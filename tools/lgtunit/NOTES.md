@@ -379,12 +379,13 @@ with the default value if applicable. The `quick_check/3` predicate
 returns results in reified form:
 
 - `passed(Seed, Discarded, Labels)`,
-- `failed(Goal, Seed)` with Goal being the random test that failed
+- `failed(Goal, Seed)`
 - `error(Error, Culprit)` or `error(Error, Goal, Seed)`
 
-The `Seed` argument is the starting seed used to generate the random tests and
-should be regarded as an opaque term. See below how to use it when testing bug
-fixes. The `error(Error, Culprit)` result only occurs when the template is not
+The `Goal` argument is the random test that failed. The `Seed` argument is the
+starting seed used to generate the random tests and should be regarded as an
+opaque term. See below how to use it when testing bug fixes. The
+`error(Error, Culprit)` result only occurs when the template is not
 callable (e.g. a non-existing predicate) or when there's a problem with the
 pre-condition closure or with the label closure (e.g. a pre-condition that
 always fails or a label that fails to classify a generated test).

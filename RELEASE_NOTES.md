@@ -103,7 +103,7 @@ its QuickCheck implementation.
 include the random generator starting seed used to generate the tests.
 
 * CHANGED: The `lgtunit` tool QuickCheck test dialects printed messages in
-case of errors and failures to include the  starting seed used to generate
+case of errors and failures to include the starting seed used to generate
 the random tests. 
 
 * ADDED: Support to the `logtalk_tester` shell script to set the random
@@ -141,6 +141,9 @@ mouse over events.
 
 * IMPROVED: The solution used by the `code_metrics` tool tests to suppress the
 metrics normal output when run.
+
+* IMPROVED: Simplified the errors reported by the `lgtunit` tool QuickCheck
+predicates and QuickCheck test dialects.
 
 * FIXED: Bug in the `lgtunit` tool expansion of `discontiguous/1` directives
 when the argument is a singleton list.

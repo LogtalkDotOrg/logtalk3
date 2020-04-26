@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-22,
+		date is 2020-04-26,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -402,7 +402,7 @@
 		subsumes_term(failed(foo(1), _), Result).
 
 	succeeds(quick_check_3_09) :-
-		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [l(label), n(1000)]),
+		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [l(label1), n(1000)]),
 		ground(Seed),
 		Discarded == 0,
 		ground(Pairs), msort(Pairs, Sorted),
@@ -410,10 +410,40 @@
 		integer(Even), integer(Odd), 1000 =:= Even + Odd.
 
 	succeeds(quick_check_3_10) :-
-		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [pc(condition)]),
+		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [l(label2), n(1000)]),
+		ground(Seed),
+		Discarded == 0,
+		ground(Pairs), msort(Pairs, Sorted),
+		Sorted = [all-All, even-Even, odd-Odd],
+		integer(All), integer(Even), integer(Odd), All =:= 1000, 1000 =:= Even + Odd.
+
+	succeeds(quick_check_3_11) :-
+		quick_check(integer(+byte), Result, [l(label3), n(1000)]),
+		Result == error(label_goal_failure, label3).
+
+	succeeds(quick_check_3_12) :-
+		quick_check(integer(+byte), Result, [l(label4), n(1000)]),
+		subsumes_term(error(existence_error(procedure, label4/2), label4), Result).
+
+	succeeds(quick_check_3_13) :-
+		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [pc(condition1)]),
 		ground(Seed),
 		integer(Discarded), Discarded > 0,
 		Pairs == [].
+
+	succeeds(quick_check_3_14) :-
+		quick_check(integer(+byte), passed(Seed, Discarded, Pairs), [pc(condition2)]),
+		ground(Seed),
+		Discarded == 0,
+		Pairs == [].
+
+	succeeds(quick_check_3_15) :-
+		quick_check(integer(+byte), Result, [pc(condition3)]),
+		Result == error(pre_condition_always_fails, condition3).
+
+	succeeds(quick_check_3_16) :-
+		quick_check(integer(+byte), Result, [pc(condition4)]),
+		subsumes_term(error(existence_error(procedure, condition4/1), condition4), Result).
 
 	% quick_check/2 tests
 
@@ -471,14 +501,28 @@
 
 	foo(1).
 
-	condition(I) :-
+	condition1(I) :-
 		between(0, 127, I).
 
-	label(I, Label) :-
+	condition2(_).
+
+	condition3(_) :-
+		fail.
+
+	label1(I, Label) :-
 		(	I mod 2 =:= 0 ->
 			Label = even
 		;	Label = odd
 		).
+
+	label2(I, [all, Label]) :-
+		(	I mod 2 =:= 0 ->
+			Label = even
+		;	Label = odd
+		).
+
+	label3(_, _) :-
+		fail.
 
 	% suppress quick_check/1-3 messages and save option values for tests
 

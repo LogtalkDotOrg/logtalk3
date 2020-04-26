@@ -23,7 +23,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-24,
+		date is 2020-04-26,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -154,10 +154,14 @@
 		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
 		['starting seed: ~w'-[Seed], nl].
 
+	message_tokens(quick_check_error(label_goal_error(error(Error,_)), Label)) -->
+		message_tokens(quick_check_error(label_goal_error(Error), Label)).
 	message_tokens(quick_check_error(label_goal_error(Error), Label)) -->
 		['quick check error using label closure: ~w'-[Label], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_error(label_goal_failure, Label)) -->
 		['quick check label closure fails: ~w'-[Label], nl].
+	message_tokens(quick_check_error(pre_condition_error(error(Error,_)), Condition)) -->
+		message_tokens(quick_check_error(pre_condition_error(Error), Condition)).
 	message_tokens(quick_check_error(pre_condition_error(Error), Condition)) -->
 		['quick check error using pre-condition closure: ~w'-[Condition], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_error(pre_condition_always_fails, Condition)) -->
@@ -272,13 +276,18 @@
 		['    expected ~q'-[ExpectedError], nl],
 		['    but got  ~q'-[Error], nl].
 
-	failed_test_reason(quick_check_failed(Goal, Test, Shrinks)) -->
-		['  quick check test failure (at test ~w after ~w shrink): ~q'-[Test, Shrinks, Goal], nl].
+	failed_test_reason(quick_check_failed(Goal, Test, Shrinks, Seed)) -->
+		(	{Shrinks == 1} ->
+			['  quick check test failure (at test ~w after ~w shrink with starting seed ~q): ~q'-[Test, Shrinks, Seed, Goal], nl]
+		;	['  quick check test failure (at test ~w after ~w shrinks with starting seed ~q): ~q'-[Test, Shrinks, Seed, Goal], nl]
+		).
 
-	failed_test_reason(quick_check_error(error(Error,_), Goal, Test)) -->
-		failed_test_reason(quick_check_error(Error, Goal, Test)).
-	failed_test_reason(quick_check_error(Error, _Goal, Test)) -->
-		['  quick check test error (at test ~w): ~q'-[Test, Error], nl].
+	failed_test_reason(quick_check_error(error(Error,_), Goal, Test, Seed)) -->
+		failed_test_reason(quick_check_error(Error, Goal, Test, Seed)).
+	failed_test_reason(quick_check_error(Error, _Goal, Test, Seed)) -->
+		['  quick check test error (at test ~w with starting seed ~q): ~q'-[Test, Seed, Error], nl].
+	failed_test_reason(quick_check_error(Error, Culprit)) -->
+		['  quick check test error (caused by ~q): ~q'-[Error, Culprit], nl].
 
 	failed_test_reason(step_error(Step, Error)) -->
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].

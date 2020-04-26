@@ -1641,17 +1641,26 @@
 		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed, Discarded, Labels), Error, true),
 		(	var(Error) ->
 			Result = passed(Seed, Discarded, Labels)
-		;	Error = quick_check_failed(Goal, _, _, Seed) ->
-			Result = failed(Goal, Seed)
-		;	Error = quick_check_error(error(Exception,_), Goal, _, Seed) ->
-			Result = error(Exception, Goal, Seed)
-		;	Error = quick_check_error(Exception, Goal, _, Seed) ->
-			Result = error(Exception, Goal, Seed)
-		;	Error = quick_check_error(error(Exception, _), Culprit) ->
-			Result = error(Exception, Culprit)
-		;	Error = quick_check_error(Exception, Culprit),
-			Result = error(Exception, Culprit)
+		;	quick_check_error_reified(Error, Result) ->
+			true
+		;	% should not happen but some Prolog backends have
+			% non-standard exception-handling mechanisms
+			Result = error(Error, _)
 		).
+
+	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                       failed(Goal, Seed)).
+	quick_check_error_reified(quick_check_error(error(Exception,_), Goal, _, Seed),       error(Exception, Goal, Seed)).
+	quick_check_error_reified(quick_check_error(Exception, Goal, _, Seed),                error(Exception, Goal, Seed)).
+	quick_check_error_reified(quick_check_error(label_goal_error(error(Exception,_)), Culprit), Result) :-
+		quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit), Result).
+	quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit),    error(Exception, Culprit)).
+	quick_check_error_reified(quick_check_error(label_goal_failure, Culprit),             error(label_goal_failure, Culprit)).
+	quick_check_error_reified(quick_check_error(pre_condition_error(error(Exception,_)), Culprit), Result) :-
+		quick_check_error_reified(quick_check_error(pre_condition_error(Exception), Culprit), Result).
+	quick_check_error_reified(quick_check_error(pre_condition_error(Exception), Culprit), error(Exception, Culprit)).
+	quick_check_error_reified(quick_check_error(pre_condition_always_fails, Culprit),     error(pre_condition_always_fails, Culprit)).
+	quick_check_error_reified(quick_check_error(error(Exception, _), Culprit),            error(Exception, Culprit)).
+	quick_check_error_reified(quick_check_error(Exception, Culprit),                      error(Exception, Culprit)).
 
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
@@ -1781,7 +1790,7 @@
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
-		catch(Condition, Error, throw(quick_check_error(Error, Original))),
+		catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))),
 		!,
 		Discarded is Discarded0 + R.
 	generate_test(_-Original, _N, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Discarded0, _Discarded, _Goal) :-
