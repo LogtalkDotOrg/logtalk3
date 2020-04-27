@@ -137,9 +137,9 @@
 		).
 
 	message_tokens(verbose_quick_check_test(passed, Goal)) -->
-		['Passed:  ~q'-[Goal], nl].
-	message_tokens(verbose_quick_check_test(skipped, Goal)) -->
-		['Skipped: ~q'-[Goal], nl].
+		['Passed:    ~q'-[Goal], nl].
+	message_tokens(verbose_quick_check_test(discarded, Goal)) -->
+		['Discarded: ~q'-[Goal], nl].
 
 	message_tokens(quick_check_passed(NumberOfTests, Seed, Discarded, Labels)) -->
 		['~w random tests passed, ~w discarded'-[NumberOfTests, Discarded], nl],

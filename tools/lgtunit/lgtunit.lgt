@@ -1813,7 +1813,7 @@
 			Condition =.. [call, Closure| Arguments],
 		(	catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))) ->
 			!
-		;	verbose_report_quick_check_test(Verbose, Goal, Template, skipped),
+		;	verbose_report_quick_check_test(Verbose, Goal, Template, discarded),
 			fail
 		),
 		Discarded is Discarded0 + R.
