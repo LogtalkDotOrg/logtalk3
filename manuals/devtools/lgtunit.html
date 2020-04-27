@@ -614,7 +614,7 @@ before generating random tests (default is <code class="docutils literal notrans
 <li><p><code class="docutils literal notranslate"><span class="pre">pc/1</span></code>: pre-condition closure for generated tests (extended with
 the test arguments; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">l/1</span></code>: label closure for classifying the generated tests (extended
-with the test arguments plus the label; no default).</p></li>
+with the test arguments plus the labels argument; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">v/1</span></code>: boolean option for verbose reporting of generated random
 tests (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
 </ul>
@@ -635,7 +635,7 @@ the template is not callable (e.g. a non-existing predicate) or when
 there’s a problem with the pre-condition closure or with the label
 closure (e.g. a pre-condition that always fails or a label that fails to
 classify a generated test).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument returns the number of generate tests that
+<p>The <code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument returns the number of generated tests that
 were discarded for failing to comply a pre-condition specified using the
 <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option. This option is specially useful when constraining or
 enforcing a relation between the generated arguments and is often used
@@ -672,9 +672,29 @@ following predicate definition:</p>
 yes
 </pre></div>
 </div>
-<p>The label statistics are key to verify if the generated tests provide
+<p>The label statistics are key to verify that the generated tests provide
 the necessary coverage. The labelling predicates can return a single
-test label or a list of test labels.</p>
+test label or a list of test labels. Labels should be ground and are
+typically atoms. To examine the generated tests themselves, you can use
+the verbose option, <code class="docutils literal notranslate"><span class="pre">v/1</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">integer</span>(<span class="o">+</span>integer), [v(<span class="k">true</span>), n(<span class="m">7</span>), pc([<span class="nv">I</span>]<span class="o">&gt;&gt;</span>(<span class="nv">I</span><span class="o">&gt;</span><span class="m">5</span>))]).
+<span class="c">% Discarded: integer(0)</span>
+<span class="c">% Passed:    integer(786)</span>
+<span class="c">% Passed:    integer(590)</span>
+<span class="c">% Passed:    integer(165)</span>
+<span class="c">% Discarded: integer(-412)</span>
+<span class="c">% Passed:    integer(440)</span>
+<span class="c">% Discarded: integer(-199)</span>
+<span class="c">% Passed:    integer(588)</span>
+<span class="c">% Discarded: integer(-852)</span>
+<span class="c">% Discarded: integer(-214)</span>
+<span class="c">% Passed:    integer(196)</span>
+<span class="c">% Passed:    integer(353)</span>
+<span class="c">% 7 random tests passed, 5 discarded</span>
+<span class="c">% starting seed: seed(23671,3853,29824)</span>
+yes
+</pre></div>
+</div>
 <p>The other two predicates print the test results. The template can be a
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable term. When the
 template is an unqualified callable term, it will be used to construct a

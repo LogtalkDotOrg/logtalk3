@@ -409,7 +409,7 @@ The following options are supported:
 -  ``pc/1``: pre-condition closure for generated tests (extended with
    the test arguments; no default).
 -  ``l/1``: label closure for classifying the generated tests (extended
-   with the test arguments plus the label; no default).
+   with the test arguments plus the labels argument; no default).
 -  ``v/1``: boolean option for verbose reporting of generated random
    tests (default is ``false``).
 
@@ -431,7 +431,7 @@ there's a problem with the pre-condition closure or with the label
 closure (e.g. a pre-condition that always fails or a label that fails to
 classify a generated test).
 
-The ``Discarded`` argument returns the number of generate tests that
+The ``Discarded`` argument returns the number of generated tests that
 were discarded for failing to comply a pre-condition specified using the
 ``pc/1`` option. This option is specially useful when constraining or
 enforcing a relation between the generated arguments and is often used
@@ -476,9 +476,30 @@ we can try:
    % odd: 4963/10000 (49.630000%)
    yes
 
-The label statistics are key to verify if the generated tests provide
+The label statistics are key to verify that the generated tests provide
 the necessary coverage. The labelling predicates can return a single
-test label or a list of test labels.
+test label or a list of test labels. Labels should be ground and are
+typically atoms. To examine the generated tests themselves, you can use
+the verbose option, ``v/1``. For example:
+
+::
+
+   | ?- lgtunit::quick_check(integer(+integer), [v(true), n(7), pc([I]>>(I>5))]).
+   % Discarded: integer(0)
+   % Passed:    integer(786)
+   % Passed:    integer(590)
+   % Passed:    integer(165)
+   % Discarded: integer(-412)
+   % Passed:    integer(440)
+   % Discarded: integer(-199)
+   % Passed:    integer(588)
+   % Discarded: integer(-852)
+   % Discarded: integer(-214)
+   % Passed:    integer(196)
+   % Passed:    integer(353)
+   % 7 random tests passed, 5 discarded
+   % starting seed: seed(23671,3853,29824)
+   yes
 
 The other two predicates print the test results. The template can be a
 ``::/2``, ``<</2``, or ``:/2`` qualified callable term. When the
