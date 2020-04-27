@@ -12234,12 +12234,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
 	(	TPred1 == repeat,
-		% check if the repreat loop ends with a cut
+		% check if the repeat loop ends with a cut if compiling a source file
 		'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,_,ExpandedGoals), Stack, Lines, Term) ->
 		'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, Term),
 		'$lgt_compile_body'(Pred2, TPred2, DPred2, NewCtx),
 		(	var(Cut),
-			% not cut found
+			% no cut found; note that this lint check is limited to conjunctions where
+			% the left side is a call to repeat/0 and the right side contains a cut
 			'$lgt_compiler_flag'(suspicious_calls, warning),
 			'$lgt_increment_compiling_warnings_counter',
 			'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -12380,7 +12381,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	(	Mode == runtime ->
 		true
-	;	% remember that we found a cut
+	;	% remember that we found a cut to enable lint checks on repeat loops
 		Mode = compile(_, true, _)
 	).
 
