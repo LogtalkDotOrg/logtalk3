@@ -28,7 +28,7 @@
 	:- info([
 		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2020-04-26,
+		date is 2020-04-27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -132,7 +132,8 @@
 			'Type edge cases' - 'Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.',
 			'Starting seed' - 'Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.',
 			'Test generation filtering' - 'Use the ``pc/1`` option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).',
-			'Generated tests classification' - 'Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.'
+			'Generated tests classification' - 'Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.',
+			'Verbose test generation' - 'Use the ``v(Boolean)`` option to specifiy verbose reporting of generated random tests. Default is ``false``.'
 		]
 	]).
 
@@ -1428,7 +1429,7 @@
 		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
-	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label)| Other]) :-
+	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose)| Other]) :-
 		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
@@ -1456,6 +1457,11 @@
 			true
 		;	default_quick_check_option(l(Label))
 		),
+		(	memberchk(v(Boolean), Options),
+			(Boolean == true; Boolean == false) ->
+			Verbose = Boolean
+		;	default_quick_check_option(v(Verbose))
+		),
 		(	member(rs(Seed), Options) ->
 			Other = [rs(Seed)]
 		;	Other = []
@@ -1471,6 +1477,8 @@
 	default_quick_check_option(pc(true)).
 	% don't label generated tests by default (represented internally by the atom "true")
 	default_quick_check_option(l(true)).
+	% don't do a verbose reporting of generated random tests
+	default_quick_check_option(v(false)).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
@@ -1683,6 +1691,7 @@
 		memberchk(ec(EdgeCases), Options),
 		memberchk(pc(ConditionClosure), Options),
 		memberchk(l(LabelClosure), Options),
+		memberchk(v(Verbose), Options),
 		(	member(rs(Seed), Options) ->
 			set_seed(Seed)
 		;	get_seed(Seed)
@@ -1692,19 +1701,19 @@
 		extend_quick_check_closure(ConditionClosure, Condition),
 		extend_quick_check_closure(LabelClosure, Label),
 		% we pass both the extend closures and the original closures for improved error reporting
-		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition-ConditionClosure, Label-LabelClosure, Seed, 0, Discarded, [], Labels).
+		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition-ConditionClosure, Label-LabelClosure, Verbose, Seed, 0, Discarded, [], Labels).
 
-	:- meta_predicate(run_quick_check_tests(*, *, *, *, *, *, *, *, *, ::, ::, *, *, *, *, *)).
-	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
+	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, _Verbose, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
 		Test > N,
 		!.
-	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, Discarded0, Discarded, Labels0, Labels) :-
-		generate_test(Condition, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded1, Goal),
+	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded0, Discarded, Labels0, Labels) :-
+		generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
 		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error)) ->
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
 					label_test(Label, Arguments, Labels0, Labels1),
-					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Seed, Discarded1, Discarded, Labels1, Labels)
+					verbose_report_quick_check_test(Verbose, Goal, Template, passed),
+					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded1, Discarded, Labels1, Labels)
 				;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
 				)
 			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
@@ -1740,6 +1749,19 @@
 		;	Labels = [Label-1| Labels0]
 		).
 
+	verbose_report_quick_check_test(false, _Goal, _Template, _Status).
+	verbose_report_quick_check_test(true, Goal, Template, Status) :-
+		verbose_report_quick_check_test(Goal, Template, Status).
+
+	verbose_report_quick_check_test(Object<<Goal, _<<_, Status) :-
+		!,
+		print_message(information, lgtunit, verbose_quick_check_test(Status, Object<<Goal)).
+	verbose_report_quick_check_test(_<<Goal, _, Status) :-
+		!,
+		print_message(information, lgtunit, verbose_quick_check_test(Status, Goal)).
+	verbose_report_quick_check_test(Goal, _, Status) :-
+		print_message(information, lgtunit, verbose_quick_check_test(Status, Goal)).
+
 	% we need to extract the predicate template from the full template argument
 	% to correctly extract the type and mode of the predicate arguments that will
 	% be randomly generated
@@ -1773,14 +1795,13 @@
 	extend_quick_check_closure(Closure, Sender<<Closure) :-
 		sender(Sender).
 
-	:- meta_predicate(generate_test(::, *, *, *, *, *, *, *, *, *, *, *, *)).
-	generate_test(true-_, _, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded, Discarded, Goal) :-
+	generate_test(true-_, _, _Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
 		% no pre-condition closure was specified (as represented internally by the atom "true")
 		!,
 		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
-	generate_test(Closure-Original, N, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Discarded0, Discarded, Goal) :-
+	generate_test(Closure-Original, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded, Goal) :-
 		% use a repeat loop to ensure that we stop trying to generate tests that
 		% comply with the given pre-condition if the discarded tests exceed the
 		% number of tests that we want to run
@@ -1790,10 +1811,13 @@
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
-		catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))),
-		!,
+		(	catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))) ->
+			!
+		;	verbose_report_quick_check_test(Verbose, Goal, Template, skipped),
+			fail
+		),
 		Discarded is Discarded0 + R.
-	generate_test(_-Original, _N, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Discarded0, _Discarded, _Goal) :-
+	generate_test(_-Original, _N, _Template, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Verbose, _Discarded0, _Discarded, _Goal) :-
 		throw(quick_check_error(pre_condition_always_fails, Original)).
 
 	% return, along the generated arguments, a copy of those arguments so that

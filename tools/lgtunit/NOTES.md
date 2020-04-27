@@ -368,10 +368,11 @@ The following options are supported:
 
 - `n/1`: number of random tests that will be generated and run (default is 100).
 - `s/1`: maximum number of shrink operations when a counter-example is found (default is 64).
-- `ec/1`: boolean option deciding if type edge cases are tested before generating random tests (default is `true`). 
+- `ec/1`: boolean option deciding if type edge cases are tested before generating random tests (default is `true`).
 - `rs/1`: starting seed to be used when generating the random tests (no default).
 - `pc/1`: pre-condition closure for generated tests (extended with the test arguments; no default).
 - `l/1`: label closure for classifying the generated tests (extended with the test arguments plus the label; no default).
+- `v/1`: boolean option for verbose reporting of generated random tests (default is `false`).
 
 The `quick_check/1` uses the default option values. When using the
 `quick_check/2-3` predicates, invalid options are ignored and replaced

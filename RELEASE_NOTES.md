@@ -113,13 +113,16 @@ generator starting seed used to run QuickCheck tests.
 the random generator starting seed to be used to generate the random tests.
 
 * ADDED: QuickCheck `ec(Boolean)` option to the `lgtunit` tool to control
-use of edge cases when generating random arguments. Defaults is `true`.
+use of edge cases when generating random arguments. Default is `true`.
 
 * ADDED: QuickCheck `pc(Closure)` option to the `lgtunit` tool to allow
 defining a pre-condition closure for filtering generated tests (no default).
 
 * ADDED: QuickCheck `l(Closure)` option to the `lgtunit` tool to allow
 defining a label closure for classifying the generated tests (no default).
+
+* ADDED: QuickCheck `v(Boolean)` option to the `lgtunit` tool to allow
+verbose reporting of generated random tests. Default is `false`.
 
 * UPDATED: Documentation of the `lgtunit` tool for the improved QuickCheck
 implementation.
