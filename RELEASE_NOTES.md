@@ -24,11 +24,17 @@ RELEASE NOTES
 3.39.0 - May ??, 2020
 =====================
 
+Library
+-------
+
+* ADDED: More type edge cases to the `arbitrary` category for atomic and
+list terms.
+
 Tools
 -----
 
-FIXED: The `lgtunit` tool implementation of QuickCheck to also use the `pc/1`
-option when shrinking counter-examples.
+* FIXED: The `lgtunit` tool implementation of QuickCheck to also use the
+`pc/1` option when shrinking counter-examples.
 
 
 3.38.0 - April 28, 2020

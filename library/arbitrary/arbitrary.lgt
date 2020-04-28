@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:15:0,
+		version is 2:16:0,
 		author is 'Paulo Moura',
-		date is 2020-04-19,
+		date is 2020-04-29,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -986,7 +986,10 @@
 
 	% atoms
 	edge_case(atom, '').
-	edge_case(atom(_), '').
+	edge_case(atom, ' ').
+	edge_case(atom, '\\').
+	edge_case(atom(_), Term) :-
+		edge_case(atom, Term).
 	edge_case(non_empty_atom, Char) :-
 		edge_case(character_code(ascii_printable), Code),
 		char_code(Char, Code).
@@ -994,11 +997,16 @@
 		edge_case(character_code(CharSet), Code),
 		char_code(Char, Code).
 	% atomics
-	edge_case(atomic, '').
-	edge_case(atomic, 0).
-	edge_case(atomic, 0.0).
+	edge_case(atomic, Term) :-
+		edge_case(atom, Term).
+	edge_case(atomic, Term) :-
+		edge_case(integer, Term).
+	edge_case(atomic, Term) :-
+		edge_case(float, Term).
 	% integers
 	edge_case(integer, 0).
+	edge_case(integer, 1).
+	edge_case(integer, -1).
 	edge_case(integer, MinInteger) :-
 		current_prolog_flag(min_integer, MinInteger).
 	edge_case(integer, MaxInteger) :-
@@ -1017,8 +1025,12 @@
 		current_prolog_flag(max_integer, MaxInteger).
 	% floats
 	edge_case(float, 0.0).
+	edge_case(float, 1.0).
+	edge_case(float, -1.0).
 	edge_case(non_positive_float, 0.0).
+	edge_case(non_positive_float, -1.0).
 	edge_case(non_negative_float, 0.0).
+	edge_case(non_negative_float, 1.0).
 	% numbers
 	edge_case(number, Number) :-
 		edge_case(integer, Number).
@@ -1056,6 +1068,13 @@
 	edge_case(operator_priority, 1200).
 	% lists
 	edge_case(list, []).
+	edge_case(list, [_]).
+	edge_case(list, [Atom]) :-
+		edge_case(atom, Atom).
+	edge_case(list, [Integer]) :-
+		edge_case(integer, Integer).
+	edge_case(list, [Float]) :-
+		edge_case(float, Float).
 	edge_case(list(_), []).
 	edge_case(list(Type), [Term]) :-
 		edge_case(Type, Term).
