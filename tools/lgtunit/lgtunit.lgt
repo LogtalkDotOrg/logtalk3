@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:0:0,
+		version is 8:0:1,
 		author is 'Paulo Moura',
-		date is 2020-04-27,
+		date is 2020-04-28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1714,9 +1714,9 @@
 					label_test(Label, Arguments, Labels0, Labels1),
 					verbose_report_quick_check_test(Verbose, Goal, Template, passed),
 					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded1, Discarded, Labels1, Labels)
-				;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
+				;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Condition, Seed)
 				)
-			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Seed)
+			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Condition, Seed)
 		).
 
 	label_test(true-_, _, Labels, Labels) :-
@@ -1878,18 +1878,20 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Types, Goal, Template, Test, Count, MaxShrinks, Seed) :-
+	shrink_failed_test(Types, Goal, Template, Test, Count, MaxShrinks, Closure-Original, Seed) :-
 		(	Count < MaxShrinks ->
-			(	shrink_goal(Types, Goal, Small),
+			(	shrink_goal(Types, Goal, SmallArguments, Small),
+				Condition =.. [call, Closure| SmallArguments],
+				catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))),
 				catch(\+ Small, _, fail) ->
 				Next is Count + 1,
-				shrink_failed_test(Types, Small, Template, Test, Next, MaxShrinks, Seed)
+				shrink_failed_test(Types, Small, Template, Test, Next, MaxShrinks, Closure-Original, Seed)
 			;	quick_check_failed(Goal, Template, Test, Count, Seed)
 			)
 		;	quick_check_failed(Goal, Template, Test, Count, Seed)
 		).
 
-	shrink_goal(Types, Large, Small) :-
+	shrink_goal(Types, Large, SmallArguments, Small) :-
 		copy_term(Large, LargeCopy),
 		decompose_quick_check_template(LargeCopy, Entity, Operator, Goal),
 		Goal =.. [Functor| LargeArguments],
