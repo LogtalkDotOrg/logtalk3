@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2020-04-26,
+		date is 2020-04-29,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -452,6 +452,13 @@
 	succeeds(quick_check_3_16) :-
 		quick_check(integer(+byte), Result, [pc(condition4)]),
 		subsumes_term(error(existence_error(procedure, condition4/1), condition4), Result).
+
+	succeeds(quick_check_3_17) :-
+		% test that we are using a pseudo random generator
+		quick_check(atom(+integer), failed(Goal0, Seed0), [ec(false)]),
+		quick_check(atom(+integer), failed(Goal, Seed), [ec(false), rs(Seed0)]),
+		Goal0 == Goal,
+		Seed0 == Seed.
 
 	% quick_check/2 tests
 
