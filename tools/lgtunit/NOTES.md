@@ -450,6 +450,21 @@ To examine the generated tests themselves, you can use the verbose option,
 	% starting seed: seed(23671,3853,29824)
 	yes
 
+When a counter-example is found, the verbose option also prints the shrink
+steps. For example:
+
+	| ?- lgtunit::quick_check(atom(+atomic), [v(true), ec(false)]).
+	% Passed:    atom('}U')
+	*     Failure:   atom(-13)
+	*     Shrinked:  atom(-6)
+	*     Shrinked:  atom(-3)
+	*     Shrinked:  atom(-1)
+	*     Shrinked:  atom(0)
+	*     quick check test failure (at test 2 after 4 shrinks):
+	*       atom(0)
+	*     starting seed: seed(1341,12174,18263)
+	no
+
 The other two predicates print the test results. The template can be a `::/2`,
 `<</2`, or `:/2` qualified callable term. When the template is an unqualified
 callable term, it will be used to construct a goal to be called in the context

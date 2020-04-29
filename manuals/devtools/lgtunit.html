@@ -695,6 +695,21 @@ the verbose option, <code class="docutils literal notranslate"><span class="pre"
 yes
 </pre></div>
 </div>
+<p>When a counter-example is found, the verbose option also prints the
+shrink steps. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">atom</span>(<span class="o">+</span>atomic), [v(<span class="k">true</span>), ec(<span class="k">false</span>)]).
+<span class="c">% Passed:    atom(&#39;}U&#39;)</span>
+<span class="o">*</span>     <span class="nv">Failure</span><span class="o">:</span>   <span class="k">atom</span>(<span class="o">-</span><span class="m">13</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">6</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">3</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">1</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="m">0</span>)
+<span class="o">*</span>     quick check test failure (at test <span class="m">2</span> after <span class="m">4</span> shrinks)<span class="o">:</span>
+<span class="o">*</span>       <span class="k">atom</span>(<span class="m">0</span>)
+<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">1341</span>,<span class="m">12174</span>,<span class="m">18263</span>)
+no
+</pre></div>
+</div>
 <p>The other two predicates print the test results. The template can be a
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable term. When the
 template is an unqualified callable term, it will be used to construct a
