@@ -1701,7 +1701,7 @@
 		extend_quick_check_closure(ConditionClosure, Condition),
 		extend_quick_check_closure(LabelClosure, Label),
 		% we pass both the extend closures and the original closures for improved error reporting
-		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition-ConditionClosure, Label-LabelClosure, Verbose, Seed, 0, Discarded, [], Labels).
+		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, 0, Discarded, [], Labels).
 
 	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, _Verbose, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
 		Test > N,
@@ -1721,9 +1721,8 @@
 				shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed)
 		).
 
-	label_test(true-_, _, Labels, Labels) :-
-		% no label closure was specified (as represented internally by the atom "true")
-		!.
+	label_test(true, _, Labels, Labels).
+	% no label closure was specified (as represented internally by the atom "true")
 	label_test(Closure-Original, Arguments, Labels0, Labels) :-
 		append(Arguments, [TestLabels], FullArguments),
 		Goal =.. [call, Closure| FullArguments],
@@ -1786,20 +1785,19 @@
 	% atom "true" internally to represent that no closure was specified
 	extend_quick_check_closure(true, true) :-
 		!.
-	extend_quick_check_closure(Object::Closure, Object::Closure) :-
+	extend_quick_check_closure(Object::Closure, (Object::Closure)-(Object::Closure)) :-
 		!.
-	extend_quick_check_closure(Object<<Closure, Object<<Closure) :-
+	extend_quick_check_closure(Object<<Closure, (Object<<Closure)-(Object<<Closure)) :-
 		!.
-	extend_quick_check_closure({Closure}, {Closure}) :-
+	extend_quick_check_closure({Closure}, {Closure}-{Closure}) :-
 		!.
-	extend_quick_check_closure(':'(Module,Closure), ':'(Module,Closure)) :-
+	extend_quick_check_closure(':'(Module,Closure), (':'(Module,Closure))-(':'(Module,Closure))) :-
 		!.
-	extend_quick_check_closure(Closure, Sender<<Closure) :-
+	extend_quick_check_closure(Closure, (Sender<<Closure)-Closure) :-
 		sender(Sender).
 
-	generate_test(true-_, _, _Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
+	generate_test(true, _, _Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
 		% no pre-condition closure was specified (as represented internally by the atom "true")
-		!,
 		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
@@ -1880,14 +1878,13 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(true-_, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed) :-
-		!,
+	shrink_failed_test(true, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed) :-
 		(	Count < MaxShrinks ->
 			(	shrink_goal(Types, Goal, _, Small),
 				catch(\+ Small, _, fail) ->
 				verbose_report_quick_check_test(Verbose, Small, Template, shrinked, warning),
 				Next is Count + 1,
-				shrink_failed_test(true-_, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed)
+				shrink_failed_test(true, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed)
 			;	quick_check_failed(Goal, Template, Test, Count, Seed)
 			)
 		;	quick_check_failed(Goal, Template, Test, Count, Seed)
