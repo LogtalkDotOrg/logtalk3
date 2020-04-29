@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2020-03-21,
+		date is 2020-04-29,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -77,7 +77,21 @@
 			^^assertion(edge_case(Type, Term), type::valid(Type, Term))
 		).
 
-	% test support predicates
+	test(arbitrary_get_seed_1_01) :-
+		type::get_seed(Seed),
+		ground(Seed).
+
+	test(arbitrary_set_seed_1_02) :-
+		type::get_seed(Seed),
+		type::set_seed(Seed).
+
+	test(arbitrary_set_seed_1_03) :-
+		type::get_seed(Seed0),
+		type::set_seed(Seed0),
+		type::get_seed(Seed),
+		Seed0 == Seed.
+
+	% auxiliary predicates
 
 	shrink_value(Type, Small) :-
 		type::arbitrary(Type, Arbitrary),

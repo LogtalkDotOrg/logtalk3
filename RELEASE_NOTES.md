@@ -41,6 +41,12 @@ shrinking counter-examples.
 
 * FIXED: Interference between QuickCheck `ec/1` and `v/1` options.
 
+Tests
+-----
+
+* FIXED: Generate code coverage data for the `arbitrary` library category and
+add missing tests for the `get_seed/1` and `set_seed/1` predicates.
+
 
 3.38.0 - April 28, 2020
 =======================

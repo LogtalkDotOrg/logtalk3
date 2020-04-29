@@ -23,6 +23,9 @@
 	logtalk_load(types(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load(lgtunit(loader)),
+	% reload the "arbitrary" category (already loaded by the "lgtunit"
+	% tool) in debug mode to support collecting code coverage data
+	logtalk_load(arbitrary(arbitrary), [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
