@@ -44,6 +44,9 @@ shrinking counter-examples.
 Tests
 -----
 
+* ADDED: Tests for most of the parametric types defined by the `arbitrary`
+library category.
+
 * FIXED: Generate code coverage data for the `arbitrary` library category and
 add missing tests for the `get_seed/1` and `set_seed/1` predicates.
 
