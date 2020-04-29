@@ -33,8 +33,13 @@ list terms.
 Tools
 -----
 
-* FIXED: The `lgtunit` tool implementation of QuickCheck to also use the
-`pc/1` option when shrinking counter-examples.
+* UPDATED: The QuickCheck implementation to also print counter-example
+shrink steps when using the `v(true)` option. 
+
+* FIXED: The QuickCheck implementation to also use the `pc/1` option when
+shrinking counter-examples.
+
+* FIXED: Interference between QuickCheck `ec/1` and `v/1` options.
 
 
 3.38.0 - April 28, 2020

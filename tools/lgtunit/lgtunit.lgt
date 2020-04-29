@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:0:1,
+		version is 8:1:0,
 		author is 'Paulo Moura',
-		date is 2020-04-28,
+		date is 2020-04-29,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1442,9 +1442,9 @@
 			true
 		;	default_quick_check_option(s(MaxShrinks))
 		),
-		(	memberchk(ec(Boolean), Options),
-			(Boolean == true; Boolean == false) ->
-			EdgeCases = Boolean
+		(	memberchk(ec(EdgeCases), Options),
+			(EdgeCases == true; EdgeCases == false) ->
+			true
 		;	default_quick_check_option(ec(EdgeCases))
 		),
 		(	memberchk(pc(Condition), Options),
@@ -1457,9 +1457,9 @@
 			true
 		;	default_quick_check_option(l(Label))
 		),
-		(	memberchk(v(Boolean), Options),
-			(Boolean == true; Boolean == false) ->
-			Verbose = Boolean
+		(	memberchk(v(Verbose), Options),
+			(Verbose == true; Verbose == false) ->
+			true
 		;	default_quick_check_option(v(Verbose))
 		),
 		(	member(rs(Seed), Options) ->
@@ -1712,11 +1712,13 @@
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
 					label_test(Label, Arguments, Labels0, Labels1),
-					verbose_report_quick_check_test(Verbose, Goal, Template, passed),
+					verbose_report_quick_check_test(Verbose, Goal, Template, passed, information),
 					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded1, Discarded, Labels1, Labels)
-				;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Condition, Seed)
+				;	verbose_report_quick_check_test(Verbose, Goal, Template, failure, warning),
+					shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed)
 				)
-			;	shrink_failed_test(Types, Goal, Template, Test, 0, MaxShrinks, Condition, Seed)
+			;	verbose_report_quick_check_test(Verbose, Goal, Template, failure, warning),
+				shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed)
 		).
 
 	label_test(true-_, _, Labels, Labels) :-
@@ -1749,18 +1751,18 @@
 		;	Labels = [Label-1| Labels0]
 		).
 
-	verbose_report_quick_check_test(false, _Goal, _Template, _Status).
-	verbose_report_quick_check_test(true, Goal, Template, Status) :-
-		verbose_report_quick_check_test(Goal, Template, Status).
+	verbose_report_quick_check_test(false, _Goal, _Template, _Status, _Kind).
+	verbose_report_quick_check_test(true, Goal, Template, Status, Kind) :-
+		verbose_report_quick_check_test(Goal, Template, Status, Kind).
 
-	verbose_report_quick_check_test(Object<<Goal, _<<_, Status) :-
+	verbose_report_quick_check_test(Object<<Goal, _<<_, Status, Kind) :-
 		!,
-		print_message(information, lgtunit, verbose_quick_check_test(Status, Object<<Goal)).
-	verbose_report_quick_check_test(_<<Goal, _, Status) :-
+		print_message(Kind, lgtunit, verbose_quick_check_test(Status, Object<<Goal)).
+	verbose_report_quick_check_test(_<<Goal, _, Status, Kind) :-
 		!,
-		print_message(information, lgtunit, verbose_quick_check_test(Status, Goal)).
-	verbose_report_quick_check_test(Goal, _, Status) :-
-		print_message(information, lgtunit, verbose_quick_check_test(Status, Goal)).
+		print_message(Kind, lgtunit, verbose_quick_check_test(Status, Goal)).
+	verbose_report_quick_check_test(Goal, _, Status, Kind) :-
+		print_message(Kind, lgtunit, verbose_quick_check_test(Status, Goal)).
 
 	% we need to extract the predicate template from the full template argument
 	% to correctly extract the type and mode of the predicate arguments that will
@@ -1813,7 +1815,7 @@
 			Condition =.. [call, Closure| Arguments],
 		(	catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))) ->
 			!
-		;	verbose_report_quick_check_test(Verbose, Goal, Template, discarded),
+		;	verbose_report_quick_check_test(Verbose, Goal, Template, discarded, information),
 			fail
 		),
 		Discarded is Discarded0 + R.
@@ -1878,14 +1880,27 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(Types, Goal, Template, Test, Count, MaxShrinks, Closure-Original, Seed) :-
+	shrink_failed_test(true-_, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed) :-
+		!,
+		(	Count < MaxShrinks ->
+			(	shrink_goal(Types, Goal, _, Small),
+				catch(\+ Small, _, fail) ->
+				verbose_report_quick_check_test(Verbose, Small, Template, shrinked, warning),
+				Next is Count + 1,
+				shrink_failed_test(true-_, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed)
+			;	quick_check_failed(Goal, Template, Test, Count, Seed)
+			)
+		;	quick_check_failed(Goal, Template, Test, Count, Seed)
+		).
+	shrink_failed_test(Closure-Original, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed) :-
 		(	Count < MaxShrinks ->
 			(	shrink_goal(Types, Goal, SmallArguments, Small),
 				Condition =.. [call, Closure| SmallArguments],
 				catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))),
 				catch(\+ Small, _, fail) ->
+				verbose_report_quick_check_test(Verbose, Small, Template, shrinked, warning),
 				Next is Count + 1,
-				shrink_failed_test(Types, Small, Template, Test, Next, MaxShrinks, Closure-Original, Seed)
+				shrink_failed_test(Closure-Original, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed)
 			;	quick_check_failed(Goal, Template, Test, Count, Seed)
 			)
 		;	quick_check_failed(Goal, Template, Test, Count, Seed)

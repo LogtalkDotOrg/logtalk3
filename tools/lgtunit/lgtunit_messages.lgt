@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2020-04-27,
+		date is 2020-04-29,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -140,6 +140,10 @@
 		['Passed:    ~q'-[Goal], nl].
 	message_tokens(verbose_quick_check_test(discarded, Goal)) -->
 		['Discarded: ~q'-[Goal], nl].
+	message_tokens(verbose_quick_check_test(failure, Goal)) -->
+		['Failure:   ~q'-[Goal], nl].
+	message_tokens(verbose_quick_check_test(shrinked, Goal)) -->
+		['Shrinked:  ~q'-[Goal], nl].
 
 	message_tokens(quick_check_passed(NumberOfTests, Seed, Discarded, Labels)) -->
 		['~w random tests passed, ~w discarded'-[NumberOfTests, Discarded], nl],
