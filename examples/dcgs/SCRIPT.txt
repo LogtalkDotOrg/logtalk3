@@ -223,3 +223,17 @@ yes
 
 Singletons == [a,b,c]
 yes
+
+
+% use call//1 and a lambda expressions to access
+% the grammar rule input list for debugging:
+
+| ?- debug::copy([1,2,3,4,5], Copy).
+[1,2,3,4,5]
+[2,3,4,5]
+[3,4,5]
+[4,5]
+[5]
+[]
+Copy = [1, 2, 3, 4, 5] ;
+no

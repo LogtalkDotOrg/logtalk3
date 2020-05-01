@@ -194,4 +194,9 @@
 		logtalk << phrase(lambdas::bb([a,a,b,b,c,c]), Singletons),
 		Singletons == [a,b,c].
 
+	test(dcgs_36) :-
+		^^suppress_text_output,
+		debug::copy([1,2,3,4,5], Copy),
+		Copy == [1, 2, 3, 4, 5].
+
 :- end_object.

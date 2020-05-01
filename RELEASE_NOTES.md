@@ -49,6 +49,13 @@ of the parametric types defined by the `arbitrary` library category.
 
 * FIXED: Generate code coverage data for the `arbitrary` library category.
 
+Examples
+--------
+
+* UPDATED: The `dcgs` example to illustrate how to use the `call//1` built-in
+non-terminal and a lambda expression to access the input list of a grammar
+rule without breaking DCGs abstraction.
+
 
 3.38.0 - April 28, 2020
 =======================

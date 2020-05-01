@@ -46,3 +46,36 @@
 	bb([X,X|Xs]) --> [X], bb(Xs).
 
 :- end_object.
+
+
+:- object(debug).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2020-05-01,
+		comment is 'Example using call//1 and a lambda expressions to access the grammar rule input list for debugging.'
+	]).
+
+	:- public(copy/2).
+	copy(Original, Copy) :-
+		phrase(do_copy(Copy), Original).
+
+	do_copy(All) -->
+		list(List), {writeq(List), nl},
+		copy(All).
+
+	copy([H| T]) -->
+		[H], list(List), {writeq(List), nl}, copy(T).
+	copy([]) -->
+		[].
+
+	list(List) --> call({List}/[List,List]>>true).
+
+	% we could also have used
+	%
+	% list(List, List, List).
+	%
+	% but this simple predicate definition breaks DCGs abstraction
+
+:- end_object.
