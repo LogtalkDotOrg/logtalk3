@@ -59,11 +59,11 @@ and the role of an instance for its metaclass. Another common reuse pattern is
 its predicate declarations by providing an implementation for those predicates and
 exposing those predicates to its clients. An essential consequence of this
 generalization is that protocols, objects, and categories are first-class entities
-while e.g. *class*, *instance*, *metaclass*, *subclass*, *superclass* are just
-*roles* that an object can play. Moreover, a language can provide multiple reuse
-patterns instead of selecting a set of patterns and supporting this set as a design
-choice that excludes other reuse patterns. For example, most imperative
-object-oriented languages are either class-based or prototype-based. In contrast,
-Logtalk naturally supports both classes and prototypes by providing the corresponding
-reuse patterns using objects as first-class entities capable of playing multiple
-roles.
+while e.g. *prototype*, *parent*, *class*, *instance*, *metaclass*, *subclass*,
+*superclass*, or *ancestor* are just *roles* that an object can play. Moreover, a
+language can provide multiple reuse patterns instead of selecting a set of patterns
+and supporting this set as a design choice that excludes other reuse patterns. For
+example, most imperative object-oriented languages are either class-based or
+prototype-based. In contrast, Logtalk naturally supports both classes and prototypes
+by providing the corresponding reuse patterns using objects as first-class entities
+capable of playing multiple roles.
