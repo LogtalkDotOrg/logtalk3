@@ -60,6 +60,12 @@ Examples
 non-terminal and a lambda expression to access the input list of a grammar
 rule without breaking DCGs abstraction.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installation script to also detect SICStus Prolog 4.6.x
+versions.
+
 
 3.38.0 - April 28, 2020
 =======================
