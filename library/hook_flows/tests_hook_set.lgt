@@ -22,16 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-05-27,
+		date is 2020-05-05,
 		comment is 'Unit tests for the "hook_flows" library hook_set/1 object.'
 	]).
 
 	test(hook_set_1_01, true(N == 42)) :-
 		test_object_2::bb(N).
 
-	test(hook_set_1_02, true(N == 6)) :-
+	test(hook_set_1_02, true(N == 60)) :-
 		test_object_2::p(N).
 
 :- end_object.

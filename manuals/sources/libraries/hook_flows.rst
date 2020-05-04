@@ -9,7 +9,8 @@ other cases a specific order is required. The ``hook_pipeline`` and
 common scenarios of combining multiple hook objects for the expansion of
 source files. These parametric hook objects can be combined to define
 workflows of any complexity (e.g. a pipeline where one of the steps is
-set with an element that is a pipeline).
+set with an element that is a pipeline). These two basic hook flows can
+also used as examples of how to construct custom hook flows.
 
 API documentation
 -----------------
@@ -52,14 +53,16 @@ Note that ``set_logtalk_flag/2`` directives are local to a source file.
 The ``hook_pipeline(Pipeline)`` is a parametric object where the
 parameter is a list of hook objects, interpreted as a pre-processing
 pipeline: the results of a hook object are passed to the next hook
-object.
+object. This parametric object is used when the expansions must be
+applied in a specific order.
 
 The ``hook_set(Set)`` is a parametric object where the parameter is a
-list of hook objects, interpreted as a set of hook object: hooks in the
-set are tried until one of them succeeds.
-
-Note that these two basic hook flows can be freely combined and also
-used as examples of how to construct custom hook flows.
+list of hook objects, interpreted as a set of hook objects. For
+term-expansion, hooks in the set are tried until one of them succeeds.
+For goal-expansion, as the compiler expands a goal until a fixed-point
+is reached, all the hooks objects in the set that are applicable at any
+point will be used. This parametric object is used when applying
+multiple independent expansions.
 
 When using a backend Prolog compiler that supports modules, it's also
 possible to use as parameter a list of hook modules as long as their

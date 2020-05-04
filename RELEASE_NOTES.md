@@ -51,6 +51,8 @@ Tests
 * ADDED: Tests for the `get_seed/1` and `set_seed/1` predicates and for most
 of the parametric types defined by the `arbitrary` library category.
 
+* IMPROVED: Goal-expansion tests for the `hook_set/1` library object.
+
 * FIXED: Generate code coverage data for the `arbitrary` library category.
 
 Examples

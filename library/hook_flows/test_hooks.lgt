@@ -53,7 +53,7 @@
 
 	term_expansion(a(X), [(:- public(aa/1)), aa(X)]).
 
-	goal_expansion(g(F1, Y), k(F2, Y)) :-
+	goal_expansion(g(F1, Y), j(F2, Y)) :-
 		F2 is F1 * 2.
 
 :- end_object.
@@ -64,7 +64,7 @@
 
 	term_expansion(b(X), [(:- public(bb/1)), bb(X)]).
 
-	goal_expansion(h(F1, Y), k(F2, Y)) :-
+	goal_expansion(h(F1, Y), g(F2, Y)) :-
 		F2 is F1 * 3.
 
 :- end_object.
