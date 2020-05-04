@@ -18,33 +18,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(grammar_rules_hook,
-	implements(expanding)).
+:- object(f16).
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2020-02-14,
-		comment is 'This hook object expands grammar rules into clauses.',
-		see_also is [
-			backend_adapter_hook, default_workflow_hook,
-			identity_hook, prolog_module_hook(_), object_wrapper_hook,
-			write_to_stream_hook(_, _), write_to_stream_hook(_),
-			print_goal_hook, suppress_goal_hook
-		]
-	]).
+	:- public(a/0).
 
-	term_expansion((GRHead --> GRBody), Clause) :-
-		{	'$lgt_comp_ctx_mode'(CompilationContext, runtime),
-			'$lgt_dcg_rule'((GRHead --> GRBody), Clause0, CompilationContext),
-			(	Clause0 = (Head :- Body0) ->
-				'$lgt_simplify_goal'(Body0, Body),
-				(	Body == true ->
-					Clause = Head
-				;	Clause = (Head :- Body)
-				)
-			;	Clause = Clause0
-			)
-		}.
+	a :-
+		b,
+		-- fail,
+		c.
+
+	b.
+
+	c.
 
 :- end_object.

@@ -30,6 +30,10 @@ Library
 * ADDED: More type edge cases to the `arbitrary` category for atomic and
 list terms.
 
+* ADDED: New hook object `suppress_goal_hook` to the `hook_objects` library
+to support suppressing a goal in a clause body by prefixing it with the `--`
+operator.
+
 Tools
 -----
 

@@ -137,6 +137,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object">Wrap the contents of a plain Prolog file as an object</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outputting-term-expansion-results-to-a-stream">Outputting term-expansion results to a stream</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#printing-entity-predicate-goals-before-or-after-calling-them">Printing entity predicate goals before or after calling them</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suppressing-goals">Suppressing goals</a></li>
 </ul>
 </li>
 </ul>
@@ -351,7 +352,7 @@ expansion workflow.</p>
 <p>This is helpful for quick debugging. Load the <code class="docutils literal notranslate"><span class="pre">print_goal_hook.lgt</span></code>
 file and use the <code class="docutils literal notranslate"><span class="pre">print_goal_hook</span></code> hook object. For example, we can
 set this hook object as the default hook:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, print_goal_hook).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, print_goal_hook).
 </pre></div>
 </div>
 <p>Then, edit the entity source code to print selected goals:</p>
@@ -361,6 +362,29 @@ set this hook object as the default hook:</p>
     <span class="o">*</span> quux.  <span class="c">% print goal before and after calling it</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="suppressing-goals">
+<h3>Suppressing goals<a class="headerlink" href="#suppressing-goals" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook.lgt</span></code> file provides the <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook</span></code>
+hook object that supports suppressing a goal in a clause body by
+prefixing it using the <code class="docutils literal notranslate"><span class="pre">--</span></code> operator. We can set this hook object as
+the default hook using the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, suppress_goal_hook).
+</pre></div>
+</div>
+<p>If the expansion is only to be used in a single file, use instead the
+source file directive:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, suppress_goal_hook).
+</pre></div>
+</div>
+<p>Then, edit entity predicates to suppress goals. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
+    bar,
+    <span class="o">--</span> baz,
+    quux.
+</pre></div>
+</div>
+<p>The suppressed goals are replaced by calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
 </div>
 </div>
 </div>

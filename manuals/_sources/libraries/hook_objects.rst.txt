@@ -142,7 +142,7 @@ set this hook object as the default hook:
 
 ::
 
-   :- set_logtalk_flag(hook, print_goal_hook).
+   | ?- set_logtalk_flag(hook, print_goal_hook).
 
 Then, edit the entity source code to print selected goals:
 
@@ -153,3 +153,32 @@ Then, edit the entity source code to print selected goals:
        + baz,   % print goal after calling it
        * quux.  % print goal before and after calling it
 
+Suppressing goals
+~~~~~~~~~~~~~~~~~
+
+The ``suppress_goal_hook.lgt`` file provides the ``suppress_goal_hook``
+hook object that supports suppressing a goal in a clause body by
+prefixing it using the ``--`` operator. We can set this hook object as
+the default hook using the goal:
+
+::
+
+   | ?- set_logtalk_flag(hook, suppress_goal_hook).
+
+If the expansion is only to be used in a single file, use instead the
+source file directive:
+
+::
+
+   :- set_logtalk_flag(hook, suppress_goal_hook).
+
+Then, edit entity predicates to suppress goals. For example:
+
+::
+
+   foo :-
+       bar,
+       -- baz,
+       quux.
+
+The suppressed goals are replaced by calls to ``true/0``.

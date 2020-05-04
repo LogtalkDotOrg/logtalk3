@@ -29,7 +29,8 @@
 		see_also is [
 			default_workflow_hook, identity_hook,
 			grammar_rules_hook, prolog_module_hook(_), object_wrapper_hook,
-			write_to_stream_hook(_, _), write_to_stream_hook(_), print_goal_hook
+			write_to_stream_hook(_, _), write_to_stream_hook(_),
+			print_goal_hook, suppress_goal_hook
 		]
 	]).
 

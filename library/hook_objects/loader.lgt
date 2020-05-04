@@ -28,7 +28,8 @@
 		prolog_module_hook,
 		object_wrapper_hook,
 		write_to_stream_hook,
-		print_goal_hook
+		print_goal_hook,
+		suppress_goal_hook
 	], [
 		optimize(on)
 	])
