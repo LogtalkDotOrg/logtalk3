@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 24, 2019
+; Last updated on May 4, 2020
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
