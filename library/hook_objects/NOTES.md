@@ -21,7 +21,10 @@ ________________________________________________________________________
 ==============
 
 This library provides a set of convenient hook objects for defining custom
-expansion workflows (using e.g. the `hook_flows` library).
+expansion workflows (using e.g. the `hook_flows` library) and for debugging.
+They are usable and useful as-is but should also be regarded as term- and
+goal-expansion examples that you can learn from, clone, and change to fit
+your application requirements.
 
 
 API documentation

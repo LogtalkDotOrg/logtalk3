@@ -229,9 +229,15 @@
             
   <div class="section" id="hook-flows">
 <h1><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code><a class="headerlink" href="#hook-flows" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">hook_pipeline</span></code> and <code class="docutils literal notranslate"><span class="pre">hook_set</span></code> parametric objects in this
-library implement common scenarios of combining multiple hook objects
-for the expansion of source files.</p>
+<p>Hook objects (i.e. objects that define term- and goal-expansion rules)
+can be combined to define expansion <em>workflows</em>. While in some cases the
+expansions are independent and thus can be applied in any order, in
+other cases a specific order is required. The <code class="docutils literal notranslate"><span class="pre">hook_pipeline</span></code> and
+<code class="docutils literal notranslate"><span class="pre">hook_set</span></code> parametric objects in this library implement the two most
+common scenarios of combining multiple hook objects for the expansion of
+source files. These parametric hook objects can be combined to define
+workflows of any complexity (e.g. a pipeline where one of the steps is
+set with an element that is a pipeline).</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
