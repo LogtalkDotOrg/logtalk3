@@ -232,6 +232,9 @@
 goal deterministically with a time limit as made available in some form
 by some of the supported backend Prolog systems (B-Prolog, ECLiPSe,
 SICStus Prolog, SWI-Prolog, XSB, and YAP).</p>
+<p>For better performance, compile calls to this library meta-predicates
+with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on so that the meta-arguments, i.e.
+the goals that you are timing, are also compiled.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the

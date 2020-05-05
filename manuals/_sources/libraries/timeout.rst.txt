@@ -6,6 +6,10 @@ goal deterministically with a time limit as made available in some form
 by some of the supported backend Prolog systems (B-Prolog, ECLiPSe,
 SICStus Prolog, SWI-Prolog, XSB, and YAP).
 
+For better performance, compile calls to this library meta-predicates
+with the ``optimize`` flag turned on so that the meta-arguments, i.e.
+the goals that you are timing, are also compiled.
+
 API documentation
 -----------------
 
