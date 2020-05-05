@@ -4,10 +4,10 @@
 The ``basic_types`` library is a virtual library that loads only basic
 types from the ``types`` library:
 
--  ``termp``, ``term``,
+-  ``termp``, ``term``
 -  ``atomic``, ``atom``, ``number``, ``float``, ``integer``
-   -``compound``, ``listp``, ``list``
--  ``type``.
+-  ``compound``, ``listp``, ``list``
+-  ``type``
 
 API documentation
 -----------------
