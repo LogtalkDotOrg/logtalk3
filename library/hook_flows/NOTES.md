@@ -29,7 +29,8 @@ common scenarios of combining multiple hook objects for the expansion
 of source files. These parametric hook objects can be combined to
 define workflows of any complexity (e.g. a pipeline where one of the
 steps is set with an element that is a pipeline). These two basic hook
-flows can also used as examples of how to construct custom hook flows.
+flows can also used as examples of how to construct your own custom
+expansion workflows.
 
 
 API documentation
@@ -69,7 +70,9 @@ Note that `set_logtalk_flag/2` directives are local to a source file.
 The `hook_pipeline(Pipeline)` is a parametric object where the parameter is a
 list of hook objects, interpreted as a pre-processing pipeline: the results of
 a hook object are passed to the next hook object. This parametric object is
-used when the expansions must be applied in a specific order.
+used when the expansions must be applied in a specific order. It also allows
+overriding the default compiler semantics where term-expansion rules are tried
+in sequence only until one of them succeeds.
 
 The `hook_set(Set)` is a parametric object where the parameter is a list of
 hook objects, interpreted as a set of hook objects. For term-expansion, hooks

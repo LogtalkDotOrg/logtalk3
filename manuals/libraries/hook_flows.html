@@ -238,7 +238,8 @@ common scenarios of combining multiple hook objects for the expansion of
 source files. These parametric hook objects can be combined to define
 workflows of any complexity (e.g. a pipeline where one of the steps is
 set with an element that is a pipeline). These two basic hook flows can
-also used as examples of how to construct custom hook flows.</p>
+also used as examples of how to construct your own custom expansion
+workflows.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
@@ -272,7 +273,9 @@ or by adding to the top of the file the directive:</p>
 parameter is a list of hook objects, interpreted as a pre-processing
 pipeline: the results of a hook object are passed to the next hook
 object. This parametric object is used when the expansions must be
-applied in a specific order.</p>
+applied in a specific order. It also allows overriding the default
+compiler semantics where term-expansion rules are tried in sequence only
+until one of them succeeds.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">hook_set(Set)</span></code> is a parametric object where the parameter is a
 list of hook objects, interpreted as a set of hook objects. For
 term-expansion, hooks in the set are tried until one of them succeeds.
