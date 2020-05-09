@@ -176,7 +176,7 @@
 
 % dynamic binding lookup cache for asserting and retracting dynamic facts
 
-% '$lgt_db_lookup_cache_'(Obj, Fact, Sender, TFact, UClause)
+% '$lgt_db_lookup_cache_'(Obj, Fact, Sender, TFact, UpdateData)
 :- dynamic('$lgt_db_lookup_cache_'/5).
 
 
@@ -187,7 +187,7 @@
 :- dynamic(logtalk_library_path/2).
 
 
-% extension points for logtalk_make/1
+% extension point for logtalk_make/1
 
 % logtalk_make_target_action(Target)
 :- multifile(logtalk_make_target_action/1).
@@ -4343,10 +4343,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_retract'(Obj, Clause, Sender, _, _) :-
 	nonvar(Obj),
 	nonvar(Clause),
-	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, UClause),
+	'$lgt_db_lookup_cache_'(Obj, Clause, Sender, TClause, UpdateData),
 	!,
 	retract(TClause),
-	'$lgt_update_ddef_table_opt'(UClause).
+	'$lgt_update_ddef_table_opt'(UpdateData).
 
 '$lgt_retract'(Obj, Clause, Sender, TestScope, ExCtx) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retract(Clause), ExCtx)),
@@ -4461,10 +4461,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_retract_fact_checked'(Obj, Head, Sender, _, _) :-
-	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
+	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UpdateData),
 	!,
 	retract(THead),
-	'$lgt_update_ddef_table_opt'(UClause).
+	'$lgt_update_ddef_table_opt'(UpdateData).
 
 '$lgt_retract_fact_checked'(Obj, Head, Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
@@ -4534,10 +4534,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_retractall'(Obj, Head, Sender, _, _) :-
 	nonvar(Obj),
 	nonvar(Head),
-	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
+	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UpdateData),
 	!,
 	retractall(THead),
-	'$lgt_update_ddef_table_opt'(UClause).
+	'$lgt_update_ddef_table_opt'(UpdateData).
 
 '$lgt_retractall'(Obj, Head, Sender, TestScope, ExCtx) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::retractall(Head), ExCtx)),
@@ -4546,10 +4546,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_retractall_checked'(Obj, Head, Sender, _, _) :-
-	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UClause),
+	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, UpdateData),
 	!,
 	retractall(THead),
-	'$lgt_update_ddef_table_opt'(UClause).
+	'$lgt_update_ddef_table_opt'(UpdateData).
 
 '$lgt_retractall_checked'(Obj, Head, Sender, TestScope, ExCtx) :-
 	'$lgt_current_object_'(Obj, _, Dcl, Def, _, _, _, _, DDef, _, ObjFlags),
@@ -19448,9 +19448,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_update_ddef_table_opt'(+callable)
 %
 % retracts a dynamic "ddef clause" (used to translate a predicate call)
-% and updated the predicate lookup caches if there are no more (local)
+% and updates the predicate lookup caches if there are no more (local)
 % clauses for the predicate otherwise does nothing; this is required in
-% order to allow definitions in ancestor entities to be found
+% order to allow definitions in ancestor entities to be found when all
+% the overriding clauses in an intermediate object are retracted
 
 '$lgt_update_ddef_table_opt'(true).
 
@@ -19502,6 +19503,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_protocol_directives' :-
 	(	'$lgt_pp_dynamic_' ->
+		% add the necessary directives to allow abolishing the protocol
 		'$lgt_pp_protocol_'(_, _, Dcl, Rnm, _),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/4))),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/5))),
@@ -19513,6 +19515,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_object_dynamic_directives' :-
 	(	'$lgt_pp_dynamic_' ->
+		% add the necessary directives to allow abolishing the object
 		'$lgt_generate_dynamic_object_dynamic_directives'
 	;	'$lgt_generate_static_object_dynamic_directives'
 	).
@@ -19582,6 +19585,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_category_dynamic_directives' :-
 	(	'$lgt_pp_dynamic_' ->
+		% add the necessary directives to allow abolishing the category
 		'$lgt_pp_category_'(_, _, Dcl, Def, Rnm, _),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/4))),
 		assertz('$lgt_pp_directive_'(dynamic(Dcl/5))),
@@ -19607,11 +19611,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_object_clauses' :-
 	(	'$lgt_pp_specialized_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+		% object plays the role of a class
 		'$lgt_generate_ic_clauses'
 	;	'$lgt_pp_instantiated_class_'(_, _, _, _, _, _, _, _, _, _, _) ->
+		% object plays the role of a class
 		'$lgt_generate_ic_clauses'
 	;	% objects without an instantiation or specialization relation
-		% are always compiled as prototypes
+		%play the role of prototypes
 		'$lgt_generate_prototype_clauses'
 	).
 
@@ -19620,8 +19626,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_generate_dcl_table_clauses'(+atom, -atom)
 %
 % a predicate declaration table clause is only generated if there is a
-% scope declaration for the predicate; the single argument returns the
+% scope declaration for the predicate; the second argument returns the
 % atom "true" if there are local clauses and the atom "false" otherwise
+%
+% the table clauses use a bit pattern representation for the predicate
+% properties for compacteness and access performance
 
 '$lgt_generate_dcl_table_clauses'(Dcl, _) :-
 	(	'$lgt_pp_public_'(Functor, Arity, _, _), Scope = p(p(p))
@@ -19732,7 +19741,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_protocol_clauses' :-
 	'$lgt_pp_protocol_'(Ptc, _, Dcl, Rnm, _),
-	% first, generate the local table of predicate declarations:
+	% first, generate the local table of predicate declarations
 	'$lgt_generate_dcl_table_clauses'(Dcl, Local),
 	% second, generate linking clauses for accessing both local
 	% declarations and declarations in related entities (some
@@ -19784,13 +19793,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_protocol_catchall_clauses'(Dcl) :-
 	(	'$lgt_pp_dcl_'(_) ->
-		% local or inherited predicate declarations
+		% local or inherited predicate declarations exist
 		true
 	;	% empty, standalone protocol
 		'$lgt_pp_dynamic_' ->
-		% dynamic protocol
+		% dynamic protocol; calls to the dynamic predicate implementing the
+		% predicate declaration table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static protocols
+	;	% generate a catchall clause for static protocols as the predicate
+		% implementing the predicate declaration table is static
 		functor(Head, Dcl, 5),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -19805,7 +19816,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_generate_category_dcl_clauses'(Ctg, Dcl, Rnm) :-
-	% first, generate the local table of predicate declarations:
+	% first, generate the local table of predicate declarations
 	'$lgt_generate_dcl_table_clauses'(Dcl, Local),
 	% second, generate linking clauses for accessing both local
 	% declarations and declarations in related entities (some
@@ -19881,13 +19892,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_category_catchall_dcl_clauses'(Dcl) :-
 	(	'$lgt_pp_dcl_'(_) ->
-		% local or inherited predicate declarations
+		% local or inherited predicate declarations exist
 		true
 	;	% standalone category with no local or inherited predicate declarations
 		'$lgt_pp_dynamic_' ->
-		% dynamic category
+		% dynamic category; calls to the dynamic predicate implementing the
+		% predicate declaration table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static categories
+	;	% generate a catchall clause for static categories as the predicate
+		% implementing the predicate declaration table is static
 		functor(Head, Dcl, 5),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -19937,9 +19950,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_object_catchall_local_dcl_clause'(false, Dcl) :-
 	(	'$lgt_pp_dynamic_' ->
-		% dynamic object
+		% dynamic object; calls to the dynamic predicate implementing the
+		% predicate declaration table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static objects
+	;	% generate a catchall clause for static objects as the predicate
+		% implementing the predicate declaration table is static
 		functor(Head, Dcl, 4),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -19950,9 +19965,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_object_catchall_def_clauses'(false, Def) :-
 	(	'$lgt_pp_dynamic_' ->
-		% dynamic object
+		% dynamic object; calls to the dynamic predicate implementing the
+		% predicate definition table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static objects
+	;	% generate a catchall clause for static objects as the predicate
+		% implementing the predicate definition table is static
 		functor(Head, Def, 3),
 		assertz('$lgt_pp_def_'((Head:-fail)))
 	).
