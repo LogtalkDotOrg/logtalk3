@@ -24,6 +24,11 @@ RELEASE NOTES
 3.39.0 - May ??, 2020
 =====================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the ``scratch_directory`` compiler flag.
+
 Library
 -------
 

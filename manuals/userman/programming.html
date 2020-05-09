@@ -1007,7 +1007,11 @@ always end with a slash. The default value is a sub-directory of the
 source files directory, either <code class="docutils literal notranslate"><span class="pre">'./lgt_tmp/'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./.lgt_tmp/'</span></code>
 (depending on the backend Prolog compiler and operating-system).
 Relative directories must always start with <code class="docutils literal notranslate"><span class="pre">'./'</span></code> due to the lack
-of a portable solution to check if a path is relative or absolute.</p>
+of a portable solution to check if a path is relative or absolute.
+The default value set on the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> adapter
+file can be overriden by defining the <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code> library
+alias (see the <a class="reference internal" href="../refman/predicates/logtalk_library_path_2.html#predicates-logtalk-library-path-2"><span class="std std-ref">logtalk_library_path/2</span></a>
+predicate documentation for details).</p>
 </dd>
 </dl>
 <span class="target" id="flag-report"></span><dl class="simple" id="index-39">

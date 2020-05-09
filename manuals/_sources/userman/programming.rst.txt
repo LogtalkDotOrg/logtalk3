@@ -945,6 +945,10 @@ Other flags
    (depending on the backend Prolog compiler and operating-system).
    Relative directories must always start with ``'./'`` due to the lack
    of a portable solution to check if a path is relative or absolute.
+   The default value set on the :term:`backend Prolog compiler` adapter
+   file can be overriden by defining the ``scratch_directory`` library
+   alias (see the :ref:`predicates_logtalk_library_path_2`
+   predicate documentation for details).
 
 .. _flag_report:
 .. index:: pair: report; Flag
