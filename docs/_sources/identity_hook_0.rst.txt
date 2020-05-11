@@ -53,5 +53,5 @@ Operators
 
 .. seealso::
 
-   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`, :ref:`object_wrapper_hook <object_wrapper_hook/0>`, :ref:`write_to_stream_hook(Stream,Options) <write_to_stream_hook/2>`, :ref:`write_to_stream_hook(Stream) <write_to_stream_hook/1>`, :ref:`print_goal_hook <print_goal_hook/0>`
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`, :ref:`object_wrapper_hook <object_wrapper_hook/0>`, :ref:`write_to_stream_hook(Stream,Options) <write_to_stream_hook/2>`, :ref:`write_to_stream_hook(Stream) <write_to_stream_hook/1>`, :ref:`print_goal_hook <print_goal_hook/0>`, :ref:`suppress_goal_hook <suppress_goal_hook/0>`
 

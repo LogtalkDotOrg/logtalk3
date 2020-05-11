@@ -27,7 +27,7 @@
 		date is 2020-05-04,
 		comment is 'Use this object to easily suppress a goal in a clause body.',
 		remarks is [
-			'Usage' - 'Mark a goal to be suppressed by prefixing it with the ``--` operator.',
+			'Usage' - 'Mark a goal to be suppressed by prefixing it with the ``--`` operator.',
 			'Operators' - 'This hook object uses the ``--`` prefix operator declared by Logtalk for use in ``mode/2`` directives.'
 		],
 		see_also is [
