@@ -22,9 +22,9 @@
 	implements(varlistp)).
 
 	:- info([
-		version is 1:11:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-03-12,
+		date is 2020-05-11,
 		comment is 'List of variables predicates.',
 		see_also is [list, list(_), numberlist, difflist]
 	]).
@@ -93,29 +93,29 @@
 	nth0(Nth, List, Element) :-
 		nth(Element, List, 0, Nth, _).
 
-	nth0(Nth, List, Element, Tail) :-
-		nth(Element, List, 0, Nth, Tail).
+	nth0(Nth, List, Element, Rest) :-
+		nth(Element, List, 0, Nth, Rest).
 
 	nth1(Nth, List, Element) :-
 		nth(Element, List, 1, Nth, _).
 
-	nth1(Nth, List, Element, Tail) :-
-		nth(Element, List, 1, Nth, Tail).
+	nth1(Nth, List, Element, Rest) :-
+		nth(Element, List, 1, Nth, Rest).
 
-	nth(Element, List, Acc, Nth, Tail) :-
+	nth(Element, List, Acc, Nth, Rest) :-
 		(	integer(Nth),
 			Nth >= Acc,
-			nth_aux(NthElement, List, Acc, Nth, Tail) ->
+			nth_aux(NthElement, List, Acc, Nth, Rest) ->
 			Element == NthElement
 		;	var(Nth),
-			nth_aux(Element, List, Acc, Nth, Tail)
+			nth_aux(NthElement, List, Acc, Nth, Rest),
+			Element == NthElement
 		).
 
-	nth_aux(Element, [Head| Tail], Position, Position, Tail) :-
-		Element == Head.
-	nth_aux(Element, [_| List], Count, Position, Tail) :-
-		Count2 is Count + 1,
-		nth_aux(Element, List, Count2, Position, Tail).
+	nth_aux(Element, [Element| Rest], Position, Position, Rest).
+	nth_aux(Element, [Head| Tail], Position0, Position, [Head| Rest]) :-
+		Position1 is Position0 + 1,
+		nth_aux(Element, Tail, Position1, Position, Rest).
 
 	permutation(List, Permutation) :-
 		same_length(List, Permutation),

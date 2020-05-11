@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1:21:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-04,
+		date is 2020-05-11,
 		comment is 'Difference list predicates.',
 		see_also is [list, list(_), numberlist, varlist]
 	]).
@@ -182,23 +182,24 @@
 	nth0(Position, List, Element) :-
 		nth(Element, List, 0, Position, _).
 
-	nth0(Nth, List, Element, Tail) :-
-		nth(Element, List, 0, Nth, Tail).
+	nth0(Nth, List, Element, Rest) :-
+		nth(Element, List, 0, Nth, Rest).
 
 	nth1(Position, List, Element) :-
 		nth(Element, List, 1, Position, _).
 
-	nth1(Nth, List, Element, Tail) :-
-		nth(Element, List, 1, Nth, Tail).
+	nth1(Nth, List, Element, Rest) :-
+		nth(Element, List, 1, Nth, Rest).
 
-	nth(Element, List-Back, Position, Position, Tail-Back) :-
+	nth(Element, List-Back, Position, Position, Rest-Back) :-
 		List \== Back,
-		List = [Element| Tail].
-	nth(Element, List-Back, Count, Position, Tail-Back) :-
+		List = [Element| Rest].
+	nth(Element, List-Back, Position0, Position, [Head| Rest]-Back) :-
+		Position0 < Position,
 		List \== Back,
-		List = [_| List2],
-		Count2 is Count + 1,
-		nth(Element, List2-Back, Count2, Position, Tail-Back).
+		List = [Head| Tail],
+		Position1 is Position0 + 1,
+		nth(Element, Tail-Back, Position1, Position, Rest-Back).
 
 	min(List-Back, Min) :-
 		List \== Back,

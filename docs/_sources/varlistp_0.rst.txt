@@ -252,13 +252,13 @@ Nth element of a list (counting from zero).
 ``nth0/4``
 ^^^^^^^^^^
 
-Nth element of a list (counting from zero).
+Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``nth0(Nth,List,Element,Residue)``
+|    ``nth0(Nth,List,Element,Rest)``
 | **Mode and number of proofs:**
 |    ``nth0(?integer,+list,@var,?list)`` - ``zero_or_more``
 
@@ -298,13 +298,13 @@ Nth element of a list (counting from one).
 ``nth1/4``
 ^^^^^^^^^^
 
-Nth element of a list (counting from zero).
+Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``nth1(Nth,List,Element,Residue)``
+|    ``nth1(Nth,List,Element,Rest)``
 | **Mode and number of proofs:**
 |    ``nth1(?integer,+list,@var,?list)`` - ``zero_or_more``
 

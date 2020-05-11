@@ -11,8 +11,8 @@
 List protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:15:0
-| **Date:** 2019-01-03
+| **Version:** 1:15:1
+| **Date:** 2020-05-11
 
 | **Compilation flags:**
 |    ``static``
@@ -461,13 +461,13 @@ Nth element of a list (counting from zero).
 ``nth0/4``
 ^^^^^^^^^^
 
-Nth element of a list (counting from zero).
+Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``nth0(Nth,List,Element,Residue)``
+|    ``nth0(Nth,List,Element,Rest)``
 | **Mode and number of proofs:**
 |    ``nth0(?integer,?list,?term,?list)`` - ``zero_or_more``
 
@@ -507,13 +507,13 @@ Nth element of a list (counting from one).
 ``nth1/4``
 ^^^^^^^^^^
 
-Nth element of a list (counting from one).
+Nth element of a list (counting from one). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``nth1(Nth,List,Element,Residue)``
+|    ``nth1(Nth,List,Element,Rest)``
 | **Mode and number of proofs:**
 |    ``nth1(?integer,?list,?term,?list)`` - ``zero_or_more``
 

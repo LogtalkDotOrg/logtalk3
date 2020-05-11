@@ -27,10 +27,14 @@ RELEASE NOTES
 Documentation
 -------------
 
-* IMPROVED: Documentation of the ``scratch_directory`` compiler flag.
+* IMPROVED: Documentation of the `scratch_directory` compiler flag.
 
 Library
 -------
+
+* CHANGED: The behavior of the library `nth0/4` and `nth1/4` list predicates
+to match the same behavior found in Prolog libraries where the last argument
+returns all other elements instead of just those after the selected element.
 
 * ADDED: More type edge cases to the `arbitrary` category for atomic and
 list terms.

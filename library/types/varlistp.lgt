@@ -94,8 +94,8 @@
 	:- public(nth0/4).
 	:- mode(nth0(?integer, +list, @var, ?list), zero_or_more).
 	:- info(nth0/4, [
-		comment is 'Nth element of a list (counting from zero).',
-		argnames is ['Nth', 'List', 'Element', 'Residue']
+		comment is 'Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
+		argnames is ['Nth', 'List', 'Element', 'Rest']
 	]).
 
 	:- public(nth1/3).
@@ -108,8 +108,8 @@
 	:- public(nth1/4).
 	:- mode(nth1(?integer, +list, @var, ?list), zero_or_more).
 	:- info(nth1/4, [
-		comment is 'Nth element of a list (counting from zero).',
-		argnames is ['Nth', 'List', 'Element', 'Residue']
+		comment is 'Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
+		argnames is ['Nth', 'List', 'Element', 'Rest']
 	]).
 
 	:- public(permutation/2).

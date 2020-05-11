@@ -21,9 +21,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1:15:0,
+		version is 1:15:1,
 		author is 'Paulo Moura',
-		date is 2019-01-03,
+		date is 2020-05-11,
 		comment is 'List protocol.',
 		see_also is [list, list(_), numberlistp, varlistp]
 	]).
@@ -158,8 +158,8 @@
 	:- public(nth0/4).
 	:- mode(nth0(?integer, ?list, ?term, ?list), zero_or_more).
 	:- info(nth0/4, [
-		comment is 'Nth element of a list (counting from zero).',
-		argnames is ['Nth', 'List', 'Element', 'Residue']
+		comment is 'Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
+		argnames is ['Nth', 'List', 'Element', 'Rest']
 	]).
 
 	:- public(nth1/3).
@@ -172,8 +172,8 @@
 	:- public(nth1/4).
 	:- mode(nth1(?integer, ?list, ?term, ?list), zero_or_more).
 	:- info(nth1/4, [
-		comment is 'Nth element of a list (counting from one).',
-		argnames is ['Nth', 'List', 'Element', 'Residue']
+		comment is 'Nth element of a list (counting from one). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
+		argnames is ['Nth', 'List', 'Element', 'Rest']
 	]).
 
 	:- public(partition/5).
