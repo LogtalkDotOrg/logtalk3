@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on April 13, 2020
+%  Last updated on May 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -22,6 +22,7 @@
 
 
 :- use_module(library(lists)).
+:- use_module(library(os)).
 
 
 
@@ -290,8 +291,7 @@ setup_call_cleanup(_, _, _) :-
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
-	?????
+'$lgt_prolog_os_file_name'(Path, Path).
 
 
 % '$lgt_expand_path'(+nonvar, -atom)
@@ -299,7 +299,7 @@ setup_call_cleanup(_, _, _) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	?????
+	absolute_file_name(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
@@ -307,7 +307,7 @@ setup_call_cleanup(_, _, _) :-
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	?????
+	exists_file(File).
 
 
 % '$lgt_delete_file'(+atom)
@@ -315,7 +315,7 @@ setup_call_cleanup(_, _, _) :-
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	?????
+	delete_file(File).
 
 
 % '$lgt_directory_exists'(+atom)
@@ -323,7 +323,7 @@ setup_call_cleanup(_, _, _) :-
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	?????
+	exists_directory(Directory).
 
 
 % '$lgt_current_directory'(-atom)
@@ -331,7 +331,7 @@ setup_call_cleanup(_, _, _) :-
 % gets current working directory
 
 '$lgt_current_directory'(Directory) :-
-	?????
+	working_directory(Directory, Directory).
 
 
 % '$lgt_change_directory'(+atom)
@@ -339,7 +339,7 @@ setup_call_cleanup(_, _, _) :-
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	?????
+	working_directory(_, Directory).
 
 
 % '$lgt_make_directory'(+atom)
@@ -347,7 +347,7 @@ setup_call_cleanup(_, _, _) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	?????
+	make_directory(Directory).
 
 
 % '$lgt_directory_hash_as_atom'(+atom, -atom)
@@ -380,7 +380,7 @@ setup_call_cleanup(_, _, _) :-
 % gets a file modification time, assumed to be an opaque term but comparable
 
 '$lgt_file_modification_time'(File, Time) :-
-	?????
+	time_file(File, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
@@ -398,7 +398,37 @@ setup_call_cleanup(_, _, _) :-
 % be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	?????
+	atom_codes(File, FileCodes),
+	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+		atom_codes(Basename, BasenameCodes),
+		atom_concat(Directory, Basename, File)
+	;	Directory = './',
+		atom_codes(Basename, FileCodes),
+		BasenameCodes = FileCodes
+	),
+	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
+		atom_codes(Extension, ExtensionCodes),
+		atom_concat(Name, Extension, Basename)
+	;	Name = Basename,
+		Extension = ''
+	).
+
+
+% the following auxiliary predicate is simplified version of code
+% written by Per Mildner and is used here with permission
+'$lgt_strrch'(Xs, G, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch'(Xs1, G, Ys)
+	).
+
+'$lgt_strrch1'([], _G, Ys, Ys).
+'$lgt_strrch1'([X| Xs1], G, Prev, Ys) :-
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, [X| Xs1], Ys)
+	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	).
 
 
 
