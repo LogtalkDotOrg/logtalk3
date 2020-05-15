@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on May 14, 2020
+%  Last updated on May 15, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -80,10 +80,7 @@ format(Format, Arguments) :-
 	?????
 
 
-% numbervars(?term, +integer, ?integer) -- built-in ????
-
-numbervars(Term, From, Next) :-
-	?????
+% numbervars(?term, +integer, ?integer) -- built-in
 
 
 
@@ -217,12 +214,12 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
-'$lgt_prolog_feature'(encoding_directive, ?????).
+'$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
-'$lgt_prolog_feature'(unicode, ?????).
+'$lgt_prolog_feature'(unicode, bmp).
 
 
 
@@ -362,8 +359,7 @@ setup_call_cleanup(_, _, _) :-
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_compile_prolog_code'(File, Source, Options) :-
-	?????.
+'$lgt_compile_prolog_code'(_, _, _).
 
 
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
@@ -388,7 +384,7 @@ setup_call_cleanup(_, _, _) :-
 % access to operating-system environment variables
 
 '$lgt_environment_variable'(Variable, Value) :-
-	?????
+	getenv(Variable, Value).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
@@ -514,11 +510,7 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom)
 
-'$lgt_logtalk_prolog_encoding'('US-ASCII', ?????).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', ?????).
-'$lgt_logtalk_prolog_encoding'('UTF-8', ?????).
-'$lgt_logtalk_prolog_encoding'('UTF-16BE', ?????).
-'$lgt_logtalk_prolog_encoding'('UTF-16LE', ?????).
+'$lgt_logtalk_prolog_encoding'('UTF-8', _).
 
 
 
