@@ -347,14 +347,12 @@
 
 '$lgt_directory_hash_as_atom'(_, '').
 
-
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_compile_prolog_code'(File, Source, Options) :-
-	?????.
+'$lgt_compile_prolog_code'(_, _, _).
 
 
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
@@ -362,8 +360,8 @@
 % compile and load a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_load_prolog_code'(File, Source, Options) :-
-	?????
+'$lgt_load_prolog_code'(File, _Source, _Options) :-
+	consult(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

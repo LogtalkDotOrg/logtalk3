@@ -367,8 +367,8 @@ setup_call_cleanup(_, _, _) :-
 % compile and load a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_load_prolog_code'(File, Source, Options) :-
-	?????
+'$lgt_load_prolog_code'(File, _Source, _Options) :-
+	consult(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
