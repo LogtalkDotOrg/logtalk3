@@ -21,9 +21,9 @@
 :- object(game).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2016-06-15,
+		date is 2020-05-16,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
@@ -32,8 +32,6 @@
 	% create an engine to do all output from the other engines
 	:- initialization(threaded_engine_create(_, output, writer)).
 
-	% format/2 allows us to avoid synchronization issues
-	% when our engines are concurrently writing text
 	:- uses(user, [format/2]).
 
 	:- public(explain/0).
@@ -43,16 +41,18 @@
 	]).
 
 	explain :-
-		format('Scissors cuts Paper\n', []),
-		format('Paper covers Rock\n', []),
-		format('Rock crushes Lizard\n', []),
-		format('Lizard poisons Spock\n', []),
-		format('Spock smashes Scissors\n', []),
-		format('Scissors decapitates Lizard\n', []),
-		format('Lizard eats Paper\n', []),
-		format('Paper disproves Spock\n', []),
-		format('Spock vaporizes Rock\n', []),
-		format('(and as it always has) Rock crushes Scissors\n', []).
+		format('~w~n~w~n~w~n~w~n~w~n~w~n~w~n~w~n~w~n~w~n', [
+			'Scissors cuts Paper',
+			'Paper covers Rock',
+			'Rock crushes Lizard',
+			'Lizard poisons Spock',
+			'Spock smashes Scissors',
+			'Scissors decapitates Lizard',
+			'Lizard eats Paper',
+			'Paper disproves Spock',
+			'Spock vaporizes Rock',
+			'(and as it always has) Rock crushes Scissors'
+		]).
 
 	:- public(play/0).
 	:- mode(play, one).
@@ -100,7 +100,7 @@
 
 	% arbiter predicate that collects engine moves, compares them,
 	% communicate the move outcome to the engines, and decides if
-	% the game continues 
+	% the game continues
 	play_move :-
 		threaded_engine_next(sheldon, SheldonMove),
 		threaded_engine_next(raj, RajMove),
