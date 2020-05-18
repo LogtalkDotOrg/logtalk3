@@ -27,12 +27,10 @@
 :- use_package(runtime_ops).
 :- use_package(hiord).
 
+:- use_module(engine(basic_props)).
 :- use_module(library(compiler)).
 :- use_module(library(system)).
-:- use_module(library(prolog_sys)).
 :- use_module(library(sort)).
-:- use_module(library(filenames)).
-:- use_module(library(terms_vars)).
 
 :- set_prolog_flag(multi_arity_warnings, off).
 
@@ -56,9 +54,7 @@
 
 '$lgt_iso_predicate'(term_variables(_, _)).
 
-term_variables(Term, Variables) :-
-	varsbag(Term, Variables, []).
-
+:- use_module(library(terms_vars)).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,7 +64,9 @@ term_variables(Term, Variables) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% between(+integer, +integer, ?integer) -- built-in
+% between(+integer, +integer, ?integer)
+
+:- use_module(library(between)).
 
 
 % findall(?term, +callable, ?list, +list) -- built-in
@@ -135,33 +133,6 @@ forall(Generate, Test) :-
 
 
 % setup_call_cleanup(+callable, +callable, +callable) -- not supported
-
-
-% call/2-7
-
-call(F, A) :-
-	Call =.. [F, A],
-	call(Call).
-
-call(F, A1, A2) :-
-	Call =.. [F, A1, A2],
-	call(Call).
-
-call(F, A1, A2, A3) :-
-	Call =.. [F, A1, A2, A3],
-	call(Call).
-
-call(F, A1, A2, A3, A4) :-
-	Call =.. [F, A1, A2, A3, A4],
-	call(Call).
-
-call(F, A1, A2, A3, A4, A5) :-
-	Call =.. [F, A1, A2, A3, A4, A5],
-	call(Call).
-
-call(F, A1, A2, A3, A4, A5, A6) :-
-	Call =.. [F, A1, A2, A3, A4, A5, A6],
-	call(Call).
 
 
 
@@ -257,10 +228,10 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_prolog_feature'(prolog_dialect, ciao).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
-	current_prolog_flag(version, ciao(Version, Patch)),
+	current_prolog_flag(version, ciao(Version, Patch, _, _, _)),
 	Major is truncate(float_integer_part(Version)),
 	Minor is truncate(float_fractional_part(Version)*100).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,10,5))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,18,0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
@@ -313,9 +284,9 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
 '$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
-	(	get_os(Name), (Name == 'LINUX'; Name == 'DARWIN'; Name == 'Solaris') ->
-		ScratchDirectory = './.lgt_tmp/'
-	;	ScratchDirectory = './lgt_tmp/'
+	(	using_windows ->
+		ScratchDirectory = './lgt_tmp/'
+	;	ScratchDirectory = './.lgt_tmp/'
 	).
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
@@ -335,6 +306,14 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 %  operating-system access predicates
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_prolog_os_file_name'(+atom, -atom)
+% '$lgt_prolog_os_file_name'(-atom, +atom)
+%
+% converts between Prolog internal file paths and operating-system paths
+
+'$lgt_prolog_os_file_name'(Path, Path).
 
 
 % '$lgt_expand_path'(+nonvar, -atom)
@@ -595,7 +574,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_ciao_directive_meta_predicate'(Template, CTemplate) :-
 	functor(Template, Functor, Arity),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity),
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/_),
 	Template =.. [Functor| Args],
 	'$lgt_ciao_directive_meta_predicate_args'(Args, CArgs),
 	CTemplate =.. [CFunctor| CArgs].
