@@ -21,13 +21,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- use_package(iso).
 
 :- use_package(runtime_ops).
 :- use_package(hiord).
 
 :- use_module(engine(basic_props)).
+:- use_module(engine(stream_basic)).
+
 :- use_module(library(compiler)).
 :- use_module(library(system)).
 :- use_module(library(sort)).
@@ -69,7 +70,9 @@
 :- use_module(library(between)).
 
 
-% findall(?term, +callable, ?list, +list) -- built-in
+% findall(?term, +callable, ?list, +list)
+
+:- use_module(library(aggregates)).
 
 
 % forall(+callable, +callable)
@@ -78,13 +81,15 @@ forall(Generate, Test) :-
 	\+ (Generate, \+ Test).
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+% format(+character_code_list_or_atom, +list)
+
+:- use_module(library(format)).
 
 
-% format(+character_code_list_or_atom, +list) -- built-in
+% numbervars(?term, +integer, ?integer)
 
-
-% numbervars(?term, +integer, ?integer) -- built-in
+:- use_module(library(write)).
 
 
 
@@ -662,7 +667,10 @@ forall(Generate, Test) :-
 
 % '$lgt_normalize_error_term'(@callable, -callable)
 
-'$lgt_normalize_error_term'(error(existence_error(procedure, ModFunctor/Arity), _), error(existence_error(procedure, Functor/Arity), _)) :-
+'$lgt_normalize_error_term'(
+		error(existence_error(procedure, ModFunctor/Arity), _),
+		error(existence_error(procedure, Functor/Arity), _)
+	) :-
 	atom_concat('user:', Functor, ModFunctor).
 
 
