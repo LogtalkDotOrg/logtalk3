@@ -35,7 +35,8 @@
 
 :- set_prolog_flag(multi_arity_warnings, off).
 
-:- op(1200, xfx, [(-->)]).
+:- op(1200, xfx, (-->)).
+:- op(600,  xfy, (:)).
 
 
 
@@ -326,7 +327,8 @@ forall(Generate, Test) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	absolute_file_name(Path, ExpandedPath).
+	working_directory(Directory, Directory),
+	fixed_absolute_file_name(Path, Directory, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
@@ -492,9 +494,9 @@ forall(Generate, Test) :-
 
 '$lgt_open'(File, Mode, Stream, Options) :-
 	(	Options = [alias(Alias)| OtherOptions] ->
-		open(File, Mode, OtherOptions, Stream),
+		open(File, Mode, Stream, OtherOptions),
 		'$lgt_ciao_save_stream_alias'(Stream, Alias)
-	;	open(File, Mode, Options, Stream)
+	;	open(File, Mode, Stream, Options)
 	).
 
 
@@ -523,13 +525,10 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	line_count(Stream, LineBegin),
-	read_term(Stream, Term, Options),
-	line_count(Stream, LineEnd),
-	!.
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	read_term(Stream, Term, [variable_names(Variables), lines(LineBegin,LineEnd)| Options]).
 
 
 
