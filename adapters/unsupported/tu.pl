@@ -464,53 +464,6 @@ numbervars(Term, From, Next) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  time and date predicates
-%
-%  if your Prolog compiler does not provide access to the operating system
-%  time and date just write dummy definitions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_current_date'(?integer, ?integer, ?integer)
-
-'$lgt_current_date'(Year, Month, Day) :-
-	class('java.util.Calendar') <- getInstance returns Instance,
-	Instance.'YEAR' <- get(YEAR), Instance <- get(YEAR) returns Year,
-	Instance.'MONTH' <- get(MONTH), Instance <- get(MONTH) returns Month0, Month is Month0 + 1,
-	Instance.'DAY_OF_MONTH' <- get(DAY), Instance <- get(DAY) returns Day.
-
-
-% '$lgt_current_time'(?integer, ?integer, ?integer)
-
-'$lgt_current_time'(Hours, Minutes, Seconds) :-
-	class('java.util.Calendar') <- getInstance returns Instance,
-	Instance.'HOUR' <- get(HOUR), Instance <- get(HOUR) returns Hours,
-	Instance.'MINUTE' <- get(MINUTE), Instance <- get(MINUTE) returns Minutes,
-	Instance.'SECOND' <- get(SECOND), Instance <- get(SECOND) returns Seconds.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  timing predicate
-%
-%  if your Prolog compiler does not provide access to a timing predicate
-%  just write a dummy definition
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% '$lgt_cpu_time'(-Seconds)
-
-'$lgt_cpu_time'(Seconds) :-
-	class('java.lang.System') <- currentTimeMillis returns Miliseconds,
-	Seconds is Miliseconds / 1000 .
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %  getting stream current line number
 %  (needed for improved compiler error messages)
 %

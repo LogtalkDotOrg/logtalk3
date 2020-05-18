@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on May 15, 2020
+%  Last updated on May 16, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -58,11 +58,7 @@
 % between(+integer, +integer, ?integer) -- built-in
 
 
-% findall(?term, +callable, ?list, +list)
-
-findall(Term, Goal, List, Tail) :-
-	findall(Term, Goal, List0),
-	append(List0, Tail, List).
+% findall(?term, +callable, ?list, +list) -- built-in
 
 
 % forall(+callable, +callable) -- built-in
@@ -98,7 +94,7 @@ format(Format, Arguments) :-
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	?????
+	predicate_property(Pred, Prop).
 
 
 

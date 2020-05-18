@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on April 13, 2020
+%  Last updated on May 18, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -63,6 +63,35 @@ term_variables(Term, Variables) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  de facto standard Prolog predicates that might be missing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% between(+integer, +integer, ?integer) -- built-in
+
+
+% findall(?term, +callable, ?list, +list) -- built-in
+
+
+% forall(+callable, +callable)
+
+forall(Generate, Test) :-
+	\+ (Generate, \+ Test).
+
+
+% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+
+% format(+character_code_list_or_atom, +list) -- built-in
+
+
+% numbervars(?term, +integer, ?integer) -- built-in
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  predicate properties
 %
 %  this predicate must return at least static, dynamic, and built_in
@@ -106,15 +135,6 @@ term_variables(Term, Variables) :-
 
 
 % setup_call_cleanup(+callable, +callable, +callable) -- not supported
-
-
-% between(+integer, +integer, ?integer) -- built-in
-
-
-% forall(+callable, +callable)
-
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
 
 
 % call/2-7
@@ -462,26 +482,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  read character predicate
-%
-%  read a single character echoing it and writing a newline after
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-'$lgt_read_single_char'(Char) :-
-	get_code(Code), char_code(Char, Code),
-	(	Code =:= 10 ->
-		true
-	;	peek_code(10) ->	% hack to workaround the lack of built-in
-		get_code(_)			% support for unbuffered character input
-	;	true
-	).
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
 %  getting stream current line number
 %  (needed for improved compiler error messages)
 %
@@ -493,6 +493,40 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_stream_current_line_number'(Stream, Line) :-
 	line_count(Stream, Last),
 	Line is Last + 1.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  abstraction of the standard open/4 and close/1 predicates for dealing
+%  with the alias/1 option in old non-standard compliant systems
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% '$lgt_open'(+atom, +atom, -stream, @list)
+
+'$lgt_open'(File, Mode, Stream, Options) :-
+	(	Options = [alias(Alias)| OtherOptions] ->
+		open(File, Mode, OtherOptions, Stream),
+		'$lgt_ciao_save_stream_alias'(Stream, Alias)
+	;	open(File, Mode, Options, Stream)
+	).
+
+
+% '$lgt_close'(@stream)
+
+'$lgt_close'(Stream) :-
+	retractall('$lgt_ciao_stream_alias'(Stream, _)),
+	close(Stream).
+
+
+:- dynamic('$lgt_ciao_stream_alias'/2).
+
+
+'$lgt_ciao_save_stream_alias'(Stream, Alias) :-
+	retractall('$lgt_ciao_stream_alias'(Stream, _)),
+	asserta('$lgt_ciao_stream_alias'(Stream, Alias)).
 
 
 
@@ -663,6 +697,17 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 %:- multifile('$logtalk#0.print_message_token#4'/5).
 %:- dynamic('$logtalk#0.print_message_token#4'/5).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  term hashing (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% term_hash(@callable, +integer, +integer, -integer) -- built-in
 
 
 
