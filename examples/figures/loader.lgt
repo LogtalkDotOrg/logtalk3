@@ -18,7 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(coroutining(loader)),
-	logtalk_load(figures, [optimize(on)])
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
 )).
+
+	:- initialization((
+		logtalk_load(coroutining(loader)),
+		logtalk_load(figures, [optimize(on)])
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.
