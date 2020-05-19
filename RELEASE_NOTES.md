@@ -57,6 +57,10 @@ shrinking counter-examples.
 
 * FIXED: Interference between QuickCheck `ec/1` and `v/1` options.
 
+* FIXED: Bug in the `logtalk_tester` shell script where running the same test
+with two different backends in a row would result in the wrong results being
+reported for the second run if it resulted in the tests being skipped.
+
 Tests
 -----
 
