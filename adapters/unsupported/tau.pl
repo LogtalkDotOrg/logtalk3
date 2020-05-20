@@ -208,7 +208,7 @@ setup_call_cleanup(_, _, _) :-
 % backend Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, tau).
-'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, tau(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 2, 88))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
@@ -474,7 +474,7 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, (-1)-(-1), Variables) :-
-	read_term(Stream, Term, [variable_names(Variables)| Options]),
+	read_term(Stream, Term, [variable_names(Variables)| Options]).
 
 
 
