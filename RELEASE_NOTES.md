@@ -29,6 +29,9 @@ Documentation
 
 * IMPROVED: Documentation of the `scratch_directory` compiler flag.
 
+* FIXED: Broken Handbook links do API documentation. Thanks to Paul Brown for
+the bug report.
+
 Library
 -------
 

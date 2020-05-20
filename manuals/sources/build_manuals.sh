@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on February 7, 2020
+##   Last updated on May 20, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -98,6 +98,13 @@ make html
 make latexpdf
 make epub
 make info
+
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/devtools/index.html
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/faq/index.html
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/libraries/index.html
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/refman/index.html
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/tutorial/index.html
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/userman/index.html
 
 rm -f _build/html/index_latexpdf.html
 mv -f _build/html/* ../
