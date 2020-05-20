@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on May 16, 2020
+%  Last updated on May 20, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -64,16 +64,19 @@
 % forall(+callable, +callable) -- built-in
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+% format(+character_code_list_or_atom, +list)
 
-format(Stream, Format, Arguments) :-
-	?????
+:- use_module(library(format)).
 
-
-% format(+character_code_list_or_atom, +list) -- built-in ????
-
-format(Format, Arguments) :-
-	?????
+goal_expansion(
+	format(Stream,Format,Arguments),
+	(atom(Format) -> atom_chars(Format,Chars), format:format(Stream,Chars,Arguments))
+).
+goal_expansion(
+	format(Format,Arguments),
+	(atom(Format) -> atom_chars(Format,Chars), format:format(Chars,Arguments))
+).
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
