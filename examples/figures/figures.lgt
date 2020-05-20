@@ -30,7 +30,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-05-19,
+		date is 2020-05-20,
 		comment is 'Example of network modeling for recognizing polyhedra represented as graphs.',
 		source is '"A framework for network modeling in Prolog", Zdravko I. Markov, IJCAI, 1989.'
 	]).
@@ -48,12 +48,17 @@
 	edge(_E_, _G_, _S3_, _L3_).
 	edge(_G_, _A_, _S4_, _L4_).
 
-	% classes of figures
+	% classes of figures; the last four arguments are the vertices
 	:- public(class/5).
-	class(four_side_figure, _A_, _B_, _E_, _G_) :- dif.
-	class(parallelogram,    _A_, _B_, _E_, _F_) :- dif.
-	class(rhombus,          _A_, _B_, _C_, _D_) :- dif.
+	class(four_side_figure, _A_, _B_, _E_, _G_) :-
+		dif, ground(vars(_A_, _B_, _E_, _G_)).
+	class(parallelogram,    _A_, _B_, _E_, _F_) :-
+		dif, ground(vars(_A_, _B_, _E_, _F_)).
+	class(rhombus,          _A_, _B_, _C_, _D_) :-
+		dif, ground(vars(_A_, _B_, _C_, _D_)).
 
+	% ensure that vertices, edge slopes, and
+	% edge lengths bindings are distinct
 	dif :-
 		dif([_A_, _B_, _C_, _D_, _E_, _F_, _G_]),
 		dif([_S1_, _S2_, _S3_, _S4_]),

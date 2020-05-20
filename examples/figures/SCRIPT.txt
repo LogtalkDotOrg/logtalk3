@@ -31,8 +31,7 @@ ________________________________________________________________________
 		edge(3, 4,  0, 20),
 		edge(4, 1, 45, 30),
 		class(Name, X, Y, Z, P)
-	),
-	nonvar(X), nonvar(Y), nonvar(Z), nonvar(P).
+	).
 
 Name = parallelogram,
 X = 1,
@@ -65,8 +64,7 @@ no
 		edge(c, d, 45, 10),
 		edge(d, a,  0, 10),
 		class(Name, X, Y, Z, P)
-	),
-	nonvar(X), nonvar(Y), nonvar(Z), nonvar(P).
+	).
 
 Name = rhombus,
 X = a,
