@@ -71,11 +71,11 @@
 
 goal_expansion(
 	format(Stream,Format,Arguments),
-	(atom(Format) -> atom_chars(Format,Chars), format:format(Stream,Chars,Arguments))
+	(atom(Format) -> atom_chars(Format,Chars), format(Stream,Chars,Arguments))
 ).
 goal_expansion(
 	format(Format,Arguments),
-	(atom(Format) -> atom_chars(Format,Chars), format:format(Chars,Arguments))
+	(atom(Format) -> atom_chars(Format,Chars), format(Chars,Arguments))
 ).
 
 
@@ -210,7 +210,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, tau).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
 	current_prolog_flag(version_data, tau(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 2, 88))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
