@@ -343,7 +343,10 @@ setup_call_cleanup(_, _, _) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	make_directory(Directory).
+	(	exists_directory(Directory) ->
+		true
+	;	make_directory(Directory)
+	).
 
 
 % '$lgt_directory_hash_as_atom'(+atom, -atom)
