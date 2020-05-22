@@ -49,6 +49,8 @@ list terms.
 to support suppressing a goal in a clause body by prefixing it with the `--`
 operator.
 
+* ADDED: Support for Tau Prolog to the portable `os` and `random` libraries.
+
 Tools
 -----
 
