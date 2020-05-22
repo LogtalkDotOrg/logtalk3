@@ -24,6 +24,18 @@ RELEASE NOTES
 3.39.0 - May ??, 2020
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `logtalk` built-in object to call the portability abstraction
+for the `format/2-3` predicates.
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: Abstract the calls to the `format/2-3` predicates to workaround
+portability issues with Tau Prolog and Scryer Prolog.
+
 Documentation
 -------------
 

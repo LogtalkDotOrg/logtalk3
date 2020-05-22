@@ -68,14 +68,11 @@
 
 :- use_module(library(format), [format/3, format/2]).
 
-goal_expansion(
-	format(Stream,Format,Arguments),
-	(atom(Format) -> atom_chars(Format,Chars), format(Stream,Chars,Arguments))
-).
-goal_expansion(
-	format(Format,Arguments),
-	(atom(Format) -> atom_chars(Format,Chars), format(Chars,Arguments))
-).
+'$lgt_format'(Stream, Format, Arguments) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_format'(Format, Arguments) :-
+	format(Format, Arguments).
 
 
 % numbervars(?term, +integer, ?integer)

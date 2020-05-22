@@ -87,6 +87,12 @@ forall(Generate, Test) :-
 
 :- use_module(library(format)).
 
+'$lgt_format'(Stream, Format, Arguments) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_format'(Format, Arguments) :-
+	format(Format, Arguments).
+
 
 % numbervars(?term, +integer, ?integer)
 

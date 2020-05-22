@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on May 20, 2020
+%  Last updated on May 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -69,14 +69,19 @@
 
 :- use_module(library(format)).
 
-goal_expansion(
-	format(Stream,Format,Arguments),
-	(atom(Format) -> atom_chars(Format,Chars), format(Stream,Chars,Arguments))
-).
-goal_expansion(
-	format(Format,Arguments),
-	(atom(Format) -> atom_chars(Format,Chars), format(Chars,Arguments))
-).
+'$lgt_format'(Stream, Format, Arguments) :-
+	(	atom(Format) ->
+		atom_chars(Format, Chars),
+		format(Stream,  Chars, Arguments)
+	;	format(Stream, Format, Arguments)
+	).
+
+'$lgt_format'(Format, Arguments) :-
+	(	atom(Format) ->
+		atom_chars(Format, Chars),
+		format(Chars,  Arguments)
+	;	format(Format, Arguments)
+	).
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
@@ -370,7 +375,9 @@ setup_call_cleanup(_, _, _) :-
 % Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _Source, _Options) :-
-	consult(File).
+	writeq(in-consult(File)), nl,
+	consult(File),
+	writeq(out-consult(File)), nl.
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

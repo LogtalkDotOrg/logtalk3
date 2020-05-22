@@ -33,9 +33,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:17:0,
+		version is 1:17:1,
 		author is 'Paulo Moura',
-		date is 2020-02-05,
+		date is 2020-05-22,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -400,13 +400,13 @@
 	default_print_message_token(flush, _, Stream, _) :-
 		flush_output(Stream).
 	default_print_message_token(Format-Arguments, _, Stream, _) :-
-		{format(Stream, Format, Arguments)}.
+		{'$lgt_format'(Stream, Format, Arguments)}.
 	default_print_message_token(term(Term, Options), _, Stream, _) :-
 		write_term(Stream, Term, Options).
 	% the following tokens were first introduced by SWI-Prolog; we use default definitions
 	% for compatibility when running Logtalk with other backend Prolog compilers
 	default_print_message_token(ansi(_, Format, Arguments), _, Stream, _) :-
-		{format(Stream, Format, Arguments)}.
+		{'$lgt_format'(Stream, Format, Arguments)}.
 	default_print_message_token(begin(_, _), _, _, _).
 	default_print_message_token(end(_), _, _, _).
 
@@ -603,7 +603,4 @@
 	:- dynamic('$lgt_current_category_'/6).
 	:- multifile('$lgt_included_file_'/4).
 	:- dynamic('$lgt_included_file_'/4).
-:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-	% workaround XSB atom-based module system
-	:- import(from(/(format,3), format)).
 :- endif.

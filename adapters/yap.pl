@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on April 13, 2020
+%  Last updated on May 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,12 @@
 
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+'$lgt_format'(Stream, Format, Arguments) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_format'(Format, Arguments) :-
+	format(Format, Arguments).
 
 
 % format(+character_code_list_or_atom, +list) -- built-in
@@ -917,6 +923,10 @@
 
 :- dynamic(user:goal_expansion/2).
 :- multifile(user:goal_expansion/2).
+
+% optimize portable format/2-3 calls
+user:goal_expansion('$lgt_format'(Stream, Format, Arguments), format(Stream, Format, Arguments)).
+user:goal_expansion('$lgt_format'(Format, Arguments), format(Format, Arguments)).
 
 % support calls to phrase/2 that call object non-terminals
 user:goal_expansion(phrase(Rule, Input, Rest), ExpandedGoal) :-
