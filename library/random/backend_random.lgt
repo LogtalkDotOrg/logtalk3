@@ -22,7 +22,7 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
 		date is 2020-05-22,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
@@ -203,6 +203,11 @@
 		get_seed(_).
 		set_seed(_).
 		random(Random) :- Random is random.
+	:- elif(current_logtalk_flag(prolog_dialect, ciao)).
+		{:- use_module(library(random))}.
+		get_seed(_).
+		set_seed(Seed) :- {srandom(Seed)}.
+		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, cx)).
 		get_seed(_).
 		set_seed(_).
