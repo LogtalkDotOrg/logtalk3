@@ -220,6 +220,7 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
@@ -375,9 +376,7 @@ setup_call_cleanup(_, _, _) :-
 % Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _Source, _Options) :-
-	writeq(in-consult(File)), nl,
-	consult(File),
-	writeq(out-consult(File)), nl.
+	consult(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
