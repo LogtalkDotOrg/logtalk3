@@ -20,23 +20,29 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(system), [current_env/2]).
+:- use_module(engine(runtime_control), [set_prolog_flag/2]).
 
-:- use_module(library(system)).
-:- set_prolog_flag(multi_arity_warnings, off).
+% % TODO: needed?
+% :- op(600, xfy, ::).
+% :- op(600,  fy, ::).
+% :- op(600,  fy, ^^).
+% :- op(200,  fy,  +).
+% :- op(200,  fy,  ?).
+% :- op(200,  fy,  @).
+% :- op(200,  fy,  -).
+% :- op(400, yfx, <<).
+% :- op(600,  fy,  :).
+% :- op(400, yfx, >>).
 
-:- initialization((
-	absolute_file_name('$LOGTALKHOME/adapters/unsupported/ciao.pl', Adapter), ensure_loaded(Adapter),
-	absolute_file_name('$LOGTALKHOME/paths/paths.pl', Paths), ensure_loaded(Paths),
-	absolute_file_name('$LOGTALKHOME/core/core.pl', Core), ensure_loaded(Core)
-)).
+logtalk_ciao_init :-
+	set_prolog_flag(multi_arity_warnings, off),
+	current_env('LOGTALKHOME', LogtalkHome),
+	% load Logtalk core files
+	atom_concat(LogtalkHome, '/adapters/unsupported/ciao.pl', AdapterFile), ensure_loaded(AdapterFile),
+	atom_concat(LogtalkHome, '/paths/paths.pl', PathsFile), ensure_loaded(PathsFile),
+	atom_concat(LogtalkHome, '/core/core.pl', CoreFile), ensure_loaded(CoreFile).
 
-:- op(600, xfy, ::).
-:- op(600,  fy, ::).
-:- op(600,  fy, ^^).
-:- op(200,  fy,  +).
-:- op(200,  fy,  ?).
-:- op(200,  fy,  @).
-:- op(200,  fy,  -).
-:- op(400, yfx, <<).
-:- op(600,  fy,  :).
-:- op(400, yfx, >>).
+%:- initialization(logtalk_ciao_init).
+?- logtalk_ciao_init.
+

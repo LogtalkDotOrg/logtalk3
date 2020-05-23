@@ -20,19 +20,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 :- use_package(iso).
-
-:- use_package(runtime_ops).
-:- use_package(hiord).
-
-:- use_module(engine(basic_props)).
-:- use_module(engine(stream_basic)).
-
-:- use_module(library(compiler)).
-:- use_module(library(system)).
-:- use_module(library(indexer/hash), [hash_term/2]).
-:- use_module(library(sort)).
 
 :- set_prolog_flag(multi_arity_warnings, off).
 
@@ -320,6 +308,7 @@ forall(Generate, Test) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(indexer/hash), [hash_term/2]).
 
 % '$lgt_prolog_os_file_name'(+atom, -atom)
 % '$lgt_prolog_os_file_name'(-atom, +atom)
@@ -334,8 +323,7 @@ forall(Generate, Test) :-
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	working_directory(Directory, Directory),
-	fixed_absolute_file_name(Path, Directory, ExpandedPath).
+	absolute_file_name(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
@@ -506,27 +494,13 @@ forall(Generate, Test) :-
 % '$lgt_open'(+atom, +atom, -stream, @list)
 
 '$lgt_open'(File, Mode, Stream, Options) :-
-	(	Options = [alias(Alias)| OtherOptions] ->
-		open(File, Mode, Stream, OtherOptions),
-		'$lgt_ciao_save_stream_alias'(Stream, Alias)
-	;	open(File, Mode, Stream, Options)
-	).
+	open(File, Mode, Stream, Options).
 
 
 % '$lgt_close'(@stream)
 
 '$lgt_close'(Stream) :-
-	retractall('$lgt_ciao_stream_alias'(Stream, _)),
 	close(Stream).
-
-
-:- dynamic('$lgt_ciao_stream_alias'/2).
-
-
-'$lgt_ciao_save_stream_alias'(Stream, Alias) :-
-	retractall('$lgt_ciao_stream_alias'(Stream, _)),
-	asserta('$lgt_ciao_stream_alias'(Stream, Alias)).
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
