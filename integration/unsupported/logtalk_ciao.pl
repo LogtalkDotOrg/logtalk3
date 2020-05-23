@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for Ciao Prolog
-%  Last updated on October 11, 2013
+%  Last updated on May 23, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -20,18 +20,16 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(system), [current_env/2]).
+:- use_module(engine(runtime_control), [set_prolog_flag/2]).
 
-:- ensure_loaded('$LOGTALKHOME/adapters/ciao.pl').
-:- ensure_loaded('$LOGTALKHOME/paths/paths.pl').
-:- set_prolog_flag(multi_arity_warnings, off).
-:- ensure_loaded('$LOGTALKHOME/core/core.pl').
-:- op(600, xfy, ::).
-:- op(600,  fy, ::).
-:- op(600,  fy, ^^).
-:- op(200,  fy,  +).
-:- op(200,  fy,  ?).
-:- op(200,  fy,  @).
-:- op(200,  fy,  -).
-:- op(400, yfx, <<).
-:- op(600,  fy,  :).
-:- op(400, yfx, >>).
+logtalk_ciao_init :-
+	set_prolog_flag(multi_arity_warnings, off),
+	current_env('LOGTALKHOME', LogtalkHome),
+	% load Logtalk core files
+	atom_concat(LogtalkHome, '/adapters/unsupported/ciao.pl', AdapterFile), ensure_loaded(AdapterFile),
+	atom_concat(LogtalkHome, '/paths/paths.pl', PathsFile), ensure_loaded(PathsFile),
+	atom_concat(LogtalkHome, '/core/core.pl', CoreFile), ensure_loaded(CoreFile).
+
+%:- initialization(logtalk_ciao_init).
+?- logtalk_ciao_init.

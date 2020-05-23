@@ -20,24 +20,12 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 :- use_package(iso).
-
-:- use_package(runtime_ops).
-:- use_package(hiord).
-
-:- use_module(engine(basic_props)).
-:- use_module(engine(stream_basic)).
-
-:- use_module(library(compiler)).
-:- use_module(library(system)).
-:- use_module(library(sort)).
 
 :- set_prolog_flag(multi_arity_warnings, off).
 
 :- op(1200, xfx, [(-->)]).
-
-
+:- op( 600, xfy, (:)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -491,27 +479,13 @@ forall(Generate, Test) :-
 % '$lgt_open'(+atom, +atom, -stream, @list)
 
 '$lgt_open'(File, Mode, Stream, Options) :-
-	(	Options = [alias(Alias)| OtherOptions] ->
-		open(File, Mode, OtherOptions, Stream),
-		'$lgt_ciao_save_stream_alias'(Stream, Alias)
-	;	open(File, Mode, Options, Stream)
-	).
+	open(File, Mode, Stream, Options).
 
 
 % '$lgt_close'(@stream)
 
 '$lgt_close'(Stream) :-
-	retractall('$lgt_ciao_stream_alias'(Stream, _)),
 	close(Stream).
-
-
-:- dynamic('$lgt_ciao_stream_alias'/2).
-
-
-'$lgt_ciao_save_stream_alias'(Stream, Alias) :-
-	retractall('$lgt_ciao_stream_alias'(Stream, _)),
-	asserta('$lgt_ciao_stream_alias'(Stream, Alias)).
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -523,13 +497,11 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	line_count(Stream, LineBegin),
-	read_term(Stream, Term, Options),
-	line_count(Stream, LineEnd),
-	!.
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	read_term(Stream, Term, [variable_names(Variables),
+                                 lines(LineBegin, LineEnd)| Options]).
 
 
 
