@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Ciao
-##   Last updated on May 17, 2018
+##   Last updated on May 18, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>

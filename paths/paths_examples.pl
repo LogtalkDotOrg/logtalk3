@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on March 15, 2020
+%  Last updated on May 19, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -92,6 +92,7 @@ logtalk_library_path(family, examples('family/')).
 logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
 logtalk_library_path(fibonacci, threads('fibonacci/')).
+logtalk_library_path(figures, threads('figures/')).
 logtalk_library_path(fluents, engines('fluents/')).
 logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(futures, examples('futures/')).

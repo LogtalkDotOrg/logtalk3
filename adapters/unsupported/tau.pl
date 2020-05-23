@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on May 16, 2020
+%  Last updated on May 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -64,16 +64,24 @@
 % forall(+callable, +callable) -- built-in
 
 
-% format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
+% format(+stream_or_alias, +character_code_list_or_atom, +list)
+% format(+character_code_list_or_atom, +list)
 
-format(Stream, Format, Arguments) :-
-	?????
+:- use_module(library(format)).
 
+'$lgt_format'(Stream, Format, Arguments) :-
+	(	atom(Format) ->
+		atom_chars(Format, Chars),
+		format(Stream,  Chars, Arguments)
+	;	format(Stream, Format, Arguments)
+	).
 
-% format(+character_code_list_or_atom, +list) -- built-in ????
-
-format(Format, Arguments) :-
-	?????
+'$lgt_format'(Format, Arguments) :-
+	(	atom(Format) ->
+		atom_chars(Format, Chars),
+		format(Chars,  Arguments)
+	;	format(Format, Arguments)
+	).
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
@@ -205,15 +213,16 @@ setup_call_cleanup(_, _, _) :-
 % backend Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, tau).
-'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
+'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, tau(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 2, 88))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
-'$lgt_prolog_feature'(modules, supported).
+'$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 '$lgt_prolog_feature'(unicode, bmp).
 
@@ -340,7 +349,10 @@ setup_call_cleanup(_, _, _) :-
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	make_directory(Directory).
+	(	exists_directory(Directory) ->
+		true
+	;	make_directory(Directory)
+	).
 
 
 % '$lgt_directory_hash_as_atom'(+atom, -atom)
@@ -471,7 +483,7 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, (-1)-(-1), Variables) :-
-	read_term(Stream, Term, [variable_names(Variables)| Options]),
+	read_term(Stream, Term, [variable_names(Variables)| Options]).
 
 
 

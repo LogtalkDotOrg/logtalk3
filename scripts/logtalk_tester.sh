@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 12, 2020
+##   Last updated on May 19, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -459,6 +459,7 @@ fi
 mkdir -p "$results"
 rm -f "$results"/*.results
 rm -f "$results"/*.errors
+rm -f "$results"/*.totals
 rm -f "$results"/errors.all
 rm -f "$results"/tester_versions.txt
 

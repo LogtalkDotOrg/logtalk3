@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on April 13, 2020
+%  Last updated on May 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -316,6 +316,12 @@ findall(Term, Goal, List, Tail) :-
 
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in
+
+'$lgt_format'(Stream, Format, Arguments) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_format'(Format, Arguments) :-
+	format(Format, Arguments).
 
 
 % format(+character_code_list_or_atom, +list) -- built-in

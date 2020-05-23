@@ -217,6 +217,10 @@ Follows a short description of each included example (in alphabetical order):
 	alternative version of the `family` example using a family registry
 	implemented using multifile predicates to avoid dynamic binding
 
+- `figures`  
+	an example of network modeling for recognizing polyhedra represented
+	as graphs
+
 - `futures`  
 	simple example of working with futures, a common concurrent programming
 	idiom, using the high-level multi-threading predicates

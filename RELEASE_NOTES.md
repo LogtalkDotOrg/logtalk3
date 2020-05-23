@@ -24,10 +24,25 @@ RELEASE NOTES
 3.39.0 - May ??, 2020
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: The `logtalk` built-in object to call the portability abstraction
+for the `format/2-3` predicates.
+
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: Abstract the calls to the `format/2-3` predicates to workaround
+portability issues with Tau Prolog and Scryer Prolog.
+
 Documentation
 -------------
 
 * IMPROVED: Documentation of the `scratch_directory` compiler flag.
+
+* FIXED: Broken Handbook links do API documentation. Thanks to Paul Brown for
+the bug report.
 
 Library
 -------
@@ -36,12 +51,18 @@ Library
 to match the same behavior found in Prolog libraries where the last argument
 returns all other elements instead of just those after the selected element.
 
+* ADDED: New `dif/1` predicate to the `coroutining` library to set `dif/2`
+constraints between all terms in a list.
+
 * ADDED: More type edge cases to the `arbitrary` category for atomic and
 list terms.
 
 * ADDED: New hook object `suppress_goal_hook` to the `hook_objects` library
 to support suppressing a goal in a clause body by prefixing it with the `--`
 operator.
+
+* ADDED: Support for Ciao Prolog and Tau Prolog to the portable `os` and
+`random` libraries.
 
 Tools
 -----
@@ -53,6 +74,10 @@ shrink steps when using the `v(true)` option.
 shrinking counter-examples.
 
 * FIXED: Interference between QuickCheck `ec/1` and `v/1` options.
+
+* FIXED: Bug in the `logtalk_tester` shell script where running the same test
+with two different backends in a row would result in the wrong results being
+reported for the second run if it resulted in the tests being skipped.
 
 Tests
 -----
@@ -66,6 +91,11 @@ of the parametric types defined by the `arbitrary` library category.
 
 Examples
 --------
+
+* ADDED: New example, `figures`, with an implementation using parametric
+objects of the network modeling example for recognizing polyhedra represented
+as graphs described in the paper "A framework for network modeling in Prolog"
+by Zdravko I. Markov.
 
 * UPDATED: The `dcgs` example to illustrate how to use the `call//1` built-in
 non-terminal and a lambda expression to access the input list of a grammar

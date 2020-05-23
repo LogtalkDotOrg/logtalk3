@@ -11,8 +11,8 @@
 Coroutining predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2019-11-28
+| **Version:** 0:3:0
+| **Date:** 2020-05-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -55,6 +55,29 @@ Sets a constraint that is true iff the two terms are different.
 |    ``dif(Term1,Term2)``
 | **Mode and number of proofs:**
 |    ``dif(+term,+term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="dif/1"> </div>
+
+.. index:: dif/1
+.. _coroutining/0::dif/1:
+
+``dif/1``
+^^^^^^^^^
+
+Sets a set of constraints that are true iff all terms in a list are different.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dif(Terms)``
+| **Mode and number of proofs:**
+|    ``dif(+list(term))`` - ``zero_or_one``
 
 
 ------------

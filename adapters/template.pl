@@ -64,14 +64,12 @@ forall(Generate, Test) :-
 
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list) -- built-in ????
-
-format(Stream, Format, Arguments) :-
-	?????
-
-
 % format(+character_code_list_or_atom, +list) -- built-in ????
 
-format(Format, Arguments) :-
+'$lgt_format'(Stream, Format, Arguments) :-
+	?????
+
+'$lgt_format'(Format, Arguments) :-
 	?????
 
 

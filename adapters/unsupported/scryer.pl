@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 15, 2020
+%  Last updated on May 20, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -67,6 +67,12 @@
 % format(+character_code_list_or_atom, +list)
 
 :- use_module(library(format), [format/3, format/2]).
+
+'$lgt_format'(Stream, Format, Arguments) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_format'(Format, Arguments) :-
+	format(Format, Arguments).
 
 
 % numbervars(?term, +integer, ?integer)

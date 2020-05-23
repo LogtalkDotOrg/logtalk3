@@ -21,9 +21,9 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2019-11-28,
+		date is 2020-05-19,
 		comment is 'Coroutining predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
@@ -35,6 +35,13 @@
 	:- info(dif/2, [
 		comment is 'Sets a constraint that is true iff the two terms are different.',
 		argnames is ['Term1', 'Term2']
+	]).
+
+	:- public(dif/1).
+	:- mode(dif(+list(term)), zero_or_one).
+	:- info(dif/1, [
+		comment is 'Sets a set of constraints that are true iff all terms in a list are different.',
+		argnames is ['Terms']
 	]).
 
 	:- public(freeze/2).
@@ -120,5 +127,15 @@
 			user:when(Condition, Goal).
 
 	:- endif.
+
+	dif([]).
+	dif([Term | Terms]) :-
+		dif_(Terms, Term),
+		dif(Terms).
+
+	dif_([], _).
+	dif_([Next| Terms], Term) :-
+		dif(Term, Next),
+		dif_(Terms, Term).
 
 :- end_object.

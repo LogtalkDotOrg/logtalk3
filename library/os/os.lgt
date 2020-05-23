@@ -21,12 +21,16 @@
 
 :- if(current_logtalk_flag(prolog_dialect, ciao)).
 	:- use_module(library(system)).
+	:- use_module(engine(stream_basic)).
+	:- use_module(engine(runtime_control)).
 :- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 	:- use_module(library(calendar)).
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
 :- elif(current_logtalk_flag(prolog_dialect, swi)).
 	:- use_module(library(filesex)).
+:- elif(current_logtalk_flag(prolog_dialect, tau)).
+	:- use_module(library(statistics)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	:- import(from(/(datime,1), standard)).
 	:- import(from(/(expand_atom,2), standard)).
@@ -40,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:56:1,
+		version is 1:58:0,
 		author is 'Paulo Moura',
-		date is 2020-04-18,
+		date is 2020-05-22,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -51,6 +55,7 @@
 			'Lean Prolog' - '``pid/1`` predicate is not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
+			'Tau Prolog' - '``pid/1``, ``directory_files/2``, and ``file_permission/2`` predicates are not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -852,10 +857,11 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath)}.
+			{working_directory(Directory, Directory),
+			 fixed_absolute_file_name(Path, Directory, ExpandedPath)}.
 
 		make_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath)},
+			absolute_file_name(Directory, ExpandedPath),
 			(	{file_exists(ExpandedPath)} ->
 				true
 			;	{make_directory(ExpandedPath)}
@@ -865,57 +871,57 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 delete_directory(ExpandedPath)}.
+			absolute_file_name(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
 
 		change_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 cd(ExpandedPath)}.
+			absolute_file_name(Directory, ExpandedPath),
+			{cd(ExpandedPath)}.
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Directory, Path),
-			 directory_files(Path, Files)}.
+			absolute_file_name(Directory, Path),
+			{directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 file_exists(ExpandedPath),
+			absolute_file_name(Directory, ExpandedPath),
+			{file_exists(ExpandedPath),
 			 file_property(ExpandedPath, type(directory))}.
 
 		file_exists(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath)}.
+			absolute_file_name(File, ExpandedPath),
+			{file_exists(ExpandedPath)}.
 
 		file_modification_time(File, Time) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_property(ExpandedPath, mod_time(Time))}.
+			absolute_file_name(File, ExpandedPath),
+			{file_property(ExpandedPath, mod_time(Time))}.
 
 		file_size(File, Size) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_property(ExpandedPath, size(Size))}.
+			absolute_file_name(File, ExpandedPath),
+			{file_property(ExpandedPath, size(Size))}.
 
 		file_permission(File, read) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath, 4)}.
+			absolute_file_name(File, ExpandedPath),
+			{file_exists(ExpandedPath, 4)}.
 
 		file_permission(File, write) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath, 2)}.
+			absolute_file_name(File, ExpandedPath),
+			{file_exists(ExpandedPath, 2)}.
 
 		file_permission(File, execute) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath, 1)}.
+			absolute_file_name(File, ExpandedPath),
+			{file_exists(ExpandedPath, 1)}.
 
 		delete_file(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 delete_file(ExpandedPath)}.
+			absolute_file_name(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
 
 		rename_file(Old, New) :-
-			{absolute_file_name(Old, OldPath),
-			 absolute_file_name(New, NewPath),
-			 rename_file(OldPath, NewPath)}.
+			absolute_file_name(Old, OldPath),
+			absolute_file_name(New, NewPath),
+			{rename_file(OldPath, NewPath)}.
 
 		environment_variable(Variable, Value) :-
 			{getenvstr(Variable, String)},
@@ -941,8 +947,8 @@
 			;	Type = unix
 			).
 
-		command_line_arguments(_) :-
-			throw(not_available(command_line_arguments/1)).
+		command_line_arguments(Arguments) :-
+			current_prolog_flag(argv, Arguments).
 
 		sleep(Seconds) :-
 			number_codes(Seconds, Codes),
@@ -1588,6 +1594,104 @@
 		sleep(Seconds) :-
 			Milliseconds is Seconds * 1000,
 			{sleep(Milliseconds)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, tau)).
+
+		pid(_) :-
+			throw(not_available(pid/1)).
+
+		shell(Command, Status) :-
+			{shell(Command, Status)}.
+
+		shell(Command) :-
+			{shell(Command)}.
+
+		absolute_file_name(Path, ExpandedPath) :-
+			{absolute_file_name(Path, ExpandedPath)}.
+
+		make_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			(	{exists_directory(ExpandedPath)} ->
+				true
+			;	{make_directory(ExpandedPath)}
+			).
+
+		make_directory_path(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{make_directory_path(ExpandedPath)}.
+
+		delete_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
+
+		change_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{working_directory(_, ExpandedPath)}.
+
+		working_directory(Directory) :-
+			{working_directory(Directory, Directory)}.
+
+		directory_files(_, _) :-
+			throw(not_available(directory_files/2)).
+
+		directory_exists(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{exists_directory(ExpandedPath)}.
+
+		file_exists(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{exists_file(ExpandedPath)}.
+
+		file_modification_time(File, Time) :-
+			absolute_file_name(File, ExpandedPath),
+			{time_file(ExpandedPath, Time)}.
+
+		file_size(File, Size) :-
+			absolute_file_name(File, ExpandedPath),
+			{size_file(ExpandedPath, Size)}.
+
+		file_permission(_, _) :-
+			throw(not_available(file_permission/2)).
+
+		rename_file(Old, New) :-
+			absolute_file_name(Old, OldExpandedPath),
+			absolute_file_name(New, NewExpandedPath),
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
+
+		delete_file(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
+
+		environment_variable(Variable, Value) :-
+			{getenv(Variable, Value)}.
+
+		time_stamp(Time) :-
+			{get_time(Time)}.
+
+		date_time(0, 0, 0, 0, 0, 0, 0).
+
+		cpu_time(Seconds) :-
+			{statistics(runtime, [Milliseconds| _])},
+			Seconds is Milliseconds / 1000.
+
+		wall_time(Seconds) :-
+			{statistics(walltime, [Milliseconds, _])},
+			Seconds is Milliseconds / 1000.
+
+		operating_system_type(Type) :-
+			(	{environ('COMSPEC', _)} ->
+				Type = windows
+			;	Type = unix
+			).
+
+		command_line_arguments(Arguments) :-
+			current_prolog_flag(argv, [_| Arguments]).
+
+		sleep(Seconds) :-
+			number_codes(Seconds, Codes),
+			atom_codes(SecondsAtom, Codes),
+			atom_concat('sleep ', SecondsAtom, Command),
+			{system(Command)}.
 
 	:- else.
 

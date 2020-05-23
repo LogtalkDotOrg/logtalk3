@@ -209,7 +209,7 @@ findall(Term, Goal, List, Tail) :-
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list)
 
-format(Stream, Format, Arguments) :-
+'$lgt_format'(Stream, Format, Arguments) :-
 	atom_chars(Format, Chars),
 	format_(Chars, Stream, Arguments).
 
@@ -257,7 +257,7 @@ format_spec_('~~', Stream, Arguments, Arguments) :-
 
 % format(+character_code_list_or_atom, +list)
 
-format(Format, Arguments) :-
+'$lgt_format'(Format, Arguments) :-
 	output(Stream),
 	format(Stream, Format, Arguments).
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on May 18, 2020
+%  Last updated on May 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -21,11 +21,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- use_package(iso).
+:- use_package(indexer).
 
 :- set_prolog_flag(multi_arity_warnings, off).
 
-:- op(1200, xfx, [(-->)]).
-:- op( 600, xfy, (:)).
+:- op(1200, xfx, (-->)).
+:- op(600,  xfy, (:)).
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -73,6 +76,12 @@ forall(Generate, Test) :-
 % format(+character_code_list_or_atom, +list)
 
 :- use_module(library(format)).
+
+'$lgt_format'(Stream, Format, Arguments) :-
+	format(Stream, Format, Arguments).
+
+'$lgt_format'(Format, Arguments) :-
+	format(Format, Arguments).
 
 
 % numbervars(?term, +integer, ?integer)
@@ -300,6 +309,7 @@ forall(Generate, Test) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(indexer/hash), [hash_term/2]).
 
 % '$lgt_prolog_os_file_name'(+atom, -atom)
 % '$lgt_prolog_os_file_name'(-atom, +atom)
@@ -373,7 +383,13 @@ forall(Generate, Test) :-
 %
 % returns the directory hash as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	hash_term(Directory, Hash0),
+	atom_number(Hash, Hash0).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -500,8 +516,7 @@ forall(Generate, Test) :-
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [variable_names(Variables),
-                                 lines(LineBegin, LineEnd)| Options]).
+	read_term(Stream, Term, [variable_names(Variables), lines(LineBegin,LineEnd)| Options]).
 
 
 
