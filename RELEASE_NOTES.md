@@ -36,6 +36,8 @@ Prolog adapter and integration files
 * CHANGED: Abstract the calls to the `format/2-3` predicates to workaround
 portability issues with Tau Prolog and Scryer Prolog.
 
+* UPDATED: Support for Ciao Prolog. Contributed by José Morales.
+
 Documentation
 -------------
 
