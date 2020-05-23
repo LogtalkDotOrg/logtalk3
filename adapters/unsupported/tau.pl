@@ -222,7 +222,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
-'$lgt_prolog_feature'(modules, supported).
+'$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 '$lgt_prolog_feature'(unicode, bmp).
 
