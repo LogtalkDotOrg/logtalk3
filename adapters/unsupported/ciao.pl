@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Ciao Prolog 1.14.0
-%  Last updated on May 22, 2020
+%  Adapter file for Ciao Prolog 1.19.0
+%  Last updated on May 23, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -22,7 +22,6 @@
 
 
 :- use_package(iso).
-:- use_package(indexer).
 
 :- use_package(runtime_ops).
 :- use_package(hiord).
@@ -32,6 +31,7 @@
 
 :- use_module(library(compiler)).
 :- use_module(library(system)).
+:- use_module(library(indexer/hash), [hash_term/2]).
 :- use_module(library(sort)).
 
 :- set_prolog_flag(multi_arity_warnings, off).
@@ -244,7 +244,7 @@ forall(Generate, Test) :-
 	current_prolog_flag(version, ciao(Version, Patch, _, _, _)),
 	Major is truncate(float_integer_part(Version)),
 	Minor is truncate(float_fractional_part(Version)*100).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,18,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,19,0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
