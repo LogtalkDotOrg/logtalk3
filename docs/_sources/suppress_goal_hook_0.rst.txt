@@ -1,0 +1,59 @@
+.. index:: suppress_goal_hook
+.. _suppress_goal_hook/0:
+
+.. rst-class:: right
+
+**object**
+
+``suppress_goal_hook``
+======================
+
+Use this object to easily suppress a goal in a clause body.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-05-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+
+| **Remarks:**
+
+   - Usage: Mark a goal to be suppressed by prefixing it with the ``--`` operator.
+   - Operators: This hook object uses the ``--`` prefix operator declared by Logtalk for use in ``mode/2`` directives.
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`backend_adapter_hook <backend_adapter_hook/0>`, :ref:`default_workflow_hook <default_workflow_hook/0>`, :ref:`grammar_rules_hook <grammar_rules_hook/0>`, :ref:`identity_hook <identity_hook/0>`, :ref:`prolog_module_hook(Module) <prolog_module_hook/1>`, :ref:`object_wrapper_hook <object_wrapper_hook/0>`, :ref:`write_to_stream_hook(Stream,Options) <write_to_stream_hook/2>`, :ref:`write_to_stream_hook(Stream) <write_to_stream_hook/1>`, :ref:`print_goal_hook <print_goal_hook/0>`
+
