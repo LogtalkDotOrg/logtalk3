@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for Ciao Prolog
-%  Last updated on May 18, 2020
+%  Last updated on May 24, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -20,8 +20,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- use_module(library(system), [current_env/2]).
-:- use_module(engine(runtime_control), [set_prolog_flag/2]).
+
+:- use_package(iso).
 
 % % TODO: needed?
 % :- op(600, xfy, ::).
