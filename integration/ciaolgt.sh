@@ -96,4 +96,4 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec ciaosh --iso -l "$LOGTALKHOME/integration/unsupported/logtalk_ciao.pl" "$@"
+exec ciaosh --iso -l "$LOGTALKHOME/integration/logtalk_ciao.pl" "$@"

@@ -39,7 +39,7 @@ logtalk_ciao_init :-
 	set_prolog_flag(multi_arity_warnings, off),
 	current_env('LOGTALKHOME', LogtalkHome),
 	% load Logtalk core files
-	atom_concat(LogtalkHome, '/adapters/unsupported/ciao.pl', AdapterFile), ensure_loaded(AdapterFile),
+	atom_concat(LogtalkHome, '/adapters/ciao.pl', AdapterFile), ensure_loaded(AdapterFile),
 	atom_concat(LogtalkHome, '/paths/paths.pl', PathsFile), ensure_loaded(PathsFile),
 	atom_concat(LogtalkHome, '/core/core.pl', CoreFile), ensure_loaded(CoreFile).
 
