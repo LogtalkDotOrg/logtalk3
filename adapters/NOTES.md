@@ -80,6 +80,7 @@ following table summarizes the availability of these features:
 |  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  
 | :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
 |  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |  
+|  Ciao Prolog     |       no      |       no      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |  
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
@@ -132,6 +133,14 @@ Matching clauses and action rules are currently not supported.
 
 On Windows, the environment variable `BPDIR` must be defined and pointing
 to the B-Prolog installation directory for the installer to detect it.
+
+
+Ciao Prolog 1.19.0 and later versions
+-------------------------------------
+
+	ciao.pl
+
+Experimental. Joint work with the Ciao Prolog developer José Morales.
 
 
 CxProlog 0.98.1 or later versions

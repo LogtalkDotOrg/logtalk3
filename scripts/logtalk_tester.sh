@@ -218,7 +218,7 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -o output (valid values are verbose and minimal; default is $output)"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"

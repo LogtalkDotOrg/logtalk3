@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on May 16, 2018
+##   Last updated on May 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -120,7 +120,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
 	echo "  -s supress path prefix (default is $prefix)"
@@ -148,6 +148,10 @@ if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
 	logtalk_call="$logtalk -g"
+elif [ "$p_arg" == "ciao" ] ; then
+	prolog='Ciao Prolog'
+	logtalk=ciaolgt$extension
+	logtalk_call="$logtalk -e"
 elif [ "$p_arg" == "cx" ] ; then
 	prolog='CxProlog'
 	logtalk=cxlgt$extension

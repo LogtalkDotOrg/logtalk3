@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
 ## 
-##   Last updated on March 1, 2020
+##   Last updated on May 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -74,7 +74,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, xsb, xsbmt, and yap)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
@@ -95,6 +95,9 @@ done
 if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk="bplgt$extension -g"
+elif [ "$p_arg" == "ciao" ] ; then
+	prolog='Ciao Prolog'
+	logtalk="ciaolgt$extension -e"
 elif [ "$p_arg" == "cx" ] ; then
 	prolog='CxProlog'
 	logtalk="cxlgt$extension --goal"

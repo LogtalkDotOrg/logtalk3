@@ -102,7 +102,6 @@ forall(Generate, Test) :-
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
-
 '$lgt_predicate_property'(Pred, built_in) :-
 	'$lgt_iso_spec_predicate'(Pred).
 

@@ -106,6 +106,8 @@ rule without breaking DCGs abstraction.
 Installers and installation scripts
 -----------------------------------
 
+* CHANGED: Make Ciao Prolog support available by default in POSIX systems.
+
 * UPDATED: The Windows installation script to also detect SICStus Prolog 4.6.x
 versions.
 

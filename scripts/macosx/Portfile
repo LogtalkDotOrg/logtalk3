@@ -67,6 +67,7 @@ post-activate {
 	ui_msg "* the scripts!):"
 	ui_msg "*"
 	ui_msg "* B-Prolog (version 7.8 or later):         bplgt"
+	ui_msg "* Ciao Prolog (version 1.19.0 or later):   ciaolgt     (experimental)"
 	ui_msg "* CxProlog (version 0.98.1 or later):      cxlgt"
 	ui_msg "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 	ui_msg "* GNU Prolog (version 1.4.5 or later):     gplgt"
