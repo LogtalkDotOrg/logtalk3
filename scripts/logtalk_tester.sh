@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 19, 2020
+##   Last updated on May 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -283,6 +283,11 @@ if [ "$p_arg" == "b" ] || [ "$p_arg" == "b-prolog" ] ; then
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
+elif [ "$p_arg" == "ciao" ] ; then
+	backend=ciao
+	prolog='Ciao Prolog'
+	logtalk=ciaolgt$extension
+	logtalk_call="$logtalk $i_arg -e"
 elif [ "$p_arg" == "cx" ] || [ "$p_arg" == "cxprolog" ] ; then
 	backend=cx
 	prolog='CxProlog'
