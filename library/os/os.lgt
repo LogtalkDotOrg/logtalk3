@@ -21,7 +21,6 @@
 
 :- if(current_logtalk_flag(prolog_dialect, ciao)).
 	:- use_module(library(system)).
-	:- use_module(engine(stream_basic)).
 	:- use_module(engine(runtime_control)).
 :- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 	:- use_module(library(calendar)).
@@ -44,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:58:0,
+		version is 1:58:1,
 		author is 'Paulo Moura',
-		date is 2020-05-22,
+		date is 2020-05-24,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
