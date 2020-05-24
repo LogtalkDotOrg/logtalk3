@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.19.0
-%  Last updated on May 23, 2020
+%  Last updated on May 24, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -85,7 +85,7 @@ forall(Generate, Test) :-
 
 % numbervars(?term, +integer, ?integer)
 
-:- use_module(library(write)).
+:- use_module(library(write), [numbervars/3]).
 
 
 
