@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:58:1,
+		version is 1:58:2,
 		author is 'Paulo Moura',
-		date is 2020-05-24,
+		date is 2020-05-25,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -856,11 +856,10 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{working_directory(Directory, Directory),
-			 fixed_absolute_file_name(Path, Directory, ExpandedPath)}.
+			{absolute_file_name(Path, ExpandedPath)}.
 
 		make_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
+			{absolute_file_name(Directory, ExpandedPath)},
 			(	{file_exists(ExpandedPath)} ->
 				true
 			;	{make_directory(ExpandedPath)}
@@ -870,57 +869,57 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{delete_directory(ExpandedPath)}.
+			{absolute_file_name(Directory, ExpandedPath),
+			 delete_directory(ExpandedPath)}.
 
 		change_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{cd(ExpandedPath)}.
+			{absolute_file_name(Directory, ExpandedPath),
+			 cd(ExpandedPath)}.
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, Path),
-			{directory_files(Path, Files)}.
+			{absolute_file_name(Directory, Path),
+			 directory_files(Path, Files)}.
 
 		directory_exists(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{file_exists(ExpandedPath),
+			{absolute_file_name(Directory, ExpandedPath),
+			 file_exists(ExpandedPath),
 			 file_property(ExpandedPath, type(directory))}.
 
 		file_exists(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath)}.
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath)}.
 
 		file_modification_time(File, Time) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_property(ExpandedPath, mod_time(Time))}.
+			{absolute_file_name(File, ExpandedPath),
+			 file_property(ExpandedPath, mod_time(Time))}.
 
 		file_size(File, Size) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_property(ExpandedPath, size(Size))}.
+			{absolute_file_name(File, ExpandedPath),
+			 file_property(ExpandedPath, size(Size))}.
 
 		file_permission(File, read) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath, 4)}.
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath, 4)}.
 
 		file_permission(File, write) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath, 2)}.
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath, 2)}.
 
 		file_permission(File, execute) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath, 1)}.
+			{absolute_file_name(File, ExpandedPath),
+			 file_exists(ExpandedPath, 1)}.
 
 		delete_file(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
+			{absolute_file_name(File, ExpandedPath),
+			 delete_file(ExpandedPath)}.
 
 		rename_file(Old, New) :-
-			absolute_file_name(Old, OldPath),
-			absolute_file_name(New, NewPath),
-			{rename_file(OldPath, NewPath)}.
+			{absolute_file_name(Old, OldPath),
+			 absolute_file_name(New, NewPath),
+			 rename_file(OldPath, NewPath)}.
 
 		environment_variable(Variable, Value) :-
 			{getenvstr(Variable, String)},
