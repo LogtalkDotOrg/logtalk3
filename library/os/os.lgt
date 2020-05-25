@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:58:3,
+		version is 1:58:4,
 		author is 'Paulo Moura',
 		date is 2020-05-25,
 		comment is 'Portable operating-system access predicates.',
@@ -950,10 +950,7 @@
 			current_prolog_flag(argv, Arguments).
 
 		sleep(Seconds) :-
-			number_codes(Seconds, Codes),
-			atom_codes(SecondsAtom, Codes),
-			atom_concat('sleep ', SecondsAtom, Command),
-			{shell(Command)}.
+			{pause(Seconds)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, cx)).
 
