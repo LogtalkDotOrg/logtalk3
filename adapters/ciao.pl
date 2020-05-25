@@ -44,9 +44,9 @@
 
 % '$lgt_iso_predicate'(?callable).
 
-'$lgt_iso_predicate'(term_variables(_, _)).
+'$lgt_iso_predicate'(_) :-
+	fail.
 
-:- use_module(library(terms_vars)).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
