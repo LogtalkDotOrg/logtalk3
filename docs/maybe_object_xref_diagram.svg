@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-257 730,-257 730,4 -4,4"/>
 <text text-anchor="start" x="8" y="-26" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-16" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object maybe</text>
-<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2020&#45;05&#45;19, 14:33</text>
+<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2020&#45;05&#45;25, 21:55</text>
 <g id="clust1" class="cluster">
 <title>cluster_maybe_object</title>
 <g id="a_clust1"><a xlink:title="maybe">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 706,-46 706,-46 712,-46 718,-52 718,-58 718,-58 718,-233 718,-233 718,-239 712,-245 706,-245 706,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt">
 <text text-anchor="start" x="20" y="-229" font-family="Courier,monospace" font-size="10.00" fill="dimgray">maybe</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- cat/2 -->
 <g id="node1" class="node">
 <title>cat/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L35">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L35">
 <polygon fill="springgreen" stroke="black" points="707.5,-209 648.5,-209 648.5,-173 707.5,-173 707.5,-209"/>
 <text text-anchor="start" x="656.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="662" y="-192.2" font-family="Courier,monospace" font-size="11.00">cat/2</text>
@@ -55,12 +55,12 @@
 <!-- cat/2&#45;&gt;optional(Optional)::or_else_fail/1 -->
 <g id="edge1" class="edge">
 <title>cat/2&#45;&gt;optional(Optional)::or_else_fail/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L82" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L82" xlink:title="calls">
 <path fill="none" stroke="black" d="M663.57,-172.53C647.65,-153.26 621.88,-122.06 603.78,-100.15"/>
 <polygon fill="black" stroke="black" points="606.32,-97.73 597.25,-92.25 600.92,-102.19 606.32,-97.73"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L82">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L82">
 <text text-anchor="start" x="633" y="-129.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- type::type/1 -->
 <g id="node2" class="node">
 <title>type::type/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L48">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L48">
 <polygon fill="skyblue" stroke="black" points="630.5,-209 525.5,-209 525.5,-173 630.5,-173 630.5,-209"/>
 <text text-anchor="start" x="533.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="538.89" y="-192.2" font-family="Courier,monospace" font-size="11.00">type::type/1</text>
@@ -82,7 +82,7 @@
 <!-- type::check/2 -->
 <g id="node3" class="node">
 <title>type::check/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L56">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L56">
 <polygon fill="skyblue" stroke="black" points="507.5,-209 396.5,-209 396.5,-173 507.5,-173 507.5,-209"/>
 <text text-anchor="start" x="404.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="409.59" y="-192.2" font-family="Courier,monospace" font-size="11.00">type::check/2</text>
@@ -96,7 +96,7 @@
 <!-- arbitrary::arbitrary/1 -->
 <g id="node4" class="node">
 <title>arbitrary::arbitrary/1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L66">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L66">
 <polygon fill="skyblue" stroke="black" points="378.5,-209 207.5,-209 207.5,-173 378.5,-173 378.5,-209"/>
 <text text-anchor="start" x="215.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="220.89" y="-192.2" font-family="Courier,monospace" font-size="11.00">arbitrary::arbitrary/1</text>
@@ -110,7 +110,7 @@
 <!-- arbitrary::arbitrary/2 -->
 <g id="node5" class="node">
 <title>arbitrary::arbitrary/2</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/optionals/maybe.lgt#L74">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/optionals/maybe.lgt#L74">
 <polygon fill="skyblue" stroke="black" points="189.5,-209 18.5,-209 18.5,-173 189.5,-173 189.5,-209"/>
 <text text-anchor="start" x="26.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.89" y="-192.2" font-family="Courier,monospace" font-size="11.00">arbitrary::arbitrary/2</text>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-257 306,-257 306,4 -4,4"/>
 <text text-anchor="start" x="8" y="-26" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-16" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object natural</text>
-<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2020&#45;05&#45;19, 14:33</text>
+<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2020&#45;05&#45;25, 21:55</text>
 <g id="clust1" class="cluster">
 <title>cluster_natural_object</title>
 <g id="a_clust1"><a xlink:title="natural">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 282,-46 282,-46 288,-46 294,-52 294,-58 294,-58 294,-233 294,-233 294,-239 288,-245 282,-245 282,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt">
 <text text-anchor="start" x="20" y="-229" font-family="Courier,monospace" font-size="10.00" fill="dimgray">natural</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- between/3 -->
 <g id="node1" class="node">
 <title>between/3</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L32">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L32">
 <polygon fill="cornsilk" stroke="black" points="283.5,-209 198.5,-209 198.5,-173 283.5,-173 283.5,-209"/>
 <text text-anchor="start" x="206.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="211.8" y="-192.2" font-family="Courier,monospace" font-size="11.00">between/3</text>
@@ -52,12 +52,12 @@
 <!-- between/3&#45;&gt;^^between/3 -->
 <g id="edge1" class="edge">
 <title>between/3&#45;&gt;^^between/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L32" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L32" xlink:title="calls">
 <path fill="none" stroke="black" d="M240.09,-172.53C239.12,-153.94 237.57,-124.24 236.43,-102.5"/>
 <polygon fill="black" stroke="black" points="239.92,-102.06 235.9,-92.25 232.93,-102.42 239.92,-102.06"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L32">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L32">
 <text text-anchor="start" x="238" y="-129.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- valid/1 -->
 <g id="node2" class="node">
 <title>valid/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L37">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L37">
 <polygon fill="cornsilk" stroke="black" points="180,-209 108,-209 108,-173 180,-173 180,-209"/>
 <text text-anchor="start" x="115.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="120.9" y="-192.2" font-family="Courier,monospace" font-size="11.00">valid/1</text>
@@ -79,7 +79,7 @@
 <!-- check/1 -->
 <g id="node3" class="node">
 <title>check/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9ede7fe6b380a22ea114c31d6bb4aa89b41eac3e/library/types/natural.lgt#L41">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ee3e469ba16664bcc8b3b120a4a0bb7672d96db2/library/types/natural.lgt#L41">
 <polygon fill="cornsilk" stroke="black" points="90,-209 18,-209 18,-173 90,-173 90,-209"/>
 <text text-anchor="start" x="25.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="30.9" y="-192.2" font-family="Courier,monospace" font-size="11.00">check/1</text>

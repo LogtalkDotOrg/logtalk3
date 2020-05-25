@@ -3452,7 +3452,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 39, 0, b01)).
+'$lgt_version_data'(logtalk(3, 39, 0, b02)).
 
 
 
@@ -23898,6 +23898,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_iso_spec_predicate'(fail).
 '$lgt_iso_spec_predicate'(false).
 '$lgt_iso_spec_predicate'(call(_)).
+'$lgt_iso_spec_predicate'(call(_, _)).
+'$lgt_iso_spec_predicate'(call(_, _, _)).
+'$lgt_iso_spec_predicate'(call(_, _, _, _)).
+'$lgt_iso_spec_predicate'(call(_, _, _, _, _)).
+'$lgt_iso_spec_predicate'(call(_, _, _, _, _, _)).
+'$lgt_iso_spec_predicate'(call(_, _, _, _, _, _, _)).
+'$lgt_iso_spec_predicate'(call(_, _, _, _, _, _, _, _)).
 '$lgt_iso_spec_predicate'(!).
 '$lgt_iso_spec_predicate'((Goal; _)) :-
 	(	var(Goal) ->

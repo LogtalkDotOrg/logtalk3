@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * CHANGED: The `logtalk` built-in object to call the portability abstraction
 for the `format/2-3` predicates.
 
+* UPDATED: The compiler internal table of standard predicates to include the
+`call/2-8` predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 
