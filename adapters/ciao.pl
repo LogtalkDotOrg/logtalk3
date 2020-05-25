@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.19.0
-%  Last updated on May 24, 2020
+%  Last updated on May 25, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -330,7 +330,8 @@ forall(Generate, Test) :-
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	file_exists(File).
+	file_exists(File),
+	file_property(File, type(regular)).
 
 
 % '$lgt_delete_file'(+atom)
