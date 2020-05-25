@@ -20,6 +20,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- use_package(iso).
 
 :- set_prolog_flag(multi_arity_warnings, off).
@@ -65,10 +66,7 @@
 :- use_module(library(aggregates)).
 
 
-% forall(+callable, +callable)
-
-forall(Generate, Test) :-
-	\+ (Generate, \+ Test).
+% forall(+callable, +callable) -- provided by the "iso" package
 
 
 % format(+stream_or_alias, +character_code_list_or_atom, +list)
@@ -160,8 +158,15 @@ forall(Generate, Test) :-
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
 
-'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(_, _) :-
-	fail.
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(Spec, *) :-
+	var(Spec),
+	!.
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(?, *).
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(+, *).
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(-, *).
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(goal, 0).
+'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(pred(N), M) :-
+	M is N - 1.
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
