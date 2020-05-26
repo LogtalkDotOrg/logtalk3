@@ -77,6 +77,7 @@ post-activate {
 	ui_msg "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"
 	ui_msg "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
 	ui_msg "* SWI-Prolog (version 6.6.0 or later):     swilgt"
+	ui_msg "* Tau Prolog (version 0.3.0 or later):     taulgt      (experimental)"
 	ui_msg "* XSB (version 3.8.0 or later):            xsblgt      (first run may require sudo)"
 	ui_msg "* XSB MT (version 3.8.0 or later):         xsbmtlgt    (first run may require sudo)"
 	ui_msg "* YAP (version 6.3.4 or later):            yaplgt"

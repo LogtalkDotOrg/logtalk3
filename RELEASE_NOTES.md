@@ -41,6 +41,9 @@ portability issues with Tau Prolog and Scryer Prolog.
 
 * UPDATED: Support for Ciao Prolog. Contributed by José Morales.
 
+* UPDATED: Support for Tau Prolog. With contributions from José Antonio Riaza
+Valverde.
+
 Documentation
 -------------
 
@@ -109,7 +112,8 @@ rule without breaking DCGs abstraction.
 Installers and installation scripts
 -----------------------------------
 
-* CHANGED: Make Ciao Prolog support available by default in POSIX systems.
+* CHANGED: Make Ciao Prolog and Tau Prolog support available by default in
+POSIX systems.
 
 * UPDATED: The Windows installation script to also detect SICStus Prolog 4.6.x
 versions.

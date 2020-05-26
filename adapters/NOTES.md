@@ -90,6 +90,7 @@ following table summarizes the availability of these features:
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
+|  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |  
 |  XSB             |      yes      |       no      |       no      |       no      |      yes      |  
 |  YAP             |      yes      |      yes      |      yes      |       no      |      yes      |  
 
@@ -425,6 +426,18 @@ generate saved states that include Logtalk applications.
 
 Messages sent from modules (including `user`) use static binding when the
 Logtalk `optimize` flag is turned on before compiling the module files.
+
+
+Tau Prolog 0.3.0 and later versions
+-----------------------------------
+
+	tau.pl
+
+Experimental. Joint work with the Tau Prolog developers. For faster startups
+after the first one when using the provided `taulgt` integration script,
+edit the `core/core.pl` file and change the compiler flag `clean(on)` to
+`clean(off)` for loading the built-in entities (look into the end of the
+file for the predicate that loads them).
 
 
 XSB 3.8.0 and later versions

@@ -36,6 +36,7 @@ system path):
 * Quintus Prolog (version 3.3 or later):   `quintuslgt`
 * SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
 * SWI-Prolog (version 6.6.0 or later):     `swilgt`
+* Tau Prolog (version 0.3.0 or later):     `taulgt`
 * XSB (version 3.8.0 or later):            `xsblgt`     (first run may require `sudo`)
 * XSB MT (version 3.8.0 or later):         `xsbmtlgt`   (first run may require `sudo`)
 * YAP (version 6.3.4 or later):            `yaplgt`
@@ -72,6 +73,10 @@ The GNU Prolog integration script provides adequate performance for
 development. But for production environments, improved performance can be
 achieved by generating a new GNU-Prolog top-level that includes Logtalk.
 See the `adapters/NOTES.md` file for details.
+
+The Tau Prolog integration scripts requires that the `NODE_PATH` environment
+variable be set to the `node_modules` directory path where you installed
+Tau Prolog and its dependencies.
 
 The environment variables `LOGTALKHOME` and `LOGTALKUSER` should be defined
 in order to run the integration scripts (see the `INSTALL.md` file for
