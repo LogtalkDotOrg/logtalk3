@@ -72,8 +72,15 @@ operator.
 * ADDED: Support for Ciao Prolog and Tau Prolog to the portable `os` and
 `random` libraries.
 
+* ADDED: Support for Tau Prolog to the `types` library.
+
 Tools
 -----
+
+* ADDED: Support for Ciao Prolog to the `debugger`, `lgtunit`, and
+`ports_profiler` tools.
+
+* ADDED: Support for Tau Prolog to the `lgtunit` tool.
 
 * UPDATED: The QuickCheck implementation to also print counter-example
 shrink steps when using the `v(true)` option. 
