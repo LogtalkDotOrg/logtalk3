@@ -85,6 +85,7 @@ rm -f qplgt
 rm -f quintuslgt
 rm -f sicstuslgt
 rm -f swilgt
+rm -f taulgt
 rm -f xsblgt
 rm -f xsbmtlgt
 rm -f yaplgt
@@ -111,6 +112,7 @@ rm -f qplgt.1.gz
 rm -f quintuslgt.1.gz
 rm -f sicstuslgt.1.gz
 rm -f swilgt.1.gz
+rm -f taulgt.1.gz
 rm -f xsblgt.1.gz
 rm -f xsbmtlgt.1.gz
 rm -f yaplgt.1.gz
