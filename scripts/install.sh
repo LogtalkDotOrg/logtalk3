@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on May 24, 2020
+##   Last updated on May 26, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -165,7 +165,7 @@ echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
 echo "* B-Prolog (version 7.8 or later):         bplgt"
-echo "* Ciao Prolog (version 1.19.0 or later):   ciaolgt     (experimental)"
+echo "* Ciao Prolog (version 1.19.0 or later):   ciaolgt     (first run may require sudo)"
 echo "* CxProlog (version 0.98.1 or later):      cxlgt"
 echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
 echo "* GNU Prolog (version 1.4.5 or later):     gplgt"

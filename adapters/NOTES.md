@@ -140,7 +140,11 @@ Ciao Prolog 1.19.0 and later versions
 
 	ciao.pl
 
-Experimental. Joint work with the Ciao Prolog developer José Morales.
+Experimental. Joint work with the Ciao Prolog developer José Morales. One
+known issue is that most ISO Prolog standard and de facto standard predicates
+are not built-in predicates but library predicates. The internal predicate
+that checks predicate properties (defined in the adapter file) tries to
+workaround this issue for those predicates but the solution is fragile.
 
 
 CxProlog 0.98.1 or later versions

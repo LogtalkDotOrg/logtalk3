@@ -26,6 +26,7 @@ scripts available from the command-line (you may need to adjust your
 system path):
 
 * B-Prolog (version 7.8 or later):         `bplgt`
+* Ciao Prolog (version 1.19.0 or later):   `ciaolgt`    (first run may require `sudo`)
 * CxProlog (version 0.98.1 or later):      `cxlgt`
 * ECLiPSe (version 6.1#143 or later):      `eclipselgt`
 * GNU Prolog (version 1.4.5 or later):     `gplgt`
@@ -61,11 +62,11 @@ accomplished by defining e.g. a `~/.profile` file with the necessary export
 commands. The integration scripts will need to be called, however, without
 omitting the `.sh` extension.
 
-The first run of the XSB (and possibly of the JIProlog) integration scripts
-must be made by a user with administrative rights. On POSIX systems, run
-them once as root or using `sudo`. In Windows systems, the first run of the
-XSB integration shortcuts must be made from an administrative account
-(right-click on the shortcut and select the "Run as administrator" option).
+The first run of the Ciao Prolog, XSB, or JIProlog integration scripts may
+require a user with administrative rights. On POSIX systems, run them **once**
+as root or using `sudo`. In Windows systems, the first run of the integration
+shortcuts must be made from an administrative account (right-click on the
+shortcut and select the "Run as administrator" option).
 
 The GNU Prolog integration script provides adequate performance for
 development. But for production environments, improved performance can be
