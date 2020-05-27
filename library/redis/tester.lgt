@@ -20,7 +20,7 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	Dialect \== eclipse, Dialect \== gnu, Dialect \== qp, Dialect \== sicstus, Dialect \== swi, Dialect \== xsb
+	Dialect \== ciao, Dialect \== eclipse, Dialect \== gnu, Dialect \== qp, Dialect \== sicstus, Dialect \== swi, Dialect \== xsb
 )).
 
 	:- initialization((
@@ -29,7 +29,9 @@
 
 :- else.
 
-	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- if(current_logtalk_flag(prolog_dialect, ciao)).
+		:- use_module(library(system), []).
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(system), []).
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		:- import(from(/(sleep,1), shell)).

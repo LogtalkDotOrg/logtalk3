@@ -18,7 +18,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+:- if(current_logtalk_flag(prolog_dialect, ciao)).
+
+	:- use_module(library(sockets), []).
+	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(redis, [optimize(on)])
+	)).
+
+:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),

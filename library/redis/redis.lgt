@@ -21,9 +21,9 @@
 :- object(redis).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2017-06-29,
+		date is 2020-05-27,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
@@ -114,7 +114,15 @@
 	% backend Prolog compiler dependent auxiliary predicates
 	% (there is not standard sockets Prolog library)
 
-	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
+	:- if(current_logtalk_flag(prolog_dialect, ciao)).
+
+	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
+		sockets:connect_to_socket(Host, Port, Stream).
+
+	disconnect_from_server(redis(Stream, _, _)) :-
+		sockets:socket_shutdown(Stream, read_write).
+
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 	connect_to_server(Host, Port, redis(Stream, Stream, _)) :-
 		socket(internet, stream, Stream),

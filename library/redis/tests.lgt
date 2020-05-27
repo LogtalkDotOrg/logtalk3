@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2020-01-25,
+		date is 2020-05-27,
 		comment is 'Unit tests for the "redis" library.'
 	]).
 
@@ -38,7 +38,9 @@
 		length/2
 	]).
 
-	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- if(current_logtalk_flag(prolog_dialect, ciao)).
+		:- use_module(system, [pause/1 as sleep/1]).
+	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(system, [sleep/1]).
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 		:- uses(user, [thread_sleep/1 as sleep/1]).
