@@ -119,13 +119,15 @@ Writing your own programs
 
 Ready to start writing your own programs?
 
-1. Read the User Manual sections on `Programming in Logtalk` and
-`Running and debugging Logtalk programs`.
+1. Read the Handbook sections on "Writing and running applications" and
+"Debugging". If you want to use your Prolog backend resources, read also
+the section on "Prolog integration and migration".
 
 2. Take a look at the [`coding`](coding) directory. There you will find
 syntax  support files for popular text editors which enable syntax coloring
 and other text services when editing Logtalk source files. There's also
-support for syntax highlighters used for publishing source code.
+support for syntax highlighters used for publishing source code and for
+source code versioning systems.
 
 3. The [`tools`](tools) directory contains a comprehensive set of developer
 tools to help you test, debug, analyze, and document your applications.
