@@ -49,6 +49,8 @@ Documentation
 
 * IMPROVED: Documentation of the `scratch_directory` compiler flag.
 
+* UPDATED: The `QUICK_START.md` file to mention the `tutor` tool.
+
 * FIXED: Broken Handbook links do API documentation. Thanks to Paul Brown for
 the bug report.
 

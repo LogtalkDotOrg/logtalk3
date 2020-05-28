@@ -81,6 +81,14 @@ This will provide you with an overview on how to get help and how to load
 and debug your code.
 
 
+Help on understanding compiler errors and warnings
+--------------------------------------------------
+
+Start Logtalk and call the goal `{tutor(loader)}`. The `tutor` tool will
+augment compiler errors and warnings with explanations and suggestions on
+how to solve the reported problems.
+
+
 Loading libraries, examples, and tools
 --------------------------------------
 
