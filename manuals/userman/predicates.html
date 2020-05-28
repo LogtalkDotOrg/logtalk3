@@ -1727,8 +1727,9 @@ debug mode.</p>
 </div>
 <div class="section" id="calling-prolog-user-defined-plain-predicates">
 <span id="predicates-prolog-user"></span><h3>Calling Prolog user-defined plain predicates<a class="headerlink" href="#calling-prolog-user-defined-plain-predicates" title="Permalink to this headline">¶</a></h3>
-<p>Prolog user-defined plain predicates can be called from within objects or
-categories by sending the corresponding message to <code class="docutils literal notranslate"><span class="pre">user</span></code>. For example:</p>
+<p>User-defined Prolog plain predicates (i.e. predicates that are not defined
+in a Prolog module) can be called from within objects or categories by
+sending the corresponding message to <code class="docutils literal notranslate"><span class="pre">user</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
     ...,
     user<span class="o">::</span>bar,

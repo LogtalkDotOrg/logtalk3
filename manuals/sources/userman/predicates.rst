@@ -1757,8 +1757,9 @@ debug mode.
 Calling Prolog user-defined plain predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Prolog user-defined plain predicates can be called from within objects or
-categories by sending the corresponding message to ``user``. For example:
+User-defined Prolog plain predicates (i.e. predicates that are not defined
+in a Prolog module) can be called from within objects or categories by
+sending the corresponding message to ``user``. For example:
 
 ::
 
