@@ -389,6 +389,11 @@ Follows a short description of each included example (in alphabetical order):
 	example illustrating the predicate declaration and predicate definition
 	lookup algorithms used when sending a message to an object
 
+- `process_modeling`  
+	example of using parametric objects to represent and restore
+	shared variables between sets of constraints that are stored
+	in different objects
+
 - `profiling`  
 	examples of using of events and monitors to implement profilers
 

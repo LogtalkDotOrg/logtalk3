@@ -114,6 +114,10 @@ objects of the network modeling example for recognizing polyhedra represented
 as graphs described in the paper "A framework for network modeling in Prolog"
 by Zdravko I. Markov.
 
+* ADDED: New example, `process_modeling`, of using parametric objects to
+represent and restore shared variables between sets of constraints that are
+stored in different objects.
+
 * UPDATED: The `dcgs` example to illustrate how to use the `call//1` built-in
 non-terminal and a lambda expression to access the input list of a grammar
 rule without breaking DCGs abstraction.

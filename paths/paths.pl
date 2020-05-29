@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 19, 2020
+%  Last updated on May 29, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -257,6 +257,7 @@ logtalk_library_path(points, examples('points/')).
 logtalk_library_path(polygons, examples('polygons/')).
 logtalk_library_path(predicate_lookups, examples('predicate_lookups/')).
 logtalk_library_path(primes, threads('primes/')).
+logtalk_library_path(process_modeling, examples('process_modeling/')).
 logtalk_library_path(profiling, examples('profiling/')).
 logtalk_library_path(prototypes, examples('prototypes/')).
 logtalk_library_path(proxies, examples('proxies/')).
