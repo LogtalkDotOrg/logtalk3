@@ -30,6 +30,8 @@ Logtalk compiler and runtime
 * CHANGED: The `logtalk` built-in object to call the portability abstraction
 for the `format/2-3` predicates.
 
+* IMPROVED: Linter checks for tautologies and falsehoods in `is/2` goals.
+
 * UPDATED: The compiler internal table of standard predicates to include the
 `call/2-8` predicates.
 
@@ -121,6 +123,9 @@ stored in different objects.
 * UPDATED: The `dcgs` example to illustrate how to use the `call//1` built-in
 non-terminal and a lambda expression to access the input list of a grammar
 rule without breaking DCGs abstraction.
+
+* UPDATED: The `errors` example for the updated linter checks for falsehoods
+and tautologies in `is/2` goals.
 
 Installers and installation scripts
 -----------------------------------

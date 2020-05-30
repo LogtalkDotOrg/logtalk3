@@ -14994,6 +14994,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_print_message'(warning(always_true_or_false_goals), goal_is_always_false(File, Lines, Type, Entity, Term is Exp)),
 	fail.
 '$lgt_compile_body'(Term is Exp, _, _, _) :-
+	integer(Term),
+	ground(Exp),
+	catch(Value is Exp, _, fail),
+	float(Value),
+	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(always_true_or_false_goals), goal_is_always_false(File, Lines, Type, Entity, Term is Exp)),
+	fail.
+'$lgt_compile_body'(Term is Exp, _, _, _) :-
 	var(Term),
 	Term \== Exp,
 	term_variables(Exp, ExpVariables),

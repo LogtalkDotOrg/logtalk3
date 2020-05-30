@@ -202,6 +202,8 @@
 
 	really :- \+ x == y.
 
+	indeed :- 1 =:= sin(3.1415926535897931/2).
+
 :- end_object.
 
 
@@ -215,6 +217,8 @@
 	rats :- \+ x \== y.
 
 	jinx(X) :- a is X*2.
+
+	what :- 1 is sin(3.1415926535897931/2).
 
 	% ... or misinterpretation of operator precedence
 
