@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2018-02-27,
+		date is 2020-06-03,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -67,6 +67,9 @@
 
 	test(test_2_09, balls([ball1,ball2])) :-
 		throw(ball1).
+
+	test(test_2_10, subsumes(a(_), Result)) :-
+		Result = a(1).
 
 	% test/3 dialect
 
@@ -121,6 +124,13 @@
 		throw(ball1).
 	test(test_3_09b, true, []) :-
 		check(c09), check(n09).
+
+	test(test_3_10a, subsumes(a(_), Result), [condition(g(a10)), setup(g(b10)), cleanup(g(c10)), note(n10)]) :-
+		check(a10), check(b10),
+		Result = a(1).
+
+	test(test_3_10b, subsumes(a(_), Result), []) :-
+		Result = a(1).
 
 	% "explicit" dialects
 

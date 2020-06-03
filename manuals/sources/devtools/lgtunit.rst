@@ -261,6 +261,10 @@ The possible values of the outcome argument are:
    | the test is expected to succeed once without leaving a choice-point
      and satisfy the ``Assertion`` goal
 
+-  | ``subsumes(Expected, Result)``
+   | the test is expected to succeed binding ``Result`` to a term that
+     is subsumed by the ``Expected`` term
+
 -  | ``fail``
    | the test is expected to fail
 

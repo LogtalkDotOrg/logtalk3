@@ -86,6 +86,9 @@ Tools
 
 * ADDED: Support for Tau Prolog to the `lgtunit` tool.
 
+* ADDED: Support for the `subsumes/2` outcome for `test/2-3` test dialects to
+the `lgtunit` tool.
+
 * UPDATED: The QuickCheck implementation to also print counter-example
 shrink steps when using the `v(true)` option. 
 
