@@ -101,6 +101,8 @@ reported for the second run if it resulted in the tests being skipped.
 Tests
 -----
 
+* ADDED: Preliminary version of tests for the compiler translation of DCGs.
+
 * ADDED: Tests for the `get_seed/1` and `set_seed/1` predicates and for most
 of the parametric types defined by the `arbitrary` library category.
 
