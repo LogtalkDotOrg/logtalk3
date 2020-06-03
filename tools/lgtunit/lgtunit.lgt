@@ -1323,7 +1323,7 @@
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic(Deterministic), (lgtunit::deterministic(Head,Deterministic), lgtunit::assertion(Assertion,Assertion))) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
-	convert_test_outcome(subsumes(Expected, Result), _, Goal, true, (Goal, subsumes_term(Expected, Result))).
+	convert_test_outcome(subsumes(Expected, Result), _, Goal, true, (Goal, lgtunit::assertion(subsumes_term(Expected,Result),subsumes_term(Expected,Result)))).
 	convert_test_outcome(fail, _, Goal, fail, Goal).
 	convert_test_outcome(false, _, Goal, fail, Goal).
 	convert_test_outcome(error(Ball), _, Goal, [error(Ball,_)], Goal).
