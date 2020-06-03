@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2019-05-29,
+		date is 2020-06-03,
 		comment is 'Unit tests for the "loops" library.'
 	]).
 
@@ -37,22 +37,22 @@
 	% whiledo/2 tests
 
 	test(loops_whiledo_2_01, true(Assertion)) :-
-		^^set_text_input(file, '1. 2. 3.'),
+		^^set_text_input(file, '123'),
 		^^set_text_output(''),
 		loop::whiledo(
-			\+ at_end_of_stream(file),
-			(read(file,Element), write(Element))
+			\+ peek_char(file, end_of_file),
+			(get_char(file, Element), write(Element))
 		),
 		^^text_output_assertion('123', Assertion).
 
 	% dowhile/2 tests
 
 	test(loops_dowhile_2_01, true(Assertion)) :-
-		^^set_text_input(file, '1. 2. 3.'),
+		^^set_text_input(file, '123'),
 		^^set_text_output(''),
 		loop::dowhile(
-			(read(file,Element), write(Element)),
-			\+ at_end_of_stream(file)
+			(get_char(file, Element), write(Element)),
+			\+ peek_char(file, end_of_file)
 		),
 		^^text_output_assertion('123', Assertion).
 
