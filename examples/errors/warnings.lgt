@@ -414,6 +414,15 @@
 
 
 
+:- object(linter_hook).
+
+	p(L) :-
+		list::append([1], [2, 3], L).
+
+:- end_object.
+
+
+
 :- object(steadfastness).
 
 	% incorrect max/3 definition (e.g. max(5,3,3) is true!)

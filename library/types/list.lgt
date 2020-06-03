@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2020-05-11,
+		date is 2020-06-03,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -612,5 +612,17 @@
 		N > 0,
 		M is N - 1,
 		drop(M, Tail, Remaining).
+
+	% linter warning definitions
+
+	:- multifile(user::logtalk_linter_hook/8).
+	user::logtalk_linter_hook(
+		list, append(L1,L2,L), suspicious_calls,
+		File, Lines, Type, Entity,
+		suspicious_call(File, Lines, Type, Entity, list::append(L1,L2,L), [L = [X| L2]])
+	) :-
+		nonvar(L1),
+		L1 = [X| Tail],
+		Tail == [].
 
 :- end_object.

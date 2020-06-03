@@ -18,7 +18,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
+:- initialization((
+	logtalk_load(basic_types(loader)),
 	logtalk_load(
 		[
 			warnings,
@@ -44,4 +45,4 @@
 			report(on)
 		]
 	)
-).
+)).

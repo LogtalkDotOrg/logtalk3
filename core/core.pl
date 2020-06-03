@@ -194,6 +194,12 @@
 :- dynamic(logtalk_make_target_action/1).
 
 
+% extension point for the linter
+
+% logtalk_linter_hook(Object, Message, Flag, File, Lines, Type, Entity, Warning)
+:- multifile(logtalk_linter_hook/8).
+
+
 % term- and goal-expansion default compiler hooks
 
 % '$lgt_hook_term_expansion_'(Term, ExpandedTerms)
@@ -3452,7 +3458,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 39, 0, b02)).
+'$lgt_version_data'(logtalk(3, 39, 0, b03)).
 
 
 
@@ -17152,6 +17158,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = '$lgt_guarded_method_call'(Obj, Pred, This, TPred0)
 	;	TPred = TPred0
 	).
+
+'$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	logtalk_linter_hook(Obj, Pred, Flag, File, Lines, Type, Entity, Warning),
+	nonvar(Flag),
+	'$lgt_valid_flag'(Flag),
+	'$lgt_compiler_flag'(Flag, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(Flag), Warning),
+	fail.
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, This, _, _, _, _, ExCtx, Mode, _, _, _),

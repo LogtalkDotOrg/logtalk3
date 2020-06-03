@@ -32,3 +32,4 @@ Built-in predicates
    engine_predicates
    compiling_predicates
    flag_predicates
+   linter_predicates

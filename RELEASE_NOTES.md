@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 * CHANGED: The `logtalk` built-in object to call the portability abstraction
 for the `format/2-3` predicates.
 
+* ADDED: Linter hook predicate, `logtalk_linter_hook/8`, enabling libraries
+to define linter warnings. Experimental.
+
 * IMPROVED: Linter checks for tautologies and falsehoods in `is/2` goals.
 
 * UPDATED: The compiler internal table of standard predicates to include the
@@ -77,6 +80,9 @@ operator.
 `random` libraries.
 
 * ADDED: Support for Tau Prolog to the `types` library.
+
+* UPDATED: The `list` library object to illustrate the new experimental linter
+hook predicate.
 
 Tools
 -----
@@ -130,7 +136,8 @@ non-terminal and a lambda expression to access the input list of a grammar
 rule without breaking DCGs abstraction.
 
 * UPDATED: The `errors` example for the updated linter checks for falsehoods
-and tautologies in `is/2` goals.
+and tautologies in `is/2` goals and for the new experimental linter hook
+predicate.
 
 Installers and installation scripts
 -----------------------------------
