@@ -29,8 +29,8 @@ Description
    logtalk_linter_hook(Object, Message, Flag, File, Lines, Type, Entity, Warning)
 
 Multifile user-defined predicate, supporting the definition of linter warnings
-for object predicates. Experimental. The `Flag` argument must be a supported
-linter flag. The `Warning` argument must be a valid `core` message term.
+for object predicates. Experimental. The ``Flag`` argument must be a supported
+linter flag. The ``Warning`` argument must be a valid ``core`` message term.
 
 
 Modes and number of proofs
