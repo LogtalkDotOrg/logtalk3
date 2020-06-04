@@ -617,11 +617,10 @@
 
 	:- multifile(user::logtalk_linter_hook/8).
 	user::logtalk_linter_hook(
-		list, append(L1,L2,L), suspicious_calls,
+		list, append(L1, L2, L), suspicious_calls,
 		File, Lines, Type, Entity,
-		suspicious_call(File, Lines, Type, Entity, list::append(L1,L2,L), [L = [X| L2]])
+		suspicious_call(File, Lines, Type, Entity, list::append(L1, L2, L), [L = [X| L2]])
 	) :-
-		nonvar(L1),
 		L1 = [X| Tail],
 		Tail == [].
 

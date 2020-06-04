@@ -238,9 +238,8 @@ linter flag. The <code class="docutils literal notranslate"><span class="pre">Wa
 user<span class="o">::</span>logtalk_linter_hook(
     list, append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), suspicious_calls,
     <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>,
-    suspicious_call(<span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), [<span class="nv">L</span> <span class="o">=</span> [<span class="nv">X</span>| <span class="nv">L2</span>]])
+    suspicious_call(<span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), [<span class="nv">L</span><span class="o">=</span>[<span class="nv">X</span>|<span class="nv">L2</span>]])
 ) <span class="o">:-</span>
-    <span class="k">nonvar</span>(<span class="nv">L1</span>),
     <span class="nv">L1</span> <span class="o">=</span> [<span class="nv">X</span>| <span class="nv">Tail</span>],
     <span class="nv">Tail</span> <span class="o">==</span> [].
 </pre></div>
