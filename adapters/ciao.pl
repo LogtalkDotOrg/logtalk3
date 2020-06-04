@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.19.0
-%  Last updated on May 25, 2020
+%  Last updated on June 4, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -233,9 +233,7 @@
 
 '$lgt_prolog_feature'(prolog_dialect, ciao).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
-	current_prolog_flag(version, ciao(Version, Patch, _, _, _)),
-	Major is truncate(float_integer_part(Version)),
-	Minor is truncate(float_fractional_part(Version)*100).
+	current_prolog_flag(version_data, ciao(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,19,0))).
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
