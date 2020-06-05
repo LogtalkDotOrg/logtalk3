@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Lean Prolog 4.5.7 and later versions
-%  Last updated on May 22, 2020
+%  Last updated on June 5, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -853,9 +853,9 @@ clause(_, _, _) :- fail.
 '$lgt_lean_print_message_token'(flush, _, _, Stream) :-
 	flush_output(Stream).
 '$lgt_lean_print_message_token'(Format-Arguments, _, _, Stream) :-
-	format(Stream, Format, Arguments).
+	'$lgt_format'(Stream, Format, Arguments).
 '$lgt_lean_print_message_token'(ansi(_, Format, Arguments), _, _, Stream) :-
-	format(Stream, Format, Arguments).
+	'$lgt_format'(Stream, Format, Arguments).
 '$lgt_lean_print_message_token'(begin(_, _), _, _, _).
 '$lgt_lean_print_message_token'(end(_), _, _, _).
 
