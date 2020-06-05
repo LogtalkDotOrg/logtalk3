@@ -746,7 +746,6 @@ begin
       (EclipseExePath = 'prolog_compiler_not_installed') and
       (GPExePath = 'prolog_compiler_not_installed') and
       (JIPExePath = 'prolog_compiler_not_installed') and
-      (LeanPrologExePath = 'prolog_compiler_not_installed') and
       (QuintusExePath = 'prolog_compiler_not_installed') and
       (SICStusExePath = 'prolog_compiler_not_installed') and
       (SWIConExePath = 'prolog_compiler_not_installed') and
