@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.19.0
-%  Last updated on June 4, 2020
+%  Last updated on June 5, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -58,7 +58,7 @@
 
 % between(+integer, +integer, ?integer)
 
-:- use_module(library(between)).
+:- use_module(library(between), [between/3]).
 
 
 % findall(?term, +callable, ?list, +list)
@@ -180,14 +180,17 @@
 
 % '$lgt_prolog_database_predicate'(@callable)
 
-'$lgt_prolog_database_predicate'(_) :-
-	fail.
+'$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(assert(_, _)).
+'$lgt_prolog_database_predicate'(asserta(_, _)).
+'$lgt_prolog_database_predicate'(assertz(_, _)).
+'$lgt_prolog_database_predicate'(clause(_, _, _)).
 
 
 % '$lgt_prolog_predicate_property'(?callable)
 
-'$lgt_prolog_predicate_property'(_) :-
-	fail.
+'$lgt_prolog_predicate_property'(compiled).
+'$lgt_prolog_predicate_property'(interpreted).
 
 
 
