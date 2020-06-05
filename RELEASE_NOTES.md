@@ -41,6 +41,9 @@ to define linter warnings. Experimental.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: Lean Prolog is no longer supported due to unfixed bugs and lack of
+standards compliance.
+
 * CHANGED: Abstract the calls to the `format/2-3` predicates to workaround
 portability issues with Tau Prolog and Scryer Prolog.
 
