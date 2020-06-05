@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on May 4, 2020
+; Last updated on June 5, 2020
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -72,7 +72,6 @@ Name: "prolog\cxprolog"; Description: "CxProlog integration (version 0.98.1 or l
 Name: "prolog\eclipse"; Description: "ECLiPSe integration (version 6.1#143 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (version 1.4.5 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\ji"; Description: "JIProlog integration (version 4.1.6.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\lean"; Description: "Lean Prolog (experimental) integration (version 4.5.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (version 3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (version 4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (version 6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -151,8 +150,6 @@ Name: "{group}\Logtalk - ECLiPSe"; Filename: "{code:GetEclipseExePath}"; Paramet
 Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameters: "--entry-goal ""['$LOGTALKHOME/integration/logtalk_gp.pl']"""; Comment: "Runs Logtalk with GNU Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\gprolog; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters: "-c ""{code:GetJIPIntegrationFilePath}"""; Comment: "Runs Logtalk with JIProlog (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\ji; Flags: createonlyiffileexists
-
-Name: "{group}\Logtalk - Lean Prolog"; Filename: "{code:GetLeanPrologExePath}"; Parameters: """['$LOGTALKHOME/integration/logtalk_lean']"""; Comment: "Runs Logtalk with Lean Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\lean; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""{code:GetQuintusIntegrationFilePath}"" +z ""%LOGTALKHOME%"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
 
@@ -433,29 +430,6 @@ end;
 function GetJIPIntegrationFilePath(Param: String): String;
 begin
   Result := ExpandConstant('{app}') + '\integration\logtalk_ji.pl'
-end;
-
-function LeanPrologExePath: String;
-begin
-  if FileExists(ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat') then
-    Result := ExpandConstant('{pf}') + '\LeanProlog\lprolog.bat'
-  else
-    Result := 'prolog_compiler_not_installed'
-end;
-
-function GetLeanPrologExePath(Param: String): String;
-var
-  Warning: String;
-begin
-  Result := LeanPrologExePath;
-  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
-  begin
-    Warning := 'Failed to detect Lean Prolog installation.' + Chr(13) +
-               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
-               'You can manually create the shortcut by finding the full path to the Lean Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
-               'executable full path "[''$LOGTALKHOME/integration/logtalk_lean'']"';
-    MsgBox(Warning, mbError, MB_OK);
-  end
 end;
 
 function QuintusExePath: String;

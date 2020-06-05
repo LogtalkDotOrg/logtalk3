@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 24, 2020
+##   Last updated on June 5, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -218,7 +218,7 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -o output (valid values are verbose and minimal; default is $output)"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lean, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
@@ -308,11 +308,6 @@ elif [ "$p_arg" == "ji" ] || [ "$p_arg" == "jiprolog" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk $i_arg -n -g"
-elif [ "$p_arg" == "lean" ] || [ "$p_arg" == "lean-prolog" ] ; then
-	backend=lean
-	prolog='Lean Prolog'
-	logtalk=lplgt$extension
-	logtalk_call="$logtalk $i_arg"
 elif [ "$p_arg" == "qp" ] || [ "$p_arg" == "qu-prolog" ] ; then
 	backend=qp
 	prolog='Qu-Prolog'

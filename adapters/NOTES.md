@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on January 30, 2018
+Last updated on June 5, 2020
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -85,7 +85,6 @@ following table summarizes the availability of these features:
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
-|  Lean Prolog     |       no      |       no      |      yes      |       no      |       no      |  
 |  Qu-Prolog       |       no      |       no      |       no      |       no      |       no      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
@@ -222,46 +221,6 @@ See the `scripts/embedding/jiprolog` directory for a sample shell script
 for embedding Logtalk and optionally a Logtalk application. The script
 documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
-
-
-Lean Prolog 4.5.4 and later versions
-------------------------------------
-
-	lean.pl
-
-Experimental. Lean Prolog lacks compliance with both official and de facto
-standards. Notably, it lacks support for stream aliases, for the `0'Char`
-notation, for escape sequences in atoms, and its limited parser often
-requires atoms to be quoted and written between ()'s. Moreover, due to
-Lean Prolog limitation of compiling more than one file per session, the
-compilation of Logtalk source files generates intermediate Prolog files
-that are consulted (i.e. interpreted) instead of being compiled, severely
-hurting performance. Thus, practical use requires embedding Logtalk and the
-Logtalk application in Lean Prolog by including all necessary files in a
-single file that can then be compiled. For example, you can collect all
-Logtalk core files in a single file by following the steps (exemplified
-for POSIX systems):
-
-	$ lplgt
-	...
-	| ?- logtalk_compile([
-			core(expanding),
-			core(monitoring),
-			core(forwarding),
-			core(user),
-			core(logtalk),
-			core(core_messages)],
-			[optimize(on), scratch_directory('$HOME/collect')]).
-
-	$ cp $LOGTALKHOME/adapters/lean.pl $HOME/collect/lean.pl
-	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
-	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
-
-	$ cd $HOME/collect
-	$ cat lean.pl paths.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl core.pl > logtalk_core.pl
-
-Starting Lean Prolog with a Java allocation of at least 2GB is recommended
-(by passing a `-Xmx2G` option to Java).
 
 
 Qu-Prolog 9.7 and later versions

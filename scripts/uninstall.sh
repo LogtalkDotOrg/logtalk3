@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on May 24, 2020
+##   Last updated on June 5, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -80,7 +80,6 @@ rm -f logtalk_tester
 rm -f logtalk_doclet
 rm -f logtalk_user_setup
 rm -f logtalk_version_select
-rm -f lplgt
 rm -f qplgt
 rm -f quintuslgt
 rm -f sicstuslgt
@@ -107,7 +106,6 @@ rm -f logtalk_tester.1.gz
 rm -f logtalk_doclet.1.gz
 rm -f logtalk_user_setup.1.gz
 rm -f logtalk_version_select.1.gz
-rm -f lplgt.1.gz
 rm -f qplgt.1.gz
 rm -f quintuslgt.1.gz
 rm -f sicstuslgt.1.gz

@@ -18,8 +18,8 @@ ________________________________________________________________________
 
 
 This folder contains adapter files for Prolog compilers that are not yet
-officially supported or no longer supported. Follows some notes on these
-compilers.
+officially supported or no longer supported due to lack of compliance
+with standards and/or unfixed bugs. Follows some notes on these compilers.
 
 
 Amzi! Prolog 7.6.1 and later versions
@@ -78,22 +78,6 @@ not tested.
 Updated and tested with help of Arun Majumdar.
 
 
-CIAO Prolog 1.14.0
-------------------
-
-	ciao.pl
-
-The definition of the predicate '$lgt_predicate_property'/2 in the 
-file "ciao_aux.pl" is a bit of a hack, but should enable you to run 
-the Logtalk companion examples and to try out your own Logtalk 
-programs. 
-
-Don't forget to call the cd/1 predicate to set the working directory 
-before compiling the library or an example (you will need first to 
-load the library system that exports the cd/1 predicate by calling 
-the goal use_module(library(system)).
-
-
 IF/Prolog 5.3 and later versions
 --------------------------------
 
@@ -106,6 +90,46 @@ working directory before loading the library or an example. Supports
 smart compilation of source files. Does not support the "altdirs" 
 compiler flag. Full support for settings files on POSIX operating-
 systems. Support for settings files on Windows unknown.
+
+
+Lean Prolog 4.5.7 and later versions
+------------------------------------
+
+	lean.pl
+
+Experimental. Lean Prolog lacks compliance with both official and de facto
+standards. Notably, it lacks support for stream aliases, for the `0'Char`
+notation, for escape sequences in atoms, and its limited parser often
+requires atoms to be quoted and written between ()'s. Moreover, due to
+Lean Prolog limitation of compiling more than one file per session, the
+compilation of Logtalk source files generates intermediate Prolog files
+that are consulted (i.e. interpreted) instead of being compiled, severely
+hurting performance. Thus, practical use requires embedding Logtalk and the
+Logtalk application in Lean Prolog by including all necessary files in a
+single file that can then be compiled. For example, you can collect all
+Logtalk core files in a single file by following the steps (exemplified
+for POSIX systems):
+
+	$ lplgt
+	...
+	| ?- logtalk_compile([
+			core(expanding),
+			core(monitoring),
+			core(forwarding),
+			core(user),
+			core(logtalk),
+			core(core_messages)],
+			[optimize(on), scratch_directory('$HOME/collect')]).
+
+	$ cp $LOGTALKHOME/adapters/lean.pl $HOME/collect/lean.pl
+	$ cp $LOGTALKHOME/paths/paths.pl $HOME/collect/paths.pl
+	$ cp $LOGTALKHOME/core/core.pl $HOME/collect/core.pl
+
+	$ cd $HOME/collect
+	$ cat lean.pl paths.pl expanding*_lgt.pl monitoring*_lgt.pl forwarding*_lgt.pl user*_lgt.pl logtalk*_lgt.pl core_messages*_lgt.pl core.pl > logtalk_core.pl
+
+Starting Lean Prolog with a Java allocation of at least 2GB is recommended
+(by passing a `-Xmx2G` option to Java).
 
 
 LPA MacProlog32 1.25
