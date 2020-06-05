@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:25:0,
+		version is 1:26:0,
 		author is 'Paulo Moura',
-		date is 2019-11-18,
+		date is 2020-06-05,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).
@@ -102,6 +102,13 @@
 	:- mode(working_directory(?atom), zero_or_one).
 	:- info(working_directory/1, [
 		comment is 'Current working directory.',
+		argnames is ['Directory']
+	]).
+
+	:- public(temporary_directory/1).
+	:- mode(temporary_directory(?atom), one).
+	:- info(temporary_directory/1, [
+		comment is 'Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR``, ``TMP``, ``TEMP``, and ``TEMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.',
 		argnames is ['Directory']
 	]).
 

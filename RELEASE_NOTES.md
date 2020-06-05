@@ -66,6 +66,8 @@ Library
 to match the same behavior found in Prolog libraries where the last argument
 returns all other elements instead of just those after the selected element.
 
+* ADDED: New `temporary_directory/1` predicate to the `os` library.
+
 * ADDED: New `dif/1` predicate to the `coroutining` library to set `dif/2`
 constraints between all terms in a list.
 

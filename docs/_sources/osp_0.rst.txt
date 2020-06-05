@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:25:0
-| **Date:** 2019-11-18
+| **Version:** 1:26:0
+| **Date:** 2020-06-05
 
 | **Compilation flags:**
 |    ``static``
@@ -284,6 +284,29 @@ Current working directory.
 |    ``working_directory(Directory)``
 | **Mode and number of proofs:**
 |    ``working_directory(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="temporary_directory/1"> </div>
+
+.. index:: temporary_directory/1
+.. _osp/0::temporary_directory/1:
+
+``temporary_directory/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR``, ``TMP``, ``TEMP``, and ``TEMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``temporary_directory(Directory)``
+| **Mode and number of proofs:**
+|    ``temporary_directory(?atom)`` - ``one``
 
 
 ------------

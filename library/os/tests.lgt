@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2019-11-18,
+		date is 2020-06-05,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -259,6 +259,17 @@
 		os::change_directory(Directory),
 		os::absolute_file_name(File, ExpandedFile),
 		ExpandedFile == Path.
+
+	test(temporary_directory_1_01) :-
+		os::temporary_directory(Directory),
+		os::directory_exists(Directory).
+
+	test(temporary_directory_1_02) :-
+		os::temporary_directory(Directory),
+		atom_concat(Directory, 'logtalk_temporary_directory_test_file', File),
+		open(File, write, Stream),
+		write(Stream, 1),
+		close(Stream).
 
 	test(os_directory_files_2_01) :-
 		this(This),

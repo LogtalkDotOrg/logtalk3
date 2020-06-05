@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:58:4,
+		version is 1:59:4,
 		author is 'Paulo Moura',
-		date is 2020-05-25,
+		date is 2020-06-05,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1694,6 +1694,32 @@
 		:- initialization((write('WARNING: backend Prolog compiler not supported!'), nl)).
 
 	:- endif.
+
+	temporary_directory(Directory) :-
+		(	operating_system_type(windows) ->
+			temporary_directory_windows(Directory)
+		;	temporary_directory_unix(Directory)
+		).
+
+	temporary_directory_windows(Directory) :-
+		(	environment_variable('TEMP', Directory)
+		;	environment_variable('TMP', Directory)
+		;	directory_exists('c:\\windows\\temp'), Directory = 'c:\\windows\\temp'
+		;	working_directory(Directory)
+		),
+		!.
+
+	temporary_directory_unix(Directory) :-
+		(	environment_variable('TMPDIR', Directory)
+		;	environment_variable('TMP', Directory)
+		;	environment_variable('TEMP', Directory)
+		;	environment_variable('TEMPDIR', Directory)
+		;	directory_exists('/tmp'), Directory = '/tmp'
+		;	directory_exists('/var/tmp'), Directory = '/var/tmp'
+		;	directory_exists('/usr/tmp'), Directory = '/usr/tmp'
+		;	working_directory(Directory)
+		),
+		!.
 
 	ensure_directory(Directory) :-
 		(	directory_exists(Directory) ->
