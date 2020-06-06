@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:26:0,
+		version is 1:27:0,
 		author is 'Paulo Moura',
-		date is 2020-06-05,
+		date is 2020-06-06,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).
@@ -110,6 +110,13 @@
 	:- info(temporary_directory/1, [
 		comment is 'Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on Windows systems; ``TMPDIR``, ``TMP``, ``TEMP``, and ``TEMPDIR`` on POSIX systems. When not defined, tries default locations. Returns the working directory as last resort.',
 		argnames is ['Directory']
+	]).
+
+	:- public(null_device_path/1).
+	:- mode(null_device_path(?atom), one).
+	:- info(null_device_path/1, [
+		comment is 'Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.',
+		argnames is ['Path']
 	]).
 
 	:- public(directory_files/2).

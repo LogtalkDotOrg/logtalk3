@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2020-06-05,
+		date is 2020-06-06,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -132,6 +132,12 @@
 
 	test(os_file_exists_1_02) :-
 		\+ os::file_exists(non_existing_file).
+
+	test(os_file_size_1_01) :-
+		this(This),
+		object_property(This, file(File)),
+		os::file_size(File, Size),
+		integer(Size).
 
 	test(os_delete_file_1_01) :-
 		this(This),
@@ -260,16 +266,35 @@
 		os::absolute_file_name(File, ExpandedFile),
 		ExpandedFile == Path.
 
-	test(temporary_directory_1_01) :-
+	test(os_temporary_directory_1_01) :-
 		os::temporary_directory(Directory),
 		os::directory_exists(Directory).
 
-	test(temporary_directory_1_02) :-
+	test(os_temporary_directory_1_02) :-
 		os::temporary_directory(Directory),
 		atom_concat(Directory, 'logtalk_temporary_directory_test_file', File),
 		open(File, write, Stream),
 		write(Stream, 1),
 		close(Stream).
+
+	test(os_null_device_path_1_01) :-
+		os::null_device_path(Path),
+		atom(Path).
+
+	test(os_null_device_path_1_02) :-
+		os::null_device_path(Path),
+		open(Path, write, Stream),
+		write(Stream, abc),
+		close(Stream).
+
+	test(os_null_device_path_1_03) :-
+		os::null_device_path(Path),
+		os::file_size(Path, Size0),
+		open(Path, write, Stream),
+		write(Stream, abc),
+		close(Stream),
+		os::file_size(Path, Size),
+		Size =:= Size0.
 
 	test(os_directory_files_2_01) :-
 		this(This),

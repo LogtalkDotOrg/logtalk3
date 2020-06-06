@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:59:4,
+		version is 1:60:0,
 		author is 'Paulo Moura',
-		date is 2020-06-05,
+		date is 2020-06-06,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1720,6 +1720,12 @@
 		;	working_directory(Directory)
 		),
 		!.
+
+	null_device_path(Path) :-
+		(	operating_system_type(windows) ->
+			Path = nul
+		;	Path = '/dev/null'
+		).
 
 	ensure_directory(Directory) :-
 		(	directory_exists(Directory) ->

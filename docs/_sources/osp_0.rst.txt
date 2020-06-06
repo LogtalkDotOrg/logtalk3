@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:26:0
-| **Date:** 2020-06-05
+| **Version:** 1:27:0
+| **Date:** 2020-06-06
 
 | **Compilation flags:**
 |    ``static``
@@ -307,6 +307,29 @@ Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on 
 |    ``temporary_directory(Directory)``
 | **Mode and number of proofs:**
 |    ``temporary_directory(?atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="null_device_path/1"> </div>
+
+.. index:: null_device_path/1
+.. _osp/0::null_device_path/1:
+
+``null_device_path/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``null_device_path(Path)``
+| **Mode and number of proofs:**
+|    ``null_device_path(?atom)`` - ``one``
 
 
 ------------
