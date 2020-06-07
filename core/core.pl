@@ -2969,7 +2969,13 @@ logtalk_make(Target) :-
 	'$lgt_print_message'(warning(make), duplicated_library_aliases(Duplicates)),
 	fail.
 '$lgt_logtalk_make'(check) :-
-	'$lgt_print_message'(comment(make), completed_scanning_for_duplicated_library_aliases).
+	'$lgt_print_message'(comment(make), scanning_for_library_paths_end_slash),
+	findall(Alias-Path, (logtalk_library_path(Alias, Path), atom(Path), \+ sub_atom(Path, _, 1, 0, '/')), Paths),
+	Paths \== [],
+	'$lgt_print_message'(warning(make), library_paths_dont_end_with_slash(Paths)),
+	fail.
+'$lgt_logtalk_make'(check) :-
+	'$lgt_print_message'(comment(make), completed_scanning_of_library_alias_definitions).
 
 '$lgt_logtalk_make'(circular) :-
 	'$lgt_print_message'(comment(make), scanning_for_circular_dependencies),
@@ -3458,7 +3464,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 39, 0, b03)).
+'$lgt_version_data'(logtalk(3, 39, 0, b04)).
 
 
 

@@ -35,6 +35,9 @@ to define linter warnings. Experimental.
 
 * IMPROVED: Linter checks for tautologies and falsehoods in `is/2` goals.
 
+* UPDATED: The `logtalk_make/1` predicate `check` target to also scan for
+library paths not ending with a slash.
+
 * UPDATED: The compiler internal table of standard predicates to include the
 `call/2-8` predicates.
 

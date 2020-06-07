@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:99:0,
+		version is 1:100:0,
 		author is 'Paulo Moura',
-		date is 2020-04-20,
+		date is 2020-06-07,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -154,8 +154,11 @@
 	message_tokens(scanning_for_duplicated_library_aliases) -->
 		['Scanning for duplicated library aliases ...'-[], nl].
 
-	message_tokens(completed_scanning_for_duplicated_library_aliases) -->
-		['... completed scanning for duplicated library aliases'-[], nl].
+	message_tokens(scanning_for_library_paths_end_slash) -->
+		['Scanning for library paths end slash ...'-[], nl].
+
+	message_tokens(completed_scanning_of_library_alias_definitions) -->
+		['... completed scanning for library alias definitions'-[], nl].
 
 	message_tokens(scanning_for_circular_dependencies) -->
 		['Scanning for circular entity dependencies ...'-[], nl].
@@ -215,6 +218,12 @@
 		(	{Duplicates = [Duplicate]} ->
 			['Duplicated library alias: ~q'-[Duplicate], nl]
 		;	['Duplicated library aliases: ~q'-[Duplicates], nl]
+		).
+
+	message_tokens(library_paths_dont_end_with_slash(Paths)) -->
+		(	{Paths = [Path]} ->
+			['Library path does not end with slash: ~q'-[Path], nl]
+		;	['Library paths do not end with slash: ~q'-[Paths], nl]
 		).
 
 	% startup messages
