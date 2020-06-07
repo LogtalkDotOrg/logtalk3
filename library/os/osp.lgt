@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:27:0,
+		version is 1:28:0,
 		author is 'Paulo Moura',
-		date is 2020-06-06,
+		date is 2020-06-07,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).
@@ -68,6 +68,13 @@
 	:- info(decompose_file_name/4, [
 		comment is 'Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent), name (that can be the empty atom), and extension (which starts with a ``.`` when defined; the empty atom otherwise).',
 		argnames is ['File', 'Directory', 'Name', 'Extension']
+	]).
+
+	:- public(path_concat/3).
+	:- mode(path_concat(+atom, +atom, ?atom), one).
+	:- info(path_concat/3, [
+		comment is 'Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a ``/`` appended if missing when ``Suffix`` is the empty atom.',
+		argnames is ['Prefix', 'Suffix', 'Path']
 	]).
 
 	:- public(make_directory/1).

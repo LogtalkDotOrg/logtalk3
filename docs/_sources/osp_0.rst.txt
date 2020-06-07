@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:27:0
-| **Date:** 2020-06-06
+| **Version:** 1:28:0
+| **Date:** 2020-06-07
 
 | **Compilation flags:**
 |    ``static``
@@ -169,6 +169,29 @@ Decomposes a file name into its directory (which always ends with a slash; ``./`
 |    ``decompose_file_name(File,Directory,Name,Extension)``
 | **Mode and number of proofs:**
 |    ``decompose_file_name(+atom,?atom,?atom,?atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="path_concat/3"> </div>
+
+.. index:: path_concat/3
+.. _osp/0::path_concat/3:
+
+``path_concat/3``
+^^^^^^^^^^^^^^^^^
+
+Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a ``/`` appended if missing when ``Suffix`` is the empty atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``path_concat(Prefix,Suffix,Path)``
+| **Mode and number of proofs:**
+|    ``path_concat(+atom,+atom,?atom)`` - ``one``
 
 
 ------------

@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:60:0,
+		version is 1:61:0,
 		author is 'Paulo Moura',
-		date is 2020-06-06,
+		date is 2020-06-07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1694,6 +1694,20 @@
 		:- initialization((write('WARNING: backend Prolog compiler not supported!'), nl)).
 
 	:- endif.
+
+	path_concat(Prefix, Suffix, Path) :-
+		(	absolute_file_name(Suffix, Suffix) ->
+			Path = Suffix
+		;	Suffix == '' ->
+			(	sub_atom(Prefix, _, 1, 0, '/') ->
+				Path = Prefix
+			;	atom_concat(Prefix, '/', Path)
+			)
+		;	sub_atom(Prefix, _, 1, 0, '/') ->
+			atom_concat(Prefix, Suffix, Path)
+		;	atom_concat(Prefix, '/', Path0),
+			atom_concat(Path0, Suffix, Path)
+		).
 
 	temporary_directory(Directory) :-
 		(	operating_system_type(windows) ->

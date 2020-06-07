@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2020-06-06,
+		date is 2020-06-07,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -95,6 +95,26 @@
 		Directory == './',
 		Name == 'foo',
 		Extension == '.bar'.
+
+	test(os_path_concat_03_01) :-
+		os::path_concat('/foo', '/bar', Path),
+		Path == '/bar'.
+
+	test(os_path_concat_03_02) :-
+		os::path_concat('/foo', '', Path),
+		Path == '/foo/'.
+
+	test(os_path_concat_03_03) :-
+		os::path_concat('/foo/', '', Path),
+		Path == '/foo/'.
+
+	test(os_path_concat_03_04) :-
+		os::path_concat('/foo', 'bar', Path),
+		Path == '/foo/bar'.
+
+	test(os_path_concat_03_05) :-
+		os::path_concat('foo', 'bar', Path),
+		Path == 'foo/bar'.
 
 	test(os_cpu_time_1_01) :-
 		os::cpu_time(Seconds),
