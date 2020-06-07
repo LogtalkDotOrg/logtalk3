@@ -71,9 +71,9 @@
 	]).
 
 	:- public(path_concat/3).
-	:- mode(path_concat(+atom, +atom, ?atom), one).
+	:- mode(path_concat(+atom, +atom, --atom), one).
 	:- info(path_concat/3, [
-		comment is 'Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a ``/`` appended if missing when ``Suffix`` is the empty atom.',
+		comment is 'Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a trailing ``/`` appended if missing when ``Suffix`` is the empty atom.',
 		argnames is ['Prefix', 'Suffix', 'Path']
 	]).
 

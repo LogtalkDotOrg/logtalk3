@@ -451,7 +451,7 @@
 <div id="path_concat/3"> </div></div>
 <div class="section" id="path-concat-3">
 <span id="osp-0-path-concat-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">path_concat/3</span></code></a><a class="headerlink" href="#path-concat-3" title="Permalink to this headline">¶</a></h3>
-<p>Concatenates a path prefix and a path suffix, adding  a <code class="docutils literal notranslate"><span class="pre">/</span></code> separator if required. Returns <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> when it is an absolute path. Returns <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> with a <code class="docutils literal notranslate"><span class="pre">/</span></code> appended if missing when <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is the empty atom.</p>
+<p>Concatenates a path prefix and a path suffix, adding  a <code class="docutils literal notranslate"><span class="pre">/</span></code> separator if required. Returns <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> when it is an absolute path. Returns <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> with a trailing <code class="docutils literal notranslate"><span class="pre">/</span></code> appended if missing when <code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is the empty atom.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -465,7 +465,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">path_concat(+atom,+atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">path_concat(+atom,+atom,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

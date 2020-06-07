@@ -183,7 +183,7 @@ Decomposes a file name into its directory (which always ends with a slash; ``./`
 ``path_concat/3``
 ^^^^^^^^^^^^^^^^^
 
-Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a ``/`` appended if missing when ``Suffix`` is the empty atom.
+Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a trailing ``/`` appended if missing when ``Suffix`` is the empty atom.
 
 | **Compilation flags:**
 |    ``static``
@@ -191,7 +191,7 @@ Concatenates a path prefix and a path suffix, adding  a ``/`` separator if requi
 | **Template:**
 |    ``path_concat(Prefix,Suffix,Path)``
 | **Mode and number of proofs:**
-|    ``path_concat(+atom,+atom,?atom)`` - ``one``
+|    ``path_concat(+atom,+atom,--atom)`` - ``one``
 
 
 ------------
