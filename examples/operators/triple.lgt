@@ -21,9 +21,9 @@
 :- object(triple).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2017-06-21,
+		date is 2020-06-07,
 		comment is 'Read and asserts a simple table of facts from a file for testing operator handling code.'
 	]).
 
@@ -38,7 +38,7 @@
 		retractall(triple(_, _)),
 		this(This),
 		object_property(This, file(_, Directory)),
-		atom_concat(Directory, '/triple.txt', Path),
+		atom_concat(Directory, 'triple.txt', Path),
 		open(Path, read, Stream),
 		read(Stream, Term),
 		process(Stream, Term).

@@ -508,7 +508,7 @@ The following category properties are supported:
    applicable)
 ``file(Basename, Directory)``
    Basename and directory of the source file defining the category (if
-   applicable)
+   applicable); ``Directory`` always ends with a ``/``
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the category definition (if
    applicable)

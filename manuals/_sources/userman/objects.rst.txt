@@ -711,7 +711,7 @@ The following object properties are supported:
    Absolute path of the source file defining the object (if applicable)
 ``file(Basename, Directory)``
    Basename and directory of the source file defining the object (if
-   applicable)
+   applicable); ``Directory`` always ends with a ``/``
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the object definition (if
    applicable)

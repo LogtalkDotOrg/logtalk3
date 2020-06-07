@@ -278,7 +278,7 @@ The following protocol properties are supported:
    applicable)
 ``file(Basename, Directory)``
    Basename and directory of the source file defining the protocol (if
-   applicable)
+   applicable); ``Directory`` always ends with a ``/``
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the protocol definition (if
    applicable)
