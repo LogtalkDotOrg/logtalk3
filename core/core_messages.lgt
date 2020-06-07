@@ -155,10 +155,10 @@
 		['Scanning for duplicated library aliases ...'-[], nl].
 
 	message_tokens(scanning_for_library_paths_end_slash) -->
-		['Scanning for library paths end slash ...'-[], nl].
+		['Scanning for library paths not ending with a slash ...'-[], nl].
 
 	message_tokens(completed_scanning_of_library_alias_definitions) -->
-		['... completed scanning for library alias definitions'-[], nl].
+		['... completed scanning of library alias definitions'-[], nl].
 
 	message_tokens(scanning_for_circular_dependencies) -->
 		['Scanning for circular entity dependencies ...'-[], nl].
