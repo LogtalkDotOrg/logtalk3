@@ -63,8 +63,11 @@ no
 		class(Name)
 	).
 
-Name = parallelogram
-yes
+Name = parallelogram ;
+Name = parallelogram ;
+Name = parallelogram ;
+Name = parallelogram ;
+no
 
 
 % recognize a rhombus (the vertices rotation results in four solutions):
@@ -107,8 +110,11 @@ no
 		class(Name)
 	).
 
-Name = rhombus
-yes
+Name = rhombus ;
+Name = rhombus ;
+Name = rhombus ;
+Name = rhombus ;
+no
 
 
 % take perpendicularity into account when checking the class of a figure:

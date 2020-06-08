@@ -31,12 +31,13 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2020-06-08,
-		comment is 'Example of network modeling for recognizing polyhedra represented as graphs.',
+		comment is 'Example of network modeling for recognizing polyhedra represented as a graph.',
 		source is '"A framework for network modeling in Prolog", Zdravko I. Markov, IJCAI, 1989.'
 	]).
 
 	:- uses(coroutining, [dif/1]).
 
+	% graph representation of polyhedra
 	:- public(edge/4).
 	edge(_A_, _B_, _S1_, _L1_).
 	edge(_B_, _C_, _S2_, _L1_).
@@ -51,7 +52,14 @@
 	% classes of figures; the last four arguments are the vertices
 	:- public(class/5).
 	class(Class, A, B, C, D) :-
-		dif, class_(Class, A, B, C, D), ground(vars(A, B, C, D)).
+		% vertices, edge slopes, and edge lengths must be distinct
+		dif([_A_, _B_, _C_, _D_, _E_, _F_, _G_]),
+		dif([_S1_, _S2_, _S3_, _S4_]),
+		dif([_L1_, _L2_, _L3_, _L4_]),
+		% classify the polyhedra
+		class_(Class, A, B, C, D),
+		% ensure all constraints are solved
+		ground(vars(A, B, C, D)).
 
 	class_(four_side_figure, _A_, _B_, _E_, _G_).
 	class_(parallelogram,    _A_, _B_, _E_, _F_).
@@ -59,13 +67,6 @@
 
 	:- public(class/1).
 	class(Class) :-
-		once(class(Class, _, _, _, _)).
-
-	% ensure that vertices, edge slopes, and
-	% edge lengths bindings are distinct
-	dif :-
-		dif([_A_, _B_, _C_, _D_, _E_, _F_, _G_]),
-		dif([_S1_, _S2_, _S3_, _S4_]),
-		dif([_L1_, _L2_, _L3_, _L4_]).
+		class(Class, _, _, _, _).
 
 :- end_object.
