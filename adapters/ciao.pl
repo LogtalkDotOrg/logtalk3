@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.19.0
-%  Last updated on June 5, 2020
+%  Last updated on June 8, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -313,7 +313,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- use_module(library(indexer/hash), [hash_term/2]).
 
 % '$lgt_prolog_os_file_name'(+atom, -atom)
 % '$lgt_prolog_os_file_name'(-atom, +atom)
@@ -388,9 +387,7 @@
 %
 % returns the directory hash as an atom
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
-%
-% returns the directory hash as an atom
+:- use_module(library(indexer/hash), [hash_term/2]).
 
 '$lgt_directory_hash_as_atom'(Directory, Hash) :-
 	hash_term(Directory, Hash0),
@@ -558,6 +555,9 @@
 		'$lgt_ciao_find_module_name'(Module)
 	;	true
 	).
+'$lgt_ciao_directive_expansion'(table(Predicates), {:- table(TPredicates)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_ciao_table_directive_expansion'(Predicates, TPredicates).
 
 
 '$lgt_ciao_find_module_name'(Module) :-
@@ -587,6 +587,24 @@
 '$lgt_ciao_directive_meta_predicate_arg'(+, *).
 '$lgt_ciao_directive_meta_predicate_arg'(?, *).
 '$lgt_ciao_directive_meta_predicate_arg'(-, *).
+
+
+'$lgt_ciao_table_directive_expansion'([Predicate| Predicates], [TPredicate| TPredicates]) :-
+	!,
+	'$lgt_ciao_table_directive_predicate'(Predicate, TPredicate),
+	'$lgt_ciao_table_directive_expansion'(Predicates, TPredicates).
+'$lgt_ciao_table_directive_expansion'((Predicate, Predicates), (TPredicate, TPredicates)) :-
+	!,
+	'$lgt_ciao_table_directive_predicate'(Predicate, TPredicate),
+	'$lgt_ciao_table_directive_expansion'(Predicates, TPredicates).
+'$lgt_ciao_table_directive_expansion'(Predicate, TPredicate) :-
+	'$lgt_ciao_table_directive_predicate'(Predicate, TPredicate).
+
+'$lgt_ciao_table_directive_predicate'(F/A, TF/TA) :-
+	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
+'$lgt_ciao_table_directive_predicate'(F//A, TF/TA) :-
+	A2 is A + 2,
+	'$lgt_compile_predicate_indicators'(F/A2, _, TF/TA).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
