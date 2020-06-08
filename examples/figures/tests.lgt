@@ -28,44 +28,69 @@
 		comment is 'Unit tests for the "figures" example.'
 	]).
 
+	:- uses([
+		figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _) as figures,
+		figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _) as figures_split
+	]).
+
 	cover(figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)).
 
-	test(figures_01, true(Name == parallelogram)) :-
-		figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
-			edge(1, 2,  0, 20),
-			edge(2, 3, 45, 30),
-			edge(3, 4,  0, 20),
-			edge(4, 1, 45, 30),
-			class(Name)
-		).
+	test(figures_01, true(Classes == [four_side_figure, parallelogram])) :-
+		findall(
+			Class,
+			figures::(
+				edge(1, 2,  0, 20),
+				edge(2, 3, 45, 30),
+				edge(3, 4,  0, 20),
+				edge(4, 1, 45, 30),
+				class(Class)
+			),
+			Classes0
+		),
+		sort(Classes0, Classes).
 
-	test(figures_02, true(Name == rhombus)) :-
-		figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
-			edge(a, b, 45, 10),
-			edge(b, c,  0, 10),
-			edge(c, d, 45, 10),
-			edge(d, a,  0, 10),
-			class(Name)
-		).
+	test(figures_02, true(Classes == [four_side_figure, parallelogram, rhombus])) :-
+		findall(
+			Class,
+			figures::(
+				edge(a, b, 45, 10),
+				edge(b, c,  0, 10),
+				edge(c, d, 45, 10),
+				edge(d, a,  0, 10),
+				class(Class)
+			),
+			Classes0
+		),
+		sort(Classes0, Classes).
 
-	test(figures_split_01, true(Name == square)) :-
-		figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
-			edge(1, 2,  0, 20),
-			edge(2, 3, 90, 20),
-			edge(3, 4,  0, 20),
-			edge(4, 1, 90, 20),
-			perpendicularity,
-			class(Name)
-		).
+	test(figures_split_01, true(Classes == [four_side_figure, rectangular, square])) :-
+		findall(
+			Class,
+			figures_split::(
+				edge(1, 2,  0, 20),
+				edge(2, 3, 90, 20),
+				edge(3, 4,  0, 20),
+				edge(4, 1, 90, 20),
+				perpendicularity,
+				class(Class)
+			),
+			Classes0
+		),
+		sort(Classes0, Classes).
 
-	test(figures_split_02, true(Name == rhombus)) :-
-		figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
-			edge(a, b, 45, 10),
-			edge(b, c,  0, 10),
-			edge(c, d, 45, 10),
-			edge(d, a,  0, 10),
-			perpendicularity,
-			class(Name)
-		).
+	test(figures_split_02, true(Classes == [four_side_figure, parallelogram, rhombus])) :-
+		findall(
+			Class,
+			figures_split::(
+				edge(a, b, 45, 10),
+				edge(b, c,  0, 10),
+				edge(c, d, 45, 10),
+				edge(d, a,  0, 10),
+				perpendicularity,
+				class(Class)
+			),
+			Classes0
+		),
+		sort(Classes0, Classes).
 
 :- end_object.

@@ -54,10 +54,8 @@
 	% classes of figures; the last four arguments are the vertices
 	:- public(class/5).
 	class(Class, A, B, C, D) :-
-		% vertices, edge slopes, and edge lengths must be distinct
+		% vertices must be distinct
 		dif([_A_, _B_, _C_, _D_, _E_, _F_, _G_]),
-		dif([_S1_, _S2_, _S3_, _S4_]),
-		dif([_L1_, _L2_, _L3_, _L4_]),
 		% classify the polyhedra
 		class_(Class, A, B, C, D),
 		% ensure all constraints are solved
