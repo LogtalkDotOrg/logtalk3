@@ -52,20 +52,17 @@
 
 	% classes of figures; the last four arguments are the vertices
 	:- public(class/5).
+	class(Class, A, B, C, D) :-
+		dif, class_(Class, A, B, C, D), ground(vars(A, B, C, D)).
 
 	% general case
-	class(four_side_figure, _A_, _B_, _E_, _G_) :-
-		dif, ground(vars(_A_, _B_, _E_, _G_)).
+	class_(four_side_figure, _A_, _B_, _E_, _G_).
 	% non-perpendicular figures
-	class(parallelogram,    _A_, _B_, _E_, _F_) :-
-		dif, var(_P_), ground(vars(_A_, _B_, _E_, _F_, _S1_, _S2_)).
-	class(rhombus,          _A_, _B_, _C_, _D_) :-
-		dif, var(_P_), ground(vars(_A_, _B_, _C_, _D_, _S1_, _S2_)).
+	class_(parallelogram,    _A_, _B_, _E_, _F_) :- var(_P_).
+	class_(rhombus,          _A_, _B_, _C_, _D_) :- var(_P_).
 	% perpendicular figures
-	class(rectangular, _A_, _B_, _E_, _F_) :-
-		dif, ground(vars(_P_, _A_, _B_, _E_, _F_, _S1_, _S2_)).
-	class(square, _A_, _B_, _C_, _D_) :-
-		dif, ground(vars(_P_, _A_, _B_, _C_, _D_, _S1_, _S2_)).
+	class_(rectangular, _A_, _B_, _E_, _F_) :- nonvar(_P_).
+	class_(square, _A_, _B_, _C_, _D_) :- nonvar(_P_).
 
 	:- public(class/1).
 	class(Class) :-

@@ -50,12 +50,12 @@
 
 	% classes of figures; the last four arguments are the vertices
 	:- public(class/5).
-	class(four_side_figure, _A_, _B_, _E_, _G_) :-
-		dif, ground(vars(_A_, _B_, _E_, _G_)).
-	class(parallelogram,    _A_, _B_, _E_, _F_) :-
-		dif, ground(vars(_A_, _B_, _E_, _F_)).
-	class(rhombus,          _A_, _B_, _C_, _D_) :-
-		dif, ground(vars(_A_, _B_, _C_, _D_)).
+	class(Class, A, B, C, D) :-
+		dif, class_(Class, A, B, C, D), ground(vars(A, B, C, D)).
+
+	class_(four_side_figure, _A_, _B_, _E_, _G_).
+	class_(parallelogram,    _A_, _B_, _E_, _F_).
+	class_(rhombus,          _A_, _B_, _C_, _D_).
 
 	:- public(class/1).
 	class(Class) :-
