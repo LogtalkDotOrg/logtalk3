@@ -71,7 +71,7 @@
 				edge(2, 3, 90, 20),
 				edge(3, 4,  0, 20),
 				edge(4, 1, 90, 20),
-				perpendicularity,
+				perpendicular,
 				class(Class)
 			),
 			Classes0
@@ -86,7 +86,7 @@
 				edge(b, c,  0, 10),
 				edge(c, d, 45, 10),
 				edge(d, a,  0, 10),
-				perpendicularity,
+				perpendicular,
 				class(Class)
 			),
 			Classes0

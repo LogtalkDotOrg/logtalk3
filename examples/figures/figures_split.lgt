@@ -74,8 +74,8 @@
 	class(Class) :-
 		class(Class, _, _, _, _).
 
-	:- public(perpendicularity/0).
-	perpendicularity :-
+	:- public(perpendicular/0).
+	perpendicular :-
 		ground(vars(_S1_, _S2_)),
 		(	(_S1_ - _S2_) mod 90 =:= 0 ->
 			_P_ = true
