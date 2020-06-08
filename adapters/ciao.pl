@@ -241,7 +241,7 @@
 '$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
-'$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(tabling, supported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
@@ -533,7 +533,9 @@
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	'$lgt_ciao_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
+	(	Expanded0 = [_| _] ->
+		Expanded = Expanded0
+	;	Expanded0 == [] ->
 		Expanded  == []
 	;	Expanded0 =  {ExpandedDirective} ->
 		Expanded  =  {(:- ExpandedDirective)}
@@ -555,7 +557,7 @@
 		'$lgt_ciao_find_module_name'(Module)
 	;	true
 	).
-'$lgt_ciao_directive_expansion'(table(Predicates), {:- table(TPredicates)}) :-
+'$lgt_ciao_directive_expansion'(table(Predicates), [{:- use_package(tabling)}, {:- table(TPredicates)}]) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_ciao_table_directive_expansion'(Predicates, TPredicates).
 
