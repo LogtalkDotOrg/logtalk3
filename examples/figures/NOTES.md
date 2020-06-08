@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This folder contains an example of network modeling for recognizing polyhedra
+This folder contains two examples of network modeling for recognizing polyhedra
 represented as graphs as described in the following paper:
 
 	@inproceedings{Markov1989AFF,

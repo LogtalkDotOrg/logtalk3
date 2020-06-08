@@ -109,3 +109,36 @@ no
 
 Name = rhombus
 yes
+
+
+% take perpendicularity into account when checking the class of a figure:
+
+| ?- figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(1, 2,  0, 20),
+		edge(2, 3, 90, 20),
+		edge(3, 4,  0, 20),
+		edge(4, 1, 90, 20),
+		perpendicularity,
+		class(Name)
+	).
+
+Name = square ;
+Name = square ;
+Name = square ;
+Name = square ;
+no
+
+| ?- figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(a, b, 45, 10),
+		edge(b, c,  0, 10),
+		edge(c, d, 45, 10),
+		edge(d, a,  0, 10),
+		perpendicularity,
+		class(Name)
+	).
+
+Name = rhombus ;
+Name = rhombus ;
+Name = rhombus ;
+Name = rhombus ;
+no

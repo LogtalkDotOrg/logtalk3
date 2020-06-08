@@ -48,4 +48,24 @@
 			class(Name)
 		).
 
+	test(figures_split_01, true(Name == square)) :-
+		figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+			edge(1, 2,  0, 20),
+			edge(2, 3, 90, 20),
+			edge(3, 4,  0, 20),
+			edge(4, 1, 90, 20),
+			perpendicularity,
+			class(Name)
+		).
+
+	test(figures_split_02, true(Name == rhombus)) :-
+		figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+			edge(a, b, 45, 10),
+			edge(b, c,  0, 10),
+			edge(c, d, 45, 10),
+			edge(d, a,  0, 10),
+			perpendicularity,
+			class(Name)
+		).
+
 :- end_object.

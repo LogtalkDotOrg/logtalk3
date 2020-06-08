@@ -25,7 +25,7 @@
 
 	:- initialization((
 		logtalk_load(coroutining(loader)),
-		logtalk_load(figures, [optimize(on)])
+		logtalk_load([figures, figures_split], [optimize(on)])
 	)).
 
 :- else.
