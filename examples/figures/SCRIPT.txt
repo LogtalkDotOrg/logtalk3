@@ -55,6 +55,17 @@ Z = 4,
 P = 1 ;
 no
 
+| ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(1, 2,  0, 20),
+		edge(2, 3, 45, 30),
+		edge(3, 4,  0, 20),
+		edge(4, 1, 45, 30),
+		class(Name)
+	).
+
+Name = parallelogram
+yes
+
 
 % recognize a rhombus (the vertices rotation results in four solutions):
 
@@ -87,3 +98,14 @@ Y = c,
 Z = d,
 P = a ;
 no
+
+| ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(a, b, 45, 10),
+		edge(b, c,  0, 10),
+		edge(c, d, 45, 10),
+		edge(d, a,  0, 10),
+		class(Name)
+	).
+
+Name = rhombus
+yes

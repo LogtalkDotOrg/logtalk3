@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-05-20,
+		date is 2020-06-08,
 		comment is 'Unit tests for the "figures" example.'
 	]).
 
@@ -36,7 +36,7 @@
 			edge(2, 3, 45, 30),
 			edge(3, 4,  0, 20),
 			edge(4, 1, 45, 30),
-			class(Name, _, _, _, _)
+			class(Name)
 		).
 
 	test(figures_02, true(Name == rhombus)) :-
@@ -45,7 +45,7 @@
 			edge(b, c,  0, 10),
 			edge(c, d, 45, 10),
 			edge(d, a,  0, 10),
-			class(Name, _, _, _, _)
+			class(Name)
 		).
 
 :- end_object.

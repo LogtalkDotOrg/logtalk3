@@ -30,7 +30,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-05-20,
+		date is 2020-06-08,
 		comment is 'Example of network modeling for recognizing polyhedra represented as graphs.',
 		source is '"A framework for network modeling in Prolog", Zdravko I. Markov, IJCAI, 1989.'
 	]).
@@ -56,6 +56,10 @@
 		dif, ground(vars(_A_, _B_, _E_, _F_)).
 	class(rhombus,          _A_, _B_, _C_, _D_) :-
 		dif, ground(vars(_A_, _B_, _C_, _D_)).
+
+	:- public(class/1).
+	class(Class) :-
+		once(class(Class, _, _, _, _)).
 
 	% ensure that vertices, edge slopes, and
 	% edge lengths bindings are distinct
