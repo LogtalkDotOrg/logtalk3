@@ -34,6 +34,7 @@
 	]).
 
 	cover(figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)).
+	cover(figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)).
 
 	test(figures_01, true(Classes == [four_side_figure, parallelogram])) :-
 		findall(

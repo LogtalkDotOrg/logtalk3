@@ -74,6 +74,9 @@
 	class(Class) :-
 		class(Class, _, _, _, _).
 
+	% use perpendicularity to split perpendicular classes
+	% from non-perpendicular classes; should be called
+	% before the class/5 and class/1 predicates
 	:- public(perpendicular/0).
 	perpendicular :-
 		ground(vars(_S1_, _S2_)),

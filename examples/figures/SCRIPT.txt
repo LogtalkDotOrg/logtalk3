@@ -23,7 +23,7 @@ ________________________________________________________________________
 ...
 
 
-% recognize a parallelogram (the vertices rotation results in four solutions):
+% recognize a parallelogram (the vertices rotation results in four solutions per class):
 
 | ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(1, 2,  0, 20),
@@ -38,7 +38,17 @@ X = 1,
 Y = 2,
 Z = 3,
 P = 4 ;
+Name = four_side_figure,
+X = 1,
+Y = 2,
+Z = 3,
+P = 4 ;
 Name = parallelogram,
+X = 4,
+Y = 1,
+Z = 2,
+P = 3 ;
+Name = four_side_figure,
 X = 4,
 Y = 1,
 Z = 2,
@@ -49,6 +59,16 @@ Y = 4,
 Z = 1,
 P = 2 ;
 Name = parallelogram,
+X = 2,
+Y = 3,
+Z = 4,
+P = 1 ;
+Name = four_side_figure,
+X = 3,
+Y = 4,
+Z = 1,
+P = 2 ;
+Name = four_side_figure,
 X = 2,
 Y = 3,
 Z = 4,
@@ -64,13 +84,17 @@ no
 	).
 
 Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = four_side_figure ;
 Name = parallelogram ;
 Name = parallelogram ;
-Name = parallelogram ;
+Name = four_side_figure ;
+Name = four_side_figure ;
 no
 
 
-% recognize a rhombus (the vertices rotation results in four solutions):
+% recognize a rhombus (the vertices rotation results in four solutions per class):
 
 | ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(a, b, 45, 10),
@@ -81,6 +105,16 @@ no
 	).
 
 Name = rhombus,
+X = a,
+Y = b,
+Z = c,
+P = d ;
+Name = parallelogram,
+X = a,
+Y = b,
+Z = c,
+P = d ;
+Name = four_side_figure,
 X = a,
 Y = b,
 Z = c,
@@ -100,6 +134,36 @@ X = b,
 Y = c,
 Z = d,
 P = a ;
+Name = parallelogram,
+X = d,
+Y = a,
+Z = b,
+P = c ;
+Name = four_side_figure,
+X = d,
+Y = a,
+Z = b,
+P = c ;
+Name = parallelogram,
+X = c,
+Y = d,
+Z = a,
+P = b ;
+Name = parallelogram,
+X = b,
+Y = c,
+Z = d,
+P = a ;
+Name = four_side_figure,
+X = c,
+Y = d,
+Z = a,
+P = b ;
+Name = four_side_figure,
+X = b,
+Y = c,
+Z = d,
+P = a ;
 no
 
 | ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
@@ -111,9 +175,17 @@ no
 	).
 
 Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
 Name = rhombus ;
 Name = rhombus ;
 Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = four_side_figure ;
 no
 
 
@@ -129,9 +201,17 @@ no
 	).
 
 Name = square ;
+Name = rectangular ;
+Name = four_side_figure ;
 Name = square ;
 Name = square ;
 Name = square ;
+Name = rectangular ;
+Name = four_side_figure ;
+Name = rectangular ;
+Name = rectangular ;
+Name = four_side_figure ;
+Name = four_side_figure ;
 no
 
 | ?- figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
@@ -144,7 +224,15 @@ no
 	).
 
 Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
 Name = rhombus ;
 Name = rhombus ;
 Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = four_side_figure ;
 no
