@@ -50,10 +50,10 @@ standards compliance.
 * CHANGED: Abstract the calls to the `format/2-3` predicates to workaround
 portability issues with Tau Prolog and Scryer Prolog.
 
-* UPDATED: Support for Ciao Prolog. Contributed by José Morales.
+* UPDATED: Support for Ciao Prolog. Experimental. Contributed by José Morales.
 
-* UPDATED: Support for Tau Prolog. With contributions from José Antonio Riaza
-Valverde.
+* UPDATED: Support for Tau Prolog. Experimental. With contributions from José
+Antonio Riaza Valverde.
 
 Documentation
 -------------

@@ -32,7 +32,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 (which must be installed and up-to-date before running these scripts):
 
 * B-Prolog:       `bplgt`
-* Ciao Prolog:    `ciaolgt`    (first run may require `sudo`)
+* Ciao Prolog:    `ciaolgt`    (experimental; first run may require `sudo`)
 * CxProlog:       `cxlgt`
 * ECLiPSe:        `eclipselgt`
 * GNU Prolog:     `gplgt`
