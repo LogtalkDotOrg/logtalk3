@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.1"
+	echo "$(basename "$0") 2.2"
 	exit 0
 }
 
@@ -77,11 +77,6 @@ if gsed --version >/dev/null 2>&1 ; then
 else
 	sed="sed"
 fi
-
-# testing goals
-
-versions_goal="logtalk_load(library(tester_versions)),halt"
-versions_goal_dot="logtalk_load(library(tester_versions)),halt."
 
 format_default_goal="true"
 format_tap_goal="logtalk_load(lgtunit(tap_report))"
@@ -445,6 +440,8 @@ else
 	flag_goal="true"
 fi
 
+versions_goal="logtalk_load(library(tester_versions)),halt$dot"
+
 tester_optimal_goal="set_logtalk_flag(optimize,on),logtalk_load($driver),halt$dot"
 tester_normal_goal="logtalk_load($driver),halt$dot"
 tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load($driver),halt$dot"
@@ -466,6 +463,14 @@ fi
 
 drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
 testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+
+if  [ $testsets -eq 0 ] ; then
+	echo "%"
+	echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timeouts, 0 crashes"
+	echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
+	exit 0
+fi
+
 if [ "$output" == 'verbose' ] ; then
 	while read -r file && [ "$file" != "" ]; do
 		run_testset "$file"

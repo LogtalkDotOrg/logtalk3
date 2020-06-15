@@ -122,6 +122,8 @@ shrinking counter-examples.
 with two different backends in a row would result in the wrong results being
 reported for the second run if it resulted in the tests being skipped.
 
+* FIXED: Warnings when the `logtalk_tester` shell script finds no test sets.
+
 * FIXED: The `diagrams` tool `tester.lgt` file to avoid reloading the
 `types(pairs)` library dependency in non-optimized mode.
 
