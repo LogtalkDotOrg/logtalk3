@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "May 24, 2020" "Logtalk 3.39.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "June 15, 2020" "Logtalk 3.39.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -18,6 +18,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .I results
 .B ] [-t
 .I timeout
+.B ] [-n
+.I driver
 .B ] [-s
 .I prefix
 .B ] [-c
@@ -37,7 +39,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the current directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the \fIlogtalk_tester\fR script.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script.
 
 .SH OPTIONS
 .TP
@@ -61,6 +63,9 @@ Directory to store the test results. Default is the local \fI./logtalk_tester_lo
 .TP
 .BI \-t
 Timeout in seconds for running each test set. Default is \fI0\fR; i.e. disabled.
+.TP
+.BI \-n
+Name of the test driver and sourced files (minus file name extensions). Default is \fItester\fR.
 .TP
 .BI \-s
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.

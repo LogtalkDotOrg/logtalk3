@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on June 5, 2020
+##   Last updated on June 15, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.0"
+	echo "$(basename "$0") 2.1"
 	exit 0
 }
 
@@ -53,30 +53,11 @@ else
 	timeout_command=""
 fi
 
-# testing goals
-
-versions_goal="logtalk_load(library(tester_versions)),halt"
-versions_goal_dot="logtalk_load(library(tester_versions)),halt."
-
-tester_optimal_goal="set_logtalk_flag(optimize,on),logtalk_load(tester),halt"
-tester_optimal_goal_dot="set_logtalk_flag(optimize,on),logtalk_load(tester),halt."
-
-tester_normal_goal="logtalk_load(tester),halt"
-tester_normal_goal_dot="logtalk_load(tester),halt."
-
-tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load(tester),halt"
-tester_debug_goal_dot="set_logtalk_flag(debug,on),logtalk_load(tester),halt."
-
-format_default_goal="true"
-format_tap_goal="logtalk_load(lgtunit(tap_report))"
-format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
-
-coverage_default_goal="true"
-coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
-
 # default argument values
 
 backend=swi
+driver='tester'
+dot=""
 output='verbose'
 base="$PWD"
 level=""
@@ -84,8 +65,6 @@ results="$base/logtalk_tester_logs"
 mode='normal'
 format='default'
 coverage='none'
-format_goal=$format_default_goal
-coverage_goal=$coverage_default_goal
 flag_goal="true"
 initialization_goal="true"
 # disable timeouts to maintain backward compatibility
@@ -99,6 +78,20 @@ else
 	sed="sed"
 fi
 
+# testing goals
+
+versions_goal="logtalk_load(library(tester_versions)),halt"
+versions_goal_dot="logtalk_load(library(tester_versions)),halt."
+
+format_default_goal="true"
+format_tap_goal="logtalk_load(lgtunit(tap_report))"
+format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
+format_goal=$format_default_goal
+
+coverage_default_goal="true"
+coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
+coverage_goal=$coverage_default_goal
+
 run_testset() {
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
@@ -107,15 +100,15 @@ run_testset() {
 		echo "%"
 		echo "% $unit_short"
 	fi
-	if [ -f tester.sh ] ; then
+	if [ -f "$driver.sh" ] ; then
 		if [ $# -eq 0 ] ; then
-			source tester.sh -p $backend
+			source "$driver.sh" -p $backend
 		else
-			source tester.sh "$@"
+			source "$driver.sh" "$@"
 		fi
 		source_exit=$?
 		if [ "$source_exit" -gt 0 ] ; then
-			echo "%         source tester.sh returned code $source_exit"
+			echo "%         source $driver.sh returned code $source_exit"
 			exit 9
 		fi
 	fi
@@ -204,13 +197,15 @@ run_tests() {
 usage_help()
 {
 	echo 
-	echo "This script automates running unit tests found in the current directory"
-	echo "and recursively in its sub-directories by scanning for \"tester.logtalk\""
-	echo "and \"tester.lgt\" source files. In case of failed unit tests or test set"
-	echo "errors, this script returns a non-zero exit code."
+	echo "This script automates running unit tests found in the current directory and"
+	echo "recursively in its sub-directories by scanning by default for \"tester.lgt\""
+	echo "and \"tester.logtalk\" source files. In case of failed unit tests or test set"
+	echo "errors, this script returns a non-zero exit code. When a \"tester.sh\" file"
+	echo "exists in the tests directory, the file is sourced before running the tests."
+	echo "The \"tester.sh\" file is sourced with all the parameters passed to the script."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-- arguments]"
+	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -225,6 +220,7 @@ usage_help()
 	echo "     (valid values are default, tap, and xunit)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
+	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
 	echo "  -s suppress path prefix (default is $prefix)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (valid values are none and xml)"
@@ -238,7 +234,7 @@ usage_help()
 	echo
 }
 
-while getopts "vo:p:m:f:d:t:s:c:l:g:r:i:h" option
+while getopts "vo:p:m:f:d:t:n:s:c:l:g:r:i:h" option
 do
 	case $option in
 		v) print_version;;
@@ -248,6 +244,7 @@ do
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
+		n) n_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
@@ -313,19 +310,13 @@ elif [ "$p_arg" == "qp" ] || [ "$p_arg" == "qu-prolog" ] ; then
 	prolog='Qu-Prolog'
 	logtalk=qplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
-	versions_goal=$versions_goal_dot
-	tester_optimal_goal=$tester_optimal_goal_dot
-	tester_normal_goal=$tester_normal_goal_dot
-	tester_debug_goal=$tester_debug_goal_dot
+	dot="."
 elif [ "$p_arg" == "sicstus" ] || [ "$p_arg" == "sicstus-prolog" ] ; then
 	backend=sicstus
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk $i_arg --goal"
-	versions_goal=$versions_goal_dot
-	tester_optimal_goal=$tester_optimal_goal_dot
-	tester_normal_goal=$tester_normal_goal_dot
-	tester_debug_goal=$tester_debug_goal_dot
+	dot="."
 elif [ "$p_arg" == "swi" ] || [ "$p_arg" == "swi-prolog" ] ; then
 	backend=swi
 	prolog='SWI-Prolog'
@@ -341,19 +332,13 @@ elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk=xsblgt$extension
 	logtalk_call="$logtalk $i_arg -e"
-	versions_goal=$versions_goal_dot
-	tester_optimal_goal=$tester_optimal_goal_dot
-	tester_normal_goal=$tester_normal_goal_dot
-	tester_debug_goal=$tester_debug_goal_dot
+	dot="."
 elif [ "$p_arg" == "xsbmt" ] ; then
 	backend=xsbmt
 	prolog='XSB-MT'
 	logtalk=xsbmtlgt$extension
 	logtalk_call="$logtalk $i_arg -e"
-	versions_goal=$versions_goal_dot
-	tester_optimal_goal=$tester_optimal_goal_dot
-	tester_normal_goal=$tester_normal_goal_dot
-	tester_debug_goal=$tester_debug_goal_dot
+	dot="."
 elif [ "$p_arg" == "yap" ] ; then
 	backend=yap
 	prolog='YAP'
@@ -422,6 +407,10 @@ if [ "$s_arg" != "" ] ; then
 	prefix="$s_arg"
 fi
 
+if [ "$n_arg" != "" ] ; then
+	driver="$n_arg"
+fi
+
 if [ "$l_arg" != "" ] ; then
 	if [[ "$l_arg" =~ ^[1-9][0-9]*$ ]] ; then
 		level="-maxdepth $l_arg"
@@ -456,6 +445,10 @@ else
 	flag_goal="true"
 fi
 
+tester_optimal_goal="set_logtalk_flag(optimize,on),logtalk_load($driver),halt$dot"
+tester_normal_goal="logtalk_load($driver),halt$dot"
+tester_debug_goal="set_logtalk_flag(debug,on),logtalk_load($driver),halt$dot"
+
 mkdir -p "$results"
 rm -f "$results"/*.results
 rm -f "$results"/*.errors
@@ -471,8 +464,8 @@ if [ "$output" == 'verbose' ] ; then
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
 fi
 
-drivers="$(find "$base" $level -type f -name "tester.lgt" -or -name "tester.logtalk" | LC_ALL=C sort)"
-testsets=$(find "$base" $level -type f -name "tester.lgt" -or -name "tester.logtalk" | wc -l | tr -d ' ')
+drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
 if [ "$output" == 'verbose' ] ; then
 	while read -r file && [ "$file" != "" ]; do
 		run_testset "$file"

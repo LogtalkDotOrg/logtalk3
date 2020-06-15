@@ -105,6 +105,9 @@ Tools
 * ADDED: Support for the `subsumes/2` outcome for `test/2-3` test dialects to
 the `lgtunit` tool.
 
+* ADDED: Option to the `logtalk_tester` shell script to specify an alternative
+name for the tests driver and sourced files (minus the file name extensions).
+
 * UPDATED: The `help` tool for the new `logtalk_linter_hook/8` predicate.
 
 * UPDATED: The QuickCheck implementation to also print counter-example
