@@ -80,7 +80,7 @@ following table summarizes the availability of these features:
 |  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  
 | :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
 |  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |  
-|  Ciao Prolog     |       no      |       no      |       no      |       no      |       no      |  
+|  Ciao Prolog     |      yes      |       no      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |  
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
@@ -145,6 +145,10 @@ known issue is that most ISO Prolog standard and de facto standard predicates
 are not built-in predicates but library predicates. The internal predicate
 that checks predicate properties (defined in the adapter file) tries to
 workaround this issue for those predicates but the solution is fragile.
+There are also several standards compliance issues, notably with multifile
+predicates, that trigger errors with some tools and examples. These issues
+are expected to be solved soon. For the best experience, use the latest
+Ciao Prolog git version.
 
 
 CxProlog 0.98.1 or later versions
@@ -396,7 +400,10 @@ Experimental. Joint work with the Tau Prolog developers. For faster startups
 after the first one when using the provided `taulgt` integration script,
 edit the `core/core.pl` file and change the compiler flag `clean(on)` to
 `clean(off)` for loading the built-in entities (look into the end of the
-file for the predicate that loads them).
+file for the predicate that loads them). There are also some standards
+compliance issues and parser bugs that trigger errors with some tools
+and examples. These issues are expected to be solved soon. For the best
+experience, use the latest Tau Prolog git version.
 
 
 XSB 3.8.0 and later versions
