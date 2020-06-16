@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>logtalk_linter_hook/8 &mdash; The Logtalk Handbook v3.39.0-b04 documentation</title>
+  <title>logtalk_linter_hook/7 &mdash; The Logtalk Handbook v3.39.0-b05 documentation</title>
   
 
   
@@ -119,7 +119,7 @@
 <li class="toctree-l3"><a class="reference internal" href="compiling_predicates.html">Compiling and loading source files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flag_predicates.html">Flags</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="linter_predicates.html">Linter</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">logtalk_linter_hook/8</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">logtalk_linter_hook/7</a></li>
 </ul>
 </li>
 </ul>
@@ -190,14 +190,14 @@
         
           <li><a href="linter_predicates.html">Linter</a> &raquo;</li>
         
-      <li>logtalk_linter_hook/8</li>
+      <li>logtalk_linter_hook/7</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/predicates/logtalk_linter_hook_8.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/predicates/logtalk_linter_hook_7.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -211,20 +211,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="logtalk-linter-hook-8">
-<span id="predicates-logtalk-linter-hook-8"></span><span id="index-0"></span><h1>logtalk_linter_hook/8<a class="headerlink" href="#logtalk-linter-hook-8" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="logtalk-linter-hook-7">
+<span id="predicates-logtalk-linter-hook-7"></span><span id="index-0"></span><h1>logtalk_linter_hook/7<a class="headerlink" href="#logtalk-linter-hook-7" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Flag</span>, <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, <span class="nv">Warning</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="nv">Goal</span>, <span class="nv">Flag</span>, <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, <span class="nv">Warning</span>)
 </pre></div>
 </div>
-<p>Multifile user-defined predicate, supporting the definition of linter warnings
-for object predicates. Experimental. The <code class="docutils literal notranslate"><span class="pre">Flag</span></code> argument must be a supported
-linter flag. The <code class="docutils literal notranslate"><span class="pre">Warning</span></code> argument must be a valid <code class="docutils literal notranslate"><span class="pre">core</span></code> message term.</p>
+<p>Multifile user-defined predicate, supporting the definition of custom linter
+warnings. Experimental. The <code class="docutils literal notranslate"><span class="pre">Goal</span></code> argument can be a message sending goal,
+<code class="docutils literal notranslate"><span class="pre">Object::Message</span></code>, a call to a Prolog built-in predicate, or a call to a
+module predicate, <code class="docutils literal notranslate"><span class="pre">Module:Predicate</span></code>. The <code class="docutils literal notranslate"><span class="pre">Flag</span></code> argument must be a
+supported linter flag. The <code class="docutils literal notranslate"><span class="pre">Warning</span></code> argument must be a valid <code class="docutils literal notranslate"><span class="pre">core</span></code>
+message term.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="o">@</span>object_identifier, <span class="o">@</span>callable, <span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">+</span>pair(integer), <span class="o">+</span>atom, <span class="o">@</span>object_identifier, <span class="o">--</span>callable) <span class="o">-</span> zero_or_more
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="o">@</span>callable, <span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">+</span>pair(integer), <span class="o">+</span>atom, <span class="o">@</span>object_identifier, <span class="o">--</span>callable) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </div>
@@ -234,9 +237,9 @@ linter flag. The <code class="docutils literal notranslate"><span class="pre">Wa
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(user<span class="o">::</span>logtalk_linter_hook<span class="o">/</span><span class="m">8</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(user<span class="o">::</span>logtalk_linter_hook<span class="o">/</span><span class="m">7</span>).
 user<span class="o">::</span>logtalk_linter_hook(
-    list, append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), suspicious_calls,
+    list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), suspicious_calls,
     <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>,
     suspicious_call(<span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), [<span class="nv">L</span><span class="o">=</span>[<span class="nv">X</span>|<span class="nv">L2</span>]])
 ) <span class="o">:-</span>

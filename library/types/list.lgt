@@ -615,9 +615,9 @@
 
 	% linter warning definitions
 
-	:- multifile(user::logtalk_linter_hook/8).
+	:- multifile(user::logtalk_linter_hook/7).
 	user::logtalk_linter_hook(
-		list, append(L1, L2, L), suspicious_calls,
+		list::append(L1, L2, L), suspicious_calls,
 		File, Lines, Type, Entity,
 		suspicious_call(File, Lines, Type, Entity, list::append(L1, L2, L), [L = [X| L2]])
 	) :-

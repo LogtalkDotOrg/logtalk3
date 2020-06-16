@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.39.0 - June ??, 2020
+3.39.0 - June 17, 2020
 ======================
 
 Logtalk compiler and runtime
@@ -30,8 +30,8 @@ Logtalk compiler and runtime
 * CHANGED: The `logtalk` built-in object to call the portability abstraction
 for the `format/2-3` predicates.
 
-* ADDED: Linter hook predicate, `logtalk_linter_hook/8`, enabling libraries
-to define linter warnings. Experimental.
+* ADDED: Linter hook predicate, `logtalk_linter_hook/7`, enabling user-defined
+linter warnings. Experimental.
 
 * IMPROVED: Linter checks for tautologies and falsehoods in `is/2` goals.
 
@@ -108,7 +108,7 @@ the `lgtunit` tool.
 * ADDED: Option to the `logtalk_tester` shell script to specify an alternative
 name for the tests driver and sourced files (minus the file name extensions).
 
-* UPDATED: The `help` tool for the new `logtalk_linter_hook/8` predicate.
+* UPDATED: The `help` tool for the new `logtalk_linter_hook/7` predicate.
 
 * UPDATED: The QuickCheck implementation to also print counter-example
 shrink steps when using the `v(true)` option. 

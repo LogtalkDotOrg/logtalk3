@@ -23,4 +23,4 @@ Linter
 .. toctree::
    :maxdepth: 1
 
-   logtalk_linter_hook_8
+   logtalk_linter_hook_7

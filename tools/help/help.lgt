@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2020-06-03,
+		date is 2020-06-16,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -303,7 +303,7 @@
 	built_in_predicate(set_logtalk_flag, 2, '/manuals/refman/predicates/', 'set_logtalk_flag_2.html').
 	built_in_predicate(create_logtalk_flag, 3, '/manuals/refman/predicates/', 'create_logtalk_flag_3.html').
 
-	built_in_predicate(logtalk_linter_hook, 8, '/manuals/refman/predicates/', 'logtalk_linter_hook_8.html').
+	built_in_predicate(logtalk_linter_hook, 7, '/manuals/refman/predicates/', 'logtalk_linter_hook_7.html').
 
 	:- public(built_in_method/4).
 	:- mode(built_in_method(?atom, ?integer, -atom, -atom), zero_or_more).

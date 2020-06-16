@@ -196,8 +196,8 @@
 
 % extension point for the linter
 
-% logtalk_linter_hook(Object, Message, Flag, File, Lines, Type, Entity, Warning)
-:- multifile(logtalk_linter_hook/8).
+% logtalk_linter_hook(Goal, Flag, File, Lines, Type, Entity, Warning)
+:- multifile(logtalk_linter_hook/7).
 
 
 % term- and goal-expansion default compiler hooks
@@ -3464,7 +3464,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 39, 0, b04)).
+'$lgt_version_data'(logtalk(3, 39, 0, b05)).
 
 
 
@@ -13769,6 +13769,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_body'(':'(Module, Pred), TPred, DPred, Ctx).
 
+'$lgt_compile_body'(':'(Module, Pred), _, _, Ctx) :-
+	atom(Module),
+	callable(Pred),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	logtalk_linter_hook(':'(Module, Pred), Flag, File, Lines, Type, Entity, Warning),
+	nonvar(Flag),
+	'$lgt_valid_flag'(Flag),
+	'$lgt_compiler_flag'(Flag, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(Flag), Warning),
+	fail.
+
 '$lgt_compile_body'(':'(Module, Pred), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
@@ -15506,6 +15519,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % call to a Prolog built-in predicate
 
+'$lgt_compile_body'(Pred, _, _, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(Pred),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	logtalk_linter_hook(Pred, Flag, File, Lines, Type, Entity, Warning),
+	nonvar(Flag),
+	'$lgt_valid_flag'(Flag),
+	'$lgt_compiler_flag'(Flag, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(warning(Flag), Warning),
+	fail.
+
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	!,
@@ -17167,7 +17192,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	logtalk_linter_hook(Obj, Pred, Flag, File, Lines, Type, Entity, Warning),
+	logtalk_linter_hook(Obj::Pred, Flag, File, Lines, Type, Entity, Warning),
 	nonvar(Flag),
 	'$lgt_valid_flag'(Flag),
 	'$lgt_compiler_flag'(Flag, warning),

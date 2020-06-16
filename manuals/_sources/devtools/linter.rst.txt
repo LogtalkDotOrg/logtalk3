@@ -73,5 +73,5 @@ your code.
 
 Experimental support for extending the linter with user-defined warnings
 is available using the
-`logtalk_linter_hook/8 <../refman/predicates/logtalk_linter_hook_8.html>`__
+`logtalk_linter_hook/7 <../refman/predicates/logtalk_linter_hook_7.html>`__
 multifile hook predicate.

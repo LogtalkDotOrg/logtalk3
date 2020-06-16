@@ -15,10 +15,10 @@
    limitations under the License.
 
 
-.. index:: pair: logtalk_linter_hook/8; Built-in predicate
-.. _predicates_logtalk_linter_hook_8:
+.. index:: pair: logtalk_linter_hook/7; Built-in predicate
+.. _predicates_logtalk_linter_hook_7:
 
-logtalk_linter_hook/8
+logtalk_linter_hook/7
 =====================
 
 Description
@@ -26,11 +26,14 @@ Description
 
 ::
 
-   logtalk_linter_hook(Object, Message, Flag, File, Lines, Type, Entity, Warning)
+   logtalk_linter_hook(Goal, Flag, File, Lines, Type, Entity, Warning)
 
-Multifile user-defined predicate, supporting the definition of linter warnings
-for object predicates. Experimental. The ``Flag`` argument must be a supported
-linter flag. The ``Warning`` argument must be a valid ``core`` message term.
+Multifile user-defined predicate, supporting the definition of custom linter
+warnings. Experimental. The ``Goal`` argument can be a message sending goal,
+``Object::Message``, a call to a Prolog built-in predicate, or a call to a
+module predicate, ``Module:Predicate``. The ``Flag`` argument must be a
+supported linter flag. The ``Warning`` argument must be a valid ``core``
+message term.
 
 
 Modes and number of proofs
@@ -38,7 +41,7 @@ Modes and number of proofs
 
 ::
 
-   logtalk_linter_hook(@object_identifier, @callable, +atom, +atom, +pair(integer), +atom, @object_identifier, --callable) - zero_or_more
+   logtalk_linter_hook(@callable, +atom, +atom, +pair(integer), +atom, @object_identifier, --callable) - zero_or_more
 
 Errors
 ------
@@ -50,9 +53,9 @@ Examples
 
 ::
 
-   :- multifile(user::logtalk_linter_hook/8).
+   :- multifile(user::logtalk_linter_hook/7).
    user::logtalk_linter_hook(
-       list, append(L1,L2,L), suspicious_calls,
+       list::append(L1,L2,L), suspicious_calls,
        File, Lines, Type, Entity,
        suspicious_call(File, Lines, Type, Entity, list::append(L1,L2,L), [L=[X|L2]])
    ) :-
