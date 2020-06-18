@@ -1,15 +1,19 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>forward/1 &mdash; The Logtalk Handbook v3.39.0 documentation</title>
+  <title>forward/1 &mdash; The Logtalk Handbook v3.40.0-b01 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
 
   
   
@@ -17,7 +21,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -62,7 +63,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> The Logtalk Handbook
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> The Logtalk Handbook
           
 
           
@@ -75,7 +76,7 @@
             
             
               <div class="version">
-                3.39.0
+                3.40.0
               </div>
             
           
@@ -92,6 +93,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
     
@@ -146,6 +148,7 @@
     <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
   
         </div>
+        
       </div>
     </nav>
 
@@ -184,7 +187,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Reference Manual</a> &raquo;</li>
         
@@ -223,7 +226,7 @@
 <p>User-defined method for forwarding unknown messages sent to an object (using
 the <a class="reference internal" href="../control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct), automatically called
 by the runtime when defined. This method is declared in the
-<a class="reference external" href="../../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.39.0)"><span class="xref std std-ref">forwarding</span></a> built-in protocol as a
+<a class="reference external" href="../../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.40.0)"><span class="xref std std-ref">forwarding</span></a> built-in protocol as a
 <a class="reference internal" href="../directives/public_1.html#directives-public-1"><span class="std std-ref">public</span></a> predicate. Note that you can make
 its scope protected or private by using, respectively, <a class="reference internal" href="../../userman/inheritance.html#inheritance-scope"><span class="std std-ref">protected or
 private implementation</span></a> of the <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> protocol.</p>
@@ -276,11 +279,19 @@ private implementation</span></a> of the <code class="docutils literal notransla
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 1998-2020, Paulo Moura
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -291,7 +302,6 @@ private implementation</span></a> of the <code class="docutils literal notransla
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
