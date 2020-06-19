@@ -230,6 +230,9 @@ possible to run out of identifiers when using a <a class="reference internal" hr
 with bounded integer support. The portable solution, when creating a
 large number of dynamic category in long-running applications, is to
 recycle, whenever possible, the identifiers.</p>
+<p>When creating a new dynamic parametric category, access to the object
+parameters must use the <a class="reference internal" href="../methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> built-in execution
+context method.</p>
 <p>When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to
 avoid race conditions.</p>

@@ -39,6 +39,9 @@ with bounded integer support. The portable solution, when creating a
 large number of dynamic objects in long-running applications, is to
 recycle, whenever possible, the identifiers.
 
+When creating a new dynamic parametric object, access to the object parameters
+must use the :ref:`methods_parameter_2` built-in execution context method.
+
 When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to
 avoid race conditions.

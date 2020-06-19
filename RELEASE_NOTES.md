@@ -24,7 +24,11 @@ RELEASE NOTES
 3.40.0 - July ??, 2020
 ======================
 
+Documentation
+-------------
 
+* IMPROVED: The documentation of the `create_object/4` and `create_category/4`
+built-in predicates.
 
 
 3.39.0 - June 17, 2020
