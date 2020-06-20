@@ -29,6 +29,12 @@
 :- multifile(logtalk_linter_hook/7).
 :- dynamic(logtalk_linter_hook/7).
 
+:- multifile('$logtalk#0.debug_handler_provider#1'/2).
+:- dynamic('$logtalk#0.debug_handler_provider#1'/2).
+
+:- multifile('$logtalk#0.debug_handler#2'/3).
+:- dynamic('$logtalk#0.debug_handler#2'/3).
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
