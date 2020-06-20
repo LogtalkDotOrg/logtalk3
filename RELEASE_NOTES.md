@@ -30,6 +30,12 @@ Documentation
 * IMPROVED: The documentation of the `create_object/4` and `create_category/4`
 built-in predicates.
 
+Library
+-------
+
+* FIXED: The definition of the `os::operating_system_type/1` predicate for
+Tau Prolog.
+
 
 3.39.0 - June 17, 2020
 ======================
