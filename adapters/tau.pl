@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog
-%  Last updated on May 23, 2020
+%  Last updated on JUne 19, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -23,6 +23,11 @@
 
 :- use_module(library(lists)).
 :- use_module(library(os)).
+
+
+% workaround lack of support for static multifile predicates
+:- multifile(logtalk_linter_hook/7).
+:- dynamic(logtalk_linter_hook/7).
 
 
 
