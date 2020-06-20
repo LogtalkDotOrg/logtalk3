@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 20, 2020
+%  Last updated on June 20, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -282,6 +282,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- use_module(library(files), [
+	file_exists/1, directory_exists/1, make_directory/1
+]).
+
+
 % '$lgt_prolog_os_file_name'(+atom, -atom)
 % '$lgt_prolog_os_file_name'(-atom, +atom)
 %
@@ -304,7 +309,8 @@
 % checks if a file exists
 
 '$lgt_file_exists'(File) :-
-	?????
+	atom_chars(File, Chars),
+	file_exists(Chars).
 
 
 % '$lgt_delete_file'(+atom)
@@ -320,7 +326,8 @@
 % checks if a directory exists
 
 '$lgt_directory_exists'(Directory) :-
-	?????
+	atom_chars(Directory, Chars),
+	directory_exists(Chars).
 
 
 % '$lgt_current_directory'(-atom)
@@ -344,7 +351,8 @@
 % makes a new directory; succeeds if the directory already exists
 
 '$lgt_make_directory'(Directory) :-
-	?????
+	atom_chars(Directory, Chars),
+	make_directory(Chars).
 
 
 % '$lgt_directory_hash_as_atom'(+atom, -atom)
