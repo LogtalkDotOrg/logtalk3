@@ -141,7 +141,7 @@
 		remarks is [
 			'Option ``paths/1``' - 'Possible values are ``relative`` and ``absolute``. Default is ``relative``.',
 			'Option ``type/1``' - 'Possible values are ``all``, ``regular``, ``directory``. Default is ``all``.',
-			'Option ``extensions/1``' -'Argument is a list of required extensions (using the format ``\'.ext\'``). Default is the empty list.',
+			'Option ``extensions/1``' - 'Argument is a list of required extensions (using the format ``\'.ext\'``). Default is the empty list.',
 			'Option ``prefixes/1``' - 'Argument is a list of required file prefixes (atoms). Default is the empty list.',
 			'Option ``suffixes/1``' - 'Argument is a list of required file suffixes (atoms). Default is the empty list.',
 			'Option ``dot_files/1``' - 'Possible values are ``true`` and ``false``. Default is ``true``.'
