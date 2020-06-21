@@ -8986,8 +8986,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(ground, FileSpec),
 	% try to expand the file spec as the directive may be found in an included file
 	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
-	% assume that ensure_loaded/1 is also a built-in predicate
-	ensure_loaded(ExpandedFile),
+	% try to call ensure_loaded/1 as a built-in predicate but ignore any errors
+	catch(ensure_loaded(ExpandedFile), _, true),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(ExpandedFile)), sd(Term,VariableNames,File,Lines), Lines)).
 
@@ -8997,8 +8997,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(ground, FileSpec),
 	% try to expand the file spec as the directive may be found in an included file
 	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
-	% assume that use_module/1 is also a built-in predicate
-	use_module(ExpandedFile),
+	% try to call use_module/1 as a built-in predicate but ignore any errors
+	catch(use_module(ExpandedFile), _, true),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile)), sd(Term,VariableNames,File,Lines), Lines)).
 
@@ -9009,8 +9009,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(ground, Imports),
 	% try to expand the file spec as the directive may be found in an included file
 	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
-	% assume that use_module/2 is also a built-in predicate
-	use_module(ExpandedFile, Imports),
+	% try to call use_module/2 as a built-in predicate but ignore any errors
+	catch(use_module(ExpandedFile, Imports), _, true),
 	'$lgt_pp_term_variable_names_file_lines_'(Term, VariableNames, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile, Imports)), sd(Term,VariableNames,File,Lines), Lines)).
 

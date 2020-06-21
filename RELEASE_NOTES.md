@@ -24,6 +24,13 @@ RELEASE NOTES
 3.40.0 - July ??, 2020
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The compilation of file level `ensure_loaded/1` and `use_module/1-2`
+directives when using backend Prolog compilers such as Tau Prolog that don't
+support calling them as predicates.
+
 Documentation
 -------------
 
