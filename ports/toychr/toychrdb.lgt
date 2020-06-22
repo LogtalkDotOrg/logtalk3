@@ -107,9 +107,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0:4:1,
+		version is 0:4:2,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2020-03-02,
+		date is 2020-06-22,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
@@ -1054,9 +1054,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		write(' |_(_)\\/(_| ||   (_||_)  Version 3.1\n'),
 		write('      /\n'),
 		write('toychrdb version 1.0, Copyright (C) 2004 Gregory J. Duck\n'),
-		write('toychrdb comes with ABSOLUTELY NO WARRANTY; for details see `COPYING\'\n'),
+		write('toychrdb comes with ABSOLUTELY NO WARRANTY; for details see `COPYING''\n'),
 		write('This is free software, and you are welcome to redistribute it\n'),
-		write('under certain conditions; see `COPYING\' for details.\n\n').
+		write('under certain conditions; see `COPYING'' for details.\n\n').
 
 	:- initialization(banner).
 

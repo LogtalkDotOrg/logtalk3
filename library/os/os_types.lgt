@@ -21,14 +21,14 @@
 :- category(os_types).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2018-02-28,
+		date is 2020-06-22,
 		comment is 'A set of operating-system related types.',
 		remarks is [
 			'Provided types' - 'This category adds ``file``, ``file(Extensions)``, ``directory``, and ``environment_variable`` types for type-checking when using the ``type`` library object.',
 			'Type file' - 'For checking if a term is an atom and an existing file.',
-			'Type file(Extensions)' - 'For checking if a term is an atom and an existing file with one of the listed extensions (specified as ``\'.ext\'``).',
+			'Type file(Extensions)' - 'For checking if a term is an atom and an existing file with one of the listed extensions (specified as ``''.ext''``).',
 			'Type directory' - 'For checking if a term is an atom and an existing directory.',
 			'Type environment_variable' - 'For checking if a term is an atom and an existing environment variable.'
 		],

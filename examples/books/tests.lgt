@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2019-11-22,
+		date is 2020-06-22,
 		comment is 'Unit tests for the "books" example.'
 	]).
 
@@ -69,7 +69,7 @@
 
 	:- endif.
 
-	test(books_04, true(Titles == ['The Philosopher\'s Stone', 'The Chamber of Secrets', 'The Half-Blood Prince', 'The Deathly Hallows'])) :-
+	test(books_04, true(Titles == ['The Philosopher''s Stone', 'The Chamber of Secrets', 'The Half-Blood Prince', 'The Deathly Hallows'])) :-
 		data_processing::books_with_extras(Titles).
 
 :- end_object.
