@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-06-23,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
@@ -50,5 +50,21 @@
 	succeeds(iso_disjunction_2_05) :-
 		findall(X, {';'(X=1, X=2)}, L),
 		L == [1,2].
+
+	% tests from the Logtalk portability work
+
+	throws(lgt_disjunction_2_06, [error(type_error(callable,3),_), error(type_error(callable,(3;true)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{(Three; true)}.
+
+	throws(lgt_disjunction_2_07, [error(type_error(callable,3),_), error(type_error(callable,(fail;3)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{(fail; Three)}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.

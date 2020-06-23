@@ -47,9 +47,9 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-02-06,
+		date is 2020-06-23,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 
@@ -118,5 +118,24 @@ condition_opaque_to_cut_3(2).
 		% then part is cut transparent
 		findall(X, {';'(X=1, X=2), '*->'(true, !)}, L),
 		L == [1].
+
+	throws(lgt_soft_cut_2_3_18, [error(type_error(callable,3),_), error(type_error(callable,';'('*->'(3,true),fail)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{';'('*->'(Three, true), fail)}.
+
+	throws(lgt_soft_cut_2_3_19, [error(type_error(callable,3),_), error(type_error(callable,';'('*->'(true,3),fail)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{';'('*->'(true, Three), fail)}.
+
+	throws(lgt_soft_cut_2_3_20, [error(type_error(callable,3),_), error(type_error(callable,';'('*->'(fail,true),3)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{';'('*->'(fail, true), Three)}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.

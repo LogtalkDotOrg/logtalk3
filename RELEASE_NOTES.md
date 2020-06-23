@@ -43,6 +43,12 @@ Library
 * FIXED: The definition of the `os::operating_system_type/1` predicate for
 Tau Prolog.
 
+Tests
+-----
+
+* ADDED: Additional tests for Prolog control constructs for better coverage of
+expected exceptions when testing Prolog systems under development.
+
 
 3.39.0 - June 17, 2020
 ======================

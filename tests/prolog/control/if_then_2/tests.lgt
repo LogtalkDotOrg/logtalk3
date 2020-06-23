@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-01-26,
+		date is 2020-06-23,
 		comment is 'Unit tests for the ISO Prolog standard (->)/2 control construct.'
 	]).
 
@@ -67,5 +67,19 @@
 		% then part is cut transparent
 		findall(X, {';'(X=1, X=2), '->'(true, !)}, L),
 		L == [1].
+
+	throws(lgt_if_then_2_10, [error(type_error(callable,3),_), error(type_error(callable,'->'(3,true)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{'->'(Three, true)}.
+
+	throws(lgt_if_then_2_11, [error(type_error(callable,3),_), error(type_error(callable,'->'(true,3)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{'->'(true, Three)}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.

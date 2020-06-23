@@ -39,9 +39,9 @@ condition_opaque_to_cut(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-01-30,
+		date is 2020-06-23,
 		comment is 'Unit tests for the soft-cut if/3 built-in predicate.'
 	]).
 
@@ -79,5 +79,24 @@ condition_opaque_to_cut(2).
 	succeeds(if_3_09) :-
 		findall(X, {condition_opaque_to_cut(X)}, L),
 		L == [1, 2].
+
+	throws(if_3_10, [error(type_error(callable,3),_), error(type_error(callable,if(3,true,true)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{if(Three, true, true)}.
+
+	throws(if_3_11, [error(type_error(callable,3),_), error(type_error(callable,if(true,3,true)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{if(true, Three, true)}.
+
+	throws(if_3_12, [error(type_error(callable,3),_), error(type_error(callable,if(fail,true,3)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{if(fail, true, Three)}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.

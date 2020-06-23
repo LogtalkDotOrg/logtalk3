@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-12-06,
+		date is 2020-06-23,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
@@ -72,5 +72,24 @@
 		% it makes sense to test for correct semantics when a cut is found
 		% in the condition of an if-then-else
 		{';'('->'((!, fail), true), true)}.
+
+	throws(lgt_if_then_else_3_11, [error(type_error(callable,3),_), error(type_error(callable,';'('->'(3,true),fail)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{';'('->'(Three, true), fail)}.
+
+	throws(lgt_if_then_else_3_12, [error(type_error(callable,3),_), error(type_error(callable,';'('->'(true,3),fail)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{';'('->'(true, Three), fail)}.
+
+	throws(lgt_if_then_else_3_13, [error(type_error(callable,3),_), error(type_error(callable,';'('->'(fail,true),3)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{';'('->'(fail, true), Three)}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.

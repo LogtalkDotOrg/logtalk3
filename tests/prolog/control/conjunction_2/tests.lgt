@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-06-23,
 		comment is 'Unit tests for the ISO Prolog standard (,)/2 control construct.'
 	]).
 
@@ -40,5 +40,21 @@
 	succeeds(iso_conjunction_2_03) :-
 		{','(X = true, call(X))},
 		X == true.
+
+	% tests from the Logtalk portability work
+
+	throws(lgt_conjunction_2_04, [error(type_error(callable,3),_), error(type_error(callable,(3,true)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{(Three, true)}.
+
+	throws(lgt_conjunction_2_05, [error(type_error(callable,3),_), error(type_error(callable,(true,3)),_)]) :-
+		% try to delay the error to runtime
+		three(Three),
+		{(true, Three)}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.
