@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2018-02-08,
+		date is 2020-06-24,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -227,6 +227,11 @@
 	succeeds(lgt_current_op_3_47) :-
 		setof(P-T, {current_op(P, T, '-')}, PTs),
 		PTs == [200-fy, 500-yfx].
+
+	throws(lgt_current_op_3_48, [error(type_error(integer,a),_), error(domain_error(operator_priority,a),_)]) :-
+		% the standard specifies a domain_error(operator_priority,a) for this case
+		% but domain errors imply that the type is correct, which is not the case here
+		{current_op(a, _, _)}.
 
 	infix(yfx).
 	infix(xfx).

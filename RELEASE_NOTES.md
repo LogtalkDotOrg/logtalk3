@@ -49,6 +49,9 @@ Tests
 * ADDED: Additional tests for Prolog control constructs for better coverage of
 expected exceptions when testing Prolog systems under development.
 
+* ADDED: Missing test for an error condition of the Prolog standard predicate
+`current_op/3`.
+
 
 3.39.0 - June 17, 2020
 ======================
