@@ -258,8 +258,8 @@ to be named either <code class="docutils literal notranslate"><span class="pre">
 <h2>Integration with the make tool<a class="headerlink" href="#integration-with-the-make-tool" title="Permalink to this headline">¶</a></h2>
 <p>Loading this tool adds a definition for the
 <code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action/1</span></code> hook predicate for the target
-<code class="docutils literal notranslate"><span class="pre">documentation</span></code>. The hook definition checks that a single doclet
-object is loaded and, if true, sends an <code class="docutils literal notranslate"><span class="pre">update/0</span></code> message to it.</p>
+<code class="docutils literal notranslate"><span class="pre">documentation</span></code>. The hook definition sends an <code class="docutils literal notranslate"><span class="pre">update/0</span></code> message to
+each loaded doclet.</p>
 </div>
 <div class="section" id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">¶</a></h2>

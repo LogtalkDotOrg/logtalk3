@@ -46,6 +46,12 @@ Tau Prolog.
 Tools
 -----
 
+* CHANGED: The `doclet` tool integration with the `make` tool to run all the
+loaded doclets instead of requiring that a single doclet is loaded.
+
+* IMPROVED: Simplify the `zoom_doclet` doclet example by using the `lgt2svg`
+script.
+
 * IMPROVED: The `lgtdoc` tool no longer changes the current working directory
 when generating documenting XML files.
 

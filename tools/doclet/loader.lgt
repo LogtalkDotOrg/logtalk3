@@ -31,8 +31,7 @@
 :- dynamic(logtalk_make_target_action/1).
 
 logtalk_make_target_action(documentation) :-
-	findall(Doclet, extends_object(Doclet, doclet), Doclets),
-	(	Doclets = [MyDoclet] ->
-		MyDoclet::update
-	;	true
+	forall(
+		extends_object(Doclet, doclet),
+		Doclet::update
 	).

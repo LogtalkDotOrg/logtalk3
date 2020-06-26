@@ -54,8 +54,8 @@ Integration with the make tool
 
 Loading this tool adds a definition for the
 ``logtalk_make_target_action/1`` hook predicate for the target
-``documentation``. The hook definition checks that a single doclet
-object is loaded and, if true, sends an ``update/0`` message to it.
+``documentation``. The hook definition sends an ``update/0`` message to
+each loaded doclet.
 
 Other notes
 -----------
