@@ -43,6 +43,12 @@ Library
 * FIXED: The definition of the `os::operating_system_type/1` predicate for
 Tau Prolog.
 
+Tools
+-----
+
+* IMPROVED: The `lgtdoc` tool no longer changes the current working directory
+when generating documenting XML files.
+
 Tests
 -----
 

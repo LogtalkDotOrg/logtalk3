@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 5:2:0,
+		version is 5:3:0,
 		author is 'Paulo Moura',
-		date is 2020-02-03,
+		date is 2020-06-26,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -83,14 +83,10 @@
 	rlibrary(Library, UserOptions) :-
 		reset,
 		logtalk::expand_library_path(Library, TopPath),
-		os::working_directory(Current),
-		os::change_directory(TopPath),
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
-		os::change_directory(XMLDirectory),
-		output_rlibrary(TopPath, Options),
-		os::change_directory(Current).
+		output_rlibrary(TopPath, Options).
 
 	rlibrary(Library) :-
 		rlibrary(Library, []).
@@ -112,15 +108,11 @@
 	library(Library, UserOptions) :-
 		reset,
 		logtalk::expand_library_path(Library, Path),
-		os::working_directory(Current),
-		os::change_directory(Path),
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
-		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
-		write_indexes(Options),
-		os::change_directory(Current).
+		write_indexes(Options).
 
 	library(Library) :-
 		library(Library, []).
@@ -128,14 +120,10 @@
 	rdirectory(Directory, UserOptions) :-
 		reset,
 		os::absolute_file_name(Directory, Path),
-		os::working_directory(Current),
-		os::change_directory(Path),
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
-		os::change_directory(XMLDirectory),
-		output_rdirectory(Path, Options),
-		os::change_directory(Current).
+		output_rdirectory(Path, Options).
 
 	rdirectory(Directory) :-
 		rdirectory(Directory, []).
@@ -162,15 +150,11 @@
 	directory(Directory, UserOptions) :-
 		reset,
 		os::absolute_file_name(Directory, Path),
-		os::working_directory(Current),
-		os::change_directory(Path),
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
-		os::change_directory(XMLDirectory),
 		output_directory_files(Path, Options),
-		write_indexes(Options),
-		os::change_directory(Current).
+		write_indexes(Options).
 
 	directory(Directory) :-
 		directory(Directory, []).
@@ -195,14 +179,10 @@
 	file(Source, UserOptions) :-
 		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
-		os::working_directory(Current),
-		os::change_directory(Directory),
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
-		os::change_directory(XMLDirectory),
-		process(Basename, Directory, Options, StreamOptions),
-		os::change_directory(Current).
+		process(Basename, Directory, Options, StreamOptions).
 
 	file(Source) :-
 		file(Source, []).
@@ -211,16 +191,13 @@
 		reset,
 		merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
-		os::working_directory(Current),
 		os::make_directory(XMLDirectory),
-		os::change_directory(XMLDirectory),
 		(	logtalk::loaded_file_property(Path, directory(Directory)),
 			logtalk::loaded_file_property(Path, basename(File)),
 			logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 			process(File, Directory, Options, StreamOptions),
 			fail
-		;	write_indexes(Options),
-			os::change_directory(Current)
+		;	write_indexes(Options)
 		).
 
 	all :-
@@ -298,9 +275,11 @@
 	% writes to disk the entity documentation in XML format
 
 	write_entity_doc(Entity, Type, Options, StreamOptions) :-
+		memberchk(xml_docs_directory(XMLDirectory), Options),
 		entity_doc_file_name(Entity, File),
+		atom_concat(XMLDirectory, File, XMLFile),
 		convert_stream_options(StreamOptions, ConvertedStreamOptions),
-		open(File, write, Stream, ConvertedStreamOptions),
+		open(XMLFile, write, Stream, ConvertedStreamOptions),
 		write_entity_xml_file(File, Stream, Entity, Type, Options, StreamOptions),
 		close(Stream).
 
@@ -1386,7 +1365,9 @@
 	:- meta_predicate(write_index(*, 4, *, *)).
 
 	write_index(Type, Functor, File, Options) :-
-		open(File, write, Stream),
+		memberchk(xml_docs_directory(XMLDirectory), Options),
+		atom_concat(XMLDirectory, File, XMLFile),
+		open(XMLFile, write, Stream),
 		memberchk(xml_spec_reference(XMLSRef), Options),
 		(	member(encoding(Encoding), Options) ->
 			true
