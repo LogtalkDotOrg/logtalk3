@@ -67,6 +67,8 @@ expected exceptions when testing Prolog systems under development.
 * ADDED: Missing tests for an error condition of the Prolog standard predicate
 `stream_property/2`.
 
+* ADDED: Missing tests for the properties of standard Prolog streams.
+
 
 3.39.0 - June 17, 2020
 ======================

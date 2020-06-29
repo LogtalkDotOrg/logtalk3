@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2020-06-29,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
@@ -114,31 +114,73 @@
 	% tests from the Logtalk portability work
 
 	test(lgt_stream_property_2_08a, true) :-
+		stream_property(S, alias(user_input)),
+		findall(P, {stream_property(S, P)}, L),
+		memberchk(input, L).
+
+	test(lgt_stream_property_2_08b, true(Action == reset)) :-
+		stream_property(S, alias(user_input)),
+		{stream_property(S, eof_action(Action))}.
+
+	test(lgt_stream_property_2_08c, true(Mode == read)) :-
+		stream_property(S, alias(user_input)),
+		{stream_property(S, mode(Mode))}.
+
+	test(lgt_stream_property_2_08d, true(Reposition == false)) :-
+		stream_property(S, alias(user_input)),
+		{stream_property(S, reposition(Reposition))}.
+
+	test(lgt_stream_property_2_08e, true(Type == text)) :-
+		stream_property(S, alias(user_input)),
+		{stream_property(S, type(Type))}.
+
+	test(lgt_stream_property_2_09a, true) :-
+		stream_property(S, alias(user_output)),
+		findall(P, {stream_property(S, P)}, L),
+		memberchk(output, L).
+
+	test(lgt_stream_property_2_09b, true(Action == reset)) :-
+		stream_property(S, alias(user_output)),
+		{stream_property(S, eof_action(Action))}.
+
+	test(lgt_stream_property_2_09c, true(Mode == append)) :-
+		stream_property(S, alias(user_output)),
+		{stream_property(S, mode(Mode))}.
+
+	test(lgt_stream_property_2_09d, true(Reposition == false)) :-
+		stream_property(S, alias(user_output)),
+		{stream_property(S, reposition(Reposition))}.
+
+	test(lgt_stream_property_2_09e, true(Type == text)) :-
+		stream_property(S, alias(user_output)),
+		{stream_property(S, type(Type))}.
+
+	test(lgt_stream_property_2_10a, true) :-
 		stream_property(S, alias(user_error)),
 		findall(P, {stream_property(S, P)}, L),
 		memberchk(output, L).
 
-	test(lgt_stream_property_2_08b, true(Action == reset)) :-
+	test(lgt_stream_property_2_10b, true(Action == reset)) :-
 		stream_property(S, alias(user_error)),
 		{stream_property(S, eof_action(Action))}.
 
-	test(lgt_stream_property_2_08c, true(Mode == append)) :-
+	test(lgt_stream_property_2_10c, true(Mode == append)) :-
 		stream_property(S, alias(user_error)),
 		{stream_property(S, mode(Mode))}.
 
-	test(lgt_stream_property_2_08d, true(Reposition == false)) :-
+	test(lgt_stream_property_2_10d, true(Reposition == false)) :-
 		stream_property(S, alias(user_error)),
 		{stream_property(S, reposition(Reposition))}.
 
-	test(lgt_stream_property_2_08e, true(Type == text)) :-
+	test(lgt_stream_property_2_10e, true(Type == text)) :-
 		stream_property(S, alias(user_error)),
 		{stream_property(S, type(Type))}.
 
-	test(lgt_stream_property_2_09, error(existence_error(stream,_))) :-
+	test(lgt_stream_property_2_11, error(existence_error(stream,_))) :-
 		^^closed_input_stream(S, [alias(foo)]),
 		{stream_property(S, type(_))}.
 
-	test(lgt_stream_property_2_10, error(existence_error(stream,_))) :-
+	test(lgt_stream_property_2_12, error(existence_error(stream,_))) :-
 		^^closed_output_stream(S, [alias(bar)]),
 		{stream_property(S, type(_))}.
 
