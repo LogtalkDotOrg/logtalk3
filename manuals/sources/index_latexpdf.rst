@@ -20,12 +20,14 @@ The Logtalk Handbook
 
 .. toctree::
    :maxdepth: 3
-   :caption: Contents:
+   :caption: Contents
 
    userman/index
    refman/index
    tutorial/index
    faq/index
+   devtools/index
+   libraries/index
    glossary
    bibliography
 
