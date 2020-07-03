@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:1:1,
 		author is 'Paulo Moura',
-		date is 2020-06-03,
+		date is 2020-07-03,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -616,6 +616,10 @@
 	% linter warning definitions
 
 	:- multifile(user::logtalk_linter_hook/7).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
+		:- dynamic(user::logtalk_linter_hook/7).
+	:- endif.
 	user::logtalk_linter_hook(
 		list::append(L1, L2, L), suspicious_calls,
 		File, Lines, Type, Entity,

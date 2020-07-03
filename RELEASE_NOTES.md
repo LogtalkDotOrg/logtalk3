@@ -37,11 +37,17 @@ Documentation
 * IMPROVED: The documentation of the `create_object/4` and `create_category/4`
 built-in predicates.
 
+* FIXED: Include the developer tool and library overviews on the PDF version
+of the Handbook.
+
 Library
 -------
 
 * FIXED: The definition of the `os::operating_system_type/1` predicate for
 Tau Prolog.
+
+* FIXED: Workaround the lack of support for static multifile predicates in
+Qu-Prolog in the `list` library object.
 
 Tools
 -----
