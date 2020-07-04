@@ -31,6 +31,12 @@ Logtalk compiler and runtime
 directives when using backend Prolog compilers such as Tau Prolog that don't
 support calling them as predicates.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The Qu-Prolog adapter file definition of the internal '$lgt_format'/2
+predicate.
+
 Documentation
 -------------
 
