@@ -350,21 +350,25 @@
 		% try to delay the expected error to runtime
 		{G = (_X is div(7, 0)), call(G)}.
 
+	% check behavior when the first argument of is/2 is bound
+
 	test(lgt_is_2_81, true) :-
-		% try to delay the expected error to runtime
 		{2 is 4 - 2}.
 
 	test(lgt_is_2_82, fail) :-
-		% try to delay the expected error to runtime
 		{2 is 4 - 1}.
 
 	test(lgt_is_2_83, true) :-
-		% try to delay the expected error to runtime
 		{2.0 is 4.0 - 2.0}.
 
 	test(lgt_is_2_84, fail) :-
-		% try to delay the expected error to runtime
 		{2.0 is 4.0 - 1.0}.
+
+	test(lgt_is_2_85, fail) :-
+		{foo42 is 4 - 2}.
+
+	test(lgt_is_2_86, fail) :-
+		{foo42(_) is 4 - 2}.
 
 	% auxiliary predicates used to delay errors to runtime
 
