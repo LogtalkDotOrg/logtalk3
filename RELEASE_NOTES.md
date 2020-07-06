@@ -81,6 +81,9 @@ expected exceptions when testing Prolog systems under development.
 
 * ADDED: Missing tests for the properties of standard Prolog streams.
 
+* ADDED: Tests for the Prolog standard predicate `is/2` when the first argument
+is bound.
+
 
 3.39.0 - June 17, 2020
 ======================

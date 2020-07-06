@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2019-11-08,
+		date is 2020-07-06,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -349,6 +349,22 @@
 	test(lgt_is_2_80, error(evaluation_error(zero_divisor))) :-
 		% try to delay the expected error to runtime
 		{G = (_X is div(7, 0)), call(G)}.
+
+	test(lgt_is_2_81, true) :-
+		% try to delay the expected error to runtime
+		{2 is 4 - 2}.
+
+	test(lgt_is_2_82, fail) :-
+		% try to delay the expected error to runtime
+		{2 is 4 - 1}.
+
+	test(lgt_is_2_83, true) :-
+		% try to delay the expected error to runtime
+		{2.0 is 4.0 - 2.0}.
+
+	test(lgt_is_2_84, fail) :-
+		% try to delay the expected error to runtime
+		{2.0 is 4.0 - 1.0}.
 
 	% auxiliary predicates used to delay errors to runtime
 
