@@ -30,16 +30,16 @@ Description
 
 Declares object aliases. Typically used to shorten long object names, to
 simplify and consistently send messages to parameterized objects, and to
-simplify experimenting with different object implementations of the same
-protocol when using explicit message sending. Object aliases are local
-to the object (or category) where they are defined.
+simplify using or experimenting with different object implementations of
+the same protocol when using explicit message sending. Object aliases are
+local to the object (or category) where they are defined.
 
 The objects being aliased can be :term:`parameter variables <parameter variable>`
 or parametric objects where one of more parameters are parameter variables
 when using the directive in a parametric object or a parametric category
 defined in a source file (the common case).
 
-Declaring multiple aliases for the same object are allowed. But repeated
+Declaring multiple aliases for the same object is allowed. But repeated
 declarations of the same alias, declaring an alias for an object alias,
 and redefining an alias to reference a different object are reported as
 compilation errors.
