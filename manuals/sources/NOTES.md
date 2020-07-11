@@ -37,3 +37,9 @@ After completion, the exported files are found in the `_build` directory.
 The `build_manuals.sh` bash shell script can be used to both export the
 final formats and move the final files to the `manuals` root directory
 in the distribution.
+
+The required Python packages can be installed using the commands:
+
+	$ sudo pip install --upgrade pygments
+	$ sudo pip install --upgrade sphinx
+	$ sudo pip install --upgrade sphinx_rtd_theme

@@ -17,6 +17,17 @@ limitations under the License.
 ________________________________________________________________________
 
 
+This directory contains files used by the Logtalk API documentation. The
+sources are generated automatically in reStructuredText markup language
+using the `update_html_docs.sh` script and then converted to HTML, PDF,
+and ePub formats using Sphinx:
+
+http://sphinx-doc.org/
+
+The conversion uses the `sphinx_rtd_theme` theme:
+
+https://github.com/rtfd/sphinx_rtd_theme
+
 The Sphinx configuration file, `conf.py`, is renamed in this directory
 to `_conf.py` to avoid being picked up by the Read the Docs website
 builds. This file is temporarily renamed to the correct name by the
@@ -24,3 +35,9 @@ builds. This file is temporarily renamed to the correct name by the
 
 The `_templates/layout.html` file adds the links to the SVG diagrams
 and the index to the sidebar of the generated HTML documentation.
+
+The required Python packages can be installed using the commands:
+
+	$ sudo pip install --upgrade pygments
+	$ sudo pip install --upgrade sphinx
+	$ sudo pip install --upgrade sphinx_rtd_theme
