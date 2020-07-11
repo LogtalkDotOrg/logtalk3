@@ -27,6 +27,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Entity `use_module/1` directive to support the declaration of module
+aliases. The aliased modules can be parameter variables when using the
+directive in a parametric object or a parametric category.
+
 * FIXED: The compilation of file level `ensure_loaded/1` and `use_module/1-2`
 directives when using backend Prolog compilers such as Tau Prolog that don't
 support calling them as predicates.
@@ -83,6 +87,12 @@ expected exceptions when testing Prolog systems under development.
 
 * ADDED: Tests for the Prolog standard predicate `is/2` when the first argument
 is bound.
+
+Examples
+--------
+
+* ADDED: Simple example, `module_aliases`, illustrating the use of module
+aliases.
 
 
 3.39.0 - June 17, 2020

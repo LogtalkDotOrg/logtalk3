@@ -317,6 +317,9 @@ Follows a short description of each included example (in alphabetical order):
 - `modules`  
 	simple example of compiling Prolog modules as objects
 
+- `module_aliases`  
+	simple examples illustrating the use of module aliases
+
 - `msglog`  
 	example of using events and monitors for recording, replaying,
 	and printing user messages

@@ -316,6 +316,9 @@
 % '$lgt_pp_object_alias_'(Obj, Alias, CompilationContext)
 :- dynamic('$lgt_pp_object_alias_'/3).
 
+% '$lgt_pp_module_alias_'(Module, Alias, CompilationContext)
+:- dynamic('$lgt_pp_module_alias_'/3).
+
 % '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, CompilationContext)
 :- dynamic('$lgt_pp_uses_predicate_'/4).
 % '$lgt_pp_uses_non_terminal_'(Obj, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext)
@@ -3464,7 +3467,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 40, 0, b01)).
+'$lgt_version_data'(logtalk(3, 40, 0, b02)).
 
 
 
@@ -7976,6 +7979,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_parameter_variables_'(_)),
 	retractall('$lgt_pp_object_alias_'(_, _, _)),
+	retractall('$lgt_pp_module_alias_'(_, _, _)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _)),
@@ -9540,6 +9544,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_add_referenced_object'(Obj, Ctx),
 	'$lgt_compile_uses_directive'(Resources, Resources, Obj, false, Ctx).
 
+% use_module/1 entity directive
+
+'$lgt_compile_logtalk_directive'(use_module(Aliases), Ctx) :-
+	'$lgt_compile_use_module_directive'(Aliases, Aliases, Ctx).
+
 % use_module/2 predicate directive
 %
 % the first argument must be a module identifier; when a file specification
@@ -10929,6 +10938,62 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_uses_directive_predicate_call'(_, Alias, _, _, _) :-
 	functor(Alias, AliasFunctor, AliasArity),
 	throw(permission_error(modify, uses_object_predicate, AliasFunctor/AliasArity)).
+
+
+
+% '$lgt_compile_use_module_directive'(Aliases, Aliases, Ctx)
+%
+% auxiliary predicate for compiling use_module/1 directives
+
+'$lgt_compile_use_module_directive'([Alias| Aliases], Argument, Ctx) :-
+	!,
+	'$lgt_compile_use_module_directive_alias'(Alias, Argument, Ctx),
+	'$lgt_compile_use_module_directive'(Aliases, Argument, Ctx).
+
+'$lgt_compile_use_module_directive'([], _, _) :-
+	!.
+
+'$lgt_compile_use_module_directive'(_, Argument, _) :-
+	throw(type_error(list, Argument)).
+
+
+'$lgt_compile_use_module_directive_alias'(Module as Alias, Argument, Ctx) :-
+	var(Module),
+	'$lgt_pp_term_variable_names_file_lines_'((:- use_module(Argument)), VariableNames, _, _),
+	'$lgt_member'(VariableName=Variable, VariableNames),
+	Module == Variable,
+	'$lgt_pp_parameter_variables_'(ParameterVariablePairs),
+	'$lgt_member'(VariableName-_, ParameterVariablePairs),
+	% module argument is a parameter variable
+	!,
+	'$lgt_check'(module_identifier, Alias),
+	(	\+ \+ ('$lgt_pp_module_alias_'(Other, Alias, _), Module == Other) ->
+		throw(permission_error(repeat, module_alias, Alias))
+	;	\+ \+ '$lgt_pp_module_alias_'(_, Alias, _) ->
+		throw(permission_error(modify, module_alias, Alias))
+	;	% use a minimal compilation-context to preserve the binding
+		% between the parameter variable and the module argument
+		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+		assertz('$lgt_pp_module_alias_'(Module, Alias, NewCtx))
+	).
+
+'$lgt_compile_use_module_directive_alias'(Module as Alias, _, Ctx) :-
+	!,
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_check'(module_identifier, Alias),
+	(	\+ \+ '$lgt_pp_module_alias_'(Module, Alias, _) ->
+		throw(permission_error(repeat, module_alias, Alias))
+	;	\+ \+ '$lgt_pp_module_alias_'(_, Alias, _) ->
+		throw(permission_error(modify, module_alias, Alias))
+	;	\+ \+ '$lgt_pp_module_alias_'(_, Module, _) ->
+		throw(permission_error(create, module_alias, Alias))
+	;	'$lgt_add_referenced_module'(Module, Ctx),
+		assertz('$lgt_pp_module_alias_'(Module, Alias, _))
+	).
+
+'$lgt_compile_use_module_directive_alias'(Term, _, _) :-
+	throw(type_error(module_alias, Term)).
 
 
 
@@ -13768,6 +13833,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Callable = ':'(Module, Pred),
 	!,
 	'$lgt_compile_body'(':'(Module, Pred), TPred, DPred, Ctx).
+
+'$lgt_compile_body'(':'(Alias, Pred), TPred, '$lgt_debug'(goal(':'(Alias, Pred), TPred), ExCtx), Ctx) :-
+	atom(Alias),
+	'$lgt_pp_module_alias_'(Module, Alias, Ctx),
+	!,
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	'$lgt_compile_body'(':'(Module, Pred), TPred, _, Ctx).
 
 '$lgt_compile_body'(':'(Module, Pred), _, _, Ctx) :-
 	atom(Module),
@@ -22435,6 +22507,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_logtalk_entity_directive'(threaded).
 '$lgt_logtalk_entity_directive'(set_logtalk_flag(_, _)).
 '$lgt_logtalk_entity_directive'(uses(_)).
+'$lgt_logtalk_entity_directive'(use_module(_)).
 
 
 '$lgt_logtalk_predicate_directive'(synchronized(_)).

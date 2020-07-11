@@ -84,4 +84,5 @@ Examples
 .. seealso::
 
    :ref:`directives_uses_2`,
+   :ref:`directives_use_module_1`,
    :ref:`directives_use_module_2`

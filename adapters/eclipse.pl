@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on May 22, 2020
+%  Last updated on July 11, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -706,12 +706,16 @@ forall(Generate, Test) :-
 	'$lgt_flatten_to_list'(Conjunction, Exports).
 
 '$lgt_eclipse_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
+	File \= [_| _],
+	% not the Logtalk use_module/1 directive
 	logtalk_load_context(entity_type, module),
 	% we're compiling a module as an object; assume referenced modules are also compiled as objects
 	!,
 	'$lgt_eclipse_list_of_exports'(File, Module, Imports).
 
 '$lgt_eclipse_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
+	File \= [_| _],
+	% not the Logtalk use_module/1 directive
 	logtalk_load_context(entity_type, _),
 	'$lgt_eclipse_list_of_exports'(File, Module, Imports),
 	use_module(File).

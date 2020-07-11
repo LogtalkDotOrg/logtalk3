@@ -38,3 +38,4 @@ Entity directives
    set_logtalk_flag_2
    threaded_0
    uses_1
+   use_module_1

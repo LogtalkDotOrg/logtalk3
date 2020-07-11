@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on May 29, 2020
+%  Last updated on July 11, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -231,6 +231,7 @@ logtalk_library_path(mi, examples('mi/')).
 logtalk_library_path(miscellaneous, examples('miscellaneous/')).
 logtalk_library_path(missing_data, examples('missing_data/')).
 logtalk_library_path(modules, examples('modules/')).
+logtalk_library_path(module_aliases, examples('module_aliases/')).
 logtalk_library_path(msglog, examples('msglog/')).
 logtalk_library_path(mtbatch, threads('mtbatch/')).
 logtalk_library_path(multifile, examples('multifile/')).

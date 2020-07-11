@@ -159,6 +159,7 @@ identifier to delay to runtime the actual module to use:
 
 .. seealso::
 
+   :ref:`directives_use_module_1`,
    :ref:`directives_uses_2`,
    :ref:`directives_uses_1`,
    :ref:`directives_alias_2`
