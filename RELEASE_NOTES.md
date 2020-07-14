@@ -74,6 +74,11 @@ when generating documenting XML files.
 Tests
 -----
 
+* CHANGED: Moved tests for arithmetic functions `abs/1`, `ceiling/1`, `div/2`,
+`float/1`, `float_fractional_part/1`, `float_integer_part/1`, `floor/1`,
+`mod/2`, `rem/2`, `round/1`, and `truncate/1` from the `is/2` predicate test
+set to their own test sets.
+
 * ADDED: Additional tests for Prolog control constructs for better coverage of
 expected exceptions when testing Prolog systems under development.
 

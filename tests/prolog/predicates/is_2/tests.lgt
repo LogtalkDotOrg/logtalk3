@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-07-06,
+		date is 2020-07-14,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -143,231 +143,67 @@
 		foo(0, Foo),
 		{_X is '/'(Foo, 77)}.
 
-	test(iso_is_2_29, error(evaluation_error(zero_divisor))) :-
+	test(iso_is_2_29, error(type_error(evaluable,foo/1))) :-
+		% try to delay the error to runtime
+		foo(1, Foo),
+		{_X is '/'(77, Foo)}.
+
+	test(iso_is_2_30, error(evaluation_error(zero_divisor))) :-
 		% try to delay the expected error to runtime
 		{G = (_X is '/'(3, 0)), call(G)}.
 
-	test(iso_is_2_30, true(X == 1)) :-
-		{X is mod(7, 3)}.
-
-	test(iso_is_2_31, true(X == 0)) :-
-		{X is mod(0, 3+11)}.
-
-	test(iso_is_2_32, true(X == -1)) :-
-		{X is mod(7,-2)}.
-
-	test(iso_is_2_33, error(instantiation_error)) :-
-		% try to delay the error to runtime
-		variable(N),
-		{_X is mod(77, N)}.
-
-	test(iso_is_2_34, error(type_error(evaluable,foo/0))) :-
-		% try to delay the error to runtime
-		foo(0, Foo),
-		{_X is mod(Foo, 77)}.
-
-	test(iso_is_2_35, error(type_error(integer,7.5))) :-
-		% try to delay the expected error to runtime
-		{G = (_X is mod(7.5, 2)), call(G)}.
-
-	test(iso_is_2_36, error(evaluation_error(zero_divisor))) :-
-		% try to delay the expected error to runtime
-		{G = (_X is mod(7, 0)), call(G)}.
-
-	test(iso_is_2_37, true(X == 7)) :-
-		{X is floor(7.4)}.
-
-	test(iso_is_2_38, true(X == -1)) :-
-		{X is floor(-0.4)}.
-
-	test(iso_is_2_39, true(X == 8)) :-
-		{X is round(7.5)}.
-
-	test(iso_is_2_40, true(X == 8)) :-
-		{X is round(7.6)}.
-
-	test(iso_is_2_41, true(X == -1)) :-
-		{X is round(-0.6)}.
-
-	test(iso_is_2_42, error(instantiation_error)) :-
-		% try to delay the error to runtime
-		variable(N),
-		{_X is round(N)}.
-
-	test(iso_is_2_43, true(X == 0)) :-
-		{X is ceiling(-0.5)}.
-
-	test(iso_is_2_44, true(X == 0)) :-
-		{X is truncate(-0.5)}.
-
-	test(iso_is_2_45, error(type_error(evaluable,foo/0))) :-
-		% try to delay the error to runtime
-		foo(0, Foo),
-		{_X is truncate(Foo)}.
-
-	test(iso_is_2_46, true(X == 7.0)) :-
-		{X is float(7)}.
-
-	test(iso_is_2_47, true(X == 7.3)) :-
-		{X is float(7.3)}.
-
-	test(iso_is_2_48, true(X == 1.0)) :-
-		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
-		{X is float(5//3)}.
-
-	test(iso_is_2_49, error(instantiation_error)) :-
-		% try to delay the error to runtime
-		variable(N),
-		{_X is float(N)}.
-
-	test(iso_is_2_50, error(type_error(evaluable,foo/0))) :-
-		% try to delay the error to runtime
-		foo(0, Foo),
-		{_X is float(Foo)}.
-
-	test(iso_is_2_51, true(X == 7)) :-
-		{X is abs(7)}.
-
-	test(iso_is_2_52, true(X == 8)) :-
-		{X is abs(3-11)}.
-
-	test(iso_is_2_53, true(X == 7.8)) :-
-		{X is abs(3.2-11.0)}.
-
-	test(iso_is_2_54, error(instantiation_error)) :-
-		% try to delay the error to runtime
-		variable(N),
-		{_X is abs(N)}.
-
-	test(iso_is_2_55, error(type_error(evaluable,foo/0))) :-
-		% try to delay the error to runtime
-		foo(0, Foo),
-		{_X is abs(Foo)}.
-
 	:- if(current_prolog_flag(bounded, true)).
 
-	test(iso_is_2_56, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_31, error(evaluation_error(int_overflow))) :-
 		{current_prolog_flag(max_integer, MI), _X is '+'(MI,1)}.
 
-	test(iso_is_2_57, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_32, error(evaluation_error(int_overflow))) :-
 		{current_prolog_flag(max_integer, MI), _X is '-'('+'(MI,1),1)}.
 
-	test(iso_is_2_58, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_33, error(evaluation_error(int_overflow))) :-
 		% ISO allows min_integer = -(max_integer + 1)
 		{current_prolog_flag(max_integer, MI), _X is '-'(-2,MI)}.
 
-	test(iso_is_2_59, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_34, error(evaluation_error(int_overflow))) :-
 		{current_prolog_flag(max_integer, MI), _X is '*'(MI,2)}.
 
-	test(iso_is_2_60, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_35, error(evaluation_error(int_overflow))) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is floor(R)}.
 
 	:- else.
 
-	test(iso_is_2_56).
+	test(iso_is_2_31).
 
-	test(iso_is_2_57).
+	test(iso_is_2_32).
 
-	test(iso_is_2_58).
+	test(iso_is_2_33).
 
-	test(iso_is_2_59).
+	test(iso_is_2_34).
 
-	test(iso_is_2_60).
+	test(iso_is_2_35).
 
 	:- endif.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_is_2_61, error(type_error(evaluable,foo/3))) :-
-		% try to delay the error to runtime
-		foo(3, Foo),
-		{_X is abs(Foo)}.
-
-	% tests from the ECLiPSe test suite
-
-	test(eclipse_is_2_62, true(X == 3)) :-
-		{X is floor(3.5)}.
-
-	test(eclipse_is_2_63, true(X == 4)) :-
-		{X is ceiling(3.5)}.
-
-	test(eclipse_is_2_64, true(X == 3)) :-
-		{X is truncate(3.5)}.
-
-	test(eclipse_is_2_65, true(X == 4)) :-
-		{X is round(3.5)}.
-
-	test(eclipse_is_2_66, true(X == 5)) :-
-		{X is round(4.5)}.
-
-	test(eclipse_is_2_67, true(X == -4)) :-
-		{X is floor(-3.5)}.
-
-	test(eclipse_is_2_68, true(X == -3)) :-
-		{X is ceiling(-3.5)}.
-
-	test(eclipse_is_2_69, true(X == -3)) :-
-		{X is truncate(-3.5)}.
-
-	test(eclipse_is_2_70, true(X == -3)) :-
-		{X is round(-3.5)}.
-
-	test(eclipse_is_2_71, true(X == -4)) :-
-		{X is round(-4.5)}.
-
-	test(eclipse_is_2_72, true(X > 0)) :-
-		{X = log(9.9)}.
-
-	test(eclipse_is_2_73, true(_ is X + 1)) :-
-		{X = log(9.9)}.
-
-	% tests from the Logtalk portability work
-
-	test(lgt_is_2_74, true(X == 2)) :-
-		{X is div(7, 3)}.
-
-	test(lgt_is_2_75, true(X == 0)) :-
-		{X is div(0, 3+11)}.
-
-	test(lgt_is_2_76, true(X == -4)) :-
-		{X is div(7,-2)}.
-
-	test(lgt_is_2_77, error(instantiation_error)) :-
-		% try to delay the error to runtime
-		variable(N),
-		{_X is div(77, N)}.
-
-	test(lgt_is_2_78, error(type_error(evaluable,foo/0))) :-
-		% try to delay the error to runtime
-		foo(0, Foo),
-		{_X is div(Foo, 77)}.
-
-	test(lgt_is_2_79, error(type_error(integer,7.5))) :-
-		% try to delay the expected error to runtime
-		{G = (_X is div(7.5, 2)), call(G)}.
-
-	test(lgt_is_2_80, error(evaluation_error(zero_divisor))) :-
-		% try to delay the expected error to runtime
-		{G = (_X is div(7, 0)), call(G)}.
-
 	% check behavior when the first argument of is/2 is bound
 
-	test(lgt_is_2_81, true) :-
+	test(lgt_is_2_36, true) :-
 		{2 is 4 - 2}.
 
-	test(lgt_is_2_82, fail) :-
+	test(lgt_is_2_37, fail) :-
 		{2 is 4 - 1}.
 
-	test(lgt_is_2_83, true) :-
+	test(lgt_is_2_38, true) :-
 		{2.0 is 4.0 - 2.0}.
 
-	test(lgt_is_2_84, fail) :-
+	test(lgt_is_2_39, fail) :-
 		{2.0 is 4.0 - 1.0}.
 
-	test(lgt_is_2_85, fail) :-
+	test(lgt_is_2_40, fail) :-
 		{foo42 is 4 - 2}.
 
-	test(lgt_is_2_86, fail) :-
+	test(lgt_is_2_41, fail) :-
 		{foo42(_) is 4 - 2}.
 
 	% auxiliary predicates used to delay errors to runtime
@@ -376,7 +212,5 @@
 
 	foo(0, foo).
 	foo(1, foo(1)).
-	foo(2, foo(1,2)).
-	foo(3, foo(1,2,3)).
 
 :- end_object.
