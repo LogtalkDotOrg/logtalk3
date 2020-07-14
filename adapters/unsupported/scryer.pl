@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on June 20, 2020
+%  Last updated on July 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -390,8 +390,10 @@
 %
 % access to operating-system environment variables
 
+:- use_module(library(os), [getenv/2]).
+
 '$lgt_environment_variable'(Variable, Value) :-
-	?????
+	getenv(Variable, Value).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
@@ -401,7 +403,37 @@
 % be the empty atom when it does not exist
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	?????
+	atom_codes(File, FileCodes),
+	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+		atom_codes(Basename, BasenameCodes),
+		atom_concat(Directory, Basename, File)
+	;	Directory = './',
+		atom_codes(Basename, FileCodes),
+		BasenameCodes = FileCodes
+	),
+	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
+		atom_codes(Extension, ExtensionCodes),
+		atom_concat(Name, Extension, Basename)
+	;	Name = Basename,
+		Extension = ''
+	).
+
+
+% the following auxiliary predicate is simplified version of code
+% written by Per Mildner and is used here with permission
+'$lgt_strrch'(Xs, G, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch'(Xs1, G, Ys)
+	).
+
+'$lgt_strrch1'([], _G, Ys, Ys).
+'$lgt_strrch1'([X| Xs1], G, Prev, Ys) :-
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, [X| Xs1], Ys)
+	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	).
 
 
 
