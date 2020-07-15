@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on July 11, 2020
+%  Last updated on July 15, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -434,7 +434,7 @@ forall(Generate, Test) :-
 	os_file_name(PrologPath, OSPath).
 
 
-% '$lgt_expand_path'(+nonvar, -atom)
+% '$lgt_expand_path'(+atom, -atom)
 %
 % expands a file path to a full path
 

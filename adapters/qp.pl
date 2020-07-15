@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on July 4, 2020
+%  Last updated on July 15, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -363,7 +363,7 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 '$lgt_prolog_os_file_name'(Path, Path).
 
 
-% '$lgt_expand_path'(+nonvar, -atom)
+% '$lgt_expand_path'(+atom, -atom)
 %
 % expands a file path to a full path
 

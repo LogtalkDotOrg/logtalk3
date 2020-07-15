@@ -286,7 +286,7 @@ numbervars(Term, From, Next) :-
 	?????
 
 
-% '$lgt_expand_path'(+nonvar, -atom)
+% '$lgt_expand_path'(+atom, -atom)
 %
 % expands a file path to a full path
 

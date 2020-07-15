@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Tau Prolog
-%  Last updated on June 20, 2020
+%  Adapter file for Tau Prolog 0.3.0 and later versions
+%  Last updated on July 15, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -307,7 +307,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_os_file_name'(Path, Path).
 
 
-% '$lgt_expand_path'(+nonvar, -atom)
+% '$lgt_expand_path'(+atom, -atom)
 %
 % expands a file path to a full path
 

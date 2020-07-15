@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on July 14, 2020
+%  Last updated on July 15, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -283,6 +283,7 @@
 
 
 :- use_module(library(files), [
+	path_canonical/2,
 	delete_file/1, file_exists/1, directory_exists/1,
 	make_directory/1, working_directory/2
 ]).
@@ -297,12 +298,12 @@
 	?????
 
 
-% '$lgt_expand_path'(+nonvar, -atom)
+% '$lgt_expand_path'(+atom, -atom)
 %
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	?????
+	path_canonical(Path, ExpandedPath).
 
 
 % '$lgt_file_exists'(+atom)
