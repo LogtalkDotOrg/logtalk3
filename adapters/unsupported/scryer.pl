@@ -283,7 +283,8 @@
 
 
 :- use_module(library(files), [
-	file_exists/1, directory_exists/1, make_directory/1
+	delete_file/1, file_exists/1, directory_exists/1,
+	make_directory/1, working_directory/2
 ]).
 
 
@@ -318,7 +319,7 @@
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	?????
+	delete_file(File).
 
 
 % '$lgt_directory_exists'(+atom)
@@ -335,7 +336,7 @@
 % gets current working directory
 
 '$lgt_current_directory'(Directory) :-
-	?????
+	working_directory(Directory, Directory).
 
 
 % '$lgt_change_directory'(+atom)
@@ -343,7 +344,7 @@
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	?????
+	working_directory(_, Directory).
 
 
 % '$lgt_make_directory'(+atom)
@@ -360,6 +361,7 @@
 % returns the directory hash as an atom
 
 '$lgt_directory_hash_as_atom'(_, '').
+
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
 %
