@@ -17,8 +17,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains files used when building Windows 2000/XP/7 GUI 
-installers using Inno Setup 5.3.0 Unicode (or a later version):
+This directory contains files used when building Windows GUI installers
+using Inno Setup 5.3.0 Unicode (or a later version):
 
 	http://www.jrsoftware.org/isinfo.php
 
@@ -48,5 +48,6 @@ The installer can be run in silent mode when executed at the command-line
 by using the option `/SILENT` (progress window is show) or `/VERYSILENT`
 (no progress window).
 
-The installation directory can be set at the command-line by using the
-option `/DIR=path`.
+The installation directory can be set at the command-line by using
+the option `/DIR=path` or by defining the value of the `LOGTALKHOME`
+environment variable prior to running the installer.

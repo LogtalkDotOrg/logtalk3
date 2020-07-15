@@ -99,6 +99,12 @@ Examples
 * ADDED: Simple example, `module_aliases`, illustrating the use of module
 aliases.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installer notes on how to change the default system
+installation directory.
+
 
 3.39.0 - June 17, 2020
 ======================
