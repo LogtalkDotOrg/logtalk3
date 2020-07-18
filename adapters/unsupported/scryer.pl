@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on July 15, 2020
+%  Last updated on July 16, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -284,8 +284,8 @@
 
 :- use_module(library(files), [
 	path_canonical/2,
-	delete_file/1, file_exists/1, directory_exists/1,
-	make_directory/1, working_directory/2
+	delete_file/1, file_exists/1, file_modification_time/2,
+	directory_exists/1, make_directory/1, working_directory/2
 ]).
 
 
@@ -294,8 +294,7 @@
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
-	?????
+'$lgt_prolog_os_file_name'(Path, Path).
 
 
 % '$lgt_expand_path'(+atom, -atom)
@@ -386,7 +385,7 @@
 % gets a file modification time, assumed to be an opaque term but comparable
 
 '$lgt_file_modification_time'(File, Time) :-
-	?????
+	file_modification_time(File, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
