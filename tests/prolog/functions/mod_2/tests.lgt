@@ -24,20 +24,20 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-07-14,
+		date is 2020-07-22,
 		comment is 'Unit tests for the ISO Prolog standard mod/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.1.7
 
 	test(iso_mod_2_01, true(X == 1)) :-
-		{X is mod(7, 3)}.
+		{X is mod(5, 2)}.
 
 	test(iso_mod_2_02, true(X == 0)) :-
 		{X is mod(0, 3+11)}.
 
 	test(iso_mod_2_03, true(X == -1)) :-
-		{X is mod(7,-2)}.
+		{X is mod(5,-2)}.
 
 	test(iso_mod_2_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
@@ -63,6 +63,9 @@
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is abs(Foo)}.
+
+	test(lgt_mod_2_09, true(X == 1)) :-
+		{X is mod(-5, 2)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
