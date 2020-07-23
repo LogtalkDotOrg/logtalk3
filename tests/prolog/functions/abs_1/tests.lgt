@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-07-14,
+		date is 2020-07-23,
 		comment is 'Unit tests for the ISO Prolog standard abs/1 built-in function.'
 	]).
 
@@ -55,6 +55,9 @@
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is abs(Foo)}.
+
+	test(lgt_abs_1_07, true(X == 7.0)) :-
+		{X is abs(7.0)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
