@@ -93,6 +93,9 @@ expected exceptions when testing Prolog systems under development.
 * ADDED: Tests for the Prolog standard predicate `is/2` when the first argument
 is bound.
 
+* ADDED: Tests for the de facto standard `log/2` and `log10/1` arithmetic
+functions.
+
 Examples
 --------
 
