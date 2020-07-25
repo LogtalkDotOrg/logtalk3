@@ -28,9 +28,9 @@ https://www.swi-prolog.org/pldoc/man?section=pengine-examples
 The main issue when reusing the original example code from within an object
 is that the `pengines:pengine_create/1` meta-predicate template is ambiguous
 due to the use of `:` as the meta-predicate argument specifier (Logtalk is
-not based on a predicate-prefixing mechanism as used by Prolog modules).
-Thus, we must override the template using the following directive to avoid
-a compilation error:
+not based on a predicate-prefixing mechanism as used by most Prolog module
+systems). Thus, we must override the template using the following directive
+to avoid a compilation error:
 
 	:- meta_predicate(pengines:pengine_create(*)).
 

@@ -38,8 +38,8 @@ support calling them as predicates.
 Prolog adapter and integration files
 ------------------------------------
 
-* FIXED: The Qu-Prolog adapter file definition of the internal '$lgt_format'/2
-predicate.
+* FIXED: The Qu-Prolog adapter file definition of the `'$lgt_format'/2`
+internal predicate.
 
 Documentation
 -------------
