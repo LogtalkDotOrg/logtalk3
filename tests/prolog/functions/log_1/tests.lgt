@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2020-07-28,
 		comment is 'Unit tests for the ISO Prolog standard log/1 built-in function.'
 	]).
 
@@ -67,17 +67,17 @@
 
 	% it is undisputed that the evaluable function log/1 should throw undefined for negative numbers
 	% many Prolog systems even don't throw en error but return NaN
-	throws(eclipse_log_1_01, error(evaluation_error(undefined),_)) :-
+	throws(eclipse_log_1_07, error(evaluation_error(undefined),_)) :-
 		{_X is log(-1)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_log_1_07, error(type_error(evaluable,foo/1),_)) :-
+	throws(lgt_log_1_08, error(type_error(evaluable,foo/1),_)) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is log(Foo)}.
 
-	throws(lgt_log_1_08, error(type_error(evaluable,foo/2),_)) :-
+	throws(lgt_log_1_09, error(type_error(evaluable,foo/2),_)) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is log(Foo)}.
