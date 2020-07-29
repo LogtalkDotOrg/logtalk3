@@ -24,7 +24,10 @@ RELEASE NOTES
 3.41.0 - August ??, 2020
 ========================
 
+Tests
+-----
 
+* ADDED: Additional tests for the `(=..)/2` Prolog standard predicate.
 
 
 3.40.0 - July 29, 2020
