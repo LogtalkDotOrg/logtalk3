@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2017-08-24,
+		date is 2020-07-30,
 		comment is 'Unit tests for the ISO Prolog standard get_code/1-2 built-in predicates.'
 	]).
 
@@ -135,6 +135,12 @@
 	throws(lgt_get_code_2_20, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{get_code(s, _)}.
+
+	succeeds(lgt_get_code_2_21) :-
+		^^set_text_input(st_i, ''),
+		{get_code(st_i, -1)},
+		stream_property(Stream, alias(st_i)),
+		stream_property(Stream, end_of_stream(past)).
 
 	cleanup :-
 		^^clean_file(t),

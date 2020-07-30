@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2017-08-24,
+		date is 2020-07-30,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -116,10 +116,14 @@
 	% tests from the Logtalk portability work
 
 	succeeds(lgt_peek_char_2_17) :-
+		^^set_text_input(s, ''),
+		{get_char(s, end_of_file)}.
+
+	succeeds(lgt_peek_char_2_18) :-
 		^^set_text_input(s, '', [eof_action(eof_code)]),
 		{get_char(s, end_of_file), peek_char(s, end_of_file)}.
 
-	throws(lgt_peek_char_2_18, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_char_2_19, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{peek_char(s, _)}.
 

@@ -31,6 +31,9 @@ Tests
 
 * ADDED: Additional tests for Prolog standard list syntax.
 
+* ADDED: Additional tests for Prolog standard character input/output predicates
+for checking calls with a bound argument.
+
 
 3.40.0 - July 29, 2020
 ======================

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2017-08-24,
+		date is 2020-07-30,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -96,15 +96,20 @@
 	% tests from the Logtalk portability work
 
 	succeeds(lgt_peek_byte_2_14) :-
+		^^set_binary_input(st_i, []),
+		{peek_byte(st_i, -1)},
+		^^check_binary_input(st_i, []).
+
+	succeeds(lgt_peek_byte_2_15) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{get_byte(st_i,_), peek_byte(st_i,Byte)},
 		Byte == -1.
 
-	throws(lgt_peek_byte_2_15, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_byte_2_16, error(permission_error(input,stream,s),_)) :-
 		^^set_binary_output(s, []),
 		{peek_byte(s,_)}.
 
-	throws(lgt_peek_byte_2_16, error(permission_error(input,text_stream,_),_)) :-
+	throws(lgt_peek_byte_2_17, error(permission_error(input,text_stream,_),_)) :-
 		^^set_text_input(s, ''),
 		{peek_byte(s,_)}.
 

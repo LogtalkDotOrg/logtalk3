@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2017-08-24,
+		date is 2020-07-30,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
@@ -110,6 +110,10 @@
 	throws(lgt_get_byte_2_16, error(permission_error(input,text_stream,_),_)) :-
 		^^set_text_input(s, ''),
 		{get_byte(s,_)}.
+
+	succeeds(lgt_get_byte_2_17) :-
+		^^set_binary_input(st_i, []),
+		{get_byte(st_i, -1)}.
 
 	cleanup :-
 		^^clean_text_input,
