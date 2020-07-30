@@ -22,48 +22,53 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-06-28,
+		date is 2020-07-30,
 		comment is 'Unit tests for the ISO Prolog standard list syntax.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.5.1
 
-	succeeds(iso_list_01) :-
+	test(iso_list_01, true(T == .(a, []))) :-
 		^^set_text_input('[a]. '),
-		{read(T)},
-		T == .(a, []).
+		{read(T)}.
 
-	succeeds(iso_list_02) :-
+	test(iso_list_02, true(T == .(a, .(b, [])))) :-
 		^^set_text_input('[a,b]. '),
-		{read(T)},
-		T == .(a, .(b, [])).
+		{read(T)}.
 
-	succeeds(iso_list_03) :-
+	test(iso_list_03, true(T == .(a, b))) :-
 		^^set_text_input('[a|b]. '),
-		{read(T)},
-		T == .(a, b).
+		{read(T)}.
 
-	% invalid lists
+	% tests from the Logtalk portability work
 
-	throws(lgt_list_04, error(syntax_error(_), _)) :-
+	test(lgt_list_04, true(T == [])) :-
+		^^set_text_input('[]. '),
+		{read(T)}.
+
+	test(lgt_list_05, true(T == '[]')) :-
+		^^set_text_input('[]. '),
+		{read(T)}.
+
+	test(lgt_list_06, error(syntax_error(_))) :-
 		^^set_text_input('[|]. '),
 		{read(_)}.
 
-	throws(lgt_list_05, error(syntax_error(_), _)) :-
+	test(lgt_list_07, error(syntax_error(_))) :-
 		^^set_text_input('[1|]. '),
 		{read(_)}.
 
-	throws(lgt_list_06, error(syntax_error(_), _)) :-
+	test(lgt_list_08, error(syntax_error(_))) :-
 		^^set_text_input('[|1]. '),
 		{read(_)}.
 
-	throws(lgt_list_07, error(syntax_error(_), _)) :-
+	test(lgt_list_09, error(syntax_error(_))) :-
 		^^set_text_input('[1,2,3,]. '),
 		{read(_)}.
 
-	throws(lgt_list_08, error(syntax_error(_), _)) :-
+	test(lgt_list_10, error(syntax_error(_))) :-
 		^^set_text_input('[1|2|3]. '),
 		{read(_)}.
 

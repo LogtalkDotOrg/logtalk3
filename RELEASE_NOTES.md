@@ -29,6 +29,8 @@ Tests
 
 * ADDED: Additional tests for the `(=..)/2` Prolog standard predicate.
 
+* ADDED: Additional tests for Prolog standard list syntax.
+
 
 3.40.0 - July 29, 2020
 ======================
