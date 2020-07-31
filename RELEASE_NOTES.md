@@ -34,6 +34,8 @@ Tests
 * ADDED: Additional tests for Prolog standard character input/output predicates
 for checking calls with a bound argument.
 
+* FIXED: Test for the `keysort/2` Prolog standard predicate.
+
 
 3.40.0 - July 29, 2020
 ======================
