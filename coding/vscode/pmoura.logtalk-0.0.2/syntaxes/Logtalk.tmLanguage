@@ -201,7 +201,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b((type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])</string>
+			<string>\b((uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])</string>
 			<key>name</key>
 			<string>support.function.control.logtalk</string>
 		</dict>

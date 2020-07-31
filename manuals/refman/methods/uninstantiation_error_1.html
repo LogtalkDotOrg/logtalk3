@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>existence_error/2 &mdash; The Logtalk Handbook v3.41.0-b01 documentation</title>
+  <title>uninstantiation_error/1 &mdash; The Logtalk Handbook v3.41.0-b01 documentation</title>
   
 
   
@@ -47,8 +47,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="permission_error/3" href="permission_error_3.html" />
-    <link rel="prev" title="domain_error/2" href="domain_error_2.html" />
+    <link rel="next" title="type_error/2" href="type_error_2.html" />
+    <link rel="prev" title="instantiation_error/0" href="instantiation_error_0.html" />
    
 </head>
 
@@ -119,10 +119,10 @@
 <li class="toctree-l4"><a class="reference internal" href="catch_3.html">catch/3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="throw_1.html">throw/1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="instantiation_error_0.html">instantiation_error/0</a></li>
-<li class="toctree-l4"><a class="reference internal" href="uninstantiation_error_1.html">uninstantiation_error/1</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">uninstantiation_error/1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="type_error_2.html">type_error/2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="domain_error_2.html">domain_error/2</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">existence_error/2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="existence_error_2.html">existence_error/2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="permission_error_3.html">permission_error/3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="representation_error_1.html">representation_error/1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="evaluation_error_1.html">evaluation_error/1</a></li>
@@ -207,14 +207,14 @@
         
           <li><a href="error_handling_methods.html">Error handling</a> &raquo;</li>
         
-      <li>existence_error/2</li>
+      <li>uninstantiation_error/1</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/existence_error_2.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/uninstantiation_error_1.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -228,44 +228,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="existence-error-2">
-<span id="methods-existence-error-2"></span><span id="index-0"></span><h1>existence_error/2<a class="headerlink" href="#existence-error-2" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="uninstantiation-error-1">
+<span id="methods-uninstantiation-error-1"></span><span id="index-0"></span><h1>uninstantiation_error/1<a class="headerlink" href="#uninstantiation-error-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">existence_error</span>(<span class="nv">Thing</span>, <span class="nv">Culprit</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uninstantiation_error(<span class="nv">Culprit</span>)
 </pre></div>
 </div>
-<p>Throws an existence error. Used when the subject of an operation does not
-exist. This built-in method is declared private and thus cannot be used as a
-message to an object. Calling this predicate is equivalent to the following
-sequence of goals:</p>
+<p>Throws an uninstantiation error. Used when an argument or one of its
+sub-arguments is bound but a variable is required. For example, trying
+to open a file with a stream argument bound.</p>
+<p>This built-in method is declared private and thus cannot be used as a message
+to an object. Calling this predicate is equivalent to the following sequence
+of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(<span class="k">existence_error</span>(<span class="nv">Thing</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
+<span class="k">throw</span>(error(uninstantiation_error(<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
-<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Thing</span></code> include:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">procedure</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">source_sink</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stream</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">category</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">module</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">library</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">goal_thread</span></code></p></li>
-</ul>
-<p>The value of <code class="docutils literal notranslate"><span class="pre">Culprit</span></code> is the argument or one of its sub-terms that caused
-the error.</p>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">existence_error</span>(<span class="o">@</span>nonvar, <span class="o">@</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uninstantiation_error(<span class="o">@</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </div>
@@ -274,15 +260,15 @@ the error.</p>
 <div class="line-block">
 <div class="line">When called:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(Thing,</span> <span class="pre">Culprit)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uninstantiation_error(Culprit)</span></code></div>
 </div>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
-<span class="o">\+</span> <span class="k">current_object</span>(payroll),
-<span class="k">existence_error</span>(object, payroll).
+<span class="k">var</span>(<span class="nv">Handler</span>),
+uninstantiation_error(my_stream).
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -291,12 +277,12 @@ the error.</p>
 <a class="reference internal" href="throw_1.html#methods-throw-1"><span class="std std-ref">throw/1</span></a>,
 <a class="reference internal" href="context_1.html#methods-context-1"><span class="std std-ref">context/1</span></a>,
 <a class="reference internal" href="instantiation_error_0.html#methods-instantiation-error-0"><span class="std std-ref">instantiation_error/0</span></a>,
-<a class="reference internal" href="uninstantiation_error_1.html#methods-uninstantiation-error-1"><span class="std std-ref">uninstantiation_error/1</span></a>,
 <a class="reference internal" href="type_error_2.html#methods-type-error-2"><span class="std std-ref">type_error/2</span></a>,
 <a class="reference internal" href="domain_error_2.html#methods-domain-error-2"><span class="std std-ref">domain_error/2</span></a>,
-<a class="reference internal" href="evaluation_error_1.html#methods-evaluation-error-1"><span class="std std-ref">evaluation_error/1</span></a>,
+<a class="reference internal" href="existence_error_2.html#methods-existence-error-2"><span class="std std-ref">existence_error/2</span></a>,
 <a class="reference internal" href="permission_error_3.html#methods-permission-error-3"><span class="std std-ref">permission_error/3</span></a>,
 <a class="reference internal" href="representation_error_1.html#methods-representation-error-1"><span class="std std-ref">representation_error/1</span></a>,
+<a class="reference internal" href="evaluation_error_1.html#methods-evaluation-error-1"><span class="std std-ref">evaluation_error/1</span></a>,
 <a class="reference internal" href="resource_error_1.html#methods-resource-error-1"><span class="std std-ref">resource_error/1</span></a>,
 <a class="reference internal" href="syntax_error_1.html#methods-syntax-error-1"><span class="std std-ref">syntax_error/1</span></a>,
 <a class="reference internal" href="system_error_0.html#methods-system-error-0"><span class="std std-ref">system_error/0</span></a></p>
@@ -312,10 +298,10 @@ the error.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="permission_error_3.html" class="btn btn-neutral float-right" title="permission_error/3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="type_error_2.html" class="btn btn-neutral float-right" title="type_error/2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="domain_error_2.html" class="btn btn-neutral float-left" title="domain_error/2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="instantiation_error_0.html" class="btn btn-neutral float-left" title="instantiation_error/0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

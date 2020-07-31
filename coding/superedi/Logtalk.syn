@@ -1,7 +1,7 @@
 ; Superedi syntax definitions for Logtalk (https://logtalk.org/)
 ; 
-; Author: 			Paulo Moura
-; Last changed in: 	February 12, 2019
+; Author:           Paulo Moura
+; Last changed in:  July 31, 2020
 
 
 C=1
@@ -209,6 +209,7 @@ goal_expansion
 term_expansion
 phrase
 instantiation_error
+uninstantiation_error
 type_error
 domain_error
 existence_error
@@ -367,7 +368,7 @@ truncate
 round
 ceiling
 
-; Other arithemtic functors
+; Other arithmetic functors
 **
 sin
 cos

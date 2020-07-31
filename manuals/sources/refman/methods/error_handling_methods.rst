@@ -26,6 +26,7 @@ Error handling
    catch_3
    throw_1
    instantiation_error_0
+   uninstantiation_error_1
    type_error_2
    domain_error_2
    existence_error_2

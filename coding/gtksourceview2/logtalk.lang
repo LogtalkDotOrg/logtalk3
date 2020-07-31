@@ -255,7 +255,7 @@
       <!-- Logic and control -->
       <keyword>(ca(ll|tch)|ignore|once|throw)(?=[(])</keyword>
       <keyword>(true|fa(il|lse)|repeat|(instantiation|system)_error)(?![-!(^~])</keyword>
-      <keyword>((type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])</keyword>
+      <keyword>((uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])</keyword>
       <!-- Atomic term processing -->
       <keyword>(atom_(length|c(hars|o(ncat|des))))(?=[(])</keyword>
       <keyword>(sub_atom)(?=[(])</keyword>

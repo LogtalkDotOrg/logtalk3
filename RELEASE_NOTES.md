@@ -24,8 +24,20 @@ RELEASE NOTES
 3.41.0 - August ??, 2020
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Convenience error throwing built-in method `uninstantiation_error/1`.
+
+Documentation
+-------------
+
+* ADDED: Documentation for the new `uninstantiation_error/1` built-in method.
+
 Tests
 -----
+
+* ADDED: Tests for the new `uninstantiation_error/1` built-in method.
 
 * ADDED: Additional tests for the `(=..)/2` Prolog standard predicate.
 
@@ -35,6 +47,12 @@ Tests
 for checking calls with a bound argument.
 
 * FIXED: Test for the `keysort/2` Prolog standard predicate.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Syntax highlighter support to the new `uninstantiation_error/1`
+built-in method.
 
 
 3.40.0 - July 29, 2020

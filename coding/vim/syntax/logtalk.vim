@@ -1,8 +1,8 @@
 " Vim syntax file
 "
 " Language:	Logtalk
-" Maintainer:	Paulo Moura <pmoura@logtalk.org>
-" Last Change:	February 12, 2019
+" Maintainer:   Paulo Moura <pmoura@logtalk.org>
+" Last Change:  July 31, 2020
 
 
 " Quit when a syntax file was already loaded:
@@ -191,7 +191,7 @@ syn match	logtalkOperator		"-->"
 syn match	logtalkOperator		"->"
 syn match	logtalkKeyword		"\<throw\ze("
 syn match	logtalkKeyword		"\<\(instantiation\|system\)_error\>"
-syn match	logtalkKeyword		"\<\(type\|domain\|existence\|permission\|representation\|evaluation\|resource\|syntax\)_error\ze("
+syn match	logtalkKeyword		"\<\(uninstantiation\|type\|domain\|existence\|permission\|representation\|evaluation\|resource\|syntax\)_error\ze("
 
 
 " Term unification

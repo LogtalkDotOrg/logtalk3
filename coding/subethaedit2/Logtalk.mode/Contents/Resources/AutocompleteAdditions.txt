@@ -102,6 +102,7 @@ once()
 catch(, , )
 throw()
 instantiation_error
+uninstantiation_error()
 type_error(, )
 domain_error(, )
 existence_error(, )

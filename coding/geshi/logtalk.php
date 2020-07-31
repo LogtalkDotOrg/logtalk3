@@ -4,7 +4,7 @@
  * -----------
  *
  * Author: Paulo Moura (pmoura@logtalk.org)
- * Copyright: (c) 2009-2018 Paulo Moura (https://logtalk.org/)
+ * Copyright: (c) 2009-2020 Paulo Moura (https://logtalk.org/)
  * Release Version: 1.0.8.6
  * Date Started: 2009/10/24
  *
@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2020/07/31 (1.1.26)
+ *  -  Added syntax coloring of the uninstantiation_error/1 error throwing built-in method
  * 2019/07/08 (1.1.25)
  *  -  Fixed coloring of 0'Char numbers
  * 2019/02/12 (1.1.24)
@@ -181,15 +183,15 @@ $language_data = array(
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control
             'call', 'catch', 'ignore', 'once', 'throw',
-            'type_error', 'domain_error', 'existence_error', 'permission_error',
-            'representation_error', 'evaluation_error', 'resource_error',
-            'syntax_error',
+            'uninstantiation_error', 'type_error', 'domain_error', 'existence_error',
+            'permission_error', 'representation_error', 'evaluation_error',
+            'resource_error', 'syntax_error',
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',
             // multi-threading predicates
             'threaded',
             'threaded_call', 'threaded_once', 'threaded_ignore',
-			'threaded_exit', 'threaded_peek', 'threaded_cancel',
+            'threaded_exit', 'threaded_peek', 'threaded_cancel',
             'threaded_wait', 'threaded_notify',
             // engine predicates
             'threaded_engine',

@@ -4,10 +4,10 @@
 
 <!--	jEdit 4.3 Logtalk syntax file
 
-	written by		Paulo Moura
-	version			1.110
-	created on		May 5, 2002
-	last revised	February 12, 2019
+	written by      Paulo Moura
+	version         1.111
+	created on      May 5, 2002
+	last revised    July 31, 2020
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -86,7 +86,7 @@
 		<!-- Control -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(ca(ll|tch)|throw)(?=[(])</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(fa(il|lse)|true|(instantiation|system)_error)\b</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(type|domain|existence|permission|representation|evaluation|resource|syntax)_error(?=[(])</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b(uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error(?=[(])</SEQ_REGEXP>
 		<!-- All solutions -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="KEYWORD2">\b((bag|set)of|f(ind|or)all)(?=[(])</SEQ_REGEXP>
 		<!-- Multi-threading predicates -->
@@ -435,6 +435,7 @@
 			<NULL>truncate</NULL>
 			<NULL>type_error</NULL>
 			<NULL>unify_with_occurs_check</NULL>
+			<NULL>uninstantiation_error</NULL>
 			<NULL>uses</NULL>
 			<NULL>var</NULL>
 			<NULL>write</NULL>

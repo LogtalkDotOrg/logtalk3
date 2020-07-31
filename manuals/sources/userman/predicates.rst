@@ -1406,6 +1406,7 @@ Besides the :ref:`methods_catch_3` and :ref:`methods_throw_1` methods inherited 
 Prolog, Logtalk also provides a set of convenience methods to throw
 standard ``error/2`` exception terms:
 :ref:`methods_instantiation_error_0`,
+:ref:`methods_uninstantiation_error_1`,
 :ref:`methods_type_error_2`,
 :ref:`methods_domain_error_2`,
 :ref:`methods_existence_error_2`,

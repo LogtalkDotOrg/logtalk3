@@ -43,9 +43,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:46:0,
+		version is 1:48:0,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2019-07-03,
+		date is 2020-07-31,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;
 	]).
 
@@ -205,6 +205,7 @@ comment
 		catch(Goal, Error, Catcher),
 		throw(Error),
 		instantiation_error,
+		uninstantiation_error(Culprit),
 		type_error(Type, Culprit),
 		domain_error(Domain, Culprit),
 		existence_error(Thing, Culprit),

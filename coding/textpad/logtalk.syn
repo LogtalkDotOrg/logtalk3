@@ -1,7 +1,7 @@
 ; TextPad syntax definitions for Logtalk (https://logtalk.org/)
 ; 
 ; Author:          Paulo Moura
-; Last changed in: February 12, 2019
+; Last changed in: July 31, 2020
 ;
 ; Tags used and suggested colors:
 ;   Keywords 1 message sending operators   blue
@@ -209,6 +209,7 @@ goal_expansion
 term_expansion
 phrase
 instantiation_error
+uninstantiation_error
 type_error
 domain_error
 existence_error

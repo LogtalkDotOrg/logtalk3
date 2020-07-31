@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
 
-<language name="Logtalk" version="4" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
+<language name="Logtalk" version="5" kateversion="2.4" section="Sources" extensions="*.lgt;.logtalk" mimetype="text/x-logtalk" author="Paulo Moura (pmoura@logtalk.org)" license="Apache License 2.0">
 
 	<highlighting>
 
@@ -41,7 +41,7 @@
 				<!-- Control -->
 				<RegExpr String = "\b(ca(ll|tch)|throw)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<RegExpr String = "\b(fa(il|lse)|true|(instantiation|system)_error)\b" attribute = "Built-in" context = "#stay" />
-				<RegExpr String = "\b(type|domain|existence|permission|representation|evaluation|resource|syntax)_error(?=[(])" attribute = "Built-in" context = "#stay" />
+				<RegExpr String = "\b(uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- All solutions -->
 				<RegExpr String = "\b((bag|set)of|f(ind|or)all)(?=[(])" attribute = "Built-in" context = "#stay" />
 				<!-- Multi-threading predicates -->

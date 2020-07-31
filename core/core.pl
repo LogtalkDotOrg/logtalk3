@@ -12574,6 +12574,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_error_predicate'(instantiation_error, TPred, DPred, Ctx).
 
+'$lgt_compile_body'(uninstantiation_error(Culprit), TPred, DPred, Ctx) :-
+	!,
+	'$lgt_compile_error_predicate'(uninstantiation_error(Culprit), TPred, DPred, Ctx).
+
 '$lgt_compile_body'(type_error(Type,Culprit), TPred, DPred, Ctx) :-
 	!,
 	'$lgt_compile_error_predicate'(type_error(Type,Culprit), TPred, DPred, Ctx).
@@ -22401,6 +22405,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(throw(_), p, no, 1).
 % error predicates
 '$lgt_built_in_method_spec'(instantiation_error, p, no, 1).
+'$lgt_built_in_method_spec'(uninstantiation_error(_), p, no, 1).
 '$lgt_built_in_method_spec'(type_error(_,_), p, no, 1).
 '$lgt_built_in_method_spec'(domain_error(_,_), p, no, 1).
 '$lgt_built_in_method_spec'(existence_error(_,_), p, no, 1).

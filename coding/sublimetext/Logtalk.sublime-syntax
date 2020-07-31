@@ -68,7 +68,7 @@ contexts:
       scope: support.function.control.logtalk
     - match: '\b(ca(ll|tch)|ignore|throw|once)(?=[(])'
       scope: support.function.control.logtalk
-    - match: '\b((type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])'
+    - match: '\b((uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])'
       scope: support.function.control.logtalk
     - match: '\b((get|p(eek|ut))_(c(har|ode)|byte)|nl)(?=[(])'
       scope: support.function.chars-and-bytes-io.logtalk
