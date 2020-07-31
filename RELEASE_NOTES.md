@@ -48,6 +48,8 @@ for checking calls with a bound argument.
 
 * FIXED: Test for the `keysort/2` Prolog standard predicate.
 
+* FIXED: Some tests for the `atomic/1` Prolog standard predicate.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
