@@ -46,6 +46,9 @@ Tests
 * ADDED: Additional tests for Prolog standard character input/output predicates
 for checking calls with a bound argument.
 
+* ADDED: Additional tests for the `write_term/3` Prolog standard predicate for
+checking output of lists with elements that are conjunctions.
+
 * FIXED: Test for the `keysort/2` Prolog standard predicate.
 
 * FIXED: Some tests for the `atomic/1` Prolog standard predicate.

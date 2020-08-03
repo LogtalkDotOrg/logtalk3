@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2020-03-03,
+		date is 2020-08-03,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -177,6 +177,30 @@
 		current_output(S),
 		{write_term(S, '%text', [quoted(true)])},
 		^^text_output_assertion('\'%text\'', Assertion).
+
+	test(lgt_write_term_3_31, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, [(1,2,3)], [])},
+		^^text_output_assertion('[(1,2,3)]', Assertion).
+
+	test(lgt_write_term_3_32, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, [a,(1,2,3)], [])},
+		^^text_output_assertion('[a,(1,2,3)]', Assertion).
+
+	test(lgt_write_term_3_33, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_canonical(S, [(1,2,3)])},
+		^^text_output_assertion('\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
+
+	test(lgt_write_term_3_34, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_canonical(S, [a,(1,2,3)])},
+		^^text_output_assertion('\'.\'(a,\'.\'(\',\'(1,\',\'(2,3)),[]))', Assertion).
 
 	cleanup :-
 		^^clean_binary_output,
