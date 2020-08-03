@@ -45,52 +45,42 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-02,
+		date is 2020-08-03,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.9.4
 
-	succeeds(iso_catch_3_01) :-
-		{catch(foo(5), test(Y), true)},
-		Y == 10.
+	test(iso_catch_3_01, true(Y == 10)) :-
+		{catch(foo(5), test(Y), true)}.
 
-	succeeds(iso_catch_3_02) :-
-		{catch(bar(3), Z, true)},
-		Z == 3.
+	test(iso_catch_3_02, true(Z == 3)) :-
+		{catch(bar(3), Z, true)}.
 
-	succeeds(iso_catch_3_03) :-
+	test(iso_catch_3_03, true) :-
 		{catch(true, _, 3)}.
 
-	throws(iso_catch_3_04, bla) :-
+	test(iso_catch_3_04, ball(bla)) :-
 		% ISO wants a system_error instead but all tested systems disagree!
 		{catch(true, _C, write(demoen)), throw(bla)}.
 
-	succeeds(iso_catch_3_05) :-
-		{catch(car(_X), Y, true)},
-		Y == 1.
+	test(iso_catch_3_05, true(Y == 1)) :-
+		{catch(car(_X), Y, true)}.
 
-	fails(iso_catch_3_06) :-
+	test(iso_catch_3_06, fail) :-
 		{catch(number_chars(_X,['1',a,'0']), error(syntax_error(_),_), fail)}.
 
-	succeeds(iso_catch_3_07) :-
-		{catch(g, C, write(h1)), nl},
-		C == c.
+	test(iso_catch_3_07, true(C == c)) :-
+		{catch(g, C, write(h1)), nl}.
 
-	succeeds(iso_catch_3_08) :-
-		{catch(coo(_X), Y, true)},
-		Y = error(instantiation_error,_).
+	test(iso_catch_3_08, true(subsumes_term(error(instantiation_error,_), Y))) :-
+		{catch(coo(_X), Y, true)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_catch_3_09) :-
-		{catch(_, Y, true)},
-		Y = error(instantiation_error,_).
+	test(iso_catch_3_09, true(subsumes_term(error(instantiation_error,_), Y))) :-
+		{catch(_, Y, true)}.
 
 :- end_object.

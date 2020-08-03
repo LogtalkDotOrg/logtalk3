@@ -49,7 +49,7 @@ for checking calls with a bound argument.
 * ADDED: Additional tests for the `write_term/3` Prolog standard predicate for
 checking output of lists with elements that are conjunctions.
 
-* IMPROVED: Tests for the cut control construct.
+* IMPROVED: Tests for the `catch/3` and cut control constructs.
 
 * FIXED: Test for the `keysort/2` Prolog standard predicate.
 
