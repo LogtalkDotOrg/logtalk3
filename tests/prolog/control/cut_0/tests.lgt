@@ -31,89 +31,95 @@ goal(write('Three ')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-01-26,
+		date is 2020-08-03,
 		comment is 'Unit tests for the ISO Prolog standard !/0 control construct.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.4.4
 
-	succeeds(iso_cut_0_01) :-
+	test(iso_cut_0_01, true) :-
 		{!}.
 
-	fails(iso_cut_0_02) :-
+	test(iso_cut_0_02, fail) :-
 		{(!,fail;true)}.
 
-	succeeds(iso_cut_0_03) :-
+	test(iso_cut_0_03, true) :-
 		{(call(!),fail;true)}.
 
-	fails(iso_cut_0_04) :-
-		{(twice(_), !, write('Forwards '), fail)}.
+	test(iso_cut_0_04, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(_), !, write('Forwards '), fail)},
+		^^text_output_assertion('C Forwards ', Assertion).
 
-	fails(iso_cut_0_05) :-
-		{((!; write('No ')), write('Cut disjunction '), fail)}.
+	test(iso_cut_0_05, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {((!; write('No ')), write('Cut disjunction '), fail)},
+		^^text_output_assertion('Cut disjunction ', Assertion).
 
-	fails(iso_cut_0_06) :-
-		{(twice(_), (write('No '); !), write('Cut '), fail)}.
+	test(iso_cut_0_06, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(_), (write('No '); !), write('Cut '), fail)},
+		^^text_output_assertion('C No Cut Cut ', Assertion).
 
-	fails(iso_cut_0_07) :-
-		{(twice(_), (!, fail; write('No ')))}.
+	test(iso_cut_0_07, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(_), (!, fail; write('No ')))},
+		^^text_output_assertion('C ', Assertion).
 
-	fails(iso_cut_0_08) :-
-		{(twice(X), call(X), write('Forwards '), fail)}.
+	test(iso_cut_0_08, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(X), call(X), write('Forwards '), fail)},
+		^^text_output_assertion('C Forwards Moss Forwards ', Assertion).
 
-	fails(iso_cut_0_09) :-
-		{(goal(X), call(X), write('Forwards '), fail)}.
+	test(iso_cut_0_09, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(goal(X), call(X), write('Forwards '), fail)},
+		^^text_output_assertion('C Forwards Three Forwards ', Assertion).
 
-	fails(iso_cut_0_10) :-
-		{(twice(_), \+(\+(!)), write('Forwards '), fail)}.
+	test(iso_cut_0_10, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(_), \+(\+(!)), write('Forwards '), fail)},
+		^^text_output_assertion('C Forwards Moss Forwards ', Assertion).
 
-	fails(iso_cut_0_11) :-
-		{(twice(_), once(!), write('Forwards '), fail)}.
+	test(iso_cut_0_11, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(_), once(!), write('Forwards '), fail)},
+		^^text_output_assertion('C Forwards Moss Forwards ', Assertion).
 
-	fails(iso_cut_0_12) :-
-		{(twice(_), call(!), write('Forwards '), fail)}.
+	test(iso_cut_0_12, true(Assertion)) :-
+		^^set_text_output(''),
+		\+ {(twice(_), call(!), write('Forwards '), fail)},
+		^^text_output_assertion('C Forwards Moss Forwards ', Assertion).
 
 	% tests from the ECLiPSe test suite
 
-	succeeds(eclipse_cut_0_13) :-
-		findall(X, {(X=1;X=2), !}, L),
-		L == [1].
+	test(eclipse_cut_0_13, true(L == [1])) :-
+		findall(X, {(X=1;X=2), !}, L).
 
-	succeeds(eclipse_cut_0_14) :-
-		findall(X, {(!,X=1;X=2)}, L),
-		L == [1].
+	test(eclipse_cut_0_14, true(L == [1])) :-
+		findall(X, {(!,X=1;X=2)}, L).
 
-	succeeds(eclipse_cut_0_15) :-
-		findall(X, {(X=1;X=2), (true;!)}, L),
-		L == [1, 1].
+	test(eclipse_cut_0_15, true(L == [1, 1])) :-
+		findall(X, {(X=1;X=2), (true;!)}, L).
 
-	fails(eclipse_cut_0_16) :-
+	test(eclipse_cut_0_16, fail) :-
 		{(X=1;X=2), (!,fail;true)}.
 
-	succeeds(eclipse_cut_0_17) :-
-		findall(X, {(X=!;X=true), call(X)}, L),
-		L == [!, true].
+	test(eclipse_cut_0_17, true(L == [!, true])) :-
+		findall(X, {(X=!;X=true), call(X)}, L).
 
-	succeeds(eclipse_cut_0_18) :-
-		findall(X, {(G = ((X=1; X=2), !); G = (X=3)), call(G)}, L),
-		L == [1, 3].
+	test(eclipse_cut_0_18, true(L == [1, 3])) :-
+		findall(X, {(G = ((X=1; X=2), !); G = (X=3)), call(G)}, L).
 
-	succeeds(eclipse_cut_0_19) :-
-		findall(X, {(X=1;X=2), \+(\+(!))}, L),
-		L == [1, 2].
+	test(eclipse_cut_0_19, true(L == [1, 2])) :-
+		findall(X, {(X=1;X=2), \+(\+(!))}, L).
 
-	succeeds(eclipse_cut_0_20) :-
-		findall(X, {(X=1;X=2), once(!)}, L),
-		L == [1, 2].
+	test(eclipse_cut_0_20, true(L == [1, 2])) :-
+		findall(X, {(X=1;X=2), once(!)}, L).
 
-	succeeds(eclipse_cut_0_21) :-
-		findall(X, {(X=1;X=2), call(!)}, L),
-		L == [1, 2].
+	test(eclipse_cut_0_21, true(L == [1, 2])) :-
+		findall(X, {(X=1;X=2), call(!)}, L).
 
 :- end_object.
