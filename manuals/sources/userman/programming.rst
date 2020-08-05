@@ -581,15 +581,6 @@ These are:
    compiler. Checking the value of this flag fails for any Prolog
    compiler that does not provide access to version data.
 
-.. _flag_prolog_conformance:
-.. index:: pair: prolog_conformance; Flag
-
-``prolog_conformance``
-   Level of conformance of the :term:`backend Prolog compiler` with the
-   ISO Prolog Core standard. The possible values are ``strict`` for
-   compilers claiming strict conformance and ``lax`` for compilers
-   claiming only broad conformance.
-
 .. _flag_unicode:
 .. index:: pair: unicode; Flag
 

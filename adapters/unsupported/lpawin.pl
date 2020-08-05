@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA WinProlog 5.00
-%  Last updated on July 15, 2020
+%  Last updated on August 5, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -412,7 +412,6 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_prolog_feature'(prolog_version, _) :-
 	fail.
 '$lgt_prolog_feature'(prolog_compatible_version, '=='(v(5,0))).
-'$lgt_prolog_feature'(prolog_conformance, lax).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

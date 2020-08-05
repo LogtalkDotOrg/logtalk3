@@ -27,6 +27,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Deleted the no longer used read-only `prolog_conformance` flag.
+
 * ADDED: Convenience error throwing built-in method `uninstantiation_error/1`.
 
 Documentation

@@ -3467,7 +3467,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 41, 0, b01)).
+'$lgt_version_data'(logtalk(3, 41, 0, b02)).
 
 
 
@@ -23252,7 +23252,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(prolog_dialect).
 '$lgt_valid_flag'(prolog_version).
 '$lgt_valid_flag'(prolog_compatible_version).
-'$lgt_valid_flag'(prolog_conformance).
 % features requiring specific backend Prolog compiler support
 '$lgt_valid_flag'(unicode).
 '$lgt_valid_flag'(encoding_directive).
@@ -23279,7 +23278,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_read_only_flag'(prolog_dialect).
 '$lgt_read_only_flag'(prolog_version).
 '$lgt_read_only_flag'(prolog_compatible_version).
-'$lgt_read_only_flag'(prolog_conformance).
 '$lgt_read_only_flag'(unicode).
 '$lgt_read_only_flag'(encoding_directive).
 '$lgt_read_only_flag'(engines).
@@ -23421,8 +23419,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(prolog_compatible_version, Version) :-
 	compound(Version),
 	functor(Version, v, 3).
-'$lgt_valid_flag_value'(prolog_conformance, strict) :- !.
-'$lgt_valid_flag_value'(prolog_conformance, lax) :- !.
 
 '$lgt_valid_flag_value'(unicode, full) :- !.
 '$lgt_valid_flag_value'(unicode, bmp) :- !.

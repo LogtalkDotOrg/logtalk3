@@ -206,7 +206,6 @@ numbervars(Term, From, Next) :-
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
 	?????
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
-'$lgt_prolog_feature'(prolog_conformance, ?????).	% either lax or strict
 
 '$lgt_prolog_feature'(encoding_directive, ?????).
 '$lgt_prolog_feature'(tabling, ?????).
