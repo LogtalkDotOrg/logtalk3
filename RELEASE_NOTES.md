@@ -57,6 +57,8 @@ checking output of lists with elements that are conjunctions.
 
 * FIXED: Some tests for the `atomic/1` Prolog standard predicate.
 
+* FIXED: Duplicated test for the `atom_concat/3` Prolog standard predicate.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

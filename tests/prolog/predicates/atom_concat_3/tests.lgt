@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-08-07,
 		comment is 'Unit tests for the ISO Prolog standard atom_concat/3 built-in predicate.'
 	]).
 
@@ -39,8 +39,8 @@
 		S3 == 'hello world'.
 
 	succeeds(iso_atom_concat_3_02) :-
-		{atom_concat('hello', ' world', S3)},
-		S3 == 'hello world'.
+		{atom_concat(S1, ' world', 'small world')},
+		S1 == 'small'.
 
 	fails(iso_atom_concat_3_03) :-
 		{atom_concat('hello',' world', 'small world')}.
