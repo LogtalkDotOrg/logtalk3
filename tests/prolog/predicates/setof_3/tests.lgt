@@ -81,9 +81,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2018-03-12,
+		date is 2020-08-09,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -114,9 +114,9 @@ setof_3_member(X, [_| L]) :-
 
 	succeeds(iso_setof_3_05) :-
 		{setof(X, (X=Y;X=Z), S)},
-		(	S = [Z,Y] ->
+		(	S == [Z,Y] ->
 			true
-		;	S = [Y,Z]
+		;	S == [Y,Z]
 		).
 
 	fails(iso_setof_3_06) :-
@@ -124,45 +124,45 @@ setof_3_member(X, [_| L]) :-
 
 	succeeds(iso_setof_3_07) :-
 		findall(L-Y, {setof(1,(Y=1;Y=2),L)}, LL),
-		LL = [[1]-1, [1]-2].
+		LL == [[1]-1, [1]-2].
 
 	succeeds(iso_setof_3_08) :-
 		{setof(f(X,Y), (X=a;Y=b), L)},
-		L = [f(_,b), f(a,_)].
+		variant(L, [f(_,b), f(a,_)]).
 
 	succeeds(iso_setof_3_09) :-
 		{setof(X, Y^((X=1,Y=1);(X=2,Y=2)), S)},
-		S = [1, 2].
+		S == [1, 2].
 
 	succeeds(iso_setof_3_10) :-
 		{setof(X, Y^((X=1;Y=1);(X=2,Y=2)), S)},
-		S = [_, 1, 2].
+		variant(S, [_, 1, 2]).
 
 	succeeds(iso_setof_3_11) :-
-		{(	catch(1^true, _, fail) ->
-			findall(S-Y, setof(X,(Y^(X=1;Y=2);X=3),S), L),
-			L = [[1,3]-_,[_]-2]
+		(	catch({1^true}, _, fail) ->
+			findall(S-Y, {setof(X,(Y^(X=1;Y=2);X=3),S)}, L),
+			variant(L, [[1,3]-_,[_]-2])
 		;	set_prolog_flag(unknown, fail),
-			setof(X,(Y^(X=1;Y=2);X=3),S),
+			{setof(X,(Y^(X=1;Y=2);X=3),S)},
 			S == [3]
-		)}.
+		).
 
 	succeeds(iso_setof_3_12) :-
 		findall(S-Y, {setof(X,(X=Y;X=Z;Y=1),S)}, LL),
-		(	LL = [[Y,Z]-_, [_]-1] ->
+		(	variant(LL, [[A,_]-A, [_]-1]) ->
 			true
-		;	LL = [[Z,Y]-_, [_]-1]
+		;	variant(LL, [[_,A]-A, [_]-1])
 		).
 
 	succeeds(iso_setof_3_13) :-
 		{setof(X, a(X,Y), L)},
-		L == [1, 2], Y = f(_).
+		L == [1, 2], variant(Y, f(_)).
 
 	succeeds(iso_setof_3_14) :-
 		{setof(X, setof_3_member(X,[f(U,b),f(V,c)]), L)},
-		(	L = [f(U,b),f(V,c)] ->
+		(	variant(L, [f(U,b),f(V,c)]) ->
 			true
-		;	L = [f(V,c),f(U,b)]
+		;	variant(L, [f(V,c),f(U,b)])
 		).
 
 	succeeds(iso_setof_3_15) :-
@@ -177,8 +177,8 @@ setof_3_member(X, [_| L]) :-
 
 	succeeds(iso_setof_3_17) :-
 		(	{setof(X, setof_3_member(X,[V,U,f(U),f(V)]), L)} ->
-			L = [U, V, f(U), f(V)]
-		;	L = [V, U, f(V), f(U)]
+			variant(L, [U, V, f(U), f(V)])
+		;	variant(L, [V, U, f(V), f(U)])
 		).
 
 	succeeds(iso_setof_3_18) :-

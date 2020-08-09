@@ -53,6 +53,8 @@ checking output of lists with elements that are conjunctions.
 
 * IMPROVED: Tests for the `catch/3` and cut control constructs.
 
+* IMPROVED: Tests for the `bagof/3` and `setof/3` Prolog standard predicates.
+
 * FIXED: Test for the `keysort/2` Prolog standard predicate.
 
 * FIXED: Some tests for the `atomic/1` Prolog standard predicate.

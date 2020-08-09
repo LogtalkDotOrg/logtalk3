@@ -41,11 +41,13 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2015-08-25,
+		date is 2020-08-09,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
+
+	:- uses(lgtunit, [variant/2]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.2.4
 
@@ -73,7 +75,7 @@ c(3, c, 'C').
 
 	succeeds(iso_bagof_3_06) :-
 		{bagof(f(X,Y), (X=a;Y=b), L)},
-		L = [f(a, _), f(_, b)].
+		variant(L, [f(a, _), f(_, b)]).
 
 	succeeds(iso_bagof_3_07) :-
 		{bagof(X, Y^((X=1,Y=1);(X=2,Y=2)), S)},
@@ -81,7 +83,7 @@ c(3, c, 'C').
 
 	succeeds(iso_bagof_3_08) :-
 		{bagof(X, Y^((X=1;Y=1);(X=2,Y=2)), S)},
-		S = [1, _, 2].
+		variant(S, [1, _, 2]).
 
 	succeeds(iso_bagof_3_09) :-
 		{(	catch(1^true, _, fail) ->
@@ -94,15 +96,15 @@ c(3, c, 'C').
 
 	succeeds(iso_bagof_3_10) :-
 		findall(S-Y, {bagof(X,(X=Y;X=Z;Y=1),S)}, LL),
-		LL = [[Y,Z]-_, [_]-1].
+		variant(LL, [[A,_]-A, [_]-1]).
 
 	succeeds(iso_bagof_3_11) :-
 		{bagof(X, a(X,Y), L)},
-		L = [1, 2], Y = f(_).
+		L == [1, 2], variant(Y, f(_)).
 
 	succeeds(iso_bagof_3_12) :-
 		findall(L-Y, {bagof(X,b(X,Y),L)}, LL),
-		LL = [[1, 1, 2]-1, [1, 2, 2]-2].
+		LL == [[1, 1, 2]-1, [1, 2, 2]-2].
 
 	throws(iso_bagof_3_13, error(instantiation_error,_)) :-
 		{bagof(_X, _Y^_Z, _L)}.
