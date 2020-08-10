@@ -43,6 +43,9 @@ Tests
 
 * ADDED: Additional tests for the `(=..)/2` Prolog standard predicate.
 
+* ADDED: Additional tests for the `current_input/1` and `current_output/1`
+Prolog standard predicates.
+
 * ADDED: Additional tests for Prolog standard list syntax.
 
 * ADDED: Additional tests for Prolog standard character input/output predicates
