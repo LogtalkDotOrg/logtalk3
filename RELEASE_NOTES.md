@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 
 * ADDED: Convenience error throwing built-in method `uninstantiation_error/1`.
 
+* ADDED: Linter checks for tautologies and falsehoods in non-ground `var/1`,
+`nonvar/1`, and `ground/1` goals.
+
 Documentation
 -------------
 

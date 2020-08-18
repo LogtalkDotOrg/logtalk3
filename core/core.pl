@@ -3467,7 +3467,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 41, 0, b02)).
+'$lgt_version_data'(logtalk(3, 41, 0, b03)).
 
 
 
@@ -12614,6 +12614,69 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
 
+% type testing (only lint warnings)
+
+'$lgt_compile_body'(var(Var), _, _, Ctx) :-
+	var(Var),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	\+ (
+		'$lgt_member'(_=Var0, VariableNames),
+		Var0 == Var
+	),
+	% assume that Var is an anonymous variable
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(always_true_or_false_goals),
+		goal_is_always_true(File, Lines, Type, Entity, var(Var))
+	),
+	fail.
+
+'$lgt_compile_body'(nonvar(Var), _, _, Ctx) :-
+	var(Var),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	\+ (
+		'$lgt_member'(_=Var0, VariableNames),
+		Var0 == Var
+	),
+	% assume that Var is an anonymous variable
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(always_true_or_false_goals),
+		goal_is_always_false(File, Lines, Type, Entity, nonvar(Var))
+	),
+	fail.
+
+'$lgt_compile_body'(ground(Ground), _, _, Ctx) :-
+	\+ ground(Ground),
+	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
+	term_variables(Ground, Variables),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_variable_names_file_lines_'(OriginalTerm, VariableNames, _, _),
+	\+ (
+		'$lgt_member'(_=Var, VariableNames),
+		'$lgt_member_var'(Var, Variables)
+	),
+	% assume that all variables in Ground are anonymous variables
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(always_true_or_false_goals),
+		goal_is_always_false(File, Lines, Type, Entity, ground(Ground))
+	),
+	fail.
+
 % term comparison (only lint warnings)
 
 '$lgt_compile_body'(Exp1 == Exp2, _, _, Ctx) :-
@@ -15918,7 +15981,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_check_for_tautology_or_falsehood_goal'(@compilation_mode, @callable)
 %
-% check for likely typos in calls to some Prolog built-in predicates
+% check for likely typos in ground calls to some Prolog built-in predicates
 % that result in either tautologies or falsehoods
 
 '$lgt_check_for_tautology_or_falsehood_goal'(runtime, _).
