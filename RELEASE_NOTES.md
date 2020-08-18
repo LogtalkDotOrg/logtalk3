@@ -42,6 +42,12 @@ Documentation
 * FIXED: Generate Handbook and API documentation using Sphinx 3.2.0 as it
 includes a fix for a bug where invalid ePub files would be generated.
 
+Tools
+-----
+
+* UPDATED: The `help` tool for the new `use_module/1` directive and the new
+`uninstantiation_error/1` method.
+
 Tests
 -----
 

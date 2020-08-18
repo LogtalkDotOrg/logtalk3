@@ -22,9 +22,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2020-06-16,
+		date is 2020-08-18,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -218,6 +218,7 @@
 	built_in_directive(public, 1, '/manuals/refman/directives/', 'public_1.html').
 	built_in_directive(synchronized, 1, '/manuals/refman/directives/', 'synchronized_1.html').
 	built_in_directive(uses, 2, '/manuals/refman/directives/', 'uses_2.html').
+	built_in_directive(use_module, 1, '/manuals/refman/directives/', 'use_module_1.html').
 	built_in_directive(use_module, 2, '/manuals/refman/directives/', 'use_module_2.html').
 
 	:- public(built_in_predicate/4).
@@ -339,6 +340,7 @@
 	built_in_method(throw, 1, '/manuals/refman/methods/', 'throw_1.html').
 
 	built_in_method(instantiation_error, 0, '/manuals/refman/methods/', 'instantiation_error_0.html').
+	built_in_method(uninstantiation_error, 1, '/manuals/refman/methods/', 'uninstantiation_error_1.html').
 	built_in_method(type_error, 2, '/manuals/refman/methods/', 'type_error_2.html').
 	built_in_method(domain_error, 2, '/manuals/refman/methods/', 'domain_error_2.html').
 	built_in_method(existence_error, 2, '/manuals/refman/methods/', 'existence_error_2.html').
