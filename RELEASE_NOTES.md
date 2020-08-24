@@ -42,6 +42,11 @@ Documentation
 * FIXED: Generate Handbook and API documentation using Sphinx 3.2.0 as it
 includes a fix for a bug where invalid ePub files would be generated.
 
+Library
+-------
+
+* ADDED: Definition for library predicate `os::date_time/7` for Tau Prolog.
+
 Tools
 -----
 
