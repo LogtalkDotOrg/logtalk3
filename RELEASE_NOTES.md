@@ -34,6 +34,12 @@ Logtalk compiler and runtime
 * ADDED: Linter checks for tautologies and falsehoods in non-ground `var/1`,
 `nonvar/1`, and `ground/1` goals.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Tau Prolog adapter file to use the new `stream_position_data/3`
+built-in predicate.
+
 Documentation
 -------------
 
