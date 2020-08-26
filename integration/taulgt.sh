@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for  Tau Prolog
-##   Last updated on May 26, 2020
+##   Last updated on Aug 26, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -97,4 +97,4 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec node --stack_size=10000 "$LOGTALKHOME/integration/logtalk_tau.js"
+exec node --stack_size=10000 "$LOGTALKHOME/integration/logtalk_tau.js" "$@"
