@@ -45,6 +45,12 @@ Documentation
 
 * ADDED: Documentation for the new `uninstantiation_error/1` built-in method.
 
+* UPDATED: The man page of the Tau Prolog integration script, `taulgt` for
+the new command-line options to specify an initialization goal.
+
+* UPDATED: The man page of the `logtalk_doclet` and `logtalk_tester` shell
+scripts for the added support for using Tau Prolog as the backend compiler.
+
 * FIXED: Generate Handbook and API documentation using Sphinx 3.2.0 as it
 includes a fix for a bug where invalid ePub files would be generated.
 
@@ -55,6 +61,12 @@ Library
 
 Tools
 -----
+
+* UPDATED: The `taulgt` shell script to accept `-g` and `--goal` command-line
+options. Changes contributed by José Antonio Riaza Valverde.
+
+* UPDATED: The `logtalk_doclet` and `logtalk_tester` shell scripts to support
+using Tau Prolog as the backend compiler.
 
 * UPDATED: The `help` tool for the new `use_module/1` directive and the new
 `uninstantiation_error/1` method.

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on June 15, 2020
+##   Last updated on August 26, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.2"
+	echo "$(basename "$0") 2.3"
 	exit 0
 }
 
@@ -208,7 +208,7 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -o output (valid values are verbose and minimal; default is $output)"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, swipack, xsb, xsbmt, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, swipack, tau, xsb, xsbmt, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
@@ -322,6 +322,12 @@ elif [ "$p_arg" == "swipack" ] ; then
 	prolog='SWI-Prolog'
 	logtalk=swipl
 	logtalk_call="$logtalk $i_arg -g"
+elif [ "$p_arg" == "tau" ] ; then
+	backend=xsb
+	prolog='Tau Prolog'
+	logtalk=taulgt$extension
+	logtalk_call="$logtalk $i_arg -g"
+	dot="."
 elif [ "$p_arg" == "xsb" ] ; then
 	backend=xsb
 	prolog='XSB'
