@@ -53,6 +53,7 @@ CONTRIBUTORS
 * John Fletcher (made XML parser available)
 * John Stewart (Java interface suggestions and solutions)
 * Joost Geurts (bug reports)
+* José Antonio Riaza Valverde (Tau Prolog integration)
 * José Morales (Ciao Prolog support)
 * Markus Triska (help in porting CLP(FD) examples)
 * Mats Carlsson (bug reports)
