@@ -86,6 +86,10 @@ Prolog standard predicates.
 * ADDED: Additional tests for Prolog standard character input/output predicates
 for checking calls with a bound argument.
 
+* ADDED: Additional tests for the `close/1` Prolog standard predicate for
+checking that the standard input/output streams are restored after closing
+redirections.
+
 * ADDED: Additional tests for the `write_term/3` Prolog standard predicate for
 checking output of lists with elements that are conjunctions.
 

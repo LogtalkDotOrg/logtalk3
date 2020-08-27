@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2017-02-08,
+		date is 2020-08-27,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
@@ -110,8 +110,23 @@
 		^^closed_input_stream(S, []),
 		{close(S, [force(true)])}.
 
+	succeeds(lgt_close_1_19) :-
+		open(bar, write, Stream),
+		set_output(Stream),
+		{close(Stream)},
+		current_output(Current),
+		stream_property(Current, alias(user_output)).
+
+	succeeds(lgt_close_1_20) :-
+		open(bar, read, Stream),
+		set_input(Stream),
+		{close(Stream)},
+		current_input(Current),
+		stream_property(Current, alias(user_input)).
+
 	cleanup :-
 		^^clean_file(foo),
+		^^clean_file(bar),
 		^^clean_text_output,
 		^^clean_text_input.
 
