@@ -99,6 +99,8 @@ checking output of lists with elements that are conjunctions.
 
 * FIXED: Duplicated test for the `atom_concat/3` Prolog standard predicate.
 
+* FIXED: Test for the Prolog standard `get_byte/2` built-in predicate.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

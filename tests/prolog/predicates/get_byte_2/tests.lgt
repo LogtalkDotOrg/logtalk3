@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2020-07-30,
+		date is 2020-08-27,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
@@ -101,7 +101,7 @@
 	succeeds(lgt_get_byte_2_14) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{get_byte(st_i,_), get_byte(st_i,Byte)},
-		Byte = -1.
+		Byte == -1.
 
 	throws(lgt_get_byte_2_15, error(permission_error(input,stream,s),_)) :-
 		^^set_binary_output(s, []),
