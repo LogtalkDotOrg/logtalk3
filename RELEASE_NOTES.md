@@ -101,6 +101,10 @@ checking output of lists with elements that are conjunctions.
 
 * FIXED: Test for the Prolog standard `get_byte/2` built-in predicate.
 
+* FIXED: Tests for the Prolog standard `number_codes/2` built-in predicate
+to set the `double_quotes` flag to `codes` as required. Thanks to José
+Antonio Riaza Valverde for the bug report.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
