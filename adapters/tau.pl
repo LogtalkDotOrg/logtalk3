@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog 0.3.0 and later versions
-%  Last updated on August 25, 2020
+%  Last updated on August 28, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -259,7 +259,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_default_flag'(always_true_or_false_goals, warning).
 '$lgt_default_flag'(lambda_variables, warning).
 '$lgt_default_flag'(suspicious_calls, warning).
-'$lgt_default_flag'(underscore_variables, singletons).
+'$lgt_default_flag'(underscore_variables, dont_care).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).
