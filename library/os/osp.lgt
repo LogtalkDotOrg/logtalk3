@@ -21,9 +21,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:28:1,
+		version is 1:28:2,
 		author is 'Paulo Moura',
-		date is 2020-06-22,
+		date is 2020-08-29,
 		comment is 'Portable operating-system access protocol.',
 		see_also is [os, os_types]
 	]).
@@ -184,9 +184,9 @@
 	]).
 
 	:- public(file_permission/2).
-	:- mode(file_permission(+atom, ?atom), zero_or_one).
+	:- mode(file_permission(+atom, +atom), zero_or_one).
 	:- info(file_permission/2, [
-		comment is 'True if the specified file has the specified permission (``read``, ``write``, or ``execute``).',
+		comment is 'True iff the specified file has the specified permission (``read``, ``write``, or ``execute``).',
 		argnames is ['File', 'Permission']
 	]).
 

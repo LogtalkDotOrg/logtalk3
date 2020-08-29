@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:28:1
-| **Date:** 2020-06-22
+| **Version:** 1:28:2
+| **Date:** 2020-08-29
 
 | **Compilation flags:**
 |    ``static``
@@ -537,7 +537,7 @@ File size (in bytes).
 ``file_permission/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-True if the specified file has the specified permission (``read``, ``write``, or ``execute``).
+True iff the specified file has the specified permission (``read``, ``write``, or ``execute``).
 
 | **Compilation flags:**
 |    ``static``
@@ -545,7 +545,7 @@ True if the specified file has the specified permission (``read``, ``write``, or
 | **Template:**
 |    ``file_permission(File,Permission)``
 | **Mode and number of proofs:**
-|    ``file_permission(+atom,?atom)`` - ``zero_or_one``
+|    ``file_permission(+atom,+atom)`` - ``zero_or_one``
 
 
 ------------
