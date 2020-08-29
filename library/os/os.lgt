@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:63:0,
+		version is 1:63:1,
 		author is 'Paulo Moura',
 		date is 2020-08-29,
 		comment is 'Portable operating-system access predicates.',
@@ -688,7 +688,12 @@
 
 		file_permission(File, Permission) :-
 			absolute_file_name(File, Path),
-			{file_exists(Path, Permission)}.
+			map_file_permission(Permission, Property),
+			{file_property(Path, Property, true)}.
+
+		map_file_permission(read,    readable).
+		map_file_permission(write,   writable).
+		map_file_permission(execute, executable).
 
 		delete_file(File) :-
 			absolute_file_name(File, Path),
@@ -1428,7 +1433,12 @@
 
 		file_permission(File, Permission) :-
 			absolute_file_name(File, Path),
-			{file_exists(Path, Permission)}.
+			map_file_permission(Permission, Property),
+			{file_property(Path, Property, true)}.
+
+		map_file_permission(read,    readable).
+		map_file_permission(write,   writable).
+		map_file_permission(execute, executable).
 
 		delete_file(File) :-
 			absolute_file_name(File, Path),
