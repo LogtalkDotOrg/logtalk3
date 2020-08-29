@@ -54,7 +54,7 @@
 			'Lean Prolog' - '``pid/1`` predicate is not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
-			'Tau Prolog' - '``pid/1`` and ``file_permission/2`` predicates are not supported.',
+			'Tau Prolog' - '``pid/1`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1647,8 +1647,9 @@
 			absolute_file_name(File, ExpandedPath),
 			{size_file(ExpandedPath, Size)}.
 
-		file_permission(_, _) :-
-			throw(not_available(file_permission/2)).
+		file_permission(File, Permission) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_permission(ExpandedPath, Permission)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
