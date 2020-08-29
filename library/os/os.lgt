@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:62:0,
+		version is 1:63:0,
 		author is 'Paulo Moura',
-		date is 2020-08-24,
+		date is 2020-08-29,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -54,7 +54,7 @@
 			'Lean Prolog' - '``pid/1`` predicate is not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
-			'Tau Prolog' - '``pid/1``, ``directory_files/2``, and ``file_permission/2`` predicates are not supported.',
+			'Tau Prolog' - '``pid/1`` and ``file_permission/2`` predicates are not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1627,8 +1627,9 @@
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
-		directory_files(_, _) :-
-			throw(not_available(directory_files/2)).
+		directory_files(Directory, Files) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
