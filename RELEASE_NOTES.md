@@ -57,8 +57,8 @@ includes a fix for a bug where invalid ePub files would be generated.
 Library
 -------
 
-* ADDED: Definition for the `os` library predicates `directory_files/2`,
-`date_time/7`, and `file_permission/2` for Tau Prolog.
+* ADDED: Definition for the `os` library predicates `pid/1`, `date_time/7`,
+`directory_files/2`, and `file_permission/2` for Tau Prolog.
 
 * FIXED: Definition of the `os::file_permission/2` predicate for Quintus
 Prolog and SICStus Prolog.

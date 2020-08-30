@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:63:1,
+		version is 1:64:0,
 		author is 'Paulo Moura',
 		date is 2020-08-29,
 		comment is 'Portable operating-system access predicates.',
@@ -54,7 +54,6 @@
 			'Lean Prolog' - '``pid/1`` predicate is not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
-			'Tau Prolog' - '``pid/1`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1603,8 +1602,8 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
 
-		pid(_) :-
-			throw(not_available(pid/1)).
+		pid(PID) :-
+			{pid(PID)}.
 
 		shell(Command, Status) :-
 			{shell(Command, Status)}.
