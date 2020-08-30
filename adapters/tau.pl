@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog 0.3.0 and later versions
-%  Last updated on August 28, 2020
+%  Last updated on August 30, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -117,10 +117,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable) -- not supported
-
-setup_call_cleanup(_, _, _) :-
-	throw(not_supported(setup_call_cleanup/3)).
+% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 
