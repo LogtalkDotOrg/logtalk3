@@ -134,8 +134,8 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_prolog_meta_predicate'(_, _, _) :-
-	fail.
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
+'$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
