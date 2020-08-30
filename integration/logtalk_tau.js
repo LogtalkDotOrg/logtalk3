@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //
 //  Integration file for Tau Prolog
-//  Last updated on Aug 26, 2020
+//  Last updated on Aug 30, 2020
 //
 //  This file is part of Logtalk <https://logtalk.org/>  
 //  Copyright 1998-2020 José Antonio Riaza Valverde and  
@@ -24,6 +24,7 @@
 
 var readlineSync = require("readline-sync");
 var pl = require("tau-prolog/modules/core.js");
+require("tau-prolog/modules/charsio.js")(pl);
 require("tau-prolog/modules/format.js")(pl);
 require("tau-prolog/modules/js.js")(pl);
 require("tau-prolog/modules/lists.js")(pl);
