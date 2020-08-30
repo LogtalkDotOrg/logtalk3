@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:64:0,
+		version is 1:64:1,
 		author is 'Paulo Moura',
 		date is 2020-08-29,
 		comment is 'Portable operating-system access predicates.',
@@ -1706,7 +1706,7 @@
 			number_codes(Seconds, Codes),
 			atom_codes(SecondsAtom, Codes),
 			atom_concat('sleep ', SecondsAtom, Command),
-			{system(Command)}.
+			{shell(Command)}.
 
 	:- else.
 

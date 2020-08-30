@@ -60,6 +60,8 @@ Library
 * ADDED: Definition for the `os` library predicates `pid/1`, `date_time/7`,
 `directory_files/2`, and `file_permission/2` for Tau Prolog.
 
+* FIXED: Definition of the `os::sleep/1` predicate for Tau Prolog.
+
 * FIXED: Definition of the `os::file_permission/2` predicate for Quintus
 Prolog and SICStus Prolog.
 
