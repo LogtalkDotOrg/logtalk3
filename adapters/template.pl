@@ -474,13 +474,13 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_logtalk_prolog_encoding'(?atom, ?atom)
+% '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
-'$lgt_logtalk_prolog_encoding'('US-ASCII', ?????).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', ?????).
-'$lgt_logtalk_prolog_encoding'('UTF-8', ?????).
-'$lgt_logtalk_prolog_encoding'('UTF-16BE', ?????).
-'$lgt_logtalk_prolog_encoding'('UTF-16LE', ?????).
+'$lgt_logtalk_prolog_encoding'('US-ASCII', ?????, _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', ?????, _).
+'$lgt_logtalk_prolog_encoding'('UTF-8', ?????, _).
+'$lgt_logtalk_prolog_encoding'('UTF-16BE', ?????, _).
+'$lgt_logtalk_prolog_encoding'('UTF-16LE', ?????, _).
 
 
 

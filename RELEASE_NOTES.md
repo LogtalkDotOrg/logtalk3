@@ -43,6 +43,9 @@ built-in predicate.
 * UPDATED: The `taulgt` shell script to accept `-g` and `--goal` command-line
 options. Changes contributed by José Antonio Riaza Valverde.
 
+* FIXED: The Fix Tau Prolog and template adapters for the internal predicate
+`'$lgt_logtalk_prolog_encoding'/3`.
+
 Documentation
 -------------
 
