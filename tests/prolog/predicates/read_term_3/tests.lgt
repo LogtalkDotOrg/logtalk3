@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2019-09-22,
+		date is 2020-08-31,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -45,7 +45,8 @@
 		^^set_text_input(st_o, ['foo(A+Roger,A+_). ','term2. ...']),
 		{read_term(st_o, T, [variables(VL),variable_names(VN),singletons(VS)])},
 		^^text_input_assertion(st_o, ' term2. ...', Assertion),
-		^^assertion(T = foo(X1+X2,X1+X3)),
+		^^assertion(variant(T, foo(X1+X2,X1+X3))),
+		T = foo(X1+X2,X1+X3),
 		^^assertion(VL == [X1,X2,X3]),
 		^^assertion(VN == ['A'=X1,'Roger'=X2]),
 		^^assertion(VS == ['Roger'=X2]),
@@ -143,7 +144,7 @@
 		max_min_integer_as_atom(max_integer, Integer, Atom),
 		^^set_text_input([Atom, '. ']),
 		{read(X)}.
-		
+
 	test(sics_read_term_3_23, true(X == Integer)) :-
 		max_min_integer_as_atom(min_integer, Integer, Atom),
 		^^set_text_input([Atom, '. ']),
@@ -178,6 +179,17 @@
 		^^assertion(VL == []),
 		^^assertion(VN == []),
 		^^assertion(VS == []).
+
+	test(lgt_read_term_3_29, true) :-
+		^^set_text_input(empty, 'foo(A,B,A). '),
+		{read_term(empty, T, [variables(VL),variable_names(VN),singletons(VS)])},
+		^^assertion(variant(T, foo(A,B,A))),
+		T = foo(A,B,A),
+		^^assertion(var(A)),
+		^^assertion(var(B)),
+		^^assertion(VL == [A,B]),
+		^^assertion(VN == ['A'=A,'B'=B]),
+		^^assertion(VS == ['B'=B]).
 
 	cleanup :-
 		^^clean_text_input,
