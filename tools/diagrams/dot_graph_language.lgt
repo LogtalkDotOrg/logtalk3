@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2020-04-06,
+		date is 2020-08-31,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -384,6 +384,12 @@
 		{:- use_module(library(codesio), [])}.
 		write_term_to_chars(Term, Chars) :-
 			{codesio:format_to_codes('~w', Term, Codes), atom_codes(Atom, Codes), atom_chars(Atom, Chars)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, tau)).
+
+		{:- use_module(library(charsio))}.
+		write_term_to_chars(Term, Chars) :-
+			{write_term_to_chars(Term, [], Chars)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 

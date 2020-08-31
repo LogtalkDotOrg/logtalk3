@@ -40,6 +40,9 @@ Prolog adapter and integration files
 * UPDATED: The Tau Prolog adapter file to use the new `stream_position_data/3`
 built-in predicate.
 
+* UPDATED: The `taulgt` shell script to accept `-g` and `--goal` command-line
+options. Changes contributed by José Antonio Riaza Valverde.
+
 Documentation
 -------------
 
@@ -68,8 +71,8 @@ Prolog and SICStus Prolog.
 Tools
 -----
 
-* UPDATED: The `taulgt` shell script to accept `-g` and `--goal` command-line
-options. Changes contributed by José Antonio Riaza Valverde.
+* UPDATED: The `debugger`, `diagrams`, `lgtunit`, and `ports_profiler` tools
+for Tau Prolog support.
 
 * UPDATED: The `logtalk_doclet` and `logtalk_tester` shell scripts to support
 using Tau Prolog as the backend compiler.

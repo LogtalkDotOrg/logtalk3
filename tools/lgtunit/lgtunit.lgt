@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:4:0,
+		version is 8:5:0,
 		author is 'Paulo Moura',
-		date is 2020-06-03,
+		date is 2020-08-31,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1484,7 +1484,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == qp; Dialect == swi; Dialect == yap)
+		(Dialect == b; Dialect == qp; Dialect == swi; Dialect == tau; Dialect == yap)
 	)).
 
 		% avoid portability warnings
@@ -1507,8 +1507,9 @@
 			),
 			!.
 
-	:- elif((	current_logtalk_flag(prolog_dialect, Dialect),
-				(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
+	:- elif((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
 	)).
 
 		% avoid portability warnings
