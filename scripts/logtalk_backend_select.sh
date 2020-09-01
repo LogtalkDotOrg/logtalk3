@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on June 5, 2020
+##   Last updated on September 1, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.8"
+	echo "  0.9"
 	exit 0
 }
 
@@ -55,6 +55,9 @@ list_backends() {
 	fi
 	if [ -e "$(command -v swilgt)" ] && [ "$(command -v swipl)" != "" ] ; then
 		echo -n "  swilgt"
+	fi
+	if [ -e "$(command -v taulgt)" ] && [ -d "$NODE_PATH/tau-prolog" ] ; then
+		echo -n "  taulgt"
 	fi
 	if [ -e "$(command -v xsblgt)" ] && [ "$(command -v xsb)" != "" ] ; then
 		echo -n "  xsblgt"
@@ -139,6 +142,8 @@ valid_backend() {
 	elif [ "$1" == "sicstuslgt" ] && [ -e "$(command -v sicstuslgt)" ]  && [ "$(command -v sicstus)" != "" ] ; then
 		return 0
 	elif [ "$1" == "swilgt" ] && [ -e "$(command -v swilgt)" ]  && [ "$(command -v swipl)" != "" ] ; then
+		return 0
+	elif [ "$1" == "taulgt" ] && [ -e "$(command -v taulgt)" ] && [ -d "$NODE_PATH/tau-prolog" ] ; then
 		return 0
 	elif [ "$1" == "xsblgt" ] && [ -e "$(command -v xsblgt)" ]  && [ "$(command -v xsb)" != "" ] ; then
 		return 0

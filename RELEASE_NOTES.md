@@ -24,7 +24,10 @@ RELEASE NOTES
 3.42.0 - October ??, 2020
 =========================
 
+Installers and installation scripts
+-----------------------------------
 
+* UPDATED: The `logtalk_backend_select` script for Tau Prolog.
 
 
 3.41.0 - September 1, 2020
