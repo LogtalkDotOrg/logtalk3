@@ -34,9 +34,12 @@ being compiled.
 Library
 -------
 
-* FIXED: Workaround an issue with some backend Prolog compilers such as ECLiPSe
+* FIXED: Workaround an issue with some backend Prolog systems such as ECLiPSe
 where reloading a file defining clauses for a multifile predicate results in
 the duplication of the clauses when testing the `arbitrary` library.
+
+* FIXED: The `arbitrary` library tests for backend Prolog systems that don't
+support Unicode.
 
 Installers and installation scripts
 -----------------------------------
