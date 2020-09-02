@@ -12642,12 +12642,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 	% reinstate relation between term variables and their names
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
-	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, _, _, _),
-	\+ (
-		'$lgt_member'(_=Var0, VariableNames),
-		Var0 == Var
-	),
-	% assume that Var is an anonymous variable
+	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
+	'$lgt_anonymous_or_singleton_variable'(Var, VariableNames, Singletons),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
@@ -12662,12 +12658,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 	% reinstate relation between term variables and their names
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
-	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, _, _, _),
-	\+ (
-		'$lgt_member'(_=Var0, VariableNames),
-		Var0 == Var
-	),
-	% assume that Var is an anonymous variable
+	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
+	'$lgt_anonymous_or_singleton_variable'(Var, VariableNames, Singletons),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
@@ -12683,12 +12675,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	term_variables(Ground, Variables),
 	% reinstate relation between term variables and their names
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
-	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, _, _, _),
-	\+ (
-		'$lgt_member'(_=Var, VariableNames),
-		'$lgt_member_var'(Var, Variables)
-	),
-	% assume that all variables in Ground are anonymous variables
+	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
+	'$lgt_anonymous_or_singleton_variables'(Variables, VariableNames, Singletons),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
@@ -26113,6 +26101,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 	arg(N, Term, Argument),
 	'$lgt_sub_term_var'(SubTerm, Argument),
 	!.
+
+
+'$lgt_anonymous_or_singleton_variable'(Variable, VariableNames, Singletons) :-
+	(	'$lgt_member'(_=Variable0, Singletons),
+		Variable0 == Variable ->
+		true
+	;	\+ (
+			'$lgt_member'(_=Variable0, VariableNames),
+			Variable0 == Variable
+		)
+	).
+
+
+'$lgt_anonymous_or_singleton_variables'([], _, _).
+'$lgt_anonymous_or_singleton_variables'([Variable| Variables], VariableNames, Singletons) :-
+	'$lgt_anonymous_or_singleton_variable'(Variable, VariableNames, Singletons),
+	'$lgt_anonymous_or_singleton_variables'(Variables, VariableNames, Singletons).
+
 
 
 % find position-relevant argument pairs for =../2 lint checks where a relevant

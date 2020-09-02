@@ -31,6 +31,10 @@ Logtalk compiler and runtime
 keys for accessing the variables and the singleton variables of the term
 being compiled.
 
+* IMPROVED: Generalize linter checks for tautologies and falsehoods in
+non-ground `var/1`, `nonvar/1`, and `ground/1` goals to check for singleton
+variables.
+
 Library
 -------
 
