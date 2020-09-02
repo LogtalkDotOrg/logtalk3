@@ -31,6 +31,13 @@ Logtalk compiler and runtime
 keys for accessing the variables and the singleton variables of the term
 being compiled.
 
+Library
+-------
+
+* FIXED: Workaround an issue with some backend Prolog compilers such as ECLiPSe
+where reloading a file defining clauses for a multifile predicate results in
+the duplication of the clauses when testing the `arbitrary` library.
+
 Installers and installation scripts
 -----------------------------------
 

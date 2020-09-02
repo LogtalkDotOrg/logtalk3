@@ -18,14 +18,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% to avoid problems with backend Prolog compilers such as ECLiPSe where
+% reloading a file defining clauses for a multifile predicate results in
+% the duplication of the clauses, below we load the required libraries
+% for the "lgtunit" tool separately so that we can load the "arbitrary"
+% library under testing in debug mode
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(lgtunit(loader)),
-	% reload the "arbitrary" category (already loaded by the "lgtunit"
-	% tool) in debug mode to support collecting code coverage data
+	logtalk_load(os(loader)),
+	% load the "arbitrary" category in debug mode to support collecting code coverage data
 	logtalk_load(arbitrary(arbitrary), [debug(on), source_data(on)]),
+	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
