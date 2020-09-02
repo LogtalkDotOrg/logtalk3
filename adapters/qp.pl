@@ -555,15 +555,15 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, [singletons(Singletons)| Options], LineBegin-LineEnd, Variables) :-
+'$lgt_read_term'(Stream, Term, [variable_names(VariablesNames), singletons(Singletons)| Options], LineBegin-LineEnd) :-
 	stream_property(Stream, line_number(LineBegin)),
-	read_term(Stream, Term, [variable_names(Variables0), singletons(Singletons0)| Options]),
+	read_term(Stream, Term, [variable_names(VariablesNames0), singletons(Singletons0)| Options]),
 	stream_property(Stream, line_number(LineEnd)),
 	% workaround lack of compliance of the variable_names/1 option
 	'$lgt_qp_fix_variable_names'(Singletons0, Singletons),
-	'$lgt_qp_fix_variable_names'(Variables0, Variables).
+	'$lgt_qp_fix_variable_names'(VariablesNames0, VariablesNames).
 
 
 '$lgt_qp_fix_variable_names'([], []).

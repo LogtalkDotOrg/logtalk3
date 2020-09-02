@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.6.1 or later versions
-%  Last updated on August 5, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -478,10 +478,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [line_counts(LineBegin,LineEnd), variable_names(Variables)| Options]).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	read_term(Stream, Term, [line_counts(LineBegin,LineEnd)| Options]).
 
 
 

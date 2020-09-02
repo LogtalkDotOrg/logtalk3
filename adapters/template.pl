@@ -438,9 +438,9 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
 	?????
 
 

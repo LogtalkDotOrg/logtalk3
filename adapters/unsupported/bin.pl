@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on August 5, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -482,7 +482,7 @@ write_term(Stream, Term, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
 '$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
 	read_term(Stream, Term, Options).

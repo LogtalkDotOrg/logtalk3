@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog 0.3.0 and later versions
-%  Last updated on August 31, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -478,11 +478,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
 	stream_property(Stream, position(PositionBegin)),
-	read_term(Stream, Term, [variable_names(Variables)| Options]),
+	read_term(Stream, Term, Options),
 	stream_position_data(line_count, PositionBegin, LineBegin),
 	stream_property(Stream, position(PositionEnd)),
 	stream_position_data(line_count, PositionEnd, LineEnd).

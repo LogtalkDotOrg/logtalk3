@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on August 5, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -505,10 +505,10 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1), Variables) :-
-	read_term(Stream, Term, [variable_names(Variables)| Options]).
+'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
+	read_term(Stream, Term, Options).
 
 
 

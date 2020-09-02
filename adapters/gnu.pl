@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on August 5, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -464,10 +464,10 @@ setup_call_cleanup(_, _, _) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [syntax_error(error), variable_names(Variables)| Options]),
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	read_term(Stream, Term, [syntax_error(error)| Options]),
 	last_read_start_line_column(LineBegin, _),
 	stream_line_column(Stream, Line, Col),
 	(	Col = 1 ->

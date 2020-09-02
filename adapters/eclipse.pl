@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on August 5, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -617,18 +617,18 @@ forall(Generate, Test) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
 :- if((get_flag(version_as_list, Version), Version @>= [7,0,35])).
-	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
 		get_stream_info(Stream, line, LineLast),
-		read_term(Stream, Term, [syntax_errors(error), variable_names(Variables)| Options]),
+		read_term(Stream, Term, [syntax_errors(error)| Options]),
 		LineBegin is LineLast + 1,
 		get_stream_info(Stream, line, LineEnd).
 :- else.
-	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+	'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
 		get_stream_info(Stream, line, LineLast),
-		(	read_term(Stream, Term, [variable_names(Variables)| Options]) ->
+		(	read_term(Stream, Term, Options) ->
 			LineBegin is LineLast + 1,
 			get_stream_info(Stream, line, LineEnd)
 		;	throw(syntax_error)

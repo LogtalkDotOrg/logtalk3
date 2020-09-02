@@ -594,10 +594,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
-	read_term(Stream, Term, [syntax_errors(error), term_position(PositionBegin), variable_names(Variables)| Options]),
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	read_term(Stream, Term, [term_position(PositionBegin), syntax_errors(error)| Options]),
 	stream_position_data(line_count, PositionBegin, LineBegin),
 	stream_position(Stream, PositionEnd),
 	stream_position_data(line_count, PositionEnd, LineEnd).

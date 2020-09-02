@@ -24,10 +24,22 @@ RELEASE NOTES
 3.42.0 - October ??, 2020
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: New `logtalk_load_context/2` predicate `variables` and `singletons`
+keys for accessing the variables and the singleton variables of the term
+being compiled.
+
 Installers and installation scripts
 -----------------------------------
 
 * UPDATED: The `logtalk_backend_select` script for Tau Prolog.
+
+Tests
+-----
+
+* ADDED: Tests for the new `logtalk_load_context/2` predicate keys.
 
 
 3.41.0 - September 1, 2020

@@ -35,15 +35,23 @@
 		{assertz(logtalk_library_path(hook_directory, Directory))}
 	)).
 
-	term_expansion(a(_,_,_,_), _) :-
+	term_expansion(a(_,_,_,_,_), _) :-
 		logtalk_load_context(term, Term),
 		assertz(result(term, Term)),
 		fail.
-	term_expansion(a(_,_,_,_), _) :-
+	term_expansion(a(_,_,_,_,_), _) :-
+		logtalk_load_context(variables, Variables),
+		assertz(result(variables, Variables)),
+		fail.
+	term_expansion(a(_,_,_,_,_), _) :-
 		logtalk_load_context(variable_names, VariableNames),
 		assertz(result(variable_names, VariableNames)),
 		fail.
-	term_expansion(a(_,_,_,_), _) :-
+	term_expansion(a(_,_,_,_,_), _) :-
+		logtalk_load_context(singletons, Singletons),
+		assertz(result(singletons, Singletons)),
+		fail.
+	term_expansion(a(_,_,_,_,_), _) :-
 		logtalk_load_context(term_position, Position),
 		assertz(result(term_position, Position)),
 		fail.
@@ -102,9 +110,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2018-04-16,
+		date is 2020-09-02,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -172,33 +180,41 @@
 
 	test(logtalk_load_context_2_11) :-
 		result(term, Term),
-		^^variant(Term, a(A,B,B,A)).
+		^^variant(Term, a(A,B,C,B,A)).
 
 	test(logtalk_load_context_2_12) :-
-		result(variable_names, VariableNames),
-		^^variant(VariableNames, ['A'=_, 'B'=_]).
+		result(variables, Variables),
+		^^variant(Variables, [_, _, _]).
 
 	test(logtalk_load_context_2_13) :-
+		result(variable_names, VariableNames),
+		^^variant(VariableNames, ['A'=_, 'B'=_, 'C'=_]).
+
+	test(logtalk_load_context_2_14) :-
+		result(singletons, Singletons),
+		^^variant(Singletons, ['C'=_]).
+
+	test(logtalk_load_context_2_15) :-
 		result(term_position, TermPosition), ground(TermPosition).
 
 	% calls from initialization/1 directives
 
-	test(logtalk_load_context_2_14) :-
+	test(logtalk_load_context_2_16) :-
 		object_property(hook, file(Source0)),
 		logtalk_library_path(hook_source, Source),
 		Source0 == Source.
 
-	test(logtalk_load_context_2_15) :-
+	test(logtalk_load_context_2_17) :-
 		object_property(hook, file(_, Directory0)),
 		logtalk_library_path(hook_directory, Directory),
 		Directory0 == Directory.
 
-	test(logtalk_load_context_2_16) :-
+	test(logtalk_load_context_2_18) :-
 		object_property(hook, file(Basename0,_)),
 		logtalk_library_path(hook_basename, Basename),
 		Basename0 == Basename.
 
-	test(logtalk_load_context_2_17) :-
+	test(logtalk_load_context_2_19) :-
 		object_property(hook, file(File0)),
 		logtalk_library_path(hook_file, File),
 		File0 == File.

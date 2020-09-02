@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on August 5, 2020
+%  Last updated on September 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -509,11 +509,11 @@ findall(Term, Goal, List, Tail) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_read_term'(@stream, -term, +list, -position, -list)
+% '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
-'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd, Variables) :-
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
 	% B-Prolog bug workaround: up to version 8.1, the lines are returned end line first!
-	read_term(Stream, Term, [line_counts(LineEnd, LineBegin), variable_names(Variables0)| Options]),
+	read_term(Stream, Term, [line_counts(LineEnd, LineBegin)| Options]),
 	% workaround lack of compliance of the variable_names/1 option
 	reverse(Variables0, Variables).
 
