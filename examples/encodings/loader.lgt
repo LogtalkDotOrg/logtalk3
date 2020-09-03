@@ -27,9 +27,9 @@
 
 	:- initialization(logtalk_load([asian, babel, latin, mythology])).
 
-:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ji; Dialect == lean))).
+:- elif(current_logtalk_flag(prolog_dialect, ji)).
 
-	% JIProlog and Lean Prolog only supported Unicode encoding is UTF-8
+	% JIProlog only supported Unicode encoding is UTF-8
 	:- initialization(logtalk_load([babel])).
 
 :- else.

@@ -22,23 +22,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:13:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2019-02-01,
+		date is 2020-09-03,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 
-	:- if(\+ current_logtalk_flag(prolog_dialect, lean)).
-	% Lean Prolog doesn't support the 0'<char> used in these examples
 	test(dcgs_01) :-
 		findall(Result,calculator::parse("1+2-3*4", Result), Solutions),
 		Solutions == [-9].
 
 	test(dcgs_02) :-
 		macaddr::valid("00:1e:4a:ef:72:8b").
-	:- endif.
 
 	test(dcgs_03) :-
 		findall(Message, logtalk << phrase(morse::morse(Message), "... --- ..."), Solutions),
@@ -85,9 +82,6 @@
 		A =~= -0.94974746830583223,
 		B =~=  6.9497474683058318.
 
-	:- if(\+ current_logtalk_flag(prolog_dialect, lean)).
-	% Lean Prolog doesn't support the 0'<char> used in these examples
-
 	test(dcgs_13) :-
 		findall(XML, xml::convert(word(child, children), word(singular, plural), XML), Solutions),
 		Solutions == ['<word><singular>child</singular><plural>children</plural></word>'].
@@ -122,8 +116,6 @@
 	:- else.
 	- test(dcgs_20) :-
 		iban::valid("GB82 WEST 1234 5698 7654 32").
-	:- endif.
-
 	:- endif.
 
 	test(dcgs_21) :-

@@ -22,19 +22,13 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2016-03-03,
+		date is 2020-09-03,
 		comment is 'Hook object for the named database predicates.'
 	]).
 
-	:- if(current_logtalk_flag(prolog_dialect, lean)).
-
-		goal_expansion(db_create(_), true).
-		goal_expansion(db_load(Database, File), db_reconsult(File, Database)).
-		% the other predicate are built-in predicates in Lean Prolog
-
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		goal_expansion(db_create(Database), (current_module(Database) -> true; create_module(Database, [], eclipse_language))).
 		goal_expansion(db_dynamic(Database, Predicates), '@'(dynamic(Predicates), Database)).

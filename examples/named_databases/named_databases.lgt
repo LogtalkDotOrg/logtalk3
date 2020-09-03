@@ -18,20 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, lean)).
-
-	db_create(_).
-
-	db_load(Database, File) :-
-		db_reconsult(File, Database).
-
-	db_once(Database, Goal) :-
-		db_call(Database:Goal),
-		!.
-
-	% the other predicate are built-in predicates in Lean Prolog
-
-:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
 	db_create(Database) :-
 		(	current_module(Database) ->
@@ -142,7 +129,7 @@
 			),
 			fail
 		;	true
-		).		
+		).
 
 	db_load(Database, File) :-
 		Database:reconsult(File).
@@ -214,7 +201,7 @@
 		current_output(Current),
 		set_output(Stream),
 		current_predicate(Database:Functor/Arity),
-		functor(Template, Functor, Arity), 
+		functor(Template, Functor, Arity),
 		predicate_property(Database:Template, (dynamic)),
 		listing(Database:Functor/Arity),
 		close(Stream),

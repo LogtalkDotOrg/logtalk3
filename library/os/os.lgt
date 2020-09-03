@@ -43,15 +43,14 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:64:1,
+		version is 1:65:0,
 		author is 'Paulo Moura',
-		date is 2020-08-29,
+		date is 2020-09-03,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
 			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` predicates are not supported.',
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
-			'Lean Prolog' - '``pid/1`` predicate is not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
@@ -1198,152 +1197,6 @@
 
 		sleep(Seconds) :-
 			{thread_sleep(Seconds)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, lean)).
-
-		pid(_) :-
-			throw(not_available(pid/1)).
-
-		shell(Command, Status) :-
-			split_command(Command, List),
-			{system(List, Status)}.
-
-		shell(Command) :-
-			shell(Command, 0).
-
-		split_command(Command, List) :-
-			atom_chars(Command, Chars),
-			split_command_(Chars, Lists),
-			lists_to_atoms(Lists, List).
-
-		split_command_([], [[]]).
-		split_command_([' '| Chars], [[]| List]) :-
-			!,
-			split_command_(Chars, List).
-		split_command_([Char| Chars], [[Char|Tail]| List]) :-
-			split_command_(Chars, [Tail| List]).
-
-		lists_to_atoms([], []).
-		lists_to_atoms([List| Lists], [Atom| Atoms]) :-
-			atom_chars(Atom, List),
-			lists_to_atoms(Lists, Atoms).
-
-		absolute_file_name(Path, ExpandedPath) :-
-			(	\+ atom_concat('/', _, Path),
-				\+ atom_concat('$', _, Path) ->
-				{working_directory(Current, Current)},
-				atom_concat(Current, '/', ExpandedPath0),
-				atom_concat(ExpandedPath0, Path, ExpandedPath1),
-				{absolute_file_name(ExpandedPath1, ExpandedPath)}
-			;	{absolute_file_name(Path, ExpandedPath)}
-			).
-
-		make_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			(	{exists_dir(ExpandedPath)} ->
-				true
-			;	{make_directory(ExpandedPath)}
-			).
-
-		make_directory_path(Directory) :-
-			make_directory(Directory).
-
-		delete_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{delete_directory(ExpandedPath)}.
-
-		change_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{working_directory(_, ExpandedPath)}.
-
-		working_directory(Directory) :-
-			{working_directory(Directory, Directory)}.
-
-		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, Path),
-			{working_directory(CurrentDirectory, Path),
-			 dirs(Directories0),
-			 files(Files0),
-			 append(['.', '..'| Directories0], Files0, Files),
-			 working_directory(_, CurrentDirectory)}.
-
-		directory_exists(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{exists_dir(ExpandedPath)}.
-
-		file_exists(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{exists_file(ExpandedPath)}.
-
-		file_modification_time(File, Time) :-
-			absolute_file_name(File, ExpandedPath),
-			{new_java_object('java.io.File'(ExpandedPath), Object),
-			 invoke_java_method(Object, lastModified, Time)}.
-
-		file_size(File, Size) :-
-			absolute_file_name(File, ExpandedPath),
-			{new_java_object('java.io.File'(ExpandedPath), Object),
-			 invoke_java_method(Object, length, Size0)},
-			atom_codes(Size0, Codes),
-			number_codes(Size, Codes).
-
-		file_permission(File, read) :-
-			absolute_file_name(File, ExpandedPath),
-			{new_java_object('java.io.File'(ExpandedPath), Object),
-			 invoke_java_method(Object, canRead, Result)},
-			is_true(Result).
-
-		file_permission(File, write) :-
-			absolute_file_name(File, ExpandedPath),
-			{new_java_object('java.io.File'(ExpandedPath), Object),
-			 invoke_java_method(Object, canWrite, Result)},
-			is_true(Result).
-
-		file_permission(File, execute) :-
-			absolute_file_name(File, ExpandedPath),
-			{new_java_object('java.io.File'(ExpandedPath), Object),
-			 invoke_java_method(Object, canExecute, Result)},
-			is_true(Result).
-
-		delete_file(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
-
-		rename_file(Old, New) :-
-			{rename_file(Old, New)}.
-
-		environment_variable(Variable, Value) :-
-			{getenv(Variable, Value)}.
-
-		time_stamp(Time) :-
-			{get_time(Time)}.
-
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{new_java_object('java.util.GregorianCalendar', Calendar),
-			 get_java_field(Calendar,'YEAR', Field1), invoke_java_method(Calendar, get(Field1), Year),
-			 get_java_field(Calendar,'MONTH', Field2), invoke_java_method(Calendar, get(Field2), Month),
-			 get_java_field(Calendar,'DAY_OF_MONTH', Field3), invoke_java_method(Calendar, get(Field3), Day),
-			 get_java_field(Calendar,'HOUR_OF_DAY', Field4), invoke_java_method(Calendar, get(Field4), Hours),
-			 get_java_field(Calendar,'MINUTE', Field5), invoke_java_method(Calendar, get(Field5), Minutes),
-			 get_java_field(Calendar,'SECOND', Field6), invoke_java_method(Calendar, get(Field6), Seconds)}.
-
-		cpu_time(Time) :-
-			{cputime(Time)}.
-
-		wall_time(Time) :-
-			{cputime(Time)}.
-
-		operating_system_type(Type) :-
-			(	{getenv('COMSPEC', _)} ->
-				Type = windows
-			;	Type = unix
-			).
-
-		command_line_arguments(Arguments) :-
-			{get_cmd_line_args(Arguments)}.
-
-		sleep(Seconds) :-
-			{sleep(Seconds)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, quintus)).
 

@@ -38,21 +38,11 @@
 		bypass,
 		dcgtest,
 		metas,
-		lambdas
+		lambdas,
+		calculator,
+		iban,
+		macaddr,
+		url,
+		xml
 	])
 ).
-
-:- if(\+ current_logtalk_flag(prolog_dialect, lean)).
-
-	% Lean Prolog doesn't support the 0'<char> used in these examples
-	:- initialization(
-		logtalk_load([
-			calculator,
-			iban,
-			macaddr,
-			url,
-			xml
-		])
-	).
-
-:- endif.

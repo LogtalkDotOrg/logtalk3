@@ -22,7 +22,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:4:0,
+		version is 4:5:0,
 		author is 'Paulo Moura',
 		date is 2020-08-31,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -743,7 +743,7 @@
 		),
 		fail.
 
-	:- if((current_logtalk_flag(prolog_dialect,Dialect), Dialect \== b, Dialect \== cx, Dialect \== ji, Dialect \== lean)).
+	:- if((current_logtalk_flag(prolog_dialect,Dialect), Dialect \== b, Dialect \== cx, Dialect \== ji)).
 
 	do_port_option((<), _, _, _, _, _, _, _) :-
 		ask_question(question, debugger, enter_write_max_depth, '=<'(0), N),
@@ -908,14 +908,6 @@
 				put_code(10), Char = '\n'
 			;	put_code(Code), char_code(Char, Code), nl
 			).
-
-	:- elif(current_logtalk_flag(prolog_dialect, lean)).
-
-		read_single_char(Char) :-
-			kbd_wait(Code),
-			put_code(Code),
-			nl,
-			char_code(Char, Code).
 
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 
