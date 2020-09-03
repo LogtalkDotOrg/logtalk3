@@ -26104,8 +26104,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_anonymous_or_singleton_variable'(Variable, VariableNames, Singletons) :-
-	(	'$lgt_member'(_=Variable0, Singletons),
-		Variable0 == Variable ->
+	(	'$lgt_member'(Name0=Variable0, Singletons),
+		Variable0 == Variable,
+		\+ '$lgt_parameter_variable_name'(Name0) ->
 		true
 	;	\+ (
 			'$lgt_member'(_=Variable0, VariableNames),
