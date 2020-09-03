@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on August 26, 2020
+##   Last updated on September 3, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.3"
+	echo "$(basename "$0") 2.4"
 	exit 0
 }
 
@@ -46,9 +46,9 @@ if [[ "$(command -v timeout)" == *"System32"* ]] || [[ "$(command -v timeout)" =
 	timeout_command=""
 # second, look for GNU coreutils package timeout command
 elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="timeout -k 1"
+	timeout_command="timeout -s 9 -k 1.0s"
 elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="gtimeout -k 1"
+	timeout_command="gtimeout -s 9 -k 1.0s"
 else
 	timeout_command=""
 fi
@@ -140,7 +140,7 @@ run_testset() {
 		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
 	elif [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] ; then
 		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/%         (/'
-	elif [ $tests_exit -eq 124 ] ; then
+	elif [ $tests_exit -eq 137 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
 		fi

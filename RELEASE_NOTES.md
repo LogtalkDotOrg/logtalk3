@@ -45,10 +45,11 @@ the duplication of the clauses when testing the `arbitrary` library.
 * FIXED: The `arbitrary` library tests for backend Prolog systems that don't
 support Unicode.
 
-Installers and installation scripts
------------------------------------
+Tools
+-----
 
-* UPDATED: The `logtalk_backend_select` script for Tau Prolog.
+* CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
+timeout option.
 
 Tests
 -----
@@ -57,6 +58,11 @@ Tests
 
 * IMPROVED: Tests for the `predicate_property/2` de facto standard Prolog
 predicate.
+
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `logtalk_backend_select` script for Tau Prolog.
 
 
 3.41.0 - September 1, 2020
