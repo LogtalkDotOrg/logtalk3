@@ -33,9 +33,9 @@ elk(X) :- moose(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-09-03,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 
@@ -46,25 +46,31 @@ elk(X) :- moose(X).
 	% some of tests below are taken from the ISO/IEC DTR 13211--1:2006 - New built-in flags, predicates,
 	% and functions standardization proposal (October 5, 2009 revision)
 
-	succeeds(commons_predicate_property_2_01) :-
+	test(commons_predicate_property_2_01, true) :-
+		forall(
+			{predicate_property(once(_), Property)},
+			^^assertion(ground(Property))
+		).
+
+	test(commons_predicate_property_2_02, true) :-
 		{predicate_property(once(_), built_in)}.
 
-	succeeds(commons_predicate_property_2_02) :-
+	test(commons_predicate_property_2_03, true) :-
 		{predicate_property(atom_codes(_,_), built_in)}.
 
-	succeeds(commons_predicate_property_2_03) :-
-		{predicate_property(findall(_,_,_), meta_predicate(findall(_,0,_)))}.
+	test(commons_predicate_property_2_04, true(subsumes_term(findall(_,0,_),Template))) :-
+		{predicate_property(findall(_,_,_), meta_predicate(Template))}.
 
-	succeeds(commons_predicate_property_2_04) :-
-		{predicate_property(call(_,_,_), meta_predicate(call(2,_,_)))}.
+	test(commons_predicate_property_2_05, true(subsumes_term(call(2,_,_),Template))) :-
+		{predicate_property(call(_,_,_), meta_predicate(Template))}.
 
-	succeeds(commons_predicate_property_2_05) :-
+	test(commons_predicate_property_2_06, true) :-
 		{predicate_property(cat(_), (dynamic))}.
 
-	succeeds(commons_predicate_property_2_06) :-
+	test(commons_predicate_property_2_07, true) :-
 		{predicate_property(elk(_), static)}.
 
-	succeeds(commons_predicate_property_2_07) :-
+	test(commons_predicate_property_2_08, true) :-
 		{predicate_property(scattered(_), (multifile))}.
 
 :- end_object.
