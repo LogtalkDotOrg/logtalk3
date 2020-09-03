@@ -35,9 +35,9 @@ bar(_X) :- true.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2020-09-03,
 		comment is 'Unit tests for the ISO Prolog standard abolish/1 built-in predicate.'
 	]).
 
@@ -72,44 +72,38 @@ bar(_X) :- true.
 		findall(X, {insect(X), abolish(insect/1)}, L),
 		L == [ant, bee].
 
-	throws(eddbali_abolish_1_08, error(instantiation_error,_)) :-
-		{abolish(foo/_)}.
-
-	throws(eddbali_abolish_1_09, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
+	throws(eddbali_abolish_1_08, [error(permission_error(modify,static_procedure,bar/1),_), error(permission_error(modify,static_procedure,':'(user,bar/1)),_)]) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(bar/1)}.
 
-	throws(eddbali_abolish_1_10, error(type_error(integer,a),_)) :-
+	throws(eddbali_abolish_1_09, error(type_error(integer,a),_)) :-
 		{abolish(foo/a)}.
 
-	throws(eddbali_abolish_1_11, error(domain_error(not_less_than_zero,-1),_)) :-
+	throws(eddbali_abolish_1_10, error(domain_error(not_less_than_zero,-1),_)) :-
 		{abolish(foo/(-1))}.
 
 	:- if(current_prolog_flag(max_arity, unbounded)).
-		succeeds(eddbali_abolish_1_12) :-
+		succeeds(eddbali_abolish_1_11) :-
 			true.
 	:- else.
-		throws(eddbali_abolish_1_12, error(representation_error(max_arity),_)) :-
+		throws(eddbali_abolish_1_11, error(representation_error(max_arity),_)) :-
 			current_prolog_flag(max_arity, MaxArity),
 			X is MaxArity + 1,
 			{abolish(foo/X)}.
 	:- endif.
 
-	throws(eddbali_abolish_1_13, error(type_error(atom,5),_)) :-
+	throws(eddbali_abolish_1_12, error(type_error(atom,5),_)) :-
 		{abolish(5/2)}.
 
-	throws(eddbali_abolish_1_14, error(type_error(predicate_indicator,insect),_)) :-
+	throws(eddbali_abolish_1_13, error(type_error(predicate_indicator,insect),_)) :-
 		{abolish(insect)}.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_abolish_1_15, error(instantiation_error,_)) :-
+	throws(eclipse_abolish_1_14, error(instantiation_error,_)) :-
 		{abolish(_)}.
 
-	throws(eclipse_abolish_1_16, error(instantiation_error,_)) :-
+	throws(eclipse_abolish_1_15, error(instantiation_error,_)) :-
 		{abolish(_/2)}.
-
-	succeeds(eclipse_abolish_1_17) :-
-		{abolish(foo/2)}.
 
 :- end_object.

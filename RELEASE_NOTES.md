@@ -59,6 +59,9 @@ Tests
 * IMPROVED: Tests for the `predicate_property/2` de facto standard Prolog
 predicate.
 
+* FIXED: Deleted two repeated tests for the `abolish/1` standard Prolog
+predicate.
+
 Installers and installation scripts
 -----------------------------------
 
