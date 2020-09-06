@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:65:0,
+		version is 1:65:1,
 		author is 'Paulo Moura',
-		date is 2020-09-03,
+		date is 2020-09-06,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -53,6 +53,7 @@
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
+			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1475,8 +1476,7 @@
 			).
 
 		make_directory_path(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{make_directory_path(ExpandedPath)}.
+			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1542,9 +1542,8 @@
 			{statistics(runtime, [Milliseconds| _])},
 			Seconds is Milliseconds / 1000.
 
-		wall_time(Seconds) :-
-			{statistics(walltime, [Milliseconds, _])},
-			Seconds is Milliseconds / 1000.
+		wall_time(_) :-
+			throw(not_available(wall_time/1)).
 
 		operating_system_type(Type) :-
 			(	{getenv('COMSPEC', _)} ->

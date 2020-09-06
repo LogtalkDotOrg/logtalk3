@@ -22,13 +22,13 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:11:1,
 		author is 'Paulo Moura',
-		date is 2020-09-03,
+		date is 2020-09-06,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
-			'Portability' - 'B-Prolog, CxProlog, ECLiPSe, JIProlog, Qu-Prolog, Quintus Prolog, and Tau Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.'
+			'Portability' - 'B-Prolog, CxProlog, ECLiPSe, JIProlog, Qu-Prolog, and Quintus Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.'
 		],
 		see_also is [random, fast_random]
 	]).
@@ -243,10 +243,10 @@
 		set_seed(Seed) :- {set_random(seed(Seed))}.
 		random(Random) :- Random is random_float.
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
-		{:- use_module(library(random), [])}.
+		{:- use_module(library(random))}.
 		get_seed(Seed) :- {get_seed(Seed)}.
 		set_seed(Seed) :- {set_seed(Seed)}.
-		random(Random) :- {random:random(Random)}.
+		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		{:- import(from(/(getrand,1), random))}.
 		{:- import(from(/(setrand,1), random))}.

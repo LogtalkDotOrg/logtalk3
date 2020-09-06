@@ -45,6 +45,8 @@ the duplication of the clauses when testing the `arbitrary` library.
 * FIXED: The `arbitrary` library tests for backend Prolog systems that don't
 support Unicode.
 
+* FIXED: Support for the `os` and `random` libraries for Tau Prolog.
+
 Tools
 -----
 
