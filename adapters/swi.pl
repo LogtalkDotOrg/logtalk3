@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on September 1, 2020
+%  Last updated on September 9, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -239,7 +239,9 @@
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(number_string(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(plus(_, _, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(rational(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(succ(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)

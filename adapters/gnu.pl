@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on September 1, 2020
+%  Last updated on September 9, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -153,6 +153,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(list_or_partial_list(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(partial_list(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(succ(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)

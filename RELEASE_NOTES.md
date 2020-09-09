@@ -35,6 +35,12 @@ being compiled.
 non-ground `var/1`, `nonvar/1`, and `ground/1` goals to check for singleton
 variables.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The list of candidate goals for tautologies and falsehoods linter
+checks for GNU Prolog, SWI-Prolog, and YAP.
+
 Library
 -------
 
