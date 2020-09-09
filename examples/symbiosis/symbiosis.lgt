@@ -38,6 +38,8 @@
 		:- use_module(lists, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(apply, [maplist/2, maplist/3]).
+	:- elif(current_logtalk_flag(prolog_dialect, tau)).
+		:- use_module(lists, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 		:- use_module(maplist, [maplist/2, maplist/3]).
 	:- endif.
