@@ -1,12 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of Logtalk <https://logtalk.org/>    
+%
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% benchmark test module for Ciao, SICStus Prolog, SWI-Prolog, XSB, and YAP
+% benchmark test module for Ciao, SICStus Prolog, SWI-Prolog, Tau Prolog, XSB, and YAP
 
 :- module(module, [mod_nrev/2, mod_length/2, mod_maze_solve/3, mod_graph_path/3]).
 
@@ -48,12 +48,12 @@ mod_length([_| Tail], Acc, Length) :-
 	mod_length(Tail, Acc2, Length).
 
 
-mod_maze_solve(Start, Destination, Steps) :- 
+mod_maze_solve(Start, Destination, Steps) :-
 	mod_path(Start, Destination, [Start], Path),
 	mod_reverse(Path, Steps).
 
 mod_path(Destination, Destination, Path, Path).
-mod_path(Node, Destination, Path0, Path) :- 
+mod_path(Node, Destination, Path0, Path) :-
 	mod_link(Node, Next),
 	\+ mod_member(Next, Path0),
 	mod_path(Next, Destination, [Next | Path0], Path).

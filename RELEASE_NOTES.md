@@ -54,6 +54,12 @@ Tools
 * CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
 timeout option.
 
+Examples
+--------
+
+* FIXED: Compatibility of the `benchmarks` and `module_aliases` examples with
+Tau Prolog.
+
 Tests
 -----
 
