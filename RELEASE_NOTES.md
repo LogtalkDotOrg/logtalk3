@@ -41,6 +41,10 @@ Prolog adapter and integration files
 * UPDATED: The list of candidate goals for tautologies and falsehoods linter
 checks for GNU Prolog, SWI-Prolog, and YAP.
 
+* FIXED: Set the `encoding_directive` flag to `unsupported` for Tau Prolog as
+its implementation of the standard `open/4` predicate doesn't support setting
+the stream encoding.
+
 Library
 -------
 

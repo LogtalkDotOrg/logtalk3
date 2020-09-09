@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog 0.3.0 and later versions
-%  Last updated on September 1, 2020
+%  Last updated on September 9, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -214,7 +214,7 @@
 	current_prolog_flag(version_data, tau(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 3, 0))).
 
-'$lgt_prolog_feature'(encoding_directive, source).
+'$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
@@ -520,7 +520,8 @@
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
-'$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'(_, _, _) :-
+	fail.
 
 
 
