@@ -35,6 +35,8 @@ being compiled.
 non-ground `var/1`, `nonvar/1`, and `ground/1` goals to check for singleton
 variables.
 
+* FIXED: The `user.lgt` file to workaround embedding errors with GNU Prolog.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -44,6 +46,10 @@ checks for GNU Prolog, SWI-Prolog, and YAP.
 * FIXED: Set the `encoding_directive` flag to `unsupported` for Tau Prolog as
 its implementation of the standard `open/4` predicate doesn't support setting
 the stream encoding.
+
+* FIXED: The GNU Prolog adapter file to provide dummy definitions for the
+Prolog database predicates that take a reference argument to avoid embedding
+errors.
 
 Library
 -------
@@ -63,6 +69,8 @@ Tools
 
 * CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
 timeout option.
+
+* FIXED: The `lgtunit.lgt` file to workaround embedding errors with GNU Prolog.
 
 Examples
 --------

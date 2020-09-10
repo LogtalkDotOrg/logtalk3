@@ -2666,3 +2666,11 @@
 		member_var(Var, Tail).
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, gnu)).
+	% workaround gplc limitation when dealing with multifile predicates
+	% that are called from a file but not defined in that file
+	:- multifile('$type#0.type#1'/2).
+	:- multifile('$type#0.check#2'/3).
+:- endif.
