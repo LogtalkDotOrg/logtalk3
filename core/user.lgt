@@ -70,6 +70,6 @@
 :- if(current_logtalk_flag(prolog_dialect, gnu)).
 	% workaround gplc limitation when dealing with predicates
 	% that are called from a file but not defined in that file
-	:- discontiguous(before/3).
-	:- discontiguous(after/3).
+	:- multifile(before/3).
+	:- multifile(after/3).
 :- endif.

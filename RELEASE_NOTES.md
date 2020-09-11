@@ -75,7 +75,7 @@ timeout option.
 Examples
 --------
 
-* FIXED: Compatibility of the `benchmarks`, `module_aliases`, `symbiosis`
+* FIXED: Compatibility of the `benchmarks`, `module_aliases`, and `symbiosis`
 examples with Tau Prolog.
 
 Tests
