@@ -64,6 +64,9 @@ support Unicode.
 
 * FIXED: Support for the `os` and `random` libraries for Tau Prolog.
 
+* FIXED: Workaround GNU Prolog embedding errors with the `hook_objects`
+library.
+
 Tools
 -----
 

@@ -48,3 +48,13 @@
 		).
 
 :- end_object.
+
+
+:- if(current_logtalk_flag(prolog_dialect, gnu)).
+	% workaround gplc limitation when dealing with predicates
+	% that are called from a file but not defined in that file
+	:- multifile(term_expansion/2).
+	:- dynamic(term_expansion/2).
+	:- multifile(goal_expansion/2).
+	:- dynamic(goal_expansion/2).
+:- endif.
