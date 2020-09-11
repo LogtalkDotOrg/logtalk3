@@ -70,7 +70,7 @@ Tools
 * CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
 timeout option.
 
-* FIXED: The `lgtunit.lgt` file to workaround embedding errors with GNU Prolog.
+* FIXED: Tool files to workaround embedding errors with GNU Prolog.
 
 Examples
 --------

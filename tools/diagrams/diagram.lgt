@@ -1269,3 +1269,11 @@
 		[at_same_line, nl, 'Unable to locate ~w: ~q'-[Kind, Specification], nl].
 
 :- end_category.
+
+
+:- if(current_logtalk_flag(prolog_dialect, gnu)).
+	% workaround gplc limitation when dealing with multifile predicates
+	% that are called from a file but not defined in that file
+	:- multifile(logtalk_library_path/2).
+	:- multifile('$graph_language_registry#0.language_object#2'/3).
+:- endif.
