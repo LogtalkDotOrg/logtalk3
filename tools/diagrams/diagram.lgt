@@ -35,6 +35,13 @@
 		keys/2
 	]).
 
+	:- if(current_logtalk_flag(prolog_dialect, gnu)).
+		% workaround gplc limitation when dealing with multifile predicates
+		% that are called from a file but not defined in that file
+		:- multifile(user::logtalk_library_path/2).
+		:- multifile(graph_language_registry::language_object/2).
+	:- endif.
+
 	:- public(libraries/3).
 	:- mode(libraries(+atom, +list(atom), +list(compound)), one).
 	:- info(libraries/3, [
@@ -1269,11 +1276,3 @@
 		[at_same_line, nl, 'Unable to locate ~w: ~q'-[Kind, Specification], nl].
 
 :- end_category.
-
-
-:- if(current_logtalk_flag(prolog_dialect, gnu)).
-	% workaround gplc limitation when dealing with multifile predicates
-	% that are called from a file but not defined in that file
-	:- multifile(logtalk_library_path/2).
-	:- multifile('$graph_language_registry#0.language_object#2'/3).
-:- endif.

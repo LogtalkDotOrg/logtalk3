@@ -645,6 +645,13 @@
 	% for QuickCheck support
 	:- uses(fast_random, [maybe/0]).
 
+	:- if(current_logtalk_flag(prolog_dialect, gnu)).
+		% workaround gplc limitation when dealing with multifile predicates
+		% that are called from a file but not defined in that file
+		:- multifile(type::type/1).
+		:- multifile(type::check/2).
+	:- endif.
+
 	% by default, run the unit tests
 	condition.
 
@@ -2666,11 +2673,3 @@
 		member_var(Var, Tail).
 
 :- end_object.
-
-
-:- if(current_logtalk_flag(prolog_dialect, gnu)).
-	% workaround gplc limitation when dealing with multifile predicates
-	% that are called from a file but not defined in that file
-	:- multifile('$type#0.type#1'/2).
-	:- multifile('$type#0.check#2'/3).
-:- endif.
