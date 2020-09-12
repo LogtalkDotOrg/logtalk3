@@ -42,19 +42,27 @@ directive calling the startup goal. For example:
 
 	:- initialization('::'(app,start)).
 
-To avoid syntax errors, use canonical notation in the argument of the
-directive as exemplified.
+To avoid syntax errors, you may need to use canonical notation in the argument
+of the directive as exemplified.
 
 Known issues
 ------------
 
-The script generates some `suspicious predicate {}/1` warnings. These can
-be safely ignored.
+The script generates some `suspicious predicate {}/1` warnings for the adapter
+file, `gnu.pl`. These can be safely ignored.
 
 A `gplc` limitation when compiling calls to multifile predicates requires
 files that contain those calls but don't define clauses for the multifile
 predicates to include the multifile predicate directives (or to meta-call
-the multifile predicates).
+the multifile predicates). For example, if your code calls the predicate
+`logtalk_library_path/2` but doesn't define clauses for it (in the same
+file):
+
+	:- if(current_logtalk_flag(prolog_dialect, gnu)).
+		% workaround gplc limitation when dealing with multifile predicates
+		% that are called from a file but not defined in that file
+		:- multifile(logtalk_library_path/2).
+	:- endif.
 
 Be sure to read the GNU Prolog manual on `gplc`, specially the discussion
 on how the calling order for initialization goals found in different files
