@@ -56,20 +56,23 @@ A common scenario is to use the ``directory`` key to define
 
    The ``term_position`` key is only supported in
    :term:`backend Prolog compilers <backend Prolog compiler>`
-   that provide access to the start and end lines of a read term.
+   that provide access to the start and end lines of a read term. When
+   such support is not available, the value ``-1`` is returned for both
+   the start and the end lines.
 
-   Currently, any variables in the values of the ``term`` and
-   ``variable_names`` keys are not shared with, respectively, the term
-   and goal arguments of the :ref:`methods_term_expansion_2` and
+   Currently, any variables in the values of the ``term``, ``variables``,
+   ``variable_names``, and ``singletons`` keys are not shared with, respectively,
+   the term and goal arguments of the :ref:`methods_term_expansion_2` and
    :ref:`methods_goal_expansion_2` methods.
 
-   Using the ``variable_names`` key requires calling the standard built-in
-   predicate ``term_variables/2`` on the term read and unifying the term
-   variables with the variables in the names list. This, however, may rise
-   portability issues with those Prolog compilers that don't return the
-   variables in the same order for the ``term_variables/2`` predicate and
-   the option ``variable_names/1`` of the ``read_term/3`` built-in
-   predicate, which is used by the Logtalk compiler to read source files.
+   Using the ``variables``, ``variable_names``, and ``singletons`` keys
+   requires calling the standard built-in predicate ``term_variables/2``
+   on the term read and unifying the term variables with the variables
+   in the names list. This, however, may rise portability issues with
+   Prolog compilers that don't return the variables in the same order for
+   the ``term_variables/2`` predicate and the option ``variable_names/1``
+   of the ``read_term/3`` built-in predicate, which is used by the Logtalk
+   compiler to read source files.
 
 Modes and number of proofs
 --------------------------

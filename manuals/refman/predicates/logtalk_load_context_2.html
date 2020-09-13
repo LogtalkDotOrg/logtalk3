@@ -256,18 +256,21 @@ A common scenario is to use the <code class="docutils literal notranslate"><span
 <p class="admonition-title">Warning</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">term_position</span></code> key is only supported in
 <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>
-that provide access to the start and end lines of a read term.</p>
-<p>Currently, any variables in the values of the <code class="docutils literal notranslate"><span class="pre">term</span></code> and
-<code class="docutils literal notranslate"><span class="pre">variable_names</span></code> keys are not shared with, respectively, the term
-and goal arguments of the <a class="reference internal" href="../methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and
+that provide access to the start and end lines of a read term. When
+such support is not available, the value <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned for both
+the start and the end lines.</p>
+<p>Currently, any variables in the values of the <code class="docutils literal notranslate"><span class="pre">term</span></code>, <code class="docutils literal notranslate"><span class="pre">variables</span></code>,
+<code class="docutils literal notranslate"><span class="pre">variable_names</span></code>, and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> keys are not shared with, respectively,
+the term and goal arguments of the <a class="reference internal" href="../methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and
 <a class="reference internal" href="../methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> methods.</p>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">variable_names</span></code> key requires calling the standard built-in
-predicate <code class="docutils literal notranslate"><span class="pre">term_variables/2</span></code> on the term read and unifying the term
-variables with the variables in the names list. This, however, may rise
-portability issues with those Prolog compilers that don’t return the
-variables in the same order for the <code class="docutils literal notranslate"><span class="pre">term_variables/2</span></code> predicate and
-the option <code class="docutils literal notranslate"><span class="pre">variable_names/1</span></code> of the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in
-predicate, which is used by the Logtalk compiler to read source files.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">variables</span></code>, <code class="docutils literal notranslate"><span class="pre">variable_names</span></code>, and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> keys
+requires calling the standard built-in predicate <code class="docutils literal notranslate"><span class="pre">term_variables/2</span></code>
+on the term read and unifying the term variables with the variables
+in the names list. This, however, may rise portability issues with
+Prolog compilers that don’t return the variables in the same order for
+the <code class="docutils literal notranslate"><span class="pre">term_variables/2</span></code> predicate and the option <code class="docutils literal notranslate"><span class="pre">variable_names/1</span></code>
+of the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in predicate, which is used by the Logtalk
+compiler to read source files.</p>
 </div>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
