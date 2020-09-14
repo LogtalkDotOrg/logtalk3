@@ -1672,11 +1672,11 @@ predicates, either in <code class="docutils literal notranslate"><span class="pr
 calls that are not prefixed with a message sending, super call, or module
 qualification operator (<code class="docutils literal notranslate"><span class="pre">::</span></code>, <code class="docutils literal notranslate"><span class="pre">^^</span></code>, or <code class="docutils literal notranslate"><span class="pre">:</span></code>), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
-A predicate call is compiled as a call to a local predicate if the object (or
-category) contains a scope directive, a definition for the called predicate,
-or a dynamic declaration for it. When that is not the case, the compiler
-checks if the call corresponds to a Logtalk or Prolog built-in predicate.
-Consider the following example:</p>
+A predicate call is compiled as a call to a local predicate if the object
+(or category) contains a scope directive, a multifile directive, a dynamic
+directive, or a definition for the called predicate. When that is not the
+case, the compiler checks if the call corresponds to a Logtalk or Prolog
+built-in predicate. Consider the following example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
     ...,
     <span class="k">write</span>(bar),
@@ -1686,7 +1686,7 @@ Consider the following example:</p>
 <p>The call to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate will be compiled as a call to the
 corresponding Prolog standard built-in predicate unless the object (or
 category) containing the above definition also contains a predicate
-named <code class="docutils literal notranslate"><span class="pre">write/1</span></code> or a dynamic directive for the predicate.</p>
+named <code class="docutils literal notranslate"><span class="pre">write/1</span></code> or a directive for the predicate.</p>
 <p>When calling non-standard Prolog built-in predicates or using non-standard
 Prolog arithmetic functions, we may run into portability problems while
 trying your applications with different backend Prolog compilers. We can
@@ -1845,7 +1845,7 @@ at runtime when the calls are made.</p>
 <h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Permalink to this headline">¶</a></h3>
 <p>The Logtalk library provides implementations of common meta-predicates,
 which can be used in place of module meta-predicates (e.g. list mapping
-meta-predicates). If that is not the case the Logtalk compiler may need
+meta-predicates). If that is not the case, the Logtalk compiler may need
 help to understand the module meta-predicate templates. Despite some recent
 progress in standardization of the syntax of <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives
 and of the <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> property returned by the <code class="docutils literal notranslate"><span class="pre">predicate_property/2</span></code>

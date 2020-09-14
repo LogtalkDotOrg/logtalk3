@@ -1684,11 +1684,11 @@ In predicate clauses and object ``initialization/1`` directives, predicate
 calls that are not prefixed with a message sending, super call, or module
 qualification operator (``::``, ``^^``, or ``:``), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
-A predicate call is compiled as a call to a local predicate if the object (or
-category) contains a scope directive, a definition for the called predicate,
-or a dynamic declaration for it. When that is not the case, the compiler
-checks if the call corresponds to a Logtalk or Prolog built-in predicate.
-Consider the following example:
+A predicate call is compiled as a call to a local predicate if the object 
+(or category) contains a scope directive, a multifile directive, a dynamic
+directive, or a definition for the called predicate. When that is not the
+case, the compiler checks if the call corresponds to a Logtalk or Prolog
+built-in predicate. Consider the following example:
 
 ::
 
@@ -1700,7 +1700,7 @@ Consider the following example:
 The call to the ``write/1`` predicate will be compiled as a call to the
 corresponding Prolog standard built-in predicate unless the object (or
 category) containing the above definition also contains a predicate
-named ``write/1`` or a dynamic directive for the predicate.
+named ``write/1`` or a directive for the predicate.
 
 When calling non-standard Prolog built-in predicates or using non-standard
 Prolog arithmetic functions, we may run into portability problems while
@@ -1893,7 +1893,7 @@ Calling Prolog module meta-predicates
 
 The Logtalk library provides implementations of common meta-predicates,
 which can be used in place of module meta-predicates (e.g. list mapping
-meta-predicates). If that is not the case the Logtalk compiler may need
+meta-predicates). If that is not the case, the Logtalk compiler may need
 help to understand the module meta-predicate templates. Despite some recent
 progress in standardization of the syntax of ``meta_predicate/1`` directives
 and of the ``meta_predicate/1`` property returned by the ``predicate_property/2``
