@@ -92,6 +92,7 @@
 		% workaround gplc limitation when dealing with multifile predicates
 		% that are called from a file but not defined in that file
 		:- multifile(logtalk::message_prefix_stream/4).
+		:- dynamic(logtalk::message_prefix_stream/4).
 	:- endif.
 
 	enable(Component) :-
