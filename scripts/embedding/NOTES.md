@@ -27,9 +27,9 @@ for embedding, specially when deploying applications in read-only file
 systems. These sample scripts should be regarded as starting points as
 actual use requires customization (e.g. the starting goal, inclusion of
 a top-level interpreter, etc). The scripts also accept command-lines
-options for specifying a paths files and a settings file. See the
-`settings-embedding-sample.lgt` file for settings suggestions for
-embedding applications.
+options for specifying a paths files and a settings file to be used to
+compile any application files. See the `settings-embedding-sample.lgt`
+file for settings suggestions for embedding applications.
 
 An alternative, available in some backend Prolog compilers such as
 SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
@@ -44,7 +44,11 @@ In both solutions, the `reload` flag should usually be set to `skip`
 (in the used settings file) to prevent reloading of already loaded
 code when running the embedded application or saved state. You may
 also want to turn off the `source_data` flag to reduce the size of
-your application.
+your application. The required flag values can be set on a dedicated
+settings file or, preferably, in a modified adapter file (where you
+can also set the `settings_file` flag to `deny` to prevent using any
+settings file accessible on a computer where the embedded application
+is run to disturb it). 
 
 To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
 environment variables, the sample scripts allow expansion of library
