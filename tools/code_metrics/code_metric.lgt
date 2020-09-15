@@ -458,4 +458,5 @@
 	% workaround gplc limitation when dealing with multifile predicates
 	% that are called from a file but not defined in that file
 	:- multifile(logtalk_library_path/2).
+	:- dynamic(logtalk_library_path/2).
 :- endif.
