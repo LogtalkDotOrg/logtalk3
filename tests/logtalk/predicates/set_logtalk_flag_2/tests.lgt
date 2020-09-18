@@ -18,6 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% set_logtalk_flag/2 goals are global
+:- initialization((
+	set_logtalk_flag(dynamic_declarations, allow),
+	set_logtalk_flag(code_prefix, '~')
+)).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
@@ -50,5 +57,10 @@
 		set_logtalk_flag(optimize, on),
 		current_logtalk_flag(optimize, Optimize), Optimize == on,
 		current_logtalk_flag(debug, Debug), Debug == off.
+
+	% test that calls to the set_logtalk_flag/2 predicate have global scope
+	test(set_logtalk_flag_2_06) :-
+		current_logtalk_flag(dynamic_declarations, allow),
+		current_logtalk_flag(code_prefix, '~').
 
 :- end_object.

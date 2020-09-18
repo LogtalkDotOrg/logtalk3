@@ -27,42 +27,42 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-12-06,
+		date is 2020-09-18,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in directive.'
 	]).
 
-	% entity level  set_logtalk_flag/2 directives are local to the entity
+	% entity level set_logtalk_flag/2 directives are local to the entity
 	:- set_logtalk_flag(complements, allow).
 	:- set_logtalk_flag(context_switching_calls, deny).
 
-	test(set_logtalk_flag_2_1) :-
+	test(set_logtalk_flag_2_01) :-
 		this(This),
 		object_property(This, complements).
 
-	test(set_logtalk_flag_2_2) :-
+	test(set_logtalk_flag_2_02) :-
 		this(This),
 		\+ object_property(This, context_switching_calls).
 
-	test(set_logtalk_flag_2_3) :-
+	test(set_logtalk_flag_2_03) :-
 		bottom::p(X),
 		X == top.
 
-	test(set_logtalk_flag_2_4) :-
+	test(set_logtalk_flag_2_04) :-
 		logtalk_load(patch),
 		bottom::p(X),
 		X == patch.
 
 	% tests for the "optimize" flag
 
-	test(set_logtalk_flag_2_5) :-
+	test(set_logtalk_flag_2_05) :-
 		optimize_off::p.
 
-	test(set_logtalk_flag_2_6) :-
+	test(set_logtalk_flag_2_06) :-
 		optimize_on_1::p.
 
-	test(set_logtalk_flag_2_7) :-
+	test(set_logtalk_flag_2_07) :-
 		optimize_on_2::p.
 
 :- end_object.
