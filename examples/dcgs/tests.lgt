@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:13:0,
+		version is 1:13:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-09-03,
+		date is 2020-09-20,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -41,9 +41,13 @@
 		findall(Message, logtalk << phrase(morse::morse(Message), "... --- ..."), Solutions),
 		Solutions == [[sos]].
 
-	test(dcgs_04) :-
-		findall(Message, enigma::solve("4 96853 5683 86 4283 346637 9484 968 8664448", Message), Solutions),
-		Solutions == [[i, would, love, to, have, dinner, with, you, tonight]].
+	:- if(current_logtalk_flag(prolog_dialect, tau)).
+		- test(dcgs_04).
+	:- else.
+		test(dcgs_04) :-
+			findall(Message, enigma::solve("4 96853 5683 86 4283 346637 9484 968 8664448", Message), Solutions),
+			Solutions == [[i, would, love, to, have, dinner, with, you, tonight]].
+	:- endif.
 
 	test(dcgs_05) :-
 		sentence::parse([the, girl, likes, the, boy], Result),
@@ -111,11 +115,10 @@
 		Solutions == [[protocol(https), address([logtalk, org]), path([files,update]), file('')]].
 
 	:- if(current_prolog_flag(bounded, false)).
-	test(dcgs_20) :-
-		iban::valid("GB82 WEST 1234 5698 7654 32").
+		test(dcgs_20) :-
+			iban::valid("GB82 WEST 1234 5698 7654 32").
 	:- else.
-	- test(dcgs_20) :-
-		iban::valid("GB82 WEST 1234 5698 7654 32").
+		- test(dcgs_20).
 	:- endif.
 
 	test(dcgs_21) :-
