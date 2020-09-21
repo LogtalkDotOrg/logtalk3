@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-18,
+		date is 2020-09-21,
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
 	]).
 
@@ -91,10 +91,14 @@
 	succeeds(lgt_atom_codes_2_15) :-
 		{atom_codes('', [])}.
 
+	succeeds(lgt_atom_codes_2_16) :-
+		{atom_codes('ABC', [A,B,C])},
+		A == 65, B == 66, C == 67.
+
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
-	% 
+	%
 	% they also result in a syntax error with several Prolog compilers
 
 %	succeeds(sics_atom_codes_2_12) :-

@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-08-27,
+		date is 2020-09-21,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -117,7 +117,7 @@
 		{number_codes(_N, "a")}.
 
 	throws(sics_number_codes_2_22, error(syntax_error(_),_)) :-
-		{number_codes(_X,[0'0,0'x,0'0,0'.,0'0])}.
+		{number_codes(_X, [0'0,0'x,0'0,0'.,0'0])}.
 
 	% tests from the Logtalk portability work
 
@@ -127,5 +127,9 @@
 	% until a consensus if found, we accept both exception terms
 	throws(lgt_number_codes_2_23, [error(representation_error(character_code),_), error(type_error(integer,a),_)]) :-
 		{number_codes(_A, [0'4,a])}.
+
+	succeeds(lgt_number_codes_2_24) :-
+		{number_codes(42, [A,B])},
+		A == 52, B == 50.
 
 :- end_object.

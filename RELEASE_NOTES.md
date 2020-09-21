@@ -86,7 +86,8 @@ Tests
 
 * ADDED: Tests for the new `logtalk_load_context/2` predicate keys.
 
-* ADDED: Additional test for the `set_logtalk_flag/2` predicate.
+* ADDED: Additional tests for the `atom_chars/2`, `atom_codes/2`,
+`number_chars/2`, `number_codes/2`, and `set_logtalk_flag/2` predicates.
 
 * IMPROVED: Tests for the `predicate_property/2` de facto standard Prolog
 predicate.

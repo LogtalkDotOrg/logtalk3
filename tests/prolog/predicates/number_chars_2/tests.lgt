@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-09-21,
 		comment is 'Unit tests for the ISO Prolog standard number_chars/2 built-in predicate.'
 	]).
 
@@ -132,5 +132,11 @@
 
 	throws(sics_number_chars_2_27, error(syntax_error(_),_)) :-
 		{number_chars(_X, ['0','x','0','.','0'])}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_number_chars_2_28) :-
+		{number_chars(42, [A,B])},
+		A == '4', B == '2'.
 
 :- end_object.

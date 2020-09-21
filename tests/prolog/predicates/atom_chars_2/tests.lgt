@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-18,
+		date is 2020-09-21,
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
 	]).
 
@@ -98,15 +98,19 @@
 	throws(lgt_atom_chars_2_16, error(type_error(character,1),_)) :-
 		{atom_chars(abc, [1,2,3])}.
 
-	succeeds(lgt_atom_codes_2_17) :-
+	succeeds(lgt_atom_chars_2_17) :-
 		{atom_chars('', Chars)},
 		Chars == [].
 
-	succeeds(lgt_atom_codes_2_18) :-
+	succeeds(lgt_atom_chars_2_18) :-
 		{atom_chars(Atom, [])},
 		Atom == ''.
 
-	succeeds(lgt_atom_codes_2_19) :-
+	succeeds(lgt_atom_chars_2_19) :-
 		{atom_chars('', [])}.
+
+	succeeds(lgt_atom_chars_2_20) :-
+		{atom_chars('ABC', [A,B,C])},
+		A == 'A', B == 'B', C == 'C'.
 
 :- end_object.
