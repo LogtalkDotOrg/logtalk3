@@ -81,6 +81,11 @@ Examples
 * FIXED: Compatibility of the `benchmarks`, `dcgs`, `module_aliases`, and
 `symbiosis` examples with Tau Prolog.
 
+Ports
+-----
+
+* FIXED: Added missing `|` operator declaration to the `toychr` port.
+
 Tests
 -----
 
