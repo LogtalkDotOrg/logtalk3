@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:8:1,
 		author is 'Paulo Moura',
-		date is 2020-08-31,
+		date is 2020-09-24,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -181,8 +181,8 @@
 		^^assertion(VS == []).
 
 	test(lgt_read_term_3_29, true) :-
-		^^set_text_input(empty, 'foo(A,B,A). '),
-		{read_term(empty, T, [variables(VL),variable_names(VN),singletons(VS)])},
+		^^set_text_input(foo, 'foo(A,B,A). '),
+		{read_term(foo, T, [variables(VL),variable_names(VN),singletons(VS)])},
 		^^assertion(variant(T, foo(A,B,A))),
 		T = foo(A,B,A),
 		^^assertion(var(A)),

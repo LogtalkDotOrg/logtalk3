@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2020-08-03,
+		date is 2020-09-24,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -181,22 +181,34 @@
 	test(lgt_write_term_3_31, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
+		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C])])},
+		^^text_output_assertion('foo(A,B,C)', Assertion).
+
+	test(lgt_write_term_3_32, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C,'X'=A])])},
+		^^text_output_assertion('foo(A,B,C)', Assertion).
+
+	test(lgt_write_term_3_33, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
 		{write_term(S, [(1,2,3)], [])},
 		^^text_output_assertion('[(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_32, true(Assertion)) :-
+	test(lgt_write_term_3_34, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, [a,(1,2,3)], [])},
 		^^text_output_assertion('[a,(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_33, true(Assertion)) :-
+	test(lgt_write_term_3_35, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_canonical(S, [(1,2,3)])},
 		^^text_output_assertion('\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
 
-	test(lgt_write_term_3_34, true(Assertion)) :-
+	test(lgt_write_term_3_36, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_canonical(S, [a,(1,2,3)])},
