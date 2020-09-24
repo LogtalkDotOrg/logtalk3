@@ -1633,6 +1633,12 @@ Prolog built-in predicates. Note that if a predicate is declared in a
 category imported by the object, it will be the category name — not the
 object name — that will be returned by the property <code class="docutils literal notranslate"><span class="pre">declared_in/1</span></code>.
 The same is true for protocol declared predicates.</p>
+<p>Some properties such as line numbers are only available when the entity
+holding the predicates is defined in a source file compiled with the
+<a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag turned on. Moreover, line
+numbers are only supported in <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compilers</span></a>
+that provide access to the start line of a read term. When such support is
+not available, the value <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned for the start lines.</p>
 </div>
 <div class="section" id="finding-declared-predicates">
 <span id="predicates-finding"></span><h2>Finding declared predicates<a class="headerlink" href="#finding-declared-predicates" title="Permalink to this headline">¶</a></h2>

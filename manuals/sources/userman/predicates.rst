@@ -1634,6 +1634,13 @@ category imported by the object, it will be the category name — not the
 object name — that will be returned by the property ``declared_in/1``.
 The same is true for protocol declared predicates.
 
+Some properties such as line numbers are only available when the entity
+holding the predicates is defined in a source file compiled with the
+:ref:`source_data <flag_source_data>` flag turned on. Moreover, line
+numbers are only supported in :term:`backend Prolog compilers <backend Prolog compiler>`
+that provide access to the start line of a read term. When such support is
+not available, the value ``-1`` is returned for the start lines.
+
 .. _predicates_finding:
 
 Finding declared predicates

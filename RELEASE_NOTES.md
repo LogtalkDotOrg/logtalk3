@@ -51,6 +51,12 @@ the stream encoding.
 Prolog database predicates that take a reference argument to avoid embedding
 errors.
 
+Documentation
+-------------
+
+* IMPROVED: Handbook description of entity and predicate properties that
+include line numbers information.
+
 Library
 -------
 

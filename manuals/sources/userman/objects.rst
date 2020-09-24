@@ -744,13 +744,13 @@ The following object properties are supported:
    in the specified entity (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
    ``line_count(Line)`` with ``Line`` being the begin line of the
-   multifile predicate clause)
+   first multifile predicate clause)
 ``provides(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicate that are
    defined in the object (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
    ``line_count(Line)`` with ``Line`` being the begin line of the
-   multifile predicate clause)
+   first multifile predicate clause)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the object
    (the properties include ``for(Original)``, ``from(Entity)``,
@@ -809,9 +809,12 @@ The following object properties are supported:
 When a predicate is called from an ``initialization/1`` directive, the
 argument of the ``caller/1`` property is ``:-/1``.
 
-Some of the properties such as line numbers are only available when the
-object is defined in a source file compiled with the
-:ref:`source_data <flag_source_data>` flag turned on.
+Some properties such as line numbers are only available when the object is
+defined in a source file compiled with the :ref:`source_data <flag_source_data>`
+flag turned on. Moreover, line numbers are only supported in
+:term:`backend Prolog compilers <backend Prolog compiler>`
+that provide access to the start line of a read term. When such support is
+not available, the value ``-1`` is returned for the start lines.
 
 The properties that return the number of clauses (rules) report the
 clauses (rules) *textually defined in the object* for both multifile and

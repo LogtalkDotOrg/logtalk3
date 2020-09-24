@@ -66,7 +66,7 @@ A common scenario is to use the ``directory`` key to define
    :ref:`methods_goal_expansion_2` methods.
 
    Using the ``variables``, ``variable_names``, and ``singletons`` keys
-   requires calling the standard built-in predicate ``term_variables/2``
+   may require calling the standard built-in predicate ``term_variables/2``
    on the term read and unifying the term variables with the variables
    in the names list. This, however, may rise portability issues with
    Prolog compilers that don't return the variables in the same order for
