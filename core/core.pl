@@ -7334,7 +7334,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_add_entity_source_data'(@atom, @entity_identifier)
 %
-% adds entity source data
+% adds entity source data when the corresponding flag is turned on
 
 '$lgt_add_entity_source_data'(Kind, Entity) :-
 	(	'$lgt_compiler_flag'(source_data, on) ->
@@ -7424,7 +7424,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_properties'(_, Entity, _) :-
 	findall(Define, '$lgt_pp_number_of_clauses_rules_'(_, _, Define, _), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux,_,_), _), '$lgt_pp_number_of_clauses_rules_'(Functor, Arity, AuxDefine, _)), AuxDefines),
+	findall(
+		AuxDefine,
+		(	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux,_,_), _),
+			'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, AuxDefine, _)
+		),
+		AuxDefines
+	),
 	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
 	findall(Provide, '$lgt_pp_number_of_clauses_rules_'(_, _, _, Provide, _), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
@@ -7436,7 +7442,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_properties'(_, Entity, _) :-
 	findall(Define, '$lgt_pp_number_of_clauses_rules_'(_, _, _, Define), Defines),
 	'$lgt_sum_list'(Defines, TotalDefines),
-	findall(AuxDefine, ('$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux,_,_), _), '$lgt_pp_number_of_clauses_rules_'(Functor, Arity, _, AuxDefine)), AuxDefines),
+	findall(
+		AuxDefine,
+		(	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux,_,_), _),
+			'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, _, AuxDefine)
+		),
+		AuxDefines
+	),
 	'$lgt_sum_list'(AuxDefines, TotalAuxDefines),
 	findall(Provide, '$lgt_pp_number_of_clauses_rules_'(_, _, _, _, Provide), Provides),
 	'$lgt_sum_list'(Provides, TotalProvides),
@@ -7464,6 +7476,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
 	'$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Line),
+	% multifile predicate clauses defined in Entity for Other
 	'$lgt_property_location'(MainFile, File, Line, Location),
 	'$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, clauses_rules_location_from(Clauses,Rules,Location,Entity)))),
@@ -7471,6 +7484,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
 	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line),
+	% local predicate clauses
 	'$lgt_property_location'(MainFile, File, Line, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, declaration_location(Location)))),
 	\+ '$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
@@ -7515,6 +7529,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_predicate_properties'(_, _).
 
+
+% the property location is just the line when found on the main file
+% or a compound term File-Line when found in an included file
 
 '$lgt_property_location'(MainFile, MainFile, Line, Line) :-
 	!.
@@ -13906,6 +13923,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(':'(_, Callable), TPred, DPred, Ctx) :-
 	nonvar(Callable),
 	Callable = ':'(Module, Pred),
+	% in a module predicate call with multiple prefixes (e.g. m1:m2:m3:goal),
+	% only the one that immediately precedes the predicate is relevant
 	!,
 	'$lgt_compile_body'(':'(Module, Pred), TPred, DPred, Ctx).
 
@@ -14181,14 +14200,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(asserta(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
-	(	QClause = (QHead :- Body),
-		nonvar(QHead),
-		QHead = ':'(Module,Head) ->
-		Clause = (Head :- Body)
-	;	QClause = ':'(Module,Head),
-		Clause = Head,
-		Body = true
-	),
+	'$lgt_module_qualified_clause'(QClause, Module, Clause, Head, Body),
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
 	'$lgt_check'(var_or_callable, Head),
@@ -14267,14 +14279,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(assertz(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
-	(	QClause = (QHead :- Body),
-		nonvar(QHead),
-		QHead = ':'(Module,Head) ->
-		Clause = (Head :- Body)
-	;	QClause = ':'(Module,Head),
-		Clause = Head,
-		Body = true
-	),
+	'$lgt_module_qualified_clause'(QClause, Module, Clause, Head, Body),
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
 	'$lgt_check'(var_or_callable, Head),
@@ -14409,14 +14414,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(retract(QClause), TCond, DCond, Ctx) :-
 	nonvar(QClause),
-	(	QClause = (QHead :- Body),
-		nonvar(QHead),
-		QHead = ':'(Module,Head) ->
-		Clause = (Head :- Body)
-	;	QClause = ':'(Module,Head),
-		Clause = Head,
-		Body = true
-	),
+	'$lgt_module_qualified_clause'(QClause, Module, Clause, Head, Body),
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
 	'$lgt_check'(var_or_callable, Head),
@@ -14564,7 +14562,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(
 			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, assert/1, assertz/1)
+			deprecated_predicate(File, Lines, Type, Entity, assert/2, assertz/2)
 		)
 	;	true
 	),
@@ -14574,14 +14572,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_built_in_predicate'(asserta(_, _)),
 	\+ '$lgt_pp_defines_predicate_'(asserta(_, _), _, _, _, _, _),
 	nonvar(QClause),
-	(	QClause = (QHead :- Body),
-		nonvar(QHead),
-		QHead = ':'(Module,Head) ->
-		Clause = (Head :- Body)
-	;	QClause = ':'(Module,Head),
-		Clause = Head,
-		Body = true
-	),
+	'$lgt_module_qualified_clause'(QClause, Module, Clause, Head, Body),
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
 	'$lgt_check'(var_or_callable, Head),
@@ -14666,14 +14657,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_built_in_predicate'(assertz(_, _)),
 	\+ '$lgt_pp_defines_predicate_'(assertz(_, _), _, _, _, _, _),
 	nonvar(QClause),
-	(	QClause = (QHead :- Body),
-		nonvar(QHead),
-		QHead = ':'(Module,Head) ->
-		Clause = (Head :- Body)
-	;	QClause = ':'(Module,Head),
-		Clause = Head,
-		Body = true
-	),
+	'$lgt_module_qualified_clause'(QClause, Module, Clause, Head, Body),
 	!,
 	'$lgt_check'(var_or_module_identifier, Module),
 	'$lgt_check'(var_or_callable, Head),
@@ -15834,6 +15818,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_negated_goal_alternative'(Term1 == Term2, Term1 \== Term2).
 '$lgt_negated_goal_alternative'(Term1 =:= Term2, Term1 =\= Term2).
 '$lgt_negated_goal_alternative'(var(Term), nonvar(Term)).
+
+
+
+% '$lgt_module_qualified_clause'(@nonvar, -atom, -clause, -term, -term)
+%
+% decomposes a an explicitly module qualified clause
+
+'$lgt_module_qualified_clause'(QClause, Module, Clause, Head, Body) :-
+	(	QClause = (QHead :- Body),
+		nonvar(QHead),
+		QHead = ':'(Module,Head) ->
+		Clause = (Head :- Body)
+	;	QClause = ':'(Module,Head),
+		Clause = Head,
+		Body = true
+	).
 
 
 
