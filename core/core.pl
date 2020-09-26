@@ -405,8 +405,6 @@
 :- dynamic('$lgt_pp_calls_self_predicate_'/4).
 % '$lgt_pp_calls_super_predicate_'(Functor/Arity, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_calls_super_predicate_'/4).
-% '$lgt_pp_calls_module_predicate_'(Module, Functor/Arity)
-:- dynamic('$lgt_pp_calls_module_predicate_'/2).
 
 % '$lgt_pp_updates_predicate_'(Dynamic, HeadFunctor/HeadArity, File, Lines)
 :- dynamic('$lgt_pp_updates_predicate_'/4).
@@ -424,6 +422,8 @@
 :- dynamic('$lgt_pp_missing_discontiguous_directive_'/3).
 % '$lgt_pp_missing_multifile_directive_'(PI, File, Lines)
 :- dynamic('$lgt_pp_missing_multifile_directive_'/3).
+% '$lgt_pp_missing_use_module_directive_'(Module, Functor/Arity)
+:- dynamic('$lgt_pp_missing_use_module_directive_'/2).
 
 % '$lgt_pp_previous_predicate_'(Head, Mode)
 :- dynamic('$lgt_pp_previous_predicate_'/2).
@@ -8036,7 +8036,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_calls_predicate_'(_, _, _, _, _)),
 	retractall('$lgt_pp_calls_self_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_calls_super_predicate_'(_, _, _, _)),
-	retractall('$lgt_pp_calls_module_predicate_'(_, _)),
 	retractall('$lgt_pp_updates_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
@@ -8044,6 +8043,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_multifile_directive_'(_, _, _)),
+	retractall('$lgt_pp_missing_use_module_directive_'(_, _)),
 	retractall('$lgt_pp_previous_predicate_'(_, _)),
 	retractall('$lgt_pp_defines_non_terminal_'(_, _, _)),
 	retractall('$lgt_pp_calls_non_terminal_'(_, _, _, _)),
@@ -8971,9 +8971,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% or a built-in predicate
 	;	\+ '$lgt_control_construct'(Directive),
 		'$lgt_find_visible_module_predicate'(Current, Module, Directive),
+		% or an implicit call to a module predicate with a missing use_module/2 directive
 		functor(Directive, Functor, Arity),
 		'$lgt_comp_ctx_mode'(Ctx, Mode),
-		'$lgt_remember_called_module_predicate'(Mode, Module, Functor/Arity)
+		'$lgt_remember_missing_use_module_directive'(Mode, Module, Functor/Arity)
 	),
 	!,
 	% compile query as an initialization goal
@@ -15559,9 +15560,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-% call to a module predicate with a missing use_module/2 directive but only
-% when compiling a module as an object; in practice, this is only usable
-% from backend systems with an autoload mechanism
+% implicit call to a module predicate with a missing use_module/2 directive
+% but only when compiling a module as an object; in practice, this is only
+% usable from backend systems with an autoload mechanism
 
 '$lgt_compile_body'(Pred, ':'(Module,Pred), '$lgt_debug'(goal(Pred, ':'(Module,Pred)), ExCtx), Ctx) :-
 	'$lgt_pp_module_'(Current),
@@ -15570,7 +15571,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	functor(Pred, Functor, Arity),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	'$lgt_remember_called_module_predicate'(Mode, Module, Functor/Arity).
+	'$lgt_remember_missing_use_module_directive'(Mode, Module, Functor/Arity).
 
 % call to a declared but undefined predicate
 
@@ -15617,6 +15618,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
 	!,
+	% replace it with a call to the standard alternative
+	'$lgt_compile_body'(RPred, TPred, DPred, Ctx),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
 		'$lgt_source_file_context'(File, Lines),
@@ -15629,13 +15632,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			deprecated_predicate(File, Lines, Type, Entity, Functor/Arity, RFunctor/RArity)
 		)
 	;	true
-	),
-	'$lgt_compile_body'(RPred, TPred, DPred, Ctx).
+	).
 
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
 	'$lgt_prolog_deprecated_built_in_predicate'(Pred),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+	% no standard alternative; just print a warning
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(deprecated, warning),
 	'$lgt_source_file_context'(File, Lines),
@@ -16222,21 +16225,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_remember_called_module_predicate'(@compilation_mode, +atom, +predicate_indicator)
+% '$lgt_remember_missing_use_module_directive'(@compilation_mode, +atom, +predicate_indicator)
 %
-% used only for checking calls to module predicates without missing use_module/2 directives whe
-% compiling modules as objects
+% used only for reporting implicit calls to module predicates with missing use_module/2
+% directives when compiling modules as objects
 
-'$lgt_remember_called_module_predicate'(runtime, _, _).
+'$lgt_remember_missing_use_module_directive'(runtime, _, _).
 
-'$lgt_remember_called_module_predicate'(compile(aux,_,_), _, _) :-
+'$lgt_remember_missing_use_module_directive'(compile(aux,_,_), _, _) :-
 	!.
 
-'$lgt_remember_called_module_predicate'(compile(user,_,_), Module, Functor/Arity) :-
-	(	'$lgt_pp_calls_module_predicate_'(Module, Functor/Arity) ->
+'$lgt_remember_missing_use_module_directive'(compile(user,_,_), Module, Functor/Arity) :-
+	(	'$lgt_pp_missing_use_module_directive_'(Module, Functor/Arity) ->
 		% already recorded
 		true
-	;	assertz('$lgt_pp_calls_module_predicate_'(Module, Functor/Arity))
+	;	assertz('$lgt_pp_missing_use_module_directive_'(Module, Functor/Arity))
 	).
 
 
@@ -21337,7 +21340,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% Type == protocol
 		fail
 	),
-	setof(Predicate, '$lgt_pp_calls_module_predicate_'(Module, Predicate), Predicates),
+	setof(Predicate, '$lgt_pp_missing_use_module_directive_'(Module, Predicate), Predicates),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
@@ -22364,7 +22367,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_prolog_deprecated_built_in_predicate'(@callable, -callable)
+% '$lgt_prolog_deprecated_built_in_predicate'(@callable)
 %
 % Prolog deprecated built-in predicate; callers must check that the
 % predicate is a built-in predicate that is not being locally redefined
