@@ -35,6 +35,9 @@ being compiled.
 non-ground `var/1`, `nonvar/1`, and `ground/1` goals to check for singleton
 variables.
 
+* FIXED: Increment the warnings counter when reporting term-expansion and
+goal-expansion errors.
+
 * FIXED: The `user.lgt` file to workaround embedding errors with GNU Prolog.
 
 Prolog adapter and integration files

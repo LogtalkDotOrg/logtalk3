@@ -2674,6 +2674,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_term_expansion_error'(HookEntity, Term, Error) :-
 	'$lgt_source_file_context'(File, Lines),
+	'$lgt_increment_loading_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_print_message'(
 			warning(expansion),
@@ -2691,6 +2692,7 @@ logtalk_compile(Files, Flags) :-
 
 '$lgt_goal_expansion_error'(HookEntity, Goal, Error) :-
 	'$lgt_source_file_context'(File, Lines),
+	'$lgt_increment_loading_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
 		'$lgt_print_message'(
 			warning(expansion),
@@ -3476,7 +3478,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 42, 0, b01)).
+'$lgt_version_data'(logtalk(3, 42, 0, b02)).
 
 
 
