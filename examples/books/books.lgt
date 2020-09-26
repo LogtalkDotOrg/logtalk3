@@ -37,7 +37,7 @@ extra('The Half-Blood Prince',    audio_cd).
 extra('The Deathly Hallows',      horcrux_set).
 
 % weight(Extra, Weight)
-weight(quidditch_set, 278).
+weight(quidditch_set, 223).
 weight(horcrux_set,   123).
 
 

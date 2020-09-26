@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2020-06-22,
+		date is 2020-09-26,
 		comment is 'Unit tests for the "books" example.'
 	]).
 
@@ -38,34 +38,34 @@
 		test(books_01, true(Assertion)) :-
 			^^set_text_output(''),
 			data_processing::print,
-			^^text_output_assertion('The Philosopher''s Stone\r\n  with free quidditch_set at 278 gr\r\nThe Chamber of Secrets\r\n  with free map\r\nThe Prisoner of Azkaban\r\nThe Goblet of Fire\r\nThe Order of the Phoenix\r\nThe Half-Blood Prince\r\n  with free audio_cd\r\nThe Deathly Hallows\r\n  with free horcrux_set at 123 gr\r\n', Assertion).
+			^^text_output_assertion('The Philosopher''s Stone\r\n  with free quidditch_set at 223 gr\r\nThe Chamber of Secrets\r\n  with free map\r\nThe Prisoner of Azkaban\r\nThe Goblet of Fire\r\nThe Order of the Phoenix\r\nThe Half-Blood Prince\r\n  with free audio_cd\r\nThe Deathly Hallows\r\n  with free horcrux_set at 123 gr\r\n', Assertion).
 
 		test(books_02, true(Assertion)) :-
 			^^set_text_output(''),
 			data_processing::print_kg,
-			^^text_output_assertion('The Philosopher''s Stone\r\n  with free quidditch_set at 0.278 kg\r\nThe Chamber of Secrets\r\n  with free map\r\nThe Prisoner of Azkaban\r\nThe Goblet of Fire\r\nThe Order of the Phoenix\r\nThe Half-Blood Prince\r\n  with free audio_cd\r\nThe Deathly Hallows\r\n  with free horcrux_set at 0.123 kg\r\n', Assertion).
+			^^text_output_assertion('The Philosopher''s Stone\r\n  with free quidditch_set at 0.223 kg\r\nThe Chamber of Secrets\r\n  with free map\r\nThe Prisoner of Azkaban\r\nThe Goblet of Fire\r\nThe Order of the Phoenix\r\nThe Half-Blood Prince\r\n  with free audio_cd\r\nThe Deathly Hallows\r\n  with free horcrux_set at 0.123 kg\r\n', Assertion).
 
 		test(books_03, true(Assertion)) :-
 			^^set_text_output(''),
 			data_processing::print_heavy_extras,
-			^^text_output_assertion('quidditch_set at 278 gr\r\nhorcrux_set at 123 gr\r\n', Assertion).
+			^^text_output_assertion('quidditch_set at 223 gr\r\nhorcrux_set at 123 gr\r\n', Assertion).
 
 	:- else.
 
 		test(books_01, true(Assertion)) :-
 			^^set_text_output(''),
 			data_processing::print,
-			^^text_output_assertion('The Philosopher''s Stone\n  with free quidditch_set at 278 gr\nThe Chamber of Secrets\n  with free map\nThe Prisoner of Azkaban\nThe Goblet of Fire\nThe Order of the Phoenix\nThe Half-Blood Prince\n  with free audio_cd\nThe Deathly Hallows\n  with free horcrux_set at 123 gr\n', Assertion).
+			^^text_output_assertion('The Philosopher''s Stone\n  with free quidditch_set at 223 gr\nThe Chamber of Secrets\n  with free map\nThe Prisoner of Azkaban\nThe Goblet of Fire\nThe Order of the Phoenix\nThe Half-Blood Prince\n  with free audio_cd\nThe Deathly Hallows\n  with free horcrux_set at 123 gr\n', Assertion).
 
 		test(books_02, true(Assertion)) :-
 			^^set_text_output(''),
 			data_processing::print_kg,
-			^^text_output_assertion('The Philosopher''s Stone\n  with free quidditch_set at 0.278 kg\nThe Chamber of Secrets\n  with free map\nThe Prisoner of Azkaban\nThe Goblet of Fire\nThe Order of the Phoenix\nThe Half-Blood Prince\n  with free audio_cd\nThe Deathly Hallows\n  with free horcrux_set at 0.123 kg\n', Assertion).
+			^^text_output_assertion('The Philosopher''s Stone\n  with free quidditch_set at 0.223 kg\nThe Chamber of Secrets\n  with free map\nThe Prisoner of Azkaban\nThe Goblet of Fire\nThe Order of the Phoenix\nThe Half-Blood Prince\n  with free audio_cd\nThe Deathly Hallows\n  with free horcrux_set at 0.123 kg\n', Assertion).
 
 		test(books_03, true(Assertion)) :-
 			^^set_text_output(''),
 			data_processing::print_heavy_extras,
-			^^text_output_assertion('quidditch_set at 278 gr\nhorcrux_set at 123 gr\n', Assertion).
+			^^text_output_assertion('quidditch_set at 223 gr\nhorcrux_set at 123 gr\n', Assertion).
 
 	:- endif.
 
