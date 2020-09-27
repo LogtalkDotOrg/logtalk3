@@ -54,11 +54,11 @@ Examples
 ::
 
    :- multifile(user::logtalk_linter_hook/7).
+   % warn about using list::append/3 to construct a list from an head and a tail
    user::logtalk_linter_hook(
        list::append(L1,L2,L), suspicious_calls,
        File, Lines, Type, Entity,
-       suspicious_call(File, Lines, Type, Entity, list::append(L1,L2,L), [L=[X|L2]])
+       suspicious_call(File, Lines, Type, Entity, list::append(L1,L2,L), [L=[Head|L2]])
    ) :-
-       L1 = [X| Tail],
-       Tail == [].
-
+       nonvar(L1),
+       L1 = [Head].

@@ -241,13 +241,14 @@ message term.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(user<span class="o">::</span>logtalk_linter_hook<span class="o">/</span><span class="m">7</span>).
+<span class="c">% warn about using list::append/3 to construct a list from an head and a tail</span>
 user<span class="o">::</span>logtalk_linter_hook(
     list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), suspicious_calls,
     <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>,
-    suspicious_call(<span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), [<span class="nv">L</span><span class="o">=</span>[<span class="nv">X</span>|<span class="nv">L2</span>]])
+    suspicious_call(<span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, list<span class="o">::</span>append(<span class="nv">L1</span>,<span class="nv">L2</span>,<span class="nv">L</span>), [<span class="nv">L</span><span class="o">=</span>[<span class="nv">Head</span>|<span class="nv">L2</span>]])
 ) <span class="o">:-</span>
-    <span class="nv">L1</span> <span class="o">=</span> [<span class="nv">X</span>| <span class="nv">Tail</span>],
-    <span class="nv">Tail</span> <span class="o">==</span> [].
+    <span class="k">nonvar</span>(<span class="nv">L1</span>),
+    <span class="nv">L1</span> <span class="o">=</span> [<span class="nv">Head</span>].
 </pre></div>
 </div>
 </div>
