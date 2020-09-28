@@ -132,4 +132,7 @@
 		{number_codes(42, [A,B])},
 		A == 52, B == 50.
 
+	throws(lgt_number_codes_2_25, [error(representation_error(character_code),_), error(type_error(integer,a),_)]) :-
+		{number_codes(1234, [a,b,c,d])}.
+
 :- end_object.

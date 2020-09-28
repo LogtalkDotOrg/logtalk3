@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-09-21,
+		date is 2020-09-28,
 		comment is 'Unit tests for the ISO Prolog standard number_chars/2 built-in predicate.'
 	]).
 
@@ -138,5 +138,8 @@
 	succeeds(lgt_number_chars_2_28) :-
 		{number_chars(42, [A,B])},
 		A == '4', B == '2'.
+
+	throws(lgt_number_chars_2_29, error(type_error(character,1),_)) :-
+		{number_chars(1234, [1,2,3,4])}.
 
 :- end_object.
