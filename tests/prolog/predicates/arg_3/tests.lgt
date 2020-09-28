@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2018-02-15,
+		date is 2020-09-28,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -117,5 +117,9 @@
 	succeeds(lgt_arg_3_19) :-
 		{arg(2, [_], Arg)},
 		Arg == [].
+
+	succeeds(lgt_arg_3_20) :-
+		{arg(1, {1,2,3}, Arg)},
+		Arg == (1,2,3).
 
 :- end_object.
