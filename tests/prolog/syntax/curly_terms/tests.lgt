@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2018-06-30,
+		date is 2020-09-28,
 		comment is 'Unit tests for the ISO Prolog standard curly bracketed term syntax.'
 	]).
 
@@ -45,7 +45,7 @@
 	succeeds(lgt_curly_bracketed_term_03) :-
 		^^set_text_input('{}. '),
 		{read(T)},
-		T = '{}'.
+		T == '{}'.
 
 	succeeds(lgt_curly_bracketed_term_04) :-
 		^^set_text_input('{(a,b)}. '),
