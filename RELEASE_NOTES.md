@@ -106,6 +106,9 @@ Tests
 * ADDED: Tests for the standard Prolog predicate `write_term/3` option
 `variable_names/1`.
 
+* ADDED: Tests for the standard Prolog predicate `write_term/3` to check using
+the `quoted(true)` option for writing atoms that start with `%` or `/*`.
+
 * ADDED: Additional tests for the `arg/3`, `atom_chars/2`, `atom_codes/2`,
 `number_chars/2`, and `number_codes/2` standard Prolog predicates.
 
