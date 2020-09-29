@@ -81,9 +81,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:4:2,
 		author is 'Paulo Moura',
-		date is 2020-08-09,
+		date is 2020-09-29,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -148,7 +148,7 @@ setof_3_member(X, [_| L]) :-
 		).
 
 	succeeds(iso_setof_3_12) :-
-		findall(S-Y, {setof(X,(X=Y;X=Z;Y=1),S)}, LL),
+		findall(S-Y, {setof(X,(X=Y;X=_Z;Y=1),S)}, LL),
 		(	variant(LL, [[A,_]-A, [_]-1]) ->
 			true
 		;	variant(LL, [[_,A]-A, [_]-1])

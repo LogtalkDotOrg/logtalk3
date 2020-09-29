@@ -41,9 +41,9 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:2:2,
 		author is 'Paulo Moura',
-		date is 2020-08-09,
+		date is 2020-09-29,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -95,7 +95,7 @@ c(3, c, 'C').
 		)}.
 
 	succeeds(iso_bagof_3_10) :-
-		findall(S-Y, {bagof(X,(X=Y;X=Z;Y=1),S)}, LL),
+		findall(S-Y, {bagof(X,(X=Y;X=_Z;Y=1),S)}, LL),
 		variant(LL, [[A,_]-A, [_]-1]).
 
 	succeeds(iso_bagof_3_11) :-
