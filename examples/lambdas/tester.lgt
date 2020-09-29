@@ -19,6 +19,8 @@
 
 
 :- initialization((
+	set_logtalk_flag(suspicious_calls, silent),
+	set_logtalk_flag(always_true_or_false_goals, silent),
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(loader),
