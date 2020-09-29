@@ -18,6 +18,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- set_logtalk_flag(singleton_variables, silent).
+
+
 :- object(sample).
 
 	a(A,B,C,B,A).

@@ -120,6 +120,8 @@
 		result/2
 	]).
 
+	:- set_logtalk_flag(singleton_variables, silent).
+
 	setup :-
 		this(This),
 		object_property(This, file(_, Directory)),
