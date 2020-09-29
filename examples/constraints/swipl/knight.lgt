@@ -138,7 +138,7 @@
 	show(Ts) :-
 		setup_call_cleanup(
 			open(pipe('gs -dNOPROMPT -g510x510 -dGraphicsAlphaBits=2 -r72 -q'), write, Out, [buffer(false)]),
-			(tell(Out), tour_postscript(Ts), (Sol = yes; Sol = no), Sol == yes),
+			(set_output(Out), tour_postscript(Ts), (Sol = yes; Sol = no), Sol == yes),
 			close(Out)
 		).
 

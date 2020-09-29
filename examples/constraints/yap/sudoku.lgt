@@ -120,7 +120,7 @@
 	show(Options, Rows) :-
 		sudoku(Rows),
 		popen('gs -dNOPAUSE -g680x680 -dGraphicsAlphaBits=2 -r150 -q -', write, Out),
-		tell(Out),
+		set_output(Out),
 		phrase(postscript, Ps),
 		format(Ps, []),
 		append(Rows, Vs),

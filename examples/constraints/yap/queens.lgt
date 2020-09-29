@@ -124,7 +124,7 @@
 		N #> 0,
 		n_queens(N, Qs),
 		popen('gs -dNOPAUSE -g680x680 -dGraphicsAlphaBits=2 -r151 -q -', write, Out),
-		tell(Out),
+		set_output(Out),
 		phrase(postscript, Ps),
 		format("~s\n~w init\n", [Ps,N]),
 		call_cleanup(((animate(Qs),labeling(Options, Qs),finish)), close(Out)).
