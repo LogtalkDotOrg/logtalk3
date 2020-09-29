@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2020-09-28,
+		date is 2020-09-29,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -225,6 +225,18 @@
 		current_output(S),
 		{write_canonical(S, [a,(1,2,3)])},
 		^^text_output_assertion('\'.\'(a,\'.\'(\',\'(1,\',\'(2,3)),[]))', Assertion).
+
+	test(lgt_write_term_3_39, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{writeq(S, '[]')},
+		^^text_output_assertion('[]', Assertion).
+
+	test(lgt_write_term_3_40, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{writeq(S, '{}')},
+		^^text_output_assertion('{}', Assertion).
 
 	cleanup :-
 		^^clean_binary_output,
