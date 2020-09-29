@@ -106,6 +106,9 @@ Tests
 * ADDED: Tests for the standard Prolog predicate `write_term/3` option
 `variable_names/1`.
 
+* ADDED: Tests for the standard Prolog predicate `op/3` to check for a
+permission error when trying to declare the empty list as an operator.
+
 * ADDED: Tests for the standard Prolog predicate `write_term/3` to check using
 the `quoted(true)` option for writing atoms that start with `%` or `/*`.
 

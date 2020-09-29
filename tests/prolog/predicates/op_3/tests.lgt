@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2014-08-03,
+		date is 2020-09-29,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -78,56 +78,62 @@
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.14.3.4
 
-	throws(iso_op_3_11, error(permission_error(create,operator,{}),_)) :-
+	throws(iso_op_3_11, error(permission_error(create,operator,[]),_)) :-
+		{op(500, xfy, [])}.
+
+	throws(iso_op_3_12, error(permission_error(create,operator,[]),_)) :-
+		{op(500, xfy, [[]])}.
+
+	throws(iso_op_3_13, error(permission_error(create,operator,{}),_)) :-
 		{op(500, xfy, {})}.
 
-	throws(iso_op_3_12, error(permission_error(create,operator,{}),_)) :-
+	throws(iso_op_3_14, error(permission_error(create,operator,{}),_)) :-
 		{op(500, xfy, [{}])}.
 
-	throws(iso_op_3_13, error(permission_error(create,operator,'|'),_)) :-
+	throws(iso_op_3_15, error(permission_error(create,operator,'|'),_)) :-
 		{op(1000, xfy, '|')}.
 
-	throws(iso_op_3_14, error(permission_error(create,operator,'|'),_)) :-
+	throws(iso_op_3_16, error(permission_error(create,operator,'|'),_)) :-
 		{op(1000, xfy, ['|'])}.
 
-	throws(iso_op_3_15, error(permission_error(create,operator,'|'),_)) :-
+	throws(iso_op_3_17, error(permission_error(create,operator,'|'),_)) :-
 		{op(1150, fx, '|')}.
 
-	succeeds(iso_op_3_16) :-
+	succeeds(iso_op_3_18) :-
 		{op(1105, xfy, '|')},
 		{current_op(Priority, Specifier, '|')}, Priority == 1105, Specifier == xfy.
 
-	succeeds(iso_op_3_17) :-
+	succeeds(iso_op_3_19) :-
 		{op(0, xfy, '|')},
 		{\+ current_op(_, xfy, '|')}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_op_3_18, error(instantiation_error,_)) :-
+	throws(sics_op_3_20, error(instantiation_error,_)) :-
 		{op(_, xfx, ++)}.
 
-	throws(sics_op_3_19, error(instantiation_error,_)) :-
+	throws(sics_op_3_21, error(instantiation_error,_)) :-
 		{op(100, xfx, _)}.
 
-	throws(sics_op_3_20, error(instantiation_error,_)) :-
+	throws(sics_op_3_22, error(instantiation_error,_)) :-
 		{op(100, xfx, [a|_])}.
 
-	throws(sics_op_3_21, error(instantiation_error,_)) :-
+	throws(sics_op_3_23, error(instantiation_error,_)) :-
 		{op(100, xfx, [a,_])}.
 
-	throws(sics_op_3_22, error(type_error(atom,200),_)) :-
+	throws(sics_op_3_24, error(type_error(atom,200),_)) :-
 		{op(100, 200, [a])}.
 
-	throws(sics_op_3_23, error(type_error(atom,f(1)),_)) :-
+	throws(sics_op_3_25, error(type_error(atom,f(1)),_)) :-
 		{op(100, f(1), [a])}.
 
-	throws(sics_op_3_24, error(type_error(atom,a+b),_)) :-
+	throws(sics_op_3_26, error(type_error(atom,a+b),_)) :-
 		{op(100, xfx, [a,a+b])}.
 
-	throws(sics_op_3_25, error(permission_error(modify,operator,(',')),_)) :-
+	throws(sics_op_3_27, error(permission_error(modify,operator,(',')),_)) :-
 		{op(100, xfx, (','))}.
 
-	throws(sics_op_3_26, error(permission_error(modify,operator,(',')),_)) :-
+	throws(sics_op_3_28, error(permission_error(modify,operator,(',')),_)) :-
 		{op(100, xfx, [a,(',')])}.
 
 :- end_object.
