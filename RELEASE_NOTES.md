@@ -115,6 +115,8 @@ the `quoted(true)` option for writing the `[]` and `{}` atoms.
 * ADDED: Additional tests for the `arg/3`, `atom_chars/2`, `atom_codes/2`,
 `number_chars/2`, and `number_codes/2` standard Prolog predicates.
 
+* ADDED: Tests for single quote representation in quoted atoms.
+
 * ADDED: Additional tests for the `set_logtalk_flag/2` predicate.
 
 * IMPROVED: Tests for the `predicate_property/2` de facto standard Prolog
