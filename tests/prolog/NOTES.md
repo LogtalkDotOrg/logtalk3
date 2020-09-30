@@ -18,10 +18,10 @@ ________________________________________________________________________
 
 
 This directory contains a set of unit tests for Prolog official and de facto
-standard features. Most of these unit tests are taken from the official ISO
-Prolog standard (updated up to the ISO/IEC 13211-1:1995/Cor.2:2012(en)
-standard). Several tests originate from SICS, ECLiPSe, and SWI-Prolog and are
-used here with permission.
+standard features. Several of these unit tests are taken from the official ISO
+Prolog standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard
+and the follow up corrigendas 1, 2, and 3). Several tests originate from SICS,
+ECLiPSe, and SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that are
 slowly becoming de facto standards (e.g. the `(*->)/2` soft-cut control
