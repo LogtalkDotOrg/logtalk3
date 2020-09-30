@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-09-28,
+		date is 2020-09-30,
 		comment is 'Unit tests for the ISO Prolog standard curly bracketed term syntax.'
 	]).
 
@@ -51,6 +51,16 @@
 		^^set_text_input('{(a,b)}. '),
 		{read(T)},
 		T == '{}'(','(a,b)).
+
+	succeeds(lgt_curly_bracketed_term_05) :-
+		^^set_text_input('{a}. {}(a). '),
+		{read(T1), read(T2)},
+		T1 == T2.
+
+	succeeds(lgt_curly_bracketed_term_06) :-
+		^^set_text_input('{a,b}. {}((a,b)). '),
+		{read(T1), read(T2)},
+		T1 == T2.
 
 	cleanup :-
 		^^clean_text_input.

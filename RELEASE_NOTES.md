@@ -127,6 +127,8 @@ Prolog predicates.
 
 * ADDED: Tests for single quote representation in quoted atoms.
 
+* ADDED: Additional tests for curly terms syntax.
+
 * ADDED: Additional tests for the `set_logtalk_flag/2` predicate.
 
 * IMPROVED: Tests for the `predicate_property/2` de facto standard Prolog
