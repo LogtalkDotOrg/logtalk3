@@ -78,4 +78,7 @@
 		read_term(S, T, []),
 		{compound(T)}.
 
+	cleanup :-
+		^^clean_text_input.
+
 :- end_object.

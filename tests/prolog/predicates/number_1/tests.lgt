@@ -65,4 +65,7 @@
 		read_term(S, T, []),
 		{number(T)}.
 
+	cleanup :-
+		^^clean_text_input.
+
 :- end_object.
