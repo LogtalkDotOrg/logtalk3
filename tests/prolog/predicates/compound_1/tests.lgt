@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-09-30,
 		comment is 'Unit tests for the ISO Prolog standard compound/1 built-in predicate.'
 	]).
 
@@ -57,5 +57,25 @@
 
 	succeeds(iso_compound_1_08) :-
 		{compound([a])}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_compound_1_09) :-
+		{compound(-(1))}.
+
+	succeeds(lgt_compound_1_10) :-
+		{compound(+(1))}.
+
+	fails(lgt_compound_1_11) :-
+		^^set_text_input('-1. '),
+		current_input(S),
+		read_term(S, T, []),
+		{compound(T)}.
+
+	succeeds(lgt_compound_1_12) :-
+		^^set_text_input('+1. '),
+		current_input(S),
+		read_term(S, T, []),
+		{compound(T)}.
 
 :- end_object.

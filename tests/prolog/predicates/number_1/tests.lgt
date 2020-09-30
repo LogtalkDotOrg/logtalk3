@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-09-30,
 		comment is 'Unit tests for the ISO Prolog standard number/1 built-in predicate.'
 	]).
 
@@ -44,5 +44,25 @@
 
 	fails(iso_number_1_05) :-
 		{number(_X)}.
+
+	% tests from the Logtalk portability work
+
+	fails(iso_number_1_06) :-
+		{number(-(1))}.
+
+	fails(iso_number_1_07) :-
+		{number(+(1))}.
+
+	succeeds(lgt_number_1_08) :-
+		^^set_text_input('-1. '),
+		current_input(S),
+		read_term(S, T, []),
+		{number(T)}.
+
+	fails(lgt_number_1_09) :-
+		^^set_text_input('+1. '),
+		current_input(S),
+		read_term(S, T, []),
+		{number(T)}.
 
 :- end_object.
