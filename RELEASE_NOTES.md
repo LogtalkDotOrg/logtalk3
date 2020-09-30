@@ -38,6 +38,10 @@ variables.
 * FIXED: Increment the warnings counter when reporting term-expansion and
 goal-expansion errors.
 
+* FIXED: Bug in the `logtalk_make/0-1` predicates when reloading a failed file
+or a main file due to an updated included file that could result in multiple
+entries for the runtime table of loaded files.
+
 * FIXED: The `user.lgt` file to workaround embedding errors with GNU Prolog.
 
 Prolog adapter and integration files

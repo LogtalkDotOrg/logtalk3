@@ -2868,10 +2868,8 @@ logtalk_make(Target) :-
 	'$lgt_failed_file_'(Path),
 	'$lgt_decompose_file_name'(Path, Directory, Name, Extension),
 	atom_concat(Name, Extension, Basename),
-	% force reloading by changing the main file time stamp to 0.0, a value that in the standard term
-	% comparison order used to compare time stamps comes before any integer or float actual time stamp
-	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, _)),
-	assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, 0.0)),
+	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, _),
+	% typically a descendant file failure propagated to a parent file
 	logtalk_load(Path, Flags),
 	fail.
 % recompilation of changed source files since last loaded
@@ -2888,11 +2886,10 @@ logtalk_make(Target) :-
 	'$lgt_included_file_'(Path, MainBasename, MainDirectory, LoadingTimeStamp),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
-	% force reloading by changing the main file time stamp to 0.0, a value that in the standard term
-	% comparison order used to compare time stamps comes before any integer or float actual time stamp
-	retract('$lgt_loaded_file_'(MainBasename, MainDirectory, Mode, Flags, TextProperties, ObjectFile, _)),
-	assertz('$lgt_loaded_file_'(MainBasename, MainDirectory, Mode, Flags, TextProperties, ObjectFile, 0.0)),
+	% force reloading by marking the main file loading as failed
 	atom_concat(MainDirectory, MainBasename, MainPath),
+	assertz('$lgt_failed_file_'(MainPath)),
+	'$lgt_loaded_file_'(MainBasename, MainDirectory, _, Flags, _, _, _),
 	logtalk_load(MainPath, Flags),
 	fail.
 % recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
@@ -3478,7 +3475,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 42, 0, b02)).
+'$lgt_version_data'(logtalk(3, 42, 0, b03)).
 
 
 
