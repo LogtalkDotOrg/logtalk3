@@ -30,39 +30,44 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.6.1
 
-	succeeds(iso_curly_bracketed_term_01) :-
+	test(iso_curly_bracketed_term_01, true(T == '{}'(a))) :-
 		^^set_text_input('{a}. '),
-		{read(T)},
-		T == '{}'(a).
+		{read(T)}.
 
-	succeeds(iso_curly_bracketed_term_02) :-
+	test(iso_curly_bracketed_term_02, true(T == '{}'(','(a,b)))) :-
 		^^set_text_input('{a,b}. '),
-		{read(T)},
-		T == '{}'(','(a,b)).
+		{read(T)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_curly_bracketed_term_03) :-
+	test(lgt_curly_bracketed_term_03, true(T == '{}')) :-
 		^^set_text_input('{}. '),
-		{read(T)},
-		T == '{}'.
+		{read(T)}.
 
-	succeeds(lgt_curly_bracketed_term_04) :-
+	test(lgt_curly_bracketed_term_04, true(T == '{}'(','(a,b)))) :-
 		^^set_text_input('{(a,b)}. '),
-		{read(T)},
-		T == '{}'(','(a,b)).
+		{read(T)}.
 
-	succeeds(lgt_curly_bracketed_term_05) :-
+	test(lgt_curly_bracketed_term_05, true(T1 == T2)) :-
 		^^set_text_input('{a}. {}(a). '),
-		{read(T1), read(T2)},
-		T1 == T2.
+		{read(T1), read(T2)}.
 
-	succeeds(lgt_curly_bracketed_term_06) :-
+	test(lgt_curly_bracketed_term_06, true(T1 == T2)) :-
 		^^set_text_input('{a,b}. {}((a,b)). '),
-		{read(T1), read(T2)},
-		T1 == T2.
+		{read(T1), read(T2)}.
+
+	test(lgt_curly_bracketed_term_07, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_canonical({a})},
+		^^text_output_assertion('{}(a)', Assertion).
+
+	test(lgt_curly_bracketed_term_08, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_canonical({a,b})},
+		^^text_output_assertion('{}(\',\'(a,b))', Assertion).
 
 	cleanup :-
-		^^clean_text_input.
+		^^clean_text_input,
+		^^clean_text_output.
 
 :- end_object.
