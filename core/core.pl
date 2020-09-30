@@ -12610,49 +12610,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
-'$lgt_compile_body'(instantiation_error, TPred, DPred, Ctx) :-
+'$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
+	'$lgt_built_in_error_method'(Pred),
 	!,
-	'$lgt_compile_error_predicate'(instantiation_error, TPred, DPred, Ctx).
-
-'$lgt_compile_body'(uninstantiation_error(Culprit), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(uninstantiation_error(Culprit), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(type_error(Type,Culprit), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(type_error(Type,Culprit), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(domain_error(Domain,Culprit), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(domain_error(Domain,Culprit), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(existence_error(Thing,Culprit), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(existence_error(Thing,Culprit), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(permission_error(Operation,Permission,Culprit), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(permission_error(Operation,Permission,Culprit), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(representation_error(Flag), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(representation_error(Flag), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(evaluation_error(Error), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(evaluation_error(Error), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(resource_error(Resource), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(resource_error(Resource), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(syntax_error(Description), TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(syntax_error(Description), TPred, DPred, Ctx).
-
-'$lgt_compile_body'(system_error, TPred, DPred, Ctx) :-
-	!,
-	'$lgt_compile_error_predicate'(system_error, TPred, DPred, Ctx).
+	'$lgt_compile_error_method'(Pred, TPred, DPred, Ctx).
 
 % type testing (only lint warnings)
 
@@ -15842,12 +15803,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_error_predicate'(+compilation_context, -compound)
+% '$lgt_compile_error_method'(+compilation_context, -compound)
 %
-% compiles a call to one of the built-in error predicates;
-% these predicates are shorthands to context/1 + throw/1
+% compiles a call to one of the built-in error methods;
+% these methods are shorthands to context/1 + throw/1
 
-'$lgt_compile_error_predicate'(Exception, TPred, DPred, Ctx) :-
+'$lgt_compile_error_method'(Exception, TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx_head'(Ctx, Head0),
 	(	Head0 = _::Head ->
 		% object (or category) multifile predicate clause
@@ -22503,6 +22464,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(findall(_,_,_,_), p, findall(*, 0, *, *), 1).
 '$lgt_built_in_method_spec'(forall(_,_,_), p, forall(0, 0), 1).
 '$lgt_built_in_method_spec'(setof(_,_,_), p, setof(*, ^, *), 1).
+
+
+
+% Logtalk built-in error methods
+%
+% '$lgt_built_in_error_method'(@callable)
+
+'$lgt_built_in_error_method'(instantiation_error).
+'$lgt_built_in_error_method'(uninstantiation_error(_)).
+'$lgt_built_in_error_method'(type_error(_, _)).
+'$lgt_built_in_error_method'(domain_error(_, _)).
+'$lgt_built_in_error_method'(existence_error(_, _)).
+'$lgt_built_in_error_method'(permission_error(_, _, _)).
+'$lgt_built_in_error_method'(representation_error(_)).
+'$lgt_built_in_error_method'(evaluation_error(_)).
+'$lgt_built_in_error_method'(resource_error(_)).
+'$lgt_built_in_error_method'(syntax_error(_)).
+'$lgt_built_in_error_method'(system_error).
 
 
 
