@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-03,
+		date is 2020-10-02,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -395,6 +395,11 @@
 
 		write_term_to_chars(Term, Chars) :-
 			{format(chars(Chars), '~w', [Term])}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+
+		write_term_to_chars(Term, Chars) :-
+			{open(atom(Atom), write, Stream), write(Stream, Term), close(Stream), atom_chars(Atom, Chars)}.
 
 	:- else.
 

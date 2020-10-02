@@ -43,14 +43,15 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:65:1,
+		version is 1:66:0,
 		author is 'Paulo Moura',
-		date is 2020-09-06,
+		date is 2020-10-02,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
 			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` predicates are not supported.',
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
+			'LVM portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
 			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
@@ -1559,6 +1560,103 @@
 			atom_codes(SecondsAtom, Codes),
 			atom_concat('sleep ', SecondsAtom, Command),
 			{shell(Command)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+
+		pid(PID) :-
+			{pid(PID)}.
+
+		shell(Command, Status) :-
+			{shell(Command, Status)}.
+
+		shell(Command) :-
+			{shell(Command)}.
+
+		absolute_file_name(Path, ExpandedPath) :-
+			{absolute_file_name(Path, ExpandedPath)}.
+
+		make_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			(	{exists_directory(ExpandedPath)} ->
+				true
+			;	{make_directory(ExpandedPath)}
+			).
+
+		make_directory_path(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{make_directory_path(ExpandedPath)}.
+
+		delete_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
+
+		change_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{change_directory(ExpandedPath)}.
+
+		working_directory(Directory) :-
+			{current_directory(Directory)}.
+
+		directory_files(Directory, Files) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
+
+		directory_exists(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_exists(ExpandedPath)}.
+
+		file_exists(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_exists(ExpandedPath)}.
+
+		file_modification_time(File, Time) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_modification_time(ExpandedPath, Time)}.
+
+		file_size(File, Size) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_size(ExpandedPath, Size)}.
+
+		file_permission(_, _) :-
+			throw(not_available(file_permission/2)).
+
+		rename_file(Old, New) :-
+			absolute_file_name(Old, OldExpandedPath),
+			absolute_file_name(New, NewExpandedPath),
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
+
+		delete_file(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
+
+		environment_variable(Variable, Value) :-
+			{getenv(Variable, Value)}.
+
+		time_stamp(Time) :-
+			{get_time(Time)}.
+
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{date_time(Year, Month, Day, Hours, Minutes, Seconds)}.
+
+		cpu_time(Seconds) :-
+			{cpu_time(Milliseconds)},
+			Seconds is Milliseconds / 1000.
+
+		wall_time(Seconds) :-
+			{wall_time(Milliseconds)},
+			Seconds is Milliseconds / 1000.
+
+		operating_system_type(Type) :-
+			(	{getenv('COMSPEC', _)} ->
+				Type = windows
+			;	Type = unix
+			).
+
+		command_line_arguments(_) :-
+			throw(not_available(command_line_arguments/1)).
+
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
 
 	:- else.
 

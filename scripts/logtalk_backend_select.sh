@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on September 1, 2020
+##   Last updated on October 2, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -46,6 +46,9 @@ list_backends() {
 	fi
 	if [ -e "$(command -v jiplgt)" ] && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		echo -n "  jiplgt"
+	fi
+	if [ -e "$(command -v lvmlgt)" ] && [ "$(command -v lvm)" != "" ] ; then
+		echo -n "  lvmlgt"
 	fi
 	if [ -e "$(command -v qplgt)" ] && [ "$(command -v qp)" != "" ] ; then
 		echo -n "  qplgt"
@@ -134,6 +137,8 @@ valid_backend() {
 	elif [ "$1" == "gplgt" ] && [ -e "$(command -v gplgt)" ]  && [ "$(command -v gprolog)" != "" ] ; then
 		return 0
 	elif [ "$1" == "jiplgt" ] && [ -e "$(command -v jiplgt)" ]  && [ "$(command -v jipconsole.sh)" != "" ] ; then
+		return 0
+	elif [ "$1" == "lvmlgt" ] && [ -e "$(command -v lvmlgt)" ]  && [ "$(command -v lvm)" != "" ] ; then
 		return 0
 	elif [ "$1" == "lplgt" ] && [ -e "$(command -v lplgt)" ]  && [ "$(command -v lprolog)" != "" ] ; then
 		return 0

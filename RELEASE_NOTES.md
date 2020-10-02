@@ -47,6 +47,8 @@ entries for the runtime table of loaded files.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Experimental support for LVM as a backend compiler.
+
 * UPDATED: The list of candidate goals for tautologies and falsehoods linter
 checks for GNU Prolog, SWI-Prolog, and YAP.
 
@@ -67,6 +69,8 @@ include line numbers information.
 Library
 -------
 
+* ADDED: Support for LVM to the portable `os` and `random` libraries.
+
 * FIXED: Workaround an issue with some backend Prolog systems such as ECLiPSe
 and Tau Prolog where reloading a file defining clauses for a multifile predicate
 results in the duplication of the clauses when testing the `arbitrary` and `os`
@@ -85,6 +89,8 @@ Tools
 
 * CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
 timeout option.
+
+* ADDED: Support for LVM to the `debugger`, `diagrams`, and `lgtunit` tools.
 
 * FIXED: Tool files to workaround embedding errors with GNU Prolog.
 

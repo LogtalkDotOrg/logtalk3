@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:6:0,
+		version is 8:7:0,
 		author is 'Paulo Moura',
-		date is 2020-09-03,
+		date is 2020-10-02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1658,7 +1658,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx; Dialect == tau)
+		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx; Dialect == tau; Dialect == lvm)
 	)).
 		epsilon(Epsilon) :-
 			Epsilon is epsilon.

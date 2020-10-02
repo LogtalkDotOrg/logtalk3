@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on June 5, 2020
+Last updated on October 2, 2020
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -83,8 +83,9 @@ following table summarizes the availability of these features:
 |  Ciao Prolog     |      yes      |       no      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |  
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
-|  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
+|  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
+|  LVM             |       no      |       no      |       no      |       no      |       no      |  
 |  Qu-Prolog       |       no      |       no      |       no      |       no      |       no      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
@@ -225,6 +226,14 @@ See the `scripts/embedding/jiprolog` directory for a sample shell script
 for embedding Logtalk and optionally a Logtalk application. The script
 documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
+
+
+LVM 1.0.0 and later versions
+-----------------------------------
+
+	lvm.pl
+
+Experimental.
 
 
 Qu-Prolog 9.7 and later versions
