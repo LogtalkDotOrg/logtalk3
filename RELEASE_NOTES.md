@@ -126,8 +126,8 @@ the `quoted(true)` option for writing the `[]` and `{}` atoms.
 the `quoted(true)` option for writing escape sequences.
 
 * ADDED: Additional tests for the `arg/3`, `atom_chars/2`, `atom_codes/2`,
-`number_chars/2`, `number_codes/2`, `compound/1`, and `number/1`, standard
-Prolog predicates.
+`number_chars/2`, `number_codes/2`, `compound/1`, `number/1`, and
+`predicate_property/2` standard Prolog predicates.
 
 * ADDED: Additional tests for the `catch/3` Prolog standard control construct.
 
