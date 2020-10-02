@@ -45,10 +45,10 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-08-03,
-		comment is 'Unit tests for the ISO Prolog standard catch/3 built-in predicate.'
+		date is 2020-10-02,
+		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.9.4
@@ -80,7 +80,13 @@ p :-
 
 	% tests from the Logtalk portability work
 
-	test(iso_catch_3_09, true(subsumes_term(error(instantiation_error,_), Y))) :-
+	test(lgt_catch_3_09, true(subsumes_term(error(instantiation_error,_), Y))) :-
 		{catch(_, Y, true)}.
+
+	test(lgt_catch_3_10, true(subsumes_term(error(type_error(callable,1),_), Y))) :-
+		{catch(1, Y, true)}.
+
+	test(lgt_catch_3_11, fail) :-
+		{catch(fail, _, true)}.
 
 :- end_object.
