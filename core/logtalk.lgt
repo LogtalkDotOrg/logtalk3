@@ -27,9 +27,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:17:1,
+		version is 1:17:2,
 		author is 'Paulo Moura',
-		date is 2020-05-22,
+		date is 2020-10-03,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -157,8 +157,8 @@
 		comment is 'Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.',
 		argnames is ['Provider']
 	]).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(debug_handler_provider/1).
 	:- endif.
 
@@ -169,8 +169,8 @@
 		comment is 'Debug event handler. The defined events are unification events - ``fact(Entity,Fact,Clause,File,Line)`` and ``rule(Entity,Head,Clause,File,Line)`` - and goal events - ``top_goal(Goal,CompiledGoal)`` and ``goal(Goal,CompiledGoal)``.',
 		argnames is ['Event', 'ExecutionContext']
 	]).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(debug_handler/2).
 	:- endif.
 

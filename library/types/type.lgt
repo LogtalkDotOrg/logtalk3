@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:27:0,
+		version is 1:27:1,
 		author is 'Paulo Moura',
-		date is 2019-07-27,
+		date is 2020-10-03,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -65,8 +65,8 @@
 
 	:- public(type/1).
 	:- multifile(type/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(type/1).
 	:- endif.
 	:- mode(type(?callable), zero_or_more).
@@ -77,8 +77,8 @@
 
 	:- public(meta_type/3).
 	:- multifile(meta_type/3).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(meta_type/3).
 	:- endif.
 	:- mode(meta_type(?callable, -list, -list), zero_or_more).
@@ -103,8 +103,8 @@
 
 	:- public(check/2).
 	:- multifile(check/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog and XSB
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect==xsb; Dialect==qp))).
+	% workaround the lack of support for static multifile predicates in Qu-Prolog
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(check/2).
 	:- endif.
 	:- mode(check(@callable, @term), one_or_error).
