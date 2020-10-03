@@ -45,7 +45,7 @@
 	:- info([
 		version is 1:66:0,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2020-10-03,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1577,10 +1577,7 @@
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			(	{exists_directory(ExpandedPath)} ->
-				true
-			;	{make_directory(ExpandedPath)}
-			).
+			{make_directory(ExpandedPath)}.
 
 		make_directory_path(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),

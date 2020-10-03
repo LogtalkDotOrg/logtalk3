@@ -229,7 +229,7 @@ Logtalk applications.
 
 
 LVM 1.0.0 and later versions
------------------------------------
+----------------------------
 
 	lvm.pl
 
