@@ -154,7 +154,7 @@ predicate.
 Installers and installation scripts
 -----------------------------------
 
-* UPDATED: The `logtalk_backend_select` script for Tau Prolog.
+* UPDATED: The `logtalk_backend_select` script for Ciao Prolog and Tau Prolog.
 
 
 3.41.0 - September 1, 2020
