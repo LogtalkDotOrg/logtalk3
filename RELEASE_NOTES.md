@@ -71,7 +71,7 @@ include line numbers information.
 Library
 -------
 
-* ADDED: Support for LVM to the portable `os` and `random` libraries.
+* ADDED: Support for LVM to the `os`, `random`, and `redis` libraries.
 
 * FIXED: Workaround an issue with some backend Prolog systems such as ECLiPSe
 and Tau Prolog where reloading a file defining clauses for a multifile predicate
