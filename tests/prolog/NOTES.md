@@ -20,8 +20,8 @@ ________________________________________________________________________
 This directory contains a set of unit tests for Prolog official and de facto
 standard features. Several of these unit tests are taken from the official ISO
 Prolog standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard
-and the follow up corrigendas 1, 2, and 3). Several tests originate from SICS,
-ECLiPSe, and SWI-Prolog and are used here with permission.
+and the follow up corrigendas). Several tests originate from SICS, ECLiPSe,
+and SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that are
 slowly becoming de facto standards (e.g. the `(*->)/2` soft-cut control
@@ -112,3 +112,8 @@ argument. For example, accepting `type_error(callable,1)` where the term
 `type_error(callable,(fail,1))` is expected. Another example is when the
 exception term contains a module-qualified culprit. For example, the
 system generating instead a `type_error(callable,user:1)` exception.
+
+There is a potential catch-22 when using a language to test itself as the
+test code itself is written and compiled using a possibly faulty language
+implementation. Always remember that tests can only expose bugs; they
+can never prove that bugs don't exist.

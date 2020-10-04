@@ -21,7 +21,7 @@ This directory contains two test suites. The Logtalk test suite includes unit
 tests for built-in entities, predicates, control constructs, directives, and
 methods. Besides this set of unit tests, there are also unit tests defined
 for most of the examples, for most of the developer tools, and for some code
-contributions.
+contributions and ports.
 
 The Prolog test suite includes conformance tests for both official and de
 facto standards. It can be used to highlight differences between backend
