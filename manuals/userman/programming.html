@@ -541,7 +541,13 @@ problems of your loader files.</p>
 <p>This <a class="reference internal" href="../glossary.html#term-library-notation"><span class="xref std std-term">library notation</span></a> provides functionality inspired by the
 <code class="docutils literal notranslate"><span class="pre">file_search_path/2</span></code> mechanism introduced by Quintus Prolog and later
 adopted by some other Prolog compilers but with a key difference: there
-is no search and Logtalk will warn about duplicated library aliases.</p>
+is no fragile search mechanism and the Logtalk <code class="docutils literal notranslate"><span class="pre">make</span></code> can be used to
+check for duplicated library aliases. Multiple definitions for the
+same alias are problematic when using external dependencies as any
+third-party update to those dependencies can introduce file name clashes.
+Note that the potential for these clashes cannot be reliably minimized by
+a careful ordering of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate clauses
+due to this predicate being multifile and dynamic.</p>
 </div>
 <div class="section" id="settings-files">
 <span id="programming-settings"></span><h2>Settings files<a class="headerlink" href="#settings-files" title="Permalink to this headline">¶</a></h2>

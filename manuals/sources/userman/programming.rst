@@ -368,7 +368,13 @@ problems of your loader files.
 This :term:`library notation` provides functionality inspired by the
 ``file_search_path/2`` mechanism introduced by Quintus Prolog and later
 adopted by some other Prolog compilers but with a key difference: there
-is no search and Logtalk will warn about duplicated library aliases.
+is no fragile search mechanism and the Logtalk ``make`` can be used to
+check for duplicated library aliases. Multiple definitions for the
+same alias are problematic when using external dependencies as any
+third-party update to those dependencies can introduce file name clashes.
+Note that the potential for these clashes cannot be reliably minimized by
+a careful ordering of the ``logtalk_library_path/2`` predicate clauses
+due to this predicate being multifile and dynamic.
 
 .. _programming_settings:
 

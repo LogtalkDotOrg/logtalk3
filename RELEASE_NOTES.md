@@ -66,6 +66,8 @@ Documentation
 * IMPROVED: Handbook description of entity and predicate properties that
 include line numbers information.
 
+* UPDATED: Handbook documentation of the `logtalk_library_path/2` predicate.
+
 Library
 -------
 
