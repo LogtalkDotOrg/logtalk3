@@ -610,15 +610,15 @@ flag we can write a single settings file that can be used with several
 </div>
 <div class="section" id="compiler-linter">
 <span id="programming-linter"></span><h2>Compiler linter<a class="headerlink" href="#compiler-linter" title="Permalink to this headline">¶</a></h2>
-<p>The compiler includes a linter that checks for a wide range of possible
-problems in source files. Notably, the compiler checks for unknown
+<p>The compiler includes a <a class="reference internal" href="../devtools/linter.html"><span class="doc">linter</span></a> that checks for a wide range
+of possible problems in source files. Notably, the compiler checks for unknown
 entities, unknown predicates, undefined predicates (i.e. predicates that
 are declared but not defined), missing directives (including missing
 <code class="docutils literal notranslate"><span class="pre">dynamic/1</span></code> and <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives), redefined built-in
-predicates, calls to non-portable predicates, singleton variables,
-tautology and falsehood goals (i.e. goals that are can be replaced by
-<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">fail</span></code>), and trivial fails (i.e. calls to predicates with
-no match clauses). Most of the linter warnings are controlled by
+predicates, calls to non-portable predicates, singleton variables, goals that
+are always true or always false (i.e. goals that are can be replaced by
+<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">fail</span></code>), and trivial fails (i.e. calls to predicates with no
+match clauses). Most of the linter warnings are controlled by
 <a class="reference internal" href="#programming-flags-lint"><span class="std std-ref">compiler flags</span></a>. See the next section
 for details.</p>
 </div>
@@ -705,9 +705,9 @@ startup directory.</p>
 </dd>
 </dl>
 <span class="target" id="flag-prolog-dialect"></span><dl class="simple" id="index-1">
-<dt><code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code></dt><dd><p>Name of the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> (an atom). This flag can be used
+<dt><code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code></dt><dd><p>Identifier of the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> (an atom). This flag can be used
 for <a class="reference internal" href="../refman/directives/conditional_compilation_directives.html#conditional-compilation-directives"><span class="std std-ref">conditional compilation</span></a>
-of Prolog specific code.</p>
+of Prolog compiler specific code.</p>
 </dd>
 </dl>
 <span class="target" id="flag-prolog-version"></span><dl class="simple" id="index-2">
@@ -765,8 +765,8 @@ values are <code class="docutils literal notranslate"><span class="pre">unsuppor
 <span class="target" id="flag-modules"></span><dl class="simple" id="index-9">
 <dt><code class="docutils literal notranslate"><span class="pre">modules</span></code></dt><dd><p>Informs Logtalk if the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> provides suitable
 module support. Possible flag values are <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> and
-<code class="docutils literal notranslate"><span class="pre">supported</span></code> (Logtalk provides limited support for compiling Prolog
-modules as objects).</p>
+<code class="docutils literal notranslate"><span class="pre">supported</span></code> (independently of this flag, Logtalk provides limited support
+for compiling Prolog modules as objects).</p>
 </dd>
 </dl>
 <span class="target" id="flag-coinduction"></span><dl class="simple" id="index-10">

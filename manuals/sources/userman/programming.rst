@@ -446,15 +446,15 @@ flag we can write a single settings file that can be used with several
 Compiler linter
 ---------------
 
-The compiler includes a linter that checks for a wide range of possible
-problems in source files. Notably, the compiler checks for unknown
+The compiler includes a :doc:`../devtools/linter` that checks for a wide range
+of possible problems in source files. Notably, the compiler checks for unknown
 entities, unknown predicates, undefined predicates (i.e. predicates that
 are declared but not defined), missing directives (including missing
 ``dynamic/1`` and ``meta_predicate/1`` directives), redefined built-in
-predicates, calls to non-portable predicates, singleton variables,
-tautology and falsehood goals (i.e. goals that are can be replaced by
-``true`` or ``fail``), and trivial fails (i.e. calls to predicates with
-no match clauses). Most of the linter warnings are controlled by
+predicates, calls to non-portable predicates, singleton variables, goals that
+are always true or always false (i.e. goals that are can be replaced by
+``true`` or ``fail``), and trivial fails (i.e. calls to predicates with no
+match clauses). Most of the linter warnings are controlled by
 :ref:`compiler flags <programming_flags_lint>`. See the next section
 for details.
 
@@ -563,9 +563,9 @@ These are:
 .. index:: pair: prolog_dialect; Flag
 
 ``prolog_dialect``
-   Name of the :term:`backend Prolog compiler` (an atom). This flag can be used
+   Identifier of the :term:`backend Prolog compiler` (an atom). This flag can be used
    for :ref:`conditional compilation <conditional_compilation_directives>`
-   of Prolog specific code.
+   of Prolog compiler specific code.
 
 .. _flag_prolog_version:
 .. index:: pair: prolog_version; Flag
@@ -639,8 +639,8 @@ These are:
 ``modules``
    Informs Logtalk if the :term:`backend Prolog compiler` provides suitable
    module support. Possible flag values are ``unsupported`` and
-   ``supported`` (Logtalk provides limited support for compiling Prolog
-   modules as objects).
+   ``supported`` (independently of this flag, Logtalk provides limited support
+   for compiling Prolog modules as objects).
 
 .. _flag_coinduction:
 .. index:: pair: coinduction; Flag

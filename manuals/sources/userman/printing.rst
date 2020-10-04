@@ -62,7 +62,7 @@ that also allows abstracting asking a user for input. Both mechanisms are
 implemented by the :ref:`logtalk <apis:logtalk/0>` built-in object and
 described in this section. The message printing mechanism is extensively
 used by the Logtalk compiler itself and by the developer tools. The question
-asking mechanism is used in the debugger tool.
+asking mechanism is used e.g. in the :doc:`../devtools/debugger` tool.
 
 .. _printing_messages:
 
@@ -128,8 +128,9 @@ filtering of all messages from a specific component and also avoiding conflicts
 when two components happen to define the same message term (e.g. ``banner``).
 Users should choose and use a unique name for a component, which usually is
 the name of the component itself. For example, all messages from the
-``lgtunit`` tool use ``lgtunit`` for the component argument. The compiler
-and runtime are interpreted as a single component designated as ``core``.
+:doc:`../devtools/lgtunit` tool use ``lgtunit`` for the component argument.
+The compiler and runtime are interpreted as a single component designated as
+``core``.
 
 The third argument of ``print_message/3`` is the message itself, represented
 by a term. In the above example, the message term is ``banner``. Using a
