@@ -49,6 +49,9 @@ Prolog adapter and integration files
 
 * ADDED: Experimental support for LVM as a backend compiler.
 
+* ADDED: Double-clickable `*.command` Terminal.app files for starting Logtalk
+with LVM or Tau Prolog backend compilers on macOS.
+
 * UPDATED: The list of candidate goals for tautologies and falsehoods linter
 checks for GNU Prolog, SWI-Prolog, and YAP.
 
