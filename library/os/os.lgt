@@ -43,15 +43,15 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:66:0,
+		version is 1:67:0,
 		author is 'Paulo Moura',
-		date is 2020-10-03,
+		date is 2020-10-05,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
 			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` predicates are not supported.',
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
-			'LVM portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
+			'LVM portability' - '``command_line_arguments/1`` predicate is not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
 			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
@@ -1614,8 +1614,9 @@
 			absolute_file_name(File, ExpandedPath),
 			{file_size(ExpandedPath, Size)}.
 
-		file_permission(_, _) :-
-			throw(not_available(file_permission/2)).
+		file_permission(File, Permission) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_permission(ExpandedPath, Permission)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
