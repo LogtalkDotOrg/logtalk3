@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.0.0 and later versions
-%  Last updated on October 2, 2020
+%  Last updated on October 6, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -257,7 +257,7 @@ setup_call_cleanup(_, _, _) :-
 % other compilation flags:
 '$lgt_default_flag'(scratch_directory, './lgt_tmp/').
 '$lgt_default_flag'(report, on).
-'$lgt_default_flag'(clean, off).
+'$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
 '$lgt_default_flag'(source_data, on).
