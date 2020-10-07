@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2020-08-31,
+		date is 2020-10-07,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -430,6 +430,9 @@
 		Length1 is Length0 - 1,
 		generate_atom(Length1, Character, Atom1, Atom).
 
+	% silence warnings as we meta-call the first argument as-is as it's already compiled
+	:- meta_predicate(call_goal(*, *)).
+
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(Dialect == b; Dialect == qp; Dialect == swi; Dialect == tau; Dialect == yap)
@@ -492,9 +495,3 @@
 		reverse(Tail, [Head| List], Reversed).
 
 :- end_object.
-
-
-:- if(current_logtalk_flag(prolog_dialect, swi)).
-	% add dummy meta_predicate/1 directive to avoid cluttering the make/0 analysis report
-	:- meta_predicate(':'(user,'$ports#0.call_goal#2'(*,*,*))).
-:- endif.

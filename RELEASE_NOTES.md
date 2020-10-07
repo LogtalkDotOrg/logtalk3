@@ -99,6 +99,10 @@ timeout option.
 
 * FIXED: Tool files to workaround embedding errors with GNU Prolog.
 
+* FIXED: The `ports_profiler` tool to avoid a spurious warning for a missing
+`meta_predicate/1` directive for the `call_goal/2` predicate with some backend
+compilers.
+
 Examples
 --------
 
