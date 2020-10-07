@@ -111,6 +111,15 @@ GNU Prolog as the backend compiler due to an issue with a float computation.
 * FIXED: Replaced use of legacy `tell/1` Prolog predicate in the `constraints`
 example.
 
+* FIXED: Set the `double_quotes` flag to `codes` unconditionally in the `dcgs`
+example loader files.
+
+Contributions
+-------------
+
+* FIXED: Set the `double_quotes` flag to `codes` unconditionally in the
+`xml_parser` loader file.
+
 Ports
 -----
 

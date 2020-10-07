@@ -22,9 +22,7 @@
 	:- set_prolog_flag(strict_iso, off).
 :- endif.
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
-	:- set_prolog_flag(double_quotes, codes).
-:- endif.
+:- set_prolog_flag(double_quotes, codes).
 
 :- initialization((
 	logtalk_load(types(loader)),

@@ -18,13 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == swi; Dialect == tau)
-)).
-	:- set_prolog_flag(double_quotes, codes).
-:- endif.
-
+:- set_prolog_flag(double_quotes, codes).
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
