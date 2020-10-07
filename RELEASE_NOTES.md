@@ -95,7 +95,9 @@ Tools
 * CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
 timeout option.
 
-* ADDED: Support for LVM to the `debugger`, `diagrams`, and `lgtunit` tools.
+* ADDED: LVM support to the `logtalk_doclet` and `logtalk_tester` scripts.
+
+* ADDED: LVM support to the `debugger`, `diagrams`, and `lgtunit` tools.
 
 * FIXED: Tool files to workaround embedding errors with GNU Prolog.
 
@@ -170,7 +172,8 @@ predicate.
 Installers and installation scripts
 -----------------------------------
 
-* UPDATED: The `logtalk_backend_select` script for Ciao Prolog and Tau Prolog.
+* UPDATED: The `logtalk_backend_select` script for Ciao Prolog, LVM and
+Tau Prolog.
 
 
 3.41.0 - September 1, 2020

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on August 26, 2020
+##   Last updated on October 7, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -55,17 +55,15 @@ fi
 
 # documenting goals
 
-versions_goal="logtalk_load(library(tester_versions)),halt"
-versions_goal_dot="$versions_goal."
-
-documenting_goal="logtalk_load([doclet(loader),doclet]),halt"
-documenting_goal_dot="$documenting_goal."
+versions_goal="logtalk_load(library(tester_versions)),halt$dot"
+documenting_goal="logtalk_load([doclet(loader),doclet]),halt$dot"
 
 # default argument values
 
 base="$PWD"
 results="$base/logtalk_doclet_logs"
 backend=swipl
+dot=""
 prolog='SWI-Prolog'
 logtalk=swilgt$extension
 logtalk_call="$logtalk -g"
@@ -120,7 +118,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, swipack, tau, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, qp, sicstus, swi, swipack, tau, xsb, xsbmt, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
 	echo "  -s supress path prefix (default is $prefix)"
@@ -168,18 +166,21 @@ elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk -n -g"
+elif [ "$p_arg" == "lvm" ] ; then
+	prolog='LVM'
+	logtalk=lvmlgt$extension
+	logtalk_call="$logtalk $i_arg -g"
+	dot="?"
 elif [ "$p_arg" == "qp" ] ; then
 	prolog='Qu-Prolog'
 	logtalk=qplgt$extension
 	logtalk_call="$logtalk -g"
-	versions_goal=$versions_goal_dot
-	documenting_goal=$documenting_goal_dot
+	dot="."
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk --goal"
-	versions_goal=$versions_goal_dot
-	documenting_goal=$documenting_goal_dot
+	dot="."
 elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
@@ -192,20 +193,16 @@ elif [ "$p_arg" == "tau" ] ; then
 	prolog='Tau Prolog'
 	logtalk=taulgt$extension
 	logtalk_call="$logtalk -g"
-	versions_goal=$versions_goal_dot
-	documenting_goal=$documenting_goal_dot
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk=xsblgt$extension
 	logtalk_call="$logtalk -e"
-	versions_goal=$versions_goal_dot
-	documenting_goal=$documenting_goal_dot
+	dot="."
 elif [ "$p_arg" == "xsbmt" ] ; then
 	prolog='XSB-MT'
 	logtalk=xsbmtlgt$extension
 	logtalk_call="$logtalk -e"
-	versions_goal=$versions_goal_dot
-	documenting_goal=$documenting_goal_dot
+	dot="."
 elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
 	logtalk=yaplgt$extension
