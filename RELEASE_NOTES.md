@@ -105,6 +105,8 @@ timeout option.
 `meta_predicate/1` directive for the `call_goal/2` predicate with some backend
 compilers.
 
+* FIXED: The `lgtunit` tool messages for test outcome format errors.
+
 Examples
 --------
 

@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:1:1,
 		author is 'Paulo Moura',
-		date is 2020-04-29,
+		date is 2020-10-07,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -252,10 +252,10 @@
 
 	% messages for test outcome errors
 
-	message_tokens(non_instantiated_test_outcome(_Object, Test)) -->
+	message_tokens(non_instantiated_test_outcome(Test)) -->
 		['non-instantiated test outcome found: ~q'-[Test], nl].
 
-	message_tokens(invalid_test_outcome(_Object, Test, Outcome)) -->
+	message_tokens(invalid_test_outcome(Test, Outcome)) -->
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
 
 	% auxiliary grammar rules
