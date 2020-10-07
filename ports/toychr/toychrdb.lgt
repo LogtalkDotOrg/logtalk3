@@ -99,7 +99,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 :- op(1150, fx, chr_constraint).
 :- op(1150, fx, handler).
 :- op(1150, fx, rules).
-:- op(1105, xfy, '|').
+:- if(\+ current_op(_, _, '|')).
+	:- op(1105, xfy, '|').
+:- endif.
 :- op(1100, xfx, \).
 :- op(1200, xfx, @).
 
