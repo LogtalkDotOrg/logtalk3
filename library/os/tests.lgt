@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
 		date is 2020-10-08,
 		comment is 'Unit tests for the "os" object.'
@@ -269,6 +269,9 @@
 		os::make_directory(SubDirectory),
 		os::delete_directory(SubDirectory),
 		\+ os::directory_exists(SubDirectory).
+
+	test(os_delete_directory_1_02, error(_)) :-
+		os::delete_directory(non_existing_directory).
 
 	test(os_working_directory_01) :-
 		os::working_directory(WorkingDirectory),
