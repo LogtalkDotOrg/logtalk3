@@ -253,8 +253,8 @@
 <p>Portable operating-system access protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:28:2</div>
-<div class="line"><strong>Date:</strong> 2020-08-29</div>
+<div class="line"><strong>Version:</strong> 1:29:0</div>
+<div class="line"><strong>Date:</strong> 2020-10-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -270,10 +270,12 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Error handling: Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -517,7 +519,7 @@
 <div id="delete_directory/1"> </div></div>
 <div class="section" id="delete-directory-1">
 <span id="osp-0-delete-directory-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">delete_directory/1</span></code></a><a class="headerlink" href="#delete-directory-1" title="Permalink to this headline">¶</a></h3>
-<p>Deletes an empty directory.</p>
+<p>Deletes an empty directory. Throws an error if the directory does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -531,14 +533,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="change_directory/1"> </div></div>
 <div class="section" id="change-directory-1">
 <span id="osp-0-change-directory-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">change_directory/1</span></code></a><a class="headerlink" href="#change-directory-1" title="Permalink to this headline">¶</a></h3>
-<p>Changes current working directory.</p>
+<p>Changes current working directory. Throws an error if the directory does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -552,7 +554,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">change_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">change_directory(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -622,7 +624,7 @@
 <div id="directory_files/2"> </div></div>
 <div class="section" id="directory-files-2">
 <span id="osp-0-directory-files-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code></a><a class="headerlink" href="#directory-files-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory.</p>
+<p>Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory. Throws an error if the directory does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -636,14 +638,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="directory_files/3"> </div></div>
 <div class="section" id="directory-files-3">
 <span id="osp-0-directory-files-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory_files/3</span></code></a><a class="headerlink" href="#directory-files-3" title="Permalink to this headline">¶</a></h3>
-<p>Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to <code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code>.</p>
+<p>Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to <code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code>. Throws an error if the directory does not exist.s</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -657,7 +659,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory_files(+atom,-list(atom),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -740,7 +742,7 @@
 <div id="file_modification_time/2"> </div></div>
 <div class="section" id="file-modification-time-2">
 <span id="osp-0-file-modification-time-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">file_modification_time/2</span></code></a><a class="headerlink" href="#file-modification-time-2" title="Permalink to this headline">¶</a></h3>
-<p>File modification time (which can be used for comparison).</p>
+<p>File modification time (which can be used for comparison). Throws an error if the file does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -761,7 +763,7 @@
 <div id="file_size/2"> </div></div>
 <div class="section" id="file-size-2">
 <span id="osp-0-file-size-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">file_size/2</span></code></a><a class="headerlink" href="#file-size-2" title="Permalink to this headline">¶</a></h3>
-<p>File size (in bytes).</p>
+<p>File size (in bytes). Throws an error if the file does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -782,7 +784,7 @@
 <div id="file_permission/2"> </div></div>
 <div class="section" id="file-permission-2">
 <span id="osp-0-file-permission-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">file_permission/2</span></code></a><a class="headerlink" href="#file-permission-2" title="Permalink to this headline">¶</a></h3>
-<p>True iff the specified file has the specified permission (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, or <code class="docutils literal notranslate"><span class="pre">execute</span></code>).</p>
+<p>True iff the specified file has the specified permission (<code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">write</span></code>, or <code class="docutils literal notranslate"><span class="pre">execute</span></code>). Throws an error if the file does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -803,7 +805,7 @@
 <div id="rename_file/2"> </div></div>
 <div class="section" id="rename-file-2">
 <span id="osp-0-rename-file-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">rename_file/2</span></code></a><a class="headerlink" href="#rename-file-2" title="Permalink to this headline">¶</a></h3>
-<p>Renames a file or a directory.</p>
+<p>Renames a file or a directory. Throws an error if the file or directory does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -817,14 +819,14 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">rename_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rename_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="delete_file/1"> </div></div>
 <div class="section" id="delete-file-1">
 <span id="osp-0-delete-file-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">delete_file/1</span></code></a><a class="headerlink" href="#delete-file-1" title="Permalink to this headline">¶</a></h3>
-<p>Deletes a file.</p>
+<p>Deletes a file. Throws an error if the file does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -838,7 +840,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">delete_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

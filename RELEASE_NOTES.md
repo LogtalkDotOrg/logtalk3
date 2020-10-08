@@ -83,6 +83,9 @@ case.
 * ADDED: Tests for the `os` library predicates `file_modification_time/2` and
 `file_permission/2`.
 
+* FIXED: Description of `osp` library protocol predicates that are expected to
+throw an error when a fie or directory does not exist.
+
 * FIXED: Workaround an issue with some backend Prolog systems such as ECLiPSe
 and Tau Prolog where reloading a file defining clauses for a multifile predicate
 results in the duplication of the clauses when testing the `arbitrary` and `os`

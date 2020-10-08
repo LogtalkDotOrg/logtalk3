@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:28:2
-| **Date:** 2020-08-29
+| **Version:** 1:29:0
+| **Date:** 2020-10-08
 
 | **Compilation flags:**
 |    ``static``
@@ -23,7 +23,8 @@ Portable operating-system access protocol.
 
 
 | **Remarks:**
-|    (none)
+
+   - Error handling: Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.
 
 | **Inherited public predicates:**
 |    (none)
@@ -252,7 +253,7 @@ Makes a new directory creating all the intermediate directories if necessary. Su
 ``delete_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Deletes an empty directory.
+Deletes an empty directory. Throws an error if the directory does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -260,7 +261,7 @@ Deletes an empty directory.
 | **Template:**
 |    ``delete_directory(Directory)``
 | **Mode and number of proofs:**
-|    ``delete_directory(+atom)`` - ``one``
+|    ``delete_directory(+atom)`` - ``one_or_error``
 
 
 ------------
@@ -275,7 +276,7 @@ Deletes an empty directory.
 ``change_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Changes current working directory.
+Changes current working directory. Throws an error if the directory does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -283,7 +284,7 @@ Changes current working directory.
 | **Template:**
 |    ``change_directory(Directory)``
 | **Mode and number of proofs:**
-|    ``change_directory(+atom)`` - ``one``
+|    ``change_directory(+atom)`` - ``one_or_error``
 
 
 ------------
@@ -367,7 +368,7 @@ Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.
 ``directory_files/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory.
+Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory. Throws an error if the directory does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -375,7 +376,7 @@ Returns a list of all files (including directories, regular files, and hidden di
 | **Template:**
 |    ``directory_files(Directory,Files)``
 | **Mode and number of proofs:**
-|    ``directory_files(+atom,-list(atom))`` - ``one``
+|    ``directory_files(+atom,-list(atom))`` - ``one_or_error``
 
 
 ------------
@@ -390,7 +391,7 @@ Returns a list of all files (including directories, regular files, and hidden di
 ``directory_files/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``.
+Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``. Throws an error if the directory does not exist.s
 
 | **Compilation flags:**
 |    ``static``
@@ -398,7 +399,7 @@ Returns a list of files filtered using the given list of options. Invalid option
 | **Template:**
 |    ``directory_files(Directory,Files,Options)``
 | **Mode and number of proofs:**
-|    ``directory_files(+atom,-list(atom),+list(compound))`` - ``one``
+|    ``directory_files(+atom,-list(atom),+list(compound))`` - ``one_or_error``
 
 | **Remarks:**
 
@@ -491,7 +492,7 @@ True if the specified file exists and is a regular file (irrespective of file pe
 ``file_modification_time/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-File modification time (which can be used for comparison).
+File modification time (which can be used for comparison). Throws an error if the file does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -514,7 +515,7 @@ File modification time (which can be used for comparison).
 ``file_size/2``
 ^^^^^^^^^^^^^^^
 
-File size (in bytes).
+File size (in bytes). Throws an error if the file does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -537,7 +538,7 @@ File size (in bytes).
 ``file_permission/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-True iff the specified file has the specified permission (``read``, ``write``, or ``execute``).
+True iff the specified file has the specified permission (``read``, ``write``, or ``execute``). Throws an error if the file does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -560,7 +561,7 @@ True iff the specified file has the specified permission (``read``, ``write``, o
 ``rename_file/2``
 ^^^^^^^^^^^^^^^^^
 
-Renames a file or a directory.
+Renames a file or a directory. Throws an error if the file or directory does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -568,7 +569,7 @@ Renames a file or a directory.
 | **Template:**
 |    ``rename_file(Old,New)``
 | **Mode and number of proofs:**
-|    ``rename_file(+atom,+atom)`` - ``zero_or_one``
+|    ``rename_file(+atom,+atom)`` - ``one_or_error``
 
 
 ------------
@@ -583,7 +584,7 @@ Renames a file or a directory.
 ``delete_file/1``
 ^^^^^^^^^^^^^^^^^
 
-Deletes a file.
+Deletes a file. Throws an error if the file does not exist.
 
 | **Compilation flags:**
 |    ``static``
@@ -591,7 +592,7 @@ Deletes a file.
 | **Template:**
 |    ``delete_file(File)``
 | **Mode and number of proofs:**
-|    ``delete_file(+atom)`` - ``one``
+|    ``delete_file(+atom)`` - ``one_or_error``
 
 
 ------------

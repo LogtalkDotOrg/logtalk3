@@ -21,10 +21,13 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:28:2,
+		version is 1:29:0,
 		author is 'Paulo Moura',
-		date is 2020-08-29,
+		date is 2020-10-08,
 		comment is 'Portable operating-system access protocol.',
+		remarks is [
+			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
+		],
 		see_also is [os, os_types]
 	]).
 
@@ -92,16 +95,16 @@
 	]).
 
 	:- public(delete_directory/1).
-	:- mode(delete_directory(+atom), one).
+	:- mode(delete_directory(+atom), one_or_error).
 	:- info(delete_directory/1, [
-		comment is 'Deletes an empty directory.',
+		comment is 'Deletes an empty directory. Throws an error if the directory does not exist.',
 		argnames is ['Directory']
 	]).
 
 	:- public(change_directory/1).
-	:- mode(change_directory(+atom), one).
+	:- mode(change_directory(+atom), one_or_error).
 	:- info(change_directory/1, [
-		comment is 'Changes current working directory.',
+		comment is 'Changes current working directory. Throws an error if the directory does not exist.',
 		argnames is ['Directory']
 	]).
 
@@ -127,16 +130,16 @@
 	]).
 
 	:- public(directory_files/2).
-	:- mode(directory_files(+atom, -list(atom)), one).
+	:- mode(directory_files(+atom, -list(atom)), one_or_error).
 	:- info(directory_files/2, [
-		comment is 'Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory.',
+		comment is 'Returns a list of all files (including directories, regular files, and hidden directories and files) in a directory. File paths are relative to the directory. Throws an error if the directory does not exist.',
 		argnames is ['Directory', 'Files']
 	]).
 
 	:- public(directory_files/3).
-	:- mode(directory_files(+atom, -list(atom), +list(compound)), one).
+	:- mode(directory_files(+atom, -list(atom), +list(compound)), one_or_error).
 	:- info(directory_files/3, [
-		comment is 'Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``.',
+		comment is 'Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``. Throws an error if the directory does not exist.s',
 		argnames is ['Directory', 'Files', 'Options'],
 		remarks is [
 			'Option ``paths/1``' - 'Possible values are ``relative`` and ``absolute``. Default is ``relative``.',
@@ -172,35 +175,35 @@
 	:- public(file_modification_time/2).
 	:- mode(file_modification_time(+atom, -integer), zero_or_one).
 	:- info(file_modification_time/2, [
-		comment is 'File modification time (which can be used for comparison).',
+		comment is 'File modification time (which can be used for comparison). Throws an error if the file does not exist.',
 		argnames is ['File', 'Time']
 	]).
 
 	:- public(file_size/2).
 	:- mode(file_size(+atom, -integer), zero_or_one).
 	:- info(file_size/2, [
-		comment is 'File size (in bytes).',
+		comment is 'File size (in bytes). Throws an error if the file does not exist.',
 		argnames is ['File', 'Size']
 	]).
 
 	:- public(file_permission/2).
 	:- mode(file_permission(+atom, +atom), zero_or_one).
 	:- info(file_permission/2, [
-		comment is 'True iff the specified file has the specified permission (``read``, ``write``, or ``execute``).',
+		comment is 'True iff the specified file has the specified permission (``read``, ``write``, or ``execute``). Throws an error if the file does not exist.',
 		argnames is ['File', 'Permission']
 	]).
 
 	:- public(rename_file/2).
-	:- mode(rename_file(+atom, +atom), zero_or_one).
+	:- mode(rename_file(+atom, +atom), one_or_error).
 	:- info(rename_file/2, [
-		comment is 'Renames a file or a directory.',
+		comment is 'Renames a file or a directory. Throws an error if the file or directory does not exist.',
 		argnames is ['Old', 'New']
 	]).
 
 	:- public(delete_file/1).
-	:- mode(delete_file(+atom), one).
+	:- mode(delete_file(+atom), one_or_error).
 	:- info(delete_file/1, [
-		comment is 'Deletes a file.',
+		comment is 'Deletes a file. Throws an error if the file does not exist.',
 		argnames is ['File']
 	]).
 
