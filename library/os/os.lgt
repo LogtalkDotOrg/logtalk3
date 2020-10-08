@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:68:1,
+		version is 1:68:2,
 		author is 'Paulo Moura',
 		date is 2020-10-08,
 		comment is 'Portable operating-system access predicates.',
@@ -1633,7 +1633,7 @@
 			{getenv(Variable, Value)}.
 
 		time_stamp(Time) :-
-			{get_time(Time)}.
+			{time_stamp(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{date_time(Year, Month, Day, Hours, Minutes, Seconds)}.
