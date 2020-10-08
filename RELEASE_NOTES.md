@@ -76,6 +76,10 @@ Library
 
 * ADDED: Support for LVM to the `os`, `random`, and `redis` libraries.
 
+* ADDED: New tests for the `os` library to check that its predicates that
+require a file or a directory to exist throw an error when that is not the
+case.
+
 * FIXED: Workaround an issue with some backend Prolog systems such as ECLiPSe
 and Tau Prolog where reloading a file defining clauses for a multifile predicate
 results in the duplication of the clauses when testing the `arbitrary` and `os`

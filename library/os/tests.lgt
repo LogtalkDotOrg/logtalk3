@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2020-06-07,
+		date is 2020-10-08,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -159,6 +159,9 @@
 		os::file_size(File, Size),
 		integer(Size).
 
+	test(os_file_size_1_02, error(_)) :-
+		os::file_size(non_existing_file, _).
+
 	test(os_delete_file_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -167,6 +170,9 @@
 		close(Stream),
 		os::file_exists(TestFile),
 		os::delete_file(TestFile).
+
+	test(os_delete_file_1_02, error(_)) :-
+		os::delete_file(non_existing_file).
 
 	test(os_rename_file_2_01) :-
 		this(This),
@@ -179,6 +185,9 @@
 		\+ os::file_exists(TestFile1),
 		os::file_exists(TestFile2),
 		os::delete_file(TestFile2).
+
+	test(os_rename_file_2_02, error(_)) :-
+		os::rename_file(non_existing_file, non_existing_file_2).
 
 	test(os_ensure_file_1_01) :-
 		this(This),
@@ -259,6 +268,9 @@
 			WorkingDirectory == DirectoryNoSlash
 		).
 
+	test(os_change_directory_02, error(_)) :-
+		os::change_directory(non_existing_directory).
+
 	test(os_ensure_directory_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
@@ -322,6 +334,9 @@
 		os::directory_files(Directory, Files),
 		list::memberchk('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_2_02, error(_)) :-
+		os::directory_files(non_existing_directory, _).
 
 	test(os_directory_files_3_01) :-
 		this(This),
@@ -397,6 +412,9 @@
 		os::directory_files(Directory, Files, [type(regular), paths(relative), suffixes(['r.lgt'])]),
 		\+ list::member('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
+
+	test(os_directory_files_3_11, error(_)) :-
+		os::directory_files(non_existing_directory, _, []).
 
 	test(os_sleep_1_01) :-
 		os::sleep(1).
