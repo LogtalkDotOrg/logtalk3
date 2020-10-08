@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
 		date is 2020-10-08,
 		comment is 'Unit tests for the "os" object.'
@@ -153,6 +153,15 @@
 	test(os_file_exists_1_02) :-
 		\+ os::file_exists(non_existing_file).
 
+	test(os_file_modification_time_1_01) :-
+		this(This),
+		object_property(This, file(File)),
+		os::file_modification_time(File, Time),
+		ground(Time).
+
+	test(os_file_modification_time_1_02, error(_)) :-
+		os::file_modification_time(non_existing_file, _).
+
 	test(os_file_size_1_01) :-
 		this(This),
 		object_property(This, file(File)),
@@ -161,6 +170,14 @@
 
 	test(os_file_size_1_02, error(_)) :-
 		os::file_size(non_existing_file, _).
+
+	test(os_file_permission_1_01) :-
+		this(This),
+		object_property(This, file(File)),
+		os::file_permission(File, read).
+
+	test(os_file_permission_1_02, error(_)) :-
+		os::file_permission(non_existing_file, _).
 
 	test(os_delete_file_1_01) :-
 		this(This),

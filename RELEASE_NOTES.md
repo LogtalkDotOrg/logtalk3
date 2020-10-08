@@ -80,6 +80,9 @@ Library
 require a file or a directory to exist throw an error when that is not the
 case.
 
+* ADDED: Tests for the `os` library predicates `file_modification_time/2` and
+`file_permission/2`.
+
 * FIXED: Workaround an issue with some backend Prolog systems such as ECLiPSe
 and Tau Prolog where reloading a file defining clauses for a multifile predicate
 results in the duplication of the clauses when testing the `arbitrary` and `os`
