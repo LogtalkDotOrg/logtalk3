@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:68:0,
+		version is 1:68:1,
 		author is 'Paulo Moura',
-		date is 2020-10-07,
+		date is 2020-10-08,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -665,7 +665,10 @@
 
 		directory_files(Directory, Files) :-
 			absolute_file_name(Directory, Path),
-			{findall(File1, file_member_of_directory(Path, File1, _), Files1),
+			% ensure an existence error when the directory does not exist
+			{current_directory(Current, Path),
+			 current_directory(_, Current),
+			 findall(File1, file_member_of_directory(Path, File1, _), Files1),
 			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
 			 append(['.', '..'| Directories1], Files1, Files)}.
 

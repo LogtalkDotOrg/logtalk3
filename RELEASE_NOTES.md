@@ -93,6 +93,9 @@ support Unicode.
 * FIXED: Workaround GNU Prolog embedding errors with the `hook_objects`
 library.
 
+* FIXED: The `os::directory_files/2-3` predicates for SICStus Prolog to throw
+an exception when the directory does not exist.
+
 Tools
 -----
 
