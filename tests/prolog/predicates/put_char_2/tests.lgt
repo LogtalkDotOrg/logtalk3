@@ -22,70 +22,70 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2017-08-24,
+		date is 2020-10-09,
 		comment is 'Unit tests for the ISO Prolog standard put_char/1-2 built-in predicates.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.3.4
 
-	succeeds(iso_put_char_2_01) :-
+	test(iso_put_char_2_01, true(Assertion)) :-
 		^^set_text_output('qwer'),
 		{put_char(t)},
-		^^check_text_output('qwert').
+		^^text_output_assertion('qwert', Assertion).
 
-	succeeds(iso_put_char_2_02) :-
+	test(iso_put_char_2_02, true(Assertion)) :-
 		^^set_text_output(st_o, 'qwer'),
 		{put_char(st_o, 'A')},
-		^^check_text_output(st_o, 'qwerA').
+		^^text_output_assertion(st_o, 'qwerA', Assertion).
 
-	succeeds(iso_put_char_2_03) :-
+	test(iso_put_char_2_03, true(Assertion)) :-
 		^^set_text_output('qwer'),
 		{nl, put_char(a)},
-		^^check_text_output('qwer\na').
+		^^text_output_assertion('qwer\na', Assertion).
 
-	succeeds(iso_put_char_2_04) :-
+	test(iso_put_char_2_04, true(Assertion)) :-
 		^^set_text_output(st_o, 'qwer'),
 		{nl(st_o), put_char(st_o, a)},
-		^^check_text_output(st_o, 'qwer\na').
+		^^text_output_assertion(st_o, 'qwer\na', Assertion).
 
-	throws(iso_put_char_2_05, error(instantiation_error,_)) :-
+	test(iso_put_char_2_05, error(instantiation_error)) :-
 		^^set_text_output(my_file, ''),
 		{put_char(my_file, _C)}.
 
-	throws(iso_put_char_2_06, error(type_error(character, ty),_)) :-
+	test(iso_put_char_2_06, error(type_error(character, ty))) :-
 		^^set_text_output(st_o, ''),
 		{put_char(st_o, 'ty')}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_put_char_2_07, error(instantiation_error,_)) :-
+	test(sics_put_char_2_07, error(instantiation_error)) :-
 		{put_char(_, t)}.
 
-	throws(sics_put_char_2_08, error(instantiation_error,_)) :-
+	test(sics_put_char_2_08, error(instantiation_error)) :-
 		{put_char(_)}.
 
-	throws(sics_put_char_2_09, error(existence_error(stream,S),_)) :-
+	test(sics_put_char_2_09, error(existence_error(stream,S))) :-
 		^^closed_output_stream(S, []),
 		{put_char(S, a)}.
 
-	throws(sics_put_char_2_10, error(permission_error(output,stream,S),_)) :-
+	test(sics_put_char_2_10, error(permission_error(output,stream,S))) :-
 		current_input(S),
 		{put_char(S, a)}.
 
-	throws(sics_put_char_2_11, error(permission_error(output,binary_stream,S),_)) :-
+	test(sics_put_char_2_11, error(permission_error(output,binary_stream,S))) :-
 		^^set_binary_output([]),
 		current_output(S),
 		{put_char(a)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_put_char_2_12, error(permission_error(output,stream,s),_)) :-
+	test(lgt_put_char_2_12, error(permission_error(output,stream,s))) :-
 		^^set_text_input(s, ''),
 		{put_char(s, a)}.
 
-	throws(lgt_put_char_2_13, error(permission_error(output,binary_stream,_),_)) :-
+	test(lgt_put_char_2_13, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{put_char(s, a)}.
 

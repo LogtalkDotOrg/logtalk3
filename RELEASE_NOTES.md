@@ -178,8 +178,8 @@ the `quoted(true)` option for writing escape sequences.
 
 * ADDED: Additional tests for the `set_logtalk_flag/2` predicate.
 
-* IMPROVED: Tests for the `predicate_property/2` de facto standard Prolog
-predicate.
+* IMPROVED: Tests for the `predicate_property/2`, `put_byte/2`, `put_char/2`,
+and `put_code/2` Prolog predicates.
 
 * FIXED: Deleted two repeated tests for the `abolish/1` standard Prolog
 predicate.
