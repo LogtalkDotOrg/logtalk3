@@ -22,118 +22,128 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-29,
+		date is 2020-10-09,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.3.4
 
-	succeeds(iso_op_3_01) :-
+	test(iso_op_3_01, true) :-
 		{op(30, xfy, ++)},
 		{current_op(30, xfy, ++), op(0, xfy, ++)}.
 
-	succeeds(iso_op_3_02) :-
+	test(iso_op_3_02, true) :-
 		{op(30, xfy, ++), op(0, xfy, ++)},
 		{\+ current_op(_, xfy, ++)}.
 
-	throws(iso_op_3_03, error(type_error(integer,max),_)) :-
+	test(iso_op_3_03, error(type_error(integer,max))) :-
 		{op(max, xfy, ++)}.
 
-	throws(iso_op_3_04, error(domain_error(operator_priority,-30),_)) :-
+	test(iso_op_3_04, error(domain_error(operator_priority,-30))) :-
 		{op(-30, xfy, ++)}.
 
-	throws(iso_op_3_05, error(domain_error(operator_priority,1201),_)) :-
+	test(iso_op_3_05, error(domain_error(operator_priority,1201))) :-
 		{op(1201, xfy, ++)}.
 
-	throws(iso_op_3_06, error(instantiation_error,_)) :-
+	test(iso_op_3_06, error(instantiation_error)) :-
 		{op(30, _XFY, ++)}.
 
-	throws(iso_op_3_07, error(domain_error(operator_specifier,yfy),_)) :-
+	test(iso_op_3_07, error(domain_error(operator_specifier,yfy))) :-
 		{op(30, yfy, ++)}.
 
-	throws(iso_op_3_08, error(type_error(list,0),_)) :-
+	test(iso_op_3_08, error(type_error(list,0))) :-
 		{op(30, xfy, 0)}.
 
-	succeeds(iso_op_3_09) :-
+	test(iso_op_3_09, true) :-
 		{(op(30, xfy, ++), op(40, xfx, ++))},
 		{current_op(40, xfx, ++), op(0, xfx, ++)}.
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
+		(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap; Dialect == lvm)
 	)).
 		% these Prolog systems support the definition of an atom as both an infix and a postfix operator
-		succeeds(iso_op_3_10) :-
+		test(iso_op_3_10, true) :-
 			true.
 	:- else.
-		throws(iso_op_3_10, error(permission_error(create,operator,++),_)) :-
+		test(iso_op_3_10, error(permission_error(create,operator,++))) :-
 			{op(30, xfy, ++), op(50, yf, ++)}.
 	:- endif.
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.14.3.4
 
-	throws(iso_op_3_11, error(permission_error(create,operator,[]),_)) :-
+	test(iso_op_3_11, error(permission_error(create,operator,[]))) :-
 		{op(500, xfy, [])}.
 
-	throws(iso_op_3_12, error(permission_error(create,operator,[]),_)) :-
+	test(iso_op_3_12, error(permission_error(create,operator,[]))) :-
 		{op(500, xfy, [[]])}.
 
-	throws(iso_op_3_13, error(permission_error(create,operator,{}),_)) :-
+	test(iso_op_3_13, error(permission_error(create,operator,{}))) :-
 		{op(500, xfy, {})}.
 
-	throws(iso_op_3_14, error(permission_error(create,operator,{}),_)) :-
+	test(iso_op_3_14, error(permission_error(create,operator,{}))) :-
 		{op(500, xfy, [{}])}.
 
-	throws(iso_op_3_15, error(permission_error(create,operator,'|'),_)) :-
+	test(iso_op_3_15, error(permission_error(create,operator,'|'))) :-
 		{op(1000, xfy, '|')}.
 
-	throws(iso_op_3_16, error(permission_error(create,operator,'|'),_)) :-
+	test(iso_op_3_16, error(permission_error(create,operator,'|'))) :-
 		{op(1000, xfy, ['|'])}.
 
-	throws(iso_op_3_17, error(permission_error(create,operator,'|'),_)) :-
+	test(iso_op_3_17, error(permission_error(create,operator,'|'))) :-
 		{op(1150, fx, '|')}.
 
-	succeeds(iso_op_3_18) :-
-		{op(1105, xfy, '|')},
-		{current_op(Priority, Specifier, '|')}, Priority == 1105, Specifier == xfy.
+	% next test updated for the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 6.3.4.3
 
-	succeeds(iso_op_3_19) :-
+	:- if(\+ current_op(_, _, '|')).
+		test(iso_op_3_18, true) :-
+			{op(1105, xfy, '|')},
+			{current_op(Priority, Specifier, '|')},
+			Priority == 1105,
+			Specifier == xfy.
+	:- else.
+		test(iso_op_3_18, true) :-
+			{current_op(Priority, Specifier, '|')},
+			Priority >= 1001,
+			(	Specifier == xfy
+			;	Specifier == xfx
+			;	Specifier == yfx
+			).
+	:- endif.
+
+	test(iso_op_3_19, true) :-
 		{op(0, xfy, '|')},
 		{\+ current_op(_, xfy, '|')}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_op_3_20, error(instantiation_error,_)) :-
+	test(sics_op_3_20, error(instantiation_error)) :-
 		{op(_, xfx, ++)}.
 
-	throws(sics_op_3_21, error(instantiation_error,_)) :-
+	test(sics_op_3_21, error(instantiation_error)) :-
 		{op(100, xfx, _)}.
 
-	throws(sics_op_3_22, error(instantiation_error,_)) :-
+	test(sics_op_3_22, error(instantiation_error)) :-
 		{op(100, xfx, [a|_])}.
 
-	throws(sics_op_3_23, error(instantiation_error,_)) :-
+	test(sics_op_3_23, error(instantiation_error)) :-
 		{op(100, xfx, [a,_])}.
 
-	throws(sics_op_3_24, error(type_error(atom,200),_)) :-
+	test(sics_op_3_24, error(type_error(atom,200))) :-
 		{op(100, 200, [a])}.
 
-	throws(sics_op_3_25, error(type_error(atom,f(1)),_)) :-
+	test(sics_op_3_25, error(type_error(atom,f(1)))) :-
 		{op(100, f(1), [a])}.
 
-	throws(sics_op_3_26, error(type_error(atom,a+b),_)) :-
+	test(sics_op_3_26, error(type_error(atom,a+b))) :-
 		{op(100, xfx, [a,a+b])}.
 
-	throws(sics_op_3_27, error(permission_error(modify,operator,(',')),_)) :-
+	test(sics_op_3_27, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, (','))}.
 
-	throws(sics_op_3_28, error(permission_error(modify,operator,(',')),_)) :-
+	test(sics_op_3_28, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, [a,(',')])}.
 
 :- end_object.

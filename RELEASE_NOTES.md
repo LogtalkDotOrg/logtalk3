@@ -184,6 +184,9 @@ predicate.
 * FIXED: Deleted two repeated tests for the `abolish/1` standard Prolog
 predicate.
 
+* FIXED: Test for the `|` operator for the ISO/IEC 13211-1:1995/Cor.2:2012(en)
+standard.
+
 Installers and installation scripts
 -----------------------------------
 
