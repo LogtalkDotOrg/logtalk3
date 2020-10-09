@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:1,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-08-27,
+		date is 2020-10-09,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
@@ -81,16 +81,20 @@
 		^^closed_input_stream(S, [type(binary)]),
 		{get_byte(S,_)}.
 
-	throws(sics_get_byte_2_11, error(permission_error(input,stream,S),_)) :-
+	throws(sics_get_byte_2_11, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, [type(binary)]),
+		{get_byte(S,_)}.
+
+	throws(sics_get_byte_2_12, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{get_byte(S,_)}.
 
-	throws(sics_get_byte_2_12, error(permission_error(input,text_stream,S),_)) :-
+	throws(sics_get_byte_2_13, error(permission_error(input,text_stream,S),_)) :-
 		^^set_text_input(''),
 		current_input(S),
 		{get_byte(_)}.
 
-	succeeds(sics_get_byte_2_13) :-
+	succeeds(sics_get_byte_2_14) :-
 		^^set_binary_input(st_i, [], [eof_action(error)]),
 		catch({get_byte(st_i,_), get_byte(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
 		stream_property(S, alias(st_i)),
@@ -98,20 +102,20 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_get_byte_2_14) :-
+	succeeds(lgt_get_byte_2_15) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{get_byte(st_i,_), get_byte(st_i,Byte)},
 		Byte == -1.
 
-	throws(lgt_get_byte_2_15, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_get_byte_2_16, error(permission_error(input,stream,s),_)) :-
 		^^set_binary_output(s, []),
 		{get_byte(s,_)}.
 
-	throws(lgt_get_byte_2_16, error(permission_error(input,text_stream,_),_)) :-
+	throws(lgt_get_byte_2_17, error(permission_error(input,text_stream,_),_)) :-
 		^^set_text_input(s, ''),
 		{get_byte(s,_)}.
 
-	succeeds(lgt_get_byte_2_17) :-
+	succeeds(lgt_get_byte_2_18) :-
 		^^set_binary_input(st_i, []),
 		{get_byte(st_i, -1)}.
 

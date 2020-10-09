@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2017-08-24,
+		date is 2020-10-09,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -85,25 +85,29 @@
 		{get_char(foo,_)}.
 
 	throws(sics_get_char_2_11, error(existence_error(stream,S),_)) :-
+		^^closed_input_stream(S, []),
+		{get_char(S,_)}.
+
+	throws(sics_get_char_2_12, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{get_char(S,_)}.
 
-	throws(sics_get_char_2_12, error(permission_error(input,stream,S),_)) :-
+	throws(sics_get_char_2_13, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{get_char(S,_)}.
 
-	throws(sics_get_char_2_13, error(permission_error(input,binary_stream,S),_)) :-
+	throws(sics_get_char_2_14, error(permission_error(input,binary_stream,S),_)) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{get_char(_)}.
 
-	succeeds(sics_get_char_2_14) :-
+	succeeds(sics_get_char_2_15) :-
 		^^set_text_input(st_i, '', [eof_action(error)]),
 		catch({get_char(st_i,_), get_char(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
 		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
-	succeeds(sics_get_char_2_15) :-
+	succeeds(sics_get_char_2_16) :-
 		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S, [eof_action(eof_code)]),
@@ -111,7 +115,7 @@
 		C1 == end_of_file, C2 == end_of_file,
 		stream_property(S, end_of_stream(past)).
 
-	succeeds(sics_get_char_2_16) :-
+	succeeds(sics_get_char_2_17) :-
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
@@ -119,17 +123,17 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_get_char_2_17) :-
+	succeeds(lgt_get_char_2_18) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
 		{get_char(st_i,end_of_file), get_char(st_i,end_of_file)},
 		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
-	throws(lgt_get_char_2_18, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_get_char_2_19, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{get_char(s, _)}.
 
-	throws(lgt_get_char_2_19, error(permission_error(input,binary_stream,_),_)) :-
+	throws(lgt_get_char_2_20, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{get_char(s, _)}.
 

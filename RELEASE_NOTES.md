@@ -170,6 +170,9 @@ the `quoted(true)` option for writing escape sequences.
 `number_chars/2`, `number_codes/2`, `compound/1`, `number/1`, and
 `predicate_property/2` standard Prolog predicates.
 
+* ADDED: Additional tests for the `get_byte/2`, `get_char/2`, and `get_code/2`
+standard Prolog predicates.
+
 * ADDED: Additional tests for the `catch/3` Prolog standard control construct.
 
 * ADDED: Tests for single quote representation in quoted atoms.

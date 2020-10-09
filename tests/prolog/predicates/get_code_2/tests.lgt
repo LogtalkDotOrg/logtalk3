@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2020-07-30,
+		date is 2020-10-09,
 		comment is 'Unit tests for the ISO Prolog standard get_code/1-2 built-in predicates.'
 	]).
 
@@ -92,22 +92,26 @@
 		^^closed_input_stream(S, []),
 		{get_code(S,_)}.
 
-	throws(sics_get_code_2_13, error(permission_error(input,stream,S),_)) :-
+	throws(sics_get_code_2_13, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{get_code(S,_)}.
+
+	throws(sics_get_code_2_14, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{get_code(S,_)}.
 
-	throws(sics_get_code_2_14, error(permission_error(input,binary_stream,S),_)) :-
+	throws(sics_get_code_2_15, error(permission_error(input,binary_stream,S),_)) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{get_code(_)}.
 
-	succeeds(sics_get_code_2_15) :-
+	succeeds(sics_get_code_2_16) :-
 		^^set_text_input(st_i, '', [eof_action(error)]),
 		catch({get_code(st_i,_), get_code(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
 		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
-	succeeds(sics_get_code_2_16) :-
+	succeeds(sics_get_code_2_17) :-
 		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S, [eof_action(eof_code)]),
@@ -115,7 +119,7 @@
 		C1 == -1, C2 == -1,
 		stream_property(S, end_of_stream(past)).
 
-	succeeds(sics_get_code_2_17) :-
+	succeeds(sics_get_code_2_18) :-
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
@@ -123,20 +127,20 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_get_code_2_18) :-
+	succeeds(lgt_get_code_2_19) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
 		{get_code(st_i,_), get_code(st_i,Code)},
 		Code == -1.
 
-	throws(lgt_get_code_2_19, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_get_code_2_20, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{get_code(s, _)}.
 
-	throws(lgt_get_code_2_20, error(permission_error(input,binary_stream,_),_)) :-
+	throws(lgt_get_code_2_21, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{get_code(s, _)}.
 
-	succeeds(lgt_get_code_2_21) :-
+	succeeds(lgt_get_code_2_22) :-
 		^^set_text_input(st_i, ''),
 		{get_code(st_i, -1)},
 		stream_property(Stream, alias(st_i)),
