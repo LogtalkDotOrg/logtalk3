@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:68:2,
+		version is 1:69:0,
 		author is 'Paulo Moura',
-		date is 2020-10-08,
+		date is 2020-10-10,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1665,13 +1665,13 @@
 	:- endif.
 
 	path_concat(Prefix, Suffix, Path) :-
-		(	absolute_file_name(Suffix, Suffix) ->
-			Path = Suffix
-		;	Suffix == '' ->
+		(	Suffix == '' ->
 			(	sub_atom(Prefix, _, 1, 0, '/') ->
 				Path = Prefix
 			;	atom_concat(Prefix, '/', Path)
 			)
+		;	absolute_file_name(Suffix, Suffix) ->
+			Path = Suffix
 		;	sub_atom(Prefix, _, 1, 0, '/') ->
 			atom_concat(Prefix, Suffix, Path)
 		;	atom_concat(Prefix, '/', Path0),
