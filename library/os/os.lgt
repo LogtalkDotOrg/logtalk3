@@ -43,12 +43,13 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:69:0,
+		version is 1:69:1,
 		author is 'Paulo Moura',
-		date is 2020-10-10,
+		date is 2020-10-11,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
+			'Exception terms' - 'Currently, there is no standardization of the exception terms thrown by the different backend Prolog systems.',
 			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` predicates are not supported.',
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
@@ -792,16 +793,25 @@
 			 get_file_info(ExpandedPath, type, file)}.
 
 		file_modification_time(File, Time) :-
-			{canonical_path_name(File, ExpandedPath),
-			 get_file_info(ExpandedPath, mtime, Time)}.
+			{(	canonical_path_name(File, ExpandedPath),
+				exists(ExpandedPath) ->
+			 	get_file_info(ExpandedPath, mtime, Time)
+			 ;	throw(abort)
+			 )}.
 
 		file_size(File, Size) :-
-			{canonical_path_name(File, ExpandedPath),
-			 get_file_info(ExpandedPath, size, Size)}.
+			{(	canonical_path_name(File, ExpandedPath),
+				exists(ExpandedPath) ->
+				get_file_info(ExpandedPath, size, Size)
+			 ;	throw(abort)
+			 )}.
 
 		file_permission(File, read) :-
-			{canonical_path_name(File, ExpandedPath),
-			 get_file_info(ExpandedPath, readable, on)}.
+			{(	canonical_path_name(File, ExpandedPath),
+				exists(ExpandedPath) ->
+				get_file_info(ExpandedPath, readable, on)
+			 ;	throw(abort)
+			 )}.
 
 		file_permission(File, write) :-
 			{canonical_path_name(File, ExpandedPath),
