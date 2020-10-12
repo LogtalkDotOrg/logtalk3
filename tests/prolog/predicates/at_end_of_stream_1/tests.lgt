@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-05-10,
+		date is 2020-10-12,
 		comment is 'Unit tests for the ISO Prolog standard at_end_of_stream/0-1 built-in predicates.'
 	]).
 
@@ -40,25 +40,37 @@
 		{at_end_of_stream(foo)}.
 
 	throws(sics_at_end_of_stream_1_03, error(existence_error(stream,S),_)) :-
+		^^closed_input_stream(S, []),
+		{at_end_of_stream(S)}.
+
+	throws(sics_at_end_of_stream_1_04, [error(domain_error(stream_or_alias,st_i),_), error(existence_error(stream,S),_)]) :-
+		^^closed_input_stream(S, [alias(st_i)]),
+		{at_end_of_stream(st_i)}.
+
+	throws(sics_at_end_of_stream_1_05, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{at_end_of_stream(S)}.
 
-	succeeds(sics_at_end_of_stream_1_04) :-
+	throws(sics_at_end_of_stream_1_06, [error(domain_error(stream_or_alias,st_o),_), error(existence_error(stream,S),_)]) :-
+		^^closed_output_stream(S, [alias(st_o)]),
+		{at_end_of_stream(st_o)}.
+
+	succeeds(sics_at_end_of_stream_1_07) :-
 		^^set_text_input(st_i, ''),
 		{at_end_of_stream(st_i)},
 		^^check_text_input(st_i, '').
 
-	succeeds(sics_at_end_of_stream_1_05) :-
+	succeeds(sics_at_end_of_stream_1_08) :-
 		^^set_text_input(st_i, 'a'),
 		\+ {at_end_of_stream(st_i)},
 		^^check_text_input(st_i, 'a').
 
-	succeeds(sics_at_end_of_stream_1_06) :-
+	succeeds(sics_at_end_of_stream_1_09) :-
 		^^set_binary_input(st_i, []),
 		{at_end_of_stream(st_i)},
 		^^check_binary_input(st_i, []).
 
-	succeeds(sics_at_end_of_stream_1_07) :-
+	succeeds(sics_at_end_of_stream_1_10) :-
 		^^set_binary_input(st_i, [0]),
 		\+ {at_end_of_stream(st_i)},
 		^^set_binary_input(st_i, [0]).

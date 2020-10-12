@@ -170,9 +170,9 @@ the `quoted(true)` option for writing the `[]` and `{}` atoms.
 * ADDED: Tests for the standard Prolog predicate `write_term/3` to check using
 the `quoted(true)` option for writing escape sequences.
 
-* ADDED: Additional tests for the `arg/3`, `atom_chars/2`, `atom_codes/2`,
-`number_chars/2`, `number_codes/2`, `compound/1`, `number/1`, and
-`predicate_property/2` standard Prolog predicates.
+* ADDED: Additional tests for the `at_end_of_stream/1`, `arg/3`, `number/1`,
+`compound/1`, `predicate_property/2`, `atom_chars/2`, `atom_codes/2`,
+`number_chars/2`, and `number_codes/2`, standard Prolog predicates.
 
 * ADDED: Additional tests for the `get_byte/2`, `get_char/2`, and `get_code/2`
 standard Prolog predicates.
