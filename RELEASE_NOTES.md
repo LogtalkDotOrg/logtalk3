@@ -102,9 +102,9 @@ library.
 * FIXED: The `os::directory_files/2-3` predicates for SICStus Prolog to throw
 an exception when the directory does not exist.
 
-* FIXED: The `os` library predicates `file_permission/2`, `file_size/2`, and
-`file_modification_time/2` for ECLiPSe to throw an error when the file does
-not exists as per the `osp` protocol.
+* FIXED: The `os` library predicates for B-Prolog, CxProlog, ECLiPSe and XSB
+to throw an error when a file or a directory does not exists as per the `osp`
+protocol.
 
 Tools
 -----

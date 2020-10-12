@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:69:1,
+		version is 1:69:2,
 		author is 'Paulo Moura',
-		date is 2020-10-11,
+		date is 2020-10-12,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -326,18 +326,27 @@
 
 		delete_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{path_sysop(rmdir, ExpandedPath)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(rmdir, ExpandedPath)
+			 ;	existence_error(directory, Directory)
+			 )}.
 
 		change_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{path_sysop(chdir, ExpandedPath)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(chdir, ExpandedPath)
+			 ;	existence_error(directory, Directory)
+			 )}.
 
 		working_directory(Directory) :-
 			{path_sysop(cwd, Directory)}.
 
 		directory_files(Directory, Files) :-
 			absolute_file_name(Directory, Path),
-			{findall(File, list_directory(Path, File), Files)}.
+			{(	path_sysop(exists, Path) ->
+				findall(File, list_directory(Path, File), Files)
+			 ;	existence_error(directory, Directory)
+			 )}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -351,33 +360,53 @@
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(modtime, ExpandedPath, [High, Low])},
-			Time is Low + High * 2 ** 24.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(modtime, ExpandedPath, Time)
+			 ;	existence_error(file, File)
+			 )}.
 
 		file_size(File, Size) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(size, ExpandedPath, Size)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(size, ExpandedPath, Size)
+			 ;	existence_error(file, File)
+			 )}.
 
 		file_permission(File, read) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(readable, ExpandedPath)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(readable, ExpandedPath)
+			 ;	existence_error(file, File)
+			 )}.
 
 		file_permission(File, write) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(writable, ExpandedPath)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(writable, ExpandedPath)
+			 ;	existence_error(file, File)
+			 )}.
 
 		file_permission(File, execute) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(executable, ExpandedPath)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(executable, ExpandedPath)
+			 ;	existence_error(file, File)
+			 )}.
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(rm, ExpandedPath)}.
+			{(	path_sysop(exists, ExpandedPath) ->
+				path_sysop(rm, ExpandedPath)
+			 ;	existence_error(file, File)
+			 )}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldPath),
 			absolute_file_name(New, NewPath),
-			{path_sysop(rename, OldPath, NewPath)}.
+			{(	path_sysop(exists, OldPath) ->
+				path_sysop(rename, OldPath, NewPath)
+			 ;	existence_error(file, Old)
+			 )}.
 
 		environment_variable(Variable, Value) :-
 			atom_concat('$', Variable, DollarVariable),
@@ -584,7 +613,10 @@
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
+			{(	file_exists(ExpandedPath) ->
+				delete_file(ExpandedPath)
+			 ;	existence_error(file, File)
+			)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldPath),
@@ -1030,12 +1062,18 @@
 			 fs_property(ExpandedPath, size, Size)}.
 
 		file_permission(File, read) :-
-			{absolute_file_name(File, ExpandedPath),
-			 fs_property(ExpandedPath, readable, true)}.
+			{(	absolute_file_name(File, ExpandedPath),
+				fs_exists_file(ExpandedPath) ->
+				fs_property(ExpandedPath, readable, true)
+			 ;	existence_error(file, File)
+			)}.
 
 		file_permission(File, write) :-
-			{absolute_file_name(File, ExpandedPath),
-			 fs_property(ExpandedPath, writable, true)}.
+			{(	absolute_file_name(File, ExpandedPath),
+				fs_exists_file(ExpandedPath) ->
+				fs_property(ExpandedPath, writable, true)
+			 ;	existence_error(file, File)
+			)}.
 
 		delete_file(File) :-
 			{absolute_file_name(File, ExpandedPath),
