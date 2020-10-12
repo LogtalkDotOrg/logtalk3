@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:69:2,
+		version is 1:69:3,
 		author is 'Paulo Moura',
 		date is 2020-10-12,
 		comment is 'Portable operating-system access predicates.',
@@ -1627,7 +1627,10 @@
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{make_directory(ExpandedPath)}.
+			(	{directory_exists(ExpandedPath)} ->
+				true
+			;	{make_directory(ExpandedPath)}
+			).
 
 		make_directory_path(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
