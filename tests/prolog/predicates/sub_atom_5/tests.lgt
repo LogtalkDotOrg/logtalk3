@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2017-10-30,
+		date is 2020-10-13,
 		comment is 'Unit tests for the ISO Prolog standard integer/1 built-in predicate.'
 	]).
 
@@ -166,5 +166,11 @@
 
 	throws(lgt_sub_atom_5_38, error(type_error(atom,2.2),_)) :-
 		{sub_atom(2.2, _, _, _, _)}.
+
+	succeeds(lgt_sub_atom_5_39) :-
+		{sub_atom(abc, _, _, 0, c)}.
+
+	fails(lgt_sub_atom_5_40) :-
+		{sub_atom(abc, _, _, 0, d)}.
 
 :- end_object.

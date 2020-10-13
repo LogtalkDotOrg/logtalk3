@@ -172,10 +172,8 @@ the `quoted(true)` option for writing escape sequences.
 
 * ADDED: Additional tests for the `at_end_of_stream/1`, `arg/3`, `number/1`,
 `compound/1`, `predicate_property/2`, `atom_chars/2`, `atom_codes/2`,
-`number_chars/2`, and `number_codes/2`, standard Prolog predicates.
-
-* ADDED: Additional tests for the `get_byte/2`, `get_char/2`, and `get_code/2`
-standard Prolog predicates.
+`get_byte/2`, `get_char/2`, and `get_code/2`, `sub_atom/5`, `number_chars/2`,
+and `number_codes/2` standard Prolog predicates.
 
 * ADDED: Additional tests for the `catch/3` Prolog standard control construct.
 
