@@ -1089,6 +1089,9 @@ defining the tests. When running a set of test suites as a single unified
 suite (using the `run_test_sets/1` predicate), the single xUnit report is
 created in the directory of the first test suite object in the set.
 
+When using the `logtalk_tester` automation script, use the `-f xunit` option
+to generate the `xunit_report.xml` files on the test set directories.
+
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
@@ -1113,6 +1116,9 @@ To export the test results to a file using the TAP (Test Anything Protocol)
 output format, load instead the `tap_report.lgt` file before running the
 tests. A file named `tap_report.txt` will be created in the same directory
 as the object defining the tests.
+
+When using the `logtalk_tester` automation script, use the `-f tap` option
+to generate the `tap_report.xml` files on the test set directories.
 
 When using the `test/3` dialect with the TAP format, a `note/1` option
 whose argument is an atom starting with a `TODO` or `todo` word results
