@@ -192,6 +192,9 @@ predicate.
 * FIXED: Test for the `|` operator for the ISO/IEC 13211-1:1995/Cor.2:2012(en)
 standard.
 
+* FIXED: Test for the `char_code/2` standard Prolog predicate with backend
+compilers that only support the US-ASCII character set.
+
 Installers and installation scripts
 -----------------------------------
 
