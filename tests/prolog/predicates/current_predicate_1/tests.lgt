@@ -37,9 +37,9 @@ insect(bee).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-05-10,
+		date is 2020-10-15,
 		comment is 'Unit tests for the ISO Prolog standard current_predicate/1 built-in predicate.'
 	]).
 
@@ -91,6 +91,9 @@ insect(bee).
 	throws(eclipse_current_predicate_1_11, [error(type_error(predicate_indicator,f/ -1),_), error(domain_error(not_less_than_zero,-1),_)]) :-
 		% the first exception is the one specified in the ISO standard but the second one is common
 		{current_predicate(f/ -1)}.
+
+	throws(eclipse_current_predicate_1_12, error(type_error(predicate_indicator,a+1),_)) :-
+		{current_predicate(a+1)}.
 
 	% avoid library dependencies
 	memberchk(X, [X| _]) :-
