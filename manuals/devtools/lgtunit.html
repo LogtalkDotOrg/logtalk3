@@ -878,7 +878,7 @@ skipped tests.</p>
 <div class="section" id="checking-test-goal-results">
 <h2>Checking test goal results<a class="headerlink" href="#checking-test-goal-results" title="Permalink to this headline">¶</a></h2>
 <p>Checking test goal results can be performed using the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code>
-dialect <code class="docutils literal notranslate"><span class="pre">true/1</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> assertions. For example:</p>
+dialects <code class="docutils literal notranslate"><span class="pre">true/1</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> assertions. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(compare_3_order_less, deterministic(<span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>))) <span class="o">:-</span>
     <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>).
 </pre></div>
@@ -897,8 +897,20 @@ checking goals directly in the test body. For example:</p>
     <span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>).
 </pre></div>
 </div>
-<p>Using assertions is preferable as it facilitates debugging by printing
-the unexpected results when the tests fail.</p>
+<p>Using assertions is, however, preferable to directly check test results
+in the test body as it facilitates debugging by printing the unexpected
+results when the assertions fail.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> utility predicates are also useful for the
+<code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects when we want to check multiple assertions in the
+same test. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(dictionary_clone_4_01, <span class="k">true</span>) <span class="o">:-</span>
+    as_dictionary([], <span class="nv">Dictionary</span>),
+    clone(<span class="nv">Dictionary</span>, <span class="nv">DictionaryPairs</span>, <span class="nv">Clone</span>, <span class="nv">ClonePairs</span>),
+    empty(<span class="nv">Clone</span>),
+    <span class="o">^^</span>assertion(original_pairs, <span class="nv">DictionaryPairs</span> <span class="o">==</span> []),
+    <span class="o">^^</span>assertion(clone_pairs, <span class="nv">ClonePairs</span> <span class="o">==</span> []).
+</pre></div>
+</div>
 <p>Ground results can be compared using the standard <code class="docutils literal notranslate"><span class="pre">==/2</span></code> term equality
 built-in predicate. Non-ground results can be compared using the
 <code class="docutils literal notranslate"><span class="pre">variant/2</span></code> predicate provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. The standard

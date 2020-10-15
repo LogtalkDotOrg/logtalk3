@@ -628,7 +628,7 @@ that in this case there will be no report on the number of skipped tests.
 Checking test goal results
 --------------------------
 
-Checking test goal results can be performed using the `test/2-3` dialect `true/1`
+Checking test goal results can be performed using the `test/2-3` dialects `true/1`
 and `deterministic/1` assertions. For example:
 
 	test(compare_3_order_less, deterministic(Order == (<))) :-
@@ -648,8 +648,20 @@ or:
 		compare(Order, 1, 2),
 		Order == (<).
 
-Using assertions is preferable as it facilitates debugging by printing the
-unexpected results when the tests fail.
+Using assertions is, however, preferable to directly check test results in the
+test body as it facilitates debugging by printing the unexpected results when
+the assertions fail.
+
+The `assertion/1-2` utility predicates are also useful for the `test/2-3`
+dialects when we want to check multiple assertions in the same test. For
+example:
+
+	test(dictionary_clone_4_01, true) :-
+		as_dictionary([], Dictionary),
+		clone(Dictionary, DictionaryPairs, Clone, ClonePairs),
+		empty(Clone),
+		^^assertion(original_pairs, DictionaryPairs == []),
+		^^assertion(clone_pairs, ClonePairs == []).
 
 Ground results can be compared using the standard `==/2` term equality
 built-in predicate. Non-ground results can be compared using the `variant/2`
