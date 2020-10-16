@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on September 7, 2020
+##   Last updated on October 16, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.5"
+	echo "$(basename "$0") 2.6"
 	exit 0
 }
 
@@ -140,6 +140,10 @@ run_testset() {
 		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
 	elif [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] ; then
 		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/%         (/'
+	elif [ $tests_exit -eq 5 ] ; then
+		if [ "$output" == 'verbose' ] ; then
+			echo "%         broken"
+		fi
 	elif [ $tests_exit -eq 137 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
@@ -181,10 +185,8 @@ run_tests() {
 	fi
 	exit=$?
 	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
-		if [ "$output" == 'verbose' ] ; then
-			echo "%         broken"
-		fi
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
+		return 5
 	fi
 	return $exit
 }

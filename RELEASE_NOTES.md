@@ -127,6 +127,9 @@ compilers.
 
 * FIXED: The `lgtunit` tool messages for test outcome format errors.
 
+* FIXED: The `logtalk_tester` shell script spurious "clause coverage" text in
+case of a broken test set.
+
 Examples
 --------
 
