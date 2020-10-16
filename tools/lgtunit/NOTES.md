@@ -1128,6 +1128,12 @@ When running a set of test suites as a single unified suite, the single
 TAP report is created in the directory of the first test suite object in
 the set.
 
+There are several third-party TAP report converters that can generate
+HTML files for easy browsing. For example:
+
+- https://github.com/Quobject/tap-to-html
+- https://plugins.jenkins.io/tap/
+
 
 Exporting code coverage results in XML format
 ---------------------------------------------
