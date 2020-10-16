@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:7:0,
+		version is 8:7:1,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2020-10-16,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2660,7 +2660,7 @@
 
 	stream_position(Position) :-
 		os::absolute_file_name(temporary_file, Path),
-		open(Path, write, Stream, [reposition(true)]),
+		open(Path, write, Stream),
 		stream_property(Stream, position(Position)),
 		close(Stream),
 		os::delete_file(Path).

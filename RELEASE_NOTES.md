@@ -112,6 +112,9 @@ Tools
 * CHANGED: The `logtalk_tester` shell script to use a `SIGKILL` signal for the
 timeout option.
 
+* CHANGED: The `lgtunit` tool `stream_position/1` utility predicate to not
+require the backend Prolog system to support repositioning of streams.
+
 * ADDED: LVM support to the `logtalk_doclet` and `logtalk_tester` scripts.
 
 * ADDED: LVM support to the `debugger`, `diagrams`, and `lgtunit` tools.
