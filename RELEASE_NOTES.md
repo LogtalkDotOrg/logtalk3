@@ -69,6 +69,8 @@ Documentation
 * IMPROVED: Handbook description of entity and predicate properties that
 include line numbers information.
 
+* IMPROVED: The man page for the `logtalk_tester` shell script.
+
 * UPDATED: Handbook documentation of the `logtalk_library_path/2` predicate.
 
 Library
@@ -128,7 +130,7 @@ compilers.
 * FIXED: The `lgtunit` tool messages for test outcome format errors.
 
 * FIXED: The `logtalk_tester` shell script spurious "clause coverage" text in
-case of a broken test set.
+case of a skipped or broken test set.
 
 Examples
 --------

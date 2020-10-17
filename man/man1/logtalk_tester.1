@@ -62,7 +62,7 @@ Format for writing the test results. Default is \fIdefault\fR. Valid values are 
 Directory to store the test results. Default is the local \fI./logtalk_tester_logs\fR directory.
 .TP
 .BI \-t
-Timeout in seconds for running each test set. Default is \fI0\fR; i.e. disabled.
+Timeout in seconds for running each test set. Default is \fI0\fR (i.e. disabled).
 .TP
 .BI \-n
 Name of the test driver and sourced files (minus file name extensions). Default is \fItester\fR.
@@ -83,7 +83,7 @@ Integration script command-line options (no default).
 Initialization goal. Default is true. Called after loading the Logtalk compiler and runtime.
 .TP
 .BI \-r
-Random generator starting seed goal (no default).
+Random generator starting seed (no default).
 .TP
 .BI \--
 Arguments to be passed to the tests (no default).
@@ -110,6 +110,22 @@ One or more test sets crashed the process running them.
 .TP
 .B 9
 The sourced \fItester.sh\fR file returned a non-zero code.
+
+.SH EXAMPLES
+.TP
+Run all tests on the current directory and sub-directories using the GNU Prolog backend, with results in TAP format, code coverage reports in XML format, and passing arguments \fIfoo\fR, \fIbar\fR, and \fIbaz\fR to the tests:
+logtalk_tester -p gnu -tap -c xml -- foo bar baz
+.PP
+.TP
+Run all tests on the current directory only using the ECLiPSe backend, with a timeout of 4 minutes per test set:
+logtalk_tester -p eclipse -l 1 -t 240
+.PP
+.TP
+Run all tests on the current directory and sub-directories using the SICStus Prolog backend and a random generator starting seed:
+logtalk_tester -p sicstus -r "seed(3172,9814,20125)"
+
+.SH IMPLEMENTATION NOTES
+When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. On Windows operating-systems, the native timeout command is not usable for this purpose. Installation of the GNU \fIsed\fR command, when not available by default, is strongly recommended.
 
 .SH ENVIRONMENT
 .TP

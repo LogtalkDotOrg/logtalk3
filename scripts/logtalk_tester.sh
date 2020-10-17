@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 16, 2020
+##   Last updated on October 17, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.6"
+	echo "$(basename "$0") 2.7"
 	exit 0
 }
 
@@ -122,7 +122,12 @@ run_testset() {
 		tests_exit=$?
 		mode_prefix="% (debug) "
 	fi
-	if [ $tests_exit -eq 0 ] && [ -f "$results/$name.totals" ] && [ "$output" == 'verbose' ] ; then
+
+	if [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] && grep -q "tests skipped" "$results/$name.results" ; then
+		echo "%         skipped"
+	elif [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] && grep -q "(not applicable)" "$results/$name.results" ; then
+		echo "%         not applicable"
+	elif [ $tests_exit -eq 0 ] && [ -f "$results/$name.totals" ] && [ "$output" == 'verbose' ] ; then
 		while read -r line ; do
 			echo -n "$mode_prefix"
 			echo -n "$(cut -f 3 <<< "$line")"
@@ -138,8 +143,6 @@ run_testset() {
 		done < <(grep '^object' "$results/$name.totals")
 		echo -n '%         clause coverage '
 		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
-	elif [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] ; then
-		grep -a '(not applicable)' "$results/$name.results" | $sed 's/(/%         (/'
 	elif [ $tests_exit -eq 5 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"
