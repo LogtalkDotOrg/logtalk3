@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:1,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2020-09-24,
+		date is 2020-10-19,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -118,61 +118,65 @@
 		^^closed_input_stream(S, []),
 		{read_term(S, _, [])}.
 
-	test(sics_read_term_3_18, error(permission_error(input,binary_stream,S))) :-
-		^^set_binary_input([]),
-		current_input(S),
-		{read_term(_, [])}.
+	test(sics_read_term_3_18, error(existence_error(stream,S))) :-
+		^^closed_output_stream(S, []),
+		{read_term(S, _, [])}.
 
 	test(sics_read_term_3_19, error(permission_error(input,binary_stream,S))) :-
 		^^set_binary_input([]),
 		current_input(S),
+		{read_term(_, [])}.
+
+	test(sics_read_term_3_20, error(permission_error(input,binary_stream,S))) :-
+		^^set_binary_input([]),
+		current_input(S),
 		{read(_)}.
 
-	test(sics_read_term_3_20, true(Value == past)) :-
+	test(sics_read_term_3_21, true(Value == past)) :-
 		^^set_text_input(st_o, '', [eof_action(error)]),
 		get_code(st_o, _),
 		catch({read_term(st_o, _, [])}, error(permission_error(input,past_end_of_stream,_),_), true),
 		stream_property(Stream, alias(st_o)),
 		stream_property(Stream, end_of_stream(Value)).
 
-	test(sics_read_term_3_21, true(Assertion)) :-
+	test(sics_read_term_3_22, true(Assertion)) :-
 		^^set_text_input('\'a.'),
 		catch({read_term(_,[])}, error(syntax_error(_),_), true),
 		^^text_input_assertion('', Assertion).
 
-	test(sics_read_term_3_22, true(X == Integer)) :-
+	test(sics_read_term_3_23, true(X == Integer)) :-
 		max_min_integer_as_atom(max_integer, Integer, Atom),
 		^^set_text_input([Atom, '. ']),
 		{read(X)}.
 
-	test(sics_read_term_3_23, true(X == Integer)) :-
+	test(sics_read_term_3_24, true(X == Integer)) :-
 		max_min_integer_as_atom(min_integer, Integer, Atom),
 		^^set_text_input([Atom, '. ']),
 		{read(X)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_read_term_3_24, true(Term == end_of_file)) :-
+	test(lgt_read_term_3_25, true(Term == end_of_file)) :-
 		^^set_text_input(st_o, '', [eof_action(eof_code)]),
 		get_code(st_o, _),
 		{read_term(st_o, Term, [])}.
 
-	test(lgt_read_term_3_25, error(permission_error(input,stream,s))) :-
+	test(lgt_read_term_3_26, error(permission_error(input,stream,s))) :-
 		^^set_text_output(s, ''),
 		{read(s, _)}.
 
-	test(lgt_read_term_3_26, error(permission_error(input,binary_stream,_))) :-
+	test(lgt_read_term_3_27, error(permission_error(input,binary_stream,_))) :-
 		^^set_binary_input(s, []),
 		{read(s, _)}.
 
-	test(lgt_read_term_3_27, true) :-
+	test(lgt_read_term_3_28, true) :-
 		^^set_text_input('foo(_X,_Y,_x,_y). '),
 		{read_term(T, [singletons(S)])},
 		compound(T),
 		^^assertion(T = foo(A, B, C, D)),
 		^^assertion(S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D]).
 
-	test(lgt_read_term_3_28, true) :-
+	test(lgt_read_term_3_29, true) :-
 		^^set_text_input(empty, ''),
 		{read_term(empty, T, [variables(VL),variable_names(VN),singletons(VS)])},
 		^^assertion(T == end_of_file),
@@ -180,7 +184,7 @@
 		^^assertion(VN == []),
 		^^assertion(VS == []).
 
-	test(lgt_read_term_3_29, true) :-
+	test(lgt_read_term_3_30, true) :-
 		^^set_text_input(foo, 'foo(A,B,A). '),
 		{read_term(foo, T, [variables(VL),variable_names(VN),singletons(VS)])},
 		^^assertion(variant(T, foo(A,B,A))),

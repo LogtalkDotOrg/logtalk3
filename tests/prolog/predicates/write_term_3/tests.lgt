@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:13:0,
 		author is 'Paulo Moura',
-		date is 2020-09-30,
+		date is 2020-10-19,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -114,113 +114,117 @@
 		{write_term(1, [quoted(true),foo])}.
 
 	test(sics_write_term_3_19, error(existence_error(stream,S))) :-
+		^^closed_input_stream(S, []),
+		{write(S, a)}.
+
+	test(sics_write_term_3_20, error(existence_error(stream,S))) :-
 		^^closed_output_stream(S, []),
 		{write(S, a)}.
 
-	test(sics_write_term_3_20, error(permission_error(output,stream,S))) :-
+	test(sics_write_term_3_21, error(permission_error(output,stream,S))) :-
 		current_input(S),
 		{write(S, a)}.
 
-	test(sics_write_term_3_21, error(permission_error(output,binary_stream,S))) :-
+	test(sics_write_term_3_22, error(permission_error(output,binary_stream,S))) :-
 		^^set_binary_output([]),
 		current_output(S),
 		{write(a)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_write_term_3_22, error(permission_error(output,stream,s))) :-
+	test(lgt_write_term_3_23, error(permission_error(output,stream,s))) :-
 		^^set_text_input(s, ''),
 		{write(s, a)}.
 
-	test(lgt_write_term_3_23, error(permission_error(output,binary_stream,_))) :-
+	test(lgt_write_term_3_24, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{write(s, a)}.
 
-	test(lgt_write_term_3_24, true(Assertion)) :-
+	test(lgt_write_term_3_25, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, 'A', [quoted(false)])},
 		^^text_output_assertion('A', Assertion).
 
-	test(lgt_write_term_3_25, true(Assertion)) :-
+	test(lgt_write_term_3_26, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, 'A', [quoted(true)])},
 		^^text_output_assertion('\'A\'', Assertion).
 
-	test(lgt_write_term_3_26, true(Assertion)) :-
+	test(lgt_write_term_3_27, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, 1+2, [ignore_ops(false)])},
 		^^text_output_assertion('1+2', Assertion).
 
-	test(lgt_write_term_3_27, true(Assertion)) :-
+	test(lgt_write_term_3_28, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, 1+2, [ignore_ops(true)])},
 		^^text_output_assertion('+(1,2)', Assertion).
 
-	test(lgt_write_term_3_28, true(Assertion)) :-
+	test(lgt_write_term_3_29, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, '%', [quoted(true)])},
 		^^text_output_assertion('\'%\'', Assertion).
 
-	test(lgt_write_term_3_29, true(Assertion)) :-
+	test(lgt_write_term_3_30, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, ' %', [quoted(true)])},
 		^^text_output_assertion('\' %\'', Assertion).
 
-	test(lgt_write_term_3_30, true(Assertion)) :-
+	test(lgt_write_term_3_31, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, '%text', [quoted(true)])},
 		^^text_output_assertion('\'%text\'', Assertion).
 
-	test(lgt_write_term_3_31, true(Assertion)) :-
+	test(lgt_write_term_3_32, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, '/*', [quoted(true)])},
 		^^text_output_assertion('\'/*\'', Assertion).
 
-	test(lgt_write_term_3_32, true(Assertion)) :-
+	test(lgt_write_term_3_33, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, '/*text', [quoted(true)])},
 		^^text_output_assertion('\'/*text\'', Assertion).
 
-	test(lgt_write_term_3_33, true(Assertion)) :-
+	test(lgt_write_term_3_34, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C])])},
 		^^text_output_assertion('foo(A,B,C)', Assertion).
 
-	test(lgt_write_term_3_34, true(Assertion)) :-
+	test(lgt_write_term_3_35, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C,'X'=A])])},
 		^^text_output_assertion('foo(A,B,C)', Assertion).
 
-	test(lgt_write_term_3_35, true(Assertion)) :-
+	test(lgt_write_term_3_36, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, [(1,2,3)], [])},
 		^^text_output_assertion('[(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_36, true(Assertion)) :-
+	test(lgt_write_term_3_37, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, [a,(1,2,3)], [])},
 		^^text_output_assertion('[a,(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_37, true(Assertion)) :-
+	test(lgt_write_term_3_38, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_canonical(S, [(1,2,3)])},
 		^^text_output_assertion('\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
 
-	test(lgt_write_term_3_38, true(Assertion)) :-
+	test(lgt_write_term_3_39, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_canonical(S, [a,(1,2,3)])},
@@ -228,25 +232,25 @@
 
 	% [] and {} are atoms that don't require quoting
 
-	test(lgt_write_term_3_39, true(Assertion)) :-
+	test(lgt_write_term_3_40, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '[]')},
 		^^text_output_assertion('[]', Assertion).
 
-	test(lgt_write_term_3_40, true(Assertion)) :-
+	test(lgt_write_term_3_41, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, [])},
 		^^text_output_assertion('[]', Assertion).
 
-	test(lgt_write_term_3_41, true(Assertion)) :-
+	test(lgt_write_term_3_42, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '{}')},
 		^^text_output_assertion('{}', Assertion).
 
-	test(lgt_write_term_3_42, true(Assertion)) :-
+	test(lgt_write_term_3_43, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, {})},
@@ -254,13 +258,13 @@
 
 	% quoted writing of escape sequences shoudl preserve them
 
-	test(lgt_write_term_3_43, true(Assertion)) :-
+	test(lgt_write_term_3_44, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '\n')},
 		^^text_output_assertion('\'\\n\'', Assertion).
 
-	test(lgt_write_term_3_44, true(Assertion)) :-
+	test(lgt_write_term_3_45, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '\t')},
