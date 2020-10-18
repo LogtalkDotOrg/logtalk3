@@ -203,6 +203,10 @@ standard.
 * FIXED: Test for the `char_code/2` standard Prolog predicate with backend
 compilers that only support the US-ASCII character set.
 
+* FIXED: Test for the `char_code/2` standard Prolog predicate that is expected
+to either succeed or throw an error depending on the backend Prolog compiler
+character set representation.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:9:1,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -119,7 +119,7 @@
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
-		catch({get_char(S, _)}, Error, Error = error(representation_error(character),_)).
+		catch({get_char(S, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).
 
 	% tests from the Logtalk portability work
 
