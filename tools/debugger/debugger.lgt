@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:5:0,
+		version is 4:6:0,
 		author is 'Paulo Moura',
-		date is 2020-08-31,
+		date is 2020-10-18,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -467,7 +467,7 @@
 		call_goal(TGoal, Deterministic) :-
 			{call_cleanup(TGoal, Deterministic = true)}.
 
-	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ciao; Dialect == gnu))).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ciao; Dialect == gnu; Dialect == lvm))).
 
 		call_goal(TGoal, Deterministic) :-
 			{call_det(TGoal, Deterministic)}.
