@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2017-11-19,
+		date is 2020-10-18,
 		comment is 'Unit tests for the "parametric" example.'
 	]).
 
@@ -39,49 +39,40 @@
 	cover(speech(_)).
 	cover(speech(_, _)).
 
-	test(parametric_01) :-
-		findall(X, [1, 2, 3]::member(X), Solutions),
-		Solutions == [1, 2, 3].
+	test(parametric_01, true(Solutions == [1, 2, 3])) :-
+		findall(X, [1, 2, 3]::member(X), Solutions).
 
-	test(parametric_02) :-
-		findall(X, [1, 2, 3]::last(X), Solutions),
-		Solutions == [3].
+	test(parametric_02, true(Solutions == [3])) :-
+		findall(X, [1, 2, 3]::last(X), Solutions).
 
-	test(parametric_03) :-
-		findall(X, [1, 2, 3]::nextto(2,X), Solutions),
-		Solutions == [3].
+	test(parametric_03, true(Solutions == [3])) :-
+		findall(X, [1, 2, 3]::nextto(2,X), Solutions).
 
-	test(parametric_04) :-
+	test(parametric_04, true) :-
 		\+ '[]'::member(_).
 
-	test(parametric_05) :-
+	test(parametric_05, true) :-
 		rectangle(W, H, X, Y)::init, rectangle(W, H, X, Y)::move(3, 4, NR), NR::position(X2, Y2),
-		W  == 2,
-		H  == 1,
-		X  == 0,
-		Y  == 0,
-		NR == rectangle(2, 1, 3, 4),
-		X2 == 3,
-		Y2 == 4.
+		^^assertion(init, i(W,H,X,Y) == i(2,1,0,0)),
+		^^assertion(new, NR == rectangle(2,1,3,4)),
+		^^assertion(position, p(X2,Y2) == p(3,4)).
 
-	test(parametric_06) :-
-		person(sally, 20)::grow_older(NewId),
-		NewId == person(sally, 21).
+	test(parametric_06, true(NewId == person(sally, 21))) :-
+		person(sally, 20)::grow_older(NewId).
 
-	test(parametric_07) :-
-		employee(sally, 21, 1200)::give_raise(250, NewId),
-		NewId == employee(sally, 21, 1450).
+	test(parametric_07, true(NewId == employee(sally, 21, 1450))) :-
+		employee(sally, 21, 1200)::give_raise(250, NewId).
 
-	test(parametric_08) :-
+	test(parametric_08, true) :-
 		speech(winter, wedding)::advice(Clothes, Speech),
-		Clothes == [pants, sleeves, heavy],
-		Speech == [happy, jokes].
+		^^assertion(clothes, Clothes == [pants, sleeves, heavy]),
+		^^assertion(speech,  Speech  == [happy, jokes]).
 
-	test(parametric_09) :-
+	test(parametric_09, true(d(Year,Month,Day) == d(2017,11,19))) :-
 		date(2017, 11, 19) :: (year(Year), month(Month), day(Day)),
 		Year == 2017, Month == 11, Day == 19.
 
-	test(parametric_10) :-
+	test(parametric_10, true(t(Hours,Mins,Secs) == t(21,33,42))) :-
 		time(21, 33, 42) :: (hours(Hours), mins(Mins), secs(Secs)),
 		Hours == 21, Mins == 33, Secs == 42.
 
