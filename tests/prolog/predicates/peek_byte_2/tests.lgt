@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-07-30,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -74,44 +74,48 @@
 
 	throws(sics_peek_byte_2_09, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
-		{peek_byte(foo,_)}.
+		{peek_byte(foo, _)}.
 
 	throws(sics_peek_byte_2_10, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, [type(binary)]),
-		{peek_byte(S,_)}.
+		{peek_byte(S, _)}.
 
-	throws(sics_peek_byte_2_11, error(permission_error(input,stream,S),_)) :-
+	throws(sics_get_char_2_11, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, [type(binary)]),
+		{peek_byte(S, _)}.
+
+	throws(sics_peek_byte_2_12, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
-		{peek_byte(S,_)}.
+		{peek_byte(S, _)}.
 
-	throws(sics_peek_byte_2_12, error(permission_error(input,text_stream,S),_)) :-
+	throws(sics_peek_byte_2_13, error(permission_error(input,text_stream,S),_)) :-
 		^^set_text_input(''),
 		current_input(S),
 		{peek_byte(_)}.
 
-	throws(sics_peek_byte_2_13, error(permission_error(input,past_end_of_stream,_),_)) :-
+	throws(sics_peek_byte_2_14, error(permission_error(input,past_end_of_stream,_),_)) :-
 		^^set_binary_input(st_i, [], [eof_action(error)]),
-		{get_byte(st_i,_), peek_byte(st_i,_)}.
+		{get_byte(st_i, _), peek_byte(st_i, _)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_peek_byte_2_14) :-
+	succeeds(lgt_peek_byte_2_15) :-
 		^^set_binary_input(st_i, []),
 		{peek_byte(st_i, -1)},
 		^^check_binary_input(st_i, []).
 
-	succeeds(lgt_peek_byte_2_15) :-
+	succeeds(lgt_peek_byte_2_16) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
-		{get_byte(st_i,_), peek_byte(st_i,Byte)},
-		Byte == -1.
+		{peek_byte(st_i, Byte1), peek_byte(st_i, Byte1), peek_byte(st_i, Byte2)},
+		Byte1 == -1, Byte2 == -1.
 
-	throws(lgt_peek_byte_2_16, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_byte_2_17, error(permission_error(input,stream,s),_)) :-
 		^^set_binary_output(s, []),
-		{peek_byte(s,_)}.
+		{peek_byte(s, _)}.
 
-	throws(lgt_peek_byte_2_17, error(permission_error(input,text_stream,_),_)) :-
+	throws(lgt_peek_byte_2_18, error(permission_error(input,text_stream,_),_)) :-
 		^^set_text_input(s, ''),
-		{peek_byte(s,_)}.
+		{peek_byte(s, _)}.
 
 	cleanup :-
 		^^clean_text_input,

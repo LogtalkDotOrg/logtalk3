@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard get_code/1-2 built-in predicates.'
 	]).
 
@@ -115,7 +115,7 @@
 		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S, [eof_action(eof_code)]),
-		{get_code(S, C1), get_code(S, C2)},
+		{get_code(S, C1), get_code(S, C1), get_code(S, C2)},
 		C1 == -1, C2 == -1,
 		stream_property(S, end_of_stream(past)).
 

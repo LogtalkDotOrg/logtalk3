@@ -22,7 +22,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:1,
+		version is 1:10:0,
 		author is 'Paulo Moura',
 		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
@@ -111,7 +111,7 @@
 		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S, [eof_action(eof_code)]),
-		{get_char(S, C1), get_char(S, C2)},
+		{get_char(S, C1), get_char(S, C1), get_char(S, C2)},
 		C1 == end_of_file, C2 == end_of_file,
 		stream_property(S, end_of_stream(past)).
 

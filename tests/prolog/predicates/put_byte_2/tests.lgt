@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard put_byte/1-2 built-in predicates.'
 	]).
 
@@ -58,36 +58,40 @@
 		{put_byte(_C)}.
 
 	test(sics_put_byte_2_07, error(existence_error(stream,S))) :-
+		^^closed_input_stream(S, [type(binary)]),
+		{put_byte(S, 77)}.
+
+	test(sics_put_byte_2_08, error(existence_error(stream,S))) :-
 		^^closed_output_stream(S, [type(binary)]),
 		{put_byte(S, 77)}.
 
-	test(sics_put_byte_2_08, error(permission_error(output,stream,S))) :-
+	test(sics_put_byte_2_09, error(permission_error(output,stream,S))) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{put_byte(S, 99)}.
 
-	test(sics_put_byte_2_09, error(permission_error(output,text_stream,S))) :-
+	test(sics_put_byte_2_10, error(permission_error(output,text_stream,S))) :-
 		current_output(S),
 		{put_byte(99)}.
 
-	test(sics_put_byte_2_10, error(type_error(byte,-1))) :-
+	test(sics_put_byte_2_11, error(type_error(byte,-1))) :-
 		^^set_binary_output([]),
 		{put_byte(-1)}.
 
-	test(sics_put_byte_2_11, error(instantiation_error)) :-
+	test(sics_put_byte_2_12, error(instantiation_error)) :-
 		{put_byte(_S, 1)}.
 
-	test(sics_put_byte_2_12, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
+	test(sics_put_byte_2_13, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
 		% both exception terms seem to be acceptable in the ISO spec
 		{put_byte(foo, 1)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_put_byte_2_13, error(permission_error(output,stream,s))) :-
+	test(lgt_put_byte_2_14, error(permission_error(output,stream,s))) :-
 		^^set_binary_input(s, []),
 		{put_byte(s, 99)}.
 
-	test(lgt_put_byte_2_14, error(permission_error(output,text_stream,_))) :-
+	test(lgt_put_byte_2_15, error(permission_error(output,text_stream,_))) :-
 		^^set_text_output(s, ''),
 		{put_byte(s, 99)}.
 

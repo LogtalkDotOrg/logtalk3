@@ -104,8 +104,8 @@
 
 	succeeds(lgt_get_byte_2_15) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
-		{get_byte(st_i,_), get_byte(st_i,Byte)},
-		Byte == -1.
+		{get_byte(st_i, Byte1), get_byte(st_i, Byte1), get_byte(st_i, Byte2)},
+		Byte1 == -1, Byte2 == -1.
 
 	throws(lgt_get_byte_2_16, error(permission_error(input,stream,s),_)) :-
 		^^set_binary_output(s, []),

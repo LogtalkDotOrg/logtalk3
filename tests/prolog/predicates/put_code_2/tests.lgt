@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard put_code/1-2 built-in predicates.'
 	]).
 
@@ -59,32 +59,36 @@
 		{put_code(_)}.
 
 	test(iso_put_code_2_07, error(existence_error(stream,S))) :-
+		^^closed_input_stream(S, []),
+		{put_code(S, 0'a)}.
+
+	test(iso_put_code_2_08, error(existence_error(stream,S))) :-
 		^^closed_output_stream(S, []),
 		{put_code(S, 0'a)}.
 
-	test(iso_put_code_2_08, error(permission_error(output,stream,S))) :-
+	test(iso_put_code_2_09, error(permission_error(output,stream,S))) :-
 		current_input(S),
 		{put_code(S, 0'a)}.
 
-	test(iso_put_code_2_09, error(permission_error(output,binary_stream,S))) :-
+	test(iso_put_code_2_10, error(permission_error(output,binary_stream,S))) :-
 		os::absolute_file_name(t, Path),
 		open(Path, write, S, [type(binary)]),
 		{put_code(S, 0'a)}.
 
-	test(sics_put_code_2_10, error(representation_error(character_code))) :-
+	test(sics_put_code_2_11, error(representation_error(character_code))) :-
 		{put_code(-1)}.
 
-	test(sics_put_code_2_11, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
+	test(sics_put_code_2_12, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
 		% both exception terms seem to be acceptable in the ISO spec
 		{put_code(foo, 1)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_put_code_2_12, error(permission_error(output,stream,s))) :-
+	test(lgt_put_code_2_13, error(permission_error(output,stream,s))) :-
 		^^set_text_input(s, ''),
 		{put_code(s, 1)}.
 
-	test(lgt_put_code_2_13, error(permission_error(output,binary_stream,_))) :-
+	test(lgt_put_code_2_14, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{put_code(s, 1)}.
 

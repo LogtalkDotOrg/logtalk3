@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2020-07-30,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -92,22 +92,26 @@
 		^^closed_input_stream(S, []),
 		{peek_char(S, _)}.
 
-	throws(sics_peek_char_2_13, error(permission_error(input,stream,S),_)) :-
+	throws(sics_peek_char_2_13, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{peek_char(S, _)}.
+
+	throws(sics_peek_char_2_14, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{peek_char(S, _)}.
 
-	throws(sics_peek_char_2_14, error(permission_error(input,binary_stream,_),_)) :-
+	throws(sics_peek_char_2_15, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{peek_char(s, _)}.
 
-	succeeds(sics_peek_char_2_15) :-
+	succeeds(sics_peek_char_2_16) :-
 		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{peek_char(Stream, C1), peek_char(Stream, C1), peek_char(Stream, C2)},
 		C1 == end_of_file, C2 == end_of_file.
 
-	succeeds(sics_peek_char_2_16) :-
+	succeeds(sics_peek_char_2_17) :-
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
@@ -115,15 +119,15 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_peek_char_2_17) :-
+	succeeds(lgt_peek_char_2_18) :-
 		^^set_text_input(s, ''),
 		{get_char(s, end_of_file)}.
 
-	succeeds(lgt_peek_char_2_18) :-
+	succeeds(lgt_peek_char_2_19) :-
 		^^set_text_input(s, '', [eof_action(eof_code)]),
 		{get_char(s, end_of_file), peek_char(s, end_of_file)}.
 
-	throws(lgt_peek_char_2_19, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_char_2_20, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{peek_char(s, _)}.
 

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2020-07-30,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -90,27 +90,31 @@
 		^^closed_input_stream(S, []),
 		{peek_code(S, _)}.
 
-	throws(sics_peek_code_2_13, error(permission_error(input,stream,S),_)) :-
+	throws(sics_peek_code_2_13, error(existence_error(stream,S),_)) :-
+		^^closed_output_stream(S, []),
+		{peek_code(S, _)}.
+
+	throws(sics_peek_code_2_14, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{peek_code(S, _)}.
 
-	throws(sics_peek_code_2_14, error(permission_error(input,binary_stream,S),_)) :-
+	throws(sics_peek_code_2_15, error(permission_error(input,binary_stream,S),_)) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{peek_code(S, _)}.
 
-	succeeds(sics_peek_code_2_15) :-
+	succeeds(sics_peek_code_2_16) :-
 		^^set_text_input(st_i, '', [eof_action(error)]),
 		catch({get_code(st_i,_), peek_code(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
 		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
-	succeeds(sics_peek_code_2_16) :-
+	succeeds(sics_peek_code_2_17) :-
 		^^set_text_input(''),
 		{peek_code(C1), peek_code(C2)},
 		C1 == -1, C2 == -1.
 
-	succeeds(sics_peek_code_2_17) :-
+	succeeds(sics_peek_code_2_18) :-
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
@@ -118,21 +122,21 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_peek_code_2_18) :-
+	succeeds(lgt_peek_code_2_19) :-
 		^^set_text_input(st_i, ''),
 		{peek_code(st_i, -1)},
 		^^check_text_input(st_i, '').
 
-	succeeds(lgt_peek_code_2_19) :-
+	succeeds(lgt_peek_code_2_20) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
-		{get_code(st_i,_), peek_code(st_i,Code)},
-		Code == -1.
+		{peek_code(st_i, Code1), peek_code(st_i, Code1), peek_code(st_i, Code2)},
+		Code1 == -1, Code2 == -1.
 
-	throws(lgt_peek_code_2_20, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_code_2_21, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{peek_code(s, _)}.
 
-	throws(lgt_peek_code_2_21, error(permission_error(input,binary_stream,_),_)) :-
+	throws(lgt_peek_code_2_22, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{peek_code(s, _)}.
 

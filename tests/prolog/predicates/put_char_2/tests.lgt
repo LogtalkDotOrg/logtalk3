@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-10-18,
 		comment is 'Unit tests for the ISO Prolog standard put_char/1-2 built-in predicates.'
 	]).
 
@@ -67,25 +67,29 @@
 		{put_char(_)}.
 
 	test(sics_put_char_2_09, error(existence_error(stream,S))) :-
+		^^closed_input_stream(S, []),
+		{put_char(S, a)}.
+
+	test(sics_put_char_2_10, error(existence_error(stream,S))) :-
 		^^closed_output_stream(S, []),
 		{put_char(S, a)}.
 
-	test(sics_put_char_2_10, error(permission_error(output,stream,S))) :-
+	test(sics_put_char_2_11, error(permission_error(output,stream,S))) :-
 		current_input(S),
 		{put_char(S, a)}.
 
-	test(sics_put_char_2_11, error(permission_error(output,binary_stream,S))) :-
+	test(sics_put_char_2_12, error(permission_error(output,binary_stream,S))) :-
 		^^set_binary_output([]),
 		current_output(S),
 		{put_char(a)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_put_char_2_12, error(permission_error(output,stream,s))) :-
+	test(lgt_put_char_2_13, error(permission_error(output,stream,s))) :-
 		^^set_text_input(s, ''),
 		{put_char(s, a)}.
 
-	test(lgt_put_char_2_13, error(permission_error(output,binary_stream,_))) :-
+	test(lgt_put_char_2_14, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{put_char(s, a)}.
 

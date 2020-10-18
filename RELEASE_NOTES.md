@@ -180,8 +180,10 @@ the `quoted(true)` option for writing escape sequences.
 
 * ADDED: Additional tests for the `at_end_of_stream/1`, `arg/3`, `number/1`,
 `compound/1`, `current_predicate/1`, `predicate_property/2`, `atom_chars/2`,
-`atom_codes/2`, `get_byte/2`, `get_char/2`, and `get_code/2`, `sub_atom/5`,
-`number_chars/2`, `number_codes/2`, and  `close/1-2` standard Prolog predicates.
+`atom_codes/2`, `get_byte/2`, `get_char/2`, and `get_code/2`, `peek_byte/2`,
+`peek_char/2`, `peek_code/2`, `put_byte/2`, `put_char/2`, `put_code/2`,
+`sub_atom/5`, `number_chars/2`, `number_codes/2`, and  `close/1-2` standard
+Prolog predicates.
 
 * ADDED: Additional tests for the `catch/3` Prolog standard control construct.
 
