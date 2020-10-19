@@ -68,7 +68,7 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	test(iso_read_term_3_07, true) :-
+	test(sics_read_term_3_07, true) :-
 		^^set_text_input('foo( bar). '),
 		{read_term(T, [singletons(S)])},
 		^^assertion(T == foo(bar)),
