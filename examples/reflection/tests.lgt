@@ -24,9 +24,9 @@
 	:- set_logtalk_flag(unknown_entities, silent).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-04,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "reflection" example.'
 	]).
 
@@ -57,8 +57,7 @@
 		setof(Predicate, ac::current_predicate(Predicate), Predicates),
 		Predicates == [abstract_class/0, metaclass/0, print/0, strict_instance/0].
 
-	throws(reflection_4, error(existence_error(predicate_declaration,new/1), logtalk(ac::new(i),This))) :-
-		this(This),
+	throws(reflection_4, error(existence_error(predicate_declaration,new/1), logtalk(ac::new(i),_))) :-
 		ac::new(i).
 
 	succeeds(reflection_5) :-

@@ -22,22 +22,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2016-06-15,
+		date is 2020-10-20,
 		comment is 'Unit tests for the threaded_engine_destroy/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
 	% engine argument must be bound at runtime (but no error at compile time)
-	throws(threaded_engine_destroy_1_01, error(instantiation_error, logtalk(threaded_engine_destroy(_), This))) :-
-		this(This),
+	throws(threaded_engine_destroy_1_01, error(instantiation_error, logtalk(threaded_engine_destroy(_), _))) :-
 		threaded_engine_destroy(_).
 
 	% engine must exist
-	throws(threaded_engine_destroy_1_02, error(existence_error(engine,foo), logtalk(threaded_engine_destroy(foo), This))) :-
-		this(This),
+	throws(threaded_engine_destroy_1_02, error(existence_error(engine,foo), logtalk(threaded_engine_destroy(foo), _))) :-
 		threaded_engine_destroy(foo).
 
 	% engine destroy should always be successful independent

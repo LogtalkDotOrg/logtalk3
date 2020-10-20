@@ -26,51 +26,46 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-04-30,
+		date is 2020-10-20,
 		comment is 'Unit tests for the findall/3 built-in method.'
 	]).
 
-	succeeds(findall_3_01) :-
-		findall(X, a(X, _), L),
-		L == [1, 2, 3, 4].
+	:- uses(lgtunit, [
+		variant/2
+	]).
 
-	succeeds(findall_3_02) :-
-		findall(Y-L, findall(X, a(X, Y), L), LL),
-		LL = [_-[1,2,3,4]].
+	test(findall_3_01, true(L == [1, 2, 3, 4])) :-
+		findall(X, a(X, _), L).
+
+	test(findall_3_02, true(variant(LL, [_-[1,2,3,4]]))) :-
+		findall(Y-L, findall(X, a(X, Y), L), LL).
 
 	% the following tests are taken from the ISO Prolog Core standard
 
-	succeeds(findall_3_03) :-
-		findall(X, (X=1; X=2), L),
-		L == [1, 2].
+	test(findall_3_03, true(L == [1, 2])) :-
+		findall(X, (X=1; X=2), L).
 
-	succeeds(findall_3_04) :-
-		findall(X+_Y, (X=1), L),
-		L = [1+_].
+	test(findall_3_04, true(variant(L, [1+_]))) :-
+		findall(X+_Y, (X=1), L).
 
-	succeeds(findall_3_05) :-
-		findall(_X, fail, L),
-		L == [].
+	test(findall_3_05, true(L == [])) :-
+		findall(_X, fail, L).
 
-	succeeds(findall_3_06) :-
-		findall(X, (X=1; X=1), L),
-		L == [1, 1].
+	test(findall_3_06, true(L == [1, 1])) :-
+		findall(X, (X=1; X=1), L).
 
-	succeeds(findall_3_07) :-
-		findall(X, (X=1; X=2), [X,Y]),
-		X == 1, Y == 2.
+	test(findall_3_07, true(X-Y == 1-2)) :-
+		findall(X, (X=1; X=2), [X,Y]).
 
-	fails(findall_3_08) :-
+	test(findall_3_08, false) :-
 		findall(X, (X=2; X=1), [1,2]).
 
-	throws(findall_3_09, error(instantiation_error, logtalk(call(_),This))) :-
-		this(This),
+	test(findall_3_09, error(instantiation_error)) :-
 		findall(_X, _Goal, _L).
 
-	throws(findall_3_10, error(type_error(callable,4), logtalk(call(4),This))) :-
-		this(This),
+	test(findall_3_10, error(type_error(callable,4))) :-
 		Goal = 4,
 		findall(_X, Goal, _L).
 

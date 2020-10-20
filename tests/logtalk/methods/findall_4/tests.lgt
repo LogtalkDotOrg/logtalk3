@@ -26,34 +26,32 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2017-05-29,
+		date is 2020-10-20,
 		comment is 'Unit tests for the findall/4 built-in method.'
 	]).
 
-	test(findall_4_01) :-
-		findall(X, a(X, _), L, []),
-		L == [1, 2, 3, 4].
+	:- uses(lgtunit, [
+		variant/2
+	]).
 
-	test(findall_4_02) :-
-		findall(X, a(X, _), L, [5, 6, 7]),
-		L == [1, 2, 3, 4, 5, 6, 7].
+	test(findall_4_01, true(L == [1, 2, 3, 4])) :-
+		findall(X, a(X, _), L, []).
 
-	test(findall_4_03) :-
-		findall(Y-L, findall(X, a(X, Y), L, [5, 6, 7]), LL),
-		LL = [_-[1,2,3,4,5,6,7]].
+	test(findall_4_02, true(L == [1, 2, 3, 4, 5, 6, 7])) :-
+		findall(X, a(X, _), L, [5, 6, 7]).
 
-	test(findall_4_04) :-
-		findall(_, fail, L, [5, 6, 7]),
-		L == [5, 6, 7].
+	test(findall_4_03, true(variant(LL, [_-[1,2,3,4,5,6,7]]))) :-
+		findall(Y-L, findall(X, a(X, Y), L, [5, 6, 7]), LL).
 
-	throws(findall_4_05, error(instantiation_error, logtalk(call(_),This))) :-
-		this(This),
+	test(findall_4_04, true(L == [5, 6, 7])) :-
+		findall(_, fail, L, [5, 6, 7]).
+
+	test(findall_4_05, error(instantiation_error)) :-
 		findall(_X, _Goal, _L, _T).
 
-	throws(findall_4_06, error(type_error(callable,4), logtalk(call(4),This))) :-
-		this(This),
+	test(findall_4_06, error(type_error(callable,4))) :-
 		Goal = 4,
 		findall(_X, Goal, _L, _T).
 

@@ -22,71 +22,65 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2019-03-18,
+		date is 2020-10-20,
 		comment is 'Unit tests for the once/1 built-in method.'
+	]).
+
+	:- uses(lgtunit, [
+		variant/2
 	]).
 
 	% once/1 calls are expanded and thus the error term is for call/1
 
-	throws(once_1_01, error(instantiation_error,logtalk(call(_),This))) :-
-		this(This),
+	test(once_1_01, error(instantiation_error)) :-
 		once(_).
 
-	throws(once_1_02, error(type_error(callable,1),logtalk(call(1),This))) :-
-		this(This),
+	test(once_1_02, error(type_error(callable,1))) :-
 		Goal = 1,
 		once(Goal).
 
 	% it's not always possible to decompile the actual call
 
-	throws(once_1_03, error(existence_error(procedure,_),logtalk(call(p(_)),This))) :-
-		this(This),
+	test(once_1_03, error(existence_error(procedure,_))) :-
 		Goal = p(_),
 		once(Goal).
 
-	succeeds(once_1_04) :-
+	test(once_1_04, true) :-
 		once(!).
 
-	succeeds(once_1_05) :-
-		findall(X, once(a(X)), Xs),
-		Xs == [1].
+	test(once_1_05, true(Xs == [1])) :-
+		findall(X, once(a(X)), Xs).
 
-	succeeds(once_1_06) :-
-		findall(X, (once(a(X)); X = 0), Xs),
-		Xs == [1, 0].
+	test(once_1_06, true(Xs == [1, 0])) :-
+		findall(X, (once(a(X)); X = 0), Xs).
 
-	succeeds(once_1_07) :-
-		findall(X, (once(!); a(X)), Xs),
-		Xs = [H| T], var(H), T == [1, 2, 3].
+	test(once_1_07, true(variant(Xs, [_, 1, 2, 3]))) :-
+		findall(X, (once(!); a(X)), Xs).
 
-	succeeds(once_1_08) :-
-		findall(X, (once((!, fail)); a(X)), Xs),
-		Xs == [1, 2, 3].
+	test(once_1_08, true(Xs == [1, 2, 3])) :-
+		findall(X, (once((!, fail)); a(X)), Xs).
 
-	fails(once_1_09) :-
+	test(once_1_09, false) :-
 		% avoid a warning about a no matching clause for goal a(4)
 		% by delaying the argument instantiation to runtime
 		N = 4,
 		once(a(N)).
 
-	fails(once_1_10) :-
+	test(once_1_10, false) :-
 		once(fail).
 
 	% once/1 is opaque to cuts
 
-	succeeds(once_1_11) :-
-		findall(X, ((X = 1; X =2; X = 3), once(!)), L),
-		L == [1, 2, 3].
+	test(once_1_11, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), once(!)), L).
 
-	succeeds(once_1_12) :-
-		findall(X, ((X = 1; X =2; X = 3), once((true,!))), L),
-		L == [1, 2, 3].
+	test(once_1_12, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), once((true,!))), L).
 
-	succeeds(once_1_13) :-
-		findall(X, ((X = 1; X =2; X = 3), once((true;!))), L),
-		L == [1, 2, 3].
+	test(once_1_13, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), once((true;!))), L).
 
 	% auxiliary predicates
 

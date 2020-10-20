@@ -26,10 +26,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2014-09-08,
+		date is 2020-10-20,
 		comment is 'Unit tests for the setof/3 built-in method.'
+	]).
+
+	:- uses(lgtunit, [
+		variant/2
 	]).
 
 	succeeds(setof_3_01) :-
@@ -95,32 +99,32 @@
 
 	succeeds(setof_3_13) :-
 		findall(L, setof(f(X,Y), (X=a; Y=b), L), LL),
-		LL = [[f(a,_), f(_,b)]].
+		^^variant(LL, [[f(_,b), f(a,_)]]).
 
 	succeeds(setof_3_14) :-
 		findall(L, setof(X, Y^((X=1, Y=1); (X=2, Y=2)), L), LL),
-		LL = [[1,2]].
+		LL == [[1,2]].
 
 	succeeds(setof_3_15) :-
 		findall(L, setof(X, Y^((X=1; Y=1); (X=2, Y=2)), L), LL),
-		LL = [[_,1,2]].
+		^^variant(LL, [[_,1,2]]).
 
 	% Logtalk doesn't support setting the `unknown` standard Prolog
 	% flag *locally* to an entity to `warning` for the folowing test
 	- succeeds(setof_3_16) :-
 		findall(Y-L, setof(X, ((Y^(X=1; Y=2)); X=3), L), LL),
-		LL = [_-[3]].
+		^^variant(LL, [_-[3]]).
 
 	succeeds(setof_3_17) :-
 		bagof(Y-L, setof(X, (X=Y; X=Z; Y=1), L), LL),
-		(	LL = [Y-[Y,Z], 1-[_]] ->
+		(	^^variant(LL, [Y-[Y,Z], 1-[_]]) ->
 			true
-		;	LL = [1-[_], Y-[Y,Z]]
+		;	^^variant(LL, [1-[_], Y-[Y,Z]])
 		).
 
 	succeeds(setof_3_18) :-
 		findall(Y-L, setof(X, a(X,Y), L), LL),
-		LL = [f(_)-[1,2]].
+		^^variant(LL, [f(_)-[1,2]]).
 
 	succeeds(setof_3_19) :-
 		setof(X, member(X, [f(U,b),f(V,c)]), L),
@@ -166,15 +170,15 @@
 
 	succeeds(setof_3_26) :-
 		findall(L, setof(X-Xs, Y^setof(Y, b(X,Y), Xs), L), LL),
-		LL = [[1-[1,2],2-[1,2]]].
+		LL == [[1-[1,2],2-[1,2]]].
 
 	succeeds(setof_3_27) :-
 		findall(Y-L, setof(X-Xs, setof(Y, b(X,Y), Xs), L), LL),
-		LL = [_-[1-[1,2],2-[1,2]]].
+		^^variant(LL, [_-[1-[1,2],2-[1,2]]]).
 
 	succeeds(setof_3_28) :-
 		findall(Y-L, setof(X-Xs, bagof(Y, d(X,Y), Xs), L), LL),
-		LL = [_-[1-[1,2,1],2-[2,1,2]]].
+		^^variant(LL, [_-[1-[1,2,1],2-[2,1,2]]]).
 
 	fails(setof_3_29) :-
 		setof(_X, fail, _L).
@@ -184,12 +188,10 @@
 
 	% tests for error conditions
 
-	throws(setof_3_31, error(instantiation_error,logtalk(call(_),This))) :-
-		this(This),
+	throws(setof_3_31, error(instantiation_error,logtalk(call(_),_))) :-
 		setof(_, _, _).
 
-	throws(setof_3_32, error(type_error(callable,1),logtalk(call(1),This))) :-
-		this(This),
+	throws(setof_3_32, error(type_error(callable,1),logtalk(call(1),_))) :-
 		Goal = 1,
 		setof(_, Goal, _).
 

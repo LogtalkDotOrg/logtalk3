@@ -22,52 +22,45 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2017-05-29,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ignore/1 built-in method.'
 	]).
 
 	% ignore/1 calls are expanded and thus the error term is for call/1
 
-	throws(ignore_1_01, error(instantiation_error,logtalk(call(_),This))) :-
-		this(This),
+	test(ignore_1_01, error(instantiation_error)) :-
 		ignore(_).
 
-	throws(ignore_1_02, error(type_error(callable,1),logtalk(call(1),This))) :-
-		this(This),
+	test(ignore_1_02, error(type_error(callable,1))) :-
 		Goal = 1,
 		ignore(Goal).
 
 	% it's not always possible to decompile the actual call
 
-	throws(ignore_1_03, error(existence_error(procedure,_),logtalk(call(p(_)),This))) :-
-		this(This),
+	test(ignore_1_03, error(existence_error(procedure,_))) :-
 		Goal = p(_),
 		ignore(Goal).
 
-	succeeds(ignore_1_04) :-
+	test(ignore_1_04, true) :-
 		ignore(true).
 
-	succeeds(ignore_1_05) :-
+	test(ignore_1_05, true) :-
 		ignore(fail).
 
 	% ignore/1 is opaque to cuts
 
-	succeeds(ignore_1_06) :-
-		findall(X, ((X = 1; X =2; X = 3), ignore(!)), L), 
-		L == [1, 2, 3].
+	test(ignore_1_06, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), ignore(!)), L).
 
-	succeeds(ignore_1_07) :-
-		findall(X, ((X = 1; X =2; X = 3), ignore((true,!))), L), 
-		L == [1, 2, 3].
+	test(ignore_1_07, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), ignore((true,!))), L).
 
-	succeeds(ignore_1_08) :-
-		findall(X, ((X = 1; X =2; X = 3), ignore((true;!))), L), 
-		L == [1, 2, 3].
+	test(ignore_1_08, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), ignore((true;!))), L).
 
-	succeeds(ignore_1_09) :-
-		findall(X, ((X = 1; X =2; X = 3), ignore((fail;!))), L), 
-		L == [1, 2, 3].
+	test(ignore_1_09, true(L == [1, 2, 3])) :-
+		findall(X, ((X = 1; X =2; X = 3), ignore((fail;!))), L).
 
 :- end_object.

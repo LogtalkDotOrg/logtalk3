@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2016-06-15,
+		date is 2020-10-20,
 		comment is 'Unit tests for the threaded_engine_next/2 built-in predicate.'
 	]).
 
@@ -35,13 +35,11 @@
 	]).
 
 	% engine name must be bound at runtime (but no error at compile time)
-	throws(threaded_engine_next_2_01, error(instantiation_error, logtalk(threaded_engine_next(_,_), This))) :-
-		this(This),
+	throws(threaded_engine_next_2_01, error(instantiation_error, logtalk(threaded_engine_next(_,_), _))) :-
 		threaded_engine_next(_, _).
 
 	% engine must exist
-	throws(threaded_engine_next_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_next(foo,_), This))) :-
-		this(This),
+	throws(threaded_engine_next_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_next(foo,_), _))) :-
 		threaded_engine_next(foo, _).
 
 	% create engine for the following tests
@@ -69,8 +67,7 @@
 		threaded_engine_next(test_engine_2, _).
 
 	% engine with a goal that throws an exception
-	throws(threaded_engine_next_2_08, error(error, logtalk(threaded_engine_next(_,_), This))) :-
-		this(This),
+	throws(threaded_engine_next_2_08, error(error, logtalk(threaded_engine_next(_,_), _))) :-
 		threaded_engine_create(_, throw(error), test_engine_3),
 		threaded_engine_next(test_engine_3, _).
 

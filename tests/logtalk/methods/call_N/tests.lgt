@@ -31,37 +31,30 @@
 		comment is 'Unit tests for the call/1-N built-in method.'
 	]).
 
-	throws(call_N_1, error(instantiation_error,logtalk(call(_),This))) :-
-		this(This),
+	throws(call_N_1, error(instantiation_error,logtalk(call(_),_))) :-
 		call(_).
 
-	throws(call_N_2, error(instantiation_error,logtalk(call(_,_),This))) :-
-		this(This),
+	throws(call_N_2, error(instantiation_error,logtalk(call(_,_),_))) :-
 		call(_, _).
 
-	throws(call_N_3, error(instantiation_error,logtalk(call(_,_,_),This))) :-
-		this(This),
+	throws(call_N_3, error(instantiation_error,logtalk(call(_,_,_),_))) :-
 		call(_, _, _).
 
-	throws(call_N_4, error(type_error(callable,1),logtalk(call(1),This))) :-
-		this(This),
+	throws(call_N_4, error(type_error(callable,1),logtalk(call(1),_))) :-
 		Goal = 1,
 		call(Goal).
 
-	throws(call_N_5, error(type_error(callable,1),logtalk(call(1,_),This))) :-
-		this(This),
+	throws(call_N_5, error(type_error(callable,1),logtalk(call(1,_),_))) :-
 		Closure = 1,
 		call(Closure, _).
 
-	throws(call_N_6, error(type_error(callable,1),logtalk(call(1,_,_),This))) :-
-		this(This),
+	throws(call_N_6, error(type_error(callable,1),logtalk(call(1,_,_),_))) :-
 		Closure = 1,
 		call(Closure, _, _).
 
 	% it's not always possible to decompile the actual call
 
-	throws(call_N_7, error(existence_error(procedure,_),logtalk(call(foo(_,_)),This))) :-
-		this(This),
+	throws(call_N_7, error(existence_error(procedure,_),logtalk(call(foo(_,_)),_))) :-
 		Goal = foo(_,_),
 		call(Goal).
 

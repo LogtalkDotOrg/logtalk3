@@ -196,6 +196,13 @@ the `quoted(true)` option for writing escape sequences.
 * IMPROVED: Tests for the `predicate_property/2`, `put_byte/2`, `put_char/2`,
 and `put_code/2` Prolog predicates.
 
+* IMPROVED: Tests for the `call/N`, `findall/3-4`, `ignore/1`, `once/1`, and
+`setof/3` Logtalk built-in methods.
+
+* IMPROVED: Tests for the `threaded_engine_create/3`, `threaded_engine_next/2`,
+`threaded_engine_next_reified/2`, and `threaded_engine_destroy/1` Logtalk
+built-in predicates.
+
 * FIXED: Deleted two repeated tests for the `abolish/1` standard Prolog
 predicate.
 
