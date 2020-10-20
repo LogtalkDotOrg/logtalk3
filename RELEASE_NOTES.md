@@ -135,6 +135,9 @@ compilers.
 
 * FIXED: The `lgtunit` tool messages for test outcome format errors.
 
+* FIXED: The testing automation report to also list tests failures caused by
+non-deterministic success.
+
 * FIXED: The `logtalk_tester` shell script spurious "clause coverage" text in
 case of a skipped or broken test set.
 
