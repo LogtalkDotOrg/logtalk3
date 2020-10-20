@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 8:8:0
-| **Date:** 2020-10-18
+| **Version:** 8:9:0
+| **Date:** 2020-10-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1762,13 +1762,15 @@ Internal flag used when running two or more test sets as a unified set.
 ``test/3``
 ^^^^^^^^^^
 
-Specifies a unit test.
+Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
 |    ``test(Identifier,Variables,Outcome)``
+| **Meta-predicate template:**
+|    ``test(*,*,*)``
 | **Mode and number of proofs:**
 |    ``test(?atom,?list(variable),?nonvar)`` - ``zero_or_more``
 

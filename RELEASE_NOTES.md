@@ -121,6 +121,9 @@ require the backend Prolog system to support repositioning of streams.
 
 * ADDED: LVM support to the `debugger`, `diagrams`, and `lgtunit` tools.
 
+* IMPROVED: The `lgtunit` tool handling of shared variables between a test and
+its options.
+
 * FIXED: Tool files to workaround embedding errors with GNU Prolog.
 
 * FIXED: The `ports_profiler` tool to avoid a spurious warning for a missing

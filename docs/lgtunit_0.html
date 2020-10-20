@@ -259,8 +259,8 @@
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 8:8:0</div>
-<div class="line"><strong>Date:</strong> 2020-10-18</div>
+<div class="line"><strong>Version:</strong> 8:9:0</div>
+<div class="line"><strong>Date:</strong> 2020-10-20</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1977,7 +1977,7 @@
 <div id="test/3"> </div></div>
 <div class="section" id="test-3">
 <span id="lgtunit-0-test-3"></span><span id="index-74"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">test/3</span></code></a><a class="headerlink" href="#test-3" title="Permalink to this headline">¶</a></h3>
-<p>Specifies a unit test.</p>
+<p>Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1988,6 +1988,10 @@
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">test(Identifier,Variables,Outcome)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">test(*,*,*)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">

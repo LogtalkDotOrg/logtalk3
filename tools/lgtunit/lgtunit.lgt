@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:8:0,
+		version is 8:9:0,
 		author is 'Paulo Moura',
-		date is 2020-10-18,
+		date is 2020-10-20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -570,9 +570,10 @@
 	]).
 
 	:- private(test/3).
+	:- meta_predicate(test(*, *, *)).  % just to slience warnings
 	:- mode(test(?atom, ?list(variable), ?nonvar), zero_or_more).
 	:- info(test/3, [
-		comment is 'Specifies a unit test.',
+		comment is 'Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.',
 		argnames is ['Identifier', 'Variables', 'Outcome']
 	]).
 
@@ -857,10 +858,10 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	% quick_check/3 dialect
-	run_test(quick_check(Test, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, _, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
 					(	var(Error) ->
 						passed_test(Test, File, Position, Note, Output)
 					;	true
@@ -873,8 +874,8 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	% quick_check/2 dialect
-	run_test(quick_check(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+	run_test(quick_check(Test, Variables, Position), File, Output) :-
+		(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
 			(	var(Error) ->
 				passed_test(Test, File, Position, Output)
 			;	true
@@ -882,16 +883,16 @@
 		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
 		).
 	% other dialects
-	run_test(succeeds(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
+	run_test(succeeds(Test, Variables, Position), File, Output) :-
+		(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
 			(	var(Error) ->
 				passed_test(Test, File, Position, Output)
 			;	true
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
 		).
-	run_test(deterministic(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
+	run_test(deterministic(Test, Variables, Position), File, Output) :-
+		(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
 			(	var(Error) ->
 				(	Deterministic == true ->
 					passed_test(Test, File, Position, Output)
@@ -901,16 +902,16 @@
 			)
 		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
 		).
-	run_test(fails(Test, Position), File, Output) :-
-		(	catch(::test(Test, _, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Output)) ->
+	run_test(fails(Test, Variables, Position), File, Output) :-
+		(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Output)) ->
 			(	var(Error) ->
 				failed_test(Test, File, Position, success_instead_of_failure, Output)
 			;	true
 			)
 		;	passed_test(Test, File, Position, Output)
 		).
-	run_test(throws(Test, PossibleErrors, Position), File, Output) :-
-		(	catch(::test(Test, _, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Output)) ->
+	run_test(throws(Test, Variables, PossibleErrors, Position), File, Output) :-
+		(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Output)) ->
 			(	var(Error) ->
 				failed_test(Test, File, Position, success_instead_of_error, Output)
 			;	true
@@ -1122,12 +1123,12 @@
 	% skipped tests
 	term_expansion((- Head), Expansion) :-
 		term_expansion((- Head :- true), Expansion).
-	term_expansion((- Head :- Goal), []) :-
+	term_expansion((- Head :- _), []) :-
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		(	Head = test(Test, _, Options) ->
-			parse_test_options(Options, Goal, Test, _, _, _, Note),
+			parse_test_options(Options, Test, _, _, _, Note),
 			assertz(test_(Test, skipped(Test, Position, Note)))
 		;	assertz(test_(Test, skipped(Test, Position)))
 		).
@@ -1138,8 +1139,8 @@
 		check_for_valid_test_outcome(Test, Outcome0),
 		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
-		term_variables(Options, Variables),
-		parse_test_options(Options, Goal0, Test, Condition, Setup, Cleanup, Note),
+		term_variables(Outcome0+Options, Variables),
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
 		;	Outcome = deterministic(_) ->
@@ -1151,71 +1152,74 @@
 		).
 
 	% unit test idiom test/2
-	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, [], Outcome) :- Goal)]) :-
+	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		check_for_valid_test_outcome(Test, Outcome0),
 		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
+		term_variables(Outcome0, Variables),
 		(	Outcome == true ->
-			assertz(test_(Test, succeeds(Test, Position)))
+			assertz(test_(Test, succeeds(Test, Variables, Position)))
 		;	Outcome = deterministic(_) ->
-			assertz(test_(Test, deterministic(Test, Position)))
+			assertz(test_(Test, deterministic(Test, Variables, Position)))
 		;	Outcome == fail ->
-			assertz(test_(Test, fails(Test, Position)))
+			assertz(test_(Test, fails(Test, Variables, Position)))
 		;	% errors
-			assertz(test_(Test, throws(Test, Outcome, Position)))
+			assertz(test_(Test, throws(Test, Variables, Outcome, Position)))
 		).
 
 	% unit test idiom test/1
 	term_expansion((test(Test)), [test(Test, [], true)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, [], Position))).
 	term_expansion((test(Test) :- Goal), [(test(Test, [], true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, [], Position))).
 
 	% unit test idiom succeeds/1 + deterministic/1 + fails/1 + throws/2
 	term_expansion((succeeds(Test)), [test(Test, [], true)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, [], Position))).
 	term_expansion((succeeds(Test) :- Goal), [(test(Test, [], true) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, succeeds(Test, Position))).
+		assertz(test_(Test, succeeds(Test, [], Position))).
 	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic(Deterministic)) :- lgtunit::deterministic(Head,Deterministic))]) :-
 		check_for_valid_test_identifier(Test),
 		compile_deterministic_test_aux_predicate(Test, Goal, Head),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, deterministic(Test, Position))).
+		assertz(test_(Test, deterministic(Test, [], Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, [], fail) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, fails(Test, Position))).
-	term_expansion((throws(Test, Balls) :- Goal), [(test(Test, [], Errors) :- Goal)]) :-
+		assertz(test_(Test, fails(Test, [], Position))).
+	term_expansion((throws(Test, Balls) :- Goal), [(test(Test, Variables, Errors) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		(	Balls = [_| _] ->
 			Errors = Balls
 		;	Errors = [Balls]
 		),
 		logtalk_load_context(term_position, Position),
-		assertz(test_(Test, throws(Test, Errors, Position))).
+		term_variables(Balls, Variables),
+		assertz(test_(Test, throws(Test, Variables, Errors, Position))).
 
 	% unit test idiom quick_check/3
-	term_expansion(quick_check(Test, Template, Options),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))]) :-
+	term_expansion(quick_check(Test, Template, Options),  [(test(Test, Variables, quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
+		term_variables(Options, Variables),
 		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions),
-		assertz(test_(Test, quick_check(Test, Position, Condition, Setup, Cleanup, Note))).
+		assertz(test_(Test, quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note))).
 
 	% unit test idiom quick_check/2
 	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		findall(Option, default_quick_check_option(Option), QuickCheckOptions),
-		assertz(test_(Test, quick_check(Test, Position))).
+		assertz(test_(Test, quick_check(Test, [], Position))).
 
 	% make target for automatically running the tests
 	term_expansion(make(Target), [make(Target), (:- initialization({assertz((logtalk_make_target_action(Target) :- Tests::run))}))]) :-
@@ -1232,23 +1236,23 @@
 	% debugging failed unit tests
 	directive_expansion(
 			object(Test, Relation),
-			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2),
-			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2, Relation3),
-			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2, Relation3, Relation4),
-			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2, Relation3, Relation4, Relation5),
-			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow))]) :-
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
 		reset_compilation_counters.
 
 	% the discontiguous/1 directives usually required when using some of the
@@ -1369,7 +1373,12 @@
 		;	true
 		).
 
-	parse_test_options([], TestGoal, _, Condition, Setup, Cleanup, Note) :-
+	parse_test_options(Options, Test, Condition, Setup, Cleanup, Note) :-
+		% notes can be variables (e.g. a parameter variable or a variable shared with the
+		% test clause body);  use a boolean flag to track the presence of a note/1 option
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note, _NoteFlag).
+
+	parse_test_options([], _, Condition, Setup, Cleanup, Note, NoteFlag) :-
 		(	var(Condition) ->
 			% no condition/1 option found
 			Condition = true
@@ -1385,16 +1394,12 @@
 			Cleanup = true
 		;	true
 		),
-		(	nonvar(Note) ->
-			true
-		;	term_variables(TestGoal, Variables),
-			member_var(Note, Variables) ->
-			% assume note/1 argument instantiated by the test goal
+		(	NoteFlag == true ->
 			true
 		;	% no note/1 option found
 			Note = ''
 		).
-	parse_test_options([Option| Options], TestGoal, Test, Condition, Setup, Cleanup, Note) :-
+	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Note, NoteFlag) :-
 		(	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '__condition', Goal, Condition)
 		;	Option = setup(Goal) ->
@@ -1402,11 +1407,11 @@
 		;	Option = cleanup(Goal) ->
 			compile_test_step_aux_predicate(Test, '__cleanup', Goal, Cleanup)
 		;	Option = note(Note) ->
-			true
+			NoteFlag = true
 		;	% ignore non-recognized options
 			true
 		),
-		parse_test_options(Options, TestGoal, Test, Condition, Setup, Cleanup, Note).
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note, NoteFlag).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, Head) :-
 		test_name_to_atom_prefix(Test, Prefix),
@@ -1435,7 +1440,7 @@
 		atom_concat(Prefix2, CounterAtom, Prefix).
 
 	parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions) :-
-		parse_test_options(Options, true, Test, Condition, Setup, Cleanup, Note),
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
 	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose)| Other]) :-
