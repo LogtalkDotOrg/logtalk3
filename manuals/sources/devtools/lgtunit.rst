@@ -1335,8 +1335,8 @@ Known issues
 
 Parameter variables (``_VariableName_``) cannot currently be used in the
 definition of test options (e.g. ``condition/1``) when using the
-``test/3`` dialect. Use in alternative the ``pgr/2`` built-in execution
-context predicate.
+``test/3`` dialect. Use in alternative the ``parameter/2`` built-in
+execution context predicate.
 
 Deterministic unit tests are currently not available when using Lean
 Prolog or Quintus Prolog as these backend compilers lack required
