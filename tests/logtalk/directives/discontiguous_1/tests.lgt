@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2014-11-16,
+		date is 2020-10-20,
 		comment is 'Unit tests for the discontiguous/1 built-in directive.'
 	]).
 
@@ -60,15 +60,15 @@
 
 	test(discontiguous_1_1) :-
 		findall(X, a(X), L),
-		L = [1, 2].
+		L == [1, 2].
 
 	test(discontiguous_1_2) :-
 		findall(X, b(X), L),
-		L = [1, 2].
+		L == [1, 2].
 
 	test(discontiguous_1_3) :-
 		findall(X, c(X), L),
-		L = [1, 2].
+		L == [1, 2].
 
 	test(discontiguous_1_4) :-
 		\+ f(_, _, _, _, _).

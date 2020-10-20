@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2019-02-20,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "roles" example.'
 	]).
 
@@ -57,7 +57,7 @@
 
 	test(roles_08) :-
 		instance::bar(X, Y),
-		X == 1, Y = 2.
+		X == 1, Y == 2.
 
 	test(roles_09) :-
 		empty_instance::foo(Foo),

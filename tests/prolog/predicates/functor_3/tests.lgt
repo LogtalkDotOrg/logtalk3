@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2018-01-28,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
 	]).
 
@@ -44,7 +44,7 @@
 
 	succeeds(iso_functor_3_03) :-
 		{functor(X, foo, 3)},
-		X = foo(_A,_B,_C).
+		^^variant(X, foo(_A,_B,_C)).
 
 	succeeds(iso_functor_3_04) :-
 		{functor(X, foo, 0)},
@@ -62,7 +62,7 @@
 
 	succeeds(iso_functor_3_08) :-
 		{functor(1, X, Y)},
-		X == 1,Y == 0.
+		X == 1, Y == 0.
 
 	succeeds(iso_functor_3_09) :-
 		{functor(X, 1.1, 0)},

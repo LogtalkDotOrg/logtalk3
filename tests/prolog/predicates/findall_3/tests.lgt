@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -36,7 +36,7 @@
 
 	succeeds(iso_findall_3_02) :-
 		{findall(X+_Y, (X=1), S)},
-		S = [1+_].
+		^^variant(S, [1+_]).
 
 	succeeds(iso_findall_3_03) :-
 		{findall(_X, fail, L)},

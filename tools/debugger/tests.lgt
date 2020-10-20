@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:3:1,
 		author is 'Paulo Moura',
-		date is 2018-02-18,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -63,7 +63,7 @@
 		debug,
 		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
-		spying(Sender, This, _, _), Sender == user, This = logtalk.
+		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	test(debugger_nodebug_0_01, deterministic) :-
 		nodebug.
@@ -77,7 +77,7 @@
 		nodebug,
 		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
-		spying(Sender, This, _, _), Sender == user, This = logtalk.
+		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	% debugging/0 must be deterministic when there are no spy points to report
 	test(debugger_debugging_0_01, deterministic) :-
@@ -112,7 +112,7 @@
 		trace,
 		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
-		spying(Sender, This, _, _), Sender == user, This = logtalk.
+		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	test(debugger_notrace_0_01, deterministic) :-
 		notrace.
@@ -126,7 +126,7 @@
 		notrace,
 		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
-		spying(Sender, This, _, _), Sender == user, This = logtalk.
+		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	test(debugger_nospyall_0_01, deterministic) :-
 		nospyall.

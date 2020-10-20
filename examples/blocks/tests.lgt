@@ -30,9 +30,9 @@
 	:- set_logtalk_flag(events, allow).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2018-04-04,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "blocks" example.'
 	]).
 
@@ -47,7 +47,7 @@
 		block_stack::add_tuple(a-b),
 		block_stack::tuples(Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [a-b, b-c, c-d].
+		TuplesSorted == [a-b, b-c, c-d].
 
 	test(blocks_2) :-
 		d::move(9, 1),
@@ -64,7 +64,7 @@
 	test(blocks_3) :-
 		block_stack::tuples(Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [a-b, b-c, c-d].
+		TuplesSorted == [a-b, b-c, c-d].
 
 	test(blocks_4) :-
 		b::move(3, 1),
@@ -81,7 +81,7 @@
 	test(blocks_5) :-
 		block_stack::tuples(Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [a-b, c-d].
+		TuplesSorted == [a-b, c-d].
 
 	test(blocks_6) :-
 		block_stack::add_tuple(d-a),
@@ -98,7 +98,7 @@
 	test(blocks_7) :-
 		block_stack::tuples(Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [a-b, c-d, d-a].
+		TuplesSorted == [a-b, c-d, d-a].
 
 	test(blocks_8) :-
 		b::move(5, 1),
@@ -115,6 +115,6 @@
 	test(blocks_9) :-
 		block_stack::tuples(Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [a-b, c-d, d-a].
+		TuplesSorted == [a-b, c-d, d-a].
 
 :- end_object.

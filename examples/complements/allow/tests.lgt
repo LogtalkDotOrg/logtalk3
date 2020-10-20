@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2019-12-11,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "complements/allow" example.'
 	]).
 
@@ -53,7 +53,7 @@
 		^^suppress_text_output,
 		employee::predicates(Predicates),
 		list::msort(Predicates, PredicatesSorted),
-		PredicatesSorted = [after/3, age/1, before/3, income/1, name/1, predicates/1, salary/1].
+		PredicatesSorted == [after/3, age/1, before/3, income/1, name/1, predicates/1, salary/1].
 
 	test(complements_allow_06) :-
 		findall(Property, employee::predicate_property(predicates(_), Property), AllProperties),

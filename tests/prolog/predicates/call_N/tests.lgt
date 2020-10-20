@@ -30,9 +30,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2018-01-26,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -55,7 +55,7 @@ call_n_maplist(Cont, [E|Es]) :-
 
 	succeeds(iso_call_N_04) :-
 		findall(X-Y, {call(;, X=1, Y=2)}, L),
-		L = [1-_,_-2].
+		^^variant(L, [1-_, _-2]).
 
 	fails(iso_call_N_05) :-
 		{call(;, (true->fail), _X=1)}.

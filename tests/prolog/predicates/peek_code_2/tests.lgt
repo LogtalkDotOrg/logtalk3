@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:9:1,
 		author is 'Paulo Moura',
-		date is 2020-10-18,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -118,7 +118,7 @@
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
-		catch({peek_code(Stream, _)}, Error, Error = error(representation_error(character),_)).
+		catch({peek_code(Stream, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).
 
 	% tests from the Logtalk portability work
 

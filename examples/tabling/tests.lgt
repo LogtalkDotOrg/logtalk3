@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:23:0,
+		version is 1:23:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2017-06-18,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "tabling" example.'
 	]).
 
@@ -50,7 +50,7 @@
 
 	test(tabling_1) :-
 		setof(Y, paths::path(1, Y), Ys),
-		Ys = [2, 3, 4, 5].
+		Ys == [2, 3, 4, 5].
 
 	test(tabling_2) :-
 		fibonacci::fib(30, F),

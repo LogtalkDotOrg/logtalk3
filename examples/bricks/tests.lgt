@@ -25,9 +25,9 @@
 	:- set_logtalk_flag(events, allow).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "bricks" example.'
 	]).
 
@@ -42,7 +42,7 @@
 		brick_stack::add_tuple([a,b]),
 		findall(Tuple, brick_stack::tuple(Tuple), Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [[a,b], [b,c], [c,d]].
+		TuplesSorted == [[a,b], [b,c], [c,d]].
 
 	test(bricks_2) :-
 		d::move(9, 1),
@@ -59,7 +59,7 @@
 	test(bricks_3) :-
 		findall(Tuple, brick_stack::tuple(Tuple), Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [[a,b], [b,c], [c,d]].
+		TuplesSorted == [[a,b], [b,c], [c,d]].
 
 	test(bricks_4) :-
 		b::move(3, 1),
@@ -76,7 +76,7 @@
 	test(bricks_5) :-
 		findall(Tuple, brick_stack::tuple(Tuple), Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [[a,b], [c,d]].
+		TuplesSorted == [[a,b], [c,d]].
 
 	test(bricks_6) :-
 		brick_stack::add_tuple([d, a]),
@@ -93,7 +93,7 @@
 	test(bricks_7) :-
 		findall(Tuple, brick_stack::tuple(Tuple), Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [[a,b], [c,d], [d,a]].
+		TuplesSorted == [[a,b], [c,d], [d,a]].
 
 	test(bricks_8) :-
 		b::move(5, 1),
@@ -110,6 +110,6 @@
 	test(bricks_9) :-
 		findall(Tuple, brick_stack::tuple(Tuple), Tuples),
 		list::msort(Tuples, TuplesSorted),
-		TuplesSorted = [[a,b], [c,d], [d,a]].
+		TuplesSorted == [[a,b], [c,d], [d,a]].
 
 :- end_object.

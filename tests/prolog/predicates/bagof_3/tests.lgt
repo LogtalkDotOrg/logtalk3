@@ -41,9 +41,9 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:2,
+		version is 1:2:3,
 		author is 'Paulo Moura',
-		date is 2020-09-29,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -86,13 +86,13 @@ c(3, c, 'C').
 		variant(S, [1, _, 2]).
 
 	succeeds(iso_bagof_3_09) :-
-		{(	catch(1^true, _, fail) ->
-			findall(S-Y, bagof(X,(Y^(X=1;Y=1);X=3),S), L),
-			L = [[1,3]-_,[_]-1]
-		;	set_prolog_flag(unknown, fail),
-			bagof(X,(Y^(X=1;Y=1);X=3),S),
+		(	{catch(1^true, _, fail)} ->
+			findall(S-Y, {bagof(X,(Y^(X=1;Y=1);X=3),S)}, L),
+			variant(L, [[1,3]-_,[_]-1])
+		;	{set_prolog_flag(unknown, fail)},
+			{bagof(X,(Y^(X=1;Y=1);X=3),S)},
 			S == [3]
-		)}.
+		).
 
 	succeeds(iso_bagof_3_10) :-
 		findall(S-Y, {bagof(X,(X=Y;X=_Z;Y=1),S)}, LL),

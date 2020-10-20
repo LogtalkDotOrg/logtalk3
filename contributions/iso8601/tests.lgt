@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura and Daniel L. Dudley',
-		date is 2016-03-12,
+		date is 2020-10-20,
 		comment is 'Unit tests for the iso8601 library.'
 	]).
 
@@ -75,7 +75,7 @@
 	test(iso8601_date_4_08) :-
 		% This is the correct date!
 		date(2415080, Y, M, D),
-		Y = 1900, M = 3, D = 1.
+		Y == 1900, M == 3, D == 1.
 
 	% date/5 tests
 

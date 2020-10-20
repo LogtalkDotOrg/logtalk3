@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-12-14,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "expansion" example.'
 	]).
 
@@ -34,7 +34,7 @@
 
 	test(expansion_02) :-
 		exp_public::expand_goal(write(Term), EGoal),
-		EGoal = write_term(Term, [quoted(true)]).
+		EGoal == write_term(Term, [quoted(true)]).
 
 	test(expansion_03) :-
 		exp_protected::expand_term(8, Term),
@@ -42,7 +42,7 @@
 
 	test(expansion_04) :-
 		exp_protected::expand_goal(write(Term), EGoal),
-		EGoal = write(Term).
+		EGoal == write(Term).
 
 	test(expansion_05) :-
 		exp_private::expand_term(8, Term),
@@ -50,7 +50,7 @@
 
 	test(expansion_06) :-
 		exp_private::expand_goal(write(Term), EGoal),
-		EGoal = write(Term).
+		EGoal == write(Term).
 
 	test(expansion_07) :-
 		desc_public::test_term_expansion(8, Term),
@@ -58,7 +58,7 @@
 
 	test(expansion_08) :-
 		desc_public::test_goal_expansion(write(Term), EGoal),
-		EGoal = write_term(Term, [quoted(true)]).
+		EGoal == write_term(Term, [quoted(true)]).
 
 	test(expansion_09) :-
 		desc_protected::test_term_expansion(8, Term),
@@ -66,7 +66,7 @@
 
 	test(expansion_10) :-
 		desc_protected::test_goal_expansion(write(Term), EGoal),
-		EGoal = write_term(Term, [quoted(true)]).
+		EGoal == write_term(Term, [quoted(true)]).
 
 	test(expansion_11) :-
 		desc_private::test_term_expansion(8, Term),
@@ -74,7 +74,7 @@
 
 	test(expansion_12) :-
 		desc_private::test_goal_expansion(write(Term), EGoal),
-		EGoal = write(Term).
+		EGoal == write(Term).
 
 	test(expansion_13) :-
 		cooked << (aa, bb, cc).
@@ -86,12 +86,12 @@
 		cooked << p.
 
 	test(expansion_16) :-
-		piped<<a(key-value).
+		piped << a(key-value).
 
 	test(expansion_17) :-
-		piped<<b(key-value).
+		piped << b(key-value).
 
 	test(expansion_18) :-
-		piped<<c(key-value).
+		piped << c(key-value).
 
 :- end_object.

@@ -42,9 +42,9 @@ foo(X) :- call(X), call(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'
 	]).
 
@@ -66,7 +66,7 @@ foo(X) :- call(X), call(X).
 
 	succeeds(iso_retract_1_04) :-
 		findall(X-Y-Z, {retract((legs(X,Y) :- Z))}, L),
-		L = [_-4-animal(X), _-6-insect(X), spider-8-true].
+		^^variant(L, [A-4-animal(A), B-6-insect(B), spider-8-true]).
 
 	fails(iso_retract_1_05) :-
 		{retract((legs(_X,_Y) :- _Z))}.

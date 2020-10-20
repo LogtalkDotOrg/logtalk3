@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2019-01-20,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "zippers" library.'
 	]).
 
@@ -142,7 +142,7 @@
 		zlist::insert_before(Zipper0, 0, Zipper1),
 		zlist::previous(Zipper1, Zipper2),
 		zlist::current(Zipper2, Current),
-		Current = 0.
+		Current == 0.
 
 	test(zlist_insert_after_3_01) :-
 		zlist::zip([1,3,5,7,9], Zipper0),
@@ -155,24 +155,24 @@
 		zlist::zip([1,2,3,4,5], Zipper0),
 		zlist::replace(Zipper0, 0, Zipper1),
 		zlist::current(Zipper1, Current),
-		Current = 0.
+		Current == 0.
 
 	test(zlist_delete_and_previous_2_01) :-
 		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),
 		zlist::delete_and_previous(Zipper0, Zipper1),
 		zlist::current(Zipper1, Current),
-		Current = 2.
+		Current == 2.
 
 	test(zlist_delete_and_next_2_01) :-
 		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),
 		zlist::delete_and_next(Zipper0, Zipper1),
 		zlist::current(Zipper1, Current),
-		Current = 4.
+		Current == 4.
 
 	test(zlist_delete_and_unzip_2_01) :-
 		zlist::zip_at_index(3, [1,2,3,4,5], Zipper, _),
 		zlist::delete_and_unzip(Zipper, List),
-		List = [1,2,4,5].
+		List == [1,2,4,5].
 
 	test(zlist_delete_all_before_2_01) :-
 		zlist::zip_at_index(3, [1,2,3,4,5], Zipper0, _),

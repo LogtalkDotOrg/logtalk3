@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2016-06-18,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "emetas" example.'
 	]).
 
@@ -46,7 +46,7 @@
 
 	test(emetas_5) :-
 		emetas::find_at_most(3, X, c(X), Xs),
-		Xs = [1, 2].
+		Xs == [1, 2].
 
 	% auxiliary predicates
 

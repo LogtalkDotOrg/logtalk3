@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "lo/travellers" example.'
 	]).
 
@@ -42,6 +42,6 @@
 
 	test(lo_travellers_4) :-
 		permute::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route),
-		Route = (aberystwyth-exeter-portsmouth-brighton-london-oxford,_).
+		subsumes_term((aberystwyth-exeter-portsmouth-brighton-london-oxford,_), Route).
 
 :- end_object.
