@@ -26,14 +26,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2020-10-20,
 		comment is 'Unit tests for the findall/4 built-in method.'
-	]).
-
-	:- uses(lgtunit, [
-		variant/2
 	]).
 
 	test(findall_4_01, true(L == [1, 2, 3, 4])) :-
@@ -42,7 +38,7 @@
 	test(findall_4_02, true(L == [1, 2, 3, 4, 5, 6, 7])) :-
 		findall(X, a(X, _), L, [5, 6, 7]).
 
-	test(findall_4_03, true(variant(LL, [_-[1,2,3,4,5,6,7]]))) :-
+	test(findall_4_03, variant(LL, [_-[1,2,3,4,5,6,7]])) :-
 		findall(Y-L, findall(X, a(X, Y), L, [5, 6, 7]), LL).
 
 	test(findall_4_04, true(L == [5, 6, 7])) :-

@@ -117,6 +117,9 @@ timeout option.
 * CHANGED: The `lgtunit` tool `stream_position/1` utility predicate to not
 require the backend Prolog system to support repositioning of streams.
 
+* ADDED: Support for a `variant/2` outcome for `test/2-3` test dialects to the
+`lgtunit` tool.
+
 * ADDED: LVM support to the `logtalk_doclet` and `logtalk_tester` scripts.
 
 * ADDED: LVM support to the `debugger`, `diagrams`, and `lgtunit` tools.

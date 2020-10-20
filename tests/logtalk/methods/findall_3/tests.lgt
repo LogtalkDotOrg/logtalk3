@@ -26,20 +26,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2020-10-20,
 		comment is 'Unit tests for the findall/3 built-in method.'
 	]).
 
-	:- uses(lgtunit, [
-		variant/2
-	]).
-
 	test(findall_3_01, true(L == [1, 2, 3, 4])) :-
 		findall(X, a(X, _), L).
 
-	test(findall_3_02, true(variant(LL, [_-[1,2,3,4]]))) :-
+	test(findall_3_02, variant(LL, [_-[1,2,3,4]])) :-
 		findall(Y-L, findall(X, a(X, Y), L), LL).
 
 	% the following tests are taken from the ISO Prolog Core standard
@@ -47,7 +43,7 @@
 	test(findall_3_03, true(L == [1, 2])) :-
 		findall(X, (X=1; X=2), L).
 
-	test(findall_3_04, true(variant(L, [1+_]))) :-
+	test(findall_3_04, variant(L, [1+_])) :-
 		findall(X+_Y, (X=1), L).
 
 	test(findall_3_05, true(L == [])) :-

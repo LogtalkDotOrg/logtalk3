@@ -251,6 +251,9 @@ The possible values of the outcome argument are:
 - `subsumes(Expected, Result)`  
 	the test is expected to succeed binding `Result` to a term that is subsumed by the `Expected` term
 
+- `variant(Term1, Term2)`  
+	the test is expected to succeed binding `Term1` to a term that is a variant of the `Term2` term
+
 - `fail`  
 	the test is expected to fail
 

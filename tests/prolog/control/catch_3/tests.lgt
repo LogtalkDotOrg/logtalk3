@@ -45,9 +45,9 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2020-10-20,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -75,15 +75,15 @@ p :-
 	test(iso_catch_3_07, true(C == c)) :-
 		{catch(g, C, write(h1)), nl}.
 
-	test(iso_catch_3_08, true(subsumes_term(error(instantiation_error,_), Y))) :-
+	test(iso_catch_3_08, subsumes(error(instantiation_error,_), Y)) :-
 		{catch(coo(_X), Y, true)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_catch_3_09, true(subsumes_term(error(instantiation_error,_), Y))) :-
+	test(lgt_catch_3_09, subsumes(error(instantiation_error,_), Y)) :-
 		{catch(_, Y, true)}.
 
-	test(lgt_catch_3_10, true(subsumes_term(error(type_error(callable,1),_), Y))) :-
+	test(lgt_catch_3_10, subsumes(error(type_error(callable,1),_), Y)) :-
 		{catch(1, Y, true)}.
 
 	test(lgt_catch_3_11, fail) :-

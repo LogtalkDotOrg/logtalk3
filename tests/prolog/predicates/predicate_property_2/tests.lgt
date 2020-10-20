@@ -33,9 +33,9 @@ elk(X) :- moose(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2020-10-20,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 
@@ -58,10 +58,10 @@ elk(X) :- moose(X).
 	test(commons_predicate_property_2_03, true) :-
 		{predicate_property(atom_codes(_,_), built_in)}.
 
-	test(commons_predicate_property_2_04, true(subsumes_term(findall(_,0,_),Template))) :-
+	test(commons_predicate_property_2_04, subsumes(findall(_,0,_),Template)) :-
 		{predicate_property(findall(_,_,_), meta_predicate(Template))}.
 
-	test(commons_predicate_property_2_05, true(subsumes_term(call(2,_,_),Template))) :-
+	test(commons_predicate_property_2_05, subsumes(call(2,_,_),Template)) :-
 		{predicate_property(call(_,_,_), meta_predicate(Template))}.
 
 	test(commons_predicate_property_2_06, true) :-

@@ -37,14 +37,10 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-05-04,
+		date is 2020-10-20,
 		comment is 'Unit tests for the "hook_objects" library.'
-	]).
-
-	:- uses(lgtunit, [
-		variant/2
 	]).
 
 	% tests for the identity_hook object | term_expansion/2
@@ -152,10 +148,10 @@ goal_expansion(X = 1, X = 2).
 
 	% tests for the grammar_rules_hook/1 object | term_expansion/2
 
-	test(grammar_rules_hook_01, true(variant(Clause, a(A,A)))) :-
+	test(grammar_rules_hook_01, variant(Clause, a(A,A))) :-
 		grammar_rules_hook::term_expansion((a --> []), Clause).
 
-	test(grammar_rules_hook_02, true(variant(Clause, ((a([b|T],C) :- c(T,C)))))) :-
+	test(grammar_rules_hook_02, variant(Clause, ((a([b|T],C) :- c(T,C))))) :-
 		grammar_rules_hook::term_expansion((a --> [b],c), Clause).
 
 	% tests for the write_to_stream_hook/2 object | term_expansion/2

@@ -22,14 +22,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
 		date is 2020-10-20,
 		comment is 'Unit tests for the once/1 built-in method.'
-	]).
-
-	:- uses(lgtunit, [
-		variant/2
 	]).
 
 	% once/1 calls are expanded and thus the error term is for call/1
@@ -56,7 +52,7 @@
 	test(once_1_06, true(Xs == [1, 0])) :-
 		findall(X, (once(a(X)); X = 0), Xs).
 
-	test(once_1_07, true(variant(Xs, [_, 1, 2, 3]))) :-
+	test(once_1_07, variant(Xs, [_, 1, 2, 3])) :-
 		findall(X, (once(!); a(X)), Xs).
 
 	test(once_1_08, true(Xs == [1, 2, 3])) :-
