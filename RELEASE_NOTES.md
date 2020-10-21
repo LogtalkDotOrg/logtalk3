@@ -147,6 +147,8 @@ Examples
 * FIXED: Compatibility of the `benchmarks`, `dcgs`, `module_aliases`, and
 `symbiosis` examples with Tau Prolog.
 
+* FIXED: Compatibility of the `poem` example with LVM.
+
 * FIXED: Modify the `books` example to avoid a test failure when using
 GNU Prolog as the backend compiler due to an issue with a float computation.
 
