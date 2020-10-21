@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2016-10-10,
+		date is 2020-10-21,
 		comment is 'Unit tests for the PDDL 3.0 parsers.'
 	]).
 
@@ -53,17 +53,10 @@
 		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/scanalyzer-strips/', Directory),
 		test_collection(Directory).
 
-	:- if(current_prolog_flag(max_arity, 255)).
-		:- initialization((
-			write('WARNING: The "sokoban" unit tests cannot run with this backend Prolog'), nl,
-			write('         compiler due to a limitation on the maximum arity of terms.'), nl
-		)).
-	:- else.
-		test(sokoban) :-
-			logtalk::expand_library_path(pddl_parser, Base),
-			atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/sokoban-strips/', Directory),
-			test_collection(Directory).
-	:- endif.
+	test(sokoban, true, [condition((current_prolog_flag(max_arity, MaxArity), (MaxArity == unbounded; MaxArity >= 2048)))]) :-
+		logtalk::expand_library_path(pddl_parser, Base),
+		atom_concat(Base, 'ipc2008-no-cybersec/seq-opt/sokoban-strips/', Directory),
+		test_collection(Directory).
 
 	test(transport) :-
 		logtalk::expand_library_path(pddl_parser, Base),

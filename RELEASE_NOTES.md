@@ -162,6 +162,10 @@ Contributions
 * FIXED: Set the `double_quotes` flag to `codes` unconditionally in the
 `xml_parser` loader file.
 
+* FIXED: Skip condition for the `pddl_parser` test `sokoban`, which requires
+a backend Prolog compiler with either unbound term arity or a maximum arity
+of at least 2048.
+
 Ports
 -----
 
