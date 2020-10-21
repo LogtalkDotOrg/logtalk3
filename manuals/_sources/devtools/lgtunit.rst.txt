@@ -292,10 +292,12 @@ The possible values of the outcome argument are:
 
 In the case of the ``true(Assertion)`` and ``deterministic(Assertion)``
 outcomes, a message that includes the assertion goal is printed for
-assertion failures and errors to help to debug failed unit tests. Note
-that this message is only printed when the test goal succeeds as its
-failure will prevent the assertion goal from being called. This allows
-distinguishing between test goal failure and assertion failure.
+assertion failures and errors to help to debug failed unit tests. Same
+for the ``subsumes(Expected, Result)`` and ``variant(Term1, Term2)``
+assertions. Note that this message is only printed when the test goal
+succeeds as its failure will prevent the assertion goal from being
+called. This allows distinguishing between test goal failure and
+assertion failure.
 
 Some tests may require individual condition, setup, or cleanup goals. In
 this case, the following alternative test dialect can be used:

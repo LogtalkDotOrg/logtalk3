@@ -511,10 +511,12 @@ where <code class="docutils literal notranslate"><span class="pre">Error</span><
 </ul>
 <p>In the case of the <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>
 outcomes, a message that includes the assertion goal is printed for
-assertion failures and errors to help to debug failed unit tests. Note
-that this message is only printed when the test goal succeeds as its
-failure will prevent the assertion goal from being called. This allows
-distinguishing between test goal failure and assertion failure.</p>
+assertion failures and errors to help to debug failed unit tests. Same
+for the <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code> and <code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code>
+assertions. Note that this message is only printed when the test goal
+succeeds as its failure will prevent the assertion goal from being
+called. This allows distinguishing between test goal failure and
+assertion failure.</p>
 <p>Some tests may require individual condition, setup, or cleanup goals. In
 this case, the following alternative test dialect can be used:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>, <span class="nv">Outcome</span>, <span class="nv">Options</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
