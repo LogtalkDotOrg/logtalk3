@@ -141,6 +141,8 @@ non-deterministic success.
 * FIXED: The `logtalk_tester` shell script spurious "clause coverage" text in
 case of a skipped or broken test set.
 
+* FIXED: Cleanup step for the `lgtdoc` tool tests.
+
 Examples
 --------
 
