@@ -45,9 +45,9 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-10-22,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -73,6 +73,7 @@ p :-
 		{catch(number_chars(_X,['1',a,'0']), error(syntax_error(_),_), fail)}.
 
 	test(iso_catch_3_07, true(C == c)) :-
+		^^suppress_text_output,
 		{catch(g, C, write(h1)), nl}.
 
 	test(iso_catch_3_08, subsumes(error(instantiation_error,_), Y)) :-
