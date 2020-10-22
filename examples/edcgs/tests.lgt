@@ -27,9 +27,9 @@ SOFTWARE.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Michael Hendricks; adapted to Logtalk by Paulo Moura.',
-		date is 2020-03-31,
+		date is 2020-10-22,
 		comment is 'Unit tests for the "edcgs" example.'
 	]).
 
@@ -39,46 +39,40 @@ SOFTWARE.
 	cover(synopsis).
 	cover(unique).
 
-	test(list_constructors_flist_1) :-
-		list_constructors::flist(7, [], L),
-		L == [1, 2, 3, 4, 5, 6, 7].
+	test(list_constructors_flist_1, true(L == [1, 2, 3, 4, 5, 6, 7])) :-
+		list_constructors::flist(7, [], L).
 
-	test(list_constructors_rlist_1) :-
-		list_constructors::rlist(7, L, []),
-		L == [7, 6, 5, 4, 3, 2, 1].
+	test(list_constructors_rlist_1, true(L == [7, 6, 5, 4, 3, 2, 1])) :-
+		list_constructors::rlist(7, L, []).
 
-	test(list_sums_sum_first_n_1) :-
-		list_sums::sum_first_n(0, 0, Sum),
-		Sum == 0.
+	test(list_sums_sum_first_n_1, true(Sum == 0)) :-
+		list_sums::sum_first_n(0, 0, Sum).
 
-	test(list_sums_sum_first_n_2) :-
-		list_sums::sum_first_n(4, 0, Sum),
-		Sum == 10.
+	test(list_sums_sum_first_n_2, true(Sum == 10)) :-
+		list_sums::sum_first_n(4, 0, Sum).
 
-	test(list_sums_sum_first_n_3) :-
-		list_sums::sum([2,2,3], Sum),
-		Sum == 7.
+	test(list_sums_sum_1, true(Sum == 7)) :-
+		list_sums::sum([2,2,3], Sum).
 
-	test(synopsis_1) :-
+	test(synopsis_1, true) :-
 		synopsis::len([], 0).
 
-	test(synopsis_2) :-
+	test(synopsis_2, true) :-
 		synopsis::len([a], 1).
 
-	test(synopsis_3) :-
+	test(synopsis_3, true) :-
 		synopsis::len([a,b,a], 3).
 
-	test(unique_1) :-
+	test(unique_1, true) :-
 		unique::unique([],[]).
 
-	test(unique_2) :-
+	test(unique_2, true) :-
 		unique::unique([a],[a]).
 
-	test(unique_3) :-
+	test(unique_3, true) :-
 		unique::unique([a,b,a],[a,b]).
 
-	test(gemini_1) :-
-		gemini::p(1, S0, S, _),
-		S0 == S.
+	test(gemini_1, true(S0 == S)) :-
+		gemini::p(1, S0, S, _).
 
 :- end_object.
