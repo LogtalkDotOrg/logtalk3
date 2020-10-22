@@ -21,7 +21,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	set_logtalk_flag(optimize, on),
-	logtalk_load(lgtunit(loader)),
+	logtalk_load(loader),
 	logtalk_load([
 		tests_parametric,
 		tests_dialects,
