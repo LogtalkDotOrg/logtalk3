@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-11-24,
+		date is 2020-10-24,
 		comment is 'Unit tests for the ISO Prolog standard arithmetic comparison built-in predicates.'
 	]).
 
@@ -118,8 +118,41 @@
 		variable(X),
 		{'=<'(X, 5)}.
 
-	% auxiliary predicate used to delay errors to runtime
+	% tests from the Logtalk portability work
+
+	throws(lgt_arithmetic_comparison_25, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(X),
+		{'=:='(X, 5)}.
+
+	throws(lgt_arithmetic_comparison_26, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(X),
+		{=\=(X, 5)}.
+
+	throws(lgt_arithmetic_comparison_27, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(X),
+		{'<'(X, 5)}.
+
+	throws(lgt_arithmetic_comparison_28, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(X),
+		{'>'(X, 5)}.
+
+	throws(lgt_arithmetic_comparison_29, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(X),
+		{'>='(X, 5)}.
+
+	throws(lgt_arithmetic_comparison_30, error(type_error(evaluable,foo/1),_)) :-
+		% try to delay the error to runtime
+		foo(X),
+		{'=<'(X, 5)}.
+
+	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
+	foo(foo(1)).
 
 :- end_object.
