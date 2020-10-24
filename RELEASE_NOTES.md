@@ -120,6 +120,9 @@ require the backend Prolog system to support repositioning of streams.
 * ADDED: Support for a `variant/2` outcome for `test/2-3` test dialects to the
 `lgtunit` tool.
 
+* ADDED: Option `-w` to the `logtalk_tester` shell script to wipe default
+scratch directories (`./.lgt_tmp` and `./lgt_tmp`) before running a test set.
+
 * ADDED: LVM support to the `logtalk_doclet` and `logtalk_tester` scripts.
 
 * ADDED: LVM support to the `debugger`, `diagrams`, and `lgtunit` tools.

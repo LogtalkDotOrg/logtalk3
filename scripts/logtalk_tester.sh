@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 17, 2020
+##   Last updated on October 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.7"
+	echo "$(basename "$0") 2.8"
 	exit 0
 }
 
@@ -67,6 +67,7 @@ format='default'
 coverage='none'
 flag_goal="true"
 initialization_goal="true"
+wipe='false'
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
@@ -91,6 +92,10 @@ run_testset() {
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
 	cd "$unit" || exit 1
+	if [ "$wipe" == 'true' ] ; then
+		rm -rf ./.lgt_tmp
+		rm -rf ./lgt_tmp
+	fi
 	if [ "$output" == 'verbose' ] ; then
 		echo "%"
 		echo "% $unit_short"
@@ -205,7 +210,7 @@ usage_help()
 	echo "The \"tester.sh\" file is sourced with all the parameters passed to the script."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-- arguments]"
+	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -229,12 +234,13 @@ usage_help()
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
+	echo "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
 	echo "  -- arguments to be passed to the tests (no default)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vo:p:m:f:d:t:n:s:c:l:g:r:i:h" option
+while getopts "vo:p:m:f:d:t:n:s:c:l:g:r:i:wh" option
 do
 	case $option in
 		v) print_version;;
@@ -251,6 +257,7 @@ do
 		i) i_arg="$OPTARG";;
 		g) g_arg="$OPTARG";;
 		r) r_arg="$OPTARG";;
+		w) wipe='true';;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
