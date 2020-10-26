@@ -25,6 +25,8 @@
 	implements(expanding)).
 
 	term_expansion(Term, ExpandedTerm) :-
+		logtalk_load_context(entity_identifier, _),
+		% entity term
 		nonvar(Term),
 		\+ functor(Term, (:-), _),
 		% not a rule or a directive
@@ -39,6 +41,8 @@
 	implements(expanding)).
 
 	term_expansion(Term, ExpandedTerm) :-
+		logtalk_load_context(entity_identifier, _),
+		% entity term
 		nonvar(Term),
 		\+ functor(Term, (:-), _),
 		% not a rule or a directive
@@ -53,6 +57,8 @@
 	implements(expanding)).
 
 	term_expansion(Term, ExpandedTerm) :-
+		logtalk_load_context(entity_identifier, _),
+		% entity term
 		nonvar(Term),
 		\+ functor(Term, (:-), _),
 		% not a rule or a directive

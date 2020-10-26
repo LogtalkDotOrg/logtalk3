@@ -21,6 +21,16 @@ RELEASE NOTES
 =============
 
 
+3.43.0 - November ??, 2020
+==========================
+
+Examples
+--------
+
+* FIXED: The `expansion` example to only expand entity terms in the expansion
+pipeline demo.
+
+
 3.42.0 - October 26, 2020
 =========================
 
