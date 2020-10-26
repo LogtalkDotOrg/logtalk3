@@ -24,6 +24,12 @@ RELEASE NOTES
 3.43.0 - November ??, 2020
 ==========================
 
+Library
+-------
+
+* FIXED: The `os::directory_files/2` predicate for LVM to also return the `.`
+and `..` directories as per the `osp` protocol.
+
 Examples
 --------
 
