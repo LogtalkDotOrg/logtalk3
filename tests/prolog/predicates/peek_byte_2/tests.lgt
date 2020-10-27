@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2020-10-18,
+		date is 2020-10-27,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -80,7 +80,7 @@
 		^^closed_input_stream(S, [type(binary)]),
 		{peek_byte(S, _)}.
 
-	throws(sics_get_char_2_11, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_byte_2_11, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, [type(binary)]),
 		{peek_byte(S, _)}.
 
