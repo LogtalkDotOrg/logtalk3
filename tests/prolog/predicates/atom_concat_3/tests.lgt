@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-08-07,
+		date is 2020-10-27,
 		comment is 'Unit tests for the ISO Prolog standard atom_concat/3 built-in predicate.'
 	]).
 
@@ -88,5 +88,15 @@
 	- succeeds(sics_atom_concat_3_14) :-
 		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L),
 		L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''].
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_atom_concat_3_15) :-
+		{atom_concat(A, '.', '.')},
+		A == ''.
+
+	succeeds(lgt_atom_concat_3_16) :-
+		{atom_concat('.', A, '.')},
+		A == ''.
 
 :- end_object.

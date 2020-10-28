@@ -38,6 +38,12 @@ Examples
 * FIXED: The `expansion` example to only expand entity terms in the expansion
 pipeline demo.
 
+Tests
+-----
+
+* ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
+Contributed by John Stewart.
+
 
 3.42.0 - October 26, 2020
 =========================
