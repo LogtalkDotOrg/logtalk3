@@ -37,9 +37,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-10-27,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -227,6 +227,9 @@ goal_expansion(X = 1, X = 2).
 	% tests for the suppress_goal_hook object | goal_expansion/2
 
 	test(suppress_goal_hook_01, true(f16::a)) :-
+		% set the default hook to identity_hook so that the expansions
+		% performed by suppress_goal_hook are not further expanded
+		set_logtalk_flag(hook, identity_hook),
 		logtalk_load('test_files/test_source_file_16', [hook(suppress_goal_hook)]).
 
 	% test set actions

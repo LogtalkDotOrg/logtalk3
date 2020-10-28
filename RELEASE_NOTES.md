@@ -30,6 +30,8 @@ Library
 * FIXED: The `os::directory_files/2` predicate for LVM to also return the `.`
 and `..` directories as per the `osp` protocol.
 
+* FIXED: Test failure for the `hook_objects` library due to missing setup step.
+
 Examples
 --------
 
