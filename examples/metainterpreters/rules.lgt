@@ -27,11 +27,11 @@
 
 	:- op(200,  fx, if).
 	:- op(150, xfx, then).
-	:- op(100, xfy, &).
+	:- op(100, xfy, and).
 
 	prove(true) :-
 		!.
-	prove(Cond & Conds) :-
+	prove(Cond and Conds) :-
 		!,
 		prove(Cond),
 		prove(Conds).
@@ -54,11 +54,11 @@
 
 	:- op(200,  fx, if).
 	:- op(150, xfx, then).
-	:- op(100, xfy, &).
+	:- op(100, xfy, and).
 
-	if weather(sunny) & weekday(weekend) & time(day) then goto(beach).
-	if weather(raining) & weekday(weekend) & time(night) then goto(cinema).
-	if weekday(workday) & time(day) then goto(work).
+	if weather(sunny) and weekday(weekend) and time(day) then goto(beach).
+	if weather(raining) and weekday(weekend) and time(night) then goto(cinema).
+	if weekday(workday) and time(day) then goto(work).
 
 	weather(raining).
 	weekday(weekend).

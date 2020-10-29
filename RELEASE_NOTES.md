@@ -35,6 +35,9 @@ and `..` directories as per the `osp` protocol.
 Examples
 --------
 
+* FIXED: Changed an operator declaration in the `metainterpreters` example to
+avoid a conflict with a LVM built-in operator.
+
 * FIXED: The `expansion` example to only expand entity terms in the expansion
 pipeline demo.
 
