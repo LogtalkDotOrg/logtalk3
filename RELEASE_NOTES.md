@@ -56,6 +56,9 @@ Contributed by John Stewart.
 * FIXED: Test for the `op/3` standard Prolog predicate for compliance with the
 ISO/IEC 13211-1:1995/Cor.2:2012(en) standard update.
 
+* FIXED: Typo in test for the Prolog standard `char_code/2` built-in predicate
+that would cause a test failure with some backends.
+
 
 3.42.0 - October 26, 2020
 =========================

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2020-10-16,
+		date is 2020-10-29,
 		comment is 'Unit tests for the ISO Prolog standard char_code/2 built-in predicate.'
 	]).
 
@@ -47,7 +47,7 @@
 		catch({char_code(_Char, 163)}, Error, true),
 		(	var(Error) ->
 			true
-		;	subsumes_term(error(epresentation_error(character_code),_), Error)
+		;	subsumes_term(error(representation_error(character_code),_), Error)
 		).
 
 	succeeds(iso_char_code_2_05) :-
