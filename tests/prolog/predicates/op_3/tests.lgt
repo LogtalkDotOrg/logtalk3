@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-10-29,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -93,7 +93,7 @@
 		{op(1000, xfy, ['|'])}.
 
 	test(iso_op_3_17, error(permission_error(create,operator,'|'))) :-
-		{op(1150, fx, '|')}.
+		{op(1000, fx, '|')}.
 
 	% next test updated for the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 6.3.4.3
 

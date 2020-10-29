@@ -47,6 +47,9 @@ Tests
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
+* FIXED: Test for the `op/3` standard Prolog predicate for compliance with the
+ISO/IEC 13211-1:1995/Cor.2:2012(en) standard update.
+
 
 3.42.0 - October 26, 2020
 =========================
