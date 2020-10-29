@@ -24,6 +24,12 @@ RELEASE NOTES
 3.43.0 - November ??, 2020
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The LVM adapter file to take advantage of indexing support for the
+internal runtime tables.
+
 Library
 -------
 
