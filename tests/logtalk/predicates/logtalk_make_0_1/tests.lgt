@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2018-03-08,
+		date is 2020-10-30,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
 
@@ -65,12 +65,16 @@
 	test(logtalk_make_1_all_03, true({foo(4)})) :-
 		main_file(Main),
 		logtalk_load(Main, [reload(changed)]),
-		os::sleep(1),
+		% pause for two seconds to try to ensure that the updated
+		% main file will have a different modification time
+		os::sleep(2),
 		update_main_file(_),
 		logtalk_make(all).
 
 	test(logtalk_make_1_all_04, true({bar(4)})) :-
-		os::sleep(1),
+		% pause for two seconds to try to ensure that the updated
+		% included file will have a different modification time
+		os::sleep(2),
 		update_included_file(_),
 		logtalk_make(all).
 
@@ -122,10 +126,10 @@
 	% auxiliary predicates
 
 	main_file(Main) :-
-		file_path('main_file.lgt', Main).
+		file_path('main_file.lgt', Main), writeq(Main), nl.
 
 	included_file(Included) :-
-		file_path('included_file.lgt', Included).
+		file_path('included_file.lgt', Included), writeq(Included), nl.
 
 	file_path(File, Path) :-
 		this(Object),
@@ -160,7 +164,7 @@
 		included_file(Included),
 		open(Included, append, Stream),
 		write(Stream, bar(4)), write(Stream, '.\n'),
-		close(Stream).
+		close(Stream), writeq(updated), nl.
 
 	% define target actions for the tests
 

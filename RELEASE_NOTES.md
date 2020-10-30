@@ -53,6 +53,10 @@ Tests
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
+* IMPROVED: Test for the `logtalk_make/0-1` predicates to ensure that an
+updated main file or included file will have a different file modification
+time from the previous version.
+
 * FIXED: Test for the `op/3` standard Prolog predicate for compliance with the
 ISO/IEC 13211-1:1995/Cor.2:2012(en) standard update.
 
