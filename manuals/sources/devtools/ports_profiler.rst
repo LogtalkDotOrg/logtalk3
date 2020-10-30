@@ -169,12 +169,16 @@ Profiling plain Prolog code
 
 This tool can also be applied to plain Prolog code. For example, if the
 Prolog file is named ``code.pl``, simply define an object including its
-code:
+code and declaring as public any predicates that you want to use as
+messages to the object. For example:
 
 ::
 
    :- object(code).
+
+       :- public(foo/2).
        :- include('code.pl').
+
    :- end_object.
 
 Save the object to an e.g. ``code.lgt`` file in the same directory as
@@ -192,11 +196,20 @@ In alternative, use the ``object_wrapper_hook`` provided by the
    | ?- logtalk_load(hook_objects(object_wrapper_hook)).
    ...
 
-   | ?- logtalk_load(code, [hook(object_wrapper_hook), debug(on)]).
+   | ?- logtalk_load(code, [hook(object_wrapper_hook), debug(on), source_data(on)]).
+
+In this second alternative, you can then use the ``<</2`` context switch
+control construct to call the wrapped predicates. E.g.
+
+::
+
+   | ?- code<<foo(X, Y).
 
 With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog code
-of working when wrapped by an object.
+of working as-is when wrapped by an object. Often any required changes
+are straight-forward (e.g. adding ``use_module/2`` directives for called
+module library predicates).
 
 Known issues
 ------------

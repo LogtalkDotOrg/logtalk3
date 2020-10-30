@@ -361,9 +361,13 @@ cases.</p>
 <h2>Profiling plain Prolog code<a class="headerlink" href="#profiling-plain-prolog-code" title="Permalink to this headline">¶</a></h2>
 <p>This tool can also be applied to plain Prolog code. For example, if the
 Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an object including its
-code:</p>
+code and declaring as public any predicates that you want to use as
+messages to the object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(code).
+
+<span class="p">    :- </span><span class="k">public</span>(foo<span class="o">/</span><span class="m">2</span>).
 <span class="p">    :- </span><span class="k">include</span>(<span class="s">&#39;code.pl&#39;</span>).
+
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
@@ -377,12 +381,19 @@ the Prolog file and then load it in debug mode:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
 ...
 
-| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), debug(on)]).
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), debug(on), source_data(on)]).
+</pre></div>
+</div>
+<p>In this second alternative, you can then use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> context switch
+control construct to call the wrapped predicates. E.g.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> code<span class="o">&lt;&lt;</span>foo(<span class="nv">X</span>, <span class="nv">Y</span>).
 </pre></div>
 </div>
 <p>With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog code
-of working when wrapped by an object.</p>
+of working as-is when wrapped by an object. Often any required changes
+are straight-forward (e.g. adding <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives for called
+module library predicates).</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>

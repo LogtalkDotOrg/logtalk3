@@ -46,6 +46,11 @@ and `..` directories as per the `osp` protocol.
 
 * FIXED: Test failure for the `hook_objects` library due to missing setup step.
 
+Tools
+-----
+
+* IMPROVED: Documentation of the `ports_profiler` tool.
+
 Examples
 --------
 
