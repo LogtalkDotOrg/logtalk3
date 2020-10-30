@@ -127,6 +127,10 @@ application to Logtalk. For example:
    | ?- current_object(plain).
    yes
 
+The ``object_wrapper_hook`` sets the ``context_switching_calls`` flag to
+``allow`` for the generated object. This enables calling the predicates
+using the ``<</2`` context-switching control construct.
+
 Outputting term-expansion results to a stream
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

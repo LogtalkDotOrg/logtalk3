@@ -41,6 +41,11 @@ internal runtime tables.
 Library
 -------
 
+* UPDATED: The `hook_objects` library `object_wrapper_hook` object to set the
+`context_switching_calls` flag to `allow` for the generated objects, enabling
+calling the wrapped predicates using the `<</2` context-switching control
+construct.
+
 * FIXED: The `os::directory_files/2` predicate for LVM to also return the `.`
 and `..` directories as per the `osp` protocol.
 

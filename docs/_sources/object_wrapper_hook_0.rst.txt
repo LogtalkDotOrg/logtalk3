@@ -8,11 +8,11 @@
 ``object_wrapper_hook``
 =======================
 
-Use this object to wrap the contents of a plain prolog file as an object named after the file.
+Use this object to wrap the contents of a plain Prolog file in an object named after the file. The wrapper sets the ``context_switching_calls`` flag to ``allow``, enabling calling of the wrapped predicates using the ``<</2`` control construct.
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2020-03-19
+| **Version:** 1:1:0
+| **Date:** 2020-10-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
