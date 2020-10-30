@@ -2889,7 +2889,13 @@ logtalk_make(Target) :-
 	% force reloading by marking the main file loading as failed
 	atom_concat(MainDirectory, MainBasename, MainPath),
 	assertz('$lgt_failed_file_'(MainPath)),
-	'$lgt_loaded_file_'(MainBasename, MainDirectory, _, Flags, _, _, _),
+	'$lgt_loaded_file_'(MainBasename, MainDirectory, _, Flags, _, ObjectFile, _),
+	% ensure that the main file is recompiled so that it
+	% includes the contents of the modified include file
+	(	'$lgt_file_exists'(ObjectFile) ->
+		'$lgt_delete_file'(ObjectFile)
+	;	true
+	),
 	logtalk_load(MainPath, Flags),
 	fail.
 % recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")

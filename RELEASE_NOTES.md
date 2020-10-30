@@ -24,6 +24,14 @@ RELEASE NOTES
 3.43.0 - November ??, 2020
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the `logtalk_make/0-1` predicates when reloading a main file
+due to an updated included file when the `clean` flag is turned off and the
+`reload` file is set tp `changed` where the main file would not be recompiled
+to include the news contents of the included file.
+
 Prolog adapter and integration files
 ------------------------------------
 
