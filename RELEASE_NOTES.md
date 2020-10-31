@@ -35,6 +35,8 @@ to include the news contents of the included file.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Unsupported adapter file for Trealla ProLog.
+
 * UPDATED: The LVM adapter file to take advantage of indexing support for the
 internal runtime tables.
 
