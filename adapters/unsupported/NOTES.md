@@ -187,12 +187,12 @@ lack of standards compliance in key features and several bugs currently
 prevent Logtalk from running.
 
 
-Tau-Prolog
-----------
+Trealla Prolog
+--------------
 
-	tau.pl
+	trealla.pl
 
-Incomplete. Missing features prevents Logtalk from running.
+Almost complete. But missing standard features prevents Logtalk from running.
 
 
 tuProlog 2.9.0
