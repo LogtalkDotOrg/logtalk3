@@ -73,6 +73,9 @@ Tests
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
+* ADDED: Test for the `zero_divisor` exception for the Prolog standard `(//)/2`
+function.
+
 * IMPROVED: Test for the `logtalk_make/0-1` predicates to ensure that an
 updated main file or included file will have a different file modification
 time from the previous version.
