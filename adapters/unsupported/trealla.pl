@@ -120,7 +120,16 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
+'$lgt_prolog_meta_predicate'(call_nth(_, _), call_nth(0, *), predicate).
 '$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_), spawn(0), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _), spawn(1, *), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _, _), spawn(2, *, *), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _, _, _), spawn(3, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _), spawn(4, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _, _), spawn(5, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _, _, _), spawn(6, *, *, *, *, *. *), predicate).
+'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _, _, _, _), spawn(7, *, *, *, *, *, *, *), predicate).
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
