@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla ProLog 0.0.0 and later versions
-%  Last updated on October 31, 2020
+%  Last updated on November 3, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -146,8 +146,13 @@
 
 % '$lgt_prolog_database_predicate'(@callable)
 
-'$lgt_prolog_database_predicate'(_) :-
-	fail.
+% '$lgt_prolog_database_predicate'(@callable)
+
+'$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(asserta(_, _)).
+'$lgt_prolog_database_predicate'(assertz(_, _)).
+'$lgt_prolog_database_predicate'(clause(_, _, _)).
+'$lgt_prolog_database_predicate'(listing(_)).
 
 
 % '$lgt_prolog_predicate_property'(?callable)
