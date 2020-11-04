@@ -88,6 +88,9 @@ ISO/IEC 13211-1:1995/Cor.2:2012(en) standard update.
 * FIXED: Typo in test for the Prolog standard `char_code/2` built-in predicate
 that would cause a test failure with some backends.
 
+* FIXED: Tests the Prolog standard bitwise functions to skip those that would
+require a system using two's complement representation for negative integers.
+
 
 3.42.0 - October 26, 2020
 =========================

@@ -22,50 +22,47 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2020-11-04,
 		comment is 'Unit tests for the ISO Prolog standard (\\)/1 built-in function.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.4.5.4
 
-	succeeds(iso_bitwise_complement_1_01) :-
-		{X is '\\'('\\'(10))},
-		X == 10.
+	test(iso_bitwise_complement_1_01, true(X == 10)) :-
+		{X is '\\'('\\'(10))}.
 
-	succeeds(iso_bitwise_complement_1_02) :-
-		{X is \(\(10))},
-		X == 10.
+	test(iso_bitwise_complement_1_02, true(X == 10)) :-
+		{X is \(\(10))}.
 
-	succeeds(iso_bitwise_complement_1_03) :-
+	- test(iso_bitwise_complement_1_03, true(X == -11), [note('Implementation defined result')]) :-
 		% assumes two's complement representation for negative integers
-		{X is \(10)},
-		X == -11.
+		{X is \(10)}.
 
-	throws(iso_bitwise_complement_1_04, error(instantiation_error,_)) :-
+	test(iso_bitwise_complement_1_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is '\\'(N)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_bitwise_complement_1_05, error(type_error(integer,2.5),_)) :-
+	test(sics_bitwise_complement_1_05, error(type_error(integer,2.5))) :-
 		{_X is '\\'(2.5)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_bitwise_complement_1_06, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_bitwise_complement_1_06, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is '\\'(Foo)}.
 
-	throws(lgt_bitwise_complement_1_07, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_bitwise_complement_1_07, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is '\\'(Foo)}.
 
-	throws(lgt_bitwise_complement_1_08, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_bitwise_complement_1_08, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is '\\'(Foo)}.

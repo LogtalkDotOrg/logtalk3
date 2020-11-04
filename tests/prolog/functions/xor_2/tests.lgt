@@ -30,64 +30,62 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.4.6.4
 
-	succeeds(iso_xor_2_01) :-
-		{X is xor(10, 12)},
-		X == 6.
+	test(iso_xor_2_01, true(X == 6)) :-
+		{X is xor(10, 12)}.
 
-	succeeds(iso_xor_2_02) :-
-		{X is xor(125, 255)},
-		X == 130.
+	test(iso_xor_2_02, true(X == 130)) :-
+		{X is xor(125, 255)}.
 
-	succeeds(iso_xor_2_03) :-
-		% implementation defined value
-		{_X is xor(-10, 12)}.
+	- test(iso_xor_2_03, true(X == -6), [note('Implementation defined result')]) :-
+		% assumes two's complement representation for negative integers
+		{X is xor(-10, 12)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_xor_2_04, error(instantiation_error,_)) :-
+	test(lgt_xor_2_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is xor(10, N)}.
 
-	throws(lgt_xor_2_05, error(instantiation_error,_)) :-
+	test(lgt_xor_2_05, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is xor(N, 12)}.
 
-	throws(lgt_xor_2_06, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_xor_2_06, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is xor(10, Foo)}.
 
-	throws(lgt_xor_2_07, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_xor_2_07, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is xor(Foo, 12)}.
 
-	throws(lgt_xor_2_08, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_xor_2_08, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is xor(10, Foo)}.
 
-	throws(lgt_xor_2_09, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_xor_2_09, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is xor(Foo, 12)}.
 
-	throws(lgt_xor_2_10, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_xor_2_10, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is xor(2, Foo)}.
 
-	throws(lgt_xor_2_11, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_xor_2_11, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is xor(Foo, 3)}.
 
-	throws(lgt_xor_2_12, error(type_error(integer,1.0),_)) :-
+	test(lgt_xor_2_12, error(type_error(integer,1.0))) :-
 		{_X is xor(1.0, 2)}.
 
-	throws(lgt_xor_2_13, error(type_error(integer,2.0),_)) :-
+	test(lgt_xor_2_13, error(type_error(integer,2.0))) :-
 		{_X is xor(1, 2.0)}.
 
 	% auxiliary predicates used to delay errors to runtime
