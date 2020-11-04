@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-07-28,
+		date is 2020-11-04,
 		comment is 'Unit tests for the ISO Prolog standard log/1 built-in function.'
 	]).
 
@@ -34,50 +34,48 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.6.4
 
-	succeeds(iso_log_1_01) :-
-		{X is log(1.0)},
-		X == 0.0.
+	test(iso_log_1_01, true(X == 0.0)) :-
+		{X is log(1.0)}.
 
-	succeeds(iso_log_1_02) :-
+	test(iso_log_1_02, true(E =~= 1.0)) :-
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
-		{E is log(2.71828)},
-		E =~= 1.0.
+		{E is log(2.71828)}.
 
-	throws(iso_log_1_03, error(instantiation_error,_)) :-
+	test(iso_log_1_03, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{_X is log(X)}.
 
-	% there is a certain dispute whether for a zero argument a different error should be thrown
-	% see also http://eclipseclp.org/wiki/Prolog/IsoErrata
+	% there is a dispute about the correct error for a zero argument
+	% see e.g. http://eclipseclp.org/wiki/Prolog/IsoErrata
 	% many Prolog systems even don't throw en error but return negative infinity
-	throws(iso_log_1_04, error(evaluation_error(undefined),_)) :-
+	test(iso_log_1_04, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
 		{_X is log(0)}.
 
-	throws(iso_log_1_05, error(type_error(evaluable,foo/0),_)) :-
+	test(iso_log_1_05, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is log(Foo)}.
 
-	% there is a certain dispute whether for a zero argument a different error should be thrown
-	% see also http://eclipseclp.org/wiki/Prolog/IsoErrata
+	% there is a dispute about the correct error for a zero argument
+	% see e.g. http://eclipseclp.org/wiki/Prolog/IsoErrata
 	% many Prolog systems even don't throw en error but return negative infinity
-	throws(iso_log_1_06, error(evaluation_error(undefined),_)) :-
+	test(iso_log_1_06, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
 		{_X is log(0.0)}.
 
 	% it is undisputed that the evaluable function log/1 should throw undefined for negative numbers
 	% many Prolog systems even don't throw en error but return NaN
-	throws(eclipse_log_1_07, error(evaluation_error(undefined),_)) :-
+	test(eclipse_log_1_07, error(evaluation_error(undefined))) :-
 		{_X is log(-1)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_log_1_08, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_log_1_08, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is log(Foo)}.
 
-	throws(lgt_log_1_09, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_log_1_09, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is log(Foo)}.
