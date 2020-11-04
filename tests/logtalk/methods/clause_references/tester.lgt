@@ -18,7 +18,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(predicate_property(asserta(_,_), built_in)).
+:- if((
+	predicate_property(asserta(_,_), built_in),
+	% the GNU Prolog adapter file provides dummy definitions of this (and
+	% other) predicates as built-in predicates to avoid embedding errors
+	\+ current_logtalk_flag(prolog_dialect, gnu)
+)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),

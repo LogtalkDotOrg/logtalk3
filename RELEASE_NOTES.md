@@ -97,6 +97,9 @@ that would cause a test failure with some backends.
 * FIXED: Tests the Prolog standard bitwise functions to skip those that would
 require a system using two's complement representation for negative integers.
 
+* FIXED: Prevent tests for the clause reference predicates and for the
+`setup_call_cleanup/3` to run with the GNU Prolog backend.
+
 
 3.42.0 - October 26, 2020
 =========================
