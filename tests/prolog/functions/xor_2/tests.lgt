@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2020-11-04,
 		comment is 'Unit tests for the ISO Prolog standard xor/2 built-in function.'
 	]).
 
@@ -83,6 +83,12 @@
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is xor(Foo, 3)}.
+
+	throws(lgt_xor_2_12, error(type_error(integer,1.0),_)) :-
+		{_X is xor(1.0, 2)}.
+
+	throws(lgt_xor_2_13, error(type_error(integer,2.0),_)) :-
+		{_X is xor(1, 2.0)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
