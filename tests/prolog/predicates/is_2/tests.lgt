@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2020-11-02,
+		date is 2020-11-04,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -152,37 +152,21 @@
 		% try to delay the expected error to runtime
 		{G = (_X is '/'(3, 0)), call(G)}.
 
-	:- if(current_prolog_flag(bounded, true)).
-
-	test(iso_is_2_31, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_31, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), _X is '+'(MI,1)}.
 
-	test(iso_is_2_32, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_32, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), _X is '-'('+'(MI,1),1)}.
 
-	test(iso_is_2_33, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_33, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		% ISO allows min_integer = -(max_integer + 1)
 		{current_prolog_flag(max_integer, MI), _X is '-'(-2,MI)}.
 
-	test(iso_is_2_34, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_34, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), _X is '*'(MI,2)}.
 
-	test(iso_is_2_35, error(evaluation_error(int_overflow))) :-
+	test(iso_is_2_35, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is floor(R)}.
-
-	:- else.
-
-	test(iso_is_2_31).
-
-	test(iso_is_2_32).
-
-	test(iso_is_2_33).
-
-	test(iso_is_2_34).
-
-	test(iso_is_2_35).
-
-	:- endif.
 
 	% tests from the Logtalk portability work
 
@@ -211,6 +195,17 @@
 	test(lgt_is_2_42, error(evaluation_error(zero_divisor))) :-
 		% try to delay the expected error to runtime
 		{G = (_X is '//'(3, 0)), call(G)}.
+
+	% also check integer overflow for other functions
+
+	test(iso_is_2_43, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is truncate(R)}.
+
+	test(iso_is_2_44, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is round(R)}.
+
+	test(iso_is_2_45, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is ceiling(R)}.
 
 	% auxiliary predicates used to delay errors to runtime
 

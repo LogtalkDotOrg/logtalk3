@@ -79,6 +79,9 @@ Contributed by John Stewart.
 * ADDED: Test for the `zero_divisor` exception for the Prolog standard `(//)/2`
 function.
 
+* ADDED: Integer overflow tests for the Prolog standard `truncate/1`,
+`round/1`, and `ceiling/1` functions.
+
 * ADDED: Missing type error tests for the Prolog standard `xor/2` function.
 
 * IMPROVED: Test for the `logtalk_make/0-1` predicates to ensure that an
