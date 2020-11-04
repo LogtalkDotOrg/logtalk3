@@ -35,7 +35,7 @@ to include the news contents of the included file.
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Unsupported adapter file for Trealla ProLog.
+* ADDED: Unsupported adapter file for Trealla Prolog.
 
 * UPDATED: The LVM adapter file to take advantage of indexing support for the
 internal runtime tables and of the new `atom_hash/2` built-in predicate.
