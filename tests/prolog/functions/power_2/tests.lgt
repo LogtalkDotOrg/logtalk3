@@ -32,10 +32,6 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
-	:- discontiguous([
-		succeeds/1, throws/2
-	]).
-
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.1.4
 
 	test(iso_power_2_01, true(X =~= 125.0)) :-
