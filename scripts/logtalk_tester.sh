@@ -322,7 +322,7 @@ elif [ "$p_arg" == "lvm" ] ; then
 		*"-s"*) dot=".";;
 		*"--custom-top-level"*) dot="?";;
 		*"-c"*) dot="?";;
-		*) dot="?";;
+		*) dot=".";;
 	esac
 elif [ "$p_arg" == "qp" ] || [ "$p_arg" == "qu-prolog" ] ; then
 	backend=qp
