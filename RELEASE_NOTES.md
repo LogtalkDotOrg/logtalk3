@@ -76,6 +76,8 @@ an `evaluation_error(zero_divisor)` exception term when the argument is zero.
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
+* ADDED: Additional test for the Prolog standard `(**)/2` function.
+
 * ADDED: Test for the `zero_divisor` exception for the Prolog standard `(//)/2`
 function.
 

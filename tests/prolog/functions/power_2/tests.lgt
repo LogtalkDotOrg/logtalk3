@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2020-11-05,
 		comment is 'Unit tests for the ISO Prolog standard (**)/2 built-in function.'
 	]).
 
@@ -38,65 +38,70 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.1.4
 
-	succeeds(iso_power_2_01) :-
-		{X is '**'(5, 3)},
-		X =~= 125.0.
+	test(iso_power_2_01, true(X =~= 125.0)) :-
+		{X is '**'(5, 3)}.
 
-	succeeds(iso_power_2_02) :-
-		{X is '**'(-5.0, 3)},
-		X =~= -125.0.
+	test(iso_power_2_02, true(X =~= -125.0)) :-
+		{X is '**'(-5.0, 3)}.
 
-	succeeds(iso_power_2_03) :-
-		{X is '**'(5, -1)},
-		X =~= 0.2.
+	test(iso_power_2_03, true(X =~= 0.2)) :-
+		{X is '**'(5, -1)}.
 
-	throws(iso_power_2_04, error(instantiation_error,_)) :-
+	test(iso_power_2_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is '**'(77, N)}.
 
-	throws(iso_power_2_05, error(type_error(evaluable,foo/0),_)) :-
+	test(iso_power_2_05, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is '**'(Foo, 3)}.
 
-	succeeds(iso_power_2_06) :-
-		{X is '**'(5, 3.0)},
-		X =~= 125.0.
+	test(iso_power_2_06, true(X =~= 125.0)) :-
+		{X is '**'(5, 3.0)}.
 
-	succeeds(iso_power_2_07) :-
-		{X is '**'(0, 0.0)},
-		X =~= 1.0.
+	test(iso_power_2_07, true(X =~= 1.0)) :-
+		{X is '**'(0, 0.0)}.
 
-	throws(lgt_power_2_08, error(instantiation_error,_)) :-
+	test(lgt_power_2_08, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is '**'(N, 77)}.
 
-	throws(iso_power_2_09, error(type_error(evaluable,foo/0),_)) :-
+	test(iso_power_2_09, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is '**'(5, Foo)}.
 
-	throws(iso_power_2_10, error(type_error(evaluable,foo/1),_)) :-
+	test(iso_power_2_10, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is '**'(Foo, 3)}.
 
-	throws(iso_power_2_11, error(type_error(evaluable,foo/1),_)) :-
+	test(iso_power_2_11, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is '**'(5, Foo)}.
 
-	throws(iso_power_2_12, error(type_error(evaluable,foo/2),_)) :-
+	test(iso_power_2_12, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is '**'(Foo, 3)}.
 
-	throws(iso_power_2_13, error(type_error(evaluable,foo/2),_)) :-
+	test(iso_power_2_13, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is '**'(5, Foo)}.
+
+	% tests from the Logtalk portability work
+
+	% there is a dispute about the correct error for a zero argument
+	% see e.g. http://eclipseclp.org/wiki/Prolog/IsoErrata
+	% many Prolog systems even don't throw en error but return infinity
+	test(lgt_power_2_14, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+		% try to delay the error to runtime
+		negative(Negative),
+		{_X is '**'(0, Negative)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
@@ -105,5 +110,7 @@
 	foo(0, foo).
 	foo(1, foo(1)).
 	foo(2, foo(1,2)).
+
+	negative(-1).
 
 :- end_object.
