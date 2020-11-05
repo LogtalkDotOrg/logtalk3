@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:2:1,
 		author is 'Paulo Moura',
-		date is 2020-11-04,
+		date is 2020-11-05,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -198,13 +198,13 @@
 
 	% also check integer overflow for other functions
 
-	test(iso_is_2_43, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+	test(lgt_is_2_43, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is truncate(R)}.
 
-	test(iso_is_2_44, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+	test(lgt_is_2_44, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is round(R)}.
 
-	test(iso_is_2_45, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+	test(lgt_is_2_45, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is ceiling(R)}.
 
 	% auxiliary predicates used to delay errors to runtime
