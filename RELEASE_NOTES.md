@@ -40,6 +40,8 @@ Prolog adapter and integration files
 * UPDATED: The LVM adapter file to take advantage of indexing support for the
 internal runtime tables and of the new `atom_hash/2` built-in predicate.
 
+* UPDATED: The LVM integration script to select the standard-top-level.
+
 Library
 -------
 
@@ -57,6 +59,8 @@ Tools
 -----
 
 * IMPROVED: Documentation of the `ports_profiler` tool.
+
+* UPDATED: The `logtalk_tester` script support for the LVM backend.
 
 Examples
 --------
