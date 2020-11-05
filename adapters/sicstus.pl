@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on September 1, 2020
+%  Last updated on November 5, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -132,6 +132,10 @@ forall(Generate, Test) :-
 	'$lgt_sicstus_foreign_'(Pred).
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
+:- if(\+ predicate_property(setup_call_cleanup(_,_,_), _)).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), static).
+:- endif.
 
 
 

@@ -19,7 +19,7 @@
 
 
 :- if((
-	predicate_property(setup_call_cleanup(_,_,_), _),
+	predicate_property(setup_call_cleanup(_,_,_), built_in),
 	% the GNU Prolog adapter file provides dummy definitions of this (and
 	% other) predicates as built-in predicates to avoid embedding errors
 	\+ current_logtalk_flag(prolog_dialect, gnu)

@@ -98,7 +98,10 @@ that would cause a test failure with some backends.
 require a system using two's complement representation for negative integers.
 
 * FIXED: Prevent tests for the clause reference predicates and for the
-`setup_call_cleanup/3` to run with the GNU Prolog backend.
+`setup_call_cleanup/3` predicate to run with the GNU Prolog backend.
+
+* FIXED: Only run tests for the `setup_call_cleanup/3` predicate on backends
+defining it as a built-in predicate or when the adapter file emulates it. 
 
 
 3.42.0 - October 26, 2020
