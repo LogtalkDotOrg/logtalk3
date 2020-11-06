@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2020-10-27,
+		date is 2020-11-06,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -116,6 +116,42 @@
 	throws(lgt_peek_byte_2_18, error(permission_error(input,text_stream,_),_)) :-
 		^^set_text_input(s, ''),
 		{peek_byte(s, _)}.
+
+	succeeds(lgt_peek_byte_2_19) :-
+		^^set_binary_input([255,255,255]),
+		{peek_byte(Byte)},
+		Byte == 255.
+
+	succeeds(lgt_peek_byte_2_20) :-
+		^^set_binary_input(st_i, [255,255,255]),
+		{peek_byte(st_i, Byte)},
+		Byte == 255.
+
+	succeeds(lgt_peek_byte_2_21) :-
+		^^set_binary_input([255,255,255]),
+		{peek_byte(255)}.
+
+	succeeds(lgt_peek_byte_2_22) :-
+		^^set_binary_input(st_i, [255,255,255]),
+		{peek_byte(st_i, 255)}.
+
+	succeeds(lgt_peek_byte_2_23) :-
+		^^set_binary_input([0,0,0]),
+		{peek_byte(Byte)},
+		Byte == 0.
+
+	succeeds(lgt_peek_byte_2_24) :-
+		^^set_binary_input(st_i, [0,0,0]),
+		{peek_byte(st_i, Byte)},
+		Byte == 0.
+
+	succeeds(lgt_peek_byte_2_25) :-
+		^^set_binary_input([0,0,0]),
+		{peek_byte(0)}.
+
+	succeeds(lgt_peek_byte_2_26) :-
+		^^set_binary_input(st_i, [0,0,0]),
+		{peek_byte(st_i, 0)}.
 
 	cleanup :-
 		^^clean_text_input,

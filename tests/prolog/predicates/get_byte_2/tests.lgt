@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2020-10-09,
+		date is 2020-11-06,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
@@ -118,6 +118,42 @@
 	succeeds(lgt_get_byte_2_18) :-
 		^^set_binary_input(st_i, []),
 		{get_byte(st_i, -1)}.
+
+	succeeds(lgt_get_byte_2_19) :-
+		^^set_binary_input([255,255,255]),
+		{get_byte(Byte)},
+		Byte == 255.
+
+	succeeds(lgt_get_byte_2_20) :-
+		^^set_binary_input(st_i, [255,255,255]),
+		{get_byte(st_i, Byte)},
+		Byte == 255.
+
+	succeeds(lgt_get_byte_2_21) :-
+		^^set_binary_input([255,255,255]),
+		{get_byte(255)}.
+
+	succeeds(lgt_get_byte_2_22) :-
+		^^set_binary_input(st_i, [255,255,255]),
+		{get_byte(st_i, 255)}.
+
+	succeeds(lgt_get_byte_2_23) :-
+		^^set_binary_input([0,0,0]),
+		{get_byte(Byte)},
+		Byte == 0.
+
+	succeeds(lgt_get_byte_2_24) :-
+		^^set_binary_input(st_i, [0,0,0]),
+		{get_byte(st_i, Byte)},
+		Byte == 0.
+
+	succeeds(lgt_get_byte_2_25) :-
+		^^set_binary_input([0,0,0]),
+		{get_byte(0)}.
+
+	succeeds(lgt_get_byte_2_26) :-
+		^^set_binary_input(st_i, [0,0,0]),
+		{get_byte(st_i, 0)}.
 
 	cleanup :-
 		^^clean_text_input,
