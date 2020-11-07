@@ -30,7 +30,7 @@ Logtalk compiler and runtime
 * FIXED: Bug in the `logtalk_make/0-1` predicates when reloading a main file
 due to an updated included file when the `clean` flag is turned off and the
 `reload` file is set tp `changed` where the main file would not be recompiled
-to include the news contents of the included file.
+to include the new contents of the included file.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -85,8 +85,8 @@ Contributed by John Stewart.
 
 * ADDED: Additional test for the Prolog standard `(**)/2` function.
 
-* ADDED: Test for the `zero_divisor` exception for the Prolog standard `(//)/2`
-function.
+* ADDED: Test for the `zero_divisor` exception for the Prolog standard
+`(//)/2` function.
 
 * ADDED: Integer overflow tests for the Prolog standard `truncate/1`,
 `round/1`, and `ceiling/1` functions.
