@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:37:0,
 		author is 'Paulo Moura',
-		date is 2020-04-13,
+		date is 2020-11-08,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -623,17 +623,24 @@
 		[	'Misspelt object name? Wrong file loading order? Circular references?'-[], nl,
 			'Object defined later in the same source file? If only a loading order'-[], nl,
 			'issue, the only consequence should be only a small performance penalty'-[], nl,
-			'as some static binding optimizations may not be possible.'-[], nl, nl
+			'as some static binding optimizations may not be possible. Otherwise,'-[], nl,
+			'references to unknown objects can result in runtime errors.'-[], nl, nl
 		].
 
 	explain(reference_to_unknown_protocol(_, _, _, _, _)) -->
-		[	'Misspelt protocol name? Wrong file loading order?'-[], nl,
-			'Protocol defined later in the same source file?'-[], nl, nl
+		[	'Misspelt protocol name? Wrong file loading order? Protocol defined'-[], nl,
+			'later in the same source file? If only a loading order issue, the'-[], nl,
+			'only consequence should be only a small performance penalty as some'-[], nl,
+			'some static binding optimizations may not be possible. Otherwise,'-[], nl,
+			'references to unknown protocols can result in runtime errors.'-[], nl, nl
 		].
 
 	explain(reference_to_unknown_category(_, _, _, _, _)) -->
-		[	'Misspelt category name? Wrong file loading order?'-[], nl,
-			'Category defined later in the same source file?'-[], nl, nl
+		[	'Misspelt category name? Wrong file loading order? Category defined'-[], nl,
+			'later in the same source file? If only a loading order issue, the'-[], nl,
+			'only consequence should be only a small performance penalty as some'-[], nl,
+			'static binding optimizations may not be possible. Otherwise,'-[], nl,
+			'references to unknown categories can result in runtime errors.'-[], nl, nl
 		].
 
 	explain(reference_to_unknown_module(_, _, _, _, _)) -->
