@@ -22,85 +22,79 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-11-07,
-		comment is 'Unit tests for the ISO Prolog standard double quoted list syntax.'
+		date is 2020-11-08,
+		comment is 'Unit tests for the ISO Prolog standard double quoted term syntax.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.7.1
 
-	succeeds(iso_double_quoted_list_01) :-
+	test(iso_double_quoted_term_01, true) :-
 		double_quotes_example_1(Contents),
 		^^set_text_input(Contents),
 		set_prolog_flag(double_quotes, chars),
 		{read(Goal), call(Goal)}.
 
-	succeeds(iso_double_quoted_list_02) :-
+	test(iso_double_quoted_term_02, true) :-
 		double_quotes_example_1(Contents),
 		^^set_text_input(Contents),
 		set_prolog_flag(double_quotes, codes),
 		{read(Goal), call(Goal)}.
 
-	succeeds(iso_double_quoted_list_03) :-
+	test(iso_double_quoted_term_03, true) :-
 		double_quotes_example_1(Contents),
 		^^set_text_input(Contents),
 		set_prolog_flag(double_quotes, atom),
 		{read(Goal), call(Goal)}.
 
-	succeeds(iso_double_quoted_list_04) :-
+	test(iso_double_quoted_term_04, true) :-
 		double_quotes_example_2(Contents),
 		^^set_text_input(Contents),
 		set_prolog_flag(double_quotes, chars),
 		{read(Goal), call(Goal)}.
 
-	succeeds(iso_double_quoted_list_05) :-
+	test(iso_double_quoted_term_05, true) :-
 		double_quotes_example_2(Contents),
 		^^set_text_input(Contents),
 		set_prolog_flag(double_quotes, codes),
 		{read(Goal), call(Goal)}.
 
-	succeeds(iso_double_quoted_list_06) :-
+	test(iso_double_quoted_term_06, true) :-
 		double_quotes_example_2(Contents),
 		^^set_text_input(Contents),
 		set_prolog_flag(double_quotes, atom),
 		{read(Goal), call(Goal)}.
 
-	succeeds(iso_double_quoted_list_07) :-
+	test(iso_double_quoted_term_07, true(atom_chars('jim', T))) :-
 		^^set_text_input('"jim". '),
 		set_prolog_flag(double_quotes, chars),
-		{read(T)},
-		atom_chars('jim', T).
+		{read(T)}.
 
-	succeeds(iso_double_quoted_list_08) :-
+	test(iso_double_quoted_term_08, true(atom_codes('jim', T))) :-
 		^^set_text_input('"jim". '),
 		set_prolog_flag(double_quotes, codes),
-		{read(T)},
-		atom_codes('jim', T).
+		{read(T)}.
 
-	succeeds(iso_double_quoted_list_09) :-
+	test(iso_double_quoted_term_09, true(T == 'jim')) :-
 		^^set_text_input('"jim". '),
 		set_prolog_flag(double_quotes, atom),
-		{read(T)},
-		T == 'jim'.
+		{read(T)}.
 
-	succeeds(iso_double_quoted_list_10) :-
+	test(iso_double_quoted_term_10, true(T == [])) :-
 		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, chars),
-		{read(T)},
-		T == [].
+		{read(T)}.
 
-	succeeds(iso_double_quoted_list_11) :-
+	test(iso_double_quoted_term_11, true(T == [])) :-
 		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, codes),
-		{read(T)},
-		T == [].
+		{read(T)}.
 
-	succeeds(iso_double_quoted_list_12) :-
+	test(iso_double_quoted_term_12, true(T == '')) :-
 		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, atom),
-		{read(T)},
-		T == ''.
+		{read(T)}.
 
 	cleanup :-
 		^^clean_text_input.
