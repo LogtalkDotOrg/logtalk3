@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 1.2.104 and later versions
-%  Last updated on November 8, 2020
+%  Last updated on November 9, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -297,7 +297,8 @@
 % expands a file path to a full path
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	absolute_file_name(Path, ExpandedPath, [expand(true)]).
+	absolute_file_name(Path, ExpandedPath0, [expand(true)]),
+	atom_chars(ExpandedPath, ExpandedPath0).
 
 
 % '$lgt_file_exists'(+atom)
