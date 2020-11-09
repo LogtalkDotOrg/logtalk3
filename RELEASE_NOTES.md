@@ -83,8 +83,8 @@ an `evaluation_error(zero_divisor)` exception term when the argument is zero.
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
-* ADDED: Additional tests for the `peek_byte/1-2`, `get_byte/1-2`, and
-`put_byte/1-2` Prolog standard predicates.
+* ADDED: Additional tests for the `set_stream_position/2`, `peek_byte/1-2`,
+`get_byte/1-2`, and `put_byte/1-2` Prolog standard predicates.
 
 * ADDED: Additional test for the Prolog standard `(**)/2` function.
 

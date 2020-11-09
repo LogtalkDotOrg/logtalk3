@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2015-06-01,
+		date is 2020-11-09,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -32,38 +32,50 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_set_stream_position_2_01, error(instantiation_error,_)) :-
-		^^stream_position(Pos),
-		{set_stream_position(_S, Pos)}.
+	test(sics_set_stream_position_2_01, error(instantiation_error)) :-
+		^^stream_position(Position),
+		{set_stream_position(_Stream, Position)}.
 
-	throws(sics_set_stream_position_2_02, error(instantiation_error,_)) :-
+	test(sics_set_stream_position_2_02, error(instantiation_error)) :-
 		% the original test used the current input stream but this results in a test that
 		% can trigger two different errors depending on the order of argument checking
 		% {current_input(S)},
 		^^set_text_input(st_i, '', [reposition(true)]),
-		{set_stream_position(st_i, _Pos)}.
+		{set_stream_position(st_i, _Position)}.
 
-	throws(sics_set_stream_position_2_03, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+	test(sics_set_stream_position_2_03, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
 		% both exception terms seem to be acceptable in the ISO spec
-		^^stream_position(Pos),
-		{set_stream_position(foo,Pos)}.
+		^^stream_position(Position),
+		{set_stream_position(foo, Position)}.
 
-	throws(sics_set_stream_position_2_04, error(existence_error(stream,S),_)) :-
-		^^stream_position(Pos),
-		^^closed_output_stream(S, []),
-		{set_stream_position(S, Pos)}.
+	test(sics_set_stream_position_2_04, error(existence_error(stream,Stream))) :-
+		^^stream_position(Position),
+		^^closed_output_stream(Stream, []),
+		{set_stream_position(Stream, Position)}.
 
-	throws(sics_set_stream_position_2_05, error(domain_error(stream_position,foo),_)) :-
+	test(sics_set_stream_position_2_05, error(domain_error(stream_position,foo))) :-
 		% the original test used the current input stream but this results in a test that
 		% can trigger two different errors depending on the order of argument checking
 		% {current_input(S)},
 		^^set_text_input(st_i, '', [reposition(true)]),
 		{set_stream_position(st_i, foo)}.
 
-	throws(sics_set_stream_position_2_06, error(permission_error(reposition,stream,S),_)) :-
-		os::absolute_file_name(foo, Path),
-		{open(Path, write, FS), stream_property(FS, position(Pos)), current_input(S)},
-		{set_stream_position(S, Pos)}.
+	test(sics_set_stream_position_2_06, error(permission_error(reposition,stream,Stream))) :-
+		os::absolute_file_name('terms.pl', Path),
+		open(Path, read, Stream, [reposition(false)]),
+		stream_property(Stream, position(Position)),
+		{set_stream_position(Stream, Position)}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_stream_property_2_07, true(Term1 == Term3)) :-
+		os::absolute_file_name('terms.pl', Path),
+		open(Path, read, Stream, [reposition(true)]),
+		stream_property(Stream, position(Position)),
+		read_term(Stream, Term1, []),
+		read_term(Stream, _, []),
+		{set_stream_position(Stream, Position)},
+		read_term(Stream, Term3, []).		
 
 	cleanup :-
 		^^clean_text_input,
