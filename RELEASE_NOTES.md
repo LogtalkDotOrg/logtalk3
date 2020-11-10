@@ -84,7 +84,7 @@ an `evaluation_error(zero_divisor)` exception term when the argument is zero.
 Contributed by John Stewart.
 
 * ADDED: Additional tests for the `set_stream_position/2`, `peek_byte/1-2`,
-`get_byte/1-2`, and `put_byte/1-2` Prolog standard predicates.
+`get_byte/1-2`, `put_byte/1-2`, and `writeq/2` Prolog standard predicates.
 
 * ADDED: Additional test for the Prolog standard `(**)/2` function.
 
