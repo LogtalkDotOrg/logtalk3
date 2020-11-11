@@ -30,9 +30,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:1,
+		version is 1:5:2,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-11-11,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -77,70 +77,70 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _)}.
 
-	throws(lgt_call_N_10, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_10, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _)}.
+		three(Three),
+		{call(Three, _)}.
 
 	throws(lgt_call_N_11, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _)}.
 
-	throws(lgt_call_N_12, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_12, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _, _)}.
+		three(Three),
+		{call(Three, _, _)}.
 
 	throws(lgt_call_N_13, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _)}.
 
-	throws(lgt_call_N_14, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_14, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _, _, _)}.
+		three(Three),
+		{call(Three, _, _, _)}.
 
 	throws(lgt_call_N_15, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _)}.
 
-	throws(lgt_call_N_16, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_16, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _, _, _, _)}.
+		three(Three),
+		{call(Three, _, _, _, _)}.
 
 	throws(lgt_call_N_17, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _, _)}.
 
-	throws(lgt_call_N_18, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_18, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _, _, _, _, _)}.
+		three(Three),
+		{call(Three, _, _, _, _, _)}.
 
 	throws(lgt_call_N_19, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _, _, _)}.
 
-	throws(lgt_call_N_20, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_20, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _, _, _, _, _, _)}.
+		three(Three),
+		{call(Three, _, _, _, _, _, _)}.
 
 	throws(lgt_call_N_21, error(instantiation_error,_)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _, _, _, _)}.
 
-	throws(lgt_call_N_22, error(type_error(callable,1),_)) :-
+	throws(lgt_call_N_22, error(type_error(callable,3),_)) :-
 		% try to delay the error to runtime
-		Goal = 1,
-		{call(Goal, _, _, _, _, _, _, _)}.
+		three(Three),
+		{call(Three, _, _, _, _, _, _, _)}.
 
 	% tests from the ECLiPSe test suite
 
@@ -149,21 +149,27 @@ call_n_maplist(Cont, [E|Es]) :-
 			error(type_error(callable,(':'(user,fail),':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
-		{call(',', fail, 3)}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{call(',', fail, Three)}.
 
 	throws(eclipse_call_N_24, [
 			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,(':'(user,!);':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
-		{call(';', !, 3)}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{call(';', !, Three)}.
 
 	throws(eclipse_call_N_25, [
 			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,(':'(user,fail)->':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
-		{call('->', fail, 3)}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{call('->', fail, Three)}.
 
 	succeeds(eclipse_call_N_26) :-
 		findall(X, {call(',', C=!, (X=1,C;X=2))}, L),
@@ -174,27 +180,35 @@ call_n_maplist(Cont, [E|Es]) :-
 			error(type_error(callable,(':'(user,fail),':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
-		{call(','(fail), 3)}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{call(','(fail), Three)}.
 
 	throws(eclipse_call_N_28, [
 			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,(':'(user,!);':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
-		{call(';'(!), 3)}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{call(';'(!), Three)}.
 
 	throws(eclipse_call_N_29, [
 			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
 			error(type_error(callable,(':'(user,fail)->':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
 			]) :-
 		% the first exception term is the strictly conforming one
-		{call('->'(fail), 3)}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{call('->'(fail), Three)}.
 
 	succeeds(eclipse_call_N_30) :-
 		findall(X, {call(','(C=!), (X=1,C;X=2))}, L),
 		L == [1, 2].
 
-	% auxiliary predicate used to delay errors to runtime
+	% auxiliary predicates used to delay errors to runtime
+
+	three(3).
 
 	variable(_).
 

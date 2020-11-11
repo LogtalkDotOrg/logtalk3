@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2020-06-23,
+		date is 2020-11-11,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
@@ -41,7 +41,9 @@
 		{';'((!, fail), true)}.
 
 	succeeds(iso_disjunction_2_03) :-
-		{';'(!, call(3))}.
+		% try to avoid a compile time error with some backends
+		three(Three),
+		{';'(!, call(Three))}.
 
 	succeeds(iso_disjunction_2_04) :-
 		{';'((X=1, !), X=2)},

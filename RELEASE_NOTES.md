@@ -96,6 +96,9 @@ Contributed by John Stewart.
 
 * ADDED: Missing type error tests for the Prolog standard `xor/2` function.
 
+* IMPROVED: Some tests for the Prolog standard disjunction control construct
+and the `call/N` predicate to try to delay expected errors to runtime.
+
 * IMPROVED: Tests for Prolog standard double-quoted terms.
 
 * IMPROVED: Test for the `logtalk_make/0-1` predicates to ensure that an
