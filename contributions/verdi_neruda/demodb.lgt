@@ -4,18 +4,18 @@
 
 	%%Some simple test programs.
 
-	append([], Ys, Ys) <- true.
-	append([X|Xs], Ys, [X|Zs]) <-
+	append([], Ys, Ys) if true.
+	append([X|Xs], Ys, [X|Zs]) if
 		append(Xs, Ys, Zs).
 
-	nrev([], []) <- true.
-	nrev([X|Xs], Reversed) <-
-		nrev(Xs, Reversed1) &
+	nrev([], []) if true.
+	nrev([X|Xs], Reversed) if
+		nrev(Xs, Reversed1) and
 		append(Reversed1, [X], Reversed).
 
-	length([], 0) <- true.
-	length([_|Xs], N) <-
-		length(Xs, N0) &
+	length([], 0) if true.
+	length([_|Xs], N) if
+		length(Xs, N0) and
 		 {N is N0 + 1}.
 
 :- end_object.

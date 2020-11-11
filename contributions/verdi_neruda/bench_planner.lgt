@@ -9,49 +9,49 @@
 		comment is 'A simple database for planning in a blocks world.'
 	]).
 
-	member(X, [X|_]) <- true.
-	member(X, [_|Xs]) <-
+	member(X, [X|_]) if true.
+	member(X, [_|Xs]) if
 		member(X, Xs).
 
-	transform(State1,State2,Plan) <-
+	transform(State1,State2,Plan) if
 		transform(State1,State2, [State1], Plan).
 
-	transform(State,State,_,[]) <- true.
-	transform(State1,State2,Visited,[Action|Actions]) <-
-	   legal_action(Action,State1) &
-	   update(Action,State1,State) &
-	   not(member(State,Visited)) &
+	transform(State,State,_,[]) if true.
+	transform(State1,State2,Visited,[Action|Actions]) if
+	   legal_action(Action,State1) and
+	   update(Action,State1,State) and
+	   not(member(State,Visited)) and
 	   transform(State,State2,[State|Visited],Actions).
 
-	legal_action(to_place(Block,Y,Place),State) <-
-	   on(Block,Y,State) &
-	   clear(Block,State) &
-	   place(Place) &
+	legal_action(to_place(Block,Y,Place),State) if
+	   on(Block,Y,State) and
+	   clear(Block,State) and
+	   place(Place) and
 	   clear(Place,State).
-	legal_action(to_block(Block1,Y,Block2),State) <-
-	   on(Block1,Y,State) &
-	   clear(Block1,State) &
-	   block(Block2) &
-	   {Block1 \== Block2} &
+	legal_action(to_block(Block1,Y,Block2),State) if
+	   on(Block1,Y,State) and
+	   clear(Block1,State) and
+	   block(Block2) and
+	   {Block1 \== Block2} and
 	   clear(Block2,State).
 
-	clear(X,State) <- not(above(X, State)).
-	above(X, State) <- member(on(_, X), State).
-	on(X,Y,State) <- member(on(X,Y),State).
+	clear(X,State) if not(above(X, State)).
+	above(X, State) if member(on(_, X), State).
+	on(X,Y,State) if member(on(X,Y),State).
 
-	update(to_block(X,Y,Z),State,State1) <-
+	update(to_block(X,Y,Z),State,State1) if
 	   substitute(on(X,Y), on(X,Z),State,State1).
-	update(to_place(X,Y,Z),State,State1) <-
+	update(to_place(X,Y,Z),State,State1) if
 	   substitute(on(X,Y),on(X,Z),State,State1).
 
-	substitute(X,Y,[X|Xs],[Y|Xs]) <- true.
-	substitute(X,Y,[X1|Xs],[X1|Ys]) <-
-		{X \== X1} &
+	substitute(X,Y,[X|Xs],[Y|Xs]) if true.
+	substitute(X,Y,[X1|Xs],[X1|Ys]) if
+		{X \== X1} and
 		substitute(X,Y,Xs,Ys).
 
-	block(a) <- true. block(b) <- true. block(c) <- true.
+	block(a) if true. block(b) if true. block(c) if true.
 
-	place(p) <- true. place(q) <- true. place(r) <- true.
+	place(p) if true. place(q) if true. place(r) if true.
 
 	initial_state(test, [on(a, b), on(b, p), on(c, r)]).
 	final_state(test, [on(a, b), on(b, c), on(c, r)]).

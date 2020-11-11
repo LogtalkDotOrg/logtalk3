@@ -114,9 +114,9 @@ database 'demodb' should be included in the list. Next type
 'listing(demodb).' to print the contents of the database. The output
 should look something like:
 
-    append([],A,A) <-
+    append([],A,A) if
     	  true.
-    append([A|B],C,[A|D]) <-
+    append([A|B],C,[A|D]) if
     	  append(B,C,D).
     .  
     .  

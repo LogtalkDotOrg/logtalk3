@@ -1,6 +1,6 @@
 
-:- op(1200, xfx, (<-)).
-:- op(1000, xfy, (&)).
+:- op(1200, xfx, if).
+:- op(1000, xfy, and).
 
 :- object(magic_expansion(Mode),
 	implements(expanding),
@@ -8,16 +8,16 @@
 	extends(debug_expansion(Mode))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Victor Lagerkvist',
-		date is 2010-06-13,
-		comment is 'Expands rules of the form p <- f & g to the more manageable rule(p, [f,g]) and performs magic transformation of clauses.'
+		date is 2020-11-11,
+		comment is 'Expands rules of the form p if f and g to the more manageable rule(p, [f,g]) and performs magic transformation of clauses.'
 	]).
 
 	goal_expansion(Term, Expansion) :-
 		^^goal_expansion(Term, Expansion).
 
-	term_expansion((Head <- Goals), MagicClauses) :-
+	term_expansion((Head if Goals), MagicClauses) :-
 		findall(
 			rule(MagicHead, MagicBody, NegOrPos),
 			magic_clause(Head, Goals, MagicHead, MagicBody, NegOrPos),

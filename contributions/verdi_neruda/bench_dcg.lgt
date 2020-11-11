@@ -9,39 +9,39 @@
 		comment is 'A simple database for parsing natural language using a compiled DCG.'
 	]).
 
-	sentence(A, C) <-
-		noun_phrase(A, B) &
+	sentence(A, C) if
+		noun_phrase(A, B) and
 		verb_phrase(B, C).
 
-	noun_phrase(A, B) <-
+	noun_phrase(A, B) if
 		noun_phrase2(A, B).
-	noun_phrase(A, C) <-
-		determiner(A, B) &
+	noun_phrase(A, C) if
+		determiner(A, B) and
 		noun_phrase2(B, C).
 
-	verb_phrase(A, C) <-
-		verb(A, B) &
+	verb_phrase(A, C) if
+		verb(A, B) and
 		noun_phrase(B, C).
-	verb_phrase(A, B) <-
+	verb_phrase(A, B) if
 		verb(A, B).
 
-	verb([contains|A], A) <- true.
-	verb([eats|A], A) <- true.
+	verb([contains|A], A) if true.
+	verb([eats|A], A) if true.
 
-	noun([pieplate|A], A) <- true.
-	noun([surprise|A], A) <- true.
-	noun([man|A], A) <- true.
+	noun([pieplate|A], A) if true.
+	noun([surprise|A], A) if true.
+	noun([man|A], A) if true.
 
-	adjective([decorated|A], A) <- true.
-	adjective([corpulent|A], A) <- true.
+	adjective([decorated|A], A) if true.
+	adjective([corpulent|A], A) if true.
 
-	determiner([the|A], A) <- true.
-	determiner([a|A], A) <- true.
+	determiner([the|A], A) if true.
+	determiner([a|A], A) if true.
 
-	noun_phrase2(A, C) <-
-		adjective(A, B) &
+	noun_phrase2(A, C) if
+		adjective(A, B) and
 		noun_phrase2(B, C).
-	noun_phrase2(A, B) <-
+	noun_phrase2(A, B) if
 		noun(A, B).
 
 	bench_goal(sentence([the, corpulent, man, contains, a, decorated, pieplate], [])).

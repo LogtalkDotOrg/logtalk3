@@ -4,16 +4,16 @@
 	extends(rule_expansion(Mode))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Victor Lagerkvist',
-		date is 2010-06-13,
-		comment is 'Expands rules of the form p <- f & g to rule(p, [f,g|Tail], Length, Tail).'
+		date is 2020-11-11,
+		comment is 'Expands rules of the form p if f and g to rule(p, [f,g|Tail], Length, Tail).'
 	]).
 
 	goal_expansion(Term, Expansion) :-
 		^^goal_expansion(Term, Expansion).
 
-	term_expansion((Head <- Goals), rule(Head, List, Length, Tail)) :-
+	term_expansion((Head if Goals), rule(Head, List, Length, Tail)) :-
 		phrase(::flatten_goals(Goals), List0),
 		list::length(List0, Length),
 		list::append(List0, Tail, List).

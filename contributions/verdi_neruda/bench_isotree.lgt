@@ -11,22 +11,22 @@
 
 	%% Determining whether two binary trees are isomorphic.
 
-	isotree(void, void) <- true.
+	isotree(void, void) if true.
 
 	%Normal version.
-	isotree(t(X, L1, R1), t(X, L2, R2)) <-
-		isotree(L1, L2) &
+	isotree(t(X, L1, R1), t(X, L2, R2)) if
+		isotree(L1, L2) and
 		isotree(R1, R2).
-	isotree(t(X, L1, R1), t(X, L2, R2)) <-
-		isotree(L1, R2) &
+	isotree(t(X, L1, R1), t(X, L2, R2)) if
+		isotree(L1, R2) and
 		isotree(R1, L2).
 
 	%%Goals in body swapped.
-%	 isotree(t(X, L1, R1), t(X, L2, R2)) <-
-%		 isotree(R1, R2) &
+%	 isotree(t(X, L1, R1), t(X, L2, R2)) if
+%		 isotree(R1, R2) and
 %		 isotree(L1, L2).
-%	 isotree(t(X, L1, R1), t(X, L2, R2)) <-
-%		 isotree(R1, L2) &
+%	 isotree(t(X, L1, R1), t(X, L2, R2)) if
+%		 isotree(R1, L2) and
 %		 isotree(L1, R2).
 
 	tree1(t(2, t(3, t(0, t(2, void, void), t(0, t(0, void, void), t(0, t(0, void, void), t(0, void, void)))), t(1, void, void)), t(0, t(0, t(3, void, void), t(0, void, void)), t(2, t(4, void, void), t(3, t(2, void, void), t(3, void, void)))))).

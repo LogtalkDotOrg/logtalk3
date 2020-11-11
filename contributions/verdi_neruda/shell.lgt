@@ -243,7 +243,7 @@
 	write_rule(rule(Head, Body)) :-
 		write(Head),
 		write(' '),
-		write('<-'), nl,
+		write('if'), nl,
 		write_body(Body),
 		nl.
 
@@ -261,7 +261,7 @@
 		write('    '),
 		write(G),
 		write(' '),
-		write('&'), nl,
+		write('and'), nl,
 		write_body(Gs).
 
 	write_benchmark(Stream, Interpreter, Statistic, N, Goal, Database) :-

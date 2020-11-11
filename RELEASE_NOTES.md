@@ -74,6 +74,12 @@ avoid a conflict with a LVM built-in operator.
 * FIXED: The `expansion` example to only expand entity terms in the expansion
 pipeline demo.
 
+Contributions
+-------------
+
+* CHANGED: The operators used by `verdi_neruda` to avoid conflicts with some
+backends.
+
 Tests
 -----
 
