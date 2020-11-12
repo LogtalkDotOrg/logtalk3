@@ -127,6 +127,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
@@ -251,6 +252,50 @@ link in a web browser.</p>
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(git(tester)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>All predicates take as first argument a directory, which should be
+either a git repository directory or a sub-directory of a git repository
+directory. The main predicate is <code class="docutils literal notranslate"><span class="pre">commit_log/3</span></code>. It provides access to
+the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command when called with the
+<code class="docutils literal notranslate"><span class="pre">--oneline</span> <span class="pre">-n</span> <span class="pre">1</span> <span class="pre">--pretty=format:</span></code> options. By passing as second
+argument the desired format, it returns an atom with the formatted
+output. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>commit_log(<span class="s">&#39;/Users/pmoura/logtalk3&#39;</span>, <span class="s">&#39;%h%n%B&#39;</span>, <span class="nv">Output</span>),
+     <span class="k">write</span>(<span class="nv">Output</span>), <span class="k">nl</span>.
+
+eccaa1a2a
+<span class="nv">Update</span> <span class="nv">SVG</span> diagrams
+
+<span class="nv">Output</span> <span class="o">=</span> <span class="s">&#39;eccaa1a2a</span><span class="se">\n</span><span class="s">Update SVG diagrams</span><span class="se">\n</span><span class="s">&#39;</span>
+yes
+</pre></div>
+</div>
+<p>See e.g. the official documentation on <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> pretty formats for
+details:</p>
+<p><a class="reference external" href="https://git-scm.com/docs/pretty-formats">https://git-scm.com/docs/pretty-formats</a></p>
+<p>Convenient predicates are also provided for common used formats such as
+the commit author and the commit hash. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>commit_author(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Author</span>).
+
+<span class="nv">Author</span> <span class="o">=</span> <span class="s">&#39;Paulo Moura&#39;</span>
+yes
+
+| <span class="o">?-</span> git<span class="o">::</span>commit_hash(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Hash</span>).
+
+<span class="nv">Hash</span> <span class="o">=</span> eccaa1a2a9495fef441915bbace84e0a4b0394a2
+yes
+</pre></div>
+</div>
+<p>It’s also possible to get the name of the current local branch. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> git<span class="o">::</span>branch(<span class="s">&#39;/Users/pmoura/Documents/Logtalk/logtalk3&#39;</span>, <span class="nv">Branch</span>).
+
+<span class="nv">Branch</span> <span class="o">=</span> master
+yes
 </pre></div>
 </div>
 </div>
