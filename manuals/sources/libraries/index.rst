@@ -38,6 +38,7 @@ directory in the ``NOTES.md`` file.
    expand_library_alias_paths
    expecteds
    gensym
+   git
    heaps
    hierarchies
    hook_flows

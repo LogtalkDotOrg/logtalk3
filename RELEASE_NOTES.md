@@ -45,6 +45,9 @@ internal runtime tables and of the new `atom_hash/2` built-in predicate.
 Library
 -------
 
+* ADDED: Library `git` with predicates for accessing a git project current
+branch and latest commit data.
+
 * UPDATED: The `hook_objects` library `object_wrapper_hook` object to set the
 `context_switching_calls` flag to `allow` for the generated objects, enabling
 calling the wrapped predicates using the `<</2` context-switching control

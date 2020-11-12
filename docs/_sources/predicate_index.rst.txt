@@ -606,6 +606,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::body_pred/1>`
 
+``branch/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::branch/2>`
+
 ``built_in_directive/4``
 ------------------------
 
@@ -916,6 +926,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::command_line_arguments/1>`
+
+``commit_author/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::commit_author/2>`
+
+``commit_date/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::commit_date/2>`
+
+``commit_hash/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::commit_hash/2>`
+
+``commit_hash_abbreviated/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::commit_hash_abbreviated/2>`
+
+``commit_log/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::commit_log/3>`
+
+``commit_message/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`git_protocol <git_protocol/0::commit_message/2>`
 
 ``compile_aux_clauses/1``
 -------------------------

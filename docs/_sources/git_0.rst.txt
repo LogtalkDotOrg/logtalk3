@@ -1,0 +1,55 @@
+.. index:: git
+.. _git/0:
+
+.. rst-class:: right
+
+**object**
+
+``git``
+=======
+
+Predicates for accessing a git project current branch and latest commit data.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-11-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`git_protocol <git_protocol/0>`
+| **Uses:**
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`git_protocol/0::branch/2`  :ref:`git_protocol/0::commit_author/2`  :ref:`git_protocol/0::commit_date/2`  :ref:`git_protocol/0::commit_hash/2`  :ref:`git_protocol/0::commit_hash_abbreviated/2`  :ref:`git_protocol/0::commit_log/3`  :ref:`git_protocol/0::commit_message/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

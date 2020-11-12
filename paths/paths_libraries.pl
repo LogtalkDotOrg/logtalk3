@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on February 7, 2020
+%  Last updated on November 12, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -42,6 +42,7 @@ logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(gensym, library('gensym/')).
+logtalk_library_path(git, library('git/')).
 logtalk_library_path(heaps, library('heaps/')).
 logtalk_library_path(hierarchies, library('hierarchies/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).

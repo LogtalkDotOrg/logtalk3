@@ -1,0 +1,213 @@
+.. index:: git_protocol
+.. _git_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``git_protocol``
+================
+
+Predicates for accessing a git project current branch and latest commit data.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2020-11-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="branch/2"> </div>
+
+.. index:: branch/2
+.. _git_protocol/0::branch/2:
+
+``branch/2``
+^^^^^^^^^^^^
+
+Returns the name of the current git branch.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``branch(Directory,Branch)``
+| **Mode and number of proofs:**
+|    ``branch(+atom,?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="commit_author/2"> </div>
+
+.. index:: commit_author/2
+.. _git_protocol/0::commit_author/2:
+
+``commit_author/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the latest commit author.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_author(Directory,Author)``
+| **Mode and number of proofs:**
+|    ``commit_author(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="commit_date/2"> </div>
+
+.. index:: commit_date/2
+.. _git_protocol/0::commit_date/2:
+
+``commit_date/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the latest commit date (strict ISO 8601 format).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_date(Directory,Date)``
+| **Mode and number of proofs:**
+|    ``commit_date(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="commit_hash/2"> </div>
+
+.. index:: commit_hash/2
+.. _git_protocol/0::commit_hash/2:
+
+``commit_hash/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the latest commit hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_hash(Directory,Hash)``
+| **Mode and number of proofs:**
+|    ``commit_hash(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="commit_hash_abbreviated/2"> </div>
+
+.. index:: commit_hash_abbreviated/2
+.. _git_protocol/0::commit_hash_abbreviated/2:
+
+``commit_hash_abbreviated/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the latest commit abbreviated hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_hash_abbreviated(Directory,Hash)``
+| **Mode and number of proofs:**
+|    ``commit_hash_abbreviated(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="commit_message/2"> </div>
+
+.. index:: commit_message/2
+.. _git_protocol/0::commit_message/2:
+
+``commit_message/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the latest commit message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_message(Directory,Message)``
+| **Mode and number of proofs:**
+|    ``commit_message(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="commit_log/3"> </div>
+
+.. index:: commit_log/3
+.. _git_protocol/0::commit_log/3:
+
+``commit_log/3``
+^^^^^^^^^^^^^^^^
+
+Returns the git latest commit log output for the given format (see e.g. https://git-scm.com/docs/pretty-formats).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``commit_log(Directory,Format,Output)``
+| **Mode and number of proofs:**
+|    ``commit_log(+atom,+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

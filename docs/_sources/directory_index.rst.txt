@@ -231,6 +231,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    gensym <gensym_0>
 
+``library/git/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   git <git_0>
+   git_protocol <git_protocol_0>
+
 ``library/heaps/``
 ------------------
 

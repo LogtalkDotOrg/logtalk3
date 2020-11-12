@@ -52,6 +52,7 @@
 		reader(loader),
 		timeout(loader),
 		gensym(loader),
+		git(loader),
 		cloning,
 		counters,
 		streamvars

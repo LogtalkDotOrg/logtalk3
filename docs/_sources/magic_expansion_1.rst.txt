@@ -8,11 +8,11 @@
 ``magic_expansion(A)``
 ======================
 
-Expands rules of the form p <- f & g to the more manageable rule(p, [f,g]) and performs magic transformation of clauses.
+Expands rules of the form p if f and g to the more manageable rule(p, [f,g]) and performs magic transformation of clauses.
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:0:0
-| **Date:** 2010-06-13
+| **Version:** 1:0:1
+| **Date:** 2020-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

@@ -8,11 +8,11 @@
 ``rule_expansion(A)``
 =====================
 
-Expands rules of the form p <- f & g to the more manageable rule(p, [f,g]).
+Expands rules of the form p if f and g to the more manageable rule(p, [f,g]).
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:0:0
-| **Date:** 2010-06-13
+| **Version:** 1:0:1
+| **Date:** 2020-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
