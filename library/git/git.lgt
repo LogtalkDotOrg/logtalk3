@@ -35,10 +35,14 @@
 	branch(Directory, Branch) :-
 		temporary_file(Temporary),
 		atom_concat('cd ', Directory, Command0),
-		atom_concat(Command0, ' && git rev-parse --abbrev-ref HEAD | tr -d \'\\n\' | tr -d \'\\r\' > ', Command1),
+		atom_concat(Command0, ' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d \'\\n\' | tr -d \'\\r\' > ', Command1),
 		atom_concat(Command1, Temporary, Command),
-		shell(Command),
-		data(Temporary, Branch).
+		(	shell(Command) ->
+			data(Temporary, Branch),
+			Branch \== ''
+		;	delete_file(Temporary),
+			fail
+		).
 
 	commit_author(Directory, Hash) :-
 		commit_log(Directory, '%an', Hash).
@@ -60,10 +64,13 @@
 		atom_concat('cd ', Directory, Command0),
 		atom_concat(Command0, ' && git log --oneline -n 1 --pretty=format:"', Command1),
 		atom_concat(Command1, Format, Command2),
-		atom_concat(Command2, '" > ', Command3),
+		atom_concat(Command2, '" 2>/dev/null > ', Command3),
 		atom_concat(Command3, Temporary, Command),
-		shell(Command),
-		data(Temporary, Output).
+		(	shell(Command) ->
+			data(Temporary, Output)
+		;	delete_file(Temporary),
+			fail
+		).
 
 	% auxiliary predicates
 
