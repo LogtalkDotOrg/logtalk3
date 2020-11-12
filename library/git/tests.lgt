@@ -37,7 +37,8 @@
 	cover(git).
 
 	condition :-
-		os::shell('git --version > /dev/null 2>&1').
+		os::shell('git --version > /dev/null 2>&1'),
+		os::shell('unzip -v > /dev/null 2>&1').
 
 	setup :-
 		test_repo(Repo, Directory),
