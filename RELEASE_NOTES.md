@@ -58,6 +58,9 @@ and `..` directories as per the `osp` protocol.
 
 * FIXED: Test failure for the `hook_objects` library due to missing setup step.
 
+* FIXED: Fix the `os::shell/1` library predicate for ECLiPSe (broken due to a
+bug in its `system/1` built-in predicate).
+
 Tools
 -----
 
