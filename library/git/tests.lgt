@@ -36,17 +36,46 @@
 
 	cover(git).
 
+	condition :-
+		os::shell('git --version > /dev/null 2>&1').
+
+	setup :-
+		test_repo(Repo, Directory),
+		atom_concat(Repo, '.zip', Zip),
+		atom_concat('unzip ', Zip, Command0),
+		atom_concat(Command0, ' -d ', Command1),
+		atom_concat(Command1, Directory, Command),
+		writeq(os::shell(Command)), nl,
+		os::shell(Command).
+
+	cleanup :-
+		test_repo(Repo, _),
+		atom_concat('rm -rf ', Repo, Command),
+		os::shell(Command).
+
 	% when the directory is not a git repo, the predicates
 	% are expected to fail
 
 	test(git_branch_2_01, false) :-
 		branch('/', _).
 
+	test(git_branch_2_02, true(Branch == master)) :-
+		test_repo(Repo, _),
+		branch(Repo, Branch).
+
 	test(git_commit_log_3_01, false) :-
 		commit_log('/', '%h', _).
 
+	test(git_commit_log_3_02, true) :-
+		test_repo(Repo, _),
+		commit_log(Repo, '%h', _).
+
 	test(git_commit_author_2_01, false) :-
 		commit_author('/', _).
+
+	test(git_commit_author_2_02, true(Author == 'John Doe')) :-
+		test_repo(Repo, _),
+		commit_author(Repo, Author).
 
 	test(git_commit_date_2_01, false) :-
 		commit_date('/', _).
@@ -54,10 +83,29 @@
 	test(git_commit_message_2_01, false) :-
 		commit_message('/', _).
 
+	test(git_commit_message_2_02, true(Message == 'First commit\n')) :-
+		test_repo(Repo, _),
+		commit_message(Repo, Message).
+
 	test(git_commit_hash_2_01, false) :-
 		commit_hash('/', _).
 
+	test(git_commit_hash_2_02, true(Hash == '02a812ed805949d3aaf15240254c27564eff35c5')) :-
+		test_repo(Repo, _),
+		commit_hash(Repo, Hash).
+
 	test(git_commit_hash_abbreviated_2_01, false) :-
 		commit_hash_abbreviated('/', _).
+
+	test(git_commit_hash_abbreviated_2_02, true(Hash == '02a812e')) :-
+		test_repo(Repo, _),
+		commit_hash_abbreviated(Repo, Hash).
+
+	% auxiliary predicates
+
+	test_repo(Repo, Directory) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		os::path_concat(Directory, repo, Repo).
 
 :- end_object.
