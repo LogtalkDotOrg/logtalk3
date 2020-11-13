@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.0.0 and later versions
-%  Last updated on November 6, 2020
+%  Last updated on November 13, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -374,6 +374,8 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_load_prolog_code'(File, _Source, _Options) :-
 	consult(File),
+	destroy_index('$lgt_current_flag_'/2),
+	create_index('$lgt_current_flag_'/2),
 	destroy_index('$lgt_current_object_'/11),
 	create_index('$lgt_current_object_'/11),
 	destroy_index('$lgt_current_protocol_'/5),
