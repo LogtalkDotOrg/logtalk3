@@ -1,0 +1,18 @@
+root = true
+
+[*]
+insert_final_newline = true
+
+[*.{lgt,pl}]
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.md]
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = false
+
+[*.rst]
+indent_style = space
+indent_size = 3

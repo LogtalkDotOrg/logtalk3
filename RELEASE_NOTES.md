@@ -130,7 +130,13 @@ require a system using two's complement representation for negative integers.
 `setup_call_cleanup/3` predicate to run with the GNU Prolog backend.
 
 * FIXED: Only run tests for the `setup_call_cleanup/3` predicate on backends
-defining it as a built-in predicate or when the adapter file emulates it. 
+defining it as a built-in predicate or when the adapter file emulates it.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Sample EditorConfig file and link to the official website to the
+`coding` directory.
 
 
 3.42.0 - October 26, 2020
