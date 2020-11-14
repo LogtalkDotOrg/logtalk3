@@ -3481,7 +3481,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 43, 0, b01)).
+'$lgt_version_data'(logtalk(3, 43, 0, b02)).
 
 
 
@@ -19135,14 +19135,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % reports any unknown referenced entities found while compiling an entity
 
+'$lgt_report_unknown_entities'(_, _) :-
+	'$lgt_compiler_flag'(unknown_entities, silent),
+	!.
+
+'$lgt_report_unknown_entities'(protocol, Entity) :-
+	!,
+	'$lgt_report_unknown_protocols'(protocol, Entity).
+
 '$lgt_report_unknown_entities'(Type, Entity) :-
-	(	'$lgt_compiler_flag'(unknown_entities, warning) ->
-		'$lgt_report_unknown_objects'(Type, Entity),
-		'$lgt_report_unknown_protocols'(Type, Entity),
-		'$lgt_report_unknown_categories'(Type, Entity),
-		'$lgt_report_unknown_modules'(Type, Entity)
-	;	true
-	).
+	'$lgt_report_unknown_objects'(Type, Entity),
+	'$lgt_report_unknown_protocols'(Type, Entity),
+	'$lgt_report_unknown_categories'(Type, Entity),
+	'$lgt_report_unknown_modules'(Type, Entity).
 
 
 
@@ -21393,7 +21398,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % reports non-portable predicate and function calls in the body of object and category predicates
 
 '$lgt_report_non_portable_calls'(Type, Entity) :-
-	(	'$lgt_compiler_flag'(portability, warning) ->
+	(	Type \== protocol,
+		'$lgt_compiler_flag'(portability, warning) ->
 		'$lgt_report_non_portable_calls_'(Type, Entity)
 	;	true
 	).
@@ -21426,6 +21432,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_report_non_tail_recursive_predicates'(@entity_type, @entity_identifier)
 %
 % reports non-tail recursive predicate definitions
+
+'$lgt_report_non_tail_recursive_predicates'(protocol, _) :-
+	!.
 
 '$lgt_report_non_tail_recursive_predicates'(Type, Entity) :-
 	'$lgt_compiler_flag'(tail_recursive, warning),
