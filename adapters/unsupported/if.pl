@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for IF/Prolog 5.3
-%  Last updated on September 1, 2020
+%  Last updated on November 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -154,12 +154,17 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 
 % '$lgt_prolog_database_predicate'(@callable)
+%
+% table of non-standard darabase built-in predicates
 
 '$lgt_prolog_database_predicate'(_) :-
 	fail.
 
 
 % '$lgt_prolog_predicate_property'(?callable)
+%
+% table of proprietary predicate properties; used by the
+% compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(_) :-
 	fail.

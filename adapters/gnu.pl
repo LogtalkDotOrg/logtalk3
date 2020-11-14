@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on September 10, 2020
+%  Last updated on November 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -157,11 +157,16 @@ setup_call_cleanup(_, _, _) :-
 
 
 % '$lgt_prolog_database_predicate'(@callable)
+%
+% table of non-standard darabase built-in predicates
 
 '$lgt_prolog_database_predicate'(listing(_)).
 
 
 % '$lgt_prolog_predicate_property'(?callable)
+%
+% table of proprietary predicate properties; used by the
+% compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(_) :-
 	fail.

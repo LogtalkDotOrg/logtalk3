@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on September 9, 2020
+%  Last updated on November 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -245,6 +245,8 @@
 
 
 % '$lgt_prolog_database_predicate'(@callable)
+%
+% table of non-standard darabase built-in predicates
 
 '$lgt_prolog_database_predicate'(assert(_)).
 '$lgt_prolog_database_predicate'(assert(_, _)).
@@ -255,6 +257,9 @@
 
 
 % '$lgt_prolog_predicate_property'(?callable)
+%
+% table of proprietary predicate properties; used by the
+% compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(indexed(_)).
 '$lgt_prolog_predicate_property'(tabled).
