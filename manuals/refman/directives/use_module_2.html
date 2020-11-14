@@ -269,9 +269,9 @@ there’s no mixing between <em>loading</em> a resource and (declaring the)
 automatically load the module. Loading the module file is dependent of
 the used <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> and must be done separately (usually,
 using a source file directive such as <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
-in the entity file or preferably in the application loader file).
-Also, note that the name of the module may differ from the name of the
-module file.</p>
+in the entity file or preferably in the application <a class="reference internal" href="../../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a>
+file). Also, note that the name of the module may differ from the name of
+the module file.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The modules <strong>must</strong> be loaded prior to the compilation of entities
@@ -281,7 +281,7 @@ and retrieve its meta-predicate template to ensure proper call compilation.</p>
 </div>
 <p>The module identifier argument can also be a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a>
 when using the directive in a parametric object or a parametric category
-defined in a source file (the common case). In this case, dynamic binding
+defined in a source file (the common case). In this case, <a class="reference internal" href="../../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
 will be used for all listed predicates (and non-terminals). The parameter
 variable must be instantiated at runtime when the calls are made.</p>
 </div>

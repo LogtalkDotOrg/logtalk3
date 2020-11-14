@@ -44,7 +44,7 @@ declarations of the same alias, declaring an alias for an object alias,
 and redefining an alias to reference a different object are reported as
 compilation errors.
 
-To enable the use of static binding, and thus optimal message sending
+To enable the use of :term:`static binding`, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.
 

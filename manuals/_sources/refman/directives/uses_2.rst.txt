@@ -62,13 +62,13 @@ possible to define alias shorthands using the notation
 ``Predicate::Alias``, where ``Predicate`` and ``Alias`` are callable
 terms where some or all arguments may be instantiated.
 
-To enable the use of static binding, and thus optimal message sending
+To enable the use of :term:`static binding`, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.
 
 The object identifier argument can also be a :term:`parameter variable`
 when using the directive in a parametric object or a parametric category
-defined in a source file (the common case). In this case, dynamic binding
+defined in a source file (the common case). In this case, :term:`dynamic binding`
 will be used for all listed predicates (and non-terminals). The parameter
 variable must be instantiated at runtime when the messages are sent.
 

@@ -260,12 +260,12 @@ possible to define alias shorthands using the notation
 <code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> or, in alternative, the notation
 <code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>, where <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> are callable
 terms where some or all arguments may be instantiated.</p>
-<p>To enable the use of static binding, and thus optimal message sending
+<p>To enable the use of <a class="reference internal" href="../../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.</p>
 <p>The object identifier argument can also be a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a>
 when using the directive in a parametric object or a parametric category
-defined in a source file (the common case). In this case, dynamic binding
+defined in a source file (the common case). In this case, <a class="reference internal" href="../../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
 will be used for all listed predicates (and non-terminals). The parameter
 variable must be instantiated at runtime when the messages are sent.</p>
 </div>

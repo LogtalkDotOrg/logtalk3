@@ -435,7 +435,7 @@ reported by Logtalk as compilation errors.
 
 The object identifier argument can also be a :term:`parameter variable`
 when using the directive in a parametric object or a parametric category.
-In this case, dynamic binding will necessarily be used for all listed
+In this case, :term:`dynamic binding` will necessarily be used for all listed
 predicates (and non-terminals). The parameter variable must be instantiated
 at runtime when the messages are sent. This feature simplifies experimenting
 with multiple implementations of the same protocol (for example, to evaluate

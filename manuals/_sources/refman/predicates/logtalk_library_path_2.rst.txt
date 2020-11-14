@@ -41,12 +41,12 @@ called.
 
 When working with a relocatable application, the actual application
 installation directory can be retrieved by calling the
-:ref:`predicates_logtalk_load_context_2` predicate
-with the ``directory`` key and using the returned value to define the
-``logtalk_library_path/2`` predicate. On a settings file or a loader file,
-simply use an :ref:`directives_initialization_1` directive
-to wrap the call to the ``logtalk_load_context/2`` predicate and the
-assert of the ``logtalk_library_path/2`` fact.
+:ref:`predicates_logtalk_load_context_2` predicate with the ``directory``
+key and using the returned value to define the ``logtalk_library_path/2``
+predicate. On a settings file or a :term:`loader file` file, simply use
+an :ref:`directives_initialization_1` directive to wrap the call to the
+``logtalk_load_context/2`` predicate and the assert of the
+``logtalk_library_path/2`` fact.
 
 This predicate may also be used to override the default
 :term:`scratch directory` by defining the library alias ``scratch_directory``

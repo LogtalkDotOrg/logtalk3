@@ -113,8 +113,8 @@ compiler. While there are pros and cons with each solution, the most relevant
 consequence in this context is for the content of source files. In Logtalk,
 entities and predicates only become available (for the runtime system) after
 the source file is fully compiled and loaded. This may prevent some compiler
-optimizations, notably static binding, if some of the referred entities are
-defined in the same source file. On the other hand, the order of predicate
+optimizations, notably :term:`static binding`, if some of the referred entities
+are defined in the same source file. On the other hand, the order of predicate
 directives and predicate definitions is irrelevant. In contrast, in a system
 implemented using a single-pass compiler, the order of the source file terms
 can and often is significant for proper and successful compilation. In these
@@ -196,7 +196,7 @@ as an argument. The Logtalk source file name extension, as defined in
 the adapter file (by default, ``.lgt``), can be omitted.
 
 If you have more than a few source files then you may want to use a
-loader helper file containing the calls to the ``logtalk_load/1-2``
+:term:`loader file` helper file containing the calls to the ``logtalk_load/1-2``
 predicates. Consulting or compiling the loader file will then compile
 and load all your Logtalk entities into memory (see below for details).
 

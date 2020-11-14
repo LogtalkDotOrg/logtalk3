@@ -71,9 +71,9 @@ there's no mixing between *loading* a resource and (declaring the)
 automatically load the module. Loading the module file is dependent of
 the used :term:`backend Prolog compiler` and must be done separately (usually,
 using a source file directive such as ``use_module/1`` or ``use_module/2``
-in the entity file or preferably in the application loader file).
-Also, note that the name of the module may differ from the name of the
-module file.
+in the entity file or preferably in the application :term:`loader file`
+file). Also, note that the name of the module may differ from the name of
+the module file.
 
 .. warning::
 
@@ -84,7 +84,7 @@ module file.
 
 The module identifier argument can also be a :term:`parameter variable`
 when using the directive in a parametric object or a parametric category
-defined in a source file (the common case). In this case, dynamic binding
+defined in a source file (the common case). In this case, :term:`dynamic binding`
 will be used for all listed predicates (and non-terminals). The parameter
 variable must be instantiated at runtime when the calls are made.
 

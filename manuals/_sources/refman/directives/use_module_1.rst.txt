@@ -42,7 +42,7 @@ declarations of the same alias, declaring an alias for a module alias,
 and redefining an alias to reference a different module are reported as
 compilation errors.
 
-To enable the use of static binding, and thus optimal predicate call
+To enable the use of :term:`static binding`, and thus optimal predicate call
 performance, the modules should be loaded before compiling the entities
 that call their predicates.
 

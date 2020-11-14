@@ -67,7 +67,8 @@ mode, we may instead write:
 The :ref:`predicates_logtalk_make_1` built-in predicate can also be used to
 recompile all loaded files (that were compiled without using explicit values
 for the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` compiler
-flags in a ``logtalk_load/2`` call or in a loader file, if used) in debug mode:
+flags in a ``logtalk_load/2`` call or in a :term:`loader file` file, if used)
+in debug mode:
 
 .. code-block:: text
 
