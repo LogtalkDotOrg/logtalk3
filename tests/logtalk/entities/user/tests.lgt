@@ -18,13 +18,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% database for message sending tests
+a(1).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-04-01,
+		date is 2020-11-15,
 		comment is 'Unit tests for the "user" built-in object.'
 	]).
 
@@ -70,5 +74,15 @@
 	test(user_10) :-
 		setof(Protocol-Scope, implements_protocol(user, Protocol, Scope), List),
 		List == [expanding-(public), forwarding-(public), monitoring-(public)].
+
+	% sending messages to "user"
+	
+	test(user_11) :-
+		{user::a(X)},
+		X == 1.
+	
+	test(user_12) :-
+		user::a(X),
+		X == 1.
 
 :- end_object.

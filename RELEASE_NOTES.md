@@ -112,6 +112,8 @@ Contributed by John Stewart.
 
 * ADDED: Missing type error tests for the Prolog standard `xor/2` function.
 
+* ADDED: Additional tests for the `user` pseudo-object.
+
 * IMPROVED: Some tests for the Prolog standard disjunction control construct
 and the `call/N` predicate to try to delay expected errors to runtime.
 
