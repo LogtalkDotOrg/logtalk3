@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on November 14, 2020
+%  Last updated on November 15, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -692,12 +692,9 @@ write_term(Stream, Term, _) :-
 	!,
 	logtalk_make(caches).
 
-{File, Files} :-
-	!,
-	logtalk_load(File),
-	{Files}.
-{File} :-
-	logtalk_load(File).
+{Files} :-
+	'$lgt_conjunction_to_list'(Files, List),
+	logtalk_load(List).
 
 
 

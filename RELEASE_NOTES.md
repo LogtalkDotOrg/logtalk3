@@ -41,6 +41,10 @@ Prolog adapter and integration files
 
 * ADDED: Unsupported adapter file for Trealla Prolog.
 
+* IMPROVED: Adapter files definition of the `{}/1` top-level interpreter
+shortcut for loading files to use a single call to the `logtalk_load/1`
+built-in predicate.
+
 * UPDATED: The LVM adapter file to take advantage of indexing support for the
 internal runtime tables and of the new `atom_hash/2` built-in predicate.
 

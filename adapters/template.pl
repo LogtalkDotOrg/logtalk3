@@ -664,12 +664,9 @@ term_hash(Term, Depth, Range, Hash) :-
 	!,
 	logtalk_make(caches).
 
-{File, Files} :-
-	!,
-	logtalk_load(File),
-	{Files}.
-{File} :-
-	logtalk_load(File).
+{Files} :-
+	'$lgt_conjunction_to_list'(Files, List),
+	logtalk_load(List).
 
 
 
