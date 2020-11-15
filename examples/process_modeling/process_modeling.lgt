@@ -88,7 +88,7 @@
 		% unify the variables shared between the two domain/2 arguments
         unify(Deps, Dependencies),
 		% establish the constraints
-        {call(Constraints)},
+        {Constraints},
         constraints(Processes, Dependencies).
 
 	unify([], _).

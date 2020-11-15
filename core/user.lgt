@@ -22,9 +22,9 @@
 	implements((expanding, forwarding, monitoring))).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2020-04-01,
+		date is 2020-11-15,
 		comment is 'Pseudo-object representing the plain Prolog database. Can be used as a monitor by defining ``before/3`` and ``after/3`` predicates. Can be used as a hook object by defining ``term_expansion/2`` and ``goal_expansion/2`` multifile and dynamic predicates.'
 	]).
 
@@ -42,7 +42,7 @@
 	% it's not necessary or used as the Logtalk compiler already performs
 	% this translation
 	forward(Message) :-
-		{call(Message)}.
+		{Message}.
 
 	% allow the "user" pseudo-object to be used as an event monitor;
 	% requires before/3 and after/3 predicates to be defined in "user"

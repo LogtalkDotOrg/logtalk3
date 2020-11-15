@@ -21,9 +21,9 @@
 :- category(attvars).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2011-03-08,
+		date is 2020-11-15,
 		comment is 'Runtime support for attributed variables.'
 	]).
 
@@ -53,12 +53,12 @@
 		get_attr(Var, Value) :-
 			this(This),
 			Goal =.. [get_attr, Var, This, Value],
-			{call(Goal)}.
+			{Goal}.
 
 		put_attr(Var, Value) :-
 			this(This),
 			Goal =.. [put_attr, Var, This, Value],
-			{call(Goal)}.
+			{Goal}.
 
 		del_attr(Var) :-
 			this(This),
