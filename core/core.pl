@@ -18435,12 +18435,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_parameter_variable_name'(+atom)
 %
-% checks if a variable name is a parameter variable name
+% checks if a variable name is a parameter variable name (i.e. if the variable
+% name starts and ends with an underscore and have at least three characters)
 
 '$lgt_parameter_variable_name'(VariableName) :-
-	sub_atom(VariableName, 0, 1, After, '_'),
-	After >= 2,
-	sub_atom(VariableName, _, 1, 0, '_').
+	sub_atom(VariableName, Before, 1, 0, '_'),
+	Before >= 2,
+	sub_atom(VariableName, 0, 1, _, '_').
 
 
 

@@ -29,6 +29,8 @@ Logtalk compiler and runtime
 
 * IMPROVED: Compiler performance for protocols.
 
+* IMPROVED: More efficient compiler checking for parameter variables.
+
 * FIXED: Bug in the `logtalk_make/0-1` predicates when reloading a main file
 due to an updated included file when the `clean` flag is turned off and the
 `reload` file is set tp `changed` where the main file would not be recompiled
