@@ -21189,16 +21189,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing predicate directives
 
-'$lgt_report_missing_directives'(Type, Entity) :-
-	(	'$lgt_compiler_flag'(missing_directives, warning) ->
-		'$lgt_report_missing_directives_'(Type, Entity)
-	;	true
-	).
-
+'$lgt_report_missing_directives'(_, _) :-
+	'$lgt_compiler_flag'(missing_directives, silent),
+	!.
 
 % reports missing scope directives for dynamic predicates
 
-'$lgt_report_missing_directives_'(category, Entity) :-
+'$lgt_report_missing_directives'(category, Entity) :-
 	'$lgt_pp_dynamic_'(Head, File, Lines),
 	% declared dynamic predicate in a category are for objects
 	functor(Head, Functor, Arity),
@@ -21218,7 +21215,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing scope directives for multifile predicates
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	'$lgt_pp_multifile_'(Head, File, Lines),
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
@@ -21235,7 +21232,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing meta_predicate/1 directives for meta-predicates
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	'$lgt_pp_missing_meta_predicate_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
@@ -21253,7 +21250,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing multifile/1 directives
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	'$lgt_pp_missing_multifile_directive_'(PI, File, Lines),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
@@ -21264,7 +21261,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing dynamic/1 directives
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	'$lgt_pp_missing_dynamic_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
@@ -21276,7 +21273,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing discontiguous/1 directives
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	'$lgt_pp_missing_discontiguous_directive_'(Head, File, Lines),
 	functor(Head, Functor, Arity),
 	'$lgt_increment_compiling_warnings_counter',
@@ -21288,7 +21285,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % reports missing scope directives for mode directives
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	'$lgt_pp_mode_'(Mode, _, File, Lines),
 	% documented predicate or non-terminal
 	functor(Mode, Functor, Arity),
@@ -21304,7 +21301,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	fail.
 
-'$lgt_report_missing_directives_'(Type, Entity) :-
+'$lgt_report_missing_directives'(Type, Entity) :-
 	(	Type == object ->
 		'$lgt_pp_referenced_object_'(Entity, File, Lines)
 	;	Type == category ->
@@ -21320,7 +21317,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	fail.
 
-'$lgt_report_missing_directives_'(_, _).
+'$lgt_report_missing_directives'(_, _).
 
 
 
@@ -21398,15 +21395,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % reports non-portable predicate and function calls in the body of object and category predicates
 
+'$lgt_report_non_portable_calls'(protocol, _) :-
+	!.
+
+'$lgt_report_non_portable_calls'(_, _) :-
+	'$lgt_compiler_flag'(portability, silent),
+	!.
+
 '$lgt_report_non_portable_calls'(Type, Entity) :-
-	(	Type \== protocol,
-		'$lgt_compiler_flag'(portability, warning) ->
-		'$lgt_report_non_portable_calls_'(Type, Entity)
-	;	true
-	).
-
-
-'$lgt_report_non_portable_calls_'(Type, Entity) :-
 	'$lgt_pp_non_portable_predicate_'(Head, File, Lines),
 		functor(Head, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
@@ -21416,7 +21412,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 	fail.
 
-'$lgt_report_non_portable_calls_'(Type, Entity) :-
+'$lgt_report_non_portable_calls'(Type, Entity) :-
 	'$lgt_pp_non_portable_function_'(Function, File, Lines),
 		functor(Function, Functor, Arity),
 		'$lgt_increment_compiling_warnings_counter',
@@ -21426,7 +21422,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 	fail.
 
-'$lgt_report_non_portable_calls_'(_, _).
+'$lgt_report_non_portable_calls'(_, _).
 
 
 
