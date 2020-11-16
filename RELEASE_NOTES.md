@@ -125,6 +125,8 @@ and the `call/N` predicate to try to delay expected errors to runtime.
 
 * IMPROVED: Tests for Prolog standard double-quoted terms.
 
+* IMPROVED: Tests for the Prolog standard `atom_length/2` built-in predicate.
+
 * IMPROVED: Test for the `logtalk_make/0-1` predicates to ensure that an
 updated main file or included file will have a different file modification
 time from the previous version.

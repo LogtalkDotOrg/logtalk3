@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2020-11-16,
 		comment is 'Unit tests for the ISO Prolog standard atom_length/2 built-in predicate.'
 	]).
 
@@ -34,42 +34,38 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.1.4
 
-	succeeds(iso_atom_length_2_01) :-
-		{atom_length('enchanted evening', N)},
-		N == 17.
+	test(iso_atom_length_2_01, true(N == 17)) :-
+		{atom_length('enchanted evening', N)}.
 
-	succeeds(iso_atom_length_2_02) :-
+	test(iso_atom_length_2_02, true(N == 17)) :-
 		{atom_length('enchanted\
- evening', N)},
-		N == 17.
+ evening', N)}.
 
-	succeeds(iso_atom_length_2_03) :-
-		{atom_length('', N)},
-		N == 0.
+	test(iso_atom_length_2_03, true(N == 0)) :-
+		{atom_length('', N)}.
 
-	fails(iso_atom_length_2_04) :-
+	test(iso_atom_length_2_04, false) :-
 		{atom_length('scarlet', 5)}.
 
-	throws(iso_atom_length_2_05, error(instantiation_error,_)) :-
+	test(iso_atom_length_2_05, error(instantiation_error)) :-
 		{atom_length(_Atom, 4)}.
 
-	throws(iso_atom_length_2_06, error(type_error(atom,1.23),_)) :-
+	test(iso_atom_length_2_06, error(type_error(atom,1.23))) :-
 		{atom_length(1.23, 4)}.
 
-	throws(iso_atom_length_2_07, error(type_error(integer,'4'),_)) :-
+	test(iso_atom_length_2_07, error(type_error(integer,'4'))) :-
 		{atom_length(atom, '4')}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_atom_length_2_08, error(domain_error(not_less_than_zero,-4),_)) :-
+	test(eddbali_atom_length_2_08, error(domain_error(not_less_than_zero,-4))) :-
 		{atom_length(atom, -4)}.
 
 	% the following test is disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8
 	% for all Logtalk supported backend Prolog compilers
 
-	- succeeds(sics_atom_length_2_09) :-
-		{atom_length('Bartók Béla', L)},
-		L == 11.
+	- test(sics_atom_length_2_09, true(N == 11)) :-
+		{atom_length('Bartók Béla', N)}.
 
 :- end_object.
