@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-29,
+		date is 2020-11-16,
 		comment is 'Unit tests for the ISO Prolog standard atom syntax.'
 	]).
 
@@ -78,14 +78,24 @@
 		^^set_text_input('\'a\\X5G\\b\'. '),
 		{read(_)}.
 
+	test(lgt_atom_12, error(syntax_error(_))) :-
+		^^set_text_input('\'a\\ b\'. '),
+		{read(_)}.
+
 	% single quote representation in quoted atoms
 
-	test(lgt_atom_12, true(T == '\'')) :-
+	test(lgt_atom_13, true(T == '\'')) :-
 		^^set_text_input('\'\'\'\'. '),
 		{read(T)}.
 
-	test(lgt_atom_13, true(T == '''')) :-
+	test(lgt_atom_14, true(T == '''')) :-
 		^^set_text_input('\'\\\'\'. '),
+		{read(T)}.
+
+	% atoms with continuation characters
+
+	test(lgt_atom_15, true(T == 'enchanted evening')) :-
+		^^set_text_input(['\'', enchanted, '\\', '\n', ' evening\'. ']),
 		{read(T)}.
 
 	cleanup :-
