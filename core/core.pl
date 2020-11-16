@@ -26229,7 +26229,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	compound(Head),
 	Head =.. [_| Arguments],
 	'$lgt_select'(Argument1, Arguments, OtherArguments),
-	'$lgt_select'(Argument2, OtherArguments, _),
+	'$lgt_member'(Argument2, OtherArguments),
 	term_variables(Argument1, Variables1),
 	term_variables(Argument2, Variables2),
 	'$lgt_intersection'(Variables1, Variables2, [_| _]),
