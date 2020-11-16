@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Also check correctness of `variable_names/1` options in calls to the
+`write_term/2-3` Prolog standard predicates.
+
 * IMPROVED: Compiler performance for protocols.
 
 * IMPROVED: More efficient compiler checking for parameter variables.

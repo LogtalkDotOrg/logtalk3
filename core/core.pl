@@ -6483,8 +6483,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles to disk and then loads to memory a source file or a list of source files
 %
-% a call to this predicate can trigger other calls to it, therefore we must clean
-% the compilation auxiliary predicates before compiling a file
+% a call to this predicate can trigger other calls to it, therefore we *must* clean
+% the compilation auxiliary predicates *before* compiling a file
 
 '$lgt_load_files'([], _) :-
 	!.
@@ -6759,8 +6759,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles to disk a source file or a list of source files
 %
-% a call to this predicate can trigger other calls to it, therefore we
-% must clean the compilation auxiliary predicates before compiling a file
+% a call to this predicate can trigger other calls to it, therefore we *must*
+% clean the compilation auxiliary predicates *before* compiling a file
 
 '$lgt_compile_files'([], _) :-
 	!.
@@ -21097,7 +21097,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), _, (THead:-Nop,DHead,DBody)) :-
 	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
-% goal
+% initialization goal
 '$lgt_compile_predicate_calls'(goal(Body,Ctx), Optimize, TBody) :-
 	'$lgt_compile_body'(Body, TBody0, _, Ctx),
 	(	Optimize == on ->
@@ -21105,7 +21105,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TBody = TBody0
 	).
 
-% debug version of goal
+% debug version of initialization goal
 '$lgt_compile_predicate_calls'(dgoal(Body,Ctx), _, DBody) :-
 	'$lgt_compile_body'(Body, _, DBody, Ctx).
 
@@ -24536,6 +24536,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Boolean == true ->
 		true
 	;	Boolean == false
+	).
+'$lgt_iso_spec_write_term_option'(variable_names(Pairs)) :-
+	'$lgt_is_list'(Pairs),
+	forall(
+		'$lgt_member'(Pair, Pairs),
+		(Pair = (Name = Variable), atom(Name), var(Variable))
 	).
 
 
