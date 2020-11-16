@@ -28,7 +28,7 @@ a(1).
 	:- info([
 		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-11-15,
+		date is 2020-11-16,
 		comment is 'Unit tests for the "user" built-in object.'
 	]).
 
@@ -84,5 +84,13 @@ a(1).
 	test(user_12) :-
 		user::a(X),
 		X == 1.
+
+	% term and goal expansion predicates must be current predicates
+
+	test(user_13) :-
+		{current_predicate(term_expansion/2)}.
+
+	test(user_14) :-
+		{current_predicate(goal_expansion/2)}.
 
 :- end_object.
