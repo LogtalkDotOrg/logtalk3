@@ -103,6 +103,10 @@ Tests
 * CHANGED: The tests for the Prolog standard `log/1` function to also accept
 an `evaluation_error(zero_divisor)` exception term when the argument is zero.
 
+* CHANGED: The tests for the `asserta/1` and `assertz/1` Prolog standard
+predicates to accept alternative callable type errors to account for current
+practice.
+
 * ADDED: Additional tests for the Prolog standard syntax for atoms.
 
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.

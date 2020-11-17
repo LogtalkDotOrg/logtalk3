@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2020-11-17,
 		comment is 'Unit tests for the ISO Prolog standard asserta/1 built-in predicate.'
 	]).
 
@@ -79,7 +79,8 @@
 	throws(lgt_asserta_1_11, error(type_error(callable,4),_)) :-
 		{asserta((4 :- foo))}.
 
-	throws(lgt_asserta_1_12, error(type_error(callable,(fail,4)),_)) :-
+	throws(lgt_asserta_1_12, [error(type_error(callable,(fail,4)),_), error(type_error(callable,4),_)]) :-
+		% the second exception term is throw by some of the Prolog compilers
 		{asserta((foo :- fail,4))}.
 
 :- end_object.
