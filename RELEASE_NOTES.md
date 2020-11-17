@@ -112,8 +112,9 @@ practice.
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
-* ADDED: Additional tests for the `set_stream_position/2`, `peek_byte/1-2`,
-`get_byte/1-2`, `put_byte/1-2`, and `writeq/2` Prolog standard predicates.
+* ADDED: Additional tests for the `current_predicate/1`, `peek_byte/1-2`,
+`get_byte/1-2`, `put_byte/1-2`, `writeq/2`, and `set_stream_position/2`
+Prolog standard predicates.
 
 * ADDED: Additional test for the Prolog standard `(**)/2` function.
 

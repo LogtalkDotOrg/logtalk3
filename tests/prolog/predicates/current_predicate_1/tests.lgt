@@ -32,14 +32,20 @@ elk(X) :- moose(X).
 insect(ant).
 insect(bee).
 
+% declared predicates with no clauses must also be reported
+
+:- dynamic(unicorn/0).
+
+:- multifile(fenix/1).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-10-15,
+		date is 2020-11-17,
 		comment is 'Unit tests for the ISO Prolog standard current_predicate/1 built-in predicate.'
 	]).
 
@@ -94,6 +100,14 @@ insect(bee).
 
 	throws(eclipse_current_predicate_1_12, error(type_error(predicate_indicator,a+1),_)) :-
 		{current_predicate(a+1)}.
+
+	% tests from the Logtalk portability work
+
+	succeeds(lgt_current_predicate_1_13) :-
+		{current_predicate(unicorn/0)}.
+
+	succeeds(lgt_current_predicate_1_14) :-
+		{current_predicate(fenix/1)}.
 
 	% avoid library dependencies
 	memberchk(X, [X| _]) :-
