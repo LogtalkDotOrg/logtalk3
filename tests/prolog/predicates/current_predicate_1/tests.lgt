@@ -38,6 +38,8 @@ insect(bee).
 
 :- multifile(fenix/1).
 
+:- discontiguous(scattered/2).
+
 
 :- object(tests,
 	extends(lgtunit)).
@@ -108,6 +110,9 @@ insect(bee).
 
 	succeeds(lgt_current_predicate_1_14) :-
 		{current_predicate(fenix/1)}.
+
+	succeeds(lgt_current_predicate_1_15) :-
+		{current_predicate(scattered/2)}.
 
 	% avoid library dependencies
 	memberchk(X, [X| _]) :-
