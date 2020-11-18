@@ -47,7 +47,7 @@ insect(bee).
 	:- info([
 		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-11-17,
+		date is 2020-11-18,
 		comment is 'Unit tests for the ISO Prolog standard current_predicate/1 built-in predicate.'
 	]).
 
@@ -71,7 +71,7 @@ insect(bee).
 		{current_predicate(foo/_A)}.
 
 	succeeds(iso_current_predicate_1_05) :-
-		setof(Name, {current_predicate(Name/1)}, Names),
+		findall(Name, {current_predicate(Name/1)}, Names),
 		memberchk(elk, Names), memberchk(insect, Names).
 
 	throws(iso_current_predicate_1_06, error(type_error(predicate_indicator,4),_)) :-
@@ -114,10 +114,24 @@ insect(bee).
 	succeeds(lgt_current_predicate_1_15) :-
 		{current_predicate(scattered/2)}.
 
+	succeeds(iso_current_predicate_1_16) :-
+		findall(Name, {current_predicate(Name/0)}, Names),
+		memberchk(unicorn, Names).
+
+	succeeds(iso_current_predicate_1_17) :-
+		findall(Name, {current_predicate(Name/1)}, Names),
+		memberchk(fenix, Names).
+
+	succeeds(iso_current_predicate_1_18) :-
+		findall(Name, {current_predicate(Name/2)}, Names),
+		memberchk(scattered, Names).
+
 	% avoid library dependencies
-	memberchk(X, [X| _]) :-
+	memberchk(Element, [Head| _]) :-
+		Element == Head,
 		!.
-	memberchk(X, [_| L]) :-
-		memberchk(X, L).
+	memberchk(Element, [_| Tail]) :-
+		nonvar(Tail),
+		memberchk(Element, Tail).
 
 :- end_object.
