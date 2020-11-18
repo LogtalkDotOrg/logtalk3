@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2020-11-09,
+		date is 2020-11-18,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -68,7 +68,7 @@
 
 	% tests from the Logtalk portability work
 
-	test(lgt_stream_property_2_07, true(Term1 == Term3)) :-
+	test(lgt_set_stream_position_2_07, true(Term1 == Term3)) :-
 		os::absolute_file_name('terms.pl', Path),
 		open(Path, read, Stream, [reposition(true)]),
 		stream_property(Stream, position(Position)),
