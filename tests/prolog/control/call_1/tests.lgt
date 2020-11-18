@@ -28,13 +28,22 @@ a(1).
 a(2).
 
 
+% calls to declared predicates with no clauses must fail
+
+:- dynamic(unicorn/0).
+
+:- multifile(fenix/1).
+
+:- discontiguous(scattered/2).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-01-25,
+		date is 2020-11-18,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
@@ -58,10 +67,12 @@ a(2).
 		{call((fail, call(X)))}.
 
 	throws(iso_call_1_05, error(instantiation_error,_)) :-
+		^^suppress_text_output,
 		{b(_)}.
 
 	throws(iso_call_1_06, [error(type_error(callable,(write(3),3)),_), error(type_error(callable,3),_)]) :-
 		% the second exception term is a common but not strictly conforming alternative
+		^^suppress_text_output,
 		{b(3)}.
 
 	succeeds(iso_call_1_07) :-
@@ -73,9 +84,11 @@ a(2).
 		L == [ !-1, !-2 ].
 
 	throws(iso_call_1_09, error(instantiation_error,_)) :-
+		^^suppress_text_output,
 		{call((write(3), _X))}.
 
 	throws(iso_call_1_10, error(type_error(callable,1),_)) :-
+		^^suppress_text_output,
 		X = 1,
 		{call((write(3), call(X)))}.
 
@@ -93,6 +106,7 @@ a(2).
 
 	throws(iso_call_1_14, [error(type_error(callable,(write(3),1)),_), error(type_error(callable,1),_)]) :-
 		% the second exception term is a common but not strictly conforming alternative
+		^^suppress_text_output,
 		X = 1,
 		{call((write(3), X))}.
 
@@ -100,5 +114,16 @@ a(2).
 		% the second exception term is a common but not strictly conforming alternative
 		X = 1,
 		{call((X; true))}.
+
+	% tests from the Logtalk portability work
+
+	fails(lgt_call_1_16) :-
+		{call(unicorn)}.
+
+	fails(lgt_call_1_17) :-
+		{call(fenix(_))}.
+
+	fails(lgt_call_1_18) :-
+		{call(scattered(_, _))}.
 
 :- end_object.

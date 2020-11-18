@@ -109,6 +109,8 @@ practice.
 
 * ADDED: Additional tests for the Prolog standard syntax for atoms.
 
+* ADDED: Additional tests for the Prolog standard `call/1` control construct.
+
 * ADDED: Additional tests for the `atom_concat/3` Prolog standard predicate.
 Contributed by John Stewart.
 
