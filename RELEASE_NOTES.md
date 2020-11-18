@@ -82,6 +82,9 @@ time references to unknown entities.
 
 * UPDATED: The `logtalk_tester` script support for the LVM backend.
 
+* FIXED: The `lgtunit::run_test_sets/1` predicate to throw an object existence
+error instead of failing when a test set object does not exist.
+
 Examples
 --------
 

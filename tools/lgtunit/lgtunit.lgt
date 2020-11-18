@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:10:0,
+		version is 8:10:1,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-11-18,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -710,8 +710,10 @@
 
 	run_test_sets_([]).
 	run_test_sets_([TestSet| TestSets]) :-
-		current_object(TestSet),
-		TestSet::run_test_set,
+		(	current_object(TestSet) ->
+			TestSet::run_test_set
+		;	existence_error(object, TestSet)
+		),
 		run_test_sets_(TestSets).
 
 	run_test_set :-
