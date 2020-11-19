@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:10:1,
+		version is 8:11:0,
 		author is 'Paulo Moura',
 		date is 2020-11-19,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -638,6 +638,8 @@
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
+	% library support for suppressin test output
+	:- uses(os, [null_device_path/1]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
 	% don't assume that between/3 is a built-in predicate as some backend
@@ -2364,27 +2366,15 @@
 
 	% support for suppressing output
 
-	:- if(os::operating_system_type(windows)).
-
 	suppress_text_output :-
-		open('nul', write, Stream, [type(text)]),
+		null_device_path(Path),
+		open(Path, write, Stream, [type(text)]),
 		set_output(Stream).
 
 	suppress_binary_output :-
-		open('nul', write, Stream, [type(binary)]),
+		null_device_path(Path),
+		open(Path, write, Stream, [type(binary)]),
 		set_output(Stream).
-
-	:- else.	% assume a POSIX system
-
-	suppress_text_output :-
-		open('/dev/null', write, Stream, [type(text)]),
-		set_output(Stream).
-
-	suppress_binary_output :-
-		open('/dev/null', write, Stream, [type(binary)]),
-		set_output(Stream).
-
-	:- endif.
 
 	% support for testing input predicates
 
