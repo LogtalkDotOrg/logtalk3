@@ -53,6 +53,12 @@ internal runtime tables and of the new `atom_hash/2` built-in predicate.
 
 * UPDATED: The LVM integration script to select the standard-top-level.
 
+Documentation
+-------------
+
+* FIXED: Mention of settings file possible locations in the integration script
+man pages.
+
 Library
 -------
 
