@@ -24,10 +24,6 @@
 
 
 
-## As silly as it seems, there is no reliable solution to put the following
-## checks in their own file that would be source'd within each individual  
-## integration script!!!
-
 if ! [ "$LOGTALKHOME" ]; then
 	echo "The environment variable LOGTALKHOME should be defined first, pointing"
 	echo "to your Logtalk installation directory!"
