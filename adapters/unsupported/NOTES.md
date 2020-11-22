@@ -187,14 +187,6 @@ lack of standards compliance in key features and several bugs currently
 prevent Logtalk from running.
 
 
-Trealla Prolog
---------------
-
-	trealla.pl
-
-Almost complete. But missing standard features prevents Logtalk from running.
-
-
 tuProlog 2.9.0
 --------------
 
