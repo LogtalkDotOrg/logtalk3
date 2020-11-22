@@ -42,7 +42,8 @@ by default for running Logtalk with the supported backend Prolog compilers
 * Quintus Prolog: `quintuslgt` (experimental)
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
-* Tau Prolog:     `taulgt`     (experimental)
+* Tau Prolog:     `taulgt`
+* Trealla ProLog: `tplgt`      (experimental)
 * XSB:            `xsblgt`     (first run may require `sudo`)
 * XSB MT:         `xsbmtlgt`   (first run may require `sudo`)
 * YAP:            `yaplgt`

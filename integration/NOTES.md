@@ -25,21 +25,22 @@ On POSIX systems, the Logtalk installers make the following integration
 scripts available from the command-line (you may need to adjust your
 system path):
 
-* B-Prolog (version 7.8 or later):         `bplgt`
-* Ciao Prolog (version 1.19.0 or later):   `ciaolgt`    (experimental; first run may require `sudo`)
-* CxProlog (version 0.98.1 or later):      `cxlgt`
-* ECLiPSe (version 6.1#143 or later):      `eclipselgt`
-* GNU Prolog (version 1.4.5 or later):     `gplgt`
-* JIProlog (version 4.1.6.1 or later):     `jiplgt`     (first run may require `sudo`)
-* LVM (version 1.0.0 or later):            `lvmlgt`     (experimental)
-* Qu-Prolog (version 9.7 or later):        `qplgt`
-* Quintus Prolog (version 3.3 or later):   `quintuslgt`
-* SICStus Prolog (version 4.1.0 or later): `sicstuslgt`
-* SWI-Prolog (version 6.6.0 or later):     `swilgt`
-* Tau Prolog (version 0.3.0 or later):     `taulgt`     (experimental)
-* XSB (version 3.8.0 or later):            `xsblgt`     (first run may require `sudo`)
-* XSB MT (version 3.8.0 or later):         `xsbmtlgt`   (first run may require `sudo`)
-* YAP (version 6.3.4 or later):            `yaplgt`
+* B-Prolog (7.8 or later):           `bplgt`
+* Ciao Prolog (1.19.0 or later):     `ciaolgt`    (experimental; first run may require `sudo`)
+* CxProlog (0.98.1 or later):        `cxlgt`
+* ECLiPSe (6.1#143 or later):        `eclipselgt`
+* GNU Prolog (1.4.5 or later):       `gplgt`
+* JIProlog (4.1.6.1 or later):       `jiplgt`     (first run may require `sudo`)
+* LVM (1.0.0 or later):              `lvmlgt`     (experimental)
+* Qu-Prolog (9.7 or later):          `qplgt`
+* Quintus Prolog (3.3 or later):     `quintuslgt`
+* SICStus Prolog (4.1.0 or later):   `sicstuslgt`
+* SWI-Prolog (6.6.0 or later):       `swilgt`
+* Tau Prolog (0.3.0 or later):       `taulgt`     (experimental)
+* Trealla ProLog (1.2.122 or later): `tplgt`      (experimental)"
+* XSB (3.8.0 or later):              `xsblgt`     (first run may require `sudo`)
+* XSB MT (3.8.0 or later):           `xsbmtlgt`   (first run may require `sudo`)
+* YAP (6.3.4 or later):              `yaplgt`
 
 For more information about these scripts and their dependencies, consult
 the corresponding `man` page (e.g. `man yaplgt`). The `man` pages are also

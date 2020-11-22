@@ -86,6 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/sicstuslgt
 /usr/local/bin/swilgt
 /usr/local/bin/taulgt
+/usr/local/bin/tplgt
 /usr/local/bin/xsblgt
 /usr/local/bin/xsbmtlgt
 /usr/local/bin/yaplgt
@@ -113,6 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/sicstuslgt.1.gz
 /usr/local/share/man/man1/swilgt.1.gz
 /usr/local/share/man/man1/taulgt.1.gz
+/usr/local/share/man/man1/tplgt.1.gz
 /usr/local/share/man/man1/xsblgt.1.gz
 /usr/local/share/man/man1/xsbmtlgt.1.gz
 /usr/local/share/man/man1/yaplgt.1.gz
@@ -131,21 +133,22 @@ echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
-echo "* B-Prolog (version 7.8 or later):         bplgt"
-echo "* Ciao Prolog (version 1.19.0 or later):   ciaolgt     (experimental; first run may require sudo)"
-echo "* CxProlog (version 0.98.1 or later):      cxlgt"
-echo "* ECLiPSe (version 6.1#143 or later):      eclipselgt"
-echo "* GNU Prolog (version 1.4.5 or later):     gplgt"
-echo "* JIProlog (version 4.1.6.1 or later):     jiplgt      (first run may require sudo)"
-echo "* LVM (version 1.0.0 or later):            lvmlgt      (experimental)"
-echo "* Qu-Prolog (version 9.7 or later):        qplgt"
-echo "* Quintus Prolog (version 3.3 or later):   quintuslgt  (experimental)"
-echo "* SICStus Prolog (version 4.1.0 or later): sicstuslgt"
-echo "* SWI-Prolog (version 6.6.0 or later):     swilgt"
-echo "* Tau Prolog (version 0.3.0 or later):     taulgt      (experimental)"
-echo "* XSB (version 3.8.0 or later):            xsblgt      (first run may require sudo)"
-echo "* XSB MT (version 3.8.0 or later):         xsbmtlgt    (first run may require sudo)"
-echo "* YAP (version 6.3.4 or later):            yaplgt"
+echo "* B-Prolog (7.8 or later):           bplgt"
+echo "* Ciao Prolog (1.19.0 or later):     ciaolgt     (experimental; first run may require sudo)"
+echo "* CxProlog (0.98.1 or later):        cxlgt"
+echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
+echo "* GNU Prolog (1.4.5 or later):       gplgt"
+echo "* JIProlog (4.1.6.1 or later):       jiplgt      (first run may require sudo)"
+echo "* LVM (1.0.0 or later):              lvmlgt      (experimental)"
+echo "* Qu-Prolog (9.7 or later):          qplgt"
+echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
+echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
+echo "* SWI-Prolog (6.6.0 or later):       swilgt"
+echo "* Tau Prolog (0.3.0 or later):       taulgt      (experimental)"
+echo "* Trealla ProLog (1.2.122 or later): tplgt       (experimental)"
+echo "* XSB (3.8.0 or later):              xsblgt      (first run may require sudo)"
+echo "* XSB MT (3.8.0 or later):           xsbmtlgt    (first run may require sudo)"
+echo "* YAP (6.3.4 or later):              yaplgt"
 echo
 echo "Links to the Prolog integration scripts can be found on \"/usr/local/bin\"."
 echo "Make sure that the Prolog compilers are properly installed and available"
