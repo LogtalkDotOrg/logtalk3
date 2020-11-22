@@ -286,7 +286,7 @@
 		;	Tokens = ['Unknown ~q message for component ~q: ~q'-[Kind, Component, Message], nl]
 		).
 
-	% default_print_message(+atom_or_compound, +atom, +compound, +list, +compound)
+	% default_print_message(+atom_or_compound, +atom, +list)
 	%
 	% print a message that was not intercepted by the user
 	default_print_message(silent, _, _) :-
