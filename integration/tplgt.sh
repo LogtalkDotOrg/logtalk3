@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Trealla ProLog
-##   Last updated on November 22, 2020
+##   Last updated on November 23, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -92,4 +92,8 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec tpl --noindex -f "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
+if ! [ "$TPL_LIBRARY_PATH" ] || [ -d "$TPL_LIBRARY_PATH" ]; then
+	exec tpl --noindex --library "$(dirname "$(which tpl)")/library" -f "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
+else
+	exec tpl --noindex -f "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
+fi
