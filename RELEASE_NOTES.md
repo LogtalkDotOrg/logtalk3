@@ -579,6 +579,9 @@ is bound.
 * ADDED: Tests for the de facto standard `log/2` and `log10/1` arithmetic
 functions.
 
+* ADDED: Additional tests for the de facto standard `findall/4` Prolog
+predicate.
+
 Examples
 --------
 
