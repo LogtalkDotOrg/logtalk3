@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-12,
+		date is 2020-11-23,
 		comment is 'Unit tests for the ISO Prolog standard at_end_of_stream/0-1 built-in predicates.'
 	]).
 
@@ -74,6 +74,16 @@
 		^^set_binary_input(st_i, [0]),
 		\+ {at_end_of_stream(st_i)},
 		^^set_binary_input(st_i, [0]).
+
+	% tests from the Logtalk portability work
+
+	throws(lgt_at_end_of_stream_1_11, error(permission_error(input,stream,st_o),_)) :-
+		^^set_text_output(st_o, ' '),
+		{at_end_of_stream(st_o)}.
+
+	throws(lgt_at_end_of_stream_1_12, error(permission_error(input,stream,st_o),_)) :-
+		^^set_binary_output(st_o, [32]),
+		{at_end_of_stream(st_o)}.
 
 	cleanup :-
 		^^clean_text_input,

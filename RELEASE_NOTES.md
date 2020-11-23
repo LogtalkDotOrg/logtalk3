@@ -124,8 +124,8 @@ practice.
 Contributed by John Stewart.
 
 * ADDED: Additional tests for the `current_predicate/1`, `peek_byte/1-2`,
-`get_byte/1-2`, `put_byte/1-2`, `writeq/2`, and `set_stream_position/2`
-Prolog standard predicates.
+`get_byte/1-2`, `put_byte/1-2`, `writeq/2`, and `set_stream_position/2`, and
+`at_end_of_stream/1` Prolog standard predicates.
 
 * ADDED: Additional test for the Prolog standard `(**)/2` function.
 
