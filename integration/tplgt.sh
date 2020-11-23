@@ -93,7 +93,7 @@ LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
 if ! [ "$TPL_LIBRARY_PATH" ] || [ -d "$TPL_LIBRARY_PATH" ]; then
-	exec tpl --noindex --library "$(dirname "$(which tpl)")/library" -f "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
+	exec tpl --noindex --library "$(dirname "$(which tpl)")/library" -l "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
 else
-	exec tpl --noindex -f "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
+	exec tpl --noindex -l "$LOGTALKHOME/integration/logtalk_tp.pl" "$@"
 fi
