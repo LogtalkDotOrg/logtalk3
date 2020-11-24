@@ -34,7 +34,7 @@ Portable operating-system access predicates.
    - Qu-Prolog portability: ``directory_files/2`` predicate is not supported.
    - Quintus Prolog: ``pid/1`` and ``shell/2`` predicate are not supported.
    - Tau Prolog portability: ``wall_time/1`` predicate is not supported.
-   - Trealla ProLog portability: Several predicates are not supported.
+   - Trealla ProLog portability: ``command_line_arguments/1`` predicate is not supported.
    - XSB portability: ``command_line_arguments/1`` predicate is not supported.
 
 | **Inherited public predicates:**

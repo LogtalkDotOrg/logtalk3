@@ -55,7 +55,7 @@
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
 			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
-			'Trealla ProLog portability' - 'Several predicates are not supported.',
+			'Trealla ProLog portability' - '``command_line_arguments/1`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1614,14 +1614,14 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
-		pid(_) :-
-			throw(not_available(pid/1)).
+		pid(PID) :-
+			{pid(PID)}.
 
-		shell(_, _) :-
-			throw(not_available(shell/2)).
+		shell(Command, Status) :-
+			{shell(Command, Status)}.
 
-		shell(_) :-
-			throw(not_available(shell/1)).
+		shell(Command) :-
+			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
@@ -1686,13 +1686,14 @@
 		time_stamp(Time) :-
 			{get_time(Time)}.
 
-		date_time(2020, 11, 24, 0, 0, 0, 0).
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
+			{date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds)}.
 
 		cpu_time(Seconds) :-
 			{get_time(Seconds)}.
 
-		wall_time(_) :-
-			throw(not_available(wall_time/1)).
+		wall_time(Seconds) :-
+			{wall_time(Seconds)}.
 
 		operating_system_type(Type) :-
 			(	{getenv('COMSPEC', _)} ->
