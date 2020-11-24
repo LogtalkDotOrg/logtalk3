@@ -37,7 +37,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 * ECLiPSe:        `eclipselgt`
 * GNU Prolog:     `gplgt`
 * JIProlog:       `jiplgt`     (first run may require `sudo`)
-* LVM:            `lvmlgt`     (experimental)
+* LVM:            `lvmlgt`
 * Qu-Prolog:      `qplgt`
 * Quintus Prolog: `quintuslgt` (experimental)
 * SICStus Prolog: `sicstuslgt`

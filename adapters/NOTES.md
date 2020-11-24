@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on October 2, 2020
+Last updated on November 24, 2020
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -233,8 +233,6 @@ LVM 1.0.0 and later versions
 ----------------------------
 
 	lvm.pl
-
-Experimental.
 
 
 Qu-Prolog 9.7 and later versions
