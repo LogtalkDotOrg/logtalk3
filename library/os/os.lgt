@@ -1689,7 +1689,7 @@
 		date_time(2020, 11, 24, 0, 0, 0, 0).
 
 		cpu_time(Seconds) :-
-			{get_time(Time)}.
+			{get_time(Seconds)}.
 
 		wall_time(_) :-
 			throw(not_available(wall_time/1)).
@@ -1701,7 +1701,7 @@
 			).
 
 		command_line_arguments(_) :-
-			current_prolog_flag(argv, [_| Arguments]).
+			throw(not_available(command_line_arguments/1)).
 
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
