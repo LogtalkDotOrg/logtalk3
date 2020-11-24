@@ -1668,8 +1668,9 @@
 			absolute_file_name(File, ExpandedPath),
 			{size_file(ExpandedPath, Size)}.
 
-		file_permission(_, _) :-
-			throw(not_available(file_permission/2)).
+		file_permission(File, Permission) :-
+			absolute_file_name(File, ExpandedPath),
+			{access_file(ExpandedPath, Permission)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
