@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on October 7, 2020
+##   Last updated on November 24, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -118,7 +118,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, qp, sicstus, swi, swipack, tau, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, qp, sicstus, swi, swipack, tau, trealla, xsb, xsbmt, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
 	echo "  -s supress path prefix (default is $prefix)"
@@ -193,6 +193,10 @@ elif [ "$p_arg" == "tau" ] ; then
 	prolog='Tau Prolog'
 	logtalk=taulgt$extension
 	logtalk_call="$logtalk -g"
+elif [ "$p_arg" == "trealla" ] ; then
+	prolog='Trealla ProLog'
+	logtalk=tplgt$extension
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk=xsblgt$extension
