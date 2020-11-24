@@ -252,7 +252,6 @@
 		set_seed(Seed) :- {set_seed(Seed)}.
 		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
-		{:- use_module(library(random))}.
 		get_seed(_).
 		set_seed(Seed) :- {srandom(Seed)}.
 		random(Random) :- {random(Random)}.
