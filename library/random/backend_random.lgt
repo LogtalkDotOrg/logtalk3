@@ -252,8 +252,8 @@
 		set_seed(Seed) :- {set_seed(Seed)}.
 		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
-		get_seed(_).
-		set_seed(Seed) :- {srandom(Seed)}.
+		get_seed(Seed) :- {get_seed(Seed)}.
+		set_seed(Seed) :- {set_seed(Seed)}.
 		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		{:- import(from(/(getrand,1), random))}.
