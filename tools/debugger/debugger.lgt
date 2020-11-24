@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:6:1,
+		version is 4:7:0,
 		author is 'Paulo Moura',
-		date is 2020-11-15,
+		date is 2020-11-24,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -457,7 +457,10 @@
 		retractall(skipping_),
 		retractall(quasi_skipping_).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == b; Dialect == qp; Dialect == swi; Dialect == tau; Dialect == yap))).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == b; Dialect == qp; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+	)).
 
 		call_goal(TGoal, Deterministic) :-
 			{setup_call_cleanup(true, TGoal, Deterministic = true)}.

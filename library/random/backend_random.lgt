@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:13:0,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2020-11-24,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
@@ -250,6 +250,11 @@
 		{:- use_module(library(random))}.
 		get_seed(Seed) :- {get_seed(Seed)}.
 		set_seed(Seed) :- {set_seed(Seed)}.
+		random(Random) :- {random(Random)}.
+	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
+		{:- use_module(library(random))}.
+		get_seed(_).
+		set_seed(Seed) :- {srandom(Seed)}.
 		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 		{:- import(from(/(getrand,1), random))}.
