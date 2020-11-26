@@ -22,51 +22,52 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-11-23,
+		date is 2020-11-26,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
-	succeeds(commons_findall_4_01) :-
-		{findall(X, (X=1;X=2), S, [3])},
-		S == [1,2,3].
+	test(commons_findall_4_01, true(S == [1,2,3])) :-
+		{findall(X, (X=1;X=2), S, [3])}.
 
-	succeeds(commons_findall_4_02) :-
-		{findall(X+_Y, (X=1), S, _)},
-		^^variant(S, [1+_|_]).
+	test(commons_findall_4_02, variant(S, [1+_|_])) :-
+		{findall(X+_Y, (X=1), S, _)}.
 
-	succeeds(commons_findall_4_03) :-
-		{findall(_X, fail, L, [0])},
-		L == [0].
+	test(commons_findall_4_03, true(L == [0])) :-
+		{findall(_X, fail, L, [0])}.
 
-	succeeds(commons_findall_4_04) :-
-		{findall(X, (X=1;X=1), S, [])},
-		S == [1,1].
+	test(commons_findall_4_04, true(S == [1,1])) :-
+		{findall(X, (X=1;X=1), S, [])}.
 
-	fails(commons_findall_4_05) :-
+	test(commons_findall_4_05, false) :-
 		{findall(X, (X=2;X=1), [1,2], _)}.
 
-	succeeds(commons_findall_4_06) :-
+	test(commons_findall_4_06, true) :-
 		{findall(X, (X=1;X=2), [X,Y,3], T)},
-		X == 1, Y == 2, T == [3].
+		^^assertion(x, X == 1),
+		^^assertion(y, Y == 2),
+		^^assertion(t, T == [3]).
 
-	throws(commons_findall_4_07, error(instantiation_error,_)) :-
+	test(commons_findall_4_07, true(L == [1,2,3])) :-
+		{findall(X, (X=1;X=2), L, [Y]), Y = 3}.
+
+	test(commons_findall_4_08, error(instantiation_error)) :-
 		{findall(_X, _Goal, _S, _T)}.
 
-	throws(commons_findall_4_08, error(type_error(callable,4),_)) :-
+	test(commons_findall_4_09, error(type_error(callable,4))) :-
 		{findall(_X, 4, _S, _T)}.
 
-	throws(commons_findall_4_09, error(type_error(list,[A|1]),_)) :-
+	test(commons_findall_4_10, error(type_error(list,[A|1]))) :-
 		{findall(X, X=1, [A|1], _)}.
 
-	throws(commons_findall_4_10, error(type_error(list,12),_)) :-
+	test(commons_findall_4_11, error(type_error(list,12))) :-
 		{findall(X, (X=2; X=1), 12, [])}.
 
-	throws(commons_findall_4_11, error(type_error(list,[A|1]),_)) :-
+	test(commons_findall_4_12, error(type_error(list,[A|1]))) :-
 		{findall(X, X=1, _, [A|1])}.
 
-	throws(commons_findall_4_12, error(type_error(list,12),_)) :-
+	test(commons_findall_4_13, error(type_error(list,12))) :-
 		{findall(X, (X=2; X=1), _, 12)}.
 
 :- end_object.
