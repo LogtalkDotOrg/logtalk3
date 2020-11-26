@@ -142,18 +142,17 @@ Third-party tools
 
 ``cloc`` is an open-source command-line program that counts blank lines,
 comment lines, and lines of source code in many programming languages
-including Logtalk. Available at
-`https://github.com/AlDanial/cloc <https://github.com/AlDanial/cloc>`__
+including Logtalk. Available at https://github.com/AlDanial/cloc
 
 ``ohcount`` is an open-source command-line program that counts blank
 lines, comment lines, and lines of source code in many programming
 languages including Logtalk. Available at
-`https://github.com/blackducksoftware/ohcount <https://github.com/blackducksoftware/ohcount>`__
+https://github.com/blackducksoftware/ohcount
 
 ``tokei`` is an open-source command-line program that counts blank
 lines, comment lines, and lines of source code in many programming
 languages including Logtalk. Available at
-`https://github.com/Aaronepower/tokei <https://github.com/Aaronepower/tokei>`__
+https://github.com/Aaronepower/tokei
 
 Applying metrics to Prolog modules
 ----------------------------------

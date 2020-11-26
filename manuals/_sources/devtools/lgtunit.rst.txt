@@ -811,8 +811,6 @@ For example:
            assertion(generator(X,Y,Z), test(X,Y,Z))
        ).
 
-.. _testing-input/output-predicates:
-
 Testing input/output predicates
 -------------------------------
 
@@ -1116,12 +1114,12 @@ page for the script:
 
 An HTML version of this man page can be found at:
 
-`https://logtalk.org/man/logtalk_tester.html <https://logtalk.org/man/logtalk_tester.html>`__
+https://logtalk.org/man/logtalk_tester.html
 
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:
 
-`https://logtalk.org/testing.html <https://logtalk.org/testing.html>`__
+https://logtalk.org/testing.html
 
 Utility predicates
 ------------------
@@ -1231,13 +1229,16 @@ test set directories.
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
--  `http://allure.qatools.ru <http://allure.qatools.ru>`__ (supports
-   multiple reports)
--  `https://github.com/Zir0-93/xunit-to-html <https://github.com/Zir0-93/xunit-to-html>`__
-   (supports multiple test sets in a single report)
--  `https://www.npmjs.com/package/xunit-viewer <https://www.npmjs.com/package/xunit-viewer>`__
--  `https://github.com/JatechUK/NUnit-HTML-Report-Generator <https://github.com/JatechUK/NUnit-HTML-Report-Generator>`__
--  `https://plugins.jenkins.io/xunit <https://plugins.jenkins.io/xunit>`__
+-  http://allure.qatools.ru (supports multiple reports)
+
+-  https://github.com/Zir0-93/xunit-to-html (supports multiple test sets
+   in a single report)
+
+-  https://www.npmjs.com/package/xunit-viewer
+
+-  https://github.com/JatechUK/NUnit-HTML-Report-Generator
+
+-  https://plugins.jenkins.io/xunit
 
 Exporting test results in the TAP output format
 -----------------------------------------------
@@ -1267,8 +1268,9 @@ the set.
 There are several third-party TAP report converters that can generate
 HTML files for easy browsing. For example:
 
--  `https://github.com/Quobject/tap-to-html <https://github.com/Quobject/tap-to-html>`__
--  `https://plugins.jenkins.io/tap/ <https://plugins.jenkins.io/tap/>`__
+-  https://github.com/Quobject/tap-to-html
+
+-  https://plugins.jenkins.io/tap/
 
 Exporting code coverage results in XML format
 ---------------------------------------------

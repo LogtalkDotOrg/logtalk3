@@ -40,4 +40,3 @@ can set it as thew default hook object:
 
    | ?- set_logtalk_flag(hook, expand_library_alias_paths).
    ...
-

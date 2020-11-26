@@ -30,4 +30,3 @@ file:
 ::
 
    | ?- logtalk_load(events(loader)).
-

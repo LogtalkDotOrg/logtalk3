@@ -33,4 +33,3 @@ To test this library predicates, load the ``tester.lgt`` file:
 ::
 
    | ?- logtalk_load(coroutining(tester)).
-

@@ -64,8 +64,6 @@ to set the default hook object:
 
    | ?- set_logtalk_flag(hook, default_workflow_hook).
 
-.. _preventing-applying-any-(other)-user-defined-expansion-rules:
-
 Preventing applying any (other) user-defined expansion rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

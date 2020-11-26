@@ -87,7 +87,7 @@ O'Keefe and can be found in its book "The Craft of Prolog".
 Some elements of this library are inspired by Richard O'Keefe library
 proposal available at:
 
-`http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm <http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm>`__
+http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm
 
 Some libraries, or part of libraries, are either ports of Prolog system
 libraries or inspired by Prolog system libraries. See the individual

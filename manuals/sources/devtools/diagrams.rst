@@ -201,11 +201,10 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.43 on macOS; visit the
-`http://www.graphviz.org/ <http://www.graphviz.org/>`__ website for more
-information). Some recent versions have a nasty regression in the SVG
-exporter where text overflows the boxes that should contain it. Also,
-old stable versions such as 2.40.1 have a bug (fixed in the recent
+version 2.43 on macOS; visit the http://www.graphviz.org/ website for
+more information). Some recent versions have a nasty regression in the
+SVG exporter where text overflows the boxes that should contain it.
+Also, old stable versions such as 2.40.1 have a bug (fixed in the recent
 versions) that can result in very long edges.
 
 The diagrams ``.dot`` files are created on the current directory by
@@ -551,10 +550,8 @@ example, consider the Logtalk library. Its source code is available from
 a GitHub repository and its documentation is published in the Logtalk
 website. The relevant URLs are:
 
--  `https://github.com/LogtalkDotOrg/logtalk3/tree/ <https://github.com/LogtalkDotOrg/logtalk3/tree/>`__
-   (source code)
--  `https://logtalk.org/library/ <https://logtalk.org/library/>`__ (API
-   documentation)
+-  https://github.com/LogtalkDotOrg/logtalk3/tree/ (source code)
+-  https://logtalk.org/library/ (API documentation)
 
 Git source code URLs should include the commit SHA1 to ensure that
 entity and predicate file line information in the URLs remain valid if
@@ -646,7 +643,7 @@ diagrams.
 The zoom icons, ``zoom.png`` and ``zoom.svg`` have been designed by Xinh
 Studio:
 
-`https://www.iconfinder.com/xinhstudio <https://www.iconfinder.com/xinhstudio>`__
+https://www.iconfinder.com/xinhstudio
 
 Currently, only the ``zoom.png`` file is used. A copy of this file must
 exist in any directory used for publishing diagrams using it. The

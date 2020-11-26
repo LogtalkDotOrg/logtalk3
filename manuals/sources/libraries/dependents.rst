@@ -21,4 +21,3 @@ file:
 ::
 
    | ?- logtalk_load(dependents(loader)).
-

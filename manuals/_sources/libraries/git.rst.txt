@@ -54,7 +54,7 @@ output. For example:
 See e.g. the official documentation on ``git log`` pretty formats for
 details:
 
-`https://git-scm.com/docs/pretty-formats <https://git-scm.com/docs/pretty-formats>`__
+https://git-scm.com/docs/pretty-formats
 
 Convenient predicates are also provided for common used formats such as
 the commit author and the commit hash. For example:
@@ -80,4 +80,3 @@ example:
 
    Branch = master
    yes
-

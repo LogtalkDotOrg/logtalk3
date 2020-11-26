@@ -3481,7 +3481,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 43, 0, b02)).
+'$lgt_version_data'(logtalk(3, 43, 0, b03)).
 
 
 
@@ -15374,6 +15374,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 				% built-in Prolog meta-predicate declared in the adapter file in use
 			;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
 				% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
+			;	'$lgt_pp_meta_predicate_'(user::Pred, user::Meta, _, _)
+				% we're either providing a meta-predicate template or overriding the original
+				% meta-predicate template
 			) ->
 			% meta-predicate
 			Pred =.. [Functor| Args],

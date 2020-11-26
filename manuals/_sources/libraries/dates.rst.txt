@@ -24,4 +24,3 @@ file:
 ::
 
    | ?- logtalk_load(dates(loader)).
-

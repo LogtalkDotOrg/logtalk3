@@ -19,4 +19,3 @@ file:
 ::
 
    | ?- logtalk_load(logging(loader)).
-
