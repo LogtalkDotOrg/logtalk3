@@ -1,6 +1,9 @@
 *.lgt linguist-language=Logtalk
 *.pl  linguist-language=Prolog
 
+*.lgt diff=logtalk
+*.logtalk diff=logtalk
+
 docs/_sources/** linguist-generated=true
 docs/_static/** linguist-generated=true
 docs/*.html linguist-generated=true

@@ -189,6 +189,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Sample EditorConfig file and link to the official website to the
 `coding` directory.
 
+* ADDED: Instructions on how to provide better `git diff` hunk header context
+that includes the first line of the entity opening directive.
+
 
 3.42.0 - October 26, 2020
 =========================

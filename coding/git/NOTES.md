@@ -20,3 +20,14 @@ ________________________________________________________________________
 This directory contains a `Logtalk.gitignore` file for versioning Logtalk
 projects using git. To use this file, copy it to the root of your git
 repository and rename it to `.gitignore`.
+
+For providing better `git diff` hunk header context, create or edit your
+`.gitattributes` and add the following lines:
+
+	*.lgt diff=logtalk
+	*.logtalk diff=logtalk
+
+Next, edit your `~/.gitconfig` and add the following lines:
+
+	[diff "logtalk"]
+	    xfuncname ="^[ \t]*(:- (object|protocol|category)\\((.*)(\\)[.]|[,]))$"
