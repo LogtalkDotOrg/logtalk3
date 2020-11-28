@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:7:1,
+		version is 4:7:2,
 		author is 'Paulo Moura',
-		date is 2020-11-26,
+		date is 2020-11-28,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -85,7 +85,7 @@
 		ask_question/5
 	]).
 
-	:- initialization(reset).
+	:- initialization(reset_invocation_number(_)).
 
 	reset :-
 		nospyall,
