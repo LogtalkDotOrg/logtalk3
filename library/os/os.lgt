@@ -43,9 +43,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:70:0,
+		version is 1:70:1,
 		author is 'Paulo Moura',
-		date is 2020-11-24,
+		date is 2020-11-28,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -55,7 +55,7 @@
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
 			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
-			'Trealla ProLog portability' - '``command_line_arguments/1`` predicate is not supported.',
+			'Trealla ProLog portability' - '``command_line_arguments/1`` and ``directory_files/2`` predicates are not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1624,7 +1624,8 @@
 			{shell(Command)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
+			{absolute_file_name(Path, ExpandedPath0, [expand(true)])},
+			atom_chars(ExpandedPath, ExpandedPath0).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1648,9 +1649,8 @@
 			{working_directory(Directory0, Directory0)},
 			atom_chars(Directory, Directory0).
 
-		directory_files(Directory, Files) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{directory_files(ExpandedPath, Files)}.
+		directory_files(_, _) :-
+			throw(not_available(directory_files/2)).
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),

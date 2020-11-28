@@ -19,7 +19,8 @@
 	add([D1| R1], [D2| R2], [Sd| S], O) :-
 		add(R1, R2, S, C),
 		Sum is D1 + D2 + C,
-		Sd is Sum mod 10,O is Sum // 10.
+		Sd is Sum mod 10,
+		O is Sum // 10.
 
 	:- public(max/2).
 	:- coinductive(max(+, -)).
