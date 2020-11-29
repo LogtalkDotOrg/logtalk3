@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-10-13,
+		date is 2020-11-29,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
@@ -117,35 +117,45 @@
 		^^closed_input_stream(S, []),
 		{close(S, [force(true)])}.
 
+	% tests from the Logtalk portability work
+
 	throws(lgt_close_2_09, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{close(S, [force(true)])}.
 
-	succeeds(lgt_close_2_10) :-
+	throws(sics_close_2_10, [error(domain_error(close_option,force(_)),_), error(instantiation_error,_)]) :-
+		current_input(S),
+		{close(S, [force(_)])}.
+
+	throws(sics_close_2_11, error(domain_error(close_option,force(fail)),_)) :-
+		current_input(S),
+		{close(S, [force(fail)])}.
+
+	succeeds(lgt_close_2_12) :-
 		^^set_text_output(''),
 		current_output(S),
 		{close(S, [force(true)])}.
 
-	succeeds(lgt_close_2_11) :-
+	succeeds(lgt_close_2_13) :-
 		^^set_text_output(s, ''),
 		{close(s, [force(true)])}.
 
-	succeeds(lgt_close_2_12) :-
+	succeeds(lgt_close_2_14) :-
 		^^set_text_input(''),
 		current_input(S),
 		{close(S, [force(true)])}.
 
-	succeeds(lgt_close_2_13) :-
+	succeeds(lgt_close_2_15) :-
 		^^set_text_input(s, ''),
 		{close(s, [force(true)])}.
 
-	succeeds(lgt_close_2_14) :-
+	succeeds(lgt_close_2_16) :-
 		{close(user_input, [force(true)])}.
 
-	succeeds(lgt_close_2_15) :-
+	succeeds(lgt_close_2_17) :-
 		{close(user_output, [force(true)])}.
 
-	succeeds(lgt_close_2_16) :-
+	succeeds(lgt_close_2_18) :-
 		{close(user_error, [force(true)])}.
 
 	cleanup :-
