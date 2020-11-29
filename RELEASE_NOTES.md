@@ -139,8 +139,9 @@ practice.
 Contributed by John Stewart.
 
 * ADDED: Additional tests for the `current_predicate/1`, `write_term/2-3`,
-`writeq/2`, `at_end_of_stream/1`, `set_stream_position/2`, `peek_byte/1-2`,
-`get_byte/1-2`, and `put_byte/1-2`, Prolog standard predicates.
+`writeq/2`, `read_term/2-3`, `at_end_of_stream/1`, `set_stream_position/2`,
+`peek_byte/1-2`, `get_byte/1-2`, and `put_byte/1-2`, Prolog standard
+predicates.
 
 * ADDED: Additional test for the Prolog standard `(**)/2` function.
 

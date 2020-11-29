@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2020-10-19,
+		date is 2020-11-29,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -194,6 +194,28 @@
 		^^assertion(VL == [A,B]),
 		^^assertion(VN == ['A'=A,'B'=B]),
 		^^assertion(VS == ['B'=B]).
+
+	% check detection of invalid options; the ISO Prolog standard only
+	% specifies a domain_error/2 but an instantiation_error/0 is also
+	% a sensible made by several Prolog systems when applicable 
+
+	test(lgt_read_term_3_31, error(domain_error(read_option,variables(a)))) :-
+		{read_term(_, [variables(a)])}.
+
+	test(lgt_read_term_3_32, error(domain_error(read_option,variables([_|a])))) :-
+		{read_term(_, [variables([_|a])])}.
+
+	test(lgt_read_term_3_33, error(domain_error(read_option,variable_names(a)))) :-
+		{read_term(_, [variable_names(a)])}.
+
+	test(lgt_read_term_3_34, error(domain_error(read_option,variable_names([_|a])))) :-
+		{read_term(_, [variable_names([_|a])])}.
+
+	test(lgt_read_term_3_35, error(domain_error(read_option,singletons(a)))) :-
+		{read_term(_, [singletons(a)])}.
+
+	test(lgt_read_term_3_36, error(domain_error(read_option,singletons([_|a])))) :-
+		{read_term(_, [singletons([_|a])])}.
 
 	cleanup :-
 		^^clean_text_input,
