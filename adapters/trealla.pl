@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.3.0 and later versions
+%  Adapter file for Trealla Prolog 1.3.3 and later versions
 %  Last updated on November 28, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -132,14 +132,14 @@
 
 '$lgt_prolog_meta_predicate'(call_nth(_, _), call_nth(0, *), predicate).
 '$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_), spawn(0), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _), spawn(1, *), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _, _), spawn(2, *, *), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _, _, _), spawn(3, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _), spawn(4, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _, _), spawn(5, *, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _, _, _), spawn(6, *, *, *, *, *. *), predicate).
-'$lgt_prolog_meta_predicate'(spawn(_, _, _, _, _, _, _, _), spawn(7, *, *, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(task(_), task(0), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _), task(1, *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _), task(2, *, *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _, _), task(3, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _, _, _), task(4, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _), task(5, *, *, *, *, *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _, _), task(6, *, *, *, *, *. *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _, _, _), task(7, *, *, *, *, *, *, *), predicate).
 '$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
 
 
@@ -230,7 +230,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 3, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 3, 3))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
