@@ -43,7 +43,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:70:1,
+		version is 1:71:0,
 		author is 'Paulo Moura',
 		date is 2020-11-28,
 		comment is 'Portable operating-system access predicates.',
@@ -55,7 +55,7 @@
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
 			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
-			'Trealla ProLog portability' - '``command_line_arguments/1`` and ``directory_files/2`` predicates are not supported.',
+			'Trealla ProLog portability' - '``directory_files/2`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1702,8 +1702,8 @@
 			;	Type = unix
 			).
 
-		command_line_arguments(_) :-
-			throw(not_available(command_line_arguments/1)).
+		command_line_arguments(Arguments) :-
+			current_prolog_flag(argv, Arguments).
 
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
