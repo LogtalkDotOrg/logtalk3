@@ -22,26 +22,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2020-11-29,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.5.4
 
-	succeeds(iso_open_4_01) :-
+	test(iso_open_4_01, true) :-
 		os::absolute_file_name('roger_data', Path),
 		^^create_binary_file(Path, []),
 		{open(Path, read, D, [type(binary)]),
 		 at_end_of_stream(D)}.
 
-	succeeds(iso_open_4_02) :-
+	test(iso_open_4_02, true) :-
 		os::absolute_file_name('scowen', Path),
 		{open(Path, write, D, [alias(editor)]),
 		 stream_property(D, alias(editor))}.
 
-	succeeds(iso_open_4_03) :-
+	test(iso_open_4_03, true) :-
 		os::absolute_file_name('dave', Path),
 		^^create_text_file(Path, 'foo.'),
 		{open(Path, read, DD, []),
@@ -50,66 +50,80 @@
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_open_4_04, error(instantiation_error,_)) :-
+	test(sics_open_4_04, error(instantiation_error)) :-
 		{open(_, read, _)}.
 
-	throws(sics_open_4_05, error(instantiation_error,_)) :-
+	test(sics_open_4_05, error(instantiation_error)) :-
 		{open(f, _, _)}.
 
-	throws(sics_open_4_06, error(instantiation_error,_)) :-
+	test(sics_open_4_06, error(instantiation_error)) :-
 		{open(f, write, _, _)}.
 
-	throws(sics_open_4_07, error(instantiation_error,_)) :-
+	test(sics_open_4_07, error(instantiation_error)) :-
 		{open(f, write, _, [type(text)|_])}.
 
-	throws(sics_open_4_08, error(instantiation_error,_)) :-
+	test(sics_open_4_08, error(instantiation_error)) :-
 		{open(f, write, _, [type(text),_])}.
 
-	throws(sics_open_4_09, error(type_error(atom,1),_)) :-
+	test(sics_open_4_09, error(type_error(atom,1))) :-
 		{open(f, 1, _)}.
 
-	throws(sics_open_4_10, error(type_error(list,type(text)),_)) :-
+	test(sics_open_4_10, error(type_error(list,type(text)))) :-
 		{open(f, write, _, type(text))}.
 
-	throws(sics_open_4_11, error(uninstantiation_error(bar),_)) :-
+	test(sics_open_4_11, error(uninstantiation_error(bar))) :-
 		{open(f, write, bar)}.
 
-	throws(sics_open_4_12, error(domain_error(source_sink,foo(1,2)),_)) :-
+	test(sics_open_4_12, error(domain_error(source_sink,foo(1,2)))) :-
 		{open(foo(1,2), write, _)}.
 
-	throws(sics_open_4_13, error(domain_error(io_mode,red),_)) :-
+	test(sics_open_4_13, error(domain_error(io_mode,red))) :-
 		{open('foo', red, _)}.
 
-	throws(sics_open_4_14, error(domain_error(stream_option,bar),_)) :-
+	test(sics_open_4_14, error(domain_error(stream_option,bar))) :-
 		{open(foo, write, _, [bar])}.
 
-	throws(sics_open_4_15, error(existence_error(source_sink,Path),_)) :-
+	test(sics_open_4_15, error(existence_error(source_sink,Path))) :-
 		os::absolute_file_name('nonexistent', Path),
 		{open(Path, read, _)}.
 
-	throws(sics_open_4_16, error(permission_error(open,source_sink,alias(a)),_)) :-
+	test(sics_open_4_16, error(permission_error(open,source_sink,alias(a)))) :-
 		os::absolute_file_name(foo, Path),
 		{open(Path, write, _, [alias(a)]),
 		 open(bar, write, _, [alias(a)])}.
 
-	% tests from the Logtalk portability work
+	% tests from the Logtalk portability work; the ISO Prolog standard only
+	% specifies a domain_error/2 for incvlaid option but an instantiation_error/0
+	% is also a sensible choice made by several Prolog systems when applicable 
 
-	throws(lgt_open_4_17, error(instantiation_error,_)) :-
+	test(lgt_open_4_17, error(instantiation_error)) :-
 		{open(foo, write, _, [_|_])}.
 
-	throws(lgt_open_4_18, error(domain_error(stream_option,1),_)) :-
+	test(lgt_open_4_18, error(domain_error(stream_option,1))) :-
 		{open(foo, write, _, [1])}.
 
-	throws(lgt_open_4_19, error(domain_error(stream_option,alias(1)),_)) :-
+	test(lgt_open_4_19, errors([domain_error(stream_option,alias(_)), instantiation_error])) :-
+		{open(foo, write, _, [alias(_)])}.
+
+	test(lgt_open_4_20, error(domain_error(stream_option,alias(1)))) :-
 		{open(foo, write, _, [alias(1)])}.
 
-	throws(lgt_open_4_20, error(domain_error(stream_option,eof_action(1)),_)) :-
+	test(lgt_open_4_21, errors([domain_error(stream_option,eof_action(_)), instantiation_error])) :-
+		{open(foo, write, _, [eof_action(_)])}.
+
+	test(lgt_open_4_22, error(domain_error(stream_option,eof_action(1)))) :-
 		{open(foo, write, _, [eof_action(1)])}.
 
-	throws(lgt_open_4_21, error(domain_error(stream_option,reposition(1)),_)) :-
+	test(lgt_open_4_23, errors([domain_error(stream_option,reposition(_)), instantiation_error])) :-
+		{open(foo, write, _, [reposition(_)])}.
+
+	test(lgt_open_4_24, error(domain_error(stream_option,reposition(1)))) :-
 		{open(foo, write, _, [reposition(1)])}.
 
-	throws(lgt_open_4_22, error(domain_error(stream_option,type(1)),_)) :-
+	test(lgt_open_4_25, errors([domain_error(stream_option,type(_)), instantiation_error])) :-
+		{open(foo, write, _, [type(_)])}.
+
+	test(lgt_open_4_26, error(domain_error(stream_option,type(1)))) :-
 		{open(foo, write, _, [type(1)])}.
 
 	cleanup :-

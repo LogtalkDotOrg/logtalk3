@@ -281,7 +281,7 @@
 
 	% check detection of invalid options; the ISO Prolog standard only
 	% specifies a domain_error/2 but an instantiation_error/0 is also
-	% a sensible made by several Prolog systems when applicable 
+	% a sensible choice made by several Prolog systems when applicable 
 
 	test(sics_write_term_3_47, errors([domain_error(write_option,quoted(_)), instantiation_error])) :-
 		{write_term(1, [quoted(_)])}.

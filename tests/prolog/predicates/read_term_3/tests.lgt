@@ -197,7 +197,7 @@
 
 	% check detection of invalid options; the ISO Prolog standard only
 	% specifies a domain_error/2 but an instantiation_error/0 is also
-	% a sensible made by several Prolog systems when applicable 
+	% a sensible choice made by several Prolog systems when applicable 
 
 	test(lgt_read_term_3_31, error(domain_error(read_option,variables(a)))) :-
 		{read_term(_, [variables(a)])}.
