@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:15:0,
+		version is 1:15:1,
 		author is 'Paulo Moura',
-		date is 2020-11-29,
+		date is 2020-11-30,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -284,33 +284,43 @@
 	% a sensible choice made by several Prolog systems when applicable 
 
 	test(sics_write_term_3_47, errors([domain_error(write_option,quoted(_)), instantiation_error])) :-
+		^^suppress_text_output,
 		{write_term(1, [quoted(_)])}.
 
 	test(sics_write_term_3_48, error(domain_error(write_option,quoted(fail)))) :-
+		^^suppress_text_output,
 		{write_term(1, [quoted(fail)])}.
 
 	test(sics_write_term_3_49, errors([domain_error(write_option,ignore_ops(_)), instantiation_error])) :-
+		^^suppress_text_output,
 		{write_term(1, [ignore_ops(_)])}.
 
 	test(sics_write_term_3_50, error(domain_error(write_option,ignore_ops(fail)))) :-
+		^^suppress_text_output,
 		{write_term(1, [ignore_ops(fail)])}.
 
 	test(sics_write_term_3_51, errors([domain_error(write_option,numbervars(_)), instantiation_error])) :-
+		^^suppress_text_output,
 		{write_term(1, [numbervars(_)])}.
 
 	test(sics_write_term_3_52, error(domain_error(write_option,numbervars(fail)))) :-
+		^^suppress_text_output,
 		{write_term(1, [numbervars(fail)])}.
 
 	test(sics_write_term_3_53, errors([domain_error(write_option,variable_names(_)), instantiation_error])) :-
+		^^suppress_text_output,
 		{write_term(1, [variable_names(_)])}.
 
 	test(sics_write_term_3_54, error(domain_error(write_option,variable_names(a)))) :-
+		^^suppress_text_output,
 		{write_term(1, [variable_names(a)])}.
 
 	test(sics_write_term_3_55, errors([domain_error(write_option,variable_names([_='A'])), instantiation_error])) :-
+		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
 	test(sics_write_term_3_56, errors([domain_error(write_option,variable_names(['A'=_|_])), instantiation_error])) :-
+		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 
 	cleanup :-
