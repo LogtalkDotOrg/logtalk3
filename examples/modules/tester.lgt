@@ -24,7 +24,10 @@
 	logtalk_load([exports, lists, metapreds, test], [debug(on), source_data(on)]),
 	% also test parsing of use_module/1 directives, which
 	% is only supported by some backend Prolog compilers
-	catch((logtalk_load(client, [debug(on), source_data(on)]) -> true; true), _, true),
+	(	current_logtalk_flag(modules, supported) ->
+		logtalk_load(client, [debug(on), source_data(on)])
+	; 	true
+	),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

@@ -21,7 +21,7 @@ RELEASE NOTES
 =============
 
 
-3.43.0 - November ??, 2020
+3.43.0 - December ??, 2020
 ==========================
 
 Logtalk compiler and runtime
@@ -114,6 +114,9 @@ avoid a conflict with a LVM built-in operator.
 
 * FIXED: The `expansion` example to only expand entity terms in the expansion
 pipeline demo.
+
+* FIXED: The `modules` example to avoid a spurious loading error when running
+its tests using a backend that doesn't natively support modules.
 
 Contributions
 -------------
