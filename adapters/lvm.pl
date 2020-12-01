@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.0.0 and later versions
-%  Last updated on November 15, 2020
+%  Last updated on December 1, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -407,7 +407,9 @@ setup_call_cleanup(_, _, _) :-
 	destroy_index('$lgt_extends_object_'/3),
 	create_index('$lgt_extends_object_'/3),
 	destroy_index('$lgt_extends_protocol_'/3),
-	create_index('$lgt_extends_protocol_'/3).
+	create_index('$lgt_extends_protocol_'/3),
+	destroy_index(logtalk_library_path/2),
+	create_index(logtalk_library_path/2).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
