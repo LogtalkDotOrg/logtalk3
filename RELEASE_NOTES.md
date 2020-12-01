@@ -106,6 +106,9 @@ objects.
 to ensure that code compiled in debug mode will also run even when not tracing
 or debugging. Thanks to Camilo Correa Restrepo for the bug report.
 
+* FIXED: The `lgtdoc` tool to abolish the temporary objects created to find
+inherited predicates when documenting entities.
+
 Examples
 --------
 

@@ -22,9 +22,9 @@
 	implements(lgtdocp)).
 
 	:- info([
-		version is 5:3:0,
+		version is 5:3:1,
 		author is 'Paulo Moura',
-		date is 2020-06-26,
+		date is 2020-12-01,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1309,10 +1309,12 @@
 
 	inherited_predicates(protocol, Entity, Predicates) :-
 		create_object(Object, [implements(Entity)], [], []),
-		find_inherited_predicates(Object, Entity, Predicates).
+		find_inherited_predicates(Object, Entity, Predicates),
+		abolish_object(Object).
 	inherited_predicates(category, Entity, Predicates) :-
 		create_object(Object, [imports(Entity)], [], []),
-		find_inherited_predicates(Object, Entity, Predicates).
+		find_inherited_predicates(Object, Entity, Predicates),
+		abolish_object(Object).
 	inherited_predicates(object, Entity, Predicates) :-
 		(	\+ instantiates_class(Entity, _),
 			\+ specializes_class(Entity, _) ->
@@ -1324,7 +1326,8 @@
 		;	% class
 			create_object(Object, [instantiates(Entity)], [], [])
 		),
-		find_inherited_predicates(Object, Entity, Predicates).
+		find_inherited_predicates(Object, Entity, Predicates),
+		abolish_object(Object).
 
 	find_inherited_predicates(Object, Entity, Predicates) :-
 		findall(
