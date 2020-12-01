@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:1,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2020-10-22,
+		date is 2020-12-01,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -97,16 +97,13 @@
 		rdirectory(Directory).
 
 	cleanup :-
-		logtalk::expand_library_path(lgtdoc, Directory),
+		this(This),
+		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'xml_docs/', XMLDocsDirectory),
-		os::directory_files(XMLDocsDirectory, XMLFiles),
+		os::directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
 		forall(
-			(	list::member(XMLFile, XMLFiles),
-				sub_atom(XMLFile, _, 4, 0, '.xml')
-			),
-			(	atom_concat(XMLDocsDirectory, XMLFile, XMLFilePath),
-				os::delete_file(XMLFilePath)
-			)
+			list::member(XMLFile, XMLFiles),
+			os::delete_file(XMLFile)
 		),
 		os::delete_directory(XMLDocsDirectory).
 
