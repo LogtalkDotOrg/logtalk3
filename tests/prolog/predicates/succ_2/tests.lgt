@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-12-23,
+		date is 2020-12-02,
 		comment is 'Unit tests for the de facto Prolog standard succ/2 built-in predicate.'
 	]).
 
@@ -54,5 +54,8 @@
 
 	test(lgt_succ_2_08, fail) :-
 		{succ(3, 2)}.
+
+	test(lgt_succ_2_09, fail) :-
+		{succ(_, 0)}.
 
 :- end_object.
