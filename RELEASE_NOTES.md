@@ -137,7 +137,8 @@ an `evaluation_error(zero_divisor)` exception term when the argument is zero.
 predicates to accept alternative callable type errors to account for current
 practice.
 
-* ADDED: Additional tests for the Prolog standard syntax for atoms.
+* ADDED: Additional tests for the Prolog standard syntax for atoms and curly
+bracketed terms.
 
 * ADDED: Additional tests for the Prolog standard `call/1` control construct.
 

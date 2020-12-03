@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-30,
+		date is 2020-12-03,
 		comment is 'Unit tests for the ISO Prolog standard curly bracketed term syntax.'
 	]).
 
@@ -65,6 +65,21 @@
 		^^set_text_output(''),
 		{write_canonical({a,b})},
 		^^text_output_assertion('{}(\',\'(a,b))', Assertion).
+
+	test(lgt_curly_bracketed_term_09, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq({'A','B','C'})},
+		^^text_output_assertion('{\'A\',\'B\',\'C\'}', Assertion).
+
+	test(lgt_curly_bracketed_term_10, true(Assertion)) :-
+		^^set_text_output(''),
+		{write({1,2,3})},
+		^^text_output_assertion('{1,2,3}', Assertion).
+
+	test(lgt_curly_bracketed_term_11, true(Assertion)) :-
+		^^set_text_output(''),
+		{write({(1,2,3)})},
+		^^text_output_assertion('{1,2,3}', Assertion).
 
 	cleanup :-
 		^^clean_text_input,
