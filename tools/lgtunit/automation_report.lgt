@@ -51,6 +51,7 @@
 
 	% start
 	message_hook(tests_started) :-
+		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(test_results_directory, Directory)},
 		{current_logtalk_flag(test_unit_name, Name)},
 		atom_concat('/', Name, ResultsFile0),

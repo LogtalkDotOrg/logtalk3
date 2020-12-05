@@ -1204,8 +1204,8 @@ the definition of the `condition/1`, `setup/1`, and `cleanup/1` test options
 when using the `test/3` dialect. Use in alternative the `parameter/2` built-in
 execution context predicate.
 
-Deterministic unit tests are currently not available when using Prolog as it
-lacks built-in support that cannot be sensibly defined in Prolog.
+Deterministic unit tests are currently not available when using Quintus Prolog
+as it lacks built-in support that cannot be sensibly defined in Prolog.
 
 
 Other notes
