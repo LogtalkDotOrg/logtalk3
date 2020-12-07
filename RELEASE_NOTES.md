@@ -86,6 +86,8 @@ and `..` directories as per the `osp` protocol.
 * FIXED: Fix the `os::shell/1` library predicate for ECLiPSe (broken due to a
 bug in its `system/1` built-in predicate).
 
+* FIXED: The `os::command_line_arguments/1` predicate for Tau Prolog.
+
 Tools
 -----
 

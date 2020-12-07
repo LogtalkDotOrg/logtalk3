@@ -29,6 +29,7 @@
 :- elif(current_logtalk_flag(prolog_dialect, swi)).
 	:- use_module(library(filesex)).
 :- elif(current_logtalk_flag(prolog_dialect, tau)).
+	:- use_module(library(lists)).
 	:- use_module(library(statistics)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	:- import(from(/(datime,1), standard)).
@@ -43,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:71:0,
+		version is 1:71:1,
 		author is 'Paulo Moura',
-		date is 2020-11-28,
+		date is 2020-12-07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1604,7 +1605,8 @@
 			).
 
 		command_line_arguments(Arguments) :-
-			current_prolog_flag(argv, [_| Arguments]).
+			current_prolog_flag(argv, AllArguments),
+			{append(_, ['--'| Arguments], AllArguments)}, !.
 
 		sleep(Seconds) :-
 			number_codes(Seconds, Codes),
