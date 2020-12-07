@@ -44,7 +44,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:71:1,
+		version is 1:72:0,
 		author is 'Paulo Moura',
 		date is 2020-12-07,
 		comment is 'Portable operating-system access predicates.',
@@ -55,7 +55,6 @@
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
-			'Tau Prolog portability' - '``wall_time/1`` predicate is not supported.',
 			'Trealla ProLog portability' - '``directory_files/2`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
@@ -1595,8 +1594,9 @@
 			{statistics(runtime, [Milliseconds| _])},
 			Seconds is Milliseconds / 1000.
 
-		wall_time(_) :-
-			throw(not_available(wall_time/1)).
+		wall_time(Seconds) :-
+			{statistics(walltime, Milliseconds)},
+			Seconds is Milliseconds / 1000.
 
 		operating_system_type(Type) :-
 			(	{getenv('COMSPEC', _)} ->
