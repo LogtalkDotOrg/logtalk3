@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-01-22,
+		date is 2020-12-08,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -66,13 +66,17 @@
 		findall(List, {between(0,3,N), length(List,N)}, Lists),
 		^^variant(Lists, [[], [_], [_,_], [_,_,_]]).
 
-	throws(commons_length_2_10, error(type_error(integer,a),_)) :-
+	succeeds(commons_length_2_10) :-
+		findall(List-N, {(length(List, N), (N < 3 -> true; !))}, Lists),
+		^^variant(Lists, [[]-0, [_]-1, [_,_]-2, [_,_,_]-3]).
+
+	throws(commons_length_2_11, error(type_error(integer,a),_)) :-
 		{length(_, a)}.
 
-	throws(commons_length_2_11, error(type_error(list,a),_)) :-
+	throws(commons_length_2_12, error(type_error(list,a),_)) :-
 		{length(a, _)}.
 
-	throws(commons_length_2_12, error(domain_error(not_less_than_zero,-1),_)) :-
+	throws(commons_length_2_13, error(domain_error(not_less_than_zero,-1),_)) :-
 		{length(_, -1)}.
 
 :- end_object.

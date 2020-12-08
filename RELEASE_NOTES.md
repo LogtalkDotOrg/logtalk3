@@ -164,8 +164,8 @@ Prolog standard predicates.
 
 * ADDED: Missing type error tests for the Prolog standard `xor/2` function.
 
-* ADDED: Additional tests for the de facto standard `findall/4` and `succ/2`
-Prolog predicates.
+* ADDED: Additional tests for the de facto standard `findall/4`, `length/2`,
+and `succ/2` Prolog predicates.
 
 * ADDED: Additional tests for the `user` pseudo-object.
 
