@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-01-06,
+		date is 2020-12-09,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
@@ -68,5 +68,11 @@
 		^^assertion(Y == '$VAR'(-6)),
 		^^assertion(Z == '$VAR'(-5)),
 		^^assertion(N == -4).
+
+	test(commons_numbervars_3_08, error(instantiation_error)) :-
+		{numbervars(_, _, _)}.
+
+	test(commons_numbervars_3_09, error(type_error(integer,a))) :-
+		{numbervars(_, a, _)}.
 
 :- end_object.
