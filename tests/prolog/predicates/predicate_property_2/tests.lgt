@@ -33,9 +33,9 @@ elk(X) :- moose(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-12-09,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 
@@ -75,5 +75,14 @@ elk(X) :- moose(X).
 
 	test(commons_predicate_property_2_09, true) :-
 		{predicate_property(scattered(_), (dynamic))}.
+
+	test(commons_predicate_property_2_10, error(instantiation_error)) :-
+		{predicate_property(_, _)}.
+
+	test(commons_predicate_property_2_11, error(type_error(callable,1))) :-
+		{predicate_property(1, _)}.
+
+	test(commons_predicate_property_2_12, error(domain_error(predicate_property,foobar))) :-
+		{predicate_property(atom_chars(_,_), foobar)}.
 
 :- end_object.
