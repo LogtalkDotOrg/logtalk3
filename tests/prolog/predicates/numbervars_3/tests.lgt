@@ -75,4 +75,7 @@
 	test(commons_numbervars_3_09, error(type_error(integer,a))) :-
 		{numbervars(_, a, _)}.
 
+	test(commons_numbervars_3_10, error(type_error(integer,a))) :-
+		{numbervars(_, 1, a)}.
+
 :- end_object.
