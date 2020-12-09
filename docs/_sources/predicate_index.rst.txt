@@ -296,6 +296,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::append/3>`
+* :ref:`queuep <queuep/0::append/3>`
 * :ref:`varlistp <varlistp/0::append/3>`
 
 ``apply/2``
@@ -3565,6 +3566,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`queuep <queuep/0::jump_all/3>`
 
+``jump_all_block/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`queuep <queuep/0::jump_all_block/3>`
+
 ``keys/2``
 ----------
 
@@ -4053,6 +4064,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`expected(Expected) <expected/1::map/2>`
 * :ref:`metap <metap/0::map/2>`
 * :ref:`optional(Optional) <optional/1::map/2>`
+* :ref:`queuep <queuep/0::map/2>`
 
 ``map/3``
 ---------
@@ -4065,6 +4077,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::map/3>`
 * :ref:`metap <metap/0::map/3>`
 * :ref:`pairs <pairs/0::map/3>`
+* :ref:`queuep <queuep/0::map/3>`
 
 ``map/4``
 ---------

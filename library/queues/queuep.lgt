@@ -21,9 +21,9 @@
 :- protocol(queuep).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-03-25,
+		date is 2020-12-09,
 		comment is 'Queue protocol.',
 		see_also is [queue]
 	]).
@@ -66,8 +66,22 @@
 	:- public(jump_all/3).
 	:- mode(jump_all(+list, +queue, -queue), zero_or_one).
 	:- info(jump_all/3, [
-		comment is 'Adds the new elements at the front of the queue. The elements are added in the same order that they appear in the list.',
+		comment is 'Adds the new elements at the front of the queue. The last element in the list will be at the front of the queue.',
 		argnames is ['Elements', 'Queue', 'NewQueue']
+	]).
+
+	:- public(jump_all_block/3).
+	:- mode(jump_all_block(+list, +queue, -queue), zero_or_one).
+	:- info(jump_all_block/3, [
+		comment is 'Adds the new elements as a block at the front of the queue. The first element in the list will be at the front of the queue.',
+		argnames is ['Elements', 'Queue', 'NewQueue']
+	]).
+
+	:- public(append/3).
+	:- mode(append(+queue, +queue, -queue), one).
+	:- info(append/3, [
+		comment is 'Appends two queues. The new queue will have the elements of the first queue followed by the elements of the second queue.',
+		argnames is ['Queue1', 'Queue2', 'NewQueue']
 	]).
 
 	:- public(length/2).
@@ -89,6 +103,22 @@
 	:- info(as_list/2, [
 		comment is 'Converts a queue to a list.',
 		argnames is ['Queue', 'List']
+	]).
+
+	:- public(map/2).
+	:- meta_predicate(map(1, *)).
+	:- mode(map(+callable, +queue), zero_or_one).
+	:- info(map/2, [
+		comment is 'Applies a closure to all elements of a queue.',
+		argnames is ['Closure', 'Queue']
+	]).
+
+	:- public(map/3).
+	:- meta_predicate(map(2, *, *)).
+	:- mode(map(+callable, +queue, ?queue), zero_or_one).
+	:- info(map/3, [
+		comment is 'Applies a closure to all elements of a queue constructing a new queue.',
+		argnames is ['Closure', 'Queue', 'NewQueue']
 	]).
 
 :- end_protocol.

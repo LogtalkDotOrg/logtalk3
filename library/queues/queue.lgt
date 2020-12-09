@@ -23,9 +23,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-05-23,
+		date is 2020-12-09,
 		comment is 'Queue predicates implemented using difference lists.'
 	]).
 
@@ -47,16 +47,23 @@
 	join(Element, Front-[Element| Back], Front-Back).
 
 	join_all([], Queue, Queue).
-	join_all([Head| Tail], Queue1, Queue3) :-
-		join(Head, Queue1, Queue2),
-		join_all(Tail, Queue2, Queue3).
+	join_all([Head| Tail], Queue0, Queue) :-
+		join(Head, Queue0, Queue1),
+		join_all(Tail, Queue1, Queue).
 
 	jump(Element, Front-Back, [Element| Front]-Back).
 
 	jump_all([], Queue, Queue).
-	jump_all([Head| Tail], Queue1, Queue3) :-
-		jump(Head, Queue1, Queue2),
-		jump_all(Tail, Queue2, Queue3).
+	jump_all([Head| Tail], Queue0, Queue) :-
+		jump(Head, Queue0, Queue1),
+		jump_all(Tail, Queue1, Queue).
+
+	jump_all_block([], Queue, Queue).
+	jump_all_block([Head|Tail], Queue, Queue0) :-
+		jump(Head, Queue1, Queue0),
+		jump_all_block(Tail, Queue, Queue1).
+
+	append(Queue1-Back1, Back1-Back2, Queue1-Back2).
 
 	length(Front-Back, Length) :-
 		length(Front, Back, 0, Length).
@@ -74,6 +81,27 @@
 	serve(OldFront-Back, Head, NewFront-Back) :-
 		OldFront \== Back,
 		OldFront = [Head| NewFront].
+
+	:- meta_predicate(map(1, *)).
+	map(_, Queue-Back) :-
+		Queue == Back,
+		!.
+	map(Closure, Queue-Back) :-
+		Queue \== Back,
+		Queue = [Head| Tail],
+		call(Closure, Head),
+		map(Closure, Tail-Back).
+
+	:- meta_predicate(map(2, *, *)).
+	map(_, Queue-Back, NewQueue-NewBack) :-
+		Queue == Back,
+		!,
+		NewQueue = NewBack.
+	map(Closure, Queue-Back, [NewHead| NewTail]-NewBack) :-
+		Queue \== Back,
+		Queue = [Head| Tail],
+		call(Closure, Head, NewHead),
+		map(Closure, Tail-Back, NewTail-NewBack).
 
 	valid(Queue) :-
 		nonvar(Queue),
