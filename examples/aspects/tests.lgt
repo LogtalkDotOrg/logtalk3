@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2020-02-20,
+		date is 2020-12-12,
 		comment is 'Unit tests for the "aspects" example.'
 	]).
 
@@ -34,6 +34,7 @@
 	cover(account).
 
 	test(aspects_01, true) :-
+		^^suppress_text_output,
 		bank::transfer(john, jane, 100),
 		^^assertion(john, john::balance(900)),
 		^^assertion(jane, jane::balance(1100)).
