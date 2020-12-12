@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:12:0,
+		version is 8:12:1,
 		author is 'Paulo Moura',
-		date is 2020-11-24,
+		date is 2020-12-12,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1368,7 +1368,7 @@
 			print_message(error, lgtunit, non_instantiated_test_identifier)
 		;	\+ callable(Test) ->
 			print_message(error, lgtunit, non_callable_test_identifier(Object, Test))
-		;	ground(Test),
+		;	atom(Test),
 			test_(Test, _) ->
 			print_message(error, lgtunit, repeated_test_identifier(Object, Test))
 		;	functor(Test, Functor, Arity),

@@ -109,6 +109,9 @@ time references to unknown entities.
 * FIXED: The `lgtunit::run_test_sets/1` predicate to type-check the test set
 objects.
 
+* FIXED: The `lgtunit` tool check for repeated test identifiers when using a
+test identifier is a ground compound term.
+
 * FIXED: The `debugger` tool to call the `reset/0` predicate at loading time
 to ensure that code compiled in debug mode will also run even when not tracing
 or debugging. Thanks to Camilo Correa Restrepo for the bug report.
