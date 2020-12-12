@@ -203,13 +203,13 @@ Test dialects
 -------------
 
 Multiple test *dialects* are supported by default. See the next section
-on how to define your own test dialects. In all dialects, a callable
-term, usually an atom, is used to uniquely identify a test. This
-simplifies reporting failed tests and running tests selectively. An
-error message is printed if duplicated test identifiers are found. These
-errors must be corrected otherwise the reported test results can be
-misleading. Ideally, tests should have descriptive names that clearly
-state the purpose of the test and what is being tested.
+on how to define your own test dialects. In all dialects, a **ground
+callable term**, usually an atom, is used to uniquely identify a test.
+This simplifies reporting failed tests and running tests selectively. An
+error message is printed if invalid or duplicated test identifiers are
+found. These errors must be corrected otherwise the reported test
+results can be misleading. Ideally, tests should have descriptive names
+that clearly state the purpose of the test and what is being tested.
 
 Unit tests can be written using any of the following predefined
 dialects:

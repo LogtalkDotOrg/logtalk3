@@ -96,6 +96,9 @@ bug in its `system/1` built-in predicate).
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool now requires and checks that test identifiers
+are ground callable terms.
+
 * ADDED: Support for Trealla ProLog to the `debugger`, `lgtunit`, and
 `ports_profiler` tools.
 
@@ -108,9 +111,6 @@ time references to unknown entities.
 
 * FIXED: The `lgtunit::run_test_sets/1` predicate to type-check the test set
 objects.
-
-* FIXED: The `lgtunit` tool check for repeated test identifiers when using a
-test identifier is a ground compound term.
 
 * FIXED: The `debugger` tool to call the `reset/0` predicate at loading time
 to ensure that code compiled in debug mode will also run even when not tracing

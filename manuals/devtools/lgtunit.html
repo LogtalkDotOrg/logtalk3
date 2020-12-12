@@ -405,13 +405,13 @@ implementations:</p>
 <div class="section" id="test-dialects">
 <h2>Test dialects<a class="headerlink" href="#test-dialects" title="Permalink to this headline">¶</a></h2>
 <p>Multiple test <em>dialects</em> are supported by default. See the next section
-on how to define your own test dialects. In all dialects, a callable
-term, usually an atom, is used to uniquely identify a test. This
-simplifies reporting failed tests and running tests selectively. An
-error message is printed if duplicated test identifiers are found. These
-errors must be corrected otherwise the reported test results can be
-misleading. Ideally, tests should have descriptive names that clearly
-state the purpose of the test and what is being tested.</p>
+on how to define your own test dialects. In all dialects, a <strong>ground
+callable term</strong>, usually an atom, is used to uniquely identify a test.
+This simplifies reporting failed tests and running tests selectively. An
+error message is printed if invalid or duplicated test identifiers are
+found. These errors must be corrected otherwise the reported test
+results can be misleading. Ideally, tests should have descriptive names
+that clearly state the purpose of the test and what is being tested.</p>
 <p>Unit tests can be written using any of the following predefined
 dialects:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>) <span class="o">:-</span> <span class="nv">Goal</span>.

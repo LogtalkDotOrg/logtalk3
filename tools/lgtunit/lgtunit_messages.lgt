@@ -21,9 +21,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 3:1:1,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2020-10-07,
+		date is 2020-12-12,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -246,6 +246,9 @@
 
 	message_tokens(non_callable_test_identifier(_Object, Test)) -->
 		['non-callable test identifier found: ~q'-[Test], nl].
+
+	message_tokens(non_ground_test_identifier(_Object, Test)) -->
+		['non-ground test identifier found: ~q'-[Test], nl].
 
 	message_tokens(repeated_test_identifier(_Object, Test)) -->
 		['repeated test identifier found: ~q'-[Test], nl].
