@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.0.0 and later versions
-%  Last updated on December 1, 2020
+%  Last updated on December 12, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -163,8 +163,12 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_prolog_predicate_property'(control_construct).
 '$lgt_prolog_predicate_property'(file(_)).
+'$lgt_prolog_predicate_property'(line_).
+'$lgt_prolog_predicate_property'(discontiguous).
 '$lgt_prolog_predicate_property'(indexed).
 '$lgt_prolog_predicate_property'(last_modified_generation(_)).
+'$lgt_prolog_predicate_property'(foreign).
+'$lgt_prolog_predicate_property'(number_of_clauses(_)).
 
 
 
