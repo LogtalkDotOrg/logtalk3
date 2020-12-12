@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-04,
+		date is 2020-12-12,
 		comment is 'Unit tests for the "assign_parameters" example.'
 	]).
 
@@ -45,10 +45,12 @@
 		Area == 6.
 
 	test(assignvars_2) :-
+		^^suppress_text_output,
 		findall(T-I-F, {fsm(T, I, F)}::recognise([0,1,1,2,1,2,0]), Solutions),
 		Solutions == [[red-0-red, red-1-green, red-2-red, yellow-0-red, yellow-1-green, yellow-2-red, green-0-yellow, green-1-yellow, green-2-red]-red-[red]].
 
 	test(assignvars_3) :-
+		^^suppress_text_output,
 		\+ {fsm(_T, _I, _F)}::recognise([0,1,1,2,1,2,1,0]).
 
 :- end_object.
