@@ -41,93 +41,85 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:3,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-12-13,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
-	:- uses(lgtunit, [variant/2]).
+	:- uses(lgtunit, [
+		assertion/1
+	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.2.4
 
-	succeeds(iso_bagof_3_01) :-
-		{bagof(X, (X=1;X=2), S)},
-		S == [1,2].
+	test(iso_bagof_3_01, true(S == [1,2])) :-
+		{bagof(X, (X=1;X=2), S)}.
 
-	succeeds(iso_bagof_3_02) :-
-		{bagof(X, (X=1;X=2), X)},
-		X == [1,2].
+	test(iso_bagof_3_02, true(X == [1,2])) :-
+		{bagof(X, (X=1;X=2), X)}.
 
-	succeeds(iso_bagof_3_03) :-
-		{bagof(X, (X=Y;X=Z), S)},
-		S == [Y, Z].
+	test(iso_bagof_3_03, true(S == [Y, Z])) :-
+		{bagof(X, (X=Y;X=Z), S)}.
 
-	fails(iso_bagof_3_04) :-
+	test(iso_bagof_3_04, false) :-
 		{bagof(_X, fail, _S)}.
 
-	succeeds(iso_bagof_3_05) :-
-		findall(L-Y, {bagof(1,(Y=1;Y=2),L)}, LL),
-		(	LL == [[1]-1, [1]-2] ->
-			true
-		;	LL == [[1]-2, [1]-1]
-		).
+	test(iso_bagof_3_05, true((LL == [[1]-1, [1]-2]; LL == [[1]-2, [1]-1]))) :-
+		findall(L-Y, {bagof(1,(Y=1;Y=2),L)}, LL).
 
-	succeeds(iso_bagof_3_06) :-
-		{bagof(f(X,Y), (X=a;Y=b), L)},
-		variant(L, [f(a, _), f(_, b)]).
+	test(iso_bagof_3_06, variant(L, [f(a, _), f(_, b)])) :-
+		{bagof(f(X,Y), (X=a;Y=b), L)}.
 
-	succeeds(iso_bagof_3_07) :-
-		{bagof(X, Y^((X=1,Y=1);(X=2,Y=2)), S)},
-		S == [1, 2].
+	test(iso_bagof_3_07, true(S == [1, 2])) :-
+		{bagof(X, Y^((X=1,Y=1);(X=2,Y=2)), S)}.
 
-	succeeds(iso_bagof_3_08) :-
-		{bagof(X, Y^((X=1;Y=1);(X=2,Y=2)), S)},
-		variant(S, [1, _, 2]).
+	test(iso_bagof_3_08, variant(S, [1, _, 2])) :-
+		{bagof(X, Y^((X=1;Y=1);(X=2,Y=2)), S)}.
 
-	succeeds(iso_bagof_3_09) :-
-		(	{catch(1^true, _, fail)} ->
-			findall(S-Y, {bagof(X,(Y^(X=1;Y=1);X=3),S)}, L),
-			variant(L, [[1,3]-_,[_]-1])
-		;	{set_prolog_flag(unknown, fail)},
-			{bagof(X,(Y^(X=1;Y=1);X=3),S)},
-			S == [3]
-		).
+	:- if(catch(1^true, _, fail)).
 
-	succeeds(iso_bagof_3_10) :-
-		findall(S-Y, {bagof(X,(X=Y;X=_Z;Y=1),S)}, LL),
-		variant(LL, [[A,_]-A, [_]-1]).
+		test(iso_bagof_3_09, variant(L, [[1,3]-_,[_]-1])) :-
+			findall(S-Y, {bagof(X,(Y^(X=1;Y=1);X=3),S)}, L).
 
-	succeeds(iso_bagof_3_11) :-
+	:- else.
+
+		test(iso_bagof_3_09, true(S == [3])) :-
+			{set_prolog_flag(unknown, fail),
+			 bagof(X,(Y^(X=1;Y=1);X=3),S)}.
+
+	:- endif.
+
+	test(iso_bagof_3_10, variant(LL, [[A,_]-A, [_]-1])) :-
+		findall(S-Y, {bagof(X,(X=Y;X=_Z;Y=1),S)}, LL).
+
+	test(iso_bagof_3_11, variant(Y, f(_))) :-
 		{bagof(X, a(X,Y), L)},
-		L == [1, 2], variant(Y, f(_)).
+		assertion(L == [1, 2]).
 
-	succeeds(iso_bagof_3_12) :-
-		findall(L-Y, {bagof(X,b(X,Y),L)}, LL),
-		LL == [[1, 1, 2]-1, [1, 2, 2]-2].
+	test(iso_bagof_3_12, true(LL == [[1, 1, 2]-1, [1, 2, 2]-2])) :-
+		findall(L-Y, {bagof(X,b(X,Y),L)}, LL).
 
-	throws(iso_bagof_3_13, error(instantiation_error,_)) :-
+	test(iso_bagof_3_13, error(instantiation_error)) :-
 		{bagof(_X, _Y^_Z, _L)}.
 
-	throws(iso_bagof_3_14, error(type_error(callable,1),_)) :-
+	test(iso_bagof_3_14, error(type_error(callable,1))) :-
 		{bagof(_X, 1, _L)}.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_bagof_3_15, error(type_error(list,12),_)) :-
+	test(eclipse_bagof_3_15, error(type_error(list,12))) :-
 		{bagof(X, (X=2; X=1), 12)}.
 
-	throws(eclipse_bagof_3_16, error(type_error(list,[1|2]),_)) :-
+	test(eclipse_bagof_3_16, error(type_error(list,[1|2]))) :-
 		{bagof(X, (X=2; X=1), [1|2])}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_bagof_3_17) :-
-		{bagof(Z, X^Y^c(X,Y,Z), L)},
-		L == ['B', 'A', 'C'].
+	test(lgt_bagof_3_17, true(L == ['B', 'A', 'C'])) :-
+		{bagof(Z, X^Y^c(X,Y,Z), L)}.
 
-	succeeds(lgt_bagof_3_18) :-
-		{bagof(Z, t(X,Y)^c(X,Y,Z), L)},
-		L == ['B', 'A', 'C'].
+	test(lgt_bagof_3_18, true(L == ['B', 'A', 'C'])) :-
+		{bagof(Z, t(X,Y)^c(X,Y,Z), L)}.
 
 :- end_object.

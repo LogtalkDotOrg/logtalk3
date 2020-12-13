@@ -81,135 +81,122 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:2,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-09-29,
+		date is 2020-12-13,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
-	:- uses(lgtunit, [variant/2]).
+	:- uses(lgtunit, [assertion/1, variant/2]).
 	:- uses(list, [msort/2]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
-	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.3.4
 
-	succeeds(iso_setof_3_01) :-
-		{setof(X, (X=1;X=2), S)},
-		S == [1,2].
+	test(iso_setof_3_01, true(S == [1,2])) :-
+		{setof(X, (X=1;X=2), S)}.
 
-	succeeds(iso_setof_3_02) :-
-		{setof(X, (X=1;X=2), X)},
-		X == [1,2].
+	test(iso_setof_3_02, true(X == [1,2])) :-
+		{setof(X, (X=1;X=2), X)}.
 
-	succeeds(iso_setof_3_03) :-
-		{setof(X, (X=2;X=1), S)},
-		S == [1,2].
+	test(iso_setof_3_03, true(S == [1,2])) :-
+		{setof(X, (X=2;X=1), S)}.
 
-	succeeds(iso_setof_3_04) :-
-		{setof(X, (X=2;X=2), S)},
-		S == [2].
+	test(iso_setof_3_04, true(S == [2])) :-
+		{setof(X, (X=2;X=2), S)}.
 
-	succeeds(iso_setof_3_05) :-
-		{setof(X, (X=Y;X=Z), S)},
-		(	S == [Z,Y] ->
-			true
-		;	S == [Y,Z]
-		).
+	test(iso_setof_3_05, true((S == [Z,Y]; S == [Y,Z]))) :-
+		{setof(X, (X=Y;X=Z), S)}.
 
-	fails(iso_setof_3_06) :-
+	test(iso_setof_3_06, false) :-
 		{setof(_X, fail, _S)}.
 
-	succeeds(iso_setof_3_07) :-
-		findall(L-Y, {setof(1,(Y=1;Y=2),L)}, LL),
-		LL == [[1]-1, [1]-2].
+	test(iso_setof_3_07, true(LL == [[1]-1, [1]-2])) :-
+		findall(L-Y, {setof(1,(Y=1;Y=2),L)}, LL).
 
-	succeeds(iso_setof_3_08) :-
-		{setof(f(X,Y), (X=a;Y=b), L)},
-		variant(L, [f(_,b), f(a,_)]).
+	test(iso_setof_3_08, variant(L, [f(_,b), f(a,_)])) :-
+		{setof(f(X,Y), (X=a;Y=b), L)}.
 
-	succeeds(iso_setof_3_09) :-
-		{setof(X, Y^((X=1,Y=1);(X=2,Y=2)), S)},
-		S == [1, 2].
+	test(iso_setof_3_09, true(S == [1, 2])) :-
+		{setof(X, Y^((X=1,Y=1);(X=2,Y=2)), S)}.
 
-	succeeds(iso_setof_3_10) :-
-		{setof(X, Y^((X=1;Y=1);(X=2,Y=2)), S)},
-		variant(S, [_, 1, 2]).
+	test(iso_setof_3_10, variant(S, [_, 1, 2])) :-
+		{setof(X, Y^((X=1;Y=1);(X=2,Y=2)), S)}.
 
-	succeeds(iso_setof_3_11) :-
-		(	catch({1^true}, _, fail) ->
-			findall(S-Y, {setof(X,(Y^(X=1;Y=2);X=3),S)}, L),
-			variant(L, [[1,3]-_,[_]-2])
-		;	set_prolog_flag(unknown, fail),
-			{setof(X,(Y^(X=1;Y=2);X=3),S)},
-			S == [3]
-		).
+	:- if(catch({1^true}, _, fail)).
 
-	succeeds(iso_setof_3_12) :-
+		test(iso_setof_3_11, variant(L, [[1,3]-_,[_]-2])) :-
+			findall(S-Y, {setof(X, (Y^(X=1;Y=2);X=3), S)}, L).
+
+	:- else.
+
+		test(iso_setof_3_11, true(S == [3])) :-
+			{set_prolog_flag(unknown, fail),
+			 setof(X, (Y^(X=1;Y=2);X=3), S)}.
+
+	:- endif.
+
+	test(iso_setof_3_12, true) :-
 		findall(S-Y, {setof(X,(X=Y;X=_Z;Y=1),S)}, LL),
 		(	variant(LL, [[A,_]-A, [_]-1]) ->
 			true
 		;	variant(LL, [[_,A]-A, [_]-1])
 		).
 
-	succeeds(iso_setof_3_13) :-
+	test(iso_setof_3_13, variant(Y, f(_))) :-
 		{setof(X, a(X,Y), L)},
-		L == [1, 2], variant(Y, f(_)).
+		assertion(L == [1, 2]).
 
-	succeeds(iso_setof_3_14) :-
+	test(iso_setof_3_14, true) :-
 		{setof(X, setof_3_member(X,[f(U,b),f(V,c)]), L)},
 		(	variant(L, [f(U,b),f(V,c)]) ->
 			true
 		;	variant(L, [f(V,c),f(U,b)])
 		).
 
-	succeeds(iso_setof_3_15) :-
+	test(iso_setof_3_15, true) :-
 		(	{setof(X, setof_3_member(X,[f(U,b),f(V,c)]), [f(a,c),f(a,b)])} ->
 			U == a, V == a
 		;	true
 		).
 
-	succeeds(iso_setof_3_16) :-
-		{setof(X, setof_3_member(X,[f(b,U),f(c,V)]), [f(b,a),f(c,a)])},
-		U == a, V == a.
+	test(iso_setof_3_16, true((U == a, V == a))) :-
+		{setof(X, setof_3_member(X,[f(b,U),f(c,V)]), [f(b,a),f(c,a)])}.
 
-	succeeds(iso_setof_3_17) :-
+	test(iso_setof_3_17, true) :-
 		(	{setof(X, setof_3_member(X,[V,U,f(U),f(V)]), L)} ->
 			variant(L, [U, V, f(U), f(V)])
 		;	variant(L, [V, U, f(V), f(U)])
 		).
 
-	succeeds(iso_setof_3_18) :-
+	test(iso_setof_3_18, true) :-
 		{setof(X, setof_3_member(X,[V,U,f(U),f(V)]), [a,b,f(a),f(b)])},
-		(	U == a, V == b ->
+		(	(U == a, V == b) ->
 			true
 		;	U == b, V == a
 		).
 
-	fails(iso_setof_3_19) :-
+	test(iso_setof_3_19, false) :-
 		{setof(X, setof_3_member(X,[V,U,f(U),f(V)]), [a,b,f(b),f(a)])}.
 
-	succeeds(iso_setof_3_20) :-
+	test(iso_setof_3_20, true) :-
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{setof(X, exists(U,V)^setof_3_member(X,[V,U,f(U),f(V)]), [a,b,f(a),f(b)])}.
 
-	succeeds(iso_setof_3_21) :-
-		findall(L-Y, {setof(X,b(X,Y),L)}, LL),
-		LL == [[1, 2]-1, [1, 2]-2].
+	test(iso_setof_3_21, true(LL == [[1, 2]-1, [1, 2]-2])) :-
+		findall(L-Y, {setof(X,b(X,Y),L)}, LL).
 
-	succeeds(iso_setof_3_22) :-
-		{setof(X-Xs, Y^setof(Y,b(X,Y),Xs), L)},
-		L == [1-[1,2], 2-[1,2]].
+	test(iso_setof_3_22, true(L == [1-[1,2], 2-[1,2]])) :-
+		{setof(X-Xs, Y^setof(Y,b(X,Y),Xs), L)}.
 
-	succeeds(iso_setof_3_23) :-
+	test(iso_setof_3_23, true) :-
 		{setof(X-Xs, setof(Y,b(X,Y),Xs), L)},
-		var(Y), L == [1-[1,2], 2-[1,2]].
+		assertion(var(Y)),
+		assertion(L == [1-[1,2], 2-[1,2]]).
 
-	succeeds(iso_setof_3_24) :-
+	test(iso_setof_3_24, true) :-
 		{setof(X-Xs, bagof(Y,d(X,Y),Xs), L)},
-		var(Y), L == [1-[1,2,1], 2-[2,1,2]].
+		assertion(var(Y)),
+		assertion(L == [1-[1,2,1], 2-[2,1,2]]).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
@@ -218,47 +205,48 @@ setof_3_member(X, [_| L]) :-
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(eddbali_setof_3_25) :-
+
+		test(eddbali_setof_3_25, true) :-
 			{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
+
 	:- else.
-		- succeeds(eddbali_setof_3_25) :-
+
+		- test(eddbali_setof_3_25, true) :-
 			% STO; Undefined
 			{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
+
 	:- endif.
 
-	throws(eddbali_setof_3_26, [error(type_error(callable,(true;4)),_), error(type_error(callable,4),_)]) :-
+	test(eddbali_setof_3_26, errors([type_error(callable,(true;4)), type_error(callable,4)])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		{setof(X, X^(true; 4), _L)}.
 
-	throws(sics_setof_3_27, error(type_error(callable,1),_)) :-
+	test(sics_setof_3_27, error(type_error(callable,1))) :-
 		{setof(_X, A^A^1, _L)}.
 
-	succeeds(sics_setof_3_28) :-
-		{setof(X, X=1, [1|A])},
-		A == [].
+	test(sics_setof_3_28, true(A == [])) :-
+		{setof(X, X=1, [1|A])}.
 
-	throws(sics_setof_3_29, error(type_error(list,[A|1]),_)) :-
+	test(sics_setof_3_29, error(type_error(list,[A|1]))) :-
 		{setof(X, X=1, [A|1])}.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_setof_3_30, error(type_error(list,12),_)) :-
+	test(eclipse_setof_3_30, error(type_error(list,12))) :-
 		{setof(X, (X=2; X=1), 12)}.
 
-	throws(eclipse_setof_3_31, error(type_error(list,[1|2]),_)) :-
+	test(eclipse_setof_3_31, error(type_error(list,[1|2]))) :-
 		{setof(X, (X=2; X=1), [1|2])}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_setof_3_32) :-
-		{setof(Z, X^Y^c(X,Y,Z), L)},
-		L == ['A', 'B', 'C'].
+	test(lgt_setof_3_32, true(L == ['A', 'B', 'C'])) :-
+		{setof(Z, X^Y^c(X,Y,Z), L)}.
 
-	succeeds(lgt_setof_3_33) :-
-		{setof(Z, t(X,Y)^c(X,Y,Z), L)},
-		L == ['A', 'B', 'C'].
+	test(lgt_setof_3_33, true(L == ['A', 'B', 'C'])) :-
+		{setof(Z, t(X,Y)^c(X,Y,Z), L)}.
 
-	succeeds(lgt_setof_3_34) :-
+	test(lgt_setof_3_34, true) :-
 		findall(T2-L-T1, {setof(T3, a(T1, T2, T3), L)}, Ls),
 		msort(Ls, Ss),
 		variant(
@@ -276,7 +264,7 @@ setof_3_member(X, [_| L]) :-
 			]
 		).
 
-	throws(lgt_setof_3_35, error(instantiation_error,_)) :-
+	test(lgt_setof_3_35, error(instantiation_error)) :-
 		{setof(_X, _Y^_Z, _L)}.
 
 :- end_object.
