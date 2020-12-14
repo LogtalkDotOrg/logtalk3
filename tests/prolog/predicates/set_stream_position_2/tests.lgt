@@ -86,8 +86,33 @@
 		{set_stream_position(Stream, Position)},
 		get_byte(Stream, Byte3).		
 
+	test(lgt_set_stream_position_2_09, true(Assertion)) :-
+		^^set_text_output(t, '', [reposition(true)]),
+		stream_property(Stream, alias(t)),
+		stream_property(Stream, position(Position)),
+		write(t, 't1.\n'), 
+		write(t, 't2.\n'), 
+		write(t, 't3.\n'), 
+		{set_stream_position(Stream, Position)},
+		write(t, 't4.\n'), 
+		^^text_output_assertion(t, 't4.\nt2.\nt3.\n', Assertion).
+
+	test(lgt_set_stream_position_2_10, true(Assertion)) :-
+		^^set_binary_output(b, [], [reposition(true)]),
+		stream_property(Stream, alias(b)),
+		stream_property(Stream, position(Position)),
+		put_byte(b, 65), 
+		put_byte(b, 66), 
+		put_byte(b, 67), 
+		{set_stream_position(Stream, Position)},
+		put_byte(b, 68), 
+		^^binary_output_assertion(b, [68,66,67], Assertion).
+
 	cleanup :-
 		^^clean_text_input,
+		^^clean_binary_input,
+		^^clean_text_output,
+		^^clean_binary_output,
 		^^clean_file(foo).
 
 :- end_object.
