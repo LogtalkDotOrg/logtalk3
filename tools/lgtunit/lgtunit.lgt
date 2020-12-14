@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:13:0,
+		version is 8:14:0,
 		author is 'Paulo Moura',
-		date is 2020-12-12,
+		date is 2020-12-14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -407,6 +407,14 @@
 		comment is 'Cleans the temporary file used when testing binary input.'
 	]).
 
+	:- protected(set_text_output/3).
+	:- mode(set_text_output(+atom, +atom, +list(stream_option)), one).
+	:- mode(set_text_output(+atom, +list(atom), +list(stream_option)), one).
+	:- info(set_text_output/3, [
+		comment is 'Creates a temporary file with the given text contents and opens it for writing referenced by the given alias and using the additional options.',
+		argnames is ['Alias', 'Contents', 'Options']
+	]).
+
 	:- protected(set_text_output/2).
 	:- mode(set_text_output(+atom, +atom), one).
 	:- mode(set_text_output(+atom, +list(atom)), one).
@@ -457,10 +465,17 @@
 		comment is 'Cleans the temporary file used when testing text output.'
 	]).
 
+	:- protected(set_binary_output/3).
+	:- mode(set_binary_output(+atom, +list(byte), +list(stream_option)), one).
+	:- info(set_binary_output/3, [
+		comment is 'Creates a temporary file with the given binary contents and opens it for writing referenced by the given alias and using the additional options.',
+		argnames is ['Alias', 'Contents', 'Options']
+	]).
+
 	:- protected(set_binary_output/2).
 	:- mode(set_binary_output(+atom, +list(byte)), one).
 	:- info(set_binary_output/2, [
-		comment is 'Creates a temporary file with the given binary contents and referenced with the given alias.',
+		comment is 'Creates a temporary file with the given binary contents and opens it for writing referenced with the given alias.',
 		argnames is ['Alias', 'Bytes']
 	]).
 
@@ -2459,10 +2474,13 @@
 
 	% support for testing output predicates
 
-	set_text_output(Alias, Contents) :-
+	set_text_output(Alias, Contents, Options) :-
 		clean_file(Alias, 'test_output.text', Path),
-		open(Path, write, Stream, [type(text),alias(Alias)]),
+		open(Path, write, Stream, [type(text),alias(Alias)| Options]),
 		write_text_contents(Stream, Contents).
+
+	set_text_output(Alias, Contents) :-
+		set_text_output(Alias, Contents, []).
 
 	set_text_output(Contents) :-
 		clean_file('test_output.text', Path),
@@ -2505,10 +2523,13 @@
 	clean_text_output :-
 		clean_file('test_output.text', _).
 
-	set_binary_output(Alias, Bytes) :-
+	set_binary_output(Alias, Bytes, Options) :-
 		clean_file(Alias, 'test_output.binary', Path),
-		open(Path, write, Stream, [type(binary), alias(Alias)]),
+		open(Path, write, Stream, [type(binary), alias(Alias)| Options]),
 		write_binary_contents(Bytes, Stream).
+
+	set_binary_output(Alias, Bytes) :-
+		set_binary_output(Alias, Bytes, []).
 
 	set_binary_output(Bytes) :-
 		clean_file('test_output.binary', Path),

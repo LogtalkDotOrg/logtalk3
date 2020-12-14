@@ -99,6 +99,9 @@ Tools
 * CHANGED: The `lgtunit` tool now requires and checks that test identifiers
 are ground callable terms.
 
+* ADDED: Predicates `set_text_output/3` and `set_binary_output/3` to the
+`lgtunit` tool.
+
 * ADDED: Support for Trealla ProLog to the `debugger`, `lgtunit`, and
 `ports_profiler` tools.
 
