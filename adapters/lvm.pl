@@ -522,9 +522,7 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	line_count(Stream, LineBegin),
-	read_term(Stream, Term, Options),
-	line_count(Stream, LineEnd).
+	read_term(Stream, Term, [lines(LineBegin,LineEnd)| Options]).
 
 
 
