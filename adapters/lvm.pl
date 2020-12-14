@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.0.0 and later versions
-%  Last updated on December 12, 2020
+%  Last updated on December 14, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -214,7 +214,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 8, 3))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 9, 1))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -484,7 +484,8 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
 '$lgt_stream_current_line_number'(Stream, Line) :-
-	stream_property(Stream, position(Line)).
+	line_count(Stream, Last),
+	Line is Last + 1.
 
 
 
@@ -521,8 +522,9 @@ setup_call_cleanup(_, _, _) :-
 % '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	read_term(Stream, Term, [term_position(LineBegin)| Options]),
-	stream_property(Stream, position(LineEnd)).
+	line_count(Stream, LineBegin),
+	read_term(Stream, Term, Options),
+	line_count(Stream, LineEnd).
 
 
 
