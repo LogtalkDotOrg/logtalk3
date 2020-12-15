@@ -164,7 +164,7 @@ Defining spy points
 
 Logtalk spy points can be defined by simply stating which predicates
 should be spied, as in most Prolog debuggers, by stating which predicate
-clauses to specify given their source file line numbers, or by
+clauses to spy given their source file line numbers, or by
 specifying the context for activating a spy point. In the case
 of line number spy points (also known as breakpoints), the line number
 must correspond to the first line of an entity clause. To simplify the
