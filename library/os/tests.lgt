@@ -446,6 +446,17 @@
 	test(os_sleep_1_01) :-
 		os::sleep(1).
 
+	test(os_shell_1_01) :-
+		os::shell(cd).
+
+	test(os_shell_2_01) :-
+		os::shell(cd, Exit),
+		Exit == 0.
+
+	test(os_shell_2_02) :-
+		os::shell(false, Exit),
+		Exit \== 0.
+
 	% os_types category tests
 
 	test(os_types_type_1_01) :-
