@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:19:0,
 		author is 'Paulo Moura',
-		date is 2020-10-08,
+		date is 2020-12-16,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -123,6 +123,13 @@
 	test(os_wall_time_1_01) :-
 		os::wall_time(Seconds),
 		number(Seconds).
+
+	test(os_wall_time_1_02) :-
+		os::wall_time(Seconds0),
+		os::sleep(5),
+		os::wall_time(Seconds1),
+		4.5 =< Seconds1 - Seconds0,
+		Seconds1 - Seconds0 =< 5.5.
 
 	test(os_operating_system_type_1_01) :-
 		os::operating_system_type(Type),

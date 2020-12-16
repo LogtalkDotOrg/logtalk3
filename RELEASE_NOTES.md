@@ -78,6 +78,8 @@ branch and latest commit data.
 * ADDED: New `jump_all_block/3`, `append/3`, and `map/2-3` predicates to the
 `queues` library.
 
+* ADDED: New test for the `os::wall_time/1` library predicate.
+
 * UPDATED: The `hook_objects` library `object_wrapper_hook` object to set the
 `context_switching_calls` flag to `allow` for the generated objects, enabling
 calling the wrapped predicates using the `<</2` context-switching control
