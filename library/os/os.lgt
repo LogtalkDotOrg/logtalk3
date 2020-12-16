@@ -44,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:72:0,
+		version is 1:72:1,
 		author is 'Paulo Moura',
-		date is 2020-12-07,
+		date is 2020-12-16,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1789,12 +1789,10 @@
 			{date_time(Year, Month, Day, Hours, Minutes, Seconds)}.
 
 		cpu_time(Seconds) :-
-			{cpu_time(Milliseconds)},
-			Seconds is Milliseconds / 1000.
+			{cpu_time(Seconds)}.
 
 		wall_time(Seconds) :-
-			{wall_time(Milliseconds)},
-			Seconds is Milliseconds / 1000.
+			{wall_time(Seconds)}.
 
 		operating_system_type(Type) :-
 			(	{getenv('COMSPEC', _)} ->

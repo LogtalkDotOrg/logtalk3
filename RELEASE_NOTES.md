@@ -93,6 +93,8 @@ bug in its `system/1` built-in predicate).
 
 * FIXED: The `os::command_line_arguments/1` predicate for Tau Prolog.
 
+* FIXED: The `os` library predicates `cpu_time/1` and `wall_time/1` for LVM.
+
 Tools
 -----
 
