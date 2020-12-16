@@ -81,9 +81,3 @@ the ``docs`` directory (open the ``../docs/index.html`` file with your
 web browser). The documentation for these tools can be regenerated using
 the shell scripts ``../scripts/update_html_docs.sh`` and
 ``../scripts/update_svg_diagrams.sh``.
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab
-width equivalent to 4 spaces).

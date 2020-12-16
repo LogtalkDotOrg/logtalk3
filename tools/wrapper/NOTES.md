@@ -113,10 +113,3 @@ must be manually solved before using the tool.
 
 - There isn't yet any support for dealing with meta-predicates and advise on
 missing meta-predicate directives.
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

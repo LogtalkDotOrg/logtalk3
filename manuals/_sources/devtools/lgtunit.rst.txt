@@ -1349,9 +1349,3 @@ alternative the ``parameter/2`` built-in execution context predicate.
 Deterministic unit tests are currently not available when using Quintus
 Prolog as it lacks built-in support that cannot be sensibly defined in
 Prolog.
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab
-width equivalent to 4 spaces).

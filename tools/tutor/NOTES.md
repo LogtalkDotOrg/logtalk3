@@ -45,10 +45,3 @@ Usage
 -----
 
 Simply load the tool at startup (e.g. from a settings file).
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

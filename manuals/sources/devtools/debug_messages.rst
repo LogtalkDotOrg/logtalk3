@@ -95,9 +95,3 @@ Or we can selectively enable only debug messages for a specific group:
    | ?- foo::(bar, baz).
    bar/0 called
    yes
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab
-width equivalent to 4 spaces).

@@ -93,10 +93,3 @@ compiling your source code. For example:
 
 See also the `settings-sample.lgt` file for automating the necessary setup
 at Logtalk startup.
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

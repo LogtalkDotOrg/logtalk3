@@ -123,10 +123,3 @@ For more complex applications, you can use the `doclet` tool to define a *doclet
 to automate all the steps required to generate documentation. The *doclet* message
 that triggers the process can also be sent automatically when the `make` tool is
 used with the `documentation` target.
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

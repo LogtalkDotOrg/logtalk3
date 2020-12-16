@@ -115,10 +115,3 @@ clause.
 
 Line number spy points are currently not available when using XSB as the
 Prolog backend compiler.
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

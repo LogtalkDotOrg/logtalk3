@@ -132,9 +132,3 @@ and throw an error. For example:
 
 In alternative, if you want assertions to always trigger an exception, use
 instead the `lgtunit` tool `assertions/1-2` public predicates.
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

@@ -43,9 +43,3 @@ documentation page.
 ECLiPSe defines a ``help`` prefix operator that forces wrapping this
 atom between parenthesis when sending messages to the tool. E.g. use
 ``(help)::help`` instead of ``help::help``.
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab
-width equivalent to 4 spaces).

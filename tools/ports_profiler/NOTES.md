@@ -210,10 +210,3 @@ Known issues
 
 Determinism information is currently not available when using Lean Prolog
 or Quintus Prolog as backend compilers.
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

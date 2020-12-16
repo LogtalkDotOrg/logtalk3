@@ -152,9 +152,3 @@ In alternative, use the ``object_wrapper_hook`` provided by the
 With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog from
 being fully analyzed when wrapped by an object.
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab
-width equivalent to 4 spaces).

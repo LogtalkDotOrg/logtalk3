@@ -110,6 +110,3 @@ Other notes
 
 Some files contained in this directory represent work in progress and are
 not loaded by default by any loader utility file.
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

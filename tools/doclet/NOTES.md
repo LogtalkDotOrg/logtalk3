@@ -71,10 +71,3 @@ Integration with the make tool
 Loading this tool adds a definition for the `logtalk_make_target_action/1`
 hook predicate for the target `documentation`. The hook definition sends an
 `update/0` message to each loaded doclet.
-
-
-Other notes
------------
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

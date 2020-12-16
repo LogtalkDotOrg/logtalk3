@@ -584,6 +584,3 @@ crashes (segmentation faults usually), often requiring re-doing conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
 command until it completes without error. See for example the `lgt2svg.sh`
 script.
-
-All source files are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).

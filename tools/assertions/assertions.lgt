@@ -45,7 +45,7 @@
 		argnames is ['Context', 'Goal']
 	]).
 
-	% we use the structured printing mechanism in order to allow unit tests
+	% we use the structured printing mechanism in order to allow assertion
 	% results to be intercepted for alternative reporting by e.g. GUI IDEs
 	:- uses(logtalk, [
 		print_message/3
