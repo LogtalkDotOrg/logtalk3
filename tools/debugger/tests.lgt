@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:1,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-12-17,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -95,10 +95,9 @@
 	test(debugger_debugging_1_01, deterministic) :-
 		\+ debugging(_).
 
-	test(debugger_debugging_1_02, true) :-
+	test(debugger_debugging_1_02, true(Object == Entity)) :-
 		create_object(Object, [], [set_logtalk_flag(debug,on)], []),
-		debugging(Entity),
-		Object == Entity.
+		debugging(Entity).
 
 	test(debugger_trace_0_01, deterministic) :-
 		trace.
@@ -113,6 +112,12 @@
 		spying(Name/Arity), Name == foo, Arity == 1,
 		spying(Entity-Line), Entity == logtalk, Line == 13,
 		spying(Sender, This, _, _), Sender == user, This == logtalk.
+
+	test(debugger_trace_0_03, deterministic(L == [1,2,3])) :-
+		logtalk_load(test_object, [debug(on)]),
+		leash(none),
+		trace,
+		findall(X, test_object::a(X), L).
 
 	test(debugger_notrace_0_01, deterministic) :-
 		notrace.
