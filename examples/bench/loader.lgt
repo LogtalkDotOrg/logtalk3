@@ -37,6 +37,7 @@
 		qsort,
 		queens_8,
 		query,
+		prover,
 		reducer,
 		sendmore,
 		serialise,
@@ -50,15 +51,6 @@
 	]),
 	logtalk_load(run)
 )).
-
-
-:- if(\+ current_logtalk_flag(prolog_dialect, lvm)).
-
-:- initialization(
-	logtalk_load(prover, [singleton_variables(silent)])
-).
-
-:- endif.
 
 
 :- if(predicate_property(length(_,_), built_in)).

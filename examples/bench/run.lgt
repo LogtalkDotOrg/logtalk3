@@ -43,9 +43,7 @@ program(mu).
 program(nreverse).
 program(ops8).
 program(poly_10).
-:- if(\+ current_logtalk_flag(prolog_dialect, lvm)).
-	program(prover).
-:- endif.
+program(prover).
 program(qsort).
 program(queens_8).
 program(query).
