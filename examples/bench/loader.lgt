@@ -19,7 +19,8 @@
 
 
 :- initialization((
-	set_logtalk_flag(optimize, on),	% for top-level calls
+	set_logtalk_flag(optimize, on),
+	logtalk_load(lgtunit(loader)),
 	logtalk_load([
 		protocol,
 		boyer,
@@ -33,7 +34,6 @@
 		nreverse,
 		ops8,
 		poly_10,
-		prover,
 		qsort,
 		queens_8,
 		query,
@@ -46,10 +46,19 @@
 		unify,
 		zebra
 	], [
-		optimize(on),
 		singleton_variables(silent)
-	])
+	]),
+	logtalk_load(run)
 )).
+
+
+:- if(\+ current_logtalk_flag(prolog_dialect, lvm)).
+
+:- initialization(
+	logtalk_load(prover, [singleton_variables(silent)])
+).
+
+:- endif.
 
 
 :- if(predicate_property(length(_,_), built_in)).

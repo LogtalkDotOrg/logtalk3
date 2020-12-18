@@ -131,6 +131,8 @@ inherited predicates when documenting entities.
 Examples
 --------
 
+* ADDED: Crude solution to the `bench` example to run all benchmarks.
+
 * FIXED: Changed an operator declaration in the `metainterpreters` example to
 avoid a conflict with a LVM built-in operator.
 
