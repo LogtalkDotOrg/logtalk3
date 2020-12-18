@@ -146,7 +146,7 @@ incl_3(>, A, B, S1, [B|S]) :- incl_2(S1, A, S).
 
 my_compound(X)  :- nonvar(X), \+atomic(X).
 cons(X)      :- nonvar(X), X=[_|_].
-structure(X) :- my_compound(X), \+X=[_|_].
+structure(X) :- my_compound(X), X \= [_|_].
 
 termtag(T, tstr) :- structure(T).
 termtag(T, tlst) :- cons(T).

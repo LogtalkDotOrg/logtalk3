@@ -138,8 +138,8 @@ search(NumVars, NumGs, Gs) :-
 select_vector(NumVars, NumGs, Gs, Gj, Vector) :-
 	select_vector(Gs, NumVars, NumGs, Gs,
 		dummy, 0, nf, 999, Gj, Vector, Type, _), !,
-	\+ Type = cov,
-	\+ Type = nf.
+	Type \= cov,
+	Type \= nf.
 
 % loop over functions
 select_vector([Gk|_], NumVars, _, _, Gj, V, Type, N, Gj, V, Type, N) :-

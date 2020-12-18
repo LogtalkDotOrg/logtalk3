@@ -40,15 +40,17 @@ tautology(Wff) :-
         tautology(NewWff,[],[]).
 
 tautology(Wff,Tlist,Flist) :-
-        (truep(Wff,Tlist) -> true
-        ;falsep(Wff,Flist) -> fail
-        ;Wff = if(If,Then,Else) ->
-		(truep(If,Tlist) -> tautology(Then,Tlist,Flist)
-		;falsep(If,Flist) -> tautology(Else,Tlist,Flist)
-		;tautology(Then,[If|Tlist],Flist),	% both must hold
-		 tautology(Else,Tlist,[If|Flist])
-                )
-        ),!.
+        (	truep(Wff,Tlist) -> true
+        ;	falsep(Wff,Flist) -> fail
+        ;	Wff = if(If,Then,Else) ->
+			(	truep(If,Tlist) -> tautology(Then,Tlist,Flist)
+			;	falsep(If,Flist) -> tautology(Else,Tlist,Flist)
+			;	tautology(Then,[If|Tlist],Flist),	% both must hold
+		 		tautology(Else,Tlist,[If|Flist])
+            )
+        ;	false
+		),
+		!.
 
 
 rewrite(Atom,Atom) :-

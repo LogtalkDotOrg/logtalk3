@@ -285,6 +285,7 @@ make_list([_b,_a|LF], [_a|_rb]) :-
 listify(_X, _X) :-
 	(var(_X); atomic(_X)), !.
 listify(_Expr, [_Op|_LArgs]) :-
+	atom(_Op),
 	functor(_Expr, _Op, N),
 	listify_list(1, N, _Expr, _LArgs).
 
