@@ -138,6 +138,8 @@ Examples
 * IMPROVED: Fixed some lint warnings and improved the portability of the
 `bench` example.
 
+* UPDATED: The `encodings` example to support Tau Prolog and Trealla ProLog.
+
 * FIXED: Changed an operator declaration in the `metainterpreters` example to
 avoid a conflict with a LVM built-in operator.
 

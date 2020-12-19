@@ -33,9 +33,9 @@
 			tests_utf_16::run
 		)).
 
-	:- elif(current_logtalk_flag(prolog_dialect, ji)).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ji; Dialect == tau; Dialect == trealla))).
 
-		% JIProlog only supported Unicode encoding is UTF-8
+		% these backends only supported Unicode encoding is UTF-8
 		:- initialization((
 			set_logtalk_flag(report, warnings),
 			logtalk_load(lgtunit(loader)),
