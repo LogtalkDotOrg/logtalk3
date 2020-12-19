@@ -45,6 +45,9 @@ due to an updated included file when the `clean` flag is turned off and the
 `reload` file is set tp `changed` where the main file would not be recompiled
 to include the new contents of the included file.
 
+* FIXED: Bug in the `asserta/1` built-in method when the argument is only know
+at runtime.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -3481,7 +3481,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 43, 0, b03)).
+'$lgt_version_data'(logtalk(3, 43, 0, b04)).
 
 
 
@@ -14226,7 +14226,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_updated_predicate'(Mode, Functor/Arity, CallerHead)
 	;	'$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx),
 		(	'$lgt_runtime_checked_db_clause'(Clause) ->
-			TCond = '$lgt_asserta'(Database, Clause, Database, p(_), p)
+			TCond = '$lgt_asserta'(Database, Clause, Database, p(_), p, ExCtx)
 		;	'$lgt_check'(clause_or_partial_clause, Clause),
 			(	Clause = (Head :- Body) ->
 				(	Body == true ->
