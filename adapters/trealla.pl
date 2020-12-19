@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.3.24 and later versions
-%  Last updated on December 16, 2020
+%  Adapter file for Trealla Prolog 1.3.32 and later versions
+%  Last updated on December 19, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
@@ -230,7 +230,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 3, 24))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 3, 32))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -541,8 +541,8 @@
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
-'$lgt_logtalk_prolog_encoding'(_, _, _) :-
-	fail.
+'$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
 
 
 

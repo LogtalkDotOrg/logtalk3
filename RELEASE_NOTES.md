@@ -57,6 +57,8 @@ internal runtime tables and of the new `atom_hash/2` built-in predicate.
 
 * UPDATED: The LVM integration script to select the standard-top-level.
 
+* UPDATED: The Tau Prolog and Trealla ProLog adapter files for Unicode support.
+
 Documentation
 -------------
 
