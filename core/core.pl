@@ -15786,6 +15786,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % auxiliary table to simplify calls to \+ Goal goals
 
+'$lgt_negated_goal_alternative'(call(Goal), \+ Goal).
+'$lgt_negated_goal_alternative'(once(Goal), \+ Goal).
 '$lgt_negated_goal_alternative'(Term1 = Term2, Term1 \= Term2).
 '$lgt_negated_goal_alternative'(Term1 == Term2, Term1 \== Term2).
 '$lgt_negated_goal_alternative'(Term1 =:= Term2, Term1 =\= Term2).

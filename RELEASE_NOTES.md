@@ -27,6 +27,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Lint check for redundant use of the `call/1` control construct as
+argument to the `\+/1` built-in predicate.
+
 * ADDED: Also check correctness of `variable_names/1` options in calls to the
 `write_term/2-3` Prolog standard predicates.
 

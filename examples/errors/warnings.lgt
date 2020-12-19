@@ -498,6 +498,15 @@
 
 
 
+:- object(redundant_call).
+
+	foo(Goal) :-
+		\+ call(Goal).
+
+:- end_object.
+
+
+
 :- object(redundant_univ).
 
 	% =../2 calls are only necessary when the second argument is a
