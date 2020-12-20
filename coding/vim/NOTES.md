@@ -36,9 +36,9 @@ your VIM installation directory (replacing any existing older file).
 2. Add the following entries to the `filetype.vim` configuration file 
 (only if not already present):
 
-	" Logtalk source files
-	au BufNewFile,BufRead *.lgt                     setf logtalk
-	au BufNewFile,BufRead *.logtalk                 setf logtalk
+		" Logtalk source files
+		au BufNewFile,BufRead *.lgt                     setf logtalk
+		au BufNewFile,BufRead *.logtalk                 setf logtalk
 
 3. Copy the file `indent/logtalk.vim` to the `indent` sub-directory in 
 your VIM installation directory (replacing any existing older file).
@@ -49,14 +49,14 @@ to the `ftplugin` sub-directory in your Vim installation directory
 with a `ftplugin/logtalk.vim` that comments out some of the necessary
 settings despite their local scope!).
 
-5. Add the following lines to your ~/.vimrc file:
+5. Add the following lines to your `~/.vimrc` file:
 
-	syntax on
-	filetype indent on
-	filetype plugin on
+		syntax on
+		filetype indent on
+		filetype plugin on
 
-You may then perform code completion by typing CTRL-X, CTRL-K and then 
-CTRL-P or CTRL-N to cycle between all the completion choices.
+You may then perform code completion by typing `CTRL-X`, `CTRL-K` and
+then `CTRL-P` or `CTRL-N` to cycle between all the completion choices.
 
 6. Check the `coding/ctags` in the Logtalk installation directory for
 instructions on how to enable a source code browser for Logtalk source
@@ -76,12 +76,8 @@ for further help.
 Once installed, typing `OBJ` followed by the expansion key should result in the
 code:
 
-```
-:- object().
+	:- object().
 
-
-
-:- end_object.
-```
+	:- end_object.
 
 All snippets provided can be inspected in `Ultisnips/logtalk.snippets`.

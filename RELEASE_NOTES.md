@@ -234,6 +234,8 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: Instructions on how to provide better `git diff` hunk header context
 that includes the first line of the entity opening directive.
 
+* ADDED: UltiSnips support for the Vim text editor. Contributed by Paul Brown.
+
 
 3.42.0 - October 26, 2020
 =========================
