@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:15:0,
+		version is 8:15:1,
 		author is 'Paulo Moura',
-		date is 2020-12-18,
+		date is 2020-12-20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1276,6 +1276,7 @@
 	% the discontiguous/1 directives usually required when using some of the
 	% unit tests idioms are no longer necessary after term-expanding them
 	directive_expansion(discontiguous(PI), Expansion) :-
+		logtalk_load_context(entity_identifier, _),
 		ground(PI),
 		filter_discontiguous_directive(PI, Filtered),
 		(	Filtered == [] ->
