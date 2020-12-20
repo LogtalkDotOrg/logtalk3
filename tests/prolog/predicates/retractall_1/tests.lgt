@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% databse for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
+% database for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
 
 elk(X) :- moose(X).
 
@@ -26,14 +26,23 @@ elk(X) :- moose(X).
 insect(ant).
 insect(bee).
 
+% database for tests from the Logtalk portability work
+
+:- dynamic(a/1).
+a(1).
+a(2).
+a(X) :- b(X).
+
+b(3).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2020-12-20,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
@@ -60,9 +69,12 @@ insect(bee).
 	throws(lgt_retractall_1_06, error(instantiation_error,_)) :-
 		{retractall(_)}.
 
+	succeeds(lgt_retractall_1_07) :-
+		{retractall(a(_)), \+ a(_)}.
+
 	% tests from the ECLiPSe test suite
 
-	succeeds(eclipse_retractall_1_07) :-
+	succeeds(eclipse_retractall_1_08) :-
 		{	assertz(insect(fly(house))),
 			assertz(insect(beetle(stag))),
 			assertz(insect(fly(fruit))),
@@ -72,10 +84,10 @@ insect(bee).
 		},
 		I == beetle(stag).
 
-	succeeds(eclipse_retractall_1_08) :-
+	succeeds(eclipse_retractall_1_09) :-
 		{retractall(mammal(_))}.
 
-	throws(eclipse_retractall_1_09, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
+	throws(eclipse_retractall_1_10, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(elk(_))}.
 

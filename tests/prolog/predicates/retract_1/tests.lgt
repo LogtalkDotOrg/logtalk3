@@ -18,7 +18,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% databse for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
+% database for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
 
 elk(X) :- moose(X).
 
