@@ -3,7 +3,7 @@
 %  This file is part of Logtalk <https://logtalk.org/>
 %
 %  Copyright 2016 Metagol authors
-%  Copyright 2018-2019 Paulo Moura
+%  Copyright 2018-2020 Paulo Moura
 %  All rights reserved.
 %
 %  Redistribution and use in source and binary forms, with or without
@@ -38,9 +38,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:24:1,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2019-05-08,
+		date is 2020-12-20,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -220,7 +220,7 @@
 					::func_test(Atom2,TestAtom2,Condition),
 					make_atom(TestAtom2,TestAtom1),
 					deduce_atom(TestAtom1,Sig,Prog),
-					\+ call(Condition)
+					\+ Condition
 				)
 			)
 		;	true

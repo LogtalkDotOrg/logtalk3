@@ -22,23 +22,23 @@
 	implements(loopp)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2017-03-20,
+		date is 2020-12-20,
 		comment is 'Loop control structures predicates.'
 	]).
 
 	:- meta_predicate(whiledo(0, 0)).
 	whiledo(Condition, Action) :-
 		(	call(Condition) ->
-			\+ \+ call(Action),
+			\+ \+ Action,
 			whiledo(Condition, Action)
 		;	true
 		).
 
 	:- meta_predicate(dowhile(0, 0)).
 	dowhile(Action, Condition) :-
-		\+ \+ call(Action),
+		\+ \+ Action,
 		whiledo(Condition, Action).
 
 	:- meta_predicate(foreach(*, *, 0)).
