@@ -68,3 +68,20 @@ After installing the plugin, add the following line to your `.vimrc` file:
 
 	let tlist_logtalk_settings = 'logtalk;o:Objects;p:Protocols;c:Categories;m:Modules;u:Public predicates;r:Protected predicates;v:Private predicates'
 
+7. Optional [UltiSnips](https://github.com/sirver/UltiSnips) plugin support. Copy
+the contents of the `UltiSnips` directory to the location required, see the
+UltiSnips [documentation](https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt)
+for further help.
+
+Once installed, typing `OBJ` followed by the expansion key should result in the
+code:
+
+```
+:- object().
+
+
+
+:- end_object.
+```
+
+All snippets provided can be inspected in `Ultisnips/logtalk.snippets`.
