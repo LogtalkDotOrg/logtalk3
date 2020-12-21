@@ -20,8 +20,13 @@
 
 :- if((current_logtalk_flag(modules, supported), \+ current_logtalk_flag(prolog_dialect, eclipse))).
 
-	:- use_module(data1, []).
-	:- use_module(data2, []).
+	:- if((current_logtalk_flag(prolog_dialect, tau); current_logtalk_flag(prolog_dialect, trealla))).
+		:- use_module(data1).
+		:- use_module(data2).
+	:- else.
+		:- use_module(data1, []).
+		:- use_module(data2, []).
+	:- endif.
 
 	:- initialization(logtalk_load(module_aliases, [optimize(on)])).
 

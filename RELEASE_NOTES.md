@@ -149,6 +149,8 @@ Examples
 
 * UPDATED: The `encodings` example to support Tau Prolog and Trealla ProLog.
 
+* UPDATED: The `module_aliases` example to support Trealla ProLog.
+
 * FIXED: Changed an operator declaration in the `metainterpreters` example to
 avoid a conflict with a LVM built-in operator.
 

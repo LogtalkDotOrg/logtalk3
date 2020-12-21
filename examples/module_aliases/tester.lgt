@@ -20,7 +20,7 @@
 
 :- if((current_logtalk_flag(modules, supported), \+ current_logtalk_flag(prolog_dialect, eclipse))).
 
-	:- if(current_logtalk_flag(prolog_dialect, tau)).
+	:- if((current_logtalk_flag(prolog_dialect, tau); current_logtalk_flag(prolog_dialect, trealla))).
 		:- use_module(data1).
 		:- use_module(data2).
 	:- else.
