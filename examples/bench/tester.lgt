@@ -22,6 +22,8 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(loader),
+	% some individual benchmarks may not be loaded depending on the backend
+	set_logtalk_flag(unknown_entities, silent),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
