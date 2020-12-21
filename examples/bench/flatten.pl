@@ -96,11 +96,11 @@ intersect_vars(V1,V2,Out) :-
 make_dummy_name(N,Name) :-
 	name('_dummy_',L1),
 	name(N,L2),
-	append(L1,L2,L),
+	my_append(L1,L2,L),
 	name(Name,L).
 
-append([], L, L).
-append([H|L1], L2, [H|Res]) :- append(L1, L2, Res).
+my_append([], L, L).
+my_append([H|L1], L2, [H|Res]) :- my_append(L1, L2, Res).
 
 % copy_term using a symbol table.
 copy(Term1, Term2) :-

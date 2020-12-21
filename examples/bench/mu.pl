@@ -28,7 +28,7 @@ rule1([H|X], [H|Y]) :-
     rule1(X, Y).
 
 rule2([m|X], [m|Y]) :- 
-    append(X, X, Y).
+    my_append(X, X, Y).
 
 rule3([i,i,i|X], [u|X]).
 rule3([H|X], [H|Y]) :-
@@ -38,6 +38,6 @@ rule4([u,u|X], X).
 rule4([H|X], [H|Y]) :-
     rule4(X, Y).
 
-append([], X, X).
-append([A|B], X, [A|B1]) :-
-    append(B, X, B1).
+my_append([], X, X).
+my_append([A|B], X, [A|B1]) :-
+    my_append(B, X, B1).
