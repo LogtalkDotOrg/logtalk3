@@ -21,6 +21,8 @@
 :- object(nreverse,
 	implements(protocol)).
 
+	:- public(nreverse/2).
+
 	:- include('nreverse.pl').
 
 :- end_object.

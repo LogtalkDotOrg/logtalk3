@@ -21,6 +21,8 @@
 :- object(qsort,
 	implements(protocol)).
 
+	:- public(qsort/3).
+
 	:- include('qsort.pl').
 
 :- end_object.

@@ -18,9 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_prolog_flag(double_quotes, codes).
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -33,6 +30,12 @@
 
 	test(mu_01, true(Result == [[3,m,u,i,i,u],[3,m,u,i,i,i,i,i],[2,m,i,i,i,i,i,i,i,i],[2,m,i,i,i,i],[2,m,i,i],[a,m,i]])) :-
 		mu::theorem([m,u,i,i,u], 5, Result).
+
+	test(nreverse_01, true(Result == [5,4,3,2,1])) :-
+		nreverse::nreverse([1,2,3,4,5], Result).
+
+	test(qsort_01, true(Result == [1,2,3,4,5,7,9])) :-
+		qsort::qsort([3,1,2,7,4,9,5], Result, []).
 
 	test(reducer_01, true(Result == 6)) :-
 		reducer::try(fac(3), Result).
