@@ -144,6 +144,8 @@ Examples
 
 * ADDED: Crude solution to the `bench` example to run all benchmarks.
 
+* ADDED: Tests for some of the individual benchmarks in the `bench` example.
+
 * IMPROVED: Fixed some lint warnings and improved the portability of the
 `bench` example.
 

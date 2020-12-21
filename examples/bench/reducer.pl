@@ -26,8 +26,9 @@ end(X) :- atom(X), !.
 end(X) :- X == [].
 
 list_functor_name(Name) :-
-	% use catch/3 to workaround a functor/3 issue with GNU Prolog
-	catch(functor([_|_], Name, _), _, fail).
+	functor([_|_], Name0, _),
+	% workaround a functor/3 error-checking issue with GNU Prolog
+	Name = Name0.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

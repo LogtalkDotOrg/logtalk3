@@ -21,6 +21,8 @@
 :- object(reducer,
 	implements(protocol)).
 
+	:- public(try/2).
+
 	:- include('reducer.pl').
 
 :- end_object.

@@ -21,6 +21,8 @@
 :- object(tak,
 	implements(protocol)).
 
+	:- public(tak/4).
+
 	:- include('tak.pl').
 
 :- end_object.

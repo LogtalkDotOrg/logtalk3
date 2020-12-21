@@ -21,6 +21,8 @@
 :- object(serialise,
 	implements(protocol)).
 
+	:- public(serialise/2).
+
 	:- include('serialise.pl').
 
 :- end_object.
