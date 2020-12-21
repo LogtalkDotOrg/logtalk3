@@ -10,9 +10,9 @@
 % Uses write/1, compare/3, functor/3, arg/3.
 top :-
 	try(fac(3), _ans1),
-	write(_ans1), nl,
-	try(quick([3,1,2]), _ans2),
-	write(_ans2), nl.
+%	write(_ans1), nl,
+	try(quick([3,1,2]), _ans2).
+%	write(_ans2), nl.
 
 try(_inpexpr, _anslist) :-
 	listify(_inpexpr, _list),
