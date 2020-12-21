@@ -166,6 +166,8 @@ and SICStus Prolog.
 * FIXED: The `bench` example `flatten` and `mu` benchmarks compatibility with
 GNU Prolog.
 
+* FIXED: The `bench` example `serialise` benchmark portability.
+
 Contributions
 -------------
 

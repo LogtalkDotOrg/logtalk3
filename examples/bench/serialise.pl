@@ -8,6 +8,8 @@
 %   itemize (pick a "serial number" for each 
 %   unique integer in) a list of 25 integers
 
+:- set_prolog_flag(double_quotes, codes).
+
 top:-serialise.
 
 serialise :- serialise("ABLE WAS I ERE I SAW ELBA",_).
