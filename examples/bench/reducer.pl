@@ -10,9 +10,9 @@
 % Uses write/1, compare/3, functor/3, arg/3.
 top :-
 	try(fac(3), _ans1),
-%	write(_ans1), nl,
-	try(quick([3,1,2]), _ans2).
-%	write(_ans2), nl.
+	write(_ans1), nl,
+	try(quick([3,1,2]), _ans2),
+	write(_ans2), nl.
 
 try(_inpexpr, _anslist) :-
 	listify(_inpexpr, _list),
@@ -26,7 +26,8 @@ end(X) :- atom(X), !.
 end(X) :- X == [].
 
 list_functor_name(Name) :-
-	functor([_|_], Name, _).
+	% use catch/3 to workaround a functor/3 issue with GNU Prolog
+	catch(functor([_|_], Name, _), _, fail).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -109,7 +110,7 @@ t_redex([_arg|tl], _y) :-
 % Arithmetic:
 t_redex([_y,_x|_op], _res) :-
 	end(_op),
-	member(_op, ['+', '-', '*', '//', 'mod']),
+	my_member(_op, ['+', '-', '*', '//', 'mod']),
 	t_reduce(_x, _xres),
 	t_reduce(_y, _yres),
 	number(_xres), number(_yres),
@@ -118,7 +119,7 @@ t_redex([_y,_x|_op], _res) :-
 % Tests:
 t_redex([_y,_x|_test], _res) :-
 	end(_test),
-	member(_test, [<, >, =<, >=, =\=, =:=]),
+	my_member(_test, [<, >, =<, >=, =\=, =:=]),
 	t_reduce(_x, _xres),
 	t_reduce(_y, _yres),
 	number(_xres), number(_yres),
@@ -136,7 +137,7 @@ t_redex([_y,_x|=], _res) :-
 % Arithmetic functions:
 t_redex([_x|_op], _res) :-
 	end(_op),
-	member(_op, ['-']),
+	my_member(_op, ['-']),
 	t_reduce(_x, _xres),
 	number(_xres),
 	eval1(_op, _t, _xres).
@@ -145,11 +146,11 @@ t_redex([_x|_op], _res) :-
 % Assumes a fact t_def(_func,_def) in the database for every
 % defined function.
 t_redex(_in, _out) :-
-	append(_par,_func,_in),
+	my_append(_par,_func,_in),
 	end(_func),
 	t_def(_func, _args, _expr),
 	t(_args, _expr, _def),
-	append(_par,_def,_out).
+	my_append(_par,_def,_out).
 
 % Basic arithmetic and relational operators:
 
@@ -285,7 +286,6 @@ make_list([_b,_a|LF], [_a|_rb]) :-
 listify(_X, _X) :-
 	(var(_X); atomic(_X)), !.
 listify(_Expr, [_Op|_LArgs]) :-
-	atom(_Op),
 	functor(_Expr, _Op, N),
 	listify_list(1, N, _Expr, _LArgs).
 
@@ -296,11 +296,11 @@ listify_list(I, N, _Expr, [_LA|_LArgs]) :- I=<N, !,
 	I1 is I+1,
 	listify_list(I1, N, _Expr, _LArgs).
 
-member(X, [X|_]).
-member(X, [_|L]) :- member(X, L).
+my_member(X, [X|_]).
+my_member(X, [_|L]) :- my_member(X, L).
 
-append([], L, L).
-append([X|L1], L2, [X|L3]) :- append(L1, L2, L3).
+my_append([], L, L).
+my_append([X|L1], L2, [X|L3]) :- my_append(L1, L2, L3).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -337,9 +337,9 @@ diffv_2([B|S2], A, S1, S) :-
         compare(Order, A, B),
         diffv_3(Order, A, S1, B, S2, S).
 
-diffv_3(<, A, S1, B, S2, [A|S]) :- diffv(S1, [B|S2], S).
-diffv_3(=, A, S1, _, S2,     S) :- diffv(S1, S2, S).
-diffv_3(>, A, S1, _, S2,     S) :- diffv_2(S2, A, S1, S).
+diffv_3(<,  A, S1, B, S2, [A|S]) :- diffv(S1, [B|S2], S).
+diffv_3(=, _A, S1, _, S2,     S) :- diffv(S1, S2, S).
+diffv_3(>,  A, S1, _, S2,     S) :- diffv_2(S2, A, S1, S).
 
 % *** Union
 unionv([], S2, S2).

@@ -160,6 +160,8 @@ pipeline demo.
 * FIXED: The `modules` example to avoid a spurious loading error when running
 its tests using a backend that doesn't natively support modules.
 
+* FIXED: The `bench` example `reducer` benchmark compatibility with GNU Prolog.
+
 Contributions
 -------------
 
