@@ -18,8 +18,8 @@
 .. index:: pair: threaded_engine_fetch/1; Built-in predicate
 .. _predicates_threaded_engine_fetch_1:
 
-threaded_engine_fetch/1
-=======================
+``threaded_engine_fetch/1``
+===========================
 
 Description
 -----------

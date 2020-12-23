@@ -18,8 +18,8 @@
 .. index:: pair: discontiguous/1; Directive
 .. _directives_discontiguous_1:
 
-discontiguous/1
-===============
+``discontiguous/1``
+===================
 
 Description
 -----------

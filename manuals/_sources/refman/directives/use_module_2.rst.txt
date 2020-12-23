@@ -18,8 +18,8 @@
 .. index:: pair: use_module/2; Directive
 .. _directives_use_module_2:
 
-use_module/2
-============
+``use_module/2``
+================
 
 Description
 -----------

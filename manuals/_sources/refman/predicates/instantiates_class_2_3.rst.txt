@@ -18,8 +18,8 @@
 .. index:: pair: instantiates_class/2-3; Built-in predicate
 .. _predicates_instantiates_class_2_3:
 
-instantiates_class/2-3
-======================
+``instantiates_class/2-3``
+==========================
 
 Description
 -----------

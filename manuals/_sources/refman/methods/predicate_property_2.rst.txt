@@ -18,8 +18,8 @@
 .. index:: pair: predicate_property/2; Built-in method
 .. _methods_predicate_property_2:
 
-predicate_property/2
-====================
+``predicate_property/2``
+========================
 
 Description
 -----------

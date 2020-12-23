@@ -18,8 +18,8 @@
 .. index:: pair: end_object/0; Directive
 .. _directives_end_object_0:
 
-end_object/0
-============
+``end_object/0``
+================
 
 Description
 -----------

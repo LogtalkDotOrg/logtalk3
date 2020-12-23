@@ -18,8 +18,8 @@
 .. index:: pair: parameter/2; Built-in method
 .. _methods_parameter_2:
 
-parameter/2
-===========
+``parameter/2``
+===============
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: once/1; Built-in method
 .. _methods_once_1:
 
-once/1
-======
+``once/1``
+==========
 
 Description
 -----------

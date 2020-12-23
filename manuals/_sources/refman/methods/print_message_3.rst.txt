@@ -18,8 +18,8 @@
 .. index:: pair: print_message/3; Built-in method
 .. _methods_print_message_3:
 
-print_message/3
-===============
+``print_message/3``
+===================
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: abolish_protocol/1; Built-in predicate
 .. _predicates_abolish_protocol_1:
 
-abolish_protocol/1
-==================
+``abolish_protocol/1``
+======================
 
 Description
 -----------

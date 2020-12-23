@@ -18,8 +18,8 @@
 .. index:: pair: threaded_ignore/1; Built-in predicate
 .. _predicates_threaded_ignore_1:
 
-threaded_ignore/1
-=================
+``threaded_ignore/1``
+=====================
 
 Description
 -----------

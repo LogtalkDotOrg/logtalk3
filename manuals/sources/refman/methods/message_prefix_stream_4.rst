@@ -18,8 +18,8 @@
 .. index:: pair: message_prefix_stream/4; Built-in method
 .. _methods_message_prefix_stream_4:
 
-message_prefix_stream/4
-=======================
+``message_prefix_stream/4``
+===========================
 
 Description
 -----------

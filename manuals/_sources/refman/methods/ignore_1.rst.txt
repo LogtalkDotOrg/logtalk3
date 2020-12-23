@@ -18,8 +18,8 @@
 .. index:: pair: ignore/1; Built-in method
 .. _methods_ignore_1:
 
-ignore/1
-========
+``ignore/1``
+============
 
 Description
 -----------

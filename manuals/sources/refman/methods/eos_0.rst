@@ -18,8 +18,8 @@
 .. index:: pair: eos//0; Built-in method
 .. _methods_eos_0:
 
-eos//0
-======
+``eos//0``
+==========
 
 Description
 -----------

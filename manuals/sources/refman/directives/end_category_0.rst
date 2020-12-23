@@ -18,8 +18,8 @@
 .. index:: pair: end_category/0; Directive
 .. _directives_end_category_0:
 
-end_category/0
-==============
+``end_category/0``
+==================
 
 Description
 -----------

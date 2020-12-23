@@ -18,8 +18,8 @@
 .. index:: pair: logtalk_linter_hook/7; Built-in predicate
 .. _predicates_logtalk_linter_hook_7:
 
-logtalk_linter_hook/7
-=====================
+``logtalk_linter_hook/7``
+=========================
 
 Description
 -----------

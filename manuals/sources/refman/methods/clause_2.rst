@@ -18,8 +18,8 @@
 .. index:: pair: clause/2; Built-in method
 .. _methods_clause_2:
 
-clause/2
-========
+``clause/2``
+============
 
 Description
 -----------

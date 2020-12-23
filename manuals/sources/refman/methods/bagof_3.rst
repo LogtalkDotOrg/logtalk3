@@ -18,8 +18,8 @@
 .. index:: pair: bagof/3; Built-in method
 .. _methods_bagof_3:
 
-bagof/3
-=======
+``bagof/3``
+===========
 
 Description
 -----------

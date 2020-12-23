@@ -18,8 +18,8 @@
 .. index:: pair: category_property/2; Built-in predicate
 .. _predicates_category_property_2:
 
-category_property/2
-===================
+``category_property/2``
+=======================
 
 Description
 -----------

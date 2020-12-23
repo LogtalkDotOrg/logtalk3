@@ -18,8 +18,8 @@
 .. index:: pair: before/3; Built-in method
 .. _methods_before_3:
 
-before/3
-========
+``before/3``
+============
 
 Description
 -----------

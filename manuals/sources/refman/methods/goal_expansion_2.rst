@@ -18,8 +18,8 @@
 .. index:: pair: goal_expansion/2; Built-in method
 .. _methods_goal_expansion_2:
 
-goal_expansion/2
-================
+``goal_expansion/2``
+====================
 
 Description
 -----------

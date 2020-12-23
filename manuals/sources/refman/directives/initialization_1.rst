@@ -18,8 +18,8 @@
 .. index:: pair: initialization/1; Directive
 .. _directives_initialization_1:
 
-initialization/1
-================
+``initialization/1``
+====================
 
 Description
 -----------

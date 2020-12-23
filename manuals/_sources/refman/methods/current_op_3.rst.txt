@@ -18,8 +18,8 @@
 .. index:: pair: current_op/3; Built-in method
 .. _methods_current_op_3:
 
-current_op/3
-============
+``current_op/3``
+================
 
 Description
 -----------

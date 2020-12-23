@@ -18,8 +18,8 @@
 .. index:: pair: forall/2; Built-in method
 .. _methods_forall_2:
 
-forall/2
-========
+``forall/2``
+============
 
 Description
 -----------

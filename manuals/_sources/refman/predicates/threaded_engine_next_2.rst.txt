@@ -18,8 +18,8 @@
 .. index:: pair: threaded_engine_next/2; Built-in predicate
 .. _predicates_threaded_engine_next_2:
 
-threaded_engine_next/2
-======================
+``threaded_engine_next/2``
+==========================
 
 Description
 -----------

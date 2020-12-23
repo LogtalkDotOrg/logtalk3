@@ -18,8 +18,8 @@
 .. index:: pair: extends_protocol/2-3; Built-in predicate
 .. _predicates_extends_protocol_2_3:
 
-extends_protocol/2-3
-====================
+``extends_protocol/2-3``
+========================
 
 Description
 -----------

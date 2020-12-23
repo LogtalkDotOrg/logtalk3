@@ -18,8 +18,8 @@
 .. index:: pair: syntax_error/1; Built-in method
 .. _methods_syntax_error_1:
 
-syntax_error/1
-==============
+``syntax_error/1``
+==================
 
 Description
 -----------

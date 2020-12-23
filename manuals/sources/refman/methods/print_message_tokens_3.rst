@@ -18,8 +18,8 @@
 .. index:: pair: print_message_tokens/3; Built-in method
 .. _methods_print_message_tokens_3:
 
-print_message_tokens/3
-======================
+``print_message_tokens/3``
+==========================
 
 Description
 -----------

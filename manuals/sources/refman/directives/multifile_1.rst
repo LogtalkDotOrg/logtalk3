@@ -18,8 +18,8 @@
 .. index:: pair: multifile/1; Directive
 .. _directives_multifile_1:
 
-multifile/1
-===========
+``multifile/1``
+===============
 
 Description
 -----------

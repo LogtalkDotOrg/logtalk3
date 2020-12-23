@@ -18,8 +18,8 @@
 .. index:: pair: current_event/5; Built-in predicate
 .. _predicates_current_event_5:
 
-current_event/5
-===============
+``current_event/5``
+===================
 
 Description
 -----------

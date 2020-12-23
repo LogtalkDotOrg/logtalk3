@@ -18,8 +18,8 @@
 .. index:: pair: findall/3; Built-in method
 .. _methods_findall_3:
 
-findall/3
-=========
+``findall/3``
+=============
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: throw/1; Built-in method
 .. _methods_throw_1:
 
-throw/1
-=======
+``throw/1``
+===========
 
 Description
 -----------

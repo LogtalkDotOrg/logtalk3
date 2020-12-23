@@ -18,8 +18,8 @@
 .. index:: pair: asserta/1; Built-in method
 .. _methods_asserta_1:
 
-asserta/1
-=========
+``asserta/1``
+=============
 
 Description
 -----------

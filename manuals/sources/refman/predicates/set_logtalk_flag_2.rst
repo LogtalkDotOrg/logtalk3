@@ -18,8 +18,8 @@
 .. index:: pair: set_logtalk_flag/2; Built-in predicate
 .. _predicates_set_logtalk_flag_2:
 
-set_logtalk_flag/2
-==================
+``set_logtalk_flag/2``
+======================
 
 Description
 -----------

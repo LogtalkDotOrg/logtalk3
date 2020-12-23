@@ -18,8 +18,8 @@
 .. index:: pair: expand_term/2; Built-in method
 .. _methods_expand_term_2:
 
-expand_term/2
-=============
+``expand_term/2``
+=================
 
 Description
 -----------

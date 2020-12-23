@@ -18,8 +18,8 @@
 .. index:: pair: mode/2; Directive
 .. _directives_mode_2:
 
-mode/2
-======
+``mode/2``
+==========
 
 Description
 -----------

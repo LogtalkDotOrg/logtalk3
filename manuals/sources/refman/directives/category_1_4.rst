@@ -18,8 +18,8 @@
 .. index:: pair: category/1-4; Directive
 .. _directives_category_1_4:
 
-category/1-4
-============
+``category/1-4``
+================
 
 Description
 -----------

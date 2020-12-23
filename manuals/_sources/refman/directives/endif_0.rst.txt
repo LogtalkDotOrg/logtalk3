@@ -18,8 +18,8 @@
 .. index:: pair: endif/0; Directive
 .. _directives_endif_0:
 
-endif/0
-=======
+``endif/0``
+===========
 
 Description
 -----------

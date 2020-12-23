@@ -18,8 +18,8 @@
 .. index:: pair: findall/4; Built-in method
 .. _methods_findall_4:
 
-findall/4
-=========
+``findall/4``
+=============
 
 Description
 -----------

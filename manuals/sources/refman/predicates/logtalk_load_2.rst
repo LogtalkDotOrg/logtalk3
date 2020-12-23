@@ -18,8 +18,8 @@
 .. index:: pair: logtalk_load/2; Built-in predicate
 .. _predicates_logtalk_load_2:
 
-logtalk_load/2
-==============
+``logtalk_load/2``
+==================
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: if/1; Directive
 .. _directives_if_1:
 
-if/1
-====
+``if/1``
+========
 
 Description
 -----------

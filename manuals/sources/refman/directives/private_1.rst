@@ -18,8 +18,8 @@
 .. index:: pair: private/1; Directive
 .. _directives_private_1:
 
-private/1
-=========
+``private/1``
+=============
 
 Description
 -----------

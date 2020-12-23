@@ -18,8 +18,8 @@
 .. index:: pair: ununinstantiation_error/1; Built-in method
 .. _methods_uninstantiation_error_1:
 
-uninstantiation_error/1
-=======================
+``uninstantiation_error/1``
+===========================
 
 Description
 -----------

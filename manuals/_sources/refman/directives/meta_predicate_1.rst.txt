@@ -18,8 +18,8 @@
 .. index:: pair: meta_predicate/1; Directive
 .. _directives_meta_predicate_1:
 
-meta_predicate/1
-================
+``meta_predicate/1``
+====================
 
 Description
 -----------

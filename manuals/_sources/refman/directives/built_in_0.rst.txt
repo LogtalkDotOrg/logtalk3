@@ -18,8 +18,8 @@
 .. index:: pair: built_in/0; Directive
 .. _directives_built_in_0:
 
-built_in/0
-==========
+``built_in/0``
+==============
 
 Description
 -----------

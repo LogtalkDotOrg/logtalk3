@@ -18,8 +18,8 @@
 .. index:: pair: phrase//1; Built-in method
 .. _methods_phrase_1:
 
-phrase//1
-=========
+``phrase//1``
+=============
 
 Description
 -----------

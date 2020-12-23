@@ -18,8 +18,8 @@
 .. index:: pair: forward/1; Built-in method
 .. _methods_forward_1:
 
-forward/1
-=========
+``forward/1``
+=============
 
 Description
 -----------

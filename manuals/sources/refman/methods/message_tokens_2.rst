@@ -18,8 +18,8 @@
 .. index:: pair: message_tokens//2; Built-in method
 .. _methods_message_tokens_2:
 
-message_tokens//2
-=================
+``message_tokens//2``
+=====================
 
 Description
 -----------

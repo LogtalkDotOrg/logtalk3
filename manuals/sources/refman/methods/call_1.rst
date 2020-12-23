@@ -18,8 +18,8 @@
 .. index:: pair: call//1-N; Built-in method
 .. _methods_call_1:
 
-call//1-N
-=========
+``call//1-N``
+=============
 
 Description
 -----------

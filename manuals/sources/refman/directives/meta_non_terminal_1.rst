@@ -18,8 +18,8 @@
 .. index:: pair: meta_non_terminal/1; Directive
 .. _directives_meta_non_terminal_1:
 
-meta_non_terminal/1
-===================
+``meta_non_terminal/1``
+=======================
 
 Description
 -----------

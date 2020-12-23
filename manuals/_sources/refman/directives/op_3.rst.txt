@@ -18,8 +18,8 @@
 .. index:: pair: op/3; Directive
 .. _directives_op_3:
 
-op/3
-====
+``op/3``
+========
 
 Description
 -----------

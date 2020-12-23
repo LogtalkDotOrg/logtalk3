@@ -18,8 +18,8 @@
 .. index:: pair: coinductive_success_hook/1-2; Built-in method
 .. _methods_coinductive_success_hook_1_2:
 
-coinductive_success_hook/1-2
-============================
+``coinductive_success_hook/1-2``
+================================
 
 Description
 -----------

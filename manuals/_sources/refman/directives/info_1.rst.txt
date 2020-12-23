@@ -18,8 +18,8 @@
 .. index:: pair: info/1; Directive
 .. _directives_info_1:
 
-info/1
-======
+``info/1``
+==========
 
 Description
 -----------

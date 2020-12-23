@@ -18,8 +18,8 @@
 .. index:: pair: abolish_category/1; Built-in predicate
 .. _predicates_abolish_category_1:
 
-abolish_category/1
-==================
+``abolish_category/1``
+======================
 
 Description
 -----------

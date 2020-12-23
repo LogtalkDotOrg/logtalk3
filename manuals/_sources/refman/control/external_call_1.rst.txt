@@ -18,8 +18,8 @@
 .. index:: pair: {}/1; Control construct
 .. _control_external_call_1:
 
-{}/1
-====
+``{}/1``
+========
 
 Description
 -----------

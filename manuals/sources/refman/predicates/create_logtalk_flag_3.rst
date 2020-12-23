@@ -18,8 +18,8 @@
 .. index:: pair: create_logtalk_flag/3; Built-in predicate
 .. _predicates_create_logtalk_flag_3:
 
-create_logtalk_flag/3
-=====================
+``create_logtalk_flag/3``
+=========================
 
 Description
 -----------

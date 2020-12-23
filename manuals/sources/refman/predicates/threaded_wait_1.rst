@@ -18,8 +18,8 @@
 .. index:: pair: threaded_wait/1; Built-in predicate
 .. _predicates_threaded_wait_1:
 
-threaded_wait/1
-===============
+``threaded_wait/1``
+===================
 
 Description
 -----------

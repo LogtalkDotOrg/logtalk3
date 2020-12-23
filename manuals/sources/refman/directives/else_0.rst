@@ -18,8 +18,8 @@
 .. index:: pair: else/0; Directive
 .. _directives_else_0:
 
-else/0
-======
+``else/0``
+==========
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: protected/1; Directive
 .. _directives_protected_1:
 
-protected/1
-===========
+``protected/1``
+===============
 
 Description
 -----------

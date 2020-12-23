@@ -18,8 +18,8 @@
 .. index:: pair: encoding/1; Directive
 .. _directives_encoding_1:
 
-encoding/1
-==========
+``encoding/1``
+==============
 
 Description
 -----------

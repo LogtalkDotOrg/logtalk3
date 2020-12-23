@@ -18,8 +18,8 @@
 .. index:: pair: existence_error/2; Built-in method
 .. _methods_existence_error_2:
 
-existence_error/2
-=================
+``existence_error/2``
+=====================
 
 Description
 -----------

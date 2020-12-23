@@ -18,8 +18,8 @@
 .. index:: pair: logtalk_make/1; Built-in predicate
 .. _predicates_logtalk_make_1:
 
-logtalk_make/1
-==============
+``logtalk_make/1``
+==================
 
 Description
 -----------

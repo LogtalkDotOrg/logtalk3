@@ -18,8 +18,8 @@
 .. index:: pair: extends_category/2-3; Built-in predicate
 .. _predicates_extends_category_2_3:
 
-extends_category/2-3
-====================
+``extends_category/2-3``
+========================
 
 Description
 -----------

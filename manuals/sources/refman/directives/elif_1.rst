@@ -18,8 +18,8 @@
 .. index:: pair: elif/1; Directive
 .. _directives_elif_1:
 
-elif/1
-======
+``elif/1``
+==========
 
 Description
 -----------

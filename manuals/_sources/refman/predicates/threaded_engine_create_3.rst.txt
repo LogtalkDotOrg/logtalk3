@@ -18,8 +18,8 @@
 .. index:: pair: threaded_engine_create/3; Built-in predicate
 .. _predicates_threaded_engine_create_3:
 
-threaded_engine_create/3
-========================
+``threaded_engine_create/3``
+============================
 
 Description
 -----------

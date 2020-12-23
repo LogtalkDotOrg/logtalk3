@@ -18,8 +18,8 @@
 .. index:: pair: context/1; Built-in method
 .. _methods_context_1:
 
-context/1
-=========
+``context/1``
+=============
 
 Description
 -----------

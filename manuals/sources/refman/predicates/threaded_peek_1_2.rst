@@ -18,8 +18,8 @@
 .. index:: pair: threaded_peek/1-2; Built-in predicate
 .. _predicates_threaded_peek_1_2:
 
-threaded_peek/1-2
-=================
+``threaded_peek/1-2``
+=====================
 
 Description
 -----------

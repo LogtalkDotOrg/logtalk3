@@ -18,8 +18,8 @@
 .. index:: pair: specializes_class/2-3; Built-in predicate
 .. _predicates_specializes_class_2_3:
 
-specializes_class/2-3
-=====================
+``specializes_class/2-3``
+=========================
 
 Description
 -----------

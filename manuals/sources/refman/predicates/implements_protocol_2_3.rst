@@ -18,8 +18,8 @@
 .. index:: pair: implements_protocol/2-3; Built-in predicate
 .. _predicates_implements_protocol_2_3:
 
-implements_protocol/2-3
-=======================
+``implements_protocol/2-3``
+===========================
 
 Description
 -----------

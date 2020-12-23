@@ -18,8 +18,8 @@
 .. index:: pair: threaded_engine_self/1; Built-in predicate
 .. _predicates_threaded_engine_self_1:
 
-threaded_engine_self/1
-======================
+``threaded_engine_self/1``
+==========================
 
 Description
 -----------

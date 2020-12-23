@@ -18,8 +18,8 @@
 .. index:: pair: question_prompt_stream/4; Built-in method
 .. _methods_question_prompt_stream_4:
 
-question_prompt_stream/4
-========================
+``question_prompt_stream/4``
+============================
 
 Description
 -----------

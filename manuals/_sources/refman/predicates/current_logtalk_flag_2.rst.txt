@@ -18,8 +18,8 @@
 .. index:: pair: current_logtalk_flag/2; Built-in predicate
 .. _predicates_current_logtalk_flag_2:
 
-current_logtalk_flag/2
-======================
+``current_logtalk_flag/2``
+==========================
 
 Description
 -----------

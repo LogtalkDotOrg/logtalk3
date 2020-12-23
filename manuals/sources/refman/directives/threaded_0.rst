@@ -18,8 +18,8 @@
 .. index:: pair: threaded/0; Directive
 .. _directives_threaded_0:
 
-threaded/0
-==========
+``threaded/0``
+==============
 
 Description
 -----------

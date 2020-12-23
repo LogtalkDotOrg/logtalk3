@@ -18,8 +18,8 @@
 .. index:: pair: this/1; Built-in method
 .. _methods_this_1:
 
-this/1
-======
+``this/1``
+==========
 
 Description
 -----------

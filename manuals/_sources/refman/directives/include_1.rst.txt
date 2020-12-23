@@ -18,8 +18,8 @@
 .. index:: pair: include/1; Directive
 .. _directives_include_1:
 
-include/1
-=========
+``include/1``
+=============
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: dynamic/0; Directive
 .. _directives_dynamic_0:
 
-dynamic/0
-=========
+``dynamic/0``
+=============
 
 Description
 -----------
@@ -30,6 +30,12 @@ Description
 
 Declares an entity and its contents as dynamic. Dynamic entities can be
 abolished at runtime.
+
+.. warning::
+
+   Some backend Prolog compilers declare ``dynamic`` as an operator
+   for a lighter syntax, forcing writing this atom between parenthesis
+   when using this directive.
 
 Template and modes
 ------------------

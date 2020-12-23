@@ -18,8 +18,8 @@
 .. index:: pair: synchronized/1; Directive
 .. _directives_synchronized_1:
 
-synchronized/1
-==============
+``synchronized/1``
+==================
 
 Description
 -----------

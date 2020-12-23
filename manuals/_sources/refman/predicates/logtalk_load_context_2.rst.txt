@@ -18,8 +18,8 @@
 .. index:: pair: logtalk_load_context/2; Built-in predicate
 .. _predicates_logtalk_load_context_2:
 
-logtalk_load_context/2
-======================
+``logtalk_load_context/2``
+==========================
 
 Description
 -----------

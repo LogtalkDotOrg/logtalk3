@@ -18,8 +18,8 @@
 .. index:: pair: logtalk_make_target_action/1; Built-in predicate
 .. _predicates_logtalk_make_target_action_1:
 
-logtalk_make_target_action/1
-============================
+``logtalk_make_target_action/1``
+================================
 
 Description
 -----------

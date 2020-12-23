@@ -18,8 +18,8 @@
 .. index:: pair: system_error/0; Built-in method
 .. _methods_system_error_0:
 
-system_error/0
-==============
+``system_error/0``
+==================
 
 Description
 -----------

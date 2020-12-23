@@ -18,8 +18,8 @@
 .. index:: pair: type_error/2; Built-in method
 .. _methods_type_error_2:
 
-type_error/2
-============
+``type_error/2``
+================
 
 Description
 -----------

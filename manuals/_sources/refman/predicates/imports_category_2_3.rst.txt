@@ -18,8 +18,8 @@
 .. index:: pair: imports_category/2-3; Built-in predicate
 .. _predicates_imports_category_2_3:
 
-imports_category/2-3
-====================
+``imports_category/2-3``
+========================
 
 Description
 -----------

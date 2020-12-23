@@ -18,8 +18,8 @@
 .. index:: pair: public/1; Directive
 .. _directives_public_1:
 
-public/1
-========
+``public/1``
+============
 
 Description
 -----------

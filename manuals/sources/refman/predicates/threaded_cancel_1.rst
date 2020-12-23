@@ -18,8 +18,8 @@
 .. index:: pair: threaded_cancel/1; Built-in predicate
 .. _predicates_threaded_cancel_1:
 
-threaded_cancel/1
-=================
+``threaded_cancel/1``
+=====================
 
 Description
 -----------

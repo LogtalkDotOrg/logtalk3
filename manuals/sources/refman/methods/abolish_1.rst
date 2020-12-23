@@ -18,8 +18,8 @@
 .. index:: pair: abolish/1; Built-in method
 .. _methods_abolish_1:
 
-abolish/1
-=========
+``abolish/1``
+=============
 
 Description
 -----------

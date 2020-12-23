@@ -18,8 +18,8 @@
 .. index:: pair: create_category/4; Built-in predicate
 .. _predicates_create_category_4:
 
-create_category/4
-=================
+``create_category/4``
+=====================
 
 Description
 -----------

@@ -18,8 +18,8 @@
 .. index:: pair: coinductive/1; Directive
 .. _directives_coinductive_1:
 
-coinductive/1
-=============
+``coinductive/1``
+=================
 
 Description
 -----------

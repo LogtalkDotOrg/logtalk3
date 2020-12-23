@@ -18,8 +18,8 @@
 .. index:: pair: <</2; Control construct
 .. _control_context_switch_2:
 
-<</2
-====
+``<</2``
+========
 
 Description
 -----------

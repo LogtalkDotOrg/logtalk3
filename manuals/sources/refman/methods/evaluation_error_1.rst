@@ -18,8 +18,8 @@
 .. index:: pair: evaluation_error/1; Built-in method
 .. _methods_evaluation_error_1:
 
-evaluation_error/1
-==================
+``evaluation_error/1``
+======================
 
 Description
 -----------

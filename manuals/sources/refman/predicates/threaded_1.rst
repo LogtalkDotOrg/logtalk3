@@ -18,8 +18,8 @@
 .. index:: pair: threaded/1; Built-in predicate
 .. _predicates_threaded_1:
 
-threaded/1
-==========
+``threaded/1``
+==============
 
 Description
 -----------

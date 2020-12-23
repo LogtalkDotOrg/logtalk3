@@ -18,8 +18,8 @@
 .. index:: pair: logtalk_compile/1; Built-in predicate
 .. _predicates_logtalk_compile_1:
 
-logtalk_compile/1
-=================
+``logtalk_compile/1``
+=====================
 
 Description
 -----------

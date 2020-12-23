@@ -18,8 +18,8 @@
 .. index:: pair: dynamic/1; Directive
 .. _directives_dynamic_1:
 
-dynamic/1
-=========
+``dynamic/1``
+=============
 
 Description
 -----------
