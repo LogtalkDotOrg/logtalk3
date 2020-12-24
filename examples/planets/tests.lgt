@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-02-20,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "planets" example.'
 	]).
 
@@ -36,20 +36,16 @@
 	cover(earth).
 	cover(mars).
 
-	test(planets_01) :-
-		earth::weight(m1, W1),
-		W1 =~= 29.41995.
+	test(planets_01, true(W1 =~= 29.41995)) :-
+		earth::weight(m1, W1).
 
-	test(planets_02) :-
-		mars::weight(m1, W1),
-		W1 =~= 11.162279999999999.
+	test(planets_02, true(W1 =~= 11.162279999999999)) :-
+		mars::weight(m1, W1).
 
-	test(planets_03) :-
-		earth::weight(m2, W2),
-		W2 =~= 39.2266.
+	test(planets_03, true(W2 =~= 39.2266)) :-
+		earth::weight(m2, W2).
 
-	test(planets_04) :-
-		mars::weight(m2, W2),
-		W2 =~= 14.88304.
+	test(planets_04, true(W2 =~= 14.88304)) :-
+		mars::weight(m2, W2).
 
 :- end_object.

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-03,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "viewpoints" example.'
 	]).
 
@@ -34,43 +34,34 @@
 	cover(joe_film_enthusiast).
 	cover(joe_employee).
 
-	test(viewpoints_1) :-
-		joe_person::age(Age),
-		Age == 30.
+	test(viewpoints_01, true(Age == 30)) :-
+		joe_person::age(Age).
 
-	test(viewpoints_2) :-
-		joe_sportsman::age(Age),
-		Age == 30.
+	test(viewpoints_02, true(Age == 30)) :-
+		joe_sportsman::age(Age).
 
-	test(viewpoints_3) :-
+	test(viewpoints_03, true(Age == 31)) :-
 		joe_person::grow_older,
-		joe_chess_player::age(Age),
-		Age == 31.
+		joe_chess_player::age(Age).
 
-	test(viewpoints_4) :-
+	test(viewpoints_04, true(Age == 32)) :-
 		joe_employee::grow_older,
-		joe_person::age(Age),
-		Age == 32.
+		joe_person::age(Age).
 
-	test(viewpoints_5) :-
-		joe_person::score(Score),
-		Score == 0.
+	test(viewpoints_05, true(Score == 0)) :-
+		joe_person::score(Score).
 
-	test(viewpoints_6) :-
-		joe_employee::score(Score),
-		Score == 0.
+	test(viewpoints_06, true(Score == 0)) :-
+		joe_employee::score(Score).
 
 	% don't use message broadcasting syntax in order to workaround a XSB parser bug
-	test(viewpoints_7) :-
-		joe_chess_player::set_score(2200), joe_chess_player::score(Score),
-		Score == 2200.
+	test(viewpoints_07, true(Score == 2200)) :-
+		joe_chess_player::set_score(2200), joe_chess_player::score(Score).
 
-	test(viewpoints_8) :-
-		joe_person::score(Score),
-		Score == 0.
+	test(viewpoints_08, true(Score == 0)) :-
+		joe_person::score(Score).
 
-	test(viewpoints_9) :-
-		joe_sportsman::score(Score),
-		Score == 0.
+	test(viewpoints_09, true(Score == 0)) :-
+		joe_sportsman::score(Score).
 
 :- end_object.

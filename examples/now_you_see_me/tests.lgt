@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-06-28,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "now_you_see_me" example.'
 	]).
 
@@ -32,19 +32,16 @@
 	cover(magic).
 	cover(stage).
 
-	test(now_you_see_me_01) :-
+	test(now_you_see_me_01, true(AllHorseman == [danny, merritt, henley, jack])) :-
 		magic::show,
-		stage::all(AllHorseman),
-		AllHorseman == [danny, merritt, henley, jack].
+		stage::all(AllHorseman).
 
-	test(now_you_see_me_02) :-
+	test(now_you_see_me_02, true(AllHorseman == [])) :-
 		magic::hide,
-		stage::all(AllHorseman),
-		AllHorseman == [].
+		stage::all(AllHorseman).
 
-	test(now_you_see_me_03) :-
+	test(now_you_see_me_03, true(AllHorseman == [danny, merritt, henley, jack])) :-
 		magic::show,
-		stage::all(AllHorseman),
-		AllHorseman == [danny, merritt, henley, jack].
+		stage::all(AllHorseman).
 
 :- end_object.

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-06,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "instmethods" example.'
 	]).
 
@@ -33,16 +33,13 @@
 	cover(instance2).
 	cover(instance3).
 
-	test(instmethods_1) :-
-		instance1::predicate_property(method, defined_in(Object)),
-		Object == root.
+	test(instmethods_01, true(Object == root)) :-
+		instance1::predicate_property(method, defined_in(Object)).
 
-	test(instmethods_2) :-
-		instance2::predicate_property(method, defined_in(Object)),
-		Object == instance2.
+	test(instmethods_02, true(Object == instance2)) :-
+		instance2::predicate_property(method, defined_in(Object)).
 
-	test(instmethods_3) :-
-		instance3::predicate_property(method, defined_in(Object)),
-		Object == instance3.
+	test(instmethods_03, true(Object == instance3)) :-
+		instance3::predicate_property(method, defined_in(Object)).
 
 :- end_object.

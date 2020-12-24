@@ -22,41 +22,41 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2019-04-01,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "proxies" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [
+		op(700, xfx, '=~='), '=~='/2,
+		assertion/1
+	]).
 
 	cover(circle(_, _, _)).
 
-	test(proxies_01) :-
-		circle(one, 7, red)::id(Id),
-		Id == one.
+	test(proxies_01, true(Id == one)) :-
+		circle(one, 7, red)::id(Id).
 
-	test(proxies_02) :-
-		circle(one, 7, red)::radius(Radius),
-		Radius == 7.
+	test(proxies_02, true(Radius == 7)) :-
+		circle(one, 7, red)::radius(Radius).
 
-	test(proxies_03) :-
-		circle(one, 7, red)::color(Color),
-		Color == red.
+	test(proxies_03, true(Color == red)) :-
+		circle(one, 7, red)::color(Color).
 
-	test(proxies_04) :-
+	test(proxies_04, true) :-
 		^^suppress_text_output,
 		{circle('#2', Radius, Color)}::print,
-		Radius =~= 3.71,
-		Color == yellow.
+		assertion(Radius =~= 3.71),
+		assertion(Color == yellow).
 
 	test(proxies_05) :-
 		findall(Area, {circle(_, _, _)}::area(Area), Areas),
 		Areas = [Area1, Area2, Area3, Area4, Area5],
-		Area1 =~= 4.75291552561599,
-		Area2 =~= 43.2411954432752,
-		Area3 =~= 0.477836242611007,
-		Area4 =~= 103.507938113415,
-		Area5 =~= 217.468583303854.
+		assertion(Area1 =~= 4.75291552561599),
+		assertion(Area2 =~= 43.2411954432752),
+		assertion(Area3 =~= 0.477836242611007),
+		assertion(Area4 =~= 103.507938113415),
+		assertion(Area5 =~= 217.468583303854).
 
 :- end_object.

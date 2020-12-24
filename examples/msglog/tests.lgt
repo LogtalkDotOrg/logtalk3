@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-01-19,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "msglog" example.'
 	]).
 
@@ -40,8 +40,8 @@
 		% the "msglog" object records messages sent from "user"
 		{character::is_alpha(p)},
 		msglog::log(Object, Message),
-		Object == character,
-		Message == is_alpha(p).
+		^^assertion(Object == character),
+		^^assertion(Message == is_alpha(p)).
 
 	test(msglog_03) :-
 		msglog::erase,
@@ -57,7 +57,7 @@
 		LogEntries = [Entry1, Entry2| Tail],
 		^^variant(Entry1, list::member(_, [1, 2, 3])),
 		^^variant(Entry2, integer::between(1, 4, _)),
-		Tail == [].
+		^^assertion(Tail == []).
 
 	test(msglog_04) :-
 		msglog::erase,
@@ -73,7 +73,7 @@
 			LogEntries
 		),
 		LogEntries = [Entry| Tail],
-		Entry == character::is_alpha(p),
-		Tail == [].
+		^^assertion(Entry == character::is_alpha(p)),
+		^^assertion(Tail == []).
 
 :- end_object.

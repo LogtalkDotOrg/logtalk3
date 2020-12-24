@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-06,
+		date is 2020-12-24,
 		comment is 'Unit tests for the "classmethods" example.'
 	]).
 
@@ -34,17 +34,14 @@
 	cover(circle).
 	cover(c42).
 
-	test(classmethods_1) :-
-		circle::area(1.0, Area),
-		Area =~= 3.14159265358979.
+	test(classmethods_01, true(Area =~= 3.14159265358979)) :-
+		circle::area(1.0, Area).
 
-	test(classmethods_2) :-
-		c42::area(Area),
-		Area =~= 24.630086404144.
+	test(classmethods_02, true(Area =~= 24.630086404144)) :-
+		c42::area(Area).
 
-	test(classmethods_3) :-
+	test(classmethods_03, true(Area =~= 4.5238934211693)) :-
 		circle::new(1.2, 7.9, 2.0, Circle),
-		Circle::area(Area),
-		Area =~= 4.5238934211693.
+		Circle::area(Area).
 
 :- end_object.
