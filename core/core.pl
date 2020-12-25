@@ -3,7 +3,7 @@
 %  core compiler and runtime
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -3481,7 +3481,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 43, 0, stable)).
+'$lgt_version_data'(logtalk(3, 44, 0, b01)).
 
 
 

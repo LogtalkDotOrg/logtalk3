@@ -4,7 +4,7 @@
 //  Last updated on Aug 30, 2020
 //
 //  This file is part of Logtalk <https://logtalk.org/>  
-//  Copyright 1998-2020 José Antonio Riaza Valverde and  
+//  Copyright 1998-2021 José Antonio Riaza Valverde and  
 //  Paulo Moura <pmoura@logtalk.org>
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");

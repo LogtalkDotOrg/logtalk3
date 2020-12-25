@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 1998-2020 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -237,8 +237,8 @@
 	message_tokens(banner) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
 		(	{Status == stable} ->
-			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2020 Paulo Moura'-[], nl, nl]
-		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2020 Paulo Moura'-[], nl, nl]
+			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2021 Paulo Moura'-[], nl, nl]
+		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2021 Paulo Moura'-[], nl, nl]
 		).
 
 	message_tokens(default_flags) -->
