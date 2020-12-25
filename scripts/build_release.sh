@@ -89,7 +89,7 @@ sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
 sudo cp -f "logtalk-$version.tar.bz2" "/opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2"
 cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/ || exit 1
 sudo mv -f Portfile Portfile.old
-sudo cp "$directory/logtalk-$version/scripts/macosx/Portfile" .
+sudo cp "$directory/logtalk-$version/scripts/macos/Portfile" .
 sudo sed -e "s/^version.*/version $version/" -i '' Portfile
 sudo sed -e "s/sha256.*/sha256 $sha256 \\\/" -i '' Portfile
 sudo sed -e "s/rmd160.*/rmd160 $rmd160/" -i '' Portfile

@@ -51,7 +51,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts.
 Terminal command files for running Logtalk with selected backend Prolog
 compilers are also available on the Logtalk installation folder (by default,
-`/opt/local/share/logtalk/scripts/macosx/command_files`). For easy access, the
+`/opt/local/share/logtalk/scripts/macos/command_files`). For easy access, the
 installer creates an alias to the Logtalk folder in the Applications folder.
 
 On Windows systems, shortcuts for running Logtalk with selected backend

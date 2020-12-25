@@ -123,7 +123,7 @@ also available in the Logtalk website.
 - `linux`  
 	directory containing files used when building
 
-- `macosx`  
+- `macos`  
 	directory containing files used when building macOS installer packages
 
 - `pack`  

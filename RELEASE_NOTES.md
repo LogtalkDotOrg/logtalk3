@@ -27,6 +27,8 @@ RELEASE NOTES
 Installers and installation scripts
 -----------------------------------
 
+* CHANGED: Renamed the `scripts/macosx` directory to `scripts/macos`.
+
 * UPDATED: The macOS installer to also set system-wide default values for the
 `LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
 

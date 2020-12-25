@@ -54,10 +54,10 @@ package.flat    no
 
 post-pkg {
 	set resources ${workpath}/${name}-${version}.pkg/Contents/Resources/
-	file copy -force -- ${workpath}/${worksrcdir}/scripts/macosx/License.html ${resources}
-	file copy -force -- ${workpath}/${worksrcdir}/scripts/macosx/ReadMe.html ${resources}
-	file copy -force -- ${workpath}/${worksrcdir}/scripts/macosx/Welcome.html ${resources}
-	file copy -force -- ${workpath}/${worksrcdir}/scripts/macosx/postflight ${resources}
+	file copy -force -- ${workpath}/${worksrcdir}/scripts/macos/License.html ${resources}
+	file copy -force -- ${workpath}/${worksrcdir}/scripts/macos/ReadMe.html ${resources}
+	file copy -force -- ${workpath}/${worksrcdir}/scripts/macos/Welcome.html ${resources}
+	file copy -force -- ${workpath}/${worksrcdir}/scripts/macos/postflight ${resources}
 }
 
 post-activate {

@@ -53,8 +53,8 @@ chmod a+x scripts/debian/prerm
 chmod a+x scripts/debian/postrm
 chmod a+x scripts/docker/swi-prolog/*.sh
 chmod a+x scripts/linux/*.sh
-chmod a+x scripts/macosx/postflight
-chmod a+x scripts/macosx/command_files/*.command
+chmod a+x scripts/macos/postflight
+chmod a+x scripts/macos/command_files/*.command
 chmod a+x tools/diagrams/*.sh
 chmod a+x tools/diagrams/*.js
 chmod a+x tools/lgtdoc/xml/*.sh
