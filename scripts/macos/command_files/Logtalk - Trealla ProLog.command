@@ -20,4 +20,4 @@
 ## 
 #############################################################################
 
-exec $LOGTALKHOME/integration/qplgt.sh
+exec $LOGTALKHOME/integration/tplgt.sh
