@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2020-12-25,
 		comment is 'Unit tests for the "classvars" example.'
 	]).
 
@@ -33,20 +33,24 @@
 	cover(instance2).
 	cover(instance3).
 
-	test(classvars_1) :-
-		instance1::cv(Value1),
-		instance2::cv(Value2),
-		instance3::cv(Value3),
-		Value1 == 0, Value2 == 0, Value3 == 0.
+	test(classvars_01, true(Value1 == 0)) :-
+		instance1::cv(Value1).
 
-	% test 2.  Note: Depends on previous test.
-	test(classvars_2) :-
+	test(classvars_02, true(Value2 == 0)) :-
+		instance2::cv(Value2).
+
+	test(classvars_03, true(Value3 == 0)) :-
+		instance3::cv(Value3).
+
+	% depends on previous test
+	test(classvars_04, true) :-
 		instance1::set_cv(1).
 
-	% test 3.   Note: Depends on previous test.
-	test(classvars_3) :-
-		instance2::cv(Value2),
-		instance3::cv(Value3),
-		Value2 == 1, Value3 == 1.
+	% depends on previous test
+	test(classvars_05, true(Value2 == 1)) :-
+		instance2::cv(Value2).
+
+	test(classvars_06, true(Value3 == 1)) :-
+		instance3::cv(Value3).
 
 :- end_object.

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-06,
+		date is 2020-12-25,
 		comment is 'Unit tests for the "instvars" example.'
 	]).
 
@@ -33,15 +33,25 @@
 	cover(instance2).
 	cover(instance3).
 
-	test(instvars_1) :-
-		instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3),
-		Value1 == 0, Value2 == 0, Value3 == 0.
+	test(instvars_01, true(Value1 == 0)) :-
+		instance1::ivar(Value1).
 
-	test(instvars_2) :-
+	test(instvars_02, true(Value2 == 0)) :-
+		instance2::ivar(Value2).
+
+	test(instvars_03, true(Value3 == 0)) :-
+		instance3::ivar(Value3).
+
+	test(instvars_04) :-
 		instance1::set_ivar(1).
 
-	test(instvars_3) :-
-		instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3),
-		Value1 == 1, Value2 == 0, Value3 == 0.
+	test(instvars_05, true(Value1 == 1)) :-
+		instance1::ivar(Value1).
+
+	test(instvars_06, true(Value2 == 0)) :-
+		instance2::ivar(Value2).
+
+	test(instvars_07, true(Value3 == 0)) :-
+		instance3::ivar(Value3).
 
 :- end_object.
