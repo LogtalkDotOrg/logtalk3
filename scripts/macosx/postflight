@@ -3,6 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk macOS installer package auxiliary script
+##   Last updated on December 25, 2020
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -24,6 +25,17 @@
 echo ""
 echo "Checking for the Logtalk environment variable definitions..."
 echo ""
+
+if grep "LOGTALKHOME=/opt/local/share/logtalk" /etc/zprofile >/dev/null 2>&1; then
+	echo "Logtalk environment variables default values already set for zsh!"
+else
+	/bin/cp -fp /etc/zprofile /etc/zprofile.lgtsaved
+	echo '' >> /etc/zprofile
+	echo '# Logtalk environment variables default values' >> /etc/zprofile
+	echo 'LOGTALKHOME=/opt/local/share/logtalk' >> /etc/zprofile
+	echo 'LOGTALKUSER=$HOME/logtalk' >> /etc/zprofile
+	echo 'export LOGTALKHOME LOGTALKUSER' >> /etc/zprofile
+fi
 
 if grep "LOGTALKHOME=/opt/local/share/logtalk" /etc/profile >/dev/null 2>&1; then
 	echo "Logtalk environment variables default values already set for bash!"

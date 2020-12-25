@@ -21,6 +21,16 @@ RELEASE NOTES
 =============
 
 
+3.44.0 - January ??, 2020
+=========================
+
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The macOS installer to also set system-wide default values for the
+`LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
+
+
 3.43.0 - December 22, 2020
 ==========================
 
