@@ -34,6 +34,15 @@ Installers and installation scripts
 * UPDATED: The macOS installer to also set system-wide default values for the
 `LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
 
+Library
+-------
+
+* ADDED: Implementation for the `os::directory_files/2` predicate for Trealla
+ProLog.
+
+* FIXED: Implementation for the `os::delete_directory/1` predicate for Trealla
+ProLog.
+
 
 3.43.0 - December 22, 2020
 ==========================
