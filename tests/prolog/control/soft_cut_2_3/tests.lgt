@@ -47,89 +47,78 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-06-23,
+		date is 2020-12-26,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 
-	:- discontiguous([
-		succeeds/1, fails/1
-	]).
-
-	succeeds(commons_soft_cut_2_3_01) :-
+	test(commons_soft_cut_2_3_01, true) :-
 		{'*->'(true, true)}.
 
-	fails(commons_soft_cut_2_3_02) :-
+	test(commons_soft_cut_2_3_02, false) :-
 		{'*->'(true, fail)}.
 
-	fails(commons_soft_cut_2_3_03) :-
+	test(commons_soft_cut_2_3_03, false) :-
 		{'*->'(fail, true)}.
 
-	fails(commons_soft_cut_2_3_04) :-
+	test(commons_soft_cut_2_3_04, false) :-
 		{'*->'(fail, fail)}.
 
-	succeeds(commons_soft_cut_2_3_05) :-
+	test(commons_soft_cut_2_3_05, true) :-
 		{';'('*->'(true, true), fail)}.
 
-	succeeds(commons_soft_cut_2_3_06) :-
+	test(commons_soft_cut_2_3_06, true) :-
 		{';'('*->'(fail, true), true)}.
 
-	fails(commons_soft_cut_2_3_07) :-
+	test(commons_soft_cut_2_3_07, false) :-
 		{';'('*->'(true, fail), fail)}.
 
-	fails(commons_soft_cut_2_3_08) :-
+	test(commons_soft_cut_2_3_08, false) :-
 		{';'('*->'(fail, true), fail)}.
 
-	succeeds(commons_soft_cut_2_3_09) :-
-		findall(X-Y, {';'('*->'(a(X),b(Y)), c(_))}, L),
-		L == [1-4, 1-5, 1-6, 2-4, 2-5, 2-6, 3-4, 3-5, 3-6].
+	test(commons_soft_cut_2_3_09, true(L == [1-4, 1-5, 1-6, 2-4, 2-5, 2-6, 3-4, 3-5, 3-6])) :-
+		findall(X-Y, {';'('*->'(a(X),b(Y)), c(_))}, L).
 
-	succeeds(commons_soft_cut_2_3_10) :-
-		findall(Z, {';'('*->'(fail,b(_)), c(Z))}, L),
-		L == [7, 8, 9].
+	test(commons_soft_cut_2_3_10, true(L == [7, 8, 9])) :-
+		findall(Z, {';'('*->'(fail,b(_)), c(Z))}, L).
 
-	succeeds(commons_soft_cut_2_3_11) :-
-		findall(Z, {';'('*->'((!,fail),b(_)), c(Z))}, L),
-		L == [7, 8, 9].
+	test(commons_soft_cut_2_3_11, true(L == [7, 8, 9])) :-
+		findall(Z, {';'('*->'((!,fail),b(_)), c(Z))}, L).
 
-	succeeds(commons_soft_cut_2_3_12) :-
+	test(commons_soft_cut_2_3_12, true) :-
 		{condition_opaque_to_cut_2}.
 
-	succeeds(commons_soft_cut_2_3_13) :-
-		findall(X, {condition_opaque_to_cut_2(X)}, L),
-		L == [1, 2].
+	test(commons_soft_cut_2_3_13, true(L == [1, 2])) :-
+		findall(X, {condition_opaque_to_cut_2(X)}, L).
 
-	succeeds(commons_soft_cut_2_3_14) :-
+	test(commons_soft_cut_2_3_14, true) :-
 		{condition_opaque_to_cut_3}.
 
-	succeeds(commons_soft_cut_2_3_15) :-
-		findall(X, {condition_opaque_to_cut_3(X)}, L),
-		L == [1, 2].
+	test(commons_soft_cut_2_3_15, true(L == [1, 2])) :-
+		findall(X, {condition_opaque_to_cut_3(X)}, L).
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_soft_cut_2_3_16) :-
+	test(lgt_soft_cut_2_3_16, true(L == [1, 2])) :-
 		% if part is cut opaque
-		findall(X, {';'(X=1, X=2), '*->'(!, true)}, L),
-		L == [1, 2].
+		findall(X, {';'(X=1, X=2), '*->'(!, true)}, L).
 
-	succeeds(lgt_soft_cut_2_3_17) :-
+	test(lgt_soft_cut_2_3_17, true(L == [1])) :-
 		% then part is cut transparent
-		findall(X, {';'(X=1, X=2), '*->'(true, !)}, L),
-		L == [1].
+		findall(X, {';'(X=1, X=2), '*->'(true, !)}, L).
 
-	throws(lgt_soft_cut_2_3_18, [error(type_error(callable,3),_), error(type_error(callable,';'('*->'(3,true),fail)),_)]) :-
+	test(lgt_soft_cut_2_3_18, errors([type_error(callable,3), type_error(callable,';'('*->'(3,true),fail))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{';'('*->'(Three, true), fail)}.
 
-	throws(lgt_soft_cut_2_3_19, [error(type_error(callable,3),_), error(type_error(callable,';'('*->'(true,3),fail)),_)]) :-
+	test(lgt_soft_cut_2_3_19, errors([type_error(callable,3), type_error(callable,';'('*->'(true,3),fail))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{';'('*->'(true, Three), fail)}.
 
-	throws(lgt_soft_cut_2_3_20, [error(type_error(callable,3),_), error(type_error(callable,';'('*->'(fail,true),3)),_)]) :-
+	test(lgt_soft_cut_2_3_20, errors([type_error(callable,3), type_error(callable,';'('*->'(fail,true),3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{';'('*->'(fail, true), Three)}.

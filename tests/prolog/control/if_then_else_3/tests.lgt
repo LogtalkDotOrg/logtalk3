@@ -22,43 +22,39 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-06-23,
+		date is 2020-12-26,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.8.4
 
-	succeeds(iso_if_then_else_3_01) :-
+	test(iso_if_then_else_3_01, true) :-
 		{';'('->'(true, true), fail)}.
 
-	succeeds(iso_if_then_else_3_02) :-
+	test(iso_if_then_else_3_02, true) :-
 		{';'('->'(fail, true), true)}.
 
-	fails(iso_if_then_else_3_03) :-
+	test(iso_if_then_else_3_03, false) :-
 		{';'('->'(true, fail), fail)}.
 
-	fails(iso_if_then_else_3_04) :-
+	test(iso_if_then_else_3_04, false) :-
 		{';'('->'(fail, true), fail)}.
 
-	succeeds(iso_if_then_else_3_05) :-
-		{';'('->'(true, X=1), X=2)},
-		X == 1.
+	test(iso_if_then_else_3_05, true(X == 1)) :-
+		{';'('->'(true, X=1), X=2)}.
 
-	succeeds(iso_if_then_else_3_06) :-
-		{';'('->'(fail, X=1), X=2)},
-		X == 2.
+	test(iso_if_then_else_3_06, true(X == 2)) :-
+		{';'('->'(fail, X=1), X=2)}.
 
-	succeeds(iso_if_then_else_3_07) :-
-		findall(X, {';'('->'(true, ';'(X=1, X=2)), true)}, L),
-		L == [1,2].
+	test(iso_if_then_else_3_07, true(L == [1,2])) :-
+		findall(X, {';'('->'(true, ';'(X=1, X=2)), true)}, L).
 
-	succeeds(iso_if_then_else_3_08) :-
-		{';'('->'(';'(X=1, X=2), true), true)},
-		X == 1.
+	test(iso_if_then_else_3_08, true(X == 1)) :-
+		{';'('->'(';'(X=1, X=2), true), true)}.
 
-	succeeds(iso_if_then_else_3_09) :-
+	test(iso_if_then_else_3_09, true) :-
 		% the original example in the ISO/IEC 13211-1:1995(E) standard suffers from
 		% a syntax error and was "fixed" in the ISO/IEC 13211-1:1995/Cor.1:2007;
 		% however, with this fix (also used here) it's no longer a test for the
@@ -67,23 +63,23 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_if_then_else_3_10) :-
+	test(lgt_if_then_else_3_10, true) :-
 		% correct test goal for the botched TC1 fix in the previous test?
 		% it makes sense to test for correct semantics when a cut is found
 		% in the condition of an if-then-else
 		{';'('->'((!, fail), true), true)}.
 
-	throws(lgt_if_then_else_3_11, [error(type_error(callable,3),_), error(type_error(callable,';'('->'(3,true),fail)),_)]) :-
+	test(lgt_if_then_else_3_11, errors([type_error(callable,3), type_error(callable,';'('->'(3,true),fail))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{';'('->'(Three, true), fail)}.
 
-	throws(lgt_if_then_else_3_12, [error(type_error(callable,3),_), error(type_error(callable,';'('->'(true,3),fail)),_)]) :-
+	test(lgt_if_then_else_3_12, errors([type_error(callable,3), type_error(callable,';'('->'(true,3),fail))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{';'('->'(true, Three), fail)}.
 
-	throws(lgt_if_then_else_3_13, [error(type_error(callable,3),_), error(type_error(callable,';'('->'(fail,true),3)),_)]) :-
+	test(lgt_if_then_else_3_13, errors([type_error(callable,3), type_error(callable,';'('->'(fail,true),3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{';'('->'(fail, true), Three)}.

@@ -22,58 +22,52 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-06-23,
+		date is 2020-12-26,
 		comment is 'Unit tests for the ISO Prolog standard (->)/2 control construct.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.7.4
 
-	succeeds(iso_if_then_2_01) :-
+	test(iso_if_then_2_01, true) :-
 		{'->'(true, true)}.
 
-	fails(iso_if_then_2_02) :-
+	test(iso_if_then_2_02, false) :-
 		{'->'(true, fail)}.
 
-	fails(iso_if_then_2_03) :-
+	test(iso_if_then_2_03, false) :-
 		{'->'(fail, true)}.
 
-	succeeds(iso_if_then_2_04) :-
-		{'->'(true, X=1)},
-		X == 1.
+	test(iso_if_then_2_04, true(X == 1)) :-
+		{'->'(true, X=1)}.
 
-	succeeds(iso_if_then_2_05) :-
-		{'->'(';'(X=1, X=2), true)},
-		X == 1.
+	test(iso_if_then_2_05, true(X == 1)) :-
+		{'->'(';'(X=1, X=2), true)}.
 
-	succeeds(iso_if_then_2_06) :-
-		findall(X, {'->'(true, ';'(X=1, X=2))}, L),
-		L == [1, 2].
+	test(iso_if_then_2_06, true(L == [1, 2])) :-
+		findall(X, {'->'(true, ';'(X=1, X=2))}, L).
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_if_then_2_07) :-
+	test(lgt_if_then_2_07, true(L == [1])) :-
 		% implicit cut in the if part
-		findall(X, {'->'(';'(X=1, X=2), true)}, L),
-		L == [1].
+		findall(X, {'->'(';'(X=1, X=2), true)}, L).
 
-	succeeds(lgt_if_then_2_08) :-
+	test(lgt_if_then_2_08, true(L == [1, 2])) :-
 		% if part is cut opaque
-		findall(X, {';'(X=1, X=2), '->'(!, true)}, L),
-		L == [1, 2].
+		findall(X, {';'(X=1, X=2), '->'(!, true)}, L).
 
-	succeeds(lgt_if_then_2_09) :-
+	test(lgt_if_then_2_09, true(L == [1])) :-
 		% then part is cut transparent
-		findall(X, {';'(X=1, X=2), '->'(true, !)}, L),
-		L == [1].
+		findall(X, {';'(X=1, X=2), '->'(true, !)}, L).
 
-	throws(lgt_if_then_2_10, [error(type_error(callable,3),_), error(type_error(callable,'->'(3,true)),_)]) :-
+	test(lgt_if_then_2_10, errors([type_error(callable,3), type_error(callable,'->'(3,true))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{'->'(Three, true)}.
 
-	throws(lgt_if_then_2_11, [error(type_error(callable,3),_), error(type_error(callable,'->'(true,3)),_)]) :-
+	test(lgt_if_then_2_11, errors([type_error(callable,3), type_error(callable,'->'(true,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{'->'(true, Three)}.

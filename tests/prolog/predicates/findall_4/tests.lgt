@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-11-26,
+		date is 2020-12-26,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
@@ -45,9 +45,9 @@
 
 	test(commons_findall_4_06, true) :-
 		{findall(X, (X=1;X=2), [X,Y,3], T)},
-		^^assertion(x, X == 1),
-		^^assertion(y, Y == 2),
-		^^assertion(t, T == [3]).
+		^^assertion(x(X), X == 1),
+		^^assertion(y(Y), Y == 2),
+		^^assertion(t(T), T == [3]).
 
 	test(commons_findall_4_07, true(L == [1,2,3])) :-
 		{findall(X, (X=1;X=2), L, [Y]), Y = 3}.
