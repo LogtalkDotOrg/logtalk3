@@ -22,29 +22,25 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-08-29,
+		date is 2020-12-26,
 		comment is 'Unit tests for the "elephants" example.'
 	]).
 
 	cover(clyde).
 	cover(fred).
 
-	test(elephants_01) :-
-		clyde::number_of_legs(N),
-		N == 4.
+	test(elephants_01, true(N == 4)) :-
+		clyde::number_of_legs(N).
 
-	test(elephants_02) :-
-		clyde::color(C),
-		C == grey.
+	test(elephants_02, true(C == grey)) :-
+		clyde::color(C).
 
-	test(elephants_03) :-
-		fred::number_of_legs(N),
-		N == 4.
+	test(elephants_03, true(N == 4)) :-
+		fred::number_of_legs(N).
 
-	test(elephants_04) :-
-		fred::color(C),
-		C == white.
+	test(elephants_04, true(C == white)) :-
+		fred::color(C).
 
 :- end_object.

@@ -22,76 +22,64 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-10-20,
+		date is 2020-12-26,
 		comment is 'Unit tests for the "expansion" example.'
 	]).
 
-	test(expansion_01) :-
-		exp_public::expand_term(8, Term),
-		Term == eight.
+	test(expansion_01, true(Term == eight)) :-
+		exp_public::expand_term(8, Term).
 
-	test(expansion_02) :-
-		exp_public::expand_goal(write(Term), EGoal),
-		EGoal == write_term(Term, [quoted(true)]).
+	test(expansion_02, true(EGoal == write_term(Term, [quoted(true)]))) :-
+		exp_public::expand_goal(write(Term), EGoal).
 
-	test(expansion_03) :-
-		exp_protected::expand_term(8, Term),
-		Term == 8.
+	test(expansion_03, true(Term == 8)) :-
+		exp_protected::expand_term(8, Term).
 
-	test(expansion_04) :-
-		exp_protected::expand_goal(write(Term), EGoal),
-		EGoal == write(Term).
+	test(expansion_04, true(EGoal == write(Term))) :-
+		exp_protected::expand_goal(write(Term), EGoal).
 
-	test(expansion_05) :-
-		exp_private::expand_term(8, Term),
-		Term == 8.
+	test(expansion_05, true(Term == 8)) :-
+		exp_private::expand_term(8, Term).
 
-	test(expansion_06) :-
-		exp_private::expand_goal(write(Term), EGoal),
-		EGoal == write(Term).
+	test(expansion_06, true(EGoal == write(Term))) :-
+		exp_private::expand_goal(write(Term), EGoal).
 
-	test(expansion_07) :-
-		desc_public::test_term_expansion(8, Term),
-		Term == eight.
+	test(expansion_07, true(Term == eight)) :-
+		desc_public::test_term_expansion(8, Term).
 
-	test(expansion_08) :-
-		desc_public::test_goal_expansion(write(Term), EGoal),
-		EGoal == write_term(Term, [quoted(true)]).
+	test(expansion_08, true(EGoal == write_term(Term, [quoted(true)]))) :-
+		desc_public::test_goal_expansion(write(Term), EGoal).
 
-	test(expansion_09) :-
-		desc_protected::test_term_expansion(8, Term),
-		Term == eight.
+	test(expansion_09, true(Term == eight)) :-
+		desc_protected::test_term_expansion(8, Term).
 
-	test(expansion_10) :-
-		desc_protected::test_goal_expansion(write(Term), EGoal),
-		EGoal == write_term(Term, [quoted(true)]).
+	test(expansion_10, true(EGoal == write_term(Term, [quoted(true)]))) :-
+		desc_protected::test_goal_expansion(write(Term), EGoal).
 
-	test(expansion_11) :-
-		desc_private::test_term_expansion(8, Term),
-		Term == 8.
+	test(expansion_11, true(Term == 8)) :-
+		desc_private::test_term_expansion(8, Term).
 
-	test(expansion_12) :-
-		desc_private::test_goal_expansion(write(Term), EGoal),
-		EGoal == write(Term).
+	test(expansion_12, true(EGoal == write(Term))) :-
+		desc_private::test_goal_expansion(write(Term), EGoal).
 
-	test(expansion_13) :-
+	test(expansion_13, true) :-
 		cooked << (aa, bb, cc).
 
-	test(expansion_14) :-
+	test(expansion_14, true) :-
 		cooked << (ha, hb, hc).
 
-	test(expansion_15) :-
+	test(expansion_15, true) :-
 		cooked << p.
 
-	test(expansion_16) :-
+	test(expansion_16, true) :-
 		piped << a(key-value).
 
-	test(expansion_17) :-
+	test(expansion_17, true) :-
 		piped << b(key-value).
 
-	test(expansion_18) :-
+	test(expansion_18, true) :-
 		piped << c(key-value).
 
 :- end_object.

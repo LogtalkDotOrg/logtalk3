@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-01-06,
+		date is 2020-12-26,
 		comment is 'Unit tests for the "carengines" example.'
 	]).
 
@@ -33,22 +33,22 @@
 	cover(sedan).
 	cover(coupe).
 
-	test(carengines_1) :-
+	test(carengines_01) :-
 		findall(Predicate, sedan::current_predicate(Predicate), Solutions),
 		list::msort(Solutions, SolutionsSorted),
-		SolutionsSorted == [bore_stroke/2, capacity/1, cylinders/1, fuel/1, horsepower_rpm/2, reference/1].
+		^^assertion(SolutionsSorted == [bore_stroke/2, capacity/1, cylinders/1, fuel/1, horsepower_rpm/2, reference/1]).
 
-	test(carengines_2) :-
+	test(carengines_02) :-
 		findall(Predicate, coupe::current_predicate(Predicate), Solutions),
 		list::msort(Solutions, SolutionsSorted),
-		SolutionsSorted == [bore_stroke/2, capacity/1, cylinders/1, fuel/1, horsepower_rpm/2, reference/1].
+		^^assertion(SolutionsSorted == [bore_stroke/2, capacity/1, cylinders/1, fuel/1, horsepower_rpm/2, reference/1]).
 
-	test(carengines_3) :-
+	test(carengines_03) :-
 		findall(Name-Cylinders-HP-RPM, sedan::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)), Solutions),
-		Solutions == ['M180.940'-6-94-4800].
+		^^assertion(Solutions == ['M180.940'-6-94-4800]).
 
-	test(carengines_4) :-
+	test(carengines_04) :-
 		findall(Name-Cylinders-HP-RPM, coupe::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)), Solutions),
-		Solutions == ['M180.941'-6-115-3657].
+		^^assertion(Solutions == ['M180.941'-6-115-3657]).
 
 :- end_object.

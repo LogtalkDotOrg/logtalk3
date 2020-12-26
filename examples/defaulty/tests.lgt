@@ -22,18 +22,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-12-17,
+		date is 2020-12-26,
 		comment is 'Unit tests for the "defaulty" example.'
 	]).
 
 	test(defaulty_01) :-
 		defaulty::count_atomics([a,1,_,b,2,_,c,3,_], As, Ns),
-		As == 3, Ns == 3.
+		^^assertion(atoms, As == 3),
+		^^assertion(numbers, Ns == 3).
 
 	test(defaulty_02) :-
 		tagged::count_atomics([a(a),n(1),o(_),a(b),n(2),o(_),a(c),n(3),o(_)], As, Ns),
-		As == 3, Ns == 3.
+		^^assertion(atoms, As == 3),
+		^^assertion(numbers, Ns == 3).
 
 :- end_object.

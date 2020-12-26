@@ -22,34 +22,28 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2020-12-26,
 		comment is 'Unit tests for the "diamonds" example.'
 	]).
 
-	test(d1) :-
-		d1::predicate_property(m, defined_in(Object)),
-		Object == b1.
+	test(d1_01, true(Object == b1)) :-
+		d1::predicate_property(m, defined_in(Object)).
 
-	test(d2_1) :-
-		d2::predicate_property(m, defined_in(Object)),
-		Object == d2.
+	test(d2_01, true(Object == d2)) :-
+		d2::predicate_property(m, defined_in(Object)).
 
-	test(d2_2) :-
-		d2::predicate_property(c2_m, defined_in(Object)),
-		Object == c2.
+	test(d2_02, true(Object == c2)) :-
+		d2::predicate_property(c2_m, defined_in(Object)).
 
-	test(d3_1) :-
-		d3::predicate_property(b3_m, defined_in(Object)),
-		Object == b3.
+	test(d3_01, true(Object == b3)) :-
+		d3::predicate_property(b3_m, defined_in(Object)).
 
-	test(d3_2) :-
-		d3::predicate_property(c3_m, defined_in(Object)),
-		Object == c3.
+	test(d3_02, true(Object == c3)) :-
+		d3::predicate_property(c3_m, defined_in(Object)).
 
-	test(d3_3) :-
-		d3::predicate_property(m, defined_in(Object)),
-		Object == b3.
+	test(d3_03, true(Object == b3)) :-
+		d3::predicate_property(m, defined_in(Object)).
 
 :- end_object.
