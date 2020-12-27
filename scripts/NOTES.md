@@ -155,3 +155,6 @@ also available in the Logtalk website.
 - `update_svg_diagrams.sh`  
 	shell script for updating the core entities, library, development
 	tools, and third-party contributions SVG diagrams
+
+- `update_man_html_versions.sh`  
+	shell script for updating the HTML versions of the man pages

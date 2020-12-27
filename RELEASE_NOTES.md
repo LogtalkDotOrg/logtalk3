@@ -24,16 +24,6 @@ RELEASE NOTES
 3.44.0 - January ??, 2020
 =========================
 
-Installers and installation scripts
------------------------------------
-
-* CHANGED: Renamed the `scripts/macosx` directory to `scripts/macos`.
-
-* ADDED: A macOS command-file for Trealla ProLog.
-
-* UPDATED: The macOS installer to also set system-wide default values for the
-`LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
-
 Library
 -------
 
@@ -42,6 +32,19 @@ ProLog.
 
 * FIXED: Implementation for the `os::delete_directory/1` predicate for Trealla
 ProLog.
+
+Installers and installation scripts
+-----------------------------------
+
+* CHANGED: Renamed the `scripts/macosx` directory to `scripts/macos`.
+
+* ADDED: A macOS command-file for Trealla ProLog.
+
+* ADDED: A `update_man_html_versions.sh` shell script for updating the HTML
+versions of the man pages.
+
+* UPDATED: The macOS installer to also set system-wide default values for the
+`LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
 
 
 3.43.0 - December 22, 2020
