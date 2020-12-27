@@ -151,10 +151,18 @@ also available in the Logtalk website.
 
 - `update_html_docs.sh`  
 	shell script for updating the library and tools HTML documentation
+	requires [Sphinx](https://www.sphinx-doc.org) to be installed (version
+	3.4.1 or later) plus [Pygments](https://pygments.org) (version 2.7.3
+	or later) and the Sphinx [Read The Docs theme](https://readthedocs.org)
+	(version 0.5.0 or later)
 
 - `update_svg_diagrams.sh`  
 	shell script for updating the core entities, library, development
-	tools, and third-party contributions SVG diagrams
+	tools, and third-party contributions SVG diagrams; requires
+	[GraphViz](https://www.graphviz.org/) to be installed (version
+	2.43.20191029.1313 or later)
 
 - `update_man_html_versions.sh`  
-	shell script for updating the HTML versions of the man pages
+	shell script for updating the HTML versions of the man pages; requires
+	[`roffit`](https://github.com/bagder/roffit) to be installed and available
+	from the system PATH
