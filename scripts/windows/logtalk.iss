@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on December 25, 2020
+; Last updated on December 28, 2020
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -76,6 +76,7 @@ Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration 
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsbmt"; Description: "XSB-MT integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -158,6 +159,8 @@ Name: "{group}\Logtalk - SICStus Prolog"; Filename: "{code:GetSICStusExePath}"; 
 Name: "{group}\Logtalk - SWI-Prolog (console)"; Filename: "{code:GetSWIConExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swicon; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swiwin; Flags: createonlyiffileexists
+
+Name: "{group}\Logtalk - Tau Prolog"; Filename: "{code:GetNodeExePath}"; Parameters: "--stack_size=10000 ""%LOGTALKHOME%\integration\logtalk_tau.js"""; Comment: "Runs Logtalk with Tau Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\tau; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
 
@@ -611,6 +614,35 @@ begin
                'You can manually create the shortcut by finding the full path to the SWI-Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
                'executable full path -s "%LOGTALKHOME%\integration\logtalk_swi.pl"';
     MsgBox(Warning, mbError, MB_OK)
+  end
+end;
+
+function NodeExePath: String;
+var
+  NODE_PATH: String;
+begin
+  if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'NODE_PATH', NODE_PATH) then
+    if DirExists(NODE_PATH + '\tau-prolog') then
+      Result := 'C:\Program Files\nodejs\node.exe'
+  else
+    Result := 'prolog_compiler_not_installed'
+end;
+
+function GetNodeExePath(Param: String): String;
+var
+  Warning: String;
+begin
+  Result := NodeExePath;
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
+  begin
+    Warning := 'Failed to detect Tau Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by setting the NODE_PATH ' +
+               'environment variable to the "node_modules" directory path where ' +
+               'you installed Tau Prolog and its dependencies and defining the ' +
+               'shortcut target as:' + Chr(13) + Chr(13) +
+               'node --stack_size=10000 "%LOGTALKHOME%\\integration\\logtalk_tau.js"';
+    MsgBox(Warning, mbError, MB_OK);
   end
 end;
 

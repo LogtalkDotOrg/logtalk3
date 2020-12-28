@@ -38,6 +38,9 @@ Installers and installation scripts
 
 * CHANGED: Renamed the `scripts/macosx` directory to `scripts/macos`.
 
+* ADDED: Windows installer experimental support for creating a shortcut for
+Tau Prolog.
+
 * ADDED: A macOS command-file for Trealla ProLog.
 
 * ADDED: A `update_man_html_versions.sh` shell script for updating the HTML
