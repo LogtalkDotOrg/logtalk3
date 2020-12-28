@@ -150,11 +150,11 @@ also available in the Logtalk website.
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
 
 - `update_html_docs.sh`  
-	shell script for updating the library and tools HTML documentation
-	requires [Sphinx](https://www.sphinx-doc.org) to be installed (version
-	3.4.1 or later) plus [Pygments](https://pygments.org) (version 2.7.3
-	or later) and the Sphinx [Read The Docs theme](https://readthedocs.org)
-	(version 0.5.0 or later)
+	shell script for updating the library and tools HTML documentation requires
+	[Sphinx](https://www.sphinx-doc.org) to be installed (version 3.4.1 or later)
+	plus [Pygments](https://pygments.org) (version 2.7.3 or later) and the Sphinx
+	[Read The Docs theme](https://github.com/rtfd/sphinx_rtd_theme) (version
+	0.5.0 or later)
 
 - `update_svg_diagrams.sh`  
 	shell script for updating the core entities, library, development
