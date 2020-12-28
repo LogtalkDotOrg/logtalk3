@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.4.3 and later versions
+%  Adapter file for Trealla Prolog 1.4.7 and later versions
 %  Last updated on December 26, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -230,7 +230,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 4, 3))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 4, 7))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -316,8 +316,7 @@
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
 	working_directory(Current, Current),
-	absolute_file_name(Path, ExpandedPath0, [expand(true), relative_to(Current)]),
-	atom_chars(ExpandedPath, ExpandedPath0).
+	absolute_file_name(Path, ExpandedPath, [expand(true), relative_to(Current)]).
 
 
 % '$lgt_file_exists'(+atom)
