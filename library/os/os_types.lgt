@@ -27,10 +27,10 @@
 		comment is 'A set of operating-system related types.',
 		remarks is [
 			'Provided types' - 'This category adds ``file``, ``file(Extensions)``, ``directory``, and ``environment_variable`` types for type-checking when using the ``type`` library object.',
-			'Type file' - 'For checking if a term is an atom and an existing file.',
-			'Type file(Extensions)' - 'For checking if a term is an atom and an existing file with one of the listed extensions (specified as ``''.ext''``).',
-			'Type directory' - 'For checking if a term is an atom and an existing directory.',
-			'Type environment_variable' - 'For checking if a term is an atom and an existing environment variable.'
+			'Type ``file``' - 'For checking if a term is an atom and an existing file.',
+			'Type ``file(Extensions)``' - 'For checking if a term is an atom and an existing file with one of the listed extensions (specified as ``''.ext''``).',
+			'Type ``directory``' - 'For checking if a term is an atom and an existing directory.',
+			'Type ``environment_variable``' - 'For checking if a term is an atom and an existing environment variable.'
 		],
 		see_also is [osp, os, type]
 	]).
