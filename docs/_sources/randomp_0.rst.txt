@@ -439,7 +439,7 @@ Calls a goal or fails without calling it with equal probability. When the goal i
 ``maybe_call/2``
 ^^^^^^^^^^^^^^^^
 
-Calls a goal or fails without calling it with probability Probability. When the goal is called, it determines if this predicate succeeds once or fails.
+Calls a goal or fails without calling it with probability ``Probability``. When the goal is called, it determines if this predicate succeeds once or fails.
 
 | **Compilation flags:**
 |    ``static``

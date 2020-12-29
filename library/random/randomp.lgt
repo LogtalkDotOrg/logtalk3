@@ -154,7 +154,7 @@
 	:- meta_predicate(maybe_call(*, 0)).
 	:- mode(maybe_call(+probability, +callable), zero_or_one).
 	:- info(maybe_call/2, [
-		comment is 'Calls a goal or fails without calling it with probability Probability. When the goal is called, it determines if this predicate succeeds once or fails.',
+		comment is 'Calls a goal or fails without calling it with probability ``Probability``. When the goal is called, it determines if this predicate succeeds once or fails.',
 		argnames is ['Probability', 'Goal']
 	]).
 

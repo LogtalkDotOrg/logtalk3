@@ -30,8 +30,8 @@ Built-in object providing message printing, debugging, library, source file, and
    - Printing of help, information, and question messages: These messages are always printed by default as they provide requested output.
    - Printing of warning messages: By default, warning messages are not printed when the ``report`` flag is turned off.
    - Printing of error messages: These messages are always printed by default.
-   - Printing of debug messages: By default, debug messages are only printed when the ``debug`` flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.
-   - Meta messages: A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.
+   - Printing of debug messages: By default, debug messages are only printed when the ``debug`` flag is turned on. The compiler suppresses debug message printing goals when compiling in optimized mode.
+   - Meta messages: A *meta message* is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.
    - Meta message ``@Message``: By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.
    - Meta message ``Key-Value``: By default, the message is printed as "Key: Value" followed by a newline. The key is printed as passed to the ``write/1`` predicate while the value is printed as passed to the ``writeq/1`` predicate.
    - Meta message ``Format+Arguments``: By default, the message is printed as passed to the ``format/2`` predicate.
