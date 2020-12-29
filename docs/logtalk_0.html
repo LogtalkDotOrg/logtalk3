@@ -256,8 +256,8 @@
 <p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:17:2</div>
-<div class="line"><strong>Date:</strong> 2020-10-03</div>
+<div class="line"><strong>Version:</strong> 1:18:0</div>
+<div class="line"><strong>Date:</strong> 2020-12-29</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -284,11 +284,11 @@
 <li><p>Printing of error messages: These messages are always printed by default.</p></li>
 <li><p>Printing of debug messages: By default, debug messages are only printed when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.</p></li>
 <li><p>Meta messages: A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.</p></li>
-<li><p>&#64;Message meta message: By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate followed by a newline.</p></li>
-<li><p>Key-Value meta message: By default, the message is printed as “Key: Value” followed by a newline. The key is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate while the value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
-<li><p>Format+Arguments meta message: By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate.</p></li>
-<li><p>List meta message: By default, the list items are printed indented one per line. The items are preceded by a dash and can be <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>, <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>, or <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code> messages. If that is not the case, the item is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
-<li><p>Title::List meta message: By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>: By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate followed by a newline.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>: By default, the message is printed as “Key: Value” followed by a newline. The key is printed as passed to the <code class="docutils literal notranslate"><span class="pre">write/1</span></code> predicate while the value is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code>: By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">List</span></code>: By default, the list items are printed indented one per line. The items are preceded by a dash and can be <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>, <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>, or <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code> messages. If that is not the case, the item is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">Title::List</span></code>: By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -638,7 +638,7 @@
 <div id="loaded_file_property/2"> </div></div>
 <div class="section" id="loaded-file-property-2">
 <span id="logtalk-0-loaded-file-property-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a><a class="headerlink" href="#loaded-file-property-2" title="Permalink to this headline">¶</a></h3>
-<p>Enumerates, by backtracking, loaded file properties: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.</p>
+<p>Enumerates, by backtracking, loaded file properties.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -655,6 +655,26 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">loaded_file_property(?atom,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">basename/1</span></code>: Basename of the file (includes the file extension, if any).</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>: Directory of the file (ending with a slash).</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">mode/1</span></code>: Compilation mode of the file (possible values are <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code>, and <code class="docutils literal notranslate"><span class="pre">debug</span></code>).</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">flags/1</span></code>: Explicit flags used for compiling the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">text_properties/1</span></code>: List of the file text properties (<code class="docutils literal notranslate"><span class="pre">encoding/1</span></code> and <code class="docutils literal notranslate"><span class="pre">bom/1</span></code>). Empty if no <code class="docutils literal notranslate"><span class="pre">encoding/1</span></code> directive is present and the stream used for reading the file does not have a <code class="docutils literal notranslate"><span class="pre">bom/1</span></code> (or equivalent) property.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">target/1</span></code>: Full path of the generated intermediate Prolog file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">modified/1</span></code>: File modification time stamp (should be regarded as an opaque but otherwise comparable term).</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">parent/1</span></code>: Full path of the parent file that loaded the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">includes/1</span></code>: Full path of a file included by the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">library/1</span></code>: Library alias for the library that includes the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">object/1</span></code>: Identifier for an object defined in the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">protocol/1</span></code>: Identifier for a protocol defined in the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">category/1</span></code>: Identifier for a category defined in the file.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <div id="file_type_extension/2"> </div></div>
 <div class="section" id="file-type-extension-2">

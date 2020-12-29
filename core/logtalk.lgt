@@ -27,9 +27,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:17:2,
+		version is 1:18:0,
 		author is 'Paulo Moura',
-		date is 2020-10-03,
+		date is 2020-12-29,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -40,11 +40,11 @@
 			'Printing of error messages' - 'These messages are always printed by default.',
 			'Printing of debug messages' - 'By default, debug messages are only printed when the ``debug`` flag is turned on. The compiler suppresses debug messages when compiling in optimized mode.',
 			'Meta messages' - 'A meta message is a message that have another message as argument and is typically used for debugging messages. Meta messages avoid the need of defining tokenizer rules for every message but can be intercepted as any other message.',
-			'@Message meta message' - 'By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.',
-			'Key-Value meta message' - 'By default, the message is printed as "Key: Value" followed by a newline. The key is printed as passed to the ``write/1`` predicate while the value is printed as passed to the ``writeq/1`` predicate.',
-			'Format+Arguments meta message' - 'By default, the message is printed as passed to the ``format/2`` predicate.',
-			'List meta message' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.',
-			'Title::List meta message' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.'
+			'Meta message ``@Message``' - 'By default, the message is printed as passed to the ``write/1`` predicate followed by a newline.',
+			'Meta message ``Key-Value``' - 'By default, the message is printed as "Key: Value" followed by a newline. The key is printed as passed to the ``write/1`` predicate while the value is printed as passed to the ``writeq/1`` predicate.',
+			'Meta message ``Format+Arguments``' - 'By default, the message is printed as passed to the ``format/2`` predicate.',
+			'Meta message ``List``' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.',
+			'Meta message ``Title::List``' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.'
 		]
 	]).
 
@@ -194,8 +194,23 @@
 	:- public(loaded_file_property/2).
 	:- mode(loaded_file_property(?atom, ?compound), zero_or_more).
 	:- info(loaded_file_property/2, [
-		comment is 'Enumerates, by backtracking, loaded file properties: basename/1, directory/1, mode/1, flags/1, text_properties/1 (encoding/1 and bom/1), target/1, modified/1, parent/1, includes/1, library/1, object/1, protocol/1, and category/1.',
-		argnames is ['Path', 'Property']
+		comment is 'Enumerates, by backtracking, loaded file properties.',
+		argnames is ['Path', 'Property'],
+		remarks is [
+			'Property ``basename/1``' - 'Basename of the file (includes the file extension, if any).',
+			'Property ``directory/1``' - 'Directory of the file (ending with a slash).',
+			'Property ``mode/1``' - 'Compilation mode of the file (possible values are ``optimal``, ``normal``, and ``debug``).',
+			'Property ``flags/1``' - 'Explicit flags used for compiling the file.',
+			'Property ``text_properties/1``' - 'List of the file text properties (``encoding/1`` and ``bom/1``). Empty if no ``encoding/1`` directive is present and the stream used for reading the file does not have a ``bom/1`` (or equivalent) property.',
+			'Property ``target/1``' - 'Full path of the generated intermediate Prolog file.',
+			'Property ``modified/1``' - 'File modification time stamp (should be regarded as an opaque but otherwise comparable term).',
+			'Property ``parent/1``' - 'Full path of the parent file that loaded the file.',
+			'Property ``includes/1``' - 'Full path of a file included by the file.',
+			'Property ``library/1``' - 'Library alias for the library that includes the file.',
+			'Property ``object/1``' - 'Identifier for an object defined in the file.',
+			'Property ``protocol/1``' - 'Identifier for a protocol defined in the file.',
+			'Property ``category/1``' - 'Identifier for a category defined in the file.'
+		]
 	]).
 
 	:- public(file_type_extension/2).

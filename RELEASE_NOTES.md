@@ -24,6 +24,11 @@ RELEASE NOTES
 3.44.0 - January ??, 2021
 =========================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `logtalk::loaded_file_property/2` predicate.
+
 Library
 -------
 
