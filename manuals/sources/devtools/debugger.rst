@@ -80,17 +80,17 @@ You can also use the ``gspy/1`` predicate to spy a Logtalk predicate
 specified as ``Entity::Functor/Arity`` when using the graphical tracer.
 When using this tool, internal Logtalk compiler/runtime predicates and
 compiled predicates that resulted from the term-expansion mechanism may
-be exposed in some cases. This issue is shared with Prolog and results
-from the non-availability of source code for the predicates being
-traced.
+be exposed in some cases. This issue is shared with Prolog code and
+results from the non-availability of source code for the predicates
+being traced.
 
 Known issues
 ------------
 
-Line number spy points require a Prolog backend compiler that supports
-accessing read term starting line but only some systems (B-Prolog,
-JIProlog, Lean Prolog, SWI-Prolog, and YAP) provide accurate line
-numbers.
+Line number spy points (aka breakpoints) require a Prolog backend
+compiler that supports accessing read term starting line but only some
+backends (B-Prolog, JIProlog, Lean Prolog, LVM, SWI-Prolog, and YAP)
+provide accurate line numbers.
 
 As a workaround, you can check the start line number for an entity
 predicate definition using a query such as:
