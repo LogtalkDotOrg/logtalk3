@@ -44,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:74:0,
+		version is 1:74:1,
 		author is 'Paulo Moura',
-		date is 2020-12-28,
+		date is 2020-12-31,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -55,7 +55,6 @@
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
-			'Trealla ProLog portability' - '``directory_files/2`` predicate is not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]

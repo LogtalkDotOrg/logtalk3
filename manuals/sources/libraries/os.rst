@@ -35,3 +35,9 @@ To test this library predicates, load the ``tester.lgt`` file:
 ::
 
    | ?- logtalk_load(os(tester)).
+
+Known issues
+------------
+
+Some predicates are not supported by all backends. See the remarks
+section in the ``os`` object documentation for details.

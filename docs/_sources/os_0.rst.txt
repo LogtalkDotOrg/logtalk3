@@ -11,8 +11,8 @@
 Portable operating-system access predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:74:0
-| **Date:** 2020-12-28
+| **Version:** 1:74:1
+| **Date:** 2020-12-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,6 @@ Portable operating-system access predicates.
    - JIProlog portability: ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.
    - Qu-Prolog portability: ``directory_files/2`` predicate is not supported.
    - Quintus Prolog: ``pid/1`` and ``shell/2`` predicate are not supported.
-   - Trealla ProLog portability: ``directory_files/2`` predicate is not supported.
    - XSB portability: ``command_line_arguments/1`` predicate is not supported.
 
 | **Inherited public predicates:**
