@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "October 24, 2020" "Logtalk 3.42.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "December 31, 2020" "Logtalk 3.44.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -52,7 +52,7 @@ Directory to store the test results. Default is the local \fI./logtalk_tester_lo
 Timeout in seconds for running each test set. Default is \fI0\fR (i.e. disabled).
 .TP
 .BI \-n
-Name of the test driver and sourced files (minus file name extensions). Default is \fItester\fR.
+Name of the tests driver and sourced files (minus file name extensions). Default is \fItester\fR.
 .TP
 .BI \-s
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.
@@ -113,6 +113,10 @@ Run all tests on the current directory only using the ECLiPSe backend, with a ti
 .TP
 Run all tests on the current directory and sub-directories using the SICStus Prolog backend and a random generator starting seed:
 \fBlogtalk_tester -p sicstus -r "seed(3172,9814,20125)"\fR
+.PP
+.TP
+Run all tests on the current directory and sub-directories using the SWI-Prolog backend and looking for \fItester_debug\fR driver and sourced files:
+\fBlogtalk_tester -p swi -n tester_debug\fR
 .PP
 .TP
 Run all tests on the current directory and sub-directories using the Tau Prolog backend, caching the compilation of the testing tool for better performance, but wiping the test set default scratch directories before running it:
