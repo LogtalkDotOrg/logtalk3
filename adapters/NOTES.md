@@ -45,6 +45,7 @@ Prolog standard built-in predicates. These hacks aim only to fulfill
 the minimal requirements of the Logtalk compiler and runtime and are
 not intended as a full replacement for missing functionality.
 
+
 Top-level interpreter shorthands
 --------------------------------
 
@@ -67,7 +68,9 @@ predicates such as `logtalk_load/1` and `logtalk_make/1` including:
 Note that these shorthands should only be used for iterative development
 at the top-level interpreter. They are not part of the Logtalk language
 specification and can be commented out in case of conflict with backend
-Prolog compiler features or third-party libraries.
+Prolog compiler features or third-party libraries. See the documentation
+of the compilation and loading predicates for a full list and details on
+all available shorthands.
 
 
 Optional features support per backend Prolog compiler
@@ -409,12 +412,12 @@ after the first one when using the provided `taulgt` integration script,
 edit the `core/core.pl` file and change the compiler flag `clean(on)` to
 `clean(off)` for loading the built-in entities (look into the end of the
 file for the predicate that loads them). There are also some standards
-compliance issues and parser bugs that trigger errors with some tools
+compliance issues and parser bugs that may trigger errors with some tools
 and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla ProLog 1.4.0 and later versions
+Trealla ProLog 1.4.7 and later versions
 ---------------------------------------
 
 	trealla.pl
@@ -454,10 +457,6 @@ To generate `.xwam` files from Logtalk source files, set the `prolog_compiler`
 flag to the list of options that will be passed to the XSB `compile/2` built-in
 predicate and use either the built-in predicates `logtalk_compile/1-2` or the
 built-in predicates `logtalk_load/1-2` with the `clean` flag turned off.
-
-Changes in the XSB development version after the 3.7.0 release introduce an
-incompatibility with a setting for the `scratch_directory` flag other than
-`./`. This issue may or may not be fixed in the next XSB stable release.
 
 See the `scripts/embedding/xsb` directory for a sample shell script
 that can help in pre-compiling Logtalk.

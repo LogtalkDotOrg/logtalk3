@@ -89,8 +89,8 @@ Known issues
 
 Line number spy points (aka breakpoints) require a Prolog backend
 compiler that supports accessing read term starting line but only some
-backends (B-Prolog, JIProlog, Lean Prolog, LVM, SWI-Prolog, and YAP)
-provide accurate line numbers.
+backends (B-Prolog, GNU Prolog, JIProlog, Lean Prolog, LVM, SICStus
+Prolog, SWI-Prolog, and YAP) provide accurate line numbers.
 
 As a workaround, you can check the start line number for an entity
 predicate definition using a query such as:

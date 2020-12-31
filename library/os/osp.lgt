@@ -62,7 +62,7 @@
 	:- public(decompose_file_name/3).
 	:- mode(decompose_file_name(+atom, ?atom, ?atom), one).
 	:- info(decompose_file_name/3, [
-		comment is 'Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent) and its basename (that can be the empty atom).',
+		comment is 'Decomposes a file name into its directory (which always ends with a slash; ``./`` is returned if absent) and its basename (which can be the empty atom).',
 		argnames is ['File', 'Directory', 'Basename']
 	]).
 

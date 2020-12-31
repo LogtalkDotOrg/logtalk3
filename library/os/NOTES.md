@@ -21,11 +21,7 @@ ________________________________________________________________________
 ====
 
 This library entities define a *portable* operating-system interface for the
-supported backend Prolog compilers. Some predicates may only be supported
-by a subset of backend Prolog compilers on a subset of operating-systems.
-They should be used with care and fully tested in your application domain
-as some backend Prolog compilers have buggy and inconsistent interfaces,
-specially across operating-systems.
+supported backend Prolog compilers.
 
 The `os_types` category defines some useful operating-system types for
 type-checking when using with the `type` library object.
@@ -57,5 +53,8 @@ To test this library predicates, load the `tester.lgt` file:
 Known issues
 ------------
 
-Some predicates are not supported by all backends. See the remarks section
-in the `os` object documentation for details.
+Some predicates may only be supported by a subset of backend Prolog compilers
+on a subset of operating-systems. They should be used with care and fully
+tested in your application domain as some backend Prolog compilers have buggy
+and inconsistent interfaces, specially across operating-systems. See the
+remarks section in the `os` object documentation for details.

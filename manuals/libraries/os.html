@@ -233,11 +233,7 @@
   <div class="section" id="os">
 <h1><code class="docutils literal notranslate"><span class="pre">os</span></code><a class="headerlink" href="#os" title="Permalink to this headline">¶</a></h1>
 <p>This library entities define a <em>portable</em> operating-system interface for
-the supported backend Prolog compilers. Some predicates may only be
-supported by a subset of backend Prolog compilers on a subset of
-operating-systems. They should be used with care and fully tested in
-your application domain as some backend Prolog compilers have buggy and
-inconsistent interfaces, specially across operating-systems.</p>
+the supported backend Prolog compilers.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">os_types</span></code> category defines some useful operating-system types for
 type-checking when using with the <code class="docutils literal notranslate"><span class="pre">type</span></code> library object.</p>
 <div class="section" id="api-documentation">
@@ -262,8 +258,12 @@ link in a web browser.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
-<p>Some predicates are not supported by all backends. See the remarks
-section in the <code class="docutils literal notranslate"><span class="pre">os</span></code> object documentation for details.</p>
+<p>Some predicates may only be supported by a subset of backend Prolog
+compilers on a subset of operating-systems. They should be used with
+care and fully tested in your application domain as some backend Prolog
+compilers have buggy and inconsistent interfaces, specially across
+operating-systems. See the remarks section in the <code class="docutils literal notranslate"><span class="pre">os</span></code> object
+documentation for details.</p>
 </div>
 </div>
 

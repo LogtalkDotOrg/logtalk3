@@ -54,7 +54,7 @@
 			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` predicates are not supported.',
 			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
-			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicate are not supported.',
+			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicates are not supported.',
 			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
