@@ -633,3 +633,16 @@
 :- object(someObject).
 
 :- end_object.
+
+
+
+:- object(disjunctions).
+
+	foo :-
+		(bar; baz).
+
+	bar.
+
+	baz.
+
+:- end_object.

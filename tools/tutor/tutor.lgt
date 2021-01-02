@@ -673,7 +673,7 @@
 
 	explain(disjunction_as_body(_, _, _, _, _, _)) -->
 		[	'Coding guidelines advise using separate clauses instead of a single'-[], nl,
-			'clause with a disjunction as body.'-[], nl, nl
+			'clause with a disjunction as body for improved code readability.'-[], nl, nl
 		].
 
 	% naming guidelines messages

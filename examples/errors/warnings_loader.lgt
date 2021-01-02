@@ -42,6 +42,7 @@
 			portability(warning),
 			steadfastness(warning),
 			naming(warning),
+			disjunctions(warning),
 			report(on)
 		]
 	)

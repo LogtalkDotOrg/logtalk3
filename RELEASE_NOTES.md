@@ -64,6 +64,8 @@ lint check.
 Examples
 --------
 
+* UPDATED: The `errors` example to illustrate the new disjunctions lint check.
+
 * FIXED: Warnings with the new `disjunctions` flag for the `assumptions` and
 `searching` examples.
 
