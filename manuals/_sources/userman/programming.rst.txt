@@ -838,6 +838,13 @@ Lint flags
    the reported line numbers are for lines of the original clauses that
    were expanded.
 
+.. _flag_disjunctions:
+.. index:: pair: disjunctions; Flag
+
+``disjunctions(Option)``
+   Controls warnings on clauses where the body is a disjunction. Possible
+   option values are ``warning`` (the usual default) and ``silent``.
+
 .. _flag_tail_recursive:
 .. index:: pair: tail_recursive; Flag
 

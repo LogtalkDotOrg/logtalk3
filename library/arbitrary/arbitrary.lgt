@@ -33,9 +33,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:16:0,
+		version is 2:16:1,
 		author is 'Paulo Moura',
-		date is 2020-04-29,
+		date is 2021-01-02,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -1099,10 +1099,11 @@
 		arbitrary(list(Type, Length, Min, Max), [_| Others]),
 		permutation([Term| Others], EdgeCase).
 	edge_case(non_empty_list, [Term]) :-
-		(	edge_case(atom, Term)
-		;	edge_case(integer, Term)
-		;	edge_case(float, Term)
-		).
+		edge_case(atom, Term).
+	edge_case(non_empty_list, [Term]) :-
+		edge_case(integer, Term).
+	edge_case(non_empty_list, [Term]) :-
+		edge_case(float, Term).
 	edge_case(partial_list, _).
 	edge_case(list_or_partial_list, _).
 	edge_case(list_or_partial_list, []).

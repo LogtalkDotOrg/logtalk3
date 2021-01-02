@@ -3,9 +3,9 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.',
-		date is 2018-05-07,
+		date is 2021-01-02,
 		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.'
 	]).
 
@@ -133,12 +133,11 @@
 		!,
 		counter::increment,		%Inference counting.
 		call(A).
-
-	satisfy_atom([X| Xs], A, DB) :-
-		(	counter::increment,	%Inference counting.
-			copy_term(X, A)
-		;	satisfy_atom(Xs, A, DB)
-		).
+	satisfy_atom([X| _], A, _) :-
+		counter::increment,	%Inference counting.
+		copy_term(X, A).
+	satisfy_atom([_| Xs], A, DB) :-
+		satisfy_atom(Xs, A, DB).
 
 	split([], [], []).
 	split([X|Xs], [X|Ys], Zs) :-

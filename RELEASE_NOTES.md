@@ -24,8 +24,21 @@ RELEASE NOTES
 3.44.0 - January ??, 2021
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Lint check for clauses whose body is a disjunction. Controlled by a
+new flag, `disjunctions`, with a default value of `warning`.
+
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Default value for the new `disjunctions` flag to all adaptert files.
+
 Documentation
 -------------
+
+* ADDED: Handbook documentation for the new `disjunctions` flag.
 
 * IMPROVED: Documentation of the `logtalk::loaded_file_property/2` predicate.
 
@@ -37,6 +50,34 @@ ProLog.
 
 * FIXED: Implementation for the `os::delete_directory/1` predicate for Trealla
 ProLog.
+
+* FIXED: Warnings with the new `disjunctions` flag for the `arbitrary` library.
+
+Tools
+-----
+
+* UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
+lint check.
+
+* FIXED: Warnings with the new `disjunctions` flag for the `code_metrics` tool.
+
+Examples
+--------
+
+* FIXED: Warnings with the new `disjunctions` flag for the `assumptions` and
+`searching` examples.
+
+Contributions
+-------------
+
+* FIXED: Warnings with the new `disjunctions` flag for the `verdi_neruda` and
+`xml_parser` contributions.
+
+Tests
+-----
+
+* FIXED: Warnings with the new `disjunctions` flag for the `set_logtalk_flag/2`
+directive and the `goal_expansion/2` method.
 
 Installers and installation scripts
 -----------------------------------

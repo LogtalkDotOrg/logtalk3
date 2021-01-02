@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
-		date is 2020-11-08,
+		date is 2021-01-02,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -667,6 +667,13 @@
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
 		[	'But there is a ~w directive for the predicate. If there is a scope'-[Directive], nl,
 			'directive, check for a typo in the predicate name or number of arguments.'-[], nl, nl
+		].
+
+	% disjunction guidelines messages
+
+	explain(disjunction_as_body(_, _, _, _, _, _)) -->
+		[	'Coding guidelines advise using separate clauses instead of a single'-[], nl,
+			'clause with a disjunction as body.'-[], nl, nl
 		].
 
 	% naming guidelines messages

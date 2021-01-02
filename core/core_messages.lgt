@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:100:0,
+		version is 1:101:0,
 		author is 'Paulo Moura',
-		date is 2020-06-07,
+		date is 2021-01-02,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -248,6 +248,7 @@
 		 current_logtalk_flag(steadfastness, Steadfastness),
 		 current_logtalk_flag(naming, Naming),
 		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
+		 current_logtalk_flag(disjunctions, Disjunctions),
 		 current_logtalk_flag(tail_recursive, TailRecursive),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
@@ -293,7 +294,8 @@
 			'  duplicated_clauses: ~w, portability: ~w, deprecated: ~w'-[DuplicatedClauses, Portability, Deprecated], nl,
 			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
-			'  lambda_variables: ~w, suspicious_calls: ~w, tail_recursive: ~w'-[Lambda, SuspiciousCalls, TailRecursive], nl,
+			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
+			'  disjunctions: ~w, tail_recursive: ~w'-[Disjunctions, TailRecursive], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,
@@ -668,6 +670,13 @@
 
 	message_tokens(possible_non_steadfast_non_terminal(File, Lines, Type, Entity, NonTerminal)) -->
 		['Non-terminal ~q may not be steadfast due to cut and variable aliasing in grammar rule head'-[NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
+	% disjunction guidelines messages
+
+	message_tokens(disjunction_as_body(File, Lines, Type, Entity, Head, _)) -->
+		{functor(Head, Name, Arity)},
+		['Predicate ~q clause body is a disjunction'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% naming guidelines messages

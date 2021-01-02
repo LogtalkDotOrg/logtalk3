@@ -12392,6 +12392,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Then, TThen, DThen, Ctx),
 	'$lgt_compile_body'(Else, TElse, DElse, Ctx).
 
+'$lgt_compile_body'((Pred1; Pred2), _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(disjunctions, warning),
+	'$lgt_comp_ctx_term'(Ctx, (Head :- (Pred11; Pred22))),
+	(Pred1; Pred2) == (Pred11; Pred22),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(disjunctions),
+		disjunction_as_body(File, Lines, Type, Entity, Head, (Pred1; Pred2))
+	),
+	fail.
 '$lgt_compile_body'((Pred1; Pred2), (TPred1; TPred2), (DPred1; DPred2), Ctx) :-
 	!,
 	'$lgt_compile_body'(Pred1, TPred10, DPred10, Ctx),
@@ -23296,6 +23308,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(naming).
 '$lgt_valid_flag'(duplicated_clauses).
 '$lgt_valid_flag'(tail_recursive).
+'$lgt_valid_flag'(disjunctions).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -23414,6 +23427,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(tail_recursive, silent) :- !.
 '$lgt_valid_flag_value'(tail_recursive, warning) :- !.
+
+'$lgt_valid_flag_value'(disjunctions, silent) :- !.
+'$lgt_valid_flag_value'(disjunctions, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.

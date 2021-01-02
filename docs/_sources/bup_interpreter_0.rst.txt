@@ -11,8 +11,8 @@
 Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.
 
 | **Author:** Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.
-| **Version:** 1:1:0
-| **Date:** 2018-05-07
+| **Version:** 1:1:1
+| **Date:** 2021-01-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

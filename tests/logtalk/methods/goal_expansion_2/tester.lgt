@@ -20,6 +20,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	set_logtalk_flag(disjunctions, silent),
 	logtalk_load([hook, dummy]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([object1, object2], [hook(hook)]),

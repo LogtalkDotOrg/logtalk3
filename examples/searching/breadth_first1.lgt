@@ -22,9 +22,9 @@
 	instantiates(blind_search(Bound))).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Ivan Bratko; adapted to Logtalk by Paulo Moura.',
-		date is 2013-05-10,
+		date is 2021-01-02,
 		comment is 'Breadth first state space search strategy.',
 		source is 'Code adapted from the book "Prolog Programming for Artificial Intelligence" by Ivan Bratko.',
 		parnames is ['Bound']
@@ -51,14 +51,14 @@
 
 	expandall(_, [], [Tree| Trees], [Tree| Trees], fail, _, _, _).
 	expandall(Path, [Tree| Trees], Trees2, Subs2, Solved, Solution, Space, Bound) :-
-		(	Bound > 0,
-			Bound2 is Bound - 1,
-			expand(Path, Tree, Tree2, Solved2, Solution, Space, Bound2),
-			(	Solved2 == true ->
-				Solved = true
-			;	expandall(Path, Trees, [Tree2| Trees2], Subs2, Solved, Solution, Space, Bound)
-			)
-		;	expandall(Path, Trees, Trees2, Subs2, Solved, Solution, Space, Bound)
+		Bound > 0,
+		Bound2 is Bound - 1,
+		expand(Path, Tree, Tree2, Solved2, Solution, Space, Bound2),
+		(	Solved2 == true ->
+			Solved = true
+		;	expandall(Path, Trees, [Tree2| Trees2], Subs2, Solved, Solution, Space, Bound)
 		).
+	expandall(Path, [_| Trees], Trees2, Subs2, Solved, Solution, Space, Bound) :-
+		expandall(Path, Trees, Trees2, Subs2, Solved, Solution, Space, Bound).
 
 :- end_object.

@@ -20,6 +20,7 @@
 
 :- initialization((
 	set_logtalk_flag(suspicious_calls, silent),
+	set_logtalk_flag(disjunctions, silent),
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([top, middle, bottom], [optimize(on)]),

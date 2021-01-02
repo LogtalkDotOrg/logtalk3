@@ -22,9 +22,9 @@
 :- category(code_metric).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2019-09-23,
+		date is 2021-01-02,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -239,14 +239,12 @@
 			::process_entity(Kind, Entity)
 		).
 
-	file_entity(Path, Kind, Entity) :-
-		(	logtalk::loaded_file_property(Path, object(Entity)),
-			Kind = object
-		;	logtalk::loaded_file_property(Path, protocol(Entity)),
-			Kind = protocol
-		;	logtalk::loaded_file_property(Path, category(Entity)),
-			Kind = category
-		).
+	file_entity(Path, object, Entity) :-
+		logtalk::loaded_file_property(Path, object(Entity)).
+	file_entity(Path, protocol, Entity) :-
+		logtalk::loaded_file_property(Path, protocol(Entity)).
+	file_entity(Path, category, Entity) :-
+		logtalk::loaded_file_property(Path, category(Entity)).
 
 	% file given in library notation
 	locate_file(LibraryNotation, Path) :-
@@ -394,14 +392,12 @@
 			::process_entity(Kind, Entity)
 		).
 
-	all(Kind, Entity) :-
-		(	current_object(Entity),
-			Kind = object
-		;	current_category(Entity),
-			Kind = category
-		;	current_protocol(Entity),
-			Kind = protocol
-		).
+	all(object, Entity) :-
+		current_object(Entity).
+	all(category, Entity) :-
+		current_category(Entity).
+	all(protocol, Entity) :-
+		current_protocol(Entity).
 
 	% internal/common predicates
 

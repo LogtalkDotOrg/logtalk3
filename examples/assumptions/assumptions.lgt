@@ -21,9 +21,9 @@
 :- category(assumptions).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2014-06-26,
+		date is 2021-01-02,
 		comment is 'Simple implementation of ground linear and intuitionistic assumptions.'
 	]).
 
@@ -35,11 +35,11 @@
 	]).
 
 	assumel(Fact) :-
-		(	assertz((Fact :- retractall(Fact)))
-		;	retractall(Fact),
-			!,
-			fail
-		).
+		assertz((Fact :- retractall(Fact))).
+	assumel(Fact) :-
+		retractall(Fact),
+		!,
+		fail.
 
 	:- public(assumei/1).
 	:- mode(assumei(+callable), one).
@@ -49,10 +49,10 @@
 	]).
 
 	assumei(Fact) :-
-		(	assertz(Fact)
-		;	retract(Fact),
-			!,
-			fail
-		).
+		assertz(Fact).
+	assumei(Fact) :-
+		retract(Fact),
+		!,
+		fail.
 
 :- end_category.

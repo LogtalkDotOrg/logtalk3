@@ -155,10 +155,10 @@
 	subterm( Term, Term ).
 	subterm( xml(_Attributes, Content), Term ) :-
 		subterm( Content, Term ).
-	subterm( [H|T], Term ) :-
-		(	subterm( H, Term )
-		;	subterm( T, Term )
-		).
+	subterm( [H|_], Term ) :-
+		subterm( H, Term ).
+	subterm( [_|T], Term ) :-
+		subterm( T, Term ).
 	subterm( element(_Name,_Attributes,Content), Term ) :-
 		subterm( Content, Term ).
 	subterm( namespace(_URI,_Prefix,Content), Term ) :-
