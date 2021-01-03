@@ -95,14 +95,15 @@ following table summarizes the availability of these features:
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |  
 |  Trealla ProLog  |       no      |       no      |      yes      |       no      |       no      |  
-|  XSB             |      yes      |       no      |       no      |       no      |      yes      |  
-|  YAP             |      yes      |      yes      |      yes      |       no      |      yes      |  
+|  XSB             |      yes      |       no      |       no      |       no      |       no      |  
+|  YAP             |      yes      |      yes      |      yes      |       no      |       no      |  
 
 A value of "yes" means at least partial support (but some limitations may be
 present and a recent version of the Prolog system may be required). A value
-of "no" may simply mean that the backend Prolog compiler doesn't provide a
-*compatible* implementation of the required features. For "partial" values,
-see the Prolog system notes.
+of "no" may simply mean that the backend Prolog compiler either does not
+provide a *compatible* implementation of the required features or that the
+implementation is too buggy to be used. For "partial" values, see the Prolog
+system notes.
 
 
 template adapter file

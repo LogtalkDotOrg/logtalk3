@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on December 21, 2020
+##   Last updated on January 3, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.4"
+	echo "  0.5"
 	exit 0
 }
 
@@ -153,7 +153,6 @@ ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/taulgt.sh taulgt
 ln -sf ../share/logtalk/integration/tplgt.sh tplgt
 ln -sf ../share/logtalk/integration/xsblgt.sh xsblgt
-ln -sf ../share/logtalk/integration/xsbmtlgt.sh xsbmtlgt
 ln -sf ../share/logtalk/integration/yaplgt.sh yaplgt
 
 mkdir -p ../share/man/man1
@@ -180,7 +179,6 @@ echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.0 or later):       taulgt"
 echo "* Trealla ProLog (1.4.7 or later):   tplgt       (experimental)"
 echo "* XSB (3.8.0 or later):              xsblgt      (first run may require sudo)"
-echo "* XSB MT (3.8.0 or later):           xsbmtlgt    (first run may require sudo)"
 echo "* YAP (6.3.4 or later):              yaplgt"
 echo
 echo "Links to the Prolog integration scripts can be found on \"$prefix/bin\"."

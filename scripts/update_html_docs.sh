@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports, and
 ##   contributions documentation
 ## 
-##   Last updated on June 5, 2020
+##   Last updated on January 3, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -51,7 +51,7 @@ goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(l
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -68,7 +68,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, xsb, xsbmt, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, xsb, and yap)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
@@ -116,9 +116,6 @@ elif [ "$p_arg" == "swi" ] ; then
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk="xsblgt$extension -e"
-elif [ "$p_arg" == "xsbmt" ] ; then
-	prolog='XSB-MT'
-	logtalk="xsbmtlgt$extension -e"
 elif [ "$p_arg" == "yap" ] ; then
 	prolog='YAP'
 	logtalk="yaplgt$extension -g"

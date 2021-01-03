@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on December 28, 2020
+; Last updated on January 3, 2021
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -78,7 +78,6 @@ Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or 
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\xsbmt"; Description: "XSB-MT integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 
@@ -163,8 +162,6 @@ Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath
 Name: "{group}\Logtalk - Tau Prolog"; Filename: "{code:GetNodeExePath}"; Parameters: "--stack_size=10000 ""%LOGTALKHOME%\integration\logtalk_tau.js"""; Comment: "Runs Logtalk with Tau Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\tau; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
-
-Name: "{group}\Logtalk - XSB-MT"; Filename: "{code:GetXSBMTExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsbmt.pl']."""; Comment: "Runs Logtalk with XSB-MT (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsbmt; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - YAP (console)"; Filename: "{code:GetYAPConExePath}"; Parameters: "-l ""$LOGTALKHOME/integration/logtalk_yap.pl"""; Comment: "Runs Logtalk with YAP"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\yap; Flags: createonlyiffileexists
 
@@ -676,36 +673,6 @@ begin
   end
 end;
 
-function XSBMTExePath: String;
-var
-  XSB_DIR: String;
-begin
-  if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'XSB_DIR', XSB_DIR) then
-    if IsWin64 and FileExists(XSB_DIR + '\config\x64-pc-windows-mt\bin\xsb.exe') then
-      Result := XSB_DIR + '\config\x64-pc-windows-mt\bin\xsb.exe'
-    else if FileExists(XSB_DIR + '\config\x86-pc-windows-mt\bin\xsb.exe') then
-      Result := XSB_DIR + '\config\x86-pc-windows-mt\bin\xsb.exe'
-    else if FileExists(XSB_DIR + '\config\i686-pc-cygwin-mt\bin\xsb.exe') then
-      Result := XSB_DIR + '\config\i686-pc-cygwin-mt\bin\xsb.exe'
-  else
-    Result := 'prolog_compiler_not_installed'
-end;
-
-function GetXSBMTExePath(Param: String): String;
-var
-  Warning: String;
-begin
-  Result := XSBMTExePath;
-  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
-  begin
-    Warning := 'Failed to detect XSB-MT installation.' + Chr(13) +
-               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
-               'You can manually create the shortcut by finding the full path to the XSB-MT executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
-               'executable full path -l -e "[''%LOGTALKHOME%\\integration\\logtalk_xsbmt.pl'']."';
-    MsgBox(Warning, mbError, MB_OK);
-  end
-end;
-
 function YAPConExePath: String;
 var
   Home: String;
@@ -783,7 +750,6 @@ begin
       (SWIConExePath = 'prolog_compiler_not_installed') and
       (SWIWinExePath = 'prolog_compiler_not_installed') and
       (XSBExePath = 'prolog_compiler_not_installed') and
-      (XSBMTExePath = 'prolog_compiler_not_installed') and
       (YAPConExePath = 'prolog_compiler_not_installed') and
       (YAPWinExePath = 'prolog_compiler_not_installed')
 end;

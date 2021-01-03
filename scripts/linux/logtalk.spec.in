@@ -88,7 +88,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/taulgt
 /usr/local/bin/tplgt
 /usr/local/bin/xsblgt
-/usr/local/bin/xsbmtlgt
 /usr/local/bin/yaplgt
 /usr/local/share/man/man1/bplgt.1.gz
 /usr/local/share/man/man1/ciaolgt.1.gz
@@ -116,7 +115,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/taulgt.1.gz
 /usr/local/share/man/man1/tplgt.1.gz
 /usr/local/share/man/man1/xsblgt.1.gz
-/usr/local/share/man/man1/xsbmtlgt.1.gz
 /usr/local/share/man/man1/yaplgt.1.gz
 %exclude /usr/local/share/mime
 
@@ -147,7 +145,6 @@ echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.0 or later):       taulgt"
 echo "* Trealla ProLog (1.4.7 or later):   tplgt       (experimental)"
 echo "* XSB (3.8.0 or later):              xsblgt      (first run may require sudo)"
-echo "* XSB MT (3.8.0 or later):           xsbmtlgt    (first run may require sudo)"
 echo "* YAP (6.3.4 or later):              yaplgt"
 echo
 echo "Links to the Prolog integration scripts can be found on \"/usr/local/bin\"."

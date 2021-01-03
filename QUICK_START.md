@@ -45,7 +45,6 @@ by default for running Logtalk with the supported backend Prolog compilers
 * Tau Prolog:     `taulgt`
 * Trealla ProLog: `tplgt`      (experimental)
 * XSB:            `xsblgt`     (first run may require `sudo`)
-* XSB MT:         `xsbmtlgt`   (first run may require `sudo`)
 * YAP:            `yaplgt`
 
 On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts.

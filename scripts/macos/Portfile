@@ -80,7 +80,6 @@ post-activate {
 	ui_msg "* Tau Prolog (0.3.0 or later):       taulgt"
 	ui_msg "* Trealla ProLog (1.4.7 or later):   tplgt       (experimental)"
 	ui_msg "* XSB (3.8.0 or later):              xsblgt      (first run may require sudo)"
-	ui_msg "* XSB MT (3.8.0 or later):           xsbmtlgt    (first run may require sudo)"
 	ui_msg "* YAP (6.3.4 or later):              yaplgt"
 	ui_msg "*"
 	ui_msg "* Remember to set the environment variable LOGTALKHOME to the path to"

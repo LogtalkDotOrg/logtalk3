@@ -35,6 +35,9 @@ Prolog adapter and integration files
 
 * ADDED: Default value for the new `disjunctions` flag to all adaptert files.
 
+* REMOVED: Integration files for XSB-MT as this backend support for threads is
+too buggy to be usable.
+
 Documentation
 -------------
 
@@ -79,7 +82,7 @@ Tests
 -----
 
 * FIXED: Warnings with the new `disjunctions` flag for the `set_logtalk_flag/2`
-directive and the `goal_expansion/2` method.
+directive and the `goal_expansion/2` method tests.
 
 Installers and installation scripts
 -----------------------------------
@@ -96,6 +99,9 @@ versions of the man pages.
 
 * UPDATED: The macOS installer to also set system-wide default values for the
 `LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
+
+* REMOVED: Install actions for XSB-MT as this backend support for threads is
+too buggy to be usable.
 
 
 3.43.0 - December 22, 2020

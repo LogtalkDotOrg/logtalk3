@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on November 24, 2020
+##   Last updated on January 3, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.10"
+	echo "  0.11"
 	exit 0
 }
 
@@ -70,9 +70,6 @@ list_backends() {
 	fi
 	if [ -e "$(command -v xsblgt)" ] && [ "$(command -v xsb)" != "" ] ; then
 		echo -n "  xsblgt"
-	fi
-	if [ -e "$(command -v xsbmtlgt)" ] && [ "$(command -v xsb-mt)" != "" ] ; then
-		echo -n "  xsbmtlgt"
 	fi
 	if [ -e "$(command -v yaplgt)" ] && [ "$(command -v yap)" != "" ] ; then
 		echo -n "  yaplgt"
@@ -159,8 +156,6 @@ valid_backend() {
 	elif [ "$1" == "tplgt" ] && [ -e "$(command -v tplgt)" ]  && [ "$(command -v tpl)" != "" ] ; then
 		return 0
 	elif [ "$1" == "xsblgt" ] && [ -e "$(command -v xsblgt)" ]  && [ "$(command -v xsb)" != "" ] ; then
-		return 0
-	elif [ "$1" == "xsbmtlgt" ] && [ -e "$(command -v xsbmtlgt)" ]  && [ "$(command -v xsb-mt)" != "" ] ; then
 		return 0
 	elif [ "$1" == "yaplgt" ] && [ -e "$(command -v yaplgt)" ]  && [ "$(command -v yap)" != "" ] ; then
 		return 0
