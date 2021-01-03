@@ -27,9 +27,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:18:0,
+		version is 1:19:0,
 		author is 'Paulo Moura',
-		date is 2020-12-29,
+		date is 2021-01-03,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -157,10 +157,6 @@
 		comment is 'Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.',
 		argnames is ['Provider']
 	]).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(debug_handler_provider/1).
-	:- endif.
 
 	:- public(debug_handler/2).
 	:- multifile(debug_handler/2).
@@ -169,10 +165,6 @@
 		comment is 'Debug event handler. The defined events are unification events - ``fact(Entity,Fact,Clause,File,Line)`` and ``rule(Entity,Head,Clause,File,Line)`` - and goal events - ``top_goal(Goal,CompiledGoal)`` and ``goal(Goal,CompiledGoal)``.',
 		argnames is ['Event', 'ExecutionContext']
 	]).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(debug_handler/2).
-	:- endif.
 
 	% file and library predicates
 

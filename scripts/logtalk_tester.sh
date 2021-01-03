@@ -324,12 +324,6 @@ elif [ "$p_arg" == "lvm" ] ; then
 		*"-c"*) dot="?";;
 		*) dot=".";;
 	esac
-elif [ "$p_arg" == "qp" ] || [ "$p_arg" == "qu-prolog" ] ; then
-	backend=qp
-	prolog='Qu-Prolog'
-	logtalk=qplgt$extension
-	logtalk_call="$logtalk $i_arg -g"
-	dot="."
 elif [ "$p_arg" == "sicstus" ] || [ "$p_arg" == "sicstus-prolog" ] ; then
 	backend=sicstus
 	prolog='SICStus Prolog'

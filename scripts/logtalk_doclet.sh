@@ -171,11 +171,6 @@ elif [ "$p_arg" == "lvm" ] ; then
 	logtalk=lvmlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 	dot="?"
-elif [ "$p_arg" == "qp" ] ; then
-	prolog='Qu-Prolog'
-	logtalk=qplgt$extension
-	logtalk_call="$logtalk -g"
-	dot="."
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension

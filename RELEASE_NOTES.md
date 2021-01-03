@@ -35,6 +35,9 @@ Prolog adapter and integration files
 
 * ADDED: Default value for the new `disjunctions` flag to all adaptert files.
 
+* REMOVED: Integration files for Qu-Prolog as this backend memory model limits
+prevent loading the Logtalk compiler/runtime.
+
 * REMOVED: Integration files for XSB-MT as this backend support for threads is
 too buggy to be usable.
 
@@ -99,6 +102,9 @@ versions of the man pages.
 
 * UPDATED: The macOS installer to also set system-wide default values for the
 `LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
+
+* REMOVED: Install actions for Qu-Prolog as this backend memory model limits
+prevent loading the Logtalk compiler/runtime.
 
 * REMOVED: Install actions for XSB-MT as this backend support for threads is
 too buggy to be usable.

@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:7:2,
+		version is 4:8:0,
 		author is 'Paulo Moura',
-		date is 2020-11-28,
+		date is 2021-01-03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -369,10 +369,6 @@
 		!.
 
 	:- multifile(logtalk::debug_handler_provider/1).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		% Qu-Prolog and XSB don't support static multifile predicates
-		:- dynamic(logtalk::debug_handler_provider/1).
-	:- endif.
 
 	% there can only be one debug handler provider loaded at the same time;
 	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
@@ -381,10 +377,6 @@
 	logtalk::debug_handler_provider(debugger).
 
 	:- multifile(logtalk::debug_handler/2).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
-		% Qu-Prolog and XSB don't support static multifile predicates
-		:- dynamic(logtalk::debug_handler/2).
-	:- endif.
 
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).

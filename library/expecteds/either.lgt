@@ -21,9 +21,9 @@
 :- object(either).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2019-11-26,
+		date is 2021-01-03,
 		comment is 'Types and predicates for extended type-checking and handling of expected terms.',
 		remarks is [
 			'Type-checking support' - 'Defines a ``either(ValueType, ErrorType)`` type for checking expected terms where the value and error terms must be of the given types.',
@@ -54,38 +54,18 @@
 	]).
 
 	:- multifile(type::type/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::type/1).
-	:- endif.
-
 	type::type(either(_, _)).
 
 	:- multifile(type::check/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::check/2).
-	:- endif.
-
 	type::check(either(ValueType, ErrorType), Term) :-
 		type::check(expected, Term),
 		expected(Term)::if_expected(type::check(ValueType)),
 		expected(Term)::if_unexpected(type::check(ErrorType)).
 
 	:- multifile(arbitrary::arbitrary/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(arbitrary::arbitrary/1).
-	:- endif.
-
 	arbitrary::arbitrary(either(_, _)).
 
 	:- multifile(arbitrary::arbitrary/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(arbitrary::arbitrary/2).
-	:- endif.
-
 	arbitrary::arbitrary(either(ValueType, ErrorType), Arbitrary) :-
 		(	random::maybe ->
 			type::arbitrary(ValueType, Value),

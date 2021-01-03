@@ -53,9 +53,6 @@ list_backends() {
 	if [ -e "$(command -v lvmlgt)" ] && [ "$(command -v lvm)" != "" ] ; then
 		echo -n "  lvmlgt"
 	fi
-	if [ -e "$(command -v qplgt)" ] && [ "$(command -v qp)" != "" ] ; then
-		echo -n "  qplgt"
-	fi
 	if [ -e "$(command -v sicstuslgt)" ] && [ "$(command -v sicstus)" != "" ] ; then
 		echo -n "  sicstuslgt"
 	fi
@@ -144,8 +141,6 @@ valid_backend() {
 	elif [ "$1" == "jiplgt" ] && [ -e "$(command -v jiplgt)" ]  && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		return 0
 	elif [ "$1" == "lvmlgt" ] && [ -e "$(command -v lvmlgt)" ]  && [ "$(command -v lvm)" != "" ] ; then
-		return 0
-	elif [ "$1" == "qplgt" ] && [ -e "$(command -v qplgt)" ]  && [ "$(command -v qp)" != "" ] ; then
 		return 0
 	elif [ "$1" == "sicstuslgt" ] && [ -e "$(command -v sicstuslgt)" ]  && [ "$(command -v sicstus)" != "" ] ; then
 		return 0

@@ -21,9 +21,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:27:1,
+		version is 1:28:0,
 		author is 'Paulo Moura',
-		date is 2020-10-03,
+		date is 2021-01-03,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -65,10 +65,6 @@
 
 	:- public(type/1).
 	:- multifile(type/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type/1).
-	:- endif.
 	:- mode(type(?callable), zero_or_more).
 	:- info(type/1, [
 		comment is 'Table of defined types. A new type can be registered by defining a clause for this predicate and adding a clause for the ``check/2`` multifile predicate.',
@@ -77,10 +73,6 @@
 
 	:- public(meta_type/3).
 	:- multifile(meta_type/3).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(meta_type/3).
-	:- endif.
 	:- mode(meta_type(?callable, -list, -list), zero_or_more).
 	:- info(meta_type/3, [
 		comment is 'Table of defined meta-types. A registered type that is a meta-type can be described by defining a clause for this predicate to enumerate its sub-types and optional values in case of a single sub-type.',
@@ -103,10 +95,6 @@
 
 	:- public(check/2).
 	:- multifile(check/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(check/2).
-	:- endif.
 	:- mode(check(@callable, @term), one_or_error).
 	:- info(check/2, [
 		comment is 'True if the given term is of the specified type. Throws an error otherwise. A new type can be added by defining a clause for this predicate and registering it by adding a clause for the ``type/1`` multifile predicate.',

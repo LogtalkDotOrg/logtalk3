@@ -81,7 +81,6 @@ rm -f logtalk_doclet
 rm -f logtalk_user_setup
 rm -f logtalk_version_select
 rm -f lvmlgt
-rm -f qplgt
 rm -f quintuslgt
 rm -f sicstuslgt
 rm -f swilgt
@@ -108,7 +107,6 @@ rm -f logtalk_doclet.1.gz
 rm -f logtalk_user_setup.1.gz
 rm -f logtalk_version_select.1.gz
 rm -f lvmlgt.1.gz
-rm -f qplgt.1.gz
 rm -f quintuslgt.1.gz
 rm -f sicstuslgt.1.gz
 rm -f swilgt.1.gz

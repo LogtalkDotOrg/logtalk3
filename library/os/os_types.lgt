@@ -21,9 +21,9 @@
 :- category(os_types).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-06-22,
+		date is 2021-01-03,
 		comment is 'A set of operating-system related types.',
 		remarks is [
 			'Provided types' - 'This category adds ``file``, ``file(Extensions)``, ``directory``, and ``environment_variable`` types for type-checking when using the ``type`` library object.',
@@ -36,11 +36,6 @@
 	]).
 
 	:- multifile(type::type/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::type/1).
-	:- endif.
-
 	% clauses for the type::type/1 predicate must always be defined with
 	% an instantiated first argument to keep calls deterministic by taking
 	% advantage of first argument indexing
@@ -50,11 +45,6 @@
 	type::type(environment_variable).
 
 	:- multifile(type::check/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::check/2).
-	:- endif.
-
 	% clauses for the type::check/2 predicate must always be defined with
 	% an instantiated first argument to keep calls deterministic by taking
 	% advantage of first argument indexing

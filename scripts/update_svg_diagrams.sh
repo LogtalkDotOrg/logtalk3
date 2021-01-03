@@ -110,9 +110,6 @@ elif [ "$p_arg" == "gnu" ] ; then
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk="jiplgt$extension -n -g"
-elif [ "$p_arg" == "qp" ] ; then
-	prolog='Qu-Prolog'
-	logtalk="qplgt$extension -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"

@@ -89,7 +89,6 @@ following table summarizes the availability of these features:
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
 |  LVM             |       no      |       no      |       no      |       no      |       no      |  
-|  Qu-Prolog       |       no      |       no      |       no      |       no      |       no      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
@@ -237,21 +236,6 @@ LVM 1.0.0 and later versions
 ----------------------------
 
 	lvm.pl
-
-
-Qu-Prolog 9.7 and later versions
---------------------------------
-
-	qp.pl
-
-Known issues in Qu-Prolog 9.7: (1) this version doesn't support static
-multifile predicates. This limitation may be fixed in later versions;
-(2) a bug in the Windows version of Qu-Prolog in the expansion of file
-paths containing environment variables prevents using it with Logtalk
-in this operating-system; (3) the adapter file redefines the `:/2`
-operator per its ISO Prolog standard definition.
-
-Written and tested with the help of Peter Robinson, Qu-Prolog author.
 
 
 Quintus Prolog 3.3~3.5

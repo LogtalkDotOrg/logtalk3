@@ -21,9 +21,9 @@
 :- object(maybe).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2019-11-26,
+		date is 2021-01-03,
 		comment is 'Types and predicates for type-checking and handling optional terms. Inspired by Haskell.',
 		remarks is [
 			'Type-checking support' - 'Defines type ``maybe(Type)`` for checking optional terms where the value hold by the optional term must be of the given type.',
@@ -40,37 +40,17 @@
 	]).
 
 	:- multifile(type::type/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::type/1).
-	:- endif.
-
 	type::type(maybe(_)).
 
 	:- multifile(type::check/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::check/2).
-	:- endif.
-
 	type::check(maybe(Type), Term) :-
 		type::check(optional, Term),
 		optional(Term)::if_present(type::check(Type)).
 
 	:- multifile(arbitrary::arbitrary/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(arbitrary::arbitrary/1).
-	:- endif.
-
 	arbitrary::arbitrary(maybe(_)).
 
 	:- multifile(arbitrary::arbitrary/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(arbitrary::arbitrary/2).
-	:- endif.
-
 	arbitrary::arbitrary(maybe(Type), Arbitrary) :-
 		(	random::maybe ->
 			optional::empty(Arbitrary)

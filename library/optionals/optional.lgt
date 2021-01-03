@@ -21,9 +21,9 @@
 :- object(optional).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2020-01-02,
+		date is 2021-01-03,
 		comment is 'Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.',
 		remarks is [
 			'Type-checking support' - 'This object also defines a type ``optional`` for use with the ``type`` library object.'
@@ -118,22 +118,12 @@
 	from_generator(_, empty).
 
 	:- multifile(type::type/1).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::type/1).
-	:- endif.
-
 	% clauses for the type::type/1 predicate must always be defined with
 	% an instantiated first argument to keep calls deterministic by taking
 	% advantage of first argument indexing
 	type::type(optional).
 
 	:- multifile(type::check/2).
-	% workaround the lack of support for static multifile predicates in Qu-Prolog
-	:- if(current_logtalk_flag(prolog_dialect, qp)).
-		:- dynamic(type::check/2).
-	:- endif.
-
 	% clauses for the type::check/2 predicate must always be defined with
 	% an instantiated first argument to keep calls deterministic by taking
 	% advantage of first argument indexing

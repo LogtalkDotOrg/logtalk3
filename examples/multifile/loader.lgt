@@ -18,13 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(\+ current_logtalk_flag(prolog_dialect, qp)).
-
-	:- initialization(logtalk_load([main, other, more])).
-
-:- else.
-
-	% Qu-Prolog only supports dynamic multifile predicates
-	:- initialization((write('WARNING: example not supported on this backend Prolog compiler!'), nl)).
-
-:- endif.
+:- initialization(
+	logtalk_load([main, other, more])
+).
