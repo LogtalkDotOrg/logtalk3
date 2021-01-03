@@ -169,6 +169,23 @@ the "altdirs" compiler flag. Settings files are not supported (must be
 manually loaded).
 
 
+Quintus Prolog 3.3~3.5
+----------------------
+
+	quintus.pl
+
+Experimental. Quintus Prolog is still maintained but (apparently) no
+longer developed and thus it lacks compliance with current official and
+de facto standards. Notably, the `open/4` and `read_term/2-3` built-in
+predicates use a different argument order and there are also significant
+differences in arithmetic functions support. This adapter file copes with
+some of these issues using the dialect-level goal-expansion mechanism.
+
+The original version of this adapter file was written and tested with help
+of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
+current release using version 3.5 for Windows for testing.
+
+
 Qu-Prolog 9.7 and later versions
 --------------------------------
 
