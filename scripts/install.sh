@@ -146,6 +146,7 @@ ln -sf ../share/logtalk/integration/eclipselgt.sh eclipselgt
 ln -sf ../share/logtalk/integration/gplgt.sh gplgt
 ln -sf ../share/logtalk/integration/jiplgt.sh jiplgt
 ln -sf ../share/logtalk/integration/lvmlgt.sh lvmlgt
+ln -sf ../share/logtalk/integration/quintuslgt.sh quintuslgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/taulgt.sh taulgt
@@ -170,6 +171,7 @@ echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.6.1 or later):       jiplgt      (first run may require sudo)"
 echo "* LVM (1.0.0 or later):              lvmlgt"
+echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.0 or later):       taulgt"

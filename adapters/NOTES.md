@@ -89,6 +89,7 @@ following table summarizes the availability of these features:
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
 |  LVM             |       no      |       no      |       no      |       no      |       no      |  
+|  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |  
@@ -235,6 +236,23 @@ LVM 1.0.0 and later versions
 ----------------------------
 
 	lvm.pl
+
+
+Quintus Prolog 3.3~3.5
+----------------------
+
+	quintus.pl
+
+Experimental. Quintus Prolog is still maintained but (apparently) no
+longer developed and thus it lacks compliance with current official and
+de facto standards. Notably, the `open/4` and `read_term/2-3` built-in
+predicates use a different argument order and there are also significant
+differences in arithmetic functions support. This adapter file copes with
+some of these issues using the dialect-level goal-expansion mechanism.
+
+The original version of this adapter file was written and tested with help
+of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
+current release using version 3.5 for Windows for testing.
 
 
 SICStus Prolog 4.1.0 and later versions

@@ -35,9 +35,6 @@ Prolog adapter and integration files
 
 * ADDED: Default value for the new `disjunctions` flag to all adaptert files.
 
-* REMOVED: Integration file for the legacy Quintus Prolog backend due to the
-lack of support for current official and de facto Prolog standards.
-
 * REMOVED: Integration files for Qu-Prolog as this backend memory model limits
 prevent loading the Logtalk compiler/runtime.
 
@@ -105,9 +102,6 @@ versions of the man pages.
 
 * UPDATED: The macOS installer to also set system-wide default values for the
 `LOGTALKHOME` and `LOGTALKUSER` environment variables for the `zsh` shell.
-
-* REMOVED: Install actions for the legacy Quintus Prolog backend due to the
-lack of support for current official and de facto Prolog standards.
 
 * REMOVED: Install actions for Qu-Prolog as this backend memory model limits
 prevent loading the Logtalk compiler/runtime.
