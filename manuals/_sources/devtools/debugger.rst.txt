@@ -1,7 +1,11 @@
 ``debugger``
 ============
 
-This tool provides the default Logtalk command-line debugger.
+This tool provides the default Logtalk command-line debugger. Unlike
+Prolog systems, the Logtalk debugger is a regular application, using a
+public API. As a consequence, it must be explicitly loaded by the
+programmer, either manually at the top-level interpreter or
+automatically from a settings file.
 
 API documentation
 -----------------

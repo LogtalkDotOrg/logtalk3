@@ -33,10 +33,10 @@ new flag, `disjunctions`, with a default value of `warning`.
 Prolog adapter and integration files
 ------------------------------------
 
-* ADDED: Default value for the new `disjunctions` flag to all adaptert files.
+* ADDED: Default value for the new `disjunctions` flag to all adapter files.
 
 * REMOVED: Integration files for Qu-Prolog as this backend memory model limits
-prevent loading the Logtalk compiler/runtime.
+prevent loading the current version of the Logtalk compiler/runtime.
 
 * REMOVED: Integration files for XSB-MT as this backend support for threads is
 too buggy to be usable.
