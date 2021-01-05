@@ -21,18 +21,17 @@ ________________________________________________________________________
 `ports_profiler`
 ================
 
-The `ports_profiler.lgt` source file defines a simple predicate execution box
-model port profiler tool (inspired by the ECLiPSe `port_profiler` tool). The
-box model is the same used in the debugger tool.
+This tool counts and reports the number of times each port in the
+*procedure box model* is traversed during the execution of queries.
+It is inspired by the ECLiPSe `port_profiler` tool.
 
-The Logtalk predicate execution box model is an extended version of the
-original Byrd's four port model. Besides the standard `call`, `exit`, `fail`,
-and `redo` ports, Logtalk also defines two post-unification ports, `fact`
-and `rule`, and an `exception` port. This tool counts and reports the
-number of times each port is traversed during the execution of queries.
-It also distinguishes between deterministic exits (reported in the `exit`
-column in the profiling result tables) and exits that leave choice-points
-(reported in the `*exit` column).
+The procedure box model is the same used in the debugger tool. This
+is an extended version of the original Byrd's four port model. Besides
+the standard `call`, `exit`, `fail`, and `redo` ports, Logtalk also
+defines two post-unification ports, `fact` and `rule`, and an `exception`
+port. This tool can also distinguishes between deterministic exits
+(reported in the `exit` column in the profiling result tables) and
+exits that leave choice-points (reported in the `*exit` column).
 
 
 API documentation
