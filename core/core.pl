@@ -3481,7 +3481,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 44, 0, b01)).
+'$lgt_version_data'(logtalk(3, 44, 0, b02)).
 
 
 
@@ -19291,99 +19291,135 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_report_entity_naming_issues'(Type, Entity) :-
-	functor(Entity, Functor, _),
-	(	'$lgt_camel_case_name'(Functor) ->
-		'$lgt_increment_compiling_warnings_counter',
-		(	'$lgt_pp_referenced_object_'(Entity, File, Lines) ->
-			true
-		;	'$lgt_pp_referenced_protocol_'(Entity, File, Lines) ->
-			true
-		;	'$lgt_pp_referenced_category_'(Entity, File, Lines) ->
-			true
-		;	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
-			Lines = '-'(-1, -1)
-		),
-		'$lgt_print_message'(warning(naming), camel_case_entity_name(File, Lines, Type, Entity))
-	;	true
-	).
+	functor(Entity, Name, _),
+	atom_chars(Name, Chars),
+	(	'$lgt_camel_case_name'(Chars),
+		Warning = camel_case_entity_name(File, Lines, Type, Entity)
+	;	'$lgt_name_with_digits_in_the_middle'(Chars),
+		Warning = entity_name_with_digits_in_the_middle(File, Lines, Type, Entity)
+	),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_referenced_object_'(Entity, File, Lines) ->
+		true
+	;	'$lgt_pp_referenced_protocol_'(Entity, File, Lines) ->
+		true
+	;	'$lgt_pp_referenced_category_'(Entity, File, Lines) ->
+		true
+	;	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+		Lines = '-'(-1, -1)
+	),
+	'$lgt_print_message'(warning(naming), Warning),
+	fail.
+
+'$lgt_report_entity_naming_issues'(_, _).
 
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	(	'$lgt_pp_public_'(Functor, Arity, _, _)
-	;	'$lgt_pp_protected_'(Functor, Arity, _, _)
-	;	'$lgt_pp_private_'(Functor, Arity, _, _)
+	(	'$lgt_pp_public_'(Name, Arity, _, _)
+	;	'$lgt_pp_protected_'(Name, Arity, _, _)
+	;	'$lgt_pp_private_'(Name, Arity, _, _)
 	),
 	% backtrack over all declared predicates
-	\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
+	\+ '$lgt_pp_non_terminal_'(Name, _, Arity),
 	% not declared as non-terminals
-	functor(Template, Functor, Arity),
+	functor(Template, Name, Arity),
 	\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
 	% not defined
-	'$lgt_camel_case_name'(Functor),
-	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line) ->
-		'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, Line-Line, Type, Entity, Functor/Arity))
-	;	'$lgt_source_file_context'(File, _),
-		'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, '-'(-1, -1), Type, Entity, Functor/Arity))
+	atom_chars(Name, Chars),
+	(	'$lgt_camel_case_name'(Chars),
+		Warning = camel_case_predicate_name(File, Line-Line, Type, Entity, Name/Arity)
+	;	'$lgt_name_with_digits_in_the_middle'(Chars),
+		Warning = predicate_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name/Arity)
 	),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_declaration_location_'(Name, Arity, File, Line) ->
+		true
+	;	'$lgt_source_file_context'(File, _),
+		Line = -1
+	),
+	'$lgt_print_message'(warning(naming), Warning),
 	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	'$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
+	'$lgt_pp_non_terminal_'(Name, Arity, ExtArity),
 	% declared non-terminal (in a scope directive)
-	functor(Template, Functor, ExtArity),
+	functor(Template, Name, ExtArity),
 	\+ '$lgt_pp_defines_predicate_'(Template, _, _, _, _, _),
 	% not defined
-	'$lgt_camel_case_name'(Functor),
-	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, Line) ->
-		'$lgt_print_message'(warning(naming), camel_case_non_terminal_name(File, Line-Line, Type, Entity, Functor//Arity))
-	;	'$lgt_source_file_context'(File, _),
-		'$lgt_print_message'(warning(naming), camel_case_non_terminal_name(File, '-'(-1, -1), Type, Entity, Functor//Arity))
+	atom_chars(Name, Chars),
+	(	'$lgt_camel_case_name'(Chars),
+		Warning = camel_case_non_terminal_name(File, Line-Line, Type, Entity, Name//Arity)
+	;	'$lgt_name_with_digits_in_the_middle'(Chars),
+		Warning = non_terminal_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name//Arity)
 	),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_declaration_location_'(Name, ExtArity, File, Line) ->
+		true
+	;	'$lgt_source_file_context'(File, _),
+		Line = -1
+	),
+	'$lgt_print_message'(warning(naming), Warning),
 	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
-	\+ '$lgt_pp_defines_non_terminal_'(Functor, _, Arity),
-	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
-	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
-	\+ '$lgt_pp_private_'(Functor, Arity, _, _),
-	\+ '$lgt_pp_non_terminal_'(Functor, _, Arity),
+	'$lgt_pp_defines_predicate_'(_, Name/Arity, _, _, _, _),
+	\+ '$lgt_pp_defines_non_terminal_'(Name, _, Arity),
+	\+ '$lgt_pp_public_'(Name, Arity, _, _),
+	\+ '$lgt_pp_protected_'(Name, Arity, _, _),
+	\+ '$lgt_pp_private_'(Name, Arity, _, _),
+	\+ '$lgt_pp_non_terminal_'(Name, _, Arity),
 	% defined local predicate
-	'$lgt_camel_case_name'(Functor),
-	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line) ->
-		'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, Line-Line, Type, Entity, Functor/Arity))
-	;	'$lgt_source_file_context'(File, _),
-		'$lgt_print_message'(warning(naming), camel_case_predicate_name(File, '-'(-1, -1), Type, Entity, Functor/Arity))
+	atom_chars(Name, Chars),
+	(	'$lgt_camel_case_name'(Chars),
+		Warning = camel_case_predicate_name(File, Line-Line, Type, Entity, Name/Arity)
+	;	'$lgt_name_with_digits_in_the_middle'(Chars),
+		Warning = predicate_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name/Arity)
 	),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_definition_location_'(Name, Arity, File, Line) ->
+		true
+	;	'$lgt_source_file_context'(File, _),
+		Line = -1
+	),
+	'$lgt_print_message'(warning(naming), Warning),
 	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	'$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
-	\+ '$lgt_pp_public_'(Functor, ExtArity, _, _),
-	\+ '$lgt_pp_protected_'(Functor, ExtArity, _, _),
-	\+ '$lgt_pp_private_'(Functor, ExtArity, _, _),
-	\+ '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity),
+	'$lgt_pp_defines_non_terminal_'(Name, Arity, ExtArity),
+	\+ '$lgt_pp_public_'(Name, ExtArity, _, _),
+	\+ '$lgt_pp_protected_'(Name, ExtArity, _, _),
+	\+ '$lgt_pp_private_'(Name, ExtArity, _, _),
+	\+ '$lgt_pp_non_terminal_'(Name, Arity, ExtArity),
 	% defined local non-terminal
-	'$lgt_camel_case_name'(Functor),
-	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_definition_location_'(Functor, ExtArity, File, Line) ->
-		'$lgt_print_message'(warning(naming), camel_case_non_terminal_name(File, Line-Line, Type, Entity, Functor//Arity))
-	;	'$lgt_source_file_context'(File, _),
-		'$lgt_print_message'(warning(naming), camel_case_non_terminal_name(File, '-'(-1, -1), Type, Entity, Functor//Arity))
+	atom_chars(Name, Chars),
+	(	'$lgt_camel_case_name'(Chars),
+		Warning = camel_case_non_terminal_name(File, Line-Line, Type, Entity, Name//Arity)
+	;	'$lgt_name_with_digits_in_the_middle'(Chars),
+		Warning = non_terminal_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name//Arity)
 	),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_predicate_definition_location_'(Name, ExtArity, File, Line) ->
+		true
+	;	'$lgt_source_file_context'(File, _),
+		Line = -1
+	),
+	'$lgt_print_message'(warning(naming), Warning),
 	fail.
 
 '$lgt_report_predicate_naming_issues'(_, _).
 
 
-'$lgt_camel_case_name'(Name) :-
-	atom_chars(Name, Chars),
+'$lgt_camel_case_name'(Chars) :-
 	'$lgt_append'([_| _], [Char1, Char2| _], Chars),
 	a @=< Char1, Char1 @=< z,
 	'A' @=< Char2, Char2 @=< 'Z',
+	!.
+
+
+'$lgt_name_with_digits_in_the_middle'(Chars) :-
+	'$lgt_append'([_| _], [Char1, Char2| _], Chars),
+	'0' @=< Char1, Char1 @=< '9',
+	('0' @> Char2; Char2 @> '9'),
 	!.
 
 
@@ -19574,15 +19610,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_non_camel_case_name'(Name),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(
-			warning(naming),
-			non_camel_case_variable_name(File, Lines, Type, Entity, Name)
-		)
-	;	'$lgt_print_message'(
-			warning(naming),
-			non_camel_case_variable_name(File, Lines, Name)
-		)
+		Warning = non_camel_case_variable_name(File, Lines, Type, Entity, Name)
+	;	Warning = non_camel_case_variable_name(File, Lines, Name)
 	),
+	'$lgt_print_message'(warning(naming), Warning),
+	fail.
+
+'$lgt_report_variable_naming_issues'(Names, File, Lines) :-
+	'$lgt_member'(Name=_, Names),
+	atom_chars(Name, Chars),
+	'$lgt_name_with_digits_in_the_middle'(Chars),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_entity_'(Type, Entity, _) ->
+		Warning = variable_name_with_digits_in_the_middle(File, Lines, Type, Entity, Name)
+	;	Warning = variable_name_with_digits_in_the_middle(File, Lines, Name)
+	),
+	'$lgt_print_message'(warning(naming), Warning),
 	fail.
 
 '$lgt_report_variable_naming_issues'(Names, File, Lines) :-
@@ -19590,15 +19633,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_similar_names'(Name, OtherName),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(
-			warning(naming),
-			variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName)
-		)
-	;	'$lgt_print_message'(
-			warning(naming),
-			variable_names_differ_only_on_case(File, Lines, Name, OtherName)
-		)
+		Warning = variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName)
+	;	Warning = variable_names_differ_only_on_case(File, Lines, Name, OtherName)
 	),
+	'$lgt_print_message'(warning(naming), Warning),
 	fail.
 
 '$lgt_report_variable_naming_issues'(_, _, _).
@@ -19610,6 +19648,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Char1 \== '_',
 	Char2 \== '_',
 	!.
+
 
 '$lgt_name_pair'([Name=_| Names], Name, OtherName) :-
 	'$lgt_member'(OtherName=_, Names).

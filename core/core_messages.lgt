@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:101:0,
+		version is 1:102:0,
 		author is 'Paulo Moura',
-		date is 2021-01-02,
+		date is 2021-01-05,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -685,6 +685,10 @@
 		['Entity name in camel case: ~w'-[Entity], nl],
 		message_context(File, Lines).
 
+	message_tokens(entity_name_with_digits_in_the_middle(File, Lines, _Type, Entity)) -->
+		['Entity name with digits in the middle: ~w'-[Entity], nl],
+		message_context(File, Lines).
+
 	message_tokens(camel_case_predicate_name(File, Lines, Type, Entity, Predicate)) -->
 		['Predicate name in camel case: ~w'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
@@ -693,12 +697,28 @@
 		['Non-terminal name in camel case: ~w'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(predicate_name_with_digits_in_the_middle(File, Lines, Type, Entity, Predicate)) -->
+		['Predicate name with digits in the middle: ~w'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(non_terminal_name_with_digits_in_the_middle(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-terminal name with digits in the middle: ~w'-[NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
 	message_tokens(non_camel_case_variable_name(File, Lines, Type, Entity, Name)) -->
 		['Variable name not in camel case: ~w'-[Name], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(non_camel_case_variable_name(File, Lines, Name)) -->
 		['Variable name not in camel case: ~w'-[Name], nl],
+		message_context(File, Lines).
+
+	message_tokens(variable_name_with_digits_in_the_middle(File, Lines, Type, Entity, Name)) -->
+		['Variable name with digits in the middle: ~w'-[Name], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(variable_name_with_digits_in_the_middle(File, Lines, Name)) -->
+		['Variable name with digits in the middle: ~w'-[Name], nl],
 		message_context(File, Lines).
 
 	message_tokens(variable_names_differ_only_on_case(File, Lines, Type, Entity, Name, OtherName)) -->
