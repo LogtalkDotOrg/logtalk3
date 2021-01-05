@@ -66,7 +66,8 @@ Tools
 -----
 
 * UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
-lint check.
+lint check and for the updated entity, predicate, and variable names lint
+checks.
 
 * FIXED: Warnings with the new `disjunctions` flag for the `code_metrics` tool.
 

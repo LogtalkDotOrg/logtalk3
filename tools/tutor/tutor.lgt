@@ -21,9 +21,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:38:0,
+		version is 0:39:0,
 		author is 'Paulo Moura',
-		date is 2021-01-02,
+		date is 2021-01-05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -683,6 +683,11 @@
 			'to separate words in entity names.'-[], nl, nl
 		].
 
+	explain(entity_name_with_digits_in_the_middle(_, _, _, _)) -->
+		[	'Coding guidelines advise against using names with'-[], nl,
+			'digits in the middle as these may hurt readbility.'-[], nl, nl
+		].
+
 	explain(camel_case_predicate_name(_, _, _, _, _)) -->
 		[	'Coding guidelines advise the use of underscores'-[], nl,
 			'to separate words in predicate names.'-[], nl, nl
@@ -693,6 +698,16 @@
 			'to separate words in non-terminal names.'-[], nl, nl
 		].
 
+	explain(predicate_name_with_digits_in_the_middle(_, _, _, _, _)) -->
+		[	'Coding guidelines advise against using names with'-[], nl,
+			'digits in the middle as these may hurt readbility.'-[], nl, nl
+		].
+
+	explain(non_terminal_name_with_digits_in_the_middle(_, _, _, _, _)) -->
+		[	'Coding guidelines advise against using names with'-[], nl,
+			'digits in the middle as these may hurt readbility.'-[], nl, nl
+		].
+
 	explain(non_camel_case_variable_name(_, _, _, _, _)) -->
 		[	'Coding guidelines advise the use of CamelCase'-[], nl,
 			'in variable names with multiple words.'-[], nl, nl
@@ -701,6 +716,16 @@
 	explain(non_camel_case_variable_name(_, _, _)) -->
 		[	'Coding guidelines advise the use of CamelCase'-[], nl,
 			'in variable names with multiple words.'-[], nl, nl
+		].
+
+	explain(variable_name_with_digits_in_the_middle(_, _, _, _, _)) -->
+		[	'Coding guidelines advise against using names with'-[], nl,
+			'digits in the middle as these may hurt readbility.'-[], nl, nl
+		].
+
+	explain(variable_name_with_digits_in_the_middle(_, _, _)) -->
+		[	'Coding guidelines advise against using names with'-[], nl,
+			'digits in the middle as these may hurt readbility.'-[], nl, nl
 		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _, _, _)) -->
