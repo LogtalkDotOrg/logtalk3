@@ -1,7 +1,7 @@
-.TH lgt2rst 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH lgt2rst 1 "January 5, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
 
 .SH NAME
-lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files for use with Sphinx
+lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files, notably for use with Sphinx
 
 .SH SYNOPSIS
 .B lgt2rst
@@ -15,7 +15,7 @@ lgt2rst \- Logtalk script for converting XML documenting files into reStructured
 .B \-h
 
 .SH DESCRIPTION
-\fBlgt2rst\fR is a Logtalk script for converting all Logtalk XML documenting files in the current directory into reStructuredText files for use with Sphinx. Assumes UTF-8 encoding.
+\fBlgt2rst\fR is a Logtalk script for converting all Logtalk XML documenting files in the current directory into reStructuredText files, notably for use with Sphinx. Assumes UTF-8 encoding.
 
 .SH OPTIONS
 .TP
@@ -43,8 +43,8 @@ Prints a summary of the script options.
 
 .SH REQUIREMENTS
 Requires a compatible XSLT processor. See the script help screen for more information.
-The use of the -s option requires Sphinx and the Read the Docs Sphinx Theme to be
-installed.
+The use of the -s option requires Sphinx, the Read the Docs Sphinx theme, and Pygments
+to be installed.
 
 .SH ENVIRONMENT
 .TP
@@ -81,7 +81,11 @@ The Logtalk index XSLT file.
 The conf.py template file.
 
 .SH "SEE ALSO"
-The Sphinx website at <http://www.sphinx-doc.org/en/master/>
+The Sphinx website at https://www.sphinx-doc.org/
+.PP
+The Pygments website at https://pygments.org/
+.PP
+The Read the Docs theme website at https://github.com/readthedocs/sphinx_rtd_theme
 .PP
 The Logtalk website at https://logtalk.org/
 .PP

@@ -13,7 +13,8 @@ converting the XML documenting files into final formats including
 (X)HTML, PDF, Markdown, and reStructuredText (for use with Sphinx), or
 plain text files. The scripts are described in their ``man`` pages and
 made available in the system path by default. See also the
-``lgtdoc/xml/NOTES.md`` for details.
+``lgtdoc/xml/NOTES.md`` for details, including **required third-party
+software**.
 
 API documentation
 -----------------

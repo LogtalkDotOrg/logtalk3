@@ -32,8 +32,9 @@ Windows (requiring WSH 5.6 or later version). These scripts assumes that
 the `LOGTALKHOME` and `LOGTALKUSER` environment variables are defined and
 that the chosen XSLT processor is available in the path.
 
-*MAKE SURE THAT THE XSL PROCESSORS YOU INTEND TO USE ARE PROPERLY INSTALLED
-AND WORKING BEFORE RUNNING THESE SCRIPTS!*
+**MAKE SURE THAT THE XSL PROCESSORS AND ANY ADDITIONAL THIRD-PARTY SOFTWARE
+YOU INTEND TO USE ARE PROPERLY INSTALLED AND WORKING BEFORE RUNNING THESE
+SCRIPTS!**
 
 Regarding conversion to (X)HTML, the links to the XSL files on the XML
 files and the links to the CSS files in the generated HTML files assume
@@ -221,6 +222,14 @@ Brief description of each file in this folder:
 	options. For example `lgt2rst -s -- -q -p "My Project" -a "J. Doe" -v "1.12"`.
 	This use in non-interactive mode is currently only supported by the
 	`lgt2rst.sh` POSIX script.
+
+	Required software:  
+		* [Sphinx](https://www.sphinx-doc.org/) (tested with version 3.4.2)  
+		* [Pygments](https://pygments.org/) (tested with version 2.7.3)
+
+	Sphinx includes default themes. The Logtalk documentation uses the
+	[Read the Docs theme](https://github.com/readthedocs/sphinx_rtd_theme)
+	(tested with version 0.5.1).
 
 - `lgt2txt.sh` and `lgt2txt.js`  
 	Sample scripts to batch convert XML files to text files.
