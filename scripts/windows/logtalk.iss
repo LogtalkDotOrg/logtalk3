@@ -618,9 +618,10 @@ function NodeExePath: String;
 var
   NODE_PATH: String;
 begin
-  if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'NODE_PATH', NODE_PATH) then
-    if DirExists(NODE_PATH + '\tau-prolog') then
-      Result := 'C:\Program Files\nodejs\node.exe'
+  if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\', 'NODE_PATH', NODE_PATH) and DirExists(NODE_PATH + '\tau-prolog') then
+    Result := 'C:\Program Files\nodejs\node.exe'
+  else if RegQueryStringValue(HKCU, 'Environment', 'NODE_PATH', NODE_PATH) and DirExists(NODE_PATH + '\tau-prolog') then
+    Result := 'C:\Program Files\nodejs\node.exe'
   else
     Result := 'prolog_compiler_not_installed'
 end;
@@ -749,6 +750,7 @@ begin
       (SICStusExePath = 'prolog_compiler_not_installed') and
       (SWIConExePath = 'prolog_compiler_not_installed') and
       (SWIWinExePath = 'prolog_compiler_not_installed') and
+      (NodeExePath = 'prolog_compiler_not_installed') and
       (XSBExePath = 'prolog_compiler_not_installed') and
       (YAPConExePath = 'prolog_compiler_not_installed') and
       (YAPWinExePath = 'prolog_compiler_not_installed')
