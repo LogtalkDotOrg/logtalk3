@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:102:0,
+		version is 1:102:1,
 		author is 'Paulo Moura',
-		date is 2021-01-05,
+		date is 2021-01-06,
 		comment is 'Logtalk core (compiler and runtime) default message translations.'
 	]).
 
@@ -681,13 +681,13 @@
 
 	% naming guidelines messages
 
-	message_tokens(camel_case_entity_name(File, Lines, _Type, Entity)) -->
+	message_tokens(camel_case_entity_name(File, Lines, Type, Entity)) -->
 		['Entity name in camel case: ~w'-[Entity], nl],
-		message_context(File, Lines).
+		message_context(File, Lines, Type, Entity).
 
-	message_tokens(entity_name_with_digits_in_the_middle(File, Lines, _Type, Entity)) -->
+	message_tokens(entity_name_with_digits_in_the_middle(File, Lines, Type, Entity)) -->
 		['Entity name with digits in the middle: ~w'-[Entity], nl],
-		message_context(File, Lines).
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(camel_case_predicate_name(File, Lines, Type, Entity, Predicate)) -->
 		['Predicate name in camel case: ~w'-[Predicate], nl],

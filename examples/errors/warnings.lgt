@@ -615,10 +615,16 @@
 :- object(naming).
 
 	:- public(fooBar/0).
+	:- public(foo42bar/0).
 
 	:- private(nonTerminal//0).
+	:- private(non42terminal//0).
 
 	bazQux.
+
+	baz42qux.
+
+	bar(Corge42Grault, Corge42Grault).
 
 	quux(Corge_Grault, Corge_Grault).
 
@@ -633,6 +639,12 @@
 :- object(someObject).
 
 :- end_object.
+
+
+
+:- protocol(foo42bar).
+
+:- end_protocol.
 
 
 

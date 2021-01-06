@@ -74,7 +74,8 @@ checks.
 Examples
 --------
 
-* UPDATED: The `errors` example to illustrate the new disjunctions lint check.
+* UPDATED: The `errors` example to illustrate the new disjunctions lint check
+and the update entity, predicate, and variable names checks.
 
 * FIXED: Warnings with the new `disjunctions` flag for the `assumptions` and
 `searching` examples.
