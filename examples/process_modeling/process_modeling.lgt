@@ -20,7 +20,7 @@
 
 :- protocol(process).
 
-    :- public(domain/2).
+	:- public(domain/2).
 	:- mode(domain(-list(object_identifier), -callable), one).
 	:- info(domain/2, [
 		comment is 'Returns the process dependencies and its domain.',
@@ -30,7 +30,7 @@
 
 
 :- object(a(_A_),
-    implements(process)).
+	implements(process)).
 
 	:- uses(user, [(#>=)/2, (#=<)/2]).
 
@@ -42,7 +42,7 @@
 
 
 :- object(b(_B_),
-    implements(process)).
+	implements(process)).
 
 	:- uses(user, [(#>=)/2, (#=<)/2]).
 
@@ -55,21 +55,21 @@
 
 
 :- object(c(_C_),
-    implements(process)).
+	implements(process)).
 
 	:- uses(user, [(#>=)/2, (#=<)/2]).
 
 	% process "c" depends on processes "a" and "b"
 	% and must executed one more time than process
 	% "a" and  one more time than process "b"
-    domain([a(A), b(B)], (_C_ #= B + 1, _C_ #= A + 1)).
+	domain([a(A), b(B)], (_C_ #= B + 1, _C_ #= A + 1)).
 
 :- end_object.
 
 
 :- object(process_model).
 
-    :- public(solve/2).
+	:- public(solve/2).
 	:- mode(solve(+list(object_identifier), -list(object_identifier)), zero_or_more).
 	:- info(solve/2, [
 		comment is '.',
@@ -82,37 +82,37 @@
 		% experiment with commenting out the next goal
 		{fd_labeling(Variables)}.
 
-    constraints([], _).
-    constraints([Process| Processes], Dependencies) :-
-        Process::domain(Deps, Constraints),
+	constraints([], _).
+	constraints([Process| Processes], Dependencies) :-
+		Process::domain(Deps, Constraints),
 		% unify the variables shared between the two domain/2 arguments
-        unify(Deps, Dependencies),
+		unify(Deps, Dependencies),
 		% establish the constraints
-        {Constraints},
-        constraints(Processes, Dependencies).
+		{Constraints},
+		constraints(Processes, Dependencies).
 
 	unify([], _).
 	unify([Process| Processes], Dependencies) :-
 		list::memberchk(Process, Dependencies),
 		unify(Processes, Dependencies).
 
-    :- public(dependencies/2).
+	:- public(dependencies/2).
 	:- mode(dependencies(+list, -list), one).
 	:- info(dependencies/2, [
 		comment is 'Returns the processes dependencies.',
 		argnames is ['Processes', 'Dependencies']]).
 
-    dependencies(Processes, Dependencies) :-
-	    dependencies(Processes, Processes, Dependencies).
+	dependencies(Processes, Dependencies) :-
+		dependencies(Processes, Processes, Dependencies).
 
 	% this is just a quick hack for testing a simple example; it
 	% needs a graph algorithm that returns all processes reachable
 	% from a list of processes when following the dependency links
-    dependencies([], Dependencies, Dependencies).
-    dependencies([Process| Processes], Acc, Dependencies) :-
-        Process::domain(Others, _),
-        add(Others, Acc, Acc2),
-        dependencies(Processes, Acc2, Dependencies).
+	dependencies([], Dependencies, Dependencies).
+	dependencies([Process| Processes], Acc, Dependencies) :-
+		Process::domain(Others, _),
+		add(Others, Acc, Acc2),
+		dependencies(Processes, Acc2, Dependencies).
 
 	add([], All, All).
 	add([Process| Processes], Acc, All) :-

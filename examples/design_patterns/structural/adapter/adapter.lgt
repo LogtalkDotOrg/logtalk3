@@ -126,9 +126,9 @@
 :- object(iphone_recharger(_PHONE_),
 	implements(recharger)).
 
-    connect :-
-        _PHONE_::use_lightning,
-        _PHONE_::recharge.
+	connect :-
+		_PHONE_::use_lightning,
+		_PHONE_::recharge.
 
 :- end_object.
 
@@ -136,9 +136,9 @@
 :- object(android_recharger(_PHONE_),
 	implements(recharger)).
 
-    connect :-
-        _PHONE_::use_micro_usb,
-        _PHONE_::recharge.
+	connect :-
+		_PHONE_::use_micro_usb,
+		_PHONE_::recharge.
 
 :- end_object.
 
@@ -146,8 +146,8 @@
 :- object(iphone_micro_usb_recharger(_PHONE_),
 	implements(recharger)).
 
-    connect :-
+	connect :-
 		iphone_adapter(_PHONE_)::use_micro_usb,
-        iphone_adapter(_PHONE_)::recharge.
+		iphone_adapter(_PHONE_)::recharge.
 
 :- end_object.

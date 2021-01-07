@@ -87,7 +87,7 @@
 
 	:- public(play/0).
 	play :-
-        write('Playing using:'), nl,
+		write('Playing using:'), nl,
 		forall(
 			::room_(Room),
 			(write(Room), write(' - '), Room::describe)
