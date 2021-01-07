@@ -250,6 +250,11 @@ object-oriented nature introduces additional names and concepts that are
 not common when discussing logic programming semantics. We mention here
 the most relevant ones, notably those where semantics differ.</p>
 <dl class="simple">
+<dt><strong>arbitrary goals as directives</strong></dt><dd><p>Although not ISO Prolog Core standard compliant, several Prolog systems
+accept using arbitrary goal as directives. This is not supported in
+Logtalk source files. Always use an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> to wrap those
+goals.</p>
+</dd>
 <dt><strong>calling a predicate</strong></dt><dd><p>Sending a message to an object is similar to <em>calling a goal</em> with the
 difference that the actual predicate that is called is determined not
 just by the message <em>term</em> but also by the object receiving the message.
@@ -266,17 +271,33 @@ are required to have a static predicate being known by the runtime without
 it being also defined (so that calling it would fail instead of throwing a
 predicate existence error).</p>
 </dd>
-<dt><strong>encapsulation</strong></dt><dd><p>Logtalk enforces (predicate) encapsulation. In contrast, most Prolog
-module systems allow any module predicate to be called by using explicit
-qualification, even if not exported.</p>
+<dt><strong>debugging</strong></dt><dd><p>In most (if not all) Prolog systems, debugging support is a built-in
+feature made available using a set of built-in predicates like <code class="docutils literal notranslate"><span class="pre">trace/0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">spy/1</span></code>. But in Logtalk the default debugger is a regular application,
+implemented using a public reflection API. This means that the debugger
+must be explicitly loaded (either automatically from a <em>settings</em> file or
+from the top-level). It also means that the debugger can be easily extended
+or replaced by an alternative application.</p>
+</dd>
+<dt><strong>directive operators</strong></dt><dd><p>Some Prolog systems declare directive names as operators (e.g. <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>,
+<code class="docutils literal notranslate"><span class="pre">multifile</span></code>, …). This is not required by the ISO Prolog Core standard.
+It’s a practice that should be avoided as it makes code non-portable.</p>
+</dd>
+<dt><strong>encapsulation</strong></dt><dd><p>Logtalk enforces encapsulation of object predicates, generating a permission
+error when a predicate is not within the scope of the caller. In contrast,
+most Prolog module systems allow any module predicate to be called by using
+explicit qualification, even if not exported. Worse, some Prolog systems
+also allow defining clauses for a module predicate outside the module,
+without declaring the predicate as multifile, by simply writing clauses
+with explicit module-qualified heads.</p>
 </dd>
 <dt><strong>entity loading</strong></dt><dd><p>When using Prolog modules, <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code> (or equivalent) directives
 both load the module files and declare that the (implicitly or explicitly)
 imported predicates can be used with implicit module qualification.
 But Logtalk separates entity (object, protocol, category, or module)
 predicate <em>usage</em> declarations (via <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or its own <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>
-directives) from <em>loading</em> goals, which use a disciplined approach with
-<em>loader</em> files.</p>
+directives) from <em>loading</em> goals, which use an explicit and disciplined
+approach with <em>loader</em> files.</p>
 </dd>
 <dt><strong>flags scope</strong></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive is always local to the entity or
 source file that contains it. Only calls to the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code>
@@ -299,11 +320,11 @@ a module to try to export a predicate that it does not define.</p>
 </dd>
 <dt><strong>predicate loading conflicts</strong></dt><dd><p>Logtalk does not use predicate import/export semantics. Thus, there are
 never conflicts when loading entities (objects, protocols, or categories)
-that declare the same public predicates. In Prolog modules, attempting to
-load two modules that export the same predicate results in a conflict,
-usually a compilation error (this is specially problematic when the
-<cite>use_module/1</cite> directive is used; e.g. adding a new exported predicate
-can break applications that use the module but not the new predicate).</p>
+that declare the same public predicates. But attempting to load two Prolog
+modules that export the same predicate results in a conflict, usually a
+compilation error (this is specially problematic when the <cite>use_module/1</cite>
+directive is used; e.g. adding a new exported predicate can break
+applications that use the module but not the new predicate).</p>
 </dd>
 </dl>
 </div>

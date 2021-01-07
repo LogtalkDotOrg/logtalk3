@@ -53,6 +53,12 @@ object-oriented nature introduces additional names and concepts that are
 not common when discussing logic programming semantics. We mention here
 the most relevant ones, notably those where semantics differ.
 
+**arbitrary goals as directives**
+   Although not ISO Prolog Core standard compliant, several Prolog systems
+   accept using arbitrary goal as directives. This is not supported in
+   Logtalk source files. Always use an ``initialization/1`` to wrap those
+   goals.
+
 **calling a predicate**
    Sending a message to an object is similar to *calling a goal* with the
    difference that the actual predicate that is called is determined not
@@ -71,10 +77,28 @@ the most relevant ones, notably those where semantics differ.
    it being also defined (so that calling it would fail instead of throwing a
    predicate existence error).
 
+**debugging**
+   In most (if not all) Prolog systems, debugging support is a built-in
+   feature made available using a set of built-in predicates like ``trace/0``
+   and ``spy/1``. But in Logtalk the default debugger is a regular application,
+   implemented using a public reflection API. This means that the debugger
+   must be explicitly loaded (either automatically from a *settings* file or
+   from the top-level). It also means that the debugger can be easily extended
+   or replaced by an alternative application.
+
+**directive operators**
+   Some Prolog systems declare directive names as operators (e.g. ``dynamic``,
+   ``multifile``, ...). This is not required by the ISO Prolog Core standard.
+   It's a practice that should be avoided as it makes code non-portable.
+
 **encapsulation**
-   Logtalk enforces (predicate) encapsulation. In contrast, most Prolog
-   module systems allow any module predicate to be called by using explicit
-   qualification, even if not exported.
+   Logtalk enforces encapsulation of object predicates, generating a permission
+   error when a predicate is not within the scope of the caller. In contrast,
+   most Prolog module systems allow any module predicate to be called by using
+   explicit qualification, even if not exported. Worse, some Prolog systems
+   also allow defining clauses for a module predicate outside the module,
+   without declaring the predicate as multifile, by simply writing clauses
+   with explicit module-qualified heads.
 
 **entity loading**
    When using Prolog modules, ``use_module/1-2`` (or equivalent) directives
@@ -82,8 +106,8 @@ the most relevant ones, notably those where semantics differ.
    imported predicates can be used with implicit module qualification.
    But Logtalk separates entity (object, protocol, category, or module)
    predicate *usage* declarations (via ``uses/2`` or its own ``use_module/1-2``
-   directives) from *loading* goals, which use a disciplined approach with
-   *loader* files.
+   directives) from *loading* goals, which use an explicit and disciplined
+   approach with *loader* files.
 
 **flags scope**
    The ``set_logtalk_flag/2`` directive is always local to the entity or
@@ -110,11 +134,11 @@ the most relevant ones, notably those where semantics differ.
 **predicate loading conflicts**
    Logtalk does not use predicate import/export semantics. Thus, there are
    never conflicts when loading entities (objects, protocols, or categories)
-   that declare the same public predicates. In Prolog modules, attempting to
-   load two modules that export the same predicate results in a conflict,
-   usually a compilation error (this is specially problematic when the
-   `use_module/1` directive is used; e.g. adding a new exported predicate
-   can break applications that use the module but not the new predicate).
+   that declare the same public predicates. But attempting to load two Prolog
+   modules that export the same predicate results in a conflict, usually a
+   compilation error (this is specially problematic when the `use_module/1`
+   directive is used; e.g. adding a new exported predicate can break
+   applications that use the module but not the new predicate).
 
 .. _nomenclature_smalltalk:
 
