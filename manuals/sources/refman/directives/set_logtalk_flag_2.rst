@@ -33,7 +33,8 @@ the source file containing it. For global scope, use the corresponding
 :ref:`predicates_set_logtalk_flag_2` built-in predicate called from an
 :ref:`directives_initialization_1` directive. For a description of the
 predefined compiler flags, consult the :ref:`programming_flags`
-section in the User Manual.
+section in the User Manual. The directive affects the compilation of
+all terms that follow it within scope of the directive.
 
 Template and modes
 ------------------
@@ -72,4 +73,11 @@ Examples
 
        % generate events for messages sent from this object:
        :- set_logtalk_flag(events, allow).
+       ...
+
+       % turn off suspicious call lint checks for the next predicate:
+       :- set_logtalk_flag(suspicious_calls, silent).
+       foo :-
+           ...   
+       :- set_logtalk_flag(suspicious_calls, warning).
        ...
