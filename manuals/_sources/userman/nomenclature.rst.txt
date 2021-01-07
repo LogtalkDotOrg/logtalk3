@@ -48,10 +48,12 @@ the exact meaning of the names commonly used in Logtalk programming.
 Prolog nomenclature
 -------------------
 
-Being a superset of Prolog, Logtalk inherits its nomenclature. But its
-object-oriented nature introduces additional names and concepts that are
-not common when discussing logic programming semantics. We mention here
-the most relevant ones, notably those where semantics differ.
+Being a superset of Prolog, Logtalk inherits its nomenclature. But Logtalk
+also aims to fix several Prolog shortcomings, thus introducing new concepts
+or refining existing Prolog concepts. Logtalk object-oriented nature also
+introduces names and concepts that are not common when discussing logic
+programming semantics. We mention here the most relevant ones, notably
+those where semantics or common practice differ.
 
 **arbitrary goals as directives**
    Although not ISO Prolog Core standard compliant, several Prolog systems
@@ -76,6 +78,13 @@ the most relevant ones, notably those where semantics differ.
    are required to have a static predicate being known by the runtime without
    it being also defined (so that calling it would fail instead of throwing a
    predicate existence error).
+
+**compiling and loading source files**
+   Logtalk provides its own built-in predicates for compiling and loading
+   source files. It also provides convenient top-level interpreter shorthands
+   for these and other frequent operations. In general, the traditional
+   Prolog built-in predicates and top-level interpreter shorthands cannot
+   be used to load Logtalk source files.
 
 **debugging**
    In most (if not all) Prolog systems, debugging support is a built-in
