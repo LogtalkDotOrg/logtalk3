@@ -83,8 +83,8 @@ and the update entity, predicate, and variable names checks.
 * FIXED: Warnings with the new `disjunctions` flag for the `assumptions` and
 `searching` examples.
 
-* FIXED: Library alias for the `figures` example. Thanks to Jacinto Jacinto
-Dávila for the bug report.
+* FIXED: Library alias for the `figures` example. Thanks to Jacinto Dávila
+for the bug report.
 
 Contributions
 -------------
