@@ -32,13 +32,13 @@ Includes a file contents, which must be valid terms, at the place of
 occurrence of the directive. The file can be specified as a relative
 path, an absolute path, or using :term:`library notation` and is expanded
 as a source file name. Relative paths are interpreted as relative to the
-path of the file containing the directive.
+path of the file containing the directive. The file extension is optional.
 
 When using the :ref:`reflection API <reflection_reflection>`, predicates
 from an included file can be distinguished from predicates from the main
-file by looking for the ``include/1`` predicate declaration or predicate
-definition property. For the included predicates, the ``line_count/1``
-property stores the term line number in the included file.
+file by looking for the ``include/1`` predicate declaration property or
+the ``include/1`` predicate definition property. For the included predicates,
+the ``line_count/1`` property stores the term line number in the included file.
 
 This directive can be used as either a source file directive or an
 entity directive. As an entity directive, it can be used both in
