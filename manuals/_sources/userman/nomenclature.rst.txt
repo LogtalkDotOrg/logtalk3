@@ -67,13 +67,13 @@ the most relevant ones, notably those where semantics differ.
    for declared but undefined predicates fail. Messages or calls for unknown
    (i.e. not declared) predicates throw an error. Crucially, this semantics
    apply to both *static* and *dynamic* predicates. But in Prolog workarounds
-   are required to have a static predicate being know by the runtime without
-   if being also defined (so that calling it would fail instead of throwing a
+   are required to have a static predicate being known by the runtime without
+   it being also defined (so that calling it would fail instead of throwing a
    predicate existence error).
 
 **encapsulation**
    Logtalk enforces (predicate) encapsulation. In contrast, most Prolog
-   module systems allows any module predicate to be called by using explicit
+   module systems allow any module predicate to be called by using explicit
    qualification, even if not exported.
 
 **entity loading**
