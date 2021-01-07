@@ -401,7 +401,7 @@ assume a ``expansions_debug.lgt`` file with the contents:
 ::
 
    :- initialization(
-   	define_events(after, edcg, _, _, expansions_debug)
+       define_events(after, edcg, _, _, expansions_debug)
    ).
 
 
