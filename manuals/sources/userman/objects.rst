@@ -478,8 +478,8 @@ directive:
 
    :- initialization(Goal).
 
-The argument can be any valid Prolog or Logtalk goal, including a
-message to other object. For example:
+The argument can be any valid Logtalk goal. For example, a call to a
+local predicate:
 
 ::
 
@@ -495,7 +495,7 @@ message to other object. For example:
 
    :- end_object.
 
-Or:
+Or a message to another object:
 
 ::
 
@@ -506,9 +506,9 @@ Or:
 
    :- end_object.
 
-The initialization goal can also be a message to *self* in order to call
+Another common initialization goal is a message to *self* in order to call
 an inherited or imported predicate. For example, assuming that we have a
-``monitor`` category defining a ``reset/0`` predicate:
+``monitor`` category defining a ``reset/0`` predicate, we could write:
 
 ::
 
@@ -522,7 +522,7 @@ an inherited or imported predicate. For example, assuming that we have a
 
 Note, however, that descendant objects do not inherit initialization
 directives. In this context, *self* denotes the object that contains the
-directive. Also note that by initialization we do not necessarily mean
+directive. Also note that object initialization does not necessarily mean
 setting an object dynamic state.
 
 .. _objects_dynamic:

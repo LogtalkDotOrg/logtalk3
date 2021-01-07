@@ -45,8 +45,8 @@ loading time.
 
 Although technically a global ``initialization/1`` directive in a source
 file is a Prolog directive, calls to Logtalk built-in predicates from it
-are usually compiled to improve performance and providing better support
-for embedded applications.
+are usually compiled to improve portability, improve performance, and
+provide better support for embedded applications.
 
 .. warning::
 
