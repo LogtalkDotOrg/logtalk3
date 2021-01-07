@@ -47,6 +47,9 @@ too buggy to be usable.
 Documentation
 -------------
 
+* ADDED: Handbook nomenclature section highlighting the differences between
+Logtalk and Prolog.
+
 * ADDED: Handbook documentation for the new `disjunctions` flag.
 
 * IMPROVED: Documentation of the `logtalk::loaded_file_property/2` predicate.

@@ -20,12 +20,11 @@
 Nomenclature
 ============
 
-Depending on your Object-oriented Programming background (or lack of it), you
-may find Logtalk nomenclature either familiar or at odds with the terms used
-in other languages. In addition, being a superset of Prolog, terms such as
-*predicate* and *method* are often used interchangeably. Logtalk inherits
-most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
-the most popular OOP language nowadays.
+Depending on your logic programming and object-oriented programming background
+(or lack of it), you may find Logtalk nomenclature either familiar or at odds
+with the terms used in other languages. In addition, being a superset of Prolog,
+terms such as *predicate* and *method* are often used interchangeably. Logtalk
+inherits most of its nomenclature from Prolog and Smalltalk.
 
 Note that the same terms can have different meanings in different languages.
 A good example is *class*. The support for meta-classes in e.g. Smalltalk
@@ -37,10 +36,85 @@ and *this*) but that can also mean different concepts in other languages.
 Always be aware of these differences and be cautious with assumptions carried
 from other programming languages.
 
-In this section, we map nomenclatures from popular OOP languages such as
-Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The Logtalk
-distribution includes several examples of how to implement common concepts
-found in other languages, complementing the information in this section.
+In this section, we map nomenclatures from Prolog and popular OOP languages
+such as Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The
+Logtalk distribution includes several examples of how to implement common
+concepts found in other languages, complementing the information in this
+section. There is also an extensive :ref:`glossary <glossary>` providing
+the exact meaning of the names commonly used in Logtalk programming.
+
+.. _nomenclature_prolog:
+
+Prolog nomenclature
+-------------------
+
+Being a superset of Prolog, Logtalk inherits its nomenclature. But its
+object-oriented nature introduces additional names and concepts that are
+not common when discussing logic programming semantics. We mention here
+the most relevant ones, notably those where semantics differ.
+
+**calling a predicate**
+   Sending a message to an object is similar to *calling a goal* with the
+   difference that the actual predicate that is called is determined not
+   just by the message *term* but also by the object receiving the message.
+   This is also different from calling a Prolog module predicate: a message
+   may result e.g. in calling a predicate inherited by the object but calling
+   a module predicate requires the predicate to exist in (or be reexported by)
+   the module.
+
+**closed world assumption semantics**
+   Logtalk provides clear closed world assumption semantics: messages or calls
+   for declared but undefined predicates fail. Messages or calls for unknown
+   (i.e. not declared) predicates throw an error. Crucially, this semantics
+   apply to both *static* and *dynamic* predicates. But in Prolog workarounds
+   are required to have a static predicate being know by the runtime without
+   if being also defined (so that calling it would fail instead of throwing a
+   predicate existence error).
+
+**encapsulation**
+   Logtalk enforces (predicate) encapsulation. In contrast, most Prolog
+   module systems allows any module predicate to be called by using explicit
+   qualification, even if not exported.
+
+**entity loading**
+   When using Prolog modules, ``use_module/1-2`` (or equivalent) directives
+   both load the module files and declare that the (implicitly or explicitly)
+   imported predicates can be used with implicit module qualification.
+   But Logtalk separates entity (object, protocol, category, or module)
+   predicate *usage* declarations (via ``uses/2`` or its own ``use_module/1-2``
+   directives) from *loading* goals, which use a disciplined approach with
+   *loader* files.
+
+**flags scope**
+   The ``set_logtalk_flag/2`` directive is always local to the entity or
+   source file that contains it. Only calls to the ``set_logtalk_flag/2``
+   predicate set the global default value for a flag. This distinction is
+   lacking in Prolog (where directives usually have a global scope) and
+   Prolog modules (where some flags are local to modules in some systems
+   and global in other systems).
+
+**meta-predicate call semantics**
+   Logtalk provides consistent meta-predicate call semantics: meta-arguments
+   are always called in the meta-predicate *calling context*. This contrasts
+   with Prolog module meta-predicates where the semantics of implicitly
+   qualified calls is different from explicitly qualified calls.
+
+**predicate declaration**
+   Logtalk provides a clear distinction between *declaring* a predicate and
+   *defining* a predicate. This is a fundamental requirement for the concept
+   of *protocol* (aka interface) in Logtalk: we must be able to *declare* a
+   predicate without necessarily *defining* it. This clear distinction is
+   missing in Prolog and Prolog modules. Notably, it's a compiler error for
+   a module to try to export a predicate that it does not define.
+
+**predicate loading conflicts**
+   Logtalk does not use predicate import/export semantics. Thus, there are
+   never conflicts when loading entities (objects, protocols, or categories)
+   that declare the same public predicates. In Prolog modules, attempting to
+   load two modules that export the same predicate results in a conflict,
+   usually a compilation error (this is specially problematic when the
+   `use_module/1` directive is used; e.g. adding a new exported predicate
+   can break applications that use the module but not the new predicate).
 
 .. _nomenclature_smalltalk:
 

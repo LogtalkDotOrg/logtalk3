@@ -18,6 +18,8 @@
 Glossary
 ========
 
+.. _glossary:
+
 .. glossary::
    :sorted:
 

@@ -110,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Nomenclature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prolog-nomenclature">Prolog nomenclature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#smalltalk-nomenclature">Smalltalk nomenclature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c-nomenclature">C++ nomenclature</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#java-nomenclature">Java nomenclature</a></li>
@@ -222,12 +223,11 @@
             
   <div class="section" id="nomenclature">
 <span id="nomenclature-nomenclature"></span><h1>Nomenclature<a class="headerlink" href="#nomenclature" title="Permalink to this headline">¶</a></h1>
-<p>Depending on your Object-oriented Programming background (or lack of it), you
-may find Logtalk nomenclature either familiar or at odds with the terms used
-in other languages. In addition, being a superset of Prolog, terms such as
-<em>predicate</em> and <em>method</em> are often used interchangeably. Logtalk inherits
-most of its nomenclature from Smalltalk, arguably (and somehow sadly) not
-the most popular OOP language nowadays.</p>
+<p>Depending on your logic programming and object-oriented programming background
+(or lack of it), you may find Logtalk nomenclature either familiar or at odds
+with the terms used in other languages. In addition, being a superset of Prolog,
+terms such as <em>predicate</em> and <em>method</em> are often used interchangeably. Logtalk
+inherits most of its nomenclature from Prolog and Smalltalk.</p>
 <p>Note that the same terms can have different meanings in different languages.
 A good example is <em>class</em>. The support for meta-classes in e.g. Smalltalk
 translates to a concept of class that is different is key aspects from the
@@ -237,10 +237,76 @@ same concept is found under different names in some languages (e.g. <em>self</em
 and <em>this</em>) but that can also mean different concepts in other languages.
 Always be aware of these differences and be cautious with assumptions carried
 from other programming languages.</p>
-<p>In this section, we map nomenclatures from popular OOP languages such as
-Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The Logtalk
-distribution includes several examples of how to implement common concepts
-found in other languages, complementing the information in this section.</p>
+<p>In this section, we map nomenclatures from Prolog and popular OOP languages
+such as Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The
+Logtalk distribution includes several examples of how to implement common
+concepts found in other languages, complementing the information in this
+section. There is also an extensive <a class="reference internal" href="../glossary.html#id1"><span class="std std-ref">glossary</span></a> providing
+the exact meaning of the names commonly used in Logtalk programming.</p>
+<div class="section" id="prolog-nomenclature">
+<span id="nomenclature-prolog"></span><h2>Prolog nomenclature<a class="headerlink" href="#prolog-nomenclature" title="Permalink to this headline">¶</a></h2>
+<p>Being a superset of Prolog, Logtalk inherits its nomenclature. But its
+object-oriented nature introduces additional names and concepts that are
+not common when discussing logic programming semantics. We mention here
+the most relevant ones, notably those where semantics differ.</p>
+<dl class="simple">
+<dt><strong>calling a predicate</strong></dt><dd><p>Sending a message to an object is similar to <em>calling a goal</em> with the
+difference that the actual predicate that is called is determined not
+just by the message <em>term</em> but also by the object receiving the message.
+This is also different from calling a Prolog module predicate: a message
+may result e.g. in calling a predicate inherited by the object but calling
+a module predicate requires the predicate to exist in (or be reexported by)
+the module.</p>
+</dd>
+<dt><strong>closed world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed world assumption semantics: messages or calls
+for declared but undefined predicates fail. Messages or calls for unknown
+(i.e. not declared) predicates throw an error. Crucially, this semantics
+apply to both <em>static</em> and <em>dynamic</em> predicates. But in Prolog workarounds
+are required to have a static predicate being know by the runtime without
+if being also defined (so that calling it would fail instead of throwing a
+predicate existence error).</p>
+</dd>
+<dt><strong>encapsulation</strong></dt><dd><p>Logtalk enforces (predicate) encapsulation. In contrast, most Prolog
+module systems allows any module predicate to be called by using explicit
+qualification, even if not exported.</p>
+</dd>
+<dt><strong>entity loading</strong></dt><dd><p>When using Prolog modules, <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code> (or equivalent) directives
+both load the module files and declare that the (implicitly or explicitly)
+imported predicates can be used with implicit module qualification.
+But Logtalk separates entity (object, protocol, category, or module)
+predicate <em>usage</em> declarations (via <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or its own <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>
+directives) from <em>loading</em> goals, which use a disciplined approach with
+<em>loader</em> files.</p>
+</dd>
+<dt><strong>flags scope</strong></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive is always local to the entity or
+source file that contains it. Only calls to the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code>
+predicate set the global default value for a flag. This distinction is
+lacking in Prolog (where directives usually have a global scope) and
+Prolog modules (where some flags are local to modules in some systems
+and global in other systems).</p>
+</dd>
+<dt><strong>meta-predicate call semantics</strong></dt><dd><p>Logtalk provides consistent meta-predicate call semantics: meta-arguments
+are always called in the meta-predicate <em>calling context</em>. This contrasts
+with Prolog module meta-predicates where the semantics of implicitly
+qualified calls is different from explicitly qualified calls.</p>
+</dd>
+<dt><strong>predicate declaration</strong></dt><dd><p>Logtalk provides a clear distinction between <em>declaring</em> a predicate and
+<em>defining</em> a predicate. This is a fundamental requirement for the concept
+of <em>protocol</em> (aka interface) in Logtalk: we must be able to <em>declare</em> a
+predicate without necessarily <em>defining</em> it. This clear distinction is
+missing in Prolog and Prolog modules. Notably, it’s a compiler error for
+a module to try to export a predicate that it does not define.</p>
+</dd>
+<dt><strong>predicate loading conflicts</strong></dt><dd><p>Logtalk does not use predicate import/export semantics. Thus, there are
+never conflicts when loading entities (objects, protocols, or categories)
+that declare the same public predicates. In Prolog modules, attempting to
+load two modules that export the same predicate results in a conflict,
+usually a compilation error (this is specially problematic when the
+<cite>use_module/1</cite> directive is used; e.g. adding a new exported predicate
+can break applications that use the module but not the new predicate).</p>
+</dd>
+</dl>
+</div>
 <div class="section" id="smalltalk-nomenclature">
 <span id="nomenclature-smalltalk"></span><h2>Smalltalk nomenclature<a class="headerlink" href="#smalltalk-nomenclature" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk name originates from a combination of the Prolog and Smalltalk
