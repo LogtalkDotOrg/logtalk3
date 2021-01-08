@@ -255,18 +255,18 @@ found elsewhere in this Handbook.</p>
 <dl class="simple">
 <dt><strong>arbitrary goals as directives</strong></dt><dd><p>Although not ISO Prolog Core standard compliant, several Prolog systems
 accept using arbitrary goal as directives. This is not supported in
-Logtalk source files. Always use an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> to wrap those
-goals. This ensure that any initialization goals, which often have
-side-effects, are only called if the source file is successfully
-compiled and loaded.</p>
+Logtalk source files. Always use an <a class="reference internal" href="../refman/directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a>
+directive to wrap those goals. This ensure that any initialization goals,
+which often have side-effects, are only called if the source file is
+successfully compiled and loaded.</p>
 </dd>
-<dt><strong>calling a predicate</strong></dt><dd><p>Sending a message to an object is similar to <em>calling a goal</em> with the
-difference that the actual predicate that is called is determined not
+<dt><strong>calling a predicate</strong></dt><dd><p>Sending a <a class="reference internal" href="../glossary.html#term-message"><span class="xref std std-term">message</span></a> to an object is similar to <em>calling a goal</em> with
+the difference that the actual predicate that is called is determined not
 just by the message <em>term</em> but also by the object receiving the message.
 This is also different from calling a Prolog module predicate: a message
-may result e.g. in calling a predicate inherited by the object but calling
-a module predicate requires the predicate to exist in (or be reexported by)
-the module.</p>
+may result e.g. in calling a predicate <a class="reference internal" href="../glossary.html#term-inheritance"><span class="xref std std-term">inherited</span></a> by
+the object but calling a module predicate requires the predicate to exist
+in (or be reexported by) the module.</p>
 </dd>
 <dt><strong>closed world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed world assumption semantics: messages or calls
 for declared but undefined predicates fail. Messages or calls for unknown
@@ -276,19 +276,21 @@ are required to have a static predicate being known by the runtime without
 it being also defined (so that calling it would fail instead of throwing a
 predicate existence error).</p>
 </dd>
-<dt><strong>compiling and loading source files</strong></dt><dd><p>Logtalk provides its own built-in predicates for compiling and loading
-source files. It also provides convenient top-level interpreter shorthands
+<dt><strong>compiling and loading source files</strong></dt><dd><p>Logtalk provides its own built-in predicates for
+<a class="reference internal" href="../refman/predicates/compiling_predicates.html#compiling-predicates"><span class="std std-ref">compiling and loading</span></a> source files. It also
+provides convenient top-level interpreter <a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">shorthands</span></a>
 for these and other frequent operations. In general, the traditional
 Prolog built-in predicates and top-level interpreter shorthands cannot
 be used to load Logtalk source files.</p>
 </dd>
 <dt><strong>debugging</strong></dt><dd><p>In most (if not all) Prolog systems, debugging support is a built-in
 feature made available using a set of built-in predicates like <code class="docutils literal notranslate"><span class="pre">trace/0</span></code>
-and <code class="docutils literal notranslate"><span class="pre">spy/1</span></code>. But in Logtalk the default debugger is a regular application,
-implemented using a public reflection API. This means that the debugger
-must be explicitly loaded (either automatically from a <em>settings</em> file or
-from the top-level). It also means that the debugger can be easily extended
-or replaced by an alternative application.</p>
+and <code class="docutils literal notranslate"><span class="pre">spy/1</span></code>. But in Logtalk the <a class="reference internal" href="debugging.html#debugging-debugging"><span class="std std-ref">default debugger</span></a>
+is a regular application, implemented using a public
+<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a> API. This means that the debugger
+must be explicitly loaded (either automatically from a <a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>
+or from the top-level). It also means that the debugger can be easily
+extended or replaced by an alternative application.</p>
 </dd>
 <dt><strong>directive operators</strong></dt><dd><p>Some Prolog systems declare directive names as operators (e.g. <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>,
 <code class="docutils literal notranslate"><span class="pre">multifile</span></code>, …). This is not required by the ISO Prolog Core standard.
@@ -306,35 +308,40 @@ with explicit module-qualified heads.</p>
 both load the module files and declare that the (implicitly or explicitly)
 imported predicates can be used with implicit module qualification.
 But Logtalk separates entity (object, protocol, category, or module)
-predicate <em>usage</em> declarations (via <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or its own <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>
+predicate <em>usage</em> declarations (via <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or its own
+<a class="reference internal" href="../refman/directives/use_module_1.html#directives-use-module-1"><span class="std std-ref">use_module/1</span></a> and <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a>
 directives) from <em>loading</em> goals, which use an explicit and disciplined
 approach with <em>loader</em> files.</p>
 </dd>
-<dt><strong>flags scope</strong></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> <strong>directive</strong> is always local to the entity or
-source file that contains it. Only calls to the <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code>
-<strong>predicate</strong> set the global default value for a flag. This distinction
-is lacking in Prolog (where directives usually have a global scope) and
-Prolog modules (where some flags are local to modules in some systems
-and global in other systems).</p>
+<dt><strong>flags scope</strong></dt><dd><p>The <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> <strong>directive</strong> is always local
+to the entity or source file that contains it. Only calls to the
+<a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> <strong>predicate</strong> set the global default
+value for a flag. This distinction is lacking in Prolog (where directives
+usually have a global scope) and Prolog modules (where some flags are
+local to modules in some systems and global in other systems).</p>
 </dd>
-<dt><strong>meta-predicate call semantics</strong></dt><dd><p>Logtalk provides consistent meta-predicate call semantics: meta-arguments
-are always called in the meta-predicate <em>calling context</em>. This contrasts
-with Prolog module meta-predicates where the semantics of implicitly
-qualified calls is different from explicitly qualified calls.</p>
+<dt><strong>meta-predicate call semantics</strong></dt><dd><p>Logtalk provides consistent <a class="reference internal" href="../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a> call semantics:
+meta-arguments are always called in the meta-predicate
+calling context. This contrasts with Prolog module meta-predicates
+where the semantics of implicitly qualified calls is different from
+explicitly qualified calls.</p>
 </dd>
 <dt><strong>operators scope</strong></dt><dd><p>Operators declared inside an entity (object, protocol, or category) are
 local to the entity.</p>
 </dd>
 <dt><strong>predicates scope</strong></dt><dd><p>In plain Prolog, all predicates are visible. In a Prolog module, a
 predicate can be exported or local. In Logtalk, a predicate can be
-<em>public</em>, <em>protected</em>, <em>private</em>, or <em>local</em>.</p>
+<a class="reference internal" href="../glossary.html#term-public-predicate"><span class="xref std std-term">public</span></a>, <a class="reference internal" href="../glossary.html#term-protected-predicate"><span class="xref std std-term">protected</span></a>,
+<a class="reference internal" href="../glossary.html#term-private-predicate"><span class="xref std std-term">private</span></a>, or <a class="reference internal" href="../glossary.html#term-local-predicate"><span class="xref std std-term">local</span></a>.</p>
 </dd>
-<dt><strong>predicate declaration</strong></dt><dd><p>Logtalk provides a clear distinction between <em>declaring</em> a predicate and
-<em>defining</em> a predicate. This is a fundamental requirement for the concept
-of <em>protocol</em> (aka interface) in Logtalk: we must be able to <em>declare</em> a
-predicate without necessarily <em>defining</em> it. This clear distinction is
-missing in Prolog and Prolog modules. Notably, it’s a compiler error for
-a module to try to export a predicate that it does not define.</p>
+<dt><strong>predicate declaration</strong></dt><dd><p>Logtalk provides a clear distinction between
+<a class="reference internal" href="../glossary.html#term-predicate-declaration"><span class="xref std std-term">declaring</span></a> a predicate
+and <a class="reference internal" href="../glossary.html#term-predicate-definition"><span class="xref std std-term">defining</span></a> a predicate. This is a
+fundamental requirement for the concept of <a class="reference internal" href="../glossary.html#term-protocol"><span class="xref std std-term">protocol</span></a> (aka interface)
+in Logtalk: we must be able to <em>declare</em> a predicate without necessarily
+<em>defining</em> it. This clear distinction is missing in Prolog and Prolog
+modules. Notably, it’s a compiler error for a module to try to export a
+predicate that it does not define.</p>
 </dd>
 <dt><strong>predicate loading conflicts</strong></dt><dd><p>Logtalk does not use predicate import/export semantics. Thus, there are
 never conflicts when loading entities (objects, protocols, or categories)

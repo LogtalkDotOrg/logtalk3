@@ -59,19 +59,19 @@ found elsewhere in this Handbook.
 **arbitrary goals as directives**
    Although not ISO Prolog Core standard compliant, several Prolog systems
    accept using arbitrary goal as directives. This is not supported in
-   Logtalk source files. Always use an ``initialization/1`` to wrap those
-   goals. This ensure that any initialization goals, which often have
-   side-effects, are only called if the source file is successfully
-   compiled and loaded.
+   Logtalk source files. Always use an :ref:`directives_initialization_1`
+   directive to wrap those goals. This ensure that any initialization goals,
+   which often have side-effects, are only called if the source file is
+   successfully compiled and loaded.
 
 **calling a predicate**
-   Sending a message to an object is similar to *calling a goal* with the
-   difference that the actual predicate that is called is determined not
+   Sending a :term:`message` to an object is similar to *calling a goal* with
+   the difference that the actual predicate that is called is determined not
    just by the message *term* but also by the object receiving the message.
    This is also different from calling a Prolog module predicate: a message
-   may result e.g. in calling a predicate inherited by the object but calling
-   a module predicate requires the predicate to exist in (or be reexported by)
-   the module.
+   may result e.g. in calling a predicate :term:`inherited <inheritance>` by
+   the object but calling a module predicate requires the predicate to exist
+   in (or be reexported by) the module.
 
 **closed world assumption semantics**
    Logtalk provides clear closed world assumption semantics: messages or calls
@@ -83,8 +83,9 @@ found elsewhere in this Handbook.
    predicate existence error).
 
 **compiling and loading source files**
-   Logtalk provides its own built-in predicates for compiling and loading
-   source files. It also provides convenient top-level interpreter shorthands
+   Logtalk provides its own built-in predicates for
+   :ref:`compiling and loading <compiling_predicates>` source files. It also
+   provides convenient top-level interpreter :ref:`shorthands <predicates_logtalk_load_1>`
    for these and other frequent operations. In general, the traditional
    Prolog built-in predicates and top-level interpreter shorthands cannot
    be used to load Logtalk source files.
@@ -92,11 +93,12 @@ found elsewhere in this Handbook.
 **debugging**
    In most (if not all) Prolog systems, debugging support is a built-in
    feature made available using a set of built-in predicates like ``trace/0``
-   and ``spy/1``. But in Logtalk the default debugger is a regular application,
-   implemented using a public reflection API. This means that the debugger
-   must be explicitly loaded (either automatically from a *settings* file or
-   from the top-level). It also means that the debugger can be easily extended
-   or replaced by an alternative application.
+   and ``spy/1``. But in Logtalk the :ref:`default debugger <debugging_debugging>`
+   is a regular application, implemented using a public
+   :ref:`reflection <reflection_reflection>` API. This means that the debugger
+   must be explicitly loaded (either automatically from a :term:`settings file`
+   or from the top-level). It also means that the debugger can be easily
+   extended or replaced by an alternative application.
 
 **directive operators**
    Some Prolog systems declare directive names as operators (e.g. ``dynamic``,
@@ -117,23 +119,25 @@ found elsewhere in this Handbook.
    both load the module files and declare that the (implicitly or explicitly)
    imported predicates can be used with implicit module qualification.
    But Logtalk separates entity (object, protocol, category, or module)
-   predicate *usage* declarations (via ``uses/2`` or its own ``use_module/1-2``
+   predicate *usage* declarations (via :ref:`directives_uses_2` or its own
+   :ref:`directives_use_module_1` and :ref:`directives_use_module_2`
    directives) from *loading* goals, which use an explicit and disciplined
    approach with *loader* files.
 
 **flags scope**
-   The ``set_logtalk_flag/2`` **directive** is always local to the entity or
-   source file that contains it. Only calls to the ``set_logtalk_flag/2``
-   **predicate** set the global default value for a flag. This distinction
-   is lacking in Prolog (where directives usually have a global scope) and
-   Prolog modules (where some flags are local to modules in some systems
-   and global in other systems).
+   The :ref:`directives_set_logtalk_flag_2` **directive** is always local
+   to the entity or source file that contains it. Only calls to the
+   :ref:`predicates_set_logtalk_flag_2` **predicate** set the global default
+   value for a flag. This distinction is lacking in Prolog (where directives
+   usually have a global scope) and Prolog modules (where some flags are
+   local to modules in some systems and global in other systems).
 
 **meta-predicate call semantics**
-   Logtalk provides consistent meta-predicate call semantics: meta-arguments
-   are always called in the meta-predicate *calling context*. This contrasts
-   with Prolog module meta-predicates where the semantics of implicitly
-   qualified calls is different from explicitly qualified calls.
+   Logtalk provides consistent :term:`meta-predicate` call semantics:
+   meta-arguments are always called in the meta-predicate
+   calling context. This contrasts with Prolog module meta-predicates
+   where the semantics of implicitly qualified calls is different from
+   explicitly qualified calls.
 
 **operators scope**
    Operators declared inside an entity (object, protocol, or category) are
@@ -142,15 +146,18 @@ found elsewhere in this Handbook.
 **predicates scope**
    In plain Prolog, all predicates are visible. In a Prolog module, a
    predicate can be exported or local. In Logtalk, a predicate can be
-   *public*, *protected*, *private*, or *local*.
+   :term:`public <public predicate>`, :term:`protected <protected predicate>`,
+   :term:`private <private predicate>`, or :term:`local <local predicate>`.
 
 **predicate declaration**
-   Logtalk provides a clear distinction between *declaring* a predicate and
-   *defining* a predicate. This is a fundamental requirement for the concept
-   of *protocol* (aka interface) in Logtalk: we must be able to *declare* a
-   predicate without necessarily *defining* it. This clear distinction is
-   missing in Prolog and Prolog modules. Notably, it's a compiler error for
-   a module to try to export a predicate that it does not define.
+   Logtalk provides a clear distinction between
+   :term:`declaring <predicate declaration>` a predicate
+   and :term:`defining <predicate definition>` a predicate. This is a
+   fundamental requirement for the concept of :term:`protocol` (aka interface)
+   in Logtalk: we must be able to *declare* a predicate without necessarily
+   *defining* it. This clear distinction is missing in Prolog and Prolog
+   modules. Notably, it's a compiler error for a module to try to export a
+   predicate that it does not define.
 
 **predicate loading conflicts**
    Logtalk does not use predicate import/export semantics. Thus, there are
