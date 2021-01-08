@@ -119,10 +119,10 @@ those where semantics or common practice differ.
    approach with *loader* files.
 
 **flags scope**
-   The ``set_logtalk_flag/2`` directive is always local to the entity or
+   The ``set_logtalk_flag/2`` **directive** is always local to the entity or
    source file that contains it. Only calls to the ``set_logtalk_flag/2``
-   predicate set the global default value for a flag. This distinction is
-   lacking in Prolog (where directives usually have a global scope) and
+   **predicate** set the global default value for a flag. This distinction
+   is lacking in Prolog (where directives usually have a global scope) and
    Prolog modules (where some flags are local to modules in some systems
    and global in other systems).
 
@@ -477,7 +477,7 @@ Logtalk equivalents.
 Python nomenclature
 -------------------
 
-The list that follows relates the commonly used Java Python concepts with
+The list that follows relates the commonly used Python concepts with
 their Logtalk equivalents.
 
 **abstract class**
