@@ -532,12 +532,12 @@ their Logtalk equivalents.
    library provides implementations of several loop predicates.
 
 **metaclass**
-   Logtalk objects can play the role of metaclasses by instantiating other
+   Logtalk objects play the role of metaclasses when instantiated by
    objects that play the role of classes.
 
 **method**
    Logtalk uses the terms *method* and *predicate* interchangeably.
-   Predicates canc be defined in objects (and categories). The value
+   Predicates can be defined in objects (and categories). The value
    of *self* is implicit unlike in Python where it is the first parameter
    of any method.
 
