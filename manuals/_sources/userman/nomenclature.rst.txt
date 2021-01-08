@@ -53,13 +53,16 @@ also aims to fix several Prolog shortcomings, thus introducing new concepts
 or refining existing Prolog concepts. Logtalk object-oriented nature also
 introduces names and concepts that are not common when discussing logic
 programming semantics. We mention here the most relevant ones, notably
-those where semantics or common practice differ.
+those where semantics or common practice differ. Further details can be
+found elsewhere in this Handbook.
 
 **arbitrary goals as directives**
    Although not ISO Prolog Core standard compliant, several Prolog systems
    accept using arbitrary goal as directives. This is not supported in
    Logtalk source files. Always use an ``initialization/1`` to wrap those
-   goals.
+   goals. This ensure that any initialization goals, which often have
+   side-effects, are only called if the source file is successfully
+   compiled and loaded.
 
 **calling a predicate**
    Sending a message to an object is similar to *calling a goal* with the
@@ -132,6 +135,15 @@ those where semantics or common practice differ.
    with Prolog module meta-predicates where the semantics of implicitly
    qualified calls is different from explicitly qualified calls.
 
+**operators scope**
+   Operators declared inside an entity (object, protocol, or category) are
+   local to the entity.
+
+**predicates scope**
+   In plain Prolog, all predicates are visible. In a Prolog module, a
+   predicate can be exported or local. In Logtalk, a predicate can be
+   *public*, *protected*, *private*, or *local*.
+
 **predicate declaration**
    Logtalk provides a clear distinction between *declaring* a predicate and
    *defining* a predicate. This is a fundamental requirement for the concept
@@ -145,7 +157,7 @@ those where semantics or common practice differ.
    never conflicts when loading entities (objects, protocols, or categories)
    that declare the same public predicates. But attempting to load two Prolog
    modules that export the same predicate results in a conflict, usually a
-   compilation error (this is specially problematic when the `use_module/1`
+   compilation error (this is specially problematic when the ``use_module/1``
    directive is used; e.g. adding a new exported predicate can break
    applications that use the module but not the new predicate).
 

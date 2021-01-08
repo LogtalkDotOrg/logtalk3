@@ -250,12 +250,15 @@ also aims to fix several Prolog shortcomings, thus introducing new concepts
 or refining existing Prolog concepts. Logtalk object-oriented nature also
 introduces names and concepts that are not common when discussing logic
 programming semantics. We mention here the most relevant ones, notably
-those where semantics or common practice differ.</p>
+those where semantics or common practice differ. Further details can be
+found elsewhere in this Handbook.</p>
 <dl class="simple">
 <dt><strong>arbitrary goals as directives</strong></dt><dd><p>Although not ISO Prolog Core standard compliant, several Prolog systems
 accept using arbitrary goal as directives. This is not supported in
 Logtalk source files. Always use an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> to wrap those
-goals.</p>
+goals. This ensure that any initialization goals, which often have
+side-effects, are only called if the source file is successfully
+compiled and loaded.</p>
 </dd>
 <dt><strong>calling a predicate</strong></dt><dd><p>Sending a message to an object is similar to <em>calling a goal</em> with the
 difference that the actual predicate that is called is determined not
@@ -319,6 +322,13 @@ are always called in the meta-predicate <em>calling context</em>. This contrasts
 with Prolog module meta-predicates where the semantics of implicitly
 qualified calls is different from explicitly qualified calls.</p>
 </dd>
+<dt><strong>operators scope</strong></dt><dd><p>Operators declared inside an entity (object, protocol, or category) are
+local to the entity.</p>
+</dd>
+<dt><strong>predicates scope</strong></dt><dd><p>In plain Prolog, all predicates are visible. In a Prolog module, a
+predicate can be exported or local. In Logtalk, a predicate can be
+<em>public</em>, <em>protected</em>, <em>private</em>, or <em>local</em>.</p>
+</dd>
 <dt><strong>predicate declaration</strong></dt><dd><p>Logtalk provides a clear distinction between <em>declaring</em> a predicate and
 <em>defining</em> a predicate. This is a fundamental requirement for the concept
 of <em>protocol</em> (aka interface) in Logtalk: we must be able to <em>declare</em> a
@@ -330,7 +340,7 @@ a module to try to export a predicate that it does not define.</p>
 never conflicts when loading entities (objects, protocols, or categories)
 that declare the same public predicates. But attempting to load two Prolog
 modules that export the same predicate results in a conflict, usually a
-compilation error (this is specially problematic when the <cite>use_module/1</cite>
+compilation error (this is specially problematic when the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code>
 directive is used; e.g. adding a new exported predicate can break
 applications that use the module but not the new predicate).</p>
 </dd>
