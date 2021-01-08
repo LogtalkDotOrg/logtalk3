@@ -483,7 +483,8 @@ their Logtalk equivalents.
 **abstract class**
    Logtalk uses a different definition of abstract class: a class that
    does not inherit a method for creating new instances. Notably, the
-   presence of *abstract methods* does not a class abstract.
+   presence of *abstract methods* (i.e. predicates that are declared
+   but not defined) does not make a class abstract.
 
 **abstract method**
    Logtalk uses the term *predicate* interchangeably with *method*. Predicates
