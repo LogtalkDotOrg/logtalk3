@@ -585,3 +585,9 @@ Glossary
       bound output arguments). Typically, a predicate may not be steadfast
       when output argument unifications can occur before a cut in a predicate
       clause.
+
+   top-level interpreter shorthand
+      Aliases for frequently used built-in predicates such as
+      :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_make_1`.
+      These shorthands are **not** part of the Logtalk language and should
+      only be used at the top-level interpreter.

@@ -52,6 +52,8 @@ Logtalk and Prolog.
 
 * ADDED: Handbook documentation for the new `disjunctions` flag.
 
+* ADDED: Handbook glossary entry for "top-level interpreter shorthand".
+
 * IMPROVED: Documentation of the `logtalk::loaded_file_property/2` predicate.
 
 Library
