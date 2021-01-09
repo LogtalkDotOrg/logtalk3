@@ -432,7 +432,8 @@ documenting your predicates.</p>
 <p>Some predicates may have arguments that will be called as goals or interpreted
 as <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> that will be used for constructing goals. To
 ensure that these goals will be executed in the correct context (i.e. in the
-<em>calling context</em>, not in the meta-predicate <em>definition context</em>) we need to
+<a class="reference internal" href="../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the meta-predicate
+<a class="reference internal" href="../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>) we need to
 use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
 <span class="p">:- </span><span class="k">meta_predicate</span>(map(<span class="m">2</span>, <span class="o">*</span>, <span class="o">*</span>)).

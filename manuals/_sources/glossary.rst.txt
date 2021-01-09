@@ -414,6 +414,20 @@ Glossary
    primary predicate declaration
       See :term:`multifile predicate`.
 
+   predicate calling context
+      The object or category from within a predicate is called (either
+      directly or using a control construct such as a message sending
+      control construct).
+
+   predicate definition context
+      The object or category that contains the definition (i.e. clauses)
+      for a predicate.
+
+   predicate execution context
+      The implicit arguments (including :term:`sender`, :term:`self`,
+      and :term:`this`) required for the correct execution of a
+      predicate call.
+
    multifile predicate
       A predicate whose clauses can be defined in multiple
       :term:`entities <entity>` and :term:`source files <source file>`.

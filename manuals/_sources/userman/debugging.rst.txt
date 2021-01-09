@@ -38,8 +38,9 @@ This translates to a different, although similar, set of debugging features
 when compared with some of the more sophisticated Prolog debuggers. Second,
 debugging is only possible for entities compiled in debug mode. When
 compiling an entity in debug mode, Logtalk decorates clauses with source
-information to allow tracing of the goal execution. Third, implementation
-of spy points allows the user to specify the execution context for entering
+information to allow tracing of the goal execution. Third, the implementation
+of spy points allows the user to specify the
+:term:`execution context <predicate execution context>` for entering
 the debugger. This feature is a consequence of the encapsulation of
 predicates inside objects.
 

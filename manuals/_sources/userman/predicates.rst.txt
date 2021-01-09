@@ -218,7 +218,8 @@ Meta-predicate directive
 Some predicates may have arguments that will be called as goals or interpreted
 as :term:`closures <closure>` that will be used for constructing goals. To
 ensure that these goals will be executed in the correct context (i.e. in the
-*calling context*, not in the meta-predicate *definition context*) we need to
+:term:`calling context <predicate calling context>`, not in the meta-predicate
+:term:`definition context <predicate definition context>`) we need to
 use the :ref:`directives_meta_predicate_1` directive. For example:
 
 ::

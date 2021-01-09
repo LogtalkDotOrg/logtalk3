@@ -40,8 +40,9 @@ loading time.
 .. note::
 
    Categories and protocols cannot contain ``initialization/1`` directives
-   as the initialization goals would lack a complete execution context that
-   is only available for objects.
+   as the initialization goals would lack a complete
+   :term:`execution context <predicate execution context>` that is only
+   available for objects.
 
 Although technically a global ``initialization/1`` directive in a source
 file is a Prolog directive, calls to Logtalk built-in predicates from it

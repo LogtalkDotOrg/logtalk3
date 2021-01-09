@@ -51,8 +51,9 @@ appended to the closure in order to construct the corresponding meta-call.
 Meta-arguments that will be called using the ``bagof/3`` or ``setof/3``
 predicates and that can thus be existentially-qualified are represented
 by the atom ``^``. Normal arguments are represented by the atom ``*``.
-Meta-arguments are always called in the meta-predicate *calling context*,
-not in the meta-predicate *definition context*.
+Meta-arguments are always called in the meta-predicate
+:term:`calling context <predicate calling context>`, not in the
+meta-predicate :term:`definition context <predicate definition context>`.
 
 Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling

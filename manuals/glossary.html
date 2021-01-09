@@ -506,6 +506,10 @@ Predicate aliases can be used to solve inheritance conflicts and
 to improve code clarity by using alternative names that are more
 meaningful in the calling context.</p>
 </dd>
+<dt id="term-predicate-calling-context">predicate calling context</dt><dd><p>The object or category from within a predicate is called (either
+directly or using a control construct such as a message sending
+control construct).</p>
+</dd>
 <dt id="term-predicate-declaration">predicate declaration</dt><dd><p>A predicate declaration is composed by a set of predicate directives,
 which must include ar least a
 <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>.</p>
@@ -514,8 +518,15 @@ which must include ar least a
 Predicate definitions can be overriden or specialized in descendant
 entities.</p>
 </dd>
+<dt id="term-predicate-definition-context">predicate definition context</dt><dd><p>The object or category that contains the definition (i.e. clauses)
+for a predicate.</p>
+</dd>
 <dt id="term-predicate-directive">predicate directive</dt><dd><p>A directive that specifies a predicate property that affects how
 predicates are called or compiled.</p>
+</dd>
+<dt id="term-predicate-execution-context">predicate execution context</dt><dd><p>The implicit arguments (including <a class="reference internal" href="#term-sender"><span class="xref std std-term">sender</span></a>, <a class="reference internal" href="#term-self"><span class="xref std std-term">self</span></a>,
+and <a class="reference internal" href="#term-this"><span class="xref std std-term">this</span></a>) required for the correct execution of a
+predicate call.</p>
 </dd>
 <dt id="term-predicate-scope-container">predicate scope container</dt><dd><p>The object that inherits a <a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a> from an
 imported <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> or an implemented <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</p>
