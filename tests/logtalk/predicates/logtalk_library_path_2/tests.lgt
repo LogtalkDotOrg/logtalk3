@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2017-01-05,
+		date is 2021-01-10,
 		comment is 'Unit tests for the logtalk_library_path/2 built-in predicate.'
 	]).
 
@@ -45,6 +45,15 @@
 			logtalk_library_path(Library, _),
 			(	logtalk::expand_library_path(Library, ExpandedPath),
 				sub_atom(ExpandedPath, _, 1, 0, '/')
+			)
+		).
+
+	% library alias paths must exist
+	test(logtalk_library_path_2_03) :-
+		forall(
+			logtalk_library_path(Library, _),
+			(	logtalk::expand_library_path(Library, ExpandedPath),
+				os::directory_exists(ExpandedPath)
 			)
 		).
 
