@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on January 7, 2021
+%  Last updated on January 10, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -157,7 +157,6 @@ logtalk_library_path(buckets, threads('buckets/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(carengines, examples('carengines/')).
 logtalk_library_path(cascade, examples('cascade/')).
-logtalk_library_path(categories, examples('categories/')).
 logtalk_library_path(cc, examples('cc/')).
 logtalk_library_path(checkpoint, threads('checkpoint/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
@@ -190,7 +189,6 @@ logtalk_library_path(encodings, examples('encodings/')).
 logtalk_library_path(engines, examples('engines/')).
 logtalk_library_path(errors, examples('errors/')).
 logtalk_library_path(expansion, examples('expansion/')).
-logtalk_library_path(experiments, examples('experiments/')).
 logtalk_library_path(family, examples('family/')).
 logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
@@ -220,7 +218,7 @@ logtalk_library_path(lo_planner, examples('lo/planner/')).
 logtalk_library_path(lo_travellers, examples('lo/travellers/')).
 logtalk_library_path(localizations, examples('localizations/')).
 logtalk_library_path(logic, examples('logic/')).
-logtalk_library_path(logs, examples('logging/')).
+logtalk_library_path(logs, examples('logs/')).
 logtalk_library_path(lpa_faults, examples('lpa/faults/')).
 logtalk_library_path(lpa_timetables, examples('lpa/timetables/')).
 logtalk_library_path(metaclasses, examples('metaclasses/')).

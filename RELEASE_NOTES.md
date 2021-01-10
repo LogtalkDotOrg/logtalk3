@@ -90,6 +90,10 @@ and the update entity, predicate, and variable names checks.
 * FIXED: Library alias for the `figures` example. Thanks to Jacinto Dávila
 for the bug report.
 
+* FIXED: Deleted library aliases for non existing examples (due to renaming).
+
+* FIXED: Library alias for the `logs` example.
+
 Contributions
 -------------
 
