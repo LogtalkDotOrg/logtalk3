@@ -1140,6 +1140,25 @@ HTML files for easy browsing. For example:
 - https://plugins.jenkins.io/tap/
 
 
+Generating Allure reports
+-------------------------
+
+A shell script is provided for generating Allure reports. This requires
+exporting test results in xUnit XML format. A simple usage example:
+
+	$ logtalk_tester -p gnu -f xunit
+	...
+	$ logtalk_allure_report
+
+The `logtalk_allure_report` supports command-line options to set the
+tests directory (i.e. the directory where the `logtalk_tester` script
+was run), the directory where to save the test results (i.e. the xUnit
+reports) for generating the report, and the directory where the report
+is to be saved. The script supports saving the history of past test
+runs. In this case, a persistant location for the results and report
+directories must be used.
+
+
 Exporting code coverage results in XML format
 ---------------------------------------------
 

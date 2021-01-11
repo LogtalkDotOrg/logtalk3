@@ -148,6 +148,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#utility-predicates">Utility predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-allure-reports">Generating Allure reports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-code-coverage-results-in-xml-format">Exporting code coverage results in XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#minimizing-test-results-output">Minimizing test results output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
@@ -1392,6 +1393,23 @@ HTML files for easy browsing. For example:</p>
 <li><p><a class="reference external" href="https://github.com/Quobject/tap-to-html">https://github.com/Quobject/tap-to-html</a></p></li>
 <li><p><a class="reference external" href="https://plugins.jenkins.io/tap/">https://plugins.jenkins.io/tap/</a></p></li>
 </ul>
+</div>
+<div class="section" id="generating-allure-reports">
+<h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Permalink to this headline">¶</a></h2>
+<p>A shell script is provided for generating Allure reports. This requires
+exporting test results in xUnit XML format. A simple usage example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -f xunit
+...
+$ logtalk_allure_report
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report</span></code> supports command-line options to set the
+tests directory (i.e. the directory where the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script
+was run), the directory where to save the test results (i.e. the xUnit
+reports) for generating the report, and the directory where the report
+is to be saved. The script supports saving the history of past test
+runs. In this case, a persistant location for the results and report
+directories must be used.</p>
 </div>
 <div class="section" id="exporting-code-coverage-results-in-xml-format">
 <h2>Exporting code coverage results in XML format<a class="headerlink" href="#exporting-code-coverage-results-in-xml-format" title="Permalink to this headline">¶</a></h2>

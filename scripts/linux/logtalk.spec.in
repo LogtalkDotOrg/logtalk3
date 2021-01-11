@@ -70,6 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/lgt2md
 /usr/local/bin/lgt2rst
 /usr/local/bin/lgt2txt
+/usr/local/bin/logtalk_allure_report
 /usr/local/bin/logtalk_tester
 /usr/local/bin/logtalk_doclet
 /usr/local/bin/logtalk_version_select
@@ -101,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/lgt2md.1.gz
 /usr/local/share/man/man1/lgt2rst.1.gz
 /usr/local/share/man/man1/lgt2txt.1.gz
+/usr/local/share/man/man1/logtalk_allure_report.1.gz
 /usr/local/share/man/man1/logtalk_backend_select.1.gz
 /usr/local/share/man/man1/logtalk_tester.1.gz
 /usr/local/share/man/man1/logtalk_doclet.1.gz

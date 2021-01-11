@@ -72,6 +72,8 @@ ProLog.
 Tools
 -----
 
+* ADDED: Shell script for generating Allure reports (`logtalk_allure_report`).
+
 * UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
 lint check and for the updated entity, predicate, and variable names lint
 checks.

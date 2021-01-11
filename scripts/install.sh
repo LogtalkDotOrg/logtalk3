@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on January 3, 2021
+##   Last updated on January 11, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -119,6 +119,7 @@ ln -sf "$directory" logtalk
 mkdir -p "$prefix/bin"
 cd "$prefix/bin" || exit 1
 
+ln -sf ../share/logtalk/scripts/logtalk_allure_report.sh logtalk_allure_report
 ln -sf ../share/logtalk/scripts/logtalk_tester.sh logtalk_tester
 ln -sf ../share/logtalk/scripts/logtalk_doclet.sh logtalk_doclet
 ln -sf ../share/logtalk/scripts/logtalk_user_setup.sh logtalk_user_setup
