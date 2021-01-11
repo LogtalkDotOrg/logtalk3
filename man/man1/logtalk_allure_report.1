@@ -1,0 +1,56 @@
+.TH logtalk_allure_report 1 "January 11, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+
+.SH NAME
+logtalk_allure_report \- Logtalk script for generating Allure reports
+
+.SH SYNOPSIS
+.B logtalk_allure_report -v
+.br
+.B logtalk_allure_report
+[\fB-t \fItests\fR]
+[\fB-i \fIresults\fR]
+[\fB-o \fIreport\fR]
+[\fB-m \fImax\fR]
+.br
+.B logtalk_allure_report -h
+
+.SH DESCRIPTION
+\fBlogtalk_allure_report\fR is a script for generating Allure reports.
+
+.SH OPTIONS
+.TP
+.BI \-v
+Print script version.
+.TP
+.BI \-t
+The directory containing the tests (i.e. the directory where the \fIlogtalk_tester\fR script was run.
+.TP
+.BI \-i
+Directory where to save the test results (i.e. the xUnit reports) for generating the report.
+.TP
+.BI \-o
+Directory where the report is to be saved.
+.TP
+.BI \-m
+Maximum number of reports to keep in history.
+.TP
+.B \-h
+Provide help on script usage.
+
+.SH "EXIT STATUS"
+.TP
+.B 0
+Allure report successfully created.
+
+.SH "SEE ALSO"
+The Allure website at http://allure.qatools.ru
+.PP
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2021 Paulo Moura.

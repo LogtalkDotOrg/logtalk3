@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.2"
 	exit 0
 }
 
@@ -34,6 +34,7 @@ print_version() {
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
+max=7
 
 usage_help()
 {
@@ -41,7 +42,7 @@ usage_help()
 	echo "This script generates Allure reports."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-t logs] [-i results] [-o report]"
+	echo "  $(basename "$0") [-t logs] [-i results] [-o report] [-m max]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -50,17 +51,19 @@ usage_help()
 	echo "  -t tests directory (default is $tests)"
 	echo "  -i results directory (default is $results)"
 	echo "  -o report directory (default is $reports)"
+	echo "  -m maximum number of reports in history (default is $max)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vt:i:o:h" option
+while getopts "vt:i:o:m:h" option
 do
 	case $option in
 		v) print_version;;
 		t) t_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		o) o_arg="$OPTARG";;
+		m) m_arg="$OPTARG";;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -81,6 +84,10 @@ fi
 if [ "$o_arg" != "" ] ; then
 	mkdir -p "$o_arg"
 	reports="$o_arg"
+fi
+
+if [ "$m_arg" != "" ] ; then
+	max="$m_arg"
 fi
 
 if [ ! -d "$results" ] ; then
