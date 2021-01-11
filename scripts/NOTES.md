@@ -81,9 +81,9 @@ also available in the Logtalk website.
 	strongly recommended
 
 - `logtalk_allure_report.sh`  
-	shell script for creating Allure reports (http://allure.qatools.ru);
-	called after running the `logtalk_tester.sh` shell script (using the
-	`-f xunit` command-line option)
+	shell script for creating Allure reports (http://allure.qatools.ru); tested
+	with Allure 2.13.8; this script should be called after running the
+	`logtalk_tester.sh` shell script (using the `-f xunit` command-line option)
 
 - `logtalk_doclet.sh`  
 	shell script for automating running doclets in the current directory and

@@ -15,7 +15,7 @@ logtalk_allure_report \- Logtalk script for generating Allure reports
 .B logtalk_allure_report -h
 
 .SH DESCRIPTION
-\fBlogtalk_allure_report\fR is a script for generating Allure reports. Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR command-kine option.
+\fBlogtalk_allure_report\fR is a script for generating Allure reports. Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR command-line option.
 
 .SH OPTIONS
 .TP
@@ -41,6 +41,18 @@ Provide help on script usage.
 .TP
 .B 0
 Allure report successfully created.
+
+.SH EXAMPLES
+.TP
+Run all tests on the current directory and sub-directories using the GNU Prolog backend, with results in the required xUnit format, generate and open an Allure report:
+\fBlogtalk_tester -p gnu -f xunit\fR
+.br
+\fBlogtalk_allure_report\fR
+.br
+\fBallure open\fR
+
+.SH IMPLEMENTATION NOTES
+Tested using Allure 2.13.8.
 
 .SH "SEE ALSO"
 The Allure website at http://allure.qatools.ru
