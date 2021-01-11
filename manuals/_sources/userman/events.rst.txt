@@ -130,10 +130,9 @@ The monitor status of an object can be dynamically changed in runtime
    a monitor (the monitor status of an object is not stored in the
    object).
 
-The execution of actions, defined in a monitor, associated to each event, never affects the term that denotes the message involved
-   In other words, if the message contains unbound variables,
-   these are not affected by the acting of monitors associated to the
-   event.
+Event handlers cannot modify the event arguments
+   Notably, if the message contains unbound variables, these cannot be
+   bound by the calls to the monitor event handlers.
 
 .. _events_generation:
 

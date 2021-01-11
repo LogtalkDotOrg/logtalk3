@@ -58,6 +58,9 @@ shorthand.
 
 * IMPROVED: Documentation of the `logtalk::loaded_file_property/2` predicate.
 
+* FIXED: Overflow line the Event-driven programming chapter in the PDF version
+of the Handbook. Thanks to Jacinto Dávila for the bug report.
+
 Library
 -------
 

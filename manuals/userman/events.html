@@ -324,9 +324,8 @@ by the available computing resources.</p>
 a monitor (the monitor status of an object is not stored in the
 object).</p>
 </dd>
-<dt>The execution of actions, defined in a monitor, associated to each event, never affects the term that denotes the message involved</dt><dd><p>In other words, if the message contains unbound variables,
-these are not affected by the acting of monitors associated to the
-event.</p>
+<dt>Event handlers cannot modify the event arguments</dt><dd><p>Notably, if the message contains unbound variables, these cannot be
+bound by the calls to the monitor event handlers.</p>
 </dd>
 </dl>
 </div>
