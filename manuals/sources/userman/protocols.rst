@@ -282,12 +282,12 @@ The following protocol properties are supported:
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the protocol definition (if
    applicable)
-``public(Predicates)``
-   List of public predicates declared by the protocol
-``protected(Predicates)``
-   List of protected predicates declared by the protocol
-``private(Predicates)``
-   List of private predicates declared by the protocol
+``public(Resources)``
+   List of public predicates and operators declared by the protocol
+``protected(Resources)``
+   List of protected predicates and operators declared by the protocol
+``private(Resources)``
+   List of private predicates and operators declared by the protocol
 ``declares(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a predicate declared by the protocol
 ``alias(Predicate, Properties)``

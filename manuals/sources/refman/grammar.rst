@@ -640,6 +640,10 @@ Predicate directives
 | parameter_variable ::=
 |    *_variable_*
 
+| entity_resources_list ::=
+|    predicate_indicator_list \|
+|    operator_list
+
 | predicate_indicator_term ::=
 |    *predicate_indicator* \|
 |    predicate_indicator_sequence \|
@@ -981,9 +985,9 @@ Entity properties
 |    "``lines(``" *integer* "``,``" *integer* "``)``" \|
 |    "``events``" \|
 |    "``source_data``" \|
-|    "``public(``" predicate_indicator_list "``)``" \|
-|    "``protected(``" predicate_indicator_list "``)``" \|
-|    "``private(``" predicate_indicator_list "``)``" \|
+|    "``public(``" entity_resources_list "``)``" \|
+|    "``protected(``" entity_resources_list "``)``" \|
+|    "``private(``" entity_resources_list "``)``" \|
 |    "``declares(``" predicate_indicator "``,``" predicate_declaration_property_list "``)``" \|
 |    "``defines(``" predicate_indicator "``,``" predicate_definition_property_list "``)``" \|
 |    "``includes(``" predicate_indicator "``,``" object_identifier \| category_identifier "``,``" predicate_definition_property_list "``)``" \|
@@ -1011,9 +1015,9 @@ Entity properties
 |    "``source_data``" \|
 |    "``complements(``" "``allow``" \| "``restrict``" "``)``" \|
 |    "``complements``" \|
-|    "``public(``" predicate_indicator_list "``)``" \|
-|    "``protected(``" predicate_indicator_list "``)``" \|
-|    "``private(``" predicate_indicator_list "``)``" \|
+|    "``public(``" entity_resources_list "``)``" \|
+|    "``protected(``" entity_resources_list "``)``" \|
+|    "``private(``" entity_resources_list "``)``" \|
 |    "``declares(``" predicate_indicator "``,``" predicate_declaration_property_list "``)``" \|
 |    "``defines(``" predicate_indicator "``,``" predicate_definition_property_list "``)``" \|
 |    "``includes(``" predicate_indicator "``,``" object_identifier \| category_identifier "``,``" predicate_definition_property_list "``)``" \|
@@ -1036,9 +1040,9 @@ Entity properties
 |    "``file(``" *atom* "``)``" \|
 |    "``file(``" *atom* "``,``" *atom* "``)``" \|
 |    "``lines(``" *integer* "``,``" *integer* "``)``" \|
-|    "``public(``" predicate_indicator_list "``)``" \|
-|    "``protected(``" predicate_indicator_list "``)``" \|
-|    "``private(``" predicate_indicator_list "``)``" \|
+|    "``public(``" entity_resources_list "``)``" \|
+|    "``protected(``" entity_resources_list "``)``" \|
+|    "``private(``" entity_resources_list "``)``" \|
 |    "``declares(``" predicate_indicator "``,``" predicate_declaration_property_list "``)``" \|
 |    "``alias(``" predicate_indicator "``,``" predicate_alias_property_list "``)``" \|
 |    "``debugging``"

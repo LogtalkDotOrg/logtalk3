@@ -729,12 +729,12 @@ The following object properties are supported:
    permission (``allow`` or ``restrict``)
 ``complements``
    The object supports complementing categories
-``public(Predicates)``
-   List of public predicates declared by the object
-``protected(Predicates)``
-   List of protected predicates declared by the object
-``private(Predicates)``
-   List of private predicates declared by the object
+``public(Resources)``
+   List of public predicates and operators declared by the object
+``protected(Resources)``
+   List of protected predicates and operators declared by the object
+``private(Resources)``
+   List of private predicates and operators declared by the object
 ``declares(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a predicate declared by the object
 ``defines(Predicate, Properties)``

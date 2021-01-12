@@ -1144,6 +1144,13 @@ Prolog Core standard. Terminal symbols are represented in a
 </div>
 </div>
 <div class="line-block">
+<div class="line">entity_resources_list ::=</div>
+<div class="line-block">
+<div class="line">predicate_indicator_list |</div>
+<div class="line">operator_list</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line">predicate_indicator_term ::=</div>
 <div class="line-block">
 <div class="line"><em>predicate_indicator</em> |</div>
@@ -1709,9 +1716,9 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">events</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">defines(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">includes(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
@@ -1742,9 +1749,9 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">source_data</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">complements(</span></code>” “<code class="docutils literal notranslate"><span class="pre">allow</span></code>” | “<code class="docutils literal notranslate"><span class="pre">restrict</span></code>” “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">complements</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">defines(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">includes(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” object_identifier | category_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_definition_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
@@ -1770,9 +1777,9 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">file(</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>atom</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">lines(</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">,</span></code>” <em>integer</em> “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” predicate_indicator_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">public(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">protected(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">private(</span></code>” entity_resources_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">declares(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_declaration_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">alias(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>” predicate_alias_property_list “<code class="docutils literal notranslate"><span class="pre">)</span></code>” |</div>
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">debugging</span></code>”</div>

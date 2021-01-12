@@ -516,12 +516,12 @@ The following category properties are supported:
    Messages sent from the category generate events
 ``source_data``
    Source data available for the category
-``public(Predicates)``
-   List of public predicates declared by the category
-``protected(Predicates)``
-   List of protected predicates declared by the category
-``private(Predicates)``
-   List of private predicates declared by the category
+``public(Resources)``
+   List of public predicates and operators declared by the category
+``protected(Resources)``
+   List of protected predicates and operators declared by the category
+``private(Resources)``
+   List of private predicates and operators declared by the category
 ``declares(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a predicate declared by the category
 ``defines(Predicate, Properties)``

@@ -61,6 +61,9 @@ shorthand.
 * FIXED: Overflow line the Event-driven programming chapter in the PDF version
 of the Handbook. Thanks to Jacinto Dávila for the bug report.
 
+* FIXED: Handbook documentation on entity properties and the entity property
+predicates for the `public/1`, `protected/1`, and `private/1` properties.
+
 Library
 -------
 
