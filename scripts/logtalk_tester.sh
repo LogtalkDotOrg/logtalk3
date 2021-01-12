@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 3, 2021
+##   Last updated on January 12, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.11"
+	echo "$(basename "$0") 2.12"
 	exit 0
 }
 
@@ -82,6 +82,7 @@ fi
 format_default_goal="true"
 format_tap_goal="logtalk_load(lgtunit(tap_report))"
 format_xunit_goal="logtalk_load(lgtunit(xunit_report))"
+format_xunit_net_v2_goal="logtalk_load(lgtunit(xunit_net_v2_report))"
 format_goal=$format_default_goal
 
 coverage_default_goal="true"
@@ -222,7 +223,7 @@ usage_help()
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
-	echo "     (valid values are default, tap, and xunit)"
+	echo "     (valid values are default, tap, xunit, and xunit_net_v2)"
 	echo "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
@@ -395,6 +396,9 @@ elif [ "$f_arg" == "tap" ] ; then
 elif [ "$f_arg" == "xunit" ] ; then
 	format='xunit'
 	format_goal=$format_xunit_goal
+elif [ "$f_arg" == "xunit_net_v2" ] ; then
+	format='xunit_net_v2'
+	format_goal=$format_xunit_net_v2_goal
 elif [ "$f_arg" != "" ] ; then
 	echo "Error! Unknown format: $f_arg" >&2
 	usage_help

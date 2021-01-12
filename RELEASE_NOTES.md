@@ -80,6 +80,8 @@ Tools
 
 * ADDED: Shell script for generating Allure reports (`logtalk_allure_report`).
 
+* ADDED: Support for exporting test results using the xUnit.net v2 XML format.
+
 * UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
 lint check and for the updated entity, predicate, and variable names lint
 checks.

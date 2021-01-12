@@ -1,0 +1,77 @@
+.. index:: xunit_net_v2_report
+.. _xunit_net_v2_report/0:
+
+.. rst-class:: right
+
+**object**
+
+``xunit_net_v2_report``
+=======================
+
+Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2021-01-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
+
+| **Remarks:**
+
+   - Usage: Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="message_cache_/1"> </div>
+
+.. index:: message_cache_/1
+.. _xunit_net_v2_report/0::message_cache_/1:
+
+``message_cache_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of messages emitted by the lgtunit tool when running tests.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``message_cache_(Message)``
+| **Mode and number of proofs:**
+|    ``message_cache_(?callable)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
