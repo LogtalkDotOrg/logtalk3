@@ -1344,10 +1344,11 @@ predicates.</p>
 <div class="section" id="exporting-test-results-in-xunit-xml-format">
 <h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Permalink to this headline">¶</a></h2>
 <p>To output test results in the xUnit XML format (from JUnit; see e.g.
-<a class="reference external" href="https://github.com/windyroad/JUnit-Schema">https://github.com/windyroad/JUnit-Schema</a>), simply load the
-<code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code> file before running the tests. This file defines an
-object, <code class="docutils literal notranslate"><span class="pre">xunit_output</span></code>, that intercepts and rewrites unit test
-execution messages, converting them to the xUnit XML format.</p>
+<a class="reference external" href="https://github.com/windyroad/JUnit-Schema">https://github.com/windyroad/JUnit-Schema</a> or
+<a class="reference external" href="https://llg.cubic.org/docs/junit/">https://llg.cubic.org/docs/junit/</a>), simply load the <code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code>
+file before running the tests. This file defines an object,
+<code class="docutils literal notranslate"><span class="pre">xunit_output</span></code>, that intercepts and rewrites unit test execution
+messages, converting them to the xUnit XML format.</p>
 <p>To export the test results to a file using the xUnit XML format, simply
 load the <code class="docutils literal notranslate"><span class="pre">xunit_report.lgt</span></code> file before running the tests. A file
 named <code class="docutils literal notranslate"><span class="pre">xunit_report.xml</span></code> will be created in the same directory as the

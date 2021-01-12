@@ -1083,10 +1083,10 @@ Exporting test results in xUnit XML format
 ------------------------------------------
 
 To output test results in the xUnit XML format (from JUnit; see e.g.
-https://github.com/windyroad/JUnit-Schema), simply load the
-`xunit_output.lgt` file before running the tests. This file defines an
-object, `xunit_output`, that intercepts and rewrites unit test execution
-messages, converting them to the xUnit XML format.
+https://github.com/windyroad/JUnit-Schema or https://llg.cubic.org/docs/junit/),
+simply load the `xunit_output.lgt` file before running the tests. This file
+defines an object, `xunit_output`, that intercepts and rewrites unit test
+execution messages, converting them to the xUnit XML format.
 
 To export the test results to a file using the xUnit XML format, simply
 load the `xunit_report.lgt` file before running the tests. A file named
