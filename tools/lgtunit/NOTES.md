@@ -1082,9 +1082,10 @@ predicates.
 Exporting test results in xUnit XML format
 ------------------------------------------
 
-To output test results in the xUnit XML format (from JUnit), simply load
-the `xunit_output.lgt` file before running the tests. This file defines
-an object, `xunit_output`, that intercepts and rewrites unit test execution
+To output test results in the xUnit XML format (from JUnit; see e.g.
+https://github.com/windyroad/JUnit-Schema), simply load the
+`xunit_output.lgt` file before running the tests. This file defines an
+object, `xunit_output`, that intercepts and rewrites unit test execution
 messages, converting them to the xUnit XML format.
 
 To export the test results to a file using the xUnit XML format, simply
@@ -1094,7 +1095,8 @@ defining the tests. When running a set of test suites as a single unified
 suite (using the `run_test_sets/1` predicate), the single xUnit report is
 created in the directory of the first test suite object in the set.
 
-To use instead the xUnit.net v2 XML format, load either the
+To use in alternative the xUnit.net v2 XML format
+(https://xunit.net/docs/format-xml-v2), load either the
 `xunit_net_v2_output.lgt` file or the `xunit_net_v2_report.lgt` file.
 
 When using the `logtalk_tester` automation script, use either the `-f xunit`

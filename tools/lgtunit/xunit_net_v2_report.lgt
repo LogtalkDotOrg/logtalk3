@@ -122,8 +122,31 @@
 			 	total-Tests, errors-Errors, failures-Failures, skipped-Skipped
 			]
 		),
+		write_errors_element,
 		write_collection_element,
 		write_xml_close_tag(assembly).
+
+	write_errors_element :-
+		\+ message_cache_(broken_step(_, _, _)),
+		\+ message_cache_(failed_step(_, _)),
+		!.
+	write_errors_element :-
+		write_xml_open_tag(errors, []),
+		message_cache_(broken_step(Step, _Object, Error)),
+		write_xml_open_tag(error, [type-error, name-Step]),
+		write_xml_open_tag(failure, []),
+		write_xml_cdata_element('stack-trace', [], Error),
+		write_xml_close_tag(failure),
+		write_xml_close_tag(error),
+		fail.
+	write_errors_element :-
+		message_cache_(failed_step(Step, _Object)),
+		write_xml_open_tag(error, [type-failure, name-Step]),
+		write_xml_empty_tag(failure, []),
+		write_xml_close_tag(error),
+		fail.
+	write_errors_element :-
+		write_xml_close_tag(errors).
 
 	write_collection_element :-
 		collection_stats(Tests, Errors, Failures, Skipped),

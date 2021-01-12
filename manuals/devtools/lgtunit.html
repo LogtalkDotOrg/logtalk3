@@ -1343,10 +1343,11 @@ predicates.</p>
 </div>
 <div class="section" id="exporting-test-results-in-xunit-xml-format">
 <h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Permalink to this headline">¶</a></h2>
-<p>To output test results in the xUnit XML format (from JUnit), simply load
-the <code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code> file before running the tests. This file
-defines an object, <code class="docutils literal notranslate"><span class="pre">xunit_output</span></code>, that intercepts and rewrites unit
-test execution messages, converting them to the xUnit XML format.</p>
+<p>To output test results in the xUnit XML format (from JUnit; see e.g.
+<a class="reference external" href="https://github.com/windyroad/JUnit-Schema">https://github.com/windyroad/JUnit-Schema</a>), simply load the
+<code class="docutils literal notranslate"><span class="pre">xunit_output.lgt</span></code> file before running the tests. This file defines an
+object, <code class="docutils literal notranslate"><span class="pre">xunit_output</span></code>, that intercepts and rewrites unit test
+execution messages, converting them to the xUnit XML format.</p>
 <p>To export the test results to a file using the xUnit XML format, simply
 load the <code class="docutils literal notranslate"><span class="pre">xunit_report.lgt</span></code> file before running the tests. A file
 named <code class="docutils literal notranslate"><span class="pre">xunit_report.xml</span></code> will be created in the same directory as the
@@ -1354,7 +1355,8 @@ object defining the tests. When running a set of test suites as a single
 unified suite (using the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate), the single
 xUnit report is created in the directory of the first test suite object
 in the set.</p>
-<p>To use instead the xUnit.net v2 XML format, load either the
+<p>To use in alternative the xUnit.net v2 XML format
+(<a class="reference external" href="https://xunit.net/docs/format-xml-v2">https://xunit.net/docs/format-xml-v2</a>), load either the
 <code class="docutils literal notranslate"><span class="pre">xunit_net_v2_output.lgt</span></code> file or the <code class="docutils literal notranslate"><span class="pre">xunit_net_v2_report.lgt</span></code>
 file.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, use either the
