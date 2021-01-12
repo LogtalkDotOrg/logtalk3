@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 11, 2021
+##   Last updated on January 12, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.2"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
@@ -70,7 +70,6 @@ do
 done
 
 shift $((OPTIND - 1))
-args=("$@")
 
 if [ "$t_arg" != "" ] ; then
 	tests="$t_arg"
@@ -100,7 +99,7 @@ counter=0
 output="$(find "$tests" -name xunit_report.xml)"
 while read -r file && [ "$file" != "" ]; do
   ((counter++))
-  mv -f "$file" "$results"/xunit_report_$counter.xml
+  mv -f "$file" "$results"/xunit_report_"$counter".xml
 done <<< "$output"
 
 if [[ -e "$report"/history ]]; then
@@ -110,7 +109,16 @@ if [[ -e "$report"/history ]]; then
     mv "$report"/history "$results"/history
 fi
 
-cd "$results/.."
+executor=$(cat <<EOF
+{
+    "name": "logtalk_tester"
+}
+EOF
+)
+
+echo "$executor" > "$results"/executor.json
+
+cd "$results/.." || exit 1
 allure generate --clean --report-dir "$report" "$results"
 
 exit 0
