@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 12, 2021
+##   Last updated on January 13, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.4"
 	exit 0
 }
 
@@ -96,21 +96,34 @@ else
 fi
 
 counter=0
+mkdir -p "$results"
+rm -f "$results"/xunit_report_*.xml
 output="$(find "$tests" -name xunit_report.xml)"
 while read -r file && [ "$file" != "" ]; do
   ((counter++))
   mv -f "$file" "$results"/xunit_report_"$counter".xml
 done <<< "$output"
 
-if [[ -e "$report"/history ]]; then
-    if [[ -e "$results"/history ]]; then
+if [ -d "$results"/history ] ; then
+	current_build=$(<"$results"/history/logtalk_build_number)
+else
+	current_build=1
+fi
+
+if [ -d "$report"/history ] ; then
+    if [ -d "$results"/history ] ; then
         rm -rf "$results"/history
     fi
     mv "$report"/history "$results"/history
+	next_build=$((current_build+1))
+	echo "$next_build" > "$results"/history/logtalk_build_number
+else
+	next_build="$current_build"
 fi
 
 executor=$(cat <<EOF
 {
+    "buildOrder": "$next_build",
     "name": "logtalk_tester"
 }
 EOF
