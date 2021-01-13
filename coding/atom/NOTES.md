@@ -48,6 +48,10 @@ from within Atom allowing clicking on warnings and errors and jump to their
 location, for running unit tests, for scanning for dead code, for generating
 HTML documentation, and for generating SVG diagrams.
 
+In most cases, the menu options should be used with with either your *loader*
+file or *tester* file selected. This ensures that the full code of your
+application is loaded to perform the requested menu option.
+
 For using these commands, install the `process-palette` package and replace
 or merge the contents of the file with default file found at `~/.atom`. If
 no `~/.atom/process-palette.json` file exists just copy the provided file
