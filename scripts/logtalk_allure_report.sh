@@ -22,15 +22,12 @@
 ## 
 #############################################################################
 
-# loosely based on a unit test automation script contributed by Parker Jones
-
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
 
 # default argument values
-
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
@@ -42,7 +39,7 @@ usage_help()
 	echo "This script generates Allure reports."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-t logs] [-i results] [-o report] [-m max] [-p]"
+	echo "  $(basename "$0") [-t logs] [-i results] [-o report] [-p]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -82,13 +79,16 @@ fi
 
 if [ "$o_arg" != "" ] ; then
 	mkdir -p "$o_arg"
-	reports="$o_arg"
+	report="$o_arg"
 fi
 
 if [ "$p_arg" != "" ] ; then
 	preprocess_only="true"
 fi
 
+# move all xunit_report.xml files found in the current directory
+# and sub-directories to the $results directory; the files are
+# renamed using an integer counter to avoid overwriting them
 counter=0
 mkdir -p "$results"
 rm -f "$results"/xunit_report_*.xml
@@ -102,12 +102,16 @@ if [ "$preprocess_only" == "true" ] ; then
 	exit 0
 fi
 
+# assume that the $results directory is kept between test
+# runs and use a custom file to track the build order
 if [ -d "$results"/history ] ; then
 	current_build=$(<"$results"/history/logtalk_build_number)
 else
 	current_build=1
 fi
 
+# move the history from the previous report to the
+# $results directory so that we can get trend graphs
 if [ -d "$report"/history ] ; then
     if [ -d "$results"/history ] ; then
         rm -rf "$results"/history
@@ -119,6 +123,8 @@ else
 	next_build="$current_build"
 fi
 
+# add a minimal executor.json so that trend graphs
+# show build labels
 executor=$(cat <<EOF
 {
     "buildOrder": "$next_build",
@@ -126,7 +132,6 @@ executor=$(cat <<EOF
 }
 EOF
 )
-
 echo "$executor" > "$results"/executor.json
 
 cd "$results/.." || exit 1
