@@ -45,7 +45,8 @@ Transparent-box view
 
 The transparent-box view provides a structural view of the contents and
 properties of entities, predicates, and source files akin to accessing
-the corresponding source code.
+the corresponding source code. I.e. this is the view we use when asking
+questions such as: *What predicates are declared in this protocol?*
 
 For entities, built-in predicates are provided for
 :ref:`enumerating entities <enumerating_entity_predicates>`,
@@ -75,9 +76,10 @@ querying loaded source files and their properties.
 Black-box view
 ~~~~~~~~~~~~~~
 
-The black-box view provides a view that respects entity encapsulation and
-thus only allow querying about predicates and operators that are within
-scope of the entity calling the reflection methods.
+The black-box view provides a view that takes into account entity encapsulation
+and thus only allow querying about predicates and operators that are within
+scope of the entity calling the reflection methods. This is the view we use
+and asking questions such as: *What messages can be sent to this object?*
 
 Built-in methods are provided for querying the :ref:`predicates that are
 declared and can be called or used as messages <methods_current_predicate_1>`
