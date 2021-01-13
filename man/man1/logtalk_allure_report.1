@@ -1,4 +1,4 @@
-.TH logtalk_allure_report 1 "January 11, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+.TH logtalk_allure_report 1 "January 13, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_allure_report \- Logtalk script for generating Allure reports
@@ -10,12 +10,12 @@ logtalk_allure_report \- Logtalk script for generating Allure reports
 [\fB-t \fItests\fR]
 [\fB-i \fIresults\fR]
 [\fB-o \fIreport\fR]
-[\fB-m \fImax\fR]
+[\fB-p\fR]
 .br
 .B logtalk_allure_report -h
 
 .SH DESCRIPTION
-\fBlogtalk_allure_report\fR is a script for generating Allure reports. Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR command-line option.
+\fBlogtalk_allure_report\fR is a script for generating Allure reports. Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR or \fI-f xunit_net_v2\fR command-line option.
 
 .SH OPTIONS
 .TP
@@ -31,8 +31,8 @@ Directory where to save the test results (i.e. the xUnit reports) for generating
 .BI \-o
 Directory where the report is to be saved.
 .TP
-.BI \-m
-Maximum number of reports to keep in history.
+.BI \-p
+Preprocess results but do not generate report. Useful when the actual generatation of the report is delegated to e.g. a Docker service or a Jenkins plug-in.
 .TP
 .B \-h
 Provide help on script usage.

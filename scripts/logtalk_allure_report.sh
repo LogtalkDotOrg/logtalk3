@@ -34,7 +34,7 @@ print_version() {
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
-max=7
+preprocess_only="false"
 
 usage_help()
 {
@@ -42,7 +42,7 @@ usage_help()
 	echo "This script generates Allure reports."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-t logs] [-i results] [-o report] [-m max]"
+	echo "  $(basename "$0") [-t logs] [-i results] [-o report] [-m max] [-p]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -51,19 +51,19 @@ usage_help()
 	echo "  -t tests directory (default is $tests)"
 	echo "  -i results directory (default is $results)"
 	echo "  -o report directory (default is $reports)"
-	echo "  -m maximum number of reports in history (default is $max)"
+	echo "  -p preprocess results but do not generate report"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vt:i:o:m:h" option
+while getopts "vt:i:o:ph" option
 do
 	case $option in
 		v) print_version;;
 		t) t_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		o) o_arg="$OPTARG";;
-		m) m_arg="$OPTARG";;
+		p) p_arg="true";;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -85,14 +85,8 @@ if [ "$o_arg" != "" ] ; then
 	reports="$o_arg"
 fi
 
-if [ "$m_arg" != "" ] ; then
-	max="$m_arg"
-fi
-
-if [ ! -d "$results" ] ; then
-	mkdir "$results"
-else
-	rm -rf "$results"/*.xml
+if [ "$p_arg" != "" ] ; then
+	preprocess_only="true"
 fi
 
 counter=0
@@ -103,6 +97,10 @@ while read -r file && [ "$file" != "" ]; do
   ((counter++))
   mv -f "$file" "$results"/xunit_report_"$counter".xml
 done <<< "$output"
+
+if [ "$preprocess_only" == "true" ] ; then
+	exit 0
+fi
 
 if [ -d "$results"/history ] ; then
 	current_build=$(<"$results"/history/logtalk_build_number)
