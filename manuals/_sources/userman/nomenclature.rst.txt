@@ -40,8 +40,10 @@ In this section, we map nomenclatures from Prolog and popular OOP languages
 such as Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The
 Logtalk distribution includes several examples of how to implement common
 concepts found in other languages, complementing the information in this
-section. There is also an extensive :ref:`glossary <glossary>` providing
-the exact meaning of the names commonly used in Logtalk programming.
+section. This Handbook also features a
+:ref:`Prolog interoperability section <predicates_prolog>` and
+an extensive :ref:`glossary <glossary>` providing the exact meaning of the
+names commonly used in Logtalk programming.
 
 .. _nomenclature_prolog:
 
@@ -50,7 +52,7 @@ Prolog nomenclature
 
 Being a superset of Prolog, Logtalk inherits its nomenclature. But Logtalk
 also aims to fix several Prolog shortcomings, thus introducing new concepts
-or refining existing Prolog concepts. Logtalk object-oriented nature also
+and refining existing Prolog concepts. Logtalk object-oriented nature also
 introduces names and concepts that are not common when discussing logic
 programming semantics. We mention here the most relevant ones, notably
 those where semantics or common practice differ. Further details can be
