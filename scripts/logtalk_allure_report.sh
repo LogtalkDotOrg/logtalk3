@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 13, 2021
+##   Last updated on January 14, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
@@ -128,7 +128,9 @@ fi
 executor=$(cat <<EOF
 {
     "buildOrder": "$next_build",
-    "name": "logtalk_tester"
+	"buildName": "logtalk_allure_report#$next_build", 
+    "name": "logtalk_tester",
+    "type": "logtalk_tester"
 }
 EOF
 )
