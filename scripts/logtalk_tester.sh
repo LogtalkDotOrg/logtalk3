@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.13"
+	echo "$(basename "$0") 2.14"
 	exit 0
 }
 
@@ -159,7 +159,7 @@ run_testset() {
 			echo "%         timeout"
 		fi
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
-		ensure_format_report "$unit" "Timeout (after $timeout seconds)"
+		ensure_format_report "$unit" "Timeout"
 	elif [ $tests_exit -ne 0 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         crash"
@@ -224,7 +224,9 @@ ensure_format_report() {
 		echo "<assembly name=\"$directory/\" config-file=\"$directory/tests.lgt\" test-framework=\"lgtunit\" run-date=\"$run_date\" run-time=\"$run_time\" time=\"0\" total=\"0\" errors=\"1\" failures=\"0\" skipped=\"0\">" >> "$directory/xunit_report.xml"
 		echo "<errors>" >> "$directory/xunit_report.xml"
 		echo "<error type=\"$error\" name=\"$error\">" >> "$directory/xunit_report.xml"
-		echo "<failure exception-type=\"$error\"/>" >> "$directory/xunit_report.xml"
+		echo "<failure exception-type=\"$error\">" >> "$directory/xunit_report.xml"
+		echo "<message><![CDATA[$error]]></message>" >> "$directory/xunit_report.xml"
+		echo "</failure>" >> "$directory/xunit_report.xml"
 		echo "</error>" >> "$directory/xunit_report.xml"
 		echo "</errors>" >> "$directory/xunit_report.xml"
 		echo "</assembly>" >> "$directory/xunit_report.xml"
