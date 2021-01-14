@@ -28,9 +28,9 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2021-01-12,
+		date is 2021-01-14,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -281,7 +281,7 @@
 		message_cache_(tests_start_date_time(Year, Month, Day, _, _, _)),
 		integers_to_atoms([Year,Month,Day], [AYear,AMonth0,ADay0]),
 		pad_single_char_atoms([AMonth0,ADay0], [AMonth,ADay]),
-		concatenate_atoms([AYear,'-',AMonth,'-',ADay,'T'], '', RunDate).
+		concatenate_atoms([AYear,'-',AMonth,'-',ADay], '', RunDate).
 
 	assembly_run_time(RunTime) :-
 		message_cache_(tests_start_date_time(_, _, _, Hours, Minutes, Seconds)),
