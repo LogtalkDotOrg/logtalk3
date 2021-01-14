@@ -28,7 +28,7 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
 		date is 2021-01-14,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
@@ -177,26 +177,26 @@
 		write_xml_close_tag(test).
 	write_test_element_tags(non_deterministic_success(File, Position, Note), Name, Type) :-
 		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0, result-'Fail']),
-		write_xml_open_tag(failure, []),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
 		write_xml_close_tag(traits),
+		write_xml_open_tag(failure, []),
 		test_message(Note, 'Non-deterministic success', Message),
 		write_xml_cdata_element(message, [], Message),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
 	write_test_element_tags(failed_test(File, Position, Reason, Note), Name, Type) :-
 		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0, result-'Fail']),
-		failed_test(Reason, Description, _, Error),
-		test_message(Note, Description, Message),
-		write_xml_open_tag(failure, []),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
 		write_xml_close_tag(traits),
+		write_xml_open_tag(failure, []),
+		failed_test(Reason, Description, _, Error),
+		test_message(Note, Description, Message),
 		write_xml_cdata_element(message, [], Message),
 		(	Error == '' ->
 			true
