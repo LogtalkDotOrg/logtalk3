@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 12, 2021
+##   Last updated on January 14, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.12"
+	echo "$(basename "$0") 2.13"
 	exit 0
 }
 
@@ -153,16 +153,19 @@ run_testset() {
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"
 		fi
+		ensure_format_report "$unit" "Broken"
 	elif [ $tests_exit -eq 137 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
 		fi
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
+		ensure_format_report "$unit" "Timeout (after $timeout seconds)"
 	elif [ $tests_exit -ne 0 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         crash"
 		fi
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
+		ensure_format_report "$unit" "Crash"
 	fi
 	if [ $coverage == 'xml' ] ; then
 		if [ -d "$LOGTALKUSER" ] ; then
@@ -198,6 +201,38 @@ run_tests() {
 		return 5
 	fi
 	return $exit
+}
+
+ensure_format_report() {
+	directory="$1"
+	error="$2"
+	if [ "$format" == "xunit" ] ; then
+		timestamp=$(date +"%Y-%m-%dT%H:%M:%S")
+		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > "$directory/xunit_report.xml"
+		echo "<testsuites>" >> "$directory/xunit_report.xml"
+		echo "<testsuite package=\"$directory/\" name=\"$directory/tests.lgt\" tests=\"0\" errors=\"1\" failures=\"0\" skipped=\"0\" time=\"0\" timestamp=\"$timestamp\" id=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<testcase classname=\"tests\" name=\"unknown\" time=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<failure message=\"$error\" type=\"$error\">$error</failure>" >> "$directory/xunit_report.xml"
+		echo "</testcase>" >> "$directory/xunit_report.xml"
+		echo "</testsuite>" >> "$directory/xunit_report.xml"
+		echo "</testsuites>" >> "$directory/xunit_report.xml"
+	elif [ "$format" == "xunit_net_v2" ] ; then
+		run_date=$(date +"%Y-%m-%d")
+		run_time=$(date +"%H:%M:%S")
+		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > "$directory/xunit_report.xml"
+		echo "<assemblies>" >> "$directory/xunit_report.xml"
+		echo "<assembly name=\"$directory/\" config-file=\"$directory/tests.lgt\" test-framework=\"lgtunit\" run-date=\"$run_date\" run-time=\"$run_time\" time=\"0\" total=\"0\" errors=\"1\" failures=\"0\" skipped=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<errors>" >> "$directory/xunit_report.xml"
+		echo "<error type=\"$error\" name=\"$error\">" >> "$directory/xunit_report.xml"
+		echo "<failure exception-type=\"$error\"/>" >> "$directory/xunit_report.xml"
+		echo "</error>" >> "$directory/xunit_report.xml"
+		echo "</errors>" >> "$directory/xunit_report.xml"
+		echo "</assembly>" >> "$directory/xunit_report.xml"
+		echo "</assemblies>" >> "$directory/xunit_report.xml"
+	elif [ "$format" == "tap" ] ; then
+		echo "TAP version 13" > "$directory/tap_report.xml"
+		echo "Bail out! $error" >> "$directory/tap_report.xml"
+	fi
 }
 
 usage_help()

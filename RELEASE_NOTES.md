@@ -82,6 +82,10 @@ Tools
 
 * ADDED: Support for exporting test results using the xUnit.net v2 XML format.
 
+* IMPROVED: The `logtalk_tester` script now generates a minimal report file
+when using the `-f` option so that tools that process and display test results
+may also be able to display broken, timed out, and crashed test sets.
+
 * UPDATED: The `logtalk_tester` script to support the `-f xunit_net_v2` option.
 
 * UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
