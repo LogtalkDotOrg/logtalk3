@@ -1429,6 +1429,13 @@ to only perform the preprocessing step:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -p
 </pre></div>
 </div>
+<p>The script also supports passing <em>environment pairs</em>, which are
+displayed in the generated Allure reports in the environment pane. This
+feature can be used to pass e.g. the backend name and the backend
+version or git commit hash. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -- Backend.name=&#39;GNU Prolog&#39; Backend.version=1.4.5
+</pre></div>
+</div>
 </div>
 <div class="section" id="exporting-code-coverage-results-in-xml-format">
 <h2>Exporting code coverage results in XML format<a class="headerlink" href="#exporting-code-coverage-results-in-xml-format" title="Permalink to this headline">¶</a></h2>

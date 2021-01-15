@@ -1314,6 +1314,15 @@ to only perform the preprocessing step:
 
    $ logtalk_allure_report -p
 
+The script also supports passing *environment pairs*, which are
+displayed in the generated Allure reports in the environment pane. This
+feature can be used to pass e.g. the backend name and the backend
+version or git commit hash. For example:
+
+::
+
+   $ logtalk_allure_report -- Backend.name='GNU Prolog' Backend.version=1.4.5
+
 Exporting code coverage results in XML format
 ---------------------------------------------
 
