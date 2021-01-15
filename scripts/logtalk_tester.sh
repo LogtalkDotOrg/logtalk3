@@ -153,19 +153,19 @@ run_testset() {
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"
 		fi
-		ensure_format_report "$unit" "Broken"
+		ensure_format_report "$unit" "$(basename "$unit")" "Broken"
 	elif [ $tests_exit -eq 137 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
 		fi
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
-		ensure_format_report "$unit" "Timeout"
+		ensure_format_report "$unit" "$(basename "$unit")" "Timeout"
 	elif [ $tests_exit -ne 0 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         crash"
 		fi
 		echo "LOGTALK_CRASH" >> "$results/$name.errors"
-		ensure_format_report "$unit" "Crash"
+		ensure_format_report "$unit" "$(basename "$unit")" "Crash"
 	fi
 	if [ $coverage == 'xml' ] ; then
 		if [ -d "$LOGTALKUSER" ] ; then
@@ -205,13 +205,14 @@ run_tests() {
 
 ensure_format_report() {
 	directory="$1"
-	error="$2"
+	name="$2"
+	error="$3"
 	if [ "$format" == "xunit" ] ; then
 		timestamp=$(date +"%Y-%m-%dT%H:%M:%S")
 		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > "$directory/xunit_report.xml"
 		echo "<testsuites>" >> "$directory/xunit_report.xml"
 		echo "<testsuite package=\"$directory/\" name=\"$directory/tests.lgt\" tests=\"0\" errors=\"1\" failures=\"0\" skipped=\"0\" time=\"0\" timestamp=\"$timestamp\" id=\"0\">" >> "$directory/xunit_report.xml"
-		echo "<testcase classname=\"tests\" name=\"unknown\" time=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<testcase classname=\"tests\" name=\"$name\" time=\"0\">" >> "$directory/xunit_report.xml"
 		echo "<failure message=\"$error\" type=\"$error\">$error</failure>" >> "$directory/xunit_report.xml"
 		echo "</testcase>" >> "$directory/xunit_report.xml"
 		echo "</testsuite>" >> "$directory/xunit_report.xml"
@@ -225,7 +226,7 @@ ensure_format_report() {
 		echo "<errors>" >> "$directory/xunit_report.xml"
 		echo "<error type=\"$error\" name=\"$error\">" >> "$directory/xunit_report.xml"
 		echo "<failure exception-type=\"$error\">" >> "$directory/xunit_report.xml"
-		echo "<message><![CDATA[$error]]></message>" >> "$directory/xunit_report.xml"
+		echo "<message><![CDATA[$error $name]]></message>" >> "$directory/xunit_report.xml"
 		echo "</failure>" >> "$directory/xunit_report.xml"
 		echo "</error>" >> "$directory/xunit_report.xml"
 		echo "</errors>" >> "$directory/xunit_report.xml"
@@ -233,7 +234,7 @@ ensure_format_report() {
 		echo "</assemblies>" >> "$directory/xunit_report.xml"
 	elif [ "$format" == "tap" ] ; then
 		echo "TAP version 13" > "$directory/tap_report.xml"
-		echo "Bail out! $error" >> "$directory/tap_report.xml"
+		echo "Bail out! $unit $error" >> "$directory/tap_report.xml"
 	fi
 }
 
