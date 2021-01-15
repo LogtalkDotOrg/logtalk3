@@ -56,6 +56,8 @@ Logtalk and Prolog.
 definition context, predicate execution context, and top-level interpreter
 shorthand.
 
+* ADDED: Man page for the new `logtalk_allure_report` script.
+
 * IMPROVED: Documentation of the `logtalk::loaded_file_property/2` predicate.
 
 * FIXED: Overflow line the Event-driven programming chapter in the PDF version
@@ -79,6 +81,8 @@ Tools
 -----
 
 * ADDED: Shell script for generating Allure reports (`logtalk_allure_report`).
+
+* ADDED: New `lgtunit` documentation section on generating Allure reports.
 
 * ADDED: Support for exporting test results using the xUnit.net v2 XML format.
 
@@ -130,7 +134,7 @@ Installers and installation scripts
 * CHANGED: Renamed the `scripts/macosx` directory to `scripts/macos`.
 
 * ADDED: Windows installer experimental support for creating a shortcut for
-Tau Prolog.
+Tau Prolog. Tested with the help of José Antonio Riaza Valverde.
 
 * ADDED: A macOS command-file for Trealla ProLog.
 
