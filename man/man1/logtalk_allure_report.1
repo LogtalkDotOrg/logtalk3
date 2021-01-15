@@ -1,4 +1,4 @@
-.TH logtalk_allure_report 1 "January 13, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+.TH logtalk_allure_report 1 "January 15, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_allure_report \- Logtalk script for generating Allure reports
@@ -11,8 +11,9 @@ logtalk_allure_report \- Logtalk script for generating Allure reports
 [\fB-i \fIresults\fR]
 [\fB-o \fIreport\fR]
 [\fB-p\fR]
+[\fB-- \fIenvironment pairs\fR]
 .br
-.B logtalk_allure_report -h
+.B logtalk_tester -h
 
 .SH DESCRIPTION
 \fBlogtalk_allure_report\fR is a script for generating Allure reports. Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR (or \fI-f xunit_net_v2\fR) command-line option.
@@ -33,6 +34,9 @@ Directory where the report is to be saved.
 .TP
 .BI \-p
 Preprocess results but do not generate report. Useful when the actual generatation of the report is delegated to e.g. a Docker service or a Jenkins plug-in.
+.TP
+.BI \--
+Environment pairs (key1=value1 key2=value2 ...). Used to generate an \fIenvironment.properties\fR for adding additional information to the generated report.
 .TP
 .B \-h
 Provide help on script usage.

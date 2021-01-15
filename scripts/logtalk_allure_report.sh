@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 14, 2021
+##   Last updated on January 15, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -32,6 +32,7 @@ tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
 preprocess_only="false"
+environment_pairs=""
 
 usage_help()
 {
@@ -49,6 +50,7 @@ usage_help()
 	echo "  -i results directory (default is $results)"
 	echo "  -o report directory (default is $reports)"
 	echo "  -p preprocess results but do not generate report"
+	echo "  -- environment pairs (key1=value1 key2=value2 ...)"
 	echo "  -h help"
 	echo
 }
@@ -67,6 +69,7 @@ do
 done
 
 shift $((OPTIND - 1))
+environment_pairs=("$@")
 
 if [ "$t_arg" != "" ] ; then
 	tests="$t_arg"
@@ -97,6 +100,13 @@ while read -r file && [ "$file" != "" ]; do
   ((counter++))
   mv -f "$file" "$results"/xunit_report_"$counter".xml
 done <<< "$output"
+
+if [ ${#environment_pairs[@]} -gt 0 ] ; then
+	rm -f "$results"/environment.properties
+	for pair in "${environment_pairs[@]}" ; do
+		echo "$pair" >> "$results"/environment.properties
+	done
+fi
 
 if [ "$preprocess_only" == "true" ] ; then
 	exit 0
