@@ -540,7 +540,7 @@
 
 	in_word(C, C) :- C >= 0'a, C =< 0'z.
 	in_word(C, L) :- C >= 0'A, C =< 0'Z, L is C + 32.
-	in_word(0'', 0'').
+	in_word(0'\', 0'\').
 	in_word(0'-, 0'-).
 
 	% Have character C (known integer) - keep reading integers and build
