@@ -23,14 +23,19 @@ file.
 This folder contains Logtalk versions of some simple Prolog text
 adventures:
 
+- nani_search, written by Amzi! inc
 - sleepy, written by David Matuszek, Villanova University
 - spider, written by David Matuszek, Villanova University
 - wumpus, written by Dan Cliburn, University of the Pacific
 
+For the "nani_search" adventure, I applied the necessary changes to ensure
+compatibility with the backend Prolog compilers that you can use with Logtalk.
+The original code was also reformatted to comply with coding guidelines.
+
 For the "sleepy" and "spider" adventures, I applied the necessary changes
-to ensure compatibility with all the backend Prolog compilers that you
-can use with Logtalk, rewrote some code to avoid creation of choice-points,
-and added a very simple command-line interface.
+to ensure compatibility with the backend Prolog compilers that you can use
+with Logtalk, rewrote some code to avoid creation of choice-points, and
+added a very simple command-line interface.
 
 For the "wumpus" adventure, I applied the necessary changes to ensure
 compatibility with all the backend Prolog compilers that you can use

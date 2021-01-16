@@ -24,10 +24,11 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2012-08-06,
+		date is 2021-01-16,
 		comment is 'Unit tests for the "adventure" example.'
 	]).
 
+	cover(nani_search).
 	cover(sleepy).
 	cover(spider).
 	cover(wumpus).

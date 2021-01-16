@@ -101,6 +101,9 @@ checks.
 Examples
 --------
 
+* ADDED: Port of the Amzi! Inc "Nani search" adventure game to the `adventure`
+example.
+
 * UPDATED: The `errors` example to illustrate the new disjunctions lint check
 and the update entity, predicate, and variable names checks.
 
