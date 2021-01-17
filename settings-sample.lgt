@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on February 27, 2020
+%  Last updated on January 17, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -216,7 +216,7 @@ logtalk_library_path(Project, my_logtalk_projects(ProjectPath)) :-
 
 /*
 :- initialization((
-	logtalk_load(types(loader)),
+	logtalk_load(basic_types(loader)),
 	logtalk_load(os(loader))
 )).
 
