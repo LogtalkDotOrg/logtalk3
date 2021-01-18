@@ -96,6 +96,9 @@ may also be able to display broken, timed out, and crashed test sets.
 lint check and for the updated entity, predicate, and variable names lint
 checks.
 
+* FIXED: Workaround limitations of the xUnit XML formats for reporting skipped
+test sets.
+
 * FIXED: Warnings with the new `disjunctions` flag for the `code_metrics` tool.
 
 Examples

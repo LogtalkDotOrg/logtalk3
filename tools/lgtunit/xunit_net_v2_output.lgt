@@ -28,9 +28,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-01-14,
+		date is 2021-01-18,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -139,6 +139,12 @@
 		write_xml_close_tag(collection).
 
 	write_test_elements :-
+		message_cache_(tests_skipped(Object, Note)),
+		message_cache_(running_tests_from_object_file(Object, File)),
+		Object<<test_(Name, _),
+		write_test_element_tags(skipped_test(File, 0-0, Note), Name, Object),
+		fail.
+	write_test_elements :-
 		message_cache_(test(Type, Name, Test)),
 		write_test_element_tags(Test, Name, Type),
 		fail.
@@ -227,6 +233,10 @@
 			(Minutes - Minutes0) * 60 +
 			Seconds - Seconds0.
 
+	assembly_stats(Tests, 0, 0, Tests) :-
+		message_cache_(tests_skipped(Object, _Note)),
+		!,
+		Object<<number_of_tests(Tests).
 	assembly_stats(Tests, 0, Failures, Skipped) :-
 		assembly_stats(0, Tests, 0, Failures, 0, Skipped).
 
