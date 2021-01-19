@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on November 24, 2020
+Last updated on January 19, 2021
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -402,7 +402,7 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla ProLog 1.4.7 and later versions
+Trealla ProLog 1.5.0 and later versions
 ---------------------------------------
 
 	trealla.pl
