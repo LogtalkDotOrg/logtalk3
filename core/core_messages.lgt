@@ -21,10 +21,10 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:102:1,
+		version is 1:102:2,
 		author is 'Paulo Moura',
-		date is 2021-01-06,
-		comment is 'Logtalk core (compiler and runtime) default message translations.'
+		date is 2021-01-19,
+		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
 	:- built_in.
