@@ -1295,8 +1295,8 @@ test results in xUnit XML format. A simple usage example:
 The ``logtalk_allure_report`` script supports command-line options to
 set the tests directory (i.e. the directory where the ``logtalk_tester``
 script was run), the directory where to save the test results (i.e. the
-xUnit reports) for generating the report, and the directory where the
-report is to be saved (see the script man page or type
+xUnit reports) for generating the report, the directory where the report
+is to be saved, and the report title (see the script man page or type
 ``logtalk_allure_report -h``). The script also supports saving the
 history of past test runs. In this case, a persistant location for both
 the results and report directories must be used.

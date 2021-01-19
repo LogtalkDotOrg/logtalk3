@@ -54,9 +54,9 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -d tests directory (default is $tests)"
+	echo "  -d tests directory (default is the current directory)"
 	echo "  -i results directory (default is $results)"
-	echo "  -o report directory (default is $reports)"
+	echo "  -o report directory (default is $report)"
 	echo "  -t report title (default is \"Allure Report\")"
 	echo "  -p preprocess results but do not generate report"
 	echo "  -- environment pairs (key1=value1 key2=value2 ...)"
