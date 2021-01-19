@@ -45,6 +45,9 @@ condition_opaque_to_cut(2).
 		comment is 'Unit tests for the soft-cut if/3 built-in predicate.'
 	]).
 
+	condition :-
+		predicate_property(if(_,_,_), built_in).
+
 	:- discontiguous([
 		succeeds/1, fails/1
 	]).

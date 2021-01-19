@@ -53,6 +53,9 @@ condition_opaque_to_cut_3(2).
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 
+	condition :-
+		predicate_property('*->'(_,_), built_in).
+
 	test(commons_soft_cut_2_3_01, true) :-
 		{'*->'(true, true)}.
 
