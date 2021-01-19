@@ -44,6 +44,8 @@ prevent loading the current version of the Logtalk compiler/runtime.
 * REMOVED: Integration files for XSB-MT as this backend support for threads is
 too buggy to be usable.
 
+* UPDATED: Trealla ProLog support and minimum required version to 1.5.0.
+
 Documentation
 -------------
 
