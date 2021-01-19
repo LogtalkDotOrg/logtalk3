@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 15, 2021
+##   Last updated on January 19, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -31,8 +31,16 @@ print_version() {
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
+title=""
 preprocess_only="false"
 environment_pairs=""
+
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
 
 usage_help()
 {
@@ -40,28 +48,30 @@ usage_help()
 	echo "This script generates Allure reports."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-t logs] [-i results] [-o report] [-p]"
+	echo "  $(basename "$0") [-d tests] [-i results] [-o report] [-t title] [-p]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -t tests directory (default is $tests)"
+	echo "  -d tests directory (default is $tests)"
 	echo "  -i results directory (default is $results)"
 	echo "  -o report directory (default is $reports)"
+	echo "  -t report title (default is \"Allure Report\")"
 	echo "  -p preprocess results but do not generate report"
 	echo "  -- environment pairs (key1=value1 key2=value2 ...)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vt:i:o:ph" option
+while getopts "vd:i:o:t:ph" option
 do
 	case $option in
 		v) print_version;;
-		t) t_arg="$OPTARG";;
+		d) d_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		o) o_arg="$OPTARG";;
+		t) t_arg="$OPTARG";;
 		p) p_arg="true";;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -71,8 +81,8 @@ done
 shift $((OPTIND - 1))
 environment_pairs=("$@")
 
-if [ "$t_arg" != "" ] ; then
-	tests="$t_arg"
+if [ "$d_arg" != "" ] ; then
+	tests="$d_arg"
 fi
 
 if [ "$i_arg" != "" ] ; then
@@ -83,6 +93,10 @@ fi
 if [ "$o_arg" != "" ] ; then
 	mkdir -p "$o_arg"
 	report="$o_arg"
+fi
+
+if [ "$t_arg" != "" ] ; then
+	title="$t_arg"
 fi
 
 if [ "$p_arg" != "" ] ; then
@@ -148,5 +162,8 @@ echo "$executor" > "$results"/executor.json
 
 cd "$results/.." || exit 1
 allure generate --clean --report-dir "$report" "$results"
+if [ "$title" != "" ] ; then
+	$sed -i "s/Allure Report/$title/" "$report"/widgets/summary.json
+fi
 
 exit 0

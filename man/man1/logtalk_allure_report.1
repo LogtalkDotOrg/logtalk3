@@ -1,4 +1,4 @@
-.TH logtalk_allure_report 1 "January 15, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+.TH logtalk_allure_report 1 "January 19, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_allure_report \- Logtalk script for generating Allure reports
@@ -7,9 +7,10 @@ logtalk_allure_report \- Logtalk script for generating Allure reports
 .B logtalk_allure_report -v
 .br
 .B logtalk_allure_report
-[\fB-t \fItests\fR]
+[\fB-d \fItests\fR]
 [\fB-i \fIresults\fR]
 [\fB-o \fIreport\fR]
+[\fB-t \fItitle\fR]
 [\fB-p\fR]
 [\fB-- \fIenvironment pairs\fR]
 .br
@@ -23,14 +24,17 @@ logtalk_allure_report \- Logtalk script for generating Allure reports
 .BI \-v
 Print script version.
 .TP
-.BI \-t
-The directory containing the tests (i.e. the directory where the \fIlogtalk_tester\fR script was run.
+.BI \-d
+The directory containing the tests (i.e. the directory where the \fIlogtalk_tester\fR script was run).
 .TP
 .BI \-i
 Directory where to collect the test results (i.e. the xUnit reports) for generating the report.
 .TP
 .BI \-o
 Directory where the report is to be saved.
+.TP
+.BI \-t
+Report title (default is "Allure Report").
 .TP
 .BI \-p
 Preprocess results but do not generate report. Useful when the actual generatation of the report is delegated to e.g. a Docker service or a Jenkins plug-in.
