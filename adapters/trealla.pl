@@ -66,18 +66,10 @@
 :- use_module(library(format)).
 
 '$lgt_format'(Stream, Format, Arguments) :-
-	(	atom(Format) ->
-		atom_chars(Format, Chars),
-		format(Stream,  Chars, Arguments)
-	;	format(Stream, Format, Arguments)
-	).
+	format(Stream, Format, Arguments).
 
 '$lgt_format'(Format, Arguments) :-
-	(	atom(Format) ->
-		atom_chars(Format, Chars),
-		format(Chars,  Arguments)
-	;	format(Format, Arguments)
-	).
+	format(Format, Arguments).
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
