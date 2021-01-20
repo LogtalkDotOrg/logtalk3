@@ -5594,6 +5594,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`read_file <read_file/0::read_file/2>`
 
+``read_from_atom/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::read_from_atom/2>`
+
+``read_from_chars/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::read_from_chars/2>`
+
+``read_from_codes/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::read_from_codes/2>`
+
+``read_term_from_atom/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::read_term_from_atom/3>`
+
+``read_term_from_chars/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::read_term_from_chars/3>`
+
+``read_term_from_codes/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::read_term_from_codes/3>`
+
 ``relative_standard_deviation/2``
 ---------------------------------
 
@@ -7085,6 +7145,86 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::working_directory/1>`
+
+``write_term_to_atom/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_term_to_atom/3>`
+
+``write_term_to_chars/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_term_to_chars/3>`
+
+``write_term_to_chars/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_term_to_chars/4>`
+
+``write_term_to_codes/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_term_to_codes/3>`
+
+``write_term_to_codes/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_term_to_codes/4>`
+
+``write_to_atom/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_to_atom/2>`
+
+``write_to_chars/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_to_chars/2>`
+
+``write_to_codes/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`term_io_protocol <term_io_protocol/0::write_to_codes/2>`
 
 ``z_normalization/2``
 ---------------------

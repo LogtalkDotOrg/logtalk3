@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on January 10, 2021
+%  Last updated on January 20, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -130,6 +130,7 @@ logtalk_library_path(reader, library('reader/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(statistics, library('statistics/')).
+logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(types, library('types/')).
 logtalk_library_path(zippers, library('zippers/')).

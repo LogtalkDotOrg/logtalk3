@@ -57,6 +57,7 @@ directory in the ``NOTES.md`` file.
    redis
    sets
    statistics
+   term_io
    timeout
    types
    unicode_data

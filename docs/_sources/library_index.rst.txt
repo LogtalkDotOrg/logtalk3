@@ -602,6 +602,17 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    statistics <statistics_0>
    statisticsp <statisticsp_0>
 
+``term_io``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   term_io <term_io_0>
+   term_io_protocol <term_io_protocol_0>
+
 ``timeout``
 -----------
 

@@ -71,6 +71,9 @@ predicates for the `public/1`, `protected/1`, and `private/1` properties.
 Library
 -------
 
+* ADDED: Library `term_io` for term input/output from/to atom, chars, and
+codes.
+
 * ADDED: Implementation for the `os::directory_files/2` predicate for Trealla
 ProLog.
 

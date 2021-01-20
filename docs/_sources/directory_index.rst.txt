@@ -462,6 +462,17 @@ To load an entity, always load the library that includes it using the goal ``log
    statistics <statistics_0>
    statisticsp <statisticsp_0>
 
+``library/term_io/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   term_io <term_io_0>
+   term_io_protocol <term_io_protocol_0>
+
 ``library/timeout/``
 --------------------
 

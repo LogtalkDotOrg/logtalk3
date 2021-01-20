@@ -50,6 +50,7 @@
 		coroutining(loader),
 		zippers(loader),
 		reader(loader),
+		term_io(loader),
 		timeout(loader),
 		gensym(loader),
 		git(loader),
