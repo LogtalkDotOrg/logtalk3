@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 1.5.0 and later versions
-%  Last updated on January 19, 2021
+%  Last updated on January 20, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -66,10 +66,10 @@
 :- use_module(library(format)).
 
 '$lgt_format'(Stream, Format, Arguments) :-
-	format(Stream, Format, Arguments).
+	format(Stream, Format, Arguments), !.
 
 '$lgt_format'(Format, Arguments) :-
-	format(Format, Arguments).
+	format(Format, Arguments), !.
 
 
 % numbervars(?term, +integer, ?integer) -- built-in
