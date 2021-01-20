@@ -22,14 +22,18 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:3:1,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2021-01-20,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
 	:- uses(list, [
 		member/2, memberchk/2
+	]).
+
+	:- uses(term_io, [
+		write_to_chars/2
 	]).
 
 	:- multifile(graph_language_registry::language_object/2).
@@ -327,15 +331,10 @@
 	% which is a non-standard functionality that only some backend systems
 	% provide in a usable form
 	write_escaped_term(Stream, Term) :-
-		(	term_to_html_atom(Term, Atom) ->
-			write(Stream, Atom)
-		;	write(Stream, Term)
-		).
-
-	term_to_html_atom(Term, Atom) :-
-		write_term_to_chars(Term, Chars),
+		write_to_chars(Term, Chars),
 		escape_chars(Chars, EscapedChars),
-		atom_chars(Atom, EscapedChars).
+		atom_chars(Atom, EscapedChars),
+		write(Stream, Atom).
 
 	escape_chars([], []).
 	escape_chars([Char| Chars], EscapedChars) :-
@@ -349,68 +348,4 @@
 		),
 		escape_chars(Chars, RestEscapedChars).
 
-	:- if(current_logtalk_flag(prolog_dialect, cx)).
-
-		write_term_to_chars(Term, Chars) :-
-			{atom_term(Atom, Term), atom_chars(Atom, Chars)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-
-		write_term_to_chars(Term, Chars) :-
-			{term_string(Term, String), atom_string(Atom, String), atom_chars(Atom, Chars)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
-
-		write_term_to_chars(Term, Chars) :-
-			{write_to_chars(Chars, Term)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, qp)).
-
-		write_term_to_chars(Term, Chars) :-
-			{open_string(write, Stream), write(Stream, Term), stream_to_atom(Stream, Atom), atom_chars(Atom, Chars)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, swi)).
-
-		write_term_to_chars(Term, Chars) :-
-			{format(chars(Chars), '~w', [Term])}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-
-		{:- use_module(library(codesio), [])}.
-		write_term_to_chars(Term, Chars) :-
-			{codesio:format_to_codes('~w', Term, Codes), atom_codes(Atom, Codes), atom_chars(Atom, Chars)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, tau)).
-
-		{:- use_module(library(charsio))}.
-		write_term_to_chars(Term, Chars) :-
-			{write_term_to_chars(Term, [], Chars)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-
-		write_term_to_chars(Term, Chars) :-
-			{term_to_atom(Term, Atom), atom_chars(Atom, Chars)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, yap)).
-
-		write_term_to_chars(Term, Chars) :-
-			{format(chars(Chars), '~w', [Term])}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
-
-		write_term_to_chars(Term, Chars) :-
-			{open(atom(Atom), write, Stream), write(Stream, Term), close(Stream), atom_chars(Atom, Chars)}.
-
-	:- else.
-
-		write_term_to_chars(_, _) :-
-			fail.
-
-	:- endif.
-
 :- end_object.
-
-
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
-	:- import(from(/(term_to_atom,2), string)).
-:- endif.

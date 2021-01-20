@@ -11,8 +11,8 @@
 Predicates for generating graph files in the DOT language (version 2.36.0 or later).
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:0
-| **Date:** 2020-10-02
+| **Version:** 3:3:1
+| **Date:** 2021-01-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Predicates for generating graph files in the DOT language (version 2.36.0 or lat
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
 
 | **Remarks:**
 |    (none)

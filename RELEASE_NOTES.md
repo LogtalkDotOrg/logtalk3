@@ -101,6 +101,9 @@ may also be able to display broken, timed out, and crashed test sets.
 lint check and for the updated entity, predicate, and variable names lint
 checks.
 
+* UPDATED: The `diagrams` tool to use the new `term_io` library for escaping
+text when generating DOT files.
+
 * FIXED: Workaround limitations of the xUnit XML formats for reporting skipped
 test sets.
 
