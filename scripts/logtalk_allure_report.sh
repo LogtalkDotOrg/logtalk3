@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 19, 2021
+##   Last updated on January 20, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -111,8 +111,8 @@ mkdir -p "$results"
 rm -f "$results"/xunit_report_*.xml
 output="$(find "$tests" -name xunit_report.xml)"
 while read -r file && [ "$file" != "" ]; do
-  ((counter++))
-  mv -f "$file" "$results"/xunit_report_"$counter".xml
+	((counter++))
+	mv -f "$file" "$results"/xunit_report_"$counter".xml
 done <<< "$output"
 
 if [ ${#environment_pairs[@]} -gt 0 ] ; then
@@ -137,10 +137,10 @@ fi
 # move the history from the previous report to the
 # $results directory so that we can get trend graphs
 if [ -d "$report"/history ] ; then
-    if [ -d "$results"/history ] ; then
-        rm -rf "$results"/history
-    fi
-    mv "$report"/history "$results"/history
+	if [ -d "$results"/history ] ; then
+		rm -rf "$results"/history
+	fi
+	mv "$report"/history "$results"/history
 	next_build=$((current_build+1))
 	echo "$next_build" > "$results"/history/logtalk_build_number
 else
@@ -151,10 +151,10 @@ fi
 # show build labels
 executor=$(cat <<EOF
 {
-    "buildOrder": "$next_build",
+	"buildOrder": "$next_build",
 	"buildName": "logtalk_allure_report#$next_build", 
-    "name": "logtalk_tester",
-    "type": "logtalk_tester"
+	"name": "logtalk_tester",
+	"type": "logtalk_tester"
 }
 EOF
 )
