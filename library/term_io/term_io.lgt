@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-20,
+		date is 2021-01-21,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -181,7 +181,8 @@
 			put_char(Stream, Char)
 		;	put_char(Stream, Char),
 			put_char(Stream, '.')
-		).
+		),
+		put_char(Stream, ' ').
 	put_chars([Next| Chars], Char, Stream) :-
 		put_char(Stream, Char),
 		put_chars(Chars, Next, Stream).
@@ -191,7 +192,8 @@
 			put_code(Stream, Code)
 		;	put_code(Stream, Code),
 			put_code(Stream, 0'.)
-		).
+		),
+		put_code(Stream, 0'\s).
 	put_codes([Next| Codes], Code, Stream) :-
 		put_code(Stream, Code),
 		put_codes(Codes, Next, Stream).
