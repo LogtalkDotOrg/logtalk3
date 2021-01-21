@@ -200,7 +200,7 @@ of messages printed on a console.
 Meta-messages
 -------------
 
-Define tokenization rules for every message is not always necessary, however.
+Defining tokenization rules for every message is not always necessary, however.
 Logtalk defines several *meta-messages* that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.
 See the :ref:`debugging_messages` section and the
@@ -286,7 +286,7 @@ the following message tokenization and question prompt and stream:
        :- multifile(logtalk::message_tokens//2).
        :- dynamic(logtalk::message_tokens//2).
    
-       % abstract the question text using the atom ultimate_question
+       % abstract the question text using the atom ultimate_question;
        % the second argument, hitchhikers, is the application component
        logtalk::message_tokens(ultimate_question, hitchhikers) -->
            ['The answer to the ultimate question of life, the universe and everything is?'-[], nl].

@@ -389,7 +389,7 @@ of messages printed on a console.</p>
 </div>
 <div class="section" id="meta-messages">
 <h2>Meta-messages<a class="headerlink" href="#meta-messages" title="Permalink to this headline">¶</a></h2>
-<p>Define tokenization rules for every message is not always necessary, however.
+<p>Defining tokenization rules for every message is not always necessary, however.
 Logtalk defines several <em>meta-messages</em> that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.
 See the <a class="reference internal" href="debugging.html#debugging-messages"><span class="std std-ref">Debugging messages</span></a> section and the
@@ -461,7 +461,7 @@ the following message tokenization and question prompt and stream:</p>
 <span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_tokens<span class="o">//</span><span class="m">2</span>).
 <span class="p">    :- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_tokens<span class="o">//</span><span class="m">2</span>).
 
-    <span class="c">% abstract the question text using the atom ultimate_question</span>
+    <span class="c">% abstract the question text using the atom ultimate_question;</span>
     <span class="c">% the second argument, hitchhikers, is the application component</span>
     logtalk<span class="o">::</span>message_tokens(ultimate_question, hitchhikers) <span class="o">--&gt;</span>
         [<span class="s">&#39;The answer to the ultimate question of life, the universe and everything is?&#39;</span><span class="o">-</span>[], <span class="k">nl</span>].
