@@ -303,11 +303,16 @@
 <li><p><a class="reference internal" href="#write-term-to-codes-3" id="id13"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#write-term-to-codes-4" id="id14"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#write-to-codes-2" id="id15"><code class="docutils literal notranslate"><span class="pre">write_to_codes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-to-atom-3" id="id16"><code class="docutils literal notranslate"><span class="pre">format_to_atom/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-to-chars-3" id="id17"><code class="docutils literal notranslate"><span class="pre">format_to_chars/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-to-chars-4" id="id18"><code class="docutils literal notranslate"><span class="pre">format_to_chars/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-to-codes-3" id="id19"><code class="docutils literal notranslate"><span class="pre">format_to_codes/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-to-codes-4" id="id20"><code class="docutils literal notranslate"><span class="pre">format_to_codes/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id21">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id22">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-predicates">
@@ -328,7 +333,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_atom(&#64;term,?atom,+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_atom(&#64;term,-atom,+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -349,7 +354,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_atom(&#64;term,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_atom(&#64;term,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -370,7 +375,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_chars(&#64;term,?list(character),+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_chars(&#64;term,-list(character),+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -391,7 +396,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_chars(&#64;term,?list(character))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_chars(&#64;term,-list(character))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -412,7 +417,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_codes(&#64;term,?list(character_code),+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_codes(&#64;term,-list(character_code),+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -433,7 +438,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_codes(&#64;term,?list(character_code))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_codes(&#64;term,-list(character_code))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -454,7 +459,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_atom(&#64;term,?atom,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_atom(&#64;term,-atom,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -475,7 +480,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_to_atom(&#64;term,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_to_atom(&#64;term,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -496,7 +501,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,?list(character),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,-list(character),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -517,7 +522,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,?list(character),?term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars(&#64;term,-list(character),&#64;term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -538,7 +543,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_to_chars(&#64;term,?list(character))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_to_chars(&#64;term,-list(character))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -559,7 +564,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,?list(character_code),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,-list(character_code),+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -580,7 +585,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,?list(character_code),?term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes(&#64;term,-list(character_code),&#64;term,+list(write_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -601,7 +606,112 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">write_to_codes(&#64;term,?list(character_code))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">write_to_codes(&#64;term,-list(character_code))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="format_to_atom/3"> </div></div>
+<div class="section" id="format-to-atom-3">
+<span id="term-io-protocol-0-format-to-atom-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_atom/3</span></code></a><a class="headerlink" href="#format-to-atom-3" title="Permalink to this headline">¶</a></h3>
+<p>Writes a list of arguments to an atom using the given format.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_atom(Format,Arguments,Atom)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_atom(&#64;atom,+list(term),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="format_to_chars/3"> </div></div>
+<div class="section" id="format-to-chars-3">
+<span id="term-io-protocol-0-format-to-chars-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_chars/3</span></code></a><a class="headerlink" href="#format-to-chars-3" title="Permalink to this headline">¶</a></h3>
+<p>Writes a list of arguments to a list of characters using the given format.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_chars(Format,Arguments,Chars)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_chars(&#64;term,+list(term),-list(character))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="format_to_chars/4"> </div></div>
+<div class="section" id="format-to-chars-4">
+<span id="term-io-protocol-0-format-to-chars-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_chars/4</span></code></a><a class="headerlink" href="#format-to-chars-4" title="Permalink to this headline">¶</a></h3>
+<p>Writes a term to a list of characters with the given tail using the given format.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_chars(Format,Arguments,Chars,Tail)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_chars(&#64;term,+list(term),-list(character),&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="format_to_codes/3"> </div></div>
+<div class="section" id="format-to-codes-3">
+<span id="term-io-protocol-0-format-to-codes-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_codes/3</span></code></a><a class="headerlink" href="#format-to-codes-3" title="Permalink to this headline">¶</a></h3>
+<p>Writes a list of arguments to a list of character codes using the given format.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_codes(Format,Arguments,Codes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_codes(&#64;term,+list(term),-list(character_code))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="format_to_codes/4"> </div></div>
+<div class="section" id="format-to-codes-4">
+<span id="term-io-protocol-0-format-to-codes-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_codes/4</span></code></a><a class="headerlink" href="#format-to-codes-4" title="Permalink to this headline">¶</a></h3>
+<p>Writes a list of arguments to a list of character codes with the given tail using the given format.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_codes(Format,Arguments,Codes,Tail)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_to_codes(&#64;term,+list(term),-list(character_code),&#64;term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </div>

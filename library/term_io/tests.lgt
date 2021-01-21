@@ -34,7 +34,10 @@
 		read_term_from_codes/3, read_from_codes/2,
 		write_term_to_atom/3,   write_to_atom/2,
 		write_term_to_chars/3,  write_term_to_chars/4, write_to_chars/2,
-		write_term_to_codes/3,  write_term_to_codes/4, write_to_codes/2
+		write_term_to_codes/3,  write_term_to_codes/4, write_to_codes/2,
+		format_to_atom/3,
+		format_to_chars/3,      format_to_chars/4,
+		format_to_codes/3,      format_to_codes/4
 	]).
 
 	:- uses(lgtunit, [
@@ -256,7 +259,7 @@
 		atom_chars('[1,2,3]', ExpectedChars),
 		write_term_to_chars([1,2,3], Chars, []).
 
-	% write_term_to_chars/4
+	% write_term_to_chars/4 tests
 
 	test(write_term_to_chars_4_01, true(Chars == [a,b,c])) :-
 		write_term_to_chars(abc, Chars, [], []).
@@ -297,7 +300,7 @@
 		atom_codes('[1,2,3]', ExpectedCodes),
 		write_term_to_codes([1,2,3], Codes, []).
 
-	% write_term_to_codes/4
+	% write_term_to_codes/4 tests
 
 	test(write_term_to_codes_4_01, true(Codes == [0'a,0'b,0'c])) :-
 		write_term_to_codes(abc, Codes, [], []).
@@ -307,5 +310,34 @@
 
 	test(write_term_to_codes_4_03, true(Codes == [0'a,0'b,0'c| Tail])) :-
 		write_term_to_codes(abc, Codes, Tail, []).
+
+	% format_to_atom/3 tests
+
+	test(format_to_atom_3_01, true(Atom == '42 ---> 24')) :-
+		format_to_atom('~d ---> ~d', [42,24], Atom).
+
+	% format_to_chars/3 tests
+
+	test(format_to_chars_3_01, true(Chars == ExpectedChars)) :-
+		atom_chars('42 ---> 24', ExpectedChars),
+		format_to_chars('~d ---> ~d', [42,24], Chars).
+
+	% format_to_chars/4 tests
+
+	test(format_to_chars_4_01, true(Chars == ExpectedChars)) :-
+		atom_chars('42 ---> 24\n', ExpectedChars),
+		format_to_chars('~d ---> ~d', [42,24], Chars, ['\n']).
+
+	% format_to_codes/3 tests
+
+	test(format_to_codes_3_01, true(Codes == ExpectedCodes)) :-
+		atom_codes('42 ---> 24', ExpectedCodes),
+		format_to_codes('~d ---> ~d', [42,24], Codes).
+
+	% format_to_codes/4 tests
+
+	test(format_to_codes_4_01, true(Codes == ExpectedCodes)) :-
+		atom_codes('42 ---> 24\n', ExpectedCodes),
+		format_to_codes('~d ---> ~d', [42,24], Codes, [0'\n]).
 
 :- end_object.

@@ -27,7 +27,7 @@ Term input/output from/to atom, chars, and codes.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`term_io_protocol/0::read_from_atom/2`  :ref:`term_io_protocol/0::read_from_chars/2`  :ref:`term_io_protocol/0::read_from_codes/2`  :ref:`term_io_protocol/0::read_term_from_atom/3`  :ref:`term_io_protocol/0::read_term_from_chars/3`  :ref:`term_io_protocol/0::read_term_from_codes/3`  :ref:`term_io_protocol/0::write_term_to_atom/3`  :ref:`term_io_protocol/0::write_term_to_chars/3`  :ref:`term_io_protocol/0::write_term_to_chars/4`  :ref:`term_io_protocol/0::write_term_to_codes/3`  :ref:`term_io_protocol/0::write_term_to_codes/4`  :ref:`term_io_protocol/0::write_to_atom/2`  :ref:`term_io_protocol/0::write_to_chars/2`  :ref:`term_io_protocol/0::write_to_codes/2`  
+|     :ref:`term_io_protocol/0::format_to_atom/3`  :ref:`term_io_protocol/0::format_to_chars/3`  :ref:`term_io_protocol/0::format_to_chars/4`  :ref:`term_io_protocol/0::format_to_codes/3`  :ref:`term_io_protocol/0::format_to_codes/4`  :ref:`term_io_protocol/0::read_from_atom/2`  :ref:`term_io_protocol/0::read_from_chars/2`  :ref:`term_io_protocol/0::read_from_codes/2`  :ref:`term_io_protocol/0::read_term_from_atom/3`  :ref:`term_io_protocol/0::read_term_from_chars/3`  :ref:`term_io_protocol/0::read_term_from_codes/3`  :ref:`term_io_protocol/0::write_term_to_atom/3`  :ref:`term_io_protocol/0::write_term_to_chars/3`  :ref:`term_io_protocol/0::write_term_to_chars/4`  :ref:`term_io_protocol/0::write_term_to_codes/3`  :ref:`term_io_protocol/0::write_term_to_codes/4`  :ref:`term_io_protocol/0::write_to_atom/2`  :ref:`term_io_protocol/0::write_to_chars/2`  :ref:`term_io_protocol/0::write_to_codes/2`  
 
 .. contents::
    :local:

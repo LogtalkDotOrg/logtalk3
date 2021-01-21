@@ -88,15 +88,6 @@
 		close(Input),
 		atom_chars(Atom, Chars).
 
-	write_term_to_chars(Term, Chars, Options) :-
-		temporary_file_(Path),
-		open(Path, write, Output),
-		write_term(Output, Term, Options),
-		close(Output),
-		open(Path, read, Input),
-		get_chars(Input, Chars, []),
-		close(Input).
-
 	write_term_to_chars(Term, Chars, Tail, Options) :-
 		temporary_file_(Path),
 		open(Path, write, Output),
@@ -106,19 +97,41 @@
 		get_chars(Input, Chars, Tail),
 		close(Input).
 
-	write_term_to_codes(Term, Codes, Options) :-
+	write_term_to_codes(Term, Codes, Tail, Options) :-
 		temporary_file_(Path),
 		open(Path, write, Output),
 		write_term(Output, Term, Options),
 		close(Output),
 		open(Path, read, Input),
-		get_codes(Input, Codes, []),
+		get_codes(Input, Codes, Tail),
 		close(Input).
 
-	write_term_to_codes(Term, Codes, Tail, Options) :-
+	format_to_atom(Format, Arguments, Atom) :-
 		temporary_file_(Path),
 		open(Path, write, Output),
-		write_term(Output, Term, Options),
+		% the '$lgt_format'/3 predicate is defined in the backend adapter files
+		{'$lgt_format'(Output, Format, Arguments)},
+		close(Output),
+		open(Path, read, Input),
+		get_chars(Input, Chars, []),
+		close(Input),
+		atom_chars(Atom, Chars).
+
+	format_to_chars(Format, Arguments, Chars, Tail) :-
+		temporary_file_(Path),
+		open(Path, write, Output),
+		% the '$lgt_format'/3 predicate is defined in the backend adapter files
+		{'$lgt_format'(Output, Format, Arguments)},
+		close(Output),
+		open(Path, read, Input),
+		get_chars(Input, Chars, Tail),
+		close(Input).
+
+	format_to_codes(Format, Arguments, Codes, Tail) :-
+		temporary_file_(Path),
+		open(Path, write, Output),
+		% the '$lgt_format'/3 predicate is defined in the backend adapter files
+		{'$lgt_format'(Output, Format, Arguments)},
 		close(Output),
 		open(Path, read, Input),
 		get_codes(Input, Codes, Tail),
@@ -143,6 +156,18 @@
 
 	write_to_codes(Term, Codes) :-
 		write_term_to_codes(Term, Codes, []).
+
+	write_term_to_chars(Term, Chars, Options) :-
+		write_term_to_chars(Term, Chars, [], Options).
+
+	write_term_to_codes(Term, Codes, Options) :-
+		write_term_to_codes(Term, Codes, [], Options).
+
+	format_to_chars(Format, Arguments, Chars) :-
+		format_to_chars(Format, Arguments, Chars, []).
+
+	format_to_codes(Format, Arguments, Codes) :-
+		format_to_codes(Format, Arguments, Codes, []).
 
 	% auxiliary predicates
 

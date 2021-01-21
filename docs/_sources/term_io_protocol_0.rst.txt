@@ -53,7 +53,7 @@ Reads a term from an atom using the given read options. A period at the end of t
 | **Template:**
 |    ``read_term_from_atom(Atom,Term,Options)``
 | **Mode and number of proofs:**
-|    ``read_term_from_atom(@term,?atom,+list(read_option))`` - ``one_or_error``
+|    ``read_term_from_atom(@term,-atom,+list(read_option))`` - ``one_or_error``
 
 
 ------------
@@ -76,7 +76,7 @@ Reads a term from an atom using default read options. A period at the end of the
 | **Template:**
 |    ``read_from_atom(Atom,Term)``
 | **Mode and number of proofs:**
-|    ``read_from_atom(@term,?atom)`` - ``one_or_error``
+|    ``read_from_atom(@term,-atom)`` - ``one_or_error``
 
 
 ------------
@@ -99,7 +99,7 @@ Reads a term from a list of characters using the given read options. A period at
 | **Template:**
 |    ``read_term_from_chars(Chars,Term,Options)``
 | **Mode and number of proofs:**
-|    ``read_term_from_chars(@term,?list(character),+list(read_option))`` - ``one_or_error``
+|    ``read_term_from_chars(@term,-list(character),+list(read_option))`` - ``one_or_error``
 
 
 ------------
@@ -122,7 +122,7 @@ Reads a term from a list of characters using default read options. A period at t
 | **Template:**
 |    ``read_from_chars(Chars,Term)``
 | **Mode and number of proofs:**
-|    ``read_from_chars(@term,?list(character))`` - ``one_or_error``
+|    ``read_from_chars(@term,-list(character))`` - ``one_or_error``
 
 
 ------------
@@ -145,7 +145,7 @@ Reads a term from a list of character codes using the given read options. A peri
 | **Template:**
 |    ``read_term_from_codes(Codes,Term,Options)``
 | **Mode and number of proofs:**
-|    ``read_term_from_codes(@term,?list(character_code),+list(read_option))`` - ``one_or_error``
+|    ``read_term_from_codes(@term,-list(character_code),+list(read_option))`` - ``one_or_error``
 
 
 ------------
@@ -168,7 +168,7 @@ Reads a term from a list of character codes using default read options. A period
 | **Template:**
 |    ``read_from_codes(Codes,Term)``
 | **Mode and number of proofs:**
-|    ``read_from_codes(@term,?list(character_code))`` - ``one_or_error``
+|    ``read_from_codes(@term,-list(character_code))`` - ``one_or_error``
 
 
 ------------
@@ -191,7 +191,7 @@ Writes a term to an atom using the given write options.
 | **Template:**
 |    ``write_term_to_atom(Term,Atom,Options)``
 | **Mode and number of proofs:**
-|    ``write_term_to_atom(@term,?atom,+list(write_option))`` - ``one``
+|    ``write_term_to_atom(@term,-atom,+list(write_option))`` - ``one``
 
 
 ------------
@@ -214,7 +214,7 @@ Writes a term to an atom using default write options.
 | **Template:**
 |    ``write_to_atom(Term,Atom)``
 | **Mode and number of proofs:**
-|    ``write_to_atom(@term,?atom)`` - ``one``
+|    ``write_to_atom(@term,-atom)`` - ``one``
 
 
 ------------
@@ -237,7 +237,7 @@ Writes a term to a list of characters using the given write options.
 | **Template:**
 |    ``write_term_to_chars(Term,Chars,Options)``
 | **Mode and number of proofs:**
-|    ``write_term_to_chars(@term,?list(character),+list(write_option))`` - ``one``
+|    ``write_term_to_chars(@term,-list(character),+list(write_option))`` - ``one``
 
 
 ------------
@@ -260,7 +260,7 @@ Writes a term to a list of characters with the given tail using the given write 
 | **Template:**
 |    ``write_term_to_chars(Term,Chars,Tail,Options)``
 | **Mode and number of proofs:**
-|    ``write_term_to_chars(@term,?list(character),?term,+list(write_option))`` - ``one``
+|    ``write_term_to_chars(@term,-list(character),@term,+list(write_option))`` - ``one``
 
 
 ------------
@@ -283,7 +283,7 @@ Writes a term to a list of characters using default write options.
 | **Template:**
 |    ``write_to_chars(Term,Chars)``
 | **Mode and number of proofs:**
-|    ``write_to_chars(@term,?list(character))`` - ``one``
+|    ``write_to_chars(@term,-list(character))`` - ``one``
 
 
 ------------
@@ -306,7 +306,7 @@ Writes a term to a list of character codes using the given write options.
 | **Template:**
 |    ``write_term_to_codes(Term,Codes,Options)``
 | **Mode and number of proofs:**
-|    ``write_term_to_codes(@term,?list(character_code),+list(write_option))`` - ``one``
+|    ``write_term_to_codes(@term,-list(character_code),+list(write_option))`` - ``one``
 
 
 ------------
@@ -329,7 +329,7 @@ Writes a term to a list of character codes with the given tail using the given w
 | **Template:**
 |    ``write_term_to_codes(Term,Codes,Tail,Options)``
 | **Mode and number of proofs:**
-|    ``write_term_to_codes(@term,?list(character_code),?term,+list(write_option))`` - ``one``
+|    ``write_term_to_codes(@term,-list(character_code),@term,+list(write_option))`` - ``one``
 
 
 ------------
@@ -352,7 +352,122 @@ Writes a term to a list of character codes using default write options.
 | **Template:**
 |    ``write_to_codes(Term,Codes)``
 | **Mode and number of proofs:**
-|    ``write_to_codes(@term,?list(character_code))`` - ``one``
+|    ``write_to_codes(@term,-list(character_code))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="format_to_atom/3"> </div>
+
+.. index:: format_to_atom/3
+.. _term_io_protocol/0::format_to_atom/3:
+
+``format_to_atom/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Writes a list of arguments to an atom using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_to_atom(Format,Arguments,Atom)``
+| **Mode and number of proofs:**
+|    ``format_to_atom(@atom,+list(term),-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="format_to_chars/3"> </div>
+
+.. index:: format_to_chars/3
+.. _term_io_protocol/0::format_to_chars/3:
+
+``format_to_chars/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Writes a list of arguments to a list of characters using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_to_chars(Format,Arguments,Chars)``
+| **Mode and number of proofs:**
+|    ``format_to_chars(@term,+list(term),-list(character))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="format_to_chars/4"> </div>
+
+.. index:: format_to_chars/4
+.. _term_io_protocol/0::format_to_chars/4:
+
+``format_to_chars/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Writes a term to a list of characters with the given tail using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_to_chars(Format,Arguments,Chars,Tail)``
+| **Mode and number of proofs:**
+|    ``format_to_chars(@term,+list(term),-list(character),@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="format_to_codes/3"> </div>
+
+.. index:: format_to_codes/3
+.. _term_io_protocol/0::format_to_codes/3:
+
+``format_to_codes/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Writes a list of arguments to a list of character codes using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_to_codes(Format,Arguments,Codes)``
+| **Mode and number of proofs:**
+|    ``format_to_codes(@term,+list(term),-list(character_code))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="format_to_codes/4"> </div>
+
+.. index:: format_to_codes/4
+.. _term_io_protocol/0::format_to_codes/4:
+
+``format_to_codes/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Writes a list of arguments to a list of character codes with the given tail using the given format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_to_codes(Format,Arguments,Codes,Tail)``
+| **Mode and number of proofs:**
+|    ``format_to_codes(@term,+list(term),-list(character_code),@term)`` - ``one``
 
 
 ------------
