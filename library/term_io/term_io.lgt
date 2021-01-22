@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-21,
+		date is 2021-01-22,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -36,6 +36,14 @@
 
 	:- private(temporary_file_/1).
 	:- dynamic(temporary_file_/1).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized([
+			read_term_from_atom/3, read_term_from_chars/3, read_term_from_codes/3,
+			write_term_to_atom/3, write_term_to_chars/4, write_term_to_codes/4,
+			format_to_atom/3, format_to_chars/4, format_to_codes/4
+		]).
+	:- endif.
 
 	% main predicates
 
@@ -171,11 +179,6 @@
 
 	% auxiliary predicates
 
-	:- synchronized([
-		put_chars/3, put_codes/3,
-		get_chars/3, get_codes/3
-	]).
-
 	put_chars([], Char, Stream) :-
 		(	Char == '.' ->
 			put_char(Stream, Char)
@@ -193,7 +196,8 @@
 		;	put_code(Stream, Code),
 			put_code(Stream, 0'.)
 		),
-		put_code(Stream, 0'\s).
+		char_code(' ', Space),
+		put_code(Stream, Space).
 	put_codes([Next| Codes], Code, Stream) :-
 		put_code(Stream, Code),
 		put_codes(Codes, Next, Stream).
