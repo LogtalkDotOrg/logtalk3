@@ -22,9 +22,9 @@
 	implements(randomp)).
 
 	:- info([
-		version is 2:7:0,
+		version is 2:7:1,
 		author is 'Paulo Moura',
-		date is 2020-02-01,
+		date is 2021-01-23,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.'
@@ -49,12 +49,14 @@
 		length/2, nth1/3
 	]).
 
-	:- synchronized([
-		random/1, random/3,
-		sequence/4, set/4, permutation/2,
-		randseq/4, randset/4,
-		reset_seed/0, get_seed/1, set_seed/1, randomize/1
-	]).
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized([
+			random/1, random/3,
+			sequence/4, set/4, permutation/2,
+			randseq/4, randset/4,
+			reset_seed/0, get_seed/1, set_seed/1, randomize/1
+		]).
+	:- endif.
 
 	:- initialization(reset_seed).
 

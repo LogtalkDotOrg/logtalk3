@@ -82,6 +82,9 @@ ProLog.
 
 * FIXED: Warnings with the new `disjunctions` flag for the `arbitrary` library.
 
+* IMPROVED: The `gensym` and `random` library to only declare predicates as
+synchronized when compiled with a backend that supports threads. 
+
 Tools
 -----
 

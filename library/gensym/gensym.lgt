@@ -21,21 +21,19 @@
 :- object(gensym).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2011-11-09,
+		date is 2021-01-23,
 		comment is 'Predicates for generating unique atoms. Object protocol based on the ``gensym`` module of SWI-Prolog.'
 	]).
 
 	:- public(reset_gensym/0).
-	:- synchronized(reset_gensym/0).
 	:- mode(reset_gensym, one).
 	:- info(reset_gensym/0, [
 		comment is 'Resets the generator counter for all bases.'
 	]).
 
 	:- public(reset_gensym/1).
-	:- synchronized(reset_gensym/1).
 	:- mode(reset_gensym(+atom), one).
 	:- info(reset_gensym/1, [
 		comment is 'Resets the generator counter for a given base.',
@@ -43,7 +41,6 @@
 	]).
 
 	:- public(gensym/2).
-	:- synchronized(gensym/2).
 	:- mode(gensym(+atom, -atom), one).
 	:- info(gensym/2, [
 		comment is 'Returns a new unique atom with a given base (prefix).',
@@ -57,6 +54,14 @@
 		comment is 'Table of generator bases and respective counters.',
 		argnames is ['Base', 'Counter']
 	]).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized([
+			reset_gensym/0,
+			reset_gensym/1,
+			gensym/2
+		]).
+	:- endif.
 
 	reset_gensym :-
 		retract(base_(Base, _)),
