@@ -24,7 +24,7 @@
 		version is 1:0:2,
 		author is 'Paulo Moura',
 		date is 2021-01-23,
-		comment is 'Predicates for generating unique atoms. Object protocol based on the ``gensym`` module of SWI-Prolog.'
+		comment is 'Predicates for generating unique atoms. Object protocol based on the ``gensym`` module of SWI-Prolog. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.'
 	]).
 
 	:- public(reset_gensym/0).

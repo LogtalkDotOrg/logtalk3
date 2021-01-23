@@ -21,10 +21,10 @@
 :- protocol(randomp).
 
 	:- info([
-		version is 2:5:0,
+		version is 2:5:1,
 		author is 'Paulo Moura',
-		date is 2019-12-01,
-		comment is 'Random number generator protocol.',
+		date is 2021-01-23,
+		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
 
@@ -157,5 +157,14 @@
 		comment is 'Calls a goal or fails without calling it with probability ``Probability``. When the goal is called, it determines if this predicate succeeds once or fails.',
 		argnames is ['Probability', 'Goal']
 	]).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		:- synchronized([
+			random/1, random/3,
+			sequence/4, set/4, permutation/2,
+			randseq/4, randset/4,
+			get_seed/1, set_seed/1
+		]).
+	:- endif.
 
 :- end_protocol.

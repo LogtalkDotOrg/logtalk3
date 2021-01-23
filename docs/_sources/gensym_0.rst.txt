@@ -8,7 +8,7 @@
 ``gensym``
 ==========
 
-Predicates for generating unique atoms. Object protocol based on the ``gensym`` module of SWI-Prolog.
+Predicates for generating unique atoms. Object protocol based on the ``gensym`` module of SWI-Prolog. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:2

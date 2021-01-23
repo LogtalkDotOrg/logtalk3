@@ -8,11 +8,11 @@
 ``randomp``
 ===========
 
-Random number generator protocol.
+Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
 | **Author:** Paulo Moura
-| **Version:** 2:5:0
-| **Date:** 2019-12-01
+| **Version:** 2:5:1
+| **Date:** 2021-01-23
 
 | **Compilation flags:**
 |    ``static``
@@ -48,7 +48,7 @@ Public predicates
 Returns a new random float value in the interval ``[0.0, 1.0[``.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``random(Random)``
@@ -163,7 +163,7 @@ Enumerates the elements of a list in random order. Fails if the list is empty.
 Returns a random permutation of a list.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``permutation(List,Permutation)``
@@ -186,7 +186,7 @@ Returns a random permutation of a list.
 Returns list of random integers of given length in random order in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers or if ``Lower > Upper``.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``sequence(Length,Lower,Upper,List)``
@@ -209,7 +209,7 @@ Returns list of random integers of given length in random order in interval ``[L
 Returns ordered set of random integers of given size in interval ``[Lower, Upper]``. Fails if ``Length``, ``Lower``, or ``Upper`` are not integers, if ``Lower > Upper``, or if ``Length > Upper - Lower + 1``.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``set(Length,Lower,Upper,Set)``
@@ -232,7 +232,7 @@ Returns ordered set of random integers of given size in interval ``[Lower, Upper
 Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower > Upper``. Deprecated. Use ``between/3`` for integers.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``random(Lower,Upper,Random)``
@@ -256,7 +256,7 @@ Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower 
 Returns list of random values of given length in random order in interval ``[Lower, Upper[``. Fails if ``Lower > Upper`` or if the arguments are neither integers or floats. Deprecated. Use ``sequence/4`` for integers.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``randseq(Length,Lower,Upper,List)``
@@ -280,7 +280,7 @@ Returns list of random values of given length in random order in interval ``[Low
 Returns ordered set of random values of given size in interval ``[Lower, Upper[``. Fails if the arguments are neither integers or floats, ``Lower > Upper``, or ``Length > Upper - Lower`` when arguments are integers. Deprecated. Use ``set/4`` for integers.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``randset(Length,Lower,Upper,Set)``
@@ -304,7 +304,7 @@ Returns ordered set of random values of given size in interval ``[Lower, Upper[`
 Gets the current random generator seed. Seed should be regarded as an opaque ground term.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``get_seed(Seed)``
@@ -327,7 +327,7 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
 
 | **Compilation flags:**
-|    ``static``
+|    ``static, synchronized``
 
 | **Template:**
 |    ``set_seed(Seed)``
