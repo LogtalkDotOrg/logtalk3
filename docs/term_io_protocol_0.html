@@ -255,11 +255,11 @@
   <p class="right" id="term-io-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <div class="section" id="term-io-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">term_io_protocol</span></code><a class="headerlink" href="#term-io-protocol" title="Permalink to this headline">¶</a></h1>
-<p>Predicates for term input/output from/to atom, chars, and codes.</p>
+<p>Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2021-01-20</div>
+<div class="line"><strong>Date:</strong> 2021-01-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -323,7 +323,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -340,7 +340,7 @@
 <div id="read_from_atom/2"> </div></div>
 <div class="section" id="read-from-atom-2">
 <span id="term-io-protocol-0-read-from-atom-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">read_from_atom/2</span></code></a><a class="headerlink" href="#read-from-atom-2" title="Permalink to this headline">¶</a></h3>
-<p>Reads a term from an atom using default read options. A period at the end of the atom is optional.</p>
+<p>Reads a term from an atom using default read options. Shorthand for <code class="docutils literal notranslate"><span class="pre">read_term_from_atom(Atom,Term,[])</span></code>. A period at the end of the atom is optional.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -365,7 +365,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -382,7 +382,7 @@
 <div id="read_from_chars/2"> </div></div>
 <div class="section" id="read-from-chars-2">
 <span id="term-io-protocol-0-read-from-chars-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">read_from_chars/2</span></code></a><a class="headerlink" href="#read-from-chars-2" title="Permalink to this headline">¶</a></h3>
-<p>Reads a term from a list of characters using default read options. A period at the end of the list is optional.</p>
+<p>Reads a term from a list of characters using default read options. Shorthand for <code class="docutils literal notranslate"><span class="pre">read_term_from_chars(Chars,Term,[])</span></code>. A period at the end of the list is optional.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -407,7 +407,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -424,7 +424,7 @@
 <div id="read_from_codes/2"> </div></div>
 <div class="section" id="read-from-codes-2">
 <span id="term-io-protocol-0-read-from-codes-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">read_from_codes/2</span></code></a><a class="headerlink" href="#read-from-codes-2" title="Permalink to this headline">¶</a></h3>
-<p>Reads a term from a list of character codes using default read options. A period at the end of the list is optional.</p>
+<p>Reads a term from a list of character codes using default read options. Shorthand for <code class="docutils literal notranslate"><span class="pre">read_term_from_codes(Codes,Term,[])</span></code>. A period at the end of the list is optional.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -449,7 +449,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -466,7 +466,7 @@
 <div id="write_to_atom/2"> </div></div>
 <div class="section" id="write-to-atom-2">
 <span id="term-io-protocol-0-write-to-atom-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_to_atom/2</span></code></a><a class="headerlink" href="#write-to-atom-2" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to an atom using default write options.</p>
+<p>Writes a term to an atom using default write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_atom(Term,Atom,[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -487,7 +487,7 @@
 <div id="write_term_to_chars/3"> </div></div>
 <div class="section" id="write-term-to-chars-3">
 <span id="term-io-protocol-0-write-term-to-chars-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars/3</span></code></a><a class="headerlink" href="#write-term-to-chars-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of characters using the given write options.</p>
+<p>Writes a term to a list of characters using the given write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_chars(Term,Chars,[],Options)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -512,7 +512,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -529,7 +529,7 @@
 <div id="write_to_chars/2"> </div></div>
 <div class="section" id="write-to-chars-2">
 <span id="term-io-protocol-0-write-to-chars-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_to_chars/2</span></code></a><a class="headerlink" href="#write-to-chars-2" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of characters using default write options.</p>
+<p>Writes a term to a list of characters using default write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_chars(Term,Chars,[],[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -550,7 +550,7 @@
 <div id="write_term_to_codes/3"> </div></div>
 <div class="section" id="write-term-to-codes-3">
 <span id="term-io-protocol-0-write-term-to-codes-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes/3</span></code></a><a class="headerlink" href="#write-term-to-codes-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of character codes using the given write options.</p>
+<p>Writes a term to a list of character codes using the given write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_codes(Term,Codes,[],Options)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -575,7 +575,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -592,7 +592,7 @@
 <div id="write_to_codes/2"> </div></div>
 <div class="section" id="write-to-codes-2">
 <span id="term-io-protocol-0-write-to-codes-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_to_codes/2</span></code></a><a class="headerlink" href="#write-to-codes-2" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of character codes using default write options.</p>
+<p>Writes a term to a list of character codes using default write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_chars(Term,Codes,[],[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -617,7 +617,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -634,7 +634,7 @@
 <div id="format_to_chars/3"> </div></div>
 <div class="section" id="format-to-chars-3">
 <span id="term-io-protocol-0-format-to-chars-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_chars/3</span></code></a><a class="headerlink" href="#format-to-chars-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a list of arguments to a list of characters using the given format.</p>
+<p>Writes a list of arguments to a list of characters using the given format. Shorthand for <code class="docutils literal notranslate"><span class="pre">format_to_chars(Format,Arguments,Chars,[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -659,7 +659,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -676,7 +676,7 @@
 <div id="format_to_codes/3"> </div></div>
 <div class="section" id="format-to-codes-3">
 <span id="term-io-protocol-0-format-to-codes-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_codes/3</span></code></a><a class="headerlink" href="#format-to-codes-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a list of arguments to a list of character codes using the given format.</p>
+<p>Writes a list of arguments to a list of character codes using the given format. Shorthand for <code class="docutils literal notranslate"><span class="pre">format_to_codes(Format,Arguments,Codes,[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -701,7 +701,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
 </div>
 </div>
 <div class="line-block">

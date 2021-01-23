@@ -160,10 +160,10 @@
 		write_term_to_atom(Term, Atom, []).
 
 	write_to_chars(Term, Chars) :-
-		write_term_to_chars(Term, Chars, []).
+		write_term_to_chars(Term, Chars, [], []).
 
 	write_to_codes(Term, Codes) :-
-		write_term_to_codes(Term, Codes, []).
+		write_term_to_codes(Term, Codes, [], []).
 
 	write_term_to_chars(Term, Chars, Options) :-
 		write_term_to_chars(Term, Chars, [], Options).
