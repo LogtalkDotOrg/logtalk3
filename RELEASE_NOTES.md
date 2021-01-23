@@ -44,7 +44,7 @@ prevent loading the current version of the Logtalk compiler/runtime.
 * REMOVED: Integration files for XSB-MT as this backend support for threads is
 too buggy to be usable.
 
-* UPDATED: Trealla ProLog support and minimum required version to 1.5.0.
+* UPDATED: Trealla ProLog support and minimum required version to 1.6.0.
 
 Documentation
 -------------
@@ -83,7 +83,7 @@ ProLog.
 * FIXED: Warnings with the new `disjunctions` flag for the `arbitrary` library.
 
 * IMPROVED: The `gensym` and `random` library to only declare predicates as
-synchronized when compiled with a backend that supports threads. 
+synchronized when compiled with a backend that supports threads.
 
 Tools
 -----
@@ -912,7 +912,7 @@ name for the tests driver and sourced files (minus the file name extensions).
 * UPDATED: The `help` tool for the new `logtalk_linter_hook/7` predicate.
 
 * UPDATED: The QuickCheck implementation to also print counter-example
-shrink steps when using the `v(true)` option. 
+shrink steps when using the `v(true)` option.
 
 * FIXED: The QuickCheck implementation to also use the `pc/1` option when
 shrinking counter-examples.
@@ -1053,7 +1053,7 @@ include the random generator starting seed used to generate the tests.
 
 * CHANGED: The `lgtunit` tool QuickCheck test dialects printed messages in
 case of errors and failures to include the starting seed used to generate
-the random tests. 
+the random tests.
 
 * ADDED: Support to the `logtalk_tester` shell script to set the random
 generator starting seed used to run QuickCheck tests.
@@ -2167,7 +2167,7 @@ IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
 * UPDATED: Textadept editor syntax highlighting support. Contributed by
-Michael T. Richter. 
+Michael T. Richter.
 
 * UPDATED: Syntax test files to allow detecting highlighting flaws where an
 atom would be mistaken for a built-in predicate or a built-in directive.
@@ -2569,7 +2569,7 @@ Library
 renamed their loader files to `loader.lgt` for uniformity and simplicity.
 
 * CHANGED: The now deprecated library loader files to load the individual
-libraries from their new directories. 
+libraries from their new directories.
 
 * CHANGED: Renamed the `setp` protocol `length/2` predicate to `size/2` for
 naming consistency with other libraries. Added `length/2` as an alias to the
@@ -3492,7 +3492,7 @@ converting documents to text.
 
 * UPDATED: The `pardicts` example to avoid instantiation errors when compiled
 in optimal mode due to SWI-Prolog different semantics for clauses that contain
-`./2` terms when the clauses are asserted versus compiled from a source file. 
+`./2` terms when the clauses are asserted versus compiled from a source file.
 
 Installers and installation scripts
 -----------------------------------
@@ -4543,7 +4543,7 @@ tested cluttering the test logs.
 
 * ADDED: Support to the `diagrams` tool to generate predicate cross-referencing
 diagrams with links from predicate relations (e.g. `calls` or `updates`) to the
-source file line for the corresponding predicate clause. 
+source file line for the corresponding predicate clause.
 
 * ADDED: Predicate `port/5` to the `ports` tool for public access to collected
 port profiling data.
@@ -4919,7 +4919,7 @@ Tools
 -----
 
 * CHANGED: Default value of the `lgtdoc` tool option `omit_path_prefixes/1` to
-omit the home directory. 
+omit the home directory.
 
 * ADDED: User-customizable documentation metric to the `code_metrics` tool.
 
@@ -5893,7 +5893,7 @@ is an included file.
 
 * IMPROVED: Report compiler errors and warnings found when processing an
 `include/1` directive using the included file name and line numbers instead
-of reporting the main file name and the line number of the directive. 
+of reporting the main file name and the line number of the directive.
 
 * CHANGED: The `file` key of the `logtalk_load_context/2` predicate to return
 the file being included when processing an `include/1` directive.
@@ -6887,7 +6887,7 @@ log messages when tagging a test suite as a timeout or a crash.
 Windows provided Git Bash when using the `logtalk_tester.sh` automation script.
 
 * IMPROVED: The `lgtunit` tool to print an error message when an invalid test
-outcome is found while compiling tests using the `test/3` testing dialect. 
+outcome is found while compiling tests using the `test/3` testing dialect.
 
 * FIXED: Regression in the `lgtunit` tool introduced in the previous release
 where an error in the added meta-predicate directives for local meta-predicates
@@ -7363,7 +7363,7 @@ Documentation
 Tests
 -----
 
-* FIXED: Workaround an issue with operator parsing when testing the Logtalk 
+* FIXED: Workaround an issue with operator parsing when testing the Logtalk
 `current_op/3` method using GNU Prolog as the backend compiler.
 
 Examples
@@ -7817,7 +7817,7 @@ when intercepting questions.
 
 * IMPROVED: When using the question asking mechanism, default to the `question`
 kind when there isn't neither a user or a default prompt and stream defined
-for the question kind. 
+for the question kind.
 
 * FIXED: Passing an invalid directive to the built-in `create_object/4`,
 `create_protocol/3`, and `create_category/4` predicates would fail instead of
@@ -7908,7 +7908,7 @@ would not be listed as entity properties.
 * FIXED: Bug in the processing of conditional compilation directives when
 using embedded `if/1` directives.
 
-* FIXED: Compiler spurious choice-point when compiling an `info/2` directive. 
+* FIXED: Compiler spurious choice-point when compiling an `info/2` directive.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -8115,7 +8115,7 @@ Based on the specification of the `create_prolog_flag/3` built-in predicate of
 SWI-Prolog.
 
 * IMPROVED: When printing warning and error line numbers, write "at or above"
-instead of "above" when the culprit term begin and end lines are the same. 
+instead of "above" when the culprit term begin and end lines are the same.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -8552,7 +8552,7 @@ the call to `true/0` would wrongly convert it into an if-then-else goal. Thanks
 to David S. Warren for an enlightening discussion regarding this issue in XSB
 that helped uncover this bug also in Logtalk.
 
-* FIXED: Restored support for using a list or a sequence of entity identifiers 
+* FIXED: Restored support for using a list or a sequence of entity identifiers
 as argument to entity relations in entity opening directives.
 
 Prolog adapter and integration files
@@ -8748,7 +8748,7 @@ Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: The (still unsupported) Jekejeke adapter file for changes in
-release 1.0.4. 
+release 1.0.4.
 
 Documentation
 -------------
@@ -9824,7 +9824,7 @@ Library
 -------
 
 * IMPROVED: More efficient interval representation for the implementation of
-temporal interval relations in the `interval` object. Added a constructor 
+temporal interval relations in the `interval` object. Added a constructor
 predicate, `new/3`, to the `intervalp` protocol and the `interval` object.
 
 Tools
@@ -9911,7 +9911,7 @@ calling the `::/1-2` message sending control constructs with arguments only
 bound at runtime.
 
 * FIXED: Sending a message to a parametric object proxy would not check for
-references to unknown objects during source file compilation. 
+references to unknown objects during source file compilation.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -10439,7 +10439,7 @@ list no longer being an atom in this backend Prolog compiler. Thanks to
 Andreas Becker for the bug report.
 
 * UPDATED: The `help` tool predicates `control/4`, `built_in_predicate/4`,
-`built_in_method/4`, `built_in_directive/4`, `built_in_non_terminal/4` are 
+`built_in_method/4`, `built_in_directive/4`, `built_in_non_terminal/4` are
 now public.
 
 Tests
@@ -10536,7 +10536,7 @@ Logtalk compiler and runtime
 argument pairs where atoms were previously required.
 
 * ADDED: Experimental support for using a backend Prolog compiler string
-built-in term type in DCGs. 
+built-in term type in DCGs.
 
 * FIXED: Ensure that the internal thread exit handler always succeeds to
 better deal with implementation differences between backend Prolog compilers.
@@ -11246,7 +11246,7 @@ Examples
 --------
 
 * FIXED: The `benchmarks` example `loader.lgt` file didn't ensure compilation
-of the source files with the `optimize` flag set. 
+of the source files with the `optimize` flag set.
 
 
 3.00.0 Alpha 19 - June 10, 2013
@@ -12296,7 +12296,7 @@ for CxProlog.
 
 * ADDED: Unit tests to the `constraints/sicstus` and `logging` examples.
 
-* UPDATED: The unit tests automation script to work with the new warning and 
+* UPDATED: The unit tests automation script to work with the new warning and
 error reporting formats (using the defaults in the `core/core_messages.lgt`
 file).
 
@@ -12376,7 +12376,7 @@ value of `silent` and the `missing_directives` compiler flags with a default
 value of `warning`.
 
 * NEW: Updated the compiler to perform error and portability checking
-for the Prolog standard `set_prolog_flag/2` and `current_prolog_flag/2`  
+for the Prolog standard `set_prolog_flag/2` and `current_prolog_flag/2`
 predicates and the `set_prolog_flag/2` directive.
 
 * CHANGED: Compiler messages about redefined entities that result from
@@ -12495,7 +12495,7 @@ and clauses.
 
 * FIXED: A bug in the compile-time type-checking of the first argument
 of calls to the `parameter/2` built-in method, which could result in a
-misleading instantiation error in an arithmetic comparison expression. 
+misleading instantiation error in an arithmetic comparison expression.
 
 * FIXED: Compilation of the execution-context built-in methods whenever
 their arguments are bound at compile-time. In this case, the calls are
@@ -14354,7 +14354,7 @@ Corrected the definitions of the predicates '$lgt_current_date'/3 and
 value of the Logtalk flag "prolog_dialect" from "qu" to "qp" in order
 to match the value of the new Prolog flag "dialect" implemented in
 Qu-Prolog 8.11. Added support for the "smart_compilation" compiler flag.
-Improved startup time when using the "qplgt.sh" integration script. 
+Improved startup time when using the "qplgt.sh" integration script.
 
 Corrected a typo in the template of the predicate subsumes/2 in the
 library protocol "termp".
@@ -14545,7 +14545,7 @@ test files for each supported text encoding.
 Added some more unit tests for the "reflection" example.
 
 Fixed a typo that prevented running the "mtbatch" example using XSB as the
-back-end Prolog compiler. 
+back-end Prolog compiler.
 
 Simplified the "cc" example when using SICStus Prolog 4.x as the back-end
 compiler by moving importing of the "system3" library shell/1-2 predicates
@@ -14621,7 +14621,7 @@ integration scripts for both POSIX and Windows systems in order to use
 the "--script" command-line option, thus freeing the "--goal" option.
 
 Added a logtalk_library_path/2 entry for the library "home" (the user
-home directory) when running on Windows operating-systems. However, 
+home directory) when running on Windows operating-systems. However,
 this definition only works for some back-end Prolog compilers due to
 bugs in expanding paths containing more than one environment variable.
 
@@ -14629,8 +14629,8 @@ Updated the "types_loader.lgt" library loader file in order to load the
 "rbtree" library object.
 
 Updated the library object "term" in order to implement the variant/2
-predicate as a call to the =@=/2 proprietary built-in predicate when 
-using either SWI-Prolog or YAP as the back-end Prolog compilers. 
+predicate as a call to the =@=/2 proprietary built-in predicate when
+using either SWI-Prolog or YAP as the back-end Prolog compilers.
 
 Corrected a predicate property name bug (alias/1 instead of alias_of/1)
 in the library object "listing".
@@ -14702,7 +14702,7 @@ Reintroduced parametric categories. Changed semantics of the parameter/2
 built-in execution-context method when used in category predicates to
 access the category parameters instead of the parameters of the object
 importing the category. This change provides safer and more robust use
-of parameter/2 calls in categories. 
+of parameter/2 calls in categories.
 
 Improved compile-time error-checking of calls to the parameter/2 built-in
 execution-context method.
@@ -14830,7 +14830,7 @@ Updated the library object "term" with a (hopefully) faster implementation
 of the predicate ground/1, following advise by Lindsey Spratt on the GNU
 Prolog mailing list.
 
-Corrected a validation (but harmless) bug in the Logtalk syntax coloring 
+Corrected a validation (but harmless) bug in the Logtalk syntax coloring
 support for the jEdit text editor.
 
 
@@ -15056,7 +15056,7 @@ Added information about using the Sublime Text Windows text editor for
 editing Logtalk source files.
 
 Added a set of Logtalk source code snippets and a set of compilation
-and documenting tools for the Gnome's Gedit text editor (see the file 
+and documenting tools for the Gnome's Gedit text editor (see the file
 "coding/gedit/NOTES.txt" for details).
 
 Replaced GeSHi support with a new language file written from scratch.
@@ -15065,7 +15065,7 @@ Added syntax coloring support for the module directive reexport/1 to
 all supported text editors and syntax highlighters.
 
 Updated documentation in order to remove references to deprecated syntax
-for sequences of predicate indicators in predicate directives. Updated 
+for sequences of predicate indicators in predicate directives. Updated
 documentation on built-in meta-predicates to correctly described their
 semantics when used within categories.
 
@@ -15208,7 +15208,7 @@ Added support for compiling module-qualified arguments in calls to Prolog
 database and reflection built-in predicates.
 
 Added support for using multiple info/1 directives per entity and multiple
-info/2 directives per predicate (useful when compiling modules as objects). 
+info/2 directives per predicate (useful when compiling modules as objects).
 
 Added limited support for translating queries as initialization goals when
 compiling modules as objects (queries must be calls to locally defined
@@ -15339,7 +15339,7 @@ Added aliases foldl/4, foldr/4, scanl/4, and scanr/4 to the library object
 Added an experimental "logtalk_select.sh" POSIX shell script for switching
 between installed Logtalk stable versions.
 
-Added a POSIX integration script, "xsb64lgt", for using Logtalk with the 
+Added a POSIX integration script, "xsb64lgt", for using Logtalk with the
 single-threaded, 64 bits version of XSB.
 
 Added a note on a workaround for compatibility issues between GNU Prolog
@@ -15379,7 +15379,7 @@ Simplified compilation and improved performance of predicates that call
 local user meta-predicates.
 
 Corrected a bug where calls to local user meta-predicates would fail.
-   
+
 Corrected a bug where local calls to user meta-predicates would not be
 visible to the built-in debugger.
 
@@ -15397,7 +15397,7 @@ Simplified message sending implementation by removing the seldom used
 control constructs that allowed sending the same message to a conjunction
 or disjunction of objects.
 
-Specify \+/1, call/1-N, and once/1 as built-in local meta-predicates. 
+Specify \+/1, call/1-N, and once/1 as built-in local meta-predicates.
 
 Disallow using Logtalk and Prolog built-in meta-predicates as messages in
 order to avoid conflicting semantics with user-defined object and category
@@ -15421,7 +15421,7 @@ a goal instead of using the call/1 built-in meta-predicate, this change
 allows for uniform handling of variables as goals in clause bodies. Thanks
 to Victor Noel for the bug report.
 
-Updated the ECLiPSe config files in order to support the non-standard 
+Updated the ECLiPSe config files in order to support the non-standard
 *->/2 (aka "soft cut") control construct. Thanks to Victor Noel for the
 bug report.
 
@@ -15465,7 +15465,7 @@ Simplified running the "poem" example.
 
 Added support for overriding Logtalk default compiler flags (specified
 in the back-end Prolog compiler config files) using new settings files.
-Logtalk will load a "settings.lgt" file in the startup directory. If 
+Logtalk will load a "settings.lgt" file in the startup directory. If
 this file is not found, Logtalk will load a "settings.lgt" file in the
 Logtalk user directory. Requires running Logtalk with a back-end Prolog
 compiler supporting access to environment variables. Loading of settings
@@ -15479,7 +15479,7 @@ Updated the "cplgtdirs.*" scripts to copy an existing "settings.lgt" file
 from the backup of the Logtalk user folder to the new Logtalk user folder.
 
 Updated the Logtalk compiler and runtime and all the config files to use
-the more standard call/N predicates instead of the call_with_args/N 
+the more standard call/N predicates instead of the call_with_args/N
 predicates.
 
 Improved the XML documentation automatically generated for objects and
@@ -15528,7 +15528,7 @@ The compiler flags "context_switching_calls", "startup_message", and
 their default values from within "settings.lgt" files. The possible
 values for the compiler flags "dynamic_declarations", "complements",
 "context_switching_calls", and "events" are now "allow" and "deny".
-Added a new read-only compiler flag "prolog_version". Renamed the 
+Added a new read-only compiler flag "prolog_version". Renamed the
 compiler flag "prolog" to "prolog_dialect".
 
 Changed object compilation in order to restrict the use of the <</2
@@ -15550,8 +15550,8 @@ Updated the XSB-MT integration scripts to make all lookup cache dynamic
 predicates thread private. Updated the XSB config file for version 3.2,
 which is now required for running Logtalk.
 
-Added a new '$lgt_prolog_feature'/2 predicate to all config files, used 
-for representing back-end Prolog supported features that are previously 
+Added a new '$lgt_prolog_feature'/2 predicate to all config files, used
+for representing back-end Prolog supported features that are previously
 represented by read-only compiler flags.
 
 Added new '$lgt_environment_variable'/2, '$lgt_startup_directory'/1, and
@@ -15564,11 +15564,11 @@ Updated the config files of the Ciao, CxProlog, GNU Prolog, ECLiPSE, and
 XSB compilers to set the default directory for temporary files depending
 on the host operating-system.
 
-Updated the config files of the Ciao, ECLiPSe, GNU Prolog, Qu-Prolog, 
+Updated the config files of the Ciao, ECLiPSe, GNU Prolog, Qu-Prolog,
 and SICStus Prolog compilers to return term position line numbers for
 reporting warnings and errors.
 
-Switched off use of multifile/1 directives for Amzi! Prolog due to its 
+Switched off use of multifile/1 directives for Amzi! Prolog due to its
 buggy implementation on this Prolog compiler.
 
 Updated the Ciao config file to workaround a weird bug in the read_term/3
@@ -15583,7 +15583,7 @@ to workaround the limitation on the maximum size of atoms in Qu-Prolog.
 Removed the obsolete SWI-Prolog hook file "swi_set_logtalk_context.pl"
 (the Logtalk control construct <</2 provides similar functionality).
 
-Added a check/1 predicate to all objects in the "types" library. This 
+Added a check/1 predicate to all objects in the "types" library. This
 predicate differs from the existing valid/1 predicate by throwing an
 exception when the argument is not valid instead of failing.
 
@@ -15609,13 +15609,13 @@ example when using SICStus Prolog as a back-end compiler.
 2.35.1 - March 1, 2009
 ======================
 
-Allow explicitly qualified module calls in the body of category and object 
+Allow explicitly qualified module calls in the body of category and object
 predicate clauses without requiring the calls to be wrapped within a {}/1
 control construct to ensure successful compilation. This requires an hack
 in the config files of most back-end Prolog compilers with module systems
-as the implementations of the predicate_property/2 built-in predicate 
+as the implementations of the predicate_property/2 built-in predicate
 cannot be used to test if :/2 is a built-in control construct. Updated the
-config files of Amzi! Prolog, Ciao, IF/Prolog, Quintus Prolog, SICStus 
+config files of Amzi! Prolog, Ciao, IF/Prolog, Quintus Prolog, SICStus
 Prolog, SWI-Prolog, XSB, and YAP.
 
 Improved the Logtalk compiler compatibility with Prolog meta_predicate/1
@@ -15643,12 +15643,12 @@ same unknown parametric object.
 
 Corrected a bug in the implementation of the "smart_compilation" compiler
 flag that would result in a misleading successful compilation of a source
-file containing syntax errors after the first failed compilation when the 
-errors are not corrected between compilations. Thanks to Joerg Schuster 
+file containing syntax errors after the first failed compilation when the
+errors are not corrected between compilations. Thanks to Joerg Schuster
 for the bug report.
 
 Added a '$lgt_delete_file'/1 predicate to all config files. For back-end
-Prolog compilers that don't support a built-in predicate for deleting 
+Prolog compilers that don't support a built-in predicate for deleting
 files, the '$lgt_delete_file'/1 predicate simply fails. This predicate is
 used by the Logtalk compiler to ensure correct behavior of the compiler
 flag "smart_compilation".
@@ -15659,7 +15659,7 @@ flag is set to "error".
 Integration with GNU Prolog now requires version 1.3.1 or later of this
 compiler.
 
-Added a workaround to the ECLiPSE config files in order to support smart 
+Added a workaround to the ECLiPSE config files in order to support smart
 compilation of source files (due to the non-standard implementation of the
 read_term/3 predicate that fails for syntax errors instead of throwing an
 exception).
@@ -15669,7 +15669,7 @@ renaming the predicate vars/2 to variables/2 (the old name is still
 available but shall be considered deprecated). Both the variables/2 and
 the singletons/2 predicates return variables ordered as found when doing
 a depth-first, left-to-right term traversal. Optimized the implementation
-of the predicates ground/1 and variables/2 to use the Prolog built-in 
+of the predicates ground/1 and variables/2 to use the Prolog built-in
 versions of these predicates when available.
 
 Moved the Prolog Integration and Migration Guide into the User Manual.
@@ -15680,7 +15680,7 @@ Updated the "build_release.sh" POSIX shell script steps for building the
 MacOS X installer.
 
 Updated the Windows installer to disable by default the installation of
-the integration shortcuts for Ciao Prolog and Quintus Prolog as these 
+the integration shortcuts for Ciao Prolog and Quintus Prolog as these
 compilers require patches that render Logtalk incompatible with the other
 compilers.
 
@@ -15800,7 +15800,7 @@ predicate.
 
 Corrected a bug in the implementation of the predicate_property/2 built-in
 method which would return wrong meta-predicate templates for predicate
-aliases. 
+aliases.
 
 Corrected a bug in the compilation of meta-calls to predicates defined
 in the pseudo-object "user".
@@ -15855,21 +15855,21 @@ file being compiled.
 Allow a complementing category to define aliases for predicates of the
 complemented object.
 
-Improved reporting of line numbers for syntax warnings and errors when 
+Improved reporting of line numbers for syntax warnings and errors when
 using YAP or SWI-Prolog as back-end compilers (requires YAP git version).
 
 Improved reporting of entity existence errors for top-level queries.
 
 Implemented a more flexible internal representation of entity properties.
-Added entity properties file(File, Path) and lines(Start, End) for 
-entities compiled and loaded from source files. The property lines/2 is 
+Added entity properties file(File, Path) and lines(Start, End) for
+entities compiled and loaded from source files. The property lines/2 is
 only available when using YAP or SWI-Prolog as back-end compilers.
 
 Added missing "built_in" properties for the built-in protocols "expanding"
 and "monitoring".
 
 Corrected a bug where compiler options are not cleared after compilation
-of source files. This bug would result in wrong compilation of messages 
+of source files. This bug would result in wrong compilation of messages
 sent from the top-level interpreter (i.e. messages sent by the pseudo-
 object "user") whenever events or hooks compiler options are used.
 
@@ -15892,18 +15892,18 @@ Corrected a bug where portability warnings would be reported even when the
 "report" compiler option is turned off. Corrected a bug where portability
 warnings would not increment the warnings counter.
 
-Added an optimization and safety compiler option, "complements", that 
-allows objects to be compiled with support for complementing categories 
+Added an optimization and safety compiler option, "complements", that
+allows objects to be compiled with support for complementing categories
 either enabled or disabled. The default value (set in the config files)
 is "off" (disabled).
 
 Added an optimization and safety compiler option, "dynamic_declarations",
 that allows objects to be compiled with support for dynamic declaration of
-predicates (using the built-in database methods asserta/1 and assertz/1) 
+predicates (using the built-in database methods asserta/1 and assertz/1)
 either enabled or disabled. The default value (set in the config files) is
 "off" (disabled).
 
-Updated the Logtalk built-in debugger to print goal invocation numbers 
+Updated the Logtalk built-in debugger to print goal invocation numbers
 and to accept the return and enter keys as alternatives to the "c" key
 ("creep") when tracing. Updated the implementation of the "display"
 command to include the write options quoted(false) and numbervars(false)
@@ -15914,9 +15914,9 @@ throw an exception when the monitor object doesn't define the required
 event handler methods (previously the define_events/5 call would simply
 fail).
 
-Added a customized version of the read_term/2 predicate to all config 
-files that returns the line where a term starts for back-end Prolog 
-compilers whose implementation of the read_term/2 predicate supports 
+Added a customized version of the read_term/2 predicate to all config
+files that returns the line where a term starts for back-end Prolog
+compilers whose implementation of the read_term/2 predicate supports
 this information.
 
 Updated the shortcut created by the Windows installer for integration with
@@ -15928,14 +15928,14 @@ and Java nomenclatures.
 Added a simple example, "instvars", illustrating how to define instance
 variables, default variable values, and setter and getter methods.
 
-Added a simple example, "classmethods", illustrating how to define 
+Added a simple example, "classmethods", illustrating how to define
 "class methods" as found on class-based object-oriented programming
 languages.
 
 Improved the documentation of the "complements", "hello_world", "hooks",
 and "msglog" examples.
 
-Added a new logic puzzle programming example, adapted with permission 
+Added a new logic puzzle programming example, adapted with permission
 from Kevin Stone's BrainBashers website (http://www.brainbashers.com/).
 
 Updated all the examples that make use of event-driven programming
@@ -15943,9 +15943,9 @@ Updated all the examples that make use of event-driven programming
 and "searching") to ensure correct functionality after fixing the bug in
 cleaning compiler options after compilation of source files.
 
-Updated the "dynpred" example to use the new "dynamic_declarations" 
-compiler option. Updated the "complements" example to use the new 
-"complements" compiler option. 
+Updated the "dynpred" example to use the new "dynamic_declarations"
+compiler option. Updated the "complements" example to use the new
+"complements" compiler option.
 
 Corrected a Vim syntax coloring bug with line comments occurring within
 entity opening directives.
@@ -15958,11 +15958,11 @@ Added a syntax construct for easy access to parametric object proxies
 represented as Prolog facts when sending a message ({Proxy}::Message).
 Updated the "proxies" example to illustrate this new functionality.
 
-Improved the Logtalk built-in debugger to print clause numbers for 
+Improved the Logtalk built-in debugger to print clause numbers for
 static predicates at the unification ports ("fact" and "rule").
 
 Modified the built-in methods create_category/4, create_object/4 and
-create_protocol/3 to accept a variable as the first argument, which 
+create_protocol/3 to accept a variable as the first argument, which
 will be instantiated to the identifier generated for the new entity.
 
 Modified the database built-in methods to allow initialization of static
@@ -15970,30 +15970,30 @@ predicates for dynamic objects when the predicates are declared in "this".
 These changes simplify the initialization of dynamic objects when writing
 constructors. The dynamic objects must be descendants of "this".
 
-Fixed a bug in the Logtalk compiler that would result in failure to 
+Fixed a bug in the Logtalk compiler that would result in failure to
 restore the operator table in case of compilation error.
 
-Removed support for the deprecated mutex_create/1 Prolog built-in 
+Removed support for the deprecated mutex_create/1 Prolog built-in
 predicate.
 
-Updated the XSB config file by switching off the use of multifile/1 
-directives when compiling Logtalk source files as a workaround for know 
+Updated the XSB config file by switching off the use of multifile/1
+directives when compiling Logtalk source files as a workaround for know
 bugs in the implementation of this directive for dynamic predicates.
 
-Updated the ECLiPSe 6.0 config files in order to switch on the use of 
+Updated the ECLiPSe 6.0 config files in order to switch on the use of
 multifile/1 directives.
 
 Update the CxProlog config file to work with and require version 0.97.2.
 
-Updated the Windows installer to warn the user when it fails to detect 
+Updated the Windows installer to warn the user when it fails to detect
 the installation of the selected Prolog compilers. Fixed a bug where the
 creation of the K-Prolog integration shortcut could fail when performing
 a custom installation. Fixed a bug in detecting a CxProlog installation.
 
-Added a library for descriptive statistics. For details, see the file 
+Added a library for descriptive statistics. For details, see the file
 "library/statistics.notes".
 
-Added a new library object, "pairs", defining predicates over lists of 
+Added a new library object, "pairs", defining predicates over lists of
 pairs (key-value terms).
 
 Added a new library object, "gensym", defining predicates for generating
@@ -16007,7 +16007,7 @@ Added predicates is_ascii/1, is_white_space/1, is_quote/1, is_period/1,
 is_punctation/1, and parenthesis/2 to the library entities "characterp"
 and "character".
 
-Modified the implementation of the predicate product/2 in the library 
+Modified the implementation of the predicate product/2 in the library
 object "numberlist" to fail for empty lists.
 
 Added an example, "people", illustrating a simple implementation solution
@@ -16022,71 +16022,71 @@ defined in the category "initialization" of the "roots" example.
 2.33.0 - September 1, 2008
 ==========================
 
-Applied several optimizations to the Logtalk compiler, mostly related to 
-non-detected deterministic predicates due to calls to dynamic predicates 
+Applied several optimizations to the Logtalk compiler, mostly related to
+non-detected deterministic predicates due to calls to dynamic predicates
 or due to limitations in clause indexing by most Prolog compilers.
 
-Added support for using Prolog use_module/2 directives in objects and 
-categories. This allows module predicates to be called using implicit 
+Added support for using Prolog use_module/2 directives in objects and
+categories. This allows module predicates to be called using implicit
 qualification, improving readability. The use_module/2 directive supports
 the declaration of predicate aliases using the notation Original:Alias.
 
-Added support for meta-calls whose closure arguments are explicitly 
+Added support for meta-calls whose closure arguments are explicitly
 qualified (using either Object::Closure or Module:Closure).
 
-Added support for using the ensure_loaded/1 and the set_prolog_flag/2 
-directives in source files. These directives are both processed when 
-read (thus affecting the compilation of the source code that follows) 
+Added support for using the ensure_loaded/1 and the set_prolog_flag/2
+directives in source files. These directives are both processed when
+read (thus affecting the compilation of the source code that follows)
 and copied to the generated intermediate Prolog files.
 
 Corrected a set of singleton variable related bugs in the Logtalk compiler
-and runtime. Thanks to Joachim Schimpf and Kish Shen work on the improved 
+and runtime. Thanks to Joachim Schimpf and Kish Shen work on the improved
 singleton variable checking code found on the new ECLiPSe 6.0 compiler.
 
-Simplified the implementation of the Logtalk built-in debugger. Changed 
-the implementation of the debugger abort command to use the de-facto 
+Simplified the implementation of the Logtalk built-in debugger. Changed
+the implementation of the debugger abort command to use the de-facto
 standard Prolog built-in predicate abort/0. Corrected a bug that prevented
 the use of the command "ignore" at the redo port.
 
-Removed the Logtalk dispatcher thread used for dispatching asynchronous 
-multi-threading calls, simplifying the implementation and improving the 
+Removed the Logtalk dispatcher thread used for dispatching asynchronous
+multi-threading calls, simplifying the implementation and improving the
 performance of the asynchronous built-in multi-threading predicates.
 
-Corrected a bug in the implementation of the threaded_once/1-2 built-in 
-multi-threading predicates (use of detached threads could make the methods 
+Corrected a bug in the implementation of the threaded_once/1-2 built-in
+multi-threading predicates (use of detached threads could make the methods
 fail despite the success of the thread goals).
 
 Improved performance of multi-threading applications (specially on MacOS X)
-when using SWI-Prolog as the back-end compiler by making the lookup caches 
+when using SWI-Prolog as the back-end compiler by making the lookup caches
 thread local.
 
-Small performance improvement of the threaded/1 built-in multi-threading 
+Small performance improvement of the threaded/1 built-in multi-threading
 predicate.
 
 Added a multifile/1 directive for the logtalk_library_path/2 predicate.
 
-Corrected a bug in the verification of portable calls that would fail to 
-flag the soft-cut control construct (_ *-> _; _) found on some Prolog 
+Corrected a bug in the verification of portable calls that would fail to
+flag the soft-cut control construct (_ *-> _; _) found on some Prolog
 compilers.
 
-Corrected a bug in the implementation of the built-in database predicates 
-retract/1 and retractall/1 when adding a cache entry for a local dynamic 
+Corrected a bug in the implementation of the built-in database predicates
+retract/1 and retractall/1 when adding a cache entry for a local dynamic
 predicate with no scope declaration.
 
-Corrected a bug in the compilation of source file op/3 directives whose 
-third argument is a list of operator specifiers instead of a single 
+Corrected a bug in the compilation of source file op/3 directives whose
+third argument is a list of operator specifiers instead of a single
 operator specifier.
 
-Added ECLiPSe 6.0 config files. Modified the POSIX script "eclipselgt" 
-to test for both ECLiPSe 5.10 and 6.0 versions. Added Windows shortcut 
+Added ECLiPSe 6.0 config files. Modified the POSIX script "eclipselgt"
+to test for both ECLiPSe 5.10 and 6.0 versions. Added Windows shortcut
 to start Logtalk with ECLiPSe 6.0.
 
-Updated the GNU Prolog config file to allow Logtalk to recognize as 
+Updated the GNU Prolog config file to allow Logtalk to recognize as
 built-in predicates the finite domain solver built-in predicates.
 
-Added a new set of examples, "constraints", illustrating how to use the 
-Constraint Domain Solver libraries available with B-Prolog, ECLiPSe, 
-GNU Prolog, SWI-Prolog, and YAP. Thanks to Markus Triska for his help 
+Added a new set of examples, "constraints", illustrating how to use the
+Constraint Domain Solver libraries available with B-Prolog, ECLiPSe,
+GNU Prolog, SWI-Prolog, and YAP. Thanks to Markus Triska for his help
 with the YAP and SWI-Prolog CLP(FD) examples.
 
 Updated the "mtbatch" example to provide multi-threading overhead data
@@ -16096,529 +16096,529 @@ for the competitive or-parallelism benchmark.
 2.32.2 - July 26, 2008
 ======================
 
-Simplified the predicate lookup linking clauses that are generated when 
-compiling private and protected entity relations, resulting in a small 
-runtime performance improvement when looking up non-cached predicate 
+Simplified the predicate lookup linking clauses that are generated when
+compiling private and protected entity relations, resulting in a small
+runtime performance improvement when looking up non-cached predicate
 declarations.
 
-Simplified and optimized handling of predicate aliases when looking up 
+Simplified and optimized handling of predicate aliases when looking up
 predicate declarations and predicate definitions.
 
-When sending a message to an object using the ::/2 control construct, 
-also check if the sender matches the scope container when the message 
-does not correspond to a public predicate. This is necessary in order 
-to allow calling a protected or a private predicate in "this" from 
+When sending a message to an object using the ::/2 control construct,
+also check if the sender matches the scope container when the message
+does not correspond to a public predicate. This is necessary in order
+to allow calling a protected or a private predicate in "this" from
 within a category.
 
-Updated the Logtalk compiler to throw an error when detecting a call 
-to a dynamic predicate in the body of a predicate clause defined in a 
+Updated the Logtalk compiler to throw an error when detecting a call
+to a dynamic predicate in the body of a predicate clause defined in a
 category.
 
-Optimized the implementation of the ^^/1 control construct. The Logtalk 
-compiler now requires an instantiated, callable argument that must have 
+Optimized the implementation of the ^^/1 control construct. The Logtalk
+compiler now requires an instantiated, callable argument that must have
 the same functor and arity of the predicate being (re)defined.
 
 Allow the ^^/1 control construct to be used within extended categories.
 Updated the "engines" example to illustrate this new functionality.
 
-Moved support for categories that complement existing objects from the 
-code generated when compiling objects to the Logtalk runtime, making the 
-implementation of this feature easier to maintain and contributing to 
+Moved support for categories that complement existing objects from the
+code generated when compiling objects to the Logtalk runtime, making the
+implementation of this feature easier to maintain and contributing to
 smaller code sizes of the intermediate Prolog files.
 
-Corrected a typo in the exception term throw by the built-in database 
+Corrected a typo in the exception term throw by the built-in database
 method assertz/1 when an error occurs while trying to assert a fact.
 
-Restored the redefined entity warnings for back-end Prolog compilers 
+Restored the redefined entity warnings for back-end Prolog compilers
 that support multifile predicates (broken in the final version of 2.32.1).
 
-Changed the format of the Logtalk compiler informative messages for 
+Changed the format of the Logtalk compiler informative messages for
 better readability.
 
-Improved simplification of the clauses generated by the compilation of 
+Improved simplification of the clauses generated by the compilation of
 object and category predicate clauses.
 
-Corrected a bug that prevented asserting and retracting clauses in "this" 
+Corrected a bug that prevented asserting and retracting clauses in "this"
 from within a category.
 
-Corrected a bug in the implementation of the built-in database method 
+Corrected a bug in the implementation of the built-in database method
 retractall/1 when retracting clauses in an object compiled in debug mode.
 Thanks to Parker Jones for the bug report.
 
-Updated all config files due to changes to the predicate used to declare 
-proprietary meta-predicates, '$lgt_pl_meta_predicate'/1. Added a second 
-argument to represent if the meta-predicate is either a built-in predicate 
-or a built-in control construct. This is necessary in order to properly 
+Updated all config files due to changes to the predicate used to declare
+proprietary meta-predicates, '$lgt_pl_meta_predicate'/1. Added a second
+argument to represent if the meta-predicate is either a built-in predicate
+or a built-in control construct. This is necessary in order to properly
 compile calls to these proprietary meta-predicates when in debug mode.
 Thanks to Victor Noel for the bug report.
 
-Corrected a bug in the config files hooks used in handling proprietary 
-Prolog directives for the SWI-Prolog, B-Prolog YAP, SICStus, and XSB 
-Prolog compilers. Added a new internal predicate for constructing 
-predicate indicators for compiled entity predicates that simplifies the 
+Corrected a bug in the config files hooks used in handling proprietary
+Prolog directives for the SWI-Prolog, B-Prolog YAP, SICStus, and XSB
+Prolog compilers. Added a new internal predicate for constructing
+predicate indicators for compiled entity predicates that simplifies the
 config files hooks used in handling proprietary Prolog directives.
 
 Changed the valid values of the read-only compiler flag "break_predicate"
-to "supported" and "unsupported" for consistency with other read-only 
+to "supported" and "unsupported" for consistency with other read-only
 compiler flags.
 
-Updated the SWI-Prolog config file to set the Prolog flag "optimise" to 
+Updated the SWI-Prolog config file to set the Prolog flag "optimise" to
 true. Added declaration for the setup_and_call_cleanup/3 meta-predicate.
-Removed setting of the deprecated "prompt_alternatives_no_bindings" 
+Removed setting of the deprecated "prompt_alternatives_no_bindings"
 Prolog flag. Oldest SWI-Prolog compatible version is now 5.6.44.
 
-Updated the GNU-Prolog config file, adding a declaration for the 
-call_det/2 proprietary meta-predicate. GNU-Prolog version 1.3.0 or 
+Updated the GNU-Prolog config file, adding a declaration for the
+call_det/2 proprietary meta-predicate. GNU-Prolog version 1.3.0 or
 later is now required.
 
-Added list mapping predicates map/4 and map/5 to the "metap" library 
+Added list mapping predicates map/4 and map/5 to the "metap" library
 protocol and the "meta" library object.
 
-Added a proper definition for the predicate select/3 to the "varlist" 
+Added a proper definition for the predicate select/3 to the "varlist"
 library object.
 
-Added a new example, "logging", of using a category to define a set of 
-predicates that handle a dynamic predicate in the context of "this" 
+Added a new example, "logging", of using a category to define a set of
+predicates that handle a dynamic predicate in the context of "this"
 (i.e. in the context of the objects importing the category).
 
 Added a new multi-threading example, "integration2d", implementing methods
-for numerical integration for functions of two variables, contributed by 
+for numerical integration for functions of two variables, contributed by
 Paul Crocker.
 
-Updated the "integration" multi-threading example by bringing all example 
+Updated the "integration" multi-threading example by bringing all example
 functions under the same object in order to allow for static binding. This
-is essential for good results in operating-systems with poor mutex thread 
+is essential for good results in operating-systems with poor mutex thread
 synchronization performance such as MacOS X.
 
-Added experimental support for the GeSHi syntax highlighter, contributed 
+Added experimental support for the GeSHi syntax highlighter, contributed
 by Clara Dimene.
 
-Improved support for the Pygments syntax highlighter, correcting coloring 
-bugs when there are single line comments in the same lines of an opening 
+Improved support for the Pygments syntax highlighter, correcting coloring
+bugs when there are single line comments in the same lines of an opening
 entity directive.
 
 
 2.32.1 - July 7, 2008
 =====================
 
-Restored the redefined entity warnings for back-end Prolog compilers 
-that support multifile predicates. Simplified updating of the runtime 
-tables when compiling and loading source files with back-end Prolog 
+Restored the redefined entity warnings for back-end Prolog compilers
+that support multifile predicates. Simplified updating of the runtime
+tables when compiling and loading source files with back-end Prolog
 compilers that don't support multifile predicates.
 
-Changed the representation of the runtime tables for loaded entities 
-in order to drop the need of a "functors clause" per entity. This avoids 
-some redundancy on the representation of entity functors and also helps 
+Changed the representation of the runtime tables for loaded entities
+in order to drop the need of a "functors clause" per entity. This avoids
+some redundancy on the representation of entity functors and also helps
 reducing a bit the size of the generated Prolog files.
 
-When reloading an object, also clean all entries in the event handlers 
+When reloading an object, also clean all entries in the event handlers
 table where the object plays the role of a monitor.
 
-Modified the Logtalk runtime to clean all lookup caches when compiling 
-and loading source files (instead of doing it only when the files 
+Modified the Logtalk runtime to clean all lookup caches when compiling
+and loading source files (instead of doing it only when the files
 redefine existing entities).
 
-Corrected a bug that prevented using predicate aliases with the :/1 
+Corrected a bug that prevented using predicate aliases with the :/1
 control construct without static binding.
 
-Updated the CxProlog config file to take advantage and require the new 
-0.97.1 version (which implements some more ISO Prolog predicates and 
+Updated the CxProlog config file to take advantage and require the new
+0.97.1 version (which implements some more ISO Prolog predicates and
 expands support for text encodings).
 
-Updated the B-Prolog config file to take advantage and require the new 
+Updated the B-Prolog config file to take advantage and require the new
 7.1 version (which adds support for the multifile/1 predicate directive).
 
-Updated the SWI-Prolog config file notes about possible compatibility 
-issues with the default setting of the proprietary "iso" Prolog flag 
+Updated the SWI-Prolog config file notes about possible compatibility
+issues with the default setting of the proprietary "iso" Prolog flag
 to "true".
 
-Updated the SWI-Prolog hook file, "swihook.pl", to avoid hijacking the 
-arguments of use_module/1-2 calls (which resulted in wrongly loading 
-Logtalk libraries with the same name as the SWI-Prolog library modules 
+Updated the SWI-Prolog hook file, "swihook.pl", to avoid hijacking the
+arguments of use_module/1-2 calls (which resulted in wrongly loading
+Logtalk libraries with the same name as the SWI-Prolog library modules
 we intended to load).
 
 Updated the "k6.config" config file for the K-Prolog 6.0.3 release.
-Renamed the K-Prolog 5.1.x config file from "k.config" to "k5.config" 
-to avoid being mistaken for the K-Prolog 6.0.x config file. Updated 
-the "plclgt.sh" integration script to work with both K-Prolog 5.1.x 
+Renamed the K-Prolog 5.1.x config file from "k.config" to "k5.config"
+to avoid being mistaken for the K-Prolog 6.0.x config file. Updated
+the "plclgt.sh" integration script to work with both K-Prolog 5.1.x
 and 6.0.x versions.
 
-Renamed the SICStus Prolog 3 config file from "sicstus.config" to 
-"sicstus3.config" to avoid being mistaken for the SICStus Prolog 4 
+Renamed the SICStus Prolog 3 config file from "sicstus.config" to
+"sicstus3.config" to avoid being mistaken for the SICStus Prolog 4
 config file.
 
-Updated the POSIX integration scripts and the Windows installer script 
-to detect outdated versions of the Logtalk user folder (setting the 
+Updated the POSIX integration scripts and the Windows installer script
+to detect outdated versions of the Logtalk user folder (setting the
 compatibility version to 2.32.0 or later).
 
-Improved the Prolog migration guide on converting code that makes use 
+Improved the Prolog migration guide on converting code that makes use
 of multifile predicates.
 
-Added note on licensing conditions to several files. Clarified copyright 
-and license conditions for files on the "contributions" folder. Clarified 
-dual-licensing conditions for text editor and syntax highlighter 
+Added note on licensing conditions to several files. Clarified copyright
+and license conditions for files on the "contributions" folder. Clarified
+dual-licensing conditions for text editor and syntax highlighter
 supporting files. Added license file to the TextMate bundle.
 
-Updated support for the Vim text editor (changed the Logtalk file type 
-plug-in to set the path to the completion dictionary and updated the 
+Updated support for the Vim text editor (changed the Logtalk file type
+plug-in to set the path to the completion dictionary and updated the
 installation instructions).
 
-Updated the support for the Pygments syntax highlighter to avoid marking 
+Updated the support for the Pygments syntax highlighter to avoid marking
 as errors non-standard directives.
 
 
 2.32.0 - June 16, 2008
 ======================
 
-Updated the Logtalk compiler and runtime to use multifile predicates for 
-the runtime tables of loaded entities and entities relations. This is 
-necessary to generate sensible intermediate Prolog code for large files 
-with tens of thousands of objects. The workaround of using the directive 
-initialization/1 is still available (for now) for Prolog compilers that 
+Updated the Logtalk compiler and runtime to use multifile predicates for
+the runtime tables of loaded entities and entities relations. This is
+necessary to generate sensible intermediate Prolog code for large files
+with tens of thousands of objects. The workaround of using the directive
+initialization/1 is still available (for now) for Prolog compilers that
 fail to support the thirteen years old ISO Prolog standard.
 
-Updated the Logtalk runtime error handler to test for non-instantiated 
+Updated the Logtalk runtime error handler to test for non-instantiated
 exception terms. Thanks to Joerg Schuster for the bug report.
 
-Corrected two bugs in the implementation of the built-in meta-predicate 
-threaded/1 when canceling individual threads. The first bug resulted from 
-out-of-order thread status messages. The second bug resulted from a leak 
-of thread results between calls to the threaded/1 predicate. Changed the 
-thread cancellation process to not automatically releasing any locks, 
+Corrected two bugs in the implementation of the built-in meta-predicate
+threaded/1 when canceling individual threads. The first bug resulted from
+out-of-order thread status messages. The second bug resulted from a leak
+of thread results between calls to the threaded/1 predicate. Changed the
+thread cancellation process to not automatically releasing any locks,
 leaving that task to a catcher associated to the thread goal.
 
-Added a new default compiler option, multifile_directive, to all config 
+Added a new default compiler option, multifile_directive, to all config
 files. Possible values are "supported" and "unsupported".
 
-Added instructions on how to patch the Logtalk compiler in order to use 
+Added instructions on how to patch the Logtalk compiler in order to use
 Quintus Prolog as the back-end compiler.
 
-Removed from the YAP POSIX integration script the command-line options 
+Removed from the YAP POSIX integration script the command-line options
 setting the initial stack, heap, and tail data area sizes. These settings
 are no longer necessary for recent YAP versions.
 
-Updated the Windows installer script to search the registry for the 
+Updated the Windows installer script to search the registry for the
 location of the YAP installation (for YAP 5.1.3 or later versions).
 
-Added missing implementation of the predicate as_dictionary/2 to the 
+Added missing implementation of the predicate as_dictionary/2 to the
 "bintree" library object. Thanks to Victor Noel for the bug report.
 
-Updated all the search methods in the "searching" example to delegate 
-checking for cycles to the state space being searched (thus allowing 
-state descriptions to carry additional information that should not be 
-taken into account when comparing states). Updated the "salt" example 
+Updated all the search methods in the "searching" example to delegate
+checking for cycles to the state space being searched (thus allowing
+state descriptions to carry additional information that should not be
+taken into account when comparing states). Updated the "salt" example
 to support heuristics.
 
-Updated the "mtbatch" example to include a benchmark test for competitive 
+Updated the "mtbatch" example to include a benchmark test for competitive
 or-parallelism applied to state-space search (using the resources from the
 "searching" example). Improved the example documentation.
 
-Added a filetype plugin for the Vim text editor. Updated the installation 
-instructions. Updated the syntax coloring support to properly highlight 
-quoted atoms and strings in the opening directive of parametric objects. 
-Fixed an auto-indentation bug when opening and closing a conditional 
-block in a single line in the last goal a predicate clause body. Thanks 
+Added a filetype plugin for the Vim text editor. Updated the installation
+instructions. Updated the syntax coloring support to properly highlight
+quoted atoms and strings in the opening directive of parametric objects.
+Fixed an auto-indentation bug when opening and closing a conditional
+block in a single line in the last goal a predicate clause body. Thanks
 to Victor Noel for the bug report.
 
-Corrected missing installation of the "VERSION.txt" file when building 
+Corrected missing installation of the "VERSION.txt" file when building
 Linux RPMs.
 
 
 2.31.6 - May 26, 2008
 =====================
 
-Fixed a Logtalk runtime bug when using the :/1 control construct to 
-call a predicate defined in a category extended by a category that 
+Fixed a Logtalk runtime bug when using the :/1 control construct to
+call a predicate defined in a category extended by a category that
 is imported by the object making the call.
 
-Fixed a Logtalk compiler bug when compiling an alias/3 predicate 
+Fixed a Logtalk compiler bug when compiling an alias/3 predicate
 directive within a category that extends other categories.
 
-Fixed a Logtalk compiler bug when compiling a class that imports a  
-category that extends other categories. Thanks to Victor Noel for 
+Fixed a Logtalk compiler bug when compiling a class that imports a
+category that extends other categories. Thanks to Victor Noel for
 the bug report.
 
-Small performance improvement to the caching of category predicates 
+Small performance improvement to the caching of category predicates
 when using static binding.
 
-Removed from the YAP config file the definition of the forall/2 
-predicate, which have been added as a built-in predicate in YAP 
-version 5.1.3 (the current YAP CVS version must be used; the last 
-stable version, 5.1.2, is broken on Windows). Added support for 
-the proprietary if/1, else/0, elif/1, and endif/0 directives (when 
+Removed from the YAP config file the definition of the forall/2
+predicate, which have been added as a built-in predicate in YAP
+version 5.1.3 (the current YAP CVS version must be used; the last
+stable version, 5.1.2, is broken on Windows). Added support for
+the proprietary if/1, else/0, elif/1, and endif/0 directives (when
 used outside Logtalk entities).
 
-Updated the SWI-Prolog config file with support for the proprietary 
-if/1, else/0, elif/1, and endif/0 directives (when used outside 
+Updated the SWI-Prolog config file with support for the proprietary
+if/1, else/0, elif/1, and endif/0 directives (when used outside
 Logtalk entities).
 
-Improved the "complements" example, moving the category initialization 
+Improved the "complements" example, moving the category initialization
 goal to the beginning of the example source file.
 
-Added support for the Pygments syntax highlighter (co-developed with 
+Added support for the Pygments syntax highlighter (co-developed with
 Clara Dimene).
 
-Added a new sample Logtalk source file for testing syntax coloring 
+Added a new sample Logtalk source file for testing syntax coloring
 support.
 
-Added missing auto-completion keywords for the ISO Prolog standard 
-arithmetic functions to the SubEthaEdit, TextMate, Notepad++, jEdit, 
+Added missing auto-completion keywords for the ISO Prolog standard
+arithmetic functions to the SubEthaEdit, TextMate, Notepad++, jEdit,
 Vim, and Smultron text editors.
 
-Corrected a bug in the SubEthaEdit syntax coloring support for the 
-imports_category/2-3 built-in predicate. Added some missing files 
+Corrected a bug in the SubEthaEdit syntax coloring support for the
+imports_category/2-3 built-in predicate. Added some missing files
 (license and mode settings) to the SubEthaEdit mode bundle.
 
-Corrected a bug in the Vim syntax coloring support for the ISO Prolog 
-built-in predicate current_char_conversion/2 and added missing support 
+Corrected a bug in the Vim syntax coloring support for the ISO Prolog
+built-in predicate current_char_conversion/2 and added missing support
 for for quoted atom escape sequences.
 
-Corrected a bug in the jEdit syntax coloring support for hexadecimal 
-numbers and added missing support for the extends_category/2-3 and 
+Corrected a bug in the jEdit syntax coloring support for hexadecimal
+numbers and added missing support for the extends_category/2-3 and
 at_end_of_stream/0 built-in predicates.
 
-Added missing support for the syntax coloring of the external call 
-Logtalk control construct, {}/1, to the Highlight package. Corrected 
-a bug with 0'Char constants and with octal and hexadecimal escape 
+Added missing support for the syntax coloring of the external call
+Logtalk control construct, {}/1, to the Highlight package. Corrected
+a bug with 0'Char constants and with octal and hexadecimal escape
 sequences.
 
-Added missing support for the syntax coloring of the external call 
-Logtalk control construct, {}/1, and for quoted atom escape sequences 
+Added missing support for the syntax coloring of the external call
+Logtalk control construct, {}/1, and for quoted atom escape sequences
 to the TextMate text editor.
 
-Added missing support for the syntax coloring of quoted atom escape 
-sequences and of the built-in predicate at_end_of_stream/0 to the 
+Added missing support for the syntax coloring of quoted atom escape
+sequences and of the built-in predicate at_end_of_stream/0 to the
 Source-highlight package.
 
-Added missing support for the syntax coloring of the built-in predicate 
+Added missing support for the syntax coloring of the built-in predicate
 at_end_of_stream/0 and of the scope operator ::/2 to the Kate text editor.
 Improved syntax coloring of parametric object opening directives.
 
-Added missing support for the syntax coloring of the built-in predicate 
-unify_with_occurs_check/2 to the Emacs text editor. Corrected a bug in 
+Added missing support for the syntax coloring of the built-in predicate
+unify_with_occurs_check/2 to the Emacs text editor. Corrected a bug in
 the syntax coloring of arithmetic comparison operators.
 
-Added missing support for the syntax coloring of quoted atom escape 
-sequences and of the built-in control construct call/1 to the 
+Added missing support for the syntax coloring of quoted atom escape
+sequences and of the built-in control construct call/1 to the
 GtkSourceView 2.x text widget.
 
-Added missing support for the syntax coloring of variables, of quoted 
-atom escape sequences, of the built-in method clause/2, of the external 
-call Logtalk control construct {}/1, and of variables to the Nedit text 
-editor. Corrected a bug with 0'Char constants and corrected some typos 
-in the support for the current_event/2, implements_protocol/2-3, and 
+Added missing support for the syntax coloring of variables, of quoted
+atom escape sequences, of the built-in method clause/2, of the external
+call Logtalk control construct {}/1, and of variables to the Nedit text
+editor. Corrected a bug with 0'Char constants and corrected some typos
+in the support for the current_event/2, implements_protocol/2-3, and
 abolish_category/1 built-in predicates.
 
 
 2.31.5 - April 29, 2008
 =======================
 
-Added support for checking arithmetic expressions for calls to 
+Added support for checking arithmetic expressions for calls to
 non-portable functions when using the "portability" compiler flag.
 
-Updated the implementation of the threaded/1 built-in predicate to 
-ensure that thread creation errors (usually, virtual memory address 
-space exhaustion) result in the corresponding exception rather than 
-in a non-terminating call. Improved cancellation of all individual 
+Updated the implementation of the threaded/1 built-in predicate to
+ensure that thread creation errors (usually, virtual memory address
+space exhaustion) result in the corresponding exception rather than
+in a non-terminating call. Improved cancellation of all individual
 threads when one of them terminates with an exception or a failure.
 
 Simplified the terms used to post individual results from threaded/1
 calls to the queue associated to the call.
 
-Corrected a bug in the built-in predicate threaded/1 when its argument 
+Corrected a bug in the built-in predicate threaded/1 when its argument
 is a conjunction (disjunction) of conjunctions (disjunctions).
 
-Added a workaround for a mutex creation error when reloading a source 
+Added a workaround for a mutex creation error when reloading a source
 file with entities defining synchronized predicates.
 
-Updated the Logtalk runtime to unlock all mutexes hold by a thread when 
+Updated the Logtalk runtime to unlock all mutexes hold by a thread when
 upon thread cancellation.
 
-Corrected a Logtalk compiler bug that allowed a predicate to be declared 
+Corrected a Logtalk compiler bug that allowed a predicate to be declared
 both dynamic and synchronized. Thanks to Paul Crocker for the bug report.
 
-Corrected a Logtalk compiler bug where local definition clauses for 
-dynamic predicates are being generated for categories. Thanks to Victor 
+Corrected a Logtalk compiler bug where local definition clauses for
+dynamic predicates are being generated for categories. Thanks to Victor
 Noel for the bug report.
 
-Updated the YAP and SWI-Prolog config files to set the default value of 
+Updated the YAP and SWI-Prolog config files to set the default value of
 the "tmpdir" flag depending on the host operating-system. Added missing
 declaration for the multi-threading predicate thread_initialization/1.
 
-Added missing declarations for some proprietary built-in meta-predicates 
+Added missing declarations for some proprietary built-in meta-predicates
 to the B-Prolog config file.
 
-Corrected a bug in the SWI-Prolog config file in the declaration of the 
-proprietary built-in meta-predicate "soft cut". Thanks to Victor Noel 
+Corrected a bug in the SWI-Prolog config file in the declaration of the
+proprietary built-in meta-predicate "soft cut". Thanks to Victor Noel
 for the bug report.
 
-Updated the XSB config file to use the new optimized call/N predicates 
+Updated the XSB config file to use the new optimized call/N predicates
 found on the current XSB CVS version.
 
-Added an integration script, "xsbmt64lgt", for using Logtalk with the 
+Added an integration script, "xsbmt64lgt", for using Logtalk with the
 multi-threaded, 64 bits version of XSB.
 
-Simplified building of MacOS X Installer packages. Updated the Windows 
-installation script to use the "C:\lgtsvn" as base. Simplified manual 
+Simplified building of MacOS X Installer packages. Updated the Windows
+installation script to use the "C:\lgtsvn" as base. Simplified manual
 installation instructions.
 
-Updated the definitions of the predicate valid/1 for the library objects 
-"list", "list(Type)", "numberlist", "set", "set(Type)", "varlist" to fail 
-for lists with unbound tails after discussion with Jan Wielemaker and 
+Updated the definitions of the predicate valid/1 for the library objects
+"list", "list(Type)", "numberlist", "set", "set(Type)", "varlist" to fail
+for lists with unbound tails after discussion with Jan Wielemaker and
 Ulrich Neumerkel.
 
-Corrected a bug in the library object "lgtunit" when running "throws" 
-tests (make sure the generated exception is subsumed by the expected 
-exception). Added a "lgtunit_loader" loader utility file for loading 
+Corrected a bug in the library object "lgtunit" when running "throws"
+tests (make sure the generated exception is subsumed by the expected
+exception). Added a "lgtunit_loader" loader utility file for loading
 the Logtalk unit test library.
 
-Added a simple example, "debug_hooks", of using compilation hooks and 
+Added a simple example, "debug_hooks", of using compilation hooks and
 term expansion for conditional compilation of debug statements.
 
-Updated the "primes" multi-threading example to allow any number of 
+Updated the "primes" multi-threading example to allow any number of
 threads to be used in the computation of primes numbers.
 
-Added a new multi-threading example, "integration", implementing 
-Recursive Gaussian Quadrature Methods for Numerical Integration for 
+Added a new multi-threading example, "integration", implementing
+Recursive Gaussian Quadrature Methods for Numerical Integration for
 functions of a single variable, contributed by Paul Crocker.
 
-Added a new multi-threading example, "mtbatch", for benchmarking 
+Added a new multi-threading example, "mtbatch", for benchmarking
 multi-threading performance.
 
-Added a new example, "ack", implementing the Ackermann function (general 
+Added a new example, "ack", implementing the Ackermann function (general
 recursive function).
 
-Added support for using the Highlight package (version 2.6.9 or later) 
+Added support for using the Highlight package (version 2.6.9 or later)
 by Andre Simon with Logtalk source files.
 
-Updated the TextMate Logtalk bundle and its configuration instructions 
-to make the "Compile" and "Generate ..." commands more general, making 
-it compatible with most Prolog compilers. Added syntax coloring for 
-standard arithmetic functions. Added a command for generating plain text 
+Updated the TextMate Logtalk bundle and its configuration instructions
+to make the "Compile" and "Generate ..." commands more general, making
+it compatible with most Prolog compilers. Added syntax coloring for
+standard arithmetic functions. Added a command for generating plain text
 files from XML documenting files.
 
-Corrected a syntax coloring bug with character codes using the 0'Char 
+Corrected a syntax coloring bug with character codes using the 0'Char
 notation in the SubEthaEdit 2.x and Vim text editors and in the
 source-highlight package.
 
-Removed some redundant regular expressions from the jEdit text editor 
+Removed some redundant regular expressions from the jEdit text editor
 syntax coloring support files.
 
-Corrected syntax coloring bugs with variables starting with underscores 
-(including anonymous variables) and with atoms containing an underscore 
+Corrected syntax coloring bugs with variables starting with underscores
+(including anonymous variables) and with atoms containing an underscore
 in the Emacs text editor. Thanks to Joerg Schuster for the bug report.
 
-Updated the Logtalk grammar documentation to reflect the changes to 
+Updated the Logtalk grammar documentation to reflect the changes to
 category relations introduced in version 2.31.0.
 
-Added a "lgttxt.xsl" XSLT style-sheet and two shell scripts, "lgt2txt.sh" 
+Added a "lgttxt.xsl" XSLT style-sheet and two shell scripts, "lgt2txt.sh"
 and "lgt2txt.js", for converting XML documenting files into text files.
-Updated the "lgt2*.sh" shell scripts for POSIX compliance, removing 
+Updated the "lgt2*.sh" shell scripts for POSIX compliance, removing
 dependencies on bash shell features.
 
-Updated the "lgtxml.xsl" XSLT style-sheet to ensure that the generated 
+Updated the "lgtxml.xsl" XSLT style-sheet to ensure that the generated
 HTML files are fully compliant with the HTML 4.01 standard.
 
-Updated the Debian installer package shell scripts for POSIX compliance, 
+Updated the Debian installer package shell scripts for POSIX compliance,
 removing dependencies on bash shell features.
 
 
 2.31.4 - February 20, 2008
 ==========================
 
-Optimized the performance of threaded/1 calls by using a per-call 
-message queue for collecting the individual call results and by 
-using the message queue identifier as a tag for the individual 
-calls. This solution avoids runtime synchronization of a large 
-number of threads on the same message queue, simplifies compilation 
-and runtime handling of threaded/1 calls, and simplifies thread 
-cancellation, eliminating any risk of dangling individual thread 
+Optimized the performance of threaded/1 calls by using a per-call
+message queue for collecting the individual call results and by
+using the message queue identifier as a tag for the individual
+calls. This solution avoids runtime synchronization of a large
+number of threads on the same message queue, simplifies compilation
+and runtime handling of threaded/1 calls, and simplifies thread
+cancellation, eliminating any risk of dangling individual thread
 results.
 
-Removed two redundant calls to the built-in predicate thread_exit/1 
+Removed two redundant calls to the built-in predicate thread_exit/1
 on the Logtalk compiler.
 
-Corrected a bug where a competitive or-parallelism call would 
+Corrected a bug where a competitive or-parallelism call would
 prematurely fail with one or more individual calls still pending.
 
-Corrected a bug where a competitive or-parallelism call would succeed 
+Corrected a bug where a competitive or-parallelism call would succeed
 when all the individual calls had failed.
 
-Corrected a bug when compiling calls to the Logtalk multi-threading 
-built-in predicates made from the top-level interpreter, i.e. from 
+Corrected a bug when compiling calls to the Logtalk multi-threading
+built-in predicates made from the top-level interpreter, i.e. from
 within the pseudo-object "user".
 
-Added foreach/3, forto/5, and fordownto/5 meta-predicates to the 
-library object "loop". Updated the definitions of the forto/3-4 
-and fordownto/3-4 meta-predicates to allow the use of arithmetic 
+Added foreach/3, forto/5, and fordownto/5 meta-predicates to the
+library object "loop". Updated the definitions of the forto/3-4
+and fordownto/3-4 meta-predicates to allow the use of arithmetic
 expressions as arguments for convenience and clarity.
 
-Corrected a bug in the implementation of the predicate lookup/3 in 
+Corrected a bug in the implementation of the predicate lookup/3 in
 the library object "bintree".
 
-Added a multi-threading example of the Fast Fourier Transform, "fft", 
+Added a multi-threading example of the Fast Fourier Transform, "fft",
 contributed by Paul Crocker.
 
-Corrected a bug in the implementation of the bisection algorithm in 
-the multi-threading example "functions". Added an implementation of 
+Corrected a bug in the implementation of the bisection algorithm in
+the multi-threading example "functions". Added an implementation of
 the MATLAB humps function (contributed by Paul Crocker).
 
-Updated the multi-threading example "sorting" to workaround a mutex 
+Updated the multi-threading example "sorting" to workaround a mutex
 performance issue with XSB when generating lists of random numbers.
 
-Updated support for the TextMate text editor. Added a command for 
-generating the PDF documentation of open source files. Added missing 
+Updated support for the TextMate text editor. Added a command for
+generating the PDF documentation of open source files. Added missing
 tab triggers to the Logtalk snippets. Updated installation notes.
 
-Corrected a bug in the jEdit syntax coloring support for the is/2 
+Corrected a bug in the jEdit syntax coloring support for the is/2
 operator.
 
 
 2.31.3 - January 28, 2008
 =========================
 
-Added a "VERSION.txt" file that is used to check compatibility between 
-an existing Logtalk user folder (whose path is stored in the LOGTALKUSER 
+Added a "VERSION.txt" file that is used to check compatibility between
+an existing Logtalk user folder (whose path is stored in the LOGTALKUSER
 environment variable) and a new Logtalk version.
 
-Updated the POSIX Prolog integration scripts to check for an outdated 
-Logtalk user folder, creating a new one if necessary by running the 
+Updated the POSIX Prolog integration scripts to check for an outdated
+Logtalk user folder, creating a new one if necessary by running the
 "cplgtdirs" script (a backup is automatically made of the old directory).
 
-Updated the Windows installer to create a registry key with the Logtalk 
+Updated the Windows installer to create a registry key with the Logtalk
 version number and to check for an outdated Logtalk user folder.
 
-Changed the predicate used to load Prolog files, adding an additional 
+Changed the predicate used to load Prolog files, adding an additional
 argument that represents a list of load/compile options (notably,
-encoding/1, which is necessary for supporting source files encodings 
+encoding/1, which is necessary for supporting source files encodings
 such as ISO-8859-X).
 
-Updated the SICStus Prolog 4 config file to also accept UCS-2 encodings 
+Updated the SICStus Prolog 4 config file to also accept UCS-2 encodings
 when using the encoding/1 directive (UCS-2 is subsumed by UTF-16).
 
-Added a workaround to the Quintus Prolog integration scripts for its 
+Added a workaround to the Quintus Prolog integration scripts for its
 lack of support for expanding environment variables in file names.
 
 
 2.31.2 - January 21, 2008
 =========================
 
-Extended compatibility of the experimental Logtalk encoding/1 directive 
-to CxProlog 0.96.3 and SICStus Prolog 4.0.2 and improved support for YAP 
+Extended compatibility of the experimental Logtalk encoding/1 directive
+to CxProlog 0.96.3 and SICStus Prolog 4.0.2 and improved support for YAP
 and SWI-Prolog.
 
-Improved source file encoding handling by ensuring that a BOM present 
-in a source file being compiled is inherited by the generated Prolog 
+Improved source file encoding handling by ensuring that a BOM present
+in a source file being compiled is inherited by the generated Prolog
 and XML files.
 
-Changed the atoms used to represent different encodings when using the 
-encoding/1 directive; Logtalk now uses the encoding names specified by 
+Changed the atoms used to represent different encodings when using the
+encoding/1 directive; Logtalk now uses the encoding names specified by
 IANA (using the preferred MIME name whenever available).
 
-Updated the Logtalk compiler to throw an exception when the specified 
+Updated the Logtalk compiler to throw an exception when the specified
 encoding is not supported by the used back-end Prolog compiler.
 
-Updated the "encodings" example to use the new encoding names and added 
+Updated the "encodings" example to use the new encoding names and added
 new source files using UTF-16 and UTF-32 text encodings.
 
 Added POSIX and Windows integration scripts for Quintus Prolog.
@@ -16627,29 +16627,29 @@ Added POSIX and Windows integration scripts for Quintus Prolog.
 2.31.1 - January 3, 2008
 ========================
 
-Duplicated the range of threaded_call/2 tags for multi-threading Prolog 
+Duplicated the range of threaded_call/2 tags for multi-threading Prolog
 compilers with bounded integers.
 
-Updated the YAP config file to set the flag "language" to "iso". This 
-is not strictly necessary to run Logtalk with YAP but it helps prevent 
-nasty surprises when writing portable applications that rely on ISO 
+Updated the YAP config file to set the flag "language" to "iso". This
+is not strictly necessary to run Logtalk with YAP but it helps prevent
+nasty surprises when writing portable applications that rely on ISO
 Prolog semantics.
 
 Updated the SWI-Prolog integration script to test for the availability of
 the XPCE library before trying to load the "xpcehook.pl" XPCE hook file.
 
-Updated the Linux (RMP and Debian) and MacOS X package build scripts to 
+Updated the Linux (RMP and Debian) and MacOS X package build scripts to
 include Prolog version compatibility information.
 
-Updated the "tak" multi-threading example to allow parameterization of 
+Updated the "tak" multi-threading example to allow parameterization of
 the number of threads to use.
 
-Updated the "sorting", "hanoi", and "fibonacci" multi-threading examples 
-to interpret the object parameter as the number of leaf threads (i.e. 
+Updated the "sorting", "hanoi", and "fibonacci" multi-threading examples
+to interpret the object parameter as the number of leaf threads (i.e.
 working threads that will not recursively create additional threads).
 
-Updated the TextMate text editor support to include commands to compile 
-and to automatically generate the XHTML documentation of open source 
+Updated the TextMate text editor support to include commands to compile
+and to automatically generate the XHTML documentation of open source
 files.
 
 
@@ -16659,205 +16659,205 @@ files.
 Added a new built-in protocol, "expanding", declaring goal_expansion/2
 and term_expansion/2 public predicates.
 
-Added compiler support for user-defined goal expansion hooks. Changed 
-the implementation of compiler term and goal expansion hooks to use 
+Added compiler support for user-defined goal expansion hooks. Changed
+the implementation of compiler term and goal expansion hooks to use
 object-defined predicates term_expansion/2 and goal_expansion/2.
 Changed the compiler option "hook" to accept object identifiers.
 
-Allow a category to explicitly complement an existing object, thus 
-providing functionality similar to Objective-C categories. Added 
-complements_object/2 built-in predicate. Added a new example, 
+Allow a category to explicitly complement an existing object, thus
+providing functionality similar to Objective-C categories. Added
+complements_object/2 built-in predicate. Added a new example,
 "complements", illustrating the new category functionality.
 
-When constructing a new category from other categories, the relation 
-"extends" is now used instead of the relation "imports". The relation 
-"imports" is now only used when an object imports a category. Added  
+When constructing a new category from other categories, the relation
+"extends" is now used instead of the relation "imports". The relation
+"imports" is now only used when an object imports a category. Added
 extends_category/2-3 built-in predicates.
 
-Modified the built-in predicate define_events/5 to throw an existence 
-error instead of failing when the specified monitor object does not 
-exists. 
+Modified the built-in predicate define_events/5 to throw an existence
+error instead of failing when the specified monitor object does not
+exists.
 
-Updated the Logtalk compiler to convert version numbers to atoms when 
-generating XML documenting files (thus avoiding problems with some 
-Prolog compilers that resulted in version numbers with a large number 
+Updated the Logtalk compiler to convert version numbers to atoms when
+generating XML documenting files (thus avoiding problems with some
+Prolog compilers that resulted in version numbers with a large number
 of fractional digits).
 
-Improved updating of runtime bookkeeping tables when loading source 
+Improved updating of runtime bookkeeping tables when loading source
 files.
 
-Renamed the predicate property "alias/1" to "alias_of/1" in order to 
+Renamed the predicate property "alias/1" to "alias_of/1" in order to
 disambiguate its meaning.
 
-Added a new config file, "k6.config", for the K-Prolog 6.0 beta 
+Added a new config file, "k6.config", for the K-Prolog 6.0 beta
 version.
 
 Updated the B-Prolog config file to recognize mode/1 directives.
-Added some missing meta-predicate specifications to the config files 
+Added some missing meta-predicate specifications to the config files
 of XSB and YAP.
 
-Updated the Windows GUI installer to support running Logtalk with 
+Updated the Windows GUI installer to support running Logtalk with
 CxProlog 0.96.1 and later versions.
 
-Added two new multi-threading examples, "fibonacci" and "hanoi", and 
-corrected a bug in the recursive creation of threads on the "sorting" 
-example. Updated the "primes" multi-threading example to also support 
+Added two new multi-threading examples, "fibonacci" and "hanoi", and
+corrected a bug in the recursive creation of threads on the "sorting"
+example. Updated the "primes" multi-threading example to also support
 eight threads.
 
-Updated the "hooks" example for illustrating goal expansion hooks in 
+Updated the "hooks" example for illustrating goal expansion hooks in
 addition to term expansion hooks.
 
-Updated the "engines" example for compliance with the changes made 
+Updated the "engines" example for compliance with the changes made
 to category relations.
 
-Added syntax coloring support for the new goal_expansion/1, 
-complements_object/2, and extends_category/2-3 predicates to all 
+Added syntax coloring support for the new goal_expansion/1,
+complements_object/2, and extends_category/2-3 predicates to all
 supported text editors.
 
-Updated the TextMate code snippets to use the TM_FULLNAME variable 
-instead of the deprecated "niutil" command to retrieve the user full 
-name. Thanks to Michael Sheets for the update. 
+Updated the TextMate code snippets to use the TM_FULLNAME variable
+instead of the deprecated "niutil" command to retrieve the user full
+name. Thanks to Michael Sheets for the update.
 
 
 2.30.8 - November 9, 2007
 =========================
 
-Fixed bug in the compilation of synchronized predicates that breaks 
+Fixed bug in the compilation of synchronized predicates that breaks
 Logtalk on single-threaded Prolog compilers.
 
 
 2.30.7 - November 5, 2007
 =========================
 
-Updated the multi-threading built-in predicates threaded_notify/1 and 
+Updated the multi-threading built-in predicates threaded_notify/1 and
 threaded_wait/1 to accept lists of notifications.
 
-Added a new read-only compiler flag, "context_switching_calls", allowing 
+Added a new read-only compiler flag, "context_switching_calls", allowing
 context switching calls to be disabled (they are enabled by default).
 
 Updated the B-Prolog config file to recognize eager_consume/1 directives.
 Updated the XSB config file to recognize use_subsumptive_tabling/1,
-use_variant_tabling/1, index/1, thread_private/1, and thread_shared/1 
+use_variant_tabling/1, index/1, thread_private/1, and thread_shared/1
 directives.
 Updated the YAP config file to recognize thread_local/1 directives.
 Updated the SICStus Prolog config files to recognize volatile/1 directives.
-Updated the SWI-Prolog config file to recognize thread_local/1, index/1, 
+Updated the SWI-Prolog config file to recognize thread_local/1, index/1,
 and hash/1 directives.
 
-Changed the backup directory names generated by the "cplgtdirs.*" shell 
+Changed the backup directory names generated by the "cplgtdirs.*" shell
 scripts to not include whitespace characters.
 
-Updated the "xsbmtlgt.sh" integration script to start XSB-MT using the 
-new command-line option "--shared_predicates" (requires current XSB CVS 
-version). Updated the Windows GUI installer to support running Logtalk 
+Updated the "xsbmtlgt.sh" integration script to start XSB-MT using the
+new command-line option "--shared_predicates" (requires current XSB CVS
+version). Updated the Windows GUI installer to support running Logtalk
 with XSB-MT.
 
 Added a multi-threading example, "barriers", of barrier synchronization.
 
-Updated the "functions" example sample queries for compatibility with the 
+Updated the "functions" example sample queries for compatibility with the
 ISO Prolog standard regarding representation of float numbers.
 
-Added a workaround for a parsing bug in XSB while compiling the "sicstus" 
+Added a workaround for a parsing bug in XSB while compiling the "sicstus"
 example.
 
 
 2.30.6 - October 21, 2007
 =========================
 
-Replaced calls to the proprietary current_thread/2 predicate in the 
-Logtalk runtime by calls to the thread_property/2 predicate as per 
-the ISO DTR on multi-threading predicates. Added a goal_expansion/2 
-clause to the SWI-Prolog config file to automatically switch between 
-the current_thread/2 and thread_property/2 predicates depending on 
+Replaced calls to the proprietary current_thread/2 predicate in the
+Logtalk runtime by calls to the thread_property/2 predicate as per
+the ISO DTR on multi-threading predicates. Added a goal_expansion/2
+clause to the SWI-Prolog config file to automatically switch between
+the current_thread/2 and thread_property/2 predicates depending on
 availability.
 
-Changed handling of the encoding/1 directive by the Logtalk compiler in 
-order to improve compatibility with YAP and SICStus Prolog. Removed from 
-the config files the now obsolete '$lgt_set_stream_encoding'/2 predicate 
-definition. Renamed the compiler option "supports_encoding_dir" to 
-"encoding_directive" and changed its possible values to "unsupported", 
-"full" (used in both Logtalk source files and compiler generated Prolog 
+Changed handling of the encoding/1 directive by the Logtalk compiler in
+order to improve compatibility with YAP and SICStus Prolog. Removed from
+the config files the now obsolete '$lgt_set_stream_encoding'/2 predicate
+definition. Renamed the compiler option "supports_encoding_dir" to
+"encoding_directive" and changed its possible values to "unsupported",
+"full" (used in both Logtalk source files and compiler generated Prolog
 files), and "source" (used only in Logtalk source files).
 
 Renamed compiler option "underscore_vars" to "underscore_variables".
 Renamed compiler option "supports_break_predicate" to "break_predicate".
 
-Improved the performance of recursive predicate definitions synchronized 
-by mutexes. Explicitly create all mutexes used by an entity at load time 
-for compatibility with XSB. Several changes to multi-threading support in 
-order to improve compatibility with current and forthcoming versions of 
+Improved the performance of recursive predicate definitions synchronized
+by mutexes. Explicitly create all mutexes used by an entity at load time
+for compatibility with XSB. Several changes to multi-threading support in
+order to improve compatibility with current and forthcoming versions of
 YAP, SWI-Prolog, and XSB.
 
-Updated the Logtalk compiler for compatibility with both logical and 
+Updated the Logtalk compiler for compatibility with both logical and
 immediate update semantics when compiling synchronized predicates.
 
-Updated the meta-predicate compilation sanity checks to verify the 
-existence of the minimum number of normal arguments in a clause head 
+Updated the meta-predicate compilation sanity checks to verify the
+existence of the minimum number of normal arguments in a clause head
 required by the closure of maximum arity.
 
-Added a workaround for the lack of built-in support for character 
-unbuffered input when using the Logtalk built-in debugger to the config 
-files of ALS Prolog, B-Prolog, Ciao, CxProlog, IF/Prolog, JIProlog, 
-Prolog II+, SICStus Prolog, XSB, and YAP. Thanks to Parker Jones for the 
+Added a workaround for the lack of built-in support for character
+unbuffered input when using the Logtalk built-in debugger to the config
+files of ALS Prolog, B-Prolog, Ciao, CxProlog, IF/Prolog, JIProlog,
+Prolog II+, SICStus Prolog, XSB, and YAP. Thanks to Parker Jones for the
 bug report.
 
-Updated the YAP config file to auto-detect working Unicode support when 
+Updated the YAP config file to auto-detect working Unicode support when
 setting the "encoding_directive" compiler option.
 
 Updated the XSB config file to auto-detect multi-threading support
-when setting the "threads" compiler option. Added an integration script 
-(xsbmtlgt.sh) and supporting files for the multi-threaded version of XSB 
+when setting the "threads" compiler option. Added an integration script
+(xsbmtlgt.sh) and supporting files for the multi-threaded version of XSB
 (requires current development version, available from the XSB CVS server).
 
 Added a MacPorts portfile for building MacOS X installer packages.
 
-Added a BOM to the "babel.lgt" UTF-8 file in the "encodings" example in 
+Added a BOM to the "babel.lgt" UTF-8 file in the "encodings" example in
 order to improve compatibility with SICStus Prolog.
 
-Updated the library object "random" by replacing the synchronized/0 
-directive by a synchronized/1 directive listing only the predicates 
+Updated the library object "random" by replacing the synchronized/0
+directive by a synchronized/1 directive listing only the predicates
 that modify the random number seed.
 
-Added syntax coloring support for the GtkSourceView 2.x text widget 
+Added syntax coloring support for the GtkSourceView 2.x text widget
 (used e.g. on the Gnome's Gedit text editor and on the MonoDevelop IDE).
-Removed syntax coloring for the obsolete atomic/1 predicate directive 
-from the support files of Source-highlight, Emacs, SubEthaEdit, jEdit, 
-and Kate. Optimized the regular expressions used in most syntax coloring 
+Removed syntax coloring for the obsolete atomic/1 predicate directive
+from the support files of Source-highlight, Emacs, SubEthaEdit, jEdit,
+and Kate. Optimized the regular expressions used in most syntax coloring
 configuration files of supported text editors.
 
 
 2.30.5 - September 19, 2007
 ===========================
 
-Added new multi-threading built-in predicates threaded_call/2, 
-threaded_once/2, threaded_exit/2, and threaded_peek/2. These new 
-predicates support the use of threaded call identifier tags in order to 
-link specific threaded_call/2 and threaded_once/2 calls to specific 
-threaded_exit/2 and threaded_peek/2 calls. Extended the "nondet" example 
+Added new multi-threading built-in predicates threaded_call/2,
+threaded_once/2, threaded_exit/2, and threaded_peek/2. These new
+predicates support the use of threaded call identifier tags in order to
+link specific threaded_call/2 and threaded_once/2 calls to specific
+threaded_exit/2 and threaded_peek/2 calls. Extended the "nondet" example
 in order to illustrate the new functionality.
 
-Changed the implementation of the built-in predicate threaded_exit/1 in 
-order to avoid blocking when its argument is subsumed by the argument of 
+Changed the implementation of the built-in predicate threaded_exit/1 in
+order to avoid blocking when its argument is subsumed by the argument of
 the corresponding threaded_call/1 call instead of being a variant.
 
-Updated the Logtalk compiler to encapsulate resource errors inside 
+Updated the Logtalk compiler to encapsulate resource errors inside
 error/2 exception terms (as specified in the ISO Prolog core standard).
 
-Corrected a bug in the library object "lgtunit" (wrong arity on two 
+Corrected a bug in the library object "lgtunit" (wrong arity on two
 failed_test/2 predicate calls).
 
-Corrected two problems with the "testing" example: a wrong call on the 
-object "dyn_tests" and a missing entry in the "libpaths.pl" file. Removed 
+Corrected two problems with the "testing" example: a wrong call on the
+object "dyn_tests" and a missing entry in the "libpaths.pl" file. Removed
 two pointless dynamic predicate directives in the "buffer" example.
 
-Improved documentation of multi-threading programming and predicate 
-properties. Corrected the reference manual page describing the threaded/0 
+Improved documentation of multi-threading programming and predicate
+properties. Corrected the reference manual page describing the threaded/0
 directive.
 
-Simplified installation scripts by moving shared distribution cleaning 
-code into the "cleandist.sh" script. Updated the "install.sh" script to 
-set the installation prefix to "/usr" on Debian systems. Updated the 
-Linux RPM spec file in order to clean the building directory after the 
+Simplified installation scripts by moving shared distribution cleaning
+code into the "cleandist.sh" script. Updated the "install.sh" script to
+set the installation prefix to "/usr" on Debian systems. Updated the
+Linux RPM spec file in order to clean the building directory after the
 package creation.
 
 
@@ -16866,250 +16866,250 @@ package creation.
 
 Allow the argument of {}/1 calls to be a variable at compile time.
 
-Updated the Qu-Prolog config file to match and require version 8.1 and 
+Updated the Qu-Prolog config file to match and require version 8.1 and
 added a "qplgt" integration script.
 
-Updated the XSB config file to match and require version 3.1 and to 
-take advantage of the compiler option optimize/1 when loading Logtalk 
+Updated the XSB config file to match and require version 3.1 and to
+take advantage of the compiler option optimize/1 when loading Logtalk
 generated Prolog intermediate files.
 
-Added a new library object, "lgtunit", providing preliminary support for 
-writing and running unit tests. Added a new example, "testing", defining 
+Added a new library object, "lgtunit", providing preliminary support for
+writing and running unit tests. Added a new example, "testing", defining
 sample unit tests.
 
-Added a new multi-threading example, "threads/tak", implementing the 
+Added a new multi-threading example, "threads/tak", implementing the
 Takeuchi function (recursive arithmetic).
 
-Updated the "threads/philosophers" example to use notifications instead 
-of a dynamic predicate for representing chopstick availability. Added an 
-alternative implementation using a parametric object. Improved example 
+Updated the "threads/philosophers" example to use notifications instead
+of a dynamic predicate for representing chopstick availability. Added an
+alternative implementation using a parametric object. Improved example
 documentation.
 
-Updated the "benchmarks" example to allow comparisons between calls to 
+Updated the "benchmarks" example to allow comparisons between calls to
 imported category predicates and calls to local object predicates.
 
-Updated Emacs support in order to fix problems with the syntax-coloring 
-of some Logtalk built-in predicates and applied a patch contributed by 
+Updated Emacs support in order to fix problems with the syntax-coloring
+of some Logtalk built-in predicates and applied a patch contributed by
 Nicolas Pelletier to workaround a compatibility problem with XEmacs.
 
-Updated jEdit support in order to fix a problem with the syntax-coloring 
+Updated jEdit support in order to fix a problem with the syntax-coloring
 of the :/1 control construct.
 
 
 2.30.3 - July 9, 2007
 =====================
 
-Updated the multi-threading built-in predicate threaded/1 to support 
-both conjunctions of goals (akin to and-parallelism) and disjunctions 
+Updated the multi-threading built-in predicate threaded/1 to support
+both conjunctions of goals (akin to and-parallelism) and disjunctions
 of goals (akin to or-parallelism) as an argument.
 
-Removed the experimental threaded_race/1 multi-threading built-in 
-predicate (its or-parallelism functionality is subsumed by the updated 
+Removed the experimental threaded_race/1 multi-threading built-in
+predicate (its or-parallelism functionality is subsumed by the updated
 threaded/1 predicate).
 
-Corrected a bug in the implementation of the multi-threading built-in 
-predicate threaded_exit/1 when there are more than one thread running 
-the same non-deterministic goal (the fix ensures that all alternative 
-solutions per threaded_exit/1 call come from the same computing thread). 
+Corrected a bug in the implementation of the multi-threading built-in
+predicate threaded_exit/1 when there are more than one thread running
+the same non-deterministic goal (the fix ensures that all alternative
+solutions per threaded_exit/1 call come from the same computing thread).
 Thanks to Paul Crocker for the suggested bug fix solution.
 
-Updated the sample queries in the "threads/buffer"/SCRIPT.txt" file to 
+Updated the sample queries in the "threads/buffer"/SCRIPT.txt" file to
 match the updated entities in the example.
 
-Updated the "threads/functions" example to use the new version of the 
+Updated the "threads/functions" example to use the new version of the
 threaded/1 multi-threading built-in predicate.
 
 
 2.30.2 - June 24, 2007
 ======================
 
-Updated the Logtalk compiler to throw a compilation error when duplicated 
+Updated the Logtalk compiler to throw a compilation error when duplicated
 or conflicting predicate scope directives are found.
 
-Updated the Logtalk compiler to correct a cosmetic glitch when reporting 
+Updated the Logtalk compiler to correct a cosmetic glitch when reporting
 compilation errors.
 
-Updated the Logtalk compiler to check for mismatches between the argument 
+Updated the Logtalk compiler to check for mismatches between the argument
 of this/1 calls and the parametric object identifier.
 
-Corrected a bug in the implementation of the multi-threading built-in 
+Corrected a bug in the implementation of the multi-threading built-in
 predicate threaded_ignore/1.
 
-Revamped the "threads/buffer" example to support setting the buffer 
+Revamped the "threads/buffer" example to support setting the buffer
 maximum number of items.
 
-Added a new DCG example, "dcgs/morse.lgt", for parsing messages in Morse 
+Added a new DCG example, "dcgs/morse.lgt", for parsing messages in Morse
 code.
 
-Extended the "parametric" example to illustrate a solution for dealing 
-with inheritance when defining "setter" predicates/methods that return 
+Extended the "parametric" example to illustrate a solution for dealing
+with inheritance when defining "setter" predicates/methods that return
 updated object identifiers.
 
 
 2.30.1 - June 12, 2007
 ======================
 
-Added a new, experimental control construct, :/1, for calling imported 
+Added a new, experimental control construct, :/1, for calling imported
 category predicates without using message sending mechanisms.
 
-Added preliminary support for static binding when calling imported 
-category using the new :/1 control construct for categories compiled 
+Added preliminary support for static binding when calling imported
+category using the new :/1 control construct for categories compiled
 and loaded using the compiler option "reload(skip)".
 
-Added a new control construct, <</2, which allows proving a goal within 
-the context of a specified object. Useful for debugging and for writing 
+Added a new control construct, <</2, which allows proving a goal within
+the context of a specified object. Useful for debugging and for writing
 object unit tests.
 
-Improved multi-threading support in order to make the built-in predicate 
-threaded_exit/1 generate an exception instead of blocking indefinitely 
+Improved multi-threading support in order to make the built-in predicate
+threaded_exit/1 generate an exception instead of blocking indefinitely
 waiting for a reply from a non-existing thread.
 
-Updated the Logtalk compiler to generate an error when compiling from a 
+Updated the Logtalk compiler to generate an error when compiling from a
 source file new definitions for built-in entities.
 
 Updated the Logtalk compiler to generate simpler clauses for the book-
 keeping table of local predicate definitions for parametric entities.
 
-Updated the config files for ECLiPSe, Ciao Prolog, SICStus Prolog, 
-SWI-Prolog, and YAP to use the renamed hook predicates introduced in 
+Updated the config files for ECLiPSe, Ciao Prolog, SICStus Prolog,
+SWI-Prolog, and YAP to use the renamed hook predicates introduced in
 Logtalk 2.30.0 for parsing Prolog proprietary directives.
 
-Updated the "benchmarks" example to compare the performance of calls to 
-imported category predicates when using a message to "self" and a direct 
+Updated the "benchmarks" example to compare the performance of calls to
+imported category predicates when using a message to "self" and a direct
 call.
 
 
 2.30.0 - May 28, 2007
 =====================
 
-Added preliminary support for static binding when sending messages to 
+Added preliminary support for static binding when sending messages to
 objects compiled and loaded using the compiler option "reload(skip)".
 
-Allow non-instantiated arguments at compile time for the multi-threading 
+Allow non-instantiated arguments at compile time for the multi-threading
 built-in predicate threaded/1.
 
-Simplified and optimized the implementation of Logtalk multi-threading 
-support. Use a single dispatcher thread for all objects instead of each 
-object running its own dispatcher in order to minimize the number of 
-created threads (which can be problematic on 32 bits systems). Updated 
-the built-in predicate threaded/1 to make it deterministic and opaque to 
+Simplified and optimized the implementation of Logtalk multi-threading
+support. Use a single dispatcher thread for all objects instead of each
+object running its own dispatcher in order to minimize the number of
+created threads (which can be problematic on 32 bits systems). Updated
+the built-in predicate threaded/1 to make it deterministic and opaque to
 cuts (similar to once/1).
 
-Updated the Logtalk built-in database methods to always interpret rules 
-whose body is the control construct true/0 as facts. Corrected a bug when 
-compiling dynamic predicates that would prevent using of the clause/2 
-built-in database method. Corrected a bug when using the Logtalk built-in 
-database method clause/2 with entities compiled in debug mode. Improved 
+Updated the Logtalk built-in database methods to always interpret rules
+whose body is the control construct true/0 as facts. Corrected a bug when
+compiling dynamic predicates that would prevent using of the clause/2
+built-in database method. Corrected a bug when using the Logtalk built-in
+database method clause/2 with entities compiled in debug mode. Improved
 predicate lookup caching when asserting and retracting dynamic facts.
 
 Improved detection and reporting of entity existence errors.
 
-Added a quit option, "q", to the Logtalk built-in debugger. Modified 
-the debugger behavior to automatically switch to trace mode when a spy 
+Added a quit option, "q", to the Logtalk built-in debugger. Modified
+the debugger behavior to automatically switch to trace mode when a spy
 point is found.
 
-Added two new compiler options, "xmldir" and "tmpdir", allowing per 
-project definition of directories for storing XML documenting files 
+Added two new compiler options, "xmldir" and "tmpdir", allowing per
+project definition of directories for storing XML documenting files
 and for storing intermediate compilation files (e.g. Prolog files).
 Removed the config file predicate '$lgt_alt_directory'/2.
 Older config files are incompatible with this new Logtalk version.
 
 Added a shortcut to the Logtalk built-in predicate logtalk_load/1, {}/1,
-to all config files (defined there in order to be easy to comment it out 
+to all config files (defined there in order to be easy to comment it out
 in case of conflict with some Prolog native feature or lack of compliance
 with the ISO Prolog standard regarding the definition of the {}/1 syntax.
 
 Allow the compiler flag "misspelt" to be set to "error".
 
 Updated the Logtalk compiler to not try to clean-up the dynamic predicates
-of redefined entities when reloading source files. Most Prolog compilers 
-already behave as expected when reloading the intermediate Prolog files 
-generated by the Logtalk compiler. For those Prolog compilers that do not 
-replace old definitions for dynamic predicates with the new ones, it is 
-not possible for Logtalk to implement a workaround that would work 
-correctly in all cases. Consult the "configs/NOTES.txt" file for more 
+of redefined entities when reloading source files. Most Prolog compilers
+already behave as expected when reloading the intermediate Prolog files
+generated by the Logtalk compiler. For those Prolog compilers that do not
+replace old definitions for dynamic predicates with the new ones, it is
+not possible for Logtalk to implement a workaround that would work
+correctly in all cases. Consult the "configs/NOTES.txt" file for more
 information.
 
-Corrected a bug that prevents abolishing a dynamic entity loaded from a 
+Corrected a bug that prevents abolishing a dynamic entity loaded from a
 source file. Thanks to Victor Noel for the bug report.
 
-Renamed the '$lgt_copy_pl_directive'/1 and '$lgt_rewrite_pl_directive'/2 
-config files predicates to '$lgt_rewrite_and_copy_pl_directive'/2 and 
-'$lgt_rewrite_and_recompile_pl_directive'/2. 
+Renamed the '$lgt_copy_pl_directive'/1 and '$lgt_rewrite_pl_directive'/2
+config files predicates to '$lgt_rewrite_and_copy_pl_directive'/2 and
+'$lgt_rewrite_and_recompile_pl_directive'/2.
 
-Updated the config file for B-Prolog to match (and require) the new 7.0 
+Updated the config file for B-Prolog to match (and require) the new 7.0
 version; updated and simplified the corresponding integration scripts.
 
-Updated the XSB POSIX integration script to automatically detect if we 
+Updated the XSB POSIX integration script to automatically detect if we
 are running the XSB stable version of the XSB CVS version.
 
-Added basic support for tabling to the config files of B-Prolog, XSB, 
-and YAP. Added a simple example of using tabling directives within 
+Added basic support for tabling to the config files of B-Prolog, XSB,
+and YAP. Added a simple example of using tabling directives within
 objects.
 
-Updated the SWI-Prolog and YAP config files to automatically detect if 
-the Prolog systems have been compiled with multi-threading support and 
+Updated the SWI-Prolog and YAP config files to automatically detect if
+the Prolog systems have been compiled with multi-threading support and
 to set the Logtalk compiler flag "threads" accordingly.
 
-Corrected a bug when running Logtalk with SWI-Prolog that prevented the 
-use of alternative compilation directories (i.e. turning on the "altdirs" 
-compiler flag). Corrected a bug when running Logtalk with SWI-Prolog that 
-can prevent make/0 from recompiling and reloading modified Logtalk source 
-files. Updated the SWI-Prolog integration script, "swilgt.sh", to more 
+Corrected a bug when running Logtalk with SWI-Prolog that prevented the
+use of alternative compilation directories (i.e. turning on the "altdirs"
+compiler flag). Corrected a bug when running Logtalk with SWI-Prolog that
+can prevent make/0 from recompiling and reloading modified Logtalk source
+files. Updated the SWI-Prolog integration script, "swilgt.sh", to more
 reliably detect the compiler executable name.
 
-Added a "configs/swi_set_logtalk_context.pl" file defining a useful but 
-fragile hack implementing a set_logtalk_context/1 built-in predicate for 
-switching the Logtalk top-level execution context to objects other than 
+Added a "configs/swi_set_logtalk_context.pl" file defining a useful but
+fragile hack implementing a set_logtalk_context/1 built-in predicate for
+switching the Logtalk top-level execution context to objects other than
 the default pseudo-object "user" (you may use it as a debugging tool).
 
-Updated the CxProlog config file to use the new built-in predicates in 
-version 0.95. Added a shell script, "cxlgt.sh", for easy integration of 
-Logtalk with CxProlog on POSIX systems (with the help of Artur Miguel 
+Updated the CxProlog config file to use the new built-in predicates in
+version 0.95. Added a shell script, "cxlgt.sh", for easy integration of
+Logtalk with CxProlog on POSIX systems (with the help of Artur Miguel
 Dias, CxProlog author).
 
-Updated the Ciao, K-Prolog, and ECLiPSe config files to set the default 
-value for the compiler flag "underscore_vars" to "dont_care" in order to 
+Updated the Ciao, K-Prolog, and ECLiPSe config files to set the default
+value for the compiler flag "underscore_vars" to "dont_care" in order to
 avoid spurious warnings with some of the provided examples.
 
-Added a config file and integration scripts for the current XSB CVS 
-version (3.0.1+), which supports some features needed by Logtalk not 
-present in the current stable version (namely, expansion of environment 
+Added a config file and integration scripts for the current XSB CVS
+version (3.0.1+), which supports some features needed by Logtalk not
+present in the current stable version (namely, expansion of environment
 variables).
 
 Added predicates depth/2 and variant/2 to the library object "term".
 
-Much improved "benchmarks" example, updated to allow running tests in 
-three different scenarios: event support on, event support off, and 
-using static binding. Moreover, metacalls are no longer used to run 
+Much improved "benchmarks" example, updated to allow running tests in
+three different scenarios: event support on, event support off, and
+using static binding. Moreover, metacalls are no longer used to run
 the benchmark goals, resulting in more meaningful and accurate results.
 
-Removed all the "make_*lgt.*" and "makeall_lgt.*" shell scripts, replaced 
+Removed all the "make_*lgt.*" and "makeall_lgt.*" shell scripts, replaced
 by pre-made integration scripts that can be found on the new "integration"
-directory. Removed the "lgt_install.js" script. Renamed the POSIX install 
+directory. Removed the "lgt_install.js" script. Renamed the POSIX install
 and uninstall scripts to, respectively, "install.sh" and "uninstall.sh".
-Updated the integration, uninstall, and user-setup POSIX shell scripts 
-to use "$prefix/share/logtalk" as the default installation directory to 
-better comply with the Filesystem Hierarchy Standard 2.3 for UNIX-like 
+Updated the integration, uninstall, and user-setup POSIX shell scripts
+to use "$prefix/share/logtalk" as the default installation directory to
+better comply with the Filesystem Hierarchy Standard 2.3 for UNIX-like
 operating systems.
 
-Updated the integration scripts to automatically call the "cplgtdirs" 
+Updated the integration scripts to automatically call the "cplgtdirs"
 script when the Logtalk user directory cannot be located.
 
-Updated the integration, documentation, uninstall, and user-setup POSIX 
-shell scripts to try to locate the Logtalk installation directory and the 
-Logtalk user directory when the environment variables LOGTALKHOME and 
+Updated the integration, documentation, uninstall, and user-setup POSIX
+shell scripts to try to locate the Logtalk installation directory and the
+Logtalk user directory when the environment variables LOGTALKHOME and
 LOGTALKUSER are not set.
 
-Updated the "install.sh" POSIX shell script to better clean and sanitize 
+Updated the "install.sh" POSIX shell script to better clean and sanitize
 the file permissions on the installation directory.
 
-Updated the "build_release.sh" POSIX shell script to also build a Debian 
+Updated the "build_release.sh" POSIX shell script to also build a Debian
 binary installer package (experimental).
 
-The Windows GUI installer no longer spans command-line shells running 
-JScript scripts to build the Prolog integration shortcuts. This hopefully 
-solves issues with security software silently blocking and breaking the 
+The Windows GUI installer no longer spans command-line shells running
+JScript scripts to build the Prolog integration shortcuts. This hopefully
+solves issues with security software silently blocking and breaking the
 Logtalk installation.
 
 Added basic syntax coloring support for the GNU Nano 2.x text editor.
@@ -17118,113 +17118,113 @@ Added basic syntax coloring support for the GNU Nano 2.x text editor.
 2.29.5 - March 28, 2007
 =======================
 
-Added a new built-in predicate, threaded/1, for proving each goal in 
-a conjunction in its own thread, simplifying common multi-threading 
-tasks that previously required sequences of calls to the built-in 
+Added a new built-in predicate, threaded/1, for proving each goal in
+a conjunction in its own thread, simplifying common multi-threading
+tasks that previously required sequences of calls to the built-in
 predicates threaded_call/1 and threaded_exit/1.
 
-Simplified and optimized the implementation of Logtalk multi-threading 
+Simplified and optimized the implementation of Logtalk multi-threading
 support.
 
-Simplified implementation of the database built-in methods. Simplified 
-caching of dynamic predicate lookups. Improved performance of the 
+Simplified implementation of the database built-in methods. Simplified
+caching of dynamic predicate lookups. Improved performance of the
 built-in methods retract/1 and retractall/1.
 
 Simplified the code generated when compiling entities in debugging mode.
 
-Corrected a bug in the built-in debugger when processing actions at a 
+Corrected a bug in the built-in debugger when processing actions at a
 port that implies reading a port action again (e.g. print exception term,
-print debugging status, and help options). Allow the debugger command 
-"skip" to work as the command "creep" in ports other than "call" and 
-"redo". Added a new debugger command, "ignore". Suspend debugging when 
+print debugging status, and help options). Allow the debugger command
+"skip" to work as the command "creep" in ports other than "call" and
+"redo". Added a new debugger command, "ignore". Suspend debugging when
 using the "break" debugger command.
 
-Generate a compilation error instead of just printing a warning when 
-compiling calls to the multi-threading built-in predicates within an 
+Generate a compilation error instead of just printing a warning when
+compiling calls to the multi-threading built-in predicates within an
 object with no threaded/0 directive present.
 
-Corrected a bug when compiling entities containing synchronization 
+Corrected a bug when compiling entities containing synchronization
 directives on single-threaded Prolog configurations.
 
-Improving reporting of working directory when loading or compiling source 
+Improving reporting of working directory when loading or compiling source
 files by expanding any environment variables occurring in the path.
 
-Added a new compiler option, "reload", for defining the Logtalk behavior 
-when reloading source files. Valid values are "always" (default value; 
+Added a new compiler option, "reload", for defining the Logtalk behavior
+when reloading source files. Valid values are "always" (default value;
 defined in the config files) and "skip".
 
-Updated the programming examples to use the new "reload" compiler option 
-when loading library entities. Simplified loading of example source files 
-(by updating the utility loader files to automatically load all required 
+Updated the programming examples to use the new "reload" compiler option
+when loading library entities. Simplified loading of example source files
+(by updating the utility loader files to automatically load all required
 library files).
 
-Updated GNU Prolog config file to take advantage of some built-in list 
-predicates (requires version 1.2.14 or later); changed the compiler flag 
-"underscore_vars" value to "dont_care" to avoid spurious warnings with 
+Updated GNU Prolog config file to take advantage of some built-in list
+predicates (requires version 1.2.14 or later); changed the compiler flag
+"underscore_vars" value to "dont_care" to avoid spurious warnings with
 some examples.
 
 Added a config file for B-Prolog 7.0b1.
 
-Updated the POSIX integration shell scripts to pass along any command 
-line options to the corresponding Prolog compiler and to prevent some 
+Updated the POSIX integration shell scripts to pass along any command
+line options to the corresponding Prolog compiler and to prevent some
 problems with paths containing spaces.
 
-Much improved syntax coloring and code completion support for the jEdit 
+Much improved syntax coloring and code completion support for the jEdit
 text editor.
 
-Updated the "threads/primes" example to use the new "threaded/1" built-in 
-predicate. Updated the "threads/birthdays" example to better illustrate 
-the use of the built-in multi-threading predicates. Added a new 
-multi-threading example, "msort", implementing single-threaded and 
+Updated the "threads/primes" example to use the new "threaded/1" built-in
+predicate. Updated the "threads/birthdays" example to better illustrate
+the use of the built-in multi-threading predicates. Added a new
+multi-threading example, "msort", implementing single-threaded and
 multi-threaded versions of the merge sort algorithm.
 
-Expanded the "operators" example to illustrate a simple solution for 
-making operators local to source files (but global to all entities 
+Expanded the "operators" example to illustrate a simple solution for
+making operators local to source files (but global to all entities
 defined within the source files).
 
 
 2.29.4 - February 19, 2007
 ==========================
 
-Added a new library category, "listing", defining listing/0 and 
+Added a new library category, "listing", defining listing/0 and
 listing/1 methods for helping in debugging tasks.
 
-Added two new experimental multi-threading predicates, threaded_wait/1 
-and threaded_notify/1, which allows suspension of a thread's goal until  
-a notification is received. Added two new examples, "threads/buffer" and 
+Added two new experimental multi-threading predicates, threaded_wait/1
+and threaded_notify/1, which allows suspension of a thread's goal until
+a notification is received. Added two new examples, "threads/buffer" and
 "threads/blackboard", illustrating the use of these predicates.
 
-Simplified and changed implementation of the threaded built-in 
-predicates in order to ensure that the threaded/0 directive is only 
+Simplified and changed implementation of the threaded built-in
+predicates in order to ensure that the threaded/0 directive is only
 required on objects calling these predicates.
 
 Only print a warning for a missing threaded/0 directive for objects.
 
-Corrected a ordering bug on the entity initialization goal that 
-prevented using an object initialization goal that make use of 
-the object thread. 
+Corrected a ordering bug on the entity initialization goal that
+prevented using an object initialization goal that make use of
+the object thread.
 
 Corrected a bug when asserting rules into an object's database that
-resulted in only the first asserted rule being visible when calling 
-the predicate through message sending. Thanks to Parker Jones for 
+resulted in only the first asserted rule being visible when calling
+the predicate through message sending. Thanks to Parker Jones for
 the bug report.
 
-Corrected a bug when compiling dynamic entities (defined in source 
-files using the dynamic/0 directive) where declared predicates would 
+Corrected a bug when compiling dynamic entities (defined in source
+files using the dynamic/0 directive) where declared predicates would
 be wrongly compiled as static instead of dynamic.
 
-Updated the "make_xsblgt.sh" integration script again to fix an 
-additional problem resulting from the lack of support in XSB for 
+Updated the "make_xsblgt.sh" integration script again to fix an
+additional problem resulting from the lack of support in XSB for
 using environment variables in file paths.
 
 Added minimal support for using Exuberant Ctags with Logtalk.
 
 Added auto indent support to the jEdit text editor.
 
-Added support for listing public predicates in the "Functions" window 
+Added support for listing public predicates in the "Functions" window
 of the SuperEdi text editor.
 
-Converted TextMate code snippets from the old Property List format 
+Converted TextMate code snippets from the old Property List format
 to XML in order to provide compatibility with the "e" Windows text
 editor.
 
@@ -17234,66 +17234,66 @@ New example: 99 bottles of beer on the wall! Sing along!
 2.29.3 - January 15, 2007
 =========================
 
-Corrected a bug in the Logtalk compiler optimizer code which was 
-discarding some declaration and definition catchall clauses needed 
-by the Logtalk built-in database methods when there is no initial 
+Corrected a bug in the Logtalk compiler optimizer code which was
+discarding some declaration and definition catchall clauses needed
+by the Logtalk built-in database methods when there is no initial
 declaration and definition for the referenced dynamic predicates.
 Thanks to Parker Jones for the bug report.
 
-Corrected a bug in the compilation of empty, standalone protocols 
+Corrected a bug in the compilation of empty, standalone protocols
 and categories.
 
-Updated the "make_xsblgt.sh" integration script to workaround 
-the lack of support in XSB for using environment variables in 
+Updated the "make_xsblgt.sh" integration script to workaround
+the lack of support in XSB for using environment variables in
 the argument of the reconsult/1 predicate.
 
-Corrected a bug in the "potions.lgt" example puzzle that prevented 
+Corrected a bug in the "potions.lgt" example puzzle that prevented
 its solution of being found.
 
 
 2.29.2 - January 10, 2007
 =========================
 
-Silently compile synchronized predicates as normal predicates on 
+Silently compile synchronized predicates as normal predicates on
 single-threaded Prolog compilers.
 
-When using the threaded_race/1 predicate, competing threads are 
+When using the threaded_race/1 predicate, competing threads are
 now created detached.
 
-Corrected a bug that resulted in a loading error when reloading 
+Corrected a bug that resulted in a loading error when reloading
 source files defining threaded objects.
 
-Corrected a bug in the implementation of the built-in predicate 
-threaded_peek/1 that prevented alternative solutions from being 
-retrieved using the built-in predicate threaded_exit/1. Removed 
+Corrected a bug in the implementation of the built-in predicate
+threaded_peek/1 that prevented alternative solutions from being
+retrieved using the built-in predicate threaded_exit/1. Removed
 the built-in predicate threaded_discard/1.
 
-The library object "random" is now a synchronized object. Updated 
+The library object "random" is now a synchronized object. Updated
 the "philosophers" multi-threading example accordingly.
 
-Dropped loading of broken "cleanup" library from the YAP config file 
-(the call_cleanup/2 predicate, required for Logtalk multi-threading, 
+Dropped loading of broken "cleanup" library from the YAP config file
+(the call_cleanup/2 predicate, required for Logtalk multi-threading,
 is now available as a built-in predicate in the YAP CVS version).
 
 
 2.29.1 - December 28, 2006
 ==========================
 
-Added a Logtalk version of John Fletcher's Prolog XML parser (see the 
+Added a Logtalk version of John Fletcher's Prolog XML parser (see the
 folder "contributions/xml_parser").
 
-Added shell scripts for helping building the distribution files of a 
-new Logtalk release. Updated the MacOS X installer package to set 
-default values for the Logtalk environment variables. Corrected a bug 
-in the "logtalk.spec" file where the default value for the LOGTALKUSER 
+Added shell scripts for helping building the distribution files of a
+new Logtalk release. Updated the MacOS X installer package to set
+default values for the Logtalk environment variables. Corrected a bug
+in the "logtalk.spec" file where the default value for the LOGTALKUSER
 environment variable only worked for the user doing the RPM installation.
 
-Corrected a bug in the reporting of the line number where a compilation 
-error (or warning) occurred. Extended support for reporting warning and 
-error line numbers to Quintus Prolog, Ciao Prolog, Qu-Prolog, and 
+Corrected a bug in the reporting of the line number where a compilation
+error (or warning) occurred. Extended support for reporting warning and
+error line numbers to Quintus Prolog, Ciao Prolog, Qu-Prolog, and
 ECLiPSe.
 
-Corrected a bug when using partial lists with the predicates nth0/3-4 
+Corrected a bug when using partial lists with the predicates nth0/3-4
 and nth1/3-4 provided by the "list" library object.
 
 Improved "philosophers" multi-threading programming example.
@@ -17302,218 +17302,218 @@ Improved "philosophers" multi-threading programming example.
 2.29.0 - December 18, 2006
 ==========================
 
-Added a new built-in, empty object named "logtalk", which can play the 
-role of both a class and a prototype. It may be used to define class 
-hierarchies without forcing the use of metaclasses or reflective 
+Added a new built-in, empty object named "logtalk", which can play the
+role of both a class and a prototype. It may be used to define class
+hierarchies without forcing the use of metaclasses or reflective
 designs.
 
-Added a built-in protocol named "monitoring" with declarations for 
-the before/3 and after/3 public event handler predicates. Updated 
-the Logtalk compiler to print a warning when defining an event handler 
+Added a built-in protocol named "monitoring" with declarations for
+the before/3 and after/3 public event handler predicates. Updated
+the Logtalk compiler to print a warning when defining an event handler
 with no reference to the "monitoring" protocol.
 
-The default value of the compiler flag events/1 is now off. As most 
-applications do not use events, this setting ensures the best possible 
+The default value of the compiler flag events/1 is now off. As most
+applications do not use events, this setting ensures the best possible
 message processing performance for those applications.
 
-Removed the experimental threaded_call/2 and threaded_exit/2 thread 
-predicates, replaced by new threaded_once/1, threaded_ignore/1, 
+Removed the experimental threaded_call/2 and threaded_exit/2 thread
+predicates, replaced by new threaded_once/1, threaded_ignore/1,
 threaded_race/1, threaded_peek/1, and threaded_discard/1 predicates.
-Renamed predicate directive atomic/1 to synchronized/1. Added new 
-entity directive synchronized/0. Added support for new "synchronized" 
+Renamed predicate directive atomic/1 to synchronized/1. Added new
+entity directive synchronized/0. Added support for new "synchronized"
 and "threaded" entity properties.
 
-Corrected a bug when using threaded calls as initialization goals 
+Corrected a bug when using threaded calls as initialization goals
 within threaded objects.
 
-Corrected an elusive bug in the Logtalk compiler where a source file 
-may not be properly closed when it contains a syntax error (thanks 
+Corrected an elusive bug in the Logtalk compiler where a source file
+may not be properly closed when it contains a syntax error (thanks
 to Robert Shiplett for the bug report).
 
-Corrected a bug in the implementation of the built-in methods retract/1 
-and retractall/1 that could result in unexpected exceptions. Updated 
+Corrected a bug in the implementation of the built-in methods retract/1
+and retractall/1 that could result in unexpected exceptions. Updated
 the built-in method assertz/1 to always use the lookup cache.
 
-Corrected a bug in the compilation of empty classes that are not 
+Corrected a bug in the compilation of empty classes that are not
 instances of a metaclass.
 
-Corrected a bug in the built-in method predicate_property/2 where some 
-predicate properties may not be returned when enumerating properties 
+Corrected a bug in the built-in method predicate_property/2 where some
+predicate properties may not be returned when enumerating properties
 using backtracking.
 
-Modified the SWI-Prolog config file and integration scripts to set 
-the flag "iso" to "true". Corrected an elusive bug in the definition 
-of predicate '$lgt_directory_exists'/1 that resulted in "library not 
-found" errors when loading Logtalk source files from within the 
-SWI-Prolog initialization file (thanks to Robert Shiplett for the bug 
+Modified the SWI-Prolog config file and integration scripts to set
+the flag "iso" to "true". Corrected an elusive bug in the definition
+of predicate '$lgt_directory_exists'/1 that resulted in "library not
+found" errors when loading Logtalk source files from within the
+SWI-Prolog initialization file (thanks to Robert Shiplett for the bug
 report).
 
-Updated the K-Prolog config file to workaround a problem when using 
-library notation due to failure to check directory existence with the 
+Updated the K-Prolog config file to workaround a problem when using
+library notation due to failure to check directory existence with the
 provided "libpaths.pl" file.
 
-Added a RELAX NG file describing the structure of the XML documenting 
+Added a RELAX NG file describing the structure of the XML documenting
 files generated by Logtalk.
 
-Corrected a bug in the Logtalk DTD file (missing "copyright" tag 
+Corrected a bug in the Logtalk DTD file (missing "copyright" tag
 declaration).
 
-Corrected a bug in the lgt2*.js scripts where the "custom.ent" file 
+Corrected a bug in the lgt2*.js scripts where the "custom.ent" file
 was not being copied when generating (X)HTML and PDF files.
 
-Added a new multi-threading example, "philosophers", illustrating a 
+Added a new multi-threading example, "philosophers", illustrating a
 possible implementation of the "dining philosophers" problem.
 
-Improved the "metapredicates" example in order to illustrate the use 
+Improved the "metapredicates" example in order to illustrate the use
 of closures instead of goals as meta-arguments.
 
-Added a reference to the "e" Windows text editor, which supports 
+Added a reference to the "e" Windows text editor, which supports
 the MacOS X TextMate 1.x text editor syntax configuration files.
 
-Updated the manuals index pages in order to workaround browsers bugs 
+Updated the manuals index pages in order to workaround browsers bugs
 with parsing of empty "span" tags (e.g. Internet Explorer and Opera).
 
 
 2.28.2 - November 6, 2006
 =========================
 
-Corrected a compiler bug where unknown entities will not be report when 
+Corrected a compiler bug where unknown entities will not be report when
 compiling a source file whenever an entity with the same name but of a
 different type is already known.
 
-Added a XPCE hook file ("configs/xpcehook.pl") supporting Logtalk message 
-sending goals as XPCE call-back goals. The XPCE library is now loaded by 
+Added a XPCE hook file ("configs/xpcehook.pl") supporting Logtalk message
+sending goals as XPCE call-back goals. The XPCE library is now loaded by
 default by the SWI-Prolog integration scripts.
 
-Added support for generating single PDF files of the User and Reference 
+Added support for generating single PDF files of the User and Reference
 Manuals. Removed the PDF versions of the individual manual XHTML pages.
 
 The ECLiPSe config files now require release 5.10#26 or a later version.
 
-Added support for listing Logtalk entity names (objects, categories, and 
+Added support for listing Logtalk entity names (objects, categories, and
 protocols) in the SubEthaEdit symbols menu.
 
-Added a Vim dictionary file for Logtalk keyword completion and support 
+Added a Vim dictionary file for Logtalk keyword completion and support
 for automatic indentation.
 
-Added basic support for the MacOS X Smultron text editor. Added basic 
+Added basic support for the MacOS X Smultron text editor. Added basic
 support for the Notepad++, SuperEdi, and ConTEXT Windows text editors.
 
 
 2.28.1 - October 10, 2006
 =========================
 
-Added support for using XML entities using the notation "{entity name}" 
-in info/1 documenting directives for the "author", "copyright", and 
+Added support for using XML entities using the notation "{entity name}"
+in info/1 documenting directives for the "author", "copyright", and
 "license" keywords. The XML entities are defined on a "custom.ent" file.
 
 Updated Logtalk bibliographic references (in file "BIBLIOGRAPHY.bib").
 
-Added a "lgt_uninstall.sh" shell script for uninstalling Logtalk on POSIX 
+Added a "lgt_uninstall.sh" shell script for uninstalling Logtalk on POSIX
 operating systems.
 
-Improved RPM install-time messages on the defined Logtalk environment 
+Improved RPM install-time messages on the defined Logtalk environment
 variables.
 
-Updated the ECLiPSe integration scripts and config files to work with 
+Updated the ECLiPSe integration scripts and config files to work with
 and require version 5.10 (the first open source version of ECLiPSe).
 
-Corrected a typo on the "logtalk.dtd" file that prevents validation of 
+Corrected a typo on the "logtalk.dtd" file that prevents validation of
 XML documenting files that use a local reference to the DTD.
 
 
 2.28.0 - September 28, 2006
 ===========================
 
-Updated the Logtalk license to the final version of the "The Artistic 
+Updated the Logtalk license to the final version of the "The Artistic
 License 2.0" (see http://www.perlfoundation.org/legal/ for details).
 
-Added experimental support for multi-threading programming on selected 
-Prolog compilers. Added a new object directive, threaded/0, a new 
-predicate directive, atomic/1, and four new built-in predicates, 
-threaded_call/1-2 and threaded_exit/1-2. Added a new set of examples, 
-"threads". Thanks to Paulo Nunes for helping developing and testing 
+Added experimental support for multi-threading programming on selected
+Prolog compilers. Added a new object directive, threaded/0, a new
+predicate directive, atomic/1, and four new built-in predicates,
+threaded_call/1-2 and threaded_exit/1-2. Added a new set of examples,
+"threads". Thanks to Paulo Nunes for helping developing and testing
 these new features.
 
 Expanded support for meta-predicates by allowing the declaration of meta-
 arguments as closures instead of goals.
 
-Added the generalized call/N predicate as a built-in method. This built-in 
-method must be used in the implementation of meta-predicates which work 
+Added the generalized call/N predicate as a built-in method. This built-in
+method must be used in the implementation of meta-predicates which work
 with closures instead of goals.
 
-The metapredicate/1 directive should be considered deprecated. Use the 
+The metapredicate/1 directive should be considered deprecated. Use the
 meta_predicate/1 directive instead.
 
-Updated the Logtalk compiler to generate an error whenever a non-variable 
+Updated the Logtalk compiler to generate an error whenever a non-variable
 meta-argument is found in a clause head of a user-defined meta-predicate.
 
-Improved compilation of meta-predicate meta-arguments. Corrected a bug 
-in the compilation of user meta-predicates that allowed illegal calls 
-to non-public predicates on the caller object to be made from the object 
-defining the meta-predicates. Thanks to Rémy Haemmerlé and François 
+Improved compilation of meta-predicate meta-arguments. Corrected a bug
+in the compilation of user meta-predicates that allowed illegal calls
+to non-public predicates on the caller object to be made from the object
+defining the meta-predicates. Thanks to Rémy Haemmerlé and François
 Fages for reporting the problem.
 
-Improved performance for non-cached messages, notably when running with 
-YAP, GNU Prolog, and SWI-Prolog on all operating systems and with SICStus 
+Improved performance for non-cached messages, notably when running with
+YAP, GNU Prolog, and SWI-Prolog on all operating systems and with SICStus
 Prolog 4.0 on POSIX operating systems.
 
-Updated the Logtalk compiler to generate an error whenever a predicate 
-directive appears in a source file after predicate clauses that call the 
+Updated the Logtalk compiler to generate an error whenever a predicate
+directive appears in a source file after predicate clauses that call the
 predicate specified in the directive.
 
-Added support for "copyright" and "license" keys to the info/1 entity 
+Added support for "copyright" and "license" keys to the info/1 entity
 documenting directive.
 
-Improved compiler error messages to also report source file line number 
+Improved compiler error messages to also report source file line number
 for selected Prolog compilers.
 
-Added PDF versions of all the manual XHTML pages. Added links to all the 
+Added PDF versions of all the manual XHTML pages. Added links to all the
 manual XHTML pages to the corresponding PDF versions.
 
-Corrected a bug (introduced in version 2.27.0) in the built-in predicates 
+Corrected a bug (introduced in version 2.27.0) in the built-in predicates
 abolish_object/1, abolish_protocol/1, and abolish_category/1 that resulted
-in some clauses not being retracted when an object is abolished (thanks to 
+in some clauses not being retracted when an object is abolished (thanks to
 Neng-Fa Zhou for the bug report).
 
-Corrected a bug (introduced in version 2.27.1) in the processing of the 
+Corrected a bug (introduced in version 2.27.1) in the processing of the
 term_expansion/2 predicate.
 
-Corrected a bug in the compilation of redefined built-in predicates with 
+Corrected a bug in the compilation of redefined built-in predicates with
 no clauses.
 
 Added an experimental config file for CxProlog 0.93.1.
 
-Updated the SWI-Prolog config and hook files in order to support the 
+Updated the SWI-Prolog config and hook files in order to support the
 edit/1 and make/0 development predicates.
 
-Changed the Logtalk - SWI-Prolog integration scripts to load the hook 
-file "swihook.pl" after the other files in order to avoid some possible 
+Changed the Logtalk - SWI-Prolog integration scripts to load the hook
+file "swihook.pl" after the other files in order to avoid some possible
 errors at startup.
 
-Updated the config file for the forthcoming SICStus Prolog 4.0 version 
-to work in the current beta version. Modified the "make_sicstuslgt.*" 
+Updated the config file for the forthcoming SICStus Prolog 4.0 version
+to work in the current beta version. Modified the "make_sicstuslgt.*"
 shell scripts to work with both SICStus Prolog 3.12 and 4.0 versions.
 
-Updated the config file for YAP to workaround a problem on the Windows 
-version where testing for directory existence fails if the path ends with 
-a slash (or a double backslash); this problem prevents the use of library 
-notation to load source files (problem already fixed in the current YAP 
+Updated the config file for YAP to workaround a problem on the Windows
+version where testing for directory existence fails if the path ends with
+a slash (or a double backslash); this problem prevents the use of library
+notation to load source files (problem already fixed in the current YAP
 CVS version).
 
-Updated the config file for B-Prolog to match (and require) the new 6.9 
-version; added integration shell scripts (for both Windows and POSIX 
+Updated the config file for B-Prolog to match (and require) the new 6.9
+version; added integration shell scripts (for both Windows and POSIX
 systems).
 
-Updated the config files and the integration scripts for ECLiPSe in order 
+Updated the config files and the integration scripts for ECLiPSe in order
 to workaround bugs on the predicates abolish/1 and canonical_path_name/2.
-Modified the "make_eclipselgt.js" script to work with both ECLiPSe 5.8 
+Modified the "make_eclipselgt.js" script to work with both ECLiPSe 5.8
 and 5.9 versions.
 
-Dropped support for versions of XSB older than 3.0. Added support for 
+Dropped support for versions of XSB older than 3.0. Added support for
 smart compilation of source files to the XSB config file.
 
-Updated the config file for IF/Prolog 5.1 by adding a missing definition 
+Updated the config file for IF/Prolog 5.1 by adding a missing definition
 for predicate retractall/1 and avoiding some harmless singleton warnings.
 
 Add a ".txt" extension to all "NOTES" and "SCRIPT" files.
@@ -17522,65 +17522,65 @@ Extended "dcgs", "parametric", and "metainterpreters" examples.
 
 Added Inno Setup GUI Windows installer script.
 
-Update all the JScript scripts to check if a compatible version of WSH 
+Update all the JScript scripts to check if a compatible version of WSH
 is installed and to workaround some problems with spaces in file paths.
 
-Updated the "lgt_install.js" JScript script to copy the scripts/*.bat and 
-the xml/*.bat batch scripts to the system's Windows directory instead of 
+Updated the "lgt_install.js" JScript script to copy the scripts/*.bat and
+the xml/*.bat batch scripts to the system's Windows directory instead of
 modifying the PATH environment variable.
 
-Updated the "cplgtdirs.*" shell scripts to make a backup copy of any 
+Updated the "cplgtdirs.*" shell scripts to make a backup copy of any
 previous LOGTALKUSER directory.
 
-Added post-install scripts to the LINUX RPM "logtalk.spec" file for 
-setting the environment variable LOGTALKHOME for all users, defining 
-a default value for the environment variable LOGTALKUSER, and running 
+Added post-install scripts to the LINUX RPM "logtalk.spec" file for
+setting the environment variable LOGTALKHOME for all users, defining
+a default value for the environment variable LOGTALKUSER, and running
 the Prolog integration scripts.
 
-Split the installation and customization instructions in two files, 
+Split the installation and customization instructions in two files,
 "INSTALL.txt" and "CUSTOMIZE.txt".
 
-Added shell scripts for converting the manual XHTML pages into PDF files 
+Added shell scripts for converting the manual XHTML pages into PDF files
 using CSSToXSLFO.
 
 
 2.27.1 - March 27, 2006
 =======================
 
-Allow calls to the built-in method parameter/2 with the first argument 
-not instantiated at compile time. Detect and report as a compilation 
+Allow calls to the built-in method parameter/2 with the first argument
+not instantiated at compile time. Detect and report as a compilation
 error parameter/2 indexes that are out of range.
 
-Optimized generation of predicate definition and declaration linking 
-clauses, resulting in small lookup performance improvements and in space 
+Optimized generation of predicate definition and declaration linking
+clauses, resulting in small lookup performance improvements and in space
 savings for the Prolog code generated when compiling Logtalk entities.
 
 Many minor code and documentation improvements to the Logtalk compiler.
 
-Added an object version of the tokenizer described in the Michael 
+Added an object version of the tokenizer described in the Michael
 Covington's paper "Tokenization using DCG Rules" to the "dcgs" example.
 
 Improved integration code for Qu-Prolog and Logtalk ("configs/qphook.ql").
 
-Improved library hierarchy methods that return lists of objects in order 
-to avoid duplicated elements (library objects "proto_hierarchy.lgt" and 
-"class_hierarchy.lgt"). Added new methods extension/1 and extensions/1 to 
+Improved library hierarchy methods that return lists of objects in order
+to avoid duplicated elements (library objects "proto_hierarchy.lgt" and
+"class_hierarchy.lgt"). Added new methods extension/1 and extensions/1 to
 the library object "proto_hierarchy.lgt".
 
-Documented the concept of "parametric object proxy". Added a new example, 
+Documented the concept of "parametric object proxy". Added a new example,
 "proxies", illustrating the use of parametric object proxies.
 
-Added support for code completion and for listing entity names on the 
+Added support for code completion and for listing entity names on the
 symbol pop-up menu to the MacOS X TextMate text editor.
 
-Updated the "cplgtdirs.*" scripts to also create an alias/shortcut to the 
+Updated the "cplgtdirs.*" scripts to also create an alias/shortcut to the
 "coding" directory.
 
-Renamed the alternative compilation and documentation directory names on 
+Renamed the alternative compilation and documentation directory names on
 all config files to be compatible across operating-systems. Removed unused
 predicate '$lgt_reverse'/2 from all config files.
 
-Updated HTML manuals "print.css" CSS file for compatibility with the 
+Updated HTML manuals "print.css" CSS file for compatibility with the
 latest version of CSSToXSLFO.
 
 
@@ -17588,67 +17588,67 @@ latest version of CSSToXSLFO.
 =========================
 
 Improved performance for local calls to the built-in methods phrase/2-3.
-Allow the built-in methods phrase/2-3 to accept both partial and proper 
+Allow the built-in methods phrase/2-3 to accept both partial and proper
 lists of terminals.
 
-Improved grammar rule translator. Report calls to undefined non-terminals 
+Improved grammar rule translator. Report calls to undefined non-terminals
 when translating grammar rules.
 
-Added support for declaring grammar rule non-terminal aliases using the 
+Added support for declaring grammar rule non-terminal aliases using the
 alias/3 directive.
 
-Added a new predicate property, non_terminal/1, for predicates resulting 
+Added a new predicate property, non_terminal/1, for predicates resulting
 from the compilation of grammar rule non-terminals.
 
-Improved support for the built-in method expand_term/2 in order to allow 
-bypassing of the default Logtalk grammar rule translator by defining 
-clauses for the term_expansion/2 predicate. Added a "term_expansionp" 
-protocol to the Logtalk library. Added a new example, "expansion", 
+Improved support for the built-in method expand_term/2 in order to allow
+bypassing of the default Logtalk grammar rule translator by defining
+clauses for the term_expansion/2 predicate. Added a "term_expansionp"
+protocol to the Logtalk library. Added a new example, "expansion",
 illustrating the use of the term_expansion/2 predicate.
 
-Added a new compiler flag, hook/1, allowing the specification of a 
+Added a new compiler flag, hook/1, allowing the specification of a
 compiler hook that is called for which term read from a source file.
-Added a simple example, "hooks", of using the Logtalk compiler hook 
-to expand author abbreviations in info/1 directives into full names 
+Added a simple example, "hooks", of using the Logtalk compiler hook
+to expand author abbreviations in info/1 directives into full names
 and email addresses.
 
-Added support for XSB 3.x to the runtime error handler. Updated the XSB 
+Added support for XSB 3.x to the runtime error handler. Updated the XSB
 3.x config file with declarations for multi-threading meta-predicates.
 
 Removed a few choice-points when checking validity of entity directives.
 
-Added two new objects, list(Type) and set(Type), to the standard library 
-supporting the validation of lists and ordered sets whose elements are 
+Added two new objects, list(Type) and set(Type), to the standard library
+supporting the validation of lists and ordered sets whose elements are
 restricted to a single type.
 
-Added a new DCG example for solving enigmas encoded using a cellphone 
+Added a new DCG example for solving enigmas encoded using a cellphone
 keypad.
 
 Added a missing library dependency to the "puzzles" example SCRIPT file.
 
-Removed the experimental "systemp.lgt" protocol from the list of files 
-loaded by the "library/all_loader.lgt" loader utility files to avoid 
+Removed the experimental "systemp.lgt" protocol from the list of files
+loaded by the "library/all_loader.lgt" loader utility files to avoid
 compilation errors on some Prolog systems.
 
-Corrected a bug that prevented dynamic creation of categories using the 
+Corrected a bug that prevented dynamic creation of categories using the
 built-in predicate create_category/4.
 
-Corrected a bug in the reporting of singleton variables, which failed to 
+Corrected a bug in the reporting of singleton variables, which failed to
 write an accurate message for facts and grammar rules.
 
-Corrected a bug in passing the correct calling context ("this") when 
+Corrected a bug in passing the correct calling context ("this") when
 processing meta-calls in objects.
 
-Corrected a bug in scope checking with local calls to reflection and 
+Corrected a bug in scope checking with local calls to reflection and
 database methods.
 
-Corrected a bug in checking the validity of the arguments of the op/3 
+Corrected a bug in checking the validity of the arguments of the op/3
 directive appearing inside entities.
 
-Added predicates for testing if a term is a partial list or a proper list 
+Added predicates for testing if a term is a partial list or a proper list
 to all config files.
 
-Added a definition for missing open/4 ISO Prolog predicate to the config 
+Added a definition for missing open/4 ISO Prolog predicate to the config
 file of Bin Prolog.
 
 Added a workaround for a B-Prolog bug to this compiler config file.
@@ -17657,35 +17657,35 @@ Added a workaround for a B-Prolog bug to this compiler config file.
 2.26.2 - December 20, 2005
 ==========================
 
-Improved error-checking for the Logtalk compiler and for the grammar rule 
+Improved error-checking for the Logtalk compiler and for the grammar rule
 translator.
 
-Small performance improvements for message sending and for the built-in 
+Small performance improvements for message sending and for the built-in
 database methods.
 
-Corrected a bug on the implementation of the built-in methods phrase/2-3 
-for negated grammar rule bodies (thanks to Mats Carlsson for pointing the 
+Corrected a bug on the implementation of the built-in methods phrase/2-3
+for negated grammar rule bodies (thanks to Mats Carlsson for pointing the
 error).
 
 Removed the read-only compiler flag "iso_initialization_dir".
 
 Corrected a compilation bug on the "metapredicates" example source file.
-Corrected several bugs on the performance monitor of the "searching" 
+Corrected several bugs on the performance monitor of the "searching"
 example.
 
-Switched off default generation of XML documenting files for the "symdiff" 
+Switched off default generation of XML documenting files for the "symdiff"
 example in order to avoid file names compatibility problems on Windows.
 
-Updated compatibility notes on B-Prolog 6.8 and Qu-Prolog 7.0. Added a 
-config file for the forthcoming SICStus Prolog 4.0 version (based only 
-on publicly available information). Updated the config file for Amzi! 
-Prolog to solve issues with predicate properties and to ensure that file 
+Updated compatibility notes on B-Prolog 6.8 and Qu-Prolog 7.0. Added a
+config file for the forthcoming SICStus Prolog 4.0 version (based only
+on publicly available information). Updated the config file for Amzi!
+Prolog to solve issues with predicate properties and to ensure that file
 system utility predicates are loaded.
 
-Added a config file for the current XSB CVS version and the corresponding 
-integration shell scripts (for both Windows and POSIX systems). Modified 
+Added a config file for the current XSB CVS version and the corresponding
+integration shell scripts (for both Windows and POSIX systems). Modified
 the "cplgtdirs.*" shell scripts in order to make either links or copies of
-the config files and the "libpaths.pl" file with the required ".P" file 
+the config files and the "libpaths.pl" file with the required ".P" file
 name extension.
 
 Improved integration scripts documentation and help screens.
@@ -17696,26 +17696,26 @@ Added a predicate for checking directory existence to the config files.
 2.26.1 - November 28, 2005
 ==========================
 
-Added a CSS style-sheet to the Logtalk XHTML documentation that can be 
-used with CSSToXSLFO to generate nicely formatted PDF files suitable for 
+Added a CSS style-sheet to the Logtalk XHTML documentation that can be
+used with CSSToXSLFO to generate nicely formatted PDF files suitable for
 printing with running headers and page numbers.
 
-Updated the Logtalk XHTML documentation for compliance with the XHTML 1.1 
+Updated the Logtalk XHTML documentation for compliance with the XHTML 1.1
 standard.
 
 Updated the "lgtxhtml.xsl" XSLT file in order to generate XHTML 1.1 files.
 
-Added a new, generic "lgtpdf.xsl" XSLT file. Redefined the "lgtpdfa4.xsl" 
+Added a new, generic "lgtpdf.xsl" XSLT file. Redefined the "lgtpdfa4.xsl"
 and "lgtpdfus.xsl" files to import the "lgtpdf.xsl" file.
 
-Added support for the Lunasil XSL-FO processor to the "lgt2pdf.*" shell 
+Added support for the Lunasil XSL-FO processor to the "lgt2pdf.*" shell
 scripts.
 
-Updated the "lgt2pdf.sh", "lgt2xml.sh", and "lgt2html.sh" shell scripts 
-in order to write a warning message when the current directory does not 
+Updated the "lgt2pdf.sh", "lgt2xml.sh", and "lgt2html.sh" shell scripts
+in order to write a warning message when the current directory does not
 contain any XML documenting file.
 
-Added a definition for missing open/4 ISO Prolog predicate to the config 
+Added a definition for missing open/4 ISO Prolog predicate to the config
 files of Open Prolog, LPA Prolog compilers, and MasterProlog.
 
 
@@ -17725,100 +17725,100 @@ files of Open Prolog, LPA Prolog compilers, and MasterProlog.
 Added support for defining predicate aliases when using uses/2 directives
 (using the format Predicate::Alias).
 
-Added Prolog modules migration code allowing modules to be compiled as 
+Added Prolog modules migration code allowing modules to be compiled as
 objects and allowing messages to be sent to modules. Added a new "modules"
 example.
 
-Added a "Prolog Integration and Migration Guide" to the Logtalk 
+Added a "Prolog Integration and Migration Guide" to the Logtalk
 documentation.
 
-Added support for syntax coloring of common Prolog module directives to 
+Added support for syntax coloring of common Prolog module directives to
 the configuration files of the supported text editors.
 
-Added support for using library aliases on the second argument of the 
+Added support for using library aliases on the second argument of the
 logtalk_library_path/2 predicate (using the format alias(path)).
 
 Added support for ignoring, copying as-is, or rewriting proprietary Prolog
-directives. The action to be taken is defined on a per-directive basis on 
+directives. The action to be taken is defined on a per-directive basis on
 the config files.
 
-Updated the config files of CIAO, ECLiPSe, SWI-Prolog, and YAP to define 
-actions for some proprietary directives in order to allow some or most of 
-the module libraries distributed with these compilers to be compiled as 
+Updated the config files of CIAO, ECLiPSe, SWI-Prolog, and YAP to define
+actions for some proprietary directives in order to allow some or most of
+the module libraries distributed with these compilers to be compiled as
 objects.
 
-Renamed some XML documentation-related compiler flags to more meaningful 
+Renamed some XML documentation-related compiler flags to more meaningful
 names: "xml" -> "xmldocs", "xsl" -> "xslfile", and "doctype" -> "xmlsref".
 No changes to the other flags or flag valid values.
 
 Updated documenting scripts to use system-wide resources from LOGTALKHOME
 and user-modifiable resources from LOGTALKUSER.
 
-Updated "cplgtdirs.*" shell scripts to create links to the documenting 
-scripts and to the DTD and XML Schema specifications instead of making 
+Updated "cplgtdirs.*" shell scripts to create links to the documenting
+scripts and to the DTD and XML Schema specifications instead of making
 local copies. Updated the "cplgtdirs.js" Windows JScript script to create
 a link to the Logtalk manuals.
 
-Changed generation of predicate compiled functors to add an underscore 
-between the original predicate functor and arity (further minimizing the 
+Changed generation of predicate compiled functors to add an underscore
+between the original predicate functor and arity (further minimizing the
 chance of name conflicts).
 
-Improved compilation warning messages (separately handling plural and 
+Improved compilation warning messages (separately handling plural and
 singular forms).
 
-Improved documentation of Windows JScript installation and integration 
+Improved documentation of Windows JScript installation and integration
 scripts.
 
 Corrected a bug on the Logtalk built-in debugger on the processing of the
 abort option at a leashed port (option was ignored instead of aborting the
 debugging session).
 
-Added an option to choose between a "verbose" or "compact" listing of the 
+Added an option to choose between a "verbose" or "compact" listing of the
 default compilation flags at Logtalk startup (defined on the config files).
 
-Improved CIAO integration scripts in order to suppress some (harmless) 
+Improved CIAO integration scripts in order to suppress some (harmless)
 warnings which are generated at first run.
 
-Updated SWI-Prolog hook file ("swihook.pl") in order to support Logtalk 
-library notation when loading Logtalk files using the SWI-Prolog consult/1 
+Updated SWI-Prolog hook file ("swihook.pl") in order to support Logtalk
+library notation when loading Logtalk files using the SWI-Prolog consult/1
 predicate.
 
-Corrected a bug on the implementation of the built-in method abolish/1 
+Corrected a bug on the implementation of the built-in method abolish/1
 that prevented abolishing of dynamic predicates with arity zero.
 
 Corrected a bug on the "gplgt" shell script generated by the make_gplgt.sh
 shell script where the value of the LOGTALKHOME environment variable would
 not be retrieved at runtime.
 
-Removed config file for older versions of XSB (up to 2.6). Renamed the 
+Removed config file for older versions of XSB (up to 2.6). Renamed the
 config file for XSB 2.7.1 to simply "xsb.config".
 
-Consolidated the source files of the "birds", "errors", "lpa", "lo", 
-"metainterpreters", "poem", "relations", "roots", and "symdiff" examples 
+Consolidated the source files of the "birds", "errors", "lpa", "lo",
+"metainterpreters", "poem", "relations", "roots", and "symdiff" examples
 into single source files. Updated the "searching" example to take advantage
 of the uses/2 directive.
 
 Removed outdated documenting shell scripts from the "xml" directory.
 
-Corrected a bug when compiling a source file where the generated Prolog 
+Corrected a bug when compiling a source file where the generated Prolog
 file might not be properly closed when a compilation error occurs.
 
 
 2.25.3 - September 12, 2005
 ===========================
 
-Consolidated the source files of the examples "bricks", "dynpred", "mi", 
-"parametric", "points", "polygons", "reflection", "shapes", "sicstus", 
+Consolidated the source files of the examples "bricks", "dynpred", "mi",
+"parametric", "points", "polygons", "reflection", "shapes", "sicstus",
 and "viewpoints" into single source files.
 
 Improved documentation on most example source files. Improved "parametric"
 example by adding a new parametric objects and by illustrating alternative
 ways of accessing object parameters.
 
-Updated several config files with declarations for some more non-standard 
+Updated several config files with declarations for some more non-standard
 Prolog meta-predicates.
 
-Corrected some omissions and typos on the B-Prolog - Logtalk integration 
+Corrected some omissions and typos on the B-Prolog - Logtalk integration
 instructions.
 
 Small performance optimization for messages and super-calls with not yet
@@ -17828,266 +17828,266 @@ cached method lookups.
 2.25.2 - August 11, 2005
 ========================
 
-Updated Logtalk installation and Prolog integration scripts in order to 
+Updated Logtalk installation and Prolog integration scripts in order to
 detect a wrongly defined LOGTALKHOME environment variable.
 
-Corrected a bug on the lgt_install.sh and make*lgt.sh shell scripts where 
-the wrong variable was being referenced when testing the existence of the 
+Corrected a bug on the lgt_install.sh and make*lgt.sh shell scripts where
+the wrong variable was being referenced when testing the existence of the
 installation directory prefix.
 
 Corrected a bug on the makeall_lgt.sh shell script that failed to properly
-detect unsuccessful completion of individual Prolog integration scripts. 
+detect unsuccessful completion of individual Prolog integration scripts.
 
 
 2.25.1 - August 8, 2005
 =======================
 
-Added support for using the "source-highlight" package (version 2.0 or 
+Added support for using the "source-highlight" package (version 2.0 or
 later) by Lorenzo Bettini with Logtalk source files.
 
-Several optimizations to the syntax coloring configuration files of most 
-of the supported text editors. Added support for code folding to the Vim, 
+Several optimizations to the syntax coloring configuration files of most
+of the supported text editors. Added support for code folding to the Vim,
 Kate, and TextMate text editors.
 
-Updated the SWI-Prolog shell integration script (make_swilgt.sh) to use 
-either "swipl" or "pl" as the name of the Prolog executable, depending 
+Updated the SWI-Prolog shell integration script (make_swilgt.sh) to use
+either "swipl" or "pl" as the name of the Prolog executable, depending
 on the host operating system.
 
-Modified the way entity prefixes are generated for compiled code in order 
+Modified the way entity prefixes are generated for compiled code in order
 to further minimize possible conflicts resulting from the same prefix being
-used for different entities (bug report and fix by Brian Hulley). Changes 
-to the prefix format are also reflected on the names of the automatically 
+used for different entities (bug report and fix by Brian Hulley). Changes
+to the prefix format are also reflected on the names of the automatically
 generated XML documenting files.
 
-Updated the lgt2html.* and lgt2xml.* documenting scripts in order to index 
+Updated the lgt2html.* and lgt2xml.* documenting scripts in order to index
 parametric objects using the notation <entity>/<number of parameters>.
 
-Corrected a bug on the lgtxml.xsl XSLT file where links to related files 
+Corrected a bug on the lgtxml.xsl XSLT file where links to related files
 pointed to .html files instead of .xml files.
 
 Updated the lgt_install.sh and the make_*lgt.sh shell scripts to check and
 report invalid installation directory prefixes.
 
-Added a new state-space search problem, "salt3.lgt", contributed by Paula 
+Added a new state-space search problem, "salt3.lgt", contributed by Paula
 Marisa Sampaio, to the "searching" example.
 
 
 2.25.0 - May 23, 2005
 =====================
 
-Logtalk compiler is now source file-based instead of entity-based. Thus, 
-a source file may now contain any number of entities, without the need of 
-using source metafiles. Therefore, this version drops support for source 
+Logtalk compiler is now source file-based instead of entity-based. Thus,
+a source file may now contain any number of entities, without the need of
+using source metafiles. Therefore, this version drops support for source
 metafiles and the .mlgt file name extension.
 
-The experimental encoding/1 directive, when used, must be the first term 
-on a source file.  Added an entry to the reference manual describing the 
+The experimental encoding/1 directive, when used, must be the first term
+on a source file.  Added an entry to the reference manual describing the
 directive. Improved "encodings" example.
 
-Added a new method, debugging/1, to the "debugger" pseudo-object for 
+Added a new method, debugging/1, to the "debugger" pseudo-object for
 querying the system about entities compiled in debug mode.
 
-Improved source file and entity compilation and loading reporting. In 
-particular, when using library notation for source files, the Logtalk 
-compiler now prints the library path containing the source files being 
+Improved source file and entity compilation and loading reporting. In
+particular, when using library notation for source files, the Logtalk
+compiler now prints the library path containing the source files being
 compiled or loaded.
 
-Added new shell scripts, makeall_lgt.*, which run all the make_*lgt.* 
+Added new shell scripts, makeall_lgt.*, which run all the make_*lgt.*
 shell scripts in sequence.
 
-Simplified compiler reporting of singleton variables in directives and 
+Simplified compiler reporting of singleton variables in directives and
 clauses.
 
 Added an adaption of the "timetables" LPA Prolog++ example.
 
-Updated B-Prolog config file for the new 6.7 #2 version. Dropped support 
+Updated B-Prolog config file for the new 6.7 #2 version. Dropped support
 for older versions of B-Prolog.
 
 
 2.24.0 - April 22, 2005
 =======================
 
-Added experimental support for a encoding/1 directive for declaring the 
-text character encoding of a source file. This directive is fully based 
-on a directive with the same name and with similar semantics found on 
-recent development versions of SWI-Prolog. For now, this directive only 
-works with SWI-Prolog as most Prolog compilers lack support for dealing 
-with different text encodings. Added new flag "supports_encoding_dir". 
+Added experimental support for a encoding/1 directive for declaring the
+text character encoding of a source file. This directive is fully based
+on a directive with the same name and with similar semantics found on
+recent development versions of SWI-Prolog. For now, this directive only
+works with SWI-Prolog as most Prolog compilers lack support for dealing
+with different text encodings. Added new flag "supports_encoding_dir".
 Added a new example, "encodings", of using the new encoding/1 directive.
 
-When a source file contains an encoding/1 directive, the XML documenting 
+When a source file contains an encoding/1 directive, the XML documenting
 files will use the same encoding. When no encoding/1 directive is present,
 the XML documenting files will assume UTF-8 encoding.
 
-Added new info/1 documenting directive key, "parameters", allowing the 
-declaration of both parameter names and parameter descriptions. Added new 
-info/1 documenting directive key, "remarks", allowing general remarks 
-about an entity to be stated. Added new info/2 documenting directive key, 
-"arguments", allowing declaration of both predicate argument names and 
+Added new info/1 documenting directive key, "parameters", allowing the
+declaration of both parameter names and parameter descriptions. Added new
+info/1 documenting directive key, "remarks", allowing general remarks
+about an entity to be stated. Added new info/2 documenting directive key,
+"arguments", allowing declaration of both predicate argument names and
 predicate argument descriptions. Added new info/2 documenting directive
 key, "examples", allowing the representation of predicate call examples.
 
-Much improved and accurate reporting of non-portable predicate calls when 
+Much improved and accurate reporting of non-portable predicate calls when
 using the "portability" flag.
 
-Added a new directory to the Logtalk distribution, "contributions", which 
-will be used for user-contributed code. On this release, it contains an 
-implementation of the ISO 8601 standard by Daniel L. Dudley, providing a 
+Added a new directory to the Logtalk distribution, "contributions", which
+will be used for user-contributed code. On this release, it contains an
+implementation of the ISO 8601 standard by Daniel L. Dudley, providing a
 library of useful date predicates.
 
-Added new lgt2xml.* shell scripts for generating (X)HTML indexes of XML 
+Added new lgt2xml.* shell scripts for generating (X)HTML indexes of XML
 documenting files.
 
-Rewritten the lgtxhtml.xsl, lgthtml.xsl, lgtxml.xsl XSLT scripts in order 
-to make it easier to define alternative CSS files for the generated HTML 
-files. Rewritten the lgtpdfa4.xsl and lgtpdfus.xsl XSLT scripts in order 
+Rewritten the lgtxhtml.xsl, lgthtml.xsl, lgtxml.xsl XSLT scripts in order
+to make it easier to define alternative CSS files for the generated HTML
+files. Rewritten the lgtpdfa4.xsl and lgtpdfus.xsl XSLT scripts in order
 to improve appearance of the generated PDF files.
 
-Improved the documentation of the "benchmarks" example and added new 
-predicates for running batches of benchmark tests and for generating 
+Improved the documentation of the "benchmarks" example and added new
+predicates for running batches of benchmark tests and for generating
 lists of known size for the benchmark tests of static code.
 
-Corrected a bug in the lgt2html.*, lgt2pdf.*, and cplgtdirs.sh shell 
-scripts which resulted in failed transformations whenever the LOGTALKHOME 
-and LOGTALKUSER environment variables or the output directory contained 
+Corrected a bug in the lgt2html.*, lgt2pdf.*, and cplgtdirs.sh shell
+scripts which resulted in failed transformations whenever the LOGTALKHOME
+and LOGTALKUSER environment variables or the output directory contained
 spaces or accented characters.
 
-Added workaround for Prolog compilers that define operators other than 
+Added workaround for Prolog compilers that define operators other than
 ','/2 that cannot be redefined (such as new B-Prolog 6.7).
 
 Added a Logtalk "clip" file for the TextPad Windows text editor.
 
 Renamed directory "misc" to the more meaningful name "scripts".
 
-Corrected a bug in the implementation of the built-in database methods 
-asserta/1 and assertz/1 when asserting facts on objects compiled in debug 
+Corrected a bug in the implementation of the built-in database methods
+asserta/1 and assertz/1 when asserting facts on objects compiled in debug
 mode.
 
-Corrected a bug in the method leash/1 of the built-in pseudo-object 
+Corrected a bug in the method leash/1 of the built-in pseudo-object
 "debugger", which failed to accept an empty list as a valid argument.
 
-Corrected a bug in the header of the automatically generated XML 
-documenting files when using the XML Schema specification (logtalk.xsd), 
-which could prevented validation when the compiler flag "doctype" is set 
+Corrected a bug in the header of the automatically generated XML
+documenting files when using the XML Schema specification (logtalk.xsd),
+which could prevented validation when the compiler flag "doctype" is set
 to "web".
 
-Corrected a compilation bug where Prolog clauses written outside entities 
-on source metafiles would have their order reversed. Simplified splitting 
+Corrected a compilation bug where Prolog clauses written outside entities
+on source metafiles would have their order reversed. Simplified splitting
 of source metafiles.
 
-Corrected a compilation bug where Prolog clauses written before an entity 
+Corrected a compilation bug where Prolog clauses written before an entity
 opening directive would not be copied to the generated Prolog file.
 
-Corrected a bug on the "roots" example in the object "class" which failed 
+Corrected a bug on the "roots" example in the object "class" which failed
 to properly test the validity of new object identifiers.
 
 Corrected a bug in the syntax coloring file for the Vim text editor, which
-resulted in an error message when opening a Logtalk source file for the 
+resulted in an error message when opening a Logtalk source file for the
 first time.
 
 
 2.23.1 - March 7, 2005
 ======================
 
-Simplified message sending compilation, improving performance of both 
+Simplified message sending compilation, improving performance of both
 entity compilation and runtime top-level message sending.
 
-Simplified implementation and improved performance of the built-in method 
+Simplified implementation and improved performance of the built-in method
 current_predicate/2.
 
-Updated the runtime error handler for top-level ::/2 calls to recognize 
-non-existing predicate exceptions thrown by XSB, SICStus Prolog, CIAO, 
-B-Prolog, and recent development versions of SWI-Prolog. Rewritten the 
-::/2 predicate in order to minimize the overhead of the catch/3 calls 
+Updated the runtime error handler for top-level ::/2 calls to recognize
+non-existing predicate exceptions thrown by XSB, SICStus Prolog, CIAO,
+B-Prolog, and recent development versions of SWI-Prolog. Rewritten the
+::/2 predicate in order to minimize the overhead of the catch/3 calls
 associated with the runtime error handler, thus improving performance.
 
-Expanded the benchmarks example to test performance of the built-in 
+Expanded the benchmarks example to test performance of the built-in
 database methods.
 
-Lookup caches are now cleaned before loading a redefined entity in order 
-to avoid potential problems with entity initialization goals containing 
-message sending calls (previous versions cleaned the caches only after 
+Lookup caches are now cleaned before loading a redefined entity in order
+to avoid potential problems with entity initialization goals containing
+message sending calls (previous versions cleaned the caches only after
 entity loading).
 
-When reloading an object, its tables of dynamic predicate declarations 
+When reloading an object, its tables of dynamic predicate declarations
 and dynamic predicate definitions are now reseted.
 
-Corrected a compatibility problem with the "birds" example due to the use 
+Corrected a compatibility problem with the "birds" example due to the use
 of an operator not available in some Prolog compilers.
 
 
 2.23.0 - February 21, 2005
 ==========================
 
-Optimized the code generated for local calls to the built-in predicates 
-asserta/1, assertz/1, retract/1, and retractall/1, when the argument is 
-a dynamic predicate declared by a scope directive in the object making 
+Optimized the code generated for local calls to the built-in predicates
+asserta/1, assertz/1, retract/1, and retractall/1, when the argument is
+a dynamic predicate declared by a scope directive in the object making
 the calls.
 
-Added caching of predicate compiled forms for dynamic facts when used 
-with the database built-in methods clause/2, asserta/1, assertz/1, 
-retract/1, and retractall/1, resulting in a significant performance 
-improvement when using an object's dynamic database. Improved performance 
-of the database built-in methods abolish/1, asserta/1, assertz/1, clause/2, 
+Added caching of predicate compiled forms for dynamic facts when used
+with the database built-in methods clause/2, asserta/1, assertz/1,
+retract/1, and retractall/1, resulting in a significant performance
+improvement when using an object's dynamic database. Improved performance
+of the database built-in methods abolish/1, asserta/1, assertz/1, clause/2,
 retract/1, and retractall/1 when the cache is not used.
 
-Corrected a bug on the implementation of the built-in methods asserta/1 
+Corrected a bug on the implementation of the built-in methods asserta/1
 and assertz/1 that prevented asserting of rules.
 
-Corrected a bug on the implementation of built-in methods retractall/1, 
-retract/1, and clause/2 that allowed access to local dynamic predicates 
+Corrected a bug on the implementation of built-in methods retractall/1,
+retract/1, and clause/2 that allowed access to local dynamic predicates
 from outside the container object.
 
 Added a runtime error handler for top-level ::/2 calls which tries to deal
-with exceptions thrown by calling non-existing predicates by translating 
+with exceptions thrown by calling non-existing predicates by translating
 Logtalk generated internal predicate names to user names.
 
-Print the total number of warnings after a call to the Logtalk built-in 
+Print the total number of warnings after a call to the Logtalk built-in
 predicates logtalk_compile/1-2 and logtalk_load/1-2.
 
 
 2.22.5 - February 9, 2005
 =========================
 
-Added scripts for easy integration of Logtalk with K-Prolog. Updated the 
-K-Prolog config file, correcting a show-stopper bug and enabling support 
+Added scripts for easy integration of Logtalk with K-Prolog. Updated the
+K-Prolog config file, correcting a show-stopper bug and enabling support
 for using the "library" notation for loading source files.
 
 Updated JIProlog config file in order to allow smart compilation of source
 files.
 
-Changed format of preprocessor and runtime dynamic predicates that deal 
+Changed format of preprocessor and runtime dynamic predicates that deal
 with predicate indicators for better performance.
 
-Simplified implementation of Logtalk built-in methods asserta/1 and 
+Simplified implementation of Logtalk built-in methods asserta/1 and
 assertz/1.
 
 Corrected a performance bug with calls to built-in predicates from objects
 and categories.
 
-Corrected spurious backtracking occurring on some calls to the built-in 
+Corrected spurious backtracking occurring on some calls to the built-in
 predicate define_events/5.
 
-Updated shell script "misc/cplgtdirs.sh" to prevent copy of Logtalk files 
-when the destination directory already exists (thus avoiding overriding 
+Updated shell script "misc/cplgtdirs.sh" to prevent copy of Logtalk files
+when the destination directory already exists (thus avoiding overriding
 any user-modified files when upgrading Logtalk).
 
-Added syntax coloring for the predicate logtalk_library_path/2 to the 
-supported text editors. Updated the syntax coloring file for the TextMate 
+Added syntax coloring for the predicate logtalk_library_path/2 to the
+supported text editors. Updated the syntax coloring file for the TextMate
 text editor, adding some missing ISO Prolog predicates.
 
 Improved printing of lists of unknown referenced entities, misspelt calls,
-and singleton variables when compiling source files. Simplified handling 
+and singleton variables when compiling source files. Simplified handling
 of references to unknown entities.
 
 Added workaround for Prolog compilers with broken read_term/3 singletons/1
 option.
 
-Updated the Logtalk compiler/runtime and the documentation to always 
-use the expression "compiler flag" instead of "compiler option" for 
+Updated the Logtalk compiler/runtime and the documentation to always
+use the expression "compiler flag" instead of "compiler option" for
 consistency. Other minor documentation improvements.
 
-Corrected a bug with the abolishing of dynamic entities where the clauses 
+Corrected a bug with the abolishing of dynamic entities where the clauses
 corresponding to the alias/3 directive are not being abolished.
 
 Added new predicates '$lgt_call'/9 and '$lgt_once'/9 to all config files.
@@ -18099,28 +18099,28 @@ predicate indicators.
 2.22.4 - January 12, 2005
 =========================
 
-Simplified method lookup cache tables, resulting in a small message 
-sending performance speedup. Improved method lookup caching for 
-parametric objects. Added support for caching method lookups for 
+Simplified method lookup cache tables, resulting in a small message
+sending performance speedup. Improved method lookup caching for
+parametric objects. Added support for caching method lookups for
 parametric objects whose parameters contain cyclic terms.
 
-Added a new category, "assignvars", to the Logtalk standard library, 
-containing an adaptation of the implementation of logical assignable 
+Added a new category, "assignvars", to the Logtalk standard library,
+containing an adaptation of the implementation of logical assignable
 variables developed by Nobukuni Kino. Added a new example, "assignvars",
-illustrating some possible uses of assignable variables in the context 
+illustrating some possible uses of assignable variables in the context
 of parametric objects.
 
-Simplified compilation of op/3 directives: there is no longer need to 
-repeat the directives both before and inside an entity in order to make 
+Simplified compilation of op/3 directives: there is no longer need to
+repeat the directives both before and inside an entity in order to make
 the operators global and also use them in the compilation process.
 
 Simplified installation instructions.
 
-Corrected a compiler bug in the code that checks and prints a warning 
+Corrected a compiler bug in the code that checks and prints a warning
 when redefined parametric objects.
 
-Corrected a bug in the built-in predicate abolish_category/1, which 
-failed to delete import relation clauses between the category being 
+Corrected a bug in the built-in predicate abolish_category/1, which
+failed to delete import relation clauses between the category being
 abolished and other categories.
 
 
@@ -18129,119 +18129,119 @@ abolished and other categories.
 
 Added a configuration file for XSB 2.7.
 
-Corrected a bug where the use of alternative compilation directories 
-would fail the first time the logtalk_compile/1-2 or logtalk_load/1-2 
+Corrected a bug where the use of alternative compilation directories
+would fail the first time the logtalk_compile/1-2 or logtalk_load/1-2
 predicates are used for a given file or library.
 
-Corrected a bug in the built-in methods asserta/1 and assertz/1 when 
-asserting facts into an object being debugged, which resulted in wrong 
-execution context information being printed when tracing calls to 
+Corrected a bug in the built-in methods asserta/1 and assertz/1 when
+asserting facts into an object being debugged, which resulted in wrong
+execution context information being printed when tracing calls to
 the asserted facts.
 
-Corrected a bug in the built-in methods asserta/1 and assertz/1 when 
-asserting rules into an object being debugged, which resulted in rule 
-bodies compiled with no information being printed for the rule head 
+Corrected a bug in the built-in methods asserta/1 and assertz/1 when
+asserting rules into an object being debugged, which resulted in rule
+bodies compiled with no information being printed for the rule head
 when tracing calls to the asserted rules.
 
-Corrected a bug in the dynamic creation of objects, protocols, and 
-categories when the debug flag is on, which resulted in the table of 
+Corrected a bug in the dynamic creation of objects, protocols, and
+categories when the debug flag is on, which resulted in the table of
 entities being debugged not being updated.
 
-Corrected a bug in the handling of exceptions thrown when using the 
-built-in debugger, which resulted in exceptions always being turned 
+Corrected a bug in the handling of exceptions thrown when using the
+built-in debugger, which resulted in exceptions always being turned
 into failures.
 
 
 2.22.2 - December 24, 2004
 ==========================
 
-Improved performance of dynamic creation and compilation of objects, 
+Improved performance of dynamic creation and compilation of objects,
 protocols, and categories.
 
-Improved error-checking code of methods asserta/1 and assertz/1 to 
+Improved error-checking code of methods asserta/1 and assertz/1 to
 prevent asserting of non-callable terms as facts.
 
 Improved error checking for documenting directives (info/1 and info/2).
 
-Improved the XSB integration script (make_xsblgt.sh) in order to use the 
-configuration file and the libpaths file available from the $LOGTALKUSER 
+Improved the XSB integration script (make_xsblgt.sh) in order to use the
+configuration file and the libpaths file available from the $LOGTALKUSER
 directory.
 
 Improved installation instructions and installation scripts documentation.
 
-Added documentation to the user manual on describing predicate exceptions 
+Added documentation to the user manual on describing predicate exceptions
 using the info/2 directive.
 
-Corrected a bug in the predicate_property/2 built-in method when called 
+Corrected a bug in the predicate_property/2 built-in method when called
 with the second argument instantiated to the alias/1 property.
 
 
 2.22.1 - December 6, 2004
 =========================
 
-Improved installation instructions. Updated the Windows installation 
-JScript script to add the Logtalk directories "misc" and "xml" to the 
-system PATH environment variable and to reuse the environment variable 
+Improved installation instructions. Updated the Windows installation
+JScript script to add the Logtalk directories "misc" and "xml" to the
+system PATH environment variable and to reuse the environment variable
 LOGTALKUSER if already defined.
 
-Added helper batch scripts (misc/cplgtdirs.bat, xml/lgt2html.bat, and 
-xml/lgt2pdf.bat) for easily running the corresponding Windows JScript 
-scripts from the command-line (the two xml/lgt2*.bat scripts run the 
-corresponding *.js scripts stored in the %LOGTALKUSER%/xml directory 
+Added helper batch scripts (misc/cplgtdirs.bat, xml/lgt2html.bat, and
+xml/lgt2pdf.bat) for easily running the corresponding Windows JScript
+scripts from the command-line (the two xml/lgt2*.bat scripts run the
+corresponding *.js scripts stored in the %LOGTALKUSER%/xml directory
 in order to support user customization).
 
-Updated the lgt2html.* and lgt2pdf.* shell scripts to use the environment 
-variable LOGTALKUSER instead of LOGTALKHOME for finding supporting files, 
-thus allowing for end-user customization of the scripts and their related 
+Updated the lgt2html.* and lgt2pdf.* shell scripts to use the environment
+variable LOGTALKUSER instead of LOGTALKHOME for finding supporting files,
+thus allowing for end-user customization of the scripts and their related
 files.
 
-Added documentation on read-only compiler flags (which are defined in the 
+Added documentation on read-only compiler flags (which are defined in the
 configuration files) to the User Manual.
 
-Updated the misc/lgt_install.js JScript installer script to workaround a 
-Windows Scripting Host bug which may result in broken shortcuts in the 
+Updated the misc/lgt_install.js JScript installer script to workaround a
+Windows Scripting Host bug which may result in broken shortcuts in the
 created "Logtalk" program group.
 
 
 2.22.0 - November 29, 2004
 ==========================
 
-Implemented a notion of library as simply a directory containing source 
-files. Added a new dynamic predicate, logtalk_library_path/2, for 
-specifying library paths. Added a sample file (libpaths/libpaths.pl) for 
-setting library paths for the Logtalk standard library and for all the 
+Implemented a notion of library as simply a directory containing source
+files. Added a new dynamic predicate, logtalk_library_path/2, for
+specifying library paths. Added a sample file (libpaths/libpaths.pl) for
+setting library paths for the Logtalk standard library and for all the
 supplied examples.
 
 Added support for using the notation <library>(<entity>) with the built-in
-predicates logtalk_compile/1-2 and logtalk_load/1-2 for compiling and 
-loading source files contained on a library, without the need to first 
+predicates logtalk_compile/1-2 and logtalk_load/1-2 for compiling and
+loading source files contained on a library, without the need to first
 change the current working directory.
 
-Changed the library and the examples loading instructions to use the new 
+Changed the library and the examples loading instructions to use the new
 notation <library>(<entity>).
 
-Improved installation instructions and installation scripts. Added a new 
-environment variable, LOGTALKUSER, for defining the location of the copies 
+Improved installation instructions and installation scripts. Added a new
+environment variable, LOGTALKUSER, for defining the location of the copies
 of the user-modifiable Logtalk files in a multiple users setup environment.
 
-Added utility predicates to most configuration files for querying and 
-changing the current working directory (needed for the <library>(<entity>) 
+Added utility predicates to most configuration files for querying and
+changing the current working directory (needed for the <library>(<entity>)
 notation to work).
 
-Corrected a bug in the code that checks for file existence when compiling 
+Corrected a bug in the code that checks for file existence when compiling
 or loading source files and source metafiles.
 
 
 2.21.6 - November 15, 2004
 ==========================
 
-Added support for using alternative directories for storing the Prolog files 
+Added support for using alternative directories for storing the Prolog files
 and the XML documenting files resulting from entity compilation. A new read-
-only flag, "altdirs", allows the support for alternative directories to be 
-turned on the configuration files of Prolog compilers providing the necessary 
+only flag, "altdirs", allows the support for alternative directories to be
+turned on the configuration files of Prolog compilers providing the necessary
 operating-system access predicates for implementing this feature.
 
-Improved installation instructions and reporting of default compilation flags 
+Improved installation instructions and reporting of default compilation flags
 at startup.
 
 Added a sorely missing "Hello World!" example :-)
@@ -18250,21 +18250,21 @@ Added a sorely missing "Hello World!" example :-)
 2.21.5 - November 2, 2004
 =========================
 
-Added a new optimization compiler flag, "events", which can be used to switch 
-off event-driven programming support when not needed, on a per-object basis, 
+Added a new optimization compiler flag, "events", which can be used to switch
+off event-driven programming support when not needed, on a per-object basis,
 resulting in improved message sending performance.
 
-Small performance optimization to the runtime creation of dynamic objects, 
+Small performance optimization to the runtime creation of dynamic objects,
 protocols, and categories.
 
-Updated the error handling code of the built-in predicates create_object/4, 
-create_protocol/3, and create_category/4 in order to throw an instantiation 
+Updated the error handling code of the built-in predicates create_object/4,
+create_protocol/3, and create_category/4 in order to throw an instantiation
 error when called with a non-instantiated argument.
 
-Updated the benchmarks example to calculate and subtract the benchmark loop 
+Updated the benchmarks example to calculate and subtract the benchmark loop
 time in order to print absolute timings for the benchmarked goals.
 
-Updated the Qu-Prolog patching instructions to also convert Logtalk source 
+Updated the Qu-Prolog patching instructions to also convert Logtalk source
 metafiles.
 
 Fixed a typo on the XSB compatibility notes in the configs/NOTES file.
@@ -18273,33 +18273,33 @@ Fixed a typo on the XSB compatibility notes in the configs/NOTES file.
 2.21.4 - October 26, 2004
 =========================
 
-Corrected a silly bug in the definition of the predicate repeat/1 on the 
+Corrected a silly bug in the definition of the predicate repeat/1 on the
 new "benchmarks" example.
 
 
 2.21.3 - October 25, 2004
 =========================
 
-Corrected a silly bug in message translation which resulted in a small 
-performance loss. Simplified implementation of message sending predicate 
+Corrected a silly bug in message translation which resulted in a small
+performance loss. Simplified implementation of message sending predicate
 ::/2, resulting in a small performance improvement.
 
 Added a new section on message sending performance to the user manual.
 
-Added a new example, "benchmarks", for helping measuring performance of 
-Logtalk message sending between Prolog compilers and for comparing message 
-sending with predicate calls in plain Prolog and with calls to modules 
+Added a new example, "benchmarks", for helping measuring performance of
+Logtalk message sending between Prolog compilers and for comparing message
+sending with predicate calls in plain Prolog and with calls to modules
 predicates.
 
-Updated the YAP configuration file to hide some of the book-keeping tables 
-of the Logtalk runtime engine and to use statistics/2 instead of cputime/0 
+Updated the YAP configuration file to hide some of the book-keeping tables
+of the Logtalk runtime engine and to use statistics/2 instead of cputime/0
 for more accurate timings.
 
-Updated the Logtalk shell installation script to create the $prefix/bin 
+Updated the Logtalk shell installation script to create the $prefix/bin
 directory if it does not exist.
 
-The lgt2pdf.sh and lgt2html.sh shell scripts now use "rm -f" when removing 
-the DTD and XSD files in order to avoid prompting the user about the file 
+The lgt2pdf.sh and lgt2html.sh shell scripts now use "rm -f" when removing
+the DTD and XSD files in order to avoid prompting the user about the file
 permissions.
 
 Updated the cplgtdirs.sh shell script to make all copied files user writable.
@@ -18308,88 +18308,88 @@ Updated the cplgtdirs.sh shell script to make all copied files user writable.
 2.21.2 - October 18, 2004
 =========================
 
-Added support for declaring grammar rule non-terminals as public, protected, 
-private, dynamic, or discontiguous using the notation Functor//Arity. Added 
+Added support for declaring grammar rule non-terminals as public, protected,
+private, dynamic, or discontiguous using the notation Functor//Arity. Added
 support for documenting non-terminals using the info/2 and mode/2 directives.
 
 Added support for a new alias/1 predicate property.
 
-New experimental config file for JIProlog 3.0 (see the configs/NOTES file 
+New experimental config file for JIProlog 3.0 (see the configs/NOTES file
 for details).
 
-Added a mode bundle for the TextMode 1.0.x (MacOS X) text editor providing 
-syntax highlighting, folding, and code snippets for editing Logtalk source 
-files. Corrected a bug in the syntax coloring of the :-/1-2 operator on the 
+Added a mode bundle for the TextMode 1.0.x (MacOS X) text editor providing
+syntax highlighting, folding, and code snippets for editing Logtalk source
+files. Corrected a bug in the syntax coloring of the :-/1-2 operator on the
 SubEthaEdit 2.x text editor.
 
 
 2.21.1 - September 27, 2004
 ===========================
 
-Added experimental support for a new built-in method, expand_term/2, which 
-allows access to the Logtalk grammar rule translator. Corrected bug in the 
-expansion of \+/1 in grammar rule bodies. Optimized code generated for 
-message sending calls in the body of grammar rules. Improved error handling 
-of the built-in methods phrase/2 and phrase/3. Added new section on definite 
-clause grammars to the user manual. Added two new objects to the "dcgs" 
-example, dcgtest and bypass, containing test cases for the Logtalk DCG 
+Added experimental support for a new built-in method, expand_term/2, which
+allows access to the Logtalk grammar rule translator. Corrected bug in the
+expansion of \+/1 in grammar rule bodies. Optimized code generated for
+message sending calls in the body of grammar rules. Improved error handling
+of the built-in methods phrase/2 and phrase/3. Added new section on definite
+clause grammars to the user manual. Added two new objects to the "dcgs"
+example, dcgtest and bypass, containing test cases for the Logtalk DCG
 translator and illustrating some programming techniques with grammar rules.
 
-Corrected a bug in the implementation of the built-in method clause/2 which 
+Corrected a bug in the implementation of the built-in method clause/2 which
 prevented access to clauses of local dynamic predicates.
 
 Corrected some dead links on the XHTML manuals.
 
-Corrected a bug in the syntax coloring of numbers on the SubEthaEdit 2.x 
+Corrected a bug in the syntax coloring of numbers on the SubEthaEdit 2.x
 text editor.
 
 
 2.21.0 - September 14, 2004
 ===========================
 
-Added a new predicate directive, alias/3, which allows the definition of 
-alternative predicate names in order to improve readability of inherited 
-features and to solve conflicts between implemented, imported, or inherited 
+Added a new predicate directive, alias/3, which allows the definition of
+alternative predicate names in order to improve readability of inherited
+features and to solve conflicts between implemented, imported, or inherited
 predicates.
 
-Added new example, "aliases", illustrating the use of the new alias/3 
+Added new example, "aliases", illustrating the use of the new alias/3
 predicate directive for improving readability of inherited features.
 
-Added new example, "diamonds", illustrating problems and solutions for the 
-"diamond problem" (multi-inheritance conflicts and ambiguities) using the 
+Added new example, "diamonds", illustrating problems and solutions for the
+"diamond problem" (multi-inheritance conflicts and ambiguities) using the
 new alias/3 predicate directive.
 
-Allow categories to import other categories, i.e. allow categories to be 
-defined as a composition of other categories. This feature should only be 
-used when extending a category without breaking its functional cohesion 
-(for example, when a modified version of a category is needed for importing 
-into several unrelated objects). 
+Allow categories to import other categories, i.e. allow categories to be
+defined as a composition of other categories. This feature should only be
+used when extending a category without breaking its functional cohesion
+(for example, when a modified version of a category is needed for importing
+into several unrelated objects).
 
-Added new example, "engines", illustrating importing a category from another 
+Added new example, "engines", illustrating importing a category from another
 category.
 
-Updated the syntax coloring configuration files for the supported text 
+Updated the syntax coloring configuration files for the supported text
 editors for the new alias/3 predicate directive.
 
-Added auto-complete strings for Logtalk methods and for Logtalk and Prolog 
+Added auto-complete strings for Logtalk methods and for Logtalk and Prolog
 built-in predicates and directives to the SubEthaEdit 2.x text editor.
 
-Corrected a bug which prevented compilation of metafiles containing 
+Corrected a bug which prevented compilation of metafiles containing
 parametric entities.
 
 
 2.20.2 - August 31, 2004
 ========================
 
-Added a Windows JScript script for installing Logtalk. Improved the Windows 
-JScript scripts used for easy integration of Logtalk with selected Prolog 
+Added a Windows JScript script for installing Logtalk. Improved the Windows
+JScript scripts used for easy integration of Logtalk with selected Prolog
 compilers.
 
-Improved user manual section on defining object and category metapredicates 
-and on calling non-standard Prolog built-in metapredicates. Improved the 
+Improved user manual section on defining object and category metapredicates
+and on calling non-standard Prolog built-in metapredicates. Improved the
 description of some compiler options.
 
-Added some files missing from the "errors" example (which should have been 
+Added some files missing from the "errors" example (which should have been
 included in the previous release).
 
 Added basic syntax coloring support for the BBEdit 8.x text editor.
@@ -18398,16 +18398,16 @@ Added basic syntax coloring support for the BBEdit 8.x text editor.
 2.20.1 - August 19, 2004
 ========================
 
-Added Windows JScript scripts for easy integration of Logtalk with CIAO and 
+Added Windows JScript scripts for easy integration of Logtalk with CIAO and
 GNU Prolog.
 
-Added encoding attribute (set to UTF-8) to the xsl:output tag in the 
+Added encoding attribute (set to UTF-8) to the xsl:output tag in the
 lgtxml.xsl, lgthtml.xsl, and lgtxhtml.xsl files.
 
-Replaced the Windows JScript scripts lgt2pdf.js and lgt2html.js by their 
+Replaced the Windows JScript scripts lgt2pdf.js and lgt2html.js by their
 final versions (the wrong ones shipped with Logtalk version 2.20.0).
 
-Updated the "errors" example to illustrate possible conflict errors when 
+Updated the "errors" example to illustrate possible conflict errors when
 using the uses/2 directive.
 
 Updated the RPM logtalk.spec file to use the .tgz archive extension.
@@ -18416,47 +18416,47 @@ Updated the RPM logtalk.spec file to use the .tgz archive extension.
 2.20.0 - August 16, 2004
 ========================
 
-Added support for the uses/2 predicate directive (whose semantics is similar 
-to C++ using-declarations). Updated the uses/1 entity directive to accept as 
+Added support for the uses/2 predicate directive (whose semantics is similar
+to C++ using-declarations). Updated the uses/1 entity directive to accept as
 argument a single object identifier.
 
 Improved installation instructions for Windows users.
 
-Added four new sample bash shell scripts and Windows JScript scripts for 
-converting XML documenting files to PDF, HTML, and XHTML using several XSL 
+Added four new sample bash shell scripts and Windows JScript scripts for
+converting XML documenting files to PDF, HTML, and XHTML using several XSL
 processors.
 
-Added missing namespace to XSL files in order to generated valid (X)HTML 
+Added missing namespace to XSL files in order to generated valid (X)HTML
 files with recent versions of XSLT processors.
 
-Updated the User Manual documentation on converting XML documenting files 
+Updated the User Manual documentation on converting XML documenting files
 to other formats.
 
-Removed the texml.xsl XSLT file as the TeXMLatte application it depends on 
+Removed the texml.xsl XSLT file as the TeXMLatte application it depends on
 is no longer available.
 
-Added Windows JScript script for copying the Logtalk examples, library, and 
+Added Windows JScript script for copying the Logtalk examples, library, and
 xml directories to the user directory.
 
-Added Windows JScript scripts for easy integration of Logtalk with ECLiPSe, 
+Added Windows JScript scripts for easy integration of Logtalk with ECLiPSe,
 SWI-Prolog, SICStus Prolog, and YAP.
 
 Added missing extension for source metafiles to the SWI-Prolog hook file.
 
-Corrected a bug in the lgtxhtml.xsl XSLT file where a wrong reference to 
+Corrected a bug in the lgtxhtml.xsl XSLT file where a wrong reference to
 the Logtalk CSS file is being used in the xml-stylesheet tag.
 
-The iso_initialization_dir/1 compiler option is now a read only flag, 
+The iso_initialization_dir/1 compiler option is now a read only flag,
 defined in the configuration files.
 
 
 2.19.1 - August 2, 2004
 =======================
 
-Corrected a bug where entities could not be reloaded if they depend on 
+Corrected a bug where entities could not be reloaded if they depend on
 other, not yet loaded entities.
 
-Corrected a bug where compiler options would not be used when compiling 
+Corrected a bug where compiler options would not be used when compiling
 source metafiles.
 
 Corrected several typos on the Logtalk manuals.
@@ -18465,11 +18465,11 @@ Corrected several typos on the Logtalk manuals.
 2.19.0 - July 26, 2004
 ======================
 
-Added support for defining more than one entity per file using Logtalk 
-source metafiles (*.mlgt), which the runtime engine automatically splits 
+Added support for defining more than one entity per file using Logtalk
+source metafiles (*.mlgt), which the runtime engine automatically splits
 on single entity source files plus loading and compiling helper files.
 
-Updated the URL used on the automatically generated XML documenting files 
+Updated the URL used on the automatically generated XML documenting files
 when compiling entities with the option doctype(web).
 
 Improved error checking when compiling calls to the {}/1 control construct.
@@ -18480,48 +18480,48 @@ Corrected several typos and some outdated links on the Logtalk manuals.
 2.18.0 - July 9, 2004
 =====================
 
-Added caching of method lookups in order to improve message processing 
-performance (including messages to self and super calls). Applied several 
-optimizations to runtime translation of messages in order to further 
+Added caching of method lookups in order to improve message processing
+performance (including messages to self and super calls). Applied several
+optimizations to runtime translation of messages in order to further
 improve performance.
 
 Improved error checking while parsing and compiling messages to self.
 
-Update ECLiPSe config files to compile the Prolog files generated by Logtalk 
+Update ECLiPSe config files to compile the Prolog files generated by Logtalk
 (when compiling source files) in optimized mode instead of traceable mode.
 
-Updated description of patches needed for running Logtalk with XSB, added 
-a shell script for easy integration of Logtalk with this Prolog compiler, 
+Updated description of patches needed for running Logtalk with XSB, added
+a shell script for easy integration of Logtalk with this Prolog compiler,
 and corrected a problem with its corresponding config file.
 
-Added multifile/1 directive to the syntax coloring configuration files of the 
+Added multifile/1 directive to the syntax coloring configuration files of the
 supported text editors.
 
 
 2.17.2 - June 14, 2004
 ======================
 
-Updated the Logtalk compiler to allow compilation of source files which 
+Updated the Logtalk compiler to allow compilation of source files which
 contain only directives and no entity definition.
 
-Simplified loading of library and example entities by using Logtalk source 
+Simplified loading of library and example entities by using Logtalk source
 files as loader files.
 
-Some improvements to the documentation, including the QUICK_START file and 
+Some improvements to the documentation, including the QUICK_START file and
 the User Manual for first-time users, and to the example descriptions.
 
-Corrected a bug in handling of local object operators that are also global 
+Corrected a bug in handling of local object operators that are also global
 operators.
 
-Corrected a bug where dynamic directives are not being generated for dynamic 
+Corrected a bug where dynamic directives are not being generated for dynamic
 predicates that lack a scope directive or an initial set of clauses.
 
-Corrected a bug where local dynamic predicates would need a private scope 
+Corrected a bug where local dynamic predicates would need a private scope
 directive in order to allow clauses of the predicate to be retracted.
 
 Simplified compilation of dynamic and discontiguous predicate directives.
 
-Added new "logic" example implementing a translator from logic propositions 
+Added new "logic" example implementing a translator from logic propositions
 to conjunctive normal form.
 
 Corrected a problem with wrong end-on-lines on some files.
@@ -18532,64 +18532,64 @@ Added a shell script for easy integration of Logtalk with CIAO Prolog.
 2.17.1 - June 7, 2004
 =====================
 
-Added custom handling of specification of predicate exceptions in info/2 
-documenting directives when writing XML documenting files (declared as 
-"exceptions is [Cond1-Term1, Cond2-Term2, ...]"; each pair (Condi, Termi) 
-represents an error condition and its respective exception). 
+Added custom handling of specification of predicate exceptions in info/2
+documenting directives when writing XML documenting files (declared as
+"exceptions is [Cond1-Term1, Cond2-Term2, ...]"; each pair (Condi, Termi)
+represents an error condition and its respective exception).
 
-Changed debugger command "e" to print exception terms instead of exiting 
+Changed debugger command "e" to print exception terms instead of exiting
 Logtalk session.
 
 Corrected a compilation error with B-Prolog due to operator priorities.
 
-Corrected a possible problem with the redefinition of loaded entities that 
-define (possibly at runtime) dynamic predicates. All clauses for an entity 
+Corrected a possible problem with the redefinition of loaded entities that
+define (possibly at runtime) dynamic predicates. All clauses for an entity
 dynamic predicates are retracted before loading the new entity definition.
 
-Corrected a potential bug when pretty printing terms with variables in the 
+Corrected a potential bug when pretty printing terms with variables in the
 debugger and in the created XML documenting files.
 
-Added four more DCGs examples ("walker movements", "iterative shell command 
+Added four more DCGs examples ("walker movements", "iterative shell command
 parsing", "bill of materials", and "command language").
 
 New "puzzles" and "metainterpreters" examples.
 
-Added a mode bundle for the SubEthaEdit 2.x (MacOS X) text editor providing 
-syntax coloring for editing Logtalk source files. Optimized some of the 
-regular expressions in the syntax coloring files for the Kate/Kwrite and Vim 
+Added a mode bundle for the SubEthaEdit 2.x (MacOS X) text editor providing
+syntax coloring for editing Logtalk source files. Optimized some of the
+regular expressions in the syntax coloring files for the Kate/Kwrite and Vim
 text editors.
 
-Removed predicate nth/3 from library entities listp, list, and difflist. 
-Replaced by the predicates nth0/3 and nth1/3. Added new predicates nth1/4 
+Removed predicate nth/3 from library entities listp, list, and difflist.
+Replaced by the predicates nth0/3 and nth1/3. Added new predicates nth1/4
 and nth0/4.
 
-Updated the config file for Quintus Prolog to make use of the "files" 
+Updated the config file for Quintus Prolog to make use of the "files"
 library.
 
-Added experimental implementations for some Prolog compilers of the library 
-portable protocol for operating system access (systemp.lgt). See the file 
+Added experimental implementations for some Prolog compilers of the library
+portable protocol for operating system access (systemp.lgt). See the file
 library/experimental/NOTES for details.
 
 
 2.17.0 - April 26, 2004
 =======================
 
-Added built-in debugging support implemented through the definition of a 
-new pseudo-object named "debugger". Added "debug" compiler option. Renamed 
-library entities "debuggerp" and "debugger" to, respectively, "event_dbgp" 
+Added built-in debugging support implemented through the definition of a
+new pseudo-object named "debugger". Added "debug" compiler option. Renamed
+library entities "debuggerp" and "debugger" to, respectively, "event_dbgp"
 and "event_dbg".
 
-Improved installation instructions for multi-user environments. Added 
-a shell script for installing Logtalk in Unix and Unix-like operating 
-systems. Added a shell script for copying Logtalk xml, examples, and 
+Improved installation instructions for multi-user environments. Added
+a shell script for installing Logtalk in Unix and Unix-like operating
+systems. Added a shell script for copying Logtalk xml, examples, and
 library directories to the user home directory.
 
 Added a logtalk.spec file for building Linux RPMs from sources.
 
-Added a set of shell scripts for easy integration of Logtalk with ECLiPSe, 
+Added a set of shell scripts for easy integration of Logtalk with ECLiPSe,
 GNU Prolog, Qu-Prolog, SICStus Prolog, SWI-Prolog, and YAP.
 
-Corrected bug in the definition of the pseudo-object "user" that resulted 
+Corrected bug in the definition of the pseudo-object "user" that resulted
 in mixed up metapredicate and type predicate properties.
 
 Removed config files for outdated versions of Qu-Prolog, SWI-Prolog, ECLiPSe,
@@ -18599,42 +18599,42 @@ K-Prolog, CIAO, YAP, Amzi! Prolog, LPA Win-Prolog, SICStus Prolog, and XSB.
 2.16.2 - April 2, 2004
 ======================
 
-Corrected a bug in the library category monitor (file library/monitor.lgt) 
+Corrected a bug in the library category monitor (file library/monitor.lgt)
 that prevents its compilation.
 
-Changed the possible values of the read-only flag startup_message (defined 
-in the config files) to "flags" (print banner and flag values), "banner" 
-(print only the banner), and "none" (do not print neither the banner nor the 
+Changed the possible values of the read-only flag startup_message (defined
+in the config files) to "flags" (print banner and flag values), "banner"
+(print only the banner), and "none" (do not print neither the banner nor the
 flag values). Default value is "flags".
 
-Updated the "errors" example to illustrate the error messages thrown when 
+Updated the "errors" example to illustrate the error messages thrown when
 trying to redefine Logtalk built-in control constructs.
 
-Corrected a small problem with the Logtalk language specification file for 
+Corrected a small problem with the Logtalk language specification file for
 Apple's Xcode IDE.
 
-Added preliminary support for syntax coloring using the Windows text editor 
+Added preliminary support for syntax coloring using the Windows text editor
 Crimson Editor.
 
 
 2.16.1 - March 23, 2004
 =======================
 
-The local built-in method parameter/2 can now be used inside categories 
+The local built-in method parameter/2 can now be used inside categories
 (but please read the warnings about such practice on the user manual).
 
-Updated the Logtalk compiler to report an error when the user tries to 
-redefine a message sending or external call control construct inside an 
+Updated the Logtalk compiler to report an error when the user tries to
+redefine a message sending or external call control construct inside an
 object or category.
 
-Corrected a bug in the compilation of metacalls whose meta-arguments are 
+Corrected a bug in the compilation of metacalls whose meta-arguments are
 variables.
 
-Removed references to file sax.jar from the scripts used to convert XML 
-documenting files into (X)HTML. Updated scripts html.sh, htmlnt.cmd, and 
+Removed references to file sax.jar from the scripts used to convert XML
+documenting files into (X)HTML. Updated scripts html.sh, htmlnt.cmd, and
 htmldos.bat to use XT 20020426a or later version.
 
-Improved syntax coloring accuracy of built-in predicates and methods for 
+Improved syntax coloring accuracy of built-in predicates and methods for
 the SubEthaEdit text editor.
 
 Updated config file for Qu-Prolog 6.4.
@@ -18645,139 +18645,139 @@ Updated config file for Qu-Prolog 6.4.
 
 Logtalk is now distributed under the Artistic License 2.0.
 
-Operators declared inside an entity are now local to the entity, not 
-affecting the global operator table (complying with the Logtalk language 
-specification). Input and output of terms from inside objects and 
-categories now work as expected in the presence of local operator 
+Operators declared inside an entity are now local to the entity, not
+affecting the global operator table (complying with the Logtalk language
+specification). Input and output of terms from inside objects and
+categories now work as expected in the presence of local operator
 declarations. Added a new example named "operators".
 
-Updated built-in method predicate_property/2 for returning metapredicate/1 
+Updated built-in method predicate_property/2 for returning metapredicate/1
 properties for both Logtalk and Prolog metapredicates.
 
-Added support for calls to non-ISO Prolog standard built-in metapredicates 
-inside objects and categories. Added support for the declaration of non-ISO 
+Added support for calls to non-ISO Prolog standard built-in metapredicates
+inside objects and categories. Added support for the declaration of non-ISO
 Prolog standard metapredicates in the config files.
 
 Small change to the way the Logtalk compiler reports the compilation of
 entities. Small optimizations to the compilation of Logtalk source files.
 
-Corrected a bug where calls to Logtalk built-in predicates would be 
-reported as non-portable when the value of compiler option portability is 
+Corrected a bug where calls to Logtalk built-in predicates would be
+reported as non-portable when the value of compiler option portability is
 set to warning.
 
 New config file for Qu-Prolog 6.4 (see the configs/NOTES file for details).
 
-Corrected a problem with the syntax coloring of quoted atoms and strings 
+Corrected a problem with the syntax coloring of quoted atoms and strings
 in the SubEthaEdit text editor. Added more accurate syntax highlight for
 built-in methods and built-in predicates.
 
-Updated the syntax coloring configuration files for all supported text 
+Updated the syntax coloring configuration files for all supported text
 editors to recognize the file extension used by the config files.
 
 
 2.15.6 - February 9, 2004
 =========================
 
-Added "xmlspec" compiler option in order to specify the extension (dtd 
+Added "xmlspec" compiler option in order to specify the extension (dtd
 or xsd) of the file describing the XML documenting files specification.
 
-Renamed compiler option "named_anonymous_vars" to the more appropriated 
-name "underscore_vars". Changed possible option values to "dont_care" and 
+Renamed compiler option "named_anonymous_vars" to the more appropriated
+name "underscore_vars". Changed possible option values to "dont_care" and
 "singletons" (default).
 
-Added XSLT file for converting XML documenting files to XHTML 1.0 Strict 
+Added XSLT file for converting XML documenting files to XHTML 1.0 Strict
 files. Set the default encoding of all XSLT files to UTF-8.
 
 Added syntax coloring support for the KDE Kate and Kwrite text editors.
 
-Improved syntax coloring configuration files for VIM, jEdit, NEdit, 
+Improved syntax coloring configuration files for VIM, jEdit, NEdit,
 SubEthaEdit, and Emacs text editors.
 
-Removed outdated support for MacOS X Project Builder and added support 
+Removed outdated support for MacOS X Project Builder and added support
 for the new MacOS X Xcode developer tool.
 
-Corrected bug in the built-in predicate current_logtalk_flag/2 that 
-prevented some flag values from being returned after using the built-in 
+Corrected bug in the built-in predicate current_logtalk_flag/2 that
+prevented some flag values from being returned after using the built-in
 predicate set_logtalk_flag/2.
 
-Corrected bug in the shapes example (wrong placement of the declaration 
+Corrected bug in the shapes example (wrong placement of the declaration
 of the predicate side/1).
 
 
 2.15.5 - December 30, 2003
 ==========================
 
-Make operator ^^/1 right-associative for consistency with remaining 
+Make operator ^^/1 right-associative for consistency with remaining
 operator declarations.
 
-Added file BIBLIOGRAPHY containing a list of Logtalk publications in 
+Added file BIBLIOGRAPHY containing a list of Logtalk publications in
 BibTeX format.
 
-Added a font-lock file for Emacs providing syntax coloring for editing 
+Added a font-lock file for Emacs providing syntax coloring for editing
 Logtalk source files.
 
-Added an implementation of the Smalltalk dependent mechanism to the 
+Added an implementation of the Smalltalk dependent mechanism to the
 standard Logtalk library.
 
-Updated the config file for ECLiPSe 5.4~5.7 with missing ISO Prolog 
-predicate definitions needed for successful compilation of all entities 
+Updated the config file for ECLiPSe 5.4~5.7 with missing ISO Prolog
+predicate definitions needed for successful compilation of all entities
 in the Logtalk standard library.
 
-Updated manual pages to comply with XHTML 1.0 Strict and to provide 
+Updated manual pages to comply with XHTML 1.0 Strict and to provide
 better navigation.
 
 
 2.15.4 - July 9, 2003
 =====================
 
-Corrected a spurious backtracking bug in the DCG rule translator. Added 
+Corrected a spurious backtracking bug in the DCG rule translator. Added
 two more examples of DCGs.
 
-New config file for XSB 2.6. Updated Logtalk compiler to compile cleanly 
+New config file for XSB 2.6. Updated Logtalk compiler to compile cleanly
 under XSB after applying the patch described in configs/NOTES.
 
-Updated SWI-Prolog config file to hide compiled entity predicates (requires 
-SWI-Prolog 5.2.3 or later version). New optional file configs/swihook.pl 
-contains hook code that allows Logtalk entities to be compiled and loaded 
+Updated SWI-Prolog config file to hide compiled entity predicates (requires
+SWI-Prolog 5.2.3 or later version). New optional file configs/swihook.pl
+contains hook code that allows Logtalk entities to be compiled and loaded
 using SWI-Prolog load_files/2 and consult/1 predicates.
 
-Syntax definition file for the Hydra 1.1 (MacOS X) text editor providing 
+Syntax definition file for the Hydra 1.1 (MacOS X) text editor providing
 syntax coloring for editing Logtalk source files.
 
-Updated syntax coloring files for jEdit, NEdit, Vim, and TextPad in order 
+Updated syntax coloring files for jEdit, NEdit, Vim, and TextPad in order
 to recognize character code constants (0'x) and the DCG operator -->/2.
 
 
 2.15.3 - June 27, 2003
 ======================
 
-Updated experimental support for DCG rules to prevent over-simplification 
-of unification goals in the compilation of rules to clauses. Push-back 
+Updated experimental support for DCG rules to prevent over-simplification
+of unification goals in the compilation of rules to clauses. Push-back
 lists can now be used on rule heads.
 
-The compilation mode of an entity (static/dynamic) is now stored in the 
+The compilation mode of an entity (static/dynamic) is now stored in the
 corresponding entity table (implying recompilation of all entities).
 
 Updated GNU Prolog config file to hide compiled entity predicates.
 
-Updated SWI-Prolog config file for better integration of Logtalk with 
+Updated SWI-Prolog config file for better integration of Logtalk with
 this compiler.
 
 
 2.15.2 - April 2, 2003
 ======================
 
-Experimental support for DCG rules inside categories and objects. Added 
+Experimental support for DCG rules inside categories and objects. Added
 built-in methods phrase/2 and phrase/3.
 
-Updated GNU Prolog config file to not hide compiled entity predicates in 
+Updated GNU Prolog config file to not hide compiled entity predicates in
 order to avoid incompatibilities with dynamic entities.
 
 
 2.15.1 - March 8, 2003
 ======================
 
-New example, msglog, of using events and monitors to record, replay, and 
+New example, msglog, of using events and monitors to record, replay, and
 print user messages.
 
 Corrected a typo on the jEdit templates that resulted in syntax errors.
@@ -18795,26 +18795,26 @@ Changed "authors" key in info/1 directive to "author".
 
 Corrected documentation of built-in local method this/1.
 
-New geometric shapes example implemented in two versions, one 
+New geometric shapes example implemented in two versions, one
 prototype-based and the other one class-based.
 
-Improved support for jEdit text editor by adding a set of programming 
+Improved support for jEdit text editor by adding a set of programming
 templates for use with the editor Templates plug-in.
 
-Added basic support for syntax highlighting and programming templates 
+Added basic support for syntax highlighting and programming templates
 for MacOS X Project builder.
 
 
 2.14.7 - January 10, 2003
 =========================
 
-Corrected a bug in the built-in methods asserta/1 and assertz/1 when 
+Corrected a bug in the built-in methods asserta/1 and assertz/1 when
 asserting predicate rules.
 
-The built-in predicates logtalk_compile/1-2 and logtalk_load/1-2 now 
+The built-in predicates logtalk_compile/1-2 and logtalk_load/1-2 now
 accept both an entity (an atom) or a list of entities (a list of atoms).
 
-Optimized the code generated when compiling or asserting clauses for 
+Optimized the code generated when compiling or asserting clauses for
 dynamic predicates.
 
 Optimized protected inheritance performance on some Prolog compilers.
@@ -18823,21 +18823,21 @@ Optimized protected inheritance performance on some Prolog compilers.
 2.14.6 - December 31, 2002
 ==========================
 
-Corrected a bug where the opening directive of an object that, 
-simultaneously, implements a protocol, imports a category, instantiates 
+Corrected a bug where the opening directive of an object that,
+simultaneously, implements a protocol, imports a category, instantiates
 a class, and specializes a superclass, will not be recognized.
 
 
 2.14.5 - December 20, 2002
 ==========================
 
-Simplified dynamic table of predicate declarations by removing two 
+Simplified dynamic table of predicate declarations by removing two
 redundant arguments.
 
-Corrected a bug where sending messages such as true/0 or !/0 to an 
+Corrected a bug where sending messages such as true/0 or !/0 to an
 unknown object succeeded instead of throwing the correct exception.
 
-Simplified the code used to generate links in the lgtpdfa4.xsl and 
+Simplified the code used to generate links in the lgtpdfa4.xsl and
 lgtpdfus.xsl XSLT files.
 
 
@@ -18848,57 +18848,57 @@ Removed definition of deprecated built-in predicate logtalk_version/3.
 
 Show flag names when printing at startup the default flag values.
 
-Small change to messages printed on console with smart compilation of 
+Small change to messages printed on console with smart compilation of
 source files turned on.
 
-Updated YAP 4.3.x config file to use the YAP "system" library to access 
-the operating system for time, date, and file properties (enabling smart 
+Updated YAP 4.3.x config file to use the YAP "system" library to access
+the operating system for time, date, and file properties (enabling smart
 source code compilation).
 
-Updated the lgtpdfa4.xsl and lgtpdfus.xsl XSLT files to workaround a bug 
+Updated the lgtpdfa4.xsl and lgtpdfus.xsl XSLT files to workaround a bug
 in the PassiveTeX 1.21 XSL:FO processor.
 
 
 2.14.3 - September 16, 2002
 ===========================
 
-New compiler option, doctype, to set the doctype reference (if any) 
-in the XML documenting files. Default value is "local" for backward 
+New compiler option, doctype, to set the doctype reference (if any)
+in the XML documenting files. Default value is "local" for backward
 compatibility. Updated the user manual section on compiler options.
 
-The Logtalk built-in predicate logtalk_version/3 should be considered 
-deprecated (use current_logtalk_flag/3 instead). All references to this 
+The Logtalk built-in predicate logtalk_version/3 should be considered
+deprecated (use current_logtalk_flag/3 instead). All references to this
 predicate have been removed from the manuals.
 
-Updated the jEdit syntax coloring config file for the new jEdit 4.1 
+Updated the jEdit syntax coloring config file for the new jEdit 4.1
 version.
 
-Updated the lgtpdfa4.xsl and lgtpdfus.xsl XSLT files for compatibility 
-with the XSL:FO processors Apache FOP 0.20.4, PassiveTeX, and RenderX 
-and with the XSL W3C Recommendation of October 15, 2001. Updated the 
-pdf.bat and pdf.sh scripts to reference the latest version of the 
+Updated the lgtpdfa4.xsl and lgtpdfus.xsl XSLT files for compatibility
+with the XSL:FO processors Apache FOP 0.20.4, PassiveTeX, and RenderX
+and with the XSL W3C Recommendation of October 15, 2001. Updated the
+pdf.bat and pdf.sh scripts to reference the latest version of the
 Apache FOP processor (0.20.4).
 
-Changed the shell scripts html.sh and pdf.sh for compatibility with the 
+Changed the shell scripts html.sh and pdf.sh for compatibility with the
 sh, bash, and zsh shells.
 
 
 2.14.2 - August 26, 2002
 ========================
 
-Calls to built-in method parameter/2 are now compiled inline, improving 
+Calls to built-in method parameter/2 are now compiled inline, improving
 call performance.
 
-Updated Logtalk compiler to clean temporary compilation predicates after 
+Updated Logtalk compiler to clean temporary compilation predicates after
 compiling an entity instead of only before compilation.
 
-Updated YAP 4.3.x config file for better Logtalk integration by hiding 
+Updated YAP 4.3.x config file for better Logtalk integration by hiding
 all internal compiler, runtime, and compiled entities static predicates.
 
-Updated GNU Prolog config file for better Logtalk integration by hiding 
+Updated GNU Prolog config file for better Logtalk integration by hiding
 all internal compiler, runtime, and compiled entities predicates.
 
-Updated the XSLT conversion scripts lgtxml.xsl and lgthtml.xsl to correct 
+Updated the XSLT conversion scripts lgtxml.xsl and lgthtml.xsl to correct
 some HTML conformance errors in the generated pages.
 
 Corrected some XHTML conformance errors in the manual pages.
@@ -18907,8 +18907,8 @@ Corrected some XHTML conformance errors in the manual pages.
 2.14.1 - July 31, 2002
 ======================
 
-New Windows NT script and updated Unix shell script for batch converting 
-XML documenting files to HTML. Both scripts also generate an index.html 
+New Windows NT script and updated Unix shell script for batch converting
+XML documenting files to HTML. Both scripts also generate an index.html
 file containing links to all converted XML documenting files.
 
 Corrected wrong XHTML DOCTYPE declaration in manual pages.
@@ -18917,36 +18917,36 @@ Corrected wrong XHTML DOCTYPE declaration in manual pages.
 2.14.0 - July 26, 2002
 ======================
 
-Renamed all compiler and runtime internal predicates and all auxiliary 
+Renamed all compiler and runtime internal predicates and all auxiliary
 predicates in the config files to start with a "$" character.
 
-New compiler option, code_prefix, to set a prefix for all Prolog code 
+New compiler option, code_prefix, to set a prefix for all Prolog code
 functors generated by Logtalk when compiling entities. Default is ''.
 
-New compiler option, named_anonymous_vars, that instructs the compiler to 
-interpret variables that start with an underscore as anonymous variables 
+New compiler option, named_anonymous_vars, that instructs the compiler to
+interpret variables that start with an underscore as anonymous variables
 (and to not report them as singleton variables). Default value is "off".
 
-Directive info/2 was wrongly declared as a entity directive instead of a 
+Directive info/2 was wrongly declared as a entity directive instead of a
 predicate directive.
 
-Converted all manual pages to XHTML 1.0 format. Corrected a wrong link in 
+Converted all manual pages to XHTML 1.0 format. Corrected a wrong link in
 the reference manual. Replaced GIF images by PNG versions.
 
-Updated BProlog 6.x config file to workaround the new 6.2 built-in 
-predicate ::/2 that conflicts with the same named Logtalk message sending 
+Updated BProlog 6.x config file to workaround the new 6.2 built-in
+predicate ::/2 that conflicts with the same named Logtalk message sending
 operator.
 
-Removed call to the obsolete built-in predicate nodbgcomp/0 from all 
+Removed call to the obsolete built-in predicate nodbgcomp/0 from all
 ECLiPSe config files.
 
 
 2.13.0 - June 15, 2002
 ======================
 
-Logtalk now outputs Prolog code using write_canonical/2 instead of 
-write_term/3. Goals are better portability of the generated Prolog files 
-and avoid issues with clauses with long bodies for Prolog compilers that 
+Logtalk now outputs Prolog code using write_canonical/2 instead of
+write_term/3. Goals are better portability of the generated Prolog files
+and avoid issues with clauses with long bodies for Prolog compilers that
 use a term print depth limit to prevent problems with cyclic terms.
 
 Added report of default flag values at Logtalk startup.
@@ -18956,68 +18956,68 @@ Logtalk now prints a warning when redefining parametric objects.
 Removed need of an abort/0 predicate from the Logtalk debugger example.
 Removed any definition of this predicate from the config files.
 
-Added missing definitions for some ISO built-in predicates to the Amzi! 
+Added missing definitions for some ISO built-in predicates to the Amzi!
 Prolog 6.2.2 config file.
 
 
 2.12.0 - May 25, 2002
 =====================
 
-New read-only Logtalk flag "version". Corrected exception term generated 
-when trying to modify a read-only flag using the set_logtalk_flag/2 
+New read-only Logtalk flag "version". Corrected exception term generated
+when trying to modify a read-only flag using the set_logtalk_flag/2
 built-in predicate.
 
 Updated config file for OpenProlog 1.1b5.
 
 New config file for ECLiPSe 5.4.
 
-Renamed config files for CIAO 1.7 (beta of 1.8) to "ciao_aux18.config" 
+Renamed config files for CIAO 1.7 (beta of 1.8) to "ciao_aux18.config"
 and "ciao18.config".
 
 Updated config file for Amzi! Prolog 6.2.2.
 
-New example of using some of the built-in database handling methods 
+New example of using some of the built-in database handling methods
 (dynpred).
 
-Syntax configuration files for jEdit 4.0, VIM 6.1, NEdit 5.2, and 
-TextPad 4.5 text editors providing syntax highlighting for editing 
+Syntax configuration files for jEdit 4.0, VIM 6.1, NEdit 5.2, and
+TextPad 4.5 text editors providing syntax highlighting for editing
 Logtalk source files.
 
 
 2.11.0 - April 22, 2002
 =======================
 
-Added a "smart compilation" feature to the Logtalk compiler, controlled 
-by a "smart_compilation" flag. Only available in Prolog compilers that 
+Added a "smart compilation" feature to the Logtalk compiler, controlled
+by a "smart_compilation" flag. Only available in Prolog compilers that
 provide access to file modification dates.
 
-Added a "startup_message" flag to control printing of the Logtalk banner 
+Added a "startup_message" flag to control printing of the Logtalk banner
 at startup.
 
-Reworked Logtalk pre-processor compilation and loading reports. Compiler 
-option "report" now toggles between normal reporting (as specified by the 
+Reworked Logtalk pre-processor compilation and loading reports. Compiler
+option "report" now toggles between normal reporting (as specified by the
 other flags) and silent compilation/loading of source files.
 
 
 2.10.0 - April 5, 2002
 ======================
 
-Scope of object asserted predicates for which there is no declaration is 
-now a function of the context instead of always being declared public. 
-Asserting in this, the predicate is declared private, asserting in self, 
-the predicate is declared protected, otherwise the predicate is declared 
+Scope of object asserted predicates for which there is no declaration is
+now a function of the context instead of always being declared public.
+Asserting in this, the predicate is declared private, asserting in self,
+the predicate is declared protected, otherwise the predicate is declared
 public.
 
 Throw an error if a category contains clauses for dynamic predicates.
 
-Updated documentation on categories and built-in methods for database 
+Updated documentation on categories and built-in methods for database
 handling.
 
-Retracting all clauses for a dynamic predicate from an object now allows 
-an inherited definition to be called when sending the corresponding 
+Retracting all clauses for a dynamic predicate from an object now allows
+an inherited definition to be called when sending the corresponding
 message. In previous versions the message just failed.
 
-Added missing entries for the built-in predicates current_logtalk_flag/2 
+Added missing entries for the built-in predicates current_logtalk_flag/2
 and set_logtalk_flag/2 to the Logtalk compiler built-in predicates table.
 
 Updated config file for Amzi! Prolog 6.1.74.
@@ -19036,19 +19036,19 @@ Renamed SWI-Prolog config file swi330.config to swi.config.
 
 Renamed config file predicate lgt_default_compiler_option/2 to lgt_flag/2.
 
-New XSL style-sheets and shell scripts to convert Logtalk XML entity 
+New XSL style-sheets and shell scripts to convert Logtalk XML entity
 documenting files to PDF format using XSL Formating Objects.
 
 
 2.9.2 - January 4, 2002
 =======================
 
-The Logtalk compiler can now print a warning when compiling source files 
-that use non-ISO defined built-in predicates using a new portability/1 
-compiler option. Updated the relevant sections of the user manual and the 
+The Logtalk compiler can now print a warning when compiling source files
+that use non-ISO defined built-in predicates using a new portability/1
+compiler option. Updated the relevant sections of the user manual and the
 errors example.
 
-Corrected a compiler bug where the entity relation tables only recorded 
+Corrected a compiler bug where the entity relation tables only recorded
 the last entry per entity relation type.
 
 Updated config file for CIAO 1.7#162.
@@ -19060,14 +19060,14 @@ Updated config file for CIAO 1.7#162.
 Logtalk compiler now prints a warning when redefining or replacing an
 existing entity.
 
-Corrected a compiler bug in the error checking code for the info/1 
+Corrected a compiler bug in the error checking code for the info/1
 and info/2 directives.
 
-Changed the order of object loading in the "mi" example to avoid 
+Changed the order of object loading in the "mi" example to avoid
 spurious warning messages.
 
-Added a new problem ("bridge") to the "searching" example. Improved 
-"performance" monitor to give correct reports on alternative solutions. 
+Added a new problem ("bridge") to the "searching" example. Improved
+"performance" monitor to give correct reports on alternative solutions.
 Corrected a bug in the "water jug" state space example.
 
 
@@ -19076,28 +19076,28 @@ Corrected a bug in the "water jug" state space example.
 
 Added config files for CIAO Prolog 1.7p115 and B-Prolog 6.0.
 
-Compiling and loading an entity that contains references to unknown 
-entities (by default) prints a warning. Updated user and reference 
+Compiling and loading an entity that contains references to unknown
+entities (by default) prints a warning. Updated user and reference
 manuals.
 
 Rewritten all the compiler warning/error code and output messages.
 
-Changed compiled code functors postfixes from "_sdcl" and "_sdef" to 
-"_idcl"and "_idef" (implies recompilation of all objects, protocols, 
+Changed compiled code functors postfixes from "_sdcl" and "_sdef" to
+"_idcl"and "_idef" (implies recompilation of all objects, protocols,
 and categories).
 
-Changed all occurrences and references to the term "entity_scope" to 
+Changed all occurrences and references to the term "entity_scope" to
 "scope".
 
 Removed some redundant productions from the Logtalk grammar.
 
-Updated documentation on the xml directory. Renamed some of the .xsl 
+Updated documentation on the xml directory. Renamed some of the .xsl
 files. Added sample scripts to batch convert .xml files to .html files.
 
-Added a new loader utility file, all.loader, to load all library files 
+Added a new loader utility file, all.loader, to load all library files
 loaded by the other loader files.
 
-Started work on documenting the Logtalk pre-processor/compiler source 
+Started work on documenting the Logtalk pre-processor/compiler source
 file.
 
 New "errors" example. Updated the "inheritance" example.
@@ -19112,7 +19112,7 @@ Amzi! Prolog 4.103~5.0.
 New config file for Amzi! Prolog 6.1 beta.
 
 Corrected an incomplete entity definition in the Logtalk XML DTD.
-Rewrite the Logtalk XSLT files for improved compatibility with XSLT 
+Rewrite the Logtalk XSLT files for improved compatibility with XSLT
 processors regarding handling of whitespace.
 
 A first cut of a XML Schema for the Logtalk XML documentation files
@@ -19124,15 +19124,15 @@ Small improvements to the documentation.
 2.8.3 - November 21, 2000
 =========================
 
-Corrected a bug where sending a message for a built-in method to an 
+Corrected a bug where sending a message for a built-in method to an
 unknown object fails instead of generating the expected exception.
 
-Put some occurrences of atoms public, mode, and type between ()'s to 
-avoid compilation errors in BinProlog 8.0 and other Prolog compilers 
+Put some occurrences of atoms public, mode, and type between ()'s to
+avoid compilation errors in BinProlog 8.0 and other Prolog compilers
 that declare these atoms as operators.
 
-Corrected the definition of the state space of the "Missionaries and 
-Cannibals" problem in the "searching" example that resulted in some 
+Corrected the definition of the state space of the "Missionaries and
+Cannibals" problem in the "searching" example that resulted in some
 wrong solutions.
 
 
@@ -19141,11 +19141,11 @@ wrong solutions.
 
 New .xsl file to convert .xml files to TeXML files.
 
-Fixed a problem with explicit compilation options being correctly parsed 
+Fixed a problem with explicit compilation options being correctly parsed
 but not processed.
 
-Corrected a bug regarding default init options definition for the 
-points, polygons, and bricks examples. Updated category initialization 
+Corrected a bug regarding default init options definition for the
+points, polygons, and bricks examples. Updated category initialization
 in roots example.
 
 
@@ -19154,11 +19154,11 @@ in roots example.
 
 New config file for K-Prolog 5.0.
 
-Improved compiler error detection and reporting of invalid directives 
+Improved compiler error detection and reporting of invalid directives
 and clauses.
 
-Corrected a problem with some Prolog compilers where compiling a file 
-containing syntax errors may not close the file after the errors are 
+Corrected a problem with some Prolog compilers where compiling a file
+containing syntax errors may not close the file after the errors are
 reported.
 
 Many small improvements to all documentation.
@@ -19169,23 +19169,23 @@ Small improvements to the .xsl files and to the output of .xml files.
 2.8.0 - October 1, 2000
 =======================
 
-I have found just a few days ago that I have uploaded to the Logtalk web 
+I have found just a few days ago that I have uploaded to the Logtalk web
 server a development version of Logtalk 2.7.0 instead of the final one!
 To avoid confusions I decided to release a new version.
 
-Changed implementation of the logtalk_compile/1-2 and logtalk_load/1-2 
-predicates to only accept a list of entities instead of either an entity 
-or a list of entities, simplifying and improving the performance of these 
-predicates. Improved error reporting for the logtalk_compile/1 and 
-logtalk_load/1 predicates. Updated relevant sessions in the user and 
+Changed implementation of the logtalk_compile/1-2 and logtalk_load/1-2
+predicates to only accept a list of entities instead of either an entity
+or a list of entities, simplifying and improving the performance of these
+predicates. Improved error reporting for the logtalk_compile/1 and
+logtalk_load/1 predicates. Updated relevant sessions in the user and
 reference manuals.
 
-Simplified the implementation of the following predicates, by sharing 
-the error checking code with the corresponding extended versions: 
-implements_protocol/2, imports_category/2, instantiates_class/2, 
+Simplified the implementation of the following predicates, by sharing
+the error checking code with the corresponding extended versions:
+implements_protocol/2, imports_category/2, instantiates_class/2,
 specializes_class/2, extends_protocol/2, and extends_object/2.
 
-Completed some missing library file dependencies documentation in some 
+Completed some missing library file dependencies documentation in some
 examples.
 
 New version of the QUICK_START help file. Updated tutorial.
@@ -19194,53 +19194,53 @@ New version of the QUICK_START help file. Updated tutorial.
 2.7.0 - August 24, 2000
 =======================
 
-First release of the Logtalk standard library of objects, protocols and 
+First release of the Logtalk standard library of objects, protocols and
 categories.
 
 Rewritten all examples to use the new Logtalk standard library.
 
 New logtalk_load/2 and logtalk_compile/2 Logtalk built-in predicates,
-accepting a list of compiler options. See the User and Reference Manuals 
+accepting a list of compiler options. See the User and Reference Manuals
 for details.
 
-New XSLT file for viewing .xml files in Microsoft Internet Explorer 5.5 
-for Windows after installing the latest Microsoft XML Parser Preview 
+New XSLT file for viewing .xml files in Microsoft Internet Explorer 5.5
+for Windows after installing the latest Microsoft XML Parser Preview
 Release. Small improvements in all XSLT files.
 
-Starting with this version all config files need to provide a definition 
-for the compare/3 predicate if it is not built-in in the corresponding 
-Prolog compiler. Also, default Logtalk compiler options are now also set 
+Starting with this version all config files need to provide a definition
+for the compare/3 predicate if it is not built-in in the corresponding
+Prolog compiler. Also, default Logtalk compiler options are now also set
 in the config files using the lgt_default_compiler_option/2 predicate.
 
-Updated config file for CIAO 1.6p1. See the configs/NOTES file for 
+Updated config file for CIAO 1.6p1. See the configs/NOTES file for
 details.
 
 
 2.6.2 - July 4, 2000
 ====================
 
-Improved performance and error checking for the built-in predicates 
+Improved performance and error checking for the built-in predicates
 create_object/4, create_protocol/3 and create_category/4.
 
 Updated config file for BinProlog 7.83.
 
 Many small updates to all documentation.
 
-New PDF versions of the documentation formated for printing (with page 
-numbers, table of contents and index)are now available in both A4 and 
+New PDF versions of the documentation formated for printing (with page
+numbers, table of contents and index)are now available in both A4 and
 US letter formats.
 
 
 2.6.1 - May 5, 2000
 ===================
 
-Modified the structure of the automatically generated XML documenting 
-files to improve XSL translation performance. Added a new, more standard 
-compliant, XSL file to generate HTML files and renamed the old one to 
-ie5.xsl. See the xml/NOTES file for details. Corrected an error in the 
-logtalk.css CSS file.   
+Modified the structure of the automatically generated XML documenting
+files to improve XSL translation performance. Added a new, more standard
+compliant, XSL file to generate HTML files and renamed the old one to
+ie5.xsl. See the xml/NOTES file for details. Corrected an error in the
+logtalk.css CSS file.
 
-Modified the definitions of predicates lgt_file_extension/2 and 
+Modified the definitions of predicates lgt_file_extension/2 and
 lgt_file_name/2 in all config files.
 
 Updated all the user manual sessions related to automatic documentation.
@@ -19253,30 +19253,30 @@ Start adding documenting directives to most examples.
 2.6.0 - April 27, 2000
 ======================
 
-Added support for documentation of objects, protocols, and categories, 
+Added support for documentation of objects, protocols, and categories,
 using automatic generation of XML files.
 
 Added info/1 and info/2 directives for documenting objects, protocols,
 categories, and predicates. Added definition of documentation file name
-extension and default file names for the DTD and XSL files to the config 
+extension and default file names for the DTD and XSL files to the config
 files.
 
 Improved error checking for the built-in predicates create_object/4,
-create_protocol/3 and create_category/4 to also detect invalid entity 
+create_protocol/3 and create_category/4 to also detect invalid entity
 identifiers.
 
-Updated the user and reference manuals to describe the new automatic 
+Updated the user and reference manuals to describe the new automatic
 documenting features.
 
 Updated all HTML documentation to conform to HTML 4.01 strict standard.
 
-Corrected some wrong cross-reference links and titles in the reference 
+Corrected some wrong cross-reference links and titles in the reference
 and user manuals HTML pages.
 
-PDF versions of the manuals and tutorial are now available in both A4 
+PDF versions of the manuals and tutorial are now available in both A4
 and US letter formats.
 
-Corrected two errors in the searching example, one in the definition of 
+Corrected two errors in the searching example, one in the definition of
 the farmer problem state space and the other when backtracking over
 performance reports.
 
@@ -19285,11 +19285,11 @@ performance reports.
 =====================
 
 Updated manuals to clarify some limitations of declaring and defining
-dynamic predicates inside categories and documented a way of using the 
+dynamic predicates inside categories and documented a way of using the
 built-in local method this/1 to access object parameters.
 
-Removed references to parametric categories from the Logtalk 
-documentation (at runtime we can only access object parameters, 
+Removed references to parametric categories from the Logtalk
+documentation (at runtime we can only access object parameters,
 not category parameters).
 
 Corrected two wrong declarations of built-in methods (forall/2 and
@@ -19305,12 +19305,12 @@ from being abolished. Speedup predicate definition lookups for categories.
 2.5.1 - February 18, 2000
 =========================
 
-Two new examples: birds, a bird identification expert system adopted 
-(with permission) from an Amzi example, and viewpoints, a set of 
-prototypes showing how to do property sharing and value sharing in 
+Two new examples: birds, a bird identification expert system adopted
+(with permission) from an Amzi example, and viewpoints, a set of
+prototypes showing how to do property sharing and value sharing in
 Logtalk.
 
-Renamed config file yap421.config to yap430.config to match the name of 
+Renamed config file yap421.config to yap430.config to match the name of
 the new YAP 4.3.0 public release (named 4.2.1 while on beta testing).
 
 Partial config file for Trinc Prolog R3.
@@ -19325,9 +19325,9 @@ directives are added unchanged to the compiled file.
 
 Improved performance for all kinds of message sending.
 
-Two new examples: reflection, showing how to implement a simple 
-class-based reflective system, and symdiff, showing how to use 
-parametric objects to implement symbolic expression differentiation 
+Two new examples: reflection, showing how to implement a simple
+class-based reflective system, and symdiff, showing how to use
+parametric objects to implement symbolic expression differentiation
 and simplification.
 
 Updated config file for the beta 8 release of SWI-Prolog 3.3.0.
@@ -19336,24 +19336,24 @@ Updated config file for the beta 8 release of SWI-Prolog 3.3.0.
 2.4.0 - December 1, 1999
 ========================
 
-Logtalk is now an Open Source project, available under Perl's Artistic 
+Logtalk is now an Open Source project, available under Perl's Artistic
 license.
 
-Two new examples: instmethods, illustrating the use of instance defined 
+Two new examples: instmethods, illustrating the use of instance defined
 methods, and classvars, showing how to implement class variables.
 
 Updated Logtalk grammar to explicitly allow for user-defined types
 in mode/2 directives.
 
-New config files for SWI-Prolog 3.3.0, SICStus Prolog 3.8 and CIAO 
+New config files for SWI-Prolog 3.3.0, SICStus Prolog 3.8 and CIAO
 Prolog 1.4p0 (incomplete).
 
 Updated config file for B-Prolog 4.0.
 
-Updated config file for GNU Prolog to use the new call_with_args() 
+Updated config file for GNU Prolog to use the new call_with_args()
 built-in predicate added in version 1.1.0.
 
-Updated config file for YAP Prolog to use the new call_with_args() 
+Updated config file for YAP Prolog to use the new call_with_args()
 built-in predicate added in version 4.2.1.
 
 
@@ -19363,9 +19363,9 @@ built-in predicate added in version 4.2.1.
 Logtalk pre-processor updated to only report one warning per redefined
 Logtalk or Prolog built-in predicate.
 
-Changed some occurrences of atom "public" to "(public)" in 
-compiler/logtalk.pl file to avoid syntax errors in Prolog compilers 
-(like BinProlog) that define "public" as an operator. Also put some 
+Changed some occurrences of atom "public" to "(public)" in
+compiler/logtalk.pl file to avoid syntax errors in Prolog compilers
+(like BinProlog) that define "public" as an operator. Also put some
 terms between ()'s to avoid syntax errors with ALS Prolog 3.1
 
 Update config file for ALS Prolog to work with version 3.1.
@@ -19378,52 +19378,52 @@ BinProlog 7.50, and a bug in ALS Prolog 3.1 that affects Logtalk.
 2.3.0 - September 12, 1999
 ==========================
 
-Metapredicate information is now stored with the other predicate 
+Metapredicate information is now stored with the other predicate
 properties, instead of being discarded after compiling the clauses of
-a metapredicate. Added predicate property metapredicate/1. It is now 
-possible to assert clauses for dynamic metapredicates. 
+a metapredicate. Added predicate property metapredicate/1. It is now
+possible to assert clauses for dynamic metapredicates.
 
-Corrected a bug in the processing of metacalls in pseudo-object user. 
+Corrected a bug in the processing of metacalls in pseudo-object user.
 
 Corrected a bug in the implementation of private inheritance.
 Improved performance of protected inheritance.
 
-Corrected failure of processing initialization/1 and op/3 directives in 
-create_object/4, create_category/4 and create_protocol/3 built-in 
+Corrected failure of processing initialization/1 and op/3 directives in
+create_object/4, create_category/4 and create_protocol/3 built-in
 predicates.
 
-Corrected a bug when calling private static category predicates from 
+Corrected a bug when calling private static category predicates from
 importing objects. Simplified code generated for categories.
 
-Rewrite code for the built-in method current_predicate/1 to avoid 
-duplicated or wrong results when overriding predicate declarations 
+Rewrite code for the built-in method current_predicate/1 to avoid
+duplicated or wrong results when overriding predicate declarations
 and to ensure that all possible argument type errors are detected.
 
 Changed compilation of classes that do not instantiate any (meta)class
 in order to throw the correct exception when a message is sent to them.
 
-Changed compilation of root objects (that do not instantiate, specialize 
-or extend other objects) so that calls to "super" (^^/1) fail (as they 
+Changed compilation of root objects (that do not instantiate, specialize
+or extend other objects) so that calls to "super" (^^/1) fail (as they
 should) instead of generating a "predicate does not exist" error message.
 
-Changed implementation of "super" calls (^^/1) to avoid a potential 
-endless loop problem when using these calls from the inheritance root 
+Changed implementation of "super" calls (^^/1) to avoid a potential
+endless loop problem when using these calls from the inheritance root
 object of a reflexive class-based systems.
 
 Pre-processor now checks for callable and object identifier errors.
 Runtime now checks for non-instantiated messages.
 
-Added new example (inheritance) about public, protected and private 
+Added new example (inheritance) about public, protected and private
 inheritance.
 
-Updated metapredicates, lo, kernel, and types examples. Most of the 
-code in the last two examples is being updated to form the basis of an 
+Updated metapredicates, lo, kernel, and types examples. Most of the
+code in the last two examples is being updated to form the basis of an
 upcoming Logtalk standard library.
 
 Small changes in the pre-processor/runtime code for compatibility with
 ECLiPSe 4.2.2. Updated config files for this Prolog compiler.
 
-Rewrite some predicates in the config files for SWI-Prolog and LPA 
+Rewrite some predicates in the config files for SWI-Prolog and LPA
 Mac & WIN Prologs for improved performance.
 
 New tutorial session about events and monitors.
@@ -19443,7 +19443,7 @@ implements_protocol/3. The third argument returns the relation scope.
 
 Pre-processor now checks most directive errors.
 
-Changed ^^/1 (super call) implementation to only allow the use of a 
+Changed ^^/1 (super call) implementation to only allow the use of a
 single predicate call for argument and to retain the original sender
 of the message (see the updated sicstus example).
 
@@ -19465,27 +19465,27 @@ Removed variables example. The category attributes is now part of the
 kernel example. Corrected some harmless syntax errors in directives in
 kernel/attributes.lgt, kernel/monitor.lgt and miscellaneous/queens.lgt.
 
-Changed name of blocks example to bricks and object "block" to "brick" 
-in order to avoid problems with some Prolog compilers that use the atom 
+Changed name of blocks example to bricks and object "block" to "brick"
+in order to avoid problems with some Prolog compilers that use the atom
 "block" for operators or built-in predicates.
 
 
 2.1.0 - May 11, 1999
 ====================
 
-Fixed some bugs in the definition of the pseudo-object user when sending 
+Fixed some bugs in the definition of the pseudo-object user when sending
 the message predicate_property/2.
 
 Renamed config file for Calypso to GNU Prolog.
 
 New config file for LPA WinProlog 4.0.
 
-Corrected the omission in the documentation of the Logtalk grammar of the 
+Corrected the omission in the documentation of the Logtalk grammar of the
 built_in entity property.
 
 New tutorial pages about building reflective class-based systems.
 
-Modified pre-processor to compile throw/1 as a control structure to 
+Modified pre-processor to compile throw/1 as a control structure to
 ensure compatibility with the GNU-Prolog compiler.
 
 Modified pre-processor to ensure compatibility with Prolog compilers that
@@ -19504,31 +19504,31 @@ an initialization/1 directive for ISO standard compliance.
 2.0 GM - February 9, 1999
 =========================
 
-Removed some redundant choice-points that are being created when 
+Removed some redundant choice-points that are being created when
 compiling Logtalk entities.
 
 Small compilation speed optimizations.
 
-Logtalk compiled files now contain the declarations for the message 
+Logtalk compiled files now contain the declarations for the message
 sending operators to ensure compatibility with some Prolog compilers.
 
-Changed the way Logtalk pre-processor writes directives to ensure 
+Changed the way Logtalk pre-processor writes directives to ensure
 compatibility with some Prolog compilers. Corrected a bug in the
 processing of the op/3 directive.
 
 Updated PrologII+ config file for version 4.5.
 
-Changed the definitions of catch/3 and throw/1 in the config files for 
+Changed the definitions of catch/3 and throw/1 in the config files for
 LPA Prolog compilers.
 
-New config file for MasterProlog 4.1; removed config file for the 
+New config file for MasterProlog 4.1; removed config file for the
 old BIM Prolog 4.0.
 
 Corrected an error in the config file for OpenProlog in the definition
 of the write_term/3 predicate.
 
-Added a safer definition for write_term/3 predicate in the config  
-files for Amzi, Aquarius, Arity, Eclipse, IC, K, LPA Mac, LPA Win, 
+Added a safer definition for write_term/3 predicate in the config
+files for Amzi, Aquarius, Arity, Eclipse, IC, K, LPA Mac, LPA Win,
 and XSB Prolog compilers.
 
 Added a QUICK_START file.
@@ -19539,19 +19539,19 @@ Added a QUICK_START file.
 
 Closed some encapsulation holes in the implementation of super calls.
 
-Changed Logtalk pre-processor to use write_term/3 instead of write/2 and 
-writeq/2 to workaround some compatibility problems with some Prolog 
+Changed Logtalk pre-processor to use write_term/3 instead of write/2 and
+writeq/2 to workaround some compatibility problems with some Prolog
 compilers.
 
 Changed mode operators priority and type to be compatible with the ISO
 standard.
 
-Modified definition of predicate read_term/3 in the config file for Amzi 
+Modified definition of predicate read_term/3 in the config file for Amzi
 compiler to return the atom end_of_file instead of '!EOF' at the end of
-a file (this prevented Logtalk to complete compilation any file under 
+a file (this prevented Logtalk to complete compilation any file under
 this compiler). Improved detection of built-in predicates while compiling.
 
-Removed config file for wamcc. This compiler have been replaced by 
+Removed config file for wamcc. This compiler have been replaced by
 Calypso (developed by the same author).
 
 Updated K-Prolog config file for version 4.50.
@@ -19568,23 +19568,23 @@ New end user license.
 2.0 Beta 2 - November 16, 1998
 ==============================
 
-Built-ins logtalk_compile/1 and logtalk_load/1 updated to match 
+Built-ins logtalk_compile/1 and logtalk_load/1 updated to match
 the documentation regarding thrown errors and to accept a list of
 entities to compile/load.
 
 Modified the examples loader utility files to make only a call to
 logtalk_load/1 by using a list of entities. This should make it easy to
 modify these files for compilers that don't support arbitrary queries
-in a file. 
+in a file.
 
-Logtalk runtime no longer tries to catch some of the errors thrown 
+Logtalk runtime no longer tries to catch some of the errors thrown
 by ::/2.
 
-Added to all config files a Logtalk predicate to check if a file 
+Added to all config files a Logtalk predicate to check if a file
 exists in the current working directory (used by the logtalk_load/1
 and logtalk_compile/1 Logtalk built-in predicates).
 
-New configs files for the K-Prolog 4.14 and Calypso 1.0b6 Prolog 
+New configs files for the K-Prolog 4.14 and Calypso 1.0b6 Prolog
 compilers.
 
 Completed the config file for Open Prolog 1.03d38 (with the exception
@@ -19601,7 +19601,7 @@ protocols.
 Modified some examples that use operators to avoid syntax errors in
 some Prolog compilers.
 
-Modified the implementation of the built-in method 
+Modified the implementation of the built-in method
 predicate_property/2 to avoid duplicate answers and to throw an
 instantiation error if the first argument is not bound.
 
@@ -19625,7 +19625,7 @@ Updated Tutorial and User and Reference Manuals.
 
 Added basic support for implementation multi-inheritance.
 
-Logtalk pre-processor updated to try to detect misspelt local 
+Logtalk pre-processor updated to try to detect misspelt local
 predicate calls.
 
 First public beta.

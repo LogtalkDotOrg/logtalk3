@@ -402,7 +402,7 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla ProLog 1.5.0 and later versions
+Trealla ProLog 1.6.0 and later versions
 ---------------------------------------
 
 	trealla.pl
