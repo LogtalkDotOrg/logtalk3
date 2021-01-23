@@ -313,9 +313,10 @@ Glossary
 
    parameter variable
       A variable used as parameter in a parametric object or a parametric
-      category using the syntax ``_ParameterName_``. Occurrences of
-      parameter variables in entity clauses are implicitly unified with the
-      corresponding entity parameters.
+      category using the syntax ``_ParameterName_``. Parameter variables
+      are *logical variables* shared by all entity terms. Occurrences of
+      parameter variables in entity directives and clauses are implicitly
+      unified with the corresponding entity parameters.
 
    parent
       A prototype that is extended by another prototype.
