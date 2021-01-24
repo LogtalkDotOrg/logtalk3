@@ -11,8 +11,8 @@
 Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:28:0
-| **Date:** 2021-01-03
+| **Version:** 1:29:0
+| **Date:** 2021-01-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(restrict)``
@@ -26,7 +26,7 @@ Type checking predicates. User extensible. New types can be defined by adding cl
    - Logtalk specific types: ``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``
    - Prolog module related types (when the backend compiler supports modules): ``module``, ``module_identifier``, ``qualified_callable``
    - Prolog base types: ``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``
-   - Atom derived types: ``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``
+   - Atom derived types: ``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``
    - Number derived types: ``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``
    - Float derived types: ``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``
    - Integer derived types: ``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``

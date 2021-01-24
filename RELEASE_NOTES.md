@@ -76,6 +76,8 @@ Library
 * ADDED: Library `term_io` for term input/output from/to atom, chars, and
 codes.
 
+* ADDED: New `non_quoted_atom` type to the `arbitrary` and `types` libraries.
+
 * ADDED: Implementation for the `os::directory_files/2` predicate for Trealla
 ProLog.
 

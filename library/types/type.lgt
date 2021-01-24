@@ -21,15 +21,15 @@
 :- object(type).
 
 	:- info([
-		version is 1:28:0,
+		version is 1:29:0,
 		author is 'Paulo Moura',
-		date is 2021-01-03,
+		date is 2021-01-24,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
 			'Prolog module related types (when the backend compiler supports modules)' - '``module``, ``module_identifier``, ``qualified_callable``',
 			'Prolog base types' - '``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``',
-			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``',
+			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``',
 			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``',
 			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``',
@@ -168,6 +168,7 @@
 	% atom derived types
 	type(atom(_Charset)).
 	type(atom(_Charset, _Length)).
+	type(non_quoted_atom).
 	type(non_empty_atom).
 	type(non_empty_atom(_Charset)).
 	type(boolean).
@@ -505,6 +506,17 @@
 			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
 			true
 		;	throw(type_error(atom(CharSet,Length), Term))
+		).
+
+	check(non_quoted_atom, Term) :-
+		(	atom(Term),
+			atom_codes(Term, [Code| Codes]),
+			97 =< Code, Code =< 122,
+			forall(member(Code1, Codes), valid_character_code(ascii_identifier, Code1)) ->
+			true
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(non_empty_atom, Term))
 		).
 
 	check(non_empty_atom, Term) :-

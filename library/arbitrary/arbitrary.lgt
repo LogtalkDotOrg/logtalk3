@@ -22,15 +22,15 @@
 	complements(type)).
 
 	:- info([
-		version is 2:16:1,
+		version is 2:17:0,
 		author is 'Paulo Moura',
-		date is 2021-01-02,
+		date is 2021-01-24,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
 			'Prolog module related types (when the backend compiler supports modules)' - '``module``, ``module_identifier``, ``qualified_callable``',
 			'Prolog base types' - '``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``',
-			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``',
+			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``',
 			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float``, ``probability``',
 			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``',
@@ -171,6 +171,7 @@
 	arbitrary(char(_CharSet)).
 	arbitrary(order).
 	arbitrary(non_empty_atom).
+	arbitrary(non_quoted_atom).
 	arbitrary(atom(_CharSet)).
 	arbitrary(atom(_CharSet, _Length)).
 	arbitrary(non_empty_atom(_CharSet)).
@@ -370,6 +371,11 @@
 	arbitrary(non_empty_atom, Arbitrary) :-
 		arbitrary(character_code(ascii_printable), Code),
 		arbitrary(list(character_code(ascii_printable)), Codes),
+		atom_codes(Arbitrary, [Code| Codes]).
+
+	arbitrary(non_quoted_atom, Arbitrary) :-
+		between(97, 122, Code),
+		arbitrary(list(character_code(ascii_identifier)), Codes),
 		atom_codes(Arbitrary, [Code| Codes]).
 
 	arbitrary(atom(CharSet), Arbitrary) :-
