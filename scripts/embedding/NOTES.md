@@ -51,12 +51,14 @@ settings file accessible on a computer where the embedded application
 is run to disturb it). 
 
 To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
-environment variables, the sample scripts allow expansion of library
-aliases paths in the paths and settings files. If for some reason
-this option is not desirable, the embedded application or saved state
-should be run in a process that sets (possibly just for itself) the
-`LOGTALKHOME` and `LOGTALKUSER` environment variables to the values
-used during the pre-compilation of the Logtalk resources. For example,
-in a POSIX system, you can use something like:
+environment variables, the sample scripts support an option for
+expanding library aliases paths in the paths and settings files. This
+option also allows (in general) the safe inclusion of the application
+loader files. If for some reason this option is not desirable, the
+embedded application or saved state should be run in a process that
+sets (possibly just for itself) the `LOGTALKHOME` and `LOGTALKUSER`
+environment variables to the values used during the pre-compilation
+of the Logtalk resources. For example, in a POSIX system, you can
+use something like:
 
 	$ LOGTALKHOME=/usr/local/share/logtalk LOGTALKUSER=/home/user/logtalk ./saved_state
