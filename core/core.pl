@@ -19362,13 +19362,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	'$lgt_pp_defines_predicate_'(_, Name/Arity, _, _, _, _),
+	'$lgt_pp_defines_predicate_'(_, Name/Arity, _, _, Mode, _),
+	Mode \= compile(aux, _, _),
 	\+ '$lgt_pp_defines_non_terminal_'(Name, _, Arity),
 	\+ '$lgt_pp_public_'(Name, Arity, _, _),
 	\+ '$lgt_pp_protected_'(Name, Arity, _, _),
 	\+ '$lgt_pp_private_'(Name, Arity, _, _),
 	\+ '$lgt_pp_non_terminal_'(Name, _, Arity),
-	% defined local predicate
+	% user-defined local predicate
 	atom_chars(Name, Chars),
 	(	'$lgt_camel_case_name'(Chars),
 		Warning = camel_case_predicate_name(File, Line-Line, Type, Entity, Name/Arity)
@@ -19386,11 +19387,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
 	'$lgt_pp_defines_non_terminal_'(Name, Arity, ExtArity),
+	'$lgt_pp_defines_predicate_'(_, Name/ExtArity, _, _, Mode, _),
+	Mode \= compile(aux, _, _),
 	\+ '$lgt_pp_public_'(Name, ExtArity, _, _),
 	\+ '$lgt_pp_protected_'(Name, ExtArity, _, _),
 	\+ '$lgt_pp_private_'(Name, ExtArity, _, _),
 	\+ '$lgt_pp_non_terminal_'(Name, Arity, ExtArity),
-	% defined local non-terminal
+	% user-defined local non-terminal
 	atom_chars(Name, Chars),
 	(	'$lgt_camel_case_name'(Chars),
 		Warning = camel_case_non_terminal_name(File, Line-Line, Type, Entity, Name//Arity)
