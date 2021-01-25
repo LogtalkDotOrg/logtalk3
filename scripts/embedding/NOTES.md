@@ -21,6 +21,12 @@ This directory contains sample scripts for selected backend Prolog
 compilers for embedding Logtalk and Logtalk applications. See the
 `SCRIPT.txt` file for usage examples.
 
+If you're using Windows, a possible solution to run these scripts is
+to install either the
+[Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/)
+or [Git for Windows](https://gitforwindows.org). Both provide access
+to a Bash shell.
+
 These scripts allow pre-compilation of the Logtalk compiler/runtime
 and optionally of a Logtalk application. This is a common requirement
 for embedding, specially when deploying applications in read-only file

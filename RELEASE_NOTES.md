@@ -64,6 +64,8 @@ shorthand.
 
 * IMPROVED: Handbook glossary definition of "parameter variable".
 
+* IMPROVED: Documentation on using the embedding scripts.
+
 * FIXED: Overflow line the Event-driven programming chapter in the PDF version
 of the Handbook. Thanks to Jacinto Dávila for the bug report.
 
