@@ -135,6 +135,8 @@ for the bug report.
 
 * FIXED: Library alias for the `logs` example.
 
+* FIXED: Non-ASCII character in comment in the `dcgs/morse.lgt` source file.
+
 Contributions
 -------------
 

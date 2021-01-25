@@ -21,9 +21,9 @@
 :- object(morse).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2013-11-04,
+		date is 2021-01-25,
 		comment is 'Morse code decoder.'
 	]).
 
@@ -89,7 +89,7 @@
 	character('..--..',  '?').
 	character('.----.', '''').
 	character('-.-.--',  '!').
-%	character('— — — ·', '!').
+%	character('- - - .', '!').
 	character('-..-.',   '/').
 	character('-.--.',   '(').
 	character('-.--.-',  ')').
