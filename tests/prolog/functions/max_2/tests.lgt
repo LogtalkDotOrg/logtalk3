@@ -22,33 +22,32 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-11-8,
+		date is 2021-01-26,
 		comment is 'Unit tests for the ISO Prolog standard max/2 built-in function.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.8.4
 
-	succeeds(iso_max_2_01) :-
-		{X is max(2, 3)},
-		X == 3.
+	test(iso_max_2_01, true(X == 3)) :-
+		{X is max(2, 3)}.
 
-	succeeds(iso_max_2_02) :-
+	test(iso_max_2_02, true) :-
 		catch(
 			({X is max(2.0, 3), (X == 3; X == 3.0)}),
 			Error,
 			Error = error(evaluation_error(undefined), _)
 		).
 
-	succeeds(iso_max_2_03) :-
+	test(iso_max_2_03, true) :-
 		catch(
 			({X is max(2, 3.0), X == 3.0}),
 			Error,
 			Error = error(evaluation_error(undefined), _)
 		).
 
-	succeeds(iso_max_2_04) :-
+	test(iso_max_2_04, true) :-
 		catch(
 			({X is max(0, 0.0), (X == 0; X == 0.0)}),
 			Error,
@@ -57,46 +56,45 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_max_2_05) :-
-		{X is max(2.0, 3.0)},
-		X == 3.0.
+	test(lgt_max_2_05, true(X == 3.0)) :-
+		{X is max(2.0, 3.0)}.
 
-	throws(lgt_max_2_06, error(instantiation_error,_)) :-
+	test(lgt_max_2_06, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is max(2, N)}.
 
-	throws(lgt_max_2_07, error(instantiation_error,_)) :-
+	test(lgt_max_2_07, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is max(N, 3)}.
 
-	throws(lgt_max_2_08, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_max_2_08, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is max(2, Foo)}.
 
-	throws(lgt_max_2_09, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_max_2_09, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is max(Foo, 3)}.
 
-	throws(lgt_max_2_10, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_max_2_10, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is max(2, Foo)}.
 
-	throws(lgt_max_2_11, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_max_2_11, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is max(Foo, 3)}.
 
-	throws(lgt_max_2_12, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_max_2_12, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is max(2, Foo)}.
 
-	throws(lgt_max_2_13, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_max_2_13, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is max(Foo, 3)}.

@@ -165,6 +165,8 @@ Tests
 
 * ADDED: Additional test for the `logtalk_library_path/2` built-in predicate.
 
+* UPDATED: Tests for most of the arithmetic functions to use assertions.
+
 * FIXED: Warnings with the new `disjunctions` flag for the `set_logtalk_flag/2`
 directive and the `goal_expansion/2` method tests.
 

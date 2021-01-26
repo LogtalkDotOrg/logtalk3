@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-01-27,
+		date is 2021-01-26,
 		comment is 'Unit tests for the de facto standard e/0 built-in evaluable functor.'
 	]).
 
@@ -32,8 +32,7 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
-	succeeds(lgt_e_0_01) :-
-		{X is e},
-		X =~= 2.7182818284590451.
+	test(lgt_e_0_01, true(X =~= 2.7182818284590451)) :-
+		{X is e}.
 
 :- end_object.

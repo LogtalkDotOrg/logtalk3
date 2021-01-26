@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2021-01-26,
 		comment is 'Unit tests for the ISO Prolog standard pi/0 built-in evaluable functor.'
 	]).
 
@@ -34,8 +34,7 @@
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.15.4
 
-	succeeds(iso_pi_0_01) :-
-		{X is pi},
-		X =~= 3.1415927.
+	test(iso_pi_0_01, true(X =~= 3.1415927)) :-
+		{X is pi}.
 
 :- end_object.
