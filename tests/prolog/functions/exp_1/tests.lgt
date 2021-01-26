@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2021-01-26,
 		comment is 'Unit tests for the ISO Prolog standard exp/1 built-in function.'
 	]).
 
@@ -72,6 +72,11 @@
 		foo(2, Foo),
 		{_X is exp(Foo)}.
 
+	throws(lgt_exp_1_08, error(evaluation_error(float_overflow),_)) :-
+		% try to delay the error to runtime
+		large(Number),
+		{_X is exp(Number)}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -79,5 +84,7 @@
 	foo(0, foo).
 	foo(1, foo(1)).
 	foo(2, foo(1,2)).
+
+	large(123456789).
 
 :- end_object.

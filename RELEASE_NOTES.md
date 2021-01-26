@@ -156,6 +156,8 @@ Contributions
 Tests
 -----
 
+* ADDED: Additional test for the de Prolog standard function `exp/1`.
+
 * ADDED: Additional tests for the de facto standard functions `log/2` and
 `log10/1`.
 
