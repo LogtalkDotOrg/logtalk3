@@ -161,6 +161,8 @@ Tests
 * ADDED: Additional tests for the de facto standard functions `log/2` and
 `log10/1`.
 
+* ADDED: Tests for the de facto standard hyperbolic functions.
+
 * ADDED: Additional test for the `logtalk_library_path/2` built-in predicate.
 
 * FIXED: Warnings with the new `disjunctions` flag for the `set_logtalk_flag/2`
