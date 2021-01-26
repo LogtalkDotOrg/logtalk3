@@ -27,11 +27,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Lint check for clauses whose body is a disjunction. Controlled by a
-new flag, `disjunctions`, with a default value of `warning`.
+* ADDED: Lint check for clauses whose body is a disjunction as per coding
+guidelines. Controlled by a new flag, `disjunctions`, with a default value
+of `warning`.
 
 * UPDATED: Lint check for entity, predicate, and variable names to also check
-for digits in the middle of a name.
+for digits in the middle of a name as per coding guidelines.
 
 Prolog adapter and integration files
 ------------------------------------

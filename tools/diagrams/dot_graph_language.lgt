@@ -22,9 +22,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 3:3:1,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2021-01-20,
+		date is 2021-01-26,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -332,20 +332,18 @@
 	% provide in a usable form
 	write_escaped_term(Stream, Term) :-
 		write_to_chars(Term, Chars),
-		escape_chars(Chars, EscapedChars),
-		atom_chars(Atom, EscapedChars),
-		write(Stream, Atom).
+		write_escaped_chars(Chars, Stream).
 
-	escape_chars([], []).
-	escape_chars([Char| Chars], EscapedChars) :-
+	write_escaped_chars([], _).
+	write_escaped_chars([Char| Chars], Stream) :-
 		(	Char == ('>') ->
-			EscapedChars = ['&','g','t',';'| RestEscapedChars]
+			write(Stream, '&gt;')
 		;	Char == ('<') ->
-			EscapedChars = ['&','l','t',';'| RestEscapedChars]
+			write(Stream, '&lt;')
 		;	Char == ('&') ->
-			EscapedChars = ['&','a','m','p',';'| RestEscapedChars]
-		;	EscapedChars = [Char| RestEscapedChars]
+			write(Stream, '&amp;')
+		;	put_char(Stream, Char)
 		),
-		escape_chars(Chars, RestEscapedChars).
+		write_escaped_chars(Chars, Stream).
 
 :- end_object.
