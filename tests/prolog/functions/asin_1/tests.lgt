@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2021-01-26,
 		comment is 'Unit tests for the ISO Prolog standard asin/1 built-in function.'
 	]).
 
@@ -34,35 +34,33 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.11.4
 
-	succeeds(iso_asin_1_01) :-
-		{X is asin(0.5)},
-		X =~= 0.523599.
+	test(iso_asin_1_01, true(X =~= 0.5235988)) :-
+		{X is asin(0.5)}.
 
-	succeeds(iso_asin_1_02) :-
-		{X is 2*asin(1)},
-		X =~= 3.1415927.
+	test(iso_asin_1_02, true(X =~= 3.1415927)) :-
+		{X is 2*asin(1)}.
 
-	throws(iso_asin_1_03, error(evaluation_error(undefined),_)) :-
+	test(iso_asin_1_03, error(evaluation_error(undefined))) :-
 		{_X is asin(2)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_asin_1_04, error(instantiation_error,_)) :-
+	test(lgt_asin_1_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{_X is asin(X)}.
 
-	throws(lgt_asin_1_05, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_asin_1_05, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is asin(Foo)}.
 
-	throws(lgt_asin_1_06, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_asin_1_06, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is asin(Foo)}.
 
-	throws(lgt_asin_1_07, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_asin_1_07, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is asin(Foo)}.

@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2021-01-26,
 		comment is 'Unit tests for the ISO Prolog standard acos/1 built-in function.'
 	]).
 
@@ -34,35 +34,33 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.12.4
 
-	succeeds(iso_acos_1_01) :-
-		{X is acos(-1)},
-		X =~= 3.1415927.
+	test(iso_acos_1_01, true(X =~= 3.1415927)) :-
+		{X is acos(-1)}.
 
-	succeeds(iso_acos_1_02) :-
-		{X is acos(0.5)},
-		X =~= 1.047197.
+	test(iso_acos_1_02, true(X =~= 1.0471976)) :-
+		{X is acos(0.5)}.
 
-	throws(iso_acos_1_03, error(evaluation_error(undefined),_)) :-
+	test(iso_acos_1_03, error(evaluation_error(undefined))) :-
 		{_X is acos(1.5)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_acos_1_04, error(instantiation_error,_)) :-
+	test(lgt_acos_1_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{_X is acos(X)}.
 
-	throws(lgt_acos_1_05, error(type_error(evaluable,foo/0),_)) :-
+	test(lgt_acos_1_05, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is acos(Foo)}.
 
-	throws(lgt_acos_1_06, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_acos_1_06, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is acos(Foo)}.
 
-	throws(lgt_acos_1_07, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_acos_1_07, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is acos(Foo)}.

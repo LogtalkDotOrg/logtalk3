@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-04-05,
+		date is 2021-01-26,
 		comment is 'Unit tests for the ISO Prolog standard cos/1 built-in function.'
 	]).
 
@@ -32,42 +32,35 @@
 		op(700, xfx, '=~='), '=~='/2
 	]).
 
-	:- discontiguous([
-		succeeds/1, throws/2
-	]).
-
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.3.4
 
-	succeeds(iso_cos_1_01) :-
-		{X is cos(0.0)},
-		X == 1.0.
+	test(iso_cos_1_01, true(X == 1.0)) :-
+		{X is cos(0.0)}.
 
-	throws(iso_cos_1_02, error(instantiation_error,_)) :-
+	test(iso_cos_1_02, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is cos(N)}.
 
-	succeeds(iso_cos_1_03) :-
-		{X is cos(0)},
-		X == 1.0.
+	test(iso_cos_1_03, true(X == 1.0)) :-
+		{X is cos(0)}.
 
-	throws(iso_cos_1_04, error(type_error(evaluable,foo/0),_)) :-
+	test(iso_cos_1_04, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is cos(Foo)}.
 
-	succeeds(iso_cos_1_05) :-
-		{PI is atan(1.0)*4, X is cos(PI/2.0)},
-		X =~= 0, PI =~= 3.14159.
+	test(iso_cos_1_05, true(X =~= 0.0)) :-
+		{PI is atan(1.0)*4, X is cos(PI/2.0)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_cos_1_06, error(type_error(evaluable,foo/1),_)) :-
+	test(lgt_cos_1_06, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is cos(Foo)}.
 
-	throws(lgt_cos_1_07, error(type_error(evaluable,foo/2),_)) :-
+	test(lgt_cos_1_07, error(type_error(evaluable,foo/2))) :-
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is cos(Foo)}.
