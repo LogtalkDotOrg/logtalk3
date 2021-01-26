@@ -47,6 +47,10 @@ too buggy to be usable.
 
 * UPDATED: Trealla ProLog support and minimum required version to 1.6.0.
 
+* FIXED: The SWI-Prolog and YAP adapter files to not optimize top-level
+interpreter message-sending goals when the object receiving the message
+is compiled in debug mode.
+
 Documentation
 -------------
 

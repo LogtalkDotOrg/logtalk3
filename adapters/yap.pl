@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for YAP Prolog 6.3.4 and later versions
-%  Last updated on January 2, 2021
+%  Last updated on January 26, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -957,6 +957,9 @@ user:goal_expansion(phrase(Rule, Input), ExpandedGoal) :-
 user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 	callable(Object),
 	callable(Message),
+	% check that the object is not compiled in debug mode
+	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, Flags),
+	Flags /\ 512 =\= 512,
 	% find out in which module Logtalk was loaded (usually, "user")
 	'$lgt_user_module_qualification'(xx, QualifiedGoal),
 	QualifiedGoal = ':'(UserModule, xx),
