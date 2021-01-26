@@ -22,9 +22,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:8:0,
+		version is 4:9:0,
 		author is 'Paulo Moura',
-		date is 2021-01-03,
+		date is 2021-01-26,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -42,6 +42,9 @@
 
 	:- private(quasi_skipping_/0).
 	:- dynamic(quasi_skipping_/0).
+
+	:- private(leaping_/1).
+	:- dynamic(leaping_/1).
 
 	:- private(spying_line_number_/2).
 	:- dynamic(spying_line_number_/2).
@@ -106,6 +109,7 @@
 		(	debugging_ ->
 			retractall(debugging_),
 			retractall(tracing_),
+			retractall(leaping_(_)),
 			print_message(comment, debugger, debugger_switched_off)
 		;	print_message(comment, debugger, debugger_off)
 		).
@@ -116,6 +120,7 @@
 		;	assertz(tracing_),
 			retractall(debugging_),
 			assertz(debugging_),
+			retractall(leaping_(_)),
 			reset_invocation_number(_),
 			print_message(comment, debugger, debugger_switched_on_tracing)
 		).
@@ -124,6 +129,7 @@
 		(	tracing_ ->
 			retractall(tracing_),
 			retractall(debugging_),
+			retractall(leaping_(_)),
 			print_message(comment, debugger, debugger_switched_off)
 		;	print_message(comment, debugger, debugger_off)
 		).
@@ -338,15 +344,18 @@
 	leashing(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
 		(	spying_port_code(Port, Goal, ExCtx, Code) ->
+			retractall(leaping_(_)),
 			retractall(tracing_),
 			assertz(tracing_)
 		;	tracing_ ->
 			Code = ' '
 		;	retract(jump_to_invocation_number_(N)) ->
+			retractall(leaping_(_)),
 			assertz(tracing_),
 			Code = ' '
 		;	retract(zap_to_port_(PortUserName)) ->
 			retractall(zap_to_port_(_)),
+			retractall(leaping_(_)),
 			assertz(tracing_),
 			Code = ' '
 		;	fail
@@ -409,6 +418,18 @@
 		).
 	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		reset_invocation_number(_),
+		(	leaping_(tracing) ->
+			retractall(leaping_(_)),
+			retractall(tracing_),
+			assertz(tracing_),
+			retractall(debugging_),
+			assertz(debugging_)
+		;	leaping_(debugging) ->
+			retractall(leaping_(_)),
+			retractall(debugging_),
+			assertz(debugging_)
+		;	true
+		),
 		debug_handler(goal(Goal, TGoal), ExCtx).
 	debug_handler(goal(Goal, TGoal), ExCtx) :-
 		inc_invocation_number(N),
@@ -579,7 +600,13 @@
 	do_port_option(c, _, _, _, _, _, _, true).
 
 	do_port_option(l, _, _, _, _, _, _, true) :-
-		retractall(tracing_).
+		(	tracing_ ->
+			retractall(tracing_),
+			retractall(leaping_(_)),
+			assertz(leaping_(tracing))
+		;	retractall(leaping_(_)),
+			assertz(leaping_(debugging))
+		).
 
 	do_port_option(s, rule(_,_,_,_), _, _, _, _, _, true) :-
 		!,
@@ -639,13 +666,6 @@
 			Result = unify
 		;	Result = fail
 		).
-
-	do_port_option(t, _, _, _, _, _, _, _) :-
-		(	tracing_ ->
-			true
-		;	assertz(tracing_)
-		),
-		fail.
 
 	do_port_option(n, _, _, _, _, _, _, true) :-
 		nodebug.

@@ -123,6 +123,9 @@ test sets.
 
 * FIXED: Warnings with the new `disjunctions` flag for the `code_metrics` tool.
 
+* FIXED: The `debugger` tool handling of the leap option to restore the current
+trace or debug mode if necessary for the next top-level query.
+
 Examples
 --------
 

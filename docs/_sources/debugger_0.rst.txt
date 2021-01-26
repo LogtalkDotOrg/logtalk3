@@ -11,8 +11,8 @@
 Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.
 
 | **Author:** Paulo Moura
-| **Version:** 4:8:0
-| **Date:** 2021-01-03
+| **Version:** 4:9:0
+| **Date:** 2021-01-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -106,6 +106,22 @@ Private predicates
 
 ``quasi_skipping_/0``
 ^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="leaping_/1"> </div>
+
+.. index:: leaping_/1
+.. _debugger/0::leaping_/1:
+
+``leaping_/1``
+^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``
