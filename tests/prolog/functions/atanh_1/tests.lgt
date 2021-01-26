@@ -57,6 +57,22 @@
 		foo(2, Foo),
 		{_X is atanh(Foo)}.
 
+	test(lgt_atanh_1_06, error(evaluation_error(undefined))) :-
+		% try to delay the error to runtime
+		{_X is atanh(-1.1)}.
+
+	test(lgt_atanh_1_07, error(evaluation_error(undefined))) :-
+		% try to delay the error to runtime
+		{_X is atanh(1.1)}.
+
+	test(lgt_atanh_1_08, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+		% try to delay the error to runtime
+		{_X is atanh(-1.0)}.
+
+	test(lgt_atanh_1_09, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+		% try to delay the error to runtime
+		{_X is atanh(1.0)}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).

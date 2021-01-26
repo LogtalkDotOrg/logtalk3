@@ -57,6 +57,10 @@
 		foo(2, Foo),
 		{_X is acosh(Foo)}.
 
+	test(lgt_acosh_1_06, error(evaluation_error(undefined))) :-
+		% try to delay the error to runtime
+		{_X is acosh(0.5)}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).

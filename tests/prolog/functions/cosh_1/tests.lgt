@@ -57,6 +57,11 @@
 		foo(2, Foo),
 		{_X is cosh(Foo)}.
 
+	test(lgt_cosh_1_06, error(evaluation_error(float_overflow))) :-
+		% try to delay the error to runtime
+		large(Number),
+		{_X is cosh(Number)}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -64,5 +69,7 @@
 	foo(0, foo).
 	foo(1, foo(1)).
 	foo(2, foo(1,2)).
+
+	large(4444).
 
 :- end_object.
