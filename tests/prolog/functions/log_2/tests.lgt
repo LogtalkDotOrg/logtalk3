@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-07-24,
+		date is 2021-01-26,
 		comment is 'Unit tests for the de facto standard log/2 built-in function.'
 	]).
 
@@ -83,6 +83,20 @@
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is log(Foo, 10)}.
+
+	test(lgt_log_2_12, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+		{_X is log(0, 10)}.
+
+	test(lgt_log_2_13, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+		{_X is log(10, 0)}.
+
+	% many Prolog systems don't throw en error but return NaN
+	test(lgt_log_2_14, error(evaluation_error(undefined))) :-
+		{_X is log(-1, 10)}.
+
+	% many Prolog systems don't throw en error but return NaN
+	test(lgt_log_2_15, error(evaluation_error(undefined))) :-
+		{_X is log(10, -1)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
