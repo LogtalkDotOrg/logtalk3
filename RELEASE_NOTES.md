@@ -96,6 +96,9 @@ ProLog.
 * IMPROVED: The `gensym` and `random` library to only declare predicates as
 synchronized when compiled with a backend that supports threads.
 
+* FIXED: The `types` library check for a public object predicate to explicitly
+check that the object exists.
+
 Tools
 -----
 
