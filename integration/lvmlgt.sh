@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for LVM
-##   Last updated on December 18, 2020
+##   Last updated on January 27, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -92,8 +92,16 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-if [ -e "$(command -v rlwrap)" ] ; then
-	exec rlwrap lvm -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+if [ -e "$(command -v lvmpl)" ] ; then
+	if [ -e "$(command -v rlwrap)" ] ; then
+		exec rlwrap lvmpl -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	else
+		exec lvmpl -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	fi
 else
-	exec lvm -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	if [ -e "$(command -v rlwrap)" ] ; then
+		exec rlwrap lvm -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	else
+		exec lvm -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	fi
 fi
