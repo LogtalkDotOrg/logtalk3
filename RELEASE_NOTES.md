@@ -156,6 +156,13 @@ Contributions
 * FIXED: Warnings with the new `disjunctions` flag for the `verdi_neruda` and
 `xml_parser` contributions.
 
+Ports
+-----
+
+* IMPROVED: Tests for the ToyCHR port.
+
+* FIXED: Copyright information on the ToyCHR documentation.
+
 Tests
 -----
 

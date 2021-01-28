@@ -25,20 +25,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-10-10,
+		date is 2021-01-28,
 		comment is 'Unit tests for the "toychr" port.'
 	]).
 
 	cover(toychrdb).
 
-	test(gcd_01) :-
-		gcd::chr_is(GCD, (gcd(9), gcd(6))),
-		^^assertion(GCD == gcd(3)).
+	test(gcd_01, true(GCD == gcd(3))) :-
+		gcd::chr_is(GCD, (gcd(9), gcd(6))).
 
-	test(leq_01) :-
-		leq::chr_is(Result, (leq(X,Y), leq(Y,Z))),
-		^^assertion(variant(Result, (leq(X,Z), leq(Y,Z), leq(X,Y)))).
+	test(leq_01, variant(Result, (leq(X,Z), leq(Y,Z), leq(X,Y)))) :-
+		leq::chr_is(Result, (leq(X,Y), leq(Y,Z))).
 
 :- end_object.
