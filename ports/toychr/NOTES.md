@@ -26,8 +26,7 @@ To load this port and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains a Logtalk port of ToyCHR, a reference implementation
-of Constraint Handling Rules (CHR) available
-from:
+of Constraint Handling Rules (CHR) available from:
 
 	https://www.comp.nus.edu.sg/~gregory/toychr/
 

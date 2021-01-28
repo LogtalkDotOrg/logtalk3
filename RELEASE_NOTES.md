@@ -112,6 +112,9 @@ Tools
 when using the `-f` option so that tools that process and display test results
 may also be able to display broken, timed out, and crashed test sets.
 
+* IMPROVED: More informative `lgtunit` tool report of failed `variant/2` and
+`subsumes/2` test outcomes.
+
 * UPDATED: The `logtalk_tester` script to support the `-f xunit_net_v2` option.
 
 * UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
