@@ -2,7 +2,7 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %
-%  Copyright 2019 Paulo Moura
+%  Copyright 2021 Paulo Moura
 %
 %  This program is free software; you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -21,37 +21,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% start by loading the port:
-
-| ?- logtalk_load(toychr(loader)).
-...
+:- set_logtalk_flag(hook, toychrdb).
 
 
-% load all the examples:
+:- object(fib,
+	extends(toychrdb)).
 
-| ?- logtalk_load(toychr('examples/loader')).
-...
+	fib(N,M1), fib(N,M2) <=> M1 = M2, fib(N,M1).
 
+	fib(0,M) ==> M = 1.
+	fib(1,M) ==> M = 1.
+	fib(N,M) ==> N > 1 | N1 is N-1, fib(N1,M1), N2 is N-2, fib(N2,M2), M is M1 + M2.
 
-% try some of the examples:
-
-| ?- gcd::chr_is(GCD, (gcd(9), gcd(6))).
-
-GCD = gcd(3)
-yes
-
-| ?- leq::chr_is(Result, (leq(X,Y), leq(Y,Z))).
-
-Result = leq(X,Z), leq(Y,Z), leq(X,Y)
-yes
-
-| ?- fib::chr_is(Result, fib(5,N)).
-
-Result = (fib(1, 1), fib(0, 1), fib(2, 2), fib(3, 3), fib(4, 5), fib(5, 8)),
-N = 8
-yes
-
-| ?- primes::chr_is(Result, candidate(11)).
-
-Result =  (prime(2), prime(3), prime(5), prime(7), prime(11))
-yes
+:- end_object.

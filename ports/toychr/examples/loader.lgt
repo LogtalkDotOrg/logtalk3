@@ -2,7 +2,7 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %
-%  Copyright 2019 Paulo Moura
+%  Copyright 2021 Paulo Moura
 %
 %  This program is free software; you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -23,8 +23,10 @@
 
 :- initialization((
 	logtalk_load([
+		fib,
 		gcd,
-		leq
+		leq,
+		primes
 	], [
 		optimize(on)
 	])

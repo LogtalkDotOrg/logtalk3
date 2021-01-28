@@ -39,4 +39,10 @@
 	test(leq_01, variant(Result, (leq(X,Z), leq(Y,Z), leq(X,Y)))) :-
 		leq::chr_is(Result, (leq(X,Y), leq(Y,Z))).
 
+	test(fib_01, true(N == 8)) :-
+		fib::chr_is(_, fib(5,N)).
+
+	test(primes_01, true(Result == (prime(2), prime(3), prime(5), prime(7), prime(11)))) :-
+		primes::chr_is(Result, candidate(11)).
+
 :- end_object.

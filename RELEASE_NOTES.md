@@ -159,6 +159,8 @@ Contributions
 Ports
 -----
 
+* ADDED: Fibonacci sequence and prime numbers examples to the ToyCHR port.
+
 * IMPROVED: Tests for the ToyCHR port.
 
 * FIXED: Copyright information on the ToyCHR documentation.
