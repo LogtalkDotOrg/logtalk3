@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 guidelines. Controlled by a new flag, `disjunctions`, with a default value
 of `warning`.
 
+* IMPROVED: Startup message when the backend version is older than the
+recommended version.
+
 * UPDATED: Lint check for entity, predicate, and variable names to also check
 for digits in the middle of a name as per coding guidelines.
 

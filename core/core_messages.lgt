@@ -21,9 +21,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:102:2,
+		version is 1:103:0,
 		author is 'Paulo Moura',
-		date is 2021-01-19,
+		date is 2021-01-29,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -231,7 +231,7 @@
 	message_tokens(possibly_incompatible_prolog_version(v(Major,Minor,Patch), v(Major0,Minor0,Patch0))) -->
 		['Possibly incompatible backend Prolog compiler version detected!'-[], nl,
 		 'Running Prolog compiler version: ~d.~d.~d'-[Major, Minor, Patch], nl,
-		 'Advised Prolog compiler version: ~d.~d.~d'-[Major0, Minor0, Patch0], nl
+		 'Advised Prolog compiler version: ~d.~d.~d (or later version)'-[Major0, Minor0, Patch0], nl
 		].
 
 	message_tokens(banner) -->
