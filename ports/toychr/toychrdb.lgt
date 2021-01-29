@@ -110,9 +110,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2020-09-03,
+		date is 2021-01-29,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
@@ -576,11 +576,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		(	chr_option_allow_deep_guards ->
 			parse_bodies(G,Gs),
 			state(Gs,State),
-			(	chr_next_state(L) ->
+			(	::chr_next_state(L) ->
 				clear_next,
 				(	derivation(State,P,_) ->
-					assertz(chr_next_state(L))
-				;	assertz(chr_next_state(L)),
+					::assertz(chr_next_state(L))
+				;	::assertz(chr_next_state(L)),
 					fail
 				)
 			;	derivation(State,P,_)

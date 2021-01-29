@@ -168,6 +168,8 @@ Ports
 
 * FIXED: Copyright information on the ToyCHR documentation.
 
+* FIXED: Bug in the ToyCHR port `test_guard/2` predicate.
+
 Tests
 -----
 
