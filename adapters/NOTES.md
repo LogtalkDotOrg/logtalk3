@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on January 19, 2021
+Last updated on January 29, 2021
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -232,7 +232,7 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 1.0.0 and later versions
+LVM 1.2.0 and later versions
 ----------------------------
 
 	lvm.pl
