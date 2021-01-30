@@ -107,6 +107,9 @@ check that the object exists.
 Tools
 -----
 
+* CHANGED: The specification and implementation of the `lgtunit::assertion/1-2`
+predicates to prevent further instantiation of the assertion goal argument.
+
 * ADDED: Support to the `debugger` tool for specifying non-terminal spy points
 directly.
 
@@ -139,6 +142,10 @@ test sets.
 
 * FIXED: The `debugger` tool handling of the leap option to restore the current
 trace or debug mode if necessary for the next top-level query.
+
+* FIXED: The `assertions` tool to prevent calls to the `assertion/1-2`
+predicates from further instantiating the assertion argument as per
+documentation.
 
 Examples
 --------

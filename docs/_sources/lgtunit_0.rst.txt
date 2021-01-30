@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 8:16:0
-| **Date:** 2020-12-28
+| **Version:** 8:16:1
+| **Date:** 2021-01-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -231,7 +231,7 @@ True if the assertion goal succeeds. Throws an error using the assertion goal as
 | **Meta-predicate template:**
 |    ``assertion(::)``
 | **Mode and number of proofs:**
-|    ``assertion(+callable)`` - ``one``
+|    ``assertion(@callable)`` - ``one``
 
 | **Exceptions:**
 |    Assertion goal fails:
@@ -262,7 +262,7 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 | **Meta-predicate template:**
 |    ``assertion(*,0)``
 | **Mode and number of proofs:**
-|    ``assertion(+nonvar,+callable)`` - ``one``
+|    ``assertion(+nonvar,@callable)`` - ``one``
 
 | **Exceptions:**
 |    Assertion goal fails:

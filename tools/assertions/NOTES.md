@@ -113,9 +113,9 @@ the `logtalk::message_hook/4` multifile predicate. For example:
 Converting assertion failures into errors
 -----------------------------------------
 
-If you want an assertion failure to result in a runtime error, you can
-intercept the assertion failure messages, optionally still printing them,
-and throw an error. For example:
+If you want an assertion failure to result in a failure or a runtime error,
+you can intercept the assertion failure messages, optionally still printing
+them, and throw an error. For example:
 
 	:- category(assertions_failures_to_errors).
 	

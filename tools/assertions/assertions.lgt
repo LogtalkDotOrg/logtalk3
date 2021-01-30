@@ -22,9 +22,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:2:1,
 		author is 'Paulo Moura',
-		date is 2019-06-17,
+		date is 2021-01-30,
 		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions (``production`` mode) or expanding them with file context information (``debug`` mode).',
 		parnames is ['Mode']
 	]).
@@ -52,20 +52,14 @@
 	]).
 
 	assertion(Goal) :-
-		(	catch(Goal, Error, true) ->
-			(	var(Error) ->
-				print_message(silent, assertions, assertion_success(Goal))
-			;	print_message(error, assertions, assertion_error(Goal, Error))
-			)
+		(	\+ \+ catch(Goal, Error, print_message(error, assertions, assertion_error(Goal, Error))) ->
+			print_message(silent, assertions, assertion_success(Goal))
 		;	print_message(error, assertions, assertion_failure(Goal))
 		).
 
 	assertion(Context, Goal) :-
-		(	catch(Goal, Error, true) ->
-			(	var(Error) ->
-				print_message(silent, assertions, assertion_success(Context, Goal))
-			;	print_message(error, assertions, assertion_error(Context, Goal, Error))
-			)
+		(	\+ \+ catch(Goal, Error, print_message(error, assertions, assertion_error(Context, Goal, Error))) ->
+			print_message(silent, assertions, assertion_success(Context, Goal))
 		;	print_message(error, assertions, assertion_failure(Context, Goal))
 		).
 

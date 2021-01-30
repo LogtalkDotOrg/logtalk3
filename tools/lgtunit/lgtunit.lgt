@@ -26,9 +26,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:16:0,
+		version is 8:16:1,
 		author is 'Paulo Moura',
-		date is 2020-12-28,
+		date is 2021-01-30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -90,7 +90,7 @@
 
 	:- public(assertion/1).
 	:- meta_predicate(assertion('::')).
-	:- mode(assertion(+callable), one).
+	:- mode(assertion(@callable), one).
 	:- info(assertion/1, [
 		comment is 'True if the assertion goal succeeds. Throws an error using the assertion goal as argument if the assertion goal throws an error or fails.',
 		argnames is ['Assertion'],
@@ -102,7 +102,7 @@
 
 	:- public(assertion/2).
 	:- meta_predicate(assertion(*, 0)).
-	:- mode(assertion(+nonvar, +callable), one).
+	:- mode(assertion(+nonvar, @callable), one).
 	:- info(assertion/2, [
 		comment is 'True if the assertion goal succeeds. Throws an error using the description as argument if the assertion goal throws an error or fails. The description argument helps to distinguish between different assertions in the same test body.',
 		argnames is ['Description', 'Assertion'],
@@ -1639,11 +1639,8 @@
 		assertion(Goal, Goal).
 
 	assertion(Assertion, Goal) :-
-		(	catch(Goal, Error, true) ->
-			(	var(Error) ->
-				true
-			;	throw(assertion_error(Assertion, Error))
-			)
+		(	\+ \+ catch(Goal, Error, throw(assertion_error(Assertion, Error))) ->
+			true
 		;	throw(assertion_failure(Assertion))
 		).
 

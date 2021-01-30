@@ -18,13 +18,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% test data
+a(1).
+
+
 :- object(tests_utils,
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2020-04-29,
+		date is 2021-01-30,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -353,6 +357,12 @@
 		Assertion = foobar(1),
 		assertion(Assertion).
 
+	succeeds(assertion_1_08) :-
+		% delay calling the assertion to runtime
+		Assertion = {a(X)},
+		assertion(Assertion),
+		var(X).
+
 	% assertion/2 tests
 
 	succeeds(assertion_2_01) :-
@@ -374,6 +384,12 @@
 		% delay calling the assertion to runtime
 		Assertion = foobar(1),
 		assertion(4, Assertion).
+
+	succeeds(assertion_2_05) :-
+		% delay calling the assertion to runtime
+		Assertion = {a(X)},
+		assertion(a/1, Assertion),
+		var(X).
 
 	% quick_check/3 tests
 

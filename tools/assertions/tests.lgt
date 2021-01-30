@@ -18,13 +18,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% test data
+a(1).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2019-03-07,
+		date is 2021-01-30,
 		comment is 'Unit tests for the "assertions" tool.'
 	]).
 
@@ -38,41 +42,49 @@
 
 	% assertion/1 tests
 
-	test(assertions_1) :-
+	test(assertions_1_01) :-
 		assertion(ground(x)),
 		2 is 1 + 1.
 
-	test(assertions_2) :-
+	test(assertions_1_02) :-
 		assertion(22 is 2 + 2),
 		2 is 1 + 1.
 
-	test(assertions_3) :-
+	test(assertions_1_03) :-
 		assertion(1),
+		2 is 1 + 1.
+
+	test(assertions_1_04, true(var(X))) :-
+		assertion({a(X)}),
 		2 is 1 + 1.
 
 	% assertion/2 tests
 
-	test(assertions_4) :-
-		assertion(assertions_4, ground(x)),
+	test(assertions_2_01) :-
+		assertion(assertions_2_01, ground(x)),
 		2 is 1 + 1.
 
-	test(assertions_5) :-
-		assertion(assertions_5, 22 is 2 + 2),
+	test(assertions_2_02) :-
+		assertion(assertions_2_02, 22 is 2 + 2),
 		2 is 1 + 1.
 
-	test(assertions_6) :-
-		assertion(assertions_6, 1),
+	test(assertions_2_03) :-
+		assertion(assertions_2_03, 1),
+		2 is 1 + 1.
+
+	test(assertions_2_04, true(var(X))) :-
+		assertion(assertions_1_04, {a(X)}),
 		2 is 1 + 1.
 
 	% goal_expansion/2 tests
 
-	test(assertions_7) :-
+	test(assertions_expansion_01) :-
 		source::p_1.
 
-	test(assertions_8) :-
+	test(assertions_expansion_02) :-
 		source::p_2.
 
-	test(assertions_9) :-
+	test(assertions_expansion_03) :-
 		source::p_3.
 
 	:- multifile(logtalk::message_hook/4).
@@ -85,9 +97,9 @@
 	message(assertion_failure(22 is 2+2), error).
 	message(assertion_error(1,error(type_error(callable,1),logtalk(call(1),_))), error).
 
-	message(assertion_success(assertions_4,ground(x)), silent).
-	message(assertion_failure(assertions_5,22 is 2+2), error).
-	message(assertion_error(assertions_6,1,error(type_error(callable,1),logtalk(call(1),_))), error).
+	message(assertion_success(assertions_2_01,ground(x)), silent).
+	message(assertion_failure(assertions_2_02,22 is 2+2), error).
+	message(assertion_error(assertions_2_03,1,error(type_error(callable,1),logtalk(call(1),_))), error).
 
 	message(assertion_success(Context,ground(x)), silent) :-
 		check_context(Context).
