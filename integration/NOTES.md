@@ -36,7 +36,7 @@ system path):
 * SICStus Prolog (4.1.0 or later):   `sicstuslgt`
 * SWI-Prolog (6.6.0 or later):       `swilgt`
 * Tau Prolog (0.3.0 or later):       `taulgt`
-* Trealla ProLog (1.6.0 or later):   `tplgt`      (experimental)
+* Trealla ProLog (1.6.8 or later):   `tplgt`      (experimental)
 * XSB (3.8.0 or later):              `xsblgt`     (first run may require `sudo`)
 * YAP (6.3.4 or later):              `yaplgt`
 
