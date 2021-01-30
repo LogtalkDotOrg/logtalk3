@@ -265,7 +265,12 @@
 		retractall(spying_predicate_(Functor, Arity, _)).
 
 	nospy_non_terminal(Functor//Arity) :-
-		retractall(spying_predicate_(Functor, _, Functor//Arity)).
+		retractall(spying_predicate_(Functor, _, Functor//Arity)),
+		(	integer(Arity) ->
+			ExtArity is Arity + 2,
+			retractall(spying_predicate_(Functor, ExtArity, _))
+		;	true
+		).
 
 	spy(Sender, This, Self, Goal) :-
 		asserta(spying_context_(Sender, This, Self, Goal)),
