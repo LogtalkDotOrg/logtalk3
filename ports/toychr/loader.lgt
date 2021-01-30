@@ -1,8 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%
-%  Copyright 2019 Paulo Moura
+%  Copyright 2020-2021 Paulo Moura <pmoura@logtalk.org>
 %
 %  This program is free software; you can redistribute it and/or modify
 %  it under the terms of the GNU General Public License as published by
@@ -23,6 +22,6 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
+	logtalk_load(basic_types(loader)),
 	logtalk_load(toychrdb, [optimize(on)])
 )).

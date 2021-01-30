@@ -22,12 +22,7 @@
 
 
 :- initialization((
-	logtalk_load([
-		fib,
-		gcd,
-		leq,
-		primes
-	], [
-		optimize(on)
-	])
+	logtalk_load(basic_types(loader)),
+	logtalk_load(sets(loader)),
+	logtalk_load([dom, fib, gcd, leq, primes], [optimize(on)])
 )).

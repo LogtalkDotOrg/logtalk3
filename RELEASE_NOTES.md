@@ -167,7 +167,8 @@ Contributions
 Ports
 -----
 
-* ADDED: Fibonacci sequence and prime numbers examples to the ToyCHR port.
+* ADDED: Fibonacci sequence, prime numbers, and finite domain constraint solver
+examples to the ToyCHR port.
 
 * IMPROVED: Tests for the ToyCHR port.
 

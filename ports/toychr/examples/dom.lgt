@@ -20,31 +20,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- set_logtalk_flag(hook, toychrdb).
 
-	:- info([
-		version is 1:1:0,
-		author is 'Paulo Moura',
-		date is 2021-01-30,
-		comment is 'Unit tests for the "toychr" port.'
-	]).
 
-	cover(toychrdb).
+:- object(dom,
+	extends(toychrdb)).
 
-	test(dom_01, true(N == 3)) :-
-		dom::chr_is(_, (dom(N, [1,2,3]), dom(N, [3,4,5]))).
-
-	test(gcd_01, true(GCD == gcd(3))) :-
-		gcd::chr_is(GCD, (gcd(9), gcd(6))).
-
-	test(leq_01, variant(Result, (leq(X,Z), leq(Y,Z), leq(X,Y)))) :-
-		leq::chr_is(Result, (leq(X,Y), leq(Y,Z))).
-
-	test(fib_01, true(N == 8)) :-
-		fib::chr_is(_, fib(5,N)).
-
-	test(primes_01, true(Result == (prime(2), prime(3), prime(5), prime(7), prime(11)))) :-
-		primes::chr_is(Result, candidate(11)).
+	dom(_, []) <=> fail.
+	dom(N, [M]) <=> N = M.
+	dom(N, Domain) <=>
+		nonvar(N) | list::memberchk(N, Domain).
+	dom(N, Domain1), dom(N, Domain2) <=>
+		sort(Domain1, Set1), sort(Domain2, Set2),
+		set::intersection(Set1, Set2, Set), dom(N, Set).
 
 :- end_object.
