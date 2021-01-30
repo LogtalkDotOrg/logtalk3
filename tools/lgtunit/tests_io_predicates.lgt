@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2019-11-27,
+		date is 2021-01-30,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -205,20 +205,17 @@
 
 	% closed_input_stream/2 tests
 
-	test(closed_input_stream_2_01, deterministic) :-
-		^^closed_input_stream(Handle, []),
-		ground(Handle).
+	test(closed_input_stream_2_01, deterministic(ground(Handle))) :-
+		^^closed_input_stream(Handle, []).
 
 	% closed_output_stream/2 tests
 
-	test(closed_output_stream_2_01, deterministic) :-
-		^^closed_output_stream(Handle, []),
-		ground(Handle).
+	test(closed_output_stream_2_01, deterministic(ground(Handle))) :-
+		^^closed_output_stream(Handle, []).
 
 	% stream_position/1 tests
 
-	test(stream_position_1_01, deterministic) :-
-		^^stream_position(Position),
-		ground(Position).
+	test(stream_position_1_01, deterministic(ground(Position))) :-
+		^^stream_position(Position).
 
 :- end_object.

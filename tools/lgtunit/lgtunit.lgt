@@ -26,7 +26,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:16:1,
+		version is 8:16:2,
 		author is 'Paulo Moura',
 		date is 2021-01-30,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -2687,12 +2687,25 @@
 		close(WriteStream),
 		os::delete_file(Path).
 
-	stream_position(Position) :-
-		os::absolute_file_name(temporary_file, Path),
-		open(Path, write, Stream),
-		stream_property(Stream, position(Position)),
-		close(Stream),
-		os::delete_file(Path).
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+
+		stream_position(Position) :-
+			os::absolute_file_name(temporary_file, Path),
+			open(Path, write, Stream),
+			stream_position(Stream, Position),
+			close(Stream),
+			os::delete_file(Path).
+
+	:- else.
+
+		stream_position(Position) :-
+			os::absolute_file_name(temporary_file, Path),
+			open(Path, write, Stream),
+			stream_property(Stream, position(Position)),
+			close(Stream),
+			os::delete_file(Path).
+
+	:- endif.
 
 	% auxiliary predicates
 

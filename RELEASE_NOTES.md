@@ -147,6 +147,9 @@ trace or debug mode if necessary for the next top-level query.
 predicates from further instantiating the assertion argument as per
 documentation.
 
+* FIXED: Implementation of the `lgtunit::stream_position/1` predicate for
+SICStus Prolog.
+
 Examples
 --------
 
