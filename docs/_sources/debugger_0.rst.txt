@@ -12,7 +12,7 @@ Command-line debugger based on an extended procedure box model supporting execut
 
 | **Author:** Paulo Moura
 | **Version:** 4:9:0
-| **Date:** 2021-01-26
+| **Date:** 2021-01-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -147,12 +147,12 @@ Private predicates
 
 .. raw:: html
 
-   <div id="spying_predicate_/2"> </div>
+   <div id="spying_predicate_/3"> </div>
 
-.. index:: spying_predicate_/2
-.. _debugger/0::spying_predicate_/2:
+.. index:: spying_predicate_/3
+.. _debugger/0::spying_predicate_/3:
 
-``spying_predicate_/2``
+``spying_predicate_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**

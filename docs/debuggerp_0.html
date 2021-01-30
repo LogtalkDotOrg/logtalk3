@@ -259,8 +259,8 @@
 <p>Debugger protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:2:0</div>
-<div class="line"><strong>Date:</strong> 2019-12-03</div>
+<div class="line"><strong>Version:</strong> 2:3:0</div>
+<div class="line"><strong>Date:</strong> 2021-01-30</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -281,6 +281,7 @@
 <div><ul class="simple">
 <li><p>Debugger help: Type the character <code class="docutils literal notranslate"><span class="pre">h</span></code> (condensed help) or the character <code class="docutils literal notranslate"><span class="pre">?</span></code> (extended help) at a leashed port.</p></li>
 <li><p>Predicate spy point: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor/Arity</span></code>.</p></li>
+<li><p>Non-terminal spy point: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor//Arity</span></code>.</p></li>
 <li><p>Line number spy point (aka breakpoint): Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
 <li><p>Leash port shorthands: <code class="docutils literal notranslate"><span class="pre">none</span></code> - <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">loose</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call]</span></code>, <code class="docutils literal notranslate"><span class="pre">half</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,redo]</span></code>, <code class="docutils literal notranslate"><span class="pre">tight</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,redo,fail,exception]</span></code>, and <code class="docutils literal notranslate"><span class="pre">full</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,exit,redo,fail,exception]</span></code>.</p></li>
 </ul>
@@ -445,7 +446,7 @@
 <div id="spy/1"> </div></div>
 <div class="section" id="spy-1">
 <span id="debuggerp-0-spy-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">spy/1</span></code></a><a class="headerlink" href="#spy-1" title="Permalink to this headline">¶</a></h3>
-<p>Sets a line number spy point, a predicate spy point, or a list of spy points. Fails if a spy point is invalid.</p>
+<p>Sets a line number spy point, a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -467,7 +468,7 @@
 <div id="spying/1"> </div></div>
 <div class="section" id="spying-1">
 <span id="debuggerp-0-spying-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">spying/1</span></code></a><a class="headerlink" href="#spying-1" title="Permalink to this headline">¶</a></h3>
-<p>Enumerates, by backtracking, all defined line number and predicate spy points.</p>
+<p>Enumerates, by backtracking, all defined line number, predicate, and non-terminal spy points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -530,7 +531,7 @@
 <div id="nospy/1"> </div></div>
 <div class="section" id="nospy-1">
 <span id="debuggerp-0-nospy-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">nospy/1</span></code></a><a class="headerlink" href="#nospy-1" title="Permalink to this headline">¶</a></h3>
-<p>Removes all matching line number spy points and predicate spy points.</p>
+<p>Removes all matching line number, predicate, and non-terminal spy points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -574,7 +575,7 @@
 <div id="nospyall/0"> </div></div>
 <div class="section" id="nospyall-0">
 <span id="debuggerp-0-nospyall-0"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code></a><a class="headerlink" href="#nospyall-0" title="Permalink to this headline">¶</a></h3>
-<p>Removes all line number, predicate, and context spy points.</p>
+<p>Removes all line number, predicate, non-terminal, and context spy points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

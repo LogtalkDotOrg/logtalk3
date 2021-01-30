@@ -107,6 +107,9 @@ check that the object exists.
 Tools
 -----
 
+* ADDED: Support to the `debugger` tool for specifying non-terminal spy points
+directly.
+
 * ADDED: Shell script for generating Allure reports (`logtalk_allure_report`).
 
 * ADDED: New `lgtunit` documentation section on generating Allure reports.

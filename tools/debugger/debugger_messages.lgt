@@ -21,9 +21,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-02,
+		date is 2021-01-30,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -123,19 +123,19 @@
 		['     All specified spy points added.'-[], nl].
 
 	message_tokens(matching_spy_points_removed) -->
-		['     All matching line number and predicate spy points removed.'-[], nl].
+		['     All matching line number, predicate, and non-terminal spy points removed.'-[], nl].
 
 	% predicate spy points
 
 	message_tokens(predicate_spy_points(SpyPoints)) -->
-		['     Defined predicate spy points (Functor/Arity):'-[], nl],
+		['     Defined predicate and non-terminal spy points:'-[], nl],
 		spy_points(SpyPoints).
 
 	message_tokens(all_predicate_spy_points_removed) -->
 		['     All predicate spy points removed.'-[], nl].
 
 	message_tokens(no_predicate_spy_points_defined) -->
-		['     No predicate spy points are defined.'-[], nl].
+		['     No predicate and non-terminal spy points are defined.'-[], nl].
 
 	message_tokens(predicate_spy_point_added) -->
 		['     Predicate spy point added.'-[], nl].
@@ -372,6 +372,8 @@
 		['        ~q'-[GroundEntity-Line], nl].
 	spy_point(Functor/Arity) -->
 		['        ~q'-[Functor/Arity], nl].
+	spy_point(Functor//Arity) -->
+		['        ~q'-[Functor//Arity], nl].
 
 	context_spy_points([SpyPoint| SpyPoints]) -->
 		context_spy_point(SpyPoint),

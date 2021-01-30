@@ -24,7 +24,7 @@
 	:- info([
 		version is 4:9:0,
 		author is 'Paulo Moura',
-		date is 2021-01-26,
+		date is 2021-01-30,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -49,8 +49,8 @@
 	:- private(spying_line_number_/2).
 	:- dynamic(spying_line_number_/2).
 
-	:- private(spying_predicate_/2).
-	:- dynamic(spying_predicate_/2).
+	:- private(spying_predicate_/3).
+	:- dynamic(spying_predicate_/3).
 
 	:- private(spying_context_/4).
 	:- dynamic(spying_context_/4).
@@ -150,8 +150,8 @@
 			print_message(information, debugger, line_number_spy_points(LineNumberSpyPoints))
 		;	print_message(information, debugger, no_line_number_spy_points_defined)
 		),
-		(	spying_predicate_(_, _) ->
-			findall(Functor/Arity, spying_predicate_(Functor,Arity), PredicateSpyPoints),
+		(	spying_predicate_(_, _, _) ->
+			findall(Predicate, spying_predicate_(_,_,Predicate), PredicateSpyPoints),
 			print_message(information, debugger, predicate_spy_points(PredicateSpyPoints))
 		;	print_message(information, debugger, no_predicate_spy_points_defined)
 		),
@@ -198,7 +198,10 @@
 	spy_aux(Entity-Line) :-
 		spy_line_number(Entity-Line).
 	spy_aux(Functor/Arity) :-
-		spy_predicate(Functor/Arity).
+		spy_predicate(Functor, Arity, Functor/Arity).
+	spy_aux(Functor//Arity) :-
+		ExtArity is Arity + 2,
+		spy_predicate(Functor, ExtArity, Functor//Arity).
 
 	spy_list([]).
 	spy_list([SpyPoint| SpyPoints]) :-
@@ -215,18 +218,20 @@
 		;	assertz(spying_line_number_(Template, Line))
 		).
 
-	spy_predicate(Functor/Arity) :-
+	spy_predicate(Functor, Arity, Original) :-
 		atom(Functor),
 		integer(Arity),
-		(	spying_predicate_(Functor, Arity) ->
+		(	spying_predicate_(Functor, Arity, _) ->
 			true
-		;	assertz(spying_predicate_(Functor, Arity))
+		;	assertz(spying_predicate_(Functor, Arity, Original))
 		).
 
 	spying(Entity-Line) :-
 		spying_line_number_(Entity, Line).
 	spying(Functor/Arity) :-
-		spying_predicate_(Functor, Arity).
+		spying_predicate_(Functor, Arity, Functor/Arity).
+	spying(Functor//Arity) :-
+		spying_predicate_(Functor, _, Functor//Arity).
 
 	nospy(SpyPoints) :-
 		nospy_aux(SpyPoints),
@@ -236,7 +241,8 @@
 		var(SpyPoints),
 		!,
 		nospy_line_number(_),
-		nospy_predicate(_).
+		nospy_predicate(_),
+		nospy_non_terminal(_).
 	nospy_aux([]).
 	nospy_aux([SpyPoint| SpyPoints]) :-
 		nospy_list([SpyPoint| SpyPoints]).
@@ -244,6 +250,8 @@
 		nospy_line_number(Entity-Line).
 	nospy_aux(Functor/Arity) :-
 		nospy_predicate(Functor/Arity).
+	nospy_aux(Functor//Arity) :-
+		nospy_non_terminal(Functor//Arity).
 
 	nospy_list([]).
 	nospy_list([SpyPoint| SpyPoints]) :-
@@ -254,7 +262,10 @@
 		retractall(spying_line_number_(Entity, Line)).
 
 	nospy_predicate(Functor/Arity) :-
-		retractall(spying_predicate_(Functor, Arity)).
+		retractall(spying_predicate_(Functor, Arity, _)).
+
+	nospy_non_terminal(Functor//Arity) :-
+		retractall(spying_predicate_(Functor, _, Functor//Arity)).
 
 	spy(Sender, This, Self, Goal) :-
 		asserta(spying_context_(Sender, This, Self, Goal)),
@@ -274,7 +285,7 @@
 	nospyall :-
 		retractall(spying_line_number_(_, _)),
 		print_message(comment, debugger, all_line_number_spy_points_removed),
-		retractall(spying_predicate_(_, _)),
+		retractall(spying_predicate_(_, _, _)),
 		print_message(comment, debugger, all_predicate_spy_points_removed),
 		retractall(spying_context_(_, _, _, _)),
 		print_message(comment, debugger, all_context_spy_points_removed).
@@ -369,7 +380,7 @@
 		!.
 	spying_port_code(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
-		spying_predicate_(Functor, Arity),
+		spying_predicate_(Functor, Arity, _),
 		!.
 	spying_port_code(_, Goal, ExCtx, '*') :-
 		logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
@@ -438,7 +449,7 @@
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				(	functor(Goal, Functor, Arity),
-					spying_predicate_(Functor, Arity)
+					spying_predicate_(Functor, Arity, _)
 				;	logtalk::execution_context(ExCtx, _, Sender, This, Self, _, _),
 					spying_context_(Sender0, This0, Self0, Goal0),
 					subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal))
@@ -679,7 +690,7 @@
 			functor(Predicate, Functor, Arity)
 		;	functor(Goal, Functor, Arity)
 		),
-		spy_predicate(Functor/Arity),
+		spy_predicate(Functor, Arity, Functor/Arity),
 		print_message(information, debugger, predicate_spy_point_added),
 		fail.
 

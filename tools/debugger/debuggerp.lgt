@@ -21,13 +21,14 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2019-12-03,
+		date is 2021-01-30,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
 			'Predicate spy point' - 'Specified as a ground term ``Functor/Arity``.',
+			'Non-terminal spy point' - 'Specified as a ground term ``Functor//Arity``.',
 			'Line number spy point (aka breakpoint)' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
 			'Leash port shorthands' - '``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.'
 		],
@@ -84,14 +85,14 @@
 	:- mode(spy(@spy_point), zero_or_one).
 	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets a line number spy point, a predicate spy point, or a list of spy points. Fails if a spy point is invalid.',
+		comment is 'Sets a line number spy point, a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
 		argnames is ['SpyPoint']
 	]).
 
 	:- public(spying/1).
 	:- mode(spying(?spy_point), zero_or_more).
 	:- info(spying/1, [
-		comment is 'Enumerates, by backtracking, all defined line number and predicate spy points.',
+		comment is 'Enumerates, by backtracking, all defined line number, predicate, and non-terminal spy points.',
 		argnames is ['SpyPoint']
 	]).
 
@@ -114,7 +115,7 @@
 	:- mode(nospy(@spy_point), one).
 	:- mode(nospy(@list(spy_point)), one).
 	:- info((nospy)/1, [
-		comment is 'Removes all matching line number spy points and predicate spy points.',
+		comment is 'Removes all matching line number, predicate, and non-terminal spy points.',
 		argnames is ['SpyPoint']
 	]).
 
@@ -128,7 +129,7 @@
 	:- public(nospyall/0).
 	:- mode(nospyall, one).
 	:- info(nospyall/0, [
-		comment is 'Removes all line number, predicate, and context spy points.'
+		comment is 'Removes all line number, predicate, non-terminal, and context spy points.'
 	]).
 
 	:- public(leash/1).
