@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 2016 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2020-12-17,
+		date is 2021-01-30,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -93,11 +93,12 @@
 		debugging.
 
 	test(debugger_debugging_1_01, deterministic) :-
-		\+ debugging(_).
+		create_object(Object, [], [set_logtalk_flag(debug,off)], []),
+		\+ (debugging(Entity), Entity == Object).
 
-	test(debugger_debugging_1_02, true(Object == Entity)) :-
+	test(debugger_debugging_1_02, deterministic) :-
 		create_object(Object, [], [set_logtalk_flag(debug,on)], []),
-		debugging(Entity).
+		\+ \+ (debugging(Entity), Entity == Object).
 
 	test(debugger_trace_0_01, deterministic) :-
 		trace.

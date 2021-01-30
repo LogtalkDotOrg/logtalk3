@@ -150,6 +150,9 @@ documentation.
 * FIXED: Implementation of the `lgtunit::stream_position/1` predicate for
 SICStus Prolog.
 
+* FIXED: Two `debugger` tool tests to not fail when run in batch with other
+test sets that compile entities in debug mode.
+
 Examples
 --------
 
