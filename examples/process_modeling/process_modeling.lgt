@@ -46,7 +46,7 @@
 
 	:- uses(user, [(#>=)/2, (#=<)/2]).
 
-	% process "a" depends on process "a" and must
+	% process "b" depends on process "a" and must
 	% be executed at least the same number of times
 	% as process "a" but at most three times
 	domain([a(A)], (_B_ #>= A, _B_ #=< 3)).
