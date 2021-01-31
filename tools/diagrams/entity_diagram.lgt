@@ -22,9 +22,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:48:0,
+		version is 2:49:0,
 		author is 'Paulo Moura',
-		date is 2019-10-22,
+		date is 2021-01-31,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -62,6 +62,7 @@
 
 	file(Source, UserOptions) :-
 		self(Self),
+		^^check_options(UserOptions),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Source)),
 		^^format_object(Format),
 		^^locate_file(Source, Basename, Extension, Directory, Path),

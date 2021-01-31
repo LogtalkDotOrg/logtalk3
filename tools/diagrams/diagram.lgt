@@ -122,9 +122,10 @@
 	]).
 
 	all_libraries(UserOptions) :-
-		format_object(Format),
+		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		::reset,
+		format_object(Format),
 		::output_file_path(all_libraries, Options, Format, OutputPath),
 		::diagram_description(Description),
 		open(OutputPath, write, Stream, [alias(diagram_output_file)]),
@@ -180,6 +181,7 @@
 
 	rlibrary(Library, UserOptions) :-
 		self(Self),
+		^^check_options(UserOptions),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		locate_library(Library, Path),
 		format_object(Format),
@@ -225,6 +227,7 @@
 
 	library(Library, UserOptions) :-
 		self(Self),
+		^^check_options(UserOptions),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		locate_library(Library, Path),
 		format_object(Format),
@@ -288,6 +291,7 @@
 	]).
 
 	directories(Project, Directories, UserOptions) :-
+		^^check_options(UserOptions),
 		format_object(Format),
 		^^merge_options(UserOptions, Options),
 		::reset,
@@ -349,6 +353,7 @@
 
 	rdirectory(Project, Directory, UserOptions) :-
 		self(Self),
+		^^check_options(UserOptions),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		locate_directory(Directory, NormalizedDirectory),
 		format_object(Format),
@@ -409,6 +414,7 @@
 
 	directory(Project, Directory, UserOptions) :-
 		self(Self),
+		^^check_options(UserOptions),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		locate_directory(Directory, NormalizedDirectory),
 		format_object(Format),
@@ -468,6 +474,7 @@
 	]).
 
 	files(Project, Files, UserOptions) :-
+		^^check_options(UserOptions),
 		format_object(Format),
 		^^merge_options(UserOptions, Options),
 		::reset,
@@ -529,6 +536,7 @@
 	]).
 
 	all_files(UserOptions) :-
+		^^check_options(UserOptions),
 		format_object(Format),
 		^^merge_options(UserOptions, Options),
 		::reset,

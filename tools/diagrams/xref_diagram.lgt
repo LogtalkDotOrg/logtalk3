@@ -22,9 +22,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:61:0,
+		version is 2:62:0,
 		author is 'Paulo Moura',
-		date is 2019-10-22,
+		date is 2021-01-31,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -62,6 +62,7 @@
 	:- dynamic(external_predicate_/1).
 
 	entity(Entity, UserOptions) :-
+		^^check_options(UserOptions),
 		self(Self),
 		entity_kind(Entity, Kind, GroundEntity, Name),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, Kind, Entity)),

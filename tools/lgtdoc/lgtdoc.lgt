@@ -74,6 +74,7 @@
 	]).
 
 	rlibrary(Library, UserOptions) :-
+		^^check_options(UserOptions),
 		reset,
 		logtalk::expand_library_path(Library, TopPath),
 		^^merge_options(UserOptions, Options),
@@ -99,6 +100,7 @@
 		\+ member(RelativePath, ExcludedPaths).
 
 	library(Library, UserOptions) :-
+		^^check_options(UserOptions),
 		reset,
 		logtalk::expand_library_path(Library, Path),
 		^^merge_options(UserOptions, Options),
@@ -111,6 +113,7 @@
 		library(Library, []).
 
 	rdirectory(Directory, UserOptions) :-
+		^^check_options(UserOptions),
 		reset,
 		os::absolute_file_name(Directory, Path),
 		^^merge_options(UserOptions, Options),
@@ -141,6 +144,7 @@
 		\+ member(RelativePath, ExcludedPaths).
 
 	directory(Directory, UserOptions) :-
+		^^check_options(UserOptions),
 		reset,
 		os::absolute_file_name(Directory, Path),
 		^^merge_options(UserOptions, Options),
@@ -170,6 +174,7 @@
 	output_directory_files(_, _).
 
 	file(Source, UserOptions) :-
+		^^check_options(UserOptions),
 		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
 		^^merge_options(UserOptions, Options),
@@ -181,6 +186,7 @@
 		file(Source, []).
 
 	all(UserOptions) :-
+		^^check_options(UserOptions),
 		reset,
 		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
@@ -1461,16 +1467,18 @@
 		(Spec == dtd -> true; Spec == xsd).
 	valid_option(xml_docs_directory(Directory)) :-
 		atom(Directory).
+	valid_option(omit_path_prefixes(Prefixes)) :-
+		valid(list(atom), Prefixes).
 	valid_option(bom(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(encoding(Encoding)) :-
 		atom(Encoding).
-	valid_option(exclude_files(List)) :-
-		valid(list(atom), List).
-	valid_option(exclude_paths(List)) :-
-		valid(list(atom), List).
-	valid_option(exclude_entities(List)) :-
-		valid(list(atom), List).
+	valid_option(exclude_files(Files)) :-
+		valid(list(atom), Files).
+	valid_option(exclude_paths(Paths)) :-
+		valid(list(atom), Paths).
+	valid_option(exclude_entities(Entities)) :-
+		valid(list(atom), Entities).
 	valid_option(sort_predicates(Boolean)) :-
 		valid(boolean, Boolean).
 
