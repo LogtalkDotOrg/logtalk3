@@ -333,15 +333,15 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Option is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Option</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Option is neither a variable nor a compound term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Option</span></code> is neither a variable nor a compound term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
 </div>
-<div class="line">Option is a compound term but not a valid option:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Option</span></code> is a compound term but not a valid option:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
 </div>
@@ -371,23 +371,23 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Options is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Options is neither a variable nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
 </div>
-<div class="line">An element Option of the Options list is a variable:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">An element Option of the Options list is neither a variable nor a compound term:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
 </div>
-<div class="line">An element Option of the Options list is a compound term but not a valid option:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
 </div>
@@ -439,7 +439,7 @@
 <div id="default_option/1"> </div></div>
 <div class="section" id="default-option-1">
 <span id="options-protocol-0-default-option-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">default_option/1</span></code></a><a class="headerlink" href="#default-option-1" title="Permalink to this headline">¶</a></h3>
-<p>Enumerates by backtracking the default options.</p>
+<p>Enumerates, by backtracking, the default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -484,7 +484,7 @@
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="merge_options/2"> </div><div class="section" id="merge-options-2">
 <span id="options-protocol-0-merge-options-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">merge_options/2</span></code></a><a class="headerlink" href="#merge-options-2" title="Permalink to this headline">¶</a></h3>
-<p>Merges the user options with the default options, returning the final list of options. Calls the fix_options/2 predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.</p>
+<p>Merges the user options with the default options, returning the final list of options. Calls the <code class="docutils literal notranslate"><span class="pre">fix_options/2</span></code> predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

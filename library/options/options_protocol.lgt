@@ -34,9 +34,9 @@
 		comment is 'Succeeds if the option is valid. Throws an error otherwise.',
 		argnames is ['Option'],
 		exceptions is [
-			'Option is a variable' - instantiation_error,
-			'Option is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'Option is a compound term but not a valid option' - domain_error(option, 'Option')
+			'``Option`` is a variable' - instantiation_error,
+			'``Option`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'``Option`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -46,11 +46,11 @@
 		comment is 'Succeeds if all the options in a list are valid. Throws an error otherwise.',
 		argnames is ['Options'],
 		exceptions is [
-			'Options is a variable' - instantiation_error,
-			'Options is neither a variable nor a list' - type_error(list, 'Options'),
-			'An element Option of the Options list is a variable' - instantiation_error,
-			'An element Option of the Options list is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element Option of the Options list is a compound term but not a valid option' - domain_error(option, 'Option')
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -71,7 +71,7 @@
 	:- public(default_option/1).
 	:- mode(default_option(?compound), zero_or_more).
 	:- info(default_option/1, [
-		comment is 'Enumerates by backtracking the default options.',
+		comment is 'Enumerates, by backtracking, the default options.',
 		argnames is ['Option']
 	]).
 
@@ -85,7 +85,7 @@
 	:- protected(merge_options/2).
 	:- mode(merge_options(+list(compound), -list(compound)), one).
 	:- info(merge_options/2, [
-		comment is 'Merges the user options with the default options, returning the final list of options. Calls the fix_options/2 predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.',
+		comment is 'Merges the user options with the default options, returning the final list of options. Calls the ``fix_options/2`` predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.',
 		argnames is ['UserOptions', 'Options']
 	]).
 

@@ -52,3 +52,9 @@ developer tool or application. The importing object should define the
 the ``valid_option/1``  predicate. This library requires options to be
 represented by compound terms but leaves otherwise to the clients the
 actual representation.
+
+The library also supports a user-defined ``fix_option/1`` predicate.
+An usage example is when an option value can be a relative file path
+that should be expanded before used. Another usage example would be
+converting from a user-friendly option to a form more suitable for
+internal processing.

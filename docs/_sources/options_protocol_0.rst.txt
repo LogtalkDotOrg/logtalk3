@@ -56,11 +56,11 @@ Succeeds if the option is valid. Throws an error otherwise.
 |    ``check_option(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Option is a variable:
+|    ``Option`` is a variable:
 |        ``instantiation_error``
-|    Option is neither a variable nor a compound term:
+|    ``Option`` is neither a variable nor a compound term:
 |        ``type_error(compound,Option)``
-|    Option is a compound term but not a valid option:
+|    ``Option`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
 
 
@@ -87,15 +87,15 @@ Succeeds if all the options in a list are valid. Throws an error otherwise.
 |    ``check_options(+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Options is a variable:
+|    ``Options`` is a variable:
 |        ``instantiation_error``
-|    Options is neither a variable nor a list:
+|    ``Options`` is neither a variable nor a list:
 |        ``type_error(list,Options)``
-|    An element Option of the Options list is a variable:
+|    An element ``Option`` of the list ``Options`` is a variable:
 |        ``instantiation_error``
-|    An element Option of the Options list is neither a variable nor a compound term:
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
 |        ``type_error(compound,Option)``
-|    An element Option of the Options list is a compound term but not a valid option:
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
 
 
@@ -157,7 +157,7 @@ Succeeds if all the options in a list are valid.
 ``default_option/1``
 ^^^^^^^^^^^^^^^^^^^^
 
-Enumerates by backtracking the default options.
+Enumerates, by backtracking, the default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -206,7 +206,7 @@ Protected predicates
 ``merge_options/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Merges the user options with the default options, returning the final list of options. Calls the fix_options/2 predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.
+Merges the user options with the default options, returning the final list of options. Calls the ``fix_options/2`` predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.
 
 | **Compilation flags:**
 |    ``static``
