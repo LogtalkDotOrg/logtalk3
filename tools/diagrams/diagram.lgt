@@ -617,6 +617,18 @@
 	% default value
 	diagram_name_suffix('_diagram').
 
+	valid_option(exclude_libraries(Libraries)) :-
+		valid(list(atom), Libraries).
+	valid_option(exclude_directories(Directories)) :-
+		valid(list(atom), Directories).
+	valid_option(exclude_files(Files)) :-
+		valid(list(atom), Files).
+	valid_option(exclude_entities(Entities)) :-
+		valid(list(atom), Entities).
+	valid_option(externals(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(file_extensions(Boolean)) :-
+		valid(boolean, Boolean).
 	valid_option(path_url_prefixes(Directory, CodePrefix, DocPrefix)) :-
 		atom(Directory),
 		atom(CodePrefix),
@@ -628,6 +640,39 @@
 		valid(list(atom), Prefixes).
 	valid_option(output_directory(Directory)) :-
 		atom(Directory).
+	valid_option(layout(Layout)) :-
+		valid(one_of(atom, [top_to_bottom,bottom_to_top,left_to_right,right_to_left]), Layout).
+	valid_option(title(Title)) :-
+		atom(Title).
+	valid_option(date(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(interface(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(directory_paths(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(file_labels(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(inheritance_relations(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(provide_relations(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(xref_relations(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(relation_labels(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(xref_calls(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(node_type_captions(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(entity_url_suffix_target(Suffix, Target)) :-
+		atom(Suffix),
+		atom(Target).
+	valid_option(zoom(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(zoom_url_suffix(Suffix)) :-
+		atom(Suffix).
+	valid_option(url_line_references(Provider)) :-
+		valid(one_of(atom, [bitbucket,github,gitlab]), Provider).
 
 	fix_option(path_url_prefixes(Directory, CodePrefix, DocPrefix), path_url_prefixes(NormalizedDirectory, CodePrefix, DocPrefix)) :-
 		normalize_directory_paths([Directory], [NormalizedDirectory]).
