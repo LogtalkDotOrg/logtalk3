@@ -14,13 +14,15 @@
 Common predicates for generating diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2:46:0
-| **Date:** 2019-10-22
+| **Version:** 2:47:0
+| **Date:** 2021-01-31
 
 | **Compilation flags:**
 |    ``static``
 
 
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
 | **Provides:**
 |    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
@@ -31,12 +33,13 @@ Common predicates for generating diagrams.
 |    :ref:`modules_diagram_support <modules_diagram_support/0>`
 |    :ref:`os <os/0>`
 |    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::valid_option/1`  
 
 .. contents::
    :local:
@@ -616,77 +619,8 @@ Returns the diagram name suffix.
 
 ------------
 
-.. raw:: html
-
-   <div id="default_option/1"> </div>
-
-.. index:: default_option/1
-.. _diagram/1::default_option/1:
-
-``default_option/1``
-^^^^^^^^^^^^^^^^^^^^
-
-Enumerates by backtracking the default options used when generating a diagram.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``default_option(DefaultOption)``
-| **Mode and number of proofs:**
-|    ``default_option(?compound)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="default_options/1"> </div>
-
-.. index:: default_options/1
-.. _diagram/1::default_options/1:
-
-``default_options/1``
-^^^^^^^^^^^^^^^^^^^^^
-
-Returns a list of the default options used when generating a diagram.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``default_options(DefaultOptions)``
-| **Mode and number of proofs:**
-|    ``default_options(-list(compound))`` - ``one``
-
-
-------------
-
 Protected predicates
 --------------------
-
-.. raw:: html
-
-   <div id="merge_options/2"> </div>
-
-.. index:: merge_options/2
-.. _diagram/1::merge_options/2:
-
-``merge_options/2``
-^^^^^^^^^^^^^^^^^^^
-
-Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``merge_options(UserOptions,Options)``
-| **Mode and number of proofs:**
-|    ``merge_options(+list(compound),-list(compound))`` - ``one``
-
-
-------------
 
 .. raw:: html
 

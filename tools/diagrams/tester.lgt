@@ -23,6 +23,7 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([basic_types(loader), os(loader)]),
 	logtalk_load(types(pairs), [optimize(on)]),
+	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
 	logtalk_load(modules_diagram_support, [source_data(on), debug(on)]),
 	logtalk_load([

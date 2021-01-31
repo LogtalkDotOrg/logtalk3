@@ -290,8 +290,8 @@
 <p>Common predicates for generating diagrams.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:46:0</div>
-<div class="line"><strong>Date:</strong> 2019-10-22</div>
+<div class="line"><strong>Version:</strong> 2:47:0</div>
+<div class="line"><strong>Date:</strong> 2021-01-31</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -300,6 +300,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Extends:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+</div>
 <div class="line"><strong>Provides:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a></div>
@@ -313,6 +317,7 @@
 <div class="line"><a class="reference internal" href="modules_diagram_support_0.html#modules-diagram-support-0"><span class="std std-ref">modules_diagram_support</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 <div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -324,7 +329,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a></div>
 </div>
 </div>
 <div class="contents local topic" id="contents">
@@ -356,48 +361,45 @@
 <li><p><a class="reference internal" href="#format-object-1" id="id28"><code class="docutils literal notranslate"><span class="pre">format_object/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#diagram-description-1" id="id29"><code class="docutils literal notranslate"><span class="pre">diagram_description/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#diagram-name-suffix-1" id="id30"><code class="docutils literal notranslate"><span class="pre">diagram_name_suffix/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#default-option-1" id="id31"><code class="docutils literal notranslate"><span class="pre">default_option/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#default-options-1" id="id32"><code class="docutils literal notranslate"><span class="pre">default_options/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id33">Protected predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id31">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#merge-options-2" id="id34"><code class="docutils literal notranslate"><span class="pre">merge_options/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#diagram-caption-3" id="id35"><code class="docutils literal notranslate"><span class="pre">diagram_caption/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-rlibrary-3" id="id36"><code class="docutils literal notranslate"><span class="pre">output_rlibrary/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-library-3" id="id37"><code class="docutils literal notranslate"><span class="pre">output_library/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-rdirectory-3" id="id38"><code class="docutils literal notranslate"><span class="pre">output_rdirectory/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-externals-1" id="id39"><code class="docutils literal notranslate"><span class="pre">output_externals/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-files-2" id="id40"><code class="docutils literal notranslate"><span class="pre">output_files/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-file-4" id="id41"><code class="docutils literal notranslate"><span class="pre">output_file/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-sub-diagrams-1" id="id42"><code class="docutils literal notranslate"><span class="pre">output_sub_diagrams/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reset-0" id="id43"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-node-6" id="id44"><code class="docutils literal notranslate"><span class="pre">output_node/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#node-6" id="id45"><code class="docutils literal notranslate"><span class="pre">node/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#edge-5" id="id46"><code class="docutils literal notranslate"><span class="pre">edge/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-edges-1" id="id47"><code class="docutils literal notranslate"><span class="pre">output_edges/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#save-edge-5" id="id48"><code class="docutils literal notranslate"><span class="pre">save_edge/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-missing-externals-1" id="id49"><code class="docutils literal notranslate"><span class="pre">output_missing_externals/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#not-excluded-file-3" id="id50"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#output-file-path-4" id="id51"><code class="docutils literal notranslate"><span class="pre">output_file_path/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#locate-library-2" id="id52"><code class="docutils literal notranslate"><span class="pre">locate_library/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#locate-directory-2" id="id53"><code class="docutils literal notranslate"><span class="pre">locate_directory/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#locate-file-5" id="id54"><code class="docutils literal notranslate"><span class="pre">locate_file/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ground-entity-identifier-3" id="id55"><code class="docutils literal notranslate"><span class="pre">ground_entity_identifier/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#filter-file-extension-3" id="id56"><code class="docutils literal notranslate"><span class="pre">filter_file_extension/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#add-link-options-3" id="id57"><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#omit-path-prefix-3" id="id58"><code class="docutils literal notranslate"><span class="pre">omit_path_prefix/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#add-node-zoom-option-4" id="id59"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#message-diagram-description-1" id="id60"><code class="docutils literal notranslate"><span class="pre">message_diagram_description/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#diagram-caption-3" id="id32"><code class="docutils literal notranslate"><span class="pre">diagram_caption/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-rlibrary-3" id="id33"><code class="docutils literal notranslate"><span class="pre">output_rlibrary/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-library-3" id="id34"><code class="docutils literal notranslate"><span class="pre">output_library/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-rdirectory-3" id="id35"><code class="docutils literal notranslate"><span class="pre">output_rdirectory/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-externals-1" id="id36"><code class="docutils literal notranslate"><span class="pre">output_externals/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-files-2" id="id37"><code class="docutils literal notranslate"><span class="pre">output_files/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-file-4" id="id38"><code class="docutils literal notranslate"><span class="pre">output_file/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-sub-diagrams-1" id="id39"><code class="docutils literal notranslate"><span class="pre">output_sub_diagrams/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reset-0" id="id40"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-node-6" id="id41"><code class="docutils literal notranslate"><span class="pre">output_node/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#node-6" id="id42"><code class="docutils literal notranslate"><span class="pre">node/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#edge-5" id="id43"><code class="docutils literal notranslate"><span class="pre">edge/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-edges-1" id="id44"><code class="docutils literal notranslate"><span class="pre">output_edges/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#save-edge-5" id="id45"><code class="docutils literal notranslate"><span class="pre">save_edge/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-missing-externals-1" id="id46"><code class="docutils literal notranslate"><span class="pre">output_missing_externals/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#not-excluded-file-3" id="id47"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#output-file-path-4" id="id48"><code class="docutils literal notranslate"><span class="pre">output_file_path/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#locate-library-2" id="id49"><code class="docutils literal notranslate"><span class="pre">locate_library/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#locate-directory-2" id="id50"><code class="docutils literal notranslate"><span class="pre">locate_directory/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#locate-file-5" id="id51"><code class="docutils literal notranslate"><span class="pre">locate_file/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ground-entity-identifier-3" id="id52"><code class="docutils literal notranslate"><span class="pre">ground_entity_identifier/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#filter-file-extension-3" id="id53"><code class="docutils literal notranslate"><span class="pre">filter_file_extension/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#add-link-options-3" id="id54"><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#omit-path-prefix-3" id="id55"><code class="docutils literal notranslate"><span class="pre">omit_path_prefix/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#add-node-zoom-option-4" id="id56"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-diagram-description-1" id="id57"><code class="docutils literal notranslate"><span class="pre">message_diagram_description/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id61">Private predicates</a></p>
+<li><p><a class="reference internal" href="#private-predicates" id="id58">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id1" id="id62"><code class="docutils literal notranslate"><span class="pre">node_/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#id3" id="id63"><code class="docutils literal notranslate"><span class="pre">edge_/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id59"><code class="docutils literal notranslate"><span class="pre">node_/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id60"><code class="docutils literal notranslate"><span class="pre">edge_/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id64">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id61">Operators</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-predicates">
@@ -917,76 +919,13 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">diagram_name_suffix(-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-<hr class="docutils" />
-<div id="default_option/1"> </div></div>
-<div class="section" id="default-option-1">
-<span id="diagram-1-default-option-1"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">default_option/1</span></code></a><a class="headerlink" href="#default-option-1" title="Permalink to this headline">¶</a></h3>
-<p>Enumerates by backtracking the default options used when generating a diagram.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">default_option(DefaultOption)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">default_option(?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="default_options/1"> </div></div>
-<div class="section" id="default-options-1">
-<span id="diagram-1-default-options-1"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">default_options/1</span></code></a><a class="headerlink" href="#default-options-1" title="Permalink to this headline">¶</a></h3>
-<p>Returns a list of the default options used when generating a diagram.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">default_options(DefaultOptions)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">default_options(-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
 </div>
 </div>
 <hr class="docutils" />
 <div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="merge_options/2"> </div><div class="section" id="merge-options-2">
-<span id="diagram-1-merge-options-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">merge_options/2</span></code></a><a class="headerlink" href="#merge-options-2" title="Permalink to this headline">¶</a></h3>
-<p>Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">merge_options(UserOptions,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">merge_options(+list(compound),-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="diagram_caption/3"> </div></div>
-<div class="section" id="diagram-caption-3">
-<span id="diagram-1-diagram-caption-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">diagram_caption/3</span></code></a><a class="headerlink" href="#diagram-caption-3" title="Permalink to this headline">¶</a></h3>
+<div id="diagram_caption/3"> </div><div class="section" id="diagram-caption-3">
+<span id="diagram-1-diagram-caption-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">diagram_caption/3</span></code></a><a class="headerlink" href="#diagram-caption-3" title="Permalink to this headline">¶</a></h3>
 <p>Creates a diagram caption from the diagram description and the subject and its kind.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1007,7 +946,7 @@
 <hr class="docutils" />
 <div id="output_rlibrary/3"> </div></div>
 <div class="section" id="output-rlibrary-3">
-<span id="diagram-1-output-rlibrary-3"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_rlibrary/3</span></code></a><a class="headerlink" href="#output-rlibrary-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-rlibrary-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_rlibrary/3</span></code></a><a class="headerlink" href="#output-rlibrary-3" title="Permalink to this headline">¶</a></h3>
 <p>Generates diagram output for a library and its sub-libraries using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1028,7 +967,7 @@
 <hr class="docutils" />
 <div id="output_library/3"> </div></div>
 <div class="section" id="output-library-3">
-<span id="diagram-1-output-library-3"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_library/3</span></code></a><a class="headerlink" href="#output-library-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-library-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_library/3</span></code></a><a class="headerlink" href="#output-library-3" title="Permalink to this headline">¶</a></h3>
 <p>Generates diagram output for a library using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1049,7 +988,7 @@
 <hr class="docutils" />
 <div id="output_rdirectory/3"> </div></div>
 <div class="section" id="output-rdirectory-3">
-<span id="diagram-1-output-rdirectory-3"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_rdirectory/3</span></code></a><a class="headerlink" href="#output-rdirectory-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-rdirectory-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_rdirectory/3</span></code></a><a class="headerlink" href="#output-rdirectory-3" title="Permalink to this headline">¶</a></h3>
 <p>Generates diagram output for a directory and its sub-directories using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1070,7 +1009,7 @@
 <hr class="docutils" />
 <div id="output_externals/1"> </div></div>
 <div class="section" id="output-externals-1">
-<span id="diagram-1-output-externals-1"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_externals/1</span></code></a><a class="headerlink" href="#output-externals-1" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-externals-1"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_externals/1</span></code></a><a class="headerlink" href="#output-externals-1" title="Permalink to this headline">¶</a></h3>
 <p>Output external nodes using the specified options depending on the value of the boolean option <code class="docutils literal notranslate"><span class="pre">externals/1</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1091,7 +1030,7 @@
 <hr class="docutils" />
 <div id="output_files/2"> </div></div>
 <div class="section" id="output-files-2">
-<span id="diagram-1-output-files-2"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_files/2</span></code></a><a class="headerlink" href="#output-files-2" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-files-2"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_files/2</span></code></a><a class="headerlink" href="#output-files-2" title="Permalink to this headline">¶</a></h3>
 <p>Generates diagram output for a list of files using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1112,7 +1051,7 @@
 <hr class="docutils" />
 <div id="output_file/4"> </div></div>
 <div class="section" id="output-file-4">
-<span id="diagram-1-output-file-4"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_file/4</span></code></a><a class="headerlink" href="#output-file-4" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-file-4"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_file/4</span></code></a><a class="headerlink" href="#output-file-4" title="Permalink to this headline">¶</a></h3>
 <p>Generates diagram output for a file using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1133,7 +1072,7 @@
 <hr class="docutils" />
 <div id="output_sub_diagrams/1"> </div></div>
 <div class="section" id="output-sub-diagrams-1">
-<span id="diagram-1-output-sub-diagrams-1"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_sub_diagrams/1</span></code></a><a class="headerlink" href="#output-sub-diagrams-1" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-sub-diagrams-1"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_sub_diagrams/1</span></code></a><a class="headerlink" href="#output-sub-diagrams-1" title="Permalink to this headline">¶</a></h3>
 <p>Outputs sub-diagrams using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1154,7 +1093,7 @@
 <hr class="docutils" />
 <div id="reset/0"> </div></div>
 <div class="section" id="reset-0">
-<span id="diagram-1-reset-0"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-reset-0"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Permalink to this headline">¶</a></h3>
 <p>Resets all temporary information used when generating a diagram.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1171,7 +1110,7 @@
 <hr class="docutils" />
 <div id="output_node/6"> </div></div>
 <div class="section" id="output-node-6">
-<span id="diagram-1-output-node-6"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_node/6</span></code></a><a class="headerlink" href="#output-node-6" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-node-6"></span><span id="index-35"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_node/6</span></code></a><a class="headerlink" href="#output-node-6" title="Permalink to this headline">¶</a></h3>
 <p>Outputs a graph node.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1192,7 +1131,7 @@
 <hr class="docutils" />
 <div id="node/6"> </div></div>
 <div class="section" id="node-6">
-<span id="diagram-1-node-6"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">node/6</span></code></a><a class="headerlink" href="#node-6" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-node-6"></span><span id="index-36"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">node/6</span></code></a><a class="headerlink" href="#node-6" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all saved nodes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1213,7 +1152,7 @@
 <hr class="docutils" />
 <div id="edge/5"> </div></div>
 <div class="section" id="edge-5">
-<span id="diagram-1-edge-5"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">edge/5</span></code></a><a class="headerlink" href="#edge-5" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-edge-5"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">edge/5</span></code></a><a class="headerlink" href="#edge-5" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates, by backtracking, all saved edges.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1234,7 +1173,7 @@
 <hr class="docutils" />
 <div id="output_edges/1"> </div></div>
 <div class="section" id="output-edges-1">
-<span id="diagram-1-output-edges-1"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_edges/1</span></code></a><a class="headerlink" href="#output-edges-1" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-edges-1"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_edges/1</span></code></a><a class="headerlink" href="#output-edges-1" title="Permalink to this headline">¶</a></h3>
 <p>Outputs all edges.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1255,7 +1194,7 @@
 <hr class="docutils" />
 <div id="save_edge/5"> </div></div>
 <div class="section" id="save-edge-5">
-<span id="diagram-1-save-edge-5"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">save_edge/5</span></code></a><a class="headerlink" href="#save-edge-5" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-save-edge-5"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">save_edge/5</span></code></a><a class="headerlink" href="#save-edge-5" title="Permalink to this headline">¶</a></h3>
 <p>Saves a graph edge.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1276,7 +1215,7 @@
 <hr class="docutils" />
 <div id="output_missing_externals/1"> </div></div>
 <div class="section" id="output-missing-externals-1">
-<span id="diagram-1-output-missing-externals-1"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_missing_externals/1</span></code></a><a class="headerlink" href="#output-missing-externals-1" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-missing-externals-1"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_missing_externals/1</span></code></a><a class="headerlink" href="#output-missing-externals-1" title="Permalink to this headline">¶</a></h3>
 <p>Outputs missing external nodes (usually due to unloaded resources) that are referenced from edges.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1297,7 +1236,7 @@
 <hr class="docutils" />
 <div id="not_excluded_file/3"> </div></div>
 <div class="section" id="not-excluded-file-3">
-<span id="diagram-1-not-excluded-file-3"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a><a class="headerlink" href="#not-excluded-file-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-not-excluded-file-3"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a><a class="headerlink" href="#not-excluded-file-3" title="Permalink to this headline">¶</a></h3>
 <p>True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1318,7 +1257,7 @@
 <hr class="docutils" />
 <div id="output_file_path/4"> </div></div>
 <div class="section" id="output-file-path-4">
-<span id="diagram-1-output-file-path-4"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_file_path/4</span></code></a><a class="headerlink" href="#output-file-path-4" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-output-file-path-4"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">output_file_path/4</span></code></a><a class="headerlink" href="#output-file-path-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns the output file path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1339,7 +1278,7 @@
 <hr class="docutils" />
 <div id="locate_library/2"> </div></div>
 <div class="section" id="locate-library-2">
-<span id="diagram-1-locate-library-2"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">locate_library/2</span></code></a><a class="headerlink" href="#locate-library-2" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-locate-library-2"></span><span id="index-43"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">locate_library/2</span></code></a><a class="headerlink" href="#locate-library-2" title="Permalink to this headline">¶</a></h3>
 <p>Locates a library given its name.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1360,7 +1299,7 @@
 <hr class="docutils" />
 <div id="locate_directory/2"> </div></div>
 <div class="section" id="locate-directory-2">
-<span id="diagram-1-locate-directory-2"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">locate_directory/2</span></code></a><a class="headerlink" href="#locate-directory-2" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-locate-directory-2"></span><span id="index-44"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">locate_directory/2</span></code></a><a class="headerlink" href="#locate-directory-2" title="Permalink to this headline">¶</a></h3>
 <p>Locates a directory given its name or full path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1381,7 +1320,7 @@
 <hr class="docutils" />
 <div id="locate_file/5"> </div></div>
 <div class="section" id="locate-file-5">
-<span id="diagram-1-locate-file-5"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">locate_file/5</span></code></a><a class="headerlink" href="#locate-file-5" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-locate-file-5"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">locate_file/5</span></code></a><a class="headerlink" href="#locate-file-5" title="Permalink to this headline">¶</a></h3>
 <p>Locates a file given its name, basename, full path, or library notation representation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1402,7 +1341,7 @@
 <hr class="docutils" />
 <div id="ground_entity_identifier/3"> </div></div>
 <div class="section" id="ground-entity-identifier-3">
-<span id="diagram-1-ground-entity-identifier-3"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">ground_entity_identifier/3</span></code></a><a class="headerlink" href="#ground-entity-identifier-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-ground-entity-identifier-3"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">ground_entity_identifier/3</span></code></a><a class="headerlink" href="#ground-entity-identifier-3" title="Permalink to this headline">¶</a></h3>
 <p>Converts an entity identifier to a ground term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1423,7 +1362,7 @@
 <hr class="docutils" />
 <div id="filter_file_extension/3"> </div></div>
 <div class="section" id="filter-file-extension-3">
-<span id="diagram-1-filter-file-extension-3"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">filter_file_extension/3</span></code></a><a class="headerlink" href="#filter-file-extension-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-filter-file-extension-3"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">filter_file_extension/3</span></code></a><a class="headerlink" href="#filter-file-extension-3" title="Permalink to this headline">¶</a></h3>
 <p>Filters the file name extension depending on the <code class="docutils literal notranslate"><span class="pre">file_extensions/1</span></code> option.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1444,7 +1383,7 @@
 <hr class="docutils" />
 <div id="add_link_options/3"> </div></div>
 <div class="section" id="add-link-options-3">
-<span id="diagram-1-add-link-options-3"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code></a><a class="headerlink" href="#add-link-options-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-add-link-options-3"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add_link_options/3</span></code></a><a class="headerlink" href="#add-link-options-3" title="Permalink to this headline">¶</a></h3>
 <p>Adds <code class="docutils literal notranslate"><span class="pre">url/1</span></code>, <code class="docutils literal notranslate"><span class="pre">urls/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">tooltip/1</span></code> link options (for use by the graph language) based on the specified path to the list of options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1465,7 +1404,7 @@
 <hr class="docutils" />
 <div id="omit_path_prefix/3"> </div></div>
 <div class="section" id="omit-path-prefix-3">
-<span id="diagram-1-omit-path-prefix-3"></span><span id="index-52"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">omit_path_prefix/3</span></code></a><a class="headerlink" href="#omit-path-prefix-3" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-omit-path-prefix-3"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">omit_path_prefix/3</span></code></a><a class="headerlink" href="#omit-path-prefix-3" title="Permalink to this headline">¶</a></h3>
 <p>Removes a prefix from a path, returning the relative path, when using the option <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code>. Used mainly for constructing directory and file node identifiers and captions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1486,7 +1425,7 @@
 <hr class="docutils" />
 <div id="add_node_zoom_option/4"> </div></div>
 <div class="section" id="add-node-zoom-option-4">
-<span id="diagram-1-add-node-zoom-option-4"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/4</span></code></a><a class="headerlink" href="#add-node-zoom-option-4" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-add-node-zoom-option-4"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add_node_zoom_option/4</span></code></a><a class="headerlink" href="#add-node-zoom-option-4" title="Permalink to this headline">¶</a></h3>
 <p>Adds node zoom options when using the zoom option.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1507,7 +1446,7 @@
 <hr class="docutils" />
 <div id="message_diagram_description/1"> </div></div>
 <div class="section" id="message-diagram-description-1">
-<span id="diagram-1-message-diagram-description-1"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">message_diagram_description/1</span></code></a><a class="headerlink" href="#message-diagram-description-1" title="Permalink to this headline">¶</a></h3>
+<span id="diagram-1-message-diagram-description-1"></span><span id="index-51"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">message_diagram_description/1</span></code></a><a class="headerlink" href="#message-diagram-description-1" title="Permalink to this headline">¶</a></h3>
 <p>Diagram description for progress messages.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1531,7 +1470,7 @@
 <div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="node_/6"> </div><div class="section" id="id1">
-<span id="index-55"></span><span id="id2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">node_/6</span></code></a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span id="index-52"></span><span id="id2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">node_/6</span></code></a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Table of saved nodes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1552,7 +1491,7 @@
 <hr class="docutils" />
 <div id="edge_/5"> </div></div>
 <div class="section" id="id3">
-<span id="index-56"></span><span id="id4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">edge_/5</span></code></a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<span id="index-53"></span><span id="id4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">edge_/5</span></code></a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Table of saved edges.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

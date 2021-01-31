@@ -18,12 +18,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(diagram(_Format)).
+:- category(diagram(_Format),
+	extends(options)).
 
 	:- info([
-		version is 2:46:0,
+		version is 2:47:0,
 		author is 'Paulo Moura',
-		date is 2019-10-22,
+		date is 2021-01-31,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -33,6 +34,10 @@
 	]).
 	:- uses(pairs, [
 		keys/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, gnu)).
@@ -52,7 +57,7 @@
 
 	libraries(Project, Libraries, UserOptions) :-
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		::diagram_description(Description),
@@ -118,7 +123,7 @@
 
 	all_libraries(UserOptions) :-
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(all_libraries, Options, Format, OutputPath),
 		::diagram_description(Description),
@@ -178,7 +183,7 @@
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		locate_library(Library, Path),
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Library, Options, Format, OutputPath),
 		diagram_caption(library, Library, Description),
@@ -223,7 +228,7 @@
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, library, Library)),
 		locate_library(Library, Path),
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Library, Options, Format, OutputPath),
 		diagram_caption(library, Library, Description),
@@ -284,7 +289,7 @@
 
 	directories(Project, Directories, UserOptions) :-
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		::diagram_description(Description),
@@ -347,7 +352,7 @@
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		locate_directory(Directory, NormalizedDirectory),
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		omit_path_prefix(NormalizedDirectory, Options, Relative),
@@ -407,7 +412,7 @@
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, directory, Directory)),
 		locate_directory(Directory, NormalizedDirectory),
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		omit_path_prefix(NormalizedDirectory, Options, Relative),
@@ -464,7 +469,7 @@
 
 	files(Project, Files, UserOptions) :-
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(Project, Options, Format, OutputPath),
 		::diagram_description(Description),
@@ -525,7 +530,7 @@
 
 	all_files(UserOptions) :-
 		format_object(Format),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		::reset,
 		::output_file_path(all_files, Options, Format, OutputPath),
 		::diagram_description(Description),
@@ -612,50 +617,17 @@
 	% default value
 	diagram_name_suffix('_diagram').
 
-	:- public(default_option/1).
-	:- mode(default_option(?compound), zero_or_more).
-	:- info(default_option/1, [
-		comment is 'Enumerates by backtracking the default options used when generating a diagram.',
-		argnames is ['DefaultOption']
-	]).
-
-	:- public(default_options/1).
-	:- mode(default_options(-list(compound)), one).
-	:- info(default_options/1, [
-		comment is 'Returns a list of the default options used when generating a diagram.',
-		argnames is ['DefaultOptions']
-	]).
-
-	default_options(DefaultOptions) :-
-		findall(DefaultOption, ::default_option(DefaultOption), DefaultOptions).
-
-	:- protected(merge_options/2).
-	:- mode(merge_options(+list(compound), -list(compound)), one).
-	:- info(merge_options/2, [
-		comment is 'Merges the user options with the default options, returning the list of options used when generating a diagram. Path arguments in options are expanded to full paths. Also ensures that all directory paths end with a slash.',
-		argnames is ['UserOptions', 'Options']
-	]).
-
-	merge_options(UserOptions, Options) :-
-		findall(
-			DefaultOption,
-			(	::default_option(DefaultOption),
-				functor(DefaultOption, OptionName, Arity),
-				functor(UserOption, OptionName, Arity),
-				\+ member(UserOption, UserOptions)
-			),
-			DefaultOptions
-		),
-		append(UserOptions, DefaultOptions, Options0),
-		fix_options(Options0, Options).
-
-	fix_options([], []).
-	fix_options([Option| Options], [FixedOption| FixedOptions]) :-
-		(	fix_option(Option, FixedOption) ->
-			true
-		;	FixedOption = Option
-		),
-		fix_options(Options, FixedOptions).
+	valid_option(path_url_prefixes(Directory, CodePrefix, DocPrefix)) :-
+		atom(Directory),
+		atom(CodePrefix),
+		atom(DocPrefix).
+	valid_option(url_prefixes(CodePrefix, DocPrefix)) :-
+		atom(CodePrefix),
+		atom(DocPrefix).
+	valid_option(omit_path_prefixes(Prefixes)) :-
+		valid(list(atom), Prefixes).
+	valid_option(output_directory(Directory)) :-
+		atom(Directory).
 
 	fix_option(path_url_prefixes(Directory, CodePrefix, DocPrefix), path_url_prefixes(NormalizedDirectory, CodePrefix, DocPrefix)) :-
 		normalize_directory_paths([Directory], [NormalizedDirectory]).

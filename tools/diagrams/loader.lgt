@@ -22,6 +22,7 @@
 	logtalk_load(os(loader)),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(types(pairs), [optimize(on)]),
+	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
 	logtalk_load(modules_diagram_support, [optimize(on)]),
 	logtalk_load([

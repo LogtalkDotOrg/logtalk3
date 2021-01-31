@@ -134,6 +134,8 @@ may also be able to display broken, timed out, and crashed test sets.
 
 * UPDATED: The `logtalk_tester` script to support the `-f xunit_net_v2` option.
 
+* UPDATED: The `diagrams` tool to use the new `options` library.
+
 * UPDATED: The `tutor` tool to provide advice for the new clause disjunctions
 lint check and for the updated entity, predicate, and variable names lint
 checks.
