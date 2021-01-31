@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on January 20, 2021
+##   Last updated on January 31, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -83,6 +83,7 @@ sed '1,18d' ../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loo
 sed '1,18d' ../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
 sed '1,18d' ../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 sed '1,18d' ../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
+sed '1,18d' ../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst
 sed '1,18d' ../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
 sed '1,18d' ../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst
 sed '1,18d' ../../library/random/NOTES.md | pandoc -f gfm -t rst -o libraries/random.rst

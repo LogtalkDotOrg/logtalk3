@@ -149,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#os"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#pddl-parser"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ports-profiler"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
@@ -258,8 +259,8 @@
 <p>Documenting tool protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:3:0</div>
-<div class="line"><strong>Date:</strong> 2019-11-26</div>
+<div class="line"><strong>Version:</strong> 4:0:0</div>
+<div class="line"><strong>Date:</strong> 2021-01-31</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -316,13 +317,11 @@
 <li><p><a class="reference internal" href="#file-1" id="id11"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#all-1" id="id12"><code class="docutils literal notranslate"><span class="pre">all/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#all-0" id="id13"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#option-2" id="id14"><code class="docutils literal notranslate"><span class="pre">option/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#set-option-2" id="id15"><code class="docutils literal notranslate"><span class="pre">set_option/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id15">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id16">Operators</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-predicates">
@@ -631,48 +630,6 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">all</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="option/2"> </div></div>
-<div class="section" id="option-2">
-<span id="lgtdocp-0-option-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">option/2</span></code></a><a class="headerlink" href="#option-2" title="Permalink to this headline">¶</a></h3>
-<p>Returns, by backtracking, all options and their values.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">option(Option,Value)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">option(?atom,?nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="set_option/2"> </div></div>
-<div class="section" id="set-option-2">
-<span id="lgtdocp-0-set-option-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_option/2</span></code></a><a class="headerlink" href="#set-option-2" title="Permalink to this headline">¶</a></h3>
-<p>Sets an option value.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">set_option(Option,Value)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">set_option(+atom,+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </div>

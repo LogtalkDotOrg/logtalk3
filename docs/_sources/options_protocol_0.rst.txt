@@ -1,0 +1,192 @@
+.. index:: options_protocol
+.. _options_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``options_protocol``
+====================
+
+Options protocol.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2021-01-31
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="valid_option/1"> </div>
+
+.. index:: valid_option/1
+.. _options_protocol/0::valid_option/1:
+
+``valid_option/1``
+^^^^^^^^^^^^^^^^^^
+
+Succeeds if the option is valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_option(Option)``
+| **Mode and number of proofs:**
+|    ``valid_option(?compound)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="default_option/1"> </div>
+
+.. index:: default_option/1
+.. _options_protocol/0::default_option/1:
+
+``default_option/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``default_option(Option)``
+| **Mode and number of proofs:**
+|    ``default_option(?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="default_options/1"> </div>
+
+.. index:: default_options/1
+.. _options_protocol/0::default_options/1:
+
+``default_options/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a list of the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``default_options(Options)``
+| **Mode and number of proofs:**
+|    ``default_options(-list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. raw:: html
+
+   <div id="merge_options/2"> </div>
+
+.. index:: merge_options/2
+.. _options_protocol/0::merge_options/2:
+
+``merge_options/2``
+^^^^^^^^^^^^^^^^^^^
+
+Merges the user options with the default options, returning the final list of options. Calls the fix_options/2 predicate to preprocess the options after merging.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``merge_options(UserOptions,Options)``
+| **Mode and number of proofs:**
+|    ``merge_options(+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="fix_options/2"> </div>
+
+.. index:: fix_options/2
+.. _options_protocol/0::fix_options/2:
+
+``fix_options/2``
+^^^^^^^^^^^^^^^^^
+
+Fixes a list of options, returning the list of options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fix_options(Options,FixedOptions)``
+| **Mode and number of proofs:**
+|    ``fix_options(+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="fix_option/2"> </div>
+
+.. index:: fix_option/2
+.. _options_protocol/0::fix_option/2:
+
+``fix_option/2``
+^^^^^^^^^^^^^^^^
+
+Fixes an option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fix_option(Option,FixedOption)``
+| **Mode and number of proofs:**
+|    ``fix_option(+compound,-compound)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`options <options/0>`
+

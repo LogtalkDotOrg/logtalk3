@@ -306,9 +306,9 @@ the <code class="docutils literal notranslate"><span class="pre">logtalk::messag
 </div>
 <div class="section" id="converting-assertion-failures-into-errors">
 <h2>Converting assertion failures into errors<a class="headerlink" href="#converting-assertion-failures-into-errors" title="Permalink to this headline">¶</a></h2>
-<p>If you want an assertion failure to result in a runtime error, you can
-intercept the assertion failure messages, optionally still printing
-them, and throw an error. For example:</p>
+<p>If you want an assertion failure to result in a failure or a runtime
+error, you can intercept the assertion failure messages, optionally
+still printing them, and throw an error. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(assertions_failures_to_errors).
 
 <span class="p">    :- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).

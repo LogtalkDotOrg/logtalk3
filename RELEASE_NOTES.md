@@ -21,8 +21,8 @@ RELEASE NOTES
 =============
 
 
-3.44.0 - January ??, 2021
-=========================
+3.44.0 - February ??, 2021
+==========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -88,6 +88,9 @@ Library
 * ADDED: Library `term_io` for term input/output from/to atom, chars, and
 codes.
 
+* ADDED: Library `options` providing predicates for managing developer tool
+and application options.
+
 * ADDED: New `non_quoted_atom` type to the `arbitrary` and `types` libraries.
 
 * ADDED: Implementation for the `os::directory_files/2` predicate for Trealla
@@ -106,6 +109,9 @@ check that the object exists.
 
 Tools
 -----
+
+* CHANGED: Remove the `lgtdoc` tool `option/2` and `set_option/2` predicates
+and refactored option handling to use the new `options` library.
 
 * CHANGED: The specification and implementation of the `lgtunit::assertion/1-2`
 predicates to prevent further instantiation of the assertion goal argument.

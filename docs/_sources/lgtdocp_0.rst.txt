@@ -11,8 +11,8 @@
 Documenting tool protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:0
-| **Date:** 2019-11-26
+| **Version:** 4:0:0
+| **Date:** 2021-01-31
 
 | **Compilation flags:**
 |    ``static``
@@ -349,52 +349,6 @@ Creates XML documenting files for all loaded entities using default options.
 
 | **Mode and number of proofs:**
 |    ``all`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="option/2"> </div>
-
-.. index:: option/2
-.. _lgtdocp/0::option/2:
-
-``option/2``
-^^^^^^^^^^^^
-
-Returns, by backtracking, all options and their values.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``option(Option,Value)``
-| **Mode and number of proofs:**
-|    ``option(?atom,?nonvar)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="set_option/2"> </div>
-
-.. index:: set_option/2
-.. _lgtdocp/0::set_option/2:
-
-``set_option/2``
-^^^^^^^^^^^^^^^^
-
-Sets an option value.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``set_option(Option,Value)``
-| **Mode and number of proofs:**
-|    ``set_option(+atom,+nonvar)`` - ``zero_or_one``
 
 
 ------------

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on January 20, 2021
+%  Last updated on January 31, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -54,6 +54,7 @@ logtalk_library_path(loops, library('loops/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(optionals, library('optionals/')).
+logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).

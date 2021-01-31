@@ -1348,6 +1348,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`diagram(Format) <diagram/1::default_option/1>`
+* :ref:`options_protocol <options_protocol/0::default_option/1>`
 * :ref:`wrapper <wrapper/0::default_option/1>`
 
 ``default_options/1``
@@ -1359,6 +1360,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`diagram(Format) <diagram/1::default_options/1>`
+* :ref:`options_protocol <options_protocol/0::default_options/1>`
 * :ref:`wrapper <wrapper/0::default_options/1>`
 
 ``define_log_file/2``
@@ -4855,16 +4857,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::operating_system_type/1>`
 
-``option/2``
-------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`lgtdocp <lgtdocp/0::option/2>`
-
 ``or/2``
 --------
 
@@ -6250,16 +6242,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`event_registryp <event_registryp/0::set_monitor/4>`
 
-``set_option/2``
-----------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`lgtdocp <lgtdocp/0::set_option/2>`
-
 ``set_seed/1``
 --------------
 
@@ -7063,6 +7045,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`iso8601 <iso8601/0::valid_date/3>`
+
+``valid_option/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`options_protocol <options_protocol/0::valid_option/1>`
 
 ``validate/1``
 --------------

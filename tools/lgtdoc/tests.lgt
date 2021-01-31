@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 2016 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,13 +22,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2020-12-01,
+		date is 2021-01-31,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
 	cover(lgtdoc).
+
+	:- private(xml_docs_directory_/1).
+	:- dynamic(xml_docs_directory_/1).
 
 	:- uses(lgtdoc, [
 		all/1, all/0,
@@ -50,6 +53,12 @@
 	:- uses(list, [
 		member/2
 	]).
+
+	setup :-
+		retractall(xml_docs_directory_(_)),
+		os::working_directory(Directory),
+		atom_concat(Directory, 'xml_docs/', XMLDocsDirectory),
+		assertz(xml_docs_directory_(XMLDocsDirectory)).
 
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic
@@ -97,9 +106,7 @@
 		rdirectory(Directory).
 
 	cleanup :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'xml_docs/', XMLDocsDirectory),
+		xml_docs_directory_(XMLDocsDirectory),
 		os::directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
 		forall(
 			list::member(XMLFile, XMLFiles),

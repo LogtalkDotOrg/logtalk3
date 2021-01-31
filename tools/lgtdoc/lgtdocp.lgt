@@ -21,9 +21,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 3:3:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2019-11-26,
+		date is 2021-01-31,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',
@@ -143,20 +143,6 @@
 	:- mode(all, one).
 	:- info(all/0, [
 		comment is 'Creates XML documenting files for all loaded entities using default options.'
-	]).
-
-	:- public(option/2).
-	:- mode(option(?atom, ?nonvar), zero_or_more).
-	:- info(option/2, [
-		comment is 'Returns, by backtracking, all options and their values.',
-		argnames is ['Option', 'Value']
-	]).
-
-	:- public(set_option/2).
-	:- mode(set_option(+atom, +nonvar), zero_or_one).
-	:- info(set_option/2, [
-		comment is 'Sets an option value.',
-		argnames is ['Option', 'Value']
 	]).
 
 :- end_protocol.

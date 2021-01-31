@@ -44,6 +44,7 @@
 		java(loader),
 		redis(loader),
 		optionals(loader),
+		options(loader),
 		expecteds(loader),
 		expand_library_alias_paths(loader),
 		edcg(loader),

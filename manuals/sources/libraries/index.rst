@@ -50,6 +50,7 @@ directory in the ``NOTES.md`` file.
    meta
    meta_compiler
    optionals
+   options
    os
    queues
    random

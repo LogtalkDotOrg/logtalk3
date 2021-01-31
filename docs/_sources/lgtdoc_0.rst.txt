@@ -11,8 +11,8 @@
 Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.
 
 | **Author:** Paulo Moura
-| **Version:** 5:3:1
-| **Date:** 2020-12-01
+| **Version:** 6:0:0
+| **Date:** 2021-01-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 
 | **Implements:**
 |    ``public`` :ref:`lgtdocp <lgtdocp/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
@@ -31,7 +33,7 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`lgtdocp/0::all/0`  :ref:`lgtdocp/0::all/1`  :ref:`lgtdocp/0::directory/1`  :ref:`lgtdocp/0::directory/2`  :ref:`lgtdocp/0::file/1`  :ref:`lgtdocp/0::file/2`  :ref:`lgtdocp/0::library/1`  :ref:`lgtdocp/0::library/2`  :ref:`lgtdocp/0::option/2`  :ref:`lgtdocp/0::rdirectory/1`  :ref:`lgtdocp/0::rdirectory/2`  :ref:`lgtdocp/0::rlibrary/1`  :ref:`lgtdocp/0::rlibrary/2`  :ref:`lgtdocp/0::set_option/2`  
+|     :ref:`lgtdocp/0::all/0`  :ref:`lgtdocp/0::all/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`lgtdocp/0::directory/1`  :ref:`lgtdocp/0::directory/2`  :ref:`lgtdocp/0::file/1`  :ref:`lgtdocp/0::file/2`  :ref:`options_protocol/0::fix_option/2`  :ref:`options_protocol/0::fix_options/2`  :ref:`lgtdocp/0::library/1`  :ref:`lgtdocp/0::library/2`  :ref:`options_protocol/0::merge_options/2`  :ref:`lgtdocp/0::rdirectory/1`  :ref:`lgtdocp/0::rdirectory/2`  :ref:`lgtdocp/0::rlibrary/1`  :ref:`lgtdocp/0::rlibrary/2`  :ref:`options_protocol/0::valid_option/1`  
 
 .. contents::
    :local:
@@ -49,29 +51,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="option_/2"> </div>
-
-.. index:: option_/2
-.. _lgtdoc/0::option_/2:
-
-``option_/2``
-^^^^^^^^^^^^^
-
-Table of option values.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``option_(Option,Value)``
-| **Mode and number of proofs:**
-|    ``option_(?atom,?nonvar)`` - ``zero_or_more``
-
-
-------------
 
 .. raw:: html
 

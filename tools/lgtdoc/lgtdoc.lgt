@@ -19,21 +19,14 @@
 
 
 :- object(lgtdoc,
-	implements(lgtdocp)).
+	implements(lgtdocp),
+	imports(options)).
 
 	:- info([
-		version is 5:3:1,
+		version is 6:0:0,
 		author is 'Paulo Moura',
-		date is 2020-12-01,
+		date is 2021-01-31,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
-	]).
-
-	:- private(option_/2).
-	:- dynamic(option_/2).
-	:- mode(option_(?atom, ?nonvar), zero_or_more).
-	:- info(option_/2, [
-		comment is 'Table of option values.',
-		argnames is ['Option', 'Value']
 	]).
 
 	:- private(library_entity_/4).
@@ -83,7 +76,7 @@
 	rlibrary(Library, UserOptions) :-
 		reset,
 		logtalk::expand_library_path(Library, TopPath),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options).
@@ -108,7 +101,7 @@
 	library(Library, UserOptions) :-
 		reset,
 		logtalk::expand_library_path(Library, Path),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_directory_files(Path, Options),
@@ -120,7 +113,7 @@
 	rdirectory(Directory, UserOptions) :-
 		reset,
 		os::absolute_file_name(Directory, Path),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_rdirectory(Path, Options).
@@ -150,7 +143,7 @@
 	directory(Directory, UserOptions) :-
 		reset,
 		os::absolute_file_name(Directory, Path),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_directory_files(Path, Options),
@@ -179,7 +172,7 @@
 	file(Source, UserOptions) :-
 		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		process(Basename, Directory, Options, StreamOptions).
@@ -189,7 +182,7 @@
 
 	all(UserOptions) :-
 		reset,
-		merge_options(UserOptions, Options),
+		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		(	logtalk::loaded_file_property(Path, directory(Directory)),
@@ -1441,100 +1434,54 @@
 		write_xml_close_tag(Stream, entity),
 		write_index_key_entities(Entities, Stream).
 
-	default_option(entity_xsl_file, 'logtalk_entity_to_xml.xsl').
-	default_option(index_xsl_file, 'logtalk_index_to_xml.xsl').
-	default_option(xml_spec, dtd).
-	default_option(xml_spec_reference, local).
-	default_option(xml_docs_directory, './xml_docs/').
-	default_option(bom, true).
-	default_option(encoding, 'UTF-8').
-	default_option(omit_path_prefixes, Prefixes) :-
+	default_option(entity_xsl_file('logtalk_entity_to_xml.xsl')).
+	default_option(index_xsl_file('logtalk_index_to_xml.xsl')).
+	default_option(xml_spec(dtd)).
+	default_option(xml_spec_reference(local)).
+	default_option(xml_docs_directory('./xml_docs/')).
+	default_option(bom(true)).
+	default_option(encoding('UTF-8')).
+	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
 			Prefixes = [Home]
 		;	Prefixes = []
 		).
-	default_option(exclude_files, []).
-	default_option(exclude_paths, []).
-	default_option(exclude_entities, []).
-	default_option(sort_predicates, false).
-
-	valid_option(entity_xsl_file).
-	valid_option(index_xsl_file).
-	valid_option(xml_spec_reference).
-	valid_option(xml_spec).
-	valid_option(xml_docs_directory).
-	valid_option(bom).
-	valid_option(encoding).
-	valid_option(omit_path_prefixes).
-	valid_option(exclude_files).
-	valid_option(exclude_paths).
-	valid_option(exclude_entities).
-	valid_option(sort_predicates).
+	default_option(exclude_files([])).
+	default_option(exclude_paths([])).
+	default_option(exclude_entities([])).
+	default_option(sort_predicates(false)).
 
 	valid_option(entity_xsl_file, File) :-
 		atom(File).
 	valid_option(index_xsl_file, File) :-
 		atom(File).
-	valid_option(xml_spec_reference, standalone) :- !.
-	valid_option(xml_spec_reference, (local)) :- !.
-	valid_option(xml_spec_reference, web) :- !.
-	valid_option(xml_spec, dtd) :- !.
-	valid_option(xml_spec, xsd) :- !.
-	valid_option(xml_docs_directory, Directory) :-
+	valid_option(xml_spec_reference(Reference)) :-
+		(Reference == standalone -> true; Reference == (local) -> true; Reference == web).
+	valid_option(xml_spec(Spec)) :-
+		(Spec == dtd -> true; Spec == xsd).
+	valid_option(xml_docs_directory(Directory)) :-
 		atom(Directory).
-	valid_option(bom, true) :- !.
-	valid_option(bom, false) :- !.
-	valid_option(encoding, Encoding) :-
+	valid_option(bom(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(encoding(Encoding)) :-
 		atom(Encoding).
-	valid_option(exclude_files, List) :-
+	valid_option(exclude_files(List)) :-
 		valid(list(atom), List).
-	valid_option(exclude_paths, List) :-
+	valid_option(exclude_paths(List)) :-
 		valid(list(atom), List).
-	valid_option(exclude_entities, List) :-
+	valid_option(exclude_entities(List)) :-
 		valid(list(atom), List).
-	valid_option(sort_predicates, true) :- !.
-	valid_option(sort_predicates, false) :- !.
+	valid_option(sort_predicates(Boolean)) :-
+		valid(boolean, Boolean).
 
-	option(Option, Value) :-
-		valid_option(Option),
-		(	option_(Option, Value2) ->
-			Value = Value2
-		;	default_option(Option, Value2) ->
-			Value = Value2
-		;	fail
-		).
-
-	set_option(Option, Value) :-
-		atom(Option),
-		ground(Value),
-		valid_option(Option, Value),
-		retractall(option_(Option, _)),
-		assertz(option_(Option, Value)).
-
-	merge_options(UserOptions, Options) :-
-		(member(xml_docs_directory(Directory0), UserOptions) -> true; option(xml_docs_directory, Directory0)),
-		(member(xml_spec_reference(XMLSRef), UserOptions) -> true; option(xml_spec_reference, XMLSRef)),
-		(member(xml_spec(XMLSpec), UserOptions) -> true; option(xml_spec, XMLSpec)),
-		(member(entity_xsl_file(EntityXSL), UserOptions) -> true; option(entity_xsl_file, EntityXSL)),
-		(member(index_xsl_file(IndexXSL), UserOptions) -> true; option(index_xsl_file, IndexXSL)),
-		(member(encoding(Encoding), UserOptions) -> true; option(encoding, Encoding)),
-		(member(bom(BOM), UserOptions) -> true; option(bom, BOM)),
-		(member(omit_path_prefixes(Prefixes0), UserOptions) -> true; option(omit_path_prefixes, Prefixes0)),
-		(member(exclude_files(ExcludedFiles0), UserOptions) -> true; option(exclude_files, ExcludedFiles0)),
-		(member(exclude_paths(ExcludedPaths0), UserOptions) -> true; option(exclude_paths, ExcludedPaths0)),
-		(member(exclude_entities(ExcludedEntities), UserOptions) -> true; option(exclude_entities, ExcludedEntities)),
-		(member(sort_predicates(SortPredicates), UserOptions) -> true; option(sort_predicates, SortPredicates)),
-		normalize_directory_paths([Directory0| Prefixes0], [Directory| Prefixes]),
-		normalize_file_paths(ExcludedFiles0, ExcludedFiles),
-		normalize_directory_paths(ExcludedPaths0, ExcludedPaths),
-		Options = [
-			xml_docs_directory(Directory), xml_spec_reference(XMLSRef), xml_spec(XMLSpec),
-			entity_xsl_file(EntityXSL), index_xsl_file(IndexXSL),
-			encoding(Encoding), bom(BOM),
-			omit_path_prefixes(Prefixes),
-			exclude_files(ExcludedFiles), exclude_paths(ExcludedPaths), exclude_entities(ExcludedEntities),
-			sort_predicates(SortPredicates)
-		].
+	fix_option(xml_docs_directory(Directory0), xml_docs_directory(Directory)) :-
+		normalize_directory_paths([Directory0], [Directory]).
+	fix_option(omit_path_prefixes(Prefixes0), omit_path_prefixes(Prefixes)) :-
+		normalize_directory_paths(Prefixes0, Prefixes).
+	fix_option(exclude_files(ExcludedFiles0), exclude_files(ExcludedFiles)) :-
+		normalize_file_paths(ExcludedFiles0, ExcludedFiles).
+	fix_option(exclude_paths(ExcludedPaths0), exclude_paths(ExcludedPaths)) :-
+		normalize_directory_paths(ExcludedPaths0, ExcludedPaths).
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
@@ -1551,7 +1498,6 @@
 		normalize_file_paths(Files, NormalizedFiles).
 
 	reset :-
-		retractall(option_(_, _)),
 		retractall(library_entity_(_, _, _, _)),
 		retractall(directory_entity_(_, _, _, _)),
 		retractall(type_entity_(_, _, _, _)),
