@@ -265,7 +265,11 @@ file:</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> category is usually imported by the root object of the
-developer tool or application.</p>
+developer tool or application. The importing object should define the
+<code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> predicate and, if option type-checking is required,
+the <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicate. This library requires options to be
+represented by compound terms but leaves otherwise to the clients the
+actual representation.</p>
 </div>
 </div>
 

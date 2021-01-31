@@ -28,11 +28,44 @@
 		see_also is [options]
 	]).
 
+	:- public(check_option/1).
+	:- mode(check_option(+compound), one_or_error).
+	:- info(check_option/1, [
+		comment is 'Succeeds if the option is valid. Throws an error otherwise.',
+		argnames is ['Option'],
+		exceptions is [
+			'Option is a variable' - instantiation_error,
+			'Option is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'Option is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
+	]).
+
+	:- public(check_options/1).
+	:- mode(check_options(+list(compound)), one_or_error).
+	:- info(check_options/1, [
+		comment is 'Succeeds if all the options in a list are valid. Throws an error otherwise.',
+		argnames is ['Options'],
+		exceptions is [
+			'Options is a variable' - instantiation_error,
+			'Options is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element Option of the Options list is a variable' - instantiation_error,
+			'An element Option of the Options list is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element Option of the Options list is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
+	]).
+
 	:- public(valid_option/1).
-	:- mode(valid_option(?compound), zero_or_one).
+	:- mode(valid_option(+compound), zero_or_one).
 	:- info(valid_option/1, [
 		comment is 'Succeeds if the option is valid.',
 		argnames is ['Option']
+	]).
+
+	:- public(valid_options/1).
+	:- mode(valid_options(+list(compound)), one).
+	:- info(valid_options/1, [
+		comment is 'Succeeds if all the options in a list are valid.',
+		argnames is ['Options']
 	]).
 
 	:- public(default_option/1).
@@ -52,7 +85,7 @@
 	:- protected(merge_options/2).
 	:- mode(merge_options(+list(compound), -list(compound)), one).
 	:- info(merge_options/2, [
-		comment is 'Merges the user options with the default options, returning the final list of options. Calls the fix_options/2 predicate to preprocess the options after merging.',
+		comment is 'Merges the user options with the default options, returning the final list of options. Calls the fix_options/2 predicate to preprocess the options after merging. Callers must ensure, if required, that the user options are valid.',
 		argnames is ['UserOptions', 'Options']
 	]).
 

@@ -47,4 +47,8 @@ Usage
 -----
 
 The ``options`` category is usually imported by the root object of the
-developer tool or application.
+developer tool or application. The importing object should define the
+``default_option/1`` predicate and, if option type-checking is required,
+the ``valid_option/1``  predicate. This library requires options to be
+represented by compound terms but leaves otherwise to the clients the
+actual representation.
