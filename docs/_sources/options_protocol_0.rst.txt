@@ -12,7 +12,7 @@ Options protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2021-01-31
+| **Date:** 2021-02-01
 
 | **Compilation flags:**
 |    ``static``
@@ -53,7 +53,7 @@ Succeeds if the option is valid. Throws an error otherwise.
 | **Template:**
 |    ``check_option(Option)``
 | **Mode and number of proofs:**
-|    ``check_option(+compound)`` - ``one_or_error``
+|    ``check_option(@term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Option`` is a variable:
@@ -84,7 +84,7 @@ Succeeds if all the options in a list are valid. Throws an error otherwise.
 | **Template:**
 |    ``check_options(Options)``
 | **Mode and number of proofs:**
-|    ``check_options(+list(compound))`` - ``one_or_error``
+|    ``check_options(@term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Options`` is a variable:
@@ -119,7 +119,7 @@ Succeeds if the option is valid.
 | **Template:**
 |    ``valid_option(Option)``
 | **Mode and number of proofs:**
-|    ``valid_option(+compound)`` - ``zero_or_one``
+|    ``valid_option(@term)`` - ``zero_or_one``
 
 
 ------------
@@ -142,7 +142,7 @@ Succeeds if all the options in a list are valid.
 | **Template:**
 |    ``valid_options(Options)``
 | **Mode and number of proofs:**
-|    ``valid_options(+list(compound))`` - ``one``
+|    ``valid_options(@term)`` - ``one``
 
 
 ------------

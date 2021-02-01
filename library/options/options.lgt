@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-02-01,
 		comment is 'Options processing predicates.'
 	]).
 
@@ -81,7 +81,7 @@
 			DefaultOptions
 		),
 		append(UserOptions, DefaultOptions, Options0),
-		::fix_options(Options0, Options).
+		fix_options(Options0, Options).
 
 	fix_options([], []).
 	fix_options([Option| Options], [FixedOption| FixedOptions]) :-

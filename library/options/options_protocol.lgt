@@ -23,13 +23,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-02-01,
 		comment is 'Options protocol.',
 		see_also is [options]
 	]).
 
 	:- public(check_option/1).
-	:- mode(check_option(+compound), one_or_error).
+	:- mode(check_option(@term), one_or_error).
 	:- info(check_option/1, [
 		comment is 'Succeeds if the option is valid. Throws an error otherwise.',
 		argnames is ['Option'],
@@ -41,7 +41,7 @@
 	]).
 
 	:- public(check_options/1).
-	:- mode(check_options(+list(compound)), one_or_error).
+	:- mode(check_options(@term), one_or_error).
 	:- info(check_options/1, [
 		comment is 'Succeeds if all the options in a list are valid. Throws an error otherwise.',
 		argnames is ['Options'],
@@ -55,14 +55,14 @@
 	]).
 
 	:- public(valid_option/1).
-	:- mode(valid_option(+compound), zero_or_one).
+	:- mode(valid_option(@term), zero_or_one).
 	:- info(valid_option/1, [
 		comment is 'Succeeds if the option is valid.',
 		argnames is ['Option']
 	]).
 
 	:- public(valid_options/1).
-	:- mode(valid_options(+list(compound)), one).
+	:- mode(valid_options(@term), one).
 	:- info(valid_options/1, [
 		comment is 'Succeeds if all the options in a list are valid.',
 		argnames is ['Options']
