@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:10:1,
 		author is 'Paulo Moura',
-		date is 2020-11-29,
+		date is 2021-02-01,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -173,7 +173,7 @@
 		^^set_text_input('foo(_X,_Y,_x,_y). '),
 		{read_term(T, [singletons(S)])},
 		compound(T),
-		^^assertion(T = foo(A, B, C, D)),
+		T = foo(A, B, C, D),
 		^^assertion(S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D]).
 
 	test(lgt_read_term_3_29, true) :-
@@ -197,7 +197,7 @@
 
 	% check detection of invalid options; the ISO Prolog standard only
 	% specifies a domain_error/2 but an instantiation_error/0 is also
-	% a sensible choice made by several Prolog systems when applicable 
+	% a sensible choice made by several Prolog systems when applicable
 
 	test(lgt_read_term_3_31, error(domain_error(read_option,variables(a)))) :-
 		{read_term(_, [variables(a)])}.
