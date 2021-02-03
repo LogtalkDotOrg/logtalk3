@@ -35,9 +35,12 @@
 	cover(csv).
 
 	setup :-
-		catch(os::delete_file('test_files/output00.csv'), _, true),
-		catch(os::delete_file('test_files/output01.csv'), _, true),
-		catch(os::delete_file('test_files/output02.csv'), _, true).
+		file_path('test_files/output00.csv', Path1),
+		catch(os::delete_file(Path1), _, true),
+		file_path('test_files/output01.csv', Path2),
+		catch(os::delete_file(Path2), _, true),
+		file_path('test_files/output02.csv', Path3),
+		catch(os::delete_file(Path3), _, true).
 
 	cleanup :-
 		setup.
@@ -45,7 +48,8 @@
 	% An empty file is read
 	test(csv_read_sample_csv_empty_file, true(Rows == [])) :-
 		^^suppress_text_output,
-		csv::read_file('test_files/empty.csv', Rows).
+		file_path('test_files/empty.csv', Path),
+		csv::read_file(Path, Rows).
 
 	% following: https://www.rfc-editor.org/rfc/rfc4180.txt
 
@@ -55,14 +59,16 @@
     %    zzz,yyy,xxx CRLF
 	test(csv_read_sample_csv_crlf_ending, true(Rows == [[aaa,bbb,ccc],[zzz,yyy,xxx]])) :-
 		^^suppress_text_output,
-		csv::read_file('test_files/crlf_ending.csv', Rows).
+		file_path('test_files/crlf_ending.csv', Path),
+		csv::read_file(Path, Rows).
 
 	%    without CRLF in the last row
     %    aaa,bbb,ccc CRLF
     %    zzz,yyy,xxx
 	test(csv_read_sample_csv_no_crlf_at_end, true(Rows == [[aaa,bbb,ccc],[zzz,yyy,xxx]])) :-
 		^^suppress_text_output,
-		csv::read_file('test_files/no_crlf_at_end.csv', Rows).
+		file_path('test_files/no_crlf_at_end.csv', Path),
+		csv::read_file(Path, Rows).
 
 	%3.  There maybe an optional header line appearing as the first line
 	%    of the file with the same format as normal record lines.  This
@@ -77,17 +83,20 @@
 	%        zzz,yyy,xxx CRLF
 	test(csv_read_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
-		csv::read_file('test_files/with_header.csv', Rows).
+		file_path('test_files/with_header.csv', Path),
+		csv::read_file(Path, Rows).
 
 	%
 	test(csv_read_by_line_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
-		csv::read_file_by_line('test_files/with_header.csv', Rows).
+		file_path('test_files/with_header.csv', Path),
+		csv::read_file_by_line(Path, Rows).
 
 	% but we have an option to jump over the headers
 	test(csv_read_sample_csv_skip_header, true(Rows == [[aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
-		csv(skip, comma, true)::read_file('test_files/with_header.csv', Rows).
+		file_path('test_files/with_header.csv', Path),
+		csv(skip, comma, true)::read_file(Path, Rows).
 
 	%4.  Within the header and each record, there may be one or more
 	%    fields, separated by commas.  Each line should contain the same
@@ -98,7 +107,8 @@
 	%       aaa,bbb,ccc
 	test(csv_read_sample_csv_with_spaces, true(Rows == [['       aaa', bbb, ccc]])) :-
 		^^suppress_text_output,
-		csv(missing, comma, true)::read_file('test_files/with_spaces.csv', Rows).
+		file_path('test_files/with_spaces.csv', Path),
+		csv(missing, comma, true)::read_file(Path, Rows).
 
 	%5.  Each field may or may not be enclosed in double quotes (however
 	%    some programs, such as Microsoft Excel, do not use double quotes
@@ -109,7 +119,8 @@
 	%    zzz,yyy,xxx
 	test(csv_read_sample_csv_with_double_quotes, true(Rows == [['"aaa"', '"bbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
-		csv::read_file('test_files/with_double_quotes.csv', Rows).
+		file_path('test_files/with_double_quotes.csv', Path),
+		csv::read_file(Path, Rows).
 
 	%6.  Fields containing line breaks (CRLF), double quotes, and commas
 	%    should be enclosed in double-quotes.  For example:
@@ -119,7 +130,8 @@
 	%    zzz,yyy,xxx
 	test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
-		csv::read_file('test_files/escaping_double_quotes.csv', Rows).
+		file_path('test_files/escaping_double_quotes.csv', Path),
+		csv::read_file(Path, Rows).
 
 
 	%7.  If double-quotes are used to enclose fields, then a double-quote
@@ -129,7 +141,8 @@
 	%    "aaa","b""bb","ccc"
 	test(csv_read_sample_csv_double_double_quotes, true(Rows == [['"aaa"', '"b""bb"', '"ccc"']])) :-
 		^^suppress_text_output,
-		csv(missing, comma, false)::read_file('test_files/double_double_quotes.csv', Rows).
+		file_path('test_files/double_double_quotes.csv', Path),
+		csv(missing, comma, false)::read_file(Path, Rows).
 
 	% Adapted from https://www.iana.org/assignments/media-types/text/tab-separated-values
 	%Name<TAB><TAB>Age<TAB>Address
@@ -138,109 +151,146 @@
 	%Zeke<TAB><TAB>45<TAB>W Main St
 	test(csv_read_sample_tsv_tab_separated, true(Rows == [['Name', 'Age', 'Address'], ['Paul', 23, '1115 W Franklin'], ['Bessy the Cow', 5, 'Big Farm Way'], ['Zeke', 45, 'W Main St']])) :-
 		^^suppress_text_output,
-		csv(keep, tab, true)::read_file('test_files/tab_separated.tsv', Rows).
+		file_path('test_files/tab_separated.tsv', Path),
+		csv(keep, tab, true)::read_file(Path, Rows).
 
 	%
 	test(csv_read_sample_csv_comma_separated, true(Rows == [['Name', 'Age', 'Address'], ['Paul', 23, '1115 W Franklin'], ['Bessy the Cow', 5, 'Big Farm Way'], ['Zeke', 45, 'W Main St']])) :-
 		^^suppress_text_output,
-		csv(keep, comma, true)::read_file('test_files/comma_separated.csv', Rows).
+		file_path('test_files/comma_separated.csv', Path),
+		csv(keep, comma, true)::read_file(Path, Rows).
 
 	%
 	test(csv_read_sample_ssv_semicolon_separated, true(Rows == [['Name', 'Age', 'Address'], ['Paul', 23, '1115 W Franklin'], ['Bessy the Cow', 5, 'Big Farm Way'], ['Zeke', 45, 'W Main St']])) :-
 		^^suppress_text_output,
-		csv(keep, semicolon, true)::read_file('test_files/semicolon_separated.ssv', Rows).
+		file_path('test_files/semicolon_separated.ssv', Path),
+		csv(keep, semicolon, true)::read_file(Path, Rows).
 
 	%
 	test(csv_read_sample_csv_colon_separated, true(Rows == [['Name', 'Age', 'Address'], ['Paul', 23, '1115 W Franklin'], ['Bessy the Cow', 5, 'Big Farm Way'], ['Zeke', 45, 'W Main St']])) :-
 		^^suppress_text_output,
-		csv(keep, colon, true)::read_file('test_files/colon_separated.csv', Rows).
+		file_path('test_files/colon_separated.csv', Path),
+		csv(keep, colon, true)::read_file(Path, Rows).
 
 	% Dealing with numbers (even in other languages)
 	test(csv_read_sample_tsv_tab_vs_comma, true(Rows == [['Salario', '1.000.000,50']])) :-
 		^^suppress_text_output,
-		csv(missing, tab, true)::read_file('test_files/tab_vs_comma.tsv', Rows).
+		file_path('test_files/tab_vs_comma.tsv', Path),
+		csv(missing, tab, true)::read_file(Path, Rows).
 
 	% reading just numbers
 	test(csv_read_sample_csv_integers, true(Rows == [[1,2,3]])) :-
 		^^suppress_text_output,
-		csv(missing, comma, true)::read_file('test_files/integers.csv', Rows).
+		file_path('test_files/integers.csv', Path),
+		csv(missing, comma, true)::read_file(Path, Rows).
 
 	% format taken from https://www.stats.govt.nz/assets/Uploads/Business-financial-data/Business-financial-data-September-2020-quarter/Download-data/business-financial-data-september-2020-quarter-csv.zip
 	% testing empty fields at the beginning, in the middle and at the end of a record
 	test(csv_read_sample_csv_empty_beginning, true(Rows == [['Series_reference','Period','Data_value','Suppressed','STATUS','UNITS','Magnitude','Subject','Group','Series_title_1','Series_title_2','Series_title_3','Series_title_4','Series_title_5'],['',0.0,1.0,datum,datum,datum,0,datum,datum,datum,datum,datum,datum]])) :-
 		^^suppress_text_output,
-		csv(keep, comma, true)::read_file('test_files/empty_beginning.csv', Rows).
+		file_path('test_files/empty_beginning.csv', Path),
+		csv(keep, comma, true)::read_file(Path, Rows).
 
 	% format taken from https://www.stats.govt.nz/assets/Uploads/Business-financial-data/Business-financial-data-September-2020-quarter/Download-data/business-financial-data-september-2020-quarter-csv.zip
 	% testing empty fields at the beginning, in the middle and at the end of a record
 	test(csv_read_sample_csv_empty_empty_middle, true(Rows == [['Series_reference','Period','Data_value','Suppressed','STATUS','UNITS','Magnitude','Subject','Group','Series_title_1','Series_title_2','Series_title_3','Series_title_4','Series_title_5'],[datum,0.0,1.0,'',datum,datum,0,datum,datum,datum,datum,datum,datum]])) :-
 		^^suppress_text_output,
-		csv(keep, comma, true)::read_file('test_files/empty_middle.csv', Rows).
+		file_path('test_files/empty_middle.csv', Path),
+		csv(keep, comma, true)::read_file(Path, Rows).
 
 	% format taken from https://www.stats.govt.nz/assets/Uploads/Business-financial-data/Business-financial-data-September-2020-quarter/Download-data/business-financial-data-september-2020-quarter-csv.zip
 	% testing empty fields at the beginning, in the middle and at the end of a record
 	test(csv_read_sample_csv_empty_end, true(Rows == [['Series_reference','Period','Data_value','Suppressed','STATUS','UNITS','Magnitude','Subject','Group','Series_title_1','Series_title_2','Series_title_3','Series_title_4','Series_title_5'],[datum,0.0,1.0,'datum 1',datum,datum,0,'datum 42',datum,datum,datum,datum,'']])) :-
 		^^suppress_text_output,
-		csv(keep, comma, true)::read_file('test_files/empty_end.csv', Rows).
+		file_path('test_files/empty_end.csv', Path),
+		csv(keep, comma, true)::read_file(Path, Rows).
 
 	% Guessing separator (with one argument method). The output on the second parameter of the object
 	% with comma
 	test(csv_guess_separator_crlf_ending, true(Separator == comma)) :-
 		^^suppress_text_output,
-		csv::guess_separator('test_files/crlf_ending.csv', Separator).
+		file_path('test_files/crlf_ending.csv', Path),
+		csv::guess_separator(Path, Separator).
 
 	% with tab
 	test(csv_guess_separator_tab_separated, true(Separator == tab)) :-
 		^^suppress_text_output,
-		csv::guess_separator('test_files/tab_separated.tsv', Separator).
+		file_path('test_files/tab_separated.tsv', Path),
+		csv::guess_separator(Path, Separator).
 
 	% with tab
 	test(csv_guess_separator_tab_vs_comma, true(Separator == tab)) :-
 		^^suppress_text_output,
-		csv::guess_separator('test_files/tab_vs_comma.tsv', Separator).
+		file_path('test_files/tab_vs_comma.tsv', Path),
+		csv::guess_separator(Path, Separator).
 
 	% An "ambiguous" file has more than one possible separator
 	%
 	test(csv_guess_separator_ambiguous, true(Separators == [comma,tab])) :-
-          ^^suppress_text_output,
-          setof(Separator, csv::guess_separator('test_files/ambiguous.asv', Separator), Separators).
+		^^suppress_text_output,
+		file_path('test_files/ambiguous.asv', Path),
+		setof(Separator, csv::guess_separator(Path, Separator), Separators).
 
 	%
 	test(csv_writing_correctly, true(Rows == [['"quote alone "" in here"','"quote escaped """','"no quote at the end"']])) :-
 		^^suppress_text_output,
 		user::retractall(p(_, _, _)),
 		user::assertz(p('quote alone " in here', 'quote escaped ""', '"no quote at the end')),
-		csv::write_file('test_files/output00.csv', user, p/3),
-		csv(keep, comma, false)::read_file('test_files/output00.csv', Rows).
+		file_path('test_files/output00.csv', Path),
+		csv::write_file(Path, user, p/3),
+		csv(keep, comma, false)::read_file(Path, Rows).
 
 	% round-trip testing with read/write user::p/3 where p/3 is dynamics
 	% reading file11.csv and writing on output.csv and diff them
 	test(csv_round_trip_input_01, true(Diff == 0)) :-
 		^^suppress_text_output,
 		user::retractall(p(_, _, _)),
-		csv::read_file('test_files/input01.csv', user, p/3),
-		csv::write_file('test_files/output01.csv', user, p/3),
-		os::shell('diff test_files/input01.csv test_files/output01.csv', Diff).
+		file_path('test_files/input01.csv', Path1),
+		file_path('test_files/output01.csv', Path2),
+		csv::read_file(Path1, user, p/3),
+		csv::write_file(Path2, user, p/3),
+		atom_concat('diff ', Path1, Command0),
+		atom_concat(Command0, ' ', Command1),
+		atom_concat(Command1, Path2, Command),
+		os::shell(Command, Diff).
 
 	% round trip as before but without regarding dquotes: _IgnoreQuotes_==true
 	test(csv_round_trip_input_02, true(Diff == 0)) :-
 		^^suppress_text_output,
 		user::retractall(q(_, _, _)),
-		csv(keep, comma, true)::read_file('test_files/input02.csv', user, q/3),
-		csv(keep, comma, true)::write_file('test_files/output02.csv', user, q/3),
-		os::shell('diff test_files/input02.csv test_files/output02.csv', Diff).
+		file_path('test_files/input02.csv', Path1),
+		file_path('test_files/output02.csv', Path2),
+		csv(keep, comma, true)::read_file(Path1, user, q/3),
+		csv(keep, comma, true)::write_file(Path2, user, q/3),
+		atom_concat('diff ', Path1, Command0),
+		atom_concat(Command0, ' ', Command1),
+		atom_concat(Command1, Path2, Command),
+		os::shell(Command, Diff).
 
 	%
 	test(csv_round_trip_input_02_read_by_line, true(Diff == 0)) :-
 		^^suppress_text_output,
 		user::retractall(q(_, _, _)),
-		csv(keep, comma, true)::read_file_by_line('test_files/input02.csv', user, q/3),
-		csv(keep, comma, true)::write_file('test_files/output02.csv', user, q/3),
-		os::shell('diff test_files/input02.csv test_files/output02.csv', Diff).
+		file_path('test_files/input02.csv', Path1),
+		file_path('test_files/output02.csv', Path2),
+		csv(keep, comma, true)::read_file_by_line(Path1, user, q/3),
+		csv(keep, comma, true)::write_file(Path2, user, q/3),
+		atom_concat('diff ', Path1, Command0),
+		atom_concat(Command0, ' ', Command1),
+		atom_concat(Command1, Path2, Command),
+		os::shell(Command, Diff).
 
 	% guess arity
 	% reading that file from https://www.stats.govt.nz/large-datasets/csv-files-for-download/
 	test(csv_guess_arity, true(Arity == 14)) :-
-		csv(keep, comma, false)::guess_arity('test_files/arity.csv', Arity).
+		file_path('test_files/arity.csv', Path),
+		csv(keep, comma, false)::guess_arity(Path, Arity).
+
+	% auxiliary predicates
+
+	file_path(File, Path) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, File, Path).
 
 :- end_object.
