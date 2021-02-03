@@ -85,6 +85,9 @@ predicates for the `public/1`, `protected/1`, and `private/1` properties.
 Library
 -------
 
+* ADDED: Library `csv` for reading and writing CSV files. Contributed by
+Jacinto Dávila.
+
 * ADDED: Library `term_io` for term input/output from/to atom, chars, and
 codes.
 

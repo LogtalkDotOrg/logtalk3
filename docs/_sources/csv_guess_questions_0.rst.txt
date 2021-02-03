@@ -1,0 +1,54 @@
+.. index:: csv_guess_questions
+.. _csv_guess_questions/0:
+
+.. rst-class:: right
+
+**category**
+
+``csv_guess_questions``
+=======================
+
+Support for asking questions when guessing the separator and the record arity of CSV files.
+
+| **Author:** Jacinto Dávila
+| **Version:** 1:0:0
+| **Date:** 2021-02-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
+|    :ref:`logtalk::question_prompt_stream/4 <logtalk/0::question_prompt_stream/4>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

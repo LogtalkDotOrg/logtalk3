@@ -1,0 +1,213 @@
+.. index:: csv_protocol
+.. _csv_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``csv_protocol``
+================
+
+CSV files reading and writing protocol.
+
+| **Author:** Jacinto Dávila
+| **Version:** 1:0:0
+| **Date:** 2021-02-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="read_file/3"> </div>
+
+.. index:: read_file/3
+.. _csv_protocol/0::read_file/3:
+
+``read_file/3``
+^^^^^^^^^^^^^^^
+
+Reads a CSV file saving the data as clauses for the specified object predicate. Fails if the file cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_file(File,Object,Predicate)``
+| **Mode and number of proofs:**
+|    ``read_file(+atom,+object_identifier,+predicate_indicator)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="read_file/2"> </div>
+
+.. index:: read_file/2
+.. _csv_protocol/0::read_file/2:
+
+``read_file/2``
+^^^^^^^^^^^^^^^
+
+Reads a CSV file returning the data as a list of rows, each row a list of fields. Fails if the file cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_file(File,Rows)``
+| **Mode and number of proofs:**
+|    ``read_file(+atom,-list(list))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="read_file_by_line/3"> </div>
+
+.. index:: read_file_by_line/3
+.. _csv_protocol/0::read_file_by_line/3:
+
+``read_file_by_line/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Reads a CSV file saving the data as clauses for the specified object predicate. The file is read line by line. Fails if the file cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_file_by_line(File,Object,Predicate)``
+| **Mode and number of proofs:**
+|    ``read_file_by_line(+atom,+object_identifier,+predicate_indicator)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="read_file_by_line/2"> </div>
+
+.. index:: read_file_by_line/2
+.. _csv_protocol/0::read_file_by_line/2:
+
+``read_file_by_line/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Reads a CSV file returning the data as a list of rows, each row a list of fields. The file is read line by line. Fails if the file cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_file_by_line(File,Rows)``
+| **Mode and number of proofs:**
+|    ``read_file_by_line(+atom,-list(list))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="write_file/3"> </div>
+
+.. index:: write_file/3
+.. _csv_protocol/0::write_file/3:
+
+``write_file/3``
+^^^^^^^^^^^^^^^^
+
+Writes a CSV file with the data represented by the clauses of the specified object predicate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_file(File,Object,Predicate)``
+| **Mode and number of proofs:**
+|    ``write_file(+atom,+object_identifier,+predicate_indicator)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="guess_separator/2"> </div>
+
+.. index:: guess_separator/2
+.. _csv_protocol/0::guess_separator/2:
+
+``guess_separator/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Guesses the separator used in a given file, asking the user to confirm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_separator(File,Separator)``
+| **Mode and number of proofs:**
+|    ``guess_separator(+atom,-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="guess_arity/2"> </div>
+
+.. index:: guess_arity/2
+.. _csv_protocol/0::guess_arity/2:
+
+``guess_arity/2``
+^^^^^^^^^^^^^^^^^
+
+Guesses the arity of records in a given file, asking the user to confirm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``guess_arity(File,Arity)``
+| **Mode and number of proofs:**
+|    ``guess_arity(+atom,-number)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

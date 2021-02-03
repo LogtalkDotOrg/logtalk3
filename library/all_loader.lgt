@@ -55,6 +55,7 @@
 		timeout(loader),
 		gensym(loader),
 		git(loader),
+		csv(loader),
 		cloning,
 		counters,
 		streamvars

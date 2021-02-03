@@ -1,0 +1,53 @@
+.. index:: csv
+.. _csv/0:
+
+.. rst-class:: right
+
+**object**
+
+``csv``
+=======
+
+CSV files reading and writing predicates using the options Header - ``keep``, Separator - ``comma``, and IgnoreQuotes - ``false``.
+
+| **Author:** Jacinto Dávila
+| **Version:** 1:0:0
+| **Date:** 2021-02-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`csv(keep,comma,false) <csv/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`csv_protocol/0::guess_arity/2`  :ref:`csv_protocol/0::guess_separator/2`  :ref:`csv_protocol/0::read_file/2`  :ref:`csv_protocol/0::read_file/3`  :ref:`csv_protocol/0::read_file_by_line/2`  :ref:`csv_protocol/0::read_file_by_line/3`  :ref:`csv_protocol/0::write_file/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

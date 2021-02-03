@@ -89,6 +89,19 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    coroutining <coroutining_0>
 
+``csv``
+-------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   csv <csv_0>
+   csv(Header,Separator,IgnoreQuotes) <csv_3>
+   csv_guess_questions <csv_guess_questions_0>
+   csv_protocol <csv_protocol_0>
+
 ``dates``
 ---------
 

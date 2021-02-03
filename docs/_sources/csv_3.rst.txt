@@ -1,0 +1,63 @@
+.. index:: csv(Header，Separator，IgnoreQuotes)
+.. _csv/3:
+
+.. rst-class:: right
+
+**object**
+
+``csv(Header,Separator,IgnoreQuotes)``
+======================================
+
+* ``Header`` - Header handling option with possible values ``missing``, ``skip``, and ``keep``.
+* ``Separator`` - Separator handling option with possible values ``comma``, ``tab``, ``semicolon``, and ``colon``.
+* ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``) double quotes surrounding data.
+
+
+CSV files reading and writing predicates.
+
+| **Author:** Jacinto Dávila
+| **Version:** 1:0:0
+| **Date:** 2021-02-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`csv_protocol <csv_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`csv_protocol/0::guess_arity/2`  :ref:`csv_protocol/0::guess_separator/2`  :ref:`csv_protocol/0::read_file/2`  :ref:`csv_protocol/0::read_file/3`  :ref:`csv_protocol/0::read_file_by_line/2`  :ref:`csv_protocol/0::read_file_by_line/3`  :ref:`csv_protocol/0::write_file/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

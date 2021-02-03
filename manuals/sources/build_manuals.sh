@@ -63,6 +63,7 @@ sed '1,18d' ../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,18d' ../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,18d' ../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
 sed '1,18d' ../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
+sed '1,18d' ../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
 sed '1,18d' ../../library/dates/NOTES.md | pandoc -f gfm -t rst -o libraries/dates.rst
 sed '1,18d' ../../library/dependents/NOTES.md | pandoc -f gfm -t rst -o libraries/dependents.rst
 sed '1,18d' ../../library/dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/dictionaries.rst

@@ -25,6 +25,7 @@ Categories
    code_metrics_utilities <code_metrics_utilities_0>
    core_messages <core_messages_0>
    counters <counters_0>
+   csv_guess_questions <csv_guess_questions_0>
    dead_code_scanner_messages <dead_code_scanner_messages_0>
    debugger_messages <debugger_messages_0>
    diagram(Format) <diagram_1>
@@ -77,6 +78,8 @@ Objects
    counter <counter_0>
    coupling_metric <coupling_metric_0>
    coverage_report <coverage_report_0>
+   csv <csv_0>
+   csv(Header,Separator,IgnoreQuotes) <csv_3>
    date <date_0>
    dead_code_scanner <dead_code_scanner_0>
    debug_expansion(Mode) <debug_expansion_1>
@@ -222,6 +225,7 @@ Protocols
    class_hierarchyp <class_hierarchyp_0>
    cloning <cloning_0>
    comparingp <comparingp_0>
+   csv_protocol <csv_protocol_0>
    databasep <databasep_0>
    datep <datep_0>
    debuggerp <debuggerp_0>

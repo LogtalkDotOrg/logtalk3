@@ -30,6 +30,7 @@ directory in the ``NOTES.md`` file.
    assignvars
    basic_types
    coroutining
+   csv
    dates
    dependents
    dictionaries

@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>csv &mdash; The Logtalk Handbook v3.44.0-b02 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="dates" href="dates.html" />
+    <link rel="prev" title="coroutining" href="coroutining.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.44.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+	<p class="caption"><span class="caption-text">External Contents</span></p>
+    <a href="../docs/index.html">APIs</a>
+    <a href="https://logtalk.org">Logtalk website</a>
+    <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
+  
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Libraries</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">csv</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/libraries/csv.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="csv">
+<h1><code class="docutils literal notranslate"><span class="pre">csv</span></code><a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv</span></code> library provides predicates for reading and writing CSV
+files:</p>
+<p><a class="reference external" href="https://www.rfc-editor.org/rfc/rfc4180.txt">https://www.rfc-editor.org/rfc/rfc4180.txt</a></p>
+<p>The main object, <code class="docutils literal notranslate"><span class="pre">csv/3</span></code>, is a parametric object allowing passing
+options for the handling of the header of the file, the fields
+separator, and the handling of double-quoted fields. The <code class="docutils literal notranslate"><span class="pre">cvs</span></code> object
+extends the <code class="docutils literal notranslate"><span class="pre">csv/3</span></code> parametric object using default option values.</p>
+<p>The library also include predicates to guess the separator and guess the
+number of columns in a given CSV file.</p>
+<p>Files can be read into a list of rows (with each row being represented
+by a list of fields) or asserted using a user-defined dynamic predicate.</p>
+<p>Data can be saved to a CSV file by providing the object and predicate
+for accessing the data plus the name of the destination file.</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#csv">../../docs/library_index.html#csv</a>
+link in a web browser.</p>
+</div>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(csv(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(csv(tester)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv(Header,</span> <span class="pre">Separator,</span> <span class="pre">IgnoreQuotes)</span></code> parametric object allows
+passing the following options:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Header</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">missing</span></code>, <code class="docutils literal notranslate"><span class="pre">skip</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Separator</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">comma</span></code>, <code class="docutils literal notranslate"><span class="pre">tab</span></code>, <code class="docutils literal notranslate"><span class="pre">semicolon</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">colon</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IgnoreQuotes</span></code>: possible values are <code class="docutils literal notranslate"><span class="pre">true</span></code> to ignore double
+quotes surrounding field data and <code class="docutils literal notranslate"><span class="pre">false</span></code> to preserve the double
+quotes.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv</span></code> object uses the default values <code class="docutils literal notranslate"><span class="pre">keep</span></code>, <code class="docutils literal notranslate"><span class="pre">comma</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>When writing CSV files, set the quoted fields option to <code class="docutils literal notranslate"><span class="pre">false</span></code> to
+write all non-numeric fields double-quoted (i.e. escaped).</p>
+<p>The library objects can also be used to guess the separator used in a
+CSV file if necessary. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv<span class="o">::</span>guess_separator(<span class="s">&#39;test_files/crlf_ending.csv&#39;</span>, <span class="nv">Separator</span>).
+<span class="nv">Is</span> this the proper reading of a line of this file (y<span class="o">/</span>n)<span class="o">?</span> [aaa,bb,ccc]
+|<span class="o">&gt;</span> y.
+
+<span class="nv">Separator</span> <span class="o">=</span> comma <span class="o">?</span>
+</pre></div>
+</div>
+<p>This information can then be used to read the CSV file returning a list
+of rows:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>)<span class="o">::</span>read_file(<span class="s">&#39;test_files/crlf_ending.csv&#39;</span>, <span class="nv">Rows</span>).
+
+<span class="nv">Rows</span> <span class="o">=</span> [[aaa,bbb,ccc],[zzz,yyy,xxx]] <span class="o">?</span>
+</pre></div>
+</div>
+<p>Alternatively, The CSV data can be saved using a public and dynamic
+object predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>)<span class="o">::</span>read_file(<span class="s">&#39;test_files/crlf_ending.csv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
+<span class="o">**</span> yes
+
+| <span class="o">?-</span>  p(<span class="nv">A</span>,<span class="nv">B</span>,<span class="nv">C</span>).
+
+<span class="nv">A</span> <span class="o">=</span> aaa
+<span class="nv">B</span> <span class="o">=</span> bbb
+<span class="nv">C</span> <span class="o">=</span> ccc <span class="o">?</span> <span class="o">;</span>
+
+<span class="nv">A</span> <span class="o">=</span> zzz
+<span class="nv">B</span> <span class="o">=</span> yyy
+<span class="nv">C</span> <span class="o">=</span> xxx
+</pre></div>
+</div>
+<p>Given a predicate representing a table, the predicate data can be
+written to a file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>)<span class="o">::</span>write_file(<span class="s">&#39;output.csv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
+<span class="o">**</span> yes
+</pre></div>
+</div>
+<p>leaving the content just as the original file thanks to the use of
+<code class="docutils literal notranslate"><span class="pre">true</span></code> for the <code class="docutils literal notranslate"><span class="pre">IgnoreQuotes</span></code> option:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>aaa,bbb,ccc
+zzz,yyy,xxx
+</pre></div>
+</div>
+<p>Otherwise:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">false</span>)<span class="o">::</span>write_file(<span class="s">&#39;output.csv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
+<span class="o">**</span> yes
+</pre></div>
+</div>
+<p>results in the following file content:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;aaa&quot;</span>,<span class="s">&quot;bbb&quot;</span>,<span class="s">&quot;ccc&quot;</span>
+<span class="s">&quot;zzz&quot;</span>,<span class="s">&quot;yyy&quot;</span>,<span class="s">&quot;xxx&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">guess_arity/2</span></code> method, to identify the arity, i. e. the number of
+fields or columns per record in a given CSV file, for example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">false</span>)<span class="o">::</span>guess_arity(<span class="s">&#39;test_files/crlf_ending.csv&#39;</span>, <span class="nv">Arity</span>).
+<span class="nv">Is</span> this the proper reading of a line of this file (y<span class="o">/</span>n)<span class="o">?</span> [aaa,bbb,ccc]
+|<span class="o">&gt;</span> y.
+
+<span class="nv">Arity</span> <span class="o">=</span> <span class="m">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dates.html" class="btn btn-neutral float-right" title="dates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="coroutining.html" class="btn btn-neutral float-left" title="coroutining" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 1998-2021, Paulo Moura.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

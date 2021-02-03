@@ -2994,6 +2994,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pairs <pairs/0::group_by_key/2>`
 
+``guess_arity/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::guess_arity/2>`
+
+``guess_separator/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::guess_separator/2>`
+
 ``hamming_distance/3``
 ----------------------
 
@@ -5652,7 +5672,38 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`csv_protocol <csv_protocol/0::read_file/2>`
 * :ref:`read_file <read_file/0::read_file/2>`
+
+``read_file/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_file/3>`
+
+``read_file_by_line/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_file_by_line/2>`
+
+``read_file_by_line/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_file_by_line/3>`
 
 ``read_from_atom/2``
 --------------------
@@ -7215,6 +7266,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::working_directory/1>`
+
+``write_file/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::write_file/3>`
 
 ``write_term_to_atom/3``
 ------------------------
