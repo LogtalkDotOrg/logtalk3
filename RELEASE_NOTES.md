@@ -21,6 +21,15 @@ RELEASE NOTES
 =============
 
 
+3.45.0 - March ??, 2021
+=======================
+
+Tools
+-----
+
+* FIXED: The cleanup step for the `lgtdoc` tool unit tests.
+
+
 3.44.0 - February 3, 2021
 =========================
 

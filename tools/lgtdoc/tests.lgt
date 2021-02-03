@@ -22,9 +22,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-02-03,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -47,7 +47,8 @@
 	]).
 
 	:- uses(os, [
-		directory_files/2, delete_file/1, delete_directory/1
+		directory_files/3, delete_file/1, delete_directory/1,
+		working_directory/1, path_concat/3
 	]).
 
 	:- uses(list, [
@@ -56,8 +57,8 @@
 
 	setup :-
 		retractall(xml_docs_directory_(_)),
-		os::working_directory(Directory),
-		atom_concat(Directory, 'xml_docs/', XMLDocsDirectory),
+		working_directory(Directory),
+		path_concat(Directory, 'xml_docs/', XMLDocsDirectory),
 		assertz(xml_docs_directory_(XMLDocsDirectory)).
 
 	% the following tests ony check (for now) that the called
@@ -107,12 +108,12 @@
 
 	cleanup :-
 		xml_docs_directory_(XMLDocsDirectory),
-		os::directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
+		directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
 		forall(
 			list::member(XMLFile, XMLFiles),
-			os::delete_file(XMLFile)
+			delete_file(XMLFile)
 		),
-		os::delete_directory(XMLDocsDirectory).
+		delete_directory(XMLDocsDirectory).
 
 	% suppress all messages from the "lgtdoc" tool
 	% component to not pollute the unit tests output
