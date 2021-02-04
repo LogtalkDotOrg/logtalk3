@@ -118,6 +118,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
@@ -259,6 +260,13 @@ directory.</p>
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dead_code_scanner(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dead_code_scanner(tester)).
 </pre></div>
 </div>
 </div>

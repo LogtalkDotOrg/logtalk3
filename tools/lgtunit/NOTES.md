@@ -65,6 +65,14 @@ This tool can be loaded using the query:
 	| ?- logtalk_load(lgtunit(loader)).
 
 
+Testing
+-------
+
+To test this tool, load the `tester.lgt` file:
+
+	| ?- logtalk_load(lgtunit(tester)).
+
+
 Writing and loading tests
 -------------------------
 

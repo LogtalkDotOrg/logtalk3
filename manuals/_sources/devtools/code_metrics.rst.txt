@@ -29,6 +29,15 @@ This tool can be loaded using the query:
 
    | ?- logtalk_load(code_metrics(loader)).
 
+Testing
+-------
+
+To test this tool, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(code_metrics(tester)).
+
 Available metrics
 -----------------
 

@@ -35,6 +35,15 @@ Note that this tool cannot be loaded at the same time as other tools
 (e.g. the debugger) that also provide a debug handler, which must be
 unique in a running session.
 
+Testing
+-------
+
+To test this tool, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ports_profiler(tester)).
+
 Compiling source files for port profiling
 -----------------------------------------
 

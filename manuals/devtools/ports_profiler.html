@@ -128,6 +128,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compiling-source-files-for-port-profiling">Compiling source files for port profiling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-profiling-data">Generating profiling data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#printing-profiling-data-reports">Printing profiling data reports</a></li>
@@ -250,6 +251,13 @@ directory.</p>
 <p>Note that this tool cannot be loaded at the same time as other tools
 (e.g. the debugger) that also provide a debug handler, which must be
 unique in a running session.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ports_profiler(tester)).
+</pre></div>
+</div>
 </div>
 <div class="section" id="compiling-source-files-for-port-profiling">
 <h2>Compiling source files for port profiling<a class="headerlink" href="#compiling-source-files-for-port-profiling" title="Permalink to this headline">¶</a></h2>

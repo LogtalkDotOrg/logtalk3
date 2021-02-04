@@ -126,6 +126,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#main-files">Main files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#writing-and-loading-tests">Writing and loading tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parametric-test-objects">Parametric test objects</a></li>
@@ -277,6 +278,13 @@ formats of test results and are discussed below.</p>
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(tester)).
 </pre></div>
 </div>
 </div>

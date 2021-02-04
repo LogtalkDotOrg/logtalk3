@@ -15,6 +15,15 @@ This tool can be loaded using the query:
 For sample queries, please see the ``SCRIPT.txt`` file in the tool
 directory.
 
+Testing
+-------
+
+To test this tool, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(profiler(tester)).
+
 Supported backend Prolog compilers
 ----------------------------------
 

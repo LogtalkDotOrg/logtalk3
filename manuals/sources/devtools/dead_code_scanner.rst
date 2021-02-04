@@ -49,6 +49,15 @@ This tool can be loaded using the query:
 
    | ?- logtalk_load(dead_code_scanner(loader)).
 
+Testing
+-------
+
+To test this tool, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(dead_code_scanner(tester)).
+
 Usage
 -----
 

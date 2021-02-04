@@ -21,6 +21,15 @@ Loading
 
    | ?- logtalk_load(help(loader)).
 
+Testing
+-------
+
+To test this tool, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(help(tester)).
+
 Supported operating-systems
 ---------------------------
 

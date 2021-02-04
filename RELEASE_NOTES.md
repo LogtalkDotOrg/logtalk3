@@ -33,6 +33,8 @@ available.
 Tools
 -----
 
+* UPDATED: Tools documentation on testing.
+
 * FIXED: The cleanup step for the `lgtdoc` tool unit tests.
 
 

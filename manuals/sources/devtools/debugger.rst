@@ -31,6 +31,15 @@ When the code to be debugged runs computationally expensive
 initializations, loading this tool after the code may have a noticeable
 impact in loading times.
 
+Testing
+-------
+
+To test this tool, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(debugger(tester)).
+
 Usage
 -----
 

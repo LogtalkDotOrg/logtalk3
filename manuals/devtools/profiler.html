@@ -128,6 +128,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">profiler</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-backend-prolog-compilers">Supported backend Prolog compilers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compiling-source-code-for-profiling">Compiling source code for profiling</a></li>
 </ul>
@@ -227,6 +228,13 @@
 </div>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(tester)).
+</pre></div>
+</div>
 </div>
 <div class="section" id="supported-backend-prolog-compilers">
 <h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Permalink to this headline">¶</a></h2>
