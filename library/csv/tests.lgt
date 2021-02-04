@@ -27,7 +27,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Jacinto Dávila',
-		date is 2021-02-02,
+		date is 2021-02-04,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -242,7 +242,7 @@
 
 	% round-trip testing with read/write user::p/3 where p/3 is dynamics
 	% reading file11.csv and writing on output.csv and diff them
-	test(csv_round_trip_input_01, true(Diff == 0)) :-
+	test(csv_round_trip_input_01, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
 		^^suppress_text_output,
 		user::retractall(p(_, _, _)),
 		file_path('test_files/input01.csv', Path1),
@@ -255,7 +255,7 @@
 		os::shell(Command, Diff).
 
 	% round trip as before but without regarding dquotes: _IgnoreQuotes_==true
-	test(csv_round_trip_input_02, true(Diff == 0)) :-
+	test(csv_round_trip_input_02, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
 		^^suppress_text_output,
 		user::retractall(q(_, _, _)),
 		file_path('test_files/input02.csv', Path1),
@@ -268,7 +268,7 @@
 		os::shell(Command, Diff).
 
 	%
-	test(csv_round_trip_input_02_read_by_line, true(Diff == 0)) :-
+	test(csv_round_trip_input_02_read_by_line, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
 		^^suppress_text_output,
 		user::retractall(q(_, _, _)),
 		file_path('test_files/input02.csv', Path1),

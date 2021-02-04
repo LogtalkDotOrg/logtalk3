@@ -24,6 +24,12 @@ RELEASE NOTES
 3.45.0 - March ??, 2021
 =======================
 
+Library
+-------
+
+* FIXED: Library `csv` round-trip tests to only run when the `diff` command is
+available.
+
 Tools
 -----
 
