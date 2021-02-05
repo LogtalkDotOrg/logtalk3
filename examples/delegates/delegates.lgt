@@ -61,21 +61,21 @@
 % is to use a parametric object whose parameter would be
 % instantiated to the delegate object:
 
-:- object(a_delegator(_Delegate)).
+:- object(a_delegator(_Delegate_)).
 
 	:- public(operation/1).
 
 	operation(String) :-
-		(	parameter(1, Delegate), Delegate::current_predicate(thing/1) ->
+		(	_Delegate_::current_predicate(thing/1) ->
 			% a delegate is defined that understands the method thing/1
-			Delegate::thing(String)
+			_Delegate_::thing(String)
 		;	% otherwise just use the default implementation
 			String = 'default implementation'
 		).
 
 :- end_object.
 
-% define an interface for delegate objects 
+% define an interface for delegate objects
 
 :- protocol(delegate).
 

@@ -28,7 +28,7 @@ RELEASE NOTES
 Distribution
 ------------
 
-* UPDATED: Most files with SPDX short-form identifiers.
+* ADDED: SPDX short-form identifiers to most of the files in the distribution.
 
 Library
 -------
@@ -42,6 +42,11 @@ Tools
 * UPDATED: Tools documentation on testing.
 
 * FIXED: The cleanup step for the `lgtdoc` tool unit tests.
+
+Examples
+--------
+
+* UPDATED: The `delegates` example to use parameter variables.
 
 
 3.44.0 - February 3, 2021
