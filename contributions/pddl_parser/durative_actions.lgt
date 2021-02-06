@@ -1,9 +1,17 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 2011 Robert Sasak
+%  SPDX-License-Identifier: Artistic-2.0
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- category(durative_actions).
 
 	:- info([
 		version is 1:0:0,
-		author is 'Paulo Moura',
+		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
 		date is 2011-06-12,
 		comment is 'Durative action grammar rules for parsing PDDL 3.0 domains.'
 	]).

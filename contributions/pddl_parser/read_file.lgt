@@ -1,3 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 2011 Robert Sasak
+%  SPDX-License-Identifier: Artistic-2.0
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  read_line
 %%%  This is a modified version for parsing pddl files.
@@ -22,7 +31,8 @@
 %%%             (:predicates (on ?x - block ?y - block)
 %%%           ...
 %%%           L = ['(', define, '(', domain, blocks, ')', '(', :, requirements|...].
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- category(read_file).
 

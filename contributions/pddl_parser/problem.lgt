@@ -1,3 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 2011 Robert Sasak
+%  SPDX-License-Identifier: Artistic-2.0
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% parseProblem.pl
 %%   Simple parser of PDDL domain file into prolog syntax.
@@ -18,6 +27,7 @@
 %%              _G1449								%length_specification-not implemented
 %%              )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- object(problem,
 	imports(read_file, common, actions),
