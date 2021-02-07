@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of VivoMind Prolog Unicode Resources  
-%  
+%
+%  This file is part of VivoMind Prolog Unicode Resources
+%  SPDX-License-Identifier: CC0-1.0
+%
 %  VivoMind Prolog Unicode Resources is free software distributed using the
 %  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
 %  license
@@ -28,7 +29,7 @@
 # information exemplified in Tables 8-3, 8-8, 8-9, 8-10, 8-13, 8-14,
 # 8-15, 13-5, 14-5, and 14-6 of The Unicode Standard, Version 6.1.
 #
-# See sections 8.2, 8.3, 13.5, and 14.12 of The Unicode Standard, 
+# See sections 8.2, 8.3, 13.5, and 14.12 of The Unicode Standard,
 # Version 6.1 for more information.
 #
 # Each line contains four fields, separated by a semicolon.
@@ -64,7 +65,7 @@
 #
 # corresponds to [Joining_Group = Teh_Marbuta].
 #
-# Note: The property value now designated [Joining_Group = Teh_Marbuta_Goal] 
+# Note: The property value now designated [Joining_Group = Teh_Marbuta_Goal]
 #   used to apply to both of the following characters
 #   in earlier versions of the standard:
 #

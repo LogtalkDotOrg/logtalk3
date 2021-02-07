@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  
-%  This file is part of VivoMind Prolog Unicode Resources  
-%  
+%
+%  This file is part of VivoMind Prolog Unicode Resources
+%  SPDX-License-Identifier: CC0-1.0
+%
 %  VivoMind Prolog Unicode Resources is free software distributed using the
 %  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
 %  license
@@ -17,7 +18,7 @@
 # Date: 2011-12-20, 19:31:00 GMT [KW, LI]
 #
 # Bidi_Mirroring_Glyph Property
-# 
+#
 # This file is an informative contributory data file in the
 # Unicode Character Database.
 #
@@ -29,23 +30,23 @@
 # that is the mirror image of the original character's glyph.
 #
 # The repertoire covered by the file is Unicode 6.1.0.
-# 
+#
 # The file contains a list of lines with mappings from one code point
 # to another one for character-based mirroring.
 # Note that for "real" mirroring, a rendering engine needs to select
 # appropriate alternative glyphs, and that many Unicode characters do not
 # have a mirror-image Unicode character.
-# 
+#
 # Each mapping line contains two fields, separated by a semicolon (';').
 # Each of the two fields contains a code point represented as a
 # variable-length hexadecimal value with 4 to 6 digits.
 # A comment indicates where the characters are "BEST FIT" mirroring.
-# 
-# Code points for which Bidi_Mirrored=Yes, but for which no appropriate 
+#
+# Code points for which Bidi_Mirrored=Yes, but for which no appropriate
 # characters exist with mirrored glyphs, are
 # listed as comments at the end of the file.
 #
-#   Note: (2011-12-19) There is an inconsistency between the 
+#   Note: (2011-12-19) There is an inconsistency between the
 #   following statement about the default value
 #   of the Bidi_Mirroring_Glyph property and the
 #   value of the @missing line for Bidi_Mirroring_Glyph in
@@ -59,14 +60,14 @@
 # point has the default value for the Bidi_Mirroring_Glyph property,
 # that means that no other character exists whose glyph is suitable
 # for character-based mirroring.
-# 
+#
 # For information on bidi mirroring, see UAX #9: Bidirectional Algorithm,
 # at http://www.unicode.org/unicode/reports/tr9/
-# 
+#
 # This file was originally created by Markus Scherer.
 # Extended for Unicode 3.2, 4.0, 4.1, 5.0, 5.1, 5.2, and 6.0 by Ken Whistler,
 # and for Unicode 6.1 by Ken Whistler and Laurentiu Iancu.
-# 
+#
 # ############################################################
 #
 # Property:	Bidi_Mirroring_Glyph
