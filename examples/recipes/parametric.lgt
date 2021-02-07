@@ -40,7 +40,7 @@ recipe(
 	'Berries and cream', [
 		cream-500-ml,
 		sugar-50-gr,
-		strawberries-300-gr, 
+		strawberries-300-gr,
 		chocolate-100-gr
 	], [
 		'mix whipping cream add sugar'-5-min,
@@ -54,7 +54,7 @@ recipe(
 
 % a parametric object to bridge the fact and the object representations
 
-:- object(recipe(_Name,_Ingredients,_Steps),
+:- object(recipe(_Name_, _Ingredients_, _Steps_),
 	implements(recipep),
 	extends(proto_recipe)).
 
@@ -62,16 +62,13 @@ recipe(
 		member/2, nth1/3
 	]).
 
-	name(Name) :-
-		parameter(1, Name).
+	name(_Name_).
 
 	ingredient(Ingredient, Quantity, Units) :-
-		parameter(2, Ingredients),
-		member(Ingredient-Quantity-Units, Ingredients).
+		member(Ingredient-Quantity-Units, _Ingredients_).
 
 	step(Order, Step, StepTime) :-
-		parameter(3, Steps),
-		nth1(Order, Steps, Step-StepTime-_).
+		nth1(Order, _Steps_, Step-StepTime-_).
 
 :- end_object.
 

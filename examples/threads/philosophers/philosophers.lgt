@@ -241,13 +241,13 @@
 :- end_object.
 
 
-:- object(philosopher(_Philosopher, _LeftChopstick, _RightChopstick),
+:- object(philosopher(_Philosopher_, _LeftChopstick_, _RightChopstick_),
 	implements(philosopherp)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2013-02-09,
+		date is 2021-02-07,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 
@@ -261,16 +261,12 @@
 
 	:- uses(random, [random/3]).
 
-	left_chopstick(LeftStick) :-
-		parameter(2, LeftStick).
+	left_chopstick(_LeftChopstick_).
 
-	right_chopstick(RightStick) :-
-		parameter(3, RightStick).
+	right_chopstick(_RightChopstick_).
 
 	run(0, _) :-
-		parameter(1, Philosopher),
-		message([Philosopher, ' terminated.'
-	]).
+		message([_Philosopher_, ' terminated.']).
 
 	run(Count, MaxTime) :-
 		Count > 0,
@@ -281,21 +277,17 @@
 
 	think(MaxTime) :-
 		random(1, MaxTime, ThinkTime),
-		parameter(1, Philosopher),
-		message(['Philosopher ', Philosopher, ' thinking for ', ThinkTime, ' seconds.']),
+		message(['Philosopher ', _Philosopher_, ' thinking for ', ThinkTime, ' seconds.']),
 		thread_sleep(ThinkTime).
 
 	eat(MaxTime) :-
 		random(1, MaxTime, EatTime),
-		parameter(2, LeftStick),
-		parameter(3, RightStick),
-		LeftStick::pick_up,
-		RightStick::pick_up,
-		parameter(1, Philosopher),
-		message(['Philosopher ', Philosopher, ' eating for ', EatTime, ' seconds with chopsticks ', LeftStick, ' and ', RightStick, '.']),
+		_LeftChopstick_::pick_up,
+		_RightChopstick_::pick_up,
+		message(['Philosopher ', _Philosopher_, ' eating for ', EatTime, ' seconds with chopsticks ', _LeftChopstick_, ' and ', _RightChopstick_, '.']),
 		thread_sleep(EatTime),
-		LeftStick::put_down,
-		RightStick::put_down.
+		_LeftChopstick_::put_down,
+		_RightChopstick_::put_down.
 
 	% writing a message needs to be synchronized as it's accomplished
 	% using a combination of individual write/1 and nl/0 calls:

@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(quick(_Order)).
+:- object(quick(_Order_)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:0:0,
-		date is 2000-4-22,
+		version is 1:1:0,
+		date is 2021-02-07,
 		parnames is ['Order'],
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
@@ -42,8 +42,7 @@
 
 	split([], _, [], []).
 	split([D| L], X, [D| L1], L2) :-
-		parameter(1, Order),
-		Order::less(D, X),
+		_Order_::less(D, X),
 		!,
 		split(L, X, L1, L2).
 	split([D| L], X, L1, [D| L2]) :-
@@ -96,12 +95,12 @@
 :- end_object.
 
 
-:- object(geographic(_OX, _OY)).
+:- object(geographic(_OX_, _OY_)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:0:0,
-		date is 2000-4-22,
+		version is 1:1:0,
+		date is 2021-02-07,
 		parnames is ['OX', 'OY'],
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
@@ -116,9 +115,7 @@
 
 	angle(Town, Angle) :-
 		Town::at(X, Y),
-		parameter(1, OX),
-		parameter(2, OY),
-		angle(X, Y, OX, OY, Angle).
+		angle(X, Y, _OX_, _OY_, Angle).
 
 	angle(X, Y, OX, OY, Angle) :-
 		X > OX,
@@ -143,7 +140,7 @@
 		pi(Pi),
 		Angle is Pi + atan((OY-Y)/(OX-X)).
 
-	angle(OX, Y, OX, OY, Angle) :- 
+	angle(OX, Y, OX, OY, Angle) :-
 		Y > OY,
 		pi(Pi),
 		Angle is Pi / 2.
@@ -159,12 +156,12 @@
 :- end_object.
 
 
-:- object(metric(_Town)).
+:- object(metric(_Town_)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:0:0,
-		date is 2000-4-22,
+		version is 1:1:0,
+		date is 2021-02-07,
 		comment is '.',
 		parnames is ['Town'],
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
@@ -173,9 +170,8 @@
 	:- public(less/2).
 
 	less((Town1, _), (Town2, _)) :-
-		parameter(1, Town),
-		Town::crow_flies(Town1, Distance1),
-		Town::crow_flies(Town2, Distance2),
+		_Town_::crow_flies(Town1, Distance1),
+		_Town_::crow_flies(Town2, Distance2),
 		Distance1 < Distance2.
 
 :- end_object.

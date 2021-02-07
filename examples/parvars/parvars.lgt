@@ -187,9 +187,9 @@
 :- object(rectangle(_Width_, _Height_, _X_, _Y_)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-11-16,
+		date is 2021-02-07,
 		comment is 'A simple implementation of a geometric rectangle using parametric objects.',
 		parnames is ['Width', 'Height', 'X', 'Y']
 	]).
@@ -222,10 +222,7 @@
 	]).
 
 	init :-
-		parameter(1, 2),	% Width
-		parameter(2, 1),	% Height
-		parameter(3, 0),	% X
-		parameter(4, 0).	% Y
+		this(rectangle(2,1,0,0)).
 
 	area(Area) :-
 		Area is _Width_ * _Height_.

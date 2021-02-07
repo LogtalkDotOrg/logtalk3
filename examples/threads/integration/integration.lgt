@@ -39,31 +39,30 @@
 
 
 
-:- object(quadrec(_Threads),
+:- object(quadrec(_Threads_),
 	implements(integrate),
 	imports(areas)).
 
 	:- threaded.
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paul Crocker',
-		date is 2013-04-19,
+		date is 2021-02-07,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of a single variable.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).
 
 	integrate(Function, Left, Right, NP, Epsilon, Integral) :-
-		parameter(1, Threads),
-		Threads > 0,
+		_Threads_ > 0,
 		(	NP =:= 0 ->
 			functions::eval(Function, Left,  Fleft),
 			functions::eval(Function, Right, Fright),
 			^^trapezium_area(Left, Right, Fleft, Fright, InitialArea),
-			trapezium(Function, Threads, Left, Right, Fleft, Fright, InitialArea, Epsilon, Integral)
+			trapezium(Function, _Threads_, Left, Right, Fleft, Fright, InitialArea, Epsilon, Integral)
 		;	NP > 0,
 			^^interval_area(Function, Left, Right, NP, NP, 0.0, InitialArea),
-			quadrature(Function, Threads, Left, Right, InitialArea, NP, Epsilon, Integral)
+			quadrature(Function, _Threads_, Left, Right, InitialArea, NP, Epsilon, Integral)
 		).
 
 	quadrature(Function, Threads, Left, Right, Area, NP, Epsilon, Integral) :-
@@ -92,13 +91,13 @@
 		^^trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
 		^^trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
 		Error is abs(Area-Area1-Area2),
-		(	Error > Epsilon -> 
+		(	Error > Epsilon ->
 			(	Threads =:= 1 ->
 				trapezium(Function, Threads, Left, Middle,  Fleft, Fmiddle,  Area1, Epsilon, I1),
 				trapezium(Function, Threads, Middle, Right, Fmiddle, Fright, Area2, Epsilon, I2)
 			;	% Threads > 1,
 				Threads2 is Threads//2,
-				threaded(( 
+				threaded((
 					trapezium(Function, Threads2, Left,   Middle,  Fleft,   Fmiddle,  Area1, Epsilon, I1),
 					trapezium(Function, Threads2, Middle, Right,   Fmiddle, Fright,   Area2, Epsilon, I2)
 				))
@@ -111,7 +110,7 @@
 
 
 
-:- object(quadsplit(_Threads),
+:- object(quadsplit(_Threads_),
 	implements(integrate),
 	imports(areas)).
 
@@ -126,14 +125,13 @@
 	]).
 
 	integrate(Function, Left, Right, NP, Epsilon, Integral) :-
-		parameter(1, Threads),
-		Threads > 0,
+		_Threads_ > 0,
 		Right > Left,
 		NP >= 0, NP =< 4,
-		(	Threads =:= 1 ->
+		(	_Threads_ =:= 1 ->
 			start(Function, Left, Right, NP, Epsilon, Integral)
 		;	% Threads > 1
-			split(Left, Right, Threads, Intervals),
+			split(Left, Right, _Threads_, Intervals),
 			spawn(Intervals, Function, NP, Epsilon, Goals),
 			collect(Goals, 0.0, Integral)
 		).
@@ -165,7 +163,7 @@
 
 	% predicate that the threads will start
 	start(Function, Left, Right, NP, Epsilon, Integral) :-
-		(	NP =:= 0 -> 
+		(	NP =:= 0 ->
 			functions::eval(Function, Left, Fleft),
 			functions::eval(Function, Right,Fright),
 			^^trapezium_area(Left, Right, Fleft, Fright, InitialArea),
@@ -193,7 +191,7 @@
 		^^trapezium_area(Left,   Middle, Fleft,   Fmiddle, Area1),
 		^^trapezium_area(Middle, Right,  Fmiddle, Fright,  Area2),
 		Error is abs(Area-Area1-Area2),
-		(	Error > Epsilon -> 
+		(	Error > Epsilon ->
 			trapezium(Function, Left,   Middle, Fleft,   Fmiddle, Area1, Epsilon, I1),
 			trapezium(Function, Middle, Right,  Fmiddle, Fright,  Area2, Epsilon, I2),
 			Integral is I1 + I2

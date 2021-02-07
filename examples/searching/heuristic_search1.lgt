@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(heuristic_search(_),
+:- object(heuristic_search(_Threshold_),
 	instantiates(class),
 	specializes(search_strategy)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 1998-3-23,
+		date is 2021-02-07,
 		comment is 'Heuristic state space search strategies.',
 		parnames is ['Threshold']
 	]).
@@ -59,7 +59,6 @@
 		::threshold(Threshold),
 		::search(Space, State, Threshold, Path, Cost).
 
-	threshold(Threshold) :-
-		parameter(1, Threshold).
+	threshold(_Threshold_).
 
 :- end_object.

@@ -19,11 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(fibonacci(_Threads)).
+:- object(fibonacci(_Threads_)).
 
 	:- info([
-		version is 1:1:0,
-		date is 2007-12-27,
+		version is 1:2:0,
+		date is 2021-02-07,
 		author is 'Paulo Moura',
 		comment is 'Multi-threaded version of the computation of Fibonacci numbers.',
 		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']
@@ -39,8 +39,7 @@
 	]).
 
 	fib(N, F) :-
-		parameter(1, Threads),
-		mt_fib(Threads, N, F),
+		mt_fib(_Threads_, N, F),
 		!.
 
 	mt_fib(_, 0, 1) :- !.

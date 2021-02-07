@@ -22,9 +22,9 @@
 :- object(person).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2008-10-12,
+		date is 2021-02-07,
 		comment is 'Generic person.'
 	]).
 
@@ -68,8 +68,8 @@
 	]).
 
 	print :-
-		::name(Name),   write('Name:   '), write(Name), nl,
-		::birth(Birth), write('Birth:  '), write(Birth), nl.
+		::name(Name),   write('Name:      '), write(Name), nl,
+		::birth(Birth), write('Birth:     '), write(Birth), nl.
 
 :- end_object.
 
@@ -78,9 +78,9 @@
 	extends(person)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2008-10-12,
+		date is 2021-02-07,
 		comment is 'Teacher person.'
 	]).
 
@@ -115,100 +115,95 @@
 	extends(person)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2008-10-12,
+		date is 2021-02-07,
 		comment is 'Student person.'
 	]).
 
-	:- public(dorm/1).
-	:- mode(dorm(?atom), zero_or_one).
-	:- info(dorm/1, [
-		comment is 'Student dorm.',
-		argnames is ['Dorm']
+	:- public(dormitory/1).
+	:- mode(dormitory(?atom), zero_or_one).
+	:- info(dormitory/1, [
+		comment is 'Student dormitory.',
+		argnames is ['Dormitory']
 	]).
 
 	:- public(new/4).
 	:- mode(new(-object_identifier, +atom, +atom, +atom), one).
 	:- info(new/4, [
 		comment is 'Creates a new student.',
-		argnames is ['Id', 'Name', 'Birth', 'Dorm']
+		argnames is ['Id', 'Name', 'Birth', 'Dormitory']
 	]).
 
-	new(Person, Name, Birth, Dorm) :-
+	new(Person, Name, Birth, Dormitory) :-
 		% create a "generic" person and ...
 		::new(Person, Name, Birth),
 		% ... add "student" specific data
-		Person::assertz(dorm(Dorm)).
+		Person::assertz(dormitory(Dormitory)).
 
 	print :-
 		^^print,
-		::dorm(Dorm), write('Dorm:   '), write(Dorm), nl.
+		::dormitory(Dormitory), write('Dormitory: '), write(Dormitory), nl.
 
 :- end_object.
 
 
 % some parametric objects for working with object proxies:
 
-:- object(person(_Name, _Birth),
+:- object(person(_Name_, _Birth_),
 	extends(person)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2008-10-12,
-		comment is 'Person as a parametric object.'
+		date is 2021-02-07,
+		comment is 'Person as a parametric object.',
+		parnames is ['Name', 'Birth']
 	]).
 
-	name(Name) :-
-		parameter(1, Name).
+	name(_Name_).
 
-	birth(Birth) :-
-		parameter(2, Birth).
+	birth(_Birth_).
 
 :- end_object.
 
 
-:- object(teacher(_Name, _Birth, _Office),
+:- object(teacher(_Name_, _Birth_, _Office_),
 	extends(teacher)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2008-10-12,
-		comment is 'Teacher as a parametric object.'
+		date is 2021-02-07,
+		comment is 'Teacher as a parametric object.',
+		parnames is ['Name', 'Birth', 'Office']
 	]).
 
-	name(Name) :-
-		parameter(1, Name).
+	name(_Name_).
 
-	birth(Birth) :-
-		parameter(2, Birth).
+	birth(_Birth_).
 
-	office(Office) :-
-		parameter(3, Office).
+	office(_Office_).
 
 :- end_object.
 
 
-:- object(student(_Name, _Birth, _Dorm),
+:- object(student(_Name_, _Birth_, _Dormitory_),
 	extends(student)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2008-10-12,
-		comment is 'Student as a parametric object.'
+		date is 2021-02-07,
+		comment is 'Student as a parametric object.',
+		parnames is ['Name', 'Birth', 'Dormitory']
 	]).
 
-	name(Name) :-
-		parameter(1, Name).
+	name(_Name_).
 
-	birth(Birth) :-
-		parameter(2, Birth).
+	birth(_Birth_).
 
-	dorm(Dorm) :-
-		parameter(3, Dorm).
+	dormitory(_Dormitory_).
 
 :- end_object.
 

@@ -19,11 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(fft(_Threads)).
+:- object(fft(_Threads_)).
 
 	:- info([
-		version is 1:0:1,
-		date is 2008-2-13,
+		version is 1:1:0,
+		date is 2021-02-07,
 		author is 'Paul Crocker, adapted from original code by Colin Barker',
 		comment is 'Simple multi-threaded version of the Fast Fourier Transform.',
 		source is 'Original code available from http://pagesperso-orange.fr/colin.barker/lpa/fft.htm',
@@ -40,9 +40,8 @@
 	]).
 
 	fft(N, L, Ft) :-
-		parameter(1, Threads),
-		Threads > 0,
-		mt_fft(Threads, N, L, Ft).
+		_Threads_ > 0,
+		mt_fft(_Threads_, N, L, Ft).
 
 	mt_fft(_, 1, Ft, Ft) :-
 		!.

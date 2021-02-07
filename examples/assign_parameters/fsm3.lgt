@@ -32,12 +32,12 @@ fsm([red-0-red, red-1-green, red-2-red,
 ).
 
 
-:- object(fsm(_Transitions, _Initial, _Final)).
+:- object(fsm(_Transitions_, _Initial_, _Final_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-08-02,
+		date is 2021-02-07,
 		comment is 'A simple implementation of finite-state machines using assignable variables and parametric objects. Adapted from a similar example by Nobukuni Kino.',
 		parnames is ['Transitions', 'Initial state', 'Final states']
 	]).
@@ -54,8 +54,7 @@ fsm([red-0-red, red-1-green, red-2-red,
 	]).
 
 	recognise(Events) :-
-		parameter(2, Initial),
-		assignable(Current, Initial),
+		assignable(Current, _Initial_),
 		recognise(Events, Current).
 
 	recognise([], State) :-
@@ -72,16 +71,14 @@ fsm([red-0-red, red-1-green, red-2-red,
 		recognise(Events, State).
 
 	transition(Event, Current, Next) :-
-		parameter(1, Transitions),
-		transition(Transitions, Event, Current, Next).
+		transition(_Transitions_, Event, Current, Next).
 
 	transition([Current-Event-Next| _], Event, Current, Next).
 	transition([_| Transitions], Event, Current, Next) :-
 		transition(Transitions, Event, Current, Next).
 
 	final_state(State) :-
-		parameter(3, Final),
-		final_state(Final, State).
+		final_state(_Final_, State).
 
 	final_state([State| _], State).
 	final_state([_| States], State) :-

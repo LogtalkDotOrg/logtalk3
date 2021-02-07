@@ -26,32 +26,32 @@
 	http://paginas.fe.up.pt/~eol/LP/0304/documents/Exercicios_CNPL.PDF
 
 Introduction:
-	Mr Silva sells salt. He has to measure the quantity requested by his 
-	customers by using two measures and an accumulator.  Neither has any 
-	measuring markers. Those measures can easily be broken and he has to 
-	replace them each time it happens.  More, a substitution can be made 
+	Mr Silva sells salt. He has to measure the quantity requested by his
+	customers by using two measures and an accumulator.  Neither has any
+	measuring markers. Those measures can easily be broken and he has to
+	replace them each time it happens.  More, a substitution can be made
 	by a measure with a different capacity than the one being replaced.
 
 Objective:
-	To produce a program, given the capacity of two measures and the 
-	intended quantity, which helps Mr. Silva knowing if it is possible 
-	to obtain the amount requested by his customer, and if so, measuring 
+	To produce a program, given the capacity of two measures and the
+	intended quantity, which helps Mr. Silva knowing if it is possible
+	to obtain the amount requested by his customer, and if so, measuring
 	the intended quantity in the least amount of steps.
 
 Remarks:
-	This problem is similar to the Water Jug's' problem. It is more general, 
-	seeing that the Water Jug's problem uses static values for the jugs 
+	This problem is similar to the Water Jug's' problem. It is more general,
+	seeing that the Water Jug's problem uses static values for the jugs
 	capacities and the final goal.
 */
 
 
-:- object(salt(_Accumulator, _Measure1, _Measure2),
+:- object(salt(_Accumulator_, _Measure1_, _Measure2_),
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1:15:0,
+		version is 1:16:0,
 		author is 'Paula Marisa Sampaio',
-		date is 2018-05-23,
+		date is 2021-02-07,
 		comment is 'Salt state-space search problem (updated from the original 1.0 version to support heuristics).',
 		parnames is ['Accumulator', 'Measure1', 'Measure2']
 	]).
@@ -60,8 +60,7 @@ Remarks:
 	initial_state(initial, s(0, 0, 0, all_empty)).
 
 	% the intended salt quantity must end up on the accumulator
-	goal_state(accumulator, s(Accumulator, _, _, _)) :-
-		parameter(1, Accumulator).
+	goal_state(accumulator, s(_Accumulator_, _, _, _)).
 
 	% state transitions:
 
@@ -74,34 +73,30 @@ Remarks:
 		NewAcc is Acc + Y.
 
 	% filling up of one of the measures
-	next_state(s(Acc, X, Y, Step), s(Acc, MaxX, Y, fill(m1)), 1) :-
-		parameter(2, MaxX),
-		X < MaxX,
+	next_state(s(Acc, X, Y, Step), s(Acc, _Measure1_, Y, fill(m1)), 1) :-
+		X < _Measure1_,
 		Step \= empty(m1).
-	next_state(s(Acc, X, Y, Step), s(Acc, X, MaxY, fill(m2)), 1) :-
-		parameter(3, MaxY),
-		Y < MaxY,
+	next_state(s(Acc, X, Y, Step), s(Acc, X, _Measure2_, fill(m2)), 1) :-
+		Y < _Measure2_,
 		Step \= empty(m2).
 
 	% either pouring of a measure into the other till it is filled up
 	% or all content of a measure into the other one
 	next_state(s(Acc, X, Y, _), s(Acc, W, Z, transfer(m2, m1)), 1) :-
-		parameter(2, MaxX),
 		Y > 0,
-		X < MaxX,
-		(X + Y >= MaxX ->
-			W = MaxX,
-			Z is Y - (MaxX - X)
+		X < _Measure1_,
+		(X + Y >= _Measure1_ ->
+			W = _Measure1_,
+			Z is Y - (_Measure1_ - X)
 		;	W is X + Y,
 			Z = 0
 		).
 	next_state(s(Acc, X, Y, _), s(Acc, W, Z, transfer(m1, m2)), 1) :-
-		parameter(3, MaxY),
 		X > 0,
-		Y < MaxY,
-		(	X + Y >= MaxY ->
-			W is X - (MaxY - Y),
-			Z = MaxY
+		Y < _Measure2_,
+		(	X + Y >= _Measure2_ ->
+			W is X - (_Measure2_ - Y),
+			Z = _Measure2_
 		;	W = 0,
 			Z is X + Y
 		).
@@ -114,33 +109,27 @@ Remarks:
 		Y > 0,
 		Step \= fill(m2).
 
-	heuristic(s(Acc, Acc, _, _), 0.1) :-
-		parameter(1, Acc),
+	heuristic(s(_Accumulator_, _Accumulator_, _, _), 0.1) :-
 		!.
-	heuristic(s(Acc, _, Acc, _), 0.1) :-
-		parameter(1, Acc),
+	heuristic(s(_Accumulator_, _, _Accumulator_, _), 0.1) :-
 		!.
-	heuristic(s(Acc, X, Y, _), 0.2) :-
-		parameter(1, Acc),
-		Acc is abs(X - Y),
+	heuristic(s(_Accumulator_, X, Y, _), 0.2) :-
+		_Accumulator_ is abs(X - Y),
 		!.
-	heuristic(s(Acc, X, _, _), 0.3) :-
-		parameter(1, Acc),
-		(	X mod Acc =:= 0 
-		;	Acc mod X =:= 0
+	heuristic(s(_Accumulator_, X, _, _), 0.3) :-
+		(	X mod _Accumulator_ =:= 0
+		;	_Accumulator_ mod X =:= 0
 		),
 		!.
-	heuristic(s(Acc, _, Y, _), 0.3) :-
-		parameter(1, Acc),
-		(	Y mod Acc =:= 0
-		;	Acc mod Y =:= 0
+	heuristic(s(_Accumulator_, _, Y, _), 0.3) :-
+		(	Y mod _Accumulator_ =:= 0
+		;	_Accumulator_ mod Y =:= 0
 		),
 		!.
-	heuristic(s(Acc, X, Y, _), 0.4) :-
-		parameter(1, Acc),
+	heuristic(s(_Accumulator_, X, Y, _), 0.4) :-
 		Diff is abs(X - Y),
-		(	Diff mod Acc =:= 0
-		;	Acc mod Diff =:= 0
+		(	Diff mod _Accumulator_ =:= 0
+		;	_Accumulator_ mod Diff =:= 0
 		),
 		!.
 	heuristic(s(_, _, _, _), 0.5).

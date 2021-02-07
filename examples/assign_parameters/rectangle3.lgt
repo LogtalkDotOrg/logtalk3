@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(rectangle(_Width, _Height, _Position)).
+:- object(rectangle(_Width_, _Height_, _Position_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-08-02,
+		date is 2021-02-07,
 		comment is 'A simple implementation of a geometric rectangle using assignable variables and parametric objects.',
 		parnames is ['Width', 'Height', 'Position']
 	]).
@@ -61,20 +61,15 @@
 	]).
 
 	init :-
-		parameter(3, Position),
-		assignable(Position, (0, 0)).
+		assignable(_Position_, (0, 0)).
 
 	area(Area) :-
-		parameter(1, Width),
-		parameter(2, Height),
-		Area is Width*Height.
+		Area is _Width_ * _Height_.
 
 	move(X, Y) :-
-		parameter(3, Position),
-		Position <= (X, Y).
+		_Position_ <= (X, Y).
 
 	position(X, Y) :-
-		parameter(3, Position),
-		Position => (X, Y).
+		_Position_ => (X, Y).
 
 :- end_object.

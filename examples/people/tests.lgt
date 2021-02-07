@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-07-03,
+		date is 2021-02-07,
 		comment is 'Unit tests for the "people" example.'
 	]).
 
@@ -65,12 +65,12 @@
 		Name == 'Roosevelt Franklin',
 		Id4::birth(Birth),
 		Birth == '1969/11/10',
-		Id4::dorm(Dorm),
-		Dorm == 'Blue'.
+		Id4::dormitory(Dormitory),
+		Dormitory == 'Blue'.
 
 	test(people_5) :-
-		{student('Roosevelt Franklin', Birth, Dorm)}::true,
+		{student('Roosevelt Franklin', Birth, Dormitory)}::true,
 		Birth == '1969/11/10',
-		Dorm == 'Blue'.
+		Dormitory == 'Blue'.
 
 :- end_object.

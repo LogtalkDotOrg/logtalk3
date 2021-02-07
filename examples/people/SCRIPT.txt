@@ -37,8 +37,8 @@ yes
 
 | ?- o2::print.
 
-Name:   Cookie Monster
-Birth:  1969/12/02
+Name:      Oscar the Grouch
+Birth:     1969/11/10
 yes
 
 
@@ -55,9 +55,9 @@ yes
 
 | ?- o4::print.
 
-Name:   Roosevelt Franklin
-Birth:  1969/11/10
-Dorm:   Blue
+Name:      Roosevelt Franklin
+Birth:     1969/11/10
+Dormitory: Blue
 yes
 
 
@@ -65,7 +65,7 @@ yes
 
 | ?- {student('Roosevelt Franklin', _, _)}::print.
 
-Name:   Roosevelt Franklin
-Birth:  1969/11/10
-Dorm:   Blue
+Name:      Roosevelt Franklin
+Birth:     1969/11/10
+Dormitory: Blue
 yes

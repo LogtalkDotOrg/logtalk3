@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(msort(_Threads)).
+:- object(msort(_Threads_)).
 
 	:- info([
-		version is 1:32:0,
+		version is 1:33:0,
 		author is 'Paulo Moura and Paul Crocker',
-		date is 2011-03-28,
+		date is 2021-02-07,
 		comment is 'Multi-threaded implementation of the merge sort algorithm.',
 		parameters is ['Threads' - 'Number of threads to use in sorting. Valid values are 1, 2, 4, 8, etc.']
 	]).
@@ -39,9 +39,8 @@
 	]).
 
 	msort(List, Sorted) :-
-		parameter(1, Threads),
-		Threads > 0,
-		mt_msort(Threads, List, Sorted).
+		_Threads_ > 0,
+		mt_msort(_Threads_, List, Sorted).
 
 	mt_msort(1, List, Sorted) :-
 		!,

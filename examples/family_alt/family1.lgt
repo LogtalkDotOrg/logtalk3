@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(family(_Family),
+:- object(family(_Family_),
 	implements(basic_family_relations)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-03-06,
+		date is 2021-02-07,
 		comment is 'Family relations.',
 		parnames is ['Family']
 	]).
@@ -52,16 +52,13 @@
 	% to the registered concrete families
 
 	male(Male) :-
-		parameter(1, Family),
-		male(Family, Male).
+		male(_Family_, Male).
 
 	female(Female) :-
-		parameter(1, Family),
-		female(Family, Female).
+		female(_Family_, Female).
 
 	parent(Parent, Child) :-
-		parameter(1, Family),
-		parent(Family, Parent, Child).
+		parent(_Family_, Parent, Child).
 
 	% define the extended family relations
 

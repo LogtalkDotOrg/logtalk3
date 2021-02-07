@@ -46,7 +46,8 @@ Tools
 Examples
 --------
 
-* UPDATED: The `delegates` example to use parameter variables.
+* UPDATED: Most examples that use parametric entities to use parameter
+variables.
 
 
 3.44.0 - February 3, 2021

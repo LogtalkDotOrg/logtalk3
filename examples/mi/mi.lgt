@@ -82,27 +82,23 @@
 
 
 
-:- object(xyz(_X,_Y,_Z)).
+:- object(xyz(_X_, _Y_, _Z_)).
 
 	:- public(distance/1).
 	:- mode(distance(?number), one).
 
 	distance(Distance) :-
-		parameter(1, X),
-		parameter(2, Y),
-		parameter(3, Z),
-		Distance is sqrt(X*X+Y*Y+Z*Z).
+		Distance is sqrt(_X_*_X_ + _Y_*_Y_ + _Z_*_Z_).
 
 :- end_object.
 
 
-:- object(t(_T)).
+:- object(t(_Time_)).
 
 	:- public(time/1).
 	:- mode(time(?integer), zero_or_one).
 
-	time(Time) :-
-		parameter(1, Time).
+	time(_Time_).
 
 :- end_object.
 

@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(primes(_Threads)).
+:- object(primes(_Threads_)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2020-02-02,
+		date is 2021-02-07,
 		comment is 'Simple example for comparing single and multi-threading calculation of prime numbers.',
 		parameters is ['Threads' - 'Number of threads to use.']
 	]).
@@ -39,9 +39,8 @@
 	]).
 
 	primes(Inf, Sup, Primes) :-
-		parameter(1, Threads),
 		Sup > Inf,
-		split(Inf, Sup, Threads, Intervals),
+		split(Inf, Sup, _Threads_, Intervals),
 		spawn(Intervals, Primes, Goals),
 		collect(Goals).
 

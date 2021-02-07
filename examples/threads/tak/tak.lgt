@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tak(_Threads)).
+:- object(tak(_Threads_)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2011-04-03,
+		date is 2021-02-07,
 		comment is 'Takeuchi function (recursive arithmetic).',
 		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 3, 9, 27, 81, etc.']
 	]).
@@ -39,9 +39,8 @@
 	]).
 
 	tak(X, Y, Z, A) :-
-		parameter(1, Threads),
-		Threads > 0,
-		tak_mt(Threads, X, Y, Z, A).
+		_Threads_ > 0,
+		tak_mt(_Threads_, X, Y, Z, A).
 
 	tak_mt(1, X, Y, Z, A) :-
 		!,

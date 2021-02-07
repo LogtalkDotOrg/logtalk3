@@ -21,7 +21,7 @@
 
 % example adapted from the SWI-Prolog documentation on attributed variables
 
-:- object(domain(_Type)).
+:- object(domain(_Type_)).
 
 	:- public(domain/2).
 
@@ -30,22 +30,17 @@
 	domain(X, Domain) :-
 		var(Domain),
 		!,
-		parameter(1, Type),
-		get_attr(X, domain(Type), Domain).
+		get_attr(X, domain(_Type_), Domain).
 	domain(X, List) :-
 		check_domain(List),
 		new(Set),
 		insert_all(List, Set, Domain),
-		parameter(1, Type),
-		put_attr(Y, domain(Type), Domain),
+		put_attr(Y, domain(_Type_), Domain),
 		X = Y.
 
 	check_domain([]).
 	check_domain([Head| Tail]) :-
-		% parameter/1 calls are usually compiled in-line
-		% into an head unification
-		parameter(1, Type),
-		Type::valid(Head),
+		_Type_::valid(Head),
 		check_domain(Tail).
 
 	% Var, ?Domain
@@ -61,8 +56,7 @@
 					Y = Value
 				;	put_attr(Y, domain(Type), NewDomain)
 				)
-			;	parameter(1, Type),
-				put_attr(Y, domain(Type), Domain)
+			;	put_attr(Y, domain(_Type_), Domain)
 			)
 		;	memberchk(Y, Domain)
 		).

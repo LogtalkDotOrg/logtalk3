@@ -19,11 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(hanoi(_Threads)).
+:- object(hanoi(_Threads_)).
 
 	:- info([
-		version is 1:1:0,
-		date is 2007-12-27,
+		version is 1:2:0,
+		date is 2021-02-07,
 		author is 'Paulo Moura',
 		comment is 'Multi-threaded version of the Towers of Hanoi problem.',
 		parameters is ['Threads' - 'Number of threads to use. Valid values are 1, 2, 4, 8, 16, etc.']
@@ -53,8 +53,7 @@
 	]).
 
 	run(Disks) :-
-		parameter(1, Threads),
-		mt_move(Threads, Disks, left, middle, right).
+		mt_move(_Threads_, Disks, left, middle, right).
 
 	mt_move(1, Disks, Left, Aux, Right) :- !,
 		st_move(Disks, Left, Aux, Right).
@@ -76,8 +75,7 @@
 		st_move(Disks2, Aux, Left, Right).
 
 	run(Disks, Moves) :-
-		parameter(1, Threads),
-		mt_move(Threads, Disks, left, middle, right, [], Moves).
+		mt_move(_Threads_, Disks, left, middle, right, [], Moves).
 
 	mt_move(1, Disks, Left, Aux, Right, Acc, Moves) :- !,
 		st_move(Disks, Left, Aux, Right, Acc, Moves).

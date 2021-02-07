@@ -19,14 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(blind_search(_),
+:- object(blind_search(_Bound_),
 	instantiates(class),
 	specializes(search_strategy)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 1998-3-23,
+		date is 2021-02-07,
 		comment is 'Blind search state space strategies.',
 		parnames is ['Bound']
 	]).
@@ -45,8 +45,7 @@
 		argnames is ['Space', 'State', 'Bound', 'Path']
 	]).
 
-	bound(Bound) :-
-		parameter(1, Bound).
+	bound(_Bound_).
 
 	solve(Space, State, Path) :-
 		::bound(Bound),

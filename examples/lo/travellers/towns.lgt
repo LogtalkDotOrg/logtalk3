@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(location(_X, _Y)).
+:- object(location(_X_, _Y_)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:0:0,
-		date is 2000-4-22,
+		version is 1:1:0,
+		date is 2021-02-07,
 		parnames is ['X', 'Y'],
 		comment is '.',
 		source is 'Example adapted from the Francis G. McCabe L&O documentation.'
@@ -45,9 +45,7 @@
 	:- public(road_distance/2).
 	:- mode(road_distance(?atom, ?integer), zero_or_more).
 
-	at(X, Y) :-
-		parameter(1, X),
-		parameter(2, Y).
+	at(_X_, _Y_).
 
 	crow_flies(Town, Distance) :-
 		::at(X, Y),

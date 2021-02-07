@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(sort(_Type)).
+:- object(sort(_Type_)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:1:0,
-		date is 2013-04-23,
+		version is 1:2:0,
+		date is 2021-02-07,
 		comment is 'List sorting parameterized by the type of the list elements.',
 		parnames is ['Type'],
 		source is 'Example adapted from the SICStus Objects documentation.'
@@ -55,8 +55,7 @@
 
 	partition([], _, [], []).
 	partition([X| L1], P, Small, Large) :-
-		parameter(1, Type),
-		(	(Type::(X < P)) ->
+		(	_Type_::(X < P) ->
 			Small = [X| Small1], Large = Large1
 		;	Small = Small1, Large = [X| Large1]
 		),

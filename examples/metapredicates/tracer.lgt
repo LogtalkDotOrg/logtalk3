@@ -58,13 +58,14 @@
 % sort code adapted from an example on the SICStus Prolog User Manual
 % meta-predicate example taken from Prolog Part 2, Modules - Committee Draft
 
-:- object(sort(_Type)).
+:- object(sort(_Type_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2013-04-23,
-		comment is 'List sorting parameterized by the type of the list elements.'
+		date is 2021-02-07,
+		comment is 'List sorting parameterized by the type of the list elements.',
+		parnames is ['Type']
 	]).
 
 	% compile calls to append(...) as list::append(...)
@@ -97,8 +98,7 @@
 	partition([], _, [], []).
 
 	partition([Head| Tail], Pivot, Small, Large) :-
-		parameter(1, Type),
-		(	Type :: (Head < Pivot) ->
+		(	_Type_ :: (Head < Pivot) ->
 			Small = [Head| Small1], Large = Large1
 		;	Small = Small1, Large = [Head| Large1]
 		),

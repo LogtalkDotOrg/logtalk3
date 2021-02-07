@@ -38,29 +38,28 @@
 :- end_protocol.
 
 
-:- object(quadrec2d(_Threads),
+:- object(quadrec2d(_Threads_),
 	implements(integrate2d),
 	imports(volumes2d)).
 
 	:- threaded.
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paul Crocker',
-		date is 2013-04-19,
+		date is 2021-02-07,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two variables.',
 		parameters is ['Threads' - 'Number of threads to use (1, 4, 16, 64, 256, ...).']
 	]).
 
 	integrate(Function, A, B, C, D, NP, Epsilon, Integral) :-
-		parameter(1, Threads),
-		Threads > 0,
+		_Threads_ > 0,
 		(	NP =:= 0 ->
 			^^trapezium_volume(Function, A, B, C, D, InitialVolume),
-			trapezium(Threads, Function, A, B, C, D, InitialVolume, Epsilon, Integral)
+			trapezium(_Threads_, Function, A, B, C, D, InitialVolume, Epsilon, Integral)
 		;	NP > 0, NP < 4,
 			^^interval_volume(Function, A, B, C, D, NP, NP, 0.0, InitialVolume),
-			quadrature(Threads, Function, A, B, C, D, InitialVolume, NP, Epsilon, Integral)
+			quadrature(_Threads_, Function, A, B, C, D, InitialVolume, NP, Epsilon, Integral)
 		).
 
 	quadrature(1, Function, A, B, C, D, Volume, NP, Epsilon, Integral) :-
@@ -112,7 +111,7 @@
 		^^trapezium_volume(Function, A,       MiddleX, MiddleY, D,       Volume3),
 		^^trapezium_volume(Function, MiddleX, B,       MiddleY, D,       Volume4),
 		Error is abs(Volume-Volume1-Volume2-Volume3-Volume4),
-		(	Error > Epsilon -> 
+		(	Error > Epsilon ->
 			(	Threads =:= 1 ->
 				Epsilon4 is Epsilon/4.0,
 				trapezium(Function, 1, A,       MiddleX, C,       MiddleY, Volume1, Epsilon4, I1),
@@ -123,7 +122,7 @@
 				Threads4 is Threads//4,
 				Epsilon4 is Epsilon/4.0,
 				threaded((
-					trapezium(Threads4, Function, A,       MiddleX, C,       MiddleY, Volume1, Epsilon4, I1), 
+					trapezium(Threads4, Function, A,       MiddleX, C,       MiddleY, Volume1, Epsilon4, I1),
 					trapezium(Threads4, Function, MiddleX, B,       C,       MiddleY, Volume2, Epsilon4, I2),
 					trapezium(Threads4, Function, A,       MiddleX, MiddleY, D,       Volume3, Epsilon4, I3),
 					trapezium(Threads4, Function, MiddleX, B,       MiddleY, D,       Volume4, Epsilon4, I4)
@@ -136,31 +135,30 @@
 :- end_object.
 
 
-:- object(quadsplit2d(_Threads),
+:- object(quadsplit2d(_Threads_),
 	implements(integrate2d),
 	imports(volumes2d)).
 
 	:- threaded.
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paul Crocker',
-		date is 2013-04-19,
+		date is 2021-02-07,
 		comment is 'Multi-threading implementation of Recursive Gaussian Quadrature Methods for Numerical Integration for functions of two real variables.',
 		parameters is ['Threads' - 'Number of threads to use (1, 4, 9, 16, 25, ...).']
 	]).
 
 	integrate(Function, A, B, C, D, NP, Epsilon, Integral) :-
-		parameter(1, Threads),
-		Threads > 0,
+		_Threads_ > 0,
 		B > A,
 		D > C,
 		NP >= 0, NP < 4,
-		(	Threads =:= 1 ->
+		(	_Threads_ =:= 1 ->
 			start(Function, A, B, C, D, NP, Epsilon, Integral)
 		;	% Threads > 1
-			Threads2 is round(sqrt(Threads)),
-			Epsilon2 is Epsilon/Threads,
+			Threads2 is round(sqrt(_Threads_)),
+			Epsilon2 is Epsilon/_Threads_,
 			split(A, B, Threads2, ABIntervals),
 			split(C, D, Threads2, CDIntervals),
 			spawn(ABIntervals, CDIntervals, Function, NP, Epsilon2, [], Goals),
@@ -199,7 +197,7 @@
 
 	% predicate that the threads will start
 	start(Function, A, B, C, D, NP, Epsilon, Integral) :-
-		(	NP =:= 0 -> 
+		(	NP =:= 0 ->
 			^^trapezium_volume(Function, A, B, C, D, InitialVolume),
 			trapezium(Function, A, B, C, D, InitialVolume, Epsilon, Integral)
 		;	% NP > 0,
@@ -215,7 +213,7 @@
 		^^trapezium_volume(Function, A,       MiddleX, MiddleY, D,       Volume3),
 		^^trapezium_volume(Function, MiddleX, B,       MiddleY, D,       Volume4),
 		Error is abs(Volume - Volume1 - Volume2 - Volume3 - Volume4),
-		(	Error > Epsilon -> 
+		(	Error > Epsilon ->
 			Epsilon4 is Epsilon/4.0,
 			trapezium(Function, A,       MiddleX, C,       MiddleY, Volume1, Epsilon4, I1),
 			trapezium(Function, MiddleX, B,       C,       MiddleY, Volume2, Epsilon4, I2),
