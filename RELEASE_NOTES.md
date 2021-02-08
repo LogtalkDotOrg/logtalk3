@@ -39,6 +39,10 @@ available.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool to report individual tests execution time. Code
+that intercepts the tool messages may need to be updated as several messages
+now have an additional argument to carry execution time data (in seconds).
+
 * UPDATED: Tools documentation on testing.
 
 * FIXED: The cleanup step for the `lgtdoc` tool unit tests.

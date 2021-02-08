@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-06-03,
+		date is 2021-02-08,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -190,7 +190,7 @@
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(passed_test(_, _, _, _, Note), _, lgtunit, _) :-
+	logtalk::message_hook(passed_test(_, _, _, _, Note, _), _, lgtunit, _) :-
 		g(Note),
 		fail.
 

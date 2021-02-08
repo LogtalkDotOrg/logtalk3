@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 8:16:2,
+		version is 9:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2021-02-08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -655,7 +655,7 @@
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
 	% library support for suppressin test output
-	:- uses(os, [null_device_path/1]).
+	:- uses(os, [cpu_time/1, null_device_path/1]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
 	% don't assume that between/3 is a built-in predicate as some backend
@@ -816,12 +816,13 @@
 	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Output)) ->
+				cpu_time(Start),
+				(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Start, Output)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position, Note, Output)
+						passed_test(Test, File, Position, Note, Start, Output)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -831,15 +832,16 @@
 	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Output)) ->
+				cpu_time(Start),
+				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Start, Output)) ->
 					(	var(Error) ->
 						(	Deterministic == true ->
-							passed_test(Test, File, Position, Note, Output)
-						;	non_deterministic_success(Test, File, Position, Note, Output)
+							passed_test(Test, File, Position, Note, Start, Output)
+						;	non_deterministic_success(Test, File, Position, Note, Start, Output)
 						)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -849,12 +851,13 @@
 	run_test(fails(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Note, Output)) ->
+				cpu_time(Start),
+				(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Note, Start, Output)) ->
 					(	var(Error) ->
-						failed_test(Test, File, Position, success_instead_of_failure, Note, Output)
+						failed_test(Test, File, Position, success_instead_of_failure, Note, Start, Output)
 					;	true
 					)
-				;	passed_test(Test, File, Position, Note, Output)
+				;	passed_test(Test, File, Position, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -864,12 +867,13 @@
 	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Note, Output)) ->
+				cpu_time(Start),
+				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Note, Start, Output)) ->
 					(	var(Error) ->
-						failed_test(Test, File, Position, success_instead_of_error, Note, Output)
+						failed_test(Test, File, Position, success_instead_of_error, Note, Start, Output)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_error, Note, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_error, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -880,12 +884,13 @@
 	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
 		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
-				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+				cpu_time(Start),
+				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Start, Output)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position, Note, Output)
+						passed_test(Test, File, Position, Note, Start, Output)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -894,48 +899,53 @@
 		).
 	% quick_check/2 dialect
 	run_test(quick_check(Test, Variables, Position), File, Output) :-
-		(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Output)) ->
+		cpu_time(Start),
+		(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Start, Output)) ->
 			(	var(Error) ->
-				passed_test(Test, File, Position, Output)
+				passed_test(Test, File, Position, Start, Output)
 			;	true
 			)
-		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
+		;	failed_test(Test, File, Position, failure_instead_of_success, Start, Output)
 		).
 	% other dialects
 	run_test(succeeds(Test, Variables, Position), File, Output) :-
-		(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
+		cpu_time(Start),
+		(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Start, Output)) ->
 			(	var(Error) ->
-				passed_test(Test, File, Position, Output)
+				passed_test(Test, File, Position, Start, Output)
 			;	true
 			)
-		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
+		;	failed_test(Test, File, Position, failure_instead_of_success, Start, Output)
 		).
 	run_test(deterministic(Test, Variables, Position), File, Output) :-
-		(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Output)) ->
+		cpu_time(Start),
+		(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Start, Output)) ->
 			(	var(Error) ->
 				(	Deterministic == true ->
-					passed_test(Test, File, Position, Output)
-				;	non_deterministic_success(Test, File, Position, Output)
+					passed_test(Test, File, Position, Start, Output)
+				;	non_deterministic_success(Test, File, Position, Start, Output)
 				)
 			;	true
 			)
-		;	failed_test(Test, File, Position, failure_instead_of_success, Output)
+		;	failed_test(Test, File, Position, failure_instead_of_success, Start, Output)
 		).
 	run_test(fails(Test, Variables, Position), File, Output) :-
-		(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Output)) ->
+		cpu_time(Start),
+		(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Start, Output)) ->
 			(	var(Error) ->
-				failed_test(Test, File, Position, success_instead_of_failure, Output)
+				failed_test(Test, File, Position, success_instead_of_failure, Start, Output)
 			;	true
 			)
-		;	passed_test(Test, File, Position, Output)
+		;	passed_test(Test, File, Position, Start, Output)
 		).
 	run_test(throws(Test, Variables, PossibleErrors, Position), File, Output) :-
-		(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Output)) ->
+		cpu_time(Start),
+		(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Start, Output)) ->
 			(	var(Error) ->
-				failed_test(Test, File, Position, success_instead_of_error, Output)
+				failed_test(Test, File, Position, success_instead_of_error, Start, Output)
 			;	true
 			)
-		;	failed_test(Test, File, Position, failure_instead_of_error, Output)
+		;	failed_test(Test, File, Position, failure_instead_of_error, Start, Output)
 		).
 
 	run_test(skipped(Test, Position, Note), File, Output) :-
@@ -944,14 +954,14 @@
 	run_test(skipped(Test, Position), File, Output) :-
 		skipped_test(Test, File, Position, Output).
 
-	check_error(Test, PossibleErrors, Error, File, Position, Output) :-
-		check_error(Test, PossibleErrors, Error, File, Position, '', Output).
+	check_error(Test, PossibleErrors, Error, File, Position, Start, Output) :-
+		check_error(Test, PossibleErrors, Error, File, Position, '', Start, Output).
 
-	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Note, Output) :-
+	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Note, Start, Output) :-
 		(	member(ExpectedError, [PossibleError| PossibleErrors]),
 			subsumes_term(ExpectedError, Error) ->
-			passed_test(Test, File, Position, Note, Output)
-		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Note, Output)
+			passed_test(Test, File, Position, Note, Start, Output)
+		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Note, Start, Output)
 		).
 
 	write_tests_header :-
@@ -982,41 +992,47 @@
 		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, lgtunit, tests_ended).
 
-	passed_test(Test, File, Position, Note, Output) :-
+	passed_test(Test, File, Position, Note, Start, Output) :-
 		self(Object),
+		cpu_time(End),
+		Time is End - Start,
 		increment_passed_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(information, lgtunit, passed_test(Object, Test, File, Position, Note)),
+		print_message(information, lgtunit, passed_test(Object, Test, File, Position, Note, Time)),
 		set_output(Current).
 
-	passed_test(Test, File, Position, Output) :-
-		passed_test(Test, File, Position, '', Output).
+	passed_test(Test, File, Position, Start, Output) :-
+		passed_test(Test, File, Position, '', Start, Output).
 
-	non_deterministic_success(Test, File, Position, Note, Output) :-
+	non_deterministic_success(Test, File, Position, Note, Start, Output) :-
 		self(Object),
+		cpu_time(End),
+		Time is End - Start,
 		increment_failed_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, non_deterministic_success(Object, Test, File, Position, Note)),
+		print_message(error, lgtunit, non_deterministic_success(Object, Test, File, Position, Note, Time)),
 		set_output(Current).
 
-	non_deterministic_success(Test, File, Position, Output) :-
-		non_deterministic_success(Test, File, Position, '', Output).
+	non_deterministic_success(Test, File, Position, Start, Output) :-
+		non_deterministic_success(Test, File, Position, '', Start, Output).
 
-	failed_test(Test, File, Position, Reason, Note, Output) :-
+	failed_test(Test, File, Position, Reason, Note, Start, Output) :-
 		self(Object),
+		cpu_time(End),
+		Time is End - Start,
 		increment_failed_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, failed_test(Object, Test, File, Position, Reason, Note)),
+		print_message(error, lgtunit, failed_test(Object, Test, File, Position, Reason, Note, Time)),
 		set_output(Current).
 
-	failed_test(Test, File, Position, Reason, Output) :-
-		failed_test(Test, File, Position, Reason, '', Output).
+	failed_test(Test, File, Position, Reason, Start, Output) :-
+		failed_test(Test, File, Position, Reason, '', Start, Output).
 
 	skipped_test(Test, File, Position, Note, Output) :-
 		self(Object),
@@ -1042,7 +1058,7 @@
 		% expected either success or failure; error means user error
 		(	Goal == true ->
 			true
-		;	catch(Goal, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,Output), fail))
+		;	catch(Goal, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,0.0,Output), fail))
 		).
 
 	:- meta_predicate(run_test_setup(*, *, *, *, *, *)).
@@ -1052,12 +1068,12 @@
 		% expected success; failure or error means user error
 		(	Goal == true ->
 			true
-		;	catch(Goal, Error, failed_test(Test,File,Position,step_error(setup,Error),Note,Output)) ->
+		;	catch(Goal, Error, failed_test(Test,File,Position,step_error(setup,Error),Note,0.0,Output)) ->
 			(	var(Error) ->
 				true
 			;	fail
 			)
-		;	failed_test(Test, File, Position, step_failure(setup), Note, Output),
+		;	failed_test(Test, File, Position, step_failure(setup), Note, 0.0, Output),
 			fail
 		).
 

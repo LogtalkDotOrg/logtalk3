@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-18,
+		date is 2021-02-08,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -79,15 +79,15 @@
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
 	% "testcase" tag predicates
-	message_hook(passed_test(Object, Test, File, Position, Note)) :-
+	message_hook(passed_test(Object, Test, File, Position, Note, Time)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note)))).
-	message_hook(non_deterministic_success(Object, Test, File, Position, Note)) :-
+		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, Time)))).
+	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note)))).
-	message_hook(failed_test(Object, Test, File, Position, Reason, Note)) :-
+		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note, Time)))).
+	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note)))).
+		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, Time)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
@@ -173,8 +173,8 @@
 		fail.
 	write_test_elements.
 
-	write_test_element_tags(passed_test(File, Position, Note), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0, result-'Pass']),
+	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Type) :-
+		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-Time, result-'Pass']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -182,8 +182,8 @@
 		write_xml_empty_tag(trait, [name-note, value-Note]),
 		write_xml_close_tag(traits),
 		write_xml_close_tag(test).
-	write_test_element_tags(non_deterministic_success(File, Position, Note), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0, result-'Fail']),
+	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Type) :-
+		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-Time, result-'Fail']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -194,8 +194,8 @@
 		write_xml_cdata_element(message, [], Message),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
-	write_test_element_tags(failed_test(File, Position, Reason, Note), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0, result-'Fail']),
+	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Type) :-
+		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-Time, result-'Fail']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -212,7 +212,7 @@
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
 	write_test_element_tags(skipped_test(File, Position, Note), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0, result-'Skip']),
+		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0.0, result-'Skip']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),

@@ -1246,7 +1246,7 @@ integration servers can be found at:</p>
 <div class="section" id="utility-predicates">
 <h2>Utility predicates<a class="headerlink" href="#utility-predicates" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides several public utility predicates to
-simplify writing unit tests:</p>
+simplify writing unit tests and for general use:</p>
 <ul>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code></div>
@@ -1340,12 +1340,14 @@ context of the <em>sender</em>, which would be the <code class="docutils literal
 case of a <code class="docutils literal notranslate"><span class="pre">^^/2</span></code> call (as it preserves both <em>self</em> and <em>sender</em> and
 the tests are internally run by a message sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
 object to the tests object).</p>
-<p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-3</span></code> predicates are meta-predicates, turning on the
+<p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-4</span></code> predicates are meta-predicates, turning on the
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is advised to avoid runtime compilation of
 the meta-argument, which would add an overhead to the timing results.
 But this advice conflicts with collecting code coverage data, which
 requires compilation in debug mode. The solution is to use separate test
-objects for benchmarking and for code coverage.</p>
+objects for benchmarking and for code coverage. But note that the CPU
+execution time (in seconds) for each individual test is reported by
+default when running the tests.</p>
 <p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation for more details on these
 predicates.</p>
 </div>

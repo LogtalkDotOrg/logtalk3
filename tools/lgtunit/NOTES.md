@@ -1013,7 +1013,7 @@ Utility predicates
 ------------------
 
 The `lgtunit` tool provides several public utility predicates to simplify
-writing unit tests:
+writing unit tests and for general use:
 
 - `variant(Term1, Term2)`  
 	to check when two terms are a variant of each other (e.g. to check
@@ -1077,12 +1077,14 @@ of a `^^/2` call (as it preserves both _self_ and _sender_ and the tests
 are internally run by a message sent from the `lgtunit` object to the
 tests object).
 
-As the `benchmark/2-3` predicates are meta-predicates, turning on the
+As the `benchmark/2-4` predicates are meta-predicates, turning on the
 `optimize` compiler flag is advised to avoid runtime compilation of the
 meta-argument, which would add an overhead to the timing results. But
 this advice conflicts with collecting code coverage data, which requires
 compilation in debug mode. The solution is to use separate test objects
-for benchmarking and for code coverage.
+for benchmarking and for code coverage. But note that the CPU execution
+time (in seconds) for each individual test is reported by default when
+running the tests.
 
 Consult the `lgtunit` object documentation for more details on these
 predicates.

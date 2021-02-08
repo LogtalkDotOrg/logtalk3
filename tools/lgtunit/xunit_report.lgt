@@ -29,9 +29,9 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 1:6:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-18,
+		date is 2021-02-08,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -79,15 +79,15 @@
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
 	% "testcase" tag predicates
-	message_hook(passed_test(Object, Test, File, Position, Note)) :-
+	message_hook(passed_test(Object, Test, File, Position, Note, Time)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note)))).
-	message_hook(non_deterministic_success(Object, Test, File, Position, Note)) :-
+		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, Time)))).
+	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note)))).
-	message_hook(failed_test(Object, Test, File, Position, Reason, Note)) :-
+		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note, Time)))).
+	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note)))).
+		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, Time)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
@@ -105,9 +105,8 @@
 		write(xunit_report, '<?xml version="1.0" encoding="UTF-8"?>'), nl(xunit_report).
 
 	write_testsuites_element :-
-%		testsuites_duration(Duration),
-%		write_xml_open_tag(testsuites, [duration-Duration]),
-		write_xml_open_tag(testsuites, []),
+		testsuites_duration(Duration),
+		write_xml_open_tag(testsuites, [duration-Duration]),
 		write_testsuite_element,
 		write_xml_close_tag(testsuites).
 
@@ -130,19 +129,19 @@
 		message_cache_(tests_skipped(Object, Note)),
 		message_cache_(running_tests_from_object_file(Object, File)),
 		Object<<test_(Name, _),
-		write_testcase_element_tags(skipped_test(File, 0-0, Note), Object, Name, 0),
+		write_testcase_element_tags(skipped_test(File, 0-0, Note), Object, Name),
 		fail.
 	write_test_elements :-
 		message_cache_(test(ClassName, Name, Test)),
-		write_testcase_element_tags(Test, ClassName, Name, 0),
+		write_testcase_element_tags(Test, ClassName, Name),
 		fail.
 	write_test_elements.
 
-	write_testcase_element_tags(passed_test(_File, _Position, _Note), ClassName, Name, Time) :-
+	write_testcase_element_tags(passed_test(_File, _Position, _Note, Time), ClassName, Name) :-
 		write_xml_empty_tag(testcase, [classname-ClassName, name-Name, time-Time]).
-	write_testcase_element_tags(non_deterministic_success(File, Position, Note), ClassName, Name, Time) :-
-		write_testcase_element_tags(failed_test(File, Position, non_deterministic_success, Note), ClassName, Name, Time).
-	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note), ClassName, Name, Time) :-
+	write_testcase_element_tags(non_deterministic_success(File, Position, Note, Time), ClassName, Name) :-
+		write_testcase_element_tags(failed_test(File, Position, non_deterministic_success, Note, Time), ClassName, Name).
+	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note, Time), ClassName, Name) :-
 		failed_test(Reason, Description, Type, Error),
 		test_message(Note, Description, Message),
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
@@ -151,8 +150,8 @@
 		;	writeq_xml_cdata_element(failure, [message-Message, type-Type], Error)
 		),
 		write_xml_close_tag(testcase).
-	write_testcase_element_tags(skipped_test(_File, _Position, Note), ClassName, Name, Time) :-
-		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
+	write_testcase_element_tags(skipped_test(_File, _Position, Note), ClassName, Name) :-
+		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-0.0]),
 		test_message(Note, 'Skipped test', Message),
 		write_xml_empty_tag(skipped, [message-Message]),
 		write_xml_close_tag(testcase).
