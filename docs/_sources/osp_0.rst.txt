@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:29:0
-| **Date:** 2020-10-08
+| **Version:** 1:29:1
+| **Date:** 2021-02-09
 
 | **Compilation flags:**
 |    ``static``
@@ -391,7 +391,7 @@ Returns a list of all files (including directories, regular files, and hidden di
 ``directory_files/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``. Throws an error if the directory does not exist.s
+Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``. Throws an error if the directory does not exist.
 
 | **Compilation flags:**
 |    ``static``

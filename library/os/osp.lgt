@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:29:0,
+		version is 1:29:1,
 		author is 'Paulo Moura',
-		date is 2020-10-08,
+		date is 2021-02-09,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -140,7 +140,7 @@
 	:- public(directory_files/3).
 	:- mode(directory_files(+atom, -list(atom), +list(compound)), one_or_error).
 	:- info(directory_files/3, [
-		comment is 'Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``. Throws an error if the directory does not exist.s',
+		comment is 'Returns a list of files filtered using the given list of options. Invalid options are ignored. Default option values are equivalent to ``directory_files/2``. Throws an error if the directory does not exist.',
 		argnames is ['Directory', 'Files', 'Options'],
 		remarks is [
 			'Option ``paths/1``' - 'Possible values are ``relative`` and ``absolute``. Default is ``relative``.',
