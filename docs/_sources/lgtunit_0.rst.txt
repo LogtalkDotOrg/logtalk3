@@ -12,7 +12,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 
 | **Author:** Paulo Moura
 | **Version:** 9:0:0
-| **Date:** 2021-02-08
+| **Date:** 2021-02-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -109,8 +109,8 @@ Runs a unit test or a list of unit tests, writing the results to the current out
 | **Template:**
 |    ``run(Tests)``
 | **Mode and number of proofs:**
-|    ``run(+atom)`` - ``zero_or_one``
-|    ``run(+list(atom))`` - ``zero_or_one``
+|    ``run(++callable)`` - ``zero_or_one``
+|    ``run(++list(callable))`` - ``zero_or_one``
 
 
 ------------
@@ -157,6 +157,52 @@ Runs two or more test sets as a unified set generating a single code coverage re
 |    ``run_test_sets(TestObjects)``
 | **Mode and number of proofs:**
 |    ``run_test_sets(+list(object_identifier))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="test/1"> </div>
+
+.. index:: test/1
+.. _lgtunit/0::test/1:
+
+``test/1``
+^^^^^^^^^^
+
+Enumerates, by backtracking, the identifiers of all defined unit tests.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``test(Identifier)``
+| **Mode and number of proofs:**
+|    ``test(?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="number_of_tests/1"> </div>
+
+.. index:: number_of_tests/1
+.. _lgtunit/0::number_of_tests/1:
+
+``number_of_tests/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Number of defined unit tests.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``number_of_tests(NumerOfTests)``
+| **Mode and number of proofs:**
+|    ``number_of_tests(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -600,27 +646,6 @@ Protected predicates
 
 .. raw:: html
 
-   <div id="number_of_tests/1"> </div>
-
-.. index:: number_of_tests/1
-.. _lgtunit/0::number_of_tests/1:
-
-``number_of_tests/1``
-^^^^^^^^^^^^^^^^^^^^^
-
-Number of defined unit tests.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``number_of_tests(?integer)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="run_tests/0"> </div>
 
 .. index:: run_tests/0
@@ -658,7 +683,7 @@ Runs a list of defined tests.
 | **Template:**
 |    ``run_tests(Tests,File)``
 | **Mode and number of proofs:**
-|    ``run_tests(+list(callable),+atom)`` - ``one``
+|    ``run_tests(++list(callable),+atom)`` - ``one``
 
 
 ------------
@@ -1819,7 +1844,7 @@ Compiled unit tests. The list of variables is used to ensure variable sharing be
 | **Meta-predicate template:**
 |    ``test(*,*,*)``
 | **Mode and number of proofs:**
-|    ``test(?atom,?list(variable),?nonvar)`` - ``zero_or_more``
+|    ``test(?callable,?list(variable),?nonvar)`` - ``zero_or_more``
 
 
 ------------
@@ -1865,7 +1890,7 @@ Table of defined tests.
 | **Template:**
 |    ``test_(Identifier,Test)``
 | **Mode and number of proofs:**
-|    ``test_(?atom,?compound)`` - ``zero_or_more``
+|    ``test_(?callable,?compound)`` - ``zero_or_more``
 
 
 ------------

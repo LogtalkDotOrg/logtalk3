@@ -170,7 +170,7 @@
 	write_test_elements(Object) :-
 		message_cache_(tests_skipped(Object, Note)),
 		message_cache_(running_tests_from_object_file(Object, File)),
-		Object<<test_(Name, _),
+		Object::test(Name),
 		write_test_element_tags(skipped_test(File, 0-0, Note), Name, Object),
 		fail.
 	write_test_elements(Object) :-
@@ -268,7 +268,7 @@
 	assembly_stats(Object, Total, Total, 0, 0) :-
 		message_cache_(tests_skipped(Object, _Note)),
 		!,
-		Object<<number_of_tests(Total).
+		Object::number_of_tests(Total).
 	assembly_stats(Object, Total, Skipped, Passed, Failed) :-
 		message_cache_(tests_results_summary(Object, Total, Skipped, Passed, Failed, _Note)),
 		!.

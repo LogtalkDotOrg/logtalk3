@@ -29,7 +29,7 @@
 	:- info([
 		version is 9:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-02-09,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -52,8 +52,8 @@
 	]).
 
 	:- public(run/1).
-	:- mode(run(+atom), zero_or_one).
-	:- mode(run(+list(atom)), zero_or_one).
+	:- mode(run(++callable), zero_or_one).
+	:- mode(run(++list(callable)), zero_or_one).
 	:- info(run/1, [
 		comment is 'Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.',
 		argnames is ['Tests']
@@ -71,6 +71,20 @@
 	:- info(run_test_sets/1, [
 		comment is 'Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.',
 		argnames is ['TestObjects']
+	]).
+
+	:- public(test/1).
+	:- mode(test(?callable), zero_or_more).
+	:- info(test/1, [
+		comment is 'Enumerates, by backtracking, the identifiers of all defined unit tests.',
+		argnames is ['Identifier']
+	]).
+
+	:- public(number_of_tests/1).
+	:- mode(number_of_tests(?integer), zero_or_one).
+	:- info(number_of_tests/1, [
+		comment is 'Number of defined unit tests.',
+		argnames is ['NumerOfTests']
 	]).
 
 	:- public(deterministic/1).
@@ -221,12 +235,6 @@
 		argnames is ['Epsilon']
 	]).
 
-	:- protected(number_of_tests/1).
-	:- mode(number_of_tests(?integer), one).
-	:- info(number_of_tests/1, [
-		comment is 'Number of defined unit tests.'
-	]).
-
 	:- protected(run_tests/0).
 	:- mode(run_tests, one).
 	:- info(run_tests/0, [
@@ -234,7 +242,7 @@
 	]).
 
 	:- protected(run_tests/2).
-	:- mode(run_tests(+list(callable), +atom), one).
+	:- mode(run_tests(++list(callable), +atom), one).
 	:- info(run_tests/2, [
 		comment is 'Runs a list of defined tests.',
 		argnames is ['Tests', 'File']
@@ -587,7 +595,7 @@
 
 	:- private(test/3).
 	:- meta_predicate(test(*, *, *)).  % just to slience warnings
-	:- mode(test(?atom, ?list(variable), ?nonvar), zero_or_more).
+	:- mode(test(?callable, ?list(variable), ?nonvar), zero_or_more).
 	:- info(test/3, [
 		comment is 'Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.',
 		argnames is ['Identifier', 'Variables', 'Outcome']
@@ -603,7 +611,7 @@
 
 	:- private(test_/2).
 	:- dynamic(test_/2).
-	:- mode(test_(?atom, ?compound), zero_or_more).
+	:- mode(test_(?callable, ?compound), zero_or_more).
 	:- info(test_/2, [
 		comment is 'Table of defined tests.',
 		argnames is ['Identifier', 'Test']
@@ -1528,6 +1536,12 @@
 	default_quick_check_option(l(true)).
 	% don't do a verbose reporting of generated random tests
 	default_quick_check_option(v(false)).
+
+	% default number of tests
+	number_of_tests(0).
+
+	test(Identifier) :-
+		::test_(Identifier, _).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),

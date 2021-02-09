@@ -118,7 +118,7 @@
 	write_test_elements(Object) :-
 		message_cache_(tests_skipped(Object, Note)),
 		message_cache_(running_tests_from_object_file(Object, File)),
-		Object<<test_(Name, _),
+		Object::test(Name),
 		write_testcase_element_tags(skipped_test(File, 0-0, Note), Object, Name),
 		fail.
 	write_test_elements(Object) :-
@@ -185,7 +185,7 @@
 	testsuite_stats(Object, Tests, 0, 0, Tests) :-
 		message_cache_(tests_skipped(Object, _Note)),
 		!,
-		Object<<number_of_tests(Tests).
+		Object::number_of_tests(Tests).
 	testsuite_stats(Object, Tests, 0, Failures, Skipped) :-
 		once(message_cache_(tests_results_summary(Object, Tests, Skipped, _, Failures, _))),
 		!.

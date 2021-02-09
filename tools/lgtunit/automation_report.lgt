@@ -78,14 +78,14 @@
 		write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
 	% skipped test set
 	message_hook(tests_skipped(Object, _)) :-
-		Object<<number_of_tests(Tests),
+		Object::number_of_tests(Tests),
 		write(results_file, 'object\t'), writeq(results_file, Object),
 		write(results_file, '\t'), write(results_file, Tests),
 		write(results_file, '\t'), write(results_file, Tests),
 		write(results_file, '\t0'),
 		write(results_file, '\t0'), nl(results_file),
 		forall(
-			Object<<test_(Test, _),
+			Object::test(Test),
 			(write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file))
 		).
 	% code coverage results
