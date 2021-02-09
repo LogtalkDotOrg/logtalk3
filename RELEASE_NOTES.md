@@ -43,6 +43,9 @@ Tools
 that intercepts the tool messages may need to be updated as several messages
 now have an additional argument to carry execution time data (in seconds).
 
+* CHANGED: The test automation support to also list, when possible, all the
+skipped tests for skipped test sets.
+
 * UPDATED: Tools documentation on testing.
 
 * FIXED: The cleanup step for the `lgtdoc` tool unit tests.

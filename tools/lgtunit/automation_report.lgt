@@ -33,7 +33,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-02-09,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
@@ -76,6 +76,18 @@
 	% skipped test
 	message_hook(skipped_test(Object, Test, _, _, _)) :-
 		write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
+	% skipped test set
+	message_hook(tests_skipped(Object, _)) :-
+		Object<<number_of_tests(Tests),
+		write(results_file, 'object\t'), writeq(results_file, Object),
+		write(results_file, '\t'), write(results_file, Tests),
+		write(results_file, '\t'), write(results_file, Tests),
+		write(results_file, '\t0'),
+		write(results_file, '\t0'), nl(results_file),
+		forall(
+			Object<<test_(Test, _),
+			(write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file))
+		).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write(results_file, 'coverage\t'), write(results_file, Percentage), write(results_file, '%'), nl(results_file).
