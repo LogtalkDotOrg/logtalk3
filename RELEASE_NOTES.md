@@ -46,6 +46,9 @@ now have an additional argument to carry execution time data (in seconds).
 * CHANGED: The test automation support to also list, when possible, all the
 skipped tests for skipped test sets.
 
+* IMPROVED: Better reporting of tests results from running a set of test suites
+as a single unified suite when using the xUnit formats.
+
 * UPDATED: Tools documentation on testing.
 
 * FIXED: The cleanup step for the `lgtdoc` tool unit tests.

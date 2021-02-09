@@ -31,7 +31,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-02-09,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -90,75 +90,82 @@
 
 	write_assemblies_element :-
 		write_xml_open_tag(assemblies, []),
-		write_assembly_element,
+		write_assembly_elements,
 		write_xml_close_tag(assemblies).
 
-	write_assembly_element :-
-		assembly_name(Name),
-		assembly_config_file(ConfigFile),
-		assembly_time(Time),
+	write_assembly_elements :-
+		message_cache_(running_tests_from_object_file(Object, _)),
+		write_assembly_element(Object),
+		fail.
+	write_assembly_elements.
+
+	write_assembly_element(Object) :-
+		assembly_name(Object, Name),
+		assembly_config_file(Object, ConfigFile),
+		assembly_time(Object, Time),
 		assembly_run_date(RunDate),
 		assembly_run_time(RunTime),
-		assembly_stats(Tests, Errors, Failures, Skipped),
+		assembly_stats(Object, Total, Skipped, Passed, Failed),
 		write_xml_open_tag(assembly,
 			[	name-Name, 'config-file'-ConfigFile, 'test-framework'-lgtunit,
 				'run-date'-RunDate, 'run-time'-RunTime,
 				time-Time,
-			 	total-Tests, errors-Errors, failures-Failures, skipped-Skipped
+			 	total-Total, passed-Passed, failed-Failed, skipped-Skipped, errors-0
 			]
 		),
-		write_errors_element,
-		write_collection_element,
+		write_errors_element(Object),
+		write_collection_element(Object),
 		write_xml_close_tag(assembly).
 
-	write_errors_element :-
-		\+ message_cache_(broken_step(_, _, _)),
-		\+ message_cache_(failed_step(_, _)),
+	write_errors_element(Object) :-
+		\+ message_cache_(broken_step(_, Object, _)),
+		\+ message_cache_(failed_step(_, Object)),
 		!.
-	write_errors_element :-
+	write_errors_element(Object) :-
 		write_xml_open_tag(errors, []),
-		message_cache_(broken_step(Step, _Object, Error)),
+		message_cache_(broken_step(Step, Object, Error)),
 		write_xml_open_tag(error, [type-error, name-Step]),
 		write_xml_open_tag(failure, []),
 		write_xml_cdata_element('stack-trace', [], Error),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(error),
 		fail.
-	write_errors_element :-
-		message_cache_(failed_step(Step, _Object)),
+	write_errors_element(Object) :-
+		message_cache_(failed_step(Step, Object)),
 		write_xml_open_tag(error, [type-failure, name-Step]),
 		write_xml_empty_tag(failure, []),
 		write_xml_close_tag(error),
 		fail.
-	write_errors_element :-
+	write_errors_element(_) :-
 		write_xml_close_tag(errors).
 
-	write_collection_element :-
-		collection_stats(Tests, Errors, Failures, Skipped),
-		collection_name(Name),
-		collection_time(Time),
+	write_collection_element(Object) :-
+		collection_stats(Object, Total, Skipped, Passed, Failed),
+		collection_name(Object, Name),
+		collection_time(Object, Time),
 		write_xml_open_tag(collection,
 			[	name-Name, time-Time,
-			 	total-Tests, errors-Errors, failures-Failures, skipped-Skipped
+			 	total-Total, passed-Passed, failed-Failed, skipped-Skipped
 			]
 		),
-		write_test_elements,
+		write_test_elements(Object),
 		write_xml_close_tag(collection).
 
-	write_test_elements :-
+	write_test_elements(Object) :-
 		message_cache_(tests_skipped(Object, Note)),
 		message_cache_(running_tests_from_object_file(Object, File)),
 		Object<<test_(Name, _),
 		write_test_element_tags(skipped_test(File, 0-0, Note), Name, Object),
 		fail.
-	write_test_elements :-
-		message_cache_(test(Type, Name, Test)),
-		write_test_element_tags(Test, Name, Type),
+	write_test_elements(Object) :-
+		message_cache_(test(Object, Name, Test)),
+		write_test_element_tags(Test, Name, Object),
 		fail.
-	write_test_elements.
+	write_test_elements(_).
 
-	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-Time, result-'Pass']),
+	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Object) :-
+		suppress_path_prefix(File, Short),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Pass']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -166,8 +173,9 @@
 		write_xml_empty_tag(trait, [name-note, value-Note]),
 		write_xml_close_tag(traits),
 		write_xml_close_tag(test).
-	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-Time, result-'Fail']),
+	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Object) :-
+		suppress_path_prefix(File, Short),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Fail']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -178,10 +186,10 @@
 		write_xml_cdata_element(message, [], Message),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
-	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-Time, result-'Fail']),
-		write_xml_open_tag(traits, []),
+	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Fail']),
+		write_xml_open_tag(traits, []),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
 		write_xml_close_tag(traits),
@@ -195,8 +203,9 @@
 		),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
-	write_test_element_tags(skipped_test(File, Position, Note), Name, Type) :-
-		write_xml_open_tag(test, [name-Name, type-Type, method-'', time-0.0, result-'Skip']),
+	write_test_element_tags(skipped_test(File, Position, Note), Name, Object) :-
+		suppress_path_prefix(File, Short),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-0.0, result-'Skip']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -229,47 +238,36 @@
 
 	% "assembly" tag attributes
 
-	assembly_time(Time) :-
-		message_cache_(tests_start_date_time(Year0, Month0, Day0, Hours0, Minutes0, Seconds0)),
-		message_cache_(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
-		julian_day(Year0, Month0, Day0, JulianDay0),
-		julian_day(Year, Month, Day, JulianDay),
-		Time is
-			(JulianDay - JulianDay0) * 86400 +
-			(Hours - Hours0) * 3600 +
-			(Minutes - Minutes0) * 60 +
-			Seconds - Seconds0.
+	assembly_time(Object, Time) :-
+		findall(
+			TestTime,
+			(	message_cache_(test(Object, _, passed_test(_, _, _, TestTime)))
+			;	message_cache_(test(Object, _, non_deterministic_success(_, _, _, TestTime)))
+			;	message_cache_(test(Object, _, failed_test(_, _, _, _, TestTime)))
+			),
+			TestTimes
+		),
+		sum(TestTimes, 0, Time).
 
-	assembly_stats(Tests, 0, 0, Tests) :-
+	assembly_stats(Object, Total, Total, 0, 0) :-
 		message_cache_(tests_skipped(Object, _Note)),
 		!,
-		Object<<number_of_tests(Tests).
-	assembly_stats(Tests, 0, Failures, Skipped) :-
-		assembly_stats(0, Tests, 0, Failures, 0, Skipped).
+		Object<<number_of_tests(Total).
+	assembly_stats(Object, Total, Skipped, Passed, Failed) :-
+		message_cache_(tests_results_summary(Object, Total, Skipped, Passed, Failed, _Note)),
+		!.
 
-	assembly_stats(Tests0, Tests, Failures0, Failures, Skipped0, Skipped) :-
-		(	retract(message_cache_(tests_results_summary(_Object, PartialTests, PartialSkipped, _, PartialFailures, _))) ->
-			Tests1 is Tests0 + PartialTests,
-			Failures1 is Failures0 + PartialFailures,
-			Skipped1 is Skipped0 + PartialSkipped,
-			assembly_stats(Tests1, Tests, Failures1, Failures, Skipped1, Skipped)
-		;	Tests is Tests0,
-			Failures is Failures0,
-			Skipped is Skipped0
-		).
-
-	assembly_config_file(Name) :-
-		once(message_cache_(running_tests_from_object_file(_, File))),
+	assembly_config_file(Object, Name) :-
+		once(message_cache_(running_tests_from_object_file(Object, File))),
 		suppress_path_prefix(File, Name).
 
-	assembly_name(Name) :-
+	assembly_name(Object, Name::Object) :-
 		once(message_cache_(running_tests_from_object_file(Object, File))),
-		(	logtalk::loaded_file_property(File, library(Library)),
-			Library \== startup ->
-			Name = library(Library)
-		;	% use the object file directory
-			object_property(Object, file(_,Directory)),
-			suppress_path_prefix(Directory, Name)
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, Name, File) ->
+			true
+		;	Name = File
 		).
 
 	assembly_run_date(RunDate) :-
@@ -286,14 +284,14 @@
 
 	% "collection" tag attributes
 
-	collection_stats(Tests, Errors, Failures, Skipped) :-
-		assembly_stats(Tests, Errors, Failures, Skipped).
+	collection_stats(Object, Total, Skipped, Passed, Failed) :-
+		assembly_stats(Object, Total, Skipped, Passed, Failed).
 
-	collection_name(Name) :-
-		assembly_name(Name).
+	collection_name(Object, Name) :-
+		assembly_name(Object, Name).
 
-	collection_time(Time) :-
-		assembly_time(Time).
+	collection_time(Object, Time) :-
+		assembly_time(Object, Time).
 
 	% date and time auxiliary predicates
 
@@ -407,5 +405,10 @@
 			numbervars(Term, 0, _),
 			write_term(Term, [numbervars(true), quoted(true)])
 		).
+
+	sum([], Sum, Sum).
+	sum([X| Xs], Acc, Sum) :-
+		Acc2 is Acc + X,
+		sum(Xs, Acc2, Sum).
 
 :- end_object.

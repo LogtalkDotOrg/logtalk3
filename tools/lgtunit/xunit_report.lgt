@@ -31,7 +31,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-02-09,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -107,35 +107,42 @@
 	write_testsuites_element :-
 		testsuites_duration(Duration),
 		write_xml_open_tag(testsuites, [duration-Duration]),
-		write_testsuite_element,
+		write_testsuite_elements,
 		write_xml_close_tag(testsuites).
 
-	write_testsuite_element :-
-		testsuite_stats(Tests, Errors, Failures, Skipped),
-		testsuite_name(Name),
-		testsuite_package(Package),
-		testsuite_time(Time),
+	write_testsuite_elements :-
+		message_cache_(running_tests_from_object_file(Object, _)),
+		write_testsuite_element(Object),
+		fail.
+	write_testsuite_elements.
+
+	write_testsuite_element(Object) :-
+		message_cache_(running_tests_from_object_file(Object, _)),
+		testsuite_stats(Object, Tests, Errors, Failures, Skipped),
+		testsuite_name(Object, Name),
+		testsuite_package(Object, Package),
+		testsuite_time(Object, Time),
 		testsuite_timestamp(TimeStamp),
 		write_xml_open_tag(testsuite,
 			[package-Package, name-Name,
 			 tests-Tests, errors-Errors, failures-Failures, skipped-Skipped,
-			 time-Time, timestamp-TimeStamp, id-0
+			 time-Time, timestamp-TimeStamp
 			]
 		),
-		write_test_elements,
+		write_test_elements(Object),
 		write_xml_close_tag(testsuite).
 
-	write_test_elements :-
+	write_test_elements(Object) :-
 		message_cache_(tests_skipped(Object, Note)),
 		message_cache_(running_tests_from_object_file(Object, File)),
 		Object<<test_(Name, _),
 		write_testcase_element_tags(skipped_test(File, 0-0, Note), Object, Name),
 		fail.
-	write_test_elements :-
-		message_cache_(test(ClassName, Name, Test)),
-		write_testcase_element_tags(Test, ClassName, Name),
+	write_test_elements(Object) :-
+		message_cache_(test(Object, Name, Test)),
+		write_testcase_element_tags(Test, Object, Name),
 		fail.
-	write_test_elements.
+	write_test_elements(_).
 
 	write_testcase_element_tags(passed_test(_File, _Position, _Note, Time), ClassName, Name) :-
 		write_xml_empty_tag(testcase, [classname-ClassName, name-Name, time-Time]).
@@ -192,26 +199,16 @@
 
 	% "testsuite" tag attributes
 
-	testsuite_stats(Tests, 0, 0, Tests) :-
+	testsuite_stats(Object, Tests, 0, 0, Tests) :-
 		message_cache_(tests_skipped(Object, _Note)),
 		!,
 		Object<<number_of_tests(Tests).
-	testsuite_stats(Tests, 0, Failures, Skipped) :-
-		testsuite_stats(0, Tests, 0, Failures, 0, Skipped).
+	testsuite_stats(Object, Tests, 0, Failures, Skipped) :-
+		once(message_cache_(tests_results_summary(Object, Tests, Skipped, _, Failures, _))),
+		!.
 
-	testsuite_stats(Tests0, Tests, Failures0, Failures, Skipped0, Skipped) :-
-		(	retract(message_cache_(tests_results_summary(_Object, PartialTests, PartialSkipped, _, PartialFailures, _))) ->
-			Tests1 is Tests0 + PartialTests,
-			Failures1 is Failures0 + PartialFailures,
-			Skipped1 is Skipped0 + PartialSkipped,
-			testsuite_stats(Tests1, Tests, Failures1, Failures, Skipped1, Skipped)
-		;	Tests is Tests0,
-			Failures is Failures0,
-			Skipped is Skipped0
-		).
-
-	testsuite_name(Name) :-
-		once(message_cache_(running_tests_from_object_file(_, File))),
+	testsuite_name(Object, Name::Object) :-
+		once(message_cache_(running_tests_from_object_file(Object, File))),
 		% bypass the compiler as the flag is only created after loading this file
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
 		(	atom_concat(Prefix, Name, File) ->
@@ -219,7 +216,7 @@
 		;	Name = File
 		).
 
-	testsuite_package(Package) :-
+	testsuite_package(Object, Package) :-
 		once(message_cache_(running_tests_from_object_file(Object, File))),
 		(	logtalk::loaded_file_property(File, library(Library)),
 			Library \== startup ->
@@ -234,9 +231,16 @@
 			)
 		).
 
-	testsuite_time(Time) :-
-		% there's a single testsuite
-		testsuites_duration(Time).
+	testsuite_time(Object, Time) :-
+		findall(
+			TestTime,
+			(	message_cache_(test(Object, _, passed_test(_, _, _, TestTime)))
+			;	message_cache_(test(Object, _, non_deterministic_success(_, _, _, TestTime)))
+			;	message_cache_(test(Object, _, failed_test(_, _, _, _, TestTime)))
+			),
+			TestTimes
+		),
+		sum(TestTimes, 0, Time).
 
 	testsuite_timestamp(TimeStamp) :-
 		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
@@ -345,5 +349,10 @@
 			numbervars(Term, 0, _),
 			write_term(xunit_report, Term, [numbervars(true), quoted(true)])
 		).
+
+	sum([], Sum, Sum).
+	sum([X| Xs], Acc, Sum) :-
+		Acc2 is Acc + X,
+		sum(Xs, Acc2, Sum).
 
 :- end_object.
