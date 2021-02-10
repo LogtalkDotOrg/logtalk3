@@ -30,6 +30,11 @@ Distribution
 
 * ADDED: SPDX short-form identifiers to most of the files in the distribution.
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Simplified the SWI-Prolog integration files.
+
 Library
 -------
 
