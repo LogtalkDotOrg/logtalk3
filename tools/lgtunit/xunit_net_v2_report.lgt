@@ -181,7 +181,7 @@
 
 	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-Name, type-Object, method-Name, time-Time, result-'Pass']),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Pass']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -194,7 +194,7 @@
 		write_xml_close_tag(test).
 	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-Name, type-Object, method-Name, time-Time, result-'Fail']),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Fail']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
@@ -207,7 +207,7 @@
 		write_xml_close_tag(test).
 	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-Name, type-Object, method-Name, time-Time, result-'Fail']),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Fail']),
 		write_xml_open_tag(traits, []),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
@@ -224,7 +224,7 @@
 		write_xml_close_tag(test).
 	write_test_element_tags(skipped_test(File, Position, Note), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-Name, type-Object, method-Name, time-0.0, result-'Skip']),
+		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-0.0, result-'Skip']),
 		write_xml_open_tag(traits, []),
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
