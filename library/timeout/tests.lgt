@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2019-12-02,
+		date is 2021-02-10,
 		comment is 'Unit tests for the "timeout" library.'
 	]).
 
@@ -77,7 +77,8 @@
 
 	% auxiliary predicates
 
+	my_repeat.
 	my_repeat :-
-		repeat.
+		my_repeat.
 
 :- end_object.
