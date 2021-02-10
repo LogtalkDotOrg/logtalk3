@@ -389,7 +389,7 @@ elif [ "$p_arg" == "tau" ] ; then
 	dot="."
 elif [ "$p_arg" == "trealla" ] ; then
 	backend=trealla
-	prolog='Trealla ProLog'
+	prolog='Trealla Prolog'
 	logtalk=tplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "xsb" ] ; then

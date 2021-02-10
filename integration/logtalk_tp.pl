@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Integration file for Trealla ProLog
+%  Integration file for Trealla Prolog
 %  Last updated on November 22, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>

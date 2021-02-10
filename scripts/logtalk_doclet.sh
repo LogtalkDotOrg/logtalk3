@@ -190,7 +190,7 @@ elif [ "$p_arg" == "tau" ] ; then
 	logtalk=taulgt$extension
 	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "trealla" ] ; then
-	prolog='Trealla ProLog'
+	prolog='Trealla Prolog'
 	logtalk=tplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "xsb" ] ; then

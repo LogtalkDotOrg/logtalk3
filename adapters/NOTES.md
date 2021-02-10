@@ -94,7 +94,7 @@ following table summarizes the availability of these features:
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |  
-|  Trealla ProLog  |       no      |       no      |      yes      |       no      |       no      |  
+|  Trealla Prolog  |       no      |       no      |      yes      |       no      |       no      |  
 |  XSB             |      yes      |       no      |       no      |       no      |       no      |  
 |  YAP             |      yes      |      yes      |      yes      |       no      |       no      |  
 
@@ -403,12 +403,12 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla ProLog 1.6.8 and later versions
+Trealla Prolog 1.6.8 and later versions
 ---------------------------------------
 
 	trealla.pl
 
-Experimental. Joint work with the Trealla ProLog developer, Andrew Davison.
+Experimental. Joint work with the Trealla Prolog developer, Andrew Davison.
 
 
 XSB 3.8.0 and later versions

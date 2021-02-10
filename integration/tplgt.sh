@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   Integration script for Trealla ProLog
+##   Integration script for Trealla Prolog
 ##   Last updated on January 19, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
