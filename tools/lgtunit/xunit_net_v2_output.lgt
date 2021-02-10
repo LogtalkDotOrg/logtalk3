@@ -170,7 +170,10 @@
 		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
-		write_xml_empty_tag(trait, [name-note, value-Note]),
+		(	Note == '' ->
+			true
+		;	write_xml_empty_tag(trait, [name-note, value-Note])
+		),
 		write_xml_close_tag(traits),
 		write_xml_close_tag(test).
 	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Object) :-
