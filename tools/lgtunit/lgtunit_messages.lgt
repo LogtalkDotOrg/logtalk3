@@ -24,7 +24,7 @@
 	:- info([
 		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-02-11,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -105,14 +105,14 @@
 
 	message_tokens(passed_test(_Object, Test, _File, _Position, Note, Time)) -->
 		(	{Note == ''} ->
-			['~q: success (~w seconds)'-[Test, Time], nl]
-		;	['~q: success (~w) (~w seconds)'-[Test, Note, Time], nl]
+			['~q: success (in ~w seconds)'-[Test, Time], nl]
+		;	['~q: success (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 		).
 
 	message_tokens(non_deterministic_success(_Object, Test, File, Position, Note, Time)) -->
 		(	{Note == ''} ->
-			['~q: failure (~w seconds)'-[Test, Time], nl]
-		;	['~q: failure (~w) (~w seconds)'-[Test, Note, Time], nl]
+			['~q: failure (in ~w seconds)'-[Test, Time], nl]
+		;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 		),
 		failed_test_reason(non_deterministic_success),
 		(	{Position = Line-Line} ->
@@ -122,8 +122,8 @@
 
 	message_tokens(failed_test(_Object, Test, File, Position, Reason, Note, Time)) -->
 		(	{Note == ''} ->
-			['~q: failure (~w seconds)'-[Test, Time], nl]
-		;	['~q: failure (~w) (~w seconds)'-[Test, Note, Time], nl]
+			['~q: failure (in ~w seconds)'-[Test, Time], nl]
+		;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 		),
 		failed_test_reason(Reason),
 		(	{Position = Line-Line} ->
