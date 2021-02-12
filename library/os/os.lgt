@@ -257,7 +257,7 @@
 
 		file_permission(File, Permission) :-
 			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath, Permission)}.
+			{access_file(ExpandedPath, Permission)}.
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
@@ -266,7 +266,7 @@
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
 			absolute_file_name(New, NewExpandedPath),
-			{rename(OldExpandedPath, NewExpandedPath)}.
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
 
 		environment_variable(Variable, Value) :-
 			{environ(Variable, Value)}.
@@ -725,7 +725,10 @@
 		file_permission(File, Permission) :-
 			absolute_file_name(File, Path),
 			map_file_permission(Permission, Property),
-			{file_property(Path, Property, true)}.
+			(	{directory_exists(Path)} ->
+				{directory_property(Path, Property, true)}
+			;	{file_property(Path, Property, true)}
+			).
 
 		map_file_permission(read,    readable).
 		map_file_permission(write,   writable).
@@ -797,23 +800,35 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
+			context(Context),
 			{canonical_path_name(Directory, ExpandedPath),
-			 delete(ExpandedPath)}.
+			 (	exists(ExpandedPath) ->
+			 	delete(ExpandedPath)
+			 ;	throw(error(existence_error(directory,Directory), logtalk(delete_directory(Directory),Context)))
+			 )}.
 
 		change_directory(Directory) :-
+			context(Context),
 			{canonical_path_name(Directory, ExpandedPath),
-			 cd(ExpandedPath)}.
+			 (	exists(ExpandedPath) ->
+			 	cd(ExpandedPath)
+			 ;	throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
+			 )}.
 
 		working_directory(Directory) :-
 			{getcwd(DirectoryString),
 			 atom_string(Directory, DirectoryString)}.
 
 		directory_files(Directory, Files) :-
+			context(Context),
 			{canonical_path_name(Directory, Path),
-			 read_directory(Path, '*', Directories0, Files0),
-			 findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
-			 findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
-			 append(['.', '..'| Directories1], Files1, Files)}.
+			 (	exists(Path) ->
+   			 	read_directory(Path, '*', Directories0, Files0),
+   			 	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
+   			 	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
+   			 	append(['.', '..'| Directories1], Files1, Files)
+			 ;	throw(error(existence_error(directory,Directory), logtalk(directory_files(Directory,Files),Context)))
+			 )}.
 
 		directory_exists(Directory) :-
 			{canonical_path_name(Directory, ExpandedPath),
@@ -826,42 +841,61 @@
 			 get_file_info(ExpandedPath, type, file)}.
 
 		file_modification_time(File, Time) :-
+			context(Context),
 			{(	canonical_path_name(File, ExpandedPath),
 				exists(ExpandedPath) ->
 			 	get_file_info(ExpandedPath, mtime, Time)
-			 ;	throw(abort)
+			 ;	throw(error(existence_error(file,File), logtalk(file_modification_time(File,Time),Context)))
 			 )}.
 
 		file_size(File, Size) :-
+			context(Context),
 			{(	canonical_path_name(File, ExpandedPath),
 				exists(ExpandedPath) ->
 				get_file_info(ExpandedPath, size, Size)
-			 ;	throw(abort)
+			 ;	throw(error(existence_error(file,File), logtalk(file_size(File,Size),Context)))
 			 )}.
 
 		file_permission(File, read) :-
+			context(Context),
 			{(	canonical_path_name(File, ExpandedPath),
 				exists(ExpandedPath) ->
 				get_file_info(ExpandedPath, readable, on)
-			 ;	throw(abort)
+			 ;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
 			 )}.
 
 		file_permission(File, write) :-
-			{canonical_path_name(File, ExpandedPath),
-			 get_file_info(ExpandedPath, writable, on)}.
+			context(Context),
+			{(	canonical_path_name(File, ExpandedPath),
+				exists(ExpandedPath) ->
+				get_file_info(ExpandedPath, writable, on)
+			 ;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
+			 )}.
 
 		file_permission(File, execute) :-
-			{canonical_path_name(File, ExpandedPath),
-			 get_file_info(ExpandedPath, executable, on)}.
+			context(Context),
+			{(	canonical_path_name(File, ExpandedPath),
+				exists(ExpandedPath) ->
+				get_file_info(ExpandedPath, executable, on)
+			 ;	throw(error(existence_error(file,File), logtalk(file_permission(File,execute),Context)))
+			 )}.
 
 		delete_file(File) :-
+			context(Context),
 			{canonical_path_name(File, ExpandedPath),
-			 delete(ExpandedPath)}.
+			 (	exists(ExpandedPath) ->
+			 	delete(ExpandedPath)
+			 ;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
+			 )}.
 
 		rename_file(Old, New) :-
+			context(Context),
 			{canonical_path_name(Old, OldPath),
-			 canonical_path_name(New, NewPath),
-			 rename(OldPath, NewPath)}.
+			 (	exists(OldPath) ->
+   			 	canonical_path_name(New, NewPath),
+   			 	rename(OldPath, NewPath)
+			 ;	throw(error(existence_error(file,Old), logtalk(rename_file(Old,New),Context)))
+			 )}.
 
 		environment_variable(Variable, Value) :-
 			{getenv(Variable, ValueString),

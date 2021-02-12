@@ -22,15 +22,15 @@
 % to avoid problems with backend Prolog compilers such as ECLiPSe where
 % reloading a file defining clauses for a multifile predicate results in
 % the duplication of the clauses, below we load the required libraries
-% for the "lgtunit" tool separately so that we can load the "arbitrary"
-% library under testing in debug mode
+% for the "lgtunit" tool separately so that we can load the "os" library
+% under testing in debug mode
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(random(loader)),
 	logtalk_load(arbitrary(loader)),
-	logtalk_load([os(osp), os(os), os(os_types)], [source_data(on), debug(on)]),
+	logtalk_load([osp, os, os_types], [source_data(on), debug(on)]),
 	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

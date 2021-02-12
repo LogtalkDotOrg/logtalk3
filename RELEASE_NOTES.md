@@ -38,6 +38,17 @@ Prolog adapter and integration files
 Library
 -------
 
+* ADDED: New types `file(Extensions,Permissions)` and `directory(Permissions)`
+to the `os` library.
+
+* FIXED: Library `os::file_permission/2` predicate for SICStus Prolog when the
+first argument is a directory.
+
+* FIXED: Library `os` predicates `file_permission/2` and `rename_file/2` for
+YAP.
+
+* FIXED: Exceptions for the `os` library predicates for ECLiPSe.
+
 * FIXED: Library `csv` round-trip tests to only run when the `diff` command is
 available.
 

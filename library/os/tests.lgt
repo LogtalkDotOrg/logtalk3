@@ -467,9 +467,15 @@
 		type::type(file(_)).
 
 	test(os_types_type_1_03) :-
-		type::type(directory).
+		type::type(file(_, _)).
 
 	test(os_types_type_1_04) :-
+		type::type(directory).
+
+	test(os_types_type_1_05) :-
+		type::type(directory(_)).
+
+	test(os_types_type_1_06) :-
 		type::type(environment_variable).
 
 	test(os_types_check_2_01) :-
@@ -489,17 +495,29 @@
 		\+ type::valid(file(['.foo','.bar']), Path).
 
 	test(os_types_check_2_05) :-
+		logtalk::expand_library_path(core('monitoring.lgt'), Path),
+		type::valid(file([], [read]), Path).
+
+	test(os_types_check_2_06) :-
+		logtalk::expand_library_path(core('monitoring.lgt'), Path),
+		\+ type::valid(file(['.lgt'], [execute]), Path).
+
+	test(os_types_check_2_07) :-
 		logtalk::expand_library_path(core, Path),
 		type::check(directory, Path).
 
-	test(os_types_check_2_06) :-
+	test(os_types_check_2_08) :-
+		logtalk::expand_library_path(logtalk_user, Path),
+		type::valid(directory([read]), Path).
+
+	test(os_types_check_2_09) :-
 		logtalk::expand_library_path(core('foobar42/'), Path),
 		\+ type::valid(directory, Path).
 
-	test(os_types_check_2_07) :-
+	test(os_types_check_2_10) :-
 		type::check(environment_variable, 'LOGTALKHOME').
 
-	test(os_types_check_2_08) :-
+	test(os_types_check_2_11) :-
 		\+ type::valid(environment_variable, 'FOOBAR42').
 
 	setup :-
