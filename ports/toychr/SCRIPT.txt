@@ -55,3 +55,8 @@ yes
 
 Result =  (prime(2), prime(3), prime(5), prime(7), prime(11))
 yes
+
+| ?- dom::chr_is(_, (dom(N, [1,2,3]), dom(N, [3,4,5]))).
+
+N = 3
+yes.
