@@ -492,7 +492,7 @@ Calls a goal deterministically with output to the given format: ``atom(Atom)``, 
 | **Meta-predicate template:**
 |    ``with_output_to(*,0)``
 | **Mode and number of proofs:**
-|    ``with_output_to(+callable,-atom)`` - ``zero_or_one``
+|    ``with_output_to(+compound,+callable)`` - ``zero_or_one``
 
 
 ------------
