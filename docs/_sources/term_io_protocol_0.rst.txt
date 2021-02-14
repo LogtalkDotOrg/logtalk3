@@ -482,7 +482,7 @@ Writes a list of arguments to a list of character codes with the given tail usin
 ``with_output_to/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Calls a goal deterministically with output to the given format: {``atom(Atom)``, ``chars(Chars)``, ``chars(Chars,Tail)``, ``codes(Codes)``, ``codes(Codes,Tail)``}.
+Calls a goal deterministically with output to the given format: ``atom(Atom)``, ``chars(Chars)``, ``chars(Chars,Tail)``, ``codes(Codes)``, or ``codes(Codes,Tail)``.
 
 | **Compilation flags:**
 |    ``static, synchronized``

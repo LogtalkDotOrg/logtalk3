@@ -165,7 +165,7 @@
 	:- meta_predicate(with_output_to(*, 0)).
 	:- mode(with_output_to(+callable, -atom), zero_or_one).
 	:- info(with_output_to/2, [
-		comment is 'Calls a goal deterministically with output to the given format: {``atom(Atom)``, ``chars(Chars)``, ``chars(Chars,Tail)``, ``codes(Codes)``, ``codes(Codes,Tail)``}.',
+		comment is 'Calls a goal deterministically with output to the given format: ``atom(Atom)``, ``chars(Chars)``, ``chars(Chars,Tail)``, ``codes(Codes)``, or ``codes(Codes,Tail)``.',
 		argnames is ['Output', 'Goal']
 	]).
 
