@@ -417,14 +417,13 @@ point for user interaction. The commands available are as follows:
 ``Q`` — quit
    quits Logtalk
 ``p`` — print
-   writes current goal using the print/1 predicate if available
+   writes current goal using the ``print/1`` predicate if available
 ``d`` — display
    writes current goal without using operator notation
 ``w`` — write
    writes current goal quoting atoms if necessary
 ``$`` — dollar
-   outputs the compiled form of the current goal (for low-level
-   debugging)
+   outputs the compiled form of the current goal (for low-level debugging)
 ``x`` — context
    prints execution context
 ``.`` — file
@@ -435,7 +434,7 @@ point for user interaction. The commands available are as follows:
 ``=`` — debugging
    prints debugging information
 ``<`` — write depth
-   sets the write term depth (set to 0 to reset)
+   sets the write term depth (set to ``0`` to reset)
 ``*`` — add
    adds a context spy point for the current goal
 ``/`` — remove
