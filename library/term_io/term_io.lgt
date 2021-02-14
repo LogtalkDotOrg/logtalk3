@@ -23,9 +23,9 @@
 	implements(term_io_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-01-22,
+		date is 2021-02-14,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -42,7 +42,8 @@
 		:- synchronized([
 			read_term_from_atom/3, read_term_from_chars/3, read_term_from_codes/3,
 			write_term_to_atom/3, write_term_to_chars/4, write_term_to_codes/4,
-			format_to_atom/3, format_to_chars/4, format_to_codes/4
+			format_to_atom/3, format_to_chars/4, format_to_codes/4,
+			with_output_to/2
 		]).
 	:- endif.
 
@@ -145,6 +146,46 @@
 		open(Path, read, Input),
 		get_codes(Input, Codes, Tail),
 		close(Input).
+
+	:- meta_predicate(with_output_to(*, 0)).
+
+	with_output_to(atom(Atom), Goal) :-
+		with_output_to(codes(Codes, []), Goal),
+		atom_codes(Atom, Codes).
+	with_output_to(chars(Chars), Goal) :-
+		with_output_to(chars(Chars, []), Goal).
+	with_output_to(chars(Chars, Tail), Goal) :-
+		temporary_file_(Path),
+		open(Path, write, Output),
+		current_output(Current),
+		set_output(Output),
+		(	catch(Goal, Error, (close(Output), set_output(Current), throw(Error))) ->
+			close(Output),
+			set_output(Current),
+			open(Path, read, Input),
+			get_chars(Input, Chars, Tail),
+			close(Input)
+		;	close(Output),
+			set_output(Current),
+			fail
+		).
+	with_output_to(codes(Codes), Goal) :-
+		with_output_to(codes(Codes, []), Goal).
+	with_output_to(codes(Codes, Tail), Goal) :-
+		temporary_file_(Path),
+		open(Path, write, Output),
+		current_output(Current),
+		set_output(Output),
+		(	catch(Goal, Error, (close(Output), set_output(Current), throw(Error))) ->
+			close(Output),
+			set_output(Current),
+			open(Path, read, Input),
+			get_codes(Input, Codes, Tail),
+			close(Input)
+		;	close(Output),
+			set_output(Current),
+			fail
+		).
 
 	% shorthands
 

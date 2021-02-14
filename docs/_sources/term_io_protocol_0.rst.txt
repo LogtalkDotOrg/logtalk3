@@ -11,8 +11,8 @@
 Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2021-01-23
+| **Version:** 1:1:0
+| **Date:** 2021-02-14
 
 | **Compilation flags:**
 |    ``static``
@@ -468,6 +468,31 @@ Writes a list of arguments to a list of character codes with the given tail usin
 |    ``format_to_codes(Format,Arguments,Codes,Tail)``
 | **Mode and number of proofs:**
 |    ``format_to_codes(@term,+list(term),-list(character_code),@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="with_output_to/2"> </div>
+
+.. index:: with_output_to/2
+.. _term_io_protocol/0::with_output_to/2:
+
+``with_output_to/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Calls a goal deterministically with output to the given format: {``atom(Atom)``, ``chars(Chars)``, ``chars(Chars,Tail)``, ``codes(Codes)``, ``codes(Codes,Tail)``}.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``with_output_to(Output,Goal)``
+| **Meta-predicate template:**
+|    ``with_output_to(*,0)``
+| **Mode and number of proofs:**
+|    ``with_output_to(+callable,-atom)`` - ``zero_or_one``
 
 
 ------------

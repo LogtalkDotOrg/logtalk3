@@ -22,9 +22,9 @@
 :- protocol(term_io_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-01-23,
+		date is 2021-02-14,
 		comment is 'Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.'
 	]).
 
@@ -161,11 +161,20 @@
 		argnames is ['Format', 'Arguments', 'Codes', 'Tail']
 	]).
 
+	:- public(with_output_to/2).
+	:- meta_predicate(with_output_to(*, 0)).
+	:- mode(with_output_to(+callable, -atom), zero_or_one).
+	:- info(with_output_to/2, [
+		comment is 'Calls a goal deterministically with output to the given format: {``atom(Atom)``, ``chars(Chars)``, ``chars(Chars,Tail)``, ``codes(Codes)``, ``codes(Codes,Tail)``}.',
+		argnames is ['Output', 'Goal']
+	]).
+
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
 			read_term_from_atom/3, read_term_from_chars/3, read_term_from_codes/3,
 			write_term_to_atom/3, write_term_to_chars/4, write_term_to_codes/4,
-			format_to_atom/3, format_to_chars/4, format_to_codes/4
+			format_to_atom/3, format_to_chars/4, format_to_codes/4,
+			with_output_to/2
 		]).
 	:- endif.
 

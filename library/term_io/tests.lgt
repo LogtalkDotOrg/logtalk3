@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-01-20,
+		date is 2021-02-14,
 		comment is 'Unit tests for the "term_io" library.'
 	]).
 
@@ -38,7 +38,8 @@
 		write_term_to_codes/3,  write_term_to_codes/4, write_to_codes/2,
 		format_to_atom/3,
 		format_to_chars/3,      format_to_chars/4,
-		format_to_codes/3,      format_to_codes/4
+		format_to_codes/3,      format_to_codes/4,
+		with_output_to/2
 	]).
 
 	:- uses(lgtunit, [
@@ -340,5 +341,27 @@
 	test(format_to_codes_4_01, true(Codes == ExpectedCodes)) :-
 		atom_codes('42 ---> 24\n', ExpectedCodes),
 		format_to_codes('~d ---> ~d', [42,24], Codes, [0'\n]).
+
+	% with_output_to/2 tests
+
+	test(with_output_to_2_01, true(Atom == 'foo\tbar')) :-
+		with_output_to(atom(Atom), output).
+
+	test(with_output_to_2_02, true(Chars == [f,o,o,'\t',b,a,r])) :-
+		with_output_to(chars(Chars), output).
+
+	test(with_output_to_2_03, true(Chars == [f,o,o,'\t',b,a,r|Tail])) :-
+		with_output_to(chars(Chars,Tail), output).
+
+	test(with_output_to_2_04, true(Codes == [102,111,111,9,98,97,114])) :-
+		with_output_to(codes(Codes), output).
+
+	test(with_output_to_2_05, true(Codes == [102,111,111,9,98,97,114|Tail])) :-
+		with_output_to(codes(Codes,Tail), output).
+
+	% auxiliary predicates
+
+	output :-
+		write(foo), write('\t'), write(bar).
 
 :- end_object.
