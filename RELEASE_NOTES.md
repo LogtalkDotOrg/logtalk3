@@ -38,6 +38,8 @@ Prolog adapter and integration files
 Library
 -------
 
+* ADDED: Library predicate `list::append/2` linter check for redundant calls.
+
 * ADDED: New types `file(Extensions,Permissions)` and `directory(Permissions)`
 to the `os` library.
 
