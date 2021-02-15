@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-02-14,
+		date is 2021-02-15,
 		comment is 'Unit tests for the "term_io" library.'
 	]).
 
@@ -350,14 +350,26 @@
 	test(with_output_to_2_02, true(Chars == [f,o,o,'\t',b,a,r])) :-
 		with_output_to(chars(Chars), output).
 
-	test(with_output_to_2_03, true(Chars == [f,o,o,'\t',b,a,r|Tail])) :-
+	test(with_output_to_2_03, true(Chars == [f,o,o,'\t',b,a,r])) :-
+		with_output_to(chars(Chars,[]), output).
+
+	test(with_output_to_2_04, true(Chars == [f,o,o,'\t',b,a,r|Tail])) :-
 		with_output_to(chars(Chars,Tail), output).
 
-	test(with_output_to_2_04, true(Codes == [102,111,111,9,98,97,114])) :-
+	test(with_output_to_2_05, true(Chars == [f,o,o,'\t',b,a,r,'\t',b,a,z])) :-
+		with_output_to(chars(Chars,['\t',b,a,z]), output).
+
+	test(with_output_to_2_06, true(Codes == [102,111,111,9,98,97,114])) :-
 		with_output_to(codes(Codes), output).
 
-	test(with_output_to_2_05, true(Codes == [102,111,111,9,98,97,114|Tail])) :-
+	test(with_output_to_2_07, true(Codes == [102,111,111,9,98,97,114])) :-
+		with_output_to(codes(Codes,[]), output).
+
+	test(with_output_to_2_08, true(Codes == [102,111,111,9,98,97,114|Tail])) :-
 		with_output_to(codes(Codes,Tail), output).
+
+	test(with_output_to_2_09, true(Codes == [102,111,111,9,98,97,114,9,98,97,122])) :-
+		with_output_to(codes(Codes,[9,98,97,122]), output).
 
 	% auxiliary predicates
 
