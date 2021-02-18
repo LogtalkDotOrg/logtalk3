@@ -23,7 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(basic_types(loader)),
-	logtalk_load([zippers(zipperp), zippers(zlist)], [debug(on), source_data(on)]),
+	logtalk_load([zipperp, zlist], [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
