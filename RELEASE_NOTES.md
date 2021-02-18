@@ -35,6 +35,11 @@ Prolog adapter and integration files
 
 * IMPROVED: Simplified the SWI-Prolog integration files.
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `term_io` library.
+
 Library
 -------
 

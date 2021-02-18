@@ -11,8 +11,8 @@
 Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2021-02-14
+| **Version:** 1:2:0
+| **Date:** 2021-02-18
 
 | **Compilation flags:**
 |    ``static``
@@ -23,7 +23,8 @@ Predicates for term input/output from/to atom, chars, and codes. The predicates 
 
 
 | **Remarks:**
-|    (none)
+
+   - Portability notes: To keep calls to these library predicates portable, use only standard read/write options and specify output formats using atoms.
 
 | **Inherited public predicates:**
 |    (none)
@@ -45,7 +46,7 @@ Public predicates
 ``read_term_from_atom/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Reads a term from an atom using the given read options. A period at the end of the atom is optional.
+Reads a term from an atom using the given read options. A period at the end of the atom is optional. Valid options are those supported by the standard ``read_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -91,7 +92,7 @@ Reads a term from an atom using default read options. Shorthand for ``read_term_
 ``read_term_from_chars/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Reads a term from a list of characters using the given read options. A period at the end of the list is optional.
+Reads a term from a list of characters using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -137,7 +138,7 @@ Reads a term from a list of characters using default read options. Shorthand for
 ``read_term_from_codes/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Reads a term from a list of character codes using the given read options. A period at the end of the list is optional.
+Reads a term from a list of character codes using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -183,7 +184,7 @@ Reads a term from a list of character codes using default read options. Shorthan
 ``write_term_to_atom/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Writes a term to an atom using the given write options.
+Writes a term to an atom using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -229,7 +230,7 @@ Writes a term to an atom using default write options. Shorthand for ``write_term
 ``write_term_to_chars/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Writes a term to a list of characters using the given write options. Shorthand for ``write_term_to_chars(Term,Chars,[],Options)``.
+Writes a term to a list of characters using the given write options. Shorthand for ``write_term_to_chars(Term,Chars,[],Options)``. Valid options are those supported by the standard ``write_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -252,7 +253,7 @@ Writes a term to a list of characters using the given write options. Shorthand f
 ``write_term_to_chars/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Writes a term to a list of characters with the given tail using the given write options.
+Writes a term to a list of characters with the given tail using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -298,7 +299,7 @@ Writes a term to a list of characters using default write options. Shorthand for
 ``write_term_to_codes/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Writes a term to a list of character codes using the given write options. Shorthand for ``write_term_to_codes(Term,Codes,[],Options)``.
+Writes a term to a list of character codes using the given write options. Shorthand for ``write_term_to_codes(Term,Codes,[],Options)``. Valid options are those supported by the standard ``write_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static``
@@ -321,7 +322,7 @@ Writes a term to a list of character codes using the given write options. Shorth
 ``write_term_to_codes/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Writes a term to a list of character codes with the given tail using the given write options.
+Writes a term to a list of character codes with the given tail using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -367,7 +368,7 @@ Writes a term to a list of character codes using default write options. Shorthan
 ``format_to_atom/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Writes a list of arguments to an atom using the given format.
+Writes a list of arguments to an atom using the given format (specified as in the de facto standard ``format/2`` predicate).
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -390,7 +391,7 @@ Writes a list of arguments to an atom using the given format.
 ``format_to_chars/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Writes a list of arguments to a list of characters using the given format. Shorthand for ``format_to_chars(Format,Arguments,Chars,[])``.
+Writes a list of arguments to a list of characters using the given format (specified as in the de facto standard ``format/2`` predicate). Shorthand for ``format_to_chars(Format,Arguments,Chars,[])``.
 
 | **Compilation flags:**
 |    ``static``
@@ -413,7 +414,7 @@ Writes a list of arguments to a list of characters using the given format. Short
 ``format_to_chars/4``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Writes a term to a list of characters with the given tail using the given format.
+Writes a term to a list of characters with the given tail using the given format (specified as in the de facto standard ``format/2`` predicate).
 
 | **Compilation flags:**
 |    ``static, synchronized``
@@ -436,7 +437,7 @@ Writes a term to a list of characters with the given tail using the given format
 ``format_to_codes/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Writes a list of arguments to a list of character codes using the given format. Shorthand for ``format_to_codes(Format,Arguments,Codes,[])``.
+Writes a list of arguments to a list of character codes using the given format (specified as in the de facto standard ``format/2`` predicate). Shorthand for ``format_to_codes(Format,Arguments,Codes,[])``.
 
 | **Compilation flags:**
 |    ``static``
@@ -459,7 +460,7 @@ Writes a list of arguments to a list of character codes using the given format. 
 ``format_to_codes/4``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Writes a list of arguments to a list of character codes with the given tail using the given format.
+Writes a list of arguments to a list of character codes with the given tail using the given format (specified as in the de facto standard ``format/2`` predicate).
 
 | **Compilation flags:**
 |    ``static, synchronized``

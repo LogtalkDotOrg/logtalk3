@@ -22,16 +22,19 @@
 :- protocol(term_io_protocol).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-02-14,
-		comment is 'Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.'
+		date is 2021-02-18,
+		comment is 'Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
+		remarks is [
+			'Portability notes' - 'To keep calls to these library predicates portable, use only standard read/write options and specify output formats using atoms.'
+		]
 	]).
 
 	:- public(read_term_from_atom/3).
 	:- mode(read_term_from_atom(@term, -atom, +list(read_option)), one_or_error).
 	:- info(read_term_from_atom/3, [
-		comment is 'Reads a term from an atom using the given read options. A period at the end of the atom is optional.',
+		comment is 'Reads a term from an atom using the given read options. A period at the end of the atom is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
 		argnames is ['Atom', 'Term', 'Options']
 	]).
 
@@ -45,7 +48,7 @@
 	:- public(read_term_from_chars/3).
 	:- mode(read_term_from_chars(@term, -list(character), +list(read_option)), one_or_error).
 	:- info(read_term_from_chars/3, [
-		comment is 'Reads a term from a list of characters using the given read options. A period at the end of the list is optional.',
+		comment is 'Reads a term from a list of characters using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
 		argnames is ['Chars', 'Term', 'Options']
 	]).
 
@@ -59,7 +62,7 @@
 	:- public(read_term_from_codes/3).
 	:- mode(read_term_from_codes(@term, -list(character_code), +list(read_option)), one_or_error).
 	:- info(read_term_from_codes/3, [
-		comment is 'Reads a term from a list of character codes using the given read options. A period at the end of the list is optional.',
+		comment is 'Reads a term from a list of character codes using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
 		argnames is ['Codes', 'Term', 'Options']
 	]).
 
@@ -73,7 +76,7 @@
 	:- public(write_term_to_atom/3).
 	:- mode(write_term_to_atom(@term, -atom, +list(write_option)), one).
 	:- info(write_term_to_atom/3, [
-		comment is 'Writes a term to an atom using the given write options.',
+		comment is 'Writes a term to an atom using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.',
 		argnames is ['Term', 'Atom', 'Options']
 	]).
 
@@ -87,14 +90,14 @@
 	:- public(write_term_to_chars/3).
 	:- mode(write_term_to_chars(@term, -list(character), +list(write_option)), one).
 	:- info(write_term_to_chars/3, [
-		comment is 'Writes a term to a list of characters using the given write options. Shorthand for ``write_term_to_chars(Term,Chars,[],Options)``.',
+		comment is 'Writes a term to a list of characters using the given write options. Shorthand for ``write_term_to_chars(Term,Chars,[],Options)``. Valid options are those supported by the standard ``write_term/3`` predicate.',
 		argnames is ['Term', 'Chars', 'Options']
 	]).
 
 	:- public(write_term_to_chars/4).
 	:- mode(write_term_to_chars(@term, -list(character), @term, +list(write_option)), one).
 	:- info(write_term_to_chars/4, [
-		comment is 'Writes a term to a list of characters with the given tail using the given write options.',
+		comment is 'Writes a term to a list of characters with the given tail using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.',
 		argnames is ['Term', 'Chars', 'Tail', 'Options']
 	]).
 
@@ -108,14 +111,14 @@
 	:- public(write_term_to_codes/3).
 	:- mode(write_term_to_codes(@term, -list(character_code), +list(write_option)), one).
 	:- info(write_term_to_codes/3, [
-		comment is 'Writes a term to a list of character codes using the given write options. Shorthand for ``write_term_to_codes(Term,Codes,[],Options)``.',
+		comment is 'Writes a term to a list of character codes using the given write options. Shorthand for ``write_term_to_codes(Term,Codes,[],Options)``. Valid options are those supported by the standard ``write_term/3`` predicate.',
 		argnames is ['Term', 'Codes', 'Options']
 	]).
 
 	:- public(write_term_to_codes/4).
 	:- mode(write_term_to_codes(@term, -list(character_code), @term, +list(write_option)), one).
 	:- info(write_term_to_codes/4, [
-		comment is 'Writes a term to a list of character codes with the given tail using the given write options.',
+		comment is 'Writes a term to a list of character codes with the given tail using the given write options. Valid options are those supported by the standard ``write_term/3`` predicate.',
 		argnames is ['Term', 'Codes', 'Tail', 'Options']
 	]).
 
@@ -129,35 +132,35 @@
 	:- public(format_to_atom/3).
 	:- mode(format_to_atom(@atom, +list(term), -atom), one).
 	:- info(format_to_atom/3, [
-		comment is 'Writes a list of arguments to an atom using the given format.',
+		comment is 'Writes a list of arguments to an atom using the given format (specified as in the de facto standard ``format/2`` predicate).',
 		argnames is ['Format', 'Arguments', 'Atom']
 	]).
 
 	:- public(format_to_chars/3).
 	:- mode(format_to_chars(@term, +list(term), -list(character)), one).
 	:- info(format_to_chars/3, [
-		comment is 'Writes a list of arguments to a list of characters using the given format. Shorthand for ``format_to_chars(Format,Arguments,Chars,[])``.',
+		comment is 'Writes a list of arguments to a list of characters using the given format (specified as in the de facto standard ``format/2`` predicate). Shorthand for ``format_to_chars(Format,Arguments,Chars,[])``.',
 		argnames is ['Format', 'Arguments', 'Chars']
 	]).
 
 	:- public(format_to_chars/4).
 	:- mode(format_to_chars(@term, +list(term), -list(character), @term), one).
 	:- info(format_to_chars/4, [
-		comment is 'Writes a term to a list of characters with the given tail using the given format.',
+		comment is 'Writes a term to a list of characters with the given tail using the given format (specified as in the de facto standard ``format/2`` predicate).',
 		argnames is ['Format', 'Arguments', 'Chars', 'Tail']
 	]).
 
 	:- public(format_to_codes/3).
 	:- mode(format_to_codes(@term, +list(term), -list(character_code)), one).
 	:- info(format_to_codes/3, [
-		comment is 'Writes a list of arguments to a list of character codes using the given format. Shorthand for ``format_to_codes(Format,Arguments,Codes,[])``.',
+		comment is 'Writes a list of arguments to a list of character codes using the given format (specified as in the de facto standard ``format/2`` predicate). Shorthand for ``format_to_codes(Format,Arguments,Codes,[])``.',
 		argnames is ['Format', 'Arguments', 'Codes']
 	]).
 
 	:- public(format_to_codes/4).
 	:- mode(format_to_codes(@term, +list(term), -list(character_code), @term), one).
 	:- info(format_to_codes/4, [
-		comment is 'Writes a list of arguments to a list of character codes with the given tail using the given format.',
+		comment is 'Writes a list of arguments to a list of character codes with the given tail using the given format (specified as in the de facto standard ``format/2`` predicate).',
 		argnames is ['Format', 'Arguments', 'Codes', 'Tail']
 	]).
 

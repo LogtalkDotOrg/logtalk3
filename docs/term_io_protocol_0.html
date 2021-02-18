@@ -260,8 +260,8 @@
 <p>Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2021-02-14</div>
+<div class="line"><strong>Version:</strong> 1:2:0</div>
+<div class="line"><strong>Date:</strong> 2021-02-18</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -277,10 +277,12 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Portability notes: To keep calls to these library predicates portable, use only standard read/write options and specify output formats using atoms.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -322,7 +324,7 @@
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="read_term_from_atom/3"> </div><div class="section" id="read-term-from-atom-3">
 <span id="term-io-protocol-0-read-term-from-atom-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">read_term_from_atom/3</span></code></a><a class="headerlink" href="#read-term-from-atom-3" title="Permalink to this headline">¶</a></h3>
-<p>Reads a term from an atom using the given read options. A period at the end of the atom is optional.</p>
+<p>Reads a term from an atom using the given read options. A period at the end of the atom is optional. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -364,7 +366,7 @@
 <div id="read_term_from_chars/3"> </div></div>
 <div class="section" id="read-term-from-chars-3">
 <span id="term-io-protocol-0-read-term-from-chars-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">read_term_from_chars/3</span></code></a><a class="headerlink" href="#read-term-from-chars-3" title="Permalink to this headline">¶</a></h3>
-<p>Reads a term from a list of characters using the given read options. A period at the end of the list is optional.</p>
+<p>Reads a term from a list of characters using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -406,7 +408,7 @@
 <div id="read_term_from_codes/3"> </div></div>
 <div class="section" id="read-term-from-codes-3">
 <span id="term-io-protocol-0-read-term-from-codes-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">read_term_from_codes/3</span></code></a><a class="headerlink" href="#read-term-from-codes-3" title="Permalink to this headline">¶</a></h3>
-<p>Reads a term from a list of character codes using the given read options. A period at the end of the list is optional.</p>
+<p>Reads a term from a list of character codes using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -448,7 +450,7 @@
 <div id="write_term_to_atom/3"> </div></div>
 <div class="section" id="write-term-to-atom-3">
 <span id="term-io-protocol-0-write-term-to-atom-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_atom/3</span></code></a><a class="headerlink" href="#write-term-to-atom-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to an atom using the given write options.</p>
+<p>Writes a term to an atom using the given write options. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -490,7 +492,7 @@
 <div id="write_term_to_chars/3"> </div></div>
 <div class="section" id="write-term-to-chars-3">
 <span id="term-io-protocol-0-write-term-to-chars-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars/3</span></code></a><a class="headerlink" href="#write-term-to-chars-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of characters using the given write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_chars(Term,Chars,[],Options)</span></code>.</p>
+<p>Writes a term to a list of characters using the given write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_chars(Term,Chars,[],Options)</span></code>. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -511,7 +513,7 @@
 <div id="write_term_to_chars/4"> </div></div>
 <div class="section" id="write-term-to-chars-4">
 <span id="term-io-protocol-0-write-term-to-chars-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_chars/4</span></code></a><a class="headerlink" href="#write-term-to-chars-4" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of characters with the given tail using the given write options.</p>
+<p>Writes a term to a list of characters with the given tail using the given write options. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -553,7 +555,7 @@
 <div id="write_term_to_codes/3"> </div></div>
 <div class="section" id="write-term-to-codes-3">
 <span id="term-io-protocol-0-write-term-to-codes-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes/3</span></code></a><a class="headerlink" href="#write-term-to-codes-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of character codes using the given write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_codes(Term,Codes,[],Options)</span></code>.</p>
+<p>Writes a term to a list of character codes using the given write options. Shorthand for <code class="docutils literal notranslate"><span class="pre">write_term_to_codes(Term,Codes,[],Options)</span></code>. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -574,7 +576,7 @@
 <div id="write_term_to_codes/4"> </div></div>
 <div class="section" id="write-term-to-codes-4">
 <span id="term-io-protocol-0-write-term-to-codes-4"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_term_to_codes/4</span></code></a><a class="headerlink" href="#write-term-to-codes-4" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of character codes with the given tail using the given write options.</p>
+<p>Writes a term to a list of character codes with the given tail using the given write options. Valid options are those supported by the standard <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -616,7 +618,7 @@
 <div id="format_to_atom/3"> </div></div>
 <div class="section" id="format-to-atom-3">
 <span id="term-io-protocol-0-format-to-atom-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_atom/3</span></code></a><a class="headerlink" href="#format-to-atom-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a list of arguments to an atom using the given format.</p>
+<p>Writes a list of arguments to an atom using the given format (specified as in the de facto standard <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -637,7 +639,7 @@
 <div id="format_to_chars/3"> </div></div>
 <div class="section" id="format-to-chars-3">
 <span id="term-io-protocol-0-format-to-chars-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_chars/3</span></code></a><a class="headerlink" href="#format-to-chars-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a list of arguments to a list of characters using the given format. Shorthand for <code class="docutils literal notranslate"><span class="pre">format_to_chars(Format,Arguments,Chars,[])</span></code>.</p>
+<p>Writes a list of arguments to a list of characters using the given format (specified as in the de facto standard <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate). Shorthand for <code class="docutils literal notranslate"><span class="pre">format_to_chars(Format,Arguments,Chars,[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -658,7 +660,7 @@
 <div id="format_to_chars/4"> </div></div>
 <div class="section" id="format-to-chars-4">
 <span id="term-io-protocol-0-format-to-chars-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_chars/4</span></code></a><a class="headerlink" href="#format-to-chars-4" title="Permalink to this headline">¶</a></h3>
-<p>Writes a term to a list of characters with the given tail using the given format.</p>
+<p>Writes a term to a list of characters with the given tail using the given format (specified as in the de facto standard <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -679,7 +681,7 @@
 <div id="format_to_codes/3"> </div></div>
 <div class="section" id="format-to-codes-3">
 <span id="term-io-protocol-0-format-to-codes-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_codes/3</span></code></a><a class="headerlink" href="#format-to-codes-3" title="Permalink to this headline">¶</a></h3>
-<p>Writes a list of arguments to a list of character codes using the given format. Shorthand for <code class="docutils literal notranslate"><span class="pre">format_to_codes(Format,Arguments,Codes,[])</span></code>.</p>
+<p>Writes a list of arguments to a list of character codes using the given format (specified as in the de facto standard <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate). Shorthand for <code class="docutils literal notranslate"><span class="pre">format_to_codes(Format,Arguments,Codes,[])</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -700,7 +702,7 @@
 <div id="format_to_codes/4"> </div></div>
 <div class="section" id="format-to-codes-4">
 <span id="term-io-protocol-0-format-to-codes-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">format_to_codes/4</span></code></a><a class="headerlink" href="#format-to-codes-4" title="Permalink to this headline">¶</a></h3>
-<p>Writes a list of arguments to a list of character codes with the given tail using the given format.</p>
+<p>Writes a list of arguments to a list of character codes with the given tail using the given format (specified as in the de facto standard <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
