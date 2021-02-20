@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:19:1,
 		author is 'Paulo Moura',
-		date is 2020-12-16,
+		date is 2021-02-20,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -98,8 +98,10 @@
 		Extension == '.bar'.
 
 	test(os_path_concat_03_01) :-
-		os::path_concat('/foo', '/bar', Path),
-		Path == '/bar'.
+		this(This),
+		object_property(This, file(File)),
+		os::path_concat('/foo', File, Path),
+		Path == File.
 
 	test(os_path_concat_03_02) :-
 		os::path_concat('/foo', '', Path),

@@ -58,6 +58,9 @@ YAP.
 
 * FIXED: Exceptions for the `os` library predicates for ECLiPSe.
 
+* FIXED: Test for the `os::path_concat/3` predicate to work on both POSIX and
+Windows systems.
+
 * FIXED: Library `csv` round-trip tests to only run when the `diff` command is
 available.
 
