@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:29:1
-| **Date:** 2021-02-09
+| **Version:** 1:30:0
+| **Date:** 2021-02-20
 
 | **Compilation flags:**
 |    ``static``
@@ -101,6 +101,29 @@ Runs an operating-system shell command.
 |    ``shell(Command)``
 | **Mode and number of proofs:**
 |    ``shell(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="is_absolute_file_name/1"> </div>
+
+.. index:: is_absolute_file_name/1
+.. _osp/0::is_absolute_file_name/1:
+
+``is_absolute_file_name/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the argument is an absolute file path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_absolute_file_name(File)``
+| **Mode and number of proofs:**
+|    ``is_absolute_file_name(+atom)`` - ``zero_or_one``
 
 
 ------------

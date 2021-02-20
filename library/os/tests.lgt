@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:19:1,
+		version is 0:20:0,
 		author is 'Paulo Moura',
 		date is 2021-02-20,
 		comment is 'Unit tests for the "os" object.'
@@ -319,6 +319,16 @@
 		atom_concat(Directory, 'a/b/ensure_directory2', EnsureDirectory2),
 		os::ensure_directory(EnsureDirectory2),
 		os::directory_exists(EnsureDirectory2).
+
+	test(os_is_absolute_file_name_1_01) :-
+		this(This),
+		object_property(This, file(File)),
+		os::is_absolute_file_name(File).
+
+	test(os_is_absolute_file_name_1_02) :-
+		this(This),
+		object_property(This, file(File,_)),
+		\+ os::is_absolute_file_name(File).
 
 	test(os_absolute_file_name_2_01) :-
 		this(This),

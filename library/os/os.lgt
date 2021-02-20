@@ -19,7 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- if(current_logtalk_flag(prolog_dialect, ciao)).
 	:- use_module(library(system)).
 	:- use_module(engine(runtime_control)).
@@ -45,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:74:1,
+		version is 1:75:0,
 		author is 'Paulo Moura',
-		date is 2020-12-31,
+		date is 2021-02-20,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -78,6 +77,9 @@
 
 		shell(Command) :-
 			{shell(Command)}.
+
+		is_absolute_file_name(Path) :-
+			{is_absolute_file_name(Path)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			catch(
@@ -199,6 +201,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			{is_absolute_file_name(Path)}.
+
 		:- if((current_prolog_flag(version_data, yap(Major,Minor,_,_)), (Major,Minor) @< (6,3))).
 		absolute_file_name(Path, ExpandedPath) :-
 			{working_directory(Current, Current),
@@ -309,6 +314,10 @@
 
 		shell(Command) :-
 			{shell(Command)}.
+
+		is_absolute_file_name(Path, ExpandedPath) :-
+			{expand_atom(Path, EnvVarExpandedPath),
+			 path_sysop(isabsolute, EnvVarExpandedPath)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{expand_atom(Path, EnvVarExpandedPath),
@@ -448,6 +457,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			{is_absolute_file_name(Path)}.
+
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -553,6 +565,9 @@
 
 		shell(Command) :-
 			{system(Command)}.
+
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{expand_environment(Path, ExpandedPath0),
@@ -673,6 +688,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
+
 		absolute_file_name(Path, ExpandedPath) :-
 			{current_directory(Directory),
 			 absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])}.
@@ -785,6 +803,9 @@
 
 		shell(Command) :-
 			shell(Command, 0).
+
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{canonical_path_name(Path, ExpandedPath)}.	% works with strings and atoms
@@ -939,6 +960,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
+
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -1049,6 +1073,9 @@
 
 		shell(Command) :-
 			{os_run(Command)}.
+
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
@@ -1168,6 +1195,9 @@
 
 		shell(Command) :-
 			{os(system(Command))}.
+
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
@@ -1295,6 +1325,9 @@
 
 		shell(Command) :-
 			{unix(shell(Command))}.
+
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{expanded_file_name(Path, ExpandedPath0)},
@@ -1441,6 +1474,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
+
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath0)},
 			convert_file_path(ExpandedPath0, ExpandedPath).
@@ -1551,6 +1587,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			{is_absolute_file_name(Path)}.
+
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -1659,6 +1698,9 @@
 		shell(Command) :-
 			{shell(Command)}.
 
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
+
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
 
@@ -1754,6 +1796,9 @@
 
 		shell(Command) :-
 			{shell(Command)}.
+
+		is_absolute_file_name(Path) :-
+			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.

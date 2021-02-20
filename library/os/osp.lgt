@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:29:1,
+		version is 1:30:0,
 		author is 'Paulo Moura',
-		date is 2021-02-09,
+		date is 2021-02-20,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -51,6 +51,13 @@
 	:- info(shell/1, [
 		comment is 'Runs an operating-system shell command.',
 		argnames is ['Command']
+	]).
+
+	:- public(is_absolute_file_name/1).
+	:- mode(is_absolute_file_name(+atom), zero_or_one).
+	:- info(is_absolute_file_name/1, [
+		comment is 'True iff the argument is an absolute file path.',
+		argnames is ['File']
 	]).
 
 	:- public(absolute_file_name/2).

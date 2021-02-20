@@ -47,6 +47,8 @@ Library
 
 * ADDED: Library predicate `list::append/2` linter check for redundant calls.
 
+* ADDED: Library predicate `os::is_absolute_file_name/1`.
+
 * ADDED: New types `file(Extensions,Permissions)` and `directory(Permissions)`
 to the `os` library.
 
