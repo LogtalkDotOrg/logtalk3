@@ -1,0 +1,101 @@
+.. index:: pseudo_random_protocol
+.. _pseudo_random_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``pseudo_random_protocol``
+==========================
+
+Pseudo-random number generator protocol for seed handling predicates. These predicates are declared as synchronized when the library is compiled using a backend supporting threads.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2021-02-21
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`random_protocol <random_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`random_protocol/0::between/3`  :ref:`random_protocol/0::enumerate/2`  :ref:`random_protocol/0::maybe/0`  :ref:`random_protocol/0::maybe/1`  :ref:`random_protocol/0::maybe/2`  :ref:`random_protocol/0::maybe_call/1`  :ref:`random_protocol/0::maybe_call/2`  :ref:`random_protocol/0::member/2`  :ref:`random_protocol/0::permutation/2`  :ref:`random_protocol/0::random/1`  :ref:`random_protocol/0::random/3`  :ref:`random_protocol/0::randseq/4`  :ref:`random_protocol/0::randset/4`  :ref:`random_protocol/0::select/3`  :ref:`random_protocol/0::sequence/4`  :ref:`random_protocol/0::set/4`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="get_seed/1"> </div>
+
+.. index:: get_seed/1
+.. _pseudo_random_protocol/0::get_seed/1:
+
+``get_seed/1``
+^^^^^^^^^^^^^^
+
+Gets the current random generator seed. Seed should be regarded as an opaque ground term.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``get_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``get_seed(-ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="set_seed/1"> </div>
+
+.. index:: set_seed/1
+.. _pseudo_random_protocol/0::set_seed/1:
+
+``set_seed/1``
+^^^^^^^^^^^^^^
+
+Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``set_seed(Seed)``
+| **Mode and number of proofs:**
+|    ``set_seed(+ground)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`random <random/0>`, :ref:`backend_random <backend_random/0>`, :ref:`fast_random <fast_random/0>`
+

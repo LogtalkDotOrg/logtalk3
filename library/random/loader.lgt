@@ -21,5 +21,13 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
-	logtalk_load([randomp, random, backend_random, fast_random], [optimize(on)])
+	logtalk_load([
+		random_protocol,
+		pseudo_random_protocol,
+		random,
+		backend_random,
+		fast_random
+	], [
+		optimize(on)
+	])
 )).

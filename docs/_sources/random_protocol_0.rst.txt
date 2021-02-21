@@ -1,18 +1,18 @@
-.. index:: randomp
-.. _randomp/0:
+.. index:: random_protocol
+.. _random_protocol/0:
 
 .. rst-class:: right
 
 **protocol**
 
-``randomp``
-===========
+``random_protocol``
+===================
 
 Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
 | **Author:** Paulo Moura
-| **Version:** 2:5:1
-| **Date:** 2021-01-23
+| **Version:** 3:0:0
+| **Date:** 2021-02-21
 
 | **Compilation flags:**
 |    ``static``
@@ -40,7 +40,7 @@ Public predicates
    <div id="random/1"> </div>
 
 .. index:: random/1
-.. _randomp/0::random/1:
+.. _random_protocol/0::random/1:
 
 ``random/1``
 ^^^^^^^^^^^^
@@ -63,7 +63,7 @@ Returns a new random float value in the interval ``[0.0, 1.0[``.
    <div id="between/3"> </div>
 
 .. index:: between/3
-.. _randomp/0::between/3:
+.. _random_protocol/0::between/3:
 
 ``between/3``
 ^^^^^^^^^^^^^
@@ -86,7 +86,7 @@ Returns a new random integer in the interval ``[Lower, Upper]``. Fails if ``Lowe
    <div id="member/2"> </div>
 
 .. index:: member/2
-.. _randomp/0::member/2:
+.. _random_protocol/0::member/2:
 
 ``member/2``
 ^^^^^^^^^^^^
@@ -109,7 +109,7 @@ Returns a random member of a list. Fails if the list is empty.
    <div id="select/3"> </div>
 
 .. index:: select/3
-.. _randomp/0::select/3:
+.. _random_protocol/0::select/3:
 
 ``select/3``
 ^^^^^^^^^^^^
@@ -132,7 +132,7 @@ Returns a random member of a list and the rest of the list. Fails if the list is
    <div id="enumerate/2"> </div>
 
 .. index:: enumerate/2
-.. _randomp/0::enumerate/2:
+.. _random_protocol/0::enumerate/2:
 
 ``enumerate/2``
 ^^^^^^^^^^^^^^^
@@ -155,7 +155,7 @@ Enumerates the elements of a list in random order. Fails if the list is empty.
    <div id="permutation/2"> </div>
 
 .. index:: permutation/2
-.. _randomp/0::permutation/2:
+.. _random_protocol/0::permutation/2:
 
 ``permutation/2``
 ^^^^^^^^^^^^^^^^^
@@ -178,7 +178,7 @@ Returns a random permutation of a list.
    <div id="sequence/4"> </div>
 
 .. index:: sequence/4
-.. _randomp/0::sequence/4:
+.. _random_protocol/0::sequence/4:
 
 ``sequence/4``
 ^^^^^^^^^^^^^^
@@ -201,7 +201,7 @@ Returns list of random integers of given length in random order in interval ``[L
    <div id="set/4"> </div>
 
 .. index:: set/4
-.. _randomp/0::set/4:
+.. _random_protocol/0::set/4:
 
 ``set/4``
 ^^^^^^^^^
@@ -224,7 +224,7 @@ Returns ordered set of random integers of given size in interval ``[Lower, Upper
    <div id="random/3"> </div>
 
 .. index:: random/3
-.. _randomp/0::random/3:
+.. _random_protocol/0::random/3:
 
 ``random/3``
 ^^^^^^^^^^^^
@@ -248,7 +248,7 @@ Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower 
    <div id="randseq/4"> </div>
 
 .. index:: randseq/4
-.. _randomp/0::randseq/4:
+.. _random_protocol/0::randseq/4:
 
 ``randseq/4``
 ^^^^^^^^^^^^^
@@ -272,7 +272,7 @@ Returns list of random values of given length in random order in interval ``[Low
    <div id="randset/4"> </div>
 
 .. index:: randset/4
-.. _randomp/0::randset/4:
+.. _random_protocol/0::randset/4:
 
 ``randset/4``
 ^^^^^^^^^^^^^
@@ -293,56 +293,10 @@ Returns ordered set of random values of given size in interval ``[Lower, Upper[`
 
 .. raw:: html
 
-   <div id="get_seed/1"> </div>
-
-.. index:: get_seed/1
-.. _randomp/0::get_seed/1:
-
-``get_seed/1``
-^^^^^^^^^^^^^^
-
-Gets the current random generator seed. Seed should be regarded as an opaque ground term.
-
-| **Compilation flags:**
-|    ``static, synchronized``
-
-| **Template:**
-|    ``get_seed(Seed)``
-| **Mode and number of proofs:**
-|    ``get_seed(-ground)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="set_seed/1"> </div>
-
-.. index:: set_seed/1
-.. _randomp/0::set_seed/1:
-
-``set_seed/1``
-^^^^^^^^^^^^^^
-
-Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.
-
-| **Compilation flags:**
-|    ``static, synchronized``
-
-| **Template:**
-|    ``set_seed(Seed)``
-| **Mode and number of proofs:**
-|    ``set_seed(+ground)`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="maybe/0"> </div>
 
 .. index:: maybe/0
-.. _randomp/0::maybe/0:
+.. _random_protocol/0::maybe/0:
 
 ``maybe/0``
 ^^^^^^^^^^^
@@ -363,7 +317,7 @@ Succeeds or fails with equal probability.
    <div id="maybe/1"> </div>
 
 .. index:: maybe/1
-.. _randomp/0::maybe/1:
+.. _random_protocol/0::maybe/1:
 
 ``maybe/1``
 ^^^^^^^^^^^
@@ -386,7 +340,7 @@ Succeeds with probability ``Probability`` or fails with probability ``1 - Probab
    <div id="maybe/2"> </div>
 
 .. index:: maybe/2
-.. _randomp/0::maybe/2:
+.. _random_protocol/0::maybe/2:
 
 ``maybe/2``
 ^^^^^^^^^^^
@@ -409,7 +363,7 @@ Succeeds with probability ``K/N`` where ``K`` and ``N`` are integers satisfying 
    <div id="maybe_call/1"> </div>
 
 .. index:: maybe_call/1
-.. _randomp/0::maybe_call/1:
+.. _random_protocol/0::maybe_call/1:
 
 ``maybe_call/1``
 ^^^^^^^^^^^^^^^^
@@ -434,7 +388,7 @@ Calls a goal or fails without calling it with equal probability. When the goal i
    <div id="maybe_call/2"> </div>
 
 .. index:: maybe_call/2
-.. _randomp/0::maybe_call/2:
+.. _random_protocol/0::maybe_call/2:
 
 ``maybe_call/2``
 ^^^^^^^^^^^^^^^^

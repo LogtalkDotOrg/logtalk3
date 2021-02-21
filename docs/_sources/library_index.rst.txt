@@ -578,8 +578,9 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    backend_random <backend_random_0>
    fast_random <fast_random_0>
+   pseudo_random_protocol <pseudo_random_protocol_0>
    random <random_0>
-   randomp <randomp_0>
+   random_protocol <random_protocol_0>
 
 ``reader``
 ----------

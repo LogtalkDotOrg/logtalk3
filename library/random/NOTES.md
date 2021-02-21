@@ -68,10 +68,11 @@ generators, which makes it a bit faster than the `random` object.
 
 The `random` and `fast_random` objects manage the random number generator
 seed using internal dynamic state. The predicates that update the seed
-are declared as synchronized. Still, care must be taken when using these
-objects from multi-threaded applications as there is not portable solution
-to protect seed updates from signals and prevent inconsistent state when
-threads are canceled.
+are declared as synchronized (when running on Prolog backends that support
+threads). Still, care must be taken when using these objects from
+multi-threaded applications as there is not portable solution to protect
+seed updates from signals and prevent inconsistent state when threads are
+canceled.
 
 The `backend_random` object abstracts the native backend Prolog compiler
 random number generator for the basic `random/1`, `get_seed/1`, and `set_seed/1`

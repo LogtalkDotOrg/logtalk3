@@ -20,12 +20,12 @@
 
 
 :- object(backend_random,
-	implements(randomp)).
+	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 1:13:0,
+		version is 1:14:0,
 		author is 'Paulo Moura',
-		date is 2020-11-24,
+		date is 2021-02-21,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',

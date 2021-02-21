@@ -26,7 +26,7 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(
-		[random(randomp), random(random), random(backend_random), random(fast_random)],
+		[random(random_protocol), random(pseudo_random_protocol), random(random), random(backend_random), random(fast_random)],
 		[debug(on), source_data(on)]
 	),
 	logtalk_load(tests, [hook(lgtunit)]),

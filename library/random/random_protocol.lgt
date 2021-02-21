@@ -19,12 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(randomp).
+:- protocol(random_protocol).
 
 	:- info([
-		version is 2:5:1,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-23,
+		date is 2021-02-21,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -109,20 +109,6 @@
 		argnames is ['Length', 'Lower', 'Upper', 'Set']
 	]).
 
-	:- public(get_seed/1).
-	:- mode(get_seed(-ground), one).
-	:- info(get_seed/1, [
-		comment is 'Gets the current random generator seed. Seed should be regarded as an opaque ground term.',
-		argnames is ['Seed']
-	]).
-
-	:- public(set_seed/1).
-	:- mode(set_seed(+ground), one).
-	:- info(set_seed/1, [
-		comment is 'Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.',
-		argnames is ['Seed']
-	]).
-
 	:- public(maybe/0).
 	:- mode(maybe, zero_or_one).
 	:- info(maybe/0, [
@@ -163,8 +149,7 @@
 		:- synchronized([
 			random/1, random/3,
 			sequence/4, set/4, permutation/2,
-			randseq/4, randset/4,
-			get_seed/1, set_seed/1
+			randseq/4, randset/4
 		]).
 	:- endif.
 

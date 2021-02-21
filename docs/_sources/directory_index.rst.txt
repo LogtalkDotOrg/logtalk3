@@ -438,8 +438,9 @@ To load an entity, always load the library that includes it using the goal ``log
 
    backend_random <backend_random_0>
    fast_random <fast_random_0>
+   pseudo_random_protocol <pseudo_random_protocol_0>
    random <random_0>
-   randomp <randomp_0>
+   random_protocol <random_protocol_0>
 
 ``library/reader/``
 -------------------

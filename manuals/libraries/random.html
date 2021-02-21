@@ -281,10 +281,11 @@ generator but does not support deriving multiple random number
 generators, which makes it a bit faster than the <code class="docutils literal notranslate"><span class="pre">random</span></code> object.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">random</span></code> and <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> objects manage the random number
 generator seed using internal dynamic state. The predicates that update
-the seed are declared as synchronized. Still, care must be taken when
-using these objects from multi-threaded applications as there is not
-portable solution to protect seed updates from signals and prevent
-inconsistent state when threads are canceled.</p>
+the seed are declared as synchronized (when running on Prolog backends
+that support threads). Still, care must be taken when using these
+objects from multi-threaded applications as there is not portable
+solution to protect seed updates from signals and prevent inconsistent
+state when threads are canceled.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">backend_random</span></code> object abstracts the native backend Prolog
 compiler random number generator for the basic <code class="docutils literal notranslate"><span class="pre">random/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates providing a portable
