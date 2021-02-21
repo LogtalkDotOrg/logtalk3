@@ -46,7 +46,7 @@
 	:- info([
 		version is 1:75:0,
 		author is 'Paulo Moura',
-		date is 2021-02-20,
+		date is 2021-02-21,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1798,7 +1798,7 @@
 			{shell(Command)}.
 
 		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
+			{is_absolute_file_name(Path)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
