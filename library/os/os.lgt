@@ -689,7 +689,17 @@
 			{shell(Command)}.
 
 		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
+			operating_system_type(Type),
+			(	Type == windows ->
+				sub_atom(Path, 1, 1, _, ':'),
+				sub_atom(Path, 0, 1, _, Drive),
+				(	a @=< Drive, Drive @=< z ->
+					true
+				;	'A' @=< Drive, Drive @=< 'Z'
+				)
+			;	% assume POSIX or POSIX compatible operating-system
+				sub_atom(Path, 0, 1, _, '/')
+			).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{current_directory(Directory),
