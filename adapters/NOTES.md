@@ -233,7 +233,7 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 1.2.0 and later versions
+LVM 1.4.0 and later versions
 ----------------------------
 
 	lvm.pl
@@ -403,7 +403,7 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla Prolog 1.6.8 and later versions
+Trealla Prolog 1.7.4 and later versions
 ---------------------------------------
 
 	trealla.pl

@@ -35,6 +35,12 @@ Prolog adapter and integration files
 
 * IMPROVED: Simplified the SWI-Prolog integration files.
 
+* UPDATED: Require LVM 1.4.0 or later version (due to new `os` library
+requirements).
+
+* UPDATED: Require Trealla Prolog 1.7.4 or later version (due to critical bug
+fixes).
+
 Documentation
 -------------
 
