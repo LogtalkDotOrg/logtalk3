@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on January 30, 2021
+##   Last updated on February 26, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.5"
+	echo "  0.6"
 	exit 0
 }
 
@@ -106,7 +106,7 @@ mkdir -p "$prefix/share"
 rm -rf "$prefix/share/$directory"
 rm -f "$prefix/share/logtalk"
 
-mkdir "$prefix/share/$directory"
+mkdir -p "$prefix/share/$directory"
 
 cp -R ../* "$prefix/share/$directory"
 
