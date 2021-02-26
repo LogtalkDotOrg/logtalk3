@@ -75,6 +75,8 @@ Windows systems.
 * FIXED: Library `csv` round-trip tests to only run when the `diff` command is
 available.
 
+* FIXED: Syntax error while loading the `csv` library with GNU Prolog.
+
 Tools
 -----
 

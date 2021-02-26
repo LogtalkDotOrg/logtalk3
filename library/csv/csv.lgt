@@ -23,9 +23,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Jacinto Dávila',
-		date is 2021-02-03,
+		date is 2021-02-26,
 		comment is 'CSV files reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
@@ -187,7 +187,7 @@
 
 	%
 	field(0'", Atom, true) -->
-		!, {dbg('>>'-0'")}, escaped(true, Codes), {atom_codes(Atom, Codes)}.
+		!, {dbg('>>>'-0'")}, escaped(true, Codes), {atom_codes(Atom, Codes)}.
 	field(0'", Atom, false) -->
 		!, escaped(false, Codes), {atom_codes(Atom, [0'"|Codes])}.
 	field(Code, Field, _) -->
@@ -199,7 +199,7 @@
 	escaped(true, Data) -->
 		data(Data), [0'"].
 	escaped(false, QData) -->
-		data(Data), [0'"], {list::append(Data, [0'"], QData), dbg('<<'-0'")}.
+		data(Data), [0'"], {list::append(Data, [0'"], QData), dbg('<<<'-0'")}.
 
 	non_escaped([Code| Codes]) --> textdata(Code), non_escaped(Codes).
 	non_escaped([]) --> [].
@@ -332,7 +332,7 @@
 	guess_escaped(Data, true) -->
 		data(Data), [0'"].
 	guess_escaped(QData, false) -->
-		data(Data), [0'"], {list::append(Data, [0'"], QData), dbg('<<'-0'")}.
+		data(Data), [0'"], {list::append(Data, [0'"], QData), dbg('<<<'-0'")}.
 
 	%
 	guess_textdata(Code, Separator) -->
