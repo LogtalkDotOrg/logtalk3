@@ -127,6 +127,16 @@ To load an entity, always load the library that includes it using the goal ``log
    assignvars <assignvars_0>
    assignvarsp <assignvarsp_0>
 
+``library/cbor/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   cbor <cbor_0>
+
 ``library/coroutining/``
 ------------------------
 

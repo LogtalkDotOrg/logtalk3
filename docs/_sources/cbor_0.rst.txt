@@ -1,0 +1,84 @@
+.. index:: cbor
+.. _cbor/0:
+
+.. rst-class:: right
+
+**object**
+
+``cbor``
+========
+
+Concise Binary Object Representation (CBOR) format exporter and importer library.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2021-03-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="parse/2"> </div>
+
+.. index:: parse/2
+.. _cbor/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="generate/2"> </div>
+
+.. index:: generate/2
+.. _cbor/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on February 6, 2021
+##   Last updated on March 1, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -64,6 +64,7 @@ sed '1,19d' ../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
 sed '1,19d' ../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libraries/basic_types.rst
 sed '1,19d' ../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
+sed '1,19d' ../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../library/csv/NOTES.md | pandoc -f gfm -t rst -o libraries/csv.rst
 sed '1,19d' ../../library/dates/NOTES.md | pandoc -f gfm -t rst -o libraries/dates.rst
 sed '1,19d' ../../library/dependents/NOTES.md | pandoc -f gfm -t rst -o libraries/dependents.rst

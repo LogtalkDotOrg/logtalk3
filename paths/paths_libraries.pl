@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on February 3, 2021
+%  Last updated on March 1, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -35,6 +35,7 @@ logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).
 logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(coroutining, library('coroutining/')).
+logtalk_library_path(cbor, library('cbor/')).
 logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dependents, library('dependents/')).

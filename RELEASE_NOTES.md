@@ -52,6 +52,10 @@ Library
 * CHANGED: Move the `random` library seed predicates to a separate protocol.
 This change doesn't require any changes to applications using this library.
 
+* ADDED: Preliminary version of a `cbor` library for importing and exporting
+data in the Concise Binary Object Representation (CBOR) format. Currently
+requires a backend supporting unbounded integer arithmetic.
+
 * ADDED: Library predicate `term_io::with_output_to/2` predicate.
 
 * ADDED: Library predicate `list::append/2` linter check for redundant calls.

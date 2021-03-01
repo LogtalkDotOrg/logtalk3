@@ -2883,6 +2883,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`metagol <metagol/0::functional/0>`
 
+``generate/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cbor <cbor/0::generate/2>`
+
 ``gensym/2``
 ------------
 
@@ -5057,6 +5067,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`cbor <cbor/0::parse/2>`
 * :ref:`xml <xml/0::parse/2>`
 
 ``parse/3``

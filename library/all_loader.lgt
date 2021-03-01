@@ -57,6 +57,7 @@
 		gensym(loader),
 		git(loader),
 		csv(loader),
+		cbor(loader),
 		cloning,
 		counters,
 		streamvars
