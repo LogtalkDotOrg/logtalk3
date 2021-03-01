@@ -49,14 +49,14 @@
 	encode({}) --> !, [0xa0].
 	encode({Pairs}) --> !, [0xbf], encode_pairs(Pairs), [0xff].
 	encode(Key-Value) --> !, encode(Key), encode(Value).
-	encode(Atom) --> {atom(Atom)}, !, encode_atom(Atom).
+	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
 	encode(tag(N, Data)) --> !, encode_tag(N, Data).
 	encode(simple(N)) --> !, encode_simple(N).
 	encode(Term) --> {throw(domain_error(term, Term))}.
 
-	encode_atom('') -->
+	encode_utf_8_string('') -->
 		!, [0x60].
-	encode_atom(Atom) -->
+	encode_utf_8_string(Atom) -->
 		{atom_codes(Atom, Codes)}, [0x5f| Codes], [0xff].
 
 	encode_list([Head| Tail]) -->
@@ -89,7 +89,7 @@
 		).
 
 	encode_positive_integer(N) -->
-		{N > 0xffffffffffffffff}, !, {int_num_bytes(N, Length)}, [0xc2], encode_bin(Length, N).
+		{N > 0xffffffffffffffff}, !, {int_num_bytes(N, Length)}, [0xc2], encode_byte_string(Length, N).
 	encode_positive_integer(N) -->
 		{N > 0xffffffff}, !, {int_bytes(8, N, Bytes)}, [0x1b| Bytes].
 	encode_positive_integer(N) -->
@@ -112,19 +112,24 @@
 	encode_negative_integer(N) -->
 		{N >= -0xffffffffffffffff - 1}, !, {M is -1 - N, int_bytes(8, M, Bytes)}, [0x3b| Bytes].
 	encode_negative_integer(N) -->
-		{Inv is -1 - N, int_num_bytes(Inv, Length)}, [0xc3], encode_bin(Length, Inv).
+		{Inv is -1 - N, int_num_bytes(Inv, Length)}, [0xc3], encode_byte_string(Length, Inv).
 
-	encode_bin(Length, Int) -->
+	% byte string (0x00..0x17 bytes follow)
+	encode_byte_string(Length, Int) -->
 		{Length =< 0x17}, !, {Size is Length + 0x40, int_bytes(Int, Bytes)}, [Size| Bytes].
-	encode_bin(Length, Int) -->
+	% byte string (one-byte uint8_t for n, and then n bytes follow)
+	encode_byte_string(Length, Int) -->
 		{Length =< 0xff}, !, {int_bytes(Int, Bytes)}, [0x58, Length| Bytes].
-	encode_bin(Length, Int) -->
+	% byte string (two-byte uint16_t for n, and then n bytes follow)
+	encode_byte_string(Length, Int) -->
 		{Length =< 0xffff}, !, {int_bytes(2, Length, Size)}, [0x59| Size], {int_bytes(Int, [Byte| Bytes])}, [Byte| Bytes].
-	encode_bin(Length, Int) -->
+	% byte string (four-byte uint32_t for n, and then n bytes follow)
+	encode_byte_string(Length, Int) -->
 		{Length =< 0xffffffff}, !, {int_bytes(4, Length, Size)}, [0x5a| Size], {int_bytes(Int, [Byte| Bytes])}, [Byte| Bytes].
-	encode_bin(Length, Int) -->
+	% byte string (eight-byte uint64_t for n, and then n bytes follow)
+	encode_byte_string(Length, Int) -->
 		{Length =< 0xffffffffffffffff}, !, {int_bytes(8, Length, Size)}, [0x5b| Size], {int_bytes(Int, [Byte| Bytes])}, [Byte| Bytes].
-	encode_bin(_, _) -->
+	encode_byte_string(_, _) -->
 		{throw(representation_error(integer))}.
 
 	encode_tag(Tag, Data) -->
@@ -387,7 +392,7 @@
 
 	decode_halt_precision_float(Float) -->
 		[Byte1, Byte0],
-		{halt_precision_to_float(Byte1, Byte0, Float)}.
+		{half_precision_to_float(Byte1, Byte0, Float)}.
 
 	decode_single_precision_float(Float) -->
 		[Byte3, Byte2, Byte1, Byte0],
@@ -497,12 +502,12 @@
 	mantissa_and_exponent_to_float(Mantissa, Exponent, Float) :-
 		Float is float(Mantissa * 10**Exponent).
 
-	halt_precision_to_float(0x00, 0x00, 0.0) :- !.
-	halt_precision_to_float(0x80, 0x00, -0.0) :- !.
-	halt_precision_to_float(0x7c, 0x00, inf) :- !.
-	halt_precision_to_float(0x7e, 0x00, nan) :- !.
-	halt_precision_to_float(0xfc, 0x00, neginf) :- !.
-	halt_precision_to_float(Byte1, Byte0, Float) :-
+	half_precision_to_float(0x00, 0x00, 0.0) :- !.
+	half_precision_to_float(0x80, 0x00, -0.0) :- !.
+	half_precision_to_float(0x7c, 0x00, inf) :- !.
+	half_precision_to_float(0x7e, 0x00, nan) :- !.
+	half_precision_to_float(0xfc, 0x00, neginf) :- !.
+	half_precision_to_float(Byte1, Byte0, Float) :-
 		Sign is Byte1 >> 7,
 		Exponent is Byte1 >> 2 /\ 0x1f,
 		Significand is (Byte1 /\ 0x03) << 8 + Byte0,
