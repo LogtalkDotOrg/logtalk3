@@ -57,7 +57,7 @@
 	encode_utf_8_string('') -->
 		!, [0x60].
 	encode_utf_8_string(Atom) -->
-		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes)}, [0x5f| Bytes], [0xff].
+		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes)}, [0x7f| Bytes], [0xff].
 
 	encode_list([Head| Tail]) -->
 		encode(Head), encode_list(Tail).
@@ -225,20 +225,20 @@
 		!, decode_double_precision_float(Float).
 
 	% byte string (0x00..0x17 bytes follow)
-	decode(Byte, Atom) -->
-		{0x40 =< Byte, Byte =< 0x57}, !, {Length is Byte - 0x40}, bytes(Length, Bytes), {atom_codes(Atom, Bytes)}.
+	decode(Byte, Bytes) -->
+		{0x40 =< Byte, Byte =< 0x57}, !, {Length is Byte - 0x40}, bytes(Length, Bytes).
 	% byte string (one-byte uint8_t for n, and then n bytes follow)
-	decode(0x58, Atom) -->
-		!, decode_byte_string(1, Atom).
+	decode(0x58, Bytes) -->
+		!, decode_byte_string(1, Bytes).
 	% byte string (two-byte uint16_t for n, and then n bytes follow)
-	decode(0x59, Atom) -->
-		!, decode_byte_string(2, Atom).
+	decode(0x59, Bytes) -->
+		!, decode_byte_string(2, Bytes).
 	% byte string (four-byte uint32_t for n, and then n bytes follow)
-	decode(0x5a, Atom) -->
-		!, decode_byte_string(4, Atom).
+	decode(0x5a, Bytes) -->
+		!, decode_byte_string(4, Bytes).
 	% byte string (eight-byte uint64_t for n, and then n bytes follow)
-	decode(0x5b, Atom) -->
-		!, decode_byte_string(8, Atom).
+	decode(0x5b, Bytes) -->
+		!, decode_byte_string(8, Bytes).
 	% byte string, byte strings follow, terminated by "break"
 	decode(0x5f, Atom) -->
 		!, bytes_until_break(Bytes), {bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.

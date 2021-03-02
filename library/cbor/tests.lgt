@@ -493,7 +493,7 @@
 	- test(cbor_generate_2_47a, true(Encoding == [0xc0, 0x74, 0x32, 0x30, 0x31, 0x33, 0x2d, 0x30, 0x33, 0x2d, 0x32, 0x31, 0x54, 0x32, 0x30, 0x3a, 0x30, 0x34, 0x3a, 0x30, 0x30, 0x5a])) :-
 		generate(tag(0, '2013-03-21T20:04:00Z'), Encoding).
 
-	test(cbor_generate_2_47b, true(Encoding == [192,95,50,48,49,51,45,48,51,45,50,49,84,50,48,58,48,52,58,48,48,90,255])) :-
+	test(cbor_generate_2_47b, true(Encoding == [192,127,50,48,49,51,45,48,51,45,50,49,84,50,48,58,48,52,58,48,48,90,255])) :-
 		generate(tag(0, '2013-03-21T20:04:00Z'), Encoding).
 
 	test(cbor_generate_2_48, true(Encoding == [0xc1, 0x1a, 0x51, 0x4b, 0x67, 0xb0])) :-
@@ -514,7 +514,7 @@
 	- test(cbor_generate_2_52a, true(Encoding == [0xd8, 0x20, 0x76, 0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d])) :-
 		generate(tag(32, 'http://www.example.com'), Encoding).
 
-	test(cbor_generate_2_52b, true(Encoding == [216,32,95,104,116,116,112,58,47,47,119,119,119,46,101,120,97,109,112,108,101,46,99,111,109,255])) :-
+	test(cbor_generate_2_52b, true(Encoding == [216,32,127,104,116,116,112,58,47,47,119,119,119,46,101,120,97,109,112,108,101,46,99,111,109,255])) :-
 		% decimal fraction encoding
 		generate(tag(32, 'http://www.example.com'), Encoding).
 
@@ -526,13 +526,13 @@
 	test(cbor_generate_2_55, true(Encoding == [0x60])) :-
 		generate('', Encoding).
 
-	test(cbor_generate_2_56, true(Encoding == [0x5f, 0x61, 0xff])) :-
+	test(cbor_generate_2_56, true(Encoding == [0x7f, 0x61, 0xff])) :-
 		generate('a', Encoding).
 
-	test(cbor_generate_2_57, true(Encoding == [0x5f, 0x49, 0x45, 0x54, 0x46, 0xff])) :-
+	test(cbor_generate_2_57, true(Encoding == [0x7f, 0x49, 0x45, 0x54, 0x46, 0xff])) :-
 		generate('IETF', Encoding).
 
-	test(cbor_generate_2_58, true(Encoding == [0x5f, 0x27, 0x5c, 0xff])) :-
+	test(cbor_generate_2_58, true(Encoding == [0x7f, 0x27, 0x5c, 0xff])) :-
 		generate('\'\\', Encoding).
 
 %   |"\u00fc"                      | 0x62c3bc                           |
@@ -563,16 +563,16 @@
 	test(cbor_generate_2_67b, true(Encoding == [0xbf, 0x01, 0x02, 0x03, 0x04, 0xff])) :-
 		generate({1-2, 3-4}, Encoding).
 
-	test(cbor_generate_2_68, true(Encoding == [0xbf, 0x5f, 0x61, 0xff, 0x01, 0x5f, 0x62, 0xff, 0x9f, 0x02, 0x03, 0xff, 0xff])) :-
+	test(cbor_generate_2_68, true(Encoding == [0xbf, 0x7f, 0x61, 0xff, 0x01, 0x7f, 0x62, 0xff, 0x9f, 0x02, 0x03, 0xff, 0xff])) :-
 		generate({a-1, b-[2, 3]}, Encoding).
 
-	test(cbor_generate_2_69, true(Encoding == [0x9f, 0x5f, 0x61, 0xff, 0xbf, 0x5f, 0x62, 0xff, 0x5f, 0x63, 0xff, 0xff, 0xff])) :-
+	test(cbor_generate_2_69, true(Encoding == [0x9f, 0x7f, 0x61, 0xff, 0xbf, 0x7f, 0x62, 0xff, 0x7f, 0x63, 0xff, 0xff, 0xff])) :-
 		generate([a, {b-c}], Encoding).
 
 	- test(cbor_generate_2_70a, true(Encoding == [0xa5, 0x61, 0x61, 0x61, 0x41, 0x61, 0x62, 0x61, 0x42, 0x61, 0x63, 0x61, 0x43, 0x61, 0x64, 0x61, 0x44, 0x61, 0x65, 0x61, 0x45])) :-
 		generate({a-'A', b-'B', c-'C', d-'D', e-'E'}, Encoding).
 
-	test(cbor_generate_2_70b, true(Encoding == [191,95,97,255,95,65,255,95,98,255,95,66,255,95,99,255,95,67,255,95,100,255,95,68,255,95,101,255,95,69,255,255])) :-
+	test(cbor_generate_2_70b, true(Encoding == [191,127,97,255,127,65,255,127,98,255,127,66,255,127,99,255,127,67,255,127,100,255,127,68,255,127,101,255,127,69,255,255])) :-
 		generate({a-'A', b-'B', c-'C', d-'D', e-'E'}, Encoding).
 
 
