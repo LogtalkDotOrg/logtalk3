@@ -89,59 +89,81 @@
 		).
 
 	encode_positive_integer(N) -->
-		{N > 0xffffffffffffffff}, !, {int_num_bytes(N, Length), int_bytes(N, Bytes)}, [0xc2], encode_byte_string(Length, Bytes).
+		{N > 0xffffffffffffffff}, !, {int_num_bytes(N, Length), integer_to_bytes(N, Bytes)},
+		[0xc2], encode_byte_string(Length, Bytes).
 	encode_positive_integer(N) -->
-		{N > 0xffffffff}, !, {int_bytes(8, N, Bytes)}, [0x1b| Bytes].
+		{N > 0xffffffff}, !, {integer_to_bytes(8, N, Bytes)},
+		[0x1b| Bytes].
 	encode_positive_integer(N) -->
-		{N > 0xffff}, !, {int_bytes(4, N, Bytes)}, [0x1a| Bytes].
+		{N > 0xffff}, !, {integer_to_bytes(4, N, Bytes)},
+		[0x1a| Bytes].
 	encode_positive_integer(N) -->
-		{N > 0xff}, !, {int_bytes(2, N, Bytes)}, [0x19| Bytes].
+		{N > 0xff}, !, {integer_to_bytes(2, N, Bytes)},
+		[0x19| Bytes].
 	encode_positive_integer(N) -->
-		{N > 0x17}, !, [0x18, N].
+		{N > 0x17}, !,
+		[0x18, N].
 	encode_positive_integer(N) -->
-		{N >= 0}, !, [N].
+		{N >= 0}, !,
+		[N].
 
 	encode_negative_integer(N) -->
-		{N >= -0x18}, !, {Byte is 0x20 - 1 - N}, [Byte].
+		{N >= -0x18}, !, {Byte is 0x20 - 1 - N},
+		[Byte].
 	encode_negative_integer(N) -->
-		{N >= -0xff - 1}, !, {Byte is -1 - N}, [0x38, Byte].
+		{N >= -0xff - 1}, !, {Byte is -1 - N},
+		[0x38, Byte].
 	encode_negative_integer(N) -->
-		{N >= -0xffff - 1}, !, {M is -1 - N, int_bytes(2, M, Bytes)}, [0x39| Bytes].
+		{N >= -0xffff - 1}, !, {M is -1 - N, integer_to_bytes(2, M, Bytes)},
+		[0x39| Bytes].
 	encode_negative_integer(N) -->
-		{N >= -0xffffffff - 1}, !, {M is -1 - N, int_bytes(4, M, Bytes)}, [0x3a| Bytes].
+		{N >= -0xffffffff - 1}, !, {M is -1 - N, integer_to_bytes(4, M, Bytes)},
+		[0x3a| Bytes].
 	encode_negative_integer(N) -->
-		{N >= -0xffffffffffffffff - 1}, !, {M is -1 - N, int_bytes(8, M, Bytes)}, [0x3b| Bytes].
+		{N >= -0xffffffffffffffff - 1}, !, {M is -1 - N, integer_to_bytes(8, M, Bytes)},
+		[0x3b| Bytes].
 	encode_negative_integer(N) -->
-		{Inv is -1 - N, int_num_bytes(Inv, Length), int_bytes(Inv, Bytes)}, [0xc3], encode_byte_string(Length, Bytes).
+		{Inv is -1 - N, int_num_bytes(Inv, Length), integer_to_bytes(Inv, Bytes)},
+		[0xc3], encode_byte_string(Length, Bytes).
 
 	% byte string (0x00..0x17 bytes follow)
 	encode_byte_string(Length, Bytes) -->
-		{Length =< 0x17}, !, {Size is Length + 0x40}, [Size| Bytes].
+		{Length =< 0x17}, !, {Size is Length + 0x40},
+		[Size| Bytes].
 	% byte string (one-byte uint8_t for n, and then n bytes follow)
 	encode_byte_string(Length, Bytes) -->
-		{Length =< 0xff}, !, [0x58, Length| Bytes].
+		{Length =< 0xff}, !,
+		[0x58, Length| Bytes].
 	% byte string (two-byte uint16_t for n, and then n bytes follow)
 	encode_byte_string(Length, [Byte| Bytes]) -->
-		{Length =< 0xffff}, !, {int_bytes(2, Length, Size)}, [0x59| Size], [Byte| Bytes].
+		{Length =< 0xffff}, !, {integer_to_bytes(2, Length, Size)},
+		[0x59| Size], [Byte| Bytes].
 	% byte string (four-byte uint32_t for n, and then n bytes follow)
 	encode_byte_string(Length, [Byte| Bytes]) -->
-		{Length =< 0xffffffff}, !, {int_bytes(4, Length, Size)}, [0x5a| Size], [Byte| Bytes].
+		{Length =< 0xffffffff}, !, {integer_to_bytes(4, Length, Size)},
+		[0x5a| Size], [Byte| Bytes].
 	% byte string (eight-byte uint64_t for n, and then n bytes follow)
 	encode_byte_string(Length, [Byte| Bytes]) -->
-		{Length =< 0xffffffffffffffff}, !, {int_bytes(8, Length, Size)}, [0x5b| Size], [Byte| Bytes].
+		{Length =< 0xffffffffffffffff}, !, {integer_to_bytes(8, Length, Size)},
+		[0x5b| Size], [Byte| Bytes].
 	encode_byte_string(_, _) -->
 		{throw(representation_error(byte_string_length))}.
 
 	encode_tag(Tag, Data) -->
-		{Tag =< 0x17, Byte is Tag + 0xc0}, !, [Byte], encode(Data).
+		{Tag =< 0x17, Byte is Tag + 0xc0}, !,
+		[Byte], encode(Data).
 	encode_tag(Tag, Data) -->
-		{Tag =< 0xff}, !, [0xd8, Tag], encode(Data).
+		{Tag =< 0xff}, !,
+		[0xd8, Tag], encode(Data).
 	encode_tag(Tag, Data) -->
-		{Tag =< 0xffff}, !, {int_bytes(2, Tag, Bytes)}, [0xd9| Bytes], encode(Data).
+		{Tag =< 0xffff}, !, {integer_to_bytes(2, Tag, Bytes)},
+		[0xd9| Bytes], encode(Data).
 	encode_tag(Tag, Data) -->
-		{Tag =< 0xffffff}, !, {int_bytes(4, Tag, Bytes)}, [0xda| Bytes], encode(Data).
+		{Tag =< 0xffffff}, !, {integer_to_bytes(4, Tag, Bytes)},
+		[0xda| Bytes], encode(Data).
 	encode_tag(Tag, Data) -->
-		{Tag =< 0xffffffff}, !, {int_bytes(8, Tag, Bytes)}, [0xdb| Bytes], encode(Data).
+		{Tag =< 0xffffffff}, !, {integer_to_bytes(8, Tag, Bytes)},
+		[0xdb| Bytes], encode(Data).
 
 	encode_simple(N) -->
 		{N =< 0x13, Byte is N + 0xe0}, !, [Byte].
@@ -326,11 +348,11 @@
 
 	decode_unsigned_integer(N, Integer) -->
 		bytes_reversed(N, Bytes),
-		{bytes_int(Bytes, Integer)}.
+		{bytes_to_integer(Bytes, Integer)}.
 
 	decode_negative_integer(N, Integer) -->
 		bytes_reversed(N, Bytes),
-		{bytes_int(Bytes, Integer0), Integer is -1 - Integer0}.
+		{bytes_to_integer(Bytes, Integer0), Integer is -1 - Integer0}.
 
 	decode_unsigned_bignum(0x58, Integer) -->
 		!, [Length], decode_unsigned_integer(Length, Integer).
@@ -356,19 +378,19 @@
 
 	decode_byte_string(N, Atom) -->
 		bytes_reversed(N, Bytes),
-		{bytes_int(Bytes, Length)},
+		{bytes_to_integer(Bytes, Length)},
 		bytes(Length, Bytes),
 		{atom_codes(Atom, Bytes)}.
 
 	decode_utf_8_string(N, Atom) -->
 		bytes_reversed(N, Bytes),
-		{bytes_int(Bytes, Length)},
+		{bytes_to_integer(Bytes, Length)},
 		bytes(Length, Bytes),
 		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
 
 	decode_array(N, List) -->
 		bytes_reversed(N, Bytes),
-		{bytes_int(Bytes, Length)},
+		{bytes_to_integer(Bytes, Length)},
 		decode_array_elements(Length, List).
 
 	decode_array_elements(N, [Head| Tail]) -->
@@ -383,7 +405,7 @@
 
 	decode_map(N, Pairs) -->
 		bytes_reversed(N, Bytes),
-		{bytes_int(Bytes, Length)},
+		{bytes_to_integer(Bytes, Length)},
 		decode_map_elements(Length, Pairs).
 
 	decode_map_elements(N, (Key-Value, Pairs)) -->
@@ -430,7 +452,7 @@
 
 	% auxiliary predicates
 
-	int_bytes(8, Int, [B7, B6, B5, B4, B3, B2, B1, B0]) :-
+	integer_to_bytes(8, Int, [B7, B6, B5, B4, B3, B2, B1, B0]) :-
 		B7 is Int >> 56 /\ 0xff,
 		B6 is Int >> 48 /\ 0xff,
 		B5 is Int >> 40 /\ 0xff,
@@ -440,17 +462,17 @@
 		B1 is Int >>  8 /\ 0xff,
 		B0 is Int >>  0 /\ 0xff.
 
-	int_bytes(4, Int, [B3, B2, B1, B0]) :-
+	integer_to_bytes(4, Int, [B3, B2, B1, B0]) :-
 		B3 is Int >> 24 /\ 0xff,
 		B2 is Int >> 16 /\ 0xff,
 		B1 is Int >>  8 /\ 0xff,
 		B0 is Int >>  0 /\ 0xff.
 
-	int_bytes(2, Int, [B1, B0]) :-
+	integer_to_bytes(2, Int, [B1, B0]) :-
 		B1 is Int >> 8 /\ 0xff,
 		B0 is Int >> 0 /\ 0xff.
 
-	int_bytes(Int, Bytes) :-
+	integer_to_bytes(Int, Bytes) :-
 		int_num_bytes(Int, N),
 		int_bytes_n(N, Int, Bytes).
 
@@ -472,14 +494,14 @@
 		int_num_bytes(Int div 256, N1, N).
 	int_num_bytes(_, N, N).
 
-	bytes_int(Bytes, Int) :-
-		bytes_int(Bytes, 0, 0, Int).
+	bytes_to_integer(Bytes, Int) :-
+		bytes_to_integer(Bytes, 0, 0, Int).
 
-	bytes_int([], _, Int, Int).
-	bytes_int([Byte| Bytes], S0, Int0, Int) :-
-		Int1 is Int0 + Byte << S0,
-		S1 is S0 + 8,
-		bytes_int(Bytes, S1, Int1, Int).
+	bytes_to_integer([], _, Int, Int).
+	bytes_to_integer([Byte| Bytes], Shift0, Int0, Int) :-
+		Int1 is Int0 + Byte << Shift0,
+		Shift1 is Shift0 + 8,
+		bytes_to_integer(Bytes, Shift1, Int1, Int).
 
 	float_to_mantissa_and_exponent(Float, Mantissa, Exponent) :-
 		number_codes(Float, Codes),
