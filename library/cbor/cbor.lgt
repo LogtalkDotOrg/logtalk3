@@ -544,4 +544,48 @@
 		;	Float is (-1) ** Sign * (1 + Significand * 2 ** -52) * 2 ** (Exponent - 1023)
 		).
 
+	utf_8_codes_to_bytes([], []).
+	utf_8_codes_to_bytes([Code| Codes], [Code| Bytes]) :-
+		Code < 0x80,
+		!,
+		utf_8_codes_to_bytes(Codes, Bytes).
+	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2| Bytes]) :-
+		Code < 0x800,
+		!,
+		Byte1 is 0xc0 \/ (Code >> 6),
+		Byte2 is 0x80 \/ (Code /\ 0x3f),
+		utf_8_codes_to_bytes(Codes, Bytes).
+	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2, Byte3| Bytes]) :-
+		Code < 0x10000,
+		!,
+		Byte1 is 0xe0 \/ (Code >> 12),
+		Byte2 is 0x80 \/ ((Code >> 6) /\ 0x3f),
+		Byte3 is 0x80 \/ (Code /\ 0x3f),
+		utf_8_codes_to_bytes(Codes, Bytes).
+	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2, Byte3, Byte4| Bytes]) :-
+		Byte1 is 0xF0 \/ ((Code >> 18) /\ 0x07),
+		Byte2 is 0x80 \/ ((Code >> 12) /\ 0x3f),
+		Byte3 is 0x80 \/ ((Code >>  6) /\ 0x3f),
+		Byte4 is 0x80 \/ ((Code >>  0) /\ 0x3f),
+		utf_8_codes_to_bytes(Codes, Bytes).
+
+	bytes_to_utf_8_codes([], []).
+	bytes_to_utf_8_codes([Byte| Bytes], [Byte| Codes]) :-
+		Byte < 0x80,
+		!,
+		bytes_to_utf_8_codes(Bytes, Codes).
+	bytes_to_utf_8_codes([Byte1, Byte2| Bytes], [Code| Codes]) :-
+		Byte1 < 0xe0,
+		!,
+		Code is ((Byte1 /\ 0x1f) << 6) \/ (Byte2 /\ 0x3f),
+		bytes_to_utf_8_codes(Bytes, Codes).
+	bytes_to_utf_8_codes([Byte1, Byte2, Byte3| Bytes], [Code| Codes]) :-
+		Byte1 < 0xf0,
+		!,
+		Code is ((Byte1 /\ 0xf) << 12) \/ ((Byte2 /\ 0x3f) << 6) \/ (Byte3 /\ 0x3f),
+		bytes_to_utf_8_codes(Bytes, Codes).
+	bytes_to_utf_8_codes([Byte1, Byte2, Byte3, Byte4| Bytes], [Code| Codes]) :-
+		Code is ((Byte1 /\ 0x7) << 18) \/ ((Byte2 /\ 0x3f) << 12) \/ ((Byte3 /\ 0x3f) << 6) \/ (Byte4 /\ 0x3f),
+		bytes_to_utf_8_codes(Bytes, Codes).
+
 :- end_object.
