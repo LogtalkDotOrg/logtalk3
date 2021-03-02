@@ -22,13 +22,25 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2021-03-02,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
 	]).
 
-	:- public([parse/2, generate/2]).
+	:- public(parse/2).
+	:- mode(parse(@list(byte), -ground), zero_or_one).
+	:- info(parse/2, [
+		comment is 'Parses a list of bytes in the CBOR format returning the corresponding term representation.',
+		argnames is ['Bytes', 'Term']
+	]).
+
+	:- public(generate/2).
+	:- mode(generate(@ground, -list(byte)), zero_or_one).
+	:- info(generate/2, [
+		comment is 'Generates a list of bytes in the CBOR format representing the given term.',
+		argnames is ['Term', 'Bytes']
+	]).
 
 	generate(Term, Bytes) :-
 		phrase(encode(Term), Bytes).

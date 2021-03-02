@@ -11,7 +11,7 @@
 Concise Binary Object Representation (CBOR) format exporter and importer library.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
+| **Version:** 0:3:0
 | **Date:** 2021-03-02
 
 | **Compilation flags:**
@@ -45,8 +45,15 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
+Parses a list of bytes in the CBOR format returning the corresponding term representation.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``parse(Bytes,Term)``
+| **Mode and number of proofs:**
+|    ``parse(@list(byte),-ground)`` - ``zero_or_one``
 
 
 ------------
@@ -61,8 +68,15 @@ Public predicates
 ``generate/2``
 ^^^^^^^^^^^^^^
 
+Generates a list of bytes in the CBOR format representing the given term.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``generate(Term,Bytes)``
+| **Mode and number of proofs:**
+|    ``generate(@ground,-list(byte))`` - ``zero_or_one``
 
 
 ------------

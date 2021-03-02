@@ -25,7 +25,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2021-03-02,
 		comment is 'Unit tests for the "cbor" library.'
@@ -44,7 +44,8 @@
 	condition :-
 		current_prolog_flag(bounded, false).
 
-	% test cases from https://tools.ietf.org/html/rfc8949#appendix-A
+	% test cases from the https://tools.ietf.org/html/rfc8949#appendix-A table
+	% the test numbers are the table row numbers
 
 	% parse/2 tests
 
@@ -602,7 +603,7 @@
 %   |{_ "Fun": true, "Amt": -2}    | 0xbf6346756ef563416d7421ff
 
 
-	% text string tests
+	% UTF-8 text string tests
 
 	test(cbor_text_string_utf_8_01, true(Map == {el-'Γειά σου κόσμε!'})) :-
 		generate({el-'Γειά σου κόσμε!'}, Encoding),
@@ -639,5 +640,13 @@
 	test(cbor_text_string_utf_8_09, true(Map == {zh-'你好世界!'})) :-
 		generate({zh-'你好世界!'}, Encoding),
 		parse(Encoding, Map).
+
+	% fixed length encoding tests
+
+	test(cbor_fixed_length_text_string, true(Term == 'hello world')) :-
+		parse([0x6b, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64], Term).
+
+	test(cbor_fixed_length_map, true(Term == {a-1,b-2,c-3})) :-
+		parse([0xa3, 0x61, 0x61, 0x01, 0x61, 0x62, 0x02, 0x61, 0x63, 0x03], Term).
 
 :- end_object.
