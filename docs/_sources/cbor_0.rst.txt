@@ -11,7 +11,7 @@
 Concise Binary Object Representation (CBOR) format exporter and importer library.
 
 | **Author:** Paulo Moura
-| **Version:** 0:5:0
+| **Version:** 0:6:0
 | **Date:** 2021-03-02
 
 | **Compilation flags:**
@@ -45,7 +45,7 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses a list of bytes in the CBOR format returning the corresponding term representation.
+Parses a list of bytes in the CBOR format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).
 
 | **Compilation flags:**
 |    ``static``
@@ -53,7 +53,7 @@ Parses a list of bytes in the CBOR format returning the corresponding term repre
 | **Template:**
 |    ``parse(Bytes,Term)``
 | **Mode and number of proofs:**
-|    ``parse(@list(byte),-ground)`` - ``zero_or_one``
+|    ``parse(@list(byte),-ground)`` - ``one_or_error``
 
 
 ------------
@@ -68,7 +68,7 @@ Parses a list of bytes in the CBOR format returning the corresponding term repre
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates a list of bytes in the CBOR format representing the given term.
+Generates a list of bytes in the CBOR format representing the given term. Throws an error when parsing is not possible (usually due to a term that have no CBOR corresponding representation).
 
 | **Compilation flags:**
 |    ``static``
@@ -76,7 +76,7 @@ Generates a list of bytes in the CBOR format representing the given term.
 | **Template:**
 |    ``generate(Term,Bytes)``
 | **Mode and number of proofs:**
-|    ``generate(@ground,-list(byte))`` - ``zero_or_one``
+|    ``generate(@ground,-list(byte))`` - ``one_or_error``
 
 
 ------------

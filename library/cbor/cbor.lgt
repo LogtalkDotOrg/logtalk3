@@ -22,29 +22,33 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2021-03-02,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
 	]).
 
 	:- public(parse/2).
-	:- mode(parse(@list(byte), -ground), zero_or_one).
+	:- mode(parse(@list(byte), -ground), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses a list of bytes in the CBOR format returning the corresponding term representation.',
+		comment is 'Parses a list of bytes in the CBOR format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).',
 		argnames is ['Bytes', 'Term']
 	]).
 
 	:- public(generate/2).
-	:- mode(generate(@ground, -list(byte)), zero_or_one).
+	:- mode(generate(@ground, -list(byte)), one_or_error).
 	:- info(generate/2, [
-		comment is 'Generates a list of bytes in the CBOR format representing the given term.',
+		comment is 'Generates a list of bytes in the CBOR format representing the given term. Throws an error when parsing is not possible (usually due to a term that have no CBOR corresponding representation).',
 		argnames is ['Term', 'Bytes']
 	]).
 
 	generate(Term, Bytes) :-
-		phrase(encode(Term), Bytes).
+		phrase(encode(Term), Bytes),
+		!.
+	generate(Term, _) :-
+		domain_error(cbor_term, Term).
 
+	encode(Term) --> {var(Term), instantiation_error}.
 	encode(@false) --> !, [0xf4].
 	encode(@true) --> !, [0xf5].
 	encode(@null) --> !, [0xf6].
@@ -54,27 +58,31 @@
 	encode(@not_a_number) --> !, [0xf9, 0x7e, 0x00].
 	encode(@zero) --> !, [0xf9, 0x00, 0x00].
 	encode(@negative_zero) --> !, [0xf9, 0x80, 0x00].
-	encode(Integer) --> {integer(Integer)}, !, encode_integer(Integer).
-	encode(Float) --> {float(Float)}, !, encode_float(Float).
 	encode([]) --> !, [0x80].
 	encode([Head| Tail]) --> !, [0x9f], encode_list([Head| Tail]), [0xff].
 	encode({}) --> !, [0xa0].
 	encode({Pairs}) --> !, [0xbf], encode_pairs(Pairs), [0xff].
-	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
 	encode(tag(N, Data)) --> !, encode_tag(N, Data).
 	encode(simple(N)) --> !, encode_simple(N).
-	encode(Term) --> {throw(domain_error(term, Term))}.
+	encode(Integer) --> {integer(Integer)}, !, encode_integer(Integer).
+	encode(Float) --> {float(Float)}, !, encode_float(Float).
+	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
+	encode(Term) --> {domain_error(term, Term)}.
 
 	encode_utf_8_string('') -->
 		!, [0x60].
 	encode_utf_8_string(Atom) -->
 		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes)}, [0x7f| Bytes], [0xff].
 
+	encode_list(Term) -->
+		{var(Term), instantiation_error}.
 	encode_list([Head| Tail]) -->
 		encode(Head), encode_list(Tail).
 	encode_list([]) -->
 		[].
 
+	encode_pairs(Term) -->
+		{var(Term), instantiation_error}.
 	encode_pairs((Pair, Pairs)) -->
 		!, encode_pair(Pair), encode_pairs(Pairs).
 	encode_pairs(Pair) -->
@@ -83,7 +91,7 @@
 	encode_pair(Key-Value) -->
 		!, encode(Key), encode(Value).
 	encode_pair(_) -->
-		{throw(representation_error(pair))}.
+		{representation_error(pair)}.
 
 	encode_float(0.0) -->
 		!,
@@ -163,7 +171,7 @@
 		{Length =< 0xffffffffffffffff}, !, {integer_to_bytes(8, Length, Size)},
 		[0x5b| Size], [Byte| Bytes].
 	encode_byte_string(_, _) -->
-		{throw(representation_error(byte_string))}.
+		{representation_error(byte_string)}.
 
 	encode_tag(Tag, Data) -->
 		{Tag =< 0x17, Byte is Tag + 0xc0}, !,
@@ -182,17 +190,20 @@
 		{Tag =< 0xffffffff}, !, {integer_to_bytes(8, Tag, Bytes)},
 		[0xdb| Bytes], encode(Data).
 	encode_tag(_, _) -->
-		{throw(representation_error(tag))}.
+		{representation_error(tag)}.
 
 	encode_simple(N) -->
 		{N =< 0x13, Byte is N + 0xe0}, !, [Byte].
 	encode_simple(N) -->
 		{0x20 =< N, N =< 0xff}, !, [0xf8, N].
 	encode_simple(_) -->
-		{throw(representation_error(simple))}.
+		{representation_error(simple)}.
 
 	parse(Bytes, Term) :-
-		phrase(decode(Term), Bytes).
+		phrase(decode(Term), Bytes),
+		!.
+	parse(Bytes, _) :-
+		domain_error(cbor_byte_sequence, Bytes).
 
 	decode(Term) -->
 		[Byte], decode(Byte, Term).
