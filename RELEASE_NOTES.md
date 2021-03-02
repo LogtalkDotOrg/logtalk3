@@ -41,6 +41,9 @@ requirements).
 * UPDATED: Require Trealla Prolog 1.7.4 or later version (due to critical bug
 fixes).
 
+* FIXED: Syntax typo in the Trealla Prolog adapter file. Thanks to Andrew
+Davison for the bug report.
+
 Documentation
 -------------
 

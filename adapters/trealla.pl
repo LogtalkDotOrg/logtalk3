@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 1.7.4 and later versions
-%  Last updated on February 24, 2021
+%  Last updated on March 2, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -131,7 +131,7 @@
 '$lgt_prolog_meta_predicate'(task(_, _, _, _), task(3, *, *, *), predicate).
 '$lgt_prolog_meta_predicate'(task(_, _, _, _, _), task(4, *, *, *, *), predicate).
 '$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _), task(5, *, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _, _), task(6, *, *, *, *, *. *), predicate).
+'$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _, _), task(6, *, *, *, *, *, *), predicate).
 '$lgt_prolog_meta_predicate'(task(_, _, _, _, _, _, _, _), task(7, *, *, *, *, *, *, *), predicate).
 '$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
 
