@@ -44,7 +44,8 @@ Encoding
 --------
 
 The encoding atoms, arrays, and maps uses indefinite-length encoding. All
-floats are currently encoded using decimal fractions.
+floats are currently encoded using decimal fractions. Encoding indicators
+are not currently supported.
 
 
 API documentation
