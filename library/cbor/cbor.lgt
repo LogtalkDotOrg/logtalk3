@@ -22,9 +22,9 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-03-01,
+		date is 2021-03-02,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
 	]).
 
@@ -57,7 +57,7 @@
 	encode_utf_8_string('') -->
 		!, [0x60].
 	encode_utf_8_string(Atom) -->
-		{atom_codes(Atom, Codes)}, [0x5f| Codes], [0xff].
+		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes)}, [0x5f| Bytes], [0xff].
 
 	encode_list([Head| Tail]) -->
 		encode(Head), encode_list(Tail).
@@ -89,7 +89,7 @@
 		).
 
 	encode_positive_integer(N) -->
-		{N > 0xffffffffffffffff}, !, {int_num_bytes(N, Length)}, [0xc2], encode_byte_string(Length, N).
+		{N > 0xffffffffffffffff}, !, {int_num_bytes(N, Length), int_bytes(N, Bytes)}, [0xc2], encode_byte_string(Length, Bytes).
 	encode_positive_integer(N) -->
 		{N > 0xffffffff}, !, {int_bytes(8, N, Bytes)}, [0x1b| Bytes].
 	encode_positive_integer(N) -->
@@ -112,25 +112,25 @@
 	encode_negative_integer(N) -->
 		{N >= -0xffffffffffffffff - 1}, !, {M is -1 - N, int_bytes(8, M, Bytes)}, [0x3b| Bytes].
 	encode_negative_integer(N) -->
-		{Inv is -1 - N, int_num_bytes(Inv, Length)}, [0xc3], encode_byte_string(Length, Inv).
+		{Inv is -1 - N, int_num_bytes(Inv, Length), int_bytes(Inv, Bytes)}, [0xc3], encode_byte_string(Length, Bytes).
 
 	% byte string (0x00..0x17 bytes follow)
-	encode_byte_string(Length, Int) -->
-		{Length =< 0x17}, !, {Size is Length + 0x40, int_bytes(Int, Bytes)}, [Size| Bytes].
+	encode_byte_string(Length, Bytes) -->
+		{Length =< 0x17}, !, {Size is Length + 0x40}, [Size| Bytes].
 	% byte string (one-byte uint8_t for n, and then n bytes follow)
-	encode_byte_string(Length, Int) -->
-		{Length =< 0xff}, !, {int_bytes(Int, Bytes)}, [0x58, Length| Bytes].
+	encode_byte_string(Length, Bytes) -->
+		{Length =< 0xff}, !, [0x58, Length| Bytes].
 	% byte string (two-byte uint16_t for n, and then n bytes follow)
-	encode_byte_string(Length, Int) -->
-		{Length =< 0xffff}, !, {int_bytes(2, Length, Size)}, [0x59| Size], {int_bytes(Int, [Byte| Bytes])}, [Byte| Bytes].
+	encode_byte_string(Length, [Byte| Bytes]) -->
+		{Length =< 0xffff}, !, {int_bytes(2, Length, Size)}, [0x59| Size], [Byte| Bytes].
 	% byte string (four-byte uint32_t for n, and then n bytes follow)
-	encode_byte_string(Length, Int) -->
-		{Length =< 0xffffffff}, !, {int_bytes(4, Length, Size)}, [0x5a| Size], {int_bytes(Int, [Byte| Bytes])}, [Byte| Bytes].
+	encode_byte_string(Length, [Byte| Bytes]) -->
+		{Length =< 0xffffffff}, !, {int_bytes(4, Length, Size)}, [0x5a| Size], [Byte| Bytes].
 	% byte string (eight-byte uint64_t for n, and then n bytes follow)
-	encode_byte_string(Length, Int) -->
-		{Length =< 0xffffffffffffffff}, !, {int_bytes(8, Length, Size)}, [0x5b| Size], {int_bytes(Int, [Byte| Bytes])}, [Byte| Bytes].
+	encode_byte_string(Length, [Byte| Bytes]) -->
+		{Length =< 0xffffffffffffffff}, !, {int_bytes(8, Length, Size)}, [0x5b| Size], [Byte| Bytes].
 	encode_byte_string(_, _) -->
-		{throw(representation_error(integer))}.
+		{throw(representation_error(byte_string_length))}.
 
 	encode_tag(Tag, Data) -->
 		{Tag =< 0x17, Byte is Tag + 0xc0}, !, [Byte], encode(Data).
@@ -241,11 +241,13 @@
 		!, decode_byte_string(8, Atom).
 	% byte string, byte strings follow, terminated by "break"
 	decode(0x5f, Atom) -->
-		!, bytes_until_break(Bytes), {atom_codes(Atom, Bytes)}.
+		!, bytes_until_break(Bytes), {bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
 
 	% UTF-8 string (0x00..0x17 bytes follow)
 	decode(Byte, Atom) -->
-		{0x60 =< Byte, Byte =< 0x77}, !, {Length is Byte - 0x60}, bytes(Length, Bytes), {atom_codes(Atom, Bytes)}.
+		{0x60 =< Byte, Byte =< 0x77}, !,
+		{Length is Byte - 0x60}, bytes(Length, Bytes),
+		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
 	% UTF-8 string (one-byte uint8_t for n, and then n bytes follow)
 	decode(0x78, Atom) -->
 		!, decode_utf_8_string(1, Atom).
@@ -260,7 +262,8 @@
 		!, decode_utf_8_string(8, Atom).
 	% UTF-8 string, UTF-8 strings follow, terminated by "break"
 	decode(0x7f, Atom) -->
-		!, bytes_until_break(Bytes), {atom_codes(Atom, Bytes)}.
+		!, bytes_until_break(Bytes),
+		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
 
 	% (simple value)
 	decode(Byte, simple(Simple)) -->
@@ -358,7 +361,10 @@
 		{atom_codes(Atom, Bytes)}.
 
 	decode_utf_8_string(N, Atom) -->
-		decode_byte_string(N, Atom).
+		bytes_reversed(N, Bytes),
+		{bytes_int(Bytes, Length)},
+		bytes(Length, Bytes),
+		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
 
 	decode_array(N, List) -->
 		bytes_reversed(N, Bytes),
