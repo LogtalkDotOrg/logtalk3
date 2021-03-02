@@ -1,3 +1,5 @@
+:- encoding('UTF-8').
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -23,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-03-01,
+		date is 2021-03-02,
 		comment is 'Unit tests for the "cbor" library.'
 	]).
 
@@ -598,5 +600,44 @@
 %   |["a", {_ "b": "c"}]           | 0x826161bf61626163ff               |
 %   +------------------------------+------------------------------------+
 %   |{_ "Fun": true, "Amt": -2}    | 0xbf6346756ef563416d7421ff
+
+
+	% text string tests
+
+	test(cbor_text_string_utf_8_01, true(Map == {el-'Γειά σου κόσμε!'})) :-
+		generate({el-'Γειά σου κόσμε!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_02, true(Map == {en-'Hello world!'})) :-
+		generate({en-'Hello world!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_03, true(Map == {es-'¡Hola mundo!'})) :-
+		generate({es-'¡Hola mundo!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_04, true(Map == {ja-'こんにちは世界!'})) :-
+		generate({ja-'こんにちは世界!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_05, true(Map == {ko-'여보세요 세계!'})) :-
+		generate({ko-'여보세요 세계!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_06, true(Map == {nl-'Hallo wereld!'})) :-
+		generate({nl-'Hallo wereld!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_07, true(Map == {pt-'Olá mundo!'})) :-
+		generate({pt-'Olá mundo!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_08, true(Map == {ru-'Здравствулте! мир!'})) :-
+		generate({ru-'Здравствулте! мир!'}, Encoding),
+		parse(Encoding, Map).
+
+	test(cbor_text_string_utf_8_09, true(Map == {zh-'你好世界!'})) :-
+		generate({zh-'你好世界!'}, Encoding),
+		parse(Encoding, Map).
 
 :- end_object.
