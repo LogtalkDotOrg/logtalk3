@@ -22,7 +22,7 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2021-03-02,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
@@ -60,7 +60,6 @@
 	encode([Head| Tail]) --> !, [0x9f], encode_list([Head| Tail]), [0xff].
 	encode({}) --> !, [0xa0].
 	encode({Pairs}) --> !, [0xbf], encode_pairs(Pairs), [0xff].
-	encode(Key-Value) --> !, encode(Key), encode(Value).
 	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
 	encode(tag(N, Data)) --> !, encode_tag(N, Data).
 	encode(simple(N)) --> !, encode_simple(N).
@@ -77,9 +76,14 @@
 		[].
 
 	encode_pairs((Pair, Pairs)) -->
-		!, encode(Pair), encode_pairs(Pairs).
+		!, encode_pair(Pair), encode_pairs(Pairs).
 	encode_pairs(Pair) -->
-		encode(Pair).
+		encode_pair(Pair).
+
+	encode_pair(Key-Value) -->
+		!, encode(Key), encode(Value).
+	encode_pair(_) -->
+		{throw(representation_error(pair))}.
 
 	encode_float(0.0) -->
 		!,
@@ -159,11 +163,12 @@
 		{Length =< 0xffffffffffffffff}, !, {integer_to_bytes(8, Length, Size)},
 		[0x5b| Size], [Byte| Bytes].
 	encode_byte_string(_, _) -->
-		{throw(representation_error(byte_string_length))}.
+		{throw(representation_error(byte_string))}.
 
 	encode_tag(Tag, Data) -->
 		{Tag =< 0x17, Byte is Tag + 0xc0}, !,
 		[Byte], encode(Data).
+	% (more tags; 1/2/4/8 bytes of tag number and then a data item follow)
 	encode_tag(Tag, Data) -->
 		{Tag =< 0xff}, !,
 		[0xd8, Tag], encode(Data).
@@ -176,6 +181,8 @@
 	encode_tag(Tag, Data) -->
 		{Tag =< 0xffffffff}, !, {integer_to_bytes(8, Tag, Bytes)},
 		[0xdb| Bytes], encode(Data).
+	encode_tag(_, _) -->
+		{throw(representation_error(tag))}.
 
 	encode_simple(N) -->
 		{N =< 0x13, Byte is N + 0xe0}, !, [Byte].

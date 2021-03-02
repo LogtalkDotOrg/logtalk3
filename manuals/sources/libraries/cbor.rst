@@ -4,7 +4,8 @@
 The ``cbor`` library implements predicates for importing and exporting
 data in the Concise Binary Object Representation (CBOR) format:
 
-https://www.rfc-editor.org/rfc/rfc8949.html http://cbor.io/
+-  https://www.rfc-editor.org/rfc/rfc8949.html
+-  http://cbor.io/
 
 This library is a work-in-progress. Currently it requires a backend
 supporting unbounded integer arithmetic.
