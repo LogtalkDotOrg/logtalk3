@@ -19,10 +19,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(cbor, [source_data(on), debug(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- if(\+ current_logtalk_flag(encoding_directive, unsupported)).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(cbor, [source_data(on), debug(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load([tests_common, tests_utf_8], [hook(lgtunit)]),
+		lgtunit::run_test_sets([
+			tests_common,
+			tests_utf_8
+		])
+	)).
+
+:- else.
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(cbor, [source_data(on), debug(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests_common, [hook(lgtunit)]),
+		tests_common::run
+	)).
+
+:- endif.
