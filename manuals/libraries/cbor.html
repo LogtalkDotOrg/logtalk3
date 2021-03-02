@@ -253,14 +253,27 @@ supporting unbounded integer arithmetic.</p>
 <li><p>Maps are represented using curly-bracketed terms, <code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where
 each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p></li>
 <li><p>Arrays are represented using lists.</p></li>
-<li><p>Both byte strings and text streams are represented using atoms.</p></li>
+<li><p>Text streams are represented using atoms.</p></li>
+<li><p>Tagged data uses <code class="docutils literal notranslate"><span class="pre">tag(Tag,</span> <span class="pre">Data)</span></code> compound terms.</p></li>
+<li><p>Simple values can be represented using <code class="docutils literal notranslate"><span class="pre">simple(Simple)</span></code> compound
+terms.</p></li>
+<li><p>The CBOR elements <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">null</span></code>, and <code class="docutils literal notranslate"><span class="pre">undefined</span></code>
+are represented by, respectively, the <code class="docutils literal notranslate"><span class="pre">&#64;false</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;true</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&#64;null</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;undefined</span></code> compound terms.</p></li>
+<li><p>The compound terms <code class="docutils literal notranslate"><span class="pre">&#64;infinity</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;negative_infinity</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">&#64;not_a_number</span></code> are used to represent the corresponding CBOR
+elements.</p></li>
+<li><p>Only some backends distinguish between positive zero and negative
+zero. The compound terms <code class="docutils literal notranslate"><span class="pre">&#64;zero</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;negative_zero</span></code> can be used
+as an alternative for encoding. The decoder, however, produces the
+<code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">-0.0</span></code> floats.</p></li>
 </ul>
 </div>
 <div class="section" id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
-<p>The encoding atoms, arrays, and maps uses indefinite-length encoding.
+<p>The encoding of atoms, arrays, and maps uses indefinite-length encoding.
 All floats are currently encoded using decimal fractions. Encoding
-indicators are not currently supported.</p>
+indicators and big floats are not currently supported.</p>
 </div>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>

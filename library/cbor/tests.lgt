@@ -25,7 +25,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2021-03-02,
 		comment is 'Unit tests for the "cbor" library.'
@@ -103,10 +103,10 @@
 	test(cbor_parse_2_18, true(Term == -1000)) :-
 		parse([0x39, 0x03, 0xe7], Term).
 
-	test(cbor_parse_2_19, true(Term == zero)) :-
+	test(cbor_parse_2_19, true(Term == 0.0)) :-
 		parse([0xf9, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_20, true(Term == negzero)) :-
+	test(cbor_parse_2_20, true(Term == -0.0)) :-
 		parse([0xf9, 0x80, 0x00], Term).
 
 	test(cbor_parse_2_21a, true(Term =~= 1.0)) :-
@@ -161,43 +161,43 @@
 	test(cbor_parse_2_31, true(Term =~= -4.1)) :-
 		parse([0xfb,0xc0, 0x10, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66], Term).
 
-	test(cbor_parse_2_32, true(Term == inf)) :-
+	test(cbor_parse_2_32, true(Term == @infinity)) :-
 		parse([0xf9, 0x7c, 0x00], Term).
 
-	test(cbor_parse_2_33, true(Term == nan)) :-
+	test(cbor_parse_2_33, true(Term == @not_a_number)) :-
 		parse([0xf9, 0x7e, 0x00], Term).
 
-	test(cbor_parse_2_34, true(Term == neginf)) :-
+	test(cbor_parse_2_34, true(Term == @negative_infinity)) :-
 		parse([0xf9, 0xfc, 0x00], Term).
 
-	test(cbor_parse_2_35, true(Term == inf)) :-
+	test(cbor_parse_2_35, true(Term == @infinity)) :-
 		parse([0xfa, 0x7f, 0x80, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_36, true(Term == nan)) :-
+	test(cbor_parse_2_36, true(Term == @not_a_number)) :-
 		parse([0xfa, 0x7f, 0xc0, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_37, true(Term == neginf)) :-
+	test(cbor_parse_2_37, true(Term == @negative_infinity)) :-
 		parse([0xfa, 0xff, 0x80, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_38, true(Term == inf)) :-
+	test(cbor_parse_2_38, true(Term == @infinity)) :-
 		parse([0xfb, 0x7f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_39, true(Term == nan)) :-
+	test(cbor_parse_2_39, true(Term == @not_a_number)) :-
 		parse([0xfb, 0x7f, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_40, true(Term == neginf)) :-
+	test(cbor_parse_2_40, true(Term == @negative_infinity)) :-
 		parse([0xfb, 0xff, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00], Term).
 
-	test(cbor_parse_2_41, true(Term == false)) :-
+	test(cbor_parse_2_41, true(Term == @false)) :-
 		parse([0xf4], Term).
 
-	test(cbor_parse_2_42, true(Term == true)) :-
+	test(cbor_parse_2_42, true(Term == @true)) :-
 		parse([0xf5], Term).
 
-	test(cbor_parse_2_43, true(Term == null)) :-
+	test(cbor_parse_2_43, true(Term == @null)) :-
 		parse([0xf6], Term).
 
-	test(cbor_parse_2_44, true(Term == undefined)) :-
+	test(cbor_parse_2_44, true(Term == @undefined)) :-
 		parse([0xf7], Term).
 
 	test(cbor_parse_2_45, true(Term == simple(16))) :-
@@ -304,7 +304,7 @@
 		parse([0x82, 0x61, 0x61, 0xbf, 0x61, 0x62, 0x61, 0x63, 0xff], Term).
 
 	% {_ "Fun": true, "Amt": -2}
-	test(cbor_parse_2_81, true(Term == {'Fun'-true, 'Amt'-(-2)})) :-
+	test(cbor_parse_2_81, true(Term == {'Fun'-(@true), 'Amt'-(-2)})) :-
 		parse([0xbf, 0x63, 0x46, 0x75, 0x6e, 0xf5, 0x63, 0x41, 0x6d, 0x74, 0x21, 0xff], Term).
 
 	% generate/2 tests
@@ -447,43 +447,43 @@
 		generate(-4.1, Encoding).
 
 	test(cbor_generate_2_32, true(Encoding == [0xf9, 0x7c, 0x00])) :-
-		generate(inf, Encoding).
+		generate(@infinity, Encoding).
 
 	test(cbor_generate_2_33, true(Encoding == [0xf9, 0x7e, 0x00])) :-
-		generate(nan, Encoding).
+		generate(@not_a_number, Encoding).
 
 	test(cbor_generate_2_34, true(Encoding == [0xf9, 0xfc, 0x00])) :-
-		generate(neginf, Encoding).
+		generate(@negative_infinity, Encoding).
 
 	- test(cbor_generate_2_35, true(Encoding == [0xfa, 0x7f, 0x80, 0x00, 0x00])) :-
-		generate(inf, Encoding).
+		generate(@infinity, Encoding).
 
 	- test(cbor_generate_2_36, true(Encoding == [0xfa, 0x7f, 0xc0, 0x00, 0x00])) :-
-		generate(nan, Encoding).
+		generate(@not_a_number, Encoding).
 
 	- test(cbor_generate_2_37, true(Encoding == [0xfa, 0xff, 0x80, 0x00, 0x00])) :-
-		generate(neginf, Encoding).
+		generate(@negative_infinity, Encoding).
 
 	- test(cbor_generate_2_38, true(Encoding == [0xfb, 0x7f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])) :-
-		generate(inf, Encoding).
+		generate(@infinity, Encoding).
 
 	- test(cbor_generate_2_39, true(Encoding == [0xfb, 0x7f, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])) :-
-		generate(nan, Encoding).
+		generate(@not_a_number, Encoding).
 
 	- test(cbor_generate_2_40, true(Encoding == [0xfb, 0xff, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])) :-
-		generate(neginf, Encoding).
+		generate(@negative_infinity, Encoding).
 
 	test(cbor_generate_2_41, true(Encoding == [0xf4])) :-
-		generate(false, Encoding).
+		generate(@false, Encoding).
 
 	test(cbor_generate_2_42, true(Encoding == [0xf5])) :-
-		generate(true, Encoding).
+		generate(@true, Encoding).
 
 	test(cbor_generate_2_43, true(Encoding == [0xf6])) :-
-		generate(null, Encoding).
+		generate(@null, Encoding).
 
 	test(cbor_generate_2_44, true(Encoding == [0xf7])) :-
-		generate(undefined, Encoding).
+		generate(@undefined, Encoding).
 
 	test(cbor_generate_2_45, true(Encoding == [0xf0])) :-
 		generate(simple(16), Encoding).

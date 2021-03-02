@@ -39,15 +39,30 @@ uses the representation `Key-Value`.
 
 - Arrays are represented using lists.
 
-- Both byte strings and text streams are represented using atoms.
+- Text streams are represented using atoms.
+
+- Tagged data uses `tag(Tag, Data)` compound terms.
+
+- Simple values can be represented using `simple(Simple)` compound terms. 
+
+- The CBOR elements `false`, `true`, `null`, and `undefined` are represented
+by, respectively, the `@false`, `@true`, `@null`, and `@undefined` compound
+terms.
+
+- The compound terms `@infinity`, `@negative_infinity`, and `@not_a_number`
+are used to represent the corresponding CBOR elements.
+
+- Only some backends distinguish between positive zero and negative zero. The
+compound terms `@zero` and `@negative_zero` can be used as an alternative for
+encoding. The decoder, however, produces the `0.0` and `-0.0` floats.
 
 
 Encoding
 --------
 
-The encoding atoms, arrays, and maps uses indefinite-length encoding. All
-floats are currently encoded using decimal fractions. Encoding indicators
-are not currently supported.
+The encoding of atoms, arrays, and maps uses indefinite-length encoding. All
+floats are currently encoded using decimal fractions. Encoding indicators and
+big floats are not currently supported.
 
 
 API documentation

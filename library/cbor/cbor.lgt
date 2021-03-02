@@ -22,7 +22,7 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2021-03-02,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
@@ -45,15 +45,15 @@
 	generate(Term, Bytes) :-
 		phrase(encode(Term), Bytes).
 
-	encode(false) --> !, [0xf4].
-	encode(true) --> !, [0xf5].
-	encode(null) --> !, [0xf6].
-	encode(undefined) --> !, [0xf7].
-	encode(inf) --> !, [0xf9, 0x7c, 0x00].
-	encode(neginf) --> !, [0xf9, 0xfc, 0x00].
-	encode(nan) --> !, [0xf9, 0x7e, 0x00].
-	encode(zero) --> !, [0xf9, 0x00, 0x00].
-	encode(negzero) --> !, [0xf9, 0x80, 0x00].
+	encode(@false) --> !, [0xf4].
+	encode(@true) --> !, [0xf5].
+	encode(@null) --> !, [0xf6].
+	encode(@undefined) --> !, [0xf7].
+	encode(@infinity) --> !, [0xf9, 0x7c, 0x00].
+	encode(@negative_infinity) --> !, [0xf9, 0xfc, 0x00].
+	encode(@not_a_number) --> !, [0xf9, 0x7e, 0x00].
+	encode(@zero) --> !, [0xf9, 0x00, 0x00].
+	encode(@negative_zero) --> !, [0xf9, 0x80, 0x00].
 	encode(Integer) --> {integer(Integer)}, !, encode_integer(Integer).
 	encode(Float) --> {float(Float)}, !, encode_float(Float).
 	encode([]) --> !, [0x80].
@@ -83,11 +83,11 @@
 
 	encode_float(0.0) -->
 		!,
-		encode(zero).
+		encode(@zero).
 	% only some backend Prolog systems support a negative zero
 	encode_float(-0.0) -->
 		!,
-		encode(negzero).
+		encode(@negative_zero).
 	% other floats are represented using decimal fractions
 	encode_float(Float) -->
 		[0xc4],
@@ -190,15 +190,15 @@
 	decode(Term) -->
 		[Byte], decode(Byte, Term).
 
-	decode(0xf4, false) --> !.
-	decode(0xf5, true) --> !.
-	decode(0xf6, null) --> !.
-	decode(0xf7, undefined) --> !.
-	decode(0xf9, inf) --> [0x7c, 0x00], !.
-	decode(0xf9, neginf) --> [0xfc, 0x00], !.
-	decode(0xf9, nan) --> [0x7e, 0x00], !.
-	decode(0xf9, zero) --> [0x00, 0x00], !.
-	decode(0xf9, negzero) --> [0x80, 0x00], !.
+	decode(0xf4, @false) --> !.
+	decode(0xf5, @true) --> !.
+	decode(0xf6, @null) --> !.
+	decode(0xf7, @undefined) --> !.
+	decode(0xf9, @infinity) --> [0x7c, 0x00], !.
+	decode(0xf9, @negative_infinity) --> [0xfc, 0x00], !.
+	decode(0xf9, @not_a_number) --> [0x7e, 0x00], !.
+	decode(0xf9, 0.0) --> [0x00, 0x00], !.
+	decode(0xf9, -0.0) --> [0x80, 0x00], !.
 
 	% unsigned integer 0x00..0x17 (0..23)
 	decode(Integer, Integer) -->
@@ -544,9 +544,9 @@
 
 	half_precision_to_float(0x00, 0x00, 0.0) :- !.
 	half_precision_to_float(0x80, 0x00, -0.0) :- !.
-	half_precision_to_float(0x7c, 0x00, inf) :- !.
-	half_precision_to_float(0x7e, 0x00, nan) :- !.
-	half_precision_to_float(0xfc, 0x00, neginf) :- !.
+	half_precision_to_float(0x7c, 0x00, @infinity) :- !.
+	half_precision_to_float(0x7e, 0x00, @not_a_number) :- !.
+	half_precision_to_float(0xfc, 0x00, @negative_infinity) :- !.
 	half_precision_to_float(Byte1, Byte0, Float) :-
 		Sign is Byte1 >> 7,
 		Exponent is Byte1 >> 2 /\ 0x1f,
@@ -558,9 +558,9 @@
 
 	single_precision_to_float(0x00, 0x00, 0x00, 0x00, 0.0) :- !.
 	single_precision_to_float(0x10, 0x00, 0x00, 0x00, -0.0) :- !.
-	single_precision_to_float(0x7f, 0x80, 0x00, 0x00, inf) :- !.
-	single_precision_to_float(0x7f, 0xc0, 0x00, 0x00, nan) :- !.
-	single_precision_to_float(0xff, 0x80, 0x00, 0x00, neginf) :- !.
+	single_precision_to_float(0x7f, 0x80, 0x00, 0x00, @infinity) :- !.
+	single_precision_to_float(0x7f, 0xc0, 0x00, 0x00, @not_a_number) :- !.
+	single_precision_to_float(0xff, 0x80, 0x00, 0x00, @negative_infinity) :- !.
 	single_precision_to_float(Byte3, Byte2, Byte1, Byte0, Float) :-
 		Sign is Byte3 >> 7,
 		Exponent is (Byte3 /\ 0x7f) << 1 + Byte2 >> 7,
@@ -572,9 +572,9 @@
 
 	double_precision_to_float(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0.0) :- !.
 	double_precision_to_float(0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, -0.0) :- !.
-	double_precision_to_float(0x7f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, inf) :- !.
-	double_precision_to_float(0x7f, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, nan) :- !.
-	double_precision_to_float(0xff, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, neginf) :- !.
+	double_precision_to_float(0x7f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, @infinity) :- !.
+	double_precision_to_float(0x7f, 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, @not_a_number) :- !.
+	double_precision_to_float(0xff, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, @negative_infinity) :- !.
 	double_precision_to_float(Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0, Float) :-
 		Sign is Byte7 >> 7,
 		Exponent is (Byte7 /\ 0x7f) << 4 + Byte6 >> 4,
