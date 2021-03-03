@@ -43,7 +43,7 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		append/2, length/2
 	]).
 
 	generate(Term, Bytes) :-
@@ -297,8 +297,8 @@
 	decode(0x5b, bytes(Bytes)) -->
 		!, decode_byte_string(8, Bytes).
 	% byte string, byte strings follow, terminated by "break"
-	decode(0x5f, Bytes) -->
-		!, bytes_until_break(Bytes).
+	decode(0x5f, bytes(Bytes)) -->
+		!, decode_indefinite_length_byte_string(Bytes), [0xff].
 
 	% UTF-8 string (0x00..0x17 bytes follow)
 	decode(Byte, Atom) -->
@@ -415,6 +415,17 @@
 		bytes_reversed(N, LengthBytes),
 		{bytes_to_integer(LengthBytes, Length)},
 		bytes(Length, Bytes).
+
+	decode_indefinite_length_byte_string(Bytes) -->
+		decode_byte_string_chunks(Chunks),
+		{append(Chunks, Bytes)}.
+
+	decode_byte_string_chunks([Chunk| Chunks]) -->
+		decode(bytes(Chunk)),
+		!,
+		decode_byte_string_chunks(Chunks).
+	decode_byte_string_chunks([]) -->
+		[].
 
 	decode_utf_8_string(N, Atom) -->
 		bytes_reversed(N, Bytes),
