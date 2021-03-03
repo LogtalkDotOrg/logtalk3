@@ -297,8 +297,8 @@
 	decode(0x5b, bytes(Bytes)) -->
 		!, decode_byte_string(8, Bytes).
 	% byte string, byte strings follow, terminated by "break"
-	decode(0x5f, Atom) -->
-		!, bytes_until_break(Bytes), {bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
+	decode(0x5f, Bytes) -->
+		!, bytes_until_break(Bytes).
 
 	% UTF-8 string (0x00..0x17 bytes follow)
 	decode(Byte, Atom) -->

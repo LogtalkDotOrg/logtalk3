@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
 		date is 2021-03-03,
 		comment is 'Unit tests for the "cbor" library (common).'
@@ -204,11 +204,8 @@
 	test(cbor_parse_2_46, true(Term == simple(255))) :-
 		parse([0xf8, 0xff], Term).
 
-	test(cbor_parse_2_47a, true(Term == tag(0,'2013-03-21T20:04:00Z'))) :-
+	test(cbor_parse_2_47, true(Term == tag(0,'2013-03-21T20:04:00Z'))) :-
 		parse([0xc0, 0x74, 0x32, 0x30, 0x31, 0x33, 0x2d, 0x30, 0x33, 0x2d, 0x32, 0x31, 0x54, 0x32, 0x30, 0x3a, 0x30, 0x34, 0x3a, 0x30, 0x30, 0x5a], Term).
-
-	test(cbor_parse_2_47b, true(Term == tag(0,'2013-03-21T20:04:00Z'))) :-
-		parse([192,95,50,48,49,51,45,48,51,45,50,49,84,50,48,58,48,52,58,48,48,90,255], Term).
 
 	test(cbor_parse_2_48, true(Term == tag(1, 1363896240))) :-
 		parse([0xc1, 0x1a, 0x51, 0x4b, 0x67, 0xb0], Term).
@@ -222,12 +219,8 @@
 	test(cbor_parse_2_51, true(Term == tag(24, bytes([0x64, 0x49, 0x45, 0x54, 0x46])))) :-
 		parse([0xd8, 0x18, 0x45, 0x64, 0x49, 0x45, 0x54, 0x46], Term).
 
-	% 32("http://www.example.com")
-	test(cbor_parse_2_52a, true(Term == tag(32, 'http://www.example.com'))) :-
+	test(cbor_parse_2_52, true(Term == tag(32, 'http://www.example.com'))) :-
 		parse([0xd8, 0x20, 0x76, 0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d], Term).
-
-	test(cbor_parse_2_52b, true(Term == tag(32, 'http://www.example.com'))) :-
-		parse([216,32,95,104,116,116,112,58,47,47,119,119,119,46,101,120,97,109,112,108,101,46,99,111,109,255], Term).
 
 	test(cbor_parse_2_53, true(Term == bytes([]))) :-
 		parse([0x40], Term).
@@ -257,13 +250,10 @@
 		parse([0xa2, 0x61, 0x61, 0x01, 0x61, 0x62, 0x82, 0x02, 0x03], Term).
 
 	test(cbor_parse_2_69, true(Term == [a, {b-c}])) :-
-		parse([0x9f, 0x5f, 0x61, 0xff, 0xbf, 0x5f, 0x62, 0xff, 0x5f, 0x63, 0xff, 0xff, 0xff], Term).
+		parse([0x82, 0x61, 0x61, 0xa1, 0x61, 0x62, 0x61, 0x63], Term).
 
-	test(cbor_parse_2_70a, true(Term == {a-'A', b-'B', c-'C', d-'D', e-'E'})) :-
+	test(cbor_parse_2_70, true(Term == {a-'A', b-'B', c-'C', d-'D', e-'E'})) :-
 		parse([0xa5, 0x61, 0x61, 0x61, 0x41, 0x61, 0x62, 0x61, 0x42, 0x61, 0x63, 0x61, 0x43, 0x61, 0x64, 0x61, 0x44, 0x61, 0x65, 0x61, 0x45], Term).
-
-	test(cbor_parse_2_70b, true(Term == {a-'A', b-'B', c-'C', d-'D', e-'E'})) :-
-		parse([191,95,97,255,95,65,255,95,98,255,95,66,255,95,99,255,95,67,255,95,100,255,95,68,255,95,101,255,95,69,255,255], Term).
 
 %   |(_ h'0102', h'030405')        | 0x5f42010243030405ff               |
 %   +------------------------------+------------------------------------+
@@ -577,7 +567,6 @@
 
 	test(cbor_generate_2_70b, true(Encoding == [191,127,97,255,127,65,255,127,98,255,127,66,255,127,99,255,127,67,255,127,100,255,127,68,255,127,101,255,127,69,255,255])) :-
 		generate({a-'A', b-'B', c-'C', d-'D', e-'E'}, Encoding).
-
 
 %   |(_ h'0102', h'030405')        | 0x5f42010243030405ff               |
 %   +------------------------------+------------------------------------+
