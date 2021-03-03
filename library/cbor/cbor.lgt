@@ -22,9 +22,9 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-03-02,
+		date is 2021-03-03,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
 	]).
 
@@ -40,6 +40,10 @@
 	:- info(generate/2, [
 		comment is 'Generates a list of bytes in the CBOR format representing the given term. Throws an error when parsing is not possible (usually due to a term that have no CBOR corresponding representation).',
 		argnames is ['Term', 'Bytes']
+	]).
+
+	:- uses(list, [
+		length/2
 	]).
 
 	generate(Term, Bytes) :-
@@ -64,6 +68,7 @@
 	encode({Pairs}) --> !, [0xbf], encode_pairs(Pairs), [0xff].
 	encode(tag(N, Data)) --> !, encode_tag(N, Data).
 	encode(simple(N)) --> !, encode_simple(N).
+	encode(bytes(Bytes)) --> !, {length(Bytes, Length)}, encode_byte_string(Length, Bytes).
 	encode(Integer) --> {integer(Integer)}, !, encode_integer(Integer).
 	encode(Float) --> {float(Float)}, !, encode_float(Float).
 	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
@@ -277,19 +282,19 @@
 		!, decode_double_precision_float(Float).
 
 	% byte string (0x00..0x17 bytes follow)
-	decode(Byte, Bytes) -->
+	decode(Byte, bytes(Bytes)) -->
 		{0x40 =< Byte, Byte =< 0x57}, !, {Length is Byte - 0x40}, bytes(Length, Bytes).
 	% byte string (one-byte uint8_t for n, and then n bytes follow)
-	decode(0x58, Bytes) -->
+	decode(0x58, bytes(Bytes)) -->
 		!, decode_byte_string(1, Bytes).
 	% byte string (two-byte uint16_t for n, and then n bytes follow)
-	decode(0x59, Bytes) -->
+	decode(0x59, bytes(Bytes)) -->
 		!, decode_byte_string(2, Bytes).
 	% byte string (four-byte uint32_t for n, and then n bytes follow)
-	decode(0x5a, Bytes) -->
+	decode(0x5a, bytes(Bytes)) -->
 		!, decode_byte_string(4, Bytes).
 	% byte string (eight-byte uint64_t for n, and then n bytes follow)
-	decode(0x5b, Bytes) -->
+	decode(0x5b, bytes(Bytes)) -->
 		!, decode_byte_string(8, Bytes).
 	% byte string, byte strings follow, terminated by "break"
 	decode(0x5f, Atom) -->
@@ -406,11 +411,10 @@
 	decode_negative_bignum(Byte, Integer) -->
 		!, {Length is Byte - 0x40}, decode_unsigned_integer(Length, Inv), {Integer is -Inv - 1}.
 
-	decode_byte_string(N, Atom) -->
-		bytes_reversed(N, Bytes),
-		{bytes_to_integer(Bytes, Length)},
-		bytes(Length, Bytes),
-		{atom_codes(Atom, Bytes)}.
+	decode_byte_string(N, Bytes) -->
+		bytes_reversed(N, LengthBytes),
+		{bytes_to_integer(LengthBytes, Length)},
+		bytes(Length, Bytes).
 
 	decode_utf_8_string(N, Atom) -->
 		bytes_reversed(N, Bytes),

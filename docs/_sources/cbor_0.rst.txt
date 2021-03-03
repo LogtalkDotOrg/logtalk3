@@ -11,16 +11,15 @@
 Concise Binary Object Representation (CBOR) format exporter and importer library.
 
 | **Author:** Paulo Moura
-| **Version:** 0:6:0
-| **Date:** 2021-03-02
+| **Version:** 0:7:0
+| **Date:** 2021-03-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
@@ -84,12 +83,12 @@ Generates a list of bytes in the CBOR format representing the given term. Throws
 Protected predicates
 --------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

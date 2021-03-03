@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-03-02,
+		date is 2021-03-03,
 		comment is 'Unit tests for the "cbor" library (common).'
 	]).
 
@@ -216,10 +216,11 @@
 	test(cbor_parse_2_49, true(Term == tag(1, 1363896240.5))) :-
 		parse([0xc1, 0xfb, 0x41, 0xd4, 0x52, 0xd9, 0xec, 0x20, 0x00, 0x00], Term).
 
-%   |23(h'01020304')               | 0xd74401020304                     |
-%   +------------------------------+------------------------------------+
-%   |24(h'6449455446')             | 0xd818456449455446                 |
-%   +------------------------------+------------------------------------+
+	test(cbor_parse_2_50, true(Term == tag(23, bytes([0x01, 0x02, 0x03, 0x04])))) :-
+		parse([0xd7, 0x44, 0x01, 0x02, 0x03, 0x04], Term).
+
+	test(cbor_parse_2_51, true(Term == tag(24, bytes([0x64, 0x49, 0x45, 0x54, 0x46])))) :-
+		parse([0xd8, 0x18, 0x45, 0x64, 0x49, 0x45, 0x54, 0x46], Term).
 
 	% 32("http://www.example.com")
 	test(cbor_parse_2_52a, true(Term == tag(32, 'http://www.example.com'))) :-
@@ -228,11 +229,11 @@
 	test(cbor_parse_2_52b, true(Term == tag(32, 'http://www.example.com'))) :-
 		parse([216,32,95,104,116,116,112,58,47,47,119,119,119,46,101,120,97,109,112,108,101,46,99,111,109,255], Term).
 
-%   +------------------------------+------------------------------------+
-%   |h''                           | 0x40                               |
-%   +------------------------------+------------------------------------+
-%   |h'01020304'                   | 0x4401020304                       |
-%   +------------------------------+------------------------------------+
+	test(cbor_parse_2_53, true(Term == bytes([]))) :-
+		parse([0x40], Term).
+
+	test(cbor_parse_2_54, true(Term == bytes([0x01, 0x02, 0x03, 0x04]))) :-
+		parse([0x44, 0x01, 0x02, 0x03, 0x04], Term).
 
 	test(cbor_parse_2_62, true(Term == [])) :-
 		parse([0x80], Term).
@@ -505,9 +506,11 @@
 		% decimal fraction encoding
 		generate(tag(1, 1363896240.5), Encoding).
 
-%   |23(h'01020304')               | 0xd74401020304                     |
-%   +------------------------------+------------------------------------+
-%   |24(h'6449455446')             | 0xd818456449455446                 |
+	test(cbor_generate_2_50, true(Encoding == [0xd7, 0x44, 0x01, 0x02, 0x03, 0x04])) :-
+		generate(tag(23, bytes([0x01, 0x02, 0x03, 0x04])), Encoding).
+
+	test(cbor_generate_2_51, true(Encoding == [0xd8, 0x18, 0x45, 0x64, 0x49, 0x45, 0x54, 0x46])) :-
+		generate(tag(24, bytes([0x64, 0x49, 0x45, 0x54, 0x46])), Encoding).
 
 	% 32("http://www.example.com")
 	- test(cbor_generate_2_52a, true(Encoding == [0xd8, 0x20, 0x76, 0x68, 0x74, 0x74, 0x70, 0x3a, 0x2f, 0x2f, 0x77, 0x77, 0x77, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x63, 0x6f, 0x6d])) :-
@@ -517,10 +520,11 @@
 		% decimal fraction encoding
 		generate(tag(32, 'http://www.example.com'), Encoding).
 
-%   |h''                           | 0x40                               |
-%   +------------------------------+------------------------------------+
-%   |h'01020304'                   | 0x4401020304                       |
-%   +------------------------------+------------------------------------+
+	test(cbor_generate_2_53, true(Encoding == [0x40])) :-
+		generate(bytes([]), Encoding).
+
+	test(cbor_generate_2_54, true(Encoding == [0x44, 0x01, 0x02, 0x03, 0x04])) :-
+		generate(bytes([0x01, 0x02, 0x03, 0x04]), Encoding).
 
 	test(cbor_generate_2_55, true(Encoding == [0x60])) :-
 		generate('', Encoding).

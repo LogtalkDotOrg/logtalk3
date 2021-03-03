@@ -21,7 +21,10 @@
 
 :- if(current_prolog_flag(bounded, false)).
 
-	:- initialization(logtalk_load(cbor, [optimize(on)])).
+	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(cbor, [optimize(on)])
+	)).
 
 :- else.
 

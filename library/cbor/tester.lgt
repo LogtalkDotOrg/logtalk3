@@ -23,6 +23,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(basic_types(loader)),
 		logtalk_load(cbor, [source_data(on), debug(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load([tests_common, tests_utf_8], [hook(lgtunit)]),
@@ -36,6 +37,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(basic_types(loader)),
 		logtalk_load(cbor, [source_data(on), debug(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests_common, [hook(lgtunit)]),
