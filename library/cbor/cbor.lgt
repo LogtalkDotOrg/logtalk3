@@ -337,7 +337,7 @@
 		!, decode_utf_8_string(8, Atom).
 	% UTF-8 string, UTF-8 strings follow, terminated by "break"
 	decode(0x7f, Atom) -->
-		!, decode_indefinite_length_text_string(Atom).
+		!, decode_indefinite_length_text_string(Atom), [0xff].
 
 	% (simple value)
 	decode(Byte, simple(Simple)) -->
@@ -437,7 +437,9 @@
 		decode_byte_string_chunks([], Bytes).
 
 	decode_byte_string_chunks(Bytes0, Bytes) -->
-		decode(bytes(Bytes1)),
+		[Byte],
+		{0x40 =< Byte, Byte =< 0x5b},
+		decode(Byte, bytes(Bytes1)),
 		!,
 		{append(Bytes0, Bytes1, Bytes2)},
 		decode_byte_string_chunks(Bytes2, Bytes).
@@ -454,8 +456,9 @@
 		decode_text_string_chunks('', Atom).
 
 	decode_text_string_chunks(Atom0, Atom) -->
-		decode(Atom1),
-		{atom(Atom1)},
+		[Byte],
+		{0x60 =< Byte, Byte =< 0x7b},
+		decode(Byte, Atom1),
 		!,
 		{atom_concat(Atom0, Atom1, Atom2)},
 		decode_text_string_chunks(Atom2, Atom).
