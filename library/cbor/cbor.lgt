@@ -22,7 +22,7 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
 		date is 2021-03-03,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
@@ -43,7 +43,7 @@
 	]).
 
 	:- uses(list, [
-		append/2, length/2
+		append/3, length/2
 	]).
 
 	generate(Term, Bytes) :-
@@ -74,10 +74,28 @@
 	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
 	encode(Term) --> {domain_error(term, Term)}.
 
-	encode_utf_8_string('') -->
-		!, [0x60].
 	encode_utf_8_string(Atom) -->
-		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes)}, [0x7f| Bytes], [0xff].
+		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes), length(Bytes, Length)},
+		encode_utf_8_string(Length, Bytes).
+
+	% UTF-8 string (0x00..0x17 bytes follow)
+	encode_utf_8_string(Length, Bytes) -->
+		{Length =< 0x17}, !, {Byte is Length + 0x60}, [Byte| Bytes].
+	% UTF-8 string (one-byte uint8_t for n, and then n bytes follow)
+	encode_utf_8_string(Length, Bytes) -->
+		{Length =< 0xff}, !, [0x78, Length| Bytes].
+	% UTF-8 string (two-byte uint16_t for n, and then n bytes follow)
+	encode_utf_8_string(Length, [Byte| Bytes]) -->
+		{Length =< 0xffff}, !, {integer_to_bytes(Length, LengthBytes)},
+		[0x79| LengthBytes], [Byte| Bytes].
+	% UTF-8 string (four-byte uint32_t for n, and then n bytes follow)
+	encode_utf_8_string(Length, [Byte| Bytes]) -->
+		{Length =< 0xffffffff}, !, {integer_to_bytes(Length, LengthBytes)},
+		[0x7a| LengthBytes], [Byte| Bytes].
+	% UTF-8 string (eight-byte uint64_t for n, and then n bytes follow)
+	encode_utf_8_string(Length, [Byte| Bytes]) -->
+		{Length =< 0xffffffffffffffff}, !, {integer_to_bytes(Length, LengthBytes)},
+		[0x7b| LengthBytes], [Byte| Bytes].
 
 	encode_list(Term) -->
 		{var(Term), instantiation_error}.
@@ -319,8 +337,7 @@
 		!, decode_utf_8_string(8, Atom).
 	% UTF-8 string, UTF-8 strings follow, terminated by "break"
 	decode(0x7f, Atom) -->
-		!, bytes_until_break(Bytes),
-		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
+		!, decode_indefinite_length_text_string(Atom).
 
 	% (simple value)
 	decode(Byte, simple(Simple)) -->
@@ -417,21 +434,33 @@
 		bytes(Length, Bytes).
 
 	decode_indefinite_length_byte_string(Bytes) -->
-		decode_byte_string_chunks(Chunks),
-		{append(Chunks, Bytes)}.
+		decode_byte_string_chunks([], Bytes).
 
-	decode_byte_string_chunks([Chunk| Chunks]) -->
-		decode(bytes(Chunk)),
+	decode_byte_string_chunks(Bytes0, Bytes) -->
+		decode(bytes(Bytes1)),
 		!,
-		decode_byte_string_chunks(Chunks).
-	decode_byte_string_chunks([]) -->
+		{append(Bytes0, Bytes1, Bytes2)},
+		decode_byte_string_chunks(Bytes2, Bytes).
+	decode_byte_string_chunks(Bytes, Bytes) -->
 		[].
 
 	decode_utf_8_string(N, Atom) -->
-		bytes_reversed(N, Bytes),
-		{bytes_to_integer(Bytes, Length)},
+		bytes_reversed(N, LengthBytes),
+		{bytes_to_integer(LengthBytes, Length)},
 		bytes(Length, Bytes),
 		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
+
+	decode_indefinite_length_text_string(Atom) -->
+		decode_text_string_chunks('', Atom).
+
+	decode_text_string_chunks(Atom0, Atom) -->
+		decode(Atom1),
+		{atom(Atom1)},
+		!,
+		{atom_concat(Atom0, Atom1, Atom2)},
+		decode_text_string_chunks(Atom2, Atom).
+	decode_text_string_chunks(Atom, Atom) -->
+		[].
 
 	decode_array(N, List) -->
 		bytes_reversed(N, Bytes),

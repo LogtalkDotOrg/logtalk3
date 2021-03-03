@@ -62,9 +62,9 @@ encoding. The decoder, however, produces the `0.0` and `-0.0` floats.
 Encoding
 --------
 
-The encoding of atoms, arrays, and maps uses indefinite-length encoding. All
-floats are currently encoded using decimal fractions. Encoding indicators and
-big floats are not currently supported.
+The encoding of arrays and maps uses indefinite-length encoding. All floats
+are currently encoded using decimal fractions. Encoding indicators and big
+floats are not currently supported.
 
 
 API documentation

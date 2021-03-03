@@ -43,8 +43,8 @@ Representation
 Encoding
 --------
 
-The encoding of atoms, arrays, and maps uses indefinite-length encoding.
-All floats are currently encoded using decimal fractions. Encoding
+The encoding of arrays and maps uses indefinite-length encoding. All
+floats are currently encoded using decimal fractions. Encoding
 indicators and big floats are not currently supported.
 
 API documentation
