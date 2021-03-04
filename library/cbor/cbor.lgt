@@ -22,9 +22,9 @@
 :- object(cbor).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2021-03-03,
+		date is 2021-03-04,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
 	]).
 
@@ -69,13 +69,23 @@
 	encode(tag(N, Data)) --> !, encode_tag(N, Data).
 	encode(simple(N)) --> !, encode_simple(N).
 	encode(bytes(Bytes)) --> !, {length(Bytes, Length)}, encode_byte_string(Length, Bytes).
+	encode(chars(Chars)) --> !, encode_utf_8_chars(Chars).
+	encode(codes(Codes)) --> !, encode_utf_8_codes(Codes).
+	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_atom(Atom).
 	encode(Integer) --> {integer(Integer)}, !, encode_integer(Integer).
 	encode(Float) --> {float(Float)}, !, encode_float(Float).
-	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_string(Atom).
 	encode(Term) --> {domain_error(term, Term)}.
 
-	encode_utf_8_string(Atom) -->
-		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes), length(Bytes, Length)},
+	encode_utf_8_chars(Chars) -->
+		{utf_8_chars_to_bytes(Chars, Bytes, 0, Length)},
+		encode_utf_8_string(Length, Bytes).
+
+	encode_utf_8_codes(Codes) -->
+		{utf_8_codes_to_bytes(Codes, Bytes, 0, Length)},
+		encode_utf_8_string(Length, Bytes).
+
+	encode_utf_8_atom(Atom) -->
+		{atom_codes(Atom, Codes), utf_8_codes_to_bytes(Codes, Bytes, 0, Length)},
 		encode_utf_8_string(Length, Bytes).
 
 	% UTF-8 string (0x00..0x17 bytes follow)
@@ -649,30 +659,90 @@
 		;	Float is (-1) ** Sign * (1 + Significand * 2 ** -52) * 2 ** (Exponent - 1023)
 		).
 
-	utf_8_codes_to_bytes([], []).
-	utf_8_codes_to_bytes([Code| Codes], [Code| Bytes]) :-
+	utf_8_chars_to_bytes([], [], Length, Length).
+	utf_8_chars_to_bytes([Char| Chars], [Code| Bytes], Length0, Length) :-
+		char_code(Char, Code),
 		Code < 0x80,
 		!,
-		utf_8_codes_to_bytes(Codes, Bytes).
-	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2| Bytes]) :-
+		Length1 is Length0 + 1,
+		utf_8_chars_to_bytes(Chars, Bytes, Length1, Length).
+	utf_8_chars_to_bytes([Char| Chars], [Byte1, Byte2| Bytes], Length0, Length) :-
+		char_code(Char, Code),
 		Code < 0x800,
 		!,
 		Byte1 is 0xc0 \/ (Code >> 6),
 		Byte2 is 0x80 \/ (Code /\ 0x3f),
-		utf_8_codes_to_bytes(Codes, Bytes).
-	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2, Byte3| Bytes]) :-
+		Length1 is Length0 + 2,
+		utf_8_chars_to_bytes(Chars, Bytes, Length1, Length).
+	utf_8_chars_to_bytes([Char| Chars], [Byte1, Byte2, Byte3| Bytes], Length0, Length) :-
+		char_code(Char, Code),
 		Code < 0x10000,
 		!,
 		Byte1 is 0xe0 \/ (Code >> 12),
 		Byte2 is 0x80 \/ ((Code >> 6) /\ 0x3f),
 		Byte3 is 0x80 \/ (Code /\ 0x3f),
-		utf_8_codes_to_bytes(Codes, Bytes).
-	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2, Byte3, Byte4| Bytes]) :-
+		Length1 is Length0 + 3,
+		utf_8_chars_to_bytes(Chars, Bytes, Length1, Length).
+	utf_8_chars_to_bytes([Char| Chars], [Byte1, Byte2, Byte3, Byte4| Bytes], Length0, Length) :-
+		char_code(Char, Code),
 		Byte1 is 0xF0 \/ ((Code >> 18) /\ 0x07),
 		Byte2 is 0x80 \/ ((Code >> 12) /\ 0x3f),
 		Byte3 is 0x80 \/ ((Code >>  6) /\ 0x3f),
 		Byte4 is 0x80 \/ ((Code >>  0) /\ 0x3f),
-		utf_8_codes_to_bytes(Codes, Bytes).
+		Length1 is Length0 + 4,
+		utf_8_chars_to_bytes(Chars, Bytes, Length1, Length).
+
+	utf_8_codes_to_bytes([], [], Length, Length).
+	utf_8_codes_to_bytes([Code| Codes], [Code| Bytes], Length0, Length) :-
+		Code < 0x80,
+		!,
+		Length1 is Length0 + 1,
+		utf_8_codes_to_bytes(Codes, Bytes, Length1, Length).
+	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2| Bytes], Length0, Length) :-
+		Code < 0x800,
+		!,
+		Byte1 is 0xc0 \/ (Code >> 6),
+		Byte2 is 0x80 \/ (Code /\ 0x3f),
+		Length1 is Length0 + 2,
+		utf_8_codes_to_bytes(Codes, Bytes, Length1, Length).
+	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2, Byte3| Bytes], Length0, Length) :-
+		Code < 0x10000,
+		!,
+		Byte1 is 0xe0 \/ (Code >> 12),
+		Byte2 is 0x80 \/ ((Code >> 6) /\ 0x3f),
+		Byte3 is 0x80 \/ (Code /\ 0x3f),
+		Length1 is Length0 + 3,
+		utf_8_codes_to_bytes(Codes, Bytes, Length1, Length).
+	utf_8_codes_to_bytes([Code| Codes], [Byte1, Byte2, Byte3, Byte4| Bytes], Length0, Length) :-
+		Byte1 is 0xF0 \/ ((Code >> 18) /\ 0x07),
+		Byte2 is 0x80 \/ ((Code >> 12) /\ 0x3f),
+		Byte3 is 0x80 \/ ((Code >>  6) /\ 0x3f),
+		Byte4 is 0x80 \/ ((Code >>  0) /\ 0x3f),
+		Length1 is Length0 + 4,
+		utf_8_codes_to_bytes(Codes, Bytes, Length1, Length).
+
+	bytes_to_utf_8_chars([], []).
+	bytes_to_utf_8_chars([Byte| Bytes], [Char| Chars]) :-
+		Byte < 0x80,
+		!,
+		char_code(Char, Byte),
+		bytes_to_utf_8_chars(Bytes, Chars).
+	bytes_to_utf_8_chars([Byte1, Byte2| Bytes], [Char| Chars]) :-
+		Byte1 < 0xe0,
+		!,
+		Code is ((Byte1 /\ 0x1f) << 6) \/ (Byte2 /\ 0x3f),
+		char_code(Char, Code),
+		bytes_to_utf_8_chars(Bytes, Chars).
+	bytes_to_utf_8_chars([Byte1, Byte2, Byte3| Bytes], [Char| Chars]) :-
+		Byte1 < 0xf0,
+		!,
+		Code is ((Byte1 /\ 0xf) << 12) \/ ((Byte2 /\ 0x3f) << 6) \/ (Byte3 /\ 0x3f),
+		char_code(Char, Code),
+		bytes_to_utf_8_chars(Bytes, Chars).
+	bytes_to_utf_8_chars([Byte1, Byte2, Byte3, Byte4| Bytes], [Char| Chars]) :-
+		Code is ((Byte1 /\ 0x7) << 18) \/ ((Byte2 /\ 0x3f) << 12) \/ ((Byte3 /\ 0x3f) << 6) \/ (Byte4 /\ 0x3f),
+		char_code(Char, Code),
+		bytes_to_utf_8_chars(Bytes, Chars).
 
 	bytes_to_utf_8_codes([], []).
 	bytes_to_utf_8_codes([Byte| Bytes], [Byte| Codes]) :-

@@ -256,8 +256,9 @@ supporting unbounded integer arithmetic.</p>
 <li><p>Maps are represented using curly-bracketed terms, <code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where
 each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p></li>
 <li><p>Arrays are represented using lists.</p></li>
-<li><p>Byte strings uses <code class="docutils literal notranslate"><span class="pre">bytes(Bytes)</span></code> compound terms.</p></li>
-<li><p>Text streams are represented using atoms.</p></li>
+<li><p>Byte strings uses <code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code> compound terms.</p></li>
+<li><p>Text strings can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>.</p></li>
 <li><p>Tagged data uses <code class="docutils literal notranslate"><span class="pre">tag(Tag,</span> <span class="pre">Data)</span></code> compound terms.</p></li>
 <li><p>Simple values can be represented using <code class="docutils literal notranslate"><span class="pre">simple(Simple)</span></code> compound
 terms.</p></li>

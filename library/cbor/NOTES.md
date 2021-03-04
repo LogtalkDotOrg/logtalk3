@@ -39,9 +39,9 @@ uses the representation `Key-Value`.
 
 - Arrays are represented using lists.
 
-- Byte strings uses `bytes(Bytes)` compound terms.
+- Byte strings uses `bytes(List)` compound terms.
 
-- Text streams are represented using atoms.
+- Text strings can be represented as atoms, `chars(List)`, or `codes(List)`.
 
 - Tagged data uses `tag(Tag, Data)` compound terms.
 

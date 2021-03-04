@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2021-03-03,
+		date is 2021-03-04,
 		comment is 'Unit tests for the "cbor" library (common).'
 	]).
 
@@ -299,6 +299,22 @@
 	test(cbor_parse_2_81, true(Term == {'Fun'-(@true), 'Amt'-(-2)})) :-
 		parse([0xbf, 0x63, 0x46, 0x75, 0x6e, 0xf5, 0x63, 0x41, 0x6d, 0x74, 0x21, 0xff], Term).
 
+	% indefinite length encoding tests
+
+	test(cbor_indefinite_length_byte_string_empty, true(Term == bytes([]))) :-
+		parse([0x5f, 0xff], Term).
+
+	test(cbor_indefinite_length_byte_string_non_empty, true(Term == bytes([0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, 0x99]))) :-
+		parse([0x5f, 0x44, 0xaa, 0xbb, 0xcc, 0xdd, 0x43, 0xee, 0xff, 0x99, 0xff], Term).
+
+	% fixed length encoding tests
+
+	test(cbor_fixed_length_text_string, true(Term == 'hello world')) :-
+		parse([0x6b, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64], Term).
+
+	test(cbor_fixed_length_map, true(Term == {a-1,b-2,c-3})) :-
+		parse([0xa3, 0x61, 0x61, 0x01, 0x61, 0x62, 0x02, 0x61, 0x63, 0x03], Term).
+
 	% generate/2 tests
 
 	test(cbor_generate_2_01, true(Encoding == [0x00])) :-
@@ -523,12 +539,14 @@
 	test(cbor_generate_2_58, true(Encoding == [0x62, 0x27, 0x5c])) :-
 		generate('\'\\', Encoding).
 
-%   |"\u00fc"                      | 0x62c3bc                           |
-%   +------------------------------+------------------------------------+
-%   |"\u6c34"                      | 0x63e6b0b4                         |
-%   +------------------------------+------------------------------------+
-%   |"\ud800\udd51"                | 0x64f0908591                       |
-%   +------------------------------+------------------------------------+
+%	test(cbor_generate_2_59, true(Encoding == [0x62, 0xc3, 0xbc])) :-
+%		generate('\u00fc', Encoding).
+%
+%	test(cbor_generate_2_60, true(Encoding == [0x63, 0xe6, 0xb0, 0xb4])) :-
+%		generate('\u6c34', Encoding).
+%
+%	test(cbor_generate_2_61, true(Encoding == [0x64, 0xf0, 0x90, 0x85, 0x91])) :-
+%		generate('\ud800\udd51', Encoding).
 
 	test(cbor_generate_2_62, true(Encoding == [0x80])) :-
 		generate([], Encoding).
@@ -563,45 +581,15 @@
 	test(cbor_generate_2_70b, true(Encoding == [191,97,97,97,65,97,98,97,66,97,99,97,67,97,100,97,68,97,101,97,69,255])) :-
 		generate({a-'A', b-'B', c-'C', d-'D', e-'E'}, Encoding).
 
-%   |(_ h'0102', h'030405')        | 0x5f42010243030405ff               |
-%   +------------------------------+------------------------------------+
-%   |(_ "strea", "ming")           | 0x7f657374726561646d696e67ff       |
-%   +------------------------------+------------------------------------+
-%   |[_ ]                          | 0x9fff                             |
-%   +------------------------------+------------------------------------+
-%   |[_ 1, [2, 3], [_ 4, 5]]       | 0x9f018202039f0405ffff             |
-%   +------------------------------+------------------------------------+
-%   |[_ 1, [2, 3], [4, 5]]         | 0x9f01820203820405ff               |
-%   +------------------------------+------------------------------------+
-%   |[1, [2, 3], [_ 4, 5]]         | 0x83018202039f0405ff               |
-%   +------------------------------+------------------------------------+
-%   |[1, [_ 2, 3], [4, 5]]         | 0x83019f0203ff820405               |
-%   +------------------------------+------------------------------------+
-%   |[_ 1, 2, 3, 4, 5, 6, 7, 8, 9, | 0x9f0102030405060708090a0b0c0d0e0f |
-%   |10, 11, 12, 13, 14, 15, 16,   | 101112131415161718181819ff         |
-%   |17, 18, 19, 20, 21, 22, 23,   |                                    |
-%   |24, 25]                       |                                    |
-%   +------------------------------+------------------------------------+
-%   |{_ "a": 1, "b": [_ 2, 3]}     | 0xbf61610161629f0203ffff           |
-%   +------------------------------+------------------------------------+
-%   |["a", {_ "b": "c"}]           | 0x826161bf61626163ff               |
-%   +------------------------------+------------------------------------+
-%   |{_ "Fun": true, "Amt": -2}    | 0xbf6346756ef563416d7421ff
+	% text representation
 
-	% indefinite length encoding tests
+	test(cbor_generate_2_atom, true(Encoding == [99, 97, 98, 99])) :-
+		generate(abc, Encoding).
 
-	test(cbor_indefinite_length_byte_string_empty, true(Term == bytes([]))) :-
-		parse([0x5f, 0xff], Term).
+	test(cbor_generate_2_chars, true(Encoding == [99, 97, 98, 99])) :-
+		generate(chars([a,b,c]), Encoding).
 
-	test(cbor_indefinite_length_byte_string_non_empty, true(Term == bytes([0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, 0x99]))) :-
-		parse([0x5f, 0x44, 0xaa, 0xbb, 0xcc, 0xdd, 0x43, 0xee, 0xff, 0x99, 0xff], Term).
-
-	% fixed length encoding tests
-
-	test(cbor_fixed_length_text_string, true(Term == 'hello world')) :-
-		parse([0x6b, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64], Term).
-
-	test(cbor_fixed_length_map, true(Term == {a-1,b-2,c-3})) :-
-		parse([0xa3, 0x61, 0x61, 0x01, 0x61, 0x62, 0x02, 0x61, 0x63, 0x03], Term).
+	test(cbor_generate_2_codes, true(Encoding == [99, 97, 98, 99])) :-
+		generate(codes([97,98,99]), Encoding).
 
 :- end_object.
