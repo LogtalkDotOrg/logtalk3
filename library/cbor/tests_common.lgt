@@ -228,6 +228,24 @@
 	test(cbor_parse_2_54, true(Term == bytes([0x01, 0x02, 0x03, 0x04]))) :-
 		parse([0x44, 0x01, 0x02, 0x03, 0x04], Term).
 
+	test(cbor_parse_2_55, true(Term == '')) :-
+		parse([0x60], Term).
+
+	test(cbor_parse_2_56, true(Term == 'a')) :-
+		parse([0x61, 0x61], Term).
+
+	test(cbor_parse_2_57, true(Term == 'IETF')) :-
+		parse([0x64, 0x49, 0x45, 0x54, 0x46], Term).
+
+	test(cbor_parse_2_58, true(Term == '\'\\')) :-
+		parse([0x62, 0x27, 0x5c], Term).
+
+	test(cbor_parse_2_59, true(Term == '\x00fc\')) :-
+		parse([0x62, 0xc3, 0xbc], Term).
+
+	test(cbor_parse_2_60, true(Term == '\x6c34\')) :-
+		parse([0x63, 0xe6, 0xb0, 0xb4], Term).
+
 	test(cbor_parse_2_62, true(Term == [])) :-
 		parse([0x80], Term).
 
@@ -539,14 +557,11 @@
 	test(cbor_generate_2_58, true(Encoding == [0x62, 0x27, 0x5c])) :-
 		generate('\'\\', Encoding).
 
-%	test(cbor_generate_2_59, true(Encoding == [0x62, 0xc3, 0xbc])) :-
-%		generate('\u00fc', Encoding).
-%
-%	test(cbor_generate_2_60, true(Encoding == [0x63, 0xe6, 0xb0, 0xb4])) :-
-%		generate('\u6c34', Encoding).
-%
-%	test(cbor_generate_2_61, true(Encoding == [0x64, 0xf0, 0x90, 0x85, 0x91])) :-
-%		generate('\ud800\udd51', Encoding).
+	test(cbor_generate_2_59, true(Encoding == [0x62, 0xc3, 0xbc])) :-
+		generate('\x00fc\', Encoding).
+
+	test(cbor_generate_2_60, true(Encoding == [0x63, 0xe6, 0xb0, 0xb4])) :-
+		generate('\x6c34\', Encoding).
 
 	test(cbor_generate_2_62, true(Encoding == [0x80])) :-
 		generate([], Encoding).
