@@ -22,7 +22,7 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:10:1,
 		author is 'Paulo Moura',
 		date is 2021-03-04,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
@@ -242,7 +242,11 @@
 		domain_error(cbor_byte_sequence, Bytes).
 
 	decode(Term) -->
+		% use the first byte to take advantage
+		% of first-argument indexing
 		[Byte], decode(Byte, Term).
+
+	decode(Byte, _) --> {var(Byte), instantiation_error}.
 
 	decode(0xf4, @false) --> !.
 	decode(0xf5, @true) --> !.
@@ -251,8 +255,6 @@
 	decode(0xf9, @infinity) --> [0x7c, 0x00], !.
 	decode(0xf9, @negative_infinity) --> [0xfc, 0x00], !.
 	decode(0xf9, @not_a_number) --> [0x7e, 0x00], !.
-	decode(0xf9, 0.0) --> [0x00, 0x00], !.
-	decode(0xf9, -0.0) --> [0x80, 0x00], !.
 
 	% unsigned integer 0x00..0x17 (0..23)
 	decode(Integer, Integer) -->
@@ -409,6 +411,8 @@
 	decode(0xbb, {Pairs}) -->
 		!, decode_map(8, Pairs).
 	% map, pairs of data items follow, terminated by "break"
+	decode(0xbf, {}) -->
+		[0xff], !.
 	decode(0xbf, {Pairs}) -->
 		!, decode_indefinite_length_map(Pairs).
 

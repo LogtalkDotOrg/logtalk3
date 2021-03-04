@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
 		date is 2021-03-04,
 		comment is 'Unit tests for the "cbor" library (common).'
@@ -326,6 +326,12 @@
 
 	test(cbor_indefinite_length_byte_string_non_empty, true(Term == bytes([0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, 0x99]))) :-
 		parse([0x5f, 0x44, 0xaa, 0xbb, 0xcc, 0xdd, 0x43, 0xee, 0xff, 0x99, 0xff], Term).
+
+	test(cbor_indefinite_length_array_empty, true(Term == [])) :-
+		parse([0x9f, 0xff], Term).
+
+	test(cbor_indefinite_length_map_empty, true(Term == {})) :-
+		parse([0xbf, 0xff], Term).
 
 	% fixed length encoding tests
 
