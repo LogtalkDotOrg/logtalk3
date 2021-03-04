@@ -41,7 +41,7 @@
 	:- public(generate/2).
 	:- mode(generate(@ground, -list(byte)), one_or_error).
 	:- info(generate/2, [
-		comment is 'Generates a list of bytes in the CBOR format representing the given term. Throws an error when parsing is not possible (usually due to a term that have no CBOR corresponding representation).',
+		comment is 'Generates a list of bytes in the CBOR format representing the given term. Throws an error when generating is not possible (usually due to a term that have no CBOR corresponding representation).',
 		argnames is ['Term', 'Bytes']
 	]).
 
@@ -552,11 +552,6 @@
 
 	% auxiliary non-terminals
 
-	bytes_until_break([Byte| Bytes]) -->
-		[Byte], {Byte =\= 0xff}, !, bytes_until_break(Bytes).
-	bytes_until_break([]) -->
-		[0xff].
-
 	bytes(0, []) -->
 		!, [].
 	bytes(N, [Byte| Bytes]) -->
@@ -753,29 +748,6 @@
 		Byte4 is 0x80 \/ ((Code >>  0) /\ 0x3f),
 		Length1 is Length0 + 4,
 		utf_8_codes_to_bytes(Codes, Bytes, Length1, Length).
-
-	bytes_to_utf_8_chars([], []).
-	bytes_to_utf_8_chars([Byte| Bytes], [Char| Chars]) :-
-		Byte < 0x80,
-		!,
-		char_code(Char, Byte),
-		bytes_to_utf_8_chars(Bytes, Chars).
-	bytes_to_utf_8_chars([Byte1, Byte2| Bytes], [Char| Chars]) :-
-		Byte1 < 0xe0,
-		!,
-		Code is ((Byte1 /\ 0x1f) << 6) \/ (Byte2 /\ 0x3f),
-		char_code(Char, Code),
-		bytes_to_utf_8_chars(Bytes, Chars).
-	bytes_to_utf_8_chars([Byte1, Byte2, Byte3| Bytes], [Char| Chars]) :-
-		Byte1 < 0xf0,
-		!,
-		Code is ((Byte1 /\ 0xf) << 12) \/ ((Byte2 /\ 0x3f) << 6) \/ (Byte3 /\ 0x3f),
-		char_code(Char, Code),
-		bytes_to_utf_8_chars(Bytes, Chars).
-	bytes_to_utf_8_chars([Byte1, Byte2, Byte3, Byte4| Bytes], [Char| Chars]) :-
-		Code is ((Byte1 /\ 0x7) << 18) \/ ((Byte2 /\ 0x3f) << 12) \/ ((Byte3 /\ 0x3f) << 6) \/ (Byte4 /\ 0x3f),
-		char_code(Char, Code),
-		bytes_to_utf_8_chars(Bytes, Chars).
 
 	bytes_to_utf_8_codes([], []).
 	bytes_to_utf_8_codes([Byte| Bytes], [Byte| Codes]) :-

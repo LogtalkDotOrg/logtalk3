@@ -65,9 +65,29 @@ Representation
 Encoding
 --------
 
+Encoding is accomplished using the ``generate/2`` predicate. For
+example:
+
+::
+
+   | ?- cbor::generate([a,{b-c}], Encoding).
+   Encoding = [0x9f,0x61,0x61,0xbf,0x61,0x62,0x61,0x63,0xff,0xff]
+   yes
+
 The encoding of arrays and maps uses indefinite-length encoding. All
 floats are currently encoded using decimal fractions. Encoding
 indicators and big floats are not currently supported.
+
+Decoding
+--------
+
+Decoding is accomplished using the ``parse/2`` predicate. For example:
+
+::
+
+   | ?- cbor::parse([0x9f,0x61,0x61,0xbf,0x61,0x62,0x61,0x63,0xff,0xff], Term).
+   Term = [a,{b-c}]
+   yes
 
 API documentation
 -----------------

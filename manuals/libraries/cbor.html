@@ -120,6 +120,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encoding">Encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decoding">Decoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -297,9 +298,25 @@ as an alternative for encoding. The decoder, however, produces the
 </div>
 <div class="section" id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<p>Encoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> predicate. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> cbor<span class="o">::</span>generate([a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>], <span class="nv">Encoding</span>).
+<span class="nv">Encoding</span> <span class="o">=</span> [<span class="mh">0x9f</span>,<span class="mh">0x61</span>,<span class="mh">0x61</span>,<span class="mh">0xbf</span>,<span class="mh">0x61</span>,<span class="mh">0x62</span>,<span class="mh">0x61</span>,<span class="mh">0x63</span>,<span class="mh">0xff</span>,<span class="mh">0xff</span>]
+yes
+</pre></div>
+</div>
 <p>The encoding of arrays and maps uses indefinite-length encoding. All
 floats are currently encoded using decimal fractions. Encoding
 indicators and big floats are not currently supported.</p>
+</div>
+<div class="section" id="decoding">
+<h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h2>
+<p>Decoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> cbor<span class="o">::</span>parse([<span class="mh">0x9f</span>,<span class="mh">0x61</span>,<span class="mh">0x61</span>,<span class="mh">0xbf</span>,<span class="mh">0x61</span>,<span class="mh">0x62</span>,<span class="mh">0x61</span>,<span class="mh">0x63</span>,<span class="mh">0xff</span>,<span class="mh">0xff</span>], <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> [a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>]
+yes
+</pre></div>
+</div>
 </div>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>

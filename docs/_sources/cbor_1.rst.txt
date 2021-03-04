@@ -70,7 +70,7 @@ Parses a list of bytes in the CBOR format returning the corresponding term repre
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates a list of bytes in the CBOR format representing the given term. Throws an error when parsing is not possible (usually due to a term that have no CBOR corresponding representation).
+Generates a list of bytes in the CBOR format representing the given term. Throws an error when generating is not possible (usually due to a term that have no CBOR corresponding representation).
 
 | **Compilation flags:**
 |    ``static``
