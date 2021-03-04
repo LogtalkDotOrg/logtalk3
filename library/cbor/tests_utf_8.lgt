@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-03-02,
+		date is 2021-03-04,
 		comment is 'Unit tests for the "cbor" library (UTF-8 text strings).'
 	]).
 
@@ -40,6 +40,7 @@
 	]).
 
 	cover(cbor).
+	cover(cbor(_)).
 
 	condition :-
 		current_prolog_flag(bounded, false).

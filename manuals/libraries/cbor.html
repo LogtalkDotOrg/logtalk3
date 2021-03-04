@@ -252,13 +252,34 @@ data in the Concise Binary Object Representation (CBOR) format:</p>
 supporting unbounded integer arithmetic.</p>
 <div class="section" id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
+<ul>
 <li><p>Maps are represented using curly-bracketed terms, <code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where
 each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p></li>
 <li><p>Arrays are represented using lists.</p></li>
 <li><p>Byte strings uses <code class="docutils literal notranslate"><span class="pre">bytes(List)</span></code> compound terms.</p></li>
 <li><p>Text strings can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>. The default when decoding is to use atoms when using
+the <code class="docutils literal notranslate"><span class="pre">cbor</span></code> object. To decode text strings into lists of chars or
+code, use the <code class="docutils literal notranslate"><span class="pre">cbor/1</span></code> with the parameter bound to <code class="docutils literal notranslate"><span class="pre">chars</span></code> or
+<code class="docutils literal notranslate"><span class="pre">codes</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> cbor<span class="o">::</span>parse([<span class="mh">0x65</span>,<span class="mh">0x68</span>,<span class="mh">0x65</span>,<span class="mh">0x6c</span>,<span class="mh">0x6c</span>,<span class="mh">0x6f</span>], <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> hello
+yes
+
+| <span class="o">?-</span> cbor(atom)<span class="o">::</span>parse([<span class="mh">0x65</span>,<span class="mh">0x68</span>,<span class="mh">0x65</span>,<span class="mh">0x6c</span>,<span class="mh">0x6c</span>,<span class="mh">0x6f</span>], <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> hello
+yes
+
+| <span class="o">?-</span> cbor(chars)<span class="o">::</span>parse([<span class="mh">0x65</span>,<span class="mh">0x68</span>,<span class="mh">0x65</span>,<span class="mh">0x6c</span>,<span class="mh">0x6c</span>,<span class="mh">0x6f</span>], <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> chars([h,<span class="o">e</span>,l,l,o])
+yes
+
+| <span class="o">?-</span> cbor(codes)<span class="o">::</span>parse([<span class="mh">0x65</span>,<span class="mh">0x68</span>,<span class="mh">0x65</span>,<span class="mh">0x6c</span>,<span class="mh">0x6c</span>,<span class="mh">0x6f</span>], <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> codes([<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>])
+yes
+</pre></div>
+</div>
+</li>
 <li><p>Tagged data uses <code class="docutils literal notranslate"><span class="pre">tag(Tag,</span> <span class="pre">Data)</span></code> compound terms.</p></li>
 <li><p>Simple values can be represented using <code class="docutils literal notranslate"><span class="pre">simple(Simple)</span></code> compound
 terms.</p></li>

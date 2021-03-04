@@ -136,6 +136,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    cbor <cbor_0>
+   cbor(StringRepresentation) <cbor_1>
 
 ``library/coroutining/``
 ------------------------

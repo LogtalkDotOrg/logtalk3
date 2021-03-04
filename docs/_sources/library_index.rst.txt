@@ -50,6 +50,7 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
 
    cbor <cbor_0>
+   cbor(StringRepresentation) <cbor_1>
 
 ``code_metrics``
 ----------------

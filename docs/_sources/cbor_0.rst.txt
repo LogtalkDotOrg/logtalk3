@@ -8,24 +8,24 @@
 ``cbor``
 ========
 
-Concise Binary Object Representation (CBOR) format exporter and importer library.
+Concise Binary Object Representation (CBOR) format exporter and importer. Uses atoms to represent decoded CBOR strings.
 
 | **Author:** Paulo Moura
-| **Version:** 0:9:0
+| **Version:** 1:0:0
 | **Date:** 2021-03-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Uses:**
-|    :ref:`list <list/0>`
+| **Extends:**
+|    ``public`` :ref:`cbor(atom) <cbor/1>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`cbor/1::generate/2`  :ref:`cbor/1::parse/2`  
 
 .. contents::
    :local:
@@ -34,51 +34,7 @@ Concise Binary Object Representation (CBOR) format exporter and importer library
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="parse/2"> </div>
-
-.. index:: parse/2
-.. _cbor/0::parse/2:
-
-``parse/2``
-^^^^^^^^^^^
-
-Parses a list of bytes in the CBOR format returning the corresponding term representation. Throws an error when parsing is not possible (usually due to an invalid byte sequence).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``parse(Bytes,Term)``
-| **Mode and number of proofs:**
-|    ``parse(@list(byte),-ground)`` - ``one_or_error``
-
-
-------------
-
-.. raw:: html
-
-   <div id="generate/2"> </div>
-
-.. index:: generate/2
-.. _cbor/0::generate/2:
-
-``generate/2``
-^^^^^^^^^^^^^^
-
-Generates a list of bytes in the CBOR format representing the given term. Throws an error when parsing is not possible (usually due to a term that have no CBOR corresponding representation).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``generate(Term,Bytes)``
-| **Mode and number of proofs:**
-|    ``generate(@ground,-list(byte))`` - ``one_or_error``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------

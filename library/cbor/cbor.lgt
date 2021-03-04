@@ -19,13 +19,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(cbor).
+:- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
 		date is 2021-03-04,
-		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer library.'
+		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
+		parameters is [
+			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
+		]
 	]).
 
 	:- public(parse/2).
@@ -329,25 +332,26 @@
 		!, decode_indefinite_length_byte_string(Bytes), [0xff].
 
 	% UTF-8 string (0x00..0x17 bytes follow)
-	decode(Byte, Atom) -->
+	decode(Byte, String) -->
 		{0x60 =< Byte, Byte =< 0x77}, !,
 		{Length is Byte - 0x60}, bytes(Length, Bytes),
-		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
+		{bytes_to_utf_8_codes(Bytes, Codes),
+		 cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)}.
 	% UTF-8 string (one-byte uint8_t for n, and then n bytes follow)
-	decode(0x78, Atom) -->
-		!, decode_utf_8_string(1, Atom).
+	decode(0x78, String) -->
+		!, decode_utf_8_string(1, String).
 	% UTF-8 string (two-byte uint16_t for n, and then n bytes follow)
-	decode(0x79, Atom) -->
-		!, decode_utf_8_string(2, Atom).
+	decode(0x79, String) -->
+		!, decode_utf_8_string(2, String).
 	% UTF-8 string (four-byte uint32_t for n, and then n bytes follow)
-	decode(0x7a, Atom) -->
-		!, decode_utf_8_string(4, Atom).
+	decode(0x7a, String) -->
+		!, decode_utf_8_string(4, String).
 	% UTF-8 string (eight-byte uint64_t for n, and then n bytes follow)
-	decode(0x7b, Atom) -->
-		!, decode_utf_8_string(8, Atom).
+	decode(0x7b, String) -->
+		!, decode_utf_8_string(8, String).
 	% UTF-8 string, UTF-8 strings follow, terminated by "break"
-	decode(0x7f, Atom) -->
-		!, decode_indefinite_length_text_string(Atom), [0xff].
+	decode(0x7f, String) -->
+		!, decode_indefinite_length_text_string(String), [0xff].
 
 	% (simple value)
 	decode(Byte, simple(Simple)) -->
@@ -456,24 +460,53 @@
 	decode_byte_string_chunks(Bytes, Bytes) -->
 		[].
 
-	decode_utf_8_string(N, Atom) -->
+	decode_utf_8_string(N, String) -->
 		bytes_reversed(N, LengthBytes),
 		{bytes_to_integer(LengthBytes, Length)},
 		bytes(Length, Bytes),
-		{bytes_to_utf_8_codes(Bytes, Codes), atom_codes(Atom, Codes)}.
+		{bytes_to_utf_8_codes(Bytes, Codes),
+		 cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)}.
 
-	decode_indefinite_length_text_string(Atom) -->
-		decode_text_string_chunks('', Atom).
+	cbor_utf_8_string_to_string_term(atom, Codes, Atom) :-
+		 atom_codes(Atom, Codes).
+	cbor_utf_8_string_to_string_term(chars, Codes, chars(Chars)) :-
+		 codes_to_chars(Codes, Chars).
+	cbor_utf_8_string_to_string_term(codes, Codes, codes(Codes)).
 
-	decode_text_string_chunks(Atom0, Atom) -->
+	codes_to_chars([], []).
+	codes_to_chars([Code| Codes], [Char| Chars]) :-
+		char_code(Char, Code),
+		codes_to_chars(Codes, Chars).
+
+	decode_indefinite_length_text_string(String) -->
+		{empty_string(_StringRepresentation_, EmptyString)},
+		decode_text_string_chunks(EmptyString, String0),
+		{cbor_out_8_string_chunks_to_string_term(_StringRepresentation_, String0, String)}.
+
+	empty_string(atom,  '').
+	empty_string(chars, []).
+	empty_string(codes, []).
+
+	decode_text_string_chunks(String0, String) -->
 		[Byte],
 		{0x60 =< Byte, Byte =< 0x7b},
-		decode(Byte, Atom1),
+		decode(Byte, String1),
 		!,
-		{atom_concat(Atom0, Atom1, Atom2)},
-		decode_text_string_chunks(Atom2, Atom).
-	decode_text_string_chunks(Atom, Atom) -->
+		{string_append(_StringRepresentation_, String0, String1, String2)},
+		decode_text_string_chunks(String2, String).
+	decode_text_string_chunks(String, String) -->
 		[].
+
+	string_append(atom, String0, String1, String2) :-
+		atom_concat(String0, String1, String2).
+	string_append(chars, String0, String1, String2) :-
+		append(String0, String1, String2).
+	string_append(codes, String0, String1, String2) :-
+		append(String0, String1, String2).
+
+	cbor_out_8_string_chunks_to_string_term(atom,  Atom,  Atom).
+	cbor_out_8_string_chunks_to_string_term(chars, Chars, chars(Chars)).
+	cbor_out_8_string_chunks_to_string_term(codes, Codes, codes(Codes)).
 
 	decode_array(N, List) -->
 		bytes_reversed(N, Bytes),
@@ -762,5 +795,18 @@
 	bytes_to_utf_8_codes([Byte1, Byte2, Byte3, Byte4| Bytes], [Code| Codes]) :-
 		Code is ((Byte1 /\ 0x7) << 18) \/ ((Byte2 /\ 0x3f) << 12) \/ ((Byte3 /\ 0x3f) << 6) \/ (Byte4 /\ 0x3f),
 		bytes_to_utf_8_codes(Bytes, Codes).
+
+:- end_object.
+
+
+:- object(cbor,
+	extends(cbor(atom))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2021-03-04,
+		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer. Uses atoms to represent decoded CBOR strings.'
+	]).
 
 :- end_object.

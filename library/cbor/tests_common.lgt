@@ -38,12 +38,14 @@
 	]).
 
 	cover(cbor).
+	cover(cbor(_)).
 
 	condition :-
 		current_prolog_flag(bounded, false).
 
 	% test cases from the https://tools.ietf.org/html/rfc8949#appendix-A table
-	% the test numbers are the table row numbers
+	% the test numbers are the table row numbers; all encoding tests that use
+	% encoding indicators are ommitted as these are not currently supported
 
 	% parse/2 tests
 
@@ -332,6 +334,17 @@
 
 	test(cbor_fixed_length_map, true(Term == {a-1,b-2,c-3})) :-
 		parse([0xa3, 0x61, 0x61, 0x01, 0x61, 0x62, 0x02, 0x61, 0x63, 0x03], Term).
+
+	% text representation tests
+
+	test(cbor_string_as_atom, true(Term == 'hello')) :-
+		cbor(atom)::parse([0x65, 0x68, 0x65, 0x6c, 0x6c, 0x6f], Term).
+
+	test(cbor_string_as_chars, true(Term == chars([h,e,l,l,o]))) :-
+		cbor(chars)::parse([0x65, 0x68, 0x65, 0x6c, 0x6c, 0x6f], Term).
+
+	test(cbor_string_as_codes, true(Term == codes([104, 101, 108, 108, 111]))) :-
+		cbor(codes)::parse([0x65, 0x68, 0x65, 0x6c, 0x6c, 0x6f], Term).
 
 	% generate/2 tests
 

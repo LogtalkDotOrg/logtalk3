@@ -21,7 +21,28 @@ Representation
 -  Byte strings uses ``bytes(List)`` compound terms.
 
 -  Text strings can be represented as atoms, ``chars(List)``, or
-   ``codes(List)``.
+   ``codes(List)``. The default when decoding is to use atoms when using
+   the ``cbor`` object. To decode text strings into lists of chars or
+   code, use the ``cbor/1`` with the parameter bound to ``chars`` or
+   ``codes``. For example:
+
+   ::
+
+        | ?- cbor::parse([0x65,0x68,0x65,0x6c,0x6c,0x6f], Term).
+        Term = hello
+        yes
+
+        | ?- cbor(atom)::parse([0x65,0x68,0x65,0x6c,0x6c,0x6f], Term).
+        Term = hello
+        yes
+
+        | ?- cbor(chars)::parse([0x65,0x68,0x65,0x6c,0x6c,0x6f], Term).
+        Term = chars([h,e,l,l,o])
+        yes
+
+        | ?- cbor(codes)::parse([0x65,0x68,0x65,0x6c,0x6c,0x6f], Term).
+        Term = codes([104,101,108,108,111])
+        yes
 
 -  Tagged data uses ``tag(Tag, Data)`` compound terms.
 
