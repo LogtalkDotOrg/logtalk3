@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:0:0,
+		version is 9:0:1,
 		author is 'Paulo Moura',
-		date is 2021-02-09,
+		date is 2021-03-05,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2154,35 +2154,64 @@
 		retractall(covered_(_, _, _, _)).
 
 	write_coverage_results :-
-		(	setof(DeclaredEntity, ::cover(DeclaredEntity), DeclaredEntities) ->
-			print_message(information, lgtunit, code_coverage_header),
+		declared_entities(DeclaredEntities),
+		(	DeclaredEntities == [] ->
+			print_message(information, lgtunit, no_code_coverage_information_collected)
+		;	print_message(information, lgtunit, code_coverage_header),
 			write_entity_coverage_results(DeclaredEntities),
-			(	setof(TestedEntity, fired_entity(TestedEntity), TestedEntities) ->
-				true
-			;	TestedEntities = []
-			),
+			fired_entities(TestedEntities),
 			write_coverage_results_summary(DeclaredEntities, TestedEntities)
-		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
 
 	write_coverage_results(TestSets) :-
-		(	setof(DeclaredEntity, TestSet^(member(TestSet, TestSets), TestSet::cover(DeclaredEntity)), DeclaredEntities) ->
-			print_message(information, lgtunit, code_coverage_header),
+		declared_entities(TestSets, DeclaredEntities),
+		(	DeclaredEntities == [] ->
+			print_message(information, lgtunit, no_code_coverage_information_collected)
+		;	print_message(information, lgtunit, code_coverage_header),
 			write_entity_coverage_results(DeclaredEntities),
-			(	setof(TestedEntity, fired_entity(TestSets, TestedEntity), TestedEntities) ->
-				true
-			;	TestedEntities = []
-			),
+			fired_entities(TestSets, TestedEntities),
 			write_coverage_results_summary(DeclaredEntities, TestedEntities)
-		;	print_message(information, lgtunit, no_code_coverage_information_collected)
 		).
+
+	% the same entity can be declared as covered by multiple test sets; the
+	% following predicates use the entity indicators to avoid any duplicated
+	% code coverage results for parametric entities
+
+	declared_entities(Entities) :-
+		findall(
+			Name/Arity,
+			(::cover(Entity), functor(Entity, Name, Arity)),
+			Indicators
+		),
+		entity_indicators_to_templates(Indicators, Entities).
+
+	declared_entities(TestSets, Entities) :-
+		findall(
+			Name/Arity,
+			(member(TestSet, TestSets), TestSet::cover(Entity), functor(Entity, Name, Arity)),
+			Indicators
+		),
+		entity_indicators_to_templates(Indicators, Entities).
+
+	fired_entities(TestSets, Entities) :-
+		findall(
+			Name/Arity,
+			(member(TestSet, TestSets), TestSet::cover(Entity), fired_entity(Entity), functor(Entity, Name, Arity)),
+			Indicators
+		),
+		entity_indicators_to_templates(Indicators, Entities).
+
+	fired_entities(Entities) :-
+		findall(
+			Name/Arity,
+			(::cover(Entity), fired_entity(Entity), functor(Entity, Name, Arity)),
+			Indicators
+		),
+		entity_indicators_to_templates(Indicators, Entities).
 
 	% we consider objects and categories with no clauses also
 	% as "fired" in order to reported them as covered
-
-	fired_entity(TestSets, Entity) :-
-		member(TestSet, TestSets),
-		TestSet::cover(Entity),
+	fired_entity(Entity) :-
 		(	fired_(Entity, _, _) ->
 			true
 		;	current_object(Entity) ->
@@ -2192,15 +2221,14 @@
 		;	fail
 		).
 
-	fired_entity(Entity) :-
-		::cover(Entity),
-		(	fired_(Entity, _, _) ->
-			true
-		;	current_object(Entity) ->
-			object_property(Entity, number_of_user_clauses(0))
-		;	current_category(Entity) ->
-			category_property(Entity, number_of_user_clauses(0))
-		;	fail
+	entity_indicators_to_templates(Indicators, Entities) :-
+		sort(Indicators, Sorted),
+		findall(
+			Entity,
+			(	member(Name/Arity, Sorted),
+				functor(Entity, Name, Arity)
+			),
+			Entities
 		).
 
 	write_entity_coverage_results([]).

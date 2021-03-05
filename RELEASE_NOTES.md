@@ -103,6 +103,10 @@ as a single unified suite when using the xUnit formats.
 
 * UPDATED: Tools documentation on testing.
 
+* FIXED: Bug where the `lgtunit` tool would print duplicated code coverage
+stats for parametric entities when using multiple test sets. Thanks to Jacinto
+Dávila for the bug report.
+
 * FIXED: The cleanup step for the `lgtdoc` tool unit tests.
 
 Examples
