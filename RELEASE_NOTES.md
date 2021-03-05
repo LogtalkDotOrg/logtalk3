@@ -28,6 +28,8 @@ RELEASE NOTES
 Distribution
 ------------
 
+* REMOVED: Deprecated library loader files (predating library restructuring).
+
 * ADDED: SPDX short-form identifiers to most of the files in the distribution.
 
 Prolog adapter and integration files
