@@ -52,6 +52,7 @@ CONTRIBUTORS
 * Jan Wielemaker (feedback on Prolog compliance testing and engine examples)
 * Joachim Schimpf (feedback on Prolog compliance testing)
 * Joerg Schuster (bug reports)
+* Jeremy Vickery (bug reports)
 * John Fletcher (made XML parser available)
 * John Stewart (Java interface suggestions and solutions)
 * Joost Geurts (bug reports)

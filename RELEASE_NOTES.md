@@ -115,7 +115,7 @@ Installers and installation scripts
 -----------------------------------
 
 * FIXED: The manual `install.sh` script to use `mkdir -p` when creating the
-Logtalk installation directory.
+Logtalk installation directory. Thanks to Jeremy Vickery for the bug report.
 
 
 3.44.0 - February 3, 2021
