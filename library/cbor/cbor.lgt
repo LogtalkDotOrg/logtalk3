@@ -22,9 +22,9 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:10:1,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2021-03-04,
+		date is 2021-03-08,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -56,15 +56,7 @@
 		domain_error(cbor_term, Term).
 
 	encode(Term) --> {var(Term), instantiation_error}.
-	encode(@false) --> !, [0xf4].
-	encode(@true) --> !, [0xf5].
-	encode(@null) --> !, [0xf6].
-	encode(@undefined) --> !, [0xf7].
-	encode(@infinity) --> !, [0xf9, 0x7c, 0x00].
-	encode(@negative_infinity) --> !, [0xf9, 0xfc, 0x00].
-	encode(@not_a_number) --> !, [0xf9, 0x7e, 0x00].
-	encode(@zero) --> !, [0xf9, 0x00, 0x00].
-	encode(@negative_zero) --> !, [0xf9, 0x80, 0x00].
+	encode(@Literal) --> !, encode_literal(Literal).
 	encode([]) --> !, [0x80].
 	encode([Head| Tail]) --> !, [0x9f], encode_list([Head| Tail]), [0xff].
 	encode({}) --> !, [0xa0].
@@ -77,7 +69,18 @@
 	encode(Atom) --> {atom(Atom)}, !, encode_utf_8_atom(Atom).
 	encode(Integer) --> {integer(Integer)}, !, encode_integer(Integer).
 	encode(Float) --> {float(Float)}, !, encode_float(Float).
-	encode(Term) --> {domain_error(term, Term)}.
+	encode(Term) --> {domain_error(cbor_term, Term)}.
+
+	encode_literal(Literal) --> {var(Literal), instantiation_error}.
+	encode_literal(false) --> [0xf4].
+	encode_literal(true) --> [0xf5].
+	encode_literal(null) --> [0xf6].
+	encode_literal(undefined) --> [0xf7].
+	encode_literal(infinity) --> [0xf9, 0x7c, 0x00].
+	encode_literal(negative_infinity) --> [0xf9, 0xfc, 0x00].
+	encode_literal(not_a_number) --> [0xf9, 0x7e, 0x00].
+	encode_literal(zero) --> [0xf9, 0x00, 0x00].
+	encode_literal(negative_zero) --> [0xf9, 0x80, 0x00].
 
 	encode_utf_8_chars(Chars) -->
 		{utf_8_chars_to_bytes(Chars, Bytes, 0, Length)},
@@ -131,11 +134,11 @@
 
 	encode_float(0.0) -->
 		!,
-		encode(@zero).
+		encode_literal(zero).
 	% only some backend Prolog systems support a negative zero
 	encode_float(-0.0) -->
 		!,
-		encode(@negative_zero).
+		encode_literal(negative_zero).
 	% other floats are represented using decimal fractions
 	encode_float(Float) -->
 		[0xc4],
