@@ -24,7 +24,7 @@
 	:- info([
 		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-11,
+		date is 2021-03-09,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -266,12 +266,14 @@
 
 	failed_test_reason(success_instead_of_failure) -->
 		['  test goal succeeded but should have failed'-[], nl].
-	failed_test_reason(success_instead_of_error) -->
-		['  test goal succeeded but should have thrown an error'-[], nl].
+	failed_test_reason(success_instead_of_error(ExpectedError)) -->
+		['  test goal succeeded but should have thrown an error:'-[], nl],
+		['    expected ~q'-[ExpectedError], nl].
 	failed_test_reason(failure_instead_of_success) -->
 		['  test goal failed but should have succeeded'-[], nl].
-	failed_test_reason(failure_instead_of_error) -->
-		['  test goal failed but should have thrown an error'-[], nl].
+	failed_test_reason(failure_instead_of_error(ExpectedError)) -->
+		['  test goal failed but should have thrown an error:'-[], nl],
+		['    expected ~q'-[ExpectedError], nl].
 	failed_test_reason(non_deterministic_success) -->
 		['  test goal succeeded non-deterministically'-[], nl].
 	failed_test_reason(error_instead_of_failure(Error)) -->

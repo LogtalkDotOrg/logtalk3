@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:0:1,
+		version is 9:0:0,
 		author is 'Paulo Moura',
-		date is 2021-03-05,
+		date is 2021-03-09,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -878,10 +878,12 @@
 				cpu_time(Start),
 				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Note, Start, Output)) ->
 					(	var(Error) ->
-						failed_test(Test, File, Position, success_instead_of_error, Note, Start, Output)
+						PossibleErrors = [PossibleError| _],
+						failed_test(Test, File, Position, success_instead_of_error(PossibleError), Note, Start, Output)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_error, Note, Start, Output)
+				;	PossibleErrors = [PossibleError| _],
+					failed_test(Test, File, Position, failure_instead_of_error(PossibleError), Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -950,10 +952,12 @@
 		cpu_time(Start),
 		(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Start, Output)) ->
 			(	var(Error) ->
-				failed_test(Test, File, Position, success_instead_of_error, Start, Output)
+				PossibleErrors = [PossibleError| _],
+				failed_test(Test, File, Position, success_instead_of_error(PossibleError), Start, Output)
 			;	true
 			)
-		;	failed_test(Test, File, Position, failure_instead_of_error, Start, Output)
+		;	PossibleErrors = [PossibleError| _],
+			failed_test(Test, File, Position, failure_instead_of_error(PossibleError), Start, Output)
 		).
 
 	run_test(skipped(Test, Position, Note), File, Output) :-

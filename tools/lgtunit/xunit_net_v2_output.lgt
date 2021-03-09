@@ -31,7 +31,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-09,
+		date is 2021-03-09,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -220,11 +220,11 @@
 
 	% failed_test(Reason, Description, Type, Error)
 	failed_test(non_deterministic_success, 'Non-deterministic success', non_deterministic_success, '').
-	failed_test(failure_instead_of_error, 'Failure instead of error', failure_instead_of_error, '').
+	failed_test(failure_instead_of_error(Error), 'Failure instead of error', failure_instead_of_error, Error).
 	failed_test(failure_instead_of_success, 'Failure instead of success', failure_instead_of_success, '').
 	failed_test(error_instead_of_success(Error), 'Error instead of success', error_instead_of_success, Error).
 	failed_test(error_instead_of_failure(Error), 'Error instead of failure', error_instead_of_failure, Error).
-	failed_test(success_instead_of_error, 'Success instead of error', success_instead_of_error, '').
+	failed_test(success_instead_of_error(Error), 'Success instead of error', success_instead_of_error, Error).
 	failed_test(success_instead_of_failure, 'Success instead of failure', success_instead_of_failure, '').
 	failed_test(wrong_error(_, Error), 'Wrong error', wrong_error, Error).
 	failed_test(quick_check_failed(Error, _, _), 'QuickCheck test failed', quick_check_failed, Error).

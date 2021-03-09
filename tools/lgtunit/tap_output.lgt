@@ -31,7 +31,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-03-09,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'
@@ -143,12 +143,14 @@
 
 	write_failed_reason_message_data(success_instead_of_failure) :-
 		write('  message: "test goal succeeded but should have failed"'), nl.
-	write_failed_reason_message_data(success_instead_of_error) :-
-		write('  message: "test goal succeeded but should have throw an error"'), nl.
+	write_failed_reason_message_data(success_instead_of_error(ExpectedError)) :-
+		write('  message: "test goal succeeded but should have throw an error"'), nl,
+		write('  expected: '), pretty_print_term(ExpectedError), nl.
 	write_failed_reason_message_data(failure_instead_of_success) :-
 		write('  message: "test goal failed but should have succeeded"'), nl.
-	write_failed_reason_message_data(failure_instead_of_error) :-
-		write('  message: "test goal failed but should have throw an error"'), nl.
+	write_failed_reason_message_data(failure_instead_of_error(ExpectedError)) :-
+		write('  message: "test goal failed but should have throw an error"'), nl,
+		write('  expected: '), pretty_print_term(ExpectedError), nl.
 	write_failed_reason_message_data(error_instead_of_failure(Error)) :-
 		write('  message: "test goal throws an error but should have failed"'), nl,
 		write('  got: '), pretty_print_term(Error), nl.

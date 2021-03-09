@@ -31,7 +31,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-03-09,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -143,12 +143,14 @@
 
 	write_failed_reason_message_data(success_instead_of_failure) :-
 		write(tap_report, '  message: "test goal succeeded but should have failed"'), nl(tap_report).
-	write_failed_reason_message_data(success_instead_of_error) :-
-		write(tap_report, '  message: "test goal succeeded but should have throw an error"'), nl(tap_report).
+	write_failed_reason_message_data(success_instead_of_error(ExpectedError)) :-
+		write(tap_report, '  message: "test goal succeeded but should have throw an error"'), nl(tap_report),
+		write(tap_report, '  expected: '), pretty_print_term(ExpectedError), nl(tap_report).
 	write_failed_reason_message_data(failure_instead_of_success) :-
 		write(tap_report, '  message: "test goal failed but should have succeeded"'), nl(tap_report).
-	write_failed_reason_message_data(failure_instead_of_error) :-
-		write(tap_report, '  message: "test goal failed but should have throw an error"'), nl(tap_report).
+	write_failed_reason_message_data(failure_instead_of_error(ExpectedError)) :-
+		write(tap_report, '  message: "test goal failed but should have throw an error"'), nl(tap_report),
+		write(tap_report, '  expected: '), pretty_print_term(ExpectedError), nl(tap_report).
 	write_failed_reason_message_data(error_instead_of_failure(Error)) :-
 		write(tap_report, '  message: "test goal throws an error but should have failed"'), nl(tap_report),
 		write(tap_report, '  got: '), pretty_print_term(Error), nl(tap_report).

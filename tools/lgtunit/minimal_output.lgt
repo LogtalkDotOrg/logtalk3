@@ -29,9 +29,9 @@
 :- object(minimal_output).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-29,
+		date is 2021-03-09,
 		comment is 'Intercepts unit test execution messages and outputs a minimal report.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.',
@@ -96,12 +96,14 @@
 
 	write_failed_reason_message_data(success_instead_of_failure) :-
 		write('!   test goal succeeded but should have failed'), nl.
-	write_failed_reason_message_data(success_instead_of_error) :-
-		write('!   test goal succeeded but should have throw an error'), nl.
+	write_failed_reason_message_data(success_instead_of_error(ExpectedError)) :-
+		write('!   test goal succeeded but should have throw an error'), nl,
+		write('!   expected: '), pretty_print_term(ExpectedError), nl.
 	write_failed_reason_message_data(failure_instead_of_success) :-
 		write('!   test goal failed but should have succeeded'), nl.
-	write_failed_reason_message_data(failure_instead_of_error) :-
-		write('!   test goal failed but should have throw an error'), nl.
+	write_failed_reason_message_data(failure_instead_of_error(ExpectedError)) :-
+		write('!   test goal failed but should have throw an error'), nl,
+		write('!   expected: '), pretty_print_term(ExpectedError), nl.
 	write_failed_reason_message_data(error_instead_of_failure(Error)) :-
 		write('!   test goal throws an error but should have failed'), nl,
 		write('!   got: '), pretty_print_term(Error), nl.
