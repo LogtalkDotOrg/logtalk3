@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-02-26,
+		date is 2021-03-09,
 		comment is 'Unit tests for the "reader" library.'
 	]).
 
@@ -212,7 +212,8 @@
 	file_path(File, Path) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, File, Path).
+		os::path_concat(Directory, test_files, Path0),
+		os::path_concat(Path0, File, Path).
 
 	file_stream(File, Stream) :-
 		file_path(File, Path),
