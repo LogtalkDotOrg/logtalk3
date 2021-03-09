@@ -61,6 +61,9 @@ This change doesn't require any changes to applications using this library.
 data in the Concise Binary Object Representation (CBOR) format. Currently
 requires a backend supporting unbounded integer arithmetic.
 
+* ADDED: Predicates `file_to_bytes/2-3` and `stream_to_bytes/2-3` to the
+`reader` library.
+
 * ADDED: Library predicate `term_io::with_output_to/2` predicate.
 
 * ADDED: Library predicate `list::append/2` linter check for redundant calls.

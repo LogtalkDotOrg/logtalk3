@@ -22,10 +22,10 @@
 :- object(reader).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-02-26,
-		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes.'
+		date is 2021-03-09,
+		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.'
 	]).
 
 	% file reader predicates
@@ -72,6 +72,20 @@
 		argnames is ['File', 'Terms', 'Tail']
 	]).
 
+	:- public(file_to_bytes/2).
+	:- mode(file_to_bytes(+atom, -list(byte)), one).
+	:- info(file_to_bytes/2, [
+		comment is 'Reads a binary file into a list of bytes.',
+		argnames is ['File', 'Bytes']
+	]).
+
+	:- public(file_to_bytes/3).
+	:- mode(file_to_bytes(+atom, -list(byte), @term), one).
+	:- info(file_to_bytes/3, [
+		comment is 'Reads a binary file into a list of bytes. The list is terminated by the given tail.',
+		argnames is ['File', 'Bytes', 'Tail']
+	]).
+
 	% stream reader predicates
 
 	:- public(stream_to_codes/2).
@@ -114,6 +128,20 @@
 	:- info(stream_to_terms/3, [
 		comment is 'Reads a text stream into a list of terms. Does not close the stream. The list is terminated by the given tail.',
 		argnames is ['Stream', 'Terms', 'Tail']
+	]).
+
+	:- public(stream_to_bytes/2).
+	:- mode(stream_to_bytes(+stream_or_alias, -list(byte)), one).
+	:- info(stream_to_bytes/2, [
+		comment is 'Reads a binary stream into a list of bytes. Does not close the stream.',
+		argnames is ['Stream', 'Bytes']
+	]).
+
+	:- public(stream_to_bytes/3).
+	:- mode(stream_to_bytes(+stream_or_alias, -list(byte), @term), one).
+	:- info(stream_to_bytes/3, [
+		comment is 'Reads a binary stream into a list of bytes. Does not close the stream. The list is terminated by the given tail.',
+		argnames is ['Stream', 'Bytes', 'Tail']
 	]).
 
 	% line reader predicates
@@ -168,6 +196,18 @@
 		),
 		close(Stream).
 
+	file_to_bytes(File, Bytes) :-
+		file_to_bytes(File, Bytes, []).
+
+	file_to_bytes(File, Bytes, Tail) :-
+		open(File, read, Stream, [type(binary)]),
+		catch(
+			stream_to_bytes(Stream, Bytes, Tail),
+			Error,
+			(close(Stream), throw(Error))
+		),
+		close(Stream).
+
 	stream_to_codes(Stream, Codes) :-
 		stream_to_codes(Stream, Codes, []).
 
@@ -188,6 +228,17 @@
 			Chars = Tail
 		;	Chars = [Char| Rest],
 			stream_to_chars(Stream, Rest, Tail)
+		).
+
+	stream_to_bytes(Stream, Bytes) :-
+		stream_to_bytes(Stream, Bytes, []).
+
+	stream_to_bytes(Stream, Bytes, Tail) :-
+		get_byte(Stream, Byte),
+		(	Byte == -1 ->
+			Bytes = Tail
+		;	Bytes = [Byte| Rest],
+			stream_to_bytes(Stream, Rest, Tail)
 		).
 
 	line_to_codes(Stream, Codes) :-

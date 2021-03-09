@@ -8,11 +8,11 @@
 ``reader``
 ==========
 
-Predicates for reading text file and text stream contents to lists of terms, characters, or character codes.
+Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2019-02-26
+| **Version:** 2:0:0
+| **Date:** 2021-03-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -175,6 +175,52 @@ Reads a text file into a list of terms. The list is terminated by the given tail
 
 .. raw:: html
 
+   <div id="file_to_bytes/2"> </div>
+
+.. index:: file_to_bytes/2
+.. _reader/0::file_to_bytes/2:
+
+``file_to_bytes/2``
+^^^^^^^^^^^^^^^^^^^
+
+Reads a binary file into a list of bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_to_bytes(File,Bytes)``
+| **Mode and number of proofs:**
+|    ``file_to_bytes(+atom,-list(byte))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="file_to_bytes/3"> </div>
+
+.. index:: file_to_bytes/3
+.. _reader/0::file_to_bytes/3:
+
+``file_to_bytes/3``
+^^^^^^^^^^^^^^^^^^^
+
+Reads a binary file into a list of bytes. The list is terminated by the given tail.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_to_bytes(File,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``file_to_bytes(+atom,-list(byte),@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="stream_to_codes/2"> </div>
 
 .. index:: stream_to_codes/2
@@ -307,6 +353,52 @@ Reads a text stream into a list of terms. Does not close the stream. The list is
 |    ``stream_to_terms(Stream,Terms,Tail)``
 | **Mode and number of proofs:**
 |    ``stream_to_terms(+stream_or_alias,-list(term),@term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="stream_to_bytes/2"> </div>
+
+.. index:: stream_to_bytes/2
+.. _reader/0::stream_to_bytes/2:
+
+``stream_to_bytes/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Reads a binary stream into a list of bytes. Does not close the stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stream_to_bytes(Stream,Bytes)``
+| **Mode and number of proofs:**
+|    ``stream_to_bytes(+stream_or_alias,-list(byte))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="stream_to_bytes/3"> </div>
+
+.. index:: stream_to_bytes/3
+.. _reader/0::stream_to_bytes/3:
+
+``stream_to_bytes/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Reads a binary stream into a list of bytes. Does not close the stream. The list is terminated by the given tail.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stream_to_bytes(Stream,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``stream_to_bytes(+stream_or_alias,-list(byte),@term)`` - ``one``
 
 
 ------------

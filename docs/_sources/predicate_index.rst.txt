@@ -2372,6 +2372,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::file_size/2>`
 
+``file_to_bytes/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_bytes/2>`
+
+``file_to_bytes/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::file_to_bytes/3>`
+
 ``file_to_chars/2``
 -------------------
 
@@ -6604,6 +6624,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::starts/2>`
+
+``stream_to_bytes/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_bytes/2>`
+
+``stream_to_bytes/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`reader <reader/0::stream_to_bytes/3>`
 
 ``stream_to_chars/2``
 ---------------------
