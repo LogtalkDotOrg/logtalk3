@@ -59,7 +59,10 @@
 		^^assertion(Base64 == [86,71,104,108,73,72,70,49,97,87,78,114,73,71,74,121,98,51,100,117,73,71,90,118,101,67,66,113,100,87,49,119,99,121,66,118,100,109,86,121,73,72,82,111,90,83,66,115,89,88,112,53,73,71,82,118,90,121,52,61]).
 
 	test(base64_roundtrip, true) :-
-		reader::file_to_bytes('test_files/logtalk.png', Bytes),
+		this(This),
+		object_property(This, file(_, Directory)),
+		os::path_concat(Directory, 'test_files/logtalk.png', Path),
+		reader::file_to_bytes(Path, Bytes),
 		base64::generate(codes(Codes), Bytes),
 		base64::parse(codes(Codes), Bytes).
 
