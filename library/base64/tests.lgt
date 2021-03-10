@@ -30,6 +30,7 @@
 	]).
 
 	cover(base64).
+	cover(base64url).
 
 	test(base64_parse_2_atom, true) :-
 		base64::parse(atom('VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4='), Bytes),
@@ -65,5 +66,29 @@
 		reader::file_to_bytes(Path, Bytes),
 		base64::generate(codes(Codes), Bytes),
 		base64::parse(codes(Codes), Bytes).
+
+	test(base64url_parse_atom, true) :-
+		base64url::parse(atom('aHR0cHM6Ly9sb2d0YWxrLm9yZw'), URL),
+		^^assertion(URL == 'https://logtalk.org').
+
+	test(base64url_parse_chars, true) :-
+		base64url::parse(chars([a,'H','R','0',c,'H','M','6','L',y,'9',s,b,'2',d,'0','Y','W',x,r,'L',m,'9',y,'Z',w]), URL),
+		^^assertion(URL == [h,t,t,p,s,:,/,/,l,o,g,t,a,l,k,'.',o,r,g]).
+
+	test(base64url_parse_codes, true) :-
+		base64url::parse(codes([97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119]), URL),
+		^^assertion(URL == [104,116,116,112,115,58,47,47,108,111,103,116,97,108,107,46,111,114,103]).
+
+	test(base64url_generate_atom, true) :-
+		base64url::generate(atom(Base64URL), 'https://logtalk.org'),
+		^^assertion(Base64URL == 'aHR0cHM6Ly9sb2d0YWxrLm9yZw').
+
+	test(base64url_generate_chars, true) :-
+		base64url::generate(chars(Base64URL), [h,t,t,p,s,:,/,/,l,o,g,t,a,l,k,'.',o,r,g]),
+		^^assertion(Base64URL == [a,'H','R','0',c,'H','M','6','L',y,'9',s,b,'2',d,'0','Y','W',x,r,'L',m,'9',y,'Z',w]).
+
+	test(base64url_generate_codes, true) :-
+		base64url::generate(codes(Base64URL), [104,116,116,112,115,58,47,47,108,111,103,116,97,108,107,46,111,114,103]),
+		^^assertion(Base64URL == [97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119]).
 
 :- end_object.

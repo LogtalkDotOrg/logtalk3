@@ -21,5 +21,5 @@
 
 :- initialization((
 	logtalk_load(reader(loader)),
-	logtalk_load(base64, [optimize(on)])
+	logtalk_load([base64, base64url], [optimize(on)])
 )).

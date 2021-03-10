@@ -19,77 +19,73 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(base64).
+:- object(base64url).
 
 	:- info([
 		version is 0:9:0,
 		author is 'Paulo Moura',
 		date is 2021-03-10,
-		comment is 'Base64 parser and generator.'
+		comment is 'Base64URL parser and generator.'
 	]).
 
 	:- public(parse/2).
-	:- mode(parse(++compound, --list(byte)), one_or_error).
+	:- mode(parse(++compound, --types([atom,chars,codes])), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses the Base64 data from the given source (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` into a list of bytes.',
-		argnames is ['Source', 'Bytes']
+		comment is 'Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).',
+		argnames is ['Source', 'URL']
 	]).
 
 	:- public(generate/2).
-	:- mode(generate(+compound, +list(byte)), one_or_error).
+	:- mode(generate(+compound, +types([atom,chars,codes])), one_or_error).
 	:- info(generate/2, [
-		comment is 'Generates Base64 in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` for the list of bytes in the second argument.',
-		argnames is ['Sink', 'Bytes']
+		comment is 'Generates Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).',
+		argnames is ['Sink', 'URL']
 	]).
 
-	parse(file(File), Bytes) :-
-		reader::file_to_codes(File, Codes),
-		phrase(decode(Codes), Bytes).
-	parse(stream(Stream), Bytes) :-
-		reader::stream_to_codes(Stream, Codes),
-		phrase(decode(Codes), Bytes).
-	parse(atom(Atom), Bytes) :-
+	parse(atom(Atom), URL) :-
 		atom_codes(Atom, Codes),
-		phrase(decode(Codes), Bytes).
-	parse(chars(Chars), Bytes) :-
+		phrase(decode(Codes), URLCodes),
+		atom_codes(URL, URLCodes).
+	parse(chars(Chars), URL) :-
 		chars_to_codes(Chars, Codes),
-		phrase(decode(Codes), Bytes).
-	parse(codes(Codes), Bytes) :-
-		phrase(decode(Codes), Bytes).
+		phrase(decode(Codes), URLCodes),
+		codes_to_chars(URLCodes, URL).
+	parse(codes(Codes), URL) :-
+		phrase(decode(Codes), URL).
 
-	generate(file(File), Bytes) :-
-		phrase(encode(Bytes), Codes),
-		open(File, write, Stream),
-		write_codes(Codes, Stream),
-		close(Stream).
-	generate(stream(Stream), Bytes) :-
-		phrase(encode(Bytes), Codes),
-		write_codes(Codes, Stream).
-	generate(atom(Atom), Bytes) :-
-		phrase(encode(Bytes), Codes),
+	generate(atom(Atom), URL) :-
+		atom_codes(URL, URLCodes),
+		phrase(encode(URLCodes), Codes),
 		atom_codes(Atom, Codes).
-	generate(chars(Chars), Bytes) :-
-		phrase(encode(Bytes), Codes),
+	generate(chars(Chars), URL) :-
+		chars_to_codes(URL, URLCodes),
+		phrase(encode(URLCodes), Codes),
 		codes_to_chars(Codes, Chars).
-	generate(codes(Codes), Bytes) :-
-		phrase(encode(Bytes), Codes).
+	generate(codes(Codes), URL) :-
+		phrase(encode(URL), Codes).
 
 	% parser (decoding)
 
 	decode([Code1, Code2, Code3, Code4| Codes]) -->
+		!,
 		codes_to_bytes(Code4, Code3, Code2, Code1),
 		decode(Codes).
+	decode([Code1, Code2, Code3]) -->
+		!,
+		codes_to_bytes(Code3, Code2, Code1).
+	decode([Code1, Code2]) -->
+		codes_to_bytes(Code2, Code1).
 	decode([]) -->
 		[].
 
-	codes_to_bytes(0'=, 0'=, Code2, Code1) -->
+	codes_to_bytes(Code2, Code1) -->
 		!,
 		{	code_to_index(Code1, Index1),
 			code_to_index(Code2, Index2),
 			Byte1 is (Index1 << 2) \/ (Index2 >> 4)
 		},
 		[Byte1].
-	codes_to_bytes(0'=, Code3, Code2, Code1) -->
+	codes_to_bytes(Code3, Code2, Code1) -->
 		!,
 		{	code_to_index(Code1, Index1),
 			code_to_index(Code2, Index2),
@@ -110,8 +106,8 @@
 		[Byte1, Byte2, Byte3].
 
 	code_to_index(Code, Index) :-
-		(	Code =:= 0'/ -> Index is 62
-		;	Code =:= 0'+ -> Index is 63
+		(	Code =:= 0'_ -> Index is 62
+		;	Code =:= 0'- -> Index is 63
 		;	0'0 =< Code, Code =< 0'9 -> Index is Code - 0'0 + 52
 		;	0'A =< Code, Code =< 0'Z -> Index is Code - 0'A
 		;	0'a =< Code, Code =< 0'z -> Index is Code - 0'a + 26
@@ -154,7 +150,7 @@
 			index_to_code(Index2, Code2),
 			index_to_code(Index3, Code3)
 		},
-		[Code1, Code2, Code3, 0'=].
+		[Code1, Code2, Code3].
 
 	bytes_to_codes(Byte1) -->
 		{	Index1 is Byte1 >> 2,
@@ -162,14 +158,14 @@
 			index_to_code(Index1, Code1),
 			index_to_code(Index2, Code2)
 		},
-		[Code1, Code2, 0'=, 0'=].
+		[Code1, Code2].
 
 	index_to_code(Index, Code) :-
 		(	Index =< 25 -> Code is 0'A + Index
 		;	Index =< 51 -> Code is 0'a + Index - 26
 		;	Index =< 61 -> Code is 0'0 + Index - 52
-		;	Index =:= 62 -> Code is 0'/
-		;	Code is 0'+
+		;	Index =:= 62 -> Code is 0'_
+		;	Code is 0'-
 		),
 		!.
 

@@ -1,14 +1,14 @@
-.. index:: base64
-.. _base64/0:
+.. index:: base64url
+.. _base64url/0:
 
 .. rst-class:: right
 
 **object**
 
-``base64``
-==========
+``base64url``
+=============
 
-Base64 parser and generator.
+Base64URL parser and generator.
 
 | **Author:** Paulo Moura
 | **Version:** 0:9:0
@@ -18,8 +18,9 @@ Base64 parser and generator.
 |    ``static, context_switching_calls``
 
 
-| **Uses:**
-|    :ref:`reader <reader/0>`
+| **Dependencies:**
+|   (none)
+
 
 | **Remarks:**
 |    (none)
@@ -39,20 +40,20 @@ Public predicates
    <div id="parse/2"> </div>
 
 .. index:: parse/2
-.. _base64/0::parse/2:
+.. _base64url/0::parse/2:
 
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses the Base64 data from the given source (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` into a list of bytes.
+Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``parse(Source,Bytes)``
+|    ``parse(Source,URL)``
 | **Mode and number of proofs:**
-|    ``parse(++compound,--list(byte))`` - ``one_or_error``
+|    ``parse(++compound,--types([atom,chars,codes]))`` - ``one_or_error``
 
 
 ------------
@@ -62,20 +63,20 @@ Parses the Base64 data from the given source (``atom(Atom)``, ``chars(List)``, `
    <div id="generate/2"> </div>
 
 .. index:: generate/2
-.. _base64/0::generate/2:
+.. _base64url/0::generate/2:
 
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates Base64 in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` for the list of bytes in the second argument.
+Generates Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``generate(Sink,Bytes)``
+|    ``generate(Sink,URL)``
 | **Mode and number of proofs:**
-|    ``generate(+compound,+list(byte))`` - ``one_or_error``
+|    ``generate(+compound,+types([atom,chars,codes]))`` - ``one_or_error``
 
 
 ------------
@@ -83,12 +84,12 @@ Generates Base64 in the representation specified in the first argument (``atom(A
 Protected predicates
 --------------------
 
-(no local declarations; see entity ancestors if any)
+(none)
 
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+(none)
 
 Operators
 ---------

@@ -58,7 +58,7 @@ Library
 This change doesn't require any changes to applications using this library.
 
 * ADDED: Preliminary version of a `base64` library for encoding and decoding
-binary data in the Base64 format.
+binary data in the Base64 and Base64URL formats.
 
 * ADDED: Preliminary version of a `cbor` library for encoding and decoding
 data in the Concise Binary Object Representation (CBOR) format. Currently
