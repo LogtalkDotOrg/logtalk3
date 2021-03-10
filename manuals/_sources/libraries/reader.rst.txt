@@ -3,7 +3,8 @@
 
 The ``reader`` object provides portable predicates for reading text file
 and text stream contents to lists of terms, characters, or character
-codes. The API is loosely based on the SWI-Prolog ``readutil`` module.
+codes and for reading binary files to lists of bytes. The text file API
+is loosely based on the SWI-Prolog ``readutil`` module.
 
 API documentation
 -----------------

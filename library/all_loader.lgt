@@ -58,6 +58,7 @@
 		git(loader),
 		csv(loader),
 		cbor(loader),
+		base64(loader),
 		cloning,
 		counters,
 		streamvars

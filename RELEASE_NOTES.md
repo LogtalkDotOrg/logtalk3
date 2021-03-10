@@ -57,7 +57,10 @@ Library
 * CHANGED: Move the `random` library seed predicates to a separate protocol.
 This change doesn't require any changes to applications using this library.
 
-* ADDED: Preliminary version of a `cbor` library for importing and exporting
+* ADDED: Preliminary version of a `base64` library for encoding and decoding
+binary data in the Base64 format.
+
+* ADDED: Preliminary version of a `cbor` library for encoding and decoding
 data in the Concise Binary Object Representation (CBOR) format. Currently
 requires a backend supporting unbounded integer arithmetic.
 

@@ -1,0 +1,97 @@
+.. index:: base64
+.. _base64/0:
+
+.. rst-class:: right
+
+**object**
+
+``base64``
+==========
+
+Base64 parser and generator.
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2021-03-10
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="parse/2"> </div>
+
+.. index:: parse/2
+.. _base64/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses the Base64 contents read from the given source (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` into a list of bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Bytes)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. raw:: html
+
+   <div id="generate/2"> </div>
+
+.. index:: generate/2
+.. _base64/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates Base64 in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, or ``file(Path)`` for the list of bytes in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Bytes)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,+list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

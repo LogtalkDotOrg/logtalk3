@@ -6,37 +6,21 @@ The following developer tools are available, each one with its own
 ``make`` tools) and ``NOTES.md`` documentation files:
 
 -  ``asdf``
-
 -  ``assertions``
-
 -  ``code_metrics``
-
 -  ``dead_code_scanner``
-
 -  ``debug_messages``
-
 -  ``debugger``
-
 -  ``diagrams``
-
 -  ``doclet``
-
 -  ``help``
-
 -  ``lgtdoc``
-
 -  ``lgtunit``
-
 -  ``linter``
-
 -  ``make``
-
 -  ``ports_profiler``
-
 -  ``profiler``
-
 -  ``tutor``
-
 -  ``wrapper``
 
 Loading the developer tools

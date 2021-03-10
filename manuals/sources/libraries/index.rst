@@ -29,6 +29,7 @@ directory in the ``NOTES.md`` file.
    overview
    arbitrary
    assignvars
+   base64
    basic_types
    coroutining
    cbor
