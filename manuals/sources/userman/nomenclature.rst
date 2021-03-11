@@ -29,7 +29,7 @@ inherits most of its nomenclature from Prolog and Smalltalk.
 
 Note that the same terms can have different meanings in different languages.
 A good example is *class*. The support for meta-classes in e.g. Smalltalk
-translates to a concept of class that is different is key aspects from the
+translates to a concept of class that is different in key aspects from the
 concept of class in e.g. Java or C++. Other terms that can have different
 meanings are *delegation* and *forwarding*. There are also cases where the
 same concept is found under different names in some languages (e.g. *self*
