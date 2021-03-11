@@ -181,9 +181,4 @@
 		char_code(Char, Code),
 		codes_to_chars(Codes, Chars).
 
-	write_codes([], _).
-	write_codes([Code| Codes], Stream) :-
-		put_code(Stream, Code),
-		write_codes(Codes, Stream).
-
 :- end_object.
