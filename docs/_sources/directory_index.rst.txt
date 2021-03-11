@@ -562,6 +562,18 @@ To load an entity, always load the library that includes it using the goal ``log
    varlist <varlist_0>
    varlistp <varlistp_0>
 
+``library/uuid/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   uuid <uuid_0>
+   uuid(Representation) <uuid_1>
+   uuid_protocol <uuid_protocol_0>
+
 ``library/zippers/``
 --------------------
 

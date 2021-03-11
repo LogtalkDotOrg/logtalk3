@@ -1,0 +1,121 @@
+.. index:: uuid_protocol
+.. _uuid_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``uuid_protocol``
+=================
+
+Universally unique identifier (UUID) generator protocol.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2021-03-11
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="uuid_v1/2"> </div>
+
+.. index:: uuid_v1/2
+.. _uuid_protocol/0::uuid_v1/2:
+
+``uuid_v1/2``
+^^^^^^^^^^^^^
+
+Returns a version 1 UUID for the given MAC address (a list of 6 bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_v1(MAC,UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_v1(+list(byte),--term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="uuid_v4/1"> </div>
+
+.. index:: uuid_v4/1
+.. _uuid_protocol/0::uuid_v4/1:
+
+``uuid_v4/1``
+^^^^^^^^^^^^^
+
+Returns a version 4 UUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_v4(UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_v4(--term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="uuid_null/1"> </div>
+
+.. index:: uuid_null/1
+.. _uuid_protocol/0::uuid_null/1:
+
+``uuid_null/1``
+^^^^^^^^^^^^^^^
+
+Returns the null UUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uuid_null(UUID)``
+| **Mode and number of proofs:**
+|    ``uuid_null(--term)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

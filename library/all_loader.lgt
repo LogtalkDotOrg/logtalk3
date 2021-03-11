@@ -59,6 +59,7 @@
 		csv(loader),
 		cbor(loader),
 		base64(loader),
+		uuid(loader),
 		cloning,
 		counters,
 		streamvars

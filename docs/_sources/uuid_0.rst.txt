@@ -1,0 +1,53 @@
+.. index:: uuid
+.. _uuid/0:
+
+.. rst-class:: right
+
+**object**
+
+``uuid``
+========
+
+Universally unique identifier (UUID) generator using an atom representation.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2021-03-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`uuid(atom) <uuid/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`uuid_protocol/0::uuid_null/1`  :ref:`uuid_protocol/0::uuid_v1/2`  :ref:`uuid_protocol/0::uuid_v4/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
