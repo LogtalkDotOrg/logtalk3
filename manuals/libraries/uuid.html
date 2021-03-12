@@ -247,6 +247,12 @@
 <h1><code class="docutils literal notranslate"><span class="pre">uuid</span></code><a class="headerlink" href="#uuid" title="Permalink to this headline">¶</a></h1>
 <p>This library implements a Universally unique identifier (UUID)
 generator. Currently only version 1 and version 4 UUIDs are supported.</p>
+<p>The generation of version 1 UUIDs uses 14 random bits for the clock
+sequence.</p>
+<p>The generation of version 4 UUIDs uses the <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> random
+number generator when available. This includes macOS, Linux, *BSD, and
+other POSIX operating-systems. On Windows, a pseudo-random generator is
+used but randomized using the current wall time.</p>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
@@ -269,6 +275,25 @@ link in a web browser.</p>
 </div>
 <div class="section" id="generating-version-1-uuids">
 <h2>Generating version 1 UUIDs<a class="headerlink" href="#generating-version-1-uuids" title="Permalink to this headline">¶</a></h2>
+<p>By default, version 1 UUIDs are generated as atoms. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_v1([<span class="mh">0xf2</span>,<span class="mh">0xd1</span>,<span class="mh">0x90</span>,<span class="mh">0x94</span>,<span class="mh">0xdc</span>,<span class="mh">0x4b</span>], <span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;00a66fc0-82cf-11eb-bc83-f2d19094dc4b&#39;</span>
+yes
+</pre></div>
+</div>
+<p>To generate a UUID using a list of characters representation, use
+instead the <code class="docutils literal notranslate"><span class="pre">uuid/1</span></code> parametric object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(chars)<span class="o">::</span>uuid_v1([<span class="mh">0xf2</span>,<span class="mh">0xd1</span>,<span class="mh">0x90</span>,<span class="mh">0x94</span>,<span class="mh">0xdc</span>,<span class="mh">0x4b</span>], <span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> [<span class="s">&#39;0&#39;</span>,<span class="s">&#39;0&#39;</span>,d,<span class="o">e</span>,<span class="s">&#39;9&#39;</span>,<span class="s">&#39;0&#39;</span>,c,<span class="s">&#39;0&#39;</span>,<span class="o">-</span>,<span class="s">&#39;8&#39;</span>,<span class="s">&#39;2&#39;</span>,c,f,<span class="o">-</span>,<span class="s">&#39;1&#39;</span>,<span class="s">&#39;1&#39;</span>,<span class="o">e</span>,b,<span class="o">-</span>,a,<span class="s">&#39;9&#39;</span>,<span class="s">&#39;8&#39;</span>,<span class="s">&#39;5&#39;</span>,<span class="o">-</span>,f,<span class="s">&#39;2&#39;</span>,d,<span class="s">&#39;1&#39;</span>,<span class="s">&#39;9&#39;</span>,<span class="s">&#39;0&#39;</span>,<span class="s">&#39;9&#39;</span>,<span class="s">&#39;4&#39;</span>,d,c,<span class="s">&#39;4&#39;</span>,b]
+yes
+</pre></div>
+</div>
+<p>Similar to get a UUID using a list of character codes representation:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(codes)<span class="o">::</span>uuid_v1([<span class="mh">0xf2</span>,<span class="mh">0xd1</span>,<span class="mh">0x90</span>,<span class="mh">0x94</span>,<span class="mh">0xdc</span>,<span class="mh">0x4b</span>], <span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> [<span class="m">48</span>,<span class="m">48</span>,<span class="m">52</span>,<span class="m">99</span>,<span class="m">99</span>,<span class="m">54</span>,<span class="m">99</span>,<span class="m">48</span>,<span class="m">45</span>,<span class="m">56</span>,<span class="m">50</span>,<span class="m">99</span>,<span class="m">102</span>,<span class="m">45</span>,<span class="m">49</span>,<span class="m">49</span>,<span class="m">101</span>,<span class="m">98</span>,<span class="m">45</span>,<span class="m">98</span>,<span class="m">57</span>,<span class="m">102</span>,<span class="m">52</span>,<span class="m">45</span>,<span class="m">102</span>,<span class="m">50</span>,<span class="m">100</span>,<span class="m">49</span>,<span class="m">57</span>,<span class="m">48</span>,<span class="m">57</span>,<span class="m">52</span>,<span class="m">100</span>,<span class="m">99</span>,<span class="m">52</span>,<span class="m">98</span>]
+yes
+</pre></div>
+</div>
 </div>
 <div class="section" id="generating-version-4-uuids">
 <h2>Generating version 4 UUIDs<a class="headerlink" href="#generating-version-4-uuids" title="Permalink to this headline">¶</a></h2>

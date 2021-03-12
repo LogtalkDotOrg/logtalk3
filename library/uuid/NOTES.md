@@ -24,6 +24,13 @@ ________________________________________________________________________
 This library implements a Universally unique identifier (UUID) generator.
 Currently only version 1 and version 4 UUIDs are supported.
 
+The generation of version 1 UUIDs uses 14 random bits for the clock sequence.
+
+The generation of version 4 UUIDs uses the `/dev/urandom` random number
+generator when available. This includes macOS, Linux, *BSD, and other POSIX
+operating-systems. On Windows, a pseudo-random generator is used but
+randomized using the current wall time. 
+
 
 API documentation
 -----------------
@@ -51,7 +58,24 @@ To test this library predicates, load the `tester.lgt` file:
 Generating version 1 UUIDs
 --------------------------
 
+By default, version 1 UUIDs are generated as atoms. For example:
 
+	| ?- uuid::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
+	UUID = '00a66fc0-82cf-11eb-bc83-f2d19094dc4b'
+	yes
+	
+To generate a UUID using a list of characters representation, use instead the
+`uuid/1` parametric object:
+
+	| ?- uuid(chars)::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
+	UUID = ['0','0',d,e,'9','0',c,'0',-,'8','2',c,f,-,'1','1',e,b,-,a,'9','8','5',-,f,'2',d,'1','9','0','9','4',d,c,'4',b]
+	yes
+
+Similar to get a UUID using a list of character codes representation:
+
+	| ?- uuid(codes)::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
+	UUID = [48,48,52,99,99,54,99,48,45,56,50,99,102,45,49,49,101,98,45,98,57,102,52,45,102,50,100,49,57,48,57,52,100,99,52,98]
+	yes
 
 
 Generating version 4 UUIDs

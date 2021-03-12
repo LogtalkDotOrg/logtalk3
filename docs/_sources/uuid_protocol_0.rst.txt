@@ -11,8 +11,8 @@
 Universally unique identifier (UUID) generator protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2021-03-11
+| **Version:** 0:2:0
+| **Date:** 2021-03-12
 
 | **Compilation flags:**
 |    ``static``
@@ -53,7 +53,7 @@ Returns a version 1 UUID for the given MAC address (a list of 6 bytes). The MAC 
 | **Template:**
 |    ``uuid_v1(MAC,UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_v1(+list(byte),--term)`` - ``one``
+|    ``uuid_v1(+list(byte),--ground)`` - ``one``
 
 
 ------------
@@ -76,7 +76,7 @@ Returns a version 4 UUID.
 | **Template:**
 |    ``uuid_v4(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_v4(--term)`` - ``one``
+|    ``uuid_v4(--ground)`` - ``one``
 
 
 ------------
@@ -99,7 +99,7 @@ Returns the null UUID.
 | **Template:**
 |    ``uuid_null(UUID)``
 | **Mode and number of proofs:**
-|    ``uuid_null(--term)`` - ``one``
+|    ``uuid_null(--ground)`` - ``one``
 
 
 ------------

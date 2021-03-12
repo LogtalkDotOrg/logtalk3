@@ -23,14 +23,51 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-03-11,
+		date is 2021-03-12,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		]
 	]).
+
+	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
+		iso8601::date(Start, 1582, 10, 15),
+		iso8601::date(Current, _, _, _),
+		Nanoseconds0 is (Current - Start) * 86400 * 10000000,
+		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
+		Nanoseconds is Nanoseconds0 + ((Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds) * 1000,
+		TimeLow is Nanoseconds /\ 0xffffffff,
+		TimeMid is (Nanoseconds >> 32) /\ 0xffff,
+		TimeHiAndVersion is ((Nanoseconds >> 48) /\ 0x0fff) \/ 0b0001000000000000,
+		clock_seq(ClockSeq),
+		ClockSeqLow is ClockSeq /\ 0xff,
+		ClockSeqHiVariant is (((ClockSeq >> 8) /\ 0x3f) /\ 0b10111111) \/ 0b10000000,
+		Byte1 is TimeLow >> 32,
+		Byte2 is (TimeLow /\ 0x00ffffff) >> 16,
+		Byte3 is (TimeLow /\ 0x0000ffff) >> 8,
+		Byte4 is TimeLow /\ 0x000000ff,
+		Byte5 is TimeMid >> 8,
+		Byte6 is TimeMid /\ 0x00ff,
+		Byte7 is TimeHiAndVersion >> 8,
+		Byte8 is TimeHiAndVersion /\ 0x00ff,
+		phrase(
+			bytes_to_uuid(
+				[Byte1, Byte2, Byte3, Byte4],
+				[Byte5, Byte6],
+				[Byte7, Byte8],
+				[ClockSeqHiVariant, ClockSeqLow],
+				[Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]
+			),
+			Codes
+		),
+		codes_to_uuid(_Representation_, Codes, UUID).
+
+	clock_seq(ClockSeq) :-
+		% get 14 random bits
+		random_bytes(2, [Byte1, Byte2]),
+		ClockSeq is (Byte1 << 8 + Byte2) /\ 0b0011111111111111.
 
 	uuid_v4(UUID) :-
 		random_bytes(16, [Byte1, Byte2, Byte3, Byte4, Byte5, Byte6, Byte7, Byte8, Byte9, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15, Byte16]),
