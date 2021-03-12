@@ -22,18 +22,18 @@
 :- object(type).
 
 	:- info([
-		version is 1:29:1,
+		version is 1:30:0,
 		author is 'Paulo Moura',
-		date is 2021-01-27,
+		date is 2021-03-12,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
 			'Prolog module related types (when the backend compiler supports modules)' - '``module``, ``module_identifier``, ``qualified_callable``',
 			'Prolog base types' - '``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``',
-			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``',
+			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``, ``hex_char``',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``',
 			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``',
-			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``',
+			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``, ``hex_code``',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``',
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``',
@@ -166,6 +166,7 @@
 	type(code).
 	type(code(_Charset)).
 	type(operator_priority).
+	type(hex_code).
 	% atom derived types
 	type(atom(_Charset)).
 	type(atom(_Charset, _Length)).
@@ -179,6 +180,7 @@
 	type(char(_Charset)).
 	type(order).
 	type(operator_specifier).
+	type(hex_char).
 	% compound derived types
 	type(predicate_indicator).
 	type(non_terminal_indicator).
@@ -624,6 +626,19 @@
 		;	throw(type_error(atom, Term))
 		).
 
+	check(hex_char, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	(	'0' @=< Term, Term @=< '9'
+			;	'a' @=< Term, Term @=< 'f'
+			;	'A' @=< Term, Term @=< 'F'
+			) ->
+			true
+		;	atom(Term) ->
+			throw(domain_error(hex_char, Term))
+		;	throw(type_error(atom, Term))
+		).
+
 	% number derived types
 
 	check(positive_number, Term) :-
@@ -820,6 +835,19 @@
 		;	0 =< Term, Term =< 1200 ->
 			true
 		;	throw(domain_error(operator_priority, Term))
+		).
+
+	check(hex_code, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	(	0'0 @=< Term, Term @=< 0'9
+			;	0'a @=< Term, Term @=< 0'f
+			;	0'A @=< Term, Term @=< 0'F
+			) ->
+			true
+		;	integer(Term) ->
+			throw(domain_error(hex_code, Term))
+		;	throw(type_error(integer, Term))
 		).
 
 	% compound derived types

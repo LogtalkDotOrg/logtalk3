@@ -74,6 +74,9 @@ requires a backend supporting unbounded integer arithmetic.
 
 * ADDED: Library predicate `list::append/2` linter check for redundant calls.
 
+* ADDED: Support for new `hex_char` and `hex_code` types to the `arbitrary`
+and `types` libraries.
+
 * ADDED: Library predicate `os::is_absolute_file_name/1`.
 
 * ADDED: New types `file(Extensions,Permissions)` and `directory(Permissions)`
