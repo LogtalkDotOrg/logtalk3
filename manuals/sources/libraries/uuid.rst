@@ -3,9 +3,13 @@
 
 This library implements a Universally unique identifier (UUID)
 generator. Currently only version 1 and version 4 UUIDs are supported.
+For reference material, see e.g.
 
-The generation of version 1 UUIDs uses 14 random bits for the clock
-sequence.
+https://en.wikipedia.org/wiki/Universally_unique_identifier
+
+Some backends provide time stamps with low granularity (e.g. seconds but
+not milliseconds or nanoseconds). To compensate, the generation of
+version 1 UUIDs uses 14 random bits for the clock sequence.
 
 The generation of version 4 UUIDs uses the ``/dev/urandom`` random
 number generator when available. This includes macOS, Linux, \*BSD, and
