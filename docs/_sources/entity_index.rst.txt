@@ -139,6 +139,8 @@ Objects
    java(Reference) <java_1>
    java(Reference,ReturnValue) <java_2>
    java_hook <java_hook_0>
+   json <json_0>
+   json(StringRepresentation) <json_1>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
    library_dependency_diagram <library_dependency_diagram_0>
@@ -248,6 +250,7 @@ Protocols
    intervalp <intervalp_0>
    java_access_protocol <java_access_protocol_0>
    java_utils_protocol <java_utils_protocol_0>
+   json_protocol <json_protocol_0>
    lgtdocp <lgtdocp_0>
    listp <listp_0>
    loggingp <loggingp_0>

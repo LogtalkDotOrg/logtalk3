@@ -49,6 +49,7 @@ directory in the ``NOTES.md`` file.
    hook_objects
    intervals
    java
+   json
    logging
    loops
    meta

@@ -425,6 +425,18 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    java_hook <java_hook_0>
    java_utils_protocol <java_utils_protocol_0>
 
+``json``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   json <json_0>
+   json(StringRepresentation) <json_1>
+   json_protocol <json_protocol_0>
+
 ``lgtdoc``
 ----------
 

@@ -57,6 +57,7 @@
 		gensym(loader),
 		git(loader),
 		csv(loader),
+		json(loader),
 		cbor(loader),
 		base64(loader),
 		uuid(loader),

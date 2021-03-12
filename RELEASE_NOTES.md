@@ -63,6 +63,9 @@ binary data in the Base64 and Base64URL formats.
 * ADDED: Preliminary version of a `uuid` library for generating Universally
 Unique Identifiers (UUIDs). Currently only supporting version 4 UUIDs.
 
+* ADDED: Preliminary version of a `json` library for encoding and decoding
+JSON data. Joint work with Jacinto Dávila.
+
 * ADDED: Preliminary version of a `cbor` library for encoding and decoding
 data in the Concise Binary Object Representation (CBOR) format. Currently
 requires a backend supporting unbounded integer arithmetic.

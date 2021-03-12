@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>json &mdash; The Logtalk Handbook v3.45.0-b01 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="logging" href="logging.html" />
+    <link rel="prev" title="java" href="java.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.45.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">json</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoding">Encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decoding">Decoding</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+	<p class="caption"><span class="caption-text">External Contents</span></p>
+    <a href="../docs/index.html">APIs</a>
+    <a href="https://logtalk.org">Logtalk website</a>
+    <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
+  
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Libraries</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">json</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/libraries/json.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="json">
+<h1><code class="docutils literal notranslate"><span class="pre">json</span></code><a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">json</span></code> library provides predicates for parsing and generating data
+in the JSON format based on the specification and standard found at:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc8259">https://tools.ietf.org/html/rfc8259</a></p></li>
+<li><p><a class="reference external" href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">https://www.ecma-international.org/publications-and-standards/standards/ecma-404/</a></p></li>
+</ul>
+<p>It includes a parametric object whose parameter indicates the preferred
+representation for decoded JSON text strings (<code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code> or
+<code class="docutils literal notranslate"><span class="pre">codes</span></code>).</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#json">../../docs/library_index.html#json</a>
+link in a web browser.</p>
+</div>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(json(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(json(tester)).
+</pre></div>
+</div>
+<p>Some of the sample JSON test files are based on examples published at:</p>
+<p><a class="reference external" href="https://www.json.org/">https://www.json.org/</a></p>
+</div>
+<div class="section" id="representation">
+<h2>Representation<a class="headerlink" href="#representation" title="Permalink to this headline">¶</a></h2>
+<p>The following choices of syntax has been made to represent JSON elements
+as terms:</p>
+<ul>
+<li><p>JSON objects are represented using curly-bracketed terms,
+<code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p></li>
+<li><p>Arrays are represented using lists.</p></li>
+<li><p>Text strings can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>. The default when decoding is to use atoms when using
+the <code class="docutils literal notranslate"><span class="pre">json</span></code> object. To decode text strings into lists of chars or
+code, use the <code class="docutils literal notranslate"><span class="pre">json/1</span></code> with the parameter bound to <code class="docutils literal notranslate"><span class="pre">chars</span></code> or
+<code class="docutils literal notranslate"><span class="pre">codes</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json<span class="o">::</span>parse(codes([<span class="m">34</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>,<span class="m">34</span>]), <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> hello
+yes
+
+| <span class="o">?-</span> json(atom)<span class="o">::</span>parse(codes([<span class="m">34</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>,<span class="m">34</span>]), <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> hello
+yes
+
+| <span class="o">?-</span> json(chars)<span class="o">::</span>parse(codes([<span class="m">34</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>,<span class="m">34</span>]), <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> chars([h,<span class="o">e</span>,l,l,o])
+yes
+
+| <span class="o">?-</span> json(codes)<span class="o">::</span>parse(codes([<span class="m">34</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>,<span class="m">34</span>]), <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> codes([<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>])
+yes
+</pre></div>
+</div>
+</li>
+<li><p>The JSON values <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">null</span></code> are represented by,
+respectively, the <code class="docutils literal notranslate"><span class="pre">&#64;false</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;true</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;null</span></code> compound terms.</p></li>
+</ul>
+<p>The following table exemplifies the term equivalents of JSON elements:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JSON</p></th>
+<th class="head"><p>term</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[1,2]</p></td>
+<td><p>[1,2]</p></td>
+</tr>
+<tr class="row-odd"><td><p>true</p></td>
+<td><p>&#64;true</p></td>
+</tr>
+<tr class="row-even"><td><p>false</p></td>
+<td><p>&#64;false</p></td>
+</tr>
+<tr class="row-odd"><td><p>null</p></td>
+<td><p>&#64;null</p></td>
+</tr>
+<tr class="row-even"><td><p>-1</p></td>
+<td><p>-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>[1.2345]</p></td>
+<td><p>[1.2345]</p></td>
+</tr>
+<tr class="row-even"><td><p>[]</p></td>
+<td><p>[]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[2147483647]</p></td>
+<td><p>[2147483647]</p></td>
+</tr>
+<tr class="row-even"><td><p>[0]</p></td>
+<td><p>[0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[1234567890123456789]</p></td>
+<td><p>[1234567890123456789]</p></td>
+</tr>
+<tr class="row-even"><td><p>[false]</p></td>
+<td><p>[&#64;false]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[-2147483648]</p></td>
+<td><p>[-2147483648]</p></td>
+</tr>
+<tr class="row-even"><td><p>{“a”:null,”foo”:”bar”}</p></td>
+<td><p><a class="reference external" href="mailto:{a-&#37;&#52;&#48;null">{a-<span>&#64;</span>null</a>, foo-bar}</p></td>
+</tr>
+<tr class="row-odd"><td><p>[2.225073858507201e-308]</p></td>
+<td><p>[2.225073858507201e-308]</p></td>
+</tr>
+<tr class="row-even"><td><p>[0,1]</p></td>
+<td><p>[0,1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[2.2250738585072014e-308]</p></td>
+<td><p>[2.2250738585072014e-308]</p></td>
+</tr>
+<tr class="row-even"><td><p>[1.7976931348623157e+308]</p></td>
+<td><p>[1.7976931348623157e+308]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[0.0]</p></td>
+<td><p>[0.0]</p></td>
+</tr>
+<tr class="row-even"><td><p>[4294967295]</p></td>
+<td><p>[4294967295]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[-1234567890123456789]</p></td>
+<td><p>[-1234567890123456789]</p></td>
+</tr>
+<tr class="row-even"><td><p>[“foo”]</p></td>
+<td><p>[foo]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[1]</p></td>
+<td><p>[1]</p></td>
+</tr>
+<tr class="row-even"><td><p>[null]</p></td>
+<td><p>[&#64;null]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[-1.2345]</p></td>
+<td><p>[-1.2345]</p></td>
+</tr>
+<tr class="row-even"><td><p>[5.0e-324]</p></td>
+<td><p>[5.0e-324]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[-1]</p></td>
+<td><p>[-1]</p></td>
+</tr>
+<tr class="row-even"><td><p>[true]</p></td>
+<td><p>[&#64;true]</p></td>
+</tr>
+<tr class="row-odd"><td><p>[9223372036854775807]</p></td>
+<td><p>[9223372036854775807]</p></td>
+</tr>
+<tr class="row-even"><td><p>{“foo”:”bar”}</p></td>
+<td><p>{foo-bar}</p></td>
+</tr>
+<tr class="row-odd"><td><p>{}</p></td>
+<td><p>{}</p></td>
+</tr>
+<tr class="row-even"><td><p>[0.0]</p></td>
+<td><p>[0.0]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<p>Encoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> predicate. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json<span class="o">::</span>generate(codes(<span class="nv">Encoding</span>), [a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>]).
+<span class="nv">Encoding</span> <span class="o">=</span> [<span class="m">91</span>,<span class="m">34</span>,<span class="m">97</span>,<span class="m">34</span>,<span class="m">44</span>,<span class="m">123</span>,<span class="m">34</span>,<span class="m">98</span>,<span class="m">34</span>,<span class="m">58</span>,<span class="m">34</span>,<span class="m">99</span>,<span class="m">34</span>,<span class="m">125</span>,<span class="m">93</span>]
+yes
+</pre></div>
+</div>
+<p>Alternatively:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json<span class="o">::</span>generate(chars(<span class="nv">Encoding</span>), [a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>]).
+<span class="nv">Encoding</span> <span class="o">=</span> [<span class="s">&#39;[&#39;</span>,<span class="s">&#39;&quot;&#39;</span>,a,<span class="s">&#39;&quot;&#39;</span>,<span class="s">&#39;,&#39;</span>,<span class="s">&#39;{&#39;</span>,<span class="s">&#39;&quot;&#39;</span>,b,<span class="s">&#39;&quot;&#39;</span>,<span class="o">:</span>,<span class="s">&#39;&quot;&#39;</span>,c,<span class="s">&#39;&quot;&#39;</span>,<span class="s">&#39;}&#39;</span>,<span class="s">&#39;]&#39;</span>]
+<span class="nv">Yes</span>
+
+| <span class="o">?-</span> json<span class="o">::</span>generate(<span class="k">atom</span>(<span class="nv">Encoding</span>), [a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>]).
+<span class="nv">Encoding</span> <span class="o">=</span> <span class="s">&#39;[&quot;a&quot;,{&quot;b&quot;:&quot;c&quot;}]&#39;</span>
+<span class="nv">Yes</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> takes, as second argument, a Prolog term that
+corresponds to the JSON Syntax in Prolog and produces the corresponding
+JSON output in the media indicated as first argument:
+(<code class="docutils literal notranslate"><span class="pre">codes(Variable)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">chars(Variable)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Variable)</span></code>).</p>
+</div>
+<div class="section" id="decoding">
+<h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h2>
+<p>Decoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate. For example,
+to decode a given json file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json<span class="o">::</span>parse(file(<span class="s">&#39;simple/roundtrip_array_obj_array.json&#39;</span>), <span class="nv">Term</span>).
+<span class="nv">Term</span> <span class="o">=</span> [<span class="k">{</span>a<span class="o">-</span>[b]<span class="k">}</span>]
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate first argument must indicate the input source
+(<code class="docutils literal notranslate"><span class="pre">codes(Source)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Source)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Source)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">chars(Source)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Source)</span></code>) containing a JSON structure to be
+decoded into the Prolog term in the second argument.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="logging.html" class="btn btn-neutral float-right" title="logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="java.html" class="btn btn-neutral float-left" title="java" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 1998-2021, Paulo Moura.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

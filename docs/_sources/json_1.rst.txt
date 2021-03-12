@@ -1,0 +1,58 @@
+.. index:: json(StringRepresentation)
+.. _json/1:
+
+.. rst-class:: right
+
+**object**
+
+``json(StringRepresentation)``
+==============================
+
+* ``StringRepresentation`` - Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+JSON parser and generator.
+
+| **Author:** Paulo Moura and Jacinto Dávila
+| **Version:** 0:9:0
+| **Date:** 2021-03-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`json_protocol <json_protocol/0>`
+| **Uses:**
+|    :ref:`reader <reader/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_protocol/0::generate/2`  :ref:`json_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

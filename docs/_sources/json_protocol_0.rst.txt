@@ -1,0 +1,98 @@
+.. index:: json_protocol
+.. _json_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_protocol``
+=================
+
+JSON parser and generator protocol.
+
+| **Author:** Paulo Moura and Jacinto Dávila
+| **Version:** 0:9:0
+| **Date:** 2021-03-12
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="parse/2"> </div>
+
+.. index:: parse/2
+.. _json_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Term)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="generate/2"> </div>
+
+.. index:: generate/2
+.. _json_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates the content using the representation specified in the first argument (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument. Fails if this term cannot be processed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Term)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

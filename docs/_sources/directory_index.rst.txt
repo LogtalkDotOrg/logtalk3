@@ -360,6 +360,18 @@ To load an entity, always load the library that includes it using the goal ``log
    java_hook <java_hook_0>
    java_utils_protocol <java_utils_protocol_0>
 
+``library/json/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   json <json_0>
+   json(StringRepresentation) <json_1>
+   json_protocol <json_protocol_0>
+
 ``library/logging/``
 --------------------
 
