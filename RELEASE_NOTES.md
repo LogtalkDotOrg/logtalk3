@@ -51,6 +51,9 @@ Documentation
 
 * IMPROVED: Documentation of the `term_io` library.
 
+* FIXED: Typo in the Handbook nomenclature section. Thanks to David Tonhofer
+for reporting.
+
 Library
 -------
 
