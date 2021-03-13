@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:0:0,
+		version is 9:1:0,
 		author is 'Paulo Moura',
-		date is 2021-03-09,
+		date is 2021-03-13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -666,9 +666,6 @@
 	:- uses(os, [cpu_time/1, null_device_path/1]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
-	% don't assume that between/3 is a built-in predicate as some backend
-	% Prolog systems still provide it as a library predicate
-	:- uses(integer, [between/3]).
 	% for QuickCheck support
 	:- uses(fast_random, [maybe/0]).
 
@@ -2769,12 +2766,5 @@
 			os::delete_file(Path).
 
 	:- endif.
-
-	% auxiliary predicates
-
-	member_var(Var, [Head| _]) :-
-		Var == Head.
-	member_var(Var, [_| Tail]) :-
-		member_var(Var, Tail).
 
 :- end_object.
