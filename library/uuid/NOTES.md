@@ -73,13 +73,15 @@ To generate a UUID using a list of characters representation, use instead the
 `uuid/1` parametric object:
 
 	| ?- uuid(chars)::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
-	UUID = ['0','0',d,e,'9','0',c,'0',-,'8','2',c,f,-,'1','1',e,b,-,a,'9','8','5',-,f,'2',d,'1','9','0','9','4',d,c,'4',b]
+	UUID = ['0','0',d,e,'9','0',c,'0',-,'8','2',c,f,-,'1','1',e,b,-,
+	        a,'9','8','5',-,f,'2',d,'1','9','0','9','4',d,c,'4',b]
 	yes
 
 Similar to get a UUID using a list of character codes representation:
 
 	| ?- uuid(codes)::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
-	UUID = [48,48,52,99,99,54,99,48,45,56,50,99,102,45,49,49,101,98,45,98,57,102,52,45,102,50,100,49,57,48,57,52,100,99,52,98]
+	UUID = [48,48,52,99,99,54,99,48,45,56,50,99,102,45,49,49,101,98,45,
+	        98,57,102,52,45,102,50,100,49,57,48,57,52,100,99,52,98]
 	yes
 
 
@@ -96,13 +98,15 @@ To generate a UUID using a list of characters representation, use instead the
 `uuid/1` parametric object:
 
 	| ?- uuid(chars)::uuid_v4(UUID).
-	UUID = [d,'3',d,'3','3','5','1','3',-,'8','1',e,c,-,'4',d,'2','6',-,'9',f,'2','2',-,e,d,'9','5',e,'0','0',e,'1','5','7','0']
+	UUID = [d,'3',d,'3','3','5','1','3',-,'8','1',e,c,-,'4',d,'2','6',-,
+	        '9',f,'2','2',-,e,d,'9','5',e,'0','0',e,'1','5','7','0']
 	yes
 
 Similar to get a UUID using a list of character codes representation:
 
 	| ?- uuid(codes)::uuid_v4(UUID).
-	UUID = [102,97,52,54,57,98,100,50,45,51,57,54,51,45,52,97,100,55,45,98,50,50,55,45,101,100,52,99,56,55,99,54,53,55,102,98]
+	UUID = [102,97,52,54,57,98,100,50,45,51,57,54,51,45,52,97,100,55,45,
+	        98,50,50,55,45,101,100,52,99,56,55,99,54,53,55,102,98]
 	yes
 
 

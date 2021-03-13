@@ -11,8 +11,8 @@
 Universally unique identifier (UUID) generator protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2021-03-12
+| **Version:** 0:3:0
+| **Date:** 2021-03-13
 
 | **Compilation flags:**
 |    ``static``
@@ -45,7 +45,7 @@ Public predicates
 ``uuid_v1/2``
 ^^^^^^^^^^^^^
 
-Returns a version 1 UUID for the given MAC address (a list of 6 bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.
+Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.
 
 | **Compilation flags:**
 |    ``static``
@@ -100,6 +100,29 @@ Returns the null UUID.
 |    ``uuid_null(UUID)``
 | **Mode and number of proofs:**
 |    ``uuid_null(--ground)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="random_node/1"> </div>
+
+.. index:: random_node/1
+.. _uuid_protocol/0::random_node/1:
+
+``random_node/1``
+^^^^^^^^^^^^^^^^^
+
+Generates a list with six random bytes that can be used in alternative to a MAC address when generating version 1 UUIDs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_node(Node)``
+| **Mode and number of proofs:**
+|    ``random_node(--list(byte))`` - ``one``
 
 
 ------------

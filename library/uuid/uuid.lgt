@@ -23,9 +23,9 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2021-03-12,
+		date is 2021-03-13,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -108,6 +108,9 @@
 	uuid_null(atom,  '00000000-0000-0000-0000-000000000000').
 	uuid_null(chars, ['0','0','0','0','0','0','0','0',-,'0','0','0','0',-,'0','0','0','0',-,'0','0','0','0',-,'0','0','0','0','0','0','0','0','0','0','0','0']).
 	uuid_null(codes, [48,48,48,48,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,45,48,48,48,48,48,48,48,48,48,48,48,48]).
+
+	random_node(Node) :-
+		random_bytes(6, Node).
 
 	% auxiliary predicates
 

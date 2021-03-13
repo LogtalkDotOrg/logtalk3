@@ -23,17 +23,29 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:1,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-03-12,
+		date is 2021-03-13,
 		comment is 'Unit tests for the "uuid" library.'
 	]).
 
 	cover(uuid).
 	cover(uuid(_)).
 
-	quick_check(uuid_v1_valid, uuid_v1_valid({[0xf2,0xd1,0x90,0x94,0xdc,0x4b]}, -chars)).
+	quick_check(uuid_v1_valid, uuid_v1_valid(+list(byte,6), -chars)).
 	quick_check(uuid_v4_valid, uuid_v4_valid(-chars)).
+
+	test(uuid_null_atom, true(atom(UUID))) :-
+		uuid(atom)::uuid_null(UUID).
+
+	test(uuid_null_chars, true(type::valid(chars,UUID))) :-
+		uuid(chars)::uuid_null(UUID).
+
+	test(uuid_null_codes, true(type::valid(codes,UUID))) :-
+		uuid(codes)::uuid_null(UUID).
+
+	test(uuid_random_node, true(type::valid(list(byte,6),Node))) :-
+		uuid::random_node(Node).
 
 	% auxiliary predicates
 

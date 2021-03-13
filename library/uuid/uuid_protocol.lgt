@@ -22,16 +22,16 @@
 :- protocol(uuid_protocol).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2021-03-12,
+		date is 2021-03-13,
 		comment is 'Universally unique identifier (UUID) generator protocol.'
 	]).
 
 	:- public(uuid_v1/2).
 	:- mode(uuid_v1(+list(byte), --ground), one).
 	:- info(uuid_v1/2, [
-		comment is 'Returns a version 1 UUID for the given MAC address (a list of 6 bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.',
+		comment is 'Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.',
 		argnames is ['MAC', 'UUID']
 	]).
 
@@ -47,6 +47,13 @@
 	:- info(uuid_null/1, [
 		comment is 'Returns the null UUID.',
 		argnames is ['UUID']
+	]).
+
+	:- public(random_node/1).
+	:- mode(random_node(--list(byte)), one).
+	:- info(random_node/1, [
+		comment is 'Generates a list with six random bytes that can be used in alternative to a MAC address when generating version 1 UUIDs.',
+		argnames is ['Node']
 	]).
 
 :- end_protocol.

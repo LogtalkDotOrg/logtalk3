@@ -14,8 +14,8 @@
 Universally unique identifier (UUID) generator.
 
 | **Author:** Paulo Moura
-| **Version:** 0:3:0
-| **Date:** 2021-03-12
+| **Version:** 0:4:0
+| **Date:** 2021-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,7 @@ Universally unique identifier (UUID) generator.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`uuid_protocol/0::uuid_null/1`  :ref:`uuid_protocol/0::uuid_v1/2`  :ref:`uuid_protocol/0::uuid_v4/1`  
+|     :ref:`uuid_protocol/0::random_node/1`  :ref:`uuid_protocol/0::uuid_null/1`  :ref:`uuid_protocol/0::uuid_v1/2`  :ref:`uuid_protocol/0::uuid_v4/1`  
 
 .. contents::
    :local:
