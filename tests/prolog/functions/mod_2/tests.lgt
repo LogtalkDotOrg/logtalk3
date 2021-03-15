@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2020-07-22,
+		date is 2021-03-15,
 		comment is 'Unit tests for the ISO Prolog standard mod/2 built-in predicate.'
 	]).
 
@@ -63,7 +63,7 @@
 	test(lgt_mod_2_08, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
-		{_X is abs(Foo)}.
+		{_X is mod(Foo, 77)}.
 
 	test(lgt_mod_2_09, true(X == 1)) :-
 		{X is mod(-5, 2)}.
