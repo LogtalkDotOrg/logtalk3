@@ -23,10 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2020-07-22,
-		comment is 'Unit tests for the ISO Prolog standard rem/2 built-in predicate.'
+		date is 2021-03-15,
+		comment is 'Unit tests for the ISO Prolog standard rem/2 built-in function.'
 	]).
 
 	% tests from the Logtalk portability work
@@ -37,7 +37,7 @@
 	test(lgt_rem_2_02, true(X == 1)) :-
 		{X is rem(5, 2)}.
 
-	test(iso_mod_2_03, true(X == 1)) :-
+	test(lgt_rem_2_03, true(X == 1)) :-
 		{X is rem(5, -2)}.
 
 	test(lgt_rem_2_04, true(X == -1)) :-
