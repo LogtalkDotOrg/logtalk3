@@ -111,6 +111,20 @@
 	test(lgt_unbounded_mod_03, true(N == 122443787781019052100)) :-
 		N is 15241578753238836750495351562536198787501905199875019052100 mod 1234567890123456789123.
 
+	% gcd/2
+
+	test(lgt_unbounded_gcd_01, true(N == 42), [condition((Function = gcd(2,1), catch(_ is Function, _, fail)))]) :-
+		GCD = gcd(987654321098765432109876543210, 42),
+		N is GCD.
+
+	test(lgt_unbounded_gcd_02, true(N == 42), [condition((Function = gcd(2,1), catch(_ is Function, _, fail)))]) :-
+		GCD = gcd(42, 987654321098765432109876543210),
+		N is GCD.
+
+	test(lgt_unbounded_gcd_03, true(N == 9000000000900000000090), [condition((Function = gcd(2,1), catch(_ is Function, _, fail)))]) :-
+		GCD = gcd(987654321098765432109876543210, 123456789012345678901234567890),
+		N is GCD.
+
 	% (^)/2
 
 	test(lgt_unbounded_power_01, true(N == 5846006549323611672814739330865132078623730171904)) :-
