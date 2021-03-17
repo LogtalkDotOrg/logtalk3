@@ -138,6 +138,11 @@ Examples
 * UPDATED: Most examples that use parametric entities to use parameter
 variables.
 
+Tests
+-----
+
+* ADDED: Tests for unbounded integer arithmetic using standard functions.
+
 Installers and installation scripts
 -----------------------------------
 
