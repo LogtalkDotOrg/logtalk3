@@ -141,7 +141,8 @@ variables.
 Tests
 -----
 
-* ADDED: Tests for unbounded integer arithmetic using standard functions.
+* ADDED: Tests for unbounded integer arithmetic using standard functions and
+predicates.
 
 Installers and installation scripts
 -----------------------------------

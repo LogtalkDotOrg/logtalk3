@@ -162,4 +162,45 @@
 	test(lgt_unbounded_xor_03, true(N == 55022852378141362590441801315)) :-
 		N is xor(123456789012345678901234567890, 98765432109876543210987654321).
 
+	% min/2
+
+	test(lgt_unbounded_min_01, true(N == 24)) :-
+		N is min(123456789012345678901234567890, 24).
+
+	test(lgt_unbounded_min_02, true(N == 24)) :-
+		N is min(24, 123456789012345678901234567890).
+
+	test(lgt_unbounded_min_03, true(N == 123456789012345678901234567890)) :-
+		N is min(123456789012345678901234567890, 987654321098765432109876543210).
+
+	% max/2
+
+	test(lgt_unbounded_max_01, true(N == 123456789012345678901234567890)) :-
+		N is max(123456789012345678901234567890, 24).
+
+	test(lgt_unbounded_max_02, true(N == 123456789012345678901234567890)) :-
+		N is max(24, 123456789012345678901234567890).
+
+	test(lgt_unbounded_max_03, true(N == 987654321098765432109876543210)) :-
+		N is max(123456789012345678901234567890, 987654321098765432109876543210).
+
+	% succ/2
+
+	test(lgt_unbounded_succ_01, true(N == 123456789012345678901234567891), [condition(predicate_property(succ(_,_), built_in))]) :-
+		{succ(123456789012345678901234567890, N)}.
+
+	test(lgt_unbounded_succ_02, true(N == 123456789012345678901234567890), [condition(predicate_property(succ(_,_), built_in))]) :-
+		{succ(N, 123456789012345678901234567891)}.
+
+	% plus/3
+
+	test(lgt_unbounded_plus_01, true(N == 1111111110111111111011111111100), [condition(predicate_property(plus(_,_,_), built_in))]) :-
+		{plus(123456789012345678901234567890, 987654321098765432109876543210, N)}.
+
+	test(lgt_unbounded_plus_02, true(N == 987654321098765432109876543210), [condition(predicate_property(plus(_,_,_), built_in))]) :-
+		{plus(123456789012345678901234567890, N, 1111111110111111111011111111100)}.
+
+	test(lgt_unbounded_plus_03, true(N == 123456789012345678901234567890), [condition(predicate_property(plus(_,_,_), built_in))]) :-
+		{plus(N, 987654321098765432109876543210, 1111111110111111111011111111100)}.
+
 :- end_object.
