@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2021-03-18,
 		comment is 'Unit tests for unbounded integer arithmetic.'
@@ -34,6 +34,16 @@
 	]).
 
 	% tests from the Logtalk portability work
+
+	% (+)/1
+
+	test(lgt_unbounded_unary_plus_01, true(N == 123456789012345678901234567890)) :-
+		N is +(123456789012345678901234567890).
+
+	% (-)/1
+
+	test(lgt_unbounded_unary_minus_01, true(N == -123456789012345678901234567890)) :-
+		N is -(123456789012345678901234567890).
 
 	% (+)/2
 
