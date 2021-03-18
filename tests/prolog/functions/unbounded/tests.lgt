@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-03-17,
+		date is 2021-03-18,
 		comment is 'Unit tests for unbounded integer arithmetic.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, '=~='), '=~='/2
 	]).
 
 	% tests from the Logtalk portability work
@@ -69,14 +73,25 @@
 
 	% (//)/2
 
-	test(lgt_unbounded_division_01, true(N == 41152263004115226300411522630)) :-
+	test(lgt_unbounded_integer_division_01, true(N == 41152263004115226300411522630)) :-
 		N is 123456789012345678901234567890 // 3.
 
-	test(lgt_unbounded_division_02, true(N == 0)) :-
+	test(lgt_unbounded_integer_division_02, true(N == 0)) :-
 		N is 3 // 123456789012345678901234567890.
 
-	test(lgt_unbounded_division_03, true(N == 41152263004115226300411522630)) :-
+	test(lgt_unbounded_integer_division_03, true(N == 41152263004115226300411522630)) :-
 		N is 15241578753238836750495351562536198787501905199875019052100 // 370370367037037036703703703670.
+
+	% (/)/2
+
+	test(lgt_unbounded_float_division_01, true(N =~= 4.115226300411523e+28)) :-
+		N is 123456789012345678901234567890 / 3.
+
+	test(lgt_unbounded_float_division_02, true(N =~= 2.4300000218700003e-29)) :-
+		N is 3 / 123456789012345678901234567890.
+
+	test(lgt_unbounded_float_division_03, true(N =~= 3.0)) :-
+		N is 370370367037037036703703703670 / 123456789012345678901234567890.
 
 	% (div)/2
 
@@ -112,6 +127,9 @@
 		N is 15241578753238836750495351562536198787501905199875019052100 mod 1234567890123456789123.
 
 	% gcd/2
+	%
+	% the tests use a variable for the function call term to avoid compilation errors
+	% with backends that don't provid gcd/2 as a built-in arithmetic function
 
 	test(lgt_unbounded_gcd_01, true(N == 42), [condition((Function = gcd(2,1), catch(_ is Function, _, fail)))]) :-
 		GCD = gcd(987654321098765432109876543210, 42),
