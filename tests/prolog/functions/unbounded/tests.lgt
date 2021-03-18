@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2021-03-18,
 		comment is 'Unit tests for unbounded integer arithmetic.'
@@ -56,6 +56,9 @@
 	test(lgt_unbounded_addition_03, true(N == 246913578024691357802469135780)) :-
 		N is 123456789012345678901234567890 + 123456789012345678901234567890.
 
+	test(lgt_unbounded_addition_04, true(N =~= 1.3420123456789013e+34)) :-
+		N is 123456789012345678901234567890 + 13.42e+33.
+
 	% (-)/2
 
 	test(lgt_unbounded_subtraction_01, true(N == 123456789012345678901234567890)) :-
@@ -70,6 +73,9 @@
 	test(lgt_unbounded_subtraction_04, true(N == -123456789012345678901234567890)) :-
 		N is 123456789012345678901234567890 - 246913578024691357802469135780.
 
+	test(lgt_unbounded_subtraction_05, true(N =~= -1.3419876543210988e+34)) :-
+		N is 123456789012345678901234567890 - 13.42e+33.
+
 	% (*)/2
 
 	test(lgt_unbounded_multiplication_01, true(N == 370370367037037036703703703670)) :-
@@ -80,6 +86,9 @@
 
 	test(lgt_unbounded_multiplication_03, true(N == 15241578753238836750495351562536198787501905199875019052100)) :-
 		N is 123456789012345678901234567890 * 123456789012345678901234567890.
+
+	test(lgt_unbounded_multiplication_04, true(N =~= 1.656790108545679e+63)) :-
+		N is 123456789012345678901234567890 * 13.42e+33.
 
 	% (//)/2
 
@@ -102,6 +111,9 @@
 
 	test(lgt_unbounded_float_division_03, true(N =~= 3.0)) :-
 		N is 370370367037037036703703703670 / 123456789012345678901234567890.
+
+	test(lgt_unbounded_float_division_04, true(N =~= 2.7598388005740465e-05)) :-
+		N is 370370367037037036703703703670 / 13.42e+33.
 
 	% (div)/2
 
