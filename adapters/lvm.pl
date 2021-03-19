@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 1.4.0 and later versions
-%  Last updated on February 24, 2021
+%  Adapter file for LVM 1.5.0 and later versions
+%  Last updated on March 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -215,7 +215,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 4, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 5, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -385,37 +385,7 @@ setup_call_cleanup(_, _, _) :-
 % Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _Source, _Options) :-
-	consult(File),
-	destroy_index('$lgt_current_flag_'/2),
-	create_index('$lgt_current_flag_'/2),
-	destroy_index('$lgt_current_object_'/11),
-	create_index('$lgt_current_object_'/11),
-	destroy_index('$lgt_current_protocol_'/5),
-	create_index('$lgt_current_protocol_'/5),
-	destroy_index('$lgt_current_category_'/6),
-	create_index('$lgt_current_category_'/6),
-	destroy_index('$lgt_current_category_'/6),
-	create_index('$lgt_current_category_'/6),
-	destroy_index('$lgt_entity_property_'/2),
-	create_index('$lgt_entity_property_'/2),
-	destroy_index('$lgt_predicate_property_'/3),
-	create_index('$lgt_predicate_property_'/3),
-	destroy_index('$lgt_implements_protocol_'/3),
-	create_index('$lgt_implements_protocol_'/3),
-	destroy_index('$lgt_imports_category_'/3),
-	create_index('$lgt_imports_category_'/3),
-	destroy_index('$lgt_instantiates_class_'/3),
-	create_index('$lgt_instantiates_class_'/3),
-	destroy_index('$lgt_specializes_class_'/3),
-	create_index('$lgt_specializes_class_'/3),
-	destroy_index('$lgt_extends_category_'/3),
-	create_index('$lgt_extends_category_'/3),
-	destroy_index('$lgt_extends_object_'/3),
-	create_index('$lgt_extends_object_'/3),
-	destroy_index('$lgt_extends_protocol_'/3),
-	create_index('$lgt_extends_protocol_'/3),
-	destroy_index(logtalk_library_path/2),
-	create_index(logtalk_library_path/2).
+	consult(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
