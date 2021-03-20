@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2021-03-18,
+		date is 2021-03-20,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -237,6 +237,17 @@
 
 	test(lgt_unbounded_max_03, true(N == 987654321098765432109876543210)) :-
 		N is max(123456789012345678901234567890, 987654321098765432109876543210).
+
+	% float/1
+
+	test(lgt_unbounded_float_01, true(N =~= 1.2345678901234568e+29)) :-
+		N is float(123456789012345678901234567890).
+
+	test(lgt_unbounded_float_02, true(N =~= 1.881676372353658e+78)) :-
+		N is float(1881676372353657772546715999894626455109783106026821047606410765129148590562263).
+
+	test(lgt_unbounded_float_03, error(evaluation_error(float_overflow))) :-
+		_ is float(7^7^7).
 
 	% succ/2
 
