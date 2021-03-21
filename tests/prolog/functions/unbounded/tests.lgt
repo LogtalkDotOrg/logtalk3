@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-03-20,
+		date is 2021-03-21,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -151,7 +151,7 @@
 	% gcd/2
 	%
 	% the tests use a variable for the function call term to avoid compilation errors
-	% with backends that don't provid gcd/2 as a built-in arithmetic function
+	% with backends that don't provide the de facto standard gcd/2 arithmetic function
 
 	test(lgt_unbounded_gcd_01, true(N == 42), [condition((Function = gcd(2,1), catch(_ is Function, _, fail)))]) :-
 		GCD = gcd(987654321098765432109876543210, 42),
@@ -248,6 +248,37 @@
 
 	test(lgt_unbounded_float_03, error(evaluation_error(float_overflow))) :-
 		_ is float(7^7^7).
+
+	% exp/1
+
+	test(lgt_unbounded_exp_01, error(evaluation_error(float_overflow))) :-
+		_ is exp(7^7^7).
+
+	% log/1
+
+	test(lgt_unbounded_log_01, error(evaluation_error(float_overflow))) :-
+		_ is log(7^7^7).
+
+	% sqrt/1
+
+	test(lgt_unbounded_sqrt_01, error(evaluation_error(float_overflow))) :-
+		_ is sqrt(7^7^7).
+
+	% sign/1
+
+	test(lgt_unbounded_sign_01, true(N == 1)) :-
+		N is sign(123456789012345678901234567890).
+
+	test(lgt_unbounded_sign_02, true(N == -1)) :-
+		N is sign(-123456789012345678901234567890).
+
+	% abs/1
+
+	test(lgt_unbounded_abs_01, true(N == 123456789012345678901234567890)) :-
+		N is abs(123456789012345678901234567890).
+
+	test(lgt_unbounded_abs_02, true(N == 123456789012345678901234567890)) :-
+		N is abs(-123456789012345678901234567890).
 
 	% succ/2
 
