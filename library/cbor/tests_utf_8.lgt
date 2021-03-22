@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-03-04,
+		date is 2021-03-22,
 		comment is 'Unit tests for the "cbor" library (UTF-8 text strings).'
 	]).
 
@@ -44,6 +44,21 @@
 
 	condition :-
 		current_prolog_flag(bounded, false).
+
+	% test cases from the https://tools.ietf.org/html/rfc8949#appendix-A table
+	% that require Unicode support; the test numbers are the table row numbers
+
+	test(cbor_parse_2_59, true(Term == '\x00fc\')) :-
+		parse([0x62, 0xc3, 0xbc], Term).
+
+	test(cbor_parse_2_60, true(Term == '\x6c34\')) :-
+		parse([0x63, 0xe6, 0xb0, 0xb4], Term).
+
+	test(cbor_generate_2_59, true(Encoding == [0x62, 0xc3, 0xbc])) :-
+		generate('\x00fc\', Encoding).
+
+	test(cbor_generate_2_60, true(Encoding == [0x63, 0xe6, 0xb0, 0xb4])) :-
+		generate('\x6c34\', Encoding).
 
 	% UTF-8 text string tests
 

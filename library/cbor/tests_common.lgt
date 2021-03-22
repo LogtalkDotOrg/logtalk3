@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2021-03-04,
+		date is 2021-03-22,
 		comment is 'Unit tests for the "cbor" library (common).'
 	]).
 
@@ -46,6 +46,9 @@
 	% test cases from the https://tools.ietf.org/html/rfc8949#appendix-A table
 	% the test numbers are the table row numbers; all encoding tests that use
 	% encoding indicators are ommitted as these are not currently supported
+	%
+	% the four tests that require backend Unicode support are found in the
+	% tests_utf_8.lgt source file
 
 	% parse/2 tests
 
@@ -241,12 +244,6 @@
 
 	test(cbor_parse_2_58, true(Term == '\'\\')) :-
 		parse([0x62, 0x27, 0x5c], Term).
-
-	test(cbor_parse_2_59, true(Term == '\x00fc\')) :-
-		parse([0x62, 0xc3, 0xbc], Term).
-
-	test(cbor_parse_2_60, true(Term == '\x6c34\')) :-
-		parse([0x63, 0xe6, 0xb0, 0xb4], Term).
 
 	test(cbor_parse_2_62, true(Term == [])) :-
 		parse([0x80], Term).
@@ -575,12 +572,6 @@
 
 	test(cbor_generate_2_58, true(Encoding == [0x62, 0x27, 0x5c])) :-
 		generate('\'\\', Encoding).
-
-	test(cbor_generate_2_59, true(Encoding == [0x62, 0xc3, 0xbc])) :-
-		generate('\x00fc\', Encoding).
-
-	test(cbor_generate_2_60, true(Encoding == [0x63, 0xe6, 0xb0, 0xb4])) :-
-		generate('\x6c34\', Encoding).
 
 	test(cbor_generate_2_62, true(Encoding == [0x80])) :-
 		generate([], Encoding).

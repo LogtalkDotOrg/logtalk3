@@ -58,20 +58,20 @@ Library
 -------
 
 * CHANGED: Move the `random` library seed predicates to a separate protocol.
-This change doesn't require any changes to applications using this library.
+This change doesn't require changes to applications using this library.
 
-* ADDED: Preliminary version of a `base64` library for encoding and decoding
-binary data in the Base64 and Base64URL formats.
+* ADDED: A `base64` library for encoding and decoding binary data in the
+Base64 and Base64URL formats.
 
-* ADDED: Preliminary version of a `uuid` library for generating Universally
-Unique Identifiers (UUIDs). Currently only supporting version 4 UUIDs.
+* ADDED: A `uuid` library for generating Universally Unique Identifiers
+(UUIDs). Currently supports version 1 and version 4 UUIDs.
 
-* ADDED: Preliminary version of a `json` library for encoding and decoding
-JSON data. Joint work with Jacinto Dávila.
+* ADDED: A `json` library for encoding and decoding JSON data. Joint work
+with Jacinto Dávila.
 
-* ADDED: Preliminary version of a `cbor` library for encoding and decoding
-data in the Concise Binary Object Representation (CBOR) format. Currently
-requires a backend supporting unbounded integer arithmetic.
+* ADDED: A `cbor` library for encoding and decoding data in the Concise Binary
+Object Representation (CBOR) format. Currently requires a backend supporting
+unbounded integer arithmetic.
 
 * ADDED: Predicates `file_to_bytes/2-3` and `stream_to_bytes/2-3` to the
 `reader` library.
