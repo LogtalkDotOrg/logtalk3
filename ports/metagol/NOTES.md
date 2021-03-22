@@ -2,9 +2,9 @@ ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
 
-Copyright 2016 Metagol authors
-Copyright 2018-2019 Paulo Moura
-All rights reserved.
+Copyright 2016 Metagol authors  
+Copyright 2018-2019 Paulo Moura  
+All rights reserved.  
 SPDX-License-Identifier: BSD-3-Clause
 
 Redistribution and use in source and binary forms, with or without
@@ -43,6 +43,9 @@ from:
 
 	https://github.com/metagol/metagol
 
+See the original code git repo for details and bibliography on Metagol
+and ILP.
+
 The port allows any number of datasets to be loaded simultaneously with
 per-dataset learning options. A dataset is simply wrapped in an object
 that extends and is expanded by the `metagol` object as illustrated by
@@ -51,7 +54,7 @@ the ported examples.
 Both the original code and the port requires the coroutining `when/2`
 predicate, which is only available in some backend Prolog systems.
 The port currently supports ECLiPSe, SICStus Prolog, SWI-Prolog, and
-YAP.
+YAP. It can be used on both POSIX and Windows operating-systems.
 
 The examples are ported from the original Metagol distribution. Some of
 the examples are taken from the following paper (with the original Prolog
