@@ -42,8 +42,6 @@
 	implements(metagol_example_protocol),
 	extends(metagol)).
 
-	:- uses(list, [member/2]).
-
 	%% tell metagol to use the BK
 	body_pred(s/2).
 

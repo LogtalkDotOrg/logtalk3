@@ -103,10 +103,10 @@
 		B = [_|_],
 		%% freeze(A,freeze(B,(length(A,N),length(B,N)))),
 		msort(A,B).
-	is_letter(A):-
-	  my_char_code(_,A),!.
-	%% not_letter(A):-
-	  %% my_char_code(_,A),!.
+%	is_letter(A):-
+%		my_char_code(_,A),!.
+%	not_letter(A):-
+%		my_char_code(_,A),!.
 	empty([]).
 	not_empty([_|_]).
 
