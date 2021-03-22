@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
 		date is 2021-03-22,
 		comment is 'Unit tests for the "cbor" library (common).'
@@ -442,7 +442,7 @@
 	- test(cbor_generate_2_25a, true(Encoding == [0xfa, 0x47, 0xc3, 0x50, 0x00])) :-
 		generate(100000.0, Encoding).
 
-	test(cbor_generate_2_25b, true(Encoding == [0xc4, 0x82, 0x20, 0x1a, 0x00, 0x0f, 0x42, 0x40])) :-
+	test(cbor_generate_2_25b, true((Encoding == [0xc4, 0x82, 0x20, 0x1a, 0x00, 0x0f, 0x42, 0x40]; Encoding == [196,130,4,10]))) :-
 		% decimal fraction encoding
 		generate(100000.0, Encoding).
 
