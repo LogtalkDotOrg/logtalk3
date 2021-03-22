@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2021-03-22,
 		comment is 'Unit tests for the "cbor" library (common).'
@@ -117,34 +117,34 @@
 
 	test(cbor_parse_2_21b, true(Term =~= 1.0)) :-
 		% decimal fraction encoding
-		parse([196, 130, 32, 10], Term).
+		parse([0xc4, 0x82, 0x20, 0x0a], Term).
 
 	test(cbor_parse_2_22a, true(Term =~= 1.1)) :-
 		parse([0xfb, 0x3f, 0xf1, 0x99, 0x99, 0x99, 0x99, 0x99, 0x9a], Term).
 
 	test(cbor_parse_2_22b, true(Term =~= 1.1)) :-
-		parse([196, 130, 32, 11], Term).
+		parse([0xc4, 0x82, 0x20, 0x0b], Term).
 
 	test(cbor_parse_2_23a, true(Term =~= 1.5)) :-
 		parse([0xf9, 0x3e, 0x00], Term).
 
 	test(cbor_parse_2_23b, true(Term =~= 1.5)) :-
 		% decimal fraction encoding
-		parse([196, 130, 32, 15], Term).
+		parse([0xc4, 0x82, 0x20, 0x0f], Term).
 
 	test(cbor_parse_2_24a, true(Term =~= 65504.0)) :-
 		parse([0xf9, 0x7b, 0xff], Term).
 
 	test(cbor_parse_2_24b, true(Term =~= 65504.0)) :-
 		% decimal fraction encoding
-		parse([196, 130, 32, 26, 0, 9, 254, 192], Term).
+		parse([0xc4, 0x82, 0x20, 0x1a, 0x00, 0x09, 0xfe, 0xc0], Term).
 
 	test(cbor_parse_2_25a, true(Term =~= 100000.0)) :-
 		parse([0xfa, 0x47, 0xc3, 0x50, 0x00], Term).
 
 	test(cbor_parse_2_25b, true(Term =~= 100000.0)) :-
 		% decimal fraction encoding
-		parse([196, 130, 32, 26, 0, 15, 66, 64], Term).
+		parse([0xc4, 0x82, 0x20, 0x1a, 0x00, 0x0f, 0x42, 0x40], Term).
 
 	test(cbor_parse_2_26, true(Term =~= 3.4028234663852886e+38)) :-
 		parse([0xfa, 0x7f, 0x7f, 0xff, 0xff], Term).
@@ -414,77 +414,77 @@
 	- test(cbor_generate_2_21a, true(Encoding == [0xf9, 0x3c, 0x00])) :-
 		generate(1.0, Encoding).
 
-	test(cbor_generate_2_21b, true(Encoding == [196, 130, 32, 10])) :-
+	test(cbor_generate_2_21b, true(Encoding == [0xc4, 0x82, 0x20, 0x0a])) :-
 		% decimal fraction encoding
 		generate(1.0, Encoding).
 
 	- test(cbor_generate_2_22a, true(Encoding == [0xfb, 0x3f, 0xf1, 0x99, 0x99, 0x99, 0x99, 0x99, 0x9a])) :-
 		generate(1.1, Encoding).
 
-	test(cbor_generate_2_22b, true(Encoding == [196, 130, 32, 11])) :-
+	test(cbor_generate_2_22b, true(Encoding == [0xc4, 0x82, 0x20, 0x0b])) :-
 		% decimal fraction encoding
 		generate(1.1, Encoding).
 
 	- test(cbor_generate_2_23a, true(Encoding == [0xf9, 0x3e, 0x00])) :-
 		generate(1.5, Encoding).
 
-	test(cbor_generate_2_23b, true(Encoding == [196, 130, 32, 15])) :-
+	test(cbor_generate_2_23b, true(Encoding == [0xc4, 0x82, 0x20, 0x0f])) :-
 		% decimal fraction encoding
 		generate(1.5, Encoding).
 
 	- test(cbor_generate_2_24a, true(Encoding == [0xf9, 0x7b, 0xff])) :-
 		generate(65504.0, Encoding).
 
-	test(cbor_generate_2_24b, true(Encoding == [196, 130, 32, 26, 0, 9, 254, 192])) :-
+	test(cbor_generate_2_24b, true(Encoding == [0xc4, 0x82, 0x20, 0x1a, 0x00, 0x09, 0xfe, 0xc0])) :-
 		% decimal fraction encoding
 		generate(65504.0, Encoding).
 
 	- test(cbor_generate_2_25a, true(Encoding == [0xfa, 0x47, 0xc3, 0x50, 0x00])) :-
 		generate(100000.0, Encoding).
 
-	test(cbor_generate_2_25b, true(Encoding == [196, 130, 32, 26, 0, 15, 66, 64])) :-
+	test(cbor_generate_2_25b, true(Encoding == [0xc4, 0x82, 0x20, 0x1a, 0x00, 0x0f, 0x42, 0x40])) :-
 		% decimal fraction encoding
 		generate(100000.0, Encoding).
 
 	- test(cbor_generate_2_26a, true(Encoding == [0xfa, 0x7f, 0x7f, 0xff, 0xff])) :-
 		generate(3.4028234663852886e+38, Encoding).
 
-	test(cbor_generate_2_26b, true(Encoding == [196,130,22,27,0,120,228,127,199,120,251,86])) :-
+	test(cbor_generate_2_26b, true(Encoding == [0xc4, 0x82, 0x16, 0x1b, 0x00, 0x78, 0xe4, 0x7f, 0xc7, 0x78, 0xfb, 0x56])) :-
 		% decimal fraction encoding
 		generate(3.4028234663852886e+38, Encoding).
 
 	- test(cbor_generate_2_27a, true(Encoding == [0xfb, 0x7e, 0x37, 0xe4, 0x3c, 0x88, 0x00, 0x75, 0x9c])) :-
 		generate(1.0e+300, Encoding).
 
-	test(cbor_generate_2_27b, true(Encoding == [196, 130, 25, 1, 43, 10])) :-
+	test(cbor_generate_2_27b, true(Encoding == [0xc4, 0x82, 0x19, 0x01, 0x2b, 0x0a])) :-
 		% decimal fraction encoding
 		generate(1.0e+300, Encoding).
 
 	- test(cbor_generate_2_28a, true(Encoding == [0xf9, 0x00, 0x01])) :-
 		generate(5.960464477539063e-8, Encoding).
 
-	test(cbor_generate_2_28b, true(Encoding == [196,130,54,27,0,21,45,2,199,225,74,247])) :-
+	test(cbor_generate_2_28b, true(Encoding == [0xc4, 0x82, 0x36, 0x1b, 0x00, 0x15, 0x2d, 0x02, 0xc7, 0xe1, 0x4a, 0xf7])) :-
 		% decimal fraction encoding
 		generate(5.960464477539063e-8, Encoding).
 
 	- test(cbor_generate_2_29a, true(Encoding == [0xf9, 0x04, 0x00])) :-
 		generate(0.00006103515625, Encoding).
 
-	test(cbor_generate_2_29b, true(Encoding == [196,130,45,27,0,0,0,1,107,204,65,233])) :-
+	test(cbor_generate_2_29b, true(Encoding == [0xc4, 0x82, 0x2d, 0x1b, 0x00, 0x00, 0x00, 0x01, 0x6b, 0xcc, 0x41, 0xe9])) :-
 		% decimal fraction encoding
 		generate(0.00006103515625, Encoding).
 
 	- test(cbor_generate_2_30a, true(Encoding == [0xf9, 0xc4, 0x00])) :-
 		generate(-4.0, Encoding).
 
-	test(cbor_generate_2_30b, true(Encoding == [196,130,32,56,39])) :-
+	test(cbor_generate_2_30b, true(Encoding == [0xc4, 0x82, 0x20, 0x38, 0x27])) :-
 		% decimal fraction encoding
 		generate(-4.0, Encoding).
 
 	- test(cbor_generate_2_31a, true(Encoding == [0xfb,0xc0, 0x10, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66])) :-
 		generate(-4.1, Encoding).
 
-	test(cbor_generate_2_31b, true(Encoding == [196,130,32,56,40])) :-
+	test(cbor_generate_2_31b, true(Encoding == [0xc4, 0x82, 0x20, 0x38, 0x28])) :-
 		% decimal fraction encoding
 		generate(-4.1, Encoding).
 
@@ -542,7 +542,7 @@
 	- test(cbor_generate_2_49a, true(Encoding == [0xc1, 0xfb, 0x41, 0xd4, 0x52, 0xd9, 0xec, 0x20, 0x00, 0x00])) :-
 		generate(tag(1, 1363896240.5), Encoding).
 
-	test(cbor_generate_2_49b, true(Encoding == [193,196,130,32,27,0,0,0,3,44,242,12,229])) :-
+	test(cbor_generate_2_49b, true(Encoding == [0xc1, 0xc4, 0x82, 0x20, 0x1b, 0x00, 0x00, 0x00, 0x03, 0x2c, 0xf2, 0x0c, 0xe5])) :-
 		% decimal fraction encoding
 		generate(tag(1, 1363896240.5), Encoding).
 
@@ -603,18 +603,18 @@
 	- test(cbor_generate_2_70a, true(Encoding == [0xa5, 0x61, 0x61, 0x61, 0x41, 0x61, 0x62, 0x61, 0x42, 0x61, 0x63, 0x61, 0x43, 0x61, 0x64, 0x61, 0x44, 0x61, 0x65, 0x61, 0x45])) :-
 		generate({a-'A', b-'B', c-'C', d-'D', e-'E'}, Encoding).
 
-	test(cbor_generate_2_70b, true(Encoding == [191,97,97,97,65,97,98,97,66,97,99,97,67,97,100,97,68,97,101,97,69,255])) :-
+	test(cbor_generate_2_70b, true(Encoding == [0xbf, 0x61, 0x61, 0x61, 0x41, 0x61, 0x62, 0x61, 0x42, 0x61, 0x63, 0x61, 0x43, 0x61, 0x64, 0x61, 0x44, 0x61, 0x65, 0x61, 0x45, 0xff])) :-
 		generate({a-'A', b-'B', c-'C', d-'D', e-'E'}, Encoding).
 
 	% text representation
 
-	test(cbor_generate_2_atom, true(Encoding == [99, 97, 98, 99])) :-
+	test(cbor_generate_2_atom, true(Encoding == [0x63, 0x61, 0x62, 0x63])) :-
 		generate(abc, Encoding).
 
-	test(cbor_generate_2_chars, true(Encoding == [99, 97, 98, 99])) :-
+	test(cbor_generate_2_chars, true(Encoding == [0x63, 0x61, 0x62, 0x63])) :-
 		generate(chars([a,b,c]), Encoding).
 
-	test(cbor_generate_2_codes, true(Encoding == [99, 97, 98, 99])) :-
+	test(cbor_generate_2_codes, true(Encoding == [0x63, 0x61, 0x62, 0x63])) :-
 		generate(codes([97,98,99]), Encoding).
 
 :- end_object.
