@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-03-21,
+		date is 2021-03-22,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -298,5 +298,101 @@
 
 	test(lgt_unbounded_plus_03, true(N == 123456789012345678901234567890), [condition(predicate_property(plus(_,_,_), built_in))]) :-
 		{plus(N, 987654321098765432109876543210, 1111111110111111111011111111100)}.
+
+	% (=<)/2
+
+	test(lgt_unbounded_less_or_equal_01, true) :-
+		value(Value),
+		-1844674407370909797907654848955145546336677616 =< Value.
+
+	test(lgt_unbounded_less_or_equal_02, false) :-
+		value(Value),
+		1844674407370909797907654848955145546336677616 =< Value.
+
+	test(lgt_unbounded_less_or_equal_03, false) :-
+		value(Value),
+		 Value =< -1844674407370909797907654848955145546336677616.
+
+	test(lgt_unbounded_less_or_equal_04, true) :-
+		value(Value),
+		Value =< 1844674407370909797907654848955145546336677616.
+
+	% (<)/2
+
+	test(lgt_unbounded_less_01, true) :-
+		value(Value),
+		-1844674407370909797907654848955145546336677616 < Value.
+
+	test(lgt_unbounded_less_02, false) :-
+		value(Value),
+		1844674407370909797907654848955145546336677616 < Value.
+
+	test(lgt_unbounded_less_03, false) :-
+		value(Value),
+		Value < -1844674407370909797907654848955145546336677616.
+
+	test(lgt_unbounded_less_04, true) :-
+		value(Value),
+		Value < 1844674407370909797907654848955145546336677616.
+
+	% (>=)/2
+
+	test(lgt_unbounded_greater_or_equal_01, false) :-
+		value(Value),
+		-1844674407370909797907654848955145546336677616 >= Value.
+
+	test(lgt_unbounded_greater_or_equal_02, true) :-
+		value(Value),
+		1844674407370909797907654848955145546336677616 >= Value.
+
+	test(lgt_unbounded_greater_or_equal_03, true) :-
+		value(Value),
+		 Value >= -1844674407370909797907654848955145546336677616.
+
+	test(lgt_unbounded_greater_or_equal_04, false) :-
+		value(Value),
+		Value >= 1844674407370909797907654848955145546336677616.
+
+	% (>)/2
+
+	test(lgt_unbounded_greater_01, false) :-
+		value(Value),
+		-1844674407370909797907654848955145546336677616 > Value.
+
+	test(lgt_unbounded_greater_02, true) :-
+		value(Value),
+		1844674407370909797907654848955145546336677616 > Value.
+
+	test(lgt_unbounded_greater_03, true) :-
+		value(Value),
+		Value > -1844674407370909797907654848955145546336677616.
+
+	test(lgt_unbounded_greater_04, false) :-
+		value(Value),
+		Value > 1844674407370909797907654848955145546336677616.
+
+	% (=:=)/2
+
+	test(lgt_unbounded_equal_01, false) :-
+		value(Value),
+		-1844674407370909797907654848955145546336677616 =:= Value.
+
+	test(lgt_unbounded_equal_02, false) :-
+		value(Value),
+		Value =:= -1844674407370909797907654848955145546336677616.
+
+	% (=\=)/2
+
+	test(lgt_unbounded_not_equal_01, true) :-
+		value(Value),
+		1844674407370909797907654848955145546336677616 =\= Value.
+
+	test(lgt_unbounded_not_equal_02, true) :-
+		value(Value),
+		Value =\= 1844674407370909797907654848955145546336677616.
+
+	% auxiliary predicates for delaying tests to runtime
+
+	value(42).
 
 :- end_object.
