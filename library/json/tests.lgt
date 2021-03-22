@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-03-12,
+		date is 2021-03-22,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.',
 		parameters is [
 			'Collection' - 'JSON files directory.'
@@ -111,7 +111,7 @@
 		file_path(_Collection_, Directory),
 		directory_files(Directory, Files, [type(regular), extensions(['.json'])]),
 		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))),
-		forall(fail_named(File, Files), assertion(File, (\+ json::parse(file(File), _)))).
+		forall(fail_named(File, Files), assertion(File, (catch(json::parse(file(File), _), Error, true), nonvar(Error)))).
 
 	test(roundtrip_hexadecimals, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
 		^^suppress_text_output,

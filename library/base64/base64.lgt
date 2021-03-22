@@ -22,9 +22,9 @@
 :- object(base64).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-03-10,
+		date is 2021-03-22,
 		comment is 'Base64 parser and generator.'
 	]).
 
@@ -42,37 +42,56 @@
 		argnames is ['Sink', 'Bytes']
 	]).
 
+	parse(Source, _) :-
+		var(Source),
+		instantiation_error.
 	parse(file(File), Bytes) :-
 		reader::file_to_codes(File, Codes),
-		phrase(decode(Codes), Bytes).
+		phrase(decode(Codes), Bytes),
+		!.
 	parse(stream(Stream), Bytes) :-
 		reader::stream_to_codes(Stream, Codes),
-		phrase(decode(Codes), Bytes).
+		phrase(decode(Codes), Bytes),
+		!.
 	parse(atom(Atom), Bytes) :-
 		atom_codes(Atom, Codes),
-		phrase(decode(Codes), Bytes).
+		phrase(decode(Codes), Bytes),
+		!.
 	parse(chars(Chars), Bytes) :-
 		chars_to_codes(Chars, Codes),
-		phrase(decode(Codes), Bytes).
+		phrase(decode(Codes), Bytes),
+		!.
 	parse(codes(Codes), Bytes) :-
-		phrase(decode(Codes), Bytes).
+		phrase(decode(Codes), Bytes),
+		!.
+	parse(Source, _) :-
+		domain_error(base64_source, Source).
 
+	generate(Sink, _) :-
+		var(Sink),
+		instantiation_error.
 	generate(file(File), Bytes) :-
 		phrase(encode(Bytes), Codes),
 		open(File, write, Stream),
 		write_codes(Codes, Stream),
-		close(Stream).
+		close(Stream),
+		!.
 	generate(stream(Stream), Bytes) :-
 		phrase(encode(Bytes), Codes),
-		write_codes(Codes, Stream).
+		write_codes(Codes, Stream),
+		!.
 	generate(atom(Atom), Bytes) :-
 		phrase(encode(Bytes), Codes),
-		atom_codes(Atom, Codes).
+		atom_codes(Atom, Codes),
+		!.
 	generate(chars(Chars), Bytes) :-
 		phrase(encode(Bytes), Codes),
 		codes_to_chars(Codes, Chars).
 	generate(codes(Codes), Bytes) :-
-		phrase(encode(Bytes), Codes).
+		phrase(encode(Bytes), Codes),
+		!.
+	generate(Sink, _) :-
+		domain_error(base64_sink, Sink).
 
 	% parser (decoding)
 

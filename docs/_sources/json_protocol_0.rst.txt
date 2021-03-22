@@ -11,8 +11,8 @@
 JSON parser and generator protocol.
 
 | **Author:** Paulo Moura and Jacinto Dávila
-| **Version:** 0:9:0
-| **Date:** 2021-03-12
+| **Version:** 0:10:0
+| **Date:** 2021-03-22
 
 | **Compilation flags:**
 |    ``static``
@@ -53,7 +53,7 @@ Parses the JSON contents read from the given source (``codes(List)``, ``stream(S
 | **Template:**
 |    ``parse(Source,Term)``
 | **Mode and number of proofs:**
-|    ``parse(++compound,--term)`` - ``zero_or_one``
+|    ``parse(++compound,--term)`` - ``one_or_error``
 
 
 ------------
@@ -76,7 +76,7 @@ Generates the content using the representation specified in the first argument (
 | **Template:**
 |    ``generate(Sink,Term)``
 | **Mode and number of proofs:**
-|    ``generate(+compound,++term)`` - ``zero_or_one``
+|    ``generate(+compound,++term)`` - ``one_or_error``
 
 
 ------------

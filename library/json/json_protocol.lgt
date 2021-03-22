@@ -23,21 +23,21 @@
 :- protocol(json_protocol).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-03-12,
+		date is 2021-03-22,
 		comment is 'JSON parser and generator protocol.'
 	]).
 
 	:- public(parse/2).
-	:- mode(parse(++compound, --term), zero_or_one).
+	:- mode(parse(++compound, --term), one_or_error).
 	:- info(parse/2, [
 		comment is 'Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.',
 		argnames is ['Source', 'Term']
 	]).
 
 	:- public(generate/2).
-	:- mode(generate(+compound, ++term), zero_or_one).
+	:- mode(generate(+compound, ++term), one_or_error).
 	:- info(generate/2, [
 		comment is 'Generates the content using the representation specified in the first argument (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument. Fails if this term cannot be processed.',
 		argnames is ['Sink', 'Term']

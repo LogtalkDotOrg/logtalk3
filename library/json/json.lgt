@@ -24,46 +24,66 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-03-12,
+		date is 2021-03-22,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		]
 	]).
 
+	parse(Source, _) :-
+		var(Source),
+		instantiation_error.
 	parse(file(File), JSON) :-
 		reader::file_to_codes(File, Codes),
-		phrase(json(JSON), Codes).
+		phrase(json(JSON), Codes),
+		!.
 	parse(stream(Stream), JSON) :-
 		reader::stream_to_codes(Stream, Codes),
-		phrase(json(JSON), Codes).
+		phrase(json(JSON), Codes),
+		!.
 	parse(codes(Codes), JSON) :-
-		phrase(json(JSON), Codes).
+		phrase(json(JSON), Codes),
+		!.
 	parse(chars(Chars), JSON) :-
 		chars_to_codes(Chars, Codes),
-		phrase(json(JSON), Codes).
+		phrase(json(JSON), Codes),
+		!.
 	parse(atom(Atom), JSON) :-
 		atom_codes(Atom, Codes),
-		phrase(json(JSON), Codes).
+		phrase(json(JSON), Codes),
+		!.
+	parse(Source, _) :-
+		domain_error(json_source, Source).
 
+	generate(Sink, _) :-
+		var(Sink),
+		instantiation_error.
 	generate(file(File), Term) :-
 		phrase(encode(Term), Codes),
 		open(File, write, Stream),
 		write_codes(Codes, Stream),
-		close(Stream).
+		close(Stream),
+		!.
 	generate(stream(Stream), Term) :-
 		phrase(encode(Term), Codes),
-		write_codes(Codes, Stream).
+		write_codes(Codes, Stream),
+		!.
 	generate(codes(Codes), Term) :-
-		phrase(encode(Term), Codes).
+		phrase(encode(Term), Codes),
+		!.
 	generate(chars(Chars), Term) :-
 		phrase(encode(Term), Codes),
-		codes_to_chars(Codes, Chars).
+		codes_to_chars(Codes, Chars),
+		!.
 	generate(atom(Atom), Term) :-
 		phrase(encode(Term), Codes),
-		atom_codes(Atom, Codes).
+		atom_codes(Atom, Codes),
+		!.
+	generate(Sink, _) :-
+		domain_error(json_sink, Sink).
 
 	json(JSON) -->
 		json_white_space, json_value(JSON), json_white_space.
