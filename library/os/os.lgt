@@ -44,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:75:0,
+		version is 1:75:1,
 		author is 'Paulo Moura',
-		date is 2021-02-21,
+		date is 2021-03-23,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -735,7 +735,10 @@
 			 append(['.', '..'| Directories1], Files1, Files)}.
 
 		directory_exists(Directory) :-
-			absolute_file_name(Directory, Path),
+			% workaround issue with directories like "c:" not
+			% being recognized when running on Windows
+			atom_concat(Directory, '/', DirectorySlash),
+			absolute_file_name(DirectorySlash, Path),
 			{directory_exists(Path)}.
 
 		file_exists(File) :-

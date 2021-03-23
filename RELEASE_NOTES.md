@@ -99,6 +99,9 @@ YAP.
 * FIXED: Test for the `os::path_concat/3` predicate to work on both POSIX and
 Windows systems.
 
+* FIXED: Workaround issue with directories like `c:` not being recognized when
+running with the SICStus Prolog backend on Windows operating-systems.
+
 * FIXED: Library `csv` round-trip tests to only run when the `diff` command is
 available.
 
