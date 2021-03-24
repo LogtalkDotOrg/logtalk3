@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "January 12, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "March 24, 2021" "Logtalk 3.46.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -6,9 +6,8 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .SH SYNOPSIS
 .B logtalk_tester -v
 .br
-.B logtalk_tester
+.B logtalk_tester \fB-p \fIprolog\fR
 [\fB-o \fIoutput\fR]
-[\fB-p \fIprolog\fR]
 [\fB-m \fImode\fR\fR]
 [\fB-f \fIformat\fR]
 [\fB-d \fIresults\fR]
@@ -33,11 +32,11 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .BI \-v
 Print script version.
 .TP
+.BI \-p
+Backend Prolog compiler. Required. The following identifiers are used: B-Prolog - \fIb\fR, Ciao Prolog - \fIciao\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, JIProlog - \fIji\fR, LVM - \fIlvm\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, Trealla Prolog - \fItrealla\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
+.TP
 .BI \-o
 Output verbosity. Default is \fIverbose\fR. Valid values are \fIverbose\fR and \fIminimal\fR.
-.TP
-.BI \-p
-Backend Prolog compiler. Default is SWI-Prolog. The following identifiers are used: B-Prolog - \fIb\fR, Ciao Prolog - \fIciao\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, JIProlog - \fIji\fR, LVM - \fIlvm\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, Trealla Prolog - \fItrealla\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
 .TP
 .BI \-m
 Compilation mode. Default is \fInormal\fR. Valid values are \fIoptimal\fR, \fInormal\fR, \fIdebug\fR, and \fIall\fR.

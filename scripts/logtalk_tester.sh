@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 17, 2021
+##   Last updated on March 24, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 2.16"
+	echo "$(basename "$0") 3.0"
 	exit 0
 }
 
@@ -56,7 +56,7 @@ fi
 
 # default argument values
 
-backend=swi
+backend=""
 driver='tester'
 dot=""
 output='verbose'
@@ -251,15 +251,17 @@ usage_help()
 	echo "The \"tester.sh\" file is sourced with all the parameters passed to the script."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-o output] [-p prolog] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
+	echo
+	echo "Required arguments:"
+	echo "  -p backend Prolog compiler"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -o output (valid values are verbose and minimal; default is $output)"
-	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, qp, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
@@ -281,12 +283,12 @@ usage_help()
 	echo
 }
 
-while getopts "vo:p:m:f:d:t:n:s:c:l:g:r:i:wh" option
+while getopts "vp:o:m:f:d:t:n:s:c:l:g:r:i:wh" option
 do
 	case $option in
 		v) print_version;;
-		o) o_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
+		o) o_arg="$OPTARG";;
 		m) m_arg="$OPTARG";;
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
@@ -300,30 +302,18 @@ do
 		r) r_arg="$OPTARG";;
 		w) wipe='true';;
 		h) usage_help; exit;;
-		*) usage_help; exit;;
+		*) usage_help; exit 1;;
 	esac
 done
 
 shift $((OPTIND - 1))
 args=("$@")
 
-if [ "$o_arg" == "verbose" ] ; then
-	output='verbose'
-elif [ "$o_arg" == "minimal" ] ; then
-	output='minimal'
-elif [ "$o_arg" != "" ] ; then
-	echo "Error! Unknown output verbosity: $o_arg" >&2
+if [ "$p_arg" == "" ] ; then
+	echo "Error! Backend Prolog compiler not specified!" >&2
 	usage_help
 	exit 1
-fi
-
-# default backend
-
-prolog='SWI-Prolog'
-logtalk=swilgt$extension
-logtalk_call="$logtalk $i_arg -g"
-
-if [ "$p_arg" == "b" ] || [ "$p_arg" == "b-prolog" ] ; then
+elif [ "$p_arg" == "b" ] || [ "$p_arg" == "b-prolog" ] ; then
 	backend=b
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
@@ -410,6 +400,16 @@ elif [ "$p_arg" != "" ] ; then
 elif [ ! "$(command -v $logtalk)" ] ; then
 	echo "Error! $logtalk integration script for $prolog not found." >&2
 	echo "       Check that its directory is in your execution path." >&2
+	exit 1
+fi
+
+if [ "$o_arg" == "verbose" ] ; then
+	output='verbose'
+elif [ "$o_arg" == "minimal" ] ; then
+	output='minimal'
+elif [ "$o_arg" != "" ] ; then
+	echo "Error! Unknown output verbosity: $o_arg" >&2
+	usage_help
 	exit 1
 fi
 

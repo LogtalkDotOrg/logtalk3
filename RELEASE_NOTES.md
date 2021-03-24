@@ -22,6 +22,19 @@ RELEASE NOTES
 =============
 
 
+3.46.0 - April ??, 2021
+=======================
+
+Tools
+-----
+
+* CHANGED: The `logtalk_tester.sh` script to require specifying the backend
+instead of using a default backend.
+
+* FIXED: The `logtalk_tester.sh` script to exit with an error when passed an
+unknown option.
+
+
 3.45.0 - March 23, 2021
 =======================
 
