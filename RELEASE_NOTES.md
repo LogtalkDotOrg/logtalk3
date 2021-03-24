@@ -34,6 +34,9 @@ specifying the backend instead of using a default backend.
 * FIXED: The `logtalk_tester.sh` and `logtalk_doclet.sh` scripts to exit with
 an error when passed an unknown option.
 
+* FIXED: The `lgtunit` tool xUnit and xUnit.net v2 XML format exporters to
+escape special XML characters in common cases such as the `heaps` library.
+
 
 3.45.0 - March 23, 2021
 =======================

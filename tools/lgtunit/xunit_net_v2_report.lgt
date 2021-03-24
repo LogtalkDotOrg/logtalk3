@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2021-03-09,
+		date is 2021-03-24,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -398,7 +398,8 @@
 		write(xunit_report, ' '),
 		write(xunit_report, Attribute),
 		write(xunit_report, '="'),
-		write(xunit_report, Value),
+		escape_special_characters(Value, Escaped),
+		write(xunit_report, Escaped),
 		write(xunit_report, '"'),
 		write_xml_tag_attributes(Rest).
 
@@ -406,6 +407,29 @@
 		write(xunit_report, '</'),
 		write(xunit_report, Tag),
 		write(xunit_report, '>'), nl(xunit_report).
+
+	escape_special_characters(Term, Escaped) :-
+		(	var(Term) ->
+			Escaped = Term
+		;	escape_special_character(Term, Escaped) ->
+			true
+		;	compound(Term) ->
+			Term =.. List,
+			escape_special_characters_list(List, EscapedList),
+			Escaped =.. EscapedList
+		;	Escaped = Term
+		).
+
+	escape_special_character((<),  '&lt;').
+	escape_special_character((>),  '&gt;').
+	escape_special_character('"',  '&quot;').
+	escape_special_character('\'', '&apos;').
+	escape_special_character((&),  '&amp;').
+
+	escape_special_characters_list([], []).
+	escape_special_characters_list([Argument| Arguments], [EscapedArgument| EscapedArguments]) :-
+		escape_special_characters(Argument, EscapedArgument),
+		escape_special_characters_list(Arguments, EscapedArguments).
 
 	pretty_print_vars(Term) :-
 		\+ \+ (
