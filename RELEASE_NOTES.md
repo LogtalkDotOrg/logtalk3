@@ -28,11 +28,11 @@ RELEASE NOTES
 Tools
 -----
 
-* CHANGED: The `logtalk_tester.sh` script to require specifying the backend
-instead of using a default backend.
+* CHANGED: The `logtalk_tester.sh` and `logtalk_doclet.sh` scripts to require
+specifying the backend instead of using a default backend.
 
-* FIXED: The `logtalk_tester.sh` script to exit with an error when passed an
-unknown option.
+* FIXED: The `logtalk_tester.sh` and `logtalk_doclet.sh` scripts to exit with
+an error when passed an unknown option.
 
 
 3.45.0 - March 23, 2021

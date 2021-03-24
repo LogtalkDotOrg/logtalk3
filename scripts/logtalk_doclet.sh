@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on January 3, 2021
+##   Last updated on March 24, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 2.0"
 	exit 0
 }
 
@@ -112,14 +112,16 @@ usage_help()
 	echo  "case of failed doclets or doclet errors, this script returns a non-zero exit code."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-p prolog] [-d results] [-t timeout] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-d results] [-t timeout] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
+	echo "Required arguments:"
+	echo "  -p backend Prolog compiler"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, qp, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
 	echo "  -s supress path prefix (default is $prefix)"
@@ -137,13 +139,17 @@ do
 		t) t_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		h) usage_help; exit;;
-		*) usage_help; exit;;
+		*) usage_help; exit 1;;
 	esac
 done
 
 shift $((OPTIND - 1))
 
-if [ "$p_arg" == "b" ] ; then
+if [ "$p_arg" == "" ] ; then
+	echo "Error! Backend Prolog compiler not specified!" >&2
+	usage_help
+	exit 1
+elif [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
 	logtalk_call="$logtalk -g"
