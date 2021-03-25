@@ -25,6 +25,12 @@ RELEASE NOTES
 3.46.0 - April ??, 2021
 =======================
 
+Library
+-------
+
+* ADDED: Predicates `numbervars/3`, `numbervars/1`, and `varnumbers/2-3 to the
+library `term` object.
+
 Tools
 -----
 

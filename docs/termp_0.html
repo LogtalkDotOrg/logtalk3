@@ -282,11 +282,11 @@
   <p class="right" id="termp-0"><span id="index-0"></span><strong>protocol</strong></p>
 <div class="section" id="termp">
 <h1><code class="docutils literal notranslate"><span class="pre">termp</span></code><a class="headerlink" href="#termp" title="Permalink to this headline">¶</a></h1>
-<p>Prolog term utility predicates protocol.</p>
+<p>Term utility predicates protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:31:0</div>
-<div class="line"><strong>Date:</strong> 2010-06-09</div>
+<div class="line"><strong>Version:</strong> 1:32:0</div>
+<div class="line"><strong>Date:</strong> 2021-03-25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -327,11 +327,15 @@
 <li><p><a class="reference internal" href="#variant-2" id="id10"><code class="docutils literal notranslate"><span class="pre">variant/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#variables-2" id="id11"><code class="docutils literal notranslate"><span class="pre">variables/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#singletons-2" id="id12"><code class="docutils literal notranslate"><span class="pre">singletons/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#numbervars-3" id="id13"><code class="docutils literal notranslate"><span class="pre">numbervars/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#numbervars-1" id="id14"><code class="docutils literal notranslate"><span class="pre">numbervars/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#varnumbers-3" id="id15"><code class="docutils literal notranslate"><span class="pre">varnumbers/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#varnumbers-2" id="id16"><code class="docutils literal notranslate"><span class="pre">varnumbers/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id17">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
 </ul>
 </div>
 <div class="section" id="public-predicates">
@@ -563,6 +567,90 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">singletons(&#64;term,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="numbervars/3"> </div></div>
+<div class="section" id="numbervars-3">
+<span id="termp-0-numbervars-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">numbervars/3</span></code></a><a class="headerlink" href="#numbervars-3" title="Permalink to this headline">¶</a></h3>
+<p>Grounds a term by replacing all variables with <code class="docutils literal notranslate"><span class="pre">'$VAR'(N)</span></code> terms with <code class="docutils literal notranslate"><span class="pre">N</span></code> starting at <code class="docutils literal notranslate"><span class="pre">From</span></code>. The <code class="docutils literal notranslate"><span class="pre">Next</span></code> argument is unified with the next value for <code class="docutils literal notranslate"><span class="pre">N</span></code> after binding all variables.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">numbervars(Term,From,Next)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">numbervars(?term,+integer,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="numbervars/1"> </div></div>
+<div class="section" id="numbervars-1">
+<span id="termp-0-numbervars-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">numbervars/1</span></code></a><a class="headerlink" href="#numbervars-1" title="Permalink to this headline">¶</a></h3>
+<p>Grounds a term by replacing all variables with <code class="docutils literal notranslate"><span class="pre">'$VAR'(N)</span></code> terms with <code class="docutils literal notranslate"><span class="pre">N</span></code> starting at <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">numbervars(Term)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">numbervars(?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="varnumbers/3"> </div></div>
+<div class="section" id="varnumbers-3">
+<span id="termp-0-varnumbers-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">varnumbers/3</span></code></a><a class="headerlink" href="#varnumbers-3" title="Permalink to this headline">¶</a></h3>
+<p>Replaces all <code class="docutils literal notranslate"><span class="pre">'$VAR'(N)</span></code> sub-terms in a term with fresh variables for all values of <code class="docutils literal notranslate"><span class="pre">N</span></code> grater or equal to <code class="docutils literal notranslate"><span class="pre">From</span></code>. Variables in <code class="docutils literal notranslate"><span class="pre">Term</span></code> are shared with <code class="docutils literal notranslate"><span class="pre">Copy</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">varnumbers(Term,From,Copy)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">varnumbers(&#64;term,+integer,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="varnumbers/2"> </div></div>
+<div class="section" id="varnumbers-2">
+<span id="termp-0-varnumbers-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">varnumbers/2</span></code></a><a class="headerlink" href="#varnumbers-2" title="Permalink to this headline">¶</a></h3>
+<p>Replaces all <code class="docutils literal notranslate"><span class="pre">'$VAR'(N)</span></code> sub-terms in a term with fresh variables for all values of <code class="docutils literal notranslate"><span class="pre">N</span></code> grater or equal to <code class="docutils literal notranslate"><span class="pre">0</span></code>. Variables in <code class="docutils literal notranslate"><span class="pre">Term</span></code> are shared with <code class="docutils literal notranslate"><span class="pre">Copy</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">varnumbers(Term,Copy)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">varnumbers(&#64;term,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </div>

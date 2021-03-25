@@ -24,10 +24,10 @@
 	implements(termp)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2018-06-18,
-		comment is 'Prolog term utility predicates.'
+		date is 2021-03-25,
+		comment is 'Term utility predicates.'
 	]).
 
 	:- alias(termp, [variables/2 as vars/2]).
@@ -80,12 +80,6 @@
 
 	subsumes(General, Specific) :-
 		subsumes_term(General, Specific).
-
-	var_member_chk(Var, [Head| Tail]) :-
-		(	Var == Head ->
-			true
-		;	var_member_chk(Var, Tail)
-		).
 
 	subterm(Term, Term).
 	subterm(Sub, Term) :-
@@ -144,5 +138,58 @@
 			Acc2 = [Var| Acc]
 		),
 		vars_to_singletons(Vars, Repeated2, Acc2, Singletons).
+
+	% the backend adapter files ensure that the de facto standard
+	% numbervars/3 predicate is avaialble in "user"; the definitions
+	% here are inlined by the compiler and thus can be called with
+	% no overhead compared with a direct call to the predicate
+
+	numbervars(Term, From, Next) :-
+		{numbervars(Term, From, Next)}.
+
+	numbervars(Term) :-
+		{numbervars(Term, 0, _)}.
+
+	varnumbers(Term, From, Copy) :-
+		varnumbers(Term, From, [], _, Copy).
+
+	varnumbers(Term, _, Pairs, Pairs, Copy) :-
+		var(Term),
+		!,
+		Copy = Term.
+	varnumbers('$VAR'(N), From, Pairs0, Pairs, Var) :-
+		N >= From,
+		!,
+		(	member(N-Var, Pairs0) ->
+			Pairs = Pairs0
+		;	Pairs = [N-Var| Pairs0]
+		).
+	varnumbers('$VAR'(N), _, Pairs, Pairs, '$VAR'(N)) :-
+		!.
+	varnumbers(Term, From, Pairs0, Pairs, Copy) :-
+		Term =.. [Name| Arguments],
+		varnumbers_list(Arguments, From, Pairs0, Pairs, CopyArguments),
+		Copy =.. [Name| CopyArguments].
+
+	varnumbers_list([], _, Pairs, Pairs, []).
+	varnumbers_list([Argument| Arguments], From, Pairs0, Pairs, [Copy| Copies]) :-
+		varnumbers(Argument, From, Pairs0, Pairs1, Copy),
+		varnumbers_list(Arguments, From, Pairs1, Pairs, Copies).
+
+	varnumbers(Term, Copy) :-
+		varnumbers(Term, 0, Copy).
+
+	% auxiliary predicates (as this is a root object
+	% we avoid a dependency on descendant objects)
+
+	member(Head, [Head| _]).
+	member(Head, [_| Tail]) :-
+		member(Head, Tail).
+
+	var_member_chk(Var, [Head| Tail]) :-
+		(	Var == Head ->
+			true
+		;	var_member_chk(Var, Tail)
+		).
 
 :- end_object.

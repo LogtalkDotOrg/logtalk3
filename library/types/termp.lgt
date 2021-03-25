@@ -22,10 +22,10 @@
 :- protocol(termp).
 
 	:- info([
-		version is 1:31:0,
+		version is 1:32:0,
 		author is 'Paulo Moura',
-		date is 2010-06-09,
-		comment is 'Prolog term utility predicates protocol.',
+		date is 2021-03-25,
+		comment is 'Term utility predicates protocol.',
 		see_also is [term]
 	]).
 
@@ -104,6 +104,34 @@
 	:- info(singletons/2, [
 		comment is 'Returns a list of all term singleton variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).',
 		argnames is ['Term', 'Singletons']
+	]).
+
+	:- public(numbervars/3).
+	:- mode(numbervars(?term, +integer, ?integer), zero_or_one).
+	:- info(numbervars/3, [
+		comment is 'Grounds a term by replacing all variables with ``\'$VAR\'(N)`` terms with ``N`` starting at ``From``. The ``Next`` argument is unified with the next value for ``N`` after binding all variables.',
+		argnames is ['Term', 'From', 'Next']
+	]).
+
+	:- public(numbervars/1).
+	:- mode(numbervars(?term), zero_or_one).
+	:- info(numbervars/1, [
+		comment is 'Grounds a term by replacing all variables with ``\'$VAR\'(N)`` terms with ``N`` starting at ``0``.',
+		argnames is ['Term']
+	]).
+
+	:- public(varnumbers/3).
+	:- mode(varnumbers(@term, +integer, ?term), zero_or_one).
+	:- info(varnumbers/3, [
+		comment is 'Replaces all ``\'$VAR\'(N)`` sub-terms in a term with fresh variables for all values of ``N`` grater or equal to ``From``. Variables in ``Term`` are shared with ``Copy``.',
+		argnames is ['Term', 'From', 'Copy']
+	]).
+
+	:- public(varnumbers/2).
+	:- mode(varnumbers(@term, ?term), zero_or_one).
+	:- info(varnumbers/2, [
+		comment is 'Replaces all ``\'$VAR\'(N)`` sub-terms in a term with fresh variables for all values of ``N`` grater or equal to ``0``. Variables in ``Term`` are shared with ``Copy``.',
+		argnames is ['Term', 'Copy']
 	]).
 
 :- end_protocol.

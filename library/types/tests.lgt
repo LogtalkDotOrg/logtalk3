@@ -23,15 +23,40 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2020-02-01,
+		date is 2021-03-25,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, '=~='), '=~='/2
 	]).
+
+	test(term_numbervars_3_01, true(ground(Term))) :-
+		Term = a(_,_,_),
+		term::numbervars(Term, 0, _).
+
+	test(term_numbervars_3_02, true(N == 3)) :-
+		Term = a(_,_,_),
+		term::numbervars(Term, 0, N).
+
+	test(term_numbervars_3_03, true(N == 2)) :-
+		Term = a(A,_,A),
+		term::numbervars(Term, 0, N).
+
+	test(term_numbervars_1_01, true(ground(Term))) :-
+		Term = a(_,_,_),
+		term::numbervars(Term).
+
+	test(term_varnumbers_3_01, variant(Term, a(A,_,A))) :-
+		term::varnumbers(a('$VAR'(0),'$VAR'(1),'$VAR'(0)), 0, Term).
+
+	test(term_varnumbers_3_02, variant(Term, a('$VAR'(0),_,'$VAR'(0)))) :-
+		term::varnumbers(a('$VAR'(0),'$VAR'(1),'$VAR'(0)), 1, Term).
+
+	test(term_varnumbers_2_01, variant(Term, a(A,_,A))) :-
+		term::varnumbers(a('$VAR'(0),'$VAR'(1),'$VAR'(0)), Term).
 
 	test(atom_replace_sub_atom_4_01, true(Atom == axc)) :-
 		atom::replace_sub_atom(b, x, abc, Atom).

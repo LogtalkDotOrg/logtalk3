@@ -21,6 +21,9 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	% load the loader file from the $LOGTALKUSER directory
+	% to avoid redefinition warnings when running the tests
+	% as the lgtunit tool depends on this library
 	logtalk_load(types(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),

@@ -8,11 +8,11 @@
 ``termp``
 =========
 
-Prolog term utility predicates protocol.
+Term utility predicates protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:31:0
-| **Date:** 2010-06-09
+| **Version:** 1:32:0
+| **Date:** 2021-03-25
 
 | **Compilation flags:**
 |    ``static``
@@ -284,6 +284,98 @@ Returns a list of all term singleton variables (ordered as found when doing a de
 |    ``singletons(Term,Singletons)``
 | **Mode and number of proofs:**
 |    ``singletons(@term,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="numbervars/3"> </div>
+
+.. index:: numbervars/3
+.. _termp/0::numbervars/3:
+
+``numbervars/3``
+^^^^^^^^^^^^^^^^
+
+Grounds a term by replacing all variables with ``'$VAR'(N)`` terms with ``N`` starting at ``From``. The ``Next`` argument is unified with the next value for ``N`` after binding all variables.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``numbervars(Term,From,Next)``
+| **Mode and number of proofs:**
+|    ``numbervars(?term,+integer,?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="numbervars/1"> </div>
+
+.. index:: numbervars/1
+.. _termp/0::numbervars/1:
+
+``numbervars/1``
+^^^^^^^^^^^^^^^^
+
+Grounds a term by replacing all variables with ``'$VAR'(N)`` terms with ``N`` starting at ``0``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``numbervars(Term)``
+| **Mode and number of proofs:**
+|    ``numbervars(?term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="varnumbers/3"> </div>
+
+.. index:: varnumbers/3
+.. _termp/0::varnumbers/3:
+
+``varnumbers/3``
+^^^^^^^^^^^^^^^^
+
+Replaces all ``'$VAR'(N)`` sub-terms in a term with fresh variables for all values of ``N`` grater or equal to ``From``. Variables in ``Term`` are shared with ``Copy``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``varnumbers(Term,From,Copy)``
+| **Mode and number of proofs:**
+|    ``varnumbers(@term,+integer,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="varnumbers/2"> </div>
+
+.. index:: varnumbers/2
+.. _termp/0::varnumbers/2:
+
+``varnumbers/2``
+^^^^^^^^^^^^^^^^
+
+Replaces all ``'$VAR'(N)`` sub-terms in a term with fresh variables for all values of ``N`` grater or equal to ``0``. Variables in ``Term`` are shared with ``Copy``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``varnumbers(Term,Copy)``
+| **Mode and number of proofs:**
+|    ``varnumbers(@term,?term)`` - ``zero_or_one``
 
 
 ------------
