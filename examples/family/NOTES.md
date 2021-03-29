@@ -22,9 +22,9 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
 This folder contains an implementation of the classical family tree Prolog
-example. This solution defines a root object, `relations`, with predicates
-for common family relations like `sister/2` and `father/2`. This root object
-can then be extended with objects defining the actual families using basic
+example. This solution defines a root category, `relations`, with predicates
+for common family relations like `sister/2` and `father/2`. This root category
+can then be imported into objects defining the actual families using basic
 `female/1`, `male/1`, and `parent/2` facts. The relation predicates always
-call the basic facts in _self_. Any number of family objects can be loaded
+calls the basic facts in _self_. Any number of family objects can be loaded
 at the same time.

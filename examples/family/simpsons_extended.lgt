@@ -34,8 +34,8 @@
 	male(abe).
 	male(herb).
 
-	female(Male) :-
-		^^female(Male).
+	female(Female) :-
+		^^female(Female).
 	female(gaby).
 	female(mona).
 
