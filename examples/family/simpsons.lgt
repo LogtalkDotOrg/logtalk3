@@ -20,7 +20,7 @@
 
 
 :- object(simpsons,
-	extends(familytree)).
+	imports(relations)).
 
 	:- info([
 		version is 1:0:0,

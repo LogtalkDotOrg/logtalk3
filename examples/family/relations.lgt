@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(familytree).
+:- category(relations).
 
 	:- info([
 		version is 1:0:0,
@@ -58,4 +58,4 @@
 		::parent(Parent, Child),
 		Brother \== Child.
 
-:- end_object.
+:- end_category.
