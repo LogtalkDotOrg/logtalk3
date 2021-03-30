@@ -25,7 +25,7 @@ XHTML content generation using the XHTML 1.1 doctype.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`html/0::generate/2`  
+|     :ref:`html/0::generate/2`  :ref:`html/0::normal_element/2`  :ref:`html/0::void_element/1`  
 
 .. contents::
    :local:

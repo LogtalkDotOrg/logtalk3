@@ -23,7 +23,7 @@
 :- category(html).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paul Brown and Paulo Moura',
 		date is 2021-03-30,
 		comment is 'HTML generation.'
@@ -34,6 +34,20 @@
 	:- info(generate/2, [
 		comment is 'Generates HTML content using the representation specified in the first argument (``stream(Stream)`` or ``file(Path)``) for the term in the second argument.',
 		argnames is ['Sink', 'Term']
+	]).
+
+	:- public(void_element/1).
+	:- mode(void_element(?atom), zero_or_more).
+	:- info(void_element/1, [
+		comment is 'Enumerates, by backtracking, all void elements.',
+		argnames is ['Element']
+	]).
+
+	:- public(normal_element/2).
+	:- mode(normal_element(?atom, ?atom), zero_or_more).
+	:- info(normal_element/2, [
+		comment is 'Enumerates, by backtracking, all normal elements. The value of the ``Display`` argument is either ``inline`` or ``block``.',
+		argnames is ['Element', 'Display']
 	]).
 
 	:- private(doctype/1).
@@ -115,13 +129,13 @@
 
 	% void element; only attributes allowed
 	write_html_element(1, Name, Tag, Stream) :-
-		void_element(Name),
+		::void_element(Name),
 		!,
 		arg(1, Tag, Attributes),
 		write_html_void_element(Name, Attributes, Stream).
 	% normal element with no attributes
 	write_html_element(1, Name, Tag, Stream) :-
-		normal_element(Name, Breaks),
+		::normal_element(Name, Breaks),
 		!,
 		write_html_open_tag(Name, Breaks, Stream),
 		arg(1, Tag, Content),
@@ -129,7 +143,7 @@
 		write_html_close_tag(Name, Breaks, Stream).
 	% normal element with attributes
 	write_html_element(2, Name, Tag, Stream) :-
-		normal_element(Name, Breaks),
+		::normal_element(Name, Breaks),
 		!,
 		arg(1, Tag, Attributes),
 		arg(2, Tag, Content),

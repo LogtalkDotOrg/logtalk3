@@ -76,4 +76,18 @@
 		current_output(Stream),
 		xhtml11::generate(stream(Stream), pre([foo,bar,baz])).
 
+	test(html_12, true) :-
+		^^suppress_text_output,
+		create_object(
+			Custom,
+			[extends(html5)],
+			[],
+			[
+				normal_element(foo,inline),
+				(normal_element(Name, Display) :- ^^normal_element(Name, Display))
+			]
+		),
+		current_output(Stream),
+		Custom::generate(stream(Stream), foo(bar)).
+
 :- end_object.

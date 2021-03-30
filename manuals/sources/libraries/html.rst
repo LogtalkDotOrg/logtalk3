@@ -118,3 +118,24 @@ then ``html``. For example:
    </ul>
 
    Stream = ...
+
+Working with custom elements
+----------------------------
+
+The ``html5`` and ``xhtml11`` objects recognize the same set of standard
+HTML 5 normal and void elements and generate an error for non-standard
+elements. If you need to generate HTML content containing custom
+elements, define a new object that extends one of the library objects.
+For example:
+
+::
+
+   :- object(html5custom,
+       extends(html5)).
+
+       normal_element(foo, inline).
+       normal_element(bar, block).
+       normal_element(Name, Display) :-
+           ^^normal_element(Name, Display).
+
+   :- end_object.

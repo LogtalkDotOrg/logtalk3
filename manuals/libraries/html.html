@@ -139,6 +139,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-a-html-document">Generating a HTML document</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-a-html-fragment">Generating a HTML fragment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-custom-elements">Working with custom elements</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
@@ -339,6 +340,25 @@ baz<span class="o">&lt;/</span>li<span class="o">&gt;</span>
 <span class="o">&lt;/</span>ul<span class="o">&gt;</span>
 
 <span class="nv">Stream</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-custom-elements">
+<h2>Working with custom elements<a class="headerlink" href="#working-with-custom-elements" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">html5</span></code> and <code class="docutils literal notranslate"><span class="pre">xhtml11</span></code> objects recognize the same set of standard
+HTML 5 normal and void elements and generate an error for non-standard
+elements. If you need to generate HTML content containing custom
+elements, define a new object that extends one of the library objects.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(html5custom,
+    <span class="k">extends</span>(html5)).
+
+    normal_element(foo, inline).
+    normal_element(bar, block).
+    normal_element(<span class="nv">Name</span>, <span class="nv">Display</span>) <span class="o">:-</span>
+        <span class="o">^^</span>normal_element(<span class="nv">Name</span>, <span class="nv">Display</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 </div>
