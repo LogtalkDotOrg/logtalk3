@@ -50,7 +50,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#os <../../docs/library_index.html#html>`__
+`../../docs/library_index.html#html <../../docs/library_index.html#html>`__
 link in a web browser.
 
 Loading

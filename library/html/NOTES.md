@@ -61,7 +61,7 @@ This library is a work in progress.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#os](../../docs/library_index.html#html)
+Open the [../../docs/library_index.html#html](../../docs/library_index.html#html)
 link in a web browser.
 
 
