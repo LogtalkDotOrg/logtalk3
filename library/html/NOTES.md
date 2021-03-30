@@ -124,6 +124,32 @@ For example:
 	Stream = ...
 
 
+Working with callbacks to generate content
+------------------------------------------
+
+Often we need to programmatically generate HTML content from queries. In other
+cases, we may have fixed content that we don't want to keep repeating (e.g. a
+navigation bar). The library supports a `::/2` pseudo-element that sends a
+message to an object to retrieve content. As an example, assume the following
+predicate definition in `user`:
+
+	content(strong('Hello world!')).
+
+This predicate can then be called from the HTML term representation. For
+example:
+
+	| ?- current_output(Stream),
+	     html5::generate(stream(Stream), span(user::content)).
+
+	<span><strong>Hello world!</strong></span>
+
+	Stream = ...
+
+Note that the callback always takes the form `Object::Closure` where `Closure`
+is extended with a single argument (to be bound to the generated content).
+More complex callbacks are possible by using lambda expressions.
+
+
 Working with custom elements
 ----------------------------
 

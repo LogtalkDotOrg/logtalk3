@@ -139,6 +139,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-a-html-document">Generating a HTML document</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-a-html-fragment">Generating a HTML fragment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-callbacks-to-generate-content">Working with callbacks to generate content</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-custom-elements">Working with custom elements</a></li>
 </ul>
 </li>
@@ -342,6 +343,31 @@ baz<span class="o">&lt;/</span>li<span class="o">&gt;</span>
 <span class="nv">Stream</span> <span class="o">=</span> ...
 </pre></div>
 </div>
+</div>
+<div class="section" id="working-with-callbacks-to-generate-content">
+<h2>Working with callbacks to generate content<a class="headerlink" href="#working-with-callbacks-to-generate-content" title="Permalink to this headline">¶</a></h2>
+<p>Often we need to programmatically generate HTML content from queries. In
+other cases, we may have fixed content that we don’t want to keep
+repeating (e.g. a navigation bar). The library supports a <code class="docutils literal notranslate"><span class="pre">::/2</span></code>
+pseudo-element that sends a message to an object to retrieve content. As
+an example, assume the following predicate definition in <code class="docutils literal notranslate"><span class="pre">user</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>content(strong(<span class="s">&#39;Hello world!&#39;</span>)).
+</pre></div>
+</div>
+<p>This predicate can then be called from the HTML term representation. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_output</span>(<span class="nv">Stream</span>),
+     html5<span class="o">::</span>generate(stream(<span class="nv">Stream</span>), span(user<span class="o">::</span>content)).
+
+<span class="o">&lt;</span>span<span class="o">&gt;&lt;</span>strong<span class="o">&gt;</span><span class="nv">Hello</span> world<span class="o">!&lt;/</span>strong<span class="o">&gt;&lt;/</span>span<span class="o">&gt;</span>
+
+<span class="nv">Stream</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+<p>Note that the callback always takes the form <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code> where
+<code class="docutils literal notranslate"><span class="pre">Closure</span></code> is extended with a single argument (to be bound to the
+generated content). More complex callbacks are possible by using lambda
+expressions.</p>
 </div>
 <div class="section" id="working-with-custom-elements">
 <h2>Working with custom elements<a class="headerlink" href="#working-with-custom-elements" title="Permalink to this headline">¶</a></h2>

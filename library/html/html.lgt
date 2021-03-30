@@ -23,7 +23,7 @@
 :- category(html).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paul Brown and Paulo Moura',
 		date is 2021-03-30,
 		comment is 'HTML generation.'
@@ -91,6 +91,12 @@
 		::doctype(Text),
 		write(Stream, Text), nl(Stream).
 
+	:- meta_predicate(write_html_element(::, *)).
+	% handle callbacks to generate content
+	write_html_element('::'(Object, Closure), Stream) :-
+		!,
+		call('::'(Object, Closure), Content),
+		write_html(Content, Stream).
 	% handle html/1-2 elements explicitly to output the doctype
 	write_html_element(html(Attributes, Content), Stream) :-
 		!,

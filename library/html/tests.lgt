@@ -20,11 +20,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% predicate for testing callbacks
+content(strong('Hello world!')).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2021-03-30,
 		comment is 'Unit tests for the "html" library.'
@@ -61,20 +65,22 @@
 		current_output(Stream),
 		html5::generate(stream(Stream), html([lang=en], [head(title('Hello world!')), body(p('Bye!'))])).
 
-	test(html_09, true) :-
-		^^suppress_text_output,
+	test(html_09, true(Assertion)) :-
+		^^set_text_output(''),
 		current_output(Stream),
-		html5::generate(stream(Stream), pre([foo,bar,baz])).
+		html5::generate(stream(Stream), code([foo,bar,baz])),
+		^^text_output_assertion('<code>[foo,bar,baz]</code>', Assertion).
 
 	test(html_10, true) :-
 		^^suppress_text_output,
 		current_output(Stream),
 		xhtml11::generate(stream(Stream), html([lang=en], [head(title('Hello world!')), body(p('Bye!'))])).
 
-	test(html_11, true) :-
-		^^suppress_text_output,
+	test(html_11, true(Assertion)) :-
+		^^set_text_output(''),
 		current_output(Stream),
-		xhtml11::generate(stream(Stream), pre([foo,bar,baz])).
+		xhtml11::generate(stream(Stream), code([foo,bar,baz])),
+		^^text_output_assertion('<code>[foo,bar,baz]</code>', Assertion).
 
 	test(html_12, true) :-
 		^^suppress_text_output,
@@ -89,5 +95,11 @@
 		),
 		current_output(Stream),
 		Custom::generate(stream(Stream), foo(bar)).
+
+	test(html_13, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(Stream),
+		html5::generate(stream(Stream), span(user::content)),
+		^^text_output_assertion('<span><strong>Hello world!</strong></span>', Assertion).
 
 :- end_object.
