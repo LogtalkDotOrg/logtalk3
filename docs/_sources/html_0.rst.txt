@@ -1,0 +1,96 @@
+.. index:: html
+.. _html/0:
+
+.. rst-class:: right
+
+**category**
+
+``html``
+========
+
+HTML generation.
+
+| **Author:** Paul Brown and Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2021-03-30
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="generate/2"> </div>
+
+.. index:: generate/2
+.. _html/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates HTML content using the representation specified in the first argument (``stream(Stream)`` or ``file(Path)``) for the term in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Term)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++term)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="doctype/1"> </div>
+
+.. index:: doctype/1
+.. _html/0::doctype/1:
+
+``doctype/1``
+^^^^^^^^^^^^^
+
+Doctype text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``doctype(DocType)``
+| **Mode and number of proofs:**
+|    ``doctype(?atom)`` - ``one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -389,6 +389,18 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    write_to_stream_hook(Stream) <write_to_stream_hook_1>
    write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
 
+``html``
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   html <html_0>
+   html5 <html5_0>
+   xhtml11 <xhtml11_0>
+
 ``intervals``
 -------------
 

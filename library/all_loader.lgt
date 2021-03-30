@@ -61,6 +61,7 @@
 		cbor(loader),
 		base64(loader),
 		uuid(loader),
+		html(loader),
 		cloning,
 		counters,
 		streamvars

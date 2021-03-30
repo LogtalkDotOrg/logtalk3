@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>html &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="intervals" href="intervals.html" />
+    <link rel="prev" title="hook_objects" href="hook_objects.html" />
+   
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+          
+
+          
+            
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.46.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arbitrary.html"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignvars.html"><code class="docutils literal notranslate"><span class="pre">assignvars</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="base64.html"><code class="docutils literal notranslate"><span class="pre">base64</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="coroutining.html"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependents.html"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dictionaries.html"><code class="docutils literal notranslate"><span class="pre">dictionaries</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="edcg.html"><code class="docutils literal notranslate"><span class="pre">edcg</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html"><code class="docutils literal notranslate"><span class="pre">events</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchies.html"><code class="docutils literal notranslate"><span class="pre">hierarchies</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_flows.html"><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook_objects.html"><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">html</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-a-html-document">Generating a HTML document</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generating-a-html-fragment">Generating a HTML fragment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="os.html"><code class="docutils literal notranslate"><span class="pre">os</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zippers.html"><code class="docutils literal notranslate"><span class="pre">zippers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+            
+          
+	<p class="caption"><span class="caption-text">External Contents</span></p>
+    <a href="../docs/index.html">APIs</a>
+    <a href="https://logtalk.org">Logtalk website</a>
+    <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
+  
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Libraries</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">html</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/libraries/html.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="html">
+<h1><code class="docutils literal notranslate"><span class="pre">html</span></code><a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h1>
+<p>This library provides predicates for generating HTML content using
+either HTML 5 or XHTML 1.1 formats from a term representation. The
+library performs minimal validation, checking only that all elements are
+valid. No attempt is made to generate nicely indented output.</p>
+<p>Normal elements are represented using a compound term with one argument
+(the element content) or two arguments (the element attributes
+represented by a list of <code class="docutils literal notranslate"><span class="pre">Key=Value</span></code> or <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code> pairs and the
+element content). The element content can be another element or a list
+of elements. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ol([type<span class="o">-</span>a], [li(foo), li(bar), li(baz)])
+</pre></div>
+</div>
+<p>The two exceptions are the <code class="docutils literal notranslate"><span class="pre">pre</span></code> or <code class="docutils literal notranslate"><span class="pre">code</span></code> elements whose content is
+never interpreted as an element or a list of elements. For example, the
+fragment:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pre([foo,bar,baz])
+</pre></div>
+</div>
+<p>is translated to:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span>pre<span class="o">&gt;</span>
+[foo,bar,baz]
+<span class="o">&lt;/</span>pre<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Void elements are represented using a compound term with one argument,
+the (possibly empty) list of attributes represented by a list of
+<code class="docutils literal notranslate"><span class="pre">Key=Value</span></code> or <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code> pairs. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>hr([class<span class="o">-</span>separator])
+</pre></div>
+</div>
+<p>Atomic arguments of the compound terms are interpreted as element
+content. Non atomic element content can be represented as a quoted atom
+or by using the <code class="docutils literal notranslate"><span class="pre">pre</span></code> or <code class="docutils literal notranslate"><span class="pre">code</span></code> elements as explained above.</p>
+<p>This library is a work in progress.</p>
+<div class="section" id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#html">../../docs/library_index.html#os</a>
+link in a web browser.</p>
+</div>
+<div class="section" id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(html(loader)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(html(tester)).
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-a-html-document">
+<h2>Generating a HTML document<a class="headerlink" href="#generating-a-html-document" title="Permalink to this headline">¶</a></h2>
+<p>HTML documents can be generated from a compound term representation and
+written to a file or a stream. For example, assuming we want to generate
+a HTML 5 file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> html5<span class="o">::</span>generate(
+         file(<span class="s">&#39;hello.html&#39;</span>),
+         html([lang<span class="o">=</span>en], [head(title(<span class="s">&#39;Hello world!&#39;</span>)), body(p(<span class="s">&#39;Bye!&#39;</span>))])
+     ).
+</pre></div>
+</div>
+<p>When the second argument is a <code class="docutils literal notranslate"><span class="pre">html/1</span></code> or <code class="docutils literal notranslate"><span class="pre">html/2</span></code> compound term, a
+<em>doctype</em> is automatically written. If we prefer instead e.g. a XHTML
+1.1 document, we use the <code class="docutils literal notranslate"><span class="pre">xhtml11</span></code> object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> xhtml11<span class="o">::</span>generate(
+         file(<span class="s">&#39;hello.html&#39;</span>),
+         html([lang<span class="o">=</span>en], [head(title(<span class="s">&#39;Hello world!&#39;</span>)), body(p(<span class="s">&#39;Bye!&#39;</span>))])
+     ).
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-a-html-fragment">
+<h2>Generating a HTML fragment<a class="headerlink" href="#generating-a-html-fragment" title="Permalink to this headline">¶</a></h2>
+<p>It’s also possible to generate just a fragment of a (X)HTML document by
+using a list of compound terms or a compound term for an element other
+then <code class="docutils literal notranslate"><span class="pre">html</span></code>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">current_output</span>(<span class="nv">Stream</span>),
+     html5<span class="o">::</span>generate(stream(<span class="nv">Stream</span>), ul([li(foo), li(bar), li(baz)])).
+
+<span class="o">&lt;</span>ul<span class="o">&gt;</span>
+<span class="o">&lt;</span>li<span class="o">&gt;</span>
+foo<span class="o">&lt;/</span>li<span class="o">&gt;</span>
+<span class="o">&lt;</span>li<span class="o">&gt;</span>
+bar<span class="o">&lt;/</span>li<span class="o">&gt;</span>
+<span class="o">&lt;</span>li<span class="o">&gt;</span>
+baz<span class="o">&lt;/</span>li<span class="o">&gt;</span>
+<span class="o">&lt;/</span>ul<span class="o">&gt;</span>
+
+<span class="nv">Stream</span> <span class="o">=</span> ...
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="intervals.html" class="btn btn-neutral float-right" title="intervals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hook_objects.html" class="btn btn-neutral float-left" title="hook_objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 1998-2021, Paulo Moura.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

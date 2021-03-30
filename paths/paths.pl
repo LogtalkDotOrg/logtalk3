@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on March 12, 2021
+%  Last updated on March 30, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -120,6 +120,7 @@ logtalk_library_path(heaps, library('heaps/')).
 logtalk_library_path(hierarchies, library('hierarchies/')).
 logtalk_library_path(hook_flows, library('hook_flows/')).
 logtalk_library_path(hook_objects, library('hook_objects/')).
+logtalk_library_path(html, library('html/')).
 logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).

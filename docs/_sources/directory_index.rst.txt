@@ -334,6 +334,18 @@ To load an entity, always load the library that includes it using the goal ``log
    write_to_stream_hook(Stream) <write_to_stream_hook_1>
    write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
 
+``library/html/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   html <html_0>
+   html5 <html5_0>
+   xhtml11 <xhtml11_0>
+
 ``library/intervals/``
 ----------------------
 

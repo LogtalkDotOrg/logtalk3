@@ -47,6 +47,7 @@ directory in the ``NOTES.md`` file.
    hierarchies
    hook_flows
    hook_objects
+   html
    intervals
    java
    json
