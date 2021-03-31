@@ -141,7 +141,7 @@ On Windows, the environment variable `BPDIR` must be defined and pointing
 to the B-Prolog installation directory for the installer to detect it.
 
 
-Ciao Prolog 1.19.0 and later versions
+Ciao Prolog 1.20.0 and later versions
 -------------------------------------
 
 	ciao.pl

@@ -167,7 +167,7 @@ echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
 echo "* B-Prolog (7.8 or later):           bplgt"
-echo "* Ciao Prolog (1.19.0 or later):     ciaolgt     (experimental; first run may require sudo)"
+echo "* Ciao Prolog (1.20.0 or later):     ciaolgt     (experimental; first run may require sudo)"
 echo "* CxProlog (0.98.1 or later):        cxlgt"
 echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"

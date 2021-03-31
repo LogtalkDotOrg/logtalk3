@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Ciao
-##   Last updated on May 18, 2020
+##   Last updated on March 31, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -93,4 +93,4 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec ciaosh --iso -l "$LOGTALKHOME/integration/logtalk_ciao.pl" "$@"
+exec ciaosh --iso-strict -l "$LOGTALKHOME/integration/logtalk_ciao.pl" "$@"
