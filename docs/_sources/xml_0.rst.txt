@@ -11,8 +11,8 @@
 Bi-directional XML parser.
 
 | **Author:** John Fletcher; adapted to Logtalk by Paulo Moura.
-| **Version:** 3:8:0
-| **Date:** 2019-10-09
+| **Version:** 3:8:1
+| **Date:** 2021-04-01
 
 | **Copyright:** Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher
 | **License:** This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.
@@ -31,7 +31,7 @@ Bi-directional XML parser.
    - Compliance: This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.
    - Compliance-strictness: It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.
    - Compliance-comprehensive: It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.
-   - Bi-directional conversions: Conversions are not fully symmetrical as weaker XML is accepted than can be generated. Notably, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.
+   - Bi-directional conversions: Conversions are not fully symmetrical as weaker XML is accepted than can be generated. Notably, in-bound (Codes -> Document) parsing does not require strictly well-formed XML. If Codes does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.
 
 | **Inherited public predicates:**
 |    (none)
@@ -53,16 +53,16 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.
+Parses a list of character codes to/from a data structure of the form ``xml(<atts>,<content>)``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``parse(Chars,Document)``
+|    ``parse(Codes,Document)``
 | **Mode and number of proofs:**
-|    ``parse(+nonvar,?nonvar)`` - ``zero_or_one``
-|    ``parse(?nonvar,+nonvar)`` - ``zero_or_one``
+|    ``parse(+list(character_code),?nonvar)`` - ``zero_or_one``
+|    ``parse(?list(character_code),+nonvar)`` - ``zero_or_one``
 
 
 ------------
@@ -77,16 +77,23 @@ Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.
 ``parse/3``
 ^^^^^^^^^^^
 
-Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.
+Parses a list of character codes to/from a data structure of the form ``xml(<atts>,<content>)`` using the given list of options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``parse(Controls,Chars,Document)``
+|    ``parse(Options,Codes,Document)``
 | **Mode and number of proofs:**
-|    ``parse(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
-|    ``parse(+nonvar,?nonvar,+nonvar)`` - ``zero_or_one``
+|    ``parse(++list(compound),+list(character_code),?nonvar)`` - ``zero_or_one``
+|    ``parse(++list(compound),?list(character_code),+nonvar)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``extended_characters(Boolean)`` option: Use the extended character entities for XHTML (default ``true``)
+    - ``format(Boolean)`` option: For parsing, strip layouts when no character data appears between elements (default ``true``). For generating, indent the element content (default ``true``)
+    - ``remove_attribute_prefixes(Boolean)`` option: Remove namespace prefixes from attributes when it's the same as the prefix of the parent element (default ``false``).
+    - ``allow_ampersand(Boolean)`` option: Allow unescaped ampersand characters (&) to occur in PCDATA (default ``false``).
 
 
 ------------
@@ -155,13 +162,13 @@ Private predicates
 ``xml_to_document/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Controls`` is a list of terms controlling the treatment of layout characters and character entities.
+Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Options`` is a list of terms controlling the treatment of layout characters and character entities.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``xml_to_document(Controls,XML,Document)``
+|    ``xml_to_document(Options,XML,Document)``
 | **Mode and number of proofs:**
 |    ``xml_to_document(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
@@ -345,7 +352,7 @@ Represents the ASCII character set in its simplest format, using the character e
 |    ``static``
 
 | **Template:**
-|    ``pcdata_7bit(Char)``
+|    ``pcdata_7bit(Code)``
 | **Mode and number of proofs:**
 |    ``pcdata_7bit(?nonvar)`` - ``zero_or_one``
 
@@ -362,13 +369,13 @@ Represents the ASCII character set in its simplest format, using the character e
 ``character_data_format/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
+Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Codes`` - which may be null.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``character_data_format(Chars,Format0,Format1)``
+|    ``character_data_format(Codes,Format0,Format1)``
 | **Mode and number of proofs:**
 |    ``character_data_format(+nonvar,+nonvar,?nonvar)`` - ``zero_or_one``
 
@@ -385,13 +392,13 @@ Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before
 ``cdata_generation//1``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.
+Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Codes`` - which may be null.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``cdata_generation(Chars)``
+|    ``cdata_generation(Codes)``
 | **Mode and number of proofs:**
 |    ``cdata_generation(+list)`` - ``zero_or_one``
 

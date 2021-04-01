@@ -52,6 +52,14 @@ an error when passed an unknown option.
 * FIXED: The `lgtunit` tool xUnit and xUnit.net v2 XML format exporters to
 escape special XML characters in common cases such as the `heaps` library.
 
+Contributions
+-------------
+
+* IMPROVED: Documentation of the `xml_parser` contribution public predicates.
+
+* FIXED: Two conversion bugs between numbers and atom as their corresponding
+list of codes in the `xml_parser` contribution.
+
 
 3.45.0 - March 23, 2021
 =======================

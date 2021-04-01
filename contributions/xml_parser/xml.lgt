@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3:8:0,
+		version is 3:8:1,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2019-10-09,
+		date is 2021-04-01,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -28,24 +28,30 @@
 			'Compliance' - 'This XML parser supports a subset of XML suitable for XML Data and Worldwide Web applications. It is neither as strict nor as comprehensive as the XML 1.0 Specification mandates.',
 			'Compliance-strictness' - 'It is not as strict, because, while the specification must eliminate ambiguities, not all errors need to be regarded as faults, and some reasonable examples of real XML usage would have to be rejected if they were.',
 			'Compliance-comprehensive' - 'It is not as comprehensive, because, where the XML specification makes provision for more or less complete DTDs to be provided as part of a document, xml.pl actions the local definition of ENTITIES only. Other DTD extensions are treated as commentary.',
-			'Bi-directional conversions' - 'Conversions are not fully symmetrical as weaker XML is accepted than can be generated. Notably, in-bound (Chars -> Document) parsing does not require strictly well-formed XML. If Chars does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.'
+			'Bi-directional conversions' - 'Conversions are not fully symmetrical as weaker XML is accepted than can be generated. Notably, in-bound (Codes -> Document) parsing does not require strictly well-formed XML. If Codes does not represent well-formed XML, Document is instantiated to the term ``malformed(<attributes>,<content>)``.'
 		]
 	]).
 
 	:- public(parse/2).
-	:- mode(parse(+nonvar, ?nonvar), zero_or_one).
-	:- mode(parse(?nonvar, +nonvar), zero_or_one).
+	:- mode(parse(+list(character_code), ?nonvar), zero_or_one).
+	:- mode(parse(?list(character_code), +nonvar), zero_or_one).
 	:- info(parse/2, [
-		comment is 'Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.',
-		argnames is ['Chars', 'Document']
+		comment is 'Parses a list of character codes to/from a data structure of the form ``xml(<atts>,<content>)``.',
+		argnames is ['Codes', 'Document']
 	]).
 
 	:- public(parse/3).
-	:- mode(parse(+nonvar, +nonvar, ?nonvar), zero_or_one).
-	:- mode(parse(+nonvar, ?nonvar, +nonvar), zero_or_one).
+	:- mode(parse(++list(compound), +list(character_code), ?nonvar), zero_or_one).
+	:- mode(parse(++list(compound), ?list(character_code), +nonvar), zero_or_one).
 	:- info(parse/3, [
-		comment is 'Parses ``Chars`` to/from a data structure of the form ``xml(<atts>,<content>)``.',
-		argnames is ['Controls', 'Chars', 'Document']
+		comment is 'Parses a list of character codes to/from a data structure of the form ``xml(<atts>,<content>)`` using the given list of options.',
+		argnames is ['Options', 'Codes', 'Document'],
+		remarks is [
+			'``extended_characters(Boolean)`` option' - 'Use the extended character entities for XHTML (default ``true``)',
+			'``format(Boolean)`` option' - 'For parsing, strip layouts when no character data appears between elements (default ``true``). For generating, indent the element content (default ``true``)',
+			'``remove_attribute_prefixes(Boolean)`` option' - 'Remove namespace prefixes from attributes when it\'s the same as the prefix of the parent element (default ``false``).',
+			'``allow_ampersand(Boolean)`` option' - 'Allow unescaped ampersand characters (&) to occur in PCDATA (default ``false``).'
+		]
 	]).
 
 	:- public(subterm/2).
@@ -65,7 +71,7 @@
 	:- uses(list, [append/3, member/2, select/3, valid/1::is_list/1]).
 	:- uses(term, [ground/1]).
 
-	/* parse( {+Controls}, +?Chars, ?+Document ) parses Chars to/from a data
+	/* parse( {+Options}, +?Codes, ?+Document ) parses Codes to/from a data
 	 * structure of the form xml(<atts>, <content>). <atts> is a list of
 	 * <atom>=<string> attributes from the (possibly implicit) XML signature of the
 	 * document. <content> is a (possibly empty) list comprising occurrences of :
@@ -79,9 +85,9 @@
 	 *    doctype(<atom>, <doctype id>)       :  DTD <!DOCTYPE .. >
 	 *
 	 * The conversions are not completely symmetrical, in that weaker XML is
-	 * accepted than can be generated. Specifically, in-bound (Chars -> Document)
+	 * accepted than can be generated. Specifically, in-bound (Codes -> Document)
 	 * does not  require strictly well-formed XML. Document is instantiated to the
-	 * term malformed(Attributes, Content) if Chars does not represent well-formed
+	 * term malformed(Attributes, Content) if Codes does not represent well-formed
 	 * XML. The Content of a malformed/2 structure can contain:
 	 *
 	 *    unparsed( <string> )                :  Text which has not been parsed
@@ -89,7 +95,7 @@
 	 *
 	 * in addition to the standard term types.
 	 *
-	 * Out-bound (Document -> Chars) parsing _does_ require that Document defines
+	 * Out-bound (Document -> Codes) parsing _does_ require that Document defines
 	 * strictly well-formed XML. If an error is detected a 'domain' exception is
 	 * raised.
 	 *
@@ -97,7 +103,7 @@
 	 * error and the message will show a list of its ancestor elements in the form
 	 * <tag>{(id)}* where <id> is the value of any attribute _named_ id.
 	 *
-	 * At this release, the Controls applying to in-bound (Chars -> Document)
+	 * At this release, the Options applying to in-bound (Codes -> Document)
 	 * parsing are:
 	 *
 	 *    extended_characters(<bool>)         :  Use the extended character
@@ -118,7 +124,7 @@
 	 *
 	 *    [<bool> is one of 'true' or 'false']
 	 *
-	 * For out-bound (Document -> Chars) parsing, the only available option is:
+	 * For out-bound (Document -> Codes) parsing, the only available option is:
 	 *
 	 *    format(<Bool>)                      :  Indent the element content
 	 *                                        :  (default true)
@@ -128,23 +134,23 @@
 	 * of the data structure. Output parsing throws an exception if the document
 	 * is not well-formed, diagnosis tries to identify the specific culprit term.
 	 */
-	parse( Chars, Document ) :-
-		parse( [], Chars, Document ).
+	parse( Codes, Document ) :-
+		parse( [], Codes, Document ).
 
-	parse( Controls, Chars, Document ) :-
-		(	ground( Chars ) ->
-			xml_to_document( Controls, Chars, Document )
-		;	document_to_xml( Controls, Document, Chars )
+	parse( Options, Codes, Document ) :-
+		(	ground( Codes ) ->
+			xml_to_document( Options, Codes, Document )
+		;	document_to_xml( Options, Document, Codes )
 		).
 
-	document_to_xml( Controls, Document, Chars ) :-
-		(	member( format(false), Controls ) ->
+	document_to_xml( Options, Document, Codes ) :-
+		(	member( format(false), Options ) ->
 			Format = false
 		;	Format = true
 		),
 		(	ground( Document ),
-			document_generation(Format, Document, Chars0, [] ) ->
-			Chars = Chars0
+			document_generation(Format, Document, Codes0, [] ) ->
+			Codes = Codes0
 		;	fault( Document, [], Culprit, Path, Message ),
 			exception( Message, Document, Culprit, Path )
 		).
@@ -165,8 +171,8 @@
 		subterm( Content, Term ).
 
 
-	/* xml_to_document( +Controls, +XML, ?Document ) translates the list of
-	 * character codes XML into the Prolog term Document. Controls is a list
+	/* xml_to_document( +Options, +XML, ?Document ) translates the list of
+	 * character codes XML into the Prolog term Document. Options is a list
 	 * of terms controlling the treatment of layout characters and character
 	 * entities.
 	 */
@@ -174,12 +180,12 @@
 	:- private(xml_to_document/3).
 	:- mode(xml_to_document(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(xml_to_document/3, [
-		comment is 'Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Controls`` is a list of terms controlling the treatment of layout characters and character entities.',
-		argnames is ['Controls', 'XML', 'Document']
+		comment is 'Translates the list of character codes ``XML`` into the Prolog term ``Document``. ``Options`` is a list of terms controlling the treatment of layout characters and character entities.',
+		argnames is ['Options', 'XML', 'Document']
 	]).
 
-	xml_to_document( Controls, XML, Document ) :-
-		initial_context( Controls, Context ),
+	xml_to_document( Options, XML, Document ) :-
+		initial_context( Options, Context ),
 		(	xml_declaration( Attributes0, XML, XML1 ) ->
 			Attributes = Attributes0
 		;	XML1 = XML,
@@ -204,118 +210,118 @@
 
 	xml_to_document0( [], Context, Terms, [], WF ) :-
 		close_context( Context, Terms, WF ).
-	xml_to_document0( [Char|Chars], Context, Terms, Residue, WF ) :-
-		(	Char =:= 0'< ->
-			markup_structure( Chars, Context, Terms, Residue, WF )
-		;	Char =:= 0'& ->
-			entity_reference( Chars, Context, Terms, Residue, WF )
-		;	Char =< 0' ,
+	xml_to_document0( [Code|Codes], Context, Terms, Residue, WF ) :-
+		(	Code =:= 0'< ->
+			markup_structure( Codes, Context, Terms, Residue, WF )
+		;	Code =:= 0'& ->
+			entity_reference( Codes, Context, Terms, Residue, WF )
+		;	Code =< 0' ,
 			\+ space_preserve( Context ) ->
-			layouts( Chars, Context, [Char|T], T, Terms, Residue, WF )
+			layouts( Codes, Context, [Code|T], T, Terms, Residue, WF )
 		;	void_context( Context ) ->
-			unparsed( [Char|Chars], Context, Terms, Residue, WF )
-		;	Terms = [pcdata([Char|Chars1])|Terms1],
-			acquire_pcdata( Chars, Context, Chars1, Terms1, Residue, WF )
+			unparsed( [Code|Codes], Context, Terms, Residue, WF )
+		;	Terms = [pcdata([Code|Codes1])|Terms1],
+			acquire_pcdata( Codes, Context, Codes1, Terms1, Residue, WF )
 		).
 
 	layouts( [], Context, _Plus, _Minus, Terms, [], WF ) :-
 		close_context( Context, Terms, WF ).
-	layouts( [Char|Chars], Context, Plus, Minus, Terms, Residue, WF ) :-
-		(	Char =:= 0'< ->
-			markup_structure( Chars, Context, Terms, Residue, WF )
-		;	Char =:= 0'& ->
-			reference_in_layout( Chars, Context, Plus, Minus, Terms, Residue, WF )
-		;	Char =< 0'  ->
-			Minus = [Char|Minus1],
-			layouts( Chars, Context, Plus, Minus1, Terms, Residue, WF )
+	layouts( [Code|Codes], Context, Plus, Minus, Terms, Residue, WF ) :-
+		(	Code =:= 0'< ->
+			markup_structure( Codes, Context, Terms, Residue, WF )
+		;	Code =:= 0'& ->
+			reference_in_layout( Codes, Context, Plus, Minus, Terms, Residue, WF )
+		;	Code =< 0'  ->
+			Minus = [Code|Minus1],
+			layouts( Codes, Context, Plus, Minus1, Terms, Residue, WF )
 		;	void_context( Context ) ->
-			unparsed( [Char|Chars], Context, Terms, Residue, WF )
+			unparsed( [Code|Codes], Context, Terms, Residue, WF )
 		;	Terms = [pcdata(Plus)|Terms1],
-			Minus = [Char|Chars1],
+			Minus = [Code|Codes1],
 			context_update( space_preserve, Context, true, Context1 ),
-			acquire_pcdata( Chars, Context1, Chars1, Terms1, Residue, WF )
+			acquire_pcdata( Codes, Context1, Codes1, Terms1, Residue, WF )
 		).
 
 	acquire_pcdata( [], Context, [], Terms, [], WF ) :-
 		close_context( Context, Terms, WF ).
-	acquire_pcdata( [Char|Chars], Context, Chars1, Terms, Residue, WF ) :-
-		(	Char =:= 0'< ->
-			Chars1 = [],
-			markup_structure( Chars, Context, Terms, Residue, WF )
-		;	Char =:= 0'& ->
-			reference_in_pcdata( Chars, Context, Chars1, Terms, Residue, WF )
-		;	Chars1 = [Char|Chars2],
-			acquire_pcdata( Chars, Context, Chars2, Terms, Residue, WF )
+	acquire_pcdata( [Code|Codes], Context, Codes1, Terms, Residue, WF ) :-
+		(	Code =:= 0'< ->
+			Codes1 = [],
+			markup_structure( Codes, Context, Terms, Residue, WF )
+		;	Code =:= 0'& ->
+			reference_in_pcdata( Codes, Context, Codes1, Terms, Residue, WF )
+		;	Codes1 = [Code|Codes2],
+			acquire_pcdata( Codes, Context, Codes2, Terms, Residue, WF )
 		).
 
 	markup_structure( [], Context, Terms, Residue, WF ) :-
 		unparsed( "<", Context, Terms, Residue, WF ).
-	markup_structure( Chars, Context, Terms, Residue, WF ) :-
-		Chars = [Char|Chars1],
-		(	Char =:= 0'/ ->
-			closing_tag( Context, Chars1, Terms, Residue, WF )
-		;	Char =:= 0'? ->
-			pi_acquisition( Chars1, Context, Terms, Residue, WF )
-		;	Char =:= 0'! ->
-			declaration_acquisition( Chars1, Context, Terms, Residue, WF )
-		;	open_tag(Tag,Context,Attributes,Type, Chars, Chars2 ) ->
-			push_tag( Tag, Chars2, Context, Attributes, Type, Terms, Residue, WF )
-		;	unparsed( [0'<|Chars], Context, Terms, Residue, WF ) %'
+	markup_structure( Codes, Context, Terms, Residue, WF ) :-
+		Codes = [Code|Codes1],
+		(	Code =:= 0'/ ->
+			closing_tag( Context, Codes1, Terms, Residue, WF )
+		;	Code =:= 0'? ->
+			pi_acquisition( Codes1, Context, Terms, Residue, WF )
+		;	Code =:= 0'! ->
+			declaration_acquisition( Codes1, Context, Terms, Residue, WF )
+		;	open_tag(Tag,Context,Attributes,Type, Codes, Codes2 ) ->
+			push_tag( Tag, Codes2, Context, Attributes, Type, Terms, Residue, WF )
+		;	unparsed( [0'<|Codes], Context, Terms, Residue, WF ) %'
 		).
 
-	push_tag( Tag, Chars, Context, Attributes, Type, Terms, Residue, WF ) :-
-		new_element(Tag, Chars, Context, Attributes, Type, Term, Rest, WF0),
+	push_tag( Tag, Codes, Context, Attributes, Type, Terms, Residue, WF ) :-
+		new_element(Tag, Codes, Context, Attributes, Type, Term, Rest, WF0),
 		push_tag1( WF0, Context, Term, Rest, Terms, Residue, WF ).
 
-	push_tag1( true, Context, Term, Chars, [Term|Terms], Residue, WF ) :-
-		xml_to_document0( Chars, Context, Terms, Residue, WF ).
-	push_tag1( false, _Context, Term, Chars, [Term], Chars, false ).
+	push_tag1( true, Context, Term, Codes, [Term|Terms], Residue, WF ) :-
+		xml_to_document0( Codes, Context, Terms, Residue, WF ).
+	push_tag1( false, _Context, Term, Codes, [Term], Codes, false ).
 
-	new_element( TagChars, Chars, Context, Attributes0, Type, Term, Residue, WF ) :-
+	new_element( TagCodes, Codes, Context, Attributes0, Type, Term, Residue, WF ) :-
 		namespace_attributes( Attributes0, Context, Context1, Attributes1 ),
-		(	append( NSChars, [0':|TagChars1], TagChars ), %'
-			specific_namespace( NSChars, Context1, SpecificNamespace ) ->
+		(	append( NSCodes, [0':|TagCodes1], TagCodes ), %'
+			specific_namespace( NSCodes, Context1, SpecificNamespace ) ->
 			Namespace0 = SpecificNamespace
-		;	NSChars = "",
-			TagChars1 = TagChars,
+		;	NSCodes = "",
+			TagCodes1 = TagCodes,
 			default_namespace( Context1, Namespace0 )
 		),
 		current_namespace( Context1, CurrentNamespace ),
 		(	Namespace0 == CurrentNamespace ->
 			Term = element(Tag, Attributes, Contents),
 			Context2 = Context1
-		;	Term = namespace( Namespace0, NSChars,
+		;	Term = namespace( Namespace0, NSCodes,
 						element(Tag, Attributes, Contents)
 						),
 			context_update( current_namespace, Context1, Namespace0, Context2 )
 		),
 		input_attributes( Attributes1, Context2, Attributes ),
-		atom_codes( Tag, TagChars1 ),
-		close_tag( Type, Chars, Context2, Contents, Residue, WF ).
+		atom_codes( Tag, TagCodes1 ),
+		close_tag( Type, Codes, Context2, Contents, Residue, WF ).
 
 	close_tag( empty, Residue, _Context, [], Residue, true ).
-	close_tag( push(Tag), Chars, Context0, Contents, Residue, WF ) :-
+	close_tag( push(Tag), Codes, Context0, Contents, Residue, WF ) :-
 		context_update( element, Context0, Tag, Context1 ),
-		xml_to_document0( Chars, Context1, Contents, Residue, WF ).
+		xml_to_document0( Codes, Context1, Contents, Residue, WF ).
 
-	pi_acquisition( Chars, Context, Terms, Residue, WellFormed ) :-
-		(	inline_instruction(Target, Processing, Chars, Rest ),
+	pi_acquisition( Codes, Context, Terms, Residue, WellFormed ) :-
+		(	inline_instruction(Target, Processing, Codes, Rest ),
 			Target \== xml ->
 			Terms = [instructions(Target, Processing)|Terms1],
 			xml_to_document0( Rest, Context, Terms1, Residue, WellFormed )
-		;	unparsed( [0'<,0'?|Chars], Context, Terms, Residue, WellFormed )
+		;	unparsed( [0'<,0'?|Codes], Context, Terms, Residue, WellFormed )
 		).
 
-	declaration_acquisition( Chars, Context, Terms, Residue, WF ) :-
-		(	declaration_type( Chars, Type, Chars1 ),
-			declaration_parse( Type, Context, Term, Context1, Chars1, Rest ) ->
+	declaration_acquisition( Codes, Context, Terms, Residue, WF ) :-
+		(	declaration_type( Codes, Type, Codes1 ),
+			declaration_parse( Type, Context, Term, Context1, Codes1, Rest ) ->
 			Terms = [Term|Terms1],
 			xml_to_document0( Rest, Context1, Terms1, Residue, WF )
-		;	unparsed( [0'<,0'!|Chars], Context, Terms, Residue, WF )
+		;	unparsed( [0'<,0'!|Codes], Context, Terms, Residue, WF )
 		).
 
 	open_tag( Tag, Namespaces, Attributes, Termination ) -->
-		nmtoken_chars( Tag ),
+		nmtoken_codes( Tag ),
 		attributes( Attributes, [], Namespaces ),
 		spaces,
 		open_tag_terminator( Tag, Termination ).
@@ -341,82 +347,82 @@
 		!.
 
 	entity_reference_name( Reference ) -->
-		nmtoken_chars( Reference ),
+		nmtoken_codes( Reference ),
 		";".
 
-	declaration_type( [Char1,Char2|Chars1], Class, Rest ) :-
-		Chars = [Char1,Char2|Chars1],
-		(	declaration_type1( Char1, Char2, Chars1, Class0, Residue ) ->
+	declaration_type( [Code1,Code2|Codes1], Class, Rest ) :-
+		Codes = [Code1,Code2|Codes1],
+		(	declaration_type1( Code1, Code2, Codes1, Class0, Residue ) ->
 			Class = Class0,
 			Rest = Residue
 		;	Class = generic,
-			Rest = Chars
+			Rest = Codes
 		).
 
-	declaration_type1( 0'-, 0'-, Chars, comment, Chars ).
-	declaration_type1( 0'[, 0'C, Chars, cdata, Residue ) :-
-		append( "DATA[", Residue, Chars ).
-	declaration_type1( 0'D, 0'O, Chars, doctype, Residue ) :-
-		append( "CTYPE", Residue, Chars ).
+	declaration_type1( 0'-, 0'-, Codes, comment, Codes ).
+	declaration_type1( 0'[, 0'C, Codes, cdata, Residue ) :-
+		append( "DATA[", Residue, Codes ).
+	declaration_type1( 0'D, 0'O, Codes, doctype, Residue ) :-
+		append( "CTYPE", Residue, Codes ).
 
-	closing_tag( Context, Chars, Terms, Residue, WellFormed ) :-
-		(	closing_tag_name( Tag, Chars, Rest ),
+	closing_tag( Context, Codes, Terms, Residue, WellFormed ) :-
+		(	closing_tag_name( Tag, Codes, Rest ),
 			current_tag( Context, Tag ) ->
 			Terms = [],
 			Residue = Rest,
 			WellFormed = true
-		;	unparsed( [0'<,0'/|Chars], Context, Terms, Residue, WellFormed )
+		;	unparsed( [0'<,0'/|Codes], Context, Terms, Residue, WellFormed )
 		).
 
 	closing_tag_name( Tag ) -->
-		nmtoken_chars( Tag ),
+		nmtoken_codes( Tag ),
 		spaces,
 		">".
 
-	entity_reference( Chars, Context, Terms, Residue, WF ) :-
-		reference_in_layout( Chars, Context, L, L, Terms, Residue, WF ).
+	entity_reference( Codes, Context, Terms, Residue, WF ) :-
+		reference_in_layout( Codes, Context, L, L, Terms, Residue, WF ).
 
-	reference_in_layout( Chars, Context, Plus, Minus, Terms, Residue, WF ) :-
-		(	standard_character_entity( Char, Chars, Rest ) ->
-			Minus = [Char|Chars1],
+	reference_in_layout( Codes, Context, Plus, Minus, Terms, Residue, WF ) :-
+		(	standard_character_entity( Code, Codes, Rest ) ->
+			Minus = [Code|Codes1],
 			Terms = [pcdata(Plus)|Terms1],
-			acquire_pcdata( Rest, Context, Chars1, Terms1, Residue, WF )
-		;	entity_reference_name( Reference, Chars, Rest ),
+			acquire_pcdata( Rest, Context, Codes1, Terms1, Residue, WF )
+		;	entity_reference_name( Reference, Codes, Rest ),
 			defined_entity( Reference, Context, String ) ->
 			append( String, Rest, Full ),
 			xml_to_document0( Full, Context, Terms, Residue, WF )
 		;	allow_ampersand( Context ) ->
-			Minus = [0'&|Chars1], %'
+			Minus = [0'&|Codes1], %'
 			Terms = [pcdata(Plus)|Terms1],
-			acquire_pcdata( Chars, Context, Chars1, Terms1, Residue, WF )
-		;	unparsed( [0'&|Chars], Context, Terms, Residue, WF ) %'
+			acquire_pcdata( Codes, Context, Codes1, Terms1, Residue, WF )
+		;	unparsed( [0'&|Codes], Context, Terms, Residue, WF ) %'
 		).
 
-	reference_in_pcdata( Chars0, Context, Chars1, Terms, Residue, WF ) :-
-		(	standard_character_entity( Char, Chars0, Rest ) ->
-			Chars1 = [Char|Chars2],
-			acquire_pcdata( Rest, Context, Chars2, Terms, Residue, WF )
-		;	entity_reference_name( Reference, Chars0, Rest ),
+	reference_in_pcdata( Codes0, Context, Codes1, Terms, Residue, WF ) :-
+		(	standard_character_entity( Code, Codes0, Rest ) ->
+			Codes1 = [Code|Codes2],
+			acquire_pcdata( Rest, Context, Codes2, Terms, Residue, WF )
+		;	entity_reference_name( Reference, Codes0, Rest ),
 			defined_entity( Reference, Context, String ) ->
 			append( String, Rest, Full ),
-			acquire_pcdata( Full, Context, Chars1, Terms, Residue, WF )
+			acquire_pcdata( Full, Context, Codes1, Terms, Residue, WF )
 		;	allow_ampersand( Context ) ->
-			Chars1 = [0'&|Chars2],
-			acquire_pcdata( Chars0, Context, Chars2, Terms, Residue, WF )
-		;	Chars1 = [],
-			unparsed( [0'&|Chars0], Context, Terms, Residue, WF )
+			Codes1 = [0'&|Codes2],
+			acquire_pcdata( Codes0, Context, Codes2, Terms, Residue, WF )
+		;	Codes1 = [],
+			unparsed( [0'&|Codes0], Context, Terms, Residue, WF )
 		).
 
 	namespace_attributes( [], Context, Context, [] ).
 	namespace_attributes( Attributes0, Context0, Context, Attributes ) :-
 		Attributes0 = [_|_],
-		append( "xmlns:", Unqualified, QualifiedNameChars ),
+		append( "xmlns:", Unqualified, QualifiedNameCodes ),
 		(	select( "xmlns"=Value, Attributes0, Attributes1 ) ->
 			atom_codes( URI, Value ),
 			context_update( default_namespace, Context0, URI, Context1 ),
 			namespace_attributes( Attributes1, Context1, Context, Attributes )
-		;	select( QualifiedNameChars=Value, Attributes0, Attributes1 ) ->
-			Attributes = [QualifiedNameChars=Value|Attributes2],
+		;	select( QualifiedNameCodes=Value, Attributes0, Attributes1 ) ->
+			Attributes = [QualifiedNameCodes=Value|Attributes2],
 			atom_codes( URI, Value ),
 			context_update( ns_prefix(Unqualified), Context0, URI, Context1 ),
 			namespace_attributes( Attributes1, Context1, Context, Attributes2 )
@@ -428,21 +434,21 @@
 		).
 
 	input_attributes( [], _Context, [] ).
-	input_attributes( [NameChars=Value|Attributes0], Context,
+	input_attributes( [NameCodes=Value|Attributes0], Context,
 			[Name=Value|Attributes] ) :-
 		(	remove_attribute_prefixes( Context ),
-			append( NSChars, [0':|NameChars1], NameChars ), %'
-			NSChars \== "xmlns",
-			specific_namespace( NSChars, Context, Namespace ),
+			append( NSCodes, [0':|NameCodes1], NameCodes ), %'
+			NSCodes \== "xmlns",
+			specific_namespace( NSCodes, Context, Namespace ),
 			current_namespace( Context, Namespace ) ->
-			atom_codes( Name, NameChars1 )
-		;	atom_codes( Name, NameChars )
+			atom_codes( Name, NameCodes1 )
+		;	atom_codes( Name, NameCodes )
 		),
 		input_attributes( Attributes0, Context, Attributes ).
 
 	attributes( [Name=Value|Attributes], Seen, Namespaces ) -->
 		spaces,
-		nmtoken_chars( Name ),
+		nmtoken_codes( Name ),
 		{\+ member(Name, Seen)},
 		spaces,
 		"=",
@@ -504,13 +510,13 @@
 		"<!ENTITY",
 		!,
 		spaces,
-		nmtoken_chars( Name ),
+		nmtoken_codes( Name ),
 		spaces,
 		quote( Quote ),
 		entity_value( Quote, Namespaces0, String ),
 		spaces,
 		">",
-		{\+ character_entity( Name, _StandardChar ),
+		{\+ character_entity( Name, _StandardCode ),
 		 % Don't allow &lt; &quote; etc. to be updated
 		 context_update( entity(Name), Namespaces0, String, Namespaces2 )
 		 },
@@ -531,17 +537,17 @@
 	dtd( Namespaces, [], Namespaces ) --> spaces.
 
 	dtd_literal( [] ) --> ">", !.
-	dtd_literal( Chars ) -->
+	dtd_literal( Codes ) -->
 		"--",
 		!,
 		dtd_comment,
-		dtd_literal( Chars ).
-	dtd_literal( [Char|Chars] ) -->
-		[Char],
-		dtd_literal( Chars ).
+		dtd_literal( Codes ).
+	dtd_literal( [Code|Codes] ) -->
+		[Code],
+		dtd_literal( Codes ).
 
 	dtd_comment( Plus, Minus ) :-
-		append( _Chars, [0'-,0'-|Minus], Plus ),
+		append( _Codes, [0'-,0'-|Minus], Plus ),
 		!.
 
 	nmtokens( [Name|Names] ) -->
@@ -550,13 +556,13 @@
 		nmtokens( Names ).
 	nmtokens( [] ) --> [].
 
-	entity_value( Quote, Namespaces, String, [Char|Plus], Minus ) :-
-		(	Char == Quote ->
+	entity_value( Quote, Namespaces, String, [Code|Plus], Minus ) :-
+		(	Code == Quote ->
 			String = [],
 			Minus = Plus
-		;	Char =:= 0'& ->
+		;	Code =:= 0'& ->
 			reference_in_entity( Namespaces, Quote, String, Plus, Minus )
-		;	String = [Char|String1],
+		;	String = [Code|String1],
 			entity_value( Quote, Namespaces, String1, Plus, Minus )
 		).
 
@@ -565,37 +571,37 @@
 		attribute_leading_layouts( Quote, Namespaces, String ).
 
 	attribute_leading_layouts( _Quote, _Namespace, [], [], [] ).
-	attribute_leading_layouts( Quote, Namespaces, String, [Char|Plus], Minus ) :-
-		(	Char == Quote ->
+	attribute_leading_layouts( Quote, Namespaces, String, [Code|Plus], Minus ) :-
+		(	Code == Quote ->
 			String = [],
 			Minus = Plus
-		;	Char =:= 0'& ->
+		;	Code =:= 0'& ->
 			ref_in_attribute_layout( Namespaces, Quote, String, Plus, Minus )
-		;	Char > 32, Char \== 160 ->
-			String = [Char|String1],
+		;	Code > 32, Code \== 160 ->
+			String = [Code|String1],
 			attribute_layouts( Quote, Namespaces, false, String1, Plus, Minus )
 		;	attribute_leading_layouts( Quote, Namespaces, String, Plus, Minus )
 		).
 
 	attribute_layouts( _Quote, _Namespaces, _Layout, [], [], [] ).
-	attribute_layouts( Quote, Namespaces, Layout, String, [Char|Plus], Minus ) :-
-		(	Char == Quote ->
+	attribute_layouts( Quote, Namespaces, Layout, String, [Code|Plus], Minus ) :-
+		(	Code == Quote ->
 			String = [],
 			Minus = Plus
-		;	Char =:= 0'& ->
+		;	Code =:= 0'& ->
 			reference_in_value( Namespaces, Quote, Layout, String, Plus, Minus )
-		;	Char > 32, Char \== 160 ->
+		;	Code > 32, Code \== 160 ->
 			(	Layout == true ->
-				String = [0' ,Char|String1] %'
-			;	String = [Char|String1]
+				String = [0' ,Code|String1] %'
+			;	String = [Code|String1]
 			),
 			attribute_layouts( Quote, Namespaces, false, String1, Plus, Minus )
 		;	attribute_layouts( Quote, Namespaces, true, String, Plus, Minus )
 		).
 
 	ref_in_attribute_layout( NS, Quote, String, Plus, Minus ) :-
-		(	standard_character_entity( Char, Plus, Mid ) ->
-			String = [Char|String1],
+		(	standard_character_entity( Code, Plus, Mid ) ->
+			String = [Code|String1],
 			attribute_layouts( Quote, NS, false,  String1, Mid, Minus )
 		;	entity_reference_name( Name, Plus, Suffix ),
 			defined_entity( Name, NS, Text ) ->
@@ -607,10 +613,10 @@
 		).
 
 	reference_in_value( Namespaces, Quote, Layout, String, Plus, Minus ) :-
-		(	standard_character_entity( Char, Plus, Mid ) ->
+		(	standard_character_entity( Code, Plus, Mid ) ->
 			(	Layout == true ->
-				String = [0' ,Char|String1] %'
-			;	String = [Char|String1]
+				String = [0' ,Code|String1] %'
+			;	String = [Code|String1]
 			),
 			Layout1 = false
 		;	entity_reference_name( Name, Plus, Suffix ),
@@ -629,8 +635,8 @@
 	 * circularity is avoided.
 	 */
 	reference_in_entity( Namespaces, Quote, String, Plus, Minus ) :-
-		(	standard_character_entity( _SomeChar, Plus, _Rest ) ->
-			String = [0'&|String1], % ' Character entities are unparsed
+		(	standard_character_entity( _SomeCode, Plus, _Rest ) ->
+			String = [0'&|String1], % ' Codeacter entities are unparsed
 			Mid = Plus
 		;	entity_reference_name( Name, Plus, Suffix ),
 			defined_entity( Name, Namespaces, Text ) ->
@@ -640,13 +646,13 @@
 		),
 		entity_value( Quote, Namespaces, String1, Mid, Minus ).
 
-	standard_character_entity( Char ) -->
-		"#x", hex_character_reference( Char ), ";".
-	standard_character_entity( Char ) -->
+	standard_character_entity( Code ) -->
+		"#x", hex_character_reference( Code ), ";".
+	standard_character_entity( Code ) -->
 		"#", digit( Digit ), digits( Digits ), ";",
-		{number_chars( Char, [Digit|Digits])}.
+		{catch(number_codes( Code, [Digit|Digits]), _, fail)}.
 	standard_character_entity( C ) -->
-		chars( String ),
+		codes( String ),
 		";",
 		!,
 		{character_entity(String, C)}.
@@ -658,16 +664,16 @@
 	uri1( Quote, [] ) -->
 		quote( Quote ),
 		!.
-	uri1( Quote, [Char|Chars] ) -->
-		[Char],
-		uri1( Quote, Chars ).
+	uri1( Quote, [Code|Codes] ) -->
+		[Code],
+		uri1( Quote, Codes ).
 
-	comment( Chars, Plus, Minus ) :-
-		append( Chars, [0'-,0'-,0'>|Minus], Plus ), %'
+	comment( Codes, Plus, Minus ) :-
+		append( Codes, [0'-,0'-,0'>|Minus], Plus ), %'
 		!.
 
-	cdata( Chars, Plus, Minus ) :-
-		append( Chars, [0'],0'],0'>|Minus], Plus ), %'
+	cdata( Codes, Plus, Minus ) :-
+		append( Codes, [0'],0'],0'>|Minus], Plus ), %'
 		!.
 	% Syntax Components
 
@@ -681,28 +687,28 @@
 		hex_character_reference1( New, Code ).
 	hex_character_reference1( Code, Code ) --> "".
 
-	hex_digit_char( 0 ) --> "0".
-	hex_digit_char( 1 ) --> "1".
-	hex_digit_char( 2 ) --> "2".
-	hex_digit_char( 3 ) --> "3".
-	hex_digit_char( 4 ) --> "4".
-	hex_digit_char( 5 ) --> "5".
-	hex_digit_char( 6 ) --> "6".
-	hex_digit_char( 7 ) --> "7".
-	hex_digit_char( 8 ) --> "8".
-	hex_digit_char( 9 ) --> "9".
-	hex_digit_char( 10 ) --> "A".
-	hex_digit_char( 11 ) --> "B".
-	hex_digit_char( 12 ) --> "C".
-	hex_digit_char( 13 ) --> "D".
-	hex_digit_char( 14 ) --> "E".
-	hex_digit_char( 15 ) --> "F".
-	hex_digit_char( 10 ) --> "a".
-	hex_digit_char( 11 ) --> "b".
-	hex_digit_char( 12 ) --> "c".
-	hex_digit_char( 13 ) --> "d".
-	hex_digit_char( 14 ) --> "e".
-	hex_digit_char( 15 ) --> "f".
+	hex_digit_char( 0 )  --> [0'0].
+	hex_digit_char( 1 )  --> [0'1].
+	hex_digit_char( 2 )  --> [0'2].
+	hex_digit_char( 3 )  --> [0'3].
+	hex_digit_char( 4 )  --> [0'4].
+	hex_digit_char( 5 )  --> [0'5].
+	hex_digit_char( 6 )  --> [0'6].
+	hex_digit_char( 7 )  --> [0'7].
+	hex_digit_char( 8 )  --> [0'8].
+	hex_digit_char( 9 )  --> [0'9].
+	hex_digit_char( 10 ) --> [0'A].
+	hex_digit_char( 11 ) --> [0'B].
+	hex_digit_char( 12 ) --> [0'C].
+	hex_digit_char( 13 ) --> [0'D].
+	hex_digit_char( 14 ) --> [0'E].
+	hex_digit_char( 15 ) --> [0'F].
+	hex_digit_char( 10 ) --> [0'a].
+	hex_digit_char( 11 ) --> [0'b].
+	hex_digit_char( 12 ) --> [0'c].
+	hex_digit_char( 13 ) --> [0'd].
+	hex_digit_char( 14 ) --> [0'e].
+	hex_digit_char( 15 ) --> [0'f].
 
 	quote( 0'" ) --> %'
 		"""".
@@ -712,99 +718,99 @@
 		"'", {atom_codes('''', [QuoteCode])}.
 
 	spaces( [], [] ).
-	spaces( [Char|Chars0], Chars1 ) :-
-		(	Char =< 32 ->
-			spaces( Chars0, Chars1 )
-		;	Chars1 = [Char|Chars0]
+	spaces( [Code|Codes0], Codes1 ) :-
+		(	Code =< 32 ->
+			spaces( Codes0, Codes1 )
+		;	Codes1 = [Code|Codes0]
 		).
 
 	nmtoken( Name ) -->
-		nmtoken_chars( Chars ),
-		{atom_codes(Name, Chars)}.
+		nmtoken_codes( Codes ),
+		{atom_codes(Name, Codes)}.
 
-	nmtoken_chars( [Char|Chars] ) -->
-		[Char],
-		{nmtoken_first( Char )},
-		nmtoken_chars_tail( Chars ).
+	nmtoken_codes( [Code|Codes] ) -->
+		[Code],
+		{nmtoken_first( Code )},
+		nmtoken_codes_tail( Codes ).
 
-	nmtoken_chars_tail( [Char|Chars] ) -->
-		[Char],
-		{nmtoken_char(Char)},
+	nmtoken_codes_tail( [Code|Codes] ) -->
+		[Code],
+		{nmtoken_code(Code)},
 		!,
-		nmtoken_chars_tail( Chars ).
-	nmtoken_chars_tail([]) --> "".
+		nmtoken_codes_tail( Codes ).
+	nmtoken_codes_tail([]) --> "".
 
 	nmtoken_first( 0': ).
 	nmtoken_first( 0'_ ).
-	nmtoken_first( Char ) :-
-		alphabet( Char ).
+	nmtoken_first( Code ) :-
+		alphabet( Code ).
 
-	nmtoken_char( 0'a ).
-	nmtoken_char( 0'b ).
-	nmtoken_char( 0'c ).
-	nmtoken_char( 0'd ).
-	nmtoken_char( 0'e ).
-	nmtoken_char( 0'f ).
-	nmtoken_char( 0'g ).
-	nmtoken_char( 0'h ).
-	nmtoken_char( 0'i ).
-	nmtoken_char( 0'j ).
-	nmtoken_char( 0'k ).
-	nmtoken_char( 0'l ).
-	nmtoken_char( 0'm ).
-	nmtoken_char( 0'n ).
-	nmtoken_char( 0'o ).
-	nmtoken_char( 0'p ).
-	nmtoken_char( 0'q ).
-	nmtoken_char( 0'r ).
-	nmtoken_char( 0's ).
-	nmtoken_char( 0't ).
-	nmtoken_char( 0'u ).
-	nmtoken_char( 0'v ).
-	nmtoken_char( 0'w ).
-	nmtoken_char( 0'x ).
-	nmtoken_char( 0'y ).
-	nmtoken_char( 0'z ).
-	nmtoken_char( 0'A ).
-	nmtoken_char( 0'B ).
-	nmtoken_char( 0'C ).
-	nmtoken_char( 0'D ).
-	nmtoken_char( 0'E ).
-	nmtoken_char( 0'F ).
-	nmtoken_char( 0'G ).
-	nmtoken_char( 0'H ).
-	nmtoken_char( 0'I ).
-	nmtoken_char( 0'J ).
-	nmtoken_char( 0'K ).
-	nmtoken_char( 0'L ).
-	nmtoken_char( 0'M ).
-	nmtoken_char( 0'N ).
-	nmtoken_char( 0'O ).
-	nmtoken_char( 0'P ).
-	nmtoken_char( 0'Q ).
-	nmtoken_char( 0'R ).
-	nmtoken_char( 0'S ).
-	nmtoken_char( 0'T ).
-	nmtoken_char( 0'U ).
-	nmtoken_char( 0'V ).
-	nmtoken_char( 0'W ).
-	nmtoken_char( 0'X ).
-	nmtoken_char( 0'Y ).
-	nmtoken_char( 0'Z ).
-	nmtoken_char( 0'0 ).
-	nmtoken_char( 0'1 ).
-	nmtoken_char( 0'2 ).
-	nmtoken_char( 0'3 ).
-	nmtoken_char( 0'4 ).
-	nmtoken_char( 0'5 ).
-	nmtoken_char( 0'6 ).
-	nmtoken_char( 0'7 ).
-	nmtoken_char( 0'8 ).
-	nmtoken_char( 0'9 ).
-	nmtoken_char( 0'. ).
-	nmtoken_char( 0'- ).
-	nmtoken_char( 0'_ ).
-	nmtoken_char( 0': ).
+	nmtoken_code( 0'a ).
+	nmtoken_code( 0'b ).
+	nmtoken_code( 0'c ).
+	nmtoken_code( 0'd ).
+	nmtoken_code( 0'e ).
+	nmtoken_code( 0'f ).
+	nmtoken_code( 0'g ).
+	nmtoken_code( 0'h ).
+	nmtoken_code( 0'i ).
+	nmtoken_code( 0'j ).
+	nmtoken_code( 0'k ).
+	nmtoken_code( 0'l ).
+	nmtoken_code( 0'm ).
+	nmtoken_code( 0'n ).
+	nmtoken_code( 0'o ).
+	nmtoken_code( 0'p ).
+	nmtoken_code( 0'q ).
+	nmtoken_code( 0'r ).
+	nmtoken_code( 0's ).
+	nmtoken_code( 0't ).
+	nmtoken_code( 0'u ).
+	nmtoken_code( 0'v ).
+	nmtoken_code( 0'w ).
+	nmtoken_code( 0'x ).
+	nmtoken_code( 0'y ).
+	nmtoken_code( 0'z ).
+	nmtoken_code( 0'A ).
+	nmtoken_code( 0'B ).
+	nmtoken_code( 0'C ).
+	nmtoken_code( 0'D ).
+	nmtoken_code( 0'E ).
+	nmtoken_code( 0'F ).
+	nmtoken_code( 0'G ).
+	nmtoken_code( 0'H ).
+	nmtoken_code( 0'I ).
+	nmtoken_code( 0'J ).
+	nmtoken_code( 0'K ).
+	nmtoken_code( 0'L ).
+	nmtoken_code( 0'M ).
+	nmtoken_code( 0'N ).
+	nmtoken_code( 0'O ).
+	nmtoken_code( 0'P ).
+	nmtoken_code( 0'Q ).
+	nmtoken_code( 0'R ).
+	nmtoken_code( 0'S ).
+	nmtoken_code( 0'T ).
+	nmtoken_code( 0'U ).
+	nmtoken_code( 0'V ).
+	nmtoken_code( 0'W ).
+	nmtoken_code( 0'X ).
+	nmtoken_code( 0'Y ).
+	nmtoken_code( 0'Z ).
+	nmtoken_code( 0'0 ).
+	nmtoken_code( 0'1 ).
+	nmtoken_code( 0'2 ).
+	nmtoken_code( 0'3 ).
+	nmtoken_code( 0'4 ).
+	nmtoken_code( 0'5 ).
+	nmtoken_code( 0'6 ).
+	nmtoken_code( 0'7 ).
+	nmtoken_code( 0'8 ).
+	nmtoken_code( 0'9 ).
+	nmtoken_code( 0'. ).
+	nmtoken_code( 0'- ).
+	nmtoken_code( 0'_ ).
+	nmtoken_code( 0': ).
 
 	xml_string( String ) -->
 		quote( Quote ),
@@ -813,9 +819,9 @@
 	xml_string1( Quote, [] ) -->
 		quote( Quote ),
 		!.
-	xml_string1( Quote, [Char|Chars] ) -->
-		[Char],
-		xml_string1( Quote, Chars ).
+	xml_string1( Quote, [Code|Codes] ) -->
+		[Code],
+		xml_string1( Quote, Codes ).
 
 	alphabet( 0'a ).
 	alphabet( 0'b ).
@@ -1139,24 +1145,24 @@
 	 * is an ADT hiding the "state" arguments for XML Acquisition
 	 */
 	initial_context(
-			Controls,
+			Options,
 			context(void,PreserveSpace,'','',Entities,Empty,
 				RemoveAttributePrefixes,AllowAmpersand)
 			) :-
 		empty_map( Empty ),
-		(	member( extended_characters(false), Controls ) ->
+		(	member( extended_characters(false), Options ) ->
 			Entities = Empty
 		;	extended_character_entities(Entities)
 		),
-		(	member( format(false), Controls ) ->
+		(	member( format(false), Options ) ->
 			PreserveSpace = true
 		;	PreserveSpace = false
 		),
-		(	member( remove_attribute_prefixes(true), Controls ) ->
+		(	member( remove_attribute_prefixes(true), Options ) ->
 			RemoveAttributePrefixes = true
 		;	RemoveAttributePrefixes = false
 		),
-		(	member( allow_ampersand(true), Controls ) ->
+		(	member( allow_ampersand(true), Options ) ->
 			AllowAmpersand = true
 		;	AllowAmpersand = false
 		).
@@ -1230,8 +1236,8 @@
 		close_context1( Element, Terms, WellFormed ).
 
 	close_context1( void, [], true ).
-	close_context1( tag(TagChars), [out_of_context(Tag)], false ) :-
-		atom_chars( Tag, TagChars ).
+	close_context1( tag(TagCodes), [out_of_context(Tag)], false ) :-
+		atom_codes( Tag, TagCodes ).
 
 	void_context(
 		context(void,_Preserve,_Current,_Default,_Entities,_Names,_RPFA,_Amp)
@@ -1253,36 +1259,36 @@
 		argnames is ['String']
 	]).
 
-	pp_string( Chars ) :-
-		(	member( Char, Chars ),
-			not_shorthand( Char ) ->
-			write( Chars )
+	pp_string( Codes ) :-
+		(	member( Code, Codes ),
+			not_shorthand( Code ) ->
+			write( Codes )
 		;	put_quote,
-			pp_string1( Chars ),
+			pp_string1( Codes ),
 			put_quote
 		).
 
-	not_shorthand( Char ) :-
-		Char > 255.
-	not_shorthand( Char ) :-
-		Char < 9.
+	not_shorthand( Code ) :-
+		Code > 255.
+	not_shorthand( Code ) :-
+		Code < 9.
 	not_shorthand( 126 ).	% ~ gives syntax errors in LPA Prolog
 
 	put_quote :-
 		put_code( 0'" ). % '
 
 	pp_string1( [] ).
-	pp_string1( [Char|Chars] ) :-
-		(	Char =:= 0'"  -> % Meta-quote
-			put_code( Char ),
-			put_code( Char ),
-			pp_string1( Chars )
-		;	Char =:= 13,	% Handle Windows border-settings
-			Chars = [10|Chars1] ->
+	pp_string1( [Code|Codes] ) :-
+		(	Code =:= 0'"  -> % Meta-quote
+			put_code( Code ),
+			put_code( Code ),
+			pp_string1( Codes )
+		;	Code =:= 13,	% Handle Windows border-settings
+			Codes = [10|Codes1] ->
 			put_code( 10 ),
-			pp_string1( Chars1 )
-		;	put_code( Char ),
-			pp_string1( Chars )
+			pp_string1( Codes1 )
+		;	put_code( Code ),
+			pp_string1( Codes )
 		).
 
 	xml_declaration_attributes_valid( [] ).
@@ -1314,12 +1320,12 @@
 	 * every uppercase character replaced by its lowercase equivalent.
 	 */
 	lowercase( [], [] ).
-	lowercase( [Char|Chars], [Lower|LowerCase] ) :-
-		(	Char >= 0'A, Char =< 0'Z ->
-			Lower is Char + 0'a - 0'A
-		;	Lower = Char
+	lowercase( [Code|Codes], [Lower|LowerCase] ) :-
+		(	Code >= 0'A, Code =< 0'Z ->
+			Lower is Code + 0'a - 0'A
+		;	Lower = Code
 		),
-		lowercase( Chars, LowerCase ).
+		lowercase( Codes, LowerCase ).
 
 	extended_character_entities( [
 		"AElig"-[198],		% latin capital letter AE
@@ -1573,20 +1579,20 @@
 	] ).
 
 
-	/* chars( ?Chars, ?Plus, ?Minus ) used as chars( ?Chars ) in a DCG to
-	 * copy the list Chars inline.
+	/* codes( ?Codes, ?Plus, ?Minus ) used as codes( ?Codes ) in a DCG to
+	 * copy the list Codes inline.
 	 *
 	 * This is best expressed in terms of append/3 where append/3 is built-in.
 	 * For other Prologs, a straightforward specification can be used:
 	 *
-	 *	chars( [] ) --> "".
-	 *	chars( [Char|Chars] ) -->
-	 *		[Char],
-	 *		chars( Chars ).
+	 *	codes( [] ) --> "".
+	 *	codes( [Code|Codes] ) -->
+	 *		[Code],
+	 *		codes( Codes ).
 	 */
 
-	chars(Chars, Plus, Minus) :-
-		append(Chars, Minus, Plus).
+	codes(Codes, Plus, Minus) :-
+		append(Codes, Minus, Plus).
 
 
 	/* fault( +Term, +Indentation, ?SubTerm, ?Path, ?Message ) identifies SubTerm
@@ -1613,10 +1619,10 @@
 
 	content_fault( Term, _Indent, Term, [], "Illegal Variable" ) :-
 		var( Term ).
-	content_fault( pcdata(Chars), _Indent, Chars, [], "Invalid Character Data" ) :-
-		\+ is_chars( Chars ).
-	content_fault( cdata(Chars), _Indent, Chars, [], "Invalid Character Data" ) :-
-		\+ is_chars( Chars ).
+	content_fault( pcdata(Codes), _Indent, Codes, [], "Invalid Codeacter Data" ) :-
+		\+ is_codes( Codes ).
+	content_fault( cdata(Codes), _Indent, Codes, [], "Invalid Codeacter Data" ) :-
+		\+ is_codes( Codes ).
 	content_fault( [H|_T], Indent, Culprit, Path, Message ) :-
 		content_fault( H, Indent, Culprit, Path, Message ).
 	content_fault( [_H|T], Indent, Culprit, Path, Message ) :-
@@ -1645,24 +1651,24 @@
 	attribute_fault( Name=Value, Name=Value, "Attribute Name must be atom" ) :-
 		\+ atom(Name).
 	attribute_fault( Name=Value, Name=Value, "Attribute Value must be chars" ) :-
-		\+ is_chars( Value ).
+		\+ is_codes( Value ).
 	attribute_fault( Attribute, Attribute, "Malformed Attribute" ) :-
 		Attribute \= (_Name=_Value).
 
-	is_chars( Chars ) :-
-		is_list( Chars ),
-		\+ (member( Char, Chars ), \+ (integer(Char), Char >=0, Char =< 255)).
+	is_codes( Codes ) :-
+		is_list( Codes ),
+		\+ (member( Code, Codes ), \+ (integer(Code), Code >=0, Code =< 255)).
 
 	fault_path( Tag, Attributes ) -->
-		{atom_codes( Tag, Chars )},
-		chars( Chars ),
+		{atom_codes( Tag, Codes )},
+		codes( Codes ),
 		fault_id( Attributes ),
 		" ".
 
 	fault_id( Attributes ) -->
-		{member( id=Chars, Attributes ), is_chars( Chars )},
+		{member( id=Codes, Attributes ), is_codes( Codes )},
 		!,
-		"(", chars(Chars), ")".
+		"(", codes(Codes), ")".
 	fault_id( _Attributes ) --> "".
 
 
@@ -1730,13 +1736,13 @@
 		">".
 	generation( instructions(Target,Process), _Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
-		"<?", generated_name(Target), " ", chars( Process ) ,"?>".
-	generation( pcdata(Chars), _Prefix, Format0, _Indent, Format1 ) -->
-		pcdata_generation( Chars ),
-		{character_data_format( Chars, Format0, Format1 )}.
+		"<?", generated_name(Target), " ", codes( Process ) ,"?>".
+	generation( pcdata(Codes), _Prefix, Format0, _Indent, Format1 ) -->
+		pcdata_generation( Codes ),
+		{character_data_format( Codes, Format0, Format1 )}.
 	generation( comment( Comment ), _Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
-		"<!--", chars( Comment ), "-->".
+		"<!--", codes( Comment ), "-->".
 	generation( namespace(URI, Prefix, element(Name, Atts, Content)),
 			_Prefix0, Format, Indent, Format ) -->
 		indent( Format, Indent ),
@@ -1770,7 +1776,7 @@
 		generated_name( Name ).
 	generated_prefixed_name( Prefix, Name ) -->
 		{Prefix = [_|_]},
-		chars( Prefix ), ":",
+		codes( Prefix ), ":",
 		generated_name( Name ).
 
 	generated_content( [], _Format, _Indent, _Prefix, _Namespace ) -->
@@ -1791,32 +1797,32 @@
 		generated_attributes( [xmlns=Namespace|Atts1], Format0, Format  ).
 
 	generated_name( Name, Plus, Minus ) :-
-		atom_codes( Name, Chars ),
-		append( Chars, Minus, Plus ).
+		atom_codes( Name, Codes ),
+		append( Codes, Minus, Plus ).
 
 	generated_external_id( local ) --> "".
 	generated_external_id( local(Literals) ) --> " [",
 		generated_doctype_literals( Literals ), "\n\t]".
 	generated_external_id( system(URL) ) -->
 		" SYSTEM """,
-		chars( URL ),
+		codes( URL ),
 		"""".
 	generated_external_id( system(URL,Literals) ) -->
 		" SYSTEM """,
-		chars( URL ),
+		codes( URL ),
 		""" [",
 		generated_doctype_literals( Literals ), "\n\t]".
 	generated_external_id( public(URN,URL) ) -->
 		" PUBLIC """,
-		chars( URN ),
+		codes( URN ),
 		""" """,
-		chars( URL ),
+		codes( URL ),
 		"""".
 	generated_external_id( public(URN,URL,Literals) ) -->
 		" PUBLIC """,
-		chars( URN ),
+		codes( URN ),
 		""" """,
-		chars( URL ),
+		codes( URL ),
 		""" [",
 		generated_doctype_literals( Literals ), "\n\t]".
 
@@ -1825,7 +1831,7 @@
 		"\n\t<!", cdata_generation( String ), ">",
 		generated_doctype_literals( Literals ).
 
-	/* quoted_string( +Chars ) is a DCG representing Chars, a list of character
+	/* quoted_string( +Codes ) is a DCG representing Codes, a list of character
 	 * codes, as a legal XML attribute string. Any leading or trailing layout
 	 * characters are removed. &, " and < characters are replaced by &amp;, &quot;
 	 * and &lt; respectively, .
@@ -1835,51 +1841,51 @@
 		quoted_string2( NoLeadingLayouts, Layout, Layout, Plus, Minus ).
 
 	quoted_string1( [], [] ).
-	quoted_string1( [Char|Chars], NoLeadingLayouts ) :-
-		(	Char > 32 ->
-			NoLeadingLayouts = [Char|Chars]
-		;	quoted_string1( Chars, NoLeadingLayouts )
+	quoted_string1( [Code|Codes], NoLeadingLayouts ) :-
+		(	Code > 32 ->
+			NoLeadingLayouts = [Code|Codes]
+		;	quoted_string1( Codes, NoLeadingLayouts )
 		).
 
 	quoted_string2( [], _LayoutPlus, _LayoutMinus, List, List ).
-	quoted_string2( [Char|Chars], LayoutPlus, LayoutMinus, Plus, Minus ) :-
-		(	Char =< 0' ,
-			legal_xml_unicode( Char ) ->
+	quoted_string2( [Code|Codes], LayoutPlus, LayoutMinus, Plus, Minus ) :-
+		(	Code =< 0' ,
+			legal_xml_unicode( Code ) ->
 			Plus = Plus1,
-			LayoutMinus = [Char|LayoutMinus1],
+			LayoutMinus = [Code|LayoutMinus1],
 			LayoutPlus = LayoutPlus1
-		;	Char == 34 ->
+		;	Code == 34 ->
 			Plus = LayoutPlus,
 			escaped_quote( LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
-		;	Char == 39 ->
+		;	Code == 39 ->
 			Plus = LayoutPlus,
 			apos( LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
-		;	Char =< 127 ->
+		;	Code =< 127 ->
 			Plus = LayoutPlus,
-			pcdata_7bit( Char, LayoutMinus, Plus1 ),
+			pcdata_7bit( Code, LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
-		;	legal_xml_unicode( Char ) ->
+		;	legal_xml_unicode( Code ) ->
 			Plus = LayoutPlus,
-			number_codes( Char, Codes ),
+			number_codes( Code, Codes ),
 			pcdata_8bits_plus( Codes, LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
 		;	LayoutPlus = LayoutPlus1,
 			LayoutMinus = LayoutMinus1,
 			Plus = Plus1
 		),
-		quoted_string2( Chars, LayoutPlus1, LayoutMinus1, Plus1, Minus ).
+		quoted_string2( Codes, LayoutPlus1, LayoutMinus1, Plus1, Minus ).
 
 	indent( false, _Indent ) --> [].
 	indent( true, Indent ) -->
-		"\n",	chars( Indent ).
+		"\n",	codes( Indent ).
 
 	apos --> "&apos;".
 
 	escaped_quote --> "&quot;".
 
-	/* pcdata_generation( +Chars ) is a DCG representing Chars, a list of character
+	/* pcdata_generation( +Codes ) is a DCG representing Codes, a list of character
 	 * codes as legal XML "Parsed character data" (PCDATA) string. Any codes
 	 * which cannot be represented by a 7-bit character are replaced by their
 	 * decimal numeric character entity e.g. code 160 (non-breaking space) is
@@ -1887,17 +1893,17 @@
 	 * specification are not encoded.
 	 */
 	pcdata_generation( [], Plus, Plus ).
-	pcdata_generation( [Char|Chars], Plus, Minus ) :-
-		(	Char =< 127 ->
-			pcdata_7bit( Char, Plus, Mid )
-		;	legal_xml_unicode( Char ) ->
-			number_codes( Char, Codes ),
-			pcdata_8bits_plus( Codes, Plus, Mid )
+	pcdata_generation( [Code|Codes], Plus, Minus ) :-
+		(	Code =< 127 ->
+			pcdata_7bit( Code, Plus, Mid )
+		;	legal_xml_unicode( Code ) ->
+			number_codes( Code, Digits ),
+			pcdata_8bits_plus( Digits, Plus, Mid )
 		;	Plus = Mid
 		),
-		pcdata_generation( Chars, Mid, Minus ).
+		pcdata_generation( Codes, Mid, Minus ).
 
-	/* pcdata_7bit(+Char) represents the ascii character set in its
+	/* pcdata_7bit(+Code) represents the ascii character set in its
 	 * simplest format, using the character entities &amp; &quot; &lt; and &gt;
 	 * which are common to both XML and HTML. The numeric entity &#39; is used in
 	 * place of &apos;, because browsers don't recognize it in HTML.
@@ -1906,7 +1912,7 @@
 	:- mode(pcdata_7bit(?nonvar), zero_or_one).
 	:- info(pcdata_7bit//1, [
 		comment is 'Represents the ASCII character set in its simplest format, using the character entities ``&amp;``, ``&quot;``, ``&lt;``, and ``&gt;`` which are common to both XML and HTML. The numeric entity ``&#39;`` is used in place of ``&apos;`` because browsers don''t recognize it in HTML.',
-		argnames is ['Char']
+		argnames is ['Code']
 	]).
 
 	pcdata_7bit( 0 ) --> "".
@@ -2039,39 +2045,39 @@
 	pcdata_7bit( 127 ) --> "&#127;".
 
 	pcdata_8bits_plus( Codes ) -->
-		"&#", chars( Codes ), ";".
+		"&#", codes( Codes ), ";".
 
-	/* character_data_format( +Chars, +Format0, ?Format1 ) holds when Format0 and
-	 * Format1 are the statuses of XML formatting before and after Chars -
+	/* character_data_format( +Codes, +Format0, ?Format1 ) holds when Format0 and
+	 * Format1 are the statuses of XML formatting before and after Codes -
 	 * which may be null.
 	 */
 	:- private(character_data_format/3).
 	:- mode(character_data_format(+nonvar, +nonvar, ?nonvar), zero_or_one).
 	:- info(character_data_format/3, [
-		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.',
-		argnames is ['Chars', 'Format0', 'Format1']
+		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Codes`` - which may be null.',
+		argnames is ['Codes', 'Format0', 'Format1']
 	]).
 
 	character_data_format( [], Format, Format ).
-	character_data_format( [_Char|_Chars], _Format, false ).
+	character_data_format( [_Code|_Codes], _Format, false ).
 
-	/* cdata_generation( +Chars ) is a DCG representing Chars, a list of character
+	/* cdata_generation( +Codes ) is a DCG representing Codes, a list of character
 	 * codes as a legal XML CDATA string. Any character codes disallowed by the XML
 	 * specification are not encoded.
 	 */
 	:- private(cdata_generation//1).
 	:- mode(cdata_generation(+list), zero_or_one).
 	:- info(cdata_generation//1, [
-		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Chars`` - which may be null.',
-		argnames is ['Chars']
+		comment is 'Holds when ``Format0`` and ``Format1`` are the statuses of XML formatting before and after ``Codes`` - which may be null.',
+		argnames is ['Codes']
 	]).
 
 	cdata_generation( [] ) --> "".
-	cdata_generation( [Char|Chars] ) -->
-		(	{legal_xml_unicode( Char )}, !, [Char]
+	cdata_generation( [Code|Codes] ) -->
+		(	{legal_xml_unicode( Code )}, !, [Code]
 		;	""
 		),
-		cdata_generation( Chars ).
+		cdata_generation( Codes ).
 
 	legal_xml_unicode( 9 ).
 	legal_xml_unicode( 10 ).
@@ -2442,8 +2448,8 @@
 		).
 
 	range( Low, High ) -->
-		[Char],
-		{Char >= Low, Char =< High}.
+		[Code],
+		{Code >= Low, Code =< High}.
 */
 
 :- end_object.
