@@ -44,9 +44,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:75:1,
+		version is 1:75:2,
 		author is 'Paulo Moura',
-		date is 2021-03-23,
+		date is 2021-04-04,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -315,7 +315,7 @@
 		shell(Command) :-
 			{shell(Command)}.
 
-		is_absolute_file_name(Path, ExpandedPath) :-
+		is_absolute_file_name(Path) :-
 			{expand_atom(Path, EnvVarExpandedPath),
 			 path_sysop(isabsolute, EnvVarExpandedPath)}.
 

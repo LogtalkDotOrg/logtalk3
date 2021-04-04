@@ -40,6 +40,8 @@ a term representation. Joint work with Paul Brown.
 * ADDED: Predicates `numbervars/3`, `numbervars/1`, and `varnumbers/2-3 to the
 library `term` object.
 
+* FIXED: Definition of the `os::is_absolute_file_name/1` predicate for XSB.
+
 Tools
 -----
 
