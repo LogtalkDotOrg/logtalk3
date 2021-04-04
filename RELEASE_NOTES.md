@@ -42,6 +42,8 @@ library `term` object.
 
 * FIXED: Definition of the `os::is_absolute_file_name/1` predicate for XSB.
 
+* FIXED: Portability issue in the `csv` library.
+
 Tools
 -----
 

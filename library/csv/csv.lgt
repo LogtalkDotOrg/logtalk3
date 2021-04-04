@@ -23,9 +23,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Jacinto Dávila',
-		date is 2021-02-26,
+		date is 2021-04-04,
 		comment is 'CSV files reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
@@ -374,7 +374,7 @@
 		dbg('File codes'-Codes),
 		ensure_bound_options,
 		phrase(record(Row, false), Codes),
-		length(Row, N),
+		list::length(Row, N),
 		dbg(i_suggest_arity(Row, N)),
 		logtalk::ask_question(question, csv, guess_row(Row), valid, Answer),
 		correct(Answer),
