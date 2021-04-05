@@ -21,12 +21,12 @@
 
 :- object(bintree,
 	implements(dictionaryp),
-	extends(compound)).
+	extends(term)).
 
 	:- info([
-		version is 2:10:0,
+		version is 2:10:1,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2020-03-10,
+		date is 2021-04-05,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, rbtree]
 	]).
@@ -351,6 +351,14 @@
 		ground((LeftKey,RightKey)),
 		LeftKey @< Key,
 		Key @< RightKey.
+
+	check(Term) :-
+		(	valid(Term) ->
+			true
+		;	var(Term) ->
+			instantiation_error
+		;	type_error(bintree, Term)
+		).
 
 	size(Dictionary, Size) :-
 		size(Dictionary, 0, Size).

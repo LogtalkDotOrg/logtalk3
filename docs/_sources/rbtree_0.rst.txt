@@ -11,8 +11,8 @@
 Red-Black trees. Uses standard order to compare keys.
 
 | **Author:** Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.
-| **Version:** 1:8:0
-| **Date:** 2020-03-10
+| **Version:** 1:8:1
+| **Date:** 2021-04-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -21,7 +21,7 @@ Red-Black trees. Uses standard order to compare keys.
 | **Implements:**
 |    ``public`` :ref:`dictionaryp <dictionaryp/0>`
 | **Extends:**
-|    ``public`` :ref:`compound <compound/0>`
+|    ``public`` :ref:`term <term/0>`
 
 | **Remarks:**
 |    (none)

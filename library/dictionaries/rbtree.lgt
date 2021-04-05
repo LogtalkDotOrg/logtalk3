@@ -28,12 +28,12 @@
 
 :- object(rbtree,
 	implements(dictionaryp),
-	extends(compound)).
+	extends(term)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:8:1,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
-		date is 2020-03-10,
+		date is 2021-04-05,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [avltree, bintree]
 	]).
@@ -736,13 +736,21 @@
 	valid(t(Nil,Nil)) :-
 		!.
 	valid(t(_,Tree)) :-
-		catch(check(Tree), _, fail).
+		catch(check_rbtree_root(Tree), _, fail).
 
-	check(black(Left,Key,_,Right)) :-
+	check(Term) :-
+		(	valid(Term) ->
+			true
+		;	var(Term) ->
+			instantiation_error
+		;	type_error(rbtree, Term)
+		).
+
+	check_rbtree_root(black(Left,Key,_,Right)) :-
 		find_path_blacks(Left, 0, Bls),
 		check_rbtree(Left, -inf, Key, Bls),
 		check_rbtree(Right, Key, +inf, Bls).
-	check(red(_,_,_,_)) :-
+	check_rbtree_root(red(_,_,_,_)) :-
 		throw(root_should_be_black).
 
 	find_path_blacks(black('',_,_,''), Bls, Bls) :-

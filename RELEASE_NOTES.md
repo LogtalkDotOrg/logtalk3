@@ -34,6 +34,9 @@ incompatible changes in its libraries).
 Library
 -------
 
+* CHANGED: The `dictionaries` library objects now extend `term` instead of
+`compound` as empty dictionaries are not always compound terms.
+
 * ADDED: Preliminary version of a `html` library to generate HTML content from
 a term representation. Joint work with Paul Brown.
 
@@ -43,6 +46,9 @@ library `term` object.
 * FIXED: Definition of the `os::is_absolute_file_name/1` predicate for XSB.
 
 * FIXED: Portability issue in the `csv` library.
+
+* FIXED: Definitions of the `check/1` predicate for the `dictionaries` library
+objects. Thanks to Paul Brown for the bug report.
 
 Tools
 -----

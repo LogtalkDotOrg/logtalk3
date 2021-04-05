@@ -43,12 +43,12 @@
 
 :- object(avltree,
 	implements(dictionaryp),
-	extends(compound)).
+	extends(term)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'R.A.O''Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura',
-		date is 2020-03-10,
+		date is 2021-04-05,
 		comment is 'AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [bintree, rbtree]
 	]).
@@ -417,6 +417,14 @@
 	balance((=), (-)).
 	balance((<), (<)).
 	balance((>), (>)).
+
+	check(Term) :-
+		(	valid(Term) ->
+			true
+		;	var(Term) ->
+			instantiation_error
+		;	type_error(avltree, Term)
+		).
 
 	size(Tree, Size) :-
 		size(Tree, 0, Size).

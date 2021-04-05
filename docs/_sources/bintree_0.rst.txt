@@ -11,8 +11,8 @@
 Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.
 
 | **Author:** Paulo Moura and Paul Fodor
-| **Version:** 2:10:0
-| **Date:** 2020-03-10
+| **Version:** 2:10:1
+| **Date:** 2021-04-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -21,7 +21,7 @@ Simple binary tree implementation of the dictionary protocol. Uses standard orde
 | **Implements:**
 |    ``public`` :ref:`dictionaryp <dictionaryp/0>`
 | **Extends:**
-|    ``public`` :ref:`compound <compound/0>`
+|    ``public`` :ref:`term <term/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 
