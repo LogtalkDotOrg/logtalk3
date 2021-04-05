@@ -22,9 +22,9 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:2:1,
 		author is 'Paulo Moura',
-		date is 2020-03-10,
+		date is 2021-04-04,
 		comment is 'Dictionary protocol.',
 		see_also is [avltree, bintree, rbtree]
 	]).
@@ -44,14 +44,14 @@
 	]).
 
 	:- public(clone/3).
-	:- mode(clone(+tree, -tree, -list(pairs)), one).
+	:- mode(clone(+dictionary, -dictionary, -list(pairs)), one).
 	:- info(clone/3, [
 		comment is 'Clones a dictionary using the same keys but with all values unbound and returning a list of all the pairs in the new clone.',
 		argnames is ['Dictionary', 'Clone', 'ClonePairs']
 	]).
 
 	:- public(clone/4).
-	:- mode(clone(+tree, -list(pairs), -tree, -list(pairs)), one).
+	:- mode(clone(+dictionary, -list(pairs), -dictionary, -list(pairs)), one).
 	:- info(clone/4, [
 		comment is 'Clones a dictionary using the same keys but with all values unbound and returning the list of all pairs in the dictionary and in the clone.',
 		argnames is ['Dictionary', 'Pairs', 'Clone', 'ClonePairs']

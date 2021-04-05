@@ -11,8 +11,8 @@
 Dictionary protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 2:2:0
-| **Date:** 2020-03-10
+| **Version:** 2:2:1
+| **Date:** 2021-04-04
 
 | **Compilation flags:**
 |    ``static``
@@ -99,7 +99,7 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 | **Template:**
 |    ``clone(Dictionary,Clone,ClonePairs)``
 | **Mode and number of proofs:**
-|    ``clone(+tree,-tree,-list(pairs))`` - ``one``
+|    ``clone(+dictionary,-dictionary,-list(pairs))`` - ``one``
 
 
 ------------
@@ -122,7 +122,7 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 | **Template:**
 |    ``clone(Dictionary,Pairs,Clone,ClonePairs)``
 | **Mode and number of proofs:**
-|    ``clone(+tree,-list(pairs),-tree,-list(pairs))`` - ``one``
+|    ``clone(+dictionary,-list(pairs),-dictionary,-list(pairs))`` - ``one``
 
 
 ------------
