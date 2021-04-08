@@ -50,6 +50,10 @@ library `term` object.
 * FIXED: Definitions of the `check/1` predicate for the `dictionaries` library
 objects. Thanks to Paul Brown for the bug report.
 
+* FIXED: The `rbtree::insert/4` predicate to fail when the key is a variable
+as in the other dictionary implementations. Thanks to Paul Brown for the bug
+report.
+
 Tools
 -----
 

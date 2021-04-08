@@ -31,9 +31,9 @@
 	extends(term)).
 
 	:- info([
-		version is 1:8:1,
+		version is 1:8:2,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
-		date is 2021-04-05,
+		date is 2021-04-08,
 		comment is 'Red-Black trees. Uses standard order to compare keys.',
 		see_also is [avltree, bintree]
 	]).
@@ -239,6 +239,7 @@
 	%	value is replaced by Value.
 
 	insert(t(Nil, Tree0), Key, Value, t(Nil, Tree)) :-
+		nonvar(Key),
 		insert(Tree0, Key, Value, Nil, Tree1, _),
 		fix_root(Tree1, Tree).
 
