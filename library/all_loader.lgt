@@ -28,6 +28,7 @@
 		events(loader),
 		dependents(loader),
 		dictionaries(loader),
+		nested_dictionaries(loader),
 		heaps(loader),
 		queues(loader),
 		sets(loader),

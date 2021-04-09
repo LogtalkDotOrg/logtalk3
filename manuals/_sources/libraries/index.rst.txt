@@ -55,6 +55,7 @@ directory in the ``NOTES.md`` file.
    loops
    meta
    meta_compiler
+   nested_dictionaries
    optionals
    options
    os

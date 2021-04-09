@@ -1,0 +1,59 @@
+.. index:: navltree
+.. _navltree/0:
+
+.. rst-class:: right
+
+**object**
+
+``navltree``
+============
+
+Nested dictionary implementation based on the AVL tree implementation. Uses standard order to compare keys.
+
+| **Author:** Paul Brown and Paulo Moura.
+| **Version:** 0:1:0
+| **Date:** 2021-04-09
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0>`
+| **Extends:**
+|    ``private`` :ref:`avltree <avltree/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`nested_dictionary_protocol/0::as_curly_bracketed/2`  :ref:`nested_dictionary_protocol/0::as_nested_dictionary/2`  :ref:`nested_dictionary_protocol/0::delete_in/4`  :ref:`nested_dictionary_protocol/0::empty/1`  :ref:`nested_dictionary_protocol/0::insert_in/4`  :ref:`nested_dictionary_protocol/0::lookup_in/3`  :ref:`nested_dictionary_protocol/0::new/1`  :ref:`nested_dictionary_protocol/0::update_in/4`  :ref:`nested_dictionary_protocol/0::update_in/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`nrbtree <nrbtree/0>`, :ref:`nbintree <nbintree/0>`
+

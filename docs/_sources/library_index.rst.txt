@@ -547,6 +547,19 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    metagol <metagol_0>
    metagol_example_protocol <metagol_example_protocol_0>
 
+``nested_dictionaries``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   navltree <navltree_0>
+   nbintree <nbintree_0>
+   nested_dictionary_protocol <nested_dictionary_protocol_0>
+   nrbtree <nrbtree_0>
+
 ``optionals``
 -------------
 

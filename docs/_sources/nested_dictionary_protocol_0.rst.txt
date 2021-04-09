@@ -1,0 +1,263 @@
+.. index:: nested_dictionary_protocol
+.. _nested_dictionary_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``nested_dictionary_protocol``
+==============================
+
+Nested dictionary protocol.
+
+| **Author:** Paul Brown and Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2021-04-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="new/1"> </div>
+
+.. index:: new/1
+.. _nested_dictionary_protocol/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Create an empty (nested) dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Dictionary)``
+| **Mode and number of proofs:**
+|    ``new(--dictionary)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="empty/1"> </div>
+
+.. index:: empty/1
+.. _nested_dictionary_protocol/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True iff the dictionary is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Dictionary)``
+| **Mode and number of proofs:**
+|    ``empty(@dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="as_nested_dictionary/2"> </div>
+
+.. index:: as_nested_dictionary/2
+.. _nested_dictionary_protocol/0::as_nested_dictionary/2:
+
+``as_nested_dictionary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a (nested) dictionary term from a curly-brackted term representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_nested_dictionary(Term,Dictionary)``
+| **Mode and number of proofs:**
+|    ``as_nested_dictionary(++term,--dictionary)`` - ``one_or_error``
+
+
+------------
+
+.. raw:: html
+
+   <div id="as_curly_bracketed/2"> </div>
+
+.. index:: as_curly_bracketed/2
+.. _nested_dictionary_protocol/0::as_curly_bracketed/2:
+
+``as_curly_bracketed/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a a curly-brackted term representation from a (nested) dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_curly_bracketed(Dictionary,Term)``
+| **Mode and number of proofs:**
+|    ``as_curly_bracketed(+dictionary,--term)`` - ``one_or_error``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lookup_in/3"> </div>
+
+.. index:: lookup_in/3
+.. _nested_dictionary_protocol/0::lookup_in/3:
+
+``lookup_in/3``
+^^^^^^^^^^^^^^^
+
+Lookup a chain of keys in a nested dictionary. Unifies ``Value`` with ``Dictionary`` when ``Keys`` is the empty list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup_in(Keys,Value,Dictionary)``
+| **Mode and number of proofs:**
+|    ``lookup_in(++list(ground),?term,+dictionary)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update_in/4"> </div>
+
+.. index:: update_in/4
+.. _nested_dictionary_protocol/0::update_in/4:
+
+``update_in/4``
+^^^^^^^^^^^^^^^
+
+Updates the value found by traversing through the nested keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_in(OldDictionary,Keys,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``update_in(+dictionary,++list(ground),++term,--dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update_in/5"> </div>
+
+.. index:: update_in/5
+.. _nested_dictionary_protocol/0::update_in/5:
+
+``update_in/5``
+^^^^^^^^^^^^^^^
+
+Updates the value found by traversing through the nested keys, only succeeding if the value found after traversal matches the old value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_in(OldDictionary,Keys,OldValue,NewValue,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``update_in(+dictionary,++list(ground),?term,++term,--dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="insert_in/4"> </div>
+
+.. index:: insert_in/4
+.. _nested_dictionary_protocol/0::insert_in/4:
+
+``insert_in/4``
+^^^^^^^^^^^^^^^
+
+Inserts a key-value pair into a dictionary by traversing through the nested keys. When the key already exists, the associated value is updated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert_in(OldDictionary,Keys,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``insert_in(+dictionary,++list(ground),++term,--dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete_in/4"> </div>
+
+.. index:: delete_in/4
+.. _nested_dictionary_protocol/0::delete_in/4:
+
+``delete_in/4``
+^^^^^^^^^^^^^^^
+
+Deletes a matching key-value pair from a dictionary by traversing through the nested keys, returning the updated dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_in(OldDictionary,Keys,Value,NewDictionary)``
+| **Mode and number of proofs:**
+|    ``delete_in(+dictionary,++list(ground),?term,--dictionary)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`navltree <navltree/0>`, :ref:`nbintree <nbintree/0>`, :ref:`nrbtree <nrbtree/0>`
+

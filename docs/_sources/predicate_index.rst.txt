@@ -390,6 +390,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::array_to_terms/3>`
 
+``as_curly_bracketed/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::as_curly_bracketed/2>`
+
 ``as_dictionary/2``
 -------------------
 
@@ -433,6 +443,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`heapp <heapp/0::as_list/2>`
 * :ref:`queuep <queuep/0::as_list/2>`
 * :ref:`setp <setp/0::as_list/2>`
+
+``as_nested_dictionary/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::as_nested_dictionary/2>`
 
 ``as_set/2``
 ------------
@@ -1544,6 +1564,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::delete_file/1>`
 
+``delete_in/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::delete_in/4>`
+
 ``delete_matches/3``
 --------------------
 
@@ -1967,6 +1997,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::empty/1>`
 * :ref:`heapp <heapp/0::empty/1>`
 * :ref:`listp <listp/0::empty/1>`
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`
 * :ref:`optional <optional/0::empty/1>`
 * :ref:`queuep <queuep/0::empty/1>`
 * :ref:`setp <setp/0::empty/1>`
@@ -3290,6 +3321,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`zipperp <zipperp/0::insert_before/3>`
 
+``insert_in/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::insert_in/4>`
+
 ``instance/1``
 --------------
 
@@ -4106,6 +4147,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::lookup/3>`
 
+``lookup_in/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::lookup_in/3>`
+
 ``lower_upper/2``
 -----------------
 
@@ -4650,6 +4701,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`java_access_protocol <java_access_protocol/0::new/1>`
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`
 * :ref:`streamvars <streamvars/0::new/1>`
 * :ref:`termp <termp/0::new/1>`
 
@@ -7198,6 +7250,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::update/5>`
+
+``update_in/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::update_in/4>`
+
+``update_in/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::update_in/5>`
 
 ``uuid_null/1``
 ---------------

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on March 30, 2021
+%  Last updated on April 7, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -128,6 +128,7 @@ logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(loops, library('loops/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
+logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).

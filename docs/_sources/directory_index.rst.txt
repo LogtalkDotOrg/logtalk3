@@ -428,6 +428,19 @@ To load an entity, always load the library that includes it using the goal ``log
 
    meta_compiler <meta_compiler_0>
 
+``library/nested_dictionaries/``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   navltree <navltree_0>
+   nbintree <nbintree_0>
+   nested_dictionary_protocol <nested_dictionary_protocol_0>
+   nrbtree <nrbtree_0>
+
 ``library/optionals/``
 ----------------------
 

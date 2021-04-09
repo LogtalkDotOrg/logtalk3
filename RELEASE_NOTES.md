@@ -39,6 +39,9 @@ Library
 * CHANGED: The `dictionaries` library objects now extend `term` instead of
 `compound` as empty dictionaries are not always compound terms.
 
+* ADDED: Preliminary version of a `nested_dictionaries` library. Joint work
+with Paul Brown.
+
 * ADDED: Preliminary version of a `html` library to generate HTML content from
 a term representation. Joint work with Paul Brown.
 
