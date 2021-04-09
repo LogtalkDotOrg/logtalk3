@@ -31,6 +31,8 @@ Prolog adapter and integration files
 * UPDATED: Require Ciao Prolog 1.20.0 or later version (due to backward
 incompatible changes in its libraries).
 
+* FIXED: The value of the `unicode` read-only flag for Trealla Prolog.
+
 Library
 -------
 
