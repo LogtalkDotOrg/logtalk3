@@ -69,6 +69,12 @@ Tools
 * CHANGED: The `logtalk_tester.sh` and `logtalk_doclet.sh` scripts to require
 specifying the backend instead of using a default backend.
 
+* IMPROVED: The `logtalk_tester.sh` script and the `lgtunit` tool TAP, xUnit,
+and code coverage reports to allow overriding the directory where tests reports
+are created (e.g. when running tests defined in a directory different from the
+directory that contains the tests driver file). Thanks to Paul Brown for the
+use case.
+
 * FIXED: The `logtalk_tester.sh` and `logtalk_doclet.sh` scripts to exit with
 an error when passed an unknown option.
 

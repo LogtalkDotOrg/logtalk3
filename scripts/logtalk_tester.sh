@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 24, 2021
+##   Last updated on April 10, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 3.0"
+	echo "$(basename "$0") 4.0"
 	exit 0
 }
 
@@ -501,10 +501,12 @@ if [ "$timeout_command" == "" ] ; then
 	echo "Warning! Timeout support not available. The timeout option will be ignored." >&2
 fi
 
-if [[ "$prefix" != "" && ("$format" != "default" || "$coverage" != "none") ]] ; then
+if [ "$prefix" != "" ] ; then
 	flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
-else
-	flag_goal="true"
+fi
+
+if [[ "$format" != "default" || "$coverage" != "none" ]] ; then
+	flag_goal="set_logtalk_flag(tests_report_directory,'$base/'),$flag_goal"
 fi
 
 versions_goal="logtalk_load(library(tester_versions)),halt$dot"

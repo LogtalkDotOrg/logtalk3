@@ -19,19 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% define a flag to allow the logtalk_tester script to pass the
-% option to suppress the test file and directory path prefix
-:- initialization(
-	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)])
-).
+:- initialization((
+	% define a flag to allow the logtalk_tester script to pass the
+	% option to supress the test file and directory path prefix
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
+	% define a flag to allow overriding the directory where tests reports
+	% are created (e.g. when running tests defined in a directory different
+	% from the directory that contains the tests driver file)
+	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)])
+)).
 
 
 :- object(xunit_report).
 
 	:- info([
-		version is 2:1:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-03-24,
+		date is 2021-04-10,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -63,7 +67,11 @@
 		assertz(message_cache_(tests_start_date_time(Year,Month,Day,Hours,Minutes,Seconds))).
 	message_hook(running_tests_from_object_file(Object, File)) :-
 		!,
-		logtalk::loaded_file_property(File, directory(Directory)),
+		(	% bypass the compiler as the flag is only created after loading this file
+			{current_logtalk_flag(tests_report_directory, Directory)}, Directory \== '' ->
+			true
+		;	logtalk::loaded_file_property(File, directory(Directory))
+		),
 		atom_concat(Directory, 'xunit_report.xml', ReportFile),
 		(	stream_property(_, alias(xunit_report)) ->
 			true

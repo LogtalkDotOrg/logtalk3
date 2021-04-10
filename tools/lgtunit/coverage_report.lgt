@@ -19,19 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% define a flag to allow the logtalk_tester script to pass the
-% option to supress the test file and directory path prefix
-:- initialization(
-	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)])
-).
+:- initialization((
+	% define a flag to allow the logtalk_tester script to pass the
+	% option to supress the test file and directory path prefix
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
+	% define a flag to allow overriding the directory where tests reports
+	% are created (e.g. when running tests defined in a directory different
+	% from the directory that contains the tests driver file)
+	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)])
+)).
 
 
 :- object(coverage_report).
 
 	:- info([
-		version is 1:8:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-05,
+		date is 2021-04-10,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
@@ -69,7 +73,11 @@
 		% multiple implementations of the same protocol
 		!.
 	message_hook(running_tests_from_object_file(Object, File)) :-
-		logtalk::loaded_file_property(File, directory(Directory)),
+		(	% bypass the compiler as the flag is only created after loading this file
+			{current_logtalk_flag(tests_report_directory, Directory)}, Directory \== '' ->
+			true
+		;	logtalk::loaded_file_property(File, directory(Directory))
+		),
 		atom_concat(Directory, 'coverage_report.xml', ReportFile),
 		open(ReportFile, write, _, [alias(coverage_report)]),
 		write(coverage_report, '<?xml version="1.0" encoding="UTF-8"?>'), nl(coverage_report),
