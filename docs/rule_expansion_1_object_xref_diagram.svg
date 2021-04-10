@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-257 340,-257 340,4 -4,4"/>
 <text text-anchor="start" x="8" y="-26" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-16" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object rule_expansion/1</text>
-<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;04&#45;09, 23:09</text>
+<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;04&#45;10, 15:22</text>
 <g id="clust1" class="cluster">
 <title>cluster_rule_expansion_1_object</title>
 <g id="a_clust1"><a xlink:title="rule_expansion(_)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 316,-46 316,-46 322,-46 328,-52 328,-58 328,-58 328,-233 328,-233 328,-239 322,-245 316,-245 316,-245 20,-245 20,-245 14,-245 8,-239 8,-233 8,-233 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt">
 <text text-anchor="start" x="19.99" y="-229" font-family="Courier,monospace" font-size="10.00" fill="dimgray">rule_expansion(_)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- goal_expansion/2 -->
 <g id="node1" class="node">
 <title>goal_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L51">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L51">
 <polygon fill="cornsilk" stroke="black" points="311.5,-209 180.5,-209 180.5,-173 311.5,-173 311.5,-209"/>
 <text text-anchor="start" x="188.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="193.69" y="-192.2" font-family="Courier,monospace" font-size="11.00">goal_expansion/2</text>
@@ -52,12 +52,12 @@
 <!-- goal_expansion/2&#45;&gt;^^goal_expansion/2 -->
 <g id="edge2" class="edge">
 <title>goal_expansion/2&#45;&gt;^^goal_expansion/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L51" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M246,-172.53C246,-153.94 246,-124.24 246,-102.5"/>
 <polygon fill="black" stroke="black" points="249.5,-102.25 246,-92.25 242.5,-102.25 249.5,-102.25"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L51">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L51">
 <text text-anchor="start" x="246" y="-129.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- term_expansion/2 -->
 <g id="node2" class="node">
 <title>term_expansion/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L54">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L54">
 <polygon fill="cornsilk" stroke="black" points="152.5,-209 21.5,-209 21.5,-173 152.5,-173 152.5,-209"/>
 <text text-anchor="start" x="29.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="34.69" y="-192.2" font-family="Courier,monospace" font-size="11.00">term_expansion/2</text>
@@ -90,12 +90,12 @@
 <!-- term_expansion/2&#45;&gt;::flatten_goals/3 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;::flatten_goals/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L54" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M87,-172.53C87,-153.94 87,-124.24 87,-102.5"/>
 <polygon fill="black" stroke="black" points="90.5,-102.25 87,-92.25 83.5,-102.25 90.5,-102.25"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b7e3bc927c1220c8d38c44c65144c2f1cc4e826/contributions/verdi_neruda/rule_expansion.lgt#L54">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1e570ffdbcdc91d64d220591a78a67f795360ac9/contributions/verdi_neruda/rule_expansion.lgt#L54">
 <text text-anchor="start" x="87" y="-129.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
