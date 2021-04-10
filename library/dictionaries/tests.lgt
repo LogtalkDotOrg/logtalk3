@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2020-03-10,
+		date is 2021-04-10,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -35,6 +35,10 @@
 		clone/3, clone/4, insert/4, delete/4, update/4, update/5, update/3, empty/1,
 		lookup/3, lookup/2, previous/4, next/4, min/3, max/3, delete_min/4, delete_max/4,
 		keys/2, values/2, map/2, map/3, apply/4, size/2, valid/1, new/1
+	]).
+
+	:- uses(list, [
+		msort/2
 	]).
 
 	cover(_DictionaryObject_).
@@ -246,7 +250,8 @@
 
 	deterministic(dictionary_lookup_3_03) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
-		findall(Key-Value, lookup(Key, Value, Dictionary), Pairs),
+		findall(Key-Value, lookup(Key, Value, Dictionary), Pairs0),
+		msort(Pairs0, Pairs),
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% lookup/2 tests
@@ -315,7 +320,8 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete_min(Dictionary, Key, Value, NewDictionary),
 		^^assertion(pair, Key-Value == a-1),
-		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs),
+		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
+		msort(OtherPairs0, OtherPairs),
 		^^assertion(pairs, OtherPairs == [b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete_max/4 tests
@@ -328,7 +334,8 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete_max(Dictionary, Key, Value, NewDictionary),
 		^^assertion(pair, Key-Value == j-0),
-		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs),
+		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
+		msort(OtherPairs0, OtherPairs),
 		^^assertion(pairs, OtherPairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9]).
 
 	% keys/2 tests
@@ -370,7 +377,8 @@
 	test(dictionary_map_3_01) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		map([Key-Value, Key-NewValue]>>(integer::succ(Value,NewValue)), Dictionary, NewDictionary),
-		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs),
+		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
+		msort(OtherPairs0, OtherPairs),
 		^^assertion(pairs, OtherPairs == [a-2,b-3,c-4,d-5,e-6,f-7,g-8,h-9,i-10,j-1]).
 
 	% apply/4 tests

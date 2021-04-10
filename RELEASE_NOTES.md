@@ -59,6 +59,10 @@ objects. Thanks to Paul Brown for the bug report.
 as in the other dictionary implementations. Thanks to Paul Brown for the bug
 report.
 
+* FIXED: Tests for the `dictionaries` library to allow alternative user-defined
+implementations where the order pairs are returned from lookup predicates is
+not necessarily ascending order by key. Thanks to Paul Brown for the report.
+
 Tools
 -----
 
