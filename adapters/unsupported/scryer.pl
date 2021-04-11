@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on January 2, 2021
+%  Last updated on April 11, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -39,8 +39,17 @@
 %
 % table of missing ISO predicates which are defined in this file
 
-'$lgt_iso_predicate'(_) :-
-	fail.
+'$lgt_iso_predicate'(callable(_)).
+'$lgt_iso_predicate'(retractall(_)).
+
+callable(Term) :-
+	once((atom(Term); compound(Term))).
+
+retractall(What) :-
+        (   \+ \+ retract(What) ->
+            retractall(What)
+        ;   true
+        ).
 
 
 
@@ -70,10 +79,18 @@
 :- use_module(library(format), [format/3, format/2]).
 
 '$lgt_format'(Stream, Format, Arguments) :-
-	format(Stream, Format, Arguments).
+	(	atom(Format) ->
+		atom_chars(Format, Chars),
+		format(Stream,  Chars, Arguments)
+	;	format(Stream, Format, Arguments)
+	).
 
 '$lgt_format'(Format, Arguments) :-
-	format(Format, Arguments).
+	(	atom(Format) ->
+		atom_chars(Format, Chars),
+		format(Chars,  Arguments)
+	;	format(Format, Arguments)
+	).
 
 
 % numbervars(?term, +integer, ?integer)
@@ -96,7 +113,7 @@
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
 '$lgt_predicate_property'(Pred, Prop) :-
-	?????
+	predicate_property(Pred, Prop).
 
 
 
@@ -214,9 +231,8 @@
 % backend Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, scryer).
-'$lgt_prolog_feature'(prolog_version, v(Major, Minor, Path)) :-
-	?????
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(Major, Minor, Path))).
+'$lgt_prolog_feature'(prolog_version, v(0, 8, 128)).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 8, 128))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -224,7 +240,7 @@
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
-'$lgt_prolog_feature'(unicode, bmp).
+'$lgt_prolog_feature'(unicode, full).
 
 
 
@@ -290,7 +306,7 @@
 
 
 :- use_module(library(files), [
-	path_canonical/2,
+	path_canonical/2, path_segments/2,
 	delete_file/1, file_exists/1, file_modification_time/2,
 	directory_exists/1, make_directory/1, working_directory/2
 ]).
@@ -308,8 +324,18 @@
 %
 % expands a file path to a full path
 
+:- use_module(library(lists), [append/3]).
+
 '$lgt_expand_path'(Path, ExpandedPath) :-
-	path_canonical(Path, ExpandedPath).
+	atom_chars(Path, PathChars),
+	path_segments(PathChars, [Segment| Segments]),
+	(	append("$", EnvVar, Segment) ->
+		getenv(EnvVar, Value),
+		path_segments(PathCharsExpanded, [Value| Segments])
+	;	PathCharsExpanded = PathChars
+	),
+	path_canonical(PathCharsExpanded, ExpandedPathChars),
+	atom_chars(ExpandedPath, ExpandedPathChars).
 
 
 % '$lgt_file_exists'(+atom)
@@ -326,7 +352,8 @@
 % deletes a file
 
 '$lgt_delete_file'(File) :-
-	delete_file(File).
+	atom_chars(File, Chars),
+	delete_file(Chars).
 
 
 % '$lgt_directory_exists'(+atom)
@@ -343,7 +370,8 @@
 % gets current working directory
 
 '$lgt_current_directory'(Directory) :-
-	working_directory(Directory, Directory).
+	working_directory(Chars, Chars),
+	atom_chars(Directory, Chars).
 
 
 % '$lgt_change_directory'(+atom)
@@ -351,7 +379,8 @@
 % changes current working directory
 
 '$lgt_change_directory'(Directory) :-
-	working_directory(_, Directory).
+	atom_chars(Directory, Chars),
+	working_directory(_, Chars).
 
 
 % '$lgt_make_directory'(+atom)
@@ -392,7 +421,8 @@
 % gets a file modification time, assumed to be an opaque term but comparable
 
 '$lgt_file_modification_time'(File, Time) :-
-	file_modification_time(File, Time).
+	atom_chars(File, Chars),
+	file_modification_time(Chars, Time).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
@@ -402,7 +432,8 @@
 :- use_module(library(os), [getenv/2]).
 
 '$lgt_environment_variable'(Variable, Value) :-
-	getenv(Variable, Value).
+	atom_chars(Variable, Chars),
+	getenv(Chars, Value).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
@@ -526,9 +557,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% '$lgt_logtalk_prolog_encoding'(?atom, ?atom)
+% '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
-'$lgt_logtalk_prolog_encoding'('UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
 
 
 
