@@ -39,14 +39,14 @@
 	:- public(as_list/2).
 	:- mode(as_list(@dictionary, -list(pairs)), one).
 	:- info(as_list/2, [
-		comment is 'Converts a dictionary to an ordered list of key-value pairs.',
+		comment is 'Converts a dictionary to an ordered list (as per standard order) of key-value pairs.',
 		argnames is ['Dictionary', 'Pairs']
 	]).
 
 	:- public(as_curly_bracketed/2).
 	:- mode(as_curly_bracketed(+dictionary, --term), one).
 	:- info(as_curly_bracketed/2, [
-		comment is 'Creates a a curly-bracketed term representation of a dictionary.',
+		comment is 'Creates a curly-bracketed term representation of a dictionary.',
 		argnames is ['Dictionary', 'Term']
 	]).
 
@@ -102,7 +102,7 @@
 	:- public(empty/1).
 	:- mode(empty(@dictionary), zero_or_one).
 	:- info(empty/1, [
-		comment is 'True if the dictionary is empty.',
+		comment is 'True iff the dictionary is empty.',
 		argnames is ['Dictionary']
 	]).
 
@@ -152,42 +152,42 @@
 	:- public(min/3).
 	:- mode(min(+dictionary, -key, -value), zero_or_one).
 	:- info(min/3, [
-		comment is 'Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.',
+		comment is 'Returns the pair with the minimum key (as per standard order) in a dictionary. Fails if the dictionary is empty.',
 		argnames is ['Dictionary', 'Key', 'Value']
 	]).
 
 	:- public(max/3).
 	:- mode(max(+dictionary, -key, -value), zero_or_one).
 	:- info(max/3, [
-		comment is 'Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.',
+		comment is 'Returns the pair with the maximum key (as per standard order) in a dictionary. Fails if the dictionary is empty.',
 		argnames is ['Dictionary', 'Key', 'Value']
 	]).
 
 	:- public(delete_min/4).
 	:- mode(delete_min(+dictionary, -key, -value, -dictionary), zero_or_one).
 	:- info(delete_min/4, [
-		comment is 'Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.',
+		comment is 'Deletes the pair with the minimum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
 	:- public(delete_max/4).
 	:- mode(delete_max(+dictionary, -key, -value, -dictionary), zero_or_one).
 	:- info(delete_max/4, [
-		comment is 'Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.',
+		comment is 'Deletes the pair with the maximum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
 	:- public(keys/2).
 	:- mode(keys(@dictionary, -list), one).
 	:- info(keys/2, [
-		comment is 'Returns a list with all the dictionary keys in ascending order.',
+		comment is 'Returns a list with all the dictionary keys in ascending order (as per standard order).',
 		argnames is ['Dictionary', 'Keys']
 	]).
 
 	:- public(values/2).
 	:- mode(values(@dictionary, -list), one).
 	:- info(values/2, [
-		comment is 'Returns a list with all the dictionary values in ascending order of the keys.',
+		comment is 'Returns a list with all the dictionary values in ascending order of the keys (as per standard order).',
 		argnames is ['Dictionary', 'Values']
 	]).
 

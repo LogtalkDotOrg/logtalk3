@@ -68,7 +68,7 @@ Converts a list of key-value pairs to a dictionary.
 ``as_list/2``
 ^^^^^^^^^^^^^
 
-Converts a dictionary to an ordered list of key-value pairs.
+Converts a dictionary to an ordered list (as per standard order) of key-value pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -91,7 +91,7 @@ Converts a dictionary to an ordered list of key-value pairs.
 ``as_curly_bracketed/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a a curly-bracketed term representation of a dictionary.
+Creates a curly-bracketed term representation of a dictionary.
 
 | **Compilation flags:**
 |    ``static``
@@ -275,7 +275,7 @@ Updates the key-value pairs in a dictionary, returning the updated dictionary. F
 ``empty/1``
 ^^^^^^^^^^^
 
-True if the dictionary is empty.
+True iff the dictionary is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -437,7 +437,7 @@ Returns the next pair in a dictionary given a key.
 ``min/3``
 ^^^^^^^^^
 
-Returns the pair with the minimum key in a dictionary. Fails if the dictionary is empty.
+Returns the pair with the minimum key (as per standard order) in a dictionary. Fails if the dictionary is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -460,7 +460,7 @@ Returns the pair with the minimum key in a dictionary. Fails if the dictionary i
 ``max/3``
 ^^^^^^^^^
 
-Returns the pair with the maximum key in a dictionary. Fails if the dictionary is empty.
+Returns the pair with the maximum key (as per standard order) in a dictionary. Fails if the dictionary is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -483,7 +483,7 @@ Returns the pair with the maximum key in a dictionary. Fails if the dictionary i
 ``delete_min/4``
 ^^^^^^^^^^^^^^^^
 
-Deletes the pair with the minimum key from a dictionary, returning the deleted pair and the updated dictionary.
+Deletes the pair with the minimum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.
 
 | **Compilation flags:**
 |    ``static``
@@ -506,7 +506,7 @@ Deletes the pair with the minimum key from a dictionary, returning the deleted p
 ``delete_max/4``
 ^^^^^^^^^^^^^^^^
 
-Deletes the pair with the maximum key from a dictionary, returning the deleted pair and the updated dictionary.
+Deletes the pair with the maximum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.
 
 | **Compilation flags:**
 |    ``static``
@@ -529,7 +529,7 @@ Deletes the pair with the maximum key from a dictionary, returning the deleted p
 ``keys/2``
 ^^^^^^^^^^
 
-Returns a list with all the dictionary keys in ascending order.
+Returns a list with all the dictionary keys in ascending order (as per standard order).
 
 | **Compilation flags:**
 |    ``static``
@@ -552,7 +552,7 @@ Returns a list with all the dictionary keys in ascending order.
 ``values/2``
 ^^^^^^^^^^^^
 
-Returns a list with all the dictionary values in ascending order of the keys.
+Returns a list with all the dictionary values in ascending order of the keys (as per standard order).
 
 | **Compilation flags:**
 |    ``static``
