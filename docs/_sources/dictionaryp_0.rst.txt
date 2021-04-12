@@ -68,7 +68,7 @@ Converts a list of key-value pairs to a dictionary.
 ``as_list/2``
 ^^^^^^^^^^^^^
 
-Converts a dictionary to a ordered list of key-value pairs.
+Converts a dictionary to an ordered list of key-value pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -91,7 +91,7 @@ Converts a dictionary to a ordered list of key-value pairs.
 ``as_curly_bracketed/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a a curly-brackted term representation of a dictionary.
+Creates a a curly-bracketed term representation of a dictionary.
 
 | **Compilation flags:**
 |    ``static``

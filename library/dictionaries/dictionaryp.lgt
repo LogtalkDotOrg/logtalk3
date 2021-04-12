@@ -39,14 +39,14 @@
 	:- public(as_list/2).
 	:- mode(as_list(@dictionary, -list(pairs)), one).
 	:- info(as_list/2, [
-		comment is 'Converts a dictionary to a ordered list of key-value pairs.',
+		comment is 'Converts a dictionary to an ordered list of key-value pairs.',
 		argnames is ['Dictionary', 'Pairs']
 	]).
 
 	:- public(as_curly_bracketed/2).
 	:- mode(as_curly_bracketed(+dictionary, --term), one).
 	:- info(as_curly_bracketed/2, [
-		comment is 'Creates a a curly-brackted term representation of a dictionary.',
+		comment is 'Creates a a curly-bracketed term representation of a dictionary.',
 		argnames is ['Dictionary', 'Term']
 	]).
 
