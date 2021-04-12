@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on April 11, 2021
+%  Last updated on April 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -389,7 +389,10 @@ retractall(What) :-
 
 '$lgt_make_directory'(Directory) :-
 	atom_chars(Directory, Chars),
-	make_directory(Chars).
+	(	directory_exists(Chars) ->
+		true
+	;	make_directory(Chars)
+	).
 
 
 % '$lgt_directory_hash_as_atom'(+atom, -atom)
