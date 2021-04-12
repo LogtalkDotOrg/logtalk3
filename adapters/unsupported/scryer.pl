@@ -39,17 +39,8 @@
 %
 % table of missing ISO predicates which are defined in this file
 
-'$lgt_iso_predicate'(callable(_)).
-'$lgt_iso_predicate'(retractall(_)).
-
-callable(Term) :-
-	once((atom(Term); compound(Term))).
-
-retractall(What) :-
-        (   \+ \+ retract(What) ->
-            retractall(What)
-        ;   true
-        ).
+'$lgt_iso_predicate'(_) :-
+	fail.
 
 
 
@@ -595,8 +586,8 @@ retractall(What) :-
 % e.g. from term-expansion)
 
 '$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
-	write_term(Stream, Term, [quoted(true), ignore_ops(true)]),
-	write_term(Stream, '.\n', []).
+	write_canonical(Stream, Term),
+	write(Stream, '.\n').
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
