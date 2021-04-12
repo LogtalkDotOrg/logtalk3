@@ -102,6 +102,18 @@
 	as_list(Tree, Pairs) :-
 		inorder(Tree, Pairs).
 
+	as_curly_bracketed(Tree, Curly) :-
+		inorder(Tree, Pairs),
+		pairs_to_curly(Pairs, Curly).
+
+	pairs_to_curly([], {}).
+	pairs_to_curly([Pair| Pairs], {Term}) :-
+		pairs_to_curly(Pairs, Pair, Term).
+
+	pairs_to_curly([], Pair, Pair).
+	pairs_to_curly([NextPair| Pairs], Pair, (Pair, RestPairs)) :-
+		pairs_to_curly(Pairs, NextPair, RestPairs).
+
 	clone(Tree, Clone, Pairs) :-
 		clone_3(Tree, Clone, [], Pairs).
 

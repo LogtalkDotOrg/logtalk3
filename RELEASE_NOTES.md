@@ -45,7 +45,8 @@ with Paul Brown.
 * ADDED: Preliminary version of a `html` library to generate HTML content from
 a term representation. Joint work with Paul Brown.
 
-* ADDED: Predicates `intersection/2-3` to the `dictionaries` library.
+* ADDED: Predicates `as_curly_bracketed/2` and `intersection/2-3` to the
+`dictionaries` library.
 
 * ADDED: Predicates `numbervars/3`, `numbervars/1`, and `varnumbers/2-3 to the
 library `term` object.

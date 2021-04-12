@@ -31,7 +31,7 @@
 	]).
 
 	:- uses(_DictionaryObject_, [
-		as_dictionary/2, as_list/2,
+		as_dictionary/2, as_list/2, as_curly_bracketed/2,
 		clone/3, clone/4, insert/4, delete/4, update/4, update/5, update/3, empty/1,
 		lookup/3, lookup/2, previous/4, next/4, min/3, max/3, delete_min/4, delete_max/4,
 		intersection/2, intersection/3, keys/2, values/2, map/2, map/3, apply/4, size/2,
@@ -55,6 +55,18 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		as_list(Dictionary, Pairs),
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+
+	% as_curly_bracketed/2 tests
+
+	test(dictionary_as_curly_bracketed_2_01) :-
+		as_dictionary([], Dictionary),
+		as_curly_bracketed(Dictionary, Curly),
+		^^assertion(Curly == {}).
+
+	test(dictionary_as_curly_bracketed_2_02) :-
+		as_dictionary([a-1,b-2], Dictionary),
+		as_curly_bracketed(Dictionary, Curly),
+		^^assertion((Curly == {a-1,b-2}; Curly == {b-2,a-1})).
 
 	% clone/3 tests
 

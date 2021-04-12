@@ -569,6 +569,18 @@
 		as_list(Left, [Key-Value| Pairs1], Pairs),
 		as_list(Right, Pairs0, Pairs1).
 
+	as_curly_bracketed(Tree, Curly) :-
+		as_list(Tree, [], Pairs),
+		pairs_to_curly(Pairs, Curly).
+
+	pairs_to_curly([], {}).
+	pairs_to_curly([Pair| Pairs], {Term}) :-
+		pairs_to_curly(Pairs, Pair, Term).
+
+	pairs_to_curly([], Pair, Pair).
+	pairs_to_curly([NextPair| Pairs], Pair, (Pair, RestPairs)) :-
+		pairs_to_curly(Pairs, NextPair, RestPairs).
+
 	:- meta_predicate(map_(*, 2, *, *)).
 	map_(black('',_,_,''), _, Nil, Nil) :-
 		!.

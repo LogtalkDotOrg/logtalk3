@@ -83,6 +83,29 @@ Converts a dictionary to a ordered list of key-value pairs.
 
 .. raw:: html
 
+   <div id="as_curly_bracketed/2"> </div>
+
+.. index:: as_curly_bracketed/2
+.. _dictionaryp/0::as_curly_bracketed/2:
+
+``as_curly_bracketed/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a a curly-brackted term representation of a dictionary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_curly_bracketed(Dictionary,Term)``
+| **Mode and number of proofs:**
+|    ``as_curly_bracketed(+dictionary,--term)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="clone/3"> </div>
 
 .. index:: clone/3

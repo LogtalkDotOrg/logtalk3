@@ -43,6 +43,13 @@
 		argnames is ['Dictionary', 'Pairs']
 	]).
 
+	:- public(as_curly_bracketed/2).
+	:- mode(as_curly_bracketed(+dictionary, --term), one).
+	:- info(as_curly_bracketed/2, [
+		comment is 'Creates a a curly-brackted term representation of a dictionary.',
+		argnames is ['Dictionary', 'Term']
+	]).
+
 	:- public(clone/3).
 	:- mode(clone(+dictionary, -dictionary, -list(pairs)), one).
 	:- info(clone/3, [
