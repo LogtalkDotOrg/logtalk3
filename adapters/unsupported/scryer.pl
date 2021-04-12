@@ -595,8 +595,8 @@ retractall(What) :-
 % e.g. from term-expansion)
 
 '$lgt_write_compiled_term'(Stream, Term, _Kind, _Path, _Line) :-
-	write_canonical(Stream, Term),
-	write(Stream, '.\n').
+	write_term(Stream, Term, [quoted(true), ignore_ops(true)]),
+	write_term(Stream, '.\n', []).
 
 
 % '$lgt_assertz_entity_clause'(@clause, +atom)
