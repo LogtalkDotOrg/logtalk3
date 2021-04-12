@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>random_protocol &mdash; Logtalk APIs v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
@@ -264,7 +265,7 @@
            <div itemprop="articleBody">
             
   <p class="right" id="random-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<div class="section" id="random-protocol">
+<section id="random-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">random_protocol</span></code><a class="headerlink" href="#random-protocol" title="Permalink to this headline">¶</a></h1>
 <p>Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.</p>
 <div class="line-block">
@@ -323,9 +324,9 @@
 <li><p><a class="reference internal" href="#operators" id="id20">Operators</a></p></li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="random/1"> </div><div class="section" id="random-1">
+<div id="random/1"> </div><section id="random-1">
 <span id="random-protocol-0-random-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">random/1</span></code></a><a class="headerlink" href="#random-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns a new random float value in the interval <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0[</span></code>.</p>
 <div class="line-block">
@@ -345,8 +346,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="between/3"> </div></div>
-<div class="section" id="between-3">
+<div id="between/3"> </div></section>
+<section id="between-3">
 <span id="random-protocol-0-between-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">between/3</span></code></a><a class="headerlink" href="#between-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns a new random integer in the interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper]</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Lower</span></code> or <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are not integers or if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>.</p>
 <div class="line-block">
@@ -366,8 +367,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="member/2"> </div></div>
-<div class="section" id="member-2">
+<div id="member/2"> </div></section>
+<section id="member-2">
 <span id="random-protocol-0-member-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">member/2</span></code></a><a class="headerlink" href="#member-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns a random member of a list. Fails if the list is empty.</p>
 <div class="line-block">
@@ -387,8 +388,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="select/3"> </div></div>
-<div class="section" id="select-3">
+<div id="select/3"> </div></section>
+<section id="select-3">
 <span id="random-protocol-0-select-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">select/3</span></code></a><a class="headerlink" href="#select-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns a random member of a list and the rest of the list. Fails if the list is empty.</p>
 <div class="line-block">
@@ -408,8 +409,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="enumerate/2"> </div></div>
-<div class="section" id="enumerate-2">
+<div id="enumerate/2"> </div></section>
+<section id="enumerate-2">
 <span id="random-protocol-0-enumerate-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">enumerate/2</span></code></a><a class="headerlink" href="#enumerate-2" title="Permalink to this headline">¶</a></h3>
 <p>Enumerates the elements of a list in random order. Fails if the list is empty.</p>
 <div class="line-block">
@@ -429,8 +430,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="permutation/2"> </div></div>
-<div class="section" id="permutation-2">
+<div id="permutation/2"> </div></section>
+<section id="permutation-2">
 <span id="random-protocol-0-permutation-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">permutation/2</span></code></a><a class="headerlink" href="#permutation-2" title="Permalink to this headline">¶</a></h3>
 <p>Returns a random permutation of a list.</p>
 <div class="line-block">
@@ -450,8 +451,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="sequence/4"> </div></div>
-<div class="section" id="sequence-4">
+<div id="sequence/4"> </div></section>
+<section id="sequence-4">
 <span id="random-protocol-0-sequence-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">sequence/4</span></code></a><a class="headerlink" href="#sequence-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns list of random integers of given length in random order in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper]</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Length</span></code>, <code class="docutils literal notranslate"><span class="pre">Lower</span></code>, or <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are not integers or if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>.</p>
 <div class="line-block">
@@ -471,8 +472,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="set/4"> </div></div>
-<div class="section" id="set-4">
+<div id="set/4"> </div></section>
+<section id="set-4">
 <span id="random-protocol-0-set-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set/4</span></code></a><a class="headerlink" href="#set-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns ordered set of random integers of given size in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper]</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Length</span></code>, <code class="docutils literal notranslate"><span class="pre">Lower</span></code>, or <code class="docutils literal notranslate"><span class="pre">Upper</span></code> are not integers, if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>, or if <code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">&gt;</span> <span class="pre">Upper</span> <span class="pre">-</span> <span class="pre">Lower</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
 <div class="line-block">
@@ -492,8 +493,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="random/3"> </div></div>
-<div class="section" id="random-3">
+<div id="random/3"> </div></section>
+<section id="random-3">
 <span id="random-protocol-0-random-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">random/3</span></code></a><a class="headerlink" href="#random-3" title="Permalink to this headline">¶</a></h3>
 <p>Returns a new random value in the interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper[</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">between/3</span></code> for integers.</p>
 <div class="line-block">
@@ -514,8 +515,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="randseq/4"> </div></div>
-<div class="section" id="randseq-4">
+<div id="randseq/4"> </div></section>
+<section id="randseq-4">
 <span id="random-protocol-0-randseq-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">randseq/4</span></code></a><a class="headerlink" href="#randseq-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns list of random values of given length in random order in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper[</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code> or if the arguments are neither integers or floats. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">sequence/4</span></code> for integers.</p>
 <div class="line-block">
@@ -536,8 +537,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="randset/4"> </div></div>
-<div class="section" id="randset-4">
+<div id="randset/4"> </div></section>
+<section id="randset-4">
 <span id="random-protocol-0-randset-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">randset/4</span></code></a><a class="headerlink" href="#randset-4" title="Permalink to this headline">¶</a></h3>
 <p>Returns ordered set of random values of given size in interval <code class="docutils literal notranslate"><span class="pre">[Lower,</span> <span class="pre">Upper[</span></code>. Fails if the arguments are neither integers or floats, <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">&gt;</span> <span class="pre">Upper</span></code>, or <code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">&gt;</span> <span class="pre">Upper</span> <span class="pre">-</span> <span class="pre">Lower</span></code> when arguments are integers. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">set/4</span></code> for integers.</p>
 <div class="line-block">
@@ -558,8 +559,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="maybe/0"> </div></div>
-<div class="section" id="maybe-0">
+<div id="maybe/0"> </div></section>
+<section id="maybe-0">
 <span id="random-protocol-0-maybe-0"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe/0</span></code></a><a class="headerlink" href="#maybe-0" title="Permalink to this headline">¶</a></h3>
 <p>Succeeds or fails with equal probability.</p>
 <div class="line-block">
@@ -575,8 +576,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="maybe/1"> </div></div>
-<div class="section" id="maybe-1">
+<div id="maybe/1"> </div></section>
+<section id="maybe-1">
 <span id="random-protocol-0-maybe-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe/1</span></code></a><a class="headerlink" href="#maybe-1" title="Permalink to this headline">¶</a></h3>
 <p>Succeeds with probability <code class="docutils literal notranslate"><span class="pre">Probability</span></code> or fails with probability <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-</span> <span class="pre">Probability</span></code>. Fails if <code class="docutils literal notranslate"><span class="pre">Probability</span></code> is not a float or is outside the interval <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code>.</p>
 <div class="line-block">
@@ -596,8 +597,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="maybe/2"> </div></div>
-<div class="section" id="maybe-2">
+<div id="maybe/2"> </div></section>
+<section id="maybe-2">
 <span id="random-protocol-0-maybe-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe/2</span></code></a><a class="headerlink" href="#maybe-2" title="Permalink to this headline">¶</a></h3>
 <p>Succeeds with probability <code class="docutils literal notranslate"><span class="pre">K/N</span></code> where <code class="docutils literal notranslate"><span class="pre">K</span></code> and <code class="docutils literal notranslate"><span class="pre">N</span></code> are integers satisfying the equation <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=&lt;</span> <span class="pre">K</span> <span class="pre">=&lt;</span> <span class="pre">N</span></code>. Fails otherwise.</p>
 <div class="line-block">
@@ -617,8 +618,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="maybe_call/1"> </div></div>
-<div class="section" id="maybe-call-1">
+<div id="maybe_call/1"> </div></section>
+<section id="maybe-call-1">
 <span id="random-protocol-0-maybe-call-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe_call/1</span></code></a><a class="headerlink" href="#maybe-call-1" title="Permalink to this headline">¶</a></h3>
 <p>Calls a goal or fails without calling it with equal probability. When the goal is called, it determines if this predicate succeeds once or fails.</p>
 <div class="line-block">
@@ -642,8 +643,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="maybe_call/2"> </div></div>
-<div class="section" id="maybe-call-2">
+<div id="maybe_call/2"> </div></section>
+<section id="maybe-call-2">
 <span id="random-protocol-0-maybe-call-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">maybe_call/2</span></code></a><a class="headerlink" href="#maybe-call-2" title="Permalink to this headline">¶</a></h3>
 <p>Calls a goal or fails without calling it with probability <code class="docutils literal notranslate"><span class="pre">Probability</span></code>. When the goal is called, it determines if this predicate succeeds once or fails.</p>
 <div class="line-block">
@@ -666,26 +667,26 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">maybe_call(+probability,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="private-predicates">
+</section>
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="random_0.html#random-0"><span class="std std-ref">random</span></a>, <a class="reference internal" href="backend_random_0.html#backend-random-0"><span class="std std-ref">backend_random</span></a>, <a class="reference internal" href="fast_random_0.html#fast-random-0"><span class="std std-ref">fast_random</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

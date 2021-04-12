@@ -24,9 +24,9 @@
 	extends(term)).
 
 	:- info([
-		version is 2:10:1,
+		version is 2:11:0,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2021-04-05,
+		date is 2021-04-12,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, rbtree]
 	]).
@@ -193,6 +193,32 @@
 	lookup([Key-Value| Pairs], Tree) :-
 		lookup(Key, Value, Tree),
 		lookup(Pairs, Tree).
+
+	intersection(Tree1, Tree2) :-
+		inorder(Tree1, Pairs),
+		intersection_(Pairs, Tree2).
+
+	intersection_([], _).
+	intersection_([Key-Value| Pairs], Tree) :-
+		(	lookup_nonvar(Key, Value0, Tree) ->
+			Value = Value0
+		;	true
+		),
+		intersection_(Pairs, Tree).
+
+	intersection(Tree1, Tree2, Intersection) :-
+		inorder(Tree1, Pairs),
+		new(Intersection0),
+		intersection_(Pairs, Tree2, Intersection0, Intersection).
+
+	intersection_([], _, Intersection, Intersection).
+	intersection_([Key-Value| Pairs], Tree, Intersection0, Intersection) :-
+		(	lookup_nonvar(Key, Value0, Tree) ->
+			Value = Value0,
+			insert(Intersection0, Key, Value, Intersection1)
+		;	Intersection1 = Intersection0
+		),
+		intersection_(Pairs, Tree, Intersection1, Intersection).
 
 	min(t(Key, Value, t, _), MinKey, MinValue) :-
 		!,

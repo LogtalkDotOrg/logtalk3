@@ -22,9 +22,9 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2:2:1,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2021-04-04,
+		date is 2021-04-12,
 		comment is 'Dictionary protocol.',
 		see_also is [avltree, bintree, rbtree]
 	]).
@@ -112,6 +112,20 @@
 	:- info(lookup/2, [
 		comment is 'Lookups all matching key-value pairs from a dictionary. Fails if it cannot find one of the keys or if a value for a key does not unify.',
 		argnames is ['Pairs', 'Dictionary']
+	]).
+
+	:- public(intersection/2).
+	:- mode(intersection(+dictionary, +dictionary), zero_or_one).
+	:- info(intersection/2, [
+		comment is 'True iff the values of the dictionaries common keys unify. Trivially true when there are no common keys.',
+		argnames is ['Dictionary1', 'Dictionary2']
+	]).
+
+	:- public(intersection/3).
+	:- mode(intersection(+dictionary, +dictionary, -dictionary), zero_or_one).
+	:- info(intersection/3, [
+		comment is 'Returns the (possibly empty) intersection between two dictionaries when the values of their common keys unify.',
+		argnames is ['Dictionary1', 'Dictionary2', 'Intersection']
 	]).
 
 	:- public(previous/4).

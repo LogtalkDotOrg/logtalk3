@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>expected &mdash; Logtalk APIs v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
@@ -262,7 +263,7 @@
            <div itemprop="articleBody">
             
   <p class="right" id="expected-0"><span id="index-0"></span><strong>object</strong></p>
-<div class="section" id="expected">
+<section id="expected">
 <h1><code class="docutils literal notranslate"><span class="pre">expected</span></code><a class="headerlink" href="#expected" title="Permalink to this headline">¶</a></h1>
 <p>Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the <code class="docutils literal notranslate"><span class="pre">expected/1</span></code> object by passing the expected term as a parameter.</p>
 <div class="line-block">
@@ -316,9 +317,9 @@
 <li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="of_unexpected/2"> </div><div class="section" id="of-unexpected-2">
+<div id="of_unexpected/2"> </div><section id="of-unexpected-2">
 <span id="expected-0-of-unexpected-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">of_unexpected/2</span></code></a><a class="headerlink" href="#of-unexpected-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs an expected term from an error that represent that the expected value is missing.</p>
 <div class="line-block">
@@ -338,8 +339,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="of_expected/2"> </div></div>
-<div class="section" id="of-expected-2">
+<div id="of_expected/2"> </div></section>
+<section id="of-expected-2">
 <span id="expected-0-of-expected-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">of_expected/2</span></code></a><a class="headerlink" href="#of-expected-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs an expected term from an expected value.</p>
 <div class="line-block">
@@ -359,8 +360,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="from_goal/4"> </div></div>
-<div class="section" id="from-goal-4">
+<div id="from_goal/4"> </div></section>
+<section id="from-goal-4">
 <span id="expected-0-from-goal-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_goal/4</span></code></a><a class="headerlink" href="#from-goal-4" title="Permalink to this headline">¶</a></h3>
 <p>Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or failure represented by the <code class="docutils literal notranslate"><span class="pre">Error</span></code> argument.</p>
 <div class="line-block">
@@ -384,8 +385,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="from_goal/3"> </div></div>
-<div class="section" id="from-goal-3">
+<div id="from_goal/3"> </div></section>
+<section id="from-goal-3">
 <span id="expected-0-from-goal-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_goal/3</span></code></a><a class="headerlink" href="#from-goal-3" title="Permalink to this headline">¶</a></h3>
 <p>Constructs an expected term holding a value bound by calling the given goal. Otherwise returns an expected term with the unexpected goal error or the atom <code class="docutils literal notranslate"><span class="pre">fail</span></code> representing the unexpected failure.</p>
 <div class="line-block">
@@ -409,8 +410,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="from_goal/2"> </div></div>
-<div class="section" id="from-goal-2">
+<div id="from_goal/2"> </div></section>
+<section id="from-goal-2">
 <span id="expected-0-from-goal-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_goal/2</span></code></a><a class="headerlink" href="#from-goal-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs an expected term holding a value bound by calling the given closure. Otherwise returns an expected term holding the unexpected closure error or the atom <code class="docutils literal notranslate"><span class="pre">fail</span></code> representing the unexpected failure.</p>
 <div class="line-block">
@@ -434,8 +435,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="from_generator/4"> </div></div>
-<div class="section" id="from-generator-4">
+<div id="from_generator/4"> </div></section>
+<section id="from-generator-4">
 <span id="expected-0-from-generator-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_generator/4</span></code></a><a class="headerlink" href="#from-generator-4" title="Permalink to this headline">¶</a></h3>
 <p>Constructs expected terms with the values generated by calling the given goal. On goal error or failure, returns an expected term with the unexpected goal error or failure represented by the <code class="docutils literal notranslate"><span class="pre">Error</span></code> argument.</p>
 <div class="line-block">
@@ -459,8 +460,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="from_generator/3"> </div></div>
-<div class="section" id="from-generator-3">
+<div id="from_generator/3"> </div></section>
+<section id="from-generator-3">
 <span id="expected-0-from-generator-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_generator/3</span></code></a><a class="headerlink" href="#from-generator-3" title="Permalink to this headline">¶</a></h3>
 <p>Constructs expected terms with the values generated by calling the given goal. On goal error or failure, returns an expected term with, respectively, the unexpected goal error or the atom <code class="docutils literal notranslate"><span class="pre">fail</span></code> representing the unexpected goal failure.</p>
 <div class="line-block">
@@ -484,8 +485,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="from_generator/2"> </div></div>
-<div class="section" id="from-generator-2">
+<div id="from_generator/2"> </div></section>
+<section id="from-generator-2">
 <span id="expected-0-from-generator-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">from_generator/2</span></code></a><a class="headerlink" href="#from-generator-2" title="Permalink to this headline">¶</a></h3>
 <p>Constructs expected terms with the values generated by calling the given closure. On closure error or failure, returns an expected term with, respectively, the unexpected closure error or the atom <code class="docutils literal notranslate"><span class="pre">fail</span></code> representing the unexpected closure failure.</p>
 <div class="line-block">
@@ -508,26 +509,26 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">from_generator(+callable,--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</div>
-<div class="section" id="private-predicates">
+</section>
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="expected_1.html#expected-1"><span class="std std-ref">expected(Expected)</span></a>, <a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

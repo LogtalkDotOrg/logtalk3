@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-04-10,
+		date is 2021-04-12,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -34,7 +34,8 @@
 		as_dictionary/2, as_list/2,
 		clone/3, clone/4, insert/4, delete/4, update/4, update/5, update/3, empty/1,
 		lookup/3, lookup/2, previous/4, next/4, min/3, max/3, delete_min/4, delete_max/4,
-		keys/2, values/2, map/2, map/3, apply/4, size/2, valid/1, new/1
+		intersection/2, intersection/3, keys/2, values/2, map/2, map/3, apply/4, size/2,
+		valid/1, new/1
 	]).
 
 	:- uses(list, [
@@ -400,6 +401,73 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		size(Dictionary, Size),
 		^^assertion(size, Size == 10).
+
+	% intersection/2 tests
+
+	test(dictionary_intersection_2_01) :-
+		as_dictionary([], Dictionary1),
+		as_dictionary([], Dictionary2),
+		intersection(Dictionary1, Dictionary2).
+
+	test(dictionary_intersection_2_02) :-
+		as_dictionary([], Dictionary1),
+		as_dictionary([x-1], Dictionary2),
+		intersection(Dictionary1, Dictionary2).
+
+	test(dictionary_intersection_2_03) :-
+		as_dictionary([x-1], Dictionary1),
+		as_dictionary([], Dictionary2),
+		intersection(Dictionary1, Dictionary2).
+
+	test(dictionary_intersection_2_04) :-
+		as_dictionary([x-1, y-Y], Dictionary1),
+		as_dictionary([x-X, y-2], Dictionary2),
+		intersection(Dictionary1, Dictionary2),
+		^^assertion(X-Y == 1-2).
+
+	test(dictionary_intersection_2_05) :-
+		as_dictionary([x-1, y-Y, z-3], Dictionary1),
+		as_dictionary([x-X, y-2, t-4], Dictionary2),
+		intersection(Dictionary1, Dictionary2),
+		^^assertion(X-Y == 1-2).
+
+	% intersection/3 tests
+
+	test(dictionary_intersection_3_01) :-
+		as_dictionary([], Dictionary1),
+		as_dictionary([], Dictionary2),
+		intersection(Dictionary1, Dictionary2, Intersection),
+		empty(Intersection).
+
+	test(dictionary_intersection_3_02) :-
+		as_dictionary([], Dictionary1),
+		as_dictionary([x-1], Dictionary2),
+		intersection(Dictionary1, Dictionary2, Intersection),
+		empty(Intersection).
+
+	test(dictionary_intersection_3_03) :-
+		as_dictionary([x-1], Dictionary1),
+		as_dictionary([], Dictionary2),
+		intersection(Dictionary1, Dictionary2, Intersection),
+		empty(Intersection).
+
+	test(dictionary_intersection_3_04) :-
+		as_dictionary([x-1, y-Y], Dictionary1),
+		as_dictionary([x-X, y-2], Dictionary2),
+		intersection(Dictionary1, Dictionary2, Intersection),
+		as_list(Intersection, Pairs),
+		msort(Pairs, SortedPairs),
+		^^assertion(xy, X-Y == 1-2),
+		^^assertion(pairs, SortedPairs == [x-1, y-2]).
+
+	test(dictionary_intersection_3_05) :-
+		as_dictionary([x-1, y-Y, z-3], Dictionary1),
+		as_dictionary([x-X, y-2, t-4], Dictionary2),
+		intersection(Dictionary1, Dictionary2, Intersection),
+		as_list(Intersection, Pairs),
+		msort(Pairs, SortedPairs),
+		^^assertion(xy, X-Y == 1-2),
+		^^assertion(pairs, SortedPairs == [x-1, y-2]).
 
 	% valid/1 tests
 

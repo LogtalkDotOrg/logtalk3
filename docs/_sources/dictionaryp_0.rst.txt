@@ -11,8 +11,8 @@
 Dictionary protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 2:2:1
-| **Date:** 2021-04-04
+| **Version:** 2:3:0
+| **Date:** 2021-04-12
 
 | **Compilation flags:**
 |    ``static``
@@ -308,6 +308,52 @@ Lookups all matching key-value pairs from a dictionary. Fails if it cannot find 
 |    ``lookup(Pairs,Dictionary)``
 | **Mode and number of proofs:**
 |    ``lookup(+list(pair),@dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="intersection/2"> </div>
+
+.. index:: intersection/2
+.. _dictionaryp/0::intersection/2:
+
+``intersection/2``
+^^^^^^^^^^^^^^^^^^
+
+True iff the values of the dictionaries common keys unify. Trivially true when there are no common keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``intersection(Dictionary1,Dictionary2)``
+| **Mode and number of proofs:**
+|    ``intersection(+dictionary,+dictionary)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="intersection/3"> </div>
+
+.. index:: intersection/3
+.. _dictionaryp/0::intersection/3:
+
+``intersection/3``
+^^^^^^^^^^^^^^^^^^
+
+Returns the (possibly empty) intersection between two dictionaries when the values of their common keys unify.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``intersection(Dictionary1,Dictionary2,Intersection)``
+| **Mode and number of proofs:**
+|    ``intersection(+dictionary,+dictionary,-dictionary)`` - ``zero_or_one``
 
 
 ------------
