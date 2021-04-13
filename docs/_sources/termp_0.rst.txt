@@ -11,8 +11,8 @@
 Term utility predicates protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:32:0
-| **Date:** 2021-03-25
+| **Version:** 1:33:0
+| **Date:** 2021-04-13
 
 | **Compilation flags:**
 |    ``static``
@@ -68,7 +68,7 @@ True if the depth of ``Term`` is ``Depth``. The depth of atomic terms is zero; t
 ``ground/1``
 ^^^^^^^^^^^^
 
-True if the argument is ground.
+True if the argument is ground. Deprecated. Use the ``ground/1 standard predicate instead.
 
 | **Compilation flags:**
 |    ``static``
@@ -137,7 +137,7 @@ True if the variable occurs in the term.
 ``subsumes/2``
 ^^^^^^^^^^^^^^
 
-The first term subsumes the second term.
+The first term subsumes the second term. Deprecated. Use the ``subsumes_term/2`` standard predicate instead.
 
 | **Compilation flags:**
 |    ``static``

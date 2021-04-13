@@ -22,9 +22,9 @@
 :- protocol(termp).
 
 	:- info([
-		version is 1:32:0,
+		version is 1:33:0,
 		author is 'Paulo Moura',
-		date is 2021-03-25,
+		date is 2021-04-13,
 		comment is 'Term utility predicates protocol.',
 		see_also is [term]
 	]).
@@ -39,7 +39,7 @@
 	:- public(ground/1).
 	:- mode(ground(@term), zero_or_one).
 	:- info(ground/1, [
-		comment is 'True if the argument is ground.',
+		comment is 'True if the argument is ground. Deprecated. Use the ``ground/1 standard predicate instead.',
 		argnames is ['Term']
 	]).
 
@@ -60,7 +60,7 @@
 	:- public(subsumes/2).
 	:- mode(subsumes(?term, @term), zero_or_one).
 	:- info(subsumes/2, [
-		comment is 'The first term subsumes the second term.',
+		comment is 'The first term subsumes the second term. Deprecated. Use the ``subsumes_term/2`` standard predicate instead.',
 		argnames is ['General', 'Specific']
 	]).
 

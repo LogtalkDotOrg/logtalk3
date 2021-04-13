@@ -39,6 +39,10 @@ Library
 * CHANGED: The `dictionaries` library objects now extend `term` instead of
 `compound` as empty dictionaries are not always compound terms.
 
+* CHANGED: Mark the `termp` protocol `ground/1` and `subsumes/2` predicates
+as deprecated as both `ground/1` and `subsumes_term/2` are nowadays standard
+Prolog predicates.
+
 * ADDED: Preliminary version of a `nested_dictionaries` library. Joint work
 with Paul Brown.
 
