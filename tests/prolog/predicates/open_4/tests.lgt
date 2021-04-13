@@ -94,7 +94,7 @@
 		 open(bar, write, _, [alias(a)])}.
 
 	% tests from the Logtalk portability work; the ISO Prolog standard only
-	% specifies a domain_error/2 for incvlaid option but an instantiation_error/0
+	% specifies a domain_error/2 for an invalid option but an instantiation_error/0
 	% is also a sensible choice made by several Prolog systems when applicable
 
 	test(lgt_open_4_17, error(instantiation_error)) :-
@@ -129,15 +129,15 @@
 
 	test(lgt_open_4_27, error(permission_error(open,source_sink,_)), [condition(create_no_read_permission_file)]) :-
 		os::absolute_file_name('no_read_permission', Path),
-		{open(Path, read, _)}.
+		{open(Path, read, _, [])}.
 
 	test(lgt_open_4_28, error(permission_error(open,source_sink,_)), [condition(create_no_write_permission_file)]) :-
 		os::absolute_file_name('no_write_permission', Path),
-		{open(Path, write, _)}.
+		{open(Path, write, _, [])}.
 
 	test(lgt_open_4_29, error(permission_error(open,source_sink,_)), [condition(create_no_append_permission_file)]) :-
 		os::absolute_file_name('no_append_permission', Path),
-		{open(Path, append, _)}.
+		{open(Path, append, _, [])}.
 
 	cleanup :-
 		^^clean_file(roger_data),
