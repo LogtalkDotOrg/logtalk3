@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-11-29,
+		date is 2021-04-13,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -95,7 +95,7 @@
 
 	% tests from the Logtalk portability work; the ISO Prolog standard only
 	% specifies a domain_error/2 for incvlaid option but an instantiation_error/0
-	% is also a sensible choice made by several Prolog systems when applicable 
+	% is also a sensible choice made by several Prolog systems when applicable
 
 	test(lgt_open_4_17, error(instantiation_error)) :-
 		{open(foo, write, _, [_|_])}.
@@ -127,12 +127,50 @@
 	test(lgt_open_4_26, error(domain_error(stream_option,type(1)))) :-
 		{open(foo, write, _, [type(1)])}.
 
+	test(lgt_open_4_27, error(permission_error(open,source_sink,_)), [condition(create_no_read_permission_file)]) :-
+		os::absolute_file_name('no_read_permission', Path),
+		{open(Path, read, _)}.
+
+	test(lgt_open_4_28, error(permission_error(open,source_sink,_)), [condition(create_no_write_permission_file)]) :-
+		os::absolute_file_name('no_write_permission', Path),
+		{open(Path, write, _)}.
+
+	test(lgt_open_4_29, error(permission_error(open,source_sink,_)), [condition(create_no_append_permission_file)]) :-
+		os::absolute_file_name('no_append_permission', Path),
+		{open(Path, append, _)}.
+
 	cleanup :-
 		^^clean_file(roger_data),
 		^^clean_file(scowen),
 		^^clean_file(dave),
 		^^clean_file(foo),
 		^^clean_file(bar),
-		^^clean_file(f).
+		^^clean_file(f),
+		^^clean_file(no_read_permission),
+		^^clean_file(no_write_permission),
+		^^clean_file(no_append_permission).
+
+	% auxiliary predicates
+
+	create_no_read_permission_file :-
+		os::operating_system_type(unix),
+		os::absolute_file_name('no_read_permission', Path),
+		^^create_text_file(Path, 'foo.'),
+		atom_concat('chmod a-r ', Path, Command),
+		os::shell(Command).
+
+	create_no_write_permission_file :-
+		os::operating_system_type(unix),
+		os::absolute_file_name('no_write_permission', Path),
+		^^create_text_file(Path, 'foo.'),
+		atom_concat('chmod a-w ', Path, Command),
+		os::shell(Command).
+
+	create_no_append_permission_file :-
+		os::operating_system_type(unix),
+		os::absolute_file_name('no_append_permission', Path),
+		^^create_text_file(Path, 'foo.'),
+		atom_concat('chmod a-w ', Path, Command),
+		os::shell(Command).
 
 :- end_object.
