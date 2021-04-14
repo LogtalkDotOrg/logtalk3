@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-04-13,
+		date is 2021-04-14,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -138,6 +138,12 @@
 	test(lgt_open_4_29, error(permission_error(open,source_sink,_)), [condition(create_no_append_permission_file)]) :-
 		os::absolute_file_name('no_append_permission', Path),
 		{open(Path, append, _, [])}.
+
+	test(lgt_open_4_30, error(permission_error(open,source_sink,_)), [condition(os::operating_system_type(unix))]) :-
+		{open('/no_write_permission', write, _, [])}.
+
+	test(lgt_open_4_31, errors([permission_error(open,source_sink,_), existence_error(source_sink,_)]), [condition(os::operating_system_type(unix))]) :-
+		{open('/foo/bar/no_write_permission', write, _, [])}.
 
 	cleanup :-
 		^^clean_file(roger_data),
