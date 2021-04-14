@@ -147,8 +147,8 @@ administration privileges.
 For POSIX systems using a bash shell, edit and add the following lines to your
 `~/.profile` file:
 
-	export LOGTALKHOME=...
-	export LOGTALKUSER=...
+	export LOGTALKHOME=/your/logtalk/installation/directory
+	export LOGTALKUSER=$HOME/logtalk
 
 In case you're using the clone directory itself to run Logtalk without running
 the `install.sh` script, you will also need to add:
@@ -163,8 +163,8 @@ the `install.sh` script, you will also need to add:
 If you use instead a csh shell, edit and add the following lines to your
 `~/.cshrc` file:
 
-	setenv LOGTALKHOME ...
-	setenv LOGTALKUSER ...
+	setenv LOGTALKHOME /your/logtalk/installation/directory
+	setenv LOGTALKUSER "${HOME}"/logtalk
 
 In case you're using the clone directory itself to run Logtalk without running
 the `install.sh` script, you will also need to add:
