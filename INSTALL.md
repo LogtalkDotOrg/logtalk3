@@ -141,12 +141,15 @@ in your home directory where you want to store the user-specific Logtalk files
 Windows). Both environment variables may be set for all users by a user with
 administration privileges.
 
-For POSIX systems using a bash shell, add the following lines to your `~/.profile`
-file and edit the definitions of the `LOGTALKHOME` and `LOGTALKUSER` environment
-variables to match your installation:
+For POSIX systems using a bash shell, edit and add the following lines to your
+`~/.profile` file:
 
 	LOGTALKHOME=...
 	LOGTALKUSER=...
+
+In case you're using the clone directory itself to run Logtalk without running
+the `install.sh` script, you will also need to add:
+
 	PATH=$PATH:$LOGTALKHOME/tools/diagrams
 	PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml
 	PATH=$PATH:$LOGTALKHOME/scripts
@@ -154,12 +157,15 @@ variables to match your installation:
 	MANPATH=$MANPATH:$LOGTALKHOME/man
 	export LOGTALKHOME LOGTALKUSER PATH MANPATH
 
-For POSIX systems using a csh shell, add the following lines to your `~/.cshrc`
-file and edit the definitions of the `LOGTALKHOME` and `LOGTALKUSER` environment
-variables to match your installation:
+If you use instead a csh shell, edit and add the following lines to your
+`~/.cshrc` file:
 
 	setenv LOGTALKHOME ...
 	setenv LOGTALKUSER ...
+
+In case you're using the clone directory itself to run Logtalk without running
+the `install.sh` script, you will also need to add:
+
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/diagrams
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/lgtdoc/xml
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/scripts
