@@ -74,7 +74,7 @@ current directory to the Logtalk directory, and then type:
 
 This will install Logtalk into the `$HOME/share` and `$HOME/bin` directories
 (the `$HOME/bin` path must be in your `PATH` environment variable; also, the
-`$HOME/man` directory should be in your `MANPATH` environment variable).
+`$HOME/share/man` directory should be in your `MANPATH` environment variable).
 
 If you're using **Windows**, you can simply use the provided installer (which
 supports both admin and non-admin users) to perform a full installation.
@@ -111,8 +111,8 @@ integration and other useful shell scripts written to the `$prefix/bin`
 directory, which should be in your `PATH` environment variable. The script
 also creates a symbolic link, `$prefix/share/logtalk`, which can be used
 for e.g. defining the `LOGTALKHOME` environment variable described below.
-Man pages are installed on the `$prefix/man` directory, which should be
-in your `MANPATH` environment variable.
+Man pages are installed on the `$prefix/share/man` directory, which should
+be in your `MANPATH` environment variable.
 
 If you're using **Windows**, you can simply use the provided GUI installer
 (which supports both admin and non-admin users) to perform a full installation.
