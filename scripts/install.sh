@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on February 26, 2021
+##   Last updated on April 14, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -187,7 +187,8 @@ echo "on your execution path."
 echo
 echo "Users should ensure that the environment variable LOGTALKHOME is set to"
 echo "\"$prefix/share/logtalk\" and then run the \"logtalk_user_setup\" shell script"
-echo "once before running the integration scripts."
+echo "once before running the integration scripts. For more details on manual"
+echo "installation setup, see the INSTALL.md file."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"

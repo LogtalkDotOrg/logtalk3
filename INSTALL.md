@@ -73,7 +73,8 @@ current directory to the Logtalk directory, and then type:
 	% ./install.sh -p $HOME
 
 This will install Logtalk into the `$HOME/share` and `$HOME/bin` directories
-(the `$HOME/bin` path must be in your `PATH` environment variable).
+(the `$HOME/bin` path must be in your `PATH` environment variable; also, the
+`$HOME/man` directory should be in your `MANPATH` environment variable).
 
 If you're using **Windows**, you can simply use the provided installer (which
 supports both admin and non-admin users) to perform a full installation.
@@ -107,9 +108,11 @@ operating-system:
 
 The script installs Logtalk in the `$prefix/share` directory with Prolog
 integration and other useful shell scripts written to the `$prefix/bin`
-directory, which should be in your path. The `install.sh` shell script also
-creates a symbolic link, `$prefix/share/logtalk`, which can be used for e.g.
-defining the `LOGTALKHOME` environment variable described below.
+directory, which should be in your `PATH` environment variable. The script
+also creates a symbolic link, `$prefix/share/logtalk`, which can be used
+for e.g. defining the `LOGTALKHOME` environment variable described below.
+Man pages are installed on the `$prefix/man` directory, which should be
+in your `MANPATH` environment variable.
 
 If you're using **Windows**, you can simply use the provided GUI installer
 (which supports both admin and non-admin users) to perform a full installation.
@@ -144,8 +147,8 @@ administration privileges.
 For POSIX systems using a bash shell, edit and add the following lines to your
 `~/.profile` file:
 
-	LOGTALKHOME=...
-	LOGTALKUSER=...
+	export LOGTALKHOME=...
+	export LOGTALKUSER=...
 
 In case you're using the clone directory itself to run Logtalk without running
 the `install.sh` script, you will also need to add:
@@ -155,7 +158,7 @@ the `install.sh` script, you will also need to add:
 	PATH=$PATH:$LOGTALKHOME/scripts
 	PATH=$PATH:$LOGTALKHOME/integration
 	MANPATH=$MANPATH:$LOGTALKHOME/man
-	export LOGTALKHOME LOGTALKUSER PATH MANPATH
+	export PATH MANPATH
 
 If you use instead a csh shell, edit and add the following lines to your
 `~/.cshrc` file:
