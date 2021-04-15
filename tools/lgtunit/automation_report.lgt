@@ -31,9 +31,9 @@
 :- object(automation_report).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2021-02-09,
+		date is 2021-04-15,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
@@ -69,10 +69,20 @@
 		write(results_file, '\t'), write(results_file, Passed),
 		write(results_file, '\t'), write(results_file, Failed), nl(results_file).
 	% failed tests
-	message_hook(failed_test(Object, Test, _, _, _, _, _)) :-
-		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
-	message_hook(non_deterministic_success(Object, Test, _, _, _, _)) :-
-		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
+	message_hook(failed_test(Object, Test, _, _, _, Note, _)) :-
+		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
+		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
+			write(results_file, ' [flaky]')
+		;	true
+		),
+		nl(results_file).
+	message_hook(non_deterministic_success(Object, Test, _, _, Note, _)) :-
+		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
+		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
+			write(results_file, ' [flaky]')
+		;	true
+		),
+		nl(results_file).
 	% skipped test
 	message_hook(skipped_test(Object, Test, _, _, _)) :-
 		write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).

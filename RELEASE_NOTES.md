@@ -84,6 +84,8 @@ Tools
 * CHANGED: The `logtalk_tester.sh` and `logtalk_doclet.sh` scripts to require
 specifying the backend instead of using a default backend.
 
+* ADDED: Support for reporting tests as flaky tests to the `lgtunit` tool.
+
 * IMPROVED: The `logtalk_tester.sh` script and the `lgtunit` tool TAP, xUnit,
 and code coverage reports to allow overriding the directory where tests reports
 are created (e.g. when running tests defined in a directory different from the

@@ -144,6 +144,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tests-with-timeout-limits">Tests with timeout limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flaky-tests">Flaky tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#automating-running-tests">Automating running tests</a></li>
@@ -1098,6 +1099,17 @@ skipped by writing:</p>
 </div>
 <p>Annotations are written, by default, between parenthesis after and in
 the same line as the test results.</p>
+</section>
+<section id="flaky-tests">
+<h2>Flaky tests<a class="headerlink" href="#flaky-tests" title="Permalink to this headline">¶</a></h2>
+<p>Flaky tests are tests that pass or fail non-deterministically, usually
+due to external conditions (e.g. computer or network load). Thus, flake
+tests often don’t result from bugs in the code being tested itself but
+from test execution conditions that are not predictable. The <code class="docutils literal notranslate"><span class="pre">note/1</span></code>
+annotation can be used to alert that a test failure is for a flaky test.
+If the <code class="docutils literal notranslate"><span class="pre">note/1</span></code> argument is an atom containing the sub-atom <code class="docutils literal notranslate"><span class="pre">flaky</span></code>,
+the testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
+reporting failed tests.</p>
 </section>
 <section id="debugging-failed-tests">
 <h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Permalink to this headline">¶</a></h2>

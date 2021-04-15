@@ -959,6 +959,18 @@ skipped by writing:
 Annotations are written, by default, between parenthesis after and in
 the same line as the test results.
 
+Flaky tests
+-----------
+
+Flaky tests are tests that pass or fail non-deterministically, usually
+due to external conditions (e.g. computer or network load). Thus, flake
+tests often don't result from bugs in the code being tested itself but
+from test execution conditions that are not predictable. The ``note/1``
+annotation can be used to alert that a test failure is for a flaky test.
+If the ``note/1`` argument is an atom containing the sub-atom ``flaky``,
+the testing automation support outputs the text ``[flaky]`` when
+reporting failed tests.
+
 Debugging failed tests
 ----------------------
 
