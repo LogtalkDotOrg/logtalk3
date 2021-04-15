@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>help &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -218,31 +219,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="help">
+  <section id="help">
 <h1><code class="docutils literal notranslate"><span class="pre">help</span></code><a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h1>
 <p>This tool provides basic on-line help for Logtalk when running in a
 limited set of operating-systems.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#help">../../docs/library_index.html#help</a></p>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(help(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(help(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="supported-operating-systems">
+</section>
+<section id="supported-operating-systems">
 <h2>Supported operating-systems<a class="headerlink" href="#supported-operating-systems" title="Permalink to this headline">¶</a></h2>
 <p>Currently, support is limited to Linux, macOS, and Windows.</p>
 <p>On Windows, the <code class="docutils literal notranslate"><span class="pre">start</span></code> command must be available. On Linux, the
@@ -250,8 +251,8 @@ directory.</p>
 is used.</p>
 <p>This tool relies on the library portable operating-system access
 abstraction.</p>
-</div>
-<div class="section" id="known-issues">
+</section>
+<section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
 <p>On macOS, the <code class="docutils literal notranslate"><span class="pre">open</span></code> command used to open documentation URLs drops the
 anchors, thus preventing navigating to the specified position on the
@@ -259,8 +260,8 @@ documentation page.</p>
 <p>ECLiPSe defines a <code class="docutils literal notranslate"><span class="pre">help</span></code> prefix operator that forces wrapping this
 atom between parenthesis when sending messages to the tool. E.g. use
 <code class="docutils literal notranslate"><span class="pre">(help)::help</span></code> instead of <code class="docutils literal notranslate"><span class="pre">help::help</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

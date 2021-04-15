@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Documenting &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -224,7 +225,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="documenting">
+  <section id="documenting">
 <span id="documenting-documenting"></span><h1>Documenting<a class="headerlink" href="#documenting" title="Permalink to this headline">¶</a></h1>
 <p>Assuming that the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on, the
 compiler saves all relevant documenting information collected when compiling
@@ -239,14 +240,14 @@ with arbitrary user-defined information, either about an entity or about its
 predicates, by using the two directives described in the next section. The
 <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool includes POSIX and Windows scripts for converting the XML
 documentation files to several final formats (such as HTML and PDF).</p>
-<div class="section" id="documenting-directives">
+<section id="documenting-directives">
 <span id="id1"></span><h2>Documenting directives<a class="headerlink" href="#documenting-directives" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
 directives complement other directives that also provide important
 documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> and
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directives.</p>
-<div class="section" id="entity-directives">
+<section id="entity-directives">
 <span id="documenting-entity"></span><h3>Entity directives<a class="headerlink" href="#entity-directives" title="Permalink to this headline">¶</a></h3>
 <p>Arbitrary user-defined entity information can be represented using the
 <a class="reference internal" href="../refman/directives/info_1.html#directives-info-1"><span class="std std-ref">info/1</span></a> directive:</p>
@@ -311,8 +312,8 @@ be atoms or compound terms).</p>
 you are free to invent your own keywords. All key-value pairs can be retrieved
 programmatically using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and
 are visible to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool.</p>
-</div>
-<div class="section" id="predicate-directives">
+</section>
+<section id="predicate-directives">
 <span id="documenting-predicate"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
 <p>Arbitrary user-defined predicate information can be represented using
 the <a class="reference internal" href="../refman/directives/info_2.html#directives-info-2"><span class="std std-ref">info/2</span></a> directive:</p>
@@ -377,9 +378,9 @@ for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
 using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and are visible
 to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool.</p>
-</div>
-</div>
-<div class="section" id="processing-and-viewing-documenting-files">
+</section>
+</section>
+<section id="processing-and-viewing-documenting-files">
 <span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool
 generates an XML documenting file per entity. It can also generate library,
@@ -427,8 +428,8 @@ used to control the generation of the XML documentation files. See the
 tool documentation for details. There is also a <a class="reference internal" href="../devtools/doclet.html"><span class="doc">doclet</span></a>
 tool that allows automating the steps required to generate the documentation
 for an application.</p>
-</div>
-<div class="section" id="inline-formatting-in-comments-text">
+</section>
+<section id="inline-formatting-in-comments-text">
 <span id="documenting-formatting"></span><h2>Inline formatting in comments text<a class="headerlink" href="#inline-formatting-in-comments-text" title="Permalink to this headline">¶</a></h2>
 <p>Inline formatting in comments text can be accomplished by using Markdown
 or reStructuredText syntax and converting XML documenting files to Markdown
@@ -445,8 +446,8 @@ Mark ``monospaced text`` with two backquotes.
 <div><p>Mark <em>italic text</em> with one asterisk. Mark <strong>bold text</strong> with
 two asterisks. Mark <code class="docutils literal notranslate"><span class="pre">monospaced</span> <span class="pre">text</span></code> with two backquotes.</p>
 </div></blockquote>
-</div>
-<div class="section" id="diagrams">
+</section>
+<section id="diagrams">
 <h2>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="../devtools/diagrams.html"><span class="doc">diagrams</span></a> tool supports a wide range of diagrams that
 can also help in documenting an application. The generated diagrams can
@@ -457,8 +458,8 @@ understanding the structure and implementation of an application. This tool
 uses the same <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
 tool and thus have access to the same source data. See the tool documentation
 for details.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

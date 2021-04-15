@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Protocols &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -235,7 +236,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="protocols">
+  <section id="protocols">
 <span id="protocols-protocols"></span><h1>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h1>
 <p>Protocols enable the separation between interface and implementation:
 several objects can implement the same protocol and an object can
@@ -249,7 +250,7 @@ declarations.</p>
 <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">expanding</span></a>, and
 <a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">forwarding</span></a>, which are described at the
 end of this section.</p>
-<div class="section" id="defining-a-new-protocol">
+<section id="defining-a-new-protocol">
 <span id="protocols-defining"></span><h2>Defining a new protocol<a class="headerlink" href="#defining-a-new-protocol" title="Permalink to this headline">¶</a></h2>
 <p>We can define a new protocol in the same way we write Prolog code: by
 using a text editor. Logtalk source files may contain one or more
@@ -291,8 +292,8 @@ protocol should relate to the same functionality. Therefore, the only
 recommended use of protocol extension is when you need both a minimal
 protocol and an extended version of the same protocol with additional,
 convenient predicates.</p>
-</div>
-<div class="section" id="finding-defined-protocols">
+</section>
+<section id="finding-defined-protocols">
 <span id="protocols-finding"></span><h2>Finding defined protocols<a class="headerlink" href="#finding-defined-protocols" title="Permalink to this headline">¶</a></h2>
 <p>We can find, by backtracking, all defined protocols by using the
 <a class="reference internal" href="../refman/predicates/current_protocol_1.html#predicates-current-protocol-1"><span class="std std-ref">current_protocol/1</span></a> built-in predicate with a
@@ -302,8 +303,8 @@ unbound argument:</p>
 </div>
 <p>This predicate can also be used to test if a protocol is defined by
 calling it with a valid protocol identifier (an atom).</p>
-</div>
-<div class="section" id="creating-a-new-protocol-in-runtime">
+</section>
+<section id="creating-a-new-protocol-in-runtime">
 <span id="protocols-creating"></span><h2>Creating a new protocol in runtime<a class="headerlink" href="#creating-a-new-protocol-in-runtime" title="Permalink to this headline">¶</a></h2>
 <p>We can create a new (dynamic) protocol at runtime by calling the Logtalk
 built-in predicate <a class="reference internal" href="../refman/predicates/create_protocol_3.html#predicates-create-protocol-3"><span class="std std-ref">create_protocol/3</span></a>:</p>
@@ -333,8 +334,8 @@ opening protocol directive and to the protocol directives.</p>
 best to define a metaclass or a prototype with a predicate that will
 call this built-in predicate in order to provide more sophisticated
 behavior.</p>
-</div>
-<div class="section" id="abolishing-an-existing-protocol">
+</section>
+<section id="abolishing-an-existing-protocol">
 <span id="protocols-abolishing"></span><h2>Abolishing an existing protocol<a class="headerlink" href="#abolishing-an-existing-protocol" title="Permalink to this headline">¶</a></h2>
 <p>Dynamic protocols can be abolished using the
 <a class="reference internal" href="../refman/predicates/abolish_protocol_1.html#predicates-abolish-protocol-1"><span class="std std-ref">abolish_protocol/1</span></a> built-in predicate:</p>
@@ -343,12 +344,12 @@ behavior.</p>
 </div>
 <p>The argument must be an identifier of a defined dynamic protocol,
 otherwise an error will be thrown.</p>
-</div>
-<div class="section" id="protocol-directives">
+</section>
+<section id="protocol-directives">
 <h2>Protocol directives<a class="headerlink" href="#protocol-directives" title="Permalink to this headline">¶</a></h2>
 <p>Protocol directives are used to define protocol properties and
 documentation.</p>
-<div class="section" id="dynamic-protocols">
+<section id="dynamic-protocols">
 <span id="protocols-dynamic"></span><h3>Dynamic protocols<a class="headerlink" href="#dynamic-protocols" title="Permalink to this headline">¶</a></h3>
 <p>As usually happens with Prolog code, a protocol can be either static or
 dynamic. A protocol created during the execution of a program is always
@@ -362,22 +363,22 @@ Dynamic protocols are declared by using the
 that using dynamic code results in a performance hit when compared to
 static code. We should only use dynamic protocols when these need to be
 abolished during program execution.</p>
-</div>
-<div class="section" id="protocol-documentation">
+</section>
+<section id="protocol-documentation">
 <span id="protocols-documentation"></span><h3>Protocol documentation<a class="headerlink" href="#protocol-documentation" title="Permalink to this headline">¶</a></h3>
 <p>A protocol can be documented with arbitrary user-defined information
 by using the <a class="reference internal" href="../refman/directives/info_1.html#directives-info-1"><span class="std std-ref">info/1</span></a> entity directive. See the
 <a class="reference internal" href="documenting.html#documenting-documenting"><span class="std std-ref">Documenting</span></a> section for details.</p>
-</div>
-<div class="section" id="loading-files-into-a-protocol">
+</section>
+<section id="loading-files-into-a-protocol">
 <span id="protocols-include"></span><h3>Loading files into a protocol<a class="headerlink" href="#loading-files-into-a-protocol" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive
 can be used to load the contents of a file into a protocol. See the
 <a class="reference internal" href="objects.html#objects-objects"><span class="std std-ref">Objects</span></a> section for an example of using this
 directive.</p>
-</div>
-</div>
-<div class="section" id="protocol-relationships">
+</section>
+</section>
+<section id="protocol-relationships">
 <span id="protocols-relationships"></span><h2>Protocol relationships<a class="headerlink" href="#protocol-relationships" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk provides two sets of built-in predicates that enable us to query
 the system about the possible relationships that a protocol have with
@@ -404,8 +405,8 @@ call the <a class="reference internal" href="../refman/predicates/implements_pro
 we will need to use the <a class="reference internal" href="../refman/predicates/current_object_1.html#predicates-current-object-1"><span class="std std-ref">current_object/1</span></a> or
 <a class="reference internal" href="../refman/predicates/current_category_1.html#predicates-current-category-1"><span class="std std-ref">current_category/1</span></a>
 built-in predicates to identify the kind of entity returned.</p>
-</div>
-<div class="section" id="protocol-properties">
+</section>
+<section id="protocol-properties">
 <span id="protocols-properties"></span><h2>Protocol properties<a class="headerlink" href="#protocol-properties" title="Permalink to this headline">¶</a></h2>
 <p>We can find the properties of defined protocols by calling the
 <a class="reference internal" href="../refman/predicates/protocol_property_2.html#predicates-protocol-property-2"><span class="std std-ref">protocol_property/2</span></a> built-in predicate:</p>
@@ -455,8 +456,8 @@ being the begin line of the alias directive)</p>
 <p>Some of the properties such as line numbers are only available when the
 protocol is defined in a source file compiled with the
 <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag turned on.</p>
-</div>
-<div class="section" id="implementing-protocols">
+</section>
+<section id="implementing-protocols">
 <span id="protocols-implementing"></span><h2>Implementing protocols<a class="headerlink" href="#implementing-protocols" title="Permalink to this headline">¶</a></h2>
 <p>Any number of objects or categories can implement a protocol. The syntax
 is very simple:</p>
@@ -497,34 +498,34 @@ prefix the protocol’s name with the corresponding keyword. For instance:</p>
 </pre></div>
 </div>
 <p>The same rules applies to protocols implemented by categories.</p>
-</div>
-<div class="section" id="built-in-protocols">
+</section>
+<section id="built-in-protocols">
 <span id="protocols-built-in"></span><h2>Built-in protocols<a class="headerlink" href="#built-in-protocols" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk defines a set of built-in protocols that are always available
 for any application.</p>
-<div class="section" id="the-built-in-protocol-expanding">
+<section id="the-built-in-protocol-expanding">
 <span id="protocols-expanding"></span><h3>The built-in protocol <code class="docutils literal notranslate"><span class="pre">expanding</span></code><a class="headerlink" href="#the-built-in-protocol-expanding" title="Permalink to this headline">¶</a></h3>
 <p>The built-in <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">expanding</span></a> protocol declares
 the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>
 predicates. See the description of the <a class="reference internal" href="programming.html#flag-hook"><span class="std std-ref">hook</span></a>
 compiler flag for more details.</p>
-</div>
-<div class="section" id="the-built-in-protocol-monitoring">
+</section>
+<section id="the-built-in-protocol-monitoring">
 <span id="protocols-monitoring"></span><h3>The built-in protocol <code class="docutils literal notranslate"><span class="pre">monitoring</span></code><a class="headerlink" href="#the-built-in-protocol-monitoring" title="Permalink to this headline">¶</a></h3>
 <p>The built-in <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">monitoring</span></a> protocol declares the
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a> public event handler
 predicates. See the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more details.</p>
-</div>
-<div class="section" id="the-built-in-protocol-forwarding">
+</section>
+<section id="the-built-in-protocol-forwarding">
 <span id="protocols-forwarding"></span><h3>The built-in protocol <code class="docutils literal notranslate"><span class="pre">forwarding</span></code><a class="headerlink" href="#the-built-in-protocol-forwarding" title="Permalink to this headline">¶</a></h3>
 <p>The built-in <a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">forwarding</span></a> protocol declares the
 <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a> user-defined message forwarding handler, which
 is automatically called (if defined) by the runtime for any message that
 the receiving object does not understand. See also the
 <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> control construct.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

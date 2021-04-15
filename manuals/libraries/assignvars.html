@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>assignvars &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -243,7 +244,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="assignvars">
+  <section id="assignvars">
 <h1><code class="docutils literal notranslate"><span class="pre">assignvars</span></code><a class="headerlink" href="#assignvars" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">assignvarsp</span></code> protocol declares the predicates used for logical
 assignment of Prolog terms developed by Nobukuni Kino.</p>
@@ -255,32 +256,30 @@ implementation of the <code class="docutils literal notranslate"><span class="pr
 following backend Prolog compilers: B-Prolog, CxProlog, ECLiPSe, GNU
 Prolog, Qu-Prolog, SICStus Prolog, SWI-Prolog, and YAP.</p>
 <p>For more information on assignvars, please consult the URL:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>http<span class="o">://</span>www.kprolog.com<span class="o">/</span>en<span class="o">/</span>logical_assignment<span class="o">/</span>
-</pre></div>
-</div>
+<p><a class="reference external" href="https://web.archive.org/web/20160818050049/http://www.kprolog.com/en/logical_assignment/">https://web.archive.org/web/20160818050049/http://www.kprolog.com/en/logical_assignment/</a></p>
 <p>The representation of assignable terms should be regarded as an opaque
 term and only accessed using the library predicates.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#assignvars">../../docs/library_index.html#assignvars</a>
 link in a web browser.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(assignvars(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(coroutining(tester)).
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

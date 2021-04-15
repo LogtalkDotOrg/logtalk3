@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Event-driven programming &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -233,7 +234,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="event-driven-programming">
+  <section id="event-driven-programming">
 <span id="events-events"></span><h1>Event-driven programming<a class="headerlink" href="#event-driven-programming" title="Permalink to this headline">¶</a></h1>
 <p>The addition of event-driven programming capacities to the Logtalk
 language <a class="reference internal" href="../bibliography.html#moura94" id="id1"><span>[Moura94]</span></a> is based on a simple but powerful idea:</p>
@@ -263,12 +264,12 @@ acting as method monitors.</p></li>
 <li><p>Provide a <em>publish-subscribe</em> mechanism where public messages play the
 role of events.</p></li>
 </ul>
-<div class="section" id="definitions">
+<section id="definitions">
 <span id="events-definitions"></span><h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
 <p>The words <em>event</em> and <em>monitor</em> have multiple meanings in computer
 science. To avoid misunderstandings, we start by defining them in
 the Logtalk context.</p>
-<div class="section" id="event">
+<section id="event">
 <span id="events-event"></span><h3>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
 <p>In an object-oriented system, all computations start through message
 sending. It thus becomes quite natural to declare that the only event
@@ -299,8 +300,8 @@ program execution. It is our goal to provide the user with the
 possibility of modeling the largest number of situations.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="monitor">
+</section>
+<section id="monitor">
 <span id="events-monitor"></span><h3>Monitor<a class="headerlink" href="#monitor" title="Permalink to this headline">¶</a></h3>
 <p>Complementary to the notion of event is the notion of monitor. A monitor
 is an object that is automatically notified by the message sending
@@ -328,9 +329,9 @@ object).</p>
 bound by the calls to the monitor event handlers.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="event-generation">
+</section>
+</section>
+<section id="event-generation">
 <span id="events-generation"></span><h2>Event generation<a class="headerlink" href="#event-generation" title="Permalink to this headline">¶</a></h2>
 <p>Assuming that the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
 the object (or category) sending the messages we want to observe, for each
@@ -342,8 +343,8 @@ been executed.</p>
 <p>Note that <em>self</em> messages (using the <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> control
 construct) or <em>super</em> calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control
 construct) don’t generate events.</p>
-</div>
-<div class="section" id="communicating-events-to-monitors">
+</section>
+<section id="communicating-events-to-monitors">
 <span id="events-communicating"></span><h2>Communicating events to monitors<a class="headerlink" href="#communicating-events-to-monitors" title="Permalink to this headline">¶</a></h2>
 <p>Whenever a spied event occurs, the message sending mechanism calls the
 corresponding event handlers directly for all registered monitors. These
@@ -351,8 +352,8 @@ calls are internally made bypassing the message sending primitives in order
 to avoid potential endless loops. The event handlers consist in user
 definitions for the public predicates declared in the built-in
 <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">monitoring</span></a> protocol (see below for more details).</p>
-</div>
-<div class="section" id="performance-concerns">
+</section>
+<section id="performance-concerns">
 <span id="events-performance"></span><h2>Performance concerns<a class="headerlink" href="#performance-concerns" title="Permalink to this headline">¶</a></h2>
 <p>Ideally, the existence of monitored messages should not affect the
 processing of the remaining messages. On the other hand, for each
@@ -367,8 +368,8 @@ using the <a class="reference internal" href="programming.html#flag-events"><spa
 turned off, Logtalk uses optimized code for processing message sending
 calls that skips the checking of monitored events, resulting in a small
 but measurable performance improvement.</p>
-</div>
-<div class="section" id="monitor-semantics">
+</section>
+<section id="monitor-semantics">
 <span id="events-semantics"></span><h2>Monitor semantics<a class="headerlink" href="#monitor-semantics" title="Permalink to this headline">¶</a></h2>
 <p>The established semantics for monitors actions consists on considering
 its success as a necessary condition so that a message can succeed:</p>
@@ -385,8 +386,8 @@ backtracking over the preceding monitor actions).</p></li>
 presence of monitors in a message processing, we just have to define the
 monitor actions in such a way that they never fail (which is very simple
 to accomplish).</p>
-</div>
-<div class="section" id="activation-order-of-monitors">
+</section>
+<section id="activation-order-of-monitors">
 <span id="events-order"></span><h2>Activation order of monitors<a class="headerlink" href="#activation-order-of-monitors" title="Permalink to this headline">¶</a></h2>
 <p>Ideally, whenever there are several monitors defined for the same event,
 the calling order should not interfere with the result. However, this is
@@ -404,15 +405,15 @@ knowledge can reveal itself as incorrect if there is any changing in the
 execution conditions. Note that, given the independence between
 monitors, it does not make sense that a failure forces backtracking over
 the actions previously executed.</p>
-</div>
-<div class="section" id="event-handling">
+</section>
+<section id="event-handling">
 <span id="events-handling"></span><h2>Event handling<a class="headerlink" href="#event-handling" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk provides three built-in predicates for event handling. These
 predicates support defining, enumerating, and abolishing events.
 Applications that use events extensively usually define a set of objects
 that use these built-in predicates to implement more sophisticated and
 higher-level behavior.</p>
-<div class="section" id="defining-new-events">
+<section id="defining-new-events">
 <span id="events-defining"></span><h3>Defining new events<a class="headerlink" href="#defining-new-events" title="Permalink to this headline">¶</a></h3>
 <p>New events can be defined using the <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a>
 built-in predicate:</p>
@@ -422,8 +423,8 @@ built-in predicate:</p>
 <p>Note that if any of the <code class="docutils literal notranslate"><span class="pre">Event</span></code>, <code class="docutils literal notranslate"><span class="pre">Object</span></code>, <code class="docutils literal notranslate"><span class="pre">Message</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">Sender</span></code> arguments is a free variable or contains free variables, this
 call will define a <strong>set</strong> of matching events.</p>
-</div>
-<div class="section" id="abolishing-defined-events">
+</section>
+<section id="abolishing-defined-events">
 <span id="events-abolishing"></span><h3>Abolishing defined events<a class="headerlink" href="#abolishing-defined-events" title="Permalink to this headline">¶</a></h3>
 <p>Events that are no longer needed may be abolished using the
 <a class="reference internal" href="../refman/predicates/abolish_events_5.html#predicates-abolish-events-5"><span class="std std-ref">abolish_events/5</span></a> built-in predicate:</p>
@@ -432,8 +433,8 @@ call will define a <strong>set</strong> of matching events.</p>
 </div>
 <p>If called with free variables, this goal will remove all matching
 events.</p>
-</div>
-<div class="section" id="finding-defined-events">
+</section>
+<section id="finding-defined-events">
 <span id="events-finding"></span><h3>Finding defined events<a class="headerlink" href="#finding-defined-events" title="Permalink to this headline">¶</a></h3>
 <p>The events that are currently defined can be retrieved using the
 <a class="reference internal" href="../refman/predicates/current_event_5.html#predicates-current-event-5"><span class="std std-ref">current_event/5</span></a> built-in predicate:</p>
@@ -442,8 +443,8 @@ events.</p>
 </div>
 <p>Note that this predicate will return <strong>sets</strong> of matching events if some
 of the returned arguments are free variables or contain free variables.</p>
-</div>
-<div class="section" id="defining-event-handlers">
+</section>
+<section id="defining-event-handlers">
 <span id="events-handlers"></span><h3>Defining event handlers<a class="headerlink" href="#defining-event-handlers" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">monitoring</span></a> built-in protocol declares two
 public predicates, <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, that
@@ -529,9 +530,9 @@ order to change the scope of the event handler predicates. Note that the
 message sending processing mechanism is able to call the event handlers
 irrespective of their scope. Nevertheless, the scope of the event handlers
 may be restricted in order to prevent other objects from calling them.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

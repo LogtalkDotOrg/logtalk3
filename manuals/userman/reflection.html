@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Reflection &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -222,20 +223,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="reflection">
+  <section id="reflection">
 <span id="reflection-reflection"></span><span id="index-0"></span><h1>Reflection<a class="headerlink" href="#reflection" title="Permalink to this headline">¶</a></h1>
 <p>Logtalk provides support for both <em>structural</em> and <em>behavioral</em> reflection.
 Structural reflection supports computations over an application structure
 while behavioral reflection computations over what an application does while
 running. The structural and behavioral reflection APIs are used by all the
 <a class="reference internal" href="../devtools/index.html"><span class="doc">developer tools</span></a>, which are regular applications.</p>
-<div class="section" id="structural-reflection">
+<section id="structural-reflection">
 <span id="reflection-structural"></span><span id="index-1"></span><h2>Structural reflection<a class="headerlink" href="#structural-reflection" title="Permalink to this headline">¶</a></h2>
 <p>Structural reflection allows querying the properties of objects, categories,
 protocols, and predicates. This API provides two views on the structure of
 an application: a <em>transparent-box view</em> and a <em>black-box view</em>, described
 next.</p>
-<div class="section" id="transparent-box-view">
+<section id="transparent-box-view">
 <span id="index-2"></span><h3>Transparent-box view<a class="headerlink" href="#transparent-box-view" title="Permalink to this headline">¶</a></h3>
 <p>The transparent-box view provides a structural view of the contents and
 properties of entities, predicates, and source files akin to accessing
@@ -262,8 +263,8 @@ turned on.</p>
 </div>
 <p>The <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">logtalk</span></a> built-in object provides predicates for
 querying loaded source files and their properties.</p>
-</div>
-<div class="section" id="black-box-view">
+</section>
+<section id="black-box-view">
 <span id="index-3"></span><h3>Black-box view<a class="headerlink" href="#black-box-view" title="Permalink to this headline">¶</a></h3>
 <p>The black-box view provides a view that takes into account entity encapsulation
 and thus only allow querying about predicates and operators that are within
@@ -275,9 +276,9 @@ and for querying the <a class="reference internal" href="../refman/methods/predi
 It is also possible to enumerate <a class="reference internal" href="../refman/methods/current_op_3.html#methods-current-op-3"><span class="std std-ref">entity operators</span></a>.
 See the sections on <a class="reference internal" href="predicates.html#predicates-finding"><span class="std std-ref">finding declared predicates</span></a> and
 on <a class="reference internal" href="predicates.html#predicates-properties"><span class="std std-ref">predicate properties</span></a> for more details.</p>
-</div>
-</div>
-<div class="section" id="behavioral-reflection">
+</section>
+</section>
+<section id="behavioral-reflection">
 <span id="reflection-behavioral"></span><span id="index-4"></span><h2>Behavioral reflection<a class="headerlink" href="#behavioral-reflection" title="Permalink to this headline">¶</a></h2>
 <p>Behavioral reflection provides insight on what an application does when running.
 Specifically, by observing and acting on the messages being exchanged between
@@ -287,8 +288,8 @@ provides an implementation of Smalltalk dependents mechanism.</p>
 <p>For use in debugging tools, there is also a small reflection API providing
 <a class="reference internal" href="debugging.html#debugging-events"><span class="std std-ref">trace and debug event predicates</span></a> provided by the
 <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">logtalk</span></a> built-in object.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

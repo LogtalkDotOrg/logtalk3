@@ -33,6 +33,14 @@ incompatible changes in its libraries).
 
 * FIXED: The value of the `unicode` read-only flag for Trealla Prolog.
 
+Documentation
+-------------
+
+* IMPROVED: Manual installation instructions for POSIX systems.
+
+* FIXED: Expired link in the documentation of the `assignvars` library. Thanks
+to kaiser185 for the bug report and alternative link.
+
 Library
 -------
 

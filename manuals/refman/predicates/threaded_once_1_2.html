@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>threaded_once/1-2 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -226,9 +227,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="threaded-once-1-2">
+  <section id="threaded-once-1-2">
 <span id="predicates-threaded-once-1-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">threaded_once/1-2</span></code><a class="headerlink" href="#threaded-once-1-2" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_once</span>(<span class="nv">Goal</span>)
 <span class="k">threaded_once</span>(<span class="nv">Goal</span>, <span class="nv">Tag</span>)
@@ -243,15 +244,15 @@ back to the message queue of the object containing the call
 can be used with the <a class="reference internal" href="threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/2</span></a>
 and <a class="reference internal" href="threaded_cancel_1.html#predicates-threaded-cancel-1"><span class="std std-ref">threaded_cancel/1</span></a> predicates. Tags shall be regarded
 as opaque terms; users shall not rely on its type.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_once</span>(<span class="o">@</span>callable) <span class="o">-</span> one
 <span class="k">threaded_once</span>(<span class="o">@</span>callable, <span class="o">--</span>nonvar) <span class="o">-</span> one
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">Goal is a variable:</div>
@@ -267,8 +268,8 @@ as opaque terms; users shall not rely on its type.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(variable,</span> <span class="pre">Goal)</span></code></div>
 </div>
 </div>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">Prove <code class="docutils literal notranslate"><span class="pre">Goal</span></code> asynchronously in a new thread:</div>
@@ -294,8 +295,8 @@ as opaque terms; users shall not rely on its type.</p>
 <a class="reference internal" href="threaded_1.html#predicates-threaded-1"><span class="std std-ref">threaded/1</span></a>,
 <a class="reference internal" href="../directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

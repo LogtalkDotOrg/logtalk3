@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>General &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -210,7 +211,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="general">
+  <section id="general">
 <span id="faq-general"></span><h1>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#faq-general-versions"><span class="std std-ref">Why are all versions of Logtalk numbered 2.x or 3.x?</span></a></p></li>
@@ -218,7 +219,7 @@
 <li><p><a class="reference internal" href="#faq-general-modules"><span class="std std-ref">Is the Logtalk implementation based on Prolog modules?</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-general-expansion"><span class="std std-ref">Does the Logtalk implementation use term-expansion?</span></a></p></li>
 </ul>
-<div class="section" id="why-are-all-versions-of-logtalk-numbered-2-x-or-3-x">
+<section id="why-are-all-versions-of-logtalk-numbered-2-x-or-3-x">
 <span id="faq-general-versions"></span><h2>Why are all versions of Logtalk numbered 2.x or 3.x?<a class="headerlink" href="#why-are-all-versions-of-logtalk-numbered-2-x-or-3-x" title="Permalink to this headline">¶</a></h2>
 <p>The numbers “2” and “3” in the Logtalk version string refers to,
 respectively, the second and the third generations of the Logtalk
@@ -228,8 +229,8 @@ beta on October. The first stable version of Logtalk 2 was released
 on February 9, 1999. Development of Logtalk 3 started on April 2012,
 with the first public alpha released on August 21, 2012. The first
 stable version of Logtalk 3 was released on January 7, 2015.</p>
-</div>
-<div class="section" id="why-do-i-need-a-prolog-compiler-to-use-logtalk">
+</section>
+<section id="why-do-i-need-a-prolog-compiler-to-use-logtalk">
 <span id="faq-general-prolog"></span><h2>Why do I need a Prolog compiler to use Logtalk?<a class="headerlink" href="#why-do-i-need-a-prolog-compiler-to-use-logtalk" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the Logtalk language is implemented as a Prolog extension
 instead of as a standalone compiler. Compilation of Logtalk source
@@ -239,8 +240,8 @@ called by Logtalk to compile the intermediate Prolog file generated
 on the first step. The implementation of Logtalk as a Prolog
 extension allows users to use Logtalk together with features only
 available on specific Prolog compilers.</p>
-</div>
-<div class="section" id="is-the-logtalk-implementation-based-on-prolog-modules">
+</section>
+<section id="is-the-logtalk-implementation-based-on-prolog-modules">
 <span id="faq-general-modules"></span><h2>Is the Logtalk implementation based on Prolog modules?<a class="headerlink" href="#is-the-logtalk-implementation-based-on-prolog-modules" title="Permalink to this headline">¶</a></h2>
 <p>No. Logtalk is (currently) implemented is plain Prolog code. Only a
 few Prolog compilers include a module system, with several
@@ -250,13 +251,13 @@ the Prolog community. Nevertheless, the Logtalk compiler is able to
 compile simple modules (using a common subset of module directives)
 as objects for backward-compatibility with existing code (see the
 <a class="reference internal" href="../userman/migration.html#migration-migration"><span class="std std-ref">Prolog integration and migration</span></a> for details).</p>
-</div>
-<div class="section" id="does-the-logtalk-implementation-use-term-expansion">
+</section>
+<section id="does-the-logtalk-implementation-use-term-expansion">
 <span id="faq-general-expansion"></span><h2>Does the Logtalk implementation use term-expansion?<a class="headerlink" href="#does-the-logtalk-implementation-use-term-expansion" title="Permalink to this headline">¶</a></h2>
 <p>No. Term-expansion mechanisms are not standard and are not available
 in all supported Prolog compilers.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

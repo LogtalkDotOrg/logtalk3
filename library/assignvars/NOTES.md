@@ -34,7 +34,7 @@ SWI-Prolog, and YAP.
 
 For more information on assignvars, please consult the URL:
 
-	http://www.kprolog.com/en/logical_assignment/
+https://web.archive.org/web/20160818050049/http://www.kprolog.com/en/logical_assignment/
 
 The representation of assignable terms should be regarded as an opaque term and
 only accessed using the library predicates.

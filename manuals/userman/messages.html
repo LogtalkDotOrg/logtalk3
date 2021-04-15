@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Messages &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -225,7 +226,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="messages">
+  <section id="messages">
 <span id="messages-messages"></span><h1>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h1>
 <p>Messages allows us to ask an object to prove a goal and must always match a
 declared predicate within the scope of the <em>sender</em> object. Note that sending
@@ -247,7 +248,7 @@ used interchangeably when referring to a declared predicate that is part of
 an object interface. Likewise, the terms <em>predicate</em> and <em>method</em> are used
 interchangeably when referring to the predicate definition (inside an object
 or category) that is called to answer a message.</p>
-<div class="section" id="operators-used-in-message-sending">
+<section id="operators-used-in-message-sending">
 <span id="messages-operators"></span><h2>Operators used in message sending<a class="headerlink" href="#operators-used-in-message-sending" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk declares the following operators for the message sending control
 constructs:</p>
@@ -261,8 +262,8 @@ compiler and runtime files are loaded) until the end of the Prolog
 session (this is the usual behavior of most Prolog compilers). Note that
 these operator definitions are compatible with the predefined operators
 in the Prolog ISO standard.</p>
-</div>
-<div class="section" id="sending-a-message-to-an-object">
+</section>
+<section id="sending-a-message-to-an-object">
 <span id="messages-sending"></span><h2>Sending a message to an object<a class="headerlink" href="#sending-a-message-to-an-object" title="Permalink to this headline">¶</a></h2>
 <p>Sending a message to an object is accomplished by using the
 <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct:</p>
@@ -274,8 +275,8 @@ object. The message may also correspond to a protected or private
 predicate if the <em>sender</em> matches the predicate scope container. If the
 predicate is declared but not defined, the message simply fails (as per
 the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
-</div>
-<div class="section" id="delegating-a-message-to-an-object">
+</section>
+<section id="delegating-a-message-to-an-object">
 <span id="messages-delegating"></span><h2>Delegating a message to an object<a class="headerlink" href="#delegating-a-message-to-an-object" title="Permalink to this headline">¶</a></h2>
 <p>It is also possible to send a message to an object while preserving the
 original <em>sender</em> by using the <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> delegation
@@ -287,8 +288,8 @@ control construct:</p>
 (in the top-level interpreter, the <em>sender</em> is always the pseudo-object
 <code class="docutils literal notranslate"><span class="pre">user</span></code> so using this control construct would be equivalent to use the
 <code class="docutils literal notranslate"><span class="pre">::/2</span></code> message sending control construct).</p>
-</div>
-<div class="section" id="sending-a-message-to-self">
+</section>
+<section id="sending-a-message-to-self">
 <h2>Sending a message to <em>self</em><a class="headerlink" href="#sending-a-message-to-self" title="Permalink to this headline">¶</a></h2>
 <p>While defining a predicate, we sometimes need to send a message to
 <em>self</em>, i.e., to the same object that has received the original message.
@@ -303,8 +304,8 @@ otherwise an error will be thrown. If the message is sent from inside a
 category or if we are using private inheritance, then the message may also
 match a private predicate. Again, if the predicate is declared but not
 defined, the message simply fails (as per the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
-</div>
-<div class="section" id="broadcasting">
+</section>
+<section id="broadcasting">
 <span id="messages-broadcasting"></span><h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this headline">¶</a></h2>
 <p>In the Logtalk context, <em>broadcasting</em> is interpreted as the sending of
 several messages to the same object. This can be achieved by using the
@@ -322,8 +323,8 @@ we wish to send several messages to the same object, we can write:</p>
 </div>
 <p>This extended syntax may also be used with the <code class="docutils literal notranslate"><span class="pre">::/1</span></code> message sending
 control construct.</p>
-</div>
-<div class="section" id="calling-imported-and-inherited-predicates">
+</section>
+<section id="calling-imported-and-inherited-predicates">
 <span id="messages-super"></span><h2>Calling imported and inherited predicates<a class="headerlink" href="#calling-imported-and-inherited-predicates" title="Permalink to this headline">¶</a></h2>
 <p>When redefining a predicate, sometimes we need to call the inherited
 definition in the new code. This functionality, introduced by the
@@ -348,8 +349,8 @@ predicates to be called with the same performance of local predicates.
 As with the message sending control constructs, the <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> call simply
 fails when the predicate is declared but not defined (as per the
 <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
-</div>
-<div class="section" id="message-sending-and-event-generation">
+</section>
+<section id="message-sending-and-event-generation">
 <span id="messages-events"></span><h2>Message sending and event generation<a class="headerlink" href="#message-sending-and-event-generation" title="Permalink to this headline">¶</a></h2>
 <p>Assuming the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for the
 object (or category) sending a message using the
@@ -391,8 +392,8 @@ containing the predicate definition, we can write:</p>
 or on a per entity basis by using the <code class="docutils literal notranslate"><span class="pre">events</span></code> compiler flag to optimize
 message sending performance (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more
 details).</p>
-</div>
-<div class="section" id="sending-a-message-from-a-module">
+</section>
+<section id="sending-a-message-from-a-module">
 <span id="messages-from-module"></span><h2>Sending a message from a module<a class="headerlink" href="#sending-a-message-from-a-module" title="Permalink to this headline">¶</a></h2>
 <p>Messages can be sent to object from within a Prolog module. Depending on
 the backend Prolog system and on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag
@@ -408,13 +409,13 @@ at the top-level interpreter, be careful to check first if the goal
 is pre-compiled to use static binding, otherwise you will also be
 benchmarking the Logtalk compiler itself.</p>
 </div>
-</div>
-<div class="section" id="message-sending-performance">
+</section>
+<section id="message-sending-performance">
 <span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Permalink to this headline">¶</a></h2>
 <p>For a detailed discussion on message sending performance, see the
 <a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">Performance</span></a> section.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

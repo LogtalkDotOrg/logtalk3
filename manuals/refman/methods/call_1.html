@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>call//1-N &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -224,9 +225,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="call-1-n">
+  <section id="call-1-n">
 <span id="methods-call-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">call//1-N</span></code><a class="headerlink" href="#call-1-n" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">call</span>(<span class="nv">Closure</span>)
 <span class="k">call</span>(<span class="nv">Closure</span>, <span class="nv">Arg1</span>, ...)
@@ -250,8 +251,8 @@ calls in the format <code class="docutils literal notranslate"><span class="pre"
 as argument a <a class="reference internal" href="../../glossary.html#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>, this built-in non-terminal can
 provide controlled access to the input list of tokens and to the list of
 the remaining tokens processed by the grammar rule containing the call.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">call</span>(<span class="o">+</span>callable) <span class="o">-</span> zero_or_more
 <span class="k">call</span>(<span class="o">+</span>callable, <span class="o">?</span>term) <span class="o">-</span> zero_or_more
@@ -259,8 +260,8 @@ the remaining tokens processed by the grammar rule containing the call.</p>
 ...
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Closure</span></code> is a variable:</div>
@@ -272,8 +273,8 @@ the remaining tokens processed by the grammar rule containing the call.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Closure)</span></code></div>
 </div>
 </div>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">Calls a goal, constructed by appending the tokens difference list to the closure, in in the context of the object or category containing the call:</div>
@@ -300,8 +301,8 @@ the remaining tokens processed by the grammar rule containing the call.</p>
 <a class="reference internal" href="phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a>,
 <a class="reference internal" href="phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>dead_code_scanner &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -221,7 +222,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dead-code-scanner">
+  <section id="dead-code-scanner">
 <h1><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code><a class="headerlink" href="#dead-code-scanner" title="Permalink to this headline">¶</a></h1>
 <p>This tool detects <em>likely</em> dead code in Logtalk entities and in Prolog
 modules compiled as objects. Predicates (and non-terminals) are
@@ -249,28 +250,28 @@ the default translations for the messages printed when scanning for dead
 code. These messages can be intercepted to customize output, e.g. to
 make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#dead-code-scanner">../../docs/library_index.html#dead-code-scanner</a></p>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dead_code_scanner(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(dead_code_scanner(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>This tool provides a set of predicates that allows scanning entities,
 libraries, files, and directories. See the tool API documentation for
@@ -301,14 +302,14 @@ single entity:</p>
 </div>
 <p>For other usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
-</div>
-<div class="section" id="integration-with-the-make-tool">
+</section>
+<section id="integration-with-the-make-tool">
 <h2>Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool<a class="headerlink" href="#integration-with-the-make-tool" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file sets a make target action that will call the
 <code class="docutils literal notranslate"><span class="pre">dead_code_scanner::all</span></code> goal whenever the <code class="docutils literal notranslate"><span class="pre">logtalk_make(check)</span></code>
 goal (or its top-level abbreviation, <code class="docutils literal notranslate"><span class="pre">{?}</span></code>) is called.</p>
-</div>
-<div class="section" id="caveats">
+</section>
+<section id="caveats">
 <h2>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h2>
 <p>Use of local meta-calls with goal arguments only known at runtime can
 result in false positives. When using library or user-defined
@@ -316,8 +317,8 @@ meta-predicates, compilation of the source files with the <code class="docutils 
 flag turned on may allow meta-calls to be resolved at compile time and
 thus allow calling information for the meta-arguments to be recorded,
 avoiding false positives for predicates that are only meta-called.</p>
-</div>
-<div class="section" id="scanning-prolog-modules">
+</section>
+<section id="scanning-prolog-modules">
 <h2>Scanning Prolog modules<a class="headerlink" href="#scanning-prolog-modules" title="Permalink to this headline">¶</a></h2>
 <p>This tool can also be applied to Prolog modules that Logtalk is able to
 compile as objects. For example, if the Prolog module file is named
@@ -328,8 +329,8 @@ compile as objects. For example, if the Prolog module file is named
 <p>Due to the lack of standardization of module systems and the abundance
 of proprietary extensions, this solution is not expected to work for all
 cases.</p>
-</div>
-<div class="section" id="scanning-plain-prolog-files">
+</section>
+<section id="scanning-plain-prolog-files">
 <h2>Scanning plain Prolog files<a class="headerlink" href="#scanning-plain-prolog-files" title="Permalink to this headline">¶</a></h2>
 <p>This tool can also be applied to plain Prolog code. For example, if the
 Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an object including its
@@ -355,8 +356,8 @@ the Prolog file and then load it in debug mode:</p>
 <p>With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog from
 being fully analyzed when wrapped by an object.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

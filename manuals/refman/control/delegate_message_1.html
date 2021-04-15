@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>[]/1 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -212,9 +213,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="control-delegate-message-1">
+  <section id="control-delegate-message-1">
 <span id="index-0"></span><span id="id1"></span><h1><code class="docutils literal notranslate"><span class="pre">[]/1</span></code><a class="headerlink" href="#control-delegate-message-1" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[<span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>]
 [<span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>]
@@ -233,15 +234,15 @@ results in an error. The remaining error conditions are the same as the
 <p>Note that, despite the correct functor for this control construct being
 (traditionally) <code class="docutils literal notranslate"><span class="pre">'.'/2</span></code>, we refer to it as <code class="docutils literal notranslate"><span class="pre">[]/1</span></code> simply to
 emphasize that the syntax is a list with a single element.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>[<span class="o">+</span>object_identifier<span class="o">::+</span>callable] <span class="o">-</span> zero_or_more
 [<span class="k">{</span><span class="o">+</span>object_identifier<span class="k">}</span><span class="o">::+</span>callable] <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
@@ -295,8 +296,8 @@ emphasize that the syntax is a list with a single element.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
 </div>
 </div>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% delegate unknown messages to the &quot;backup&quot; object:</span>
 <span class="k">forward</span>(<span class="nv">Message</span>) <span class="o">:-</span>
@@ -310,8 +311,8 @@ emphasize that the syntax is a list with a single element.</p>
 <a class="reference internal" href="call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>,
 <a class="reference internal" href="../methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

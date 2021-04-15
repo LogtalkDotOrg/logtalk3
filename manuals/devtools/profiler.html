@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>profiler &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -217,10 +218,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="profiler">
+  <section id="profiler">
 <h1><code class="docutils literal notranslate"><span class="pre">profiler</span></code><a class="headerlink" href="#profiler" title="Permalink to this headline">¶</a></h1>
 <p>This tool contains simple wrappers for selected Prolog profiler tools.</p>
-<div class="section" id="loading">
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(loader)).
@@ -228,15 +229,15 @@
 </div>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="supported-backend-prolog-compilers">
+</section>
+<section id="supported-backend-prolog-compilers">
 <h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Permalink to this headline">¶</a></h2>
 <p>Currently, this tool supports the profilers provided with SICStus Prolog
 4, SWI-Prolog, and YAP. The tool includes two files:</p>
@@ -288,8 +289,8 @@ with functors such as <code class="docutils literal notranslate"><span class="pr
 implement inheritance, may still be listed in a few cases. Note that the
 time and the number of calls/redos of concealed predicates is added to
 the caller predicates.</p>
-</div>
-<div class="section" id="compiling-source-code-for-profiling">
+</section>
+<section id="compiling-source-code-for-profiling">
 <h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this headline">¶</a></h2>
 <p>In order to get user-level object and predicate names instead of
 compiler generated internal names when using the SWI-Prolog and YAP
@@ -300,8 +301,8 @@ the default <code class="docutils literal notranslate"><span class="pre">$</span
 </div>
 <p>See also the <code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> file for automating the necessary
 setup at Logtalk startup.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

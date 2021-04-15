@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>base64 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -245,34 +246,34 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="base64">
+  <section id="base64">
 <h1><code class="docutils literal notranslate"><span class="pre">base64</span></code><a class="headerlink" href="#base64" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">base64</span></code> library provides predicates for parsing and generating
 data in the Base64 and Base64URL formats as per the specification found
 at:</p>
 <p><a class="reference external" href="https://tools.ietf.org/html/rfc4648">https://tools.ietf.org/html/rfc4648</a></p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#base64">../../docs/library_index.html#base64</a>
 link in a web browser.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
 file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(base64(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(base64(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="encoding">
+</section>
+<section id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
 <p>Encoding a list of bytes in Base64 format is accomplished by the
 <code class="docutils literal notranslate"><span class="pre">base64::generate/2</span></code> predicate. For example:</p>
@@ -300,8 +301,8 @@ yes
 </div>
 <p>The Base64URL can also be represented using a list of chars or a list of
 codes. The input URL should be in the same format.</p>
-</div>
-<div class="section" id="decoding">
+</section>
+<section id="decoding">
 <h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h2>
 <p>Decoding of Base64 data is accomplished using the <code class="docutils literal notranslate"><span class="pre">base64::parse/2</span></code>
 predicate. For example:</p>
@@ -329,8 +330,8 @@ yes
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">base64url::parse/2</span></code> predicate also accepts a list of chars or a
 list of codes as input. See the API documentation for details.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

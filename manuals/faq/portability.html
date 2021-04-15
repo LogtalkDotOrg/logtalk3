@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Portability &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -208,13 +209,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="portability">
+  <section id="portability">
 <span id="faq-portability"></span><h1>Portability<a class="headerlink" href="#portability" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#faq-portability-prolog"><span class="std std-ref">Are my Logtalk applications portable across Prolog compilers?</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-portability-os"><span class="std std-ref">Are my Logtalk applications portable across operating systems?</span></a></p></li>
 </ul>
-<div class="section" id="are-my-logtalk-applications-portable-across-prolog-compilers">
+<section id="are-my-logtalk-applications-portable-across-prolog-compilers">
 <span id="faq-portability-prolog"></span><h2>Are my Logtalk applications portable across Prolog compilers?<a class="headerlink" href="#are-my-logtalk-applications-portable-across-prolog-compilers" title="Permalink to this headline">¶</a></h2>
 <p>Yes, as long you don’t use built-in predicates or special features
 only available on some Prolog compilers. There is a
@@ -226,8 +227,8 @@ platform or compiler dependent code to a small number of objects with
 clearly defined protocols. You may also use Logtalk support for
 conditional compilation to compile different entity or predicate
 definitions depending on the backend Prolog compiler being used.</p>
-</div>
-<div class="section" id="are-my-logtalk-applications-portable-across-operating-systems">
+</section>
+<section id="are-my-logtalk-applications-portable-across-operating-systems">
 <span id="faq-portability-os"></span><h2>Are my Logtalk applications portable across operating systems?<a class="headerlink" href="#are-my-logtalk-applications-portable-across-operating-systems" title="Permalink to this headline">¶</a></h2>
 <p>Yes, as long you don’t use built-in predicates or special features
 that your chosen backend Prolog compiler only supports in some
@@ -236,8 +237,8 @@ of your source files to match the ones on the target operating system
 and the expectations of your Prolog compiler. Some Prolog compilers
 silently fail to compile source files with the wrong end-of-lines
 characters.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

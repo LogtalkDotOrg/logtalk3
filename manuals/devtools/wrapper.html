@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>wrapper &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -218,7 +219,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="wrapper">
+  <section id="wrapper">
 <h1><code class="docutils literal notranslate"><span class="pre">wrapper</span></code><a class="headerlink" href="#wrapper" title="Permalink to this headline">¶</a></h1>
 <p>This is a prototype tool to help port a plain Prolog application to
 Logtalk. It can also be used to enable applying other Logtalk developer
@@ -234,19 +235,19 @@ object opening and closing directives to the Prolog files). The wrapper
 objects use <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives to include the Prolog files and can
 be loaded for testing and for use with other tools. The wrapped Prolog
 files are not modified and thus require only read permission.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#wrapper">../../docs/library_index.html#wrapper</a></p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(wrapper(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="workflows">
+</section>
+<section id="workflows">
 <h2>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h2>
 <p>The typical porting workflow is simply:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> wrapper<span class="o">::</span>rdirectory(root_directory_of_prolog_code).
@@ -257,8 +258,8 @@ files are not modified and thus require only read permission.</p>
 </div>
 <p>See the next section on how to customize the API calls for more flexible
 processing.</p>
-</div>
-<div class="section" id="customization">
+</section>
+<section id="customization">
 <h2>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
 <p>The tool can be customized by extending the <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> object. A common
 scenario is when wrapping plain Prolog code just to take advantage, for
@@ -299,8 +300,8 @@ files (default is <code class="docutils literal notranslate"><span class="pre">t
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="current-limitations">
+</section>
+<section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>The tool cannot deal with syntax errors in the Prolog files. These
@@ -318,8 +319,8 @@ the name conflicts must be manually solved before using the tool.</p></li>
 <li><p>There isn’t yet any support for dealing with meta-predicates and
 advise on missing meta-predicate directives.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Dynamic object attributes &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -202,7 +203,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dynamic-object-attributes">
+  <section id="dynamic-object-attributes">
 <h1>Dynamic object attributes<a class="headerlink" href="#dynamic-object-attributes" title="Permalink to this headline">¶</a></h1>
 <p>In this example, we will illustrate the use of:</p>
 <ul class="simple">
@@ -212,7 +213,7 @@
 </ul>
 <p>by defining a category that implements a set of predicates for handling
 dynamic object attributes.</p>
-<div class="section" id="defining-a-category">
+<section id="defining-a-category">
 <span id="category"></span><h2>Defining a category<a class="headerlink" href="#defining-a-category" title="Permalink to this headline">¶</a></h2>
 <p>We want to define a set of predicates to handle dynamic object
 attributes. We need public predicates to set, get, and delete
@@ -297,8 +298,8 @@ directives inside a protocol that will be implemented by the category:</p>
 </div>
 <p>Any protocol can be implemented by either an object, a category, or
 both.</p>
-</div>
-<div class="section" id="importing-the-category">
+</section>
+<section id="importing-the-category">
 <span id="importing"></span><h2>Importing the category<a class="headerlink" href="#importing-the-category" title="Permalink to this headline">¶</a></h2>
 <p>We reuse a category’s predicates by importing them into an object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(person,
@@ -326,8 +327,8 @@ Attribute = gender, Value = male ;
 no
 </pre></div>
 </div>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Categories are similar to objects: we just write our predicate
@@ -341,8 +342,8 @@ unrelated, objects without being constrained by inheritance
 relations. Thus, categories can be interpreted as object building
 components.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>nested_dictionaries &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -104,7 +105,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents</span></p>
+              <p><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -245,7 +246,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nested-dictionaries">
+  <section id="nested-dictionaries">
 <h1><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code><a class="headerlink" href="#nested-dictionaries" title="Permalink to this headline">¶</a></h1>
 <p>This library provides nested dictionary implementations based on private
 extensions to the <code class="docutils literal notranslate"><span class="pre">dictionaries</span></code> library objects. The representations
@@ -253,27 +254,27 @@ of a nested dictionary should be regarded as opaque terms and only
 accessed using the library predicates.</p>
 <p>This library is experimental, a work in progress, and future versions
 can introduce incompatible changes.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#nested_dictionaries">../../docs/library_index.html#nested_dictionaries</a>
 link in a web browser.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(nested_dictionaries(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(nested_dictionaries(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>First, select the nested dictionary implementation that you want to use.
 For cases where the number of elements is relatively small and
@@ -320,8 +321,8 @@ yes
 </div>
 <p>For details on these and other provided predicates, consult the library
 API documentation.</p>
-</div>
-<div class="section" id="curly-term-representation">
+</section>
+<section id="curly-term-representation">
 <h2>Curly term representation<a class="headerlink" href="#curly-term-representation" title="Permalink to this headline">¶</a></h2>
 <p>To simplify importing and exporting data into a nested dictionary, the
 library provides <code class="docutils literal notranslate"><span class="pre">as_nested_dictionary/2</span></code> and <code class="docutils literal notranslate"><span class="pre">as_curly_bracketed/2</span></code>
@@ -331,8 +332,8 @@ based on the JSON data interchange format.</p>
 conjunction of <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code> or <code class="docutils literal notranslate"><span class="pre">Key:Value</span></code> pairs and <code class="docutils literal notranslate"><span class="pre">Value</span></code> can be
 a nested dictionary or lists of pairs. An empty dictionary is
 represented using the <code class="docutils literal notranslate"><span class="pre">{}</span></code> term.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
