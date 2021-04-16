@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.7.64 and later versions
-%  Last updated on April 9, 2021
+%  Adapter file for Trealla Prolog 1.8.19 and later versions
+%  Last updated on April 16, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -123,7 +123,9 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
+'$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
 '$lgt_prolog_meta_predicate'(call_nth(_, _), call_nth(0, *), predicate).
+'$lgt_prolog_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
 '$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
 '$lgt_prolog_meta_predicate'(task(_), task(0), predicate).
 '$lgt_prolog_meta_predicate'(task(_, _), task(1, *), predicate).
@@ -223,7 +225,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 7, 64))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 8, 19))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
