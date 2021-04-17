@@ -23,49 +23,42 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-10-27,
+		date is 2021-04-17,
 		comment is 'Unit tests for the ISO Prolog standard atom_concat/3 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.2.4
 
-	succeeds(iso_atom_concat_3_01) :-
-		{atom_concat('hello', ' world', S3)},
-		S3 == 'hello world'.
+	test(iso_atom_concat_3_01, true(S3 == 'hello world')) :-
+		{atom_concat('hello', ' world', S3)}.
 
-	succeeds(iso_atom_concat_3_02) :-
-		{atom_concat(S1, ' world', 'small world')},
-		S1 == 'small'.
+	test(iso_atom_concat_3_02, true(S1 == 'small')) :-
+		{atom_concat(S1, ' world', 'small world')}.
 
-	fails(iso_atom_concat_3_03) :-
+	test(iso_atom_concat_3_03, false) :-
 		{atom_concat('hello',' world', 'small world')}.
 
-	succeeds(iso_atom_concat_3_04) :-
-		findall(T1-T2, {atom_concat(T1, T2, 'hello')}, L),
-		L == [''-'hello', 'h'-'ello', 'he'-'llo', 'hel'-'lo', 'hell'-'o', 'hello'-''].
+	test(iso_atom_concat_3_04, true(L == [''-'hello', 'h'-'ello', 'he'-'llo', 'hel'-'lo', 'hell'-'o', 'hello'-''])) :-
+		findall(T1-T2, {atom_concat(T1, T2, 'hello')}, L).
 
-	throws(iso_atom_concat_3_05, error(instantiation_error,_)) :-
+	test(iso_atom_concat_3_05, error(instantiation_error)) :-
 		{atom_concat(small, _V2, _V4)}.
 
-	throws(eddbali_atom_concat_3_06, error(instantiation_error,_)) :-
+	test(eddbali_atom_concat_3_06, error(instantiation_error)) :-
 		{atom_concat(_A, 'iso', _C)}.
 
-	throws(eddbali_atom_concat_3_07, error(instantiation_error,_)) :-
+	test(eddbali_atom_concat_3_07, error(instantiation_error)) :-
 		{atom_concat('iso', _B, _C)}.
 
-	throws(eddbali_atom_concat_3_08, error(type_error(atom,f(a)),_)) :-
+	test(eddbali_atom_concat_3_08, error(type_error(atom,f(a)))) :-
 		{atom_concat(f(a), 'iso', _C)}.
 
-	throws(eddbali_atom_concat_3_09, error(type_error(atom,f(a)),_)) :-
+	test(eddbali_atom_concat_3_09, error(type_error(atom,f(a)))) :-
 		{atom_concat('iso', f(a), _C)}.
 
-	throws(eddbali_atom_concat_3_10, error(type_error(atom,f(a)),_)) :-
+	test(eddbali_atom_concat_3_10, error(type_error(atom,f(a)))) :-
 		{atom_concat(_A, _B, f(a))}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
@@ -74,30 +67,24 @@
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- succeeds(sics_atom_concat_3_11) :-
-		{atom_concat('Bartók ', 'Béla', N)},
-		N == 'Bartók Béla'.
+	- test(sics_atom_concat_3_11, true(N == 'Bartók Béla')) :-
+		{atom_concat('Bartók ', 'Béla', N)}.
 
-	- succeeds(sics_atom_concat_3_12) :-
-		{atom_concat(N, 'Béla', 'Bartók Béla')},
-		N == 'Bartók '.
+	- test(sics_atom_concat_3_12, true(N == 'Bartók ')) :-
+		{atom_concat(N, 'Béla', 'Bartók Béla')}.
 
-	- succeeds(sics_atom_concat_3_13) :-
-		{atom_concat('Bartók ', N, 'Bartók Béla')},
-		N == 'Béla'.
+	- test(sics_atom_concat_3_13, true(N == 'Béla')) :-
+		{atom_concat('Bartók ', N, 'Bartók Béla')}.
 
-	- succeeds(sics_atom_concat_3_14) :-
-		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L),
-		L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''].
+	- test(sics_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''])) :-
+		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L).
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_atom_concat_3_15) :-
-		{atom_concat(A, '.', '.')},
-		A == ''.
+	test(lgt_atom_concat_3_15, true(A == '')) :-
+		{atom_concat(A, '.', '.')}.
 
-	succeeds(lgt_atom_concat_3_16) :-
-		{atom_concat('.', A, '.')},
-		A == ''.
+	test(lgt_atom_concat_3_16, true(A == '')) :-
+		{atom_concat('.', A, '.')}.
 
 :- end_object.
