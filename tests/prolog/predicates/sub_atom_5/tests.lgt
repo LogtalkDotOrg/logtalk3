@@ -23,155 +23,134 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-13,
+		date is 2021-04-17,
 		comment is 'Unit tests for the ISO Prolog standard integer/1 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.3.4
 
-	succeeds(iso_sub_atom_5_01) :-
-		{sub_atom(abracadabra, 0, 5, _, S2)},
-		S2 == 'abrac'.
+	test(iso_sub_atom_5_01, true(S2 == 'abrac')) :-
+		{sub_atom(abracadabra, 0, 5, _, S2)}.
 
-	succeeds(iso_sub_atom_5_02) :-
-		{sub_atom(abracadabra, _, 5, 0, S2)},
-		S2 == 'dabra'.
+	test(iso_sub_atom_5_02, true(S2 == 'dabra')) :-
+		{sub_atom(abracadabra, _, 5, 0, S2)}.
 
-	succeeds(iso_sub_atom_5_03) :-
-		{sub_atom(abracadabra, 3, Length, 3, S2)},
-		Length == 5, S2 == 'acada'.
+	test(iso_sub_atom_5_03, true(Length-S2 == 5-'acada')) :-
+		{sub_atom(abracadabra, 3, Length, 3, S2)}.
 
-	succeeds(iso_sub_atom_5_04) :-
-		findall(Before-After, {sub_atom(abracadabra,Before,2,After,ab)}, L),
-		L == [0-9, 7-2].
+	test(iso_sub_atom_5_04, true(L == [0-9, 7-2])) :-
+		findall(Before-After, {sub_atom(abracadabra,Before,2,After,ab)}, L).
 
-	succeeds(iso_sub_atom_5_05) :-
-		{sub_atom('Banana', 3, 2, _, S2)},
-		S2 == 'an'.
+	test(iso_sub_atom_5_05, true(S2 == 'an')) :-
+		{sub_atom('Banana', 3, 2, _, S2)}.
 
-	succeeds(iso_sub_atom_5_06) :-
-		findall(S2, {sub_atom('charity',_,3,_,S2)}, L),
-		L == ['cha', 'har', 'ari', 'rit', 'ity'].
+	test(iso_sub_atom_5_06, true(L == ['cha', 'har', 'ari', 'rit', 'ity'])) :-
+		findall(S2, {sub_atom('charity',_,3,_,S2)}, L).
 
-	succeeds(iso_sub_atom_5_07) :-
-		findall(Start-Lenght-SubAtom, {sub_atom('ab',Start,Lenght,_,SubAtom)}, L),
-		L == [0-0-'', 0-1-'a', 0-2-'ab', 1-0-'', 1-1-'b', 2-0-''].
+	test(iso_sub_atom_5_07, true(L == [0-0-'', 0-1-'a', 0-2-'ab', 1-0-'', 1-1-'b', 2-0-''])) :-
+		findall(Start-Lenght-SubAtom, {sub_atom('ab',Start,Lenght,_,SubAtom)}, L).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_sub_atom_5_08, error(instantiation_error,_)) :-
+	test(eddbali_sub_atom_5_08, error(instantiation_error)) :-
 		{sub_atom(_Banana, 3, 2, _, _S)}.
 
-	throws(eddbali_sub_atom_5_09, error(type_error(atom,f(a)),_)) :-
+	test(eddbali_sub_atom_5_09, error(type_error(atom,f(a)))) :-
 		{sub_atom(f(a), 2, 2, _, _S2)}.
 
-	throws(eddbali_sub_atom_5_10, error(type_error(atom,2),_)) :-
+	test(eddbali_sub_atom_5_10, error(type_error(atom,2))) :-
 		{sub_atom('Banana', 4, 2, _, 2)}.
 
-	throws(eddbali_sub_atom_5_11, error(type_error(integer,a),_)) :-
+	test(eddbali_sub_atom_5_11, error(type_error(integer,a))) :-
 		{sub_atom('Banana', a, 2, _, _)}.
 
-	throws(eddbali_sub_atom_5_12, error(type_error(integer,n),_)) :-
+	test(eddbali_sub_atom_5_12, error(type_error(integer,n))) :-
 		{sub_atom('Banana', 4, n, _, _)}.
 
-	throws(eddbali_sub_atom_5_13, error(type_error(integer,m),_)) :-
+	test(eddbali_sub_atom_5_13, error(type_error(integer,m))) :-
 		{sub_atom('Banana', 4, _, m, _)}.
 
-	throws(sics_sub_atom_5_14, error(domain_error(not_less_than_zero,-2),_)) :-
-		{sub_atom('Banana', -2, 3, 4,_)}.
+	test(sics_sub_atom_5_14, error(domain_error(not_less_than_zero,-2))) :-
+		{sub_atom('Banana', -2, 3, 4, _)}.
 
-	throws(sics_sub_atom_5_15, error(domain_error(not_less_than_zero,-3),_)) :-
-		{sub_atom('Banana', 2, -3, 4,_)}.
+	test(sics_sub_atom_5_15, error(domain_error(not_less_than_zero,-3))) :-
+		{sub_atom('Banana', 2, -3, 4, _)}.
 
-	throws(sics_sub_atom_5_16, error(domain_error(not_less_than_zero,-4),_)) :-
-		{sub_atom('Banana', 2, 3, -4,_)}.
+	test(sics_sub_atom_5_16, error(domain_error(not_less_than_zero,-4))) :-
+		{sub_atom('Banana', 2, 3, -4, _)}.
 
-	succeeds(sics_sub_atom_5_17) :-
-		{sub_atom('Banana', 2, 3, A, 'nan')},
-		A == 1.
+	test(sics_sub_atom_5_17, true(A == 1)) :-
+		{sub_atom('Banana', 2, 3, A, 'nan')}.
 
-	succeeds(sics_sub_atom_5_18) :-
-		{sub_atom('Banana', B, 3, 1, 'nan')},
-		B == 2.
+	test(sics_sub_atom_5_18, true(B == 2)) :-
+		{sub_atom('Banana', B, 3, 1, 'nan')}.
 
-	succeeds(sics_sub_atom_5_19) :-
-		{sub_atom('Banana', 2, L, 1, 'nan')},
-		L == 3.
+	test(sics_sub_atom_5_19, true(L == 3)) :-
+		{sub_atom('Banana', 2, L, 1, 'nan')}.
 
-	succeeds(sics_sub_atom_5_20) :-
-		{sub_atom('Banana', 2, L, A, 'nan')},
-		A == 1, L == 3.
+	test(sics_sub_atom_5_20, true(A-L == 1-3)) :-
+		{sub_atom('Banana', 2, L, A, 'nan')}.
 
-	succeeds(sics_sub_atom_5_21) :-
-		{sub_atom('Banana', B, L, 1, 'nan')},
-		B == 2, L == 3.
+	test(sics_sub_atom_5_21, true(B-L == 2-3)) :-
+		{sub_atom('Banana', B, L, 1, 'nan')}.
 
-	fails(sics_sub_atom_5_22) :-
+	test(sics_sub_atom_5_22, false) :-
 		{sub_atom('Banana', 2, 3, 1, 'ana')}.
 
-	fails(sics_sub_atom_5_23) :-
+	test(sics_sub_atom_5_23, false) :-
 		{sub_atom('Banana', 2, 3, 2, 'nan')}.
 
-	fails(sics_sub_atom_5_24) :-
+	test(sics_sub_atom_5_24, false) :-
 		{sub_atom('Banana', 2, 3, 2, _)}.
 
-	fails(sics_sub_atom_5_25) :-
+	test(sics_sub_atom_5_25, false) :-
 		{sub_atom('Banana', 2, 3, 1, 'anan')}.
 
-	fails(sics_sub_atom_5_26) :-
+	test(sics_sub_atom_5_26, false) :-
 		{sub_atom('Banana', 0, 7, 0, _)}.
 
-	fails(sics_sub_atom_5_27) :-
+	test(sics_sub_atom_5_27, false) :-
 		{sub_atom('Banana', 7, 0, 0, _)}.
 
-	fails(sics_sub_atom_5_28) :-
+	test(sics_sub_atom_5_28, false) :-
 		{sub_atom('Banana', 0, 0, 7, _)}.
 
 	% the following four tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- succeeds(sics_sub_atom_5_31) :-
-		{sub_atom('Bartók Béla', 4, 2, A, S)},
-		A == 5, S == 'ók'.
+	- test(sics_sub_atom_5_31, true(A-S == 5-'ók')) :-
+		{sub_atom('Bartók Béla', 4, 2, A, S)}.
 
-	- succeeds(sics_sub_atom_5_32) :-
-		{sub_atom('Bartók Béla', 4, L, 5, S)},
-		L == 2, S == 'ók'.
+	- test(sics_sub_atom_5_32, true(L-S == 2-'ók')) :-
+		{sub_atom('Bartók Béla', 4, L, 5, S)}.
 
-	- succeeds(sics_sub_atom_5_33) :-
-		{sub_atom('Bartók Béla', B, 2, 5, S)},
-		B == 4, S == 'ók'.
+	- test(sics_sub_atom_5_33, true(B-S == 4-'ók')) :-
+		{sub_atom('Bartók Béla', B, 2, 5, S)}.
 
-	- succeeds(sics_sub_atom_5_34) :-
-		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L),
-		L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'].
+	- test(sics_sub_atom_5_34, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
+		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L).
 
-	succeeds(sics_sub_atom_5_35) :-
-		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L),
-		L == [0-4-7, 7-4-0].
+	test(sics_sub_atom_5_35, true(L == [0-4-7, 7-4-0])) :-
+		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L).
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_sub_atom_5_36) :-
+	test(lgt_sub_atom_5_36, true) :-
 		forall({sub_atom('123', _, _, _, SA)}, {atom(SA)}).
 
-	throws(lgt_sub_atom_5_37, error(type_error(atom,2),_)) :-
+	test(lgt_sub_atom_5_37, error(type_error(atom,2))) :-
 		{sub_atom(2, _, _, _, _)}.
 
-	throws(lgt_sub_atom_5_38, error(type_error(atom,2.2),_)) :-
+	test(lgt_sub_atom_5_38, error(type_error(atom,2.2))) :-
 		{sub_atom(2.2, _, _, _, _)}.
 
-	succeeds(lgt_sub_atom_5_39) :-
+	test(lgt_sub_atom_5_39, true) :-
 		{sub_atom(abc, _, _, 0, c)}.
 
-	fails(lgt_sub_atom_5_40) :-
+	test(lgt_sub_atom_5_40, false) :-
 		{sub_atom(abc, _, _, 0, d)}.
 
 :- end_object.
