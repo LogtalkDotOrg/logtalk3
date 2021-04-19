@@ -26,218 +26,258 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2021-04-17,
+		date is 2021-04-19,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
 	% atom_chars/2
 
-	test(lgt_atom_chars_2_01a, true(L == ['Γ','ε','ι','ά',' ','σ','ο','υ',' ','κ','ό','σ','μ','ε','!'])) :-
+	test(lgt_unicode_atom_chars_2_01a, true(L == ['Γ','ε','ι','ά',' ','σ','ο','υ',' ','κ','ό','σ','μ','ε','!'])) :-
 		{atom_chars('Γειά σου κόσμε!', L)}.
 
-	test(lgt_atom_chars_2_01b, true(A == 'Γειά σου κόσμε!')) :-
+	test(lgt_unicode_atom_chars_2_01b, true(A == 'Γειά σου κόσμε!')) :-
 		{atom_chars(A, ['Γ','ε','ι','ά',' ','σ','ο','υ',' ','κ','ό','σ','μ','ε','!'])}.
 
-	test(lgt_atom_chars_2_02a, true(L == ['¡','H','o','l','a',' ','m','u','n','d','o','!'])) :-
+	test(lgt_unicode_atom_chars_2_02a, true(L == ['¡','H','o','l','a',' ','m','u','n','d','o','!'])) :-
 		{atom_chars('¡Hola mundo!', L)}.
 
-	test(lgt_atom_chars_2_02b, true(A == '¡Hola mundo!')) :-
+	test(lgt_unicode_atom_chars_2_02b, true(A == '¡Hola mundo!')) :-
 		{atom_chars(A, ['¡','H','o','l','a',' ','m','u','n','d','o','!'])}.
 
-	test(lgt_atom_chars_2_03a, true(L == ['こ','ん','に','ち','は','世','界','!'])) :-
+	test(lgt_unicode_atom_chars_2_03a, true(L == ['こ','ん','に','ち','は','世','界','!'])) :-
 		{atom_chars('こんにちは世界!', L)}.
 
-	test(lgt_atom_chars_2_03b, true(A == 'こんにちは世界!')) :-
+	test(lgt_unicode_atom_chars_2_03b, true(A == 'こんにちは世界!')) :-
 		{atom_chars(A, ['こ','ん','に','ち','は','世','界','!'])}.
 
-	test(lgt_atom_chars_2_04a, true(L == ['여','보','세','요',' ','세','계','!'])) :-
+	test(lgt_unicode_atom_chars_2_04a, true(L == ['여','보','세','요',' ','세','계','!'])) :-
 		{atom_chars('여보세요 세계!', L)}.
 
-	test(lgt_atom_chars_2_04b, true(A == '여보세요 세계!')) :-
+	test(lgt_unicode_atom_chars_2_04b, true(A == '여보세요 세계!')) :-
 		{atom_chars(A, ['여','보','세','요',' ','세','계','!'])}.
 
-	test(lgt_atom_chars_2_05a, true(L == ['O','l','á',' ','m','u','n','d','o','!'])) :-
+	test(lgt_unicode_atom_chars_2_05a, true(L == ['O','l','á',' ','m','u','n','d','o','!'])) :-
 		{atom_chars('Olá mundo!', L)}.
 
-	test(lgt_atom_chars_2_05b, true(A == 'Olá mundo!')) :-
+	test(lgt_unicode_atom_chars_2_05b, true(A == 'Olá mundo!')) :-
 		{atom_chars(A, ['O','l','á',' ','m','u','n','d','o','!'])}.
 
-	test(lgt_atom_chars_2_06a, true(L == ['З','д','р','а','в','с','т','в','у','л','т','е','!',' ','м','и','р','!'])) :-
+	test(lgt_unicode_atom_chars_2_06a, true(L == ['З','д','р','а','в','с','т','в','у','л','т','е','!',' ','м','и','р','!'])) :-
 		{atom_chars('Здравствулте! мир!', L)}.
 
-	test(lgt_atom_chars_2_06b, true(A == 'Здравствулте! мир!')) :-
+	test(lgt_unicode_atom_chars_2_06b, true(A == 'Здравствулте! мир!')) :-
 		{atom_chars(A, ['З','д','р','а','в','с','т','в','у','л','т','е','!',' ','м','и','р','!'])}.
 
-	test(lgt_atom_chars_2_07a, true(L == ['你','好','世','界','!'])) :-
+	test(lgt_unicode_atom_chars_2_07a, true(L == ['你','好','世','界','!'])) :-
 		{atom_chars('你好世界!', L)}.
 
-	test(lgt_atom_chars_2_07b, true(A == '你好世界!')) :-
+	test(lgt_unicode_atom_chars_2_07b, true(A == '你好世界!')) :-
 		{atom_chars(A, ['你','好','世','界','!'])}.
 
-	test(sics_atom_chars_2_14, true(L == ['P','é','c','s'])) :-
+	test(sics_unicode_atom_chars_2_14, true(L == ['P','é','c','s'])) :-
 		{atom_chars('Pécs', L)}.
 
-	test(sics_atom_chars_2_15, true(A == 'Pécs')) :-
+	test(sics_unicode_atom_chars_2_15, true(A == 'Pécs')) :-
 		{atom_chars(A, ['P','é','c','s'])}.
 
 	% atom_codes/2
 
-	test(sics_atom_codes_2_01a, true(L == [0'Γ,0'ε,0'ι,0'ά,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])) :-
+	test(sics_unicode_atom_codes_2_01a, true(L == [0'Γ,0'ε,0'ι,0'ά,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])) :-
 		{atom_codes('Γειά σου κόσμε!', L)}.
 
-	test(sics_atom_codes_2_01b, true(A == 'Γειά σου κόσμε!')) :-
+	test(sics_unicode_atom_codes_2_01b, true(A == 'Γειά σου κόσμε!')) :-
 		{atom_codes(A, [0'Γ,0'ε,0'ι,0'ά,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])}.
 
-	test(sics_atom_codes_2_02a, true(L == [0'¡,0'H,0'o,0'l,0'a,32,0'm,0'u,0'n,0'd,0'o,0'!])) :-
+	test(sics_unicode_atom_codes_2_02a, true(L == [0'¡,0'H,0'o,0'l,0'a,32,0'm,0'u,0'n,0'd,0'o,0'!])) :-
 		{atom_codes('¡Hola mundo!', L)}.
 
-	test(sics_atom_codes_2_02b, true(A == '¡Hola mundo!')) :-
+	test(sics_unicode_atom_codes_2_02b, true(A == '¡Hola mundo!')) :-
 		{atom_codes(A, [0'¡,0'H,0'o,0'l,0'a,32,0'm,0'u,0'n,0'd,0'o,0'!])}.
 
-	test(sics_atom_codes_2_03a, true(L == [0'こ,0'ん,0'に,0'ち,0'は,0'世,0'界,0'!])) :-
+	test(sics_unicode_atom_codes_2_03a, true(L == [0'こ,0'ん,0'に,0'ち,0'は,0'世,0'界,0'!])) :-
 		{atom_codes('こんにちは世界!', L)}.
 
-	test(sics_atom_codes_2_03b, true(A == 'こんにちは世界!')) :-
+	test(sics_unicode_atom_codes_2_03b, true(A == 'こんにちは世界!')) :-
 		{atom_codes(A, [0'こ,0'ん,0'に,0'ち,0'は,0'世,0'界,0'!])}.
 
-	test(sics_atom_codes_2_04a, true(L == [0'여,0'보,0'세,0'요,32,0'세,0'계,0'!])) :-
+	test(sics_unicode_atom_codes_2_04a, true(L == [0'여,0'보,0'세,0'요,32,0'세,0'계,0'!])) :-
 		{atom_codes('여보세요 세계!', L)}.
 
-	test(sics_atom_codes_2_04b, true(A == '여보세요 세계!')) :-
+	test(sics_unicode_atom_codes_2_04b, true(A == '여보세요 세계!')) :-
 		{atom_codes(A, [0'여,0'보,0'세,0'요,32,0'세,0'계,0'!])}.
 
-	test(sics_atom_codes_2_05a, true(L == [0'O,0'l,0'á,32,0'm,0'u,0'n,0'd,0'o,0'!])) :-
+	test(sics_unicode_atom_codes_2_05a, true(L == [0'O,0'l,0'á,32,0'm,0'u,0'n,0'd,0'o,0'!])) :-
 		{atom_codes('Olá mundo!', L)}.
 
-	test(sics_atom_codes_2_05b, true(A == 'Olá mundo!')) :-
+	test(sics_unicode_atom_codes_2_05b, true(A == 'Olá mundo!')) :-
 		{atom_codes(A, [0'O,0'l,0'á,32,0'm,0'u,0'n,0'd,0'o,0'!])}.
 
-	test(sics_atom_codes_2_06a, true(L == [0'З,0'д,0'р,0'а,0'в,0'с,0'т,0'в,0'у,0'л,0'т,0'е,0'!,32,0'м,0'и,0'р,0'!])) :-
+	test(sics_unicode_atom_codes_2_06a, true(L == [0'З,0'д,0'р,0'а,0'в,0'с,0'т,0'в,0'у,0'л,0'т,0'е,0'!,32,0'м,0'и,0'р,0'!])) :-
 		{atom_codes('Здравствулте! мир!', L)}.
 
-	test(sics_atom_codes_2_06b, true(A == 'Здравствулте! мир!')) :-
+	test(sics_unicode_atom_codes_2_06b, true(A == 'Здравствулте! мир!')) :-
 		{atom_codes(A, [0'З,0'д,0'р,0'а,0'в,0'с,0'т,0'в,0'у,0'л,0'т,0'е,0'!,32,0'м,0'и,0'р,0'!])}.
 
-	test(sics_atom_codes_2_07a, true(L == [0'你,0'好,0'世,0'界,0'!])) :-
+	test(sics_unicode_atom_codes_2_07a, true(L == [0'你,0'好,0'世,0'界,0'!])) :-
 		{atom_codes('你好世界!', L)}.
 
-	test(sics_atom_codes_2_07b, true(A == '你好世界!')) :-
+	test(sics_unicode_atom_codes_2_07b, true(A == '你好世界!')) :-
 		{atom_codes(A, [0'你,0'好,0'世,0'界,0'!])}.
 
-	test(sics_atom_codes_2_12, true(C == [0'P,0'é,0'c,0's])) :-
+	test(sics_unicode_atom_codes_2_12, true(C == [0'P,0'é,0'c,0's])) :-
 		{atom_codes('Pécs', C)}.
 
-	test(sics_atom_codes_2_13, true(A == 'Pécs')) :-
+	test(sics_unicode_atom_codes_2_13, true(A == 'Pécs')) :-
 		{atom_codes(A, [0'P,0'é,0'c,0's])}.
 
 	% atom_concat/3
 
-	test(sics_atom_concat_3_11, true(N == 'Bartók Béla')) :-
+	test(sics_unicode_atom_concat_3_11, true(N == 'Bartók Béla')) :-
 		{atom_concat('Bartók ', 'Béla', N)}.
 
-	test(sics_atom_concat_3_12, true(N == 'Bartók ')) :-
+	test(sics_unicode_atom_concat_3_12, true(N == 'Bartók ')) :-
 		{atom_concat(N, 'Béla', 'Bartók Béla')}.
 
-	test(sics_atom_concat_3_13, true(N == 'Béla')) :-
+	test(sics_unicode_atom_concat_3_13, true(N == 'Béla')) :-
 		{atom_concat('Bartók ', N, 'Bartók Béla')}.
 
-	test(sics_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''])) :-
+	test(sics_unicode_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''])) :-
 		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L).
 
 	% atom_length/2
 
-	test(lgt_atom_length_2_01, true(N == 15)) :-
+	test(lgt_unicode_atom_length_2_01, true(N == 15)) :-
 		{atom_length('Γειά σου κόσμε!', N)}.
 
-	test(lgt_atom_length_2_02, true(N == 12)) :-
+	test(lgt_unicode_atom_length_2_02, true(N == 12)) :-
 		{atom_length('¡Hola mundo!', N)}.
 
-	test(lgt_atom_length_2_03, true(N == 8)) :-
+	test(lgt_unicode_atom_length_2_03, true(N == 8)) :-
 		{atom_length('こんにちは世界!', N)}.
 
-	test(lgt_atom_length_2_04, true(N == 8)) :-
+	test(lgt_unicode_atom_length_2_04, true(N == 8)) :-
 		{atom_length('여보세요 세계!', N)}.
 
-	test(lgt_atom_length_2_05, true(N == 10)) :-
+	test(lgt_unicode_atom_length_2_05, true(N == 10)) :-
 		{atom_length('Olá mundo!', N)}.
 
-	test(lgt_atom_length_2_06, true(N == 18)) :-
+	test(lgt_unicode_atom_length_2_06, true(N == 18)) :-
 		{atom_length('Здравствулте! мир!', N)}.
 
-	test(lgt_atom_length_2_07, true(N == 5)) :-
+	test(lgt_unicode_atom_length_2_07, true(N == 5)) :-
 		{atom_length('你好世界!', N)}.
 
-	test(sics_atom_length_2_09, true(N == 11)) :-
+	test(sics_unicode_atom_length_2_09, true(N == 11)) :-
 		{atom_length('Bartók Béla', N)}.
 
-	test(lgt_atom_length_2_10, true(N == 4)) :-
+	test(lgt_unicode_atom_length_2_10, true(N == 4)) :-
 		{atom_length('Pécs', N)}.
 
 	% char_code/2
 
-	test(lgt_char_code_2_01, true(Code == 243)) :-
+	test(lgt_unicode_char_code_2_01, true(Code == 243)) :-
 		{char_code('ó', Code)}.
 
-	test(lgt_char_code_2_02, true(Code == 233)) :-
+	test(lgt_unicode_char_code_2_02, true(Code == 233)) :-
 		{char_code('é', Code)}.
 
-	test(lgt_char_code_2_03, true(Char == 'Γ')) :-
+	test(lgt_unicode_char_code_2_03, true(Char == 'Γ')) :-
 		{char_code(Char, 915)}.
 
-	test(lgt_char_code_2_04, true(Char == '¡')) :-
+	test(lgt_unicode_char_code_2_04, true(Char == '¡')) :-
 		{char_code(Char, 161)}.
 
-	test(lgt_char_code_2_05, true(Char == 'こ')) :-
+	test(lgt_unicode_char_code_2_05, true(Char == 'こ')) :-
 		{char_code(Char, 12371)}.
 
-	test(lgt_char_code_2_06, true(Char == '여')) :-
+	test(lgt_unicode_char_code_2_06, true(Char == '여')) :-
 		{char_code(Char, 50668)}.
 
-	test(lgt_char_code_2_07, true(Char == 'á')) :-
+	test(lgt_unicode_char_code_2_07, true(Char == 'á')) :-
 		{char_code(Char, 225)}.
 
-	test(lgt_char_code_2_08, true(Char == 'З')) :-
+	test(lgt_unicode_char_code_2_08, true(Char == 'З')) :-
 		{char_code(Char, 1047)}.
 
-	test(lgt_char_code_2_09, true(Char == '你')) :-
+	test(lgt_unicode_char_code_2_09, true(Char == '你')) :-
 		{char_code(Char, 20320)}.
+
+	% get_char/2
+
+	test(lgt_unicode_get_char_2_01a, true(Char == 'Γ')) :-
+		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
+		{get_char(st_i, Char)}.
+
+	test(lgt_unicode_get_char_2_01b, true) :-
+		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
+		{get_char(st_i, _)},
+		^^check_text_input(st_i, 'ειά σου κόσμε!').
+
+	test(lgt_unicode_get_char_2_02a, true(Char == '你')) :-
+		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
+		{get_char(st_i, Char)}.
+
+	test(lgt_unicode_get_char_2_02b, true) :-
+		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
+		{get_char(st_i, _)},
+		^^check_text_input(st_i, '好世界!').
+
+	% get_code/2
+
+	test(lgt_unicode_get_code_2_01a, true(Code == 915)) :-
+		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
+		{get_code(st_i, Code)}.
+
+	test(lgt_unicode_get_code_2_01b, true) :-
+		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
+		{get_code(st_i, _)},
+		^^check_text_input(st_i, 'ειά σου κόσμε!').
+
+	test(lgt_unicode_get_code_2_02a, true(Code == 20320)) :-
+		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
+		{get_code(st_i, Code)}.
+
+	test(lgt_unicode_get_code_2_02b, true) :-
+		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
+		{get_code(st_i, _)},
+		^^check_text_input(st_i, '好世界!').
 
 	% sub_atom/5
 
-	test(lgt_sub_atom_5_01, true(L == [0-13-'Γε',1-12-'ει',2-11-'ιά',3-10-'ά ',4-9-' σ',5-8-'σο',6-7-'ου',7-6-'υ ',8-5-' κ',9-4-'κό',10-3-'όσ',11-2-'σμ',12-1-'με',13-0-'ε!'])) :-
+	test(lgt_unicode_sub_atom_5_01, true(L == [0-13-'Γε',1-12-'ει',2-11-'ιά',3-10-'ά ',4-9-' σ',5-8-'σο',6-7-'ου',7-6-'υ ',8-5-' κ',9-4-'κό',10-3-'όσ',11-2-'σμ',12-1-'με',13-0-'ε!'])) :-
 		findall(B-A-S, {sub_atom('Γειά σου κόσμε!',B,2,A,S)}, L).
 
-	test(lgt_sub_atom_5_02, true(L == [0-10-'¡H',1-9-'Ho',2-8-'ol',3-7-'la',4-6-'a ',5-5-' m',6-4-'mu',7-3-'un',8-2-'nd',9-1-'do',10-0-'o!'])) :-
+	test(lgt_unicode_sub_atom_5_02, true(L == [0-10-'¡H',1-9-'Ho',2-8-'ol',3-7-'la',4-6-'a ',5-5-' m',6-4-'mu',7-3-'un',8-2-'nd',9-1-'do',10-0-'o!'])) :-
 		findall(B-A-S, {sub_atom('¡Hola mundo!',B,2,A,S)}, L).
 
-	test(lgt_sub_atom_5_03, true(L == [0-6-'こん',1-5-'んに',2-4-'にち',3-3-'ちは',4-2-'は世',5-1-'世界',6-0-'界!'])) :-
+	test(lgt_unicode_sub_atom_5_03, true(L == [0-6-'こん',1-5-'んに',2-4-'にち',3-3-'ちは',4-2-'は世',5-1-'世界',6-0-'界!'])) :-
 		findall(B-A-S, {sub_atom('こんにちは世界!',B,2,A,S)}, L).
 
-	test(lgt_sub_atom_5_04, true(L == [0-6-'여보',1-5-'보세',2-4-'세요',3-3-'요 ',4-2-' 세',5-1-'세계',6-0-'계!'])) :-
+	test(lgt_unicode_sub_atom_5_04, true(L == [0-6-'여보',1-5-'보세',2-4-'세요',3-3-'요 ',4-2-' 세',5-1-'세계',6-0-'계!'])) :-
 		findall(B-A-S, {sub_atom('여보세요 세계!',B,2,A,S)}, L).
 
-	test(lgt_sub_atom_5_05, true(L == [0-8-'Ol',1-7-'lá',2-6-'á ',3-5-' m',4-4-'mu',5-3-'un',6-2-'nd',7-1-'do',8-0-'o!'])) :-
+	test(lgt_unicode_sub_atom_5_05, true(L == [0-8-'Ol',1-7-'lá',2-6-'á ',3-5-' m',4-4-'mu',5-3-'un',6-2-'nd',7-1-'do',8-0-'o!'])) :-
 		findall(B-A-S, {sub_atom('Olá mundo!',B,2,A,S)}, L).
 
-	test(lgt_sub_atom_5_06, true(L == [0-16-'Зд',1-15-'др',2-14-'ра',3-13-'ав',4-12-'вс',5-11-'ст',6-10-'тв',7-9-'ву',8-8-'ул',9-7-'лт',10-6-'те',11-5-'е!',12-4-'! ',13-3-' м',14-2-'ми',15-1-'ир',16-0-'р!'])) :-
+	test(lgt_unicode_sub_atom_5_06, true(L == [0-16-'Зд',1-15-'др',2-14-'ра',3-13-'ав',4-12-'вс',5-11-'ст',6-10-'тв',7-9-'ву',8-8-'ул',9-7-'лт',10-6-'те',11-5-'е!',12-4-'! ',13-3-' м',14-2-'ми',15-1-'ир',16-0-'р!'])) :-
 		findall(B-A-S, {sub_atom('Здравствулте! мир!',B,2,A,S)}, L).
 
-	test(lgt_sub_atom_5_07, true(L == [0-3-'你好',1-2-'好世',2-1-'世界',3-0-'界!'])) :-
+	test(lgt_unicode_sub_atom_5_07, true(L == [0-3-'你好',1-2-'好世',2-1-'世界',3-0-'界!'])) :-
 		findall(B-A-S, {sub_atom('你好世界!',B,2,A,S)}, L).
 
-	test(sics_sub_atom_5_31, true(A-S == 5-'ók')) :-
+	test(sics_unicode_sub_atom_5_31, true(A-S == 5-'ók')) :-
 		{sub_atom('Bartók Béla', 4, 2, A, S)}.
 
-	test(sics_sub_atom_5_32, true(L-S == 2-'ók')) :-
+	test(sics_unicode_sub_atom_5_32, true(L-S == 2-'ók')) :-
 		{sub_atom('Bartók Béla', 4, L, 5, S)}.
 
-	test(sics_sub_atom_5_33, true(B-S == 4-'ók')) :-
+	test(sics_unicode_sub_atom_5_33, true(B-S == 4-'ók')) :-
 		{sub_atom('Bartók Béla', B, 2, 5, S)}.
 
-	test(sics_sub_atom_5_34, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
+	test(sics_unicode_sub_atom_5_34, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
 		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L).
 
-	test(sics_sub_atom_5_35, true(L == [0-4-7, 7-4-0])) :-
+	test(sics_unicode_sub_atom_5_35, true(L == [0-4-7, 7-4-0])) :-
 		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L).
 
 :- end_object.
