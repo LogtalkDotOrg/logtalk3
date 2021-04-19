@@ -30,7 +30,7 @@
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
-	% atom_chars/2
+	% atom_chars/2 tests
 
 	test(lgt_unicode_atom_chars_2_01a, true(L == ['Γ','ε','ι','ά',' ','σ','ο','υ',' ','κ','ό','σ','μ','ε','!'])) :-
 		{atom_chars('Γειά σου κόσμε!', L)}.
@@ -80,7 +80,7 @@
 	test(sics_unicode_atom_chars_2_15, true(A == 'Pécs')) :-
 		{atom_chars(A, ['P','é','c','s'])}.
 
-	% atom_codes/2
+	% atom_codes/2 tests
 
 	test(sics_unicode_atom_codes_2_01a, true(L == [0'Γ,0'ε,0'ι,0'ά,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])) :-
 		{atom_codes('Γειά σου κόσμε!', L)}.
@@ -130,7 +130,7 @@
 	test(sics_unicode_atom_codes_2_13, true(A == 'Pécs')) :-
 		{atom_codes(A, [0'P,0'é,0'c,0's])}.
 
-	% atom_concat/3
+	% atom_concat/3 tests
 
 	test(sics_unicode_atom_concat_3_11, true(N == 'Bartók Béla')) :-
 		{atom_concat('Bartók ', 'Béla', N)}.
@@ -144,7 +144,7 @@
 	test(sics_unicode_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''])) :-
 		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L).
 
-	% atom_length/2
+	% atom_length/2 tests
 
 	test(lgt_unicode_atom_length_2_01, true(N == 15)) :-
 		{atom_length('Γειά σου κόσμε!', N)}.
@@ -173,7 +173,7 @@
 	test(lgt_unicode_atom_length_2_10, true(N == 4)) :-
 		{atom_length('Pécs', N)}.
 
-	% char_code/2
+	% char_code/2 tests
 
 	test(lgt_unicode_char_code_2_01, true(Code == 243)) :-
 		{char_code('ó', Code)}.
@@ -202,47 +202,71 @@
 	test(lgt_unicode_char_code_2_09, true(Char == '你')) :-
 		{char_code(Char, 20320)}.
 
-	% get_char/2
+	% get_char/2 tests
 
 	test(lgt_unicode_get_char_2_01a, true(Char == 'Γ')) :-
 		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
 		{get_char(st_i, Char)}.
 
-	test(lgt_unicode_get_char_2_01b, true) :-
+	test(lgt_unicode_get_char_2_01b, true(Assertion)) :-
 		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
 		{get_char(st_i, _)},
-		^^check_text_input(st_i, 'ειά σου κόσμε!').
+		^^text_input_assertion(st_i, 'ειά σου κόσμε!', Assertion).
 
 	test(lgt_unicode_get_char_2_02a, true(Char == '你')) :-
 		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
 		{get_char(st_i, Char)}.
 
-	test(lgt_unicode_get_char_2_02b, true) :-
+	test(lgt_unicode_get_char_2_02b, true(Assertion)) :-
 		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
 		{get_char(st_i, _)},
-		^^check_text_input(st_i, '好世界!').
+		^^text_input_assertion(st_i, '好世界!', Assertion).
 
-	% get_code/2
+	% get_code/2 tests
 
 	test(lgt_unicode_get_code_2_01a, true(Code == 915)) :-
 		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
 		{get_code(st_i, Code)}.
 
-	test(lgt_unicode_get_code_2_01b, true) :-
+	test(lgt_unicode_get_code_2_01b, true(Assertion)) :-
 		^^set_text_input(st_i, 'Γειά σου κόσμε!', [encoding('UTF-8')]),
 		{get_code(st_i, _)},
-		^^check_text_input(st_i, 'ειά σου κόσμε!').
+		^^text_input_assertion(st_i, 'ειά σου κόσμε!', Assertion).
 
 	test(lgt_unicode_get_code_2_02a, true(Code == 20320)) :-
 		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
 		{get_code(st_i, Code)}.
 
-	test(lgt_unicode_get_code_2_02b, true) :-
+	test(lgt_unicode_get_code_2_02b, true(Assertion)) :-
 		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
 		{get_code(st_i, _)},
-		^^check_text_input(st_i, '好世界!').
+		^^text_input_assertion(st_i, '好世界!', Assertion).
 
-	% sub_atom/5
+	% put_char/2 tests
+
+	test(lgt_unicode_put_char_2_01, true(Assertion)) :-
+		^^set_text_output(st_o, 'Γειά σου κόσμ', [encoding('UTF-8')]),
+		{put_char(st_o, 'ε')},
+		^^text_output_assertion(st_o, 'Γειά σου κόσμε', [encoding('UTF-8')], Assertion).
+
+	test(lgt_unicode_put_char_2_02, true(Assertion)) :-
+		^^set_text_output(st_o, '你好世', [encoding('UTF-8')]),
+		{put_char(st_o, '界')},
+		^^text_output_assertion(st_o,  '你好世界', [encoding('UTF-8')], Assertion).
+
+	% put_code/2 tests
+
+	test(lgt_unicode_put_code_2_01, true(Assertion)) :-
+		^^set_text_output(st_o, 'Γειά σου κόσμ', [encoding('UTF-8')]),
+		{put_code(st_o, 949)},
+		^^text_output_assertion(st_o, 'Γειά σου κόσμε', [encoding('UTF-8')], Assertion).
+
+	test(lgt_unicode_put_code_2_02, true(Assertion)) :-
+		^^set_text_output(st_o, '你好世', [encoding('UTF-8')]),
+		{put_code(st_o, 30028)},
+		^^text_output_assertion(st_o,  '你好世界', [encoding('UTF-8')], Assertion).
+
+	% sub_atom/5 tests
 
 	test(lgt_unicode_sub_atom_5_01, true(L == [0-13-'Γε',1-12-'ει',2-11-'ιά',3-10-'ά ',4-9-' σ',5-8-'σο',6-7-'ου',7-6-'υ ',8-5-' κ',9-4-'κό',10-3-'όσ',11-2-'σμ',12-1-'με',13-0-'ε!'])) :-
 		findall(B-A-S, {sub_atom('Γειά σου κόσμε!',B,2,A,S)}, L).

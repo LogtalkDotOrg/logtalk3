@@ -11,7 +11,7 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 9:1:1
+| **Version:** 9:2:0
 | **Date:** 2021-04-19
 
 | **Compilation flags:**
@@ -1321,6 +1321,29 @@ Creates a temporary file with the given text contents and sets the current outpu
 
 .. raw:: html
 
+   <div id="check_text_output/3"> </div>
+
+.. index:: check_text_output/3
+.. _lgtunit/0::check_text_output/3:
+
+``check_text_output/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the temporary file (open with the given options referenced with the given alias) being written have the expected text contents.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_text_output(Alias,Contents,Options)``
+| **Mode and number of proofs:**
+|    ``check_text_output(+atom,+atom,+list(stream_option))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="check_text_output/2"> </div>
 
 .. index:: check_text_output/2
@@ -1361,6 +1384,29 @@ Checks that the temporary file being written have the expected text contents.
 |    ``check_text_output(Contents)``
 | **Mode and number of proofs:**
 |    ``check_text_output(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="text_output_assertion/4"> </div>
+
+.. index:: text_output_assertion/4
+.. _lgtunit/0::text_output_assertion/4:
+
+``text_output_assertion/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the temporary file (open with the given options and referenced with the given alias) being written have the expected text contents.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``text_output_assertion(Alias,Contents,Options,Assertion)``
+| **Mode and number of proofs:**
+|    ``text_output_assertion(+atom,+atom,+list(stream_option),--callable)`` - ``one``
 
 
 ------------

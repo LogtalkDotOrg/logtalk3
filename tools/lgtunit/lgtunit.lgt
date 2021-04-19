@@ -27,7 +27,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:1:1,
+		version is 9:2:0,
 		author is 'Paulo Moura',
 		date is 2021-04-19,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -440,6 +440,13 @@
 		argnames is ['Contents']
 	]).
 
+	:- protected(check_text_output/3).
+	:- mode(check_text_output(+atom, +atom, +list(stream_option)), zero_or_one).
+	:- info(check_text_output/3, [
+		comment is 'Checks that the temporary file (open with the given options referenced with the given alias) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Options']
+	]).
+
 	:- protected(check_text_output/2).
 	:- mode(check_text_output(+atom, +atom), zero_or_one).
 	:- info(check_text_output/2, [
@@ -452,6 +459,13 @@
 	:- info(check_text_output/1, [
 		comment is 'Checks that the temporary file being written have the expected text contents.',
 		argnames is ['Contents']
+	]).
+
+	:- protected(text_output_assertion/4).
+	:- mode(text_output_assertion(+atom, +atom, +list(stream_option), --callable), one).
+	:- info(text_output_assertion/4, [
+		comment is 'Returns an assertion for checking that the temporary file (open with the given options and referenced with the given alias) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Options', 'Assertion']
 	]).
 
 	:- protected(text_output_assertion/3).
@@ -2546,13 +2560,16 @@
 		write_text_contents(Stream, Contents),
 		set_output(Stream).
 
-	check_text_output(Alias, Expected) :-
+	check_text_output(Alias, Expected, Options) :-
 		close(Alias),
 		os::absolute_file_name('test_output.text', Path),
-		open(Path, read, InputStream),
+		open(Path, read, InputStream, Options),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
 		Expected == Contents.
+
+	check_text_output(Alias, Expected) :-
+		check_text_output(Alias, Expected, []).
 
 	check_text_output(Expected) :-
 		current_output(OutputStream),
@@ -2563,12 +2580,15 @@
 		clean_text_output,
 		Expected == Contents.
 
-	text_output_assertion(Alias, Expected, Expected == Contents) :-
+	text_output_assertion(Alias, Expected, Options, Expected == Contents) :-
 		close(Alias),
 		os::absolute_file_name('test_output.text', Path),
-		open(Path, read, InputStream),
+		open(Path, read, InputStream, Options),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output.
+
+	text_output_assertion(Alias, Expected, Expected == Contents) :-
+		text_output_assertion(Alias, Expected, [], Expected == Contents).
 
 	text_output_assertion(Expected, Expected == Contents) :-
 		current_output(OutputStream),
