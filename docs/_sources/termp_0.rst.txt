@@ -68,7 +68,7 @@ True if the depth of ``Term`` is ``Depth``. The depth of atomic terms is zero; t
 ``ground/1``
 ^^^^^^^^^^^^
 
-True if the argument is ground. Deprecated. Use the ``ground/1 standard predicate instead.
+True if the argument is ground. Deprecated. Use the ``ground/1`` standard predicate instead.
 
 | **Compilation flags:**
 |    ``static``

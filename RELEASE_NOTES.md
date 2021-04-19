@@ -100,6 +100,9 @@ an error when passed an unknown option.
 * FIXED: The `lgtunit` tool xUnit and xUnit.net v2 XML format exporters to
 escape special XML characters in common cases such as the `heaps` library.
 
+* FIXED: The `lgtunit` tool `set_text_input/3` and `set_binary_input/3`
+predicates to also use the options argument when creating the input contents.
+
 Contributions
 -------------
 

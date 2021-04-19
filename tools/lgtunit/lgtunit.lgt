@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:1:0,
+		version is 9:1:1,
 		author is 'Paulo Moura',
-		date is 2021-03-13,
+		date is 2021-04-19,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2450,7 +2450,7 @@
 
 	set_text_input(Alias, Contents, Options) :-
 		clean_file(Alias, 'test_input.text', Path),
-		open(Path, write, WriteStream, [type(text)]),
+		open(Path, write, WriteStream, [type(text)| Options]),
 		write_text_contents(WriteStream, Contents),
 		close(WriteStream),
 		open(Path, read, _, [type(text),alias(Alias)| Options]).
@@ -2491,7 +2491,7 @@
 
 	set_binary_input(Alias, Bytes, Options) :-
 		clean_file(Alias, 'test_input.binary', Path),
-		open(Path, write, WriteStream, [type(binary)]),
+		open(Path, write, WriteStream, [type(binary)| Options]),
 		write_binary_contents(Bytes, WriteStream),
 		close(WriteStream),
 		open(Path, read, _, [type(binary),alias(Alias)| Options]).
