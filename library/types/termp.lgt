@@ -39,7 +39,7 @@
 	:- public(ground/1).
 	:- mode(ground(@term), zero_or_one).
 	:- info(ground/1, [
-		comment is 'True if the argument is ground. Deprecated. Use the ``ground/1 standard predicate instead.',
+		comment is 'True if the argument is ground. Deprecated. Use the ``ground/1`` standard predicate instead.',
 		argnames is ['Term']
 	]).
 
