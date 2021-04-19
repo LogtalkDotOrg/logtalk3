@@ -19,43 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+:- if((
+	\+ current_logtalk_flag(unicode, unsupported),
+	\+ current_logtalk_flag(encoding_directive, unsupported)
+)).
 
-	:- info([
-		version is 1:1:0,
-		author is 'Paulo Moura',
-		date is 2020-12-02,
-		comment is 'Unit tests for the de facto Prolog standard succ/2 built-in predicate.'
-	]).
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		set_logtalk_flag(suspicious_calls, silent),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
 
-	% tests from the Logtalk portability work
+:- else.
 
-	test(lgt_succ_2_01, error(instantiation_error)) :-
-		{succ(_, _)}.
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
 
-	test(lgt_succ_2_02, error(type_error(integer,a))) :-
-		{succ(a, _)}.
-
-	test(lgt_succ_2_03, error(type_error(integer,a))) :-
-		{succ(_, a)}.
-
-	test(lgt_succ_2_04, error(domain_error(not_less_than_zero, -1))) :-
-		{succ(-1, _)}.
-
-	test(lgt_succ_2_05, error(domain_error(not_less_than_zero, -1))) :-
-		{succ(_, -1)}.
-
-	test(lgt_succ_2_06, true(N == 2)) :-
-		{succ(1, N)}.
-
-	test(lgt_succ_2_07, true(N == 1)) :-
-		{succ(N, 2)}.
-
-	test(lgt_succ_2_08, fail) :-
-		{succ(3, 2)}.
-
-	test(lgt_succ_2_09, fail) :-
-		{succ(_, 0)}.
-
-:- end_object.
+:- endif.

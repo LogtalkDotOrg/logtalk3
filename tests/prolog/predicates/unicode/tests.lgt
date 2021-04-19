@@ -1,0 +1,201 @@
+:- encoding('UTF-8').
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 0:1:0,
+		author is 'Paulo Moura',
+		date is 2021-04-17,
+		comment is 'Unit tests for Prolog Unicode support.'
+	]).
+
+	% atom_chars/2
+
+	test(lgt_atom_chars_2_01a, true(L == ['Γ','ε','ι','ά',' ','σ','ο','υ',' ','κ','ό','σ','μ','ε','!'])) :-
+		{atom_chars('Γειά σου κόσμε!', L)}.
+
+	test(lgt_atom_chars_2_01b, true(A == 'Γειά σου κόσμε!')) :-
+		{atom_chars(A, ['Γ','ε','ι','ά',' ','σ','ο','υ',' ','κ','ό','σ','μ','ε','!'])}.
+
+	test(lgt_atom_chars_2_02a, true(L == ['¡','H','o','l','a',' ','m','u','n','d','o','!'])) :-
+		{atom_chars('¡Hola mundo!', L)}.
+
+	test(lgt_atom_chars_2_02b, true(A == '¡Hola mundo!')) :-
+		{atom_chars(A, ['¡','H','o','l','a',' ','m','u','n','d','o','!'])}.
+
+	test(lgt_atom_chars_2_03a, true(L == ['こ','ん','に','ち','は','世','界','!'])) :-
+		{atom_chars('こんにちは世界!', L)}.
+
+	test(lgt_atom_chars_2_03b, true(A == 'こんにちは世界!')) :-
+		{atom_chars(A, ['こ','ん','に','ち','は','世','界','!'])}.
+
+	test(lgt_atom_chars_2_04a, true(L == ['여','보','세','요',' ','세','계','!'])) :-
+		{atom_chars('여보세요 세계!', L)}.
+
+	test(lgt_atom_chars_2_04b, true(A == '여보세요 세계!')) :-
+		{atom_chars(A, ['여','보','세','요',' ','세','계','!'])}.
+
+	test(lgt_atom_chars_2_05a, true(L == ['O','l','á',' ','m','u','n','d','o','!'])) :-
+		{atom_chars('Olá mundo!', L)}.
+
+	test(lgt_atom_chars_2_05b, true(A == 'Olá mundo!')) :-
+		{atom_chars(A, ['O','l','á',' ','m','u','n','d','o','!'])}.
+
+	test(lgt_atom_chars_2_06a, true(L == ['З','д','р','а','в','с','т','в','у','л','т','е','!',' ','м','и','р','!'])) :-
+		{atom_chars('Здравствулте! мир!', L)}.
+
+	test(lgt_atom_chars_2_06b, true(A == 'Здравствулте! мир!')) :-
+		{atom_chars(A, ['З','д','р','а','в','с','т','в','у','л','т','е','!',' ','м','и','р','!'])}.
+
+	test(lgt_atom_chars_2_07a, true(L == ['你','好','世','界','!'])) :-
+		{atom_chars('你好世界!', L)}.
+
+	test(lgt_atom_chars_2_07b, true(A == '你好世界!')) :-
+		{atom_chars(A, ['你','好','世','界','!'])}.
+
+	test(sics_atom_chars_2_14, true(L == ['P','é','c','s'])) :-
+		{atom_chars('Pécs', L)}.
+
+	test(sics_atom_chars_2_15, true(A == 'Pécs')) :-
+		{atom_chars(A, ['P','é','c','s'])}.
+
+	% atom_codes/2
+
+	test(sics_atom_codes_2_01a, true(L == [0'Γ,0'ε,0'ι,0'ά,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])) :-
+		{atom_codes('Γειά σου κόσμε!', L)}.
+
+	test(sics_atom_codes_2_01b, true(A == 'Γειά σου κόσμε!')) :-
+		{atom_codes(A, [0'Γ,0'ε,0'ι,0'ά,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])}.
+
+	test(sics_atom_codes_2_02a, true(L == [0'¡,0'H,0'o,0'l,0'a,32,0'm,0'u,0'n,0'd,0'o,0'!])) :-
+		{atom_codes('¡Hola mundo!', L)}.
+
+	test(sics_atom_codes_2_02b, true(A == '¡Hola mundo!')) :-
+		{atom_codes(A, [0'¡,0'H,0'o,0'l,0'a,32,0'm,0'u,0'n,0'd,0'o,0'!])}.
+
+	test(sics_atom_codes_2_03a, true(L == [0'こ,0'ん,0'に,0'ち,0'は,0'世,0'界,0'!])) :-
+		{atom_codes('こんにちは世界!', L)}.
+
+	test(sics_atom_codes_2_03b, true(A == 'こんにちは世界!')) :-
+		{atom_codes(A, [0'こ,0'ん,0'に,0'ち,0'は,0'世,0'界,0'!])}.
+
+	test(sics_atom_codes_2_04a, true(L == [0'여,0'보,0'세,0'요,32,0'세,0'계,0'!])) :-
+		{atom_codes('여보세요 세계!', L)}.
+
+	test(sics_atom_codes_2_04b, true(A == '여보세요 세계!')) :-
+		{atom_codes(A, [0'여,0'보,0'세,0'요,32,0'세,0'계,0'!])}.
+
+	test(sics_atom_codes_2_05a, true(L == [0'O,0'l,0'á,32,0'm,0'u,0'n,0'd,0'o,0'!])) :-
+		{atom_codes('Olá mundo!', L)}.
+
+	test(sics_atom_codes_2_05b, true(A == 'Olá mundo!')) :-
+		{atom_codes(A, [0'O,0'l,0'á,32,0'm,0'u,0'n,0'd,0'o,0'!])}.
+
+	test(sics_atom_codes_2_06a, true(L == [0'З,0'д,0'р,0'а,0'в,0'с,0'т,0'в,0'у,0'л,0'т,0'е,0'!,32,0'м,0'и,0'р,0'!])) :-
+		{atom_codes('Здравствулте! мир!', L)}.
+
+	test(sics_atom_codes_2_06b, true(A == 'Здравствулте! мир!')) :-
+		{atom_codes(A, [0'З,0'д,0'р,0'а,0'в,0'с,0'т,0'в,0'у,0'л,0'т,0'е,0'!,32,0'м,0'и,0'р,0'!])}.
+
+	test(sics_atom_codes_2_07a, true(L == [0'你,0'好,0'世,0'界,0'!])) :-
+		{atom_codes('你好世界!', L)}.
+
+	test(sics_atom_codes_2_07b, true(A == '你好世界!')) :-
+		{atom_codes(A, [0'你,0'好,0'世,0'界,0'!])}.
+
+	test(sics_atom_codes_2_12, true(C == [0'P,0'é,0'c,0's])) :-
+		{atom_codes('Pécs', C)}.
+
+	test(sics_atom_codes_2_13, true(A == 'Pécs')) :-
+		{atom_codes(A, [0'P,0'é,0'c,0's])}.
+
+	% atom_concat/3
+
+	test(sics_atom_concat_3_11, true(N == 'Bartók Béla')) :-
+		{atom_concat('Bartók ', 'Béla', N)}.
+
+	test(sics_atom_concat_3_12, true(N == 'Bartók ')) :-
+		{atom_concat(N, 'Béla', 'Bartók Béla')}.
+
+	test(sics_atom_concat_3_13, true(N == 'Béla')) :-
+		{atom_concat('Bartók ', N, 'Bartók Béla')}.
+
+	test(sics_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''])) :-
+		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L).
+
+	% atom_length/2
+
+	test(lgt_atom_length_01, true(N == 15)) :-
+		{atom_length('Γειά σου κόσμε!', N)}.
+
+	test(lgt_atom_length_02, true(N == 12)) :-
+		{atom_length('¡Hola mundo!', N)}.
+
+	test(lgt_atom_length_03, true(N == 8)) :-
+		{atom_length('こんにちは世界!', N)}.
+
+	test(lgt_atom_length_04, true(N == 8)) :-
+		{atom_length('여보세요 세계!', N)}.
+
+	test(lgt_atom_length_05, true(N == 10)) :-
+		{atom_length('Olá mundo!', N)}.
+
+	test(lgt_atom_length_06, true(N == 18)) :-
+		{atom_length('Здравствулте! мир!', N)}.
+
+	test(lgt_atom_length_07, true(N == 5)) :-
+		{atom_length('你好世界!', N)}.
+
+	test(sics_atom_length_2_09, true(N == 11)) :-
+		{atom_length('Bartók Béla', N)}.
+
+	test(lgt_atom_length_2_10, true(N == 4)) :-
+		{atom_length('Pécs', N)}.
+
+	% char_code/2
+
+	test(lgt_char_code_2_01, true(Code == 0'ó)) :-
+		{char_code('ó', Code)}.
+
+	test(lgt_char_code_2_02, true(Code == 0'é)) :-
+		{char_code('é', Code)}.
+
+	% sub_atom/5
+
+	test(sics_sub_atom_5_31, true(A-S == 5-'ók')) :-
+		{sub_atom('Bartók Béla', 4, 2, A, S)}.
+
+	test(sics_sub_atom_5_32, true(L-S == 2-'ók')) :-
+		{sub_atom('Bartók Béla', 4, L, 5, S)}.
+
+	test(sics_sub_atom_5_33, true(B-S == 4-'ók')) :-
+		{sub_atom('Bartók Béla', B, 2, 5, S)}.
+
+	test(sics_sub_atom_5_34, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
+		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L).
+
+	test(sics_sub_atom_5_35, true(L == [0-4-7, 7-4-0])) :-
+		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L).
+
+:- end_object.

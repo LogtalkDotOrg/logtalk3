@@ -19,10 +19,13 @@ ________________________________________________________________________
 
 
 This directory contains a set of unit tests for Prolog official and de facto
-standard features. Several of these unit tests are taken from the official ISO
-Prolog standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard
-and the follow up corrigendas). Several tests originate from SICS, ECLiPSe,
-and SWI-Prolog and are used here with permission.
+standard syntax, control constructs, arithmetic functions, numeric constants,
+and built-in predicates. There are also test sets for unbounded integer
+arithmetic and for Unicode support for Prolog systems supporting these
+features. Several of these unit tests are taken from the official ISO Prolog
+standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard and the
+follow up corrigendas). Several tests originate from SICS, ECLiPSe, and
+SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that are
 slowly becoming de facto standards (e.g. the `(*->)/2` soft-cut control
