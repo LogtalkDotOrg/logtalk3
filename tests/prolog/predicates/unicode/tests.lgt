@@ -175,11 +175,32 @@
 
 	% char_code/2
 
-	test(lgt_char_code_2_01, true(Code == 0'ó)) :-
+	test(lgt_char_code_2_01, true(Code == 243)) :-
 		{char_code('ó', Code)}.
 
-	test(lgt_char_code_2_02, true(Code == 0'é)) :-
+	test(lgt_char_code_2_02, true(Code == 233)) :-
 		{char_code('é', Code)}.
+
+	test(lgt_char_code_2_03, true(Char == 'Γ')) :-
+		{char_code(Char, 915)}.
+
+	test(lgt_char_code_2_04, true(Char == '¡')) :-
+		{char_code(Char, 161)}.
+
+	test(lgt_char_code_2_05, true(Char == 'こ')) :-
+		{char_code(Char, 12371)}.
+
+	test(lgt_char_code_2_06, true(Char == '여')) :-
+		{char_code(Char, 50668)}.
+
+	test(lgt_char_code_2_07, true(Char == 'á')) :-
+		{char_code(Char, 225)}.
+
+	test(lgt_char_code_2_08, true(Char == 'З')) :-
+		{char_code(Char, 1047)}.
+
+	test(lgt_char_code_2_09, true(Char == '你')) :-
+		{char_code(Char, 20320)}.
 
 	% sub_atom/5
 
