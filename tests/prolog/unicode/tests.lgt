@@ -276,6 +276,22 @@
 		^^set_text_input(st_i, '\'你好世界!\'.', [encoding('UTF-8')]),
 		{read_term(st_i, Term, [])}.
 
+	% stream_property/2
+
+	test(lgt_unicode_stream_property_2_01, true(Encoding == 'UTF-8')) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		os::path_concat(Directory, 'tests.lgt', Path),
+		open(Path, read, Stream, [encoding('UTF-8')]),
+		{stream_property(Stream, encoding(Encoding))}.
+
+	test(lgt_unicode_stream_property_2_02, true(BOM == false)) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		os::path_concat(Directory, 'tests.lgt', Path),
+		open(Path, read, Stream, [encoding('UTF-8')]),
+		{stream_property(Stream, bom(BOM))}.
+
 	% sub_atom/5 tests
 
 	test(lgt_unicode_sub_atom_5_01, true(L == [0-13-'Γε',1-12-'ει',2-11-'ιά',3-10-'ά ',4-9-' σ',5-8-'σο',6-7-'ου',7-6-'υ ',8-5-' κ',9-4-'κό',10-3-'όσ',11-2-'σμ',12-1-'με',13-0-'ε!'])) :-
@@ -325,5 +341,9 @@
 		^^set_text_output(st_o, '', [encoding('UTF-8')]),
 		{write_term(st_o, '你好世界!', [])},
 		^^text_output_assertion(st_o, '你好世界!', [encoding('UTF-8')], Assertion).
+
+	cleanup :-
+		^^clean_text_input,
+		^^clean_text_output.
 
 :- end_object.
