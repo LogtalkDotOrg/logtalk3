@@ -266,6 +266,16 @@
 		{put_code(st_o, 30028)},
 		^^text_output_assertion(st_o,  '你好世界', [encoding('UTF-8')], Assertion).
 
+	% read_term/3 tests
+
+	test(lgt_unicode_read_term_3_01, true(Term == 'Γειά σου κόσμε!')) :-
+		^^set_text_input(st_i, '\'Γειά σου κόσμε!\'.', [encoding('UTF-8')]),
+		{read_term(st_i, Term, [])}.
+
+	test(lgt_unicode_read_term_3_02, true(Term == '你好世界!')) :-
+		^^set_text_input(st_i, '\'你好世界!\'.', [encoding('UTF-8')]),
+		{read_term(st_i, Term, [])}.
+
 	% sub_atom/5 tests
 
 	test(lgt_unicode_sub_atom_5_01, true(L == [0-13-'Γε',1-12-'ει',2-11-'ιά',3-10-'ά ',4-9-' σ',5-8-'σο',6-7-'ου',7-6-'υ ',8-5-' κ',9-4-'κό',10-3-'όσ',11-2-'σμ',12-1-'με',13-0-'ε!'])) :-
@@ -303,5 +313,17 @@
 
 	test(sics_unicode_sub_atom_5_35, true(L == [0-4-7, 7-4-0])) :-
 		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L).
+
+	% write_term/3 tests
+
+	test(lgt_unicode_write_term_3_01, true(Assertion)) :-
+		^^set_text_output(st_o, '', [encoding('UTF-8')]),
+		{write_term(st_o, 'Γειά σου κόσμε!', [])},
+		^^text_output_assertion(st_o, 'Γειά σου κόσμε!', [encoding('UTF-8')], Assertion).
+
+	test(lgt_unicode_write_term_3_02, true(Assertion)) :-
+		^^set_text_output(st_o, '', [encoding('UTF-8')]),
+		{write_term(st_o, '你好世界!', [])},
+		^^text_output_assertion(st_o, '你好世界!', [encoding('UTF-8')], Assertion).
 
 :- end_object.
