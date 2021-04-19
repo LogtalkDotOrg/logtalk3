@@ -146,25 +146,25 @@
 
 	% atom_length/2
 
-	test(lgt_atom_length_01, true(N == 15)) :-
+	test(lgt_atom_length_2_01, true(N == 15)) :-
 		{atom_length('Γειά σου κόσμε!', N)}.
 
-	test(lgt_atom_length_02, true(N == 12)) :-
+	test(lgt_atom_length_2_02, true(N == 12)) :-
 		{atom_length('¡Hola mundo!', N)}.
 
-	test(lgt_atom_length_03, true(N == 8)) :-
+	test(lgt_atom_length_2_03, true(N == 8)) :-
 		{atom_length('こんにちは世界!', N)}.
 
-	test(lgt_atom_length_04, true(N == 8)) :-
+	test(lgt_atom_length_2_04, true(N == 8)) :-
 		{atom_length('여보세요 세계!', N)}.
 
-	test(lgt_atom_length_05, true(N == 10)) :-
+	test(lgt_atom_length_2_05, true(N == 10)) :-
 		{atom_length('Olá mundo!', N)}.
 
-	test(lgt_atom_length_06, true(N == 18)) :-
+	test(lgt_atom_length_2_06, true(N == 18)) :-
 		{atom_length('Здравствулте! мир!', N)}.
 
-	test(lgt_atom_length_07, true(N == 5)) :-
+	test(lgt_atom_length_2_07, true(N == 5)) :-
 		{atom_length('你好世界!', N)}.
 
 	test(sics_atom_length_2_09, true(N == 11)) :-
@@ -182,6 +182,27 @@
 		{char_code('é', Code)}.
 
 	% sub_atom/5
+
+	test(lgt_sub_atom_5_01, true(L == [0-13-'Γε',1-12-'ει',2-11-'ιά',3-10-'ά ',4-9-' σ',5-8-'σο',6-7-'ου',7-6-'υ ',8-5-' κ',9-4-'κό',10-3-'όσ',11-2-'σμ',12-1-'με',13-0-'ε!'])) :-
+		findall(B-A-S, {sub_atom('Γειά σου κόσμε!',B,2,A,S)}, L).
+
+	test(lgt_sub_atom_5_02, true(L == [0-10-'¡H',1-9-'Ho',2-8-'ol',3-7-'la',4-6-'a ',5-5-' m',6-4-'mu',7-3-'un',8-2-'nd',9-1-'do',10-0-'o!'])) :-
+		findall(B-A-S, {sub_atom('¡Hola mundo!',B,2,A,S)}, L).
+
+	test(lgt_sub_atom_5_03, true(L == [0-6-'こん',1-5-'んに',2-4-'にち',3-3-'ちは',4-2-'は世',5-1-'世界',6-0-'界!'])) :-
+		findall(B-A-S, {sub_atom('こんにちは世界!',B,2,A,S)}, L).
+
+	test(lgt_sub_atom_5_04, true(L == [0-6-'여보',1-5-'보세',2-4-'세요',3-3-'요 ',4-2-' 세',5-1-'세계',6-0-'계!'])) :-
+		findall(B-A-S, {sub_atom('여보세요 세계!',B,2,A,S)}, L).
+
+	test(lgt_sub_atom_5_05, true(L == [0-8-'Ol',1-7-'lá',2-6-'á ',3-5-' m',4-4-'mu',5-3-'un',6-2-'nd',7-1-'do',8-0-'o!'])) :-
+		findall(B-A-S, {sub_atom('Olá mundo!',B,2,A,S)}, L).
+
+	test(lgt_sub_atom_5_06, true(L == [0-16-'Зд',1-15-'др',2-14-'ра',3-13-'ав',4-12-'вс',5-11-'ст',6-10-'тв',7-9-'ву',8-8-'ул',9-7-'лт',10-6-'те',11-5-'е!',12-4-'! ',13-3-' м',14-2-'ми',15-1-'ир',16-0-'р!'])) :-
+		findall(B-A-S, {sub_atom('Здравствулте! мир!',B,2,A,S)}, L).
+
+	test(lgt_sub_atom_5_07, true(L == [0-3-'你好',1-2-'好世',2-1-'世界',3-0-'界!'])) :-
+		findall(B-A-S, {sub_atom('你好世界!',B,2,A,S)}, L).
 
 	test(sics_sub_atom_5_31, true(A-S == 5-'ók')) :-
 		{sub_atom('Bartók Béla', 4, 2, A, S)}.
