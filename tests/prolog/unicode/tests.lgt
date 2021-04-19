@@ -202,6 +202,11 @@
 	test(lgt_unicode_char_code_2_09, true(Char == '你')) :-
 		{char_code(Char, 20320)}.
 
+	% current_prolog_flag/2
+
+	test(lgt_unicode_current_prolog_flag_2_01, true(atom(Encoding))) :-
+		{current_prolog_flag(encoding, Encoding)}.
+
 	% get_char/2 tests
 
 	test(lgt_unicode_get_char_2_01a, true(Char == 'Γ')) :-
