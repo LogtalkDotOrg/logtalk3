@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-04-19,
+		date is 2021-04-20,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -207,6 +207,9 @@
 	test(lgt_unicode_current_prolog_flag_2_01, true(atom(Encoding))) :-
 		{current_prolog_flag(encoding, Encoding)}.
 
+	test(lgt_unicode_current_prolog_flag_2_02, true(valid(Encoding))) :-
+		{current_prolog_flag(encoding, Encoding)}.
+
 	% get_char/2 tests
 
 	test(lgt_unicode_get_char_2_01a, true(Char == 'Γ')) :-
@@ -350,5 +353,26 @@
 	cleanup :-
 		^^clean_text_input,
 		^^clean_text_output.
+
+	% partial list of valid encodings (from http://www.iana.org/assignments/character-sets)
+
+	valid('US-ASCII').
+	valid('UTF-8').
+	valid('UTF-16BE').
+	valid('UTF-16LE').
+	valid('UTF-16').
+	valid('UTF-32BE').
+	valid('UTF-32LE').
+	valid('UTF-32').
+	valid('ISO-8859-1').
+	valid('ISO-8859-2').
+	valid('ISO-8859-3').
+	valid('ISO-8859-4').
+	valid('ISO-8859-5').
+	valid('ISO-8859-6').
+	valid('ISO-8859-7').
+	valid('ISO-8859-8').
+	valid('ISO-8859-9').
+	valid('ISO-8859-10').
 
 :- end_object.
