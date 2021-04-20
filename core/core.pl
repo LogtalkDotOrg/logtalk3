@@ -7709,12 +7709,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% (e.g. when a syntax error occurs) querying a stream line number
 		Lines = '-'(-1, -1)
 	),
-	stream_property(Input, alias(logtalk_compiler_input)), !,
 	'$lgt_print_message'(error, compiler_error(SourceFile, Lines, Error)),
 	'$lgt_restore_global_operator_table',
 	'$lgt_clean_pp_file_clauses',
 	'$lgt_clean_pp_entity_clauses',
 	'$lgt_reset_warnings_counter',
+	stream_property(Input, alias(logtalk_compiler_input)),
 	catch('$lgt_close'(Input), _, true),
 	!,
 	fail.

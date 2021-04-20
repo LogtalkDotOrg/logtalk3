@@ -25,6 +25,13 @@ RELEASE NOTES
 3.46.0 - April ??, 2021
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: The compiler handling of errors when reading the first term of a
+source file to ensure that the errors are reported even if the input stream
+cannot be retrieved.
+
 Prolog adapter and integration files
 ------------------------------------
 
