@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 10, 2021
+##   Last updated on April 20, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 4.0"
+	echo "$(basename "$0") 4.1"
 	exit 0
 }
 
@@ -116,6 +116,14 @@ run_testset() {
 	fi
 	name=${unit////__}
 	report_goal="logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
+	if [ "$prefix" != "" ] ; then
+		flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
+	else
+		flag_goal="true"
+	fi
+	if [[ "$format" != "default" || "$coverage" != "none" ]] ; then
+		flag_goal="set_logtalk_flag(tests_report_directory,'$unit/'),$flag_goal"
+	fi
 	if [ $mode == 'optimal' ] || [ $mode == 'all' ] ; then
 		run_tests "$name" "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_optimal_goal"
 		tests_exit=$?
@@ -499,14 +507,6 @@ fi
 
 if [ "$timeout_command" == "" ] ; then
 	echo "Warning! Timeout support not available. The timeout option will be ignored." >&2
-fi
-
-if [ "$prefix" != "" ] ; then
-	flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
-fi
-
-if [[ "$format" != "default" || "$coverage" != "none" ]] ; then
-	flag_goal="set_logtalk_flag(tests_report_directory,'$base/'),$flag_goal"
 fi
 
 versions_goal="logtalk_load(library(tester_versions)),halt$dot"
