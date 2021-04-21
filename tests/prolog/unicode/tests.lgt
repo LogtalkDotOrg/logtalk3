@@ -24,7 +24,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2021-04-21,
 		comment is 'Unit tests for Prolog Unicode support.'
@@ -229,6 +229,18 @@
 		^^set_text_input(st_i, '你好世界!', [encoding('UTF-8')]),
 		{get_char(st_i, _)},
 		^^text_input_assertion(st_i, '好世界!', Assertion).
+
+	% check that the BOM is skipped when opening a text file for reading
+	test(lgt_unicode_get_char_2_03, true(Char == a)) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, write, Output, [type(binary)]),
+		% UTF-8 is represented by the bytes 0xEF 0xBB 0xBF
+		put_byte(Output, 239), put_byte(Output, 187), put_byte(Output, 191),
+		% abc
+		put_byte(Output, 97), put_byte(Output, 98), put_byte(Output, 99),
+		close(Output),
+		open(Path, read, Input),
+		{get_char(Input, Char)}.
 
 	% get_code/2 tests
 
