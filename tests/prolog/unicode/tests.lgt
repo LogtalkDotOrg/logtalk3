@@ -24,7 +24,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2021-04-21,
 		comment is 'Unit tests for Prolog Unicode support.'
@@ -250,6 +250,23 @@
 		{get_code(st_i, _)},
 		^^text_input_assertion(st_i, '好世界!', Assertion).
 
+	% open/4 tests
+
+	test(lgt_unicode_open_4_01, true) :-
+		file_path(sample_utf_8, Path),
+		{open(Path, write, Stream, [encoding('UTF-8')])},
+		close(Stream).
+
+	test(lgt_unicode_open_4_02, true) :-
+		file_path(sample_utf_8_no_bom, Path),
+		{open(Path, write, Stream, [encoding('UTF-8'), bom(false)])},
+		close(Stream).
+
+	test(lgt_unicode_open_4_03, true) :-
+		file_path(sample_utf_8_bom, Path),
+		{open(Path, write, Stream, [encoding('UTF-8'), bom(true)])},
+		close(Stream).
+
 	% put_char/2 tests
 
 	test(lgt_unicode_put_char_2_01, true(Assertion)) :-
@@ -294,18 +311,45 @@
 	% stream_property/2
 
 	test(lgt_unicode_stream_property_2_01, true(Encoding == 'UTF-8')) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		os::path_concat(Directory, 'tests.lgt', Path),
-		open(Path, read, Stream, [encoding('UTF-8')]),
-		{stream_property(Stream, encoding(Encoding))}.
+		file_path(sample_utf_8, Path),
+		open(Path, write, Stream, [encoding('UTF-8')]),
+		{stream_property(Stream, encoding(Encoding))},
+		close(Stream).
 
-	test(lgt_unicode_stream_property_2_02, true(BOM == false)) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		os::path_concat(Directory, 'tests.lgt', Path),
+	test(lgt_unicode_stream_property_2_02, true(Encoding-BOM == 'UTF-8'-false)) :-
+		file_path(sample_utf_8_no_bom, Path),
+		open(Path, write, Stream, [encoding('UTF-8'), bom(false)]),
+		{stream_property(Stream, encoding(Encoding)),
+		 stream_property(Stream, bom(BOM))},
+		close(Stream).
+
+	test(lgt_unicode_stream_property_2_03, true(Encoding-BOM == 'UTF-8'-true)) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, write, Stream, [encoding('UTF-8'), bom(true)]),
+		{stream_property(Stream, encoding(Encoding)),
+		 stream_property(Stream, bom(BOM))},
+		close(Stream).
+
+	test(lgt_unicode_stream_property_2_04, true(Encoding == 'UTF-8')) :-
+		file_path('tests.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-8')]),
-		{stream_property(Stream, bom(BOM))}.
+		{stream_property(Stream, encoding(Encoding))},
+		close(Stream).
+
+	test(lgt_unicode_stream_property_2_05, true(BOM == false)) :-
+		file_path('tests.lgt', Path),
+		open(Path, read, Stream, [encoding('UTF-8')]),
+		{stream_property(Stream, bom(BOM))},
+		close(Stream).
+
+	test(lgt_unicode_stream_property_2_06, true(Encoding-BOM == 'UTF-8'-true)) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, write, Output, [encoding('UTF-8'), bom(true)]),
+		close(Output),
+		open(Path, read, Input),
+		{stream_property(Input, encoding(Encoding)),
+		 stream_property(Input, bom(BOM))},
+		close(Input).
 
 	% sub_atom/5 tests
 
@@ -359,10 +403,22 @@
 
 	cleanup :-
 		^^clean_text_input,
-		^^clean_text_output.
+		^^clean_text_output,
+		file_path(sample_utf_8, Path1),
+		catch(ignore(os::delete_file(Path1)), _, true),
+		file_path(sample_utf_8_bom, Path2),
+		catch(ignore(os::delete_file(Path2)), _, true),
+		file_path(sample_utf_8_no_bom, Path3),
+		catch(ignore(os::delete_file(Path3)), _, true).
+
+	% auxiliary predicates
+
+	file_path(File, Path) :-
+		this(Object),
+		object_property(Object, file(_,Directory)),
+		atom_concat(Directory, File, Path).
 
 	% partial list of valid encodings (from http://www.iana.org/assignments/character-sets)
-
 	valid('US-ASCII').
 	valid('UTF-8').
 	valid('UTF-16BE').
