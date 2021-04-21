@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2021-04-20,
+		date is 2021-04-21,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -283,6 +283,13 @@
 	test(lgt_unicode_read_term_3_02, true(Term == '你好世界!')) :-
 		^^set_text_input(st_i, '\'你好世界!\'.', [encoding('UTF-8')]),
 		{read_term(st_i, Term, [])}.
+
+	% set_prolog_flag/2
+
+	% if the flag is not read-only, setting its value to its current value must succeed
+	test(lgt_unicode_set_prolog_flag_2_01, true) :-
+		{current_prolog_flag(encoding, Encoding),
+		 catch(set_prolog_flag(encoding, Encoding), _, true)}.
 
 	% stream_property/2
 
