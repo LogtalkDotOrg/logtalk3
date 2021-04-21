@@ -24,7 +24,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
 		date is 2021-04-21,
 		comment is 'Unit tests for Prolog Unicode support.'
@@ -278,6 +278,26 @@
 		file_path(sample_utf_8_bom, Path),
 		{open(Path, write, Stream, [encoding('UTF-8'), bom(true)])},
 		close(Stream).
+
+	% peek_char/2 tests
+
+	test(lgt_unicode_peek_char_2_01, true(Char == 'Γ')) :-
+		^^set_text_input(st_i, 'Γειά σου κόσμε', [encoding('UTF-8')]),
+		{peek_char(st_i, Char)}.
+
+	test(lgt_unicode_peek_char_2_02, true(Char == '你')) :-
+		^^set_text_input(st_i, '你好世界', [encoding('UTF-8')]),
+		{peek_char(st_i, Char)}.
+
+	% peek_code/2 tests
+
+	test(lgt_unicode_peek_code_2_01, true(Code == 915)) :-
+		^^set_text_input(st_i, 'Γειά σου κόσμε', [encoding('UTF-8')]),
+		{peek_code(st_i, Code)}.
+
+	test(lgt_unicode_peek_code_2_02, true(Code == 20320)) :-
+		^^set_text_input(st_i, '你好世界', [encoding('UTF-8')]),
+		{peek_code(st_i, Code)}.
 
 	% put_char/2 tests
 

@@ -124,6 +124,8 @@ list of codes in the `xml_parser` contribution.
 Tests
 -----
 
+* ADDED: A `unicode` test suite for checking backends support for Unicode.
+
 * ADDED: Tests for the `open/4` Prolog standard predicate to check for the
 expected permission error when the file doesn't have the necessary read or
 write permissions.
