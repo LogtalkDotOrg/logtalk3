@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 20, 2021
+##   Last updated on April 22, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 4.1"
+	echo "$(basename "$0") 4.2"
 	exit 0
 }
 
@@ -583,6 +583,7 @@ if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || gr
 	grep -s -a -h '^\*' -- *.results | $sed 's/.results//' | tee -a errors.all
 fi
 if grep -q -s -a 'tests skipped' -- *.results || grep -q -s -a '(not applicable)' -- *.results ; then
+	echo "%"
 	echo "% Skipped test sets"
 	grep -s -a 'tests skipped' -- *.results | $sed 's/% tests skipped//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 	grep -s -a '(not applicable)' -- *.results | $sed 's/(not applicable)//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
