@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-04-21,
+		date is 2021-04-22,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -371,6 +371,18 @@
 	test(lgt_unicode_set_prolog_flag_2_01, true) :-
 		{current_prolog_flag(encoding, Encoding),
 		 catch(set_prolog_flag(encoding, Encoding), _, true)}.
+
+	% set_stream_position/2
+
+	% check that BOM detection doesn't break stream position
+	test(lgt_unicode_set_stream_position_2_01, true(Term1 == Term3)) :-
+		os::absolute_file_name('terms.pl', Path),
+		open(Path, read, Stream, [type(text), reposition(true)]),
+		stream_property(Stream, position(Position)),
+		read_term(Stream, Term1, []),
+		read_term(Stream, _, []),
+		{set_stream_position(Stream, Position)},
+		read_term(Stream, Term3, []).
 
 	% stream_property/2
 
