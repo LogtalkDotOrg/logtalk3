@@ -29,9 +29,11 @@
 			logtalk_load(lgtunit(loader)),
 			logtalk_load([asian, babel, latin], [source_data(on), debug(on)]),
 			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16], [hook(lgtunit)]),
-			tests_iso_8859_1::run,
-			tests_utf_8::run,
-			tests_utf_16::run
+			lgtunit::run_test_sets([
+				tests_iso_8859_1,
+				tests_utf_8,
+				tests_utf_16
+			])
 		)).
 
 	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ji; Dialect == tau; Dialect == trealla))).
@@ -53,10 +55,12 @@
 			logtalk_load(lgtunit(loader)),
 			logtalk_load([asian, babel, latin, mythology], [source_data(on), debug(on)]),
 			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16, tests_utf_32], [hook(lgtunit)]),
-			tests_iso_8859_1::run,
-			tests_utf_8::run,
-			tests_utf_16::run,
-			tests_utf_32::run
+			lgtunit::run_test_sets([
+				tests_iso_8859_1,
+				tests_utf_8,
+				tests_utf_16,
+				tests_utf_32
+			])
 		)).
 
 	:- endif.
