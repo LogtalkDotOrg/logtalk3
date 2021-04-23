@@ -49,7 +49,7 @@
 
 	:- else.
 
-		% only test UTF-32 encoding on Prolog dialects supporting it
+		% only test full UTF-16 and UTF-32 encodings on Prolog dialects claiming to support it
 		:- initialization((
 			set_logtalk_flag(report, warnings),
 			logtalk_load(lgtunit(loader)),
