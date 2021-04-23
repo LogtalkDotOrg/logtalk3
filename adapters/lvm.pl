@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 1.6.0 and later versions
-%  Last updated on May 3, 2021
+%  Adapter file for LVM 1.7.0 and later versions
+%  Last updated on May 15, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -215,15 +215,15 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 6, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 7, 0))).
 
-'$lgt_prolog_feature'(encoding_directive, unsupported).
+'$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).
-'$lgt_prolog_feature'(unicode, unsupported).
+'$lgt_prolog_feature'(unicode, full).
 
 
 
@@ -388,8 +388,8 @@ setup_call_cleanup(_, _, _) :-
 % compile and load a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_load_prolog_code'(File, _Source, _Options) :-
-	consult(File).
+'$lgt_load_prolog_code'(File, _Source, Options) :-
+	load_files(File, Options).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
@@ -533,7 +533,23 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_logtalk_prolog_encoding'(?atom, ?atom, +stream)
 
+'$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-1', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-2', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-4', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-9', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-10', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-15', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-16', _).
+'$lgt_logtalk_prolog_encoding'('windows-1251', 'windows-1251', _).
+'$lgt_logtalk_prolog_encoding'('windows-1252', 'windows-1252', _).
 '$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16', 'UTF-16', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16BE', 'UTF-16BE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-16LE', 'UTF-16LE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-32', 'UTF-32', _).
+'$lgt_logtalk_prolog_encoding'('UTF-32BE', 'UTF-32BE', _).
+'$lgt_logtalk_prolog_encoding'('UTF-32LE', 'UTF-32LE', _).
 
 
 
