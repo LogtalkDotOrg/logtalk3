@@ -28,16 +28,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-08-06,
+		date is 2021-04-24,
 		comment is 'Unit tests for the "encodings" example.'
 	]).
 
 	cover(babel).
 
-	test(encodings_utf_8_1) :-
+	test(encodings_utf_8_01) :-
 		findall(Code-Text, babel::hello_world(Code, Text), Solutions),
-		Solutions == [el-'Γειά σου κόσμε!', en-'Hello world!', es-'¡Hola mundo!', ja-'こんにちは世界!', ko-'여보세요 세계!', nl-'Hallo wereld!', pt-'Olá mundo!', ru-'Здравствулте! мир!', zh-'你好世界!'].
+		^^assertion(Solutions == [el-'Γειά σου κόσμε!', en-'Hello world!', es-'¡Hola mundo!', ja-'こんにちは世界!', ko-'여보세요 세계!', nl-'Hallo wereld!', pt-'Olá mundo!', ru-'Здравствулте! мир!', zh-'你好世界!']).
+
+	test(encodings_utf_8_02) :-
+		findall(Length, (babel::hello_world(_, Text), atom_length(Text, Length)), Lengths),
+		^^assertion(Lengths == [15, 12, 12, 8, 8, 13, 10, 18, 5]).
 
 :- end_object.

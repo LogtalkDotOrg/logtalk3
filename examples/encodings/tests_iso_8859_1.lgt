@@ -28,16 +28,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-08-06,
+		date is 2021-04-24,
 		comment is 'Unit tests for the "encodings" example.'
 	]).
 
 	cover(latin).
 
-	test(encodings_iso_8859_1_1) :-
-		findall(Name, latin::name(Name), Solutions),
-		Solutions == ['António Simões', 'Cátia Conceição', 'João Raínho', 'Luís Araújo'].
+	test(encodings_iso_8859_1_01) :-
+		findall(Name, latin::name(Name), Names),
+		^^assertion(Names == ['António Simões', 'Cátia Conceição', 'João Raínho', 'Luís Araújo']).
+
+	test(encodings_iso_8859_1_02) :-
+		findall(Length, (latin::name(Name), atom_length(Name,Length)), Lengths),
+		^^assertion(Lengths == [14, 15, 11, 11]).
 
 :- end_object.
