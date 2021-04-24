@@ -20,8 +20,8 @@ ________________________________________________________________________
 
 This directory contains a work-in-progress set of unit tests for Prolog
 support for Unicode. The tests are based on the October 5, 2009 WG17 Core
-revision standardization proposal, which specifies the following language
-features:
+revision standardization proposal, which specifies the following minimal
+language features:
 
 1. An `encoding` Prolog flag, allowing applications to query the default
 encoding for opening streams. When the Prolog systems supports multiple
@@ -29,10 +29,10 @@ encodings, the default encoding can be changed by setting this directive
 to a supported encoding.
 
 2. Encodings are represented by atoms after the names specified by the
-Internet Assigned Numbers Authority (IANA) and marked as "(preferred
+Internet Assigned Numbers Authority (IANA) and marked as the "(preferred
 MIME name)":
 
-http://www.iana.org/assignments/character-sets
+	http://www.iana.org/assignments/character-sets
 
 3. Two new `open/4` predicate options, `encoding(Atom)` and `bom(Boolean)`.
 
@@ -47,12 +47,12 @@ http://www.iana.org/assignments/character-sets
 - `char_code/2`
 - `current_prolog_flag/2`
 - `get_char/1-2`
-- `get_code/2`
+- `get_code/1-2`
 - `open/3-4`
-- `peek_char/2`
-- `peek_code/2`
-- `put_char/2`
-- `put_code/2`
+- `peek_char/1-2`
+- `peek_code/1-2`
+- `put_char/1-2`
+- `put_code/1-2`
 - `read_term/3`
 - `set_prolog_flag/2`
 - `stream_property/2`
