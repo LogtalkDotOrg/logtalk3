@@ -47,6 +47,8 @@ Documentation
 
 * IMPROVED: Manual installation instructions for POSIX systems.
 
+* IMPROVED: Man page for the `logtalk_tester` script.
+
 * FIXED: Expired link in the documentation of the `assignvars` library. Thanks
 to kaiser185 for the bug report and alternative link.
 

@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "March 24, 2021" "Logtalk 3.46.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "April 24, 2021" "Logtalk 3.46.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -25,7 +25,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script. The script prints by default a full report of test compilation errors and warnings, skipped test sets, broken test sets, crashed test sets, skipped tests, failed tests, and test set and test stats. Note that the existence of broken or crashed test sets may result in some inconsistency on test stats, notably in the number of passed and failed tests.
 
 .SH OPTIONS
 .TP
