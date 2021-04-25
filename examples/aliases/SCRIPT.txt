@@ -44,19 +44,33 @@ yes
 
 | ?- square(2)::predicate_property(side(_), Property).
 
-Property = public ;
+Property = alias_of(width(_56130)) ;
+Property = alias_declared_in(square(2)) ;
+Property = alias_declared_in(square(2), 52) ;
+Property = logtalk ;
+Property = scope(public) ;
+Property =  (public) ;
 Property = static ;
-Property = declared_in(rectangle(_G264, _G265)) ;
-Property = defined_in(rectangle(_G297, _G298)) ;
-Property = alias_of(width(_G182))
+Property = declared_in(rectangle(_56350, _56352)) ;
+Property = declared_in(rectangle(_56350, _56352), 32) ;
+Property = defined_in(rectangle(_63112, _63112)) ;
+Property = defined_in(rectangle(_63942, _63942), 36) ;
+Property = number_of_clauses(1) ;
+Property = number_of_rules(0)
 yes
 
 | ?- square(2)::predicate_property(width(_), Property).
 
-Property = public ;
+Property = logtalk ;
+Property = scope(public) ;
+Property =  (public) ;
 Property = static ;
-Property = declared_in(rectangle(_G262, _G263)) ;
-Property = defined_in(rectangle(_G293, _G294))
+Property = declared_in(rectangle(_3434, _3436)) ;
+Property = declared_in(rectangle(_3434, _3436), 32) ;
+Property = defined_in(rectangle(_7916, _7916)) ;
+Property = defined_in(rectangle(_8742, _8742), 36) ;
+Property = number_of_clauses(1) ;
+Property = number_of_rules(0)
 yes
 
 
@@ -80,17 +94,31 @@ yes
 
 | ?- circle(3)::predicate_property(r(_), Property).
 
-Property = public ;
+Property = alias_of(rx(_33998)) ;
+Property = alias_declared_in(circle(3)) ;
+Property = alias_declared_in(circle(3), 89) ;
+Property = logtalk ;
+Property = scope(public) ;
+Property =  (public) ;
 Property = static ;
-Property = declared_in(ellipse(_G266, _G267)) ;
-Property = defined_in(ellipse(_G299, _G300)) ;
-Property = alias_of(rx(_G177))
+Property = declared_in(ellipse(_34218, _34220)) ;
+Property = declared_in(ellipse(_34218, _34220), 69) ;
+Property = defined_in(ellipse(_40980, _40980)) ;
+Property = defined_in(ellipse(_41810, _41810), 73) ;
+Property = number_of_clauses(1) ;
+Property = number_of_rules(0)
 yes
 
 | ?- circle(3)::predicate_property(rx(_), Property).
 
-Property = public ;
+Property = logtalk ;
+Property = scope(public) ;
+Property =  (public) ;
 Property = static ;
-Property = declared_in(ellipse(_G261, _G262)) ;
-Property = defined_in(ellipse(_G292, _G293))
+Property = declared_in(ellipse(_46416, _46418)) ;
+Property = declared_in(ellipse(_46416, _46418), 69) ;
+Property = defined_in(ellipse(_50898, _50898)) ;
+Property = defined_in(ellipse(_51724, _51724), 73) ;
+Property = number_of_clauses(1) ;
+Property = number_of_rules(0)
 yes
