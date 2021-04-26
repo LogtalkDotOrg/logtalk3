@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on April 12, 2021
+%  Last updated on April 25, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -268,7 +268,7 @@
 '$lgt_default_flag'(always_true_or_false_goals, warning).
 '$lgt_default_flag'(lambda_variables, warning).
 '$lgt_default_flag'(suspicious_calls, warning).
-'$lgt_default_flag'(underscore_variables, singletons).
+'$lgt_default_flag'(underscore_variables, dont_care).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).
