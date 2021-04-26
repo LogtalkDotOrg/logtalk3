@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Performance &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -212,7 +211,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="performance">
+  <div class="section" id="performance">
 <span id="id1"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#performance-meta-interpreter"><span class="std std-ref">Is Logtalk implemented as a meta-interpreter?</span></a></p></li>
@@ -220,14 +219,14 @@
 <li><p><a class="reference internal" href="#performance-binding"><span class="std std-ref">How about message-sending performance? Does Logtalk use static binding or dynamic binding?</span></a></p></li>
 <li><p><a class="reference internal" href="#performance-prolog"><span class="std std-ref">How does Logtalk performance compare with plain Prolog and with Prolog modules?</span></a></p></li>
 </ul>
-<section id="is-logtalk-implemented-as-a-meta-interpreter">
+<div class="section" id="is-logtalk-implemented-as-a-meta-interpreter">
 <span id="performance-meta-interpreter"></span><h2>Is Logtalk implemented as a meta-interpreter?<a class="headerlink" href="#is-logtalk-implemented-as-a-meta-interpreter" title="Permalink to this headline">¶</a></h2>
 <p>No. Objects and their encapsulated predicates are compiled, not
 meta-interpreted. In particular, inheritance relations are
 pre-compiled for improved performance. Moreover, no meta-interpreter
 is used even for objects compiled in debug mode.</p>
-</section>
-<section id="what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code">
+</div>
+<div class="section" id="what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code">
 <span id="performance-code-generated"></span><h2>What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?<a class="headerlink" href="#what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code" title="Permalink to this headline">¶</a></h2>
 <p>Static objects are compiled to static code. Static objects containing
 dynamic predicates are also compiled to static code, except, of
@@ -235,8 +234,8 @@ course, for the dynamic predicates themselves. Dynamic objects are
 necessarily compiled to dynamic code. As in Prolog programming, for
 best performance, dynamic object predicates and dynamic objects
 should only be used when truly needed.</p>
-</section>
-<section id="how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding">
+</div>
+<div class="section" id="how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding">
 <span id="performance-binding"></span><h2>How about message-sending performance? Does Logtalk use static binding or dynamic binding?<a class="headerlink" href="#how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk supports both static binding and dynamic binding. When static
 binding is not possible, Logtalk uses dynamic binding coupled with a
@@ -252,8 +251,8 @@ of dynamic binding when lookups are cached is close to the
 performance that would be achieved with static binding. See the
 User Manual section on <a class="reference internal" href="../userman/performance.html#performance-performance"><span class="std std-ref">performance</span></a>
 for more details.</p>
-</section>
-<section id="which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance">
+</div>
+<div class="section" id="which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance">
 <h2>Which Prolog-dependent factors are most crucial for good Logtalk performance?<a class="headerlink" href="#which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk compiles objects assuming first-argument indexing for static
 code. First-argument indexing of dynamic code, when available, helps
@@ -264,8 +263,8 @@ Dynamic objects and static objects containing dynamic predicates also
 benefit from first-argument indexing of dynamic predicates. The
 availability of multi-argument indexing, notably for dynamic
 predicates, also benefits dynamic binding performance.</p>
-</section>
-<section id="how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules">
+</div>
+<div class="section" id="how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules">
 <span id="performance-prolog"></span><h2>How does Logtalk performance compare with plain Prolog and with Prolog modules?<a class="headerlink" href="#how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules" title="Permalink to this headline">¶</a></h2>
 <p>Plain Prolog, Prolog modules, and Logtalk objects provide different
 trade-offs between performance and features. In general, for a given
@@ -277,8 +276,8 @@ to that of plain Prolog (depending on the Prolog virtual machine
 implementation and compiler optimizations). See the
 <a class="reference external" href="https://logtalk.org/performance.html">simple benchmark test results</a> using some
 popular Prolog compilers.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

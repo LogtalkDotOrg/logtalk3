@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>current_op/3 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -223,9 +222,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="current-op-3">
+  <div class="section" id="current-op-3">
 <span id="methods-current-op-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">current_op/3</span></code><a class="headerlink" href="#current-op-3" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">current_op</span>(<span class="nv">Priority</span>, <span class="nv">Specifier</span>, <span class="nv">Operator</span>)
 </pre></div>
@@ -233,14 +232,14 @@
 <p>Enumerates, by backtracking, the visible operators declared for an
 object. Operators not declared using a scope directive are not
 enumerated.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">current_op</span>(<span class="o">?</span>operator_priority, <span class="o">?</span>operator_specifier, <span class="o">?</span>atom) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Priority</span></code> is neither a variable nor an integer:</div>
@@ -264,8 +263,8 @@ enumerated.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,</span> <span class="pre">Operator)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">To enumerate, by backtracking, the local operators or the operators visible in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
@@ -287,8 +286,8 @@ enumerated.</p>
 <a class="reference internal" href="predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>,
 <a class="reference internal" href="../directives/op_3.html#directives-op-3"><span class="std std-ref">op/3</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

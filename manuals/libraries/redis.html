@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>redis &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -246,7 +245,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="redis">
+  <div class="section" id="redis">
 <h1><code class="docutils literal notranslate"><span class="pre">redis</span></code><a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
 <p>Redis client library. Supports GNU Prolog, LVM, Qu-Prolog, SICStus
 Prolog, SWI-Prolog, and XSB. Support for ECLiPSe is also included but
@@ -257,20 +256,20 @@ commands, visit:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>redis.io
 </pre></div>
 </div>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#redis">../../docs/library_index.html#redis</a>
 link in a web browser.</p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(redis(loader)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(redis(tester)).
@@ -285,13 +284,13 @@ Prolog Redis client library:</p>
 </div>
 <p>The Logtalk version is a straight-forward port of the original tests
 using the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> dialect of <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>.</p>
-</section>
-<section id="credits">
+</div>
+<div class="section" id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
 <p>This library is inspired by the Sean Charles GNU Prolog Redis client
 library.</p>
-</section>
-<section id="known-issues">
+</div>
+<div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
 <p>Recent version of macOS seem to disable the mapping of <code class="docutils literal notranslate"><span class="pre">localhost</span></code> to
 <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. This issue may prevent running this library unit tests
@@ -299,8 +298,8 @@ and the <code class="docutils literal notranslate"><span class="pre">redis::conn
 editing the
 <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">by</span> <span class="pre">using</span> <span class="pre">in</span> <span class="pre">alternative</span> <span class="pre">the</span> <span class="pre">predicate</span></code>redis::connect/3<code class="docutils literal notranslate"><span class="pre">with</span></code>’127.0.0.1’`
 as first argument.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

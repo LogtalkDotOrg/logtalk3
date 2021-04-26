@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>html &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -248,7 +247,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="html">
+  <div class="section" id="html">
 <h1><code class="docutils literal notranslate"><span class="pre">html</span></code><a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h1>
 <p>This library provides predicates for generating HTML content using
 either HTML 5 or XHTML 1.1 formats from a term representation. The
@@ -284,27 +283,27 @@ the (possibly empty) list of attributes represented by a list of
 content. Non atomic element content can be represented as a quoted atom
 or by using the <code class="docutils literal notranslate"><span class="pre">pre</span></code> or <code class="docutils literal notranslate"><span class="pre">code</span></code> elements as explained above.</p>
 <p>This library is a work in progress.</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#html">../../docs/library_index.html#html</a>
 link in a web browser.</p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(html(loader)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(html(tester)).
 </pre></div>
 </div>
-</section>
-<section id="generating-a-html-document">
+</div>
+<div class="section" id="generating-a-html-document">
 <h2>Generating a HTML document<a class="headerlink" href="#generating-a-html-document" title="Permalink to this headline">¶</a></h2>
 <p>HTML documents can be generated from a compound term representation and
 written to a file or a stream. For example, assuming we want to generate
@@ -324,8 +323,8 @@ a HTML 5 file:</p>
      ).
 </pre></div>
 </div>
-</section>
-<section id="generating-a-html-fragment">
+</div>
+<div class="section" id="generating-a-html-fragment">
 <h2>Generating a HTML fragment<a class="headerlink" href="#generating-a-html-fragment" title="Permalink to this headline">¶</a></h2>
 <p>It’s also possible to generate just a fragment of a (X)HTML document by
 using a list of compound terms or a compound term for an element other
@@ -345,8 +344,8 @@ baz<span class="o">&lt;/</span>li<span class="o">&gt;</span>
 <span class="nv">Stream</span> <span class="o">=</span> ...
 </pre></div>
 </div>
-</section>
-<section id="working-with-callbacks-to-generate-content">
+</div>
+<div class="section" id="working-with-callbacks-to-generate-content">
 <h2>Working with callbacks to generate content<a class="headerlink" href="#working-with-callbacks-to-generate-content" title="Permalink to this headline">¶</a></h2>
 <p>Often we need to programmatically generate HTML content from queries. In
 other cases, we may have fixed content that we don’t want to keep
@@ -370,8 +369,8 @@ example:</p>
 <code class="docutils literal notranslate"><span class="pre">Closure</span></code> is extended with a single argument (to be bound to the
 generated content). More complex callbacks are possible by using lambda
 expressions.</p>
-</section>
-<section id="working-with-custom-elements">
+</div>
+<div class="section" id="working-with-custom-elements">
 <h2>Working with custom elements<a class="headerlink" href="#working-with-custom-elements" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">html5</span></code> and <code class="docutils literal notranslate"><span class="pre">xhtml11</span></code> objects recognize the same set of standard
 HTML 5 normal and void elements and generate an error for non-standard
@@ -389,8 +388,8 @@ For example:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

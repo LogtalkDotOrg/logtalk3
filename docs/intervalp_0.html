@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>intervalp &mdash; Logtalk APIs v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
@@ -262,7 +261,7 @@
            <div itemprop="articleBody">
             
   <p class="right" id="intervalp-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="intervalp">
+<div class="section" id="intervalp">
 <h1><code class="docutils literal notranslate"><span class="pre">intervalp</span></code><a class="headerlink" href="#intervalp" title="Permalink to this headline">¶</a></h1>
 <p>Basic temporal interval relations protocol (based on James F. Allen Interval Algebra work).</p>
 <div class="line-block">
@@ -320,9 +319,9 @@
 <li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
 </ul>
 </div>
-<section id="public-predicates">
+<div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="new/3"> </div><section id="new-3">
+<div id="new/3"> </div><div class="section" id="new-3">
 <span id="intervalp-0-new-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/3</span></code></a><a class="headerlink" href="#new-3" title="Permalink to this headline">¶</a></h3>
 <p>Constructs a new interval given start and end points. The start point must strictly precede the end point.</p>
 <div class="line-block">
@@ -342,8 +341,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="valid/1"> </div></section>
-<section id="valid-1">
+<div id="valid/1"> </div></div>
+<div class="section" id="valid-1">
 <span id="intervalp-0-valid-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a><a class="headerlink" href="#valid-1" title="Permalink to this headline">¶</a></h3>
 <p>True if Interval is a valid interval.</p>
 <div class="line-block">
@@ -363,8 +362,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="before/2"> </div></section>
-<section id="before-2">
+<div id="before/2"> </div></div>
+<div class="section" id="before-2">
 <span id="intervalp-0-before-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">before/2</span></code></a><a class="headerlink" href="#before-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> takes place before <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -384,8 +383,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="after/2"> </div></section>
-<section id="after-2">
+<div id="after/2"> </div></div>
+<div class="section" id="after-2">
 <span id="intervalp-0-after-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">after/2</span></code></a><a class="headerlink" href="#after-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> takes place after <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -405,8 +404,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="meets/2"> </div></section>
-<section id="meets-2">
+<div id="meets/2"> </div></div>
+<div class="section" id="meets-2">
 <span id="intervalp-0-meets-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">meets/2</span></code></a><a class="headerlink" href="#meets-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> meets <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -426,8 +425,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="met_by/2"> </div></section>
-<section id="met-by-2">
+<div id="met_by/2"> </div></div>
+<div class="section" id="met-by-2">
 <span id="intervalp-0-met-by-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">met_by/2</span></code></a><a class="headerlink" href="#met-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> is met by <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -447,8 +446,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="overlaps/2"> </div></section>
-<section id="overlaps-2">
+<div id="overlaps/2"> </div></div>
+<div class="section" id="overlaps-2">
 <span id="intervalp-0-overlaps-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">overlaps/2</span></code></a><a class="headerlink" href="#overlaps-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> overlaps with <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -468,8 +467,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="overlapped_by/2"> </div></section>
-<section id="overlapped-by-2">
+<div id="overlapped_by/2"> </div></div>
+<div class="section" id="overlapped-by-2">
 <span id="intervalp-0-overlapped-by-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">overlapped_by/2</span></code></a><a class="headerlink" href="#overlapped-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> is overlapped by <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -489,8 +488,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="starts/2"> </div></section>
-<section id="starts-2">
+<div id="starts/2"> </div></div>
+<div class="section" id="starts-2">
 <span id="intervalp-0-starts-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">starts/2</span></code></a><a class="headerlink" href="#starts-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> starts <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -510,8 +509,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="started_by/2"> </div></section>
-<section id="started-by-2">
+<div id="started_by/2"> </div></div>
+<div class="section" id="started-by-2">
 <span id="intervalp-0-started-by-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">started_by/2</span></code></a><a class="headerlink" href="#started-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> is started by <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -531,8 +530,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="during/2"> </div></section>
-<section id="during-2">
+<div id="during/2"> </div></div>
+<div class="section" id="during-2">
 <span id="intervalp-0-during-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">during/2</span></code></a><a class="headerlink" href="#during-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> occurs during <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -552,8 +551,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="contains/2"> </div></section>
-<section id="contains-2">
+<div id="contains/2"> </div></div>
+<div class="section" id="contains-2">
 <span id="intervalp-0-contains-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">contains/2</span></code></a><a class="headerlink" href="#contains-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> contains <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -573,8 +572,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="finishes/2"> </div></section>
-<section id="finishes-2">
+<div id="finishes/2"> </div></div>
+<div class="section" id="finishes-2">
 <span id="intervalp-0-finishes-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">finishes/2</span></code></a><a class="headerlink" href="#finishes-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> finishes <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -594,8 +593,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="finished_by/2"> </div></section>
-<section id="finished-by-2">
+<div id="finished_by/2"> </div></div>
+<div class="section" id="finished-by-2">
 <span id="intervalp-0-finished-by-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">finished_by/2</span></code></a><a class="headerlink" href="#finished-by-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> is finished by <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -615,8 +614,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="equal/2"> </div></section>
-<section id="equal-2">
+<div id="equal/2"> </div></div>
+<div class="section" id="equal-2">
 <span id="intervalp-0-equal-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">equal/2</span></code></a><a class="headerlink" href="#equal-2" title="Permalink to this headline">¶</a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Interval1</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">Interval2</span></code>.</p>
 <div class="line-block">
@@ -635,26 +634,26 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">equal(&#64;interval,&#64;interval)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="protected-predicates">
+<div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</section>
-<section id="private-predicates">
+</div>
+<div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</section>
-<section id="operators">
+</div>
+<div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="interval_0.html#interval-0"><span class="std std-ref">interval</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

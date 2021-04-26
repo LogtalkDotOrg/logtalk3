@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>phrase/2 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -225,9 +224,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="phrase-2">
+  <div class="section" id="phrase-2">
 <span id="methods-phrase-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">phrase/2</span></code><a class="headerlink" href="#phrase-2" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">phrase</span>(<span class="nv">GrammarRuleBody</span>, <span class="nv">Input</span>)
 <span class="k">phrase</span>(<span class="o">::</span><span class="nv">GrammarRuleBody</span>, <span class="nv">Input</span>)
@@ -246,14 +245,14 @@ argument is sufficiently instantiated at compile time, the method call
 is compiled in order to eliminate the implicit overheads of converting
 the grammar rule body into a goal and meta-calling it. For performance
 reasons, the second argument is only type-checked at compile time.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">phrase</span>(<span class="o">+</span>callable, <span class="o">?</span>list) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">NonTerminal</span></code> is a variable:</div>
@@ -265,8 +264,8 @@ reasons, the second argument is only type-checked at compile time.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">NonTerminal)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">To parse a list of tokens using a local non-terminal:</div>
@@ -288,8 +287,8 @@ reasons, the second argument is only type-checked at compile time.</p>
 <a class="reference internal" href="phrase_1.html#methods-phrase-1"><span class="std std-ref">phrase//1</span></a>,
 <a class="reference internal" href="phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

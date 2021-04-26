@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Inheritance &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -234,7 +233,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="inheritance">
+  <div class="section" id="inheritance">
 <span id="inheritance-inheritance"></span><h1>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline">¶</a></h1>
 <p>The inheritance mechanisms found on object-oriented programming
 languages allow the specialization of previously defined objects,
@@ -259,14 +258,14 @@ details of the search procedures depend on the role played by the object
 receiving the message or making the <em>super</em> call, as explained next. The
 search procedures are also used by the <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
 and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a> reflection predicates.</p>
-<section id="protocol-inheritance">
+<div class="section" id="protocol-inheritance">
 <span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
 (<a class="reference internal" href="../glossary.html#term-predicate-scope-directive"><span class="xref std std-term">scope directives</span></a>). These can be contained
 in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
 protocols and a protocol may extend several protocols.</p>
-<section id="search-order-for-prototype-hierarchies">
+<div class="section" id="search-order-for-prototype-hierarchies">
 <span id="inheritance-protocol-prototype"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#search-order-for-prototype-hierarchies" title="Permalink to this headline">¶</a></h3>
 <p>The search order for predicate declarations is first the object, second
 the implemented protocols (and the protocols that these may extend),
@@ -275,8 +274,8 @@ implement), and last the objects that the object extends. This search is
 performed in depth-first order. When an object inherits two different
 declarations for the same predicate, by default, only the first one will
 be considered.</p>
-</section>
-<section id="search-order-for-class-hierarchies">
+</div>
+<div class="section" id="search-order-for-class-hierarchies">
 <span id="inheritance-protocol-class"></span><h3>Search order for class hierarchies<a class="headerlink" href="#search-order-for-class-hierarchies" title="Permalink to this headline">¶</a></h3>
 <p>The search order for predicate declarations starts in the object
 classes. Following the classes declaration order, the search starts in
@@ -286,22 +285,22 @@ they may implement), and last the superclasses of the object classes.
 This search is performed in depth-first order. If the object inherits
 two different declarations for the same predicate, by default only the
 first one will be considered.</p>
-</section>
-</section>
-<section id="implementation-inheritance">
+</div>
+</div>
+<div class="section" id="implementation-inheritance">
 <span id="inheritance-implementation"></span><h2>Implementation inheritance<a class="headerlink" href="#implementation-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Implementation inheritance refers to the inheritance of predicate
 definitions. These can be contained in objects or in categories. Logtalk
 supports multi-inheritance of implementation: an object may import
 several categories or extend, specialize, or instantiate several
 objects.</p>
-<section id="inheritance-implementation-prototype">
+<div class="section" id="inheritance-implementation-prototype">
 <span id="id1"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#inheritance-implementation-prototype" title="Permalink to this headline">¶</a></h3>
 <p>The search order for predicate definitions is similar to the search for
 predicate declarations except that implemented protocols are ignored (as
 they can only contain predicate directives).</p>
-</section>
-<section id="inheritance-implementation-class">
+</div>
+<div class="section" id="inheritance-implementation-class">
 <span id="id2"></span><h3>Search order for class hierarchies<a class="headerlink" href="#inheritance-implementation-class" title="Permalink to this headline">¶</a></h3>
 <p>The search order for predicate definitions is similar to the search for
 predicate declarations except that implemented protocols are ignored (as
@@ -309,8 +308,8 @@ they can only contain predicate directives) and that the search starts
 at the instance itself (that received the message) before proceeding, if
 no predicate definition is found there, to the instance classes and then
 to the class superclasses.</p>
-</section>
-<section id="redefining-inherited-predicate-definitions">
+</div>
+<div class="section" id="redefining-inherited-predicate-definitions">
 <span id="inheritance-implementation-redefinition"></span><h3>Redefining inherited predicate definitions<a class="headerlink" href="#redefining-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>When we define a predicate that is already inherited from an ancestor object
 or an imported category, the inherited definition is hidden by the new
@@ -353,8 +352,8 @@ yes
 </pre></div>
 </div>
 <p>However, we can explicitly code other behaviors. Some examples follow.</p>
-</section>
-<section id="specializing-inherited-predicate-definitions">
+</div>
+<div class="section" id="specializing-inherited-predicate-definitions">
 <span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>Specialization of inherited definitions: the new definition calls the
 inherited definition and makes additional calls. This is accomplished
@@ -389,8 +388,8 @@ root init
 yes
 </pre></div>
 </div>
-</section>
-<section id="union-of-inherited-and-local-predicate-definitions">
+</div>
+<div class="section" id="union-of-inherited-and-local-predicate-definitions">
 <span id="inheritance-union"></span><h3>Union of inherited and local predicate definitions<a class="headerlink" href="#union-of-inherited-and-local-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
@@ -427,8 +426,8 @@ Foo = 2 ;
 no
 </pre></div>
 </div>
-</section>
-<section id="selective-inheritance-of-predicate-definitions">
+</div>
+<div class="section" id="selective-inheritance-of-predicate-definitions">
 <span id="inheritance-selective"></span><h3>Selective inheritance of predicate definitions<a class="headerlink" href="#selective-inheritance-of-predicate-definitions" title="Permalink to this headline">¶</a></h3>
 <p>The selective inheritance of predicate definitions (also known as
 differential inheritance) is normally used in the representation
@@ -464,9 +463,9 @@ Mode = walks ;
 no
 </pre></div>
 </div>
-</section>
-</section>
-<section id="public-protected-and-private-inheritance">
+</div>
+</div>
+<div class="section" id="public-protected-and-private-inheritance">
 <span id="inheritance-scope"></span><h2>Public, protected, and private inheritance<a class="headerlink" href="#public-protected-and-private-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>To make all <a class="reference internal" href="../glossary.html#term-public-predicate"><span class="xref std std-term">public predicates</span></a>
 declared via implemented protocols, imported categories, or ancestor
@@ -520,8 +519,8 @@ keyword. For example:</p>
 <p>This way we ensure backward compatibility with older Logtalk versions
 and a simplified syntax when protected or private inheritance are not
 used.</p>
-</section>
-<section id="multiple-inheritance">
+</div>
+<div class="section" id="multiple-inheritance">
 <span id="inheritance-multiple"></span><h2>Multiple inheritance<a class="headerlink" href="#multiple-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk supports multi-inheritance by enabling an object to extend,
 instantiate, or specialize more than one object. Likewise, a protocol
@@ -539,8 +538,8 @@ entities before looking into the parent object <cite>baz</cite>. The
 solve multi-inheritance conflicts. It should also be noted that the
 multi-inheritance support does not affect performance when we use
 single-inheritance.</p>
-</section>
-<section id="composition-versus-multiple-inheritance">
+</div>
+<div class="section" id="composition-versus-multiple-inheritance">
 <span id="inheritance-composition"></span><h2>Composition versus multiple inheritance<a class="headerlink" href="#composition-versus-multiple-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>It is not possible to discuss inheritance mechanisms without referring
 to the long and probably endless debate on single versus multiple
@@ -566,8 +565,8 @@ mechanisms <a class="reference internal" href="../bibliography.html#taenzer89" i
 and project abstraction, rather than as an implementation technique
 <a class="reference internal" href="../bibliography.html#shan-et-al-93" id="id7"><span>[Shan_et_al_93]</span></a>. Note that Logtalk provides first-class support for
 composition using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">categories</span></a>.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

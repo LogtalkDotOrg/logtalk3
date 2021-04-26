@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>hook_flows &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -245,7 +244,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="hook-flows">
+  <div class="section" id="hook-flows">
 <h1><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code><a class="headerlink" href="#hook-flows" title="Permalink to this headline">¶</a></h1>
 <p>Hook objects (i.e. objects that define term- and goal-expansion rules)
 can be combined to define expansion <em>workflows</em>. While in some cases the
@@ -258,27 +257,27 @@ workflows of any complexity (e.g. a pipeline where one of the steps is
 set with an element that is a pipeline). These two basic hook flows can
 also used as examples of how to construct your own custom expansion
 workflows.</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#hook_flows">../../docs/library_index.html#hook_flows</a>
 link in a web browser.</p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_flows(loader)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_flows(tester)).
 </pre></div>
 </div>
-</section>
-<section id="usage">
+</div>
+<div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Pre-processing a source file with a hook object can be accomplished by
 either compiling the source file using the option <code class="docutils literal notranslate"><span class="pre">hook(HookObject)</span></code>
@@ -304,8 +303,8 @@ multiple independent expansions.</p>
 <p>When using a backend Prolog compiler that supports modules, it’s also
 possible to use as parameter a list of hook modules as long as their
 names do not coincide with the names of loaded objects.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

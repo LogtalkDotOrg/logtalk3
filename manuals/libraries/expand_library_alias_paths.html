@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>expand_library_alias_paths &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -244,27 +243,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="expand-library-alias-paths">
+  <div class="section" id="expand-library-alias-paths">
 <h1><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code><a class="headerlink" href="#expand-library-alias-paths" title="Permalink to this headline">¶</a></h1>
 <p>This library provides provides a hook object,
 <code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code>, for expanding library alias paths in
 <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span> <span class="pre">facts</span></code> in source files. It is mainly used when
 embedding Logtalk and Logtalk applications.</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#expand_library_alias_paths">../../docs/library_index.html#expand_library_alias_paths</a>
 link in a web browser.</p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
 file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(expand_library_alias_paths(loader)).
 </pre></div>
 </div>
-</section>
-<section id="usage">
+</div>
+<div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">hook/1</span></code> option when compiling a source file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_source_file, [hook(expand_library_alias_paths)]).
@@ -277,8 +276,8 @@ can set it as thew default hook object:</p>
 ...
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

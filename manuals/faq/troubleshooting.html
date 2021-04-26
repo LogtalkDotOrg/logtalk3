@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Troubleshooting &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -210,14 +209,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="troubleshooting">
+  <div class="section" id="troubleshooting">
 <span id="faq-troubleshooting"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#faq-troubleshooting-options"><span class="std std-ref">Using compiler options on calls to the Logtalk compiling and loading predicates do not work!</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-troubleshooting-gecko"><span class="std std-ref">Gecko-based browsers (e.g. Firefox) show non-rendered HTML entities when browsing XML documenting files!</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-troubleshooting-warnings"><span class="std std-ref">Compiling a source file results in errors or warnings but the Logtalk compiler reports a successful compilation with zero errors and zero warnings!</span></a></p></li>
 </ul>
-<section id="using-compiler-options-on-calls-to-the-logtalk-compiling-and-loading-predicates-do-not-work">
+<div class="section" id="using-compiler-options-on-calls-to-the-logtalk-compiling-and-loading-predicates-do-not-work">
 <span id="faq-troubleshooting-options"></span><h2>Using compiler options on calls to the Logtalk compiling and loading predicates do not work!<a class="headerlink" href="#using-compiler-options-on-calls-to-the-logtalk-compiling-and-loading-predicates-do-not-work" title="Permalink to this headline">¶</a></h2>
 <p>Using compiler options on calls to the Logtalk <a class="reference internal" href="../refman/predicates/logtalk_compile_2.html#predicates-logtalk-compile-2"><span class="std std-ref">logtalk_compile/2</span></a>
 and <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> built-in predicates only apply the file being
@@ -226,8 +225,8 @@ options will only be used in the compilation of the loader file
 itself, not in the compilation of the files loaded by the loader
 file. The solution is to edit the loader file and add the compiler
 options to the calls that compile/load the individual files.</p>
-</section>
-<section id="gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files">
+</div>
+<div class="section" id="gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files">
 <span id="faq-troubleshooting-gecko"></span><h2>Gecko-based browsers (e.g. Firefox) show non-rendered HTML entities when browsing XML documenting files!<a class="headerlink" href="#gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files" title="Permalink to this headline">¶</a></h2>
 <p>Using Gecko-based browsers (e.g. Firefox) show non-rendered HTML
 entities (e.g. <code class="docutils literal notranslate"><span class="pre">&amp;ndash;</span></code>) when browsing XML documenting files after
@@ -238,8 +237,8 @@ processor. The workaround is to use other browser (e.g. Safari or
 Opera) or to use instead the <code class="docutils literal notranslate"><span class="pre">lgt2html</span></code> shell script in the
 directory containing the XML documenting files to convert them to
 (X)HTML files for browsing.</p>
-</section>
-<section id="compiling-a-source-file-results-in-errors-or-warnings-but-the-logtalk-compiler-reports-a-successful-compilation-with-zero-errors-and-zero-warnings">
+</div>
+<div class="section" id="compiling-a-source-file-results-in-errors-or-warnings-but-the-logtalk-compiler-reports-a-successful-compilation-with-zero-errors-and-zero-warnings">
 <span id="faq-troubleshooting-warnings"></span><h2>Compiling a source file results in errors or warnings but the Logtalk compiler reports a successful compilation with zero errors and zero warnings!<a class="headerlink" href="#compiling-a-source-file-results-in-errors-or-warnings-but-the-logtalk-compiler-reports-a-successful-compilation-with-zero-errors-and-zero-warnings" title="Permalink to this headline">¶</a></h2>
 <p>This may happen when your Prolog compiler implementation of the ISO
 Prolog standard <code class="docutils literal notranslate"><span class="pre">write_canonical/2</span></code> built-in predicate is buggy and
@@ -252,8 +251,8 @@ relies on the exception mechanisms to catch compilation problems, it
 may report zero errors and zero warnings despite the error messages.
 Send a bug report to the Prolog compiler developers asking them to
 fix the <code class="docutils literal notranslate"><span class="pre">write_canonical/2</span></code> buggy implementation.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

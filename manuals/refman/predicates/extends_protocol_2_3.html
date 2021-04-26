@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>extends_protocol/2-3 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -227,9 +226,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="extends-protocol-2-3">
+  <div class="section" id="extends-protocol-2-3">
 <span id="predicates-extends-protocol-2-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">extends_protocol/2-3</span></code><a class="headerlink" href="#extends-protocol-2-3" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">extends_protocol</span>(<span class="nv">Protocol</span>, <span class="nv">ParentProtocol</span>)
 <span class="k">extends_protocol</span>(<span class="nv">Protocol</span>, <span class="nv">ParentProtocol</span>, <span class="nv">Scope</span>)
@@ -238,15 +237,15 @@
 <p>Enumerates, by backtracking, all pairs of protocols such that the first
 one extends the second. The relation scope is represented by the atoms
 <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">protected</span></code>, and <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">extends_protocol</span>(<span class="o">?</span>protocol_identifier, <span class="o">?</span>protocol_identifier) <span class="o">-</span> zero_or_more
 <span class="k">extends_protocol</span>(<span class="o">?</span>protocol_identifier, <span class="o">?</span>protocol_identifier, <span class="o">?</span>scope) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Protocol</span></code> is neither a variable nor a valid protocol identifier:</div>
@@ -266,8 +265,8 @@ one extends the second. The relation scope is represented by the atoms
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(scope,</span> <span class="pre">Scope)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate the protocols extended by the listp protocol:</span>
 | <span class="o">?-</span> <span class="k">extends_protocol</span>(listp, <span class="nv">Protocol</span>).
@@ -282,8 +281,8 @@ one extends the second. The relation scope is represented by the atoms
 <a class="reference internal" href="implements_protocol_2_3.html#predicates-implements-protocol-2-3"><span class="std std-ref">implements_protocol/2-3</span></a>,
 <a class="reference internal" href="conforms_to_protocol_2_3.html#predicates-conforms-to-protocol-2-3"><span class="std std-ref">conforms_to_protocol/2-3</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

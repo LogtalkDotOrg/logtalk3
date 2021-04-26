@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>code_metrics &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -223,7 +222,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="code-metrics">
+  <div class="section" id="code-metrics">
 <h1><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code><a class="headerlink" href="#code-metrics" title="Permalink to this headline">¶</a></h1>
 <p>The purpose of this tool is to assess qualities of source code that may
 predict negative aspects such as entity coupling, cohesion, complexity,
@@ -235,26 +234,26 @@ a particular predicate depends on the specific metric. One set of
 predicates prints, by default, the computed metric values to the
 standard output. A second set of predicates computes and returns a score
 (usually a compound term with the computed metric values as arguments).</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#code-metrics">../../docs/library_index.html#code-metrics</a></p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code_metrics(loader)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code_metrics(tester)).
 </pre></div>
 </div>
-</section>
-<section id="available-metrics">
+</div>
+<div class="section" id="available-metrics">
 <h2>Available metrics<a class="headerlink" href="#available-metrics" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the following metrics are provided:</p>
 <ul class="simple">
@@ -336,21 +335,21 @@ original paper by Thomas J. McCabe:</p>
 <p>Be sure to fully understand the metrics individual meanings and any
 implementation limitations before using them to support any evaluation
 or decision process.</p>
-</section>
-<section id="usage">
+</div>
+<div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>All metrics require the source code to be analyzed to be loaded with the
 <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on. For usage examples, see the
 <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory.</p>
-</section>
-<section id="defining-new-metrics">
+</div>
+<div class="section" id="defining-new-metrics">
 <h2>Defining new metrics<a class="headerlink" href="#defining-new-metrics" title="Permalink to this headline">¶</a></h2>
 <p>New metrics can be implemented by defining an object that imports the
 <code class="docutils literal notranslate"><span class="pre">code_metric</span></code> category and implements its score predicates. There is
 also a <code class="docutils literal notranslate"><span class="pre">code_metrics_utilities</span></code> category that defines useful
 predicates for the definition of metrics.</p>
-</section>
-<section id="third-party-tools">
+</div>
+<div class="section" id="third-party-tools">
 <h2>Third-party tools<a class="headerlink" href="#third-party-tools" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">cloc</span></code> is an open-source command-line program that counts blank lines,
 comment lines, and lines of source code in many programming languages
@@ -363,8 +362,8 @@ languages including Logtalk. Available at
 lines, comment lines, and lines of source code in many programming
 languages including Logtalk. Available at
 <a class="reference external" href="https://github.com/Aaronepower/tokei">https://github.com/Aaronepower/tokei</a></p>
-</section>
-<section id="applying-metrics-to-prolog-modules">
+</div>
+<div class="section" id="applying-metrics-to-prolog-modules">
 <h2>Applying metrics to Prolog modules<a class="headerlink" href="#applying-metrics-to-prolog-modules" title="Permalink to this headline">¶</a></h2>
 <p>Some of the metrics can also be applied to Prolog modules that Logtalk
 is able to compile as objects. For example, if the Prolog module file is
@@ -375,8 +374,8 @@ named <code class="docutils literal notranslate"><span class="pre">module.pl</sp
 <p>Due to the lack of standardization of module systems and the abundance
 of proprietary extensions, this solution is not expected to work for all
 cases.</p>
-</section>
-<section id="applying-metrics-to-plain-prolog-code">
+</div>
+<div class="section" id="applying-metrics-to-plain-prolog-code">
 <h2>Applying metrics to plain Prolog code<a class="headerlink" href="#applying-metrics-to-plain-prolog-code" title="Permalink to this headline">¶</a></h2>
 <p>Some of the metrics can also be applied to plain Prolog code. For
 example, if the Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an
@@ -402,8 +401,8 @@ the Prolog file and then load it in debug mode:</p>
 <p>With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog code
 of working when wrapped by an object.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

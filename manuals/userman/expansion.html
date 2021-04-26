@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Term and goal expansion &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -226,7 +225,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="term-and-goal-expansion">
+  <div class="section" id="term-and-goal-expansion">
 <span id="expansion-expansion"></span><h1>Term and goal expansion<a class="headerlink" href="#term-and-goal-expansion" title="Permalink to this headline">¶</a></h1>
 <p>Logtalk supports a <em>term and goal expansion mechanism</em> that can be used to
 define source-to-source transformations. Two common uses are the definition
@@ -242,7 +241,7 @@ explicit and well defined semantics. It prevents the simply act of loading
 expansion rules affecting subsequent compilation of files. It prevents
 conflicts between groups of expansion rules of different origins. It avoids
 a set of buggy expansion rules from breaking other sets of expansions rules.</p>
-<section id="defining-expansions">
+<div class="section" id="defining-expansions">
 <h2>Defining expansions<a class="headerlink" href="#defining-expansions" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansions are defined using, respectively, the predicates
 <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>, which
@@ -334,8 +333,8 @@ expansion of the same goal. For example, consider the following object:</p>
 <p>The expansion of the goal <code class="docutils literal notranslate"><span class="pre">a</span></code> results in the goal <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">-&gt;</span> <span class="pre">b;</span> <span class="pre">c)</span></code> with no
 attempt to further expand the <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> goals as they have
 already been expanded.</p>
-</section>
-<section id="expanding-grammar-rules">
+</div>
+<div class="section" id="expanding-grammar-rules">
 <h2>Expanding grammar rules<a class="headerlink" href="#expanding-grammar-rules" title="Permalink to this headline">¶</a></h2>
 <p>A common term expansion is the translation of grammar rules into predicate
 clauses. This transformation is performed automatically by the compiler
@@ -349,8 +348,8 @@ yes
 </div>
 <p>Note that the default translation of grammar rules can be overridden by
 defining clauses for the <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> predicate.</p>
-</section>
-<section id="bypassing-expansions">
+</div>
+<div class="section" id="bypassing-expansions">
 <h2>Bypassing expansions<a class="headerlink" href="#bypassing-expansions" title="Permalink to this headline">¶</a></h2>
 <p>Terms and goals wrapped by the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control
 construct are not expanded. For example:</p>
@@ -367,8 +366,8 @@ yes
 </div>
 <p>This also applies to source file terms and source file goals when using hook
 objects (discussed next).</p>
-</section>
-<section id="hook-objects">
+</div>
+<div class="section" id="hook-objects">
 <h2>Hook objects<a class="headerlink" href="#hook-objects" title="Permalink to this headline">¶</a></h2>
 <p>Term and goal expansion of a source file during its compilation is performed
 by using <em>hook objects</em>. A hook object is simply an object implementing the
@@ -406,8 +405,8 @@ predicate compiler option for compiling or loading the source file.</p>
 defined within an object or a category are never used in the compilation
 of the object or the category itself.</p>
 </div>
-<span class="target" id="index-0"></span></section>
-<section id="virtual-source-file-terms-and-loading-context">
+<span class="target" id="index-0"></span></div>
+<div class="section" id="virtual-source-file-terms-and-loading-context">
 <span id="index-1"></span><h2>Virtual source file terms and loading context<a class="headerlink" href="#virtual-source-file-terms-and-loading-context" title="Permalink to this headline">¶</a></h2>
 <p>When using a hook object to expand the terms of a source file, two
 virtual file terms are generated: <code class="docutils literal notranslate"><span class="pre">begin_of_file</span></code> and <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>.
@@ -453,8 +452,8 @@ these are term-expanded but not goal-expanded (with the exception of
 <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives, where the goal argument is expanded to
 improve code portability across backends).</p>
 </div>
-</section>
-<section id="default-compiler-expansion-workflow">
+</div>
+<div class="section" id="default-compiler-expansion-workflow">
 <h2>Default compiler expansion workflow<a class="headerlink" href="#default-compiler-expansion-workflow" title="Permalink to this headline">¶</a></h2>
 <p>When compiling a source file, the compiler will first try, by default,
 the source file specific hook object specified using a local
@@ -466,8 +465,8 @@ default hook object, if defined. If that expansion also fails, the
 compiler tries the Prolog dialect specific expansion rules found found
 in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a> (which are used to support non-standard
 Prolog features).</p>
-</section>
-<section id="user-defined-expansion-workflows">
+</div>
+<div class="section" id="user-defined-expansion-workflows">
 <h2>User defined expansion workflows<a class="headerlink" href="#user-defined-expansion-workflows" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes we have multiple hook objects that we need to use in the compilation
 of a source file. Logtalk includes a <a class="reference internal" href="../libraries/hook_flows.html"><span class="doc">hook_flows</span></a> library
@@ -501,8 +500,8 @@ source file the directive:</p>
 <p>The file will be compiled as-is as any hook object (specified as a compiler
 option or as a default hook object) and any backend adapter expansion rules
 are overriden by the directive.</p>
-</section>
-<section id="using-prolog-defined-expansions">
+</div>
+<div class="section" id="using-prolog-defined-expansions">
 <h2>Using Prolog defined expansions<a class="headerlink" href="#using-prolog-defined-expansions" title="Permalink to this headline">¶</a></h2>
 <p>In order to use clauses for the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
 predicates defined in plain Prolog, simply specify the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>
@@ -536,8 +535,8 @@ existence errors when compiling source files with the <code class="docutils lite
 to <code class="docutils literal notranslate"><span class="pre">user</span></code> as these predicates are only natively declared in some of the
 supported backend Prolog compilers.</p>
 </div>
-</section>
-<section id="debugging-expansions">
+</div>
+<div class="section" id="debugging-expansions">
 <h2>Debugging expansions<a class="headerlink" href="#debugging-expansions" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates can be debugged
 as any other object predicates. Note that expansions can often be manually
@@ -599,8 +598,8 @@ yes
 yes
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>threaded_engine_create/3 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -227,9 +226,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="threaded-engine-create-3">
+  <div class="section" id="threaded-engine-create-3">
 <span id="predicates-threaded-engine-create-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">threaded_engine_create/3</span></code><a class="headerlink" href="#threaded-engine-create-3" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_create</span>(<span class="nv">AnswerTemplate</span>, <span class="nv">Goal</span>, <span class="nv">Engine</span>)
 </pre></div>
@@ -240,15 +239,15 @@ passing arbitrary terms to the engine is also created. If the name for
 the engine is not given, a unique name is generated and returned. Engine
 names shall be regarded as opaque terms; users shall not rely on its
 type.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_create</span>(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">@</span>nonvar) <span class="o">-</span> one
 <span class="k">threaded_engine_create</span>(<span class="o">@</span>term, <span class="o">@</span>callable, <span class="o">--</span>nonvar) <span class="o">-</span> one
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Goal</span></code> is a variable:</div>
@@ -264,8 +263,8 @@ type.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(create,</span> <span class="pre">engine,</span> <span class="pre">Engine)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% create a new engine for finding members of a list:</span>
 | <span class="o">?-</span> <span class="k">threaded_engine_create</span>(<span class="nv">X</span>, member(<span class="nv">X</span>, [<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>]), worker_1).
@@ -279,8 +278,8 @@ type.</p>
 <a class="reference internal" href="threaded_engine_next_2.html#predicates-threaded-engine-next-2"><span class="std std-ref">threaded_engine_next/2</span></a>,
 <a class="reference internal" href="threaded_engine_next_reified_2.html#predicates-threaded-engine-next-reified-2"><span class="std std-ref">threaded_engine_next_reified/2</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

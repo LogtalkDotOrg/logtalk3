@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Debugging &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="declarative.html">Declarative object-oriented programming</a></li>
@@ -237,7 +236,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="debugging">
+  <div class="section" id="debugging">
 <span id="debugging-debugging"></span><h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
 <p>The Logtalk distribution includes a command-line <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a>
 tool implemented as a Logtalk application. It can be loaded by typing:</p>
@@ -260,7 +259,7 @@ of spy points allows the user to specify the
 <a class="reference internal" href="../glossary.html#term-predicate-execution-context"><span class="xref std std-term">execution context</span></a> for entering
 the debugger. This feature is a consequence of the encapsulation of
 predicates inside objects.</p>
-<section id="compiling-source-files-in-debug-mode">
+<div class="section" id="compiling-source-files-in-debug-mode">
 <span id="debugging-debug-mode"></span><h2>Compiling source files in debug mode<a class="headerlink" href="#compiling-source-files-in-debug-mode" title="Permalink to this headline">¶</a></h2>
 <p>Compilation of source files in debug mode is controlled by the
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> compiler flag. The default value for this flag,
@@ -297,8 +296,8 @@ all loaded entities compiled in debug mode as follows:</p>
 </div>
 <p>To compile only a specific entity in debug mode, use the
 <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> directive inside the entity.</p>
-</section>
-<section id="procedure-box-model">
+</div>
+<div class="section" id="procedure-box-model">
 <span id="debugging-box-model"></span><h2>Procedure box model<a class="headerlink" href="#procedure-box-model" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk uses a <em>procedure box model</em> similar to those found on most
 Prolog systems. The traditional Prolog procedure box model defines
@@ -379,8 +378,8 @@ some Prolog compilers:</p>
 </div>
 </div>
 <p>By default, the debugger pauses at every port for user interaction.</p>
-</section>
-<section id="defining-spy-points">
+</div>
+<div class="section" id="defining-spy-points">
 <h2>Defining spy points<a class="headerlink" href="#defining-spy-points" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk spy points can be defined by simply stating which predicates
 should be spied, as in most Prolog debuggers, by stating which predicate
@@ -391,7 +390,7 @@ must correspond to the first line of an entity clause. To simplify the
 definition of line number spy points, these are specified using the
 entity identifier instead of the file name (as all entities share a
 single namespace, an entity can only be defined in a single file).</p>
-<section id="defining-line-number-and-predicate-spy-points">
+<div class="section" id="defining-line-number-and-predicate-spy-points">
 <h3>Defining line number and predicate spy points<a class="headerlink" href="#defining-line-number-and-predicate-spy-points" title="Permalink to this headline">¶</a></h3>
 <p>Line number and predicate spy points are specified using the debugger
 <code class="docutils literal notranslate"><span class="pre">spy/1</span></code> predicate. The argument can be a breakpoint (expressed as a
@@ -423,8 +422,8 @@ All matching predicate spy points removed.
 yes
 </pre></div>
 </div>
-</section>
-<section id="defining-context-spy-points">
+</div>
+<div class="section" id="defining-context-spy-points">
 <h3>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Permalink to this headline">¶</a></h3>
 <p>A context spy point is a tuple describing a message execution context and
 a goal:</p>
@@ -461,8 +460,8 @@ yes
 </div>
 <p>will remove all context spy points where the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> matches the
 atom <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
-</section>
-<section id="removing-all-spy-points">
+</div>
+<div class="section" id="removing-all-spy-points">
 <h3>Removing all spy points<a class="headerlink" href="#removing-all-spy-points" title="Permalink to this headline">¶</a></h3>
 <p>We may remove all line number, predicate, and context spy points by
 using the debugger <code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
@@ -474,9 +473,9 @@ All context spy points removed.
 yes
 </pre></div>
 </div>
-</section>
-</section>
-<section id="tracing-program-execution">
+</div>
+</div>
+<div class="section" id="tracing-program-execution">
 <span id="programming-trace"></span><h2>Tracing program execution<a class="headerlink" href="#tracing-program-execution" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk allows tracing of execution for all objects compiled in debug
 mode. To start the debugger in trace mode, write:</p>
@@ -529,8 +528,8 @@ yes
 yes
 </pre></div>
 </div>
-</section>
-<section id="debugging-using-spy-points">
+</div>
+<div class="section" id="debugging-using-spy-points">
 <span id="debugging-debug"></span><h2>Debugging using spy points<a class="headerlink" href="#debugging-using-spy-points" title="Permalink to this headline">¶</a></h2>
 <p>Tracing a program execution may generate large amounts of debugging
 data. Debugging using spy points allows the user to concentrate in
@@ -554,8 +553,8 @@ yes
 </pre></div>
 </div>
 <p>Note that stopping the debugger does not remove any defined spy points.</p>
-</section>
-<section id="debugging-commands">
+</div>
+<div class="section" id="debugging-commands">
 <span id="id1"></span><h2>Debugging commands<a class="headerlink" href="#debugging-commands" title="Permalink to this headline">¶</a></h2>
 <p>The debugger pauses at leashed ports when tracing or when finding a spy
 point for user interaction. The commands available are as follows:</p>
@@ -632,8 +631,8 @@ unification port</p>
 <dt><code class="docutils literal notranslate"><span class="pre">?</span></code> — extended help</dt><dd><p>prints list of command options</p>
 </dd>
 </dl>
-</section>
-<section id="context-switching-calls">
+</div>
+<div class="section" id="context-switching-calls">
 <span id="debugging-context"></span><h2>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a>,
 which allows the execution of a query within the context of an object.
@@ -691,8 +690,8 @@ Thus, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/
 <a class="reference internal" href="programming.html#flag-context-switching-calls"><span class="std std-ref">context_switching_calls</span></a> compiler
 flag (its default value is defined in the adapter files of the backend
 Prolog compilers).</p>
-</section>
-<section id="debugging-messages">
+</div>
+<div class="section" id="debugging-messages">
 <span id="id2"></span><h2>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline">¶</a></h2>
 <p>Calls to the <a class="reference internal" href="../refman/methods/print_message_3.html#methods-print-message-3"><span class="std std-ref">logtalk::print_message/3</span></a>
 predicate where the message kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> are
@@ -701,7 +700,7 @@ on. Moreover, these calls are suppressed by the compiler when the
 <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on. Note that actual printing
 of debug messages does not require compiling the code in debug mode, only
 turning on the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag.</p>
-<section id="meta-messages">
+<div class="section" id="meta-messages">
 <h3>Meta-messages<a class="headerlink" href="#meta-messages" title="Permalink to this headline">¶</a></h3>
 <p>To avoid having to define <a class="reference internal" href="../refman/methods/message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a> grammar rules
 for translating each and every debug message, Logtalk provides default
@@ -770,8 +769,8 @@ hook predicate. For example:</p>
 logtalk<span class="o">::</span>message_prefix_stream(debug, core, <span class="s">&#39;(dbg) &#39;</span>, user_error).
 </pre></div>
 </div>
-</section>
-<section id="selective-printing-of-debug-messages">
+</div>
+<div class="section" id="selective-printing-of-debug-messages">
 <h3>Selective printing of debug messages<a class="headerlink" href="#selective-printing-of-debug-messages" title="Permalink to this headline">¶</a></h3>
 <p>By default, all debug messages are either printed or skipped, depending on the
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags. When the
@@ -799,9 +798,9 @@ yes
 </pre></div>
 </div>
 <p>See the tool documentation for more details.</p>
-</section>
-</section>
-<section id="using-the-term-expansion-mechanism-for-debugging">
+</div>
+</div>
+<div class="section" id="using-the-term-expansion-mechanism-for-debugging">
 <span id="debugging-hooks"></span><h2>Using the term-expansion mechanism for debugging<a class="headerlink" href="#using-the-term-expansion-mechanism-for-debugging" title="Permalink to this headline">¶</a></h2>
 <p>Debugging messages only output information by default. These messages can,
 however, be intercepted to perform other actions. An alternative is to use
@@ -813,16 +812,16 @@ printing entity goals before or after calling them by simply prefixing them
 with an operator. See the library and hook object documentation for details.
 You can also define your own specialized hook objects for custom debugging
 tasks.</p>
-</section>
-<section id="ports-profiling">
+</div>
+<div class="section" id="ports-profiling">
 <span id="debugging-ports-profiling"></span><h2>Ports profiling<a class="headerlink" href="#ports-profiling" title="Permalink to this headline">¶</a></h2>
 <p>The Logtalk distribution includes a <a class="reference internal" href="../devtools/ports_profiler.html"><span class="doc">ports_profiler</span></a> tool
 based on the same procedure box model described above. This tool is
 specially useful for debugging performance issues (e.g. due to lack of
 determinism or unexpected backtracking). See the tool documentation for
 details.</p>
-</section>
-<section id="debug-and-trace-events">
+</div>
+<div class="section" id="debug-and-trace-events">
 <span id="debugging-events"></span><h2>Debug and trace events<a class="headerlink" href="#debug-and-trace-events" title="Permalink to this headline">¶</a></h2>
 <p>The debugging API defines two multifile predicates,
 <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.46.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
@@ -835,8 +834,8 @@ tools are regular applications thar are implemented using this API, which
 can also be used to implement alternative or new debugging related tools.
 See the API documentation for details and the source code of the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
 and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tools for usage examples.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>arbitrary &mdash; Logtalk APIs v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#arbitrary"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a><ul class="current">
@@ -261,7 +260,7 @@
            <div itemprop="articleBody">
             
   <p class="right" id="arbitrary-0"><span id="index-0"></span><strong>category</strong></p>
-<section id="arbitrary">
+<div class="section" id="arbitrary">
 <h1><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code><a class="headerlink" href="#arbitrary" title="Permalink to this headline">¶</a></h1>
 <p>Adds predicates for generating and shrinking random values for selected types to the library <code class="docutils literal notranslate"><span class="pre">type</span></code> object. User extensible.</p>
 <div class="line-block">
@@ -335,9 +334,9 @@
 <li><p><a class="reference internal" href="#operators" id="id11">Operators</a></p></li>
 </ul>
 </div>
-<section id="public-predicates">
+<div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="arbitrary/1"> </div><section id="arbitrary-1">
+<div id="arbitrary/1"> </div><div class="section" id="arbitrary-1">
 <span id="arbitrary-0-arbitrary-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code></a><a class="headerlink" href="#arbitrary-1" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined types for which an arbitrary value can be generated. A new type can be registered by defining a clause for this predicate and adding a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code> multifile predicate.</p>
 <div class="line-block">
@@ -357,8 +356,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="arbitrary/2"> </div></section>
-<section id="arbitrary-2">
+<div id="arbitrary/2"> </div></div>
+<div class="section" id="arbitrary-2">
 <span id="arbitrary-0-arbitrary-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">arbitrary/2</span></code></a><a class="headerlink" href="#arbitrary-2" title="Permalink to this headline">¶</a></h3>
 <p>Generates an arbitrary term of the specified type. Fails if the type is not supported. A new generator can be defined by adding a clause for this predicate and registering it via the <code class="docutils literal notranslate"><span class="pre">arbitrary/1</span></code> predicate.</p>
 <div class="line-block">
@@ -378,8 +377,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="shrinker/1"> </div></section>
-<section id="shrinker-1">
+<div id="shrinker/1"> </div></div>
+<div class="section" id="shrinker-1">
 <span id="arbitrary-0-shrinker-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code></a><a class="headerlink" href="#shrinker-1" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined types for which a shrinker is provided. A new shrinker can be registered by defining a clause for this predicate and adding a definition for the <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> multifile predicate.</p>
 <div class="line-block">
@@ -399,8 +398,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="shrink/3"> </div></section>
-<section id="shrink-3">
+<div id="shrink/3"> </div></div>
+<div class="section" id="shrink-3">
 <span id="arbitrary-0-shrink-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code></a><a class="headerlink" href="#shrink-3" title="Permalink to this headline">¶</a></h3>
 <p>Shrinks a value to a smaller value if possible. Must generate a finite number of solutions. Fails if the type is not supported. A new shrinker can be defined by adding a clause for this predicate and registering it via the <code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code> predicate.</p>
 <div class="line-block">
@@ -420,8 +419,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="edge_case/2"> </div></section>
-<section id="edge-case-2">
+<div id="edge_case/2"> </div></div>
+<div class="section" id="edge-case-2">
 <span id="arbitrary-0-edge-case-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">edge_case/2</span></code></a><a class="headerlink" href="#edge-case-2" title="Permalink to this headline">¶</a></h3>
 <p>Table of type edge cases. Fails if the given type have no defined edge cases. New edge cases for existing or new types can be added by defining a clause for this multifile predicate.</p>
 <div class="line-block">
@@ -441,8 +440,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="get_seed/1"> </div></section>
-<section id="get-seed-1">
+<div id="get_seed/1"> </div></div>
+<div class="section" id="get-seed-1">
 <span id="arbitrary-0-get-seed-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code></a><a class="headerlink" href="#get-seed-1" title="Permalink to this headline">¶</a></h3>
 <p>Gets the current random generator seed. Seed should be regarded as an opaque ground term.</p>
 <div class="line-block">
@@ -462,8 +461,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="set_seed/1"> </div></section>
-<section id="set-seed-1">
+<div id="set_seed/1"> </div></div>
+<div class="section" id="set-seed-1">
 <span id="arbitrary-0-set-seed-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code></a><a class="headerlink" href="#set-seed-1" title="Permalink to this headline">¶</a></h3>
 <p>Sets the random generator seed to a given value returned by calling the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> predicate.</p>
 <div class="line-block">
@@ -482,26 +481,26 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_seed(+ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="protected-predicates">
+<div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="private-predicates">
+</div>
+<div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="operators">
+</div>
+<div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

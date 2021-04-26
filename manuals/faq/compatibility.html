@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Compatibility &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -210,18 +209,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="compatibility">
+  <div class="section" id="compatibility">
 <span id="faq-compatibility"></span><h1>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#faq-compatibility-requirements"><span class="std std-ref">What are the backend Prolog compiler requirements to run Logtalk?</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-compatibility-constraints"><span class="std std-ref">Can I use constraint-based packages with Logtalk?</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-compatibility-modules"><span class="std std-ref">Can I use Logtalk objects and Prolog modules at the same time?</span></a></p></li>
 </ul>
-<section id="what-are-the-backend-prolog-compiler-requirements-to-run-logtalk">
+<div class="section" id="what-are-the-backend-prolog-compiler-requirements-to-run-logtalk">
 <span id="faq-compatibility-requirements"></span><h2>What are the backend Prolog compiler requirements to run Logtalk?<a class="headerlink" href="#what-are-the-backend-prolog-compiler-requirements-to-run-logtalk" title="Permalink to this headline">¶</a></h2>
 <p>See the <a class="reference external" href="https://logtalk.org/backend_requirements.html">backend Prolog compiler requirements guide</a>.</p>
-</section>
-<section id="can-i-use-constraint-based-packages-with-logtalk">
+</div>
+<div class="section" id="can-i-use-constraint-based-packages-with-logtalk">
 <span id="faq-compatibility-constraints"></span><h2>Can I use constraint-based packages with Logtalk?<a class="headerlink" href="#can-i-use-constraint-based-packages-with-logtalk" title="Permalink to this headline">¶</a></h2>
 <p>Usually, yes. Some constraint-based packages may define operators
 which clash with the ones defined by Logtalk. In these cases,
@@ -231,8 +230,8 @@ those operators. When the constraint solver is encapsulated using a
 Prolog module, a possible workaround is to use either explicit module
 qualification or encapsulate the call using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
 control construct (thus bypassing the Logtalk compiler).</p>
-</section>
-<section id="can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time">
+</div>
+<div class="section" id="can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time">
 <span id="faq-compatibility-modules"></span><h2>Can I use Logtalk objects and Prolog modules at the same time?<a class="headerlink" href="#can-i-use-logtalk-objects-and-prolog-modules-at-the-same-time" title="Permalink to this headline">¶</a></h2>
 <p>Yes. In order to call a module predicate from within an object (or category)
 you may use an <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive or use explicit
@@ -241,8 +240,8 @@ control construct <a class="reference internal" href="../refman/control/external
 the Logtalk compiler when compiling a predicate call). Logtalk also allows
 modules to be compiled as objects (see the <a class="reference internal" href="../userman/migration.html#migration-migration"><span class="std std-ref">Prolog integration and migration</span></a>
 for details).</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

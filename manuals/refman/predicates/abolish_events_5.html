@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>abolish_events/5 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -221,9 +220,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="abolish-events-5">
+  <div class="section" id="abolish-events-5">
 <span id="predicates-abolish-events-5"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">abolish_events/5</span></code><a class="headerlink" href="#abolish-events-5" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">abolish_events</span>(<span class="nv">Event</span>, <span class="nv">Object</span>, <span class="nv">Message</span>, <span class="nv">Sender</span>, <span class="nv">Monitor</span>)
 </pre></div>
@@ -231,14 +230,14 @@
 <p>Abolishes all matching events. The two types of events are represented
 by the atoms <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code>. When the predicate is called with
 the first argument unbound, both types of events are abolished.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">abolish_events</span>(<span class="o">@</span>term, <span class="o">@</span>term, <span class="o">@</span>term, <span class="o">@</span>term, <span class="o">@</span>term) <span class="o">-</span> one
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Event</span></code> is neither a variable nor a valid event identifier:</div>
@@ -262,8 +261,8 @@ the first argument unbound, both types of events are abolished.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Monitor)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% abolish all events for messages sent to the &quot;list&quot;</span>
 <span class="c">% object being monitored by the &quot;debugger&quot; object:</span>
@@ -277,8 +276,8 @@ the first argument unbound, both types of events are abolished.</p>
 <a class="reference internal" href="../methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a>,
 <a class="reference internal" href="../methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

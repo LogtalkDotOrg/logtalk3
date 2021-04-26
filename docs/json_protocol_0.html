@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>json_protocol &mdash; Logtalk APIs v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="library_index.html">Libraries</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#arbitrary"><code class="docutils literal notranslate"><span class="pre">arbitrary</span></code></a></li>
@@ -263,7 +262,7 @@
            <div itemprop="articleBody">
             
   <p class="right" id="json-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="json-protocol">
+<div class="section" id="json-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">json_protocol</span></code><a class="headerlink" href="#json-protocol" title="Permalink to this headline">¶</a></h1>
 <p>JSON parser and generator protocol.</p>
 <div class="line-block">
@@ -308,9 +307,9 @@
 <li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
 </ul>
 </div>
-<section id="public-predicates">
+<div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline">¶</a></h2>
-<div id="parse/2"> </div><section id="parse-2">
+<div id="parse/2"> </div><div class="section" id="parse-2">
 <span id="json-protocol-0-parse-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">parse/2</span></code></a><a class="headerlink" href="#parse-2" title="Permalink to this headline">¶</a></h3>
 <p>Parses the JSON contents read from the given source (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>) into a term. Fails if the JSON contents cannot be parsed.</p>
 <div class="line-block">
@@ -330,8 +329,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="generate/2"> </div></section>
-<section id="generate-2">
+<div id="generate/2"> </div></div>
+<div class="section" id="generate-2">
 <span id="json-protocol-0-generate-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a><a class="headerlink" href="#generate-2" title="Permalink to this headline">¶</a></h3>
 <p>Generates the content using the representation specified in the first argument (<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>) for the term in the second argument. Fails if this term cannot be processed.</p>
 <div class="line-block">
@@ -350,22 +349,22 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+compound,++term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="protected-predicates">
+<div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</section>
-<section id="private-predicates">
+</div>
+<div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</section>
-<section id="operators">
+</div>
+<div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

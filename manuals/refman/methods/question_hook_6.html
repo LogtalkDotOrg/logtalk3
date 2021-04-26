@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>question_hook/6 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -223,9 +222,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="question-hook-6">
+  <div class="section" id="question-hook-6">
 <span id="methods-question-hook-6"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code><a class="headerlink" href="#question-hook-6" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>question_hook(<span class="nv">Question</span>, <span class="nv">Kind</span>, <span class="nv">Component</span>, <span class="nv">Tokens</span>, <span class="nv">Check</span>, <span class="nv">Answer</span>)
 </pre></div>
@@ -236,24 +235,24 @@ and dynamic predicate. This hook method is automatically called by the
 <a class="reference internal" href="ask_question_5.html#methods-ask-question-5"><span class="std std-ref">ask_question/5</span></a> method. When the call
 succeeds, the <code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code> method assumes that the question have
 been successfully asked and replied.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>question_hook(<span class="o">+</span>nonvar, <span class="o">+</span>nonvar, <span class="o">+</span>nonvar, <span class="o">+</span>list(nonvar), <span class="o">+</span>callable, <span class="o">-</span>term) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
-</section>
-<section id="meta-predicate-template">
+</div>
+<div class="section" id="meta-predicate-template">
 <h2>Meta-predicate template<a class="headerlink" href="#meta-predicate-template" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>question_hook(<span class="o">*</span>, <span class="o">*</span>, <span class="o">*</span>, <span class="o">*</span>, <span class="m">1</span>, <span class="o">*</span>)
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <p>(none)</p>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
 <span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
@@ -273,8 +272,8 @@ logtalk<span class="o">::</span>question_hook(upper_limit, question, my_app, <sp
 <a class="reference internal" href="print_message_tokens_3.html#methods-print-message-tokens-3"><span class="std std-ref">print_message_tokens/3</span></a>,
 <a class="reference internal" href="print_message_token_4.html#methods-print-message-token-4"><span class="std std-ref">print_message_token/4</span></a>,</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

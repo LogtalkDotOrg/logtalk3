@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>json &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -247,7 +246,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="json">
+  <div class="section" id="json">
 <h1><code class="docutils literal notranslate"><span class="pre">json</span></code><a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">json</span></code> library provides predicates for parsing and generating data
 in the JSON format based on the specification and standard found at:</p>
@@ -256,22 +255,22 @@ in the JSON format based on the specification and standard found at:</p>
 <li><p><a class="reference external" href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">https://www.ecma-international.org/publications-and-standards/standards/ecma-404/</a></p></li>
 </ul>
 <p>It includes a parametric object whose parameter indicates the preferred
-representation for decoded JSON text strings (<code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code> or
+representation for decoded JSON text strings (<code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">codes</span></code>).</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#json">../../docs/library_index.html#json</a>
 link in a web browser.</p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(json(loader)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(json(tester)).
@@ -279,8 +278,8 @@ link in a web browser.</p>
 </div>
 <p>Some of the sample JSON test files are based on examples published at:</p>
 <p><a class="reference external" href="https://www.json.org/">https://www.json.org/</a></p>
-</section>
-<section id="representation">
+</div>
+<div class="section" id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Permalink to this headline">¶</a></h2>
 <p>The following choices of syntax has been made to represent JSON elements
 as terms:</p>
@@ -291,7 +290,7 @@ as terms:</p>
 <li><p>Text strings can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>. The default when decoding is to use atoms when using
 the <code class="docutils literal notranslate"><span class="pre">json</span></code> object. To decode text strings into lists of chars or
-code, use the <code class="docutils literal notranslate"><span class="pre">json/1</span></code> with the parameter bound to <code class="docutils literal notranslate"><span class="pre">chars</span></code> or
+codes, use the <code class="docutils literal notranslate"><span class="pre">json/1</span></code> with the parameter bound to <code class="docutils literal notranslate"><span class="pre">chars</span></code> or
 <code class="docutils literal notranslate"><span class="pre">codes</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json<span class="o">::</span>parse(codes([<span class="m">34</span>,<span class="m">104</span>,<span class="m">101</span>,<span class="m">108</span>,<span class="m">108</span>,<span class="m">111</span>,<span class="m">34</span>]), <span class="nv">Term</span>).
 <span class="nv">Term</span> <span class="o">=</span> hello
@@ -314,7 +313,8 @@ yes
 <li><p>The JSON values <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">null</span></code> are represented by,
 respectively, the <code class="docutils literal notranslate"><span class="pre">&#64;false</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;true</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;null</span></code> compound terms.</p></li>
 </ul>
-<p>The following table exemplifies the term equivalents of JSON elements:</p>
+<p>The following table exemplifies the term equivalents of JSON elements
+(with) JSON strings being represented as atoms:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 50%" />
@@ -416,13 +416,10 @@ respectively, the <code class="docutils literal notranslate"><span class="pre">&
 <tr class="row-odd"><td><p>{}</p></td>
 <td><p>{}</p></td>
 </tr>
-<tr class="row-even"><td><p>[0.0]</p></td>
-<td><p>[0.0]</p></td>
-</tr>
 </tbody>
 </table>
-</section>
-<section id="encoding">
+</div>
+<div class="section" id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
 <p>Encoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> predicate. For
 example:</p>
@@ -443,11 +440,11 @@ yes
 </div>
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> takes, as second argument, a Prolog term that
 corresponds to the JSON Syntax in Prolog and produces the corresponding
-JSON output in the media indicated as first argument:
+JSON output in the format specified in the first argument:
 (<code class="docutils literal notranslate"><span class="pre">codes(Variable)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(File)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">chars(Variable)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Variable)</span></code>).</p>
-</section>
-<section id="decoding">
+</div>
+<div class="section" id="decoding">
 <h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h2>
 <p>Decoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate. For example,
 to decode a given json file:</p>
@@ -458,10 +455,10 @@ yes
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate first argument must indicate the input source
 (<code class="docutils literal notranslate"><span class="pre">codes(Source)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Source)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Source)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">chars(Source)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Source)</span></code>) containing a JSON structure to be
+<code class="docutils literal notranslate"><span class="pre">chars(Source)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Source)</span></code>) containing a JSON payload to be
 decoded into the Prolog term in the second argument.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

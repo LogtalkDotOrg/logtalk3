@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>::/2 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -214,9 +213,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="control-send-to-object-2">
+  <div class="section" id="control-send-to-object-2">
 <span id="index-0"></span><span id="id1"></span><h1><code class="docutils literal notranslate"><span class="pre">::/2</span></code><a class="headerlink" href="#control-send-to-object-2" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>
 <span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>
@@ -245,15 +244,15 @@ compile time whenever sufficient information is available. When the
 lookups are performed at runtime, a caching mechanism is used to improve
 performance in subsequent messages. See the User Manual section on
 <a class="reference internal" href="../../userman/performance.html#performance-performance"><span class="std std-ref">performance</span></a> for details.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>object_identifier<span class="o">::+</span>callable <span class="o">-</span> zero_or_more
 <span class="k">{</span><span class="o">+</span>object_identifier<span class="k">}</span><span class="o">::+</span>callable <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">Either <code class="docutils literal notranslate"><span class="pre">Object</span></code> or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is a variable:</div>
@@ -298,8 +297,8 @@ performance in subsequent messages. See the User Manual section on
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,</span> <span class="pre">Name/Arity)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> list<span class="o">::</span>member(<span class="nv">X</span>, [<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>]).
 
@@ -315,8 +314,8 @@ yes
 <a class="reference internal" href="call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>,
 <a class="reference internal" href="delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

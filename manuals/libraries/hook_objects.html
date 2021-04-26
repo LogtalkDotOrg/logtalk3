@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>hook_objects &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -256,20 +255,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="hook-objects">
+  <div class="section" id="hook-objects">
 <h1><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code><a class="headerlink" href="#hook-objects" title="Permalink to this headline">¶</a></h1>
 <p>This library provides a set of convenient hook objects for defining
 custom expansion workflows (using e.g. the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library) and
 for debugging. They are usable and useful as-is but should also be
 regarded as term- and goal-expansion examples that you can learn from,
 clone, and change to fit your application requirements.</p>
-<section id="api-documentation">
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#hook_objects">../../docs/library_index.html#hook_objects</a>
 link in a web browser.</p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>To load all hook objects in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(loader)).
@@ -280,26 +279,26 @@ object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(backend_adapter_hook)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this library hook objects, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(tester)).
 </pre></div>
 </div>
-</section>
-<section id="usage">
+</div>
+<div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>The provided hook objects cover different expansion scenarios as
 follows.</p>
-<section id="using-the-prolog-backend-adapter-file-expansion-rules">
+<div class="section" id="using-the-prolog-backend-adapter-file-expansion-rules">
 <h3>Using the Prolog backend adapter file expansion rules<a class="headerlink" href="#using-the-prolog-backend-adapter-file-expansion-rules" title="Permalink to this headline">¶</a></h3>
 <p>Useful when defining a custom expansion workflow. This can be
 accomplished by loading the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook.lgt</span></code> file, which
 defines a <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code> hook object that can be used as a
 workflow step.</p>
-</section>
-<section id="restoring-the-default-compiler-expansion-workflow">
+</div>
+<div class="section" id="restoring-the-default-compiler-expansion-workflow">
 <h3>Restoring the default compiler expansion workflow<a class="headerlink" href="#restoring-the-default-compiler-expansion-workflow" title="Permalink to this headline">¶</a></h3>
 <p>In this case, load the <code class="docutils literal notranslate"><span class="pre">default_workflow_hook.lgt</span></code> file, which defines
 a <code class="docutils literal notranslate"><span class="pre">default_workflow_hook</span></code> hook object, and use the following <strong>goal</strong>
@@ -307,8 +306,8 @@ to set the default hook object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(hook, default_workflow_hook).
 </pre></div>
 </div>
-</section>
-<section id="preventing-applying-any-other-user-defined-expansion-rules">
+</div>
+<div class="section" id="preventing-applying-any-other-user-defined-expansion-rules">
 <h3>Preventing applying any (other) user-defined expansion rules<a class="headerlink" href="#preventing-applying-any-other-user-defined-expansion-rules" title="Permalink to this headline">¶</a></h3>
 <p>When compiling a source file, we sometimes want to prevent applying
 expansion rules. This can be accomplished by simply loading the
@@ -324,8 +323,8 @@ the file into clauses. Although this conversion can also be performed as
 an expansion, grammar rules are part of the Logtalk language. If you to
 preserve the grammar rules, use the hook objects described below to
 write them to a stream.</p>
-</section>
-<section id="expanding-grammar-rules-into-clauses-independently-of-the-compiler">
+</div>
+<div class="section" id="expanding-grammar-rules-into-clauses-independently-of-the-compiler">
 <h3>Expanding grammar rules into clauses independently of the compiler<a class="headerlink" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler" title="Permalink to this headline">¶</a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook.lgt</span></code> and use the term-expansion rules in
 the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook</span></code> object. For example:</p>
@@ -335,8 +334,8 @@ the <code class="docutils literal notranslate"><span class="pre">grammar_rules_h
 yes
 </pre></div>
 </div>
-</section>
-<section id="using-the-expansion-rules-defined-in-a-prolog-module">
+</div>
+<div class="section" id="using-the-expansion-rules-defined-in-a-prolog-module">
 <h3>Using the expansion rules defined in a Prolog module<a class="headerlink" href="#using-the-expansion-rules-defined-in-a-prolog-module" title="Permalink to this headline">¶</a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">prolog_module_hook.lgt</span></code>, which defines the parametric hook
 object <code class="docutils literal notranslate"><span class="pre">prolog_module_hook(Module)</span></code>. To use this hook object, you need
@@ -344,8 +343,8 @@ to instantiate the parameter to the name of the module. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, prolog_module_hook(user)).
 </pre></div>
 </div>
-</section>
-<section id="wrap-the-contents-of-a-plain-prolog-file-as-an-object">
+</div>
+<div class="section" id="wrap-the-contents-of-a-plain-prolog-file-as-an-object">
 <h3>Wrap the contents of a plain Prolog file as an object<a class="headerlink" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object" title="Permalink to this headline">¶</a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook.lgt</span></code>, which defines the parametric hook
 object <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code>. Use it to wrap the contents of a plain
@@ -362,16 +361,16 @@ yes
 <p>The <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> sets the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag to
 <code class="docutils literal notranslate"><span class="pre">allow</span></code> for the generated object. This enables calling the predicates
 using the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> context-switching control construct.</p>
-</section>
-<section id="outputting-term-expansion-results-to-a-stream">
+</div>
+<div class="section" id="outputting-term-expansion-results-to-a-stream">
 <h3>Outputting term-expansion results to a stream<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream" title="Permalink to this headline">¶</a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and using the
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook object. The terms are not
 modified and thus these hook objects may be used at any point in an
 expansion workflow.</p>
-</section>
-<section id="printing-entity-predicate-goals-before-or-after-calling-them">
+</div>
+<div class="section" id="printing-entity-predicate-goals-before-or-after-calling-them">
 <h3>Printing entity predicate goals before or after calling them<a class="headerlink" href="#printing-entity-predicate-goals-before-or-after-calling-them" title="Permalink to this headline">¶</a></h3>
 <p>This is helpful for quick debugging. Load the <code class="docutils literal notranslate"><span class="pre">print_goal_hook.lgt</span></code>
 file and use the <code class="docutils literal notranslate"><span class="pre">print_goal_hook</span></code> hook object. For example, we can
@@ -386,8 +385,8 @@ set this hook object as the default hook:</p>
     <span class="o">*</span> quux.  <span class="c">% print goal before and after calling it</span>
 </pre></div>
 </div>
-</section>
-<section id="suppressing-goals">
+</div>
+<div class="section" id="suppressing-goals">
 <h3>Suppressing goals<a class="headerlink" href="#suppressing-goals" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook.lgt</span></code> file provides the <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook</span></code>
 hook object that supports suppressing a goal in a clause body by
@@ -409,9 +408,9 @@ source file directive:</p>
 </pre></div>
 </div>
 <p>The suppressed goals are replaced by calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

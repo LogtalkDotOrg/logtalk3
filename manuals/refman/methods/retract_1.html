@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>retract/1 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -226,9 +225,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="retract-1">
+  <div class="section" id="retract-1">
 <span id="methods-retract-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">retract/1</span></code><a class="headerlink" href="#retract-1" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">retract</span>(<span class="nv">Head</span>)
 <span class="k">retract</span>((<span class="nv">Head</span><span class="o">:-</span><span class="nv">Body</span>))
@@ -244,14 +243,14 @@ argument can also be module qualified.</p>
 <p>This method may be used to retract clauses for predicates that are not
 declared dynamic for dynamic objects provided that the predicates are
 declared in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">retract</span>(<span class="o">+</span>clause) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Head</span></code> is a variable:</div>
@@ -279,8 +278,8 @@ declared in <a class="reference internal" href="../../glossary.html#term-this"><
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">To retract a matching clause of a dynamic predicate in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>:</div>
@@ -308,8 +307,8 @@ declared in <a class="reference internal" href="../../glossary.html#term-this"><
 <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>,
 <a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

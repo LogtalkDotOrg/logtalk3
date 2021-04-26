@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Grammar &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference Manual</a><ul class="current">
@@ -244,13 +243,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="grammar">
+  <div class="section" id="grammar">
 <span id="grammar-grammar"></span><h1>Grammar<a class="headerlink" href="#grammar" title="Permalink to this headline">¶</a></h1>
 <p>The Logtalk grammar is here described using Backus-Naur Form syntax.
 Non-terminal symbols in <em>italics</em> have the definition found in the ISO
 Prolog Core standard. Terminal symbols are represented in a
 <code class="docutils literal notranslate"><span class="pre">fixed</span> <span class="pre">width</span> <span class="pre">font</span></code> and between double-quotes.</p>
-<section id="entities">
+<div class="section" id="entities">
 <span id="grammar-entities"></span><h2>Entities<a class="headerlink" href="#entities" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">entity ::=</div>
@@ -260,8 +259,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">protocol</div>
 </div>
 </div>
-</section>
-<section id="object-definition">
+</div>
+<div class="section" id="object-definition">
 <span id="grammar-object-definition"></span><h2>Object definition<a class="headerlink" href="#object-definition" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">object ::=</div>
@@ -319,8 +318,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">specializes_classes</div>
 </div>
 </div>
-</section>
-<section id="category-definition">
+</div>
+<div class="section" id="category-definition">
 <span id="grammar-category-definition"></span><h2>Category definition<a class="headerlink" href="#category-definition" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">category ::=</div>
@@ -355,8 +354,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">complements_objects</div>
 </div>
 </div>
-</section>
-<section id="protocol-definition">
+</div>
+<div class="section" id="protocol-definition">
 <span id="grammar-protocol-definition"></span><h2>Protocol definition<a class="headerlink" href="#protocol-definition" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">protocol ::=</div>
@@ -376,8 +375,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">end_protocol.</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="entity-relations">
+</div>
+<div class="section" id="entity-relations">
 <span id="grammar-entity-relations"></span><h2>Entity relations<a class="headerlink" href="#entity-relations" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">extends_protocols ::=</div>
@@ -427,7 +426,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">complements(</span></code>” complemented_objects “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
 </div>
 </div>
-<section id="implemented-protocols">
+<div class="section" id="implemented-protocols">
 <span id="grammar-implemented-protocols"></span><h3>Implemented protocols<a class="headerlink" href="#implemented-protocols" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">implemented_protocols ::=</div>
@@ -457,8 +456,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” implemented_protocol_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="extended-protocols">
+</div>
+<div class="section" id="extended-protocols">
 <span id="grammar-extended-protocols"></span><h3>Extended protocols<a class="headerlink" href="#extended-protocols" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">extended_protocols ::=</div>
@@ -488,8 +487,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_protocol_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="imported-categories">
+</div>
+<div class="section" id="imported-categories">
 <span id="grammar-imported-categories"></span><h3>Imported categories<a class="headerlink" href="#imported-categories" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">imported_categories ::=</div>
@@ -519,8 +518,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” imported_category_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="extended-objects">
+</div>
+<div class="section" id="extended-objects">
 <span id="grammar-extended-objects"></span><h3>Extended objects<a class="headerlink" href="#extended-objects" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">extended_objects ::=</div>
@@ -550,8 +549,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="extended-categories">
+</div>
+<div class="section" id="extended-categories">
 <span id="grammar-extended-categories"></span><h3>Extended categories<a class="headerlink" href="#extended-categories" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">extended_categories ::=</div>
@@ -581,8 +580,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” extended_category_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="instantiated-objects">
+</div>
+<div class="section" id="instantiated-objects">
 <span id="grammar-instantiated-objects"></span><h3>Instantiated objects<a class="headerlink" href="#instantiated-objects" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">instantiated_objects ::=</div>
@@ -612,8 +611,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” instantiated_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="specialized-objects">
+</div>
+<div class="section" id="specialized-objects">
 <span id="grammar-specialized-objects"></span><h3>Specialized objects<a class="headerlink" href="#specialized-objects" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">specialized_objects ::=</div>
@@ -643,8 +642,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” specialized_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="complemented-objects">
+</div>
+<div class="section" id="complemented-objects">
 <span id="grammar-complemented-objects"></span><h3>Complemented objects<a class="headerlink" href="#complemented-objects" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">complemented_objects ::=</div>
@@ -667,8 +666,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” complemented_object_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="entity-and-predicate-scope">
+</div>
+<div class="section" id="entity-and-predicate-scope">
 <span id="grammar-scope"></span><h3>Entity and predicate scope<a class="headerlink" href="#entity-and-predicate-scope" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">scope ::=</div>
@@ -678,9 +677,9 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">private</span></code>”</div>
 </div>
 </div>
-</section>
-</section>
-<section id="entity-identifiers">
+</div>
+</div>
+<div class="section" id="entity-identifiers">
 <span id="grammar-entity-identifiers"></span><h2>Entity identifiers<a class="headerlink" href="#entity-identifiers" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">entity_identifiers ::=</div>
@@ -711,7 +710,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” entity_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-<section id="object-identifiers">
+<div class="section" id="object-identifiers">
 <span id="grammar-object-identifiers"></span><h3>Object identifiers<a class="headerlink" href="#object-identifiers" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">object_identifiers ::=</div>
@@ -741,8 +740,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” object_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="category-identifiers">
+</div>
+<div class="section" id="category-identifiers">
 <span id="grammar-category-identifiers"></span><h3>Category identifiers<a class="headerlink" href="#category-identifiers" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">category_identifiers ::=</div>
@@ -772,8 +771,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” category_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="protocol-identifiers">
+</div>
+<div class="section" id="protocol-identifiers">
 <span id="grammar-protocol-identifiers"></span><h3>Protocol identifiers<a class="headerlink" href="#protocol-identifiers" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">protocol_identifiers ::=</div>
@@ -801,8 +800,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” protocol_identifier_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="module-identifiers">
+</div>
+<div class="section" id="module-identifiers">
 <span id="grammar-module-identifiers"></span><h3>Module identifiers<a class="headerlink" href="#module-identifiers" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">module_identifier ::=</div>
@@ -810,9 +809,9 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line"><em>atom</em></div>
 </div>
 </div>
-</section>
-</section>
-<section id="source-file-names">
+</div>
+</div>
+<div class="section" id="source-file-names">
 <span id="grammar-source-file-names"></span><h2>Source file names<a class="headerlink" href="#source-file-names" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">source_file_names ::=</div>
@@ -853,10 +852,10 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” source_file_name_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="terms">
+</div>
+<div class="section" id="terms">
 <span id="grammar-terms"></span><h2>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">¶</a></h2>
-<section id="object-terms">
+<div class="section" id="object-terms">
 <span id="grammar-object-terms"></span><h3>Object terms<a class="headerlink" href="#object-terms" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">object_terms ::=</div>
@@ -873,8 +872,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">grammar_rule</div>
 </div>
 </div>
-</section>
-<section id="category-terms">
+</div>
+<div class="section" id="category-terms">
 <span id="grammar-category-terms"></span><h3>Category terms<a class="headerlink" href="#category-terms" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">category_terms ::=</div>
@@ -891,11 +890,11 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">grammar_rule</div>
 </div>
 </div>
-</section>
-</section>
-<section id="directives">
+</div>
+</div>
+<div class="section" id="directives">
 <span id="grammar-directives"></span><h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
-<section id="source-file-directives">
+<div class="section" id="source-file-directives">
 <span id="grammar-source-file-directives"></span><h3>Source file directives<a class="headerlink" href="#source-file-directives" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">source_file_directives ::=</div>
@@ -913,8 +912,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line"><em>Prolog directives</em></div>
 </div>
 </div>
-</section>
-<section id="conditional-compilation-directives">
+</div>
+<div class="section" id="conditional-compilation-directives">
 <span id="grammar-conditional-compilation-directives"></span><h3>Conditional compilation directives<a class="headerlink" href="#conditional-compilation-directives" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">conditional_compilation_directives ::=</div>
@@ -932,8 +931,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">endif.</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="object-directives">
+</div>
+<div class="section" id="object-directives">
 <span id="grammar-object-directives"></span><h3>Object directives<a class="headerlink" href="#object-directives" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">object_directives ::=</div>
@@ -956,8 +955,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">predicate_directives</div>
 </div>
 </div>
-</section>
-<section id="category-directives">
+</div>
+<div class="section" id="category-directives">
 <span id="grammar-category-directives"></span><h3>Category directives<a class="headerlink" href="#category-directives" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">category_directives ::=</div>
@@ -978,8 +977,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">predicate_directives</div>
 </div>
 </div>
-</section>
-<section id="protocol-directives">
+</div>
+<div class="section" id="protocol-directives">
 <span id="grammar-protocol-directives"></span><h3>Protocol directives<a class="headerlink" href="#protocol-directives" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">protocol_directives ::=</div>
@@ -999,8 +998,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">predicate_directives</div>
 </div>
 </div>
-</section>
-<section id="predicate-directives">
+</div>
+<div class="section" id="predicate-directives">
 <span id="grammar-predicate-directives"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Permalink to this headline">¶</a></h3>
 <div class="line-block">
 <div class="line">predicate_directives ::=</div>
@@ -1031,7 +1030,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">alias_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">alias(</span></code>“</div>
 <div class="line-block">
 <div class="line-block">
 <div class="line">entity_identifier “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
@@ -1050,7 +1049,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">uses_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">uses(</span></code>“</div>
 <div class="line-block">
 <div class="line">object_identifier | parameter_variable “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
 <div class="line">predicate_indicator_alias_list | non_terminal_indicator_alias_list | operator_list</div>
@@ -1061,7 +1060,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">use_module_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module(</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">use_module(</span></code>“</div>
 <div class="line-block">
 <div class="line">module_identifier | parameter_variable “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
 <div class="line">module_predicate_indicator_alias_list | module_non_terminal_indicator_alias_list | operator_list</div>
@@ -1080,7 +1079,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">mode_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">mode(</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">mode(</span></code>“</div>
 <div class="line-block">
 <div class="line">predicate_mode_term | non_terminal_mode_term “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
 <div class="line">number_of_proofs</div>
@@ -1103,7 +1102,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">info_directive ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">:-</span> <span class="pre">info(</span></code>“</div>
 <div class="line-block">
 <div class="line">predicate_indicator | non_terminal_indicator “<code class="docutils literal notranslate"><span class="pre">,</span></code>”</div>
 <div class="line">predicate_info_list</div>
@@ -1416,7 +1415,7 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line-block">
 <div class="line">coinductive_mode_term ::=</div>
 <div class="line-block">
-<div class="line">“<code class="docutils literal notranslate"><span class="pre">+</span></code>” | “<code class="docutils literal notranslate"><span class="pre">-</span></code>”</div>
+<div class="line">“<code class="docutils literal notranslate"><span class="pre">+</span></code>” | “<code class="docutils literal notranslate"><span class="pre">-</span></code>“</div>
 </div>
 </div>
 <div class="line-block">
@@ -1586,9 +1585,9 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[</span></code>” object_alias_sequence “<code class="docutils literal notranslate"><span class="pre">]</span></code>”</div>
 </div>
 </div>
-</section>
-</section>
-<section id="clauses-and-goals">
+</div>
+</div>
+<div class="section" id="clauses-and-goals">
 <span id="grammar-clauses"></span><h2>Clauses and goals<a class="headerlink" href="#clauses-and-goals" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">clause ::=</div>
@@ -1677,8 +1676,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">object_identifier “<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>” <em>goal</em></div>
 </div>
 </div>
-</section>
-<section id="lambda-expressions">
+</div>
+<div class="section" id="lambda-expressions">
 <span id="grammar-lambdas"></span><h2>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">lambda_expression ::=</div>
@@ -1703,8 +1702,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">[]</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="entity-properties">
+</div>
+<div class="section" id="entity-properties">
 <span id="grammar-entity-properties"></span><h2>Entity properties<a class="headerlink" href="#entity-properties" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">category_property ::=</div>
@@ -1901,8 +1900,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line">“<code class="docutils literal notranslate"><span class="pre">as(</span></code>” predicate_indicator “<code class="docutils literal notranslate"><span class="pre">)</span></code>”</div>
 </div>
 </div>
-</section>
-<section id="predicate-properties">
+</div>
+<div class="section" id="predicate-properties">
 <span id="grammar-predicate-properties"></span><h2>Predicate properties<a class="headerlink" href="#predicate-properties" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">predicate_property ::=</div>
@@ -1939,8 +1938,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line"><em>integer</em>”</div>
 </div>
 </div>
-</section>
-<section id="compiler-flags">
+</div>
+<div class="section" id="compiler-flags">
 <span id="grammar-compiler-flags"></span><h2>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line">compiler_flag ::=</div>
@@ -1948,8 +1947,8 @@ Prolog Core standard. Terminal symbols are represented in a
 <div class="line"><em>flag(flag_value)</em></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

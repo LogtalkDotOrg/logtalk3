@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>lgtunit &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
@@ -245,7 +244,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="lgtunit">
+  <div class="section" id="lgtunit">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code><a class="headerlink" href="#lgtunit" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides testing support for Logtalk. It can also
 be used for testing plain Prolog code and Prolog module code.</p>
@@ -260,7 +259,7 @@ testing more complex units and facilitate tests maintenance. Parametric
 test objects are specially useful to test multiple implementations of
 the same protocol using a single set of tests by passing the
 implementation object as a parameter value.</p>
-<section id="main-files">
+<div class="section" id="main-files">
 <h2>Main files<a class="headerlink" href="#main-files" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit.lgt</span></code> source file implements a framework for defining and
 running unit tests in Logtalk. The <code class="docutils literal notranslate"><span class="pre">lgtunit_messages.lgt</span></code> source file
@@ -270,27 +269,27 @@ to make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.</p>
 <p>Other files part of this tool provide support for alternative output
 formats of test results and are discussed below.</p>
-</section>
-<section id="api-documentation">
+</div>
+<div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#lgtunit">../../docs/library_index.html#lgtunit</a></p>
-</section>
-<section id="loading">
+</div>
+<div class="section" id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(loader)).
 </pre></div>
 </div>
-</section>
-<section id="testing">
+</div>
+<div class="section" id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(tester)).
 </pre></div>
 </div>
-</section>
-<section id="writing-and-loading-tests">
+</div>
+<div class="section" id="writing-and-loading-tests">
 <h2>Writing and loading tests<a class="headerlink" href="#writing-and-loading-tests" title="Permalink to this headline">¶</a></h2>
 <p>In order to write your own unit tests, define objects extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start by copying the <code class="docutils literal notranslate"><span class="pre">tests-sample.lgt</span></code>
@@ -327,8 +326,8 @@ project directory and edit it to load your project and tests files.</p>
 <p>Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
 benchmarking predicates.</p>
-</section>
-<section id="running-unit-tests">
+</div>
+<div class="section" id="running-unit-tests">
 <h2>Running unit tests<a class="headerlink" href="#running-unit-tests" title="Permalink to this headline">¶</a></h2>
 <p>Assuming that your test object is named <code class="docutils literal notranslate"><span class="pre">tests</span></code>, after compiling and
 loading its source file, you can run the tests by typing:</p>
@@ -376,8 +375,8 @@ shortcut <code class="docutils literal notranslate"><span class="pre">{*}</span>
 driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.</p>
-</section>
-<section id="parametric-test-objects">
+</div>
+<div class="section" id="parametric-test-objects">
 <h2>Parametric test objects<a class="headerlink" href="#parametric-test-objects" title="Permalink to this headline">¶</a></h2>
 <p>Parameterized unit tests can be easily defined by using parametric test
 objects. A typical example is testing multiple implementations of the
@@ -415,8 +414,8 @@ implementations:</p>
     ]).
 </pre></div>
 </div>
-</section>
-<section id="test-dialects">
+</div>
+<div class="section" id="test-dialects">
 <h2>Test dialects<a class="headerlink" href="#test-dialects" title="Permalink to this headline">¶</a></h2>
 <p>Multiple test <em>dialects</em> are supported by default. See the next section
 on how to define your own test dialects. In all dialects, a <strong>ground
@@ -579,8 +578,8 @@ below for details).</p>
 the <code class="docutils literal notranslate"><span class="pre">testing</span></code> example in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder in the Logtalk
 distribution. Most of the provided examples also include unit tests,
 some of them with code coverage.</p>
-</section>
-<section id="user-defined-test-dialects">
+</div>
+<div class="section" id="user-defined-test-dialects">
 <h2>User-defined test dialects<a class="headerlink" href="#user-defined-test-dialects" title="Permalink to this headline">¶</a></h2>
 <p>Additional test dialects can be easily defined by extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object and by term-expanding the new dialect into one of the
@@ -617,8 +616,8 @@ dialect by using a <code class="docutils literal notranslate"><span class="pre">
 followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion. This solution allows
 other hook objects (e.g. required by the code being tested) to also be
 used by updating the pipeline.</p>
-</section>
-<section id="quickcheck">
+</div>
+<div class="section" id="quickcheck">
 <h2>QuickCheck<a class="headerlink" href="#quickcheck" title="Permalink to this headline">¶</a></h2>
 <p>QuickCheck was originally developed for Haskell. Implementations for
 several other programming languages soon followed. QuickCheck provides
@@ -872,8 +871,8 @@ clauses for their multifile predicates.</p>
 <p>The user can define new types to use in the property mode templates to
 use with its QuickCheck tests by defining clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code>
 library category multifile predicates.</p>
-</section>
-<section id="skipping-tests">
+</div>
+<div class="section" id="skipping-tests">
 <h2>Skipping tests<a class="headerlink" href="#skipping-tests" title="Permalink to this headline">¶</a></h2>
 <p>A test object can define the <code class="docutils literal notranslate"><span class="pre">condition/0</span></code> predicate (which defaults
 to <code class="docutils literal notranslate"><span class="pre">true</span></code>) to test if some necessary condition for running the tests
@@ -896,8 +895,8 @@ the <code class="docutils literal notranslate"><span class="pre">test/3</span></
 <p>The conditional compilation directives can also be used in alternative
 but note that in this case there will be no report on the number of
 skipped tests.</p>
-</section>
-<section id="checking-test-goal-results">
+</div>
+<div class="section" id="checking-test-goal-results">
 <h2>Checking test goal results<a class="headerlink" href="#checking-test-goal-results" title="Permalink to this headline">¶</a></h2>
 <p>Checking test goal results can be performed using the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code>
 dialects <code class="docutils literal notranslate"><span class="pre">true/1</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> assertions. For example:</p>
@@ -943,8 +942,8 @@ Floating-point numbers can be compared using the <code class="docutils literal n
 <code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code> predicates provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the
 <code class="docutils literal notranslate"><span class="pre">=/2</span></code> term unification built-in predicate is almost always an error as
 it would mask test goals failing to bind output arguments.</p>
-</section>
-<section id="testing-local-predicates">
+</div>
+<div class="section" id="testing-local-predicates">
 <h2>Testing local predicates<a class="headerlink" href="#testing-local-predicates" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct can be used to access and
 test object local predicates (i.e. predicates without a scope
@@ -954,16 +953,16 @@ required, however, as local predicates are usually auxiliary predicates
 called by public predicates and thus tested when testing those public
 predicates. The code coverage support can pinpoint any local predicate
 clause that is not being exercised by the tests.</p>
-</section>
-<section id="testing-non-deterministic-predicates">
+</div>
+<div class="section" id="testing-non-deterministic-predicates">
 <h2>Testing non-deterministic predicates<a class="headerlink" href="#testing-non-deterministic-predicates" title="Permalink to this headline">¶</a></h2>
 <p>For testing non-deterministic predicates (with a finite and manageable
 number of solutions), you can wrap the test goal using the standard
 <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> predicate to collect all solutions and check against the
 list of expected solutions. When the expected solutions are a set, use
 in alternative the standard <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicate.</p>
-</section>
-<section id="testing-generators">
+</div>
+<div class="section" id="testing-generators">
 <h2>Testing generators<a class="headerlink" href="#testing-generators" title="Permalink to this headline">¶</a></h2>
 <p>To test all solutions of a predicate that acts as a <em>generator</em>, we can
 use the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate as the test goal with the <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code>
@@ -979,8 +978,8 @@ test(test_solution_generator) <span class="o">:-</span>
     ).
 </pre></div>
 </div>
-</section>
-<section id="testing-input-output-predicates">
+</div>
+<div class="section" id="testing-input-output-predicates">
 <h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Permalink to this headline">¶</a></h2>
 <p>Extensive support for testing input/output predicates is provided, based
 on similar support found on the Prolog conformance testing framework
@@ -1029,8 +1028,8 @@ creating text and binary files with given contents and check text and
 binary files for expected contents.</p>
 <p>For more practical examples, check the included tests for Prolog
 conformance of standard input/output predicates.</p>
-</section>
-<section id="suppressing-tested-predicates-output">
+</div>
+<div class="section" id="suppressing-tested-predicates-output">
 <h2>Suppressing tested predicates output<a class="headerlink" href="#suppressing-tested-predicates-output" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes predicates being tested output text or binary data that at
 best clutters testing logs and at worse can interfere with parsing of
@@ -1042,8 +1041,8 @@ it by using the goals <code class="docutils literal notranslate"><span class="pr
     <span class="k">{</span>circle(<span class="s">&#39;#2&#39;</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>print.
 </pre></div>
 </div>
-</section>
-<section id="tests-with-timeout-limits">
+</div>
+<div class="section" id="tests-with-timeout-limits">
 <h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Permalink to this headline">¶</a></h2>
 <p>There’s no portable way to call a goal with a timeout limit. However,
 some backend Prolog compilers provide this functionality:</p>
@@ -1058,8 +1057,8 @@ some backend Prolog compilers provide this functionality:</p>
 abstraction for those backend Prolog compilers.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a timeout option that
 can be used to set a limit per test set.</p>
-</section>
-<section id="setup-and-cleanup-goals">
+</div>
+<div class="section" id="setup-and-cleanup-goals">
 <h2>Setup and cleanup goals<a class="headerlink" href="#setup-and-cleanup-goals" title="Permalink to this headline">¶</a></h2>
 <p>A test object can define <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> goals. The
 <code class="docutils literal notranslate"><span class="pre">setup/0</span></code> predicate is called, when defined, before running the object
@@ -1078,8 +1077,8 @@ dialect and the <code class="docutils literal notranslate"><span class="pre">set
 skipped when the setup goal fails or throws an error. Note that a broken
 test cleanup goal doesn’t affect the test but may adversely affect any
 following tests.</p>
-</section>
-<section id="test-annotations">
+</div>
+<div class="section" id="test-annotations">
 <h2>Test annotations<a class="headerlink" href="#test-annotations" title="Permalink to this headline">¶</a></h2>
 <p>It’s possible to define per unit and per test annotations to be printed
 after the test results or when tests are skipped. This is particularly
@@ -1099,8 +1098,8 @@ skipped by writing:</p>
 </div>
 <p>Annotations are written, by default, between parenthesis after and in
 the same line as the test results.</p>
-</section>
-<section id="flaky-tests">
+</div>
+<div class="section" id="flaky-tests">
 <h2>Flaky tests<a class="headerlink" href="#flaky-tests" title="Permalink to this headline">¶</a></h2>
 <p>Flaky tests are tests that pass or fail non-deterministically, usually
 due to external conditions (e.g. computer or network load). Thus, flake
@@ -1110,8 +1109,8 @@ annotation can be used to alert that a test failure is for a flaky test.
 If the <code class="docutils literal notranslate"><span class="pre">note/1</span></code> argument is an atom containing the sub-atom <code class="docutils literal notranslate"><span class="pre">flaky</span></code>,
 the testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
 reporting failed tests.</p>
-</section>
-<section id="debugging-failed-tests">
+</div>
+<div class="section" id="debugging-failed-tests">
 <h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Permalink to this headline">¶</a></h2>
 <p>Debugging of failed unit tests is usually easy if you use assertions as
 the reason for the assertion failures is printed out. Thus, use
@@ -1152,8 +1151,8 @@ For example, assuming that the identifier of test to be debugged is
 <p>In the more complicated cases, it may be worth to define
 <code class="docutils literal notranslate"><span class="pre">loader_debug.lgt</span></code> and <code class="docutils literal notranslate"><span class="pre">tester_debug.lgt</span></code> files that load code and
 tests in debug mode and also load the debugger.</p>
-</section>
-<section id="code-coverage">
+</div>
+<div class="section" id="code-coverage">
 <h2>Code coverage<a class="headerlink" href="#code-coverage" title="Permalink to this headline">¶</a></h2>
 <p>If you want entity predicate clause coverage information to be collected
 and printed, you will need to compile the entities that you’re testing
@@ -1239,8 +1238,8 @@ simplify writing the tests. In alternative, we can use the
 <p>These workarounds may thus allow generating code coverage data also for
 Prolog code by defining tests that use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control
 construct to call the Prolog predicates.</p>
-</section>
-<section id="automating-running-tests">
+</div>
+<div class="section" id="automating-running-tests">
 <h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Permalink to this headline">¶</a></h2>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script for
 automating running unit tests. See the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file for
@@ -1255,8 +1254,8 @@ page for the script:</p>
 <p>Additional advice on testing and on automating testing using continuous
 integration servers can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/testing.html">https://logtalk.org/testing.html</a></p>
-</section>
-<section id="utility-predicates">
+</div>
+<div class="section" id="utility-predicates">
 <h2>Utility predicates<a class="headerlink" href="#utility-predicates" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool provides several public utility predicates to
 simplify writing unit tests and for general use:</p>
@@ -1363,8 +1362,8 @@ execution time (in seconds) for each individual test is reported by
 default when running the tests.</p>
 <p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation for more details on these
 predicates.</p>
-</section>
-<section id="exporting-test-results-in-xunit-xml-format">
+</div>
+<div class="section" id="exporting-test-results-in-xunit-xml-format">
 <h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Permalink to this headline">¶</a></h2>
 <p>To output test results in the xUnit XML format (from JUnit; see e.g.
 <a class="reference external" href="https://github.com/windyroad/JUnit-Schema">https://github.com/windyroad/JUnit-Schema</a> or
@@ -1396,8 +1395,8 @@ in a single report)</p></li>
 <li><p><a class="reference external" href="https://github.com/JatechUK/NUnit-HTML-Report-Generator">https://github.com/JatechUK/NUnit-HTML-Report-Generator</a></p></li>
 <li><p><a class="reference external" href="https://plugins.jenkins.io/xunit">https://plugins.jenkins.io/xunit</a></p></li>
 </ul>
-</section>
-<section id="exporting-test-results-in-the-tap-output-format">
+</div>
+<div class="section" id="exporting-test-results-in-the-tap-output-format">
 <h2>Exporting test results in the TAP output format<a class="headerlink" href="#exporting-test-results-in-the-tap-output-format" title="Permalink to this headline">¶</a></h2>
 <p>To output test results in the TAP (Test Anything Protocol) format,
 simply load the <code class="docutils literal notranslate"><span class="pre">tap_output.lgt</span></code> file before running the tests. This
@@ -1422,8 +1421,8 @@ HTML files for easy browsing. For example:</p>
 <li><p><a class="reference external" href="https://github.com/Quobject/tap-to-html">https://github.com/Quobject/tap-to-html</a></p></li>
 <li><p><a class="reference external" href="https://plugins.jenkins.io/tap/">https://plugins.jenkins.io/tap/</a></p></li>
 </ul>
-</section>
-<section id="generating-allure-reports">
+</div>
+<div class="section" id="generating-allure-reports">
 <h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Permalink to this headline">¶</a></h2>
 <p>A shell script is provided for generating
 <a class="reference external" href="http://allure.qatools.ru">Allure</a> reports. This requires exporting
@@ -1461,8 +1460,8 @@ version or git commit hash. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -- Backend.name=&#39;GNU Prolog&#39; Backend.version=1.4.5
 </pre></div>
 </div>
-</section>
-<section id="exporting-code-coverage-results-in-xml-format">
+</div>
+<div class="section" id="exporting-code-coverage-results-in-xml-format">
 <h2>Exporting code coverage results in XML format<a class="headerlink" href="#exporting-code-coverage-results-in-xml-format" title="Permalink to this headline">¶</a></h2>
 <p>To export code coverage results in XML format, load the
 <code class="docutils literal notranslate"><span class="pre">coverage_report.lgt</span></code> file before running the tests. A file named
@@ -1509,15 +1508,15 @@ the <code class="docutils literal notranslate"><span class="pre">$HOME</span></c
 servers, the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter may not contain a <code class="docutils literal notranslate"><span class="pre">bitbucket</span></code>,
 <code class="docutils literal notranslate"><span class="pre">github</span></code>, or <code class="docutils literal notranslate"><span class="pre">gitlab</span></code> string. In this case, you can use the XSLT
 parameter <code class="docutils literal notranslate"><span class="pre">host</span></code> to indicate which service are you running.</p>
-</section>
-<section id="minimizing-test-results-output">
+</div>
+<div class="section" id="minimizing-test-results-output">
 <h2>Minimizing test results output<a class="headerlink" href="#minimizing-test-results-output" title="Permalink to this headline">¶</a></h2>
 <p>To minimize the test results output, simply load the
 <code class="docutils literal notranslate"><span class="pre">minimal_output.lgt</span></code> file before running the tests. This file defines
 an object, <code class="docutils literal notranslate"><span class="pre">minimal_output</span></code>, that intercepts and summarizes the unit
 test execution messages.</p>
-</section>
-<section id="known-issues">
+</div>
+<div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
 <p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used
 currently in the definition of the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>, <code class="docutils literal notranslate"><span class="pre">setup/1</span></code>, and
@@ -1526,8 +1525,8 @@ alternative the <code class="docutils literal notranslate"><span class="pre">par
 <p>Deterministic unit tests are currently not available when using Quintus
 Prolog as it lacks built-in support that cannot be sensibly defined in
 Prolog.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

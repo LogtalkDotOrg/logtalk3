@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>complements_object/2 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -227,23 +226,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="complements-object-2">
+  <div class="section" id="complements-object-2">
 <span id="predicates-complements-object-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">complements_object/2</span></code><a class="headerlink" href="#complements-object-2" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">complements_object</span>(<span class="nv">Category</span>, <span class="nv">Object</span>)
 </pre></div>
 </div>
 <p>Enumerates, by backtracking, all category–object pairs such that the
 category explicitly complements the object.</p>
-</section>
-<section id="modes-and-number-of-proofs">
+</div>
+<div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">complements_object</span>(<span class="o">?</span>category_identifier, <span class="o">?</span>object_identifier) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</section>
-<section id="errors">
+</div>
+<div class="section" id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Category</span></code> is neither a variable nor a valid category identifier:</div>
@@ -255,8 +254,8 @@ category explicitly complements the object.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,</span> <span class="pre">Parent)</span></code></div>
 </div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the logging category complements the employee object:</span>
 | <span class="o">?-</span> <span class="k">complements_object</span>(logging, employee).
@@ -267,8 +266,8 @@ category explicitly complements the object.</p>
 <p><a class="reference internal" href="current_category_1.html#predicates-current-category-1"><span class="std std-ref">current_category/1</span></a>,
 <a class="reference internal" href="imports_category_2_3.html#predicates-imports-category-2-3"><span class="std std-ref">imports_category/2-3</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

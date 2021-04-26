@@ -8,7 +8,7 @@ in the JSON format based on the specification and standard found at:
 -  https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 
 It includes a parametric object whose parameter indicates the preferred
-representation for decoded JSON text strings (``atom``, ``chars`` or
+representation for decoded JSON text strings (``atom``, ``chars``, or
 ``codes``).
 
 API documentation
@@ -54,7 +54,7 @@ as terms:
 -  Text strings can be represented as atoms, ``chars(List)``, or
    ``codes(List)``. The default when decoding is to use atoms when using
    the ``json`` object. To decode text strings into lists of chars or
-   code, use the ``json/1`` with the parameter bound to ``chars`` or
+   codes, use the ``json/1`` with the parameter bound to ``chars`` or
    ``codes``. For example:
 
    ::
@@ -78,7 +78,8 @@ as terms:
 -  The JSON values ``false``, ``true`` and ``null`` are represented by,
    respectively, the ``@false``, ``@true`` and ``@null`` compound terms.
 
-The following table exemplifies the term equivalents of JSON elements:
+The following table exemplifies the term equivalents of JSON elements
+(with) JSON strings being represented as atoms:
 
 ========================= =========================
 JSON                      term
@@ -113,7 +114,6 @@ null                      @null
 [9223372036854775807]     [9223372036854775807]
 {"foo":"bar"}             {foo-bar}
 {}                        {}
-[0.0]                     [0.0]
 ========================= =========================
 
 Encoding
@@ -142,7 +142,7 @@ Alternatively:
 
 Notice that ``generate/2`` takes, as second argument, a Prolog term that
 corresponds to the JSON Syntax in Prolog and produces the corresponding
-JSON output in the media indicated as first argument:
+JSON output in the format specified in the first argument:
 (``codes(Variable)``, ``stream(Stream)``, ``file(File)``,
 ``chars(Variable)`` or ``atom(Variable)``).
 
@@ -160,5 +160,5 @@ to decode a given json file:
 
 The ``parse/2`` predicate first argument must indicate the input source
 (``codes(Source)``, ``stream(Source)``, ``file(Source)``,
-``chars(Source)`` or ``atom(Source)``) containing a JSON structure to be
+``chars(Source)`` or ``atom(Source)``) containing a JSON payload to be
 decoded into the Prolog term in the second argument.

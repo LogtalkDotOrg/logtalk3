@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>use_module/2 &mdash; The Logtalk Handbook v3.46.0-b01 documentation</title>
@@ -105,7 +104,7 @@
               
             
             
-              <p><span class="caption-text">Contents</span></p>
+              <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
@@ -227,9 +226,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="use-module-2">
+  <div class="section" id="use-module-2">
 <span id="directives-use-module-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">use_module/2</span></code><a class="headerlink" href="#use-module-2" title="Permalink to this headline">¶</a></h1>
-<section id="description">
+<div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>use_module(<span class="nv">Module</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, ...])
 use_module(<span class="nv">Module</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">/</span><span class="nv">Arity</span>, ...])
@@ -289,8 +288,8 @@ when using the directive in a parametric object or a parametric category
 defined in a source file (the common case). In this case, <a class="reference internal" href="../../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
 will be used for all listed predicates (and non-terminals). The parameter
 variable must be instantiated at runtime when the calls are made.</p>
-</section>
-<section id="template-and-modes">
+</div>
+<div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>predicate_indicator_list)
 use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>module_predicate_indicator_alias_list)
@@ -303,8 +302,8 @@ use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>mo
 use_module(<span class="o">+</span>module_identifier, <span class="o">+</span>operator_list)
 </pre></div>
 </div>
-</section>
-<section id="examples">
+</div>
+<div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(lists, [append<span class="o">/</span><span class="m">3</span>, member<span class="o">/</span><span class="m">2</span>]).
 <span class="p">:- </span><span class="k">use_module</span>(store, [data<span class="o">/</span><span class="m">2</span>]).
@@ -356,8 +355,8 @@ identifier to delay to runtime the actual module to use:</p>
 <a class="reference internal" href="uses_1.html#directives-uses-1"><span class="std std-ref">uses/1</span></a>,
 <a class="reference internal" href="alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
