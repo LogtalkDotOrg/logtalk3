@@ -126,7 +126,8 @@ list of codes in the `xml_parser` contribution.
 Examples
 --------
 
-* ADDED: Additional tests for the `encodings` example.
+* ADDED: Additional tests for the `encodings` example, including for full
+UTF-16 support.
 
 * FIXED: The tests driver file for the `encodings` example to show all test
 results with automated testing.

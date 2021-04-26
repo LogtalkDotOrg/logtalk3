@@ -30,10 +30,15 @@ backends.
 
 The following encodings are used in the source file:
 
+- `mahjong.lgt`   - UTF-16 full (with a BOM)
 - `asian.lgt`     - UTF-16 (with a BOM)
 - `babel.lgt`     - UTF-8 (with a BOM)
 - `latin.lgt`     - ISO-8859-1 (Latin 1)
 - `mythology.lgt` - UTF-32 (with a BOM)
+
+The `mahjong.lgt` source file requires full UTF-16 support as it uses
+characters that are represented using surrogate pairs. Only CxProlog and
+SICStus Prolog provides the required support.
 
 As of the release date of this Logtalk version, only SICStus Prolog and 
 CxProlog support UTF-32 encodings. Attempting to compile the `mythology.lgt` 

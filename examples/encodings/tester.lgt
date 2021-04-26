@@ -23,7 +23,7 @@
 
 	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == swi; Dialect == yap))).
 
-		% SWI-Prolog and YAP don't support UTF-32
+		% SWI-Prolog and YAP don't support UTF-32 or full UTF-16
 		:- initialization((
 			set_logtalk_flag(report, warnings),
 			logtalk_load(lgtunit(loader)),
@@ -53,12 +53,13 @@
 		:- initialization((
 			set_logtalk_flag(report, warnings),
 			logtalk_load(lgtunit(loader)),
-			logtalk_load([asian, babel, latin, mythology], [source_data(on), debug(on)]),
-			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16, tests_utf_32], [hook(lgtunit)]),
+			logtalk_load([mahjong, asian, babel, latin, mythology], [source_data(on), debug(on)]),
+			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16, tests_utf_16_surrogates, tests_utf_32], [hook(lgtunit)]),
 			lgtunit::run_test_sets([
 				tests_iso_8859_1,
 				tests_utf_8,
 				tests_utf_16,
+				tests_utf_16_surrogates,
 				tests_utf_32
 			])
 		)).
