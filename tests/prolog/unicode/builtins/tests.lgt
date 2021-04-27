@@ -442,7 +442,7 @@
 
 	% check that BOM detection doesn't break stream position
 	test(lgt_unicode_set_stream_position_2_01, true(Term1 == Term3)) :-
-		os::absolute_file_name('terms.pl', Path),
+		file_path('terms.pl', Path),
 		open(Path, read, Stream, [type(text), reposition(true)]),
 		stream_property(Stream, position(Position)),
 		read_term(Stream, Term1, []),
