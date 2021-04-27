@@ -43,6 +43,19 @@
 	test(lgt_unicode_utf_8_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_8_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
+	% UTF-8 without BOM tests
+
+	- test(lgt_unicode_utf_8_no_bom_01, true) :-
+		file_path('utf_8_no_bom.lgt', Path),
+		logtalk_compile(Path).
+
+	- test(lgt_unicode_utf_8_no_bom_02, true) :-
+		file_path('utf_8_no_bom.lgt', Path),
+		logtalk_load(Path, [clean(on)]).
+
+	- test(lgt_unicode_utf_8_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+		findall(Length, ({utf_8_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
 	% UTF-16BE with BOM tests
 
 	test(lgt_unicode_utf_16_be_bom_01, true) :-
@@ -58,15 +71,15 @@
 
 	% UTF-16BE without BOM tests
 
-	test(lgt_unicode_utf_16_be_no_bom_01, true) :-
+	- test(lgt_unicode_utf_16_be_no_bom_01, true) :-
 		file_path('utf_16_be_no_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_16_be_no_bom_02, true) :-
+	- test(lgt_unicode_utf_16_be_no_bom_02, true) :-
 		file_path('utf_16_be_no_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_16_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	- test(lgt_unicode_utf_16_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_16_be_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
 	% UTF-16LE with BOM tests
@@ -84,15 +97,15 @@
 
 	% UTF-16LE without BOM tests
 
-	test(lgt_unicode_utf_16_le_no_bom_01, true) :-
+	- test(lgt_unicode_utf_16_le_no_bom_01, true) :-
 		file_path('utf_16_le_no_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_16_le_no_bom_02, true) :-
+	- test(lgt_unicode_utf_16_le_no_bom_02, true) :-
 		file_path('utf_16_le_no_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_16_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	- test(lgt_unicode_utf_16_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_16_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
 	% UTF-32BE with BOM tests
@@ -110,15 +123,15 @@
 
 	% UTF-32BE without BOM tests
 
-	test(lgt_unicode_utf_32_be_no_bom_01, true) :-
+	- test(lgt_unicode_utf_32_be_no_bom_01, true) :-
 		file_path('utf_32_be_no_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_32_be_no_bom_02, true) :-
+	- test(lgt_unicode_utf_32_be_no_bom_02, true) :-
 		file_path('utf_32_be_no_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_32_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	- test(lgt_unicode_utf_32_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_32_be_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
 	% UTF-32LE with BOM tests
@@ -136,15 +149,15 @@
 
 	% UTF-32LE without BOM tests
 
-	test(lgt_unicode_utf_32_le_no_bom_01, true) :-
+	- test(lgt_unicode_utf_32_le_no_bom_01, true) :-
 		file_path('utf_32_le_no_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_32_le_no_bom_02, true) :-
+	- test(lgt_unicode_utf_32_le_no_bom_02, true) :-
 		file_path('utf_32_le_no_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_32_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	- test(lgt_unicode_utf_32_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_32_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
 	% auxiliary predicates
