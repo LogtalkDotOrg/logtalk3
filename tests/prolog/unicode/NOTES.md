@@ -18,10 +18,16 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains a work-in-progress set of unit tests for Prolog
-support for Unicode. The tests are based on the October 5, 2009 WG17 Core
-revision standardization proposal, which specifies the following minimal
-language features:
+This directory contains *work-in-progress* test sets for Prolog Unicode
+support. Currently, two test sets are provided: `builtins` (for flags,
+built-in predicates, and stream properties) and `encodings` (for UTF-8,
+UTF-16, and UTF-32 encodings, with and without a BOM). The `encodings`
+test set is only enabled for backends supporting all the above encodings
+(currently, CxProlog and SICStus Prolog).
+
+The tests are based on the October 5, 2009 WG17 ISO Prolog Core revision
+standardization proposal, which specifies the following minimal language
+features:
 
 1. An `encoding` Prolog flag, allowing applications to query the default
 encoding for opening streams. When the Prolog systems supports multiple
