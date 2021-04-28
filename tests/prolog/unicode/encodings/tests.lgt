@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-04-27,
+		date is 2021-04-28,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -45,15 +45,15 @@
 
 	% UTF-8 without BOM tests
 
-	- test(lgt_unicode_utf_8_no_bom_01, true) :-
+	test(lgt_unicode_utf_8_no_bom_01, true, [condition(current_prolog_flag(encoding,'UTF-8'))]) :-
 		file_path('utf_8_no_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	- test(lgt_unicode_utf_8_no_bom_02, true) :-
+	test(lgt_unicode_utf_8_no_bom_02, true, [condition(current_prolog_flag(encoding,'UTF-8'))]) :-
 		file_path('utf_8_no_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	- test(lgt_unicode_utf_8_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	test(lgt_unicode_utf_8_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(current_prolog_flag(encoding,'UTF-8'))]) :-
 		findall(Length, ({utf_8_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
 	% UTF-16BE with BOM tests
