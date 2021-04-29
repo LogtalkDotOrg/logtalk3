@@ -41,10 +41,42 @@ MIME name)":
 	http://www.iana.org/assignments/character-sets
 
 3. Two new `open/4` predicate options, `encoding(Atom)` and `bom(Boolean)`.
+The handling of these options depends on the mode argument and follow from
+the Unicode standard guidelines and current practice:
 
-4. Two new stream properties, `encoding(Atom)` and `bom(Boolean)`.
+- `write` mode: If an `encoding/1` option is present, use the specified
+encoding, otherwise use the default encoding (which the user can query using
+the `encoding` flag). If `bom(true)` option is present, write a BOM if the
+encoding is a Unicode encoding. If no `bom/1` option is used, write a BOM
+if the encoding is `UTF-16` or `UTF-32` but not if the encoding is `UTF-8`,
+`UTF-16LE`, `UTF-16BE`, `UTF-32LE`, or `UTF-32LE`. If the encoding is
+`UTF-16` or `UTF-32`, write the data big-endian.
 
-5. The standard built-in predicates that must be Unicode aware include:
+- `append` mode: If an `encoding/1` option is present, use that encoding,
+otherwise use the default encoding (which the user can query using the
+`encoding` flag). Ignore `bom/1` option if present and never write a BOM.
+
+- `read` mode: the default is `bom(true)`, i.e. perform BOM detection and use
+the corresponding encoding if a BOM is found. If no BOM is detected, then use
+the `encoding/1` option if present and the default encoding otherwise. When a
+`bom(false)` option is present, no BOM detection is performed and a BOM at
+the beginning of the stream is to be interpreted as a ZERO WIDTH NON-BREAKING
+SPACE (ZWNBSP).
+
+The `bom/1` option is ignored when not using a Unicode encoding.
+
+4. The `open/3` predicate always perform BOM detection on mode `read` and uses
+the corresponding encoding if a BOM is found. Otherwise the default encoding
+is used (which the user can query using the `encoding` flag). In `write` mode,
+a BOM is written if the encoding is `UTF-16` or `UTF-32` but not if the encoding
+is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`, or `UTF-32LE`. If the encoding
+is `UTF-16` or `UTF-32`, the data is written big-endian.
+
+5. Two new stream properties, `encoding(Atom)` and `bom(Boolean)`, set from
+the `open/3-4` calls and the default values as described above, that can be
+queried using the standard `stream_property/2` predicate.
+
+6. The standard built-in predicates that must be Unicode aware include:
 
 - `atom_chars/2`
 - `atom_codes/2`
@@ -61,6 +93,7 @@ MIME name)":
 - `put_code/1-2`
 - `read_term/3`
 - `set_prolog_flag/2`
+- `set_stream_position/2`
 - `stream_property/2`
 - `sub_atom/5`
 - `write_term/3`
