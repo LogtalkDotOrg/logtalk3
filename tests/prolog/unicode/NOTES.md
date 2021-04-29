@@ -61,9 +61,10 @@ otherwise use the default encoding (which can be queried using the
 - `read` mode: the default is `bom(true)`, i.e. perform BOM detection and use
 the corresponding encoding if a BOM is found. If no BOM is detected, then use
 the `encoding/1` option if present and the default encoding otherwise. When a
-`bom(false)` option is present, no BOM detection is performed and a BOM at
-the beginning of the stream is to be interpreted as a ZERO WIDTH NON-BREAKING
-SPACE (ZWNBSP).
+`bom(false)` option is present, no BOM detection is performed, an `encoding/1`
+is required if the file encoding is different from the default encoding, and
+a BOM at the beginning of the stream is to be interpreted as a ZERO WIDTH
+NON-BREAKING SPACE (ZWNBSP).
 
 The `bom/1` option is ignored when not using a Unicode encoding.
 

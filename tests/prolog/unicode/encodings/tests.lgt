@@ -226,6 +226,12 @@
 		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
+	% check that with BOM detection disabled a BOM is read as a ZWNBSP
+	test(lgt_unicode_open_4_read_08, true(Code == 0xFEFF)) :-
+		file_path('utf_16_le_bom.lgt', Path),
+		open(Path, read, Stream, [encoding('UTF-16LE'), bom(false)]),
+		get_code(Stream, Code),
+		close(Stream).
 
 	% auxiliary predicates
 
