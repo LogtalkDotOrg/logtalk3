@@ -44,6 +44,12 @@
 	test(lgt_unicode_escape_sequence_bmp_04, true(A == 'Γειά σου κόσμε!')) :-
 		{atom_codes(A, [0'Γ,0'ε,0'ι,940,32,0'σ,0'ο,0'υ,32,0'κ,0'ό,0'σ,0'μ,0'ε,0'!])}.
 
+	test(lgt_unicode_escape_sequence_bmp_05, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{writeq(S, 'Γει\u03AC σου κόσμε!')},
+		^^text_output_assertion('\'Γειά σου κόσμε!\'', Assertion).
+
 	% escape sequence \UXXXXXXXX
 
 	test(lgt_unicode_escape_sequence_full_01, true(L == ['🀙','🀚','🀛','🀜','🀝','🀞','🀟','🀠'])) :-
@@ -57,5 +63,11 @@
 
 	test(lgt_unicode_escape_sequence_full_04, true(A == '🀙🀚🀛🀜🀝🀞🀟🀠')) :-
 		{atom_codes(A, [0'🀙,0'🀚,0'🀛,0'🀜,127005,0'🀞,0'🀟,0'🀠])}.
+
+	test(lgt_unicode_escape_sequence_full_05, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{writeq(S, '🀙🀚🀛🀜\U0001F01D🀞🀟🀠')},
+		^^text_output_assertion('\'🀙🀚🀛🀜🀝🀞🀟🀠\'', Assertion).
 
 :- end_object.
