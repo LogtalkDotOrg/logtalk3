@@ -257,7 +257,7 @@
 		{writeq(S, {})},
 		^^text_output_assertion('{}', Assertion).
 
-	% quoted writing of escape sequences shoudl preserve them
+	% quoted writing of escape sequences should preserve them
 
 	test(lgt_write_term_3_44, true(Assertion)) :-
 		^^set_text_output(''),
@@ -282,7 +282,7 @@
 
 	% check detection of invalid options; the ISO Prolog standard only
 	% specifies a domain_error/2 but an instantiation_error/0 is also
-	% a sensible choice made by several Prolog systems when applicable 
+	% a sensible choice made by several Prolog systems when applicable
 
 	test(sics_write_term_3_47, errors([domain_error(write_option,quoted(_)), instantiation_error])) :-
 		^^suppress_text_output,
