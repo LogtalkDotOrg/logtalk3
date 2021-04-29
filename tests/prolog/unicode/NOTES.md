@@ -41,8 +41,9 @@ MIME name)":
 	http://www.iana.org/assignments/character-sets
 
 3. Two new `open/4` predicate options, `encoding(Atom)` and `bom(Boolean)`.
-The handling of these options depends on the mode argument and follow from
-the Unicode standard guidelines and current practice:
+The handling of these options depends on the mode argument, only applies to
+text files, and follows from the Unicode standard guidelines and current
+practice:
 
 - `write` mode: If an `encoding/1` option is present, use the specified
 encoding, otherwise use the default encoding (which the user can query using
@@ -65,12 +66,13 @@ SPACE (ZWNBSP).
 
 The `bom/1` option is ignored when not using a Unicode encoding.
 
-4. The `open/3` predicate always perform BOM detection on mode `read` and uses
-the corresponding encoding if a BOM is found. Otherwise the default encoding
-is used (which the user can query using the `encoding` flag). In `write` mode,
-a BOM is written if the encoding is `UTF-16` or `UTF-32` but not if the encoding
-is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`, or `UTF-32LE`. If the encoding
-is `UTF-16` or `UTF-32`, the data is written big-endian.
+4. The `open/3` predicate (for text files) always perform BOM detection on mode
+`read` and uses the corresponding encoding if a BOM is found. Otherwise the
+default encoding is used (which the user can query using the `encoding` flag).
+In `write` mode, a BOM is written if the encoding is `UTF-16` or `UTF-32` but
+not if the encoding is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`, or
+`UTF-32LE`. If the encoding is `UTF-16` or `UTF-32`, the data is written
+big-endian.
 
 5. Two new stream properties, `encoding(Atom)` and `bom(Boolean)`, set from
 the `open/3-4` calls and the default values as described above, that can be
