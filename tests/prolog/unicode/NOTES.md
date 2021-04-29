@@ -19,11 +19,12 @@ ________________________________________________________________________
 
 
 This directory contains *work-in-progress* test sets for Prolog Unicode
-support. Currently, two test sets are provided: `builtins` (for flags,
-built-in predicates, and stream properties) and `encodings` (for UTF-8,
-UTF-16, and UTF-32 encodings, with and without a BOM). The `encodings`
-test set is only enabled for backends supporting all the above encodings
-(currently, CxProlog and SICStus Prolog).
+support. Currently, three test sets are provided: `builtins` (for flags,
+built-in predicates, and stream properties), `encodings` (for UTF-8,
+UTF-16, and UTF-32 encodings, with and without a BOM), and `syntax` (for
+the `\uXXXX` and `\UXXXXXXXX` escape sequences). The `encodings` test set
+is only enabled for backends supporting all the above encodings (currently,
+CxProlog and SICStus Prolog).
 
 The tests are based on the October 5, 2009 WG17 ISO Prolog Core revision
 standardization proposal, which specifies the following minimal language
@@ -46,7 +47,7 @@ text files, and follows from the Unicode standard guidelines and current
 practice:
 
 - `write` mode: If an `encoding/1` option is present, use the specified
-encoding, otherwise use the default encoding (which the user can query using
+encoding, otherwise use the default encoding (which can be queried using
 the `encoding` flag). If `bom(true)` option is present, write a BOM if the
 encoding is a Unicode encoding. If no `bom/1` option is used, write a BOM
 if the encoding is `UTF-16` or `UTF-32` but not if the encoding is `UTF-8`,
@@ -54,7 +55,7 @@ if the encoding is `UTF-16` or `UTF-32` but not if the encoding is `UTF-8`,
 `UTF-16` or `UTF-32`, write the data big-endian.
 
 - `append` mode: If an `encoding/1` option is present, use that encoding,
-otherwise use the default encoding (which the user can query using the
+otherwise use the default encoding (which can be queried using the
 `encoding` flag). Ignore `bom/1` option if present and never write a BOM.
 
 - `read` mode: the default is `bom(true)`, i.e. perform BOM detection and use
@@ -68,7 +69,7 @@ The `bom/1` option is ignored when not using a Unicode encoding.
 
 4. The `open/3` predicate (for text files) always perform BOM detection on mode
 `read` and uses the corresponding encoding if a BOM is found. Otherwise the
-default encoding is used (which the user can query using the `encoding` flag).
+default encoding is used (which can be queried using the `encoding` flag).
 In `write` mode, a BOM is written if the encoding is `UTF-16` or `UTF-32` but
 not if the encoding is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`, or
 `UTF-32LE`. If the encoding is `UTF-16` or `UTF-32`, the data is written
