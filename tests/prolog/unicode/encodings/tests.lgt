@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2021-04-28,
+		date is 2021-04-29,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -159,6 +159,73 @@
 
 	test(lgt_unicode_utf_32_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32LE'))]) :-
 		findall(Length, ({utf_32_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
+	% open/4 mode read tests
+
+	% check that BOM detection is working for UTF-8 files
+	test(lgt_unicode_open_4_read_01, true(Encoding-BOM == 'UTF-8'-true)) :-
+		file_path('utf_8_bom.lgt', Path),
+		open(Path, read, Stream, [bom(true)]),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% BOM detection is the default
+	test(lgt_unicode_open_4_read_02, true(Encoding-BOM == 'UTF-8'-true)) :-
+		file_path('utf_8_bom.lgt', Path),
+		open(Path, read, Stream, []),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% check that BOM detection is working for UTF-16 files
+	test(lgt_unicode_open_4_read_03, true(Encoding-BOM == 'UTF-16BE'-true)) :-
+		file_path('utf_16_be_bom.lgt', Path),
+		open(Path, read, Stream, []),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% check that BOM detection is working for UTF-16 files
+	test(lgt_unicode_open_4_read_04, true(Encoding-BOM == 'UTF-16LE'-true)) :-
+		file_path('utf_16_le_bom.lgt', Path),
+		open(Path, read, Stream, []),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% check that BOM detection is working for UTF-32 files
+	test(lgt_unicode_open_4_read_05, true(Encoding-BOM == 'UTF-32BE'-true)) :-
+		file_path('utf_32_be_bom.lgt', Path),
+		open(Path, read, Stream, []),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% check that BOM detection is working for UTF-32 files
+	test(lgt_unicode_open_4_read_06, true(Encoding-BOM == 'UTF-32LE'-true)) :-
+		file_path('utf_32_le_bom.lgt', Path),
+		open(Path, read, Stream, []),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% check that BOM detection takes precedence over the encoding/1 option
+	test(lgt_unicode_open_4_read_07, true(Encoding-BOM == 'UTF-16BE'-true)) :-
+		file_path('utf_16_be_bom.lgt', Path),
+		open(Path, read, Stream, [encoding('UTF-8')]),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
+	% check that BOM detection takes precedence over the encoding/1 option
+	test(lgt_unicode_open_4_read_08, true(Encoding-BOM == 'UTF-32LE'-true)) :-
+		file_path('utf_32_le_bom.lgt', Path),
+		open(Path, read, Stream, [encoding('UTF-16BE')]),
+		stream_property(Stream, encoding(Encoding)),
+		stream_property(Stream, bom(BOM)),
+		close(Stream).
+
 
 	% auxiliary predicates
 
