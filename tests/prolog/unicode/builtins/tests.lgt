@@ -399,6 +399,14 @@
 		get_byte(Input, Byte1),
 		get_byte(Input, Byte2).
 
+	% check that a file is written using the default encoding if none is specified
+	test(lgt_unicode_open_4_08, true(Encoding == Default)) :-
+		current_prolog_flag(encoding, Default),
+		file_path(sample_utf_8_bom, Path),
+		open(Path, write, Output, []),
+		stream_property(Output, encoding(Encoding)),
+		close(Output).
+
 	% peek_char/2 tests
 
 	test(lgt_unicode_peek_char_2_01, true(Char == 'Γ')) :-
