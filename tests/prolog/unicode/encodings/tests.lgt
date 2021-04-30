@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2021-04-29,
+		date is 2021-04-30,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -227,7 +227,7 @@
 		close(Stream).
 
 	% check that with BOM detection disabled a BOM is read as a ZWNBSP
-	test(lgt_unicode_open_4_read_08, true(Code == 0xFEFF)) :-
+	test(lgt_unicode_open_4_read_09, true(Code == 0xFEFF)) :-
 		file_path('utf_16_le_bom.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-16LE'), bom(false)]),
 		get_code(Stream, Code),
