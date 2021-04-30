@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:20:1,
 		author is 'Paulo Moura',
-		date is 2021-02-20,
+		date is 2021-04-30,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -344,7 +344,7 @@
 
 	test(os_temporary_directory_1_02) :-
 		os::temporary_directory(Directory),
-		atom_concat(Directory, 'logtalk_temporary_directory_test_file', File),
+		os::path_concat(Directory, 'logtalk_temporary_directory_test_file', File),
 		open(File, write, Stream),
 		write(Stream, 1),
 		close(Stream).

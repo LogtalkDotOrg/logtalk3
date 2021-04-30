@@ -89,6 +89,9 @@ report.
 implementations where the order pairs are returned from lookup predicates is
 not necessarily ascending order by key. Thanks to Paul Brown for the report.
 
+* FIXED: Test for the `os::temporary_directory/1` predicate to use the
+`os::path_concat/3` predicate.
+
 Tools
 -----
 
