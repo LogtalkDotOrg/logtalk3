@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on April 25, 2021
+%  Last updated on May 1, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -103,6 +103,8 @@
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
+'$lgt_predicate_property'(Pred, built_in) :-
+	'$lgt_iso_spec_predicate'(Pred).
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
 
