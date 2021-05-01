@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:18:0,
+		version is 2:18:1,
 		author is 'Paulo Moura',
-		date is 2021-03-12,
+		date is 2021-04-01,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -337,29 +337,11 @@
 
 	arbitrary(character, Arbitrary) :-
 		% ascii_full
-		first_valid_character_code(First),
-		between(First, 127, Code),
+		arbitrary(character_code, Code),
 		char_code(Arbitrary, Code).
 
 	arbitrary(character(CharSet), Arbitrary) :-
-		first_valid_character_code(First),
-		(	CharSet == ascii_full ->
-			between(First, 127, Code)
-		;	CharSet == ascii_printable ->
-			between(32, 126, Code)
-		;	CharSet == ascii_identifier ->
-			identifier_characters(Characters),
-			member(Character, Characters),
-			char_code(Character, Code)
-		;	CharSet == byte ->
-			between(First, 255, Code)
-		;	CharSet == unicode_bmp ->
-			between(First, 65535, Code)
-		;	CharSet == unicode_full ->
-			between(First, 1114111, Code)
-		;	% default to ASCII printable
-			between(32, 126, Code)
-		),
+		arbitrary(character_code(CharSet), Code),
 		char_code(Arbitrary, Code).
 
 	arbitrary(char, Arbitrary) :-
@@ -471,9 +453,9 @@
 		;	CharSet == byte ->
 			between(First, 255, Arbitrary)
 		;	CharSet == unicode_bmp ->
-			between(First, 65535, Arbitrary)
+			arbitrary_unicode_code_point(First, 65535, Arbitrary)
 		;	CharSet == unicode_full ->
-			between(First, 1114111, Arbitrary)
+			arbitrary_unicode_code_point(First, 1114111, Arbitrary)
 		;	% default to ASCII printable
 			between(32, 126, Arbitrary)
 		).
@@ -1188,6 +1170,13 @@
 		'0','1','2','3','4','5','6','7','8','9','0',
 		'_'
 	]).
+
+	arbitrary_unicode_code_point(First, Last, Arbitrary) :-
+		repeat,
+			between(First, Last, Arbitrary),
+			% not a high or low surrogate code point
+			\+ between(Arbitrary, 55296, 57343),
+		!.
 
 	map_arbitrary([], _).
 	map_arbitrary([Head| Tail], Type) :-

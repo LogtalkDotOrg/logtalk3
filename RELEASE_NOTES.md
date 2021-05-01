@@ -92,6 +92,9 @@ not necessarily ascending order by key. Thanks to Paul Brown for the report.
 * FIXED: Test for the `os::temporary_directory/1` predicate to use the
 `os::path_concat/3` predicate.
 
+* FIXED: The `arbitrary` library generation of Unicode code points to exclude
+high and low surrogate code points.
+
 Tools
 -----
 
