@@ -93,7 +93,7 @@ not necessarily ascending order by key. Thanks to Paul Brown for the report.
 `os::path_concat/3` predicate.
 
 * FIXED: The `arbitrary` library generation of Unicode code points to exclude
-high and low surrogate code points.
+high and low surrogate code points plus private use code points.
 
 Tools
 -----

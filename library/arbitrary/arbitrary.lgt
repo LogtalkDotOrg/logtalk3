@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:18:1,
 		author is 'Paulo Moura',
-		date is 2021-04-01,
+		date is 2021-04-02,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -1175,7 +1175,16 @@
 		repeat,
 			between(First, Last, Arbitrary),
 			% not a high or low surrogate code point
-			\+ between(Arbitrary, 55296, 57343),
+			\+ integer::between(Arbitrary, 55296, 57343),
+			% not a non-character code point
+			\+ integer::between(Arbitrary, 64976, 65007),
+			Code is Arbitrary /\ 65535,
+			Code =\= 65534,
+			Code =\= 65535,
+			% not a private use code point
+			\+ integer::between(Arbitrary, 57344, 63743),
+			\+ integer::between(Arbitrary, 983040, 1048573),
+			\+ integer::between(Arbitrary, 1048576, 1114109),
 		!.
 
 	map_arbitrary([], _).
