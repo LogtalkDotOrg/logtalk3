@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.46.0 - April ??, 2021
-=======================
+3.46.0 - May ??, 2021
+=====================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -37,6 +37,8 @@ Prolog adapter and integration files
 
 * UPDATED: Require Ciao Prolog 1.20.0 or later version (due to backward
 incompatible changes in its libraries).
+
+* UPDATED: Require LVM 1.6.0 or later version.
 
 * UPDATED: Require Trealla Prolog 1.8.19 or later version.
 
@@ -93,7 +95,7 @@ not necessarily ascending order by key. Thanks to Paul Brown for the report.
 `os::path_concat/3` predicate.
 
 * FIXED: The `arbitrary` library generation of Unicode code points to exclude
-high and low surrogate code points plus private use code points.
+high and low surrogate, non-character, and private use code points.
 
 Tools
 -----

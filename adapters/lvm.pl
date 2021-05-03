@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 1.5.0 and later versions
-%  Last updated on March 19, 2021
+%  Adapter file for LVM 1.6.0 and later versions
+%  Last updated on May 3, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -215,7 +215,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 5, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 6, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -274,7 +274,11 @@ setup_call_cleanup(_, _, _) :-
 	;	% ... but not POSIX systems
 		ScratchDirectory = './.lgt_tmp/'
 	).
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	(	current_prolog_flag(verbose, false) ->
+		Report = warnings
+	;	Report = on
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
