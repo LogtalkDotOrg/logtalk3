@@ -26,9 +26,9 @@ the `\uXXXX` and `\UXXXXXXXX` escape sequences). The `encodings` test set
 is only enabled for backends supporting all the above encodings (currently,
 CxProlog and SICStus Prolog).
 
-The tests are based on the October 5, 2009 WG17 ISO Prolog Core revision
-standardization proposal, which specifies the following minimal language
-features:
+The tests are based on an extended version of the October 5, 2009 WG17 ISO
+Prolog Core revision standardization proposal, which specifies the following
+minimal language features:
 
 1. An `encoding` Prolog flag, allowing applications to query the default
 encoding for opening streams. When the Prolog systems supports multiple
@@ -37,9 +37,11 @@ to a supported encoding.
 
 2. Encodings are represented by atoms after the names specified by the
 Internet Assigned Numbers Authority (IANA) and marked as the "(preferred
-MIME name)":
+MIME name)" alias when available:
 
 	http://www.iana.org/assignments/character-sets
+
+For example, `'UTF-8'`, `'UTF-16LE'`, or `'UTF-32'`.
 
 3. Two new `open/4` predicate options, `encoding(Atom)` and `bom(Boolean)`.
 The handling of these options depends on the mode argument, only applies to
