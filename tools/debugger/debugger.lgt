@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:9:0,
+		version is 4:9:1,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2021-05-04,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -70,17 +70,6 @@
 
 	:- private(write_max_depth_/1).
 	:- dynamic(write_max_depth_/1).
-
-	:- if((current_logtalk_flag(prolog_dialect, xsb), current_logtalk_flag(threads, supported))).
-		:- thread_shared(debugging_/0).
-		:- thread_shared(tracing_/0).
-		:- thread_shared(skipping_/0).
-		:- thread_shared(quasi_skipping_/0).
-		:- thread_shared(spying_/2).
-		:- thread_shared(spying_/4).
-		:- thread_shared(leashing_/1).
-		:- thread_shared(invocation_number_/1).
-	:- endif.
 
 	% we use the structured printing and question asking mechanisms to allow debugger
 	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs
