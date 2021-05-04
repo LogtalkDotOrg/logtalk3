@@ -40,6 +40,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 * JIProlog:       `jiplgt`     (first run may require `sudo`)
 * LVM:            `lvmlgt`
 * Quintus Prolog: `quintuslgt` (experimental)
+* Scryer Prolog:  `scryerlgt`  (experimental)
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
 * Tau Prolog:     `taulgt`

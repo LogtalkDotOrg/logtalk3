@@ -24,7 +24,7 @@
 
 % load Logtalk core files
 :- initialization((
-	consult('../adapters/unsupported/scryer.pl'),
+	consult('../adapters/scryer.pl'),
 	consult('../paths/paths.pl'),
 	consult('../core/core.pl')
 )).
