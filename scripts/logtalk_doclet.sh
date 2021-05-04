@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on March 24, 2021
+##   Last updated on May 4, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.0"
+	echo "$(basename "$0") 2.1"
 	exit 0
 }
 
@@ -118,7 +118,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -178,6 +178,10 @@ elif [ "$p_arg" == "lvm" ] ; then
 	logtalk=lvmlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 	dot="?"
+elif [ "$p_arg" == "scryer" ] ; then
+	prolog='Scryer Prolog'
+	logtalk=scryerlgt$extension
+	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 1, 2021
+%  Last updated on May 4, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -227,13 +227,13 @@
 '$lgt_prolog_feature'(prolog_version, v(0, 8, 128)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 8, 128))).
 
-'$lgt_prolog_feature'(encoding_directive, source).
+'$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
-'$lgt_prolog_feature'(unicode, full).
+'$lgt_prolog_feature'(unicode, unsupported).
 
 
 
