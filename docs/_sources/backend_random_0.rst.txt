@@ -11,8 +11,8 @@
 Random number generator predicates using the backend Prolog compiler built-in random generator.
 
 | **Author:** Paulo Moura
-| **Version:** 1:14:0
-| **Date:** 2021-02-21
+| **Version:** 1:15:0
+| **Date:** 2021-05-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,7 +26,7 @@ Random number generator predicates using the backend Prolog compiler built-in ra
 | **Remarks:**
 
    - Implementation: The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.
-   - Portability: B-Prolog, CxProlog, ECLiPSe, JIProlog, Qu-Prolog, and Quintus Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.
+   - Portability: B-Prolog, CxProlog, ECLiPSe, JIProlog, Qu-Prolog, Quintus Prolog, and Scryer Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.
 
 | **Inherited public predicates:**
 |     :ref:`random_protocol/0::between/3`  :ref:`random_protocol/0::enumerate/2`  :ref:`pseudo_random_protocol/0::get_seed/1`  :ref:`random_protocol/0::maybe/0`  :ref:`random_protocol/0::maybe/1`  :ref:`random_protocol/0::maybe/2`  :ref:`random_protocol/0::maybe_call/1`  :ref:`random_protocol/0::maybe_call/2`  :ref:`random_protocol/0::member/2`  :ref:`random_protocol/0::permutation/2`  :ref:`random_protocol/0::random/1`  :ref:`random_protocol/0::random/3`  :ref:`random_protocol/0::randseq/4`  :ref:`random_protocol/0::randset/4`  :ref:`random_protocol/0::select/3`  :ref:`random_protocol/0::sequence/4`  :ref:`random_protocol/0::set/4`  :ref:`pseudo_random_protocol/0::set_seed/1`  
