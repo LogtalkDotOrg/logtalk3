@@ -231,7 +231,7 @@
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
-'$lgt_prolog_feature'(modules, supported).
+'$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 '$lgt_prolog_feature'(unicode, unsupported).
 
@@ -316,8 +316,6 @@
 % '$lgt_expand_path'(+atom, -atom)
 %
 % expands a file path to a full path
-
-:- use_module(library(lists), [append/3]).
 
 '$lgt_expand_path'(Path, ExpandedPath) :-
 	atom_chars(Path, PathChars),
