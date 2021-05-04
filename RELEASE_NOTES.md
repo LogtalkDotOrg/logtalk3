@@ -42,7 +42,7 @@ incompatible changes in its libraries).
 
 * UPDATED: Require LVM 1.6.0 or later version.
 
-* UPDATED: Require Trealla Prolog 1.8.19 or later version.
+* UPDATED: Require Trealla Prolog 1.8.41 or later version.
 
 * FIXED: The value of the `unicode` read-only flag for Trealla Prolog.
 
