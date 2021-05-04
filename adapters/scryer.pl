@@ -322,7 +322,7 @@
 '$lgt_expand_path'(Path, ExpandedPath) :-
 	atom_chars(Path, PathChars),
 	path_segments(PathChars, [Segment| Segments]),
-	(	append("$", EnvVar, Segment) ->
+	(	['$'| EnvVar] = Segment ->
 		getenv(EnvVar, Value),
 		path_segments(PathCharsExpanded, [Value| Segments])
 	;	PathCharsExpanded = PathChars

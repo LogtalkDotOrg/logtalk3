@@ -27,6 +27,7 @@
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
 :- elif(current_logtalk_flag(prolog_dialect, scryer)).
+	:- use_module(library(lists)).
 	:- use_module(library(files)).
 	:- use_module(library(os)).
 	:- use_module(library(time)).
@@ -1904,6 +1905,22 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
 
+		expand_path_chars(Path, ExpandedPathChars) :-
+			atom_chars(Path, PathChars),
+			{path_segments(PathChars, [Segment| Segments])},
+			(	['$'| EnvVar] = Segment ->
+				{getenv(EnvVar, Value)},
+				{path_segments(PathCharsExpanded, [Value| Segments])}
+			;	PathCharsExpanded = PathChars
+			),
+			(	{path_canonical(PathCharsExpanded, ExpandedPathChars)} ->
+				true
+			;	PathCharsExpanded = ['/'| _] ->
+				true
+			;	{working_directory(Current, Current)},
+				{append(Current, ['/'| PathCharsExpanded], ExpandedPathChars)}
+			).
+
 		pid(_) :-
 			throw(not_available(pid/1)).
 
@@ -1914,51 +1931,61 @@
 			throw(not_available(shell/1)).
 
 		is_absolute_file_name(Path) :-
-			{path_canonical(Path, Path)}.
+			atom_chars(Path, PathChars),
+			{path_canonical(PathChars, PathChars)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{path_canonical(Path, ExpandedPath)}.
+			expand_path_chars(Path, ExpandedPathChars),
+			atom_chars(ExpandedPath, ExpandedPathChars).
 
 		make_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			(	{directory_exists(ExpandedPath)} ->
+			expand_path_chars(Directory, ExpandedPathChars),
+			(	{directory_exists(ExpandedPathChars)} ->
 				true
-			;	{make_directory(ExpandedPath)}
+			;	{make_directory(ExpandedPathChars)}
 			).
 
 		make_directory_path(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
+			expand_path_chars(Directory, ExpandedPathChars),
+			atom_chars(ExpandedPath, ExpandedPathChars),
 			make_directory_path_portable(ExpandedPath).
 
 		delete_directory(_) :-
 			throw(not_available(delete_directory/1)).
 
 		change_directory(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{working_directory(_, ExpandedPath)}.
+			expand_path_chars(Directory, ExpandedPathChars),
+			{working_directory(_, ExpandedPathChars)}.
 
 		working_directory(Directory) :-
-			{working_directory(Directory, Directory)}.
+			{working_directory(DirectoryChars, DirectoryChars)},
+			atom_chars(Directory, DirectoryChars).
 
 		directory_files(Directory, ['.', '..'| Files]) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{directory_files(ExpandedPath, Files)}.
+			expand_path_chars(Directory, ExpandedPathChars),
+			{directory_files(ExpandedPathChars, FilesChars)},
+			chars_to_atom(FilesChars, Files).
+
+		chars_to_atom([], []).
+		chars_to_atom([FileChars| FilesChars], [File| Files]) :-
+			atom_chars(File, FileChars),
+			chars_to_atom(FilesChars, Files).
 
 		directory_exists(Directory) :-
-			absolute_file_name(Directory, ExpandedPath),
-			{directory_exists(ExpandedPath)}.
+			expand_path_chars(Directory, ExpandedPathChars),
+			{directory_exists(ExpandedPathChars)}.
 
 		file_exists(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath)}.
+			expand_path_chars(File, ExpandedPathChars),
+			{file_exists(ExpandedPathChars)}.
 
 		file_modification_time(File, Time) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_modification_time(ExpandedPath, Time)}.
+			expand_path_chars(File, ExpandedPathChars),
+			{file_modification_time(ExpandedPathChars, Time)}.
 
 		file_size(File, Size) :-
-			absolute_file_name(File, ExpandedPath),
-			{file_size(ExpandedPath, Size)}.
+			expand_path_chars(File, ExpandedPathChars),
+			{file_size(ExpandedPathChars, Size)}.
 
 		file_permission(_, _) :-
 			throw(not_available(file_permission/2)).
@@ -1967,11 +1994,13 @@
 			throw(not_available(file_permission/2)).
 
 		delete_file(File) :-
-			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
+			expand_path_chars(File, ExpandedPathChars),
+			{delete_file(ExpandedPathChars)}.
 
 		environment_variable(Variable, Value) :-
-			{getenv(Variable, Value)}.
+			atom_chars(Variable, VariableChars),
+			{getenv(VariableChars, ValueChars)},
+			atom_chars(Value, ValueChars).
 
 		time_stamp(Time) :-
 			{current_time(Time)}.
@@ -1983,7 +2012,7 @@
 		wall_time(0.0).
 
 		operating_system_type(Type) :-
-			(	{getenv('COMSPEC', _)} ->
+			(	{getenv("COMSPEC", _)} ->
 				Type = windows
 			;	Type = unix
 			).
