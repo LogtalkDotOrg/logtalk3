@@ -93,4 +93,4 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec scryer-prolog "$LOGTALKHOME/integration/logtalk_scryer.pl"
+exec scryer-prolog "$@" "$LOGTALKHOME/integration/logtalk_scryer.pl"

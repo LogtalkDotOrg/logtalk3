@@ -1,0 +1,63 @@
+.TH scryerlgt 1 "May 4, 2021" "Logtalk 3.46.0" "Logtalk Documentation"
+
+.SH NAME
+scryerlgt \- Logtalk integration script for Scryer Prolog
+
+.SH SYNOPSIS
+.B scryerlgt
+[\fB-g \fIgoal\fR]
+
+.SH DESCRIPTION
+\fBscryerlgt\fR is a Logtalk integration script for Scryer Prolog. It automatically loads the Scryer Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories.
+
+.SH OPTIONS
+.TP
+.B \-g
+.I goal
+Initialization goal, written between double quotes, to be executed after Logtalk startup.
+
+.SH REQUIREMENTS
+Scryer Prolog 0.8.128 or a later version is required. This integration script looks for a "scryer-prolog" executable in the system path.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/integration/logtalk_scryer.pl
+Prolog file used for loading the necessary files for starting Logtalk using Scryer Prolog as the backend compiler.
+.TP
+.BI $LOGTALKHOME/adapters/unsupported/scryer.pl
+The Scryer Prolog adapter file.
+.TP
+.BI $LOGTALKHOME/core/core.pl
+The Logtalk core compiler and runtime file.
+.TP
+.BI $LOGTALKHOME/paths/paths.pl
+The default table of library names and paths.
+.TP
+.BI ./settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR
+.PP
+The Scryer Prolog git repo at https://github.com/mthom/scryer-prolog
+.PP
+logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2021 Paulo Moura.
