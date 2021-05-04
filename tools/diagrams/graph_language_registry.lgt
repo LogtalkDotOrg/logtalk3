@@ -30,7 +30,7 @@
 
 	:- public(language_object/2).
 	:- multifile(language_object/2).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(language_object/2).
 	:- endif.
 	:- mode(language_object(?atom, ?object_identifier), zero_or_more).

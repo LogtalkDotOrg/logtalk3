@@ -38,7 +38,7 @@
 	]).
 
 	:- multifile(graph_language_registry::language_object/2).
-	:- if((current_logtalk_flag(prolog_dialect, qp); current_logtalk_flag(prolog_dialect, xsb))).
+	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(graph_language_registry::language_object/2).
 	:- endif.
 	graph_language_registry::language_object(dot, dot_graph_language).
