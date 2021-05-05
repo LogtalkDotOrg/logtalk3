@@ -1,0 +1,457 @@
+<!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">:- encoding</span></span>(<span style="color: #009900">Encoding</span>).  <span style="font-style: italic"><span style="color: #9A1900">% this is a single-line comment</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">this is</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">a block</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">comment</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- if</span></span>(<span style="color: #009900">Goal</span>).
+    <span style="font-style: italic"><span style="color: #9A1900">% conditional</span></span>
+<span style="font-weight: bold"><span style="color: #000080">:- elif</span></span>(<span style="color: #009900">Goal</span>).
+    <span style="font-style: italic"><span style="color: #9A1900">% compilation</span></span>
+<span style="font-weight: bold"><span style="color: #000080">:- else.</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900">% directives</span></span>
+<span style="font-weight: bold"><span style="color: #000080">:- endif.</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- initialization</span></span>(<span style="color: #009900">Goal</span>).
+<span style="font-weight: bold"><span style="color: #000080">:- op</span></span>(<span style="color: #009900">Precedence</span>, <span style="color: #009900">Associativity</span>, <span style="color: #009900">Operator</span>).
+<span style="font-weight: bold"><span style="color: #000080">:- ensure_loaded</span></span>(<span style="color: #009900">File</span>).
+<span style="font-weight: bold"><span style="color: #000080">:- include</span></span>(<span style="color: #009900">File</span>).
+<span style="font-weight: bold"><span style="color: #000080">:- set_prolog_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>).
+<span style="font-weight: bold"><span style="color: #000080">:- set_logtalk_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>).
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- object</span></span>(prototype,
+    <span style="font-weight: bold"><span style="color: #000080">implements</span></span>(protocol),
+    <span style="font-weight: bold"><span style="color: #000080">imports</span></span>(category),
+    <span style="font-weight: bold"><span style="color: #000080">extends</span></span>(parent)).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- info</span></span>([
+        version <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">1.46</span>,
+        author <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #FF0000">'Paulo Moura'</span>,
+        date <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">2019</span><span style="color: #990000">/</span><span style="color: #993399">07</span><span style="color: #990000">/</span><span style="color: #993399">03</span>,
+        comment <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #FF0000">'Sample prototype for testing syntax coloring.'</span>
+    ]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- built_in.</span></span>
+<span style="font-weight: bold"><span style="color: #000080">    :- threaded.</span></span>
+<span style="font-weight: bold"><span style="color: #000080">    :- dynamic.</span></span>
+
+<span style="font-weight: bold"><span style="color: #000080">    :- initialization</span></span>(some_goal(<span style="color: #009900">X</span>, <span style="color: #009900">Y</span>)).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- uses</span></span>([
+        foobar <span style="font-weight: bold"><span style="color: #0000FF">as</span></span> fb
+    ]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- alias</span></span>(set, [member<span style="color: #990000">/</span><span style="color: #993399">2</span> <span style="font-weight: bold"><span style="color: #0000FF">as</span></span> set_member<span style="color: #990000">/</span><span style="color: #993399">2</span>]).
+<span style="font-weight: bold"><span style="color: #000080">    :- alias</span></span>(words, [singular<span style="color: #990000">//</span><span style="color: #993399">0</span> <span style="font-weight: bold"><span style="color: #0000FF">as</span></span> peculiar<span style="color: #990000">//</span><span style="color: #993399">0</span>]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- uses</span></span>(list, [append<span style="color: #990000">/</span><span style="color: #993399">3</span>, member<span style="color: #990000">/</span><span style="color: #993399">2</span>]).
+<span style="font-weight: bold"><span style="color: #000080">    :- uses</span></span>(queues, [new<span style="color: #990000">/</span><span style="color: #993399">1</span> <span style="font-weight: bold"><span style="color: #0000FF">as</span></span> new_queue<span style="color: #990000">/</span><span style="color: #993399">1</span>]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- use_module</span></span>(module).
+<span style="font-weight: bold"><span style="color: #000080">    :- use_module</span></span>(module, [append<span style="color: #990000">/</span><span style="color: #993399">3</span>, member<span style="color: #990000">/</span><span style="color: #993399">2</span>]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- multifile</span></span>(zzz<span style="color: #990000">/</span><span style="color: #993399">1</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- multifile</span></span>(module<span style="color: #990000">:</span>zzz<span style="color: #990000">/</span><span style="color: #993399">1</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- multifile</span></span>(object<span style="color: #990000">::</span>zzz<span style="color: #990000">/</span><span style="color: #993399">1</span>).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- coinductive</span></span>(comember<span style="color: #990000">/</span><span style="color: #993399">1</span>).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- use_module</span></span>(module, [xxx<span style="color: #990000">/</span><span style="color: #993399">1</span>, yyy<span style="color: #990000">/</span><span style="color: #993399">2</span>, zzz<span style="color: #990000">/</span><span style="color: #993399">3</span>]).
+<span style="font-weight: bold"><span style="color: #000080">    :- export</span></span>(bbb<span style="color: #990000">/</span><span style="color: #993399">3</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- reexport</span></span>(cccc<span style="color: #990000">/</span><span style="color: #993399">4</span>).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- public</span></span>(aaa<span style="color: #990000">/</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- meta_predicate</span></span>(aaa(<span style="color: #990000">::</span>, <span style="color: #990000">*</span>)).
+<span style="font-weight: bold"><span style="color: #000080">    :- discontiguous</span></span>(aaa<span style="color: #990000">/</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- mode</span></span>(aaa(<span style="color: #990000">+</span>callable, <span style="color: #990000">?</span>integer), zero_or_one).
+<span style="font-weight: bold"><span style="color: #000080">    :- info</span></span>(position<span style="color: #990000">/</span><span style="color: #993399">2</span>, [
+        comment <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #FF0000">'Predicate brief description.'</span>,
+        arguments <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> [<span style="color: #FF0000">'Arg1'</span><span style="color: #990000">-</span><span style="color: #FF0000">'Arg1 description'</span>, <span style="color: #FF0000">'Arg2'</span><span style="color: #990000">-</span><span style="color: #FF0000">'Arg2 description'</span>]
+    ]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- public</span></span>(nt<span style="color: #990000">//</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- meta_non_terminal</span></span>(nt(<span style="color: #993399">1</span>, <span style="color: #990000">*</span>)).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- protected</span></span>(bbb<span style="color: #990000">/</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- synchronized</span></span>(bbb<span style="color: #990000">/</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- mode</span></span>(bbb(<span style="color: #990000">+</span>integer, <span style="color: #990000">-</span>float), one).
+<span style="font-weight: bold"><span style="color: #000080">    :- info</span></span>(bbb<span style="color: #990000">/</span><span style="color: #993399">2</span>, [
+        comment <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #FF0000">'Predicate brief description.'</span>,
+        argnames <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> [<span style="color: #FF0000">'Arg1'</span>, <span style="color: #FF0000">'Arg2'</span>]
+    ]).
+
+<span style="font-weight: bold"><span style="color: #000080">    :- private</span></span>(ccc<span style="color: #990000">/</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- dynamic</span></span>(ccc<span style="color: #990000">/</span><span style="color: #993399">2</span>).
+<span style="font-weight: bold"><span style="color: #000080">    :- mode</span></span>(ccc(<span style="color: #990000">@</span>atom, <span style="color: #990000">?</span>atom, <span style="color: #990000">++</span>list, <span style="color: #990000">--</span>ground), one_or_more).
+<span style="font-weight: bold"><span style="color: #000080">    :- info</span></span>(ccc<span style="color: #990000">/</span><span style="color: #993399">2</span>, [
+        comment <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #FF0000">'Predicate brief description.'</span>,
+        argnames <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> [<span style="color: #FF0000">'Arg1'</span>, <span style="color: #FF0000">'Arg2'</span>]
+    ]).
+
+    enumerating_entities(<span style="color: #009900">Object</span>, <span style="color: #009900">Protocol</span>, <span style="color: #009900">Category</span>) <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">current_category</span></span>(<span style="color: #009900">Category</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">current_object</span></span>(<span style="color: #009900">Object</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">current_protocol</span></span>(<span style="color: #009900">Protocol</span>).
+
+    enumerating_properties <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">category_property</span></span>(<span style="color: #009900">Category</span>, <span style="color: #009900">Property</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">object_property</span></span>(<span style="color: #009900">Object</span>, <span style="color: #009900">Property</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">protocol_property</span></span>(<span style="color: #009900">Protocol</span>, <span style="color: #009900">Property</span>).
+
+    creating_entities(<span style="color: #009900">Object</span>, <span style="color: #009900">Protocol</span>, <span style="color: #009900">Category</span>) <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">create_category</span></span>(<span style="color: #009900">Category</span>, <span style="color: #009900">Relations</span>, <span style="color: #009900">Directives</span>, <span style="color: #009900">Clauses</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">create_object</span></span>(<span style="color: #009900">Object</span>, <span style="color: #009900">Relations</span>, <span style="color: #009900">Directives</span>, <span style="color: #009900">Clauses</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">create_protocol</span></span>(<span style="color: #009900">Protocol</span>, <span style="color: #009900">Relations</span>, <span style="color: #009900">Directives</span>).
+
+    abolishing_entities(<span style="color: #009900">Object</span>, <span style="color: #009900">Protocol</span>, <span style="color: #009900">Category</span>) <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">abolish_category</span></span>(<span style="color: #009900">Category</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">abolish_object</span></span>(<span style="color: #009900">Object</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">abolish_protocol</span></span>(<span style="color: #009900">Protocol</span>).
+
+    entity_relations <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">extends_object</span></span>(<span style="color: #009900">Prototype</span>, <span style="color: #009900">Parent</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">extends_protocol</span></span>(<span style="color: #009900">Protocol1</span>, <span style="color: #009900">Protocol2</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">extends_category</span></span>(<span style="color: #009900">Category1</span>, <span style="color: #009900">Category2</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">implements_protocol</span></span>(<span style="color: #009900">Object</span>, <span style="color: #009900">Protocol</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">imports_category</span></span>(<span style="color: #009900">Object</span>, <span style="color: #009900">Category</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">instantiates_class</span></span>(<span style="color: #009900">Instance</span>, <span style="color: #009900">Class</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">specializes_class</span></span>(<span style="color: #009900">Class</span>, <span style="color: #009900">Superclass</span>, <span style="color: #009900">Scope</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">complements_object</span></span>(<span style="color: #009900">Category</span>, <span style="color: #009900">Object</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">conforms_to_protocol</span></span>(<span style="color: #009900">ObjOrCtg</span>, <span style="color: #009900">Protocol</span>, <span style="color: #009900">Scope</span>).
+
+    event_handling <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">abolish_events</span></span>(<span style="color: #009900">Event</span>, <span style="color: #009900">Object</span>, <span style="color: #009900">Message</span>, <span style="color: #009900">Sender</span>, <span style="color: #009900">Monitor</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">current_event</span></span>(<span style="color: #009900">Event</span>, <span style="color: #009900">Object</span>, <span style="color: #009900">Message</span>, <span style="color: #009900">Sender</span>, <span style="color: #009900">Monitor</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">define_events</span></span>(<span style="color: #009900">Event</span>, <span style="color: #009900">Object</span>, <span style="color: #009900">Message</span>, <span style="color: #009900">Sender</span>, <span style="color: #009900">Monitor</span>).
+
+    multi_threading <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded</span></span>(<span style="color: #009900">Goals</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_call</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_call</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Tag</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_once</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_once</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Tag</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_ignore</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_exit</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_exit</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Tag</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_peek</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_peek</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Tag</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_cancel</span></span>(<span style="color: #009900">Tag</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_wait</span></span>(<span style="color: #009900">Notification</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_notify</span></span>(<span style="color: #009900">Notification</span>).
+
+    engines <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine</span></span>(<span style="color: #009900">Engine</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_create</span></span>(<span style="color: #009900">AnswerTemplate</span>, <span style="color: #009900">Goal</span>, <span style="color: #009900">Engine</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_destroy</span></span>(<span style="color: #009900">Engine</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_self</span></span>(<span style="color: #009900">Engine</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_next</span></span>(<span style="color: #009900">Engine</span>, <span style="color: #009900">Answer</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_next_reified</span></span>(<span style="color: #009900">Engine</span>, <span style="color: #009900">Answer</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_yield</span></span>(<span style="color: #009900">Answer</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_post</span></span>(<span style="color: #009900">Engine</span>, <span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">threaded_engine_fetch</span></span>(<span style="color: #009900">Term</span>).
+
+    compiling_and_loading <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_compile</span></span>(<span style="color: #009900">File</span>, <span style="color: #009900">Options</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_load</span></span>(<span style="color: #009900">File</span>, <span style="color: #009900">Options</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_library_path</span></span>(<span style="color: #009900">Library</span>, <span style="color: #009900">Path</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_load_context</span></span>(<span style="color: #009900">Key</span>, <span style="color: #009900">Value</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_make</span></span>(<span style="color: #009900">Action</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_make</span></span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">logtalk_make_target_action</span></span>(<span style="color: #009900">Target</span>).
+
+    flags <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">current_logtalk_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">set_logtalk_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">create_logtalk_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>, <span style="color: #009900">Options</span>).
+
+    execution_context_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">context</span></span>(<span style="color: #009900">Context</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">parameter</span></span>(<span style="color: #009900">N</span>, <span style="color: #009900">Parameter</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">self</span></span>(<span style="color: #009900">Self</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">sender</span></span>(<span style="color: #009900">Sender</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">this</span></span>(<span style="color: #009900">This</span>).
+
+    reflection_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">current_predicate</span></span>(<span style="color: #009900">Predicate</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">predicate_property</span></span>(<span style="color: #009900">Predicate</span>, <span style="color: #009900">Property</span>).
+
+    database_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">abolish</span></span>(<span style="color: #009900">Name</span><span style="color: #990000">/</span><span style="color: #009900">Arity</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">asserta</span></span>(<span style="color: #009900">Clause</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">assertz</span></span>(<span style="color: #009900">Clause</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">clause</span></span>(<span style="color: #009900">Head</span>, <span style="color: #009900">Body</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">retract</span></span>(<span style="color: #009900">Clause</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">retractall</span></span>(<span style="color: #009900">Head</span>).
+
+    exception_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">catch</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Error</span>, <span style="color: #009900">Catcher</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">throw</span></span>(<span style="color: #009900">Error</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">instantiation_error</span></span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">type_error</span></span>(<span style="color: #009900">Type</span>, <span style="color: #009900">Culprit</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">domain_error</span></span>(<span style="color: #009900">Domain</span>, <span style="color: #009900">Culprit</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">existence_error</span></span>(<span style="color: #009900">Thing</span>, <span style="color: #009900">Culprit</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">permission_error</span></span>(<span style="color: #009900">Operation</span>, <span style="color: #009900">Permission</span>, <span style="color: #009900">Culprit</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">representation_error</span></span>(<span style="color: #009900">Flag</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">evaluation_error</span></span>(<span style="color: #009900">Exception</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">resource_error</span></span>(<span style="color: #009900">Resource</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">syntax_error</span></span>(<span style="color: #009900">Description</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">system_error</span></span>.
+
+    all_solutions_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">bagof</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Goal</span>, <span style="color: #009900">List</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">bagof</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Var</span><span style="color: #990000">^</span><span style="color: #009900">Goal</span>, <span style="color: #009900">List</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">findall</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Goal</span>, <span style="color: #009900">List</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">forall</span></span>(<span style="color: #009900">Generate</span>, <span style="color: #009900">Test</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">setof</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Goal</span>, <span style="color: #009900">List</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">setof</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Var1</span><span style="color: #990000">^</span><span style="color: #009900">Var2</span><span style="color: #990000">^</span><span style="color: #009900">Goal</span>, <span style="color: #009900">List</span>).
+
+    event_handler_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">before</span></span>(<span style="color: #009900">Object</span>, <span style="color: #009900">Message</span>, <span style="color: #009900">Sender</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">after</span></span>(<span style="color: #009900">Object</span>, <span style="color: #009900">Message</span>, <span style="color: #009900">Sender</span>).
+
+    message_forwarding_method <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">forward</span></span>(<span style="color: #009900">Message</span>).
+
+    dcg_rules_parsing_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">phrase</span></span>(<span style="color: #009900">NonTerminal</span>, <span style="color: #009900">Input</span>, <span style="color: #009900">Rest</span>).
+
+    term_expansion_methods <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">expand_term</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Expanded</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">expand_goal</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Expanded</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">term_expansion</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Expanded</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">goal_expansion</span></span>(<span style="color: #009900">Goal</span>, <span style="color: #009900">Expanded</span>).
+
+    message_sending <span style="color: #990000">:-</span>
+        <span style="color: #009900">Object</span><span style="color: #990000">::</span><span style="color: #009900">Message</span>,
+        <span style="color: #990000">::</span><span style="color: #009900">Message</span>,
+        <span style="color: #990000">^^</span><span style="color: #009900">Message</span>.
+
+    calling_external_code <span style="color: #990000">:-</span>
+        <span style="color: #FF0000">{</span>goal1, goal2, goal3<span style="color: #FF0000">}</span>.
+
+    context_switching_calls <span style="color: #990000">:-</span>
+        <span style="color: #009900">Object</span><span style="color: #990000">&lt;&lt;</span><span style="color: #009900">Goal</span>.
+
+    lambda_expressions <span style="color: #990000">:-</span>
+        <span style="color: #FF0000">{</span><span style="color: #009900">X</span>,<span style="color: #009900">Y</span>,<span style="color: #009900">Z</span><span style="color: #FF0000">}</span><span style="color: #990000">/</span>[<span style="color: #009900">P</span>,<span style="color: #009900">Q</span>]<span style="color: #990000">&gt;&gt;</span><span style="color: #009900">Goal</span>.
+
+    explicitly_qualified_module_calls <span style="color: #990000">:-</span>
+        <span style="color: #009900">Module</span><span style="color: #990000">:</span><span style="color: #009900">Goal</span>.
+
+    if_then_else <span style="color: #990000">:-</span>
+        (   <span style="color: #009900">If</span> <span style="color: #990000">-&gt;</span>
+            <span style="color: #009900">Then</span>
+        <span style="color: #990000">;</span>   <span style="color: #009900">Else</span>
+        ).
+
+    numbers <span style="color: #990000">:-</span>
+        <span style="color: #009900">X1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">13</span>, <span style="color: #009900">X2</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">-</span><span style="color: #993399">13</span>, <span style="color: #009900">X3</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">+</span><span style="color: #993399">13</span>,
+        <span style="color: #009900">Y1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">13.13</span>, <span style="color: #009900">Y2</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">-</span><span style="color: #993399">13.13</span>, <span style="color: #009900">Y3</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">+</span><span style="color: #993399">13.13</span>,
+        <span style="color: #009900">Z1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">13.13e-23</span>, <span style="color: #009900">Z2</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">-</span><span style="color: #993399">13.13e-23</span>, <span style="color: #009900">Z3</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">+</span><span style="color: #993399">13.13e-23</span>,
+        <span style="color: #009900">C1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'A</span>, <span style="color: #009900">C2</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0''</span>, <span style="color: #009900">C3</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'"</span>, <span style="color: #009900">C4</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'%</span>,
+        <span style="color: #009900">C5</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'\n</span>, <span style="color: #009900">C6</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'\\</span>, <span style="color: #009900">C7</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'\'</span>, <span style="color: #009900">C8</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'\"</span>, <span style="color: #009900">C9</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0'\`</span>,
+        <span style="color: #009900">B1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0b1011101</span>,
+        <span style="color: #009900">O1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0o1234560</span>,
+        <span style="color: #009900">H1</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">0x1234567890abcDEF</span>.
+
+    functions <span style="color: #990000">:-</span>
+        <span style="color: #009900">A</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">atan</span></span>(<span style="color: #993399">3.14</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">atan2</span></span>(<span style="color: #993399">1</span>, <span style="color: #993399">0</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">acos</span></span>(<span style="color: #993399">0.5</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">asin</span></span>(<span style="color: #993399">0.5</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">sin</span></span>(<span style="color: #993399">0.77</span>) <span style="color: #990000">-</span> <span style="font-weight: bold"><span style="color: #0000FF">cos</span></span>(<span style="color: #993399">123.23</span>) <span style="color: #990000">-</span> <span style="font-weight: bold"><span style="color: #0000FF">tan</span></span>(<span style="color: #993399">0.33</span>),
+        <span style="color: #009900">B</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">sign</span></span>(<span style="color: #990000">-</span><span style="color: #993399">12</span>) <span style="color: #990000">*</span> <span style="font-weight: bold"><span style="color: #0000FF">abs</span></span>(<span style="color: #993399">35</span><span style="color: #990000">/</span><span style="color: #993399">78</span>),
+        <span style="color: #009900">C</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">truncate</span></span>(<span style="color: #993399">3.14</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">round</span></span>(<span style="color: #990000">-</span><span style="color: #993399">7.8</span>) <span style="color: #990000">-</span> <span style="font-weight: bold"><span style="color: #0000FF">ceiling</span></span>(<span style="color: #993399">111.88</span>),
+        <span style="color: #009900">D</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">exp</span></span>(<span style="color: #993399">3.8</span>) <span style="color: #990000">-</span> <span style="font-weight: bold"><span style="color: #0000FF">log</span></span>(<span style="color: #993399">123.98</span>) <span style="color: #990000">/</span> <span style="font-weight: bold"><span style="color: #0000FF">sqrt</span></span>(<span style="color: #993399">33</span>) <span style="color: #990000">*</span> <span style="color: #993399">23</span> <span style="color: #990000">**</span> <span style="color: #993399">4</span> <span style="color: #990000">+</span> <span style="color: #993399">12345</span><span style="color: #990000">^</span><span style="color: #993399">2</span>,
+        <span style="color: #009900">E</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">rem</span></span>(<span style="color: #993399">3</span>, <span style="color: #993399">2</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">mod</span></span>(<span style="color: #993399">5</span>, <span style="color: #993399">3</span>) <span style="color: #990000">-</span> <span style="font-weight: bold"><span style="color: #0000FF">div</span></span>(<span style="color: #993399">8</span>, <span style="color: #993399">4</span>) <span style="color: #990000">*</span> <span style="color: #993399">2</span> <span style="font-weight: bold"><span style="color: #0000FF">rem</span></span> <span style="color: #993399">2</span> <span style="color: #990000">//</span> <span style="color: #993399">5</span> <span style="font-weight: bold"><span style="color: #0000FF">mod</span></span> <span style="color: #993399">3</span> <span style="color: #990000">-</span> <span style="color: #993399">8</span> <span style="font-weight: bold"><span style="color: #0000FF">div</span></span> <span style="color: #993399">4</span> <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">pi</span></span> <span style="color: #990000">*</span> <span style="font-weight: bold"><span style="color: #0000FF">e</span></span>,
+        <span style="color: #009900">F</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">float_fractional_part</span></span>(<span style="color: #993399">3.14</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">float_integer_part</span></span>(<span style="color: #993399">3.14</span>),
+        <span style="color: #009900">G</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">float</span></span>(<span style="color: #993399">33</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">floor</span></span>(<span style="color: #993399">99.99</span>),
+        <span style="color: #009900">I</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">min</span></span>(<span style="color: #993399">3</span>,<span style="color: #993399">4</span>) <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">max</span></span>(<span style="color: #993399">4</span>,<span style="color: #993399">5</span>).
+
+    bitwise <span style="color: #990000">:-</span>
+        <span style="color: #009900">A</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">16</span> <span style="color: #990000">&gt;&gt;</span> <span style="color: #993399">2</span>,
+        <span style="color: #009900">B</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">16</span> <span style="color: #990000">&lt;&lt;</span> <span style="color: #993399">2</span>,
+        <span style="color: #009900">C</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">10</span> <span style="color: #990000">/\</span> <span style="color: #993399">12</span>,
+        <span style="color: #009900">D</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #993399">10</span> <span style="color: #990000">\/</span> <span style="color: #993399">12</span>,
+        <span style="color: #009900">E</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">\</span> <span style="color: #993399">10</span>,
+        <span style="color: #009900">F</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="font-weight: bold"><span style="color: #0000FF">xor</span></span>(<span style="color: #993399">13</span>, <span style="color: #993399">7</span>).
+
+    term_unification <span style="color: #990000">:-</span>
+        <span style="color: #009900">Term1</span> <span style="color: #990000">=</span> <span style="color: #009900">Term2</span>,
+        <span style="color: #009900">Term1</span> <span style="color: #990000">\=</span> <span style="color: #009900">Term2</span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">unify_with_occurs_check</span></span>(<span style="color: #009900">Term1</span>, <span style="color: #009900">Term2</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">subsumes_term</span></span>(<span style="color: #009900">General</span>, <span style="color: #009900">Specific</span>).
+
+    term_testing <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">atom</span></span>(<span style="color: #009900">Atom</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">atomic</span></span>(<span style="color: #009900">Atomic</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">integer</span></span>(<span style="color: #009900">Integer</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">float</span></span>(<span style="color: #009900">Float</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">callable</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">compound</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">nonvar</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">var</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">number</span></span>(<span style="color: #009900">Number</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">ground</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">acyclic_term</span></span>(<span style="color: #009900">Term</span>).
+
+    term_comparison <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">compare</span></span>(<span style="color: #009900">Order</span>, <span style="color: #009900">Term1</span>, <span style="color: #009900">Term2</span>),
+        <span style="color: #009900">Term1</span> <span style="color: #990000">==</span> <span style="color: #009900">Term2</span>,
+        <span style="color: #009900">Term1</span> <span style="color: #990000">\==</span> <span style="color: #009900">Term2</span>,
+        <span style="color: #009900">Term1</span> <span style="color: #990000">@&lt;</span> <span style="color: #009900">Term2</span>,
+        <span style="color: #009900">Term1</span> <span style="color: #990000">@=&lt;</span> <span style="color: #009900">Term2</span>,
+        <span style="color: #009900">Term1</span> <span style="color: #990000">@&gt;=</span> <span style="color: #009900">Term2</span>,
+        <span style="color: #009900">Term1</span> <span style="color: #990000">@&gt;</span> <span style="color: #009900">Term2</span>.
+
+    term_creation_and_decomposition <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">functor</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Name</span>, <span style="color: #009900">Arity</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">arg</span></span>(<span style="color: #009900">N</span>, <span style="color: #009900">Term</span>, <span style="color: #009900">Arg</span>),
+        <span style="color: #009900">Term</span> <span style="color: #990000">=..</span> [<span style="color: #009900">Functor</span>| <span style="color: #009900">Args</span>],
+        <span style="font-weight: bold"><span style="color: #0000FF">copy_term</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Copy</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">numbervars</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Start</span>, <span style="color: #009900">End</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">term_variables</span></span>(<span style="color: #009900">Term</span>, <span style="color: #009900">Variables</span>).
+
+    arithmetic_evaluation <span style="color: #990000">:-</span>
+        <span style="color: #009900">X</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #009900">Expression</span>.
+
+    arithmetic_comparison <span style="color: #990000">:-</span>
+        <span style="color: #009900">Exp1</span> <span style="color: #990000">=:=</span> <span style="color: #009900">Exp2</span>,
+        <span style="color: #009900">Exp1</span> <span style="color: #990000">=\=</span> <span style="color: #009900">Exp2</span>,
+        <span style="color: #009900">Exp1</span> <span style="color: #990000">&lt;</span> <span style="color: #009900">Exp2</span>,
+        <span style="color: #009900">Exp1</span> <span style="color: #990000">=&lt;</span> <span style="color: #009900">Exp2</span>,
+        <span style="color: #009900">Exp1</span> <span style="color: #990000">&gt;</span> <span style="color: #009900">Exp2</span>,
+        <span style="color: #009900">Exp1</span> <span style="color: #990000">&gt;=</span> <span style="color: #009900">Exp2</span>.
+
+    stream_selection_and_control <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">current_input</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">current_output</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">set_input</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">set_output</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">open</span></span>(<span style="color: #009900">Source</span>, <span style="color: #009900">Mode</span>, <span style="color: #009900">Stream</span>, <span style="color: #009900">Options</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">close</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">flush_output</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">stream_property</span></span>(<span style="color: #009900">Stream</span>, <span style="color: #009900">Property</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">at_end_of_stream</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">set_stream_position</span></span>(<span style="color: #009900">Stream</span>, <span style="color: #009900">Position</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">flush_output</span></span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">at_end_of_stream</span></span>.
+
+    character_input_output <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">get_char</span></span>(<span style="color: #009900">Char</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">get_code</span></span>(<span style="color: #009900">Code</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">peek_char</span></span>(<span style="color: #009900">Char</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">peek_code</span></span>(<span style="color: #009900">Code</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">put_char</span></span>(<span style="color: #009900">Char</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">put_code</span></span>(<span style="color: #009900">Code</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">nl</span></span>(<span style="color: #009900">Stream</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">nl</span></span>.
+
+    byte_input_output <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">get_byte</span></span>(<span style="color: #009900">Byte</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">peek_byte</span></span>(<span style="color: #009900">Byte</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">put_byte</span></span>(<span style="color: #009900">Byte</span>).
+
+    term_input_output <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">read</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">read_term</span></span>(<span style="color: #009900">Stream</span>, <span style="color: #009900">Term</span>, <span style="color: #009900">Options</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write_canonical</span></span>(<span style="color: #009900">Term</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write_term</span></span>(<span style="color: #009900">Stream</span>, <span style="color: #009900">Term</span>, <span style="color: #009900">Options</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">current_op</span></span>(<span style="color: #009900">Precedence</span>, <span style="color: #009900">Associativity</span>, <span style="color: #009900">Operator</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">op</span></span>(<span style="color: #009900">Precedence</span>, <span style="color: #009900">Associativity</span>, <span style="color: #009900">Operator</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">current_char_conversion</span></span>(<span style="color: #009900">InChar</span>, <span style="color: #009900">OutChar</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">char_conversion</span></span>(<span style="color: #009900">InChar</span>, <span style="color: #009900">OutChar</span>).
+
+    logic_and_control <span style="color: #990000">:-</span>
+        <span style="color: #990000">\+</span> <span style="color: #009900">Goal</span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">call</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">once</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">ignore</span></span>(<span style="color: #009900">Goal</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">true</span></span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">fail</span></span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">false</span></span>,
+        <span style="font-weight: bold"><span style="color: #0000FF">repeat</span></span>,
+        <span style="color: #990000">!</span>.
+
+    atomic_term_processing <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">atom_length</span></span>(<span style="color: #009900">Atom</span>, <span style="color: #009900">Length</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">atom_chars</span></span>(<span style="color: #009900">Atom</span>, <span style="color: #009900">Chars</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">atom_codes</span></span>(<span style="color: #009900">Atom</span>, <span style="color: #009900">Codes</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">atom_concat</span></span>(<span style="color: #009900">Atom1</span>, <span style="color: #009900">Atom2</span>, <span style="color: #009900">Atom</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">sub_atom</span></span>(<span style="color: #009900">Atom</span>, <span style="color: #009900">Before</span>, <span style="color: #009900">Length</span>, <span style="color: #009900">After</span>, <span style="color: #009900">SubAtom</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">char_code</span></span>(<span style="color: #009900">Char</span>, <span style="color: #009900">Code</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">number_chars</span></span>(<span style="color: #009900">Number</span>, <span style="color: #009900">Chars</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">number_codes</span></span>(<span style="color: #009900">Number</span>, <span style="color: #009900">Codes</span>).
+
+    implementation_defined_hooks <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">current_prolog_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">set_prolog_flag</span></span>(<span style="color: #009900">Flag</span>, <span style="color: #009900">Value</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">halt</span></span>(<span style="color: #009900">ExitCode</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">halt</span></span>.
+
+    sorting <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">keysort</span></span>(<span style="color: #009900">List</span>, <span style="color: #009900">Sorted</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">sort</span></span>(<span style="color: #009900">List</span>, <span style="color: #009900">Sorted</span>).
+
+    <span style="font-weight: bold"><span style="color: #0000FF">number</span></span>(<span style="color: #009900">C</span>) <span style="color: #990000">--&gt;</span> <span style="color: #FF0000">"+"</span>, <span style="font-weight: bold"><span style="color: #0000FF">number</span></span>(<span style="color: #009900">C</span>).
+    <span style="font-weight: bold"><span style="color: #0000FF">number</span></span>(<span style="color: #009900">C</span>) <span style="color: #990000">--&gt;</span> <span style="color: #FF0000">"-"</span>, <span style="font-weight: bold"><span style="color: #0000FF">number</span></span>(<span style="color: #009900">X</span>), <span style="color: #FF0000">{</span><span style="color: #009900">C</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #990000">-</span><span style="color: #009900">X</span><span style="color: #FF0000">}</span>.
+    <span style="font-weight: bold"><span style="color: #0000FF">number</span></span>(<span style="color: #009900">X</span>) <span style="color: #990000">--&gt;</span> [<span style="color: #009900">C</span>], <span style="color: #FF0000">{</span><span style="color: #993399">0'0</span> <span style="color: #990000">=&lt;</span> <span style="color: #009900">C</span>, <span style="color: #009900">C</span> <span style="color: #990000">=&lt;</span> <span style="color: #993399">0'9</span>, <span style="color: #009900">X</span> <span style="font-weight: bold"><span style="color: #0000FF">is</span></span> <span style="color: #009900">C</span> <span style="color: #990000">-</span> <span style="color: #993399">0'0</span><span style="color: #FF0000">}</span>.
+
+    escape_sequences <span style="color: #990000">:-</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #FF0000">'Quoted atom with a quote ('') inside.'</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #FF0000">'Quoted atom with a quote (</span><span style="color: #CC33CC">\'</span><span style="color: #FF0000">) inside using a control escape sequence.'</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #FF0000">'Quoted atom with a backslash (</span><span style="color: #CC33CC">\\</span><span style="color: #FF0000">) inside.'</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #FF0000">'Quoted atom with control escape sequences: </span><span style="color: #CC33CC">\a</span><span style="color: #FF0000"> </span><span style="color: #CC33CC">\b</span><span style="color: #FF0000"> </span><span style="color: #CC33CC">\r</span><span style="color: #FF0000"> </span><span style="color: #CC33CC">\f</span><span style="color: #FF0000"> </span><span style="color: #CC33CC">\t</span><span style="color: #FF0000"> </span><span style="color: #CC33CC">\n</span><span style="color: #FF0000"> </span><span style="color: #CC33CC">\v</span><span style="color: #FF0000">'</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #FF0000">'Quoted atom with an octal escape sequence: </span><span style="color: #CC33CC">\123\</span><span style="color: #FF0000">.'</span>),
+        <span style="font-weight: bold"><span style="color: #0000FF">write</span></span>(<span style="color: #FF0000">'Quoted atom with an hexadecimal escape sequence: </span><span style="color: #CC33CC">\x123f\</span><span style="color: #FF0000">.'</span>).
+
+<span style="font-weight: bold"><span style="color: #000080">:- end_object.</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- object</span></span>(class,
+    <span style="font-weight: bold"><span style="color: #000080">implements</span></span>(protected<span style="color: #990000">::</span>protocol),
+    <span style="font-weight: bold"><span style="color: #000080">imports</span></span>(private<span style="color: #990000">::</span>category),
+    <span style="font-weight: bold"><span style="color: #000080">instantiates</span></span>(metaclass),
+    <span style="font-weight: bold"><span style="color: #000080">specializes</span></span>(superclass)).
+
+<span style="font-weight: bold"><span style="color: #000080">:- end_object.</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- object</span></span>(parametric(<span style="color: #009900">Parameter</span>, <span style="color: #FF0000">"String"</span>, <span style="color: #993399">33.78</span>),
+    <span style="font-weight: bold"><span style="color: #000080">implements</span></span>(protocol),
+    <span style="font-weight: bold"><span style="color: #000080">imports</span></span>(category),
+    <span style="font-weight: bold"><span style="color: #000080">extends</span></span>(parent(<span style="color: #009900">Parameter</span>))).
+
+<span style="font-weight: bold"><span style="color: #000080">:- end_object.</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- category</span></span>(category,
+    <span style="font-weight: bold"><span style="color: #000080">implements</span></span>(protocol),
+    <span style="font-weight: bold"><span style="color: #000080">extends</span></span>(other_category)).
+
+<span style="font-weight: bold"><span style="color: #000080">:- end_category.</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- protocol</span></span>(extended,
+    <span style="font-weight: bold"><span style="color: #000080">extends</span></span>(minimal)).
+
+<span style="font-weight: bold"><span style="color: #000080">:- end_protocol.</span></span>
+
+
+<span style="font-weight: bold"><span style="color: #000080">:- module</span></span>(module, [foo<span style="color: #990000">/</span><span style="color: #993399">1</span>, bar<span style="color: #990000">/</span><span style="color: #993399">2</span>]).
+
+<span style="font-weight: bold"><span style="color: #000080">:- use_module</span></span>(library).
+<span style="font-weight: bold"><span style="color: #000080">:- use_module</span></span>(library, [baz<span style="color: #990000">/</span><span style="color: #993399">3</span>]).
+
+<span style="font-weight: bold"><span style="color: #000080">:- reexport</span></span>(library).
+<span style="font-weight: bold"><span style="color: #000080">:- reexport</span></span>(library, [qux<span style="color: #990000">/</span><span style="color: #993399">4</span>]).
+
+<span style="font-weight: bold"><span style="color: #000080">:- export</span></span>(quux<span style="color: #990000">/</span><span style="color: #993399">5</span>).
+</tt></pre>

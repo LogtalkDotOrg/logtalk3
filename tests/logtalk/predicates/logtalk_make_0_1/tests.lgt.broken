@@ -1,0 +1,172 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  
+%  This file is part of Logtalk <https://logtalk.org/>  
+%  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
+%  
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%  
+%      http://www.apache.org/licenses/LICENSE-2.0
+%  
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 0.3,
+		author is 'Paulo Moura',
+		date is 2018/03/07,
+		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
+	]).
+
+	setup :-
+		create_main_file(_),
+		create_included_file(_),
+		create_broken_file(_).
+
+	cleanup :-
+		main_file(Main),
+		catch(ignore(os::delete_file(Main)), _, true),
+		included_file(Included),
+		catch(ignore(os::delete_file(Included)), _, true),
+		broken_file(Broken),
+		catch(ignore(os::delete_file(Broken)), _, true).
+
+	% logtalk_make/0 tests
+
+	test(logtalk_make_0_01) :-
+		logtalk_make.
+
+	% logtalk_make/1 tests
+
+	test(logtalk_make_1_all_01) :-
+		logtalk_make(all).
+
+	test(logtalk_make_1_all_02, true({foo(4)})) :-
+		main_file(Main),
+		logtalk_load(Main, [reload(changed)]),
+		os::sleep(1),
+		update_main_file(_),
+		logtalk_make(all).
+
+	test(logtalk_make_1_all_03, true({bar(4)})) :-
+		os::sleep(1),
+		update_included_file(_),
+		logtalk_make(all).
+
+	test(logtalk_make_1_all_04, true({baz(4)})) :-
+		broken_file(Broken),
+		\+ {logtalk_load(Broken, [reload(changed)])},
+		os::sleep(1),
+		fix_broken_file(Broken),
+		logtalk_make(all).
+
+	test(logtalk_make_1_clean_01) :-
+		logtalk_make(clean).
+
+	test(logtalk_make_1_clean_02) :-
+		set_logtalk_flag(clean, off),
+		logtalk_load(doclet(doclet), [reload(always)]),
+		object_property(doclet, file(File)),
+		logtalk::loaded_file_property(File, target(Target)),
+		os::file_exists(Target),
+		logtalk_make(clean),
+		\+ os::file_exists(Target).
+
+	test(logtalk_make_1_check_01) :-
+		logtalk_make(check).
+
+	test(logtalk_make_1_circular_01) :-
+		logtalk_make(circular).
+
+	test(logtalk_make_1_documentation_01) :-
+		logtalk_make(documentation).
+
+	- test(logtalk_make_1_debug_01) :-
+		logtalk_make(debug).
+
+	- test(logtalk_make_1_normal_01) :-
+		logtalk_make(normal).
+
+	- test(logtalk_make_1_optimal_01) :-
+		logtalk_make(optimal).
+
+	% auxiliary predicates
+
+	main_file(Main) :-
+		file_path('main_file.lgt', Main).
+
+	included_file(Included) :-
+		file_path('included_file.lgt', Included).
+
+	broken_file(Broken) :-
+		file_path('broken_file.lgt', Broken).
+
+	file_path(File, Path) :-
+		this(Object),
+		object_property(Object, file(_,Directory)),
+		atom_concat(Directory, File, Path).
+
+	create_main_file(Main) :-
+		main_file(Main),
+		open(Main, write, Stream),
+		included_file(Included),
+		writeq(Stream, (:- include(Included))), write(Stream, '.\n\n'),
+		write(Stream, foo(1)), write(Stream, '.\n'),
+		write(Stream, foo(2)), write(Stream, '.\n'),
+		write(Stream, foo(3)), write(Stream, '.\n'),
+		close(Stream).
+
+	update_main_file(Main) :-
+		main_file(Main),
+		open(Main, append, Stream),
+		write(Stream, foo(4)), write(Stream, '.\n'),
+		close(Stream).
+
+	create_included_file(Included) :-
+		included_file(Included),
+		open(Included, write, Stream),
+		write(Stream, bar(1)), write(Stream, '.\n'),
+		write(Stream, bar(2)), write(Stream, '.\n'),
+		write(Stream, bar(3)), write(Stream, '.\n'),
+		close(Stream).
+
+	update_included_file(Included) :-
+		included_file(Included),
+		open(Included, append, Stream),
+		write(Stream, bar(4)), write(Stream, '.\n'),
+		close(Stream).
+
+	create_broken_file(Broken) :-
+		broken_file(Broken),
+		open(Broken, write, Stream),
+		write(Stream, baz(1)), write(Stream, '.\n'),
+		write(Stream, baz(2)), write(Stream, '.\n'),
+		write(Stream, baz(3)), write(Stream, '.\n'),
+		write(Stream, baz(4)),
+		close(Stream).
+
+	fix_broken_file(Fixed) :-
+		broken_file(Fixed),
+		open(Fixed, append, Stream),
+		write(Stream, '.\n'),
+		close(Stream).
+
+	% supress all logtalk_make/0-1 messages to not pollute the unit tests output
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(_Message, comment(make), core, _Tokens).
+	logtalk::message_hook(_Message, warning(make), core, _Tokens).
+
+:- end_object.

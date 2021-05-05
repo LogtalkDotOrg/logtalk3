@@ -1,0 +1,2 @@
+:-('$run'(assertz(:-(:(A,~>(B,C)),lazy_findall(A,B,C)))),true).
+

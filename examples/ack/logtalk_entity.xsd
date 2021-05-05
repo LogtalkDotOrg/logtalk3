@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	version="2.0">
+
+<xsd:annotation>
+	<xsd:documentation>
+	XML Schema for Logtalk XML documentation files.
+	</xsd:documentation>
+</xsd:annotation>
+ 
+<!--
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-->
+
+
+<xsd:element name="logtalk" type="logtalk"/>
+
+
+<xsd:complexType name="logtalk">
+	<xsd:sequence>
+		<xsd:element name="entity"		type="entity"/>
+		<xsd:element name="relations"	type="relations"/>
+		<xsd:element name="predicates"	type="predicates"/>
+		<xsd:element name="operators"	type="operators"/>
+		<xsd:element name="remarks"		type="remarks"/>
+		<xsd:element name="see_also"	type="see_also"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="entity">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="functor"		type="xsd:string"/>
+		<xsd:element name="file"		type="xsd:string"/>
+		<xsd:element name="type"		type="type"/>
+		<xsd:element name="compilation"	type="entity_compilation"/>
+		<xsd:element name="comment"		type="xsd:string"	minOccurs="0"/>
+		<xsd:choice	minOccurs="0">
+			<xsd:element name="parnames"	type="xsd:string"/>
+			<xsd:element name="parameters"	type="parameters"/>
+		</xsd:choice>
+		<xsd:element name="author"		type="xsd:string"	minOccurs="0"/>
+		<xsd:element name="version"		type="xsd:string"	minOccurs="0"/>
+		<xsd:element name="date"		type="xsd:string"	minOccurs="0"/>
+		<xsd:element name="copyright"	type="xsd:string"	minOccurs="0"/>
+		<xsd:element name="license"		type="xsd:string"	minOccurs="0"/>
+		<xsd:element name="info"		type="info"			minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:simpleType name="type">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="category"/>
+		<xsd:enumeration value="object"/>
+		<xsd:enumeration value="protocol"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:simpleType name="entity_compilation">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="static"/>
+		<xsd:enumeration value="static, threaded"/>
+		<xsd:enumeration value="dynamic"/>
+		<xsd:enumeration value="dynamic, threaded"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:simpleType name="predicate_compilation">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="static"/>
+		<xsd:enumeration value="static, synchronized"/>
+		<xsd:enumeration value="dynamic"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:complexType name="parameters">
+	<xsd:sequence>
+		<xsd:element name="parameter"	type="parameter"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="parameter">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="description"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="info">
+	<xsd:sequence>
+		<xsd:element name="key"		type="xsd:string"/>
+		<xsd:element name="value"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="relations">
+	<xsd:sequence>
+		<xsd:element name="implements"		type="relation"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="imports"			type="relation"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="extends"			type="relation"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="instantiates"	type="relation"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="specializes"		type="relation"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="complements"		type="complementsrelation"	minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="provides"		type="providesrelation"		minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="uses"			type="usesrelation"			minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="alias"			type="alias"				minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="relation">
+	<xsd:sequence>
+		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="functor"	type="xsd:string"/>
+		<xsd:element name="scope"	type="scope"/>
+		<xsd:element name="file"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="complementsrelation">
+	<xsd:sequence>
+		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="functor"	type="xsd:string"/>
+		<xsd:element name="file"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="providesrelation">
+	<xsd:sequence>
+		<xsd:element name="to"			type="xsd:string"/>
+		<xsd:element name="functor"		type="xsd:string"/>
+		<xsd:element name="resource"	type="xsd:string"/>
+		<xsd:element name="file"		type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="usesrelation">
+	<xsd:sequence>
+		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="functor"	type="xsd:string"/>
+		<xsd:element name="file"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="alias">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="original"	type="xsd:string"/>
+		<xsd:element name="alternative"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:simpleType name="scope">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="public"/>
+		<xsd:enumeration value="protected"/>
+		<xsd:enumeration value="private"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:complexType name="predicates">
+	<xsd:sequence>
+		<xsd:element name="inherited"	type="inherited"/>
+		<xsd:element name="public"		type="public"/>
+		<xsd:element name="protected"	type="protected"/>
+		<xsd:element name="private"		type="private"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="inherited">
+	<xsd:sequence>
+		<xsd:element name="inherited_predicate"	type="inherited_predicate"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="public">
+	<xsd:sequence>
+		<xsd:element name="predicate"	type="predicate"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="protected">
+	<xsd:sequence>
+		<xsd:element name="predicate"	type="predicate"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="private">
+	<xsd:sequence>
+		<xsd:element name="predicate"	type="predicate"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="inherited_predicate">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="entity"		type="xsd:string"/>
+		<xsd:element name="functor"		type="xsd:string"/>
+		<xsd:element name="file"		type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="predicate">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="scope"		type="scope"/>
+		<xsd:element name="compilation"	type="predicate_compilation"/>
+		<xsd:element name="meta"		type="xsd:string"		minOccurs="0"/>
+		<xsd:element name="coinductive"	type="xsd:string"		minOccurs="0"/>
+		<xsd:element name="mode"		type="mode"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="comment"		type="xsd:string"		minOccurs="0"/>
+		<xsd:element name="template"	type="xsd:string"		minOccurs="0"/>
+		<xsd:choice	minOccurs="0">
+			<xsd:element name="argnames"	type="xsd:string"/>
+			<xsd:element name="arguments"	type="arguments"/>
+		</xsd:choice>
+		<xsd:element name="exceptions"	type="exceptions"		minOccurs="0"/>
+		<xsd:element name="remarks"		type="remarks"			minOccurs="0"/>
+		<xsd:element name="info"		type="info"				minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="examples"	type="examples"			minOccurs="0"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="mode">
+	<xsd:sequence>
+		<xsd:element name="template"	type="xsd:string"/>
+		<xsd:element name="proofs"		type="proofs"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:simpleType name="proofs">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="zero"/>
+		<xsd:enumeration value="zero_or_one"/>
+		<xsd:enumeration value="zero_or_more"/>
+		<xsd:enumeration value="one"/>
+		<xsd:enumeration value="one_or_more"/>
+		<xsd:enumeration value="error"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<xsd:complexType name="arguments">
+	<xsd:sequence>
+		<xsd:element name="argument"	type="argument"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="argument">
+	<xsd:sequence>
+		<xsd:element name="name"		type="xsd:string"/>
+		<xsd:element name="description"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="exceptions">
+	<xsd:sequence>
+		<xsd:element name="exception"	type="exception"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="exception">
+	<xsd:sequence>
+		<xsd:element name="condition"	type="xsd:string"/>
+		<xsd:element name="term"		type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="examples">
+	<xsd:sequence>
+		<xsd:element name="example"	type="example"	minOccurs="0"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="example">
+	<xsd:sequence>
+		<xsd:element name="description"	type="xsd:string"/>
+		<xsd:element name="call"		type="xsd:string"/>
+		<xsd:element name="bindings"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="see_also">
+	<xsd:sequence>
+		<xsd:element name="reference"	type="reference"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="reference">
+	<xsd:sequence>
+		<xsd:element name="name"	type="xsd:string"/>
+		<xsd:element name="file"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="operators">
+	<xsd:sequence>
+		<xsd:element name="operator"	type="operator"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="operator">
+	<xsd:sequence>
+		<xsd:element name="term"		type="xsd:string"/>
+		<xsd:element name="scope"		type="scope"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="remarks">
+	<xsd:sequence>
+		<xsd:element name="remark"	type="remark"	minOccurs="0"	maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="remark">
+	<xsd:sequence>
+		<xsd:element name="topic"	type="xsd:string"/>
+		<xsd:element name="text"	type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+
+</xsd:schema>

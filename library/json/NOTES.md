@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 
 `json`
-=====
+======
 
 The `json` library provides predicates for parsing and generating data in
 the JSON format based on the specification and standard found at:

@@ -1,0 +1,729 @@
+	VIVOMIND PROPRIETARY CATALOG OF AGENTS - 2008
+
+	ALGORITHM SERVER AGENTS
+
+	1. 
+	IntentAgent.pl
+	Loads plan structures – has both dynamic plan recognition and plan synthesis capabilities – loads a user specified file of plan fragments and an ontology
+
+	2. 
+	LinkAnalysisAgent.pl
+	Has a model and extensible grammar for link creation and analysis
+
+	3. 
+	AbductiveCostBasedAgent.pl
+	An implementation of Mark Stickels Abductive Reasoning Engine with costs for abductions
+
+	4. 
+	MarkovLogicAgent.pl
+	Prolog Markov Logic Model – creates prolog markov logic trees – can be extended to arbitrary networks, VLMM’s etc…
+
+	5. 
+	AnalogyEquationServices.pl
+	Uses prolog clause generalization for equational reasoning by analogies
+
+	AGENT INTERFACE SERVICES
+
+	6. 
+	displayAdaptor.pro
+	GUI Display Window
+
+	7. 
+	HTML_Adaptor.pro
+	HTML Display 
+
+	8. 
+	HTTPMicroServer.pro
+	Serves Web Based Clients
+
+	9. 
+	FMF
+	FMF Framework group of visual elements
+
+	10. 
+	NetworkLayerAdapter.pro
+	TCP/IP Network Layer Adaptor
+
+	LOW LEVEL FILTER AGENTS
+
+	11. 
+	agtfilter_behaviorfilter.pro
+	Rate of communications, message, time per actor
+
+	12. 
+	agtfilter_morphologyfilter.pro
+	Morphology (English lexical)
+
+	13. 
+	agtfilter_phrazefilter.pro
+	Common phrases (template based) ex. IP URL’s
+
+	14. 
+	agtfilter_setofwordsfilter.pro
+	Bag of Words representation with selectable filters – example, cut out words less than 3 chars
+
+	15. 
+	agtfilter_statisticsfilter.pro
+	Message length and Count of the p/d/w/s (punctuation/digits/words/special) chars found
+
+	16. 
+	agtfilter_stoplist.pro
+	Common stop-words or stop conditions
+
+	17. 
+	agtfilter_subsequence.pro
+	Dynamic programming of least common subsequences, most common subsequences
+
+	18. 
+	agttransducer_tokens.pro
+	Normalizes text into standard filtered form (anotated with meta-data) – example, all upper case is lowered, 
+
+	19. 
+	agttranslator_tokens.pro
+	Translator of inputs removing non-recognized characters (filter out unknowns)
+
+	20. 
+	ide_dataprefilterservice.pro
+	Prefilter message buffers – reacts to message sources, like files, dbms’s etc...
+
+	21. 
+	ide_metadatafilter.pro
+	MetaData filter – instruments filter agents
+
+	22. 
+	ide_monitor.pro
+	Monitor to permit user to view into any agent
+
+	23. 
+	ide_tokenMetaDatafilter.pro
+	Token MetaData Filter  - annotates text, dispatches to blackboards and creates textDB data storage files on disk
+
+	INFORMATION FILTERS
+
+	24. 
+	agt_BasicInformationFilter.pro
+	Technical Indicators:  Moving averages, standard deviations, least squares, and other measures 
+
+	25. 
+	ide_behaviorModel.pro
+	Reaction-rates of actors, hypothesize humans versus bots
+
+	26. 
+	ide_markovModel.pro
+	Markov Algorithms and Models – markov-tree representation and Markov Logic – calls several other lower level agents
+
+	27. 
+	mkvagt_inputtext.pro
+	Markov text model 
+
+	28. 
+	mkvagt_markov.pro
+	Markov Sematon agent 
+
+	29. 
+	mkvagt_markovModeler.pro
+	Markov model generation for actors, content, or other properties analyzable
+
+	30. 
+	mkvagt_mtokenizer.pro
+	Markov tokenizer (selects ”what” to markov model)
+
+	31. 
+	ide_symbolicfilterModel.pro
+	Symbolic dynamics filter (ex. Strip out least frequent or most frequent or periodically appearing tokens)
+
+	32. 
+	ide_vectorModel.pro
+	Information Vector based processor, traditional and Geometric – uses scalar products, geometric products, inner and outer products. Augments traditional IR models and adds onto them
+
+	33. 
+	txagt_vectorspaces.pro
+	Traditional vector, inverse index algorithms
+
+	34. 
+	txagt_geometricspaces.pro
+	Geometric Spaces – Clifford Algebra Models using Bigram or Distance based word to word Bivector representations
+
+	35. 
+	txagt_agglomcluster.pro
+	Agglomerative Clustering
+
+	36. 
+	txagt_beliefnet.pro
+	Belief Network (simple and naive algorithm)
+
+	37. 
+	txagt_bnhypothesis.pro
+	Hypothesizer based on belief net construction
+
+	38. 
+	txagt_discretenaivebayes.pro
+	Discrete Naive Bayes algorithm
+
+	39. 
+	txagt_files.pro
+	Vector file manager
+
+	40. 
+	txagt_inductiondecisiontree.pro
+	Decisition Tree induction algorithm
+
+	41. 
+	txagt_knearestneighbors.pro
+	Knn-Nearest Neighbors
+
+	42. 
+	txagt_predutils.pro
+	Support agent to routines and utilities – was originally going to be a Mathematica-Server based API (using Mathematica Models as a large and ready source of “agents”)
+
+	43. 
+	txagt_txtagentapi.pro
+	The main API for accessibility to the models for text message vector processes
+
+	KNOWLEDGE EXTRACTORS
+
+	44. 
+	hyp_by_common_phrases.pro
+	If two actors use common phrases (induced at runtime) then assume they are in dialog
+
+	45. 
+	hyp_dialoging_actors.pro
+	If actors are using and introducing new terms, but share vocabulary, assume in dialog
+
+	46. 
+	hyp_lc_entities.pro
+	If actors are introducing or using least common entities, assume these are references and topic identifiers
+
+	47. 
+	ide_corefhypothesizer.pro
+	If actors name each other, or name do not acknowledge other parties in the dialog, assume a two-way focussed dialog
+
+	48. 
+	ide_textinformationfilters.pro
+	Sub-agents (threads) for computing the profile of language – if actors language profiles match, disregard change in alias names and assume they belong to same person or *group*.  Define content by profiles as a “signature” to identify content *purpose* learned by a training cycle: INFORMATION FILTER AGENT:
+
+  (1) average word length, standard deviation, skewness, and kurtosis;
+
+  (2) average sentence length, standard deviation, skewness, and kurtosis;
+
+  (3) token count (total numbers of words);
+
+  (4) type count( number of different words);
+
+  (5) diversity index;
+
+  (6) vocabulary richness;
+
+  (7) vocabulary_hidden_index;
+
+  (8) word frequencies;
+
+  (9) first person pronoun index;
+
+  (10) second person pronoun index;
+
+  (11) text diversity measure (using various bitvector measures – tanimoto, jaccard, Koehler)
+
+  (12) readability index.
+
+  (13) Chaos Game Representation (CGR) of Words using extracted alphabet (TBD)
+
+  (14) Information Temperature of a text (TBD)
+
+  (15) Fractal Map (CGR of sentence)  (TBD)
+
+	CORE REASONING
+
+	49. 
+	agt_queries.pro
+	Knowledge layer query manager to lower level agents and to this layer
+
+	50. 
+	ide_csliverbsemapiservice.pro
+	CLSI Verb Ontology – has entailment relations drawn from public sources and thematic structures
+
+	51. 
+	ide_geolocateagent.pro
+	Geolocation using public API to internet backbone map to geolocate actors based on the ip-addresses captured via exchanges
+
+	52. 
+	ide_lexiconapiservice.pro
+	Lexicon API (to wordnet and sub agents)
+
+	53. 
+	ide_metasearchagent.pro
+	GOOGLE Api to internet search (to use the WWW as an ONLINE realtime DB)
+
+	54. 
+	ide_rogetapiservice.pro
+	Roget’s Thesaurus API (public domain version)
+
+	55. 
+	ide_rstagent.pro
+	Rhetorical Structure Agent (simple version)
+
+	56. 
+	ide_semanticdistance.pro
+	Semantic Distance Agent (can use lexical as well as non-lexical, eg. Percept, sources for computations)
+
+	57. 
+	ide_vaeapi.pro
+	VivoMind Analogy Engine API (used for analogy finding between structure mapping processes)
+
+	GAME-THEORETIC AGENTS
+
+	58. 
+	ide_agt_BPSocialchoice.pro
+	Bandit Process –statistical decision model of an agent trying to optimize decisions while improving information at the same time. The indices of the arms can be computed separately and then put together to generate an optimal strategy (Gittins-Jones Theorem) – used for characterization of optimal plans. Currently used with other agents as means to see the dynamic allocation index used for hypothesis selection (ie. hypotheses selection is like playing bandit – you can hit the jackpot).
+
+	59. 
+	ide_agt_beliefpotentialbid.pro
+	Monderer and Samet (1989) introduced a natural language for characterizingplayers’ higher order beliefs. Fix a probability p ( (0, 1]. Let Ω be a set of possible states and let E be any subset of Ω. The event E is p-believed at state ω among
+
+some fixed group of individuals if everyone believes that it is true with probability
+
+at least p.  Used for representing common knowledge using common belief (since actual knowledge is not directly perceived, onlly the win/loose or reward/punish from histories of behaviors)
+
+	60. 
+	ide_agt_bimatrixgaming.pro
+	Between pairs of agents, compute the best response (i.e. choosing a strategy)
+
+	61. 
+	ide_agt_coopesocialchoices.pro
+	Cooperative Bidding on social choices – coalition formation (societies) and bidding on hypotheses.  This agent tries to define a nucleolus of the game in order to capture the notion of an optimal society.
+
+	62. 
+	ide_agt_hypcostbasedbidder.pro
+	Distributed Planning of allocating agents to tasks based on costs to complete: 
+
+fcost (t) fcost (createAgent(t)) fcost (executeJob(t))
+
+
+
+	63. 
+	ide_agt_perfectinfogaming1.pro
+	Extensive Form Games (Game Trees) with rational decision making base on utility, preference and the game model – used to determine membership in societies or autonomous voting – an agent that looses all the time will leave.
+
+	64. 
+	ide_agt_perfectinfogaming2.pro
+	Bonanno-Vilks propositional logic modeling for game tree.  Aumann theorem of the backward induction under common knowledge model.
+
+	65. 
+	ide_agt_perfectinfogaming3.pro
+	Belief based strong/weak strategies
+
+	66. 
+	ide_agt_signallingbidding.pro
+	Signal Game based Bidding using Dempster-Shafer or Bayes evidential measures as observable signals messages and the receiver agents that select best actions to pursue get rewarded.
+
+	67. 
+	ide_agt_socialchoicepref.pro
+	Societal social choice preferences utilities – treats the pool of hypotheses as a market and makes choices based on preferences. Contains cellular society models.
+
+	68. 
+	ide_agt_votingtraders.pro
+	Hypotheses are traded on a hypothesis market by sophist, rational,cassandra,naïve agents – the cassandra agents try to predict the future based on their own histories.
+
+	PORTFOLIO THEORY AGENTS
+
+	69. 
+	agt_tverskysocialchoice.pro
+	Elimination by Aspects model with preferences. Each alternative is viewed as a set of aspects. At each stage an aspect is selected. All alternatives that do not include that aspect are eliminated. Process stops when all but one alternative are eliminated.  Used in making choices for hypotheses and outcomes.
+
+	70. 
+	ide_agt_DSbeliefbidding.pro
+	Dempster Shafer – bidding based on Dempster-Shafer based beliefs (evidential beliefs). For situations in which information is ambiguous and only part of it can be probabilized. Information can be modeled through DS-belief functions.
+
+
+
+	71. 
+	ide_agt_frontieranalysis.pro
+	Frontier Analysis - Data Envelopment Analysis - aka Frontier Analysis Data Envelopment Analysis (DEA) is a clustering methodology for 
+
+records in data sets corresponding to entities sharing a common list of attributes. Broadly defined, DEA partitions the records into
+
+two subsets; those 'efficient' and those 'inefficient.' An efficient record is one which lies on a specific portion of the boundary of a finitely generated polyhedral set in the dimension of the 
+
+attribute space known as the 'frontier'; inefficient points are those located elsewhere. In traditional applications, DEA frontiers are nonparametric surrogates for unknown theoretical efficiency limits. More generally, however, frontiers are subsets of the boundary defined by extreme elements of the data set. DEA deals with problems that require modeling both qualitative and quantitative data.:
+
+DEA deals with: 
+
+(1) imprecise data, 
+
+(2) inaccurate data, 
+
+(3) missing data, 
+
+(4) qualitative data, 
+
+(5) outliers, 
+
+(6) undesirable outputs, 
+
+(7) quality data, 
+
+(8) statistical analysis
+
+	72. 
+	ide_agt_hypcost_am.pro
+	Abreu-Matsushima market mechanism for layer 5 sub-societies.  Agents formed into model groups with managers and workers, payoffs estimate values of hypotheses to goals and bid based on goala at hand.
+
+	73. 
+	ide_agt_laghypscheduling.pro
+	Lagrange hyp prod scheduling – scheduling agents based on costs, efficiency, capabilities and deadlines for delivery of results
+
+	74. 
+	ide_agt_managehierarchsco.pro
+	Managerial Hierarchy Social Choices – creates hierarchical societies and manages them for performing analytic work based on cost of production and value created.
+
+	75. 
+	ide_agt_networkbasedagents.pro
+	Individual agents and price setting societies model with coordinators – network organizational structure.
+
+	76. 
+	ide_agt_RSDSdb.pro
+	Rouch Set Dempster-Shafer Agent can reason and make implications based on evidence using evidence-functions to reduce combinatorial complexity of Dempster-Shafer methods.
+
+	77. 
+	ide_agt_thinkingstrategically.pro
+	Thinking Strategically using Preference Rules
+
+	78. 
+	tverskyCMAgent.pl
+	A contrast model agent
+
+	DATA SOURCES / SENSORS
+
+	79. 
+	AbstractDataSource.pro
+	Buffer for the data from any source
+
+	80. 
+	syntheticRawDataHandler.pro
+	Buffer for the data from the synthetic source
+
+	ADVANCED REASONING AND FINANCIAL RISK MODELING
+
+	81. 
+	Cognitive Memory (a.k.a VAE-2)
+	Ultra High Speed Graph / Analogy Agent
+
+	82. 
+	fuzzyTreeUnification.pro
+	Fuzzy unification for Prolog Engine
+
+	83. 
+	RippleDownRules.pro
+	Ripple Down Rules Engine
+
+	84. 
+	AbductiveModelAgent.pro
+	Uses rule generating abduction to test for unforeseen or non-obvious links in data 
+
+	85. 
+	FuzzyRules.pro
+	Fuzzy Rules Engine
+
+	86. 
+	AbductiveSemanticTableaux.pro
+	Abductive Semantic conjecture making system
+
+	87. 
+	QualitativeReasoningAgent.pro
+	Uses qualitative variables for system reasoning
+
+	88. 
+	DCTGGLogic.pro
+	Definite Clause Transformation Grammar based Genetic Language Programming Agent
+
+	89. 
+	PeirceAbductiveAnalogyAgent.pro
+	Uses analogies to form constrained abductions
+
+	90. 
+	HTNAgent.pro
+	Hierarchical Task Net Agent Planner
+
+	91. 
+	vickrey-clarke-groves_agent.pl
+	Gold standard in the field of “mechanism design”: public goods economy, dynamic behavior : agent beliefs are functions of previous strategy profiles.
+
+	92. 
+	seller_agent2.pl
+	Basic routines and mechanisms the functionalities of the Seller Agents (given rules and advice)
+
+	93. 
+	secretary_agent.pl
+	Secretaries Algorithm for “relative rank” and stopping problem : this manages  agents
+
+	94. 
+	Scarfs-shoven-whalley_agent.pl
+	Consumer producer : Shoven Whalley Economic agents – decompose outcomes into multi-part causes 
+
+	95. 
+	rulestrading_multiagents.pl
+	Incorporating rules and heuristics – uses an Agent Ontology: 1. ex_ante 2. naïve 3. sophist 4. rational
+
+	96. 
+	plausibilitydecision_agent.pl
+	Decision making in the presence of ambiguities --- using modal plausible arguments
+
+	97. 
+	pandora_agent.pl
+	Optimal “order of information” agent – used with genetic algorithms agents and secretaries
+
+	98. 
+	networkpricing_multiagents.pl
+	Use of networke mechanisms and heirarchies for pricing and decision structures
+
+	99. 
+	nash_multiagents2.pl
+	Nash implementation theory – preference models
+
+	100. 
+	nash_multiagent.pl
+	Generate and test on various models of Nash
+
+	101. 
+	nashinformationgame_agent.pl
+	Perfect information gaming
+
+	102. 
+	nashequilibriumgame_agents.pl
+	Nash, mixed, and undominated strategy equilibrium
+
+	103. 
+	nashchoice_multiagent.pl
+	Nash implementation theory (social choice equilibrium theory)
+
+	104. 
+	informationgame_model.pl
+	Rational choice information game agent
+
+	105. 
+	id3-learning_agent.pl
+	ID3 quinlan
+
+	106. 
+	geneticlearner_agent.pl
+	Grammar Evolution Genetic Algorithm --- the grammar is a controlled language of causes, effects
+
+	107. 
+	geneticlearner_agent.pl
+	Holland Genetic Algorithm – bitmap evolver
+
+	108. 
+	galoisdesigner_agent.pl
+	Galois Field designer agent – synthesis of structures
+
+	109. 
+	galeshapey_marriageagent.pl
+	The marriage preferences social model for inter-agent cooperation, collaboration and coordination
+
+	110. 
+	fixpointed_agent.pl
+	Negotiator Agent that using fixpoints for CONTRACT maps (ie contracts with payoffs)
+
+	111. 
+	evidencebelief_agent.pl
+	Belief evidence and SIGNALS interpretation uncertainity
+
+	112. 
+	epistemicbelief_multiagents.pl
+	Epistemic conditions for Nash Equilibrium
+
+	113. 
+	epistemicbelief_agent.pl
+	Logic of Belief Change and Belief dynamics by unawareness and partition of information
+
+	114. 
+	dempstershafer_agent.pl
+	Dempster-Shafer evidence model agent
+
+	115. 
+	decisiontree_agent.pl
+	Decision Tree Agent – makes top decision tree analysis and learns rules
+
+	116. 
+	clarkgroves_agent.pl
+	Incentives and pricing in teams – auction oriented agents
+
+	117. 
+	choquet_agent.pl
+	The amount and quality of the information a decision maker (DM) has about the relevant events
+affects her preferences. In particular, DMs prefer to act on events they feel
+well-informed about, an attitude which has been called ambiguity aversion.
+
+	118. 
+	buyer_agent.pl
+	Buying Agent by space partitions
+
+	119. 
+	bayesperfectequlibrium_agent.pl
+	Bayes Equilbrium, decisions
+
+	120. 
+	backwrdsinduction_agent.pl
+	Backwards Induction agent – game logical agent : Think ; Decide ; Act
+
+	121. 
+	vickrey-clarke-groves_agent.pl
+	Gold standard in the field of “mechanism design”: public goods economy, dynamic behavior : agent beliefs are functions of previous strategy profiles.
+
+	122. 
+	seller_agent2.pl
+	Basic routines and mechanisms the functionalities of the Seller Agents (given rules and advice)
+
+	123. 
+	secretary_agent.pl
+	Secretaries Algorithm for “relative rank” and stopping problem : this manages  agents
+
+	124. 
+	Scarfs-shoven-whalley_agent.pl
+	Consumer producer : Shoven Whalley Economic agents – decompose outcomes into multi-part causes 
+
+	125. 
+	rulestrading_multiagents.pl
+	Incorporating rules and heuristics – uses an Agent Ontology: 1. ex_ante 2. naïve 3. sophist 4. rational
+
+	126. 
+	plausibilitydecision_agent.pl
+	Decision making in the presence of ambiguities --- using modal plausible arguments
+
+	127. 
+	pandora_agent.pl
+	Optimal “order of information” agent – used with genetic algorithms agents and secretaries
+
+	128. 
+	networkpricing_multiagents.pl
+	Use of networke mechanisms and heirarchies for pricing and decision structures
+
+	129. 
+	nash_multiagents2.pl
+	Nash implementation theory – preference models
+
+	130. 
+	nash_multiagent.pl
+	Generate and test on various models of Nash
+
+	131. 
+	nashinformationgame_agent.pl
+	Perfect information gaming
+
+	132. 
+	nashequilibriumgame_agents.pl
+	Nash, mixed, and undominated strategy equilibrium
+
+	133. 
+	nashchoice_multiagent.pl
+	Nash implementation theory (social choice equilibrium theory)
+
+	134. 
+	informationgame_model.pl
+	Rational choice information game agent
+
+	135. 
+	Chaos_model.pl
+	Chaos game dynamic agent
+
+	136. 
+	Mathematica_Agent.pl
+	Interfaces and uses Mathematica Notebooks
+
+	137. 
+	Case_Based_Reasoning.pl
+	Case based and analogical reasoner
+
+	138. 
+	Chaos_model.pl
+	Uses chaos game representations
+
+	139. 
+	ProcessPlanner_model.pl
+	Planner for Process based workflows, 
+
+	140. 
+	Semantic Distance Field Agent
+	Similarity by semantic distances
+
+	141. 
+	Modal Logic_Agent.pl
+	Different kinds of modal logic theories
+
+	142. 
+	PatternSequencingAgent.pl
+	Linear pattern sequences & subsequences
+
+	143. 
+	FuzzyLogicAgent.pl
+	Matches predicate arguments approximately
+
+	144. 
+	Fuzzy Predicate Agent.pl
+	Matches predicate functors approximately
+
+	145. 
+	KozaGeneticModelAgent.pl
+	Evolution using ADF trees of Koza’s theory
+
+	146. 
+	Evolvolog.pl
+	Functional forth-like schema agent
+
+	147. 
+	infonParser.pl
+	Keith Devlin’s INFON theory based parser
+
+	148. 
+	CLCE.pl
+	Common Logic Controlled English
+
+	149. 
+	Intellitext Parser.pl
+	Proto-Ontology extractor called “intellitext”
+
+	150. 
+	Sematon Agent.pl
+	Dynamical Conceptual Graph Process Agent
+
+	151. 
+	Linda Agent Society Model.pl
+	Protocols and Spaces for Agent Societies
+
+	152. 
+	SCIFF Agent.pl
+	SCIFF Abduction algorithm agent
+
+	153. 
+	GraphEvolutionAgent.pl
+	Graph structure based evolution
+
+	154. 
+	GraphDescriptorAgent.pl
+	Computes graph descriptors
+
+	155. 
+	GraphTopoCompressionAgent.pl
+	Compresses graph topologies to numbers
+
+	156. 
+	FastIndependentComponents.pl
+	Independent Components Analysis
+
+	157. 
+	SDFM_Agent.pl
+	Semantic Distance Field Model (SDFM) using Morse-Smale complexes and Reeb-Graphs
+
+	158. 
+	RelationLearningAgent.pl
+	Logic based relational learner agent
+
+	159. 
+	HolographicMemoryAgent.pl
+	Tony Plate’s Holographic HRR model Agent
+
+	160. 
+	CounterfactualEmotionAgent.pl
+	Simulative states for emotional ascriptions
+
+

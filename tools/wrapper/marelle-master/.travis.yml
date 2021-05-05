@@ -1,0 +1,7 @@
+language: prolog
+before_install: "scripts/before_install.sh"
+install: true
+script: "scripts/cibuild.sh"
+notifications:
+    email:
+        - lars@yencken.org

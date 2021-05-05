@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>source.lgt</title>
+<link rel="stylesheet" type="text/css" href="highlight.css"/>
+</head>
+<body class="hl">
+<pre class="hl"><span class="hl kwd">:-</span> <span class="hl kwa">encoding</span>(<span class="hl kwb">Encoding</span>).  <span class="hl slc">% this is a single-line comment</span>
+
+<span class="hl com">/*</span>
+<span class="hl com">this is</span>
+<span class="hl com">a block</span>
+<span class="hl com">comment</span>
+<span class="hl com">*/</span>
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">if</span>(<span class="hl kwb">Goal</span>).
+    <span class="hl slc">% conditional</span>
+<span class="hl kwd">:-</span> <span class="hl kwa">elif</span>(<span class="hl kwb">Goal</span>).
+    <span class="hl slc">% compilation</span>
+<span class="hl kwd">:-</span> <span class="hl kwa">else</span>.
+    <span class="hl slc">% directives</span>
+<span class="hl kwd">:-</span> <span class="hl kwa">endif</span>.
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">initialization</span>(<span class="hl kwb">Goal</span>).
+<span class="hl kwd">:-</span> <span class="hl kwa">op</span>(<span class="hl kwb">Precedence</span>, <span class="hl kwb">Associativity</span>, <span class="hl kwb">Operator</span>).
+<span class="hl kwd">:-</span> <span class="hl kwa">ensure_loaded</span>(<span class="hl kwb">File</span>).
+<span class="hl kwd">:-</span> <span class="hl kwa">include</span>(<span class="hl kwb">File</span>).
+<span class="hl kwd">:-</span> <span class="hl kwa">set_prolog_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>).
+<span class="hl kwd">:-</span> <span class="hl kwa">set_logtalk_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>).
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">object</span>(prototype,
+    <span class="hl kwa">implements</span>(protocol),
+    <span class="hl kwa">imports</span>(category),
+    <span class="hl kwa">extends</span>(parent)).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">info</span>([
+        version <span class="hl kwd">is</span> 1.39,
+        author <span class="hl kwd">is</span> <span class="hl str">&apos;Paulo Moura&apos;</span>,
+        date <span class="hl kwd">is</span> 2018/06/29,
+        comment <span class="hl kwd">is</span> <span class="hl str">&apos;Sample prototype for testing syntax coloring.&apos;</span>
+    ]).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">built_in</span>.
+    <span class="hl kwd">:-</span> <span class="hl kwa">threaded</span>.
+    <span class="hl kwd">:-</span> <span class="hl kwa">dynamic</span>.
+    <span class="hl kwd">:-</span> <span class="hl kwa">initialization</span>(some_goal(<span class="hl kwb">X</span>, <span class="hl kwb">Y</span>)).
+    <span class="hl kwd">:-</span> <span class="hl kwa">calls</span>(some_other_protocol).
+    <span class="hl kwd">:-</span> <span class="hl kwa">uses</span>(another_object).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">alias</span>(set, [member/2 <span class="hl kwd">as</span> set_member/2]).
+    <span class="hl kwd">:-</span> <span class="hl kwa">alias</span>(words, [singular//0 <span class="hl kwd">as</span> peculiar//0]).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">uses</span>(list, [append/3, member/2]).
+    <span class="hl kwd">:-</span> <span class="hl kwa">uses</span>(queues, [new/1 <span class="hl kwd">as</span> new_queue/1]).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">use_module</span>(module).
+    <span class="hl kwd">:-</span> <span class="hl kwa">use_module</span>(module, [append/3, member/2]).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">multifile</span>(zzz/1).
+    <span class="hl kwd">:-</span> <span class="hl kwa">multifile</span>(module<span class="hl kwd">:</span>zzz/1).
+    <span class="hl kwd">:-</span> <span class="hl kwa">multifile</span>(object<span class="hl kwd">::</span>zzz/1).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">coinductive</span>(comember/1).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">use_module</span>(module, [xxx/1, yyy/2, zzz/3]).
+    <span class="hl kwd">:-</span> <span class="hl kwa">export</span>(bbb/3).
+    <span class="hl kwd">:-</span> <span class="hl kwa">reexport</span>(cccc/4).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">public</span>(aaa/2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">meta_predicate</span>(aaa(<span class="hl kwd">::</span>, *)).
+    <span class="hl kwd">:-</span> <span class="hl kwa">discontiguous</span>(aaa/2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">mode</span>(aaa(+callable, <span class="hl kwd">?</span>integer), zero_or_one).
+    <span class="hl kwd">:-</span> <span class="hl kwa">info</span>(position/2, [
+        comment <span class="hl kwd">is</span> <span class="hl str">&apos;Predicate brief description.&apos;</span>,
+        arguments <span class="hl kwd">is</span> [<span class="hl str">&apos;Arg1&apos;</span>-<span class="hl str">&apos;Arg1 description&apos;</span>, <span class="hl str">&apos;Arg2&apos;</span>-<span class="hl str">&apos;Arg2 description&apos;</span>]
+    ]).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">public</span>(nt//2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">meta_non_terminal</span>(nt(1, *)).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">protected</span>(bbb/2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">synchronized</span>(bbb/2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">mode</span>(bbb(+integer, -float), one).
+    <span class="hl kwd">:-</span> <span class="hl kwa">info</span>(bbb/2, [
+        comment <span class="hl kwd">is</span> <span class="hl str">&apos;Predicate brief description.&apos;</span>,
+        argnames <span class="hl kwd">is</span> [<span class="hl str">&apos;Arg1&apos;</span>, <span class="hl str">&apos;Arg2&apos;</span>]
+    ]).
+
+    <span class="hl kwd">:-</span> <span class="hl kwa">private</span>(ccc/2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">dynamic</span>(ccc/2).
+    <span class="hl kwd">:-</span> <span class="hl kwa">mode</span>(ccc(<span class="hl kwd">&#64;</span>atom, <span class="hl kwd">?</span>atom, ++list, --ground), one_or_more).
+    <span class="hl kwd">:-</span> <span class="hl kwa">info</span>(ccc/2, [
+        comment <span class="hl kwd">is</span> <span class="hl str">&apos;Predicate brief description.&apos;</span>,
+        argnames <span class="hl kwd">is</span> [<span class="hl str">&apos;Arg1&apos;</span>, <span class="hl str">&apos;Arg2&apos;</span>]
+    ]).
+
+    enumerating_entities(<span class="hl kwb">Object</span>, <span class="hl kwb">Protocol</span>, <span class="hl kwb">Category</span>) <span class="hl kwd">:-</span>
+        <span class="hl kwc">current_category</span>(<span class="hl kwb">Category</span>),
+        <span class="hl kwc">current_object</span>(<span class="hl kwb">Object</span>),
+        <span class="hl kwc">current_protocol</span>(<span class="hl kwb">Protocol</span>).
+
+    enumerating_properties <span class="hl kwd">:-</span>
+        <span class="hl kwc">category_property</span>(<span class="hl kwb">Category</span>, <span class="hl kwb">Property</span>),
+        <span class="hl kwc">object_property</span>(<span class="hl kwb">Object</span>, <span class="hl kwb">Property</span>),
+        <span class="hl kwc">protocol_property</span>(<span class="hl kwb">Protocol</span>, <span class="hl kwb">Property</span>).
+
+    creating_entities(<span class="hl kwb">Object</span>, <span class="hl kwb">Protocol</span>, <span class="hl kwb">Category</span>) <span class="hl kwd">:-</span>
+        <span class="hl kwc">create_category</span>(<span class="hl kwb">Category</span>, <span class="hl kwb">Relations</span>, <span class="hl kwb">Directives</span>, <span class="hl kwb">Clauses</span>),
+        <span class="hl kwc">create_object</span>(<span class="hl kwb">Object</span>, <span class="hl kwb">Relations</span>, <span class="hl kwb">Directives</span>, <span class="hl kwb">Clauses</span>),
+        <span class="hl kwc">create_protocol</span>(<span class="hl kwb">Protocol</span>, <span class="hl kwb">Relations</span>, <span class="hl kwb">Directives</span>).
+
+    abolishing_entities(<span class="hl kwb">Object</span>, <span class="hl kwb">Protocol</span>, <span class="hl kwb">Category</span>) <span class="hl kwd">:-</span>
+        <span class="hl kwc">abolish_category</span>(<span class="hl kwb">Category</span>),
+        <span class="hl kwc">abolish_object</span>(<span class="hl kwb">Object</span>),
+        <span class="hl kwc">abolish_protocol</span>(<span class="hl kwb">Protocol</span>).
+
+    entity_relations <span class="hl kwd">:-</span>
+        <span class="hl kwc">extends_object</span>(<span class="hl kwb">Prototype</span>, <span class="hl kwb">Parent</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">extends_protocol</span>(<span class="hl kwb">Protocol1</span>, <span class="hl kwb">Protocol2</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">extends_category</span>(<span class="hl kwb">Category1</span>, <span class="hl kwb">Category2</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">implements_protocol</span>(<span class="hl kwb">Object</span>, <span class="hl kwb">Protocol</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">imports_category</span>(<span class="hl kwb">Object</span>, <span class="hl kwb">Category</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">instantiates_class</span>(<span class="hl kwb">Instance</span>, <span class="hl kwb">Class</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">specializes_class</span>(<span class="hl kwb">Class</span>, <span class="hl kwb">Superclass</span>, <span class="hl kwb">Scope</span>),
+        <span class="hl kwc">complements_object</span>(<span class="hl kwb">Category</span>, <span class="hl kwb">Object</span>),
+        <span class="hl kwc">conforms_to_protocol</span>(<span class="hl kwb">ObjOrCtg</span>, <span class="hl kwb">Protocol</span>, <span class="hl kwb">Scope</span>).
+
+    event_handling <span class="hl kwd">:-</span>
+        <span class="hl kwc">abolish_events</span>(<span class="hl kwb">Event</span>, <span class="hl kwb">Object</span>, <span class="hl kwb">Message</span>, <span class="hl kwb">Sender</span>, <span class="hl kwb">Monitor</span>),
+        <span class="hl kwc">current_event</span>(<span class="hl kwb">Event</span>, <span class="hl kwb">Object</span>, <span class="hl kwb">Message</span>, <span class="hl kwb">Sender</span>, <span class="hl kwb">Monitor</span>),
+        <span class="hl kwc">define_events</span>(<span class="hl kwb">Event</span>, <span class="hl kwb">Object</span>, <span class="hl kwb">Message</span>, <span class="hl kwb">Sender</span>, <span class="hl kwb">Monitor</span>).
+
+    multi_threading <span class="hl kwd">:-</span>
+        <span class="hl kwc">threaded</span>(<span class="hl kwb">Goals</span>),
+        <span class="hl kwc">threaded_call</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">threaded_once</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">threaded_ignore</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">threaded_exit</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">threaded_peek</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">threaded_wait</span>(<span class="hl kwb">Notification</span>),
+        <span class="hl kwc">threaded_notify</span>(<span class="hl kwb">Notification</span>).
+
+    engines <span class="hl kwd">:-</span>
+        <span class="hl kwc">threaded_engine</span>(<span class="hl kwb">Engine</span>),
+        <span class="hl kwc">threaded_engine_create</span>(<span class="hl kwb">AnswerTemplate</span>, <span class="hl kwb">Goal</span>, <span class="hl kwb">Engine</span>),
+        <span class="hl kwc">threaded_engine_destroy</span>(<span class="hl kwb">Engine</span>),
+        <span class="hl kwc">threaded_engine_self</span>(<span class="hl kwb">Engine</span>),
+        <span class="hl kwc">threaded_engine_next</span>(<span class="hl kwb">Engine</span>, <span class="hl kwb">Answer</span>),
+        <span class="hl kwc">threaded_engine_next_reified</span>(<span class="hl kwb">Engine</span>, <span class="hl kwb">Answer</span>),
+        <span class="hl kwc">threaded_engine_yield</span>(<span class="hl kwb">Answer</span>),
+        <span class="hl kwc">threaded_engine_post</span>(<span class="hl kwb">Engine</span>, <span class="hl kwb">Term</span>),
+        <span class="hl kwc">threaded_engine_fetch</span>(<span class="hl kwb">Term</span>).
+
+    compiling_and_loading <span class="hl kwd">:-</span>
+        <span class="hl kwc">logtalk_compile</span>(<span class="hl kwb">File</span>, <span class="hl kwb">Options</span>),
+        <span class="hl kwc">logtalk_load</span>(<span class="hl kwb">File</span>, <span class="hl kwb">Options</span>),
+        <span class="hl kwc">logtalk_library_path</span>(<span class="hl kwb">Library</span>, <span class="hl kwb">Path</span>),
+        <span class="hl kwc">logtalk_load_context</span>(<span class="hl kwb">Key</span>, <span class="hl kwb">Value</span>),
+        <span class="hl kwc">logtalk_make</span>(clean),
+        <span class="hl kwc">logtalk_make</span>.
+
+    flags <span class="hl kwd">:-</span>
+        <span class="hl kwc">current_logtalk_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>),
+        <span class="hl kwc">set_logtalk_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>),
+        <span class="hl kwc">create_logtalk_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>, <span class="hl kwb">Options</span>).
+
+    execution_context_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">context</span>(<span class="hl kwb">Context</span>),
+        <span class="hl kwc">parameter</span>(<span class="hl kwb">N</span>, <span class="hl kwb">Parameter</span>),
+        <span class="hl kwc">self</span>(<span class="hl kwb">Self</span>),
+        <span class="hl kwc">sender</span>(<span class="hl kwb">Sender</span>),
+        <span class="hl kwc">this</span>(<span class="hl kwb">This</span>).
+
+    reflection_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">current_predicate</span>(<span class="hl kwb">Predicate</span>),
+        <span class="hl kwc">predicate_property</span>(<span class="hl kwb">Predicate</span>, <span class="hl kwb">Property</span>).
+
+    database_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">abolish</span>(<span class="hl kwb">Functor</span>/<span class="hl kwb">Arity</span>),
+        <span class="hl kwc">asserta</span>(<span class="hl kwb">Clause</span>),
+        <span class="hl kwc">assertz</span>(<span class="hl kwb">Clause</span>),
+        <span class="hl kwc">clause</span>(<span class="hl kwb">Head</span>, <span class="hl kwb">Body</span>),
+        <span class="hl kwc">retract</span>(<span class="hl kwb">Clause</span>),
+        <span class="hl kwc">retractall</span>(<span class="hl kwb">Head</span>).
+
+    exception_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">catch</span>(<span class="hl kwb">Goal</span>, <span class="hl kwb">Error</span>, <span class="hl kwb">Catcher</span>),
+        <span class="hl kwc">throw</span>(<span class="hl kwb">Error</span>),
+        <span class="hl kwc">instantiation_error</span>,
+        <span class="hl kwc">uninstantiation_error</span>(<span class="hl kwb">Culprit</span>),
+        <span class="hl kwc">type_error</span>(<span class="hl kwb">Type</span>, <span class="hl kwb">Culprit</span>),
+        <span class="hl kwc">domain_error</span>(<span class="hl kwb">Domain</span>, <span class="hl kwb">Culprit</span>),
+        <span class="hl kwc">existence_error</span>(<span class="hl kwb">Thing</span>, <span class="hl kwb">Culprit</span>),
+        <span class="hl kwc">permission_error</span>(<span class="hl kwb">Operation</span>, <span class="hl kwb">Permission</span>, <span class="hl kwb">Culprit</span>),
+        <span class="hl kwc">representation_error</span>(<span class="hl kwb">Flag</span>),
+        <span class="hl kwc">evaluation_error</span>(<span class="hl kwb">Exception</span>),
+        <span class="hl kwc">resource_error</span>(<span class="hl kwb">Resource</span>),
+        <span class="hl kwc">syntax_error</span>(<span class="hl kwb">Description</span>),
+        <span class="hl kwc">system_error</span>.
+
+    all_solutions_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">bagof</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Goal</span>, <span class="hl kwb">List</span>),
+        <span class="hl kwc">bagof</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Var</span><span class="hl kwd">^</span><span class="hl kwb">Goal</span>, <span class="hl kwb">List</span>),
+        <span class="hl kwc">findall</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Goal</span>, <span class="hl kwb">List</span>),
+        <span class="hl kwc">forall</span>(<span class="hl kwb">Generate</span>, <span class="hl kwb">Test</span>),
+        <span class="hl kwc">setof</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Goal</span>, <span class="hl kwb">List</span>),
+        <span class="hl kwc">setof</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Var1</span><span class="hl kwd">^</span><span class="hl kwb">Var2</span><span class="hl kwd">^</span><span class="hl kwb">Goal</span>, <span class="hl kwb">List</span>).
+
+    event_handler_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">before</span>(<span class="hl kwb">Object</span>, <span class="hl kwb">Message</span>, <span class="hl kwb">Sender</span>),
+        <span class="hl kwc">after</span>(<span class="hl kwb">Object</span>, <span class="hl kwb">Message</span>, <span class="hl kwb">Sender</span>).
+
+    message_forwarding_method <span class="hl kwd">:-</span>
+        <span class="hl kwc">forward</span>(<span class="hl kwb">Message</span>).
+
+    dcg_rules_parsing_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">phrase</span>(<span class="hl kwb">NonTerminal</span>, <span class="hl kwb">Input</span>, <span class="hl kwb">Rest</span>).
+
+    term_expansion_methods <span class="hl kwd">:-</span>
+        <span class="hl kwc">expand_term</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Expanded</span>),
+        <span class="hl kwc">expand_goal</span>(<span class="hl kwb">Goal</span>, <span class="hl kwb">Expanded</span>),
+        <span class="hl kwc">term_expansion</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Expanded</span>),
+        <span class="hl kwc">goal_expansion</span>(<span class="hl kwb">Goal</span>, <span class="hl kwb">Expanded</span>).
+
+    message_sending <span class="hl kwd">:-</span>
+        <span class="hl kwb">Object</span><span class="hl kwd">::</span><span class="hl kwb">Message</span>,
+        <span class="hl kwd">::</span><span class="hl kwb">Message</span>,
+        <span class="hl kwd">^^</span><span class="hl kwb">Message</span>.
+
+    calling_external_code <span class="hl kwd">:-</span>
+        <span class="hl kwd">{</span>goal1, goal2, goal3<span class="hl kwd">}</span>.
+
+    context_switching_calls <span class="hl kwd">:-</span>
+        <span class="hl kwb">Object</span><span class="hl kwd">&lt;&lt;</span><span class="hl kwb">Goal</span>.
+
+    lambda_expressions <span class="hl kwd">:-</span>
+        <span class="hl kwd">{</span><span class="hl kwb">X</span>,<span class="hl kwb">Y</span>,<span class="hl kwb">Z</span><span class="hl kwd">}</span>/[<span class="hl kwb">P</span>,<span class="hl kwb">Q</span>]<span class="hl kwd">&gt;&gt;</span><span class="hl kwb">Goal</span>.
+
+    explicitly_qualified_module_calls <span class="hl kwd">:-</span>
+        <span class="hl kwb">Module</span><span class="hl kwd">:</span><span class="hl kwb">Goal</span>.
+
+    if_then_else <span class="hl kwd">:-</span>
+        (   <span class="hl kwb">If</span> <span class="hl kwd">-&gt;</span>
+            <span class="hl kwb">Then</span>
+        <span class="hl kwd">;</span>   <span class="hl kwb">Else</span>
+        ).
+
+    numbers <span class="hl kwd">:-</span>
+        <span class="hl kwb">X1</span> <span class="hl kwd">is</span> 13, <span class="hl kwb">X2</span> <span class="hl kwd">is</span> -13, <span class="hl kwb">X3</span> <span class="hl kwd">is</span> +13,
+        <span class="hl kwb">Y1</span> <span class="hl kwd">is</span> 13.13, <span class="hl kwb">Y2</span> <span class="hl kwd">is</span> -13.13, <span class="hl kwb">Y3</span> <span class="hl kwd">is</span> +13.13,
+        <span class="hl kwb">Z1</span> <span class="hl kwd">is</span> 13.13e-23, <span class="hl kwb">Z2</span> <span class="hl kwd">is</span> -13.13e-23, <span class="hl kwb">Z3</span> <span class="hl kwd">is</span> +13.13e-23,
+        <span class="hl kwb">C1</span> <span class="hl kwd">is</span> <span class="hl kwe">0&apos;A</span>, <span class="hl kwb">C2</span> <span class="hl kwd">is</span> <span class="hl kwe">0&apos;&apos;</span>, <span class="hl kwb">C3</span> <span class="hl kwd">is</span> <span class="hl kwe">0&apos;&quot;</span>,
+        <span class="hl kwb">B1</span> <span class="hl kwd">is</span> <span class="hl kwe">0b1011101</span>,
+        <span class="hl kwb">O1</span> <span class="hl kwd">is</span> <span class="hl kwe">0o1234560</span>,
+        <span class="hl kwb">H1</span> <span class="hl kwd">is</span> <span class="hl kwe">0x1234567890abcDEF</span>.
+
+    functions <span class="hl kwd">:-</span>
+        <span class="hl kwb">A</span> <span class="hl kwd">is</span> <span class="hl kwc">atan</span>(3.14) + <span class="hl kwc">atan2</span>(1, 0) + <span class="hl kwc">acos</span>(0.5) + <span class="hl kwc">asin</span>(0.5) + <span class="hl kwc">sin</span>(0.77) - <span class="hl kwc">cos</span>(123.23) - <span class="hl kwc">tan</span>(0.33),
+        <span class="hl kwb">B</span> <span class="hl kwd">is</span> <span class="hl kwc">sign</span>(-12) * <span class="hl kwc">abs</span>(35/78),
+        <span class="hl kwb">C</span> <span class="hl kwd">is</span> <span class="hl kwc">truncate</span>(3.14) + <span class="hl kwc">round</span>(-7.8) - <span class="hl kwc">ceiling</span>(111.88),
+        <span class="hl kwb">D</span> <span class="hl kwd">is</span> <span class="hl kwc">exp</span>(3.8) - <span class="hl kwc">log</span>(123.98) / <span class="hl kwc">sqrt</span>(33) * 23 ** 4 + 12345<span class="hl kwd">^</span>2,
+        <span class="hl kwb">E</span> <span class="hl kwd">is</span> <span class="hl kwc">rem</span>(3, 2) + <span class="hl kwc">mod</span>(5, 3) - <span class="hl kwc">div</span>(8, 4) * 2 <span class="hl kwd">rem</span> 2 // 5 <span class="hl kwd">mod</span> 3 - 8 <span class="hl kwd">div</span> 4 + <span class="hl kwd">pi</span> * <span class="hl kwd">e</span>,
+        <span class="hl kwb">F</span> <span class="hl kwd">is</span> <span class="hl kwc">float_fractional_part</span>(3.14) + <span class="hl kwc">float_integer_part</span>(3.14),
+        <span class="hl kwb">G</span> <span class="hl kwd">is</span> <span class="hl kwc">float</span>(33) + <span class="hl kwc">floor</span>(99.99),
+        <span class="hl kwb">I</span> <span class="hl kwd">is</span> <span class="hl kwc">min</span>(3,4) + <span class="hl kwc">max</span>(4,5).
+
+    bitwise <span class="hl kwd">:-</span>
+        <span class="hl kwb">A</span> <span class="hl kwd">is</span> 16 <span class="hl kwd">&gt;&gt;</span> 2,
+        <span class="hl kwb">B</span> <span class="hl kwd">is</span> 16 <span class="hl kwd">&lt;&lt;</span> 2,
+        <span class="hl kwb">C</span> <span class="hl kwd">is</span> 10 <span class="hl kwd">/\</span> 12,
+        <span class="hl kwb">D</span> <span class="hl kwd">is</span> 10 <span class="hl kwd">\/</span> 12,
+        <span class="hl kwb">E</span> <span class="hl kwd">is \</span> 10,
+        <span class="hl kwb">F</span> <span class="hl kwd">is</span> <span class="hl kwc">xor</span>(13, 7).
+
+    term_unification <span class="hl kwd">:-</span>
+        <span class="hl kwb">Term1</span> <span class="hl kwd">=</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwb">Term1</span> <span class="hl kwd">\=</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwc">unify_with_occurs_check</span>(<span class="hl kwb">Term1</span>, <span class="hl kwb">Term2</span>),
+        <span class="hl kwc">subsumes_term</span>(<span class="hl kwb">General</span>, <span class="hl kwb">Specific</span>).
+
+    term_testing <span class="hl kwd">:-</span>
+        <span class="hl kwc">atom</span>(<span class="hl kwb">Atom</span>),
+        <span class="hl kwc">atomic</span>(<span class="hl kwb">Atomic</span>),
+        <span class="hl kwc">integer</span>(<span class="hl kwb">Integer</span>),
+        <span class="hl kwc">float</span>(<span class="hl kwb">Float</span>),
+        <span class="hl kwc">callable</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">compound</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">nonvar</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">var</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">number</span>(<span class="hl kwb">Number</span>),
+        <span class="hl kwc">ground</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">acyclic_term</span>(<span class="hl kwb">Term</span>).
+
+    term_comparison <span class="hl kwd">:-</span>
+        <span class="hl kwc">compare</span>(<span class="hl kwb">Order</span>, <span class="hl kwb">Term1</span>, <span class="hl kwb">Term2</span>),
+        <span class="hl kwb">Term1</span> <span class="hl kwd">==</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwb">Term1</span> <span class="hl kwd">\==</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwb">Term1</span> <span class="hl kwd">&#64;&lt;</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwb">Term1</span> <span class="hl kwd">&#64;=&lt;</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwb">Term1</span> <span class="hl kwd">&#64;&gt;=</span> <span class="hl kwb">Term2</span>,
+        <span class="hl kwb">Term1</span> <span class="hl kwd">&#64;&gt;</span> <span class="hl kwb">Term2</span>.
+
+    term_creation_and_decomposition <span class="hl kwd">:-</span>
+        <span class="hl kwc">functor</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Functor</span>, <span class="hl kwb">Arity</span>),
+        <span class="hl kwc">arg</span>(<span class="hl kwb">N</span>, <span class="hl kwb">Term</span>, <span class="hl kwb">Arg</span>),
+        <span class="hl kwb">Term</span> <span class="hl kwd">=..</span> [<span class="hl kwb">Functor</span>| <span class="hl kwb">Args</span>],
+        <span class="hl kwc">copy_term</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Copy</span>),
+        <span class="hl kwc">numbervars</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Start</span>, <span class="hl kwb">End</span>),
+        <span class="hl kwc">term_variables</span>(<span class="hl kwb">Term</span>, <span class="hl kwb">Variables</span>).
+
+    arithemtic_evaluation <span class="hl kwd">:-</span>
+        <span class="hl kwb">X</span> <span class="hl kwd">is</span> <span class="hl kwb">Expression</span>.
+
+    arithmetic_comparison <span class="hl kwd">:-</span>
+        <span class="hl kwb">Exp1</span> <span class="hl kwd">=:=</span> <span class="hl kwb">Exp2</span>,
+        <span class="hl kwb">Exp1</span> <span class="hl kwd">=\=</span> <span class="hl kwb">Exp2</span>,
+        <span class="hl kwb">Exp1</span> <span class="hl kwd">&lt;</span> <span class="hl kwb">Exp2</span>,
+        <span class="hl kwb">Exp1</span> <span class="hl kwd">=&lt;</span> <span class="hl kwb">Exp2</span>,
+        <span class="hl kwb">Exp1</span> <span class="hl kwd">&gt;</span> <span class="hl kwb">Exp2</span>,
+        <span class="hl kwb">Exp1</span> <span class="hl kwd">&gt;=</span> <span class="hl kwb">Exp2</span>.
+
+    stream_selection_and_control <span class="hl kwd">:-</span>
+        <span class="hl kwc">current_input</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">current_output</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">set_input</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">set_output</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">open</span>(<span class="hl kwb">Source</span>, <span class="hl kwb">Mode</span>, <span class="hl kwb">Stream</span>, <span class="hl kwb">Options</span>),
+        <span class="hl kwc">close</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">flush_output</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">stream_property</span>(<span class="hl kwb">Stream</span>, <span class="hl kwb">Property</span>),
+        <span class="hl kwc">at_end_of_stream</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">set_stream_position</span>(<span class="hl kwb">Stream</span>, <span class="hl kwb">Position</span>),
+        <span class="hl kwc">flush_output</span>,
+        <span class="hl kwc">at_end_of_stream</span>.
+
+    character_input_output <span class="hl kwd">:-</span>
+        <span class="hl kwc">get_char</span>(<span class="hl kwb">Char</span>),
+        <span class="hl kwc">get_code</span>(<span class="hl kwb">Code</span>),
+        <span class="hl kwc">peek_char</span>(<span class="hl kwb">Char</span>),
+        <span class="hl kwc">peek_code</span>(<span class="hl kwb">Code</span>),
+        <span class="hl kwc">put_char</span>(<span class="hl kwb">Char</span>),
+        <span class="hl kwc">put_code</span>(<span class="hl kwb">Code</span>),
+        <span class="hl kwc">nl</span>(<span class="hl kwb">Stream</span>),
+        <span class="hl kwc">nl</span>.
+
+    byte_input_output <span class="hl kwd">:-</span>
+        <span class="hl kwc">get_byte</span>(<span class="hl kwb">Byte</span>),
+        <span class="hl kwc">peek_byte</span>(<span class="hl kwb">Byte</span>),
+        <span class="hl kwc">put_byte</span>(<span class="hl kwb">Byte</span>).
+
+    term_input_output <span class="hl kwd">:-</span>
+        <span class="hl kwc">read</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">read_term</span>(<span class="hl kwb">Stream</span>, <span class="hl kwb">Term</span>, <span class="hl kwb">Options</span>),
+        <span class="hl kwc">write</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">write</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">write_canonical</span>(<span class="hl kwb">Term</span>),
+        <span class="hl kwc">write_term</span>(<span class="hl kwb">Stream</span>, <span class="hl kwb">Term</span>, <span class="hl kwb">Options</span>),
+        <span class="hl kwc">current_op</span>(<span class="hl kwb">Precedence</span>, <span class="hl kwb">Associativity</span>, <span class="hl kwb">Operator</span>),
+        <span class="hl kwc">op</span>(<span class="hl kwb">Precedence</span>, <span class="hl kwb">Associativity</span>, <span class="hl kwb">Operator</span>),
+        <span class="hl kwc">current_char_conversion</span>(<span class="hl kwb">InChar</span>, <span class="hl kwb">OutChar</span>),
+        <span class="hl kwc">char_conversion</span>(<span class="hl kwb">InChar</span>, <span class="hl kwb">OutChar</span>).
+
+    logic_and_control <span class="hl kwd">:-</span>
+        <span class="hl kwd">\+</span> <span class="hl kwb">Goal</span>,
+        <span class="hl kwc">call</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">once</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">ignore</span>(<span class="hl kwb">Goal</span>),
+        <span class="hl kwc">true</span>,
+        <span class="hl kwc">fail</span>,
+        <span class="hl kwc">false</span>,
+        <span class="hl kwc">repeat</span>,
+        <span class="hl kwd">!</span>.
+
+    atomic_term_processing <span class="hl kwd">:-</span>
+        <span class="hl kwc">atom_length</span>(<span class="hl kwb">Atom</span>, <span class="hl kwb">Length</span>),
+        <span class="hl kwc">atom_chars</span>(<span class="hl kwb">Atom</span>, <span class="hl kwb">Chars</span>),
+        <span class="hl kwc">atom_codes</span>(<span class="hl kwb">Atom</span>, <span class="hl kwb">Codes</span>),
+        <span class="hl kwc">atom_concat</span>(<span class="hl kwb">Atom1</span>, <span class="hl kwb">Atom2</span>, <span class="hl kwb">Atom</span>),
+        <span class="hl kwc">sub_atom</span>(<span class="hl kwb">Atom</span>, <span class="hl kwb">Before</span>, <span class="hl kwb">Length</span>, <span class="hl kwb">After</span>, <span class="hl kwb">SubAtom</span>),
+        <span class="hl kwc">char_code</span>(<span class="hl kwb">Char</span>, <span class="hl kwb">Code</span>),
+        <span class="hl kwc">number_chars</span>(<span class="hl kwb">Number</span>, <span class="hl kwb">Chars</span>),
+        <span class="hl kwc">number_codes</span>(<span class="hl kwb">Number</span>, <span class="hl kwb">Codes</span>).
+
+    implementation_defined_hooks <span class="hl kwd">:-</span>
+        <span class="hl kwc">current_prolog_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>),
+        <span class="hl kwc">set_prolog_flag</span>(<span class="hl kwb">Flag</span>, <span class="hl kwb">Value</span>),
+        <span class="hl kwc">halt</span>(<span class="hl kwb">ExitCode</span>),
+        <span class="hl kwc">halt</span>.
+
+    sorting <span class="hl kwd">:-</span>
+        <span class="hl kwc">keysort</span>(<span class="hl kwb">List</span>, <span class="hl kwb">Sorted</span>),
+        <span class="hl kwc">sort</span>(<span class="hl kwb">List</span>, <span class="hl kwb">Sorted</span>).
+
+    <span class="hl kwc">number</span>(<span class="hl kwb">C</span>) <span class="hl kwd">--&gt;</span> <span class="hl str">&quot;+&quot;</span>, <span class="hl kwc">number</span>(<span class="hl kwb">C</span>).
+    <span class="hl kwc">number</span>(<span class="hl kwb">C</span>) <span class="hl kwd">--&gt;</span> <span class="hl str">&quot;-&quot;</span>, <span class="hl kwc">number</span>(<span class="hl kwb">X</span>), <span class="hl kwd">{</span><span class="hl kwb">C</span> <span class="hl kwd">is</span> -<span class="hl kwb">X</span><span class="hl kwd">}</span>.
+    <span class="hl kwc">number</span>(<span class="hl kwb">X</span>) <span class="hl kwd">--&gt;</span> [<span class="hl kwb">C</span>], <span class="hl kwd">{</span><span class="hl kwe">0&apos;0</span> <span class="hl kwd">=&lt;</span> <span class="hl kwb">C</span>, <span class="hl kwb">C</span> <span class="hl kwd">=&lt;</span> <span class="hl kwe">0&apos;9</span>, <span class="hl kwb">X</span> <span class="hl kwd">is</span> <span class="hl kwb">C</span> - <span class="hl kwe">0&apos;0</span><span class="hl kwd">}</span>.
+
+    escape_sequences <span class="hl kwd">:-</span>
+        <span class="hl kwc">write</span>(<span class="hl str">&apos;Quoted atom with a quote (&apos;</span><span class="hl str">&apos;) inside.&apos;</span>),
+        <span class="hl kwc">write</span>(<span class="hl str">&apos;Quoted atom with a backslash (\\) inside.&apos;</span>),
+        <span class="hl kwc">write</span>(<span class="hl str">&apos;Quoted atom with control escape sequences: \a \b \r \f \t \n \v&apos;</span>),
+        <span class="hl kwc">write</span>(<span class="hl str">&apos;Quoted atom with an octal escape sequence: \123\.&apos;</span>),
+        <span class="hl kwc">write</span>(<span class="hl str">&apos;Quoted atom with an hexadecimal escape sequence: \x123f\.&apos;</span>).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">end_object</span>.
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">object</span>(class,
+    <span class="hl kwa">implements</span>(protected<span class="hl kwd">::</span>protocol),
+    <span class="hl kwa">imports</span>(private<span class="hl kwd">::</span>category),
+    <span class="hl kwa">instantiates</span>(metaclass),
+    <span class="hl kwa">specializes</span>(superclass)).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">end_object</span>.
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">object</span>(parametric(<span class="hl kwb">Parameter</span>, <span class="hl str">&quot;String&quot;</span>, 33.78),
+    <span class="hl kwa">implements</span>(protocol),
+    <span class="hl kwa">imports</span>(category),
+    <span class="hl kwa">extends</span>(parent(<span class="hl kwb">Parameter</span>))).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">end_object</span>.
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">category</span>(category,
+    <span class="hl kwa">implements</span>(protocol),
+    <span class="hl kwa">extends</span>(other_category)).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">end_category</span>.
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">protocol</span>(extended,
+    <span class="hl kwa">extends</span>(minimal)).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">end_protocol</span>.
+
+
+<span class="hl kwd">:-</span> <span class="hl kwa">module</span>(module, [foo/1, bar/2]).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">use_module</span>(library).
+<span class="hl kwd">:-</span> <span class="hl kwa">use_module</span>(library, [baz/3]).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">reexport</span>(library).
+<span class="hl kwd">:-</span> <span class="hl kwa">reexport</span>(library, [qux/4]).
+
+<span class="hl kwd">:-</span> <span class="hl kwa">export</span>(quux/5).
+</pre>
+</body>
+</html>
+<!--HTML generated by highlight 3.40, http://www.andre-simon.de/-->
