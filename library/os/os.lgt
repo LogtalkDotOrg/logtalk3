@@ -49,9 +49,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:76:0,
+		version is 1:76:1,
 		author is 'Paulo Moura',
-		date is 2021-05-04,
+		date is 2021-05-06,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1916,7 +1916,7 @@
 			(	{path_canonical(PathCharsExpanded, ExpandedPathChars)} ->
 				true
 			;	PathCharsExpanded = ['/'| _] ->
-				true
+				ExpandedPathChars = PathCharsExpanded
 			;	{working_directory(Current, Current)},
 				{append(Current, ['/'| PathCharsExpanded], ExpandedPathChars)}
 			).

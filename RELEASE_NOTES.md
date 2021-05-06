@@ -25,6 +25,10 @@ RELEASE NOTES
 3.47.0 - June ??, 2021
 ======================
 
+Library
+-------
+
+* FIXED: Path expansion in the `os` library for Scryer Prolog.
 
 
 3.46.0 - May 4, 2021
