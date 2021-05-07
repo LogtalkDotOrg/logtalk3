@@ -28,6 +28,8 @@ RELEASE NOTES
 Library
 -------
 
+* ADDED: Definition for the `os::date_time/7` predicate for Scryer Prolog.
+
 * FIXED: Path expansion in the `os` library for Scryer Prolog.
 
 

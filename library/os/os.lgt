@@ -49,7 +49,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:76:1,
+		version is 1:77:0,
 		author is 'Paulo Moura',
 		date is 2021-05-06,
 		comment is 'Portable operating-system access predicates.',
@@ -2005,7 +2005,16 @@
 		time_stamp(Time) :-
 			{current_time(Time)}.
 
-		date_time(0, 0, 0, 0, 0, 0, 0).
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+			{
+				current_time(Time),
+				memberchk('Y'=YearChars,    Time), number_chars(Year, YearChars),
+				memberchk('m'=MonthChars,   Time), number_chars(Month, MonthChars),
+				memberchk('d'=DayChars,     Time), number_chars(Day, DayChars),
+				memberchk('H'=HoursChars,   Time), number_chars(Hours, HoursChars),
+				memberchk('M'=MinutesChars, Time), number_chars(Minutes, MinutesChars),
+				memberchk('S'=SecondsChars, Time), number_chars(Seconds, SecondsChars)
+			}.
 
 		cpu_time(0.0).
 
