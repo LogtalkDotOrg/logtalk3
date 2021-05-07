@@ -32,6 +32,12 @@ Library
 
 * FIXED: Path expansion in the `os` library for Scryer Prolog.
 
+Tests
+-----
+
+* ADDED: Additional Unicode support tests to check that the `stream_property/2`
+predicate doesn't return `bom/1` or `encoding/1` properties for binary streams.
+
 
 3.46.0 - May 4, 2021
 ====================

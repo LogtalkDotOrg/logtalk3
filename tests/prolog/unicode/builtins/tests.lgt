@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-04-29,
+		date is 2021-05-07,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -523,6 +523,38 @@
 		stream_property(Input, encoding(Encoding)),
 		 stream_property(Input, bom(BOM)),
 		close(Input).
+
+	% binary streams should not have bom/1 or encoding/1 properties
+
+	test(lgt_unicode_stream_property_2_07, true) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, write, Stream, [type(binary)]),
+		\+ stream_property(Stream, encoding(_)).
+
+	test(lgt_unicode_stream_property_2_08, true) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, write, Stream, [type(binary)]),
+		\+ stream_property(Stream, bom(_)).
+
+	test(lgt_unicode_stream_property_2_09, true) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, append, Stream, [type(binary)]),
+		\+ stream_property(Stream, encoding(_)).
+
+	test(lgt_unicode_stream_property_2_10, true) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, append, Stream, [type(binary)]),
+		\+ stream_property(Stream, bom(_)).
+
+	test(lgt_unicode_stream_property_2_11, true) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, read, Stream, [type(binary)]),
+		\+ stream_property(Stream, encoding(_)).
+
+	test(lgt_unicode_stream_property_2_12, true) :-
+		file_path(sample_utf_8_bom, Path),
+		open(Path, read, Stream, [type(binary)]),
+		\+ stream_property(Stream, bom(_)).
 
 	% sub_atom/5 tests
 
