@@ -35,7 +35,8 @@ Library
 Tools
 -----
 
-* UPDATED: The `code_metrics` tool tests to use assertions.
+* UPDATED: The `dead_code_scanner` and `code_metrics` tools tests to use
+assertions.
 
 Tests
 -----

@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2018-02-18,
+		date is 2021-05-08,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -45,151 +45,151 @@
 
 	test(dcs_stand_alone_category_01, deterministic) :-
 		predicates(stand_alone_category, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_stand_alone_category_02, deterministic) :-
 		setof(Predicate, predicate(stand_alone_category, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_category_01, deterministic) :-
 		predicates(category, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_category_02, deterministic) :-
 		setof(Predicate, predicate(category, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	% prototype tests
 
 	test(dcs_stand_alone_prototype_01, deterministic) :-
 		predicates(stand_alone_prototype, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_stand_alone_prototype_02, deterministic) :-
 		setof(Predicate, predicate(stand_alone_prototype, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_prototype_01, deterministic) :-
 		predicates(prototype, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_prototype_02, deterministic) :-
 		setof(Predicate, predicate(prototype, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	% class and instance tests
 
 	test(dcs_stand_alone_class_01, deterministic) :-
 		predicates(stand_alone_class, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_stand_alone_class_02, deterministic) :-
 		setof(Predicate, predicate(stand_alone_class, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_class_01, deterministic) :-
 		predicates(class, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_class_02, deterministic) :-
 		setof(Predicate, predicate(class, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_subclass_with_metaclass_01, deterministic) :-
 		predicates(subclass_with_metaclass, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_subclass_with_metaclass_02, deterministic) :-
 		setof(Predicate, predicate(subclass_with_metaclass, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_subclass_01, deterministic) :-
 		predicates(subclass, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_subclass_02, deterministic) :-
 		setof(Predicate, predicate(subclass, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_instance_01, deterministic) :-
 		predicates(instance, Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	test(dcs_instance_02, deterministic) :-
 		setof(Predicate, predicate(instance, Predicate), Predicates),
-		Predicates == [
+		^^assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
-		].
+		]).
 
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic
