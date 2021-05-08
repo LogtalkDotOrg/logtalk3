@@ -46,9 +46,9 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-10-22,
+		date is 2021-05-09,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -90,5 +90,11 @@ p :-
 
 	test(lgt_catch_3_11, fail) :-
 		{catch(fail, _, true)}.
+
+	test(lgt_catch_3_12, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{catch(true, _, write(S, demoen))},
+		^^text_output_assertion('', Assertion).
 
 :- end_object.
