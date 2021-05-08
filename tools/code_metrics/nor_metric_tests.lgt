@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:1,
+		version is 0:3:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2020-04-13,
+		date is 2021-05-08,
 		comment is 'Unit tests for the entity number of rules metric.'
 	]).
 
@@ -36,72 +36,55 @@
 
 	:- uses(nor_metric, [entity_score/2]).
 
-	test(nor_cat_a) :-
-		entity_score(cat_a, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_cat_a, true(Score == number_of_rules(0, 0))) :-
+		entity_score(cat_a, Score).
 
-	test(nor_cat_b) :-
-		entity_score(cat_b, Score),
-		Score == number_of_rules(1, 1).
+	test(nor_cat_b, true(Score == number_of_rules(1, 1))) :-
+		entity_score(cat_b, Score).
 
-	test(nor_cat_c) :-
-		entity_score(cat_c, Score),
-		Score == number_of_rules(1, 1).
+	test(nor_cat_c, true(Score == number_of_rules(1, 1))) :-
+		entity_score(cat_c, Score).
 
-	test(nor_cat_d) :-
-		entity_score(cat_d, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_cat_d, true(Score == number_of_rules(0, 0))) :-
+		entity_score(cat_d, Score).
 
-	test(nor_obj_e_wrong_clause) :-
-		entity_score(obj_e, Score),
-		Score \== number_of_rules(2, 2).
+	test(nor_obj_e_wrong_clause, true(Score \== number_of_rules(2, 2))) :-
+		entity_score(obj_e, Score).
 
-	test(nor_obj_e) :-
-		entity_score(obj_e, Score),
-		Score == number_of_rules(1, 1).
+	test(nor_obj_e, true(Score == number_of_rules(1, 1))) :-
+		entity_score(obj_e, Score).
 
-	test(nor_obj_d) :-
-		entity_score(obj_d, Score),
-		Score == number_of_rules(2, 2).
+	test(nor_obj_d, true(Score == number_of_rules(2, 2))) :-
+		entity_score(obj_d, Score).
 
-	test(nor_obj_a) :-
-		entity_score(obj_a, Score),
-		Score == number_of_rules(3, 3).
+	test(nor_obj_a, true(Score == number_of_rules(3, 3))) :-
+		entity_score(obj_a, Score).
 
-	test(nor_obj_b) :-
-		entity_score(obj_b, Score),
-		Score == number_of_rules(1, 1).
+	test(nor_obj_b, true(Score == number_of_rules(1, 1))) :-
+		entity_score(obj_b, Score).
 
-	test(nor_obj_c) :-
-		entity_score(obj_c, Score),
-		Score == number_of_rules(1, 1).
+	test(nor_obj_c, true(Score == number_of_rules(1, 1))) :-
+		entity_score(obj_c, Score).
 
-	test(nor_prot_a) :-
-		entity_score(prot_a, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_prot_a, true(Score == number_of_rules(0, 0))) :-
+		entity_score(prot_a, Score).
 
-	test(nor_prot_b) :-
-		entity_score(prot_b, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_prot_b, true(Score == number_of_rules(0, 0))) :-
+		entity_score(prot_b, Score).
 
-	test(nor_car) :-
-		entity_score(car, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_car, true(Score == number_of_rules(0, 0))) :-
+		entity_score(car, Score).
 
-	test(nor_vehicle) :-
-		entity_score(vehicle, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_vehicle, true(Score == number_of_rules(0, 0))) :-
+		entity_score(vehicle, Score).
 
-	test(nor_meta_vehicle) :-
-		entity_score(meta_vehicle, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_meta_vehicle, true(Score == number_of_rules(0, 0))) :-
+		entity_score(meta_vehicle, Score).
 
-	test(nor_herring) :-
-		entity_score(herring, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_herring, true(Score == number_of_rules(0, 0))) :-
+		entity_score(herring, Score).
 
-	test(nor_bird) :-
-		entity_score(bird, Score),
-		Score == number_of_rules(0, 0).
+	test(nor_bird, true(Score == number_of_rules(0, 0))) :-
+		entity_score(bird, Score).
 
 :- end_object.

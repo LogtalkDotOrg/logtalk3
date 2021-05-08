@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:1,
+		version is 0:12:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2020-04-13,
+		date is 2021-05-08,
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
@@ -36,72 +36,55 @@
 
 	:- uses(noc_metric, [entity_score/2]).
 
-	test(noc_cat_a) :-
-		entity_score(cat_a, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_cat_a, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(cat_a, Score).
 
-	test(noc_cat_b) :-
-		entity_score(cat_b, Score),
-		Score == number_of_clauses(1, 1).
+	test(noc_cat_b, true(Score == number_of_clauses(1, 1))) :-
+		entity_score(cat_b, Score).
 
-	test(noc_cat_c) :-
-		entity_score(cat_c, Score),
-		Score == number_of_clauses(1, 1).
+	test(noc_cat_c, true(Score == number_of_clauses(1, 1))) :-
+		entity_score(cat_c, Score).
 
-	test(noc_cat_d) :-
-		entity_score(cat_d, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_cat_d, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(cat_d, Score).
 
-	test(noc_obj_e_wrong_clause) :-
-		entity_score(obj_e, Score),
-		Score \== number_of_clauses(2, 2).
+	test(noc_obj_e_wrong_clause, true(Score \== number_of_clauses(2, 2))) :-
+		entity_score(obj_e, Score).
 
-	test(noc_obj_e) :-
-		entity_score(obj_e, Score),
-		Score == number_of_clauses(1, 1).
+	test(noc_obj_e, true(Score == number_of_clauses(1, 1))) :-
+		entity_score(obj_e, Score).
 
-	test(noc_obj_d) :-
-		entity_score(obj_d, Score),
-		Score == number_of_clauses(2, 2).
+	test(noc_obj_d, true(Score == number_of_clauses(2, 2))) :-
+		entity_score(obj_d, Score).
 
-	test(noc_obj_a) :-
-		entity_score(obj_a, Score),
-		Score == number_of_clauses(4, 4).
+	test(noc_obj_a, true(Score == number_of_clauses(4, 4))) :-
+		entity_score(obj_a, Score).
 
-	test(noc_obj_b) :-
-		entity_score(obj_b, Score),
-		Score == number_of_clauses(1, 1).
+	test(noc_obj_b, true(Score == number_of_clauses(1, 1))) :-
+		entity_score(obj_b, Score).
 
-	test(noc_obj_c) :-
-		entity_score(obj_c, Score),
-		Score == number_of_clauses(1, 1).
+	test(noc_obj_c, true(Score == number_of_clauses(1, 1))) :-
+		entity_score(obj_c, Score).
 
-	test(noc_prot_a) :-
-		entity_score(prot_a, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_prot_a, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(prot_a, Score).
 
-	test(noc_prot_b) :-
-		entity_score(prot_b, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_prot_b, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(prot_b, Score).
 
-	test(noc_car) :-
-		entity_score(car, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_car, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(car, Score).
 
-	test(noc_vehicle) :-
-		entity_score(vehicle, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_vehicle, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(vehicle, Score).
 
-	test(noc_meta_vehicle) :-
-		entity_score(meta_vehicle, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_meta_vehicle, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(meta_vehicle, Score).
 
-	test(noc_herring) :-
-		entity_score(herring, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_herring, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(herring, Score).
 
-	test(noc_bird) :-
-		entity_score(bird, Score),
-		Score == number_of_clauses(0, 0).
+	test(noc_bird, true(Score == number_of_clauses(0, 0))) :-
+		entity_score(bird, Score).
 
 :- end_object.

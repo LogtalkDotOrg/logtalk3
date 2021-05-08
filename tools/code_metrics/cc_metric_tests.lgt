@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:1,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2020-04-13,
+		date is 2021-05-08,
 		comment is 'Unit tests for the cyclomatic complexity metric.'
 	]).
 
@@ -36,8 +36,7 @@
 
 	:- uses(cc_metric, [entity_score/2]).
 
-	test(cc_metric_01) :-
-		entity_score(expert_system, Score),
-		Score == 2.
+	test(cc_metric_01, true(Score == 2)) :-
+		entity_score(expert_system, Score).
 
 :- end_object.

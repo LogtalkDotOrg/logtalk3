@@ -32,6 +32,11 @@ Library
 
 * FIXED: Path expansion in the `os` library for Scryer Prolog.
 
+Tools
+-----
+
+* UPDATED: The `code_metrics` tool tests to use assertions.
+
 Tests
 -----
 

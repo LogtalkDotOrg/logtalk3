@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:1,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2020-04-13,
+		date is 2021-05-08,
 		comment is 'Unit tests for the Halstead complexity metric.'
 	]).
 
@@ -53,17 +53,15 @@
 
 	% metric math tests
 
-	test(halstead_h_ptc) :-
-		entity_score(h_ptc, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
-		Pn == 2, PAn == 3,
-		Cn == 0, CAn == 0.
+	test(halstead_h_ptc, true(v(Pn,PAn,Cn,CAn) == v(2,3,0,0))) :-
+		entity_score(h_ptc, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)).
 
-	test(halstead_h_ctg) :-
+	test(halstead_h_ctg, true(v(Pn,PAn,Cn,CAn) == v(2,2,5,5))) :-
 		entity_score(h_ctg, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
 		Pn == 2, PAn == 2,
 		Cn == 5, CAn == 5.
 
-	test(halstead_h_obj) :-
+	test(halstead_h_obj, true(v(Pn,PAn,Cn,CAn) == v(4,4,4,4))) :-
 		entity_score(h_obj, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,_,_,_,_,_,_,_)),
 		Pn == 4, PAn == 4,
 		Cn == 4, CAn == 4.
