@@ -38,6 +38,9 @@ Tools
 * UPDATED: The `dead_code_scanner` and `code_metrics` tools tests to use
 assertions.
 
+* UPDATED: The `lgtunit` tool to also use the de facto standard `epsilon/0`
+arithmetic constant with Scryer Prolog.
+
 Tests
 -----
 

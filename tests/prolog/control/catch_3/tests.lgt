@@ -97,4 +97,9 @@ p :-
 		{catch(true, _, write(S, demoen))},
 		^^text_output_assertion('', Assertion).
 
+test(lgt_catch_3_13, true(Assertion)) :-
+^^set_text_output(''),
+current_output(S),
+{catch(true, _, write(S, demoen)), throw(bla)},
+^^text_output_assertion('', Assertion).
 :- end_object.
