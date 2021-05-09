@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-09-18,
+		date is 2021-05-09,
 		comment is 'Unit tests for the set_logtalk_flag/2 built-in directive.'
 	]).
 
@@ -38,32 +38,30 @@
 	:- set_logtalk_flag(complements, allow).
 	:- set_logtalk_flag(context_switching_calls, deny).
 
-	test(set_logtalk_flag_2_01) :-
+	test(set_logtalk_flag_2_01, true) :-
 		this(This),
 		object_property(This, complements).
 
-	test(set_logtalk_flag_2_02) :-
+	test(set_logtalk_flag_2_02, false) :-
 		this(This),
-		\+ object_property(This, context_switching_calls).
+		object_property(This, context_switching_calls).
 
-	test(set_logtalk_flag_2_03) :-
-		bottom::p(X),
-		X == top.
+	test(set_logtalk_flag_2_03, true(X == top)) :-
+		bottom::p(X).
 
-	test(set_logtalk_flag_2_04) :-
+	test(set_logtalk_flag_2_04, true(X == patch)) :-
 		logtalk_load(patch),
-		bottom::p(X),
-		X == patch.
+		bottom::p(X).
 
 	% tests for the "optimize" flag
 
-	test(set_logtalk_flag_2_05) :-
+	test(set_logtalk_flag_2_05, true) :-
 		optimize_off::p.
 
-	test(set_logtalk_flag_2_06) :-
+	test(set_logtalk_flag_2_06, true) :-
 		optimize_on_1::p.
 
-	test(set_logtalk_flag_2_07) :-
+	test(set_logtalk_flag_2_07, true) :-
 		optimize_on_2::p.
 
 :- end_object.

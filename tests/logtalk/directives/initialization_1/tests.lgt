@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-08-23,
+		date is 2021-05-09,
 		comment is 'Unit tests for the initialization/1 built-in directive.'
 	]).
 
@@ -40,24 +40,28 @@
 	:- initialization(assertz(foo(2))).
 	:- initialization(assertz(foo(3))).
 
-	% verify that the dynamic foo/1 predicate declaration is created
-	test(initialization_1_01) :-
-		current_predicate(foo/1),
-		predicate_property(foo(_), private),
+	% verify that the foo/1 predicate is known
+	test(initialization_1_01, true) :-
+		current_predicate(foo/1).
+
+	% verify that the foo/1 predicate is declared private
+	test(initialization_1_02, true) :-
+		predicate_property(foo(_), private).
+
+	% verify that the foo/1 predicate is declared dynamic
+	test(initialization_1_03, true) :-
 		predicate_property(foo(_), (dynamic)).
 
 	% verify initialization/1 directives goal execution order
-	test(initialization_1_02) :-
-		findall(X, foo(X), L),
-		L == [1, 2, 3].
+	test(initialization_1_04, true(L == [1, 2, 3])) :-
+		findall(X, foo(X), L).
 
 	% test multiple initialization/1 directives in dynamically created objects
-	test(initialization_1_03) :-
+	test(initialization_1_05, true(L == [1, 2, 3])) :-
 		create_object(Object, [], [
 			public(o/1), dynamic(o/1),
 			initialization(assertz(o(1))), initialization(assertz(o(2))), initialization(assertz(o(3)))
 		], []),
-		findall(N, Object::o(N), L),
-		L == [1, 2, 3].
+		findall(N, Object::o(N), L).
 
 :- end_object.
