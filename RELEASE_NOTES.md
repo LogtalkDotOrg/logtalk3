@@ -25,6 +25,11 @@ RELEASE NOTES
 3.47.0 - June ??, 2021
 ======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* IMPROVED: Scryer Prolog definition of the `scratch_directory` flag.
+
 Library
 -------
 

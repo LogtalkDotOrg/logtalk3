@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 4, 2021
+%  Last updated on May 10, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -277,7 +277,13 @@
 '$lgt_default_flag'(events, deny).
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
-'$lgt_default_flag'(scratch_directory, './lgt_tmp/').
+'$lgt_default_flag'(scratch_directory, ScratchDirectory) :-
+	(	getenv("COMSPEC", _) ->
+		% Windows systems define this environment variable...
+		ScratchDirectory = './lgt_tmp/'
+	;	% ... but not POSIX systems
+		ScratchDirectory = './.lgt_tmp/'
+	).
 '$lgt_default_flag'(report, on).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
