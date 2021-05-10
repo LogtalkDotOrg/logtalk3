@@ -47,6 +47,8 @@ Tests
 * ADDED: Additional test for the Prolog `catch/3` control construct after a
 suggestion by Andrew Davison.
 
+* ADDED: Additional test for the Prolog `char_code/2` built-in predicate.
+
 * ADDED: Additional Unicode support tests to check that the `stream_property/2`
 predicate doesn't return `bom/1` or `encoding/1` properties for binary streams.
 

@@ -23,25 +23,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-29,
+		date is 2021-05-10,
 		comment is 'Unit tests for the ISO Prolog standard char_code/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.6.4
 
-	succeeds(iso_char_code_2_01) :-
-		{char_code(a, Code)},
-		Code == 0'a.
+	test(iso_char_code_2_01, true(Code == 0'a)) :-
+		{char_code(a, Code)}.
 
-	succeeds(iso_char_code_2_02) :-
-		{char_code(Char, 99), atom_codes(Atom, [99])},
-		Char == Atom.
+	test(iso_char_code_2_02, true(Char == Atom)) :-
+		{char_code(Char, 99), atom_codes(Atom, [99])}.
 
-	succeeds(iso_char_code_2_03) :-
-		{char_code(Char, 0'c)},
-		Char == c.
+	test(iso_char_code_2_03, true(Char == c)) :-
+		{char_code(Char, 0'c)}.
 
 	succeeds(iso_char_code_2_04) :-
 		% the ISO standard also allows a representation_error(character_code)
@@ -51,26 +48,29 @@
 		;	subsumes_term(error(representation_error(character_code),_), Error)
 		).
 
-	succeeds(iso_char_code_2_05) :-
+	test(iso_char_code_2_05, true) :-
 		{char_code(b, 0'b)}.
 
-	throws(iso_char_code_2_06, error(type_error(character,'ab'),_)) :-
+	test(iso_char_code_2_06, error(type_error(character,'ab'))) :-
 		{char_code('ab', _Code)}.
 
-	throws(iso_char_code_2_07, error(instantiation_error,_)) :-
+	test(iso_char_code_2_07, error(instantiation_error)) :-
 		{char_code(_Char, _Code)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_char_code_2_08, error(type_error(integer,x),_)) :-
+	test(eddbali_char_code_2_08, error(type_error(integer,x))) :-
 		{char_code(a, x)}.
 
-	throws(eddbali_char_code_2_09, error(representation_error(character_code),_)) :-
+	test(eddbali_char_code_2_09, error(representation_error(character_code))) :-
 		{char_code(_Char, -2)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_char_code_2_10) :-
-		catch({char_code(_, 0)}, Error, Error = error(representation_error(character_code),_)).
+	test(lgt_char_code_2_10, true) :-
+		catch({char_code(_, 0)}, error(Error, _), Error == representation_error(character_code)).
+
+	test(lgt_char_code_2_11, error(type_error(character,42))) :-
+		{char_code(42, _Code)}.
 
 :- end_object.
