@@ -68,15 +68,17 @@ is required if the file encoding is different from the default encoding, and
 a BOM at the beginning of the stream is to be interpreted as a ZERO WIDTH
 NON-BREAKING SPACE (ZWNBSP).
 
-The `bom/1` option is ignored when not using a Unicode encoding.
+The `bom/1` option is ignored when not using a Unicode encoding. The `bom/1`
+and `encoding/1` options are ignored when a `type(binary)` option is present.
 
 4. The `open/3` predicate (for text files) always perform BOM detection on mode
 `read` and uses the corresponding encoding if a BOM is found. Otherwise the
 default encoding is used (which can be queried using the `encoding` flag).
-In `write` mode, a BOM is written if the encoding is `UTF-16` or `UTF-32` but
-not if the encoding is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`, or
-`UTF-32LE`. If the encoding is `UTF-16` or `UTF-32`, the data is written
-big-endian.
+In `write` mode, a BOM is written if the default encoding is `UTF-16` or
+`UTF-32` but not if the encoding is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`,
+or `UTF-32LE`. If the encoding is `UTF-16` or `UTF-32`, the data is written
+big-endian. In `append` mode, no BOM is written and the default encoding is
+used.
 
 5. Two new stream properties, `encoding(Atom)` and `bom(Boolean)`, set from
 the `open/3-4` calls and the default values as described above, that can be
