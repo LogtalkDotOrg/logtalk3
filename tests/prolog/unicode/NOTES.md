@@ -32,8 +32,8 @@ minimal language features:
 
 1. An `encoding` Prolog flag, allowing applications to query the default
 encoding for opening streams. When the Prolog systems supports multiple
-encodings, the default encoding can be changed by setting this directive
-to a supported encoding.
+encodings, the default encoding can be changed by setting this flag to a
+supported encoding.
 
 2. Encodings are represented by atoms after the names specified by the
 Internet Assigned Numbers Authority (IANA) and marked as the "(preferred

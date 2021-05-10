@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:10:1,
 		author is 'Paulo Moura',
-		date is 2021-05-07,
+		date is 2021-05-10,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -466,7 +466,7 @@
 	% if the flag is not read-only, setting its value to its current value must succeed
 	test(lgt_unicode_set_prolog_flag_2_01, true) :-
 		current_prolog_flag(encoding, Encoding),
-		 catch(set_prolog_flag(encoding, Encoding), _, true).
+		catch(set_prolog_flag(encoding, Encoding), _, true).
 
 	% set_stream_position/2
 
