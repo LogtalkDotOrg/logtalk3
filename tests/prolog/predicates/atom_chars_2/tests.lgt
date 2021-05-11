@@ -23,95 +23,80 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-21,
+		date is 2021-05-11,
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.4.4
 
-	succeeds(iso_atom_chars_2_01) :-
-		{atom_chars('', L)},
-		L == [].
+	test(iso_atom_chars_2_01, true(L == [])) :-
+		{atom_chars('', L)}.
 
-	succeeds(iso_atom_chars_2_02) :-
-		{atom_chars([], L)},
-		L == ['[',']'].
+	test(iso_atom_chars_2_02, true(L == ['[',']'])) :-
+		{atom_chars([], L)}.
 
-	succeeds(iso_atom_chars_2_03) :-
-		{atom_chars('''', L)},
-		L == [''''].
+	test(iso_atom_chars_2_03, true(L == [''''])) :-
+		{atom_chars('''', L)}.
 
-	succeeds(iso_atom_chars_2_04) :-
-		{atom_chars('ant', L)},
-		L == ['a','n','t'].
+	test(iso_atom_chars_2_04, true(L == ['a','n','t'])) :-
+		{atom_chars('ant', L)}.
 
-	succeeds(iso_atom_chars_2_05) :-
-		{atom_chars(Str, ['s','o','p'])},
-		Str == 'sop'.
+	test(iso_atom_chars_2_05, true(Str == 'sop')) :-
+		{atom_chars(Str, ['s','o','p'])}.
 
-	succeeds(iso_atom_chars_2_06) :-
-		{atom_chars('North', ['N'| X])},
-		X == ['o','r','t','h'].
+	test(iso_atom_chars_2_06, true(X == ['o','r','t','h'])) :-
+		{atom_chars('North', ['N'| X])}.
 
-	fails(iso_atom_chars_2_07) :-
+	test(iso_atom_chars_2_07, false) :-
 		{atom_chars('soap', ['s','o','p'])}.
 
-	throws(iso_atom_chars_2_08, error(instantiation_error,_)) :-
+	test(iso_atom_chars_2_08, error(instantiation_error)) :-
 		{atom_chars(_X, _Y)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_atom_chars_2_09, error(instantiation_error,_)) :-
+	test(eddbali_atom_chars_2_09, error(instantiation_error)) :-
 		{atom_chars(_A, [a,_E,c])}.
 
-	throws(eddbali_atom_chars_2_10, error(instantiation_error,_)) :-
+	test(eddbali_atom_chars_2_10, error(instantiation_error)) :-
 		{atom_chars(_A, [a,b|_L])}.
 
-	throws(eddbali_atom_chars_2_11, error(type_error(atom,f(a)),_)) :-
+	test(eddbali_atom_chars_2_11, error(type_error(atom,f(a)))) :-
 		{atom_chars(f(a), _L)}.
 
-	throws(eddbali_atom_chars_2_12, error(type_error(list,iso),_)) :-
+	test(eddbali_atom_chars_2_12, error(type_error(list,iso))) :-
 		{atom_chars(_A, iso)}.
 
-	throws(eddbali_atom_chars_2_13, error(type_error(character,f(b)),_)) :-
+	test(eddbali_atom_chars_2_13, error(type_error(character,f(b)))) :-
 		{atom_chars(_A, [a,f(b)])}.
 
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- succeeds(sics_atom_chars_2_14) :-
-		{atom_chars('Pécs', L)},
-		L == ['P','é','c','s'].
+	- test(sics_atom_chars_2_14, true(L == ['P','é','c','s'])) :-
+		{atom_chars('Pécs', L)}.
 
-	- succeeds(sics_atom_chars_2_15) :-
-		{atom_chars(A, ['P','é','c','s'])},
-		A == 'Pécs'.
+	- test(sics_atom_chars_2_15, true(A == 'Pécs')) :-
+		{atom_chars(A, ['P','é','c','s'])}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_atom_chars_2_16, error(type_error(character,1),_)) :-
+	test(lgt_atom_chars_2_16, error(type_error(character,1))) :-
 		{atom_chars(abc, [1,2,3])}.
 
-	succeeds(lgt_atom_chars_2_17) :-
-		{atom_chars('', Chars)},
-		Chars == [].
+	test(lgt_atom_chars_2_17, true(Chars == [])) :-
+		{atom_chars('', Chars)}.
 
-	succeeds(lgt_atom_chars_2_18) :-
-		{atom_chars(Atom, [])},
-		Atom == ''.
+	test(lgt_atom_chars_2_18, true(Atom == '')) :-
+		{atom_chars(Atom, [])}.
 
-	succeeds(lgt_atom_chars_2_19) :-
+	test(lgt_atom_chars_2_19, true) :-
 		{atom_chars('', [])}.
 
-	succeeds(lgt_atom_chars_2_20) :-
-		{atom_chars('ABC', [A,B,C])},
-		A == 'A', B == 'B', C == 'C'.
+	test(lgt_atom_chars_2_20, true(v(A,B,C) == v('A','B','C'))) :-
+		{atom_chars('ABC', [A,B,C])}.
 
 :- end_object.

@@ -23,78 +23,65 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-21,
+		date is 2021-05-11,
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.5.4
 
-	succeeds(iso_atom_codes_2_01) :-
-		{atom_codes('', L)},
-		L == [].
+	test(iso_atom_codes_2_01, true(L == [])) :-
+		{atom_codes('', L)}.
 
-	succeeds(iso_atom_codes_2_02) :-
-		{atom_codes([], L)},
-		L == [0'[, 0']].
+	test(iso_atom_codes_2_02, true(L == [0'[, 0']])) :-
+		{atom_codes([], L)}.
 
-	succeeds(iso_atom_codes_2_03) :-
-		{atom_codes('''', L)},
-		L == [39].
+	test(iso_atom_codes_2_03, true(L == [39])) :-
+		{atom_codes('''', L)}.
 
-	succeeds(iso_atom_codes_2_04) :-
-		{atom_codes('ant', L)},
-		L == [0'a, 0'n, 0't].
+	test(iso_atom_codes_2_04, true(L == [0'a, 0'n, 0't])) :-
+		{atom_codes('ant', L)}.
 
-	succeeds(iso_atom_codes_2_05) :-
-		{atom_codes(Str, [0's,0'o,0'p])},
-		Str == 'sop'.
+	test(iso_atom_codes_2_05, true(Str == 'sop')) :-
+		{atom_codes(Str, [0's,0'o,0'p])}.
 
-	succeeds(iso_atom_codes_2_06) :-
-		{atom_codes('North', [0'N| X])},
-		X == [0'o,0'r,0't,0'h].
+	test(iso_atom_codes_2_06, true(X == [0'o,0'r,0't,0'h])) :-
+		{atom_codes('North', [0'N| X])}.
 
-	fails(iso_atom_codes_2_07) :-
+	test(iso_atom_codes_2_07, false) :-
 		{atom_codes('soap', [0's, 0'o, 0'p])}.
 
-	throws(iso_atom_codes_2_08, error(instantiation_error,_)) :-
+	test(iso_atom_codes_2_08, error(instantiation_error)) :-
 		{atom_codes(_X, _Y)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_atom_codes_2_09, error(type_error(atom,f(a)),_)) :-
+	test(eddbali_atom_codes_2_09, error(type_error(atom,f(a)))) :-
 		{atom_codes(f(a), _L)}.
 
-	throws(eddbali_atom_codes_2_10, error(type_error(list,0'x),_)) :-
+	test(eddbali_atom_codes_2_10, error(type_error(list,0'x))) :-
 		{atom_codes(_, 0'x)}.
 
-	throws(eddbali_atom_codes_2_11, error(representation_error(character_code),_)) :-
+	test(eddbali_atom_codes_2_11, error(representation_error(character_code))) :-
 		{atom_codes(_A, [0'i,0's,-1])}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_atom_codes_2_12, error(type_error(integer,a),_)) :-
+	test(lgt_atom_codes_2_12, error(type_error(integer,a))) :-
 		{atom_codes(abc, [a,b,c])}.
 
-	succeeds(lgt_atom_codes_2_13) :-
-		{atom_codes('', Codes)},
-		Codes == [].
+	test(lgt_atom_codes_2_13, true(Codes == [])) :-
+		{atom_codes('', Codes)}.
 
-	succeeds(lgt_atom_codes_2_14) :-
-		{atom_codes(Atom, [])},
-		Atom == ''.
+	test(lgt_atom_codes_2_14, true(Atom == '')) :-
+		{atom_codes(Atom, [])}.
 
-	succeeds(lgt_atom_codes_2_15) :-
+	test(lgt_atom_codes_2_15, true) :-
 		{atom_codes('', [])}.
 
-	succeeds(lgt_atom_codes_2_16) :-
-		{atom_codes('ABC', [A,B,C])},
-		A == 65, B == 66, C == 67.
+	test(lgt_atom_codes_2_16, true(v(A,B,C) == v(65,66,67))) :-
+		{atom_codes('ABC', [A,B,C])}.
 
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
