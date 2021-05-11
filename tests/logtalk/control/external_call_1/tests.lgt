@@ -68,57 +68,46 @@ nop.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2017-04-26,
+		date is 2021-05-11,
 		comment is 'Unit tests for the {}/1 built-in control construct.'
 	]).
 
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
-	]).
-
-	throws(external_call_1_01, error(instantiation_error,_)) :-
+	test(external_call_1_01, error(instantiation_error)) :-
 		external_call_test_object::p(_).
 
-	throws(external_call_1_02, error(type_error(callable,1),_)) :-
+	test(external_call_1_02, error(type_error(callable,1))) :-
 		external_call_test_object::p(1).
 
-	throws(external_call_1_03, error(existence_error(predicate_declaration,atom_concat/3),_)) :-
+	test(external_call_1_03, error(existence_error(predicate_declaration,atom_concat/3))) :-
 		external_call_test_object::atom_concat(a, b, _).
 
-	succeeds(external_call_1_04) :-
+	test(external_call_1_04, true) :-
 		external_call_test_object::p(true).
 
-	fails(external_call_1_05) :-
+	test(external_call_1_05, false) :-
 		external_call_test_object::p(fail).
 
-	succeeds(external_call_1_06) :-
-		external_call_test_object::q(Xs),
-		Xs == [1,2,3].
+	test(external_call_1_06, true(Xs == [1,2,3])) :-
+		external_call_test_object::q(Xs).
 
-	succeeds(external_call_1_07) :-
-		external_call_test_object::r(Xs),
-		Xs == [1,2,3].
+	test(external_call_1_07, true(Xs == [1,2,3])) :-
+		external_call_test_object::r(Xs).
 
-	succeeds(external_call_1_08) :-
-		external_call_test_object::s(Xs),
-		Xs == [1,2,3].
+	test(external_call_1_08, true(Xs == [1,2,3])) :-
+		external_call_test_object::s(Xs).
 
-	succeeds(external_call_1_09) :-
-		external_call_test_object::t(Xs),
-		Xs == [1,2,3].
+	test(external_call_1_09, true(Xs == [1,2,3])) :-
+		external_call_test_object::t(Xs).
 
-	succeeds(external_call_1_10) :-
-		external_call_test_object::u(Xs),
-		Xs == [1, 1, 2, 2, 3, 3].
+	test(external_call_1_10, true(Xs == [1,1,2,2,3,3])) :-
+		external_call_test_object::u(Xs).
 
-	succeeds(external_call_1_11) :-
-		external_call_test_object::v(Xs),
-		Xs == [1,2,3].
+	test(external_call_1_11, true(Xs == [1,2,3])) :-
+		external_call_test_object::v(Xs).
 
-	succeeds(external_call_1_12) :-
-		external_call_test_object::{atom_concat(a, b, AB)},
-		AB == ab.
+	test(external_call_1_12, true(AB == ab)) :-
+		external_call_test_object::{atom_concat(a, b, AB)}.
 
 :- end_object.

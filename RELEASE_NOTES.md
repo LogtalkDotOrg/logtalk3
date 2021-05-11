@@ -60,6 +60,8 @@ predicate doesn't return `bom/1` or `encoding/1` properties for binary streams.
 * IMPROVED: Tests for the Logtalk `initialization/1`, `multifile/1`, and 
 `set_logtalk_flag/2` directives.
 
+* IMPROVED: Tests for the Logtalk `{}/1` control construct.
+
 
 3.46.0 - May 4, 2021
 ====================

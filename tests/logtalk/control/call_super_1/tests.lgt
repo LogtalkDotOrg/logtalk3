@@ -83,6 +83,7 @@
 	succeeds(call_super_1_6) :-
 		call_super_test_object_2::t1(X),
 		X == 1.
+
 	succeeds(call_super_1_7) :-
 		call_super_test_object_2::t2(X),
 		X == 1.
