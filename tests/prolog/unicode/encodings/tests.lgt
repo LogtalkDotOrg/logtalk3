@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2021-04-30,
+		date is 2021-05-11,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -43,6 +43,9 @@
 	test(lgt_unicode_utf_8_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_8_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
+	test(lgt_unicode_utf_8_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_8_bom(Atom)}, Atoms).
+
 	% UTF-8 without BOM tests
 
 	test(lgt_unicode_utf_8_no_bom_01, true, [condition(set_encoding('UTF-8'))]) :-
@@ -55,6 +58,9 @@
 
 	test(lgt_unicode_utf_8_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-8'))]) :-
 		findall(Length, ({utf_8_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
+	test(lgt_unicode_utf_8_no_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_8_no_bom(Atom)}, Atoms).
 
 	% UTF-16BE with BOM tests
 
@@ -69,6 +75,9 @@
 	test(lgt_unicode_utf_16_be_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_16_be_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
+	test(lgt_unicode_utf_16_be_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_16_be_bom(Atom)}, Atoms).
+
 	% UTF-16BE without BOM tests
 
 	test(lgt_unicode_utf_16_be_no_bom_01, true, [condition(set_encoding('UTF-16BE'))]) :-
@@ -81,6 +90,9 @@
 
 	test(lgt_unicode_utf_16_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-16BE'))]) :-
 		findall(Length, ({utf_16_be_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
+	test(lgt_unicode_utf_16_be_no_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_16_be_no_bom(Atom)}, Atoms).
 
 	% UTF-16LE with BOM tests
 
@@ -95,6 +107,9 @@
 	test(lgt_unicode_utf_16_le_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_16_le_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
+	test(lgt_unicode_utf_16_le_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_16_le_bom(Atom)}, Atoms).
+
 	% UTF-16LE without BOM tests
 
 	test(lgt_unicode_utf_16_le_no_bom_01, true, [condition(set_encoding('UTF-16LE'))]) :-
@@ -107,6 +122,9 @@
 
 	test(lgt_unicode_utf_16_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-16LE'))]) :-
 		findall(Length, ({utf_16_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
+	test(lgt_unicode_utf_16_le_no_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_16_le_no_bom(Atom)}, Atoms).
 
 	% UTF-32BE with BOM tests
 
@@ -121,6 +139,9 @@
 	test(lgt_unicode_utf_32_be_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_32_be_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
+	test(lgt_unicode_utf_32_be_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_32_be_bom(Atom)}, Atoms).
+
 	% UTF-32BE without BOM tests
 
 	test(lgt_unicode_utf_32_be_no_bom_01, true, [condition(set_encoding('UTF-32BE'))]) :-
@@ -133,6 +154,9 @@
 
 	test(lgt_unicode_utf_32_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32BE'))]) :-
 		findall(Length, ({utf_32_be_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
+	test(lgt_unicode_utf_32_be_no_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_32_be_no_bom(Atom)}, Atoms).
 
 	% UTF-32LE with BOM tests
 
@@ -147,6 +171,9 @@
 	test(lgt_unicode_utf_32_le_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
 		findall(Length, ({utf_32_le_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
+	test(lgt_unicode_utf_32_le_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_32_le_bom(Atom)}, Atoms).
+
 	% UTF-32LE without BOM tests
 
 	test(lgt_unicode_utf_32_le_no_bom_01, true, [condition(set_encoding('UTF-32LE'))]) :-
@@ -159,6 +186,9 @@
 
 	test(lgt_unicode_utf_32_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32LE'))]) :-
 		findall(Length, ({utf_32_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
+
+	test(lgt_unicode_utf_32_le_no_bom_04, true(expected_atoms(Atoms))) :-
+		findall(Atom, {utf_32_le_no_bom(Atom)}, Atoms).
 
 	% open/4 mode read tests
 
@@ -245,5 +275,20 @@
 			true
 		;	catch(set_prolog_flag(encoding, Encoding), _, fail)
 		).
+
+	expected_atoms(Atoms) :-
+		Atoms == [
+			'Γειά σου κόσμε!',
+			'Hello world!',
+			'¡Hola mundo!',
+			'こんにちは世界!',
+			'여보세요 세계!',
+			'Hallo wereld!',
+			'Olá mundo!',
+			'Здравствулте! мир!',
+			'你好世界!',
+			'🀙🀚🀛🀜🀝🀞🀟🀠',
+			'ÁÀÃÂÄáàãâä'
+		].
 
 :- end_object.
