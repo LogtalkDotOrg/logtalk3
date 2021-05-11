@@ -29,55 +29,50 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-12-08,
+		date is 2021-05-11,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
-	deterministic(commons_length_2_01) :-
-		{length([], N)},
-		N == 0.
+	test(commons_length_2_01, deterministic(N == 0)) :-
+		{length([], N)}.
 
-	deterministic(commons_length_2_02) :-
+	test(commons_length_2_02, deterministic) :-
 		{length([], 0)}.
 
-	deterministic(commons_length_2_03) :-
-		{length(List, 0)},
-		List == [].
+	test(commons_length_2_03, deterministic(List == [])) :-
+		{length(List, 0)}.
 
-	deterministic(commons_length_2_04) :-
-		{length([1,2,3], N)},
-		N == 3.
+	test(commons_length_2_04, deterministic(N == 3)) :-
+		{length([1,2,3], N)}.
 
-	deterministic(commons_length_2_05) :-
+	test(commons_length_2_05, deterministic) :-
 		{length([1,2,3], 3)}.
 
-	deterministic(commons_length_2_06) :-
+	test(commons_length_2_06, deterministic) :-
 		{length(List, 3)},
 		^^variant(List, [_, _, _]).
 
-	fails(commons_length_2_07) :-
+	test(commons_length_2_07, false) :-
 		{length([1,2,3], 0)}.
 
-	fails(commons_length_2_08) :-
+	test(commons_length_2_08, false) :-
 		{length([], 3)}.
 
-	succeeds(commons_length_2_09) :-
-		findall(List, {between(0,3,N), length(List,N)}, Lists),
-		^^variant(Lists, [[], [_], [_,_], [_,_,_]]).
+	test(commons_length_2_09, variant(Lists, [[],[_],[_,_],[_,_,_]])) :-
+		findall(List, {between(0,3,N), length(List,N)}, Lists).
 
-	succeeds(commons_length_2_10) :-
-		findall(List-N, {(length(List, N), (N < 3 -> true; !))}, Lists),
-		^^variant(Lists, [[]-0, [_]-1, [_,_]-2, [_,_,_]-3]).
+	test(commons_length_2_10, variant(Lists, [[]-0,[_]-1,[_,_]-2,[_,_,_]-3])) :-
+		findall(List-N, {(length(List, N), (N < 3 -> true; !))}, Lists).
 
-	throws(commons_length_2_11, error(type_error(integer,a),_)) :-
+	test(commons_length_2_11, error(type_error(integer,a))) :-
 		{length(_, a)}.
 
-	throws(commons_length_2_12, error(type_error(list,a),_)) :-
+	test(commons_length_2_12, error(type_error(list,a))) :-
 		{length(a, _)}.
 
-	throws(commons_length_2_13, error(domain_error(not_less_than_zero,-1),_)) :-
+	test(commons_length_2_13, error(domain_error(not_less_than_zero,-1))) :-
 		{length(_, -1)}.
 
 :- end_object.

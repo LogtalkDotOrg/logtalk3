@@ -62,8 +62,8 @@ predicate doesn't return `bom/1` or `encoding/1` properties for binary streams.
 
 * IMPROVED: Tests for the Logtalk `{}/1` control construct.
 
-* IMPROVED: Tests for the Prolog `atom_chars/2` and `atom_codes/2` built-in
-predicates.
+* IMPROVED: Tests for the Prolog `atom_chars/2`, `atom_codes/2`, `between/3`,
+`length/2`, and `halt/1` built-in predicates.
 
 
 3.46.0 - May 4, 2021

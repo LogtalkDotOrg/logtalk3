@@ -23,20 +23,20 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2021-05-11,
 		comment is 'Unit tests for the ISO Prolog standard halt/1 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.17.4.4
 
-	throws(iso_halt_1_01, error(type_error(integer,a),_)) :-
+	test(iso_halt_1_01, error(type_error(integer,a))) :-
 		{halt(a)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_halt_1_02, error(instantiation_error,_)) :-
+	test(eddbali_halt_1_02, error(instantiation_error)) :-
 		{halt(_)}.
 
 :- end_object.
