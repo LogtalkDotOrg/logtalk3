@@ -30,6 +30,9 @@ Prolog adapter and integration files
 
 * IMPROVED: Scryer Prolog definition of the `scratch_directory` flag.
 
+* UPDATED: Scryer Prolog adapter file with support for reporting warning and
+error line numbers.
+
 Library
 -------
 

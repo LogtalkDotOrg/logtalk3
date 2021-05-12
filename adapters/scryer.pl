@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 10, 2021
+%  Last updated on May 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -487,7 +487,8 @@
 
 % '$lgt_stream_current_line_number'(@stream, -integer)
 
-'$lgt_stream_current_line_number'(_, -1).
+'$lgt_stream_current_line_number'(Stream, Line) :-
+	stream_property(Stream, position(position_and_lines_read(_, Line))).
 
 
 
@@ -523,8 +524,10 @@
 
 % '$lgt_read_term'(@stream, -term, +list, -position, -list)
 
-'$lgt_read_term'(Stream, Term, Options, '-'(-1, -1)) :-
-	read_term(Stream, Term, Options).
+'$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
+	stream_property(Stream, position(position_and_lines_read(_, LineBegin))),
+	read_term(Stream, Term, Options),
+	stream_property(Stream, position(position_and_lines_read(_, LineEnd))).
 
 
 
