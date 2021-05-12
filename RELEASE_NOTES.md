@@ -52,6 +52,11 @@ arithmetic constant with Scryer Prolog.
 Tests
 -----
 
+* CHANGED: Skip test for the Prolog `catch/3` control construct from the ISO
+standard as as systems should be allowed to compile both goal arguments, which
+in this case would result in a callable type error instead of success as in
+the original test definition.
+
 * ADDED: Additional test for the Prolog `catch/3` control construct after a
 suggestion by Andrew Davison.
 

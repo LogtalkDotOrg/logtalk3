@@ -46,9 +46,9 @@ p :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-05-09,
+		date is 2021-05-12,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -60,7 +60,10 @@ p :-
 	test(iso_catch_3_02, true(Z == 3)) :-
 		{catch(bar(3), Z, true)}.
 
-	test(iso_catch_3_03, true) :-
+	% this test is skipped as systems should be allowed to compile both
+	% goal arguments, which in this case would result in a callable type
+	% error instead of success as in the original test definition
+	- test(iso_catch_3_03, true) :-
 		{catch(true, _, 3)}.
 
 	test(iso_catch_3_04, ball(bla)) :-
@@ -86,7 +89,9 @@ p :-
 		{catch(_, Y, true)}.
 
 	test(lgt_catch_3_10, subsumes(error(type_error(callable,1),_), Y)) :-
-		{catch(1, Y, true)}.
+		% try to delay the error to runtime
+		one(One),
+		{catch(One, Y, true)}.
 
 	test(lgt_catch_3_11, fail) :-
 		{catch(fail, _, true)}.
@@ -96,5 +101,9 @@ p :-
 		current_output(S),
 		{catch(true, _, write(S, demoen))},
 		^^text_output_assertion('', Assertion).
+
+	% auxiliary predicates
+
+	one(1).
 
 :- end_object.
