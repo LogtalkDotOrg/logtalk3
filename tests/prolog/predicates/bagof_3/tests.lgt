@@ -42,9 +42,9 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-12-13,
+		date is 2021-05-12,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -105,7 +105,9 @@ c(3, c, 'C').
 		{bagof(_X, _Y^_Z, _L)}.
 
 	test(iso_bagof_3_14, error(type_error(callable,1))) :-
-		{bagof(_X, 1, _L)}.
+		% try to delay the error to runtime
+		one(One),
+		{bagof(_X, One, _L)}.
 
 	% tests from the ECLiPSe test suite
 
@@ -122,5 +124,9 @@ c(3, c, 'C').
 
 	test(lgt_bagof_3_18, true(L == ['B', 'A', 'C'])) :-
 		{bagof(Z, t(X,Y)^c(X,Y,Z), L)}.
+
+	% auxiliary predicates
+
+	one(1).
 
 :- end_object.
