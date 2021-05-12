@@ -41,9 +41,9 @@ b(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-12-20,
+		date is 2021-05-12,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
@@ -59,7 +59,9 @@ b(3).
 		{retractall(insect(spider))}.
 
 	throws(iso_retractall_1_04, error(type_error(callable,3),_)) :-
-		{retractall(3)}.
+		% try to delay the error to runtime
+		three(Three),
+		{retractall(Three)}.
 
 	throws(iso_retractall_1_05, [error(permission_error(modify,static_procedure,retractall/1),_), error(permission_error(modify,static_procedure,':'(user,retractall/1)),_)]) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
@@ -91,5 +93,9 @@ b(3).
 	throws(eclipse_retractall_1_10, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(elk(_))}.
+
+	% auxiliary predicates
+
+	three(3).
 
 :- end_object.

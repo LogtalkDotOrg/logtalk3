@@ -29,9 +29,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-11-17,
+		date is 2021-05-12,
 		comment is 'Unit tests for the ISO Prolog standard assertz/1 built-in predicate.'
 	]).
 
@@ -50,10 +50,14 @@
 		{assertz(_)}.
 
 	throws(iso_assertz_1_05, error(type_error(callable,4),_)) :-
-		{assertz(4)}.
+		% try to delay the error to runtime
+		four(Four),
+		{assertz(Four)}.
 
 	throws(iso_assertz_1_06, error(type_error(callable,4),_)) :-
-		{assertz((foo :- 4))}.
+		% try to delay the error to runtime
+		four(Four),
+		{assertz((foo :- Four))}.
 
 	throws(iso_assertz_1_07, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
@@ -68,10 +72,18 @@
 		{assertz((_ :- _))}.
 
 	throws(lgt_assertz_1_10, error(type_error(callable,4),_)) :-
-		{assertz((4 :- foo))}.
+		% try to delay the error to runtime
+		four(Four),
+		{assertz((Four :- foo))}.
 
 	throws(lgt_assertz_1_11, [error(type_error(callable,(fail,4)),_), error(type_error(callable,4),_)]) :-
 		% the second exception term is throw by some of the Prolog compilers
-		{assertz((foo :- fail,4))}.
+		% try to delay the error to runtime
+		four(Four),
+		{assertz((foo :- fail,Four))}.
+
+	% auxiliary predicates
+
+	four(4).
 
 :- end_object.
