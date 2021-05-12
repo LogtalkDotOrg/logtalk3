@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2020-11-23,
+		date is 2021-05-12,
 		comment is 'Unit tests for the ISO Prolog standard at_end_of_stream/0-1 built-in predicates.'
 	]).
 
@@ -88,6 +88,8 @@
 
 	cleanup :-
 		^^clean_text_input,
-		^^clean_binary_input.
+		^^clean_binary_input,
+		^^clean_text_output,
+		^^clean_binary_output.
 
 :- end_object.

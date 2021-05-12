@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-05-12,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -58,7 +58,9 @@
 		{findall(_X, _Goal, _S)}.
 
 	throws(iso_findall_3_08, error(type_error(callable,4),_)) :-
-		{findall(_X, 4, _S)}.
+		% try to delay the error to runtime
+		four(Four),
+		{findall(_X, Four, _S)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
@@ -69,5 +71,9 @@
 
 	throws(eclipse_findall_3_10, error(type_error(list,12),_)) :-
 		{findall(X, (X=2; X=1), 12)}.
+
+	% auxiliary predicates
+
+	four(4).
 
 :- end_object.

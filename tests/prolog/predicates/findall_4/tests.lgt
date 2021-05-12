@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-12-26,
+		date is 2021-05-12,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
@@ -57,7 +57,9 @@
 		{findall(_X, _Goal, _S, _T)}.
 
 	test(commons_findall_4_09, error(type_error(callable,4))) :-
-		{findall(_X, 4, _S, _T)}.
+		% try to delay the error to runtime
+		four(Four),
+		{findall(_X, Four, _S, _T)}.
 
 	test(commons_findall_4_10, error(type_error(list,[A|1]))) :-
 		{findall(X, X=1, [A|1], _)}.
@@ -70,5 +72,9 @@
 
 	test(commons_findall_4_13, error(type_error(list,12))) :-
 		{findall(X, (X=2; X=1), _, 12)}.
+
+	% auxiliary predicates
+
+	four(4).
 
 :- end_object.
