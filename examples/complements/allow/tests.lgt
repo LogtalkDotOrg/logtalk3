@@ -23,60 +23,50 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:1,
+		version is 1:8:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-05-14,
 		comment is 'Unit tests for the "complements/allow" example.'
 	]).
 
 	cover(employee).
 	cover(add_on).
 
-	test(complements_allow_01) :-
-		complements_object(Category, Object),
-		Category == add_on, Object == employee.
+	test(complements_allow_01, true(Categories == [add_on, dynamic_patch])) :-
+		setof(Category, complements_object(Category, employee), Categories).
 
-	test(complements_allow_02) :-
-		conforms_to_protocol(employee, Protocol),
-		Protocol == monitoring.
+	test(complements_allow_02, true(Protocol == monitoring)) :-
+		conforms_to_protocol(employee, Protocol).
 
-	test(complements_allow_03) :-
-		conforms_to_protocol(employee, Protocol, Scope),
-		Protocol == monitoring,
-		Scope == (public).
+	test(complements_allow_03, true(Protocol-Scope == monitoring-(public))) :-
+		conforms_to_protocol(employee, Protocol, Scope).
 
-	test(complements_allow_04) :-
+	test(complements_allow_04, true(Name == john)) :-
 		^^suppress_text_output,
-		employee::name(Name),
-		Name == john.
+		employee::name(Name).
 
-	test(complements_allow_05) :-
+	test(complements_allow_05, true(PredicatesSorted == [after/3,age/1,before/3,income/1,name/1,predicates/1,salary/1])) :-
 		^^suppress_text_output,
 		employee::predicates(Predicates),
-		list::msort(Predicates, PredicatesSorted),
-		PredicatesSorted == [after/3, age/1, before/3, income/1, name/1, predicates/1, salary/1].
+		list::msort(Predicates, PredicatesSorted).
 
-	test(complements_allow_06) :-
+	test(complements_allow_06, true(list::subsequence(AllPropertiesSorted, PropertiesSorted, _))) :-
 		findall(Property, employee::predicate_property(predicates(_), Property), AllProperties),
 		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([logtalk, public, static, declared_in(add_on), defined_in(add_on), scope(public)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		list::msort([logtalk, public, static, declared_in(add_on), defined_in(add_on), scope(public)], PropertiesSorted).
 
-	test(complements_allow_07) :-
+	test(complements_allow_07, true(list::subsequence(AllPropertiesSorted, PropertiesSorted, _))) :-
 		findall(Property, employee::predicate_property(income(_), Property), AllProperties),
 		list::msort(AllProperties, AllPropertiesSorted),
-		list::msort([logtalk, public, static, alias_of(salary(_)), declared_in(employee), defined_in(dynamic_patch), scope(public)], PropertiesSorted),
-		list::subsequence(AllPropertiesSorted, PropertiesSorted, _).
+		list::msort([logtalk, public, static, alias_of(salary(_)), declared_in(employee), defined_in(dynamic_patch), scope(public)], PropertiesSorted).
 
-	test(complements_allow_08) :-
+	test(complements_allow_08, true(Salary == 42000)) :-
 		^^suppress_text_output,
-		employee::salary(Salary),
-		Salary == 42000.
+		employee::salary(Salary).
 
-	test(complements_allow_09) :-
+	test(complements_allow_09, true(Salary == 23500)) :-
 		^^suppress_text_output,
 		abolish_category(dynamic_patch),
-		employee::salary(Salary),
-		Salary == 23500.
+		employee::salary(Salary).
 
 :- end_object.

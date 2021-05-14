@@ -23,17 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-01-06,
+		date is 2021-05-14,
 		comment is 'Unit tests for the "hailstone" example.'
 	]).
 
 	cover(hailstone).
 
-	test(hailstone_1) :-
-		hailstone::generate_sequence(10, Sequence),
-		Sequence == [10, 5, 16, 8, 4, 2, 1].
+	test(hailstone_1, true(Sequence == [10, 5, 16, 8, 4, 2, 1])) :-
+		hailstone::generate_sequence(10, Sequence).
 
 	:- if((
 		os::operating_system_type(windows),
@@ -49,20 +48,17 @@
 
 	:- else.
 
-	test(hailstone_2) :-
+	test(hailstone_2, true(Assertion)) :-
 		^^set_text_output(''),
 		hailstone::write_sequence(10),
-		^^check_text_output('10 5 16 8 4 2 1\n').
+		^^text_output_assertion('10 5 16 8 4 2 1\n', Assertion).
 
 	:- endif.
 
-	test(hailstone_3) :-
-		hailstone::sequence_length(27, Length),
-		Length == 112.
+	test(hailstone_3, true(Length == 112)) :-
+		hailstone::sequence_length(27, Length).
 
-	test(hailstone_4) :-
-		hailstone::longest_sequence(1, 1000, N, Length),
-		N == 871,
-		Length == 179.
+	test(hailstone_4, true(N-Length == 871-179)) :-
+		hailstone::longest_sequence(1, 1000, N, Length).
 
 :- end_object.

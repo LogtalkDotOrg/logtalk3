@@ -49,6 +49,11 @@ assertions.
 * UPDATED: The `lgtunit` tool to also use the de facto standard `epsilon/0`
 arithmetic constant with Scryer Prolog.
 
+Examples
+--------
+
+* IMPROVED: Tests for the `complements` and `hailstone` examples.
+
 Tests
 -----
 
