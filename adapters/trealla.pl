@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 1.8.41 and later versions
-%  Last updated on May 4, 2021
+%  Last updated on May 14, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -538,6 +538,7 @@
 
 '$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
 '$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-1', _).
 
 
 
