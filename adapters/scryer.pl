@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 12, 2021
+%  Last updated on May 14, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -564,6 +564,7 @@
 
 '$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
 '$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-1', _).
 
 
 
@@ -576,8 +577,10 @@
 
 % '$lgt_copy_term_without_constraints'(@term, ?term)
 
+:- use_module(library(iso_ext), [copy_term_nat/2]).
+
 '$lgt_copy_term_without_constraints'(Term, Copy) :-
-	copy_term(Term, Copy).
+	copy_term_nat(Term, Copy).
 
 
 
