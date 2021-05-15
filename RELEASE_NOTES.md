@@ -79,6 +79,9 @@ predicate doesn't return `bom/1` or `encoding/1` properties for binary streams.
 `atom_codes/2`, `bagof/3`, `between/3`, `findall/3-4`, `length/2`, `halt/1`,
 and `retractall/1` built-in predicates.
 
+* FIXED: The test set for the Logtalk `encoding/1` directive to only run on
+backends that support US-ASCII, ISO-8859-1, and UTF-8 text encodings.
+
 
 3.46.0 - May 4, 2021
 ====================

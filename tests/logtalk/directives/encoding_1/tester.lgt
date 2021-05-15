@@ -19,7 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(\+ current_logtalk_flag(encoding_directive, unsupported)).
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == cx; Dialect == sicstus; Dialect == swi; Dialect == yap)
+)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
