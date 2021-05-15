@@ -105,3 +105,10 @@ queried using the standard `stream_property/2` predicate.
 - `stream_property/2`
 - `sub_atom/5`
 - `write_term/3`
+
+7. Unicode **code points** can be specified in quoted atoms and double-quoted
+terms using the `\uXXXX` and `\UXXXXXXXX` escape sequences. The `\uXXXX`
+escape sequence, using four hexadecimal digits, covers the Basic Multilingual
+Plane (BMP). The `\UXXXXXXXX` escape sequence, using eight hexadecimal digits,
+covers the full Unicode code points space. The use of code points makes these
+escape sequences independent of the chosen Unicode text encoding.
