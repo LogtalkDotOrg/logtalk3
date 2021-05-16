@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog
-%  Last updated on May 15, 2021
+%  Last updated on May 16, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -684,7 +684,12 @@ term_hash(_, _, _, _) :-
 
 % '$lgt_user_module_qualification'(@callable, -callable)
 
-'$lgt_user_module_qualification'(Goal, Goal).
+:- dynamic('$lgt_user_module_qualification'/2).
+
+:- initialization((
+	prolog_load_context(module, Module),
+	assertz('$lgt_user_module_qualification'(Goal, Module:Goal))
+)).
 
 
 
