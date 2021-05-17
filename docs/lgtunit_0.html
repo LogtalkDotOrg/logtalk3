@@ -275,8 +275,8 @@
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 9:4:0</div>
-<div class="line"><strong>Date:</strong> 2021-05-09</div>
+<div class="line"><strong>Version:</strong> 9:5:0</div>
+<div class="line"><strong>Date:</strong> 2021-05-17</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -399,29 +399,31 @@
 <li><p><a class="reference internal" href="#create-text-file-2" id="id73"><code class="docutils literal notranslate"><span class="pre">create_text_file/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#create-binary-file-2" id="id74"><code class="docutils literal notranslate"><span class="pre">create_binary_file/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#check-text-file-2" id="id75"><code class="docutils literal notranslate"><span class="pre">check_text_file/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#check-binary-file-2" id="id76"><code class="docutils literal notranslate"><span class="pre">check_binary_file/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#clean-file-1" id="id77"><code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#closed-input-stream-2" id="id78"><code class="docutils literal notranslate"><span class="pre">closed_input_stream/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#closed-output-stream-2" id="id79"><code class="docutils literal notranslate"><span class="pre">closed_output_stream/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#stream-position-1" id="id80"><code class="docutils literal notranslate"><span class="pre">stream_position/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#text-file-assertion-3" id="id76"><code class="docutils literal notranslate"><span class="pre">text_file_assertion/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#check-binary-file-2" id="id77"><code class="docutils literal notranslate"><span class="pre">check_binary_file/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#binary-file-assertion-3" id="id78"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#clean-file-1" id="id79"><code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#closed-input-stream-2" id="id80"><code class="docutils literal notranslate"><span class="pre">closed_input_stream/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#closed-output-stream-2" id="id81"><code class="docutils literal notranslate"><span class="pre">closed_output_stream/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#stream-position-1" id="id82"><code class="docutils literal notranslate"><span class="pre">stream_position/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id81">Private predicates</a></p>
+<li><p><a class="reference internal" href="#private-predicates" id="id83">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#running-test-sets-0" id="id82"><code class="docutils literal notranslate"><span class="pre">running_test_sets_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#test-3" id="id83"><code class="docutils literal notranslate"><span class="pre">test/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#auxiliary-predicate-counter-1" id="id84"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#test-2" id="id85"><code class="docutils literal notranslate"><span class="pre">test_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#skipped-1" id="id86"><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#passed-1" id="id87"><code class="docutils literal notranslate"><span class="pre">passed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#failed-1" id="id88"><code class="docutils literal notranslate"><span class="pre">failed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fired-3" id="id89"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#covered-4" id="id90"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#running-test-sets-0" id="id84"><code class="docutils literal notranslate"><span class="pre">running_test_sets_/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#test-3" id="id85"><code class="docutils literal notranslate"><span class="pre">test/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auxiliary-predicate-counter-1" id="id86"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#test-2" id="id87"><code class="docutils literal notranslate"><span class="pre">test_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#skipped-1" id="id88"><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#passed-1" id="id89"><code class="docutils literal notranslate"><span class="pre">passed_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#failed-1" id="id90"><code class="docutils literal notranslate"><span class="pre">failed_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fired-3" id="id91"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#covered-4" id="id92"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id91">Operators</a></p>
+<li><p><a class="reference internal" href="#operators" id="id93">Operators</a></p>
 <ul>
-<li><p><a class="reference internal" href="#op-700-xfx" id="id92"><code class="docutils literal notranslate"><span class="pre">op(700,xfx,=~=)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#op-700-xfx" id="id94"><code class="docutils literal notranslate"><span class="pre">op(700,xfx,=~=)</span></code></a></p></li>
 </ul>
 </li>
 </ul>
@@ -1710,6 +1712,7 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1979,9 +1982,19 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="text_file_assertion/3"> </div></div>
+<div class="section" id="text-file-assertion-3">
+<span id="lgtunit-0-text-file-assertion-3"></span><span id="index-73"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">text_file_assertion/3</span></code></a><a class="headerlink" href="#text-file-assertion-3" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="check_binary_file/2"> </div></div>
 <div class="section" id="check-binary-file-2">
-<span id="lgtunit-0-check-binary-file-2"></span><span id="index-73"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_binary_file/2</span></code></a><a class="headerlink" href="#check-binary-file-2" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-check-binary-file-2"></span><span id="index-74"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_binary_file/2</span></code></a><a class="headerlink" href="#check-binary-file-2" title="Permalink to this headline">¶</a></h3>
 <p>Checks the contents of a binary file match the expected contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2000,9 +2013,30 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="binary_file_assertion/3"> </div></div>
+<div class="section" id="binary-file-assertion-3">
+<span id="lgtunit-0-binary-file-assertion-3"></span><span id="index-75"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion/3</span></code></a><a class="headerlink" href="#binary-file-assertion-3" title="Permalink to this headline">¶</a></h3>
+<p>Returns an assertion for checking that the given file have the expected binary contents.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion(Path,Bytes,Assertion)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="clean_file/1"> </div></div>
 <div class="section" id="clean-file-1">
-<span id="lgtunit-0-clean-file-1"></span><span id="index-74"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code></a><a class="headerlink" href="#clean-file-1" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-clean-file-1"></span><span id="index-76"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code></a><a class="headerlink" href="#clean-file-1" title="Permalink to this headline">¶</a></h3>
 <p>Closes any existing stream associated with the file and deletes the file if it exists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2023,7 +2057,7 @@
 <hr class="docutils" />
 <div id="closed_input_stream/2"> </div></div>
 <div class="section" id="closed-input-stream-2">
-<span id="lgtunit-0-closed-input-stream-2"></span><span id="index-75"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">closed_input_stream/2</span></code></a><a class="headerlink" href="#closed-input-stream-2" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-closed-input-stream-2"></span><span id="index-77"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">closed_input_stream/2</span></code></a><a class="headerlink" href="#closed-input-stream-2" title="Permalink to this headline">¶</a></h3>
 <p>Opens a temporary file with the given options for reading, closes it, and returns its stream handle.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2044,7 +2078,7 @@
 <hr class="docutils" />
 <div id="closed_output_stream/2"> </div></div>
 <div class="section" id="closed-output-stream-2">
-<span id="lgtunit-0-closed-output-stream-2"></span><span id="index-76"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">closed_output_stream/2</span></code></a><a class="headerlink" href="#closed-output-stream-2" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-closed-output-stream-2"></span><span id="index-78"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">closed_output_stream/2</span></code></a><a class="headerlink" href="#closed-output-stream-2" title="Permalink to this headline">¶</a></h3>
 <p>Opens a temporary file with the given options for writing, closes it, and returns its stream handle.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2065,7 +2099,7 @@
 <hr class="docutils" />
 <div id="stream_position/1"> </div></div>
 <div class="section" id="stream-position-1">
-<span id="lgtunit-0-stream-position-1"></span><span id="index-77"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">stream_position/1</span></code></a><a class="headerlink" href="#stream-position-1" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-stream-position-1"></span><span id="index-79"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">stream_position/1</span></code></a><a class="headerlink" href="#stream-position-1" title="Permalink to this headline">¶</a></h3>
 <p>Returns a syntactically valid stream position.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2089,7 +2123,7 @@
 <div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline">¶</a></h2>
 <div id="running_test_sets_/0"> </div><div class="section" id="running-test-sets-0">
-<span id="lgtunit-0-running-test-sets-0"></span><span id="index-78"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">running_test_sets_/0</span></code></a><a class="headerlink" href="#running-test-sets-0" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-running-test-sets-0"></span><span id="index-80"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">running_test_sets_/0</span></code></a><a class="headerlink" href="#running-test-sets-0" title="Permalink to this headline">¶</a></h3>
 <p>Internal flag used when running two or more test sets as a unified set.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2106,7 +2140,7 @@
 <hr class="docutils" />
 <div id="test/3"> </div></div>
 <div class="section" id="test-3">
-<span id="lgtunit-0-test-3"></span><span id="index-79"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">test/3</span></code></a><a class="headerlink" href="#test-3" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-test-3"></span><span id="index-81"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">test/3</span></code></a><a class="headerlink" href="#test-3" title="Permalink to this headline">¶</a></h3>
 <p>Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2131,7 +2165,7 @@
 <hr class="docutils" />
 <div id="auxiliary_predicate_counter_/1"> </div></div>
 <div class="section" id="auxiliary-predicate-counter-1">
-<span id="lgtunit-0-auxiliary-predicate-counter-1"></span><span id="index-80"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_/1</span></code></a><a class="headerlink" href="#auxiliary-predicate-counter-1" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-auxiliary-predicate-counter-1"></span><span id="index-82"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_/1</span></code></a><a class="headerlink" href="#auxiliary-predicate-counter-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for generating unique auxiliary predicate names.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2152,7 +2186,7 @@
 <hr class="docutils" />
 <div id="test_/2"> </div></div>
 <div class="section" id="test-2">
-<span id="lgtunit-0-test-2"></span><span id="index-81"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">test_/2</span></code></a><a class="headerlink" href="#test-2" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-test-2"></span><span id="index-83"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">test_/2</span></code></a><a class="headerlink" href="#test-2" title="Permalink to this headline">¶</a></h3>
 <p>Table of defined tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2173,7 +2207,7 @@
 <hr class="docutils" />
 <div id="skipped_/1"> </div></div>
 <div class="section" id="skipped-1">
-<span id="lgtunit-0-skipped-1"></span><span id="index-82"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code></a><a class="headerlink" href="#skipped-1" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-skipped-1"></span><span id="index-84"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code></a><a class="headerlink" href="#skipped-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for skipped tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2194,7 +2228,7 @@
 <hr class="docutils" />
 <div id="passed_/1"> </div></div>
 <div class="section" id="passed-1">
-<span id="lgtunit-0-passed-1"></span><span id="index-83"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">passed_/1</span></code></a><a class="headerlink" href="#passed-1" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-passed-1"></span><span id="index-85"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">passed_/1</span></code></a><a class="headerlink" href="#passed-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for passed tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2215,7 +2249,7 @@
 <hr class="docutils" />
 <div id="failed_/1"> </div></div>
 <div class="section" id="failed-1">
-<span id="lgtunit-0-failed-1"></span><span id="index-84"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">failed_/1</span></code></a><a class="headerlink" href="#failed-1" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-failed-1"></span><span id="index-86"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">failed_/1</span></code></a><a class="headerlink" href="#failed-1" title="Permalink to this headline">¶</a></h3>
 <p>Counter for failed tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2236,7 +2270,7 @@
 <hr class="docutils" />
 <div id="fired_/3"> </div></div>
 <div class="section" id="fired-3">
-<span id="lgtunit-0-fired-3"></span><span id="index-85"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a><a class="headerlink" href="#fired-3" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-fired-3"></span><span id="index-87"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a><a class="headerlink" href="#fired-3" title="Permalink to this headline">¶</a></h3>
 <p>Fired clauses when running the unit tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2257,7 +2291,7 @@
 <hr class="docutils" />
 <div id="covered_/4"> </div></div>
 <div class="section" id="covered-4">
-<span id="lgtunit-0-covered-4"></span><span id="index-86"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a><a class="headerlink" href="#covered-4" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-covered-4"></span><span id="index-88"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a><a class="headerlink" href="#covered-4" title="Permalink to this headline">¶</a></h3>
 <p>Auxiliary predicate for collecting statistics on clause coverage.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

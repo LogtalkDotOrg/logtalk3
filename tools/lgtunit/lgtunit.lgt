@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:4:0,
+		version is 9:5:0,
 		author is 'Paulo Moura',
-		date is 2021-05-09,
+		date is 2021-05-17,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -565,11 +565,25 @@
 		argnames is ['File', 'Contents']
 	]).
 
+	:- protected(text_file_assertion/3).
+	:- mode(text_output_assertion(+atom, +atom, --callable), one).
+	:- info(text_output_assertion/3, [
+		comment is 'Returns an assertion for checking that the given file have the expected text contents.',
+		argnames is ['Path', 'Contents', 'Assertion']
+	]).
+
 	:- protected(check_binary_file/2).
 	:- mode(check_binary_file(+atom, +list(byte)), zero_or_one).
 	:- info(check_binary_file/2, [
 		comment is 'Checks the contents of a binary file match the expected contents.',
 		argnames is ['File', 'Bytes']
+	]).
+
+	:- protected(binary_file_assertion/3).
+	:- mode(binary_file_assertion(+atom, +list(byte), --callable), one).
+	:- info(binary_file_assertion/3, [
+		comment is 'Returns an assertion for checking that the given file have the expected binary contents.',
+		argnames is ['Path', 'Bytes', 'Assertion']
 	]).
 
 	:- protected(clean_file/1).
@@ -2671,11 +2685,21 @@
 		get_text_contents(Stream, Expected, Contents),
 		Expected == Contents.
 
+	text_file_assertion(File, Expected, Expected == Contents) :-
+		os::absolute_file_name(File, Path),
+		open(Path, read, Stream),
+		get_text_contents(Stream, Expected, Contents).
+
 	check_binary_file(File, Expected) :-
 		os::absolute_file_name(File, Path),
 		open(Path, read, Stream, [type(binary)]),
 		get_binary_contents(Stream, Expected, Contents),
 		Expected == Contents.
+
+	binary_file_assertion(File, Expected, Expected == Contents) :-
+		os::absolute_file_name(File, Path),
+		open(Path, read, Stream, [type(binary)]),
+		get_binary_contents(Stream, Expected, Contents).
 
 	% auxiliary predicates for testing input/output predicates
 

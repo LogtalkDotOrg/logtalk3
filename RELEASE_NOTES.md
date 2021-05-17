@@ -46,11 +46,15 @@ an escaped double-quote. Thanks to Paul Brown for the bug report.
 Tools
 -----
 
-* UPDATED: The `dead_code_scanner` and `code_metrics` tools tests to use
-assertions.
+* ADDED: Predicates `text_file_assertion/3` and `binary_file_assertion/3` to
+the `lgtunit` tool to generate assertions that a given file have the expected
+text or binary contents.
 
 * UPDATED: The `lgtunit` tool to also use the de facto standard `epsilon/0`
 arithmetic constant with Scryer Prolog.
+
+* UPDATED: The `dead_code_scanner` and `code_metrics` tools tests to use
+assertions.
 
 Examples
 --------

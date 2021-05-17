@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 9:4:0
-| **Date:** 2021-05-09
+| **Version:** 9:5:0
+| **Date:** 2021-05-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1430,6 +1430,7 @@ Returns an assertion for checking that the temporary file (referenced with the g
 |    ``text_output_assertion(Alias,Contents,Assertion)``
 | **Mode and number of proofs:**
 |    ``text_output_assertion(+atom,+atom,--callable)`` - ``one``
+|    ``text_output_assertion(+atom,+atom,--callable)`` - ``one``
 
 
 ------------
@@ -1732,6 +1733,22 @@ Checks that the contents of a text file match the expected contents.
 
 .. raw:: html
 
+   <div id="text_file_assertion/3"> </div>
+
+.. index:: text_file_assertion/3
+.. _lgtunit/0::text_file_assertion/3:
+
+``text_file_assertion/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
    <div id="check_binary_file/2"> </div>
 
 .. index:: check_binary_file/2
@@ -1749,6 +1766,29 @@ Checks the contents of a binary file match the expected contents.
 |    ``check_binary_file(File,Bytes)``
 | **Mode and number of proofs:**
 |    ``check_binary_file(+atom,+list(byte))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="binary_file_assertion/3"> </div>
+
+.. index:: binary_file_assertion/3
+.. _lgtunit/0::binary_file_assertion/3:
+
+``binary_file_assertion/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the given file have the expected binary contents.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_file_assertion(Path,Bytes,Assertion)``
+| **Mode and number of proofs:**
+|    ``binary_file_assertion(+atom,+list(byte),--callable)`` - ``one``
 
 
 ------------

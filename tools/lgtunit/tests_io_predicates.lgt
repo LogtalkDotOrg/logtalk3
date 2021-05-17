@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2021-05-17,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -185,6 +185,16 @@
 		^^check_text_file(File, 'foo42.'),
 		^^clean_file(File).
 
+	% text_file_assertion/3
+
+	test(text_file_assertion_3_01, deterministic(Assertion)) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_text_file(File, 'foo42.'),
+		^^text_file_assertion(File, 'foo42.', Assertion),
+		^^clean_file(File).
+
 	% check_binary_file/2 tests
 
 	test(check_binary_file_2_01, deterministic) :-
@@ -193,6 +203,16 @@
 		atom_concat(Directory, foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		^^check_binary_file(File, [65,66,67]),
+		^^clean_file(File).
+
+	% binary_file_assertion/3
+
+	test(binary_file_assertion_3_01, deterministic(Assertion)) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_binary_file(File, [65,66,67]),
+		^^binary_file_assertion(File, [65,66,67], Assertion),
 		^^clean_file(File).
 
 	% clean_file/1 tests
@@ -218,5 +238,8 @@
 
 	test(stream_position_1_01, deterministic(ground(Position))) :-
 		^^stream_position(Position).
+
+	cleanup :-
+		catch(ignore(os::delete_file(foo42)), _, true).
 
 :- end_object.
