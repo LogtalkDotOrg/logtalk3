@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:10:1,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-03-22,
+		date is 2021-05-17,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -143,11 +143,12 @@
 	json_string_contents([0'\\, 0'u, H1, H2, H3, H4| Codes]) -->
 		[0'\\, 0'u, H1, H2, H3, H4], !, {is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4)},
 		json_string_contents(Codes).
-
+	json_string_contents([0'"| Codes]) -->
+		[0'\\, 0'"], !,
+		json_string_contents(Codes).
 	json_string_contents([0'\\, Code| Codes]) -->
 		[0'\\, Code], !, {valid_escape_code(Code)},
 		json_string_contents(Codes).
-
 	json_string_contents([Code| Codes]) -->
 		[Code],
 		{\+ invalid_string_code(Code)}, !,

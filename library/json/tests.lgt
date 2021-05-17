@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-03-22,
+		date is 2021-05-17,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.',
 		parameters is [
 			'Collection' - 'JSON files directory.'
@@ -159,6 +159,13 @@
 
 	test(json_generate_chars_from_chars, true(Chars == ['"', h, e, l, l, o, '"'])) :-
 		json(_)::generate(chars(Chars),  chars([h, e, l, l, o])).
+
+	test(json_double_quote_escape_parse, true(Term == {foo-'bar "1" baz'})) :-
+		file_path('test_files/simple/double_quote_escape.json', Path),
+		json(atom)::parse(file(Path), Term).
+
+	test(json_double_quote_escape_generate, true(Atom == '{"foo":"bar \\"1\\" baz"}')) :-
+		json(atom)::generate(atom(Atom), {foo-'bar "1" baz'}).
 
 	% auxiliary predicates
 

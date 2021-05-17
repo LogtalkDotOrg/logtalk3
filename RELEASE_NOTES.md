@@ -40,6 +40,9 @@ Library
 
 * FIXED: Path expansion in the `os` library for Scryer Prolog.
 
+* FIXED: Bug in the `json` library parser of JSON files when a string contains
+an escaped double-quote. Thanks to Paul Brown for the bug report.
+
 Tools
 -----
 
