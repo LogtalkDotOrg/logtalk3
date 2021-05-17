@@ -566,8 +566,8 @@
 	]).
 
 	:- protected(text_file_assertion/3).
-	:- mode(text_output_assertion(+atom, +atom, --callable), one).
-	:- info(text_output_assertion/3, [
+	:- mode(text_file_assertion(+atom, +atom, --callable), one).
+	:- info(text_file_assertion/3, [
 		comment is 'Returns an assertion for checking that the given file have the expected text contents.',
 		argnames is ['Path', 'Contents', 'Assertion']
 	]).

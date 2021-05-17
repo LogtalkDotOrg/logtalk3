@@ -185,6 +185,13 @@
 		^^check_text_file(File, 'foo42.'),
 		^^clean_file(File).
 
+	test(check_text_file_2_02, false) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_text_file(File, 'foo42.'),
+		^^check_text_file(File, 'foo24.').
+
 	% text_file_assertion/3
 
 	test(text_file_assertion_3_01, deterministic(Assertion)) :-
@@ -193,6 +200,14 @@
 		atom_concat(Directory, foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		^^text_file_assertion(File, 'foo42.', Assertion),
+		^^clean_file(File).
+
+	test(text_file_assertion_3_02, true(\+ Assertion)) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_text_file(File, 'foo42.'),
+		^^text_file_assertion(File, 'foo24.', Assertion),
 		^^clean_file(File).
 
 	% check_binary_file/2 tests
@@ -205,6 +220,13 @@
 		^^check_binary_file(File, [65,66,67]),
 		^^clean_file(File).
 
+	test(check_binary_file_2_02, false) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_binary_file(File, [65,66,67]),
+		^^check_binary_file(File, [68,69,70]).
+
 	% binary_file_assertion/3
 
 	test(binary_file_assertion_3_01, deterministic(Assertion)) :-
@@ -213,6 +235,14 @@
 		atom_concat(Directory, foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		^^binary_file_assertion(File, [65,66,67], Assertion),
+		^^clean_file(File).
+
+	test(binary_file_assertion_3_02, true(\+ Assertion)) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, foo42, File),
+		^^create_binary_file(File, [65,66,67]),
+		^^binary_file_assertion(File, [68,69,70], Assertion),
 		^^clean_file(File).
 
 	% clean_file/1 tests

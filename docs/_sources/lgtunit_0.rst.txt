@@ -1430,7 +1430,6 @@ Returns an assertion for checking that the temporary file (referenced with the g
 |    ``text_output_assertion(Alias,Contents,Assertion)``
 | **Mode and number of proofs:**
 |    ``text_output_assertion(+atom,+atom,--callable)`` - ``one``
-|    ``text_output_assertion(+atom,+atom,--callable)`` - ``one``
 
 
 ------------
@@ -1741,8 +1740,15 @@ Checks that the contents of a text file match the expected contents.
 ``text_file_assertion/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Returns an assertion for checking that the given file have the expected text contents.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``text_file_assertion(Path,Contents,Assertion)``
+| **Mode and number of proofs:**
+|    ``text_file_assertion(+atom,+atom,--callable)`` - ``one``
 
 
 ------------
