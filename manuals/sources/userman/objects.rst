@@ -815,7 +815,7 @@ defined in a source file compiled with the :ref:`source_data <flag_source_data>`
 flag turned on. Moreover, line numbers are only supported in
 :term:`backend Prolog compilers <backend Prolog compiler>`
 that provide access to the start line of a read term. When such support is
-not available, the value ``-1`` is returned for the start lines.
+not available, the value ``-1`` is returned for the start and end lines.
 
 The properties that return the number of clauses (rules) report the
 clauses (rules) *textually defined in the object* for both multifile and
