@@ -1947,12 +1947,10 @@
 
 		make_directory_path(Directory) :-
 			expand_path_chars(Directory, ExpandedPathChars),
-			atom_chars(ExpandedPath, ExpandedPathChars),
 			{make_directory_path(ExpandedPathChars)}.
 
 		delete_directory(Directory) :-
 			expand_path_chars(Directory, ExpandedPathChars),
-			atom_chars(ExpandedPath, ExpandedPathChars),
 			{delete_directory(ExpandedPathChars)}.
 
 		change_directory(Directory) :-
@@ -1992,8 +1990,10 @@
 		file_permission(_, _) :-
 			throw(not_available(file_permission/2)).
 
-		rename_file(_, _) :-
-			throw(not_available(file_permission/2)).
+		rename_file(Old, New) :-
+			expand_path_chars(Old, OldExpandedPathChars),
+			expand_path_chars(New, NewExpandedPathChars),
+			{rename_file(OldExpandedPathChars, NewExpandedPathChars)}.
 
 		delete_file(File) :-
 			expand_path_chars(File, ExpandedPathChars),

@@ -36,8 +36,8 @@ error line numbers.
 Library
 -------
 
-* ADDED: Definitions for the `os` library `delete_directory/2` and 
-`date_time/7` predicates for Scryer Prolog.
+* ADDED: Definitions for the `os` library `delete_directory/2`, `date_time/7`,
+and `rename_file/2` predicates for Scryer Prolog.
 
 * FIXED: Path expansion in the `os` library for Scryer Prolog.
 
