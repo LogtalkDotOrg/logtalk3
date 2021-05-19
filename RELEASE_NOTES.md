@@ -33,11 +33,16 @@ Prolog adapter and integration files
 * UPDATED: Scryer Prolog adapter file with support for reporting warning and
 error line numbers.
 
+* UPDATED: Require Trealla Prolog 1.8.61 or later version.
+
 Library
 -------
 
 * ADDED: Definitions for the `os` library `delete_directory/2`, `date_time/7`,
 and `rename_file/2` predicates for Scryer Prolog.
+
+* UPDATED: Definition of the `os::make_directory_path/1` predicate for Trealla
+Prolog to use the new native definition.
 
 * FIXED: Path expansion in the `os` library for Scryer Prolog.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 1.8.41 and later versions
-%  Last updated on May 15, 2021
+%  Last updated on May 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -225,7 +225,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 8, 41))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 8, 61))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

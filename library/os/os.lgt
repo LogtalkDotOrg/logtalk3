@@ -49,9 +49,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:78:0,
+		version is 1:79:0,
 		author is 'Paulo Moura',
-		date is 2021-05-18,
+		date is 2021-05-19,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1730,7 +1730,8 @@
 			).
 
 		make_directory_path(Directory) :-
-			make_directory_path_portable(Directory).
+			absolute_file_name(Directory, ExpandedPath),
+			{make_directory_path(ExpandedPath)}.
 
 		delete_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
