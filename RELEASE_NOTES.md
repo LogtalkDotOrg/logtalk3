@@ -39,7 +39,7 @@ Library
 -------
 
 * ADDED: Definitions for the `os` library `delete_directory/2`, `date_time/7`,
-and `rename_file/2` predicates for Scryer Prolog.
+`pid/1`, and `rename_file/2` predicates for Scryer Prolog.
 
 * UPDATED: Definition of the `os::make_directory_path/1` predicate for Trealla
 Prolog to use the new native definition.

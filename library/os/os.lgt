@@ -49,9 +49,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:79:0,
+		version is 1:80:0,
 		author is 'Paulo Moura',
-		date is 2021-05-19,
+		date is 2021-05-20,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1922,8 +1922,8 @@
 				{append(Current, ['/'| PathCharsExpanded], ExpandedPathChars)}
 			).
 
-		pid(_) :-
-			throw(not_available(pid/1)).
+		pid(PID) :-
+			{pid(PID)}.
 
 		shell(_, _) :-
 			throw(not_available(shell/2)).
