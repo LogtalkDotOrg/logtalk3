@@ -67,6 +67,9 @@ Examples
 
 * IMPROVED: Tests for the `complements` and `hailstone` examples.
 
+* FIXED: Comment out non-standard (and non-required) operator definitions in
+the `bench` example that would prevent loading it with some backends.
+
 Tests
 -----
 

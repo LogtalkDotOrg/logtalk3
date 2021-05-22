@@ -16,8 +16,11 @@ top:-prover.
 
 :- op(950, xfy, or).	% disjunction
 :- op(850, xfy, and).	% conjunction
-:- op(500, fx, +).	% assertion
-:- op(500, fx, -).	% denial
+% comment out the next two directives as they clash with the standard
+% definition of the + and - operators; they are also not required and
+% interfere loading the "bench" example with some backends
+%:- op(500, fx, +).	% assertion
+%:- op(500, fx, -).	% denial
 
 prover :- problem(_, P, C),
 	  implies(P, C),
