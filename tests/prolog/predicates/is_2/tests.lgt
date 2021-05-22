@@ -44,8 +44,6 @@
 	test(iso_is_2_03, true(X == 14.2)) :-
 		{X is '+'(0, 3.2+11)}.
 
-	% in some of the throws/2 tests that follow, try to delay the expected error to runtime
-
 	test(iso_is_2_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
