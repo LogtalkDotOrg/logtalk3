@@ -269,8 +269,8 @@
 <p>Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:2:0</div>
-<div class="line"><strong>Date:</strong> 2021-02-18</div>
+<div class="line"><strong>Version:</strong> 1:2:1</div>
+<div class="line"><strong>Date:</strong> 2021-05-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -347,7 +347,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_atom(&#64;term,-atom,+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_atom(+atom,-term,+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -368,7 +368,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_atom(&#64;term,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_atom(+atom,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -389,7 +389,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_chars(&#64;term,-list(character),+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_chars(+list(character),-term,+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -410,7 +410,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_chars(&#64;term,-list(character))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_chars(+list(character),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -431,7 +431,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_codes(&#64;term,-list(character_code),+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_term_from_codes(+list(character_code),-term,+list(read_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -452,7 +452,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_codes(&#64;term,-list(character_code))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">read_from_codes(+list(character_code),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

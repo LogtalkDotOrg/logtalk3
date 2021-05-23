@@ -49,6 +49,9 @@ Prolog to use the new native definition.
 * FIXED: Bug in the `json` library parser of JSON files when a string contains
 an escaped double-quote. Thanks to Paul Brown for the bug report.
 
+* FIXED: Templates for the `term_io` library read predicates. Thanks to Paul
+Brown for the bug report.
+
 Tools
 -----
 

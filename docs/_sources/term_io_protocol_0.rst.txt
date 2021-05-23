@@ -11,8 +11,8 @@
 Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2021-02-18
+| **Version:** 1:2:1
+| **Date:** 2021-05-23
 
 | **Compilation flags:**
 |    ``static``
@@ -54,7 +54,7 @@ Reads a term from an atom using the given read options. A period at the end of t
 | **Template:**
 |    ``read_term_from_atom(Atom,Term,Options)``
 | **Mode and number of proofs:**
-|    ``read_term_from_atom(@term,-atom,+list(read_option))`` - ``one_or_error``
+|    ``read_term_from_atom(+atom,-term,+list(read_option))`` - ``one_or_error``
 
 
 ------------
@@ -77,7 +77,7 @@ Reads a term from an atom using default read options. Shorthand for ``read_term_
 | **Template:**
 |    ``read_from_atom(Atom,Term)``
 | **Mode and number of proofs:**
-|    ``read_from_atom(@term,-atom)`` - ``one_or_error``
+|    ``read_from_atom(+atom,-term)`` - ``one_or_error``
 
 
 ------------
@@ -100,7 +100,7 @@ Reads a term from a list of characters using the given read options. A period at
 | **Template:**
 |    ``read_term_from_chars(Chars,Term,Options)``
 | **Mode and number of proofs:**
-|    ``read_term_from_chars(@term,-list(character),+list(read_option))`` - ``one_or_error``
+|    ``read_term_from_chars(+list(character),-term,+list(read_option))`` - ``one_or_error``
 
 
 ------------
@@ -123,7 +123,7 @@ Reads a term from a list of characters using default read options. Shorthand for
 | **Template:**
 |    ``read_from_chars(Chars,Term)``
 | **Mode and number of proofs:**
-|    ``read_from_chars(@term,-list(character))`` - ``one_or_error``
+|    ``read_from_chars(+list(character),-term)`` - ``one_or_error``
 
 
 ------------
@@ -146,7 +146,7 @@ Reads a term from a list of character codes using the given read options. A peri
 | **Template:**
 |    ``read_term_from_codes(Codes,Term,Options)``
 | **Mode and number of proofs:**
-|    ``read_term_from_codes(@term,-list(character_code),+list(read_option))`` - ``one_or_error``
+|    ``read_term_from_codes(+list(character_code),-term,+list(read_option))`` - ``one_or_error``
 
 
 ------------
@@ -169,7 +169,7 @@ Reads a term from a list of character codes using default read options. Shorthan
 | **Template:**
 |    ``read_from_codes(Codes,Term)``
 | **Mode and number of proofs:**
-|    ``read_from_codes(@term,-list(character_code))`` - ``one_or_error``
+|    ``read_from_codes(+list(character_code),-term)`` - ``one_or_error``
 
 
 ------------
