@@ -87,15 +87,22 @@ that either doesn't support cyclic terms or whose support for cyclic terms
 is limited. Currently, these tests are only run when using SICStus Prolog,
 SWI-Prolog, or YAP as the backend Prolog compiler.
 
+There is some overlap between a few test sets. Notably, between tests sets
+for arithmetic functions and the tests for the `is/2` built-in predicate.
+
 Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
 is faulty. Standards are not perfect and there isn't always a community
 consensus on what should be the correct test results. Common causes of failure
 include:
 
 - corner cases in arithmetic operations where several systems provide
-non-conforming but otherwise valid results
-- type checking of output arguments of standard predicates, which is
+non-conforming but otherwise arguably valid results
+- type checking of output arguments of standard predicates, which can be
 problematic from both semantics and performance perspectives
+
+Often, a relatively small of issues can cause a relatively large number of
+failures. This also means that fixing a single issue can result in multiple
+tests that previously failed passing.
 
 Some Prolog compilers provide a strict ISO mode that may result in different
 test results. This strict mode, when made available, is usually only used if
