@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.8.41 and later versions
-%  Last updated on May 19, 2021
+%  Adapter file for Trealla Prolog 1.8.66 and later versions
+%  Last updated on May 23, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -225,7 +225,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 8, 61))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 8, 66))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -514,8 +514,38 @@
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
+	% allow first-argument indexing
+	catch('$lgt_trealla_directive_expansion'(Directive, Expanded), _, fail).
+
+'$lgt_trealla_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
+	File \= [_| _],
+	% not the Logtalk use_module/1 directive
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object;
+	% assume referenced modules are also compiled as objects
+	!,
+	'$lgt_trealla_list_of_exports'(File, Module, Imports).
+
+'$lgt_trealla_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
+	File \= [_| _],
+	% not the Logtalk use_module/1 directive
+	logtalk_load_context(entity_type, _),
+	% object or category using a Prolog module
+	'$lgt_trealla_list_of_exports'(File, Module, Imports),
+	use_module(File).
+
+'$lgt_trealla_list_of_exports'(File, Module, Exports) :-
+	logtalk_load_context(directory, Directory),
+	(	'$lgt_file_extension'(prolog, Extension)
+	;	'$lgt_file_extension'(logtalk, Extension)
+	),
+	atom_concat(File, Extension, Basename),
+	absolute_file_name(Basename, Path, [relative_to(Directory)]),
+	exists_file(Path),
+	open(Path, read, In),
+	setup_call_cleanup(true, read(In, (:- module(Module, Exports))), close(In)),
+	!.
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
