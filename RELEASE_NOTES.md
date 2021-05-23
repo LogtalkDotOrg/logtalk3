@@ -86,7 +86,7 @@ suggestion by Andrew Davison.
 * ADDED: Additional Unicode support tests to check that the `stream_property/2`
 predicate doesn't return `bom/1` or `encoding/1` properties for binary streams.
 
-* ADDED: Unit tests for the ISO Prolog standard `(+)/2`, `(-)/2`, `(*)/2`,
+* ADDED: Unit tests for the ISO Prolog standard `(+)/1-2`, `(-)/1-2`, `(*)/2`,
 `(/)/2`, and `(//)/2` built-in functions.
 
 * IMPROVED: Tests for the Logtalk `initialization/1`, `multifile/1`, and 

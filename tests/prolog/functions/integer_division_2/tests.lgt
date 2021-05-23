@@ -87,7 +87,7 @@
 		{_X is 3 // Zero}.
 
 	test(lgt_integer_division_2_12, true, [condition(current_prolog_flag(bounded,true))]) :-
-		% try to delay the error to runtime
+		% try to delay any error to runtime
 		current_prolog_flag(min_integer, Min),
 		{catch(X is Min // -1, error(Error, _), Error == evaluation_error(int_overflow))},
 		(	var(Error) ->
