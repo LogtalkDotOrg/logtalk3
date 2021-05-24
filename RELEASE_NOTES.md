@@ -28,7 +28,7 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* UPDATED: The compiler to use internally the de facto standard `between/3`
+* CHANGED: The compiler to use internally the de facto standard `between/3`
 predicate instead of its own version.
 
 Prolog adapter and integration files
@@ -76,6 +76,9 @@ assertions.
 
 Examples
 --------
+
+* CHANGED: The `benchmarks` example to use the de facto standard `between/3`
+predicate instead of its own version.
 
 * IMPROVED: Tests for the `complements` and `hailstone` examples.
 
