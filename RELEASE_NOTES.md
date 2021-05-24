@@ -25,6 +25,12 @@ RELEASE NOTES
 3.47.0 - June ??, 2021
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* UPDATED: The compiler to use internally the de facto standard `between/3`
+predicate instead of its own version.
+
 Prolog adapter and integration files
 ------------------------------------
 

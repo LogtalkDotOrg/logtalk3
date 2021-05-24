@@ -3482,7 +3482,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 47, 0, b01)).
+'$lgt_version_data'(logtalk(3, 47, 0, b02)).
 
 
 
@@ -23011,7 +23011,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_contains_variable'(Term, Variable) :-
     compound(Term),
 	functor(Term, _, Arity),
-	'$lgt_between'(1, Arity, N),
+	between(1, Arity, N),
     arg(N, Term, Argument),
     '$lgt_contains_variable'(Argument, Variable).
 
@@ -26177,7 +26177,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_sub_term_var'(SubTerm, Term) :-
 	compound(Term),
 	functor(Term, _, Arity),
-	'$lgt_between'(1, Arity, N),
+	between(1, Arity, N),
 	arg(N, Term, Argument),
 	'$lgt_sub_term_var'(SubTerm, Argument),
 	!.
@@ -26230,17 +26230,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	M is N + 1,
 		'$lgt_position_relevant_argument_pairs'(Arguments, M, VariableNames, Pairs, Type, Tail)
 	).
-
-
-'$lgt_between'(Lower, Upper, N) :-
-	Lower =< Upper,
-	'$lgt_between_aux'(Lower, Upper, N).
-
-'$lgt_between_aux'(Lower, _, Lower).
-'$lgt_between_aux'(Lower, Upper, N) :-
-	Lower < Upper,
-	Next is Lower + 1,
-	'$lgt_between_aux'(Next, Upper, N).
 
 
 '$lgt_is_list_or_partial_list'(Var) :-
