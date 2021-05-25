@@ -44,6 +44,9 @@ error line numbers.
 * UPDATED: Trealla Prolog adapter file with experimental code for expanding
 `use_module/1` Prolog directives.
 
+* UPDATED: The LVM adapter file to use the built-in `decompose_file_name/4`
+predicate.
+
 Library
 -------
 
