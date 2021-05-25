@@ -504,12 +504,12 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_logtalk_prolog_encoding'('US-ASCII', 'US-ASCII', _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-1', _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-2', _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-4', _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-9', _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-10', _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-15', _).
-'$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-16', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-2', 'ISO-8859-2', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-4', 'ISO-8859-4', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-9', 'ISO-8859-9', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-10', 'ISO-8859-10', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-15', 'ISO-8859-15', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-16', 'ISO-8859-16', _).
 '$lgt_logtalk_prolog_encoding'('windows-1251', 'windows-1251', _).
 '$lgt_logtalk_prolog_encoding'('windows-1252', 'windows-1252', _).
 '$lgt_logtalk_prolog_encoding'('UTF-8', 'UTF-8', _).
