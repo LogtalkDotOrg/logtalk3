@@ -45,7 +45,7 @@ error line numbers.
 `use_module/1` Prolog directives.
 
 * UPDATED: The LVM adapter file to use the built-in `decompose_file_name/4`
-predicate.
+and `atom_number/2` predicates.
 
 Library
 -------

@@ -371,8 +371,7 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_directory_hash_as_atom'(Directory, Hash) :-
 	atom_hash(Directory, Hash0),
-	number_codes(Hash0, Codes),
-	atom_codes(Hash, Codes).
+	atom_number(Hash, Hash0).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
