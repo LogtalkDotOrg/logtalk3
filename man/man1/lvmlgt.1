@@ -1,4 +1,4 @@
-.TH lvmlgt 1 "March 23, 2021" "Logtalk 3.45.0" "Logtalk Documentation"
+.TH lvmlgt 1 "May 19, 2021" "Logtalk 3.47.0" "Logtalk Documentation"
 
 .SH NAME
 lvmlgt \- Logtalk integration script for LVM
@@ -8,7 +8,7 @@ lvmlgt \- Logtalk integration script for LVM
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBlvmlgt\fR is a Logtalk integration script for LVM. It automatically loads the LVM adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. By default, this script starts LVM using the standard top-level interpreter.
+\fBlvmlgt\fR is a Logtalk integration script for LVM. It automatically loads the LVM adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. By default, this script runs LVM using \fBrlwrap\fR if available.
 
 .SH OPTIONS
 .TP
@@ -17,7 +17,7 @@ lvmlgt \- Logtalk integration script for LVM
 Initialization goal, written between double quotes, to be executed after Logtalk startup.
 
 .SH REQUIREMENTS
-LVM 1.5.0 or a later version is required. This integration script looks for a "lvmpl" executable in the system path.
+LVM 1.7.0 or a later version is required. This integration script looks for a "lvmpl" executable in the system path.
 
 .SH ENVIRONMENT
 .TP
