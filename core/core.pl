@@ -15434,8 +15434,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DPred = '$lgt_debug'(goal(Alias, TPred), ExCtx)
 	).
 
-% goal is a call to a dynamic predicate within a category; the predicate is called
-% instead in the object importing the category (implicit dynamic binding)
+% call to a dynamic predicate from within a category; the predicate
+% is called instead in the context of the object importing the category
+% that received the message under processing (implicit dynamic binding)
 
 '$lgt_compile_body'(Pred, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),

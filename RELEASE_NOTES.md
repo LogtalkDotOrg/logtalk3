@@ -85,6 +85,9 @@ predicate instead of its own version.
 
 * IMPROVED: Tests for the `complements` and `hailstone` examples.
 
+* IMPROVED: Simplified the `logs` example which illustrates how to define 
+category predicates that handle a dynamic predicate in the context of "this".
+
 * FIXED: Comment out non-standard (and non-required) operator definitions in
 the `bench` example that would prevent loading it with some backends.
 

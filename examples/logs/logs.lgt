@@ -47,19 +47,17 @@
 		time::now(Hours, Mins, Secs),
 		assertz(log_(Year/Month/Day-Hours:Mins:Secs, Entry)).
 
-	% log_/2 is a private predicate but we can still use the ::/2 message
-	% sending control construct because the sender of the message is the
-	% object, "this", importing the category where the predicate is declared
+	% log_/2 is a private dynamic predicate; calls occur in "this", i.e.
+	% in the context of the object importing the category that received
+	% the print_log/0 message
 	print_log :-
-		this(This),
-			This::log_(Date, Entry),
-			write(Date), write(' - '), write(Entry), nl,
+		log_(Date, Entry),
+		write(Date), write(' - '), write(Entry), nl,
 		fail.
 	print_log.
 
 	log_entry(Date, Entry) :-
-		this(This),
-		This::log_(Date, Entry).
+		log_(Date, Entry).
 
 :- end_category.
 
