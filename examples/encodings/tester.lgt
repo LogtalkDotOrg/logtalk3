@@ -47,9 +47,25 @@
 			tests_utf_8::run
 		)).
 
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == cx; Dialect == sicstus))).
+
+		% neither CxProlog and SICStus Prolog provide up-to-date support for UTF-16
+		:- initialization((
+			set_logtalk_flag(report, warnings),
+			logtalk_load(lgtunit(loader)),
+			logtalk_load([asian, babel, latin, mythology], [source_data(on), debug(on)]),
+			logtalk_load([tests_iso_8859_1, tests_utf_8, tests_utf_16, tests_utf_32], [hook(lgtunit)]),
+			lgtunit::run_test_sets([
+				tests_iso_8859_1,
+				tests_utf_8,
+				tests_utf_16,
+				tests_utf_32
+			])
+		)).
+
 	:- else.
 
-		% only test full UTF-16 and UTF-32 encodings on Prolog dialects claiming to support it
+		% assume full backend support for UTF-8, UTF-16 (including up-to-date surrogate support), and UTF-32
 		:- initialization((
 			set_logtalk_flag(report, warnings),
 			logtalk_load(lgtunit(loader)),

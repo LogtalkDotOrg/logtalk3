@@ -88,6 +88,9 @@ predicate instead of its own version.
 * FIXED: Comment out non-standard (and non-required) operator definitions in
 the `bench` example that would prevent loading it with some backends.
 
+* FIXED: The `encodings` example to not try to load files or run tests that
+require up-to-date UTF-16 support when using CxProlog or SICStus Prolog.
+
 Tests
 -----
 
