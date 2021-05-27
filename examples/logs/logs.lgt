@@ -47,9 +47,8 @@
 		time::now(Hours, Mins, Secs),
 		assertz(log_(Year/Month/Day-Hours:Mins:Secs, Entry)).
 
-	% log_/2 is a private dynamic predicate; calls occur in "this", i.e.
-	% in the context of the object importing the category that received
-	% the print_log/0 message
+	% log_/2 is a private dynamic predicate; calls occur in "this",
+	% i.e. in the context of the object importing the category
 	print_log :-
 		log_(Date, Entry),
 		write(Date), write(' - '), write(Entry), nl,
@@ -65,8 +64,8 @@
 :- object(object,
 	imports(logging)).
 
-	% the following two initialization goals are equivalent because,
-	% in this case, "self" and "this" are the same object:
+	% the following two initialization goals are equivalent because, in the case
+	% of the initialization/1 directive, "self" and "this" are the same object:
 
 	% starts lookup for init_log/0 in "self"
 	%:- initialization(::init_log).

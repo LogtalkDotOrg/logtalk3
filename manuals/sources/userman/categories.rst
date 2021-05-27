@@ -686,7 +686,7 @@ This is the recommended way of calling a category predicate that can be
 specialized/overridden in a descendant object as the predicate definition
 lookup will start from *self*.
 
-A direct call the predicate definition found in an imported category can
+A direct call to a predicate definition found in an imported category can
 be made using the :ref:`control_call_super_1`
 control construct. For example:
 
