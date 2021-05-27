@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 9:5:0,
+		version is 10:0:0,
 		author is 'Paulo Moura',
-		date is 2021-05-17,
+		date is 2021-05-27,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -669,6 +669,14 @@
 		argnames is ['Counter']
 	]).
 
+	:- private(flaky_/1).
+	:- dynamic(flaky_/1).
+	:- mode(flaky_(?callable), zero_or_one).
+	:- info(flaky_/1, [
+		comment is 'Counter for failed tests that are marked as flaky.',
+		argnames is ['Counter']
+	]).
+
 	:- private(fired_/3).
 	:- dynamic(fired_/3).
 	:- mode(fired_(?entity_identifier, ?predicate_indicator, ?integer), zero_or_more).
@@ -1019,9 +1027,10 @@
 		::skipped_(Skipped),
 		::passed_(Passed),
 		::failed_(Failed),
+		::flaky_(Flaky),
 		Total is Skipped + Passed + Failed,
 		::note(Note),
-		print_message(information, lgtunit, tests_results_summary(Object, Total, Skipped, Passed, Failed, Note)),
+		print_message(information, lgtunit, tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note)),
 		print_message(information, lgtunit, completed_tests_from_object(Object)).
 
 	write_tests_footer :-
@@ -1062,6 +1071,10 @@
 		cpu_time(End),
 		Time is End - Start,
 		increment_failed_tests_counter,
+		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
+			increment_flaky_tests_counter
+		;	true
+		),
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
@@ -1170,6 +1183,8 @@
 		::asserta(passed_(0)),
 		::retractall(failed_(_)),
 		::asserta(failed_(0)),
+		::retractall(flaky_(_)),
+		::asserta(flaky_(0)),
 		::retractall(skipped_(_)),
 		::asserta(skipped_(0)).
 
@@ -1182,6 +1197,11 @@
 		::retract(failed_(Old)),
 		New is Old + 1,
 		::asserta(failed_(New)).
+
+	increment_flaky_tests_counter :-
+		::retract(flaky_(Old)),
+		New is Old + 1,
+		::asserta(flaky_(New)).
 
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object

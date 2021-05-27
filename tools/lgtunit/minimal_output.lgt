@@ -29,9 +29,9 @@
 :- object(minimal_output).
 
 	:- info([
-		version is 2:0:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-03-09,
+		date is 2021-05-27,
 		comment is 'Intercepts unit test execution messages and outputs a minimal report.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(minimal_output))``.',
@@ -48,13 +48,13 @@
 		ignore(message_hook(Message)).
 
 	% test results summary
-	message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Note)) :-
+	message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note)) :-
 		nl,
 		writeq(Object), write(' suite: '),
 		write(Total), write(' tests, '),
 		write(Skipped), write(' skipped, '),
 		write(Passed), write(' passed, '),
-		write(Failed), write(' failed'),
+		write(Failed), write(' failed ('), write(Flaky), write(' flaky)'),
 		nl,
 		(	Note == '' ->
 			true

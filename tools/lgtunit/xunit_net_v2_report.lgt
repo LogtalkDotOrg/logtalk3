@@ -33,9 +33,9 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 3:0:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-04-10,
+		date is 2021-05-27,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -281,7 +281,7 @@
 		!,
 		Object::number_of_tests(Total).
 	assembly_stats(Object, Total, Skipped, Passed, Failed) :-
-		message_cache_(tests_results_summary(Object, Total, Skipped, Passed, Failed, _Note)),
+		message_cache_(tests_results_summary(Object, Total, Skipped, Passed, Failed, _Flaky, _Note)),
 		!.
 
 	assembly_config_file(Object, Name) :-

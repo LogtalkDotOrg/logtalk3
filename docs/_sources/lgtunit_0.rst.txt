@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 9:5:0
-| **Date:** 2021-05-17
+| **Version:** 10:0:0
+| **Date:** 2021-05-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -2051,6 +2051,29 @@ Counter for failed tests.
 |    ``failed_(Counter)``
 | **Mode and number of proofs:**
 |    ``failed_(?callable)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="flaky_/1"> </div>
+
+.. index:: flaky_/1
+.. _lgtunit/0::flaky_/1:
+
+``flaky_/1``
+^^^^^^^^^^^^
+
+Counter for failed tests that are marked as flaky.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``flaky_(Counter)``
+| **Mode and number of proofs:**
+|    ``flaky_(?callable)`` - ``zero_or_one``
 
 
 ------------

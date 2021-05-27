@@ -33,9 +33,9 @@
 :- object(tap_report).
 
 	:- info([
-		version is 3:0:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-04-10,
+		date is 2021-05-27,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -93,7 +93,7 @@
 		atom_codes(TotalAtom, Codes),
 		write(tap_report, '1..'), write(tap_report, TotalAtom), nl(tap_report).
 	% test results summary
-	message_hook(tests_results_summary(_, Partial, _, _, _, _)) :-
+	message_hook(tests_results_summary(_, Partial, _, _, _, _, _)) :-
 		assertz(partial_(Partial)).
 	% stop
 	message_hook(tests_end_date_time(_, _, _, _, _, _)) :-

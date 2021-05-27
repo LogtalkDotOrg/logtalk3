@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 2:1:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-03-24,
+		date is 2021-05-27,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -187,7 +187,7 @@
 		!,
 		Object::number_of_tests(Tests).
 	testsuite_stats(Object, Tests, 0, Failures, Skipped) :-
-		once(message_cache_(tests_results_summary(Object, Tests, Skipped, _, Failures, _))),
+		once(message_cache_(tests_results_summary(Object, Tests, Skipped, _, Failures, _, _))),
 		!.
 
 	testsuite_name(Object, Name::Object) :-

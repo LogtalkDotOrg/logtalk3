@@ -278,8 +278,8 @@
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 9:5:0</div>
-<div class="line"><strong>Date:</strong> 2021-05-17</div>
+<div class="line"><strong>Version:</strong> 10:0:0</div>
+<div class="line"><strong>Date:</strong> 2021-05-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -420,13 +420,14 @@
 <li><p><a class="reference internal" href="#skipped-1" id="id88"><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#passed-1" id="id89"><code class="docutils literal notranslate"><span class="pre">passed_/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#failed-1" id="id90"><code class="docutils literal notranslate"><span class="pre">failed_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#fired-3" id="id91"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#covered-4" id="id92"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#flaky-1" id="id91"><code class="docutils literal notranslate"><span class="pre">flaky_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fired-3" id="id92"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#covered-4" id="id93"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id93">Operators</a></p>
+<li><p><a class="reference internal" href="#operators" id="id94">Operators</a></p>
 <ul>
-<li><p><a class="reference internal" href="#op-700-xfx" id="id94"><code class="docutils literal notranslate"><span class="pre">op(700,xfx,=~=)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#op-700-xfx" id="id95"><code class="docutils literal notranslate"><span class="pre">op(700,xfx,=~=)</span></code></a></p></li>
 </ul>
 </li>
 </ul>
@@ -2281,9 +2282,30 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="flaky_/1"> </div></div>
+<div class="section" id="flaky-1">
+<span id="lgtunit-0-flaky-1"></span><span id="index-87"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">flaky_/1</span></code></a><a class="headerlink" href="#flaky-1" title="Permalink to this headline">¶</a></h3>
+<p>Counter for failed tests that are marked as flaky.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flaky_(Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flaky_(?callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="fired_/3"> </div></div>
 <div class="section" id="fired-3">
-<span id="lgtunit-0-fired-3"></span><span id="index-87"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a><a class="headerlink" href="#fired-3" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-fired-3"></span><span id="index-88"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a><a class="headerlink" href="#fired-3" title="Permalink to this headline">¶</a></h3>
 <p>Fired clauses when running the unit tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2304,7 +2326,7 @@
 <hr class="docutils" />
 <div id="covered_/4"> </div></div>
 <div class="section" id="covered-4">
-<span id="lgtunit-0-covered-4"></span><span id="index-88"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a><a class="headerlink" href="#covered-4" title="Permalink to this headline">¶</a></h3>
+<span id="lgtunit-0-covered-4"></span><span id="index-89"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a><a class="headerlink" href="#covered-4" title="Permalink to this headline">¶</a></h3>
 <p>Auxiliary predicate for collecting statistics on clause coverage.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

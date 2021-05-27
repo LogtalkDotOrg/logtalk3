@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 4, 2021
+##   Last updated on May 27, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 4.3"
+	echo "$(basename "$0") 5.0"
 	exit 0
 }
 
@@ -152,7 +152,9 @@ run_testset() {
 			echo -n "$(cut -f 5 <<< "$line")"
 			echo -n ' passed, '
 			echo -n "$(cut -f 6 <<< "$line")"
-			echo ' failed'		
+			echo -n ' failed ('		
+			echo -n "$(cut -f 7 <<< "$line")"
+			echo ' flaky)'
 			echo -n '%         completed tests from object '
 			echo "$(cut -f 2 <<< "$line")"
 		done < <(grep '^object' "$results/$name.totals")
@@ -571,10 +573,12 @@ testsetruns=$((testsets-testsetskipped-timeouts-crashes-broken))
 skipped=0
 passed=0
 failed=0
+flaky=0
 while read -r line ; do
 	skipped=$((skipped+$(cut -f 4 <<< "$line")))
 	passed=$((passed+$(cut -f 5 <<< "$line")))
 	failed=$((failed+$(cut -f 6 <<< "$line")))
+	flaky=$((flaky+$(cut -f 7 <<< "$line")))
 done < <(grep -s '^object' ./*.totals)
 total=$((skipped+passed+failed))
 
@@ -630,7 +634,7 @@ if grep -s -q '^failed' -- *.totals; then
 fi
 echo "%"
 echo "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timeouts, $crashes crashes"
-echo "% $total tests: $skipped skipped, $passed passed, $failed failed"
+echo "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
 if [ "$output" == 'verbose' ] ; then
 	end_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
@@ -644,7 +648,7 @@ elif [ "$broken" -gt 0 ] ; then
 	exit 5
 elif [ "$timeouts" -gt 0 ] ; then
 	exit 3
-elif [ "$failed" -gt 0 ] ; then
+elif [ "$((failed - flaky))" -gt 0 ] ; then
 	exit 1
 else
 	exit 0

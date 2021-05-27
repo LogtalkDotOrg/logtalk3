@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "May 4, 2021" "Logtalk 3.46.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "May 27, 2021" "Logtalk 3.47.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -83,10 +83,10 @@ Provide help on script usage.
 .SH "EXIT STATUS"
 .TP
 .B 0
-All non-skipped tests pass and there are no broken, timed out, or crashed test sets.
+All non-skipped tests pass (flaky test failures are ignored) and there are no broken, timed out, or crashed test sets.
 .TP
 .B 1
-Some tests fail but there are no broken, timed out, or crashed test sets.
+Some (non-flaky) tests fail but there are no broken, timed out, or crashed test sets.
 .TP
 .B 3
 One or more test sets timed out while executing but there are no broken or crashed test sets.

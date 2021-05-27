@@ -31,9 +31,9 @@
 :- object(automation_report).
 
 	:- info([
-		version is 2:1:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-04-15,
+		date is 2021-05-27,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
@@ -62,12 +62,13 @@
 	message_hook(running_tests_from_object_file(_, File)) :-
 		write(results_file, 'file\t'), write(results_file, File), nl(results_file).
 	% test results summary
-	message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, _)) :-
+	message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, _)) :-
 		write(results_file, 'object\t'), writeq(results_file, Object),
 		write(results_file, '\t'), write(results_file, Total),
 		write(results_file, '\t'), write(results_file, Skipped),
 		write(results_file, '\t'), write(results_file, Passed),
-		write(results_file, '\t'), write(results_file, Failed), nl(results_file).
+		write(results_file, '\t'), write(results_file, Failed),
+		write(results_file, '\t'), write(results_file, Flaky), nl(results_file).
 	% failed tests
 	message_hook(failed_test(Object, Test, _, _, _, Note, _)) :-
 		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),

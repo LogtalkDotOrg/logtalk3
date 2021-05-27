@@ -67,9 +67,14 @@ Brown for the bug report.
 Tools
 -----
 
+* CHANGED: The `logtalk_tester` script to ignore failed flaky tests when
+setting the exit status.
+
 * ADDED: Predicates `text_file_assertion/3` and `binary_file_assertion/3` to
 the `lgtunit` tool to generate assertions that a given file have the expected
 text or binary contents.
+
+* IMPROVED: The `lgtunit` tool support for reporting flaky tests.
 
 * UPDATED: The `lgtunit` tool to also use the de facto standard `epsilon/0`
 arithmetic constant with Scryer Prolog.
