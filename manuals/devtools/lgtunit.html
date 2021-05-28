@@ -1111,7 +1111,8 @@ from test execution conditions that are not predictable. The <code class="docuti
 annotation can be used to alert that a test failure is for a flaky test.
 If the <code class="docutils literal notranslate"><span class="pre">note/1</span></code> argument is an atom containing the sub-atom <code class="docutils literal notranslate"><span class="pre">flaky</span></code>,
 the testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
-reporting failed tests.</p>
+reporting failed tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation
+script will ignore failed flaky tests when setting its exit status.</p>
 </div>
 <div class="section" id="debugging-failed-tests">
 <h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Permalink to this headline">¶</a></h2>

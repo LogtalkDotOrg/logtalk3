@@ -866,7 +866,8 @@ don't result from bugs in the code being tested itself but from test execution
 conditions that are not predictable. The `note/1` annotation can be used to
 alert that a test failure is for a flaky test. If the `note/1` argument is an
 atom containing the sub-atom `flaky`, the testing automation support outputs
-the text `[flaky]` when reporting failed tests.
+the text `[flaky]` when reporting failed tests. Moreover, the `logtalk_tester`
+automation script will ignore failed flaky tests when setting its exit status.
 
 
 Debugging failed tests
