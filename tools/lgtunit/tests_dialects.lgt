@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2021-02-08,
+		date is 2021-05-28,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -132,6 +132,14 @@
 
 	test(test_3_10b, subsumes(a(_), Result), []) :-
 		Result = a(1).
+
+	% flaky tests
+
+	test(test_flaky_01, true, [note(flaky)]) :-
+		Goal = (1 == 2), call(Goal).
+
+	test(test_flaky_02, false, [note(flaky)]) :-
+		Goal = (1 == 1), call(Goal).
 
 	% "explicit" dialects
 
