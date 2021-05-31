@@ -24,7 +24,7 @@
 	:- info([
 		version is 5:0:0,
 		author is 'Paulo Moura',
-		date is 2021-05-27,
+		date is 2021-05-31,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -89,7 +89,7 @@
 	message_tokens(completed_tests_from_object(Object)) -->
 		['completed tests from object ~q'-[Object], nl, nl].
 
-	message_tokens(tests_skipped(_Object, Note)) -->
+	message_tokens(tests_skipped(_Object, _File, Note)) -->
 		(	{Note == ''} ->
 			['tests skipped'-[], nl]
 		;	['tests skipped (~w)'-[Note], nl]

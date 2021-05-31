@@ -91,7 +91,7 @@
 		write(results_file, 'skipped\t'), write(results_file, File), write(results_file, '\t'),
 		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
 	% skipped test set
-	message_hook(tests_skipped(Object, _)) :-
+	message_hook(tests_skipped(Object, File, _)) :-
 		Object::number_of_tests(Tests),
 		write(results_file, 'object\t'), writeq(results_file, Object),
 		write(results_file, '\t'), write(results_file, Tests),
@@ -101,7 +101,9 @@
 		write(results_file, '\t0'), nl(results_file),
 		forall(
 			Object::test(Test),
-			(write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file))
+			(	write(results_file, 'skipped\t'), write(results_file, File), write(results_file, '\t'),
+				writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file)
+			)
 		).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-

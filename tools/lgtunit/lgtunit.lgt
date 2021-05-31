@@ -29,7 +29,7 @@
 	:- info([
 		version is 10:0:0,
 		author is 'Paulo Moura',
-		date is 2021-05-27,
+		date is 2021-05-31,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1098,8 +1098,9 @@
 
 	tests_skipped :-
 		self(Object),
+		object_property(Object, file(File)),
 		::note(Note),
-		print_message(information, lgtunit, tests_skipped(Object, Note)).
+		print_message(information, lgtunit, tests_skipped(Object, File, Note)).
 
 	:- meta_predicate(run_test_condition(*, *, *, *, *, *)).
 

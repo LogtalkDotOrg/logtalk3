@@ -35,7 +35,7 @@
 	:- info([
 		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-05-27,
+		date is 2021-05-31,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -107,7 +107,7 @@
 	message_hook(failed_step(setup, _)) :-
 		write(tap_report, 'Bail out! Test suite setup failed.'), nl(tap_report).
 	% tests skipped
-	message_hook(tests_skipped(_, Note)) :-
+	message_hook(tests_skipped(_, _, Note)) :-
 		write(tap_report, '1..0 # skip'),
 		(	Note == '' ->
 			true

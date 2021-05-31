@@ -70,8 +70,9 @@ Tools
 * CHANGED: The `logtalk_tester` script to ignore failed flaky tests when
 setting the exit status.
 
-* CHANGED: The `lgtunit` tool `tests_results_summary/6` message to
-`tests_results_summary/7` in order to include the count for flaky tests.
+* CHANGED: The `lgtunit` tool `tests_results_summary/6` and `tests_skipped/2`
+messages to, respectively, `tests_results_summary/7` and `tests_skipped/3` to
+better support flaky tests and skipped test sets.
 
 * ADDED: Predicates `text_file_assertion/3` and `binary_file_assertion/3` to
 the `lgtunit` tool to generate assertions that a given file have the expected

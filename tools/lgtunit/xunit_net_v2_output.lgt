@@ -31,7 +31,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-05-27,
+		date is 2021-05-31,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -152,8 +152,7 @@
 		write_xml_close_tag(collection).
 
 	write_test_elements(Object) :-
-		message_cache_(tests_skipped(Object, Note)),
-		message_cache_(running_tests_from_object_file(Object, File)),
+		message_cache_(tests_skipped(Object, File, Note)),
 		Object::test(Name),
 		write_test_element_tags(skipped_test(File, 0-0, Note), Name, Object),
 		fail.
@@ -253,7 +252,7 @@
 		sum(TestTimes, 0, Time).
 
 	assembly_stats(Object, Total, Total, 0, 0) :-
-		message_cache_(tests_skipped(Object, _Note)),
+		message_cache_(tests_skipped(Object, _File, _Note)),
 		!,
 		Object::number_of_tests(Total).
 	assembly_stats(Object, Total, Skipped, Passed, Failed) :-
