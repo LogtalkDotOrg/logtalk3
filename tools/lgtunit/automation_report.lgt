@@ -97,6 +97,7 @@
 		write(results_file, '\t'), write(results_file, Tests),
 		write(results_file, '\t'), write(results_file, Tests),
 		write(results_file, '\t0'),
+		write(results_file, '\t0'),
 		write(results_file, '\t0'), nl(results_file),
 		forall(
 			Object::test(Test),
