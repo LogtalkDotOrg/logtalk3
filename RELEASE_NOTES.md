@@ -39,7 +39,7 @@ Prolog adapter and integration files
 * UPDATED: Scryer Prolog adapter file with support for reporting warning and
 error line numbers.
 
-* UPDATED: Require Trealla Prolog 1.8.70 or later version.
+* UPDATED: Require Trealla Prolog 1.8.71 or later version.
 
 * UPDATED: Trealla Prolog adapter file with experimental code for expanding
 `use_module/1` Prolog directives.
