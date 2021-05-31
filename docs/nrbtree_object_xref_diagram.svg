@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-608 1122,-608 1122,4 -4,4"/>
 <text text-anchor="start" x="8" y="-26" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-16" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object nrbtree</text>
-<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;05&#45;31, 10:44</text>
+<text text-anchor="start" x="8" y="-6" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;05&#45;31, 19:39</text>
 <g id="clust1" class="cluster">
 <title>cluster_nrbtree_object</title>
 <g id="a_clust1"><a xlink:title="nrbtree">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1098,-46 1098,-46 1104,-46 1110,-52 1110,-58 1110,-58 1110,-584 1110,-584 1110,-590 1104,-596 1098,-596 1098,-596 20,-596 20,-596 14,-596 8,-590 8,-584 8,-584 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt">
 <text text-anchor="start" x="20" y="-580" font-family="Courier,monospace" font-size="10.00" fill="dimgray">nrbtree</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- new/1 -->
 <g id="node1" class="node">
 <title>new/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L23">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L23">
 <polygon fill="cornsilk" stroke="black" points="541.5,-443 482.5,-443 482.5,-407 541.5,-407 541.5,-443"/>
 <text text-anchor="start" x="490.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="496" y="-426.2" font-family="Courier,monospace" font-size="11.00">new/1</text>
@@ -52,12 +52,12 @@
 <!-- new/1&#45;&gt;^^new/1 -->
 <g id="edge12" class="edge">
 <title>new/1&#45;&gt;^^new/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L23" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L23" xlink:title="calls">
 <path fill="none" stroke="black" d="M512.91,-406.53C513.88,-387.94 515.43,-358.24 516.57,-336.5"/>
 <polygon fill="black" stroke="black" points="520.07,-336.42 517.1,-326.25 513.08,-336.06 520.07,-336.42"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L23">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L23">
 <text text-anchor="start" x="515" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- empty/1 -->
 <g id="node2" class="node">
 <title>empty/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L26" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L26">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L26" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L26">
 <polygon fill="cornsilk" stroke="black" points="1093,-560 1021,-560 1021,-524 1093,-524 1093,-560"/>
 <text text-anchor="start" x="1028.8" y="-543.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1033.9" y="-543.2" font-family="Courier,monospace" font-size="11.00">empty/1</text>
@@ -90,12 +90,12 @@
 <!-- empty/1&#45;&gt;^^empty/1 -->
 <g id="edge13" class="edge">
 <title>empty/1&#45;&gt;^^empty/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L26" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L26" xlink:title="calls">
 <path fill="none" stroke="black" d="M1057,-523.53C1057,-504.94 1057,-475.24 1057,-453.5"/>
 <polygon fill="black" stroke="black" points="1060.5,-453.25 1057,-443.25 1053.5,-453.25 1060.5,-453.25"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L26" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L26">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L26" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L26">
 <text text-anchor="start" x="1057" y="-480.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,7 +103,7 @@
 <!-- as_nested_dictionary/2 -->
 <g id="node3" class="node">
 <title>as_nested_dictionary/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L29" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L29">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L29" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L29">
 <polygon fill="cornsilk" stroke="black" points="727.5,-560 556.5,-560 556.5,-524 727.5,-524 727.5,-560"/>
 <text text-anchor="start" x="564.8" y="-543.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="569.89" y="-543.2" font-family="Courier,monospace" font-size="11.00">as_nested_dictionary/2</text>
@@ -117,7 +117,7 @@
 <!-- curly_to_dictionary/2 -->
 <g id="node4" class="node">
 <title>curly_to_dictionary/2</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L40">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L40">
 <polygon fill="cornsilk" stroke="black" points="724,-443 560,-443 560,-407 724,-407 724,-443"/>
 <text text-anchor="start" x="567.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="572.69" y="-426.2" font-family="Courier,monospace" font-size="11.00">curly_to_dictionary/2</text>
@@ -131,12 +131,12 @@
 <!-- as_nested_dictionary/2&#45;&gt;curly_to_dictionary/2 -->
 <g id="edge1" class="edge">
 <title>as_nested_dictionary/2&#45;&gt;curly_to_dictionary/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L29" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L29" xlink:title="calls">
 <path fill="none" stroke="black" d="M642,-523.53C642,-504.94 642,-475.24 642,-453.5"/>
 <polygon fill="black" stroke="black" points="645.5,-453.25 642,-443.25 638.5,-453.25 645.5,-453.25"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L29" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L29">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L29" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L29">
 <text text-anchor="start" x="642" y="-480.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -144,7 +144,7 @@
 <!-- pairs_to_dictionary/3 -->
 <g id="node5" class="node">
 <title>pairs_to_dictionary/3</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55">
 <polygon fill="cornsilk" stroke="black" points="736,-326 572,-326 572,-290 736,-290 736,-326"/>
 <text text-anchor="start" x="579.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="584.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">pairs_to_dictionary/3</text>
@@ -158,12 +158,12 @@
 <!-- curly_to_dictionary/2&#45;&gt;pairs_to_dictionary/3 -->
 <g id="edge2" class="edge">
 <title>curly_to_dictionary/2&#45;&gt;pairs_to_dictionary/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L48" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M637.95,-406.81C635.58,-394.32 633.51,-377.04 636,-362 637.44,-353.28 640.13,-344.06 643,-335.8"/>
 <polygon fill="black" stroke="black" points="646.33,-336.89 646.52,-326.3 639.76,-334.46 646.33,-336.89"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L48">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L48">
 <text text-anchor="start" x="635" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -171,12 +171,12 @@
 <!-- curly_to_dictionary/2&#45;&gt;^^new/1 -->
 <g id="edge14" class="edge">
 <title>curly_to_dictionary/2&#45;&gt;^^new/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L46" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L46" xlink:title="calls">
 <path fill="none" stroke="black" d="M623.44,-406.78C602.43,-387.31 568.07,-355.43 544.31,-333.4"/>
 <polygon fill="black" stroke="black" points="546.4,-330.57 536.69,-326.33 541.64,-335.7 546.4,-330.57"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L46">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L46">
 <text text-anchor="start" x="583" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -184,12 +184,12 @@
 <!-- pairs_to_dictionary/3&#45;&gt;curly_to_dictionary/2 -->
 <g id="edge3" class="edge">
 <title>pairs_to_dictionary/3&#45;&gt;curly_to_dictionary/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M659.56,-326.17C662.85,-338.66 665.88,-355.94 663,-371 661.29,-379.94 658.1,-389.3 654.71,-397.63"/>
 <polygon fill="black" stroke="black" points="651.49,-396.27 650.72,-406.83 657.91,-399.05 651.49,-396.27"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55">
 <text text-anchor="start" x="664" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -208,12 +208,12 @@
 <!-- pairs_to_dictionary/3&#45;&gt;^^insert/4 -->
 <g id="edge15" class="edge">
 <title>pairs_to_dictionary/3&#45;&gt;^^insert/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M636.99,-289.53C618.05,-270.09 587.3,-238.51 565.93,-216.57"/>
 <polygon fill="black" stroke="black" points="568.29,-213.98 558.8,-209.25 563.27,-218.86 568.29,-213.98"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L55">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L55">
 <text text-anchor="start" x="601" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -221,7 +221,7 @@
 <!-- as_curly_bracketed/2 -->
 <g id="node6" class="node">
 <title>as_curly_bracketed/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71">
 <polygon fill="cornsilk" stroke="black" points="907,-560 749,-560 749,-524 907,-524 907,-560"/>
 <text text-anchor="start" x="756.8" y="-543.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="761.99" y="-543.2" font-family="Courier,monospace" font-size="11.00">as_curly_bracketed/2</text>
@@ -235,7 +235,7 @@
 <!-- pairs_to_curly/2 -->
 <g id="node7" class="node">
 <title>pairs_to_curly/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L81">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L81">
 <polygon fill="cornsilk" stroke="black" points="893.5,-443 762.5,-443 762.5,-407 893.5,-407 893.5,-443"/>
 <text text-anchor="start" x="770.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="775.69" y="-426.2" font-family="Courier,monospace" font-size="11.00">pairs_to_curly/2</text>
@@ -249,12 +249,12 @@
 <!-- as_curly_bracketed/2&#45;&gt;pairs_to_curly/2 -->
 <g id="edge4" class="edge">
 <title>as_curly_bracketed/2&#45;&gt;pairs_to_curly/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M828,-523.53C828,-504.94 828,-475.24 828,-453.5"/>
 <polygon fill="black" stroke="black" points="831.5,-453.25 828,-443.25 824.5,-453.25 831.5,-453.25"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71">
 <text text-anchor="start" x="828" y="-480.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -273,12 +273,12 @@
 <!-- as_curly_bracketed/2&#45;&gt;^^check/1 -->
 <g id="edge16" class="edge">
 <title>as_curly_bracketed/2&#45;&gt;^^check/1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M846.86,-523.78C868.3,-504.22 903.43,-472.16 927.58,-450.11"/>
 <polygon fill="black" stroke="black" points="929.98,-452.66 935.01,-443.33 925.26,-447.49 929.98,-452.66"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71">
 <text text-anchor="start" x="894" y="-480.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -297,12 +297,12 @@
 <!-- as_curly_bracketed/2&#45;&gt;^^as_list/2 -->
 <g id="edge17" class="edge">
 <title>as_curly_bracketed/2&#45;&gt;^^as_list/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M809.5,-523.97C791.36,-505.92 764.91,-475.55 754,-443 732.83,-379.85 758.02,-175.9 768.15,-102.03"/>
 <polygon fill="black" stroke="black" points="771.62,-102.5 769.52,-92.11 764.68,-101.53 771.62,-102.5"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L71">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L71">
 <text text-anchor="start" x="748" y="-305.3" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -310,7 +310,7 @@
 <!-- pairs_to_curly/3 -->
 <g id="node8" class="node">
 <title>pairs_to_curly/3</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L85">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L85">
 <polygon fill="cornsilk" stroke="black" points="1011.5,-326 880.5,-326 880.5,-290 1011.5,-290 1011.5,-326"/>
 <text text-anchor="start" x="888.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="893.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">pairs_to_curly/3</text>
@@ -324,12 +324,12 @@
 <!-- pairs_to_curly/2&#45;&gt;pairs_to_curly/3 -->
 <g id="edge5" class="edge">
 <title>pairs_to_curly/2&#45;&gt;pairs_to_curly/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L82" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L82" xlink:title="calls">
 <path fill="none" stroke="black" d="M845.67,-406.78C865.65,-387.31 898.35,-355.43 920.97,-333.4"/>
 <polygon fill="black" stroke="black" points="923.49,-335.82 928.21,-326.33 918.61,-330.81 923.49,-335.82"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L82">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L82">
 <text text-anchor="start" x="890" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <!-- value_to_term_value/2 -->
 <g id="node9" class="node">
 <title>value_to_term_value/2</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L91">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L91">
 <polygon fill="cornsilk" stroke="black" points="959,-209 795,-209 795,-173 959,-173 959,-209"/>
 <text text-anchor="start" x="802.8" y="-192.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="807.69" y="-192.2" font-family="Courier,monospace" font-size="11.00">value_to_term_value/2</text>
@@ -351,12 +351,12 @@
 <!-- pairs_to_curly/3&#45;&gt;value_to_term_value/2 -->
 <g id="edge6" class="edge">
 <title>pairs_to_curly/3&#45;&gt;value_to_term_value/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L85" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L85" xlink:title="calls">
 <path fill="none" stroke="black" d="M935.52,-289.53C924.11,-270.51 905.73,-239.88 892.61,-218.02"/>
 <polygon fill="black" stroke="black" points="895.5,-216.03 887.35,-209.25 889.5,-219.63 895.5,-216.03"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L85">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L85">
 <text text-anchor="start" x="913" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -364,12 +364,12 @@
 <!-- value_to_term_value/2&#45;&gt;pairs_to_curly/2 -->
 <g id="edge7" class="edge">
 <title>value_to_term_value/2&#45;&gt;pairs_to_curly/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="calls">
 <path fill="none" stroke="black" d="M870.33,-209.07C863.03,-228.41 851.51,-261.01 845,-290 836.82,-326.4 832.24,-369.3 829.95,-396.58"/>
 <polygon fill="black" stroke="black" points="826.43,-396.65 829.13,-406.9 833.41,-397.21 826.43,-396.65"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L103">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L103">
 <text text-anchor="start" x="844" y="-305.3" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -377,12 +377,12 @@
 <!-- value_to_term_value/2&#45;&gt;^^as_list/2 -->
 <g id="edge19" class="edge">
 <title>value_to_term_value/2&#45;&gt;^^as_list/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="calls">
 <path fill="none" stroke="black" d="M861.05,-172.53C843.37,-153.17 814.72,-121.79 794.7,-99.86"/>
 <polygon fill="black" stroke="black" points="797.08,-97.28 787.75,-92.25 791.91,-102 797.08,-97.28"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L103">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L103">
 <text text-anchor="start" x="827" y="-129.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -401,12 +401,12 @@
 <!-- value_to_term_value/2&#45;&gt;^^valid/1 -->
 <g id="edge18" class="edge">
 <title>value_to_term_value/2&#45;&gt;^^valid/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L100" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M877.76,-172.53C878.57,-153.94 879.86,-124.24 880.8,-102.5"/>
 <polygon fill="black" stroke="black" points="884.31,-102.4 881.25,-92.25 877.32,-102.09 884.31,-102.4"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L100">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L100">
 <text text-anchor="start" x="879" y="-129.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -414,7 +414,7 @@
 <!-- lookup_in/3 -->
 <g id="node10" class="node">
 <title>lookup_in/3</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L107">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L107">
 <polygon fill="cornsilk" stroke="black" points="464,-326 366,-326 366,-290 464,-290 464,-326"/>
 <text text-anchor="start" x="373.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="378.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">lookup_in/3</text>
@@ -439,12 +439,12 @@
 <!-- lookup_in/3&#45;&gt;^^lookup/3 -->
 <g id="edge20" class="edge">
 <title>lookup_in/3&#45;&gt;^^lookup/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L108" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M445.18,-289.94C461.52,-278.32 476.74,-262 468,-245 461.73,-232.79 451.19,-222.77 440.01,-214.85"/>
 <polygon fill="black" stroke="black" points="441.67,-211.75 431.39,-209.2 437.84,-217.61 441.67,-211.75"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L108">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L108">
 <text text-anchor="start" x="470" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -452,7 +452,7 @@
 <!-- update_in/4 -->
 <g id="node11" class="node">
 <title>update_in/4</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L112">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L112">
 <polygon fill="cornsilk" stroke="black" points="348,-443 250,-443 250,-407 348,-407 348,-443"/>
 <text text-anchor="start" x="257.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="262.69" y="-426.2" font-family="Courier,monospace" font-size="11.00">update_in/4</text>
@@ -466,7 +466,7 @@
 <!-- update_in/6 -->
 <g id="node13" class="node">
 <title>update_in/6</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L118">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L118">
 <polygon fill="cornsilk" stroke="black" points="232,-326 134,-326 134,-290 232,-290 232,-326"/>
 <text text-anchor="start" x="141.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="146.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">update_in/6</text>
@@ -480,12 +480,12 @@
 <!-- update_in/4&#45;&gt;update_in/6 -->
 <g id="edge8" class="edge">
 <title>update_in/4&#45;&gt;update_in/6</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L112" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M281.63,-406.78C261.99,-387.31 229.84,-355.43 207.61,-333.4"/>
 <polygon fill="black" stroke="black" points="210.05,-330.89 200.49,-326.33 205.12,-335.86 210.05,-330.89"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L112">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L112">
 <text text-anchor="start" x="244" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -493,7 +493,7 @@
 <!-- update_in/5 -->
 <g id="node12" class="node">
 <title>update_in/5</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L115">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L115">
 <polygon fill="cornsilk" stroke="black" points="232,-443 134,-443 134,-407 232,-407 232,-443"/>
 <text text-anchor="start" x="141.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="146.69" y="-426.2" font-family="Courier,monospace" font-size="11.00">update_in/5</text>
@@ -507,12 +507,12 @@
 <!-- update_in/5&#45;&gt;update_in/6 -->
 <g id="edge9" class="edge">
 <title>update_in/5&#45;&gt;update_in/6</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L115" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M183,-406.53C183,-387.94 183,-358.24 183,-336.5"/>
 <polygon fill="black" stroke="black" points="186.5,-336.25 183,-326.25 179.5,-336.25 186.5,-336.25"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L115">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L115">
 <text text-anchor="start" x="183" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -520,12 +520,12 @@
 <!-- update_in/6&#45;&gt;^^lookup/3 -->
 <g id="edge22" class="edge">
 <title>update_in/6&#45;&gt;^^lookup/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M210.47,-289.83C231.24,-277.04 260.6,-259.38 287,-245 306.87,-234.18 329.24,-222.95 348.38,-213.63"/>
 <polygon fill="black" stroke="black" points="350.01,-216.73 357.48,-209.22 346.96,-210.43 350.01,-216.73"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L120">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L120">
 <text text-anchor="start" x="286" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -544,12 +544,12 @@
 <!-- update_in/6&#45;&gt;^^update/5 -->
 <g id="edge21" class="edge">
 <title>update_in/6&#45;&gt;^^update/5</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L118" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L118" xlink:title="calls">
 <path fill="none" stroke="black" d="M181.27,-289.79C180.81,-276.48 182.17,-258.16 191,-245 200.25,-231.19 214.39,-220.57 228.87,-212.58"/>
 <polygon fill="black" stroke="black" points="230.6,-215.63 237.89,-207.94 227.4,-209.4 230.6,-215.63"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L118">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L118">
 <text text-anchor="start" x="190" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -568,12 +568,12 @@
 <!-- update_in/6&#45;&gt;^^update/4 -->
 <g id="edge23" class="edge">
 <title>update_in/6&#45;&gt;^^update/4</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M164.39,-289.76C155.47,-280.2 145.71,-267.53 141,-254 136.59,-241.34 142.05,-228.11 149.73,-217.14"/>
 <polygon fill="black" stroke="black" points="152.5,-219.28 155.9,-209.25 146.99,-214.97 152.5,-219.28"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L120">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L120">
 <text text-anchor="start" x="140" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -581,7 +581,7 @@
 <!-- insert_in/4 -->
 <g id="node14" class="node">
 <title>insert_in/4</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L125">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L125">
 <polygon fill="cornsilk" stroke="black" points="464,-443 366,-443 366,-407 464,-407 464,-443"/>
 <text text-anchor="start" x="373.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="378.69" y="-426.2" font-family="Courier,monospace" font-size="11.00">insert_in/4</text>
@@ -595,7 +595,7 @@
 <!-- insert_in/5 -->
 <g id="node15" class="node">
 <title>insert_in/5</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L128">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L128">
 <polygon fill="cornsilk" stroke="black" points="348,-326 250,-326 250,-290 348,-290 348,-326"/>
 <text text-anchor="start" x="257.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="262.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">insert_in/5</text>
@@ -609,12 +609,12 @@
 <!-- insert_in/4&#45;&gt;insert_in/5 -->
 <g id="edge10" class="edge">
 <title>insert_in/4&#45;&gt;insert_in/5</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L125" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M397.63,-406.78C377.99,-387.31 345.84,-355.43 323.61,-333.4"/>
 <polygon fill="black" stroke="black" points="326.05,-330.89 316.49,-326.33 321.12,-335.86 326.05,-330.89"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L125">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L125">
 <text text-anchor="start" x="360" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -622,12 +622,12 @@
 <!-- insert_in/5&#45;&gt;^^insert/4 -->
 <g id="edge24" class="edge">
 <title>insert_in/5&#45;&gt;^^insert/4</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L128" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L128" xlink:title="calls">
 <path fill="none" stroke="black" d="M335.12,-289.91C378.04,-269.6 449.7,-235.68 496.4,-213.58"/>
 <polygon fill="black" stroke="black" points="498.14,-216.63 505.68,-209.19 495.15,-210.3 498.14,-216.63"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L128">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L128">
 <text text-anchor="start" x="427" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -635,12 +635,12 @@
 <!-- insert_in/5&#45;&gt;^^lookup/3 -->
 <g id="edge25" class="edge">
 <title>insert_in/5&#45;&gt;^^lookup/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="calls">
 <path fill="none" stroke="black" d="M327.71,-289.94C341.35,-280.69 357.03,-268.24 368,-254 376.04,-243.56 382.05,-230.27 386.25,-218.67"/>
 <polygon fill="black" stroke="black" points="389.62,-219.62 389.48,-209.03 382.99,-217.39 389.62,-219.62"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L130">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L130">
 <text text-anchor="start" x="373" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -648,12 +648,12 @@
 <!-- insert_in/5&#45;&gt;^^update/4 -->
 <g id="edge26" class="edge">
 <title>insert_in/5&#45;&gt;^^update/4</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="calls">
 <path fill="none" stroke="black" d="M311.72,-289.96C319.9,-276.75 327.4,-258.48 318,-245 315.23,-241.03 269.28,-224.52 230.02,-210.96"/>
 <polygon fill="black" stroke="black" points="230.81,-207.53 220.22,-207.59 228.54,-214.15 230.81,-207.53"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L130">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L130">
 <text text-anchor="start" x="321" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -661,7 +661,7 @@
 <!-- delete_in/4 -->
 <g id="node16" class="node">
 <title>delete_in/4</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L135">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L135">
 <polygon fill="cornsilk" stroke="black" points="116,-443 18,-443 18,-407 116,-407 116,-443"/>
 <text text-anchor="start" x="25.8" y="-426.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="30.69" y="-426.2" font-family="Courier,monospace" font-size="11.00">delete_in/4</text>
@@ -675,7 +675,7 @@
 <!-- delete_in/5 -->
 <g id="node17" class="node">
 <title>delete_in/5</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L138">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L138">
 <polygon fill="cornsilk" stroke="black" points="116,-326 18,-326 18,-290 116,-290 116,-326"/>
 <text text-anchor="start" x="25.8" y="-309.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="30.69" y="-309.2" font-family="Courier,monospace" font-size="11.00">delete_in/5</text>
@@ -689,12 +689,12 @@
 <!-- delete_in/4&#45;&gt;delete_in/5 -->
 <g id="edge11" class="edge">
 <title>delete_in/4&#45;&gt;delete_in/5</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L135" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L135" xlink:title="calls">
 <path fill="none" stroke="black" d="M67,-406.53C67,-387.94 67,-358.24 67,-336.5"/>
 <polygon fill="black" stroke="black" points="70.5,-336.25 67,-326.25 63.5,-336.25 70.5,-336.25"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L135">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L135" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L135">
 <text text-anchor="start" x="67" y="-363.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -702,12 +702,12 @@
 <!-- delete_in/5&#45;&gt;^^lookup/3 -->
 <g id="edge28" class="edge">
 <title>delete_in/5&#45;&gt;^^lookup/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M116.12,-290.25C145.73,-280.04 184.14,-266.56 218,-254 228.29,-250.18 230.7,-248.8 241,-245 273.11,-233.16 309.28,-220.6 338.38,-210.67"/>
 <polygon fill="black" stroke="black" points="339.63,-213.95 347.97,-207.41 337.37,-207.32 339.63,-213.95"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L140">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L140">
 <text text-anchor="start" x="240" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -715,12 +715,12 @@
 <!-- delete_in/5&#45;&gt;^^update/4 -->
 <g id="edge29" class="edge">
 <title>delete_in/5&#45;&gt;^^update/4</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M76.33,-289.94C83.91,-276.88 95.39,-258.83 108,-245 117.78,-234.27 129.84,-223.93 140.97,-215.27"/>
 <polygon fill="black" stroke="black" points="143.39,-217.83 149.24,-209 139.16,-212.25 143.39,-217.83"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L140">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L140">
 <text text-anchor="start" x="107" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -739,12 +739,12 @@
 <!-- delete_in/5&#45;&gt;^^delete/4 -->
 <g id="edge27" class="edge">
 <title>delete_in/5&#45;&gt;^^delete/4</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L138" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L138" xlink:title="calls">
 <path fill="none" stroke="black" d="M55.95,-289.61C50.26,-279.62 43.92,-266.58 41,-254 38.18,-241.89 41.87,-228.93 47.05,-218.01"/>
 <polygon fill="black" stroke="black" points="50.24,-219.48 51.87,-209.01 44.07,-216.17 50.24,-219.48"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/19868cf2378b22cdd4ec485e82d080c911c3b062/library/nested_dictionaries/nrbtree.lgt#L138">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/235f19c8e6281025615d4fba6d7c48c38428076d/library/nested_dictionaries/nrbtree.lgt#L138">
 <text text-anchor="start" x="41" y="-246.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
