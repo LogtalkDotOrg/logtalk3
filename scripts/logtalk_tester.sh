@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 27, 2021
+##   Last updated on May 31, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -617,8 +617,7 @@ if grep -s -q '^skipped' -- *.totals; then
 	echo "% Skipped tests"
 	for file in *.totals; do
 		if grep -s -q '^skipped' "$file"; then
-			path=$(grep -m 1 '^file' "$file" | cut -f 2 | $sed "s|^$prefix||")
-			grep '^skipped' "$file" | cut -f 2 | $sed "s|^|$path - |"
+			grep '^skipped' "$file" | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |"
 		fi
 	done
 fi
@@ -627,8 +626,7 @@ if grep -s -q '^failed' -- *.totals; then
 	echo "% Failed tests"
 	for file in *.totals; do
 		if grep -s -q '^failed' "$file"; then
-			path=$(grep -m 1 '^file' "$file" | cut -f 2 | $sed "s|^$prefix||")
-			grep '^failed' "$file" | cut -f 2 | $sed "s|^|$path - |"
+			grep '^failed' "$file" | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |"
 		fi
 	done
 fi

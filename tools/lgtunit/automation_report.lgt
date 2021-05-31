@@ -31,9 +31,9 @@
 :- object(automation_report).
 
 	:- info([
-		version is 3:0:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-05-27,
+		date is 2021-05-31,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
@@ -70,23 +70,26 @@
 		write(results_file, '\t'), write(results_file, Failed),
 		write(results_file, '\t'), write(results_file, Flaky), nl(results_file).
 	% failed tests
-	message_hook(failed_test(Object, Test, _, _, _, Note, _)) :-
-		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
+	message_hook(failed_test(Object, Test, File, _, _, Note, _)) :-
+		write(results_file, 'failed\t'), write(results_file, File), write(results_file, '\t'),
+		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
 		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
 			write(results_file, ' [flaky]')
 		;	true
 		),
 		nl(results_file).
-	message_hook(non_deterministic_success(Object, Test, _, _, Note, _)) :-
-		write(results_file, 'failed\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
+	message_hook(non_deterministic_success(Object, Test, File, _, Note, _)) :-
+		write(results_file, 'failed\t'), write(results_file, File), write(results_file, '\t'),
+		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
 		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
 			write(results_file, ' [flaky]')
 		;	true
 		),
 		nl(results_file).
 	% skipped test
-	message_hook(skipped_test(Object, Test, _, _, _)) :-
-		write(results_file, 'skipped\t'), writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
+	message_hook(skipped_test(Object, Test, File, _, _)) :-
+		write(results_file, 'skipped\t'), write(results_file, File), write(results_file, '\t'),
+		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
 	% skipped test set
 	message_hook(tests_skipped(Object, _)) :-
 		Object::number_of_tests(Tests),

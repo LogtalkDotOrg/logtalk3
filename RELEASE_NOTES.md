@@ -82,6 +82,10 @@ arithmetic constant with Scryer Prolog.
 * UPDATED: The `dead_code_scanner` and `code_metrics` tools tests to use
 assertions.
 
+* FIXED: The `logtalk_tester` script report of skipped and failed tests when
+using the `lgtunit::run_test_sets/1` predicate to list the correct file for
+each reported test.
+
 Examples
 --------
 
