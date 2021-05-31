@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:20:1,
+		version is 0:21:0,
 		author is 'Paulo Moura',
-		date is 2021-04-30,
+		date is 2021-05-31,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -461,6 +461,9 @@
 
 	test(os_shell_1_01) :-
 		os::shell(cd).
+
+	test(os_shell_1_02) :-
+		\+ os::shell(false).
 
 	test(os_shell_2_01) :-
 		os::shell(cd, Exit),
