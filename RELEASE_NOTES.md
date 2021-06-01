@@ -30,6 +30,8 @@ Tools
 
 * IMPROVED: Tests for the `ports_profiler` tool.
 
+* IMPROVED: Simplify cleanup step for the `diagrams` tool tests.
+
 
 3.47.0 - June 1, 2021
 =====================

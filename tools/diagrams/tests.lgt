@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2019-04-07,
+		date is 2021-06-01,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -819,14 +819,10 @@
 	cleanup :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		os::directory_files(Directory, Files),
+		os::directory_files(Directory, Files, [paths(absolute), extensions(['.dot'])]),
 		forall(
-			(	list::member(File, Files),
-				sub_atom(File, _, 4, 0, '.dot')
-			),
-			(	atom_concat(Directory, File, FilePath),
-				os::delete_file(FilePath)
-			)
+			list::member(File, Files),
+			os::delete_file(File)
 		).
 
 	% suppress all messages from the "lgtdoc" tool
