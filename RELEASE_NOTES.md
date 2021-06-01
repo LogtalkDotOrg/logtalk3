@@ -25,7 +25,10 @@ RELEASE NOTES
 3.48.0 - July ??, 2021
 ======================
 
+Tools
+-----
 
+* IMPROVED: Tests for the `ports_profiler` tool.
 
 
 3.47.0 - June 1, 2021

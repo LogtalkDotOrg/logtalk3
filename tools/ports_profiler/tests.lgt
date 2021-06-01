@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2018-02-28,
+		date is 2021-06-01,
 		comment is 'Unit tests for the "ports_profiler" tool.'
 	]).
 
@@ -37,58 +37,52 @@
 	setup :-
 		foo::solutions.
 
-	deterministic(ports_profiler_data_0_01) :-
+	test(ports_profiler_data_0_01, deterministic) :-
+		^^suppress_text_output,
 		data.
 
-	deterministic(ports_profiler_data_1_01) :-
+	test(ports_profiler_data_1_01, deterministic) :-
+		^^suppress_text_output,
 		data(foo).
 
-	deterministic(ports_profiler_data_1_02) :-
+	test(ports_profiler_data_1_02, deterministic) :-
+		^^suppress_text_output,
 		data(non_existent).
 
-	succeeds(ports_profiler_port_5_01) :-
-		port(fact, foo, Functor, Arity, Count),
-		Functor/Arity == solutions/0, Count == 1.
+	test(ports_profiler_port_5_01, true(Functor/Arity-Count == solutions/0-1)) :-
+		port(fact, foo, Functor, Arity, Count).
 
-	succeeds(ports_profiler_port_5_02) :-
-		port(rule, foo, Functor, Arity, Count),
-		Functor/Arity == solutions/0, Count == 1.
+	test(ports_profiler_port_5_02, true(Functor/Arity-Count == solutions/0-1)) :-
+		port(rule, foo, Functor, Arity, Count).
 
-	succeeds(ports_profiler_port_5_03) :-
-		port(call, foo, Functor, Arity, Count),
-		Functor/Arity == solutions/0, Count == 1.
+	test(ports_profiler_port_5_03, true(Functor/Arity-Count == solutions/0-1)) :-
+		port(call, foo, Functor, Arity, Count).
 
-	succeeds(ports_profiler_port_5_04) :-
-		port(exit, foo, Functor, Arity, Count),
-		Functor/Arity == solutions/0, Count == 1.
+	test(ports_profiler_port_5_04, true(Functor/Arity-Count == solutions/0-1)) :-
+		port(exit, foo, Functor, Arity, Count).
 
-	succeeds(ports_profiler_port_5_05) :-
-		port(fact, bar, Functor, Arity, Count),
-		Functor/Arity == qux/1, Count == 6.
+	test(ports_profiler_port_5_05, true(Data == [baz/1-2, qux/1-6])) :-
+		setof(Functor/Arity-Count, port(fact, bar, Functor, Arity, Count), Data).
 
-	succeeds(ports_profiler_port_5_06) :-
-		port(call, bar, Functor, Arity, Count),
-		Functor/Arity == qux/1, Count == 2.
+	test(ports_profiler_port_5_06, true(Data == [bar/2-1, baz/1-1, qux/1-2])) :-
+		setof(Functor/Arity-Count, port(call, bar, Functor, Arity, Count), Data).
 
-	succeeds(ports_profiler_port_5_07) :-
-		port(exit, bar, Functor, Arity, Count),
-		Functor/Arity == qux/1, Count == 2.
+	test(ports_profiler_port_5_07, true(Data == [bar/2-1, baz/1-1, qux/1-2])) :-
+		setof(Functor/Arity-Count, port(exit, bar, Functor, Arity, Count), Data).
 
-	succeeds(ports_profiler_port_5_08) :-
-		port(nd_exit, bar, Functor, Arity, Count),
-		Functor/Arity == qux/1, Count == 4.
+	test(ports_profiler_port_5_08, true(Data == [bar/2-5, baz/1-1, qux/1-4])) :-
+		setof(Functor/Arity-Count, port(nd_exit, bar, Functor, Arity, Count), Data).
 
-	succeeds(ports_profiler_port_5_09) :-
-		port(redo, bar, Functor, Arity, Count),
-		Functor/Arity == qux/1, Count == 4.
+	test(ports_profiler_port_5_09, true(Data == [bar/2-5, baz/1-1, qux/1-4])) :-
+		setof(Functor/Arity-Count, port(redo, bar, Functor, Arity, Count), Data).
 
-	deterministic(ports_profiler_reset_0_01) :-
+	test(ports_profiler_reset_0_01, deterministic) :-
 		reset.
 
-	deterministic(ports_profiler_reset_1_01) :-
+	test(ports_profiler_reset_1_01, deterministic) :-
 		reset(foo).
 
-	deterministic(ports_profiler_reset_1_02) :-
+	test(ports_profiler_reset_1_02, deterministic) :-
 		reset(non_existent).
 
 :- end_object.
