@@ -308,24 +308,27 @@ file:</p>
 <p>Follows the usage documentation written by Michael Hendricks (with a
 contribution from Peter Ludemann), used here with permission, with the
 necessary changes for the Logtalk port.</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Declare accumulators</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% declare accumulators</span>
 acc_info(adder, <span class="nv">X</span>, <span class="nv">In</span>, <span class="nv">Out</span>, integer<span class="o">::</span>plus(<span class="nv">X</span>,<span class="nv">In</span>,<span class="nv">Out</span>)).
 
-<span class="c">% Declare predicates using these hidden arguments</span>
+<span class="c">% declare predicates using these hidden arguments</span>
 pred_info(len,<span class="m">0</span>,[adder,dcg]).
 pred_info(increment,<span class="m">0</span>,[adder]).
 
 increment <span class="o">--&gt;&gt;</span>
-    [<span class="m">1</span>]<span class="o">:</span>adder.  <span class="c">% add one to the accumulator</span>
+    <span class="c">% add one to the accumulator</span>
+    [<span class="m">1</span>]<span class="o">:</span>adder.
 
 
 len(<span class="nv">Xs</span>,<span class="nv">N</span>) <span class="o">:-</span>
     len(<span class="m">0</span>,<span class="nv">N</span>,<span class="nv">Xs</span>,[]).
 
 len <span class="o">--&gt;&gt;</span>
-    [<span class="nv">_</span>],  <span class="c">% &#39;dcg&#39; accumulator has an element</span>
+    <span class="c">% &#39;dcg&#39; accumulator has an element</span>
+    [<span class="nv">_</span>],
     <span class="o">!</span>,
-    increment,  <span class="c">% increment the &#39;adder&#39; accumulator</span>
+    <span class="c">% increment the &#39;adder&#39; accumulator</span>
+    increment,
     len.
 len <span class="o">--&gt;&gt;</span>
     [].
@@ -336,7 +339,7 @@ len <span class="o">--&gt;&gt;</span>
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>DCG notation gives us a single, hidden accumulator. Extended DCG
 notation (implemented by this library) lets predicates have arbitrarily
-many hidden accumulators. As demonstrated by the Synopsis above, those
+many hidden accumulators. As demonstrated by the synopsis above, those
 accumulators can be implemented with arbitrary goals (like
 <code class="docutils literal notranslate"><span class="pre">integer::plus/3</span></code>).</p>
 <p>Benefits of this library:</p>

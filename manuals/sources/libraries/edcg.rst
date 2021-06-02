@@ -74,24 +74,27 @@ necessary changes for the Logtalk port.
 .. code:: logtalk
 
 
-   % Declare accumulators
+   % declare accumulators
    acc_info(adder, X, In, Out, integer::plus(X,In,Out)).
 
-   % Declare predicates using these hidden arguments
+   % declare predicates using these hidden arguments
    pred_info(len,0,[adder,dcg]).
    pred_info(increment,0,[adder]).
 
    increment -->>
-       [1]:adder.  % add one to the accumulator
+       % add one to the accumulator
+       [1]:adder.
 
 
    len(Xs,N) :-
        len(0,N,Xs,[]).
 
    len -->>
-       [_],  % 'dcg' accumulator has an element
+       % 'dcg' accumulator has an element
+       [_],
        !,
-       increment,  % increment the 'adder' accumulator
+       % increment the 'adder' accumulator
+       increment,
        len.
    len -->>
        [].
@@ -101,7 +104,7 @@ Introduction
 
 DCG notation gives us a single, hidden accumulator. Extended DCG
 notation (implemented by this library) lets predicates have arbitrarily
-many hidden accumulators. As demonstrated by the Synopsis above, those
+many hidden accumulators. As demonstrated by the synopsis above, those
 accumulators can be implemented with arbitrary goals (like
 ``integer::plus/3``).
 
