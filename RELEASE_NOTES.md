@@ -42,7 +42,7 @@ Tools
 Examples
 --------
 
-* IMPROVED: Tests for the `blocks` and `bricks` examples.
+* IMPROVED: Tests for the `blocks`, `bricks`, and `polygons` examples.
 
 Tests
 -----

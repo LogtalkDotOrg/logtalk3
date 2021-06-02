@@ -25,9 +25,9 @@
 	:- set_logtalk_flag(unknown_entities, silent).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2021-06-02,
 		comment is 'Unit tests for the "polygons" example.'
 	]).
 
@@ -35,71 +35,43 @@
 		triangle::new(t, [position-(4, 5)]),
 		square::new(s, [position-(3, 2)]),
 		pentagon::new(p, [position-(7, 1)]),
-		hexagon::new(h, [position-(2, 4)]),
+		hexagon::new(h, [position-(2, 4)]).
+
+	test(polygons_02) :-
 		concentric::add_tuple([t, s]),
 		concentric::add_tuple([p, h]).
 
-	test(polygons_02) :-
+	test(polygons_03, true(SolutionsSorted == [[p,h], [t,s]])) :-
 		findall(Tuple,concentric::tuple(Tuple),Solutions),
-		list::msort(Solutions,SolutionsSorted),
-		SolutionsSorted == [[p,h], [t,s]].
+		list::msort(Solutions,SolutionsSorted).
 
-	test(polygons_03) :-
-		t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh),
-		Xh == 7,
-		Yh == 1,
-		Xp == 7,
-		Xs == 4,
-		Xt == 4,
-		Yp == 1,
-		Ys == 5,
-		Yt == 5.
+	test(polygons_04, true([Xt-Yt, Xs-Ys, Xp-Yp, Xh-Yh] == [4-5, 4-5, 7-1, 7-1])) :-
+		t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
 
-	test(polygons_04) :-
-		after_event_registry::monitors(Ma),
-		Ma == [concentric].
+	test(polygons_05, true(Ma == [concentric])) :-
+		after_event_registry::monitors(Ma).
 
-	test(polygons_05) :-
+	test(polygons_06, true(SolutionsSorted == [[p,h], [t,s]])) :-
 		t::move(3, 3), h::move(8, 4),
 		findall(Tuple,concentric::tuple(Tuple),Solutions),
-		list::msort(Solutions,SolutionsSorted),
-		SolutionsSorted == [[p,h], [t,s]].
+		list::msort(Solutions,SolutionsSorted).
 
-	test(polygons_06) :-
-		t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh),
-		Xh == 8,
-		Yh == 4,
-		Xp == 8,
-		Xs == 3,
-		Xt == 3,
-		Yp == 4,
-		Ys == 3,
-		Yt == 3.
+	test(polygons_07, true([Xt-Yt, Xs-Ys, Xp-Yp, Xh-Yh] == [3-3, 3-3, 8-4, 8-4])) :-
+		t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
 
-	test(polygons_07) :-
-		after_event_registry::monitors(Ma),
-		Ma == [concentric].
+	test(polygons_08, true(Ma == [concentric])) :-
+		after_event_registry::monitors(Ma).
 
-	test(polygons_08) :-
+	test(polygons_09, true(SolutionsSorted == [[p,h], [t,p], [t,s]])) :-
 		concentric::add_tuple([t, p]),
 		p::move(2, 7),
 		findall(Tuple,concentric::tuple(Tuple),Solutions),
-		list::msort(Solutions,SolutionsSorted),
-		SolutionsSorted == [[p,h], [t,p], [t,s]].
+		list::msort(Solutions,SolutionsSorted).
 
-	test(polygons_09) :-
-		t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh),
-		Xh == 2,
-		Yh == 7,
-		Xp == 2,
-		Xs == 2,
-		Xt == 2,
-		Yp == 7,
-		Ys == 7,
-		Yt == 7.
+	test(polygons_10, true([Xt-Yt, Xs-Ys, Xp-Yp, Xh-Yh] == [2-7, 2-7, 2-7, 2-7])) :-
+		t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
 
-	test(polygons_10) :-
-		after_event_registry::monitors(Ma),
-		Ma == [concentric].
+	test(polygons_11, true(Ma == [concentric])) :-
+		after_event_registry::monitors(Ma).
 
 :- end_object.
