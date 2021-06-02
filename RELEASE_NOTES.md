@@ -39,6 +39,11 @@ Tools
 
 * IMPROVED: Simplify cleanup step for the `diagrams` tool tests.
 
+Examples
+--------
+
+* IMPROVED: Tests for the `blocks` and `bricks` examples.
+
 Tests
 -----
 
