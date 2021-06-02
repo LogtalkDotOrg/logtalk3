@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-04-14,
+		date is 2021-06-02,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -139,7 +139,7 @@
 		os::absolute_file_name('no_append_permission', Path),
 		{open(Path, append, _, [])}.
 
-	test(lgt_open_4_30, error(permission_error(open,source_sink,_)), [condition(os::operating_system_type(unix))]) :-
+	test(lgt_open_4_30, error(permission_error(open,source_sink,_)), [condition(not_running_as_root)]) :-
 		{open('/no_write_permission', write, _, [])}.
 
 	test(lgt_open_4_31, errors([permission_error(open,source_sink,_), existence_error(source_sink,_)]), [condition(os::operating_system_type(unix))]) :-
@@ -160,6 +160,7 @@
 
 	create_no_read_permission_file :-
 		os::operating_system_type(unix),
+		not_running_as_root,
 		os::absolute_file_name('no_read_permission', Path),
 		^^create_text_file(Path, 'foo.'),
 		atom_concat('chmod a-r ', Path, Command),
@@ -167,6 +168,7 @@
 
 	create_no_write_permission_file :-
 		os::operating_system_type(unix),
+		not_running_as_root,
 		os::absolute_file_name('no_write_permission', Path),
 		^^create_text_file(Path, 'foo.'),
 		atom_concat('chmod a-w ', Path, Command),
@@ -174,9 +176,14 @@
 
 	create_no_append_permission_file :-
 		os::operating_system_type(unix),
+		not_running_as_root,
 		os::absolute_file_name('no_append_permission', Path),
 		^^create_text_file(Path, 'foo.'),
 		atom_concat('chmod a-w ', Path, Command),
 		os::shell(Command).
+
+	not_running_as_root :-
+		os::operating_system_type(unix),
+		os::shell('if [ "$(id -u)" -eq 0 ]; then exit 1; fi').
 
 :- end_object.
