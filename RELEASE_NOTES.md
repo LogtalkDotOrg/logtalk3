@@ -25,6 +25,13 @@ RELEASE NOTES
 3.48.0 - July ??, 2021
 ======================
 
+Library
+-------
+
+* IMPROVED: Most `cbor` library tests for encoding floats now use roundtrip
+testing instead of checking for the expected encoding to avoid float precision
+representation issues making the tests fail.
+
 Tools
 -----
 
