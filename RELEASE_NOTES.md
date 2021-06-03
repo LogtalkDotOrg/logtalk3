@@ -35,6 +35,10 @@ representation issues making the tests fail.
 Tools
 -----
 
+* CHANGED: The `logtalk_tester` script test sets stats message to use the
+words `timedout` instead of `timeouts` and `crashed` instead of `crashes`
+for consistency plus singular and plural agreement.
+
 * IMPROVED: Tests for the `ports_profiler` tool.
 
 * IMPROVED: Simplify cleanup step for the `diagrams` tool tests.

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on May 31, 2021
+##   Last updated on June 3, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 5.0"
+	echo "$(basename "$0") 6.0"
 	exit 0
 }
 
@@ -542,7 +542,7 @@ testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.lo
 
 if  [ $testsets -eq 0 ] ; then
 	echo "%"
-	echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timeouts, 0 crashes"
+	echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
 	echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
 	exit 0
 fi
@@ -566,9 +566,9 @@ cd "$results" || exit 1
 testsetskipped=$(cat -- *.results | grep -c 'tests skipped')
 testsetskipped=$((testsetskipped+$(cat -- *.results | grep -c '(not applicable)')))
 timeouts=$(cat -- *.errors | grep -c 'LOGTALK_TIMEOUT')
-crashes=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
+crashed=$(cat -- *.errors | grep -c 'LOGTALK_CRASH')
 broken=$(cat -- *.errors | grep -c 'LOGTALK_BROKEN')
-testsetruns=$((testsets-testsetskipped-timeouts-crashes-broken))
+testsetruns=$((testsets-testsetskipped-timeouts-crashed-broken))
 
 skipped=0
 passed=0
@@ -631,7 +631,7 @@ if grep -s -q '^failed' -- *.totals; then
 	done
 fi
 echo "%"
-echo "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timeouts, $crashes crashes"
+echo "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
 echo "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
 if [ "$output" == 'verbose' ] ; then
@@ -640,7 +640,7 @@ if [ "$output" == 'verbose' ] ; then
 	echo "% Batch testing ended @ $end_date"
 fi
 
-if [ "$crashes" -gt 0 ] ; then
+if [ "$crashed" -gt 0 ] ; then
 	exit 7
 elif [ "$broken" -gt 0 ] ; then
 	exit 5
