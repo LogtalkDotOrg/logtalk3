@@ -25,6 +25,12 @@ RELEASE NOTES
 3.48.0 - July ??, 2021
 ======================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `lgtunit` tool on defining test driver files
+and running tests.
+
 Library
 -------
 

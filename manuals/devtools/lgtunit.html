@@ -324,8 +324,32 @@ for the tests should go to separate files.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
 exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
 under testing, the unit tests, and for automatically run all the tests
-after loading. You may copy this file to a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file in your
-project directory and edit it to load your project and tests files.</p>
+after loading:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="c">% minimize compilation reports to the essential ones (errors and warnings)</span>
+    <span class="k">set_logtalk_flag</span>(report, warnings),
+    <span class="c">% load any necessary library files for your application; for example</span>
+    <span class="k">logtalk_load</span>(basic_types(loader)),
+    <span class="c">% load the unit test tool</span>
+    <span class="k">logtalk_load</span>(lgtunit(loader)),
+    <span class="c">% load your application files (e.g. &quot;source.lgt&quot;) enabling support for</span>
+    <span class="c">% code coverage, which requires compilation in debug mode and collecting</span>
+    <span class="c">% source data information; if code coverage is not required, remove the</span>
+    <span class="c">% &quot;debug(on)&quot; option for faster execution</span>
+    <span class="k">logtalk_load</span>(source, [source_data(on), debug(on)]),
+    <span class="c">% compile the unit tests file expanding it using &quot;lgtunit&quot; as the hook</span>
+    <span class="c">% object to preprocess the tests; if you have failing tests, add the</span>
+    <span class="c">% option debug(on) to debug them</span>
+    <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]),
+    <span class="c">% run all the unit tests; assuming your tests object is named &quot;tests&quot;</span>
+    tests<span class="o">::</span>run
+)).
+</pre></div>
+</div>
+<p>You may copy this sample file to a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file in your project
+directory and edit it to load your project and tests files (the
+<code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> testing automation script defaults to look for test
+driver files named <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code>).</p>
 <p>Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
 benchmarking predicates.</p>

@@ -106,9 +106,32 @@ separate files.
 
 The `tester-sample.lgt` file (at the root of the Logtalk distribution)
 exemplifies how to compile and load `lgtunit` tool, the source code under
-testing, the unit tests, and for automatically run all the tests after loading.
-You may copy this file to a `tester.lgt` file in your project directory and edit
-it to load your project and tests files.
+testing, the unit tests, and for automatically run all the tests after loading:
+
+	:- initialization((
+		% minimize compilation reports to the essential ones (errors and warnings)
+		set_logtalk_flag(report, warnings),
+		% load any necessary library files for your application; for example
+		logtalk_load(basic_types(loader)),
+		% load the unit test tool
+		logtalk_load(lgtunit(loader)),
+		% load your application files (e.g. "source.lgt") enabling support for
+		% code coverage, which requires compilation in debug mode and collecting
+		% source data information; if code coverage is not required, remove the
+		% "debug(on)" option for faster execution
+		logtalk_load(source, [source_data(on), debug(on)]),
+		% compile the unit tests file expanding it using "lgtunit" as the hook
+		% object to preprocess the tests; if you have failing tests, add the
+		% option debug(on) to debug them
+		logtalk_load(tests, [hook(lgtunit)]),
+		% run all the unit tests; assuming your tests object is named "tests"
+		tests::run
+	)).
+
+You may copy this sample file to a `tester.lgt` file in your project directory
+and edit it to load your project and tests files (the `logtalk_tester` testing
+automation script defaults to look for test driver files named `tester.lgt` or
+`tester.logtalk`).
 
 Debugged test sets should preferably be compiled in optimal mode, specially
 when containing deterministic tests and when using the utility benchmarking
