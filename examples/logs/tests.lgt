@@ -23,18 +23,29 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-11-26,
+		date is 2021-06-03,
 		comment is 'Unit tests for the "logs" example.'
 	]).
 
 	cover(logging).
 	cover(object).
 
-	test(logging_1) :-
+	test(logging_01) :-
 		object::add_log_entry('something interesting happens'),
 		findall(Entry, object::log_entry(_, Entry), Entries),
 		Entries == [start, 'something interesting happens'].
+
+	test(logging_02) :-
+		object::init_log,
+		object::add_log_entry('crickets...'),
+		findall(Entry, object::log_entry(_, Entry), Entries),
+		Entries == [start, 'crickets...'].
+
+	test(logging_03) :-
+		^^suppress_text_output,
+		object::init_log,
+		object::print_log.
 
 :- end_object.
