@@ -346,13 +346,14 @@ test (or a list of tests) using the <code class="docutils literal notranslate"><
 <p>When testing complex <em>units</em>, it is often desirable to split the tests
 between several test objects or using parametric test objects to be able
 to run the same tests using different parameters (e.g. different data
-sets). In this case, you can run all test subsets using the goal:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([...])
+sets or alternative implementations of the same protocol). In this case,
+you can run all test subsets using the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([test_set_1, test_set_2, ...]).
 </pre></div>
 </div>
-<p>where the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate argument is a list of test
-object identifiers. This predicate makes possible to get a single code
-coverage report that takes into account all the tests.</p>
+<p>where the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate argument is a list of two or
+more test object identifiers. This predicate makes possible to get a
+single code coverage report that takes into account all the tests.</p>
 <p>It’s also possible to automatically run loaded tests when using the
 <code class="docutils literal notranslate"><span class="pre">make</span></code> tool by calling the goal that runs the tests from a definition
 of the hook predicate <code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action/1</span></code>. For example, by
@@ -367,7 +368,12 @@ adding to the tests <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>Alternatively, you can define the predicate <code class="docutils literal notranslate"><span class="pre">make/1</span></code> inside the test
 set object. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>make(check).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests, <span class="k">extends</span>(lgtunit)).
+
+    make(check).
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <p>This clause will cause all tests to be run when calling the
