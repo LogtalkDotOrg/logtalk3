@@ -65,6 +65,9 @@ Installers and installation scripts
 
 * ADDED: LVM embedding script.
 
+* FIXED: CxProlog and SWI-Prolog embedding scripts to use the correct directory
+to load the precompiled Logtalk compiler and runtime.
+
 
 3.47.0 - June 1, 2021
 =====================
