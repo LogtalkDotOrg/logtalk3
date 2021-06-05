@@ -23,24 +23,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-02-14,
+		date is 2021-06-05,
 		comment is 'Unit tests for the "futures" example.'
 	]).
 
 	cover(list_math).
 
-	test(futures_01) :-
+	test(futures_01, true(Result == 76002500)) :-
 		integer::sequence(1, 100, List1),
 		integer::sequence(101, 200, List2),
-		list_math::product_sum(List1, List2, Result),
-		Result == 76002500.
+		list_math::product_sum(List1, List2, Result).
 
-	test(futures_02) :-
+	test(futures_02, true(Result == 76002500)) :-
 		integer::sequence(1, 100, List1),
 		integer::sequence(101, 200, List2),
-		list_math::product_sum_engines(List1, List2, Result),
-		Result == 76002500.
+		list_math::product_sum_engines(List1, List2, Result).
 
 :- end_object.

@@ -23,35 +23,31 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-08-21,
+		date is 2021-06-05,
 		comment is 'Unit tests for the "self_messages" example.'
 	]).
 
 	cover(parent).
 	cover(prototype).
 
-	test(self_messages_01) :-
-		parent::get_local(Local),
-		Local == parent.
+	test(self_messages_01, true(Local == parent)) :-
+		parent::get_local(Local).
 
-	test(self_messages_02) :-
-		prototype::get_local(Local),
-		Local == prototype.
+	test(self_messages_02, true(Local == prototype)) :-
+		prototype::get_local(Local).
 
-	test(self_messages_03) :-
-		parent::get_default(Default),
-		Default == parent.
+	test(self_messages_03, true(Default == parent)) :-
+		parent::get_default(Default).
 
-	test(self_messages_04) :-
-		prototype::get_default(Default),
-		Default == parent.
+	test(self_messages_04, true(Default == parent)) :-
+		prototype::get_default(Default).
 
-	test(self_messages_05) :-
-		\+ parent::get_undefined(_).
+	test(self_messages_05, false) :-
+		parent::get_undefined(_).
 
-	test(self_messages_06) :-
-		\+ prototype::get_undefined(_).
+	test(self_messages_06, false) :-
+		prototype::get_undefined(_).
 
 :- end_object.

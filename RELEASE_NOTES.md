@@ -52,7 +52,8 @@ for consistency plus singular and plural agreement.
 Examples
 --------
 
-* IMPROVED: Tests for the `blocks`, `bricks`, `logs`, and `polygons` examples.
+* IMPROVED: Tests for the `blocks`, `bricks`, `futures`, `logs`, `polygons`,
+and `self_messages` examples.
 
 Tests
 -----
