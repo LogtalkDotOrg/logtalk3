@@ -60,6 +60,11 @@ Tests
 * IMPROVED: Skip the tests for the ISO Prolog standard `open/3-4` built-in
 predicates permission error conditions when running on a POSIX system as root.
 
+Installers and installation scripts
+-----------------------------------
+
+* ADDED: LVM embedding script.
+
 
 3.47.0 - June 1, 2021
 =====================

@@ -73,3 +73,11 @@ $ ./sleepy.sav
 $ cd $LOGTALKHOME/scripts/embedding/yap/
 $ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(wumpus,main)"
 $ ~/collect/wumpus
+
+
+% create LVM Prolog files for embedding the "wumpus" text adventure example:
+
+$ cd $LOGTALKHOME/scripts/embedding/lvm/
+$ ./lvm_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd ~/collect/
+$ lvmpl -f logtalk.pl -f application.pl
