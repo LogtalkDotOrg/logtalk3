@@ -102,7 +102,9 @@ files defining the test objects using the option `hook(lgtunit)`. For example:
 As the term-expansion mechanism applies to all the contents of a source file,
 the source files defining the test objects should preferably not contain entities
 other than the test objects. Additional code necessary for the tests should go to
-separate files.
+separate files. In general, the tests themselves can be compiled in *optimized*
+mode. Assuming that's the case, also use the `optimize(on)` compiler option for
+faster tests execution.
 
 The `tester-sample.lgt` file (at the root of the Logtalk distribution)
 exemplifies how to compile and load `lgtunit` tool, the source code under

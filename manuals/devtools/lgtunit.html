@@ -320,7 +320,10 @@ the source files defining the test objects using the option
 <p>As the term-expansion mechanism applies to all the contents of a source
 file, the source files defining the test objects should preferably not
 contain entities other than the test objects. Additional code necessary
-for the tests should go to separate files.</p>
+for the tests should go to separate files. In general, the tests
+themselves can be compiled in <em>optimized</em> mode. Assuming that’s the
+case, also use the <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> compiler option for faster tests
+execution.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
 exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
 under testing, the unit tests, and for automatically run all the tests
