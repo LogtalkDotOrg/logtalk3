@@ -23,21 +23,21 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-02-27,
+		date is 2021-06-06,
 		comment is 'Unit tests for the "laptops" example.'
 	]).
 
 	test(laptops_1) :-
 		custom::new(fast, fifteen, qwerty, Laptop),
 		imports_category(Laptop, Category),
-		Category == laptop.
+		^^assertion(Category == laptop).
 
 	test(laptops_2) :-
 		custom::new(faster, thirteen, dvorak, Laptop),
-		Laptop::mainboard(Mainboard), Mainboard == faster,
-		Laptop::display(Display), Display == thirteen,
-		Laptop::keyboard(Keyboard), Keyboard == dvorak.
+		Laptop::mainboard(Mainboard), ^^assertion(Mainboard == faster),
+		Laptop::display(Display), ^^assertion(Display == thirteen),
+		Laptop::keyboard(Keyboard), ^^assertion(Keyboard == dvorak).
 
 :- end_object.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-01-19,
+		date is 2021-06-06,
 		comment is 'Unit tests for the "metaclasses" example.'
 	]).
 
@@ -34,19 +34,18 @@
 	cover(subclass1).
 	cover(subclass2).
 
-	test(metaclasses_01) :-
+	test(metaclasses_01, true(Class == root)) :-
+		^^suppress_text_output,
 		root::new(Instance),
-		instantiates_class(Instance, Class),
-		Class == root.
+		instantiates_class(Instance, Class).
 
-	test(metaclasses_02) :-
+	test(metaclasses_02, true(Class == subclass1)) :-
+		^^suppress_text_output,
 		subclass1::new(Instance),
-		instantiates_class(Instance, Class),
-		Class == subclass1.
+		instantiates_class(Instance, Class).
 
-	test(metaclasses_03) :-
+	test(metaclasses_03, true(Class == subclass2)) :-
 		subclass2::new(Instance),
-		instantiates_class(Instance, Class),
-		Class == subclass2.
+		instantiates_class(Instance, Class).
 
 :- end_object.

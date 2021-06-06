@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-05-14,
+		date is 2021-06-06,
 		comment is 'Unit tests for the "hailstone" example.'
 	]).
 
@@ -41,10 +41,10 @@
 		\+ current_logtalk_flag(prolog_dialect, swi)
 	)).
 
-	test(hailstone_2) :-
+	test(hailstone_2, true(Assertion)) :-
 		^^set_text_output(''),
 		hailstone::write_sequence(10),
-		^^check_text_output('10 5 16 8 4 2 1\r\n').
+		^^text_output_assertion('10 5 16 8 4 2 1\r\n', Assertion).
 
 	:- else.
 
