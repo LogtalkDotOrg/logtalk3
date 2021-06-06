@@ -45,8 +45,12 @@ object containing the directive or from an object that inherits the
 directive. A protected non-terminal can only be used as an argument in a
 :ref:`methods_phrase_2` and :ref:`methods_phrase_3` calls from the object
 containing the directive or from an object that inherits the directive.
-Protected operators are not inherited but declaring them provides a
-reusable specification for using them in descendant objects (or categories).
+
+.. note::
+
+   Protected operators are not inherited but declaring them provides
+   a reusable specification for using them in descendant objects (or
+   categories).
 
 Template and modes
 ------------------

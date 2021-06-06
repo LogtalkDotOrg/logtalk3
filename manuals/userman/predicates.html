@@ -348,6 +348,22 @@ and operators. For example:</p>
 <span class="p">:- </span><span class="k">public</span>(<span class="k">op</span>(<span class="m">800</span>, fx, tag)).
 </pre></div>
 </div>
+<p>Note that, in the case of operators, the operator definitions don’t become
+global when the entity containing the directives is compiled and loaded.
+This prevents an application breaking when e.g. an updated third-party
+library adds new operators. It also allows loading entities that provide
+conflicting operator definitions. Here the usual programming idiom is to
+copy the operator definitions to a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive. For example, the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool makes available a <code class="docutils literal notranslate"><span class="pre">'=~='/2</span></code> predicate (for approximate
+float equality) that is intended to be used as an infix operator:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
+     <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="s">&#39;=~=&#39;</span>), <span class="s">&#39;=~=&#39;</span><span class="o">/</span><span class="m">2</span>
+]).
+</pre></div>
+</div>
+<p>Thus, in practice, the solution to use library entity operators in client
+entities is the same for using library entity predicates with implicit
+message sending.</p>
 </div>
 <div class="section" id="mode-directive">
 <span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Permalink to this headline">¶</a></h3>

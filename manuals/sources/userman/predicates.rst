@@ -120,6 +120,25 @@ and operators. For example:
 
    :- public(op(800, fx, tag)).
 
+Note that, in the case of operators, the operator definitions don't become
+global when the entity containing the directives is compiled and loaded.
+This prevents an application breaking when e.g. an updated third-party
+library adds new operators. It also allows loading entities that provide
+conflicting operator definitions. Here the usual programming idiom is to
+copy the operator definitions to a ``uses/2`` directive. For example, the
+``lgtunit`` tool makes available a ``'=~='/2`` predicate (for approximate
+float equality) that is intended to be used as an infix operator:
+
+::
+
+   :- uses(lgtunit, [
+   	op(700, xfx, '=~='), '=~='/2
+   ]).
+
+Thus, in practice, the solution to use library entity operators in client
+entities is the same for using library entity predicates with implicit
+message sending.
+
 .. _predicates_mode:
 
 Mode directive
