@@ -23,17 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-06-06,
 		comment is 'Unit tests for the "hooks" example.'
 	]).
 
-	throws(hooks_1, error(permission_error(access, private_predicate, item/1), logtalk(object::item(_), _))) :-
+	test(hooks_01, error(permission_error(access, private_predicate, item/1))) :-
 		object::item(_).
 
-	succeeds(hooks_2) :-
-		object::items(Items),
-		Items == [alpha, omega, zeta].
+	test(hooks_02, true(Items == [alpha, omega, zeta])) :-
+		object::items(Items).
 
 :- end_object.
