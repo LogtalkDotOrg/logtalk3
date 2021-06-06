@@ -113,8 +113,10 @@ RESEARCH SUPPORT
 SPONSORS
 ========
 
+* GraphStax - 2020-present
 * Kyndi, Inc. - 2015-2017
 * VivoMind Research, LLC - 2012-2013
+* GitHub sponsors (https://github.com/sponsors/pmoura)
 
 
 OPEN-SOURCE SOFTWARE USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
