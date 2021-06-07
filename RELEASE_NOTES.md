@@ -25,6 +25,12 @@ RELEASE NOTES
 3.48.0 - July ??, 2021
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* CHANGED: Revert compiler change to use internally the de facto standard
+`between/3` predicate to avoid breaking XSB support.
+
 Documentation
 -------------
 
