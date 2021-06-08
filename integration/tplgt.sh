@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Trealla Prolog
-##   Last updated on January 19, 2021
+##   Last updated on June 7, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -93,8 +93,18 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-if ! [ "$TPL_LIBRARY_PATH" ] || [ -d "$TPL_LIBRARY_PATH" ]; then
-	exec tpl --library "$(dirname "$(which tpl)")/library" "$@" -l "$LOGTALKHOME/integration/logtalk_tp.pl"
+if [[ $1 == *.lgt ]] || [[ $1 == *.logtalk ]]; then
+	LOADER_FILE=$1
+	shift
+	if ! [ "$TPL_LIBRARY_PATH" ] || [ -d "$TPL_LIBRARY_PATH" ]; then
+		exec tpl --library "$(dirname "$(which tpl)")/library" -g "logtalk_load('$LOADER_FILE')" "$@" -l "$LOGTALKHOME/integration/logtalk_tp.pl"
+	else
+		exec tpl -g "logtalk_load('$LOADER_FILE')" "$@" -l "$LOGTALKHOME/integration/logtalk_tp.pl"
+	fi
 else
-	exec tpl "$@" -l "$LOGTALKHOME/integration/logtalk_tp.pl"
+	if ! [ "$TPL_LIBRARY_PATH" ] || [ -d "$TPL_LIBRARY_PATH" ]; then
+		exec tpl --library "$(dirname "$(which tpl)")/library" "$@" -l "$LOGTALKHOME/integration/logtalk_tp.pl"
+	else
+		exec tpl "$@" -l "$LOGTALKHOME/integration/logtalk_tp.pl"
+	fi
 fi

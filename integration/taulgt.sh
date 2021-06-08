@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for  Tau Prolog
-##   Last updated on Aug 26, 2020
+##   Last updated on June 7, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -22,7 +22,6 @@
 ##   limitations under the License.
 ## 
 #############################################################################
-
 
 
 if ! [ "$LOGTALKHOME" ]; then
@@ -94,4 +93,10 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec node --stack_size=10000 "$LOGTALKHOME/integration/logtalk_tau.js" "$@"
+if [[ $1 == *.lgt ]] || [[ $1 == *.logtalk ]]; then
+	LOADER_FILE=$1
+	shift
+	exec node --stack_size=10000 "$LOGTALKHOME/integration/logtalk_tau.js" -g "logtalk_load('$LOADER_FILE')" "$@"
+else
+	exec node --stack_size=10000 "$LOGTALKHOME/integration/logtalk_tau.js" "$@"
+fi

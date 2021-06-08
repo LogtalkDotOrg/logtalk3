@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for CxProlog
-##   Last updated on May 17, 2018
+##   Last updated on June 7, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -94,4 +94,10 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec cxprolog --script "$LOGTALKHOME/integration/logtalk_cx.pl" "$@"
+if [[ $1 == *.lgt ]] || [[ $1 == *.logtalk ]]; then
+	LOADER_FILE=$1
+	shift
+	exec cxprolog --script "$LOGTALKHOME/integration/logtalk_cx.pl" --goal "logtalk_load('$LOADER_FILE')" "$@"
+else
+	exec cxprolog --script "$LOGTALKHOME/integration/logtalk_cx.pl" "$@"
+fi

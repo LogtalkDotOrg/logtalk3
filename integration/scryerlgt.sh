@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for Scryer Prolog
-##   Last updated on May 4, 2021
+##   Last updated on June 7, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -93,4 +93,10 @@ fi
 LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
-exec scryer-prolog "$@" "$LOGTALKHOME/integration/logtalk_scryer.pl"
+if [[ $1 == *.lgt ]] || [[ $1 == *.logtalk ]]; then
+	LOADER_FILE=$1
+	shift
+	exec scryer-prolog -g "logtalk_load('$LOADER_FILE')" "$@" "$LOGTALKHOME/integration/logtalk_scryer.pl"
+else
+	exec scryer-prolog "$@" "$LOGTALKHOME/integration/logtalk_scryer.pl"
+fi

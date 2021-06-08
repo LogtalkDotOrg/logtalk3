@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for GNU Prolog
-##   Last updated on May 17, 2018
+##   Last updated on June 7, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -22,7 +22,6 @@
 ##   limitations under the License.
 ## 
 #############################################################################
-
 
 
 if ! [ "$LOGTALKHOME" ]; then
@@ -100,4 +99,10 @@ if [ "${operating_system:0:10}" == "MINGW32_NT" ] ; then
 	export LINEDIT='gui=no'
 fi
 
-exec gprolog --entry-goal "['\$LOGTALKHOME/integration/logtalk_gp.pl']" "$@"
+if [[ $1 == *.lgt ]] || [[ $1 == *.logtalk ]]; then
+	LOADER_FILE=$1
+	shift
+	exec gprolog --entry-goal "['\$LOGTALKHOME/integration/logtalk_gp.pl']" --query-goal "logtalk_load('$LOADER_FILE')" "$@"
+else
+	exec gprolog --entry-goal "['\$LOGTALKHOME/integration/logtalk_gp.pl']" "$@"
+fi
