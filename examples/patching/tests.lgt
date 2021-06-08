@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-09-16,
+		date is 2021-06-08,
 		comment is 'Unit tests for the "patching" example.'
 	]).
 
@@ -35,39 +35,34 @@
 	cover(instance).
 	cover(patch).
 
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
-	]).
+	test(patching_01, true(Objects == [broken, broken_class])) :-
+		setof(Object, complements_object(patch, Object), Objects).
 
-	succeeds(patching_01) :-
-		setof(Object, complements_object(patch, Object), Objects),
-		Objects == [broken, broken_class].
-
-	succeeds(patching_02) :-
+	test(patching_02, true) :-
 		broken::is_proper_list([1,2,3]).
 
-	succeeds(patching_03) :-
+	test(patching_03, true) :-
 		instance::is_proper_list([1,2,3]).
 
-	fails(patching_04) :-
+	test(patching_04, false) :-
 		broken::is_proper_list(_).
 
-	fails(patching_05) :-
+	test(patching_05, false) :-
 		instance::is_proper_list(_).
 
-	fails(patching_06) :-
+	test(patching_06, false) :-
 		broken::is_proper_list([a,b,c|_]).
 
-	fails(patching_07) :-
+	test(patching_07, false) :-
 		instance::is_proper_list([a,b,c|_]).
 
-	throws(patching_08, error(permission_error(access, private_predicate, last/3), _)) :- 
+	test(patching_08, error(permission_error(access, private_predicate, last/3))) :-
 		broken::last(_, _, _).
 
-	throws(patching_09, error(permission_error(access, private_predicate, last/3), _)) :- 
+	test(patching_09, error(permission_error(access, private_predicate, last/3))) :-
 		instance::last(_, _, _).
 
-	succeeds(patching_10) :-
+	test(patching_10, true) :-
 		broken::nextto(2, 3, [1,2,3]).
 
 :- end_object.

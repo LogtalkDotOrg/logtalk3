@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-02-13,
+		date is 2021-06-08,
 		comment is 'Unit tests for the "patches" example.'
 	]).
 
@@ -36,22 +36,21 @@
 		\+ current_logtalk_flag(prolog_dialect, swi)
 	)).
 
-	succeeds(patches_1) :-
+	test(patches_01, true(Assertion)) :-
 		^^set_text_output(''),
 		proto::init,
-		^^check_text_output('parent init\r\nproto init\r\n').
+		^^text_output_assertion('parent init\r\nproto init\r\n', Assertion).
 
 	:- else.
 
-	succeeds(patches_1) :-
+	test(patches_01, true(Assertion)) :-
 		^^set_text_output(''),
 		proto::init,
-		^^check_text_output('parent init\nproto init\n').
+		^^text_output_assertion('parent init\nproto init\n', Assertion).
 
 	:- endif.
 
-	succeeds(patches_2) :-
-		proto::pet(Pet),
-		Pet == cat.
+	test(patches_02, true(Pet == cat)) :-
+		proto::pet(Pet).
 
 :- end_object.

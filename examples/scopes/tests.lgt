@@ -23,48 +23,40 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-08-28,
+		date is 2021-06-08,
 		comment is 'Unit tests for the "scopes" example.'
 	]).
-
-	:- discontiguous([succeeds/1, throws/2]).
 
 	cover(prototype).
 	cover(descendant).
 
-	succeeds(scopes_01) :-
-		prototype::foo(Foo),
-		Foo == 1.
+	test(scopes_01, true(Foo == 1)) :-
+		prototype::foo(Foo).
 
-	throws(scopes_02, error(permission_error(access,protected_predicate,bar/1),_)) :-
+	test(scopes_02, error(permission_error(access,protected_predicate,bar/1))) :-
 		prototype::bar(_).
 
-	throws(scopes_03, error(permission_error(access,private_predicate,baz/1),_)) :-
+	test(scopes_03, error(permission_error(access,private_predicate,baz/1))) :-
 		prototype::baz(_).
 
-	throws(scopes_04, error(existence_error(predicate_declaration,(local)/1),_)) :-
+	test(scopes_04, error(existence_error(predicate_declaration,(local)/1))) :-
 		prototype::local(_).
 
-	succeeds(scopes_05) :-
-		descendant::p_foo(Foo),
-		Foo == 2.
+	test(scopes_05, true(Foo == 2)) :-
+		descendant::p_foo(Foo).
 
-	succeeds(scopes_06) :-
-		descendant::p_bar(Bar),
-		Bar == 2.
+	test(scopes_06, true(Bar == 2)) :-
+		descendant::p_bar(Bar).
 
-	succeeds(scopes_07) :-
-		descendant::p_baz(Baz),
-		Baz == 2.
+	test(scopes_07, true(Baz == 2)) :-
+		descendant::p_baz(Baz).
 
-	succeeds(scopes_08) :-
-		descendant::d_foo(Foo),
-		Foo == 1.
+	test(scopes_08, true(Foo == 1)) :-
+		descendant::d_foo(Foo).
 
-	succeeds(scopes_09) :-
-		descendant::d_bar(Bar),
-		Bar == 1.
+	test(scopes_09, true(Bar == 1)) :-
+		descendant::d_bar(Bar).
 
 :- end_object.
