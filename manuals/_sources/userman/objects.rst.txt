@@ -107,7 +107,9 @@ corresponding adapter file. For instance, we may define an object named
 ``vehicle`` and save it in a ``vehicle.lgt`` source file which will be
 compiled to a ``vehicle_lgt.pl`` Prolog file (depending on the
 :term:`backend compiler <backend Prolog compiler>`, the names of the
-intermediate Prolog files may include a directory hash).
+intermediate Prolog files may include a directory hash and a process
+identifier to prevent file name clashes when embedding Logtalk
+applications or running parallel Logtalk processes).
 
 Object names can be atoms or compound terms (when defining parametric
 objects, see below). Objects, categories, and protocols share the same

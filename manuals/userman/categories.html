@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Categories &mdash; The Logtalk Handbook v3.48.0-b01 documentation</title>
+  <title>Categories &mdash; The Logtalk Handbook v3.48.0-b02 documentation</title>
   
 
   
@@ -272,7 +272,9 @@ corresponding adapter file. For example, we may define a category named
 <code class="docutils literal notranslate"><span class="pre">documenting</span></code> and save it in a <code class="docutils literal notranslate"><span class="pre">documenting.lgt</span></code> source file that
 will be compiled to a <code class="docutils literal notranslate"><span class="pre">documenting_lgt.pl</span></code> Prolog file (depending on
 the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend compiler</span></a>, the names of the
-intermediate Prolog files may include a directory hash).</p>
+intermediate Prolog files may include a directory hash and a process
+identifier to prevent file name clashes when embedding Logtalk
+applications or running parallel Logtalk processes).</p>
 <p>Category names can be atoms or compound terms (when defining parametric
 categories). Objects, categories, and protocols share the same name
 space: we cannot have a category with the same name as an object or a

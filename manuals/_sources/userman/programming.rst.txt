@@ -152,9 +152,10 @@ object we can save it on a ``sort_1.lgt`` source file that will be
 compiled to a ``sort_1_lgt.pl`` Prolog file. This name scheme helps
 avoid file name conflicts (remember that all Logtalk entities share the
 same namespace). To further prevent file name conflicts, specially when
-embedding applications, and depending on the
-:term:`backend compiler <backend Prolog compiler>`, the names
-of the intermediate Prolog files may include a directory hash.
+embedding applications or running parallel Logtalk processes, and
+depending on the :term:`backend compiler <backend Prolog compiler>`,
+the names of the intermediate Prolog files may include a directory hash
+and a process identifier.
 
 Source file text encoding
 ^^^^^^^^^^^^^^^^^^^^^^^^^

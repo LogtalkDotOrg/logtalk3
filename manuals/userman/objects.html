@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Objects &mdash; The Logtalk Handbook v3.48.0-b01 documentation</title>
+  <title>Objects &mdash; The Logtalk Handbook v3.48.0-b02 documentation</title>
   
 
   
@@ -317,7 +317,9 @@ corresponding adapter file. For instance, we may define an object named
 <code class="docutils literal notranslate"><span class="pre">vehicle</span></code> and save it in a <code class="docutils literal notranslate"><span class="pre">vehicle.lgt</span></code> source file which will be
 compiled to a <code class="docutils literal notranslate"><span class="pre">vehicle_lgt.pl</span></code> Prolog file (depending on the
 <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend compiler</span></a>, the names of the
-intermediate Prolog files may include a directory hash).</p>
+intermediate Prolog files may include a directory hash and a process
+identifier to prevent file name clashes when embedding Logtalk
+applications or running parallel Logtalk processes).</p>
 <p>Object names can be atoms or compound terms (when defining parametric
 objects, see below). Objects, categories, and protocols share the same
 name space: we cannot have an object with the same name as a protocol or

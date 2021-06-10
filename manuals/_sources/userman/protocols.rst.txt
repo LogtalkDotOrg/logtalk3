@@ -53,7 +53,8 @@ corresponding adapter file. For example, we may define a protocol named
 ``listp`` and save it in a ``listp.lgt`` source file that will be
 compiled to a ``listp_lgt.pl`` Prolog file (depending on the backend
 compiler, the names of the intermediate Prolog files may include a
-directory hash).
+directory hash and a process identifier to prevent file name clashes
+when embedding Logtalk applications or running parallel Logtalk processes).
 
 Protocol names must be atoms. Objects, categories and protocols share
 the same namespace: we cannot have a protocol with the same name as an

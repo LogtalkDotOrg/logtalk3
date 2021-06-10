@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Writing and running applications &mdash; The Logtalk Handbook v3.48.0-b01 documentation</title>
+  <title>Writing and running applications &mdash; The Logtalk Handbook v3.48.0-b02 documentation</title>
   
 
   
@@ -367,9 +367,10 @@ object we can save it on a <code class="docutils literal notranslate"><span clas
 compiled to a <code class="docutils literal notranslate"><span class="pre">sort_1_lgt.pl</span></code> Prolog file. This name scheme helps
 avoid file name conflicts (remember that all Logtalk entities share the
 same namespace). To further prevent file name conflicts, specially when
-embedding applications, and depending on the
-<a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend compiler</span></a>, the names
-of the intermediate Prolog files may include a directory hash.</p>
+embedding applications or running parallel Logtalk processes, and
+depending on the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend compiler</span></a>,
+the names of the intermediate Prolog files may include a directory hash
+and a process identifier.</p>
 </div>
 <div class="section" id="source-file-text-encoding">
 <h3>Source file text encoding<a class="headerlink" href="#source-file-text-encoding" title="Permalink to this headline">¶</a></h3>

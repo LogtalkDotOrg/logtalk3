@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "May 27, 2021" "Logtalk 3.47.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "June 10, 2021" "Logtalk 3.48.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -72,7 +72,7 @@ Initialization goal. Default is true. Called after loading the Logtalk compiler 
 Random generator starting seed (no default).
 .TP
 .BI \-w
-Wipe test set default scratch directories (\fI./.lgt_tmp\fR and \fI./lgt_tmp\fR) before running it.
+Wipe test set default scratch directories (\fI./.lgt_tmp\fR and \fI./lgt_tmp\fR) before running it. This option should not be used when running parallel proccess that use the same test sets.
 .TP
 .BI \--
 Arguments to be passed to the tests (no default).

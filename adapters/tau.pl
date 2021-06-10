@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Tau Prolog 0.3.0 and later versions
-%  Last updated on January 2, 2021
+%  Last updated on June 10, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -358,11 +358,14 @@
 	).
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and PID as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+'$lgt_directory_hash_pid_as_atom'(_, Hash) :-
+	pid(PID),
+	number_codes(PID, Codes),
+	atom_codes(Hash, Codes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

@@ -56,7 +56,9 @@ corresponding adapter file. For example, we may define a category named
 ``documenting`` and save it in a ``documenting.lgt`` source file that
 will be compiled to a ``documenting_lgt.pl`` Prolog file (depending on
 the :term:`backend compiler <backend Prolog compiler>`, the names of the
-intermediate Prolog files may include a directory hash).
+intermediate Prolog files may include a directory hash and a process
+identifier to prevent file name clashes when embedding Logtalk
+applications or running parallel Logtalk processes).
 
 Category names can be atoms or compound terms (when defining parametric
 categories). Objects, categories, and protocols share the same name

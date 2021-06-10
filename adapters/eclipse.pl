@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on January 2, 2021
+%  Last updated on June 10, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -512,14 +512,15 @@ forall(Generate, Test) :-
 	).
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and PID as an atom
 
-'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
 	term_hash(Directory, 1, 2147483647, Hash0),
-	number_codes(Hash0, Codes),
-	atom_codes(Hash, Codes).
+	get_flag(pid, PID),
+	atomics_to_string([Hash0, '_', PID], HashString),
+	atom_string(Hash, HashString).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

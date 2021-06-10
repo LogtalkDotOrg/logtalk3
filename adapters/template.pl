@@ -348,11 +348,11 @@ numbervars(Term, From, Next) :-
 	?????
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and PID as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+'$lgt_directory_hash_pid_as_atom'(_, '').
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

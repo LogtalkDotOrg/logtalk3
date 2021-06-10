@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on January 2, 2021
+%  Last updated on June 10, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -438,11 +438,11 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	throw(not_supported('$lgt_make_directory'/1)).
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and PID as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+'$lgt_directory_hash_pid_as_atom'(_, '').
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
