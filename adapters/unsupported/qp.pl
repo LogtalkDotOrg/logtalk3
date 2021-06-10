@@ -437,7 +437,10 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 %
 % returns the directory hash and PID as an atom
 
-'$lgt_directory_hash_pid_as_atom'(_, '').
+'$lgt_directory_hash_pid_as_atom'(_, Hash) :-
+	process_pid(PID),
+	number_codes(PID, Codes),
+	atom_codes(Hash, Codes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

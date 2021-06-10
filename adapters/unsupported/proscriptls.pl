@@ -215,10 +215,10 @@
 %
 % backend Prolog compiler supported features (that are compatible with Logtalk)
 
-'$lgt_prolog_feature'(prolog_dialect, tau).
+'$lgt_prolog_feature'(prolog_dialect, proscriptls).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, proscriptls(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 3, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 5, 9))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).
