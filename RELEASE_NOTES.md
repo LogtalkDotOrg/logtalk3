@@ -34,6 +34,8 @@ Logtalk compiler and runtime
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: Require B-Prolog 8.1 or later version.
+
 * UPDATED: Require Trealla Prolog 1.8.75 or later version.
 
 Documentation

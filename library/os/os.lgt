@@ -49,18 +49,18 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:80:0,
+		version is 1:81:0,
 		author is 'Paulo Moura',
-		date is 2021-05-20,
+		date is 2021-06-10,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
 			'Exception terms' - 'Currently, there is no standardization of the exception terms thrown by the different backend Prolog systems.',
-			'B-Prolog portability' - '``pid/1`` and ``wall_time/1`` predicates are not supported.',
-			'JIProlog portability' - '``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
-			'Qu-Prolog portability' - '``directory_files/2`` predicate is not supported.',
-			'Quintus Prolog' - '``pid/1`` and ``shell/2`` predicates are not supported.',
-			'XSB portability' - '``command_line_arguments/1`` predicate is not supported.'
+			'B-Prolog portability' - 'The ``wall_time/1`` predicate is not supported.',
+			'JIProlog portability' - 'The ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
+			'Qu-Prolog portability' - 'The ``directory_files/2`` predicate is not supported.',
+			'Quintus Prolog' - 'The ``pid/1`` and ``shell/2`` predicates are not supported.',
+			'XSB portability' - 'The ``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
 	]).
@@ -557,13 +557,8 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, b)).
 
-		:- if(predicate_property(getpid(_), _)).
-			pid(PID) :-
-				{getpid(PID)}.
-		:- else.
-			pid(_) :-
-				throw(not_available(pid/1)).
-		:- endif.
+		pid(PID) :-
+			{getpid(PID)}.
 
 		shell(Command, Status) :-
 			{system(Command, Status)}.

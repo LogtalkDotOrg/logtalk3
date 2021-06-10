@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for B-Prolog 7.8 and later versions
-%  Last updated on January 2, 2021
+%  Adapter file for B-Prolog 8.1 and later versions
+%  Last updated on June 10, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -22,7 +22,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% allow redefinition of predicate ::/2; use the alternative in/2 predicate instead
+% allow redefinition of predicate ::/2; use the alternative in/2 predicate
+% instead for finite-domain computations
 
 :- set_prolog_flag(redefined, off).
 
@@ -248,7 +249,7 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_prolog_feature'(prolog_dialect, b).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, bp(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(7,8,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(8,1,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, supported).

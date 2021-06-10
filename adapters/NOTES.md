@@ -118,14 +118,14 @@ check if it is built-in in your Prolog, available in a library, or if
 you can write a better definition.
 
 
-B-Prolog 7.8 and later versions
+B-Prolog 8.1 and later versions
 -------------------------------
 
 	b.pl
 
-For B-Prolog 7.8 and later versions. Note that this adapter file
-redefines the B-Prolog `::/2` finite-domain built-in predicate
-(you may use the alternative `in/2` built-in predicate instead).
+Note that this adapter file redefines the B-Prolog `::/2` finite-domain
+built-in predicate (you may use the alternative `in/2` built-in predicate
+instead).
 
 Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`) 
 are not core predicates and can be redefined by the user. The predicate 

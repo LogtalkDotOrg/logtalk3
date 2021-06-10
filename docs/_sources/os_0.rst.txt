@@ -11,8 +11,8 @@
 Portable operating-system access predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:80:0
-| **Date:** 2021-05-20
+| **Version:** 1:81:0
+| **Date:** 2021-06-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,11 +29,11 @@ Portable operating-system access predicates.
 
    - File path expansion: To ensure portability, all file paths are expanded before being handed to the backend Prolog system.
    - Exception terms: Currently, there is no standardization of the exception terms thrown by the different backend Prolog systems.
-   - B-Prolog portability: ``pid/1`` and ``wall_time/1`` predicates are not supported.
-   - JIProlog portability: ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.
-   - Qu-Prolog portability: ``directory_files/2`` predicate is not supported.
-   - Quintus Prolog: ``pid/1`` and ``shell/2`` predicates are not supported.
-   - XSB portability: ``command_line_arguments/1`` predicate is not supported.
+   - B-Prolog portability: The ``wall_time/1`` predicate is not supported.
+   - JIProlog portability: The ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.
+   - Qu-Prolog portability: The ``directory_files/2`` predicate is not supported.
+   - Quintus Prolog: The ``pid/1`` and ``shell/2`` predicates are not supported.
+   - XSB portability: The ``command_line_arguments/1`` predicate is not supported.
 
 | **Inherited public predicates:**
 |     :ref:`osp/0::absolute_file_name/2`  :ref:`osp/0::change_directory/1`  :ref:`osp/0::command_line_arguments/1`  :ref:`osp/0::cpu_time/1`  :ref:`osp/0::date_time/7`  :ref:`osp/0::decompose_file_name/3`  :ref:`osp/0::decompose_file_name/4`  :ref:`osp/0::delete_directory/1`  :ref:`osp/0::delete_file/1`  :ref:`osp/0::directory_exists/1`  :ref:`osp/0::directory_files/2`  :ref:`osp/0::directory_files/3`  :ref:`osp/0::ensure_directory/1`  :ref:`osp/0::ensure_file/1`  :ref:`osp/0::environment_variable/2`  :ref:`osp/0::file_exists/1`  :ref:`osp/0::file_modification_time/2`  :ref:`osp/0::file_permission/2`  :ref:`osp/0::file_size/2`  :ref:`osp/0::is_absolute_file_name/1`  :ref:`osp/0::make_directory/1`  :ref:`osp/0::make_directory_path/1`  :ref:`osp/0::null_device_path/1`  :ref:`osp/0::operating_system_type/1`  :ref:`osp/0::path_concat/3`  :ref:`osp/0::pid/1`  :ref:`osp/0::rename_file/2`  :ref:`osp/0::shell/1`  :ref:`osp/0::shell/2`  :ref:`osp/0::sleep/1`  :ref:`osp/0::temporary_directory/1`  :ref:`osp/0::time_stamp/1`  :ref:`osp/0::wall_time/1`  :ref:`osp/0::working_directory/1`  
