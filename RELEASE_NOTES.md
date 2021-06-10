@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * CHANGED: Revert compiler change to use internally the de facto standard
 `between/3` predicate to avoid breaking XSB support.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Require Trealla Prolog 1.8.75 or later version.
+
 Documentation
 -------------
 
