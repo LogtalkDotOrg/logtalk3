@@ -75,7 +75,8 @@ Examples
 
 * IMPROVED: Tests for the `blocks`, `bricks`, `dynpred`, `futures`, `hooks`,
 `hailstone`, `includes`, `laptops`, `logs`, `metaclasses`, `multifile`,
-`patches`, `patching`, `polygons`, `self_messages`, and `scopes` examples.
+`patches`, `patching`, `polygons`, `reflection`, `self_messages`, and `scopes`
+examples.
 
 Tests
 -----
