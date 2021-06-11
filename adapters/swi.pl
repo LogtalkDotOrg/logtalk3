@@ -1380,6 +1380,23 @@ user:goal_expansion('::'(Object, Message), ExpandedGoal) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  atomics concat (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% atomic_concat(+atomic, +atomic, ?atom) -- built-in
+
+
+% atomic_list_concat(@list(atomic), ?atom) -- built-in
+
+
+% atomic_list_concat(@list(atomic), +atom, ?atom) -- built-in
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  string built-in type
 %
 %  define these predicates to trivially fail if no string type is available

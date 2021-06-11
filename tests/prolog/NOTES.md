@@ -27,11 +27,11 @@ standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard and the
 follow up corrigenda). Several tests originate from SICS, ECLiPSe, and
 SWI-Prolog and are used here with permission.
 
-This conformance suite also includes unit tests for Prolog features that are
-slowly becoming de facto standards (e.g. the `(*->)/2` soft-cut control
-construct or the `setup_call_cleanup/3` built-in predicate). These tests are
-usually skipped, however, when running on a system that doesn't provide such
-features.
+This conformance suite also includes unit tests for Prolog features that
+are slowly becoming de facto standards (e.g. the `(*->)/2` soft-cut control
+construct or the `atomic_list_concat/2-3` and `setup_call_cleanup/3` built-in
+predicates). These tests are usually skipped, however, when running on a system
+that doesn't provide such features.
 
 Writing these tests was made easier by rewriting and, whenever necessary,
 updating, the tests found on the ISO Prolog conformance testing framework

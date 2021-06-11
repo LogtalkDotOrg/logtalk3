@@ -912,6 +912,45 @@ forall(Generate, Test) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  atomics concat (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% atomic_concat(+atomic, +atomic, ?atom)
+
+:- if(\+ get_flag(atomic_concat/3, type, built_in)).
+
+	atomic_concat(Atomic1, Atomic2, Atom) :-
+		atomics_to_string([Atomic1, Atomic2], String),
+		atom_string(Atom, String).
+
+:- endif.
+
+
+% atomic_list_concat(@list(atomic), ?atom)
+
+:- if(\+ get_flag(atomic_list_concat/2, type, built_in)).
+
+	atomic_list_concat(Atomics, Atom) :-
+		atomics_to_string(Atomics, String),
+		atom_string(Atom, String).
+
+:- endif.
+
+
+:- if(\+ get_flag(atomic_list_concat/3, type, built_in)).
+
+	atomic_list_concat(Atomics, Glue, Atom) :-
+		atomics_to_string(Atomics, Glue, String),
+		atom_string(Atom, String).
+
+:- endif.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  string built-in type
 %
 %  define these predicates to trivially fail if no string type is available

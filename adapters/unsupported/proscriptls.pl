@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ProscriptLS 1.5.9 and later versions
-%  Last updated on October 12, 2021
+%  Last updated on October 25, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -616,6 +616,85 @@
 
 term_hash(_, _, _, _) :-
 	fail.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  atomics concat (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% atomic_concat(+atomic, +atomic, ?atom)
+
+atomic_concat(Atomic1, Atomic2, Atom) :-
+	(	var(Atomic1) ->
+		throw(error(instantiation_error, atomic_concat/3))
+	;	var(Atomic2) ->
+		throw(error(instantiation_error, atomic_concat/3))
+	;	\+ atomic(Atomic1) ->
+		throw(error(type_error(atomic, Atomic1), atomic_concat/3))
+	;	\+ atomic(Atomic2) ->
+		throw(error(type_error(atomic, Atomic2), atomic_concat/3))
+	;	'$lgt_proscriptls_atomic_atom'(Atomic1, Atom1),
+		'$lgt_proscriptls_atomic_atom'(Atomic2, Atom2),
+		atom_concat(Atom1, Atom2, Atom)
+	).
+
+'$lgt_proscriptls_atomic_atom'(Atomic, Atom) :-
+	(	atom(Atomic) ->
+		Atom = Atomic
+	;	number(Atomic) ->
+		number_chars(Atomic, Codes),
+		atom_chars(Atom, Codes)
+	).
+
+
+% atomic_list_concat(@list(atomic), ?atom)
+
+atomic_list_concat([Atomic| Atomics], Atom) :-
+	!,
+	(	var(Atomic) ->
+		throw(error(instantiation_error, atomic_list_concat/2))
+	;	\+ atomic(Atomic) ->
+		throw(error(type_error(atomic, Atomic), atomic_list_concat/2))
+	;	'$lgt_proscriptls_atomic_atom'(Atomic, Atom0),
+		'$lgt_proscriptls_atomic_list_concat'(Atomics, Atom0, Atom)
+	).
+atomic_list_concat([], '').
+
+'$lgt_proscriptls_atomic_list_concat'([Next| Atomics], Atom0, Atom) :-
+	!,
+	atomic_list_concat([Next| Atomics], Atom1),
+	atom_concat(Atom0, Atom1, Atom).
+'$lgt_proscriptls_atomic_list_concat'([], Atom, Atom).
+
+
+% atomic_list_concat(@list(atomic), +atom, ?atom)
+
+atomic_list_concat([Atomic| Atomics], Separator, Atom) :-
+	!,
+	(	var(Atomic) ->
+		throw(error(instantiation_error, atomic_list_concat/3))
+	;	var(Separator) ->
+		throw(error(instantiation_error, atomic_list_concat/3))
+	;	\+ atomic(Atomic) ->
+		throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
+	;	\+ atomic(Atomic) ->
+		throw(error(type_error(atomic, Separator), atomic_list_concat/3))
+	;	'$lgt_proscriptls_atomic_atom'(Atomic, Atom0),
+		'$lgt_proscriptls_atomic_atom'(Separator, SeparatorAtom),
+		'$lgt_proscriptls_atomic_list_concat'(Atomics, Atom0, SeparatorAtom, Atom)
+	).
+atomic_list_concat([], _, '').
+
+'$lgt_proscriptls_atomic_list_concat'([Next| Atomics], Atom0, SeparatorAtom, Atom) :-
+	!,
+	atomic_list_concat([Next| Atomics], SeparatorAtom, Atom2),
+	atom_concat(SeparatorAtom, Atom2, Atom1),
+	atom_concat(Atom0, Atom1, Atom).
+'$lgt_proscriptls_atomic_list_concat'([], Atom, _, Atom).
 
 
 

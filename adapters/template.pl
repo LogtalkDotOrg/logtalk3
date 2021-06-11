@@ -592,6 +592,32 @@ term_hash(Term, Depth, Range, Hash) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  atomics concat (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% atomic_concat(+atomic, +atomic, ?atom)
+
+atomic_concat(Atomic1, Atomic2, Atom) :-
+	?????
+
+
+% atomic_list_concat(@list(atomic), ?atom)
+
+atomic_list_concat(Atomics, Atom) :-
+	?????
+
+
+% atomic_list_concat(@list(atomic), +atom, ?atom)
+
+atomic_list_concat(Atomics, Glue, Atom) :-
+	?????
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  string built-in type
 %
 %  define these predicates to trivially fail if no string type is available

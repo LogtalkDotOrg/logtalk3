@@ -693,6 +693,39 @@ term_hash(_, _, _, _) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  atomics concat (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% atomic_concat(+atomic, +atomic, ?atom)
+
+atomic_concat(Atomic1, Atomic2, Atom) :-
+	concat([Atomic1, Atomic2], Atom).
+
+
+% atomic_list_concat(@list(atomic), ?atom)
+
+atomic_list_concat(Atomics, Atom) :-
+	concat(Atomics, Atom).
+
+
+% atomic_list_concat(@list(atomic), +atom, ?atom)
+
+atomic_list_concat(Atomics, Glue, Atom) :-
+	'$lgt_cx_interleave'(Atomics, Glue, AtomicsGlue),
+	concat(AtomicsGlue, Atom).
+
+'$lgt_cx_interleave'([], _, []).
+'$lgt_cx_interleave'([Atomic], _, [Atomic]) :-
+	!.
+'$lgt_cx_interleave'([Atomic1, Atomic2| Atomics], Glue, [Atomic1, Glue| AtomicsGlue]) :-
+	'$lgt_cx_interleave'([Atomic2| Atomics], Glue, AtomicsGlue).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  string built-in type
 %
 %  define these predicates to trivially fail if no string type is available

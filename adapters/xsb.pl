@@ -774,6 +774,44 @@ term_hash(_, _, _, _) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  atomics concat (not currently used in the compiler/runtime)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% atomic_concat(+atomic, +atomic, ?atom)
+
+:- if(\+ predicate_property(atomic_concat(_, _, _), built_in)).
+
+	atomic_concat(Atomic1, Atomic2, Atom) :-
+		concat_atom([Atomic1, Atomic2], Atom).
+
+:- endif.
+
+
+% atomic_list_concat(@list(atomic), ?atom)
+
+:- if(\+ predicate_property(atomic_list_concat(_, _), built_in)).
+
+	atomic_list_concat(Atomics, Atom) :-
+		concat_atom(Atomics, Atom).
+
+:- endif.
+
+
+% atomic_list_concat(@list(atomic), +atom, ?atom)
+
+:- if(\+ predicate_property(atomic_list_concat(_, _, _), built_in)).
+
+	atomic_list_concat(Atomics, Glue, Atom) :-
+		concat_atom(Atomics, Glue, Atom).
+
+:- endif.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %  string built-in type
 %
 %  define these predicates to trivially fail if no string type is available
