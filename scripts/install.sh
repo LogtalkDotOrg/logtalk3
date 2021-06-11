@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on May 4, 2021
+##   Last updated on June 10, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.7"
+	echo "  0.8"
 	exit 0
 }
 
@@ -134,11 +134,13 @@ ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2md.sh lgt2md
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2rst.sh lgt2rst
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2txt.sh lgt2txt
 
-echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
-echo "\"logtalk_version_select\", \"logtalk_tester\", \"logtalk_doclet\","
-echo "\"lgt2svg\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\","
-echo "\"lgt2rst\" and \"lgt2txt\" scripts have been created on \"$prefix/bin\";"
-echo "ensure that this directory is in your execution path."
+echo "Links to the following scripts have been created on \"$prefix/bin\":"
+echo
+echo "- logtalk_user_setup, logtalk_backend_select, logtalk_version_select"
+echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"
+echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
+echo
+echo "Ensure that the \"$prefix/bin\" directory is in your execution path."
 echo
 
 ln -sf ../share/logtalk/integration/bplgt.sh bplgt
