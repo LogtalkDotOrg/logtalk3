@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-04,
+		date is 2021-06-11,
 		comment is 'Unit tests for the "dynpred" example.'
 	]).
 
@@ -43,76 +43,90 @@
 
 	cover(prototype).
 
-	:- discontiguous(succeeds/1).
-	:- discontiguous(fails/1).
-	:- discontiguous(throws/2).
+	test(dynpred_01, true(Solutions == [root])) :-
+		findall(Value, descendant::p(Value), Solutions).
 
-	succeeds(dynpred_1) :-
-		findall(Value, descendant::p(Value), Solutions),
-		Solutions == [root].
-
-	succeeds(dynpred_2) :-
+	test(dynpred_02, true(Solutions == [descendant])) :-
 		descendant::assertz(p(descendant)),
-		findall(Value, descendant::p(Value), Solutions),
-		Solutions == [descendant].
+		findall(Value, descendant::p(Value), Solutions).
 
-	succeeds(dynpred_3) :-
+	test(dynpred_03, true(Solutions == [root])) :-
 		descendant::retractall(p(_)),
-		findall(Value, descendant::p(Value), Solutions),
-		Solutions == [root].
+		findall(Value, descendant::p(Value), Solutions).
 
-	throws(dynpred_4, error(existence_error(predicate_declaration,p1/1), logtalk(_,_))) :-
+	test(dynpred_04, error(existence_error(predicate_declaration,p1/1))) :-
 		class::p1(_).
 
-	succeeds(dynpred_5) :-
-		findall(X, instance::p1(X), Solutions),
-		Solutions == [class].
+	test(dynpred_05, true(Solutions == [class])) :-
+		findall(X, instance::p1(X), Solutions).
 
-	succeeds(dynpred_6) :-
+	test(dynpred_06, true) :-
 		class::assertz(p2(class)).
 
-	throws(dynpred_7, error(existence_error(predicate_declaration,p2/1), logtalk(_,_))) :-
+	test(dynpred_07, error(existence_error(predicate_declaration,p2/1))) :-
 		class::p2(_).
 
-	succeeds(dynpred_8) :-
-		findall(X, instance::p2(X), Solutions),
-		Solutions == [class].
+	test(dynpred_08, true(Solutions == [class])) :-
+		findall(X, instance::p2(X), Solutions).
 
-	succeeds(dynpred_9) :-
+	test(dynpred_09, true) :-
 		class::abolish(p2/1).
 
-	throws(dynpred_10, error(existence_error(predicate_declaration,p2/1), logtalk(_,_))) :-
+	test(dynpred_10, error(existence_error(predicate_declaration,p2/1))) :-
 		instance::p2(_).
 
-	succeeds(dynpred_11) :-
+	test(dynpred_11, true) :-
 		prototype::(object_assert, self_assert, this_assert).
 
-	succeeds(dynpred_12) :-
+	test(dynpred_12, true) :-
 		\+ top::get_default(_),
-		\+ top::get_value(_),
+		\+ top::get_value(_).
+
+	test(dynpred_13, true) :-
 		\+ middle::get_default(_),
-		\+ middle::get_value(_),
+		\+ middle::get_value(_).
+
+	test(dynpred_14, true) :-
 		\+ bottom::get_default(_),
 		\+ bottom::get_value(_).
 
-	succeeds(dynpred_13) :-
+	test(dynpred_15, true(Default == 1)) :-
 		top::set_default(1),
-		top::get_default(Default), Default == 1,
-		top::get_value(Default), Default == 1,
-		middle::get_default(Default), Default == 1,
-		middle::get_value(Default), Default == 1,
-		bottom::get_default(Default), Default == 1,
-		bottom::get_value(Default), Default == 1.
+		top::get_default(Default).
 
-	succeeds(dynpred_14) :-
+	test(dynpred_16, true(Value == 1)) :-
+		top::set_default(1),
+		top::get_value(Value).
+
+	test(dynpred_17, true(Default == 1)) :-
+		top::set_default(1),
+		middle::get_default(Default).
+
+	test(dynpred_18, true(Value == 1)) :-
+		top::set_default(1),
+		middle::get_value(Value).
+
+	test(dynpred_19, true(Default == 1)) :-
+		top::set_default(1),
+		bottom::get_default(Default).
+
+	test(dynpred_20, true(Value == 1)) :-
+		top::set_default(1),
+		bottom::get_value(Value).
+
+	test(dynpred_21, true(Default-Value == 2-2)) :-
 		top::set_value(2),
-		top::get_default(Default), Default == 2,
-		top::get_value(Default), Default == 2,
+		top::get_default(Default),
+		top::get_value(Value).
+
+	test(dynpred_22, true(Default-Value == 2-3)) :-
 		middle::set_value(3),
-		middle::get_default(Default), Default == 2,
-		middle::get_value(MiddleValue), MiddleValue == 3,
+		middle::get_default(Default),
+		middle::get_value(Value).
+
+	test(dynpred_23, true(Default-Value == 2-4)) :-
 		bottom::set_value(4),
-		bottom::get_default(Default), Default == 2,
-		bottom::get_value(BottomValue), BottomValue == 4.
+		bottom::get_default(Default),
+		bottom::get_value(Value).
 
 :- end_object.

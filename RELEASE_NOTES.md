@@ -73,9 +73,9 @@ for consistency plus singular and plural agreement.
 Examples
 --------
 
-* IMPROVED: Tests for the `blocks`, `bricks`, `futures`, `hailstone`, `hooks`,
-`includes`, `laptops`, `logs`, `metaclasses`, `multifile`, `patches`,
-`patching`, `polygons`, `self_messages`, and `scopes` examples.
+* IMPROVED: Tests for the `blocks`, `bricks`, `dynpred`, `futures`, `hooks`,
+`hailstone`, `includes`, `laptops`, `logs`, `metaclasses`, `multifile`,
+`patches`, `patching`, `polygons`, `self_messages`, and `scopes` examples.
 
 Tests
 -----
