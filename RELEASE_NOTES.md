@@ -46,6 +46,8 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: Handbook section on running parallel Logtalk processes.
+
 * IMPROVED: Handbook documentation on declaring and using public entity
 operators.
 
