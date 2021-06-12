@@ -23,68 +23,54 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2021-06-12,
 		comment is 'Unit tests for the "threads/functions" example.'
 	]).
 
 	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
 
-	:- discontiguous(succeeds/1).
+	test(functions_01, true(Zero =~= 2.0)) :-
+		bisection::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).
 
-	succeeds(functions_01) :-
-		bisection::find_root(f1, 1.0, 2.3, 1.0e-15, Zero),
-		Zero =~= 2.0.
+	test(functions_02, true(Zero =~= 2.0)) :-
+		newton::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).
 
-	succeeds(functions_02) :-
-		newton::find_root(f1, 1.0, 2.3, 1.0e-15, Zero),
-		Zero =~= 2.0.
+	test(functions_03, true(Zero =~= 2.0)) :-
+		muller::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).
 
-	succeeds(functions_03) :-
-		muller::find_root(f1, 1.0, 2.3, 1.0e-15, Zero),
-		Zero =~= 2.0.
+	test(functions_04, true(Zero =~= 1.25809265664599)) :-
+		bisection::find_root(f2, 1.0, 1.3, 1.0e-15, Zero).
 
-	succeeds(functions_04) :-
-		bisection::find_root(f2, 1.0, 1.3, 1.0e-15, Zero),
-		Zero =~= 1.25809265664599.
+	test(functions_05, true(Zero =~= 1.25809265664599)) :-
+		newton::find_root(f2, 1.0, 1.3, 1.0e-15, Zero).
 
-	succeeds(functions_05) :-
-		newton::find_root(f2, 1.0, 1.3, 1.0e-15, Zero),
-		Zero =~= 1.25809265664599.
+	test(functions_06, true(Zero =~= 1.25809265664599)) :-
+		muller::find_root(f2, 1.0, 1.3, 1.0e-15, Zero).
 
-	succeeds(functions_06) :-
-		muller::find_root(f2, 1.0, 1.3, 1.0e-15, Zero),
-		Zero =~= 1.25809265664599.
-
-	fails(functions_07) :-
+	test(functions_07, false) :-
 		bisection::find_root(humps, -1.0, 2.0, 1.0e-15, _).
 
-	succeeds(functions_08) :-
-		muller::find_root(humps, -1.0, 2.0, 1.0e-15, Zero),
-		Zero =~= 1.29954968258.
+	test(functions_08, true(Zero =~= 1.29954968258)) :-
+		muller::find_root(humps, -1.0, 2.0, 1.0e-15, Zero).
 
-	throws(functions_09, error(evaluation_error(float_overflow), _)) :-
+	test(functions_09, error(evaluation_error(float_overflow))) :-
 		newton::find_root(humps, -1.0, 2.0, 1.0e-15, _).
 
-	succeeds(functions_10) :-
-		function_root::find_root(f1, 1.0, 2.3, 1.0e-15, Zero, _),
-		Zero =~= 2.0.
+	test(functions_10, true(Zero =~= 2.0)) :-
+		function_root::find_root(f1, 1.0, 2.3, 1.0e-15, Zero, _).
 
-	succeeds(functions_11) :-
-		function_root::find_root(f2, 1.0, 1.3, 1.0e-15, Zero, _),
-		Zero =~= 1.25809265664599.
+	test(functions_11, true(Zero =~= 1.25809265664599)) :-
+		function_root::find_root(f2, 1.0, 1.3, 1.0e-15, Zero, _).
 
-	succeeds(functions_12) :-
-		function_root::find_root(f3, 0.0, 3.0, 1.0e-15, Zero, _),
-		Zero =~= 1.4142135623731.
+	test(functions_12, true(Zero =~= 1.4142135623731)) :-
+		function_root::find_root(f3, 0.0, 3.0, 1.0e-15, Zero, _).
 
-	succeeds(functions_13) :-
-		function_root::find_root(f4, -1.0, 2.0, 1.0e-15, Zero, _),
-		Zero =~= -8.88178419700125e-16.
+	test(functions_13, true(Zero =~= -8.88178419700125e-16)) :-
+		function_root::find_root(f4, -1.0, 2.0, 1.0e-15, Zero, _).
 
-	succeeds(functions_14) :-
-		function_root::find_root(humps, -1.0, 2.0, 1.0e-15, Zero, _),
-		Zero =~= 1.29954968258482.
+	test(functions_14, true(Zero =~= 1.29954968258482)) :-
+		function_root::find_root(humps, -1.0, 2.0, 1.0e-15, Zero, _).
 
 :- end_object.

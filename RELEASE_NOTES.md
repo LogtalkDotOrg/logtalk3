@@ -59,7 +59,7 @@ Library
 testing instead of checking for the expected encoding to avoid float precision
 representation issues making the tests fail.
 
-* IMPROVED: Tests of the `raddom` library.
+* IMPROVED: Tests of the `random` library.
 
 Tools
 -----
@@ -77,8 +77,8 @@ Examples
 
 * IMPROVED: Tests for the `blocks`, `bricks`, `dynpred`, `futures`, `hooks`,
 `hailstone`, `includes`, `laptops`, `logs`, `metaclasses`, `multifile`,
-`patches`, `patching`, `polygons`, `reflection`, `self_messages`, and `scopes`
-examples.
+`patches`, `patching`, `polygons`, `reflection`, `self_messages`, `scopes`,
+and `threads/functions` examples.
 
 Tests
 -----
