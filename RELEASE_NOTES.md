@@ -59,6 +59,8 @@ Library
 testing instead of checking for the expected encoding to avoid float precision
 representation issues making the tests fail.
 
+* IMPROVED: Tests of the `raddom` library.
+
 Tools
 -----
 

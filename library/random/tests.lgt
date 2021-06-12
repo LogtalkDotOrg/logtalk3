@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2019-12-01,
+		date is 2021-06-12,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -107,38 +107,38 @@
 
 	% maybe/0 tests
 
-	succeeds(random_maybe_0_01) :-
+	test(random_maybe_0_01,  true((4800 =< Length, Length =< 5200))) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe), List),
 		% 2% margin for checking for an even distribution
-		length(List, Length), 4800 =< Length, Length =< 5200.
+		length(List, Length).
 
 	% maybe/1 tests
 
-	succeeds(random_maybe_1_01) :-
+	test(random_maybe_1_01,  true((4800 =< Length, Length =< 5200))) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe(0.5)), List),
 		% 2% margin for checking for an even distribution
-		length(List, Length), 4800 =< Length, Length =< 5200.
+		length(List, Length).
 
 	% maybe/2 tests
 
-	succeeds(random_maybe_2_01) :-
+	test(random_maybe_2_01,  true((4800 =< Length, Length =< 5200))) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe(5,10)), List),
 		% 2% margin for checking for an even distribution
-		length(List, Length), 4800 =< Length, Length =< 5200.
+		length(List, Length).
 
 	% maybe_call/1 tests
 
-	succeeds(random_maybe_call_1_01) :-
+	test(random_maybe_call_1_01,  true((4800 =< Length, Length =< 5200))) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe_call(true)), List),
 		% 2% margin for checking for an even distribution
-		length(List, Length), 4800 =< Length, Length =< 5200.
+		length(List, Length).
 
 	% maybe_call/2 tests
 
-	succeeds(random_maybe_call_2_01) :-
+	test(random_maybe_call_2_01,  true((4800 =< Length, Length =< 5200))) :-
 		findall(1, (between(1,10000,_), _RandomObject_::maybe_call(0.5,true)), List),
 		% 2% margin for checking for an even distribution
-		length(List, Length), 4800 =< Length, Length =< 5200.
+		length(List, Length).
 
 	% auxiliary predicates
 
