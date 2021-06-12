@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Amzi! Prolog 7.6.1 and later versions
-%  Last updated on June 10, 2021
+%  Last updated on June 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -366,6 +366,13 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 		true
 	;	mkdir(Directory)
 	).
+
+
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(_, '').
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)

@@ -3482,7 +3482,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 48, 0, b02)).
+'$lgt_version_data'(logtalk(3, 48, 0, b03)).
 
 
 
@@ -6967,8 +6967,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	% append (if supported by the backend compiler) a directory hash value to the
 	% intermediate Prolog file name to try to avoid file name collisions when
-	% collecting all the intermediate files in the same directory for embedding
-	'$lgt_directory_hash_pid_as_atom'(SourceDirectory, Hash),
+	% collecting all the intermediate files in the same directory for embedding;
+	% when compiling with the "clean" flag turned on (its default value), also
+	% include in the name the process identigier to avoid file name clashes when
+	% running parallel Logtalk processes
+	(	'$lgt_compiler_flag'(clean, on) ->
+		'$lgt_directory_hash_pid_as_atom'(SourceDirectory, Hash)
+	;	'$lgt_directory_hash_as_atom'(SourceDirectory, Hash)
+	),
 	atom_concat('_', Hash, UnderscoreHash),
 	% add a suffix based on the original extension to the file name to avoid
 	% intermediate and temporary file name conflicts when compiling two or

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.6.1 or later versions
-%  Last updated on June 10, 2021
+%  Last updated on June 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -369,6 +369,16 @@
 		true
 	;	make_directory(Directory)
 	).
+
+
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	term_hash(Directory, Hash0),
+	number_codes(Hash0, Codes),
+	atom_codes(Hash, Codes).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)

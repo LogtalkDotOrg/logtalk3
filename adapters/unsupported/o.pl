@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for O-Prolog 1.32 and later versions
-%  Last updated on June 10, 2021
+%  Last updated on June 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -387,6 +387,13 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 
 '$lgt_make_directory'(Directory) :-
 	make_directory(Directory).
+
+
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(_, '').
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)

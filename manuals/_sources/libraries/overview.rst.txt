@@ -12,8 +12,9 @@ A ``parallel_logtalk_processes_setup.pl`` Prolog file is also provided
 with sample code for selected backend Prolog compilers for initializing
 Logtalk processes such that each process uses a unique scratch directory
 therefore allowing parallel process execution (e.g. for usage at
-continuous integration servers). See the comments in the file itself for
-usage instructions.
+continuous integration servers). Starting with Logtalk 3.48.0, this
+setup is only required in general when running with the ``clean`` flag
+turned off. See the comments in the file itself for usage instructions.
 
 Library documentation
 ---------------------

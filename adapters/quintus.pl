@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on June 10, 2021
+%  Last updated on June 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -653,6 +653,16 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	;	atom_concat('mkdir ', Path, Command),
 		unix(system(Command))
 	).
+
+
+% '$lgt_directory_hash_as_atom'(+atom, -atom)
+%
+% returns the directory hash as an atom
+
+'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+	hash_term(Directory, Hash0),
+	number_chars(Hash0, Codes),
+	atom_chars(Hash, Codes).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
