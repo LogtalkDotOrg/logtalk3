@@ -300,6 +300,32 @@ file names don’t include the process identifier and are kept between runs.
 This is usually done to avoid repeated recompilation of stable code when
 developing large applications or when running multiple test sets for
 performance (by avoiding repeated recompilation of the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool).</p>
+<p>To run parallel Logtalk processes with the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag turned off, each
+process must use its own <a class="reference internal" href="../glossary.html#term-scratch-directory"><span class="xref std std-term">scratch directory</span></a>. This is accomplished
+by defining the <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code> library alias to a per process
+location. For example, assuming we’re using GNU Prolog as the backend:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
+
+<span class="k">logtalk_library_path</span>(scratch_directory, <span class="nv">Directory</span>) <span class="o">:-</span>
+    temporary_name(lgtXXXXXX, <span class="nv">Name</span>),
+    decompose_file_name(<span class="nv">Name</span>, <span class="nv">_</span>, <span class="nv">Prefix</span>, <span class="nv">_</span>),
+    <span class="k">atom_concat</span>(<span class="s">&#39;/tmp/&#39;</span>, <span class="nv">Prefix</span>, <span class="nv">Directory</span>),
+    (   file_exists(<span class="nv">Directory</span>) <span class="o">-&gt;</span>
+        <span class="k">true</span>
+    <span class="o">;</span>   make_directory(<span class="nv">Directory</span>)
+    ).
+</pre></div>
+</div>
+<p>Assuming the code above is saved in a <code class="docutils literal notranslate"><span class="pre">parallel_logtalk_processes_setup.pl</span></code>
+file, we would then start Logtalk using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ gplgt --init-goal <span class="s2">&quot;consult(&#39;parallel_logtalk_processes_setup.pl&#39;)&quot;</span>
+</pre></div>
+</div>
+<p>The details on how to define and load the definition of the <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code>
+library alias are, however, backend specific due to the lack of Prolog
+standardization. But the Logtalk library contains support for selected
+backends.</p>
 </div>
 <div class="section" id="source-files">
 <span id="programming-source-files"></span><h2>Source files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>

@@ -82,6 +82,37 @@ This is usually done to avoid repeated recompilation of stable code when
 developing large applications or when running multiple test sets for
 performance (by avoiding repeated recompilation of the ``lgtunit`` tool).
 
+To run parallel Logtalk processes with the ``clean`` flag turned off, each
+process must use its own :term:`scratch directory`. This is accomplished
+by defining the ``scratch_directory`` library alias to a per process
+location. For example, assuming we're using GNU Prolog as the backend:
+
+::
+
+   :- multifile(logtalk_library_path/2).
+   :- dynamic(logtalk_library_path/2).
+   
+   logtalk_library_path(scratch_directory, Directory) :-
+       temporary_name(lgtXXXXXX, Name),
+       decompose_file_name(Name, _, Prefix, _),
+       atom_concat('/tmp/', Prefix, Directory),
+       (   file_exists(Directory) ->
+           true
+       ;   make_directory(Directory)
+       ).
+
+Assuming the code above is saved in a ``parallel_logtalk_processes_setup.pl``
+file, we would then start Logtalk using:
+
+.. code-block:: bash
+
+   $ gplgt --init-goal "consult('parallel_logtalk_processes_setup.pl')"
+
+The details on how to define and load the definition of the ``scratch_directory``
+library alias are, however, backend specific due to the lack of Prolog
+standardization. But the Logtalk library contains support for selected
+backends.
+
 .. _programming_source_files:
 
 Source files
