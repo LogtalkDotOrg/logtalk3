@@ -43,6 +43,9 @@ Prolog adapter and integration files
 
 * UPDATED: Require Trealla Prolog 1.8.75 or later version.
 
+* FIXED: Change Ciao Prolog adapter file definition of the `modules` flag to
+`unsupported`.
+
 Documentation
 -------------
 
