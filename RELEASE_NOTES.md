@@ -82,6 +82,9 @@ Examples
 `patches`, `patching`, `polygons`, `reflection`, `self_messages`, `scopes`,
 and `threads/functions` examples.
 
+* FIXED: A `benchmarks` example portability issue with the Ciao Prolog and
+XSB backends.
+
 Tests
 -----
 

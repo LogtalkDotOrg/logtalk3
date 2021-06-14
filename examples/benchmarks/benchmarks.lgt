@@ -22,9 +22,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 5:7:0,
+		version is 5:7:1,
 		author is 'Paulo Moura',
-		date is 2021-05-24,
+		date is 2021-06-15,
 		comment is 'Benchmark utility predicates and standard set of benchmarks.'
 	]).
 
@@ -55,6 +55,7 @@
 		argnames is ['Id', 'Goal']
 	]).
 
+	:- uses(integer, [between/3]).
 	:- uses(os, [cpu_time/1]).
 
 	% run all benchmarks the default number of times:
@@ -148,13 +149,13 @@
 	% try to avoid the interference of Prolog compiler memory management mechanism
 	% (such as garbage collection) on the results
 	do_benchmark(empty_loop, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 		fail.
 	do_benchmark(empty_loop, _).
 
 	do_benchmark(s11, N) :-
 		{generate_list(30, List)},
-		{between(1, N, _)},
+		between(1, N, _),
 			{my_length(List, _)},
 		fail.
 	do_benchmark(s11, _).
@@ -162,7 +163,7 @@
 	:- if(current_logtalk_flag(modules, supported)).
 	do_benchmark(s12, N) :-
 		{generate_list(30, List)},
-		{between(1, N, _)},
+		between(1, N, _),
 			':'(module, mod_length(List, _)),
 		fail.
 	do_benchmark(s12, _).
@@ -170,14 +171,14 @@
 
 	do_benchmark(s13, N) :-
 		{generate_list(30, List)},
-		{between(1, N, _)},
+		between(1, N, _),
 			object::length(List, _),
 		fail.
 	do_benchmark(s13, _).
 
 	do_benchmark(s21, N) :-
 		{generate_list(30, List)},
-		{between(1, N, _)},
+		between(1, N, _),
 			{my_nrev(List, _)},
 		fail.
 	do_benchmark(s21, _).
@@ -185,7 +186,7 @@
 	:- if(current_logtalk_flag(modules, supported)).
 	do_benchmark(s22, N) :-
 		{generate_list(30, List)},
-		{between(1, N, _)},
+		between(1, N, _),
 			':'(module, mod_nrev(List, _)),
 		fail.
 	do_benchmark(s22, _).
@@ -193,96 +194,96 @@
 
 	do_benchmark(s23, N) :-
 		{generate_list(30, List)},
-		{between(1, N, _)},
+		between(1, N, _),
 			object::nrev(List, _),
 		fail.
 	do_benchmark(s23, _).
 
 	do_benchmark(s31, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			({maze_solve(1, 7, _)} -> true; fail),
 		fail.
 	do_benchmark(s31, _).
 
 	:- if(current_logtalk_flag(modules, supported)).
 	do_benchmark(s32, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			(':'(module, mod_maze_solve(1, 7, _)) -> true; fail),
 		fail.
 	do_benchmark(s32, _).
 	:- endif.
 
 	do_benchmark(s33, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			(maze::solve(1, 7, _) -> true; fail),
 		fail.
 	do_benchmark(s33, _).
 
 	do_benchmark(s41, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			{graph_path(0, 4, _)},
 		fail.
 	do_benchmark(s41, _).
 
 	:- if(current_logtalk_flag(modules, supported)).
 	do_benchmark(s42, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			':'(module, mod_graph_path(0, 4, _)),
 		fail.
 	do_benchmark(s42, _).
 	:- endif.
 
 	do_benchmark(s43, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			graph::path(0, 4, _),
 		fail.
 	do_benchmark(s43, _).
 
 	do_benchmark(c1, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			leaf::obj_local,
 		fail.
 	do_benchmark(c1, _).
 
 	do_benchmark(c2, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			leaf::ctg_super,
 		fail.
 	do_benchmark(c2, _).
 
 	do_benchmark(c3, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			leaf::ctg_self,
 		fail.
 	do_benchmark(c3, _).
 
 	do_benchmark(d1, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			create_object(xpto, [], [], []),
 			abolish_object(xpto),
 		fail.
 	do_benchmark(d1, _).
 
 	do_benchmark(d2, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			{plain_dyndb(N)},
 		fail.
 	do_benchmark(d2, _).
 
 	do_benchmark(d3, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			database::this_dyndb(N),
 		fail.
 	do_benchmark(d3, _).
 
 	do_benchmark(d4, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			database::self_dyndb(N),
 		fail.
 	do_benchmark(d4, _).
 
 	do_benchmark(d5, N) :-
-		{between(1, N, _)},
+		between(1, N, _),
 			database::other_dyndb(N),
 		fail.
 	do_benchmark(d5, _).
