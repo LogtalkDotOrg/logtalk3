@@ -84,7 +84,7 @@ also available in the Logtalk website.
 - `logtalk_allure_report.sh`  
 	shell script for creating Allure reports (http://allure.qatools.ru); tested
 	with Allure 2.13.8; this script should be called after running the
-	`logtalk_tester.sh` shell script (using the `-f xunit` command-line option)
+	`logtalk_tester.sh` shell script using the `-f xunit` command-line option
 
 - `logtalk_doclet.sh`  
 	shell script for automating running doclets in the current directory and
@@ -96,7 +96,7 @@ also available in the Logtalk website.
 	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
 	executable directories to the system path environment variable;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
-	by the GNU coreutils package), it will use it to run each doclet if the
+	by the GNU `coreutils` package), it will use it to run each doclet if the
 	`timeout` option is set to a value greater than zero
 
 - `logtalk_version_select.sh`  

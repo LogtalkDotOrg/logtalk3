@@ -303,7 +303,8 @@ performance (by avoiding repeated recompilation of the <code class="docutils lit
 <p>To run parallel Logtalk processes with the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag turned off, each
 process must use its own <a class="reference internal" href="../glossary.html#term-scratch-directory"><span class="xref std std-term">scratch directory</span></a>. This is accomplished
 by defining the <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code> library alias to a per process
-location. For example, assuming we’re using GNU Prolog as the backend:</p>
+location. For example, assuming we’re using GNU Prolog as the backend, a
+possible definition could be:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">dynamic</span>(logtalk_library_path<span class="o">/</span><span class="m">2</span>).
 
@@ -323,9 +324,10 @@ file, we would then start Logtalk using:</p>
 </pre></div>
 </div>
 <p>The details on how to define and load the definition of the <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code>
-library alias are, however, backend specific due to the lack of Prolog
-standardization. But the Logtalk library contains support for selected
-backends.</p>
+library alias are, however, backend specific (due to the lack of Prolog
+standardization) and possibly also operating-system specific (different
+locations for the temporary directory). The Logtalk library contains support
+for selected backends.</p>
 </div>
 <div class="section" id="source-files">
 <span id="programming-source-files"></span><h2>Source files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>

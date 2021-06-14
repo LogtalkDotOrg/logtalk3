@@ -6969,8 +6969,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% intermediate Prolog file name to try to avoid file name collisions when
 	% collecting all the intermediate files in the same directory for embedding;
 	% when compiling with the "clean" flag turned on (its default value), also
-	% include in the name the process identigier to avoid file name clashes when
-	% running parallel Logtalk processes
+	% include in the file name the process identifier to avoid file name clashes
+	% when running parallel Logtalk processes
 	(	'$lgt_compiler_flag'(clean, on) ->
 		'$lgt_directory_hash_pid_as_atom'(SourceDirectory, Hash)
 	;	'$lgt_directory_hash_as_atom'(SourceDirectory, Hash)
