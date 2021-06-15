@@ -224,8 +224,8 @@
   <div class="section" id="lgtdoc">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code><a class="headerlink" href="#lgtdoc" title="Permalink to this headline">¶</a></h1>
 <p>This is the default Logtalk documenting tool for generating API
-documentation for applications and Logtalk itself. It uses the
-structural reflection API to extract and output in XML format relevant
+documentation for libraries and applications. It uses the structural
+reflection API to extract and output in XML format relevant
 documentation about a source file, a library or directory of source
 files, or all loaded source files. The tool predicates accept several
 options for generating the XML files, including the output directory.</p>
@@ -292,8 +292,8 @@ application documentation by typing:</p>
 ...
 </pre></div>
 </div>
-<p>By default, the documenting XML files are created in a <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>
-directory in the application directory. But usually all documenting
+<p>By default, the documenting XML files are created in a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code>
+directory in the current working directory. But usually all documenting
 files are collected for both the application and the libraries it uses
 ar collected in a common directory so that all documentation links
 resolved properly. The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> predicates can take a list of options

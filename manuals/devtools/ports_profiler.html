@@ -362,7 +362,7 @@ behavior for the profiled predicates.</p>
 <p>This tool can also be applied to Prolog modules that Logtalk is able to
 compile as objects. For example, if the Prolog module file is named
 <code class="docutils literal notranslate"><span class="pre">module.pl</span></code>, try:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(module, [debug(on)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(module, [debug(on), source_data(on)]).
 </pre></div>
 </div>
 <p>Due to the lack of standardization of module systems and the abundance
@@ -385,7 +385,7 @@ messages to the object. For example:</p>
 </div>
 <p>Save the object to an e.g. <code class="docutils literal notranslate"><span class="pre">code.lgt</span></code> file in the same directory as
 the Prolog file and then load it in debug mode:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [debug(on)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [debug(on), source_data(on)]).
 </pre></div>
 </div>
 <p>In alternative, use the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
@@ -393,7 +393,11 @@ the Prolog file and then load it in debug mode:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
 ...
 
-| <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), debug(on), source_data(on)]).
+| <span class="o">?-</span> <span class="k">logtalk_load</span>(
+         code,
+         [hook(object_wrapper_hook), debug(on),
+          source_data(on), context_switching_calls(allow)]
+     ).
 </pre></div>
 </div>
 <p>In this second alternative, you can then use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> context switch

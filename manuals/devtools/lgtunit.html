@@ -1138,7 +1138,7 @@ the same line as the test results.</p>
 <div class="section" id="flaky-tests">
 <h2>Flaky tests<a class="headerlink" href="#flaky-tests" title="Permalink to this headline">¶</a></h2>
 <p>Flaky tests are tests that pass or fail non-deterministically, usually
-due to external conditions (e.g. computer or network load). Thus, flake
+due to external conditions (e.g. computer or network load). Thus, flaky
 tests often don’t result from bugs in the code being tested itself but
 from test execution conditions that are not predictable. The <code class="docutils literal notranslate"><span class="pre">note/1</span></code>
 annotation can be used to alert that a test failure is for a flaky test.
@@ -1149,16 +1149,18 @@ script will ignore failed flaky tests when setting its exit status.</p>
 </div>
 <div class="section" id="debugging-failed-tests">
 <h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Permalink to this headline">¶</a></h2>
-<p>Debugging of failed unit tests is usually easy if you use assertions as
+<p>Debugging of failed unit tests is simplified by using test assertions as
 the reason for the assertion failures is printed out. Thus, use
-preferably the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects with <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> or
-<code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code> outcomes. If a test checks multiple
+preferably the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects with <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>, <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> outcomes. If a test checks multiple
 assertions, you can use the predicate <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code> in the test body.</p>
-<p>In order to debug failed unit tests, start by compiling the unit test
-objects and the code being tested in debug mode. Load the debugger and
-trace the test that you want to debug. For example, assuming your tests
-are defined in a <code class="docutils literal notranslate"><span class="pre">tests</span></code> object and that the identifier of test to be
-debugged is <code class="docutils literal notranslate"><span class="pre">test_foo</span></code>:</p>
+<p>If the assertion failures don’t provide enough information, you can use
+the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool to debug failed unit tests. Start by compiling the
+unit test objects and the code being tested in debug mode. Load the
+debugger and trace the test that you want to debug. For example,
+assuming your tests are defined in a <code class="docutils literal notranslate"><span class="pre">tests</span></code> object and that the
+identifier of test to be debugged is <code class="docutils literal notranslate"><span class="pre">test_foo</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
 ...
 
@@ -1186,8 +1188,8 @@ For example, assuming that the identifier of test to be debugged is
 </pre></div>
 </div>
 <p>In the more complicated cases, it may be worth to define
-<code class="docutils literal notranslate"><span class="pre">loader_debug.lgt</span></code> and <code class="docutils literal notranslate"><span class="pre">tester_debug.lgt</span></code> files that load code and
-tests in debug mode and also load the debugger.</p>
+<code class="docutils literal notranslate"><span class="pre">loader_debug.lgt</span></code> and <code class="docutils literal notranslate"><span class="pre">tester_debug.lgt</span></code> driver files that load
+code and tests in debug mode and also load the debugger.</p>
 </div>
 <div class="section" id="code-coverage">
 <h2>Code coverage<a class="headerlink" href="#code-coverage" title="Permalink to this headline">¶</a></h2>
@@ -1555,10 +1557,10 @@ test execution messages.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
-<p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used
-currently in the definition of the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>, <code class="docutils literal notranslate"><span class="pre">setup/1</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> test options when using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in
-alternative the <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> built-in execution context predicate.</p>
+<p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used in the
+definition of the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>, <code class="docutils literal notranslate"><span class="pre">setup/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> test
+options when using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in alternative the
+<code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> built-in execution context predicate.</p>
 <p>Deterministic unit tests are currently not available when using Quintus
 Prolog as it lacks built-in support that cannot be sensibly defined in
 Prolog.</p>

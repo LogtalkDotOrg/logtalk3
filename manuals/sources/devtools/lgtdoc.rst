@@ -2,8 +2,8 @@
 ==========
 
 This is the default Logtalk documenting tool for generating API
-documentation for applications and Logtalk itself. It uses the
-structural reflection API to extract and output in XML format relevant
+documentation for libraries and applications. It uses the structural
+reflection API to extract and output in XML format relevant
 documentation about a source file, a library or directory of source
 files, or all loaded source files. The tool predicates accept several
 options for generating the XML files, including the output directory.
@@ -88,8 +88,8 @@ application documentation by typing:
    | ?- lgtdoc::library(my_app).
    ...
 
-By default, the documenting XML files are created in a ``./xml_docs``
-directory in the application directory. But usually all documenting
+By default, the documenting XML files are created in a ``xml_docs``
+directory in the current working directory. But usually all documenting
 files are collected for both the application and the libraries it uses
 ar collected in a common directory so that all documentation links
 resolved properly. The ``lgtdoc`` predicates can take a list of options

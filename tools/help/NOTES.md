@@ -20,8 +20,10 @@ ________________________________________________________________________
 
 `help`
 ======
-This tool provides basic on-line help for Logtalk when running in a limited
-set of operating-systems.
+
+This tool provides basic on-line help for Logtalk features and libraries
+when running in a limited set of operating-systems. For help on the
+Logtalk compiler error and warning messages, see the `tutor` tool.
 
 
 API documentation
@@ -58,6 +60,10 @@ command must be available. On macOS, the command `open` is used.
 
 This tool relies on the library portable operating-system access abstraction.
 
+Usage
+-----
+
+After loading the tool, use the query `help::help` to get started.
 
 Known issues
 ------------

@@ -167,7 +167,7 @@ This tool can also be applied to Prolog modules that Logtalk is able to
 compile as objects. For example, if the Prolog module file is named
 `module.pl`, try:
 
-	| ?- logtalk_load(module, [debug(on)]).
+	| ?- logtalk_load(module, [debug(on), source_data(on)]).
 
 Due to the lack of standardization of module systems and the abundance of
 proprietary extensions, this solution is not expected to work for all cases.
@@ -191,7 +191,7 @@ example:
 Save the object to an e.g. `code.lgt` file in the same directory as the
 Prolog file and then load it in debug mode:
 
-	| ?- logtalk_load(code, [debug(on)]).
+	| ?- logtalk_load(code, [debug(on), source_data(on)]).
 
 In alternative, use the `object_wrapper_hook` provided by the `hook_objects`
 library:
@@ -199,7 +199,11 @@ library:
 	| ?- logtalk_load(hook_objects(object_wrapper_hook)).
 	...
 
-	| ?- logtalk_load(code, [hook(object_wrapper_hook), debug(on), source_data(on)]).
+	| ?- logtalk_load(
+	         code,
+	         [hook(object_wrapper_hook), debug(on),
+	          source_data(on), context_switching_calls(allow)]
+	     ).
 
 In this second alternative, you can then use the `<</2` context switch
 control construct to call the wrapped predicates. E.g.

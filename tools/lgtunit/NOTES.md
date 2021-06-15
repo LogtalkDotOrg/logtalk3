@@ -892,7 +892,7 @@ Flaky tests
 -----------
 
 Flaky tests are tests that pass or fail non-deterministically, usually due to
-external conditions (e.g. computer or network load). Thus, flake tests often
+external conditions (e.g. computer or network load). Thus, flaky tests often
 don't result from bugs in the code being tested itself but from test execution
 conditions that are not predictable. The `note/1` annotation can be used to
 alert that a test failure is for a flaky test. If the `note/1` argument is an
@@ -904,16 +904,18 @@ automation script will ignore failed flaky tests when setting its exit status.
 Debugging failed tests
 ----------------------
 
-Debugging of failed unit tests is usually easy if you use assertions as the
+Debugging of failed unit tests is simplified by using test assertions as the
 reason for the assertion failures is printed out. Thus, use preferably the
-`test/2-3` dialects with `true(Assertion)` or `deterministic(Assertion)`
-outcomes. If a test checks multiple assertions, you can use the predicate
-`assertion/2` in the test body.
+`test/2-3` dialects with `true(Assertion)`, `deterministic(Assertion)`,
+`subsumes(Expected, Result)`, or `variant(Term1, Term2)` outcomes. If a test
+checks multiple assertions, you can use the predicate `assertion/2` in the
+test body.
 
-In order to debug failed unit tests, start by compiling the unit test objects
-and the code being tested in debug mode. Load the debugger and trace the test
-that you want to debug. For example, assuming your tests are defined in a
-`tests` object and that the identifier of test to be debugged is `test_foo`:
+If the assertion failures don't provide enough information, you can use the
+`debugger` tool to debug failed unit tests. Start by compiling the unit test
+objects and the code being tested in debug mode. Load the debugger and trace 
+the test that you want to debug. For example, assuming your tests are defined
+in a `tests` object and that the identifier of test to be debugged is `test_foo`:
 
 	| ?- logtalk_load(debugger(loader)).
 	...
@@ -941,8 +943,8 @@ the identifier of test to be debugged is `test_foo` and that you used the
 	...
 
 In the more complicated cases, it may be worth to define `loader_debug.lgt`
-and `tester_debug.lgt` files that load code and tests in debug mode and also
-load the debugger.
+and `tester_debug.lgt` driver files that load code and tests in debug mode
+and also load the debugger.
 
 
 Code coverage
@@ -1300,8 +1302,8 @@ intercepts and summarizes the unit test execution messages.
 Known issues
 ------------
 
-Parameter variables (`_VariableName_`) cannot currently be used currently in
-the definition of the `condition/1`, `setup/1`, and `cleanup/1` test options
+Parameter variables (`_VariableName_`) cannot currently be used in the
+definition of the `condition/1`, `setup/1`, and `cleanup/1` test options
 when using the `test/3` dialect. Use in alternative the `parameter/2` built-in
 execution context predicate.
 
