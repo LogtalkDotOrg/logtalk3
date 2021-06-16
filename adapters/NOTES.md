@@ -89,7 +89,7 @@ following table summarizes the availability of these features:
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
-|  LVM             |       no      |       no      |       no      |       no      |       no      |  
+|  LVM             |       no      |       no      |      yes      |       no      |       no      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
 |  Scryer Prolog   |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
