@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on June 10, 2021
+##   Last updated on June 17, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 6.1"
+	echo "$(basename "$0") 6.2"
 	exit 0
 }
 
@@ -91,6 +91,7 @@ coverage_xml_goal="logtalk_load(lgtunit(coverage_report))"
 coverage_goal=$coverage_default_goal
 
 run_testset() {
+	start_time="$(date +%s)"
 	unit=$(dirname "$1")
 	unit_short=${unit#$prefix}
 	cd "$unit" || exit 1
@@ -155,8 +156,14 @@ run_testset() {
 			echo -n ' failed ('		
 			echo -n "$(cut -f 7 <<< "$line")"
 			echo ' flaky)'
+			duration=$(( $(date +%s) - start_time ))
 			echo -n '%         completed tests from object '
-			echo "$(cut -f 2 <<< "$line")"
+			echo -n "$(cut -f 2 <<< "$line")"
+			if [ $duration -eq 1 ] ; then
+				echo " in $duration second"
+			else
+				echo " in $duration seconds"
+			fi
 		done < <(grep '^object' "$results/$name.totals")
 		echo -n '%         clause coverage '
 		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"

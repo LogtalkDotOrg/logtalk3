@@ -73,6 +73,9 @@ Tools
 words `timedout` instead of `timeouts` and `crashed` instead of `crashes`
 for consistency plus singular and plural agreement.
 
+* IMPROVED: The `logtalk_tester` script test now prints the runtime in seconds
+for each test set.
+
 * IMPROVED: Tests for the `ports_profiler` tool.
 
 * IMPROVED: Simplify cleanup step for the `diagrams` tool tests.
