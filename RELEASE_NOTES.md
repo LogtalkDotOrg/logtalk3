@@ -39,6 +39,9 @@ processes in parallel (except when using the Quintus Prolog backend).
 Prolog adapter and integration files
 ------------------------------------
 
+* IMPROVED: GNU Prolog adapter file workaround for non-standard `format/3`
+predicate feature.
+
 * UPDATED: Require B-Prolog 8.1 or later version.
 
 * UPDATED: Require Trealla Prolog 1.8.75 or later version.

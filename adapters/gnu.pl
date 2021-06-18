@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on June 12, 2021
+%  Last updated on June 18, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -659,16 +659,13 @@ message_queue_destroy(_) :- fail.
 :- multifile('$logtalk#0.print_message_token#4'/5).
 :- dynamic('$logtalk#0.print_message_token#4'/5).
 
-%  ugly hack to deal with GNU Prolog's non-standard format/3 predicate
-'$logtalk#0.print_message_token#4'(Stream, _, Format-Args, _, _) :-
-	'$lgt_gnu_filter_format'(Format, FilteredFormat),
-	format(Stream, FilteredFormat, Args).
+% workaround non-standard format/3 predicate feature that uses "%" as a
+% format control sequence
 
-'$lgt_gnu_filter_format'(Format, FilteredFormat) :-
+'$logtalk#0.print_message_token#4'(Stream, _, Format-Args, _, _) :-
 	atom_codes(Format, FormatCodes),
 	'$lgt_gnu_filter_format_codes'(FormatCodes, FilteredFormatCodes),
-	atom_codes(FilteredFormat, FilteredFormatCodes).
-
+	format(Stream, FilteredFormatCodes, Args).
 
 '$lgt_gnu_filter_format_codes'([], []).
 '$lgt_gnu_filter_format_codes'([0'%| Codes], [0'%, 0'%| FilteredCodes]) :-
