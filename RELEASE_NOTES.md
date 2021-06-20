@@ -63,9 +63,9 @@ and running tests.
 Library
 -------
 
-* IMPROVED: Most `cbor` library tests for encoding floats now use roundtrip
-testing instead of checking for the expected encoding to avoid float precision
-representation issues making the tests fail.
+* IMPROVED: Most `cbor` library tests for float encoding now use roundtrip
+testing instead of checking for the expected canonical encoding to avoid
+float precision representation issues making the tests fail.
 
 * IMPROVED: Tests of the `random` library.
 
@@ -76,8 +76,8 @@ Tools
 words `timedout` instead of `timeouts` and `crashed` instead of `crashes`
 for consistency plus singular and plural agreement.
 
-* IMPROVED: The `logtalk_tester` script test now prints the runtime in seconds
-for each test set.
+* IMPROVED: The `logtalk_tester` script test now prints the run time in
+seconds for each test set.
 
 * IMPROVED: Tests for the `ports_profiler` tool.
 
@@ -96,6 +96,8 @@ XSB backends.
 
 Tests
 -----
+
+* ADDED: Tests for the Prolog `popcount/1` built-in function when available.
 
 * IMPROVED: Skip the tests for the ISO Prolog standard `open/3-4` built-in
 predicates permission error conditions when running on a POSIX system as root.
