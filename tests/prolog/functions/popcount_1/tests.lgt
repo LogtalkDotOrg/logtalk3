@@ -62,11 +62,18 @@
 		foo(1, Foo),
 		{_X is popcount(Foo)}.
 
+	test(lgt_popcount_1_09, error(domain_error(not_less_than_zero,-1))) :-
+		% try to delay the error to runtime
+		minus_one(MinusOne),
+		{_X is popcount(MinusOne)}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
 
 	foo(0, foo).
 	foo(1, foo(1)).
+
+	minus_one(-1).
 
 :- end_object.
