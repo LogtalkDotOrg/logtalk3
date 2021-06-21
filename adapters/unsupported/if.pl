@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for IF/Prolog 5.3
-%  Last updated on June 12, 2021
+%  Last updated on June 21, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -156,7 +156,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 % '$lgt_prolog_database_predicate'(@callable)
 %
-% table of non-standard darabase built-in predicates
+% table of non-standard database built-in predicates
 
 '$lgt_prolog_database_predicate'(_) :-
 	fail.

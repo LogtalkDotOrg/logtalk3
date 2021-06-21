@@ -154,7 +154,7 @@ numbervars(Term, From, Next) :-
 
 % '$lgt_prolog_database_predicate'(@callable)
 %
-% table of non-standard darabase built-in predicates
+% table of non-standard database built-in predicates
 
 '$lgt_prolog_database_predicate'(_) :-
 	fail.

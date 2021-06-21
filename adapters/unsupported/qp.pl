@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on June 12, 2021
+%  Last updated on June 21, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -229,7 +229,7 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 
 % '$lgt_prolog_database_predicate'(@callable)
 %
-% table of non-standard darabase built-in predicates
+% table of non-standard database built-in predicates
 
 '$lgt_prolog_database_predicate'(assert(_)).
 '$lgt_prolog_database_predicate'(listing(_)).

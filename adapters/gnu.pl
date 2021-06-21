@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on June 18, 2021
+%  Last updated on June 21, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -159,7 +159,7 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_prolog_database_predicate'(@callable)
 %
-% table of non-standard darabase built-in predicates
+% table of non-standard database built-in predicates
 
 '$lgt_prolog_database_predicate'(listing(_)).
 
