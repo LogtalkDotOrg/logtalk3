@@ -51,7 +51,12 @@ predicate feature.
 * UPDATED: The LVM adapter file listing of proprietary built-in meta-predicates
 and candidate tautology and falsehood goals.
 
-* UPDATED: Require Trealla Prolog 1.8.75 or later version.
+* UPDATED: The Trealla Prolog adapter file to requite 1.8.75 or later version.
+Also updated the listings of proprietary built-in meta-predicates, proprietary
+predicate properties, and candidate tautology and falsehood goals.
+
+* FIXED: The Trealla Prolog adapter file definition of the internal predicate
+`'$lgt_copy_term_without_constraints'/2`.
 
 * FIXED: Change Ciao Prolog adapter file definition of the `modules` flag to
 `unsupported`.

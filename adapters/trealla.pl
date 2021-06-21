@@ -124,6 +124,7 @@
 % is used to guide the compilation of these meta-predicates in debug mode
 
 '$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
+'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
 '$lgt_prolog_meta_predicate'(call_nth(_, _), call_nth(0, *), predicate).
 '$lgt_prolog_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
 '$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
@@ -155,13 +156,9 @@
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
-'$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
-	fail.
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 
-
-% '$lgt_prolog_database_predicate'(@callable)
-%
-% table of non-standard darabase built-in predicates
 
 % '$lgt_prolog_database_predicate'(@callable)
 %
@@ -179,8 +176,8 @@
 % table of proprietary predicate properties; used by the
 % compiler when checking if a predicate property is valid
 
-'$lgt_prolog_predicate_property'(_) :-
-	fail.
+'$lgt_prolog_predicate_property'(control_construct).
+'$lgt_prolog_predicate_property'(native_code).
 
 
 
@@ -591,7 +588,7 @@
 % '$lgt_copy_term_without_constraints'(@term, ?term)
 
 '$lgt_copy_term_without_constraints'(Term, Copy) :-
-	copy_term(Term, Copy).
+	copy_term_nat(Term, Copy).
 
 
 
