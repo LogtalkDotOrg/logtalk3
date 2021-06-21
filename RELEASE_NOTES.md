@@ -36,6 +36,10 @@ processes in parallel (except when using the Quintus Prolog backend).
 * CHANGED: Revert compiler change to use internally the de facto standard
 `between/3` predicate to avoid breaking XSB support.
 
+* CHANGED: The compilation of coinductive predicates to check if either `if/3`
+or `(*->)/2` are built-in predicates instead of relying in the adapter file
+declaration of proprietary built-in meta-predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 

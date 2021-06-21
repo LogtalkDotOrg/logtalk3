@@ -3482,7 +3482,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 48, 0, b03)).
+'$lgt_version_data'(logtalk(3, 48, 0, b04)).
 
 
 
@@ -21234,10 +21234,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Then = Hook,
 		Else = (BodyStack = [Head| HeadStack], THead)
 	),
-	(	'$lgt_prolog_meta_predicate'('*->'(_, _), _, _) ->
+	(	'$lgt_prolog_built_in_predicate'('*->'(_, _)) ->
 		% backend Prolog compiler supports the soft-cut control construct
 		assertz('$lgt_pp_entity_aux_clause_'({(TCHead :- Header, ('*->'(If, Then); Else))}))
-	;	'$lgt_prolog_meta_predicate'(if(_, _, _), _, _) ->
+	;	'$lgt_prolog_built_in_predicate'(if(_, _, _)) ->
 		% backend Prolog compiler supports the if/3 soft-cut built-in meta-predicate
 		assertz('$lgt_pp_entity_aux_clause_'({(TCHead :- Header, if(If, Then, Else))}))
 	;	% the adapter file for the backend Prolog compiler declares that coinduction
