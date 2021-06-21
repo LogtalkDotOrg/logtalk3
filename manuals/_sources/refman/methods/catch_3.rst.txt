@@ -38,15 +38,12 @@ Modes and number of proofs
 
 ::
 
-   catch(?callable, ?term, ?term) - zero_or_more
+   catch(?callable, ?term, ?callable) - zero_or_more
 
 Errors
 ------
 
-| ``Goal`` is a variable:
-|     ``instantiation_error``
-| ``Goal`` is neither a variable nor a callable term:
-|     ``type_error(callable, Goal)``
+(none)
 
 Examples
 --------

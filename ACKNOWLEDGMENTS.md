@@ -35,6 +35,7 @@ CONTRIBUTORS
 * Artur Wang (Visual Studio Code support for Logtalk)
 * Arun Majumdar (bug reports, usability suggestions)
 * Barry Evans (dead code scanner tool, usability suggestions)
+* Camilo Correa Restrepo (bug reports)
 * Clara Dimene (GeSHi syntax highlighter)
 * Damien Roch (Docker support)
 * Daniel Gross (bug reports, documentation feedback and suggestions)

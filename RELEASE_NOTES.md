@@ -72,6 +72,9 @@ operators.
 * IMPROVED: Documentation of the `lgtunit` tool on defining test driver files
 and running tests.
 
+* FIXED: Typo in the template for the `catch/3` built-in method. Thanks to
+Camilo Correa Restrepo for the bug report.
+
 Library
 -------
 
