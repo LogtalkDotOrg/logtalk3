@@ -44,6 +44,9 @@ predicate feature.
 
 * UPDATED: Require B-Prolog 8.1 or later version.
 
+* UPDATED: The LVM adapter file listing of candidate tautology and falsehood
+goals.
+
 * UPDATED: Require Trealla Prolog 1.8.75 or later version.
 
 * FIXED: Change Ciao Prolog adapter file definition of the `modules` flag to

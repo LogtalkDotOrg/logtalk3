@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.7.0 and later versions
-%  Last updated on June 12, 2021
+%  Last updated on June 21, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -146,6 +146,10 @@ setup_call_cleanup(_, _, _) :-
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_number(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list_or_partial_list(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(is_partial_list(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(plus(_, _, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(succ(_, _)).
 
