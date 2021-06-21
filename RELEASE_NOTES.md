@@ -44,8 +44,8 @@ predicate feature.
 
 * UPDATED: Require B-Prolog 8.1 or later version.
 
-* UPDATED: The LVM adapter file listing of candidate tautology and falsehood
-goals.
+* UPDATED: The LVM adapter file listing of proprietary built-in meta-predicates
+and candidate tautology and falsehood goals.
 
 * UPDATED: Require Trealla Prolog 1.8.75 or later version.
 
