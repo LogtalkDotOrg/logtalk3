@@ -99,6 +99,8 @@ Tests
 
 * ADDED: Tests for the Prolog `popcount/1` built-in function when available.
 
+* ADDED: Additional tests for unbounded integer arithmetic.
+
 * IMPROVED: Skip the tests for the ISO Prolog standard `open/3-4` built-in
 predicates permission error conditions when running on a POSIX system as root.
 
