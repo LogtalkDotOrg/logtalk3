@@ -196,13 +196,13 @@ Follows a short description of each included example (in alphabetical order):
 
 - `encodings`  
 	very simple example of using the experimental `encoding/1`
-	directive (requires Logtalk to be run with YAP, SWI-Prolog,
-	CxProlog, JIProlog, SICStus Prolog, or Lean Prolog)
+	directive (requires Logtalk to be run with a backend supporting
+	at least UTF-8 encoding)
 
 - `engines`  
 	examples of using threaded engines to implement fluents, lazy
 	meta-predicates, interactors, and simple agents (requires Logtalk
-	to be run with ECLiPSe, SWI-Prolog, XSB, or YAP)
+	to be run with a multi-threaded backend)
 
 - `errors`  
 	example showing the Logtalk compiler warning and error reporting
@@ -478,7 +478,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `tabling`  
 	simple example of using tabling directives within objects
-	(requires Logtalk to be run with B-Prolog, SWI-Prolog, XSB, or YAP)
+	(requires Logtalk to be run with a backend supporting tabling)
 
 - `testing`  
 	some examples of writing unit tests
@@ -486,7 +486,7 @@ Follows a short description of each included example (in alphabetical order):
 - `threads`  
 	several simple examples of multi-threading programming, some of
 	them intended only for benchmarking multi-threading Prolog compilers
-	(requires Logtalk to be run with YAP, SWI-Prolog, or XSB)
+	(requires Logtalk to be run with a multi-threaded backend)
 
 - `viewpoints`  
 	example on how to implement property sharing and value sharing
