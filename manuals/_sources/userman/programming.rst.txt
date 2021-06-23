@@ -190,6 +190,22 @@ file terms can and often is significant for proper and successful compilation.
 In these systems, predicates may become available for calling as soon as they
 are compiled even if the remaining of the source file is yet to be compiled.
 
+The Logtalk compiler reads source files using the Prolog standard ``read_term/3``
+predicate. This ensures compatibility with any syntax extensions that the
+used backend may implement. In the first compiler stage, all source file
+terms are read and data about all defined entities, directives, predicates,
+and grammar rules is collected. Any defined :ref:`term-expansion rules <expansion_expansion>`
+are applied to the read terms. Grammar rules are expanded into predicate
+clauses unless expanded by user-defined term-expansion rules. The second
+stage compiles all initialization goals and clause bodies, taking advantage
+of the data collected in the first stage, and applying any defined
+goal-expansion rules. Depending on the compilation mode, the generated
+code can be instrumented for debugging tools or optimized for performance.
+Linter checks are performed during these two first stages. The final step
+in the second stage is to write the generated intermediate Prolog code
+into a temporary file. In the third and final stage, this intermediate
+Prolog file is compiled and loaded by the used backend.
+
 .. _programming_compiling:
 
 Compiling and loading your applications

@@ -66,6 +66,8 @@ Documentation
 
 * ADDED: Handbook section on running parallel Logtalk processes.
 
+* ADDED: Handbook overview of the different stages of the multi-pass compiler. 
+
 * IMPROVED: Handbook documentation on declaring and using public entity
 operators.
 
