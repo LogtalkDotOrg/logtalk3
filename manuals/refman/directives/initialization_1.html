@@ -225,15 +225,18 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>initialization(<span class="nv">Goal</span>)
 </pre></div>
 </div>
-<p>When used within an object, this directive defines a goal to be called
-after the object has been loaded into memory. When used at a global
-level within a source file, this directive defines a goal to be called
-after the compiled source file is loaded into memory.</p>
+<p>When used within an object, this directive defines a goal to be called after
+the object has been successfully loaded into memory. When used at a global
+level within a source file, this directive defines a goal to be called after
+the source file is successfully compiled and loaded into memory.</p>
 <p>Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in the same order as the directives at
 loading time.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p>Arbitrary goals cannot be used as directives in source files. Any
+goal that should be automatically called when a source file is loaded
+must be wrapped using this directive.</p>
 <p>Categories and protocols cannot contain <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives
 as the initialization goals would lack a complete
 <a class="reference internal" href="../../glossary.html#term-predicate-execution-context"><span class="xref std std-term">execution context</span></a> that is only
@@ -245,9 +248,9 @@ are usually compiled to improve portability, improve performance, and
 provide better support for embedded applications.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Some backend Prolog compilers declare <code class="docutils literal notranslate"><span class="pre">initialization</span></code> as an operator
-for a lighter syntax. But this makes the code non-portable and is
-a practice best avoided.</p>
+<p>Some backend Prolog compilers declare the atom <code class="docutils literal notranslate"><span class="pre">initialization</span></code> as
+an operator for a lighter syntax. But this makes the code non-portable
+and is therefore a practice best avoided.</p>
 </div>
 </div>
 <div class="section" id="template-and-modes">
@@ -259,8 +262,23 @@ a practice best avoided.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% call the init/0 predicate after loading the</span>
-<span class="c">% source file containing the directive:</span>
+<span class="c">% source file containing the directive</span>
+
 <span class="p">:- </span><span class="k">initialization</span>(init).
+</pre></div>
+</div>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% print a debug message after loading a</span>
+<span class="c">% source file defining an object</span>
+
+<span class="p">:- </span><span class="k">object</span>(log).
+
+<span class="p">    :- </span><span class="k">initialization</span>(start_date).
+
+    start_date <span class="o">:-</span>
+        os<span class="o">::</span>date_time(<span class="nv">Year</span>, <span class="nv">Month</span>, <span class="nv">Day</span>, <span class="nv">_</span>, <span class="nv">_</span>, <span class="nv">_</span>, <span class="nv">_</span>),
+        logtalk<span class="o">::</span>print_message(debug, my_app, <span class="s">&#39;Starting date: ~d-~d-~d~n&#39;</span><span class="o">+</span>[<span class="nv">Year</span>,<span class="nv">Month</span>,<span class="nv">Day</span>]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 </div>

@@ -228,10 +228,13 @@
 The code following the directive is compiled iff <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is true. The
 goal is subjected to <a class="reference internal" href="../../userman/expansion.html#expansion-expansion"><span class="std std-ref">goal expansion</span></a> when the
 directive occurs in a source file.</p>
-<p>Conditional compilation goals cannot depend on predicate definitions
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Conditional compilation goals <strong>cannot</strong> depend on predicate definitions
 contained in the same source file that contains the conditional
 compilation directives (as those predicates only become available after
-the file is fully compiled and loaded).</p>
+the file is successfully compiled and loaded).</p>
+</div>
 </div>
 <div class="section" id="template-and-modes">
 <h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline">¶</a></h2>

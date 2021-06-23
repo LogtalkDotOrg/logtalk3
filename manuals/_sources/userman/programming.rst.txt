@@ -142,19 +142,19 @@ Logtalk source file is handled by the Logtalk compiler, not by the
 Multi-pass compiler
 ^^^^^^^^^^^^^^^^^^^
 
-Logtalk is currently implemented using a multi-pass compiler. In comparison,
+Logtalk is implemented using a *multi-pass* compiler. In comparison,
 some Prolog systems use a multi-pass compiler while others use a single-pass
 compiler. While there are pros and cons with each solution, the most relevant
 consequence in this context is for the content of source files. In Logtalk,
 entities and predicates only become available (for the runtime system) after
-the source file is fully compiled and loaded. This may prevent some compiler
-optimizations, notably :term:`static binding`, if some of the referred entities
-are defined in the same source file. On the other hand, the order of predicate
-directives and predicate definitions is irrelevant. In contrast, in a system
-implemented using a single-pass compiler, the order of the source file terms
-can and often is significant for proper and successful compilation. In these
-systems, predicates may become available for calling as soon as they are
-compiled even if the remaining of the source file is yet to be compiled.
+the source file is successfully compiled and loaded. This may prevent some
+compiler optimizations, notably :term:`static binding`, if some of the referred
+entities are defined in the same source file. On the other hand, the order of
+predicate directives and predicate definitions is irrelevant. In contrast,
+in a system implemented using a single-pass compiler, the order of the source
+file terms can and often is significant for proper and successful compilation.
+In these systems, predicates may become available for calling as soon as they
+are compiled even if the remaining of the source file is yet to be compiled.
 When writing a Logtalk source file the following advice applies:
 
 - When practical and when performance is critical, define each entity on

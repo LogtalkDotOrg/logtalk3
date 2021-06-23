@@ -69,9 +69,9 @@ necessary, declare the predicates updating the dynamic predicates as
 
 .. warning::
 
-   Some backend Prolog compilers declare ``dynamic`` as an operator
-   for a lighter syntax. But this makes the code non-portable and is
-   a practice best avoided.
+   Some backend Prolog compilers declare the atom ``dynamic`` as an
+   operator for a lighter syntax. But this makes the code non-portable
+   and is therefore a practice best avoided.
 
 Template and modes
 ------------------

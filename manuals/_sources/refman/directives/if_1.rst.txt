@@ -34,10 +34,12 @@ compiled iff ``Goal`` is true. The goal is subjected to
 :ref:`goal expansion <expansion_expansion>` when the directive occurs
 in a source file. Conditional compilation directives can be nested.
 
-Conditional compilation goals cannot depend on predicate definitions
-contained in the same source file that contains the conditional
-compilation directives (as those predicates only become available after
-the file is fully compiled and loaded).
+.. warning::
+
+   Conditional compilation goals **cannot** depend on predicate definitions
+   contained in the same source file that contains the conditional
+   compilation directives (as those predicates only become available after
+   the file is successfully compiled and loaded).
 
 Template and modes
 ------------------

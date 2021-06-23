@@ -34,7 +34,7 @@ abolished at runtime.
 
 .. warning::
 
-   Some backend Prolog compilers declare ``dynamic`` as an operator
+   Some backend Prolog compilers declare the atom ``dynamic`` as an operator
    for a lighter syntax, forcing writing this atom between parenthesis
    when using this directive.
 

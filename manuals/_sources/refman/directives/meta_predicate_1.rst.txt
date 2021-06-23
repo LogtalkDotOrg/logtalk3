@@ -64,9 +64,9 @@ templates.
 
 .. warning::
 
-   Some backend Prolog compilers declare ``meta_predicate`` as an operator
-   for a lighter syntax. But this makes the code non-portable and is
-   a practice best avoided.
+   Some backend Prolog compilers declare the atom ``meta_predicate`` as
+   an operator for a lighter syntax. But this makes the code non-portable
+   and is therefore a practice best avoided.
 
 Template and modes
 ------------------

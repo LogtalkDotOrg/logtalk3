@@ -29,16 +29,20 @@ Description
 
    initialization(Goal)
 
-When used within an object, this directive defines a goal to be called
-after the object has been loaded into memory. When used at a global
-level within a source file, this directive defines a goal to be called
-after the compiled source file is loaded into memory.
+When used within an object, this directive defines a goal to be called after
+the object has been successfully loaded into memory. When used at a global
+level within a source file, this directive defines a goal to be called after
+the source file is successfully compiled and loaded into memory.
 
 Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in the same order as the directives at
 loading time.
 
 .. note::
+
+   Arbitrary goals cannot be used as directives in source files. Any
+   goal that should be automatically called when a source file is loaded
+   must be wrapped using this directive.
 
    Categories and protocols cannot contain ``initialization/1`` directives
    as the initialization goals would lack a complete
@@ -52,9 +56,9 @@ provide better support for embedded applications.
 
 .. warning::
 
-   Some backend Prolog compilers declare ``initialization`` as an operator
-   for a lighter syntax. But this makes the code non-portable and is
-   a practice best avoided.
+   Some backend Prolog compilers declare the atom ``initialization`` as
+   an operator for a lighter syntax. But this makes the code non-portable
+   and is therefore a practice best avoided.
 
 Template and modes
 ------------------
@@ -69,5 +73,21 @@ Examples
 ::
 
    % call the init/0 predicate after loading the
-   % source file containing the directive:
+   % source file containing the directive
+   
    :- initialization(init).
+
+::
+
+   % print a debug message after loading a 
+   % source file defining an object
+
+   :- object(log).
+   
+       :- initialization(start_date).
+   
+       start_date :-
+           os::date_time(Year, Month, Day, _, _, _, _),
+           logtalk::print_message(debug, my_app, 'Starting date: ~d-~d-~d~n'+[Year,Month,Day]).
+   
+   :- end_object.
