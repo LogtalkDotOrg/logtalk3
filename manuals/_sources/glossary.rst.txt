@@ -32,11 +32,11 @@ Glossary
       a prototype are its parent(s) and the ancestors of its parent(s).
 
    category
-      A set of predicates directives and clauses that can be (virtually)
-      imported by any object. Categories support composing objects using
-      fine-grained units of code reuse and also :term:`hot patching` of
-      existing objects. A category should be functionally-cohesive,
-      defining a single functionality.
+      A set of :term:`predicates directives <predicate directive>` and
+      clauses that can be (virtually) imported by any object. Categories
+      support composing objects using fine-grained units of code reuse
+      and also :term:`hot patching` of existing objects. A category
+      should be functionally-cohesive, defining a single functionality.
 
    complementing category
       A category used for :term:`hot patching` an existing object (or a
@@ -47,13 +47,14 @@ Glossary
 
    class
       An :term:`object` that specializes another object, interpreted as its
-      superclass. Classes define the common predicates of a set of objects
+      superclass. A class define the common predicates of a set of objects
       that instantiates it. An object can also be interpreted as a class
       when it instantiates itself.
 
    abstract class
-      A :term:`class` that cannot be instantiated. Usually used to contain
-      common predicates that are inherited by other classes.
+      A :term:`class` that cannot be instantiated by sending it a message.
+      Usually used to contain common predicates that are inherited by other 
+      classes.
 
    metaclass
       The :term:`class` of a class, when interpreted as an instance.
@@ -62,7 +63,7 @@ Glossary
 
    subclass
       A :term:`class` that is a specialization, direct or indirectly, of
-      another class.
+      another class. A class may have multiple subclasses.
 
    superclass
       A :term:`class` from which another class is a specialization
@@ -80,8 +81,7 @@ Glossary
       Directives use the ``(:-)/1`` prefix operator as functor.
 
    entity directive
-      A directive that affects how Logtalk entities (:term:`objects <object>`,
-      :term:`categories <category>`, or :term:`protocols <protocol>`) are
+      A directive that affects how Logtalk :term:`entities <entity>` are
       used or compiled.
 
    predicate directive
@@ -89,7 +89,7 @@ Glossary
       predicates are called or compiled.
 
    source file directive
-      A directive that affects how a :term:`source file` is compiled.
+      A :term:`directive` that affects how a :term:`source file` is compiled.
 
    encapsulation
       The hiding of an object implementation. This promotes software reuse
@@ -103,8 +103,8 @@ Glossary
       Entities share a single namespace (i.e. entity
       :term:`identifiers <identity>` must be unique) and can be static (the
       default) or dynamic. Static entities are defined in source files.
-      Dynamic entities can be created and abolished at runtime using the
-      language built-in predicates.
+      Dynamic entities can also be defined in source files but are usually
+      created and abolished at runtime using the language built-in predicates.
 
    parametric entity
       An :term:`object` or :term:`category` whose :term:`identifier <identity>`
@@ -144,18 +144,18 @@ Glossary
       A word or basic symbol of a language.
 
    identity
-      Property of an entity that distinguishes it from every other entity.
+      Property of an :term:`entity` that distinguishes it from every other entity.
       The identifier of an entity is its functor (i.e. its name and arity),
       which must be unique. Object and :term:`category` identifiers can be
       atoms or compound terms. Protocol identities must be atoms. All Logtalk
       entities (objects, protocols, and categories) share the same namespace.
 
    inheritance
-      An entity inherits predicate directives and clauses from related
-      entities. In the particular case of objects, when an object extends
-      other object, we have prototype-based inheritance. When an object
-      specializes or instantiates another object, we have class-based
-      inheritance. See also :term:`public inheritance`,
+      An :term:`entity` inherits :term:`predicates directives <predicate directive>`
+      and clauses from related entities. In the particular case of objects,
+      when an object extends other object, we have prototype-based inheritance.
+      When an object specializes or instantiates another object, we have
+      class-based inheritance. See also :term:`public inheritance`,
       :term:`protected inheritance`, and :term:`private inheritance`.
 
    private inheritance
@@ -173,14 +173,14 @@ Glossary
       :term:`protected inheritance` and :term:`private inheritance`.
 
    instance
-      An object that instantiates one another object, interpreted as its
-      :term:`class`. An object may instantiate multiple objects (also known
-      as multiple instantiation).
+      An :term:`object` that instantiates one another object, interpreted as
+      its :term:`class`. An object may instantiate multiple objects (also
+      known as multiple instantiation).
 
    instantiation
-      The process of creating a new class instance. In Logtalk, this does
-      not necessarily imply dynamic creation of an object at runtime; an
-      instance may also be defined as a static object in a source file.
+      The process of creating a new :term:`class` :term:`instance`. In Logtalk,
+      this does not necessarily imply dynamic creation of an object at runtime;
+      an instance may also be defined as a static object in a source file.
 
    polymorphism
       Different objects (and categories) can provide different implementations
@@ -213,10 +213,11 @@ Glossary
       the root directory of the application files.
 
    module
-      A Prolog entity characterized by an identity and a set of predicate
-      directives and clauses. Prolog modules are usually static although
-      some Prolog systems allow the creation of dynamic modules at runtime.
-      Prolog modules can be seen as prototypes.
+      A Prolog entity characterized by an identity and a set of
+      :term:`predicates directives <predicate directive>` and clauses.
+      Prolog modules are usually static although some Prolog systems
+      allow the creation of dynamic modules at runtime. Prolog modules
+      can be seen as prototypes.
 
    message
       A query sent to an object. In logical terms, a message can be seen as
@@ -270,11 +271,12 @@ Glossary
       itself or by any other object.
 
    object
-      An entity characterized by an :term:`identity` and a set of predicate
-      directives and clauses. Logtalk objects can be either static or
-      dynamic. Logtalk objects can play the *role* of classes, instances,
-      or prototypes. The role or roles an object plays are a function of
-      its relations with other objects.
+      An entity characterized by an :term:`identity` and a set of
+      :term:`predicates directives <predicate directive>` and clauses.
+      Logtalk objects can be either static or dynamic. Logtalk objects
+      can play the *role* of classes, instances, or prototypes. The
+      role or roles an object plays are a function of its relations
+      with other objects.
 
    object database
       The set of predicates locally defined inside an object.
@@ -316,8 +318,9 @@ Glossary
       A variable used as parameter in a parametric object or a parametric
       category using the syntax ``_ParameterName_``. Parameter variables
       are *logical variables* shared by all entity terms. Occurrences of
-      parameter variables in entity directives and clauses are implicitly
-      unified with the corresponding entity parameters.
+      parameter variables in :term:`entity directives <entity directive>`
+      and clauses are implicitly unified with the corresponding entity
+      parameters.
 
    parent
       A prototype that is extended by another prototype.
@@ -331,9 +334,9 @@ Glossary
       :term:`methods <method>`.
 
    predicate declaration
-      A predicate declaration is composed by a set of predicate directives,
-      which must include ar least a
-      :term:`scope directive <predicate scope directive>`.
+      A predicate declaration is composed by a set of
+      :term:`predicates directives <predicate directive>`, which must
+      include ar least a :term:`scope directive <predicate scope directive>`.
 
    predicate definition
       The set of clauses for a predicate, contained in an object or category.
@@ -350,8 +353,8 @@ Glossary
       meaningful in the calling context.
 
    predicate shorthand
-      A predicate alias that defines a call template, possibly using a
-      different name, with a reduced number of arguments by hard-coding
+      A :term:`predicate alias` that defines a call template, possibly using
+      a different name, with a reduced number of arguments by hard-coding
       the value of the omitted arguments in the original call template.
       Predicate shorthands can be defined using :ref:`directives_uses_2`
       and :ref:`directives_use_module_2` directives. They can be used to
@@ -361,7 +364,7 @@ Glossary
 
    built-in predicate
       A predefined predicate that can be called from anywhere. Built-in
-      predicates can be redefined within objects and
+      predicates can be redefined within :term:`objects <object>` and
       :term:`categories <category>`.
 
    coinductive predicate
@@ -571,18 +574,20 @@ Glossary
    lambda parameter
       A term (usually a variable or a non-ground compound term) that is
       local to a :term:`lambda expression`. All lambda parameters must
-      be explicitly enumerated in a lambda expression.
+      be explicitly enumerated in a lambda expression for well-defined
+      semantics.
 
    lambda free variable
       A variable that is global to a :term:`lambda expression`. All
       used global variables must be explicitly listed in a lambda
-      expression.
+      expression for well-defined semantics.
 
    hot patching
-      The act of fixing entity directives and predicates or adding new
-      entity directives and predicates to loaded entities in a running
-      application without requiring access to the entities source code
-      or restarting the application.
+      The act of fixing :term:`entity directives <entity directive>` and
+      predicates or adding new entity directives and predicates to loaded
+      :term:`entities <entity>` in a running application without requiring
+      access to the entities source code or restarting the application.
+      Achieved using :term:`complementing categories <complementing category>`.
 
    threaded engine
       A computing thread running a goal whose solutions can be lazily and
@@ -600,10 +605,10 @@ Glossary
       correct answers when called with unexpected arguments (notably,
       bound output arguments). Typically, a predicate may not be steadfast
       when output argument unifications can occur before a cut in a predicate
-      clause.
+      clause body.
 
    top-level interpreter shorthand
       Aliases for frequently used built-in predicates such as
       :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_make_1`.
-      These shorthands are **not** part of the Logtalk language and should
+      These shorthands are **not** part of the Logtalk language and must
       only be used at the top-level interpreter.

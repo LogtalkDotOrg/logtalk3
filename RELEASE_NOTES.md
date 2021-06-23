@@ -69,6 +69,8 @@ Documentation
 * IMPROVED: Handbook documentation on declaring and using public entity
 operators.
 
+* IMPROVED: Multiple Handbook glossary entries.
+
 * IMPROVED: Documentation of the `lgtunit` tool on defining test driver files
 and running tests.
 

@@ -195,8 +195,9 @@
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary simple">
-<dt id="term-abstract-class">abstract class<a class="headerlink" href="#term-abstract-class" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that cannot be instantiated. Usually used to contain
-common predicates that are inherited by other classes.</p>
+<dt id="term-abstract-class">abstract class<a class="headerlink" href="#term-abstract-class" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that cannot be instantiated by sending it a message.
+Usually used to contain common predicates that are inherited by other
+classes.</p>
 </dd>
 <dt id="term-abstract-method">abstract method<a class="headerlink" href="#term-abstract-method" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-method"><span class="xref std std-term">method</span></a> implementing an algorithm whose step corresponds
 to calls to methods defined in the descendants of the object (or
@@ -220,17 +221,17 @@ or <a class="reference internal" href="#term-category"><span class="xref std std
 category predicates. Built-in methods cannot be redefined.</p>
 </dd>
 <dt id="term-built-in-predicate">built-in predicate<a class="headerlink" href="#term-built-in-predicate" title="Permalink to this term">¶</a></dt><dd><p>A predefined predicate that can be called from anywhere. Built-in
-predicates can be redefined within objects and
+predicates can be redefined within <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a> and
 <a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>.</p>
 </dd>
-<dt id="term-category">category<a class="headerlink" href="#term-category" title="Permalink to this term">¶</a></dt><dd><p>A set of predicates directives and clauses that can be (virtually)
-imported by any object. Categories support composing objects using
-fine-grained units of code reuse and also <a class="reference internal" href="#term-hot-patching"><span class="xref std std-term">hot patching</span></a> of
-existing objects. A category should be functionally-cohesive,
-defining a single functionality.</p>
+<dt id="term-category">category<a class="headerlink" href="#term-category" title="Permalink to this term">¶</a></dt><dd><p>A set of <a class="reference internal" href="#term-predicate-directive"><span class="xref std std-term">predicates directives</span></a> and
+clauses that can be (virtually) imported by any object. Categories
+support composing objects using fine-grained units of code reuse
+and also <a class="reference internal" href="#term-hot-patching"><span class="xref std std-term">hot patching</span></a> of existing objects. A category
+should be functionally-cohesive, defining a single functionality.</p>
 </dd>
 <dt id="term-class">class<a class="headerlink" href="#term-class" title="Permalink to this term">¶</a></dt><dd><p>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> that specializes another object, interpreted as its
-superclass. Classes define the common predicates of a set of objects
+superclass. A class define the common predicates of a set of objects
 that instantiates it. An object can also be interpreted as a class
 when it instantiates itself.</p>
 </dd>
@@ -287,11 +288,10 @@ Encapsulation is enforced in Logtalk by using
 Entities share a single namespace (i.e. entity
 <a class="reference internal" href="#term-identity"><span class="xref std std-term">identifiers</span></a> must be unique) and can be static (the
 default) or dynamic. Static entities are defined in source files.
-Dynamic entities can be created and abolished at runtime using the
-language built-in predicates.</p>
+Dynamic entities can also be defined in source files but are usually
+created and abolished at runtime using the language built-in predicates.</p>
 </dd>
-<dt id="term-entity-directive">entity directive<a class="headerlink" href="#term-entity-directive" title="Permalink to this term">¶</a></dt><dd><p>A directive that affects how Logtalk entities (<a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
-<a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, or <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>) are
+<dt id="term-entity-directive">entity directive<a class="headerlink" href="#term-entity-directive" title="Permalink to this term">¶</a></dt><dd><p>A directive that affects how Logtalk <a class="reference internal" href="#term-entity"><span class="xref std std-term">entities</span></a> are
 used or compiled.</p>
 </dd>
 <dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">¶</a></dt><dd><p>The sending of a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> to an object. An event can be
@@ -327,31 +327,32 @@ the source files to be expanded.</p>
 that allows the user to customize another predicate or provide
 alternative definitions for a default predicate definition.</p>
 </dd>
-<dt id="term-hot-patching">hot patching<a class="headerlink" href="#term-hot-patching" title="Permalink to this term">¶</a></dt><dd><p>The act of fixing entity directives and predicates or adding new
-entity directives and predicates to loaded entities in a running
-application without requiring access to the entities source code
-or restarting the application.</p>
+<dt id="term-hot-patching">hot patching<a class="headerlink" href="#term-hot-patching" title="Permalink to this term">¶</a></dt><dd><p>The act of fixing <a class="reference internal" href="#term-entity-directive"><span class="xref std std-term">entity directives</span></a> and
+predicates or adding new entity directives and predicates to loaded
+<a class="reference internal" href="#term-entity"><span class="xref std std-term">entities</span></a> in a running application without requiring
+access to the entities source code or restarting the application.
+Achieved using <a class="reference internal" href="#term-complementing-category"><span class="xref std std-term">complementing categories</span></a>.</p>
 </dd>
-<dt id="term-identity">identity<a class="headerlink" href="#term-identity" title="Permalink to this term">¶</a></dt><dd><p>Property of an entity that distinguishes it from every other entity.
+<dt id="term-identity">identity<a class="headerlink" href="#term-identity" title="Permalink to this term">¶</a></dt><dd><p>Property of an <a class="reference internal" href="#term-entity"><span class="xref std std-term">entity</span></a> that distinguishes it from every other entity.
 The identifier of an entity is its functor (i.e. its name and arity),
 which must be unique. Object and <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> identifiers can be
 atoms or compound terms. Protocol identities must be atoms. All Logtalk
 entities (objects, protocols, and categories) share the same namespace.</p>
 </dd>
-<dt id="term-inheritance">inheritance<a class="headerlink" href="#term-inheritance" title="Permalink to this term">¶</a></dt><dd><p>An entity inherits predicate directives and clauses from related
-entities. In the particular case of objects, when an object extends
-other object, we have prototype-based inheritance. When an object
-specializes or instantiates another object, we have class-based
-inheritance. See also <a class="reference internal" href="#term-public-inheritance"><span class="xref std std-term">public inheritance</span></a>,
+<dt id="term-inheritance">inheritance<a class="headerlink" href="#term-inheritance" title="Permalink to this term">¶</a></dt><dd><p>An <a class="reference internal" href="#term-entity"><span class="xref std std-term">entity</span></a> inherits <a class="reference internal" href="#term-predicate-directive"><span class="xref std std-term">predicates directives</span></a>
+and clauses from related entities. In the particular case of objects,
+when an object extends other object, we have prototype-based inheritance.
+When an object specializes or instantiates another object, we have
+class-based inheritance. See also <a class="reference internal" href="#term-public-inheritance"><span class="xref std std-term">public inheritance</span></a>,
 <a class="reference internal" href="#term-protected-inheritance"><span class="xref std std-term">protected inheritance</span></a>, and <a class="reference internal" href="#term-private-inheritance"><span class="xref std std-term">private inheritance</span></a>.</p>
 </dd>
-<dt id="term-instance">instance<a class="headerlink" href="#term-instance" title="Permalink to this term">¶</a></dt><dd><p>An object that instantiates one another object, interpreted as its
-<a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a>. An object may instantiate multiple objects (also known
-as multiple instantiation).</p>
+<dt id="term-instance">instance<a class="headerlink" href="#term-instance" title="Permalink to this term">¶</a></dt><dd><p>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> that instantiates one another object, interpreted as
+its <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a>. An object may instantiate multiple objects (also
+known as multiple instantiation).</p>
 </dd>
-<dt id="term-instantiation">instantiation<a class="headerlink" href="#term-instantiation" title="Permalink to this term">¶</a></dt><dd><p>The process of creating a new class instance. In Logtalk, this does
-not necessarily imply dynamic creation of an object at runtime; an
-instance may also be defined as a static object in a source file.</p>
+<dt id="term-instantiation">instantiation<a class="headerlink" href="#term-instantiation" title="Permalink to this term">¶</a></dt><dd><p>The process of creating a new <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> <a class="reference internal" href="#term-instance"><span class="xref std std-term">instance</span></a>. In Logtalk,
+this does not necessarily imply dynamic creation of an object at runtime;
+an instance may also be defined as a static object in a source file.</p>
 </dd>
 <dt id="term-interface">interface<a class="headerlink" href="#term-interface" title="Permalink to this term">¶</a></dt><dd><p>See <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocol</span></a>.</p>
 </dd>
@@ -363,11 +364,12 @@ defining auxiliary predicates.</p>
 </dd>
 <dt id="term-lambda-free-variable">lambda free variable<a class="headerlink" href="#term-lambda-free-variable" title="Permalink to this term">¶</a></dt><dd><p>A variable that is global to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All
 used global variables must be explicitly listed in a lambda
-expression.</p>
+expression for well-defined semantics.</p>
 </dd>
 <dt id="term-lambda-parameter">lambda parameter<a class="headerlink" href="#term-lambda-parameter" title="Permalink to this term">¶</a></dt><dd><p>A term (usually a variable or a non-ground compound term) that is
 local to a <a class="reference internal" href="#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. All lambda parameters must
-be explicitly enumerated in a lambda expression.</p>
+be explicitly enumerated in a lambda expression for well-defined
+semantics.</p>
 </dd>
 <dt id="term-late-binding">late binding<a class="headerlink" href="#term-late-binding" title="Permalink to this term">¶</a></dt><dd><p>See <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</p>
 </dd>
@@ -429,10 +431,11 @@ except for the root class, and can be shared by several classes.</p>
 to an object. Logtalk supports both <a class="reference internal" href="#term-static-binding"><span class="xref std std-term">static binding</span></a> and
 <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> to find which method to run to answer a message.</p>
 </dd>
-<dt id="term-module">module<a class="headerlink" href="#term-module" title="Permalink to this term">¶</a></dt><dd><p>A Prolog entity characterized by an identity and a set of predicate
-directives and clauses. Prolog modules are usually static although
-some Prolog systems allow the creation of dynamic modules at runtime.
-Prolog modules can be seen as prototypes.</p>
+<dt id="term-module">module<a class="headerlink" href="#term-module" title="Permalink to this term">¶</a></dt><dd><p>A Prolog entity characterized by an identity and a set of
+<a class="reference internal" href="#term-predicate-directive"><span class="xref std std-term">predicates directives</span></a> and clauses.
+Prolog modules are usually static although some Prolog systems
+allow the creation of dynamic modules at runtime. Prolog modules
+can be seen as prototypes.</p>
 </dd>
 <dt id="term-monitor">monitor<a class="headerlink" href="#term-monitor" title="Permalink to this term">¶</a></dt><dd><p>Any object, implementing the <a class="reference external" href="../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.48.0)"><span class="xref std std-ref">monitoring</span></a>
 built-in protocol, that is notified by the runtime when a spied event
@@ -447,11 +450,12 @@ prefix qualifying the predicate holds the multifile predicate
 <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a> and a
 <a class="reference internal" href="refman/directives/multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile/1</span></a> directive for the predicate.</p>
 </dd>
-<dt id="term-object">object<a class="headerlink" href="#term-object" title="Permalink to this term">¶</a></dt><dd><p>An entity characterized by an <a class="reference internal" href="#term-identity"><span class="xref std std-term">identity</span></a> and a set of predicate
-directives and clauses. Logtalk objects can be either static or
-dynamic. Logtalk objects can play the <em>role</em> of classes, instances,
-or prototypes. The role or roles an object plays are a function of
-its relations with other objects.</p>
+<dt id="term-object">object<a class="headerlink" href="#term-object" title="Permalink to this term">¶</a></dt><dd><p>An entity characterized by an <a class="reference internal" href="#term-identity"><span class="xref std std-term">identity</span></a> and a set of
+<a class="reference internal" href="#term-predicate-directive"><span class="xref std std-term">predicates directives</span></a> and clauses.
+Logtalk objects can be either static or dynamic. Logtalk objects
+can play the <em>role</em> of classes, instances, or prototypes. The
+role or roles an object plays are a function of its relations
+with other objects.</p>
 </dd>
 <dt id="term-object-database">object database<a class="headerlink" href="#term-object-database" title="Permalink to this term">¶</a></dt><dd><p>The set of predicates locally defined inside an object.</p>
 </dd>
@@ -462,8 +466,9 @@ predicate clauses.</p>
 <dt id="term-parameter-variable">parameter variable<a class="headerlink" href="#term-parameter-variable" title="Permalink to this term">¶</a></dt><dd><p>A variable used as parameter in a parametric object or a parametric
 category using the syntax <code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code>. Parameter variables
 are <em>logical variables</em> shared by all entity terms. Occurrences of
-parameter variables in entity directives and clauses are implicitly
-unified with the corresponding entity parameters.</p>
+parameter variables in <a class="reference internal" href="#term-entity-directive"><span class="xref std std-term">entity directives</span></a>
+and clauses are implicitly unified with the corresponding entity
+parameters.</p>
 </dd>
 <dt id="term-parametric-category">parametric category<a class="headerlink" href="#term-parametric-category" title="Permalink to this term">¶</a></dt><dd><p>See <a class="reference internal" href="#term-parametric-entity"><span class="xref std std-term">parametric entity</span></a>.</p>
 </dd>
@@ -514,9 +519,9 @@ meaningful in the calling context.</p>
 directly or using a control construct such as a message sending
 control construct).</p>
 </dd>
-<dt id="term-predicate-declaration">predicate declaration<a class="headerlink" href="#term-predicate-declaration" title="Permalink to this term">¶</a></dt><dd><p>A predicate declaration is composed by a set of predicate directives,
-which must include ar least a
-<a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>.</p>
+<dt id="term-predicate-declaration">predicate declaration<a class="headerlink" href="#term-predicate-declaration" title="Permalink to this term">¶</a></dt><dd><p>A predicate declaration is composed by a set of
+<a class="reference internal" href="#term-predicate-directive"><span class="xref std std-term">predicates directives</span></a>, which must
+include ar least a <a class="reference internal" href="#term-predicate-scope-directive"><span class="xref std std-term">scope directive</span></a>.</p>
 </dd>
 <dt id="term-predicate-definition">predicate definition<a class="headerlink" href="#term-predicate-definition" title="Permalink to this term">¶</a></dt><dd><p>The set of clauses for a predicate, contained in an object or category.
 Predicate definitions can be overriden or specialized in descendant
@@ -538,8 +543,8 @@ imported <a class="reference internal" href="#term-category"><span class="xref s
 <dt id="term-predicate-scope-directive">predicate scope directive<a class="headerlink" href="#term-predicate-scope-directive" title="Permalink to this term">¶</a></dt><dd><p>A directive that declares a predicate by specifying its visibility
 as <em>public</em>, <em>protected</em>, or <em>private</em>.</p>
 </dd>
-<dt id="term-predicate-shorthand">predicate shorthand<a class="headerlink" href="#term-predicate-shorthand" title="Permalink to this term">¶</a></dt><dd><p>A predicate alias that defines a call template, possibly using a
-different name, with a reduced number of arguments by hard-coding
+<dt id="term-predicate-shorthand">predicate shorthand<a class="headerlink" href="#term-predicate-shorthand" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-predicate-alias"><span class="xref std std-term">predicate alias</span></a> that defines a call template, possibly using
+a different name, with a reduced number of arguments by hard-coding
 the value of the omitted arguments in the original call template.
 Predicate shorthands can be defined using <a class="reference internal" href="refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
 and <a class="reference internal" href="refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directives. They can be used to
@@ -609,7 +614,7 @@ used <a class="reference internal" href="#term-backend-Prolog-compiler"><span cl
 specified using an <a class="reference internal" href="refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive as the
 first term in the first line in the file.</p>
 </dd>
-<dt id="term-source-file-directive">source file directive<a class="headerlink" href="#term-source-file-directive" title="Permalink to this term">¶</a></dt><dd><p>A directive that affects how a <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> is compiled.</p>
+<dt id="term-source-file-directive">source file directive<a class="headerlink" href="#term-source-file-directive" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-directive"><span class="xref std std-term">directive</span></a> that affects how a <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> is compiled.</p>
 </dd>
 <dt id="term-specialization">specialization<a class="headerlink" href="#term-specialization" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> is specialized by defining a new class that inherit its
 predicates and possibly add new ones.</p>
@@ -627,10 +632,10 @@ binding</em>. See also <a class="reference internal" href="#term-dynamic-binding
 correct answers when called with unexpected arguments (notably,
 bound output arguments). Typically, a predicate may not be steadfast
 when output argument unifications can occur before a cut in a predicate
-clause.</p>
+clause body.</p>
 </dd>
 <dt id="term-subclass">subclass<a class="headerlink" href="#term-subclass" title="Permalink to this term">¶</a></dt><dd><p>A <a class="reference internal" href="#term-class"><span class="xref std std-term">class</span></a> that is a specialization, direct or indirectly, of
-another class.</p>
+another class. A class may have multiple subclasses.</p>
 </dd>
 <dt id="term-super-call">super call<a class="headerlink" href="#term-super-call" title="Permalink to this term">¶</a></dt><dd><p>Call of an inherited (or imported) <a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a>. Mainly
 used when redefining an inherited (or imported) predicate to call the
@@ -663,7 +668,7 @@ queue can be used to pass e.g. data and new goals to the engine.</p>
 </dd>
 <dt id="term-top-level-interpreter-shorthand">top-level interpreter shorthand<a class="headerlink" href="#term-top-level-interpreter-shorthand" title="Permalink to this term">¶</a></dt><dd><p>Aliases for frequently used built-in predicates such as
 <a class="reference internal" href="refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> and <a class="reference internal" href="refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a>.
-These shorthands are <strong>not</strong> part of the Logtalk language and should
+These shorthands are <strong>not</strong> part of the Logtalk language and must
 only be used at the top-level interpreter.</p>
 </dd>
 <dt id="term-visible-predicate">visible predicate<a class="headerlink" href="#term-visible-predicate" title="Permalink to this term">¶</a></dt><dd><p>A predicate that is within scope, a locally defined predicate, a
