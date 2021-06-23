@@ -204,7 +204,9 @@ code can be instrumented for debugging tools or optimized for performance.
 Linter checks are performed during these two first stages. The final step
 in the second stage is to write the generated intermediate Prolog code
 into a temporary file. In the third and final stage, this intermediate
-Prolog file is compiled and loaded by the used backend.
+Prolog file is compiled and loaded by the used backend. These intermediate
+files are deleted by default after loading (see the :ref:`clean <flag_clean>`
+flag description for details).
 
 .. _programming_compiling:
 
@@ -260,8 +262,8 @@ loaded your application files and found a bug. You can easily recompile the
 files in debug mode by using the ``logtalk_make(debug)`` goal. After
 debugging and fixing the bug, you can reload the files in normal mode
 using the ``logtalk_make(normal)`` or in optimized mode using the
-``logtalk_make(optimal)`` goal. See the Reference Manual for a complete
-list of targets and top-level shortcuts. In particular, the
+``logtalk_make(optimal)`` goal. See the predicates documentation for a
+complete list of targets and top-level shortcuts. In particular, the
 ``logtalk_make(clean)`` goal can be specially useful before switching
 backend Prolog compilers as the generated intermediate files may not be
 compatible. The ``logtalk_make(caches)`` goal is usually used when
@@ -272,24 +274,35 @@ benchmarking compiler performance improvements.
 Loader files
 ------------
 
-Most examples directories contain an utility file that can be used to load
-all included source files and any required libraries. These loader files
-are usually named ``loader.lgt`` or contain the word "loader" in their name.
-Loader files are ordinary source files and thus compiled and loaded like any
-source file. For an example loader file named ``loader.lgt`` we would type:
+If you look into the Logtalk distribution, you will notice that most source
+code directories (e.g. of tools, libraries, and examples) contain a *driver
+file* that can be used to load all included source files and any required
+libraries. These loader files are usually named ``loader.lgt`` or contain
+the word *loader* in their name. Loader files are ordinary source files and
+thus compiled and loaded like any source file. By also defining a loader file
+for your project, you can then load it by simply typing:
 
 .. code-block:: text
 
-   | ?- logtalk_load(loader).
+   | ?- {loader}.
 
-Usually these files contain a call to the built-in predicates
-:ref:`predicates_set_logtalk_flag_2`
-(e.g. for setting global, *project-specific*, flag values) and
-:ref:`predicates_logtalk_load_1` or :ref:`predicates_logtalk_load_2` (for
-loading project files), wrapped inside a Prolog ``initialization/1``
-directive for poertability. For instance, if your code is split in three
-source files named ``source1.lgt``, ``source2.lgt``, and ``source3.lgt``,
-then the contents of your loader file could be:
+Another driver file, usually named ``tester.lgt`` (or containing the word
+*tester* in its name) is commonly used to load and run tests. By also
+defining a tester file for your project, you can then run its tests by
+simply typing:
+
+.. code-block:: text
+
+   | ?- {tester}.
+
+Usually these driver files contain calls to the built-in predicates
+:ref:`predicates_set_logtalk_flag_2` (e.g. for setting global,
+*project-specific*, flag values) and :ref:`predicates_logtalk_load_1` or
+:ref:`predicates_logtalk_load_2` (for loading project files), wrapped
+inside a Prolog ``initialization/1`` directive for portability. For
+instance, if your code is split in three source files named
+``source1.lgt``, ``source2.lgt``, and ``source3.lgt``, then the contents
+of your loader file could be:
 
 ::
 
@@ -302,7 +315,7 @@ then the contents of your loader file could be:
 
 Another example of directives that are often used in a loader file would
 be ``op/3`` directives declaring global operators needed by your
-application. Loader files are also often used for setting source
+project. Loader files are also often used for setting source
 file-specific compiler flags (this is useful even when you only have a
 single source file if you always load it with using the same set of
 compiler flags). For example:
@@ -324,11 +337,11 @@ compiler flags). For example:
            [portability(silent)])
    )).
 
-To take the best advantage of loader files, define a clause for the
-multifile and dynamic ``logtalk_library_path/2`` predicate for the
+To take the best advantage of loader and tester files, define a clause for
+the multifile and dynamic ``logtalk_library_path/2`` predicate for the
 directory containing your source files as explained in the next section.
 
-When your application uses Prolog module resources, the loader file is
+When your project also uses Prolog module resources, the loader file is
 also the advised place to load them, preferably without any exports.
 For example:
 
@@ -341,7 +354,12 @@ For example:
        ...
    )).
 
-A common mistake is to try to set compiler flags using ``logtalk_load/2``
+Complex projects often use a main loader file that loads the loader files
+of each of the project components. Thus, loader files provide a central
+point to understand a project organization and dependencies.
+
+Worth mentioning here a common mistake when first starting working with loader
+files. New users sometimes try to set compiler flags using ``logtalk_load/2``
 when loading a loader file. For example, by writing:
 
 .. code-block:: text
