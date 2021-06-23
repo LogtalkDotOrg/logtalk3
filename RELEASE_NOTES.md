@@ -73,6 +73,8 @@ operators.
 
 * IMPROVED: Handbook documentation on the `initialization/1` directive.
 
+* IMPROVED: Handbook section on writing and running applications.
+
 * IMPROVED: Documentation of the `lgtunit` tool on defining test driver files
 and running tests.
 

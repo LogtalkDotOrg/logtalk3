@@ -127,11 +127,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#starting-logtalk">Starting Logtalk</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#running-parallel-logtalk-processes">Running parallel Logtalk processes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#source-files">Source files</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#multi-pass-compiler">Multi-pass compiler</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#naming-conventions">Naming conventions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#source-file-text-encoding">Source file text encoding</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-pass-compiler">Multi-pass compiler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compiling-and-loading-your-applications">Compiling and loading your applications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loader-files">Loader files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#libraries-of-source-files">Libraries of source files</a></li>
@@ -339,17 +339,48 @@ if subject to the <a class="reference internal" href="expansion.html#expansion-e
 Prolog modules are compiled as objects. The following Prolog directives are
 processed when read (thus affecting the compilation of the source code that
 follows): <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code>, <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">op/3</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">set_prolog_flag/2</span></code>. The <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> Prolog directive may be used
-for defining an initialization goal to be executed when loading a source file.
-Most calls to Logtalk built-in predicates from file <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>
-directives are compiled for better performance.</p>
+<code class="docutils literal notranslate"><span class="pre">set_prolog_flag/2</span></code>. The <a class="reference internal" href="../refman/directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directive may
+be used for defining an initialization goal to be executed when loading a
+source file.</p>
 <p>Logtalk source files can include the text of other files by using the
 <a class="reference internal" href="../refman/directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a> directive. Although there is also a standard
 Prolog <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive, any occurrences of this directive in a
-Logtalk source file is handled by the Logtalk compiler, not by the
-<a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>.</p>
+Logtalk source file is handled by the Logtalk compiler,
+not by the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, to improve portability.</p>
+<p>When writing a Logtalk source file the following advice applies:</p>
+<ul class="simple">
+<li><p>When practical and when performance is critical, define each entity on
+its own source file.</p></li>
+<li><p>Source file loading order can impact performance (e.g. if an object
+imports a category defined in a source file loaded after the object
+source file, no static binding optimizations will be possible).</p></li>
+<li><p>Initialization directives that result in the compilation and loading of
+other source files (e.g. libraries) should preferably be written in the
+application loader file to ensure the availability of the entities
+they define when compiling the application source files (thus enabling
+static binding optimizations).</p></li>
+</ul>
+<div class="section" id="naming-conventions">
+<h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
+<p>When defining each entity in its own source file, it is recommended that
+the source file be named after the entity identifier. For parametric objects,
+the identifier arity can be appended to the identifier functor. By default,
+all Logtalk source files use the extension <code class="docutils literal notranslate"><span class="pre">.lgt</span></code> but this is optional
+and can be set in the adapter files. For example, we may define an object
+named <code class="docutils literal notranslate"><span class="pre">vehicle</span></code> and save it in a <code class="docutils literal notranslate"><span class="pre">vehicle.lgt</span></code> source file. A <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code>
+parametric object would be saved it on a <code class="docutils literal notranslate"><span class="pre">sort_1.lgt</span></code> source file.</p>
+</div>
+<div class="section" id="source-file-text-encoding">
+<h3>Source file text encoding<a class="headerlink" href="#source-file-text-encoding" title="Permalink to this headline">¶</a></h3>
+<p>The text encoding used in a source file may be declared using the
+<a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive when running Logtalk with
+backend Prolog compilers that support multiple encodings (check the
+<a class="reference internal" href="#flag-encoding-directive"><span class="std std-ref">encoding_directive</span></a> flag in the
+adapter file of your Prolog compiler).</p>
+</div>
+</div>
 <div class="section" id="multi-pass-compiler">
-<h3>Multi-pass compiler<a class="headerlink" href="#multi-pass-compiler" title="Permalink to this headline">¶</a></h3>
+<span id="programming-multi-pass-compiler"></span><h2>Multi-pass compiler<a class="headerlink" href="#multi-pass-compiler" title="Permalink to this headline">¶</a></h2>
 <p>Logtalk is implemented using a <em>multi-pass</em> compiler. In comparison,
 some Prolog systems use a multi-pass compiler while others use a single-pass
 compiler. While there are pros and cons with each solution, the most relevant
@@ -362,51 +393,7 @@ predicate directives and predicate definitions is irrelevant. In contrast,
 in a system implemented using a single-pass compiler, the order of the source
 file terms can and often is significant for proper and successful compilation.
 In these systems, predicates may become available for calling as soon as they
-are compiled even if the remaining of the source file is yet to be compiled.
-When writing a Logtalk source file the following advice applies:</p>
-<ul class="simple">
-<li><p>When practical and when performance is critical, define each entity on
-its own source file.</p></li>
-<li><p>Source file loading order can impact performance (e.g. if an object
-imports a category defined in a source file loaded after the object
-source file, no static binding optimizations will be possible).</p></li>
-<li><p>File directives that result in the compilation and loading of other
-source files (e.g. libraries) should preferably be written in the
-application loader file to ensure the availability of the entities
-they define when compiling the application source files.</p></li>
-</ul>
-</div>
-<div class="section" id="naming-conventions">
-<h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
-<p>If you prefer to define each
-entity in its own source file, then it is recommended that the source
-file be named after the entity identifier. For parametric objects, the
-identifier arity can be appended to the identifier functor. By default,
-all Logtalk source files use the extension <code class="docutils literal notranslate"><span class="pre">.lgt</span></code> but this is optional
-and can be set in the adapter files. Intermediate Prolog source files
-(generated by the Logtalk compiler) have, by default, a <code class="docutils literal notranslate"><span class="pre">_lgt</span></code> suffix
-and a <code class="docutils literal notranslate"><span class="pre">.pl</span></code> extension. Again, this can be set to match the needs of a
-particular Prolog compiler in the corresponding adapter file. For
-example, we may define an object named <code class="docutils literal notranslate"><span class="pre">vehicle</span></code> and save it in a
-<code class="docutils literal notranslate"><span class="pre">vehicle.lgt</span></code> source file that will be compiled to a
-<code class="docutils literal notranslate"><span class="pre">vehicle_lgt.pl</span></code> Prolog file. If we have a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric
-object we can save it on a <code class="docutils literal notranslate"><span class="pre">sort_1.lgt</span></code> source file that will be
-compiled to a <code class="docutils literal notranslate"><span class="pre">sort_1_lgt.pl</span></code> Prolog file. This name scheme helps
-avoid file name conflicts (remember that all Logtalk entities share the
-same namespace). To further prevent file name conflicts, specially when
-embedding applications or running parallel Logtalk processes, and
-depending on the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend compiler</span></a>,
-the names of the intermediate Prolog files may include a directory hash
-and a process identifier.</p>
-</div>
-<div class="section" id="source-file-text-encoding">
-<h3>Source file text encoding<a class="headerlink" href="#source-file-text-encoding" title="Permalink to this headline">¶</a></h3>
-<p>The text encoding used in a source file may be declared using the
-<a class="reference internal" href="../refman/directives/encoding_1.html#directives-encoding-1"><span class="std std-ref">encoding/1</span></a> directive when running Logtalk with
-backend Prolog compilers that support multiple encodings (check the
-<a class="reference internal" href="#flag-encoding-directive"><span class="std std-ref">encoding_directive</span></a> flag in the
-adapter file of your Prolog compiler).</p>
-</div>
+are compiled even if the remaining of the source file is yet to be compiled.</p>
 </div>
 <div class="section" id="compiling-and-loading-your-applications">
 <span id="programming-compiling"></span><h2>Compiling and loading your applications<a class="headerlink" href="#compiling-and-loading-your-applications" title="Permalink to this headline">¶</a></h2>
