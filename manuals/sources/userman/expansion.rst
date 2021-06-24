@@ -296,14 +296,15 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
 Default compiler expansion workflow
 -----------------------------------
 
-When compiling a source file, the compiler will first try, by default,
+When :ref:`compiling a source file <programming_multi_pass_compiler>`,
+the compiler will first try, by default,
 the source file specific hook object specified using a local
 ``set_logtalk_flag/2`` directive, if defined. If that expansion fails,
 it tries the hook object specified using the ``hook/1`` compiler option
 in the ``logtalk_compile/2`` or ``logtalk_load/2`` goal that compiles
 or loads the file, if defined. If that expansion fails, it tries the
 default hook object, if defined. If that expansion also fails, the
-compiler tries the Prolog dialect specific expansion rules found found
+compiler tries the Prolog dialect specific expansion rules found
 in the :term:`adapter file` (which are used to support non-standard
 Prolog features).
 
@@ -311,9 +312,9 @@ Prolog features).
 User defined expansion workflows
 --------------------------------
 
-Sometimes we have multiple hook objects that we need to use in the compilation
-of a source file. Logtalk includes a :doc:`../libraries/hook_flows` library
-that supports two basic expansion workflows: a :ref:`pipeline <apis:hook_pipeline/1>`
+Sometimes we have multiple hook objects that we need to combine and use in
+the compilation of a source file. Logtalk includes a :doc:`../libraries/hook_flows`
+library that supports two basic expansion workflows: a :ref:`pipeline <apis:hook_pipeline/1>`
 of hook objects, where the expansion results from a hook object are feed to
 the next hook object in the pipeline, and a :ref:`set <apis:hook_set/1>` of
 hook objects, where expansions are tried until one of them succeeds. These
@@ -391,12 +392,13 @@ in a fully controlled way.
 Debugging expansions
 --------------------
 
-The ``term_expansion/2`` and ``goal_expansion/2`` predicates can be debugged
-as any other object predicates. Note that expansions can often be manually
-tested by sending :ref:`methods_expand_term_2` and :ref:`methods_expand_goal_2`
+The ``term_expansion/2`` and ``goal_expansion/2`` predicates can be
+:ref:`debugged <debugging_debugging>` as any other object predicates. Note
+that expansions can often be manually tested by sending
+:ref:`methods_expand_term_2` and :ref:`methods_expand_goal_2`
 messages to a hook object with the term or goal whose expansion you want to
 check as argument. Another alternative to the debugging tools is to use a
-monitor for the runtime messages that call the predicates. For example,
+:term:`monitor` for the runtime messages that call the predicates. For example,
 assume a ``expansions_debug.lgt`` file with the contents:
 
 ::

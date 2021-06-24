@@ -458,22 +458,23 @@ improve code portability across backends).</p>
 </div>
 <div class="section" id="default-compiler-expansion-workflow">
 <h2>Default compiler expansion workflow<a class="headerlink" href="#default-compiler-expansion-workflow" title="Permalink to this headline">¶</a></h2>
-<p>When compiling a source file, the compiler will first try, by default,
+<p>When <a class="reference internal" href="programming.html#programming-multi-pass-compiler"><span class="std std-ref">compiling a source file</span></a>,
+the compiler will first try, by default,
 the source file specific hook object specified using a local
 <code class="docutils literal notranslate"><span class="pre">set_logtalk_flag/2</span></code> directive, if defined. If that expansion fails,
 it tries the hook object specified using the <code class="docutils literal notranslate"><span class="pre">hook/1</span></code> compiler option
 in the <code class="docutils literal notranslate"><span class="pre">logtalk_compile/2</span></code> or <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> goal that compiles
 or loads the file, if defined. If that expansion fails, it tries the
 default hook object, if defined. If that expansion also fails, the
-compiler tries the Prolog dialect specific expansion rules found found
+compiler tries the Prolog dialect specific expansion rules found
 in the <a class="reference internal" href="../glossary.html#term-adapter-file"><span class="xref std std-term">adapter file</span></a> (which are used to support non-standard
 Prolog features).</p>
 </div>
 <div class="section" id="user-defined-expansion-workflows">
 <h2>User defined expansion workflows<a class="headerlink" href="#user-defined-expansion-workflows" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes we have multiple hook objects that we need to use in the compilation
-of a source file. Logtalk includes a <a class="reference internal" href="../libraries/hook_flows.html"><span class="doc">hook_flows</span></a> library
-that supports two basic expansion workflows: a <a class="reference external" href="../../docs/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.48.0)"><span class="xref std std-ref">pipeline</span></a>
+<p>Sometimes we have multiple hook objects that we need to combine and use in
+the compilation of a source file. Logtalk includes a <a class="reference internal" href="../libraries/hook_flows.html"><span class="doc">hook_flows</span></a>
+library that supports two basic expansion workflows: a <a class="reference external" href="../../docs/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.48.0)"><span class="xref std std-ref">pipeline</span></a>
 of hook objects, where the expansion results from a hook object are feed to
 the next hook object in the pipeline, and a <a class="reference external" href="../../docs/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.48.0)"><span class="xref std std-ref">set</span></a> of
 hook objects, where expansions are tried until one of them succeeds. These
@@ -541,12 +542,13 @@ supported backend Prolog compilers.</p>
 </div>
 <div class="section" id="debugging-expansions">
 <h2>Debugging expansions<a class="headerlink" href="#debugging-expansions" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates can be debugged
-as any other object predicates. Note that expansions can often be manually
-tested by sending <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a>
+<p>The <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> predicates can be
+<a class="reference internal" href="debugging.html#debugging-debugging"><span class="std std-ref">debugged</span></a> as any other object predicates. Note
+that expansions can often be manually tested by sending
+<a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a>
 messages to a hook object with the term or goal whose expansion you want to
 check as argument. Another alternative to the debugging tools is to use a
-monitor for the runtime messages that call the predicates. For example,
+<a class="reference internal" href="../glossary.html#term-monitor"><span class="xref std std-term">monitor</span></a> for the runtime messages that call the predicates. For example,
 assume a <code class="docutils literal notranslate"><span class="pre">expansions_debug.lgt</span></code> file with the contents:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
     <span class="k">define_events</span>(after, edcg, <span class="nv">_</span>, <span class="nv">_</span>, expansions_debug)
