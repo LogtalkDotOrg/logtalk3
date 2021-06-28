@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:15:1,
+		version is 1:16:0,
 		author is 'Paulo Moura',
-		date is 2020-11-30,
+		date is 2021-06-28,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -210,22 +210,28 @@
 	test(lgt_write_term_3_36, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
+		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C,'X'=42])])},
+		^^text_output_assertion('foo(A,B,C)', Assertion).
+
+	test(lgt_write_term_3_37, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
 		{write_term(S, [(1,2,3)], [])},
 		^^text_output_assertion('[(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_37, true(Assertion)) :-
+	test(lgt_write_term_3_38, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_term(S, [a,(1,2,3)], [])},
 		^^text_output_assertion('[a,(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_38, true(Assertion)) :-
+	test(lgt_write_term_3_39, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_canonical(S, [(1,2,3)])},
 		^^text_output_assertion('\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
 
-	test(lgt_write_term_3_39, true(Assertion)) :-
+	test(lgt_write_term_3_40, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{write_canonical(S, [a,(1,2,3)])},
@@ -233,25 +239,25 @@
 
 	% [] and {} are atoms that don't require quoting
 
-	test(lgt_write_term_3_40, true(Assertion)) :-
+	test(lgt_write_term_3_41, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '[]')},
 		^^text_output_assertion('[]', Assertion).
 
-	test(lgt_write_term_3_41, true(Assertion)) :-
+	test(lgt_write_term_3_42, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, [])},
 		^^text_output_assertion('[]', Assertion).
 
-	test(lgt_write_term_3_42, true(Assertion)) :-
+	test(lgt_write_term_3_43, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '{}')},
 		^^text_output_assertion('{}', Assertion).
 
-	test(lgt_write_term_3_43, true(Assertion)) :-
+	test(lgt_write_term_3_44, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, {})},
@@ -259,13 +265,13 @@
 
 	% quoted writing of escape sequences should preserve them
 
-	test(lgt_write_term_3_44, true(Assertion)) :-
+	test(lgt_write_term_3_45, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '\n')},
 		^^text_output_assertion('\'\\n\'', Assertion).
 
-	test(lgt_write_term_3_45, true(Assertion)) :-
+	test(lgt_write_term_3_46, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, '\t')},
@@ -274,7 +280,7 @@
 	% space before and after an operator must be preserved
 	% when required to parse the term back
 
-	test(lgt_write_term_3_46, true(Assertion)) :-
+	test(lgt_write_term_3_47, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
 		{writeq(S, a is b)},
@@ -284,43 +290,43 @@
 	% specifies a domain_error/2 but an instantiation_error/0 is also
 	% a sensible choice made by several Prolog systems when applicable
 
-	test(sics_write_term_3_47, errors([domain_error(write_option,quoted(_)), instantiation_error])) :-
+	test(sics_write_term_3_48, errors([domain_error(write_option,quoted(_)), instantiation_error])) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(_)])}.
 
-	test(sics_write_term_3_48, error(domain_error(write_option,quoted(fail)))) :-
+	test(sics_write_term_3_49, error(domain_error(write_option,quoted(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(fail)])}.
 
-	test(sics_write_term_3_49, errors([domain_error(write_option,ignore_ops(_)), instantiation_error])) :-
+	test(sics_write_term_3_50, errors([domain_error(write_option,ignore_ops(_)), instantiation_error])) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(_)])}.
 
-	test(sics_write_term_3_50, error(domain_error(write_option,ignore_ops(fail)))) :-
+	test(sics_write_term_3_51, error(domain_error(write_option,ignore_ops(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(fail)])}.
 
-	test(sics_write_term_3_51, errors([domain_error(write_option,numbervars(_)), instantiation_error])) :-
+	test(sics_write_term_3_52, errors([domain_error(write_option,numbervars(_)), instantiation_error])) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(_)])}.
 
-	test(sics_write_term_3_52, error(domain_error(write_option,numbervars(fail)))) :-
+	test(sics_write_term_3_53, error(domain_error(write_option,numbervars(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(fail)])}.
 
-	test(sics_write_term_3_53, errors([domain_error(write_option,variable_names(_)), instantiation_error])) :-
+	test(sics_write_term_3_54, errors([domain_error(write_option,variable_names(_)), instantiation_error])) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(_)])}.
 
-	test(sics_write_term_3_54, error(domain_error(write_option,variable_names(a)))) :-
+	test(sics_write_term_3_55, error(domain_error(write_option,variable_names(a)))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(a)])}.
 
-	test(sics_write_term_3_55, errors([domain_error(write_option,variable_names([_='A'])), instantiation_error])) :-
+	test(sics_write_term_3_56, errors([domain_error(write_option,variable_names([_='A'])), instantiation_error])) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
-	test(sics_write_term_3_56, errors([domain_error(write_option,variable_names(['A'=_|_])), instantiation_error])) :-
+	test(sics_write_term_3_57, errors([domain_error(write_option,variable_names(['A'=_|_])), instantiation_error])) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 

@@ -120,6 +120,9 @@ XSB backends.
 Tests
 -----
 
+* ADDED: Additional test for the `write_term/3` predicate `variable_names/1`
+option.
+
 * ADDED: Tests for the Prolog `popcount/1` built-in function when available.
 
 * ADDED: Additional tests for unbounded integer arithmetic.
