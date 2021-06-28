@@ -30,11 +30,11 @@ For basic installation, copy the following files to the Sublime Text Packages
 directory, which is operating-system specific:
 
 macOS:
-	~/Library/Application Support/Sublime Text 3/Packages/Logtalk/
+	~/Library/Application Support/Sublime Text/Packages/Logtalk/
 Linux:
-	~/.config/sublime-text-3/Packages/Logtalk
+	~/.config/sublime-text/Packages/Logtalk
 Windows:
-	%APPDATA%\Sublime Text 3\Packages\Logtalk
+	%APPDATA%\Sublime Text\Packages\Logtalk
 
 Create the `Logtalk` subdirectory if it doesn't exist. The files to be
 copied are:
@@ -51,7 +51,7 @@ format, copy instead the TextMate file renamed to `Logtalk.tmLanguage`).
 4. File `Logtalk.sublime-build` (edit it to change the used integration
 script)
 
-Create a `Sublime Text 3/Packages/SublimeREPL/config/Logtalk` subdirectory
+Create a `Sublime Text/Packages/SublimeREPL/config/Logtalk` subdirectory
 if it doesn't exist and copy the following two files there:
 
 	Default.sublime-commands

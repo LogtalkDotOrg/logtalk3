@@ -127,6 +127,11 @@ Tests
 * IMPROVED: Skip the tests for the ISO Prolog standard `open/3-4` built-in
 predicates permission error conditions when running on a POSIX system as root.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Sublime Text instructions for installing Logtalk support.
+
 Installers and installation scripts
 -----------------------------------
 
