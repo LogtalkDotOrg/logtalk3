@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on May 4, 2021
+##   Last updated on June 28, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.12"
+	echo "  0.13"
 	exit 0
 }
 
@@ -51,7 +51,7 @@ list_backends() {
 	if [ -e "$(command -v jiplgt)" ] && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		echo -n "  jiplgt"
 	fi
-	if [ -e "$(command -v lvmlgt)" ] && [ "$(command -v lvm)" != "" ] ; then
+	if [ -e "$(command -v lvmlgt)" ] && [ "$(command -v lvmpl)" != "" ] ; then
 		echo -n "  lvmlgt"
 	fi
 	if [ -e "$(command -v scryerlgt)" ] && [ "$(command -v scryer-prolog)" != "" ] ; then
@@ -144,7 +144,7 @@ valid_backend() {
 		return 0
 	elif [ "$1" == "jiplgt" ] && [ -e "$(command -v jiplgt)" ]  && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		return 0
-	elif [ "$1" == "lvmlgt" ] && [ -e "$(command -v lvmlgt)" ]  && [ "$(command -v lvm)" != "" ] ; then
+	elif [ "$1" == "lvmlgt" ] && [ -e "$(command -v lvmlgt)" ]  && [ "$(command -v lvmpl)" != "" ] ; then
 		return 0
 	elif [ "$1" == "scryerlgt" ] && [ -e "$(command -v scryerlgt)" ]  && [ "$(command -v scryer-prolog)" != "" ] ; then
 		return 0
