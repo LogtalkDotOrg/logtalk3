@@ -51,6 +51,8 @@ format, copy instead the TextMate file renamed to `Logtalk.tmLanguage`).
 4. File `Logtalk.sublime-build` (edit it to change the used integration
 script)
 
+5. File `Comments.tmPreferences`
+
 Create a `Sublime Text/Packages/SublimeREPL/config/Logtalk` subdirectory
 if it doesn't exist and copy the following two files there:
 

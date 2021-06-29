@@ -133,6 +133,9 @@ predicates permission error conditions when running on a POSIX system as root.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Sublime Text support for toggling comments when editing Logtalk source
+files.
+
 * FIXED: Sublime Text instructions for installing Logtalk support.
 
 Installers and installation scripts
