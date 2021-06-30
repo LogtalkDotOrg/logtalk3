@@ -109,6 +109,9 @@ seconds for each test set.
 Examples
 --------
 
+* ADDED: New `tcltk` example illustrating how to add a portable GUI to an
+application using Tcl and Tk. Contributed by Paul Brown.
+
 * IMPROVED: Tests for the `blocks`, `bricks`, `dynpred`, `futures`, `hooks`,
 `hailstone`, `includes`, `laptops`, `logs`, `metaclasses`, `multifile`,
 `patches`, `patching`, `polygons`, `reflection`, `self_messages`, `scopes`,

@@ -71,7 +71,7 @@ CONTRIBUTORS
 * Neng-Fa Zhou (bug reports)
 * Nicolas Pelletier (bug reports, text editor support)
 * Parker Jones (testing, unit tests, bug reports)
-* Paul Brown (libraries, bug reports, suggestions, Wikipedia page maintenance)
+* Paul Brown (libraries, examples, bug reports, suggestions, Wikipedia page maintenance)
 * Paul Crocker (testing, multi-threading and meta-predicates examples, bug reports)
 * Paul Fodor (library enhancements)
 * Paul Tarau (feedback on threaded engines API and examples)
