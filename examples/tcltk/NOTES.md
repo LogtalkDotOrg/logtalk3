@@ -26,10 +26,7 @@ and replace `logtalk` by the name of the integration script you want to
 use (e.g. `gplgt`).
 
 To run the example, open the `gui.tcl` file using the `wish` application
-provided by your Tk installation. On POSIX systems, you can also simple
-call the `run` script from a terminal window:
-
-     $ ./run
+provided by your Tk installation.
 
 Note: This example requires Tcl/Tk and `tcllib` are also installed. Tested
 with Tcl/Tk version 8.6 and `tcllib` version 1.20.
