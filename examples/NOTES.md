@@ -480,6 +480,10 @@ Follows a short description of each included example (in alphabetical order):
 	simple example of using tabling directives within objects
 	(requires Logtalk to be run with a backend supporting tabling)
 
+- `tcltk`  
+	example illustrating how to add a portable GUI to an application using Tcl
+	and Tk
+
 - `testing`  
 	some examples of writing unit tests
 
