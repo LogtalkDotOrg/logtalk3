@@ -23,7 +23,8 @@ package require Tk
 
 wm title . "Symbolic Expression Differentiation"
 
-source "query.tcl"
+set thisdir [file dirname [file normalize [info script]]]
+source [file join $thisdir "query.tcl"]
 
 # Window layout
 grid [ttk::frame .c -padding "3 3 12 12"] -column 0 -row 0 -sticky wnes

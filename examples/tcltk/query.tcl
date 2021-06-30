@@ -24,14 +24,14 @@ package require json
 namespace eval ::lgt {
 
 variable logtalk 0
-variable install_dir [pwd]
+set install_dir [file dirname [file normalize [info script]]]
 variable load_cmd "logtalk"
 
 proc connect {} {
 	# Open as file
 	set lgt::logtalk [open "|$lgt::load_cmd" w+]
 	# Load loader
-	puts $lgt::logtalk "logtalk_load('$lgt::install_dir/loader.lgt'), tkinter::go."
+	puts $lgt::logtalk "logtalk_load('[file join $lgt::install_dir loader.lgt]'), tkinter::go."
 	flush $lgt::logtalk
 	discard_to_ready
 	# Log connected
@@ -42,7 +42,7 @@ proc connect_to {loader} {
 	# Open as file
 	set lgt::logtalk [open "|$lgt::load_cmd" w+]
 	# Load loader
-	puts $lgt::logtalk "logtalk_load(\['$lgt::install_dir/loader.lgt', $loader\]), tkinter::go."
+	puts $lgt::logtalk "logtalk_load(\['[file join $lgt::install_dir loader.lgt]', $loader\]), tkinter::go."
 	flush $lgt::logtalk
 	discard_to_ready
 	# Log connected

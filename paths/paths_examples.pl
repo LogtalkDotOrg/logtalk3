@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on January 10, 2021
+%  Last updated on June 30, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -184,6 +184,7 @@ logtalk_library_path(symbiosis, examples('symbiosis/')).
 logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).
 logtalk_library_path(tabling, examples('tabling/')).
+logtalk_library_path(tcltk, examples('tcltk/')).
 logtalk_library_path(tak, threads('tak/')).
 logtalk_library_path(tbbt, engines('tbbt/')).
 logtalk_library_path(team, threads('team/')).
