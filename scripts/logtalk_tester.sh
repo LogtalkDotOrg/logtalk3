@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on June 17, 2021
+##   Last updated on Julu 1, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 6.2"
+	echo "$(basename "$0") 6.3"
 	exit 0
 }
 
@@ -612,12 +612,12 @@ if grep -q -s -a 'LOGTALK_BROKEN' -- *.errors; then
 fi
 if grep -q -s -a 'LOGTALK_TIMEOUT' -- *.errors; then
 	echo "%"
-	echo "% Timeouts"
+	echo "% Timedout"
 	grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | $sed 's/LOGTALK_TIMEOUT//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 fi
 if grep -q -s -a 'LOGTALK_CRASH' -- *.errors; then
 	echo "%"
-	echo "% Crashes"
+	echo "% Crashed"
 	grep -s -a 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 fi
 if grep -s -q '^skipped' -- *.totals; then
