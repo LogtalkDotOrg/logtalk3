@@ -149,7 +149,7 @@ Installers and installation scripts
 * FIXED: CxProlog and SWI-Prolog embedding scripts to use the correct directory
 to load the precompiled Logtalk compiler and runtime.
 
-* FIXED: The `logtalk_backend_select` script for the LVM new executable name.
+* FIXED: The `logtalk_backend_select` script for the new LVM executable name.
 
 
 3.47.0 - June 1, 2021
