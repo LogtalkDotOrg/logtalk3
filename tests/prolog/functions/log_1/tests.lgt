@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-11-04,
+		date is 2021-07-05,
 		comment is 'Unit tests for the ISO Prolog standard log/1 built-in function.'
 	]).
 
@@ -49,8 +49,9 @@
 
 	% there is a dispute about the correct error for a zero argument
 	% see e.g. http://eclipseclp.org/wiki/Prolog/IsoErrata
-	% many Prolog systems even don't throw en error but return negative infinity
-	test(iso_log_1_04, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+	% some Prolog systems throw a float_overflow error
+	% other Prolog systems even don't throw en error but return negative infinity
+	test(iso_log_1_04, error(evaluation_error(_))) :-
 		{_X is log(0)}.
 
 	test(iso_log_1_05, error(type_error(evaluable,foo/0))) :-
@@ -60,8 +61,9 @@
 
 	% there is a dispute about the correct error for a zero argument
 	% see e.g. http://eclipseclp.org/wiki/Prolog/IsoErrata
-	% many Prolog systems even don't throw en error but return negative infinity
-	test(iso_log_1_06, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+	% some Prolog systems throw a float_overflow error
+	% other Prolog systems even don't throw en error but return negative infinity
+	test(iso_log_1_06, error(evaluation_error(_))) :-
 		{_X is log(0.0)}.
 
 	% it is undisputed that the evaluable function log/1 should throw undefined for negative numbers

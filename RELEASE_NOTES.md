@@ -123,6 +123,10 @@ XSB backends.
 Tests
 -----
 
+* CHANGED: Tests for the `log/1`, `log/2`, and `log10/1` arithmetic functions
+to allow any argument to the expected `evaluation_error/1` exception when the
+argument or the base is zero as there's a lack of consensus between backends.
+
 * ADDED: Additional test for the `write_term/3` predicate `variable_names/1`
 option.
 

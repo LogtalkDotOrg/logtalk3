@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-01-26,
+		date is 2021-07-05,
 		comment is 'Unit tests for the de facto standard log10/1 built-in function.'
 	]).
 
@@ -65,7 +65,7 @@
 		foo(2, Foo),
 		{_X is log10(Foo)}.
 
-	test(lgt_log10_1_08, errors([evaluation_error(undefined), evaluation_error(zero_divisor)])) :-
+	test(lgt_log10_1_08, error(evaluation_error(_))) :-
 		{_X is log10(0)}.
 
 	% many Prolog systems don't throw en error but return NaN
