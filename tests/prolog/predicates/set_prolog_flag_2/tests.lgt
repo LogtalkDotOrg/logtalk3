@@ -23,33 +23,53 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2021-07-05,
 		comment is 'Unit tests for the ISO Prolog standard set_prolog_flag/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.17.1.4
 
-	succeeds(iso_set_prolog_flag_2_01) :-
+	test(iso_set_prolog_flag_2_01, true) :-
 		{set_prolog_flag(unknown, fail)},
 		{current_prolog_flag(unknown, fail)}.
 
-	throws(iso_set_prolog_flag_2_02, error(instantiation_error,_)) :-
+	test(iso_set_prolog_flag_2_02, error(instantiation_error)) :-
 		{set_prolog_flag(_X, off)}.
 
-	throws(iso_set_prolog_flag_2_03, error(type_error(atom,5),_)) :-
+	test(iso_set_prolog_flag_2_03, error(type_error(atom,5))) :-
 		{set_prolog_flag(5, decimals)}.
 
-	throws(iso_set_prolog_flag_2_04, error(domain_error(prolog_flag,date),_)) :-
+	test(iso_set_prolog_flag_2_04, error(domain_error(prolog_flag,date))) :-
 		{set_prolog_flag(date, 'July 1999')}.
 
-	throws(iso_set_prolog_flag_2_05, error(domain_error(flag_value,debug+trace),_)) :-
+	test(iso_set_prolog_flag_2_05, error(domain_error(flag_value,debug+trace))) :-
 		{set_prolog_flag(debug, trace)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_set_prolog_flag_2_06, error(permission_error(modify,flag,max_arity),_)) :-
+	test(eddbali_set_prolog_flag_2_06, error(permission_error(modify,flag,max_arity))) :-
 		{set_prolog_flag(max_arity, 40)}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_set_prolog_flag_2_07, error(instantiation_error)) :-
+		{set_prolog_flag(double_quotes, _)}.
+
+	test(lgt_set_prolog_flag_2_08, error(domain_error(flag_value,double_quotes+foo))) :-
+		{set_prolog_flag(double_quotes, foo)}.
+
+	test(lgt_set_prolog_flag_2_09, error(instantiation_error)) :-
+		{set_prolog_flag(unknown, _)}.
+
+	test(lgt_set_prolog_flag_2_10, error(domain_error(flag_value,unknown+foo))) :-
+		{set_prolog_flag(unknown, foo)}.
+
+	test(lgt_set_prolog_flag_2_11, error(instantiation_error)) :-
+		{set_prolog_flag(char_conversion, _)}.
+
+	test(lgt_set_prolog_flag_2_12, error(domain_error(flag_value,char_conversion+foo))) :-
+		{set_prolog_flag(char_conversion, foo)}.
 
 :- end_object.

@@ -126,6 +126,8 @@ Tests
 * ADDED: Additional test for the `write_term/3` predicate `variable_names/1`
 option.
 
+* ADDED: Additional tests for the `set_prolog_flag/2` predicate.
+
 * ADDED: Tests for the Prolog `popcount/1` built-in function when available.
 
 * ADDED: Additional tests for unbounded integer arithmetic.
