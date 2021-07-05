@@ -1957,13 +1957,13 @@ inside the object (or category) where the meta-predicate is called:
 
 ::
 
-   :- meta_predicate(bar(*, *)).
+   :- meta_predicate(foo:bar(*, *)).
 
 or:
 
 ::
 
-   :- meta_predicate(bar(*, 0)).
+   :- meta_predicate(foo:bar(*, 0)).
 
 depending on the true meaning of the second meta-argument. The second
 alternative, only usable when the meta-argument can be handled as a

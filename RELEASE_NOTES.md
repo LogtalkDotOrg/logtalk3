@@ -83,6 +83,9 @@ and running tests.
 * FIXED: Typo in the template for the `catch/3` built-in method. Thanks to
 Camilo Correa Restrepo for the bug report.
 
+* FIXED: Typo in the Handbook section on calling Prolog module meta-predicates
+that require overriding the meta-predicate templates.
+
 Library
 -------
 

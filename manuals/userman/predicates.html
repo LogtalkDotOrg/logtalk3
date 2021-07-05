@@ -1905,11 +1905,11 @@ call. Therefore, the Logtalk compiler will generate an error stating that
 <code class="docutils literal notranslate"><span class="pre">foo:bar/2</span></code> goal. There are two alternative solutions for this problem.
 The advised solution is to override the meta-predicate directive by writing,
 inside the object (or category) where the meta-predicate is called:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(bar(<span class="o">*</span>, <span class="o">*</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(foo<span class="o">:</span>bar(<span class="o">*</span>, <span class="o">*</span>)).
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(bar(<span class="o">*</span>, <span class="m">0</span>)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(foo<span class="o">:</span>bar(<span class="o">*</span>, <span class="m">0</span>)).
 </pre></div>
 </div>
 <p>depending on the true meaning of the second meta-argument. The second
