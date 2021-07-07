@@ -25,6 +25,13 @@ RELEASE NOTES
 3.49.0 - August ??, 2021
 ========================
 
+Tools
+-----
+
+* IMPROVED: The `lgtunit` default message when a test set is skipped to include
+the test object identifier to provide more detailed information when tests are
+skipped only for some parameterizations of the test object.
+
 Examples
 --------
 
