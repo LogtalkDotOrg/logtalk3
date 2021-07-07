@@ -78,7 +78,7 @@ proc calculate {} {
 	set ::status "solved"
 	switch [dict get $response status] {
 		"success" {show_results [dict get $response unifications]}
-		"error" {on_error [dict get $response error]"}
+		"error" {on_error [dict get $response error]}
 		"fail" {on_fail}
 	}
 }
