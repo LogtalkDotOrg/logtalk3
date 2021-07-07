@@ -38,6 +38,13 @@ Examples
 * UPDATED: The notes and source code on the `tcltk` example to illustrate how
 to run it on Windows.
 
+Tests
+-----
+
+* IMPROVED: The tests for the standard `read_term/3` predicate to avoid the
+tests hanging on Prolog backends that don't check options validity before
+attempting to read a term.
+
 
 3.48.0 - July 6, 2021
 =====================
