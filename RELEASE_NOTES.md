@@ -38,6 +38,9 @@ Examples
 * UPDATED: The notes and source code on the `tcltk` example to illustrate how
 to run it on Windows.
 
+* FIXED: Workaround a XSB parser bug that prevented loading the `bench`
+example.
+
 Tests
 -----
 
