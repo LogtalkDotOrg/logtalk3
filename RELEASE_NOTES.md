@@ -25,7 +25,11 @@ RELEASE NOTES
 3.49.0 - August ??, 2021
 ========================
 
+Examples
+--------
 
+* UPDATED: The notes and source code on the `tcltk` example to illustrate how
+to run it on Windows.
 
 
 3.48.0 - July 6, 2021

@@ -25,7 +25,19 @@ namespace eval ::lgt {
 
 variable logtalk 0
 set install_dir [file dirname [file normalize [info script]]]
+# the definition of the "load_cmd" variable depends on the Logtalk setup
+# and operating-system; the default definition that follows assumes a POSIX
+# system where the user called the "logtalk_backend_select" script to define
+# a "logtalk" script to run Logtalk with the user preferred backend; an
+# alternative in POSIX systems, is to replace "logtalk" above with the name
+# of a specific integration script, e.g. "gplgt" or "tplgt.sh"; on Windows,
+# the command used by an integration shortcut that was created during Logtalk
+# installation must be used with proper character escaping and absolute paths
+# as exemplified below
 variable load_cmd "logtalk"
+# variable load_cmd "gplgt"
+# variable load_cmd "tplgt.sh"
+# variable load_cmd "C:\\\\Program\\ Files\\\\swipl\\\\bin\\\\swipl.exe -s \"C:/Program Files (x86)/Logtalk/integration/logtalk_swi.pl\""
 
 proc connect {} {
 	# Open as file
