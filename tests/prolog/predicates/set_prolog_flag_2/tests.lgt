@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-07-05,
+		date is 2021-07-08,
 		comment is 'Unit tests for the ISO Prolog standard set_prolog_flag/2 built-in predicate.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.17.1.4
@@ -71,5 +75,12 @@
 
 	test(lgt_set_prolog_flag_2_12, error(domain_error(flag_value,char_conversion+foo))) :-
 		{set_prolog_flag(char_conversion, foo)}.
+
+	% check that the set_prolog_flag/2 recognizes all flags, thus including read-only flags
+	test(lgt_set_prolog_flag_2_13, true) :-
+		forall(
+			{current_prolog_flag(Flag, Value)},
+			assertion(flag(Flag), catch({set_prolog_flag(Flag, Value)}, error(Error,_), Error \== domain_error(prolog_flag,Flag)))
+		).
 
 :- end_object.
