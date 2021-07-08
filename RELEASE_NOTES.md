@@ -47,6 +47,9 @@ Tests
 * ADDED: Additional test for the `set_prolog_flag/2` predicate to check that
 it recognizes all flags, thus including read-only flags.
 
+* ADDED: Additional tests for the `current_prolog_flag/2` predicate to check
+that all flag names are atoms and all flag values are bound.
+
 * IMPROVED: The tests for the standard `read_term/3` predicate to avoid the
 tests hanging on Prolog backends that don't check options validity before
 attempting to read a term.

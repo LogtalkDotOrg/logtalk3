@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-10-14,
+		date is 2021-07-08,
 		comment is 'Unit tests for the ISO Prolog standard current_prolog_flag/2 built-in predicate.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1, assertion/2
 	]).
 
 	:- discontiguous([
@@ -137,5 +141,19 @@
 	succeeds(commons_current_prolog_flag_2_18) :-
 		{current_prolog_flag(dialect, Dialect), current_prolog_flag(version_data, VersionData)},
 		functor(VersionData, Dialect, _).
+
+	% tests from the Logtalk portability work
+
+	test(lgt_current_prolog_flag_2_19, true) :-
+		forall(
+			{current_prolog_flag(Flag, _)},
+			assertion(atom(Flag))
+		).
+
+	test(lgt_current_prolog_flag_2_20, true) :-
+		forall(
+			{current_prolog_flag(Flag, Value)},
+			assertion(flag(Flag), nonvar(Value))
+		).
 
 :- end_object.
