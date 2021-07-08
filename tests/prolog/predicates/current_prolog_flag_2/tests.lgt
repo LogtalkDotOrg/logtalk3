@@ -39,108 +39,77 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.17.2.4
 
-	succeeds(iso_current_prolog_flag_2_01) :-
+	test(iso_current_prolog_flag_2_01, true) :-
 		{current_prolog_flag(debug, off)}.
 
-	succeeds(iso_current_prolog_flag_2_02) :-
-		{current_prolog_flag(bounded, Bounded)},
-		(	Bounded == true ->
-			true
-		;	Bounded == false
-		).
+	test(iso_current_prolog_flag_2_02, true((Bounded == true; Bounded == false))) :-
+		{current_prolog_flag(bounded, Bounded)}.
 
-	succeeds(iso_current_prolog_flag_2_03) :-
+	test(iso_current_prolog_flag_2_03, true) :-
 		(	{current_prolog_flag(bounded, true)} ->
 			{current_prolog_flag(max_integer, MaxInteger)},
 			integer(MaxInteger)
 		;	true
 		).
 
-	succeeds(iso_current_prolog_flag_2_04) :-
+	test(iso_current_prolog_flag_2_04, true) :-
 		(	{current_prolog_flag(bounded, true)} ->
 			{current_prolog_flag(min_integer, MinInteger)},
 			integer(MinInteger)
 		;	true
 		).
 
-	succeeds(iso_current_prolog_flag_2_05) :-
-		{current_prolog_flag(integer_rounding_function, IntegerRoundingFunction)},
-		(	IntegerRoundingFunction == down ->
-			true
-		;	IntegerRoundingFunction == toward_zero
-		).
+	test(iso_current_prolog_flag_2_05, true((IntegerRoundingFunction == down; IntegerRoundingFunction == toward_zero))) :-
+		{current_prolog_flag(integer_rounding_function, IntegerRoundingFunction)}.
 
-	succeeds(iso_current_prolog_flag_2_06) :-
-		{current_prolog_flag(char_conversion, CharConversion)},
-		(	CharConversion == on ->
-			true
-		;	CharConversion == off
-		).
+	test(iso_current_prolog_flag_2_06, true((CharConversion == on; CharConversion == off))) :-
+		{current_prolog_flag(char_conversion, CharConversion)}.
 
-	succeeds(iso_current_prolog_flag_2_07) :-
-		{current_prolog_flag(debug, Debug)},
-		(	Debug == on ->
-			true
-		;	Debug == off
-		).
+	test(iso_current_prolog_flag_2_07, true((Debug == on; Debug == off))) :-
+		{current_prolog_flag(debug, Debug)}.
 
-	succeeds(iso_current_prolog_flag_2_08) :-
+	test(iso_current_prolog_flag_2_08, true) :-
 		{current_prolog_flag(max_arity, MaxArity)},
 		(	MaxArity == unbounded ->
 			true
 		;	integer(MaxArity), MaxArity > 0
 		).
 
-	succeeds(iso_current_prolog_flag_2_09) :-
-		{current_prolog_flag(unknown, Unknown)},
-		(	Unknown == error ->
-			true
-		;	Unknown == fail ->
-			true
-		;	Unknown == warning
-		).
+	test(iso_current_prolog_flag_2_09, true((Unknown == error; Unknown == fail; Unknown == warning))) :-
+		{current_prolog_flag(unknown, Unknown)}.
 
-	succeeds(iso_current_prolog_flag_2_10) :-
-		{current_prolog_flag(double_quotes, DoubleQuotes)},
-		(	DoubleQuotes == chars ->
-			true
-		;	DoubleQuotes == codes ->
-			true
-		;	DoubleQuotes == atom
-		).
+	test(iso_current_prolog_flag_2_10, true((DoubleQuotes == chars; DoubleQuotes == codes; DoubleQuotes == atom))) :-
+		{current_prolog_flag(double_quotes, DoubleQuotes)}.
 
-	throws(iso_current_prolog_flag_2_11, error(type_error(atom,5),_)) :-
+	test(iso_current_prolog_flag_2_11, error(type_error(atom,5))) :-
 		{current_prolog_flag(5, _V)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	succeeds(eddbali_current_prolog_flag_2_12) :-
+	test(eddbali_current_prolog_flag_2_12, true) :-
 		{set_prolog_flag(unknown, warning), current_prolog_flag(unknown, warning)}.
 
-	fails(eddbali_current_prolog_flag_2_13) :-
+	test(eddbali_current_prolog_flag_2_13, false) :-
 		{set_prolog_flag(unknown, warning), current_prolog_flag(unknown,error)}.
 
-	throws(eddbali_current_prolog_flag_2_14, error(domain_error(prolog_flag,warning),_)) :-
+	test(eddbali_current_prolog_flag_2_14, error(domain_error(prolog_flag,warning))) :-
 		{current_prolog_flag(warning,_)}.
 
-	throws(eddbali_current_prolog_flag_2_15, error(type_error(atom,1+2),_)) :-
+	test(eddbali_current_prolog_flag_2_15, error(type_error(atom,1+2))) :-
 		{current_prolog_flag(1+2, flag)}.
 
 	% tests for de facto standard flags defined by the Prolog Commons initiative
 
-	succeeds(commons_current_prolog_flag_2_16) :-
-		{current_prolog_flag(dialect, Dialect)},
-		atom(Dialect).
+	test(commons_current_prolog_flag_2_16, true(atom(Dialect))) :-
+		{current_prolog_flag(dialect, Dialect)}.
 
-	succeeds(commons_current_prolog_flag_2_17) :-
+	test(commons_current_prolog_flag_2_17, true((integer(Major), integer(Minor), integer(Patch)))) :-
 		{current_prolog_flag(version_data, VersionData)},
 		compound(VersionData),
-		VersionData =.. [_Dialect, Major, Minor, Patch| _Others],
-		integer(Major), integer(Minor), integer(Patch).
+		VersionData =.. [_Dialect, Major, Minor, Patch| _Others].
 
-	succeeds(commons_current_prolog_flag_2_18) :-
-		{current_prolog_flag(dialect, Dialect), current_prolog_flag(version_data, VersionData)},
-		functor(VersionData, Dialect, _).
+	test(commons_current_prolog_flag_2_18, true(functor(VersionData, Dialect, _))) :-
+		{current_prolog_flag(dialect, Dialect), current_prolog_flag(version_data, VersionData)}.
 
 	% tests from the Logtalk portability work
 
