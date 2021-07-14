@@ -3482,7 +3482,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 49, 0, b04)).
+'$lgt_version_data'(logtalk(3, 49, 0, b05)).
 
 
 
@@ -6552,8 +6552,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags) :-
-	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
+	'$lgt_object_file_names'(Directory, Name, Extension, ObjectFilePid, ObjectFileDialect),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
+	(	'$lgt_compiler_flag'(clean, on) ->
+		ObjectFile = ObjectFilePid
+	;	ObjectFile = ObjectFileDialect
+	),
 	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	retractall('$lgt_failed_file_'(SourceFile)),
 	% save the file loading dependency on a parent file if it exists
@@ -6571,9 +6575,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 		fail
 	),
 	% compile and load the intermediate Prolog file
-	'$lgt_load_compiled_file'(SourceFile, Flags, ObjectFile),
+	'$lgt_load_compiled_file'(SourceFile, ObjectFile),
 	retractall('$lgt_file_loading_stack_'(SourceFile, _)),
-	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)).
+	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
+	% cleanup intermediate files if necessary
+	(	'$lgt_compiler_flag'(clean, on) ->
+		'$lgt_delete_intermediate_files'(ObjectFilePid),
+		'$lgt_delete_intermediate_files'(ObjectFileDialect)
+	;	true
+	).
 
 
 '$lgt_save_file_loading_dependency'(SourceFile) :-
@@ -6588,7 +6598,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_load_compiled_file'(SourceFile, Flags, ObjectFile) :-
+'$lgt_load_compiled_file'(SourceFile, ObjectFile) :-
 	% retrieve the backend Prolog specific file loading options
 	'$lgt_compiler_flag'(prolog_loader, DefaultOptions),
 	% loading a file can result in the redefinition of existing
@@ -6608,8 +6618,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	(	catch('$lgt_load_prolog_code'(ObjectFile, SourceFile, Options), Error, true) ->
 			(	var(Error) ->
 				true
-			;	% an error while loading the generated intermediate Prolog files
-				% is usually caused by write_canonical/2 and/or read_term/3 bugs
+			;	% an error while loading the generated intermediate Prolog files is usually
+				% caused by backend write_canonical/2 and/or read_term/3 predicate bugs
 				'$lgt_print_message'(error, loading_error(SourceFile, Error)),
 				fail
 			)
@@ -6622,13 +6632,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_propagate_failure_to_parent_files'(SourceFile),
 		'$lgt_delete_intermediate_files'(ObjectFile),
 		fail
-	),
-	% cleanup intermediate files if necessary
-	(	'$lgt_member'(clean(on), Flags) ->
-		'$lgt_delete_intermediate_files'(ObjectFile)
-	;	'$lgt_compiler_flag'(clean, on) ->
-		'$lgt_delete_intermediate_files'(ObjectFile)
-	;	true
 	).
 
 
@@ -6775,9 +6778,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	throw(error(existence_error(file, File), _))
 	),
-	'$lgt_object_file_name'(Directory, Name, Extension, ObjectFile),
+	'$lgt_object_file_names'(Directory, Name, Extension, ObjectFilePid, ObjectFileDialect),
 	atom_concat(Name, Extension, Basename),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
+	(	'$lgt_compiler_flag'(clean, on) ->
+		ObjectFile = ObjectFilePid
+	;	ObjectFile = ObjectFileDialect
+	),
 	assertz('$lgt_pp_file_paths_flags_'(Basename, Directory, SourceFile, ObjectFile, Flags)),
 	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, compiling),
 	'$lgt_compile_files'(Files, [RelativeTo| Flags]).
@@ -6944,11 +6951,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_object_file_name'(+atom, +atom, +atom, -atom)
+% '$lgt_object_file_names'(+atom, +atom, +atom, -atom)
 %
-% converts a source file full path into an object file full path
+% converts a source file full path into two object file full paths: one that
+% includes the process identifier for use when the clean flag is turned on
+% (to allow parallel Logtalk processes) and one that includes the backend
+% indentifier for use when the clean flag is turned off (to avoid file name
+% conflicts when running with backends generate the same directory hashes)
 
-'$lgt_object_file_name'(SourceDirectory, SourceName, SourceExtension, ObjectFile) :-
+'$lgt_object_file_names'(SourceDirectory, SourceName, SourceExtension, ObjectFilePid, ObjectFileDialect) :-
 	% temporary files are stored in the defined scratch directory
 	'$lgt_compiler_flag'(scratch_directory, ScratchDirectory0),
 	% allow using library notation to specify the scratch directory
@@ -6965,17 +6976,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% assume absolute directory path
 		ObjectDirectory = ScratchDirectory
 	),
-	% append (if supported by the backend compiler) a directory hash value to the
-	% intermediate Prolog file name to try to avoid file name collisions when
-	% collecting all the intermediate files in the same directory (possibly for
-	% embedding); when compiling with the "clean" flag turned on (its default
-	% value), also include in the file name the process identifier to avoid file
-	% name clashes when running parallel Logtalk processes
-	(	'$lgt_compiler_flag'(clean, on) ->
-		'$lgt_directory_hash_pid_as_atom'(SourceDirectory, Hash)
-	;	% clean off
-		'$lgt_directory_hash_dialect_as_atom'(SourceDirectory, Hash)
-	),
 	% add a suffix based on the original extension to the file name to avoid
 	% intermediate and temporary file name conflicts when compiling two or
 	% more source files that share the same name but use different extensions
@@ -6984,6 +6984,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	sub_atom(SourceExtension, 1, _, 0, Suffix0) ->
 		atom_concat('_', Suffix0, Suffix)
 	),
+	% append (if supported by the backend compiler) a directory hash value to the
+	% intermediate Prolog file name to try to avoid file name collisions when
+	% collecting all the intermediate files in the same directory (possibly for
+	% embedding); when compiling with the "clean" flag turned on (its default
+	% value), also include in the file name the process identifier to avoid file
+	% name clashes when running parallel Logtalk processes
+	'$lgt_directory_hash_pid_as_atom'(SourceDirectory, HashPid),
+	'$lgt_object_file_name'(ObjectDirectory, SourceName, HashPid, Suffix, ObjectFilePid),
+	'$lgt_directory_hash_dialect_as_atom'(SourceDirectory, HashDialect),
+	'$lgt_object_file_name'(ObjectDirectory, SourceName, HashDialect, Suffix, ObjectFileDialect).
+
+
+'$lgt_object_file_name'(ObjectDirectory, SourceName, Hash, Suffix, ObjectFile) :-
 	atom_concat(SourceName, Hash, ObjectName0),
 	atom_concat(ObjectName0, Suffix, ObjectName),
 	% there must be a single object file extension defined in the Prolog adapter files

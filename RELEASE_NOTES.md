@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: When compiling with the `clean` flag turned on, also delete any
+intermediate Prolog files that may have been generated in previous runs
+for the same backend with the `clean` flag turned off.
+
 * FIXED: Generated intermediate Prolog file name conflicts when running with
 two backends that generate the same directory hashes and compiling with the
 `clean` flag turned off. Thanks to Andrew Davison for the bug report.
