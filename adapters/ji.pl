@@ -373,24 +373,24 @@
 
 % '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and dialect as an atom with the format _hash_dialect
 
 '$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
 	term_hash(Directory, Hash0),
 	number_codes(Hash0, Codes),
-	atom_codes(Hash, Codes).
+	atom_codes(Hash, [0'_| Codes]).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash and PID as an atom
+% returns the directory hash and PID as an atom with the format _hash_pid
 
 '$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
 	term_hash(Directory, Hash0),
 	pid(PID),
 	number_codes(Hash0, Hash0Codes),
 	number_codes(PID, PIDCodes),
-	append(Hash0Codes, [0'_| PIDCodes], HashCodes),
+	append([0'_| Hash0Codes], [0'_| PIDCodes], HashCodes),
 	atom_codes(Hash, HashCodes).
 
 

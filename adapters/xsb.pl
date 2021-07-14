@@ -398,22 +398,22 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 % '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and dialect as an atom with the format _hash_dialect
 
 '$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
 	term_hash(Directory, 2147483647, Hash0),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	concat_atom([Hash0, '_', Dialect], Hash).
+	concat_atom(['_', Hash0, '_', Dialect], Hash).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash and PID as an atom
+% returns the directory hash and PID as an atom with the format _hash_pid
 
 '$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
 	term_hash(Directory, 2147483647, Hash0),
 	sys_pid(PID),
-	concat_atom([Hash0, '_', PID], Hash).
+	concat_atom(['_', Hash0, '_', PID], Hash).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

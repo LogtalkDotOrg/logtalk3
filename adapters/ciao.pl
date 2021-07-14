@@ -391,7 +391,7 @@
 
 % '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
 %
-% returns the directory hash as an atom
+% returns the directory hash and dialect as an atom with the format _hash_dialect
 
 :- use_module(library(indexer/hash), [hash_term/2]).
 
@@ -400,13 +400,13 @@
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
 	number_codes(Hash0, Hash0Codes),
 	atom_codes(Dialect, DialectCodes),
-	append(Hash0Codes, [0'_| DialectCodes], HashCodes),
+	append([0'_| Hash0Codes], [0'_| DialectCodes], HashCodes),
 	atom_codes(Hash, HashCodes).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
 %
-% returns the directory hash and PID as an atom
+% returns the directory hash and PID as an atom with the format _hash_pid
 
 :- use_module(library(lists), [append/3]).
 
@@ -415,7 +415,7 @@
 	get_pid(PID),
 	number_codes(Hash0, Hash0Codes),
 	number_codes(PID, PIDCodes),
-	append(Hash0Codes, [0'_| PIDCodes], HashCodes),
+	append([0'_| Hash0Codes], [0'_| PIDCodes], HashCodes),
 	atom_codes(Hash, HashCodes).
 
 
