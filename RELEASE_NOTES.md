@@ -25,12 +25,19 @@ RELEASE NOTES
 3.49.0 - August ??, 2021
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug when compiling files using an explicit `clean(on)` option where
+the generated intermediate Prolog file names would not include the process
+identifier.
+
 Tools
 -----
 
 * IMPROVED: The `lgtunit` default message when a test set is skipped to include
 the test object identifier to provide more detailed information when tests are
-skipped only for some parameterizations of the test object.
+skipped only for some parameterizations of a test object.
 
 Examples
 --------
@@ -44,11 +51,11 @@ example.
 Tests
 -----
 
-* ADDED: Additional test for the `set_prolog_flag/2` predicate to check that
-it recognizes all flags, thus including read-only flags.
+* ADDED: Additional test for the standard `set_prolog_flag/2` predicate to
+check that it recognizes all flags, thus including read-only flags.
 
-* ADDED: Additional tests for the `current_prolog_flag/2` predicate to check
-that all flag names are atoms and all flag values are bound.
+* ADDED: Additional tests for the standard `current_prolog_flag/2` predicate
+to check that all flag names are atoms and all flag values are bound.
 
 * IMPROVED: The tests for the standard `read_term/3` predicate to avoid the
 tests hanging on Prolog backends that don't check options validity before
