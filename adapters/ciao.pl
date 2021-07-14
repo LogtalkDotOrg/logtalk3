@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.20.0
-%  Last updated on June 21, 2021
+%  Last updated on July 14, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -389,15 +389,19 @@
 	).
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
 %
 % returns the directory hash as an atom
 
 :- use_module(library(indexer/hash), [hash_term/2]).
 
-'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
 	hash_term(Directory, Hash0),
-	atom_number(Hash, Hash0).
+	'$lgt_prolog_feature'(prolog_dialect, Dialect),
+	number_codes(Hash0, Hash0Codes),
+	atom_codes(Dialect, DialectCodes),
+	append(Hash0Codes, [0'_| DialectCodes], HashCodes),
+	atom_codes(Hash, HashCodes).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)

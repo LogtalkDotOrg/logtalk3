@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on June 21, 2021
+%  Last updated on July 14, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -374,11 +374,12 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	).
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
 %
 % returns the directory hash as an atom
 
-'$lgt_directory_hash_as_atom'(_, '').
+'$lgt_directory_hash_dialect_as_atom'(_, Hash) :-
+	'$lgt_prolog_feature'(prolog_dialect, Hash).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)

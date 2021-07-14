@@ -32,6 +32,10 @@ Logtalk compiler and runtime
 the generated intermediate Prolog file names would not include the process
 identifier.
 
+* FIXED: Generated intermediate Prolog file name conflicts when running with
+two backends that generate the same directory hashes and compiling with the
+`clean` flag turned off. Thanks to Andrew Davison for the bug report.
+
 Tools
 -----
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on June 21, 2021
+%  Last updated on July 14, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -446,14 +446,17 @@ forall(Generate, Test) :-
 	).
 
 
-% '$lgt_directory_hash_as_atom'(+atom, -atom)
+% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
 %
 % returns the directory hash as an atom
 
-'$lgt_directory_hash_as_atom'(Directory, Hash) :-
+'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
 	term_hash(Directory, Hash0),
-	number_codes(Hash0, Codes),
-	atom_codes(Hash, Codes).
+	'$lgt_prolog_feature'(prolog_dialect, Dialect),
+	number_codes(Hash0, Hash0Codes),
+	atom_codes(Dialect, DialectCodes),
+	append(Hash0Codes, [0'_| DialectCodes], HashCodes),
+	atom_codes(Hash, HashCodes).
 
 
 % '$lgt_directory_hash_pid_as_atom'(+atom, -atom)

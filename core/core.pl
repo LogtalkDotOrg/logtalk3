@@ -3482,7 +3482,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 49, 0, b02)).
+'$lgt_version_data'(logtalk(3, 49, 0, b03)).
 
 
 
@@ -6976,7 +6976,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_member'(clean(on), Flags) ->
 		'$lgt_directory_hash_pid_as_atom'(SourceDirectory, Hash)
 	;	% clean off
-		'$lgt_directory_hash_as_atom'(SourceDirectory, Hash)
+		'$lgt_directory_hash_dialect_as_atom'(SourceDirectory, Hash)
 	),
 	atom_concat('_', Hash, UnderscoreHash),
 	% add a suffix based on the original extension to the file name to avoid
