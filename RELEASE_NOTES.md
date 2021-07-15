@@ -41,6 +41,13 @@ Documentation
 
 * UPDATED: Handbook documentation of the `clean` flag.
 
+Library
+-------
+
+* UPDATED: The `redis` library tests to check for `REDIS_HOST` and `REDIS_PORT`
+environment variables as an alternative to the default `localhost` and `6379`
+values.
+
 Tools
 -----
 

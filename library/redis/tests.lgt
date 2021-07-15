@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Sean Charles. Adapted to Logtalk by Paulo Moura',
-		date is 2020-05-27,
+		date is 2021-07-15,
 		comment is 'Unit tests for the "redis" library.'
 	]).
 
@@ -37,6 +37,14 @@
 
 	:- uses(list, [
 		length/2
+	]).
+
+	:- uses(os, [
+		environment_variable/2
+	]).
+
+	:- uses(term_io, [
+		read_from_atom/2
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
@@ -51,30 +59,28 @@
 		:- uses(user, [sleep/1]).
 	:- endif.
 
-	% only run the tests if there's a Redis server running on localhost
+	% only run the tests if there's a Redis server running
 	condition :-
-		catch(
-			(connect(Connection), disconnect(Connection)),
-			_,
-			fail
-		).
+		server_host_port(Host, Port),
+		catch((connect(Host, Port, Connection), disconnect(Connection)), _, fail).
 
 	%% CONNECTION...
 
 	test(default_connection_and_echo) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, echo('GNU Prolog rocks!'), bulk(Output)),
 		disconnect(Connection),
 		Output == 'GNU Prolog rocks!'.
 
 	test(explicit_connection_and_echo) :-
-		connect(localhost, 6379, Connection),
+		server_host_port(Host, Port),
+		connect(Host, Port, Connection),
 		send(Connection, echo('GNU Prolog rocks!'), bulk(Output)),
 		disconnect(Connection),
 		Output == 'GNU Prolog rocks!'.
 
 	test(ping_the_server) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, ping, status(Output)),
 		disconnect(Connection),
 		Output == 'PONG'.
@@ -82,7 +88,7 @@
 	%% SERVER...
 
 	test(set_and_get_client_name) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, client(setname, 'Objitsu'), status(Set)),
 		send(Connection, client(getname), bulk(Get)),
 		disconnect(Connection),
@@ -90,7 +96,7 @@
 		Get == 'Objitsu'.
 
 	test(set_and_get_timeout) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, config(set, timeout, 86400), status(Set)),
 		send(Connection, config(get, timeout), [bulk(Key), bulk(Val)]),
 		disconnect(Connection),
@@ -99,7 +105,7 @@
 		Val == '86400'.
 
 	test(flushall_flushdb_and_dbsize) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status(OK1)),
 		send(Connection, set(test_key_1, 'Hello'), status(OK2)),
 		send(Connection, get(test_key_1), bulk(Val)),
@@ -117,7 +123,7 @@
 	%% KEYS...
 
 	test(key_creation_exists_set_get_and_deletion) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status(OK1)),
 		send(Connection, exists(test_key_1), number(Exists0)),
 		send(Connection, set(test_key_1, 'Hello'), status(OK2)),
@@ -133,7 +139,7 @@
 		Exists2 == 0.
 
 	test(key_expiry_with_set_ttl_expire_and_exists) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status(OK1)),
 		send(Connection, set(test_key_1, 'Hello'), status(OK2)),
 		send(Connection, ttl(test_key_1), number(Minus1)),
@@ -150,7 +156,7 @@
 	%% HASHES...
 
 	test(create_hash_with_data) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status('OK')),
 		send(Connection, exists(test_hash), number(0)),
 		send(Connection, hset(test_hash, name, 'Emacs The Viking'), number(1)),
@@ -160,7 +166,7 @@
 		disconnect(Connection).
 
 	test(previously_created_keys_exist) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hlen(test_hash), number(3)),
 		send(Connection, hexists(test_hash, name), number(1)),
 		send(Connection, hexists(test_hash, age), number(1)),
@@ -168,26 +174,26 @@
 		disconnect(Connection).
 
 	test(values_of_previously_created_keys) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hget(test_hash, name), bulk('Emacs The Viking')),
 		send(Connection, hget(test_hash, age), bulk('48')),
 		send(Connection, hget(test_hash, status), bulk('Thinking')),
 		disconnect(Connection).
 
 	test(integer_increment_of_hash_value) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hincrby(test_hash, age, -20), number(28)),
 		send(Connection, hincrby(test_hash, age, 20), number(48)),
 		disconnect(Connection).
 
 	test(float_increment_of_hash_value) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hincrbyfloat(test_hash, age, -0.5), bulk('47.5')),
 		send(Connection, hincrbyfloat(test_hash, age, 1.5), bulk('49')),
 		disconnect(Connection).
 
 	test(setting_multiple_keys_at_once) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hmset(test_hash,
 			new_field_1, 'Hello',
 			new_field_2, 'World',
@@ -195,19 +201,19 @@
 		disconnect(Connection).
 
 	test(getting_multiple_keys_previously_set) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hmget(test_hash, new_field_1, new_field_2, new_field_3),
 			[bulk('Hello'), bulk('World'), bulk('42')]),
 		disconnect(Connection).
 
 	test(getting_all_hash_keys_at_once) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hgetall(test_hash), X),
 		length(X, 12),
 		disconnect(Connection).
 
 	test(deleting_some_existing_fields) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, hdel(test_hash, name), number(1)),
 		send(Connection, hdel(test_hash, age), number(1)),
 		send(Connection, hdel(test_hash, status), number(1)),
@@ -218,54 +224,54 @@
 	%% LISTS...
 
 	test(create_a_list_with_a_single_value) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status('OK')),
 		send(Connection, lpush(test_list, 42), number(1)),
 		send(Connection, llen(test_list), number(1)),
 		disconnect(Connection).
 
 	test(pop_only_entry_from_a_list) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, lpop(test_list), bulk('42')),
 		send(Connection, llen(test_list), number(0)),
 		disconnect(Connection).
 
 	test(create_a_list_with_multiple_values_lpush_1) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, lpush(test_list_1, 'Hello', world, 42), number(3)),
 		send(Connection, llen(test_list_1), number(3)),
 		disconnect(Connection).
 
 	test(lrange_on_existing_list_with_lpush_1) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, lrange(test_list_1, 0, -1), [bulk('42'), bulk('world'), bulk('Hello')]),
 		disconnect(Connection).
 
 	test(create_a_list_with_multiple_values_lpush_2) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, rpush(test_list_2, 'Hello', world, 42), number(3)),
 		send(Connection, llen(test_list_2), number(3)),
 		disconnect(Connection).
 
 	test(lrange_on_existing_list_with_lpush_2) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, lrange(test_list_2, 0, -1), [bulk('Hello'), bulk('world'), bulk('42')]),
 		disconnect(Connection).
 
 	test(get_length_of_existing_list) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, llen(test_list_1), number(3)),
 		disconnect(Connection).
 
 	test(get_values_by_lindex_position) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, lindex(test_list_1,1), bulk('world')),
 		send(Connection, lindex(test_list_1,2), bulk('Hello')),
 		send(Connection, lindex(test_list_1,0), bulk('42')),
 		disconnect(Connection).
 
 	test(add_to_list_with_linset_command) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, linsert(test_list_1, before, 42, 'FRIST'), number(4)),
 		send(Connection, linsert(test_list_1, after, world, 'custard creams rock'), number(5)),
 		send(Connection, lindex(test_list_1, 3), bulk('custard creams rock')),
@@ -275,7 +281,7 @@
 		disconnect(Connection).
 
 	test(popping_with_lpop_and_rpop) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, lpop(test_list_1), bulk('FRIST')),
 		send(Connection, rpop(test_list_1), bulk('Hello')),
 		send(Connection, lpop(test_list_1), bulk('42')),
@@ -286,14 +292,14 @@
 	%% STRINGS...
 
 	test(basic_string_get_and_set) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status('OK')),
 		send(Connection, set(test_string, 'Hello World'), status('OK')),
 		send(Connection, get(test_string), bulk('Hello World')),
 		disconnect(Connection).
 
 	test(extended_set_and_get_with_expiry) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status('OK')),
 		send(Connection, set(test_string, 'Miller time!', ex, 1), status('OK')),
 		sleep(2),
@@ -301,17 +307,37 @@
 		disconnect(Connection).
 
 	test(append_to_an_existing_string) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, set(test_string, 'GNU Prolog'), status('OK')),
 		send(Connection, append(test_string, ' is Cool'), number(18)),
 		send(Connection, strlen(test_string), number(18)),
 		disconnect(Connection).
 
 	test(counting_bits_in_a_string) :-
-		connect(Connection),
+		server_connection(Connection),
 		send(Connection, flushall, status('OK')),
 		send(Connection, set('bitbucket(!)', 'U'), status('OK')),
 		send(Connection, bitcount('bitbucket(!)'), number(4)),
 		disconnect(Connection).
+
+	% auxiliary predicates
+
+	server_connection(Connection) :-
+		environment_variable('REDIS_HOST', Host),
+		environment_variable('REDIS_PORT', PortAtom),
+		read_from_atom(PortAtom, Port),
+		integer(Port),
+		!,
+		connect(Host, Port, Connection).
+	server_connection(Connection) :-
+		connect(Connection).
+
+	server_host_port(Host, Port) :-
+		environment_variable('REDIS_HOST', Host),
+		environment_variable('REDIS_PORT', PortAtom),
+		read_from_atom(PortAtom, Port),
+		integer(Port),
+		!.
+	server_host_port(localhost, 6379).
 
 :- end_object.
