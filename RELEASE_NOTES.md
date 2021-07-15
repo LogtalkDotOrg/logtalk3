@@ -36,6 +36,11 @@ for the same backend with the `clean` flag turned off.
 two backends that generate the same directory hashes and compiling with the
 `clean` flag turned off. Thanks to Andrew Davison for the bug report.
 
+Documentation
+-------------
+
+* UPDATED: Handbook documentation of the `clean` flag.
+
 Tools
 -----
 
