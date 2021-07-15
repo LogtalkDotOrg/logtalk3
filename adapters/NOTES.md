@@ -157,6 +157,9 @@ predicates, that trigger errors with some tools and examples. These issues
 are expected to be solved soon. For the best experience, use the latest
 Ciao Prolog git version.
 
+The first run of the `ciaolgt` integration script on POSIX systems may
+require the use of `sudo`.
+
 
 CxProlog 0.98.1 or later versions
 ---------------------------------
@@ -455,6 +458,10 @@ built-in predicates `logtalk_load/1-2` with the `clean` flag turned off.
 
 See the `scripts/embedding/xsb` directory for a sample shell script
 that can help in pre-compiling Logtalk.
+
+The first run of the `xsblgt` integration script on POSIX systems may require
+the use of `sudo`. The first run of the `Logtalk - XSB` integration shortcut
+on Windows may need to be run as administrator.
 
 
 YAP 6.3.4 and later versions
