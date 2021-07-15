@@ -48,6 +48,9 @@ Library
 environment variables as an alternative to the default `localhost` and `6379`
 values.
 
+* FIXED: Definition of the `os::operating_system_type/1` predicate for GNU
+Prolog would fail to detect Windows.
+
 Tools
 -----
 
