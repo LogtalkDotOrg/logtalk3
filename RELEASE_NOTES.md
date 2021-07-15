@@ -70,6 +70,12 @@ to check that all flag names are atoms and all flag values are bound.
 tests hanging on Prolog backends that don't check options validity before
 attempting to read a term.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Windows installer for the YAP 6.3.4 installer, which creates a
+`cwd` registry key instead of a `home` registry key as in previous installers.
+
 
 3.48.0 - July 6, 2021
 =====================
