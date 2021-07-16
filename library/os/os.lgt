@@ -49,9 +49,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:81:1,
+		version is 1:81:2,
 		author is 'Paulo Moura',
-		date is 2021-07-15,
+		date is 2021-07-16,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -318,7 +318,8 @@
 			{shell(Command, Status)}.
 
 		shell(Command) :-
-			{shell(Command)}.
+			{shell(Command, Status)},
+			Status =:= 0.
 
 		is_absolute_file_name(Path) :-
 			{expand_atom(Path, EnvVarExpandedPath),
@@ -341,27 +342,27 @@
 
 		delete_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(rmdir, ExpandedPath)
-			 ;	existence_error(directory, Directory)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(rmdir, ExpandedPath)}
+			;	existence_error(directory, Directory)
+			).
 
 		change_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(chdir, ExpandedPath)
-			 ;	existence_error(directory, Directory)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(chdir, ExpandedPath)}
+			;	existence_error(directory, Directory)
+			).
 
 		working_directory(Directory) :-
 			{path_sysop(cwd, Directory)}.
 
 		directory_files(Directory, Files) :-
 			absolute_file_name(Directory, Path),
-			{(	path_sysop(exists, Path) ->
-				findall(File, list_directory(Path, File), Files)
-			 ;	existence_error(directory, Directory)
-			 )}.
+			(	{path_sysop(exists, Path)} ->
+				{findall(File, list_directory(Path, File), Files)}
+			;	existence_error(directory, Directory)
+			).
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -375,53 +376,53 @@
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(modtime, ExpandedPath, Time)
-			 ;	existence_error(file, File)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(modtime, ExpandedPath, Time)}
+			;	existence_error(file, File)
+			).
 
 		file_size(File, Size) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(size, ExpandedPath, Size)
-			 ;	existence_error(file, File)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(size, ExpandedPath, Size)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(File, read) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(readable, ExpandedPath)
-			 ;	existence_error(file, File)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(readable, ExpandedPath)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(File, write) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(writable, ExpandedPath)
-			 ;	existence_error(file, File)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(writable, ExpandedPath)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(File, execute) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(executable, ExpandedPath)
-			 ;	existence_error(file, File)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(executable, ExpandedPath)}
+			;	existence_error(file, File)
+			).
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	path_sysop(exists, ExpandedPath) ->
-				path_sysop(rm, ExpandedPath)
-			 ;	existence_error(file, File)
-			 )}.
+			(	{path_sysop(exists, ExpandedPath)} ->
+				{path_sysop(rm, ExpandedPath)}
+			;	existence_error(file, File)
+			).
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldPath),
 			absolute_file_name(New, NewPath),
-			{(	path_sysop(exists, OldPath) ->
-				path_sysop(rename, OldPath, NewPath)
-			 ;	existence_error(file, Old)
-			 )}.
+			(	{path_sysop(exists, OldPath)} ->
+				{path_sysop(rename, OldPath, NewPath)}
+			;	existence_error(file, Old)
+			).
 
 		environment_variable(Variable, Value) :-
 			atom_concat('$', Variable, DollarVariable),
