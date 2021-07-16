@@ -53,6 +53,8 @@ values.
 * FIXED: Definition of the `os::operating_system_type/1` predicate for GNU
 Prolog would fail to detect Windows.
 
+* FIXED: Definition of the `os::file_permission/2` predicate for CxProlog.
+
 * FIXED: Definition of the `os::shell/1` predicate for XSB.
 
 * FIXED: Definition of `os` library predicates for XSB that may report file or

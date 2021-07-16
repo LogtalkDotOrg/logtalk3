@@ -49,7 +49,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:81:2,
+		version is 1:81:3,
 		author is 'Paulo Moura',
 		date is 2021-07-16,
 		comment is 'Portable operating-system access predicates.',
@@ -629,10 +629,10 @@
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{(	file_exists(ExpandedPath) ->
-				delete_file(ExpandedPath)
-			 ;	existence_error(file, File)
-			)}.
+			(	{file_exists(ExpandedPath)} ->
+				{delete_file(ExpandedPath)}
+			;	existence_error(file, File)
+			).
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldPath),
@@ -1137,18 +1137,18 @@
 			 fs_property(ExpandedPath, size, Size)}.
 
 		file_permission(File, read) :-
-			{(	absolute_file_name(File, ExpandedPath),
-				fs_exists_file(ExpandedPath) ->
-				fs_property(ExpandedPath, readable, true)
-			 ;	existence_error(file, File)
-			)}.
+			(	{absolute_file_name(File, ExpandedPath)},
+				{(fs_exists_file(ExpandedPath); fs_exists_dir(ExpandedPath))} ->
+				{fs_property(ExpandedPath, readable, true)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(File, write) :-
-			{(	absolute_file_name(File, ExpandedPath),
-				fs_exists_file(ExpandedPath) ->
-				fs_property(ExpandedPath, writable, true)
-			 ;	existence_error(file, File)
-			)}.
+			(	{absolute_file_name(File, ExpandedPath)},
+				{(fs_exists_file(ExpandedPath); fs_exists_dir(ExpandedPath))} ->
+				{fs_property(ExpandedPath, writable, true)}
+			;	existence_error(file, File)
+			).
 
 		delete_file(File) :-
 			{absolute_file_name(File, ExpandedPath),
