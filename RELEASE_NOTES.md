@@ -36,6 +36,11 @@ for the same backend with the `clean` flag turned off.
 two backends that generate the same directory hashes and compiling with the
 `clean` flag turned off. Thanks to Andrew Davison for the bug report.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Trealla Prolog adapter file to require 1.9.37 or later version.
+
 Documentation
 -------------
 
