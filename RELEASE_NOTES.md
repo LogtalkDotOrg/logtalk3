@@ -111,6 +111,9 @@ to check that all flag names are atoms and all flag values are bound.
 tests hanging on Prolog backends that don't check options validity before
 attempting to read a term.
 
+* FIXED: Tests for the `format/2-3` and `nl/0-1` predicates when run on Windows
+systems using GNU Prolog.
+
 Installers and installation scripts
 -----------------------------------
 
