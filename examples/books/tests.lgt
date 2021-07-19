@@ -23,14 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:2,
+		version is 1:1:3,
 		author is 'Paulo Moura',
-		date is 2020-09-26,
+		date is 2021-07-19,
 		comment is 'Unit tests for the "books" example.'
 	]).
 
 	:- if((
 		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
 		\+ current_logtalk_flag(prolog_dialect, swi)

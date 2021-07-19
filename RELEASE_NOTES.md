@@ -92,6 +92,9 @@ to run it on Windows.
 * FIXED: Workaround a XSB parser bug that prevented loading the `bench`
 example.
 
+* FIXED: Tests for the `around_methods`, `books`, `hailstone`, `hello_world`,
+`localizations`, and `patches` when run on Windows systems using GNU Prolog.
+
 Tests
 -----
 
