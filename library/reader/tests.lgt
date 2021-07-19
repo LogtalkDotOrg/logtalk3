@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2021-03-09,
+		date is 2021-07-19,
 		comment is 'Unit tests for the "reader" library.'
 	]).
 
@@ -37,9 +37,25 @@
 		file_path(empty, Path),
 		reader::file_to_codes(Path, Codes).
 
-	test(reader_file_to_codes_2_02, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10])) :-
-		file_path(lines, Path),
-		reader::file_to_codes(Path, Codes).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_file_to_codes_2_02, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10])) :-
+			file_path(lines, Path),
+			reader::file_to_codes(Path, Codes).
+
+	:- else.
+
+		test(reader_file_to_codes_2_02, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10])) :-
+			file_path(lines, Path),
+			reader::file_to_codes(Path, Codes).
+
+	:- endif.
 
 	test(reader_file_to_codes_3_01, true(Codes == [])) :-
 		file_path(empty, Path),
@@ -49,17 +65,49 @@
 		file_path(empty, Path),
 		reader::file_to_codes(Path, Codes, [65,66,67]).
 
-	test(reader_file_to_codes_3_03, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10,65,66,67])) :-
-		file_path(lines, Path),
-		reader::file_to_codes(Path, Codes, [65,66,67]).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_file_to_codes_3_03, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10,65,66,67])) :-
+			file_path(lines, Path),
+			reader::file_to_codes(Path, Codes, [65,66,67]).
+
+	:- else.
+
+		test(reader_file_to_codes_3_03, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10,65,66,67])) :-
+			file_path(lines, Path),
+			reader::file_to_codes(Path, Codes, [65,66,67]).
+
+	:- endif.
 
 	test(reader_file_to_chars_2_01, true(Chars == [])) :-
 		file_path(empty, Path),
 		reader::file_to_chars(Path, Chars).
 
-	test(reader_file_to_chars_2_02, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n'])) :-
-		file_path(lines, Path),
-		reader::file_to_chars(Path, Chars).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_file_to_chars_2_02, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n'])) :-
+			file_path(lines, Path),
+			reader::file_to_chars(Path, Chars).
+
+	:- else.
+
+		test(reader_file_to_chars_2_02, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n'])) :-
+			file_path(lines, Path),
+			reader::file_to_chars(Path, Chars).
+
+	:- endif.
 
 	test(reader_file_to_chars_3_01, true(Chars == [])) :-
 		file_path(empty, Path),
@@ -69,9 +117,25 @@
 		file_path(empty, Path),
 		reader::file_to_chars(Path, Chars, ['A','B','C']).
 
-	test(reader_file_to_chars_3_03, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n','A','B','C'])) :-
-		file_path(lines, Path),
-		reader::file_to_chars(Path, Chars, ['A','B','C']).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_file_to_chars_3_03, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n','A','B','C'])) :-
+			file_path(lines, Path),
+			reader::file_to_chars(Path, Chars, ['A','B','C']).
+
+	:- else.
+
+		test(reader_file_to_chars_3_03, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n','A','B','C'])) :-
+			file_path(lines, Path),
+			reader::file_to_chars(Path, Chars, ['A','B','C']).
+
+	:- endif.
 
 	test(reader_file_to_terms_2_01, true(Terms == [])) :-
 		file_path(empty, Path),
@@ -120,10 +184,27 @@
 		reader::stream_to_codes(Stream, Codes),
 		close(Stream).
 
-	test(reader_stream_to_codes_2_02, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10])) :-
-		text_file_stream(lines, Stream),
-		reader::stream_to_codes(Stream, Codes),
-		close(Stream).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_stream_to_codes_2_02, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_codes(Stream, Codes),
+			close(Stream).
+
+	:- else.
+
+		test(reader_stream_to_codes_2_02, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_codes(Stream, Codes),
+			close(Stream).
+
+	:- endif.
 
 	test(reader_stream_to_codes_3_01, true(Codes == [])) :-
 		text_file_stream(empty, Stream),
@@ -135,20 +216,54 @@
 		reader::stream_to_codes(Stream, Codes, [65,66,67]),
 		close(Stream).
 
-	test(reader_stream_to_codes_3_03, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10,65,66,67])) :-
-		text_file_stream(lines, Stream),
-		reader::stream_to_codes(Stream, Codes, [65,66,67]),
-		close(Stream).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_stream_to_codes_3_03, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10,65,66,67])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_codes(Stream, Codes, [65,66,67]),
+			close(Stream).
+
+	:- else.
+
+		test(reader_stream_to_codes_3_03, true(Codes == [97,98,99,10,100,101,102,10,103,104,105,10,65,66,67])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_codes(Stream, Codes, [65,66,67]),
+			close(Stream).
+
+	:- endif.
 
 	test(reader_stream_to_chars_2_01, true(Chars == [])) :-
 		text_file_stream(empty, Stream),
 		reader::stream_to_chars(Stream, Chars),
 		close(Stream).
 
-	test(reader_stream_to_chars_2_02, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n'])) :-
-		text_file_stream(lines, Stream),
-		reader::stream_to_chars(Stream, Chars),
-		close(Stream).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_stream_to_chars_2_02, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n'])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_chars(Stream, Chars),
+			close(Stream).
+
+	:- else.
+
+		test(reader_stream_to_chars_2_02, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n'])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_chars(Stream, Chars),
+			close(Stream).
+
+	:- endif.
 
 	test(reader_stream_to_chars_3_01, true(Chars == [])) :-
 		text_file_stream(empty, Stream),
@@ -160,10 +275,27 @@
 		reader::stream_to_chars(Stream, Chars, ['A','B','C']),
 		close(Stream).
 
-	test(reader_stream_to_chars_3_03, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n','A','B','C'])) :-
-		text_file_stream(lines, Stream),
-		reader::stream_to_chars(Stream, Chars, ['A','B','C']),
-		close(Stream).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(reader_stream_to_chars_3_03, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n','A','B','C'])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_chars(Stream, Chars, ['A','B','C']),
+			close(Stream).
+
+	:- else.
+
+		test(reader_stream_to_chars_3_03, true(Chars == [a,b,c,'\n',d,e,f,'\n',g,h,i,'\n','A','B','C'])) :-
+			text_file_stream(lines, Stream),
+			reader::stream_to_chars(Stream, Chars, ['A','B','C']),
+			close(Stream).
+
+	:- endif.
 
 	test(reader_stream_to_terms_2_01, true(Terms == [])) :-
 		text_file_stream(empty, Stream),
