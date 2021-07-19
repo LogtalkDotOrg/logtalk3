@@ -18,17 +18,18 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- dynamic(p/3).
-:- dynamic(q/3).
+:- dynamic(r/3).
 
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Jacinto Dávila',
-		date is 2021-02-04,
+		date is 2021-07-19,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -243,43 +244,25 @@
 
 	% round-trip testing with read/write user::p/3 where p/3 is dynamics
 	% reading file11.csv and writing on output.csv and diff them
-	test(csv_round_trip_input_01, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
+	test(csv_round_trip_input_01, true) :-
 		^^suppress_text_output,
-		user::retractall(p(_, _, _)),
-		file_path('test_files/input01.csv', Path1),
-		file_path('test_files/output01.csv', Path2),
-		csv::read_file(Path1, user, p/3),
-		csv::write_file(Path2, user, p/3),
-		atom_concat('diff ', Path1, Command0),
-		atom_concat(Command0, ' ', Command1),
-		atom_concat(Command1, Path2, Command),
-		os::shell(Command, Diff).
+		file_path('test_files/input01.csv', Input),
+		file_path('test_files/output01.csv', Output),
+		roundtrip(keep, comma, false, read_file, Input, Output, p/3, r/3).
 
-	% round trip as before but without regarding dquotes: _IgnoreQuotes_==true
-	test(csv_round_trip_input_02, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
+	% round trip as before but without regarding double-quotes: _IgnoreQuotes_==true
+	test(csv_round_trip_input_02, true) :-
 		^^suppress_text_output,
-		user::retractall(q(_, _, _)),
-		file_path('test_files/input02.csv', Path1),
-		file_path('test_files/output02.csv', Path2),
-		csv(keep, comma, true)::read_file(Path1, user, q/3),
-		csv(keep, comma, true)::write_file(Path2, user, q/3),
-		atom_concat('diff ', Path1, Command0),
-		atom_concat(Command0, ' ', Command1),
-		atom_concat(Command1, Path2, Command),
-		os::shell(Command, Diff).
+		file_path('test_files/input02.csv', Input),
+		file_path('test_files/output02.csv', Output),
+		roundtrip(keep, comma, true, read_file, Input, Output, p/3, r/3).
 
 	%
-	test(csv_round_trip_input_02_read_by_line, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
+	test(csv_round_trip_input_02_read_by_line, true) :-
 		^^suppress_text_output,
-		user::retractall(q(_, _, _)),
-		file_path('test_files/input02.csv', Path1),
-		file_path('test_files/output02.csv', Path2),
-		csv(keep, comma, true)::read_file_by_line(Path1, user, q/3),
-		csv(keep, comma, true)::write_file(Path2, user, q/3),
-		atom_concat('diff ', Path1, Command0),
-		atom_concat(Command0, ' ', Command1),
-		atom_concat(Command1, Path2, Command),
-		os::shell(Command, Diff).
+		file_path('test_files/input02.csv', Input),
+		file_path('test_files/output02.csv', Output),
+		roundtrip(keep, comma, true, read_file_by_line, Input, Output, p/3, r/3).
 
 	% guess arity
 	% reading that file from https://www.stats.govt.nz/large-datasets/csv-files-for-download/
@@ -293,5 +276,18 @@
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, File, Path).
+
+	roundtrip(Header, Separator, IgnoreQuotes, Read, Input, Output, Functor1/Arity1, Functor2/Arity2) :-
+		functor(Goal1, Functor1, Arity1),
+		user::retractall(Goal1),
+		functor(Goal2, Functor2, Arity2),
+		user::retractall(Goal2),
+		ReadMessage1 =.. [Read, Input, user, Functor1/Arity1],
+		csv(Header, Separator, IgnoreQuotes)::ReadMessage1,
+		csv(Header, Separator, IgnoreQuotes)::write_file(Output, user, Functor1/Arity1),
+		ReadMessage2 =.. [Read, Output, user, Functor2/Arity2],
+		csv(Header, Separator, IgnoreQuotes)::ReadMessage2,
+		forall(user::Goal1, user::Goal2),
+		forall(user::Goal2, user::Goal1).
 
 :- end_object.

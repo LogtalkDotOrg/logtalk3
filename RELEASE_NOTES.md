@@ -49,8 +49,8 @@ Documentation
 Library
 -------
 
-* CHANGED: Roundtrip test for the `json` library to not require the `diff`
-shell command.
+* CHANGED: Roundtrip tests for the `csv` and `json` libraries to not require
+the `diff` shell command.
 
 * ADDED: Additional test for the `os::file_permission/2` predicate.
 
