@@ -61,6 +61,9 @@ Windows operating-systems.
 environment variables as an alternative to the default `localhost` and `6379`
 values.
 
+* FIXED: Tests for the `hook_objects` library when run on Windows systems using
+GNU Prolog.
+
 * FIXED: Tests for the `reader` library when run on Windows systems.
 
 * FIXED: Tests for the `os::shell/1-2` predicates to use a command available
