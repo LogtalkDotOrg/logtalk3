@@ -38,8 +38,9 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(redis(tester)).
 
-The tests assume a local Redis server running on the default port. If
-the server is not detected, the tests are skipped.
+The tests assume a localhost Redis server running on the default port
+(6379) if the ``REDIS_HOST`` and ``REDIS_PORT`` environment variables
+are not defined. If the server is not detected, the tests are skipped.
 
 The unit tests were originally written by Sean Charles for his GNU
 Prolog Redis client library:

@@ -278,8 +278,9 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(redis(tester)).
 </pre></div>
 </div>
-<p>The tests assume a local Redis server running on the default port. If
-the server is not detected, the tests are skipped.</p>
+<p>The tests assume a localhost Redis server running on the default port
+(6379) if the <code class="docutils literal notranslate"><span class="pre">REDIS_HOST</span></code> and <code class="docutils literal notranslate"><span class="pre">REDIS_PORT</span></code> environment variables
+are not defined. If the server is not detected, the tests are skipped.</p>
 <p>The unit tests were originally written by Sean Charles for his GNU
 Prolog Redis client library:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>github.com<span class="o">/</span>emacstheviking<span class="o">/</span>gnuprolog<span class="o">-</span>redisclient
