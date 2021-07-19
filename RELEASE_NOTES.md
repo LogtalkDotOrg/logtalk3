@@ -49,6 +49,9 @@ Documentation
 Library
 -------
 
+* CHANGED: Roundtrip test for the `json` library to not require the `diff`
+shell command.
+
 * ADDED: Additional test for the `os::file_permission/2` predicate.
 
 * UPDATED: The `redis` library tests to check for `REDIS_HOST` and `REDIS_PORT`

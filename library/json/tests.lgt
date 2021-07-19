@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-05-17,
+		date is 2021-07-19,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.',
 		parameters is [
 			'Collection' - 'JSON files directory.'
@@ -113,16 +113,9 @@
 		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))),
 		forall(fail_named(File, Files), assertion(File, (catch(json::parse(file(File), _), Error, true), nonvar(Error)))).
 
-	test(roundtrip_hexadecimals, true(Diff == 0), [condition(os::shell('diff --version > /dev/null 2>&1'))]) :-
+	test(roundtrip_hexadecimals, true(roundtrip(File))) :-
 		^^suppress_text_output,
-		file_path('test_files/simple/hexadecimals.json', Path1),
-		file_path('test_files/simple/output01.json', Path2),
-		parse(file(Path1), Object),
-		generate(file(Path2), Object),
-		atom_concat('diff ', Path1, Command0),
-		atom_concat(Command0, ' ', Command1),
-		atom_concat(Command1, Path2, Command),
-		shell(Command, Diff).
+		file_path('test_files/simple/hexadecimals.json', File).
 
 	test(encode_pair_string_number, true( A == '{"a":1}' ) ) :-
 		generate(atom(A), {a-1}).
@@ -190,7 +183,7 @@
 
 	roundtrip(File) :-
 		parse(file(File), Prolog), generate(codes(Codes), Prolog),
-		dbg('Prolog term read from file and generated as String'-[Prolog, Codes]).
+		dbg('Prolog term read from file and generated as a list of codes'-[Prolog, Codes]).
 
 	file_path(File, Path) :-
 		this(This),
