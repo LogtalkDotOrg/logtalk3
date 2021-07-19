@@ -58,6 +58,9 @@ the `diff` shell command.
 environment variables as an alternative to the default `localhost` and `6379`
 values.
 
+* FIXED: Tests for the `os::shell/1-2` predicates to use a command available
+in both POSIX and Windows systems.
+
 * FIXED: Definition of the `os::operating_system_type/1` predicate for GNU
 Prolog would fail to detect Windows.
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:22:1,
 		author is 'Paulo Moura',
-		date is 2021-07-16,
+		date is 2021-07-19,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -468,14 +468,14 @@
 		os::shell(cd).
 
 	test(os_shell_1_02) :-
-		\+ os::shell(false).
+		\+ os::shell('cd non_existing_directory').
 
 	test(os_shell_2_01) :-
 		os::shell(cd, Exit),
 		Exit == 0.
 
 	test(os_shell_2_02) :-
-		os::shell(false, Exit),
+		os::shell('cd non_existing_directory', Exit),
 		Exit \== 0.
 
 	% os_types category tests
