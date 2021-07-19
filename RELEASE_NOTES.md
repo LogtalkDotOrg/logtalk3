@@ -54,6 +54,9 @@ the `diff` shell command.
 
 * ADDED: Additional test for the `os::file_permission/2` predicate.
 
+* ADDED: Experimental support for using the `git` library when running on
+Windows operating-systems.
+
 * UPDATED: The `redis` library tests to check for `REDIS_HOST` and `REDIS_PORT`
 environment variables as an alternative to the default `localhost` and `6379`
 values.

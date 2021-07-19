@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-11-12,
+		date is 2021-07-19,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -33,17 +33,62 @@
 		shell/1, temporary_directory/1, pid/1, delete_file/1, path_concat/3
 	]).
 
-	branch(Directory, Branch) :-
-		temporary_file(Temporary),
-		atom_concat('cd ', Directory, Command0),
-		atom_concat(Command0, ' && git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d \'\\n\' | tr -d \'\\r\' > ', Command1),
-		atom_concat(Command1, Temporary, Command),
-		(	shell(Command) ->
-			data(Temporary, Branch),
-			Branch \== ''
-		;	delete_file(Temporary),
-			fail
-		).
+	:- if(os::operating_system_type(windows)).
+
+		branch(Directory, Branch) :-
+			temporary_file(Temporary),
+			atom_concat('cd ', Directory, Command0),
+			atom_concat(Command0, ' & git rev-parse --abbrev-ref HEAD >nul 2>&1 > ', Command1),
+			atom_concat(Command1, Temporary, Command),
+			(	shell(Command) ->
+				data_clean(Temporary, Branch),
+				Branch \== ''
+			;	delete_file(Temporary),
+				fail
+			).
+
+		commit_log(Directory, Format, Output) :-
+			temporary_file(Temporary),
+			atom_concat('cd ', Directory, Command0),
+			atom_concat(Command0, ' & git log --oneline -n 1 --pretty=format:"', Command1),
+			atom_concat(Command1, Format, Command2),
+			atom_concat(Command2, '" >nul 2>&1 > ', Command3),
+			atom_concat(Command3, Temporary, Command),
+			(	shell(Command) ->
+				data_raw(Temporary, Output)
+			;	delete_file(Temporary),
+				fail
+			).
+
+	:- else.
+
+		branch(Directory, Branch) :-
+			temporary_file(Temporary),
+			atom_concat('cd ', Directory, Command0),
+			atom_concat(Command0, ' && git rev-parse --abbrev-ref HEAD 2>/dev/null > ', Command1),
+			atom_concat(Command1, Temporary, Command),
+			(	shell(Command) ->
+				data_clean(Temporary, Branch),
+				Branch \== ''
+			;	delete_file(Temporary),
+				fail
+			).
+
+		commit_log(Directory, Format, Output) :-
+			temporary_file(Temporary),
+			atom_concat('cd ', Directory, Command0),
+			atom_concat(Command0, ' && git log --oneline -n 1 --pretty=format:"', Command1),
+			atom_concat(Command1, Format, Command2),
+			atom_concat(Command2, '" 2>/dev/null > ', Command3),
+			atom_concat(Command3, Temporary, Command),
+			(	shell(Command) ->
+				data_raw(Temporary, Output)
+			;	delete_file(Temporary),
+				fail
+			).
+
+	:- endif.
+
 
 	commit_author(Directory, Hash) :-
 		commit_log(Directory, '%an', Hash).
@@ -60,19 +105,6 @@
 	commit_message(Directory, Message) :-
 		commit_log(Directory, '%B', Message).
 
-	commit_log(Directory, Format, Output) :-
-		temporary_file(Temporary),
-		atom_concat('cd ', Directory, Command0),
-		atom_concat(Command0, ' && git log --oneline -n 1 --pretty=format:"', Command1),
-		atom_concat(Command1, Format, Command2),
-		atom_concat(Command2, '" 2>/dev/null > ', Command3),
-		atom_concat(Command3, Temporary, Command),
-		(	shell(Command) ->
-			data(Temporary, Output)
-		;	delete_file(Temporary),
-			fail
-		).
-
 	% auxiliary predicates
 
 	temporary_file(Temporary) :-
@@ -83,19 +115,38 @@
 		temporary_directory(Directory),
 		path_concat(Directory, Basename, Temporary).
 
-	data(File, Data) :-
+	data_clean(File, Data) :-
 		open(File, read, Stream),
-		get_codes(Stream, Codes),
+		get_codes_clean(Stream, Codes),
 		atom_codes(Data, Codes),
 		close(Stream),
 		delete_file(File).
 
-	get_codes(Stream, Codes) :-
+	data_raw(File, Data) :-
+		open(File, read, Stream),
+		get_codes_raw(Stream, Codes),
+		atom_codes(Data, Codes),
+		close(Stream),
+		delete_file(File).
+
+	get_codes_clean(Stream, Codes) :-
+		get_code(Stream, Code),
+		(	Code =:= -1 ->
+			Codes = []
+		;	Code =:= 10 ->
+			get_codes_clean(Stream, Codes)
+		;	Code =:= 13 ->
+			get_codes_clean(Stream, Codes)
+		;	Codes = [Code| Rest],
+			get_codes_clean(Stream, Rest)
+		).
+
+	get_codes_raw(Stream, Codes) :-
 		get_code(Stream, Code),
 		(	Code =:= -1 ->
 			Codes = []
 		;	Codes = [Code| Rest],
-			get_codes(Stream, Rest)
+			get_codes_raw(Stream, Rest)
 		).
 
 :- end_object.

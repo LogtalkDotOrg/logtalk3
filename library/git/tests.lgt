@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-11-12,
+		date is 2021-07-19,
 		comment is 'Unit tests for the "git" library.'
 	]).
 
@@ -37,23 +37,45 @@
 
 	cover(git).
 
-	condition :-
-		os::shell('git --version > /dev/null 2>&1'),
-		os::shell('unzip -v > /dev/null 2>&1').
+	:- if(os::operating_system_type(windows)).
 
-	setup :-
-		test_repo(Repo, Directory),
-		atom_concat(Repo, '.zip', Zip),
-		atom_concat('unzip ', Zip, Command0),
-		atom_concat(Command0, ' -d ', Command1),
-		atom_concat(Command1, Directory, Command),
-		writeq(os::shell(Command)), nl,
-		os::shell(Command).
+		condition :-
+			os::shell('git --version >nul 2>&1'),
+			os::shell('tar --version >nul 2>&1').
 
-	cleanup :-
-		test_repo(Repo, _),
-		atom_concat('rm -rf ', Repo, Command),
-		os::shell(Command).
+		setup :-
+			test_repo(Repo, Directory),
+			atom_concat(Repo, '.zip', Zip),
+			atom_concat('tar -xf ', Zip, Command0),
+			atom_concat(Command0, ' -C ', Command1),
+			atom_concat(Command1, Directory, Command),
+			os::shell(Command).
+
+		cleanup :-
+			test_repo(Repo, _),
+			atom_concat('rmdir /s /q ', Repo, Command),
+			os::shell(Command).
+
+	:- else.
+
+		condition :-
+			os::shell('git --version > /dev/null 2>&1'),
+			os::shell('unzip -v > /dev/null 2>&1').
+
+		setup :-
+			test_repo(Repo, Directory),
+			atom_concat(Repo, '.zip', Zip),
+			atom_concat('unzip ', Zip, Command0),
+			atom_concat(Command0, ' -d ', Command1),
+			atom_concat(Command1, Directory, Command),
+			os::shell(Command).
+
+		cleanup :-
+			test_repo(Repo, _),
+			atom_concat('rm -rf ', Repo, Command),
+			os::shell(Command).
+
+	:- endif.
 
 	% when the directory is not a git repo, the predicates
 	% are expected to fail
