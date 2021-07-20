@@ -38,6 +38,7 @@ variable load_cmd "logtalk"
 # variable load_cmd "gplgt"
 # variable load_cmd "tplgt.sh"
 # variable load_cmd "C:\\\\Program\\ Files\\\\swipl\\\\bin\\\\swipl.exe -s \"C:/Program Files (x86)/Logtalk/integration/logtalk_swi.pl\""
+# variable load_cmd "C:\\\\Program\\ Files\\\\ECLiPSe\\ 7.0\\\\lib\\\\x86_64_nt\\\\eclipse.exe -L iso -t user -b \"//C/Program Files (x86)/Logtalk/integration/logtalk_eclipse.pl\""
 
 proc connect {} {
 	# Open as file
