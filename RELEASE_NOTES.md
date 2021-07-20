@@ -52,6 +52,10 @@ Library
 * CHANGED: Roundtrip tests for the `csv` and `json` libraries to not require
 the `diff` shell command.
 
+* CHANGED: The definition of the `os::temporary_directory/1` predicate
+to expand the directory to an absolute path for a more consistent path
+representation on Windows operating-systems.
+
 * ADDED: Definition for the `os::shell/1-2` predicates for ECLiPSe when run on
 Windows operating-systems.
 

@@ -51,7 +51,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:82:1,
+		version is 1:83:0,
 		author is 'Paulo Moura',
 		date is 2021-07-20,
 		comment is 'Portable operating-system access predicates.',
@@ -2061,9 +2061,10 @@
 
 	temporary_directory(Directory) :-
 		(	operating_system_type(windows) ->
-			temporary_directory_windows(Directory)
-		;	temporary_directory_unix(Directory)
-		).
+			temporary_directory_windows(Directory0)
+		;	temporary_directory_unix(Directory0)
+		),
+		absolute_file_name(Directory0, Directory).
 
 	temporary_directory_windows(Directory) :-
 		(	environment_variable('TEMP', Directory)
@@ -2254,7 +2255,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		Dialect \== swi, Dialect \== qp, Dialect \== quintus
+		Dialect \== swi, Dialect \== qp, Dialect \== quintus, Dialect \== trealla, Dialect \== lvm
 	)).
 
 		make_directory_path_portable(Path) :-
