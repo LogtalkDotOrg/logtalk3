@@ -57,6 +57,9 @@ the `diff` shell command.
 * ADDED: Experimental support for using the `git` library when running on
 Windows operating-systems.
 
+* IMPROVED: Handling of operating-system paths in the `os` library for ECLiPSe
+when run on Windows systems.
+
 * UPDATED: The `redis` library tests to check for `REDIS_HOST` and `REDIS_PORT`
 environment variables as an alternative to the default `localhost` and `6379`
 values.
@@ -85,6 +88,8 @@ Tools
 * IMPROVED: The `lgtunit` default message when a test set is skipped to include
 the test object identifier to provide more detailed information when tests are
 skipped only for some parameterizations of a test object.
+
+* FIXED: Tests for the `help` tool when using ECLiPSe on Windows systems.
 
 Examples
 --------

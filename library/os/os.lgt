@@ -49,9 +49,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:81:3,
+		version is 1:81:4,
 		author is 'Paulo Moura',
-		date is 2021-07-16,
+		date is 2021-07-20,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -821,10 +821,11 @@
 			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{canonical_path_name(Path, ExpandedPath)}.	% works with strings and atoms
+			{os_file_name(InternalPath, Path),
+			 canonical_path_name(InternalPath, ExpandedPath)}.
 
 		make_directory(Directory) :-
-			{canonical_path_name(Directory, ExpandedPath)},
+			absolute_file_name(Directory, ExpandedPath),
 			(	{exists(ExpandedPath), get_file_info(ExpandedPath, type, directory)} ->
 				true
 			;	{mkdir(ExpandedPath)}
@@ -835,19 +836,19 @@
 
 		delete_directory(Directory) :-
 			context(Context),
-			{canonical_path_name(Directory, ExpandedPath),
-			 (	exists(ExpandedPath) ->
-			 	delete(ExpandedPath)
-			 ;	throw(error(existence_error(directory,Directory), logtalk(delete_directory(Directory),Context)))
-			 )}.
+			absolute_file_name(Directory, ExpandedPath),
+			(	{exists(ExpandedPath)} ->
+			 	{delete(ExpandedPath)}
+			;	throw(error(existence_error(directory,Directory), logtalk(delete_directory(Directory),Context)))
+			).
 
 		change_directory(Directory) :-
 			context(Context),
-			{canonical_path_name(Directory, ExpandedPath),
-			 (	exists(ExpandedPath) ->
-			 	cd(ExpandedPath)
-			 ;	throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
-			 )}.
+			absolute_file_name(Directory, ExpandedPath),
+			(	{exists(ExpandedPath)} ->
+			 	{cd(ExpandedPath)}
+			;	throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
+			).
 
 		working_directory(Directory) :-
 			{getcwd(DirectoryString),
@@ -855,9 +856,9 @@
 
 		directory_files(Directory, Files) :-
 			context(Context),
-			{canonical_path_name(Directory, Path),
-			 (	exists(Path) ->
-   			 	read_directory(Path, '*', Directories0, Files0),
+			absolute_file_name(Directory, ExpandedPath),
+			{(	exists(ExpandedPath) ->
+   			 	read_directory(ExpandedPath, '*', Directories0, Files0),
    			 	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
    			 	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
    			 	append(['.', '..'| Directories1], Files1, Files)
@@ -865,71 +866,71 @@
 			 )}.
 
 		directory_exists(Directory) :-
-			{canonical_path_name(Directory, ExpandedPath),
-			 exists(ExpandedPath),
+			absolute_file_name(Directory, ExpandedPath),
+			{exists(ExpandedPath),
 			 get_file_info(ExpandedPath, type, directory)}.
 
 		file_exists(File) :-
-			{canonical_path_name(File, ExpandedPath),
-			 exists(ExpandedPath),
+			absolute_file_name(File, ExpandedPath),
+			{exists(ExpandedPath),
 			 get_file_info(ExpandedPath, type, file)}.
 
 		file_modification_time(File, Time) :-
 			context(Context),
-			{(	canonical_path_name(File, ExpandedPath),
-				exists(ExpandedPath) ->
-			 	get_file_info(ExpandedPath, mtime, Time)
-			 ;	throw(error(existence_error(file,File), logtalk(file_modification_time(File,Time),Context)))
-			 )}.
+			(	absolute_file_name(File, ExpandedPath),
+				{exists(ExpandedPath)} ->
+				{get_file_info(ExpandedPath, mtime, Time)}
+			;	throw(error(existence_error(file,File), logtalk(file_modification_time(File,Time),Context)))
+			).
 
 		file_size(File, Size) :-
 			context(Context),
-			{(	canonical_path_name(File, ExpandedPath),
-				exists(ExpandedPath) ->
-				get_file_info(ExpandedPath, size, Size)
-			 ;	throw(error(existence_error(file,File), logtalk(file_size(File,Size),Context)))
-			 )}.
+			(	absolute_file_name(File, ExpandedPath),
+				{exists(ExpandedPath)} ->
+				{get_file_info(ExpandedPath, size, Size)}
+			;	throw(error(existence_error(file,File), logtalk(file_size(File,Size),Context)))
+			).
 
 		file_permission(File, read) :-
 			context(Context),
-			{(	canonical_path_name(File, ExpandedPath),
-				exists(ExpandedPath) ->
-				get_file_info(ExpandedPath, readable, on)
-			 ;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
-			 )}.
+			(	absolute_file_name(File, ExpandedPath),
+				{exists(ExpandedPath)} ->
+				{get_file_info(ExpandedPath, readable, on)}
+			;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
+			).
 
 		file_permission(File, write) :-
 			context(Context),
-			{(	canonical_path_name(File, ExpandedPath),
-				exists(ExpandedPath) ->
-				get_file_info(ExpandedPath, writable, on)
-			 ;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
-			 )}.
+			(	absolute_file_name(File, ExpandedPath),
+				{exists(ExpandedPath)} ->
+				{get_file_info(ExpandedPath, writable, on)}
+			;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
+			).
 
 		file_permission(File, execute) :-
 			context(Context),
-			{(	canonical_path_name(File, ExpandedPath),
-				exists(ExpandedPath) ->
-				get_file_info(ExpandedPath, executable, on)
-			 ;	throw(error(existence_error(file,File), logtalk(file_permission(File,execute),Context)))
-			 )}.
+			(	absolute_file_name(File, ExpandedPath),
+				{exists(ExpandedPath)} ->
+				{get_file_info(ExpandedPath, executable, on)}
+			;	throw(error(existence_error(file,File), logtalk(file_permission(File,execute),Context)))
+			).
 
 		delete_file(File) :-
 			context(Context),
-			{canonical_path_name(File, ExpandedPath),
-			 (	exists(ExpandedPath) ->
-			 	delete(ExpandedPath)
-			 ;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
-			 )}.
+			absolute_file_name(File, ExpandedPath),
+			(	{exists(ExpandedPath)} ->
+			 	{delete(ExpandedPath)}
+			;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
+			).
 
 		rename_file(Old, New) :-
 			context(Context),
-			{canonical_path_name(Old, OldPath),
-			 (	exists(OldPath) ->
-   			 	canonical_path_name(New, NewPath),
-   			 	rename(OldPath, NewPath)
-			 ;	throw(error(existence_error(file,Old), logtalk(rename_file(Old,New),Context)))
-			 )}.
+			absolute_file_name(Old, OldPath),
+			(	{exists(OldPath)} ->
+   			 	absolute_file_name(New, NewPath),
+   			 	{rename(OldPath, NewPath)}
+			;	throw(error(existence_error(file,Old), logtalk(rename_file(Old,New),Context)))
+			).
 
 		environment_variable(Variable, Value) :-
 			{getenv(Variable, ValueString),
