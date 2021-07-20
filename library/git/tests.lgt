@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-20,
 		comment is 'Unit tests for the "git" library.'
 	]).
 
@@ -53,8 +53,8 @@
 
 		cleanup :-
 			test_repo(Repo, _),
-			atom_concat('rmdir /s /q ', Repo, Command),
-			os::shell(Command).
+			atom_concat('rmdir /s /q "', Repo, Command0),
+			atom_concat(Command0, '"', Command),
 
 	:- else.
 
