@@ -39,7 +39,7 @@ two backends that generate the same directory hashes and compiling with the
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The Trealla Prolog adapter file to require 1.9.37 or later version.
+* UPDATED: The Trealla Prolog adapter file to require 1.9.38 or later version.
 
 Documentation
 -------------
