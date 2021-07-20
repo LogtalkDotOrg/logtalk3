@@ -49,7 +49,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:81:4,
+		version is 1:82:0,
 		author is 'Paulo Moura',
 		date is 2021-07-20,
 		comment is 'Portable operating-system access predicates.',
@@ -808,9 +808,12 @@
 		pid(PID) :-
 			{get_flag(pid, PID)}.
 
-		shell(Command, Status) :-	% for UNIX anyway...
-			{getenv('SHELL', Shell),
-			 exec([Shell,'-c',Command], [], Pid),
+		shell(Command, Status) :-
+			{(	getenv('SHELL', Shell) ->
+			 	exec([Shell, '-c', Command], [], Pid)
+			 ;	getenv('COMSPEC', _),
+			 	exec([cmd, '/c', Command], [], Pid)
+			 ),
 			 wait(Pid, Code),
 			 Status is Code >> 8 /\ 255}.
 

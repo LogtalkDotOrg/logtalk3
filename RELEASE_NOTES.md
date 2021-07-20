@@ -52,6 +52,9 @@ Library
 * CHANGED: Roundtrip tests for the `csv` and `json` libraries to not require
 the `diff` shell command.
 
+* ADDED: Definition for the `os::shell/1-2` predicates for ECLiPSe when run on
+Windows systems.
+
 * ADDED: Additional test for the `os::file_permission/2` predicate.
 
 * ADDED: Experimental support for using the `git` library when running on
