@@ -84,8 +84,8 @@ Prolog would fail to detect Windows operating-systems.
 
 * FIXED: Definition of the `os::file_permission/2` predicate for CxProlog.
 
-* FIXED: Definitions of the `os::shell/1-2` predicates for SICStus Prolog when
-running on Windows operating-systems.
+* FIXED: Definitions of the `os::shell/1-2` predicates for SICStus Prolog and
+SWI-Prolog when running on Windows operating-systems.
 
 * FIXED: Definition of the `os::shell/1` predicate for XSB.
 

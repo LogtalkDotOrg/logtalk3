@@ -51,7 +51,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:83:0,
+		version is 1:83:1,
 		author is 'Paulo Moura',
 		date is 2021-07-20,
 		comment is 'Portable operating-system access predicates.',
@@ -80,10 +80,14 @@
 			current_prolog_flag(pid, PID).
 
 		shell(Command, Status) :-
-			{shell(Command, Status)}.
+			(	current_prolog_flag(windows, true) ->
+				atom_concat('cmd.exe /C ', Command, ExtendedCommand)
+			;	ExtendedCommand = Command
+			),
+			{shell(ExtendedCommand, Status)}.
 
 		shell(Command) :-
-			{shell(Command)}.
+			shell(Command, 0).
 
 		is_absolute_file_name(Path) :-
 			{is_absolute_file_name(Path)}.
