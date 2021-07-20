@@ -27,7 +27,7 @@
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-	:- use_module(library(system3)).
+	:- use_module(library(system3), [shell/2]).
 :- elif(current_logtalk_flag(prolog_dialect, scryer)).
 	:- use_module(library(lists)).
 	:- use_module(library(files)).
