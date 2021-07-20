@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on July 14, 2021
+%  Last updated on July 20, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -22,10 +22,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- use_module(library(file_systems)).
 :- use_module(library(system)).
-:- use_module(library(system3), [pid/1, shell/1, shell/2]).
+:- use_module(library(system3), [pid/1]).
 :- use_module(library(lists), [select/3]).
 :- use_module(library(terms), [term_hash/2, term_hash/4]).
 

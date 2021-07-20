@@ -53,7 +53,7 @@ Library
 the `diff` shell command.
 
 * ADDED: Definition for the `os::shell/1-2` predicates for ECLiPSe when run on
-Windows systems.
+Windows operating-systems.
 
 * ADDED: Additional test for the `os::file_permission/2` predicate.
 
@@ -61,24 +61,27 @@ Windows systems.
 Windows operating-systems.
 
 * IMPROVED: Handling of operating-system paths in the `os` library for ECLiPSe
-when run on Windows systems.
+when run on Windows operating-systems.
 
 * UPDATED: The `redis` library tests to check for `REDIS_HOST` and `REDIS_PORT`
 environment variables as an alternative to the default `localhost` and `6379`
 values.
 
-* FIXED: Tests for the `hook_objects` library when run on Windows systems using
-GNU Prolog.
+* FIXED: Tests for the `hook_objects` library when run on Windows
+operating-systems using GNU Prolog.
 
-* FIXED: Tests for the `reader` library when run on Windows systems.
+* FIXED: Tests for the `reader` library when run on Windows operating-systems.
 
 * FIXED: Tests for the `os::shell/1-2` predicates to use a command available
-in both POSIX and Windows systems.
+in both POSIX and Windows operating-systems.
 
 * FIXED: Definition of the `os::operating_system_type/1` predicate for GNU
-Prolog would fail to detect Windows.
+Prolog would fail to detect Windows operating-systems.
 
 * FIXED: Definition of the `os::file_permission/2` predicate for CxProlog.
+
+* FIXED: Definitions of the `os::shell/1-2` predicates for SICStus Prolog when
+running on Windows operating-systems.
 
 * FIXED: Definition of the `os::shell/1` predicate for XSB.
 

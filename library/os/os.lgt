@@ -26,6 +26,8 @@
 	:- use_module(library(calendar)).
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
+:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- use_module(library(system3)).
 :- elif(current_logtalk_flag(prolog_dialect, scryer)).
 	:- use_module(library(lists)).
 	:- use_module(library(files)).
@@ -49,7 +51,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:82:0,
+		version is 1:82:1,
 		author is 'Paulo Moura',
 		date is 2021-07-20,
 		comment is 'Portable operating-system access predicates.',
@@ -683,10 +685,13 @@
 			{pid(PID)}.
 
 		shell(Command, Status) :-
-			{shell(Command, Status)}.
+			{shell(Command, Status)},
+			!.	% workaround SICStus Prolog bug in shell/2
 
 		shell(Command) :-
-			{shell(Command)}.
+			{shell(Command, Status)},
+			!,	% workaround SICStus Prolog bug in shell/2
+			Status =:= 0.
 
 		is_absolute_file_name(Path) :-
 			operating_system_type(Type),
