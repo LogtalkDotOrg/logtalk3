@@ -23,22 +23,23 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-21,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
 	:- uses(os, [
-		shell/1, temporary_directory/1, pid/1, delete_file/1, path_concat/3
+		change_directory/1, delete_file/1, path_concat/3,
+		pid/1, temporary_directory/1, shell/1
 	]).
 
 	:- if(os::operating_system_type(windows)).
 
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),
-			atom_concat('cd ', Directory, Command0),
-			atom_concat(Command0, ' & git rev-parse --abbrev-ref HEAD >nul 2>&1 > ', Command1),
+			atom_concat('git -C ', Directory, Command0),
+			atom_concat(Command0, ' rev-parse --abbrev-ref HEAD >nul 2>&1 > ', Command1),
 			atom_concat(Command1, Temporary, Command),
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
@@ -49,8 +50,8 @@
 
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
-			atom_concat('cd ', Directory, Command0),
-			atom_concat(Command0, ' & git log --oneline -n 1 --pretty=format:"', Command1),
+			atom_concat('git -C ', Directory, Command0),
+			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:"', Command1),
 			atom_concat(Command1, Format, Command2),
 			atom_concat(Command2, '" >nul 2>&1 > ', Command3),
 			atom_concat(Command3, Temporary, Command),
@@ -64,8 +65,8 @@
 
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),
-			atom_concat('cd ', Directory, Command0),
-			atom_concat(Command0, ' && git rev-parse --abbrev-ref HEAD 2>/dev/null > ', Command1),
+			atom_concat('git -C ', Directory, Command0),
+			atom_concat(Command0, ' rev-parse --abbrev-ref HEAD 2>/dev/null > ', Command1),
 			atom_concat(Command1, Temporary, Command),
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
@@ -76,8 +77,8 @@
 
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
-			atom_concat('cd ', Directory, Command0),
-			atom_concat(Command0, ' && git log --oneline -n 1 --pretty=format:"', Command1),
+			atom_concat('git -C ', Directory, Command0),
+			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:"', Command1),
 			atom_concat(Command1, Format, Command2),
 			atom_concat(Command2, '" 2>/dev/null > ', Command3),
 			atom_concat(Command3, Temporary, Command),
@@ -88,7 +89,6 @@
 			).
 
 	:- endif.
-
 
 	commit_author(Directory, Hash) :-
 		commit_log(Directory, '%an', Hash).
