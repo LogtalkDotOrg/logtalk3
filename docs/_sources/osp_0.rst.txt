@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:30:0
-| **Date:** 2021-02-20
+| **Version:** 1:31:0
+| **Date:** 2021-07-21
 
 | **Compilation flags:**
 |    ``static``
@@ -216,6 +216,30 @@ Concatenates a path prefix and a path suffix, adding  a ``/`` separator if requi
 |    ``path_concat(Prefix,Suffix,Path)``
 | **Mode and number of proofs:**
 |    ``path_concat(+atom,+atom,--atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="internal_os_path/2"> </div>
+
+.. index:: internal_os_path/2
+.. _osp/0::internal_os_path/2:
+
+``internal_os_path/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Converts between the internal path representation (which is backend dependent) and the operating-system native path representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``internal_os_path(InternalPath,OSPath)``
+| **Mode and number of proofs:**
+|    ``internal_os_path(+atom,-atom)`` - ``one``
+|    ``internal_os_path(-atom,+atom)`` - ``one``
 
 
 ------------

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:24:0,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-21,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -97,27 +97,37 @@
 		Name == 'foo',
 		Extension == '.bar'.
 
-	test(os_path_concat_03_01) :-
+	test(os_path_concat_3_01) :-
 		this(This),
 		object_property(This, file(File)),
 		os::path_concat('/foo', File, Path),
 		Path == File.
 
-	test(os_path_concat_03_02) :-
+	test(os_path_concat_3_02) :-
 		os::path_concat('/foo', '', Path),
 		Path == '/foo/'.
 
-	test(os_path_concat_03_03) :-
+	test(os_path_concat_3_03) :-
 		os::path_concat('/foo/', '', Path),
 		Path == '/foo/'.
 
-	test(os_path_concat_03_04) :-
+	test(os_path_concat_3_04) :-
 		os::path_concat('/foo', 'bar', Path),
 		Path == '/foo/bar'.
 
-	test(os_path_concat_03_05) :-
+	test(os_path_concat_3_05) :-
 		os::path_concat('foo', 'bar', Path),
 		Path == 'foo/bar'.
+
+	test(os_internal_os_path_2_01, true, [condition(os::operating_system_type(unix))]) :-
+		os::internal_os_path(InternalPath, '/foo/bar/baz'),
+		os::internal_os_path(InternalPath, OSPath),
+		OSPath == '/foo/bar/baz'.
+
+	test(os_internal_os_path_2_02, true, [condition(os::operating_system_type(windows))]) :-
+		os::internal_os_path(InternalPath, 'C:\\foo\\bar\\baz'),
+		os::internal_os_path(InternalPath, OSPath),
+		OSPath == 'C:\\foo\\bar\\baz'.
 
 	test(os_cpu_time_1_01) :-
 		os::cpu_time(Seconds),

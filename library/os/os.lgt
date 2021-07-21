@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:83:1,
+		version is 1:84:0,
 		author is 'Paulo Moura',
-		date is 2021-07-20,
+		date is 2021-07-21,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -112,6 +112,9 @@
 			decompose_file_name(Path, Directory, Name, Extension),
 			expand_path_(Directory, ExpandedDirectory),
 			{atomic_list_concat([ExpandedDirectory, Name, Extension], ExpandedPath)}.
+
+		internal_os_path(InternalPath, OSPath) :-
+			{prolog_to_os_filename(InternalPath, OSPath)}.
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -228,6 +231,9 @@
 			).
 		:- endif.
 
+		internal_os_path(InternalPath, OSPath) :-
+			{prolog_to_os_filename(InternalPath, OSPath)}.
+
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
 			(	{file_exists(ExpandedPath), file_property(ExpandedPath, type(directory))} ->
@@ -335,6 +341,8 @@
 			{expand_atom(Path, EnvVarExpandedPath),
 			 path_sysop(expand, EnvVarExpandedPath, ExpandedPath0)},
 			ExpandedPath = ExpandedPath0.
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -475,6 +483,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
+		internal_os_path(Path, Path).
+
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
 			(	directory_exists(ExpandedPath) ->
@@ -585,6 +595,8 @@
 			 	atom_concat(Current, '/', Directory),
 			 	atom_concat(Directory, ExpandedPath0, ExpandedPath)
 			 )}.
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -714,6 +726,8 @@
 			{current_directory(Directory),
 			 absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])}.
 
+		internal_os_path(Path, Path).
+
 		make_directory(Directory) :-
 			absolute_file_name(Directory, Path),
 			(	{directory_exists(Path)} ->
@@ -835,6 +849,9 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{os_file_name(InternalPath, Path),
 			 canonical_path_name(InternalPath, ExpandedPath)}.
+
+		internal_os_path(InternalPath, OSPath) :-
+			{os_file_name(InternalPath, OSPath)}.
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -992,6 +1009,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
+		internal_os_path(Path, Path).
+
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
 			(	{file_exists(ExpandedPath)} ->
@@ -1105,6 +1124,8 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
@@ -1227,6 +1248,8 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
@@ -1376,6 +1399,8 @@
 			),
 			expand_path_reverse_slashes(Codes, ConvertedCodes).
 
+		internal_os_path(Path, Path).
+
 		make_directory(Directory) :-
 			absolute_file_name(Directory, Path),
 			(	{absolute_file_name(Path, [access(exist), file_type(directory), file_errors(fail)], _)} ->
@@ -1522,6 +1547,8 @@
 			),
 			reverse_slashes(Codes, Backslash, Slash, ConvertedCodes).
 
+		internal_os_path(Path, Path).
+
 		make_directory(Directory) :-
 			(	{exists_directory(Directory)} ->
 				true
@@ -1618,6 +1645,8 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1730,6 +1759,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
 
+		internal_os_path(Path, Path).
+
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
 			(	{exists_directory(ExpandedPath)} ->
@@ -1829,6 +1860,8 @@
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1946,6 +1979,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			expand_path_chars(Path, ExpandedPathChars),
 			atom_chars(ExpandedPath, ExpandedPathChars).
+
+		internal_os_path(Path, Path).
 
 		make_directory(Directory) :-
 			expand_path_chars(Directory, ExpandedPathChars),

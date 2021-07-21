@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:30:0,
+		version is 1:31:0,
 		author is 'Paulo Moura',
-		date is 2021-02-20,
+		date is 2021-07-21,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -86,6 +86,14 @@
 	:- info(path_concat/3, [
 		comment is 'Concatenates a path prefix and a path suffix, adding  a ``/`` separator if required. Returns ``Suffix`` when it is an absolute path. Returns ``Prefix`` with a trailing ``/`` appended if missing when ``Suffix`` is the empty atom.',
 		argnames is ['Prefix', 'Suffix', 'Path']
+	]).
+
+	:- public(internal_os_path/2).
+	:- mode(internal_os_path(+atom, -atom), one).
+	:- mode(internal_os_path(-atom, +atom), one).
+	:- info(internal_os_path/2, [
+		comment is 'Converts between the internal path representation (which is backend dependent) and the operating-system native path representation.',
+		argnames is ['InternalPath', 'OSPath']
 	]).
 
 	:- public(make_directory/1).

@@ -56,6 +56,10 @@ the `diff` shell command.
 to expand the directory to an absolute path for a more consistent path
 representation on Windows operating-systems.
 
+* ADDED: Predicate `internal_os_path/2` to the `os` library to convert between
+internal (backend dependent) paths and operating-system native paths Note that
+only a few backends provide this functionality.
+
 * ADDED: Definition for the `os::shell/1-2` predicates for ECLiPSe when run on
 Windows operating-systems.
 
