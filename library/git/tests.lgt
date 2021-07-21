@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2021-07-21,
 		comment is 'Unit tests for the "git" library.'
@@ -130,7 +130,9 @@
 
 	test_repo(Repo, Directory) :-
 		this(This),
-		object_property(This, file(_, Directory)),
-		os::path_concat(Directory, repo, Repo).
+		object_property(This, file(_, Directory0)),
+		os::path_concat(Directory0, repo, Repo0),
+		os::internal_os_path(Repo0, Repo),
+		os::internal_os_path(Directory0, Directory).
 
 :- end_object.
