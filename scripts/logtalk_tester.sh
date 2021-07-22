@@ -61,7 +61,8 @@ driver='tester'
 dot=""
 output='verbose'
 if [ "${operating_system:0:10}" == "MINGW32_NT" ] || [ "${operating_system:0:10}" == "MINGW64_NT" ] ; then
-	# assume that we're running on Windows using the Git for Windows bash shell
+	# assume that we're running on Windows using the Git for Windows bash shell and get the
+	# current directory path using forward slashes for better Prolog backend compatibility
 	base="$(pwd -W)"
 else
 	base="$PWD"
@@ -120,7 +121,9 @@ run_testset() {
 			exit 9
 		fi
 	fi
+	# convert any forward slashes so that the derived file name is usable
 	name=${unit////__}
+	# also convert any colon if running on Windows systems so that the derived file name is usable
 	name=${name/:/__}
 	report_goal="logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
 	if [ "$prefix" != "" ] ; then

@@ -44,6 +44,9 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: Documentation to the `lgtunit` tool on automating testing on Windows
+operating-systems.
+
 * UPDATED: Handbook documentation of the `clean` flag.
 
 Library

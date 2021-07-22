@@ -1049,6 +1049,25 @@ An HTML version of this man page can be found at:
 
 https://logtalk.org/man/logtalk_tester.html
 
+This automation script can also be used in Windows operating-systems with
+selected backends by using the Bash shell included in the Git for Windows
+installer. That requires defining a `.profile` file setting the paths to
+the Logtalk scripts and the Prolog backend executables. For example:
+
+	$ cat ~/.profile
+	# YAP
+	export PATH="/C/Program Files/Yap64/bin":$PATH
+	# GNU Prolog
+	export PATH="/C/GNU-Prolog/bin":$PATH
+	# SWI/Prolog
+	export PATH="/C/Program Files/swipl/bin":$PATH
+	# ECLiPSe
+	export PATH="/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt":$PATH
+	# SICStus Prolog
+	export PATH="/C/Program Files/SICStus Prolog VC16 4.6.0/bin":$PATH
+	# Logtalk
+	export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
+
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:
 

@@ -1290,6 +1290,26 @@ page for the script:</p>
 </div>
 <p>An HTML version of this man page can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
+<p>This automation script can also be used in Windows operating-systems
+with selected backends by using the Bash shell included in the Git for
+Windows installer. That requires defining a <code class="docutils literal notranslate"><span class="pre">.profile</span></code> file setting
+the paths to the Logtalk scripts and the Prolog backend executables. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cat ~/.profile
+# YAP
+export PATH=&quot;/C/Program Files/Yap64/bin&quot;:$PATH
+# GNU Prolog
+export PATH=&quot;/C/GNU-Prolog/bin&quot;:$PATH
+# SWI/Prolog
+export PATH=&quot;/C/Program Files/swipl/bin&quot;:$PATH
+# ECLiPSe
+export PATH=&quot;/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt&quot;:$PATH
+# SICStus Prolog
+export PATH=&quot;/C/Program Files/SICStus Prolog VC16 4.6.0/bin&quot;:$PATH
+# Logtalk
+export PATH=&quot;$LOGTALKHOME/scripts&quot;:&quot;$LOGTALKHOME/integration&quot;:$PATH
+</pre></div>
+</div>
 <p>Additional advice on testing and on automating testing using continuous
 integration servers can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/testing.html">https://logtalk.org/testing.html</a></p>
