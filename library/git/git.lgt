@@ -52,7 +52,7 @@
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
 			internal_os_path(Temporary, NativeTemporary),
-			atom_concat('git -C ', NativeTemporary, Command0),
+			atom_concat('git -C ', Directory, Command0),
 			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:"', Command1),
 			atom_concat(Command1, Format, Command2),
 			atom_concat(Command2, '" 2>nul > ', Command3),
