@@ -121,6 +121,7 @@ run_testset() {
 		fi
 	fi
 	name=${unit////__}
+	name=${name/:/__}
 	report_goal="logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
 	if [ "$prefix" != "" ] ; then
 		flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
