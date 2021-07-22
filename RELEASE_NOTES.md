@@ -103,6 +103,9 @@ Tools
 the test object identifier to provide more detailed information when tests are
 skipped only for some parameterizations of a test object.
 
+* FIXED: The `logtalk_tester` script when running on Windows operating-systems
+using the Bash shell bundled with the Git for Windows installer.
+
 * FIXED: Tests for the `help` tool when using ECLiPSe on Windows systems.
 
 Examples
