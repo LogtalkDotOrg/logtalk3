@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on Julu 1, 2021
+##   Last updated on July 22, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 6.3"
+	echo "$(basename "$0") 6.4"
 	exit 0
 }
 
@@ -60,7 +60,12 @@ backend=""
 driver='tester'
 dot=""
 output='verbose'
-base="$PWD"
+if [ "${operating_system:0:10}" == "MINGW32_NT" ] || [ "${operating_system:0:10}" == "MINGW64_NT" ] ; then
+	# assume that we're running on Windows using the Git for Windows bash shell
+	base="$(pwd -W)"
+else
+	base="$PWD"
+fi
 level=""
 results="$base/logtalk_tester_logs"
 mode='normal'
