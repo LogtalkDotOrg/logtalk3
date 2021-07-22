@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:84:0,
+		version is 1:85:0,
 		author is 'Paulo Moura',
-		date is 2021-07-21,
+		date is 2021-07-22,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -833,12 +833,14 @@
 
 		shell(Command, Status) :-
 			{(	getenv('SHELL', Shell) ->
-			 	exec([Shell, '-c', Command], [], Pid)
+			 	exec([Shell, '-c', Command], [], Pid),
+   			 	wait(Pid, Code),
+   			 	Status is Code >> 8 /\ 255
 			 ;	getenv('COMSPEC', _),
-			 	exec([cmd, '/c', Command], [], Pid)
-			 ),
-			 wait(Pid, Code),
-			 Status is Code >> 8 /\ 255}.
+			 	sh(Command) ->
+				Status is 0
+			 ;	Status is 1
+			 )}.
 
 		shell(Command) :-
 			shell(Command, 0).
