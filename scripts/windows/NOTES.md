@@ -24,7 +24,17 @@ using Inno Setup 5.3.0 Unicode (or a later version):
 	http://www.jrsoftware.org/isinfo.php
 
 The Inno Setup script, `logtalk.iss`, assumes that a checkout of the
-Logtalk repository exists in the `C:\lgt3git` directory.
+Logtalk repository exists in the `C:\lgt3git` directory. If you use a
+Inno Setup 6.x version, you will need to edit the `logtalk.iss` file
+and change around line 57:
+
+	MinVersion=0,5.0
+
+to:
+
+	MinVersion=0,6.0
+
+Or simply delete this line to use the Inno Setup default value.
 
 The installer creates integration shortcuts that start Logtalk in the
 `%LOGTALKUSER` directory. You can edit the building script and change

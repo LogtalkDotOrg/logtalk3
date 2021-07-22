@@ -136,6 +136,8 @@ systems using GNU Prolog.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: Windows installer notes on using recent versions of Inno Setup.
+
 * FIXED: The Windows installer for the YAP 6.3.4 installer, which creates a
 `cwd` registry key instead of a `home` registry key as in previous installers.
 
