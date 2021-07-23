@@ -23,9 +23,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:0:3,
 		author is 'Jacinto Dávila',
-		date is 2021-04-04,
+		date is 2021-07-23,
 		comment is 'CSV files reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
@@ -101,13 +101,20 @@
 		ensure_bound_options,
 		functor(Message, Predicate, Arity),
 		dbg('Goal to be called'-Object::Message),
-		open(File, write, Stream),
+		csv_file_write_options(Options),
+		open(File, write, Stream, Options),
 		catch(
 			write_one_by_one(Stream, Object, Message),
 			Error,
 			(close(Stream), throw(Error))
 		),
 		close(Stream).
+
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+		csv_file_write_options([eol(crlf)]).
+	:- else.
+		csv_file_write_options([]).
+	:- endif.
 
 	% guesses the separator in the given file by inspecting a row
 	guess_separator(File, Separator) :-
@@ -185,7 +192,6 @@
 	spaces --> [32], spaces.
 	spaces --> [].
 
-	%
 	field(0'", Atom, true) -->
 		!, {dbg('>>>'-0'")}, escaped(true, Codes), {atom_codes(Atom, Codes)}.
 	field(0'", Atom, false) -->
@@ -234,7 +240,6 @@
 	%	[N],  % but if the separator is a comma, it cannot be used in unescaped numbers
 	%	{N >= 46, N =< 57 ; \+ separator_code(_Separator_, N), N == 0',}.
 
-	%
 	number_or_atom_codes(Field, Codes) :-
 		catch(number_codes(Field, Codes), _, atom_codes(Field, Codes)).
 
@@ -268,7 +273,6 @@
 		;	fail
 		).
 
-	%
 	assert_rows([], _, _, _).
 	assert_rows([Row|Rows], Object, Predicate/Arity, N) :-
 		(	list::length(Row, Arity) ->
@@ -293,7 +297,6 @@
 			Separator = comma
 		).
 
-	%
 	guess_record([Field| Fields], Separator,  Next) -->
 		guess_field(Field, _IgnoreQuotes_, Separator), guess_separator(Separator), guess_record(Fields, Separator, Next).
 	guess_record([Field], Separator, _) -->
@@ -303,21 +306,18 @@
 	guess_record([''], _, true) -->
 		[], {dbg('Empty'-'')}. %{dbg(field-'')}.
 
-	%
 	guess_field(Atom, _IgnoreQuotes_, _) -->
 		guess_escaped(Codes, _IgnoreQuotes_),
 		{(_IgnoreQuotes_ == true -> AllCodes = Codes; AllCodes = [0'"|Codes]), atom_codes(Atom, AllCodes)}.
 	guess_field(Field, _, Separator) -->
 		guess_non_escaped(Codes, Separator), {number_or_atom_codes(Field, Codes)}.
 
-	%
 	guess_non_escaped([Char], Separator) -->
 		guess_textdata(Char, Separator).
 	guess_non_escaped([Char|RestC], Separator) -->
 		guess_textdata(Char, Separator), guess_non_escaped(RestC, Separator).
 	%guess_non_escaped([], _Separator) --> [].
 
-	%
 	guess_separator(Separator) -->
 		[Code],
 		{ propose_separator(Code, Separator) }.
@@ -328,13 +328,11 @@
 		% calling the basic parser for separator
 		separator(Separator).
 
-	%
 	guess_escaped(Data, true) -->
 		data(Data), [0'"].
 	guess_escaped(QData, false) -->
 		data(Data), [0'"], {list::append(Data, [0'"], QData), dbg('<<<'-0'")}.
 
-	%
 	guess_textdata(Code, Separator) -->
 		[Code],
 		% anything alfanumeric except \r, \n, dquotes and the separator suggested
@@ -343,7 +341,6 @@
 	propose_separator(C, Sep) :- var(Sep), separator_code(Sep, C),
 		dbg('Separator suggested'-[Sep, C]).
 
-	%
 	non_separator_code(Code, Separator) :-
 		nonvar(Separator),
 		separator_code(Separator, SeparatorCode),
@@ -392,16 +389,21 @@
 		dbg('Data '-[Field| Fields]),
 		write_data(Fields, Field, Stream).
 
-	%
-	write_data([], Field, Stream) :-
-		write_field(Stream, Field), write(Stream, '\r\n').
+	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
+		write_data([], Field, Stream) :-
+			write_field(Stream, Field),
+			nl(Stream).
+	:- else.
+		write_data([], Field, Stream) :-
+			write_field(Stream, Field),
+			write(Stream, '\r\n').
+	:- endif.
 	write_data([Next| Fields], Field, Stream) :-
 		write_field(Stream, Field),
 		separator_code(_Separator_, Code),
 		put_code(Stream, Code),
 		write_data(Fields, Next, Stream).
 
-	%
 	write_field(Stream, Field) :-
 		( 	number(Field) ->
 			write(Stream, Field)
