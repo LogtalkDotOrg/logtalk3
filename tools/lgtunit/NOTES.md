@@ -1039,13 +1039,16 @@ Automating running tests
 ------------------------
 
 You can use the `scripts/logtalk_tester.sh` Bash shell script for automating
-running unit tests. See the `scripts/NOTES.md` file for details. On POSIX
-systems, assuming Logtalk was installed using one of the provided installers
-or installation scripts, there is also a `man` page for the script:
+running unit tests. See the `scripts/NOTES.md` file for details or type:
+
+	$ logtalk_tester -h
+
+On POSIX systems, assuming Logtalk was installed using one of the provided
+installers or installation scripts, there is also a `man` page for the script:
 
 	$ man logtalk_tester
 
-An HTML version of this man page can be found at:
+Alternatively, an HTML version of this man page can be found at:
 
 https://logtalk.org/man/logtalk_tester.html
 
@@ -1068,8 +1071,13 @@ the Logtalk scripts and the Prolog backend executables. For example:
 	# Logtalk
 	export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
 
-The Git for Windows installer includes GNU `coreutils` and its `timeout`
+The Git for Windows installer also includes GNU `coreutils` and its `timeout`
 command, which is used by the `logtalk_tester` script `-t` option.
+
+Note that some tests may give different results when run from within the Bash
+shell compared with running the tests manually using a Windows GUI version of
+the Prolog backend. Some backends may also not be usable for automated testing
+due to the way their are made available as Windows applications.
 
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:

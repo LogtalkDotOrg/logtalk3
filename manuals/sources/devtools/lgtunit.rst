@@ -1171,7 +1171,7 @@ page for the script:
 
    $ man logtalk_tester
 
-An HTML version of this man page can be found at:
+Alternatively, an HTML version of this man page can be found at:
 
 https://logtalk.org/man/logtalk_tester.html
 
@@ -1197,9 +1197,15 @@ example:
    # Logtalk
    export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
 
-The Git for Windows installer includes GNU ``coreutils`` and its
+The Git for Windows installer also includes GNU ``coreutils`` and its
 ``timeout`` command, which is used by the ``logtalk_tester`` script
 ``-t`` option.
+
+Note that some tests may give different results when run from within the
+Bash shell compared with running the tests manually using a Windows GUI
+version of the Prolog backend. Some backends may also not be usable for
+automated testing due to the way their are made available as Windows
+applications.
 
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:

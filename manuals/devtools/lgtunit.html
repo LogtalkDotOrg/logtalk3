@@ -1288,7 +1288,7 @@ page for the script:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ man logtalk_tester
 </pre></div>
 </div>
-<p>An HTML version of this man page can be found at:</p>
+<p>Alternatively, an HTML version of this man page can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
 <p>This automation script can also be used in Windows operating-systems
 with selected backends by using the Bash shell included in the Git for
@@ -1310,9 +1310,14 @@ export PATH=&quot;/C/Program Files/SICStus Prolog VC16 4.6.0/bin&quot;:$PATH
 export PATH=&quot;$LOGTALKHOME/scripts&quot;:&quot;$LOGTALKHOME/integration&quot;:$PATH
 </pre></div>
 </div>
-<p>The Git for Windows installer includes GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code> and its
+<p>The Git for Windows installer also includes GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code> and its
 <code class="docutils literal notranslate"><span class="pre">timeout</span></code> command, which is used by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script
 <code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
+<p>Note that some tests may give different results when run from within the
+Bash shell compared with running the tests manually using a Windows GUI
+version of the Prolog backend. Some backends may also not be usable for
+automated testing due to the way their are made available as Windows
+applications.</p>
 <p>Additional advice on testing and on automating testing using continuous
 integration servers can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/testing.html">https://logtalk.org/testing.html</a></p>
