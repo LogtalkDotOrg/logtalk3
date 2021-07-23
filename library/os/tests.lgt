@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:24:1,
 		author is 'Paulo Moura',
-		date is 2021-07-21,
+		date is 2021-07-23,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -127,7 +127,8 @@
 	test(os_internal_os_path_2_02, true, [condition(os::operating_system_type(windows))]) :-
 		os::internal_os_path(InternalPath, 'C:\\foo\\bar\\baz'),
 		os::internal_os_path(InternalPath, OSPath),
-		OSPath == 'C:\\foo\\bar\\baz'.
+		% some backends don't preserve case, which may depend on the Windows file system in use
+		(OSPath == 'C:\\foo\\bar\\baz'; OSPath == 'c:\\foo\\bar\\baz').
 
 	test(os_cpu_time_1_01) :-
 		os::cpu_time(Seconds),
