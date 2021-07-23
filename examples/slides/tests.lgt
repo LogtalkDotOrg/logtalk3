@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2019-08-06,
+		date is 2021-07-23,
 		comment is 'Unit tests for the "slides" example.'
 	]).
 
@@ -48,14 +48,35 @@
 		logtalk::retractall(message_prefix_stream(_, slides, _, _)),
 		logtalk::assertz(message_prefix_stream(_, slides, '', test_output)).
 
-	test(slides_01, true(Assertion)) :-
-		^^set_text_output(test_output, ''),
-		slides::show([1,2,3,4,5,6], {slide}),
-		^^text_output_assertion(
-			test_output,
-			'First slide\nSecond slide\nThird slide\nFourth slide\nThird slide\nFirst slide\nLast slide\n',
-			Assertion
-		).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(slides_01, true(Assertion)) :-
+			^^set_text_output(test_output, ''),
+			slides::show([1,2,3,4,5,6], {slide}),
+			^^text_output_assertion(
+				test_output,
+				'First slide\r\nSecond slide\r\nThird slide\r\nFourth slide\r\nThird slide\r\nFirst slide\r\nLast slide\r\n',
+				Assertion
+			).
+
+	:- else.
+
+		test(slides_01, true(Assertion)) :-
+			^^set_text_output(test_output, ''),
+			slides::show([1,2,3,4,5,6], {slide}),
+			^^text_output_assertion(
+				test_output,
+				'First slide\nSecond slide\nThird slide\nFourth slide\nThird slide\nFirst slide\nLast slide\n',
+				Assertion
+			).
+
+	:- endif.
 
 	:- multifile(logtalk::question_hook/6).
 	:- dynamic(logtalk::question_hook/6).

@@ -128,7 +128,10 @@ to run it on Windows.
 example.
 
 * FIXED: Tests for the `around_methods`, `books`, `hailstone`, `hello_world`,
-`localizations`, and `patches` when run on Windows systems using GNU Prolog.
+`localizations`, and `patches` examples when run on Windows systems using
+GNU Prolog.
+
+* FIXED: Tests for the `slides` example when run on Windows systems.
 
 Tests
 -----
