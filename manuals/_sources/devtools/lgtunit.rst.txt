@@ -1197,6 +1197,10 @@ example:
    # Logtalk
    export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
 
+The Git for Windows installer includes GNU ``coreutils`` and its
+``timeout`` command, which is used by the ``logtalk_tester`` script
+``-t`` option.
+
 Additional advice on testing and on automating testing using continuous
 integration servers can be found at:
 
