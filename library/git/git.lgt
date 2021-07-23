@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 1:3:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2021-07-22,
+		date is 2021-07-23,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -53,9 +53,9 @@
 			temporary_file(Temporary),
 			internal_os_path(Temporary, NativeTemporary),
 			atom_concat('git -C ', Directory, Command0),
-			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:"', Command1),
+			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:', Command1),
 			atom_concat(Command1, Format, Command2),
-			atom_concat(Command2, '" 2>nul > ', Command3),
+			atom_concat(Command2, ' 2>nul > ', Command3),
 			atom_concat(Command3, NativeTemporary, Command),
 			(	shell(Command) ->
 				data_raw(Temporary, Output)

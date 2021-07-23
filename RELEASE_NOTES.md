@@ -52,6 +52,10 @@ operating-systems.
 Library
 -------
 
+* CHANGED: The `git` library no longer wraps pretty print formats using double
+quotes to avoid portability issues when running on Windows operating-systems
+due to differences between the Prolog backends handling of shell commands.
+
 * CHANGED: Roundtrip tests for the `csv` and `json` libraries to not require
 the `diff` shell command.
 
