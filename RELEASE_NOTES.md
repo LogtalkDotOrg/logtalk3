@@ -82,6 +82,8 @@ when run on Windows operating-systems.
 environment variables as an alternative to the default `localhost` and `6379`
 values.
 
+* FIXED: Test for the `csv` library when run on Windows operating-systems.
+
 * FIXED: Workaround SICStus Prolog issue with the `csv` library when run on
 Windows operating-systems
 

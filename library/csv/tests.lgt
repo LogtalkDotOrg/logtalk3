@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Jacinto Dávila',
-		date is 2021-07-19,
+		date is 2021-07-23,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -130,11 +130,28 @@
 	%    "aaa","b CRLF
 	%    bb","ccc" CRLF
 	%    zzz,yyy,xxx
-	test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
-		^^suppress_text_output,
-		file_path('test_files/escaping_double_quotes.csv', Path),
-		csv::read_file(Path, Rows).
 
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi)
+	)).
+
+		test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\r\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
+			^^suppress_text_output,
+			file_path('test_files/escaping_double_quotes.csv', Path),
+			csv::read_file(Path, Rows).
+
+	:- else.
+
+		test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
+			^^suppress_text_output,
+			file_path('test_files/escaping_double_quotes.csv', Path),
+			csv::read_file(Path, Rows).
+
+	:- endif.
 
 	%7.  If double-quotes are used to enclose fields, then a double-quote
 	%    appearing inside a field must be escaped by preceding it with
