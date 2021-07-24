@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:3:2,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-24,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -87,7 +87,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 	test(lgt_format_2_new_line, true(Assertion)) :-

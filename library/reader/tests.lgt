@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:0:2,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-24,
 		comment is 'Unit tests for the "reader" library.'
 	]).
 
@@ -42,7 +42,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_file_to_codes_2_02, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10])) :-
@@ -70,7 +71,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_file_to_codes_3_03, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10,65,66,67])) :-
@@ -94,7 +96,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_file_to_chars_2_02, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n'])) :-
@@ -122,7 +125,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_file_to_chars_3_03, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n','A','B','C'])) :-
@@ -189,7 +193,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_stream_to_codes_2_02, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10])) :-
@@ -221,7 +226,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_stream_to_codes_3_03, true(Codes == [97,98,99,13,10,100,101,102,13,10,103,104,105,13,10,65,66,67])) :-
@@ -248,7 +254,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_stream_to_chars_2_02, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n'])) :-
@@ -280,7 +287,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(reader_stream_to_chars_3_03, true(Chars == [a,b,c,'\r','\n',d,e,f,'\r','\n',g,h,i,'\r','\n','A','B','C'])) :-

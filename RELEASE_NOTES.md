@@ -87,8 +87,8 @@ values.
 * FIXED: Workaround SICStus Prolog issue with the `csv` library when run on
 Windows operating-systems
 
-* FIXED: Tests for the `hook_objects` library when run on Windows
-operating-systems using GNU Prolog.
+* FIXED: Tests for the `csv`, `hook_objects`, and `reader` libraries when run
+on Windows operating-systems using GNU Prolog or XSB.
 
 * FIXED: Tests for the `reader` library when run on Windows operating-systems.
 
@@ -131,7 +131,7 @@ example.
 
 * FIXED: Tests for the `around_methods`, `books`, `hailstone`, `hello_world`,
 `localizations`, and `patches` examples when run on Windows systems using
-GNU Prolog.
+GNU Prolog or XSB.
 
 * FIXED: Tests for the `slides` example when run on Windows systems.
 
@@ -151,7 +151,7 @@ attempting to read a term.
 * IMPROVED: Tests for the `logtalk_library_path/2` predicate.
 
 * FIXED: Tests for the `format/2-3` and `nl/0-1` predicates when run on Windows
-systems using GNU Prolog.
+systems using GNU Prolog or XSB.
 
 Installers and installation scripts
 -----------------------------------

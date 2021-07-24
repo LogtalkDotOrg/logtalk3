@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Jacinto Dávila',
-		date is 2021-07-23,
+		date is 2021-07-24,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -136,7 +136,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\r\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-

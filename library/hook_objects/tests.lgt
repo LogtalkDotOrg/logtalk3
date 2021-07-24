@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:4:2,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-24,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -162,7 +162,8 @@ goal_expansion(X = 1, X = 2).
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 	test(write_to_stream_hook_2_01, true(Assertion)) :-
@@ -193,7 +194,8 @@ goal_expansion(X = 1, X = 2).
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 	test(write_to_stream_hook_1_01, true(Assertion)) :-

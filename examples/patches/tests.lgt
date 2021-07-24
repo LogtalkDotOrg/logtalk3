@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:2:2,
 		author is 'Paulo Moura',
-		date is 2021-07-19,
+		date is 2021-07-24,
 		comment is 'Unit tests for the "patches" example.'
 	]).
 
@@ -34,7 +34,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 	test(patches_01, true(Assertion)) :-

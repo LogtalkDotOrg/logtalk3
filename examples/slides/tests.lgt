@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:0:3,
 		author is 'Paulo Moura',
-		date is 2021-07-23,
+		date is 2021-07-24,
 		comment is 'Unit tests for the "slides" example.'
 	]).
 
@@ -53,7 +53,8 @@
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi)
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
 		test(slides_01, true(Assertion)) :-
