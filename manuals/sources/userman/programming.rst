@@ -1090,11 +1090,11 @@ Other flags
 
 ``reload(Option)``
    Defines the reloading behavior for source files. Possible option
-   values are ``skip`` (skip loading of already loaded files; this value
+   values are ``skip`` (skip reloading of already loaded files; this value
    can be used to get similar functionality to the Prolog directive
    ``ensure_loaded/1`` but should be used only with fully debugged
    code), ``changed`` (the usual default; reload files only when they
-   are changed since last loaded provided that the any explicit flags
+   are changed since last loaded provided that any explicit flags
    and the compilation mode are the same as before), and ``always``
    (always reload files).
 

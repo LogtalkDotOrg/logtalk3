@@ -1163,8 +1163,14 @@ Automating running tests
 
 You can use the ``scripts/logtalk_tester.sh`` Bash shell script for
 automating running unit tests. See the ``scripts/NOTES.md`` file for
-details. On POSIX systems, assuming Logtalk was installed using one of
-the provided installers or installation scripts, there is also a ``man``
+details or type:
+
+::
+
+   $ logtalk_tester -h
+
+On POSIX systems, assuming Logtalk was installed using one of the
+provided installers or installation scripts, there is also a ``man``
 page for the script:
 
 ::
