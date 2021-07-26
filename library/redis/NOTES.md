@@ -22,9 +22,8 @@ ________________________________________________________________________
 =======
 
 Redis client library. Supports GNU Prolog, LVM, Qu-Prolog, SICStus Prolog,
-SWI-Prolog, and XSB. Support for ECLiPSe is also included but requires
-a fix for an ECLiPSe bug that is expected in a forthcoming version of
-this Prolog system.
+SWI-Prolog, and XSB. Support for Ciao Prolog and ECLiPSe is also included
+but requires fixes for issues in these systems.
 
 For general information on Redis, including a list of the available
 commands, visit:

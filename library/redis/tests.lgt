@@ -54,7 +54,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, qp)).
 		:- uses(user, [thread_sleep/1 as sleep/1]).
 	:- else.
-		% ECLiPSe, GNU Prolog, SWI-Prolog, and XSB provide sleep/1
+		% ECLiPSe, GNU Prolog, LVM, SWI-Prolog, and XSB provide sleep/1
 		% as a built-in predicate but we list it here for clarity
 		:- uses(user, [sleep/1]).
 	:- endif.
