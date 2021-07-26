@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:2,
+		version is 1:4:3,
 		author is 'Paulo Moura',
-		date is 2021-07-24,
+		date is 2021-07-26,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -159,6 +159,7 @@ goal_expansion(X = 1, X = 2).
 
 	:- if((
 		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
@@ -191,6 +192,7 @@ goal_expansion(X = 1, X = 2).
 
 	:- if((
 		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),

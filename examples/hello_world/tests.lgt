@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:0:3,
 		author is 'Paulo Moura',
-		date is 2021-07-24,
+		date is 2021-07-26,
 		comment is 'Unit tests for the "hello_world" example.'
 	]).
 
@@ -33,6 +33,7 @@
 
 	:- if((
 		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
 		\+ current_logtalk_flag(prolog_dialect, gnu),
 		\+ current_logtalk_flag(prolog_dialect, ji),
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
