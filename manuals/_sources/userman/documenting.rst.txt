@@ -176,6 +176,9 @@ Logtalk tools:
 ``remarks``
    List of general remarks about the predicate using ``Topic-Text``
    pairs where both the topic and the text must be atoms.
+``see_also``
+   List of related predicates and non-terminals (using the predicate
+   and non-terminal indicators).
 
 For example:
 

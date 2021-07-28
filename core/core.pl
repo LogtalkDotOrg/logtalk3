@@ -11798,6 +11798,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(domain_error(redefinition, Redefinition))
 	).
 
+'$lgt_compile_predicate_info_directive_pair'(see_also, References, _, _, see_also(References)) :-
+	!,
+	'$lgt_check'(list(predicate_or_non_terminal_indicator), References).
+
 % user-defined predicate info pair; no checking
 '$lgt_compile_predicate_info_directive_pair'(Key, Value, _, _, TPair) :-
 	TPair =.. [Key, Value].
