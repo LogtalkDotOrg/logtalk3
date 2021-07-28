@@ -117,7 +117,8 @@ For example:
 Use only the keywords that make sense for your application and remember that
 you are free to invent your own keywords. All key-value pairs can be retrieved
 programmatically using the :ref:`reflection API <reflection_reflection>` and
-are visible to the :doc:`../devtools/lgtdoc` tool.
+are visible to the :doc:`../devtools/lgtdoc` tool (which includes them in the
+generated documentation).
 
 .. _documenting_predicate:
 
@@ -190,7 +191,8 @@ As with the ``info/1`` directive, use only the keywords that make sense
 for your application and remember that you are free to invent your own
 keywords. All key-value pairs can also be retrieved programmatically
 using the :ref:`reflection API <reflection_reflection>` and are visible
-to the :doc:`../devtools/lgtdoc` tool.
+to the :doc:`../devtools/lgtdoc` tool (which includes them in the generated
+documentation).
 
 .. _documenting_processing:
 
