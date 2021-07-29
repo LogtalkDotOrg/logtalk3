@@ -63,7 +63,11 @@ entities in the generated (X)HTML files. See the sample settings file in your
 Logtalk user folder for details.
 
 
-Brief description of each file in this folder:
+Brief description of each directory and file in this folder:
+
+- `css`  
+	Directory with CSS files for use with generated human readable
+	documentation such as Sphinx
 
 - `logtalk_entity_to_xml.xsl`  
 - `logtalk_index_to_xml.xsl`  
@@ -205,7 +209,8 @@ Brief description of each file in this folder:
 	need to type `lgt2md` in order to run the script).
 
 - `lgt2rst.sh` and `lgt2rst.js`  
-	Sample scripts to batch convert XML files to reStructuredText files.
+	Sample scripts to batch convert XML files to reStructuredText files and
+	optionally generate Sphinx HTML files.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
@@ -215,9 +220,9 @@ Brief description of each file in this folder:
 	are expected to be used with Sphinx. Assuming that Sphinx and the 
 	Read the Docs Sphinx Theme are both installed, `lgt2rst -s` calls the
 	`sphinx-quickstart` interactive script using the `conf.py_t` file in this
-	directory as the `conf.py` template. You can edit the `conf.py_t` to
-	customize it; see the Sphinx documentation for more details. See also the
-	custom CSS code used for Logtalk included API documentation. To use the
+	directory as the `conf.py` template and using the `css/sphinx/custom.css`
+	to customize the Read the Docs Sphinx Theme. You can edit the `conf.py_t` to
+	customize it; see the Sphinx documentation for more details. To use the
 	`sphinx-quickstart` script in non-interactive mode pass the options to
 	it using the syntax `lgt2rst -s -- -q` followed by `-p`, `-a` and `-v`
 	options. For example `lgt2rst -s -- -q -p "My Project" -a "J. Doe" -v "1.12"`.

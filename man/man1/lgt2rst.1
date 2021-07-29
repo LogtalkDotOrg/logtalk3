@@ -1,4 +1,4 @@
-.TH lgt2rst 1 "January 5, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+.TH lgt2rst 1 "July 29, 2021" "Logtalk 3.50.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files, notably for use with Sphinx
@@ -10,6 +10,7 @@ lgt2rst \- Logtalk script for converting XML documenting files into reStructured
 [\fB-t \fItitle\fR]
 [\fB-p \fIprocessor\fR]
 [\fB-s\fI\fR]
+[\fB-m\fI\fR]
 .br
 .B lgt2rst
 .B \-h
@@ -37,6 +38,9 @@ XSLT processor.
 .TP
 .B \-s
 Runs sphinx-quickstart script.
+.TP
+.B \-m
+Runs make html (requires also using the \fB-s\fI\fR option).
 .TP
 .B \-h
 Prints a summary of the script options.
@@ -79,6 +83,9 @@ The Logtalk index XSLT file.
 .TP
 .BI $LOGTALKUSER/tools/lgtdoc/xml/conf.py_t
 The conf.py template file.
+.TP
+.BI $LOGTALKUSER/tools/lgtdoc/xml/css/sphinx/custom.css
+The CSS file used to customize the Sphinx Read the Docs theme.
 
 .SH "SEE ALSO"
 The Sphinx website at https://www.sphinx-doc.org/

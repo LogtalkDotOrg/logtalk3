@@ -33,6 +33,13 @@ Logtalk compiler and runtime
 Tools
 -----
 
+* ADDED: A `custom.css` file to the `lgtdoc` tool for use with the `lgt2rst`
+scripts when called with the `-s` option to customize the Sphinx Read the Docs
+theme.
+
+* IMPROVED: The `lgt2rst` scripts now supports a `-m` option to generate Sphinx
+HTML files without requiring a separate step.
+
 * UPDATED: The `lgtdoc` tool to process the new `see_also` key for the `info/2`
 predicate directive.
 

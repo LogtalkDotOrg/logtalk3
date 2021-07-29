@@ -2,7 +2,7 @@
 //
 //   XML documenting files to reStructuredText files conversion script
 //
-//   Last updated on February 26, 2019
+//   Last updated on July 29, 2021
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -33,6 +33,7 @@ var WshShell = new ActiveXObject("WScript.Shell");
 var directory = WshShell.CurrentDirectory;
 
 var sphinx = false;
+var make_html = false;
 
 var index_file = "index.rst"
 var index_title = "Documentation index"
@@ -95,6 +96,9 @@ if (WScript.Arguments.Named.Exists("p"))
 
 if (WScript.Arguments.Named.Exists("s"))
 	sphinx = true;
+
+if (WScript.Arguments.Named.Exists("m"))
+	make_html = true;
 
 var FSObject = new ActiveXObject("Scripting.FileSystemObject");
 
@@ -194,9 +198,18 @@ if (sphinx) {
 	FSObject.DeleteFile(WshShell.CurrentDirectory + "\\index.rst");
 	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.backup", WshShell.CurrentDirectory + "\\index.rst");
 	WScript.Echo("");
-	WScript.Echo("all done");
 }
 
+if (sphinx && make_html) {
+	WScript.Echo("");
+	WScript.Echo("running make html ...");
+	WScript.Echo("");
+	WshShell.Run("make html", 1, true);
+	WScript.Echo("");
+	
+}
+
+WScript.Echo("all done");
 WScript.Quit(0);
 
 function usage_help() {
@@ -205,7 +218,7 @@ function usage_help() {
 	WScript.Echo("current directory to reStructuredText files for use with Sphinx");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
-	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor] [/s]");
+	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor] [/s] [/m]");
 	WScript.Echo("  " + WScript.ScriptName + " help");
 	WScript.Echo("");
 	WScript.Echo("Optional arguments:");
@@ -214,6 +227,7 @@ function usage_help() {
 	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
 	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, or sabcmd; default is " + processor + ")");
 	WScript.Echo("  s - run sphinx-quickstart script");
+	WScript.Echo("  m - run make html (requires also using the -s option)");
 	WScript.Echo("");
 	WScript.Quit(1);
 }

@@ -4,7 +4,7 @@
 ## 
 ##   XML documenting files to reStructuredText files conversion script
 ## 
-##   Last updated on October 23, 2019
+##   Last updated on July 29, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.0"
+	echo "$(basename "$0") 3.0"
 	exit 0
 }
 
@@ -96,6 +96,7 @@ processor=xsltproc
 directory="."
 
 sphinx=false
+make_html=false
 
 index_file=index.rst
 index_title="Documentation index"
@@ -107,7 +108,7 @@ usage_help()
 	echo "current directory to reStructuredText files for use with Sphinx"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor] [-s]"
+	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor] [-s] [-m]"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
@@ -117,6 +118,7 @@ usage_help()
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
 	echo "  -s run sphinx-quickstart script"
+	echo "  -m run make html (requires also using the -s option)"
 	echo "  -- arguments to be passed to sphinx-quickstart script (no default)"
 	echo "  -h help"
 	echo
@@ -168,7 +170,7 @@ create_index_file()
 	echo "Generated on $date" >> "$index_file"
 }
 
-while getopts "vd:i:t:p:sh" option
+while getopts "vd:i:t:p:smh" option
 do
 	case $option in
 		v) print_version;;
@@ -177,6 +179,7 @@ do
 		t) t_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		s) sphinx=true;;
+		m) make_html=true;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -259,8 +262,13 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo
 	if [ "$sphinx" = true ] ; then
 		mv index.rst index.rst.backup
+		mkdir -p _static/css
+		cp "$LOGTALKUSER/tools/lgtdoc/xml/css/sphinx/custom.css" _static/css/custom.css
 		sphinx-quickstart --templatedir="$LOGTALKUSER/tools/lgtdoc/xml" "${args[@]}"
 		mv index.rst.backup index.rst
+	fi
+	if [ "$sphinx" = true ] && [ "$make_html" = true ] ; then
+		make html
 	fi
 else
 	echo
