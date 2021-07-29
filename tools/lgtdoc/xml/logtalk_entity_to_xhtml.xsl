@@ -332,7 +332,7 @@
 		<xsl:if test="see_also">
 		<dt class ="key">see also:</dt>
 		<xsl:for-each select="see_also/reference">
-			<dd class ="code"><xsl:value-of select="name" /></dd>
+			<dd class ="code"><a href="#{name}"><xsl:value-of select="name" /></a></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="examples">

@@ -418,7 +418,7 @@
 		<xsl:text>| **See also:**</xsl:text>
 		<xsl:value-of select="$nl" />
 		<xsl:for-each select="see_also/reference">
-			<xsl:text>|    ``</xsl:text><xsl:value-of select="name" /><xsl:text>``</xsl:text>
+			<xsl:text>|    :ref:`</xsl:text><xsl:value-of select="/logtalk_entity/entity/functor" />::<xsl:value-of select="name" /><xsl:text>`</xsl:text>
 			<xsl:value-of select="$nl" />
 		</xsl:for-each>
 		<xsl:value-of select="$nl" />

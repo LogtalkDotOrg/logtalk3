@@ -252,7 +252,7 @@
 
 
 <xsl:template match="*/predicate">
-	<xsl:text>### `</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+	<xsl:text>### &lt;a name="</xsl:text><xsl:value-of select="name" /><xsl:text>"&gt;&lt;/a&gt;`</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
 	<xsl:value-of select="$nl" />
 	<xsl:if test="comment">
 		<xsl:value-of select="$nl" />
@@ -303,7 +303,7 @@
 	<xsl:if test="see_also">
 		<xsl:text>* see also:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:for-each select="see_also/reference">
-			<xsl:text>  * `</xsl:text><xsl:value-of select="name" /><xsl:text>`</xsl:text>
+			<xsl:text>  * [`</xsl:text><xsl:value-of select="name" /><xsl:text>`](#</xsl:text><xsl:value-of select="name" /><xsl:text>)</xsl:text>
 			<xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
