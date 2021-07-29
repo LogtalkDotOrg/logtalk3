@@ -41,7 +41,7 @@
 		<xsd:element name="relations"	type="relations"/>
 		<xsd:element name="predicates"	type="predicates"/>
 		<xsd:element name="operators"	type="operators"/>
-		<xsd:element name="remarks"		type="remarks"/>
+		<xsd:element name="remarks"	type="remarks"/>
 		<xsd:element name="see_also"	type="see_also"/>
 	</xsd:sequence>
 </xsd:complexType>
@@ -255,6 +255,7 @@
 		</xsd:choice>
 		<xsd:element name="exceptions"	type="exceptions"		minOccurs="0"/>
 		<xsd:element name="remarks"		type="remarks"			minOccurs="0"/>
+		<xsd:element name="see_also"		type="see_also"		minOccurs="0"/>
 		<xsd:element name="info"		type="info"				minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="examples"	type="examples"			minOccurs="0"/>
 	</xsd:sequence>

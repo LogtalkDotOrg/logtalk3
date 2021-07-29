@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
-%  Last updated on December 1, 2019
+%  Last updated on July 29, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -288,6 +288,12 @@
 		<xsl:text>remarks:</xsl:text><xsl:value-of select="$nl" />
 		<xsl:for-each select="remarks/remark">
 			<xsl:value-of select="$tab" /><xsl:value-of select="topic" /><xsl:text>: </xsl:text><xsl:value-of select="text" /><xsl:value-of select="$nl" />
+		</xsl:for-each>
+	</xsl:if>
+	<xsl:if test="see_also">
+		<xsl:text>see also:</xsl:text><xsl:value-of select="$nl" />
+		<xsl:for-each select="see_also/reference">
+			<xsl:value-of select="$tab" /><xsl:value-of select="name" /><xsl:value-of select="$nl" />
 		</xsl:for-each>
 	</xsl:if>
 	<xsl:if test="examples">

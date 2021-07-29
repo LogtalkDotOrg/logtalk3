@@ -111,7 +111,7 @@
 
 <!ELEMENT inherited_predicate (name, entity, functor, file)>
 
-<!ELEMENT predicate (name, scope, compilation, meta?, coinductive?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, remarks?, info*, examples?)>
+<!ELEMENT predicate (name, scope, compilation, meta?, coinductive?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, remarks?, see_also?, info*, examples?)>
 
 <!ELEMENT meta (#PCDATA)>
 

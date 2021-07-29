@@ -17,7 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on December 1, 2019
+%  Last updated on July 29, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -321,6 +321,12 @@
 		<dt class ="key">remarks:</dt>
 		<xsl:for-each select="remarks/remark">
 			<dd class ="value"><xsl:value-of select="topic" />: <xsl:value-of select="text" /></dd>
+		</xsl:for-each>
+		</xsl:if>
+		<xsl:if test="see_also">
+		<dt class ="key">see also:</dt>
+		<xsl:for-each select="see_also/reference">
+			<dd class ="code"><xsl:value-of select="name" /></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="examples">

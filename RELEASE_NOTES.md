@@ -30,6 +30,15 @@ Logtalk compiler and runtime
 
 * ADDED: Support for the `see_also` key to the `info/2` predicate directive.
 
+Tools
+-----
+
+* UPDATED: The `lgtdoc` tool to process the new `see_also` key for the `info/2`
+predicate directive.
+
+* FIXED: Sample Sphinx template provided by the lgtdoc` tool for compatibility
+with recent Sphinx versions.
+
 
 3.49.0 - July 27, 2021
 ======================

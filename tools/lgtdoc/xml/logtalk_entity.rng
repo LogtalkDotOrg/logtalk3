@@ -433,6 +433,9 @@
 			<optional>
 				<ref name="remarks"/>
 			</optional>
+			<optional>
+				<ref name="see_also"/>
+			</optional>
 			<zeroOrMore>
 				<ref name="info"/>
 			</zeroOrMore>
