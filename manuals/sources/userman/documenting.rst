@@ -221,8 +221,39 @@ overridden by passing a list of options to the tool predicates. The
 ``lgtdoc/xml`` sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
 style-sheet files and sample scripts for converting XML documenting files
-to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
-the ``NOTES`` file in the tool directory for details. You may use the
+to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). For
+example, assume that you want to generate the API documentation for the
+``types`` library:
+
+.. code-block:: text
+
+   | ?- {types(loader)}.
+   ....
+
+   | ?- {lgtdoc(loader)}.
+   ....
+
+   | ?- lgtdoc::library(types).
+   ...
+
+The above queries will result in the creation of a ``xml_docs`` in your
+current directory. Assuming that we want to generate Sphinx-based documentation
+and that we are using a POSIX operating-system, the next steps would be:
+
+.. code-block:: bash
+
+   $ cd xml_docs
+   $ lgt2rst -s -m
+
+The ``lgt2rst`` script will ask a few questions (project name, author,
+version, ...). After its completion, the generated HTML files will be
+found in the ``_build/html`` directory:
+
+.. code-block:: bash
+
+   $ open _build/html/index.html
+
+See the ``NOTES`` file in the tool directory for details. You may use the
 supplied sample files as a starting point for generating the documentation
 of your Logtalk applications.
 

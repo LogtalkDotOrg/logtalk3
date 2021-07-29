@@ -30,6 +30,11 @@ Logtalk compiler and runtime
 
 * ADDED: Support for the `see_also` key to the `info/2` predicate directive.
 
+Documentation
+-------------
+
+* IMPROVED: Handbook section on documenting applications.
+
 Tools
 -----
 

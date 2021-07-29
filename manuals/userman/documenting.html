@@ -407,8 +407,33 @@ overridden by passing a list of options to the tool predicates. The
 <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
 style-sheet files and sample scripts for converting XML documenting files
-to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). See
-the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file in the tool directory for details. You may use the
+to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). For
+example, assume that you want to generate the API documentation for the
+<code class="docutils literal notranslate"><span class="pre">types</span></code> library:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- {types(loader)}.
+....
+
+| ?- {lgtdoc(loader)}.
+....
+
+| ?- lgtdoc::library(types).
+...
+</pre></div>
+</div>
+<p>The above queries will result in the creation of a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code> in your
+current directory. Assuming that we want to generate Sphinx-based documentation
+and that we are using a POSIX operating-system, the next steps would be:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> xml_docs
+$ lgt2rst -s -m
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgt2rst</span></code> script will ask a few questions (project name, author,
+version, …). After its completion, the generated HTML files will be
+found in the <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ open _build/html/index.html
+</pre></div>
+</div>
+<p>See the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file in the tool directory for details. You may use the
 supplied sample files as a starting point for generating the documentation
 of your Logtalk applications.</p>
 <p>The Logtalk DTD file, <code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>, contains a reference to a
