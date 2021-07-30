@@ -30,6 +30,11 @@ Logtalk compiler and runtime
 
 * ADDED: Support for the `see_also` key to the `info/2` predicate directive.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The LVM adapter file for the proprietary `spy` predicate property.
+
 Documentation
 -------------
 
