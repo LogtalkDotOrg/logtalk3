@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on October 24, 2019
+##   Last updated on July 30, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 1.0"
+	echo "$(basename "$0") 2.0"
 	exit 0
 }
 
@@ -101,6 +101,7 @@ index_title="Documentation index"
 processor=xsltproc
 # processor=xalan
 # processor=sabcmd
+# processor=saxon
 
 usage_help()
 {
@@ -118,7 +119,7 @@ usage_help()
 	echo "  -d output directory for the generated files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
-	echo "  -p XSLT processor (xsltproc, xalan, or sabcmd; default is $processor)"
+	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
 	echo "  -h help"
 	echo
 }
@@ -216,7 +217,7 @@ if [ "$t_arg" != "" ] ; then
 	index_title=$t_arg
 fi
 
-if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "sabcmd" ] ; then
+if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "sabcmd" ] && [ "$p_arg" != "saxon" ] ; then
 	echo "Error! Unsupported XSLT processor: $p_arg" >&2
 	usage_help
 	exit 1
@@ -263,18 +264,20 @@ if grep -q "<logtalk" ./*.xml ; then
 		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$entity_xslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$entity_xslt\";;
-			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory\"/\"$name.html\";;
+			xsltproc)	eval xsltproc -o \"$directory/$name.html\" \"$entity_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory/$name.html\" \"$file\" \"$entity_xslt\";;
+			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory/$name.html\";;
+			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.html\" -s:\"$file\" -xsl:\"$entity_xslt\";;
 		esac
 	done
 	for file in $(grep -l "<logtalk_index" ./*.xml); do
 		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory\"/\"$name.html\" \"$index_xslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory\"/\"$name.html\" \"$file\" \"$index_xslt\";;
-			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory\"/\"$name.html\";;
+			xsltproc)	eval xsltproc -o \"$directory/$name.html\" \"$index_xslt\" \"$file\";;
+			xalan)		eval xalan -o \"$directory/$name.html\" \"$file\" \"$index_xslt\";;
+			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.html\";;
+			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.html\" -s:\"$file\" -xsl:\"$index_xslt\";;
 		esac
 	done
 	echo "conversion done"

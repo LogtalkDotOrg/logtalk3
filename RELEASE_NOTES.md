@@ -38,6 +38,9 @@ Documentation
 Tools
 -----
 
+* ADDED: Support for the Saxon XSLT processor to the `lgtdoc` tool `lgt2rst`,
+`lgt2html`, `lgt2md`, and `lgt2txt` scripts.
+
 * ADDED: A `custom.css` file to the `lgtdoc` tool for use with the `lgt2rst`
 scripts when called with the `-s` option to customize the Sphinx Read the Docs
 theme.

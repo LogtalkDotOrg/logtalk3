@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to Mardown text files conversion script 
-//   Last updated on October 24, 2018
+//   Last updated on July 30, 2021
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -38,6 +38,7 @@ var processor = "msxsl";
 // var processor = "xsltproc";
 // var processor = "xalan";
 // var processor = "sabcmd";
+// var processor = "saxon";
 
 if (WScript.Arguments.Unnamed.Length > 0) {
 	usage_help();
@@ -105,7 +106,7 @@ if (i_arg != "")
 if (t_arg != "")
 	index_title=t_arg;
 
-if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" && p_arg != "sabcmd") {
+if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" && p_arg != "sabcmd" && p_arg != "saxon") {
 	WScript.Echo("Error! Unsupported XSLT processor:" + p_arg);
 	WScript.Echo("");
 	usage_help();
@@ -165,6 +166,9 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 			case "sabcmd" :
 				WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + md_file + "\"", true);
 				break;
+			case "saxon" :
+				WshShell.Run("java net.sf.saxon.Transform -o:\"" + md_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\"", true);
+				break;
 		}
 	}
 }
@@ -194,7 +198,7 @@ function usage_help() {
 	WScript.Echo("  d - output directory for the generated files (default is " + directory + ")");
 	WScript.Echo("  i - name of the index file (default is " + index_file + ")");
 	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
-	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, or sabcmd; default is " + processor + ")");
+	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, sabcmd, or saxon; default is " + processor + ")");
 	WScript.Echo("");
 	WScript.Quit(1);
 }
