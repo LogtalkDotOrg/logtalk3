@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "June 10, 2021" "Logtalk 3.48.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "June 30, 2021" "Logtalk 3.48.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -122,9 +122,9 @@ Run all tests on the current directory and sub-directories using the Tau Prolog 
 \fBlogtalk_tester -p tau -g "set_logtalk_flag(clean,off)" -w\fR
 
 .SH IMPLEMENTATION NOTES
-When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. On Windows operating-systems, the native timeout command is not usable for this purpose.
+When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.
 .TP
-Installation of the GNU \fIsed\fR command, when not available by default, is strongly recommended.
+Installation of the GNU \fIsed\fR command, when not available by default, is strongly recommended. The Git for Windows installer includes this command, which can be used from the bundled Bash shell.
 
 .SH ENVIRONMENT
 .TP

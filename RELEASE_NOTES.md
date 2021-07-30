@@ -35,6 +35,8 @@ Documentation
 
 * IMPROVED: Handbook section on documenting applications.
 
+* IMPROVED: Man page for the `logtalk_tester` shell script.
+
 Tools
 -----
 
