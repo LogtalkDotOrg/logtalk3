@@ -253,6 +253,18 @@ found in the ``_build/html`` directory:
 
    $ open _build/html/index.html
 
+On Windows operating-systems, the JScript scripts can be used. For example,
+assuming that we want to generate HTML documentation, we could run in a
+``cmd.exe`` window:
+
+.. code-block:: text
+
+   cd xml_docs
+   cscript "%LOGTALKHOME%\tools\lgtdoc\xml\lgt2html.js" /p:saxon
+
+After completion, the generated HTML files will be found in the ``xml_docs``
+directory.
+
 See the ``NOTES`` file in the tool directory for details. You may use the
 supplied sample files as a starting point for generating the documentation
 of your Logtalk applications.

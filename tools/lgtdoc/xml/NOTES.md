@@ -176,7 +176,7 @@ Brief description of each directory and file in this folder:
 		* [Xalan](http://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  
 		* [Sablotron](http://www.gingerall.com/charlie/ga/xml/p_sab.xml) (tested with version 1.0.1)  
 		* [Microsoft MSXSL](http://msdn.microsoft.com/XML/XMLDownloads/default.aspx) (only for the Windows JScript script)
-		* [Saxon](http://saxon.sourceforge.net/) (tested with version 9.5.1.1)  
+		* [Saxon](http://saxon.sourceforge.net/) (tested with version 9.5.1.1; JAR version)  
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
