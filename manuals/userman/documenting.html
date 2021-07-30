@@ -389,20 +389,19 @@ documentation).</p>
 </div>
 <div class="section" id="processing-and-viewing-documenting-files">
 <span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool
-generates an XML documenting file per entity. It can also generate library,
-directory, entity, and predicate indexes when documenting libraries and
-directories. For example, assuming the default filename extensions, a
-<code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code> parametric object will result in
-<code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML files.</p>
+<p>The <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool generates an XML documenting file per
+entity. It can also generate library, directory, entity, and predicate
+indexes when documenting libraries and directories. For example, assuming
+the default filename extensions, a <code class="docutils literal notranslate"><span class="pre">trace</span></code> object and a <code class="docutils literal notranslate"><span class="pre">sort(_)</span></code>
+parametric object will result in <code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML
+files.</p>
 <p>Each entity XML file contains references to two other files, an XML
 specification file and a XSLT style-sheet file. The XML specification
 file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or an XML Scheme
 file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The XSLT style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
-file are defined by the
-<a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool but can be
+file are defined by the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool but can be
 overridden by passing a list of options to the tool predicates. The
 <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
@@ -421,15 +420,16 @@ example, assume that you want to generate the API documentation for the
 </pre></div>
 </div>
 <p>The above queries will result in the creation of a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code> in your
-current directory. Assuming that we want to generate Sphinx-based documentation
-and that we are using a POSIX operating-system, the next steps would be:</p>
+current directory by default. Assuming that we want to generate
+Sphinx-based documentation and that we are using a POSIX operating-system,
+the next steps would be:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> xml_docs
 $ lgt2rst -s -m
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgt2rst</span></code> script will ask a few questions (project name, author,
 version, …). After its completion, the generated HTML files will be
-found in the <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> directory:</p>
+found in the <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> directory by default:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ open _build/html/index.html
 </pre></div>
 </div>
@@ -440,13 +440,13 @@ assuming that we want to generate HTML documentation, we could run in a
 cscript &quot;%LOGTALKHOME%\tools\lgtdoc\xml\lgt2html.js&quot; /p:saxon
 </pre></div>
 </div>
-<p>Or simply use the <code class="docutils literal notranslate"><span class="pre">.bat</span></code> scripts alternatives:</p>
+<p>Or simply use the <code class="docutils literal notranslate"><span class="pre">.bat</span></code> script alternatives:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd xml_docs
 lgt2html /p:saxon
 </pre></div>
 </div>
 <p>After completion, the generated HTML files will be found in the <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code>
-directory.</p>
+directory by default.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">NOTES</span></code> file in the tool directory for details, specially on the
 XSLT processor dependencies. You may use the supplied sample files as a
 starting point for generating the documentation of your Logtalk applications.</p>

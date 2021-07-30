@@ -202,12 +202,12 @@ documentation).
 Processing and viewing documenting files
 ----------------------------------------
 
-The :doc:`../devtools/lgtdoc` tool
-generates an XML documenting file per entity. It can also generate library,
-directory, entity, and predicate indexes when documenting libraries and
-directories. For example, assuming the default filename extensions, a
-``trace`` object and a ``sort(_)`` parametric object will result in
-``trace_0.xml`` and ``sort_1.xml`` XML files.
+The :doc:`../devtools/lgtdoc` tool generates an XML documenting file per
+entity. It can also generate library, directory, entity, and predicate
+indexes when documenting libraries and directories. For example, assuming
+the default filename extensions, a ``trace`` object and a ``sort(_)``
+parametric object will result in ``trace_0.xml`` and ``sort_1.xml`` XML
+files.
 
 Each entity XML file contains references to two other files, an XML
 specification file and a XSLT style-sheet file. The XML specification
@@ -215,8 +215,7 @@ file can be either a DTD file (``logtalk_entity.dtd``) or an XML Scheme
 file (``logtalk_entity.xsd``). The XSLT style-sheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
 The default names for the XML specification file and the XSL style-sheet
-file are defined by the
-:doc:`../devtools/lgtdoc` tool but can be
+file are defined by the :doc:`../devtools/lgtdoc` tool but can be
 overridden by passing a list of options to the tool predicates. The
 ``lgtdoc/xml`` sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
@@ -237,8 +236,9 @@ example, assume that you want to generate the API documentation for the
    ...
 
 The above queries will result in the creation of a ``xml_docs`` in your
-current directory. Assuming that we want to generate Sphinx-based documentation
-and that we are using a POSIX operating-system, the next steps would be:
+current directory by default. Assuming that we want to generate
+Sphinx-based documentation and that we are using a POSIX operating-system,
+the next steps would be:
 
 .. code-block:: bash
 
@@ -247,7 +247,7 @@ and that we are using a POSIX operating-system, the next steps would be:
 
 The ``lgt2rst`` script will ask a few questions (project name, author,
 version, ...). After its completion, the generated HTML files will be
-found in the ``_build/html`` directory:
+found in the ``_build/html`` directory by default:
 
 .. code-block:: bash
 
@@ -262,7 +262,7 @@ assuming that we want to generate HTML documentation, we could run in a
    cd xml_docs
    cscript "%LOGTALKHOME%\tools\lgtdoc\xml\lgt2html.js" /p:saxon
 
-Or simply use the ``.bat`` scripts alternatives:
+Or simply use the ``.bat`` script alternatives:
 
 .. code-block:: text
 
@@ -270,7 +270,7 @@ Or simply use the ``.bat`` scripts alternatives:
    lgt2html /p:saxon
 
 After completion, the generated HTML files will be found in the ``xml_docs``
-directory.
+directory by default.
 
 See the ``NOTES`` file in the tool directory for details, specially on the
 XSLT processor dependencies. You may use the supplied sample files as a

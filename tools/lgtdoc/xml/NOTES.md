@@ -174,7 +174,7 @@ Brief description of each directory and file in this folder:
 	Supported XSLT processors:  
 		* [libxslt](http://xmlsoft.org/XSLT/) (tested with version 1.1.8)  
 		* [Xalan](http://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  
-		* [Sablotron](http://www.gingerall.com/charlie/ga/xml/p_sab.xml) (tested with version 1.0.1)  
+		* [Sablotron](https://sourceforge.net/projects/sablotron/) (tested with version 1.0.1)  
 		* [Microsoft MSXSL](http://msdn.microsoft.com/XML/XMLDownloads/default.aspx) (only for the Windows JScript script)
 		* [Saxon](http://saxon.sourceforge.net/) (tested with version 9.5.1.1; JAR version)  
 
