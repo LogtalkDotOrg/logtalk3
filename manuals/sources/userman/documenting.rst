@@ -264,15 +264,17 @@ assuming that we want to generate HTML documentation, we could run in a
 
 Or simply use the ``.bat`` scripts alternatives:
 
+.. code-block:: text
+
    cd xml_docs
    lgt2html /p:saxon
 
 After completion, the generated HTML files will be found in the ``xml_docs``
 directory.
 
-See the ``NOTES`` file in the tool directory for details. You may use the
-supplied sample files as a starting point for generating the documentation
-of your Logtalk applications.
+See the ``NOTES`` file in the tool directory for details, specially on the
+XSLT processor dependencies. You may use the supplied sample files as a
+starting point for generating the documentation of your Logtalk applications.
 
 The Logtalk DTD file, ``logtalk_entity.dtd``, contains a reference to a
 user-customizable file, ``custom.ent``, which declares XML entities for
