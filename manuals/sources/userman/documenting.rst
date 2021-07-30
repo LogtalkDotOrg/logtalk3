@@ -262,6 +262,11 @@ assuming that we want to generate HTML documentation, we could run in a
    cd xml_docs
    cscript "%LOGTALKHOME%\tools\lgtdoc\xml\lgt2html.js" /p:saxon
 
+Or simply use the ``.bat`` scripts alternatives:
+
+   cd xml_docs
+   lgt2html /p:saxon
+
 After completion, the generated HTML files will be found in the ``xml_docs``
 directory.
 
