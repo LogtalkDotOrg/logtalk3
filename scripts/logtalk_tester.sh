@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on July 22, 2021
+##   Last updated on July 31, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 6.4"
+	echo "$(basename "$0") 6.5"
 	exit 0
 }
 
@@ -275,6 +275,7 @@ usage_help()
 	echo "errors, this script returns a non-zero exit code. When a \"tester.sh\" file"
 	echo "exists in the tests directory, the file is sourced before running the tests."
 	echo "The \"tester.sh\" file is sourced with all the parameters passed to the script."
+	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"

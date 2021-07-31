@@ -55,6 +55,9 @@ theme.
 * IMPROVED: The `lgt2rst` scripts now supports a `-m` option to generate Sphinx
 HTML files without requiring a separate step.
 
+* UPDATED: Mention the GNU `coreutils` package requirement for the timeout
+option in the help for the `logtalk_tester` script.
+
 * UPDATED: The `lgtdoc` tool to process the new `see_also` key for the `info/2`
 predicate directive.
 
