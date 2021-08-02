@@ -22,7 +22,11 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
+	logtalk_load(
+		[assumptions, paths, switch],
+		% avoid printing expected warnings
+		[source_data(on), debug(on), suspicious_calls(silent)]
+	),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

@@ -23,11 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-06-26,
+		date is 2021-08-02,
 		comment is 'Unit tests for the "assumptions" example.'
 	]).
+
+	cover(assumptions).
+	cover(paths).
+	cover(switch).
 
 	test(assumptions_1) :-
 		findall(Path, (paths::init, paths::path(1,5,Path)), Paths),
