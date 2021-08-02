@@ -25,9 +25,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-10-07,
+		date is 2021-08-02,
 		comment is 'Unit tests for the encoding/1 built-in directive.'
 	]).
 
@@ -40,7 +40,8 @@
 
 	test(encoding_1_iso_8859_1) :-
 		file_path('iso_8859_1.lgt', Path),
-		logtalk_load(Path),
+		% avoid printing expected warnings
+		logtalk_load(Path, [report(off)]),
 		logtalk::loaded_file_property(Path, text_properties(Properties)),
 		member(encoding('ISO-8859-1'), Properties),
 		\+ member(encoding('UTF-8'), Properties).

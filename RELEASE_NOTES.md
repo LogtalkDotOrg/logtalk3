@@ -76,6 +76,12 @@ Examples
 * IMPROVED: Avoid printing expected warnings when running the `assumptions`,
 `lambdas`, `securemp`, and `closed_world_assumption` example tests.
 
+Tests
+-----
+
+* IMPROVED: Avoid printing expected warnings when running the `encoding/1`
+directive tests.
+
 
 3.49.0 - July 27, 2021
 ======================
