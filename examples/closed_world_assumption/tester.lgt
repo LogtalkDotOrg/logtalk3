@@ -22,7 +22,13 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(closed_world_assumption, [source_data(on), debug(on)]),
+	logtalk_load(
+		closed_world_assumption,
+		[	source_data(on), debug(on),
+			undefined_predicates(silent),
+			unknown_predicates(silent)
+		]
+	),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

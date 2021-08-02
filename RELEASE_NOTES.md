@@ -70,6 +70,12 @@ predicate directive.
 * FIXED: Sample Sphinx template provided by the lgtdoc` tool for compatibility
 with recent Sphinx versions.
 
+Examples
+--------
+
+* IMPROVED: Avoid expected warnings when running the `closed_world_assumption`
+tests.
+ 
 
 3.49.0 - July 27, 2021
 ======================
