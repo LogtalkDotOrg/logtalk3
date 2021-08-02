@@ -515,7 +515,8 @@ Glossary
 
    loader file
       A :term:`source file` whose main purpose is to load a set of
-      source files.
+      source files (possibly with specific compiler flags) and any
+      library dependencies.
 
    settings file
       A :term:`source file`, compiled and loaded automatically by default at
