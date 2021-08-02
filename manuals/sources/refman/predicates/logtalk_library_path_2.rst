@@ -34,6 +34,12 @@ of aliases to :term:`library` paths. Library aliases may also be used on
 the second argument (using the notation *alias(path)*). Paths must always
 end with the path directory separator character (``'/'``).
 
+.. warning::
+
+   Library aliases should be unique. The :ref:`predicates_logtalk_make_1`
+   built-in predicate can be used to detect and report duplicated library 
+   aliases using the ``check`` target.
+
 Relative paths (e.g. ``'../'`` or ``'./'``) should only be used within
 the *alias(path)*) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current

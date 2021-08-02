@@ -240,6 +240,12 @@
 of aliases to <a class="reference internal" href="../../glossary.html#term-library"><span class="xref std std-term">library</span></a> paths. Library aliases may also be used on
 the second argument (using the notation <em>alias(path)</em>). Paths must always
 end with the path directory separator character (<code class="docutils literal notranslate"><span class="pre">'/'</span></code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Library aliases should be unique. The <a class="reference internal" href="logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a>
+built-in predicate can be used to detect and report duplicated library
+aliases using the <code class="docutils literal notranslate"><span class="pre">check</span></code> target.</p>
+</div>
 <p>Relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) should only be used within
 the <em>alias(path)</em>) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current
