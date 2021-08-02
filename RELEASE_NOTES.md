@@ -73,9 +73,9 @@ with recent Sphinx versions.
 Examples
 --------
 
-* IMPROVED: Avoid expected warnings when running the `closed_world_assumption`
-tests.
- 
+* IMPROVED: Avoid printing expected warnings when running the `securemp` and
+`closed_world_assumption` example tests.
+
 
 3.49.0 - July 27, 2021
 ======================

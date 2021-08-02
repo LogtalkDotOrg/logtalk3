@@ -22,6 +22,9 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
+	% avoid expected warnings while running the tests
+	set_logtalk_flag(unknown_predicates, silent),
+	set_logtalk_flag(missing_directives, silent),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
