@@ -25,6 +25,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(loader),
-	logtalk_load(tests, [hook(lgtunit)]),
+	% avoid printing expected warnings
+	logtalk_load(tests, [hook(lgtunit), lambda_variables(silent)]),
 	tests::run
 )).

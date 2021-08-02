@@ -25,6 +25,7 @@
 	logtalk_load(
 		closed_world_assumption,
 		[	source_data(on), debug(on),
+			% avoid printing expected warnings
 			undefined_predicates(silent),
 			unknown_predicates(silent)
 		]
