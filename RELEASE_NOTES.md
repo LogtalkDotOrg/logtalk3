@@ -40,7 +40,8 @@ Documentation
 
 * IMPROVED: Handbook section on documenting applications.
 
-* IMPROVED: Handbook documentation of the `logtalk_library_path/2` predicate.
+* IMPROVED: Handbook documentation of the `logtalk_library_path/2` and 
+`logtalk_compile/1-2` predicates.
 
 * IMPROVED: Man page for the `logtalk_tester` shell script.
 

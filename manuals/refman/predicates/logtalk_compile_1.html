@@ -247,6 +247,12 @@ compiler tries first to append a Logtalk source file extension and then a
 Prolog source file extension. If that fails, the compiler tries to use the
 file name as-is. The recognized Logtalk and Prolog file extensions are
 defined in the <a class="reference internal" href="../../glossary.html#term-adapter-file"><span class="xref std std-term">backend adapter files</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This predicate does not load into memory the compiled source file.
+If you want to both compile and load a source file, use instead the
+<a class="reference internal" href="logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> built-in predicate.</p>
+</div>
 <p>When this predicate is called from the top-level interpreter, relative source
 file paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved using

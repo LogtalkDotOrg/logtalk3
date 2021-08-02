@@ -43,6 +43,12 @@ of the available compiler flags, please see the :ref:`programming_flags`
 section in the User Manual. The recognized Logtalk and Prolog file
 extensions are defined in the :term:`backend adapter files <adapter file>`.
 
+.. note::
+
+   This predicate does not load into memory the compiled source file.
+   If you want to both compile and load a source file, use instead the
+   :ref:`predicates_logtalk_load_2` built-in predicate.
+
 When this predicate is called from the top-level interpreter, relative source
 file paths are resolved using the current working directory. When the calls
 are made from a source file, relative source file paths are resolved by
