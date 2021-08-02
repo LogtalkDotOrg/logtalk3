@@ -40,6 +40,9 @@ Documentation
 
 * IMPROVED: Handbook section on documenting applications.
 
+* IMPROVED: Handbook documentation of the `use_module/1` and `threaded/0`
+directives.
+
 * IMPROVED: Handbook documentation of the multi-threaded, threaded engines,
 `logtalk_library_path/2` and  `logtalk_compile/1-2` predicates.
 

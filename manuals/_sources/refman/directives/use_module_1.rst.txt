@@ -47,6 +47,10 @@ To enable the use of :term:`static binding`, and thus optimal predicate call
 performance, the modules should be loaded before compiling the entities
 that call their predicates.
 
+Note that this directive semantics differs from the directive with the same
+name found on some Prolog implementations where it is used to load a module
+and import all its exported predicates.
+
 Template and modes
 ------------------
 
