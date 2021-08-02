@@ -36,6 +36,13 @@ the engine is not given, a unique name is generated and returned. Engine
 names shall be regarded as opaque terms; users shall not rely on its
 type.
 
+.. note::
+
+   This predicate requires a :term:`backend Prolog compiler` providing
+   compatible multi-threading primitives. The value of the read-only
+   :ref:`engines <flag_engines>` flag is set to ``supported`` when that
+   is the case.
+
 Modes and number of proofs
 --------------------------
 

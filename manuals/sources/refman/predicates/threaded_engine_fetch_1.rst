@@ -32,6 +32,13 @@ Description
 Fetches a term from the engine term queue. Blocks until a term is
 available. Fails if not called from within an engine.
 
+.. note::
+
+   This predicate requires a :term:`backend Prolog compiler` providing
+   compatible multi-threading primitives. The value of the read-only
+   :ref:`engines <flag_engines>` flag is set to ``supported`` when that
+   is the case.
+
 Modes and number of proofs
 --------------------------
 

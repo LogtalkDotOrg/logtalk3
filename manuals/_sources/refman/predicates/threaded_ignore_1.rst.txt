@@ -36,6 +36,13 @@ exception), which is simply discarded instead of being sent back to the
 message queue of the object containing the call
 (:term:`this`).
 
+.. note::
+
+   This predicate requires a :term:`backend Prolog compiler` providing
+   compatible multi-threading primitives. The value of the read-only
+   :ref:`threads <flag_threads>` flag is set to ``supported`` when that
+   is the case.
+
 Modes and number of proofs
 --------------------------
 

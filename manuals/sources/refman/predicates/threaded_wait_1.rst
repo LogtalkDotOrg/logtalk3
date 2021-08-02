@@ -38,6 +38,13 @@ eventually send the notification. The argument may also be a list of
 notifications, ``[Term| Terms]``. In this case, the thread making the
 call will suspend until all notifications in the list are received.
 
+.. note::
+
+   This predicate requires a :term:`backend Prolog compiler` providing
+   compatible multi-threading primitives. The value of the read-only
+   :ref:`threads <flag_threads>` flag is set to ``supported`` when that
+   is the case.
+
 Modes and number of proofs
 --------------------------
 

@@ -42,6 +42,13 @@ answer will always be returned. For example, instead of
 ``(threaded_engine_yield(ready); member(X,[1,2,3]))`` use
 ``(X=ready; member(X,[1,2,3]))``.
 
+.. note::
+
+   This predicate requires a :term:`backend Prolog compiler` providing
+   compatible multi-threading primitives. The value of the read-only
+   :ref:`engines <flag_engines>` flag is set to ``supported`` when that
+   is the case.
+
 Modes and number of proofs
 --------------------------
 

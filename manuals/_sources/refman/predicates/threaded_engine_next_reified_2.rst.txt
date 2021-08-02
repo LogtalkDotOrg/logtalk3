@@ -34,6 +34,13 @@ next answer. This predicate always succeeds and blocks until an answer
 becomes available. Answers are returned using the terms ``the(Answer)``,
 ``no``, and ``exception(Error)``.
 
+.. note::
+
+   This predicate requires a :term:`backend Prolog compiler` providing
+   compatible multi-threading primitives. The value of the read-only
+   :ref:`engines <flag_engines>` flag is set to ``supported`` when that
+   is the case.
+
 Modes and number of proofs
 --------------------------
 

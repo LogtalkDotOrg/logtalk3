@@ -244,6 +244,13 @@ in order to proceed. The call must be made within the same object
 notification. The argument may also be a list of notifications,
 <code class="docutils literal notranslate"><span class="pre">[Term|</span> <span class="pre">Terms]</span></code>. In this case, all notifications in the list will be
 sent to any threads suspended waiting for them in order to proceed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This predicate requires a <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> providing
+compatible multi-threading primitives. The value of the read-only
+<a class="reference internal" href="../../userman/programming.html#flag-threads"><span class="std std-ref">threads</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">supported</span></code> when that
+is the case.</p>
+</div>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>
