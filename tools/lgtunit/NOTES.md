@@ -825,6 +825,23 @@ the beginning of the tests. For example:
 		^^suppress_text_output,
 		{circle('#2', Color)}::print.
 
+Output of expected warnings can be suppressed by turning off the corresponding
+linter flags. In this case, it is advisable to restrict the scope of the flag
+value changes as much as possible.
+
+Output of expected compiler errors can be suppressed by defining suitable
+clauses for the `logtalk::message_hook/4` hook predicate. For example:
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	% ignore expected domain error
+	logtalk::message_hook(compiler_error(_,_,error(domain_error(foo,bar),_)), error, core, _).
+
+In this case, it is advisable to restrict the scope of the clauses as much
+as possible to exact exception terms. For the exact message terms, see the
+`core_messages` category source file.
+
 
 Tests with timeout limits
 -------------------------

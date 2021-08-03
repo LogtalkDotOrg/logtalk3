@@ -48,6 +48,9 @@ directives.
 
 * IMPROVED: Man page for the `logtalk_tester` shell script.
 
+* IMPROVED: The `lgtunit` tool documentation on suppressing tested predicates
+output.
+
 Tools
 -----
 

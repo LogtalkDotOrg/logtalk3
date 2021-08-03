@@ -1077,6 +1077,22 @@ it by using the goals <code class="docutils literal notranslate"><span class="pr
     <span class="k">{</span>circle(<span class="s">&#39;#2&#39;</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>print.
 </pre></div>
 </div>
+<p>Output of expected warnings can be suppressed by turning off the
+corresponding linter flags. In this case, it is advisable to restrict
+the scope of the flag value changes as much as possible.</p>
+<p>Output of expected compiler errors can be suppressed by defining
+suitable clauses for the <code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> hook predicate. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+
+<span class="c">% ignore expected domain error</span>
+logtalk<span class="o">::</span>message_hook(compiler_error(<span class="nv">_</span>,<span class="nv">_</span>,error(<span class="k">domain_error</span>(foo,bar),<span class="nv">_</span>)), error, core, <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>In this case, it is advisable to restrict the scope of the clauses as
+much as possible to exact exception terms. For the exact message terms,
+see the <code class="docutils literal notranslate"><span class="pre">core_messages</span></code> category source file.</p>
 </div>
 <div class="section" id="tests-with-timeout-limits">
 <h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Permalink to this headline">¶</a></h2>
