@@ -26,6 +26,7 @@
 	logtalk_load(types(pairs), [optimize(on)]),
 	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
+	logtalk_load(code_metrics(loader)),
 	logtalk_load(modules_diagram_support, [source_data(on), debug(on)]),
 	logtalk_load([
 		graph_language_registry,

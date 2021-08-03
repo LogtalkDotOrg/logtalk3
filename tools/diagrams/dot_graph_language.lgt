@@ -23,9 +23,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 3:4:0,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2021-01-26,
+		date is 2021-08-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -110,8 +110,7 @@
 	integer_to_padded_atom(Integer, Atom) :-
 		number_codes(Integer, Codes),
 		(	Integer < 10 ->
-			char_code('0', ZeroCode),
-			atom_codes(Atom, [ZeroCode| Codes])
+			atom_codes(Atom, [0'0| Codes])
 		;	atom_codes(Atom, Codes)
 		).
 

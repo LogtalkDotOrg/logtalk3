@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2021-06-01,
+		date is 2021-08-03,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -67,13 +67,13 @@
 	% entity_diagram tests
 
 	test(entity_diagram_libraries_3_01, deterministic) :-
-		entity_diagram::libraries(test, [diagrams,lgtunit], []).
+		entity_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(entity_diagram_libraries_2_01, deterministic) :-
-		entity_diagram::libraries(test, [diagrams,lgtunit]).
+		entity_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(entity_diagram_libraries_1_01, deterministic) :-
-		entity_diagram::libraries([diagrams,lgtunit]).
+		entity_diagram::libraries([code_metrics,lgtunit]).
 
 	test(entity_diagram_all_libraries_1_01, deterministic) :-
 		entity_diagram::all_libraries([]).
@@ -94,41 +94,41 @@
 		entity_diagram::library(lgtunit).
 
 	test(entity_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		entity_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		entity_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(entity_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		entity_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		entity_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(entity_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		entity_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		entity_diagram::directory(test, Directory, []).
 
 	test(entity_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		entity_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		entity_diagram::directory(test, Directory).
 
 	test(entity_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		entity_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		entity_diagram::directory(Directory).
 
 	test(entity_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		entity_diagram::files(test, Files, []).
 
 	test(entity_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		entity_diagram::files(test, Files).
 
 	test(entity_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		entity_diagram::files(Files).
@@ -150,13 +150,13 @@
 	% inheritance_diagram tests
 
 	test(inheritance_diagram_libraries_3_01, deterministic) :-
-		inheritance_diagram::libraries(test, [diagrams,lgtunit], []).
+		inheritance_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(inheritance_diagram_libraries_2_01, deterministic) :-
-		inheritance_diagram::libraries(test, [diagrams,lgtunit]).
+		inheritance_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(inheritance_diagram_libraries_1_01, deterministic) :-
-		inheritance_diagram::libraries([diagrams,lgtunit]).
+		inheritance_diagram::libraries([code_metrics,lgtunit]).
 
 	test(inheritance_diagram_all_libraries_1_01, deterministic) :-
 		inheritance_diagram::all_libraries([]).
@@ -177,41 +177,41 @@
 		inheritance_diagram::library(lgtunit).
 
 	test(inheritance_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		inheritance_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		inheritance_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(inheritance_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		inheritance_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		inheritance_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(inheritance_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		inheritance_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		inheritance_diagram::directory(test, Directory, []).
 
 	test(inheritance_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		inheritance_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		inheritance_diagram::directory(test, Directory).
 
 	test(inheritance_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		inheritance_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		inheritance_diagram::directory(Directory).
 
 	test(inheritance_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		inheritance_diagram::files(test, Files, []).
 
 	test(inheritance_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		inheritance_diagram::files(test, Files).
 
 	test(inheritance_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		inheritance_diagram::files(Files).
@@ -245,41 +245,41 @@
 		directory_dependency_diagram::rdirectory(LgtunitDirectory).
 
 	test(directory_dependency_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		directory_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		directory_dependency_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(directory_dependency_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		directory_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		directory_dependency_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(directory_dependency_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		directory_dependency_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		directory_dependency_diagram::directory(test, Directory, []).
 
 	test(directory_dependency_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		directory_dependency_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		directory_dependency_diagram::directory(test, Directory).
 
 	test(directory_dependency_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		directory_dependency_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		directory_dependency_diagram::directory(Directory).
 
 	test(directory_dependency_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_dependency_diagram::files(test, Files, []).
 
 	test(directory_dependency_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_dependency_diagram::files(test, Files).
 
 	test(directory_dependency_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_dependency_diagram::files(Files).
@@ -305,41 +305,41 @@
 		directory_load_diagram::rdirectory(LgtunitDirectory).
 
 	test(directory_load_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		directory_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		directory_load_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(directory_load_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		directory_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		directory_load_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(directory_load_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		directory_load_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		directory_load_diagram::directory(test, Directory, []).
 
 	test(directory_load_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		directory_load_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		directory_load_diagram::directory(test, Directory).
 
 	test(directory_load_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		directory_load_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		directory_load_diagram::directory(Directory).
 
 	test(directory_load_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_load_diagram::files(test, Files, []).
 
 	test(directory_load_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_load_diagram::files(test, Files).
 
 	test(directory_load_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		directory_load_diagram::files(Files).
@@ -353,13 +353,13 @@
 	% file_dependency_diagram tests
 
 	test(file_dependency_diagram_libraries_3_01, deterministic) :-
-		file_dependency_diagram::libraries(test, [diagrams,lgtunit], []).
+		file_dependency_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(file_dependency_diagram_libraries_2_01, deterministic) :-
-		file_dependency_diagram::libraries(test, [diagrams,lgtunit]).
+		file_dependency_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(file_dependency_diagram_libraries_1_01, deterministic) :-
-		file_dependency_diagram::libraries([diagrams,lgtunit]).
+		file_dependency_diagram::libraries([code_metrics,lgtunit]).
 
 	test(file_dependency_diagram_all_libraries_1_01, deterministic) :-
 		file_dependency_diagram::all_libraries([]).
@@ -380,41 +380,41 @@
 		file_dependency_diagram::library(lgtunit).
 
 	test(file_dependency_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		file_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		file_dependency_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(file_dependency_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		file_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		file_dependency_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(file_dependency_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		file_dependency_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		file_dependency_diagram::directory(test, Directory, []).
 
 	test(file_dependency_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		file_dependency_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		file_dependency_diagram::directory(test, Directory).
 
 	test(file_dependency_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		file_dependency_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		file_dependency_diagram::directory(Directory).
 
 	test(file_dependency_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_dependency_diagram::files(test, Files, []).
 
 	test(file_dependency_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_dependency_diagram::files(test, Files).
 
 	test(file_dependency_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_dependency_diagram::files(Files).
@@ -428,13 +428,13 @@
 	% file_load_diagram tests
 
 	test(file_load_diagram_libraries_3_01, deterministic) :-
-		file_load_diagram::libraries(test, [diagrams,lgtunit], []).
+		file_load_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(file_load_diagram_libraries_2_01, deterministic) :-
-		file_load_diagram::libraries(test, [diagrams,lgtunit]).
+		file_load_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(file_load_diagram_libraries_1_01, deterministic) :-
-		file_load_diagram::libraries([diagrams,lgtunit]).
+		file_load_diagram::libraries([code_metrics,lgtunit]).
 
 	test(file_load_diagram_all_libraries_1_01, deterministic) :-
 		file_load_diagram::all_libraries([]).
@@ -455,41 +455,41 @@
 		file_load_diagram::library(lgtunit).
 
 	test(file_load_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		file_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		file_load_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(file_load_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		file_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		file_load_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(file_load_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		file_load_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		file_load_diagram::directory(test, Directory, []).
 
 	test(file_load_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		file_load_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		file_load_diagram::directory(test, Directory).
 
 	test(file_load_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		file_load_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		file_load_diagram::directory(Directory).
 
 	test(file_load_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_load_diagram::files(test, Files, []).
 
 	test(file_load_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_load_diagram::files(test, Files).
 
 	test(file_load_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		file_load_diagram::files(Files).
@@ -503,13 +503,13 @@
 	% library_dependency_diagram tests
 
 	test(library_dependency_diagram_libraries_3_01, deterministic) :-
-		library_dependency_diagram::libraries(test, [diagrams,lgtunit], []).
+		library_dependency_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(library_dependency_diagram_libraries_2_01, deterministic) :-
-		library_dependency_diagram::libraries(test, [diagrams,lgtunit]).
+		library_dependency_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(library_dependency_diagram_libraries_1_01, deterministic) :-
-		library_dependency_diagram::libraries([diagrams,lgtunit]).
+		library_dependency_diagram::libraries([code_metrics,lgtunit]).
 
 	test(library_dependency_diagram_all_libraries_1_01, deterministic) :-
 		library_dependency_diagram::all_libraries([]).
@@ -530,41 +530,41 @@
 		library_dependency_diagram::library(lgtunit).
 
 	test(library_dependency_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		library_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		library_dependency_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(library_dependency_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		library_dependency_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		library_dependency_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(library_dependency_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		library_dependency_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		library_dependency_diagram::directory(test, Directory, []).
 
 	test(library_dependency_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		library_dependency_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		library_dependency_diagram::directory(test, Directory).
 
 	test(library_dependency_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		library_dependency_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		library_dependency_diagram::directory(Directory).
 
 	test(library_dependency_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_dependency_diagram::files(test, Files, []).
 
 	test(library_dependency_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_dependency_diagram::files(test, Files).
 
 	test(library_dependency_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_dependency_diagram::files(Files).
@@ -578,13 +578,13 @@
 	% library_load_diagram tests
 
 	test(library_load_diagram_libraries_3_01, deterministic) :-
-		library_load_diagram::libraries(test, [diagrams,lgtunit], []).
+		library_load_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(library_load_diagram_libraries_2_01, deterministic) :-
-		library_load_diagram::libraries(test, [diagrams,lgtunit]).
+		library_load_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(library_load_diagram_libraries_1_01, deterministic) :-
-		library_load_diagram::libraries([diagrams,lgtunit]).
+		library_load_diagram::libraries([code_metrics,lgtunit]).
 
 	test(library_load_diagram_all_libraries_1_01, deterministic) :-
 		library_load_diagram::all_libraries([]).
@@ -605,41 +605,41 @@
 		library_load_diagram::library(lgtunit).
 
 	test(library_load_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		library_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		library_load_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(library_load_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		library_load_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		library_load_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(library_load_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		library_load_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		library_load_diagram::directory(test, Directory, []).
 
 	test(library_load_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		library_load_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		library_load_diagram::directory(test, Directory).
 
 	test(library_load_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		library_load_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		library_load_diagram::directory(Directory).
 
 	test(library_load_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_load_diagram::files(test, Files, []).
 
 	test(library_load_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_load_diagram::files(test, Files).
 
 	test(library_load_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		library_load_diagram::files(Files).
@@ -653,13 +653,13 @@
 	% uses_diagram tests
 
 	test(uses_diagram_libraries_3_01, deterministic) :-
-		uses_diagram::libraries(test, [diagrams,lgtunit], []).
+		uses_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(uses_diagram_libraries_2_01, deterministic) :-
-		uses_diagram::libraries(test, [diagrams,lgtunit]).
+		uses_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(uses_diagram_libraries_1_01, deterministic) :-
-		uses_diagram::libraries([diagrams,lgtunit]).
+		uses_diagram::libraries([code_metrics,lgtunit]).
 
 	test(uses_diagram_all_libraries_1_01, deterministic) :-
 		uses_diagram::all_libraries([]).
@@ -680,41 +680,41 @@
 		uses_diagram::library(lgtunit).
 
 	test(uses_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		uses_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		uses_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(uses_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		uses_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		uses_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(uses_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		uses_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		uses_diagram::directory(test, Directory, []).
 
 	test(uses_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		uses_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		uses_diagram::directory(test, Directory).
 
 	test(uses_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		uses_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		uses_diagram::directory(Directory).
 
 	test(uses_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		uses_diagram::files(test, Files, []).
 
 	test(uses_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		uses_diagram::files(test, Files).
 
 	test(uses_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		uses_diagram::files(Files).
@@ -736,13 +736,13 @@
 	% xref_diagram tests
 
 	test(xref_diagram_libraries_3_01, deterministic) :-
-		xref_diagram::libraries(test, [diagrams,lgtunit], []).
+		xref_diagram::libraries(test, [code_metrics,lgtunit], []).
 
 	test(xref_diagram_libraries_2_01, deterministic) :-
-		xref_diagram::libraries(test, [diagrams,lgtunit]).
+		xref_diagram::libraries(test, [code_metrics,lgtunit]).
 
 	test(xref_diagram_libraries_1_01, deterministic) :-
-		xref_diagram::libraries([diagrams,lgtunit]).
+		xref_diagram::libraries([code_metrics,lgtunit]).
 
 	test(xref_diagram_all_libraries_1_01, deterministic) :-
 		xref_diagram::all_libraries([]).
@@ -763,41 +763,41 @@
 		xref_diagram::library(lgtunit).
 
 	test(xref_diagram_directories_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		xref_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory], []).
+		xref_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory], []).
 
 	test(xref_diagram_directories_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
+		logtalk::expand_library_path(code_metrics, CodeMetricsDirectory),
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		xref_diagram::directories(test, [DiagramsDirectory,LgtunitDirectory]).
+		xref_diagram::directories(test, [CodeMetricsDirectory,LgtunitDirectory]).
 
 	test(xref_diagram_directory_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		xref_diagram::directory(test, DiagramsDirectory, []).
+		logtalk::expand_library_path(code_metrics, Directory),
+		xref_diagram::directory(test, Directory, []).
 
 	test(xref_diagram_directory_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		xref_diagram::directory(test, DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		xref_diagram::directory(test, Directory).
 
 	test(xref_diagram_directory_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, DiagramsDirectory),
-		xref_diagram::directory(DiagramsDirectory).
+		logtalk::expand_library_path(code_metrics, Directory),
+		xref_diagram::directory(Directory).
 
 	test(xref_diagram_files_3_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		xref_diagram::files(test, Files, []).
 
 	test(xref_diagram_files_2_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		xref_diagram::files(test, Files).
 
 	test(xref_diagram_files_1_01, deterministic) :-
-		logtalk::expand_library_path(diagrams, Directory),
+		logtalk::expand_library_path(code_metrics, Directory),
 		os::directory_files(Directory, Files0),
 		findall(File, (list::member(File,Files0), sub_atom(File,_,12,0,'_diagram.lgt')), Files),
 		xref_diagram::files(Files).
@@ -825,7 +825,7 @@
 			os::delete_file(File)
 		).
 
-	% suppress all messages from the "lgtdoc" tool
+	% suppress all messages from the "diagrams" tool
 	% component to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).

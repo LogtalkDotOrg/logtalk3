@@ -66,6 +66,9 @@ theme.
 * IMPROVED: The `lgt2rst` scripts now supports a `-m` option to generate Sphinx
 HTML files without requiring a separate step.
 
+* IMPROVED: Performance of the `diagrams` tool tests by generating diagrams
+for a smaller library.
+
 * UPDATED: Mention the GNU `coreutils` package requirement for the timeout
 option in the help for the `logtalk_tester` script.
 
