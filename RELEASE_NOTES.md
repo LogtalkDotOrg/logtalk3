@@ -76,6 +76,9 @@ Examples
 * IMPROVED: Avoid printing expected warnings when running the `assumptions`,
 `lambdas`, `securemp`, and `closed_world_assumption` example tests.
 
+* FIXED: Loading of the `securemp` example to actually load all the demo
+broken meta-predicate definitions.
+
 Tests
 -----
 
