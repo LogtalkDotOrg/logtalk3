@@ -35,6 +35,8 @@ Prolog adapter and integration files
 
 * UPDATED: The LVM adapter file for the proprietary `spy` predicate property.
 
+* UPDATED: The Trealla Prolog adapter file to require 1.10.9 or later version.
+
 Documentation
 -------------
 
