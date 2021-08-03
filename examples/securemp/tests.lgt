@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2016-10-27,
+		date is 2021-08-03,
 		comment is 'Unit tests for the "securemp" example.'
 	]).
 
@@ -36,6 +36,7 @@
 		logtalk_load(rule_a).
 
 	succeeds(rule_a_variant) :-
+		^^suppress_text_output,
 		% runtime error
 		logtalk_load(rule_a_variant),
 		catch({client_a_variant::double([1,2,3], _)}, error(existence_error(procedure,PI), _), true),
@@ -48,9 +49,11 @@
 		).
 
 	succeeds(rule_b_1) :-
+		^^suppress_text_output,
 		logtalk_load(rule_b_1).
 
 	succeeds(rule_b_2) :-
+		^^suppress_text_output,
 		% runtime error
 		logtalk_load(rule_b_2),
 		catch({client_b_2::test}, error(existence_error(procedure,PI), _), true),
@@ -63,6 +66,7 @@
 		).
 
 	succeeds(rule_b_3) :-
+		^^suppress_text_output,
 		% runtime error
 		logtalk_load(rule_b_3),
 		catch({client_b_3::test(_)}, error(existence_error(procedure,PI), _), true),
@@ -83,5 +87,15 @@
 	fails(rule_c) :-
 		% compile-time error
 		logtalk_load(rule_c).
+
+	% suppress printing of compiler errors for the first two tests
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	% for "rule_a" test
+	logtalk::message_hook(compiler_error(_,_,error(type_error(variable,scale(_)),clause(_))), error, core, _Tokens).
+	% for "rule_c" test
+	logtalk::message_hook(compiler_error(_,_,error(domain_error({1},2),clause(_))), error, core, _Tokens).
 
 :- end_object.
