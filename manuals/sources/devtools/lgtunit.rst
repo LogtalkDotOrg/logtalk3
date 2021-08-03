@@ -946,7 +946,16 @@ example:
 
 In this case, it is advisable to restrict the scope of the clauses as
 much as possible to exact exception terms. For the exact message terms,
-see the ``core_messages`` category source file.
+see the ``core_messages`` category source file. Defining this hook
+predicate can also be used to suppress all messages from a given
+component. For example:
+
+::
+
+   :- multifile(logtalk::message_hook/4).
+   :- dynamic(logtalk::message_hook/4).
+
+   logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
 Tests with timeout limits
 -------------------------

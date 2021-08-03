@@ -1092,7 +1092,15 @@ logtalk<span class="o">::</span>message_hook(compiler_error(<span class="nv">_</
 </div>
 <p>In this case, it is advisable to restrict the scope of the clauses as
 much as possible to exact exception terms. For the exact message terms,
-see the <code class="docutils literal notranslate"><span class="pre">core_messages</span></code> category source file.</p>
+see the <code class="docutils literal notranslate"><span class="pre">core_messages</span></code> category source file. Defining this hook
+predicate can also be used to suppress all messages from a given
+component. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_hook<span class="o">/</span><span class="m">4</span>).
+
+logtalk<span class="o">::</span>message_hook(<span class="nv">_Message</span>, <span class="nv">_Kind</span>, code_metrics, <span class="nv">_Tokens</span>).
+</pre></div>
+</div>
 </div>
 <div class="section" id="tests-with-timeout-limits">
 <h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Permalink to this headline">¶</a></h2>
