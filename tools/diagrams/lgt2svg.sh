@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on April 6, 2020
+##   Last updated on August 4, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -82,9 +82,13 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
+
+
+# default argument values
+command="dot"
 
 
 usage_help()
@@ -94,25 +98,46 @@ usage_help()
 	echo "in the current directory to SVG files"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0")"
+	echo "  $(basename "$0") [-c command] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version"
+	echo "  -c Graphviz command (valid values are dot, circo, fdp and neato; default is $command)"
+	echo "  -- addtional arguments to be passed to the Graphviz command (no default)"
 	echo "  -h print help"
 	echo
 }
 
 
-while getopts "vh" Option
+while getopts "c:vh" Option
 do
 	case $Option in
+		c) c_arg="$OPTARG";;
 		v) print_version;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
 done
+
+shift $((OPTIND - 1))
+args=("$@")
+
+
+if [ "$c_arg" == "dot" ] ; then
+	command="dot"
+elif [ "$c_arg" == "circo" ] ; then
+	command="circo"
+elif [ "$c_arg" == "fdp" ] ; then
+	command="fdp"
+elif [ "$c_arg" == "neato" ] ; then
+	command="neato"
+elif [ "$c_arg" != "" ] ; then
+	echo "Error! Unknown Graphviz command: $c_arg" >&2
+	usage_help
+	exit 1
+fi
 
 
 echo "Converting .dot files to .svg files ..."
@@ -125,7 +150,7 @@ if [ $count != 0 ] ; then
 		flag=1
 		counter=16
 		while [ $flag -eq 1 ] && [ $counter -gt 0 ] ; do
-			dot -q -Tsvg -o"${file%.*}.svg" "$file" 2>/dev/null | cat
+			$command -q -Tsvg -o"${file%.*}.svg" ${args[@]} "$file" 2>/dev/null | cat
 			if [ "${PIPESTATUS[0]}" == 0 ] ; then
 				flag=0
 			fi

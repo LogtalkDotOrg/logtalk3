@@ -62,6 +62,20 @@ else {
 	WScript.Quit(1);
 }
 
+var command = "dot";
+
+var c_arg = "";
+
+if (WScript.Arguments.Named.Exists("c"))
+	c_arg = WScript.Arguments.Named.Item("c");
+
+if (c_arg != "" && c_arg != "dot" && c_arg != "circo" && c_arg != "fdp" && c_arg != "neato") {
+	WScript.Echo("Error! Unknown Graphviz command:" + c_arg);
+	WScript.Echo("");
+	usage_help();
+} else if (c_arg != "")
+	command = c_arg;
+
 var FSObject = new ActiveXObject("Scripting.FileSystemObject");
 
 FSObject.CopyFile(logtalk_user + "\\tools\\diagrams\\zoom.png", WshShell.CurrentDirectory + "\\zoom.png");
@@ -77,7 +91,7 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	if (FSObject.GetExtensionName(dot_file) == "dot") {
 		WScript.Echo("  converting " + dot_file);
 		var svg_file = WshShell.CurrentDirectory + "\\" + FSObject.GetBaseName(dot_file) + ".svg";
-		WshShell.Run("dot.exe -Tsvg -o\"" + svg_file + "\" \"" + dot_file + "\"", true);
+		WshShell.Run(command + ".exe -Tsvg -o\"" + svg_file + "\" \"" + dot_file + "\"", true);
 	}
 }
 
@@ -93,8 +107,10 @@ function usage_help() {
 	WScript.Echo("in the current directory to SVG files");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
-	WScript.Echo("  " + WScript.ScriptName);
+	WScript.Echo("  " + WScript.ScriptName + " [/c:command]");
 	WScript.Echo("  " + WScript.ScriptName + " help");
 	WScript.Echo("");
+	WScript.Echo("Optional arguments:");
+	WScript.Echo("  c - Graphviz command (valid values are dot, circo, fdp and neato; default is " + command + ")");
 	WScript.Quit(1);
 }

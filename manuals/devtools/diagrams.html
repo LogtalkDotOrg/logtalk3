@@ -489,8 +489,8 @@ command-line executable we can simply type:</p>
 <p>This usually works fine for entity and predicate call cross-referencing
 diagrams. For directory and file diagrams, the <code class="docutils literal notranslate"><span class="pre">fdp</span></code> and <code class="docutils literal notranslate"><span class="pre">circo</span></code>
 command-line executables may produce better results. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>fdp <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span class="o">&gt;</span> diagram.pdf
-circo <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span class="o">&gt;</span> diagram.pdf
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>fdp <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span class="o">&gt;</span> diagram.svg
+circo <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span class="o">&gt;</span> diagram.svg
 </pre></div>
 </div>
 <p>It’s also worth to experiment with different layouts to find the one
@@ -508,9 +508,7 @@ features.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.js</span></code> and <code class="docutils literal notranslate"><span class="pre">lgt2svg.bat</span></code> for Windows systems</p></li>
 </ul>
 <p>The scripts assume that the <code class="docutils literal notranslate"><span class="pre">dot</span></code> executable is available from the
-system path. Due to the lack of a Graphviz installer for Windows,
-limited test is performed in Windows operating-systems. Use if possible
-the bash script in a POSIX system (macOS, Linux, BSD, …).</p>
+system path.</p>
 <p>When generating diagrams for multiple libraries or directories, it’s
 possible to split a diagram with several disconnected library or
 directory graphs using the <code class="docutils literal notranslate"><span class="pre">ccomps</span></code> command-line executable. For

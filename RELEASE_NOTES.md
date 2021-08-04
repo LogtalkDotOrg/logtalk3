@@ -75,6 +75,9 @@ HTML files without requiring a separate step.
 * IMPROVED: Performance of the `diagrams` tool tests by generating diagrams
 for a smaller library.
 
+* UPDATED: The `lgt2svg` scripts provided by the `diagrams` tool to allow
+specifying the Graphviz command to use.
+
 * UPDATED: The `lgt2svg` scripts provided by the `diagrams` tool to use the
 `dot` command `-ofile` option for improved Windows compatibility.
 

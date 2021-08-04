@@ -235,8 +235,8 @@ command-line executables may produce better results. For example:
 
 ::
 
-   fdp -Tsvg diagram.dot > diagram.pdf
-   circo -Tsvg diagram.dot > diagram.pdf
+   fdp -Tsvg diagram.dot > diagram.svg
+   circo -Tsvg diagram.dot > diagram.svg
 
 It's also worth to experiment with different layouts to find the one
 that produces the best results (see the ``layout/1`` option described
@@ -255,9 +255,7 @@ Sample helper scripts are provided for converting ``.dot`` files to
 -  ``lgt2svg.js`` and ``lgt2svg.bat`` for Windows systems
 
 The scripts assume that the ``dot`` executable is available from the
-system path. Due to the lack of a Graphviz installer for Windows,
-limited test is performed in Windows operating-systems. Use if possible
-the bash script in a POSIX system (macOS, Linux, BSD, ...).
+system path.
 
 When generating diagrams for multiple libraries or directories, it's
 possible to split a diagram with several disconnected library or
