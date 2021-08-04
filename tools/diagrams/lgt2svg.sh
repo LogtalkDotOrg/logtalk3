@@ -125,7 +125,7 @@ if [ $count != 0 ] ; then
 		flag=1
 		counter=16
 		while [ $flag -eq 1 ] && [ $counter -gt 0 ] ; do
-			dot -q -Tsvg "$file" > "${file%.*}.svg" 2>/dev/null | cat
+			dot -q -Tsvg -O "$file" 2>/dev/null | cat
 			if [ "${PIPESTATUS[0]}" == 0 ] ; then
 				flag=0
 			fi

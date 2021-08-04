@@ -467,6 +467,9 @@ intercepting the left side)</div>
 part of the predicates, entities, files, or libraries for which we are
 generating a diagram use a dashed border, a darker color, and are
 described as external.</p>
+<p>Note that all the elements above can have captions. See below the
+diagrams <code class="docutils literal notranslate"><span class="pre">node_type_captions/1</span></code> and <code class="docutils literal notranslate"><span class="pre">relation_labels/1</span></code> output
+options.</p>
 </div>
 <div class="section" id="supported-graph-languages">
 <h2>Supported graph languages<a class="headerlink" href="#supported-graph-languages" title="Permalink to this headline">¶</a></h2>
@@ -521,8 +524,8 @@ example:</p>
 </div>
 <p>When using Windows, there are known issues with some Prolog compilers
 due to the internal representation of paths. If you encounter problems
-with a specific backend Prolog compiler, try to use another supported
-backend Prolog compiler when generating diagrams.</p>
+with a specific backend Prolog compiler, try if possible to use another
+supported backend Prolog compiler when generating diagrams.</p>
 <p>For printing large diagrams, you will need to either use a tool to slice
 the diagram in page-sized pieces or, preferably, use software capable of
 tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
@@ -877,7 +880,9 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 <p>The option <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code> with a non-empty list of
 prefixes should preferably be used together with the option
 <code class="docutils literal notranslate"><span class="pre">directory_paths(true)</span></code> when generating library or file diagrams that
-reference external libraries or files.</p>
+reference external libraries or files. To confirm the exact default
+options used by each type of diagram, send the <code class="docutils literal notranslate"><span class="pre">default_options/1</span></code>
+message to the diagram object.</p>
 <p>Be sure to set the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag <code class="docutils literal notranslate"><span class="pre">on</span></code> before compiling the
 libraries or files for which you want to generated diagrams.</p>
 <p>Support for displaying Prolog modules and Prolog module files in

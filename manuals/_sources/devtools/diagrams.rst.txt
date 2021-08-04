@@ -206,6 +206,10 @@ part of the predicates, entities, files, or libraries for which we are
 generating a diagram use a dashed border, a darker color, and are
 described as external.
 
+Note that all the elements above can have captions. See below the
+diagrams ``node_type_captions/1`` and ``relation_labels/1`` output
+options.
+
 Supported graph languages
 -------------------------
 
@@ -272,8 +276,8 @@ For more information on the DOT language and related tools see:
 
 When using Windows, there are known issues with some Prolog compilers
 due to the internal representation of paths. If you encounter problems
-with a specific backend Prolog compiler, try to use another supported
-backend Prolog compiler when generating diagrams.
+with a specific backend Prolog compiler, try if possible to use another
+supported backend Prolog compiler when generating diagrams.
 
 For printing large diagrams, you will need to either use a tool to slice
 the diagram in page-sized pieces or, preferably, use software capable of
@@ -515,7 +519,9 @@ For library diagrams the options are:
 The option ``omit_path_prefixes(Prefixes)`` with a non-empty list of
 prefixes should preferably be used together with the option
 ``directory_paths(true)`` when generating library or file diagrams that
-reference external libraries or files.
+reference external libraries or files. To confirm the exact default
+options used by each type of diagram, send the ``default_options/1``
+message to the diagram object.
 
 Be sure to set the ``source_data`` flag ``on`` before compiling the
 libraries or files for which you want to generated diagrams.

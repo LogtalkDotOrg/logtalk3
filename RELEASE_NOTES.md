@@ -75,6 +75,9 @@ HTML files without requiring a separate step.
 * IMPROVED: Performance of the `diagrams` tool tests by generating diagrams
 for a smaller library.
 
+* UPDATED: The `lgt2svg` scripts provided by the `diagrams` tool to use the
+`dot` command `-O` option for improved Windows compatibility.
+
 * UPDATED: Mention the GNU `coreutils` package requirement for the timeout
 option in the help for the `logtalk_tester` script.
 
