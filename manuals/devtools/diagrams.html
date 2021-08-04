@@ -507,8 +507,10 @@ features.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> for POSIX systems</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.js</span></code> and <code class="docutils literal notranslate"><span class="pre">lgt2svg.bat</span></code> for Windows systems</p></li>
 </ul>
-<p>The scripts assume that the <code class="docutils literal notranslate"><span class="pre">dot</span></code> executable is available from the
-system path.</p>
+<p>The scripts assume that the Graphviz command-line executables are
+available from the system path (the default is the <code class="docutils literal notranslate"><span class="pre">dot</span></code> executable
+but the scripts accept a command-line option to select in alternative
+the <code class="docutils literal notranslate"><span class="pre">circo</span></code>, <code class="docutils literal notranslate"><span class="pre">fdp</span></code>, or <code class="docutils literal notranslate"><span class="pre">neato</span></code> executable).</p>
 <p>When generating diagrams for multiple libraries or directories, it’s
 possible to split a diagram with several disconnected library or
 directory graphs using the <code class="docutils literal notranslate"><span class="pre">ccomps</span></code> command-line executable. For

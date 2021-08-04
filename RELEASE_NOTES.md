@@ -53,6 +53,8 @@ directives.
 * IMPROVED: The `lgtunit` tool documentation on suppressing tested predicates
 output.
 
+* UPDATED: The man page for the `lgt2svg` shell script.
+
 Library
 -------
 

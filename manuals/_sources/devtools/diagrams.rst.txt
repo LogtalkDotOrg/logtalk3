@@ -254,8 +254,10 @@ Sample helper scripts are provided for converting ``.dot`` files to
 -  ``lgt2svg.sh`` for POSIX systems
 -  ``lgt2svg.js`` and ``lgt2svg.bat`` for Windows systems
 
-The scripts assume that the ``dot`` executable is available from the
-system path.
+The scripts assume that the Graphviz command-line executables are
+available from the system path (the default is the ``dot`` executable
+but the scripts accept a command-line option to select in alternative
+the ``circo``, ``fdp``, or ``neato`` executable).
 
 When generating diagrams for multiple libraries or directories, it's
 possible to split a diagram with several disconnected library or
