@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:47:0,
+		version is 2:48:0,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-08-04,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -1242,11 +1242,10 @@
 			(	compound(Identifier) ->
 				functor(Identifier, Functor, Arity),
 				number_codes(Arity, ArityCodes),
-				atom_codes(ArityAtom, ArityCodes),
-				atom_concat(Functor, '_', Diagram0),
-				atom_concat(Diagram0, ArityAtom, Diagram1),
-				atom_concat(Diagram1, Suffix, Diagram2),
-				atom_concat(Diagram2, Extension, Diagram)
+				atom_codes(ArityAtom, [0'_| ArityCodes]),
+				atom_concat(Functor, ArityAtom, Diagram0),
+				atom_concat(Diagram0, Suffix, Diagram1),
+				atom_concat(Diagram1, Extension, Diagram)
 			;	atom_concat(Identifier, Suffix, Diagram0),
 				atom_concat(Diagram0, Extension, Diagram)
 			),

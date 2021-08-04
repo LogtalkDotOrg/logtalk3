@@ -25,7 +25,7 @@
 	:- info([
 		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-03,
+		date is 2021-08-04,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -49,7 +49,7 @@
 	file_header(Stream, Identifier, Options) :-
 		write(Stream, 'digraph "'),
 		write(Stream, Identifier),
-		write(Stream, '" {'), nl(Stream),
+		write(Stream, '" {\n'),
 		memberchk(layout(Layout), Options),
 		convert_layout(Layout, RankDir),
 		write_key_value_nl(Stream, rankdir, RankDir),
@@ -65,8 +65,8 @@
 		write_key_value_nl(Stream, fontcolor, dimgray),
 		write_key_value_nl(Stream, pencolor, dimgray),
 		write_key_value_nl(Stream, stylesheet, 'diagrams.css'),
-		write(Stream, 'node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]'), nl(Stream),
-		write(Stream, 'edge [fontname="Courier",fontsize="9"]'), nl(Stream),
+		write(Stream, 'node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]\n'),
+		write(Stream, 'edge [fontname="Courier",fontsize="9"]\n'),
 		diagram_label(Options, Label),
 		write_key_value_nl(Stream, label, Label),
 		nl(Stream).
@@ -115,13 +115,13 @@
 		).
 
 	file_footer(Stream, _Identifier, _Options) :-
-		write(Stream, '}'), nl(Stream).
+		write(Stream, '}\n').
 
 	graph_header(Stream, Identifier, Label, Kind, Options) :-
 		graph_style_margin_color(Kind, Style, Margin, Color),
 		write(Stream, 'subgraph "cluster_'),
 		write(Stream, Identifier),
-		write(Stream, '" {'), nl(Stream),
+		write(Stream, '" {\n'),
 		write_key_value_nl(Stream, bgcolor, Color),
 		write_key_value_nl(Stream, style, Style),
 		write_key_value_nl(Stream, margin, Margin),
@@ -133,14 +133,14 @@
 				write(Stream, URL),
 				write(Stream, '">'),
 				write(Stream, Label),
-				write(Stream, '</TD></TR></TABLE>>'), nl(Stream),
+				write(Stream, '</TD></TR></TABLE>>\n'),
 				write_key_value_nl(Stream, tooltip, Label)
 			;	member(tooltip(Tooltip), Options) ->
 				write(Stream, 'label=<<TABLE border="0" cellborder="0"><TR><TD tooltip="'),
 				write(Stream, Tooltip),
 				write(Stream, '">'),
 				write(Stream, Label),
-				write(Stream, '</TD></TR></TABLE>>'), nl(Stream),
+				write(Stream, '</TD></TR></TABLE>>\n'),
 				write_key_value_nl(Stream, tooltip, Tooltip)
 			;	write_key_value_nl(Stream, tooltip, Label)
 			)
@@ -149,13 +149,13 @@
 			write(Stream, Tooltip),
 			write(Stream, '">'),
 			write(Stream, Label),
-			write(Stream, '</TD></TR></TABLE>>'), nl(Stream),
+			write(Stream, '</TD></TR></TABLE>>\n'),
 			write_key_value_nl(Stream, tooltip, Tooltip)
 		;	write_key_value_nl(Stream, tooltip, Label)
 		).
 
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
-		write(Stream, '}'), nl(Stream), nl(Stream).
+		write(Stream, '}\n\n').
 
 	graph_style_margin_color(rlibrary, rounded, 10, lightgray).
 	graph_style_margin_color(libraries, rounded, 10, lightgray).
@@ -206,7 +206,7 @@
 		;	write(Stream, '<TR><TD> </TD></TR>'),
 			write_node_lines(Contents, Stream)
 		),
-		write(Stream, '</TABLE>>]'), nl(Stream).
+		write(Stream, '</TABLE>>]\n').
 
 	% entities belonging to the file or library being documented
 	node_shape_style_color(prototype, box, filled, cornsilk).
@@ -260,7 +260,7 @@
 		),
 		write(Stream, 'label=<'),
 		write_edge_lines(Labels, Stream),
-		write(Stream, '>]'), nl(Stream).
+		write(Stream, '>]\n').
 
 	% entity relations
 	edge_arrow(extends_object, vee).
@@ -328,8 +328,8 @@
 	% and are broken as they don't escape problematic characters; we try
 	% to workaround the problem by manually escaping characters but the
 	% chosen solution requires writing a term to a list of characters,
-	% which is a non-standard functionality that only some backend systems
-	% provide in a usable form
+	% which uses a slow but portable implementation as this is a non-standard
+	% functionality that only some backend systems provide in a usable form
 	write_escaped_term(Stream, Term) :-
 		write_to_chars(Term, Chars),
 		write_escaped_chars(Chars, Stream).

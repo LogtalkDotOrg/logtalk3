@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:49:0,
+		version is 2:50:0,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-08-04,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -265,10 +265,9 @@
 	entity_to_html_name(module, Entity, Entity).
 	entity_to_html_name(logtalk, Entity, Name) :-
 		functor(Entity, Functor, Arity),
-		atom_concat(Functor, '_', Name0),
 		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(Name0, ArityAtom, Name).
+		atom_codes(ArityAtom, [0'_| ArityCodes]),
+		atom_concat(Functor, ArityAtom, Name).
 
 	add_external_entity_code_url(Kind, Entity, Options, EntityOptions) :-
 		(	% first, find the file defining the entity

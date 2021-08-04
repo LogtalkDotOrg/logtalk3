@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:62:0,
+		version is 2:63:0,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-08-04,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -113,9 +113,8 @@
 		;	^^ground_entity_identifier(Kind, Entity, GroundEntity),
 			functor(GroundEntity, Functor, Arity),
 			number_chars(Arity, Chars),
-			atom_chars(ArityAtom, Chars),
-			atom_concat(Functor, '_', Name0),
-			atom_concat(Name0, ArityAtom, Name)
+			atom_chars(ArityAtom, ['_'| Chars]),
+			atom_concat(Functor, ArityAtom, Name)
 		).
 
 	process_entity(Kind, Entity, Options) :-
@@ -320,17 +319,16 @@
 			DocPrefix \== '' ->
 			functor(Entity, EntityFunctor, EntityArity),
 			atom_concat(DocPrefix, EntityFunctor, DocURL0),
-			atom_concat(DocURL0, '_', DocURL1),
 			number_codes(EntityArity, EntityArityCodes),
-			atom_codes(EntityArityAtom, EntityArityCodes),
-			atom_concat(DocURL1, EntityArityAtom, DocURL2),
+			atom_codes(EntityArityAtom, [0'_| EntityArityCodes]),
+			atom_concat(DocURL0, EntityArityAtom, DocURL1),
 			memberchk(entity_url_suffix_target(Suffix, Target), Options),
-			atom_concat(DocURL2, Suffix, DocURL3),
+			atom_concat(DocURL1, Suffix, DocURL2),
 			(	Target == '' ->
-				DocURL = DocURL3
-			;	atom_concat(DocURL3, Target, DocURL4),
+				DocURL = DocURL2
+			;	atom_concat(DocURL2, Target, DocURL3),
 				predicate_target_value(Predicate, TargetValue),
-				atom_concat(DocURL4, TargetValue, DocURL)
+				atom_concat(DocURL3, TargetValue, DocURL)
 			),
 			XRefOptions = [url(DocURL)| Options]
 		;	% could not find entity file or URL prefixes not defined
