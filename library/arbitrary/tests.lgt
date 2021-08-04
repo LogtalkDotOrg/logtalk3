@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:1,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2020-09-02,
+		date is 2021-08-04,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -260,6 +260,14 @@
 		Types = [var, atom, integer, compound],
 		lgtunit::quick_check(type::arbitrary({types(Types)}, -types(Types)), Result, [n(25)]),
 		^^assertion(type(types(Types),Result), subsumes_term(passed(_,_,_), Result)).
+
+	test(arbitrary_arbitrary_2_26) :-
+		forall(
+			(	type::arbitrary(Type),
+				ground(Type)
+			),
+			^^assertion(Type, lgtunit::deterministic(type::arbitrary(Type,_)))
+		).
 
 	% random seed predicates
 

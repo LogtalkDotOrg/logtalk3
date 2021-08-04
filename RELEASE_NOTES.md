@@ -53,6 +53,12 @@ directives.
 * IMPROVED: The `lgtunit` tool documentation on suppressing tested predicates
 output.
 
+Library
+-------
+
+* ADDED: Additional tests for the `arbitrary` and `types` libraries to check
+that the main predicates are deterministic.
+
 Tools
 -----
 

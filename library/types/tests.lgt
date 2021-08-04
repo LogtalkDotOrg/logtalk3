@@ -23,15 +23,24 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2021-03-25,
+		date is 2021-08-04,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, '=~='), '=~='/2
 	]).
+
+	test(type_checking_deterministic, true) :-
+		forall(
+			(	type::type(Type),
+				ground(Type),
+				type::arbitrary(Type, Value)
+			),
+			^^assertion(Type, lgtunit::deterministic(type::valid(Type,Value)))
+		).
 
 	test(term_numbervars_3_01, true(ground(Term))) :-
 		Term = a(_,_,_),
