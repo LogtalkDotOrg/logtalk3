@@ -78,6 +78,9 @@ predicate directive.
 * FIXED: Sample Sphinx template provided by the lgtdoc` tool for compatibility
 with recent Sphinx versions.
 
+* FIXED: Tests driver file for the `arbitrary` library to use the local source
+file.
+
 Examples
 --------
 
