@@ -83,7 +83,7 @@ yes
 % sub-libraries using the rlibrary/1 method instead of the library/1
 % method:
 
-| ?- file_load_diagram(dot)::rlibrary(tools).
+| ?- library_load_diagram(dot)::rlibrary(tools).
 yes
 
 
