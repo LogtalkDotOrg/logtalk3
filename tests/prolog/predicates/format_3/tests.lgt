@@ -205,6 +205,30 @@
 		{format(S, '~3E', [1.333333])},
 		^^text_output_assertion('1.333E+00', Assertion).
 
+	test(lgt_format_3_float_best_e, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~g', [0.00000123])},
+		^^text_output_assertion('1.23e-06', Assertion).
+
+	test(lgt_format_3_float_best_f, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~g', [0.39265e+3])},
+		^^text_output_assertion('392.65', Assertion).
+
+	test(lgt_format_3_float_best_e_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~G', [0.00000123])},
+		^^text_output_assertion('1.23E-06', Assertion).
+
+	test(lgt_format_3_float_best_f_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~G', [0.39265e+3])},
+		^^text_output_assertion('392.65', Assertion).
+
 	cleanup :-
 		^^clean_text_output.
 
