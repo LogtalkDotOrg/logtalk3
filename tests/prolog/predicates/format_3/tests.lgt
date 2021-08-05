@@ -19,9 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_prolog_flag(double_quotes, codes).
-
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -95,13 +92,13 @@
 	test(lgt_format_3_string, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
-		{format(S, '~s', ["ABC"])},
+		{format(S, '~s', [[65,66,67]])},
 		^^text_output_assertion('ABC', Assertion).
 
 	test(lgt_format_2_string_first_n, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
-		{format(S, '~3s', ["ABCDEFGHI"])},
+		{format(S, '~3s', [[65,66,67,68,69,70,71,72,73]])},
 		^^text_output_assertion('ABC', Assertion).
 
 	:- if((
