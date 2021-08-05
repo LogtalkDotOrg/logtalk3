@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:3,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-07-26,
+		date is 2021-08-05,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
@@ -74,6 +74,12 @@
 		{format(S, '~a', [abc])},
 		^^text_output_assertion(abc, Assertion).
 
+	test(lgt_format_3_atom_no_quoting, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~a', ['ABC'])},
+		^^text_output_assertion('ABC', Assertion).
+
 	test(lgt_format_3_code, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
@@ -114,6 +120,12 @@
 		{format(S, '~4n', [])},
 		^^text_output_assertion('\r\n\r\n\r\n\r\n', Assertion).
 
+	test(lgt_format_3_new_line_if_not_beginning_of_line, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~Nbegin~N~Nend', [])},
+		^^text_output_assertion('begin\r\nend', Assertion).
+
 	:- else.
 
 	test(lgt_format_3_new_line, true(Assertion)) :-
@@ -127,6 +139,12 @@
 		current_output(S),
 		{format(S, '~4n', [])},
 		^^text_output_assertion('\n\n\n\n', Assertion).
+
+	test(lgt_format_3_new_line_if_not_beginning_of_line, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~Nbegin~N~Nend', [])},
+		^^text_output_assertion('begin\nend', Assertion).
 
 	:- endif.
 
