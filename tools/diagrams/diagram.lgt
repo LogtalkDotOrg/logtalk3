@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:48:0,
+		version is 2:49:0,
 		author is 'Paulo Moura',
-		date is 2021-08-04,
+		date is 2021-08-05,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -318,13 +318,21 @@
 		::output_sub_diagrams(UserOptions).
 
 	normalize_directory_paths([], []).
-	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		os::absolute_file_name(Directory, NormalizedDirectory0),
-		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
-			NormalizedDirectory = NormalizedDirectory0
-		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
+	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
+		os::absolute_file_name(Directory0, Directory1),
+		(	sub_atom(Directory1, _, _, 0, '/') ->
+			Directory = Directory1
+		;	atom_concat(Directory1, '/', Directory)
 		),
-		normalize_directory_paths(Directories, NormalizedDirectories).
+		normalize_directory_paths(Directories0, Directories).
+
+	normalize_url_prefixes([], []).
+	normalize_url_prefixes([URL0| URLs0], [URL| URLs]) :-
+		(	sub_atom(URL0, _, _, 0, '/') ->
+			URL = URL0
+		;	atom_concat(URL0, '/', URL)
+		),
+		normalize_url_prefixes(URLs0, URLs).
 
 	output_directories([], _Project, _Format, _Options).
 	output_directories([Directory| Directories], Project, Format, Options) :-
@@ -683,12 +691,15 @@
 	valid_option(url_line_references(Provider)) :-
 		valid(one_of(atom, [bitbucket,github,gitlab]), Provider).
 
-	fix_option(path_url_prefixes(Directory, CodePrefix, DocPrefix), path_url_prefixes(NormalizedDirectory, CodePrefix, DocPrefix)) :-
-		normalize_directory_paths([Directory], [NormalizedDirectory]).
-	fix_option(omit_path_prefixes(Prefixes), omit_path_prefixes(NormalizedPrefixes)) :-
-		normalize_directory_paths(Prefixes, NormalizedPrefixes).
-	fix_option(output_directory(Directory), output_directory(NormalizedDirectory)) :-
-		normalize_directory_paths([Directory], [NormalizedDirectory]).
+	fix_option(url_prefixes(CodePrefix0, DocPrefix0), url_prefixes(CodePrefix, DocPrefix)) :-
+		normalize_url_prefixes([CodePrefix0, DocPrefix0], [CodePrefix, DocPrefix]).
+	fix_option(path_url_prefixes(Directory0, CodePrefix0, DocPrefix0), path_url_prefixes(Directory, CodePrefix, DocPrefix)) :-
+		normalize_directory_paths([Directory0], [Directory]),
+		normalize_url_prefixes([CodePrefix0, DocPrefix0], [CodePrefix, DocPrefix]).
+	fix_option(omit_path_prefixes(Prefixes0), omit_path_prefixes(Prefixes)) :-
+		normalize_directory_paths(Prefixes0, Prefixes).
+	fix_option(output_directory(Directory0), output_directory(Directory)) :-
+		normalize_directory_paths([Directory0], [Directory]).
 
 	:- protected(diagram_caption/3).
 	:- mode(diagram_caption(+atom, +callable, -atom), one).

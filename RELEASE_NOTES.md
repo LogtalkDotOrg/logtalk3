@@ -53,6 +53,8 @@ directives.
 * IMPROVED: The `lgtunit` tool documentation on suppressing tested predicates
 output.
 
+* IMPROVED: The `diagrams` tool documentation and examples.
+
 * UPDATED: The man page for the `lgt2svg` shell script.
 
 Library
@@ -73,6 +75,9 @@ theme.
 
 * IMPROVED: The `lgt2rst` scripts now supports a `-m` option to generate Sphinx
 HTML files without requiring a separate step.
+
+* IMPROVED: The `diagrams` tool to also normalize URL prefixes in predicate
+options.
 
 * IMPROVED: Performance of the `diagrams` tool tests by generating diagrams
 for a smaller library.

@@ -498,9 +498,10 @@ that produces the best results (see the <code class="docutils literal notranslat
 below).</p>
 <p>Some output formats such as SVG support tooltips and URL links, which
 can be used for showing e.g. entity types, relation types, file paths,
-and for navigating to files and directories of files (libraries). See
-the relevant diagram options below in order to take advantage of these
-features.</p>
+and for navigating to files and directories of files (libraries) or to
+API documentation. See the relevant diagram options below in order to
+take advantage of these features (see the discussion below on “linking
+diagrams”).</p>
 <p>Sample helper scripts are provided for converting <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to
 <code class="docutils literal notranslate"><span class="pre">.svg</span></code> files:</p>
 <ul class="simple">
@@ -913,13 +914,15 @@ diagrams of Logtalk applications:</p>
 <div class="section" id="linking-diagrams">
 <h2>Linking diagrams<a class="headerlink" href="#linking-diagrams" title="Permalink to this headline">¶</a></h2>
 <p>When using SVG output, it’s possible to generate diagrams that link to
-other diagrams and to API documentation and source code repositories.</p>
+other diagrams, to API documentation, and to source code repositories
+(to both files and directories).</p>
 <p>For generating links between diagrams, use the <code class="docutils literal notranslate"><span class="pre">zoom(true)</span></code> option.
 This option allows (1) linking library diagrams to entity diagrams to
 predicate cross-referencing diagrams and (2) linking directory diagrams
-to file diagrams. The sub-diagrams are automatically generated. E.g.
-using the predicates that generate library diagrams will automatically
-also generate the entity and predicate cross-referencing diagrams.</p>
+to file diagrams. The sub-diagrams are automatically generated. For
+example, using the predicates that generate library diagrams will
+automatically also generate the entity and predicate cross-referencing
+diagrams.</p>
 <p>To generate links to API documentation and source code repositories, use
 the options <code class="docutils literal notranslate"><span class="pre">path_url_prefixes/3</span></code> (or <code class="docutils literal notranslate"><span class="pre">url_prefixes/2</span></code> for simpler
 cases) and <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code>. The idea is that the

@@ -80,10 +80,11 @@ yes
 
 
 % it's also possible to generate diagrams for a library and all its
-% sub-libraries using the rlibrary/1 method instead of the library/1
-% method:
+% sub-libraries using the rlibrary/1-2 methods instead of the library/1
+% method (the `zoom(true)` automatically generates all sub-diagrams
+% for linking when converting the `.dot` files to SVG):
 
-| ?- library_load_diagram(dot)::rlibrary(tools).
+| ?- library_load_diagram(dot)::rlibrary(tools, [zoom(true)]).
 yes
 
 
@@ -102,8 +103,9 @@ yes
 % when generating a diagram for public publishing, it's often possible
 % to shorten file paths in order to remove a user-dependent prefix:
 
-| ?- file_dependency_diagram::library(searching, [omit_path_prefixes(['/Users/pmoura/logtalk/'])]).
+| ?- file_dependency_diagram::library(searching, [omit_path_prefixes(['$LOGTALKUSER'])]).
 yes
+
 
 % some final output formats such as SVG support tooltips and URL links;
 % the URL prefixes can be specified so that clicking in a cluster open
@@ -111,20 +113,33 @@ yes
 % opens the corresponding file, and clicking on an entity or predicate
 % node opens its documentation:
 
-| ?- entity_diagram::library(core, [title('Logtalk core entities'), node_type_captions(true), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- entity_diagram::library(core, [title('Logtalk core entities'), node_type_captions(true), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 true.
 
-| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- xref_diagram::entity(logtalk, [title('logtalk built-in object'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 true.
 
-| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- inheritance_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
+yes
+
+
+% when the source code is evolving, is best to link to a specific commit
+% so that e.g. line numbers in links to clauses will always be valid. For
+% example, assuming a git clone of the Logtalk repo at `$HOME/logtalk3`:
+
+| ?- logtalk_load(git(loader)).
+yes
+
+| ?- git::commit_hash('$HOME/logtalk3', Hash),
+     atom_concat('https://github.com/LogtalkDotOrg/logtalk3/tree/', Hash, Git),
+     library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes(Git, 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME']), zoom(true)]).
 yes
 
 
 % the utility objects diagrams/0-1 allows generating all supported diagrams
 % at once:
 
-| ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['/Users/pmoura/logtalk/', '/opt/local/share/logtalk/'])]).
+| ?- diagrams::rlibrary(tools, [title('Logtalk development tools'), url_prefixes('https://github.com/LogtalkDotOrg/logtalk3/tree/master/', 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME'])]).
 yes
 
 
@@ -168,7 +183,7 @@ yes
 	 atom_concat(SWIHome, '/library/pldoc', SWIpldoc),
 	 atom_concat(SWIHome, '/library/semweb', SWIsemweb),
 	 git_hash(Hash, []),
-	 atomic_list_concat(['https://github.com/ClioPatria/ClioPatria/tree/',Hash,'/'], Git),
+	 atom_concat('https://github.com/ClioPatria/ClioPatria/tree/', Hash, Git),
 	 diagrams::rdirectory(cliopatria, '.', [
 	 	title('ClioPatria - an RDF application platform'),
 		zoom(true),

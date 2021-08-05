@@ -244,9 +244,10 @@ below).
 
 Some output formats such as SVG support tooltips and URL links, which
 can be used for showing e.g. entity types, relation types, file paths,
-and for navigating to files and directories of files (libraries). See
-the relevant diagram options below in order to take advantage of these
-features.
+and for navigating to files and directories of files (libraries) or to
+API documentation. See the relevant diagram options below in order to
+take advantage of these features (see the discussion below on "linking
+diagrams").
 
 Sample helper scripts are provided for converting ``.dot`` files to
 ``.svg`` files:
@@ -545,14 +546,16 @@ Linking diagrams
 ----------------
 
 When using SVG output, it's possible to generate diagrams that link to
-other diagrams and to API documentation and source code repositories.
+other diagrams, to API documentation, and to source code repositories
+(to both files and directories).
 
 For generating links between diagrams, use the ``zoom(true)`` option.
 This option allows (1) linking library diagrams to entity diagrams to
 predicate cross-referencing diagrams and (2) linking directory diagrams
-to file diagrams. The sub-diagrams are automatically generated. E.g.
-using the predicates that generate library diagrams will automatically
-also generate the entity and predicate cross-referencing diagrams.
+to file diagrams. The sub-diagrams are automatically generated. For
+example, using the predicates that generate library diagrams will
+automatically also generate the entity and predicate cross-referencing
+diagrams.
 
 To generate links to API documentation and source code repositories, use
 the options ``path_url_prefixes/3`` (or ``url_prefixes/2`` for simpler
