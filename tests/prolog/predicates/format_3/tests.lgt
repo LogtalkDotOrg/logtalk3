@@ -169,8 +169,41 @@
 	test(lgt_format_3_float, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
+		{format(S, '~f', [1.0])},
+		% default is six decimal places
+		^^text_output_assertion('1.000000', Assertion).
+
+	test(lgt_format_3_float_n_places, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
 		{format(S, '~4f', [-1.0e-1])},
 		^^text_output_assertion('-0.1000', Assertion).
+
+	test(lgt_format_3_float_exponential_notation, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~e', [1.333333])},
+		% default is six decimal places
+		^^text_output_assertion('1.333333e+00', Assertion).
+
+	test(lgt_format_3_float_exponential_notation_n_places, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~3e', [1.333333])},
+		^^text_output_assertion('1.333e+00', Assertion).
+
+	test(lgt_format_3_float_exponential_notation_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~E', [1.333333])},
+		% default is six decimal places
+		^^text_output_assertion('1.333333E+00', Assertion).
+
+	test(lgt_format_3_float_exponential_notation_n_places_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~3E', [1.333333])},
+		^^text_output_assertion('1.333E+00', Assertion).
 
 	cleanup :-
 		^^clean_text_output.
