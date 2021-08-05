@@ -87,6 +87,11 @@
 		{format('~s', ["ABC"])},
 		^^text_output_assertion('ABC', Assertion).
 
+	test(lgt_format_2_string_first_n, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~3s', ["ABCDEFGHI"])},
+		^^text_output_assertion('ABC', Assertion).
+
 	:- if((
 		os::operating_system_type(windows),
 		\+ current_logtalk_flag(prolog_dialect, b),
@@ -145,6 +150,51 @@
 		^^set_text_output(''),
 		{format('~d', [123])},
 		^^text_output_assertion('123', Assertion).
+
+	test(lgt_format_2_decimal_n, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~1d', [123])},
+		^^text_output_assertion('12.3', Assertion).
+
+	test(lgt_format_2_decimal_group, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~D', [1234567890])},
+		^^text_output_assertion('1,234,567,890', Assertion).
+
+	test(lgt_format_2_decimal_group_n, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~2D', [1234567890])},
+		^^text_output_assertion('12,345,678.90', Assertion).
+
+	test(lgt_format_2_radix_2, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~2r', [127])},
+		^^text_output_assertion('1111111', Assertion).
+
+	test(lgt_format_2_radix_8, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~8r', [127])},
+		^^text_output_assertion('177', Assertion).
+
+	test(lgt_format_2_radix_16, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~16r', [127])},
+		^^text_output_assertion('7f', Assertion).
+
+	test(lgt_format_2_radix_upper_case_2, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~2R', [127])},
+		^^text_output_assertion('1111111', Assertion).
+
+	test(lgt_format_2_radix_upper_case_8, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~8R', [127])},
+		^^text_output_assertion('177', Assertion).
+
+	test(lgt_format_2_radix_upper_case_16, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~16R', [127])},
+		^^text_output_assertion('7F', Assertion).
 
 	test(lgt_format_2_float, true(Assertion)) :-
 		^^set_text_output(''),
