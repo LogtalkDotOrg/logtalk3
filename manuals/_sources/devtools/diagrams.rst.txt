@@ -1,28 +1,29 @@
 ``diagrams``
 ============
 
-This tool generates library, directory, file, entity, and predicate
-diagrams for source files and for libraries of source files using the
-Logtalk reflection API to collect the relevant information and a graph
-language for representing the diagrams. Limited support is also
+This tool generates *library*, *directory*, *file*, *entity*, and
+*predicate* diagrams for source files and for libraries of source files
+using the Logtalk reflection API to collect the relevant information and
+a graph language for representing the diagrams. Limited support is also
 available for generating diagrams for Prolog module applications. It's
 also possible in general to generate predicate cross-referencing
 diagrams for plain Prolog files.
 
-Linking library diagrams to entity diagrams to predicate
-cross-referencing diagrams and linking directory diagrams to file
-diagrams is also supported when using SVG output. This feature allows
+Linking *library diagrams* to *entity diagrams* to *predicate
+cross-referencing diagrams* and linking *directory diagrams* to *file
+diagrams* is also supported when using SVG output. This feature allows
 using diagrams for understanding the architecture of applications by
 navigating complex code and zooming into details. SVG output can also
 easily link to both source code repositories and API documentation. This
 allows diagrams to be used for source code navigation.
 
 Diagrams can also be used to uncover code issues. For example, comparing
-loading diagrams with dependency diagrams can reveal implicit
+*loading diagrams* with *dependency diagrams* can reveal implicit
 dependencies. Loading diagrams can reveal circular dependencies that may
 warrant code refactoring. Entity diagrams can provide a good overview of
 code coupling. Predicate cross-referencing diagrams can be used to
-access entity code complexity.
+visually access entity code complexity, complementing the
+``code_metrics`` tool.
 
 All diagrams support a comprehensive set of options, discussed below, to
 customize the final contents and appearance.
@@ -258,7 +259,7 @@ Sample helper scripts are provided for converting ``.dot`` files to
 The scripts assume that the Graphviz command-line executables are
 available from the system path (the default is the ``dot`` executable
 but the scripts accept a command-line option to select in alternative
-the ``circo``, ``fdp``, or ``neato`` executable).
+the ``circo``, ``fdp``, or ``neato`` executables).
 
 When generating diagrams for multiple libraries or directories, it's
 possible to split a diagram with several disconnected library or
@@ -566,7 +567,7 @@ specific when addressing multiple code repositories). To generate local
 file system URLs, define the empty atom, ``''``, as a prefix. As an
 example, consider the Logtalk library. Its source code is available from
 a GitHub repository and its documentation is published in the Logtalk
-website. The relevant URLs are:
+website. The relevant URLs in this case are:
 
 -  https://github.com/LogtalkDotOrg/logtalk3/tree/ (source code)
 -  https://logtalk.org/library/ (API documentation)
@@ -669,7 +670,7 @@ exist in any directory used for publishing diagrams using it. The
 
 When generating diagrams in SVG format, a copy of the ``diagrams.css``
 file must exist in any directory used for publishing diagrams using it.
-The ``lgt2svg`` scripts take care of copying this file.
+The ``lgt2svg`` scripts also take care of copying this file.
 
 The Graphviz command-line utilities, e.g. ``dot``, are notorious for
 random crashes (segmentation faults usually), often requiring re-doing

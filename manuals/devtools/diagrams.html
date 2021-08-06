@@ -229,26 +229,27 @@
             
   <div class="section" id="diagrams">
 <h1><code class="docutils literal notranslate"><span class="pre">diagrams</span></code><a class="headerlink" href="#diagrams" title="Permalink to this headline">¶</a></h1>
-<p>This tool generates library, directory, file, entity, and predicate
-diagrams for source files and for libraries of source files using the
-Logtalk reflection API to collect the relevant information and a graph
-language for representing the diagrams. Limited support is also
+<p>This tool generates <em>library</em>, <em>directory</em>, <em>file</em>, <em>entity</em>, and
+<em>predicate</em> diagrams for source files and for libraries of source files
+using the Logtalk reflection API to collect the relevant information and
+a graph language for representing the diagrams. Limited support is also
 available for generating diagrams for Prolog module applications. It’s
 also possible in general to generate predicate cross-referencing
 diagrams for plain Prolog files.</p>
-<p>Linking library diagrams to entity diagrams to predicate
-cross-referencing diagrams and linking directory diagrams to file
-diagrams is also supported when using SVG output. This feature allows
+<p>Linking <em>library diagrams</em> to <em>entity diagrams</em> to <em>predicate
+cross-referencing diagrams</em> and linking <em>directory diagrams</em> to <em>file
+diagrams</em> is also supported when using SVG output. This feature allows
 using diagrams for understanding the architecture of applications by
 navigating complex code and zooming into details. SVG output can also
 easily link to both source code repositories and API documentation. This
 allows diagrams to be used for source code navigation.</p>
 <p>Diagrams can also be used to uncover code issues. For example, comparing
-loading diagrams with dependency diagrams can reveal implicit
+<em>loading diagrams</em> with <em>dependency diagrams</em> can reveal implicit
 dependencies. Loading diagrams can reveal circular dependencies that may
 warrant code refactoring. Entity diagrams can provide a good overview of
 code coupling. Predicate cross-referencing diagrams can be used to
-access entity code complexity.</p>
+visually access entity code complexity, complementing the
+<code class="docutils literal notranslate"><span class="pre">code_metrics</span></code> tool.</p>
 <p>All diagrams support a comprehensive set of options, discussed below, to
 customize the final contents and appearance.</p>
 <p>Diagram generation can be easily automated using the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool and
@@ -511,7 +512,7 @@ diagrams”).</p>
 <p>The scripts assume that the Graphviz command-line executables are
 available from the system path (the default is the <code class="docutils literal notranslate"><span class="pre">dot</span></code> executable
 but the scripts accept a command-line option to select in alternative
-the <code class="docutils literal notranslate"><span class="pre">circo</span></code>, <code class="docutils literal notranslate"><span class="pre">fdp</span></code>, or <code class="docutils literal notranslate"><span class="pre">neato</span></code> executable).</p>
+the <code class="docutils literal notranslate"><span class="pre">circo</span></code>, <code class="docutils literal notranslate"><span class="pre">fdp</span></code>, or <code class="docutils literal notranslate"><span class="pre">neato</span></code> executables).</p>
 <p>When generating diagrams for multiple libraries or directories, it’s
 possible to split a diagram with several disconnected library or
 directory graphs using the <code class="docutils literal notranslate"><span class="pre">ccomps</span></code> command-line executable. For
@@ -932,7 +933,7 @@ specific when addressing multiple code repositories). To generate local
 file system URLs, define the empty atom, <code class="docutils literal notranslate"><span class="pre">''</span></code>, as a prefix. As an
 example, consider the Logtalk library. Its source code is available from
 a GitHub repository and its documentation is published in the Logtalk
-website. The relevant URLs are:</p>
+website. The relevant URLs in this case are:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/tree/">https://github.com/LogtalkDotOrg/logtalk3/tree/</a> (source code)</p></li>
 <li><p><a class="reference external" href="https://logtalk.org/library/">https://logtalk.org/library/</a> (API documentation)</p></li>
@@ -1019,7 +1020,7 @@ exist in any directory used for publishing diagrams using it. The
 <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts take care of copying this file.</p>
 <p>When generating diagrams in SVG format, a copy of the <code class="docutils literal notranslate"><span class="pre">diagrams.css</span></code>
 file must exist in any directory used for publishing diagrams using it.
-The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts take care of copying this file.</p>
+The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts also take care of copying this file.</p>
 <p>The Graphviz command-line utilities, e.g. <code class="docutils literal notranslate"><span class="pre">dot</span></code>, are notorious for
 random crashes (segmentation faults usually), often requiring re-doing
 conversions from <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to other formats. A possible workaround
