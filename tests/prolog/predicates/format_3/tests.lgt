@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-05,
+		date is 2021-08-06,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
@@ -150,12 +150,6 @@
 		^^text_output_assertion('begin\nend', Assertion).
 
 	:- endif.
-
-	- test(lgt_format_3_tab, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{format(S, '~t~a~8|', [abc])},
-		^^text_output_assertion('     abc', Assertion).
 
 	test(lgt_format_3_ignore, true(Assertion)) :-
 		^^set_text_output(''),
@@ -285,6 +279,104 @@
 		current_output(S),
 		{format(S, '~G', [0.39265e+3])},
 		^^text_output_assertion('392.65', Assertion).
+
+	test(lgt_format_3_tab_atom_left_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~|~a~t~8+', [abcd])},
+		^^text_output_assertion('abcd    ', Assertion).
+
+	test(lgt_format_3_tab_integer_left_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~|~d~t~8+', [1234])},
+		^^text_output_assertion('1234    ', Assertion).
+
+	test(lgt_format_3_tab_atom_center_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~t~a~t~8+', [abcd])},
+		^^text_output_assertion('  abcd  ', Assertion).
+
+	test(lgt_format_3_tab_integer_center_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~t~d~t~8+', [1234])},
+		^^text_output_assertion('  1234  ', Assertion).
+
+	test(lgt_format_3_tab_atom_right_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~t~a~8|', [abcd])},
+		^^text_output_assertion('    abcd', Assertion).
+
+	test(lgt_format_3_tab_integer_right_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~t~d~8|', [1234])},
+		^^text_output_assertion('    1234', Assertion).
+
+	test(lgt_format_3_tab_all_alignments_in, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~t~a~10|~t~a~t~13+~a~t~10+', ['Alpha','and','Omega'])},
+		^^text_output_assertion('     Alpha     and     Omega     ', Assertion).
+
+	test(lgt_format_3_tab_all_alignments_out, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~|~a~t~10|~t~a~t~13+~t~a~10+', ['Alpha','and','Omega'])},
+		^^text_output_assertion('Alpha          and          Omega', Assertion).
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(lgt_format_3_tab_table_left_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			current_output(S),
+			forall(
+				list::member(Line, [['abc','defg','hi'],['j','kl','mnopq']]),
+				{format(S, '~|~a~t~8|~a~t~8+~a~t~8+~n', Line)}
+			),
+			^^text_output_assertion('abc     defg    hi      \r\nj       kl      mnopq   \r\n', Assertion).
+
+		test(lgt_format_3_tab_table_right_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			current_output(S),
+			forall(
+				list::member(Line, [['123','4567','89'],['1','23','45678']]),
+				{format(S, '~|~t~a~8|~t~a~8+~t~a~8+~n', Line)}
+			),
+			^^text_output_assertion('     123    4567      89\r\n       1      23   45678\r\n', Assertion).
+
+	:- else.
+
+		test(lgt_format_3_tab_table_left_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			current_output(S),
+			forall(
+				list::member(Line, [['abc','defg','hi'],['j','kl','mnopq']]),
+				{format(S, '~|~a~t~8|~a~t~8+~a~t~8+~n', Line)}
+			),
+			^^text_output_assertion('abc     defg    hi      \nj       kl      mnopq   \n', Assertion).
+
+		test(lgt_format_3_tab_table_right_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			current_output(S),
+			forall(
+				list::member(Line, [['123','4567','89'],['1','23','45678']]),
+				{format(S, '~|~t~a~8|~t~a~8+~t~a~8+~n', Line)}
+			),
+			^^text_output_assertion('     123    4567      89\n       1      23   45678\n', Assertion).
+
+	:- endif.
 
 	cleanup :-
 		^^clean_text_output.

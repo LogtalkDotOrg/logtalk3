@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-05,
+		date is 2021-08-06,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -99,44 +99,39 @@
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
-	test(lgt_format_2_new_line, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~n', [])},
-		^^text_output_assertion('\r\n', Assertion).
+		test(lgt_format_2_new_line, true(Assertion)) :-
+			^^set_text_output(''),
+			{format('~n', [])},
+			^^text_output_assertion('\r\n', Assertion).
 
-	test(lgt_format_2_new_line_n, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~4n', [])},
-		^^text_output_assertion('\r\n\r\n\r\n\r\n', Assertion).
+		test(lgt_format_2_new_line_n, true(Assertion)) :-
+			^^set_text_output(''),
+			{format('~4n', [])},
+			^^text_output_assertion('\r\n\r\n\r\n\r\n', Assertion).
 
-	test(lgt_format_2_new_line_if_not_beginning_of_line, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~Nbegin~N~Nend', [])},
-		^^text_output_assertion('begin\r\nend', Assertion).
+		test(lgt_format_2_new_line_if_not_beginning_of_line, true(Assertion)) :-
+			^^set_text_output(''),
+			{format('~Nbegin~N~Nend', [])},
+			^^text_output_assertion('begin\r\nend', Assertion).
 
 	:- else.
 
-	test(lgt_format_2_new_line, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~n', [])},
-		^^text_output_assertion('\n', Assertion).
+		test(lgt_format_2_new_line, true(Assertion)) :-
+			^^set_text_output(''),
+			{format('~n', [])},
+			^^text_output_assertion('\n', Assertion).
 
-	test(lgt_format_2_new_line_n, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~4n', [])},
-		^^text_output_assertion('\n\n\n\n', Assertion).
+		test(lgt_format_2_new_line_n, true(Assertion)) :-
+			^^set_text_output(''),
+			{format('~4n', [])},
+			^^text_output_assertion('\n\n\n\n', Assertion).
 
-	test(lgt_format_2_new_line_if_not_beginning_of_line, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~Nbegin~N~Nend', [])},
-		^^text_output_assertion('begin\nend', Assertion).
+		test(lgt_format_2_new_line_if_not_beginning_of_line, true(Assertion)) :-
+			^^set_text_output(''),
+			{format('~Nbegin~N~Nend', [])},
+			^^text_output_assertion('begin\nend', Assertion).
 
 	:- endif.
-
-	- test(lgt_format_2_tab, true(Assertion)) :-
-		^^set_text_output(''),
-		{format('~t~a~8|', [abc])},
-		^^text_output_assertion('     abc', Assertion).
 
 	test(lgt_format_2_ignore, true(Assertion)) :-
 		^^set_text_output(''),
@@ -245,6 +240,92 @@
 		^^set_text_output(''),
 		{format('~G', [0.39265e+3])},
 		^^text_output_assertion('392.65', Assertion).
+
+	test(lgt_format_2_tab_atom_left_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~|~a~t~8+', [abcd])},
+		^^text_output_assertion('abcd    ', Assertion).
+
+	test(lgt_format_2_tab_integer_left_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~|~d~t~8+', [1234])},
+		^^text_output_assertion('1234    ', Assertion).
+
+	test(lgt_format_2_tab_atom_center_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~t~a~t~8+', [abcd])},
+		^^text_output_assertion('  abcd  ', Assertion).
+
+	test(lgt_format_2_tab_integer_center_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~t~d~t~8+', [1234])},
+		^^text_output_assertion('  1234  ', Assertion).
+
+	test(lgt_format_2_tab_atom_right_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~t~a~8|', [abcd])},
+		^^text_output_assertion('    abcd', Assertion).
+
+	test(lgt_format_2_tab_integer_right_aligned, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~t~d~8|', [1234])},
+		^^text_output_assertion('    1234', Assertion).
+
+	test(lgt_format_2_tab_all_alignments_in, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~t~a~10|~t~a~t~13+~a~t~10+', ['Alpha','and','Omega'])},
+		^^text_output_assertion('     Alpha     and     Omega     ', Assertion).
+
+	test(lgt_format_2_tab_all_alignments_out, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~|~a~t~10|~t~a~t~13+~t~a~10+', ['Alpha','and','Omega'])},
+		^^text_output_assertion('Alpha          and          Omega', Assertion).
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(lgt_format_2_tab_table_left_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			forall(
+				list::member(Line, [['abc','defg','hi'],['j','kl','mnopq']]),
+				{format('~|~a~t~8|~a~t~8+~a~t~8+~n', Line)}
+			),
+			^^text_output_assertion('abc     defg    hi      \r\nj       kl      mnopq   \r\n', Assertion).
+
+		test(lgt_format_2_tab_table_right_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			forall(
+				list::member(Line, [['123','4567','89'],['1','23','45678']]),
+				{format('~|~t~a~8|~t~a~8+~t~a~8+~n', Line)}
+			),
+			^^text_output_assertion('     123    4567      89\r\n       1      23   45678\r\n', Assertion).
+
+	:- else.
+
+		test(lgt_format_2_tab_table_left_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			forall(
+				list::member(Line, [['abc','defg','hi'],['j','kl','mnopq']]),
+				{format('~|~a~t~8|~a~t~8+~a~t~8+~n', Line)}
+			),
+			^^text_output_assertion('abc     defg    hi      \nj       kl      mnopq   \n', Assertion).
+
+		test(lgt_format_2_tab_table_right_aligned, true(Assertion)) :-
+			^^set_text_output(''),
+			forall(
+				list::member(Line, [['123','4567','89'],['1','23','45678']]),
+				{format('~|~t~a~8|~t~a~8+~t~a~8+~n', Line)}
+			),
+			^^text_output_assertion('     123    4567      89\n       1      23   45678\n', Assertion).
+
+	:- endif.
 
 	cleanup :-
 		^^clean_text_output.
