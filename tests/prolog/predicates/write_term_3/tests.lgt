@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:17:0,
 		author is 'Paulo Moura',
-		date is 2021-06-28,
+		date is 2021-08-08,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -198,20 +198,20 @@
 	test(lgt_write_term_3_34, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
-		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C])])},
-		^^text_output_assertion('foo(A,B,C)', Assertion).
+		{write_term(S, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C])])},
+		^^text_output_assertion('foo(X,Y,Z)', Assertion).
 
 	test(lgt_write_term_3_35, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
-		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C,'X'=A])])},
-		^^text_output_assertion('foo(A,B,C)', Assertion).
+		{write_term(S, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=A])])},
+		^^text_output_assertion('foo(X,Y,Z)', Assertion).
 
 	test(lgt_write_term_3_36, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
-		{write_term(S, foo(A,B,C), [variable_names(['A'=A,'B'=B,'C'=C,'X'=42])])},
-		^^text_output_assertion('foo(A,B,C)', Assertion).
+		{write_term(S, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=42])])},
+		^^text_output_assertion('foo(X,Y,Z)', Assertion).
 
 	test(lgt_write_term_3_37, true(Assertion)) :-
 		^^set_text_output(''),

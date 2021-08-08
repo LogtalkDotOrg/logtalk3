@@ -118,6 +118,8 @@ Tests
 * IMPROVED: Avoid printing expected warnings when running the `encoding/1`
 directive tests.
 
+* IMPROVED: Tests for the `write_term/3` predicate option `variable_names/1.
+
 
 3.49.0 - July 27, 2021
 ======================
