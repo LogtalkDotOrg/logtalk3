@@ -82,12 +82,15 @@
 		{length([_, _| a], _)}.
 
 	test(commons_length_2_16, error(type_error(list,[_,_|a]))) :-
+		{length([_, _| a], 0)}.
+
+	test(commons_length_2_17, error(type_error(list,[_,_|a]))) :-
 		{length([_, _| a], 3)}.
 
-	test(commons_length_2_17, error(domain_error(not_less_than_zero,-1))) :-
+	test(commons_length_2_18, error(domain_error(not_less_than_zero,-1))) :-
 		{length(_, -1)}.
 
-	test(commons_length_2_18, error(domain_error(not_less_than_zero,-1))) :-
+	test(commons_length_2_19, error(domain_error(not_less_than_zero,-1))) :-
 		{length([], -1)}.
 
 :- end_object.
