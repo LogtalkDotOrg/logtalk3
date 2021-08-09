@@ -113,7 +113,8 @@ broken meta-predicate definitions.
 Tests
 -----
 
-* ADDED: Additional tests for the de facto standard `format/2-3` predicates.
+* ADDED: Additional tests for the de facto standard `format/2-3` and `length/2`
+predicates.
 
 * IMPROVED: Avoid printing expected warnings when running the `encoding/1`
 directive tests.
