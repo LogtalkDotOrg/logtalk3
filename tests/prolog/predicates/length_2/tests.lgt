@@ -69,13 +69,25 @@
 	test(commons_length_2_11, error(type_error(integer,a))) :-
 		{length(_, a)}.
 
-	test(commons_length_2_12, error(type_error(list,a))) :-
+	test(commons_length_2_12, error(type_error(integer,a))) :-
+		{length([], a)}.
+
+	test(commons_length_2_13, error(type_error(list,a))) :-
 		{length(a, _)}.
 
-	test(commons_length_2_13, error(type_error(list,[_,_|a]))) :-
+	test(commons_length_2_14, error(type_error(list,a))) :-
+		{length(a, 1)}.
+
+	test(commons_length_2_15, error(type_error(list,[_,_|a]))) :-
 		{length([_, _| a], _)}.
 
-	test(commons_length_2_14, error(domain_error(not_less_than_zero,-1))) :-
+	test(commons_length_2_16, error(type_error(list,[_,_|a]))) :-
+		{length([_, _| a], 3)}.
+
+	test(commons_length_2_17, error(domain_error(not_less_than_zero,-1))) :-
 		{length(_, -1)}.
+
+	test(commons_length_2_18, error(domain_error(not_less_than_zero,-1))) :-
+		{length([], -1)}.
 
 :- end_object.
