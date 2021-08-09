@@ -77,9 +77,9 @@ input/output predicates that are affected by operator declarations (which
 otherwise would be compiled to ensure that entity declared operators are
 local to the entities as required by Logtalk semantics).
 
-Tests that would require a portable way of specifying a source file text
-encoding plus a common extended text encoding (e.g. UTF-8) are currently
-skipped.
+Tests from the ISO Prolog standards that would require a portable way of
+specifying a source file text encoding plus a common extended text encoding
+(e.g. UTF-8) are currently skipped.
 
 Tests that are specified as undefined in the standards due to the potential
 of creating cyclic terms are skipped when using a backend Prolog compiler
@@ -117,12 +117,15 @@ current set of aliases) or a (stream) existence error (as there's no stream
 with such an alias). Currently, we accept both exception terms.
 
 In some tests that check that an error condition generates the expected
-exception term, alternative exception terms are accepted iff the correct
-exception type is generated and the terms only differ on the culprit
-argument. For example, accepting `type_error(callable,1)` where the term
-`type_error(callable,(fail,1))` is expected. Another example is when the
-exception term contains a module-qualified culprit. For example, the
-system generating instead a `type_error(callable,user:1)` exception.
+exception term, alternative exception terms are accepted in general when
+the correct exception type is generated and the terms only differ on the
+culprit argument. For example, accepting `type_error(callable,1)` where
+the term `type_error(callable,(fail,1))` is expected. Another example is
+when the exception term contains a module-qualified culprit. For example,
+the system generating instead a `type_error(callable,user:1)` exception.
+There are also cases where Prolog systems provide more fine-grained error
+checking than require in current standards. This can tranlate to accepting
+more than one exception type (e.g. both an instantiation and a domain error).
 
 There is a potential catch-22 when using a language to test itself as the
 test code itself is written and compiled using a possibly faulty language
