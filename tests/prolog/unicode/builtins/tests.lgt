@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:1,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2021-05-10,
+		date is 2021-08-12,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -605,6 +605,25 @@
 		^^set_text_output(st_o, '', [encoding('UTF-8')]),
 		write_term(st_o, '你好世界!', []),
 		^^text_output_assertion(st_o, '你好世界!', [encoding('UTF-8')], Assertion).
+
+	% format/2 tests
+
+	test(lgt_unicode_format_2_01, true(Assertion)) :-
+		^^set_text_output('', [encoding('UTF-8')]),
+		current_output(S),
+		% bypass the compiler as the predicate may come from
+		% a library instead of being a built-in predicate
+		{format('~8594t~8|', [])},
+		^^text_output_assertion(S, '→→→→→→→→', [encoding('UTF-8')], Assertion).
+
+	% format/3 tests
+
+	test(lgt_unicode_format_3_01, true(Assertion)) :-
+		^^set_text_output(st_o, '', [encoding('UTF-8')]),
+		% bypass the compiler as the predicate may come from
+		% a library instead of being a built-in predicate
+		{format(st_o, '~8594t~8|', [])},
+		^^text_output_assertion(st_o, '→→→→→→→→', [encoding('UTF-8')], Assertion).
 
 	cleanup :-
 		^^clean_text_input,
