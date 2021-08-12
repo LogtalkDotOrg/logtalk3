@@ -63,6 +63,7 @@ The test identifier prefixes indicate their origin:
 - `eddbali_` - tests from A Ed-Dbali's test suite
 - `lgt_` - tests originating from work on Logtalk portability
 - `commons_` - tests for de facto standard Prolog features
+- `wg17_` - tests from WG17 test suite
 
 To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 

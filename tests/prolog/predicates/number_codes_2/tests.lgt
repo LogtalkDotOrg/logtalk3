@@ -26,98 +26,84 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-09-21,
+		date is 2021-08-12,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.8.4
 
-	succeeds(iso_number_codes_2_01) :-
-		{number_codes(33, L)},
-		L == [0'3,0'3].
+	test(iso_number_codes_2_01, true(L == [0'3,0'3])) :-
+		{number_codes(33, L)}.
 
-	succeeds(iso_number_codes_2_02) :-
+	test(iso_number_codes_2_02, true) :-
 		{number_codes(33, [0'3,0'3])}.
 
-	succeeds(iso_number_codes_2_03) :-
-		{number_codes(33.0, L), number_codes(N, L)},
-		N == 33.0.
+	test(iso_number_codes_2_03, true(N == 33.0)) :-
+		{number_codes(33.0, L), number_codes(N, L)}.
 
-	succeeds(iso_number_codes_2_04) :-
+	test(iso_number_codes_2_04, true) :-
 		{number_codes(33.0, [0'3| _L])}.
 
-	succeeds(iso_number_codes_2_05) :-
-		{number_codes(A, [0'-,0'2,0'5])},
-		A == -25.
+	test(iso_number_codes_2_05, true(A == -25)) :-
+		{number_codes(A, [0'-,0'2,0'5])}.
 
-	succeeds(iso_number_codes_2_06) :-
-		{number_codes(A, [0' , 0'3])},
-		A == 3.
+	test(iso_number_codes_2_06, true(A == 3)) :-
+		{number_codes(A, [0' , 0'3])}.
 
-	succeeds(iso_number_codes_2_07) :-
-		{number_codes(A, [0'0,0'x,0'f])},
-		A == 15.
+	test(iso_number_codes_2_07, true(A == 15)) :-
+		{number_codes(A, [0'0,0'x,0'f])}.
 
-	succeeds(iso_number_codes_2_08) :-
-		{number_codes(A, [0'0,39,0'a])},
-		A == 0'a.
+	test(iso_number_codes_2_08, true(A == 0'a)) :-
+		{number_codes(A, [0'0,39,0'a])}.
 
-	succeeds(iso_number_codes_2_09) :-
-		{number_codes(A, [0'4,0'.,0'2])},
-		A == 4.2.
+	test(iso_number_codes_2_09, true(A == 4.2)) :-
+		{number_codes(A, [0'4,0'.,0'2])}.
 
-	succeeds(iso_number_codes_2_10) :-
-		{number_codes(A, [0'4,0'2,0'.,0'0,0'e,0'-,0'1])},
-		A == 4.2.
+	test(iso_number_codes_2_10, true(A == 4.2)) :-
+		{number_codes(A, [0'4,0'2,0'.,0'0,0'e,0'-,0'1])}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_number_codes_2_11, error(instantiation_error,_)) :-
+	test(eddbali_number_codes_2_11, error(instantiation_error)) :-
 		{number_codes(_A, _L)}.
 
-	throws(eddbali_number_codes_2_12, error(type_error(number,a),_)) :-
+	test(eddbali_number_codes_2_12, error(type_error(number,a))) :-
 		{number_codes(a, _L)}.
 
-	throws(eddbali_number_codes_2_13, error(type_error(list,4),_)) :-
+	test(eddbali_number_codes_2_13, error(type_error(list,4))) :-
 		{number_codes(_A, 4)}.
 
-	throws(eddbali_number_codes_2_14, error(representation_error(character_code),_)) :-
+	test(eddbali_number_codes_2_14, error(representation_error(character_code))) :-
 		{number_codes(_A, [0'4,-1])}.
 
-	throws(sics_number_codes_2_15, error(instantiation_error,_)) :-
+	test(sics_number_codes_2_15, error(instantiation_error)) :-
 		{number_codes(_A, [0'a|_L])}.
 
-	throws(sics_number_codes_2_16, error(instantiation_error,_)) :-
+	test(sics_number_codes_2_16, error(instantiation_error)) :-
 		{number_codes(_A, [0'a,_L])}.
 
-	succeeds(sics_number_codes_2_17) :-
-		{number_chars(X, [' ','0','x','1','1','1']), number_codes(X, Y)},
-		X == 273, Y == [50,55,51].
+	test(sics_number_codes_2_17, true(X-Y == 273-[50,55,51])) :-
+		{number_chars(X, [' ','0','x','1','1','1']), number_codes(X, Y)}.
 
-	succeeds(sics_number_codes_2_18) :-
+	test(sics_number_codes_2_18, true(X-Y == 73-[55,51])) :-
 		{number_chars(X, [' ','0','o','1','1','1']), number_codes(X, Y)},
 		X == 73, Y == [55,51].
 
-	succeeds(sics_number_codes_2_19) :-
+	test(sics_number_codes_2_19, true(X-Y == 7-[55])) :-
 		{number_chars(X, [' ','0','b','1','1','1']), number_codes(X, Y)},
 		X == 7, Y == [55].
 
-	- succeeds(sics_number_codes_2_20) :-
-		{number_codes(N, "0'\n")},
-		N == 10.
+	- test(sics_number_codes_2_20, true(N == 10)) :-
+		{number_codes(N, "0'\n")}.
 
-	throws(sics_number_codes_2_21, error(syntax_error(_),_)) :-
+	test(sics_number_codes_2_21, error(syntax_error(_))) :-
 		% the original test used "ä" but that rises portability issues
 		% due to the lack of a standard way to specify text encodings
 		{number_codes(_N, "a")}.
 
-	throws(sics_number_codes_2_22, error(syntax_error(_),_)) :-
+	test(sics_number_codes_2_22, error(syntax_error(_))) :-
 		{number_codes(_X, [0'0,0'x,0'0,0'.,0'0])}.
 
 	% tests from the Logtalk portability work
@@ -126,14 +112,36 @@
 	% but there seens to be some agreement between Prolog implementers
 	% that the correct exception in this case is a type_error(integer,a)
 	% until a consensus if found, we accept both exception terms
-	throws(lgt_number_codes_2_23, [error(representation_error(character_code),_), error(type_error(integer,a),_)]) :-
+	test(lgt_number_codes_2_23, errors([representation_error(character_code), type_error(integer,a)])) :-
 		{number_codes(_A, [0'4,a])}.
 
-	succeeds(lgt_number_codes_2_24) :-
-		{number_codes(42, [A,B])},
-		A == 52, B == 50.
+	test(lgt_number_codes_2_24, true(A-B == 52-50)) :-
+		{number_codes(42, [A,B])}.
 
-	throws(lgt_number_codes_2_25, [error(representation_error(character_code),_), error(type_error(integer,a),_)]) :-
+	test(lgt_number_codes_2_25, errors([representation_error(character_code), type_error(integer,a)])) :-
 		{number_codes(1234, [a,b,c,d])}.
+
+	% tests from (or derived from) the WG17 test suite
+
+	test(wg17_number_codes_2_26, true) :-
+		{number_codes(1.0e9, [0'1,0'.,0'0,0'E,0'9])}.
+
+	test(wg17_number_codes_2_27, true) :-
+		{number_codes(1.0e9, [0'1,0'.,0'0,0'E,0'+,0'9])}.
+
+	test(wg17_number_codes_2_28, error(syntax_error(_))) :-
+		{number_codes(1, [])}.
+
+	test(wg17_number_codes_2_29, error(syntax_error(_))) :-
+		{number_codes(_, [0'3,0'.])}.
+
+	test(wg17_number_codes_2_30, error(syntax_error(_))) :-
+		{number_codes(_, [0'0,0'B,0'1])}.
+
+	test(wg17_number_codes_2_31, error(syntax_error(_))) :-
+		{number_codes(_, [0'0,0'O,0'7])}.
+
+	test(wg17_number_codes_2_32, error(syntax_error(_))) :-
+		{number_codes(_, [0'0,0'X,0'f])}.
 
 :- end_object.
