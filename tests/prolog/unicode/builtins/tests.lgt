@@ -608,13 +608,12 @@
 
 	% format/2 tests
 
-	test(lgt_unicode_format_2_01, true(Assertion)) :-
-		^^set_text_output('', [encoding('UTF-8')]),
-		current_output(S),
+	test(lgt_unicode_format_2_01, true(Assertion), [condition(current_prolog_flag(encoding,'UTF-8'))]) :-
+		^^set_text_output(''),
 		% bypass the compiler as the predicate may come from
 		% a library instead of being a built-in predicate
 		{format('~8594t~8|', [])},
-		^^text_output_assertion(S, '→→→→→→→→', [encoding('UTF-8')], Assertion).
+		^^text_output_assertion('→→→→→→→→', Assertion).
 
 	% format/3 tests
 
