@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-08-12,
+		date is 2021-08-13,
 		comment is 'Unit tests for the ISO Prolog standard numbers syntax plus tests for de facto standard syntax extensions.'
 	]).
 
@@ -207,6 +207,10 @@
 
 	test(lgt_number_38, true(T == 1234.5)) :-
 		^^set_text_input('123.45e1. '),
+		{read(T)}.
+
+	test(lgt_number_39, true(T == 1234.5)) :-
+		^^set_text_input('123.45E1. '),
 		{read(T)}.
 
 	cleanup :-
