@@ -223,6 +223,12 @@
 		{format(S, '~r', [16])},
 		^^text_output_assertion('20', Assertion).
 
+	test(lgt_format_3_radix_default_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~R', [16])},
+		^^text_output_assertion('20', Assertion).
+
 	test(lgt_format_3_float, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
