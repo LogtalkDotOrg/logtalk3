@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-08-12,
+		date is 2021-08-14,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -187,6 +187,11 @@
 		^^set_text_output(''),
 		{format('~16R', [127])},
 		^^text_output_assertion('7F', Assertion).
+
+	test(lgt_format_2_radix_default, true(Assertion)) :-
+		^^set_text_output(''),
+		{format('~r', [16])},
+		^^text_output_assertion('20', Assertion).
 
 	test(lgt_format_2_float, true(Assertion)) :-
 		^^set_text_output(''),
