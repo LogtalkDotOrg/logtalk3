@@ -91,10 +91,9 @@ application documentation by typing:
 By default, the documenting XML files are created in a ``xml_docs``
 directory in the current working directory. But usually all documenting
 files are collected for both the application and the libraries it uses
-ar collected in a common directory so that all documentation links
-resolved properly. The ``lgtdoc`` predicates can take a list of options
-to customize the generated XML documenting files. See the remarks
-section in the
+in a common directory so that all documentation links resolved properly.
+The ``lgtdoc`` predicates can take a list of options to customize the
+generated XML documenting files. See the remarks section in the
 `lgtdocp <https://logtalk.org/docs/library_index.html#lgtdoc>`__
 protocol documentation for details on the available options.
 

@@ -24,7 +24,7 @@ and built-in predicates. There are also test sets for unbounded integer
 arithmetic and for Unicode support for Prolog systems supporting these
 features. Several of these unit tests are taken from the official ISO Prolog
 standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard and the
-follow up corrigendas). Several tests originate from SICS, ECLiPSe, and
+follow up corrigenda). Several tests originate from SICS, ECLiPSe, and
 SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that are
@@ -125,8 +125,9 @@ the term `type_error(callable,(fail,1))` is expected. Another example is
 when the exception term contains a module-qualified culprit. For example,
 the system generating instead a `type_error(callable,user:1)` exception.
 There are also cases where Prolog systems provide more fine-grained error
-checking than require in current standards. This can tranlate to accepting
-more than one exception type (e.g. both an instantiation and a domain error).
+checking than required by the current standards. This can translate to
+accepting more than one exception type (e.g. both an instantiation and
+a domain error).
 
 There is a potential catch-22 when using a language to test itself as the
 test code itself is written and compiled using a possibly faulty language

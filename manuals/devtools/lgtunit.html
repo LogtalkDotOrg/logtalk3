@@ -418,7 +418,8 @@ tested in optimized mode.</p>
 objects. A typical example is testing multiple implementations of the
 same protocol. In this case, we can use a parameter to pass the specific
 implementation being tested. For example, assume that we want to run the
-same set of tests for the library <code class="docutils literal notranslate"><span class="pre">randomp</span></code> protocol. We can write:</p>
+same set of tests for the library <code class="docutils literal notranslate"><span class="pre">random_protocol</span></code> protocol. We can
+write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests(<span class="nv">_RandomObject_</span>),
     <span class="k">extends</span>(lgtunit)).
 

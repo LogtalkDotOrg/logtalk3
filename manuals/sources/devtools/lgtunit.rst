@@ -205,7 +205,8 @@ Parameterized unit tests can be easily defined by using parametric test
 objects. A typical example is testing multiple implementations of the
 same protocol. In this case, we can use a parameter to pass the specific
 implementation being tested. For example, assume that we want to run the
-same set of tests for the library ``randomp`` protocol. We can write:
+same set of tests for the library ``random_protocol`` protocol. We can
+write:
 
 ::
 
