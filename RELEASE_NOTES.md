@@ -119,6 +119,8 @@ predicates.
 * ADDED: Additional tests for the standard `number_chars/2` and
 `number_codes/2` predicates. Taken or derived from the WG17 test suite.
 
+* ADDED: Additional tests for the standard `keysort/2` and `sort/2` predicates.
+
 * ADDED: Additional tests for the standard floating-point number syntax.
 
 * IMPROVED: Avoid printing expected warnings when running the `encoding/1`

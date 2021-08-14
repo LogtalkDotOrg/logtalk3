@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-07-31,
+		date is 2021-08-14,
 		comment is 'Unit tests for the ISO Prolog standard keysort/2 built-in predicate.'
 	]).
 
@@ -85,5 +85,19 @@
 
 	test(eclipse_keysort_2_14, error(type_error(pair,1/a))) :-
 		{keysort([], [1/a])}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_keysort_2_15, true(Key == a)) :-
+		{keysort([d-4,a-1,c-3,b-2,g-7], [Key-_| _])}.
+
+	test(lgt_keysort_2_16, true(Value == 1)) :-
+		{keysort([d-4,a-1,c-3,b-2,g-7], [_-Value| _])}.
+
+	test(lgt_keysort_2_17, true(Second == b-2)) :-
+		{keysort([d-4,a-1,c-3,b-2,g-7], [_, Second| _])}.
+
+	test(lgt_keysort_2_18, true(Others == [b-2,c-3,d-4,g-7])) :-
+		{keysort([d-4,a-1,c-3,b-2,g-7], [_| Others])}.
 
 :- end_object.
