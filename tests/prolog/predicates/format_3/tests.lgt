@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-08-14,
+		date is 2021-08-15,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
@@ -229,6 +229,26 @@
 		{format(S, '~R', [16])},
 		^^text_output_assertion('20', Assertion).
 
+	test(lgt_format_3_radix_invalid_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~0r', [16])}.
+
+	test(lgt_format_3_radix_invalid_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~1R', [16])}.
+
+	test(lgt_format_3_radix_invalid_3, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~37r', [16])}.
+
+	test(lgt_format_3_radix_invalid_4, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~42R', [16])}.
+
 	test(lgt_format_3_float, true(Assertion)) :-
 		^^set_text_output(''),
 		current_output(S),
@@ -392,9 +412,55 @@
 
 	test(lgt_format_3_tab_table_fill_character, true(Assertion)) :-
 		^^set_text_output(''),
-			current_output(S),
+		current_output(S),
 		{format(S, '~61t~8|', [])},
 		^^text_output_assertion('========', Assertion).
+
+	test(lgt_format_3_unbound_first_argument, error(instantiation_error)) :-
+		{format(_, _, [42])}.
+
+	test(lgt_format_3_unbound_second_argument, error(instantiation_error)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, _, [42])}.
+
+	test(lgt_format_3_unbound_third_argument, error(instantiation_error)) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~d', _)}.
+
+	test(lgt_format_3_first_argument_wrong_type, error(domain_error(stream_or_alias,3.14))) :-
+		{format(3.14, '~d', [42])}.
+
+	test(lgt_format_3_second_argument_wrong_type, error(type_error(_,42))) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, 42, [42])}.
+
+	test(lgt_format_3_third_argument_wrong_type, error(type_error(list,42))) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~d', 42)}.
+
+	test(lgt_format_3_invalid_argument_1, errors([type_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~a', [42])}.
+
+	test(lgt_format_3_invalid_argument_2, errors([type_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~d', [abc])}.
+
+	test(lgt_format_3_not_enough_arguments_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~a', [])}.
+
+	test(lgt_format_3_not_enough_arguments_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		current_output(S),
+		{format(S, '~a ~d ~a', [abc, 42])}.
 
 	cleanup :-
 		^^clean_text_output.

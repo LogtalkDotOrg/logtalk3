@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-08-14,
+		date is 2021-08-15,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -198,6 +198,22 @@
 		{format('~R', [16])},
 		^^text_output_assertion('20', Assertion).
 
+	test(lgt_format_2_radix_invalid_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~0r', [16])}.
+
+	test(lgt_format_2_radix_invalid_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~1R', [16])}.
+
+	test(lgt_format_2_radix_invalid_3, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~37r', [16])}.
+
+	test(lgt_format_2_radix_invalid_4, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~42R', [16])}.
+
 	test(lgt_format_2_float, true(Assertion)) :-
 		^^set_text_output(''),
 		{format('~f', [1.0])},
@@ -341,6 +357,38 @@
 		^^set_text_output(''),
 		{format('~61t~8|', [])},
 		^^text_output_assertion('========', Assertion).
+
+	test(lgt_format_2_unbound_first_argument, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format(_, [42])}.
+
+	test(lgt_format_2_unbound_second_argument, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format('~d', _)}.
+
+	test(lgt_format_2_first_argument_wrong_type, error(type_error(_,42))) :-
+		^^set_text_output(''),
+		{format(42, [42])}.
+
+	test(lgt_format_2_second_argument_wrong_type, error(type_error(list,42))) :-
+		^^set_text_output(''),
+		{format('~d', 42)}.
+
+	test(lgt_format_2_invalid_argument_1, errors([type_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~a', [42])}.
+
+	test(lgt_format_2_invalid_argument_2, errors([type_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~d', [abc])}.
+
+	test(lgt_format_2_not_enough_arguments_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~a', [])}.
+
+	test(lgt_format_2_not_enough_arguments_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format('~a ~d ~a', [abc, 42])}.
 
 	cleanup :-
 		^^clean_text_output.
