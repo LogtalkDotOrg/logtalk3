@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2021-08-15,
+		date is 2021-08-16,
 		comment is 'Unit tests for the de facto Prolog standard format/3 built-in predicate.'
 	]).
 
@@ -431,6 +431,9 @@
 
 	test(lgt_format_3_first_argument_wrong_type, error(domain_error(stream_or_alias,3.14))) :-
 		{format(3.14, '~d', [42])}.
+
+	test(lgt_format_3_non_existing_stream, errors([existence_error(stream,foo), domain_error(stream_or_alias,foo)])) :-
+		{format(foo, '~d', [42])}.
 
 	test(lgt_format_3_second_argument_wrong_type, error(type_error(_,42))) :-
 		^^set_text_output(''),
