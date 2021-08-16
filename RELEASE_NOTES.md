@@ -128,6 +128,11 @@ directive tests.
 
 * IMPROVED: Tests for the `write_term/3` predicate option `variable_names/1.
 
+* UPDATED: The tests for the standard `open/4` and `write_term/2-3` predicates
+for the for the changes in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
+in options checking where an instantiation error is now expected instead of a
+domain error.
+
 
 3.49.0 - July 27, 2021
 ======================

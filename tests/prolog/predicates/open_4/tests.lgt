@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-06-02,
+		date is 2021-08-16,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -93,9 +93,7 @@
 		{open(Path, write, _, [alias(a)]),
 		 open(bar, write, _, [alias(a)])}.
 
-	% tests from the Logtalk portability work; the ISO Prolog standard only
-	% specifies a domain_error/2 for an invalid option but an instantiation_error/0
-	% is also a sensible choice made by several Prolog systems when applicable
+	% tests from the Logtalk portability work
 
 	test(lgt_open_4_17, error(instantiation_error)) :-
 		{open(foo, write, _, [_|_])}.
@@ -103,25 +101,25 @@
 	test(lgt_open_4_18, error(domain_error(stream_option,1))) :-
 		{open(foo, write, _, [1])}.
 
-	test(lgt_open_4_19, errors([domain_error(stream_option,alias(_)), instantiation_error])) :-
+	test(lgt_open_4_19, error(instantiation_error)) :-
 		{open(foo, write, _, [alias(_)])}.
 
 	test(lgt_open_4_20, error(domain_error(stream_option,alias(1)))) :-
 		{open(foo, write, _, [alias(1)])}.
 
-	test(lgt_open_4_21, errors([domain_error(stream_option,eof_action(_)), instantiation_error])) :-
+	test(lgt_open_4_21, error(instantiation_error)) :-
 		{open(foo, write, _, [eof_action(_)])}.
 
 	test(lgt_open_4_22, error(domain_error(stream_option,eof_action(1)))) :-
 		{open(foo, write, _, [eof_action(1)])}.
 
-	test(lgt_open_4_23, errors([domain_error(stream_option,reposition(_)), instantiation_error])) :-
+	test(lgt_open_4_23, error(instantiation_error)) :-
 		{open(foo, write, _, [reposition(_)])}.
 
 	test(lgt_open_4_24, error(domain_error(stream_option,reposition(1)))) :-
 		{open(foo, write, _, [reposition(1)])}.
 
-	test(lgt_open_4_25, errors([domain_error(stream_option,type(_)), instantiation_error])) :-
+	test(lgt_open_4_25, error(instantiation_error)) :-
 		{open(foo, write, _, [type(_)])}.
 
 	test(lgt_open_4_26, error(domain_error(stream_option,type(1)))) :-
@@ -144,6 +142,9 @@
 
 	test(lgt_open_4_31, errors([permission_error(open,source_sink,_), existence_error(source_sink,_)]), [condition(os::operating_system_type(unix))]) :-
 		{open('/foo/bar/no_write_permission', write, _, [])}.
+
+	test(wg17_open_4_32, error(domain_error(stream_option,type(nontype)))) :-
+		{open(foo, write, _, [type(nontype)])}.
 
 	cleanup :-
 		^^clean_file(roger_data),

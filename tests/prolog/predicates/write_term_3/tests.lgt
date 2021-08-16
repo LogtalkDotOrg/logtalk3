@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:17:0,
+		version is 1:18:0,
 		author is 'Paulo Moura',
-		date is 2021-08-08,
+		date is 2021-08-16,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -286,11 +286,9 @@
 		{writeq(S, a is b)},
 		^^text_output_assertion('a is b', Assertion).
 
-	% check detection of invalid options; the ISO Prolog standard only
-	% specifies a domain_error/2 but an instantiation_error/0 is also
-	% a sensible choice made by several Prolog systems when applicable
+	% check detection of invalid options
 
-	test(sics_write_term_3_48, errors([domain_error(write_option,quoted(_)), instantiation_error])) :-
+	test(sics_write_term_3_48, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(_)])}.
 
@@ -298,7 +296,7 @@
 		^^suppress_text_output,
 		{write_term(1, [quoted(fail)])}.
 
-	test(sics_write_term_3_50, errors([domain_error(write_option,ignore_ops(_)), instantiation_error])) :-
+	test(sics_write_term_3_50, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(_)])}.
 
@@ -306,7 +304,7 @@
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(fail)])}.
 
-	test(sics_write_term_3_52, errors([domain_error(write_option,numbervars(_)), instantiation_error])) :-
+	test(sics_write_term_3_52, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(_)])}.
 
@@ -314,7 +312,7 @@
 		^^suppress_text_output,
 		{write_term(1, [numbervars(fail)])}.
 
-	test(sics_write_term_3_54, errors([domain_error(write_option,variable_names(_)), instantiation_error])) :-
+	test(sics_write_term_3_54, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(_)])}.
 
@@ -322,11 +320,11 @@
 		^^suppress_text_output,
 		{write_term(1, [variable_names(a)])}.
 
-	test(sics_write_term_3_56, errors([domain_error(write_option,variable_names([_='A'])), instantiation_error])) :-
+	test(sics_write_term_3_56, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
-	test(sics_write_term_3_57, errors([domain_error(write_option,variable_names(['A'=_|_])), instantiation_error])) :-
+	test(sics_write_term_3_57, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 
