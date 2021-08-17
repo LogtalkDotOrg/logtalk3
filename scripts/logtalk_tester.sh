@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on July 31, 2021
+##   Last updated on August 17, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 6.5"
+	echo "$(basename "$0") 7.0"
 	exit 0
 }
 
@@ -78,6 +78,7 @@ wipe='false'
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
+url=""
 
 # use GNU sed if available instead of BSD sed
 if gsed --version >/dev/null 2>&1 ; then
@@ -130,6 +131,9 @@ run_testset() {
 		flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
 	else
 		flag_goal="true"
+	fi
+	if [ "$url" != "" ] ; then
+		flag_goal="set_logtalk_flag(tests_base_url,'$url'),$flag_goal"
 	fi
 	if [[ "$format" != "default" || "$coverage" != "none" ]] ; then
 		flag_goal="set_logtalk_flag(tests_report_directory,'$unit/'),$flag_goal"
@@ -278,7 +282,7 @@ usage_help()
 	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-u url] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -297,6 +301,7 @@ usage_help()
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
 	echo "  -s suppress path prefix (default is $prefix)"
+	echo "  -u base URL to generate links to test files (no default)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (valid values are none and xml)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
@@ -311,7 +316,7 @@ usage_help()
 	echo
 }
 
-while getopts "vp:o:m:f:d:t:n:s:c:l:g:r:i:wh" option
+while getopts "vp:o:m:f:d:t:n:s:u:c:l:g:r:i:wh" option
 do
 	case $option in
 		v) print_version;;
@@ -323,6 +328,7 @@ do
 		t) t_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
+		u) u_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
@@ -500,6 +506,10 @@ fi
 
 if [ "$s_arg" != "" ] ; then
 	prefix="$s_arg"
+fi
+
+if [ "$u_arg" != "" ] ; then
+	url="$u_arg"
 fi
 
 if [ "$n_arg" != "" ] ; then

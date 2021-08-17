@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "June 30, 2021" "Logtalk 3.48.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "August 17, 2021" "Logtalk 3.50.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -14,6 +14,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 [\fB-t \fItimeout\fR]
 [\fB-n \fIdriver\fR]
 [\fB-s \fIprefix\fR]
+[\fB-u \fIurl\fR]
 [\fB-c \fIreport\fR]
 [\fB-l \fIlevel\fR]
 [\fB-i \fIoptions\fR]
@@ -55,6 +56,9 @@ Name of the tests driver and sourced files (minus file name extensions). Default
 .TP
 .BI \-s
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.
+.TP
+.BI \-u
+Base URL for generating links to test files (no default).
 .TP
 .BI \-c
 Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fInone\fR.
