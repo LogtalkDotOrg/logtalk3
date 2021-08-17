@@ -124,6 +124,10 @@ Run all tests on the current directory and sub-directories using the SWI-Prolog 
 .TP
 Run all tests on the current directory and sub-directories using the Tau Prolog backend, caching the compilation of the testing tool for better performance, but wiping the test set default scratch directories before running it:
 \fBlogtalk_tester -p tau -g "set_logtalk_flag(clean,off)" -w\fR
+.PP
+.TP
+Run the Logtalk distribution tests using the Trealla Prolog backend, passing a base URL that can be used for creating links to the test files:
+\fBlogtalk_tester -p trealla -f xunit_net_v2 -s $HOME/logtalk/ -u https://github.com/LogtalkDotOrg/logtalk3/tree/master/\fR
 
 .SH IMPLEMENTATION NOTES
 When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.

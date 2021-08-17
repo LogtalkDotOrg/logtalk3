@@ -92,6 +92,10 @@ specifying the Graphviz command to use.
 * UPDATED: The `lgt2svg` scripts provided by the `diagrams` tool to use the
 `dot` command `-ofile` option for improved Windows compatibility.
 
+* UPDATED: The `lgtunit` tool xUnit.net v2 XML format report to generate links
+to test files when using the new `logtalk_tester` script command-line option
+to pass the base URL.
+
 * UPDATED: Mention the GNU `coreutils` package requirement for the timeout
 option in the help for the `logtalk_tester` script.
 

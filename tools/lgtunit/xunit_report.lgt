@@ -26,7 +26,10 @@
 	% define a flag to allow overriding the directory where tests reports
 	% are created (e.g. when running tests defined in a directory different
 	% from the directory that contains the tests driver file)
-	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)])
+	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)]),
+	% define a flag to allow the logtalk_tester script to pass the
+	% base URL for generating links to test files
+	create_logtalk_flag(tests_base_url, '', [type(atom), keep(true)])
 )).
 
 

@@ -26,16 +26,19 @@
 	% define a flag to allow overriding the directory where tests reports
 	% are created (e.g. when running tests defined in a directory different
 	% from the directory that contains the tests driver file)
-	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)])
+	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)]),
+	% define a flag to allow the logtalk_tester script to pass the
+	% base URL for generating links to test files
+	create_logtalk_flag(tests_base_url, '', [type(atom), keep(true)])
 )).
 
 
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-31,
+		date is 2021-08-17,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -190,9 +193,12 @@
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Pass']),
 		write_xml_open_tag(traits, []),
-		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
+		(	tests_url(Short, Position, URL) ->
+			write_xml_empty_tag(trait, [name-url, value-URL])
+		;	true
+		),
 		(	Note == '' ->
 			true
 		;	write_xml_empty_tag(trait, [name-note, value-Note])
@@ -203,9 +209,12 @@
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-Time, result-'Fail']),
 		write_xml_open_tag(traits, []),
-		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
+		(	tests_url(Short, Position, URL) ->
+			write_xml_empty_tag(trait, [name-url, value-URL])
+		;	true
+		),
 		write_xml_close_tag(traits),
 		write_xml_open_tag(failure, []),
 		test_message(Note, 'Non-deterministic success', Message),
@@ -218,6 +227,10 @@
 		write_xml_open_tag(traits, []),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
+		(	tests_url(Short, Position, URL) ->
+			write_xml_empty_tag(trait, [name-url, value-URL])
+		;	true
+		),
 		write_xml_close_tag(traits),
 		write_xml_open_tag(failure, []),
 		failed_test(Reason, Description, _, Error),
@@ -233,9 +246,12 @@
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-Name, type-(Short::Object), method-Name, time-0.0, result-'Skip']),
 		write_xml_open_tag(traits, []),
-		suppress_path_prefix(File, Short),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
+		(	tests_url(Short, Position, URL) ->
+			write_xml_empty_tag(trait, [name-url, value-URL])
+		;	true
+		),
 		write_xml_close_tag(traits),
 		test_message(Note, 'Skipped test', Reason),
 		write_xml_cdata_element(reason, [], Reason),
@@ -355,6 +371,21 @@
 			true
 		;	ShortPath = Path
 		).
+
+	tests_url(Short, Position, URL) :-
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(tests_base_url, BaseURL)},
+		BaseURL \== '',
+		Position = Line-_,
+		atom_concat(BaseURL, Short, URL0),
+		(	sub_atom(BaseURL, _, _, _, bitbucket) ->
+			atom_concat(URL0, '#', URL1)
+		;	% assume GitHub or GitLab host
+			atom_concat(URL0, '#L', URL1)
+		),
+		number_chars(Line, LineChars),
+		atom_chars(LineAtom, LineChars),
+		atom_concat(URL1, LineAtom, URL).
 
 	% XML auxiliary predicates
 
