@@ -102,6 +102,10 @@ option in the help for the `logtalk_tester` script.
 * UPDATED: The `lgtdoc` tool to process the new `see_also` key for the `info/2`
 predicate directive.
 
+* FIXED: The `lgtunit` tool xUnit.net v2 XML format report to append the tests
+object identifier to the test names to distinguish tests run with different
+parameterizations.
+
 * FIXED: Sample Sphinx template provided by the lgtdoc` tool for compatibility
 with recent Sphinx versions.
 
