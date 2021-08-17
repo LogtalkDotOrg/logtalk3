@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2021-08-15,
+		date is 2021-08-17,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate.'
 	]).
 
@@ -48,6 +48,13 @@
 		^^set_text_output(''),
 		{format('~w', ['ABC'])},
 		^^text_output_assertion('ABC', Assertion).
+
+	test(lgt_format_2_write_numbervars, true(Assertion)) :-
+		^^set_text_output(''),
+		Term = a(_),
+		{numbervars(Term, 0, _)},
+		{format('~w', [Term])},
+		^^text_output_assertion('a(A)', Assertion).
 
 	test(lgt_format_2_quoted, true(Assertion)) :-
 		^^set_text_output(''),
