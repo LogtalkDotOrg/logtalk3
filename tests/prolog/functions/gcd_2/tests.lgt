@@ -23,51 +23,53 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2020-07-22,
+		date is 2021-08-18,
 		comment is 'Unit tests for the de facto standard Prolog gcd/2 built-in function.'
 	]).
 
-	test(gcd_2_01, true(GCD == 3)) :-
+	% tests from the Logtalk portability work
+
+	test(lgt_gcd_2_01, true(GCD == 3)) :-
 		{GCD is gcd(9, 6)}.
 
-	test(gcd_2_02, true(GCD == 3)) :-
+	test(lgt_gcd_2_02, true(GCD == 3)) :-
 		{GCD is gcd(6, 9)}.
 
-	test(gcd_2_03, true(GCD == 3)) :-
+	test(lgt_gcd_2_03, true(GCD == 3)) :-
 		{GCD is gcd(-6, 9)}.
 
-	test(gcd_2_04, true(GCD == 1)) :-
+	test(lgt_gcd_2_04, true(GCD == 1)) :-
 		{GCD is gcd(7, 5)}.
 
-	test(gcd_2_05, true(GCD == 1)) :-
+	test(lgt_gcd_2_05, true(GCD == 1)) :-
 		{GCD is gcd(5, 7)}.
 
-	test(gcd_2_06, true(GCD == 1)) :-
+	test(lgt_gcd_2_06, true(GCD == 1)) :-
 		{GCD is gcd(5, -7)}.
 
-	test(gcd_2_07, error(instantiation_error)) :-
+	test(lgt_gcd_2_07, error(instantiation_error)) :-
 		variable(Var),
 		{_ is gcd(4, Var)}.
 
-	test(gcd_2_08, error(instantiation_error)) :-
+	test(lgt_gcd_2_08, error(instantiation_error)) :-
 		variable(Var),
 		{_ is gcd(Var, 4)}.
 
-	test(gcd_2_09, error(type_error(integer,2.0))) :-
+	test(lgt_gcd_2_09, error(type_error(integer,2.0))) :-
 		fp(Float),
 		{_ is gcd(4, Float)}.
 
-	test(gcd_2_10, error(type_error(integer,2.0))) :-
+	test(lgt_gcd_2_10, error(type_error(integer,2.0))) :-
 		fp(Float),
 		{_ is gcd(Float, 4)}.
 
-	test(gcd_2_11, error(type_error(evaluable,a/0))) :-
+	test(lgt_gcd_2_11, error(type_error(evaluable,a/0))) :-
 		a(A),
 		{_ is gcd(A, 4)}.
 
-	test(gcd_2_12, error(type_error(evaluable,a/0))) :-
+	test(lgt_gcd_2_12, error(type_error(evaluable,a/0))) :-
 		a(A),
 		{_ is gcd(4, A)}.
 
