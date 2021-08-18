@@ -63,6 +63,9 @@ Library
 * ADDED: Additional tests for the `arbitrary` and `types` libraries to check
 that the main predicates are deterministic.
 
+* FIXED: The `meta_compiler` library to include a copy of the `meta` library
+tests to avoid names clashes when generating Allure reports from test results.
+
 Tools
 -----
 
@@ -121,6 +124,10 @@ tests.
 
 * FIXED: Loading of the `securemp` example to actually load all the demo
 broken meta-predicate definitions.
+
+* FIXED: The `lambdas_compiled` and `metapredicates_compiled` examples to
+include copies of, respectively, the `lambdas` and `metapredicates` example
+tests to avoid names clashes when generating Allure reports from test results.
 
 Tests
 -----

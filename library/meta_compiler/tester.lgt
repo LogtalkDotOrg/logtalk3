@@ -24,6 +24,6 @@
 	logtalk_load([types(loader), gensym(loader), meta(loader), hook_flows(loader)]),
 	logtalk_load(meta_compiler, [optimize(on)]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(meta(tests), [hook(hook_pipeline([meta_compiler,lgtunit]))]),
+	logtalk_load(tests, [hook(hook_pipeline([meta_compiler,lgtunit]))]),
 	tests::run
 )).
