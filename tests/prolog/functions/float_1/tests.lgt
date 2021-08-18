@@ -23,37 +23,37 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-07-14,
+		date is 2021-08-18,
 		comment is 'Unit tests for the ISO Prolog standard float/1 built-in function.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.1.7
 
-	test(iso_float_1_01, true(X == 7.0)) :-
+	test(iso_float_1_function_01, true(X == 7.0)) :-
 		{X is float(7)}.
 
-	test(iso_float_1_02, true(X == 7.3)) :-
+	test(iso_float_1_function_02, true(X == 7.3)) :-
 		{X is float(7.3)}.
 
-	test(iso_float_1_03, true(X == 1.0)) :-
+	test(iso_float_1_function_03, true(X == 1.0)) :-
 		% example fixed in ISO/IEC 13211-1:1995/Cor.1:2007
 		{X is float(5//3)}.
 
-	test(iso_float_1_04, error(instantiation_error)) :-
+	test(iso_float_1_function_04, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is float(N)}.
 
-	test(iso_float_1_05, error(type_error(evaluable,foo/0))) :-
+	test(iso_float_1_function_05, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is float(Foo)}.
 
 	% tests from the Logtalk portability work
 
-	test(iso_float_1_06, error(type_error(evaluable,foo/1))) :-
+	test(iso_float_1_function_06, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is float(Foo)}.

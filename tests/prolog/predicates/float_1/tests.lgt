@@ -23,36 +23,32 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-02-10,
+		date is 2021-08-18,
 		comment is 'Unit tests for the ISO Prolog standard float/1 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.3.4.4
 
-	succeeds(iso_float_1_01) :-
+	test(iso_float_1_predicate_01, true) :-
 		{float(3.3)}.
 
-	succeeds(iso_float_1_02) :-
+	test(iso_float_1_predicate_02, true) :-
 		{float(-3.3)}.
 
-	fails(iso_float_1_03) :-
+	test(iso_float_1_predicate_03, false) :-
 		{float(3)}.
 
-	fails(iso_float_1_04) :-
+	test(iso_float_1_predicate_04, false) :-
 		{float(atom)}.
 
-	fails(iso_float_1_05) :-
+	test(iso_float_1_predicate_05, false) :-
 		{float(_X)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_float_1_06) :-
+	test(iso_float_1_predicate_06, true) :-
 		{float(1.0)}.
 
 :- end_object.

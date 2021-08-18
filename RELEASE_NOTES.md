@@ -125,6 +125,8 @@ broken meta-predicate definitions.
 Tests
 -----
 
+* REMOVED: Duplicated tests for the standard `false/0` predicate.
+
 * ADDED: Additional tests for the de facto standard `format/2-3` and `length/2`
 predicates.
 
@@ -145,7 +147,9 @@ for the for the changes in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
 in options checking where an instantiation error is now expected instead of a
 domain error.
 
-* REMOVED: Duplicated tests for the standard `false/0` predicate.
+* RENAMED: Tests for the standard `float/1` function and the standard `float/1`
+predicate to workaround tests with the sane names clashing when generating an
+Allure report from test results using the xUnit.net v2 XML output format.
 
 
 3.49.0 - July 27, 2021
