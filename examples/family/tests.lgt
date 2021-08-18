@@ -23,30 +23,25 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2015-09-23,
+		date is 2021-08-18,
 		comment is 'Unit tests for the "family" example.'
 	]).
 
-	test(family_1) :-
-		setof(Female, addams::female(Female), Females),
-		Females == [morticia, wednesday].
+	test(family_01, true(Females == [morticia, wednesday])) :-
+		setof(Female, addams::female(Female), Females).
 
-	test(family_2) :-
-		setof(Male, addams::male(Male), Males),
-		Males == [gomez, pubert, pugsley].
+	test(family_02, true(Males == [gomez, pubert, pugsley])) :-
+		setof(Male, addams::male(Male), Males).
 
-	test(family_3) :-
-		setof(Child, addams::mother(Mother, Child), Children),
-		Mother == morticia, Children == [pubert, pugsley, wednesday].
+	test(family_03, true(Mother-Children == morticia-[pubert, pugsley, wednesday])) :-
+		setof(Child, addams::mother(Mother, Child), Children).
 
-	test(family_4) :-
-		setof(Child, simpsons::father(Father, Child), Children),
-		Father == homer, Children == [bart, lisa, maggie].
+	test(family_04, true(Father-Children == homer-[bart, lisa, maggie])) :-
+		setof(Child, simpsons::father(Father, Child), Children).
 
-	test(family_5) :-
-		setof(Male, simpsons_extended::male(Male), Males),
-		Males == [abe, bart, herb, homer].
+	test(family_05, true(Males == [abe, bart, herb, homer])) :-
+		setof(Male, simpsons_extended::male(Male), Males).
 
 :- end_object.
