@@ -145,6 +145,8 @@ for the for the changes in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
 in options checking where an instantiation error is now expected instead of a
 domain error.
 
+* REMOVED: Duplicated tests for the standard `false/0` predicate.
+
 
 3.49.0 - July 27, 2021
 ======================
