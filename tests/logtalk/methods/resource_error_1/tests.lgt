@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-11-19,
+		date is 2021-08-18,
 		comment is 'Unit tests for the resource_error/1 built-in method.'
 	]).
 
-	throws(resource_error_1_1, error(resource_error(memory), logtalk(predicate,_))) :-
+	throws(resource_error_1_01, error(resource_error(memory), logtalk(predicate,_))) :-
 		predicate.
 
-	throws(resource_error_1_2, error(resource_error(memory), logtalk(message_tokens(1,rresource_error_1_test,_,_),_))) :-
+	throws(resource_error_1_02, error(resource_error(memory), logtalk(message_tokens(1,rresource_error_1_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, rresource_error_1_test), _).
 
 	% auxiliar predicates

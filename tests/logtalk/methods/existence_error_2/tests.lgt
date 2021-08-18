@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-11-19,
+		date is 2021-08-18,
 		comment is 'Unit tests for the existence_error/2 built-in method.'
 	]).
 
-	throws(existence_error_2_1, error(existence_error(procedure,foo/1), logtalk(predicate,_))) :-
+	throws(existence_error_2_01, error(existence_error(procedure,foo/1), logtalk(predicate,_))) :-
 		predicate.
 
-	throws(existence_error_2_2, error(existence_error(procedure,foo/1), logtalk(message_tokens(1,existence_error_2_test,_,_),_))) :-
+	throws(existence_error_2_02, error(existence_error(procedure,foo/1), logtalk(message_tokens(1,existence_error_2_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, existence_error_2_test), _).
 
 	% auxiliar predicates

@@ -23,18 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-05-06,
+		date is 2021-08-18,
 		comment is 'Unit tests for the phrase//1 built-in method.'
 	]).
 
-	succeeds(phrase_1_1) :-
+	test(phrase_1_01, true) :-
 		phrase(list(atom), [a,b,c]).
 
-	succeeds(phrase_1_2) :-
-		phrase(list(sum(Sum)), [1,2,3]),
-		Sum == 6.
+	test(phrase_1_02, true(Sum == 6)) :-
+		phrase(list(sum(Sum)), [1,2,3]).
 
 	% test DCG
 

@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-11-19,
+		date is 2021-08-18,
 		comment is 'Unit tests for the domain_error/2 built-in method.'
 	]).
 
-	throws(domain_error_2_1, error(domain_error(not_less_than_zero,-1), logtalk(predicate,_))) :-
+	throws(domain_error_2_01, error(domain_error(not_less_than_zero,-1), logtalk(predicate,_))) :-
 		predicate.
 
-	throws(domain_error_2_2, error(domain_error(not_less_than_zero,-1), logtalk(message_tokens(1,domain_error_2_test,_,_),_))) :-
+	throws(domain_error_2_02, error(domain_error(not_less_than_zero,-1), logtalk(message_tokens(1,domain_error_2_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, domain_error_2_test), _).
 
 	% auxiliar predicates

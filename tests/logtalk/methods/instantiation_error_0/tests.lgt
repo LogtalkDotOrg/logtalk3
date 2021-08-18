@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-11-19,
+		date is 2021-08-18,
 		comment is 'Unit tests for the instantiation_error/0 built-in method.'
 	]).
 
-	throws(instantiation_error_0_1, error(instantiation_error, logtalk(predicate,_))) :-
+	throws(instantiation_error_0_01, error(instantiation_error, logtalk(predicate,_))) :-
 		predicate.
 
-	throws(instantiation_error_0_2, error(instantiation_error, logtalk(message_tokens(1,instantiation_error_0_test,_,_),_))) :-
+	throws(instantiation_error_0_02, error(instantiation_error, logtalk(message_tokens(1,instantiation_error_0_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, instantiation_error_0_test), _).
 
 	% auxiliar predicates

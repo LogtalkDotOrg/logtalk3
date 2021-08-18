@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-11-19,
+		date is 2021-08-18,
 		comment is 'Unit tests for the permission_error/3 built-in method.'
 	]).
 
-	throws(permission_error_3_1, error(permission_error(modify,static_predicate,foo/1), logtalk(predicate,_))) :-
+	throws(permission_error_3_01, error(permission_error(modify,static_predicate,foo/1), logtalk(predicate,_))) :-
 		predicate.
 
-	throws(instantiation_error_0_2, error(permission_error(modify,static_predicate,foo/1), logtalk(message_tokens(1,permission_error_3_test,_,_),_))) :-
+	throws(permission_error_3_02, error(permission_error(modify,static_predicate,foo/1), logtalk(message_tokens(1,permission_error_3_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, permission_error_3_test), _).
 
 	% auxiliar predicates

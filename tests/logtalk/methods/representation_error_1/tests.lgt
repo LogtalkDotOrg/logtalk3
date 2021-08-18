@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-06-29,
+		date is 2021-08-18,
 		comment is 'Unit tests for the representation_error/1 built-in method.'
 	]).
 
-	throws(representation_error_1_1, error(representation_error(character), logtalk(predicate,_))) :-
+	throws(representation_error_1_01, error(representation_error(character), logtalk(predicate,_))) :-
 		predicate.
 
-	throws(representation_error_1_2, error(representation_error(character), logtalk(message_tokens(1,representation_error_1_test,_,_),_))) :-
+	throws(representation_error_1_02, error(representation_error(character), logtalk(message_tokens(1,representation_error_1_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, representation_error_1_test), _).
 
 	% auxiliar predicates

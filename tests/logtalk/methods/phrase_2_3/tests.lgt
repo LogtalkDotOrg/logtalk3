@@ -23,37 +23,37 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-03-24,
+		date is 2021-08-18,
 		comment is 'Unit tests for the phrase/2-3 built-in methods.'
 	]).
 
-	throws(phrase_2_1, error(permission_error(access, private_predicate, phrase/2), logtalk(logtalk::phrase(_, _), _))) :-
+	throws(phrase_2_01, error(permission_error(access, private_predicate, phrase/2), logtalk(logtalk::phrase(_, _), _))) :-
 		{logtalk::phrase(_, _)}.
 
-	throws(phrase_2_2, error(instantiation_error, logtalk(logtalk<<phrase(_, _), _))) :-
+	throws(phrase_2_02, error(instantiation_error, logtalk(logtalk<<phrase(_, _), _))) :-
 		{logtalk<<phrase(_, _)}.
 
-	throws(phrase_2_3, error(type_error(callable,1), logtalk(logtalk<<phrase(1, _), _))) :-
+	throws(phrase_2_03, error(type_error(callable,1), logtalk(logtalk<<phrase(1, _), _))) :-
 		{logtalk<<phrase(1, _)}.
 
-	throws(phrase_2_4, error(type_error(list,1), logtalk(logtalk<<phrase(foo, 1), _))) :-
+	throws(phrase_2_04, error(type_error(list,1), logtalk(logtalk<<phrase(foo, 1), _))) :-
 		{logtalk<<phrase(foo, 1)}.
 
-	throws(phrase_3_1, error(permission_error(access, private_predicate, phrase/3), logtalk(logtalk::phrase(_, _, _), _))) :-
+	throws(phrase_3_01, error(permission_error(access, private_predicate, phrase/3), logtalk(logtalk::phrase(_, _, _), _))) :-
 		{logtalk::phrase(_, _, _)}.
 
-	throws(phrase_3_2, error(instantiation_error, logtalk(logtalk<<phrase(_, _, _), _))) :-
+	throws(phrase_3_02, error(instantiation_error, logtalk(logtalk<<phrase(_, _, _), _))) :-
 		{logtalk<<phrase(_, _, _)}.
 
-	throws(phrase_3_3, error(type_error(callable,1), logtalk(logtalk<<phrase(1, _, _), _))) :-
+	throws(phrase_3_03, error(type_error(callable,1), logtalk(logtalk<<phrase(1, _, _), _))) :-
 		{logtalk<<phrase(1, _, _)}.
 
-	throws(phrase_3_4, error(type_error(list,1), logtalk(logtalk<<phrase(foo, 1, _), _))) :-
+	throws(phrase_3_04, error(type_error(list,1), logtalk(logtalk<<phrase(foo, 1, _), _))) :-
 		{logtalk<<phrase(foo, 1, _)}.
 
-	throws(phrase_3_5, error(type_error(list,1), logtalk(logtalk<<phrase(foo, _, 1), _))) :-
+	throws(phrase_3_05, error(type_error(list,1), logtalk(logtalk<<phrase(foo, _, 1), _))) :-
 		{logtalk<<phrase(foo, _, 1)}.
 
 :- end_object.

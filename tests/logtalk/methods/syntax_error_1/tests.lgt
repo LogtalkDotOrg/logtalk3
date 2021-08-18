@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-06-29,
+		date is 2021-08-18,
 		comment is 'Unit tests for the syntax_error/1 built-in method.'
 	]).
 
-	throws(syntax_error_1_1, error(syntax_error(invalid_token), logtalk(predicate,_))) :-
+	throws(syntax_error_1_01, error(syntax_error(invalid_token), logtalk(predicate,_))) :-
 		predicate.
 
-	throws(syntax_error_1_2, error(syntax_error(invalid_token), logtalk(message_tokens(1,syntax_error_1_test,_,_),_))) :-
+	throws(syntax_error_1_02, error(syntax_error(invalid_token), logtalk(message_tokens(1,syntax_error_1_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, syntax_error_1_test), _).
 
 	% auxiliar predicates

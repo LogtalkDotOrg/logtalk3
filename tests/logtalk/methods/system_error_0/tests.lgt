@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-06-29,
+		date is 2021-08-18,
 		comment is 'Unit tests for the system_error/0 built-in method.'
 	]).
 
-	throws(system_error_1_1, error(system_error, logtalk(predicate,_))) :-
+	throws(system_error_1_01, error(system_error, logtalk(predicate,_))) :-
 		predicate.
 
-	throws(instantiation_error_0_2, error(system_error, logtalk(message_tokens(1,system_error_1_test,_,_),_))) :-
+	throws(system_error_1_02, error(system_error, logtalk(message_tokens(1,system_error_1_test,_,_),_))) :-
 		phrase(logtalk::message_tokens(1, system_error_1_test), _).
 
 	% auxiliar predicates
