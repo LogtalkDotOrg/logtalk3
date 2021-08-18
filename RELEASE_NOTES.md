@@ -147,9 +147,13 @@ for the for the changes in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
 in options checking where an instantiation error is now expected instead of a
 domain error.
 
-* RENAMED: Tests for the standard `float/1` function and the standard `float/1`
-predicate to workaround tests with the sane names clashing when generating an
-Allure report from test results using the xUnit.net v2 XML output format.
+* RENAMED: Tests for the standard `float/1` function and predicate to
+workaround tests with the sane names clashing when generating an Allure
+report from test results using the xUnit.net v2 XML output format.
+
+* RENAMED: Tests for the `set_logtalk_flag/2` directive and predicate to
+workaround tests with the sane names clashing when generating an Allure
+report from test results using the xUnit.net v2 XML output format.
 
 
 3.49.0 - July 27, 2021
