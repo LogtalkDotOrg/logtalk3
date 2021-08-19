@@ -33,7 +33,9 @@ Logtalk compiler and runtime
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The LVM adapter file for the proprietary `spy` predicate property.
+* UPDATED: The LVM adapter file for its proprietary `disk_predicate` and
+`spy` predicate properties and to expand its `disk_predicate/3` directive
+and `define_disk_predicate/3` predicate.
 
 * UPDATED: The Trealla Prolog adapter file to require 1.11.0 or later version.
 

@@ -513,15 +513,16 @@ setup_call_cleanup(_, _, _) :-
 	% allow first-argument indexing
 	catch('$lgt_lvm_directive_expansion'(Directive, Expanded), _, fail).
 
-'$lgt_lvm_directive_expansion'(disk_predicate(Functor/Arity), {:- disk_predicate(CFunctor/CArity)}) :-
+'$lgt_lvm_directive_expansion'(disk_predicate(Template,Mode,Database), {:- disk_predicate(CTemplate,Mode,Database)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
+	'$lgt_compile_predicate_heads'(Template, _, CTemplate, _).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_goal_expansion'(define_disk_predicate(Template,Mode,Database), {define_disk_predicate(CTemplate,Mode,Database)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_heads'(Template, _, CTemplate, _).
 
 
 
