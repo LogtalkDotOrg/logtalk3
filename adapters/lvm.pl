@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.7.0 and later versions
-%  Last updated on July 30, 2021
+%  Last updated on August 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -186,6 +186,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_predicate_property'(foreign).
 '$lgt_prolog_predicate_property'(number_of_clauses(_)).
 '$lgt_prolog_predicate_property'(spy).
+'$lgt_prolog_predicate_property'(disk_predicate(_)).
 
 
 
@@ -507,8 +508,14 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
+	nonvar(Directive),
+	% allow first-argument indexing
+	catch('$lgt_lvm_directive_expansion'(Directive, Expanded), _, fail).
+
+'$lgt_lvm_directive_expansion'(disk_predicate(Functor/Arity), {:- disk_predicate(CFunctor/CArity)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on July 14, 2021
+%  Last updated on August 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -663,6 +663,7 @@ forall(Generate, Test) :-
 
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
+	nonvar(Directive),
 	% allow first-argument indexing
 	catch('$lgt_eclipse_directive_expansion'(Directive, Expanded), _, fail).
 

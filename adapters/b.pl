@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 8.1 and later versions
-%  Last updated on July 14, 2021
+%  Last updated on August 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -549,46 +549,42 @@ findall(Term, Goal, List, Tail) :-
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_b_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	nonvar(Directive),
+	% allow first-argument indexing
+	catch('$lgt_b_directive_expansion'(Directive, Expanded), _, fail).
 
 
-'$lgt_b_directive_expansion'(eager_consume, {eager_consume}).
+'$lgt_b_directive_expansion'(eager_consume, {:- eager_consume}).
 
-'$lgt_b_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {op(Priority, Specifier, Operators)}) :-
+'$lgt_b_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
-'$lgt_b_directive_expansion'(table(':'(Head, N)), {table(':'(THead, N))}) :-
+'$lgt_b_directive_expansion'(table(':'(Head, N)), {:- table(':'(THead, N))}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_heads'(Head, _, THead, '-').
 
-'$lgt_b_directive_expansion'(table(F/A), {table(TF/TA)}) :-
+'$lgt_b_directive_expansion'(table(F/A), {:- table(TF/TA)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
 
-'$lgt_b_directive_expansion'(table(F//A), {table(TF/TA)}) :-
+'$lgt_b_directive_expansion'(table(F//A), {:- table(TF/TA)}) :-
 	logtalk_load_context(entity_type, _),
 	A2 is A + 2,
 	'$lgt_compile_predicate_indicators'(F/A2, _, TF/TA).
 
-'$lgt_b_directive_expansion'(table([F/A| PIs]), {table(TPIs)}) :-
+'$lgt_b_directive_expansion'(table([F/A| PIs]), {:- table(TPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'([F/A| PIs], _, TPIs).
 
-'$lgt_b_directive_expansion'(table((F/A, PIs)), {table(TPIs)}) :-
+'$lgt_b_directive_expansion'(table((F/A, PIs)), {:- table(TPIs)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_indicators'((F/A, PIs), _, TPIs).
 
-'$lgt_b_directive_expansion'(table(Head), {table(THead)}) :-
+'$lgt_b_directive_expansion'(table(Head), {:- table(THead)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_heads'(Head, _, THead, _).
 
-'$lgt_b_directive_expansion'(mode(Head), {mode(THead)}) :-
+'$lgt_b_directive_expansion'(mode(Head), {:- mode(THead)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_heads'(Head, _, THead, '?').
 

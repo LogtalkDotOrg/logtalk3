@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on July 14, 2021
+%  Last updated on August 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -536,8 +536,9 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
+	nonvar(Directive),
 	% allow first-argument indexing
-	'$lgt_xsb_directive_expansion'(Directive, Expanded).
+	catch('$lgt_xsb_directive_expansion'(Directive, Expanded), _, fail).
 
 
 '$lgt_xsb_directive_expansion'(table(PIs), {:- table(CPIs)}) :-

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.20.0
-%  Last updated on July 14, 2021
+%  Last updated on August 19, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -557,19 +557,13 @@
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
-	'$lgt_ciao_directive_expansion'(Directive, Expanded0),
-	(	Expanded0 = [_| _] ->
-		Expanded = Expanded0
-	;	Expanded0 == [] ->
-		Expanded  == []
-	;	Expanded0 =  {ExpandedDirective} ->
-		Expanded  =  {(:- ExpandedDirective)}
-	;	Expanded  =  (:- Expanded0)
-	).
+	nonvar(Directive),
+	% allow first-argument indexing
+	catch('$lgt_ciao_directive_expansion'(Directive, Expanded), _, fail).
 
 
-'$lgt_ciao_directive_expansion'(imports(Module, Imports), uses(Module, Imports)).
-'$lgt_ciao_directive_expansion'(meta_predicate(Template), meta_predicate(CTemplate)) :-
+'$lgt_ciao_directive_expansion'(imports(Module, Imports), (:- use_module(Module, Imports))).
+'$lgt_ciao_directive_expansion'(meta_predicate(Template), (:- meta_predicate(CTemplate))) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_ciao_directive_meta_predicate'(Template, CTemplate).
 '$lgt_ciao_directive_expansion'(module(Module, Exports, []), module(Module, Exports)) :-
@@ -577,7 +571,7 @@
 		'$lgt_ciao_find_module_name'(Module)
 	;	true
 	).
-'$lgt_ciao_directive_expansion'(module(Module, Exports, [assertions]), module(Module, Exports)) :-
+'$lgt_ciao_directive_expansion'(module(Module, Exports, [assertions]), (:- module(Module, Exports))) :-
 	(	var(Module) ->		% module name taken from file name
 		'$lgt_ciao_find_module_name'(Module)
 	;	true
