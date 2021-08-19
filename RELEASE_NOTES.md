@@ -40,6 +40,9 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: An example to the `lgtunit` tool documentation on generating reports
+with links to the tests source files and line numbers.
+
 * IMPROVED: Handbook section on documenting applications.
 
 * IMPROVED: Handbook documentation of the `use_module/1` and `threaded/0`
@@ -71,7 +74,7 @@ Tools
 
 * ADDED: Command-line option to the `logtalk_tester` script to pass a base URL
 for generating links to test files using the new `tests_base_url` user-defined
-flag.
+flag that is created by the `lgtunit` tool test results export formats.
 
 * ADDED: Support for the Saxon XSLT processor to the `lgtdoc` tool `lgt2rst`,
 `lgt2html`, `lgt2md`, and `lgt2txt` scripts.

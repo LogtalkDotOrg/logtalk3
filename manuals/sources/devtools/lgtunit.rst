@@ -1456,6 +1456,29 @@ Or:
 
    $ logtalk_allure_report -- Project='Deep Thought' Commit=`git rev-parse --short HEAD`
 
+When using the ``xunit_net_v2`` output format, it's possible to generate
+reports with links to the tests source code. This requires using the
+``logtalk_tester`` shell script option that allows passing the base URL
+for those links. This option needs to be used together with the option
+to suppress the tests directory prefix so that the links can be
+constructed by appending the tests file relative path to the base URL.
+For example, assuming that you want to generate a report for the tests
+included in the Logtalk distribution:
+
+::
+
+   $ logtalk_tester \
+     -p gnu \
+     -f xunit_net_v2 \
+     -s "$LOGTALKUSER" \
+     -u "https://github.com/LogtalkDotOrg/logtalk3/tree/3e4ea295986fb09d0d4aade1f3b4968e29ef594e/"
+
+The use of git hash in the base URL ensures that the generated links
+will always show the exact versions of the tests that were run. The
+links include the line number for the tests in the tests files (assuming
+that the git repo is stored in a BitBucket, GitHub, or GitLab server).
+But note that not all supported backends provide accurate line numbers.
+
 Exporting code coverage results in XML format
 ---------------------------------------------
 
