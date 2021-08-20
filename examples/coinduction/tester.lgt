@@ -19,25 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(coinduction, supported),
-	\+ current_logtalk_flag(prolog_dialect, cx),
-	\+ current_logtalk_flag(prolog_dialect, eclipse)
+:- initialization((
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(loader),
+	% turn off the suspicious calls warnings
+	% as the tests create cyclic terms
+	logtalk_load(tests, [hook(lgtunit), suspicious_calls(silent)]),
+	tests::run
 )).
-
-	:- initialization((
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(loader),
-		% turn off the suspicious calls warnings
-		% as the tests create cyclic terms
-		logtalk_load(tests, [hook(lgtunit), suspicious_calls(silent)]),
-		tests::run
-	)).
-
-:- else.
-
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
-
-:- endif.
