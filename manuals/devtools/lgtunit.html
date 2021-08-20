@@ -1569,7 +1569,8 @@ to suppress the tests directory prefix so that the links can be
 constructed by appending the tests file relative path to the base URL.
 For example, assuming that you want to generate a report for the tests
 included in the Logtalk distribution:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester \
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd $LOGTALKUSER
+$ logtalk_tester \
   -p gnu \
   -f xunit_net_v2 \
   -s &quot;$LOGTALKUSER&quot; \

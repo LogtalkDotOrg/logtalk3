@@ -1306,6 +1306,7 @@ directory prefix so that the links can be constructed by appending the tests
 file relative path to the base URL. For example, assuming that you want to
 generate a report for the tests included in the Logtalk distribution:
 
+	$ cd $LOGTALKUSER
 	$ logtalk_tester \
 	  -p gnu \
 	  -f xunit_net_v2 \
