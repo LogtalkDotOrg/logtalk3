@@ -173,6 +173,8 @@ report from test results using the xUnit.net v2 XML output format.
 workaround tests with the sane names clashing when generating an Allure
 report from test results using the xUnit.net v2 XML output format.
 
+* FIXED: Tests for the threaded engine predicates to also run with ECLiPSe.
+
 
 3.49.0 - July 27, 2021
 ======================
