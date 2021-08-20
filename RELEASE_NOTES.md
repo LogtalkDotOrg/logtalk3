@@ -133,9 +133,6 @@ Examples
 `assumptions`, `lambdas`, `securemp`, and `closed_world_assumption` example
 tests.
 
-* IMPROVED: Solution for skipping the `coinduction` example tests when the
-backend doesn't provide the required support for cyclic terms.
-
 * FIXED: Loading of the `securemp` example to actually load all the demo
 broken meta-predicate definitions.
 

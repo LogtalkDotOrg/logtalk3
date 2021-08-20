@@ -23,16 +23,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2013-03-02,
 		comment is 'Unit tests for the "coinduction" example.'
 	]).
-
-	condition :-
-		current_logtalk_flag(coinduction, supported),
-		\+ current_logtalk_flag(prolog_dialect, cx),
-		\+ current_logtalk_flag(prolog_dialect, eclipse).
 
 	:- discontiguous(succeeds/1).
 	:- discontiguous(fails/1).
