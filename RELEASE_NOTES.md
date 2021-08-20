@@ -30,6 +30,9 @@ Logtalk compiler and runtime
 
 * ADDED: Support for the `see_also` key to the `info/2` predicate directive.
 
+* FIXED: The definition of the `user` built-in object to also create an object
+queue when threaded engines are supported but not other thread predicates.
+
 Prolog adapter and integration files
 ------------------------------------
 

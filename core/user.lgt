@@ -23,9 +23,9 @@
 	implements((expanding, forwarding, monitoring))).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:4:2,
 		author is 'Paulo Moura',
-		date is 2020-11-15,
+		date is 2021-08-20,
 		comment is 'Pseudo-object representing the plain Prolog database. Can be used as a monitor by defining ``before/3`` and ``after/3`` predicates. Can be used as a hook object by defining ``term_expansion/2`` and ``goal_expansion/2`` multifile and dynamic predicates.'
 	]).
 
@@ -35,6 +35,8 @@
 	:- set_logtalk_flag(dynamic_declarations, allow).
 	:- set_logtalk_flag(complements, deny).
 	:- if(current_logtalk_flag(threads, supported)).
+		:- threaded.
+	:- elif(current_logtalk_flag(engines, supported)).
 		:- threaded.
 	:- endif.
 
