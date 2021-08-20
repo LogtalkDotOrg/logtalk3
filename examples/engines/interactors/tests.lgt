@@ -23,28 +23,25 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-01,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "interactors" example.'
 	]).
 
-	test(interactors_1) :-
+	test(interactors_1, true(n(N1,N2,N3) == n(1,2,3))) :-
 		interactors::natural(N1),
 		interactors::natural(N2),
-		interactors::natural(N3),
-		N1 == 1, N2 == 2, N3 == 3.
+		interactors::natural(N3).
 
-	test(interactors_2) :-
+	test(interactors_2, true(p(P1,P2,P3) == p(2,3,5))) :-
 		interactors::prime(P1),
 		interactors::prime(P2),
-		interactors::prime(P3),
-		P1 == 2, P2 == 3, P3 == 5.
+		interactors::prime(P3).
 
-	test(interactors_3) :-
+	test(interactors_3, true(s(S1,S2,S3) == s((0->2),(2->7),(7->9)))) :-
 		interactors::sums(S1),
 		interactors::sums(S2),
-		interactors::sums(S3),
-		S1 == (0->2), S2 == (2->7), S3 == (7->9).
+		interactors::sums(S3).
 
 :- end_object.

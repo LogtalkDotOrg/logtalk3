@@ -23,32 +23,31 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2010-04-10,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "constraints/bp" example.'
 	]).
 
-	test(constraints_bp_1) :-
+	test(constraints_bp_1, true) :-
 		clique::go.
 
-	test(constraints_bp_2) :-
+	test(constraints_bp_2, true) :-
 		magic::go.
 
-	test(constraints_bp_3) :-
-		puzzle::solve(V),
-		V == [9,5,6,7,1,0,8,2].
+	test(constraints_bp_3, true(V == [9,5,6,7,1,0,8,2])) :-
+		puzzle::solve(V).
 
-	test(constraints_bp_4) :-
+	test(constraints_bp_4, true) :-
 		steiner::go.
 
-	-test(constraints_bp_5) :-
+	- test(constraints_bp_5, true) :-
 		queens3::top.
 
-	-test(constraints_bp_6) :-
+	- test(constraints_bp_6, true) :-
 		srq::q.
 
-	-test(constraints_bp_7) :-
+	- test(constraints_bp_7, true) :-
 		srq::q_all.
 
 :- end_object.

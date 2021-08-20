@@ -23,26 +23,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-16,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "whisper" example.'
 	]).
 
-	test(whisper_1) :-
-		whisper::whisper(0, 1, Final),
-		Final == 1.
+	test(whisper_1, true(Final == 1)) :-
+		whisper::whisper(0, 1, Final).
 
-	test(whisper_2) :-
-		whisper::whisper(1, 1, Final),
-		Final == 2.
+	test(whisper_2, true(Final == 2)) :-
+		whisper::whisper(1, 1, Final).
 
-	test(whisper_3) :-
-		whisper::whisper(3, 1, Final),
-		Final == 4.
+	test(whisper_3, true(Final == 4)) :-
+		whisper::whisper(3, 1, Final).
 
-	test(whisper_4) :-
-		whisper::whisper(5, 3, Final),
-		Final == 8.
+	test(whisper_4, true(Final == 8)) :-
+		whisper::whisper(5, 3, Final).
 
 :- end_object.

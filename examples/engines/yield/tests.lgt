@@ -23,18 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-16,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "yield" example.'
 	]).
 
-	test(yield_1) :-
-		yield::yield(1, List),
-		List == [1].
+	test(yield_1, true(List == [1])) :-
+		yield::yield(1, List).
 
-	test(yield_2) :-
-		yield::yield(3, List),
-		List == [1, 2, 3].
+	test(yield_2, true(List == [1, 2, 3])) :-
+		yield::yield(3, List).
 
 :- end_object.

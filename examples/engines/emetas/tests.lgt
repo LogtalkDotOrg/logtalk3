@@ -23,31 +23,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "emetas" example.'
 	]).
 
-	test(emetas_1) :-
-		emetas::best_of(X, (>), a(X)),
-		X == 4.
+	test(emetas_1, true(X == 4)) :-
+		emetas::best_of(X, (>), a(X)).
 
-	test(emetas_2) :-
-		emetas::find_all(X, a(X), Xs),
-		Xs == [2, 1, 4, 3].
+	test(emetas_2, true(Xs == [2, 1, 4, 3])) :-
+		emetas::find_all(X, a(X), Xs).
 
-	test(emetas_3) :-
-		emetas::find_all_reified(X, a(X), Xs),
-		Xs == [2, 1, 4, 3].
+	test(emetas_3, true(Xs == [2, 1, 4, 3])) :-
+		emetas::find_all_reified(X, a(X), Xs).
 
-	test(emetas_4) :-
-		emetas::find_at_most(3, X, b(X), Xs),
-		Xs == [1, 2, 3].
+	test(emetas_4, true(Xs == [1, 2, 3])) :-
+		emetas::find_at_most(3, X, b(X), Xs).
 
-	test(emetas_5) :-
-		emetas::find_at_most(3, X, c(X), Xs),
-		Xs == [1, 2].
+	test(emetas_5, true(Xs == [1, 2])) :-
+		emetas::find_at_most(3, X, c(X), Xs).
 
 	% auxiliary predicates
 

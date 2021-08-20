@@ -23,53 +23,45 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2017-01-16,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "jpl" example.'
 	]).
 
-	test(java_01) :-
+	test(java_01, true) :-
 		java('java.lang.System')::getProperty('java.version').
 
-	test(java_02) :-
-		java('java.lang.System', Version)::getProperty('java.version'),
-		atom(Version).
+	test(java_02, true(atom(Version))) :-
+		java('java.lang.System', Version)::getProperty('java.version').
 
-	test(java_03) :-
-		java('java.lang.System', Version)::invoke(getProperty('java.version')),
-		atom(Version).
+	test(java_03, true(atom(Version))) :-
+		java('java.lang.System', Version)::invoke(getProperty('java.version')).
 
-	test(java_04) :-
-		java('java.lang.Integer', Integer)::parseInt('123'),
-		Integer == 123.
+	test(java_04, true(Integer == 123)) :-
+		java('java.lang.Integer', Integer)::parseInt('123').
 
-	test(java_05) :-
-		java('java.lang.Math')::get_field('PI', Pi),
-		float(Pi).
+	test(java_05, true(float(Pi))) :-
+		java('java.lang.Math')::get_field('PI', Pi).
 
-	test(java_06) :-
+	test(java_06, true(integer(Year))) :-
 		java('java.util.Calendar', Calendar)::getInstance,
-		java(Calendar)::get_field('YEAR', Year),
-		integer(Year).
+		java(Calendar)::get_field('YEAR', Year).
 
-	test(java_07) :-
+	test(java_07, true(number(Time))) :-
 		java('java.util.Date')::new(Date),
-		java(Date, Time)::getTime,
-		number(Time).
+		java(Date, Time)::getTime.
 
-	test(java_08) :-
+	test(java_08, true(float(Float))) :-
 		java('java.util.Random')::new(Random),
 		java(Random)::setSeed(12345),
-		java(Random, Float)::nextFloat,
-		float(Float).
+		java(Random, Float)::nextFloat.
 
-	test(java_09) :-
+	test(java_09, true(integer(Int))) :-
 		java('java.util.Random')::new([12345], Random),
-		java(Random, Int)::nextInt,
-		integer(Int).
+		java(Random, Int)::nextInt.
 
-	test(java_10) :-
+	test(java_10, true(Names == ['Paulo', 'Carlos', 'Helena'])) :-
 		java('java.util.ArrayList')::new(ArrayList),
 		java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')),
 		java(ArrayList, Iterator)::iterator,
@@ -84,12 +76,10 @@
 				)
 			),
 			Names
-		),
-		Names == ['Paulo', 'Carlos', 'Helena'].
+		).
 
-	test(java_11) :-
+	test(java_11, true(List == [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)])) :-
 		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], 3.14, foo(bar)], Array),
-		java::array_to_terms(Array, List),
-		List == [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)].
+		java::array_to_terms(Array, List).
 
 :- end_object.

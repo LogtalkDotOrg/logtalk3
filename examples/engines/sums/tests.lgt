@@ -23,22 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-16,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "sums" example.'
 	]).
 
-	test(sums_1) :-
-		sums::rd(1, Sums),
-		Sums == [1].
+	test(sums_1, true(Sums == [1])) :-
+		sums::rd(1, Sums).
 
-	test(sums_2) :-
-		sums::rd(3, Sums),
-		Sums == [1, 3, 6].
+	test(sums_2, true(Sums == [1, 3, 6])) :-
+		sums::rd(3, Sums).
 
-	test(sums_3) :-
-		sums::rd(5, Sums),
-		 Sums == [1, 3, 6, 10, 15].
+	test(sums_3, true(Sums == [1, 3, 6, 10, 15])) :-
+		sums::rd(5, Sums).
 
 :- end_object.

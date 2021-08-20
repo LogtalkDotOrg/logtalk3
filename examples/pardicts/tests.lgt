@@ -23,21 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2018-12-17,
+		date is 2021-08-20,
 		comment is 'Unit tests for the "pardicts" example.'
 	]).
 
-	test(dicts_01) :-
-		obj(_{m:2,n:3})::sum(Sum),
-		Sum == 5.
+	test(dicts_01, true(Sum == 5)) :-
+		obj(_{m:2,n:3})::sum(Sum).
 
-	test(dicts_02) :-
-		obj(_{m:2,n:3})::product(Sum),
-		Sum == 6.
+	test(dicts_02, true(Sum == 6)) :-
+		obj(_{m:2,n:3})::product(Sum).
 
-	test(dicts_03) :-
+	test(dicts_03, true) :-
 		obj(_{m:2,n:3})::double.
 
 :- end_object.
