@@ -23,45 +23,47 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-15,
+		date is 2021-08-20,
 		comment is 'Unit tests for the threaded_engine_self/1 built-in predicate.'
 	]).
 
-	:- threaded.
+	condition :-
+		current_logtalk_flag(engines, supported).
 
 	% test calling threaded_engine_self/1 with unbound argument
-	succeeds(threaded_engine_self_1_01) :-
-		threaded_engine_create(none, return, test_engine_1),
-		threaded_engine_next(test_engine_1, Engine),
-		Engine == test_engine_1.
+	test(threaded_engine_self_1_01, true(Engine == test_engine_1)) :-
+		{threaded_engine_create(none, tests::return, test_engine_1),
+		 threaded_engine_next(test_engine_1, Engine)}.
 
 	% test calling threaded_engine_self/1 with bound and correct argument
-	succeeds(threaded_engine_self_1_02) :-
-		threaded_engine_create(none, correct, test_engine_2),
-		threaded_engine_next(test_engine_2, Answer),
-		Answer == none.
+	test(threaded_engine_self_1_02, true(Answer == none)) :-
+		{threaded_engine_create(none, tests::correct, test_engine_2),
+		 threaded_engine_next(test_engine_2, Answer)}.
 
 	% test calling threaded_engine_self/1 with bound but incorrect argument
-	fails(threaded_engine_self_1_03) :-
-		threaded_engine_create(none, wrong, test_engine_3),
-		threaded_engine_next(test_engine_3, _).
+	test(threaded_engine_self_1_03, false) :-
+		{threaded_engine_create(none, tests::wrong, test_engine_3),
+		 threaded_engine_next(test_engine_3, _)}.
 
 	% calls outside the context of an engine must fail
-	fails(threaded_engine_self_1_04) :-
-		threaded_engine_self(_).
+	test(threaded_engine_self_1_04, false) :-
+		{threaded_engine_self(_)}.
 
 	% auxiliary predicates
 
+	:- public(return/0).
 	return :-
-		threaded_engine_self(Engine),
-		threaded_engine_yield(Engine).
+		{threaded_engine_self(Engine),
+		 threaded_engine_yield(Engine)}.
 
+	:- public(correct/0).
 	correct :-
-		threaded_engine_self(test_engine_2).
+		{threaded_engine_self(test_engine_2)}.
 
+	:- public(wrong/0).
 	wrong :-
-		threaded_engine_self(wrong).
+		{threaded_engine_self(wrong)}.
 
 :- end_object.

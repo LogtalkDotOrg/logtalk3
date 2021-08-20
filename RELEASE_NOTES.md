@@ -143,6 +143,10 @@ tests to avoid names clashes when generating Allure reports from test results.
 Tests
 -----
 
+* CHANGED: Tests for the threaded predicates to enable better reporting of
+skipped test sets when running on backends without compatible multi-threading
+support.
+
 * REMOVED: Duplicated tests for the standard `false/0` predicate.
 
 * ADDED: Additional tests for the de facto standard `format/2-3` and `length/2`
@@ -172,6 +176,9 @@ report from test results using the xUnit.net v2 XML output format.
 * RENAMED: Tests for the `set_logtalk_flag/2` directive and predicate to
 workaround tests with the sane names clashing when generating an Allure
 report from test results using the xUnit.net v2 XML output format.
+
+* FIXED: Enable the treaded engine predicate tests to run when using the
+ECLiPSe backend.
 
 
 3.49.0 - July 27, 2021

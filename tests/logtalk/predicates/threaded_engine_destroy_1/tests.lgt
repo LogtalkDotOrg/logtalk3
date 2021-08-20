@@ -23,47 +23,48 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-08-20,
 		comment is 'Unit tests for the threaded_engine_destroy/1 built-in predicate.'
 	]).
 
-	:- threaded.
+	condition :-
+		current_logtalk_flag(engines, supported).
 
 	% engine argument must be bound at runtime (but no error at compile time)
 	throws(threaded_engine_destroy_1_01, error(instantiation_error, logtalk(threaded_engine_destroy(_), _))) :-
-		threaded_engine_destroy(_).
+		{threaded_engine_destroy(_)}.
 
 	% engine must exist
 	throws(threaded_engine_destroy_1_02, error(existence_error(engine,foo), logtalk(threaded_engine_destroy(foo), _))) :-
-		threaded_engine_destroy(foo).
+		{threaded_engine_destroy(foo)}.
 
 	% engine destroy should always be successful independent
-	% of engine thread state and engine goal results 
+	% of engine thread state and engine goal results
 
 	succeeds(threaded_engine_destroy_1_03) :-
-		threaded_engine_create(none, repeat, test_engine_1),
-		threaded_engine_destroy(test_engine_1),
-		\+ threaded_engine(test_engine_1),
-		this(This), logtalk::entity_prefix(This, Prefix), \+ thread_peek_message(Prefix, _).
+		{threaded_engine_create(none, repeat, test_engine_1),
+		 threaded_engine_destroy(test_engine_1),
+		 \+ threaded_engine(test_engine_1),
+		 logtalk::entity_prefix(user, Prefix), \+ thread_peek_message(Prefix, _)}.
 
 	succeeds(threaded_engine_destroy_1_04) :-
-		threaded_engine_create(none, true, test_engine_2),
-		threaded_engine_destroy(test_engine_2),
-		\+ threaded_engine(test_engine_2),
-		this(This), logtalk::entity_prefix(This, Prefix), \+ thread_peek_message(Prefix, _).
+		{threaded_engine_create(none, true, test_engine_2),
+		 threaded_engine_destroy(test_engine_2),
+		 \+ threaded_engine(test_engine_2),
+		 logtalk::entity_prefix(user, Prefix), \+ thread_peek_message(Prefix, _)}.
 
 	succeeds(threaded_engine_destroy_1_05) :-
-		threaded_engine_create(none, fail, test_engine_3),
-		threaded_engine_destroy(test_engine_3),
-		\+ threaded_engine(test_engine_3),
-		this(This), logtalk::entity_prefix(This, Prefix), \+ thread_peek_message(Prefix, _).
+		{threaded_engine_create(none, fail, test_engine_3),
+		 threaded_engine_destroy(test_engine_3),
+		 \+ threaded_engine(test_engine_3),
+		 logtalk::entity_prefix(user, Prefix), \+ thread_peek_message(Prefix, _)}.
 
 	succeeds(threaded_engine_destroy_1_06) :-
-		threaded_engine_create(none, throw(error), test_engine_4),
-		threaded_engine_destroy(test_engine_4),
-		\+ threaded_engine(test_engine_4),
-		this(This), logtalk::entity_prefix(This, Prefix), \+ thread_peek_message(Prefix, _).
+		{threaded_engine_create(none, throw(error), test_engine_4),
+		 threaded_engine_destroy(test_engine_4),
+		 \+ threaded_engine(test_engine_4),
+		 logtalk::entity_prefix(user, Prefix), \+ thread_peek_message(Prefix, _)}.
 
 :- end_object.

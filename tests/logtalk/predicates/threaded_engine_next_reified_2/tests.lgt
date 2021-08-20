@@ -23,62 +23,60 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-08-20,
 		comment is 'Unit tests for the threaded_engine_next_reified/2 built-in predicate.'
 	]).
 
-	:- threaded.
+	condition :-
+		current_logtalk_flag(engines, supported).
 
 	% engine name must be bound at runtime (but no error at compile time)
-	throws(threaded_engine_next_reified_2_01, error(instantiation_error, logtalk(threaded_engine_next_reified(_,_), _))) :-
-		threaded_engine_next_reified(_, _).
+	test(threaded_engine_next_reified_2_01, ball(error(instantiation_error, logtalk(threaded_engine_next_reified(_,_), _)))) :-
+		{threaded_engine_next_reified(_, _)}.
 
 	% engine must exist
-	throws(threaded_engine_next_reified_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_next_reified(foo,_), _))) :-
-		threaded_engine_next_reified(foo, _).
+	test(threaded_engine_next_reified_2_02, ball(error(existence_error(engine,foo), logtalk(threaded_engine_next_reified(foo,_), _)))) :-
+		{threaded_engine_next_reified(foo, _)}.
 
 	% create engine for the following tests
-	succeeds(threaded_engine_next_reified_2_03) :-
-		threaded_engine_create(X, a(X), test_engine_1).
+	test(threaded_engine_next_reified_2_03, true) :-
+		{threaded_engine_create(X, tests::a(X), test_engine_1)}.
 
 	% all solutions must be retrievable
-	succeeds(threaded_engine_next_reified_2_04) :-
-		threaded_engine_next_reified(test_engine_1, X),
-		threaded_engine_next_reified(test_engine_1, Y),
-		threaded_engine_next_reified(test_engine_1, Z),
-		X == the(1), Y == the(2), Z == the(3).
+	test(threaded_engine_next_reified_2_04, true(xyz(X,Y,Z) == xyz(the(1),the(2),the(3)))) :-
+		{threaded_engine_next_reified(test_engine_1, X),
+		 threaded_engine_next_reified(test_engine_1, Y),
+		 threaded_engine_next_reified(test_engine_1, Z)}.
 
 	% no more answers
-	succeeds(threaded_engine_next_reified_2_05) :-
-		threaded_engine_next_reified(test_engine_1, Answer),
-		Answer == no.
+	test(threaded_engine_next_reified_2_05, true(Answer == no)) :-
+		{threaded_engine_next_reified(test_engine_1, Answer)}.
 
 	% no more answers (must keep failing)
-	succeeds(threaded_engine_next_reified_2_06) :-
-		threaded_engine_next_reified(test_engine_1, Answer),
-		Answer == no.
+	test(threaded_engine_next_reified_2_06, true(Answer == no)) :-
+		{threaded_engine_next_reified(test_engine_1, Answer)}.
 
 	% engine with no goal solutions
-	succeeds(threaded_engine_next_reified_2_07) :-
-		threaded_engine_create(_, fail, test_engine_2),
-		threaded_engine_next_reified(test_engine_2, Answer),
-		Answer == no.
+	test(threaded_engine_next_reified_2_07, true(Answer == no)) :-
+		{threaded_engine_create(_, fail, test_engine_2),
+		 threaded_engine_next_reified(test_engine_2, Answer)}.
 
 	% engine with a goal that throws an exception
-	succeeds(threaded_engine_next_reified_2_08) :-
-		threaded_engine_create(_, throw(error), test_engine_3),
-		threaded_engine_next_reified(test_engine_3, Answer),
-		Answer == exception(error).
+	test(threaded_engine_next_reified_2_08, true(Answer == exception(error))) :-
+		{threaded_engine_create(_, throw(error), test_engine_3),
+		 threaded_engine_next_reified(test_engine_3, Answer)}.
 
 	% after the exception, there cannot be any solutions
-	succeeds(threaded_engine_next_reified_2_09) :-
-		threaded_engine_next_reified(test_engine_3, Answer),
-		Answer == no.
+	test(threaded_engine_next_reified_2_09, true(Answer == no)) :-
+		{threaded_engine_next_reified(test_engine_3, Answer)}.
 
 	% auxiliary predicates
 
-	a(1). a(2). a(3).
+	:- public(a/1).
+	a(1).
+	a(2).
+	a(3).
 
 :- end_object.

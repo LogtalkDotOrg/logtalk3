@@ -23,13 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-11-19,
+		date is 2021-08-20,
 		comment is 'Unit tests for the threaded/1 built-in predicate.'
 	]).
 
-	:- threaded.
+	condition :-
+		current_logtalk_flag(threads, supported).
 
 	throws(threaded_1_1, error(instantiation_error, logtalk(threaded(_), _))) :-
 		{threaded(_)}.
