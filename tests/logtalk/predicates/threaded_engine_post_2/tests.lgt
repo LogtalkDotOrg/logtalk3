@@ -23,40 +23,39 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2018-03-24,
 		comment is 'Unit tests for the threaded_engine_post/2 built-in predicate.'
 	]).
 
-	condition :-
-		current_logtalk_flag(engines, supported).
+	:- threaded.
 
 	% engine argument must be bound at runtime (but no error at compile time)
-	test(threaded_engine_post_2_01, ball(error(instantiation_error, logtalk(threaded_engine_post(_,_),_)))) :-
-		{threaded_engine_post(_, _)}.
+	throws(threaded_engine_post_2_01, error(instantiation_error, logtalk(threaded_engine_post(_,_),_))) :-
+		threaded_engine_post(_, _).
 
 	% engine must exist
-	test(threaded_engine_post_2_02, ball(error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_),_)))) :-
-		{threaded_engine_post(foo, _)}.
+	throws(threaded_engine_post_2_02, error(existence_error(engine,foo), logtalk(threaded_engine_post(foo,_),_))) :-
+		threaded_engine_post(foo, _).
 
 	% posting terms to an engine term queue is independent of
 	% the status of the engine goal and its solutions if any
 
-	test(threaded_engine_post_2_03, true) :-
-		{threaded_engine_create(none, repeat, test_engine_1),
-		 threaded_engine_post(test_engine_1, term)}.
+	succeeds(threaded_engine_post_2_03) :-
+		threaded_engine_create(none, repeat, test_engine_1),
+		threaded_engine_post(test_engine_1, term).
 
-	test(threaded_engine_post_2_04, true) :-
-		{threaded_engine_create(none, true, test_engine_2),
-		 threaded_engine_post(test_engine_1, term)}.
+	succeeds(threaded_engine_post_2_04) :-
+		threaded_engine_create(none, true, test_engine_2),
+		threaded_engine_post(test_engine_1, term).
 
-	test(threaded_engine_post_2_05, true) :-
-		{threaded_engine_create(none, fail, test_engine_3),
-		 threaded_engine_post(test_engine_1, term)}.
+	succeeds(threaded_engine_post_2_05) :-
+		threaded_engine_create(none, fail, test_engine_3),
+		threaded_engine_post(test_engine_1, term).
 
-	test(threaded_engine_post_2_06, true) :-
-		{threaded_engine_create(none, throw(error), test_engine_4),
-		 threaded_engine_post(test_engine_1, term)}.
+	succeeds(threaded_engine_post_2_06) :-
+		threaded_engine_create(none, throw(error), test_engine_4),
+		threaded_engine_post(test_engine_1, term).
 
 :- end_object.

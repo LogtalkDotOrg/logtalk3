@@ -23,14 +23,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2019-02-12,
 		comment is 'Unit tests for the threaded_cancel/1 built-in predicate.'
 	]).
-
-	condition :-
-		current_logtalk_flag(threads, supported).
 
 	throws(threaded_cancel_1_01, error(instantiation_error, logtalk(threaded_cancel(_), _))) :-
 		{threaded_cancel(_)}.

@@ -23,46 +23,45 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2016-06-15,
 		comment is 'Unit tests for the threaded_engine_fetch/1 built-in predicate.'
 	]).
 
-	condition :-
-		current_logtalk_flag(engines, supported).
+	:- threaded.
 
 	% must be able to fetch a posted term
-	test(threaded_engine_fetch_1_01, true(Term == term)) :-
-		{threaded_engine_create(none, tests::boomerang, test_engine_1),
-		 threaded_engine_post(test_engine_1, term),
-		 threaded_engine_next(test_engine_1, Term)}.
+	succeeds(threaded_engine_fetch_1_01) :-
+		threaded_engine_create(none, boomerang, test_engine_1),
+		threaded_engine_post(test_engine_1, term),
+		threaded_engine_next(test_engine_1, Term),
+		Term == term.
 
 	% engine term queue must be, well, a queue
-	test(threaded_engine_fetch_1_02, true(t(Term1,Term2,Term3) == t(term1,term2,term3))) :-
-		{threaded_engine_create(none, tests::loop, test_engine_2),
-		 threaded_engine_post(test_engine_2, term1),
-		 threaded_engine_post(test_engine_2, term2),
-		 threaded_engine_post(test_engine_2, term3),
-		 threaded_engine_next(test_engine_2, Term1),
-		 threaded_engine_next(test_engine_2, Term2),
-		 threaded_engine_next(test_engine_2, Term3)}.
+	succeeds(threaded_engine_fetch_1_02) :-
+		threaded_engine_create(none, loop, test_engine_2),
+		threaded_engine_post(test_engine_2, term1),
+		threaded_engine_post(test_engine_2, term2),
+		threaded_engine_post(test_engine_2, term3),
+		threaded_engine_next(test_engine_2, Term1),
+		threaded_engine_next(test_engine_2, Term2),
+		threaded_engine_next(test_engine_2, Term3),
+		Term1 == term1, Term2 == term2, Term3 == term3.
 
 	% calls outside the context of an engine fail
-	test(threaded_engine_fetch_1_03, false) :-
-		{threaded_engine_fetch(_)}.
+	fails(threaded_engine_fetch_1_03) :-
+		threaded_engine_fetch(_).
 
 	% auxiliary predicates
 
-	:- public(boomerang/0).
 	boomerang :-
-		{threaded_engine_fetch(Term),
-		 threaded_engine_yield(Term)}.
+		threaded_engine_fetch(Term),
+		threaded_engine_yield(Term).
 
-	:- public(loop/0).
 	loop :-
-		{threaded_engine_fetch(Term),
-		 threaded_engine_yield(Term)},
+		threaded_engine_fetch(Term),
+		threaded_engine_yield(Term),
 		loop.
 
 :- end_object.

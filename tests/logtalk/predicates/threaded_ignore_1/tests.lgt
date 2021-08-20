@@ -23,14 +23,11 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2012-11-19,
 		comment is 'Unit tests for the threaded_ignore/1 built-in predicate.'
 	]).
-
-	condition :-
-		current_logtalk_flag(threads, supported).
 
 	throws(threaded_ignore_1_1, error(instantiation_error, logtalk(threaded_ignore(_), _))) :-
 		{threaded_ignore(_)}.

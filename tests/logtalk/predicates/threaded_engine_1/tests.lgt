@@ -23,53 +23,54 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2016-06-15,
 		comment is 'Unit tests for the threaded_engine/1 built-in predicate.'
 	]).
 
-	condition :-
-		current_logtalk_flag(engines, supported).
+	:- threaded.
 
 	% no engines exist
-	test(threaded_engine_1_01, false) :-
-		{threaded_engine(_)}.
+	fails(threaded_engine_1_01) :-
+		threaded_engine(_).
 
 	% no engine named "foo" exists
-	test(threaded_engine_1_02, false) :-
-		{threaded_engine(foo)}.
+	fails(threaded_engine_1_02) :-
+		threaded_engine(foo).
 
 	% engine with a single solution
-	test(threaded_engine_1_03, true) :-
-		{threaded_engine_create(none, true, Engine),
-		 threaded_engine(Engine),
-		 threaded_engine_destroy(Engine)}.
+	succeeds(threaded_engine_1_03) :-
+		threaded_engine_create(none, true, Engine),
+		threaded_engine(Engine),
+		threaded_engine_destroy(Engine).
 
 	% engine with multiple solutions
-	test(threaded_engine_1_04, true) :-
-		{threaded_engine_create(none, repeat, Engine),
-		 threaded_engine(Engine),
-		 threaded_engine_destroy(Engine)}.
+	succeeds(threaded_engine_1_04) :-
+		threaded_engine_create(none, repeat, Engine),
+		threaded_engine(Engine),
+		threaded_engine_destroy(Engine).
 
 	% engine with no solutions
-	test(threaded_engine_1_05, true) :-
-		{threaded_engine_create(none, fail, Engine),
-		 threaded_engine(Engine),
-		 threaded_engine_destroy(Engine)}.
+	succeeds(threaded_engine_1_05) :-
+		threaded_engine_create(none, fail, Engine),
+		threaded_engine(Engine),
+		threaded_engine_destroy(Engine).
 
 	% the predicate must also work as expected
 	% when called with an unbound argument
-	test(threaded_engine_1_06, true(ReturnedEngine == Engine)) :-
-		{threaded_engine_create(none, true, Engine),
-		 threaded_engine(ReturnedEngine),
-		 threaded_engine_destroy(Engine)}.
+	succeeds(threaded_engine_1_06) :-
+		threaded_engine_create(none, true, Engine),
+		threaded_engine(ReturnedEngine),
+		threaded_engine_destroy(Engine),
+		ReturnedEngine == Engine.
 
 	% all existing engines must be returned
-	test(threaded_engine_1_07, true(Engines == [test_engine_1, test_engine_2, test_engine_3])) :-
-		{threaded_engine_create(none, true, test_engine_1),
-		 threaded_engine_create(none, true, test_engine_2),
-		 threaded_engine_create(none, true, test_engine_3),
-		 setof(Engine, threaded_engine(Engine), Engines)}.
+	succeeds(threaded_engine_1_07) :-
+		threaded_engine_create(none, true, test_engine_1),
+		threaded_engine_create(none, true, test_engine_2),
+		threaded_engine_create(none, true, test_engine_3),
+		setof(Engine, threaded_engine(Engine), Engines),
+		Engines == [test_engine_1, test_engine_2, test_engine_3].
 
 :- end_object.

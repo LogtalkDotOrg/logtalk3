@@ -23,45 +23,44 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-08-20,
+		date is 2018-02-27,
 		comment is 'Unit tests for the threaded_engine_yield/1 built-in predicate.'
 	]).
 
-	condition :-
-		current_logtalk_flag(engines, supported).
+	:- threaded.
 
 	% calls outside the context of an engine fail
-	test(threaded_engine_yield_1_01, false) :-
-		{threaded_engine_yield(_)}.
+	fails(threaded_engine_yield_1_01) :-
+		threaded_engine_yield(_).
 
 	% no restrictions on the kind of terms that can be returned as answers
 
-	test(threaded_engine_yield_1_02, true(Answer == foo)) :-
-		{threaded_engine_create(none, tests::return_atom, test_engine_1),
-		 threaded_engine_next(test_engine_1, Answer)}.
+	succeeds(threaded_engine_yield_1_02) :-
+		threaded_engine_create(none, return_atom, test_engine_1),
+		threaded_engine_next(test_engine_1, Answer),
+		Answer == foo.
 
-	test(threaded_engine_yield_1_03, variant(Answer, f(X,_,X))) :-
-		{threaded_engine_create(none, tests::return_compound, test_engine_2),
-		 threaded_engine_next(test_engine_2, Answer)}.
+	succeeds(threaded_engine_yield_1_03) :-
+		threaded_engine_create(none, return_compound, test_engine_2),
+		threaded_engine_next(test_engine_2, Answer),
+		^^variant(Answer, f(X,_,X)).
 
-	test(threaded_engine_yield_1_04, true(var(Answer))) :-
-		{threaded_engine_create(none, tests::return_var, test_engine_3),
-		 threaded_engine_next(test_engine_3, Answer)}.
+	succeeds(threaded_engine_yield_1_04) :-
+		threaded_engine_create(none, return_var, test_engine_3),
+		threaded_engine_next(test_engine_3, Answer),
+		var(Answer).
 
 	% auxiliary predicates
 
-	:- public(return_atom/0).
 	return_atom :-
-		{threaded_engine_yield(foo)}.
+		threaded_engine_yield(foo).
 
-	:- public(return_compound/0).
 	return_compound :-
-		{threaded_engine_yield(f(X,_,X))}.
+		threaded_engine_yield(f(X,_,X)).
 
-	:- public(return_var/0).
 	return_var :-
-		{threaded_engine_yield(_)}.
+		threaded_engine_yield(_).
 
 :- end_object.
