@@ -179,6 +179,12 @@ report from test results using the xUnit.net v2 XML output format.
 
 * FIXED: Tests for the threaded engine predicates to also run with ECLiPSe.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Parsing of compiler error and warning messages when building with
+the Sublime Text editor.
+
 
 3.49.0 - July 27, 2021
 ======================

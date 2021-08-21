@@ -20,28 +20,16 @@
 	logtalk::message_hook(_, warning(Class), core, Tokens) :-
 		message_hook(Tokens, warning(Class)).
 
-	message_hook(Tokens, Type) :-
-		reverse_line_order(Tokens, TokensReversed),
+	message_hook([Issue| Tokens], Type) :-
+		find_file_line(Tokens, File, Line),
 		logtalk::message_prefix_stream(Type, core, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, TokensReversed).
+		logtalk::print_message_tokens(Stream, Prefix, ['~w:~d:1: '-[File, Line], Issue, nl]).
 
-	reverse_line_order(Tokens, TokensReversed) :-
-		append(FirstLine, [nl| OtherLines], Tokens),
-		find_last_line(OtherLines, LastLine),
-		append(LastLine, [':1:'-[]], SecondLine),
-		append(SecondLine, FirstLine, TokensReversed0),
-		append(TokensReversed0, [nl], TokensReversed).
-
-	find_last_line(OtherLines, LastLine) :-
-		append(Line, [nl| RestLines], OtherLines),
-		find_last_line(RestLines, Line, LastLine).
-
-	find_last_line([], LastLine, LastLine).
-	find_last_line(RestLines, _, LastLine) :-
-		find_last_line(RestLines, LastLine).
-
-	append([], List, List).
-	append([Head| Tail], List, [Head| Tail2]) :-
-		append(Tail, List, Tail2).
+	find_file_line(['  in file ~w between lines ~w'-[File,Line-_]| _], File, Line) :-
+		!.
+	find_file_line(['  in file ~w at or above line ~d'-[File,Line]| _], File, Line) :-
+		!.
+	find_file_line([_| Tokens], File, Line) :-
+		find_file_line(Tokens, File, Line).
 
 :- end_category.
