@@ -197,8 +197,8 @@
 		^^assertion(VS == ['B'=B]).
 
 	% check detection of invalid options; the ISO Prolog standard only
-	% specifies a domain_error/2 but an instantiation_error/0 is also
-	% a sensible choice made by several Prolog systems when applicable
+	% specifies a domain_error/2 but a uninstantiation_error/1 would be
+	% more accurate
 	%
 	% the test provide a valid input term to avoid the tests hanging
 	% on Prolog backends that don't check options validity before
