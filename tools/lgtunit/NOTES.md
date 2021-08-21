@@ -1319,6 +1319,13 @@ the line number for the tests in the tests files (assuming that the git repo
 is stored in a BitBucket, GitHub, or GitLab server). But note that not all
 supported backends provide accurate line numbers.
 
+There are some caveats when generating Allure reports that users must be aware.
+First, Allure expects test names to be unique across different tests sets. If
+there are two test with the same name in two different test sets, only one of
+them will be reported. Second, skipped test sets are not reported. Finally,
+when using the xUnit.net v2 XML format, tests are reported in a random order
+instead of their run order.
+
 
 Exporting code coverage results in XML format
 ---------------------------------------------

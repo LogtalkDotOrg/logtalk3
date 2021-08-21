@@ -66,7 +66,7 @@ directives.
 * IMPROVED: Man page for the `logtalk_tester` shell script.
 
 * IMPROVED: The `lgtunit` tool documentation on suppressing tested predicates
-output.
+output and on generating Allure reports.
 
 * IMPROVED: The `diagrams` tool documentation and examples.
 
