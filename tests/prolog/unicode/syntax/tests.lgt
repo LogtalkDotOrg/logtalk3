@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-04-29,
+		date is 2021-08-23,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -50,6 +50,10 @@
 		{writeq(S, 'Γει\u03AC σου κόσμε!')},
 		^^text_output_assertion('\'Γειά σου κόσμε!\'', Assertion).
 
+	test(lgt_unicode_escape_sequence_bmp_06, error(syntax_error(_))) :-
+		^^set_text_input('a(\'\\u3AC\').'),
+		{read(_)}.
+
 	% escape sequence \UXXXXXXXX
 
 	test(lgt_unicode_escape_sequence_full_01, true(L == ['🀙','🀚','🀛','🀜','🀝','🀞','🀟','🀠'])) :-
@@ -69,5 +73,9 @@
 		current_output(S),
 		{writeq(S, '🀙🀚🀛🀜\U0001F01D🀞🀟🀠')},
 		^^text_output_assertion('\'🀙🀚🀛🀜🀝🀞🀟🀠\'', Assertion).
+
+	test(lgt_unicode_escape_sequence_full_06, error(syntax_error(_))) :-
+		^^set_text_input('a(\'\\U1F01D\').'),
+		{read(_)}.
 
 :- end_object.
