@@ -31,7 +31,8 @@ Logtalk compiler and runtime
 * ADDED: Support for the `see_also` key to the `info/2` predicate directive.
 
 * FIXED: The definition of the `user` built-in object to also create an object
-queue when threaded engines are supported but not other thread predicates.
+events queue when threaded engines are supported but not other multi-threading
+features.
 
 Prolog adapter and integration files
 ------------------------------------
@@ -44,7 +45,7 @@ compiler.
 `spy` predicate properties and to expand its `disk_predicate/3` directive
 and `define_disk_predicate/3` predicate.
 
-* UPDATED: The Trealla Prolog adapter file to require 1.11.0 or later version.
+* UPDATED: The Trealla Prolog adapter file to require 1.11.16 or later version.
 
 * FIXED: The adapter files expansion code for directives to check that the
 directives argument is bound.
