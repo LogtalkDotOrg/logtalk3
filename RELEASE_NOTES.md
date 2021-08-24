@@ -162,6 +162,9 @@ predicates.
 * ADDED: Additional tests for the de facto standard `\uXXXX` and `\UXXXXXXXX`
 syntax.
 
+* ADDED: Additional tests for the syntax of atoms, compound terms, and
+variables using Unicode glyphs.
+
 * IMPROVED: Avoid printing expected warnings when running the `encoding/1`
 directive tests.
 

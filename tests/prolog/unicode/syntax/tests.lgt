@@ -24,11 +24,71 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2021-08-23,
+		date is 2021-08-24,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
+
+	% atoms
+
+	test(lgt_unicode_atom_writing_lower_case_start, true(Assertion)) :-
+		^^set_text_output(''),
+		{write('αβγ')},
+		^^text_output_assertion('αβγ', Assertion).
+
+	test(lgt_unicode_atom_writing_lower_case_start_quoted, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq('αβγ')},
+		^^text_output_assertion('αβγ', Assertion).
+
+	test(lgt_unicode_atom_writing_upper_case_start, true(Assertion)) :-
+		^^set_text_output(''),
+		{write('Γβα')},
+		^^text_output_assertion('Γβα', Assertion).
+
+	test(lgt_unicode_atom_writing_upper_case_start_quoted, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq('Γβα')},
+		^^text_output_assertion('\'Γβα\'', Assertion).
+
+	test(lgt_unicode_atom_reading_lower_case_start, true(atom(Term))) :-
+		^^set_text_input('αβγ.'),
+		{read(Term)}.
+
+	test(lgt_unicode_atom_reading_upper_case_start, true(atom(Term))) :-
+		^^set_text_input('\'Γβα\'.'),
+		{read(Term)}.
+
+	% variables
+
+	test(lgt_unicode_variable_reading, true(var(Term))) :-
+		^^set_text_input('Γβα.'),
+		{read(Term)}.
+
+	test(lgt_unicode_variable_unifying, true(Term1 = Term2)) :-
+		^^set_text_input('Γβα. Δεη.'),
+		{read(Term1), read(Term2)}.
+
+	% compound terms
+
+	test(lgt_unicode_ground_compound_term_writing, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq('αβγ'('Γβα'))},
+		^^text_output_assertion('αβγ(\'Γβα\')', Assertion).
+
+	test(lgt_unicode_ground_compound_term_reading, true(Term =.. ['αβγ', 'Γβα'])) :-
+		^^set_text_input('αβγ(\'Γβα\').'),
+		{read(Term)}.
+
+	test(lgt_unicode_non_ground_compound_term_writing, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_term('αβγ'(Var), [variable_names(['Γβα'=Var])])},
+		^^text_output_assertion('αβγ(Γβα)', Assertion).
+
+	test(lgt_unicode_non_ground_compound_term_reading, variant(VariableNames, ['Γβα'=_])) :-
+		^^set_text_input('αβγ(Γβα).'),
+		{read_term(_, [variable_names(VariableNames)])}.
 
 	% escape sequence \uXXXX
 
@@ -77,5 +137,9 @@
 	test(lgt_unicode_escape_sequence_full_06, error(syntax_error(_))) :-
 		^^set_text_input('a(\'\\U1F01D\').'),
 		{read(_)}.
+
+	cleanup :-
+		^^clean_text_input,
+		^^clean_text_output.
 
 :- end_object.
