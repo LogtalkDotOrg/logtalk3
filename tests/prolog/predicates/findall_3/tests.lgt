@@ -23,53 +23,48 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-05-12,
+		date is 2021-08-24,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.1.4
 
-	succeeds(iso_findall_3_01) :-
-		{findall(X, (X=1;X=2), S)},
-		S == [1,2].
+	test(iso_findall_3_01, true(S == [1,2])) :-
+		{findall(X, (X=1;X=2), S)}.
 
-	succeeds(iso_findall_3_02) :-
-		{findall(X+_Y, (X=1), S)},
-		^^variant(S, [1+_]).
+	test(iso_findall_3_02, variant(S, [1+_])) :-
+		{findall(X+_Y, (X=1), S)}.
 
-	succeeds(iso_findall_3_03) :-
-		{findall(_X, fail, L)},
-		L == [].
+	test(iso_findall_3_03, true(L == [])) :-
+		{findall(_X, fail, L)}.
 
-	succeeds(iso_findall_3_04) :-
-		{findall(X, (X=1;X=1), S)},
-		S == [1,1].
+	test(iso_findall_3_04, true(S == [1,1])) :-
+		{findall(X, (X=1;X=1), S)}.
 
-	fails(iso_findall_3_05) :-
+	test(iso_findall_3_05, false) :-
 		{findall(X, (X=2;X=1), [1,2])}.
 
-	succeeds(iso_findall_3_06) :-
-		{findall(X, (X=1;X=2), [X,Y])},
-		X == 1, Y == 2.
+	test(iso_findall_3_06, true(X-Y == 1-2)) :-
+		{findall(X, (X=1;X=2), [X,Y])}.
 
-	throws(iso_findall_3_07, error(instantiation_error,_)) :-
+	test(iso_findall_3_07, error(instantiation_error)) :-
 		{findall(_X, _Goal, _S)}.
 
-	throws(iso_findall_3_08, error(type_error(callable,4),_)) :-
+	test(iso_findall_3_08, error(type_error(callable,4))) :-
 		% try to delay the error to runtime
 		four(Four),
 		{findall(_X, Four, _S)}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_findall_3_09, error(type_error(list,[A|1]),_)) :-
+	test(sics_findall_3_09, error(type_error(list,[A|1]))) :-
 		{findall(X, X=1, [A|1])}.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_findall_3_10, error(type_error(list,12),_)) :-
+	test(eclipse_findall_3_10, error(type_error(list,12))) :-
 		{findall(X, (X=2; X=1), 12)}.
 
 	% auxiliary predicates
