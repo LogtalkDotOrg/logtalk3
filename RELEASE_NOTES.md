@@ -164,6 +164,8 @@ predicates.
 
 * ADDED: Additional tests for the standard floating-point number syntax.
 
+* ADDED: Additional tests for the `setup_call_cleanup/3` predicate.
+
 * ADDED: Additional tests for the de facto standard `\uXXXX` and `\UXXXXXXXX`
 syntax.
 
