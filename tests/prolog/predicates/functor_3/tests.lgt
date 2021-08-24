@@ -23,90 +23,79 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-08-24,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.1.4
 	% updated for the changesa in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
 
-	succeeds(iso_functor_3_01) :-
+	test(iso_functor_3_01, true) :-
 		{functor(foo(a,b,c), foo, 3)}.
 
-	succeeds(iso_functor_3_02) :-
-		{functor(foo(a,b,c), X, Y)},
-		X == foo, Y == 3.
+	test(iso_functor_3_02, true(X-Y == foo-3)) :-
+		{functor(foo(a,b,c), X, Y)}.
 
-	succeeds(iso_functor_3_03) :-
-		{functor(X, foo, 3)},
-		^^variant(X, foo(_A,_B,_C)).
+	test(iso_functor_3_03, variant(X, foo(_A,_B,_C))) :-
+		{functor(X, foo, 3)}.
 
-	succeeds(iso_functor_3_04) :-
-		{functor(X, foo, 0)},
-		X == foo.
+	test(iso_functor_3_04, true(X == foo)) :-
+		{functor(X, foo, 0)}.
 
-	succeeds(iso_functor_3_05) :-
-		{functor(mats(A,B), A, B)},
-		A == mats, B == 2.
+	test(iso_functor_3_05, true(A-B == mats-2)) :-
+		{functor(mats(A,B), A, B)}.
 
-	fails(iso_functor_3_06) :-
+	test(iso_functor_3_06, false) :-
 		{functor(foo(a), foo, 2)}.
 
-	fails(iso_functor_3_07) :-
+	test(iso_functor_3_07, false) :-
 		{functor(foo(a), fo, 1)}.
 
-	succeeds(iso_functor_3_08) :-
-		{functor(1, X, Y)},
-		X == 1, Y == 0.
+	test(iso_functor_3_08, true(X-Y == 1-0)) :-
+		{functor(1, X, Y)}.
 
-	succeeds(iso_functor_3_09) :-
-		{functor(X, 1.1, 0)},
-		X == 1.1.
+	test(iso_functor_3_09, true(X == 1.1)) :-
+		{functor(X, 1.1, 0)}.
 
-	succeeds(iso_functor_3_10) :-
+	test(iso_functor_3_10, true) :-
 		{functor([_|_], '.', 2)}.
 
-	succeeds(iso_functor_3_11) :-
+	test(iso_functor_3_11, true) :-
 		{functor([], [], 0)}.
 
 	% in the tests that follow, try to delay the expected error to runtime
 
-	throws(iso_functor_3_12, error(instantiation_error,_)) :-
+	test(iso_functor_3_12, error(instantiation_error)) :-
 		{G = functor(_X, _Y, 3), call(G)}.
 
-	throws(iso_functor_3_13, error(instantiation_error,_)) :-
+	test(iso_functor_3_13, error(instantiation_error)) :-
 		{G = functor(_X, foo, _N), call(G)}.
 
-	throws(iso_functor_3_14, error(type_error(integer,a),_)) :-
+	test(iso_functor_3_14, error(type_error(integer,a))) :-
 		{G = functor(_X, foo, a), call(G)}.
 
-	throws(iso_functor_3_15, error(type_error(atom,1.5),_)) :-
+	test(iso_functor_3_15, error(type_error(atom,1.5))) :-
 		{G = functor(_F, 1.5, 1), call(G)}.
 
-	throws(iso_functor_3_16, error(type_error(atomic,foo(a)),_)) :-
+	test(iso_functor_3_16, error(type_error(atomic,foo(a)))) :-
 		{G = functor(_F, foo(a), 1), call(G)}.
 
 	:- if(current_prolog_flag(max_arity, unbounded)).
-		throws(iso_functor_3_17, error(type_error(evaluable,unbounded/0),_)) :-
+		test(iso_functor_3_17, error(type_error(evaluable,unbounded/0))) :-
 			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
 	:- else.
-		throws(iso_functor_3_17, error(representation_error(max_arity),_)) :-
+		test(iso_functor_3_17, error(representation_error(max_arity))) :-
 			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
 	:- endif.
 
-	throws(iso_functor_3_18, error(domain_error(not_less_than_zero,-1),_)) :-
+	test(iso_functor_3_18, error(domain_error(not_less_than_zero,-1))) :-
 		{G = functor(_T, foo, -1), call(G)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_functor_3_19) :-
-		{functor(T, [], 0)},
-		T == [].
+	test(lgt_functor_3_19, true(T == [])) :-
+		{functor(T, [], 0)}.
 
 :- end_object.

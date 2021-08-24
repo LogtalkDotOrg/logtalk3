@@ -29,10 +29,6 @@
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
-	]).
-
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.2.4
 
 	test(iso_arg_3_01, true) :-
