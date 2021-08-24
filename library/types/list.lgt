@@ -24,13 +24,13 @@
 	extends(compound)).
 
 	:- info([
-		version is 3:3:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2021-02-14,
+		date is 2021-08-24,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
-			'Portability notes' - 'This object will use the backend Prolog system ``length/2``, ``msort/2``, and ``sort/4`` built-in predicates when available.'
+			'Portability notes' - 'This object will use the backend Prolog system ``msort/2`` and ``sort/4`` built-in predicates when available.'
 		]
 	]).
 
@@ -112,35 +112,26 @@
 	last([Head| Tail], _, Last) :-
 		last(Tail, Head, Last).
 
-	:- if(predicate_property(length(_, _), built_in)).
+	length(List, Length) :-
+		(	integer(Length) ->
+			Length >= 0,
+			make_list(Length, List)
+		;	var(Length),
+			length(List, 0, Length)
+		).
 
-		length(List, Length) :-
-			{length(List, Length)}.
+	make_list(N, List) :-
+		(	N =:= 0 ->
+			List = []
+		;	M is N-1,
+			List = [_| Tail],
+			make_list(M, Tail)
+		).
 
-	:- else.
-
-		length(List, Length) :-
-			(	integer(Length) ->
-				Length >= 0,
-				make_list(Length, List)
-			;	var(Length),
-				length(List, 0, Length)
-			).
-
-		make_list(N, List) :-
-			(	N =:= 0 ->
-				List = []
-			;	M is N-1,
-				List = [_| Tail],
-				make_list(M, Tail)
-			).
-
-		length([], Length, Length).
-		length([_| Tail], Acc, Length) :-
-			Acc2 is Acc + 1,
-			length(Tail, Acc2, Length).
-
-	:- endif.
+	length([], Length, Length).
+	length([_| Tail], Acc, Length) :-
+		Acc2 is Acc + 1,
+		length(Tail, Acc2, Length).
 
 	max([N| Ns], Max) :-
 		max(Ns, N, Max).

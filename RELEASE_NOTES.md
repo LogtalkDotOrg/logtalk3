@@ -76,6 +76,10 @@ output and on generating Allure reports.
 Library
 -------
 
+* CHANGED: The library `list` object no longer uses the backend built-in
+`length/2` predicate when available due to differences between backend
+implementations.
+
 * ADDED: Additional tests for the `arbitrary` and `types` libraries to check
 that the main predicates are deterministic.
 
