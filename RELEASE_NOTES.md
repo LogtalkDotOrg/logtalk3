@@ -183,7 +183,7 @@ in options checking where an instantiation error is now expected instead of a
 domain error.
 
 * RENAMED: Tests for the standard `float/1` function and predicate to
-workaround tests with the sane names clashing when generating an Allure
+workaround tests with the same names clashing when generating an Allure
 report from test results using the xUnit.net v2 XML output format.
 
 * RENAMED: Tests for the `set_logtalk_flag/2` directive and predicate to

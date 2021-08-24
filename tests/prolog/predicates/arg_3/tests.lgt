@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-09-28,
+		date is 2021-08-24,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -35,43 +35,40 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.2.4
 
-	succeeds(iso_arg_3_01) :-
+	test(iso_arg_3_01, true) :-
 		{arg(1, foo(a,b), a)}.
 
-	succeeds(iso_arg_3_02) :-
-		{arg(1, foo(a,b), X)},
-		X == a.
+	test(iso_arg_3_02, true(X == a)) :-
+		{arg(1, foo(a,b), X)}.
 
-	succeeds(iso_arg_3_03) :-
-		{arg(1, foo(X,b), a)},
-		X == a.
+	test(iso_arg_3_03, true(X == a)) :-
+		{arg(1, foo(X,b), a)}.
 
-	succeeds(iso_arg_3_04) :-
-		{arg(1, foo(X,b), Y)},
-		Y == X.
+	test(iso_arg_3_04, true(Y == X)) :-
+		{arg(1, foo(X,b), Y)}.
 
-	fails(iso_arg_3_05) :-
+	test(iso_arg_3_05, false) :-
 		{arg(1, foo(a,b), b)}.
 
-	fails(iso_arg_3_06) :-
+	test(iso_arg_3_06, false) :-
 		{arg(0, foo(a,b), foo)}.
 
-	fails(iso_arg_3_07) :-
+	test(iso_arg_3_07, false) :-
 		{arg(3, foo(3,4), _)}.
 
-	throws(iso_arg_3_08, error(instantiation_error,_)) :-
+	test(iso_arg_3_08, error(instantiation_error)) :-
 		% try to delay the expected error to runtime
 		{G = arg(_, foo(a,b), a), call(G)}.
 
-	throws(iso_arg_3_09, error(instantiation_error,_)) :-
+	test(iso_arg_3_09, error(instantiation_error)) :-
 		% try to delay the expected error to runtime
 		{G = arg(1, _, a), call(G)}.
 
-	throws(iso_arg_3_10, error(type_error(compound,atom),_)) :-
+	test(iso_arg_3_10, error(type_error(compound,atom))) :-
 		% try to delay the expected error to runtime
 		{G = arg(0, atom, _), call(G)}.
 
-	throws(iso_arg_3_11, error(type_error(compound,3),_)) :-
+	test(iso_arg_3_11, error(type_error(compound,3))) :-
 		% try to delay the expected error to runtime
 		{G = arg(0, 3, _), call(G)}.
 
@@ -80,47 +77,43 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_arg_3_12) :-
+		test(iso_arg_3_12, true) :-
 			{arg(1, foo(X), u(X))}.
 	:- else.
-		- succeeds(iso_arg_3_12) :-
+		- test(iso_arg_3_12, true) :-
 			{arg(1, foo(X), u(X))}.
 	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_arg_3_13, error(domain_error(not_less_than_zero,-3),_)) :-
+	test(eddbali_arg_3_13, error(domain_error(not_less_than_zero,-3))) :-
 		% try to delay the expected error to runtime
 		{G = arg(-3, foo(a,b), _A), call(G)}.
 
-	throws(eddbali_arg_3_14, error(type_error(integer,a),_)) :-
+	test(eddbali_arg_3_14, error(type_error(integer,a))) :-
 		% try to delay the expected error to runtime
 		{G = arg(a, foo(a,b), _X), call(G)}.
 
-	succeeds(eddbali_arg_3_15) :-
-		{arg(2, foo(a,f(X,b),c), f(a,Y))},
-		X == a, Y == b.
+	test(eddbali_arg_3_15, true(X-Y == a-b)) :-
+		{arg(2, foo(a,f(X,b),c), f(a,Y))}.
 
-	throws(sics_arg_3_16, error(type_error(compound,3),_)) :-
+	test(sics_arg_3_16, error(type_error(compound,3))) :-
 		% try to delay the expected error to runtime
 		{G = arg(1, 3, _A), call(G)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_arg_3_17) :-
-		{arg(1, [Head| _], Arg)},
-		Arg == Head.
+	test(lgt_arg_3_17, true(Arg == Head)) :-
+		{arg(1, [Head| _], Arg)}.
 
-	succeeds(lgt_arg_3_18) :-
+	test(lgt_arg_3_18) :-
 		{arg(2, [_| Tail], Arg)},
 		Arg == Tail.
 
-	succeeds(lgt_arg_3_19) :-
-		{arg(2, [_], Arg)},
-		Arg == [].
+	test(lgt_arg_3_19, true(Arg == [])) :-
+		{arg(2, [_], Arg)}.
 
-	succeeds(lgt_arg_3_20) :-
-		{arg(1, {1,2,3}, Arg)},
-		Arg == (1,2,3).
+	test(lgt_arg_3_20, true(Arg == (1,2,3))) :-
+		{arg(1, {1,2,3}, Arg)}.
 
 :- end_object.
