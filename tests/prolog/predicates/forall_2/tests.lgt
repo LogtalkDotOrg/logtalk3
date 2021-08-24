@@ -30,9 +30,9 @@ a(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-01-19,
+		date is 2021-08-24,
 		comment is 'Unit tests for the de facto Prolog standard forall/2 built-in predicate.'
 	]).
 
@@ -54,21 +54,24 @@ a(3).
 	fails(commons_forall_2_06) :-
 		{forall(a(X), atom(X))}.
 
-	throws(commons_forall_2_07, error(instantiation_error,_)) :-
-		{forall(_, true)}.
+	fails(commons_forall_2_07) :-
+		{forall((X=1; X=1; X=2), X == 1)}.
 
 	throws(commons_forall_2_08, error(instantiation_error,_)) :-
+		{forall(_, true)}.
+
+	throws(commons_forall_2_09, error(instantiation_error,_)) :-
 		{forall(true, _)}.
 
 	% don't require a specific non-callable term in the following tests
 	% as it is implementation dependent and the specification of this
 	% predicate is still informal
 
-	throws(commons_forall_2_09, error(type_error(callable,_),_)) :-
+	throws(commons_forall_2_10, error(type_error(callable,_),_)) :-
 		Goal = 1,
 		{forall(Goal, true)}.
 
-	throws(commons_forall_2_10, error(type_error(callable,_),_)) :-
+	throws(commons_forall_2_11, error(type_error(callable,_),_)) :-
 		Goal = 1,
 		{forall(true, Goal)}.
 
