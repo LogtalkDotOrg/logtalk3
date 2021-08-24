@@ -121,6 +121,12 @@ test_error_choice :-
 		one(One),
 		{setup_call_cleanup(true, true, One)}.
 
+	test(lgt_setup_call_cleanup_3_17, false) :-
+		{setup_call_cleanup(fail, true, true)}.
+
+	test(lgt_setup_call_cleanup_3_18, true) :-
+		{setup_call_cleanup(true, true, fail)}.
+
 	% auxiliary predicate used to delay errors to runtime
 
 	variable(_).
