@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.7.0 and later versions
-%  Last updated on August 19, 2021
+%  Last updated on August 25, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -515,14 +515,14 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_lvm_directive_expansion'(disk_predicate(Template,Mode,Database), {:- disk_predicate(CTemplate,Mode,Database)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Template, _, CTemplate, _).
+	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
 '$lgt_prolog_goal_expansion'(define_disk_predicate(Template,Mode,Database), {define_disk_predicate(CTemplate,Mode,Database)}) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Template, _, CTemplate, _).
+	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore).
 
 
 
