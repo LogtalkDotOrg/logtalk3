@@ -73,6 +73,9 @@ output and on generating Allure reports.
 
 * UPDATED: The man page for the `lgt2svg` shell script.
 
+* FIXED: Typo in the Handbook documentation of the `phrase/2-3` built-in
+method exception conditions.
+
 Library
 -------
 
