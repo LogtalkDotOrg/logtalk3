@@ -111,9 +111,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:1,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-09-29,
+		date is 2021-08-26,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -130,96 +130,82 @@
 		logtalk_load(Source, [hook(hook)]).
 
 	% only true during source file compilation when called from a clause
-	test(logtalk_load_context_2_01) :-
-		\+ logtalk_load_context(_, _).
+	test(logtalk_load_context_2_01, false) :-
+		logtalk_load_context(_, _).
 
 	% source file related keys
 
-	test(logtalk_load_context_2_02) :-
+	test(logtalk_load_context_2_02, true(Source0 == Source)) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'sample.lgt', Source),
-		result(source, Source0), Source0 == Source.
+		result(source, Source0).
 
-	test(logtalk_load_context_2_03) :-
+	test(logtalk_load_context_2_03, true(File0 == File)) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'sample.lgt', File),
-		result(file, File0), File0 == File.
+		result(file, File0).
 
-	test(logtalk_load_context_2_04) :-
-		result(basename, Basename),
-		Basename == 'sample.lgt'.
+	test(logtalk_load_context_2_04, true(Basename == 'sample.lgt')) :-
+		result(basename, Basename).
 
-	test(logtalk_load_context_2_05) :-
+	test(logtalk_load_context_2_05, true(Directory0 == Directory)) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		result(directory, Directory0),
-		Directory0 == Directory.
+		result(directory, Directory0).
 
-	test(logtalk_load_context_2_06) :-
-		result(target, PrologFile0),
-		atom(PrologFile0).
+	test(logtalk_load_context_2_06, true(atom(PrologFile0))) :-
+		result(target, PrologFile0).
 
-	test(logtalk_load_context_2_07) :-
-		result(stream, Stream),
-		ground(Stream).
+	test(logtalk_load_context_2_07, true(ground(Stream))) :-
+		result(stream, Stream).
 
 	% source file entity related keys
 
-	test(logtalk_load_context_2_08) :-
-		result(entity_identifier, EntityIdentifier),
-		EntityIdentifier == sample.
+	test(logtalk_load_context_2_08, true(EntityIdentifier == sample)) :-
+		result(entity_identifier, EntityIdentifier).
 
-	test(logtalk_load_context_2_09) :-
-		result(entity_prefix, EntityPrefix),
+	test(logtalk_load_context_2_09, true(EntityPrefix0 == EntityPrefix)) :-
+		result(entity_prefix, EntityPrefix0),
 		logtalk::entity_prefix(sample, EntityPrefix).
 
-	test(logtalk_load_context_2_10) :-
-		result(entity_type, EntityType),
-		EntityType == object.
+	test(logtalk_load_context_2_10, true(EntityType == object)) :-
+		result(entity_type, EntityType).
 
 	% source file term related keys
 
-	test(logtalk_load_context_2_11) :-
-		result(term, Term),
-		^^variant(Term, a(A,B,C,B,A)).
+	test(logtalk_load_context_2_11, variant(Term, a(A,B,C,B,A))) :-
+		result(term, Term).
 
-	test(logtalk_load_context_2_12) :-
-		result(variables, Variables),
-		^^variant(Variables, [_, _, _]).
+	test(logtalk_load_context_2_12, variant(Variables, [_, _, _])) :-
+		result(variables, Variables).
 
-	test(logtalk_load_context_2_13) :-
-		result(variable_names, VariableNames),
-		^^variant(VariableNames, ['A'=_, 'B'=_, 'C'=_]).
+	test(logtalk_load_context_2_13, variant(VariableNames, ['A'=_, 'B'=_, 'C'=_])) :-
+		result(variable_names, VariableNames).
 
-	test(logtalk_load_context_2_14) :-
-		result(singletons, Singletons),
-		^^variant(Singletons, ['C'=_]).
+	test(logtalk_load_context_2_14, variant(Singletons, ['C'=_])) :-
+		result(singletons, Singletons).
 
-	test(logtalk_load_context_2_15) :-
-		result(term_position, TermPosition), ground(TermPosition).
+	test(logtalk_load_context_2_15, true(ground(TermPosition))) :-
+		result(term_position, TermPosition).
 
 	% calls from initialization/1 directives
 
-	test(logtalk_load_context_2_16) :-
+	test(logtalk_load_context_2_16, true(Source0 == Source)) :-
 		object_property(hook, file(Source0)),
-		logtalk_library_path(hook_source, Source),
-		Source0 == Source.
+		logtalk_library_path(hook_source, Source).
 
-	test(logtalk_load_context_2_17) :-
+	test(logtalk_load_context_2_17, true(Directory0 == Directory)) :-
 		object_property(hook, file(_, Directory0)),
-		logtalk_library_path(hook_directory, Directory),
-		Directory0 == Directory.
+		logtalk_library_path(hook_directory, Directory).
 
-	test(logtalk_load_context_2_18) :-
+	test(logtalk_load_context_2_18, true(Basename0 == Basename)) :-
 		object_property(hook, file(Basename0,_)),
-		logtalk_library_path(hook_basename, Basename),
-		Basename0 == Basename.
+		logtalk_library_path(hook_basename, Basename).
 
-	test(logtalk_load_context_2_19) :-
+	test(logtalk_load_context_2_19, true(File0 == File)) :-
 		object_property(hook, file(File0)),
-		logtalk_library_path(hook_file, File),
-		File0 == File.
+		logtalk_library_path(hook_file, File).
 
 :- end_object.
