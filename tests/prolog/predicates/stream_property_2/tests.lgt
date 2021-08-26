@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-06-29,
+		date is 2021-08-27,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 
@@ -184,6 +184,9 @@
 	test(lgt_stream_property_2_12, error(existence_error(stream,_))) :-
 		^^closed_output_stream(S, [alias(bar)]),
 		{stream_property(S, type(_))}.
+
+	test(lgt_stream_property_2_13, true) :-
+		{stream_property(_, _)}.
 
 	cleanup :-
 		^^clean_file(foo),
