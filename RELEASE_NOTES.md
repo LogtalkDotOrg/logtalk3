@@ -45,6 +45,8 @@ compiler.
 `spy` predicate properties and to expand its `disk_predicate/3` directive
 and `define_disk_predicate/3` predicate.
 
+* UPDATED: The JIProlog adapter file to require 4.1.7.1 or later version.
+
 * UPDATED: The Trealla Prolog adapter file to require 1.11.16 or later version.
 
 * FIXED: The adapter files expansion code for directives to check that the

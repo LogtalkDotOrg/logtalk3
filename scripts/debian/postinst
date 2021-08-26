@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk Debian package auxiliary script
-##   Last updated on August 17, 2021
+##   Last updated on August 27, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -60,7 +60,7 @@ echo "* Ciao Prolog (1.20.0 or later):     ciaolgt     (experimental; first run 
 echo "* CxProlog (0.98.1 or later):        cxlgt"
 echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"
-echo "* JIProlog (4.1.6.1 or later):       jiplgt      (first run may require sudo)"
+echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
 echo "* LVM (1.7.0 or later):              lvmlgt"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
 echo "* Scryer Prolog (0.8.128 or later):  scryerlgt   (experimental)"

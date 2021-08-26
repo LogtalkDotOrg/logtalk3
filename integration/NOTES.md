@@ -31,7 +31,7 @@ system path):
 * CxProlog (0.98.1 or later):        `cxlgt`
 * ECLiPSe (6.1#143 or later):        `eclipselgt`
 * GNU Prolog (1.4.5 or later):       `gplgt`
-* JIProlog (4.1.6.1 or later):       `jiplgt`     (first run may require `sudo`)
+* JIProlog (4.1.7.1 or later):       `jiplgt`     (first run may require `sudo`)
 * LVM (1.7.0 or later):              `lvmlgt`
 * Quintus Prolog (3.3 or later):     `quintuslgt`
 * Scryer Prolog (0.8.128 or later):  `scryerlgt`  (experimental)

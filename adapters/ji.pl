@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for JIProlog 4.1.6.1 or later versions
-%  Last updated on July 14, 2021
+%  Adapter file for JIProlog 4.1.7.1 or later versions
+%  Last updated on August 27, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -200,7 +200,7 @@
 '$lgt_prolog_feature'(prolog_dialect, ji).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, jiprolog(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(4,1,6))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(4,1,7))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

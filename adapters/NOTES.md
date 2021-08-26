@@ -223,7 +223,7 @@ that can generate e.g. a new Prolog top-level that embeds Logtalk and
 optionally a Logtalk application.
 
 
-JIProlog 4.1.6.1 and later versions
+JIProlog 4.1.7.1 and later versions
 -----------------------------------
 
 	ji.pl
