@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-05-11,
+		date is 2021-08-26,
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
 	]).
 
@@ -83,18 +83,19 @@
 	test(lgt_atom_codes_2_16, true(v(A,B,C) == v(65,66,67))) :-
 		{atom_codes('ABC', [A,B,C])}.
 
+	test(lgt_atom_codes_2_17, true) :-
+		{atom_codes('ABC', [65,66,67])}.
+
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 	%
 	% they also result in a syntax error with several Prolog compilers
 
-%	succeeds(sics_atom_codes_2_12) :-
-%		{atom_codes('Pécs', C)},
-%		C == [0'P,0'é,0'c,0's].
+%	test(sics_atom_codes_2_12, true(C == [0'P,0'é,0'c,0's])) :-
+%		{atom_codes('Pécs', C)}.
 %
-%	succeeds(sics_atom_codes_2_13) :-
-%		{atom_codes(A, [0'P,0'é,0'c,0's])},
-%		A == 'Pécs'.
+%	test(sics_atom_codes_2_13, true(A == 'Pécs')) :-
+%		{atom_codes(A, [0'P,0'é,0'c,0's])}.
 
 :- end_object.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-05-11,
+		date is 2021-08-26,
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
 	]).
 
@@ -98,5 +98,8 @@
 
 	test(lgt_atom_chars_2_20, true(v(A,B,C) == v('A','B','C'))) :-
 		{atom_chars('ABC', [A,B,C])}.
+
+	test(lgt_atom_chars_2_21, true) :-
+		{atom_chars('ABC', ['A','B','C'])}.
 
 :- end_object.

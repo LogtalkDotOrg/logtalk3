@@ -160,8 +160,9 @@ Tests
 * ADDED: Additional tests for the de facto standard `forall/2`, `format/2-3`,
 and `length/2` predicates.
 
-* ADDED: Additional tests for the standard `atom_concat/3`, `number_chars/2`,
-and `number_codes/2` predicates. Taken or derived from the WG17 test suite.
+* ADDED: Additional tests for the standard `atom_chars/2`, `atom_codes/2`,
+`atom_concat/3`, `number_chars/2`, and `number_codes/2` predicates. Some of
+them taken or derived from the WG17 test suite.
 
 * ADDED: Additional tests for the standard `keysort/2` and `sort/2` predicates.
 
