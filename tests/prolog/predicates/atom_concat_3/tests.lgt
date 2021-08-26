@@ -93,4 +93,7 @@
 	test(lgt_atom_concat_3_18, false) :-
 		{atom_concat(a, _, bc)}.
 
+	test(lgt_atom_concat_3_19, false) :-
+		{atom_concat(_, b, cd)}.
+
 :- end_object.
