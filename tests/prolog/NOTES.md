@@ -64,6 +64,7 @@ The test identifier prefixes indicate their origin:
 - `lgt_` - tests originating from work on Logtalk portability
 - `commons_` - tests for de facto standard Prolog features
 - `wg17_` - tests from WG17 test suite
+- `tpl_` - tests contributed by Trealla Prolog developers
 
 To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 
