@@ -91,6 +91,14 @@ that the main predicates are deterministic.
 * FIXED: The `meta_compiler` library to include a copy of the `meta` library
 tests to avoid names clashes when generating Allure reports from test results.
 
+* FIXED: Workaround JIProlog `file_attributes/7` predicate succeeding for
+non-existing files in the implementation of the `os` library predicates
+`directory_files/2`, `file_modification_time/2`, and `file_size/2`.
+
+* FIXED: Workaround JIProlog `directory_files/2` predicate succeeding for
+non-existing directories in the implementation of the `os::directory_files/2`
+library predicate.
+
 Tools
 -----
 

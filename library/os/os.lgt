@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:85:0,
+		version is 1:85:1,
 		author is 'Paulo Moura',
-		date is 2021-07-22,
+		date is 2021-08-27,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1571,7 +1571,10 @@
 			convert_file_path(Directory0, Directory).
 
 		directory_files(Directory, Files) :-
-			{directory_files(Directory, Files)}.
+			(	{exists_directory(Directory)} ->
+				{directory_files(Directory, Files)}
+			;	existence_error(directory, Directory)
+			).
 
 		directory_exists(Directory) :-
 			{exists_directory(Directory)}.
@@ -1580,10 +1583,16 @@
 			{exists_file(File), \+ exists_directory(File)}.
 
 		file_modification_time(File, Time) :-
-			{file_attributes(File, _, _, _, _, _, Time)}.
+			(	{exists_file(File)} ->
+				{file_attributes(File, _, _, _, _, _, Time)}
+			;	existence_error(file, File)
+			).
 
 		file_size(File, Size) :-
-			{file_attributes(File, _, _, _, _, Size, _)}.
+			(	{exists_file(File)} ->
+				{file_attributes(File, _, _, _, _, Size, _)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(_, _) :-
 			throw(not_available(file_permission/2)).
