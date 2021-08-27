@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:24:1,
+		version is 0:25:0,
 		author is 'Paulo Moura',
-		date is 2021-07-23,
+		date is 2021-08-27,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -388,6 +388,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files),
+		ground(Files),
 		list::memberchk('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
 
@@ -398,6 +399,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular)]),
+		ground(Files),
 		list::memberchk('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
 
@@ -405,6 +407,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(directory)]),
+		ground(Files),
 		\+ list::member('tests.lgt', Files),
 		\+ list::member('tester.lgt', Files).
 
@@ -412,6 +415,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular), paths(relative)]),
+		ground(Files),
 		forall(
 			list::member(File, Files),
 			\+ os::is_absolute_file_name(File)
@@ -421,6 +425,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular), paths(absolute)]),
+		ground(Files),
 		forall(
 			list::member(File, Files),
 			os::is_absolute_file_name(File)
@@ -430,6 +435,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular), paths(relative), extensions(['.lgt'])]),
+		ground(Files),
 		list::memberchk('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
 
@@ -437,6 +443,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular), paths(relative), extensions([])]),
+		ground(Files),
 		list::memberchk('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
 
@@ -450,6 +457,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [dot_files(false)]),
+		ground(Files),
 		forall(
 			list::member(File, Files),
 			\+ sub_atom(File, 0, 1, _, '.')
@@ -459,6 +467,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular), paths(relative), prefixes(['test'])]),
+		ground(Files),
 		list::memberchk('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
 
@@ -466,6 +475,7 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::directory_files(Directory, Files, [type(regular), paths(relative), suffixes(['r.lgt'])]),
+		ground(Files),
 		\+ list::member('tests.lgt', Files),
 		list::memberchk('tester.lgt', Files).
 
