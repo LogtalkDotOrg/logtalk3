@@ -23,10 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-04-17,
-		comment is 'Unit tests for the ISO Prolog standard integer/1 built-in predicate.'
+		date is 2021-08-28,
+		comment is 'Unit tests for the ISO Prolog standard sub_atom/5 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.3.4
@@ -121,36 +121,42 @@
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- test(sics_sub_atom_5_31, true(A-S == 5-'ók')) :-
+	- test(sics_sub_atom_5_29, true(A-S == 5-'ók')) :-
 		{sub_atom('Bartók Béla', 4, 2, A, S)}.
 
-	- test(sics_sub_atom_5_32, true(L-S == 2-'ók')) :-
+	- test(sics_sub_atom_5_30, true(L-S == 2-'ók')) :-
 		{sub_atom('Bartók Béla', 4, L, 5, S)}.
 
-	- test(sics_sub_atom_5_33, true(B-S == 4-'ók')) :-
+	- test(sics_sub_atom_5_31, true(B-S == 4-'ók')) :-
 		{sub_atom('Bartók Béla', B, 2, 5, S)}.
 
-	- test(sics_sub_atom_5_34, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
+	- test(sics_sub_atom_5_32, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
 		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L).
 
-	test(sics_sub_atom_5_35, true(L == [0-4-7, 7-4-0])) :-
+	test(sics_sub_atom_5_33, true(L == [0-4-7, 7-4-0])) :-
 		findall(B-L-A, {sub_atom(abracadabra,B,L,A,abra)}, L).
 
 	% tests from the Logtalk portability work
 
-	test(lgt_sub_atom_5_36, true) :-
+	test(lgt_sub_atom_5_34, true) :-
 		forall({sub_atom('123', _, _, _, SA)}, {atom(SA)}).
 
-	test(lgt_sub_atom_5_37, error(type_error(atom,2))) :-
+	test(lgt_sub_atom_5_35, error(type_error(atom,2))) :-
 		{sub_atom(2, _, _, _, _)}.
 
-	test(lgt_sub_atom_5_38, error(type_error(atom,2.2))) :-
+	test(lgt_sub_atom_5_36, error(type_error(atom,2.2))) :-
 		{sub_atom(2.2, _, _, _, _)}.
 
-	test(lgt_sub_atom_5_39, true) :-
+	test(lgt_sub_atom_5_37, true) :-
 		{sub_atom(abc, _, _, 0, c)}.
 
-	test(lgt_sub_atom_5_40, false) :-
+	test(lgt_sub_atom_5_38, false) :-
 		{sub_atom(abc, _, _, 0, d)}.
+
+	test(lgt_sub_atom_5_39, true(S-L == ''-0)) :-
+		{sub_atom('', 0, L, 0, S)}.
+
+	test(lgt_sub_atom_5_40, false) :-
+		{sub_atom('', _, 1, _, _)}.
 
 :- end_object.
