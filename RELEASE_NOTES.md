@@ -213,6 +213,12 @@ IDEs, text editors, and syntax highlighters support
 * FIXED: Parsing of compiler error and warning messages when building with
 the Sublime Text editor.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installation script to also detect SICStus Prolog 4.7.x
+versions.
+
 
 3.49.0 - July 27, 2021
 ======================
