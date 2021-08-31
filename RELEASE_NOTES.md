@@ -197,6 +197,8 @@ for the for the changes in the ISO/IEC 13211-1 Technical Corrigendum 3:2017
 in options checking where an instantiation error is now expected instead of a
 domain error.
 
+* UPDATED: Allow the Unicode encodings test set to be run with Trealla Prolog.
+
 * RENAMED: Tests for the standard `float/1` function and predicate to
 workaround tests with the same names clashing when generating an Allure
 report from test results using the xUnit.net v2 XML output format.

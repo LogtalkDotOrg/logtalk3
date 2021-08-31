@@ -64,18 +64,18 @@
 
 	% UTF-16BE with BOM tests
 
-	test(lgt_unicode_utf_16_be_bom_01, true) :-
+	test(lgt_unicode_utf_16_be_bom_01, true, [condition(set_encoding('UTF-16LE'))]) :-
 		file_path('utf_16_be_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_16_be_bom_02, true) :-
+	test(lgt_unicode_utf_16_be_bom_02, true, [condition(set_encoding('UTF-16LE'))]) :-
 		file_path('utf_16_be_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_16_be_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	test(lgt_unicode_utf_16_be_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-16LE'))]) :-
 		findall(Length, ({utf_16_be_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_16_be_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_16_be_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-16LE'))]) :-
 		findall(Atom, {utf_16_be_bom(Atom)}, Atoms).
 
 	% UTF-16BE without BOM tests
@@ -91,23 +91,23 @@
 	test(lgt_unicode_utf_16_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-16BE'))]) :-
 		findall(Length, ({utf_16_be_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_16_be_no_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_16_be_no_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-16BE'))]) :-
 		findall(Atom, {utf_16_be_no_bom(Atom)}, Atoms).
 
 	% UTF-16LE with BOM tests
 
-	test(lgt_unicode_utf_16_le_bom_01, true) :-
+	test(lgt_unicode_utf_16_le_bom_01, true, [condition(set_encoding('UTF-16BE'))]) :-
 		file_path('utf_16_le_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_16_le_bom_02, true) :-
+	test(lgt_unicode_utf_16_le_bom_02, true, [condition(set_encoding('UTF-16BE'))]) :-
 		file_path('utf_16_le_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_16_le_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	test(lgt_unicode_utf_16_le_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-16BE'))]) :-
 		findall(Length, ({utf_16_le_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_16_le_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_16_le_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-16BE'))]) :-
 		findall(Atom, {utf_16_le_bom(Atom)}, Atoms).
 
 	% UTF-16LE without BOM tests
@@ -123,23 +123,23 @@
 	test(lgt_unicode_utf_16_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-16LE'))]) :-
 		findall(Length, ({utf_16_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_16_le_no_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_16_le_no_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-16BE'))]) :-
 		findall(Atom, {utf_16_le_no_bom(Atom)}, Atoms).
 
 	% UTF-32BE with BOM tests
 
-	test(lgt_unicode_utf_32_be_bom_01, true) :-
+	test(lgt_unicode_utf_32_be_bom_01, true, [condition(set_encoding('UTF-32LE'))]) :-
 		file_path('utf_32_be_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_32_be_bom_02, true) :-
+	test(lgt_unicode_utf_32_be_bom_02, true, [condition(set_encoding('UTF-32LE'))]) :-
 		file_path('utf_32_be_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_32_be_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	test(lgt_unicode_utf_32_be_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32LE'))]) :-
 		findall(Length, ({utf_32_be_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_32_be_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_32_be_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-32LE'))]) :-
 		findall(Atom, {utf_32_be_bom(Atom)}, Atoms).
 
 	% UTF-32BE without BOM tests
@@ -155,23 +155,23 @@
 	test(lgt_unicode_utf_32_be_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32BE'))]) :-
 		findall(Length, ({utf_32_be_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_32_be_no_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_32_be_no_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-32BE'))]) :-
 		findall(Atom, {utf_32_be_no_bom(Atom)}, Atoms).
 
 	% UTF-32LE with BOM tests
 
-	test(lgt_unicode_utf_32_le_bom_01, true) :-
+	test(lgt_unicode_utf_32_le_bom_01, true, [condition(set_encoding('UTF-32BE'))]) :-
 		file_path('utf_32_le_bom.lgt', Path),
 		logtalk_compile(Path).
 
-	test(lgt_unicode_utf_32_le_bom_02, true) :-
+	test(lgt_unicode_utf_32_le_bom_02, true, [condition(set_encoding('UTF-32BE'))]) :-
 		file_path('utf_32_le_bom.lgt', Path),
 		logtalk_load(Path, [clean(on)]).
 
-	test(lgt_unicode_utf_32_le_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10])) :-
+	test(lgt_unicode_utf_32_le_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32BE'))]) :-
 		findall(Length, ({utf_32_le_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_32_le_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_32_le_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-32BE'))]) :-
 		findall(Atom, {utf_32_le_bom(Atom)}, Atoms).
 
 	% UTF-32LE without BOM tests
@@ -187,7 +187,7 @@
 	test(lgt_unicode_utf_32_le_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-32LE'))]) :-
 		findall(Length, ({utf_32_le_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_32_le_no_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_32_le_no_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-32LE'))]) :-
 		findall(Atom, {utf_32_le_no_bom(Atom)}, Atoms).
 
 	% open/4 mode read tests
@@ -209,7 +209,7 @@
 		close(Stream).
 
 	% check that BOM detection is working for UTF-16 files
-	test(lgt_unicode_open_4_read_03, true(Encoding-BOM == 'UTF-16BE'-true)) :-
+	test(lgt_unicode_open_4_read_03, true(Encoding-BOM == 'UTF-16BE'-true), [condition(set_encoding('UTF-16LE'))]) :-
 		file_path('utf_16_be_bom.lgt', Path),
 		open(Path, read, Stream, []),
 		stream_property(Stream, encoding(Encoding)),
@@ -217,7 +217,7 @@
 		close(Stream).
 
 	% check that BOM detection is working for UTF-16 files
-	test(lgt_unicode_open_4_read_04, true(Encoding-BOM == 'UTF-16LE'-true)) :-
+	test(lgt_unicode_open_4_read_04, true(Encoding-BOM == 'UTF-16LE'-true), [condition(set_encoding('UTF-16BE'))]) :-
 		file_path('utf_16_le_bom.lgt', Path),
 		open(Path, read, Stream, []),
 		stream_property(Stream, encoding(Encoding)),
@@ -225,7 +225,7 @@
 		close(Stream).
 
 	% check that BOM detection is working for UTF-32 files
-	test(lgt_unicode_open_4_read_05, true(Encoding-BOM == 'UTF-32BE'-true)) :-
+	test(lgt_unicode_open_4_read_05, true(Encoding-BOM == 'UTF-32BE'-true), [condition(set_encoding('UTF-32LE'))]) :-
 		file_path('utf_32_be_bom.lgt', Path),
 		open(Path, read, Stream, []),
 		stream_property(Stream, encoding(Encoding)),
@@ -233,7 +233,7 @@
 		close(Stream).
 
 	% check that BOM detection is working for UTF-32 files
-	test(lgt_unicode_open_4_read_06, true(Encoding-BOM == 'UTF-32LE'-true)) :-
+	test(lgt_unicode_open_4_read_06, true(Encoding-BOM == 'UTF-32LE'-true), [condition(set_encoding('UTF-32BE'))]) :-
 		file_path('utf_32_le_bom.lgt', Path),
 		open(Path, read, Stream, []),
 		stream_property(Stream, encoding(Encoding)),
@@ -241,7 +241,7 @@
 		close(Stream).
 
 	% check that BOM detection takes precedence over the encoding/1 option
-	test(lgt_unicode_open_4_read_07, true(Encoding-BOM == 'UTF-16BE'-true)) :-
+	test(lgt_unicode_open_4_read_07, true(Encoding-BOM == 'UTF-16BE'-true), [condition(set_encoding('UTF-16LE'))]) :-
 		file_path('utf_16_be_bom.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-8')]),
 		stream_property(Stream, encoding(Encoding)),
@@ -249,7 +249,7 @@
 		close(Stream).
 
 	% check that BOM detection takes precedence over the encoding/1 option
-	test(lgt_unicode_open_4_read_08, true(Encoding-BOM == 'UTF-32LE'-true)) :-
+	test(lgt_unicode_open_4_read_08, true(Encoding-BOM == 'UTF-32LE'-true), [condition(set_encoding('UTF-32BE'))]) :-
 		file_path('utf_32_le_bom.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-16BE')]),
 		stream_property(Stream, encoding(Encoding)),
@@ -257,7 +257,7 @@
 		close(Stream).
 
 	% check that with BOM detection disabled a BOM is read as a ZWNBSP
-	test(lgt_unicode_open_4_read_09, true(Code == 0xFEFF)) :-
+	test(lgt_unicode_open_4_read_09, true(Code == 0xFEFF), [condition(set_encoding('UTF-16BE'))]) :-
 		file_path('utf_16_le_bom.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-16LE'), bom(false)]),
 		get_code(Stream, Code),
