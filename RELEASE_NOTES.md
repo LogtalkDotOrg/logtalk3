@@ -181,6 +181,8 @@ test suite.
 
 * ADDED: Additional tests for the `setup_call_cleanup/3` predicate.
 
+* ADDED: Additional unit tests for the 0'\Char number notation.
+
 * ADDED: Additional tests for the de facto standard `\uXXXX` and `\UXXXXXXXX`
 syntax.
 
