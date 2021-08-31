@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 1.7.0 and later versions
-%  Last updated on August 25, 2021
+%  Last updated on August 31, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -513,9 +513,10 @@ setup_call_cleanup(_, _, _) :-
 	% allow first-argument indexing
 	catch('$lgt_lvm_directive_expansion'(Directive, Expanded), _, fail).
 
-'$lgt_lvm_directive_expansion'(disk_predicate(Template,Mode,Database), {:- disk_predicate(CTemplate,Mode,Database)}) :-
+'$lgt_lvm_directive_expansion'(disk_predicate(Template,Mode,Database), [{:- disk_predicate(CTemplate,Mode,Database)}, (:- dynamic(Functor/Arity))]) :-
 	logtalk_load_context(entity_type, _),
-	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore).
+	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore),
+	functor(Template, Functor, Arity).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
@@ -523,6 +524,10 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_goal_expansion'(define_disk_predicate(Template,Mode,Database), {define_disk_predicate(CTemplate,Mode,Database)}) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore).
+
+'$lgt_prolog_goal_expansion'(destroy_disk_predicate(Functor/Arity), {destroy_disk_predicate(CFunctor/CArity)}) :-
+	logtalk_load_context(entity_type, _),
+	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
 
 
 
