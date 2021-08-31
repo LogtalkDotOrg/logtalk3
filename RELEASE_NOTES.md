@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.50.0 - August ??, 2021
+3.50.0 - August 31, 2021
 ========================
 
 Logtalk compiler and runtime
