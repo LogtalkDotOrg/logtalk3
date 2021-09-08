@@ -34,12 +34,6 @@ space) to complete execution is not available. This built-in method is declared
 private and thus cannot be used as a message to an object. Calling this
 predicate is equivalent to the following sequence of goals:
 
-Possible values for ``Resource`` include:
-
-- ``threads``
-- ``coinduction``
-- ``soft_cut_support``
-
 ::
 
    ...,
@@ -48,6 +42,13 @@ Possible values for ``Resource`` include:
 
 This allows the user to generate errors in the same format used by the
 runtime.
+
+Possible values for ``Resource`` include:
+
+- ``threads``
+- ``coinduction``
+- ``soft_cut_support``
+
 
 Modes and number of proofs
 --------------------------

@@ -246,12 +246,6 @@
 space) to complete execution is not available. This built-in method is declared
 private and thus cannot be used as a message to an object. Calling this
 predicate is equivalent to the following sequence of goals:</p>
-<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Resource</span></code> include:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">threads</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">coinduction</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">soft_cut_support</span></code></p></li>
-</ul>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 <span class="k">throw</span>(error(<span class="k">resource_error</span>(<span class="nv">Resource</span>), <span class="nv">Context</span>)).
@@ -259,6 +253,12 @@ predicate is equivalent to the following sequence of goals:</p>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Resource</span></code> include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">threads</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coinduction</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">soft_cut_support</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline">¶</a></h2>

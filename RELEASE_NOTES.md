@@ -25,7 +25,11 @@ RELEASE NOTES
 3.51.0 - September ??, 2021
 ===========================
 
+Documentation
+-------------
 
+* FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
+built-in method.
 
 
 3.50.0 - August 31, 2021
