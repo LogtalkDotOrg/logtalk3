@@ -31,6 +31,11 @@ Documentation
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.
 
+Tests
+-----
+
+* ADDED: Additional test for the `setup_call_cleanup/3` predicate.
+
 
 3.50.0 - August 31, 2021
 ========================

@@ -44,11 +44,11 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
-		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura.',
-		date is 2021-08-24,
+		version is 1:2:0,
+		author is 'Jan Wielemaker and Paulo Moura.',
+		date is 2021-09-09,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',
-		source is 'Tests adapted with permission from the SWI-Prolog distribution.'
+		source is 'Several tests adapted with permission from the SWI-Prolog distribution.'
 	]).
 
 	setup :-
@@ -126,6 +126,9 @@ test_error_choice :-
 
 	test(lgt_setup_call_cleanup_3_18, true) :-
 		{setup_call_cleanup(true, true, fail)}.
+
+	test(lgt_setup_call_cleanup_3_19, true(X-Y == 1-3)) :-
+		{setup_call_cleanup(true, setup_call_cleanup(true, (X=1;X=2), true), Y=3), !}.
 
 	% auxiliary predicate used to delay errors to runtime
 
