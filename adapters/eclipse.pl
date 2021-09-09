@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on August 19, 2021
+%  Last updated on September 9, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -151,6 +151,9 @@ forall(Generate, Test) :-
 	!,
 	functor(Predicate, Functor, Arity),
 	'$lgt_eclipse_module_predicate_property'(Module, Functor/Arity, Property).
+:- if((get_flag(version_as_list, Version), Version @> [7,0,24])).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).
+:- endif.
 '$lgt_predicate_property'(Predicate, Property) :-
 	!,
 	functor(Predicate, Functor, Arity),
@@ -246,6 +249,9 @@ forall(Generate, Test) :-
 '$lgt_prolog_meta_predicate'(make_suspension(_, _, _), make_suspension(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(mutex(_, _), mutex(*, 0), predicate).
 '$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
+:- if((get_flag(version_as_list, Version), Version @> [7,0,24])).
+	'$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
+:- endif.
 '$lgt_prolog_meta_predicate'(subcall(_, _), subcall(0, *), predicate).
 '$lgt_prolog_meta_predicate'(suspend(_, _, _), suspend(0, *, *), predicate).
 '$lgt_prolog_meta_predicate'(suspend(_, _, _, _), suspend(0, *, *, *), predicate).

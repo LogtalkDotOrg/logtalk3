@@ -25,6 +25,12 @@ RELEASE NOTES
 3.51.0 - September ??, 2021
 ===========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The ECLiPSe adapter file to allow the `setup_call_cleanup/3` predicate
+to be seen as a built-in predicate for 7.0#24 and later versions.
+
 Documentation
 -------------
 
