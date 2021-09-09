@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on August 30, 2021
+; Last updated on September 9, 2021
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -27,6 +27,8 @@
 
 #define MyBaseDir "C:\lgt3git"
 #define MyAppVer StringChange(FileRead(FileOpen(MyBaseDir + "\VERSION.txt")), '-stable', '')
+
+#define MyBackupFolderDate GetDateTimeString('yyyy-mm-dd-hhnnss', '-', ':')
 
 [Setup]
 AppName={#MyAppName}
@@ -247,8 +249,8 @@ var
   NewFolder, BackupFolder: String;
 begin
   NewFolder := LgtUserDirPage.Values[0];
+  BackupFolder := NewFolder + '-backup-' + ExpandConstant('{#MyBackupFolderDate}');
   if (CurStep = ssInstall) and DirExists(NewFolder) and (pos('backup', WizardSelectedComponents(False)) > 0) then begin
-    BackupFolder := NewFolder + '-backup-' + GetDateTimeString('yyyy-mm-dd-hhnnss', '-', ':');
     if not RenameFile(NewFolder, BackupFolder) then begin
       Error := 'Could not create a backup of the Logtalk user folder!'
                + Chr(13) + Chr(13)

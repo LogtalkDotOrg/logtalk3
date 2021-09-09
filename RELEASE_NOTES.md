@@ -42,6 +42,13 @@ Tests
 
 * ADDED: Additional test for the `setup_call_cleanup/3` predicate.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Windows installer copying of the user settings file from the
+backup folder to the new Logtalk user folder. Thanks to Michael T. Richter
+for the bug report.
+
 
 3.50.0 - August 31, 2021
 ========================
