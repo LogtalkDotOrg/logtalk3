@@ -40,7 +40,7 @@ built-in method.
 Tests
 -----
 
-* ADDED: Additional test for the `setup_call_cleanup/3` predicate.
+* ADDED: Additional tests for the `setup_call_cleanup/3` predicate.
 
 Installers and installation scripts
 -----------------------------------

@@ -124,10 +124,15 @@ test_error_choice :-
 	test(lgt_setup_call_cleanup_3_17, false) :-
 		{setup_call_cleanup(fail, true, true)}.
 
-	test(lgt_setup_call_cleanup_3_18, true) :-
+	test(lgt_setup_call_cleanup_3_18, true(Assertion)) :-
+		^^set_text_output(''),
+		({setup_call_cleanup(fail, write(hello), write(there))} -> true; true),
+		^^text_output_assertion('', Assertion).
+
+	test(lgt_setup_call_cleanup_3_19, true) :-
 		{setup_call_cleanup(true, true, fail)}.
 
-	test(lgt_setup_call_cleanup_3_19, true(X-Y == 1-3)) :-
+	test(lgt_setup_call_cleanup_3_20, true(X-Y == 1-3)) :-
 		{setup_call_cleanup(true, setup_call_cleanup(true, (X=1;X=2), true), Y=3), !}.
 
 	% auxiliary predicate used to delay errors to runtime
