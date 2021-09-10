@@ -34,6 +34,9 @@ to be seen as a built-in predicate for 7.0#24 and later versions.
 Documentation
 -------------
 
+* IMPROVED: The man page for the `logtalk_allure_report` script with an
+additional example.
+
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.
 

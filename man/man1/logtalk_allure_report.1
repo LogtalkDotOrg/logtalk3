@@ -1,4 +1,4 @@
-.TH logtalk_allure_report 1 "January 19, 2021" "Logtalk 3.44.0" "Logtalk Documentation"
+.TH logtalk_allure_report 1 "September 10, 2021" "Logtalk 3.51.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_allure_report \- Logtalk script for generating Allure reports
@@ -58,6 +58,10 @@ Run all tests on the current directory and sub-directories using the GNU Prolog 
 \fBlogtalk_allure_report\fR
 .br
 \fBallure open\fR
+.PP
+.TP
+Set the title for the report and information on the backend used:
+\fBlogtalk_allure_report -t "My application tests report" -- Backend='GNU Prolog' Commit=f7a106e\fR
 
 .SH IMPLEMENTATION NOTES
 Tested using Allure 2.13.8.
