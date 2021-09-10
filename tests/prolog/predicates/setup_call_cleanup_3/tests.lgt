@@ -44,9 +44,9 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Jan Wielemaker and Paulo Moura.',
-		date is 2021-09-09,
+		date is 2021-09-10,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',
 		source is 'Several tests adapted with permission from the SWI-Prolog distribution.'
 	]).
@@ -69,12 +69,11 @@ test_error_choice :-
 	test(swi_setup_call_cleanup_3_05, true([X,E] == [42,error(x)])) :-
 		{catch(setup_call_cleanup(A=42, throw(error(x)), assertz(v(A))), E, true), retract(v(X))}.
 
-	test(swi_setup_call_cleanup_3_06, true) :-
+	test(swi_setup_call_cleanup_3_06, true(Vs == [a,b,done])) :-
 		{	setup_call_cleanup(true, (ndet(X), assertz(v(X))), assertz(v(done))),
 			fail
 		;	findall(V, retract(v(V)), Vs)
 		},
-		Vs == [a,b,done],
 		{retractall(v(_))}.
 
 	test(swi_setup_call_cleanup_3_07, error(instantiation_error)) :-
