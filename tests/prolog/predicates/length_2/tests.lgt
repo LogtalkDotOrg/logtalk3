@@ -29,9 +29,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-18,
+		date is 2021-09-11,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -45,17 +45,17 @@
 		{length(List, 0)}.
 
 	test(commons_length_2_04, deterministic(N == 3)) :-
-		{length([1,2,3], N)}.
+		{length([1, 2, 3], N)}.
 
 	test(commons_length_2_05, deterministic) :-
-		{length([1,2,3], 3)}.
+		{length([1, 2, 3], 3)}.
 
 	test(commons_length_2_06, deterministic) :-
 		{length(List, 3)},
 		^^variant(List, [_, _, _]).
 
 	test(commons_length_2_07, false) :-
-		{length([1,2,3], 0)}.
+		{length([1, 2, 3], 0)}.
 
 	test(commons_length_2_08, false) :-
 		{length([], 3)}.
@@ -95,5 +95,11 @@
 
 	test(commons_length_2_20, error(domain_error(not_less_than_zero,-1))) :-
 		{length([], -1)}.
+
+	test(commons_length_2_21, true(Tail == [])) :-
+		{length([1, 2| Tail], 2)}.
+
+	test(commons_length_2_22, false) :-
+		{length([1, 2, 3, 4, 5| _], 2)}.
 
 :- end_object.
