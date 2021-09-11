@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA WinProlog 5.00
-%  Last updated on July 14, 2021
+%  Last updated on September 11, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -20,7 +20,6 @@
 %  limitations under the License.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 :- prolog_flag(syntax_errors, _, error).
@@ -604,8 +603,44 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % with a slash; the extension must start with a "." when defined and must
 % be the empty atom when it does not exist
 
+% '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)
+%
+% decomposes a file path in its components; the directory must always end
+% with a slash; the extension must start with a "." when defined and must
+% be the empty atom when it does not exist
+
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
-	?????
+	atom_codes(File, FileCodes),
+	(	'$lgt_strrch'(FileCodes, 0'/, [_Slash| BasenameCodes]) ->
+		atom_codes(Basename, BasenameCodes),
+		atom_concat(Directory, Basename, File)
+	;	Directory = './',
+		atom_codes(Basename, FileCodes),
+		BasenameCodes = FileCodes
+	),
+	(	'$lgt_strrch'(BasenameCodes, 0'., ExtensionCodes) ->
+		atom_codes(Extension, ExtensionCodes),
+		atom_concat(Name, Extension, Basename)
+	;	Name = Basename,
+		Extension = ''
+	).
+
+
+% the following auxiliary predicate is simplified version of code
+% written by Per Mildner and is used here with permission
+'$lgt_strrch'(Xs, G, Ys) :-
+	Xs = [X| Xs1],
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, Xs, Ys)
+	;	'$lgt_strrch'(Xs1, G, Ys)
+	).
+
+'$lgt_strrch1'([], _G, Ys, Ys).
+'$lgt_strrch1'([X| Xs1], G, Prev, Ys) :-
+	(	X == G ->
+		'$lgt_strrch1'(Xs1, G, [X| Xs1], Ys)
+	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
+	).
 
 
 

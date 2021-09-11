@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Amzi! Prolog 7.6.1 and later versions
-%  Last updated on July 14, 2021
+%  Last updated on September 11, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -20,7 +20,6 @@
 %  limitations under the License.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 :- loadlsx('aosutils.lsx').
@@ -406,7 +405,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % gets a file modification time, assumed to be an opaque term but comparable
 
 '$lgt_file_modification_time'(File, Time) :-
-	?????
+	stat(File, _, _, Time, _, _, _, _, _).
 
 
 % '$lgt_environment_variable'(?atom, ?atom)
