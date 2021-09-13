@@ -23,42 +23,36 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-11-21,
+		date is 2021-09-13,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.4.4
 
-	succeeds(iso_copy_term_2_01) :-
+	test(iso_copy_term_2_01, true) :-
 		{copy_term(_X, _Y)}.
 
-	succeeds(iso_copy_term_2_02) :-
+	test(iso_copy_term_2_02, true) :-
 		{copy_term(_X, 3)}.
 
-	succeeds(iso_copy_term_2_03) :-
+	test(iso_copy_term_2_03, true) :-
 		{copy_term(_, a)}.
 
-	succeeds(iso_copy_term_2_04) :-
-		{copy_term(a+X, X+b)},
-		X == a.
+	test(iso_copy_term_2_04, true(X == a)) :-
+		{copy_term(a+X, X+b)}.
 
-	succeeds(iso_copy_term_2_05) :-
+	test(iso_copy_term_2_05, true) :-
 		{copy_term(_, _)}.
 
-	succeeds(iso_copy_term_2_06) :-
-		{copy_term(X+X+_Y, A+B+B)},
-		A == B.
+	test(iso_copy_term_2_06, true(A == B)) :-
+		{copy_term(X+X+_Y, A+B+B)}.
 
-	fails(iso_copy_term_2_07) :-
+	test(iso_copy_term_2_07, false) :-
 		{copy_term(a, b)}.
 
-	fails(iso_copy_term_2_08) :-
+	test(iso_copy_term_2_08, false) :-
 		{copy_term(a+X,X+b), copy_term(a+X,X+b)}.
 
 	:- if((
@@ -66,12 +60,18 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_copy_term_2_09) :-
+		test(iso_copy_term_2_09, true) :-
 			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
 	:- else.
-		- succeeds(iso_copy_term_2_09) :-
+		- test(iso_copy_term_2_09, true) :-
 			% STO; Undefined
 			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
 	:- endif.
+
+	% ISO/IEC 13211-1:1995(E) standard, section 8.5.4.1 NOTE
+	test(iso_copy_term_2_10, true((Term1 == a(X,Y), X \== Z, X \== W, Y \== W, Y \== Z))) :-
+		Term1 = a(X, Y),
+		Term2 = a(Z, W),
+		{copy_term(Term1, Term2)}.
 
 :- end_object.
