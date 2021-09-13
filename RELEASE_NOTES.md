@@ -48,6 +48,9 @@ built-in method.
 Tests
 -----
 
+* ADDED: Additional tests for the `number_chars/2` and `number_codes/2`
+predicates to verify their standard roundtrip property.
+
 * ADDED: Additional tests for the `length/2` predicate.
 
 * ADDED: Additional tests for the `setup_call_cleanup/3` predicate.

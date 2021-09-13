@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-08-12,
+		date is 2021-09-13,
 		comment is 'Unit tests for the ISO Prolog standard number_chars/2 built-in predicate.'
 	]).
 
@@ -67,86 +67,97 @@
 	test(iso_number_chars_2_12, true(A == 4.2)) :-
 		{number_chars(A, ['4','2','.','0','e','-','1'])}.
 
+	quick_check(iso_number_chars_2_13, round_trip(+integer)).
+
+	quick_check(iso_number_chars_2_14, round_trip(+float)).
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	test(eddbali_number_chars_2_13, error(instantiation_error)) :-
+	test(eddbali_number_chars_2_15, error(instantiation_error)) :-
 		{number_chars(_A, _L)}.
 
-	test(eddbali_number_chars_2_14, error(type_error(number,a))) :-
+	test(eddbali_number_chars_2_16, error(type_error(number,a))) :-
 		{number_chars(a, _L)}.
 
-	test(eddbali_number_chars_2_15, error(type_error(list,4))) :-
+	test(eddbali_number_chars_2_17, error(type_error(list,4))) :-
 		{number_chars(_A, 4)}.
 
-	test(eddbali_number_chars_2_16, error(type_error(character,2))) :-
+	test(eddbali_number_chars_2_18, error(type_error(character,2))) :-
 		{number_chars(_A, ['4',2])}.
 
-	test(sics_number_chars_2_17, error(instantiation_error)) :-
+	test(sics_number_chars_2_19, error(instantiation_error)) :-
 		{number_chars(_A, [a|_L])}.
 
-	test(sics_number_chars_2_18, error(instantiation_error)) :-
+	test(sics_number_chars_2_20, error(instantiation_error)) :-
 		{number_chars(_A, [a,_L])}.
 
-	test(sics_number_chars_2_19, true(X == 9)) :-
+	test(sics_number_chars_2_21, true(X == 9)) :-
 		{number_chars(X, [' ','0','o','1','1'])}.
 
-	test(sics_number_chars_2_20, true(X == 17)) :-
+	test(sics_number_chars_2_22, true(X == 17)) :-
 		{number_chars(X, [' ','0','x','1','1'])}.
 
-	test(sics_number_chars_2_21, true(X == 3)) :-
+	test(sics_number_chars_2_23, true(X == 3)) :-
 		{number_chars(X, [' ','0','b','1','1'])}.
 
-	test(sics_number_chars_2_22, error(syntax_error(_))) :-
+	test(sics_number_chars_2_24, error(syntax_error(_))) :-
 		{number_chars(_X, ['0','o','8'])}.
 
-	test(sics_number_chars_2_23, error(syntax_error(_))) :-
+	test(sics_number_chars_2_25, error(syntax_error(_))) :-
 		{number_chars(_X, ['0','b','2'])}.
 
-	test(sics_number_chars_2_24, error(syntax_error(_))) :-
+	test(sics_number_chars_2_26, error(syntax_error(_))) :-
 		{number_chars(_X, ['0','x','g'])}.
 
 	% the following test is disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8
 	% for all Logtalk supported backend Prolog compilers
 
-	- test(sics_number_chars_2_25, error(syntax_error(_))) :-
+	- test(sics_number_chars_2_27, error(syntax_error(_))) :-
 		{number_chars(_X, ['á'])}.
 
-	test(sics_number_chars_2_26, error(syntax_error(_))) :-
+	test(sics_number_chars_2_28, error(syntax_error(_))) :-
 		{number_chars(_X, ['a'])}.
 
-	test(sics_number_chars_2_27, error(syntax_error(_))) :-
+	test(sics_number_chars_2_29, error(syntax_error(_))) :-
 		{number_chars(_X, ['0','x','0','.','0'])}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_number_chars_2_28, true(A-B == '4'-'2')) :-
+	test(lgt_number_chars_2_30, true(A-B == '4'-'2')) :-
 		{number_chars(42, [A,B])}.
 
-	test(lgt_number_chars_2_29, error(type_error(character,1))) :-
+	test(lgt_number_chars_2_31, error(type_error(character,1))) :-
 		{number_chars(1234, [1,2,3,4])}.
 
 	% tests from (or derived from) the WG17 test suite
 
-	test(wg17_number_chars_2_30, true) :-
+	test(wg17_number_chars_2_32, true) :-
 		{number_chars(1.0e9, ['1',.,'0','E','9'])}.
 
-	test(wg17_number_chars_2_31, true) :-
+	test(wg17_number_chars_2_33, true) :-
 		{number_chars(1.0e9, ['1',.,'0','E','+','9'])}.
 
-	test(wg17_number_chars_2_32, error(syntax_error(_))) :-
+	test(wg17_number_chars_2_34, error(syntax_error(_))) :-
 		{number_chars(1, [])}.
 
-	test(wg17_number_chars_2_33, error(syntax_error(_))) :-
+	test(wg17_number_chars_2_35, error(syntax_error(_))) :-
 		{number_chars(_, ['3',.])}.
 
-	test(wg17_number_chars_2_34, error(syntax_error(_))) :-
+	test(wg17_number_chars_2_36, error(syntax_error(_))) :-
 		{number_chars(_, ['0','B','1'])}.
 
-	test(wg17_number_chars_2_35, error(syntax_error(_))) :-
+	test(wg17_number_chars_2_37, error(syntax_error(_))) :-
 		{number_chars(_, ['0','O','7'])}.
 
-	test(wg17_number_chars_2_36, error(syntax_error(_))) :-
+	test(wg17_number_chars_2_38, error(syntax_error(_))) :-
 		{number_chars(_, ['0','X',f])}.
+
+	% auxiliary predicates
+
+	round_trip(X) :-
+		{number_chars(X, L),
+		 number_chars(Y, L),
+		 X == Y}.
 
 :- end_object.
