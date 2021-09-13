@@ -54,7 +54,7 @@ types to the `arbitrary` library.
 Tests
 -----
 
-* ADDED: Additional test for the `copy_term/2` predicate.
+* ADDED: Additional tests for the `copy_term/2` predicate.
 
 * ADDED: Additional tests for the `number_chars/2` and `number_codes/2`
 predicates to verify their standard roundtrip property.

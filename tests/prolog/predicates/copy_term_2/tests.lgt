@@ -69,7 +69,14 @@
 	:- endif.
 
 	% ISO/IEC 13211-1:1995(E) standard, section 8.5.4.1 NOTE
-	test(iso_copy_term_2_10, true((Term1 == a(X,Y), X \== Z, X \== W, Y \== W, Y \== Z))) :-
+
+	test(iso_copy_term_2_10, true((X == A, Y == B))) :-
+		Term1 = a(X, Y),
+		Term2 = a(_, _),
+		{copy_term(Term1, Term2)},
+		Term1 = a(A, B).
+
+	test(iso_copy_term_2_11, true((X \== Z, X \== W, Y \== W, Y \== Z))) :-
 		Term1 = a(X, Y),
 		Term2 = a(Z, W),
 		{copy_term(Term1, Term2)}.
