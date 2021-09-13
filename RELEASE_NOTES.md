@@ -40,6 +40,8 @@ Documentation
 * IMPROVED: The man page for the `logtalk_allure_report` script with an
 additional example.
 
+* UPDATED: The `lgtunit` tool documentation on Allure report limitations.
+
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.
 

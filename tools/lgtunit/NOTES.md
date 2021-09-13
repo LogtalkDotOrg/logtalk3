@@ -1324,7 +1324,8 @@ First, Allure expects test names to be unique across different tests sets. If
 there are two test with the same name in two different test sets, only one of
 them will be reported. Second, skipped test sets are not reported. Finally,
 when using the xUnit.net v2 XML format, tests are reported in a random order
-instead of their run order.
+instead of their run order and dates are displayed as "unknown" in the overview
+page.
 
 
 Exporting code coverage results in XML format
