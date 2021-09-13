@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:1,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-09-13,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -66,56 +66,66 @@
 	throws(iso_peek_code_2_06, error(permission_error(input,stream,user_output),_)) :-
 		{peek_code(user_output, _)}.
 
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.2.1 NOTE
+
+	succeeds(iso_peek_char_2_07) :-
+		^^set_text_input(st_i, 'qwerty', [reposition(true)]),
+		stream_property(S, alias(st_i)),
+		stream_property(S, position(P0)),
+		{peek_code(st_i, _)},
+		stream_property(S, position(P)),
+		P == P0.
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_peek_code_2_07, error(instantiation_error,_)) :-
+	throws(sics_peek_code_2_08, error(instantiation_error,_)) :-
 		{peek_code(_, _)}.
 
-	throws(sics_peek_code_2_08, error(type_error(integer,p),_)) :-
+	throws(sics_peek_code_2_09, error(type_error(integer,p),_)) :-
 		^^set_text_input('foo'),
 		{peek_code(p)}.
 
-	throws(sics_peek_code_2_09, error(type_error(integer,p),_)) :-
+	throws(sics_peek_code_2_10, error(type_error(integer,p),_)) :-
 		^^set_text_input(st_i, 'foo'),
 		{peek_code(st_i, p)}.
 
-	throws(sics_peek_code_2_10, error(representation_error(in_character_code),_)) :-
+	throws(sics_peek_code_2_11, error(representation_error(in_character_code),_)) :-
 		^^set_text_input('foo'),
 		{peek_code(-2)}.
 
-	throws(sics_peek_code_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+	throws(sics_peek_code_2_12, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% the second exception term is a common but not conforming alternative
 		{peek_code(foo,_)}.
 
-	throws(sics_peek_code_2_12, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_code_2_13, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, []),
 		{peek_code(S, _)}.
 
-	throws(sics_peek_code_2_13, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_code_2_14, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{peek_code(S, _)}.
 
-	throws(sics_peek_code_2_14, error(permission_error(input,stream,S),_)) :-
+	throws(sics_peek_code_2_15, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{peek_code(S, _)}.
 
-	throws(sics_peek_code_2_15, error(permission_error(input,binary_stream,S),_)) :-
+	throws(sics_peek_code_2_16, error(permission_error(input,binary_stream,S),_)) :-
 		^^set_binary_input([]),
 		current_input(S),
 		{peek_code(S, _)}.
 
-	succeeds(sics_peek_code_2_16) :-
+	succeeds(sics_peek_code_2_17) :-
 		^^set_text_input(st_i, '', [eof_action(error)]),
 		catch({get_code(st_i,_), peek_code(st_i,_)}, error(permission_error(input,past_end_of_stream,_),_), true),
 		stream_property(S, alias(st_i)),
 		stream_property(S, end_of_stream(past)).
 
-	succeeds(sics_peek_code_2_17) :-
+	succeeds(sics_peek_code_2_18) :-
 		^^set_text_input(''),
 		{peek_code(C1), peek_code(C2)},
 		C1 == -1, C2 == -1.
 
-	succeeds(sics_peek_code_2_18) :-
+	succeeds(sics_peek_code_2_19) :-
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
@@ -123,21 +133,21 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_peek_code_2_19) :-
+	succeeds(lgt_peek_code_2_20) :-
 		^^set_text_input(st_i, ''),
 		{peek_code(st_i, -1)},
 		^^check_text_input(st_i, '').
 
-	succeeds(lgt_peek_code_2_20) :-
+	succeeds(lgt_peek_code_2_21) :-
 		^^set_text_input(st_i, '', [eof_action(eof_code)]),
 		{peek_code(st_i, Code1), peek_code(st_i, Code1), peek_code(st_i, Code2)},
 		Code1 == -1, Code2 == -1.
 
-	throws(lgt_peek_code_2_21, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_code_2_22, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{peek_code(s, _)}.
 
-	throws(lgt_peek_code_2_22, error(permission_error(input,binary_stream,_),_)) :-
+	throws(lgt_peek_code_2_23, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{peek_code(s, _)}.
 
