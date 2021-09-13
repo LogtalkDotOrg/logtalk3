@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:18:1,
+		version is 2:19:0,
 		author is 'Paulo Moura',
-		date is 2021-04-02,
+		date is 2021-09-13,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -1017,6 +1017,24 @@
 	edge_case(non_positive_float, -1.0).
 	edge_case(non_negative_float, 0.0).
 	edge_case(non_negative_float, 1.0).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx;
+		 Dialect == tau; Dialect == lvm; Dialect == scryer; Dialect == trealla)
+	)).
+		edge_case(float, Epsilon) :-
+			Epsilon is epsilon.
+		edge_case(non_negative_float, Epsilon) :-
+			Epsilon is epsilon.
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+		edge_case(float, Epsilon) :-
+			Epsilon is nexttoward(1.0, 2.0) - 1.0.
+		edge_case(non_negative_float, Epsilon) :-
+			Epsilon is nexttoward(1.0, 2.0) - 1.0.
+	:- else.
+		edge_case(float, 0.000000000001).
+		edge_case(non_negative_float, 0.000000000001).
+	:- endif.
 	% numbers
 	edge_case(number, Number) :-
 		edge_case(integer, Number).

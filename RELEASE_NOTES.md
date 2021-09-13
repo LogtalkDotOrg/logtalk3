@@ -45,6 +45,12 @@ additional example.
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.
 
+Library
+-------
+
+* ADDED: New `epsilon/0` edge cases for the `float` and `non_negative_float`
+types to the `arbitrary` library.
+
 Tests
 -----
 
