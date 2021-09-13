@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2020-11-06,
+		date is 2021-09-13,
 		comment is 'Unit tests for the ISO Prolog standard peek_byte/1-2 built-in predicates.'
 	]).
 
@@ -60,97 +60,107 @@
 	throws(iso_peek_byte_2_05, error(permission_error(input,stream,user_output),_)) :-
 		{peek_byte(user_output, _Byte)}.
 
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.13.2.1 NOTE
+
+	succeeds(iso_peek_byte_2_06) :-
+		^^set_binary_input(st_i, [113,119,101,114], [reposition(true)]),
+		stream_property(S, alias(st_i)),
+		stream_property(S, position(P0)),
+		{peek_byte(st_i, _)},
+		stream_property(S, position(P)),
+		P == P0.
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_peek_byte_2_06, error(instantiation_error,_)) :-
+	throws(sics_peek_byte_2_07, error(instantiation_error,_)) :-
 		{peek_byte(_, _)}.
 
-	throws(sics_peek_byte_2_07, error(type_error(in_byte,p),_)) :-
+	throws(sics_peek_byte_2_08, error(type_error(in_byte,p),_)) :-
 		^^set_binary_input([]),
 		{peek_byte(p)}.
 
-	throws(sics_peek_byte_2_08, error(type_error(in_byte,-2),_)) :-
+	throws(sics_peek_byte_2_09, error(type_error(in_byte,-2),_)) :-
 		^^set_binary_input([]),
 		{peek_byte(-2)}.
 
-	throws(sics_peek_byte_2_09, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+	throws(sics_peek_byte_2_10, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
 		{peek_byte(foo, _)}.
 
-	throws(sics_peek_byte_2_10, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_byte_2_11, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, [type(binary)]),
 		{peek_byte(S, _)}.
 
-	throws(sics_peek_byte_2_11, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_byte_2_12, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, [type(binary)]),
 		{peek_byte(S, _)}.
 
-	throws(sics_peek_byte_2_12, error(permission_error(input,stream,S),_)) :-
+	throws(sics_peek_byte_2_13, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{peek_byte(S, _)}.
 
-	throws(sics_peek_byte_2_13, error(permission_error(input,text_stream,S),_)) :-
+	throws(sics_peek_byte_2_14, error(permission_error(input,text_stream,S),_)) :-
 		^^set_text_input(''),
 		current_input(S),
 		{peek_byte(_)}.
 
-	throws(sics_peek_byte_2_14, error(permission_error(input,past_end_of_stream,_),_)) :-
+	throws(sics_peek_byte_2_15, error(permission_error(input,past_end_of_stream,_),_)) :-
 		^^set_binary_input(st_i, [], [eof_action(error)]),
 		{get_byte(st_i, _), peek_byte(st_i, _)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_peek_byte_2_15) :-
+	succeeds(lgt_peek_byte_2_16) :-
 		^^set_binary_input(st_i, []),
 		{peek_byte(st_i, -1)},
 		^^check_binary_input(st_i, []).
 
-	succeeds(lgt_peek_byte_2_16) :-
+	succeeds(lgt_peek_byte_2_17) :-
 		^^set_binary_input(st_i, [], [eof_action(eof_code)]),
 		{peek_byte(st_i, Byte1), peek_byte(st_i, Byte1), peek_byte(st_i, Byte2)},
 		Byte1 == -1, Byte2 == -1.
 
-	throws(lgt_peek_byte_2_17, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_byte_2_18, error(permission_error(input,stream,s),_)) :-
 		^^set_binary_output(s, []),
 		{peek_byte(s, _)}.
 
-	throws(lgt_peek_byte_2_18, error(permission_error(input,text_stream,_),_)) :-
+	throws(lgt_peek_byte_2_19, error(permission_error(input,text_stream,_),_)) :-
 		^^set_text_input(s, ''),
 		{peek_byte(s, _)}.
 
-	succeeds(lgt_peek_byte_2_19) :-
+	succeeds(lgt_peek_byte_2_20) :-
 		^^set_binary_input([255,255,255]),
 		{peek_byte(Byte)},
 		Byte == 255.
 
-	succeeds(lgt_peek_byte_2_20) :-
+	succeeds(lgt_peek_byte_2_21) :-
 		^^set_binary_input(st_i, [255,255,255]),
 		{peek_byte(st_i, Byte)},
 		Byte == 255.
 
-	succeeds(lgt_peek_byte_2_21) :-
+	succeeds(lgt_peek_byte_2_22) :-
 		^^set_binary_input([255,255,255]),
 		{peek_byte(255)}.
 
-	succeeds(lgt_peek_byte_2_22) :-
+	succeeds(lgt_peek_byte_2_23) :-
 		^^set_binary_input(st_i, [255,255,255]),
 		{peek_byte(st_i, 255)}.
 
-	succeeds(lgt_peek_byte_2_23) :-
+	succeeds(lgt_peek_byte_2_24) :-
 		^^set_binary_input([0,0,0]),
 		{peek_byte(Byte)},
 		Byte == 0.
 
-	succeeds(lgt_peek_byte_2_24) :-
+	succeeds(lgt_peek_byte_2_25) :-
 		^^set_binary_input(st_i, [0,0,0]),
 		{peek_byte(st_i, Byte)},
 		Byte == 0.
 
-	succeeds(lgt_peek_byte_2_25) :-
+	succeeds(lgt_peek_byte_2_26) :-
 		^^set_binary_input([0,0,0]),
 		{peek_byte(0)}.
 
-	succeeds(lgt_peek_byte_2_26) :-
+	succeeds(lgt_peek_byte_2_27) :-
 		^^set_binary_input(st_i, [0,0,0]),
 		{peek_byte(st_i, 0)}.
 
