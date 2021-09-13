@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:1,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2021-09-13,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -72,47 +72,57 @@
 	throws(iso_peek_char_2_07, error(permission_error(input,stream,user_output),_)) :-
 		{peek_char(user_output, _)}.
 
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.2.1 NOTE
+
+	succeeds(iso_peek_char_2_08) :-
+		^^set_text_input(st_i, 'qwerty', [reposition(true)]),
+		stream_property(S, alias(st_i)),
+		stream_property(S, position(P0)),
+		{peek_char(st_i, _)},
+		stream_property(S, position(P)),
+		P == P0.
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_peek_char_2_08, error(instantiation_error,_)) :-
+	throws(sics_peek_char_2_09, error(instantiation_error,_)) :-
 		{peek_char(_, _)}.
 
-	throws(sics_peek_char_2_09, error(type_error(in_character,1),_)) :-
+	throws(sics_peek_char_2_10, error(type_error(in_character,1),_)) :-
 		^^set_text_input('foo'),
 		{peek_char(1)}.
 
-	throws(sics_peek_char_2_10, error(type_error(in_character,1),_)) :-
+	throws(sics_peek_char_2_11, error(type_error(in_character,1),_)) :-
 		^^set_text_input(st_i, 'foo'),
 		{peek_char(st_i, 1)}.
 
-	throws(sics_peek_char_2_11, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
+	throws(sics_peek_char_2_12, [error(domain_error(stream_or_alias,foo),_), error(existence_error(stream,foo),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
 		{peek_char(foo,_)}.
 
-	throws(sics_peek_char_2_12, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_char_2_13, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, []),
 		{peek_char(S, _)}.
 
-	throws(sics_peek_char_2_13, error(existence_error(stream,S),_)) :-
+	throws(sics_peek_char_2_14, error(existence_error(stream,S),_)) :-
 		^^closed_output_stream(S, []),
 		{peek_char(S, _)}.
 
-	throws(sics_peek_char_2_14, error(permission_error(input,stream,S),_)) :-
+	throws(sics_peek_char_2_15, error(permission_error(input,stream,S),_)) :-
 		current_output(S),
 		{peek_char(S, _)}.
 
-	throws(sics_peek_char_2_15, error(permission_error(input,binary_stream,_),_)) :-
+	throws(sics_peek_char_2_16, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{peek_char(s, _)}.
 
-	succeeds(sics_peek_char_2_16) :-
+	succeeds(sics_peek_char_2_17) :-
 		os::absolute_file_name(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{peek_char(Stream, C1), peek_char(Stream, C1), peek_char(Stream, C2)},
 		C1 == end_of_file, C2 == end_of_file.
 
-	succeeds(sics_peek_char_2_17) :-
+	succeeds(sics_peek_char_2_18) :-
 		os::absolute_file_name(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
@@ -120,15 +130,15 @@
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_peek_char_2_18) :-
+	succeeds(lgt_peek_char_2_19) :-
 		^^set_text_input(s, ''),
 		{get_char(s, end_of_file)}.
 
-	succeeds(lgt_peek_char_2_19) :-
+	succeeds(lgt_peek_char_2_20) :-
 		^^set_text_input(s, '', [eof_action(eof_code)]),
 		{get_char(s, end_of_file), peek_char(s, end_of_file)}.
 
-	throws(lgt_peek_char_2_20, error(permission_error(input,stream,s),_)) :-
+	throws(lgt_peek_char_2_21, error(permission_error(input,stream,s),_)) :-
 		^^set_text_output(s, ''),
 		{peek_char(s, _)}.
 
