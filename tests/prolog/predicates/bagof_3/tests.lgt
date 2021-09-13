@@ -33,6 +33,10 @@ b(2, 2).
 
 % database for tests from the Logtalk portability work
 
+a(1).
+a(2).
+a(3).
+
 c(2, b, 'B').
 c(1, a, 'A').
 c(3, c, 'C').
@@ -42,9 +46,9 @@ c(3, c, 'C').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-05-12,
+		date is 2021-09-13,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -109,20 +113,34 @@ c(3, c, 'C').
 		one(One),
 		{bagof(_X, One, _L)}.
 
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.2.1 NOTES
+
+	test(iso_bagof_3_15, true(LL = [_])) :-
+		findall(L, {bagof(X, a(X), L)}, LL).
+
+	test(iso_bagof_3_16, true(var(X))) :-
+		{bagof(X, a(X), _)}.
+
+	test(iso_bagof_3_17, true) :-
+		forall(
+			{bagof(X, Y^c(X, Y, _), _)},
+			(var(X), var(Y))
+		).
+
 	% tests from the ECLiPSe test suite
 
-	test(eclipse_bagof_3_15, error(type_error(list,12))) :-
+	test(eclipse_bagof_3_18, error(type_error(list,12))) :-
 		{bagof(X, (X=2; X=1), 12)}.
 
-	test(eclipse_bagof_3_16, error(type_error(list,[1|2]))) :-
+	test(eclipse_bagof_3_19, error(type_error(list,[1|2]))) :-
 		{bagof(X, (X=2; X=1), [1|2])}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_bagof_3_17, true(L == ['B', 'A', 'C'])) :-
+	test(lgt_bagof_3_20, true(L == ['B', 'A', 'C'])) :-
 		{bagof(Z, X^Y^c(X,Y,Z), L)}.
 
-	test(lgt_bagof_3_18, true(L == ['B', 'A', 'C'])) :-
+	test(lgt_bagof_3_21, true(L == ['B', 'A', 'C'])) :-
 		{bagof(Z, t(X,Y)^c(X,Y,Z), L)}.
 
 	% auxiliary predicates
