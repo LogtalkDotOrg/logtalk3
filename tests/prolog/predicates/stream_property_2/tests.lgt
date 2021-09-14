@@ -307,77 +307,72 @@
 
 	% tests for the end_of_stream/1 stream property
 
-	- test(lgt_stream_property_2_32, true(EndOfStream == not)) :-
-		os::absolute_file_name(output_text_file, Path),
-		open(Path, write, Stream),
-		{stream_property(Stream, end_of_stream(EndOfStream))},
-		close(Stream).
-
-	- test(lgt_stream_property_2_33, true(EndOfStream == not)) :-
-		os::absolute_file_name(output_text_file, Path),
-		open(Path, append, Stream),
-		{stream_property(Stream, end_of_stream(EndOfStream))},
-		close(Stream).
-
-	test(lgt_stream_property_2_34, true((EndOfStream == not; EndOfStream == at))) :-
+	test(lgt_stream_property_2_32, true((EndOfStream == not; EndOfStream == at))) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{stream_property(Stream, end_of_stream(EndOfStream))},
 		close(Stream).
 
+	test(lgt_stream_property_2_33, true((EndOfStream == not; EndOfStream == at))) :-
+		os::absolute_file_name(input_binary_file, Path),
+		^^create_binary_file(Path, []),
+		open(Path, read, Stream, [type(binary)]),
+		{stream_property(Stream, end_of_stream(EndOfStream))},
+		close(Stream).
+
 	% tests for the eof_action/1 stream property
 
-	test(lgt_stream_property_2_35, true(EOFAction == error)) :-
+	test(lgt_stream_property_2_34, true(EOFAction == error)) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [eof_action(error)]),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_36, true(EOFAction == eof_code)) :-
+	test(lgt_stream_property_2_35, true(EOFAction == eof_code)) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [eof_action(eof_code)]),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_37, true(EOFAction == reset)) :-
+	test(lgt_stream_property_2_36, true(EOFAction == reset)) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [eof_action(reset)]),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_38, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset))) :-
+	test(lgt_stream_property_2_37, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset))) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_39, true(EOFAction == error)) :-
+	test(lgt_stream_property_2_38, true(EOFAction == error)) :-
 		os::absolute_file_name(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [eof_action(error), type(binary)]),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_40, true(EOFAction == eof_code)) :-
+	test(lgt_stream_property_2_39, true(EOFAction == eof_code)) :-
 		os::absolute_file_name(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [eof_action(eof_code), type(binary)]),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_41, true(EOFAction == reset)) :-
+	test(lgt_stream_property_2_40, true(EOFAction == reset)) :-
 		os::absolute_file_name(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [eof_action(reset), type(binary)]),
 		{stream_property(Stream, eof_action(EOFAction))},
 		close(Stream).
 
-	test(lgt_stream_property_2_42, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset))) :-
+	test(lgt_stream_property_2_41, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset))) :-
 		os::absolute_file_name(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [type(binary)]),
@@ -386,38 +381,38 @@
 
 	% tests for the reposition/1 stream property
 
-	test(lgt_stream_property_2_43, true(Reposition == true)) :-
+	test(lgt_stream_property_2_42, true(Reposition == true)) :-
 		os::absolute_file_name(output_text_file, Path),
 		open(Path, write, Stream, [reposition(true)]),
 		{stream_property(Stream, reposition(Reposition))},
 		close(Stream).
 
-	test(lgt_stream_property_2_44, true((Reposition == false; Reposition == true))) :-
+	test(lgt_stream_property_2_43, true((Reposition == false; Reposition == true))) :-
 		os::absolute_file_name(output_text_file, Path),
 		open(Path, write, Stream, [reposition(false)]),
 		{stream_property(Stream, reposition(Reposition))},
 		close(Stream).
 
-	test(lgt_stream_property_2_45, true(Reposition == true)) :-
+	test(lgt_stream_property_2_44, true(Reposition == true)) :-
 		os::absolute_file_name(output_text_file, Path),
 		open(Path, append, Stream, [reposition(true)]),
 		{stream_property(Stream, reposition(Reposition))},
 		close(Stream).
 
-	test(lgt_stream_property_2_46, true((Reposition == false; Reposition == true))) :-
+	test(lgt_stream_property_2_45, true((Reposition == false; Reposition == true))) :-
 		os::absolute_file_name(output_text_file, Path),
 		open(Path, append, Stream, [reposition(false)]),
 		{stream_property(Stream, reposition(Reposition))},
 		close(Stream).
 
-	test(lgt_stream_property_2_47, true(Reposition == true)) :-
+	test(lgt_stream_property_2_46, true(Reposition == true)) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [reposition(true)]),
 		{stream_property(Stream, reposition(Reposition))},
 		close(Stream).
 
-	test(lgt_stream_property_2_48, true((Reposition == false; Reposition == true))) :-
+	test(lgt_stream_property_2_47, true((Reposition == false; Reposition == true))) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [reposition(false)]),
@@ -426,38 +421,38 @@
 
 	% tests for the type/1 stream property
 
-	test(lgt_stream_property_2_49, true(Type == text)) :-
+	test(lgt_stream_property_2_48, true(Type == text)) :-
 		os::absolute_file_name(output_text_file, Path),
 		open(Path, write, Stream, [type(text)]),
 		{stream_property(Stream, type(Type))},
 		close(Stream).
 
-	test(lgt_stream_property_2_50, true(Type == binary)) :-
+	test(lgt_stream_property_2_49, true(Type == binary)) :-
 		os::absolute_file_name(output_binary_file, Path),
 		open(Path, write, Stream, [type(binary)]),
 		{stream_property(Stream, type(Type))},
 		close(Stream).
 
-	test(lgt_stream_property_2_51, true(Type == text)) :-
+	test(lgt_stream_property_2_50, true(Type == text)) :-
 		os::absolute_file_name(output_text_file, Path),
 		open(Path, append, Stream, [type(text)]),
 		{stream_property(Stream, type(Type))},
 		close(Stream).
 
-	test(lgt_stream_property_2_52, true(Type == binary)) :-
+	test(lgt_stream_property_2_51, true(Type == binary)) :-
 		os::absolute_file_name(output_binary_file, Path),
 		open(Path, append, Stream, [type(binary)]),
 		{stream_property(Stream, type(Type))},
 		close(Stream).
 
-	test(lgt_stream_property_2_53, true(Type == text)) :-
+	test(lgt_stream_property_2_52, true(Type == text)) :-
 		os::absolute_file_name(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [type(text)]),
 		{stream_property(Stream, type(Type))},
 		close(Stream).
 
-	test(lgt_stream_property_2_54, true(Type == binary)) :-
+	test(lgt_stream_property_2_53, true(Type == binary)) :-
 		os::absolute_file_name(input_binary_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [type(binary)]),
