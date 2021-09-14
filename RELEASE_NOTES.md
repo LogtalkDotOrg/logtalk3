@@ -58,6 +58,9 @@ Tests
 `peek_char/2`, and `peek_code/2` predicates to verify properties specified
 in the ISO Prolog Core standard notes.
 
+* ADDED: Additional tests for the `stream_property/2` predicate to verify
+properties for both text and binary streams open in all possible modes.
+
 * ADDED: Additional tests for the `number_chars/2` and `number_codes/2`
 predicates to verify their standard roundtrip property.
 
