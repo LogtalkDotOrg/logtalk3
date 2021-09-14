@@ -54,9 +54,9 @@ types to the `arbitrary` library.
 Tests
 -----
 
-* ADDED: Additional tests for the `bagof/3`, `copy_term/2`, `peek_byte/2`,
-`peek_char/2`, and `peek_code/2` predicates to verify properties specified
-in the ISO Prolog Core standard notes.
+* ADDED: Additional tests for the `bagof/3`, `copy_term/2`, `op/3`,
+`peek_byte/2`, `peek_char/2`, and `peek_code/2` predicates to verify
+properties specified in the ISO Prolog Core standard notes.
 
 * ADDED: Additional tests for the `stream_property/2` predicate to verify
 properties for both text and binary streams open in all possible modes.

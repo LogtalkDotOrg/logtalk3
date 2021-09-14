@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-10-29,
+		date is 2021-09-14,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -96,16 +96,25 @@
 	test(iso_op_3_17, error(permission_error(create,operator,'|'))) :-
 		{op(1000, fx, '|')}.
 
+	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.14.3.1 NOTES
+
+	test(iso_op_3_18, true) :-
+		{op(333, xfy, [abc, abc, abc])},
+		{current_op(333, xfy, abc)}.
+
+	test(iso_op_3_19, error(permission_error(modify,operator,(',')))) :-
+		{op(0, xfx, (','))}.
+
 	% next test updated for the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 6.3.4.3
 
 	:- if(\+ current_op(_, _, '|')).
-		test(iso_op_3_18, true) :-
+		test(iso_op_3_20, true) :-
 			{op(1105, xfy, '|')},
 			{current_op(Priority, Specifier, '|')},
 			Priority == 1105,
 			Specifier == xfy.
 	:- else.
-		test(iso_op_3_18, true) :-
+		test(iso_op_3_20, true) :-
 			{current_op(Priority, Specifier, '|')},
 			Priority >= 1001,
 			(	Specifier == xfy
@@ -114,37 +123,37 @@
 			).
 	:- endif.
 
-	test(iso_op_3_19, true) :-
+	test(iso_op_3_21, true) :-
 		{op(0, xfy, '|')},
 		{\+ current_op(_, xfy, '|')}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	test(sics_op_3_20, error(instantiation_error)) :-
+	test(sics_op_3_22, error(instantiation_error)) :-
 		{op(_, xfx, ++)}.
 
-	test(sics_op_3_21, error(instantiation_error)) :-
+	test(sics_op_3_23, error(instantiation_error)) :-
 		{op(100, xfx, _)}.
 
-	test(sics_op_3_22, error(instantiation_error)) :-
+	test(sics_op_3_24, error(instantiation_error)) :-
 		{op(100, xfx, [a|_])}.
 
-	test(sics_op_3_23, error(instantiation_error)) :-
+	test(sics_op_3_25, error(instantiation_error)) :-
 		{op(100, xfx, [a,_])}.
 
-	test(sics_op_3_24, error(type_error(atom,200))) :-
+	test(sics_op_3_26, error(type_error(atom,200))) :-
 		{op(100, 200, [a])}.
 
-	test(sics_op_3_25, error(type_error(atom,f(1)))) :-
+	test(sics_op_3_27, error(type_error(atom,f(1)))) :-
 		{op(100, f(1), [a])}.
 
-	test(sics_op_3_26, error(type_error(atom,a+b))) :-
+	test(sics_op_3_28, error(type_error(atom,a+b))) :-
 		{op(100, xfx, [a,a+b])}.
 
-	test(sics_op_3_27, error(permission_error(modify,operator,(',')))) :-
+	test(sics_op_3_29, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, (','))}.
 
-	test(sics_op_3_28, error(permission_error(modify,operator,(',')))) :-
+	test(sics_op_3_30, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, [a,(',')])}.
 
 :- end_object.
