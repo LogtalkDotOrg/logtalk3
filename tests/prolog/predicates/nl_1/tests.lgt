@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:3,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-07-26,
+		date is 2021-09-15,
 		comment is 'Unit tests for the ISO Prolog standard nl/0-1 built-in predicates.'
 	]).
 
@@ -50,17 +50,25 @@
 	)).
 
 	test(lgt_nl_1_03, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{nl(out)},
+		^^text_output_assertion(out, '\r\n', Assertion).
+
+	test(lgt_nl_0_01, true(Assertion)) :-
 		^^set_text_output(''),
-		current_output(S),
-		{nl(S)},
+		{nl},
 		^^text_output_assertion('\r\n', Assertion).
 
 	:- else.
 
 	test(lgt_nl_1_03, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{nl(out)},
+		^^text_output_assertion(out, '\n', Assertion).
+
+	test(lgt_nl_0_01, true(Assertion)) :-
 		^^set_text_output(''),
-		current_output(S),
-		{nl(S)},
+		{nl},
 		^^text_output_assertion('\n', Assertion).
 
 	:- endif.

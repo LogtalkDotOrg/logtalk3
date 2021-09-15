@@ -68,7 +68,8 @@ predicates to verify their standard roundtrip property.
 
 * ADDED: Additional tests for the `setup_call_cleanup/3` predicate.
 
-* IMPROVED: Simplified tests for the `format/3` predicate.
+* IMPROVED: Simplified tests for the `format/3`, `nl/0-1`, and `write_term/3`
+predicates.
 
 Installers and installation scripts
 -----------------------------------

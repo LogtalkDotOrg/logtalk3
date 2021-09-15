@@ -23,55 +23,48 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:18:0,
+		version is 1:19:0,
 		author is 'Paulo Moura',
-		date is 2021-08-16,
+		date is 2021-09-15,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.2.4
 
 	test(iso_write_term_3_01, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, [1,2,3], [])},
-		^^text_output_assertion('[1,2,3]', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, [1,2,3], [])},
+		^^text_output_assertion(out, '[1,2,3]', Assertion).
 
 	test(iso_write_term_3_02, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_canonical(S, [1,2,3])},
-		^^text_output_assertion('\'.\'(1,\'.\'(2,\'.\'(3,[])))', Assertion).
+		^^set_text_output(out, ''),
+		{write_canonical(out, [1,2,3])},
+		^^text_output_assertion(out, '\'.\'(1,\'.\'(2,\'.\'(3,[])))', Assertion).
 
 	test(iso_write_term_3_03, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '1<2', [])},
-		^^text_output_assertion('1<2', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '1<2', [])},
+		^^text_output_assertion(out, '1<2', Assertion).
 
 	test(iso_write_term_3_04, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, '1<2')},
-		^^text_output_assertion('\'1<2\'', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, '1<2')},
+		^^text_output_assertion(out, '\'1<2\'', Assertion).
 
 	test(iso_write_term_3_05, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, '$VAR'(0))},
-		^^text_output_assertion('A', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, '$VAR'(0))},
+		^^text_output_assertion(out, 'A', Assertion).
 
 	test(iso_write_term_3_06, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '$VAR'(1), [numbervars(false)])},
-		^^text_output_assertion('$VAR(1)', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '$VAR'(1), [numbervars(false)])},
+		^^text_output_assertion(out, '$VAR(1)', Assertion).
 
 	test(iso_write_term_3_07, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '$VAR'(51), [numbervars(true)])},
-		^^text_output_assertion('Z1', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '$VAR'(51), [numbervars(true)])},
+		^^text_output_assertion(out, 'Z1', Assertion).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
@@ -142,149 +135,126 @@
 		{write(s, a)}.
 
 	test(lgt_write_term_3_25, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, 'A', [quoted(false)])},
-		^^text_output_assertion('A', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, 'A', [quoted(false)])},
+		^^text_output_assertion(out, 'A', Assertion).
 
 	test(lgt_write_term_3_26, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, 'A', [quoted(true)])},
-		^^text_output_assertion('\'A\'', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, 'A', [quoted(true)])},
+		^^text_output_assertion(out, '\'A\'', Assertion).
 
 	test(lgt_write_term_3_27, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, 1+2, [ignore_ops(false)])},
-		^^text_output_assertion('1+2', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, 1+2, [ignore_ops(false)])},
+		^^text_output_assertion(out, '1+2', Assertion).
 
 	test(lgt_write_term_3_28, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, 1+2, [ignore_ops(true)])},
-		^^text_output_assertion('+(1,2)', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, 1+2, [ignore_ops(true)])},
+		^^text_output_assertion(out, '+(1,2)', Assertion).
 
 	test(lgt_write_term_3_29, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '%', [quoted(true)])},
-		^^text_output_assertion('\'%\'', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '%', [quoted(true)])},
+		^^text_output_assertion(out, '\'%\'', Assertion).
 
 	test(lgt_write_term_3_30, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, ' %', [quoted(true)])},
-		^^text_output_assertion('\' %\'', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, ' %', [quoted(true)])},
+		^^text_output_assertion(out, '\' %\'', Assertion).
 
 	test(lgt_write_term_3_31, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '%text', [quoted(true)])},
-		^^text_output_assertion('\'%text\'', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '%text', [quoted(true)])},
+		^^text_output_assertion(out, '\'%text\'', Assertion).
 
 	test(lgt_write_term_3_32, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '/*', [quoted(true)])},
-		^^text_output_assertion('\'/*\'', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '/*', [quoted(true)])},
+		^^text_output_assertion(out, '\'/*\'', Assertion).
 
 	test(lgt_write_term_3_33, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, '/*text', [quoted(true)])},
-		^^text_output_assertion('\'/*text\'', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, '/*text', [quoted(true)])},
+		^^text_output_assertion(out, '\'/*text\'', Assertion).
 
 	test(lgt_write_term_3_34, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C])])},
-		^^text_output_assertion('foo(X,Y,Z)', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C])])},
+		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
 	test(lgt_write_term_3_35, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=A])])},
-		^^text_output_assertion('foo(X,Y,Z)', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=A])])},
+		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
 	test(lgt_write_term_3_36, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=42])])},
-		^^text_output_assertion('foo(X,Y,Z)', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=42])])},
+		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
 	test(lgt_write_term_3_37, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, [(1,2,3)], [])},
-		^^text_output_assertion('[(1,2,3)]', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, [(1,2,3)], [])},
+		^^text_output_assertion(out, '[(1,2,3)]', Assertion).
 
 	test(lgt_write_term_3_38, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_term(S, [a,(1,2,3)], [])},
-		^^text_output_assertion('[a,(1,2,3)]', Assertion).
+		^^set_text_output(out, ''),
+		{write_term(out, [a,(1,2,3)], [])},
+		^^text_output_assertion(out, '[a,(1,2,3)]', Assertion).
 
 	test(lgt_write_term_3_39, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_canonical(S, [(1,2,3)])},
-		^^text_output_assertion('\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
+		^^set_text_output(out, ''),
+		{write_canonical(out, [(1,2,3)])},
+		^^text_output_assertion(out, '\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
 
 	test(lgt_write_term_3_40, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{write_canonical(S, [a,(1,2,3)])},
-		^^text_output_assertion('\'.\'(a,\'.\'(\',\'(1,\',\'(2,3)),[]))', Assertion).
+		^^set_text_output(out, ''),
+		{write_canonical(out, [a,(1,2,3)])},
+		^^text_output_assertion(out, '\'.\'(a,\'.\'(\',\'(1,\',\'(2,3)),[]))', Assertion).
 
 	% [] and {} are atoms that don't require quoting
 
 	test(lgt_write_term_3_41, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, '[]')},
-		^^text_output_assertion('[]', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, '[]')},
+		^^text_output_assertion(out, '[]', Assertion).
 
 	test(lgt_write_term_3_42, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, [])},
-		^^text_output_assertion('[]', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, [])},
+		^^text_output_assertion(out, '[]', Assertion).
 
 	test(lgt_write_term_3_43, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, '{}')},
-		^^text_output_assertion('{}', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, '{}')},
+		^^text_output_assertion(out, '{}', Assertion).
 
 	test(lgt_write_term_3_44, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, {})},
-		^^text_output_assertion('{}', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, {})},
+		^^text_output_assertion(out, '{}', Assertion).
 
 	% quoted writing of escape sequences should preserve them
 
 	test(lgt_write_term_3_45, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, '\n')},
-		^^text_output_assertion('\'\\n\'', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, '\n')},
+		^^text_output_assertion(out, '\'\\n\'', Assertion).
 
 	test(lgt_write_term_3_46, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, '\t')},
-		^^text_output_assertion('\'\\t\'', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, '\t')},
+		^^text_output_assertion(out, '\'\\t\'', Assertion).
 
 	% space before and after an operator must be preserved
 	% when required to parse the term back
 
 	test(lgt_write_term_3_47, true(Assertion)) :-
-		^^set_text_output(''),
-		current_output(S),
-		{writeq(S, a is b)},
-		^^text_output_assertion('a is b', Assertion).
+		^^set_text_output(out, ''),
+		{writeq(out, a is b)},
+		^^text_output_assertion(out, 'a is b', Assertion).
 
 	% check detection of invalid options
 
