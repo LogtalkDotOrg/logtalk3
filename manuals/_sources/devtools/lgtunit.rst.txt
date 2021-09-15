@@ -1188,6 +1188,9 @@ These workarounds may thus allow generating code coverage data also for
 Prolog code by defining tests that use the ``<</2`` debugging control
 construct to call the Prolog predicates.
 
+See also the section below on exporting code coverage results to XML
+files, which can be easily converted and published as e.g. HTML reports.
+
 Automating running tests
 ------------------------
 
@@ -1448,7 +1451,7 @@ version or git commit hash. For example:
 
 ::
 
-   $ logtalk_allure_report -- Backend='GNU Prolog' Version=1.4.5
+   $ logtalk_allure_report -- Backend='GNU Prolog' Version=1.5.0
 
 Or:
 
@@ -1463,7 +1466,7 @@ for those links. This option needs to be used together with the option
 to suppress the tests directory prefix so that the links can be
 constructed by appending the tests file relative path to the base URL.
 For example, assuming that you want to generate a report for the tests
-included in the Logtalk distribution:
+included in the Logtalk distribution when using the GNU Prolog backend:
 
 ::
 
@@ -1474,7 +1477,7 @@ included in the Logtalk distribution:
      -s "$LOGTALKUSER" \
      -u "https://github.com/LogtalkDotOrg/logtalk3/tree/3e4ea295986fb09d0d4aade1f3b4968e29ef594e/"
 
-The use of git hash in the base URL ensures that the generated links
+The use of a git hash in the base URL ensures that the generated links
 will always show the exact versions of the tests that were run. The
 links include the line number for the tests in the tests files (assuming
 that the git repo is stored in a BitBucket, GitHub, or GitLab server).
