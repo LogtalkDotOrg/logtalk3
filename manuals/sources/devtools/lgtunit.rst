@@ -314,6 +314,13 @@ The possible values of the outcome argument are:
    | the test is expected to succeed binding ``Term1`` to a term that is
      a variant of the ``Term2`` term
 
+-  | ``exists(Assertion)``
+   | a solution exists for the test goal that satisfies the
+     ``Assertion`` goal
+
+-  | ``all(Assertion)``
+   | all test goal solutions satisfy the ``Assertion`` goal
+
 -  | ``fail``
    | the test is expected to fail
 

@@ -51,6 +51,12 @@ Library
 * ADDED: New `epsilon/0` edge cases for the `float` and `non_negative_float`
 types to the `arbitrary` library.
 
+Tools
+-----
+
+* ADDED: Support for `exists(Assertion)` and `all(Assertion)` test outcomes to
+the `lgtunit` tool.
+
 Tests
 -----
 

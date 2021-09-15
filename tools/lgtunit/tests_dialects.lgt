@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2021-06-02,
+		date is 2021-09-15,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -132,6 +132,27 @@
 
 	test(test_3_10b, subsumes(a(_), Result), []) :-
 		Result = a(1).
+
+	test(test_3_11a, variant(a(_), Result), [condition(g(a11)), setup(g(b11)), cleanup(g(c11)), note(n11)]) :-
+		check(a11), check(b11),
+		Result = a(_).
+
+	test(test_3_11b, variant(a(_), Result), []) :-
+		Result = a(_).
+
+	test(test_3_12a, exists(integer(N)), [condition(g(a12)), setup(g(b12)), cleanup(g(c12)), note(n12)]) :-
+		check(a12), check(b12),
+		(N = a; N = a(_); N = 42).
+
+	test(test_3_12b, exists(integer(N)), []) :-
+		(N = a; N = a(_); N = 42).
+
+	test(test_3_13a, all(integer(N)), [condition(g(a13)), setup(g(b13)), cleanup(g(c13)), note(n13)]) :-
+		check(a13), check(b13),
+		(N = 13; N = 17; N = 42).
+
+	test(test_3_13b, all(integer(N)), []) :-
+		(N = 13; N = 17; N = 42).
 
 	% flaky tests
 
