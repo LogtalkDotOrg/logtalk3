@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 9, 2021
+; Last updated on September 15, 2021
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 ChangesEnvironment=yes
 ChangesAssociations=yes
-DefaultDirName={pf}\Logtalk
+DefaultDirName={commonpf}\Logtalk
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile={#MyBaseDir}\scripts\windows\LICENSE.rtf
@@ -55,8 +55,6 @@ VersionInfoTextVersion={#MyAppVer}
 
 AllowRootDirectory=yes
 UninstallFilesDir="{userdocs}\Logtalk uninstaller"
-
-MinVersion=0,5.0
 
 [Types]
 Name: "full"; Description: "Full installation"
@@ -116,9 +114,9 @@ Source: "{#MyBaseDir}\tester-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestN
 Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tests-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
-Source: "{#MyBaseDir}\scripts\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn
-Source: "{#MyBaseDir}\tools\diagrams\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn
-Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminLoggedOn
+Source: "{#MyBaseDir}\scripts\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
+Source: "{#MyBaseDir}\tools\diagrams\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
+Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 
 [INI]
 Filename: "{app}\{#MyAppUrlName}"; Section: "InternetShortcut"; Key: "URL"; String: "{#MyAppURL}"; Components: base
@@ -189,35 +187,35 @@ Name: "{userdesktop}\Logtalk user files"; Filename: "{code:GetLgtUserDir}"; Comp
 
 [Registry]
 ; admin users
-Root: HKLM; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".lgt"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".logtalk"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: "LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
-Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminLoggedOn
+Root: HKLM; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".lgt"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKLM; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".logtalk"; Components: base; Flags: deletevalue uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".lgt"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".logtalk"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: IsAdminInstallMode
+Root: HKCR; Subkey: "LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminInstallMode
+Root: HKCR; Subkey: ".md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: IsAdminInstallMode
 ; non-admin users
-Root: HKCU; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".lgt"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".logtalk"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
-Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminLoggedOn
+Root: HKCU; Subkey: "Software\Logtalk"; ValueType: string; ValueName: "Version"; ValueData: "{#MyAppVer}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKHOME"; ValueData: "{app}"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "LOGTALKUSER"; ValueData: "{code:GetLgtUserDir}"; Flags: deletevalue uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".lgt"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\MIME\Database\Content Type\text/x-logtalk"; ValueType: string; ValueName: "Extension"; ValueData: ".logtalk"; Components: base; Flags: deletevalue uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.lgt"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: ""; ValueData: "LogtalkSourceFile"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.logtalk"; ValueType: string; ValueName: "Content Type"; ValueData: "text/x-logtalk"; Components: base; Flags: uninsdeletevalue; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\LogtalkSourceFile"; ValueType: string; ValueName: ""; ValueData: "Logtalk source file"; Components: base; Flags: uninsdeletekey; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: ""; ValueData: "txtfile"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "Content Type"; ValueData: "text/plain"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "SOFTWARE\Classes\.md"; ValueType: string; ValueName: "PerceivedType"; ValueData: "text"; Components: base; Flags: uninsdeletevalue createvalueifdoesntexist; Check: not IsAdminInstallMode
 
 [Run]
 Filename: "{app}\README.md"; Description: "Open the README.md file"; Components: base; Flags: postinstall shellexec skipifsilent
@@ -437,12 +435,12 @@ end;
 
 function QuintusExePath: String;
 begin
-  if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe') then
-    Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe'
-  else if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.4\bin\ix86\qpwin.exe') then
-    Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.4\bin\ix86\qpwin.exe'
-  else if FileExists(ExpandConstant('{pf}') + '\Quintus Prolog 3.3\bin\ix86\qpwin.exe') then
-    Result := ExpandConstant('{pf}') + '\Quintus Prolog 3.3\bin\ix86\qpwin.exe'
+  if FileExists(ExpandConstant('{commonpf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe') then
+    Result := ExpandConstant('{commonpf}') + '\Quintus Prolog 3.5\bin\ix86\qpwin.exe'
+  else if FileExists(ExpandConstant('{commonpf}') + '\Quintus Prolog 3.4\bin\ix86\qpwin.exe') then
+    Result := ExpandConstant('{commonpf}') + '\Quintus Prolog 3.4\bin\ix86\qpwin.exe'
+  else if FileExists(ExpandConstant('{commonpf}') + '\Quintus Prolog 3.3\bin\ix86\qpwin.exe') then
+    Result := ExpandConstant('{commonpf}') + '\Quintus Prolog 3.3\bin\ix86\qpwin.exe'
   else
     Result := 'prolog_compiler_not_installed'
 end;
@@ -783,11 +781,11 @@ begin
   DIR := ExpandConstant('{param:DIR}');
   if DIR <> '' then
     WizardForm.DirEdit.Text := DIR
-  else if IsAdminLoggedOn then
+  else if IsAdminInstallMode then
     if RegQueryStringValue(HKLM, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'LOGTALKHOME', LOGTALKHOME) then
       WizardForm.DirEdit.Text := LOGTALKHOME
     else
-      WizardForm.DirEdit.Text := ExpandConstant('{pf}') + '\Logtalk'
+      WizardForm.DirEdit.Text := ExpandConstant('{commonpf}') + '\Logtalk'
   else if RegQueryStringValue(HKCU, 'Environment', 'LOGTALKHOME', LOGTALKHOME) then
     WizardForm.DirEdit.Text := LOGTALKHOME
   else
@@ -808,7 +806,7 @@ begin
     LgtUserDirPage.Values[0] := LOGTALKUSER
   else 
     LgtUserDirPage.Values[0] := ExpandConstant('{userdocs}') + '\Logtalk';
-  if not IsAdminLoggedOn and RegQueryStringValue(HKLM, 'Software\Logtalk', 'Version', Version) then
+  if not IsAdminInstallMode and RegQueryStringValue(HKLM, 'Software\Logtalk', 'Version', Version) then
   begin
     Warning := 'You are running this installer from a non-administrative account.'
                + Chr(13) + Chr(13)

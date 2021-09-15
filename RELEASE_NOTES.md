@@ -74,6 +74,9 @@ predicates.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The Windows installer script to require Inno Setup 6.0.2 Unicode
+or a later version.
+
 * FIXED: The Windows installer copying of the user settings file from the
 backup folder to the new Logtalk user folder. Thanks to Michael T. Richter
 for the bug report.
