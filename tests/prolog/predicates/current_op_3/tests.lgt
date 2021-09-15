@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-06-24,
+		date is 2021-09-14,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -191,45 +191,85 @@
 		{current_op(P, T, '\\')},
 		P == 200, T == fy.
 
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.1 NOTES
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		succeeds(iso_current_op_3_40) :-
+			^^set_text_output(''),
+			{	op(333, fx, foo),
+				(T = 1; T = 2; T = 3),
+				write(foo(T)), nl,
+				op(0, fx, foo),
+				fail
+			;	true
+			},
+			^^text_output_assertion('foo 1\r\nfoo 2\r\nfoo 3\r\n', Assertion),
+			^^assertion(Assertion).
+
+	:- else.
+
+		succeeds(iso_current_op_3_40) :-
+			^^set_text_output(''),
+			{	op(333, fx, foo),
+				(T = 1; T = 2; T = 3),
+				write(foo(T)), nl,
+				op(0, fx, foo),
+				fail
+			;	true
+			},
+			^^text_output_assertion('foo 1\nfoo 2\nfoo 3\n', Assertion),
+			^^assertion(Assertion).
+
+	:- endif.
+
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(sics_current_op_3_40, error(domain_error(operator_priority,1201),_)) :-
+	throws(sics_current_op_3_41, error(domain_error(operator_priority,1201),_)) :-
 		{current_op(1201, _, _)}.
 
-	throws(sics_current_op_3_41, error(domain_error(operator_specifier,yfy),_)) :-
+	throws(sics_current_op_3_42, error(domain_error(operator_specifier,yfy),_)) :-
 		{current_op(_, yfy, _)}.
 
-	throws(sics_current_op_3_42, [error(type_error(atom,0),_), error(domain_error(operator_specifier,0),_)]) :-
+	throws(sics_current_op_3_43, [error(type_error(atom,0),_), error(domain_error(operator_specifier,0),_)]) :-
 		% the standard specifies a domain_error(operator_specifier,0) for this case
 		% but domain errors imply that the type is correct, which is not the case here
 		{current_op(_, 0, _)}.
 
-	throws(sics_current_op_3_43, error(type_error(atom,5),_)) :-
+	throws(sics_current_op_3_44, error(type_error(atom,5),_)) :-
 		{current_op(_, _, 5)}.
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.14.4.4
 
-	succeeds(iso_current_op_3_44) :-
+	succeeds(iso_current_op_3_45) :-
 		(	{current_op(P, T, '|')} ->
 			P >= 1001, infix(T)
 		;	true
 		).
 
-	succeeds(iso_current_op_3_45) :-
+	succeeds(iso_current_op_3_46) :-
 		{current_op(P, T, div)},
 		P == 400, T == yfx.
 
-	succeeds(iso_current_op_3_46) :-
+	succeeds(iso_current_op_3_47) :-
 		{current_op(P, T, '+')},
 		P == 200, T == fy.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_current_op_3_47) :-
+	succeeds(lgt_current_op_3_48) :-
 		setof(P-T, {current_op(P, T, '-')}, PTs),
 		PTs == [200-fy, 500-yfx].
 
-	throws(lgt_current_op_3_48, [error(type_error(integer,a),_), error(domain_error(operator_priority,a),_)]) :-
+	throws(lgt_current_op_3_49, [error(type_error(integer,a),_), error(domain_error(operator_priority,a),_)]) :-
 		% the standard specifies a domain_error(operator_priority,a) for this case
 		% but domain errors imply that the type is correct, which is not the case here
 		{current_op(a, _, _)}.
