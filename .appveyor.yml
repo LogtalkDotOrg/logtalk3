@@ -10,6 +10,8 @@ branches:
   only:
     - master
 
+image: Visual Studio 2019
+
 install:
   # Add Inno Setup to PATH so the ISCC command is found
   - set PATH="C:\Program Files (x86)\Inno Setup 6";%PATH%
