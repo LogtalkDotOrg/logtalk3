@@ -570,14 +570,14 @@ where <code class="docutils literal notranslate"><span class="pre">Error</span><
 </div>
 </li>
 </ul>
-<p>In the case of the <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>
-outcomes, a message that includes the assertion goal is printed for
-assertion failures and errors to help to debug failed unit tests. Same
-for the <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code> and <code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code>
-assertions. Note that this message is only printed when the test goal
-succeeds as its failure will prevent the assertion goal from being
-called. This allows distinguishing between test goal failure and
-assertion failure.</p>
+<p>In the case of the <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code>, <code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code> outcomes, a message that includes the assertion
+goal is printed for assertion failures and errors to help to debug
+failed unit tests. Same for the <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> assertions. Note that this message is only
+printed when the test goal succeeds as its failure will prevent the
+assertion goal from being called. This allows distinguishing between
+test goal failure and assertion failure.</p>
 <p>Some tests may require individual condition, setup, or cleanup goals. In
 this case, the following alternative test dialect can be used:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>, <span class="nv">Outcome</span>, <span class="nv">Options</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
@@ -632,7 +632,8 @@ some of them with code coverage.</p>
 <p>Additional test dialects can be easily defined by extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object and by term-expanding the new dialect into one of the
 default dialects. As an example, suppose that you want a dialect where
-you can simply write a file with clauses using the format:</p>
+you can simply write a file with tests defined by clauses using the
+format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test_identifier <span class="o">:-</span>
     test_goal.
 </pre></div>
@@ -947,7 +948,8 @@ skipped tests.</p>
 <div class="section" id="checking-test-goal-results">
 <h2>Checking test goal results<a class="headerlink" href="#checking-test-goal-results" title="Permalink to this headline">¶</a></h2>
 <p>Checking test goal results can be performed using the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code>
-dialects <code class="docutils literal notranslate"><span class="pre">true/1</span></code> and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code> assertions. For example:</p>
+supported outcomes such as <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(compare_3_order_less, deterministic(<span class="nv">Order</span> <span class="o">==</span> (<span class="o">&lt;</span>))) <span class="o">:-</span>
     <span class="k">compare</span>(<span class="nv">Order</span>, <span class="m">1</span>, <span class="m">2</span>).
 </pre></div>

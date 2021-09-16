@@ -319,13 +319,13 @@ The possible values of the outcome argument are:
 - `balls(Balls)`  
 	the test is expected to throw an exception term `Ball` where `Ball` is an element of the list `Balls`
 
-In the case of the `true(Assertion)` and `deterministic(Assertion)` outcomes,
-a message that includes the assertion goal is printed for assertion failures
-and errors to help to debug failed unit tests. Same for the
-`subsumes(Expected, Result)` and `variant(Term1, Term2)` assertions. Note that
-this message is only  printed when the test goal succeeds as its failure will
-prevent the assertion goal from being called. This allows distinguishing
-between test goal failure and assertion failure.
+In the case of the `true(Assertion)`, `deterministic(Assertion)`, and
+`all(Assertion)` outcomes, a message that includes the assertion goal is
+printed for assertion failures and errors to help to debug failed unit
+tests. Same for the `subsumes(Expected, Result)` and `variant(Term1, Term2)`
+assertions. Note that this message is only  printed when the test goal
+succeeds as its failure will prevent the assertion goal from being called.
+This allows distinguishing between test goal failure and assertion failure.
 
 Some tests may require individual condition, setup, or cleanup goals. In this
 case, the following alternative test dialect can be used:
@@ -369,7 +369,7 @@ User-defined test dialects
 Additional test dialects can be easily defined by extending the `lgtunit`
 object and by term-expanding the new dialect into one of the default dialects.
 As an example, suppose that you want a dialect where you can simply write a
-file with clauses using the format:
+file with tests defined by clauses using the format:
 
 	test_identifier :-
 		test_goal.
@@ -679,8 +679,8 @@ that in this case there will be no report on the number of skipped tests.
 Checking test goal results
 --------------------------
 
-Checking test goal results can be performed using the `test/2-3` dialects `true/1`
-and `deterministic/1` assertions. For example:
+Checking test goal results can be performed using the `test/2-3` supported
+outcomes such as `true(Assertion)` and `deterministic(Assertion)`. For example:
 
 	test(compare_3_order_less, deterministic(Order == (<))) :-
 		compare(Order, 1, 2).
