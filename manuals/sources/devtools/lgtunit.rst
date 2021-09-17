@@ -1468,6 +1468,21 @@ Or:
 
    $ logtalk_allure_report -- Project='Deep Thought' Commit=`git rev-parse --short HEAD`
 
+To show tests run trends in the report (e.g. when running the tests for
+each application source code commit), save the processed test results
+and the report data to permanent directories. For example:
+
+::
+
+   $ logtalk_allure_report \
+     -i "$HOME/my_project/allure-results" \
+     -o "$HOME/my_project/allure-report"
+   $ allure open "$HOME/my_project/allure-report"
+
+Note that Allure cleans the report directory when generating a new
+report. Be careful to always specify a dedicated directory to prevent
+accidental data loss.
+
 When using the ``xunit_net_v2`` output format, it's possible to generate
 reports with links to the tests source code. This requires using the
 ``logtalk_tester`` shell script option that allows passing the base URL

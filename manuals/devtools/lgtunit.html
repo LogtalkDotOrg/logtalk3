@@ -1576,6 +1576,18 @@ version or git commit hash. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -- Project=&#39;Deep Thought&#39; Commit=`git rev-parse --short HEAD`
 </pre></div>
 </div>
+<p>To show tests run trends in the report (e.g. when running the tests for
+each application source code commit), save the processed test results
+and the report data to permanent directories. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report \
+  -i &quot;$HOME/my_project/allure-results&quot; \
+  -o &quot;$HOME/my_project/allure-report&quot;
+$ allure open &quot;$HOME/my_project/allure-report&quot;
+</pre></div>
+</div>
+<p>Note that Allure cleans the report directory when generating a new
+report. Be careful to always specify a dedicated directory to prevent
+accidental data loss.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">xunit_net_v2</span></code> output format, it’s possible to generate
 reports with links to the tests source code. This requires using the
 <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> shell script option that allows passing the base URL

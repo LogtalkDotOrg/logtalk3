@@ -37,10 +37,11 @@ compiling modules as objects.
 Documentation
 -------------
 
-* IMPROVED: The man page for the `logtalk_allure_report` script with an
-additional example.
+* ADDED: Additional examples to the `logtalk_allure_report` script man page.
 
-* UPDATED: The `lgtunit` tool documentation on Allure report limitations.
+* IMPROVED: The `logtalk_allure_report` script man page.
+
+* IMPROVED: The `lgtunit` tool documentation on generating Allure reports.
 
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.

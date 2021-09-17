@@ -65,6 +65,14 @@ Run all tests on the current directory and sub-directories using the GNU Prolog 
 .TP
 Set the title for the report and information on the backend used:
 \fBlogtalk_allure_report -t "My application tests report" -- Backend='GNU Prolog' Commit=f7a106e\fR
+.br
+\fBallure open\fR
+.PP
+.TP
+Save the processed test results and the report data to permanent directories so that the report shows tests run trends:
+\fBlogtalk_allure_report -i "$HOME/my_project/allure-results" -o "$HOME/my_project/allure_report"\fR
+.br
+\fBallure open "$HOME/my_project/allure_report"\fR
 
 .SH IMPLEMENTATION NOTES
 Tested using Allure 2.13.8.
