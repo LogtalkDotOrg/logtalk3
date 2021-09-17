@@ -1,4 +1,4 @@
-.TH logtalk_allure_report 1 "September 10, 2021" "Logtalk 3.51.0" "Logtalk Documentation"
+.TH logtalk_allure_report 1 "September 17, 2021" "Logtalk 3.51.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_allure_report \- Logtalk script for generating Allure reports
@@ -31,7 +31,7 @@ The directory containing the tests (i.e. the directory where the \fIlogtalk_test
 Directory where to collect the test results (i.e. the xUnit reports) for generating the report (default is \fI./allure-results\fR).
 .TP
 .BI \-o
-Directory where the report is to be saved (default is \fI./allure-report\fR).
+Directory where the report is to be saved (default is \fI./allure-report\fR). If the directory already exists and contains a previous report, its contents are deleted before generating the new report. If the directory exists, is not empty, and does not appear to contain a previous report, the script execution is terminated to prevent data loss.
 .TP
 .BI \-t
 Report title (default is "Allure Report"; this option is ignored when using the \fI-p\fR option).
@@ -49,6 +49,9 @@ Provide help on script usage.
 .TP
 .B 0
 Allure report successfully created.
+.TP
+.B 1
+Either the results directory does not exist or the report directory exists but it is not empty and does not contain a previous report.
 
 .SH EXAMPLES
 .TP

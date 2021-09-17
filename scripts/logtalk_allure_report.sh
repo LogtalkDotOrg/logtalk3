@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on January 20, 2021
+##   Last updated on September 17, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.8"
+	echo "$(basename "$0") 0.9"
 	exit 0
 }
 
@@ -102,6 +102,18 @@ fi
 
 if [ "$p_arg" != "" ] ; then
 	preprocess_only="true"
+fi
+
+if [ -d "$report" ] && [ -n "$(ls -A "$report")" ] ; then
+	if  [ -d "$report/data" ] && [ -d "$report/export" ] && [ -d "$report/history" ] &&
+		[ -d "$report/plugins" ] && [ -d "$report/widgets" ] && [ -e "$report/app.js" ] &&
+		[ -e "$report/favicon.ico" ] && [ -e "$report/index.html" ] && [ -e "$report/styles.css" ] ; then
+		echo "Warning: Overriding previous report..."
+	else
+		echo "Error! Specified report directory is not empty and does not contain a previous"
+		echo "       report. Terminating the script execution to prevent any data loss."
+		exit 1
+	fi
 fi
 
 # move all xunit_report.xml files found in the current directory

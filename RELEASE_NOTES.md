@@ -57,6 +57,10 @@ Tools
 * ADDED: Support for `exists(Assertion)` and `all(Assertion)` test outcomes to
 the `lgtunit` tool.
 
+* IMPROVED: The `logtalk_allure_report` script to try to prevent data loss
+when the specified report directory exists, is not empty, and does not contain
+a previous report.
+
 Tests
 -----
 
