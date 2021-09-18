@@ -37,6 +37,8 @@ compiling modules as objects.
 Documentation
 -------------
 
+* ADDED: `CITATION.cff` file.
+
 * ADDED: Additional examples to the `logtalk_allure_report` script man page.
 
 * IMPROVED: The `logtalk_allure_report` script man page.
