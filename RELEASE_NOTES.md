@@ -39,7 +39,8 @@ Documentation
 
 * ADDED: `CITATION.cff` file.
 
-* ADDED: Additional examples to the `logtalk_allure_report` script man page.
+* ADDED: Additional examples to the `logtalk_allure_report` and
+`logtalk_tester` script man pages.
 
 * IMPROVED: The `logtalk_allure_report` script man page.
 
