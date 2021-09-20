@@ -36,9 +36,9 @@ bar(_X) :- true.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2020-09-17,
+		date is 2020-09-20,
 		comment is 'Unit tests for the ISO Prolog standard abolish/1 built-in predicate.'
 	]).
 
@@ -79,7 +79,7 @@ bar(_X) :- true.
 		{abolish(foo/(-1))}.
 
 	:- if(current_prolog_flag(max_arity, unbounded)).
-		test(eddbali_abolish_1_11, true).
+		test(eddbali_abolish_1_11).
 	:- else.
 		test(eddbali_abolish_1_11, error(representation_error(max_arity))) :-
 			current_prolog_flag(max_arity, MaxArity),
