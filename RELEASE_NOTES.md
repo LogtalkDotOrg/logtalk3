@@ -76,6 +76,12 @@ of all the test specifications when expanding objects. This avoids potential
 Prolog backend parsing issues when an object defines a large number of tests
 and results in more compact code.
 
+Examples
+--------
+
+* IMPROVED: Avoid printing expected warnings when running the
+`lambdas_compiled` example tests.
+
 Tests
 -----
 
