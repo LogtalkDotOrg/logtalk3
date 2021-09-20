@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 1.7.0 and later versions
-%  Last updated on August 31, 2021
+%  Adapter file for LVM 1.10.0 and later versions
+%  Last updated on September 20, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -106,10 +106,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% setup_call_cleanup(+callable, +callable, +callable) -- not supported
-
-setup_call_cleanup(_, _, _) :-
-	throw(not_supported(setup_call_cleanup/3)).
+% setup_call_cleanup(+callable, +callable, +callable) -- built-in
 
 
 
@@ -232,7 +229,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 7, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 10, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).

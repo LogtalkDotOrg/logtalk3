@@ -28,6 +28,9 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The LVM adapter file to require version 1.10.0 and allow the
+`setup_call_cleanup/3` predicate to be seen as a built-in predicate.
+
 * FIXED: The ECLiPSe adapter file to allow the `setup_call_cleanup/3` predicate
 to be seen as a built-in predicate for 7.0#24 and later versions.
 
