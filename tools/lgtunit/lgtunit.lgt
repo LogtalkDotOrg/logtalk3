@@ -614,6 +614,13 @@
 		argnames is ['Position']
 	]).
 
+	:- protected(test/2).
+	:- mode(test(?callable, ?compound), zero_or_more).
+	:- info(test/2, [
+		comment is 'Table of defined tests.',
+		argnames is ['Identifier', 'Test']
+	]).
+
 	:- private(running_test_sets_/0).
 	:- dynamic(running_test_sets_/0).
 	:- mode(running_test_sets_, zero_or_one).
@@ -641,7 +648,7 @@
 	:- dynamic(test_/2).
 	:- mode(test_(?callable, ?compound), zero_or_more).
 	:- info(test_/2, [
-		comment is 'Table of defined tests.',
+		comment is 'Table of compiled tests.',
 		argnames is ['Identifier', 'Test']
 	]).
 
@@ -806,7 +813,7 @@
 
 	run_test(Test) :-
 		self(Object),
-		::test_(Test, Spec),
+		::test(Test, Spec),
 		object_property(Object, file(File)),
 		run_test(Spec, File).
 
@@ -841,7 +848,7 @@
 		).
 
 	run_tests(File) :-
-		forall(::test_(_, Spec), run_test(Spec, File)).
+		forall(::test(_, Spec), run_test(Spec, File)).
 
 	:- meta_predicate(run_test((::), (*), (*))).
 
@@ -1356,7 +1363,7 @@
 		findall(1, test_(_, _), Ones),
 		length(Ones, Total),
 		logtalk_load_context(source, File),
-		findall(test_(Test, Spec), test_(Test, Spec), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(File)), (:- end_object)]).
+		findall(test(Test, Spec), test_(Test, Spec), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(File)), (:- end_object)]).
 
 	filter_discontiguous_directive(PIs, Filtered) :-
 		flatten_to_list(PIs, List),
@@ -1587,7 +1594,7 @@
 	number_of_tests(0).
 
 	test(Identifier) :-
-		::test_(Identifier, _).
+		::test(Identifier, _).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
