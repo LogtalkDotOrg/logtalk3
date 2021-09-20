@@ -71,6 +71,11 @@ the `lgtunit` tool.
 when the specified report directory exists, is not empty, and does not contain
 a previous report.
 
+* IMPROVED: The `lgtunit` tool no longer generates code that includes a list
+of all the test specifications when expanding objects. This avoids potential
+Prolog backend parsing issues when an object defines a large number of tests
+and results in more compact code.
+
 Tests
 -----
 

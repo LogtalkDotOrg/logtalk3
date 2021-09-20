@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "September 18, 2021" "Logtalk 3.51.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "September 20, 2021" "Logtalk 3.51.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -127,7 +127,7 @@ Run all tests on the current directory and sub-directories using the Tau Prolog 
 .PP
 .TP
 Run the Logtalk distribution tests using the Trealla Prolog backend, passing a base URL that can be used for creating links to the test files:
-\fBlogtalk_tester -p trealla -f xunit_net_v2 -s $HOME/logtalk/ -u https://github.com/LogtalkDotOrg/logtalk3/tree/master/\fR
+\fBlogtalk_tester -p trealla -f xunit_net_v2 -s "$HOME/logtalk/" -u https://github.com/LogtalkDotOrg/logtalk3/tree/master/\fR
 .PP
 .TP
 Run all tests on the current directory and sub-directories using the YAP backend with its disable signal handling option:

@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 10:1:0
-| **Date:** 2021-09-15
+| **Version:** 10:2:0
+| **Date:** 2021-09-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -666,12 +666,12 @@ Runs all defined unit tests.
 
 .. raw:: html
 
-   <div id="run_tests/2"> </div>
+   <div id="run_tests/1"> </div>
 
-.. index:: run_tests/2
-.. _lgtunit/0::run_tests/2:
+.. index:: run_tests/1
+.. _lgtunit/0::run_tests/1:
 
-``run_tests/2``
+``run_tests/1``
 ^^^^^^^^^^^^^^^
 
 Runs a list of defined tests.
@@ -680,9 +680,9 @@ Runs a list of defined tests.
 |    ``static``
 
 | **Template:**
-|    ``run_tests(Tests,File)``
+|    ``run_tests(File)``
 | **Mode and number of proofs:**
-|    ``run_tests(++list(callable),+atom)`` - ``one``
+|    ``run_tests(+atom)`` - ``one``
 
 
 ------------

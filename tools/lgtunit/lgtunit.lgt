@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 10:1:0,
+		version is 10:2:0,
 		author is 'Paulo Moura',
-		date is 2021-09-15,
+		date is 2021-09-20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -241,11 +241,11 @@
 		comment is 'Runs all defined unit tests.'
 	]).
 
-	:- protected(run_tests/2).
-	:- mode(run_tests(++list(callable), +atom), one).
-	:- info(run_tests/2, [
+	:- protected(run_tests/1).
+	:- mode(run_tests(+atom), one).
+	:- info(run_tests/1, [
 		comment is 'Runs a list of defined tests.',
-		argnames is ['Tests', 'File']
+		argnames is ['File']
 	]).
 
 	:- protected(run_test_set/0).
@@ -808,6 +808,9 @@
 		self(Object),
 		::test_(Test, Spec),
 		object_property(Object, file(File)),
+		run_test(Spec, File).
+
+	run_test(Spec, File) :-
 		% save the current input and output streams
 		current_input(Input), current_output(Output),
 		run_test(Spec, File, Output),
@@ -837,19 +840,8 @@
 		;	failed_step(cleanup)
 		).
 
-	run_tests([], _).
-	run_tests([Test| Tests], File) :-
-		% save the current input and output streams
-		current_input(Input), current_output(Output),
-		run_test(Test, File, Output),
-		% restore the current input and output streams
-		set_input(Input), set_output(Output),
-		run_tests(Tests, File).
-
-	% by default, no tests are defined:
-	run_tests :-
-		run_tests([], _).
-
+	run_tests(File) :-
+		forall(::test_(_, Spec), run_test(Spec, File)).
 
 	:- meta_predicate(run_test((::), (*), (*))).
 
@@ -1361,10 +1353,10 @@
 
 	% collect all unit test identifiers when reaching the end_object/0 directive
 	directive_expansion(end_object, Terms) :-
-		findall(test_(Identifier, Test), test_(Identifier, Test), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(Tests, File)), (:- end_object)]),
-		findall(Test, retract(test_(_, Test)), Tests),
-		length(Tests, Total),
-		logtalk_load_context(source, File).
+		findall(1, test_(_, _), Ones),
+		length(Ones, Total),
+		logtalk_load_context(source, File),
+		findall(test_(Test, Spec), test_(Test, Spec), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(File)), (:- end_object)]).
 
 	filter_discontiguous_directive(PIs, Filtered) :-
 		flatten_to_list(PIs, List),
