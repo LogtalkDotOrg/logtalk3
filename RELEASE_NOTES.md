@@ -61,6 +61,8 @@ Library
 * ADDED: New `epsilon/0` edge cases for the `float` and `non_negative_float`
 types to the `arbitrary` library.
 
+* ADDED: Additional tests for the `os::absolute_file_name/2` predicate.
+
 Tools
 -----
 

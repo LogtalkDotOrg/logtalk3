@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2021-08-27,
+		date is 2021-09-20,
 		comment is 'Unit tests for the "os" object.'
 	]).
 
@@ -353,6 +353,20 @@
 		os::change_directory(Directory),
 		os::absolute_file_name(File, ExpandedFile),
 		ExpandedFile == Path.
+
+	test(os_absolute_file_name_2_02) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, '..', Path),
+		os::absolute_file_name(Path, ExpandedPath),
+		\+ sub_atom(ExpandedPath, _, _, 0, '..').
+
+	test(os_absolute_file_name_2_03) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		atom_concat(Directory, '.', Path),
+		os::absolute_file_name(Path, ExpandedPath),
+		\+ sub_atom(ExpandedPath, _, _, 0, '.').
 
 	test(os_temporary_directory_1_01) :-
 		os::temporary_directory(Directory),
