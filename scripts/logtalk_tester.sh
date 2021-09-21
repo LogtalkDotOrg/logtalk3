@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on August 17, 2021
+##   Last updated on September 21, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 7.0"
+	echo "$(basename "$0") 8.0"
 	exit 0
 }
 
@@ -254,14 +254,22 @@ ensure_format_report() {
 		run_time=$(date +"%H:%M:%S")
 		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > "$directory/xunit_report.xml"
 		echo "<assemblies>" >> "$directory/xunit_report.xml"
-		echo "<assembly name=\"$short/\" config-file=\"$short/tests.lgt\" test-framework=\"lgtunit\" run-date=\"$run_date\" run-time=\"$run_time\" time=\"0\" total=\"0\" errors=\"1\" failures=\"0\" skipped=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<assembly name=\"$short/\" config-file=\"$short/tests.lgt\" test-framework=\"lgtunit\" run-date=\"$run_date\" run-time=\"$run_time\" time=\"0\" total=\"0\" errors=\"1\" failures=\"1\" skipped=\"0\">" >> "$directory/xunit_report.xml"
 		echo "<errors>" >> "$directory/xunit_report.xml"
 		echo "<error type=\"$error\" name=\"$error\">" >> "$directory/xunit_report.xml"
 		echo "<failure exception-type=\"$error\">" >> "$directory/xunit_report.xml"
-		echo "<message><![CDATA[$error $name]]></message>" >> "$directory/xunit_report.xml"
+		echo "<message><![CDATA[$error]]></message>" >> "$directory/xunit_report.xml"
 		echo "</failure>" >> "$directory/xunit_report.xml"
 		echo "</error>" >> "$directory/xunit_report.xml"
 		echo "</errors>" >> "$directory/xunit_report.xml"
+		# hack for Allure ignoring the "errors" tag
+		echo "<collection failed=\"1\">" >> "$directory/xunit_report.xml"
+		echo "<test name=\"$name\" type=\"$name\" method=\"$name\" time=\"0\" result=\"Fail\">" >> "$directory/xunit_report.xml"
+		echo "<failure exception-type=\"$error\">" >> "$directory/xunit_report.xml"
+		echo "<message><![CDATA[$error]]></message>" >> "$directory/xunit_report.xml"
+		echo "</failure>" >> "$directory/xunit_report.xml"
+		echo "</test>" >> "$directory/xunit_report.xml"
+		echo "</collection>" >> "$directory/xunit_report.xml"
 		echo "</assembly>" >> "$directory/xunit_report.xml"
 		echo "</assemblies>" >> "$directory/xunit_report.xml"
 	elif [ "$format" == "tap" ] ; then

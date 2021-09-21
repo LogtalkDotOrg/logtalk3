@@ -78,6 +78,9 @@ of all the test specifications when expanding objects. This avoids potential
 Prolog backend parsing issues when an object defines a large number of tests
 and results in more compact code.
 
+* FIXED: Workaround Allure ignoring the `errors` tag in xUnit.net v2 XML files
+so that crashed and broken test sets are listed in the reports.
+
 Examples
 --------
 
