@@ -84,6 +84,10 @@ so that crashed and broken test sets are listed in the reports.
 Examples
 --------
 
+* CHANGED: The `bench` example `chat_parser` benchmark to use a unrolled
+`forall/2` loop instead of the original failure-driven loop so that any
+unexpected failure will make the benchmark fail.
+
 * IMPROVED: Avoid printing expected warnings when running the
 `lambdas_compiled` example tests.
 
