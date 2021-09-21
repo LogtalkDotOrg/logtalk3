@@ -23,10 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2021-09-20,
-		comment is 'Unit tests for the "os" object.'
+		date is 2021-09-21,
+		comment is 'Unit tests for the "os" library.'
 	]).
 
 	cover(os).
@@ -208,7 +208,7 @@
 	test(os_delete_file_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, test_file, TestFile),
+		os::path_concat(Directory, test_file, TestFile),
 		open(TestFile, write, Stream),
 		close(Stream),
 		os::file_exists(TestFile),
@@ -220,10 +220,10 @@
 	test(os_rename_file_2_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, test_file_1, TestFile1),
+		os::path_concat(Directory, test_file_1, TestFile1),
 		open(TestFile1, write, Stream),
 		close(Stream),
-		atom_concat(Directory, test_file_2, TestFile2),
+		os::path_concat(Directory, test_file_2, TestFile2),
 		os::rename_file(TestFile1, TestFile2),
 		\+ os::file_exists(TestFile1),
 		os::file_exists(TestFile2),
@@ -240,14 +240,14 @@
 	test(os_ensure_file_1_02) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, ensure_file1, EnsureFile1),
+		os::path_concat(Directory, ensure_file1, EnsureFile1),
 		os::ensure_file(EnsureFile1),
 		os::file_exists(EnsureFile1).
 
 	test(os_ensure_file_1_03) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, '1/2/ensure_file2', EnsureFile2),
+		os::path_concat(Directory, '1/2/ensure_file2', EnsureFile2),
 		os::ensure_file(EnsureFile2),
 		os::file_exists(EnsureFile2).
 
@@ -262,7 +262,7 @@
 	test(os_make_directory_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::path_concat(Directory, test_sub_directory, SubDirectory),
 		os::make_directory(SubDirectory),
 		os::directory_exists(SubDirectory).
 
@@ -270,28 +270,28 @@
 	test(os_make_directory_1_02) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::path_concat(Directory, test_sub_directory, SubDirectory),
 		os::make_directory(SubDirectory),
 		os::directory_exists(SubDirectory).
 
 	test(os_make_directory_path_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory),
+		os::path_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory),
 		os::make_directory_path(SubDirectory),
 		os::directory_exists(SubDirectory).
 
 	test(os_make_directory_path_1_02) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory),
+		os::path_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory),
 		os::make_directory_path(SubDirectory),
 		os::directory_exists(SubDirectory).
 
 	test(os_delete_directory_1_01) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::path_concat(Directory, test_sub_directory, SubDirectory),
 		os::make_directory(SubDirectory),
 		os::delete_directory(SubDirectory),
 		\+ os::directory_exists(SubDirectory).
@@ -325,14 +325,14 @@
 	test(os_ensure_directory_1_02) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, ensure_directory1, EnsureDirectory1),
+		os::path_concat(Directory, ensure_directory1, EnsureDirectory1),
 		os::ensure_directory(EnsureDirectory1),
 		os::directory_exists(EnsureDirectory1).
 
 	test(os_ensure_directory_1_03) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, 'a/b/ensure_directory2', EnsureDirectory2),
+		os::path_concat(Directory, 'a/b/ensure_directory2', EnsureDirectory2),
 		os::ensure_directory(EnsureDirectory2),
 		os::directory_exists(EnsureDirectory2).
 
@@ -349,7 +349,7 @@
 	test(os_absolute_file_name_2_01) :-
 		this(This),
 		object_property(This, file(File,Directory)),
-		atom_concat(Directory, File, Path),
+		os::path_concat(Directory, File, Path),
 		os::change_directory(Directory),
 		os::absolute_file_name(File, ExpandedFile),
 		ExpandedFile == Path.
@@ -357,14 +357,14 @@
 	test(os_absolute_file_name_2_02) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, '..', Path),
+		os::path_concat(Directory, '..', Path),
 		os::absolute_file_name(Path, ExpandedPath),
 		\+ sub_atom(ExpandedPath, _, _, 0, '..').
 
 	test(os_absolute_file_name_2_03) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, '.', Path),
+		os::path_concat(Directory, '.', Path),
 		os::absolute_file_name(Path, ExpandedPath),
 		\+ sub_atom(ExpandedPath, _, _, 0, '.').
 
@@ -581,35 +581,35 @@
 	cleanup :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		atom_concat(Directory, ensure_file1, EnsureFile1),
+		os::path_concat(Directory, ensure_file1, EnsureFile1),
 		catch(ignore(os::delete_file(EnsureFile1)), _, true),
-		atom_concat(Directory, '1/2/ensure_file2', OneTwoEnsureFile2),
+		os::path_concat(Directory, '1/2/ensure_file2', OneTwoEnsureFile2),
 		catch(ignore(os::delete_file(OneTwoEnsureFile2)), _, true),
-		atom_concat(Directory, '1/2', TwoEnsureFile2),
+		os::path_concat(Directory, '1/2', TwoEnsureFile2),
 		catch(ignore(os::delete_file(TwoEnsureFile2)), _, true),
-		atom_concat(Directory, '1', OneEnsureFile2),
+		os::path_concat(Directory, '1', OneEnsureFile2),
 		catch(ignore(os::delete_file(OneEnsureFile2)), _, true),
-		atom_concat(Directory, test_file, TestFile),
+		os::path_concat(Directory, test_file, TestFile),
 		catch(ignore(os::delete_file(TestFile)), _, true),
-		atom_concat(Directory, test_file_1, TestFile1),
+		os::path_concat(Directory, test_file_1, TestFile1),
 		catch(ignore(os::delete_file(TestFile1)), _, true),
-		atom_concat(Directory, test_file_2, TestFile2),
+		os::path_concat(Directory, test_file_2, TestFile2),
 		catch(ignore(os::delete_file(TestFile2)), _, true),
-		atom_concat(Directory, test_sub_directory, SubDirectory),
+		os::path_concat(Directory, test_sub_directory, SubDirectory),
 		catch(ignore(os::delete_directory(SubDirectory)), _, true),
-		atom_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory3),
+		os::path_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory3),
 		catch(ignore(os::delete_directory(SubDirectory3)), _, true),
-		atom_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory2),
+		os::path_concat(Directory, 'sub_directory1/sub_directory2', SubDirectory2),
 		catch(ignore(os::delete_directory(SubDirectory2)), _, true),
-		atom_concat(Directory, 'sub_directory1', SubDirectory1),
+		os::path_concat(Directory, 'sub_directory1', SubDirectory1),
 		catch(ignore(os::delete_directory(SubDirectory1)), _, true),
-		atom_concat(Directory, 'ensure_directory1', EnsureDirectory1),
+		os::path_concat(Directory, 'ensure_directory1', EnsureDirectory1),
 		catch(ignore(os::delete_directory(EnsureDirectory1)), _, true),
-		atom_concat(Directory, 'a/b/ensure_directory2', ABEnsureDirectory2),
+		os::path_concat(Directory, 'a/b/ensure_directory2', ABEnsureDirectory2),
 		catch(ignore(os::delete_directory(ABEnsureDirectory2)), _, true),
-		atom_concat(Directory, 'a/b', BEnsureDirectory2),
+		os::path_concat(Directory, 'a/b', BEnsureDirectory2),
 		catch(ignore(os::delete_directory(BEnsureDirectory2)), _, true),
-		atom_concat(Directory, 'a', AEnsureDirectory2),
+		os::path_concat(Directory, 'a', AEnsureDirectory2),
 		catch(ignore(os::delete_directory(AEnsureDirectory2)), _, true).
 
 :- end_object.
