@@ -1,45 +1,21 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Event-driven programming &mdash; The Logtalk Handbook v3.51.0-b01 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -57,36 +33,17 @@
    
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
-          
-
-          
-            
             <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 3.51.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -94,19 +51,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
@@ -162,82 +108,40 @@
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
-            
-          
-	<p class="caption"><span class="caption-text">External Contents</span></p>
-    <a href="../docs/index.html">APIs</a>
-    <a href="https://logtalk.org">Logtalk website</a>
-    <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a href="../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
   
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">The Logtalk Handbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">User Manual</a> &raquo;</li>
-        
       <li>Event-driven programming</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/events.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="event-driven-programming">
-<span id="events-events"></span><h1>Event-driven programming<a class="headerlink" href="#event-driven-programming" title="Permalink to this headline">¶</a></h1>
+<span id="events-events"></span><h1>Event-driven programming<a class="headerlink" href="#event-driven-programming" title="Permalink to this headline"></a></h1>
 <p>The addition of event-driven programming capacities to the Logtalk
 language <a class="reference internal" href="../bibliography.html#moura94" id="id1"><span>[Moura94]</span></a> is based on a simple but powerful idea:</p>
 <blockquote>
@@ -267,12 +171,12 @@ acting as method monitors.</p></li>
 role of events.</p></li>
 </ul>
 <div class="section" id="definitions">
-<span id="events-definitions"></span><h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
+<span id="events-definitions"></span><h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline"></a></h2>
 <p>The words <em>event</em> and <em>monitor</em> have multiple meanings in computer
 science. To avoid misunderstandings, we start by defining them in
 the Logtalk context.</p>
 <div class="section" id="event">
-<span id="events-event"></span><h3>Event<a class="headerlink" href="#event" title="Permalink to this headline">¶</a></h3>
+<span id="events-event"></span><h3>Event<a class="headerlink" href="#event" title="Permalink to this headline"></a></h3>
 <p>In an object-oriented system, all computations start through message
 sending. It thus becomes quite natural to declare that the only event
 that can occur in this kind of system is precisely the sending of a
@@ -304,7 +208,7 @@ possibility of modeling the largest number of situations.</p>
 </dl>
 </div>
 <div class="section" id="monitor">
-<span id="events-monitor"></span><h3>Monitor<a class="headerlink" href="#monitor" title="Permalink to this headline">¶</a></h3>
+<span id="events-monitor"></span><h3>Monitor<a class="headerlink" href="#monitor" title="Permalink to this headline"></a></h3>
 <p>Complementary to the notion of event is the notion of monitor. A monitor
 is an object that is automatically notified by the message sending
 mechanism whenever a registered event occurs. Any object that defines
@@ -334,7 +238,7 @@ bound by the calls to the monitor event handlers.</p>
 </div>
 </div>
 <div class="section" id="event-generation">
-<span id="events-generation"></span><h2>Event generation<a class="headerlink" href="#event-generation" title="Permalink to this headline">¶</a></h2>
+<span id="events-generation"></span><h2>Event generation<a class="headerlink" href="#event-generation" title="Permalink to this headline"></a></h2>
 <p>Assuming that the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
 the object (or category) sending the messages we want to observe, for each
 message that is sent using the <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control
@@ -347,7 +251,7 @@ construct) or <em>super</em> calls (using the <a class="reference internal" href
 construct) don’t generate events.</p>
 </div>
 <div class="section" id="communicating-events-to-monitors">
-<span id="events-communicating"></span><h2>Communicating events to monitors<a class="headerlink" href="#communicating-events-to-monitors" title="Permalink to this headline">¶</a></h2>
+<span id="events-communicating"></span><h2>Communicating events to monitors<a class="headerlink" href="#communicating-events-to-monitors" title="Permalink to this headline"></a></h2>
 <p>Whenever a spied event occurs, the message sending mechanism calls the
 corresponding event handlers directly for all registered monitors. These
 calls are internally made bypassing the message sending primitives in order
@@ -356,7 +260,7 @@ definitions for the public predicates declared in the built-in
 <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">monitoring</span></a> protocol (see below for more details).</p>
 </div>
 <div class="section" id="performance-concerns">
-<span id="events-performance"></span><h2>Performance concerns<a class="headerlink" href="#performance-concerns" title="Permalink to this headline">¶</a></h2>
+<span id="events-performance"></span><h2>Performance concerns<a class="headerlink" href="#performance-concerns" title="Permalink to this headline"></a></h2>
 <p>Ideally, the existence of monitored messages should not affect the
 processing of the remaining messages. On the other hand, for each
 message that has been sent, the system must verify if its respective
@@ -372,7 +276,7 @@ calls that skips the checking of monitored events, resulting in a small
 but measurable performance improvement.</p>
 </div>
 <div class="section" id="monitor-semantics">
-<span id="events-semantics"></span><h2>Monitor semantics<a class="headerlink" href="#monitor-semantics" title="Permalink to this headline">¶</a></h2>
+<span id="events-semantics"></span><h2>Monitor semantics<a class="headerlink" href="#monitor-semantics" title="Permalink to this headline"></a></h2>
 <p>The established semantics for monitors actions consists on considering
 its success as a necessary condition so that a message can succeed:</p>
 <ul class="simple">
@@ -390,7 +294,7 @@ monitor actions in such a way that they never fail (which is very simple
 to accomplish).</p>
 </div>
 <div class="section" id="activation-order-of-monitors">
-<span id="events-order"></span><h2>Activation order of monitors<a class="headerlink" href="#activation-order-of-monitors" title="Permalink to this headline">¶</a></h2>
+<span id="events-order"></span><h2>Activation order of monitors<a class="headerlink" href="#activation-order-of-monitors" title="Permalink to this headline"></a></h2>
 <p>Ideally, whenever there are several monitors defined for the same event,
 the calling order should not interfere with the result. However, this is
 not always possible. In the case of an event of type <code class="docutils literal notranslate"><span class="pre">before</span></code>, the
@@ -409,14 +313,14 @@ monitors, it does not make sense that a failure forces backtracking over
 the actions previously executed.</p>
 </div>
 <div class="section" id="event-handling">
-<span id="events-handling"></span><h2>Event handling<a class="headerlink" href="#event-handling" title="Permalink to this headline">¶</a></h2>
+<span id="events-handling"></span><h2>Event handling<a class="headerlink" href="#event-handling" title="Permalink to this headline"></a></h2>
 <p>Logtalk provides three built-in predicates for event handling. These
 predicates support defining, enumerating, and abolishing events.
 Applications that use events extensively usually define a set of objects
 that use these built-in predicates to implement more sophisticated and
 higher-level behavior.</p>
 <div class="section" id="defining-new-events">
-<span id="events-defining"></span><h3>Defining new events<a class="headerlink" href="#defining-new-events" title="Permalink to this headline">¶</a></h3>
+<span id="events-defining"></span><h3>Defining new events<a class="headerlink" href="#defining-new-events" title="Permalink to this headline"></a></h3>
 <p>New events can be defined using the <a class="reference internal" href="../refman/predicates/define_events_5.html#predicates-define-events-5"><span class="std std-ref">define_events/5</span></a>
 built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- define_events(Event, Object, Message, Sender, Monitor).
@@ -427,7 +331,7 @@ built-in predicate:</p>
 call will define a <strong>set</strong> of matching events.</p>
 </div>
 <div class="section" id="abolishing-defined-events">
-<span id="events-abolishing"></span><h3>Abolishing defined events<a class="headerlink" href="#abolishing-defined-events" title="Permalink to this headline">¶</a></h3>
+<span id="events-abolishing"></span><h3>Abolishing defined events<a class="headerlink" href="#abolishing-defined-events" title="Permalink to this headline"></a></h3>
 <p>Events that are no longer needed may be abolished using the
 <a class="reference internal" href="../refman/predicates/abolish_events_5.html#predicates-abolish-events-5"><span class="std std-ref">abolish_events/5</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- abolish_events(Event, Object, Message, Sender, Monitor).
@@ -437,7 +341,7 @@ call will define a <strong>set</strong> of matching events.</p>
 events.</p>
 </div>
 <div class="section" id="finding-defined-events">
-<span id="events-finding"></span><h3>Finding defined events<a class="headerlink" href="#finding-defined-events" title="Permalink to this headline">¶</a></h3>
+<span id="events-finding"></span><h3>Finding defined events<a class="headerlink" href="#finding-defined-events" title="Permalink to this headline"></a></h3>
 <p>The events that are currently defined can be retrieved using the
 <a class="reference internal" href="../refman/predicates/current_event_5.html#predicates-current-event-5"><span class="std std-ref">current_event/5</span></a> built-in predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- current_event(Event, Object, Message, Sender, Monitor).
@@ -447,7 +351,7 @@ events.</p>
 of the returned arguments are free variables or contain free variables.</p>
 </div>
 <div class="section" id="defining-event-handlers">
-<span id="events-handlers"></span><h3>Defining event handlers<a class="headerlink" href="#defining-event-handlers" title="Permalink to this headline">¶</a></h3>
+<span id="events-handlers"></span><h3>Defining event handlers<a class="headerlink" href="#defining-event-handlers" title="Permalink to this headline"></a></h3>
 <p>The <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">monitoring</span></a> built-in protocol declares two
 public predicates, <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, that
 are automatically called to handle <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> events. Any
@@ -538,50 +442,33 @@ may be restricted in order to prevent other objects from calling them.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="threads.html" class="btn btn-neutral float-right" title="Multi-threading programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="inheritance.html" class="btn btn-neutral float-left" title="Inheritance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="threads.html" class="btn btn-neutral float-right" title="Multi-threading programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 1998-2021, Paulo Moura.
-
-    </p>
+    <p>&#169; Copyright 1998-2021, Paulo Moura.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -44,3 +44,9 @@ The required Python packages can be installed using the commands:
 	$ sudo pip install --upgrade pygments
 	$ sudo pip install --upgrade sphinx
 	$ sudo pip install --upgrade sphinx_rtd_theme
+
+Required versions are:
+
+- Sphinx 4.2.0 or later
+- RTD theme 1.0 or later
+- Pygments 2.10.0 or later

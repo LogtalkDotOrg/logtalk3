@@ -1,45 +1,21 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Inheritance &mdash; The Logtalk Handbook v3.51.0-b01 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -57,36 +33,17 @@
    
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
-          
-
-          
-            
             <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 3.51.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -94,19 +51,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Manual</a><ul class="current">
@@ -162,82 +108,40 @@
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
-            
-          
-	<p class="caption"><span class="caption-text">External Contents</span></p>
-    <a href="../docs/index.html">APIs</a>
-    <a href="https://logtalk.org">Logtalk website</a>
-    <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a href="../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
   
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">The Logtalk Handbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">User Manual</a> &raquo;</li>
-        
       <li>Inheritance</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/userman/inheritance.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="inheritance">
-<span id="inheritance-inheritance"></span><h1>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline">¶</a></h1>
+<span id="inheritance-inheritance"></span><h1>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline"></a></h1>
 <p>The inheritance mechanisms found on object-oriented programming
 languages allow the specialization of previously defined objects,
 avoiding the unnecessary repetition of code and allowing the definition
@@ -262,14 +166,14 @@ receiving the message or making the <em>super</em> call, as explained next. The
 search procedures are also used by the <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
 and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a> reflection predicates.</p>
 <div class="section" id="protocol-inheritance">
-<span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline">¶</a></h2>
+<span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline"></a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
 (<a class="reference internal" href="../glossary.html#term-predicate-scope-directive"><span class="xref std std-term">scope directives</span></a>). These can be contained
 in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
 protocols and a protocol may extend several protocols.</p>
 <div class="section" id="search-order-for-prototype-hierarchies">
-<span id="inheritance-protocol-prototype"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#search-order-for-prototype-hierarchies" title="Permalink to this headline">¶</a></h3>
+<span id="inheritance-protocol-prototype"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#search-order-for-prototype-hierarchies" title="Permalink to this headline"></a></h3>
 <p>The search order for predicate declarations is first the object, second
 the implemented protocols (and the protocols that these may extend),
 third the imported categories (and the protocols that they may
@@ -279,7 +183,7 @@ declarations for the same predicate, by default, only the first one will
 be considered.</p>
 </div>
 <div class="section" id="search-order-for-class-hierarchies">
-<span id="inheritance-protocol-class"></span><h3>Search order for class hierarchies<a class="headerlink" href="#search-order-for-class-hierarchies" title="Permalink to this headline">¶</a></h3>
+<span id="inheritance-protocol-class"></span><h3>Search order for class hierarchies<a class="headerlink" href="#search-order-for-class-hierarchies" title="Permalink to this headline"></a></h3>
 <p>The search order for predicate declarations starts in the object
 classes. Following the classes declaration order, the search starts in
 the classes implemented protocols (and the protocols that these may
@@ -291,20 +195,20 @@ first one will be considered.</p>
 </div>
 </div>
 <div class="section" id="implementation-inheritance">
-<span id="inheritance-implementation"></span><h2>Implementation inheritance<a class="headerlink" href="#implementation-inheritance" title="Permalink to this headline">¶</a></h2>
+<span id="inheritance-implementation"></span><h2>Implementation inheritance<a class="headerlink" href="#implementation-inheritance" title="Permalink to this headline"></a></h2>
 <p>Implementation inheritance refers to the inheritance of predicate
 definitions. These can be contained in objects or in categories. Logtalk
 supports multi-inheritance of implementation: an object may import
 several categories or extend, specialize, or instantiate several
 objects.</p>
 <div class="section" id="inheritance-implementation-prototype">
-<span id="id1"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#inheritance-implementation-prototype" title="Permalink to this headline">¶</a></h3>
+<span id="id1"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#inheritance-implementation-prototype" title="Permalink to this headline"></a></h3>
 <p>The search order for predicate definitions is similar to the search for
 predicate declarations except that implemented protocols are ignored (as
 they can only contain predicate directives).</p>
 </div>
 <div class="section" id="inheritance-implementation-class">
-<span id="id2"></span><h3>Search order for class hierarchies<a class="headerlink" href="#inheritance-implementation-class" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Search order for class hierarchies<a class="headerlink" href="#inheritance-implementation-class" title="Permalink to this headline"></a></h3>
 <p>The search order for predicate definitions is similar to the search for
 predicate declarations except that implemented protocols are ignored (as
 they can only contain predicate directives) and that the search starts
@@ -313,7 +217,7 @@ no predicate definition is found there, to the instance classes and then
 to the class superclasses.</p>
 </div>
 <div class="section" id="redefining-inherited-predicate-definitions">
-<span id="inheritance-implementation-redefinition"></span><h3>Redefining inherited predicate definitions<a class="headerlink" href="#redefining-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
+<span id="inheritance-implementation-redefinition"></span><h3>Redefining inherited predicate definitions<a class="headerlink" href="#redefining-inherited-predicate-definitions" title="Permalink to this headline"></a></h3>
 <p>When we define a predicate that is already inherited from an ancestor object
 or an imported category, the inherited definition is hidden by the new
 definition. This is called inheritance overriding: a local definition
@@ -357,7 +261,7 @@ yes
 <p>However, we can explicitly code other behaviors. Some examples follow.</p>
 </div>
 <div class="section" id="specializing-inherited-predicate-definitions">
-<span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline">¶</a></h3>
+<span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline"></a></h3>
 <p>Specialization of inherited definitions: the new definition calls the
 inherited definition and makes additional calls. This is accomplished
 by calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator
@@ -393,7 +297,7 @@ yes
 </div>
 </div>
 <div class="section" id="union-of-inherited-and-local-predicate-definitions">
-<span id="inheritance-union"></span><h3>Union of inherited and local predicate definitions<a class="headerlink" href="#union-of-inherited-and-local-predicate-definitions" title="Permalink to this headline">¶</a></h3>
+<span id="inheritance-union"></span><h3>Union of inherited and local predicate definitions<a class="headerlink" href="#union-of-inherited-and-local-predicate-definitions" title="Permalink to this headline"></a></h3>
 <p>Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
 mechanisms. This can be accomplished by writing a clause that just calls,
@@ -431,7 +335,7 @@ no
 </div>
 </div>
 <div class="section" id="selective-inheritance-of-predicate-definitions">
-<span id="inheritance-selective"></span><h3>Selective inheritance of predicate definitions<a class="headerlink" href="#selective-inheritance-of-predicate-definitions" title="Permalink to this headline">¶</a></h3>
+<span id="inheritance-selective"></span><h3>Selective inheritance of predicate definitions<a class="headerlink" href="#selective-inheritance-of-predicate-definitions" title="Permalink to this headline"></a></h3>
 <p>The selective inheritance of predicate definitions (also known as
 differential inheritance) is normally used in the representation
 of exceptions to inherited default definitions. We can use the
@@ -469,7 +373,7 @@ no
 </div>
 </div>
 <div class="section" id="public-protected-and-private-inheritance">
-<span id="inheritance-scope"></span><h2>Public, protected, and private inheritance<a class="headerlink" href="#public-protected-and-private-inheritance" title="Permalink to this headline">¶</a></h2>
+<span id="inheritance-scope"></span><h2>Public, protected, and private inheritance<a class="headerlink" href="#public-protected-and-private-inheritance" title="Permalink to this headline"></a></h2>
 <p>To make all <a class="reference internal" href="../glossary.html#term-public-predicate"><span class="xref std std-term">public predicates</span></a>
 declared via implemented protocols, imported categories, or ancestor
 objects <a class="reference internal" href="../glossary.html#term-protected-predicate"><span class="xref std std-term">protected predicates</span></a> or to make
@@ -524,7 +428,7 @@ and a simplified syntax when protected or private inheritance are not
 used.</p>
 </div>
 <div class="section" id="multiple-inheritance">
-<span id="inheritance-multiple"></span><h2>Multiple inheritance<a class="headerlink" href="#multiple-inheritance" title="Permalink to this headline">¶</a></h2>
+<span id="inheritance-multiple"></span><h2>Multiple inheritance<a class="headerlink" href="#multiple-inheritance" title="Permalink to this headline"></a></h2>
 <p>Logtalk supports multi-inheritance by enabling an object to extend,
 instantiate, or specialize more than one object. Likewise, a protocol
 may extends multiple protocols and a category may extend multiple
@@ -543,7 +447,7 @@ multi-inheritance support does not affect performance when we use
 single-inheritance.</p>
 </div>
 <div class="section" id="composition-versus-multiple-inheritance">
-<span id="inheritance-composition"></span><h2>Composition versus multiple inheritance<a class="headerlink" href="#composition-versus-multiple-inheritance" title="Permalink to this headline">¶</a></h2>
+<span id="inheritance-composition"></span><h2>Composition versus multiple inheritance<a class="headerlink" href="#composition-versus-multiple-inheritance" title="Permalink to this headline"></a></h2>
 <p>It is not possible to discuss inheritance mechanisms without referring
 to the long and probably endless debate on single versus multiple
 inheritance. The single inheritance mechanism can be implemented
@@ -573,50 +477,33 @@ composition using <a class="reference internal" href="categories.html#categories
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="events.html" class="btn btn-neutral float-right" title="Event-driven programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="predicates.html" class="btn btn-neutral float-left" title="Predicates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="events.html" class="btn btn-neutral float-right" title="Event-driven programming" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 1998-2021, Paulo Moura.
-
-    </p>
+    <p>&#169; Copyright 1998-2021, Paulo Moura.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

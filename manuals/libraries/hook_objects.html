@@ -1,45 +1,21 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>hook_objects &mdash; The Logtalk Handbook v3.51.0-b01 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -57,36 +33,17 @@
    
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
-          
-
-          
-            
             <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 3.51.0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -94,19 +51,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
     
-            
-            
-              
-            
-            
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
@@ -184,95 +130,53 @@
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
-            
-          
-	<p class="caption"><span class="caption-text">External Contents</span></p>
-    <a href="../docs/index.html">APIs</a>
-    <a href="https://logtalk.org">Logtalk website</a>
-    <a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a>
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a href="../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
   
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">The Logtalk Handbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Libraries</a> &raquo;</li>
-        
       <li><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code></li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/libraries/hook_objects.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="hook-objects">
-<h1><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code><a class="headerlink" href="#hook-objects" title="Permalink to this headline">¶</a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code><a class="headerlink" href="#hook-objects" title="Permalink to this headline"></a></h1>
 <p>This library provides a set of convenient hook objects for defining
 custom expansion workflows (using e.g. the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library) and
 for debugging. They are usable and useful as-is but should also be
 regarded as term- and goal-expansion examples that you can learn from,
 clone, and change to fit your application requirements.</p>
 <div class="section" id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#hook_objects">../../docs/library_index.html#hook_objects</a>
 link in a web browser.</p>
 </div>
 <div class="section" id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
 <p>To load all hook objects in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(loader)).
 </pre></div>
@@ -284,25 +188,25 @@ object:</p>
 </div>
 </div>
 <div class="section" id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
 <p>To test this library hook objects, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(tester)).
 </pre></div>
 </div>
 </div>
 <div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>The provided hook objects cover different expansion scenarios as
 follows.</p>
 <div class="section" id="using-the-prolog-backend-adapter-file-expansion-rules">
-<h3>Using the Prolog backend adapter file expansion rules<a class="headerlink" href="#using-the-prolog-backend-adapter-file-expansion-rules" title="Permalink to this headline">¶</a></h3>
+<h3>Using the Prolog backend adapter file expansion rules<a class="headerlink" href="#using-the-prolog-backend-adapter-file-expansion-rules" title="Permalink to this headline"></a></h3>
 <p>Useful when defining a custom expansion workflow. This can be
 accomplished by loading the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook.lgt</span></code> file, which
 defines a <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code> hook object that can be used as a
 workflow step.</p>
 </div>
 <div class="section" id="restoring-the-default-compiler-expansion-workflow">
-<h3>Restoring the default compiler expansion workflow<a class="headerlink" href="#restoring-the-default-compiler-expansion-workflow" title="Permalink to this headline">¶</a></h3>
+<h3>Restoring the default compiler expansion workflow<a class="headerlink" href="#restoring-the-default-compiler-expansion-workflow" title="Permalink to this headline"></a></h3>
 <p>In this case, load the <code class="docutils literal notranslate"><span class="pre">default_workflow_hook.lgt</span></code> file, which defines
 a <code class="docutils literal notranslate"><span class="pre">default_workflow_hook</span></code> hook object, and use the following <strong>goal</strong>
 to set the default hook object:</p>
@@ -311,7 +215,7 @@ to set the default hook object:</p>
 </div>
 </div>
 <div class="section" id="preventing-applying-any-other-user-defined-expansion-rules">
-<h3>Preventing applying any (other) user-defined expansion rules<a class="headerlink" href="#preventing-applying-any-other-user-defined-expansion-rules" title="Permalink to this headline">¶</a></h3>
+<h3>Preventing applying any (other) user-defined expansion rules<a class="headerlink" href="#preventing-applying-any-other-user-defined-expansion-rules" title="Permalink to this headline"></a></h3>
 <p>When compiling a source file, we sometimes want to prevent applying
 expansion rules. This can be accomplished by simply loading the
 <code class="docutils literal notranslate"><span class="pre">identity_hook.lgt</span></code> file, which defines the <code class="docutils literal notranslate"><span class="pre">identity_hook</span></code> hook
@@ -328,7 +232,7 @@ preserve the grammar rules, use the hook objects described below to
 write them to a stream.</p>
 </div>
 <div class="section" id="expanding-grammar-rules-into-clauses-independently-of-the-compiler">
-<h3>Expanding grammar rules into clauses independently of the compiler<a class="headerlink" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler" title="Permalink to this headline">¶</a></h3>
+<h3>Expanding grammar rules into clauses independently of the compiler<a class="headerlink" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler" title="Permalink to this headline"></a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook.lgt</span></code> and use the term-expansion rules in
 the <code class="docutils literal notranslate"><span class="pre">grammar_rules_hook</span></code> object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> grammar_rules_hook<span class="o">::</span><span class="k">term_expansion</span>((a <span class="o">--&gt;</span> [b],c), <span class="nv">Clause</span>).
@@ -339,7 +243,7 @@ yes
 </div>
 </div>
 <div class="section" id="using-the-expansion-rules-defined-in-a-prolog-module">
-<h3>Using the expansion rules defined in a Prolog module<a class="headerlink" href="#using-the-expansion-rules-defined-in-a-prolog-module" title="Permalink to this headline">¶</a></h3>
+<h3>Using the expansion rules defined in a Prolog module<a class="headerlink" href="#using-the-expansion-rules-defined-in-a-prolog-module" title="Permalink to this headline"></a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">prolog_module_hook.lgt</span></code>, which defines the parametric hook
 object <code class="docutils literal notranslate"><span class="pre">prolog_module_hook(Module)</span></code>. To use this hook object, you need
 to instantiate the parameter to the name of the module. For example:</p>
@@ -348,7 +252,7 @@ to instantiate the parameter to the name of the module. For example:</p>
 </div>
 </div>
 <div class="section" id="wrap-the-contents-of-a-plain-prolog-file-as-an-object">
-<h3>Wrap the contents of a plain Prolog file as an object<a class="headerlink" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object" title="Permalink to this headline">¶</a></h3>
+<h3>Wrap the contents of a plain Prolog file as an object<a class="headerlink" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object" title="Permalink to this headline"></a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook.lgt</span></code>, which defines the parametric hook
 object <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code>. Use it to wrap the contents of a plain
 Prolog file as an object named after the file. Can be used to apply
@@ -366,7 +270,7 @@ yes
 using the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> context-switching control construct.</p>
 </div>
 <div class="section" id="outputting-term-expansion-results-to-a-stream">
-<h3>Outputting term-expansion results to a stream<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream" title="Permalink to this headline">¶</a></h3>
+<h3>Outputting term-expansion results to a stream<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream" title="Permalink to this headline"></a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and using the
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook object. The terms are not
@@ -374,7 +278,7 @@ modified and thus these hook objects may be used at any point in an
 expansion workflow.</p>
 </div>
 <div class="section" id="printing-entity-predicate-goals-before-or-after-calling-them">
-<h3>Printing entity predicate goals before or after calling them<a class="headerlink" href="#printing-entity-predicate-goals-before-or-after-calling-them" title="Permalink to this headline">¶</a></h3>
+<h3>Printing entity predicate goals before or after calling them<a class="headerlink" href="#printing-entity-predicate-goals-before-or-after-calling-them" title="Permalink to this headline"></a></h3>
 <p>This is helpful for quick debugging. Load the <code class="docutils literal notranslate"><span class="pre">print_goal_hook.lgt</span></code>
 file and use the <code class="docutils literal notranslate"><span class="pre">print_goal_hook</span></code> hook object. For example, we can
 set this hook object as the default hook:</p>
@@ -390,7 +294,7 @@ set this hook object as the default hook:</p>
 </div>
 </div>
 <div class="section" id="suppressing-goals">
-<h3>Suppressing goals<a class="headerlink" href="#suppressing-goals" title="Permalink to this headline">¶</a></h3>
+<h3>Suppressing goals<a class="headerlink" href="#suppressing-goals" title="Permalink to this headline"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook.lgt</span></code> file provides the <code class="docutils literal notranslate"><span class="pre">suppress_goal_hook</span></code>
 hook object that supports suppressing a goal in a clause body by
 prefixing it using the <code class="docutils literal notranslate"><span class="pre">--</span></code> operator. We can set this hook object as
@@ -417,50 +321,33 @@ source file directive:</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="html.html" class="btn btn-neutral float-right" title="html" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="hook_flows.html" class="btn btn-neutral float-left" title="hook_flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="html.html" class="btn btn-neutral float-right" title="html" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 1998-2021, Paulo Moura.
-
-    </p>
+    <p>&#169; Copyright 1998-2021, Paulo Moura.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

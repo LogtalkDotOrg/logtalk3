@@ -1891,6 +1891,29 @@ Returns a syntactically valid stream position.
 
 ------------
 
+.. raw:: html
+
+   <div id="test/2"> </div>
+
+.. index:: test/2
+.. _lgtunit/0::test/2:
+
+``test/2``
+^^^^^^^^^^
+
+Table of defined tests.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``test(Identifier,Test)``
+| **Mode and number of proofs:**
+|    ``test(?callable,?compound)`` - ``zero_or_more``
+
+
+------------
+
 Private predicates
 ------------------
 
@@ -1973,7 +1996,7 @@ Counter for generating unique auxiliary predicate names.
 ``test_/2``
 ^^^^^^^^^^^
 
-Table of defined tests.
+Table of compiled tests.
 
 | **Compilation flags:**
 |    ``dynamic``
