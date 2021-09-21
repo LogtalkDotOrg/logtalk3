@@ -211,6 +211,11 @@ spy points will be removed. For example:
    All matching predicate spy points removed.
    yes
 
+In breakpoints, the line number must for the first line of a clause that we
+want to spy. But note that only some Prolog backends provide accurate source
+file term line numbers. Check the :doc:`../devtools/debugger` tool documentation
+for details.
+
 Defining context spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
