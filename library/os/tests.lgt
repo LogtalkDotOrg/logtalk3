@@ -349,10 +349,16 @@
 		os::absolute_file_name(Path, ExpandedPath),
 		\+ sub_atom(ExpandedPath, _, _, 0, '.').
 
-	test(os_absolute_file_name_2_04, true(ExpandedPath == '/a/d'), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_04, true(\+ sub_atom(ExpandedPath, _, 2, _, '..')), [condition(os::operating_system_type(unix))]) :-
+		os::absolute_file_name('../d', ExpandedPath).
+
+	test(os_absolute_file_name_2_05, true(ExpandedPath == '/a/d'), [condition(os::operating_system_type(unix))]) :-
 		os::absolute_file_name('/a/b/c/../../d', ExpandedPath).
 
-	test(os_absolute_file_name_2_05, true(ExpandedPath == '/a/b/c/d'), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_06, true(\+ sub_atom(ExpandedPath, _, 2, _, '.')), [condition(os::operating_system_type(unix))]) :-
+		os::absolute_file_name('./d', ExpandedPath).
+
+	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(os::operating_system_type(unix))]) :-
 		os::absolute_file_name('/a/b/c/././d', ExpandedPath).
 
 	test(os_temporary_directory_1_01, true) :-
