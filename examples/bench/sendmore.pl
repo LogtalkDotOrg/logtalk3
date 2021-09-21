@@ -17,13 +17,11 @@ top:-
 	sumdigit(C2,E, O, N, C3),
 	leftdigit(S), S=\=O, S=\=R, S=\=N, S=\=Y, S=\=E, S=\=D,
 	leftdigit(M), M=\=S, M=\=O, M=\=R, M=\=N, M=\=Y, M=\=E, M=\=D,
-	sumdigit(C3,S, M, O, M),
-	% write(' '),write(S),write(E),write(N),write(D),nl,
-	% write('+'),write(M),write(O),write(R),write(E),nl,
-	% write('-----'),nl,
-	% write(M),write(O),write(N),write(E),write(Y),nl,nl,
-	fail.
-top.
+	sumdigit(C3,S, M, O, M), !.
+	%write(' '),write(S),write(E),write(N),write(D),nl,
+	%write('+'),write(M),write(O),write(R),write(E),nl,
+	%write('-----'),nl,
+	%write(M),write(O),write(N),write(E),write(Y),nl,nl.
 
 sumdigit(C, A, B, S, D) :-
 	X is (C+A+B),

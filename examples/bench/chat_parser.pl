@@ -16,7 +16,7 @@ go:-
 
 chat_parser :-
 	% original code used a failure-driven loop; changed to use unrolled
-	% forall/2 spo that unexpected failures will make chat_parser/0 fail
+	% forall/2 so that unexpected failures will make chat_parser/0 fail
 	\+ (my_string(X), \+ determinate_say(X,Y)).
 
 %  query set
