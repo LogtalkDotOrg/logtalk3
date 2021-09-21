@@ -254,7 +254,7 @@ ensure_format_report() {
 		run_time=$(date +"%H:%M:%S")
 		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > "$directory/xunit_report.xml"
 		echo "<assemblies>" >> "$directory/xunit_report.xml"
-		echo "<assembly name=\"$short/\" config-file=\"$short/tests.lgt\" test-framework=\"lgtunit\" run-date=\"$run_date\" run-time=\"$run_time\" time=\"0\" total=\"0\" errors=\"1\" failures=\"1\" skipped=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<assembly name=\"$short/tests.lgt::tests\" config-file=\"$short/tests.lgt\" test-framework=\"lgtunit\" run-date=\"$run_date\" run-time=\"$run_time\" time=\"0\" total=\"0\" errors=\"1\" failures=\"1\" skipped=\"0\">" >> "$directory/xunit_report.xml"
 		echo "<errors>" >> "$directory/xunit_report.xml"
 		echo "<error type=\"$error\" name=\"$error\">" >> "$directory/xunit_report.xml"
 		echo "<failure exception-type=\"$error\">" >> "$directory/xunit_report.xml"
@@ -263,8 +263,8 @@ ensure_format_report() {
 		echo "</error>" >> "$directory/xunit_report.xml"
 		echo "</errors>" >> "$directory/xunit_report.xml"
 		# hack for Allure ignoring the "errors" tag
-		echo "<collection failed=\"1\">" >> "$directory/xunit_report.xml"
-		echo "<test name=\"$name\" type=\"$name\" method=\"$name\" time=\"0\" result=\"Fail\">" >> "$directory/xunit_report.xml"
+		echo "<collection name=\"$short/tests.lgt::tests\" time=\"0\" total=\"1\" passed=\"0\" failed=\"1\" skipped=\"0\">" >> "$directory/xunit_report.xml"
+		echo "<test name=\"$name::tests\" type=\"$short/tests.lgt::tests\" method=\"$name\" time=\"0\" result=\"Fail\">" >> "$directory/xunit_report.xml"
 		echo "<failure exception-type=\"$error\">" >> "$directory/xunit_report.xml"
 		echo "<message><![CDATA[$error]]></message>" >> "$directory/xunit_report.xml"
 		echo "</failure>" >> "$directory/xunit_report.xml"
