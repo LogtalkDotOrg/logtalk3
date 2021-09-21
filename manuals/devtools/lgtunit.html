@@ -482,6 +482,9 @@ failed unit tests. Same for the <code class="docutils literal notranslate"><span
 printed when the test goal succeeds as its failure will prevent the
 assertion goal from being called. This allows distinguishing between
 test goal failure and assertion failure.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fail</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> outcomes are better reserved to cases where
+there is a single test goal. With multiple test goals, the test will
+succeed when <em>any</em> of those goals fail.</p>
 <p>Some tests may require individual condition, setup, or cleanup goals. In
 this case, the following alternative test dialect can be used:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(<span class="nv">Test</span>, <span class="nv">Outcome</span>, <span class="nv">Options</span>) <span class="o">:-</span> <span class="nv">Goal</span>.
