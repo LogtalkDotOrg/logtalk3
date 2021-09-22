@@ -177,4 +177,13 @@
 	test(lgt_sub_atom_5_46, deterministic) :-
 		{sub_atom('/abc/def/ghi/', 0, _, _, '/')}.
 
+	test(lgt_sub_atom_5_47, deterministic) :-
+		{sub_atom('/abc/def/ghi/', 1, 3, _, _)}.
+
+	test(lgt_sub_atom_5_48, deterministic) :-
+		{sub_atom('/abc/def/ghi/', 1, _, 3, _)}.
+
+	test(lgt_sub_atom_5_49, deterministic) :-
+		{sub_atom('/abc/def/ghi/', _, 1, 3, _)}.
+
 :- end_object.
