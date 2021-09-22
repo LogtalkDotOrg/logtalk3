@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2020-10-21,
+		date is 2021-09-22,
 		comment is 'Unit tests for the PDDL 3.0 parsers.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/2
 	]).
 
 	test(elevators) :-
@@ -73,13 +77,13 @@
 		forall(
 			problem_file(File),
 			(	atom_concat(Directory, File, Path),
-				pddl::parse_problem(Path, _, _)
+				assertion(problem-Path, pddl::parse_problem(Path, _, _))
 			)
 		),
 		forall(
 			domain_file(File),
 			(	atom_concat(Directory, File, Path),
-				pddl::parse_domain(Path, _, _)
+				assertion(domain-Path, pddl::parse_domain(Path, _, _))
 			)
 		).
 

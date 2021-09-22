@@ -81,6 +81,12 @@ and results in more compact code.
 * FIXED: Workaround Allure ignoring the `errors` tag in xUnit.net v2 XML files
 so that crashed and broken test sets are listed in the reports.
 
+Contributions
+-------------
+
+* IMPROVED: Tests for the `pddl_parser` contribution by using explicit
+assertions.
+
 Examples
 --------
 
