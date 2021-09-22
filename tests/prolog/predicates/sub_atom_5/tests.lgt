@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-28,
+		date is 2021-09-22,
 		comment is 'Unit tests for the ISO Prolog standard sub_atom/5 built-in predicate.'
 	]).
 
@@ -158,5 +158,17 @@
 
 	test(lgt_sub_atom_5_40, false) :-
 		{sub_atom('', _, 1, _, _)}.
+
+	test(lgt_sub_atom_5_41, true) :-
+		{sub_atom('/abc/def/ghi/', 12, 1, 0, '/')}.
+
+	test(lgt_sub_atom_5_42, true(Before == 12)) :-
+		{sub_atom('/abc/def/ghi/', Before, 1, 0, '/')}.
+
+	test(lgt_sub_atom_5_43, true(Length == 1)) :-
+		{sub_atom('/abc/def/ghi/', 12, Length, 0, '/')}.
+
+	test(lgt_sub_atom_5_44, true(Before-Length == 12-1)) :-
+		{sub_atom('/abc/def/ghi/', Before, Length, 0, '/')}.
 
 :- end_object.
