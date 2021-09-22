@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-27,
+		date is 2021-09-22,
 		comment is 'Unit tests for the ISO Prolog standard atom_concat/3 built-in predicate.'
 	]).
 
@@ -98,5 +98,14 @@
 
 	test(tpl_atom_concat_3_20, true(A-B == ''-'')) :-
 		{atom_concat(A, B, '')}.
+
+	test(lgt_atom_concat_3_21, deterministic) :-
+		{atom_concat(abc, def, _)}.
+
+	test(lgt_atom_concat_3_22, deterministic) :-
+		{atom_concat(abc, _, abcdef)}.
+
+	test(lgt_atom_concat_3_23, deterministic) :-
+		{atom_concat(_, def, abcdef)}.
 
 :- end_object.
