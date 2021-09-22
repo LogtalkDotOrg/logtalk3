@@ -171,4 +171,10 @@
 	test(lgt_sub_atom_5_44, true(Before-Length == 12-1)) :-
 		{sub_atom('/abc/def/ghi/', Before, Length, 0, '/')}.
 
+	test(lgt_sub_atom_5_45, deterministic) :-
+		{sub_atom('/abc/def/ghi/', _, _, 0, '/')}.
+
+	test(lgt_sub_atom_5_46, deterministic) :-
+		{sub_atom('/abc/def/ghi/', 0, _, _, '/')}.
+
 :- end_object.
