@@ -42,89 +42,83 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-11-18,
+		date is 2021-09-23,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.3.4
 
-	succeeds(iso_call_1_01) :-
+	test(iso_call_1_01, true) :-
 		{call(!)}.
 
-	fails(iso_call_1_02) :-
+	test(iso_call_1_02, false) :-
 		{call(fail)}.
 
-	fails(iso_call_1_03) :-
+	test(iso_call_1_03, false) :-
 		{call((fail, _X))}.
 
-	fails(iso_call_1_04) :-
+	test(iso_call_1_04, false) :-
 		X = 1,
 		{call((fail, call(X)))}.
 
-	throws(iso_call_1_05, error(instantiation_error,_)) :-
+	test(iso_call_1_05, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{b(_)}.
 
-	throws(iso_call_1_06, [error(type_error(callable,(write(3),3)),_), error(type_error(callable,3),_)]) :-
+	test(iso_call_1_06, errors([type_error(callable,(write(3),3)), type_error(callable,3)])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		^^suppress_text_output,
 		{b(3)}.
 
-	succeeds(iso_call_1_07) :-
-		{(Z = !, call((Z=!, a(X), Z)))},
-		Z == !, X == 1.
+	test(iso_call_1_07, true(Z-X == !-1)) :-
+		{(Z = !, call((Z=!, a(X), Z)))}.
 
-	succeeds(iso_call_1_08) :-
-		findall(Z-X, {call((Z=!, a(X), Z))}, L),
-		L == [ !-1, !-2 ].
+	test(iso_call_1_08, true(L == [!-1, !-2])) :-
+		findall(Z-X, {call((Z=!, a(X), Z))}, L).
 
-	throws(iso_call_1_09, error(instantiation_error,_)) :-
+	test(iso_call_1_09, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{call((write(3), _X))}.
 
-	throws(iso_call_1_10, error(type_error(callable,1),_)) :-
+	test(iso_call_1_10, error(type_error(callable,1))) :-
 		^^suppress_text_output,
 		X = 1,
 		{call((write(3), call(X)))}.
 
-	throws(iso_call_1_11, error(instantiation_error,_)) :-
+	test(iso_call_1_11, error(instantiation_error)) :-
 		{call(_X)}.
 
-	throws(iso_call_1_12, error(type_error(callable,1),_)) :-
+	test(iso_call_1_12, error(type_error(callable,1))) :-
 		X = 1,
 		{call(X)}.
 
-	throws(iso_call_1_13, [error(type_error(callable,(fail,1)),_), error(type_error(callable,1),_)]) :-
+	test(iso_call_1_13, errors([type_error(callable,(fail,1)), type_error(callable,1)])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		X = 1,
 		{call((fail, X))}.
 
-	throws(iso_call_1_14, [error(type_error(callable,(write(3),1)),_), error(type_error(callable,1),_)]) :-
+	test(iso_call_1_14, errors([type_error(callable,(write(3),1)), type_error(callable,1)])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		^^suppress_text_output,
 		X = 1,
 		{call((write(3), X))}.
 
-	throws(iso_call_1_15, [error(type_error(callable,(1;true)),_), error(type_error(callable,1),_)]) :-
+	test(iso_call_1_15, errors([type_error(callable,(1;true)), type_error(callable,1)])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		X = 1,
 		{call((X; true))}.
 
 	% tests from the Logtalk portability work
 
-	fails(lgt_call_1_16) :-
+	test(lgt_call_1_16, false) :-
 		{call(unicorn)}.
 
-	fails(lgt_call_1_17) :-
+	test(lgt_call_1_17, false) :-
 		{call(fenix(_))}.
 
-	fails(lgt_call_1_18) :-
+	test(lgt_call_1_18, false) :-
 		{call(scattered(_, _))}.
 
 :- end_object.

@@ -31,181 +31,171 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:2,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-11-11,
+		date is 2021-09-23,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.15.4.4
 
-	succeeds(iso_call_N_01) :-
+	test(iso_call_N_01, true) :-
 		{call(integer, 3)}.
 
-	succeeds(iso_call_N_02) :-
-		{call(functor(F,c), 0)},
-		F == c.
+	test(iso_call_N_02, true(F == c)) :-
+		{call(functor(F,c), 0)}.
 
-	succeeds(iso_call_N_03) :-
-		{call(call(call(atom_concat, pro), log), Atom)},
-		Atom == prolog.
+	test(iso_call_N_03, true(Atom == prolog)) :-
+		{call(call(call(atom_concat, pro), log), Atom)}.
 
-	succeeds(iso_call_N_04) :-
-		findall(X-Y, {call(;, X=1, Y=2)}, L),
-		^^variant(L, [1-_, _-2]).
+	test(iso_call_N_04, variant(L, [1-_, _-2])) :-
+		findall(X-Y, {call(;, X=1, Y=2)}, L).
 
-	fails(iso_call_N_05) :-
+	test(iso_call_N_05, false) :-
 		{call(;, (true->fail), _X=1)}.
 
-	succeeds(iso_call_N_06) :-
+	test(iso_call_N_06, true) :-
 		{call_n_maplist(>(3), [1, 2])}.
 
-	fails(iso_call_N_07) :-
+	test(iso_call_N_07, false) :-
 		{call_n_maplist(>(3), [1, 2, 3])}.
 
-	succeeds(iso_call_N_08) :-
-		{call_n_maplist(=(_X), Xs)}, !,
-		Xs == [].
+	test(iso_call_N_08, true(Xs == [])) :-
+		{call_n_maplist(=(_X), Xs)}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_call_N_09, error(instantiation_error,_)) :-
+	test(lgt_call_N_09, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _)}.
 
-	throws(lgt_call_N_10, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_10, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _)}.
 
-	throws(lgt_call_N_11, error(instantiation_error,_)) :-
+	test(lgt_call_N_11, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _)}.
 
-	throws(lgt_call_N_12, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_12, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _)}.
 
-	throws(lgt_call_N_13, error(instantiation_error,_)) :-
+	test(lgt_call_N_13, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _)}.
 
-	throws(lgt_call_N_14, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_14, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _)}.
 
-	throws(lgt_call_N_15, error(instantiation_error,_)) :-
+	test(lgt_call_N_15, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _)}.
 
-	throws(lgt_call_N_16, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_16, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _)}.
 
-	throws(lgt_call_N_17, error(instantiation_error,_)) :-
+	test(lgt_call_N_17, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _, _)}.
 
-	throws(lgt_call_N_18, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_18, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _, _)}.
 
-	throws(lgt_call_N_19, error(instantiation_error,_)) :-
+	test(lgt_call_N_19, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _, _, _)}.
 
-	throws(lgt_call_N_20, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_20, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _, _, _)}.
 
-	throws(lgt_call_N_21, error(instantiation_error,_)) :-
+	test(lgt_call_N_21, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{call(X, _, _, _, _, _, _, _)}.
 
-	throws(lgt_call_N_22, error(type_error(callable,3),_)) :-
+	test(lgt_call_N_22, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _, _, _, _)}.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_call_N_23, [
-			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,(':'(user,fail),':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
-			]) :-
+	test(eclipse_call_N_23, errors([
+			type_error(callable,(fail,3)), type_error(callable,3),
+			type_error(callable,(':'(user,fail),':'(user,3))), type_error(callable,':'(user,3))
+	])) :-
 		% the first exception term is the strictly conforming one
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{call(',', fail, Three)}.
 
-	throws(eclipse_call_N_24, [
-			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,(':'(user,!);':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
-			]) :-
+	test(eclipse_call_N_24, errors([
+			type_error(callable,(!;3)), type_error(callable,3),
+			type_error(callable,(':'(user,!);':'(user,3))), type_error(callable,':'(user,3))
+	])) :-
 		% the first exception term is the strictly conforming one
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{call(';', !, Three)}.
 
-	throws(eclipse_call_N_25, [
-			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,(':'(user,fail)->':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
-			]) :-
+	test(eclipse_call_N_25, errors([
+			type_error(callable,(fail->3)), type_error(callable,3),
+			type_error(callable,(':'(user,fail)->':'(user,3))), type_error(callable,':'(user,3))
+	])) :-
 		% the first exception term is the strictly conforming one
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{call('->', fail, Three)}.
 
-	succeeds(eclipse_call_N_26) :-
-		findall(X, {call(',', C=!, (X=1,C;X=2))}, L),
-		L == [1, 2].
+	test(eclipse_call_N_26, true(L == [1, 2])) :-
+		findall(X, {call(',', C=!, (X=1,C;X=2))}, L).
 
-	throws(eclipse_call_N_27, [
-			error(type_error(callable,(fail,3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,(':'(user,fail),':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
-			]) :-
+	test(eclipse_call_N_27, errors([
+			type_error(callable,(fail,3)), type_error(callable,3),
+			type_error(callable,(':'(user,fail),':'(user,3))), type_error(callable,':'(user,3))
+	])) :-
 		% the first exception term is the strictly conforming one
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{call(','(fail), Three)}.
 
-	throws(eclipse_call_N_28, [
-			error(type_error(callable,(!;3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,(':'(user,!);':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
-			]) :-
+	test(eclipse_call_N_28, errors([
+			type_error(callable,(!;3)), type_error(callable,3),
+			type_error(callable,(':'(user,!);':'(user,3))), type_error(callable,':'(user,3))
+	])) :-
 		% the first exception term is the strictly conforming one
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{call(';'(!), Three)}.
 
-	throws(eclipse_call_N_29, [
-			error(type_error(callable,(fail->3)),_), error(type_error(callable,3),_),
-			error(type_error(callable,(':'(user,fail)->':'(user,3))),_), error(type_error(callable,':'(user,3)),_)
-			]) :-
+	test(eclipse_call_N_29, errors([
+			type_error(callable,(fail->3)), type_error(callable,3),
+			type_error(callable,(':'(user,fail)->':'(user,3))), type_error(callable,':'(user,3))
+	])) :-
 		% the first exception term is the strictly conforming one
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{call('->'(fail), Three)}.
 
-	succeeds(eclipse_call_N_30) :-
-		findall(X, {call(','(C=!), (X=1,C;X=2))}, L),
-		L == [1, 2].
+	test(eclipse_call_N_30, true(L == [1, 2])) :-
+		findall(X, {call(','(C=!), (X=1,C;X=2))}, L).
 
 	% auxiliary predicates used to delay errors to runtime
 
