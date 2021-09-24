@@ -116,6 +116,12 @@ predicates to verify their standard roundtrip property.
 * IMPROVED: Simplified tests for the `format/3`, `nl/0-1`, and `write_term/3`
 predicates.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Vim Logtalk indent file failed to set `set b:undo_indent`. Thanks to
+Doug Kearns for the patch.
+
 Installers and installation scripts
 -----------------------------------
 

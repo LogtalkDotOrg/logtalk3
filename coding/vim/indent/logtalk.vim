@@ -1,5 +1,5 @@
 "  Maintainer:	Paulo Moura <pmoura@logtalk.org>
-"  Revised on:	2011.06.18
+"  Revised on:	2021.09.24
 "  Language:	Logtalk
 
 " This Logtalk indent file is a modified version of the Prolog
@@ -15,6 +15,8 @@ let b:did_indent = 1
 setlocal indentexpr=GetLogtalkIndent()
 setlocal indentkeys-=:,0#
 setlocal indentkeys+=0%,-,0;,>,0)
+
+let b:undo_indent = "setl inde< indk<"
 
 " Only define the function once.
 if exists("*GetLogtalkIndent")
