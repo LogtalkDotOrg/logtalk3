@@ -2,6 +2,7 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 2021 Jacinto Dávila <jdavila@optimusprime.ai>
+%  Copyright 2021 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,10 +24,10 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:0:3,
-		author is 'Jacinto Dávila',
-		date is 2021-07-23,
-		comment is 'CSV files reading and writing predicates.',
+		version is 1:1:0,
+		author is 'Jacinto Dávila and Paulo Moura',
+		date is 2021-09-24,
+		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
 			'Separator' - 'Separator handling option with possible values ``comma``, ``tab``, ``semicolon``, and ``colon``.',
@@ -47,9 +48,23 @@
 		phrase(csv(Rows), Codes),
 		assert_rows(Rows, Object, Predicate, 1).
 
+	read_stream(Stream, Object, Predicate) :-
+		type::check(predicate, Object::Predicate),
+		ensure_bound_options,
+		reader::stream_to_codes(Stream, Codes),
+		dbg('File codes'-Codes),
+		phrase(csv(Rows), Codes),
+		assert_rows(Rows, Object, Predicate, 1).
+
 	read_file(File, Rows) :-
 		type::check(file, File),
 		reader::file_to_codes(File, Codes),
+		ensure_bound_options,
+		dbg('File codes'-Codes),
+		phrase(csv(Rows), Codes).
+
+	read_stream(Stream, Rows) :-
+		reader::stream_to_codes(Stream, Codes),
 		ensure_bound_options,
 		dbg('File codes'-Codes),
 		phrase(csv(Rows), Codes).
@@ -76,6 +91,17 @@
 		close(Stream),
 		dbg('All the file has been read into memory'-File).
 
+	read_stream_by_line(Stream, Object, Predicate) :-
+		type::check(predicate, Object::Predicate),
+		ensure_bound_options,
+		(	_Header_ == skip ->
+			N = 2,
+			reader::line_to_codes(Stream, _)
+		;	N = 1
+		),
+		read_assert_line_by_line(Stream, Object, Predicate, N),
+		dbg('All the stream has been read into memory'-Stream).
+
 	read_file_by_line(File, Rows) :-
 		type::check(file, File),
 		ensure_bound_options,
@@ -97,6 +123,16 @@
 		close(Stream),
 		dbg('All the file has been read'-[File,Rows]).
 
+	read_stream_by_line(Stream, Rows) :-
+		ensure_bound_options,
+		(	_Header_ == skip ->
+			N = 2,
+			reader::line_to_codes(Stream, _)
+		;	N = 1
+		),
+		read_line_by_line(Stream, Rows, N),
+		dbg('All the stream has been read'-[Stream,Rows]).
+
 	write_file(File, Object, Predicate/Arity) :-
 		ensure_bound_options,
 		functor(Message, Predicate, Arity),
@@ -109,6 +145,12 @@
 			(close(Stream), throw(Error))
 		),
 		close(Stream).
+
+	write_stream(Stream, Object, Predicate/Arity) :-
+		ensure_bound_options,
+		functor(Message, Predicate, Arity),
+		dbg('Goal to be called'-Object::Message),
+		write_one_by_one(Stream, Object, Message).
 
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 		csv_file_write_options([eol(crlf)]).
@@ -245,10 +287,10 @@
 
 	% it reads each line from the Stream, parses it and asserts it
 	read_assert_line_by_line(Stream,  Object, Predicate/Arity, N) :-
-		reader::line_to_codes(Stream, Line_Codes),
-		(	Line_Codes == end_of_file ->
+		reader::line_to_codes(Stream, LineCodes),
+		(	LineCodes == end_of_file ->
 			dbg('Final line at'-N)
-		;	phrase(record(Row, false), Line_Codes),
+		;	phrase(record(Row, false), LineCodes),
 			dbg('Read Line'-N),
 			list::length(Row, Arity) ->
 			Datum =.. [Predicate|Row],
@@ -261,11 +303,11 @@
 
 	% it reads each line from Stream and parses it
 	read_line_by_line(Stream, Rows, N) :-
-		reader::line_to_codes(Stream, Line_Codes),
-		(	(Line_Codes == end_of_file; Line_Codes == []) ->
+		reader::line_to_codes(Stream, LineCodes),
+		(	(LineCodes == end_of_file; LineCodes == []) ->
 			dbg('Final line at'-N),
 			Rows = []
-		;	phrase(record(Row, false), Line_Codes) ->
+		;	phrase(record(Row, false), LineCodes) ->
 			Rows = [Row|Rest_Rows],
 			dbg('Read Line'-N),
 			NN is N + 1,

@@ -2,7 +2,7 @@
 =======
 
 The ``csv`` library provides predicates for reading and writing CSV
-files:
+files and streams:
 
 https://www.rfc-editor.org/rfc/rfc4180.txt
 
@@ -14,11 +14,13 @@ extends the ``csv/3`` parametric object using default option values.
 The library also include predicates to guess the separator and guess the
 number of columns in a given CSV file.
 
-Files can be read into a list of rows (with each row being represented
-by a list of fields) or asserted using a user-defined dynamic predicate.
+Files and streams can be read into a list of rows (with each row being
+represented by a list of fields) or asserted using a user-defined
+dynamic predicate.
 
-Data can be saved to a CSV file by providing the object and predicate
-for accessing the data plus the name of the destination file.
+Data can be saved to a CSV file or stream by providing the object and
+predicate for accessing the data plus the name of the destination file
+or the stream handle or alias.
 
 API documentation
 -----------------
@@ -61,8 +63,8 @@ passing the following options:
 The ``csv`` object uses the default values ``keep``, ``comma``, and
 ``false``.
 
-When writing CSV files, set the quoted fields option to ``false`` to
-write all non-numeric fields double-quoted (i.e. escaped).
+When writing CSV files or streams, set the quoted fields option to
+``false`` to write all non-numeric fields double-quoted (i.e. escaped).
 
 The library objects can also be used to guess the separator used in a
 CSV file if necessary. For example:
@@ -103,7 +105,7 @@ object predicate. For example:
    C = xxx
 
 Given a predicate representing a table, the predicate data can be
-written to a file:
+written to a file or stream. For example:
 
 ::
 

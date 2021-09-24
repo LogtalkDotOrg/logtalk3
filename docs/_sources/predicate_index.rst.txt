@@ -5907,6 +5907,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`term_io_protocol <term_io_protocol/0::read_from_codes/2>`
 
+``read_stream/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_stream/2>`
+
+``read_stream/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_stream/3>`
+
+``read_stream_by_line/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_stream_by_line/2>`
+
+``read_stream_by_line/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::read_stream_by_line/3>`
+
 ``read_term_from_atom/3``
 -------------------------
 
@@ -7568,6 +7608,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`csv_protocol <csv_protocol/0::write_file/3>`
+
+``write_stream/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`csv_protocol <csv_protocol/0::write_stream/3>`
 
 ``write_term_to_atom/3``
 ------------------------

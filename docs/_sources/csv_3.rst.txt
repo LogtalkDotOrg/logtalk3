@@ -13,11 +13,11 @@
 * ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``) double quotes surrounding data.
 
 
-CSV files reading and writing predicates.
+CSV file and stream reading and writing predicates.
 
-| **Author:** Jacinto Dávila
-| **Version:** 1:0:3
-| **Date:** 2021-07-23
+| **Author:** Jacinto Dávila and Paulo Moura
+| **Version:** 1:1:0
+| **Date:** 2021-09-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -35,7 +35,7 @@ CSV files reading and writing predicates.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`csv_protocol/0::guess_arity/2`  :ref:`csv_protocol/0::guess_separator/2`  :ref:`csv_protocol/0::read_file/2`  :ref:`csv_protocol/0::read_file/3`  :ref:`csv_protocol/0::read_file_by_line/2`  :ref:`csv_protocol/0::read_file_by_line/3`  :ref:`csv_protocol/0::write_file/3`  
+|     :ref:`csv_protocol/0::guess_arity/2`  :ref:`csv_protocol/0::guess_separator/2`  :ref:`csv_protocol/0::read_file/2`  :ref:`csv_protocol/0::read_file/3`  :ref:`csv_protocol/0::read_file_by_line/2`  :ref:`csv_protocol/0::read_file_by_line/3`  :ref:`csv_protocol/0::read_stream/2`  :ref:`csv_protocol/0::read_stream/3`  :ref:`csv_protocol/0::read_stream_by_line/2`  :ref:`csv_protocol/0::read_stream_by_line/3`  :ref:`csv_protocol/0::write_file/3`  :ref:`csv_protocol/0::write_stream/3`  
 
 .. contents::
    :local:

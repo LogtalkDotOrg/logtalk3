@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:3,
+		version is 1:2:0,
 		author is 'Jacinto Dávila',
-		date is 2021-07-26,
+		date is 2021-09-24,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -48,10 +48,17 @@
 		setup.
 
 	% An empty file is read
-	test(csv_read_sample_csv_empty_file, true(Rows == [])) :-
+	test(csv_read_file_sample_csv_empty_file, true(Rows == [])) :-
 		^^suppress_text_output,
 		file_path('test_files/empty.csv', Path),
 		csv::read_file(Path, Rows).
+
+	test(csv_read_stream_sample_csv_empty_file, true(Rows == [])) :-
+		^^suppress_text_output,
+		file_path('test_files/empty.csv', Path),
+		open(Path, read, Stream),
+		csv::read_stream(Stream, Rows),
+		close(Stream).
 
 	% following: https://www.rfc-editor.org/rfc/rfc4180.txt
 
@@ -89,10 +96,17 @@
 		csv::read_file(Path, Rows).
 
 	%
-	test(csv_read_by_line_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
+	test(csv_read_file_by_line_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/with_header.csv', Path),
 		csv::read_file_by_line(Path, Rows).
+
+	test(csv_read_stream_by_line_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
+		^^suppress_text_output,
+		file_path('test_files/with_header.csv', Path),
+		open(Path, read, Stream),
+		csv::read_stream_by_line(Stream, Rows),
+		close(Stream).
 
 	% but we have an option to jump over the headers
 	test(csv_read_sample_csv_skip_header, true(Rows == [[aaa, bbb, ccc], [zzz, yyy, xxx]])) :-

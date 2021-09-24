@@ -58,6 +58,9 @@ built-in method.
 Library
 -------
 
+* ADDED: Predicates for reading and writing CSV streams (as an alternative to
+files) to the `csv` library.
+
 * ADDED: New `epsilon/0` edge cases for the `float` and `non_negative_float`
 types to the `arbitrary` library.
 
