@@ -111,7 +111,7 @@ properties for both text and binary streams open in all possible modes.
 predicates to verify their standard roundtrip property.
 
 * ADDED: Additional tests for the `abolish/1`, `atom_concat/3`, `length/2`,
-`setup_call_cleanup/3`, and `sub_atom/5` predicates.
+`plus/3`, `setup_call_cleanup/3`, `sub_atom/5`, and `succ/2` predicates.
 
 * IMPROVED: Simplified tests for the `format/3`, `nl/0-1`, and `write_term/3`
 predicates.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-12-23,
+		date is 2021-09-24,
 		comment is 'Unit tests for the de facto Prolog standard plus/3 built-in predicate.'
 	]).
 
@@ -66,5 +66,17 @@
 
 	test(lgt_plus_3_11, fail) :-
 		{plus(1, 2, 4)}.
+
+	test(lgt_plus_3_12, deterministic) :-
+		{plus(1, 2, 3)}.
+
+	test(lgt_plus_3_13, deterministic) :-
+		{plus(_, 2, 3)}.
+
+	test(lgt_plus_3_14, deterministic) :-
+		{plus(1, _, 3)}.
+
+	test(lgt_plus_3_15, deterministic) :-
+		{plus(1, 2, _)}.
 
 :- end_object.
