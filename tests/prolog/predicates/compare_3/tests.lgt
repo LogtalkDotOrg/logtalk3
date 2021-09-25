@@ -23,112 +23,103 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2015-04-01,
+		date is 2021-09-25,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.4.2.4
 
-	succeeds(iso_compare_3_01) :-
-		{compare(Order, 3, 5)},
-		Order == (<).
+	test(iso_compare_3_01, true(Order == (<))) :-
+		{compare(Order, 3, 5)}.
 
-	succeeds(iso_compare_3_02) :-
-		{compare(Order, d, d)},
-		Order == (=).
+	test(iso_compare_3_02, true(Order == (=))) :-
+		{compare(Order, d, d)}.
 
-	succeeds(iso_compare_3_03) :-
-		{compare(Order, Order, <)},
-		Order == (<).
+	test(iso_compare_3_03, true(Order == (<))) :-
+		{compare(Order, Order, <)}.
 
-	fails(iso_compare_3_04) :-
+	test(iso_compare_3_04, false) :-
 		{compare(<, <, <)}.
 
-	throws(iso_compare_3_05, error(type_error(atom,1+2),_)) :-
+	test(iso_compare_3_05, error(type_error(atom,1+2))) :-
 		{compare(1+2, 3, 3.0)}.
 
-	throws(iso_compare_3_06, error(domain_error(order,>=),_)) :-
+	test(iso_compare_3_06, error(domain_error(order,>=))) :-
 		{compare(>=, 3, 3.0)}.
 
 	% standard order tests from the Logtalk portability work
 
-	succeeds(lgt_compare_3_07) :-
+	test(lgt_compare_3_07, true) :-
 		{compare(<, _X, 1.1)}.
 
-	succeeds(lgt_compare_3_08) :-
+	test(lgt_compare_3_08, true) :-
 		{compare(<, 1.1, 1)}.
 
-	succeeds(lgt_compare_3_09) :-
+	test(lgt_compare_3_09, true) :-
 		{compare(>, 1, 1.1)}.
 
-	succeeds(lgt_compare_3_10) :-
-		{compare(Order, 1.1, 1)},
-		Order == (<).
+	test(lgt_compare_3_10, true(Order == (<))) :-
+		{compare(Order, 1.1, 1)}.
 
-	succeeds(lgt_compare_3_11) :-
-		{compare(Order, 1, 1.1)},
-		Order == (>).
+	test(lgt_compare_3_11, true(Order == (>))) :-
+		{compare(Order, 1, 1.1)}.
 
-	succeeds(lgt_compare_3_12) :-
-		{compare(Order, 1.0, 1)},
-		Order == (<).
+	test(lgt_compare_3_12, true(Order == (<))) :-
+		{compare(Order, 1.0, 1)}.
 
-	succeeds(lgt_compare_3_13) :-
-		{compare(Order, 1, 1.0)},
-		Order == (>).
+	test(lgt_compare_3_13, true(Order == (>))) :-
+		{compare(Order, 1, 1.0)}.
 
-	succeeds(lgt_compare_3_14) :-
+	test(lgt_compare_3_14, true) :-
 		{compare(<, 1, a)}.
 
-	succeeds(lgt_compare_3_15) :-
+	test(lgt_compare_3_15, true) :-
 		{compare(<, a, a(_))}.
 
-	succeeds(lgt_compare_3_16) :-
+	test(lgt_compare_3_16, true) :-
 		{compare(<, a(_), a(_,_))}.
 
-	succeeds(lgt_compare_3_17) :-
+	test(lgt_compare_3_17, true) :-
 		{compare(<, b(_), a(_,_))}.
 
-	succeeds(lgt_compare_3_18) :-
+	test(lgt_compare_3_18, true) :-
 		{compare(<, a(1,2), a(1,3))}.
 
-	succeeds(lgt_compare_3_19) :-
+	test(lgt_compare_3_19, true) :-
 		{compare(<, a(1,2), b(1,2))}.
 
 	% other tests
 
-	succeeds(lgt_compare_3_20) :-
+	test(lgt_compare_3_20, true) :-
 		{compare(>, (4,1,0), (4,0,1))}.
 
-	fails(lgt_compare_3_21) :-
+	test(lgt_compare_3_21, false) :-
 		{compare(>, (4,0,1), (4,1,0))}.
 
-	fails(lgt_compare_3_22) :-
+	test(lgt_compare_3_22, false) :-
 		{compare(<, (4,1,0), (4,0,1))}.
 
-	succeeds(lgt_compare_3_23) :-
+	test(lgt_compare_3_23, true) :-
 		{compare(<, (4,0,1), (4,1,0))}.
 
-	succeeds(lgt_compare_3_24) :-
+	test(lgt_compare_3_24, true) :-
 		{compare(>, (4,1,0), (4,0,1))}.
 
-	fails(lgt_compare_3_25) :-
+	test(lgt_compare_3_25, false) :-
 		{compare(>, (4,0,1), (4,1,0))}.
 
-	fails(lgt_compare_3_26) :-
+	test(lgt_compare_3_26, false) :-
 		{compare(<, (4,1,0), (4,0,1))}.
 
-	succeeds(lgt_compare_3_27) :-
+	test(lgt_compare_3_27, true) :-
 		{compare(<, (4,0,1), (4,1,0))}.
 
-	succeeds(lgt_compare_3_28) :-
-		{compare(Order, 1, 1+2)},
-		Order == (<).
+	test(lgt_compare_3_28, true(Order == (<))) :-
+		{compare(Order, 1, 1+2)}.
 
-	succeeds(lgt_compare_3_29) :-
-		{compare(Order, 1+2, 1)},
-		Order == (>).
+	test(lgt_compare_3_29, true(Order == (>))) :-
+		{compare(Order, 1+2, 1)}.
 
 :- end_object.
