@@ -6132,29 +6132,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-/*
-% '$lgt_metacall_local'(?term, +execution_context)
-%
-% performs a meta-call at runtime
-
-'$lgt_metacall_local'(Goal, ExCtx) :-
-	var(Goal),
-	throw(error(instantiation_error, logtalk(call(Goal), ExCtx))).
-
-'$lgt_metacall_local'({Goal}, ExCtx) :-
-	% pre-compiled meta-calls or calls in "user" (compiler bypass)
-	!,
-	(	callable(Goal) ->
-		call(Goal)
-	;	var(Goal) ->
-		throw(error(instantiation_error, logtalk({Goal}, ExCtx)))
-	;	throw(error(type_error(callable, Goal), logtalk({Goal}, ExCtx)))
-	).
-
-'$lgt_metacall_local'(Goal, ExCtx) :-
-	'$lgt_metacall_local_chk'(Goal, ExCtx).
-*/
-
 
 % '$lgt_quantified_metacall'(?term, +execution_context, +atom)
 %
