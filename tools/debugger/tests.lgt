@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2021-09-25,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -152,25 +152,21 @@
 		leash(none),
 		\+ leashing(_).
 
-	test(debugger_leash_1_02, deterministic) :-
+	test(debugger_leash_1_02, deterministic(Ports == [call, fact, rule])) :-
 		leash(loose),
-		setof(Port, leashing(Port), Ports),
-		Ports == [call, fact, rule].
+		setof(Port, leashing(Port), Ports).
 
-	test(debugger_leash_1_03, deterministic) :-
+	test(debugger_leash_1_03, deterministic(Ports == [call, fact, redo, rule])) :-
 		leash(half),
-		setof(Port, leashing(Port), Ports),
-		Ports == [call, fact, redo, rule].
+		setof(Port, leashing(Port), Ports).
 
-	test(debugger_leash_1_04, deterministic) :-
+	test(debugger_leash_1_04, deterministic(Ports == [call, exception, fact, fail, redo, rule])) :-
 		leash(tight),
-		setof(Port, leashing(Port), Ports),
-		Ports == [call, exception, fact, fail, redo, rule].
+		setof(Port, leashing(Port), Ports).
 
-	test(debugger_leash_1_05, deterministic) :-
+	test(debugger_leash_1_05, deterministic(Ports == [call, exception, exit, fact, fail, redo, rule])) :-
 		leash(full),
-		setof(Port, leashing(Port), Ports),
-		Ports == [call, exception, exit, fact, fail, redo, rule].
+		setof(Port, leashing(Port), Ports).
 
 	test(debugger_leash_1_06, deterministic) :-
 		set::powerset([fact,rule,call,exit,redo,fail,exception], PowerSet),
@@ -207,11 +203,10 @@
 		spy([]).
 
 	% all spy point in a list must be set
-	test(debugger_spy_1_06, deterministic) :-
+	test(debugger_spy_1_06, deterministic(SpyPoints == [logtalk-27, bar/5])) :-
 		reset,
 		spy([logtalk-27, bar/5]),
-		setof(SpyPoint, spying(SpyPoint), SpyPoints),
-		SpyPoints == [logtalk-27, bar/5].
+		setof(SpyPoint, spying(SpyPoint), SpyPoints).
 
 	test(debugger_nospy_1_01, deterministic) :-
 		reset,
