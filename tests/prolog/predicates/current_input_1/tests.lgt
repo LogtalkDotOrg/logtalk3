@@ -23,39 +23,35 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-08-10,
+		date is 2021-09-25,
 		comment is 'Unit tests for the ISO Prolog standard current_input/1 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
 	]).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	succeeds(sics_current_input_1_01) :-
+	test(sics_current_input_1_01, true) :-
 		{current_input(_S)}.
 
-	throws(sics_current_input_1_02, error(domain_error(stream,foo),_)) :-
+	test(sics_current_input_1_02, error(domain_error(stream,foo))) :-
 		{current_input(foo)}.
 
-	fails(sics_current_input_1_03) :-
+	test(sics_current_input_1_03, false) :-
 		{current_output(S),
 		 current_input(S)}.
 
-	throws(sics_current_input_1_04, error(domain_error(stream,S),_)) :-
+	test(sics_current_input_1_04, error(domain_error(stream,S))) :-
 		^^closed_input_stream(S, []),
 		{current_input(S)}.
 
-	succeeds(sics_current_input_1_05) :-
+	test(sics_current_input_1_05, true) :-
 		{current_input(S),
 		 current_input(S)}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_current_input_1_06) :-
+	test(lgt_current_input_1_06, true) :-
 		{current_input(S)},
 		ground(S).
 

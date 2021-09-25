@@ -40,61 +40,53 @@ condition_opaque_to_cut(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-06-23,
+		date is 2021-09-25,
 		comment is 'Unit tests for the soft-cut if/3 built-in predicate.'
 	]).
 
 	condition :-
 		predicate_property(if(_,_,_), built_in).
 
-	:- discontiguous([
-		succeeds/1, fails/1
-	]).
-
-	succeeds(if_3_01) :-
+	test(if_3_01, true) :-
 		{if(true, true, fail)}.
 
-	succeeds(if_3_02) :-
+	test(if_3_02, true) :-
 		{if(fail, true, true)}.
 
-	fails(if_3_03) :-
+	test(if_3_03, false) :-
 		{if(true, fail, fail)}.
 
-	fails(if_3_04) :-
+	test(if_3_04, false) :-
 		{if(fail, true, fail)}.
 
-	succeeds(if_3_05) :-
-		findall(X-Y, {if(a(X), b(Y), c(_))}, L),
-		L == [1-4, 1-5, 1-6, 2-4, 2-5, 2-6, 3-4, 3-5, 3-6].
+	test(if_3_05, true(L == [1-4, 1-5, 1-6, 2-4, 2-5, 2-6, 3-4, 3-5, 3-6])) :-
+		findall(X-Y, {if(a(X), b(Y), c(_))}, L).
 
-	succeeds(if_3_06) :-
-		findall(Z, {if(fail, b(_), c(Z))}, L),
-		L == [7, 8, 9].
+	test(if_3_06, true(L == [7, 8, 9])) :-
+		findall(Z, {if(fail, b(_), c(Z))}, L).
 
-	succeeds(if_3_07) :-
-		findall(Z, {if((!,fail), b(_), c(Z))}, L),
-		L == [7, 8, 9].
+	test(if_3_07, true(L == [7, 8, 9])) :-
+		findall(Z, {if((!,fail), b(_), c(Z))}, L).
 
-	succeeds(if_3_08) :-
+	test(if_3_08, true) :-
 		{condition_opaque_to_cut}.
 
-	succeeds(if_3_09) :-
-		findall(X, {condition_opaque_to_cut(X)}, L),
-		L == [1, 2].
+	test(if_3_09, true(L == [1, 2])) :-
+		findall(X, {condition_opaque_to_cut(X)}, L).
 
-	throws(if_3_10, [error(type_error(callable,3),_), error(type_error(callable,if(3,true,true)),_)]) :-
+	test(if_3_10, errors([type_error(callable,3), type_error(callable,if(3,true,true))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{if(Three, true, true)}.
 
-	throws(if_3_11, [error(type_error(callable,3),_), error(type_error(callable,if(true,3,true)),_)]) :-
+	test(if_3_11, errors([type_error(callable,3), type_error(callable,if(true,3,true))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{if(true, Three, true)}.
 
-	throws(if_3_12, [error(type_error(callable,3),_), error(type_error(callable,if(fail,true,3)),_)]) :-
+	test(if_3_12, errors([type_error(callable,3), type_error(callable,if(fail,true,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{if(fail, true, Three)}.
