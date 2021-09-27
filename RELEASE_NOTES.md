@@ -50,7 +50,8 @@ Documentation
 
 * IMPROVED: The `logtalk_allure_report` script man page.
 
-* IMPROVED: The `lgtunit` tool documentation on generating Allure reports.
+* IMPROVED: The `lgtunit` tool documentation on testing generators and on
+creating Allure reports.
 
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.

@@ -922,19 +922,29 @@ in alternative the standard <code class="docutils literal notranslate"><span cla
 <div class="section" id="testing-generators">
 <h2>Testing generators<a class="headerlink" href="#testing-generators" title="Permalink to this headline"></a></h2>
 <p>To test all solutions of a predicate that acts as a <em>generator</em>, we can
-use the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate as the test goal with the <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code>
-predicate called to report details on any solution that fails the test.
-For example:</p>
+use either the <code class="docutils literal notranslate"><span class="pre">all/1</span></code> outcome or the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate as the
+test goal with the <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code> predicate called to report details on
+any solution that fails the test. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(test_solution_generator, all(test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))) <span class="o">:-</span>
+    generator(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>).
+</pre></div>
+</div>
+<p>or:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [assertion<span class="o">/</span><span class="m">2</span>]).
 ...
 
-test(test_solution_generator) <span class="o">:-</span>
+test(test_solution_generator_2) <span class="o">:-</span>
     <span class="k">forall</span>(
         generator(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>),
-        assertion(generator(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>), test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))
+        assertion(generator(<span class="nv">X</span>), test(<span class="nv">X</span>,<span class="nv">Y</span>,<span class="nv">Z</span>))
     ).
 </pre></div>
 </div>
+<p>While using the <code class="docutils literal notranslate"><span class="pre">all/1</span></code> outcome results in a more compact test
+definition, using the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> predicate allows customizing the
+assertion description. In the example above, we use the <code class="docutils literal notranslate"><span class="pre">generator(X)</span></code>
+description instead of the <code class="docutils literal notranslate"><span class="pre">test(X,Y,Z)</span></code> description implicit when we
+use the <code class="docutils literal notranslate"><span class="pre">all/1</span></code> outcome.</p>
 </div>
 <div class="section" id="testing-input-output-predicates">
 <h2>Testing input/output predicates<a class="headerlink" href="#testing-input-output-predicates" title="Permalink to this headline"></a></h2>

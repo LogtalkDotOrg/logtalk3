@@ -755,17 +755,28 @@ Testing generators
 ------------------
 
 To test all solutions of a predicate that acts as a *generator*, we can use
-the `forall/2` predicate as the test goal with the `assertion/2` predicate
-called to report details on any solution that fails the test. For example:
+either the `all/1` outcome or the `forall/2` predicate as the test goal with
+the `assertion/2` predicate called to report details on any solution that
+fails the test. For example:
+
+	test(test_solution_generator, all(test(X,Y,Z))) :-
+		generator(X, Y, Z).
+
+or:
 
 	:- uses(lgtunit, [assertion/2]).
 	...
 
-	test(test_solution_generator) :-
+	test(test_solution_generator_2) :-
 		forall(
 			generator(X, Y, Z),
-			assertion(generator(X,Y,Z), test(X,Y,Z))
+			assertion(generator(X), test(X,Y,Z))
 		).
+
+While using the `all/1` outcome results in a more compact test definition,
+using the `forall/2` predicate allows customizing the assertion description.
+In the example above, we use the `generator(X)` description instead of the
+`test(X,Y,Z)` description implicit when we use the `all/1` outcome.
 
 
 Testing input/output predicates
