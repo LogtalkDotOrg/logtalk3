@@ -34,8 +34,8 @@ Prolog adapter and integration files
 * FIXED: The ECLiPSe adapter file to allow the `setup_call_cleanup/3` predicate
 to be seen as a built-in predicate for 7.0#24 and later versions.
 
-* FIXED: Workaround indexing issues in Trealla Prolog by updating its adapter
-file to set the `indexing_threshold` flag to 400.
+* FIXED: Workaround clause indexing bugs in Trealla Prolog by changing the
+integration script to use the `--noindex` command-line option.
 
 * FIXED: The YAP adapter file expansion of `use_module/1` directives when
 compiling modules as objects.
