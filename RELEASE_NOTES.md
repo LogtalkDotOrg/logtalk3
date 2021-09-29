@@ -25,6 +25,11 @@ RELEASE NOTES
 3.51.0 - September ??, 2021
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Changing the `report` flag default value using a settings file.
+
 Prolog adapter and integration files
 ------------------------------------
 
