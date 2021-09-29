@@ -47,6 +47,9 @@ integration script to use the `--noindex` command-line option.
 * FIXED: The YAP adapter file expansion of `use_module/1` directives when
 compiling modules as objects.
 
+* FIXED: Workaround XSB non-standard exceptions terms for procedure existence
+errors.
+
 Documentation
 -------------
 

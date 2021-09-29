@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on August 19, 2021
+%  Last updated on September 29, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -700,7 +700,15 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	'$lgt_normalize_error_term_aux'(Error, NormalizedError).
 
 '$lgt_normalize_error_term_aux'(
+	existence_error(predicate, ':'('usermod(?)', Functor/Arity)),
+	existence_error(procedure, Functor/Arity)
+).
+'$lgt_normalize_error_term_aux'(
 	existence_error(procedure, ':'('usermod(?)', Functor/Arity)),
+	existence_error(procedure, Functor/Arity)
+).
+'$lgt_normalize_error_term_aux'(
+	existence_error(predicate, ':'(usermod, Functor/Arity)),
 	existence_error(procedure, Functor/Arity)
 ).
 '$lgt_normalize_error_term_aux'(
