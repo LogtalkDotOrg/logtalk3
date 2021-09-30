@@ -953,7 +953,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
 
 		read_single_char(Char) :-
-			{get_single_char(Char)}, put_char(Char), nl.
+			{':'(charsio,get_single_char(Char))}, put_char(Char), nl.
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 

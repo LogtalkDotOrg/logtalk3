@@ -89,6 +89,9 @@ the `lgtunit` tool.
 predicate when provided by the backend Prolog system (e.g. LVM or Trealla
 Prolog).
 
+* UPDATED: The `debugger` tool to use the `charsio:get_single_char/1` predicate
+when using the Scryer Prolog backend.
+
 * IMPROVED: The `logtalk_allure_report` script to try to prevent data loss
 when the specified report directory exists, is not empty, and does not contain
 a previous report.
@@ -113,6 +116,9 @@ Ports
 * UPDATED: The `toychr` port to use a `get_unbuffered_char/1` built-in
 predicate when provided by the backend Prolog system (e.g. LVM or Trealla
 Prolog).
+
+* UPDATED: The `toychr` port to use the `charsio:get_single_char/1` predicate
+when using the Scryer Prolog backend.
 
 Examples
 --------

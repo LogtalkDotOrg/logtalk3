@@ -1042,6 +1042,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			;	skip(10)
 			).
 
+	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
+
+		read_single_char(Char) :-
+			{':'(charsio,get_single_char(Char))}, put_char(Char), nl.
+
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 
 		read_single_char(Char) :-
