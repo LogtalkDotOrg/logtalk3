@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:10:0,
+		version is 4:11:0,
 		author is 'Paulo Moura',
-		date is 2021-05-04,
+		date is 2021-09-30,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -904,7 +904,16 @@
 		asserta(invocation_number_(0)),
 		retractall(jump_to_invocation_number_(_)).
 
-	:- if(current_logtalk_flag(prolog_dialect, cx)).
+	:- if(predicate_property(get_single_code(_), built_in)). % e.g. LVM
+
+		read_single_char(Char) :-
+			{get_single_code(Code)}, put_code(Code), char_code(Char, Code),
+			(	Code =:= 10 ->
+				true
+			;	nl
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, cx)).
 
 		read_single_char(Char) :-
 			{get_single_char(Code)}, put_code(Code), char_code(Char, Code),
