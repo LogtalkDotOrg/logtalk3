@@ -36,6 +36,8 @@ Prolog adapter and integration files
 * UPDATED: The LVM adapter file to require version 1.10.0 and allow the
 `setup_call_cleanup/3` predicate to be seen as a built-in predicate.
 
+* UPDATED: The Trealla Prolog adapter file to require version 1.13.51 or later.
+
 * FIXED: The LVM `lvmlgt` integration script to suppress `rlwrap` warnings.
 
 * FIXED: The ECLiPSe adapter file to allow the `setup_call_cleanup/3` predicate
