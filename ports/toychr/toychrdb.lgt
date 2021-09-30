@@ -136,7 +136,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	:- info([
 		version is 0:6:0,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2021-09-30,
+		date is 2021-10-01,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
@@ -996,11 +996,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	% read_single_char/1 definition copied from the Logtalk debugger
 
-	:- if(predicate_property(get_single_code(_), built_in)). % e.g. LVM
+	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. LVM or Trealla Prolog
 
 		read_single_char(Char) :-
-			{get_single_code(Code)}, put_code(Code), char_code(Char, Code),
-			(	Code =:= 10 ->
+			{get_unbuffered_char(Char)}, put_char(Char),
+			(	Char == '\n' ->
 				true
 			;	nl
 			).

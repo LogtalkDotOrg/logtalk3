@@ -83,8 +83,9 @@ Tools
 * ADDED: Support for `exists(Assertion)` and `all(Assertion)` test outcomes to
 the `lgtunit` tool.
 
-* UPDATED: The `debugger` tool to use a `get_single_code/1` built-in predicate
-when provided by the backend Prolog system (e.g. LVM).
+* UPDATED: The `debugger` tool to use a `get_unbuffered_char/1` built-in
+predicate when provided by the backend Prolog system (e.g. LVM or Trealla
+Prolog).
 
 * IMPROVED: The `logtalk_allure_report` script to try to prevent data loss
 when the specified report directory exists, is not empty, and does not contain
@@ -107,8 +108,9 @@ assertions.
 Ports
 -----
 
-* UPDATED: The `toychr` port to use a `get_single_code/1` built-in predicate
-when provided by the backend Prolog system (e.g. LVM).
+* UPDATED: The `toychr` port to use a `get_unbuffered_char/1` built-in
+predicate when provided by the backend Prolog system (e.g. LVM or Trealla
+Prolog).
 
 Examples
 --------
