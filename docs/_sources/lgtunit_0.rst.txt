@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 10:3:0
-| **Date:** 2021-09-23
+| **Version:** 10:4:0
+| **Date:** 2021-10-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1662,6 +1662,30 @@ Cleans the temporary file used when testing binary output.
 
 .. raw:: html
 
+   <div id="create_text_file/3"> </div>
+
+.. index:: create_text_file/3
+.. _lgtunit/0::create_text_file/3:
+
+``create_text_file/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a text file with the given contents. The file is open for writing using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create_text_file(File,Contents,Options)``
+| **Mode and number of proofs:**
+|    ``create_text_file(+atom,+atom,+list(stream_option))`` - ``one``
+|    ``create_text_file(+atom,+list(atom),+list(stream_option))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="create_text_file/2"> </div>
 
 .. index:: create_text_file/2
@@ -1670,7 +1694,7 @@ Cleans the temporary file used when testing binary output.
 ``create_text_file/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Creates a text file with the given contents.
+Creates a text file with the given contents. The file is open for writing using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -1709,6 +1733,29 @@ Creates a binary file with the given contents.
 
 .. raw:: html
 
+   <div id="check_text_file/3"> </div>
+
+.. index:: check_text_file/3
+.. _lgtunit/0::check_text_file/3:
+
+``check_text_file/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the contents of a text file match the expected contents. The file is open for reading using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_text_file(File,Contents,Options)``
+| **Mode and number of proofs:**
+|    ``check_text_file(+atom,+atom,+list(stream_option))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="check_text_file/2"> </div>
 
 .. index:: check_text_file/2
@@ -1717,7 +1764,7 @@ Creates a binary file with the given contents.
 ``check_text_file/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the contents of a text file match the expected contents.
+Checks that the contents of a text file match the expected contents. The file is open for reading using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -1732,6 +1779,29 @@ Checks that the contents of a text file match the expected contents.
 
 .. raw:: html
 
+   <div id="text_file_assertion/4"> </div>
+
+.. index:: text_file_assertion/4
+.. _lgtunit/0::text_file_assertion/4:
+
+``text_file_assertion/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``text_file_assertion(File,Contents,Options,Assertion)``
+| **Mode and number of proofs:**
+|    ``text_file_assertion(+atom,+atom,+list(stream_option),--callable)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="text_file_assertion/3"> </div>
 
 .. index:: text_file_assertion/3
@@ -1740,13 +1810,13 @@ Checks that the contents of a text file match the expected contents.
 ``text_file_assertion/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the given file have the expected text contents.
+Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using default options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``text_file_assertion(Path,Contents,Assertion)``
+|    ``text_file_assertion(File,Contents,Assertion)``
 | **Mode and number of proofs:**
 |    ``text_file_assertion(+atom,+atom,--callable)`` - ``one``
 

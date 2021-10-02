@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 10:3:0,
+		version is 10:4:0,
 		author is 'Paulo Moura',
-		date is 2021-09-23,
+		date is 2021-10-02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -543,11 +543,19 @@
 		comment is 'Cleans the temporary file used when testing binary output.'
 	]).
 
+	:- protected(create_text_file/3).
+	:- mode(create_text_file(+atom, +atom, +list(stream_option)), one).
+	:- mode(create_text_file(+atom, +list(atom), +list(stream_option)), one).
+	:- info(create_text_file/3, [
+		comment is 'Creates a text file with the given contents. The file is open for writing using the given options.',
+		argnames is ['File', 'Contents', 'Options']
+	]).
+
 	:- protected(create_text_file/2).
 	:- mode(create_text_file(+atom, +atom), one).
 	:- mode(create_text_file(+atom, +list(atom)), one).
 	:- info(create_text_file/2, [
-		comment is 'Creates a text file with the given contents.',
+		comment is 'Creates a text file with the given contents. The file is open for writing using default options.',
 		argnames is ['File', 'Contents']
 	]).
 
@@ -558,18 +566,32 @@
 		argnames is ['File', 'Bytes']
 	]).
 
+	:- protected(check_text_file/3).
+	:- mode(check_text_file(+atom, +atom, +list(stream_option)), zero_or_one).
+	:- info(check_text_file/3, [
+		comment is 'Checks that the contents of a text file match the expected contents. The file is open for reading using the given options.',
+		argnames is ['File', 'Contents', 'Options']
+	]).
+
 	:- protected(check_text_file/2).
 	:- mode(check_text_file(+atom, +atom), zero_or_one).
 	:- info(check_text_file/2, [
-		comment is 'Checks that the contents of a text file match the expected contents.',
+		comment is 'Checks that the contents of a text file match the expected contents. The file is open for reading using default options.',
 		argnames is ['File', 'Contents']
+	]).
+
+	:- protected(text_file_assertion/4).
+	:- mode(text_file_assertion(+atom, +atom, +list(stream_option), --callable), one).
+	:- info(text_file_assertion/4, [
+		comment is 'Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using the given options.',
+		argnames is ['File', 'Contents', 'Options', 'Assertion']
 	]).
 
 	:- protected(text_file_assertion/3).
 	:- mode(text_file_assertion(+atom, +atom, --callable), one).
 	:- info(text_file_assertion/3, [
-		comment is 'Returns an assertion for checking that the given file have the expected text contents.',
-		argnames is ['Path', 'Contents', 'Assertion']
+		comment is 'Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using default options.',
+		argnames is ['File', 'Contents', 'Assertion']
 	]).
 
 	:- protected(check_binary_file/2).
@@ -2691,11 +2713,14 @@
 
 	% other predicates for testing input/output predicates
 
-	create_text_file(File, Contents) :-
+	create_text_file(File, Contents, Options) :-
 		os::absolute_file_name(File, Path),
-		open(Path, write, Stream),
+		open(Path, write, Stream, Options),
 		write_text_contents(Stream, Contents),
 		close(Stream).
+
+	create_text_file(File, Contents) :-
+		create_text_file(File, Contents, []).
 
 	create_binary_file(File, Bytes) :-
 		os::absolute_file_name(File, Path),
@@ -2703,16 +2728,22 @@
 		write_binary_contents(Bytes, Stream),
 		close(Stream).
 
-	check_text_file(File, Expected) :-
+	check_text_file(File, Expected, Options) :-
 		os::absolute_file_name(File, Path),
-		open(Path, read, Stream),
+		open(Path, read, Stream, Options),
 		get_text_contents(Stream, Expected, Contents),
 		Expected == Contents.
 
-	text_file_assertion(File, Expected, Expected == Contents) :-
+	check_text_file(File, Expected) :-
+		check_text_file(File, Expected, []).
+
+	text_file_assertion(File, Expected, Options, Expected == Contents) :-
 		os::absolute_file_name(File, Path),
-		open(Path, read, Stream),
+		open(Path, read, Stream, Options),
 		get_text_contents(Stream, Expected, Contents).
+
+	text_file_assertion(File, Expected, Assertion) :-
+		text_file_assertion(File, Expected, [], Assertion).
 
 	check_binary_file(File, Expected) :-
 		os::absolute_file_name(File, Path),

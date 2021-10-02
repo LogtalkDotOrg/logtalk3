@@ -165,6 +165,7 @@ If you find Logtalk useful, please include a citation on your publications
 (also cite the used backend Prolog compilers). The [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib)
 file includes bibliographic references in BibTeX format (including the 2003
 PhD thesis on Logtalk design and implementation and the Logtalk Handbook).
+See also the [CITATION.cff](CITATION.cff) file.
 
 
 Contributions

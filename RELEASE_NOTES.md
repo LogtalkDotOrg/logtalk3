@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.51.0 - September ??, 2021
-===========================
+3.51.0 - October ??, 2021
+=========================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -84,6 +84,9 @@ Tools
 
 * ADDED: Support for `exists(Assertion)` and `all(Assertion)` test outcomes to
 the `lgtunit` tool.
+
+* ADDED: New input/output `create_text_file/3`, `check_text_file/3`, and
+`text_file_assertion/4` testing predicates to the `lgtunit` tool.
 
 * UPDATED: The `debugger` tool to use a `get_unbuffered_char/1` built-in
 predicate when provided by the backend Prolog system (e.g. LVM or Trealla
