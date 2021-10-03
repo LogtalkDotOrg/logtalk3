@@ -156,6 +156,9 @@ predicates to verify their standard roundtrip property.
 * IMPROVED: Simplified tests for the `format/3`, `nl/0-1`, and `write_term/3`
 predicates.
 
+* UPDATED: The Logtalk `use_module/2` directive test set to support the Trealla
+Prolog backend.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

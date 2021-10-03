@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2020-01-23,
+		date is 2020-10-03,
 		comment is 'Unit tests for the use_module/2 built-in directive.'
 	]).
 
@@ -37,16 +37,16 @@
 	test(use_module_2_01, true(X == 1)) :-
 		p(X).
 
-	test(use_module_2_2, true(X == 2)) :-
+	test(use_module_2_02, true(X == 2)) :-
 		a1(X).
 
-	test(use_module_2_3, true(X == 3)) :-
+	test(use_module_2_03, true(X == 3)) :-
 		a2(X).
 
-	test(uses_2_03, true(Xs == [one])) :-
+	test(use_module_2_04, true(Xs == [one])) :-
 		findall(X, a3(X), Xs).
 
-	test(uses_2_04, true(Xs == [x,y,z])) :-
+	test(use_module_2_05, true(Xs == [x,y,z])) :-
 		findall(X, a4(X), Xs).
 
 :- end_object.
