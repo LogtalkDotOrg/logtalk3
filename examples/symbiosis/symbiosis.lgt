@@ -23,8 +23,8 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:1:0,
-		date is 2013-10-10,
+		version is 1:2:0,
+		date is 2021-10-03,
 		comment is 'Examples of using Prolog built-in meta-predicates and module meta-predicates that take closures as arguments.'
 	]).
 
@@ -41,6 +41,8 @@
 		:- use_module(apply, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
 		:- use_module(lists, [maplist/2, maplist/3]).
+	:- elif(current_logtalk_flag(prolog_dialect, trella)).
+		:- use_module(apply, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 		:- use_module(maplist, [maplist/2, maplist/3]).
 	:- endif.

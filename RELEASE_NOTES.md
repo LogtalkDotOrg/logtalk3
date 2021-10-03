@@ -133,6 +133,8 @@ fail.
 * IMPROVED: Avoid printing expected warnings when running the
 `lambdas_compiled` example tests.
 
+* UPDATED: The `symbiosis` example to support the Trealla Prolog backend.
+
 Tests
 -----
 
