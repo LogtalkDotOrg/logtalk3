@@ -12,7 +12,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 
 | **Author:** Paulo Moura
 | **Version:** 10:4:0
-| **Date:** 2021-10-02
+| **Date:** 2021-10-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -340,6 +340,12 @@ Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discar
 | **Mode and number of proofs:**
 |    ``quick_check(@callable,-callable,++list(compound))`` - ``one``
 
+| **Remarks:**
+
+    - ``Seed`` argument: Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.
+    - ``Discarded`` argument: Number of generated tests that were discarded for failing to comply a pre-condition specified using the ``pc/1`` option.
+    - ``Labels`` argument: List of pairs ``Label-N`` where ``N`` is the number of generated tests that are classified as ``Label`` by a closure specified using the ``l/1`` option.
+
 
 ------------
 
@@ -388,7 +394,7 @@ Generates and runs random tests for a predicate given its mode template and a se
 ``quick_check/1``
 ^^^^^^^^^^^^^^^^^
 
-Generates and runs 100 random tests for a predicate given its mode template. Fails when a generated test fails printing the test.
+Generates and runs random tests using default options for a predicate given its mode template. Fails when a generated test fails printing the test.
 
 | **Compilation flags:**
 |    ``static``
@@ -411,7 +417,7 @@ Generates and runs 100 random tests for a predicate given its mode template. Fai
 ``benchmark/2``
 ^^^^^^^^^^^^^^^
 
-Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.
+Benchmarks a goal and returns the total execution time in seconds. Uses CPU clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.
 
 | **Compilation flags:**
 |    ``static``
@@ -962,7 +968,7 @@ Creates a temporary file with the given text contents, opens it for reading usin
 ``check_text_input/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file (referenced with the given alias) being written have the expected text contents.
+Checks that the temporary file (referenced by the given alias) being read have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -985,7 +991,7 @@ Checks that the temporary file (referenced with the given alias) being written h
 ``check_text_input/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file being written have the expected text contents.
+Checks that the temporary file being read have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1008,7 +1014,7 @@ Checks that the temporary file being written have the expected text contents.
 ``text_input_assertion/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.
+Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1031,7 +1037,7 @@ Returns an assertion for checking that the temporary file (referenced with the g
 ``text_input_assertion/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file being written have the expected text contents.
+Returns an assertion for checking that the temporary file being read have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1144,7 +1150,7 @@ Creates a temporary file with the given binary contents, opens it for reading us
 ``check_binary_input/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file (referenced with the given alias) have the expected binary contents.
+Checks that the temporary file (referenced by the given alias) being read have the expected binary contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1167,7 +1173,7 @@ Checks that the temporary file (referenced with the given alias) have the expect
 ``check_binary_input/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file have the expected binary contents.
+Checks that the temporary file being read have the expected binary contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1190,7 +1196,7 @@ Checks that the temporary file have the expected binary contents.
 ``binary_input_assertion/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.
+Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected binary contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1213,7 +1219,7 @@ Returns an assertion for checking that the temporary file (referenced with the g
 ``binary_input_assertion/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file have the expected binary contents.
+Returns an assertion for checking that the temporary file being read have the expected binary contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1281,7 +1287,7 @@ Creates a temporary file with the given text contents and opens it for writing r
 ``set_text_output/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Creates a temporary file with the given text contents and referenced with the given alias.
+Creates a temporary file with the given text contents and referenced by the given alias.
 
 | **Compilation flags:**
 |    ``static``
@@ -1329,7 +1335,7 @@ Creates a temporary file with the given text contents and sets the current outpu
 ``check_text_output/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file (open with the given options referenced with the given alias) being written have the expected text contents.
+Checks that the temporary file (open with the given options and alias) being written have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1352,7 +1358,7 @@ Checks that the temporary file (open with the given options referenced with the 
 ``check_text_output/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file (referenced with the given alias) being written have the expected text contents.
+Checks that the temporary file (open with default options and alias) being written have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1398,7 +1404,7 @@ Checks that the temporary file being written have the expected text contents.
 ``text_output_assertion/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file (open with the given options and referenced with the given alias) being written have the expected text contents.
+Returns an assertion for checking that the temporary file (open with the given options and alias) being written have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1421,7 +1427,7 @@ Returns an assertion for checking that the temporary file (open with the given o
 ``text_output_assertion/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.
+Returns an assertion for checking that the temporary file (open with default options and alias) being written have the expected text contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1557,7 +1563,7 @@ Creates a temporary file with the given binary contents and sets the current out
 ``check_binary_output/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the temporary file (referenced with the given alias) have the expected binary contents.
+Checks that the temporary file (referenced by the given alias) have the expected binary contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1603,7 +1609,7 @@ Checks that the temporary file have the expected binary contents.
 ``binary_output_assertion/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.
+Returns an assertion for checking that the temporary file (referenced by the given alias) have the expected binary contents.
 
 | **Compilation flags:**
 |    ``static``
@@ -1764,7 +1770,7 @@ Checks that the contents of a text file match the expected contents. The file is
 ``check_text_file/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Checks that the contents of a text file match the expected contents. The file is open for reading using default options.
+Checks that the contents of a text file (open for reading using default options) match the expected contents.
 
 | **Compilation flags:**
 |    ``static``

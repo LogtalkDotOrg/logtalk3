@@ -29,7 +29,7 @@
 	:- info([
 		version is 10:4:0,
 		author is 'Paulo Moura',
-		date is 2021-10-02,
+		date is 2021-10-03,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -132,7 +132,12 @@
 	:- meta_predicate(quick_check(::, *, ::)).
 	:- info(quick_check/3, [
 		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)``, ``error(Error,Goal,Seed)``, or ``error(Error,Culprit)``. ``Goal`` is the failed test. ``Seed`` is the starting seed.',
-		argnames is ['Template', 'Result', 'Options']
+		argnames is ['Template', 'Result', 'Options'],
+		remarks is [
+			'``Seed`` argument' - 'Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.',
+			'``Discarded`` argument' - 'Number of generated tests that were discarded for failing to comply a pre-condition specified using the ``pc/1`` option.',
+			'``Labels`` argument' - 'List of pairs ``Label-N`` where ``N`` is the number of generated tests that are classified as ``Label`` by a closure specified using the ``l/1`` option.'
+		]
 	]).
 
 	:- public(quick_check/2).
@@ -155,7 +160,7 @@
 	:- public(quick_check/1).
 	:- mode(quick_check(@callable), zero_or_one).
 	:- info(quick_check/1, [
-		comment is 'Generates and runs 100 random tests for a predicate given its mode template. Fails when a generated test fails printing the test.',
+		comment is 'Generates and runs random tests using default options for a predicate given its mode template. Fails when a generated test fails printing the test.',
 		argnames is ['Template']
 	]).
 
@@ -163,7 +168,7 @@
 	:- meta_predicate(benchmark(0, *)).
 	:- mode(benchmark(+callable, -float), one).
 	:- info(benchmark/2, [
-		comment is 'Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.',
+		comment is 'Benchmarks a goal and returns the total execution time in seconds. Uses CPU clock. Goals that may throw an exception should be wrapped by the ``catch/3`` control construct.',
 		argnames is ['Goal', 'Time']
 	]).
 
@@ -330,28 +335,28 @@
 	:- protected(check_text_input/2).
 	:- mode(check_text_input(+atom, +atom), zero_or_one).
 	:- info(check_text_input/2, [
-		comment is 'Checks that the temporary file (referenced with the given alias) being written have the expected text contents.',
+		comment is 'Checks that the temporary file (referenced by the given alias) being read have the expected text contents.',
 		argnames is ['Alias', 'Contents']
 	]).
 
 	:- protected(check_text_input/1).
 	:- mode(check_text_input(+atom), zero_or_one).
 	:- info(check_text_input/1, [
-		comment is 'Checks that the temporary file being written have the expected text contents.',
+		comment is 'Checks that the temporary file being read have the expected text contents.',
 		argnames is ['Contents']
 	]).
 
 	:- protected(text_input_assertion/3).
 	:- mode(text_input_assertion(+atom, +atom, --callable), one).
 	:- info(text_input_assertion/3, [
-		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.',
+		comment is 'Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected text contents.',
 		argnames is ['Alias', 'Contents', 'Assertion']
 	]).
 
 	:- protected(text_input_assertion/2).
 	:- mode(text_input_assertion(+atom, --callable), one).
 	:- info(text_input_assertion/2, [
-		comment is 'Returns an assertion for checking that the temporary file being written have the expected text contents.',
+		comment is 'Returns an assertion for checking that the temporary file being read have the expected text contents.',
 		argnames is ['Contents', 'Assertion']
 	]).
 
@@ -385,28 +390,28 @@
 	:- protected(check_binary_input/2).
 	:- mode(check_binary_input(+atom, +list(byte)), zero_or_one).
 	:- info(check_binary_input/2, [
-		comment is 'Checks that the temporary file (referenced with the given alias) have the expected binary contents.',
+		comment is 'Checks that the temporary file (referenced by the given alias) being read have the expected binary contents.',
 		argnames is ['Alias', 'Bytes']
 	]).
 
 	:- protected(check_binary_input/1).
 	:- mode(check_binary_input(+list(byte)), zero_or_one).
 	:- info(check_binary_input/1, [
-		comment is 'Checks that the temporary file have the expected binary contents.',
+		comment is 'Checks that the temporary file being read have the expected binary contents.',
 		argnames is ['Bytes']
 	]).
 
 	:- protected(binary_input_assertion/3).
 	:- mode(binary_input_assertion(+atom, +list(byte), --callable), one).
 	:- info(binary_input_assertion/3, [
-		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.',
+		comment is 'Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected binary contents.',
 		argnames is ['Alias', 'Bytes', 'Assertion']
 	]).
 
 	:- protected(binary_input_assertion/2).
 	:- mode(binary_input_assertion(+list(byte), --callable), one).
 	:- info(binary_input_assertion/2, [
-		comment is 'Returns an assertion for checking that the temporary file have the expected binary contents.',
+		comment is 'Returns an assertion for checking that the temporary file being read have the expected binary contents.',
 		argnames is ['Bytes', 'Assertion']
 	]).
 
@@ -428,7 +433,7 @@
 	:- mode(set_text_output(+atom, +atom), one).
 	:- mode(set_text_output(+atom, +list(atom)), one).
 	:- info(set_text_output/2, [
-		comment is 'Creates a temporary file with the given text contents and referenced with the given alias.',
+		comment is 'Creates a temporary file with the given text contents and referenced by the given alias.',
 		argnames is ['Alias', 'Contents']
 	]).
 
@@ -443,14 +448,14 @@
 	:- protected(check_text_output/3).
 	:- mode(check_text_output(+atom, +atom, +list(stream_option)), zero_or_one).
 	:- info(check_text_output/3, [
-		comment is 'Checks that the temporary file (open with the given options referenced with the given alias) being written have the expected text contents.',
+		comment is 'Checks that the temporary file (open with the given options and alias) being written have the expected text contents.',
 		argnames is ['Alias', 'Contents', 'Options']
 	]).
 
 	:- protected(check_text_output/2).
 	:- mode(check_text_output(+atom, +atom), zero_or_one).
 	:- info(check_text_output/2, [
-		comment is 'Checks that the temporary file (referenced with the given alias) being written have the expected text contents.',
+		comment is 'Checks that the temporary file (open with default options and alias) being written have the expected text contents.',
 		argnames is ['Alias', 'Contents']
 	]).
 
@@ -464,14 +469,14 @@
 	:- protected(text_output_assertion/4).
 	:- mode(text_output_assertion(+atom, +atom, +list(stream_option), --callable), one).
 	:- info(text_output_assertion/4, [
-		comment is 'Returns an assertion for checking that the temporary file (open with the given options and referenced with the given alias) being written have the expected text contents.',
+		comment is 'Returns an assertion for checking that the temporary file (open with the given options and alias) being written have the expected text contents.',
 		argnames is ['Alias', 'Contents', 'Options', 'Assertion']
 	]).
 
 	:- protected(text_output_assertion/3).
 	:- mode(text_output_assertion(+atom, +atom, --callable), one).
 	:- info(text_output_assertion/3, [
-		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.',
+		comment is 'Returns an assertion for checking that the temporary file (open with default options and alias) being written have the expected text contents.',
 		argnames is ['Alias', 'Contents', 'Assertion']
 	]).
 
@@ -512,7 +517,7 @@
 	:- protected(check_binary_output/2).
 	:- mode(check_binary_output(+atom, +list(byte)), zero_or_one).
 	:- info(check_binary_output/2, [
-		comment is 'Checks that the temporary file (referenced with the given alias) have the expected binary contents.',
+		comment is 'Checks that the temporary file (referenced by the given alias) have the expected binary contents.',
 		argnames is ['Alias', 'Bytes']
 	]).
 
@@ -526,7 +531,7 @@
 	:- protected(binary_output_assertion/3).
 	:- mode(binary_output_assertion(+atom, +list(byte), --callable), one).
 	:- info(binary_output_assertion/3, [
-		comment is 'Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.',
+		comment is 'Returns an assertion for checking that the temporary file (referenced by the given alias) have the expected binary contents.',
 		argnames is ['Alias', 'Bytes', 'Assertion']
 	]).
 
@@ -576,7 +581,7 @@
 	:- protected(check_text_file/2).
 	:- mode(check_text_file(+atom, +atom), zero_or_one).
 	:- info(check_text_file/2, [
-		comment is 'Checks that the contents of a text file match the expected contents. The file is open for reading using default options.',
+		comment is 'Checks that the contents of a text file (open for reading using default options) match the expected contents.',
 		argnames is ['File', 'Contents']
 	]).
 

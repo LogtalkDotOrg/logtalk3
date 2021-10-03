@@ -187,7 +187,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 10:4:0</div>
-<div class="line"><strong>Date:</strong> 2021-10-02</div>
+<div class="line"><strong>Date:</strong> 2021-10-03</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -639,6 +639,16 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">quick_check(&#64;callable,-callable,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Seed</span></code> argument: Can be used to re-run the same exact sequence of pseudo-random tests by using the <code class="docutils literal notranslate"><span class="pre">rs/1</span></code> option after changes to the code being tested.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument: Number of generated tests that were discarded for failing to comply a pre-condition specified using the <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Labels</span></code> argument: List of pairs <code class="docutils literal notranslate"><span class="pre">Label-N</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number of generated tests that are classified as <code class="docutils literal notranslate"><span class="pre">Label</span></code> by a closure specified using the <code class="docutils literal notranslate"><span class="pre">l/1</span></code> option.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <div id="quick_check/2"> </div></div>
 <div class="section" id="quick-check-2">
@@ -682,7 +692,7 @@
 <div id="quick_check/1"> </div></div>
 <div class="section" id="quick-check-1">
 <span id="lgtunit-0-quick-check-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code></a><a class="headerlink" href="#quick-check-1" title="Permalink to this headline"></a></h3>
-<p>Generates and runs 100 random tests for a predicate given its mode template. Fails when a generated test fails printing the test.</p>
+<p>Generates and runs random tests using default options for a predicate given its mode template. Fails when a generated test fails printing the test.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -703,7 +713,7 @@
 <div id="benchmark/2"> </div></div>
 <div class="section" id="benchmark-2">
 <span id="lgtunit-0-benchmark-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">benchmark/2</span></code></a><a class="headerlink" href="#benchmark-2" title="Permalink to this headline"></a></h3>
-<p>Benchmarks a goal and returns the total execution time in seconds. Uses cpu clock. Goals that may throw an exception should be wrapped by the <code class="docutils literal notranslate"><span class="pre">catch/3</span></code> control construct.</p>
+<p>Benchmarks a goal and returns the total execution time in seconds. Uses CPU clock. Goals that may throw an exception should be wrapped by the <code class="docutils literal notranslate"><span class="pre">catch/3</span></code> control construct.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1198,7 +1208,7 @@
 <div id="check_text_input/2"> </div></div>
 <div class="section" id="check-text-input-2">
 <span id="lgtunit-0-check-text-input-2"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_text_input/2</span></code></a><a class="headerlink" href="#check-text-input-2" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
+<p>Checks that the temporary file (referenced by the given alias) being read have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1219,7 +1229,7 @@
 <div id="check_text_input/1"> </div></div>
 <div class="section" id="check-text-input-1">
 <span id="lgtunit-0-check-text-input-1"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_text_input/1</span></code></a><a class="headerlink" href="#check-text-input-1" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file being written have the expected text contents.</p>
+<p>Checks that the temporary file being read have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1240,7 +1250,7 @@
 <div id="text_input_assertion/3"> </div></div>
 <div class="section" id="text-input-assertion-3">
 <span id="lgtunit-0-text-input-assertion-3"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">text_input_assertion/3</span></code></a><a class="headerlink" href="#text-input-assertion-3" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1261,7 +1271,7 @@
 <div id="text_input_assertion/2"> </div></div>
 <div class="section" id="text-input-assertion-2">
 <span id="lgtunit-0-text-input-assertion-2"></span><span id="index-42"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">text_input_assertion/2</span></code></a><a class="headerlink" href="#text-input-assertion-2" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file being read have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1362,7 +1372,7 @@
 <div id="check_binary_input/2"> </div></div>
 <div class="section" id="check-binary-input-2">
 <span id="lgtunit-0-check-binary-input-2"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_binary_input/2</span></code></a><a class="headerlink" href="#check-binary-input-2" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+<p>Checks that the temporary file (referenced by the given alias) being read have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1383,7 +1393,7 @@
 <div id="check_binary_input/1"> </div></div>
 <div class="section" id="check-binary-input-1">
 <span id="lgtunit-0-check-binary-input-1"></span><span id="index-48"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_binary_input/1</span></code></a><a class="headerlink" href="#check-binary-input-1" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file have the expected binary contents.</p>
+<p>Checks that the temporary file being read have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1404,7 +1414,7 @@
 <div id="binary_input_assertion/3"> </div></div>
 <div class="section" id="binary-input-assertion-3">
 <span id="lgtunit-0-binary-input-assertion-3"></span><span id="index-49"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion/3</span></code></a><a class="headerlink" href="#binary-input-assertion-3" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+<p>Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1425,7 +1435,7 @@
 <div id="binary_input_assertion/2"> </div></div>
 <div class="section" id="binary-input-assertion-2">
 <span id="lgtunit-0-binary-input-assertion-2"></span><span id="index-50"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion/2</span></code></a><a class="headerlink" href="#binary-input-assertion-2" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file have the expected binary contents.</p>
+<p>Returns an assertion for checking that the temporary file being read have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1485,7 +1495,7 @@
 <div id="set_text_output/2"> </div></div>
 <div class="section" id="set-text-output-2">
 <span id="lgtunit-0-set-text-output-2"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_text_output/2</span></code></a><a class="headerlink" href="#set-text-output-2" title="Permalink to this headline"></a></h3>
-<p>Creates a temporary file with the given text contents and referenced with the given alias.</p>
+<p>Creates a temporary file with the given text contents and referenced by the given alias.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1529,7 +1539,7 @@
 <div id="check_text_output/3"> </div></div>
 <div class="section" id="check-text-output-3">
 <span id="lgtunit-0-check-text-output-3"></span><span id="index-55"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_text_output/3</span></code></a><a class="headerlink" href="#check-text-output-3" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file (open with the given options referenced with the given alias) being written have the expected text contents.</p>
+<p>Checks that the temporary file (open with the given options and alias) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1550,7 +1560,7 @@
 <div id="check_text_output/2"> </div></div>
 <div class="section" id="check-text-output-2">
 <span id="lgtunit-0-check-text-output-2"></span><span id="index-56"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_text_output/2</span></code></a><a class="headerlink" href="#check-text-output-2" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
+<p>Checks that the temporary file (open with default options and alias) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1592,7 +1602,7 @@
 <div id="text_output_assertion/4"> </div></div>
 <div class="section" id="text-output-assertion-4">
 <span id="lgtunit-0-text-output-assertion-4"></span><span id="index-58"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">text_output_assertion/4</span></code></a><a class="headerlink" href="#text-output-assertion-4" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file (open with the given options and referenced with the given alias) being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file (open with the given options and alias) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1613,7 +1623,7 @@
 <div id="text_output_assertion/3"> </div></div>
 <div class="section" id="text-output-assertion-3">
 <span id="lgtunit-0-text-output-assertion-3"></span><span id="index-59"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">text_output_assertion/3</span></code></a><a class="headerlink" href="#text-output-assertion-3" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file (referenced with the given alias) being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file (open with default options and alias) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1735,7 +1745,7 @@
 <div id="check_binary_output/2"> </div></div>
 <div class="section" id="check-binary-output-2">
 <span id="lgtunit-0-check-binary-output-2"></span><span id="index-65"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_binary_output/2</span></code></a><a class="headerlink" href="#check-binary-output-2" title="Permalink to this headline"></a></h3>
-<p>Checks that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+<p>Checks that the temporary file (referenced by the given alias) have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1777,7 +1787,7 @@
 <div id="binary_output_assertion/3"> </div></div>
 <div class="section" id="binary-output-assertion-3">
 <span id="lgtunit-0-binary-output-assertion-3"></span><span id="index-67"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion/3</span></code></a><a class="headerlink" href="#binary-output-assertion-3" title="Permalink to this headline"></a></h3>
-<p>Returns an assertion for checking that the temporary file (referenced with the given alias) have the expected binary contents.</p>
+<p>Returns an assertion for checking that the temporary file (referenced by the given alias) have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1922,7 +1932,7 @@
 <div id="check_text_file/2"> </div></div>
 <div class="section" id="check-text-file-2">
 <span id="lgtunit-0-check-text-file-2"></span><span id="index-74"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">check_text_file/2</span></code></a><a class="headerlink" href="#check-text-file-2" title="Permalink to this headline"></a></h3>
-<p>Checks that the contents of a text file match the expected contents. The file is open for reading using default options.</p>
+<p>Checks that the contents of a text file (open for reading using default options) match the expected contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
