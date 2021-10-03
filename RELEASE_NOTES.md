@@ -79,6 +79,9 @@ types to the `arbitrary` library.
 
 * ADDED: Additional tests for the `os::absolute_file_name/2` predicate.
 
+* UPDATED: The library `number` object to also use the `epsilon/0` arithmetic
+constant when using the Scryer Prolog backend.
+
 Tools
 -----
 
