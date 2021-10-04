@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on April 7, 2021
+%  Last updated on October 4, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,8 @@
 :- dynamic(logtalk_library_path/2).
 
 % libraries
+
+logtalk_library_path(library, logtalk_user('library/')).
 
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(assignvars, library('assignvars/')).

@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Moved the definition of the `library` library alias from the
+`paths_core.pl` file to the `paths_libraries.pl` file and added missing
+definition of the `tests` library alias to the `paths_core.pl` file.
+
 * FIXED: Changing the `report` flag default value using a settings file.
 
 Prolog adapter and integration files

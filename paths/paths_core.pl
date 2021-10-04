@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for core resources
-%  Last updated on April 12, 2018
+%  Last updated on October 4, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -65,4 +65,4 @@ logtalk_library_path(core, logtalk_home('core/')).
 
 % main directories in the Logtalk distribution not defined elsewhere
 logtalk_library_path(coding, logtalk_user('coding/')).
-logtalk_library_path(library, logtalk_user('library/')).
+logtalk_library_path(tests, logtalk_user('tests/')).
