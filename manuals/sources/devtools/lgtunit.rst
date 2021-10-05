@@ -480,10 +480,11 @@ The following options are supported:
 -  ``v/1``: boolean option for verbose reporting of generated random
    tests (default is ``false``).
 
-The ``quick_check/1`` uses the default option values. When using the
-``quick_check/2-3`` predicates, invalid options are ignored and replaced
-with the default value if applicable. The ``quick_check/3`` predicate
-returns results in reified form:
+The ``quick_check/1`` predicate uses the default option values. When
+using the ``quick_check/2-3`` predicates, invalid options are ignored
+and replaced with the default value if applicable. The
+``quick_check/1-2`` predicates print the test results. The
+``quick_check/3`` predicate returns results in reified form:
 
 -  ``passed(Seed, Discarded, Labels)``,
 -  ``failed(Goal, Seed)``
@@ -585,13 +586,12 @@ shrink steps. For example:
    *     starting seed: seed(1341,12174,18263)
    no
 
-The other two predicates print the test results. The template can be a
-``::/2``, ``<</2``, or ``:/2`` qualified callable term. When the
-template is an unqualified callable term, it will be used to construct a
-goal to be called in the context of the *sender* using the ``<</2``
-debugging control construct. A simple example by passing a template that
-will trigger a failed test (as the ``random::random/1`` predicate always
-returns non-negative floats):
+The template can be a ``::/2``, ``<</2``, or ``:/2`` qualified callable
+term. When the template is an unqualified callable term, it will be used
+to construct a goal to be called in the context of the *sender* using
+the ``<</2`` debugging control construct. Another simple example by
+passing a template that will trigger a failed test (as the
+``random::random/1`` predicate always returns non-negative floats):
 
 ::
 
