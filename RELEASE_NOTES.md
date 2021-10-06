@@ -88,6 +88,10 @@ types to the `arbitrary` library.
 * UPDATED: The library `number` object to also use the `epsilon/0` arithmetic
 constant when using the Scryer Prolog backend.
 
+* FIXED: Bug in the `os::make_directory_path/1` predicate when using a backend
+that doesn't provide this functionality natively. Thanks to Paul Brown for the
+bug report.
+
 Tools
 -----
 
