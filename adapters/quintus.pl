@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on July 14, 2021
+%  Last updated on October 6, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -692,6 +692,14 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _, _) :-
+	compile(File).
+
+
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file
+
+'$lgt_load_prolog_file'(File) :-
 	compile(File).
 
 

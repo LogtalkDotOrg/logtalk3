@@ -37,6 +37,8 @@ definition of the `tests` library alias to the `paths_core.pl` file.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Internal `'$lgt_load_prolog_file'/1` predicate to all adapter files.
+
 * UPDATED: The LVM adapter file to require version 1.10.0 and allow the
 `setup_call_cleanup/3` predicate to be seen as a built-in predicate.
 

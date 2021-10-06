@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on August 19, 2021
+%  Last updated on October 6, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -413,6 +413,14 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	set_prolog_flag(encoding, Default).
 
 '$lgt_load_prolog_code'(File, _, _) :-
+	consult(File).
+
+
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file
+
+'$lgt_load_prolog_file'(File) :-
 	consult(File).
 
 

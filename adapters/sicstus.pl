@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on August 21, 2021
+%  Last updated on October 6, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -494,6 +494,14 @@ forall(Generate, Test) :-
 
 '$lgt_load_prolog_code'(File, _, Options) :-
 	load_files(File, Options).
+
+
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file
+
+'$lgt_load_prolog_file'(File) :-
+	load_files(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

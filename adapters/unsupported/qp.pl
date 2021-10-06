@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on July 14, 2021
+%  Last updated on October 6, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -470,6 +470,14 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 	'$lgt_file_extension'(object, Extension),
 	atom_concat(Name, Extension, File),
 	load(Name).
+
+
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file
+
+'$lgt_load_prolog_file'(File) :-
+	load(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

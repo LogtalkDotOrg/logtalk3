@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for JIProlog 4.1.7.1 or later versions
-%  Last updated on August 27, 2021
+%  Last updated on October 6, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -410,6 +410,14 @@
 
 '$lgt_load_prolog_code'(PrologFile, _, _) :-
 	consult(PrologFile).
+
+
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file
+
+'$lgt_load_prolog_file'(File) :-
+	consult(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

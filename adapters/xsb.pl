@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on September 29, 2021
+%  Last updated on October 6, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -433,6 +433,14 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_load_prolog_code'(File, _, Options) :-
 	'$lgt_expand_path'(File, Expanded),
 	reconsult(Expanded, Options).
+
+
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file
+
+'$lgt_load_prolog_file'(File) :-
+	reconsult(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)
