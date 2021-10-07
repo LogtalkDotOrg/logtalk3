@@ -44,9 +44,9 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Jan Wielemaker and Paulo Moura.',
-		date is 2021-09-10,
+		date is 2021-10-07,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',
 		source is 'Several tests adapted with permission from the SWI-Prolog distribution.'
 	]).
@@ -133,6 +133,14 @@ test_error_choice :-
 
 	test(lgt_setup_call_cleanup_3_20, true(X-Y == 1-3)) :-
 		{setup_call_cleanup(true, setup_call_cleanup(true, (X=1;X=2), true), Y=3), !}.
+
+	test(lgt_setup_call_cleanup_3_21, true(Assertion)) :-
+		^^set_text_output(''),
+		{setup_call_cleanup(true, setup_call_cleanup(true, (true;true), write(inner)), write(outer)), !},
+		^^text_output_assertion(innerouter, Assertion).
+
+	cleanup :-
+		^^clean_text_output.
 
 	% auxiliary predicate used to delay errors to runtime
 
