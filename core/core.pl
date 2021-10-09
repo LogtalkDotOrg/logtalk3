@@ -2863,6 +2863,7 @@ logtalk_make(Target) :-
 	'$lgt_failed_file_'(Path),
 	% the following predicate may no longer be defined depending on what caused the failure
 	'$lgt_pp_file_paths_flags_'(_, _, Path, _, Flags),
+	'$lgt_file_exists'(Path),
 	logtalk_load(Path, Flags),
 	fail.
 '$lgt_logtalk_make'(all) :-
@@ -2871,6 +2872,7 @@ logtalk_make(Target) :-
 	atom_concat(Name, Extension, Basename),
 	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, _),
 	% typically a descendant file failure propagated to a parent file
+	'$lgt_file_exists'(Path),
 	logtalk_load(Path, Flags),
 	fail.
 % recompilation of changed source files since last loaded
@@ -2897,6 +2899,7 @@ logtalk_make(Target) :-
 		'$lgt_delete_file'(ObjectFile)
 	;	true
 	),
+	'$lgt_file_exists'(MainPath),
 	logtalk_load(MainPath, Flags),
 	fail.
 % recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
@@ -2918,6 +2921,7 @@ logtalk_make(Target) :-
 		'$lgt_parent_file_'(Path, Parent),
 		'$lgt_member'(file(Parent,_), Files)
 	),
+	'$lgt_file_exists'(Path),
 	logtalk_load(Path, Flags),
 	fail.
 '$lgt_logtalk_make'(all) :-
@@ -3482,7 +3486,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 51, 0, b02)).
+'$lgt_version_data'(logtalk(3, 51, 0, b03)).
 
 
 

@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `logtalk_make/0-1` predicates to avoid attempting to reload
+a source file that have been deleted after being loaded.
+
 * CHANGED: Moved the definition of the `library` library alias from the
 `paths_core.pl` file to the `paths_libraries.pl` file and added missing
 definition of the `tests` library alias to the `paths_core.pl` file.
