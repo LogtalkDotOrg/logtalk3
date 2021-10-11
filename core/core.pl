@@ -2879,6 +2879,7 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make'(all) :-
 	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, LoadingTimeStamp),
 	atom_concat(Directory, Basename, Path),
+	'$lgt_file_exists'(Path),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
 	\+ '$lgt_member'(reload(skip), Flags),
@@ -2887,6 +2888,7 @@ logtalk_make(Target) :-
 % recompilation of included source files since last loaded
 '$lgt_logtalk_make'(all) :-
 	'$lgt_included_file_'(Path, MainBasename, MainDirectory, LoadingTimeStamp),
+	'$lgt_file_exists'(Path),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
 	% force reloading by marking the main file loading as failed
@@ -3486,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 51, 0, b03)).
+'$lgt_version_data'(logtalk(3, 51, 0, b04)).
 
 
 
