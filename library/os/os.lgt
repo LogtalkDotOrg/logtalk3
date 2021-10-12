@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:85:3,
+		version is 1:85:4,
 		author is 'Paulo Moura',
-		date is 2021-10-08,
+		date is 2021-10-12,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -727,7 +727,33 @@
 			{current_directory(Directory),
 			 absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			(	{environ('COMSPEC', _)} ->
+				(	atom(Path) ->
+					atom_chars(Path, PathChars),
+					slashes_to_backslashes(PathChars, OSPathChars),
+					atom_chars(OSPath, OSPathChars)
+				;	atom(OSPath),
+					atom_chars(OSPath, OSPathChars),
+					backslashes_to_slashes(OSPathChars, PathChars),
+					atom_chars(Path, PathChars)
+				)
+			;	OSPath = Path
+			).
+
+		slashes_to_backslashes([], []).
+		slashes_to_backslashes(['/'| PathChars], ['\\'| OSPathChars]) :-
+			!,
+			slashes_to_backslashes(PathChars, OSPathChars).
+		slashes_to_backslashes([Char| PathChars], [Char| OSPathChars]) :-
+			slashes_to_backslashes(PathChars, OSPathChars).
+
+		backslashes_to_slashes([], []).
+		backslashes_to_slashes(['\\'| OSPathChars], ['/'| PathChars]) :-
+			!,
+			backslashes_to_slashes(OSPathChars, PathChars).
+		backslashes_to_slashes([Char| OSPathChars], [Char| PathChars]) :-
+			backslashes_to_slashes(OSPathChars, PathChars).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, Path),

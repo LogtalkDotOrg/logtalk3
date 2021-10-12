@@ -99,6 +99,9 @@ the Scryer Prolog backend.
 that doesn't provide this functionality natively. Thanks to Paul Brown for the
 bug report.
 
+* FIXED: Workaround SICStus Prolog lack of a predicate for converting between
+internal and operating-system file paths.
+
 Tools
 -----
 
