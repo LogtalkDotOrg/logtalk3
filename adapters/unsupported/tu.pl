@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on October 6, 2021
+%  Last updated on October 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -482,6 +482,14 @@ numbervars(Term, From, Next) :-
 	;	Name = Basename,
 		Extension = ''
 	).
+
+
+% '$lgt_directory_files'(+atom, -list(atom))
+%
+% returns a list of files in the given directory
+
+'$lgt_directory_files'(Directory, Files) :-
+	?????.
 
 
 

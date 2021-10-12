@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on October 6, 2021
+%  Last updated on October 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,6 +25,7 @@
 :- import expand_atom/2 from standard.
 :- import term_hash/3 from machine.
 :- import sys_pid/1 from shell.
+:- import list_directory/2 from shell.
 :- import concat_atom/2 from string.
 
 
@@ -480,6 +481,14 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 		Extension = Extension0
 	;	atom_concat('.', Extension0, Extension)
 	).
+
+
+% '$lgt_directory_files'(+atom, -list(atom))
+%
+% returns a list of files in the given directory
+
+'$lgt_directory_files'(Directory, Files) :-
+	findall(File, list_directory(Directory, File), Files).
 
 
 

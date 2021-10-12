@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on October 6, 2021
+%  Last updated on October 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -503,6 +503,14 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 
 '$lgt_decompose_file_name'(File, Directory, Name, Extension) :-
 	?????
+
+
+% '$lgt_directory_files'(+atom, -list(atom))
+%
+% returns a list of files in the given directory
+
+'$lgt_directory_files'(Directory, Files) :-
+	?????.
 
 
 

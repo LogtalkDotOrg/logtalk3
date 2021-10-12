@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on October 6, 2021
+%  Last updated on October 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -601,6 +601,17 @@ forall(Generate, Test) :-
 	),
 	atom_string(Name, NameString),
 	atom_string(Extension, ExtensionString).
+
+
+% '$lgt_directory_files'(+atom, -list(atom))
+%
+% returns a list of files in the given directory
+
+'$lgt_directory_files'(Directory, Files) :-
+   	read_directory(Directory, '*', Directories0, Files0),
+   	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
+   	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
+   	append(['.', '..'| Directories1], Files1, Files).
 
 
 

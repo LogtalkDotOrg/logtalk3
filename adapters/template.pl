@@ -408,6 +408,14 @@ numbervars(Term, From, Next) :-
 	?????
 
 
+% '$lgt_directory_files'(+atom, -list(atom))
+%
+% returns a list of files in the given directory
+
+'$lgt_directory_files'(Directory, Files) :-
+	?????
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on October 6, 2021
+%  Last updated on October 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -558,6 +558,16 @@ forall(Generate, Test) :-
 		'$lgt_strrch1'(Xs1, G, [X| Xs1], Ys)
 	;	'$lgt_strrch1'(Xs1, G, Prev, Ys)
 	).
+
+
+% '$lgt_directory_files'(+atom, -list(atom))
+%
+% returns a list of files in the given directory
+
+'$lgt_directory_files'(Directory, Files) :-
+	findall(File1, file_member_of_directory(Directory, File1, _), Files1),
+	findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
+	append(['.', '..'| Directories1], Files1, Files).
 
 
 
