@@ -53,7 +53,7 @@
 	:- info([
 		version is 1:85:4,
 		author is 'Paulo Moura',
-		date is 2021-10-12,
+		date is 2021-10-14,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -343,7 +343,8 @@
 			 path_sysop(expand, EnvVarExpandedPath, ExpandedPath0)},
 			ExpandedPath = ExpandedPath0.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -484,7 +485,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
@@ -597,7 +599,8 @@
 			 	atom_concat(Directory, ExpandedPath0, ExpandedPath)
 			 )}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -728,32 +731,7 @@
 			 absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])}.
 
 		internal_os_path(Path, OSPath) :-
-			(	{environ('COMSPEC', _)} ->
-				(	atom(Path) ->
-					atom_chars(Path, PathChars),
-					slashes_to_backslashes(PathChars, OSPathChars),
-					atom_chars(OSPath, OSPathChars)
-				;	atom(OSPath),
-					atom_chars(OSPath, OSPathChars),
-					backslashes_to_slashes(OSPathChars, PathChars),
-					atom_chars(Path, PathChars)
-				)
-			;	OSPath = Path
-			).
-
-		slashes_to_backslashes([], []).
-		slashes_to_backslashes(['/'| PathChars], ['\\'| OSPathChars]) :-
-			!,
-			slashes_to_backslashes(PathChars, OSPathChars).
-		slashes_to_backslashes([Char| PathChars], [Char| OSPathChars]) :-
-			slashes_to_backslashes(PathChars, OSPathChars).
-
-		backslashes_to_slashes([], []).
-		backslashes_to_slashes(['\\'| OSPathChars], ['/'| PathChars]) :-
-			!,
-			backslashes_to_slashes(OSPathChars, PathChars).
-		backslashes_to_slashes([Char| OSPathChars], [Char| PathChars]) :-
-			backslashes_to_slashes(OSPathChars, PathChars).
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, Path),
@@ -1038,7 +1016,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
@@ -1154,7 +1133,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
@@ -1278,7 +1258,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			{absolute_file_name(Directory, ExpandedPath)},
@@ -1428,7 +1409,8 @@
 			),
 			expand_path_reverse_slashes(Codes, ConvertedCodes).
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, Path),
@@ -1576,7 +1558,8 @@
 			),
 			reverse_slashes(Codes, Backslash, Slash, ConvertedCodes).
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			(	{exists_directory(Directory)} ->
@@ -1684,7 +1667,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1797,7 +1781,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1899,7 +1884,8 @@
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -2018,7 +2004,8 @@
 			expand_path_chars(Path, ExpandedPathChars),
 			atom_chars(ExpandedPath, ExpandedPathChars).
 
-		internal_os_path(Path, Path).
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
 
 		make_directory(Directory) :-
 			expand_path_chars(Directory, ExpandedPathChars),
@@ -2379,6 +2366,41 @@
 			),
 			atom_concat(Root, Part, NewRoot),
 			make_parts_(Parts, NewRoot).
+
+	:- endif.
+
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		Dialect \== eclipse, Dialect \== swi, Dialect \== yap
+	)).
+
+		internal_os_path_portable(Path, OSPath) :-
+			(	environment_variable('COMSPEC', _) ->
+				(	atom(Path) ->
+					atom_chars(Path, PathChars),
+					slashes_to_backslashes(PathChars, OSPathChars),
+					atom_chars(OSPath, OSPathChars)
+				;	atom(OSPath),
+					atom_chars(OSPath, OSPathChars),
+					backslashes_to_slashes(OSPathChars, PathChars),
+					atom_chars(Path, PathChars)
+				)
+			;	OSPath = Path
+			).
+
+		slashes_to_backslashes([], []).
+		slashes_to_backslashes(['/'| PathChars], ['\\'| OSPathChars]) :-
+			!,
+			slashes_to_backslashes(PathChars, OSPathChars).
+		slashes_to_backslashes([Char| PathChars], [Char| OSPathChars]) :-
+			slashes_to_backslashes(PathChars, OSPathChars).
+
+		backslashes_to_slashes([], []).
+		backslashes_to_slashes(['\\'| OSPathChars], ['/'| PathChars]) :-
+			!,
+			backslashes_to_slashes(OSPathChars, PathChars).
+		backslashes_to_slashes([Char| OSPathChars], [Char| PathChars]) :-
+			backslashes_to_slashes(OSPathChars, PathChars).
 
 	:- endif.
 
