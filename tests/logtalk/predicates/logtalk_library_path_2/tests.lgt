@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2021-07-24,
+		date is 2021-10-15,
 		comment is 'Unit tests for the logtalk_library_path/2 built-in predicate.'
 	]).
 
@@ -55,6 +55,12 @@
 
 	% library alias paths must exist
 	test(logtalk_library_path_2_03) :-
+		% make sure the packs directory exists
+		(	os::environment_variable('LOGTALKPACKS', Path),
+			os::directory_exists(Path) ->
+			true
+		;	os::make_directory_path('$HOME/logtalk_packs')
+		),
 		forall(
 			logtalk_library_path(Library, _),
 			(	logtalk::expand_library_path(Library, ExpandedPath),
