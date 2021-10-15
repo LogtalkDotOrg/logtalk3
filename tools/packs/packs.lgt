@@ -29,6 +29,13 @@
 		comment is 'Pack handling predicates.'
 	]).
 
+	:- public(available/1).
+	:- mode(available(+atom), one).
+	:- info(available/1, [
+		comment is 'Lists all the packs that are available for installation from the given registry.',
+		argnames is ['Registry']
+	]).
+
 	:- public(available/0).
 	:- mode(available, one).
 	:- info(available/0, [
@@ -252,6 +259,21 @@
 		print_message(banner, packs, @'Packs manager ready. For basic help, type: packs::help.').
 
 	% packs availability predicates
+
+	available(Registry) :-
+		check(atom, Registry),
+		(	\+ (
+				implements_protocol(RegistryObject, registry_protocol),
+				RegistryObject::name(Registry)
+			) ->
+			print_message(error, packs, unknown_registry(Registry)),
+			fail
+		;	print_message(information, packs, 'Available packs from registry: ~q'+[Registry]),
+			(	setof(Pack, PackObject^registry_pack(Registry, Pack, PackObject), Packs) ->
+				print_message(information, packs, Packs)
+			;	print_message(information, packs, @'  (none)')
+			)
+		).
 
 	available :-
 		print_message(information, packs, @'Available packs:'),

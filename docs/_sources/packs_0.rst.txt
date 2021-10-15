@@ -42,6 +42,29 @@ Public predicates
 
 .. raw:: html
 
+   <div id="available/1"> </div>
+
+.. index:: available/1
+.. _packs/0::available/1:
+
+``available/1``
+^^^^^^^^^^^^^^^
+
+Lists all the packs that are available for installation from the given registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``available(Registry)``
+| **Mode and number of proofs:**
+|    ``available(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="available/0"> </div>
 
 .. index:: available/0
