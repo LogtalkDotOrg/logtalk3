@@ -88,6 +88,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-handling">Pack handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-considerations">Security considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#best-practices">Best practices</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
@@ -347,6 +348,23 @@ this tool makes no attempt to audit pack source files themselves.</p>
 <p>Registries and packs can always be pinned so that they are not
 accidentally updated to a version that you may not had the chance to
 audit.</p>
+</div>
+<div class="section" id="best-practices">
+<h2>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Make available a new pack registry as a git repo. This simplifies
+updating the registry and rolling back to a previous version.</p></li>
+<li><p>Create new pack versions from git tags.</p></li>
+<li><p>If the sources of a pack are available from a git repo, consider
+using signed commits and signed tags for increased security.</p></li>
+<li><p>When a new pack version breaks backwards compatibility, list both the
+old and the new versions on the pack spec file.</p></li>
+<li><p>Pin registries and packs when specific versions are critical for your
+work so that you can still easily batch update the remaining packs
+and registries.</p></li>
+<li><p>Include the <code class="docutils literal notranslate"><span class="pre">$LOGTALKPACKS</span></code> directory (or the default
+<code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory) on your regular backups.</p></li>
+</ul>
 </div>
 </div>
 

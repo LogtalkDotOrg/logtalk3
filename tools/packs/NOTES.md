@@ -262,3 +262,24 @@ to audit pack source files themselves.
 
 Registries and packs can always be pinned so that they are not accidentally
 updated to a version that you may not had the chance to audit.
+
+
+Best practices
+--------------
+
+- Make available a new pack registry as a git repo. This simplifies updating
+the registry and rolling back to a previous version.
+
+- Create new pack versions from git tags.
+
+- If the sources of a pack are available from a git repo, consider using
+signed commits and signed tags for increased security.
+
+- When a new pack version breaks backwards compatibility, list both the old
+and the new versions on the pack spec file.
+
+- Pin registries and packs when specific versions are critical for your work
+so that you can still easily batch update the remaining packs and registries.
+
+- Include the `$LOGTALKPACKS` directory (or the default `~/logtalk_packs`
+directory) on your regular backups.
