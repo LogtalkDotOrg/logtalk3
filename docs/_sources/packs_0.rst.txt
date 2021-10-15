@@ -1,0 +1,638 @@
+.. index:: packs
+.. _packs/0:
+
+.. rst-class:: right
+
+**object**
+
+``packs``
+=========
+
+Pack handling predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2021-02-15
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`packs_common <packs_common/0>`
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`packs_common/0::help/0`  :ref:`packs_common/0::pin/1`  :ref:`packs_common/0::pinned/1`  :ref:`packs_common/0::setup/0`  :ref:`packs_common/0::unpin/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`packs_common/0::verify_commands_availability/0`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="available/0"> </div>
+
+.. index:: available/0
+.. _packs/0::available/0:
+
+``available/0``
+^^^^^^^^^^^^^^^
+
+Lists all the packs that are available for installation from all defined registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``available`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="installed/0"> </div>
+
+.. index:: installed/0
+.. _packs/0::installed/0:
+
+``installed/0``
+^^^^^^^^^^^^^^^
+
+Lists all the packs that are installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``installed`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="installed/4"> </div>
+
+.. index:: installed/4
+.. _packs/0::installed/4:
+
+``installed/4``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``installed(Registry,Pack,Version,Pinned)``
+| **Mode and number of proofs:**
+|    ``installed(?atom,?atom,?compound,?boolean)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="installed/3"> </div>
+
+.. index:: installed/3
+.. _packs/0::installed/3:
+
+``installed/3``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``installed(Registry,Pack,Version)``
+| **Mode and number of proofs:**
+|    ``installed(?atom,?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="outdated/0"> </div>
+
+.. index:: outdated/0
+.. _packs/0::outdated/0:
+
+``outdated/0``
+^^^^^^^^^^^^^^
+
+Lists all the packs that are installed but outdated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``outdated`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="outdated/4"> </div>
+
+.. index:: outdated/4
+.. _packs/0::outdated/4:
+
+``outdated/4``
+^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``outdated(Registry,Pack,Version,LatestVersion)``
+| **Mode and number of proofs:**
+|    ``outdated(?atom,?atom,?compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="orphaned/0"> </div>
+
+.. index:: orphaned/0
+.. _packs/0::orphaned/0:
+
+``orphaned/0``
+^^^^^^^^^^^^^^
+
+Lists all the packs that are installed but whose registry is no longer defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``orphaned`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="orphaned/2"> </div>
+
+.. index:: orphaned/2
+.. _packs/0::orphaned/2:
+
+``orphaned/2``
+^^^^^^^^^^^^^^
+
+Lists all the packs that are installed but whose registry is no longer defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``orphaned(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``orphaned(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/0"> </div>
+
+.. index:: directory/0
+.. _packs/0::directory/0:
+
+``directory/0``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``directory`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _packs/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Prints the directory where a pack is installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Pack)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _packs/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all packs and respective installation directories.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Pack,Directory)``
+| **Mode and number of proofs:**
+|    ``directory(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="uninstall/2"> </div>
+
+.. index:: uninstall/2
+.. _packs/0::uninstall/2:
+
+``uninstall/2``
+^^^^^^^^^^^^^^^
+
+Uninstalls a pack using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uninstall(Pack,Options)``
+| **Mode and number of proofs:**
+|    ``uninstall(+atom,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force deletion if the pack is pinned. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean pack archive after deleting. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose deletion steps. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="uninstall/1"> </div>
+
+.. index:: uninstall/1
+.. _packs/0::uninstall/1:
+
+``uninstall/1``
+^^^^^^^^^^^^^^^
+
+Uninstalls a pack using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uninstall(Pack)``
+| **Mode and number of proofs:**
+|    ``uninstall(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="describe/2"> </div>
+
+.. index:: describe/2
+.. _packs/0::describe/2:
+
+``describe/2``
+^^^^^^^^^^^^^^
+
+Describes a registered pack, including installed version if applicable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``describe(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``describe(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="describe/1"> </div>
+
+.. index:: describe/1
+.. _packs/0::describe/1:
+
+``describe/1``
+^^^^^^^^^^^^^^
+
+Describes a registered pack, including installed version if applicable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``describe(Pack)``
+| **Mode and number of proofs:**
+|    ``describe(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="install/4"> </div>
+
+.. index:: install/4
+.. _packs/0::install/4:
+
+``install/4``
+^^^^^^^^^^^^^
+
+Installs a new pack using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``install(Registry,Pack,Version,Options)``
+| **Mode and number of proofs:**
+|    ``install(+atom,+atom,+compound,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force re-installation if the pack is already installed. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean pack archive after installation. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+    - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
+    - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="install/3"> </div>
+
+.. index:: install/3
+.. _packs/0::install/3:
+
+``install/3``
+^^^^^^^^^^^^^
+
+Installs the specified version of a pack from the given registry using default options. Fails if the pack is already installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``install(Registry,Pack,Version)``
+| **Mode and number of proofs:**
+|    ``install(+atom,+atom,?compound)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="install/2"> </div>
+
+.. index:: install/2
+.. _packs/0::install/2:
+
+``install/2``
+^^^^^^^^^^^^^
+
+Installs the latest version of a pack from the given registry using default options. Fails if the pack is already installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``install(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``install(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="install/1"> </div>
+
+.. index:: install/1
+.. _packs/0::install/1:
+
+``install/1``
+^^^^^^^^^^^^^
+
+Installs a pack (if its name is unique among all registries) using default options. Fails if the pack is already installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``install(Pack)``
+| **Mode and number of proofs:**
+|    ``install(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clean/2"> </div>
+
+.. index:: clean/2
+.. _packs/0::clean/2:
+
+``clean/2``
+^^^^^^^^^^^
+
+Cleans all pack archives. Fails if the the pack is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clean(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``clean(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clean/1"> </div>
+
+.. index:: clean/1
+.. _packs/0::clean/1:
+
+``clean/1``
+^^^^^^^^^^^
+
+Cleans all pack archives. Fails if the pack is not unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clean(Pack)``
+| **Mode and number of proofs:**
+|    ``clean(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clean/0"> </div>
+
+.. index:: clean/0
+.. _packs/0::clean/0:
+
+``clean/0``
+^^^^^^^^^^^
+
+Cleans all archives for all packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clean`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/2"> </div>
+
+.. index:: update/2
+.. _packs/0::update/2:
+
+``update/2``
+^^^^^^^^^^^^
+
+Updates an outdated pack using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Pack,Options)``
+| **Mode and number of proofs:**
+|    ``update(+atom,+atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
+    - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
+    - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/1"> </div>
+
+.. index:: update/1
+.. _packs/0::update/1:
+
+``update/1``
+^^^^^^^^^^^^
+
+Updates an outdated pack using default options. Fails if the pack is pinned.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Pack)``
+| **Mode and number of proofs:**
+|    ``update(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/0"> </div>
+
+.. index:: update/0
+.. _packs/0::update/0:
+
+``update/0``
+^^^^^^^^^^^^
+
+Updades all outdated packs (that are not pinned) using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``update`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

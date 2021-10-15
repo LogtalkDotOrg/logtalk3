@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   Logtalk user folder setup script
-//   Last updated on April 9, 2019
+//   Last updated on October 12, 2021
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -103,6 +103,10 @@ if (FSObject.FolderExists(logtalk_user)) {
 	WScript.Echo("If you are upgrading from a previous Logtalk version, check the file");
 	WScript.Echo("\"\%LOGTALKUSER\%\\settings-sample.lgt\" for updated settings suggestions.");
 	WScript.Echo("");
+	if (FSObject.FolderExists(logtalk_user + "-backup-" + date + "\\packs")) {
+		FSObject.CopyFolder(logtalk_user + "-backup-" + date + "\\packs", logtalk_user + "\\packs");
+		WScript.Echo("Copied your packs to the new \"\%LOGTALKUSER\%\" directory.");
+	}
 }
 
 WScript.Echo("Creating a new \"\%LOGTALKUSER\%\" directory:");

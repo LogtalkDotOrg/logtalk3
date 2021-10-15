@@ -41,6 +41,8 @@ Categories
    observer <observer_0>
    options <options_0>
    os_types <os_types_0>
+   packs_common <packs_common_0>
+   packs_messages <packs_messages_0>
    proto_hierarchy <proto_hierarchy_0>
    read_file <read_file_0>
    statistics <statistics_0>
@@ -143,6 +145,7 @@ Objects
    java_hook <java_hook_0>
    json <json_0>
    json(StringRepresentation) <json_1>
+   lflat_pack <lflat_pack_0>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
    library_dependency_diagram <library_dependency_diagram_0>
@@ -153,9 +156,11 @@ Objects
    list(Type) <list_1>
    logger <logger_0>
    logtalk <logtalk_0>
+   logtalk_packs_registry <logtalk_packs_registry_0>
    loop <loop_0>
    magic <magic_0>
    magic_expansion(A) <magic_expansion_1>
+   magic_packs_registry <magic_packs_registry_0>
    maxheap <maxheap_0>
    maybe <maybe_0>
    meta <meta_0>
@@ -176,6 +181,8 @@ Objects
    optional <optional_0>
    optional(Optional) <optional_1>
    os <os_0>
+   packs <packs_0>
+   packs_specs_hook <packs_specs_hook_0>
    pairs <pairs_0>
    pddl <pddl_0>
    population <population_0>
@@ -187,6 +194,8 @@ Objects
    rbtree <rbtree_0>
    reader <reader_0>
    redis <redis_0>
+   registries <registries_0>
+   registry_loader_hook <registry_loader_hook_0>
    rule_expansion(A) <rule_expansion_1>
    sample <sample_0>
    set <set_0>
@@ -197,6 +206,7 @@ Objects
    size_metric <size_metric_0>
    streamvars <streamvars_0>
    suppress_goal_hook <suppress_goal_hook_0>
+   swidict_pack <swidict_pack_0>
    tap_output <tap_output_0>
    tap_report <tap_report_0>
    term <term_0>
@@ -269,10 +279,12 @@ Protocols
    numberlistp <numberlistp_0>
    options_protocol <options_protocol_0>
    osp <osp_0>
+   pack_protocol <pack_protocol_0>
    proto_hierarchyp <proto_hierarchyp_0>
    pseudo_random_protocol <pseudo_random_protocol_0>
    queuep <queuep_0>
    random_protocol <random_protocol_0>
+   registry_protocol <registry_protocol_0>
    setp <setp_0>
    statisticsp <statisticsp_0>
    term_io_protocol <term_io_protocol_0>

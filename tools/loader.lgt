@@ -33,6 +33,7 @@
 		doclet(loader),
 		help(loader),
 		lgtdoc(loader),
-		lgtunit(loader)
+		lgtunit(loader),
+		packs(loader)
 	])
 )).

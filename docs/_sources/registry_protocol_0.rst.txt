@@ -1,0 +1,167 @@
+.. index:: registry_protocol
+.. _registry_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``registry_protocol``
+=====================
+
+Registry specification protocol.
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2021-10-15
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="name/1"> </div>
+
+.. index:: name/1
+.. _registry_protocol/0::name/1:
+
+``name/1``
+^^^^^^^^^^
+
+Registry name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``name(Name)``
+| **Mode and number of proofs:**
+|    ``name(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="description/1"> </div>
+
+.. index:: description/1
+.. _registry_protocol/0::description/1:
+
+``description/1``
+^^^^^^^^^^^^^^^^^
+
+Registry one line description.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``description(Description)``
+| **Mode and number of proofs:**
+|    ``description(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="home/1"> </div>
+
+.. index:: home/1
+.. _registry_protocol/0::home/1:
+
+``home/1``
+^^^^^^^^^^
+
+Registry home HTTPS or file URL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``home(Home)``
+| **Mode and number of proofs:**
+|    ``home(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clone/1"> </div>
+
+.. index:: clone/1
+.. _registry_protocol/0::clone/1:
+
+``clone/1``
+^^^^^^^^^^^
+
+Registry git clone HTTPS URL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clone(URL)``
+| **Mode and number of proofs:**
+|    ``clone(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="archive/1"> </div>
+
+.. index:: archive/1
+.. _registry_protocol/0::archive/1:
+
+``archive/1``
+^^^^^^^^^^^^^
+
+Registry archive HTTPS URL.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``archive(URL)``
+| **Mode and number of proofs:**
+|    ``archive(?atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -40,6 +40,7 @@ directory in the ``NOTES.md`` file.
    lgtunit
    linter
    make
+   packs
    ports_profiler
    profiler
    tutor

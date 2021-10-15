@@ -1,0 +1,297 @@
+.. index:: packs_common
+.. _packs_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``packs_common``
+================
+
+Common predicates for the packs tool objects.
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2021-10-15
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="setup/0"> </div>
+
+.. index:: setup/0
+.. _packs_common/0::setup/0:
+
+``setup/0``
+^^^^^^^^^^^
+
+Setup registries and packs directory structure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``setup`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="verify_commands_availability/0"> </div>
+
+.. index:: verify_commands_availability/0
+.. _packs_common/0::verify_commands_availability/0:
+
+``verify_commands_availability/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Verify required shell commands availability.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``verify_commands_availability`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="help/0"> </div>
+
+.. index:: help/0
+.. _packs_common/0::help/0:
+
+``help/0``
+^^^^^^^^^^
+
+Provides help about the main predicates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``help`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="pin/1"> </div>
+
+.. index:: pin/1
+.. _packs_common/0::pin/1:
+
+``pin/1``
+^^^^^^^^^
+
+Pins a resource (pack or registry) preventing it from being updated, uninstalled, or deleted. Fails if the resource is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pin(Resource)``
+| **Mode and number of proofs:**
+|    ``pin(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="unpin/1"> </div>
+
+.. index:: unpin/1
+.. _packs_common/0::unpin/1:
+
+``unpin/1``
+^^^^^^^^^^^
+
+Unpins a resource (pack or registry), allowing it to be updated, uninstalled, or deleted. Fails if the resource is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unpin(Resource)``
+| **Mode and number of proofs:**
+|    ``unpin(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="pinned/1"> </div>
+
+.. index:: pinned/1
+.. _packs_common/0::pinned/1:
+
+``pinned/1``
+^^^^^^^^^^^^
+
+True iff the resource (pack or registry) is defined or installed and if it is pinned.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pinned(Resource)``
+| **Mode and number of proofs:**
+|    ``pinned(+atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. raw:: html
+
+   <div id="command/2"> </div>
+
+.. index:: command/2
+.. _packs_common/0::command/2:
+
+``command/2``
+^^^^^^^^^^^^^
+
+Executes a shell command. Prints an error message and fails if the command fails.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``command(Command,FailureMessage)``
+| **Mode and number of proofs:**
+|    ``command(+atom,@nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="load_registry/1"> </div>
+
+.. index:: load_registry/1
+.. _packs_common/0::load_registry/1:
+
+``load_registry/1``
+^^^^^^^^^^^^^^^^^^^
+
+Loads all registry files.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``load_registry(Path)``
+| **Mode and number of proofs:**
+|    ``load_registry(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="tar_command/1"> </div>
+
+.. index:: tar_command/1
+.. _packs_common/0::tar_command/1:
+
+``tar_command/1``
+^^^^^^^^^^^^^^^^^
+
+Returns the name of the tar command to be used.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tar_command(Tar)``
+| **Mode and number of proofs:**
+|    ``tar_command(-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="supported_archive/1"> </div>
+
+.. index:: supported_archive/1
+.. _packs_common/0::supported_archive/1:
+
+``supported_archive/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the archive format is supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_archive(Extension)``
+| **Mode and number of proofs:**
+|    ``supported_archive(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="print_readme_file_path/1"> </div>
+
+.. index:: print_readme_file_path/1
+.. _packs_common/0::print_readme_file_path/1:
+
+``print_readme_file_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints the absolute for path for the given directory readme file if it exists. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_readme_file_path(Directory)``
+| **Mode and number of proofs:**
+|    ``print_readme_file_path(+atom)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

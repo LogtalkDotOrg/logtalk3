@@ -1,0 +1,53 @@
+.. index:: packs_specs_hook
+.. _packs_specs_hook/0:
+
+.. rst-class:: right
+
+**object**
+
+``packs_specs_hook``
+====================
+
+Hook object for filtering registry and pack specification file contents.
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2021-10-15
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

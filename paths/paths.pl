@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 30, 2021
+%  Last updated on October 15, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -94,6 +94,7 @@ logtalk_library_path(doclet, tools('doclet/')).
 logtalk_library_path(help, tools('help/')).
 logtalk_library_path(lgtdoc, tools('lgtdoc/')).
 logtalk_library_path(lgtunit, tools('lgtunit/')).
+logtalk_library_path(packs, tools('packs/')).
 logtalk_library_path(ports_profiler, tools('ports_profiler/')).
 logtalk_library_path(profiler, tools('profiler/')).
 logtalk_library_path(tutor, tools('tutor/')).
@@ -307,3 +308,32 @@ logtalk_library_path(whisper, engines('whisper/')).
 logtalk_library_path(wrappers, examples('wrappers/')).
 logtalk_library_path(xpce, examples('xpce/')).
 logtalk_library_path(yield, engines('yield/')).
+
+% packs
+logtalk_library_path(logtalk_packs, LogtalkPacks) :-
+	(	'$lgt_environment_variable'('LOGTALKPACKS', _) ->
+		LogtalkPacks = '$LOGTALKPACKS/'
+	;	LogtalkPacks = home('logtalk_packs/')
+	).
+logtalk_library_path(Pack, logtalk_packs(Path)) :-
+	(	'$lgt_environment_variable'('LOGTALKPACKS', _) ->
+		PathsPacks = '$LOGTALKPACKS/packs'
+	;	'$lgt_environment_variable'('HOME', _) ->
+		PathsPacks = '$HOME/logtalk_packs/packs'
+	;	'$lgt_environment_variable'('USERPROFILE', _) ->
+		PathsPacks = '$USERPROFILE/logtalk_packs/packs'
+	;	fail
+	),
+	'$lgt_expand_path'(PathsPacks, ExpandedPath),
+	'$lgt_directory_exists'(ExpandedPath),
+	(	var(Pack) ->
+		'$lgt_directory_files'(ExpandedPath, Files),
+		'$lgt_member'(Pack, Files),
+		\+ sub_atom(Pack, 0, _, _, '.')
+	;	true
+	),
+	atom_concat(ExpandedPath, '/', PackPath0),
+	atom_concat(PackPath0, Pack, PackPath),
+	'$lgt_directory_exists'(PackPath),
+	atom_concat('packs/', Pack, Path0),
+	atom_concat(Path0, '/', Path).

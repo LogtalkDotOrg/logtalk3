@@ -1,0 +1,409 @@
+.. index:: registries
+.. _registries/0:
+
+.. rst-class:: right
+
+**object**
+
+``registries``
+==============
+
+Registry handling predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 0:9:0
+| **Date:** 2021-10-15
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`packs_common <packs_common/0>`
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`packs <packs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`packs_common/0::help/0`  :ref:`packs_common/0::pin/1`  :ref:`packs_common/0::pinned/1`  :ref:`packs_common/0::setup/0`  :ref:`packs_common/0::unpin/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`packs_common/0::verify_commands_availability/0`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="list/0"> </div>
+
+.. index:: list/0
+.. _registries/0::list/0:
+
+``list/0``
+^^^^^^^^^^
+
+Prints a list of all installed registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``list`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/0"> </div>
+
+.. index:: directory/0
+.. _registries/0::directory/0:
+
+``directory/0``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``directory`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _registries/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Prints the directory where a registry is installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Registry)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _registries/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed registries and respective directories.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Registry,Directory)``
+| **Mode and number of proofs:**
+|    ``directory(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="describe/1"> </div>
+
+.. index:: describe/1
+.. _registries/0::describe/1:
+
+``describe/1``
+^^^^^^^^^^^^^^
+
+Prints all registry entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``describe(Registry)``
+| **Mode and number of proofs:**
+|    ``describe(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="add/3"> </div>
+
+.. index:: add/3
+.. _registries/0::add/3:
+
+``add/3``
+^^^^^^^^^
+
+Adds a new registry using the given options. Fails if the registry is already defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add(Registry,URL,Options)``
+| **Mode and number of proofs:**
+|    ``add(+atom,+atom,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force re-installation if the registry is already installed. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="add/2"> </div>
+
+.. index:: add/2
+.. _registries/0::add/2:
+
+``add/2``
+^^^^^^^^^
+
+Adds a new registry using default options. Fails if the registry is already defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add(Registry,URL)``
+| **Mode and number of proofs:**
+|    ``add(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/2"> </div>
+
+.. index:: update/2
+.. _registries/0::update/2:
+
+``update/2``
+^^^^^^^^^^^^
+
+Updates an installed registry using the specified options. Fails if the registry is not installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Registry,Options)``
+| **Mode and number of proofs:**
+|    ``update(+atom,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force update if the registry is pinned. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/1"> </div>
+
+.. index:: update/1
+.. _registries/0::update/1:
+
+``update/1``
+^^^^^^^^^^^^
+
+Updates an installed registry using default options. Fails if the registry is not installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Registry)``
+| **Mode and number of proofs:**
+|    ``update(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/0"> </div>
+
+.. index:: update/0
+.. _registries/0::update/0:
+
+``update/0``
+^^^^^^^^^^^^
+
+Updates all installed registries using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``update`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete/2"> </div>
+
+.. index:: delete/2
+.. _registries/0::delete/2:
+
+``delete/2``
+^^^^^^^^^^^^
+
+Deletes a registry using the specified options (if not pinned).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(Registry,Options)``
+| **Mode and number of proofs:**
+|    ``delete(+atom,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force deletion if the registry is pinned or there are installed registry packs. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean registry archive after deleting. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete/1"> </div>
+
+.. index:: delete/1
+.. _registries/0::delete/1:
+
+``delete/1``
+^^^^^^^^^^^^
+
+Deletes a registry using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(Registry)``
+| **Mode and number of proofs:**
+|    ``delete(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clean/1"> </div>
+
+.. index:: clean/1
+.. _registries/0::clean/1:
+
+``clean/1``
+^^^^^^^^^^^
+
+Cleans all registry archives. Fails if the registry is not defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clean(Registry)``
+| **Mode and number of proofs:**
+|    ``clean(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clean/0"> </div>
+
+.. index:: clean/0
+.. _registries/0::clean/0:
+
+``clean/0``
+^^^^^^^^^^^
+
+Cleans all archives for all registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``clean`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="deleted_registry_/1"> </div>
+
+.. index:: deleted_registry_/1
+.. _registries/0::deleted_registry_/1:
+
+``deleted_registry_/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of deleted registries.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``deleted_registry_(Registry)``
+| **Mode and number of proofs:**
+|    ``deleted_registry_(?atom)`` - ``zero_or_one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -595,6 +595,23 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    os_types <os_types_0>
    osp <osp_0>
 
+``packs``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   pack_protocol <pack_protocol_0>
+   packs <packs_0>
+   packs_common <packs_common_0>
+   packs_messages <packs_messages_0>
+   packs_specs_hook <packs_specs_hook_0>
+   registries <registries_0>
+   registry_loader_hook <registry_loader_hook_0>
+   registry_protocol <registry_protocol_0>
+
 ``pddl_parser``
 ---------------
 
