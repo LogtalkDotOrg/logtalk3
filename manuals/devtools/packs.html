@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pack-handling">Pack handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-considerations">Security considerations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#best-practices">Best practices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-prolog-packs">Installing Prolog packs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ports_profiler.html"><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code></a></li>
@@ -367,6 +368,19 @@ and registries.</p></li>
 <li><p>Include the <code class="docutils literal notranslate"><span class="pre">$LOGTALKPACKS</span></code> directory (or the default
 <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory) on your regular backups.</p></li>
 </ul>
+</div>
+<div class="section" id="installing-prolog-packs">
+<h2>Installing Prolog packs<a class="headerlink" href="#installing-prolog-packs" title="Permalink to this headline"></a></h2>
+<p>This tool can also be used to install Prolog packs that don’t use
+Logtalk. After installing a <code class="docutils literal notranslate"><span class="pre">pl_pack</span></code> Prolog pack from a <code class="docutils literal notranslate"><span class="pre">pl_reg</span></code>
+registry, it can be found in the <code class="docutils literal notranslate"><span class="pre">$LOGTALKPACKS/packs/pl_reg/pl_pack</span></code>
+directory. When the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable is not
+defined, the pack directory is by default
+<code class="docutils literal notranslate"><span class="pre">~/logtalk_packs/packs/pl_reg/pl_pack</span></code>.</p>
+<p>Different Prolog systems provide different solutions for locating Prolog
+code. For example, some Prolog systems adopted the Quintus Prolog
+<code class="docutils literal notranslate"><span class="pre">file_search_path/2</span></code> hook predicate. For these systems, a solution
+could be to add a fact to this predicate for each installed Prolog pack.</p>
 </div>
 </div>
 

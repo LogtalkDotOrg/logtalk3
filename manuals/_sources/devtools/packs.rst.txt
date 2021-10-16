@@ -281,3 +281,18 @@ Best practices
 
 -  Include the ``$LOGTALKPACKS`` directory (or the default
    ``~/logtalk_packs`` directory) on your regular backups.
+
+Installing Prolog packs
+-----------------------
+
+This tool can also be used to install Prolog packs that don't use
+Logtalk. After installing a ``pl_pack`` Prolog pack from a ``pl_reg``
+registry, it can be found in the ``$LOGTALKPACKS/packs/pl_reg/pl_pack``
+directory. When the ``LOGTALKPACKS`` environment variable is not
+defined, the pack directory is by default
+``~/logtalk_packs/packs/pl_reg/pl_pack``.
+
+Different Prolog systems provide different solutions for locating Prolog
+code. For example, some Prolog systems adopted the Quintus Prolog
+``file_search_path/2`` hook predicate. For these systems, a solution
+could be to add a fact to this predicate for each installed Prolog pack.
