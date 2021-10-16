@@ -51,7 +51,7 @@ Public predicates
 ``list/0``
 ^^^^^^^^^^
 
-Prints a list of all installed registries.
+Prints a list of all defined registries.
 
 | **Compilation flags:**
 |    ``static``
@@ -107,9 +107,9 @@ Adds a new registry using the given options. Fails if the registry is already de
 
 | **Remarks:**
 
-    - ``force(Boolean)`` option: Force re-installation if the registry is already installed. Default is ``false``.
+    - ``force(Boolean)`` option: Force re-installation if the registry is already defined. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
-    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose adding steps. Default is ``false``.
 
 
 ------------
@@ -147,7 +147,7 @@ Adds a new registry using default options. Fails if the registry is already defi
 ``update/2``
 ^^^^^^^^^^^^
 
-Updates an installed registry using the specified options. Fails if the registry is not installed.
+Updates a defined registry using the specified options. Fails if the registry is not defined.
 
 | **Compilation flags:**
 |    ``static``
@@ -161,7 +161,7 @@ Updates an installed registry using the specified options. Fails if the registry
 
     - ``force(Boolean)`` option: Force update if the registry is pinned. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
-    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
 
 
 ------------
@@ -176,7 +176,7 @@ Updates an installed registry using the specified options. Fails if the registry
 ``update/1``
 ^^^^^^^^^^^^
 
-Updates an installed registry using default options. Fails if the registry is not installed.
+Updates a defined registry using default options. Fails if the registry is not defined.
 
 | **Compilation flags:**
 |    ``static``
@@ -199,7 +199,7 @@ Updates an installed registry using default options. Fails if the registry is no
 ``update/0``
 ^^^^^^^^^^^^
 
-Updates all installed registries using default options.
+Updates all defined registries using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -234,7 +234,7 @@ Deletes a registry using the specified options (if not pinned).
 
     - ``force(Boolean)`` option: Force deletion if the registry is pinned or there are installed registry packs. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after deleting. Default is ``false``.
-    - ``verbose(Boolean)`` option: Verbose installation steps. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose deleting steps. Default is ``false``.
 
 
 ------------
@@ -335,7 +335,7 @@ Cleans all archives for all registries.
 ``directory/1``
 ^^^^^^^^^^^^^^^
 
-Prints the directory where a registry is installed.
+Prints the directory where a registry is defined.
 
 | **Compilation flags:**
 |    ``static``
@@ -358,7 +358,7 @@ Prints the directory where a registry is installed.
 ``directory/2``
 ^^^^^^^^^^^^^^^
 
-Enumerates by backtracking all installed registries and respective directories.
+Enumerates by backtracking all defined registries and respective directories.
 
 | **Compilation flags:**
 |    ``static``

@@ -110,7 +110,7 @@
 		remarks is [
 			'``force(Boolean)`` option' - 'Force re-installation if the pack is already installed. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after installation. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose installation steps. Default is ``false``.',
+			'``verbose(Boolean)`` option' - 'Verbose installing steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.'
 		]
@@ -166,7 +166,7 @@
 		remarks is [
 			'``force(Boolean)`` option' - 'Force deletion if the pack is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after deleting. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose deletion steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose uninstalling steps. Default is ``false``.'
 		]
 	]).
 

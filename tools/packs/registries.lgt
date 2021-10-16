@@ -32,7 +32,7 @@
 	:- public(list/0).
 	:- mode(list, one).
 	:- info(list/0, [
-		comment is 'Prints a list of all installed registries.'
+		comment is 'Prints a list of all defined registries.'
 	]).
 
 	:- public(describe/1).
@@ -48,9 +48,9 @@
 		comment is 'Adds a new registry using the given options. Fails if the registry is already defined.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
-			'``force(Boolean)`` option' - 'Force re-installation if the registry is already installed. Default is ``false``.',
+			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose installation steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.'
 		]
 	]).
 
@@ -64,26 +64,26 @@
 	:- public(update/2).
 	:- mode(update(+atom, ++list(compound)), zero_or_one).
 	:- info(update/2, [
-		comment is 'Updates an installed registry using the specified options. Fails if the registry is not installed.',
+		comment is 'Updates a defined registry using the specified options. Fails if the registry is not defined.',
 		argnames is ['Registry', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force update if the registry is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose installation steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.'
 		]
 	]).
 
 	:- public(update/1).
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
-		comment is 'Updates an installed registry using default options. Fails if the registry is not installed.',
+		comment is 'Updates a defined registry using default options. Fails if the registry is not defined.',
 		argnames is ['Registry']
 	]).
 
 	:- public(update/0).
 	:- mode(update, zero_or_one).
 	:- info(update/0, [
-		comment is 'Updates all installed registries using default options.'
+		comment is 'Updates all defined registries using default options.'
 	]).
 
 	:- public(delete/2).
@@ -94,7 +94,7 @@
 		remarks is [
 			'``force(Boolean)`` option' - 'Force deletion if the registry is pinned or there are installed registry packs. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after deleting. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose installation steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose deleting steps. Default is ``false``.'
 		]
 	]).
 
@@ -121,20 +121,20 @@
 	:- public(directory/0).
 	:- mode(directory, one).
 	:- info(location/0, [
-		comment is 'Prints the directory where the registries are installed.'
+		comment is 'Prints the directory where the registries are defined.'
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(+atom), zero_or_one).
 	:- info(directory/1, [
-		comment is 'Prints the directory where a registry is installed.',
+		comment is 'Prints the directory where a registry is defined.',
 		argnames is ['Registry']
 	]).
 
 	:- public(directory/2).
 	:- mode(directory(?atom, ?atom), zero_or_more).
 	:- info(directory/2, [
-		comment is 'Enumerates by backtracking all installed registries and respective directories.',
+		comment is 'Enumerates by backtracking all defined registries and respective directories.',
 		argnames is ['Registry', 'Directory']
 	]).
 

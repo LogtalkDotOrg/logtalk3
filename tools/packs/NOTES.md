@@ -270,6 +270,9 @@ Best practices
 - Make available a new pack registry as a git repo. This simplifies updating
 the registry and rolling back to a previous version.
 
+- Use registry and pack names that are valid unquoted atoms. Use descriptive
+names with underscores if necessary to link words.
+
 - Create new pack versions from git tags.
 
 - If the sources of a pack are available from a git repo, consider using

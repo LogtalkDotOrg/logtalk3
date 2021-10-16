@@ -253,7 +253,7 @@
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
 <div id="list/0"> </div><div class="section" id="list-0">
 <span id="registries-0-list-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">list/0</span></code></a><a class="headerlink" href="#list-0" title="Permalink to this headline"></a></h3>
-<p>Prints a list of all installed registries.</p>
+<p>Prints a list of all defined registries.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -313,9 +313,9 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force re-installation if the registry is already installed. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force re-installation if the registry is already defined. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean registry archive after updating. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose installation steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose adding steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -343,7 +343,7 @@
 <div id="update/2"> </div></div>
 <div class="section" id="update-2">
 <span id="registries-0-update-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">update/2</span></code></a><a class="headerlink" href="#update-2" title="Permalink to this headline"></a></h3>
-<p>Updates an installed registry using the specified options. Fails if the registry is not installed.</p>
+<p>Updates a defined registry using the specified options. Fails if the registry is not defined.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -367,14 +367,14 @@
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force update if the registry is pinned. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean registry archive after updating. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose installation steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose updating steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
 <div id="update/1"> </div></div>
 <div class="section" id="update-1">
 <span id="registries-0-update-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">update/1</span></code></a><a class="headerlink" href="#update-1" title="Permalink to this headline"></a></h3>
-<p>Updates an installed registry using default options. Fails if the registry is not installed.</p>
+<p>Updates a defined registry using default options. Fails if the registry is not defined.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -395,7 +395,7 @@
 <div id="update/0"> </div></div>
 <div class="section" id="update-0">
 <span id="registries-0-update-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">update/0</span></code></a><a class="headerlink" href="#update-0" title="Permalink to this headline"></a></h3>
-<p>Updates all installed registries using default options.</p>
+<p>Updates all defined registries using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -436,7 +436,7 @@
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force deletion if the registry is pinned or there are installed registry packs. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean registry archive after deleting. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose installation steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose deleting steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -518,7 +518,7 @@
 <div id="directory/1"> </div></div>
 <div class="section" id="directory-1">
 <span id="registries-0-directory-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Permalink to this headline"></a></h3>
-<p>Prints the directory where a registry is installed.</p>
+<p>Prints the directory where a registry is defined.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -539,7 +539,7 @@
 <div id="directory/2"> </div></div>
 <div class="section" id="directory-2">
 <span id="registries-0-directory-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a><a class="headerlink" href="#directory-2" title="Permalink to this headline"></a></h3>
-<p>Enumerates by backtracking all installed registries and respective directories.</p>
+<p>Enumerates by backtracking all defined registries and respective directories.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
