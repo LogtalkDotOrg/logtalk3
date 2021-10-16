@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-02-15,
+		date is 2021-02-16,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -97,7 +97,7 @@
 	:- public(directory/1).
 	:- mode(directory(+atom), zero_or_one).
 	:- info(directory/1, [
-		comment is 'Prints the directory where a pack is installed.',
+		comment is 'Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.',
 		argnames is ['Pack']
 	]).
 
@@ -111,7 +111,7 @@
 	:- public(uninstall/2).
 	:- mode(uninstall(+atom, ++list(compound)), zero_or_one).
 	:- info(uninstall/2, [
-		comment is 'Uninstalls a pack using the specified options.',
+		comment is 'Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force deletion if the pack is pinned. Default is ``false``.',
@@ -123,7 +123,7 @@
 	:- public(uninstall/1).
 	:- mode(uninstall(+atom), zero_or_one).
 	:- info(uninstall/1, [
-		comment is 'Uninstalls a pack using default options.',
+		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.',
 		argnames is ['Pack']
 	]).
 
@@ -144,7 +144,7 @@
 	:- public(install/4).
 	:- mode(install(+atom, +atom, +compound, ++list(compound)), zero_or_one).
 	:- info(install/4, [
-		comment is 'Installs a new pack using the specified options.',
+		comment is 'Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using a ``force(true)`` option. Fails also if the pack version is unknown.',
 		argnames is ['Registry', 'Pack', 'Version', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force re-installation if the pack is already installed. Default is ``false``.',
@@ -158,21 +158,21 @@
 	:- public(install/3).
 	:- mode(install(+atom, +atom, ?compound), zero_or_one).
 	:- info(install/3, [
-		comment is 'Installs the specified version of a pack from the given registry using default options. Fails if the pack is already installed.',
+		comment is 'Installs the specified version of a pack from the given registry using default options. Fails if the pack is already installed or unknown. Fails also if the pack version is unknown.',
 		argnames is ['Registry', 'Pack', 'Version']
 	]).
 
 	:- public(install/2).
 	:- mode(install(+atom, +atom), zero_or_one).
 	:- info(install/2, [
-		comment is 'Installs the latest version of a pack from the given registry using default options. Fails if the pack is already installed.',
+		comment is 'Installs the latest version of a pack from the given registry using default options. Fails if the pack is already installed or unknown.',
 		argnames is ['Registry', 'Pack']
 	]).
 
 	:- public(install/1).
 	:- mode(install(+atom), zero_or_one).
 	:- info(install/1, [
-		comment is 'Installs a pack (if its name is unique among all registries) using default options. Fails if the pack is already installed.',
+		comment is 'Installs a pack (if its name is unique among all registries) using default options. Fails if the pack is already installed or unknown. Fails also if the pack is available from multiple registries.',
 		argnames is ['Pack']
 	]).
 
@@ -199,7 +199,7 @@
 	:- public(update/2).
 	:- mode(update(+atom, +atom), zero_or_one).
 	:- info(update/2, [
-		comment is 'Updates an outdated pack using the specified options.',
+		comment is 'Updates an outdated pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
@@ -213,7 +213,7 @@
 	:- public(update/1).
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
-		comment is 'Updates an outdated pack using default options. Fails if the pack is pinned.',
+		comment is 'Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.',
 		argnames is ['Pack']
 	]).
 
@@ -221,6 +221,27 @@
 	:- mode(update, zero_or_one).
 	:- info(update/0, [
 		comment is 'Updades all outdated packs (that are not pinned) using default options.'
+	]).
+
+	:- public(dependents/3).
+	:- mode(dependents(+atom, +atom, -list(atom)), zero_or_one).
+	:- info(dependents/3, [
+		comment is 'Returns a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
+		argnames is ['Registry', 'Pack', 'Dependents']
+	]).
+
+	:- public(dependents/2).
+	:- mode(dependents(+atom, +atom), zero_or_one).
+	:- info(dependents/2, [
+		comment is 'Prints a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
+		argnames is ['Registry', 'Pack']
+	]).
+
+	:- public(dependents/1).
+	:- mode(dependents(+atom), zero_or_one).
+	:- info(dependents/1, [
+		comment is 'Prints a list of all packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.',
+		argnames is ['Pack']
 	]).
 
 	:- uses(list, [
@@ -370,7 +391,7 @@
 			;	print_message(error, packs, unknown_pack_version(Registry, Pack, Version)),
 				fail
 			)
-		;	print_message(error, packs, unknown_pack(Pack)),
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		).
 
@@ -387,7 +408,7 @@
 			print_message(comment, packs, installing_pack(Registry, Pack, LatestVersion)),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, []),
 			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion))
-		;	print_message(error, packs, unknown_pack(Pack)),
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		).
 
@@ -466,7 +487,7 @@
 		check(atom, Pack),
 		(	registry_pack(Registry, Pack, PackObject) ->
 			describe_pack(Registry, Pack, PackObject)
-		;	print_message(error, packs, unknown_pack(Pack)),
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		).
 
@@ -586,7 +607,7 @@
 			RegistryPacks
 		),
 		(	RegistryPacks = [] ->
-			print_message(error, packs, unknown_pack(Pack)),
+			print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		;	RegistryPacks = [Registry-Pack] ->
 			delete_archives(Registry, Pack)
@@ -646,6 +667,71 @@
 		expand_library_path(logtalk_packs(registries), Registries),
 		path_concat(Registries, Registry, Directory),
 		\+ directory_exists(Directory).
+
+	% pack dependents predicates
+
+	dependents(Registry, Pack, Dependents) :-
+		check(atom, Registry),
+		check(atom, Pack),
+		(	registry_pack(Registry, Pack, _) ->
+			pack_dependents(Registry, Pack, Dependents)
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
+			fail
+		).
+
+	dependents(Registry, Pack) :-
+		dependents(Registry, Pack, Dependents),
+		print_dependents(Registry, Pack, Dependents).
+
+	dependents(Pack) :-
+		check(atom, Pack),
+		findall(
+			Registry-Pack,
+			registry_pack(Registry, Pack, _),
+			RegistryPacks
+		),
+		(	RegistryPacks = [] ->
+			print_message(error, packs, unknown_pack(Pack)),
+			fail
+		;	RegistryPacks = [Registry-Pack] ->
+			pack_dependents(Registry, Pack, Dependents),
+			print_dependents(Registry, Pack, Dependents)
+		;	print_message(error, packs, 'Pack available from multiple registries:'::RegistryPacks),
+			fail
+		).
+
+	print_dependents(Registry, Pack, Dependents) :-
+		print_message(information, packs, 'Packs depending on pack: ~q::~q'+[Registry, Pack]),
+		(	Dependents == [] ->
+			print_message(information, packs, @'  (none)')
+		;	print_message(information, packs, Dependents)
+		).
+
+	pack_dependents(Registry, Pack, Dependents) :-
+		findall(
+			Dependent,
+			pack_dependent(Registry, Pack, Dependent),
+			Dependents
+		).
+
+	pack_dependent(Registry, Pack, Dependent) :-
+		expand_library_path(logtalk_packs(packs), Directory),
+		directory_files(Directory, Dependents, [type(directory), dot_files(false), paths(relative)]),
+		member(Dependent, Dependents),
+		implements_protocol(DependentObject, pack_protocol),
+		DependentObject::name(Dependent),
+		DependentObject::version(_, _, _, _, Dependencies, _),
+		(	member(Dependency, Dependencies),
+			dependency(Dependency, Registry::Pack) ->
+			true
+		;	fail
+		).
+
+	dependency(Dependency >= _, Dependency).
+	dependency(Dependency =< _, Dependency).
+	dependency(Dependency > _, Dependency).
+	dependency(Dependency < _, Dependency).
+	dependency(Dependency = _, Dependency).
 
 	% auxiliary predicates
 

@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-10-19,
+		date is 2021-10-16,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -201,6 +201,9 @@
 
 	message_tokens(unknown_pack(Pack)) -->
 		['Unknown pack: ~q'-[Pack], nl].
+
+	message_tokens(unknown_pack(Registry, Pack)) -->
+		['Unknown pack: ~q::~q'-[Registry, Pack], nl].
 
 	message_tokens(pack_not_installed(Pack)) -->
 		['Pack is not installed: ~q'-[Pack], nl].

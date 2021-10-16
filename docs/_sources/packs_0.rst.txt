@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:9:0
-| **Date:** 2021-02-15
+| **Version:** 0:10:0
+| **Date:** 2021-02-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -268,7 +268,7 @@ Lists all the packs that are installed but whose registry is no longer defined.
 ``directory/1``
 ^^^^^^^^^^^^^^^
 
-Prints the directory where a pack is installed.
+Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.
 
 | **Compilation flags:**
 |    ``static``
@@ -314,7 +314,7 @@ Enumerates by backtracking all packs and respective installation directories.
 ``uninstall/2``
 ^^^^^^^^^^^^^^^
 
-Uninstalls a pack using the specified options.
+Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -343,7 +343,7 @@ Uninstalls a pack using the specified options.
 ``uninstall/1``
 ^^^^^^^^^^^^^^^
 
-Uninstalls a pack using default options.
+Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -412,7 +412,7 @@ Describes a registered pack, including installed version if applicable.
 ``install/4``
 ^^^^^^^^^^^^^
 
-Installs a new pack using the specified options.
+Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using a ``force(true)`` option. Fails also if the pack version is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -443,7 +443,7 @@ Installs a new pack using the specified options.
 ``install/3``
 ^^^^^^^^^^^^^
 
-Installs the specified version of a pack from the given registry using default options. Fails if the pack is already installed.
+Installs the specified version of a pack from the given registry using default options. Fails if the pack is already installed or unknown. Fails also if the pack version is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -466,7 +466,7 @@ Installs the specified version of a pack from the given registry using default o
 ``install/2``
 ^^^^^^^^^^^^^
 
-Installs the latest version of a pack from the given registry using default options. Fails if the pack is already installed.
+Installs the latest version of a pack from the given registry using default options. Fails if the pack is already installed or unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -489,7 +489,7 @@ Installs the latest version of a pack from the given registry using default opti
 ``install/1``
 ^^^^^^^^^^^^^
 
-Installs a pack (if its name is unique among all registries) using default options. Fails if the pack is already installed.
+Installs a pack (if its name is unique among all registries) using default options. Fails if the pack is already installed or unknown. Fails also if the pack is available from multiple registries.
 
 | **Compilation flags:**
 |    ``static``
@@ -579,7 +579,7 @@ Cleans all archives for all packs.
 ``update/2``
 ^^^^^^^^^^^^
 
-Updates an outdated pack using the specified options.
+Updates an outdated pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -610,7 +610,7 @@ Updates an outdated pack using the specified options.
 ``update/1``
 ^^^^^^^^^^^^
 
-Updates an outdated pack using default options. Fails if the pack is pinned.
+Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -640,6 +640,75 @@ Updades all outdated packs (that are not pinned) using default options.
 
 | **Mode and number of proofs:**
 |    ``update`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="dependents/3"> </div>
+
+.. index:: dependents/3
+.. _packs/0::dependents/3:
+
+``dependents/3``
+^^^^^^^^^^^^^^^^
+
+Returns a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dependents(Registry,Pack,Dependents)``
+| **Mode and number of proofs:**
+|    ``dependents(+atom,+atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="dependents/2"> </div>
+
+.. index:: dependents/2
+.. _packs/0::dependents/2:
+
+``dependents/2``
+^^^^^^^^^^^^^^^^
+
+Prints a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dependents(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``dependents(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="dependents/1"> </div>
+
+.. index:: dependents/1
+.. _packs/0::dependents/1:
+
+``dependents/1``
+^^^^^^^^^^^^^^^^
+
+Prints a list of all packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dependents(Pack)``
+| **Mode and number of proofs:**
+|    ``dependents(+atom)`` - ``zero_or_one``
 
 
 ------------
