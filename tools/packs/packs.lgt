@@ -88,45 +88,6 @@
 		argnames is ['Registry', 'Pack']
 	]).
 
-	:- public(directory/0).
-	:- mode(directory, one).
-	:- info(location/0, [
-		comment is 'Prints the directory where the packs are installed.'
-	]).
-
-	:- public(directory/1).
-	:- mode(directory(+atom), zero_or_one).
-	:- info(directory/1, [
-		comment is 'Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.',
-		argnames is ['Pack']
-	]).
-
-	:- public(directory/2).
-	:- mode(directory(?atom, ?atom), zero_or_more).
-	:- info(directory/2, [
-		comment is 'Enumerates by backtracking all packs and respective installation directories.',
-		argnames is ['Pack', 'Directory']
-	]).
-
-	:- public(uninstall/2).
-	:- mode(uninstall(+atom, ++list(compound)), zero_or_one).
-	:- info(uninstall/2, [
-		comment is 'Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
-		argnames is ['Pack', 'Options'],
-		remarks is [
-			'``force(Boolean)`` option' - 'Force deletion if the pack is pinned. Default is ``false``.',
-			'``clean(Boolean)`` option' - 'Clean pack archive after deleting. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose deletion steps. Default is ``false``.'
-		]
-	]).
-
-	:- public(uninstall/1).
-	:- mode(uninstall(+atom), zero_or_one).
-	:- info(uninstall/1, [
-		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.',
-		argnames is ['Pack']
-	]).
-
 	:- public(describe/2).
 	:- mode(describe(+atom, +atom), zero_or_one).
 	:- info(describe/2, [
@@ -176,26 +137,6 @@
 		argnames is ['Pack']
 	]).
 
-	:- public(clean/2).
-	:- mode(clean(+atom, +atom), zero_or_one).
-	:- info(clean/2, [
-		comment is 'Cleans all pack archives. Fails if the the pack is unknown.',
-		argnames is ['Registry', 'Pack']
-	]).
-
-	:- public(clean/1).
-	:- mode(clean(+atom), zero_or_one).
-	:- info(clean/1, [
-		comment is 'Cleans all pack archives. Fails if the pack is not unknown.',
-		argnames is ['Pack']
-	]).
-
-	:- public(clean/0).
-	:- mode(clean, one).
-	:- info(clean/0, [
-		comment is 'Cleans all archives for all packs.'
-	]).
-
 	:- public(update/2).
 	:- mode(update(+atom, +atom), zero_or_one).
 	:- info(update/2, [
@@ -215,6 +156,45 @@
 	:- info(update/1, [
 		comment is 'Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.',
 		argnames is ['Pack']
+	]).
+
+	:- public(uninstall/2).
+	:- mode(uninstall(+atom, ++list(compound)), zero_or_one).
+	:- info(uninstall/2, [
+		comment is 'Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		argnames is ['Pack', 'Options'],
+		remarks is [
+			'``force(Boolean)`` option' - 'Force deletion if the pack is pinned. Default is ``false``.',
+			'``clean(Boolean)`` option' - 'Clean pack archive after deleting. Default is ``false``.',
+			'``verbose(Boolean)`` option' - 'Verbose deletion steps. Default is ``false``.'
+		]
+	]).
+
+	:- public(uninstall/1).
+	:- mode(uninstall(+atom), zero_or_one).
+	:- info(uninstall/1, [
+		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.',
+		argnames is ['Pack']
+	]).
+
+	:- public(clean/2).
+	:- mode(clean(+atom, +atom), zero_or_one).
+	:- info(clean/2, [
+		comment is 'Cleans all pack archives. Fails if the the pack is unknown.',
+		argnames is ['Registry', 'Pack']
+	]).
+
+	:- public(clean/1).
+	:- mode(clean(+atom), zero_or_one).
+	:- info(clean/1, [
+		comment is 'Cleans all pack archives. Fails if the pack is not unknown.',
+		argnames is ['Pack']
+	]).
+
+	:- public(clean/0).
+	:- mode(clean, one).
+	:- info(clean/0, [
+		comment is 'Cleans all archives for all packs.'
 	]).
 
 	:- public(update/0).
@@ -242,6 +222,26 @@
 	:- info(dependents/1, [
 		comment is 'Prints a list of all packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.',
 		argnames is ['Pack']
+	]).
+
+	:- public(directory/0).
+	:- mode(directory, one).
+	:- info(location/0, [
+		comment is 'Prints the directory where the packs are installed.'
+	]).
+
+	:- public(directory/1).
+	:- mode(directory(+atom), zero_or_one).
+	:- info(directory/1, [
+		comment is 'Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.',
+		argnames is ['Pack']
+	]).
+
+	:- public(directory/2).
+	:- mode(directory(?atom, ?atom), zero_or_more).
+	:- info(directory/2, [
+		comment is 'Enumerates by backtracking all packs and respective installation directories.',
+		argnames is ['Pack', 'Directory']
 	]).
 
 	:- uses(list, [

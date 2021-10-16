@@ -64,71 +64,6 @@ Prints a list of all installed registries.
 
 .. raw:: html
 
-   <div id="directory/0"> </div>
-
-.. index:: directory/0
-.. _registries/0::directory/0:
-
-``directory/0``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``directory`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
-.. index:: directory/1
-.. _registries/0::directory/1:
-
-``directory/1``
-^^^^^^^^^^^^^^^
-
-Prints the directory where a registry is installed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Registry)``
-| **Mode and number of proofs:**
-|    ``directory(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/2"> </div>
-
-.. index:: directory/2
-.. _registries/0::directory/2:
-
-``directory/2``
-^^^^^^^^^^^^^^^
-
-Enumerates by backtracking all installed registries and respective directories.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Registry,Directory)``
-| **Mode and number of proofs:**
-|    ``directory(?atom,?atom)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
    <div id="describe/1"> </div>
 
 .. index:: describe/1
@@ -367,6 +302,71 @@ Cleans all archives for all registries.
 
 | **Mode and number of proofs:**
 |    ``clean`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/0"> </div>
+
+.. index:: directory/0
+.. _registries/0::directory/0:
+
+``directory/0``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``directory`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _registries/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Prints the directory where a registry is installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Registry)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _registries/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all installed registries and respective directories.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Registry,Directory)``
+| **Mode and number of proofs:**
+|    ``directory(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------

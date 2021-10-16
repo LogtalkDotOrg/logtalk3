@@ -35,26 +35,6 @@
 		comment is 'Prints a list of all installed registries.'
 	]).
 
-	:- public(directory/0).
-	:- mode(directory, one).
-	:- info(location/0, [
-		comment is 'Prints the directory where the registries are installed.'
-	]).
-
-	:- public(directory/1).
-	:- mode(directory(+atom), zero_or_one).
-	:- info(directory/1, [
-		comment is 'Prints the directory where a registry is installed.',
-		argnames is ['Registry']
-	]).
-
-	:- public(directory/2).
-	:- mode(directory(?atom, ?atom), zero_or_more).
-	:- info(directory/2, [
-		comment is 'Enumerates by backtracking all installed registries and respective directories.',
-		argnames is ['Registry', 'Directory']
-	]).
-
 	:- public(describe/1).
 	:- mode(describe(+atom), one).
 	:- info(describe/1, [
@@ -136,6 +116,26 @@
 	:- mode(clean, one).
 	:- info(clean/0, [
 		comment is 'Cleans all archives for all registries.'
+	]).
+
+	:- public(directory/0).
+	:- mode(directory, one).
+	:- info(location/0, [
+		comment is 'Prints the directory where the registries are installed.'
+	]).
+
+	:- public(directory/1).
+	:- mode(directory(+atom), zero_or_one).
+	:- info(directory/1, [
+		comment is 'Prints the directory where a registry is installed.',
+		argnames is ['Registry']
+	]).
+
+	:- public(directory/2).
+	:- mode(directory(?atom, ?atom), zero_or_more).
+	:- info(directory/2, [
+		comment is 'Enumerates by backtracking all installed registries and respective directories.',
+		argnames is ['Registry', 'Directory']
 	]).
 
 	:- private(deleted_registry_/1).

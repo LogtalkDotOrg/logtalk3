@@ -241,123 +241,6 @@ Lists all the packs that are installed but whose registry is no longer defined.
 
 .. raw:: html
 
-   <div id="directory/0"> </div>
-
-.. index:: directory/0
-.. _packs/0::directory/0:
-
-``directory/0``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``directory`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
-.. index:: directory/1
-.. _packs/0::directory/1:
-
-``directory/1``
-^^^^^^^^^^^^^^^
-
-Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Pack)``
-| **Mode and number of proofs:**
-|    ``directory(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/2"> </div>
-
-.. index:: directory/2
-.. _packs/0::directory/2:
-
-``directory/2``
-^^^^^^^^^^^^^^^
-
-Enumerates by backtracking all packs and respective installation directories.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Pack,Directory)``
-| **Mode and number of proofs:**
-|    ``directory(?atom,?atom)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="uninstall/2"> </div>
-
-.. index:: uninstall/2
-.. _packs/0::uninstall/2:
-
-``uninstall/2``
-^^^^^^^^^^^^^^^
-
-Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``uninstall(Pack,Options)``
-| **Mode and number of proofs:**
-|    ``uninstall(+atom,++list(compound))`` - ``zero_or_one``
-
-| **Remarks:**
-
-    - ``force(Boolean)`` option: Force deletion if the pack is pinned. Default is ``false``.
-    - ``clean(Boolean)`` option: Clean pack archive after deleting. Default is ``false``.
-    - ``verbose(Boolean)`` option: Verbose deletion steps. Default is ``false``.
-
-
-------------
-
-.. raw:: html
-
-   <div id="uninstall/1"> </div>
-
-.. index:: uninstall/1
-.. _packs/0::uninstall/1:
-
-``uninstall/1``
-^^^^^^^^^^^^^^^
-
-Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``uninstall(Pack)``
-| **Mode and number of proofs:**
-|    ``uninstall(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="describe/2"> </div>
 
 .. index:: describe/2
@@ -504,6 +387,112 @@ Installs a pack (if its name is unique among all registries) using default optio
 
 .. raw:: html
 
+   <div id="update/2"> </div>
+
+.. index:: update/2
+.. _packs/0::update/2:
+
+``update/2``
+^^^^^^^^^^^^
+
+Updates an outdated pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Pack,Options)``
+| **Mode and number of proofs:**
+|    ``update(+atom,+atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
+    - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
+    - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="update/1"> </div>
+
+.. index:: update/1
+.. _packs/0::update/1:
+
+``update/1``
+^^^^^^^^^^^^
+
+Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Pack)``
+| **Mode and number of proofs:**
+|    ``update(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="uninstall/2"> </div>
+
+.. index:: uninstall/2
+.. _packs/0::uninstall/2:
+
+``uninstall/2``
+^^^^^^^^^^^^^^^
+
+Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uninstall(Pack,Options)``
+| **Mode and number of proofs:**
+|    ``uninstall(+atom,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force deletion if the pack is pinned. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean pack archive after deleting. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose deletion steps. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="uninstall/1"> </div>
+
+.. index:: uninstall/1
+.. _packs/0::uninstall/1:
+
+``uninstall/1``
+^^^^^^^^^^^^^^^
+
+Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uninstall(Pack)``
+| **Mode and number of proofs:**
+|    ``uninstall(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="clean/2"> </div>
 
 .. index:: clean/2
@@ -565,60 +554,6 @@ Cleans all archives for all packs.
 
 | **Mode and number of proofs:**
 |    ``clean`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="update/2"> </div>
-
-.. index:: update/2
-.. _packs/0::update/2:
-
-``update/2``
-^^^^^^^^^^^^
-
-Updates an outdated pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``update(Pack,Options)``
-| **Mode and number of proofs:**
-|    ``update(+atom,+atom)`` - ``zero_or_one``
-
-| **Remarks:**
-
-    - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
-    - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
-    - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
-    - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
-    - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
-
-
-------------
-
-.. raw:: html
-
-   <div id="update/1"> </div>
-
-.. index:: update/1
-.. _packs/0::update/1:
-
-``update/1``
-^^^^^^^^^^^^
-
-Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``update(Pack)``
-| **Mode and number of proofs:**
-|    ``update(+atom)`` - ``zero_or_one``
 
 
 ------------
@@ -709,6 +644,71 @@ Prints a list of all packs that depend on the given pack if unique from all defi
 |    ``dependents(Pack)``
 | **Mode and number of proofs:**
 |    ``dependents(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/0"> </div>
+
+.. index:: directory/0
+.. _packs/0::directory/0:
+
+``directory/0``
+^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``directory`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _packs/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Pack)``
+| **Mode and number of proofs:**
+|    ``directory(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/2"> </div>
+
+.. index:: directory/2
+.. _packs/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Enumerates by backtracking all packs and respective installation directories.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Pack,Directory)``
+| **Mode and number of proofs:**
+|    ``directory(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------
