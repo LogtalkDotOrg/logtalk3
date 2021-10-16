@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.13.51 and later versions
+%  Adapter file for Trealla Prolog 1.14.0 and later versions
 %  Last updated on October 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>

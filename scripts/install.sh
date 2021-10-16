@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on August 27, 2021
+##   Last updated on October 16, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -181,7 +181,7 @@ echo "* Scryer Prolog (0.8.128 or later):  scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.0 or later):       taulgt"
-echo "* Trealla Prolog (1.13.51 or later): tplgt       (experimental)"
+echo "* Trealla Prolog (1.14.0 or later):  tplgt       (experimental)"
 echo "* XSB (3.8.0 or later):              xsblgt      (first run may require sudo)"
 echo "* YAP (6.3.4 or later):              yaplgt"
 echo
