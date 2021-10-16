@@ -29,8 +29,8 @@
 		registry_protocol,
 		packs_messages,
 		packs_common,
-		packs,
-		registries
+		registries,
+		packs
 	], [
 		optimize(on)
 	])

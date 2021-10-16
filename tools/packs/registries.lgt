@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-10-15,
+		date is 2021-10-17,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -272,7 +272,7 @@
 				fail
 			;	true
 			),
-			(	packs::installed(Registry, _, _, _),
+			(	installed_registry_packs(Registry),
 				member(force(false), Options) ->
 				print_message(error, packs, cannot_delete_registry_with_installed_packs(Registry)),
 				fail
@@ -507,5 +507,16 @@
 		atom_concat(Command2, OSPath, Command3),
 		atom_concat(Command3, '"', Command),
 		^^command(Command, registry_archive_uncompress_failed(Registry, OSPath)).
+
+	installed_registry_packs(Registry) :-
+		expand_library_path(logtalk_packs(packs), Directory),
+		directory_files(Directory, Packs, [type(directory), dot_files(false), paths(absolute)]),
+		member(Pack, Packs),
+		path_concat(Pack, 'REGISTRY.packs', File),
+		open(File, read, Stream),
+		read(Stream, PackRegistry),
+		close(Stream),
+		PackRegistry == Registry,
+		!.
 
 :- end_object.
