@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:10:0
+| **Version:** 0:11:0
 | **Date:** 2021-02-16
 
 | **Compilation flags:**
@@ -281,6 +281,29 @@ Describes a registered pack, including installed version if applicable.
 |    ``describe(Pack)``
 | **Mode and number of proofs:**
 |    ``describe(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="search/1"> </div>
+
+.. index:: search/1
+.. _packs/0::search/1:
+
+``search/1``
+^^^^^^^^^^^^
+
+Searches packs whose name or description includes the search term (case sensitive).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``search(Term)``
+| **Mode and number of proofs:**
+|    ``search(+atom)`` - ``one``
 
 
 ------------

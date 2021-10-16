@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2021-02-16,
 		comment is 'Pack handling predicates.'
@@ -100,6 +100,13 @@
 	:- info(describe/1, [
 		comment is 'Describes a registered pack, including installed version if applicable.',
 		argnames is ['Pack']
+	]).
+
+	:- public(search/1).
+	:- mode(search(+atom), one).
+	:- info(search/1, [
+		comment is 'Searches packs whose name or description includes the search term (case sensitive).',
+		argnames is ['Term']
 	]).
 
 	:- public(install/4).
@@ -370,6 +377,36 @@
 		print_message(information, packs, @'  (none)'),
 		fail.
 	outdated.
+
+	% pack search predicates
+
+	search(Term) :-
+		check(atom, Term),
+		print_message(information, packs, 'Packs whose name or description contain the term: ~q'+[Term]),
+		findall(
+			(Registry::Pack)-Status,
+			search_hit(Term, Registry, Pack, Status),
+			Packs
+		),
+		(	Packs == [] ->
+			print_message(information, packs, @'  (none)')
+		;	print_message(information, packs, search_hits(Packs))
+		).
+
+	search_hit(Term, Registry, Pack, Status) :-
+		registry_pack(Registry, Pack, PackObject),
+		(	sub_atom(Pack, _, _, _, Term) ->
+			true
+		;	PackObject::description(Description),
+			sub_atom(Description, _, _, _, Term)
+		),
+		(	installed(Registry, Pack, _) ->
+			(	pinned(Pack) ->
+				Status = '(installed; pinned)'
+			;	Status = '(installed)'
+			)
+		;	Status = ''
+		).
 
 	% install pack predicates
 

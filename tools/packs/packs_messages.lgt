@@ -22,7 +22,7 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2021-10-16,
 		comment is 'Packs default message translations.'
@@ -232,6 +232,17 @@
 			'Versions:'-[], nl
 		],
 		pack_info(Versions).
+
+	% pack search hits
+
+	message_tokens(search_hits(Packs)) -->
+		search_hits(Packs).
+
+	search_hits([]) -->
+		[].
+	search_hits([Pack-Status| Packs]) -->
+		['  - ~q ~w'-[Pack, Status], nl],
+		search_hits(Packs).
 
 	% auxiliary non-terminals
 

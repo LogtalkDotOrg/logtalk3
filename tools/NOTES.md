@@ -23,7 +23,8 @@ Overview
 
 The following developer tools are available, each one with its own
 `loader.lgt` loader file (except for the built-in `linter` and `make`
-tools) and `NOTES.md` documentation files:
+tools, which are integrated with the compiler/runtime) and `NOTES.md`
+documentation files:
 
 - `asdf`
 - `assertions`
@@ -38,6 +39,7 @@ tools) and `NOTES.md` documentation files:
 - `lgtunit`
 - `linter`
 - `make`
+- `packs`
 - `ports_profiler`
 - `profiler`
 - `tutor`
