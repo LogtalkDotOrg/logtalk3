@@ -353,6 +353,15 @@ be found in the `$LOGTALKPACKS/packs/pl_reg/pl_pack` directory. When the
 by default `~/logtalk_packs/packs/pl_reg/pl_pack`.
 
 Different Prolog systems provide different solutions for locating Prolog
-code. For example, some Prolog systems adopted the Quintus Prolog
+code. For example, several Prolog systems adopted the Quintus Prolog
 `file_search_path/2` hook predicate. For these systems, a solution could
-be to add a fact to this predicate for each installed Prolog pack.
+be to add a fact to this predicate for each installed Prolog pack. For
+example, assuming a `pl_pack` Prolog pack:
+
+	:- multifile(file_search_path/2).
+	:- dynamic(file_search_path/2).
+	
+	file_search_path(library, '$LOGTALKPACKS/packs/pl_pack').
+
+If the Prolog system also supports reading an initialization file at
+startup, the above definition could be added there.

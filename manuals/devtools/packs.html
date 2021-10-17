@@ -434,9 +434,18 @@ directory. When the <code class="docutils literal notranslate"><span class="pre"
 defined, the pack directory is by default
 <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs/packs/pl_reg/pl_pack</span></code>.</p>
 <p>Different Prolog systems provide different solutions for locating Prolog
-code. For example, some Prolog systems adopted the Quintus Prolog
+code. For example, several Prolog systems adopted the Quintus Prolog
 <code class="docutils literal notranslate"><span class="pre">file_search_path/2</span></code> hook predicate. For these systems, a solution
-could be to add a fact to this predicate for each installed Prolog pack.</p>
+could be to add a fact to this predicate for each installed Prolog pack.
+For example, assuming a <code class="docutils literal notranslate"><span class="pre">pl_pack</span></code> Prolog pack:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(file_search_path<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(file_search_path<span class="o">/</span><span class="m">2</span>).
+
+file_search_path(library, <span class="s">&#39;$LOGTALKPACKS/packs/pl_pack&#39;</span>).
+</pre></div>
+</div>
+<p>If the Prolog system also supports reading an initialization file at
+startup, the above definition could be added there.</p>
 </div>
 </div>
 
