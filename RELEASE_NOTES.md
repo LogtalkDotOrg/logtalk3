@@ -94,11 +94,14 @@ types to the `arbitrary` library.
 
 * ADDED: Additional tests for the `os::absolute_file_name/2` predicate.
 
-* UPDATED: The library `number` object to also use the `epsilon/0` arithmetic
-constant when using the Scryer Prolog backend.
+* ADDED: Definitions for the `os::shell/1-2` library predicates for the Scryer
+Prolog backend.
 
 * UPDATED: The `os` library object notes on predicates not supported when using
 the Scryer Prolog backend.
+
+* UPDATED: The library `number` object to also use the `epsilon/0` arithmetic
+constant when using the Scryer Prolog backend.
 
 * FIXED: Bug in the `os::make_directory_path/1` predicate when using a backend
 that doesn't provide this functionality natively. Thanks to Paul Brown for the
