@@ -86,9 +86,6 @@ Usage
 
 The tool provides two main objects, `registries` and `packs`, for handling,
 respectively, registries and packs. Both objects accept a `help/0` message.
-For example:
-
-	
 
 
 Registries and packs storage
@@ -196,11 +193,14 @@ can also be deleted using the `registries::delete/1-2` predicate. After deleting
 a registry, you can use the `packs::orphaned/0` predicate to list any orphaned
 packs that are installed.
 
+See the tool API documentation on the [registries](../../docs/registries_0.html)
+object for other useful predicates.
+
 
 Pack handling
 -------------
 
-Packs must of available from a defined registry. To list all packs that are
+Packs must be available from a defined registry. To list all packs that are
 available for installation, use the `packs::available/0` predicate:
 
 	| ?- packs::available.
@@ -215,10 +215,13 @@ provide packs with the same name. For example:
 
 	| ?- packs::describe(reg, bar).
 
-To install the latest version of a pack, assuming unique among all defined
-registries, we can use the `packs::install/1-4` predicates. For example:
+To install the latest version of a pack, we can use the `packs::install/1-4`
+predicates. For example:
 
 	| ?- packs::install(bar).
+
+Packs becomes available for loading immediately after successful installation
+(no restarting of the Logtalk session is required).
 
 Other install predicates are available to disambiguate between registries
 and to install a specific pack version. The `packs::installed/0` predicate
@@ -241,13 +244,17 @@ When using a `checksig(true)` option to check a pack signature, is strongly
 advised that you also use the `verbose(true)` option. Note that the public key
 used to sign the pack archive must be already present in your local system.
 
+See the tool API documentation on the [packs](../../docs/packs_0.html) object
+for other useful predicates.
+
 
 Security considerations
 -----------------------
 
 New pack registries should be examined before being added, specially if
-public and from a previously unknown source. Same when adding or updating
-a pack. But note that a registry can always index third-party packs.
+public and from a previously unknown source. The same precautions should
+be taken when adding or updating a pack. Note that a registry can always
+index third-party packs.
 
 Pack checksums are checked by default. But pack signatures are only checked
 if requested as packs are often unsigned. Care should be taken when adding
@@ -261,7 +268,25 @@ they contain URL search parameters. But note that this tool makes no attempt
 to audit pack source files themselves.
 
 Registries and packs can always be pinned so that they are not accidentally
-updated to a version that you may not had the chance to audit.
+updated to a version that you may not had the chance to audit. For example,
+if we want the `bar` pack to stay at its current installed version:
+
+	| ?- packs::pin(bar).
+	yes
+
+After, any attempt to update or uninstall the pack will fail with an error
+message:
+
+	| ?- packs::update(bar).
+	!     Cannot update pinned pack: bar
+	no
+
+	| ?- packs::uninstall(bar).
+	!     Cannot uninstall pinned pack: bar
+	no
+
+To enable the pack to be updated ou uninstalled, the pack must first be
+unpinned. Alternatively, the `force(true)` option can be used.
 
 
 Best practices

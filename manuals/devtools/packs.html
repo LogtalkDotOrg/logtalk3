@@ -190,7 +190,7 @@ download from:</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>The tool provides two main objects, <code class="docutils literal notranslate"><span class="pre">registries</span></code> and <code class="docutils literal notranslate"><span class="pre">packs</span></code>, for
 handling, respectively, registries and packs. Both objects accept a
-<code class="docutils literal notranslate"><span class="pre">help/0</span></code> message. For example:</p>
+<code class="docutils literal notranslate"><span class="pre">help/0</span></code> message.</p>
 </div>
 <div class="section" id="registries-and-packs-storage">
 <h2>Registries and packs storage<a class="headerlink" href="#registries-and-packs-storage" title="Permalink to this headline"></a></h2>
@@ -284,10 +284,13 @@ Registries can also be deleted using the <code class="docutils literal notransla
 predicate. After deleting a registry, you can use the
 <code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned packs that are
 installed.</p>
+<p>See the tool API documentation on the
+<a class="reference external" href="../../docs/registries_0.html">registries</a> object for other useful
+predicates.</p>
 </div>
 <div class="section" id="pack-handling">
 <h2>Pack handling<a class="headerlink" href="#pack-handling" title="Permalink to this headline"></a></h2>
-<p>Packs must of available from a defined registry. To list all packs that
+<p>Packs must be available from a defined registry. To list all packs that
 are available for installation, use the <code class="docutils literal notranslate"><span class="pre">packs::available/0</span></code>
 predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>available.
@@ -303,12 +306,13 @@ registries provide packs with the same name. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>describe(reg, bar).
 </pre></div>
 </div>
-<p>To install the latest version of a pack, assuming unique among all
-defined registries, we can use the <code class="docutils literal notranslate"><span class="pre">packs::install/1-4</span></code> predicates.
-For example:</p>
+<p>To install the latest version of a pack, we can use the
+<code class="docutils literal notranslate"><span class="pre">packs::install/1-4</span></code> predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(bar).
 </pre></div>
 </div>
+<p>Packs becomes available for loading immediately after successful
+installation (no restarting of the Logtalk session is required).</p>
 <p>Other install predicates are available to disambiguate between
 registries and to install a specific pack version. The
 <code class="docutils literal notranslate"><span class="pre">packs::installed/0</span></code> predicate can be used to list all installed
@@ -330,13 +334,15 @@ predicates that accept a list of options:</p>
 strongly advised that you also use the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option. Note
 that the public key used to sign the pack archive must be already
 present in your local system.</p>
+<p>See the tool API documentation on the
+<a class="reference external" href="../../docs/packs_0.html">packs</a> object for other useful predicates.</p>
 </div>
 <div class="section" id="security-considerations">
 <h2>Security considerations<a class="headerlink" href="#security-considerations" title="Permalink to this headline"></a></h2>
 <p>New pack registries should be examined before being added, specially if
-public and from a previously unknown source. Same when adding or
-updating a pack. But note that a registry can always index third-party
-packs.</p>
+public and from a previously unknown source. The same precautions should
+be taken when adding or updating a pack. Note that a registry can always
+index third-party packs.</p>
 <p>Pack checksums are checked by default. But pack signatures are only
 checked if requested as packs are often unsigned. Care should be taken
 when adding public keys for pack signers to your local system.</p>
@@ -348,7 +354,25 @@ defining URLs are discarded if the URLs are neither <code class="docutils litera
 this tool makes no attempt to audit pack source files themselves.</p>
 <p>Registries and packs can always be pinned so that they are not
 accidentally updated to a version that you may not had the chance to
-audit.</p>
+audit. For example, if we want the <code class="docutils literal notranslate"><span class="pre">bar</span></code> pack to stay at its current
+installed version:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pin(bar).
+yes
+</pre></div>
+</div>
+<p>After, any attempt to update or uninstall the pack will fail with an
+error message:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>update(bar).
+<span class="o">!</span>     <span class="nv">Cannot</span> update pinned pack<span class="o">:</span> bar
+no
+
+| <span class="o">?-</span> packs<span class="o">::</span>uninstall(bar).
+<span class="o">!</span>     <span class="nv">Cannot</span> uninstall pinned pack<span class="o">:</span> bar
+no
+</pre></div>
+</div>
+<p>To enable the pack to be updated ou uninstalled, the pack must first be
+unpinned. Alternatively, the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option can be used.</p>
 </div>
 <div class="section" id="best-practices">
 <h2>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline"></a></h2>
