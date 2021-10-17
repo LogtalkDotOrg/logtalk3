@@ -244,6 +244,64 @@ present in your local system.
 See the tool API documentation on the
 `packs <../../docs/packs_0.html>`__ object for other useful predicates.
 
+Pinning registries and packs
+----------------------------
+
+Registries and packs can be *pinned* after installation to prevent
+accidental updating or deleting, e.g. when using the batch ``update/0``
+predicate. This is useful when your application requires a specific
+version or for security considerations (see below). For example, if we
+want the ``bar`` pack to stay at its current installed version:
+
+::
+
+   | ?- packs::pin(bar).
+   yes
+
+After, any attempt to update or uninstall the pack will fail with an
+error message:
+
+::
+
+   | ?- packs::update(bar).
+   !     Cannot update pinned pack: bar
+   no
+
+   | ?- packs::uninstall(bar).
+   !     Cannot uninstall pinned pack: bar
+   no
+
+To enable the pack to be updated ou uninstalled, the pack must first be
+unpinned. Alternatively, the ``force(true)`` option can be used. Note
+that if you force update a pinned pack, the new version will be
+unpinned.
+
+Testing packs
+-------------
+
+Logtalk packs (as most Logtalk libraries, tools, and examples) are
+expected to have a ``tester.lgt`` or ``tester.logtalk`` tests driver
+file at the root of their directory, which can be used for both
+automated and manual testing. For example, after installing the ``foo``
+pack:
+
+::
+
+   | ?- {foo(tester)}.
+
+To test all installed packs, you can use the ``logtalk_tester``
+automation script from the packs directory, which you can query using
+the goal:
+
+::
+
+   | ?- packs::directory.
+
+Note that running the packs tests, like simply loading the pack, can
+result in calling arbitrary code, which can potentially harm your
+system. Always take into account the security considerations as
+discussed below.
+
 Security considerations
 -----------------------
 
@@ -265,29 +323,7 @@ this tool makes no attempt to audit pack source files themselves.
 
 Registries and packs can always be pinned so that they are not
 accidentally updated to a version that you may not had the chance to
-audit. For example, if we want the ``bar`` pack to stay at its current
-installed version:
-
-::
-
-   | ?- packs::pin(bar).
-   yes
-
-After, any attempt to update or uninstall the pack will fail with an
-error message:
-
-::
-
-   | ?- packs::update(bar).
-   !     Cannot update pinned pack: bar
-   no
-
-   | ?- packs::uninstall(bar).
-   !     Cannot uninstall pinned pack: bar
-   no
-
-To enable the pack to be updated ou uninstalled, the pack must first be
-unpinned. Alternatively, the ``force(true)`` option can be used.
+audit.
 
 Best practices
 --------------

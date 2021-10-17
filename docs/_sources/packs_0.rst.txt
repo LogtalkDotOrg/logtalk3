@@ -464,6 +464,27 @@ Updates an outdated pack using default options. Fails if the pack is pinned, not
 
 .. raw:: html
 
+   <div id="update/0"> </div>
+
+.. index:: update/0
+.. _packs/0::update/0:
+
+``update/0``
+^^^^^^^^^^^^
+
+Updades all outdated packs (that are not pinned) using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``update`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="uninstall/2"> </div>
 
 .. index:: uninstall/2
@@ -577,27 +598,6 @@ Cleans all archives for all packs.
 
 | **Mode and number of proofs:**
 |    ``clean`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="update/0"> </div>
-
-.. index:: update/0
-.. _packs/0::update/0:
-
-``update/0``
-^^^^^^^^^^^^
-
-Updades all outdated packs (that are not pinned) using default options.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``update`` - ``zero_or_one``
 
 
 ------------

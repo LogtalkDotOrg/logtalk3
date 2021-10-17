@@ -165,6 +165,12 @@
 		argnames is ['Pack']
 	]).
 
+	:- public(update/0).
+	:- mode(update, zero_or_one).
+	:- info(update/0, [
+		comment is 'Updades all outdated packs (that are not pinned) using default options.'
+	]).
+
 	:- public(uninstall/2).
 	:- mode(uninstall(+atom, ++list(compound)), zero_or_one).
 	:- info(uninstall/2, [
@@ -202,12 +208,6 @@
 	:- mode(clean, one).
 	:- info(clean/0, [
 		comment is 'Cleans all archives for all packs.'
-	]).
-
-	:- public(update/0).
-	:- mode(update, zero_or_one).
-	:- info(update/0, [
-		comment is 'Updades all outdated packs (that are not pinned) using default options.'
 	]).
 
 	:- public(dependents/3).

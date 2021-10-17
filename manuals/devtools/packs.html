@@ -87,6 +87,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#pack-dependencies">Pack dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-handling">Pack handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pinning-registries-and-packs">Pinning registries and packs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-packs">Testing packs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-considerations">Security considerations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#best-practices">Best practices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installing-prolog-packs">Installing Prolog packs</a></li>
@@ -337,6 +339,54 @@ present in your local system.</p>
 <p>See the tool API documentation on the
 <a class="reference external" href="../../docs/packs_0.html">packs</a> object for other useful predicates.</p>
 </div>
+<div class="section" id="pinning-registries-and-packs">
+<h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Permalink to this headline"></a></h2>
+<p>Registries and packs can be <em>pinned</em> after installation to prevent
+accidental updating or deleting, e.g. when using the batch <code class="docutils literal notranslate"><span class="pre">update/0</span></code>
+predicate. This is useful when your application requires a specific
+version or for security considerations (see below). For example, if we
+want the <code class="docutils literal notranslate"><span class="pre">bar</span></code> pack to stay at its current installed version:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pin(bar).
+yes
+</pre></div>
+</div>
+<p>After, any attempt to update or uninstall the pack will fail with an
+error message:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>update(bar).
+<span class="o">!</span>     <span class="nv">Cannot</span> update pinned pack<span class="o">:</span> bar
+no
+
+| <span class="o">?-</span> packs<span class="o">::</span>uninstall(bar).
+<span class="o">!</span>     <span class="nv">Cannot</span> uninstall pinned pack<span class="o">:</span> bar
+no
+</pre></div>
+</div>
+<p>To enable the pack to be updated ou uninstalled, the pack must first be
+unpinned. Alternatively, the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option can be used. Note
+that if you force update a pinned pack, the new version will be
+unpinned.</p>
+</div>
+<div class="section" id="testing-packs">
+<h2>Testing packs<a class="headerlink" href="#testing-packs" title="Permalink to this headline"></a></h2>
+<p>Logtalk packs (as most Logtalk libraries, tools, and examples) are
+expected to have a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code> tests driver
+file at the root of their directory, which can be used for both
+automated and manual testing. For example, after installing the <code class="docutils literal notranslate"><span class="pre">foo</span></code>
+pack:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>foo(tester)<span class="k">}</span>.
+</pre></div>
+</div>
+<p>To test all installed packs, you can use the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code>
+automation script from the packs directory, which you can query using
+the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>directory.
+</pre></div>
+</div>
+<p>Note that running the packs tests, like simply loading the pack, can
+result in calling arbitrary code, which can potentially harm your
+system. Always take into account the security considerations as
+discussed below.</p>
+</div>
 <div class="section" id="security-considerations">
 <h2>Security considerations<a class="headerlink" href="#security-considerations" title="Permalink to this headline"></a></h2>
 <p>New pack registries should be examined before being added, specially if
@@ -354,25 +404,7 @@ defining URLs are discarded if the URLs are neither <code class="docutils litera
 this tool makes no attempt to audit pack source files themselves.</p>
 <p>Registries and packs can always be pinned so that they are not
 accidentally updated to a version that you may not had the chance to
-audit. For example, if we want the <code class="docutils literal notranslate"><span class="pre">bar</span></code> pack to stay at its current
-installed version:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>pin(bar).
-yes
-</pre></div>
-</div>
-<p>After, any attempt to update or uninstall the pack will fail with an
-error message:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>update(bar).
-<span class="o">!</span>     <span class="nv">Cannot</span> update pinned pack<span class="o">:</span> bar
-no
-
-| <span class="o">?-</span> packs<span class="o">::</span>uninstall(bar).
-<span class="o">!</span>     <span class="nv">Cannot</span> uninstall pinned pack<span class="o">:</span> bar
-no
-</pre></div>
-</div>
-<p>To enable the pack to be updated ou uninstalled, the pack must first be
-unpinned. Alternatively, the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option can be used.</p>
+audit.</p>
 </div>
 <div class="section" id="best-practices">
 <h2>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this headline"></a></h2>
