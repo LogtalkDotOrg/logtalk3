@@ -295,7 +295,7 @@ the goal:
 
 ::
 
-   | ?- packs::directory.
+   | ?- packs::directory(Directory).
 
 Note that running the packs tests, like simply loading the pack, can
 result in calling arbitrary code, which can potentially harm your

@@ -289,7 +289,7 @@ For example, after installing the `foo` pack:
 To test all installed packs, you can use the `logtalk_tester` automation
 script from the packs directory, which you can query using the goal:
 
-	| ?- packs::directory.
+	| ?- packs::directory(Directory).
 
 Note that running the packs tests, like simply loading the pack, can result
 in calling arbitrary code, which can potentially harm your system. Always

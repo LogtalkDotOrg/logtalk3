@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2021-10-17,
 		comment is 'Registry handling predicates.'
@@ -45,7 +45,7 @@
 	:- public(add/3).
 	:- mode(add(+atom, +atom, ++list(compound)), zero_or_one).
 	:- info(add/3, [
-		comment is 'Adds a new registry using the given options. Fails if the registry is already defined.',
+		comment is 'Adds a new registry using the given URL and options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
@@ -57,7 +57,7 @@
 	:- public(add/2).
 	:- mode(add(+atom, +atom), zero_or_one).
 	:- info(add/2, [
-		comment is 'Adds a new registry using default options. Fails if the registry is already defined.',
+		comment is 'Adds a new registry using the given URL and default options. ails if the registry cannot be added or if it is already defined.',
 		argnames is ['Registry', 'URL']
 	]).
 
@@ -432,6 +432,12 @@
 		check(atom, Registry),
 		directory(Registry, Directory),
 		path_concat(Directory, 'PINNED.packs', File).
+
+	% registry readme predicates
+
+	readme(Registry, ReadMeFile) :-
+		directory(Registry, Directory),
+		^^readme_file_path(Directory, ReadMeFile).
 
 	% auxiliary predicates
 

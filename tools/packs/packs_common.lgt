@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-10-15,
+		date is 2021-10-17,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -67,6 +67,27 @@
 		argnames is ['Resource']
 	]).
 
+	:- public(readme/2).
+	:- mode(readme(+atom, -atom), zero_or_one).
+	:- info(readme/2, [
+		comment is 'Returns the path to the resource readme file. Fails if the resource is not defined or installed or if no readme file is found for it.',
+		argnames is ['Resource', 'ReadMeFile']
+	]).
+
+	:- protected(readme_file_path/2).
+	:- mode(readme_file_path(+atom, -atom), zero_or_one).
+	:- info(readme_file_path/2, [
+		comment is 'Returns the absolute path for the given directory readme file if it exists.',
+		argnames is ['Directory',  'ReadMeFile']
+	]).
+
+	:- protected(print_readme_file_path/1).
+	:- mode(print_readme_file_path(+atom), one).
+	:- info(print_readme_file_path/1, [
+		comment is 'Prints the absolute path for the given directory readme file if it exists. Succeeds otherwise.',
+		argnames is ['Directory']
+	]).
+
 	:- protected(command/2).
 	:- mode(command(+atom, @nonvar), zero_or_one).
 	:- info(command/2, [
@@ -93,13 +114,6 @@
 	:- info(supported_archive/1, [
 		comment is 'True iff the archive format is supported.',
 		argnames is ['Extension']
-	]).
-
-	:- protected(print_readme_file_path/1).
-	:- mode(print_readme_file_path(+atom), one).
-	:- info(print_readme_file_path/1, [
-		comment is 'Prints the absolute for path for the given directory readme file if it exists. Succeeds otherwise.',
-		argnames is ['Directory']
 	]).
 
 	:- uses(logtalk, [
@@ -186,10 +200,14 @@
 	supported_archive('.tz2').
 	supported_archive('.tbz2').
 
+	readme_file_path(Directory, ReadMeFile) :-
+		readme_file_name(Basename),
+		path_concat(Directory, Basename, ReadMeFile),
+		file_exists(ReadMeFile),
+		!.
+
 	print_readme_file_path(Directory) :-
-		(	readme_file_name(Basename),
-			path_concat(Directory, Basename, ReadMeFile),
-			file_exists(ReadMeFile) ->
+		(	readme_file_path(Directory, ReadMeFile) ->
 			print_message(comment, packs, readme_file(ReadMeFile))
 		;	true
 		).

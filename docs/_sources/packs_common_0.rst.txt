@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:9:0
-| **Date:** 2021-10-15
+| **Version:** 0:10:0
+| **Date:** 2021-10-17
 
 | **Compilation flags:**
 |    ``static``
@@ -167,8 +167,77 @@ True iff the resource (pack or registry) is defined or installed and if it is pi
 
 ------------
 
+.. raw:: html
+
+   <div id="readme/2"> </div>
+
+.. index:: readme/2
+.. _packs_common/0::readme/2:
+
+``readme/2``
+^^^^^^^^^^^^
+
+Returns the path to the resource readme file. Fails if the resource is not defined or installed or if no readme file is found for it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``readme(Resource,ReadMeFile)``
+| **Mode and number of proofs:**
+|    ``readme(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
 Protected predicates
 --------------------
+
+.. raw:: html
+
+   <div id="readme_file_path/2"> </div>
+
+.. index:: readme_file_path/2
+.. _packs_common/0::readme_file_path/2:
+
+``readme_file_path/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the absolute path for the given directory readme file if it exists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``readme_file_path(Directory,ReadMeFile)``
+| **Mode and number of proofs:**
+|    ``readme_file_path(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="print_readme_file_path/1"> </div>
+
+.. index:: print_readme_file_path/1
+.. _packs_common/0::print_readme_file_path/1:
+
+``print_readme_file_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints the absolute path for the given directory readme file if it exists. Succeeds otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_readme_file_path(Directory)``
+| **Mode and number of proofs:**
+|    ``print_readme_file_path(+atom)`` - ``one``
+
+
+------------
 
 .. raw:: html
 
@@ -258,29 +327,6 @@ True iff the archive format is supported.
 |    ``supported_archive(Extension)``
 | **Mode and number of proofs:**
 |    ``supported_archive(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="print_readme_file_path/1"> </div>
-
-.. index:: print_readme_file_path/1
-.. _packs_common/0::print_readme_file_path/1:
-
-``print_readme_file_path/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Prints the absolute for path for the given directory readme file if it exists. Succeeds otherwise.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``print_readme_file_path(Directory)``
-| **Mode and number of proofs:**
-|    ``print_readme_file_path(+atom)`` - ``one``
 
 
 ------------
