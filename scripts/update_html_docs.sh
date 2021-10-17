@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports, and
 ##   contributions documentation
 ## 
-##   Last updated on January 12, 2021
+##   Last updated on October 17, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -52,7 +52,7 @@ goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(l
 
 
 print_version() {
-	echo "$(basename "$0") 0.15"
+	echo "$(basename "$0") 0.16"
 	exit 0
 }
 
@@ -69,7 +69,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, qp, sicstus, swi, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
