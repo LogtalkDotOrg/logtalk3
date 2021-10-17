@@ -293,7 +293,7 @@ script from the packs directory, which you can query using the goal:
 
 Note that running the packs tests, like simply loading the pack, can result
 in calling arbitrary code, which can potentially harm your system. Always
-take into account the security considerations as discussed below.
+take into account the security considerations discussed below.
 
 
 Security considerations

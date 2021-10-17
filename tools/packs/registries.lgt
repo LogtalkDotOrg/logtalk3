@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2021-10-17,
 		comment is 'Registry handling predicates.'
@@ -118,24 +118,18 @@
 		comment is 'Cleans all archives for all registries.'
 	]).
 
-	:- public(directory/0).
-	:- mode(directory, one).
-	:- info(location/0, [
-		comment is 'Prints the directory where the registries are defined.'
-	]).
-
-	:- public(directory/1).
-	:- mode(directory(+atom), zero_or_one).
-	:- info(directory/1, [
-		comment is 'Prints the directory where a registry is defined.',
-		argnames is ['Registry']
-	]).
-
 	:- public(directory/2).
 	:- mode(directory(?atom, ?atom), zero_or_more).
 	:- info(directory/2, [
 		comment is 'Enumerates by backtracking all defined registries and respective directories.',
 		argnames is ['Registry', 'Directory']
+	]).
+
+	:- public(directory/1).
+	:- mode(directory(?atom), zero_or_one).
+	:- info(directory/1, [
+		comment is 'Returns the directory where registries are defined.',
+		argnames is ['Directory']
 	]).
 
 	:- private(deleted_registry_/1).
@@ -217,13 +211,8 @@
 		path_concat(Registries, Registry, Directory),
 		directory_exists(Directory).
 
-	directory(Registry) :-
-		directory(Registry, Directory),
-		print_message(information, packs, 'Registry directory'-Directory).
-
-	directory :-
-		expand_library_path(logtalk_packs(registries), Directory),
-		print_message(information, packs, 'Registries directory'-Directory).
+	directory(Directory) :-
+		expand_library_path(logtalk_packs(registries), Directory).
 
 	% add registry predicates
 

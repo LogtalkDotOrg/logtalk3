@@ -299,8 +299,8 @@ the goal:
 
 Note that running the packs tests, like simply loading the pack, can
 result in calling arbitrary code, which can potentially harm your
-system. Always take into account the security considerations as
-discussed below.
+system. Always take into account the security considerations discussed
+below.
 
 Security considerations
 -----------------------

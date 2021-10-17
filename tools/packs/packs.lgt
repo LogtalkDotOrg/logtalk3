@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2021-02-16,
+		date is 2021-02-17,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -42,12 +42,6 @@
 		comment is 'Lists all the packs that are available for installation from all defined registries.'
 	]).
 
-	:- public(installed/0).
-	:- mode(installed, one).
-	:- info(installed/0, [
-		comment is 'Lists all the packs that are installed.'
-	]).
-
 	:- public(installed/4).
 	:- mode(installed(?atom, ?atom, ?compound, ? boolean), zero_or_more).
 	:- info(installed/4, [
@@ -62,10 +56,10 @@
 		argnames is ['Registry', 'Pack', 'Version']
 	]).
 
-	:- public(outdated/0).
-	:- mode(outdated, one).
-	:- info(outdated/0, [
-		comment is 'Lists all the packs that are installed but outdated.'
+	:- public(installed/0).
+	:- mode(installed, one).
+	:- info(installed/0, [
+		comment is 'Lists all the packs that are installed.'
 	]).
 
 	:- public(outdated/4).
@@ -75,10 +69,10 @@
 		argnames is ['Registry', 'Pack', 'Version', 'LatestVersion']
 	]).
 
-	:- public(orphaned/0).
-	:- mode(orphaned, one).
-	:- info(orphaned/0, [
-		comment is 'Lists all the packs that are installed but whose registry is no longer defined.'
+	:- public(outdated/0).
+	:- mode(outdated, one).
+	:- info(outdated/0, [
+		comment is 'Lists all the packs that are installed but outdated.'
 	]).
 
 	:- public(orphaned/2).
@@ -86,6 +80,12 @@
 	:- info(orphaned/2, [
 		comment is 'Lists all the packs that are installed but whose registry is no longer defined.',
 		argnames is ['Registry', 'Pack']
+	]).
+
+	:- public(orphaned/0).
+	:- mode(orphaned, one).
+	:- info(orphaned/0, [
+		comment is 'Lists all the packs that are installed but whose registry is no longer defined.'
 	]).
 
 	:- public(describe/2).
@@ -231,24 +231,18 @@
 		argnames is ['Pack']
 	]).
 
-	:- public(directory/0).
-	:- mode(directory, one).
-	:- info(location/0, [
-		comment is 'Prints the directory where the packs are installed.'
-	]).
-
-	:- public(directory/1).
-	:- mode(directory(+atom), zero_or_one).
-	:- info(directory/1, [
-		comment is 'Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.',
-		argnames is ['Pack']
-	]).
-
 	:- public(directory/2).
 	:- mode(directory(?atom, ?atom), zero_or_more).
 	:- info(directory/2, [
 		comment is 'Enumerates by backtracking all packs and respective installation directories.',
 		argnames is ['Pack', 'Directory']
+	]).
+
+	:- public(directory/1).
+	:- mode(directory(?atom), zero_or_one).
+	:- info(directory/1, [
+		comment is 'Returns the directory where the packs are installed.',
+		argnames is ['Directory']
 	]).
 
 	:- uses(list, [
@@ -316,14 +310,6 @@
 
 	% packs directory predicates
 
-	directory :-
-		expand_library_path(logtalk_packs(packs), Directory),
-		print_message(information, packs, 'Packs directory'-Directory).
-
-	directory(Pack) :-
-		directory(Pack, Directory),
-		print_message(information, packs, 'Pack directory'-Directory).
-
 	directory(Pack, Directory) :-
 		(	var(Pack) ->
 			implements_protocol(PackObject, pack_protocol),
@@ -336,6 +322,9 @@
 		expand_library_path(logtalk_packs(packs), Packs),
 		path_concat(Packs, Pack, Directory),
 		directory_exists(Directory).
+
+	directory(Directory) :-
+		expand_library_path(logtalk_packs(packs), Directory).
 
 	% installed pack predicates
 

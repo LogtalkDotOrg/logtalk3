@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:11:0
-| **Date:** 2021-02-16
+| **Version:** 0:12:0
+| **Date:** 2021-02-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -86,27 +86,6 @@ Lists all the packs that are available for installation from all defined registr
 
 .. raw:: html
 
-   <div id="installed/0"> </div>
-
-.. index:: installed/0
-.. _packs/0::installed/0:
-
-``installed/0``
-^^^^^^^^^^^^^^^
-
-Lists all the packs that are installed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``installed`` - ``one``
-
-
-------------
-
-.. raw:: html
-
    <div id="installed/4"> </div>
 
 .. index:: installed/4
@@ -153,21 +132,21 @@ Enumerates by backtracking all installed packs.
 
 .. raw:: html
 
-   <div id="outdated/0"> </div>
+   <div id="installed/0"> </div>
 
-.. index:: outdated/0
-.. _packs/0::outdated/0:
+.. index:: installed/0
+.. _packs/0::installed/0:
 
-``outdated/0``
-^^^^^^^^^^^^^^
+``installed/0``
+^^^^^^^^^^^^^^^
 
-Lists all the packs that are installed but outdated.
+Lists all the packs that are installed.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``outdated`` - ``one``
+|    ``installed`` - ``one``
 
 
 ------------
@@ -197,21 +176,21 @@ Enumerates by backtracking all installed but outdated packs (together with the c
 
 .. raw:: html
 
-   <div id="orphaned/0"> </div>
+   <div id="outdated/0"> </div>
 
-.. index:: orphaned/0
-.. _packs/0::orphaned/0:
+.. index:: outdated/0
+.. _packs/0::outdated/0:
 
-``orphaned/0``
+``outdated/0``
 ^^^^^^^^^^^^^^
 
-Lists all the packs that are installed but whose registry is no longer defined.
+Lists all the packs that are installed but outdated.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``orphaned`` - ``one``
+|    ``outdated`` - ``one``
 
 
 ------------
@@ -235,6 +214,27 @@ Lists all the packs that are installed but whose registry is no longer defined.
 |    ``orphaned(Registry,Pack)``
 | **Mode and number of proofs:**
 |    ``orphaned(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="orphaned/0"> </div>
+
+.. index:: orphaned/0
+.. _packs/0::orphaned/0:
+
+``orphaned/0``
+^^^^^^^^^^^^^^
+
+Lists all the packs that are installed but whose registry is no longer defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``orphaned`` - ``one``
 
 
 ------------
@@ -673,48 +673,6 @@ Prints a list of all packs that depend on the given pack if unique from all defi
 
 .. raw:: html
 
-   <div id="directory/0"> </div>
-
-.. index:: directory/0
-.. _packs/0::directory/0:
-
-``directory/0``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``directory`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
-.. index:: directory/1
-.. _packs/0::directory/1:
-
-``directory/1``
-^^^^^^^^^^^^^^^
-
-Prints the directory where a pack is installed. Fails if the pack is unknown or not installed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Pack)``
-| **Mode and number of proofs:**
-|    ``directory(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="directory/2"> </div>
 
 .. index:: directory/2
@@ -732,6 +690,29 @@ Enumerates by backtracking all packs and respective installation directories.
 |    ``directory(Pack,Directory)``
 | **Mode and number of proofs:**
 |    ``directory(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="directory/1"> </div>
+
+.. index:: directory/1
+.. _packs/0::directory/1:
+
+``directory/1``
+^^^^^^^^^^^^^^^
+
+Returns the directory where the packs are installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Directory)``
+| **Mode and number of proofs:**
+|    ``directory(?atom)`` - ``zero_or_one``
 
 
 ------------
