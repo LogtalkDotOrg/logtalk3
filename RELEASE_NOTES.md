@@ -80,6 +80,9 @@ Documentation
 * IMPROVED: The `lgtunit` tool documentation on testing generators and on
 creating Allure reports.
 
+* UPDATED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
+exclude the packs directory.
+
 * FIXED: Text ordering typo in the Handbook section on the `resource_error/1`
 built-in method.
 
