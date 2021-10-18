@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2021-10-17,
+		date is 2021-10-18,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -146,9 +146,9 @@
 		verify_commands_availability(OS).
 
 	verify_commands_availability(unix) :-
-		command('which -s curl', missing_command(curl)),
-		command('which -s bsdtar', missing_command(bsdtar)),
-		command('which -s sha256sum', missing_command(sha256sum)).
+		command('which curl > /dev/null', missing_command(curl)),
+		command('which bsdtar > /dev/null', missing_command(bsdtar)),
+		command('which sha256sum > /dev/null', missing_command(sha256sum)).
 	verify_commands_availability(windows) :-
 		command('where curl.exe', missing_command(curl)),
 		command('where tar.exe', missing_command(tar)),
@@ -185,7 +185,7 @@
 		tar_command(OS, Tar).
 
 	tar_command(unix, Tar) :-
-		(	shell('which -s bsdtar') ->
+		(	shell('which bsdtar > /dev/null') ->
 			Tar = bsdtar
 		;	Tar = tar
 		).
