@@ -48,19 +48,23 @@
 
 	message_tokens(help) -->
 		[	'Common queries using the packs tool main predicates:'-[], nl, nl,
-			'    List registries:            registries::list.'-[], nl,
-			'    Add a new registry:         registries::add(Registry, URL).'-[], nl,
-			'    Print registry information: registries::describe(Registry).'-[], nl, nl,
-			'    List available packs:       packs::available.'-[], nl,
-			'    List installed packs:       packs::installed.'-[], nl, nl,
-			'    Print pack information:     packs::describe(Pack).'-[], nl,
-			'                                packs::describe(Registry, Pack).'-[], nl, nl,
-			'    Install a pack:             packs::install(Pack).'-[], nl,
-			'                                packs::install(Registry, Pack).'-[], nl,
-			'                                packs::install(Registry, Pack, Version).'-[], nl, nl,
-			'    Update a pack:              packs::update(Pack).'-[], nl,
-			'    Uninstall a pack:           packs::uninstall(Pack).'-[], nl, nl,
-			'Consult the Handbook and the tool API documentation for details.'-[], nl
+			'  List registries:      registries::list.'-[], nl,
+			'  Add a new registry:   registries::add(Registry, URL).'-[], nl,
+			'  Delete a registry:    registries::delete(Registry).'-[], nl, nl,
+			'  Print registry data:  registries::describe(Registry).'-[], nl,
+			'  Registry readme file: registries::readme(Path).'-[], nl, nl,
+			'  List available packs: packs::available.'-[], nl,
+			'  List installed packs: packs::installed.'-[], nl, nl,
+			'  Print pack data:      packs::describe(Pack).'-[], nl,
+			'                        packs::describe(Registry, Pack).'-[], nl,
+			'  Pack readme file:     packs::readme(Path).'-[], nl, nl,
+			'  Install a pack:       packs::install(Pack).'-[], nl,
+			'                        packs::install(Registry, Pack).'-[], nl,
+			'                        packs::install(Registry, Pack, Version).'-[], nl, nl,
+			'  Update a pack:        packs::update(Pack).'-[], nl,
+			'  Uninstall a pack:     packs::uninstall(Pack).'-[], nl, nl,
+			'Consult the Handbook and the tool API documentation'-[], nl,
+			'for details and other available predicates.'-[], nl
 		].
 
 	message_tokens(missing_command(Command)) -->
