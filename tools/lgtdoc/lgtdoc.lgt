@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 6:1:0,
+		version is 6:1:1,
 		author is 'Paulo Moura',
-		date is 2021-07-29,
+		date is 2021-10-18,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1409,10 +1409,13 @@
 		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
 		write_xml_element(Stream, type, [], Type),
-		setof(
-			PrimarySortKey-Key,
-			SecondarySortKey^Entity^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity),
-			SortedKeys
+		(	setof(
+				PrimarySortKey-Key,
+				SecondarySortKey^Entity^call(Functor, Key, PrimarySortKey, SecondarySortKey, Entity),
+				SortedKeys
+			) ->
+			true
+		;	SortedKeys = []
 		),
 		sorted_keys_to_keys(SortedKeys, Keys),
 		write_xml_open_tag(Stream, entries, []),

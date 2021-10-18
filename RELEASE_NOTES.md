@@ -141,6 +141,9 @@ and results in more compact code.
 * FIXED: Workaround Allure ignoring the `errors` tag in xUnit.net v2 XML files
 so that crashed and broken test sets are listed in the reports.
 
+* FIXED: Bug where the `lgtdoc` tool would fail to generate documentation when
+the predicate index is empty.
+
 Contributions
 -------------
 
