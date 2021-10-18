@@ -31,7 +31,7 @@ Pack handling predicates.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`packs_common/0::help/0`  :ref:`packs_common/0::pin/1`  :ref:`packs_common/0::pinned/1`  :ref:`packs_common/0::readme/2`  :ref:`packs_common/0::setup/0`  :ref:`packs_common/0::unpin/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`packs_common/0::verify_commands_availability/0`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`packs_common/0::directory/1`  :ref:`packs_common/0::directory/2`  :ref:`packs_common/0::help/0`  :ref:`packs_common/0::pin/1`  :ref:`packs_common/0::pinned/1`  :ref:`packs_common/0::readme/2`  :ref:`packs_common/0::setup/0`  :ref:`packs_common/0::unpin/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`packs_common/0::verify_commands_availability/0`  
 
 .. contents::
    :local:
@@ -667,52 +667,6 @@ Prints a list of all packs that depend on the given pack if unique from all defi
 |    ``dependents(Pack)``
 | **Mode and number of proofs:**
 |    ``dependents(+atom)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/2"> </div>
-
-.. index:: directory/2
-.. _packs/0::directory/2:
-
-``directory/2``
-^^^^^^^^^^^^^^^
-
-Enumerates by backtracking all packs and respective installation directories.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Pack,Directory)``
-| **Mode and number of proofs:**
-|    ``directory(?atom,?atom)`` - ``zero_or_more``
-
-
-------------
-
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
-.. index:: directory/1
-.. _packs/0::directory/1:
-
-``directory/1``
-^^^^^^^^^^^^^^^
-
-Returns the directory where the packs are installed.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``directory(Directory)``
-| **Mode and number of proofs:**
-|    ``directory(?atom)`` - ``zero_or_one``
 
 
 ------------

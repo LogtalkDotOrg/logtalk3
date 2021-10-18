@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pack-specification">Pack specification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-versions">Pack versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-dependencies">Pack dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pack-portability">Pack portability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-development">Pack development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-handling">Pack handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pinning-registries-and-packs">Pinning registries and packs</a></li>
@@ -244,7 +245,8 @@ the registry object file and all pack object files.</p></li>
 </div>
 <p>The registry directory should also contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> and <code class="docutils literal notranslate"><span class="pre">README.md</span></code>
 files (individual packs can use a different license, however). The path
-to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the registry is added.</p>
+to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the registry is added. It can
+also be queried using the <code class="docutils literal notranslate"><span class="pre">registries::directory/2</span></code> predicate.</p>
 </div>
 <div class="section" id="registry-handling">
 <h2>Registry handling<a class="headerlink" href="#registry-handling" title="Permalink to this headline"></a></h2>
@@ -324,14 +326,16 @@ An example of a registry specification object would be:</p>
 using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or for downloading as a <code class="docutils literal notranslate"><span class="pre">.zip</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>,
 or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code> archive. The checksum for the archive must use the
 SHA-256 hash algorithm (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>). The pack may optionally be signed.</p>
-<p>When the pack sources contains a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file, the path to this
-file is printed when the pack is installed or updated.</p>
+<p>The pack sources should contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> and <code class="docutils literal notranslate"><span class="pre">README.md</span></code> files. The
+path to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is installed or
+updated. It can also be queried using the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code>
+predicate.</p>
 </div>
 <div class="section" id="pack-versions">
 <h2>Pack versions<a class="headerlink" href="#pack-versions" title="Permalink to this headline"></a></h2>
 <p>A pack may specify multiple versions. Each version is described using a
-<code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause. For details, see the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code>
-API documentation.</p>
+<code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause as illustrated in the example above. For
+details, see the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> API documentation.</p>
 </div>
 <div class="section" id="pack-dependencies">
 <h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Permalink to this headline"></a></h2>
@@ -366,6 +370,32 @@ version 2.1.0 to the latest patch for version 2.1).</p></li>
 example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&lt;</span> <span class="pre">3]</span></code> means all 2.x
 versions but not older or newer versions.</p>
 </div>
+<div class="section" id="pack-portability">
+<h2>Pack portability<a class="headerlink" href="#pack-portability" title="Permalink to this headline"></a></h2>
+<p>Ideally, packs are fully portable and can be used with all Logtalk
+supported Prolog backends. This can be declared by using the atom
+<code class="docutils literal notranslate"><span class="pre">all</span></code> in the last argument of the <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate (see example
+above).</p>
+<p>When a pack can only be used with a subset of the Prolog backends, the
+last argument of the <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate is a list of backend
+identifiers (atoms):</p>
+<ul class="simple">
+<li><p>B-Prolog: <code class="docutils literal notranslate"><span class="pre">b</span></code></p></li>
+<li><p>Ciao Prolog: <code class="docutils literal notranslate"><span class="pre">ciao</span></code></p></li>
+<li><p>CxProlog: <code class="docutils literal notranslate"><span class="pre">cx</span></code></p></li>
+<li><p>ECLiPSe: <code class="docutils literal notranslate"><span class="pre">eclipse</span></code></p></li>
+<li><p>GNU Prolog: <code class="docutils literal notranslate"><span class="pre">gnu</span></code></p></li>
+<li><p>JIProlog: <code class="docutils literal notranslate"><span class="pre">ji</span></code></p></li>
+<li><p>LVM: <code class="docutils literal notranslate"><span class="pre">lvm</span></code></p></li>
+<li><p>Scryer Prolog: <code class="docutils literal notranslate"><span class="pre">scryer</span></code></p></li>
+<li><p>SICStus Prolog: <code class="docutils literal notranslate"><span class="pre">sicstus</span></code></p></li>
+<li><p>SWI-Prolog: <code class="docutils literal notranslate"><span class="pre">swi</span></code></p></li>
+<li><p>Tau Prolog: <code class="docutils literal notranslate"><span class="pre">tau</span></code></p></li>
+<li><p>Trealla Prolog: <code class="docutils literal notranslate"><span class="pre">trealla</span></code></p></li>
+<li><p>XSB: <code class="docutils literal notranslate"><span class="pre">xsb</span></code></p></li>
+<li><p>YAP: <code class="docutils literal notranslate"><span class="pre">yap</span></code></p></li>
+</ul>
+</div>
 <div class="section" id="pack-development">
 <h2>Pack development<a class="headerlink" href="#pack-development" title="Permalink to this headline"></a></h2>
 <p>To simplify pack development and testing, define a local registry and
@@ -385,6 +415,8 @@ from a local directory. For example:</p>
 the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
 and uninstalled independently of the pack source files.</p>
+<p>Packs that are expected to be fully portable should always be checked by
+loading them with the <code class="docutils literal notranslate"><span class="pre">portability</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>.</p>
 </div>
 <div class="section" id="pack-handling">
 <h2>Pack handling<a class="headerlink" href="#pack-handling" title="Permalink to this headline"></a></h2>

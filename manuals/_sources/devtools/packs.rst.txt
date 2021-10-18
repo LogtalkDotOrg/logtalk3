@@ -121,7 +121,8 @@ An example of a registry specification object would be:
 
 The registry directory should also contain ``LICENSE`` and ``README.md``
 files (individual packs can use a different license, however). The path
-to the ``README.md`` file is printed when the registry is added.
+to the ``README.md`` file is printed when the registry is added. It can
+also be queried using the ``registries::directory/2`` predicate.
 
 Registry handling
 -----------------
@@ -211,15 +212,17 @@ using a ``file://`` URL) or for downloading as a ``.zip``, ``.tar.gz``,
 or ``.tar.bz2`` archive. The checksum for the archive must use the
 SHA-256 hash algorithm (``sha256``). The pack may optionally be signed.
 
-When the pack sources contains a ``README.md`` file, the path to this
-file is printed when the pack is installed or updated.
+The pack sources should contain ``LICENSE`` and ``README.md`` files. The
+path to the ``README.md`` file is printed when the pack is installed or
+updated. It can also be queried using the ``packs::directory/2``
+predicate.
 
 Pack versions
 -------------
 
 A pack may specify multiple versions. Each version is described using a
-``version/6`` predicate clause. For details, see the ``pack_protocol``
-API documentation.
+``version/6`` predicate clause as illustrated in the example above. For
+details, see the ``pack_protocol`` API documentation.
 
 Pack dependencies
 -----------------
@@ -259,6 +262,33 @@ Dependencies are specified using a list of the elements above. For
 example, ``[common::bits >= 2, common::bits < 3]`` means all 2.x
 versions but not older or newer versions.
 
+Pack portability
+----------------
+
+Ideally, packs are fully portable and can be used with all Logtalk
+supported Prolog backends. This can be declared by using the atom
+``all`` in the last argument of the ``version/6`` predicate (see example
+above).
+
+When a pack can only be used with a subset of the Prolog backends, the
+last argument of the ``version/6`` predicate is a list of backend
+identifiers (atoms):
+
+-  B-Prolog: ``b``
+-  Ciao Prolog: ``ciao``
+-  CxProlog: ``cx``
+-  ECLiPSe: ``eclipse``
+-  GNU Prolog: ``gnu``
+-  JIProlog: ``ji``
+-  LVM: ``lvm``
+-  Scryer Prolog: ``scryer``
+-  SICStus Prolog: ``sicstus``
+-  SWI-Prolog: ``swi``
+-  Tau Prolog: ``tau``
+-  Trealla Prolog: ``trealla``
+-  XSB: ``xsb``
+-  YAP: ``yap``
+
 Pack development
 ----------------
 
@@ -281,6 +311,9 @@ If the directory is a git repo, the tool will clone it when installing
 the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
 and uninstalled independently of the pack source files.
+
+Packs that are expected to be fully portable should always be checked by
+loading them with the ``portability`` flag set to ``warning``.
 
 Pack handling
 -------------

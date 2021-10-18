@@ -231,20 +231,6 @@
 		argnames is ['Pack']
 	]).
 
-	:- public(directory/2).
-	:- mode(directory(?atom, ?atom), zero_or_more).
-	:- info(directory/2, [
-		comment is 'Enumerates by backtracking all packs and respective installation directories.',
-		argnames is ['Pack', 'Directory']
-	]).
-
-	:- public(directory/1).
-	:- mode(directory(?atom), zero_or_one).
-	:- info(directory/1, [
-		comment is 'Returns the directory where the packs are installed.',
-		argnames is ['Directory']
-	]).
-
 	:- uses(list, [
 		member/2, sort/4
 	]).

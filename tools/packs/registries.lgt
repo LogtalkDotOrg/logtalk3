@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
 		date is 2021-10-18,
 		comment is 'Registry handling predicates.'
@@ -116,20 +116,6 @@
 	:- mode(clean, one).
 	:- info(clean/0, [
 		comment is 'Cleans all archives for all registries.'
-	]).
-
-	:- public(directory/2).
-	:- mode(directory(?atom, ?atom), zero_or_more).
-	:- info(directory/2, [
-		comment is 'Enumerates by backtracking all defined registries and respective directories.',
-		argnames is ['Registry', 'Directory']
-	]).
-
-	:- public(directory/1).
-	:- mode(directory(?atom), zero_or_one).
-	:- info(directory/1, [
-		comment is 'Returns the directory where registries are defined.',
-		argnames is ['Directory']
 	]).
 
 	:- private(deleted_registry_/1).

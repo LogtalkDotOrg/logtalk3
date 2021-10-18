@@ -22,7 +22,7 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2021-10-18,
 		comment is 'Common predicates for the packs tool objects.'
@@ -67,10 +67,24 @@
 		argnames is ['Resource']
 	]).
 
+	:- public(directory/2).
+	:- mode(directory(?atom, ?atom), zero_or_more).
+	:- info(directory/2, [
+		comment is 'Enumerates by backtracking all packs or registries and respective installation or definition directories.',
+		argnames is ['Resource', 'Directory']
+	]).
+
+	:- public(directory/1).
+	:- mode(directory(?atom), zero_or_one).
+	:- info(directory/1, [
+		comment is 'Returns the directory where the registries or the packs are installed.',
+		argnames is ['Directory']
+	]).
+
 	:- public(readme/2).
 	:- mode(readme(+atom, -atom), zero_or_one).
 	:- info(readme/2, [
-		comment is 'Returns the path to the resource readme file. Fails if the resource is not defined or installed or if no readme file is found for it.',
+		comment is 'Returns the path to the resource (pack or registry) readme file. Fails if the resource is not defined or installed or if no readme file is found for it.',
 		argnames is ['Resource', 'ReadMeFile']
 	]).
 
