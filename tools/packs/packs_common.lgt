@@ -184,11 +184,7 @@
 		operating_system_type(OS),
 		tar_command(OS, Tar).
 
-	tar_command(unix, Tar) :-
-		(	shell('which bsdtar > /dev/null') ->
-			Tar = bsdtar
-		;	Tar = tar
-		).
+	tar_command(unix, bsdtar).
 	tar_command(windows, tar).
 	tar_command(unknown, tar).
 

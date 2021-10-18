@@ -44,7 +44,8 @@ On Windows systems, the following command-line commands are required:
 No install should be required in recent Windows 10 builds.
 
 On macOS systems, Apple bundles both `curl` and BSD `tar` (under the name
-`tar`). GNU coreutils can be installed easily using MacPorts (`sudo port
+`tar`; you can create a `bsdtar` alias or preferably install a more recent
+version). GNU coreutils can be installed easily using MacPorts (`sudo port
 install coretutils`) or Homebrew (`brew install coretutils`).
 
 On Linux systems, use the distribution own package manager to install any
@@ -112,6 +113,30 @@ suffix, implementing the `registry_protocol`.
 - A loader file (named `loader.lgt` or `loader.logtalk`) that loads the
 registry object file and all pack object files.
 
+An example of a registry specification object would be:
+
+	:- object(jdoe_awesome_packs_registry,
+		implements(registry_protocol)).
+	
+		:- info([
+			version is 1:0:0,
+			author is 'John Doe',
+			date is 2021-10-18,
+			comment is 'John Doe awesome packs registry spec.'
+		]).
+	
+		name(jdoe_awesome_packs).
+	
+		description('John Doe awesome packs').
+	
+		home('https://example.com/jdoe_awesome_packs').
+	
+		clone('https://github.com/jdoe/jdoe_awesome_packs.git').
+	
+		archive('https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip').
+	
+	:- end_object.
+
 The registry directory should also contain `LICENSE` and `README.md` files
 (individual packs can use a different license, however). The path to the
 `README.md` file is printed when the registry is added.
@@ -155,6 +180,45 @@ A pack is specified using a Logtalk source file defining an object that
 implements the `pack_protocol`. The source file should be named after
 the pack with a `_pack` suffix. The file must be available from a
 declared pack registry. The pack name is ideally a valid unquoted atom.
+An example of a registry specification object would be:
+
+	:- object(lflat_pack,
+		implements(pack_protocol)).
+	
+		:- info([
+			version is 1:0:0,
+			author is 'Paulo Moura',
+			date is 2021-10-18,
+			comment is 'L-FLAT - Logtalk Formal Language and Automata Toolkit pack spec.'
+		]).
+	
+		name(lflat).
+	
+		description('L-FLAT - Logtalk Formal Language and Automata Toolkit').
+	
+		license('MIT').
+	
+		home('https://github.com/l-flat/lflat').
+	
+		version(
+			2:1:0,
+			stable,
+			'https://github.com/l-flat/lflat/archive/refs/tags/v2.1.0.tar.gz',
+			sha256 - '9c298c2a08c4e2a1972c14720ef1498e7f116c7cd8bf7702c8d22d8ff549b6a1',
+			[logtalk >= 3:36:0],
+			all
+		).
+	
+		version(
+			2:0:2,
+			stable,
+			'https://github.com/l-flat/lflat/archive/refs/tags/v2.0.2.tar.gz',
+			sha256 - '8774b3863efc03bb6c284935885dcf34f69f115656d2496a33a446b6199f3e19',
+			[logtalk >= 3:36:0],
+			all
+		).
+	
+	:- end_object.
 
 The pack sources must be available either as a local directory (when using
 a `file://` URL) or for downloading as a `.zip`, `.tar.gz`, or `.tar.bz2`
@@ -267,11 +331,11 @@ To update a pack, use the `packs::update/1-2` predicates. For example:
 The tool provides versions of the pack install, update, and uninstall
 predicates that accept a list of options:
 
-- `verbose` (default is `false`)
-- `clean` (default is `false`)
-- `force` (default is `false`)
-- `checksum` (default is `true`)
-- `checksig` (default is `false`)
+- `verbose(Boolean)` (default is `false`)
+- `clean(Boolean)` (default is `false`)
+- `force(Boolean)` (default is `false`)
+- `checksum(Boolean)` (default is `true`)
+- `checksig(Boolean)` (default is `false`)
 
 When using a `checksig(true)` option to check a pack signature, is strongly
 advised that you also use the `verbose(true)` option. Note that the public key
