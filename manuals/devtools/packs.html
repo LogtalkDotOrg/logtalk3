@@ -82,10 +82,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registries-and-packs-storage">Registries and packs storage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-specification">Registry specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registry-development">Registry development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-specification">Pack specification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-versions">Pack versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-dependencies">Pack dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pack-development">Pack development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-handling">Pack handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pinning-registries-and-packs">Pinning registries and packs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-packs">Testing packs</a></li>
@@ -219,16 +221,44 @@ the registry object file and all pack object files.</p></li>
 files (individual packs can use a different license, however). The path
 to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the registry is added.</p>
 </div>
+<div class="section" id="registry-handling">
+<h2>Registry handling<a class="headerlink" href="#registry-handling" title="Permalink to this headline"></a></h2>
+<p>Registries can be added using the <code class="docutils literal notranslate"><span class="pre">registries::add/2</span></code> predicate, which
+takes a registry name and a registry URL. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(reg, <span class="s">&#39;https://github.com/some_user/reg.git&#39;</span>).
+</pre></div>
+</div>
+<p>Git cloning URLs are preferred but a registry can also be made available
+via a local archive (using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or a downloadable archive
+(using a <code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
+<p>To update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
+Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
+predicate. After deleting a registry, you can use the
+<code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned packs that are
+installed.</p>
+<p>See the tool API documentation on the
+<a class="reference external" href="../../docs/registries_0.html">registries</a> object for other useful
+predicates.</p>
+</div>
+<div class="section" id="registry-development">
+<h2>Registry development<a class="headerlink" href="#registry-development" title="Permalink to this headline"></a></h2>
+<p>To simplify registry development and testing, use a local directory and
+a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL when calling the <code class="docutils literal notranslate"><span class="pre">registries::add/2</span></code> predicate. If
+the directory is a git repo, the tool will clone it when adding it.
+Otherwise, the files in the directory are copied to the registry
+definition directory. This allows the registry to be added and deleted
+independently of the registry source files.</p>
+</div>
 <div class="section" id="pack-specification">
 <h2>Pack specification<a class="headerlink" href="#pack-specification" title="Permalink to this headline"></a></h2>
 <p>A pack is specified using a Logtalk source file defining an object that
 implements the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code>. The source file should be named after
 the pack with a <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. The file must be available from a
 declared pack registry. The pack name is ideally a valid unquoted atom.</p>
-<p>The pack sources must be available for downloading as a <code class="docutils literal notranslate"><span class="pre">.zip</span></code>,
-<code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>, or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code> archive. The checksum for the archive must
-use the SHA-256 hash algorithm (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>). The pack may optionally be
-signed.</p>
+<p>The pack sources must be available either as a local directory (when
+using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or for downloading as a <code class="docutils literal notranslate"><span class="pre">.zip</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code> archive. The checksum for the archive must use the
+SHA-256 hash algorithm (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>). The pack may optionally be signed.</p>
 <p>When the pack sources contains a <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file, the path to this
 file is printed when the pack is installed or updated.</p>
 </div>
@@ -271,24 +301,25 @@ version 2.1.0 to the latest patch for version 2.1).</p></li>
 example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&lt;</span> <span class="pre">3]</span></code> means all 2.x
 versions but not older or newer versions.</p>
 </div>
-<div class="section" id="registry-handling">
-<h2>Registry handling<a class="headerlink" href="#registry-handling" title="Permalink to this headline"></a></h2>
-<p>Registries can be added using the <code class="docutils literal notranslate"><span class="pre">registries::add/2</span></code> predicate, which
-takes a registry name and a registry URL. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(reg, <span class="s">&#39;https://github.com/some_user/reg.git&#39;</span>).
+<div class="section" id="pack-development">
+<h2>Pack development<a class="headerlink" href="#pack-development" title="Permalink to this headline"></a></h2>
+<p>To simplify pack development and testing, define a local registry and
+add to it a pack specification with the development version available
+from a local directory. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>version(
+    <span class="m">0</span><span class="o">:</span><span class="m">11</span><span class="o">:</span><span class="m">0</span>,
+    beta,
+    <span class="s">&#39;file:///home/jdoe/work/my_awesome_library&#39;</span>,
+    none,
+    [],
+    all
+).
 </pre></div>
 </div>
-<p>Git cloning URLs are preferred but a registry can also be made available
-via a local archive (using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or a downloadable archive
-(using a <code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
-<p>To update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
-Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
-predicate. After deleting a registry, you can use the
-<code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned packs that are
-installed.</p>
-<p>See the tool API documentation on the
-<a class="reference external" href="../../docs/registries_0.html">registries</a> object for other useful
-predicates.</p>
+<p>If the directory is a git repo, the tool will clone it when installing
+the pack. Otherwise, the files in the directory are copied to the pack
+installation directory. This allows the pack to be installed, updated,
+and uninstalled independently of the pack source files.</p>
 </div>
 <div class="section" id="pack-handling">
 <h2>Pack handling<a class="headerlink" href="#pack-handling" title="Permalink to this headline"></a></h2>

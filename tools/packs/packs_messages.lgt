@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2021-10-16,
+		date is 2021-10-18,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -100,11 +100,14 @@
 	message_tokens(registry_deletion_failed(Registry, Directory)) -->
 		['Registry deletion failed: ~q (~q)'-[Registry, Directory], nl].
 
-	message_tokens(registry_clone_pull_failed(Registry, Directory)) -->
-		['Registry clone pull failed: ~q (~q)'-[Registry, Directory], nl].
+	message_tokens(registry_clone_pull_failed(Registry, URL)) -->
+		['Registry clone pull failed: ~q (~q)'-[Registry, URL], nl].
 
 	message_tokens(registry_cloning_failed(Registry, URL)) -->
 		['Registry cloning failed: ~q (~q)'-[Registry, URL], nl].
+
+	message_tokens(registry_directory_copy_failed(Registry, URL)) -->
+		['Registry directory copy failed: ~q (~q)'-[Registry, URL], nl].
 
 	message_tokens(registry_download_failed(Registry, URL)) -->
 		['Registry archive download failed: ~q (~q)'-[Registry, URL], nl].
@@ -151,6 +154,12 @@
 
 	message_tokens(pack_installed(Registry, Pack, Version)) -->
 		['Pack installed:  ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(pack_cloning_failed(Pack, URL)) -->
+		['Pack cloning failed: ~q (~q)'-[Pack, URL], nl].
+
+	message_tokens(pack_directory_copy_failed(Pack, URL)) -->
+		['Pack directory copy failed: ~q (~q)'-[Pack, URL], nl].
 
 	% pack uninstall messages
 

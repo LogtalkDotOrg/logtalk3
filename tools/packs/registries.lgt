@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2021-10-17,
+		date is 2021-10-18,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -228,7 +228,10 @@
 		;	true
 		),
 		decompose_file_name(URL, _, Name, Extension),
-		(	Extension == '.git' ->
+		(	Extension = '',
+			sub_atom(URL, 0, _, _, 'file://') ->
+			add_directory(Registry, URL, Path, Options)
+		;	Extension == '.git' ->
 			clone(Registry, URL, Path, Options)
 		;	^^supported_archive(Extension) ->
 			download(Registry, URL, Archive, Options),
@@ -247,6 +250,39 @@
 
 	add(Registry, URL) :-
 		add(Registry, URL, []).
+
+	add_directory(Registry, URL, Path, Options) :-
+		atom_concat('file://', Directory0, URL),
+		(	sub_atom(Directory0, _, _, 0, '/') ->
+			sub_atom(Directory0, _, _, 1, Directory)
+		;	Directory = Directory0
+		),
+		make_registry_installation_directory(Registry, Path, OSPath),
+		path_concat(Directory, '.git', Git),
+		(	directory_exists(Git) ->
+			(	member(verbose(true), Options) ->
+				atom_concat('git clone -v ', URL, Command0)
+			;	atom_concat('git clone -q ', URL, Command0)
+			),
+			atom_concat(Command0, ' "', Command1),
+			atom_concat(Command1, OSPath, Command2),
+			atom_concat(Command2, '"', Command),
+			^^command(Command, registry_cloning_failed(Registry, URL))
+		;	operating_system_type(windows) ->
+			internal_os_path(Directory, OSDirectory),
+			atom_concat('xcopy /E /I "', OSDirectory, Command0),
+			atom_concat(Command0, '" "', Command1),
+			atom_concat(Command1, OSPath, Command2),
+			atom_concat(Command2, '"', Command),
+			^^command(Command, registry_directory_copy_failed(Registry, URL))
+		;	internal_os_path(Directory, OSDirectory),
+			atom_concat('cp -R "', OSDirectory, Command0),
+			atom_concat(Command0, '/." "', Command1),
+			atom_concat(Command1, OSPath, Command2),
+			atom_concat(Command2, '"', Command),
+			^^command(Command, registry_directory_copy_failed(Registry, URL))
+		),
+		^^print_readme_file_path(Path).
 
 	% delete registry predicates
 
@@ -463,12 +499,12 @@
 		path_concat(Registries, Registry, Path),
 		internal_os_path(Path, OSPath),
 		(	member(verbose(true), Options) ->
-			atom_concat('git clone -v ', URL, Command1)
-		;	atom_concat('git clone -q ', URL, Command1)
+			atom_concat('git clone -v ', URL, Command0)
+		;	atom_concat('git clone -q ', URL, Command0)
 		),
-		atom_concat(Command1, ' "', Command2),
-		atom_concat(Command2, OSPath, Command3),
-		atom_concat(Command3, '"', Command),
+		atom_concat(Command0, ' "', Command1),
+		atom_concat(Command1, OSPath, Command2),
+		atom_concat(Command2, '"', Command),
 		^^command(Command, registry_cloning_failed(Registry, URL)).
 
 	download(Registry, URL, Archive, Options) :-
@@ -488,10 +524,7 @@
 		^^command(Command, registry_download_failed(Registry, URL)).
 
 	uncompress(Registry, Archive, Path, Options) :-
-		expand_library_path(logtalk_packs(registries), Registries),
-		path_concat(Registries, Registry, Path),
-		internal_os_path(Path, OSPath),
-		make_directory_path(Path),
+		make_registry_installation_directory(Registry, Path, OSPath),
 		^^tar_command(Tar),
 		(	member(verbose(true), Options) ->
 			atom_concat(Tar, ' -xvf "', Command0)
@@ -513,5 +546,11 @@
 		close(Stream),
 		PackRegistry == Registry,
 		!.
+
+	make_registry_installation_directory(Registry, Path, OSPath) :-
+		expand_library_path(logtalk_packs(registries), Registries),
+		path_concat(Registries, Registry, Path),
+		internal_os_path(Path, OSPath),
+		make_directory_path(Path).
 
 :- end_object.

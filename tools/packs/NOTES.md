@@ -117,6 +117,37 @@ The registry directory should also contain `LICENSE` and `README.md` files
 `README.md` file is printed when the registry is added.
 
 
+Registry handling
+-----------------
+
+Registries can be added using the `registries::add/2` predicate, which takes
+a registry name and a registry URL. For example:
+
+	| ?- registries::add(reg, 'https://github.com/some_user/reg.git').
+
+Git cloning URLs are preferred but a registry can also be made available via
+a local archive (using a `file://` URL) or a downloadable archive (using a
+`https://` URL).
+
+To update a registry, use the `registries::update/1-2` predicates. Registries
+can also be deleted using the `registries::delete/1-2` predicate. After deleting
+a registry, you can use the `packs::orphaned/0` predicate to list any orphaned
+packs that are installed.
+
+See the tool API documentation on the [registries](../../docs/registries_0.html)
+object for other useful predicates.
+
+
+Registry development
+----------------
+
+To simplify registry development and testing, use a local directory and a
+`file://` URL when calling the `registries::add/2` predicate. If the directory
+is a git repo, the tool will clone it when adding it. Otherwise, the files in
+the directory are copied to the registry definition directory. This allows the
+registry to be added and deleted independently of the registry source files.
+
+
 Pack specification
 ------------------
 
@@ -125,9 +156,10 @@ implements the `pack_protocol`. The source file should be named after
 the pack with a `_pack` suffix. The file must be available from a
 declared pack registry. The pack name is ideally a valid unquoted atom.
 
-The pack sources must be available for downloading as a `.zip`, `.tar.gz`,
-or `.tar.bz2` archive. The checksum for the archive must use the SHA-256
-hash algorithm (`sha256`). The pack may optionally be signed.
+The pack sources must be available either as a local directory (when using
+a `file://` URL) or for downloading as a `.zip`, `.tar.gz`, or `.tar.bz2`
+archive. The checksum for the archive must use the SHA-256 hash algorithm
+(`sha256`). The pack may optionally be signed.
 
 When the pack sources contains a `README.md` file, the path to this file
 is printed when the pack is installed or updated.
@@ -176,25 +208,26 @@ Dependencies are specified using a list of the elements above. For example,
 or newer versions.
 
 
-Registry handling
------------------
+Pack development
+----------------
 
-Registries can be added using the `registries::add/2` predicate, which takes
-a registry name and a registry URL. For example:
+To simplify pack development and testing, define a local registry and add to
+it a pack specification with the development version available from a local
+directory. For example:
 
-	| ?- registries::add(reg, 'https://github.com/some_user/reg.git').
+	version(
+		0:11:0,
+		beta,
+		'file:///home/jdoe/work/my_awesome_library',
+		none,
+		[],
+		all
+	).
 
-Git cloning URLs are preferred but a registry can also be made available via
-a local archive (using a `file://` URL) or a downloadable archive (using a
-`https://` URL).
-
-To update a registry, use the `registries::update/1-2` predicates. Registries
-can also be deleted using the `registries::delete/1-2` predicate. After deleting
-a registry, you can use the `packs::orphaned/0` predicate to list any orphaned
-packs that are installed.
-
-See the tool API documentation on the [registries](../../docs/registries_0.html)
-object for other useful predicates.
+If the directory is a git repo, the tool will clone it when installing
+the pack. Otherwise, the files in the directory are copied to the pack
+installation directory. This allows the pack to be installed, updated,
+and uninstalled independently of the pack source files.
 
 
 Pack handling

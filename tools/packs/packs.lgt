@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2021-02-17,
+		date is 2021-02-18,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -456,26 +456,67 @@
 
 	install_pack(Registry, Pack, Version, URL, CheckSum, Options) :-
 		decompose_file_name(URL, _, Name, Extension),
-		(	^^supported_archive(Extension) ->
-			download(Registry, Pack, URL, Archive, Options),
-			(	member(checksum(true), Options) ->
-				verify_checksum(Pack, Archive, CheckSum, Options)
-			;	true
-			),
-			(	member(checksig(true), Options) ->
-				atom_concat(URL, '.asc', URLSig),
-				download(Registry, Pack, URLSig, ArchiveSig, Options),
-				verify_checksig(Pack, Archive, ArchiveSig, Options)
-			;	true
-			),
-			uncompress(Pack, Archive, Path, Options),
-			save_version(Path, Version),
-			save_registry(Path, Registry),
-			^^print_readme_file_path(Path)
-		;	atom_concat(Name, Extension, Archive),
+		(	Extension = '',
+			sub_atom(URL, 0, _, _, 'file://') ->
+			install_pack_directory(Registry, Pack, Version, URL, Options)
+		;	\+ ^^supported_archive(Extension) ->
+			atom_concat(Name, Extension, Archive),
 			print_message(error, packs, unsupported_archive_format(Archive)),
 			fail
+		;	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options)
+		).
+
+	install_pack_directory(Registry, Pack, Version, URL, Options) :-
+		atom_concat('file://', Directory0, URL),
+		(	sub_atom(Directory0, _, _, 0, '/') ->
+			sub_atom(Directory0, _, _, 1, Directory)
+		;	Directory = Directory0
 		),
+		make_pack_installation_directory(Pack, Path, OSPath),
+		path_concat(Directory, '.git', Git),
+		(	directory_exists(Git) ->
+			(	member(verbose(true), Options) ->
+				atom_concat('git clone -v ', URL, Command0)
+			;	atom_concat('git clone -q ', URL, Command0)
+			),
+			atom_concat(Command0, ' "', Command1),
+			atom_concat(Command1, OSPath, Command2),
+			atom_concat(Command2, '"', Command),
+			^^command(Command, pack_cloning_failed(Pack, URL))
+		;	operating_system_type(windows) ->
+			internal_os_path(Directory, OSDirectory),
+			atom_concat('xcopy /E /I "', OSDirectory, Command0),
+			atom_concat(Command0, '" "', Command1),
+			atom_concat(Command1, Path, Command2),
+			atom_concat(Command2, '"', Command),
+			^^command(Command, pack_directory_copy_failed(Pack, URL))
+		;	internal_os_path(Directory, OSDirectory),
+			atom_concat('cp -R "', OSDirectory, Command0),
+			atom_concat(Command0, '/." "', Command1),
+			atom_concat(Command1, Path, Command2),
+			atom_concat(Command2, '"', Command),
+			^^command(Command, pack_directory_copy_failed(Pack, URL))
+		),
+		save_version(Path, Version),
+		save_registry(Path, Registry),
+		^^print_readme_file_path(Path).
+
+	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
+		download(Registry, Pack, URL, Archive, Options),
+		(	member(checksum(true), Options) ->
+			verify_checksum(Pack, Archive, CheckSum, Options)
+		;	true
+		),
+		(	member(checksig(true), Options) ->
+			atom_concat(URL, '.asc', URLSig),
+			download(Registry, Pack, URLSig, ArchiveSig, Options),
+			verify_checksig(Pack, Archive, ArchiveSig, Options)
+		;	true
+		),
+		uncompress(Pack, Archive, Path, Options),
+		save_version(Path, Version),
+		save_registry(Path, Registry),
+		^^print_readme_file_path(Path),
 		(	member(clean(true), Options) ->
 			delete_archives(Registry, Pack)
 		;	true
@@ -839,6 +880,12 @@
 		;	true
 		).
 
+	make_pack_installation_directory(Pack, Path, OSPath) :-
+		expand_library_path(logtalk_packs(packs), Packs),
+		path_concat(Packs, Pack, Path),
+		internal_os_path(Path, OSPath),
+		make_directory_path(Path).
+
 	download(Registry, Pack, URL, Archive, Options) :-
 		expand_library_path(logtalk_packs(archives), Archives),
 		path_concat(Archives, packs, ArchivesPacks),
@@ -901,10 +948,7 @@
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
 	uncompress(Pack, Archive, Path, Options) :-
-		expand_library_path(logtalk_packs(packs), Packs),
-		path_concat(Packs, Pack, Path),
-		internal_os_path(Path, OSPath),
-		make_directory_path(Path),
+		make_pack_installation_directory(Pack, Path, OSPath),
 		^^tar_command(Tar),
 		(	member(verbose(true), Options) ->
 			atom_concat(Tar, ' -xvf "', Command0)
