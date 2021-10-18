@@ -24,7 +24,7 @@
 	imports(options)).
 
 	:- info([
-		version is 6:1:1,
+		version is 6:2:0,
 		author is 'Paulo Moura',
 		date is 2021-10-18,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
@@ -88,15 +88,20 @@
 
 	output_rlibrary(TopPath, Options) :-
 		memberchk(exclude_paths(ExcludedPaths), Options),
+		memberchk(exclude_prefixes(ExcludedPrefixes), Options),
 		forall(
-			sub_library(TopPath, ExcludedPaths, LibraryPath),
+			sub_library(TopPath, ExcludedPaths, ExcludedPrefixes, LibraryPath),
 			output_directory_files(LibraryPath, Options)
 		),
 		write_indexes(Options).
 
-	sub_library(TopPath, ExcludedPaths, LibraryPath) :-
+	sub_library(TopPath, ExcludedPaths, ExcludedPrefixes, LibraryPath) :-
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, LibraryPath),
+		\+ (
+			member(ExcludedPrefix, ExcludedPrefixes),
+			sub_atom(LibraryPath, 0, _, _, ExcludedPrefix)
+		),
 		atom_concat(TopPath, RelativePath, LibraryPath),
 		\+ member(RelativePath, ExcludedPaths).
 
@@ -127,9 +132,10 @@
 
 	output_rdirectory(Directory, Options) :-
 		memberchk(exclude_paths(ExcludedPaths), Options),
+		memberchk(exclude_prefixes(ExcludedPrefixes), Options),
 		setof(
 			SubDirectory,
-			sub_directory(Directory, ExcludedPaths, SubDirectory),
+			sub_directory(Directory, ExcludedPaths, ExcludedPrefixes, SubDirectory),
 			SubDirectories
 		),
 		forall(
@@ -138,8 +144,12 @@
 		),
 		write_indexes(Options).
 
-	sub_directory(Directory, ExcludedPaths, SubDirectory) :-
+	sub_directory(Directory, ExcludedPaths, ExcludedPrefixes, SubDirectory) :-
 		logtalk::loaded_file(Path),
+		\+ (
+			member(ExcludedPrefix, ExcludedPrefixes),
+			sub_atom(Path, 0, _, _, ExcludedPrefix)
+		),
 		os::decompose_file_name(Path, SubDirectory, _),
 		atom_concat(Directory, RelativePath, SubDirectory),
 		\+ member(RelativePath, ExcludedPaths).
@@ -191,8 +201,13 @@
 		reset,
 		^^merge_options(UserOptions, Options),
 		memberchk(xml_docs_directory(XMLDirectory), Options),
+		memberchk(exclude_prefixes(ExcludedPrefixes), Options),
 		os::make_directory(XMLDirectory),
 		(	logtalk::loaded_file_property(Path, directory(Directory)),
+			\+ (
+				member(ExcludedPrefix, ExcludedPrefixes),
+				sub_atom(Directory, 0, _, _, ExcludedPrefix)
+			),
 			logtalk::loaded_file_property(Path, basename(File)),
 			logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
 			process(File, Directory, Options, StreamOptions),
@@ -1486,6 +1501,7 @@
 		).
 	default_option(exclude_files([])).
 	default_option(exclude_paths([])).
+	default_option(exclude_prefixes([])).
 	default_option(exclude_entities([])).
 	default_option(sort_predicates(false)).
 
@@ -1509,6 +1525,8 @@
 		valid(list(atom), Files).
 	valid_option(exclude_paths(Paths)) :-
 		valid(list(atom), Paths).
+	valid_option(exclude_prefixes(Paths)) :-
+		valid(list(atom), Paths).
 	valid_option(exclude_entities(Entities)) :-
 		valid(list(atom), Entities).
 	valid_option(sort_predicates(Boolean)) :-
@@ -1518,10 +1536,8 @@
 		normalize_directory_paths([Directory0], [Directory]).
 	fix_option(omit_path_prefixes(Prefixes0), omit_path_prefixes(Prefixes)) :-
 		normalize_directory_paths(Prefixes0, Prefixes).
-	fix_option(exclude_files(ExcludedFiles0), exclude_files(ExcludedFiles)) :-
-		normalize_file_paths(ExcludedFiles0, ExcludedFiles).
-	fix_option(exclude_paths(ExcludedPaths0), exclude_paths(ExcludedPaths)) :-
-		normalize_directory_paths(ExcludedPaths0, ExcludedPaths).
+	fix_option(exclude_prefixes(ExcludedPrefixes0), exclude_prefixes(ExcludedPrefixes)) :-
+		normalize_file_paths(ExcludedPrefixes0, ExcludedPrefixes).
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-

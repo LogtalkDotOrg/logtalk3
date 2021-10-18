@@ -22,9 +22,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:1:0,
 		author is 'Paulo Moura',
-		date is 2021-01-31,
+		date is 2021-10-18,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',
@@ -37,8 +37,9 @@
 			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
 			'omit_path_prefixes(Prefixes) option' - 'List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.',
 			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
-			'exclude_paths(List) option' - 'List of (relative) library paths to exclude when generating the XML documenting files.',
-			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files.',
+			'exclude_paths(List) option' - 'List of relative library paths to exclude when generating the XML documenting files (default is ``[]``).',
+			'exclude_prefixes(List) option' - 'List of path prefixes to exclude when generating the XML documenting files (default is ``[]``).',
+			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files (default is ``[]``).',
 			'sort_predicates(Boolean) option' - 'Sort entity predicates (default is ``false``)',
 			'Known issues' - 'The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.'
 		],

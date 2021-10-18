@@ -122,6 +122,9 @@ the `lgtunit` tool.
 * ADDED: New input/output `create_text_file/3`, `check_text_file/3`, and
 `text_file_assertion/4` testing predicates to the `lgtunit` tool.
 
+* ADDED: New `exclude_prefixes/1` option to the `lgtdoc` tool to exclude from
+documentation any file or directory with one of the specified prefixes.
+
 * UPDATED: The `debugger` tool to use a `get_unbuffered_char/1` built-in
 predicate when provided by the backend Prolog system (e.g. LVM or Trealla
 Prolog).
@@ -143,6 +146,9 @@ so that crashed and broken test sets are listed in the reports.
 
 * FIXED: Bug where the `lgtdoc` tool would fail to generate documentation when
 the predicate index is empty.
+
+* FIXED: The `lgtdoc` tool to not expand the paths in the `exclude_files/1`
+and `exclude_paths/1` options as per documentation.
 
 Contributions
 -------------
