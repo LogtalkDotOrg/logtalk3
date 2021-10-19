@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2021-10-18,
+		date is 2021-10-19,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -135,8 +135,9 @@
 	]).
 
 	:- uses(os, [
-		ensure_file/1, file_exists/1, make_directory_path/1,
-		operating_system_type/1, path_concat/3, shell/1
+		ensure_file/1, file_exists/1, internal_os_path/2,
+		make_directory_path/1, operating_system_type/1,
+		path_concat/3, shell/1
 	]).
 
 	help :-
@@ -218,7 +219,8 @@
 
 	print_readme_file_path(Directory) :-
 		(	readme_file_path(Directory, ReadMeFile) ->
-			print_message(comment, packs, readme_file(ReadMeFile))
+			internal_os_path(ReadMeFile, OSReadMeFile),
+			print_message(comment, packs, readme_file(OSReadMeFile))
 		;	true
 		).
 
