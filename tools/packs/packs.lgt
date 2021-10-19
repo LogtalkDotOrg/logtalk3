@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2021-02-18,
+		date is 2021-10-19,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -636,10 +636,15 @@
 		update(Pack, []).
 
 	update :-
-		installed_pack(Registry, Pack, Version, false),
-		update_pack(Registry, Pack, Version, []),
+		print_message(comment, packs, @'Updating installed packs:'),
+		installed_pack(Registry, Pack, Version, Pinned),
+		(	Pinned == false ->
+			update_pack(Registry, Pack, Version, [])
+		;	print_message(comment, packs, pinned_pack(Registry, Pack, Version))
+		),
 		fail.
-	update.
+	update :-
+		print_message(comment, packs, @'Packs updating completed').
 
 	update_pack(Registry, Pack, Version, Options) :-
 		(	latest_pack_version(Registry, Pack, LatestVersion, URL, CheckSum),
