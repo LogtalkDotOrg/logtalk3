@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 6:2:0,
+		version is 6:2:1,
 		author is 'Paulo Moura',
-		date is 2021-10-18,
+		date is 2021-10-19,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1362,15 +1362,17 @@
 		(	\+ instantiates_class(Entity, _),
 			\+ specializes_class(Entity, _) ->
 			% prototype
-			create_object(Object, [extends(Entity)], [], [])
+			create_object(Object, [extends(Entity)], [], []),
+			find_inherited_predicates(Object, Entity, Predicates),
+			abolish_object(Object)
 		;	\+ specializes_class(Entity, _) ->
 			% instance
-			Object = Entity
+			find_inherited_predicates(Entity, Entity, Predicates)
 		;	% class
-			create_object(Object, [instantiates(Entity)], [], [])
-		),
-		find_inherited_predicates(Object, Entity, Predicates),
-		abolish_object(Object).
+			create_object(Object, [instantiates(Entity)], [], []),
+			find_inherited_predicates(Object, Entity, Predicates),
+			abolish_object(Object)
+		).
 
 	find_inherited_predicates(Object, Entity, Predicates) :-
 		findall(

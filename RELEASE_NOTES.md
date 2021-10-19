@@ -147,6 +147,9 @@ and results in more compact code.
 * FIXED: Workaround Allure ignoring the `errors` tag in xUnit.net v2 XML files
 so that crashed and broken test sets are listed in the reports.
 
+* FIXED: Bug in the `lgtdoc` tool when computing the inherited predicates of
+an instance that would result in an attempt to abolish a static object.
+
 * FIXED: Bug where the `lgtdoc` tool would fail to generate documentation when
 the predicate index is empty.
 
