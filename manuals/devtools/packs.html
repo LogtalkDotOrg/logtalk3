@@ -159,31 +159,41 @@ thus providing a stepping stone for sharing portable resources between
 multiple systems.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
-<p>On POSIX systems (Linux, macOS, …), the following command-line
-commands are required:</p>
+<p>On POSIX systems (Linux, macOS, …), the following shell commands are
+required:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sha256sum</span></code> (provided by GNU coreutils)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sha256sum</span></code> (provided by GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> (unlike GNU <code class="docutils literal notranslate"><span class="pre">tar</span></code>, it can uncompress <code class="docutils literal notranslate"><span class="pre">.zip</span></code> archives)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">libarchive</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpg</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>)</p></li>
 </ul>
-<p>On Windows systems, the following command-line commands are required:</p>
+<p>The tool uses <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> instead of GNU <code class="docutils literal notranslate"><span class="pre">tar</span></code> so that it can
+uncompress <code class="docutils literal notranslate"><span class="pre">.zip</span></code> archives (<code class="docutils literal notranslate"><span class="pre">unzip</span></code> doesn’t provide the desired
+options). The <code class="docutils literal notranslate"><span class="pre">gpg</span></code> command is only required if you want to check pack
+archive signatures.</p>
+<p>On Windows systems, the following shell commands are required:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">certutil.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar.exe</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpg</span></code></p></li>
 </ul>
-<p>No install should be required in recent Windows 10 builds.</p>
+<p>In recent Windows 10 builds, only <code class="docutils literal notranslate"><span class="pre">gpg</span></code> should require installation.
+You can download the GnuPG software from:</p>
+<p><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></p>
 <p>On macOS systems, Apple bundles both <code class="docutils literal notranslate"><span class="pre">curl</span></code> and BSD <code class="docutils literal notranslate"><span class="pre">tar</span></code> (under the
-name <code class="docutils literal notranslate"><span class="pre">tar</span></code>; you can create a <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> alias or preferably install a
-more recent version). GNU coreutils can be installed easily using
-MacPorts (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">port</span> <span class="pre">install</span> <span class="pre">coretutils</span></code>) or Homebrew
-(<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">coretutils</span></code>).</p>
+name <code class="docutils literal notranslate"><span class="pre">tar</span></code>; you can simply create a <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> alias or install a more
+recent version). The required commands can be easily installed using
+MacPorts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install coreutils libarchive gnupg2
+</pre></div>
+</div>
+<p>Or using Homebrew:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ brew install coretutils libarchive gnupg2
+</pre></div>
+</div>
 <p>On Linux systems, use the distribution own package manager to install
 any missing command.</p>
-<p>Additionally, if you want to check pack archive signatures, the <code class="docutils literal notranslate"><span class="pre">gpg</span></code>
-command-line command is also required. The GnuPG software can be
-download from:</p>
-<p><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></p>
 </div>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
@@ -217,6 +227,10 @@ environment variable when defined. Otherwise it defaults to
 <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code>. This directory holds sub-directories for
 registries, packs, and archives. Users shouldn’t manually modify the
 contents of these directories.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">packs</span></code> tools loads at startup defined registry and pack
+specifications. Therefore, using the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment
+variable allows easy switching between alternative registry/pack setups
+by simply changing the value of the variable before loading the tool.</p>
 </div>
 <div class="section" id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this headline"></a></h2>

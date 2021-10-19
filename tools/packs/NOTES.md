@@ -39,34 +39,42 @@ resources between multiple systems.
 Requirements
 ------------
 
-On POSIX systems (Linux, macOS, ...), the following command-line commands
-are required:
+On POSIX systems (Linux, macOS, ...), the following shell commands are
+required:
 
-- `sha256sum` (provided by GNU coreutils)
+- `sha256sum` (provided by GNU `coreutils`)
 - `curl`
-- `bsdtar` (unlike GNU `tar`, it can uncompress `.zip` archives)
+- `bsdtar` (provided by `libarchive`)
+- `gpg` (provided by `gnupg2`)
 
-On Windows systems, the following command-line commands are required:
+The tool uses `bsdtar` instead of GNU `tar` so that it can uncompress
+`.zip` archives (`unzip` doesn't provide the desired options). The `gpg`
+command is only required if you want to check pack archive signatures.
+
+On Windows systems, the following shell commands are required:
 
 - `certutil.exe`
 - `curl.exe`
 - `tar.exe`
+- `gpg`
 
-No install should be required in recent Windows 10 builds.
+In recent Windows 10 builds, only `gpg` should require installation. You
+can download the GnuPG software from:
+
+https://www.gnupg.org/
 
 On macOS systems, Apple bundles both `curl` and BSD `tar` (under the name
-`tar`; you can create a `bsdtar` alias or preferably install a more recent
-version). GNU coreutils can be installed easily using MacPorts (`sudo port
-install coretutils`) or Homebrew (`brew install coretutils`).
+`tar`; you can simply create a `bsdtar` alias or install a more recent
+version). The required commands can be easily installed using MacPorts:
+
+	$ sudo port install coreutils libarchive gnupg2
+
+Or using Homebrew:
+
+	$ brew install coretutils libarchive gnupg2
 
 On Linux systems, use the distribution own package manager to install any
 missing command.
-
-Additionally, if you want to check pack archive signatures, the `gpg`
-command-line command is also required. The GnuPG software can be download
-from:
-
-https://www.gnupg.org/
 
 
 API documentation
@@ -107,6 +115,11 @@ The tool uses a directory specified using the `LOGTALKPACKS` environment
 variable when defined. Otherwise it defaults to `~/logtalk_packs`. This
 directory holds sub-directories for registries, packs, and archives. Users
 shouldn't manually modify the contents of these directories.
+
+The `packs` tools loads at startup defined registry and pack specifications.
+Therefore, using the `LOGTALKPACKS` environment variable allows easy switching
+between alternative registry/pack setups by simply changing the value of the
+variable before loading the tool.
 
 
 Registry specification
