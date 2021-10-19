@@ -144,7 +144,19 @@
   <div class="section" id="packs">
 <h1><code class="docutils literal notranslate"><span class="pre">packs</span></code><a class="headerlink" href="#packs" title="Permalink to this headline"></a></h1>
 <p>This tool provides predicates for downloading, installing, upgrading,
-and removing third-party libraries and applications.</p>
+and uninstalling third-party libraries and applications, generically
+known as <em>packs</em>. Collections of pack specifications are made available
+using <em>registries</em>. Registries can be local to a system, publicly
+shared, or private to a company VPN. There is no concept of a central
+registry. Users decide which registries they trust and want to use and
+add them using their published URLs. The tool supports both pack
+checksums and signatures and takes several steps to sanitize registry
+and pack specifications. As other Logtalk developer tools, portability
+is main goal. This tool can be used with any supported Prolog backend
+and run in both POSIX and Windows systems. Moreover, this tool can be
+used not only for handling Logtalk packs but also Prolog only packs,
+thus providing a stepping stone for sharing portable resources between
+multiple systems.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
 <p>On POSIX systems (Linux, macOS, …), the following command-line
@@ -208,7 +220,7 @@ contents of these directories.</p>
 </div>
 <div class="section" id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this headline"></a></h2>
-<p>A registry is git remote repo that can be cloned, a downloadable
+<p>A registry is a git remote repo that can be cloned, a downloadable
 archive, or a local directory containing a Logtalk loader file that
 loads source files defining the registry itself and the packs it
 provides. The registry name is ideally a valid unquoted atom. The
@@ -274,7 +286,7 @@ a <code class="docutils literal notranslate"><span class="pre">file://</span></c
 the directory is a git repo, the tool will clone it when adding it.
 Otherwise, the files in the directory are copied to the registry
 definition directory. This allows the registry to be added and deleted
-independently of the registry source files.</p>
+without consequences for the registry source files.</p>
 </div>
 <div class="section" id="pack-specification">
 <h2>Pack specification<a class="headerlink" href="#pack-specification" title="Permalink to this headline"></a></h2>
@@ -414,7 +426,7 @@ from a local directory. For example:</p>
 <p>If the directory is a git repo, the tool will clone it when installing
 the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
-and uninstalled independently of the pack source files.</p>
+and uninstalled without consequences for the pack source files.</p>
 <p>Packs that are expected to be fully portable should always be checked by
 loading them with the <code class="docutils literal notranslate"><span class="pre">portability</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>.</p>
 </div>

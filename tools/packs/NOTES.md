@@ -22,7 +22,18 @@ ________________________________________________________________________
 =========
 
 This tool provides predicates for downloading, installing, upgrading, and
-removing third-party libraries and applications.
+uninstalling third-party libraries and applications, generically known as
+_packs_. Collections of pack specifications are made available using
+_registries_. Registries can be local to a system, publicly shared, or
+private to a company VPN. There is no concept of a central registry. Users
+decide which registries they trust and want to use and add them using their
+published URLs. The tool supports both pack checksums and signatures and
+takes several steps to sanitize registry and pack specifications. As other
+Logtalk developer tools, portability is main goal. This tool can be used
+with any supported Prolog backend and run in both POSIX and Windows systems.
+Moreover, this tool can be used not only for handling Logtalk packs but also
+Prolog only packs, thus providing a stepping stone for sharing portable
+resources between multiple systems.
 
 
 Requirements
@@ -101,8 +112,8 @@ shouldn't manually modify the contents of these directories.
 Registry specification
 ----------------------
 
-A registry is git remote repo that can be cloned, a downloadable archive, or a
-local directory containing a Logtalk loader file that loads source files
+A registry is a git remote repo that can be cloned, a downloadable archive,
+or a local directory containing a Logtalk loader file that loads source files
 defining the registry itself and the packs it provides. The registry name is
 ideally a valid unquoted atom. The registry directory must contain at least
 two Logtalk source files:
@@ -171,7 +182,8 @@ To simplify registry development and testing, use a local directory and a
 `file://` URL when calling the `registries::add/2` predicate. If the directory
 is a git repo, the tool will clone it when adding it. Otherwise, the files in
 the directory are copied to the registry definition directory. This allows the
-registry to be added and deleted independently of the registry source files.
+registry to be added and deleted without consequences for the registry source
+files.
 
 
 Pack specification
@@ -320,7 +332,7 @@ directory. For example:
 If the directory is a git repo, the tool will clone it when installing
 the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
-and uninstalled independently of the pack source files.
+and uninstalled without consequences for the pack source files.
 
 Packs that are expected to be fully portable should always be checked by
 loading them with the `portability` flag set to `warning`.
