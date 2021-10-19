@@ -363,6 +363,8 @@
 	update(Registry) :-
 		update(Registry, []).
 
+	% use a failure-driven loop so that we don't stop updating
+	% the defined registries if the update for one of them fails
 	update :-
 		print_message(comment, packs, @'Updating defined registries:'),
 		registry_object(Registry, _),

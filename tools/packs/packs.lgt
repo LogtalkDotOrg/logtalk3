@@ -635,6 +635,8 @@
 	update(Pack) :-
 		update(Pack, []).
 
+	% use a failure-driven loop so that we don't stop updating
+	% the installed packs if the update for one of them fails
 	update :-
 		print_message(comment, packs, @'Updating installed packs:'),
 		installed_pack(Registry, Pack, Version, Pinned),
