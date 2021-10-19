@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2021-10-18,
+		date is 2021-10-19,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -364,10 +364,15 @@
 		update(Registry, []).
 
 	update :-
-		forall(
-			registry_object(Registry, _),
-			update(Registry, [])
-		).
+		print_message(comment, packs, @'Updating defined registries:'),
+		registry_object(Registry, _),
+		(	pinned(Registry) ->
+			print_message(comment, packs, pinned_registry(Registry))
+		;	update(Registry, [])
+		),
+		fail.
+	update :-
+		print_message(comment, packs, @'Registries updating completed').
 
 	update_clone(Registry, Path, Options) :-
 		internal_os_path(Path, OSPath),
