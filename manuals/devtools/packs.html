@@ -90,6 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pack-portability">Pack portability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-development">Pack development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-handling">Pack handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pack-documentation">Pack documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pinning-registries-and-packs">Pinning registries and packs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-packs">Testing packs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#security-considerations">Security considerations</a></li>
@@ -286,9 +287,10 @@ via a local archive (using a <code class="docutils literal notranslate"><span cl
 (using a <code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
 <p>To update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
 Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
-predicate. After deleting a registry, you can use the
-<code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned packs that are
-installed.</p>
+predicate. By default, registries with installed packs cannot be
+deleted. If you force deletion (by using the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option),
+you can use the <code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned
+packs that are installed.</p>
 <p>See the tool API documentation on the
 <a class="reference external" href="../../docs/registries_0.html">registries</a> object for other useful
 predicates.</p>
@@ -362,6 +364,9 @@ predicate.</p>
 <p>A pack may specify multiple versions. Each version is described using a
 <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause as illustrated in the example above. For
 details, see the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> API documentation.</p>
+<p>Listing multiple versions allows the pack specification to be updated
+(by updating its registry) without forcing existing users into
+installing (or updating to) the latest version of the pack.</p>
 </div>
 <div class="section" id="pack-dependencies">
 <h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Permalink to this headline"></a></h2>
@@ -487,11 +492,38 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 </ul>
 <p>When using a <code class="docutils literal notranslate"><span class="pre">checksig(true)</span></code> option to check a pack signature, is
-strongly advised that you also use the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option. Note
-that the public key used to sign the pack archive must be already
+strongly advised that you also use the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(foo, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [verbose(<span class="k">true</span>), checksig(<span class="k">true</span>)]).
+</pre></div>
+</div>
+<p>Note that the public key used to sign the pack archive must be already
 present in your local system.</p>
 <p>See the tool API documentation on the
 <a class="reference external" href="../../docs/packs_0.html">packs</a> object for other useful predicates.</p>
+</div>
+<div class="section" id="pack-documentation">
+<h2>Pack documentation<a class="headerlink" href="#pack-documentation" title="Permalink to this headline"></a></h2>
+<p>The path to the pack <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is
+installed or updated. It can also be retrieved at any time by using the
+<code class="docutils literal notranslate"><span class="pre">readme/2</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>readme(lflat, <span class="nv">Path</span>).
+</pre></div>
+</div>
+<p>Additional documentation, including full API documentation, may also be
+available from the pack home page, which can be printed by using the
+<code class="docutils literal notranslate"><span class="pre">describe/1-2</span></code> predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>describe(lflat).
+
+<span class="c">% Registry:    ...</span>
+<span class="c">% Pack:        lflat</span>
+<span class="c">% Description: L-FLAT - Logtalk Formal Language and Automata Toolkit</span>
+<span class="c">% License:     MIT</span>
+<span class="c">% Home:        https://github.com/l-flat/lflat</span>
+<span class="c">% Versions:</span>
+...
+</pre></div>
+</div>
 </div>
 <div class="section" id="pinning-registries-and-packs">
 <h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Permalink to this headline"></a></h2>

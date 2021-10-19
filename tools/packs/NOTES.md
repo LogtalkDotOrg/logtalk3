@@ -180,16 +180,17 @@ a local archive (using a `file://` URL) or a downloadable archive (using a
 `https://` URL).
 
 To update a registry, use the `registries::update/1-2` predicates. Registries
-can also be deleted using the `registries::delete/1-2` predicate. After deleting
-a registry, you can use the `packs::orphaned/0` predicate to list any orphaned
-packs that are installed.
+can also be deleted using the `registries::delete/1-2` predicate. By default,
+registries with installed packs cannot be deleted. If you force deletion (by
+using the `force(true)` option), you can use the `packs::orphaned/0` predicate
+to list any orphaned packs that are installed.
 
 See the tool API documentation on the [registries](../../docs/registries_0.html)
 object for other useful predicates.
 
 
 Registry development
-----------------
+--------------------
 
 To simplify registry development and testing, use a local directory and a
 `file://` URL when calling the `registries::add/2` predicate. If the directory
@@ -262,6 +263,10 @@ Pack versions
 A pack may specify multiple versions. Each version is described using a
 `version/6` predicate clause as illustrated in the example above. For
 details, see the `pack_protocol` API documentation.
+
+Listing multiple versions allows the pack specification to be updated (by
+updating its registry) without forcing existing users into installing (or
+updating to) the latest version of the pack.
 
 
 Pack dependencies
@@ -395,12 +400,39 @@ predicates that accept a list of options:
 - `checksig(Boolean)` (default is `false`)
 
 When using a `checksig(true)` option to check a pack signature, is strongly
-advised that you also use the `verbose(true)` option. Note that the public key
-used to sign the pack archive must be already present in your local system.
+advised that you also use the `verbose(true)` option. For example:
+
+	| ?- packs::install(foo, bar, 1:1:2, [verbose(true), checksig(true)]).
+
+Note that the public key used to sign the pack archive must be already present
+in your local system.
 
 See the tool API documentation on the [packs](../../docs/packs_0.html) object
 for other useful predicates.
 
+
+Pack documentation
+------------------
+
+The path to the pack `README.md` file is printed when the pack is installed
+or updated. It can also be retrieved at any time by using the `readme/2`
+predicate. For example:
+
+	| ?- packs::readme(lflat, Path).
+
+Additional documentation, including full API documentation, may also be
+available from the pack home page, which can be printed by using the
+`describe/1-2` predicates. For example:
+
+	| ?- packs::describe(lflat).
+	
+	% Registry:    ...
+	% Pack:        lflat
+	% Description: L-FLAT - Logtalk Formal Language and Automata Toolkit
+	% License:     MIT
+	% Home:        https://github.com/l-flat/lflat
+	% Versions:
+	...
 
 Pinning registries and packs
 ----------------------------
