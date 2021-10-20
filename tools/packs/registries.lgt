@@ -347,7 +347,7 @@
 				update_archive(Registry, URL, Updated, Options)
 			),
 			(	Updated == false ->
-				print_message(comment, packs, up_to_date_registry(Registry))
+				print_message(comment, packs, up_to_date_registry(Registry, URL))
 			;	object_property(RegistryObject, file(File)),
 				loaded_file_property(File, parent(Parent)),
 				logtalk_load(Parent, [reload(always), source_data(on), hook(registry_loader_hook)]),
@@ -381,9 +381,10 @@
 		internal_os_path(Path, OSPath),
 		atom_concat('git -C "', OSPath, Command0),
 		atom_concat(Command0, '" remote update | git -C "', Command1),
+		atom_concat(Command1, OSPath, Command2),
 		(	operating_system_type(windows) ->
-			atom_concat(Command1, '" status -uno | find "up to date" > nul', Command)
-		;	atom_concat(Command1, '" status -uno | grep -q "up to date"', Command)
+			atom_concat(Command2, '" status -uno | find "up to date" > nul', Command)
+		;	atom_concat(Command2, '" status -uno | grep -q "up to date"', Command)
 		),
 		shell(Command),
 		!.
