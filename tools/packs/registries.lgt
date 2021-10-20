@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
 		date is 2021-10-20,
 		comment is 'Registry handling predicates.'
@@ -153,16 +153,22 @@
 		(	Registries == [] ->
 			print_message(information, packs, @'  (none)')
 		;	findall(
-				Registry-Pinned,
+				registry(Registry, HowDefined, Pinned),
 				(	member(Registry, Registries),
+					path_concat(Directory, Registry, Path),
+					path_concat(Path, '.git', Git),
+					(	directory_exists(Git) ->
+						HowDefined = git
+					;	HowDefined = archive
+					),
 					(	pinned(Registry) ->
 						Pinned = true
 					;	Pinned = false
 					)
 				),
-				RegistryPairs
+				RegistryList
 			),
-			print_message(information, packs, registries_list(RegistryPairs))
+			print_message(information, packs, registries_list(RegistryList))
 		).
 
 	describe(Registry) :-
@@ -381,10 +387,10 @@
 		internal_os_path(Path, OSPath),
 		atom_concat('git -C "', OSPath, Command0),
 		(	operating_system_type(windows) ->
-			atom_concat(Command0, '" remote update > nul && git -C "', Command1),
+			atom_concat(Command0, '" remote update > nul 2>&1 && git -C "', Command1),
 			atom_concat(Command1, OSPath, Command2),
 			atom_concat(Command2, '" status -uno | find "up to date" > nul', Command)
-		;	atom_concat(Command0, '" remote update > /dev/null && git -C "', Command1),
+		;	atom_concat(Command0, '" remote update > /dev/null 2>&1 && git -C "', Command1),
 			atom_concat(Command1, OSPath, Command2),
 			atom_concat(Command2, '" status -uno | grep -q "up to date"', Command)
 		),

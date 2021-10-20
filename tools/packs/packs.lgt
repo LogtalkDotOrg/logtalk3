@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2021-10-19,
+		date is 2021-10-20,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -935,7 +935,7 @@
 			atom_concat(Command1, Archive, Command2),
 			(	operating_system_type(windows) ->
 				atom_concat(Command2, '" > nul 2>&1', Command)
-			;	atom_concat(Command2, '" 2>/dev/null', Command)
+			;	atom_concat(Command2, '" > /dev/null 2>&1', Command)
 			)
 		),
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).

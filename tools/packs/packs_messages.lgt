@@ -22,7 +22,7 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
 		date is 2021-10-20,
 		comment is 'Packs default message translations.'
@@ -281,9 +281,18 @@
 
 	registries_list([]) -->
 		[nl].
-	registries_list([Registry-Pinned| Pairs]) -->
-		['  ~q'-[Registry]], pinned(Pinned),
-		registries_list(Pairs).
+	registries_list([registry(Registry,HowDefined,Pinned)| Registries]) -->
+		['  ~q'-[Registry]], registry_data(HowDefined, Pinned),
+		registries_list(Registries).
+
+	registry_data(git, true) -->
+		[' (git; pinned)'-[], nl].
+	registry_data(git, false) -->
+		[' (git)'-[], nl].
+	registry_data(archive, true) -->
+		[' (archive; pinned)'-[], nl].
+	registry_data(archive, false) -->
+		[' (archive)'-[], nl].
 
 	pinned(true) -->
 		[' (pinned)'-[], nl].
