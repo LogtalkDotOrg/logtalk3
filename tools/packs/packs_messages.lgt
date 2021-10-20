@@ -84,8 +84,8 @@
 	message_tokens(registry_updated(Registry, URL)) -->
 		['Registry updated:  ~q (~w)'-[Registry, URL], nl].
 
-	message_tokens(pinned_registry(Registry)) -->
-		['Registry is pinned: ~q'-[Registry], nl].
+	message_tokens(pinned_registry(Registry, URL)) -->
+		['Registry is pinned: ~q (~w)'-[Registry, URL], nl].
 
 	message_tokens(up_to_date_registry(Registry, URL)) -->
 		['Registry is up-to-date: ~q (~w)'-[Registry, URL], nl].

@@ -386,9 +386,14 @@
 	% the defined registries if the update for one of them fails
 	update :-
 		print_message(comment, packs, @'Updating defined registries:'),
-		registry_object(Registry, _),
-		(	pinned(Registry) ->
-			print_message(comment, packs, pinned_registry(Registry))
+		defined(Registry, HowDefined, Pinned),
+		(	Pinned == true ->
+			registry_object(Registry, RegistryObject),
+			(	HowDefined == git ->
+				RegistryObject::clone(URL)
+			;	RegistryObject::archive(URL)
+			),
+			print_message(comment, packs, pinned_registry(Registry, URL))
 		;	update(Registry, [])
 		),
 		fail.
