@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2021-10-19,
+		date is 2021-10-20,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -183,7 +183,7 @@
 		).
 
 	load_registry_files(Registry, Loader) :-
-		(	logtalk_load(Loader, [source_data(on), hook(registry_loader_hook)]) ->
+		(	logtalk_load(Loader, [reload(always), source_data(on), hook(registry_loader_hook)]) ->
 			true
 		;	print_message(warning, packs, registry_loading_failed(Registry))
 		).

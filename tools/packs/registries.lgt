@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2021-10-19,
+		date is 2021-10-20,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -350,7 +350,7 @@
 			),
 			object_property(RegistryObject, file(File)),
 			loaded_file_property(File, parent(Parent)),
-			logtalk_load(Parent, [reload(always)]),
+			logtalk_load(Parent, [reload(always), source_data(on), hook(registry_loader_hook)]),
 			(	member(clean(true), Options) ->
 				delete_archives(Registry)
 			;	true
