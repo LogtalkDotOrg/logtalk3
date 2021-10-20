@@ -22,7 +22,7 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
 		date is 2021-10-20,
 		comment is 'Packs default message translations.'
@@ -148,8 +148,8 @@
 			nl
 		].
 
-	message_tokens(registries_list(RegistryPairs)) -->
-		registries_list(RegistryPairs).
+	message_tokens(defined_registries(DefinedRegistries)) -->
+		defined_registries(DefinedRegistries).
 
 	% pack install messages
 
@@ -279,11 +279,11 @@
 		['    Dependencies: ~q'-[Dependencies], nl],
 		['    Portability: ~q'-[Portability], nl].
 
-	registries_list([]) -->
-		[nl].
-	registries_list([registry(Registry,HowDefined,Pinned)| Registries]) -->
+	defined_registries([defined(Registry,HowDefined,Pinned)| DefinedRegistries]) -->
 		['  ~q'-[Registry]], registry_data(HowDefined, Pinned),
-		registries_list(Registries).
+		defined_registries(DefinedRegistries).
+	defined_registries([]) -->
+		[].
 
 	registry_data(git, true) -->
 		[' (git; pinned)'-[], nl].

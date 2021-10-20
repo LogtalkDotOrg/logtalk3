@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:19:0,
 		author is 'Paulo Moura',
 		date is 2021-10-20,
 		comment is 'Registry handling predicates.'
@@ -40,6 +40,13 @@
 	:- info(describe/1, [
 		comment is 'Prints all registry entries.',
 		argnames is ['Registry']
+	]).
+
+	:- public(defined/3).
+	:- mode(defined(?atom, ?atom, ?boolean), zero_or_more).
+	:- info(defined/3, [
+		comment is 'Enumerates by backtracking all defined registries and how they are defined (``git`` or ``archive``) plus if they are pinned.',
+		argnames is ['Registry', 'HowDefined', 'Pinned']
 	]).
 
 	:- public(add/3).
@@ -148,27 +155,14 @@
 
 	list :-
 		print_message(information, packs, @'Defined registries:'),
-		expand_library_path(logtalk_packs(registries), Directory),
-		directory_files(Directory, Registries, [type(directory), dot_files(false)]),
-		(	Registries == [] ->
+		findall(
+			defined(Registry, HowDefined, Pinned),
+			defined(Registry, HowDefined, Pinned),
+			DefinedRegistries
+		),
+		(	DefinedRegistries == [] ->
 			print_message(information, packs, @'  (none)')
-		;	findall(
-				registry(Registry, HowDefined, Pinned),
-				(	member(Registry, Registries),
-					path_concat(Directory, Registry, Path),
-					path_concat(Path, '.git', Git),
-					(	directory_exists(Git) ->
-						HowDefined = git
-					;	HowDefined = archive
-					),
-					(	pinned(Registry) ->
-						Pinned = true
-					;	Pinned = false
-					)
-				),
-				RegistryList
-			),
-			print_message(information, packs, registries_list(RegistryList))
+		;	print_message(information, packs, defined_registries(DefinedRegistries))
 		).
 
 	describe(Registry) :-
@@ -185,6 +179,24 @@
 			print_message(information, packs, registry_info(Registry,Description,Home,Clone,Archive,Pinned))
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
+		).
+
+	defined(Registry, HowDefined, Pinned) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), HowDefined),
+		check(var_or(boolean), Pinned),
+		expand_library_path(logtalk_packs(registries), Directory),
+		directory_files(Directory, Registries, [type(directory), dot_files(false), paths(relative)]),
+		member(Registry, Registries),
+		path_concat(Directory, Registry, Path),
+		path_concat(Path, '.git', Git),
+		(	directory_exists(Git) ->
+			HowDefined = git
+		;	HowDefined = archive
+		),
+		(	pinned(Registry) ->
+			Pinned = true
+		;	Pinned = false
 		).
 
 	% registry directory predicates
