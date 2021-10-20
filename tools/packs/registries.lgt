@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
 		date is 2021-10-20,
 		comment is 'Registry handling predicates.'
@@ -342,20 +342,21 @@
 			path_concat(Path, '.git', Git),
 			(	directory_exists(Git) ->
 				RegistryObject::clone(URL),
-				print_message(comment, packs, updating_registry(Registry, URL)),
-				update_clone(Registry, Path, Options)
+				update_clone(Registry, URL, Path, Updated, Options)
 			;	RegistryObject::archive(URL),
-				print_message(comment, packs, updating_registry(Registry, URL)),
-				update_archive(Registry, URL, Options)
+				update_archive(Registry, URL, Updated, Options)
 			),
-			object_property(RegistryObject, file(File)),
-			loaded_file_property(File, parent(Parent)),
-			logtalk_load(Parent, [reload(always), source_data(on), hook(registry_loader_hook)]),
-			(	member(clean(true), Options) ->
-				delete_archives(Registry)
-			;	true
-			),
-			print_message(comment, packs, registry_updated(Registry, URL))
+			(	Updated == false ->
+				print_message(comment, packs, up_to_date_registry(Registry))
+			;	object_property(RegistryObject, file(File)),
+				loaded_file_property(File, parent(Parent)),
+				logtalk_load(Parent, [reload(always), source_data(on), hook(registry_loader_hook)]),
+				(	member(clean(true), Options) ->
+					delete_archives(Registry)
+				;	true
+				),
+				print_message(comment, packs, registry_updated(Registry, URL))
+			)
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
 		).
@@ -376,7 +377,18 @@
 	update :-
 		print_message(comment, packs, @'Registries updating completed').
 
-	update_clone(Registry, Path, Options) :-
+	update_clone(_, _, Path, false, _) :-
+		internal_os_path(Path, OSPath),
+		atom_concat('git -C "', OSPath, Command0),
+		atom_concat(Command0, '" remote update | git -C "', Command1),
+		(	operating_system_type(windows) ->
+			atom_concat(Command1, '" status -uno | find "up to date" > nul', Command)
+		;	atom_concat(Command1, '" status -uno | grep -q "up to date"', Command)
+		),
+		shell(Command),
+		!.
+	update_clone(Registry, URL, Path, true, Options) :-
+		print_message(comment, packs, updating_registry(Registry, URL)),
 		internal_os_path(Path, OSPath),
 		atom_concat('git -C "', OSPath, Command0),
 		atom_concat(Command0, '" pull ', Command1),
@@ -386,7 +398,8 @@
 		),
 		^^command(Command, registry_clone_pull_failed(Registry, OSPath)).
 
-	update_archive(Registry, URL, Options) :-
+	update_archive(Registry, URL, true, Options) :-
+		print_message(comment, packs, updating_registry(Registry, URL)),
 		download(Registry, URL, Archive, Options),
 		uncompress(Registry, Archive, _, Options).
 

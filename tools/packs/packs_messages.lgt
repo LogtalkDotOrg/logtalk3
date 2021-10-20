@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2021-10-19,
+		date is 2021-10-20,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -86,6 +86,9 @@
 
 	message_tokens(pinned_registry(Registry)) -->
 		['Registry is pinned: ~q'-[Registry], nl].
+
+	message_tokens(up_to_date_registry(Registry)) -->
+		['Registry is up-to-date: ~q'-[Registry], nl].
 
 	% registry error messages
 
