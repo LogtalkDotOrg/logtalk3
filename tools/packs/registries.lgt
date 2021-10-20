@@ -137,7 +137,7 @@
 		decompose_file_name/3, decompose_file_name/4, delete_file/1,
 		directory_exists/1, directory_files/3, ensure_file/1, file_exists/1,
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
-		path_concat/3
+		path_concat/3, shell/1
 	]).
 
 	:- uses(type, [
@@ -380,11 +380,13 @@
 	update_clone(_, _, Path, false, _) :-
 		internal_os_path(Path, OSPath),
 		atom_concat('git -C "', OSPath, Command0),
-		atom_concat(Command0, '" remote update | git -C "', Command1),
-		atom_concat(Command1, OSPath, Command2),
 		(	operating_system_type(windows) ->
+			atom_concat(Command0, '" remote update > nul && git -C "', Command1),
+			atom_concat(Command1, OSPath, Command2),
 			atom_concat(Command2, '" status -uno | find "up to date" > nul', Command)
-		;	atom_concat(Command2, '" status -uno | grep -q "up to date"', Command)
+		;	atom_concat(Command0, '" remote update > /dev/null && git -C "', Command1),
+			atom_concat(Command1, OSPath, Command2),
+			atom_concat(Command2, '" status -uno | grep -q "up to date"', Command)
 		),
 		shell(Command),
 		!.
