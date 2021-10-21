@@ -154,10 +154,10 @@ registry. Users decide which registries they trust and want to use and
 add them using their published URLs. The tool supports both pack
 checksums and signatures and takes several steps to sanitize registry
 and pack specifications. As other Logtalk developer tools, portability
-is main goal. This tool can be used with any supported Prolog backend
+is a main goal. This tool can be used with any supported Prolog backend
 and run in both POSIX and Windows systems. Moreover, this tool can be
 used not only for handling Logtalk packs but also Prolog only packs,
-thus providing a stepping stone for sharing portable resources between
+thus providing a solution for sharing portable resources between
 multiple systems.</p>
 <p>This tool is the beta stage of development.</p>
 <div class="section" id="requirements">
@@ -221,7 +221,7 @@ any missing command.</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>The tool provides two main objects, <code class="docutils literal notranslate"><span class="pre">registries</span></code> and <code class="docutils literal notranslate"><span class="pre">packs</span></code>, for
 handling, respectively, registries and packs. Both objects accept a
-<code class="docutils literal notranslate"><span class="pre">help/0</span></code> message.</p>
+<code class="docutils literal notranslate"><span class="pre">help/0</span></code> message that describes the most common queries.</p>
 </div>
 <div class="section" id="registries-and-packs-storage">
 <h2>Registries and packs storage<a class="headerlink" href="#registries-and-packs-storage" title="Permalink to this headline"></a></h2>
@@ -478,8 +478,10 @@ registries provide packs with the same name. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(bar).
 </pre></div>
 </div>
-<p>Packs becomes available for loading immediately after successful
-installation (no restarting of the Logtalk session is required).</p>
+<p>Any pack dependencies are also checked and installed or updated if
+necessary. Packs becomes available for loading immediately after
+successful installation (no restarting of the Logtalk session is
+required).</p>
 <p>Other install predicates are available to disambiguate between
 registries and to install a specific pack version. The
 <code class="docutils literal notranslate"><span class="pre">packs::installed/0</span></code> predicate can be used to list all installed

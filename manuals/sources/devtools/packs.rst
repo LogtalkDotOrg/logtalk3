@@ -10,10 +10,10 @@ registry. Users decide which registries they trust and want to use and
 add them using their published URLs. The tool supports both pack
 checksums and signatures and takes several steps to sanitize registry
 and pack specifications. As other Logtalk developer tools, portability
-is main goal. This tool can be used with any supported Prolog backend
+is a main goal. This tool can be used with any supported Prolog backend
 and run in both POSIX and Windows systems. Moreover, this tool can be
 used not only for handling Logtalk packs but also Prolog only packs,
-thus providing a stepping stone for sharing portable resources between
+thus providing a solution for sharing portable resources between
 multiple systems.
 
 This tool is the beta stage of development.
@@ -94,7 +94,7 @@ Usage
 
 The tool provides two main objects, ``registries`` and ``packs``, for
 handling, respectively, registries and packs. Both objects accept a
-``help/0`` message.
+``help/0`` message that describes the most common queries.
 
 Registries and packs storage
 ----------------------------
@@ -388,8 +388,10 @@ To install the latest version of a pack, we can use the
 
    | ?- packs::install(bar).
 
-Packs becomes available for loading immediately after successful
-installation (no restarting of the Logtalk session is required).
+Any pack dependencies are also checked and installed or updated if
+necessary. Packs becomes available for loading immediately after
+successful installation (no restarting of the Logtalk session is
+required).
 
 Other install predicates are available to disambiguate between
 registries and to install a specific pack version. The
