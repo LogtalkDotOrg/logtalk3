@@ -116,8 +116,7 @@ and operating-system file paths for several backends.
 Tools
 -----
 
-* ADDED: Alpha version of the new `packs` tool. Main missing feature is pack
-dependencies handling.
+* ADDED: Beta version of the new `packs` tool.
 
 * ADDED: Support for `exists(Assertion)` and `all(Assertion)` test outcomes to
 the `lgtunit` tool.

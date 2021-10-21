@@ -580,3 +580,17 @@ For example, assuming a ``pl_pack`` Prolog pack:
 
 If the Prolog system also supports reading an initialization file at
 startup, the above definition could be added there.
+
+Known issues
+------------
+
+When using GNU Prolog 1.5.0 as the backend on Windows, you may get an
+error on ``directory_files/2`` calls. For details and a workaround, see:
+
+https://github.com/didoudiaz/gprolog/issues/4
+
+Using SICStus Prolog as the backend on Windows doesn't currently work.
+
+XSB have an odd bug (liekly in its parser) when reading files that may
+cause a pack installed version to be reported as the ``end_of_file``
+atom.
