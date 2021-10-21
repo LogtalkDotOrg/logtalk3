@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:16:0
-| **Date:** 2021-10-20
+| **Version:** 0:17:0
+| **Date:** 2021-10-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -326,7 +326,7 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
 | **Template:**
 |    ``install(Registry,Pack,Version,Options)``
 | **Mode and number of proofs:**
-|    ``install(+atom,+atom,+compound,++list(compound))`` - ``zero_or_one``
+|    ``install(+atom,+atom,++compound,++list(compound))`` - ``zero_or_one``
 
 | **Remarks:**
 
@@ -410,6 +410,37 @@ Installs a pack (if its name is unique among all registries) using default optio
 
 .. raw:: html
 
+   <div id="update/3"> </div>
+
+.. index:: update/3
+.. _packs/0::update/3:
+
+``update/3``
+^^^^^^^^^^^^
+
+Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Pack,Version,Options)``
+| **Mode and number of proofs:**
+|    ``update(+atom,++callable,++list(callable))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
+    - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
+    - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
    <div id="update/2"> </div>
 
 .. index:: update/2
@@ -418,7 +449,7 @@ Installs a pack (if its name is unique among all registries) using default optio
 ``update/2``
 ^^^^^^^^^^^^
 
-Updates an outdated pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -426,7 +457,7 @@ Updates an outdated pack using the specified options. Fails if the pack is unkno
 | **Template:**
 |    ``update(Pack,Options)``
 | **Mode and number of proofs:**
-|    ``update(+atom,+atom)`` - ``zero_or_one``
+|    ``update(+atom,++list(callable))`` - ``zero_or_one``
 
 | **Remarks:**
 
@@ -449,7 +480,7 @@ Updates an outdated pack using the specified options. Fails if the pack is unkno
 ``update/1``
 ^^^^^^^^^^^^
 
-Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.
+Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.
 
 | **Compilation flags:**
 |    ``static``

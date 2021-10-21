@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2021-10-20,
+		date is 2021-10-21,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -110,7 +110,7 @@
 	]).
 
 	:- public(install/4).
-	:- mode(install(+atom, +atom, +compound, ++list(compound)), zero_or_one).
+	:- mode(install(+atom, +atom, ++compound, ++list(compound)), zero_or_one).
 	:- info(install/4, [
 		comment is 'Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using a ``force(true)`` option. Fails also if the pack version is unknown.',
 		argnames is ['Registry', 'Pack', 'Version', 'Options'],
@@ -144,10 +144,24 @@
 		argnames is ['Pack']
 	]).
 
+	:- public(update/3).
+	:- mode(update(+atom, ++callable, ++list(callable)), zero_or_one).
+	:- info(update/3, [
+		comment is 'Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		argnames is ['Pack', 'Version', 'Options'],
+		remarks is [
+			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
+			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
+			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
+			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
+			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.'
+		]
+	]).
+
 	:- public(update/2).
-	:- mode(update(+atom, +atom), zero_or_one).
+	:- mode(update(+atom, ++list(callable)), zero_or_one).
 	:- info(update/2, [
-		comment is 'Updates an outdated pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		comment is 'Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
@@ -161,7 +175,7 @@
 	:- public(update/1).
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
-		comment is 'Updates an outdated pack using default options. Fails if the pack is pinned, not installed, or unknown.',
+		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.',
 		argnames is ['Pack']
 	]).
 
@@ -537,19 +551,18 @@
 			true
 		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
 		).
-	check_version(Operator, Registry::Pack, RequiredVersion, none) :-
-		(	installed_pack(Registry, Pack, InstalledVersion, _),
-			{call(Operator, InstalledVersion, RequiredVersion)} ->
-			Install = none
-		;	compatible_version(Registry, Pack, RequiredVersion, CompatibleVersion) ->
-			Install = install(Registry, Pack, CompatibleVersion)
+	check_version(Operator, Registry::Pack, RequiredVersion, Install) :-
+		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
+			(	{call(Operator, InstalledVersion, RequiredVersion)} ->
+				Install = none
+			;	Install = update(Registry, Pack, RequiredVersion)
+			)
+		;	pack_object(Pack, PackObject),
+			PackObject::version(RequiredVersion, _, _, _, _, _) ->
+			Install = install(Registry, Pack, RequiredVersion)
 		;	print_message(error, packs, 'Pack dependency not available: ~q::~q@~q'+[Registry, Pack, RequiredVersion]),
 			fail
 		).
-
-	compatible_version(Registry, Pack, RequiredVersion, RequiredVersion) :-
-		registry_pack(Registry, Pack, PackObject), !,
-		PackObject::version(RequiredVersion, _, _, _, _, _).
 
 	install_dependencies([]).
 	install_dependencies([Dependency| Dependencies]) :-
@@ -667,6 +680,24 @@
 
 	% update pack predicates
 
+	update(Pack, Version, UserOptions) :-
+		check(atom, Pack),
+		check(callable, Version),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		(	installed_pack(Registry, Pack, OldVersion, Pinned) ->
+			(	Pinned == true ->
+				print_message(error, packs, cannot_update_pinned_pack(Pack)),
+				fail
+			;	update_pack(Registry, Pack, OldVersion, Version, Options)
+			)
+		;	registry_pack(_, Pack, _) ->
+			print_message(error, packs, pack_not_installed(Pack)),
+			fail
+		;	print_message(error, packs, unknown_pack(Pack)),
+			fail
+		).
+
 	update(Pack, UserOptions) :-
 		check(atom, Pack),
 		^^check_options(UserOptions),
@@ -699,6 +730,25 @@
 		fail.
 	update :-
 		print_message(comment, packs, @'Packs updating completed').
+
+	update_pack(Registry, Pack, Version, NewVersion, Options) :-
+		(	Version == NewVersion ->
+			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion))
+		;	pack_object(Pack, PackObject),
+			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, _) ->
+			check_dependencies(Dependencies, Installs),
+			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
+			uninstall_pack(Registry, Pack, Options),
+			install_dependencies(Installs),
+			install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options),
+			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion))
+		;	print_message(error, packs, unknown_pack_version(Registry, Pack, NewVersion)),
+			fail
+		),
+		(	member(clean(true), Options) ->
+			delete_archives(Registry, Pack)
+		;	true
+		).
 
 	update_pack(Registry, Pack, Version, Options) :-
 		(	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies),
@@ -847,11 +897,11 @@
 		;	fail
 		).
 
-	dependency(Dependency >= _, Dependency).
-	dependency(Dependency =< _, Dependency).
-	dependency(Dependency > _, Dependency).
-	dependency(Dependency < _, Dependency).
-	dependency(Dependency = _, Dependency).
+	dependency(Dependency @>= _, Dependency).
+	dependency(Dependency @=< _, Dependency).
+	dependency(Dependency @> _, Dependency).
+	dependency(Dependency @< _, Dependency).
+	dependency(Dependency == _, Dependency).
 
 	% auxiliary predicates
 
