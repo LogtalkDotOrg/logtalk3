@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-10-15,
+		date is 2021-10-21,
 		comment is 'Hook object for filtering registry loader file contents.'
 	]).
 
@@ -39,21 +39,41 @@
 		expand(Goal, ExpandedGoal),
 		expand(Goals, ExpandedGoals).
 	expand(logtalk_load(Files, _), logtalk_load(Files, [hook(packs_specs_hook), source_data(on)])) :-
-		atom_or_atom_list(Files).
+		safe_file_paths(Files).
 	expand(logtalk_load(Files), logtalk_load(Files, [hook(packs_specs_hook), source_data(on)])) :-
-		atom_or_atom_list(Files).
+		safe_file_paths(Files).
 
-	atom_or_atom_list((-)) :-
+	safe_file_paths((-)) :-
 		!,
 		fail.
-	atom_or_atom_list([]) :-
+	safe_file_paths([]) :-
 		!.
-	atom_or_atom_list([File| Files]) :-
+	safe_file_paths([File| Files]) :-
 		!,
-		atom(File),
-		atom_or_atom_list(Files).
-	atom_or_atom_list(File) :-
-		atom(File).
+		safe_file_path(File),
+		safe_file_paths(Files).
+	safe_file_paths(File) :-
+		safe_file_path(File).
+
+	safe_file_path(File) :-
+		atom_chars(File, Chars),
+		phrase(safe_file_path, Chars).
+
+	safe_file_path -->
+		% reject paths that start with a / or a .
+		[Char], {character::is_alphanumeric(Char)},
+		valid_chars.
+
+	valid_chars -->
+		valid_char,
+		valid_chars.
+	valid_chars -->
+		[].
+
+	valid_char --> ['/'].
+	valid_char --> ['.'].
+	valid_char --> ['-'].
+	valid_char --> [Char], {character::is_alphanumeric(Char)}.
 
 :- end_object.
 
@@ -62,9 +82,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-10-15,
+		date is 2021-10-21,
 		comment is 'Hook object for filtering registry and pack specification file contents.'
 	]).
 
@@ -98,10 +118,27 @@
 	valid_fact(version(_, _, URL, _, _, _)) :- safe_url(URL).
 
 	safe_url(URL) :-
-		(	sub_atom(URL, 0, _, _, 'https://') ->
-			true
-		;	sub_atom(URL, 0, _, _, 'file://')
-		),
-		\+ sub_atom(URL, _, _, _, '?').
+		atom_chars(URL, Chars),
+		phrase(safe_url, Chars).
+
+	safe_url -->
+		valid_protocol,
+		valid_chars.
+
+	valid_protocol -->
+		[h,t,t,p,s,':','/','/'].
+	valid_protocol -->
+		[f,i,l,e,':','/','/'].
+
+	valid_chars -->
+		valid_char,
+		valid_chars.
+	valid_chars -->
+		[].
+
+	valid_char --> ['/'].
+	valid_char --> ['.'].
+	valid_char --> ['-'].
+	valid_char --> [Char], {character::is_alphanumeric(Char)}.
 
 :- end_object.

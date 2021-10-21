@@ -584,10 +584,13 @@ checked if requested as packs are often unsigned. Care should be taken
 when adding public keys for pack signers to your local system.</p>
 <p>Registry and pack spec files plus the registry loader file are compiled
 by term-expanding them so that only expected terms are actually loaded
-and only expected <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> goals are allowed. Predicates
-defining URLs are discarded if the URLs are neither <code class="docutils literal notranslate"><span class="pre">https://</span></code> nor
-<code class="docutils literal notranslate"><span class="pre">file://</span></code> URLs or if they contain URL search parameters. But note that
-this tool makes no attempt to audit pack source files themselves.</p>
+and only expected <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> goals with expected relative file
+paths are allowed. Predicates defining URLs are discarded if the URLs
+are neither <code class="docutils literal notranslate"><span class="pre">https://</span></code> nor <code class="docutils literal notranslate"><span class="pre">file://</span></code> URLs or if they contain
+non-allowed characters (currently, only alpha-numeric ASCII characters
+plus the ASCII <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">.</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, and <code class="docutils literal notranslate"><span class="pre">_</span></code> characters are accepted).
+But note that this tool makes no attempt to audit pack source files
+themselves.</p>
 <p>Registries and packs can always be pinned so that they are not
 accidentally updated to a version that you may not had the chance to
 audit.</p>

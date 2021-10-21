@@ -496,10 +496,12 @@ public keys for pack signers to your local system.
 
 Registry and pack spec files plus the registry loader file are compiled
 by term-expanding them so that only expected terms are actually loaded and
-only expected `logtalk_load/2` goals are allowed. Predicates defining URLs
-are discarded if the URLs are neither `https://` nor `file://` URLs or if
-they contain URL search parameters. But note that this tool makes no attempt
-to audit pack source files themselves.
+only expected `logtalk_load/2` goals with expected relative file paths are
+allowed. Predicates defining URLs are discarded if the URLs are neither
+`https://` nor `file://` URLs or if they contain non-allowed characters
+(currently, only alpha-numeric ASCII characters plus the ASCII `/`, `.`,
+`-`, and `_` characters are accepted). But note that this tool makes no
+attempt to audit pack source files themselves.
 
 Registries and packs can always be pinned so that they are not accidentally
 updated to a version that you may not had the chance to audit.

@@ -11,8 +11,8 @@
 Hook object for filtering registry and pack specification file contents.
 
 | **Author:** Paulo Moura
-| **Version:** 0:9:0
-| **Date:** 2021-10-15
+| **Version:** 0:10:0
+| **Date:** 2021-10-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Hook object for filtering registry and pack specification file contents.
 
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
+| **Uses:**
+|    :ref:`character <character/0>`
 
 | **Remarks:**
 |    (none)
