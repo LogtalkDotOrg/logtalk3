@@ -23,7 +23,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2021-10-21,
 		comment is 'Hook object for filtering registry loader file contents.'
@@ -32,8 +32,13 @@
 	term_expansion((:- initialization(Goal)), (:- initialization(ExpandedGoal))) :-
 		ground(Goal),
 		expand(Goal, ExpandedGoal).
+	% virtual terms
+	term_expansion(begin_of_file, begin_of_file).
+	term_expansion(end_of_file, end_of_file).
 	% suppress anything else
-	term_expansion(_, []).
+	term_expansion(_, []) :-
+		logtalk_load_context(source, Loader),
+		logtalk::print_message(error, packs, 'Invalid registry loader file: ~w'+[Loader]).
 
 	expand((Goal, Goals), (ExpandedGoal, ExpandedGoals)) :-
 		expand(Goal, ExpandedGoal),
@@ -82,7 +87,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2021-10-21,
 		comment is 'Hook object for filtering registry and pack specification file contents.'
@@ -92,14 +97,17 @@
 	term_expansion((:- Directive), (:- Directive)) :-
 		ground(Directive),
 		valid_directive(Directive).
-	% suppress rules
-	term_expansion((_ :- _), []).
-	% filter facts
+	% filter clauses (only facts are accepted)
 	term_expansion(Fact, Fact) :-
 		ground(Fact),
 		valid_fact(Fact).
+	% virtual terms
+	term_expansion(begin_of_file, begin_of_file).
+	term_expansion(end_of_file, end_of_file).
 	% suppress anything else
-	term_expansion(_, []).
+	term_expansion(_, []) :-
+		logtalk_load_context(source, Spec),
+		logtalk::print_message(error, packs, 'Invalid registry/pack spec file: ~w'+[Spec]).
 
 	valid_directive(object(_, implements(registry_protocol))).
 	valid_directive(object(_, implements(pack_protocol))).
