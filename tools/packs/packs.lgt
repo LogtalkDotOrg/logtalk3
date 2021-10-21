@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:19:1,
 		author is 'Paulo Moura',
 		date is 2021-10-21,
 		comment is 'Pack handling predicates.'
@@ -960,11 +960,11 @@
 	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies) :-
 		registry_pack(Registry, Pack, PackObject),
 		findall(
-			Version-URL-CheckSum,
+			v(Version, URL, CheckSum, Dependencies),
 			PackObject::version(Version, _, URL, CheckSum, Dependencies, _),
 			Versions
 		),
-		sort(1, (@>), Versions, [LatestVersion-URL-CheckSum| _]).
+		sort(1, (@>), Versions, [v(LatestVersion,URL,CheckSum,Dependencies)| _]).
 
 	uninstall_pack(Registry, Pack, Options) :-
 		directory(Pack, Directory0),
