@@ -159,6 +159,7 @@ and run in both POSIX and Windows systems. Moreover, this tool can be
 used not only for handling Logtalk packs but also Prolog only packs,
 thus providing a stepping stone for sharing portable resources between
 multiple systems.</p>
+<p>This tool is the beta stage of development.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
 <p>On POSIX systems (Linux, macOS, …), the following shell commands are
@@ -363,8 +364,9 @@ predicate.</p>
 <div class="section" id="pack-versions">
 <h2>Pack versions<a class="headerlink" href="#pack-versions" title="Permalink to this headline"></a></h2>
 <p>A pack may specify multiple versions. Each version is described using a
-<code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause as illustrated in the example above. For
-details, see the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> API documentation.</p>
+<code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause as illustrated in the example above. The
+versions must be listed ordered from newest to oldest. For details, see
+the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> API documentation.</p>
 <p>Listing multiple versions allows the pack specification to be updated
 (by updating its registry) without forcing existing users into
 installing (or updating to) the latest version of the pack.</p>
@@ -392,16 +394,18 @@ version older than the specified one. For example,
 2.x or older version.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version newer than the specified one. For example,
-<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&gt;</span> <span class="pre">2.4</span></code> means that the pack requires a
+<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&gt;</span> <span class="pre">2:4</span></code> means that the pack requires a
 <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.5 or newer version.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">==</span> <span class="pre">Version</span></code> - the pack requires a dependency with a
-specific version. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">==</span> <span class="pre">2.1</span></code> means that the
+specific version. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">==</span> <span class="pre">2:1</span></code> means that the
 pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack version 2.1.x (thus, from
 version 2.1.0 to the latest patch for version 2.1).</p></li>
 </ul>
 <p>Dependencies are specified using a list of the elements above. For
-example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3]</span></code> means all 2.x
-versions but not older or newer versions.</p>
+example,
+<code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3,</span> <span class="pre">common::bytes</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2:4]</span></code> means
+all <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.x versions but not older or newer major versions
+plus all <code class="docutils literal notranslate"><span class="pre">common::bytes</span></code> versions starting from 2.4 (inclusive).</p>
 </div>
 <div class="section" id="pack-portability">
 <h2>Pack portability<a class="headerlink" href="#pack-portability" title="Permalink to this headline"></a></h2>

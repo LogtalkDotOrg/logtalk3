@@ -16,6 +16,8 @@ used not only for handling Logtalk packs but also Prolog only packs,
 thus providing a stepping stone for sharing portable resources between
 multiple systems.
 
+This tool is the beta stage of development.
+
 Requirements
 ------------
 
@@ -252,8 +254,9 @@ Pack versions
 -------------
 
 A pack may specify multiple versions. Each version is described using a
-``version/6`` predicate clause as illustrated in the example above. For
-details, see the ``pack_protocol`` API documentation.
+``version/6`` predicate clause as illustrated in the example above. The
+versions must be listed ordered from newest to oldest. For details, see
+the ``pack_protocol`` API documentation.
 
 Listing multiple versions allows the pack specification to be updated
 (by updating its registry) without forcing existing users into
@@ -286,17 +289,19 @@ used.
 
 -  ``Registry::Pack @> Version`` - the pack requires a dependency with
    version newer than the specified one. For example,
-   ``common::bits @> 2.4`` means that the pack requires a
+   ``common::bits @> 2:4`` means that the pack requires a
    ``common::bits`` 2.5 or newer version.
 
 -  ``Registry::Pack == Version`` - the pack requires a dependency with a
-   specific version. For example, ``common::bits == 2.1`` means that the
+   specific version. For example, ``common::bits == 2:1`` means that the
    pack requires a ``common::bits`` pack version 2.1.x (thus, from
    version 2.1.0 to the latest patch for version 2.1).
 
 Dependencies are specified using a list of the elements above. For
-example, ``[common::bits @>= 2, common::bits @< 3]`` means all 2.x
-versions but not older or newer versions.
+example,
+``[common::bits @>= 2, common::bits @< 3, common::bytes @>= 2:4]`` means
+all ``common::bits`` 2.x versions but not older or newer major versions
+plus all ``common::bytes`` versions starting from 2.4 (inclusive).
 
 Pack portability
 ----------------

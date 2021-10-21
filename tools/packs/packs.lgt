@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:19:0,
 		author is 'Paulo Moura',
 		date is 2021-10-21,
 		comment is 'Pack handling predicates.'
@@ -547,22 +547,33 @@
 	check_version(Operator, logtalk, Version, none) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
-		(	{call(Operator, Major:Minor:Patch, Version)} ->
+		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
+		(	{call(Operator, FixedVersion, Version)} ->
 			true
 		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
 		).
 	check_version(Operator, Registry::Pack, RequiredVersion, Install) :-
 		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
-			(	{call(Operator, InstalledVersion, RequiredVersion)} ->
+			fix_version_for_comparison(RequiredVersion, InstalledVersion, FixedVersion),
+			(	{call(Operator, FixedVersion, RequiredVersion)} ->
 				Install = none
 			;	Install = update(Registry, Pack, RequiredVersion)
 			)
 		;	pack_object(Pack, PackObject),
-			PackObject::version(RequiredVersion, _, _, _, _, _) ->
-			Install = install(Registry, Pack, RequiredVersion)
+			fix_version_for_availability(RequiredVersion, FixedVersion),
+			PackObject::version(FixedVersion, _, _, _, _, _) ->
+			Install = install(Registry, Pack, FixedVersion)
 		;	print_message(error, packs, 'Pack dependency not available: ~q::~q@~q'+[Registry, Pack, RequiredVersion]),
 			fail
 		).
+
+	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.
+	fix_version_for_comparison(_:_,   Major:Minor:_,     Major:Minor) :- !.
+	fix_version_for_comparison(_,     Major:_:_,         Major).
+
+	fix_version_for_availability(Major:Minor:Patch, Major:Minor:Patch) :- !.
+	fix_version_for_availability(Major:Minor,       Major:Minor:_) :- !.
+	fix_version_for_availability(Major,             Major:_:_).
 
 	install_dependencies([]).
 	install_dependencies([Dependency| Dependencies]) :-
