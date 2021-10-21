@@ -334,7 +334,7 @@ An example of a registry specification object would be:</p>
         stable,
         <span class="s">&#39;https://github.com/l-flat/lflat/archive/refs/tags/v2.1.0.tar.gz&#39;</span>,
         sha256 <span class="o">-</span> <span class="s">&#39;9c298c2a08c4e2a1972c14720ef1498e7f116c7cd8bf7702c8d22d8ff549b6a1&#39;</span>,
-        [logtalk <span class="o">&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
+        [logtalk <span class="o">@&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
         all
     ).
 
@@ -343,7 +343,7 @@ An example of a registry specification object would be:</p>
         stable,
         <span class="s">&#39;https://github.com/l-flat/lflat/archive/refs/tags/v2.0.2.tar.gz&#39;</span>,
         sha256 <span class="o">-</span> <span class="s">&#39;8774b3863efc03bb6c284935885dcf34f69f115656d2496a33a446b6199f3e19&#39;</span>,
-        [logtalk <span class="o">&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
+        [logtalk <span class="o">@&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
         all
     ).
 
@@ -375,30 +375,31 @@ better security, by registry and dependency names. When the pack depends
 on the Logtalk version itself, the reserved name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> can be
 used.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&gt;=</span> <span class="pre">Version</span></code> - the pack requires a dependency with
+<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;=</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version equal or above the specified one. For example,
-<code class="docutils literal notranslate"><span class="pre">logtalk</span> <span class="pre">&gt;=</span> <span class="pre">3:36:0</span></code> means that the pack requires Logtalk 3.36.0 or
+<code class="docutils literal notranslate"><span class="pre">logtalk</span> <span class="pre">&#64;&gt;=</span> <span class="pre">3:36:0</span></code> means that the pack requires Logtalk 3.36.0 or
 later version.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">=&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
-version up to the specified one. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">=&lt;</span> <span class="pre">2:1</span></code>
-means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack up to 2.1. This
-includes all previous versions and also all patches for version 2.1
-(e.g. 2.1.7, 2.1.8, …) but not version 2.2 or newer.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
+<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;=&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
+version up to the specified one. For example,
+<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;=&lt;</span> <span class="pre">2:1</span></code> means that the pack requires a
+<code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack up to 2.1. This includes all previous versions
+and also all patches for version 2.1 (e.g. 2.1.7, 2.1.8, …) but not
+version 2.2 or newer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version older than the specified one. For example,
-<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&lt;</span> <span class="pre">3</span></code> means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code>
+<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3</span></code> means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code>
 2.x or older version.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&gt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
+<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version newer than the specified one. For example,
-<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&gt;</span> <span class="pre">2.4</span></code> means that the pack requires a
+<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&gt;</span> <span class="pre">2.4</span></code> means that the pack requires a
 <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.5 or newer version.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">=</span> <span class="pre">Version</span></code> - the pack requires a dependency with a
-specific version. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">=</span> <span class="pre">2.1</span></code> means that the
+<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">==</span> <span class="pre">Version</span></code> - the pack requires a dependency with a
+specific version. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">==</span> <span class="pre">2.1</span></code> means that the
 pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack version 2.1.x (thus, from
 version 2.1.0 to the latest patch for version 2.1).</p></li>
 </ul>
 <p>Dependencies are specified using a list of the elements above. For
-example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&lt;</span> <span class="pre">3]</span></code> means all 2.x
+example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3]</span></code> means all 2.x
 versions but not older or newer versions.</p>
 </div>
 <div class="section" id="pack-portability">

@@ -223,7 +223,7 @@ An example of a registry specification object would be:
            stable,
            'https://github.com/l-flat/lflat/archive/refs/tags/v2.1.0.tar.gz',
            sha256 - '9c298c2a08c4e2a1972c14720ef1498e7f116c7cd8bf7702c8d22d8ff549b6a1',
-           [logtalk >= 3:36:0],
+           [logtalk @>= 3:36:0],
            all
        ).
 
@@ -232,7 +232,7 @@ An example of a registry specification object would be:
            stable,
            'https://github.com/l-flat/lflat/archive/refs/tags/v2.0.2.tar.gz',
            sha256 - '8774b3863efc03bb6c284935885dcf34f69f115656d2496a33a446b6199f3e19',
-           [logtalk >= 3:36:0],
+           [logtalk @>= 3:36:0],
            all
        ).
 
@@ -267,34 +267,35 @@ better security, by registry and dependency names. When the pack depends
 on the Logtalk version itself, the reserved name ``logtalk`` can be
 used.
 
--  ``Registry::Pack >= Version`` - the pack requires a dependency with
+-  ``Registry::Pack @>= Version`` - the pack requires a dependency with
    version equal or above the specified one. For example,
-   ``logtalk >= 3:36:0`` means that the pack requires Logtalk 3.36.0 or
+   ``logtalk @>= 3:36:0`` means that the pack requires Logtalk 3.36.0 or
    later version.
 
--  ``Registry::Pack =< Version`` - the pack requires a dependency with
-   version up to the specified one. For example, ``common::bits =< 2:1``
-   means that the pack requires a ``common::bits`` pack up to 2.1. This
-   includes all previous versions and also all patches for version 2.1
-   (e.g. 2.1.7, 2.1.8, ...) but not version 2.2 or newer.
+-  ``Registry::Pack @=< Version`` - the pack requires a dependency with
+   version up to the specified one. For example,
+   ``common::bits @=< 2:1`` means that the pack requires a
+   ``common::bits`` pack up to 2.1. This includes all previous versions
+   and also all patches for version 2.1 (e.g. 2.1.7, 2.1.8, ...) but not
+   version 2.2 or newer.
 
--  ``Registry::Pack < Version`` - the pack requires a dependency with
+-  ``Registry::Pack @< Version`` - the pack requires a dependency with
    version older than the specified one. For example,
-   ``common::bits < 3`` means that the pack requires a ``common::bits``
+   ``common::bits @< 3`` means that the pack requires a ``common::bits``
    2.x or older version.
 
--  ``Registry::Pack > Version`` - the pack requires a dependency with
+-  ``Registry::Pack @> Version`` - the pack requires a dependency with
    version newer than the specified one. For example,
-   ``common::bits > 2.4`` means that the pack requires a
+   ``common::bits @> 2.4`` means that the pack requires a
    ``common::bits`` 2.5 or newer version.
 
--  ``Registry::Pack = Version`` - the pack requires a dependency with a
-   specific version. For example, ``common::bits = 2.1`` means that the
+-  ``Registry::Pack == Version`` - the pack requires a dependency with a
+   specific version. For example, ``common::bits == 2.1`` means that the
    pack requires a ``common::bits`` pack version 2.1.x (thus, from
    version 2.1.0 to the latest patch for version 2.1).
 
 Dependencies are specified using a list of the elements above. For
-example, ``[common::bits >= 2, common::bits < 3]`` means all 2.x
+example, ``[common::bits @>= 2, common::bits @< 3]`` means all 2.x
 versions but not older or newer versions.
 
 Pack portability

@@ -22,9 +22,9 @@
 :- protocol(pack_protocol).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2021-10-18,
+		date is 2021-10-21,
 		comment is 'Pack specification protocol.'
 	]).
 
@@ -67,7 +67,7 @@
 			'Status' - 'Version development status. E.g ``stable``, ``rc``, ``beta``, ``alpha``, or ``deprecated``.',
 			'URL' - 'File URL for a local directory or download HTTPS URL for the pack archive.',
 			'Checksum' - 'A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be ``sha256``. For ``file://`` URLs of local directories, use ``none``.',
-			'Dependencies' - 'A list of the pack dependencies. Each dependency is a pair ``Name-Closure`` where ``Name`` identifies the dependency and ``Closure`` allows checking version compatibility.',
+			'Dependencies' - 'A list of the pack dependencies. Each dependency is a compound term ``Registry::Pack Operator Version`` where ``Operator`` is a term comparison operator. The atom ``logtalk`` can also be used in place of `Registry::Pack``.',
 			'Dependency names' - 'Either ``Registry::Dependency`` or just ``Dependency`` where both ``Registry`` and ``Dependency`` are atoms.',
 			'Portability' - 'Either the atom ``all`` or a list of the supported backend Prolog compilers (using the identifier atoms use by the ``prolog_dialect`` flag).'
 		]

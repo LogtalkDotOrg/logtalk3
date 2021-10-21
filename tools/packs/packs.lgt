@@ -396,8 +396,10 @@
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
 		;	registry_pack(Registry, Pack, PackObject) ->
-			(	PackObject::version(Version, _, URL, CheckSum, _, _) ->
+			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, _) ->
+				check_dependencies(Dependencies, Installs),
 				print_message(comment, packs, installing_pack(Registry, Pack, Version)),
+				install_dependencies(Installs),
 				install_pack(Registry, Pack, Version, URL, CheckSum, Options),
 				print_message(comment, packs, pack_installed(Registry, Pack, Version))
 			;	print_message(error, packs, unknown_pack_version(Registry, Pack, Version)),
@@ -416,8 +418,10 @@
 		(	installed_pack(_, Pack, _, _) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
-		;	latest_pack_version(Registry, Pack, LatestVersion, URL, CheckSum) ->
+		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies) ->
+			check_dependencies(Dependencies, Installs),
 			print_message(comment, packs, installing_pack(Registry, Pack, LatestVersion)),
+			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, []),
 			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion))
 		;	print_message(error, packs, unknown_pack(Registry, Pack)),
@@ -507,6 +511,54 @@
 			delete_archives(Registry, Pack)
 		;	true
 		).
+
+	check_dependencies([], []).
+	check_dependencies([Dependency| Dependencies], [Install| Installs]) :-
+		check_dependency(Dependency, Install),
+		check_dependencies(Dependencies, Installs).
+
+	check_dependency(Dependency, Install) :-
+		Dependency =.. [Operator, Pack, Version],
+		check_availability(Pack),
+		check_version(Operator, Pack, Version, Install).
+
+	check_availability(logtalk).
+	check_availability(Registry::Pack) :-
+		(	registry_pack(Registry, Pack, _) ->
+			true
+		;	print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
+			fail
+		).
+
+	check_version(Operator, logtalk, Version, none) :-
+		!,
+		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
+		(	{call(Operator, Major:Minor:Patch, Version)} ->
+			true
+		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
+		).
+	check_version(Operator, Registry::Pack, RequiredVersion, none) :-
+		(	installed_pack(Registry, Pack, InstalledVersion, _),
+			{call(Operator, InstalledVersion, RequiredVersion)} ->
+			Install = none
+		;	compatible_version(Registry, Pack, RequiredVersion, CompatibleVersion) ->
+			Install = install(Registry, Pack, CompatibleVersion)
+		;	print_message(error, packs, 'Pack dependency not available: ~q::~q@~q'+[Registry, Pack, RequiredVersion]),
+			fail
+		).
+
+	compatible_version(Registry, Pack, RequiredVersion, RequiredVersion) :-
+		registry_pack(Registry, Pack, PackObject), !,
+		PackObject::version(RequiredVersion, _, _, _, _, _).
+
+	install_dependencies([]).
+	install_dependencies([Dependency| Dependencies]) :-
+		install_dependency(Dependency),
+		install_dependencies(Dependencies).
+
+	install_dependency(none).
+	install_dependency(install(Registry, Pack, Version)) :-
+		install(Registry, Pack, Version).
 
 	% uninstall pack predicates
 
@@ -649,10 +701,12 @@
 		print_message(comment, packs, @'Packs updating completed').
 
 	update_pack(Registry, Pack, Version, Options) :-
-		(	latest_pack_version(Registry, Pack, LatestVersion, URL, CheckSum),
+		(	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies),
 			Version @< LatestVersion ->
+			check_dependencies(Dependencies, Installs),
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
 			uninstall_pack(Registry, Pack, Options),
+			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
 			print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion))
 		;	print_message(comment, packs, up_to_date_pack(Registry, Pack, Version))
@@ -834,14 +888,14 @@
 
 	outdated_pack(Registry, Pack, Version, LatestVersion) :-
 		installed_pack(Registry, Pack, Version, _),
-		latest_pack_version(Registry, Pack, LatestVersion, _, _),
+		latest_version(Registry, Pack, LatestVersion, _, _, _),
 		Version @< LatestVersion.
 
-	latest_pack_version(Registry, Pack, LatestVersion, URL, CheckSum) :-
+	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies) :-
 		registry_pack(Registry, Pack, PackObject),
 		findall(
 			Version-URL-CheckSum,
-			PackObject::version(Version, _, URL, CheckSum, _, _),
+			PackObject::version(Version, _, URL, CheckSum, Dependencies, _),
 			Versions
 		),
 		sort(1, (@>), Versions, [LatestVersion-URL-CheckSum| _]).

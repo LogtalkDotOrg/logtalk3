@@ -184,8 +184,8 @@
 <p>Pack specification protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:10:0</div>
-<div class="line"><strong>Date:</strong> 2021-10-18</div>
+<div class="line"><strong>Version:</strong> 0:11:0</div>
+<div class="line"><strong>Date:</strong> 2021-10-21</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -342,7 +342,7 @@
 <li><p>Status: Version development status. E.g <code class="docutils literal notranslate"><span class="pre">stable</span></code>, <code class="docutils literal notranslate"><span class="pre">rc</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, or <code class="docutils literal notranslate"><span class="pre">deprecated</span></code>.</p></li>
 <li><p>URL: File URL for a local directory or download HTTPS URL for the pack archive.</p></li>
 <li><p>Checksum: A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be <code class="docutils literal notranslate"><span class="pre">sha256</span></code>. For <code class="docutils literal notranslate"><span class="pre">file://</span></code> URLs of local directories, use <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
-<li><p>Dependencies: A list of the pack dependencies. Each dependency is a pair <code class="docutils literal notranslate"><span class="pre">Name-Closure</span></code> where <code class="docutils literal notranslate"><span class="pre">Name</span></code> identifies the dependency and <code class="docutils literal notranslate"><span class="pre">Closure</span></code> allows checking version compatibility.</p></li>
+<li><p>Dependencies: A list of the pack dependencies. Each dependency is a compound term <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a term comparison operator. The atom <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> can also be used in place of <cite>Registry::Pack`</cite>.</p></li>
 <li><p>Dependency names: Either <code class="docutils literal notranslate"><span class="pre">Registry::Dependency</span></code> or just <code class="docutils literal notranslate"><span class="pre">Dependency</span></code> where both <code class="docutils literal notranslate"><span class="pre">Registry</span></code> and <code class="docutils literal notranslate"><span class="pre">Dependency</span></code> are atoms.</p></li>
 <li><p>Portability: Either the atom <code class="docutils literal notranslate"><span class="pre">all</span></code> or a list of the supported backend Prolog compilers (using the identifier atoms use by the <code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code> flag).</p></li>
 </ul>
