@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
 		date is 2021-10-21,
 		comment is 'Pack handling predicates.'
@@ -188,7 +188,7 @@
 	:- public(uninstall/2).
 	:- mode(uninstall(+atom, ++list(compound)), zero_or_one).
 	:- info(uninstall/2, [
-		comment is 'Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		comment is 'Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned or have dependents and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force deletion if the pack is pinned. Default is ``false``.',
@@ -200,7 +200,7 @@
 	:- public(uninstall/1).
 	:- mode(uninstall(+atom), zero_or_one).
 	:- info(uninstall/1, [
-		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.',
+		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, have dependents, not installed, or unknown.',
 		argnames is ['Pack']
 	]).
 
@@ -583,6 +583,11 @@
 			(	Pinned == true,
 				member(force(false), Options) ->
 				print_message(error, packs, cannot_uninstall_pinned_pack(Pack)),
+				fail
+			;	dependents(Registry, Pack, Dependents),
+				Dependents \== [],
+				member(force(false), Options) ->
+				print_message(error, packs, cannot_uninstall_pack_with_dependents(Pack, Dependents)),
 				fail
 			;	print_message(comment, packs, uninstalling_pack(Registry, Pack)),
 				uninstall_pack(Registry, Pack, Options),

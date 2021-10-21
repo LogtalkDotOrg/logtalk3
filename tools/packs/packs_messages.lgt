@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2021-10-20,
+		date is 2021-10-21,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -217,6 +217,11 @@
 
 	message_tokens(cannot_uninstall_pinned_pack(Pack)) -->
 		['Cannot uninstall pinned pack: ~q'-[Pack], nl].
+
+	message_tokens(cannot_uninstall_pack_with_dependents(Pack, Dependents)) -->
+		[	'Cannot uninstall pack with dependents: ~q'-[Pack], nl,
+			'  The following packs would break: ~q'-[Dependents], nl
+		].
 
 	message_tokens(cannot_update_pinned_pack(Pack)) -->
 		['Cannot update pinned pack: ~q'-[Pack], nl].

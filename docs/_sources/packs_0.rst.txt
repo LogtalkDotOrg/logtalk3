@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:17:0
+| **Version:** 0:18:0
 | **Date:** 2021-10-21
 
 | **Compilation flags:**
@@ -524,7 +524,7 @@ Updades all outdated packs (that are not pinned) using default options.
 ``uninstall/2``
 ^^^^^^^^^^^^^^^
 
-Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+Uninstalls a pack using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned or have dependents and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -553,7 +553,7 @@ Uninstalls a pack using the specified options. Fails if the pack is unknown or n
 ``uninstall/1``
 ^^^^^^^^^^^^^^^
 
-Uninstalls a pack using default options. Fails if the pack is pinned, not installed, or unknown.
+Uninstalls a pack using default options. Fails if the pack is pinned, have dependents, not installed, or unknown.
 
 | **Compilation flags:**
 |    ``static``
