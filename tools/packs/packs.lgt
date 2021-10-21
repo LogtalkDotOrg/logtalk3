@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:19:1,
+		version is 0:20:0,
 		author is 'Paulo Moura',
 		date is 2021-10-21,
 		comment is 'Pack handling predicates.'
@@ -1078,7 +1078,7 @@
 	save_version(Path, Version) :-
 		path_concat(Path, 'VERSION.packs', File),
 		open(File, write, Stream),
-		writeq(Stream, Version), write(Stream, '.\n'),
+		write_canonical(Stream, Version), write(Stream, '.\n'),
 		close(Stream).
 
 	read_version(Path, Version) :-
