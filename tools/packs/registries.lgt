@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:19:1,
+		version is 0:20:0,
 		author is 'Paulo Moura',
 		date is 2021-10-22,
 		comment is 'Registry handling predicates.'
@@ -251,7 +251,11 @@
 			sub_atom(URL, 0, _, _, 'file://') ->
 			add_directory(Registry, URL, Path, Options)
 		;	Extension == '.git' ->
-			clone(Registry, URL, Path, Options)
+			(	Name \== Registry ->
+				print_message(error, packs, registry_name_must_be(Name)),
+				fail
+			;	clone(Registry, URL, Path, Options)
+			)
 		;	^^supported_archive(Extension) ->
 			download(Registry, URL, Archive, Options),
 			uncompress(Registry, Archive, Path, Options)

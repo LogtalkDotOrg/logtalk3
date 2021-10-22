@@ -75,6 +75,8 @@
 
 	% registry add messages
 
+	message_tokens(registry_name_must_be(Name)) -->
+		['Registry name must be:  ~q'-[Name], nl].
 
 	% registry update messages
 
