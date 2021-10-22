@@ -244,7 +244,8 @@ provides. The registry name is ideally a valid unquoted atom. The
 registry directory must contain at least two Logtalk source files:</p>
 <ul class="simple">
 <li><p>A file defining an object named after the registry with a
-<code class="docutils literal notranslate"><span class="pre">_registry</span></code> suffix, implementing the <code class="docutils literal notranslate"><span class="pre">registry_protocol</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">_registry</span></code> suffix, implementing the <code class="docutils literal notranslate"><span class="pre">registry_protocol</span></code>. This
+naming convention helps preventing name conflicts.</p></li>
 <li><p>A loader file (named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">loader.logtalk</span></code>) that loads
 the registry object file and all pack object files.</p></li>
 </ul>
@@ -276,12 +277,37 @@ the registry object file and all pack object files.</p></li>
 files (individual packs can use a different license, however). The path
 to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the registry is added. It can
 also be queried using the <code class="docutils literal notranslate"><span class="pre">registries::directory/2</span></code> predicate.</p>
+<p>Summarizing the required directory structure using the above example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>jdoe_awesome_packs
+    <span class="nv">LICENSE</span>
+    <span class="nv">README</span>.md
+    jdoe_awesome_packs_registry.lgt
+    loader.lgt
+    foo_pack.lgt
+    bar_pack.lgt
+    ...
+</pre></div>
+</div>
+<p>With the contents of the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file being:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="k">logtalk_load</span>(jdoe_awesome_packs_registry),
+    <span class="k">logtalk_load</span>(foo_pack),
+    <span class="k">logtalk_load</span>(bar_pack),
+    ...
+)).
+</pre></div>
+</div>
+<p>It would be of course possible to have all objects in a single source
+file. But having a file per object and a loader file helps maintenance
+and it’s also a tool requirement for applying safety procedures to the
+source file contents and thus successfully loding the registry and pack
+specs.</p>
 </div>
 <div class="section" id="registry-handling">
 <h2>Registry handling<a class="headerlink" href="#registry-handling" title="Permalink to this headline"></a></h2>
 <p>Registries can be added using the <code class="docutils literal notranslate"><span class="pre">registries::add/1-3</span></code> predicates,
-which take a registry URL. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(<span class="s">&#39;https://github.com/some_user/reg.git&#39;</span>).
+which take a registry URL. Using the example above:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(<span class="s">&#39;https://github.com/jdoe/jdoe_awesome_packs.git&#39;</span>).
 </pre></div>
 </div>
 <p>HTTPS URLs must end with either a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension or a an archive
@@ -292,10 +318,37 @@ downloadable archive (using a <code class="docutils literal notranslate"><span c
 <code class="docutils literal notranslate"><span class="pre">registries::add/2-3</span></code> predicates <strong>must</strong> be used as the registry name
 cannot in general be inferred from the URL basename or from the archived
 directory name. The registry argument must also be the declared registry
-name in the registry specification object.</p>
-<p>To update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
+name in the registry specification object. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(
+        jdoe_awesome_packs,
+        <span class="s">&#39;https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip&#39;</span>
+     ).
+</pre></div>
+</div>
+<p>The added registries can be listed using the <code class="docutils literal notranslate"><span class="pre">registries::list/0</span></code>
+predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>list.
+
+<span class="c">% Defined registries:</span>
+<span class="c">%   jdoe_awesome_packs (git)</span>
+<span class="c">%   ...</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">registries::describe/1</span></code> predicate can be used to print the
+details of a registry:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>describe(jdoe_awesome_packs).
+
+<span class="c">% Registry:    jdoe_awesome_packs</span>
+<span class="c">% Description: John Doe awesome packs</span>
+<span class="c">% Home:        https://example.com/jdoe_awesome_packs</span>
+<span class="c">% Cloning URL: https://github.com/jdoe/jdoe_awesome_packs.git</span>
+<span class="c">% Archive URL: https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip</span>
+</pre></div>
+</div>
+<p>To update all registries, use the <code class="docutils literal notranslate"><span class="pre">registries::update/0</span></code> predicate. To
+update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
 Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
-predicate. By default, registries with installed packs cannot be
+predicate. By default, any registries with installed packs cannot be
 deleted. If you force deletion (by using the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option),
 you can use the <code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned
 packs that are installed.</p>
@@ -320,9 +373,11 @@ without consequences for the original registry source files.</p>
 <h2>Pack specification<a class="headerlink" href="#pack-specification" title="Permalink to this headline"></a></h2>
 <p>A pack is specified using a Logtalk source file defining an object that
 implements the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code>. The source file should be named after
-the pack with a <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. The file must be available from a
-declared pack registry. The pack name is ideally a valid unquoted atom.
-An example of a registry specification object would be:</p>
+the pack with a <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. This naming convention helps
+preventing name conflicts, notably with the pack own objects. The file
+must be available from a declared pack registry. The pack name is
+ideally a valid unquoted atom. An example of a registry specification
+object would be:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(lflat_pack,
     <span class="k">implements</span>(pack_protocol)).
 

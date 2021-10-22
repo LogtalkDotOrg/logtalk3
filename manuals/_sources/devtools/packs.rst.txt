@@ -120,7 +120,8 @@ provides. The registry name is ideally a valid unquoted atom. The
 registry directory must contain at least two Logtalk source files:
 
 -  A file defining an object named after the registry with a
-   ``_registry`` suffix, implementing the ``registry_protocol``.
+   ``_registry`` suffix, implementing the ``registry_protocol``. This
+   naming convention helps preventing name conflicts.
 
 -  A loader file (named ``loader.lgt`` or ``loader.logtalk``) that loads
    the registry object file and all pack object files.
@@ -156,15 +157,45 @@ files (individual packs can use a different license, however). The path
 to the ``README.md`` file is printed when the registry is added. It can
 also be queried using the ``registries::directory/2`` predicate.
 
+Summarizing the required directory structure using the above example:
+
+::
+
+   jdoe_awesome_packs
+       LICENSE
+       README.md
+       jdoe_awesome_packs_registry.lgt
+       loader.lgt
+       foo_pack.lgt
+       bar_pack.lgt
+       ...
+
+With the contents of the ``loader.lgt`` file being:
+
+::
+
+   :- initialization((
+       logtalk_load(jdoe_awesome_packs_registry),
+       logtalk_load(foo_pack),
+       logtalk_load(bar_pack),
+       ...
+   )).
+
+It would be of course possible to have all objects in a single source
+file. But having a file per object and a loader file helps maintenance
+and it's also a tool requirement for applying safety procedures to the
+source file contents and thus successfully loding the registry and pack
+specs.
+
 Registry handling
 -----------------
 
 Registries can be added using the ``registries::add/1-3`` predicates,
-which take a registry URL. For example:
+which take a registry URL. Using the example above:
 
 ::
 
-   | ?- registries::add('https://github.com/some_user/reg.git').
+   | ?- registries::add('https://github.com/jdoe/jdoe_awesome_packs.git').
 
 HTTPS URLs must end with either a ``.git`` extension or a an archive
 extension. Git cloning URLs are preferred but a registry can also be
@@ -175,11 +206,43 @@ For registries made available using an archive, the
 ``registries::add/2-3`` predicates **must** be used as the registry name
 cannot in general be inferred from the URL basename or from the archived
 directory name. The registry argument must also be the declared registry
-name in the registry specification object.
+name in the registry specification object. For example:
 
-To update a registry, use the ``registries::update/1-2`` predicates.
+::
+
+   | ?- registries::add(
+           jdoe_awesome_packs,
+           'https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip'
+        ).
+
+The added registries can be listed using the ``registries::list/0``
+predicate:
+
+::
+
+   | ?- registries::list.
+
+   % Defined registries:
+   %   jdoe_awesome_packs (git)
+   %   ...
+
+The ``registries::describe/1`` predicate can be used to print the
+details of a registry:
+
+::
+
+   | ?- registries::describe(jdoe_awesome_packs).
+
+   % Registry:    jdoe_awesome_packs
+   % Description: John Doe awesome packs
+   % Home:        https://example.com/jdoe_awesome_packs
+   % Cloning URL: https://github.com/jdoe/jdoe_awesome_packs.git
+   % Archive URL: https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip
+
+To update all registries, use the ``registries::update/0`` predicate. To
+update a registry, use the ``registries::update/1-2`` predicates.
 Registries can also be deleted using the ``registries::delete/1-2``
-predicate. By default, registries with installed packs cannot be
+predicate. By default, any registries with installed packs cannot be
 deleted. If you force deletion (by using the ``force(true)`` option),
 you can use the ``packs::orphaned/0`` predicate to list any orphaned
 packs that are installed.
@@ -209,9 +272,11 @@ Pack specification
 
 A pack is specified using a Logtalk source file defining an object that
 implements the ``pack_protocol``. The source file should be named after
-the pack with a ``_pack`` suffix. The file must be available from a
-declared pack registry. The pack name is ideally a valid unquoted atom.
-An example of a registry specification object would be:
+the pack with a ``_pack`` suffix. This naming convention helps
+preventing name conflicts, notably with the pack own objects. The file
+must be available from a declared pack registry. The pack name is
+ideally a valid unquoted atom. An example of a registry specification
+object would be:
 
 ::
 
