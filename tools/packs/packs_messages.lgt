@@ -22,7 +22,7 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:19:0,
 		author is 'Paulo Moura',
 		date is 2021-10-22,
 		comment is 'Packs default message translations.'
@@ -300,6 +300,10 @@
 		[' (archive; pinned)'-[], nl].
 	registry_data(archive, false) -->
 		[' (archive)'-[], nl].
+	registry_data(directory, true) -->
+		[' (directory; pinned)'-[], nl].
+	registry_data(directory, false) -->
+		[' (directory)'-[], nl].
 
 	pinned(true) -->
 		[' (pinned)'-[], nl].

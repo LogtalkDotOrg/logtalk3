@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2021-10-20,
+		date is 2021-10-22,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -35,9 +35,9 @@
 	]).
 
 	:- public(verify_commands_availability/0).
-	:- mode(verify_commands_availability, one).
+	:- mode(verify_commands_availability, zero_or_one).
 	:- info(verify_commands_availability/0, [
-		comment is 'Verify required shell commands availability.'
+		comment is 'Verify required shell commands availability. Fails printing an error message if a command is missing.'
 	]).
 
 	:- public(help/0).
@@ -112,15 +112,15 @@
 	:- protected(load_registry/1).
 	:- mode(load_registry(+atom), zero_or_one).
 	:- info(load_registry/1, [
-		comment is 'Loads all registry files.',
-		argnames is ['Path']
+		comment is 'Loads all registry files from the given directory.',
+		argnames is ['Directory']
 	]).
 
 	:- protected(tar_command/1).
 	:- mode(tar_command(-atom), one).
 	:- info(tar_command/1, [
-		comment is 'Returns the name of the tar command to be used.',
-		argnames is ['Tar']
+		comment is 'Returns the name of the tar command to be used depending on the operating-system.',
+		argnames is ['Command']
 	]).
 
 	:- protected(supported_archive/1).
@@ -171,21 +171,21 @@
 	verify_commands_availability(unknown) :-
 		verify_commands_availability(unix).
 
-	load_registry(Registry) :-
-		(	path_concat(Registry, 'loader.logtalk',  Loader),
+	load_registry(Directory) :-
+		(	path_concat(Directory, 'loader.logtalk',  Loader),
 			file_exists(Loader) ->
-			load_registry_files(Registry, Loader)
-		;	path_concat(Registry, 'loader.lgt',  Loader),
+			load_registry_files(Directory, Loader)
+		;	path_concat(Directory, 'loader.lgt',  Loader),
 			file_exists(Loader) ->
-			load_registry_files(Registry, Loader)
-		;	print_message(warning, packs, registry_loader_file_missing(Registry)),
+			load_registry_files(Directory, Loader)
+		;	print_message(warning, packs, registry_loader_file_missing(Directory)),
 			fail
 		).
 
-	load_registry_files(Registry, Loader) :-
+	load_registry_files(Directory, Loader) :-
 		(	logtalk_load(Loader, [reload(always), source_data(on), hook(registry_loader_hook)]) ->
 			true
-		;	print_message(warning, packs, registry_loading_failed(Registry))
+		;	print_message(warning, packs, registry_loading_failed(Directory))
 		).
 
 	command(Command, FailureMessage) :-

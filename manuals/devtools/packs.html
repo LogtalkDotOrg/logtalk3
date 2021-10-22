@@ -306,11 +306,15 @@ predicates.</p>
 <div class="section" id="registry-development">
 <h2>Registry development<a class="headerlink" href="#registry-development" title="Permalink to this headline"></a></h2>
 <p>To simplify registry development and testing, use a local directory and
-a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL when calling the <code class="docutils literal notranslate"><span class="pre">registries::add/2</span></code> predicate. If
-the directory is a git repo, the tool will clone it when adding it.
+a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL when calling the <code class="docutils literal notranslate"><span class="pre">registries::add/2</span></code> predicate. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(<span class="s">&#39;file:///home/jdoe/work/my_pack_collection&#39;</span>).
+</pre></div>
+</div>
+<p>If the directory is a git repo, the tool will clone it when adding it.
 Otherwise, the files in the directory are copied to the registry
 definition directory. This allows the registry to be added and deleted
-without consequences for the registry source files.</p>
+without consequences for the original registry source files.</p>
 </div>
 <div class="section" id="pack-specification">
 <h2>Pack specification<a class="headerlink" href="#pack-specification" title="Permalink to this headline"></a></h2>
@@ -652,11 +656,13 @@ startup, the above definition could be added there.</p>
 </div>
 <div class="section" id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
+<p>Ciao Prolog 1.20.0 cannot be used due to non-standard support for
+multifile predicates.</p>
 <p>When using GNU Prolog 1.5.0 as the backend on Windows, you may get an
 error on <code class="docutils literal notranslate"><span class="pre">directory_files/2</span></code> calls. For details and a workaround, see:</p>
 <p><a class="reference external" href="https://github.com/didoudiaz/gprolog/issues/4">https://github.com/didoudiaz/gprolog/issues/4</a></p>
 <p>Using SICStus Prolog as the backend on Windows doesn’t currently work.</p>
-<p>XSB have an odd bug (liekly in its parser) when reading files that may
+<p>XSB have an odd bug (likely in its parser) when reading files that may
 cause a pack installed version to be reported as the <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>
 atom.</p>
 </div>

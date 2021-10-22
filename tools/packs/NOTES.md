@@ -203,11 +203,14 @@ Registry development
 --------------------
 
 To simplify registry development and testing, use a local directory and a
-`file://` URL when calling the `registries::add/2` predicate. If the directory
-is a git repo, the tool will clone it when adding it. Otherwise, the files in
-the directory are copied to the registry definition directory. This allows the
-registry to be added and deleted without consequences for the registry source
-files.
+`file://` URL when calling the `registries::add/2` predicate. For example:
+
+	| ?- registries::add('file:///home/jdoe/work/my_pack_collection').
+
+If the directory is a git repo, the tool will clone it when adding it.
+Otherwise, the files in the directory are copied to the registry definition
+directory. This allows the registry to be added and deleted without
+consequences for the original registry source files.
 
 
 Pack specification
@@ -571,6 +574,9 @@ startup, the above definition could be added there.
 Known issues
 ------------
 
+Ciao Prolog 1.20.0 cannot be used due to non-standard support for
+multifile predicates.
+
 When using GNU Prolog 1.5.0 as the backend on Windows, you may get an
 error on `directory_files/2` calls. For details and a workaround, see:
 
@@ -578,5 +584,5 @@ https://github.com/didoudiaz/gprolog/issues/4
 
 Using SICStus Prolog as the backend on Windows doesn't currently work.
 
-XSB have an odd bug (liekly in its parser) when reading files that may
+XSB have an odd bug (likely in its parser) when reading files that may
 cause a pack installed version to be reported as the `end_of_file` atom.

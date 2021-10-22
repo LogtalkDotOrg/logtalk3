@@ -184,8 +184,8 @@
 <p>Common predicates for the packs tool objects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:15:0</div>
-<div class="line"><strong>Date:</strong> 2021-10-20</div>
+<div class="line"><strong>Version:</strong> 0:16:0</div>
+<div class="line"><strong>Date:</strong> 2021-10-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -262,7 +262,7 @@
 <div id="verify_commands_availability/0"> </div></div>
 <div class="section" id="verify-commands-availability-0">
 <span id="packs-common-0-verify-commands-availability-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">verify_commands_availability/0</span></code></a><a class="headerlink" href="#verify-commands-availability-0" title="Permalink to this headline"></a></h3>
-<p>Verify required shell commands availability.</p>
+<p>Verify required shell commands availability. Fails printing an error message if a command is missing.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -272,7 +272,7 @@
 <div class="line-block">
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">verify_commands_availability</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">verify_commands_availability</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -488,7 +488,7 @@
 <div id="load_registry/1"> </div></div>
 <div class="section" id="load-registry-1">
 <span id="packs-common-0-load-registry-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">load_registry/1</span></code></a><a class="headerlink" href="#load-registry-1" title="Permalink to this headline"></a></h3>
-<p>Loads all registry files.</p>
+<p>Loads all registry files from the given directory.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -498,7 +498,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">load_registry(Path)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">load_registry(Directory)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -509,7 +509,7 @@
 <div id="tar_command/1"> </div></div>
 <div class="section" id="tar-command-1">
 <span id="packs-common-0-tar-command-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tar_command/1</span></code></a><a class="headerlink" href="#tar-command-1" title="Permalink to this headline"></a></h3>
-<p>Returns the name of the tar command to be used.</p>
+<p>Returns the name of the tar command to be used depending on the operating-system.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -519,7 +519,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">tar_command(Tar)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tar_command(Command)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">

@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:15:0
-| **Date:** 2021-10-20
+| **Version:** 0:16:0
+| **Date:** 2021-10-22
 
 | **Compilation flags:**
 |    ``static``
@@ -66,13 +66,13 @@ Setup registries and packs directory structure.
 ``verify_commands_availability/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Verify required shell commands availability.
+Verify required shell commands availability. Fails printing an error message if a command is missing.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``verify_commands_availability`` - ``one``
+|    ``verify_commands_availability`` - ``zero_or_one``
 
 
 ------------
@@ -318,13 +318,13 @@ Executes a shell command. Prints an error message and fails if the command fails
 ``load_registry/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Loads all registry files.
+Loads all registry files from the given directory.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``load_registry(Path)``
+|    ``load_registry(Directory)``
 | **Mode and number of proofs:**
 |    ``load_registry(+atom)`` - ``zero_or_one``
 
@@ -341,13 +341,13 @@ Loads all registry files.
 ``tar_command/1``
 ^^^^^^^^^^^^^^^^^
 
-Returns the name of the tar command to be used.
+Returns the name of the tar command to be used depending on the operating-system.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``tar_command(Tar)``
+|    ``tar_command(Command)``
 | **Mode and number of proofs:**
 |    ``tar_command(-atom)`` - ``one``
 

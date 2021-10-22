@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:21:0,
 		author is 'Paulo Moura',
 		date is 2021-10-22,
 		comment is 'Registry handling predicates.'
@@ -32,7 +32,7 @@
 	:- public(list/0).
 	:- mode(list, one).
 	:- info(list/0, [
-		comment is 'Prints a list of all defined registries.'
+		comment is 'Prints a list of all defined registries, including how defined (``git``, ``archive``, or ``directory``) and  if they are pinned.'
 	]).
 
 	:- public(describe/1).
@@ -45,7 +45,7 @@
 	:- public(defined/3).
 	:- mode(defined(?atom, ?atom, ?boolean), zero_or_more).
 	:- info(defined/3, [
-		comment is 'Enumerates by backtracking all defined registries and how they are defined (``git`` or ``archive``) plus if they are pinned.',
+		comment is 'Enumerates by backtracking all defined registries and how they are defined (``git``, ``archive``, or ``directory``) plus if they are pinned.',
 		argnames is ['Registry', 'HowDefined', 'Pinned']
 	]).
 
@@ -204,9 +204,15 @@
 		directory_files(Directory, Registries, [type(directory), dot_files(false), paths(relative)]),
 		member(Registry, Registries),
 		path_concat(Directory, Registry, Path),
-		path_concat(Path, '.git', Git),
-		(	directory_exists(Git) ->
+		read_url(Path, URL),
+		decompose_file_name(URL, _, Name, Extension),
+		(	Extension == '.git' ->
 			HowDefined = git
+		;	Name == Registry ->
+			HowDefined = directory
+		;	Name == Extension, Extension == '' ->
+			% URL ends with a /
+			HowDefined = directory
 		;	HowDefined = archive
 		),
 		(	pinned(Registry) ->
@@ -263,6 +269,7 @@
 			print_message(error, packs, unsupported_archive_format(Archive)),
 			fail
 		),
+		save_url(Path, URL),
 		^^load_registry(Path),
 		retractall(deleted_registry_(Registry)),
 		(	member(clean(true), Options) ->
@@ -528,6 +535,25 @@
 		check(atom, Registry),
 		directory(Registry, Directory),
 		path_concat(Directory, 'PINNED.packs', File).
+
+	% registry URL definition predicates
+
+	save_url(Path, URL) :-
+		path_concat(Path, 'URL.packs', File),
+		open(File, write, Stream),
+		writeq(Stream, URL), write(Stream, '.\n'),
+		close(Stream).
+
+	read_url(Path, URL) :-
+		path_concat(Path, 'URL.packs', File),
+		open(File, read, Stream),
+		read(Stream, URL),
+		close(Stream).
+
+	url_file(Registry, File) :-
+		check(atom, Registry),
+		directory(Registry, Directory),
+		path_concat(Directory, 'URL.packs', File).
 
 	% registry readme predicates
 

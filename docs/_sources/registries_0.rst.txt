@@ -11,7 +11,7 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:20:0
+| **Version:** 0:21:0
 | **Date:** 2021-10-22
 
 | **Compilation flags:**
@@ -50,7 +50,7 @@ Public predicates
 ``list/0``
 ^^^^^^^^^^
 
-Prints a list of all defined registries.
+Prints a list of all defined registries, including how defined (``git``, ``archive``, or ``directory``) and  if they are pinned.
 
 | **Compilation flags:**
 |    ``static``
@@ -94,7 +94,7 @@ Prints all registry entries.
 ``defined/3``
 ^^^^^^^^^^^^^
 
-Enumerates by backtracking all defined registries and how they are defined (``git`` or ``archive``) plus if they are pinned.
+Enumerates by backtracking all defined registries and how they are defined (``git``, ``archive``, or ``directory``) plus if they are pinned.
 
 | **Compilation flags:**
 |    ``static``
@@ -129,7 +129,7 @@ Adds a new registry using the given options. Fails if the registry cannot be add
 
 | **Remarks:**
 
-    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the declared registry name (in the registry specification object) when using an archive URL.
+    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.
     - ``force(Boolean)`` option: Force re-installation if the registry is already defined. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose adding steps. Default is ``false``.
@@ -159,7 +159,7 @@ Adds a new registry using default options. Fails if the registry cannot be added
 
 | **Remarks:**
 
-    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the declared registry name (in the registry specification object) when using an archive URL.
+    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.
 
 
 ------------
