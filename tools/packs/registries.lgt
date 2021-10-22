@@ -55,7 +55,7 @@
 		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
-			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.',
+			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.',
 			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.'
@@ -68,7 +68,7 @@
 		comment is 'Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.',
 		argnames is ['Registry', 'URL'],
 		remarks is [
-			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.'
+			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.'
 		]
 	]).
 

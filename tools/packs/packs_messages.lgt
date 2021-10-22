@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
-		date is 2021-10-21,
+		date is 2021-10-22,
 		comment is 'Packs default message translations.'
 	]).
 

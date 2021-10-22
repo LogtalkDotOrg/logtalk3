@@ -173,7 +173,9 @@ downloadable archive (using a ``https://`` URL).
 
 For registries made available using an archive, the
 ``registries::add/2-3`` predicates **must** be used as the registry name
-cannot be inferred from the URL basename in general.
+cannot in general be inferred from the URL basename or from the archived
+directory name. The registry argument must also be the declared registry
+name in the registry specification object.
 
 To update a registry, use the ``registries::update/1-2`` predicates.
 Registries can also be deleted using the ``registries::delete/1-2``

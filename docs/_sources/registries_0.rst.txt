@@ -129,7 +129,7 @@ Adds a new registry using the given options. Fails if the registry cannot be add
 
 | **Remarks:**
 
-    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.
+    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the declared registry name (in the registry specification object) when using an archive URL.
     - ``force(Boolean)`` option: Force re-installation if the registry is already defined. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose adding steps. Default is ``false``.
@@ -159,7 +159,7 @@ Adds a new registry using default options. Fails if the registry cannot be added
 
 | **Remarks:**
 
-    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.
+    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the declared registry name (in the registry specification object) when using an archive URL.
 
 
 ------------

@@ -290,7 +290,9 @@ made available via a local directory (using a <code class="docutils literal notr
 downloadable archive (using a <code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
 <p>For registries made available using an archive, the
 <code class="docutils literal notranslate"><span class="pre">registries::add/2-3</span></code> predicates <strong>must</strong> be used as the registry name
-cannot be inferred from the URL basename in general.</p>
+cannot in general be inferred from the URL basename or from the archived
+directory name. The registry argument must also be the declared registry
+name in the registry specification object.</p>
 <p>To update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
 Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
 predicate. By default, registries with installed packs cannot be
