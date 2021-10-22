@@ -460,7 +460,9 @@ registries provide packs with the same name. For example:
    | ?- packs::describe(reg, bar).
 
 To install the latest version of a pack, we can use the
-``packs::install/1-4`` predicates. For example:
+``packs::install/1-4`` predicates. In the most simple case, when a pack
+name is unique among registries, we can use the ``packs::install/1``
+predicate. For example:
 
 ::
 
@@ -501,6 +503,16 @@ example:
 
 Note that the public key used to sign the pack archive must be already
 present in your local system.
+
+To uninstall a pack that you no longer need, use the
+``packs::uninstall/1-2`` predicates. By default, only packs with no
+dependent packs can be uninstalled. You can print or get a list of the
+packs that depend on a given pack by using the ``packs::dependents/1-3``
+predicates. For example:
+
+::
+
+   | ?- packs::dependents(reg, bar, Dependents).
 
 See the tool API documentation on the
 `packs <../../docs/packs_0.html>`__ object for other useful predicates.
