@@ -279,15 +279,18 @@ also be queried using the <code class="docutils literal notranslate"><span class
 </div>
 <div class="section" id="registry-handling">
 <h2>Registry handling<a class="headerlink" href="#registry-handling" title="Permalink to this headline"></a></h2>
-<p>Registries can be added using the <code class="docutils literal notranslate"><span class="pre">registries::add/2</span></code> predicate, which
-takes a registry name and a registry URL. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(reg, <span class="s">&#39;https://github.com/some_user/reg.git&#39;</span>).
+<p>Registries can be added using the <code class="docutils literal notranslate"><span class="pre">registries::add/1-3</span></code> predicates,
+which take a registry URL. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(<span class="s">&#39;https://github.com/some_user/reg.git&#39;</span>).
 </pre></div>
 </div>
 <p>HTTPS URLs must end with either a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension or a an archive
 extension. Git cloning URLs are preferred but a registry can also be
 made available via a local directory (using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or a
 downloadable archive (using a <code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
+<p>For registries made available using an archive, the
+<code class="docutils literal notranslate"><span class="pre">registries::add/2-3</span></code> predicates <strong>must</strong> be used as the registry name
+cannot be inferred from the URL basename in general.</p>
 <p>To update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
 Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
 predicate. By default, registries with installed packs cannot be

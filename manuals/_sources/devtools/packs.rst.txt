@@ -159,17 +159,21 @@ also be queried using the ``registries::directory/2`` predicate.
 Registry handling
 -----------------
 
-Registries can be added using the ``registries::add/2`` predicate, which
-takes a registry name and a registry URL. For example:
+Registries can be added using the ``registries::add/1-3`` predicates,
+which take a registry URL. For example:
 
 ::
 
-   | ?- registries::add(reg, 'https://github.com/some_user/reg.git').
+   | ?- registries::add('https://github.com/some_user/reg.git').
 
 HTTPS URLs must end with either a ``.git`` extension or a an archive
 extension. Git cloning URLs are preferred but a registry can also be
 made available via a local directory (using a ``file://`` URL) or a
 downloadable archive (using a ``https://`` URL).
+
+For registries made available using an archive, the
+``registries::add/2-3`` predicates **must** be used as the registry name
+cannot be inferred from the URL basename in general.
 
 To update a registry, use the ``registries::update/1-2`` predicates.
 Registries can also be deleted using the ``registries::delete/1-2``

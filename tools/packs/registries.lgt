@@ -52,9 +52,10 @@
 	:- public(add/3).
 	:- mode(add(+atom, +atom, ++list(compound)), zero_or_one).
 	:- info(add/3, [
-		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a `.git` extension or a an archive extension. A `file://` URL can be used for a local directory.',
+		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
+			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.',
 			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.'
@@ -64,8 +65,22 @@
 	:- public(add/2).
 	:- mode(add(+atom, +atom), zero_or_one).
 	:- info(add/2, [
-		comment is 'Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a `.git` extension or a an archive extension. A `file://` URL can be used for a local directory.',
-		argnames is ['Registry', 'URL']
+		comment is 'Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.',
+		argnames is ['Registry', 'URL'],
+		remarks is [
+			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.'
+		]
+	]).
+
+	:- public(add/1).
+	:- mode(add(+atom), zero_or_one).
+	:- info(add/1, [
+		comment is 'Adds a new registry from a git cloning URL or a local directory URL using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a ``.git`` extension. A ``file://`` URL can be used for a local directory.',
+		argnames is ['URL'],
+		remarks is [
+			'Limitations' - 'Cannot be used for archive download URLs.',
+			'Registry name' - 'Taken from the URL basename.'
+		]
 	]).
 
 	:- public(update/2).
@@ -254,6 +269,15 @@
 
 	add(Registry, URL) :-
 		add(Registry, URL, []).
+
+	add(URL) :-
+		check(atom, URL),
+		(	sub_atom(URL, _, _, 0, '/') ->
+			sub_atom(URL, _, _, 1, URLFixed)
+		;	URLFixed = URL
+		),
+		decompose_file_name(URLFixed, _, Registry, _),
+		add(Registry, URLFixed, []).
 
 	add_directory(Registry, URL, Path, Options) :-
 		atom_concat('file://', Directory0, URL),

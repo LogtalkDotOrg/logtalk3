@@ -117,7 +117,7 @@ Enumerates by backtracking all defined registries and how they are defined (``gi
 ``add/3``
 ^^^^^^^^^
 
-Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a `.git` extension or a an archive extension. A `file://` URL can be used for a local directory.
+Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.
 
 | **Compilation flags:**
 |    ``static``
@@ -129,6 +129,7 @@ Adds a new registry using the given options. Fails if the registry cannot be add
 
 | **Remarks:**
 
+    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.
     - ``force(Boolean)`` option: Force re-installation if the registry is already defined. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose adding steps. Default is ``false``.
@@ -146,7 +147,7 @@ Adds a new registry using the given options. Fails if the registry cannot be add
 ``add/2``
 ^^^^^^^^^
 
-Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a `.git` extension or a an archive extension. A `file://` URL can be used for a local directory.
+Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.
 
 | **Compilation flags:**
 |    ``static``
@@ -155,6 +156,38 @@ Adds a new registry using default options. Fails if the registry cannot be added
 |    ``add(Registry,URL)``
 | **Mode and number of proofs:**
 |    ``add(+atom,+atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Registry name: Must be the URL basename when using a git URL or a local directory URL. Must be the archived directory name when using an archive URL.
+
+
+------------
+
+.. raw:: html
+
+   <div id="add/1"> </div>
+
+.. index:: add/1
+.. _registries/0::add/1:
+
+``add/1``
+^^^^^^^^^
+
+Adds a new registry from a git cloning URL or a local directory URL using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a ``.git`` extension. A ``file://`` URL can be used for a local directory.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``add(URL)``
+| **Mode and number of proofs:**
+|    ``add(+atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Limitations: Cannot be used for archive download URLs.
+    - Registry name: Taken from the URL basename.
 
 
 ------------
