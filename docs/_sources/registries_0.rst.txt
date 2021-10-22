@@ -11,8 +11,8 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:19:0
-| **Date:** 2021-10-20
+| **Version:** 0:19:1
+| **Date:** 2021-10-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -117,7 +117,7 @@ Enumerates by backtracking all defined registries and how they are defined (``gi
 ``add/3``
 ^^^^^^^^^
 
-Adds a new registry using the given URL and options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension.
+Adds a new registry using the given URL and options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension. Download URL must always end with the archive extension.
 
 | **Compilation flags:**
 |    ``static``
@@ -146,7 +146,7 @@ Adds a new registry using the given URL and options. Fails if the registry canno
 ``add/2``
 ^^^^^^^^^
 
-Adds a new registry using the given URL and default options. ails if the registry cannot be added or if it is already defined.
+Adds a new registry using the given URL and default options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension. Download URL must always end with the archive extension.
 
 | **Compilation flags:**
 |    ``static``

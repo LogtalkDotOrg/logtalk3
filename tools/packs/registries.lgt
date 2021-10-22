@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:19:1,
 		author is 'Paulo Moura',
-		date is 2021-10-20,
+		date is 2021-10-22,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -52,7 +52,7 @@
 	:- public(add/3).
 	:- mode(add(+atom, +atom, ++list(compound)), zero_or_one).
 	:- info(add/3, [
-		comment is 'Adds a new registry using the given URL and options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension.',
+		comment is 'Adds a new registry using the given URL and options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension. Download URL must always end with the archive extension.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
@@ -64,7 +64,7 @@
 	:- public(add/2).
 	:- mode(add(+atom, +atom), zero_or_one).
 	:- info(add/2, [
-		comment is 'Adds a new registry using the given URL and default options. ails if the registry cannot be added or if it is already defined.',
+		comment is 'Adds a new registry using the given URL and default options. Fails if the registry cannot be added or if it is already defined. Git clone URLs must always end with a ``.git`` extension. Download URL must always end with the archive extension.',
 		argnames is ['Registry', 'URL']
 	]).
 

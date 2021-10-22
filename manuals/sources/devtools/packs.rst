@@ -166,9 +166,10 @@ takes a registry name and a registry URL. For example:
 
    | ?- registries::add(reg, 'https://github.com/some_user/reg.git').
 
-Git cloning URLs are preferred but a registry can also be made available
-via a local archive (using a ``file://`` URL) or a downloadable archive
-(using a ``https://`` URL).
+The URL must end with either a ``.git`` extension or a an archive
+extension. Git cloning URLs are preferred but a registry can also be
+made available via a local archive (using a ``file://`` URL) or a
+downloadable archive (using a ``https://`` URL).
 
 To update a registry, use the ``registries::update/1-2`` predicates.
 Registries can also be deleted using the ``registries::delete/1-2``
