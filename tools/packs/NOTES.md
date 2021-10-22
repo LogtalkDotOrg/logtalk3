@@ -203,7 +203,7 @@ Registry development
 --------------------
 
 To simplify registry development and testing, use a local directory and a
-`file://` URL when calling the `registries::add/2` predicate. For example:
+`file://` URL when calling the `registries::add/1` predicate. For example:
 
 	| ?- registries::add('file:///home/jdoe/work/my_pack_collection').
 
