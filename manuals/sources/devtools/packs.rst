@@ -445,6 +445,12 @@ predicate:
 
    | ?- packs::available.
 
+To list all installed packs, call the ``packs::installed/0`` predicate:
+
+::
+
+   | ?- packs::installed.
+
 To know more about a specific pack, use the ``packs::describe/1-2``
 predicates. For example:
 
@@ -471,14 +477,13 @@ predicate. For example:
 Any pack dependencies are also checked and installed or updated if
 necessary. Packs becomes available for loading immediately after
 successful installation (no restarting of the Logtalk session is
-required).
+required). Other install predicates are available to disambiguate
+between registries and to install a specific pack version.
 
-Other install predicates are available to disambiguate between
-registries and to install a specific pack version. The
-``packs::installed/0`` predicate can be used to list all installed
-packs.
-
-To update a pack, use the ``packs::update/1-2`` predicates. For example:
+After updating the defined registries, outdated packs can be listed
+using the ``packs::outdated/0`` predicate. You can update all outdated
+packs by calling the ``packs::update/0`` predicate or update a single
+pack using the ``packs::update/1-2`` predicates. For example:
 
 ::
 

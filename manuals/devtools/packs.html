@@ -528,6 +528,10 @@ predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>available.
 </pre></div>
 </div>
+<p>To list all installed packs, call the <code class="docutils literal notranslate"><span class="pre">packs::installed/0</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>installed.
+</pre></div>
+</div>
 <p>To know more about a specific pack, use the <code class="docutils literal notranslate"><span class="pre">packs::describe/1-2</span></code>
 predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>describe(bar).
@@ -548,12 +552,12 @@ predicate. For example:</p>
 <p>Any pack dependencies are also checked and installed or updated if
 necessary. Packs becomes available for loading immediately after
 successful installation (no restarting of the Logtalk session is
-required).</p>
-<p>Other install predicates are available to disambiguate between
-registries and to install a specific pack version. The
-<code class="docutils literal notranslate"><span class="pre">packs::installed/0</span></code> predicate can be used to list all installed
-packs.</p>
-<p>To update a pack, use the <code class="docutils literal notranslate"><span class="pre">packs::update/1-2</span></code> predicates. For example:</p>
+required). Other install predicates are available to disambiguate
+between registries and to install a specific pack version.</p>
+<p>After updating the defined registries, outdated packs can be listed
+using the <code class="docutils literal notranslate"><span class="pre">packs::outdated/0</span></code> predicate. You can update all outdated
+packs by calling the <code class="docutils literal notranslate"><span class="pre">packs::update/0</span></code> predicate or update a single
+pack using the <code class="docutils literal notranslate"><span class="pre">packs::update/1-2</span></code> predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>update(bar).
 </pre></div>
 </div>
