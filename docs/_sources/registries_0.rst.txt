@@ -11,8 +11,8 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:21:0
-| **Date:** 2021-10-22
+| **Version:** 0:22:0
+| **Date:** 2021-10-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -357,6 +357,29 @@ Cleans all archives for all registries.
 
 | **Mode and number of proofs:**
 |    ``clean`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="provides/2"> </div>
+
+.. index:: provides/2
+.. _registries/0::provides/2:
+
+``provides/2``
+^^^^^^^^^^^^^^
+
+Enumerates by backtracking all packs provided by a registry.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``provides(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``provides(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura',
-		date is 2021-10-22,
+		date is 2021-10-23,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -138,6 +138,13 @@
 	:- mode(clean, one).
 	:- info(clean/0, [
 		comment is 'Cleans all archives for all registries.'
+	]).
+
+	:- public(provides/2).
+	:- mode(provides(?atom, ?atom), zero_or_more).
+	:- info(provides/2, [
+		comment is 'Enumerates by backtracking all packs provided by a registry.',
+		argnames is ['Registry', 'Pack']
 	]).
 
 	:- private(deleted_registry_/1).
@@ -402,8 +409,8 @@
 			(	Updated == false ->
 				print_message(comment, packs, up_to_date_registry(Registry, URL))
 			;	object_property(RegistryObject, file(File)),
-				loaded_file_property(File, parent(Parent)),
-				logtalk_load(Parent, [reload(always), source_data(on), hook(registry_loader_hook)]),
+				loaded_file_property(File, parent(Loader)),
+				logtalk_load(Loader, [reload(always), source_data(on), hook(registry_loader_hook)]),
 				(	member(clean(true), Options) ->
 					delete_archives(Registry)
 				;	true
@@ -491,6 +498,19 @@
 			forall(member(File, Files), delete_file(File))
 		;	true
 		).
+
+	% provides predicates
+
+	provides(Registry, Pack) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		registry_object(Registry, RegistryObject),
+		object_property(RegistryObject, file(RegistryFile)),
+		loaded_file_property(RegistryFile, parent(Loader)),
+		loaded_file_property(PackFile, parent(Loader)),
+		loaded_file_property(PackFile, object(PackObject)),
+		implements_protocol(PackObject, pack_protocol),
+		PackObject::name(Pack).
 
 	% options handling
 
