@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:21:0,
 		author is 'Paulo Moura',
-		date is 2021-10-21,
+		date is 2021-10-23,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -787,29 +787,34 @@
 	clean(Registry, Pack) :-
 		check(atom, Registry),
 		check(atom, Pack),
+		(	registry_pack(Registry, Pack, _) ->
+			print_message(comment, packs, cleaning_pack_archives(Registry, Pack)),
+			delete_archives(Registry, Pack),
+			print_message(comment, packs, cleaned_pack_archives(Registry, Pack))
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
+			fail
+		).
+
+	clean(Pack) :-
+		check(atom, Pack),
 		findall(
 			Registry-Pack,
 			registry_pack(Registry, Pack, _),
 			RegistryPacks
 		),
 		(	RegistryPacks = [] ->
-			print_message(error, packs, unknown_pack(Registry, Pack)),
+			print_message(error, packs, unknown_pack(Pack)),
 			fail
 		;	RegistryPacks = [Registry-Pack] ->
-			delete_archives(Registry, Pack)
+			print_message(comment, packs, cleaning_pack_archives(Registry, Pack)),
+			delete_archives(Registry, Pack),
+			print_message(comment, packs, cleaned_pack_archives(Registry, Pack))
 		;	print_message(error, packs, 'Pack available from multiple registries:'::RegistryPacks),
 			fail
 		).
 
-	clean(Pack) :-
-		check(atom, Pack),
-		(	registry_pack(Registry, Pack, _) ->
-			delete_archives(Registry, Pack)
-		;	print_message(error, packs, unknown_pack(Pack)),
-			fail
-		).
-
 	clean :-
+		print_message(comment, packs, @'Cleaning all pack archives'),
 		expand_library_path(logtalk_packs(packs), Directory),
 		directory_files(Directory, Packs, [type(directory), dot_files(false)]),
 		member(Pack, Packs),
@@ -817,7 +822,8 @@
 		read_registry(Path, Registry),
 		delete_archives(Registry, Pack),
 		fail.
-	clean.
+	clean :-
+		print_message(comment, packs, @'Cleaned all pack archives').
 
 	delete_archives(Registry, Pack) :-
 		expand_library_path(logtalk_packs(archives), Archives),

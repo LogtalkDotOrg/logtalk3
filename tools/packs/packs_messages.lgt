@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:20:0,
 		author is 'Paulo Moura',
-		date is 2021-10-22,
+		date is 2021-10-23,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -214,6 +214,14 @@
 
 	message_tokens(orphaned_pack(Registry, Pack)) -->
 		['  ~q::~q'-[Registry, Pack], nl].
+
+	% pack clean messages
+
+	message_tokens(cleaning_pack_archives(Registry, Pack)) -->
+		['Cleaning archives for pack: ~q::~q'-[Registry, Pack], nl].
+
+	message_tokens(cleaned_pack_archives(Registry, Pack)) -->
+		['Cleaned archives for pack:  ~q::~q'-[Registry, Pack], nl].
 
 	% pack error messages
 
