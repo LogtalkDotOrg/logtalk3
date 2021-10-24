@@ -263,6 +263,9 @@ Otherwise, the files in the directory are copied to the registry definition
 directory. This allows the registry to be added and deleted without
 consequences for the original registry source files.
 
+To check your registry specifications, use the `registries::lint/0-1`
+predicates after adding the registry.
+
 
 Pack specification
 ------------------
@@ -421,6 +424,9 @@ and uninstalled without consequences for the pack source files.
 
 Packs that are expected to be fully portable should always be checked by
 loading them with the `portability` flag set to `warning`.
+
+To check your packs specifications, use the `packs::lint/0-2` predicates
+after adding the registry that provides the packs.
 
 
 Pack handling

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:23:0,
 		author is 'Paulo Moura',
-		date is 2021-10-23,
+		date is 2021-10-24,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -145,6 +145,19 @@
 	:- info(provides/2, [
 		comment is 'Enumerates by backtracking all packs provided by a registry.',
 		argnames is ['Registry', 'Pack']
+	]).
+
+	:- public(lint/1).
+	:- mode(lint(+atom), zero_or_one).
+	:- info(lint/1, [
+		comment is 'Checks the registry specification. Fails if the registry is not defined.',
+		argnames is ['Registry']
+	]).
+
+	:- public(lint/0).
+	:- mode(lint, one).
+	:- info(lint/0, [
+		comment is 'Checks all registry specifications.'
 	]).
 
 	:- private(deleted_registry_/1).
@@ -580,6 +593,77 @@
 	readme(Registry, ReadMeFile) :-
 		directory(Registry, Directory),
 		^^readme_file_path(Directory, ReadMeFile).
+
+	% lint predicates
+
+	lint(Registry) :-
+		check(atom, Registry),
+		(	registry_object(Registry, RegistryObject) ->
+			lint_registry(Registry, RegistryObject)
+		;	print_message(error, packs, unknown_registry(Registry)),
+			fail
+		).
+
+	lint :-
+		print_message(comment, packs, @'Lint checking all registries'),
+		registry_object(Registry, RegistryObject),
+		lint_registry(Registry, RegistryObject),
+		fail.
+	lint :-
+		print_message(comment, packs, @'Lint checked all registries').
+
+	lint_registry(Registry, RegistryObject) :-
+		print_message(comment, packs, linting_registry(Registry)),
+		lint_check(name, Registry, RegistryObject),
+		lint_check(description, Registry, RegistryObject),
+		lint_check(home, Registry, RegistryObject),
+		lint_check(clone, Registry, RegistryObject),
+		lint_check(archive, Registry, RegistryObject),
+		print_message(comment, packs, linted_registry(Registry)).
+
+	lint_check(name, Registry, RegistryObject) :-
+		atom_concat(Registry, '_registry', ExpectedRegistryObject),
+		(	RegistryObject == ExpectedRegistryObject ->
+			true
+		;	print_message(warning, packs, 'Registry object expected name is ~q but ~q is used!'+[ExpectedRegistryObject, RegistryObject])
+		).
+	lint_check(description, _Registry, RegistryObject) :-
+		(	RegistryObject::description(_) ->
+			true
+		;	print_message(warning, packs, @'The description/1 predicate is missing or failed safety check!')
+		).
+	lint_check(home, _Registry, RegistryObject) :-
+		(	RegistryObject::home(_) ->
+			true
+		;	print_message(warning, packs, @'The home/1 predicate is missing or failed safety check!')
+		).
+	lint_check(clone, Registry, RegistryObject) :-
+		(	RegistryObject::clone(URL) ->
+			lint_check_clone_url(Registry, URL)
+		;	print_message(warning, packs, @'The clone/1 predicate is missing or failed safety check!')
+		).
+	lint_check(archive, _Registry, RegistryObject) :-
+		(	RegistryObject::archive(URL) ->
+			lint_check_archive_url(URL)
+		;	print_message(warning, packs, @'The archive/1 predicate is missing or failed safety check!')
+		).
+
+	lint_check_clone_url(Registry, URL):-
+		decompose_file_name(URL, _, Name, Extension),
+		(	Extension \== '.git' ->
+			print_message(warning, packs, 'Git cloning URL should end with ".git"!')
+		;	Name == Registry ->
+			true
+		;	print_message(warning, packs, 'Git repos should have the same name as the registry!')
+		).
+	lint_check_archive_url(URL) :-
+		decompose_file_name(URL, _, _, Extension),
+		(	^^supported_archive(Extension) ->
+			true
+		;	Extension == '' ->
+			print_message(warning, packs, 'Archive extension missing!')
+		;	print_message(warning, packs, 'Archive extension not supported!')
+		).
 
 	% auxiliary predicates
 

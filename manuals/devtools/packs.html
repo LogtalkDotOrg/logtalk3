@@ -368,6 +368,8 @@ example:</p>
 Otherwise, the files in the directory are copied to the registry
 definition directory. This allows the registry to be added and deleted
 without consequences for the original registry source files.</p>
+<p>To check your registry specifications, use the <code class="docutils literal notranslate"><span class="pre">registries::lint/0-1</span></code>
+predicates after adding the registry.</p>
 </div>
 <div class="section" id="pack-specification">
 <h2>Pack specification<a class="headerlink" href="#pack-specification" title="Permalink to this headline"></a></h2>
@@ -519,6 +521,8 @@ installation directory. This allows the pack to be installed, updated,
 and uninstalled without consequences for the pack source files.</p>
 <p>Packs that are expected to be fully portable should always be checked by
 loading them with the <code class="docutils literal notranslate"><span class="pre">portability</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>.</p>
+<p>To check your packs specifications, use the <code class="docutils literal notranslate"><span class="pre">packs::lint/0-2</span></code>
+predicates after adding the registry that provides the packs.</p>
 </div>
 <div class="section" id="pack-handling">
 <h2>Pack handling<a class="headerlink" href="#pack-handling" title="Permalink to this headline"></a></h2>

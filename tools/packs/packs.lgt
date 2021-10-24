@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura',
-		date is 2021-10-23,
+		date is 2021-10-24,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -245,6 +245,26 @@
 		argnames is ['Pack']
 	]).
 
+	:- public(lint/2).
+	:- mode(lint(+atom, +atom), zero_or_one).
+	:- info(lint/2, [
+		comment is 'Checks the pack specification. Fails if the pack is unknown or available from multiple registries.',
+		argnames is ['Registry', 'Pack']
+	]).
+
+	:- public(lint/1).
+	:- mode(lint(+atom), zero_or_one).
+	:- info(lint/1, [
+		comment is 'Checks the pack specification. Fails if the pack is unknown or available from multiple registries.',
+		argnames is ['Pack']
+	]).
+
+	:- public(lint/0).
+	:- mode(lint, one).
+	:- info(lint/0, [
+		comment is 'Checks all pack specifications.'
+	]).
+
 	:- uses(list, [
 		member/2, sort/4
 	]).
@@ -454,7 +474,7 @@
 			fail
 		;	RegistryPacks = [Registry-Pack] ->
 			install(Registry, Pack)
-		;	print_message(error, packs, 'Pack available from multiple registries:'::RegistryPacks),
+		;	print_message(error, packs, @'Pack available from multiple registries!'),
 			fail
 		).
 
@@ -809,7 +829,7 @@
 			print_message(comment, packs, cleaning_pack_archives(Registry, Pack)),
 			delete_archives(Registry, Pack),
 			print_message(comment, packs, cleaned_pack_archives(Registry, Pack))
-		;	print_message(error, packs, 'Pack available from multiple registries:'::RegistryPacks),
+		;	print_message(error, packs, @'Pack available from multiple registries!'),
 			fail
 		).
 
@@ -888,7 +908,7 @@
 		;	RegistryPacks = [Registry-Pack] ->
 			pack_dependents(Registry, Pack, Dependents),
 			print_dependents(Registry, Pack, Dependents)
-		;	print_message(error, packs, 'Pack available from multiple registries:'::RegistryPacks),
+		;	print_message(error, packs, @'Pack available from multiple registries!'),
 			fail
 		).
 
@@ -924,6 +944,167 @@
 	dependency(Dependency @> _, Dependency).
 	dependency(Dependency @< _, Dependency).
 	dependency(Dependency == _, Dependency).
+
+	% lint predicates
+
+	lint(Registry, Pack) :-
+		check(atom, Registry),
+		check(atom, Pack),
+		(	registry_pack(Registry, Pack, PackObject) ->
+			lint_pack(Registry, Pack, PackObject)
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
+			fail
+		).
+
+	lint(Pack) :-
+		check(atom, Pack),
+		findall(
+			p(Registry, Pack, PackObject),
+			registry_pack(Registry, Pack, PackObject),
+			RegistryPacks
+		),
+		(	RegistryPacks = [] ->
+			print_message(error, packs, unknown_pack(Pack)),
+			fail
+		;	RegistryPacks = [p(Registry, Pack, PackObject)] ->
+			lint_pack(Registry, Pack, PackObject)
+		;	print_message(error, packs, @'Pack available from multiple registries!'),
+			fail
+		).
+
+	lint :-
+		print_message(comment, packs, @'Lint checking all packs'),
+		registry_pack(Registry, Pack, PackObject),
+		lint_pack(Registry, Pack, PackObject),
+		fail.
+	lint :-
+		print_message(comment, packs, @'Lint checked all packs').
+
+	lint_pack(Registry, Pack, PackObject) :-
+		print_message(comment, packs, linting_pack(Registry, Pack)),
+		lint_check(name, Pack, PackObject),
+		lint_check(description, Pack, PackObject),
+		lint_check(license, Pack, PackObject),
+		lint_check(home, Pack, PackObject),
+		lint_check(version, Pack, PackObject),
+		print_message(comment, packs, linted_pack(Registry, Pack)).
+
+	lint_check(name, Pack, PackObject) :-
+		atom_concat(Pack, '_pack', ExpectedPackObject),
+		(	PackObject == ExpectedPackObject ->
+			true
+		;	print_message(warning, packs, 'Pack object expected name is ~q but ~q is used!'+[ExpectedPackObject, PackObject])
+		).
+	lint_check(description, _Pack, PackObject) :-
+		(	PackObject::description(_) ->
+			true
+		;	print_message(warning, packs, @'The description/1 predicate is missing or failed safety check!')
+		).
+	lint_check(license, _Pack, PackObject) :-
+		(	PackObject::license(_) ->
+			true
+		;	print_message(warning, packs, @'The license/1 predicate is missing or failed safety check!')
+		).
+	lint_check(home, _Pack, PackObject) :-
+		(	PackObject::home(_) ->
+			true
+		;	print_message(warning, packs, @'The home/1 predicate is missing or failed safety check!')
+		).
+	lint_check(version, Pack, PackObject) :-
+		(	\+ PackObject::version(_, _, _, _, _, _) ->
+			print_message(warning, packs, @'The version/6 predicate is missing or failed safety check!')
+		;	lint_check_versions(Pack, PackObject)
+		).
+
+	lint_check_versions(Pack, PackObject) :-
+		PackObject::version(Version, Status, URL, CheckSum, Dependencies, Portability),
+		(	valid_version(Version) ->
+			true
+		;	print_message(warning, packs, 'Invalid pack version: ~q'+[Version])
+		),
+		(	valid_status(Status) ->
+			true
+		;	print_message(warning, packs, 'Unknown pack status: ~q'+[Status])
+		),
+		decompose_file_name(URL, _, Name, Extension),
+		(	sub_atom(URL, 0, _, _, 'file://') ->
+			(	Name == Pack ->
+				true
+			;	^^supported_archive(Extension) ->
+				true
+			;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL])
+			)
+		;	^^supported_archive(Extension) ->
+			true
+		;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL])
+		),
+		(	CheckSum == none, sub_atom(URL, 0, _, _, 'file://') ->
+			true
+		;	CheckSum = sha256-Hash, atom(Hash) ->
+			true
+		;	print_message(warning, packs, 'Invalid pack checksum: ~q'+[CheckSum])
+		),
+		(	Dependencies == [] ->
+			true
+		;	Dependencies \= [_| _] ->
+			print_message(warning, packs, 'Invalid pack dependencies: ~q'+[Dependencies])
+		;	member(Dependency, Dependencies),
+			\+ valid_dependency(Dependency, Pack) ->
+			print_message(warning, packs, 'Invalid pack dependency: ~q'+[Dependency])
+		;	true
+		),
+		(	Portability == all ->
+			true
+		;	Portability \= [_| _] ->
+			print_message(warning, packs, 'Invalid pack portability: ~q'+[Portability])
+		;	member(Backend, Portability),
+			\+ valid_backend(Backend) ->
+			print_message(warning, packs, 'Unknown Prolog backend: ~q'+[Backend])
+		;	true
+		),
+		fail.
+	lint_check_versions(_, _).
+
+	valid_version(Major:Minor:Patch) :-
+		integer(Major),
+		integer(Minor),
+		integer(Patch).
+
+	valid_status(stable).
+	valid_status(rc).
+	valid_status(beta).
+	valid_status(alpha).
+	valid_status(deprecated).
+
+	valid_dependency(logtalk, _) :-
+		!.
+	valid_dependency(Dependency, Pack) :-
+		functor(Dependency, Operator, 2),
+		(	arg(1, Dependency, logtalk) ->
+			true
+		;	arg(1, Dependency, DependencyRegistry::DependencyPack),
+			atom(DependencyRegistry),
+			atom(DependencyPack),
+			DependencyPack \== Pack
+		),
+		memberchk(Operator, [(@>=), (@>), (==), (@=<), (@<)]),
+		arg(2, Dependency, Version),
+		valid_version(Version).
+
+	valid_backend(b).
+	valid_backend(ciao).
+	valid_backend(cx).
+	valid_backend(eclipse).
+	valid_backend(gnu).
+	valid_backend(ji).
+	valid_backend(lvm).
+	valid_backend(scryer).
+	valid_backend(sicstus).
+	valid_backend(swi).
+	valid_backend(tau).
+	valid_backend(treala).
+	valid_backend(xsb).
+	valid_backend(yap).
 
 	% auxiliary predicates
 

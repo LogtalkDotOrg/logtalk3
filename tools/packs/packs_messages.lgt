@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:21:0,
 		author is 'Paulo Moura',
-		date is 2021-10-23,
+		date is 2021-10-24,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -153,6 +153,14 @@
 	message_tokens(defined_registries(DefinedRegistries)) -->
 		defined_registries(DefinedRegistries).
 
+	% registry lint messages
+
+	message_tokens(linting_registry(Registry)) -->
+		['Lint checking registry: ~q'-[Registry], nl].
+
+	message_tokens(linted_registry(Registry)) -->
+		['Lint checks completed for registry: ~q'-[Registry], nl].
+
 	% pack install messages
 
 	message_tokens(unknown_pack_version(Registry, Pack, Version)) -->
@@ -222,6 +230,14 @@
 
 	message_tokens(cleaned_pack_archives(Registry, Pack)) -->
 		['Cleaned archives for pack:  ~q::~q'-[Registry, Pack], nl].
+
+	% pack lint messages
+
+	message_tokens(linting_pack(Registry, Pack)) -->
+		['Lint checking pack: ~q::~q'-[Registry, Pack], nl].
+
+	message_tokens(linted_pack(Registry, Pack)) -->
+		['Lint checks completed for pack: ~q::~q'-[Registry, Pack], nl].
 
 	% pack error messages
 

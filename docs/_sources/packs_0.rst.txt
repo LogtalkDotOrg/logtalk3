@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:21:0
-| **Date:** 2021-10-23
+| **Version:** 0:22:0
+| **Date:** 2021-10-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -698,6 +698,73 @@ Prints a list of all packs that depend on the given pack if unique from all defi
 |    ``dependents(Pack)``
 | **Mode and number of proofs:**
 |    ``dependents(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lint/2"> </div>
+
+.. index:: lint/2
+.. _packs/0::lint/2:
+
+``lint/2``
+^^^^^^^^^^
+
+Checks the pack specification. Fails if the pack is unknown or available from multiple registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lint(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``lint(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lint/1"> </div>
+
+.. index:: lint/1
+.. _packs/0::lint/1:
+
+``lint/1``
+^^^^^^^^^^
+
+Checks the pack specification. Fails if the pack is unknown or available from multiple registries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lint(Pack)``
+| **Mode and number of proofs:**
+|    ``lint(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lint/0"> </div>
+
+.. index:: lint/0
+.. _packs/0::lint/0:
+
+``lint/0``
+^^^^^^^^^^
+
+Checks all pack specifications.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``lint`` - ``one``
 
 
 ------------

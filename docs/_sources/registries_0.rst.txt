@@ -11,8 +11,8 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:22:0
-| **Date:** 2021-10-23
+| **Version:** 0:23:0
+| **Date:** 2021-10-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -380,6 +380,50 @@ Enumerates by backtracking all packs provided by a registry.
 |    ``provides(Registry,Pack)``
 | **Mode and number of proofs:**
 |    ``provides(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lint/1"> </div>
+
+.. index:: lint/1
+.. _registries/0::lint/1:
+
+``lint/1``
+^^^^^^^^^^
+
+Checks the registry specification. Fails if the registry is not defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lint(Registry)``
+| **Mode and number of proofs:**
+|    ``lint(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="lint/0"> </div>
+
+.. index:: lint/0
+.. _registries/0::lint/0:
+
+``lint/0``
+^^^^^^^^^^
+
+Checks all registry specifications.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``lint`` - ``one``
 
 
 ------------
