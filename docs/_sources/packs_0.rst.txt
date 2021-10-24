@@ -712,7 +712,7 @@ Prints a list of all packs that depend on the given pack if unique from all defi
 ``lint/2``
 ^^^^^^^^^^
 
-Checks the pack specification. Fails if the pack is unknown or available from multiple registries.
+Checks the pack specification. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``

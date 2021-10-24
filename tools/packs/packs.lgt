@@ -248,7 +248,7 @@
 	:- public(lint/2).
 	:- mode(lint(+atom, +atom), zero_or_one).
 	:- info(lint/2, [
-		comment is 'Checks the pack specification. Fails if the pack is unknown or available from multiple registries.',
+		comment is 'Checks the pack specification. Fails if the pack is unknown.',
 		argnames is ['Registry', 'Pack']
 	]).
 
