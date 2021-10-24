@@ -22,7 +22,7 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura',
 		date is 2021-10-24,
 		comment is 'Packs default message translations.'
@@ -75,6 +75,12 @@
 
 	% registry add messages
 
+	message_tokens(adding_registry(Registry)) -->
+		['Adding registry: ~q'-[Registry], nl].
+
+	message_tokens(registry_added(Registry)) -->
+		['Registry added: ~q'-[Registry], nl].
+
 	message_tokens(registry_name_must_be(Name)) -->
 		['Registry name must be:  ~q'-[Name], nl].
 
@@ -91,6 +97,14 @@
 
 	message_tokens(up_to_date_registry(Registry, URL)) -->
 		['Registry is up-to-date: ~q (~w)'-[Registry, URL], nl].
+
+	% registr delete messages
+
+	message_tokens(deleting_registry(Registry)) -->
+		['Deleting registry: ~q'-[Registry], nl].
+
+	message_tokens(registry_deleted(Registry)) -->
+		['Registry deleted: ~q'-[Registry], nl].
 
 	% registry error messages
 

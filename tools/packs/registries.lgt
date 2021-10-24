@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:24:0,
 		author is 'Paulo Moura',
 		date is 2021-10-24,
 		comment is 'Registry handling predicates.'
@@ -266,6 +266,7 @@
 		check(atom, URL),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		print_message(comment, packs, adding_registry(Registry)),
 		(	registry_object(Registry, _),
 			member(force(false), Options) ->
 			print_message(error, packs, registry_already_defined(Registry)),
@@ -275,7 +276,11 @@
 		decompose_file_name(URL, _, Name, Extension),
 		(	Extension = '',
 			sub_atom(URL, 0, _, _, 'file://') ->
-			add_directory(Registry, URL, Path, Options)
+			(	Name \== Registry ->
+				print_message(error, packs, registry_name_must_be(Name)),
+				fail
+			;	add_directory(Registry, URL, Path, Options)
+			)
 		;	Extension == '.git' ->
 			(	Name \== Registry ->
 				print_message(error, packs, registry_name_must_be(Name)),
@@ -296,7 +301,8 @@
 			delete_archives(Registry)
 		;	true
 		),
-		^^print_readme_file_path(Path).
+		^^print_readme_file_path(Path),
+		print_message(comment, packs, registry_added(Registry)).
 
 	add(Registry, URL) :-
 		add(Registry, URL, []).
@@ -340,8 +346,7 @@
 			atom_concat(Command1, OSPath, Command2),
 			atom_concat(Command2, '"', Command),
 			^^command(Command, registry_directory_copy_failed(Registry, URL))
-		),
-		^^print_readme_file_path(Path).
+		).
 
 	% delete registry predicates
 
@@ -349,6 +354,7 @@
 		check(atom, Registry),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		print_message(comment, packs, deleting_registry(Registry)),
 		(	directory(Registry, Directory0) ->
 			(	pinned(Registry),
 				member(force(false), Options) ->
@@ -386,7 +392,8 @@
 			(	member(clean(true), Options) ->
 				delete_archives(Registry)
 			;	true
-			)
+			),
+			print_message(comment, packs, registry_deleted(Registry))
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
 		).
