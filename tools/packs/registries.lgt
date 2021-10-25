@@ -75,7 +75,7 @@
 	:- public(add/1).
 	:- mode(add(+atom), zero_or_one).
 	:- info(add/1, [
-		comment is 'Adds a new registry from a git cloning URL or a local directory URL using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a ``.git`` extension. A ``file://`` URL can be used for a local directory.',
+		comment is 'Adds a new registry from a git cloning or local directory URL using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a ``.git`` extension. A ``file://`` URL can be used for a local directory.',
 		argnames is ['URL'],
 		remarks is [
 			'Limitations' - 'Cannot be used for archive download URLs.',

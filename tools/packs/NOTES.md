@@ -646,6 +646,9 @@ startup, the above definition could be added there.
 Known issues
 ------------
 
+Using the `verbose(true)` option on Windows system may not provide the
+shell commands output depending on the backend.
+
 Ciao Prolog 1.20.0 cannot be used due to non-standard support for
 multifile predicates.
 
