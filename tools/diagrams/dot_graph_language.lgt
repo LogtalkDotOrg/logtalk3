@@ -93,8 +93,8 @@
 			integer_to_padded_atom(Day, PaddedDay),
 			integer_to_padded_atom(Hours, PaddedHours),
 			integer_to_padded_atom(Minutes, PaddedMinutes),
-			atomic_list_concat([Label2, 'Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '\\l'], Label)
-		;	Label = Label2
+			atomic_list_concat([Label0, 'Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '\\l'], Label)
+		;	Label = Label0
 		).
 
 	integer_to_padded_atom(Integer, Atom) :-
