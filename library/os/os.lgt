@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:86:0,
+		version is 1:86:1,
 		author is 'Paulo Moura',
-		date is 2021-10-17,
+		date is 2021-10-25,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -630,7 +630,13 @@
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
 			{file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(directory))}.
+			 (	file_property(ExpandedPath, type(directory)) ->
+			 	true
+			 ;	% workaround B-Prolog bug on Windows where
+			 	% drives are not recognized as directories
+			 	environ('COMSPEC', _),
+			 	sub_atom(ExpandedPath, 1, 1, 0, ':')
+			 )}.
 
 		file_exists(File) :-
 			absolute_file_name(File, ExpandedPath),

@@ -113,6 +113,9 @@ bug report.
 * FIXED: Workaround the lack of a predicate for converting between internal
 and operating-system file paths for several backends.
 
+* FIXED: Workaround B-Prolog bug on Windows where drives are not recognized as
+directories.
+
 Tools
 -----
 
