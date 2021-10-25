@@ -37,6 +37,10 @@
 		write_to_chars/2
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	:- multifile(graph_language_registry::language_object/2).
 	:- if(current_logtalk_flag(prolog_dialect, qp)).
 		:- dynamic(graph_language_registry::language_object/2).
@@ -78,32 +82,18 @@
 
 	diagram_label(Options, Label) :-
 		memberchk(title(Title), Options),
-		(	Title \== '' ->
-			atom_concat(Title, '\\l', Label0)
-		;	Label0 = ''
-		),
 		memberchk(description(Description), Options),
-		atom_concat(Label0, Description, Label1),
-		atom_concat(Label1, '\\l', Label2),
+		(	Title \== '' ->
+			atomic_list_concat([Title, '\\l', Description, '\\l'], Label0)
+		;	atomic_list_concat([Description, '\\l'], Label0)
+		),
 		(	memberchk(date(true), Options),
 			catch(os::date_time(Year, Month, Day, Hours, Minutes, _, _), _, fail) ->
-			number_codes(Year, YearCodes),
-			atom_codes(YearAtom, YearCodes),
 			integer_to_padded_atom(Month, PaddedMonth),
 			integer_to_padded_atom(Day, PaddedDay),
 			integer_to_padded_atom(Hours, PaddedHours),
 			integer_to_padded_atom(Minutes, PaddedMinutes),
-			atom_concat(Label2, 'Generated on ', Label3),
-			atom_concat(Label3, YearAtom, Label4),
-			atom_concat(Label4, '-', Label5),
-			atom_concat(Label5, PaddedMonth, Label6),
-			atom_concat(Label6, '-', Label7),
-			atom_concat(Label7, PaddedDay, Label8),
-			atom_concat(Label8, ', ', Label9),
-			atom_concat(Label9, PaddedHours, Label10),
-			atom_concat(Label10, ':', Label11),
-			atom_concat(Label11, PaddedMinutes, Label12),
-			atom_concat(Label12, '\\l', Label)
+			atomic_list_concat([Label2, 'Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '\\l'], Label)
 		;	Label = Label2
 		).
 

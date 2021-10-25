@@ -34,9 +34,9 @@
 	extends(parser)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2011-06-12,
+		date is 2021-10-25,
 		comment is 'Simple parser of PDDL 3.0 domain files.'
 	]).
 
@@ -45,6 +45,10 @@
 		init_el//1,
 		pref_con_GD//1,
 		problem//1
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/3
 	]).
 
 	parse(File, Output, RestOfFile) :-
@@ -114,25 +118,5 @@
 
 	% Workaround
 	length_spec([])						--> [not_defined].	% there is no definition???
-
-	:- if(\+ predicate_property(atomic_list_concat(_,_,_), built_in)).
-
-		atomic_list_concat([E |Es], S, A) :-
-			atomic_list_concat(Es, S, E, A).
-
-		atomic_list_concat([], _, A, A).
-		atomic_list_concat([E |Es], S, A0, A) :-
-			atom_concat(A0, S, A1),
-			(	atom(E) ->
-				atom_concat(A1, E, A2)
-			;	number(E) ->
-				number_codes(E, Cs),
-				atom_codes(Ea, Cs),
-				atom_concat(A1, Ea, A2)
-			;	fail
-			),
-			atomic_list_concat(Es, S, A2, A).
-
-	:- endif.
 
 :- end_object.

@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:63:0,
+		version is 2:63:1,
 		author is 'Paulo Moura',
-		date is 2021-08-04,
+		date is 2021-10-25,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -37,6 +37,10 @@
 
 	:- uses(os, [
 		decompose_file_name/3
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	:- public(entity/2).
@@ -337,13 +341,10 @@
 
 	predicate_target_value(Predicate, TargetValue) :-
 		(	Predicate = Functor/Arity ->
-			atom_concat(Functor, '/', TargetValue0)
+			atomic_list_concat([Functor, '/', Arity], TargetValue)
 		;	Predicate = Functor//Arity,
-			atom_concat(Functor, '//', TargetValue0)
-		),
-		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(TargetValue0, ArityAtom, TargetValue).
+			atomic_list_concat([Functor, '//', Arity], TargetValue)
+		).
 
 	add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions) :-
 		(	member(line_count(Line), Properties),

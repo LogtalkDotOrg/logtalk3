@@ -56,9 +56,9 @@
 	imports(read_file)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2019-03-08,
+		date is 2021-10-25,
 		comment is 'Simple parser of PDDL 3.0 files.'
 	]).
 
@@ -99,6 +99,10 @@
 	:- info(parse_problem/3, [
 		comment is 'Parses a PDDL 3.0 problem file, returning a compound term representing its contents and rest of the file. Useful when domain and problem are in one file.',
 		argnames is ['File', 'Output', 'RestOfFile']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/3
 	]).
 
 	parse_problem(File, Output) :-
@@ -463,25 +467,5 @@
 	:- meta_non_terminal(oneOrMore(1, *)).
 	oneOrMore(W, [R| Rs]) --> call(W, R), oneOrMore(W, Rs).
 	oneOrMore(_, [])      --> [].
-
-	:- if(\+ predicate_property(atomic_list_concat(_,_,_), built_in)).
-
-		atomic_list_concat([E |Es], S, A) :-
-			atomic_list_concat(Es, S, E, A).
-
-		atomic_list_concat([], _, A, A).
-		atomic_list_concat([E |Es], S, A0, A) :-
-			atom_concat(A0, S, A1),
-			(	atom(E) ->
-				atom_concat(A1, E, A2)
-			;	number(E) ->
-				number_codes(E, Cs),
-				atom_codes(Ea, Cs),
-				atom_concat(A1, Ea, A2)
-			;	fail
-			),
-			atomic_list_concat(Es, S, A2, A).
-
-	:- endif.
 
 :- end_object.

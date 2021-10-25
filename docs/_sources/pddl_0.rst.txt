@@ -11,8 +11,8 @@
 Simple parser of PDDL 3.0 files.
 
 | **Author:** Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.
-| **Version:** 1:2:0
-| **Date:** 2019-03-08
+| **Version:** 1:2:1
+| **Date:** 2021-10-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Simple parser of PDDL 3.0 files.
 
 | **Imports:**
 |    ``public`` :ref:`read_file <read_file/0>`
+| **Uses:**
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)

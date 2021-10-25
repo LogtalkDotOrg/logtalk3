@@ -23,10 +23,14 @@
 	implements(profilerp)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2018-07-12,
+		date is 2021-10-25,
 		comment is 'Simple wrapper for the SICStus Prolog profiler.'
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	:- if((current_logtalk_flag(prolog_version, v(4, Minor, _)), Minor >= 2)).
@@ -166,19 +170,6 @@
 
 		reset :-
 			{profile_reset(_:_)}.
-
-		atomic_list_concat(List, Atom) :-
-			atomic_list_concat(List, '', Atom).
-
-		atomic_list_concat([], Atom, Atom).
-		atomic_list_concat([Atomic| Atomics], Acc, Atom) :-
-			(	atom(Atomic) ->
-				atom_concat(Acc, Atomic, Acc2)
-			;	number_codes(Atomic, Codes),
-				atom_codes(Converted, Codes),
-				atom_concat(Acc, Converted, Acc2)
-			),
-			atomic_list_concat(Atomics, Acc2, Atom).
 
 	:- endif.
 

@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:49:0,
+		version is 2:49:1,
 		author is 'Paulo Moura',
-		date is 2021-08-05,
+		date is 2021-10-25,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -39,6 +39,10 @@
 
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, gnu)).
@@ -710,17 +714,10 @@
 
 	diagram_caption(Kind, Subject, Description) :-
 		::diagram_description(Description0),
-		atom_concat(Description0, ' for ', Description1),
-		atom_concat(Description1, Kind, Description2),
-		atom_concat(Description2, ' ', Description3),
 		(	atom(Subject) ->
-			atom_concat(Description3, Subject, Description)
+			atomic_list_concat([Description0, ' for ', Kind, ' ', Subject], Description)
 		;	functor(Subject, Functor, Arity),
-			atom_concat(Description3, Functor, Description4),
-			atom_concat(Description4, '/', Description5),
-			number_codes(Arity, ArityCodes),
-			atom_codes(ArityAtom, ArityCodes),
-			atom_concat(Description5, ArityAtom, Description)
+			atomic_list_concat([Description0, ' for ', Kind, ' ', Functor, '/', Arity], Description)
 		).
 
 	:- protected(output_rlibrary/3).
@@ -1252,13 +1249,8 @@
 		;	member(zoom_url_suffix(Extension), Options) ->
 			(	compound(Identifier) ->
 				functor(Identifier, Functor, Arity),
-				number_codes(Arity, ArityCodes),
-				atom_codes(ArityAtom, [0'_| ArityCodes]),
-				atom_concat(Functor, ArityAtom, Diagram0),
-				atom_concat(Diagram0, Suffix, Diagram1),
-				atom_concat(Diagram1, Extension, Diagram)
-			;	atom_concat(Identifier, Suffix, Diagram0),
-				atom_concat(Diagram0, Extension, Diagram)
+				atomic_list_concat([Functor, '_', Arity, Suffix, Extension], Diagram)
+			;	atomic_list_concat([Identifier, Suffix, Extension], Diagram)
 			),
 			NodeOptions = [zoom_url(Diagram)| Options]
 		;	% this case should never occur as the zoom_url_suffix/1 should be always defined
