@@ -899,8 +899,7 @@ forall(Generate, Test) :-
 	'$lgt_sicstus_atomic_atom'(Atomic, Atom) :-
 		(	atom(Atomic) ->
 			Atom = Atomic
-		;	number(Atomic) ->
-			number_codes(Atomic, Codes),
+		;	number_codes(Atomic, Codes),
 			atom_codes(Atom, Codes)
 		).
 

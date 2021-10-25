@@ -771,8 +771,7 @@ atomic_concat(Atomic1, Atomic2, Atom) :-
 '$lgt_ciao_atomic_atom'(Atomic, Atom) :-
 	(	atom(Atomic) ->
 		Atom = Atomic
-	;	number(Atomic) ->
-		atom_number(Atom, Atomic)
+	;	atom_number(Atom, Atomic)
 	).
 
 
@@ -806,7 +805,7 @@ atomic_list_concat([Atomic| Atomics], Separator, Atom) :-
 		throw(error(instantiation_error, atomic_list_concat/3))
 	;	\+ atomic(Atomic) ->
 		throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
-	;	\+ atomic(Atomic) ->
+	;	\+ atomic(Separator) ->
 		throw(error(type_error(atomic, Separator), atomic_list_concat/3))
 	;	'$lgt_ciao_atomic_atom'(Atomic, Atom0),
 		'$lgt_ciao_atomic_atom'(Separator, SeparatorAtom),

@@ -1059,8 +1059,7 @@ atomic_concat(Atomic1, Atomic2, Atom) :-
 '$lgt_quintus_atomic_atom'(Atomic, Atom) :-
 	(	atom(Atomic) ->
 		Atom = Atomic
-	;	number(Atomic) ->
-		number_chars(Atomic, Codes),
+	;	number_chars(Atomic, Codes),
 		atom_chars(Atom, Codes)
 	).
 
@@ -1095,7 +1094,7 @@ atomic_list_concat([Atomic| Atomics], Separator, Atom) :-
 		throw(error(instantiation_error, atomic_list_concat/3))
 	;	\+ atomic(Atomic) ->
 		throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
-	;	\+ atomic(Atomic) ->
+	;	\+ atomic(Separator) ->
 		throw(error(type_error(atomic, Separator), atomic_list_concat/3))
 	;	'$lgt_quintus_atomic_atom'(Atomic, Atom0),
 		'$lgt_quintus_atomic_atom'(Separator, SeparatorAtom),

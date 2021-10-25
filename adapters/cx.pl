@@ -701,26 +701,71 @@ term_hash(_, _, _, _) :-
 % atomic_concat(+atomic, +atomic, ?atom)
 
 atomic_concat(Atomic1, Atomic2, Atom) :-
-	concat([Atomic1, Atomic2], Atom).
+	(	var(Atomic1) ->
+		throw(error(instantiation_error, atomic_concat/3))
+	;	var(Atomic2) ->
+		throw(error(instantiation_error, atomic_concat/3))
+	;	\+ atomic(Atomic1) ->
+		throw(error(type_error(atomic, Atomic1), atomic_concat/3))
+	;	\+ atomic(Atomic2) ->
+		throw(error(type_error(atomic, Atomic2), atomic_concat/3))
+	;	'$lgt_cx_atomic_atom'(Atomic1, Atom1),
+		'$lgt_cx_atomic_atom'(Atomic2, Atom2),
+		atom_concat(Atom1, Atom2, Atom)
+	).
+
+'$lgt_cx_atomic_atom'(Atomic, Atom) :-
+	(	atom(Atomic) ->
+		Atom = Atomic
+	;	number_codes(Atomic, Codes),
+		atom_codes(Atom, Codes)
+	).
 
 
 % atomic_list_concat(@list(atomic), ?atom)
 
-atomic_list_concat(Atomics, Atom) :-
-	concat(Atomics, Atom).
+atomic_list_concat([Atomic| Atomics], Atom) :-
+	!,
+	(	var(Atomic) ->
+		throw(error(instantiation_error, atomic_list_concat/2))
+	;	\+ atomic(Atomic) ->
+		throw(error(type_error(atomic, Atomic), atomic_list_concat/2))
+	;	'$lgt_cx_atomic_atom'(Atomic, Atom0),
+		'$lgt_cx_atomic_list_concat'(Atomics, Atom0, Atom)
+	).
+atomic_list_concat([], '').
+
+'$lgt_cx_atomic_list_concat'([Next| Atomics], Atom0, Atom) :-
+	!,
+	atomic_list_concat([Next| Atomics], Atom1),
+	atom_concat(Atom0, Atom1, Atom).
+'$lgt_cx_atomic_list_concat'([], Atom, Atom).
 
 
 % atomic_list_concat(@list(atomic), +atom, ?atom)
 
-atomic_list_concat(Atomics, Glue, Atom) :-
-	'$lgt_cx_interleave'(Atomics, Glue, AtomicsGlue),
-	concat(AtomicsGlue, Atom).
+atomic_list_concat([Atomic| Atomics], Separator, Atom) :-
+	!,
+	(	var(Atomic) ->
+		throw(error(instantiation_error, atomic_list_concat/3))
+	;	var(Separator) ->
+		throw(error(instantiation_error, atomic_list_concat/3))
+	;	\+ atomic(Atomic) ->
+		throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
+	;	\+ atomic(Separator) ->
+		throw(error(type_error(atomic, Separator), atomic_list_concat/3))
+	;	'$lgt_cx_atomic_atom'(Atomic, Atom0),
+		'$lgt_cx_atomic_atom'(Separator, SeparatorAtom),
+		'$lgt_cx_atomic_list_concat'(Atomics, Atom0, SeparatorAtom, Atom)
+	).
+atomic_list_concat([], _, '').
 
-'$lgt_cx_interleave'([], _, []).
-'$lgt_cx_interleave'([Atomic], _, [Atomic]) :-
-	!.
-'$lgt_cx_interleave'([Atomic1, Atomic2| Atomics], Glue, [Atomic1, Glue| AtomicsGlue]) :-
-	'$lgt_cx_interleave'([Atomic2| Atomics], Glue, AtomicsGlue).
+'$lgt_cx_atomic_list_concat'([Next| Atomics], Atom0, SeparatorAtom, Atom) :-
+	!,
+	atomic_list_concat([Next| Atomics], SeparatorAtom, Atom2),
+	atom_concat(SeparatorAtom, Atom2, Atom1),
+	atom_concat(Atom0, Atom1, Atom).
+'$lgt_cx_atomic_list_concat'([], Atom, _, Atom).
 
 
 

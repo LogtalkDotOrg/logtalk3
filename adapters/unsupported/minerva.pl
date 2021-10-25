@@ -572,9 +572,8 @@ atomic_concat(Atomic1, Atomic2, Atom) :-
 '$lgt_minerva_atomic_atom'(Atomic, Atom) :-
 	(	atom(Atomic) ->
 		Atom = Atomic
-	;	number(Atomic) ->
-		number_chars(Atomic, Codes),
-		atom_chars(Atom, Codes)
+	;	number_chars(Atomic, Chars),
+		atom_chars(Atom, Chars)
 	).
 
 
@@ -608,7 +607,7 @@ atomic_list_concat([Atomic| Atomics], Separator, Atom) :-
 		throw(error(instantiation_error, atomic_list_concat/3))
 	;	\+ atomic(Atomic) ->
 		throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
-	;	\+ atomic(Atomic) ->
+	;	\+ atomic(Separator) ->
 		throw(error(type_error(atomic, Separator), atomic_list_concat/3))
 	;	'$lgt_minerva_atomic_atom'(Atomic, Atom0),
 		'$lgt_minerva_atomic_atom'(Separator, SeparatorAtom),
