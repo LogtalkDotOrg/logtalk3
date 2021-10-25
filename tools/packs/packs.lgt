@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:24:0,
 		author is 'Paulo Moura',
 		date is 2021-10-25,
 		comment is 'Pack handling predicates.'
@@ -1215,7 +1215,7 @@
 		atom_concat(Command1, ' \"', Command2),
 		atom_concat(Command2, Archive, Command3),
 		(	member(verbose(true), Options) ->
-			atom_concat(Command3, '\"" | sha256sum --check --quiet', Command)
+			atom_concat(Command3, '\"" | sha256sum --check', Command)
 		;	atom_concat(Command3, '\"" | sha256sum --check --status', Command)
 		),
 		^^command(Command, pack_archive_checksum_failed(Pack, Archive)).
