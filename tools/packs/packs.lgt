@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:24:1,
+		version is 0:25:0,
 		author is 'Paulo Moura',
 		date is 2021-10-25,
 		comment is 'Pack handling predicates.'
@@ -284,6 +284,10 @@
 		check/2, valid/2
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	:- initialization(startup).
 
 	startup :-
@@ -500,25 +504,16 @@
 		path_concat(Directory, '.git', Git),
 		(	directory_exists(Git) ->
 			(	member(verbose(true), Options) ->
-				atom_concat('git clone -v ', URL, Command0)
-			;	atom_concat('git clone -q ', URL, Command0)
+				atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
+			;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 			),
-			atom_concat(Command0, ' "', Command1),
-			atom_concat(Command1, OSPath, Command2),
-			atom_concat(Command2, '"', Command),
 			^^command(Command, pack_cloning_failed(Pack, URL))
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
-			atom_concat('xcopy /E /I "', OSDirectory, Command0),
-			atom_concat(Command0, '" "', Command1),
-			atom_concat(Command1, Path, Command2),
-			atom_concat(Command2, '"', Command),
+			atomic_list_concat(['xcopy /E /I "', OSDirectory, '" "', Path, '"'], Command),
 			^^command(Command, pack_directory_copy_failed(Pack, URL))
 		;	internal_os_path(Directory, OSDirectory),
-			atom_concat('cp -R "', OSDirectory, Command0),
-			atom_concat(Command0, '/." "', Command1),
-			atom_concat(Command1, Path, Command2),
-			atom_concat(Command2, '"', Command),
+			atomic_list_concat(['cp -R "', OSDirectory, '/." "', Path, '"'], Command),
 			^^command(Command, pack_directory_copy_failed(Pack, URL))
 		),
 		save_version(Path, Version),
@@ -1111,6 +1106,8 @@
 	registry_pack(Registry, Pack, PackObject) :-
 		implements_protocol(RegistryObject, registry_protocol),
 		RegistryObject::name(Registry),
+		% check that the registry have not been deleted in the current session
+		registries::directory(Registry, _),
 		object_property(RegistryObject, file(_, Directory)),
 		implements_protocol(PackObject, pack_protocol),
 		PackObject::name(Pack),
@@ -1158,21 +1155,14 @@
 		internal_os_path(Directory0, Directory),
 		(	operating_system_type(windows) ->
 			(	member(verbose(true), Options) ->
-				atom_concat('del /s /q "', Directory, Command0),
-				atom_concat(Command0, '" && rmdir /s /q "', Command1),
-				atom_concat(Command1, Directory, Command2),
-				atom_concat(Command2, '"', Command)
-			;	atom_concat('del /s /q "', Directory, Command0),
-				atom_concat(Command0, '" > nul && rmdir /s /q "', Command1),
-				atom_concat(Command1, Directory, Command2),
-				atom_concat(Command2, '" > nul', Command)
+				atomic_list_concat(['del /s /q "', Directory, '" && rmdir /s /q "',       Directory, '"'],       Command)
+			;	atomic_list_concat(['del /s /q "', Directory, '" > nul && rmdir /s /q "', Directory, '" > nul'], Command)
 			)
 		;	% assume unix
 			(	member(verbose(true), Options) ->
-				atom_concat('rm -rvf "', Directory, Command0)
-			;	atom_concat('rm -rf "', Directory, Command0)
-			),
-			atom_concat(Command0, '"', Command)
+				atomic_list_concat(['rm -rvf "', Directory, '"'], Command)
+			;	atomic_list_concat(['rm -rf "',  Directory, '"'], Command)
+			)
 		),
 		^^command(Command, pack_uninstall_failed(Pack, Directory)),
 		(	member(clean(true), Options) ->
@@ -1198,11 +1188,9 @@
 		(	file_exists(Archive) ->
 			true
 		;	(	member(verbose(true), Options) ->
-				atom_concat('curl -v -L -o "', Archive, Command0)
-			;	atom_concat('curl -s -S -L -o "', Archive, Command0)
+				atomic_list_concat(['curl -v -L -o "',    Archive, '" ', URL], Command)
+			;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" ', URL], Command)
 			),
-			atom_concat(Command0, '" ', Command1),
-			atom_concat(Command1, URL, Command),
 			^^command(Command, pack_archive_download_failed(Pack, Archive))
 		).
 
@@ -1211,39 +1199,26 @@
 		verify_checksum(OS, Pack, Archive, CheckSum, Options).
 
 	verify_checksum(unix, Pack, Archive, sha256-CheckSum, Options) :-
-		atom_concat('echo "', CheckSum, Command1),
-		atom_concat(Command1, ' \"', Command2),
-		atom_concat(Command2, Archive, Command3),
 		(	member(verbose(true), Options) ->
-			atom_concat(Command3, '\"" | sha256sum --check', Command)
-		;	atom_concat(Command3, '\"" | sha256sum --check --status', Command)
+			atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | sha256sum --check'],          Command)
+		;	atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | sha256sum --check --status'], Command)
 		),
 		^^command(Command, pack_archive_checksum_failed(Pack, Archive)).
 	verify_checksum(windows, Pack, Archive, sha256-CheckSum, Options) :-
 		(	member(verbose(true), Options) ->
-			atom_concat('certutil -v -hashfile "', Archive, Command1)
-		;	atom_concat('certutil -hashfile "', Archive, Command1)
+			atomic_list_concat(['certutil -v -hashfile "', Archive, '" SHA256 | find /v "hash" | find "', CheckSum, '" > nul'], Command)
+		;	atomic_list_concat(['certutil -hashfile "',    Archive, '" SHA256 | find /v "hash" | find "', CheckSum, '" > nul'], Command)
 		),
-		atom_concat(Command1, '" SHA256 | find /v "hash" | find "', Command2),
-		atom_concat(Command2, CheckSum, Command3),
-		atom_concat(Command3, '" > nul', Command),
 		^^command(Command, pack_archive_checksum_failed(Pack, Archive)).
 	verify_checksum(unknown, Pack, Archive, sha256-CheckSum, Options) :-
 		verify_checksum(unix, Pack, Archive, sha256-CheckSum, Options).
 
 	verify_checksig(Pack, Archive, ArchiveSig, Options) :-
 		(	member(verbose(true), Options) ->
-			atom_concat('gpg -v --verify "', ArchiveSig, Command0),
-			atom_concat(Command0, '" "', Command1),
-			atom_concat(Command1, Archive, Command2),
-			atom_concat(Command2, '"', Command)
-		;	atom_concat('gpg --verify "', ArchiveSig, Command0),
-			atom_concat(Command0, '" "', Command1),
-			atom_concat(Command1, Archive, Command2),
-			(	operating_system_type(windows) ->
-				atom_concat(Command2, '" > nul 2>&1', Command)
-			;	atom_concat(Command2, '" > /dev/null 2>&1', Command)
-			)
+			atomic_list_concat(['gpg -v --verify "', ArchiveSig, '" "', Archive, '"'],                  Command)
+		;	operating_system_type(windows) ->
+			atomic_list_concat(['gpg --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
+		;	atomic_list_concat(['gpg --verify "',    ArchiveSig, '" "', Archive, '" > /dev/null 2>&1'], Command)
 		),
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
@@ -1251,13 +1226,9 @@
 		make_pack_installation_directory(Pack, Path, OSPath),
 		^^tar_command(Tar),
 		(	member(verbose(true), Options) ->
-			atom_concat(Tar, ' -xvf "', Command0)
-		;	atom_concat(Tar, ' -xf "', Command0)
+			atomic_list_concat([Tar, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		),
-		atom_concat(Command0, Archive, Command1),
-		atom_concat(Command1, '" --strip 1 --directory "', Command2),
-		atom_concat(Command2, OSPath, Command3),
-		atom_concat(Command3,  '"', Command),
 		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
 
 	% installed pack version data handling

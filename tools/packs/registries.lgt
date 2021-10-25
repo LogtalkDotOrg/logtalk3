@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:26:0,
 		author is 'Paulo Moura',
 		date is 2021-10-25,
 		comment is 'Registry handling predicates.'
@@ -186,6 +186,10 @@
 		check/2, valid/2
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	% registry info predicates
 
 	list :-
@@ -338,25 +342,16 @@
 		path_concat(Directory, '.git', Git),
 		(	directory_exists(Git) ->
 			(	member(verbose(true), Options) ->
-				atom_concat('git clone -v ', URL, Command0)
-			;	atom_concat('git clone -q ', URL, Command0)
+				atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
+			;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 			),
-			atom_concat(Command0, ' "', Command1),
-			atom_concat(Command1, OSPath, Command2),
-			atom_concat(Command2, '"', Command),
 			^^command(Command, registry_cloning_failed(Registry, URL))
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
-			atom_concat('xcopy /E /I "', OSDirectory, Command0),
-			atom_concat(Command0, '" "', Command1),
-			atom_concat(Command1, OSPath, Command2),
-			atom_concat(Command2, '"', Command),
+			atomic_list_concat(['xcopy /E /I "', OSDirectory, '" "', OSPath, '"'], Command),
 			^^command(Command, registry_directory_copy_failed(Registry, URL))
 		;	internal_os_path(Directory, OSDirectory),
-			atom_concat('cp -R "', OSDirectory, Command0),
-			atom_concat(Command0, '/." "', Command1),
-			atom_concat(Command1, OSPath, Command2),
-			atom_concat(Command2, '"', Command),
+			atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command),
 			^^command(Command, registry_directory_copy_failed(Registry, URL))
 		).
 
@@ -383,21 +378,14 @@
 			internal_os_path(Directory0, Directory),
 			(	operating_system_type(windows) ->
 				(	member(verbose(true), Options) ->
-					atom_concat('del /s /q "', Directory, Command0),
-					atom_concat(Command0, '" && rmdir /s /q "', Command1),
-					atom_concat(Command1, Directory, Command2),
-					atom_concat(Command2, '"', Command)
-				;	atom_concat('del /s /q "', Directory, Command0),
-					atom_concat(Command0, '" > nul 2>&1 && rmdir /s /q "', Command1),
-					atom_concat(Command1, Directory, Command2),
-					atom_concat(Command2, '" > nul 2>&1', Command)
+					atomic_list_concat(['del /s /q "', Directory, '" && rmdir /s /q "',            Directory, '"'],            Command)
+				;	atomic_list_concat(['del /s /q "', Directory, '" > nul 2>&1 && rmdir /s /q "', Directory, '" > nul 2>&1'], Command)
 				)
 			;	% assume unix
 				(	member(verbose(true), Options) ->
-					atom_concat('rm -rvf "', Directory, Command0)
-				;	atom_concat('rm -rf "', Directory, Command0)
-				),
-				atom_concat(Command0, '"', Command)
+					atomic_list_concat(['rm -rvf "', Directory, '"'], Command)
+				;	atomic_list_concat(['rm -rf "',  Directory, '"'], Command)
+				)
 			),
 			^^command(Command, registry_deletion_failed(Registry, Directory)),
 			assertz(deleted_registry_(Registry)),
@@ -476,25 +464,18 @@
 
 	update_clone(_, _, Path, false, _) :-
 		internal_os_path(Path, OSPath),
-		atom_concat('git -C "', OSPath, Command0),
 		(	operating_system_type(windows) ->
-			atom_concat(Command0, '" remote update > nul 2>&1 && git -C "', Command1),
-			atom_concat(Command1, OSPath, Command2),
-			atom_concat(Command2, '" status -uno | find "up to date" > nul', Command)
-		;	atom_concat(Command0, '" remote update > /dev/null 2>&1 && git -C "', Command1),
-			atom_concat(Command1, OSPath, Command2),
-			atom_concat(Command2, '" status -uno | grep -q "up to date"', Command)
+			atomic_list_concat(['git -C "', OSPath, '" remote update > nul 2>&1 && git -C "',       OSPath, '" status -uno | find "up to date" > nul'], Command)
+		;	atomic_list_concat(['git -C "', OSPath, '" remote update > /dev/null 2>&1 && git -C "', OSPath, '" status -uno | grep -q "up to date"'],    Command)
 		),
 		shell(Command),
 		!.
 	update_clone(Registry, URL, Path, true, Options) :-
 		print_message(comment, packs, updating_registry(Registry, URL)),
 		internal_os_path(Path, OSPath),
-		atom_concat('git -C "', OSPath, Command0),
-		atom_concat(Command0, '" pull ', Command1),
 		(	member(verbose(true), Options) ->
-			atom_concat(Command1, '-v',  Command)
-		;	atom_concat(Command1, '-q',  Command)
+			atomic_list_concat(['git -C "', OSPath, '" pull -v'], Command)
+		;	atomic_list_concat(['git -C "', OSPath, '" pull -q'], Command)
 		),
 		^^command(Command, registry_clone_pull_failed(Registry, OSPath)).
 
@@ -708,12 +689,9 @@
 		path_concat(Registries, Registry, Path),
 		internal_os_path(Path, OSPath),
 		(	member(verbose(true), Options) ->
-			atom_concat('git clone -v ', URL, Command0)
-		;	atom_concat('git clone -q ', URL, Command0)
+			atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
+		;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 		),
-		atom_concat(Command0, ' "', Command1),
-		atom_concat(Command1, OSPath, Command2),
-		atom_concat(Command2, '"', Command),
 		^^command(Command, registry_cloning_failed(Registry, URL)).
 
 	download(Registry, URL, Archive, Options) :-
@@ -725,24 +703,18 @@
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesRegistriesRegistry),
 		(	member(verbose(true), Options) ->
-			atom_concat('curl -v -L -o "', Archive, Command0)
-		;	atom_concat('curl -s -S -L -o "', Archive, Command0)
+			atomic_list_concat(['curl -v -L -o "',    Archive, '" ', URL], Command)
+		;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" ', URL], Command)
 		),
-		atom_concat(Command0, '" ', Command1),
-		atom_concat(Command1, URL, Command),
 		^^command(Command, registry_download_failed(Registry, URL)).
 
 	uncompress(Registry, Archive, Path, Options) :-
 		make_registry_installation_directory(Registry, Path, OSPath),
 		^^tar_command(Tar),
 		(	member(verbose(true), Options) ->
-			atom_concat(Tar, ' -xvf "', Command0)
-		;	atom_concat(Tar, ' -xf "', Command0)
+			atomic_list_concat([Tar, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		),
-		atom_concat(Command0, Archive, Command1),
-		atom_concat(Command1, '" --strip 1 --directory "', Command2),
-		atom_concat(Command2, OSPath, Command3),
-		atom_concat(Command3, '"', Command),
 		^^command(Command, registry_archive_uncompress_failed(Registry, OSPath)).
 
 	installed_registry_packs(Registry) :-
