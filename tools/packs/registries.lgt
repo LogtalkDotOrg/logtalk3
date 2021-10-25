@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:25:0,
 		author is 'Paulo Moura',
-		date is 2021-10-24,
+		date is 2021-10-25,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -264,8 +264,32 @@
 	add(Registry, URL, UserOptions) :-
 		check(atom, Registry),
 		check(atom, URL),
+		fix_url(URL, URLFixed),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		add_registry(Registry, URLFixed, Options).
+
+	add(Registry, URL) :-
+		check(atom, Registry),
+		check(atom, URL),
+		fix_url(URL, URLFixed),
+		^^default_options(Options),
+		add_registry(Registry, URLFixed, Options).
+
+	add(URL) :-
+		check(atom, URL),
+		fix_url(URL, URLFixed),
+		decompose_file_name(URLFixed, _, Registry, _),
+		^^default_options(Options),
+		add_registry(Registry, URLFixed, Options).
+
+	fix_url(URL, URLFixed) :-
+		(	sub_atom(URL, _, _, 0, '/') ->
+			sub_atom(URL, 0, _, 1, URLFixed)
+		;	URLFixed = URL
+		).
+
+	add_registry(Registry, URL, Options) :-
 		print_message(comment, packs, adding_registry(Registry)),
 		(	registry_object(Registry, _),
 			member(force(false), Options) ->
@@ -303,18 +327,6 @@
 		),
 		^^print_readme_file_path(Path),
 		print_message(comment, packs, registry_added(Registry)).
-
-	add(Registry, URL) :-
-		add(Registry, URL, []).
-
-	add(URL) :-
-		check(atom, URL),
-		(	sub_atom(URL, _, _, 0, '/') ->
-			sub_atom(URL, _, _, 1, URLFixed)
-		;	URLFixed = URL
-		),
-		decompose_file_name(URLFixed, _, Registry, _),
-		add(Registry, URLFixed, []).
 
 	add_directory(Registry, URL, Path, Options) :-
 		atom_concat('file://', Directory0, URL),

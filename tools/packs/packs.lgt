@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:23:0,
 		author is 'Paulo Moura',
-		date is 2021-10-24,
+		date is 2021-10-25,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -469,7 +469,7 @@
 			registry_pack(Registry, Pack, _),
 			RegistryPacks
 		),
-		(	RegistryPacks = [] ->
+		(	RegistryPacks == [] ->
 			print_message(error, packs, unknown_pack(Pack)),
 			fail
 		;	RegistryPacks = [Registry-Pack] ->
@@ -822,7 +822,7 @@
 			registry_pack(Registry, Pack, _),
 			RegistryPacks
 		),
-		(	RegistryPacks = [] ->
+		(	RegistryPacks == [] ->
 			print_message(error, packs, unknown_pack(Pack)),
 			fail
 		;	RegistryPacks = [Registry-Pack] ->
@@ -902,7 +902,7 @@
 			registry_pack(Registry, Pack, _),
 			RegistryPacks
 		),
-		(	RegistryPacks = [] ->
+		(	RegistryPacks == [] ->
 			print_message(error, packs, unknown_pack(Pack)),
 			fail
 		;	RegistryPacks = [Registry-Pack] ->
@@ -941,9 +941,9 @@
 
 	dependency(Dependency @>= _, Dependency).
 	dependency(Dependency @=< _, Dependency).
-	dependency(Dependency @> _, Dependency).
-	dependency(Dependency @< _, Dependency).
-	dependency(Dependency == _, Dependency).
+	dependency(Dependency @>  _, Dependency).
+	dependency(Dependency @<  _, Dependency).
+	dependency(Dependency ==  _, Dependency).
 
 	% lint predicates
 
@@ -959,14 +959,14 @@
 	lint(Pack) :-
 		check(atom, Pack),
 		findall(
-			p(Registry, Pack, PackObject),
+			registry_pack(Registry, Pack, PackObject),
 			registry_pack(Registry, Pack, PackObject),
 			RegistryPacks
 		),
-		(	RegistryPacks = [] ->
+		(	RegistryPacks == [] ->
 			print_message(error, packs, unknown_pack(Pack)),
 			fail
-		;	RegistryPacks = [p(Registry, Pack, PackObject)] ->
+		;	RegistryPacks = [registry_pack(Registry, Pack, PackObject)] ->
 			lint_pack(Registry, Pack, PackObject)
 		;	print_message(error, packs, @'Pack available from multiple registries!'),
 			fail
@@ -1147,11 +1147,11 @@
 	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies) :-
 		registry_pack(Registry, Pack, PackObject),
 		findall(
-			v(Version, URL, CheckSum, Dependencies),
+			version(Version, URL, CheckSum, Dependencies),
 			PackObject::version(Version, _, URL, CheckSum, Dependencies, _),
 			Versions
 		),
-		sort(1, (@>), Versions, [v(LatestVersion,URL,CheckSum,Dependencies)| _]).
+		sort(1, (@>), Versions, [version(LatestVersion,URL,CheckSum,Dependencies)| _]).
 
 	uninstall_pack(Registry, Pack, Options) :-
 		directory(Pack, Directory0),
