@@ -111,4 +111,10 @@
 	test(lgt_atom_concat_3_24, true(A == 'a[]')) :-
 		{atom_concat(a, [], A)}.
 
+	test(lgt_atom_concat_3_25, true(A == '[]a')) :-
+		{atom_concat([], a, A)}.
+
+	test(lgt_atom_concat_3_26, true(A == '[][]')) :-
+		{atom_concat([], [], A)}.
+
 :- end_object.
