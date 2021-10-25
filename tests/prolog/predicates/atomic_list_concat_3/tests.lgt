@@ -23,42 +23,43 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
-		author is 'Paulo Moura',
-		date is 2020-07-31,
-		comment is 'Unit tests for the ISO Prolog standard atomic/1 built-in predicate.'
+		version is 1:0:0,
+		author is 'Paul Brown and Paulo Moura',
+		date is 2021-10-25,
+		comment is 'Unit tests for the atomic_list_concat/3 predicate.'
 	]).
 
-	:- discontiguous([
-		succeeds/1, fails/1
+	:- uses(user, [
+		atomic_list_concat/3
 	]).
 
-	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.3.5.4
+	quick_check(atomic_list_concat_property, atomic_list_concat(+list(atomic), +atomic, -atom)).
 
-	succeeds(iso_atomic_1_01) :-
-		{atomic(atom)}.
+	test(atomic_list_concat_three_elements, deterministic(Atom == 'a_42_c')) :-
+		atomic_list_concat([a, 42, c], '_', Atom).
 
-	fails(iso_atomic_1_02) :-
-		{atomic(a(b))}.
+	test(atomic_list_concat_two_elements, deterministic(Atom == 'a_42')) :-
+		atomic_list_concat([a, 42], '_', Atom).
 
-	fails(iso_atomic_1_03) :-
-		{atomic(_Var)}.
+	test(atomic_list_concat_one_element, deterministic(Atom == 'a')) :-
+		atomic_list_concat([a], '_', Atom).
 
-	succeeds(iso_atomic_1_04) :-
-		{atomic(6)}.
+	test(atomic_list_concat_empty, deterministic(Atom == '')) :-
+		atomic_list_concat([], '-', Atom).
 
-	succeeds(iso_atomic_1_05) :-
-		{atomic(3.3)}.
+	test(atomic_list_concat_var_head, error(instantiation_error)) :-
+		atomic_list_concat([_, bar], '_', _).
 
-	% tests from the Logtalk portability work
+	test(atomic_list_concat_var_tail, error(instantiation_error)) :-
+		atomic_list_concat([foo, bar| _], '_', _).
 
-	succeeds(lgt_atomic_1_06) :-
-		{atomic([])}.
+	test(atomic_list_concat_var_second, error(instantiation_error)) :-
+		atomic_list_concat([foo, bar], _, _).
 
-	succeeds(lgt_atomic_1_07) :-
-		{atomic(!)}.
+	test(atomic_list_concat_non_atomic_first, error(type_error(atomic,a(1)))) :-
+		atomic_list_concat([a(1), bar], '_', _).
 
-	succeeds(lgt_atomic_1_08) :-
-		{atomic({})}.
+	test(atomic_list_concat_non_atomic_second, error(type_error(atomic,a(1)))) :-
+		atomic_list_concat([foo, bar], a(1), _).
 
 :- end_object.

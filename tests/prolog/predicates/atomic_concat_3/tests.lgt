@@ -24,33 +24,36 @@
 
 	:- info([
 		version is 1:0:0,
-		author is 'Paul Brown and Paulo Moura',
+		author is 'Paulo Moura',
 		date is 2021-10-25,
-		comment is 'Unit tests for the atomic_list_concat/2 predicate.'
+		comment is 'Unit tests for the atomic_concat/3 predicate.'
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2
+		atomic_concat/3
 	]).
 
-	quick_check(atomic_list_concat_property, atomic_list_concat(+list(atomic), -atom)).
+	quick_check(atomic_concat_property, atomic_concat(+atomic, +atomic, -atom)).
 
-	test(atomic_list_concat_empty, deterministic(Res == '')) :-
-		atomic_list_concat([], Res).
+	test(atomic_concat_atom_number, deterministic(Atom == 'a42')) :-
+		atomic_concat(a, 42, Atom).
 
-	test(atomic_list_concat_long_empty_list, deterministic(Res == 'a1b+2.0[]c-3.5')) :-
-		atomic_list_concat([a, 1, b, '', +, 2.0, [], c, -3.5], Res).
+	test(atomic_concat_number_atom, deterministic(Atom == '42a')) :-
+		atomic_concat(42, a, Atom).
 
-	test(atomic_list_concat_long_empty_curly, deterministic(Res == 'a1b+2.0{}c-3.5')) :-
-		atomic_list_concat([a, 1, b, '', +, 2.0, {}, c, -3.5], Res).
+	test(atomic_concat_empty, deterministic(Atom == '')) :-
+		atomic_concat('', '', Atom).
 
-	test(atomic_list_concat_var_head, error(instantiation_error)) :-
-		atomic_list_concat([_, bar], foobar).
+	test(atomic_concat_var_first, error(instantiation_error)) :-
+		atomic_concat(_, bar, _).
 
-	test(atomic_list_concat_var_tail, error(instantiation_error)) :-
-		atomic_list_concat([foo, bar| _], foobar).
+	test(atomic_concat_var_second, error(instantiation_error)) :-
+		atomic_concat(foo, _, _).
 
-	test(atomic_list_concat_non_atomic, error(type_error(atomic,a(1)))) :-
-		atomic_list_concat([a(1), bar], foobar).
+	test(atomic_concat_non_atomic_first, error(type_error(atomic,a(1)))) :-
+		atomic_concat(a(1), bar, _).
+
+	test(atomic_concat_non_atomic_second, error(type_error(atomic,a(1)))) :-
+		atomic_concat(foo, a(1), _).
 
 :- end_object.
