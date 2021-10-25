@@ -919,31 +919,82 @@ forall(Generate, Test) :-
 
 % atomic_concat(+atomic, +atomic, ?atom)
 
-:- if(\+ get_flag(atomic_concat/3, type, built_in)).
+:- if(\+ predicate_property(atomic_concat(_, _, _), built_in)).
 
 	atomic_concat(Atomic1, Atomic2, Atom) :-
-		atomics_to_string([Atomic1, Atomic2], String),
-		atom_string(Atom, String).
+		(	var(Atomic1) ->
+			throw(error(instantiation_error, atomic_concat/3))
+		;	var(Atomic2) ->
+			throw(error(instantiation_error, atomic_concat/3))
+		;	\+ atomic(Atomic1) ->
+			throw(error(type_error(atomic, Atomic1), atomic_concat/3))
+		;	\+ atomic(Atomic2) ->
+			throw(error(type_error(atomic, Atomic2), atomic_concat/3))
+		;	'$lgt_gnu_atomic_atom'(Atomic1, Atom1),
+			'$lgt_gnu_atomic_atom'(Atomic2, Atom2),
+			atom_concat(Atom1, Atom2, Atom)
+		).
+
+	'$lgt_gnu_atomic_atom'(Atomic, Atom) :-
+		(	atom(Atomic) ->
+			Atom = Atomic
+		;	number_codes(Atomic, Codes),
+			atom_codes(Atom, Codes)
+		).
 
 :- endif.
 
 
 % atomic_list_concat(@list(atomic), ?atom)
 
-:- if(\+ get_flag(atomic_list_concat/2, type, built_in)).
+:- if(\+ predicate_property(atomic_list_concat(_, _), built_in)).
 
-	atomic_list_concat(Atomics, Atom) :-
-		atomics_to_string(Atomics, String),
-		atom_string(Atom, String).
+	atomic_list_concat([Atomic| Atomics], Atom) :-
+		!,
+		(	var(Atomic) ->
+			throw(error(instantiation_error, atomic_list_concat/2))
+		;	\+ atomic(Atomic) ->
+			throw(error(type_error(atomic, Atomic), atomic_list_concat/2))
+		;	'$lgt_gnu_atomic_atom'(Atomic, Atom0),
+			'$lgt_gnu_atomic_list_concat'(Atomics, Atom0, Atom)
+		).
+	atomic_list_concat([], '').
+
+	'$lgt_gnu_atomic_list_concat'([Next| Atomics], Atom0, Atom) :-
+		!,
+		atomic_list_concat([Next| Atomics], Atom1),
+		atom_concat(Atom0, Atom1, Atom).
+	'$lgt_gnu_atomic_list_concat'([], Atom, Atom).
 
 :- endif.
 
 
-:- if(\+ get_flag(atomic_list_concat/3, type, built_in)).
+% atomic_list_concat(@list(atomic), +atom, ?atom)
 
-	atomic_list_concat(Atomics, Glue, Atom) :-
-		atomics_to_string(Atomics, Glue, String),
-		atom_string(Atom, String).
+:- if(\+ predicate_property(atomic_list_concat(_, _, _), built_in)).
+
+	atomic_list_concat([Atomic| Atomics], Separator, Atom) :-
+		!,
+		(	var(Atomic) ->
+			throw(error(instantiation_error, atomic_list_concat/3))
+		;	var(Separator) ->
+			throw(error(instantiation_error, atomic_list_concat/3))
+		;	\+ atomic(Atomic) ->
+			throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
+		;	\+ atomic(Separator) ->
+			throw(error(type_error(atomic, Separator), atomic_list_concat/3))
+		;	'$lgt_gnu_atomic_atom'(Atomic, Atom0),
+			'$lgt_gnu_atomic_atom'(Separator, SeparatorAtom),
+			'$lgt_gnu_atomic_list_concat'(Atomics, Atom0, SeparatorAtom, Atom)
+		).
+	atomic_list_concat([], _, '').
+
+	'$lgt_gnu_atomic_list_concat'([Next| Atomics], Atom0, SeparatorAtom, Atom) :-
+		!,
+		atomic_list_concat([Next| Atomics], SeparatorAtom, Atom2),
+		atom_concat(SeparatorAtom, Atom2, Atom1),
+		atom_concat(Atom0, Atom1, Atom).
+	'$lgt_gnu_atomic_list_concat'([], Atom, _, Atom).
 
 :- endif.
 

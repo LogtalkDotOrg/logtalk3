@@ -33,27 +33,27 @@
 		atomic_concat/3
 	]).
 
-	quick_check(atomic_concat_property, atomic_concat(+atomic, +atomic, -atom)).
+	quick_check(atomic_concat_3_property, atomic_concat(+atomic, +atomic, -atom)).
 
-	test(atomic_concat_atom_number, deterministic(Atom == 'a42')) :-
+	test(atomic_concat_3_atom_number, deterministic(Atom == 'a42')) :-
 		atomic_concat(a, 42, Atom).
 
-	test(atomic_concat_number_atom, deterministic(Atom == '42a')) :-
+	test(atomic_concat_3_number_atom, deterministic(Atom == '42a')) :-
 		atomic_concat(42, a, Atom).
 
-	test(atomic_concat_empty, deterministic(Atom == '')) :-
+	test(atomic_concat_3_empty, deterministic(Atom == '')) :-
 		atomic_concat('', '', Atom).
 
-	test(atomic_concat_var_first, error(instantiation_error)) :-
+	test(atomic_concat_3_var_first, error(instantiation_error)) :-
 		atomic_concat(_, bar, _).
 
-	test(atomic_concat_var_second, error(instantiation_error)) :-
+	test(atomic_concat_3_var_second, error(instantiation_error)) :-
 		atomic_concat(foo, _, _).
 
-	test(atomic_concat_non_atomic_first, error(type_error(atomic,a(1)))) :-
+	test(atomic_concat_3_non_atomic_first, error(type_error(atomic,a(1)))) :-
 		atomic_concat(a(1), bar, _).
 
-	test(atomic_concat_non_atomic_second, error(type_error(atomic,a(1)))) :-
+	test(atomic_concat_3_non_atomic_second, error(type_error(atomic,a(1)))) :-
 		atomic_concat(foo, a(1), _).
 
 :- end_object.

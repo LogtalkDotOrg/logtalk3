@@ -33,24 +33,24 @@
 		atomic_list_concat/2
 	]).
 
-	quick_check(atomic_list_concat_property, atomic_list_concat(+list(atomic), -atom)).
+	quick_check(atomic_list_concat_2_property, atomic_list_concat(+list(atomic), -atom)).
 
-	test(atomic_list_concat_empty, deterministic(Res == '')) :-
+	test(atomic_list_concat_2_empty, deterministic(Res == '')) :-
 		atomic_list_concat([], Res).
 
-	test(atomic_list_concat_long_empty_list, deterministic(Res == 'a1b+2.0[]c-3.5')) :-
+	test(atomic_list_concat_2_long_empty_list, deterministic(Res == 'a1b+2.0[]c-3.5')) :-
 		atomic_list_concat([a, 1, b, '', +, 2.0, [], c, -3.5], Res).
 
-	test(atomic_list_concat_long_empty_curly, deterministic(Res == 'a1b+2.0{}c-3.5')) :-
+	test(atomic_list_concat_2_long_empty_curly, deterministic(Res == 'a1b+2.0{}c-3.5')) :-
 		atomic_list_concat([a, 1, b, '', +, 2.0, {}, c, -3.5], Res).
 
-	test(atomic_list_concat_var_head, error(instantiation_error)) :-
+	test(atomic_list_concat_2_var_head, error(instantiation_error)) :-
 		atomic_list_concat([_, bar], foobar).
 
-	test(atomic_list_concat_var_tail, error(instantiation_error)) :-
+	test(atomic_list_concat_2_var_tail, error(instantiation_error)) :-
 		atomic_list_concat([foo, bar| _], foobar).
 
-	test(atomic_list_concat_non_atomic, error(type_error(atomic,a(1)))) :-
+	test(atomic_list_concat_2_non_atomic, error(type_error(atomic,a(1)))) :-
 		atomic_list_concat([a(1), bar], foobar).
 
 :- end_object.

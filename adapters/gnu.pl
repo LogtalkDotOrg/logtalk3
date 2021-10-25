@@ -774,7 +774,7 @@ message_queue_destroy(_) :- fail.
 			throw(error(instantiation_error, atomic_list_concat/3))
 		;	\+ atomic(Atomic) ->
 			throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
-		;	\+ atomic(Atomic) ->
+		;	\+ atomic(Separator) ->
 			throw(error(type_error(atomic, Separator), atomic_list_concat/3))
 		;	'$lgt_gnu_atomic_atom'(Atomic, Atom0),
 			'$lgt_gnu_atomic_atom'(Separator, SeparatorAtom),
