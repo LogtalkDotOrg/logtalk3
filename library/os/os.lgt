@@ -630,7 +630,9 @@
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
 			{file_exists(ExpandedPath),
-			 (	file_property(ExpandedPath, type(directory)) ->
+			 (	% workaround B-Prolog bug on Windows where file_exists/1
+			 	% succeeds but file_property/2 throws a file existence error
+			 	catch(file_property(ExpandedPath, type(directory)), _, fail) ->
 			 	true
 			 ;	% workaround B-Prolog bug on Windows where
 			 	% drives are not recognized as directories
