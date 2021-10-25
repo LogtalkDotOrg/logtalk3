@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:24:1,
 		author is 'Paulo Moura',
 		date is 2021-10-25,
 		comment is 'Pack handling predicates.'
@@ -266,7 +266,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, sort/4
+		member/2,  memberchk/2, sort/4
 	]).
 
 	:- uses(logtalk, [
