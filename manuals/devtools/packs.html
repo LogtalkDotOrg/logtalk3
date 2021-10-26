@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>packs &mdash; The Logtalk Handbook v3.51.0-b04 documentation</title>
+  <title>packs &mdash; The Logtalk Handbook v3.51.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -159,6 +159,8 @@ and run in both POSIX and Windows systems. Moreover, this tool can be
 used not only for handling Logtalk packs but also Prolog only packs,
 thus providing a solution for sharing portable resources between
 multiple systems.</p>
+<p>A list of public Logtalk and Prolog pack registries is available at:</p>
+<p><a class="reference external" href="https://github.com/LogtalkDotOrg/pack-registries">https://github.com/LogtalkDotOrg/pack-registries</a></p>
 <p>This tool is the beta stage of development.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
@@ -172,7 +174,7 @@ required:</p>
 </ul>
 <p>The tool uses <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> instead of GNU <code class="docutils literal notranslate"><span class="pre">tar</span></code> so that it can
 uncompress <code class="docutils literal notranslate"><span class="pre">.zip</span></code> archives (<code class="docutils literal notranslate"><span class="pre">unzip</span></code> doesn’t provide the desired
-options that allows a simple and reliable solution for ingoring the
+options that allows a simple and reliable solution for ignoring the
 non-predictable name of the wrapper directory).</p>
 <p>On Windows systems, the following shell commands are required:</p>
 <ul class="simple">
@@ -277,7 +279,9 @@ the registry object file and all pack object files.</p></li>
 files (individual packs can use a different license, however). The path
 to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the registry is added. It can
 also be queried using the <code class="docutils literal notranslate"><span class="pre">registries::directory/2</span></code> predicate.</p>
-<p>Summarizing the required directory structure using the above example:</p>
+<p>Summarizing the required directory structure using the above example
+(note that the registry and pack specification files are named after the
+objects):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>jdoe_awesome_packs
     <span class="nv">LICENSE</span>
     <span class="nv">README</span>.md

@@ -16,6 +16,10 @@ used not only for handling Logtalk packs but also Prolog only packs,
 thus providing a solution for sharing portable resources between
 multiple systems.
 
+A list of public Logtalk and Prolog pack registries is available at:
+
+https://github.com/LogtalkDotOrg/pack-registries
+
 This tool is the beta stage of development.
 
 Requirements
@@ -31,7 +35,7 @@ required:
 
 The tool uses ``bsdtar`` instead of GNU ``tar`` so that it can
 uncompress ``.zip`` archives (``unzip`` doesn't provide the desired
-options that allows a simple and reliable solution for ingoring the
+options that allows a simple and reliable solution for ignoring the
 non-predictable name of the wrapper directory).
 
 On Windows systems, the following shell commands are required:
@@ -157,7 +161,9 @@ files (individual packs can use a different license, however). The path
 to the ``README.md`` file is printed when the registry is added. It can
 also be queried using the ``registries::directory/2`` predicate.
 
-Summarizing the required directory structure using the above example:
+Summarizing the required directory structure using the above example
+(note that the registry and pack specification files are named after the
+objects):
 
 ::
 
