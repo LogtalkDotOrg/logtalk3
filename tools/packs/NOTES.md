@@ -51,7 +51,7 @@ required:
 
 The tool uses `bsdtar` instead of GNU `tar` so that it can uncompress
 `.zip` archives (`unzip` doesn't provide the desired options that allows
-a simple and reliable solution for ingoring the non-predictable name of
+a simple and reliable solution for ignoring the non-predictable name of
 the wrapper directory).
 
 On Windows systems, the following shell commands are required:

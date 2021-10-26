@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2021-10-26,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -579,14 +579,10 @@
 
 	read_url(Path, URL) :-
 		path_concat(Path, 'URL.packs', File),
+		file_exists(File),
 		open(File, read, Stream),
 		read(Stream, URL),
 		close(Stream).
-
-	url_file(Registry, File) :-
-		check(atom, Registry),
-		directory(Registry, Directory),
-		path_concat(Directory, 'URL.packs', File).
 
 	% registry readme predicates
 
@@ -722,6 +718,7 @@
 		directory_files(Directory, Packs, [type(directory), dot_files(false), paths(absolute)]),
 		member(Pack, Packs),
 		path_concat(Pack, 'REGISTRY.packs', File),
+		file_exists(File),
 		open(File, read, Stream),
 		read(Stream, PackRegistry),
 		close(Stream),

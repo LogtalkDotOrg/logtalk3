@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2021-10-26,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1241,6 +1241,7 @@
 
 	read_version(Path, Version) :-
 		path_concat(Path, 'VERSION.packs', File),
+		file_exists(File),
 		open(File, read, Stream),
 		read(Stream, Version),
 		close(Stream).
@@ -1260,6 +1261,7 @@
 
 	read_registry(Path, Registry) :-
 		path_concat(Path, 'REGISTRY.packs', File),
+		file_exists(File),
 		open(File, read, Stream),
 		read(Stream, Registry),
 		close(Stream).
