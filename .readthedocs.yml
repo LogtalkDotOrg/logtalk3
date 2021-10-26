@@ -5,3 +5,5 @@ formats:
 
 python:
     version: 3
+    install:
+        - requirements: manuals/sources/requirements.txt
