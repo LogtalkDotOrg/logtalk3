@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools documentation
 ## 
-##   Last updated on October 18, 2021
+##   Last updated on October 28, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -61,7 +61,7 @@ contributions_goal="git_hash(Hash,[]), atomic_list_concat(['https://github.com/L
 
 
 print_version() {
-	echo "$(basename "$0") 0.16"
+	echo "$(basename "$0") 0.17"
 	exit 0
 }
 
@@ -115,12 +115,27 @@ elif [ "$p_arg" == "gnu" ] ; then
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk="jiplgt$extension -n -g"
+elif [ "$p_arg" == "lvm" ] ; then
+	prolog='LVM'
+	logtalk="lvmlgt$extension $i_arg -g"
+elif [ "$p_arg" == "scryer" ] ; then
+	prolog='Scryer Prolog'
+	logtalk="scryerlgt$extension $i_arg -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"
 elif [ "$p_arg" == "swi" ] ; then
 	prolog='SWI-Prolog'
 	logtalk="swilgt$extension -g"
+elif [ "$p_arg" == "swipack" ] ; then
+	prolog='SWI-Prolog'
+	logtalk="swipl $i_arg -g"
+elif [ "$p_arg" == "tau" ] ; then
+	prolog='Tau Prolog'
+	logtalk="taulgt$extension $i_arg -g"
+elif [ "$p_arg" == "trealla" ] ; then
+	prolog='Trealla Prolog'
+	logtalk="tplgt$extension $i_arg -g"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk="xsblgt$extension -e"

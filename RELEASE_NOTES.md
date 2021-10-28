@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.52.0 - December ??, 2021
+==========================
+
+Documentation
+-------------
+
+* FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
+work with all supported backends.
+
+
 3.51.0 - October 26, 2021
 =========================
 
