@@ -37,6 +37,9 @@ Tools
 * IMPROVED: The `packs` tool to print a warning if the pack being installed
 or updated requires a different backend from the one running the tool.
 
+* FIXED: Workaround `packs` tool portability issue with Ciao Prolog due to
+this system lack of supported for standard multifile predicate semantics.
+
 
 3.51.0 - October 26, 2021
 =========================

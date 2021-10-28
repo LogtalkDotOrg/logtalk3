@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:27:0,
+		version is 0:27:1,
 		author is 'Paulo Moura',
 		date is 2021-10-28,
 		comment is 'Pack handling predicates.'
@@ -279,6 +279,10 @@
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
 		path_concat/3
 	]).
+
+	:- if(current_logtalk_flag(prolog_dialect, ciao)).
+		:- multifile(type::check/2).
+	:- endif.
 
 	:- uses(type, [
 		check/2, valid/2

@@ -654,8 +654,8 @@ Known issues
 Using the `verbose(true)` option on Windows system may not provide the
 shell commands output depending on the backend.
 
-Ciao Prolog 1.20.0 cannot be used due to non-standard support for
-multifile predicates.
+When using Ciao Prolog 1.20.0, a workaround is used for this system
+non-standard support for multifile predicates.
 
 When using GNU Prolog 1.5.0 as the backend on Windows, you may get an
 error on `directory_files/2` calls. For details and a workaround, see:
