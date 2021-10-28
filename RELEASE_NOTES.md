@@ -31,6 +31,11 @@ Documentation
 * FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
 work with all supported backends.
 
+Library
+-------
+
+* IMPROVED: Performance of the `arbitrary` library tests.
+
 Tools
 -----
 

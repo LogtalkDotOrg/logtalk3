@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-08-04,
+		date is 2021-10-28,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -249,12 +249,8 @@
 		).
 
 	test(arbitrary_arbitrary_2_24) :-
-		forall(
-			list::member(Type, [compound, list]),
-			(	lgtunit::quick_check(type::arbitrary({ground(Type)}, -ground(Type)), Result, [n(25)]),
-				^^assertion(type(ground(Type),Result), subsumes_term(passed(_,_,_), Result))
-			)
-		).
+		lgtunit::quick_check(type::arbitrary({ground(list(var_or(integer),3))}, -ground(list(var_or(integer),3))), Result, [n(25)]),
+		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_25) :-
 		Types = [var, atom, integer, compound],
