@@ -250,7 +250,7 @@
 
 	test(arbitrary_arbitrary_2_24) :-
 		lgtunit::quick_check(type::arbitrary({ground(list(var_or(integer),3))}, -ground(list(var_or(integer),3))), Result, [n(25)]),
-		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
+		^^assertion(type(ground(list(var_or(integer),3)),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_25) :-
 		Types = [var, atom, integer, compound],
