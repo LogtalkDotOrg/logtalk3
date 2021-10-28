@@ -22,16 +22,16 @@
 :- protocol(registry_protocol).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-10-15,
+		date is 2021-10-28,
 		comment is 'Registry specification protocol.'
 	]).
 
 	:- public(name/1).
 	:- mode(name(?atom), zero_or_one).
 	:- info(name/1, [
-		comment is 'Registry name.',
+		comment is 'Registry name. Preferably a valid unquoted atom.',
 		argnames is ['Name']
 	]).
 
@@ -52,14 +52,14 @@
 	:- public(clone/1).
 	:- mode(clone(?atom), zero_or_one).
 	:- info(clone/1, [
-		comment is 'Registry git clone HTTPS URL.',
+		comment is 'Registry git clone HTTPS URL (must end with the ``.git`` extension). Git repos should have the same name as the registry.',
 		argnames is ['URL']
 	]).
 
 	:- public(archive/1).
 	:- mode(archive(?atom), zero_or_one).
 	:- info(archive/1, [
-		comment is 'Registry archive HTTPS URL.',
+		comment is 'Registry archive download HTTPS URL.',
 		argnames is ['URL']
 	]).
 

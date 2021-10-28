@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>registry_protocol &mdash; Logtalk APIs v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -63,7 +64,6 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><code class="docutils literal notranslate"><span class="pre">code_metrics</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><code class="docutils literal notranslate"><span class="pre">core</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><code class="docutils literal notranslate"><span class="pre">coroutining</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><code class="docutils literal notranslate"><span class="pre">csv</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><code class="docutils literal notranslate"><span class="pre">dates</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#iso8601"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#java"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#json"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
@@ -97,7 +96,6 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
@@ -122,7 +120,6 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><code class="docutils literal notranslate"><span class="pre">toychr</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><code class="docutils literal notranslate"><span class="pre">tutor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
@@ -179,13 +176,13 @@
            <div itemprop="articleBody">
              
   <p class="right" id="registry-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<div class="section" id="registry-protocol">
+<section id="registry-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">registry_protocol</span></code><a class="headerlink" href="#registry-protocol" title="Permalink to this headline"></a></h1>
 <p>Registry specification protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:9:0</div>
-<div class="line"><strong>Date:</strong> 2021-10-15</div>
+<div class="line"><strong>Version:</strong> 0:10:0</div>
+<div class="line"><strong>Date:</strong> 2021-10-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -227,11 +224,11 @@
 <li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="name/1"> </div><div class="section" id="name-1">
+<div id="name/1"> </div><section id="name-1">
 <span id="registry-protocol-0-name-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">name/1</span></code></a><a class="headerlink" href="#name-1" title="Permalink to this headline"></a></h3>
-<p>Registry name.</p>
+<p>Registry name. Preferably a valid unquoted atom.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -249,8 +246,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="description/1"> </div></div>
-<div class="section" id="description-1">
+<div id="description/1"> </div></section>
+<section id="description-1">
 <span id="registry-protocol-0-description-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">description/1</span></code></a><a class="headerlink" href="#description-1" title="Permalink to this headline"></a></h3>
 <p>Registry one line description.</p>
 <div class="line-block">
@@ -270,8 +267,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="home/1"> </div></div>
-<div class="section" id="home-1">
+<div id="home/1"> </div></section>
+<section id="home-1">
 <span id="registry-protocol-0-home-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">home/1</span></code></a><a class="headerlink" href="#home-1" title="Permalink to this headline"></a></h3>
 <p>Registry home HTTPS or file URL.</p>
 <div class="line-block">
@@ -291,10 +288,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="clone/1"> </div></div>
-<div class="section" id="clone-1">
+<div id="clone/1"> </div></section>
+<section id="clone-1">
 <span id="registry-protocol-0-clone-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">clone/1</span></code></a><a class="headerlink" href="#clone-1" title="Permalink to this headline"></a></h3>
-<p>Registry git clone HTTPS URL.</p>
+<p>Registry git clone HTTPS URL (must end with the <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension). Git repos should have the same name as the registry.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -312,10 +309,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="archive/1"> </div></div>
-<div class="section" id="archive-1">
+<div id="archive/1"> </div></section>
+<section id="archive-1">
 <span id="registry-protocol-0-archive-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">archive/1</span></code></a><a class="headerlink" href="#archive-1" title="Permalink to this headline"></a></h3>
-<p>Registry archive HTTPS URL.</p>
+<p>Registry archive download HTTPS URL.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -332,22 +329,22 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">archive(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="private-predicates">
+</section>
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

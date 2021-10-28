@@ -663,6 +663,7 @@ error on `directory_files/2` calls. For details and a workaround, see:
 https://github.com/didoudiaz/gprolog/issues/4
 
 Using SICStus Prolog as the backend on Windows doesn't currently work.
+A possible fix is under discussion.
 
 XSB have an odd bug (likely in its parser) when reading files that may
 cause a pack installed version to be reported as the `end_of_file` atom.
