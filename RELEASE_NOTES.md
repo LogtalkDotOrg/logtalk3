@@ -31,6 +31,12 @@ Documentation
 * FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
 work with all supported backends.
 
+Tools
+-----
+
+* IMPROVED: The `packs` tool to print a warning if the pack being installed
+or updated requires a different backend from the one running the tool.
+
 
 3.51.0 - October 26, 2021
 =========================

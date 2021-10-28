@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2021-10-26,
+		date is 2021-10-28,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -434,9 +434,10 @@
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
 		;	registry_pack(Registry, Pack, PackObject) ->
-			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, _) ->
-				check_dependencies(Dependencies, Installs),
+			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability) ->
 				print_message(comment, packs, installing_pack(Registry, Pack, Version)),
+				check_dependencies(Dependencies, Installs),
+				check_portability(Portability),
 				install_dependencies(Installs),
 				install_pack(Registry, Pack, Version, URL, CheckSum, Options),
 				print_message(comment, packs, pack_installed(Registry, Pack, Version))
@@ -456,9 +457,10 @@
 		(	installed_pack(_, Pack, _, _) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
-		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies) ->
-			check_dependencies(Dependencies, Installs),
+		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, installing_pack(Registry, Pack, LatestVersion)),
+			check_dependencies(Dependencies, Installs),
+			check_portability(Portability),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, []),
 			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion))
@@ -598,6 +600,16 @@
 	install_dependency(none).
 	install_dependency(install(Registry, Pack, Version)) :-
 		install(Registry, Pack, Version).
+
+	check_portability(all).
+	check_portability([Backend| Backends]) :-
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(	member(Dialect, [Backend| Backends]) ->
+			true
+		;	Backends == [] ->
+			print_message(warning, packs, 'Using the pack requires a different backend: ~q'+[Backend])
+		;	print_message(warning, packs, 'Using the pack requires one of the following backends: ~q'+[[Backend| Backends]])
+		).
 
 	% uninstall pack predicates
 
@@ -766,9 +778,10 @@
 		(	Version == NewVersion ->
 			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion))
 		;	pack_object(Pack, PackObject),
-			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, _) ->
-			check_dependencies(Dependencies, Installs),
+			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
+			check_dependencies(Dependencies, Installs),
+			check_portability(Portability),
 			uninstall_pack(Registry, Pack, Options),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options),
@@ -782,10 +795,11 @@
 		).
 
 	update_pack(Registry, Pack, Version, Options) :-
-		(	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies),
+		(	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
 			Version @< LatestVersion ->
-			check_dependencies(Dependencies, Installs),
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
+			check_dependencies(Dependencies, Installs),
+			check_portability(Portability),
 			uninstall_pack(Registry, Pack, Options),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
@@ -1138,17 +1152,17 @@
 
 	outdated_pack(Registry, Pack, Version, LatestVersion) :-
 		installed_pack(Registry, Pack, Version, _),
-		latest_version(Registry, Pack, LatestVersion, _, _, _),
+		latest_version(Registry, Pack, LatestVersion, _, _, _, _),
 		Version @< LatestVersion.
 
-	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies) :-
+	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) :-
 		registry_pack(Registry, Pack, PackObject),
 		findall(
-			version(Version, URL, CheckSum, Dependencies),
-			PackObject::version(Version, _, URL, CheckSum, Dependencies, _),
+			version(Version, URL, CheckSum, Dependencies, Portability),
+			PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability),
 			Versions
 		),
-		sort(1, (@>), Versions, [version(LatestVersion,URL,CheckSum,Dependencies)| _]).
+		sort(1, (@>), Versions, [version(LatestVersion,URL,CheckSum,Dependencies,Portability)| _]).
 
 	uninstall_pack(Registry, Pack, Options) :-
 		directory(Pack, Directory0),
