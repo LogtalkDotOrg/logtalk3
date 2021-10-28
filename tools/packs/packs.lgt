@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:27:1,
+		version is 0:28:0,
 		author is 'Paulo Moura',
 		date is 2021-10-28,
 		comment is 'Pack handling predicates.'
@@ -548,14 +548,14 @@
 		).
 
 	check_dependencies([], []).
-	check_dependencies([Dependency| Dependencies], [Install| Installs]) :-
-		check_dependency(Dependency, Install),
-		check_dependencies(Dependencies, Installs).
+	check_dependencies([Dependency| Dependencies], [Action| Actions]) :-
+		check_dependency(Dependency, Action),
+		check_dependencies(Dependencies, Actions).
 
 	check_dependency(Dependency, Install) :-
 		Dependency =.. [Operator, Pack, Version],
 		check_availability(Pack),
-		check_version(Operator, Pack, Version, Install).
+		check_version(Operator, Pack, Version, Dependency, Install).
 
 	check_availability(logtalk).
 	check_availability(Registry::Pack) :-
@@ -565,7 +565,7 @@
 			fail
 		).
 
-	check_version(Operator, logtalk, Version, none) :-
+	check_version(Operator, logtalk, Version, _, none) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
 		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
@@ -573,18 +573,19 @@
 			true
 		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
 		).
-	check_version(Operator, Registry::Pack, RequiredVersion, Install) :-
+	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Actions) :-
 		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
 			fix_version_for_comparison(RequiredVersion, InstalledVersion, FixedVersion),
 			(	{call(Operator, FixedVersion, RequiredVersion)} ->
-				Install = none
-			;	Install = update(Registry, Pack, RequiredVersion)
+				Actions = none
+			;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
+				Actions = update(Registry, Pack, Version)
+			;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+				fail
 			)
-		;	pack_object(Pack, PackObject),
-			fix_version_for_availability(RequiredVersion, FixedVersion),
-			PackObject::version(FixedVersion, _, _, _, _, _) ->
-			Install = install(Registry, Pack, FixedVersion)
-		;	print_message(error, packs, 'Pack dependency not available: ~q::~q@~q'+[Registry, Pack, RequiredVersion]),
+		;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
+			Actions = install(Registry, Pack, Version)
+		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
 
@@ -595,6 +596,12 @@
 	fix_version_for_availability(Major:Minor:Patch, Major:Minor:Patch) :- !.
 	fix_version_for_availability(Major:Minor,       Major:Minor:_) :- !.
 	fix_version_for_availability(Major,             Major:_:_).
+
+	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) :-
+		registry_pack(Registry, Pack, PackObject),
+		fix_version_for_availability(RequiredVersion, Version),
+		PackObject::version(Version, _, _, _, _, _),
+		{call(Operator, Version, RequiredVersion)}.
 
 	install_dependencies([]).
 	install_dependencies([Dependency| Dependencies]) :-
@@ -957,6 +964,7 @@
 	dependency(Dependency @>  _, Dependency).
 	dependency(Dependency @<  _, Dependency).
 	dependency(Dependency ==  _, Dependency).
+	dependency(Dependency \== _, Dependency).
 
 	% lint predicates
 

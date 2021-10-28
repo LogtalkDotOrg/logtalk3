@@ -39,6 +39,9 @@ Library
 Tools
 -----
 
+* IMPROVED: The `packs` tool to handle all dependency relations except range
+dependencies.
+
 * IMPROVED: The `packs` tool to print a warning if the pack being installed
 or updated requires a different backend from the one running the tool.
 

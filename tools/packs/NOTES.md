@@ -374,6 +374,10 @@ version. For example, `common::bits == 2:1` means that the pack requires a
 `common::bits` pack version 2.1.x (thus, from version 2.1.0 to the latest patch
 for version 2.1).
 
+- `Registry::Pack \== Version` - the pack requires a dependency with any version
+other than then the one specified. For example, `common::bits \== 2.1` means that
+the pack requires a `common::bits` pack version other than any 2.1.x version.
+
 Dependencies are specified using a list of the elements above. For example,
 `[common::bits @>= 2, common::bits @< 3, common::bytes @>= 2:4]` means all
 `common::bits` 2.x versions but not older or newer major versions plus all

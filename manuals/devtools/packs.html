@@ -471,6 +471,10 @@ version newer than the specified one. For example,
 specific version. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">==</span> <span class="pre">2:1</span></code> means that the
 pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack version 2.1.x (thus, from
 version 2.1.0 to the latest patch for version 2.1).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">\==</span> <span class="pre">Version</span></code> - the pack requires a dependency with
+any version other than then the one specified. For example,
+<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">\==</span> <span class="pre">2.1</span></code> means that the pack requires a
+<code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack version other than any 2.1.x version.</p></li>
 </ul>
 <p>Dependencies are specified using a list of the elements above. For
 example,
