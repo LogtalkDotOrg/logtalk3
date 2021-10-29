@@ -22,10 +22,10 @@
 :- protocol(pack_protocol).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2021-10-28,
-		comment is 'Pack specification protocol.'
+		date is 2021-10-30,
+		comment is 'Pack specification protocol. Objects implementing this protocol should be named after the pack with a ``_pack`` suffix and saved in a file with the same name as the object.'
 	]).
 
 	:- public(name/1).
@@ -45,7 +45,7 @@
 	:- public(license/1).
 	:- mode(license(?atom), zero_or_one).
 	:- info(license/1, [
-		comment is 'Pack license. Specified using the identifier from the SPDX License List (https://spdx.org/licenses/).',
+		comment is 'Pack license. Specified using the identifier from the SPDX License List (https://spdx.org/licenses/) when possible.',
 		argnames is ['License']
 	]).
 
@@ -63,12 +63,11 @@
 		comment is 'Table of available versions.',
 		argnames is ['Version', 'Status', 'URL', 'Checksum', 'Dependencies', 'Portability'],
 		remarks is [
-			'Version' - 'The ``Version`` argument uses the same format as entity versions: ``Major:Minor:Pathch``.',
+			'Version' - 'This argument uses the same format as entity versions: ``Major:Minor:Pathch``. Semantic versioning should be used.',
 			'Status' - 'Version development status. E.g ``stable``, ``rc``, ``beta``, ``alpha``, or ``deprecated``.',
 			'URL' - 'File URL for a local directory, file URL for a local archive, or download HTTPS URL for the pack archive.',
-			'Checksum' - 'A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be ``sha256``. For ``file://`` URLs of local directories, use ``none``.',
-			'Dependencies' - 'A list of the pack dependencies. Each dependency is a compound term ``Registry::Pack Operator Version`` where ``Operator`` is a term comparison operator. The atom ``logtalk`` can also be used in place of ``Registry::Pack``.',
-			'Dependency names' - 'Either ``Registry::Dependency`` or just ``Dependency`` where both ``Registry`` and ``Dependency`` are atoms.',
+			'Checksum' - 'A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be ``sha256``. For ``file://`` URLs of local directories, use ``none`` instead of a pair.',
+			'Dependencies' - 'A list of the pack dependencies. Each dependency is a compound term ``Registry::Pack Operator Version`` where ``Operator`` is a term comparison operator. The atom ``logtalk`` or a backend identifier atom can also be used in place of ``Registry::Pack``.',
 			'Portability' - 'Either the atom ``all`` or a list of the supported backend Prolog compilers (using the identifier atoms used by the ``prolog_dialect`` flag).',
 			'Clause order' - 'Versions must be listed ordered from newest to oldest.'
 		]

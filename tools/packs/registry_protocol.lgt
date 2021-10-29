@@ -22,10 +22,10 @@
 :- protocol(registry_protocol).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2021-10-28,
-		comment is 'Registry specification protocol.'
+		date is 2021-10-30,
+		comment is 'Registry specification protocol. Objects implementing this protocol should be named after the pack with a ``_registry`` suffix and saved in a file with the same name as the object.'
 	]).
 
 	:- public(name/1).

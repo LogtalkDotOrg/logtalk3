@@ -8,11 +8,11 @@
 ``registry_protocol``
 =====================
 
-Registry specification protocol.
+Registry specification protocol. Objects implementing this protocol should be named after the pack with a ``_registry`` suffix and saved in a file with the same name as the object.
 
 | **Author:** Paulo Moura
-| **Version:** 0:10:0
-| **Date:** 2021-10-28
+| **Version:** 0:11:0
+| **Date:** 2021-10-30
 
 | **Compilation flags:**
 |    ``static``

@@ -235,9 +235,10 @@ contents of these directories.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">packs</span></code> tools loads at startup defined registry and pack
 specifications. Therefore, using the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment
 variable allows easy switching between alternative registry/pack setups
-by simply changing the value of the variable before loading the tool.</p>
 </div>
 <div class="section" id="registry-specification">
+by simply changing the value of the variable before loading the tool or
+before starting Logtalk.</p>
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this headline"></a></h2>
 <p>A registry is a git remote repo that can be cloned, a downloadable
 archive, or a local directory containing a Logtalk loader file that
@@ -700,8 +701,12 @@ audit.</p>
 <ul class="simple">
 <li><p>Make available a new pack registry as a git repo. This simplifies
 updating the registry and rolling back to a previous version.</p></li>
-<li><p>Use registry and pack names that are valid unquoted atoms. Use
-descriptive names with underscores if necessary to link words.</p></li>
+<li><p>Use registry and pack names that are valid unquoted atoms, thus
+simplifying usage. Use descriptive names with underscores if
+necessary to link words.</p></li>
+<li><p>Name registry and pack specification objects after their names with a
+<code class="docutils literal notranslate"><span class="pre">_registry</span></code> or <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. Save the objects in files named
+after the objects.</p></li>
 <li><p>Create new pack versions from git tags.</p></li>
 <li><p>If the sources of a pack are available from a git repo, consider
 using signed commits and signed tags for increased security.</p></li>

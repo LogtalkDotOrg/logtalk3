@@ -112,7 +112,8 @@ contents of these directories.
 The ``packs`` tools loads at startup defined registry and pack
 specifications. Therefore, using the ``LOGTALKPACKS`` environment
 variable allows easy switching between alternative registry/pack setups
-by simply changing the value of the variable before loading the tool.
+by simply changing the value of the variable before loading the tool or
+before starting Logtalk.
 
 Registry specification
 ----------------------
@@ -658,8 +659,13 @@ Best practices
 -  Make available a new pack registry as a git repo. This simplifies
    updating the registry and rolling back to a previous version.
 
--  Use registry and pack names that are valid unquoted atoms. Use
-   descriptive names with underscores if necessary to link words.
+-  Use registry and pack names that are valid unquoted atoms, thus
+   simplifying usage. Use descriptive names with underscores if
+   necessary to link words.
+
+-  Name registry and pack specification objects after their names with a
+   ``_registry`` or ``_pack`` suffix. Save the objects in files named
+   after the objects.
 
 -  Create new pack versions from git tags.
 
