@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:28:0,
+		version is 0:29:0,
 		author is 'Paulo Moura',
-		date is 2021-10-28,
+		date is 2021-10-29,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -547,81 +547,6 @@
 		;	true
 		).
 
-	check_dependencies([], []).
-	check_dependencies([Dependency| Dependencies], [Action| Actions]) :-
-		check_dependency(Dependency, Action),
-		check_dependencies(Dependencies, Actions).
-
-	check_dependency(Dependency, Install) :-
-		Dependency =.. [Operator, Pack, Version],
-		check_availability(Pack),
-		check_version(Operator, Pack, Version, Dependency, Install).
-
-	check_availability(logtalk).
-	check_availability(Registry::Pack) :-
-		(	registry_pack(Registry, Pack, _) ->
-			true
-		;	print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
-			fail
-		).
-
-	check_version(Operator, logtalk, Version, _, none) :-
-		!,
-		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
-		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
-		(	{call(Operator, FixedVersion, Version)} ->
-			true
-		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
-		).
-	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Actions) :-
-		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
-			fix_version_for_comparison(RequiredVersion, InstalledVersion, FixedVersion),
-			(	{call(Operator, FixedVersion, RequiredVersion)} ->
-				Actions = none
-			;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
-				Actions = update(Registry, Pack, Version)
-			;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
-				fail
-			)
-		;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
-			Actions = install(Registry, Pack, Version)
-		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
-			fail
-		).
-
-	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.
-	fix_version_for_comparison(_:_,   Major:Minor:_,     Major:Minor) :- !.
-	fix_version_for_comparison(_,     Major:_:_,         Major).
-
-	fix_version_for_availability(Major:Minor:Patch, Major:Minor:Patch) :- !.
-	fix_version_for_availability(Major:Minor,       Major:Minor:_) :- !.
-	fix_version_for_availability(Major,             Major:_:_).
-
-	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) :-
-		registry_pack(Registry, Pack, PackObject),
-		fix_version_for_availability(RequiredVersion, Version),
-		PackObject::version(Version, _, _, _, _, _),
-		{call(Operator, Version, RequiredVersion)}.
-
-	install_dependencies([]).
-	install_dependencies([Dependency| Dependencies]) :-
-		install_dependency(Dependency),
-		install_dependencies(Dependencies).
-
-	install_dependency(none).
-	install_dependency(install(Registry, Pack, Version)) :-
-		install(Registry, Pack, Version).
-
-	check_portability(all).
-	check_portability([Backend| Backends]) :-
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(	member(Dialect, [Backend| Backends]) ->
-			true
-		;	Backends == [] ->
-			print_message(warning, packs, 'Using the pack requires a different backend: ~q'+[Backend])
-		;	print_message(warning, packs, 'Using the pack requires one of the following backends: ~q'+[[Backend| Backends]])
-		).
-
 	% uninstall pack predicates
 
 	uninstall(Pack, UserOptions) :-
@@ -1127,6 +1052,152 @@
 	valid_backend(xsb).
 	valid_backend(yap).
 
+	% dependency checking predicates
+
+	check_dependencies([], []).
+	check_dependencies([Dependency1, Dependency2| Dependencies], [Action| Actions]) :-
+		range_dependency(Dependency1, Dependency2, Dependency, Lower, Operator1, Upper, Operator2),
+		!,
+		check_range_dependency(Dependency, Lower, Operator1, Upper, Operator2, Action),
+		check_dependencies(Dependencies, Actions).
+	check_dependencies([Dependency| Dependencies], [Action| Actions]) :-
+		check_dependency(Dependency, Action),
+		check_dependencies(Dependencies, Actions).
+
+	range_dependency(Dependency1, Dependency2, Registry::Pack, Lower, Operator1, Upper, Operator2) :-
+		Dependency1 =.. [Operator1, Registry::Pack, Lower],
+		Dependency2 =.. [Operator2, Registry::Pack, Upper],
+		!.
+	range_dependency(Dependency1, Dependency2, Backend, Lower, Operator1, Upper, Operator2) :-
+		backend(Backend, _),
+		Dependency1 =.. [Operator1, Backend, Lower],
+		Dependency2 =.. [Operator2, Backend, Upper].
+
+	check_range_dependency(Registry::Pack, Lower, Operator1, Upper, Operator2, Action) :-
+		!,
+		check_availability(Registry::Pack),
+		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
+			fix_version_for_comparison(Lower, InstalledVersion, LowerFixedVersion),
+			fix_version_for_comparison(Upper, InstalledVersion, UpperFixedVersion),
+			(	{call(Operator1, LowerFixedVersion, Lower)},
+				{call(Operator2, UpperFixedVersion, Upper)} ->
+				Action = none
+			;	find_dependency_version(Operator1, Registry, Pack, Lower, Version),
+				{call(Operator2, Version, Upper)} ->
+				Action = update(Registry, Pack, Version)
+			;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
+				fail
+			)
+		;	find_dependency_version(Operator1, Registry, Pack, Lower, Version),
+			{call(Operator2, Version, Upper)} ->
+			Action = install(Registry, Pack, Version)
+		;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
+			fail
+		).
+	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, none) :-
+		!,
+		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
+		fix_version_for_comparison(Lower, Major:Minor:Patch, LowerFixedVersion),
+		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
+		(	{call(Operator1, LowerFixedVersion, Lower)},
+			{call(Operator2, UpperFixedVersion, Upper)} ->
+			true
+		;	print_message(warning, packs, 'Pack requires updating Logtalk to a version ~w ~q and ~w ~q'+[Operator1, Lower, Operator2, Upper])
+		).
+	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, none) :-
+		current_logtalk_flag(prolog_dialect, Backend),
+		!,
+		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
+		fix_version_for_comparison(Lower, Major:Minor:Patch, LowerFixedVersion),
+		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
+		(	{call(Operator1, LowerFixedVersion, Lower)},
+			{call(Operator2, UpperFixedVersion, Upper)} ->
+			true
+		;	backend(Backend, Name),
+			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator1, Lower, Operator2, Upper])
+		).
+	check_range_dependency(_, _, _, _, _, none).
+
+	check_dependency(Dependency, Action) :-
+		Dependency =.. [Operator, Pack, Version],
+		check_availability(Pack),
+		check_version(Operator, Pack, Version, Dependency, Action).
+
+	check_availability(Registry::Pack) :-
+		!,
+		(	registry_pack(Registry, Pack, _) ->
+			true
+		;	print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
+			fail
+		).
+	check_availability(_Backend).
+
+	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Action) :-
+		!,
+		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
+			fix_version_for_comparison(RequiredVersion, InstalledVersion, FixedVersion),
+			(	{call(Operator, FixedVersion, RequiredVersion)} ->
+				Action = none
+			;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
+				Action = update(Registry, Pack, Version)
+			;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+				fail
+			)
+		;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
+			Action = install(Registry, Pack, Version)
+		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+			fail
+		).
+	check_version(Operator, logtalk, Version, _, none) :-
+		!,
+		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
+		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
+		(	{call(Operator, FixedVersion, Version)} ->
+			true
+		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
+		).
+	check_version(Operator, Backend, Version, _, none) :-
+		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
+		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
+		(	{call(Operator, FixedVersion, Version)} ->
+			true
+		;	backend(Backend, Name),
+			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version])
+		).
+
+	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.
+	fix_version_for_comparison(_:_,   Major:Minor:_,     Major:Minor) :- !.
+	fix_version_for_comparison(_,     Major:_:_,         Major).
+
+	fix_version_for_availability(Major:Minor:Patch, Major:Minor:Patch) :- !.
+	fix_version_for_availability(Major:Minor,       Major:Minor:_) :- !.
+	fix_version_for_availability(Major,             Major:_:_).
+
+	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) :-
+		registry_pack(Registry, Pack, PackObject),
+		fix_version_for_availability(RequiredVersion, Version),
+		PackObject::version(Version, _, _, _, _, _),
+		{call(Operator, Version, RequiredVersion)}.
+
+	install_dependencies([]).
+	install_dependencies([Dependency| Dependencies]) :-
+		install_dependency(Dependency),
+		install_dependencies(Dependencies).
+
+	install_dependency(none).
+	install_dependency(install(Registry, Pack, Version)) :-
+		install(Registry, Pack, Version).
+
+	check_portability(all).
+	check_portability([Backend| Backends]) :-
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(	member(Dialect, [Backend| Backends]) ->
+			true
+		;	Backends == [] ->
+			print_message(warning, packs, 'Using the pack requires a different backend: ~q'+[Backend])
+		;	print_message(warning, packs, 'Using the pack requires one of the following backends: ~q'+[[Backend| Backends]])
+		).
+
 	% auxiliary predicates
 
 	registry_pack(Registry, Pack, PackObject) :-
@@ -1296,6 +1367,24 @@
 		check(atom, Pack),
 		directory(Pack, Directory),
 		path_concat(Directory, 'REGISTRY.packs', File).
+
+	% Logtalk + Prolog backend identifier table
+
+	backend(logtalk, 'Logtalk').
+	backend(b,       'B-Prolog').
+	backend(ciao,    'Ciao Prolog').
+	backend(cx,      'CxProlog').
+	backend(eclipse, 'ECLiPSe').
+	backend(gnu,     'GNU Prolog').
+	backend(ji,      'JIProlog').
+	backend(lvm,     'LVM').
+	backend(scryer,  'Scryer Prolog').
+	backend(sicstus, 'SICStus Prolog').
+	backend(swi,     'SWI-Prolog').
+	backend(tau,     'Tau Prolog').
+	backend(trealla, 'Trealla Prolog').
+	backend(xsb,     'XSB').
+	backend(yap,     'YAP').
 
 	% options handling
 

@@ -444,10 +444,12 @@ installing (or updating to) the latest version of the pack.</p>
 </div>
 <div class="section" id="pack-dependencies">
 <h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Permalink to this headline"></a></h2>
-<p>Pack dependencies can be specified by pack dependency name or, for
-better security, by registry and dependency names. When the pack depends
-on the Logtalk version itself, the reserved name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> can be
-used.</p>
+<p>Pack dependencies can be specified by registry and pack dependency names
+using the syntax <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>. When the pack depends on the
+Logtalk version itself, the reserved name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> can be used. When
+a pack is Prolog backend specific, the backend identifier can be used
+(see below for the table of backend specifiers).</p>
+<p>Dependencies are specified using a list of the following elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;=</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version equal or above the specified one. For example,
@@ -476,13 +478,12 @@ any version other than then the one specified. For example,
 <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">\==</span> <span class="pre">2.1</span></code> means that the pack requires a
 <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack version other than any 2.1.x version.</p></li>
 </ul>
-<p>Dependencies are specified using a list of the elements above. For
-example,
-<code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3,</span> <span class="pre">common::bytes</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2:4]</span></code> means
-all <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.x versions but not older or newer major versions
-plus all <code class="docutils literal notranslate"><span class="pre">common::bytes</span></code> versions starting from 2.4 (inclusive).</p>
 </div>
 <div class="section" id="pack-portability">
+<p>It’s also possible to specify <em>range</em> dependencies by using two
+consecutive elements with the lower bound followed by the upper bound.
+For example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3]</span></code> means all
+<code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.x versions but not older or newer major versions.</p>
 <h2>Pack portability<a class="headerlink" href="#pack-portability" title="Permalink to this headline"></a></h2>
 <p>Ideally, packs are fully portable and can be used with all Logtalk
 supported Prolog backends. This can be declared by using the atom
