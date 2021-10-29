@@ -352,10 +352,13 @@ installing (or updating to) the latest version of the pack.
 Pack dependencies
 -----------------
 
-Pack dependencies can be specified by pack dependency name or, for
-better security, by registry and dependency names. When the pack depends
-on the Logtalk version itself, the reserved name ``logtalk`` can be
-used.
+Pack dependencies can be specified by registry and pack dependency names
+using the syntax ``Registry::Pack``. When the pack depends on the
+Logtalk version itself, the reserved name ``logtalk`` can be used. When
+a pack is Prolog backend specific, the backend identifier can be used
+(see below for the table of backend specifiers).
+
+Dependencies are specified using a list of the following elements:
 
 -  ``Registry::Pack @>= Version`` - the pack requires a dependency with
    version equal or above the specified one. For example,
@@ -389,11 +392,10 @@ used.
    ``common::bits \== 2.1`` means that the pack requires a
    ``common::bits`` pack version other than any 2.1.x version.
 
-Dependencies are specified using a list of the elements above. For
-example,
-``[common::bits @>= 2, common::bits @< 3, common::bytes @>= 2:4]`` means
-all ``common::bits`` 2.x versions but not older or newer major versions
-plus all ``common::bytes`` versions starting from 2.4 (inclusive).
+It's also possible to specify *range* dependencies by using two
+consecutive elements with the lower bound followed by the upper bound.
+For example, ``[common::bits @>= 2, common::bits @< 3]`` means all
+``common::bits`` 2.x versions but not older or newer major versions.
 
 Pack portability
 ----------------
