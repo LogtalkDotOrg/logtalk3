@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Error handling &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -152,7 +153,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="error-handling">
+  <section id="error-handling">
 <span id="errors-errors"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline"></a></h1>
 <p>Error handling is accomplished in Logtalk by using the standard <code class="docutils literal notranslate"><span class="pre">catch/3</span></code>
 and <code class="docutils literal notranslate"><span class="pre">throw/1</span></code> predicates <a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a> together with a set of built-in methods
@@ -175,8 +176,8 @@ partially instantiated when the corresponding information is not available
 (e.g. due to compiler optimizations that throw away the necessary error context
 information). The <code class="docutils literal notranslate"><span class="pre">ExecutionContext</span></code> argument is an opaque term that
 can be decoded using the
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a> predicate.</p>
-<div class="section" id="raising-exceptions">
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a> predicate.</p>
+<section id="raising-exceptions">
 <h2>Raising Exceptions<a class="headerlink" href="#raising-exceptions" title="Permalink to this headline"></a></h2>
 <p>The <a class="reference internal" href="../refman/methods/error_handling_methods.html#error-handling-methods"><span class="std std-ref">error handling section</span></a> in the reference
 manual lists a set of convenient built-in methods that generate <code class="docutils literal notranslate"><span class="pre">error/2</span></code>
@@ -194,12 +195,12 @@ manually constructing a type error as in:</p>
 </div>
 <p>The provided error built-in methods cover all standard error types found in
 the ISO Prolog Core standard.</p>
-</div>
-<div class="section" id="type-checking">
+</section>
+<section id="type-checking">
 <h2>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this headline"></a></h2>
 <p>One of the most common case where errors may be generated is when
 type-checking predicate arguments and input data before processing it.
-The standard library includes a <a class="reference external" href="../../docs/type_0.html#type-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">type</span></a> object that
+The standard library includes a <a class="reference external" href="../../docs/type_0.html#type-0" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">type</span></a> object that
 defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible and new types can
 be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile
@@ -233,16 +234,16 @@ type? If we want just to test if a temperature is valid, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
-<p>The <a class="reference external" href="../../docs/type_0.html#type-0-valid-2" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">type::valid/2</span></a> predicate succeeds or fails
+<p>The <a class="reference external" href="../../docs/type_0.html#type-0-valid-2" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">type::valid/2</span></a> predicate succeeds or fails
 depending on the second argument being of the type specified in the first
 argument. If instead of success or failure we want to generate an error for
-invalid values, we can use the <a class="reference external" href="../../docs/type_0.html#type-0-check-2" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">type::check/2</span></a>
+invalid values, we can use the <a class="reference external" href="../../docs/type_0.html#type-0-check-2" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">type::check/2</span></a>
 predicate instead:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
 <p>If we require an <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term with the error context, we can
-use instead the <a class="reference external" href="../../docs/type_0.html#type-0-check-3" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">type::check/3</span></a> predicate:</p>
+use instead the <a class="reference external" href="../../docs/type_0.html#type-0-check-3" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">type::check/3</span></a> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</span>, <span class="nv">Context</span>),
@@ -253,15 +254,15 @@ type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</s
 <code class="docutils literal notranslate"><span class="pre">type</span></code> object use <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> when compiling with the
 <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize flag</span></a> turned on, thus enabling efficient
 type-checking.</p>
-</div>
-<div class="section" id="expected-terms">
+</section>
+<section id="expected-terms">
 <h2>Expected terms<a class="headerlink" href="#expected-terms" title="Permalink to this headline"></a></h2>
 <p>Support for representing and handling <em>expected terms</em> is provided by the
 <a class="reference internal" href="../libraries/expecteds.html"><span class="doc">expecteds</span></a> library. Expected terms allows defering errors
 to later stages of an application in alternative to raising an exception as
 soon as an error is detected.</p>
-</div>
-<div class="section" id="compiler-warnings-and-errors">
+</section>
+<section id="compiler-warnings-and-errors">
 <h2>Compiler warnings and errors<a class="headerlink" href="#compiler-warnings-and-errors" title="Permalink to this headline"></a></h2>
 <p>The current Logtalk compiler uses the standard <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in
 predicate to read and compile a Logtalk source file. This improves the
@@ -274,15 +275,15 @@ may abort the compilation process with limited information given to the user
 errors and potential errors, described below, that the compiler will try
 to detect and report, depending on the used compiler flags (see the
 <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">Compiler flags</span></a> section of this manual on lint flags for details).</p>
-<div class="section" id="unknown-entities">
+<section id="unknown-entities">
 <span id="errors-unknown"></span><h3>Unknown entities<a class="headerlink" href="#unknown-entities" title="Permalink to this headline"></a></h3>
 <p>The Logtalk compiler warns about any referenced entity that is not
 currently loaded. The warning may reveal a misspell entity name or just
 an entity that it will be loaded later. Out-of-oder loading should be
 avoided when possible as it prevents some code optimizations such as
 <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> of messages to methods.</p>
-</div>
-<div class="section" id="singleton-variables">
+</section>
+<section id="singleton-variables">
 <span id="errors-singletons"></span><h3>Singleton variables<a class="headerlink" href="#singleton-variables" title="Permalink to this headline"></a></h3>
 <p>Singleton variables in a clause are often misspell variables and, as
 such, one of the most common errors when programming in Prolog.
@@ -290,8 +291,8 @@ Assuming that the <a class="reference internal" href="../glossary.html#term-back
 <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate supports the standard <code class="docutils literal notranslate"><span class="pre">singletons/1</span></code>
 option, the compiler warns about any singleton variable found while
 compiling a source file.</p>
-</div>
-<div class="section" id="redefinition-of-prolog-built-in-predicates">
+</section>
+<section id="redefinition-of-prolog-built-in-predicates">
 <span id="errors-prolog"></span><h3>Redefinition of Prolog built-in predicates<a class="headerlink" href="#redefinition-of-prolog-built-in-predicates" title="Permalink to this headline"></a></h3>
 <p>The Logtalk compiler will warn us of any redefinition of a Prolog
 built-in predicate inside an object or category. Sometimes the redefinition
@@ -299,119 +300,119 @@ is intended. In other cases, the user may not be aware that a particular
 <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> may already provide the predicate
 as a built-in predicate or may want to ensure code portability among
 several Prolog compilers with different sets of built-in predicates.</p>
-</div>
-<div class="section" id="redefinition-of-logtalk-built-in-predicates">
+</section>
+<section id="redefinition-of-logtalk-built-in-predicates">
 <span id="errors-redefinition-predicates"></span><h3>Redefinition of Logtalk built-in predicates<a class="headerlink" href="#redefinition-of-logtalk-built-in-predicates" title="Permalink to this headline"></a></h3>
 <p>Similar to the redefinition of Prolog built-in predicates, the Logtalk
 compiler will warn us if we try to redefine a Logtalk built-in. But the
 redefinition will probably be an error in most (if not all) cases.</p>
-</div>
-<div class="section" id="redefinition-of-logtalk-built-in-methods">
+</section>
+<section id="redefinition-of-logtalk-built-in-methods">
 <span id="errors-redefinition-methods"></span><h3>Redefinition of Logtalk built-in methods<a class="headerlink" href="#redefinition-of-logtalk-built-in-methods" title="Permalink to this headline"></a></h3>
 <p>An error will be thrown if we attempt to redefine a Logtalk built-in
 method inside an entity. The default behavior is to report the error and
 abort the compilation of the offending entity.</p>
-</div>
-<div class="section" id="misspell-calls-of-local-predicates">
+</section>
+<section id="misspell-calls-of-local-predicates">
 <span id="errors-misspell"></span><h3>Misspell calls of local predicates<a class="headerlink" href="#misspell-calls-of-local-predicates" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported if Logtalk finds (in the body of a predicate
 definition) a call to a local predicate that is not defined, built-in
 (either in Prolog or in Logtalk) or declared dynamic. In most cases
 these calls are simple misspell errors.</p>
-</div>
-<div class="section" id="portability-warnings">
+</section>
+<section id="portability-warnings">
 <span id="errors-portability"></span><h3>Portability warnings<a class="headerlink" href="#portability-warnings" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported if a predicate clause contains a call to a
 non-standard built-in predicate or arithmetic function, Portability
 warnings are also reported for non-standard flags or flag values. These
 warnings often cannot be avoided due to the limited scope of the ISO
 Prolog standard.</p>
-</div>
-<div class="section" id="deprecated-elements">
+</section>
+<section id="deprecated-elements">
 <span id="errors-deprecated"></span><h3>Deprecated elements<a class="headerlink" href="#deprecated-elements" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported if a deprecated directive, control construct,
 or predicate is used. These warnings should be fixed as soon as possible
 as support for any deprecated features will likely be discontinued in
 future versions.</p>
-</div>
-<div class="section" id="missing-directives">
+</section>
+<section id="missing-directives">
 <span id="errors-missing-directives"></span><h3>Missing directives<a class="headerlink" href="#missing-directives" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for any missing dynamic, discontiguous,
 meta-predicate, and public predicate directive.</p>
-</div>
-<div class="section" id="duplicated-directives">
+</section>
+<section id="duplicated-directives">
 <span id="errors-duplicated-directives"></span><h3>Duplicated directives<a class="headerlink" href="#duplicated-directives" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for any duplicated scope, multifile, dynamic,
 discontiguous, meta-predicate, and meta-non-terminal directives. Note
 that conflicting directives for the same predicate are handled as
 errors, not as duplicated directive warnings.</p>
-</div>
-<div class="section" id="duplicated-clauses">
+</section>
+<section id="duplicated-clauses">
 <span id="errors-duplicated-clauses"></span><h3>Duplicated clauses<a class="headerlink" href="#duplicated-clauses" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for any duplicated entity clauses. This check
 is computationally heavy, however, and usually turned off by default.</p>
-</div>
-<div class="section" id="goals-that-are-always-true-or-false">
+</section>
+<section id="goals-that-are-always-true-or-false">
 <span id="errors-always-true-or-false-goals"></span><h3>Goals that are always true or false<a class="headerlink" href="#goals-that-are-always-true-or-false" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for any goal that is always true or false.
 This is usually caused by typos in the code. For example, writing
 <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">==</span> <span class="pre">y</span></code> instead of <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">==</span> <span class="pre">Y</span></code>.</p>
-</div>
-<div class="section" id="trivial-fails">
+</section>
+<section id="trivial-fails">
 <span id="errors-trivial-fails"></span><h3>Trivial fails<a class="headerlink" href="#trivial-fails" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for any call to a local static predicate with
 no matching clause.</p>
-</div>
-<div class="section" id="suspicious-calls">
+</section>
+<section id="suspicious-calls">
 <span id="errors-suspicious-calls"></span><h3>Suspicious calls<a class="headerlink" href="#suspicious-calls" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for calls that are syntactically correct but most
 likely a semantic error. An example is <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> calls in
 clauses that apparently are meant to implement recursive predicate definitions
 where the user intention is to call the local predicate definition.</p>
-</div>
-<div class="section" id="lambda-variables">
+</section>
+<section id="lambda-variables">
 <span id="errors-lambda-variables"></span><h3>Lambda variables<a class="headerlink" href="#lambda-variables" title="Permalink to this headline"></a></h3>
 <p>A warning will be reported for <a class="reference internal" href="../glossary.html#term-lambda-expression"><span class="xref std std-term">lambda expressions</span></a>
 with unclassified variables (not listed as either <a class="reference internal" href="../glossary.html#term-lambda-free-variable"><span class="xref std std-term">lambda free</span></a>
 or <a class="reference internal" href="../glossary.html#term-lambda-parameter"><span class="xref std std-term">lambda parameter</span></a> variables), for variables playing a dual role
 (as both lambda free and lambda parameter variables), and for lambda parameters
 used elsewhere in a clause.</p>
-</div>
-<div class="section" id="redefinition-of-predicates-declared-in-uses-2-or-use-module-2-directives">
+</section>
+<section id="redefinition-of-predicates-declared-in-uses-2-or-use-module-2-directives">
 <span id="errors-predicate-redefinition"></span><h3>Redefinition of predicates declared in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives<a class="headerlink" href="#redefinition-of-predicates-declared-in-uses-2-or-use-module-2-directives" title="Permalink to this headline"></a></h3>
 <p>A error will be reported for any attempt to define locally a predicate
 that is already declared in an <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or
 <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive.</p>
-</div>
-<div class="section" id="other-warnings-and-errors">
+</section>
+<section id="other-warnings-and-errors">
 <span id="errors-others"></span><h3>Other warnings and errors<a class="headerlink" href="#other-warnings-and-errors" title="Permalink to this headline"></a></h3>
 <p>The Logtalk compiler will throw an error if it finds a predicate clause
 or a directive that cannot be parsed. The default behavior is to report
 the error and abort the compilation.</p>
-</div>
-</div>
-<div class="section" id="runtime-errors">
+</section>
+</section>
+<section id="runtime-errors">
 <span id="errors-runtime"></span><h2>Runtime errors<a class="headerlink" href="#runtime-errors" title="Permalink to this headline"></a></h2>
 <p>This section briefly describes runtime errors that result from misuse of
 Logtalk built-in predicates, built-in methods or from message sending.
 For a complete and detailed description of runtime errors please consult
 the Reference Manual.</p>
-<div class="section" id="logtalk-built-in-predicates">
+<section id="logtalk-built-in-predicates">
 <span id="errors-predicates"></span><h3>Logtalk built-in predicates<a class="headerlink" href="#logtalk-built-in-predicates" title="Permalink to this headline"></a></h3>
 <p>Most Logtalk built-in predicates checks the type and mode of the calling
 arguments, throwing an exception in case of misuse.</p>
-</div>
-<div class="section" id="logtalk-built-in-methods">
+</section>
+<section id="logtalk-built-in-methods">
 <span id="errors-methods"></span><h3>Logtalk built-in methods<a class="headerlink" href="#logtalk-built-in-methods" title="Permalink to this headline"></a></h3>
 <p>Most Logtalk built-in method checks the type and mode of the calling
 arguments, throwing an exception in case of misuse.</p>
-</div>
-<div class="section" id="message-sending">
+</section>
+<section id="message-sending">
 <span id="errors-sending"></span><h3>Message sending<a class="headerlink" href="#message-sending" title="Permalink to this headline"></a></h3>
 <p>The message sending mechanisms always check if the receiver of a message
 is a defined object and if the message corresponds to a declared
 predicate within the scope of the sender. The built-in protocol
-<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">forwarding</span></a> declares a predicate,
+<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">forwarding</span></a> declares a predicate,
 <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a>, which is automatically called (if defined) by
 the runtime for any message that the receiving object does not understand.
 The usual definition for this error handler is to delegate or forward the
@@ -428,9 +429,9 @@ be simplified to:</p>
 </pre></div>
 </div>
 <p>More sophisticated definitions are, of course, possible.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

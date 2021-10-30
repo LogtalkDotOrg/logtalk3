@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the user installed packs
-%  Last updated on October 15, 2021
+%  Last updated on October 30, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -31,13 +31,14 @@
 
 % packs (third-party libraries) directory
 
-logtalk_library_path(logtalk_packs, LogtalkPacks) :-
-	(	'$lgt_environment_variable'('LOGTALKPACKS', _) ->
-		LogtalkPacks = '$LOGTALKPACKS/'
-	;	LogtalkPacks = home('logtalk_packs/')
-	).
-logtalk_library_path(Pack, logtalk_packs(Path)) :-
-	(	'$lgt_environment_variable'('LOGTALKPACKS', _) ->
+logtalk_library_path(Pack, PackPath) :-
+	(	var(Pack) ->
+		true
+	;	Pack \== logtalk_packs
+	),
+	(	'$lgt_expand_library_alias'(logtalk_packs, LogtalkPacks) ->
+		atom_concat(LogtalkPacks, '/packs', PathsPacks)
+	;	'$lgt_environment_variable'('LOGTALKPACKS', _) ->
 		PathsPacks = '$LOGTALKPACKS/packs'
 	;	'$lgt_environment_variable'('HOME', _) ->
 		PathsPacks = '$HOME/logtalk_packs/packs'
@@ -53,8 +54,5 @@ logtalk_library_path(Pack, logtalk_packs(Path)) :-
 		\+ sub_atom(Pack, 0, _, _, '.')
 	;	true
 	),
-	atom_concat(ExpandedPath, '/', PackPath0),
-	atom_concat(PackPath0, Pack, PackPath),
-	'$lgt_directory_exists'(PackPath),
-	atom_concat('packs/', Pack, Path0),
-	atom_concat(Path0, '/', Path).
+	atomic_list_concat([ExpandedPath, '/', Pack], PackPath),
+	'$lgt_directory_exists'(PackPath).

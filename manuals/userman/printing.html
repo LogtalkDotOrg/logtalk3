@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Printing messages and asking questions &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -129,7 +130,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="printing-messages-and-asking-questions">
+  <section id="printing-messages-and-asking-questions">
 <span id="printing-printing"></span><h1>Printing messages and asking questions<a class="headerlink" href="#printing-messages-and-asking-questions" title="Permalink to this headline"></a></h1>
 <p>Applications, components, and libraries often print all sorts of messages.
 These include banners, logging, debugging, and computation results messages
@@ -168,11 +169,11 @@ allowing it to filter, rewrite, or redirect any message. Variations of this
 mechanism can also be found in some Prolog systems including SICStus Prolog,
 SWI-Prolog, and YAP. Based on this mechanism, Logtalk introduces an extension
 that also allows abstracting asking a user for input. Both mechanisms are
-implemented by the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">logtalk</span></a> built-in object and
+implemented by the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">logtalk</span></a> built-in object and
 described in this section. The message printing mechanism is extensively
 used by the Logtalk compiler itself and by the developer tools. The question
 asking mechanism is used e.g. in the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool.</p>
-<div class="section" id="printing-messages">
+<section id="printing-messages">
 <span id="id1"></span><h2>Printing messages<a class="headerlink" href="#printing-messages" title="Permalink to this headline"></a></h2>
 <p>The main predicate for printing a message is
 <a class="reference internal" href="../refman/methods/print_message_3.html#methods-print-message-3"><span class="std std-ref">logtalk::print_message/3</span></a>.
@@ -245,8 +246,8 @@ localization of applications, and message interception. For example:</p>
 yes
 </pre></div>
 </div>
-</div>
-<div class="section" id="message-tokenization">
+</section>
+<section id="message-tokenization">
 <h2>Message tokenization<a class="headerlink" href="#message-tokenization" title="Permalink to this headline"></a></h2>
 <p>The advantages of using message terms require a solution for generating
 the actual messages text. This is supported by defining grammar rules for
@@ -293,16 +294,16 @@ of tokens, for hooking into printing an individual token, and for setting
 default output stream and message prefixes. For example, the SWI-Prolog
 adapter file uses the print message token hook predicate to enable coloring
 of messages printed on a console.</p>
-</div>
-<div class="section" id="meta-messages">
+</section>
+<section id="meta-messages">
 <h2>Meta-messages<a class="headerlink" href="#meta-messages" title="Permalink to this headline"></a></h2>
 <p>Defining tokenization rules for every message is not always necessary, however.
 Logtalk defines several <em>meta-messages</em> that are handy for simple cases and
 temporary messages only used to help developing, notably debugging messages.
 See the <a class="reference internal" href="debugging.html#debugging-messages"><span class="std std-ref">Debugging messages</span></a> section and the
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">logtalk built-in object</span></a> remarks section for details.</p>
-</div>
-<div class="section" id="intercepting-messages">
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">logtalk built-in object</span></a> remarks section for details.</p>
+</section>
+<section id="intercepting-messages">
 <h2>Intercepting messages<a class="headerlink" href="#intercepting-messages" title="Permalink to this headline"></a></h2>
 <p>Calls to the <a class="reference internal" href="../refman/methods/print_message_3.html#methods-print-message-3"><span class="std std-ref">logtalk::print_message/3</span></a>
 predicate can be intercepted by defining clauses for the
@@ -345,8 +346,8 @@ compiler messages:</p>
 <p>This example calls the <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
 hook predicate, which can be used to define a message line prefix and an
 output stream for printing messages for a given component.</p>
-</div>
-<div class="section" id="asking-questions">
+</section>
+<section id="asking-questions">
 <span id="printing-questions"></span><h2>Asking questions<a class="headerlink" href="#asking-questions" title="Permalink to this headline"></a></h2>
 <p>Logtalk <em>structured question asking</em> mechanism complements the message
 printing mechanism. It provides an abstraction for the common task of
@@ -411,8 +412,8 @@ yes
 <p>Practical usage examples of this mechanism can be found e.g. in the
 <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool where it’s used to abstract the user interaction when
 tracing a goal execution in debug mode.</p>
-</div>
-<div class="section" id="intercepting-questions">
+</section>
+<section id="intercepting-questions">
 <h2>Intercepting questions<a class="headerlink" href="#intercepting-questions" title="Permalink to this headline"></a></h2>
 <p>Calls to the <a class="reference internal" href="../refman/methods/ask_question_5.html#methods-ask-question-5"><span class="std std-ref">logtalk::ask_question/5</span></a>
 predicate can be intercepted by defining clauses for the
@@ -452,8 +453,8 @@ yes
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">logtalk::question_hook/6</span></code> predicate takes as argument
 the closure specified in the <code class="docutils literal notranslate"><span class="pre">logtalk::ask_question/5</span></code> call, allowing
 a fixed answer to be checked before being returned.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

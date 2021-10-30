@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>coinductive_success_hook/1-2 &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -125,9 +126,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="coinductive-success-hook-1-2">
+  <section id="coinductive-success-hook-1-2">
 <span id="methods-coinductive-success-hook-1-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">coinductive_success_hook/1-2</span></code><a class="headerlink" href="#coinductive-success-hook-1-2" title="Permalink to this headline"></a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>coinductive_success_hook(<span class="nv">Head</span>, <span class="nv">Hypothesis</span>)
 coinductive_success_hook(<span class="nv">Head</span>)
@@ -145,19 +146,19 @@ performance penalties when defining coinductive predicates without a
 corresponding definition for the coinductive success hook predicates.</p>
 <p>The compiler assumes that these hook predicates are defined as static
 predicates in order to optimize their use.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>coinductive_success_hook(<span class="o">+</span>callable, <span class="o">+</span>callable) <span class="o">-</span> zero_or_one
 coinductive_success_hook(<span class="o">+</span>callable) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Are there &quot;occurrences&quot; of arg1 in arg2?</span>
 <span class="p">:- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
@@ -183,8 +184,8 @@ coinductive_success_hook(comember(<span class="nv">X</span>, <span class="nv">L<
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../directives/coinductive_1.html#directives-coinductive-1"><span class="std std-ref">coinductive/1</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

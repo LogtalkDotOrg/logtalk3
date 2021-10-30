@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A reflective class-based system &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -108,7 +109,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="a-reflective-class-based-system">
+  <section id="a-reflective-class-based-system">
 <h1>A reflective class-based system<a class="headerlink" href="#a-reflective-class-based-system" title="Permalink to this headline"></a></h1>
 <p>When compiling an object, Logtalk distinguishes prototypes from instance
 or classes by examining the object relations. If an object instantiates
@@ -125,7 +126,7 @@ class-based system, based on an extension of the ideas presented in
 provides, along with root objects for the instantiation and
 specialization hierarchies, explicit support for abstract classes
 <a class="reference internal" href="../bibliography.html#moura94" id="id3"><span>[Moura94]</span></a>.</p>
-<div class="section" id="defining-the-base-classes">
+<section id="defining-the-base-classes">
 <span id="classes"></span><h2>Defining the base classes<a class="headerlink" href="#defining-the-base-classes" title="Permalink to this headline"></a></h2>
 <p>We will start by defining three classes: <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract_class</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">class</span></code>. The class <code class="docutils literal notranslate"><span class="pre">object</span></code> will contain all predicates common
@@ -166,8 +167,8 @@ instantiation graph and the default meta-class for instantiable classes:</p>
 instantiation and specialization relationships are chosen so that each
 object may use the predicates defined in itself and in the other two
 objects, with no danger of <a class="reference internal" href="../glossary.html#term-message-lookup"><span class="xref std std-term">message lookup</span></a> endless loops.</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p>An object that does not instantiate or specialize other objects is
@@ -181,8 +182,8 @@ is instantiable if inherits methods for creating instances.
 Conversely, a class is abstract if does not inherit any instance
 creation method.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

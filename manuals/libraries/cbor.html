@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>cbor &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -153,7 +154,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="cbor">
+  <section id="cbor">
 <h1><code class="docutils literal notranslate"><span class="pre">cbor</span></code><a class="headerlink" href="#cbor" title="Permalink to this headline"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">cbor</span></code> library implements predicates for importing and exporting
 data in the Concise Binary Object Representation (CBOR) format:</p>
@@ -163,7 +164,7 @@ data in the Concise Binary Object Representation (CBOR) format:</p>
 </ul>
 <p>This library is a work-in-progress. Currently it requires a backend
 supporting unbounded integer arithmetic.</p>
-<div class="section" id="representation">
+<section id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Permalink to this headline"></a></h2>
 <ul>
 <li><p>Maps are represented using curly-bracketed terms, <code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where
@@ -207,8 +208,8 @@ zero. The compound terms <code class="docutils literal notranslate"><span class=
 as an alternative for encoding. The decoder, however, produces the
 <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">-0.0</span></code> floats.</p></li>
 </ul>
-</div>
-<div class="section" id="encoding">
+</section>
+<section id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline"></a></h2>
 <p>Encoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> predicate. For
 example:</p>
@@ -220,8 +221,8 @@ yes
 <p>The encoding of arrays and maps uses indefinite-length encoding. All
 floats are currently encoded using decimal fractions. Encoding
 indicators and big floats are not currently supported.</p>
-</div>
-<div class="section" id="decoding">
+</section>
+<section id="decoding">
 <h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline"></a></h2>
 <p>Decoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> cbor<span class="o">::</span>parse([<span class="mh">0x9f</span>,<span class="mh">0x61</span>,<span class="mh">0x61</span>,<span class="mh">0xbf</span>,<span class="mh">0x61</span>,<span class="mh">0x62</span>,<span class="mh">0x61</span>,<span class="mh">0x63</span>,<span class="mh">0xff</span>,<span class="mh">0xff</span>], <span class="nv">Term</span>).
@@ -229,28 +230,28 @@ indicators and big floats are not currently supported.</p>
 yes
 </pre></div>
 </div>
-</div>
-<div class="section" id="api-documentation">
+</section>
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#cbor">../../docs/library_index.html#cbor</a>
 link in a web browser.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(cbor(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(cbor(tester)).
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Overview &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -152,7 +153,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="overview">
+  <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
 <p>This folder contains libraries of useful objects, categories, and
 protocols. Specific notes about individual libraries can be found in the
@@ -166,7 +167,7 @@ therefore allowing parallel process execution (e.g. for usage at
 continuous integration servers). Starting with Logtalk 3.48.0, this
 setup is only required in general when running with the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag
 turned off. See the comments in the file itself for usage instructions.</p>
-<div class="section" id="library-documentation">
+<section id="library-documentation">
 <h2>Library documentation<a class="headerlink" href="#library-documentation" title="Permalink to this headline"></a></h2>
 <p>Specific notes about each library can be found in the corresponding
 <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> files. HTML documentation for each library API can be found
@@ -174,8 +175,8 @@ on the <code class="docutils literal notranslate"><span class="pre">docs</span><
 your web browser). The documentation for these libraries can be
 regenerated using the shell scripts <code class="docutils literal notranslate"><span class="pre">../scripts/update_html_docs.sh</span></code>
 and <code class="docutils literal notranslate"><span class="pre">../scripts/update_svg_diagrams.sh</span></code>.</p>
-</div>
-<div class="section" id="loading-libraries">
+</section>
+<section id="loading-libraries">
 <h2>Loading libraries<a class="headerlink" href="#loading-libraries" title="Permalink to this headline"></a></h2>
 <p>All the individual libraries can be loaded using the
 <code class="docutils literal notranslate"><span class="pre">&lt;library</span> <span class="pre">name&gt;(loader)</span></code> notation as argument for the compiling and
@@ -197,8 +198,8 @@ on other libraries and thus cannot be loaded and compiled separately
 (e.g. the <code class="docutils literal notranslate"><span class="pre">list</span></code> object implements the <code class="docutils literal notranslate"><span class="pre">listp</span></code> protocol and is part
 of a basic types hierarchy). Using the loader files takes care of all
 dependencies and also ensures compilation in optimized mode.</p>
-</div>
-<div class="section" id="testing-libraries">
+</section>
+<section id="testing-libraries">
 <h2>Testing libraries<a class="headerlink" href="#testing-libraries" title="Permalink to this headline"></a></h2>
 <p>Most of the libraries include unit tests in their directory, together
 with a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file for running them. For example, to run the
@@ -215,8 +216,8 @@ backend Prolog compiler:</p>
 $ logtalk_tester -p eclipse
 </pre></div>
 </div>
-</div>
-<div class="section" id="credits">
+</section>
+<section id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline"></a></h2>
 <p>Some code in this library is based on public domain Prolog code, in
 particular, code adopted from the Edinburgh Prolog library. The
@@ -230,13 +231,13 @@ libraries or inspired by Prolog system libraries. See the individual
 library notes for details. See also the <code class="docutils literal notranslate"><span class="pre">NOTICE.txt</span></code> file at the root
 of the Logtalk distribution for copyright information on third-party
 source code.</p>
-</div>
-<div class="section" id="other-notes">
+</section>
+<section id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline"></a></h2>
 <p>Some files contained in this directory represent work in progress and
 are not loaded by default by any loader utility file.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

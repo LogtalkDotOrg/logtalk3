@@ -50,19 +50,24 @@ When working with a relocatable application, the actual application
 installation directory can be retrieved by calling the
 :ref:`predicates_logtalk_load_context_2` predicate with the ``directory``
 key and using the returned value to define the ``logtalk_library_path/2``
-predicate. On a settings file or a :term:`loader file` file, simply use
-an :ref:`directives_initialization_1` directive to wrap the call to the
-``logtalk_load_context/2`` predicate and the assert of the
+predicate. On a :term:`settings file` file or a :term:`loader file` file,
+simply use an :ref:`directives_initialization_1` directive to wrap the
+call to the ``logtalk_load_context/2`` predicate and the assert of the
 ``logtalk_library_path/2`` fact.
 
-This predicate may also be used to override the default
-:term:`scratch directory` by defining the library alias ``scratch_directory``
-in a backend Prolog initialization file (assumed to be loaded prior to
-Logtalk loading). This allows e.g. Logtalk to be installed in a
-read-only directory by setting this alias to the operating-system
-directory for temporary files. It also allows several Logtalk instances
-to run concurrently without conflict by using a unique scratch directory
-per instance (e.g. using a process ID or a UUID generator).
+This predicate may be used to override the default :term:`scratch directory`
+by defining the library alias ``scratch_directory`` in a backend Prolog
+initialization file (assumed to be loaded prior to Logtalk loading). This
+allows e.g. Logtalk to be installed in a read-only directory by setting
+this alias to the operating-system directory for temporary files. It also
+allows several Logtalk instances to run concurrently without conflict by
+using a unique scratch directory per instance (e.g. using a process ID or
+a UUID generator).
+
+This predicate may be used to override the default location used by the
+:doc:`../../devtools/packs` tool to store registries and packs by defining
+the ``logtalk_packs`` library alias in settings file or in a backend
+Prolog initialization file (assumed to be loaded prior to Logtalk loading).
 
 The :ref:`logtalk <objects_logtalk>` built-in object provides an
 :ref:`expand_library_path/2 <apis:logtalk/0::expand_library_path/2>`

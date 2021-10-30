@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lgtdoc &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -126,7 +127,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="lgtdoc">
+  <section id="lgtdoc">
 <h1><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code><a class="headerlink" href="#lgtdoc" title="Permalink to this headline"></a></h1>
 <p>This is the default Logtalk documenting tool for generating API
 documentation for libraries and applications. It uses the structural
@@ -141,26 +142,26 @@ plain text files. The scripts are described in their <code class="docutils liter
 made available in the system path by default. See also the
 <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml/NOTES.md</span></code> for details, including <strong>required third-party
 software</strong>.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#lgtdoc">../../docs/library_index.html#lgtdoc</a></p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtdoc(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtdoc(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="documenting-source-code">
+</section>
+<section id="documenting-source-code">
 <h2>Documenting source code<a class="headerlink" href="#documenting-source-code" title="Permalink to this headline"></a></h2>
 <p>For information on documenting your source code, notably on documenting
 directives, consult the documenting section of the User Manual:</p>
@@ -181,8 +182,8 @@ corresponding loader file. In alternative, you may also turn on the
 and files, complemented with library, directory, entity, and predicate
 indexes. Note that the source files to be documented <strong>must</strong> be loaded
 prior to using this tool predicates to generate the documentation.</p>
-</div>
-<div class="section" id="generating-documentation">
+</section>
+<section id="generating-documentation">
 <h2>Generating documentation<a class="headerlink" href="#generating-documentation" title="Permalink to this headline"></a></h2>
 <p>For a simple application, assuming a library alias is defined for it
 (e.g. <code class="docutils literal notranslate"><span class="pre">my_app</span></code>), and at the top-level interpreter, we can generate the
@@ -228,8 +229,8 @@ a <em>doclet</em> to automate all the steps required to generate documentation.
 The <em>doclet</em> message that triggers the process can also be sent
 automatically when the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool is used with the <code class="docutils literal notranslate"><span class="pre">documentation</span></code>
 target.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

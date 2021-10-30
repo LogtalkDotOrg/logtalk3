@@ -119,15 +119,20 @@ that describes the most common queries.
 Registries and packs storage
 ----------------------------
 
-The tool uses a directory specified using the `LOGTALKPACKS` environment
-variable when defined. Otherwise it defaults to `~/logtalk_packs`. This
-directory holds sub-directories for registries, packs, and archives. Users
-shouldn't manually modify the contents of these directories.
+The tool uses a directory specified using the `logtalk_packs` library alias
+when defined (in a settings file or in a backend Prolog initialization file).
+When this library alias is not defined, the tool uses the value of the
+`LOGTALKPACKS` environment variable when defined. Otherwise it defaults to
+the `~/logtalk_packs` directory. This directory holds sub-directories for
+registries, packs, and archives. Users shouldn't manually modify the contents
+of these directories.
 
-The `packs` tools loads at startup defined registry and pack specifications.
-Therefore, using the `LOGTALKPACKS` environment variable allows easy switching
-between alternative registry/pack setups by simply changing the value of the
-variable before loading the tool or before starting Logtalk.
+The `packs` tool loads at startup all the defined registry and pack
+specifications. 
+
+Defining the `logtalk_packs` library alias in a settings file or defining
+the `LOGTALKPACKS` environment variable before starting Logtalk allows easy
+switching between alternative (e.g. per application) registry/pack setups.
 
 
 Registry specification

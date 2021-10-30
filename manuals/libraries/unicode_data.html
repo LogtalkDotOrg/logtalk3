@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>unicode_data &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -192,24 +193,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="unicode-data">
+  <section id="unicode-data">
 <h1><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code><a class="headerlink" href="#unicode-data" title="Permalink to this headline"></a></h1>
 <p>VivoMind Prolog Unicode Resources</p>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline"></a></h2>
 <div class="line-block">
 <div class="line">Arun Majumdar &#64; VivoMind LLC</div>
 <div class="line">Paulo Moura &#64; VivoMind LLC</div>
 </div>
-</div>
-<div class="section" id="license">
+</section>
+<section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
 <p>Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication:</p>
 <p><a class="reference external" href="http://creativecommons.org/publicdomain/zero/1.0/">http://creativecommons.org/publicdomain/zero/1.0/</a></p>
 <p>We do appreciate acknowledgement if you use these resources, however,
 and we also welcome contributions to improve them.</p>
-</div>
-<div class="section" id="website">
+</section>
+<section id="website">
 <h2>Website<a class="headerlink" href="#website" title="Permalink to this headline"></a></h2>
 <p>The latest release of the VivoMind Prolog Unicode Resources is available
 at the URL:</p>
@@ -217,8 +218,8 @@ at the URL:</p>
 <p>At this address you can also find additional information about the
 VivoMind Prolog Unicode Resources and submit your bug reports and
 contributions.</p>
-</div>
-<div class="section" id="description">
+</section>
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
 <p>The VivoMind Prolog Unicode Resources are a set of files resulting from
 the conversion of most (but not all) official UCD 6.1 files and updated
@@ -230,8 +231,8 @@ tables and also a set of auxiliary predicates (described below) for
 accessing these tables. Other than the obvious conversion in the
 provided predicate names, no attempt was made to convert the identifiers
 used for properties and other data.</p>
-</div>
-<div class="section" id="requirements">
+</section>
+<section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
 <p>Most of the auxiliary predicates assume that the de facto Prolog
 standard predicate <code class="docutils literal notranslate"><span class="pre">between/3</span></code> is available. Unicode code point values
@@ -239,8 +240,8 @@ are represented using the ISO Prolog standard notation for hexadecimal
 integers. In addition, the ISO Prolog standard directives <code class="docutils literal notranslate"><span class="pre">include/1</span></code>
 and <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> are used in some of the files to load auxiliary
 files.</p>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>Most applications only require some of the tables present in these
 resources. Most of these tables define properties for ranges of code
@@ -249,8 +250,8 @@ predicates allow access for a single code point. When increased
 performance is required, consider using the existing tables and
 auxiliary predicates to generated derived tables more fit for your
 specific application.</p>
-</div>
-<div class="section" id="known-issues">
+</section>
+<section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
 <p>In the file <code class="docutils literal notranslate"><span class="pre">unicode_unihan_variant.pl</span></code>, when there’s more than one
 variant for a code point, only the first one (as listed in the original
@@ -262,13 +263,13 @@ implementations. Thus, you may need to change how some of the files are
 loaded depending on the chosen Prolog compiler. Using conditional
 compilation directives would help in some cases but it would also rise
 portability issues on their own.</p>
-</div>
-<div class="section" id="acknowledgements">
+</section>
+<section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline"></a></h2>
 <p>We thank Richard O’Keefe for helpful suggestions to improve the
 usability of these resources.</p>
-</div>
-<div class="section" id="files-and-api-summary">
+</section>
+<section id="files-and-api-summary">
 <h2>Files and API Summary<a class="headerlink" href="#files-and-api-summary" title="Permalink to this headline"></a></h2>
 <p>The Prolog file names are derived from the original file names by
 prefixing them with the <code class="docutils literal notranslate"><span class="pre">unicode_</span></code> string, converting to lower case,
@@ -289,7 +290,7 @@ be found at:</p>
 <div class="line"><a class="reference external" href="http://www.unicode.org/reports/tr44/#Directory_Structure">http://www.unicode.org/reports/tr44/#Directory_Structure</a></div>
 <div class="line"><a class="reference external" href="http://www.unicode.org/reports/tr44/#Property_Definitions">http://www.unicode.org/reports/tr44/#Property_Definitions</a></div>
 </div>
-<div class="section" id="unicode-arabic-shaping-pl">
+<section id="unicode-arabic-shaping-pl">
 <span id="unicode-arabic-shapingpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_arabic_shaping.pl</span></code><a class="headerlink" href="#unicode-arabic-shaping-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -297,8 +298,8 @@ be found at:</p>
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-bidi-mirroring-pl">
+</section>
+<section id="unicode-bidi-mirroring-pl">
 <span id="unicode-bidi-mirroringpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_bidi_mirroring.pl</span></code><a class="headerlink" href="#unicode-bidi-mirroring-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -306,8 +307,8 @@ be found at:</p>
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-blocks-pl">
+</section>
+<section id="unicode-blocks-pl">
 <span id="unicode-blockspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_blocks.pl</span></code><a class="headerlink" href="#unicode-blocks-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -315,8 +316,8 @@ be found at:</p>
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-case-folding-pl">
+</section>
+<section id="unicode-case-folding-pl">
 <span id="unicode-case-foldingpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_case_folding.pl</span></code><a class="headerlink" href="#unicode-case-folding-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -324,8 +325,8 @@ be found at:</p>
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-categories-pl">
+</section>
+<section id="unicode-categories-pl">
 <span id="unicode-categoriespl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_categories.pl</span></code><a class="headerlink" href="#unicode-categories-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -333,8 +334,8 @@ be found at:</p>
 <li><p>Dependencies:
 files in the <code class="docutils literal notranslate"><span class="pre">unicode_categories</span></code> directory</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-cjk-radicals-pl">
+</section>
+<section id="unicode-cjk-radicals-pl">
 <span id="unicode-cjk-radicalspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_cjk_radicals.pl</span></code><a class="headerlink" href="#unicode-cjk-radicals-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -342,8 +343,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-composition-exclusions-pl">
+</section>
+<section id="unicode-composition-exclusions-pl">
 <span id="unicode-composition-exclusionspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_composition_exclusions.pl</span></code><a class="headerlink" href="#unicode-composition-exclusions-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -351,8 +352,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-core-properties-pl">
+</section>
+<section id="unicode-core-properties-pl">
 <span id="unicode-core-propertiespl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_core_properties.pl</span></code><a class="headerlink" href="#unicode-core-properties-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -379,8 +380,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 files in the <code class="docutils literal notranslate"><span class="pre">unicode_core_properties</span></code> directory</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-decomposition-type-pl">
+</section>
+<section id="unicode-decomposition-type-pl">
 <span id="unicode-decomposition-typepl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_decomposition_type.pl</span></code><a class="headerlink" href="#unicode-decomposition-type-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -404,8 +405,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 files in the <code class="docutils literal notranslate"><span class="pre">unicode_decomposition_type</span></code> directory</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-age-pl">
+</section>
+<section id="unicode-derived-age-pl">
 <span id="unicode-derived-agepl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_age.pl</span></code><a class="headerlink" href="#unicode-derived-age-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -413,15 +414,15 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-bidi-class-pl">
+</section>
+<section id="unicode-derived-bidi-class-pl">
 <span id="unicode-derived-bidi-classpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_bidi_class.pl</span></code><a class="headerlink" href="#unicode-derived-bidi-class-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides: <code class="docutils literal notranslate"><span class="pre">unicode_bidi_class/2-3</span></code></p></li>
 <li><p>Dependencies: (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-combining-class-pl">
+</section>
+<section id="unicode-derived-combining-class-pl">
 <span id="unicode-derived-combining-classpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_combining_class.pl</span></code><a class="headerlink" href="#unicode-derived-combining-class-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -429,8 +430,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-core-properties-pl">
+</section>
+<section id="unicode-derived-core-properties-pl">
 <span id="unicode-derived-core-propertiespl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_core_properties.pl</span></code><a class="headerlink" href="#unicode-derived-core-properties-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -438,8 +439,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-decomposition-type-pl">
+</section>
+<section id="unicode-derived-decomposition-type-pl">
 <span id="unicode-derived-decomposition-typepl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_decomposition_type.pl</span></code><a class="headerlink" href="#unicode-derived-decomposition-type-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -447,8 +448,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-east-asian-width-pl">
+</section>
+<section id="unicode-derived-east-asian-width-pl">
 <span id="unicode-derived-east-asian-widthpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_east_asian_width.pl</span></code><a class="headerlink" href="#unicode-derived-east-asian-width-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -456,8 +457,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-joining-group-pl">
+</section>
+<section id="unicode-derived-joining-group-pl">
 <span id="unicode-derived-joining-grouppl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_joining_group.pl</span></code><a class="headerlink" href="#unicode-derived-joining-group-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -465,8 +466,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-joining-type-pl">
+</section>
+<section id="unicode-derived-joining-type-pl">
 <span id="unicode-derived-joining-typepl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_joining_type.pl</span></code><a class="headerlink" href="#unicode-derived-joining-type-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -474,8 +475,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-line-break-pl">
+</section>
+<section id="unicode-derived-line-break-pl">
 <span id="unicode-derived-line-breakpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_line_break.pl</span></code><a class="headerlink" href="#unicode-derived-line-break-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -483,8 +484,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-normalization-props-pl">
+</section>
+<section id="unicode-derived-normalization-props-pl">
 <span id="unicode-derived-normalization-propspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_normalization_props.pl</span></code><a class="headerlink" href="#unicode-derived-normalization-props-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -505,8 +506,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 files in the <code class="docutils literal notranslate"><span class="pre">unicode_derived_normalization_props</span></code> directory</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-numeric-type-pl">
+</section>
+<section id="unicode-derived-numeric-type-pl">
 <span id="unicode-derived-numeric-typepl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_numeric_type.pl</span></code><a class="headerlink" href="#unicode-derived-numeric-type-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -514,8 +515,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-derived-numeric-values-pl">
+</section>
+<section id="unicode-derived-numeric-values-pl">
 <span id="unicode-derived-numeric-valuespl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_derived_numeric_values.pl</span></code><a class="headerlink" href="#unicode-derived-numeric-values-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -523,8 +524,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-hangul-syllable-type-pl">
+</section>
+<section id="unicode-hangul-syllable-type-pl">
 <span id="unicode-hangul-syllable-typepl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_hangul_syllable_type.pl</span></code><a class="headerlink" href="#unicode-hangul-syllable-type-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -532,8 +533,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-indic-matra-category-pl">
+</section>
+<section id="unicode-indic-matra-category-pl">
 <span id="unicode-indic-matra-categorypl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_indic_matra_category.pl</span></code><a class="headerlink" href="#unicode-indic-matra-category-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -541,8 +542,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-indic-syllabic-category-pl">
+</section>
+<section id="unicode-indic-syllabic-category-pl">
 <span id="unicode-indic-syllabic-categorypl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_indic_syllabic_category.pl</span></code><a class="headerlink" href="#unicode-indic-syllabic-category-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -550,8 +551,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-jamo-pl">
+</section>
+<section id="unicode-jamo-pl">
 <span id="unicode-jamopl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_jamo.pl</span></code><a class="headerlink" href="#unicode-jamo-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -559,8 +560,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-name-aliases-pl">
+</section>
+<section id="unicode-name-aliases-pl">
 <span id="unicode-name-aliasespl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_name_aliases.pl</span></code><a class="headerlink" href="#unicode-name-aliases-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -568,8 +569,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-names-pl">
+</section>
+<section id="unicode-names-pl">
 <span id="unicode-namespl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_names.pl</span></code><a class="headerlink" href="#unicode-names-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -577,8 +578,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 files in the <code class="docutils literal notranslate"><span class="pre">unicode_names</span></code> directory</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-prop-list-pl">
+</section>
+<section id="unicode-prop-list-pl">
 <span id="unicode-prop-listpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_prop_list.pl</span></code><a class="headerlink" href="#unicode-prop-list-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -617,8 +618,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 files in the <code class="docutils literal notranslate"><span class="pre">unicode_prop_list</span></code> directory</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-range-scripts-pl">
+</section>
+<section id="unicode-range-scripts-pl">
 <span id="unicode-range-scriptspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_range_scripts.pl</span></code><a class="headerlink" href="#unicode-range-scripts-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -627,8 +628,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-script-extensions-pl">
+</section>
+<section id="unicode-script-extensions-pl">
 <span id="unicode-script-extensionspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_script_extensions.pl</span></code><a class="headerlink" href="#unicode-script-extensions-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -636,8 +637,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 <code class="docutils literal notranslate"><span class="pre">unicode_scripts.pl</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="unicode-scripts-pl">
+</section>
+<section id="unicode-scripts-pl">
 <span id="unicode-scriptspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_scripts.pl</span></code><a class="headerlink" href="#unicode-scripts-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -646,8 +647,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-special-casing-pl">
+</section>
+<section id="unicode-special-casing-pl">
 <span id="unicode-special-casingpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_special_casing.pl</span></code><a class="headerlink" href="#unicode-special-casing-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -655,8 +656,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-unihan-variants-pl">
+</section>
+<section id="unicode-unihan-variants-pl">
 <span id="unicode-unihan-variantspl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_unihan_variants.pl</span></code><a class="headerlink" href="#unicode-unihan-variants-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -664,8 +665,8 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-<div class="section" id="unicode-version-pl">
+</section>
+<section id="unicode-version-pl">
 <span id="unicode-versionpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_version.pl</span></code><a class="headerlink" href="#unicode-version-pl" title="Permalink to this headline"></a></h3>
 <ul class="simple">
 <li><p>Provides:
@@ -673,9 +674,9 @@ files in the <code class="docutils literal notranslate"><span class="pre">unicod
 <li><p>Dependencies:
 (none)</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

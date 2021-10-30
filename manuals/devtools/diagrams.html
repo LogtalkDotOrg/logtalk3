@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>diagrams &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -132,7 +133,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="diagrams">
+  <section id="diagrams">
 <h1><code class="docutils literal notranslate"><span class="pre">diagrams</span></code><a class="headerlink" href="#diagrams" title="Permalink to this headline"></a></h1>
 <p>This tool generates <em>library</em>, <em>directory</em>, <em>file</em>, <em>entity</em>, and
 <em>predicate</em> diagrams for source files and for libraries of source files
@@ -161,28 +162,28 @@ customize the final contents and appearance.</p>
 the <code class="docutils literal notranslate"><span class="pre">logtalk_doclet</span></code> script. See the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool examples and
 documentation for details. See also the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code>
 script.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#diagrams">../../docs/library_index.html#diagrams</a></p>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(diagrams(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(diagrams(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="supported-diagrams">
+</section>
+<section id="supported-diagrams">
 <h2>Supported diagrams<a class="headerlink" href="#supported-diagrams" title="Permalink to this headline"></a></h2>
 <p>The following entity diagrams are supported:</p>
 <ul class="simple">
@@ -232,8 +233,8 @@ diagrams but note that some predicates that generate diagrams only make
 sense for some types of diagrams. For best results and fine-grained
 customization of each diagram, the individual diagram objects should be
 used with the intended set of options.</p>
-</div>
-<div class="section" id="graph-elements">
+</section>
+<section id="graph-elements">
 <h2>Graph elements<a class="headerlink" href="#graph-elements" title="Permalink to this headline"></a></h2>
 <p>Limitations in both the graph language and UML forces the invention of a
 modeling language that can represent all kinds of Logtalk entities and
@@ -376,8 +377,8 @@ described as external.</p>
 <p>Note that all the elements above can have captions. See below the
 diagrams <code class="docutils literal notranslate"><span class="pre">node_type_captions/1</span></code> and <code class="docutils literal notranslate"><span class="pre">relation_labels/1</span></code> output
 options.</p>
-</div>
-<div class="section" id="supported-graph-languages">
+</section>
+<section id="supported-graph-languages">
 <h2>Supported graph languages<a class="headerlink" href="#supported-graph-languages" title="Permalink to this headline"></a></h2>
 <p>Currently only the DOT graph language is supported (tested with Graphviz
 version 2.43 on macOS; visit the <a class="reference external" href="http://www.graphviz.org/">http://www.graphviz.org/</a> website for
@@ -438,8 +439,8 @@ the diagram in page-sized pieces or, preferably, use software capable of
 tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
 <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files and play with settings such as aspect ratio for
 fine-tuning the diagrams layout.</p>
-</div>
-<div class="section" id="customization">
+</section>
+<section id="customization">
 <h2>Customization<a class="headerlink" href="#customization" title="Permalink to this headline"></a></h2>
 <p>A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:</p>
@@ -816,8 +817,8 @@ diagrams of Logtalk applications:</p>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="linking-diagrams">
+</section>
+<section id="linking-diagrams">
 <h2>Linking diagrams<a class="headerlink" href="#linking-diagrams" title="Permalink to this headline"></a></h2>
 <p>When using SVG output, it’s possible to generate diagrams that link to
 other diagrams, to API documentation, and to source code repositories
@@ -873,8 +874,8 @@ local operating-system paths to be exposed in the diagram, we use the
 that all the paths and URLs must end with a slash for proper handling.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory for additional
 examples.</p>
-</div>
-<div class="section" id="creating-diagrams-for-prolog-module-applications">
+</section>
+<section id="creating-diagrams-for-prolog-module-applications">
 <h2>Creating diagrams for Prolog module applications<a class="headerlink" href="#creating-diagrams-for-prolog-module-applications" title="Permalink to this headline"></a></h2>
 <p>Currently limited to SWI-Prolog and YAP Prolog module applications due
 to the lack of a comprehensive reflection API in other Prolog systems.</p>
@@ -884,8 +885,8 @@ predicates are not supported. See the <code class="docutils literal notranslate"
 directory for some usage examples. Note that support for diagrams with
 links to API documentation is quite limited, however, due to the lack of
 Prolog standards.</p>
-</div>
-<div class="section" id="creating-diagrams-for-plain-prolog-files">
+</section>
+<section id="creating-diagrams-for-plain-prolog-files">
 <h2>Creating diagrams for plain Prolog files<a class="headerlink" href="#creating-diagrams-for-plain-prolog-files" title="Permalink to this headline"></a></h2>
 <p>This tool can also be used to create predicate cross-referencing
 diagrams for plain Prolog files. For example, if the Prolog file is
@@ -910,8 +911,8 @@ the Prolog file and then load it and create the diagram:</p>
      xref_diagram<span class="o">::</span>entity(code).
 </pre></div>
 </div>
-</div>
-<div class="section" id="other-notes">
+</section>
+<section id="other-notes">
 <h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline"></a></h2>
 <p>Generating complete diagrams requires that all referenced entities are
 loaded. When that is not the case, notably when generating
@@ -931,8 +932,8 @@ random crashes (segmentation faults usually), often requiring re-doing
 conversions from <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to other formats. A possible workaround
 is to repeat the command until it completes without error. See for
 example the <code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> script.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

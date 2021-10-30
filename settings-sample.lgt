@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on January 17, 2021
+%  Last updated on October 30, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -159,6 +159,18 @@ when running on non-POSIX operating systems such as Windows. Check the
 		make.
 
 :- endif.
+%*/
+
+
+%  To override the default location used by the packs tool to store
+%  registries and packs, edit and uncomment the following lines (the
+%  library paths must end with a slash character):
+
+/*
+:- multifile(logtalk_library_path/2).
+:- dynamic(logtalk_library_path/2).
+
+logtalk_library_path(logtalk_packs, home('.packs/')).
 %*/
 
 

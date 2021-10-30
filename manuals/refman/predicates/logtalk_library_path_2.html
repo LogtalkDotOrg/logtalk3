@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>logtalk_library_path/2 &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -131,9 +132,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="logtalk-library-path-2">
+  <section id="logtalk-library-path-2">
 <span id="predicates-logtalk-library-path-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code><a class="headerlink" href="#logtalk-library-path-2" title="Permalink to this headline"></a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_library_path</span>(<span class="nv">Library</span>, <span class="nv">Path</span>)
 </pre></div>
@@ -157,35 +158,39 @@ called.</p>
 installation directory can be retrieved by calling the
 <a class="reference internal" href="logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a> predicate with the <code class="docutils literal notranslate"><span class="pre">directory</span></code>
 key and using the returned value to define the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
-predicate. On a settings file or a <a class="reference internal" href="../../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a> file, simply use
-an <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directive to wrap the call to the
-<code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> predicate and the assert of the
+predicate. On a <a class="reference internal" href="../../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a> file or a <a class="reference internal" href="../../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a> file,
+simply use an <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directive to wrap the
+call to the <code class="docutils literal notranslate"><span class="pre">logtalk_load_context/2</span></code> predicate and the assert of the
 <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> fact.</p>
-<p>This predicate may also be used to override the default
-<a class="reference internal" href="../../glossary.html#term-scratch-directory"><span class="xref std std-term">scratch directory</span></a> by defining the library alias <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code>
-in a backend Prolog initialization file (assumed to be loaded prior to
-Logtalk loading). This allows e.g. Logtalk to be installed in a
-read-only directory by setting this alias to the operating-system
-directory for temporary files. It also allows several Logtalk instances
-to run concurrently without conflict by using a unique scratch directory
-per instance (e.g. using a process ID or a UUID generator).</p>
+<p>This predicate may be used to override the default <a class="reference internal" href="../../glossary.html#term-scratch-directory"><span class="xref std std-term">scratch directory</span></a>
+by defining the library alias <code class="docutils literal notranslate"><span class="pre">scratch_directory</span></code> in a backend Prolog
+initialization file (assumed to be loaded prior to Logtalk loading). This
+allows e.g. Logtalk to be installed in a read-only directory by setting
+this alias to the operating-system directory for temporary files. It also
+allows several Logtalk instances to run concurrently without conflict by
+using a unique scratch directory per instance (e.g. using a process ID or
+a UUID generator).</p>
+<p>This predicate may be used to override the default location used by the
+<a class="reference internal" href="../../devtools/packs.html"><span class="doc">packs</span></a> tool to store registries and packs by defining
+the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias in settings file or in a backend
+Prolog initialization file (assumed to be loaded prior to Logtalk loading).</p>
 <p>The <a class="reference internal" href="../../userman/objects.html#objects-logtalk"><span class="std std-ref">logtalk</span></a> built-in object provides an
-<a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0-expand-library-path-2" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">expand_library_path/2</span></a>
+<a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0-expand-library-path-2" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">expand_library_path/2</span></a>
 predicate that can be used to expand library aliases and files expressed
 using library notation.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_library_path</span>(<span class="o">?</span>atom, <span class="o">-</span>atom) <span class="o">-</span> zero_or_more
 <span class="k">logtalk_library_path</span>(<span class="o">?</span>atom, <span class="o">-</span>compound) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
    <span class="k">logtalk_load_context</span>(directory, <span class="nv">Directory</span>),
@@ -238,8 +243,8 @@ yes
 <a class="reference internal" href="logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a>,
 <a class="reference internal" href="logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

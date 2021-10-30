@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>create_object/4 &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -125,9 +126,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="create-object-4">
+  <section id="create-object-4">
 <span id="predicates-create-object-4"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">create_object/4</span></code><a class="headerlink" href="#create-object-4" title="Permalink to this headline"></a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_object</span>(<span class="nv">Identifier</span>, <span class="nv">Relations</span>, <span class="nv">Directives</span>, <span class="nv">Clauses</span>)
 </pre></div>
@@ -146,14 +147,14 @@ must use the <a class="reference internal" href="../methods/parameter_2.html#met
 <p>When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to
 avoid race conditions.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_object</span>(<span class="o">?</span>object_identifier, <span class="o">@</span>list(object_relation), <span class="o">@</span>list(object_directive), <span class="o">@</span>list(clause)) <span class="o">-</span> one
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Relations</span></code>, <code class="docutils literal notranslate"><span class="pre">Directives</span></code>, or <code class="docutils literal notranslate"><span class="pre">Clauses</span></code> is a variable:</div>
@@ -191,8 +192,8 @@ avoid race conditions.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,</span> <span class="pre">Clauses)</span></code></div>
 </div>
 </div>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% create a stand-alone object (a prototype):</span>
 | <span class="o">?-</span> <span class="k">create_object</span>(
@@ -253,8 +254,8 @@ avoid race conditions.</p>
 <a class="reference internal" href="specializes_class_2_3.html#predicates-specializes-class-2-3"><span class="std std-ref">specializes_class/2-3</span></a>,
 <a class="reference internal" href="complements_object_2.html#predicates-complements-object-2"><span class="std std-ref">complements_object/2</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

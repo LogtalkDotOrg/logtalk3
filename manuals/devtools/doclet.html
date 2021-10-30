@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>doclet &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -125,7 +126,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="doclet">
+  <section id="doclet">
 <h1><code class="docutils literal notranslate"><span class="pre">doclet</span></code><a class="headerlink" href="#doclet" title="Permalink to this headline"></a></h1>
 <p>This folder provides a simple tool for (re)generating documentation for
 a project. The tool defines a <code class="docutils literal notranslate"><span class="pre">doclet</span></code> object that is expected to be
@@ -144,35 +145,35 @@ to load and run a doclet is therefore:</p>
 </div>
 <p>For usage examples see the <code class="docutils literal notranslate"><span class="pre">sample_doclet.lgt</span></code>, <code class="docutils literal notranslate"><span class="pre">doclet1.lgt</span></code>,
 <code class="docutils literal notranslate"><span class="pre">zoom_doclet.lgt</span></code>, and <code class="docutils literal notranslate"><span class="pre">tools_doclet.lgt</span></code> source files.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#doclet">../../docs/library_index.html#doclet</a></p>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(doclet(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="automating-running-doclets">
+</section>
+<section id="automating-running-doclets">
 <h2>Automating running doclets<a class="headerlink" href="#automating-running-doclets" title="Permalink to this headline"></a></h2>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_doclet.sh</span></code> Bash shell script for
 automating running doclets. The script expects the doclet source files
 to be named either <code class="docutils literal notranslate"><span class="pre">doclet.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">doclet.logtalk</span></code>. See the
 <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file or the script man page for details.</p>
-</div>
-<div class="section" id="integration-with-the-make-tool">
+</section>
+<section id="integration-with-the-make-tool">
 <h2>Integration with the make tool<a class="headerlink" href="#integration-with-the-make-tool" title="Permalink to this headline"></a></h2>
 <p>Loading this tool adds a definition for the
 <code class="docutils literal notranslate"><span class="pre">logtalk_make_target_action/1</span></code> hook predicate for the target
 <code class="docutils literal notranslate"><span class="pre">documentation</span></code>. The hook definition sends an <code class="docutils literal notranslate"><span class="pre">update/0</span></code> message to
 each loaded doclet.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

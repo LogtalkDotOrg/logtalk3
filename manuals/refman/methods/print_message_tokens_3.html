@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>print_message_tokens/3 &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -130,15 +131,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="print-message-tokens-3">
+  <section id="print-message-tokens-3">
 <span id="methods-print-message-tokens-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code><a class="headerlink" href="#print-message-tokens-3" title="Permalink to this headline"></a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>print_message_tokens(<span class="nv">Stream</span>, <span class="nv">Prefix</span>, <span class="nv">Tokens</span>)
 </pre></div>
 </div>
 <p>Built-in method for printing a list of message tokens, declared in the
-<a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">logtalk</span></a> built-in object as a public predicate.
+<a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">logtalk</span></a> built-in object as a public predicate.
 This method is automatically called by the
 <a class="reference internal" href="print_message_3.html#methods-print-message-3"><span class="std std-ref">print_message/3</span></a> method (assuming that the
 message was not intercepted by a
@@ -149,18 +150,18 @@ token. When a call to this hook predicate succeeds, the
 <code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code> predicate assumes that the token have been
 printed. When the call fails, the <code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code> predicate
 uses a default printing procedure for the token.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>print_message_tokens(<span class="o">@</span>stream_or_alias, <span class="o">+</span>atom, <span class="o">@</span>list(nonvar)) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 logtalk<span class="o">::</span>print_message_tokens(user_error, <span class="s">&#39;% &#39;</span>, [<span class="s">&#39;Redefining ~w ~q&#39;</span><span class="o">-</span>[object,foo], <span class="k">nl</span>]),
@@ -178,8 +179,8 @@ logtalk<span class="o">::</span>print_message_tokens(user_error, <span class="s"
 <a class="reference internal" href="question_hook_6.html#methods-question-hook-6"><span class="std std-ref">question_hook/6</span></a>,
 <a class="reference internal" href="question_prompt_stream_4.html#methods-question-prompt-stream-4"><span class="std std-ref">question_prompt_stream/4</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

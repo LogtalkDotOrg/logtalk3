@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>forward/1 &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -125,9 +126,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="forward-1">
+  <section id="forward-1">
 <span id="methods-forward-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">forward/1</span></code><a class="headerlink" href="#forward-1" title="Permalink to this headline"></a></h1>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forward</span>(<span class="nv">Message</span>)
 </pre></div>
@@ -135,22 +136,22 @@
 <p>User-defined method for forwarding unknown messages sent to an object (using
 the <a class="reference internal" href="../control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct), automatically called
 by the runtime when defined. This method is declared in the
-<a class="reference external" href="../../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.51.0)"><span class="xref std std-ref">forwarding</span></a> built-in protocol as a
+<a class="reference external" href="../../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.52.0)"><span class="xref std std-ref">forwarding</span></a> built-in protocol as a
 <a class="reference internal" href="../directives/public_1.html#directives-public-1"><span class="std std-ref">public</span></a> predicate. Note that you can make
 its scope protected or private by using, respectively, <a class="reference internal" href="../../userman/inheritance.html#inheritance-scope"><span class="std std-ref">protected or
 private implementation</span></a> of the <code class="docutils literal notranslate"><span class="pre">forwarding</span></code> protocol.</p>
-</div>
-<div class="section" id="modes-and-number-of-proofs">
+</section>
+<section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">forward</span>(<span class="o">+</span>callable) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
-</div>
-<div class="section" id="errors">
+</section>
+<section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(proxy,
     <span class="k">implements</span>(forwarding),
@@ -165,8 +166,8 @@ private implementation</span></a> of the <code class="docutils literal notransla
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

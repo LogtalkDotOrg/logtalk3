@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>edcg &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -157,7 +158,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="edcg">
+  <section id="edcg">
 <h1><code class="docutils literal notranslate"><span class="pre">edcg</span></code><a class="headerlink" href="#edcg" title="Permalink to this headline"></a></h1>
 <p>This library provides a Logtalk port of the Peter Van Roy’s extended DCG
 implementation. For full documentation on EDCGs, see:</p>
@@ -185,29 +186,29 @@ EDCGs may use e.g. the same accumulator names and introduce conflicts.
 The Logtalk version uses instead the <code class="docutils literal notranslate"><span class="pre">edcg</span></code> hook object internal state
 to temporarily save those predicates in order to parse the corresponding
 EDCGs.</p>
-<div class="section" id="api-documentation">
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#edcg">../../docs/library_index.html#edcg</a>
 link in a web browser.</p>
-</div>
-<div class="section" id="loading">
+</section>
+<section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
 file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(edcg(loader)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="testing">
+</section>
+<section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file of the
 <code class="docutils literal notranslate"><span class="pre">edcgs</span></code> example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(edcgs(tester)).
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>Follows the usage documentation written by Michael Hendricks (with a
 contribution from Peter Ludemann), used here with permission, with the
@@ -238,8 +239,8 @@ len <span class="o">--&gt;&gt;</span>
     [].
 </pre></div>
 </div>
-</div>
-<div class="section" id="introduction">
+</section>
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>DCG notation gives us a single, hidden accumulator. Extended DCG
 notation (implemented by this library) lets predicates have arbitrarily
@@ -254,8 +255,8 @@ your predicates</p></li>
 <li><p>change accumulator implementation with a single declaration (ex,
 switching from ordsets to rbtrees)</p></li>
 </ul>
-</div>
-<div class="section" id="syntax">
+</section>
+<section id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline"></a></h2>
 <p>Extended DCG syntax is very similar to DCG notation. An EDCG is created
 with clauses whose neck is the <code class="docutils literal notranslate"><span class="pre">--&gt;&gt;</span></code> operator. The following syntax
@@ -288,8 +289,8 @@ may be the arguments of an arbitrary relation</p></li>
 implementing the accumulator <code class="docutils literal notranslate"><span class="pre">dcg</span></code>. This inserts the difference
 list X-Y into the accumulated list</p></li>
 </ul>
-</div>
-<div class="section" id="declaration-of-predicates">
+</section>
+<section id="declaration-of-predicates">
 <h2>Declaration of Predicates<a class="headerlink" href="#declaration-of-predicates" title="Permalink to this headline"></a></h2>
 <p>Predicates are declared with facts of the following form:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pred_info(<span class="nv">Name</span>, <span class="nv">Arity</span>, <span class="nv">List</span>).
@@ -298,8 +299,8 @@ list X-Y into the accumulated list</p></li>
 <p>The predicate <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code> has the hidden parameters given in
 <code class="docutils literal notranslate"><span class="pre">List</span></code>. The parameters are added in the order given by <code class="docutils literal notranslate"><span class="pre">List</span></code> and
 their names must be atoms.</p>
-</div>
-<div class="section" id="declaration-of-accumulators">
+</section>
+<section id="declaration-of-accumulators">
 <h2>Declaration of Accumulators<a class="headerlink" href="#declaration-of-accumulators" title="Permalink to this headline"></a></h2>
 <p>Accumulators are declared with facts in one of two forms. The short form
 is:</p>
@@ -327,8 +328,8 @@ remain unbound.</p>
 depending on which direction the accumulation is done. For forward
 accumulation, <code class="docutils literal notranslate"><span class="pre">Left</span></code> is the input and <code class="docutils literal notranslate"><span class="pre">Right</span></code> is the output. For
 reverse accumulation, <code class="docutils literal notranslate"><span class="pre">Right</span></code> is the input and <code class="docutils literal notranslate"><span class="pre">Left</span></code> is the output.</p>
-</div>
-<div class="section" id="declaration-of-passed-arguments">
+</section>
+<section id="declaration-of-passed-arguments">
 <h2>Declaration of Passed Arguments<a class="headerlink" href="#declaration-of-passed-arguments" title="Permalink to this headline"></a></h2>
 <p>Passed arguments are conceptually the same as accumulators with <code class="docutils literal notranslate"><span class="pre">=/2</span></code>
 as the joiner function. Passed arguments are declared as facts in one of
@@ -345,8 +346,8 @@ argument <code class="docutils literal notranslate"><span class="pre">Pass</span
 starting value <code class="docutils literal notranslate"><span class="pre">PStart</span></code> that is used to give a default value for a
 passed argument in a body goal that does not occur in the head. Most of
 the time this situation does not occur.</p>
-</div>
-<div class="section" id="additional-documentation">
+</section>
+<section id="additional-documentation">
 <h2>Additional documentation<a class="headerlink" href="#additional-documentation" title="Permalink to this headline"></a></h2>
 <p>Peter Van Roy’s page: <a class="reference external" href="https://www.info.ucl.ac.be/~pvr/edcg.html">Declarative Programming with
 State</a></p>
@@ -361,8 +362,8 @@ by Peter Van Roy</p>
 <p>A short <a class="reference external" href="https://en.wikipedia.org/wiki/Definite_clause_grammar#Extensions">Wikipedia
 article</a>
 on DCGs and extensions.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -33,6 +33,12 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* UPDATED: The documentation of the `logtalk_library_path/2` predicate for the
+`logtalk_packs` library alias.
+
+* UPDATED: The `settings-sample.lgt` with sample code for defining the new
+`logtalk_packs` library alias.
+
 * FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
 work with all supported backends.
 
@@ -44,8 +50,12 @@ Library
 Tools
 -----
 
-* IMPROVED: The `packs` tool to handle all dependency relations except range
-dependencies.
+* ADDED: Support for defining the `packs` tool directory used to store packs
+and registries using the `logtalk_packs` library alias (which can be defined
+e.g. in a settings file).
+
+* IMPROVED: The `packs` tool to handle all dependency relations including
+range dependencies.
 
 * IMPROVED: The `packs` tool to print a warning if the pack being installed
 or updated requires a different backend from the one running the tool.

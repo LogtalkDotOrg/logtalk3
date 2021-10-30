@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Main features &mdash; The Logtalk Handbook v3.52.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -137,7 +138,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="main-features">
+  <section id="main-features">
 <span id="features-features"></span><h1>Main features<a class="headerlink" href="#main-features" title="Permalink to this headline"></a></h1>
 <p>Several years ago, I decided that the best way to learn object-oriented
 programming was to build my own object-oriented language. Prolog being
@@ -156,7 +157,7 @@ release (2.0) was published in February 1999. Development of the third
 generation of Logtalk started in 2012 with the first public alpha version
 in August 2012 and the first stable release (3.0.0) in January 2015.</p>
 <p>Logtalk provides the following features:</p>
-<div class="section" id="integration-of-logic-and-object-oriented-programming">
+<section id="integration-of-logic-and-object-oriented-programming">
 <span id="features-logic"></span><h2>Integration of logic and object-oriented programming<a class="headerlink" href="#integration-of-logic-and-object-oriented-programming" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Logtalk tries to bring together the main advantages of these two
@@ -174,8 +175,8 @@ the possibility of defining several namespaces, instead of the
 traditional Prolog single database, addressing some of the needs
 of large software projects.</p>
 </div></blockquote>
-</div>
-<div class="section" id="integration-of-event-driven-and-object-oriented-programming">
+</section>
+<section id="integration-of-event-driven-and-object-oriented-programming">
 <span id="features-events"></span><h2>Integration of event-driven and object-oriented programming<a class="headerlink" href="#integration-of-event-driven-and-object-oriented-programming" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Event-driven programming enables the building of reactive systems,
@@ -195,8 +196,8 @@ which minimize object coupling. In addition, events provide support
 for behavioral reflection and can be used to implement the concepts
 of <em>pointcut</em> and <em>advice</em> found on Aspect-Oriented Programming.</p>
 </div></blockquote>
-</div>
-<div class="section" id="support-for-component-based-programming">
+</section>
+<section id="support-for-component-based-programming">
 <span id="features-categories"></span><h2>Support for component-based programming<a class="headerlink" href="#support-for-component-based-programming" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Predicates can be encapsulated inside <em>categories</em> which can be
@@ -211,8 +212,8 @@ Categories allows for code reuse between non-related objects,
 independent of hierarchy relations, in the same vein as protocols
 allow for interface reuse.</p>
 </div></blockquote>
-</div>
-<div class="section" id="support-for-both-prototype-and-class-based-systems">
+</section>
+<section id="support-for-both-prototype-and-class-based-systems">
 <span id="features-both"></span><h2>Support for both prototype and class-based systems<a class="headerlink" href="#support-for-both-prototype-and-class-based-systems" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Almost any (if not all) object-oriented languages available today are
@@ -228,8 +229,8 @@ encapsulating object. Stand-alone objects, that is, objects that do
 not belong to any hierarchy, are a convenient solution to encapsulate
 code that will be reused by several unrelated objects.</p>
 </div></blockquote>
-</div>
-<div class="section" id="support-for-multiple-object-hierarchies">
+</section>
+<section id="support-for-multiple-object-hierarchies">
 <span id="features-multiple"></span><h2>Support for multiple object hierarchies<a class="headerlink" href="#support-for-multiple-object-hierarchies" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Languages like Smalltalk-80 <a class="reference internal" href="../bibliography.html#goldberg83" id="id7"><span>[Goldberg83]</span></a>, Objective-C <a class="reference internal" href="../bibliography.html#cox86" id="id8"><span>[Cox86]</span></a> and Java
@@ -243,8 +244,8 @@ prototype-based while others can be class-based. Furthermore,
 stand-alone objects provide a simple way to encapsulate utility
 predicates that do not need or fit in an object hierarchy.</p>
 </div></blockquote>
-</div>
-<div class="section" id="separation-between-interface-and-implementation">
+</section>
+<section id="separation-between-interface-and-implementation">
 <span id="features-interface"></span><h2>Separation between interface and implementation<a class="headerlink" href="#separation-between-interface-and-implementation" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>This is an expected (should we say standard ?) feature of almost any
@@ -254,8 +255,8 @@ can be contained in an object, a category or a protocol (first-order
 entities in Logtalk) or can be spread in both objects, categories and
 protocols.</p>
 </div></blockquote>
-</div>
-<div class="section" id="private-protected-and-public-inheritance">
+</section>
+<section id="private-protected-and-public-inheritance">
 <span id="features-inheritance"></span><h2>Private, protected and public inheritance<a class="headerlink" href="#private-protected-and-public-inheritance" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Logtalk supports private, protected and public inheritance in a
@@ -263,8 +264,8 @@ similar way to C++ <a class="reference internal" href="../bibliography.html#stro
 the scope of inherited, imported or implemented predicates (by
 default inheritance is public).</p>
 </div></blockquote>
-</div>
-<div class="section" id="private-protected-and-public-object-predicates">
+</section>
+<section id="private-protected-and-public-object-predicates">
 <span id="features-predicates"></span><h2>Private, protected and public object predicates<a class="headerlink" href="#private-protected-and-public-object-predicates" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Logtalk supports data hiding by implementing private, protected and
@@ -273,8 +274,8 @@ only be called from the container object. Protected predicates can be
 called by the container object or by the container descendants.
 Public predicates can be called from any object.</p>
 </div></blockquote>
-</div>
-<div class="section" id="parametric-objects">
+</section>
+<section id="parametric-objects">
 <span id="features-parametric"></span><h2>Parametric objects<a class="headerlink" href="#parametric-objects" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Object names can be compound terms (instead of atoms), providing a
@@ -288,8 +289,8 @@ allows us to treat any predicate clause as defining an
 allows us to encapsulate and associate any number of predicates with
 a compound term.</p>
 </div></blockquote>
-</div>
-<div class="section" id="high-level-multi-threading-programming-support">
+</section>
+<section id="high-level-multi-threading-programming-support">
 <span id="features-threading"></span><h2>High level multi-threading programming support<a class="headerlink" href="#high-level-multi-threading-programming-support" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>High level multi-threading programming is available when running
@@ -300,16 +301,16 @@ multi-core computers without bothering with the details of creating
 and destroying threads, implement thread communication, or
 synchronizing threads.</p>
 </div></blockquote>
-</div>
-<div class="section" id="smooth-learning-curve">
+</section>
+<section id="smooth-learning-curve">
 <span id="features-learning"></span><h2>Smooth learning curve<a class="headerlink" href="#smooth-learning-curve" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>Logtalk has a smooth learning curve, by adopting standard Prolog
 syntax and by enabling an incremental learning and use of most of its
 features.</p>
 </div></blockquote>
-</div>
-<div class="section" id="compatibility-with-most-prolog-systems-and-the-iso-standard">
+</section>
+<section id="compatibility-with-most-prolog-systems-and-the-iso-standard">
 <span id="features-compatibility"></span><h2>Compatibility with most Prolog systems and the ISO standard<a class="headerlink" href="#compatibility-with-most-prolog-systems-and-the-iso-standard" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>The Logtalk system has been designed to be compatible with most
@@ -317,8 +318,8 @@ Prolog compilers and, in particular, with the ISO Prolog standard
 <a class="reference internal" href="../bibliography.html#iso95" id="id15"><span>[ISO95]</span></a>. It runs in almost any computer system with a modern Prolog
 compiler.</p>
 </div></blockquote>
-</div>
-<div class="section" id="performance">
+</section>
+<section id="performance">
 <span id="features-performance"></span><h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>The current Logtalk implementation works as a trans-compiler: Logtalk
@@ -341,8 +342,8 @@ could be achieved when using static binding.</p>
 <p>For more detailed information on performance, see its dedicated
 <a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">section</span></a>.</p>
 </div></blockquote>
-</div>
-<div class="section" id="logtalk-scope">
+</section>
+<section id="logtalk-scope">
 <span id="features-scope"></span><h2>Logtalk scope<a class="headerlink" href="#logtalk-scope" title="Permalink to this headline"></a></h2>
 <p>Logtalk, being a superset of Prolog, shares with it the same preferred
 areas of application but also extends them with those areas where
@@ -387,8 +388,8 @@ Smalltalk by facilitating a high-level mapping between the two
 languages.</p>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
