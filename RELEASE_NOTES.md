@@ -25,6 +25,11 @@ RELEASE NOTES
 3.52.0 - December ??, 2021
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Trealla Prolog adapter file to require version 1.16.0 or later.
+
 Documentation
 -------------
 
