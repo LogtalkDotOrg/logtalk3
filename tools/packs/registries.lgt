@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:27:1,
+		version is 0:28:0,
 		author is 'Paulo Moura',
-		date is 2021-10-28,
+		date is 2021-10-31,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -228,7 +228,8 @@
 		check(var_or(atom), Registry),
 		check(var_or(atom), HowDefined),
 		check(var_or(boolean), Pinned),
-		expand_library_path(logtalk_packs(registries), Directory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Directory),
 		directory_files(Directory, Registries, [type(directory), dot_files(false), paths(relative)]),
 		member(Registry, Registries),
 		path_concat(Directory, Registry, Path),
@@ -260,12 +261,14 @@
 			!
 		),
 		\+ deleted_registry_(Registry),
-		expand_library_path(logtalk_packs(registries), Registries),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Registries),
 		path_concat(Registries, Registry, Directory),
 		directory_exists(Directory).
 
 	directory(Directory) :-
-		expand_library_path(logtalk_packs(registries), Directory).
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Directory).
 
 	% add registry predicates
 
@@ -421,7 +424,8 @@
 				fail
 			;	true
 			),
-			expand_library_path(logtalk_packs(registries), Registries),
+			^^logtalk_packs(LogtalkPacks),
+			path_concat(LogtalkPacks, registries, Registries),
 			path_concat(Registries, Registry, Path),
 			path_concat(Path, '.git', Git),
 			(	directory_exists(Git) ->
@@ -499,7 +503,8 @@
 		).
 
 	clean :-
-		expand_library_path(logtalk_packs(registries), Directory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Directory),
 		directory_files(Directory, Registries, [type(directory), dot_files(false)]),
 		member(Registry, Registries),
 		delete_archives(Registry),
@@ -507,7 +512,8 @@
 	clean.
 
 	delete_archives(Registry) :-
-		expand_library_path(logtalk_packs(archives), Archives),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, registries, ArchivesRegistries),
 		path_concat(ArchivesRegistries, Registry, ArchivesRegistriesRegistry),
 		(	directory_exists(ArchivesRegistriesRegistry) ->
@@ -669,7 +675,8 @@
 
 	registry_directory(Registry, Directory) :-
 		registry_object(Registry, _),
-		expand_library_path(logtalk_packs(registries), RegistriesDirectory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, RegistriesDirectory),
 		directory_files(RegistriesDirectory, Registries, [type(directory), dot_files(false), paths(relative)]),
 		member(Registry, Registries),
 		path_concat(RegistriesDirectory, Registry, Directory).
@@ -685,7 +692,8 @@
 		\+ deleted_registry_(Registry).
 
 	clone(Registry, URL, Path, Options) :-
-		expand_library_path(logtalk_packs(registries), Registries),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Registries),
 		path_concat(Registries, Registry, Path),
 		internal_os_path(Path, OSPath),
 		(	member(verbose(true), Options) ->
@@ -695,7 +703,8 @@
 		^^command(Command, registry_cloning_failed(Registry, URL)).
 
 	download(Registry, URL, Archive, Options) :-
-		expand_library_path(logtalk_packs(archives), Archives),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, registries, ArchivesRegistries),
 		path_concat(ArchivesRegistries, Registry, ArchivesRegistriesRegistry),
 		decompose_file_name(URL, _, Basename),
@@ -718,7 +727,8 @@
 		^^command(Command, registry_archive_uncompress_failed(Registry, OSPath)).
 
 	installed_registry_packs(Registry) :-
-		expand_library_path(logtalk_packs(packs), Directory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Directory),
 		directory_files(Directory, Packs, [type(directory), dot_files(false), paths(absolute)]),
 		member(Pack, Packs),
 		path_concat(Pack, 'REGISTRY.packs', File),
@@ -730,7 +740,8 @@
 		!.
 
 	make_registry_installation_directory(Registry, Path, OSPath) :-
-		expand_library_path(logtalk_packs(registries), Registries),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Registries),
 		path_concat(Registries, Registry, Path),
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).

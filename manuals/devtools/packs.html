@@ -241,7 +241,9 @@ specifications.</p>
 <p>Defining the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias in a settings file or
 defining the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable before starting
 Logtalk allows easy switching between alternative (e.g. per application)
-registry/pack setups.</p>
+registry/pack setups. The directory being used can be queries by sending
+the <code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code> message to either the <code class="docutils literal notranslate"><span class="pre">packs</span></code> or
+<code class="docutils literal notranslate"><span class="pre">registries</span></code> objects.</p>
 </section>
 <section id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this headline"></a></h2>

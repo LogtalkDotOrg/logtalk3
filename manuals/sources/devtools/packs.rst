@@ -118,7 +118,9 @@ specifications.
 Defining the ``logtalk_packs`` library alias in a settings file or
 defining the ``LOGTALKPACKS`` environment variable before starting
 Logtalk allows easy switching between alternative (e.g. per application)
-registry/pack setups.
+registry/pack setups. The directory being used can be queries by sending
+the ``logtalk_packs/1`` message to either the ``packs`` or
+``registries`` objects.
 
 Registry specification
 ----------------------

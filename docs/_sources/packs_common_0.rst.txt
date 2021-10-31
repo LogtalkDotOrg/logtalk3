@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:17:0
-| **Date:** 2021-10-25
+| **Version:** 0:18:0
+| **Date:** 2021-10-31
 
 | **Compilation flags:**
 |    ``static``
@@ -232,6 +232,29 @@ Returns the path to the resource (pack or registry) readme file. Fails if the re
 |    ``readme(Resource,ReadMeFile)``
 | **Mode and number of proofs:**
 |    ``readme(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="logtalk_packs/1"> </div>
+
+.. index:: logtalk_packs/1
+.. _packs_common/0::logtalk_packs/1:
+
+``logtalk_packs/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the directory where the registries, packs, and archives are installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logtalk_packs(LogtalkPacks)``
+| **Mode and number of proofs:**
+|    ``logtalk_packs(-atom)`` - ``one``
 
 
 ------------

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2021-10-29,
+		date is 2021-10-31,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -300,7 +300,8 @@
 		print_message(comment, packs, @'Verifying availability of the required shell utilities...'),
 		^^verify_commands_availability,
 		print_message(comment, packs, @'Loading existing registry and pack specifications...'),
-		expand_library_path(logtalk_packs(registries), RegistriesDirectory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, RegistriesDirectory),
 		directory_files(RegistriesDirectory, Registries, [type(directory), dot_files(false), paths(absolute)]),
 		forall(
 			member(Registry, Registries),
@@ -347,12 +348,14 @@
 			PackObject::name(Pack),
 			!
 		),
-		expand_library_path(logtalk_packs(packs), Packs),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Packs),
 		path_concat(Packs, Pack, Directory),
 		directory_exists(Directory).
 
 	directory(Directory) :-
-		expand_library_path(logtalk_packs(packs), Directory).
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Directory).
 
 	% installed pack predicates
 
@@ -780,7 +783,8 @@
 
 	clean :-
 		print_message(comment, packs, @'Cleaning all pack archives'),
-		expand_library_path(logtalk_packs(packs), Directory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Directory),
 		directory_files(Directory, Packs, [type(directory), dot_files(false)]),
 		member(Pack, Packs),
 		path_concat(Directory, Pack, Path),
@@ -791,7 +795,8 @@
 		print_message(comment, packs, @'Cleaned all pack archives').
 
 	delete_archives(Registry, Pack) :-
-		expand_library_path(logtalk_packs(archives), Archives),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
 		path_concat(ArchivesPacks, Registry, ArchivesPacksRegistry),
 		path_concat(ArchivesPacksRegistry, Pack, ArchivesPacksRegistryPack),
@@ -821,7 +826,8 @@
 
 	orphaned_pack(Registry, Pack) :-
 		installed_pack(Registry, Pack, _, _),
-		expand_library_path(logtalk_packs(registries), Registries),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, registries, Registries),
 		path_concat(Registries, Registry, Directory),
 		\+ directory_exists(Directory).
 
@@ -872,7 +878,8 @@
 		).
 
 	pack_dependent(Registry, Pack, Dependent) :-
-		expand_library_path(logtalk_packs(packs), Directory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Directory),
 		directory_files(Directory, Dependents, [type(directory), dot_files(false), paths(relative)]),
 		member(Dependent, Dependents),
 		implements_protocol(DependentObject, pack_protocol),
@@ -1222,7 +1229,8 @@
 		).
 
 	installed_pack(Registry, Pack, Version, Pinned) :-
-		expand_library_path(logtalk_packs(packs), Directory),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Directory),
 		directory_files(Directory, Packs, [type(directory), dot_files(false), paths(relative)]),
 		member(Pack, Packs),
 		path_concat(Directory, Pack, Path),
@@ -1268,13 +1276,15 @@
 		).
 
 	make_pack_installation_directory(Pack, Path, OSPath) :-
-		expand_library_path(logtalk_packs(packs), Packs),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Packs),
 		path_concat(Packs, Pack, Path),
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
 
 	download(Registry, Pack, URL, Archive, Options) :-
-		expand_library_path(logtalk_packs(archives), Archives),
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
 		path_concat(ArchivesPacks, Registry, ArchivesPacksRegistry),
 		path_concat(ArchivesPacksRegistry, Pack, ArchivesPacksRegistryPack),

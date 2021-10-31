@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2021-10-31,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -88,6 +88,13 @@
 		argnames is ['Resource', 'ReadMeFile']
 	]).
 
+	:- public(logtalk_packs/1).
+	:- mode(logtalk_packs(-atom), one).
+	:- info(logtalk_packs/1, [
+		comment is 'Returns the directory where the registries, packs, and archives are installed.',
+		argnames is ['LogtalkPacks']
+	]).
+
 	:- protected(readme_file_path/2).
 	:- mode(readme_file_path(+atom, -atom), zero_or_one).
 	:- info(readme_file_path/2, [
@@ -135,16 +142,16 @@
 	]).
 
 	:- uses(os, [
-		ensure_file/1, file_exists/1, internal_os_path/2,
-		make_directory_path/1, operating_system_type/1,
-		path_concat/3, shell/1
+		absolute_file_name/2, ensure_file/1, environment_variable/2,
+		file_exists/1, internal_os_path/2, make_directory_path/1,
+		operating_system_type/1, path_concat/3, shell/1
 	]).
 
 	help :-
 		print_message(help, packs, help).
 
 	setup :-
-		expand_library_path(logtalk_packs, LogtalkPacks),
+		logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, 'registries', Registries),
 		make_directory_path(Registries),
 		path_concat(LogtalkPacks, 'packs', Packs),
@@ -155,6 +162,14 @@
 		make_directory_path(ArchivesRegistries),
 		path_concat(Archives, 'packs', ArchivesPacks),
 		make_directory_path(ArchivesPacks).
+
+	logtalk_packs(LogtalkPacks) :-
+		(	expand_library_path(logtalk_packs, LogtalkPacks) ->
+			true
+		;	environment_variable('LOGTALKPACKS', LogtalkPacks) ->
+			true
+		;	absolute_file_name('$HOME/logtalk_packs', LogtalkPacks)
+		).
 
 	verify_commands_availability :-
 		operating_system_type(OS),

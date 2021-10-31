@@ -54,6 +54,8 @@ Tools
 and registries using the `logtalk_packs` library alias (which can be defined
 e.g. in a settings file).
 
+* ADDED: Predicate `logtalk_packs/1` to the `packs` tool.
+
 * IMPROVED: The `packs` tool to handle all dependency relations including
 range dependencies.
 
