@@ -22,7 +22,7 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:18:1,
 		author is 'Paulo Moura',
 		date is 2021-10-31,
 		comment is 'Common predicates for the packs tool objects.'
@@ -168,7 +168,7 @@
 			true
 		;	environment_variable('LOGTALKPACKS', LogtalkPacks) ->
 			true
-		;	absolute_file_name('$HOME/logtalk_packs', LogtalkPacks)
+		;	expand_library_path(home(logtalk_packs), LogtalkPacks)
 		).
 
 	verify_commands_availability :-
