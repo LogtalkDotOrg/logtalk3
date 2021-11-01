@@ -25,6 +25,11 @@ RELEASE NOTES
 3.52.0 - December ??, 2021
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The pack library paths to always end with a slash.
+
 Prolog adapter and integration files
 ------------------------------------
 

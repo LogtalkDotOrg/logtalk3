@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the user installed packs
-%  Last updated on October 30, 2021
+%  Last updated on November 1, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -54,5 +54,5 @@ logtalk_library_path(Pack, PackPath) :-
 		\+ sub_atom(Pack, 0, _, _, '.')
 	;	true
 	),
-	atomic_list_concat([ExpandedPath, '/', Pack], PackPath),
+	atomic_list_concat([ExpandedPath, '/', Pack, '/'], PackPath),
 	'$lgt_directory_exists'(PackPath).
