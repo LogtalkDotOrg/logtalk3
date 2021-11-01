@@ -82,6 +82,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registries-and-packs-storage">Registries and packs storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#virtual-environments">Virtual environments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-specification">Registry specification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-development">Registry development</a></li>
@@ -222,6 +223,10 @@ any missing command.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool loads at startup all the currently defined registry
+and pack specifications (from the registries/packs storage directory;
+see below). When no registry/pack setup exists, a new one is
+automatically created.</p>
 <p>The tool provides two main objects, <code class="docutils literal notranslate"><span class="pre">registries</span></code> and <code class="docutils literal notranslate"><span class="pre">packs</span></code>, for
 handling, respectively, registries and packs. Both objects accept a
 <code class="docutils literal notranslate"><span class="pre">help/0</span></code> message that describes the most common queries.</p>
@@ -235,15 +240,29 @@ uses the value of the <code class="docutils literal notranslate"><span class="pr
 defined. Otherwise it defaults to the <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory.
 This directory holds sub-directories for registries, packs, and
 archives. Users shouldn’t manually modify the contents of these
-directories.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool loads at startup all the defined registry and pack
-specifications.</p>
+directories. Alternative registry/pack setups are possible using
+<em>virtual environments</em> as explained next.</p>
+</section>
+<section id="virtual-environments">
+<h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline"></a></h2>
+<p>An application may require a specific Logtalk version (e.g. the version
+used to test and certify it) and specific pack versions. These
+requirements may differ between applications. Therefore, a <em>virtual
+environment</em> where an application requirements are fulfilled may be
+required to develop and run it. The virtual environment is essentially a
+registries/packs storage directory.</p>
 <p>Defining the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias in a settings file or
 defining the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable before starting
-Logtalk allows easy switching between alternative (e.g. per application)
-registry/pack setups. The directory being used can be queries by sending
-the <code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code> message to either the <code class="docutils literal notranslate"><span class="pre">packs</span></code> or
-<code class="docutils literal notranslate"><span class="pre">registries</span></code> objects.</p>
+Logtalk allows easy creation and switching between virtual environments.
+The directory being used can be queried by sending the
+<code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code> message to either the <code class="docutils literal notranslate"><span class="pre">packs</span></code> or <code class="docutils literal notranslate"><span class="pre">registries</span></code>
+objects.</p>
+<p>When a virtual environment also requires a specific Logtalk version,
+this can be installed as a pack from the official
+<a class="reference external" href="https://github.com/LogtalkDotOrg/talkshow">talkshow</a> registry and
+used by (re)defining the <code class="docutils literal notranslate"><span class="pre">LOGTALKHOME</span></code> and <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code> environment
+variables to point to its pack directory (which can be queried by using
+the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> message).</p>
 </section>
 <section id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this headline"></a></h2>

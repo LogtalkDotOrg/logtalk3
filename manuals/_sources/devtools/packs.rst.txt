@@ -96,6 +96,11 @@ To test this tool, load the ``tester.lgt`` file:
 Usage
 -----
 
+The ``packs`` tool loads at startup all the currently defined registry
+and pack specifications (from the registries/packs storage directory;
+see below). When no registry/pack setup exists, a new one is
+automatically created.
+
 The tool provides two main objects, ``registries`` and ``packs``, for
 handling, respectively, registries and packs. Both objects accept a
 ``help/0`` message that describes the most common queries.
@@ -110,17 +115,32 @@ uses the value of the ``LOGTALKPACKS`` environment variable when
 defined. Otherwise it defaults to the ``~/logtalk_packs`` directory.
 This directory holds sub-directories for registries, packs, and
 archives. Users shouldn't manually modify the contents of these
-directories.
+directories. Alternative registry/pack setups are possible using
+*virtual environments* as explained next.
 
-The ``packs`` tool loads at startup all the defined registry and pack
-specifications.
+Virtual environments
+--------------------
+
+An application may require a specific Logtalk version (e.g. the version
+used to test and certify it) and specific pack versions. These
+requirements may differ between applications. Therefore, a *virtual
+environment* where an application requirements are fulfilled may be
+required to develop and run it. The virtual environment is essentially a
+registries/packs storage directory.
 
 Defining the ``logtalk_packs`` library alias in a settings file or
 defining the ``LOGTALKPACKS`` environment variable before starting
-Logtalk allows easy switching between alternative (e.g. per application)
-registry/pack setups. The directory being used can be queries by sending
-the ``logtalk_packs/1`` message to either the ``packs`` or
-``registries`` objects.
+Logtalk allows easy creation and switching between virtual environments.
+The directory being used can be queried by sending the
+``logtalk_packs/1`` message to either the ``packs`` or ``registries``
+objects.
+
+When a virtual environment also requires a specific Logtalk version,
+this can be installed as a pack from the official
+`talkshow <https://github.com/LogtalkDotOrg/talkshow>`__ registry and
+used by (re)defining the ``LOGTALKHOME`` and ``LOGTALKUSER`` environment
+variables to point to its pack directory (which can be queried by using
+the ``packs::directory/2`` message).
 
 Registry specification
 ----------------------

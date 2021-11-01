@@ -38,8 +38,11 @@ Prolog adapter and integration files
 Documentation
 -------------
 
-* UPDATED: The documentation of the `logtalk_library_path/2` predicate for the
-`logtalk_packs` library alias.
+* ADDED: Section on creating and using virtual environments to the `packs`
+tool documentation.
+
+* UPDATED: The documentation of the `logtalk_library_path/2` predicate for
+the `logtalk_packs` library alias.
 
 * UPDATED: The `settings-sample.lgt` with sample code for defining the new
 `logtalk_packs` library alias.
