@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(test_object).
+:- object(test_object_1).
 
 	% for supporting testing instantiation errors
 	:- public(ie/1).
@@ -38,5 +38,19 @@
 
 	% for supporting testing non-terminal properties
 	:- public(nt//0).
+
+:- end_object.
+
+
+:- object(test_object_2).
+
+	:- public(foo/1).
+	foo(_).
+
+	:- public(bar/0).
+	bar :-
+		foo(1),
+		foo(2),
+		foo(3).
 
 :- end_object.

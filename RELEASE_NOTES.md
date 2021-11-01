@@ -73,6 +73,12 @@ or updated requires a different backend from the one running the tool.
 * FIXED: Workaround `packs` tool portability issue with Ciao Prolog due to
 this system lack of supported for standard multifile predicate semantics.
 
+Tests
+-----
+
+* ADDED: Tests for the Logtalk `predicate_property/2` method to check for
+predicate declaration and definition term position properties.
+
 
 3.51.0 - October 26, 2021
 =========================
