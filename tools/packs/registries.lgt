@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:29:1,
 		author is 'Paulo Moura',
 		date is 2021-11-02,
 		comment is 'Registry handling predicates.'
@@ -302,10 +302,12 @@
 
 	add_registry(Registry, URL, Options) :-
 		print_message(comment, packs, adding_registry(Registry)),
-		(	registry_object(Registry, _),
-			member(force(false), Options) ->
-			print_message(error, packs, registry_already_defined(Registry)),
-			fail
+		(	registry_object(Registry, _) ->
+			(	member(force(false), Options) ->
+				print_message(error, packs, registry_already_defined(Registry)),
+				fail
+			;	delete(Registry, Options)
+			)
 		;	true
 		),
 		decompose_file_name(URL, _, Name, Extension),

@@ -70,6 +70,10 @@ range dependencies.
 * IMPROVED: The `packs` tool to print a warning if the pack being installed
 or updated requires a different backend from the one running the tool.
 
+* FIXED: The `packs` tool `registries::add/3` predicate to delete a registry
+prior to re-adding it when using the `force(true)` option to prevent a git
+cloning failure.
+
 * FIXED: Workaround `packs` tool portability issue with Ciao Prolog due to
 this system lack of supported for standard multifile predicate semantics.
 
