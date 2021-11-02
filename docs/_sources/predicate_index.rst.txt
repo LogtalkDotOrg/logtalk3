@@ -6555,6 +6555,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`fast_random <fast_random/0::reset_seed/0>`
 * :ref:`random <random/0::reset_seed/0>`
 
+``restore/1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::restore/1>`
+
+``restore/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`packs <packs/0::restore/2>`
+
 ``reverse/2``
 -------------
 
@@ -6731,6 +6751,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`packs <packs/0::save/1>`
 * :ref:`wrapper <wrapper/0::save/1>`
 
 ``scalar_product/3``

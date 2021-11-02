@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:30:0
-| **Date:** 2021-10-31
+| **Version:** 0:31:0
+| **Date:** 2021-11-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -631,6 +631,83 @@ Cleans all archives for all packs.
 
 | **Mode and number of proofs:**
 |    ``clean`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="save/1"> </div>
+
+.. index:: save/1
+.. _packs/0::save/1:
+
+``save/1``
+^^^^^^^^^^
+
+Saves a list of all installed packs and their registries and versions to a file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save(File)``
+| **Mode and number of proofs:**
+|    ``save(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="restore/2"> </div>
+
+.. index:: restore/2
+.. _packs/0::restore/2:
+
+``restore/2``
+^^^^^^^^^^^^^
+
+Restores a list of registries and packs from a file using the given options. Fails if restoring is not possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore(File,Options)``
+| **Mode and number of proofs:**
+|    ``restore(+atom,++list(compound))`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - ``force(Boolean)`` option: Force restoring if a registry is already defined or a pack is already installed. Default is ``false``.
+    - ``clean(Boolean)`` option: Clean registry and pack archives after restoring. Default is ``false``.
+    - ``verbose(Boolean)`` option: Verbose restoring steps. Default is ``false``.
+    - ``checksum(Boolean)`` option: Verify pack archive checksums. Default is ``true``.
+    - ``checksig(Boolean)`` option: Verify pack archive signatures. Default is ``false``.
+
+
+------------
+
+.. raw:: html
+
+   <div id="restore/1"> </div>
+
+.. index:: restore/1
+.. _packs/0::restore/1:
+
+``restore/1``
+^^^^^^^^^^^^^
+
+Restores a list of registries and packs from a file using default options. Fails if restoring is not possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``restore(File)``
+| **Mode and number of proofs:**
+|    ``restore(+atom)`` - ``zero_or_one``
 
 
 ------------

@@ -58,6 +58,9 @@ Library
 Tools
 -----
 
+* ADDED: Support for defining, saving, and restoring a simple form of packs
+virtual environments.
+
 * ADDED: Support for defining the `packs` tool directory used to store packs
 and registries using the `logtalk_packs` library alias (which can be defined
 e.g. in a settings file).

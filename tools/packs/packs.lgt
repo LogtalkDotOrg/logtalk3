@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:31:0,
 		author is 'Paulo Moura',
-		date is 2021-10-31,
+		date is 2021-11-02,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -222,6 +222,34 @@
 	:- mode(clean, one).
 	:- info(clean/0, [
 		comment is 'Cleans all archives for all packs.'
+	]).
+
+	:- public(save/1).
+	:- mode(save(+atom), one).
+	:- info(save/1, [
+		comment is 'Saves a list of all installed packs and their registries and versions to a file.',
+		argnames is ['File']
+	]).
+
+	:- public(restore/2).
+	:- mode(restore(+atom, ++list(compound)), zero_or_one).
+	:- info(restore/2, [
+		comment is 'Restores a list of registries and packs from a file using the given options. Fails if restoring is not possible.',
+		argnames is ['File', 'Options'],
+		remarks is [
+			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``false``.',
+			'``clean(Boolean)`` option' - 'Clean registry and pack archives after restoring. Default is ``false``.',
+			'``verbose(Boolean)`` option' - 'Verbose restoring steps. Default is ``false``.',
+			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
+			'``checksig(Boolean)`` option' - 'Verify pack archive signatures. Default is ``false``.'
+		]
+	]).
+
+	:- public(restore/1).
+	:- mode(restore(+atom), zero_or_one).
+	:- info(restore/1, [
+		comment is 'Restores a list of registries and packs from a file using default options. Fails if restoring is not possible.',
+		argnames is ['File']
 	]).
 
 	:- public(dependents/3).
@@ -804,6 +832,60 @@
 			directory_files(ArchivesPacksRegistryPack, Files, [type(regular), dot_files(false), paths(absolute)]),
 			forall(member(File, Files), delete_file(File))
 		;	true
+		).
+
+	% save and restore predicates
+
+	save(File) :-
+		open(File, write, Stream),
+		findall(
+			Registry,
+			installed_pack(Registry, _, _, _),
+			Registries
+		),
+		sort(Registries, Sorted),
+		forall(
+			member(Registry, Sorted),
+			(	registries::directory(Registry, Directory),
+				path_concat(Directory, 'URL.packs', URLFile),
+				file_exists(URLFile),
+				open(URLFile, read, URLStream),
+				read(URLStream, URL),
+				close(URLStream),
+				writeq(Stream, registry(Registry, URL)), write(Stream, '.\n')
+			)
+		),
+		forall(
+			installed_pack(Registry, Pack, Version, _),
+			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
+		),
+		close(Stream).
+
+	restore(File, UserOptions) :-
+		check(file, File),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		open(File, read, Stream),
+		read(Stream, Term),
+		restore(Term, Stream, Options).
+
+	restore(File) :-
+		restore(File, []).
+
+	restore(end_of_file, Stream, _) :-
+		!,
+		close(Stream).
+	restore(registry(Registry, URL), Stream, Options) :-
+		(	registries::add(Registry, URL, Options) ->
+			read(Stream, Term),
+			restore(Term, Stream, Options)
+		;	close(Stream)
+		).
+	restore(pack(Registry, Pack, Version), Stream, Options) :-
+		(	install(Registry, Pack, Version, Options) ->
+			read(Stream, Term),
+			restore(Term, Stream, Options)
+		;	close(Stream)
 		).
 
 	% orphaned pack predicates
