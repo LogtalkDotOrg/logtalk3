@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:31:1,
 		author is 'Paulo Moura',
 		date is 2021-11-02,
 		comment is 'Pack handling predicates.'
@@ -837,6 +837,7 @@
 	% save and restore predicates
 
 	save(File) :-
+		print_message(comment, packs, @'Saving current registries/packs setup'),
 		open(File, write, Stream),
 		findall(
 			Registry,
@@ -859,15 +860,18 @@
 			installed_pack(Registry, Pack, Version, _),
 			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
 		),
-		close(Stream).
+		close(Stream),
+		print_message(comment, packs, @'Saved current registries/packs setup').
 
 	restore(File, UserOptions) :-
+		print_message(comment, packs, @'Restoring registries/packs setup'),
 		check(file, File),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		open(File, read, Stream),
 		read(Stream, Term),
-		restore(Term, Stream, Options).
+		restore(Term, Stream, Options),
+		print_message(comment, packs, @'Restored registries/packs setup').
 
 	restore(File) :-
 		restore(File, []).
@@ -879,13 +883,17 @@
 		(	registries::add(Registry, URL, Options) ->
 			read(Stream, Term),
 			restore(Term, Stream, Options)
-		;	close(Stream)
+		;	close(Stream),
+			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			fail
 		).
 	restore(pack(Registry, Pack, Version), Stream, Options) :-
 		(	install(Registry, Pack, Version, Options) ->
 			read(Stream, Term),
 			restore(Term, Stream, Options)
-		;	close(Stream)
+		;	close(Stream),
+			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			fail
 		).
 
 	% orphaned pack predicates
