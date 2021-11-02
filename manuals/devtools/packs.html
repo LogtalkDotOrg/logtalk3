@@ -239,24 +239,29 @@ initialization file). When this library alias is not defined, the tool
 uses the value of the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable when
 defined. Otherwise it defaults to the <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory.
 This directory holds sub-directories for registries, packs, and
-archives. Users shouldn’t manually modify the contents of these
-directories. Alternative registry/pack setups are possible using
-<em>virtual environments</em> as explained next.</p>
+archives. These sub-directories are automatically created when loading
+the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool if they don’t exist . Users shouldn’t manually modify
+the contents of these directories. Multiple and independent
+registry/pack setups are possible using <em>virtual environments</em> as
+explained next.</p>
 </section>
 <section id="virtual-environments">
 <h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline"></a></h2>
 <p>An application may require a specific Logtalk version (e.g. the version
 used to test and certify it) and specific pack versions. These
-requirements may differ between applications. Therefore, a <em>virtual
-environment</em> where an application requirements are fulfilled may be
-required to develop and run it. The virtual environment is essentially a
+requirements may differ between applications. Different applications may
+also have conflicting requirements. Therefore, a <em>virtual environment</em>
+where an application requirements are fulfilled may be required to
+develop and/or run it. A virtual environment is essentially a
 registries/packs storage directory.</p>
 <p>Defining the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias in a settings file or
 defining the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable before starting
 Logtalk allows easy creation and switching between virtual environments.
-The directory being used can be queried by sending the
-<code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code> message to either the <code class="docutils literal notranslate"><span class="pre">packs</span></code> or <code class="docutils literal notranslate"><span class="pre">registries</span></code>
-objects.</p>
+By using a per application settings file (or a per application
+environment variable definition) each application can thus use its own
+virtual environment. The directory being used can always be queried by
+sending the <code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code> message to either the <code class="docutils literal notranslate"><span class="pre">packs</span></code> or
+<code class="docutils literal notranslate"><span class="pre">registries</span></code> objects.</p>
 <p>When a virtual environment also requires a specific Logtalk version,
 this can be installed as a pack from the official
 <a class="reference external" href="https://github.com/LogtalkDotOrg/talkshow">talkshow</a> registry and
@@ -278,7 +283,35 @@ pack(talkshow, lflat, <span class="m">2</span><span class="o">:</span><span clas
 </pre></div>
 </div>
 <p>These files can be distributed with applications so that users can
-easily fulfill application requirements by using the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool.</p>
+easily fulfill application requirements by using the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool.
+Typically, an application directory will include <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code> files. The <code class="docutils literal notranslate"><span class="pre">settings.lgt</span></code> file can define the
+<code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias using code such as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="k">logtalk_load_context</span>(directory, <span class="nv">Directory</span>),
+    <span class="k">assertz</span>(<span class="k">logtalk_library_path</span>(logtalk_packs, <span class="nv">Directory</span>))
+)).
+</pre></div>
+</div>
+<p>A suitable named sub-directory can also be used. The application
+requirements can then be fulfilled by starting Logtalk from the
+application directory (so that the application settings file is loaded)
+and running once the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>packs(loader)<span class="k">}</span>, packs<span class="o">::</span>restore(<span class="s">&#39;requirements.lgt).</span>
+</pre></div>
+</div>
+<p>The application <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file can then load the required packs
+using their loader files:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    <span class="c">% load required packs</span>
+    <span class="k">logtalk_load</span>(foo(loader)),
+    <span class="k">logtalk_load</span>(bar(loader)),
+    ...
+    <span class="c">% load application files</span>
+    ...
+)).
+</pre></div>
+</div>
 </section>
 <section id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this headline"></a></h2>

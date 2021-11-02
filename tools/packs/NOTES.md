@@ -128,9 +128,11 @@ when defined (in a settings file or in a backend Prolog initialization file).
 When this library alias is not defined, the tool uses the value of the
 `LOGTALKPACKS` environment variable when defined. Otherwise it defaults to
 the `~/logtalk_packs` directory. This directory holds sub-directories for
-registries, packs, and archives. Users shouldn't manually modify the contents
-of these directories. Alternative registry/pack setups are possible using
-_virtual environments_ as explained next.
+registries, packs, and archives. These sub-directories are automatically
+created when loading the `packs` tool if they don't exist . Users shouldn't
+manually modify the contents of these directories. Multiple and independent
+registry/pack setups are possible using _virtual environments_ as explained
+next.
 
 
 Virtual environments
@@ -138,15 +140,18 @@ Virtual environments
 
 An application may require a specific Logtalk version (e.g. the version used
 to test and certify it) and specific pack versions. These requirements may
-differ between applications. Therefore, a _virtual environment_ where an
-application requirements are fulfilled may be required to develop and run it.
-The virtual environment is essentially a registries/packs storage directory.
+differ between applications. Different applications may also have conflicting
+requirements. Therefore, a _virtual environment_ where an application
+requirements are fulfilled may be required to develop and/or run it. A virtual
+environment is essentially a registries/packs storage directory.
 
 Defining the `logtalk_packs` library alias in a settings file or defining
 the `LOGTALKPACKS` environment variable before starting Logtalk allows easy
-creation and switching between virtual environments. The directory being used
-can be queried by sending the `logtalk_packs/1` message to either the `packs`
-or `registries` objects.
+creation and switching between virtual environments. By using a per application
+settings file (or a per application environment variable definition) each
+application can thus use its own virtual environment. The directory being used
+can always be queried by sending the `logtalk_packs/1` message to either the
+`packs` or `registries` objects.
 
 When a virtual environment also requires a specific Logtalk version, this
 can be installed as a pack from the official
@@ -168,7 +173,33 @@ this order) and can be manually created or edited if necessary. For example:
 	pack(talkshow, lflat, 2:1:0).
 
 These files can be distributed with applications so that users can easily
-fulfill application requirements by using the `packs` tool.
+fulfill application requirements by using the `packs` tool. Typically, an
+application directory will include `settings.lgt` and `requirements.lgt`
+files. The `settings.lgt` file can define the `logtalk_packs` library alias
+using code such as:
+
+	:- initialization((
+		logtalk_load_context(directory, Directory),
+		assertz(logtalk_library_path(logtalk_packs, Directory))
+	)).
+
+A suitable named sub-directory can also be used. The application requirements
+can then be fulfilled by starting Logtalk from the application directory (so
+that the application settings file is loaded) and running once the query:
+
+	| ?- {packs(loader)}, packs::restore('requirements.lgt).
+
+The application `loader.lgt` file can then load the required packs using their
+loader files:
+
+	:- initialization((
+		% load required packs
+		logtalk_load(foo(loader)),
+		logtalk_load(bar(loader)),
+		...
+		% load application files
+		...
+	)).
 
 
 Registry specification
