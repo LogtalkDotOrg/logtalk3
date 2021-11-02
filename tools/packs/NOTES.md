@@ -159,13 +159,13 @@ A virtual environment setup, i.e. the currently defined registries and
 installed packs can be saved into a file (e.g. `requirements.lgt`) and
 restored using the `packs::save/1` and `packs::restore/1-2` predicates.
 The file uses a simple format with `registry/2` and `pack/3` facts (in
-this order). For example:
+this order) and can be manually created or edited if necessary. For example:
 
-	registry(talkshow,'https://github.com/LogtalkDotOrg/talkshow.git').
-	pack(talkshow,logtalk,3:45:0).
-	pack(talkshow,lflat,2:1:0).
+	registry(talkshow, 'https://github.com/LogtalkDotOrg/talkshow.git').
+	pack(talkshow, logtalk, 3:45:0).
+	pack(talkshow, lflat, 2:1:0).
 
-This file can be distributed with applications so that users can easily
+These files can be distributed with applications so that users can easily
 fulfill application requirements by using the `packs` tool.
 
 
