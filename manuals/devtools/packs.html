@@ -262,10 +262,13 @@ this can be installed as a pack from the official
 <a class="reference external" href="https://github.com/LogtalkDotOrg/talkshow">talkshow</a> registry and
 used by (re)defining the <code class="docutils literal notranslate"><span class="pre">LOGTALKHOME</span></code> and <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code> environment
 variables to point to its pack directory (which can be queried by using
-the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> message).</p>
-<p>A virtual environment setup, i.e. the currently defined registries and
-installed packs can be saved into a file (e.g. <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>) and
-restored using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> and <code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code>
+the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> message). Several shell utilities are
+available that can set environment variables when changing to an
+application directory (see e.g.
+<a class="reference external" href="https://github.com/direnv/direnv">direnv</a>).</p>
+<p>A virtual environment setup (i.e. the currently defined registries and
+installed packs) can be saved into a file (e.g. <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>)
+and restored using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> and <code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code>
 predicates. The file uses a simple format with <code class="docutils literal notranslate"><span class="pre">registry/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">pack/3</span></code> facts (in this order) and can be manually created or edited
 if necessary. For example:</p>

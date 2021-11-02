@@ -153,10 +153,12 @@ can be installed as a pack from the official
 [talkshow](https://github.com/LogtalkDotOrg/talkshow) registry and used
 by (re)defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables
 to point to its pack directory (which can be queried by using the
-`packs::directory/2` message).
+`packs::directory/2` message). Several shell utilities are available that
+can set environment variables when changing to an application directory
+(see e.g. [direnv](https://github.com/direnv/direnv)).
 
-A virtual environment setup, i.e. the currently defined registries and
-installed packs can be saved into a file (e.g. `requirements.lgt`) and
+A virtual environment setup (i.e. the currently defined registries and
+installed packs) can be saved into a file (e.g. `requirements.lgt`) and
 restored using the `packs::save/1` and `packs::restore/1-2` predicates.
 The file uses a simple format with `registry/2` and `pack/3` facts (in
 this order) and can be manually created or edited if necessary. For example:
