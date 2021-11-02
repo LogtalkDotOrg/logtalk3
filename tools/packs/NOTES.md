@@ -272,11 +272,13 @@ registry:
 	% Archive URL: https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip
 
 To update all registries, use the `registries::update/0` predicate. To update
-a registry, use the `registries::update/1-2` predicates. Registries can also
-be deleted using the `registries::delete/1-2` predicate. By default, any
-registries with installed packs cannot be deleted. If you force deletion (by
-using the `force(true)` option), you can use the `packs::orphaned/0` predicate
-to list any orphaned packs that are installed.
+a single registry, use the `registries::update/1-2` predicates. After updating,
+you can use the `packs::outdated/0` predicate to list any outdated packs.
+
+Registries can also be deleted using the `registries::delete/1-2` predicate.
+By default, any registries with installed packs cannot be deleted. If you
+force deletion (by using the `force(true)` option), you can use the
+`packs::orphaned/0` predicate to list any orphaned packs that are installed.
 
 See the tool API documentation on the [registries](../../docs/registries_0.html)
 object for other useful predicates.

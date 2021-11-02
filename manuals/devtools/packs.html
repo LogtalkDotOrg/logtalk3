@@ -377,8 +377,10 @@ details of a registry:</p>
 </pre></div>
 </div>
 <p>To update all registries, use the <code class="docutils literal notranslate"><span class="pre">registries::update/0</span></code> predicate. To
-update a registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
-Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
+update a single registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
+After updating, you can use the <code class="docutils literal notranslate"><span class="pre">packs::outdated/0</span></code> predicate to list
+any outdated packs.</p>
+<p>Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
 predicate. By default, any registries with installed packs cannot be
 deleted. If you force deletion (by using the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option),
 you can use the <code class="docutils literal notranslate"><span class="pre">packs::orphaned/0</span></code> predicate to list any orphaned
