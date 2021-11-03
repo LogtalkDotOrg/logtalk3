@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,24 +18,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([
-		safety_hooks,
-		pack_protocol,
-		registry_protocol,
-		packs_messages,
-		packs_common,
-		registries,
-		packs
-	], [
-		debug(on),
-		source_data(on)
-	]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(local_1_registry,
+	implements(registry_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2021-11-03,
+		comment is 'A local registry for testing.'
+	]).
+
+	name(local_1).
+
+	description('A local registry for testing').
+
+	home('file:///home/jdoe/local_1').
+
+	clone('file:///home/jdoe/local_1.git').
+
+	archive('file:///home/jdoe/local_1/master.zip').
+
+:- end_object.

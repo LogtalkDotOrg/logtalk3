@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,24 +18,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([
-		safety_hooks,
-		pack_protocol,
-		registry_protocol,
-		packs_messages,
-		packs_common,
-		registries,
-		packs
-	], [
-		debug(on),
-		source_data(on)
-	]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(foo_pack,
+	implements(pack_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2021-10-21,
+		comment is 'A local pack for testing.'
+	]).
+
+	name(foo).
+
+	description('A local pack for testing').
+
+	license('Apache-2.0').
+
+	home('file:///home/jdoe/foo').
+
+	version(
+		1:0:0,
+		stable,
+		'file:///home/jdoe/foo/v1.0.0.tar.gz',
+		none,
+		[],
+		all
+	).
+
+:- end_object.

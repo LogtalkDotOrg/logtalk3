@@ -20,23 +20,6 @@
 
 
 :- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load([
-		safety_hooks,
-		pack_protocol,
-		registry_protocol,
-		packs_messages,
-		packs_common,
-		registries,
-		packs
-	], [
-		debug(on),
-		source_data(on)
-	]),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load(local_1_registry),
+	logtalk_load(foo_pack)
 )).
