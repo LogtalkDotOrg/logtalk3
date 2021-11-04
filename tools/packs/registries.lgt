@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:31:1,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Registry handling predicates.'
@@ -501,7 +501,7 @@
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
 			internal_os_path(Path, OSPath),
-			atomic_list_concat(['xcopy /E /I "', OSDirectory, '" "', OSPath, '"'], Command),
+			atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', OSPath, '"'], Command),
 			^^command(Command, registry_directory_copy_failed(Registry, URL)),
 			Updated = true
 		;	internal_os_path(Directory, OSDirectory),
