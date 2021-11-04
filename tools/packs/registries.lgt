@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:29:1,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2021-11-02,
+		date is 2021-11-04,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -429,9 +429,12 @@
 			^^logtalk_packs(LogtalkPacks),
 			path_concat(LogtalkPacks, registries, Registries),
 			path_concat(Registries, Registry, Path),
-			path_concat(Path, '.git', Git),
-			(	directory_exists(Git) ->
-				RegistryObject::clone(URL),
+			read_url(Path, URL),
+			decompose_file_name(URL, _, Name, Extension),
+			(	Extension = '',
+				sub_atom(URL, 0, _, _, 'file://') ->
+				update_directory(Registry, URL, Path, Updated, Options)
+			;	Extension == '.git' ->
 				update_clone(Registry, URL, Path, Updated, Options)
 			;	RegistryObject::archive(URL),
 				update_archive(Registry, URL, Updated, Options)
@@ -471,6 +474,28 @@
 		fail.
 	update :-
 		print_message(comment, packs, @'Registries updating completed').
+
+	update_directory(Registry, URL, Path, Updated, Options) :-
+		atom_concat('file://', Directory0, URL),
+		(	sub_atom(Directory0, _, _, 0, '/') ->
+			sub_atom(Directory0, _, _, 1, Directory)
+		;	Directory = Directory0
+		),
+		path_concat(Directory, '.git', Git),
+		(	directory_exists(Git) ->
+			update_clone(Registry, URL, Path, Updated, Options)
+		;	operating_system_type(windows) ->
+			internal_os_path(Directory, OSDirectory),
+			internal_os_path(Path, OSPath),
+			atomic_list_concat(['xcopy /E /I "', OSDirectory, '" "', OSPath, '"'], Command),
+			^^command(Command, registry_directory_copy_failed(Registry, URL)),
+			Updated = true
+		;	internal_os_path(Directory, OSDirectory),
+			internal_os_path(Path, OSPath),
+			atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command),
+			^^command(Command, registry_directory_copy_failed(Registry, URL)),
+			Updated = true
+		).
 
 	update_clone(_, _, Path, false, _) :-
 		internal_os_path(Path, OSPath),

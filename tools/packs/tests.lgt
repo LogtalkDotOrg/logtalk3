@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-11-03,
+		date is 2021-11-04,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -138,7 +138,7 @@
 		^^suppress_text_output,
 		findall(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
-	- test(packs_registries_update_1_01, true) :-
+	test(packs_registries_update_1_01, true) :-
 		^^suppress_text_output,
 		registries::update(local_1).
 
