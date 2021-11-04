@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:18:1,
+		version is 0:18:2,
 		author is 'Paulo Moura',
-		date is 2021-10-31,
+		date is 2021-11-04,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -166,9 +166,10 @@
 	logtalk_packs(LogtalkPacks) :-
 		(	expand_library_path(logtalk_packs, LogtalkPacks) ->
 			true
-		;	environment_variable('LOGTALKPACKS', LogtalkPacks) ->
+		;	environment_variable('LOGTALKPACKS', LogtalkPacks0) ->
+			internal_os_path(LogtalkPacks, LogtalkPacks0)
+		;	expand_library_path(home(logtalk_packs), LogtalkPacks),
 			true
-		;	expand_library_path(home(logtalk_packs), LogtalkPacks)
 		).
 
 	verify_commands_availability :-

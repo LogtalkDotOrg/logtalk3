@@ -84,6 +84,9 @@ behind.
 prior to re-adding it when using the `force(true)` option to prevent a git
 cloning failure.
 
+* FIXED: The `packs` tool `logtalk_packs/1` predicate to return a path using
+the backend internal format instead of the operating-system format.
+
 * FIXED: Workaround `packs` tool portability issue with Ciao Prolog due to
 this system lack of supported for standard multifile predicate semantics.
 
