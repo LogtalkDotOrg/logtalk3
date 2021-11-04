@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Unit tests for the "packs" tool.'
@@ -38,6 +38,15 @@
 	cover(packs).
 	cover(registry_loader_hook).
 	cover(packs_specs_hook).
+
+	setup :-
+		packs::uninstall,
+		packs::clean,
+		registries::delete,
+		registries::clean.
+
+	cleanup :-
+		setup.
 
 	% we start with no defined registries or installed packs
 

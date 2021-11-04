@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Bash script to be sourced by the logtalk_tester script
-##   Last updated on November 3, 2021
+##   Last updated on November 4, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -25,5 +25,4 @@
 
 DIRECTORY="$( cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd )"
 export LOGTALKPACKS="$DIRECTORY/test_files/logtalk_packs"
-rm -rf "$LOGTALKPACKS"
 return 0

@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Pack handling predicates.'
@@ -308,8 +308,8 @@
 	]).
 
 	:- uses(os, [
-		ensure_file/1, delete_file/1, directory_exists/1, directory_files/3,
-		decompose_file_name/3, decompose_file_name/4, file_exists/1,
+		delete_file/1, delete_directory/1, directory_exists/1, directory_files/3,
+		decompose_file_name/3, decompose_file_name/4, ensure_file/1, file_exists/1,
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
 		path_concat/3
 	]).
@@ -826,12 +826,11 @@
 	clean :-
 		print_message(comment, packs, @'Cleaning all pack archives'),
 		^^logtalk_packs(LogtalkPacks),
-		path_concat(LogtalkPacks, packs, Directory),
-		directory_files(Directory, Packs, [type(directory), dot_files(false)]),
-		member(Pack, Packs),
-		path_concat(Directory, Pack, Path),
-		read_registry(Path, Registry),
-		delete_archives(Registry, Pack),
+		path_concat(LogtalkPacks, archives, Archives),
+		path_concat(Archives, packs, ArchivesPacks),
+		directory_files(ArchivesPacks, Registries, [type(directory), dot_files(false), paths(absolute)]),
+		member(Registry, Registries),
+		delete_archives(Registry),
 		fail.
 	clean :-
 		print_message(comment, packs, @'Cleaned all pack archives').
@@ -847,6 +846,16 @@
 			forall(member(File, Files), delete_file(File))
 		;	true
 		).
+
+	delete_archives(Registry) :-
+		directory_files(Registry, Packs, [type(directory), dot_files(false), paths(absolute)]),
+		member(Pack, Packs),
+		directory_files(Pack, Files, [type(regular), dot_files(false), paths(absolute)]),
+		forall(member(File, Files), delete_file(File)),
+		delete_directory(Pack),
+		fail.
+	delete_archives(Registry) :-
+		delete_directory(Registry).
 
 	% save and restore predicates
 
