@@ -68,7 +68,8 @@ virtual environments.
 and registries using the `logtalk_packs` library alias (which can be defined
 e.g. in a settings file).
 
-* ADDED: Predicate `logtalk_packs/1` to the `packs` tool.
+* ADDED: Predicates `logtalk_packs/1`, `delete/0`, and `uninstall/0` to the
+`packs` tool.
 
 * IMPROVED: The `packs` tool to handle all dependency relations including
 range dependencies.

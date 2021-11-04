@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:31:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Registry handling predicates.'
@@ -125,6 +125,12 @@
 	:- info(delete/1, [
 		comment is 'Deletes a registry using default options.',
 		argnames is ['Registry']
+	]).
+
+	:- public(delete/0).
+	:- mode(delete, zero_or_one).
+	:- info(delete/0, [
+		comment is 'Deletes all registries using the ``force(true)`` option.'
 	]).
 
 	:- public(clean/1).
@@ -410,6 +416,14 @@
 	delete(Registry) :-
 		delete(Registry, []).
 
+	delete :-
+		print_message(comment, packs, @'Deleting all registries'),
+		forall(
+			defined(Registry, _, _),
+			delete(Registry, [force(true)])
+		),
+		print_message(comment, packs, @'Deleted all registries').
+
 	% update registry predicates
 
 	update(Registry, UserOptions) :-
@@ -430,7 +444,7 @@
 			path_concat(LogtalkPacks, registries, Registries),
 			path_concat(Registries, Registry, Path),
 			read_url(Path, URL),
-			decompose_file_name(URL, _, Name, Extension),
+			decompose_file_name(URL, _, _, Extension),
 			(	Extension = '',
 				sub_atom(URL, 0, _, _, 'file://') ->
 				update_directory(Registry, URL, Path, Updated, Options)

@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:31:1
-| **Date:** 2021-11-02
+| **Version:** 0:32:0
+| **Date:** 2021-11-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -564,6 +564,27 @@ Uninstalls a pack using default options. Fails if the pack is pinned, have depen
 |    ``uninstall(Pack)``
 | **Mode and number of proofs:**
 |    ``uninstall(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="uninstall/0"> </div>
+
+.. index:: uninstall/0
+.. _packs/0::uninstall/0:
+
+``uninstall/0``
+^^^^^^^^^^^^^^^
+
+Uninstalls all packs using the ``force(true)`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``uninstall`` - ``zero_or_one``
 
 
 ------------

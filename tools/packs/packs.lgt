@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:31:1,
+		version is 0:32:0,
 		author is 'Paulo Moura',
-		date is 2021-11-02,
+		date is 2021-11-04,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -202,6 +202,12 @@
 	:- info(uninstall/1, [
 		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, have dependents, not installed, or unknown.',
 		argnames is ['Pack']
+	]).
+
+	:- public(uninstall/0).
+	:- mode(uninstall, zero_or_one).
+	:- info(uninstall/0, [
+		comment is 'Uninstalls all packs using the ``force(true)`` option.'
 	]).
 
 	:- public(clean/2).
@@ -607,6 +613,14 @@
 
 	uninstall(Pack) :-
 		uninstall(Pack, []).
+
+	uninstall :-
+		print_message(comment, packs, @'Uninstalling all packs'),
+		forall(
+			installed_pack(_, Pack, _, _),
+			uninstall(Pack, [force(true)])
+		),
+		print_message(comment, packs, @'Uninstalled all packs').
 
 	% describe pack predicates
 

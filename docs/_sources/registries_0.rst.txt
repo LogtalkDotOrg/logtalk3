@@ -11,7 +11,7 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:30:0
+| **Version:** 0:31:0
 | **Date:** 2021-11-04
 
 | **Compilation flags:**
@@ -314,6 +314,27 @@ Deletes a registry using default options.
 |    ``delete(Registry)``
 | **Mode and number of proofs:**
 |    ``delete(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="delete/0"> </div>
+
+.. index:: delete/0
+.. _registries/0::delete/0:
+
+``delete/0``
+^^^^^^^^^^^^
+
+Deletes all registries using the ``force(true)`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``delete`` - ``zero_or_one``
 
 
 ------------
