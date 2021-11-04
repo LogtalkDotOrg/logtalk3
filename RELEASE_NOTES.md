@@ -33,7 +33,7 @@ Logtalk compiler and runtime
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The Trealla Prolog adapter file to require version 1.16.4 or later.
+* UPDATED: The Trealla Prolog adapter file to require version 1.16.5 or later.
 
 * FIXED: The Trealla Prolog integration script to support "-- Arguments"
 passed by other scripts (e.g. `logtalk_tester` script) that call it.
@@ -76,6 +76,9 @@ range dependencies.
 
 * IMPROVED: The `packs` tool to print a warning if the pack being installed
 or updated requires a different backend from the one running the tool.
+
+* UPDATED: The `packs::clean/0` predicate to not leave empty directories
+behind.
 
 * FIXED: The `packs` tool `registries::add/3` predicate to delete a registry
 prior to re-adding it when using the `force(true)` option to prevent a git
