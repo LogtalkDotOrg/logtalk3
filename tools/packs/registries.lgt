@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:31:1,
+		version is 0:32:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Registry handling predicates.'
@@ -646,6 +646,12 @@
 	readme(Registry, ReadMeFile) :-
 		directory(Registry, Directory),
 		^^readme_file_path(Directory, ReadMeFile).
+
+	readme(Registry) :-
+		directory(Registry, Directory),
+		^^readme_file_path(Directory, ReadMeFile),
+		internal_os_path(ReadMeFile, OSReadMeFile),
+		print_message(information, packs, readme_file(OSReadMeFile)).
 
 	% lint predicates
 

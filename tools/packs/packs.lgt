@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:34:1,
+		version is 0:35:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Pack handling predicates.'
@@ -670,6 +670,12 @@
 	readme(Pack, ReadMeFile) :-
 		directory(Pack, Directory),
 		^^readme_file_path(Directory, ReadMeFile).
+
+	readme(Pack) :-
+		directory(Pack, Directory),
+		^^readme_file_path(Directory, ReadMeFile),
+		internal_os_path(ReadMeFile, OSReadMeFile),
+		print_message(information, packs, readme_file(OSReadMeFile)).
 
 	% pinned pack handling
 

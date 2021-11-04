@@ -11,7 +11,7 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:18:2
+| **Version:** 0:19:2
 | **Date:** 2021-11-04
 
 | **Compilation flags:**
@@ -223,7 +223,7 @@ Returns the directory where the registries or the packs are installed.
 ``readme/2``
 ^^^^^^^^^^^^
 
-Returns the path to the resource (pack or registry) readme file. Fails if the resource is not defined or installed or if no readme file is found for it.
+Returns the path to the resource (pack or registry) readme file using the internal backend format. Fails if the resource is not defined or installed or if no readme file is found for it.
 
 | **Compilation flags:**
 |    ``static``
@@ -238,6 +238,29 @@ Returns the path to the resource (pack or registry) readme file. Fails if the re
 
 .. raw:: html
 
+   <div id="readme/1"> </div>
+
+.. index:: readme/1
+.. _packs_common/0::readme/1:
+
+``readme/1``
+^^^^^^^^^^^^
+
+Prints the path to the resource (pack or registry) readme file using the native operating-system format. Fails if the resource is not defined or installed or if no readme file is found for it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``readme(Resource)``
+| **Mode and number of proofs:**
+|    ``readme(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="logtalk_packs/1"> </div>
 
 .. index:: logtalk_packs/1
@@ -246,7 +269,7 @@ Returns the path to the resource (pack or registry) readme file. Fails if the re
 ``logtalk_packs/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the directory where the registries, packs, and archives are installed.
+Returns the directory (using the internal backend format) where the registries, packs, and archives are installed.
 
 | **Compilation flags:**
 |    ``static``
@@ -255,6 +278,27 @@ Returns the directory where the registries, packs, and archives are installed.
 |    ``logtalk_packs(LogtalkPacks)``
 | **Mode and number of proofs:**
 |    ``logtalk_packs(-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="logtalk_packs/0"> </div>
+
+.. index:: logtalk_packs/0
+.. _packs_common/0::logtalk_packs/0:
+
+``logtalk_packs/0``
+^^^^^^^^^^^^^^^^^^^
+
+Prints the directory (using the native operating-system format) where the registries, packs, and archives are installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``logtalk_packs`` - ``one``
 
 
 ------------

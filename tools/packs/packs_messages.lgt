@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:23:0,
 		author is 'Paulo Moura',
-		date is 2021-10-24,
+		date is 2021-11-04,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -72,6 +72,9 @@
 
 	message_tokens(readme_file(ReadMeFile)) -->
 		['Readme file: ~w'-[ReadMeFile], nl].
+
+	message_tokens(logtalk_packs(LogtalkPacks)) -->
+		['Logtalk packs storage directory: ~w'-[LogtalkPacks], nl].
 
 	% registry add messages
 

@@ -22,7 +22,7 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:18:2,
+		version is 0:19:2,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Common predicates for the packs tool objects.'
@@ -84,15 +84,28 @@
 	:- public(readme/2).
 	:- mode(readme(+atom, -atom), zero_or_one).
 	:- info(readme/2, [
-		comment is 'Returns the path to the resource (pack or registry) readme file. Fails if the resource is not defined or installed or if no readme file is found for it.',
+		comment is 'Returns the path to the resource (pack or registry) readme file using the internal backend format. Fails if the resource is not defined or installed or if no readme file is found for it.',
 		argnames is ['Resource', 'ReadMeFile']
+	]).
+
+	:- public(readme/1).
+	:- mode(readme(+atom), zero_or_one).
+	:- info(readme/1, [
+		comment is 'Prints the path to the resource (pack or registry) readme file using the native operating-system format. Fails if the resource is not defined or installed or if no readme file is found for it.',
+		argnames is ['Resource']
 	]).
 
 	:- public(logtalk_packs/1).
 	:- mode(logtalk_packs(-atom), one).
 	:- info(logtalk_packs/1, [
-		comment is 'Returns the directory where the registries, packs, and archives are installed.',
+		comment is 'Returns the directory (using the internal backend format) where the registries, packs, and archives are installed.',
 		argnames is ['LogtalkPacks']
+	]).
+
+	:- public(logtalk_packs/0).
+	:- mode(logtalk_packs, one).
+	:- info(logtalk_packs/0, [
+		comment is 'Prints the directory (using the native operating-system format) where the registries, packs, and archives are installed.'
 	]).
 
 	:- protected(readme_file_path/2).
@@ -171,6 +184,11 @@
 		;	expand_library_path(home(logtalk_packs), LogtalkPacks),
 			true
 		).
+
+	logtalk_packs :-
+		logtalk_packs(LogtalkPacks),
+		internal_os_path(LogtalkPacks, OSLogtalkPacks),
+		print_message(information, packs, logtalk_packs(OSLogtalkPacks)).
 
 	verify_commands_availability :-
 		operating_system_type(OS),
