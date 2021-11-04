@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.16.0 and later versions
-%  Last updated on October 30, 2021
+%  Adapter file for Trealla Prolog 1.16.3 and later versions
+%  Last updated on November 4, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -220,7 +220,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 16, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(1, 16, 3))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -520,9 +520,7 @@
 % '$lgt_read_term'(@stream, -term, +list, -pair(integer,integer))
 
 '$lgt_read_term'(Stream, Term, Options, LineBegin-LineEnd) :-
-	stream_property(Stream, line_count(LineBegin)),
-	read_term(Stream, Term, Options),
-	stream_property(Stream, line_count(LineEnd)).
+	read_term(Stream, Term, [line_counts(LineBegin,LineEnd)| Options]).
 
 
 

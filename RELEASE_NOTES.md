@@ -33,7 +33,7 @@ Logtalk compiler and runtime
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The Trealla Prolog adapter file to require version 1.16.0 or later.
+* UPDATED: The Trealla Prolog adapter file to require version 1.16.3 or later.
 
 * FIXED: The Trealla Prolog integration script to support "-- Arguments"
 passed by other scripts (e.g. `logtalk_tester` script) that call it.
