@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Unit tests for the "packs" tool.'
@@ -53,7 +53,7 @@
 	test(packs_registries_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat([Directory, 'test_files/logtalk_packs'], Storage),
+		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
 		registries::logtalk_packs(LogtalkPacks).
 
 	test(packs_registries_list_0_01, true) :-
