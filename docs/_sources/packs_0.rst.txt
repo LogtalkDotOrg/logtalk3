@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:32:0
+| **Version:** 0:33:0
 | **Date:** 2021-11-04
 
 | **Compilation flags:**
@@ -720,7 +720,7 @@ Restores a list of registries and packs from a file using the given options. Fai
 ``restore/1``
 ^^^^^^^^^^^^^
 
-Restores a list of registries and packs from a file using default options. Fails if restoring is not possible.
+Restores a list of registries and packs from a file using the ``force(true)`` option. Fails if restoring is not possible.
 
 | **Compilation flags:**
 |    ``static``

@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:33:0,
 		author is 'Paulo Moura',
 		date is 2021-11-04,
 		comment is 'Pack handling predicates.'
@@ -254,7 +254,7 @@
 	:- public(restore/1).
 	:- mode(restore(+atom), zero_or_one).
 	:- info(restore/1, [
-		comment is 'Restores a list of registries and packs from a file using default options. Fails if restoring is not possible.',
+		comment is 'Restores a list of registries and packs from a file using the ``force(true)`` option. Fails if restoring is not possible.',
 		argnames is ['File']
 	]).
 
@@ -888,7 +888,7 @@
 		print_message(comment, packs, @'Restored registries/packs setup').
 
 	restore(File) :-
-		restore(File, []).
+		restore(File, [force(true)]).
 
 	restore(end_of_file, Stream, _) :-
 		!,
