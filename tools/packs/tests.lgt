@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
 		date is 2021-11-05,
 		comment is 'Unit tests for the "packs" tool.'
@@ -56,9 +56,25 @@
 		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
 		registries::logtalk_packs(LogtalkPacks).
 
+	test(packs_packs_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
+		packs::logtalk_packs(LogtalkPacks).
+
 	test(packs_registries_logtalk_packs_0_01, true) :-
-		^^suppress_text_output,
 		registries::logtalk_packs.
+
+	test(packs_packs_logtalk_packs_0_02, true) :-
+		packs::logtalk_packs.
+
+	test(packs_registries_directory_1_01, true(atom(Directory))) :-
+		^^suppress_text_output,
+		registries::directory(Directory).
+
+	test(packs_packs_directory_1_01, true(atom(Directory))) :-
+		^^suppress_text_output,
+		packs::directory(Directory).
 
 	test(packs_registries_list_0_01, true) :-
 		^^suppress_text_output,
@@ -124,6 +140,14 @@
 		^^suppress_text_output,
 		packs::update.
 
+	test(packs_registries_help_0_01, true) :-
+		^^suppress_text_output,
+		registries::help.
+
+	test(packs_packs_help_0_01, true) :-
+		^^suppress_text_output,
+		packs::help.
+
 	% now we add a local registry
 
 	test(packs_registries_add_1_01, true) :-
@@ -140,6 +164,10 @@
 	test(packs_registries_describe_1_01, true) :-
 		^^suppress_text_output,
 		registries::describe(local_1).
+
+	test(packs_registries_directory_2_01, true(atom(Directory))) :-
+		^^suppress_text_output,
+		registries::directory(local_1, Directory).
 
 	test(packs_registries_readme_2_01, true(Readme == File)) :-
 		this(This),
