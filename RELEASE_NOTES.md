@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Generalized the linter checks for `is/2` and `(=:=)/2` goals to
+cases where the expression arguments are not ground but their type can be
+inferred.
+
 * FIXED: The pack library paths to always end with a slash.
 
 Prolog adapter and integration files

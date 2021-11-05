@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 52, 0, b01)).
+'$lgt_version_data'(logtalk(3, 52, 0, b02)).
 
 
 
@@ -15136,6 +15136,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Term is Exp, _, _, _) :-
 	nonvar(Term),
 	\+ number(Term),
+	% the standard allows any term in the left side
 	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -15144,9 +15145,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Term is Exp, _, _, _) :-
 	integer(Term),
-	ground(Exp),
-	catch(Value is Exp, _, fail),
-	float(Value),
+	'$lgt_float_expression'(Exp),
+	% integers and floats do not unify (per standard)
 	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -15155,9 +15155,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Term is Exp, _, _, _) :-
 	float(Term),
-	ground(Exp),
-	catch(Value is Exp, _, fail),
-	integer(Value),
+	'$lgt_integer_expression'(Exp),
+	% integers and floats do not unify (per standard)
 	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -15169,6 +15168,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Term \== Exp,
 	term_variables(Exp, ExpVariables),
 	once('$lgt_member_var'(Term, ExpVariables)),
+	% this could also be a "goal is always false" warning
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -15185,7 +15185,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
-	once((float(Exp1); float(Exp2))),
+	'$lgt_float_expression'(Exp1),
+	'$lgt_float_expression'(Exp2),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
@@ -24414,6 +24415,138 @@ create_logtalk_flag(Flag, Value, Options) :-
 % more important, these functions are or are becoming de facto standards
 
 '$lgt_iso_spec_function'(e).
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  auxiliary predicates checking for float and integer arithmetic
+%  expressions (used for linter checks)
+%
+%  these checks also recognize de facto standard arithmetic constants
+%  and functions
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% '$lgt_float_expression'(@term)
+
+'$lgt_float_expression'(Exp) :-
+	var(Exp),
+	!,
+	fail.
+'$lgt_float_expression'(Exp) :-
+	float(Exp),
+	!.
+% basic arithmetic functions
+'$lgt_float_expression'(Exp1 + Exp2) :-
+	(	'$lgt_float_expression'(Exp1) ->
+		true
+	;	'$lgt_float_expression'(Exp2)
+	).
+'$lgt_float_expression'(Exp1 - Exp2) :-
+	(	'$lgt_float_expression'(Exp1) ->
+		true
+	;	'$lgt_float_expression'(Exp2)
+	).
+'$lgt_float_expression'(Exp1 * Exp2) :-
+	(	'$lgt_float_expression'(Exp1) ->
+		true
+	;	'$lgt_float_expression'(Exp2)
+	).
+'$lgt_float_expression'(_ / _).
+'$lgt_float_expression'(_ ** _).
+% other functions
+'$lgt_float_expression'(abs(Exp)) :-
+	'$lgt_float_expression'(Exp).
+'$lgt_float_expression'(sign(Exp)) :-
+	'$lgt_float_expression'(Exp).
+'$lgt_float_expression'(max(Exp1, Exp2)) :-
+	(	'$lgt_float_expression'(Exp1) ->
+		true
+	;	'$lgt_float_expression'(Exp2)
+	).
+'$lgt_float_expression'(min(Exp1, Exp2)) :-
+	(	'$lgt_float_expression'(Exp1) ->
+		true
+	;	'$lgt_float_expression'(Exp2)
+	).
+'$lgt_float_expression'(float_integer_part(_)).
+'$lgt_float_expression'(float_fractional_part(_)).
+'$lgt_float_expression'(sqrt(_)).
+'$lgt_float_expression'(exp(_)).
+'$lgt_float_expression'(log(_)).
+'$lgt_float_expression'(log(_, _)).
+'$lgt_float_expression'(log10(_)).
+% trignometric functions
+'$lgt_float_expression'(acos(_)).
+'$lgt_float_expression'(asin(_)).
+'$lgt_float_expression'(atan(_)).
+'$lgt_float_expression'(atan2(_, _)).
+'$lgt_float_expression'(cos(_)).
+'$lgt_float_expression'(sin(_)).
+'$lgt_float_expression'(tan(_)).
+% hyperbolic functions
+'$lgt_float_expression'(sinh(_)).
+'$lgt_float_expression'(cosh(_)).
+'$lgt_float_expression'(tanh(_)).
+'$lgt_float_expression'(asinh(_)).
+'$lgt_float_expression'(acosh(_)).
+'$lgt_float_expression'(atanh(_)).
+% float arithmetic constants
+'$lgt_float_expression'(e).
+'$lgt_float_expression'(pi).
+'$lgt_float_expression'(epsilon).
+
+
+
+% '$lgt_integer_expression'(@term)
+
+'$lgt_integer_expression'(Exp) :-
+	var(Exp),
+	!,
+	fail.
+'$lgt_integer_expression'(Exp) :-
+	integer(Exp),
+	!.
+% basic arithmetic functions
+'$lgt_integer_expression'(Exp1 + Exp2) :-
+	'$lgt_integer_expression'(Exp1),
+	'$lgt_integer_expression'(Exp2).
+'$lgt_integer_expression'(Exp1 - Exp2) :-
+	'$lgt_integer_expression'(Exp1),
+	'$lgt_integer_expression'(Exp2).
+'$lgt_integer_expression'(Exp1 * Exp2) :-
+	'$lgt_integer_expression'(Exp1),
+	'$lgt_integer_expression'(Exp2).
+'$lgt_integer_expression'(_ // _).
+% other functions
+'$lgt_integer_expression'(rem(_, _)).
+'$lgt_integer_expression'(div(_, _)).
+'$lgt_integer_expression'(mod(_, _)).
+'$lgt_integer_expression'(gcd(_, _)).
+'$lgt_integer_expression'(round(_)).
+'$lgt_integer_expression'(truncate(_)).
+'$lgt_integer_expression'(abs(Exp)) :-
+	'$lgt_integer_expression'(Exp).
+'$lgt_integer_expression'(sign(Exp)) :-
+	'$lgt_integer_expression'(Exp).
+'$lgt_integer_expression'(max(Exp1, Exp2)) :-
+	'$lgt_integer_expression'(Exp1),
+	'$lgt_integer_expression'(Exp2).
+'$lgt_integer_expression'(min(Exp1, Exp2)) :-
+	'$lgt_integer_expression'(Exp1),
+	'$lgt_integer_expression'(Exp2).
+% bitwise functions
+'$lgt_integer_expression'(_ << _).
+'$lgt_integer_expression'(_ >> _).
+'$lgt_integer_expression'(_ /\ _).
+'$lgt_integer_expression'(_ \/ _).
+'$lgt_integer_expression'(xor(_, _)).
+'$lgt_integer_expression'(\ _).
+'$lgt_integer_expression'(popcount(_)).
 
 
 
