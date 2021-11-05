@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-11-04,
+		date is 2021-11-05,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -162,6 +162,34 @@
 	test(packs_registries_clean_1_01, true) :-
 		^^suppress_text_output,
 		registries::clean(local_1).
+
+	test(packs_registries_pin_1_01, true) :-
+		^^suppress_text_output,
+		registries::pin(local_1).
+
+	test(packs_registries_pin_1_02, true) :-
+		^^suppress_text_output,
+		registries::pin(local_1),
+		registries::pin(local_1).
+
+	test(packs_registries_unpin_1_01, true) :-
+		^^suppress_text_output,
+		registries::unpin(local_1).
+
+	test(packs_registries_unpin_1_02, true) :-
+		^^suppress_text_output,
+		registries::unpin(local_1),
+		registries::unpin(local_1).
+
+	test(packs_registries_pinned_1_01, true) :-
+		^^suppress_text_output,
+		registries::pin(local_1),
+		registries::pinned(local_1).
+
+	test(packs_registries_pinned_1_02, false) :-
+		^^suppress_text_output,
+		registries::unpin(local_1),
+		registries::pinned(local_1).
 
 	test(packs_packs_lint_1_01, true) :-
 		^^suppress_text_output,
