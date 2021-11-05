@@ -94,6 +94,11 @@ the backend internal format instead of the operating-system format.
 * FIXED: Workaround `packs` tool portability issue with Ciao Prolog due to
 this system lack of supported for standard multifile predicate semantics.
 
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate the generalized linter checks.
+
 Tests
 -----
 

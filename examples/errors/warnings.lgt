@@ -191,6 +191,8 @@
 
 	q(X) :- 3.14 =:= X.
 
+	r(X, Y) :- sqrt(X) =:= sin(Y).
+
 :- end_object.
 
 
@@ -220,6 +222,10 @@
 	jinx(X) :- a is X*2.
 
 	what :- 1 is sin(3.1415926535897931/2).
+
+	hum(X) :- 1 is sqrt(X).
+
+	boo(X) :- 3.14 is truncate(X).
 
 	% ... or misinterpretation of operator precedence
 

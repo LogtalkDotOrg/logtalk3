@@ -12696,7 +12696,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % term comparison (only lint warnings)
 
 '$lgt_compile_body'(Exp1 == Exp2, _, _, Ctx) :-
-	once((float(Exp1); float(Exp2))),
+	once((
+		'$lgt_float_expression'(Exp1)
+	;	'$lgt_float_expression'(Exp2)
+	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
@@ -15185,8 +15188,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, Ctx) :-
-	'$lgt_float_expression'(Exp1),
-	'$lgt_float_expression'(Exp2),
+	once((
+		'$lgt_float_expression'(Exp1)
+	;	'$lgt_float_expression'(Exp2)
+	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_increment_compiling_warnings_counter',
