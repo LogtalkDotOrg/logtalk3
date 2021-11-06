@@ -733,6 +733,10 @@ no
 unpinned. Alternatively, the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option can be used. Note
 that if you force update a pinned pack, the new version will be
 unpinned.</p>
+<p>It’s also possible to pin (or unpin) all defined registries or installed
+packs at once by using the <code class="docutils literal notranslate"><span class="pre">pin/0</span></code> (or <code class="docutils literal notranslate"><span class="pre">unpin/0</span></code>) predicates. But
+note that registries added after or packs installed after will not be
+automatically pinned.</p>
 </section>
 <section id="testing-packs">
 <h2>Testing packs<a class="headerlink" href="#testing-packs" title="Permalink to this headline"></a></h2>

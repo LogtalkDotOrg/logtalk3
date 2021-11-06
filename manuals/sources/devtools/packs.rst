@@ -694,6 +694,11 @@ unpinned. Alternatively, the ``force(true)`` option can be used. Note
 that if you force update a pinned pack, the new version will be
 unpinned.
 
+It's also possible to pin (or unpin) all defined registries or installed
+packs at once by using the ``pin/0`` (or ``unpin/0``) predicates. But
+note that registries added after or packs installed after will not be
+automatically pinned.
+
 Testing packs
 -------------
 
