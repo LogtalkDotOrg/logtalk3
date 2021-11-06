@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-498 438,-498 438,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object coroutining</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;02, 10:35</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;06, 11:19</text>
 <g id="clust1" class="cluster">
 <title>cluster_coroutining_object</title>
 <g id="a_clust1"><a xlink:title="coroutining">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 414,-49 414,-49 420,-49 426,-55 426,-61 426,-61 426,-474 426,-474 426,-480 420,-486 414,-486 414,-486 20,-486 20,-486 14,-486 8,-480 8,-474 8,-474 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt">
 <text text-anchor="start" x="20.5" y="-469.5" font-family="Courier,monospace" font-size="10.00" fill="dimgray">coroutining</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- dif/2 -->
 <g id="node1" class="node">
 <title>dif/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L34">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L34">
 <polygon fill="springgreen" stroke="black" points="411,-213 357,-213 357,-177 411,-177 411,-213"/>
 <text text-anchor="start" x="365" y="-197.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="370" y="-197.2" font-family="Courier,monospace" font-size="11.00">dif/2</text>
@@ -52,12 +52,12 @@
 <!-- dif/2&#45;&gt;dif:dif/2 -->
 <g id="edge3" class="edge">
 <title>dif/2&#45;&gt;dif:dif/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L104" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M383.11,-176.88C382.14,-158.04 380.56,-127.47 379.41,-105.3"/>
 <polygon fill="black" stroke="black" points="382.9,-104.99 378.89,-95.19 375.91,-105.35 382.9,-104.99"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L104">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L104">
 <text text-anchor="start" x="381" y="-133.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- dif/1 -->
 <g id="node2" class="node">
 <title>dif/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L41">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L41">
 <polygon fill="springgreen" stroke="black" points="413,-449 359,-449 359,-413 413,-413 413,-449"/>
 <text text-anchor="start" x="367" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="372" y="-433.2" font-family="Courier,monospace" font-size="11.00">dif/1</text>
@@ -79,7 +79,7 @@
 <!-- dif_/2 -->
 <g id="node6" class="node">
 <title>dif_/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L137">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L137">
 <polygon fill="cornsilk" stroke="black" points="415.5,-331 356.5,-331 356.5,-295 415.5,-295 415.5,-331"/>
 <text text-anchor="start" x="365" y="-315.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="370" y="-315.2" font-family="Courier,monospace" font-size="11.00">dif_/2</text>
@@ -93,12 +93,12 @@
 <!-- dif/1&#45;&gt;dif_/2 -->
 <g id="edge1" class="edge">
 <title>dif/1&#45;&gt;dif_/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L133" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L133" xlink:title="calls">
 <path fill="none" stroke="black" d="M386,-412.88C386,-394.04 386,-363.47 386,-341.3"/>
 <polygon fill="black" stroke="black" points="389.5,-341.19 386,-331.19 382.5,-341.19 389.5,-341.19"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L133">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L133">
 <text text-anchor="start" x="386" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,7 +106,7 @@
 <!-- freeze/2 -->
 <g id="node3" class="node">
 <title>freeze/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L48">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L48">
 <polygon fill="springgreen" stroke="black" points="324,-449 254,-449 254,-413 324,-413 324,-449"/>
 <text text-anchor="start" x="262" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="267" y="-433.2" font-family="Courier,monospace" font-size="11.00">freeze/2</text>
@@ -131,12 +131,12 @@
 <!-- freeze/2&#45;&gt;user:freeze/2 -->
 <g id="edge4" class="edge">
 <title>freeze/2&#45;&gt;user:freeze/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L107" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M289,-412.88C289,-394.04 289,-363.47 289,-341.3"/>
 <polygon fill="black" stroke="black" points="292.5,-341.19 289,-331.19 285.5,-341.19 292.5,-341.19"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L107">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L107">
 <text text-anchor="start" x="289" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -144,7 +144,7 @@
 <!-- frozen/2 -->
 <g id="node4" class="node">
 <title>frozen/2</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L56">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L56">
 <polygon fill="springgreen" stroke="black" points="208,-449 138,-449 138,-413 208,-413 208,-449"/>
 <text text-anchor="start" x="146" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="151" y="-433.2" font-family="Courier,monospace" font-size="11.00">frozen/2</text>
@@ -169,12 +169,12 @@
 <!-- frozen/2&#45;&gt;user:frozen/2 -->
 <g id="edge5" class="edge">
 <title>frozen/2&#45;&gt;user:frozen/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L110" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M173,-412.88C173,-394.04 173,-363.47 173,-341.3"/>
 <polygon fill="black" stroke="black" points="176.5,-341.19 173,-331.19 169.5,-341.19 176.5,-341.19"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L110">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L110">
 <text text-anchor="start" x="173" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -182,7 +182,7 @@
 <!-- when/2 -->
 <g id="node5" class="node">
 <title>when/2</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L63">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L63">
 <polygon fill="springgreen" stroke="black" points="91.5,-449 32.5,-449 32.5,-413 91.5,-413 91.5,-449"/>
 <text text-anchor="start" x="41" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="46" y="-433.2" font-family="Courier,monospace" font-size="11.00">when/2</text>
@@ -207,12 +207,12 @@
 <!-- when/2&#45;&gt;when:when/2 -->
 <g id="edge6" class="edge">
 <title>when/2&#45;&gt;when:when/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L113" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M62,-412.88C62,-394.04 62,-363.47 62,-341.3"/>
 <polygon fill="black" stroke="black" points="65.5,-341.19 62,-331.19 58.5,-341.19 65.5,-341.19"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L113">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L113">
 <text text-anchor="start" x="62" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -220,12 +220,12 @@
 <!-- dif_/2&#45;&gt;dif/2 -->
 <g id="edge2" class="edge">
 <title>dif_/2&#45;&gt;dif/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L138" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L138" xlink:title="calls">
 <path fill="none" stroke="black" d="M385.7,-294.88C385.38,-276.04 384.85,-245.47 384.47,-223.3"/>
 <polygon fill="black" stroke="black" points="387.97,-223.12 384.3,-213.19 380.97,-223.25 387.97,-223.12"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cbba6d9f7efe0ecef480b6200bf5d3edd28fc400/library/coroutining/coroutining.lgt#L138">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a3989fb2f1e2fb4f9cfaf08f25bcd7b146d4b396/library/coroutining/coroutining.lgt#L138">
 <text text-anchor="start" x="385" y="-251.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
