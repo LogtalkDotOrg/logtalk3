@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2021-11-04,
+		date is 2021-11-06,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -604,6 +604,13 @@
 			fail
 		).
 
+	pin :-
+		defined(Registry, _, false),
+			pin_file(Registry, File),
+			ensure_file(File),
+		fail.
+	pin.
+
 	unpin(Registry) :-
 		(	pin_file(Registry, File) ->
 			(	file_exists(File) ->
@@ -613,6 +620,14 @@
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
 		).
+
+	unpin :-
+		defined(Registry, _, true),
+			pin_file(Registry, File),
+			file_exists(File),
+			delete_file(File),
+		fail.
+	unpin.
 
 	pinned(Registry) :-
 		(	pin_file(Registry, File) ->

@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:19:2
-| **Date:** 2021-11-04
+| **Version:** 0:20:0
+| **Date:** 2021-11-06
 
 | **Compilation flags:**
 |    ``static``
@@ -123,6 +123,27 @@ Pins a resource (pack or registry) preventing it from being updated, uninstalled
 
 .. raw:: html
 
+   <div id="pin/0"> </div>
+
+.. index:: pin/0
+.. _packs_common/0::pin/0:
+
+``pin/0``
+^^^^^^^^^
+
+Pins all resource (packs or registries) preventing them from being updated, uninstalled, or deleted. Note that resources added after calling this predicate will not be pinned.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``pin`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="unpin/1"> </div>
 
 .. index:: unpin/1
@@ -140,6 +161,27 @@ Unpins a resource (pack or registry), allowing it to be updated, uninstalled, or
 |    ``unpin(Resource)``
 | **Mode and number of proofs:**
 |    ``unpin(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="unpin/0"> </div>
+
+.. index:: unpin/0
+.. _packs_common/0::unpin/0:
+
+``unpin/0``
+^^^^^^^^^^^
+
+Unpins all resources (packs or registries), allowing them to be updated, uninstalled, or deleted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``unpin`` - ``one``
 
 
 ------------

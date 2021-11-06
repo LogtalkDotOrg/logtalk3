@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:19:2,
+		version is 0:20:0,
 		author is 'Paulo Moura',
-		date is 2021-11-04,
+		date is 2021-11-06,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -53,11 +53,23 @@
 		argnames is ['Resource']
 	]).
 
+	:- public(pin/0).
+	:- mode(pin, one).
+	:- info(pin/0, [
+		comment is 'Pins all resource (packs or registries) preventing them from being updated, uninstalled, or deleted. Note that resources added after calling this predicate will not be pinned.'
+	]).
+
 	:- public(unpin/1).
 	:- mode(unpin(+atom), zero_or_one).
 	:- info(unpin/1, [
 		comment is 'Unpins a resource (pack or registry), allowing it to be updated, uninstalled, or deleted. Fails if the resource is not found.',
 		argnames is ['Resource']
+	]).
+
+	:- public(unpin/0).
+	:- mode(unpin, one).
+	:- info(unpin/0, [
+		comment is 'Unpins all resources (packs or registries), allowing them to be updated, uninstalled, or deleted.'
 	]).
 
 	:- public(pinned/1).

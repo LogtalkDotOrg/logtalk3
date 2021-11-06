@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:35:0,
+		version is 0:36:0,
 		author is 'Paulo Moura',
-		date is 2021-11-04,
+		date is 2021-11-06,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -686,6 +686,13 @@
 			fail
 		).
 
+	pin :-
+		installed_pack(_, Pack, _, false),
+			pin_file(Pack, File),
+			ensure_file(File),
+		fail.
+	pin.
+
 	unpin(Pack) :-
 		(	pin_file(Pack, File) ->
 			(	file_exists(File) ->
@@ -695,6 +702,14 @@
 		;	print_message(error, packs, pack_not_installed(Pack)),
 			fail
 		).
+
+	unpin :-
+		installed_pack(_, Pack, _, true),
+			pin_file(Pack, File),
+			file_exists(File),
+			delete_file(File),
+		fail.
+	unpin.
 
 	pinned(Pack) :-
 		(	pin_file(Pack, File) ->
