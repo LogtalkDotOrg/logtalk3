@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2021-01-05,
+		date is 2021-11-07,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -497,6 +497,15 @@
 			'body. This warning can be fixed by redefining the predicate, often by'-[], nl,
 			'using an accumulator. This warning should be fixed when the predicate'-[], nl,
 			'is deterministic.'-[], nl, nl
+		].
+
+	explain(non_tail_recursive_non_terminal(_, _, _, _, _)) -->
+		[	'Non-tail recursive non-terminal definitions consume space proportional'-[], nl,
+			'to the number of recursive calls. A non-terminal definition is non-tail'-[], nl,
+			'recursive when the recursive call is not the last goal in the grammar'-[], nl,
+			'rule body. This warning can be fixed by redefining the non-terminal,'-[], nl,
+			'often by using an accumulator. This warning should be fixed when the'-[], nl,
+			'non-terminal is deterministic.'-[], nl, nl
 		].
 
 	% lambda expression messages
