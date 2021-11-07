@@ -32,6 +32,8 @@ Logtalk compiler and runtime
 cases where the expression arguments are not ground but their type can be
 inferred.
 
+* FIXED: Duplicated linter warnings for some DEC-10 Prolog I/O predicates.
+
 * FIXED: The pack library paths to always end with a slash.
 
 Prolog adapter and integration files
