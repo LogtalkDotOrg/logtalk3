@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on October 25, 2021
+%  Last updated on November 7, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -121,6 +121,7 @@ setup_call_cleanup(_, _, _) :-
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
+'$lgt_prolog_meta_predicate'(consult(_), consult(*), predicate) :- !.
 '$lgt_prolog_meta_predicate'(Callable, Template, Kind) :-
 	predicate_property(Callable, meta_predicate(Template)),
 	predicate_property(Callable, built_in),

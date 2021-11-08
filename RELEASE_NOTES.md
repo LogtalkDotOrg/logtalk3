@@ -44,6 +44,10 @@ Prolog adapter and integration files
 * FIXED: The Trealla Prolog integration script to support "-- Arguments"
 passed by other scripts (e.g. `logtalk_tester` script) that call it.
 
+* FIXED: The GNU Prolog adapter file to allow the `consult/1` built-in
+predicate to be called from within objects and categories without requiring
+overriding its meta-predicate template.
+
 Documentation
 -------------
 
