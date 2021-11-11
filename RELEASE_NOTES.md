@@ -39,6 +39,8 @@ inferred.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The LVM adapter file to require version 2.0.0 or later.
+
 * UPDATED: The Trealla Prolog adapter file to require version 1.16.6 or later.
 
 * FIXED: The Trealla Prolog integration script to support "-- Arguments"
