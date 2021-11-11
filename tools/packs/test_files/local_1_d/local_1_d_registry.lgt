@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,7 +18,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(local_1_registry),
-	logtalk_load(foo_pack)
-)).
+:- object(local_1_d_registry,
+	implements(registry_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2021-11-03,
+		comment is 'A local registry for testing.'
+	]).
+
+	name(local_1_d).
+
+	description('A local registry for testing').
+
+	home('file:///home/johndoe/local_1_d').
+
+	clone('file:///home/johndoe/local_1_d.git').
+
+	archive('file:///home/johndoe/local_1_d/master.zip').
+
+:- end_object.

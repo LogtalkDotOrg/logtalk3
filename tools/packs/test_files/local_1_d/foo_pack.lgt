@@ -18,24 +18,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(local_1_registry,
-	implements(registry_protocol)).
+:- object(foo_pack,
+	implements(pack_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-11-03,
-		comment is 'A local registry for testing.'
+		date is 2021-10-21,
+		comment is 'A local pack for testing.'
 	]).
 
-	name(local_1).
+	name(foo).
 
-	description('A local registry for testing').
+	description('A local pack for testing').
 
-	home('file:///home/jdoe/local_1').
+	license('Apache-2.0').
 
-	clone('file:///home/jdoe/local_1.git').
+	home('file:///home/johndoe/foo').
 
-	archive('file:///home/jdoe/local_1/master.zip').
+	version(
+		1:0:0,
+		stable,
+		'file:///home/johndoe/foo/v1.0.0.tar.gz',
+		none,
+		[local_1_d::bar @>= 1:0:0],
+		all
+	).
 
 :- end_object.

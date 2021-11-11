@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2021-11-05,
+		date is 2021-11-11,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -154,70 +154,74 @@
 		^^suppress_text_output,
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/local_1'], URL),
+		atomic_list_concat(['file://', Directory, 'test_files/local_1_d'], URL),
 		registries::add(URL).
+
+	test(packs_registries_defined_3_02, true(Registries == [local_1_d])) :-
+		^^suppress_text_output,
+		findall(Registry, registries::defined(Registry, _, _), Registries).
 
 	test(packs_registries_lint_1_01, true) :-
 		^^suppress_text_output,
-		registries::lint(local_1).
+		registries::lint(local_1_d).
 
 	test(packs_registries_describe_1_01, true) :-
 		^^suppress_text_output,
-		registries::describe(local_1).
+		registries::describe(local_1_d).
 
 	test(packs_registries_directory_2_01, true(atom(Directory))) :-
 		^^suppress_text_output,
-		registries::directory(local_1, Directory).
+		registries::directory(local_1_d, Directory).
 
 	test(packs_registries_readme_2_01, true(Readme == File)) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1/README.md', File),
-		registries::readme(local_1, Readme).
+		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', File),
+		registries::readme(local_1_d, Readme).
 
 	test(packs_registries_readme_1_01, true) :-
 		^^suppress_text_output,
-		registries::readme(local_1).
+		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1-foo])) :-
+	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-bar, local_1_d-foo])) :-
 		^^suppress_text_output,
-		findall(Registry-Pack, registries::provides(Registry, Pack), Pairs).
+		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
 	test(packs_registries_update_1_01, true) :-
 		^^suppress_text_output,
-		registries::update(local_1).
+		registries::update(local_1_d).
 
 	test(packs_registries_clean_1_01, true) :-
 		^^suppress_text_output,
-		registries::clean(local_1).
+		registries::clean(local_1_d).
 
 	test(packs_registries_pin_1_01, true) :-
 		^^suppress_text_output,
-		registries::pin(local_1).
+		registries::pin(local_1_d).
 
 	test(packs_registries_pin_1_02, true) :-
 		^^suppress_text_output,
-		registries::pin(local_1),
-		registries::pin(local_1).
+		registries::pin(local_1_d),
+		registries::pin(local_1_d).
 
 	test(packs_registries_unpin_1_01, true) :-
 		^^suppress_text_output,
-		registries::unpin(local_1).
+		registries::unpin(local_1_d).
 
 	test(packs_registries_unpin_1_02, true) :-
 		^^suppress_text_output,
-		registries::unpin(local_1),
-		registries::unpin(local_1).
+		registries::unpin(local_1_d),
+		registries::unpin(local_1_d).
 
 	test(packs_registries_pinned_1_01, true) :-
 		^^suppress_text_output,
-		registries::pin(local_1),
-		registries::pinned(local_1).
+		registries::pin(local_1_d),
+		registries::pinned(local_1_d).
 
 	test(packs_registries_pinned_1_02, false) :-
 		^^suppress_text_output,
-		registries::unpin(local_1),
-		registries::pinned(local_1).
+		registries::unpin(local_1_d),
+		registries::pinned(local_1_d).
 
 	test(packs_packs_lint_1_01, true) :-
 		^^suppress_text_output,
@@ -225,7 +229,7 @@
 
 	test(packs_packs_available_1_01, true) :-
 		^^suppress_text_output,
-		packs::available(local_1).
+		packs::available(local_1_d).
 
 	test(packs_packs_describe_1_01, true) :-
 		^^suppress_text_output,
@@ -233,14 +237,45 @@
 
 	test(packs_packs_dependents_3_01, true(Dependents == [])) :-
 		^^suppress_text_output,
-		packs::dependents(local_1, foo, Dependents).
+		packs::dependents(local_1_d, foo, Dependents).
 
 	test(packs_packs_dependents_2_01, true) :-
 		^^suppress_text_output,
-		packs::dependents(local_1, foo).
+		packs::dependents(local_1_d, foo).
 
 	test(packs_packs_dependents_1_01, true) :-
 		^^suppress_text_output,
 		packs::dependents(foo).
+
+	% add a second local registry
+
+	test(packs_registries_add_1_02, true) :-
+		^^suppress_text_output,
+		this(This),
+		object_property(This, file(_, Directory)),
+		atomic_list_concat(['file://', Directory, 'test_files/local_2_d'], URL),
+		registries::add(URL).
+
+	test(packs_registries_defined_3_03, true(Registries == [local_1_d, local_2_d])) :-
+		^^suppress_text_output,
+		findall(Registry, registries::defined(Registry, _, _), Registries0),
+		list::msort(Registries0, Registries).
+
+	test(packs_registries_unpin_0_01, true) :-
+		^^suppress_text_output,
+		registries::unpin.
+
+	test(packs_registries_unpin_0_02, false) :-
+		^^suppress_text_output,
+		registries::defined(_, _, true).
+
+	test(packs_registries_pin_0_01, true) :-
+		^^suppress_text_output,
+		registries::pin.
+
+	test(packs_registries_pin_0_02, true(Registries == [local_1_d, local_2_d])) :-
+		^^suppress_text_output,
+		findall(Registry, registries::defined(Registry, _, true), Registries0),
+		list::msort(Registries0, Registries).
 
 :- end_object.

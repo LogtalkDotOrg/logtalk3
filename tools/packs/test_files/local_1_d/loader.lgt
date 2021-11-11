@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -18,31 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(foo_pack,
-	implements(pack_protocol)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2021-10-21,
-		comment is 'A local pack for testing.'
-	]).
-
-	name(foo).
-
-	description('A local pack for testing').
-
-	license('Apache-2.0').
-
-	home('file:///home/jdoe/foo').
-
-	version(
-		1:0:0,
-		stable,
-		'file:///home/jdoe/foo/v1.0.0.tar.gz',
-		none,
-		[],
-		all
-	).
-
-:- end_object.
+:- initialization((
+	logtalk_load(local_1_d_registry),
+	logtalk_load(foo_pack),
+	logtalk_load(bar_pack)
+)).
