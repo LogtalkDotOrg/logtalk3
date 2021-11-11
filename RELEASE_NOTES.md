@@ -39,7 +39,7 @@ inferred.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The Trealla Prolog adapter file to require version 1.16.5 or later.
+* UPDATED: The Trealla Prolog adapter file to require version 1.16.6 or later.
 
 * FIXED: The Trealla Prolog integration script to support "-- Arguments"
 passed by other scripts (e.g. `logtalk_tester` script) that call it.
