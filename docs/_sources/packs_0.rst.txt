@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:36:0
-| **Date:** 2021-11-06
+| **Version:** 0:37:0
+| **Date:** 2021-11-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -743,7 +743,7 @@ Restores a list of registries and packs from a file using the ``force(true)`` op
 ``dependents/3``
 ^^^^^^^^^^^^^^^^
 
-Returns a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.
+Returns a list of all installed packs that depend on the given pack from the given registry. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -766,7 +766,7 @@ Returns a list of all packs that depend on the given pack from the given registr
 ``dependents/2``
 ^^^^^^^^^^^^^^^^
 
-Prints a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.
+Prints a list of all installed packs that depend on the given pack from the given registry. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -789,7 +789,7 @@ Prints a list of all packs that depend on the given pack from the given registry
 ``dependents/1``
 ^^^^^^^^^^^^^^^^
 
-Prints a list of all packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.
+Prints a list of all installed packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.
 
 | **Compilation flags:**
 |    ``static``

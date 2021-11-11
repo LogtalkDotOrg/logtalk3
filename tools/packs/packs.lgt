@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:37:0,
 		author is 'Paulo Moura',
-		date is 2021-11-06,
+		date is 2021-11-11,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -261,21 +261,21 @@
 	:- public(dependents/3).
 	:- mode(dependents(+atom, +atom, -list(atom)), zero_or_one).
 	:- info(dependents/3, [
-		comment is 'Returns a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
+		comment is 'Returns a list of all installed packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
 		argnames is ['Registry', 'Pack', 'Dependents']
 	]).
 
 	:- public(dependents/2).
 	:- mode(dependents(+atom, +atom), zero_or_one).
 	:- info(dependents/2, [
-		comment is 'Prints a list of all packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
+		comment is 'Prints a list of all installed packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
 		argnames is ['Registry', 'Pack']
 	]).
 
 	:- public(dependents/1).
 	:- mode(dependents(+atom), zero_or_one).
 	:- info(dependents/1, [
-		comment is 'Prints a list of all packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.',
+		comment is 'Prints a list of all installed packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.',
 		argnames is ['Pack']
 	]).
 
