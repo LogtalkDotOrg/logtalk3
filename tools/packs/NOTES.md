@@ -277,6 +277,10 @@ But having a file per object and a loader file helps maintenance and it's
 also a tool requirement for applying safety procedures to the source file
 contents and thus successfully loding the registry and pack specs.
 
+As registries are git repos in the most common case and thus adding them
+performs a git repo cloning, they should only contain the strictly required
+files.
+
 
 Registry handling
 -----------------
