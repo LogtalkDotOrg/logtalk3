@@ -114,7 +114,7 @@ Tests
 -----
 
 * ADDED: Tests for the valid syntaxes of the Prolog standard `dynamic/1`,
-`discontiguous/1`, and `multifile/1` directives.
+`discontiguous/1`, `meta_predicate/1`, and `multifile/1` directives.
 
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.
