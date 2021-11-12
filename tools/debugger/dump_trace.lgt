@@ -22,11 +22,14 @@
 :- object(dump_trace).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2014-12-16,
+		date is 2021-11-12,
 		comment is 'Simple solution for redirecting a debugger trace to a file.'
 	]).
+
+	% avoid a catch-22...
+	:- set_logtalk_flag(debug, off).
 
 	:- public(start_redirect_to_file/2).
 	:- meta_predicate(start_redirect_to_file(*, 0)).

@@ -105,6 +105,9 @@ this system lack of supported for standard multifile predicate semantics.
 * FIXED: Missing `tutor` tool explanation for non-tail recursive non-terminal
 definitions.
 
+* FIXED: The `debugger` tool `dump_trace` utility object to ensure that it's
+always compiled in non-debug mode.
+
 Examples
 --------
 
