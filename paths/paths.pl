@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on November 1, 2021
+%  Last updated on November 12, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -115,6 +115,7 @@ logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).
 logtalk_library_path(expecteds, library('expecteds/')).
+logtalk_library_path(format, library('format/')).
 logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(git, library('git/')).
 logtalk_library_path(heaps, library('heaps/')).

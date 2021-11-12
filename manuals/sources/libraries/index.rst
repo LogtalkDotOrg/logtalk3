@@ -41,6 +41,7 @@ directory in the ``NOTES.md`` file.
    events
    expand_library_alias_paths
    expecteds
+   format
    gensym
    git
    heaps

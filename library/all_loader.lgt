@@ -63,6 +63,7 @@
 		base64(loader),
 		uuid(loader),
 		html(loader),
+		format(loader),
 		cloning,
 		counters,
 		streamvars

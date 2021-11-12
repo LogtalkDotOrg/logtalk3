@@ -68,6 +68,9 @@ work with all supported backends.
 Library
 -------
 
+* ADDED: Library `format` that abstracts how the different backends make
+available the de facto standard `format/2-3` predicates.
+
 * IMPROVED: Performance of the `arbitrary` library tests.
 
 Tools

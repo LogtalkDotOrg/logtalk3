@@ -1,0 +1,102 @@
+.. index:: format
+.. _format/0:
+
+.. rst-class:: right
+
+**object**
+
+``format``
+==========
+
+Formatted output predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2021-11-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="format/3"> </div>
+
+.. index:: format/3
+.. _format/0::format/3:
+
+``format/3``
+^^^^^^^^^^^^
+
+Writes a list of arguments after a format specification to the specified output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format(Stream,Format,Arguments)``
+| **Mode and number of proofs:**
+|    ``format(@stream_or_alias,+atom,@list)`` - ``zero_or_one``
+|    ``format(@stream_or_alias,+list(character_code),@list)`` - ``zero_or_one``
+|    ``format(@stream_or_alias,+list(character),@list)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="format/2"> </div>
+
+.. index:: format/2
+.. _format/0::format/2:
+
+``format/2``
+^^^^^^^^^^^^
+
+Writes a list of arguments after a format specification to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format(Format,Arguments)``
+| **Mode and number of proofs:**
+|    ``format(+atom,@list)`` - ``zero_or_one``
+|    ``format(+list(character_code),@list)`` - ``zero_or_one``
+|    ``format(+list(character),@list)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
