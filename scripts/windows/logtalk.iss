@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on September 15, 2021
+; Last updated on November 12, 2021
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -77,7 +77,7 @@ Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration 
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
