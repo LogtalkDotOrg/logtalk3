@@ -1,0 +1,97 @@
+.. index:: dump_trace
+.. _dump_trace/0:
+
+.. rst-class:: right
+
+**object**
+
+``dump_trace``
+==============
+
+Simple solution for redirecting a debugger trace to a file.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:1
+| **Date:** 2021-11-12
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`debugger <debugger/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="start_redirect_to_file/2"> </div>
+
+.. index:: start_redirect_to_file/2
+.. _dump_trace/0::start_redirect_to_file/2:
+
+``start_redirect_to_file/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starts redirecting debugger trace messages to a file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start_redirect_to_file(File,Goal)``
+| **Meta-predicate template:**
+|    ``start_redirect_to_file(*,0)``
+| **Mode and number of proofs:**
+|    ``start_redirect_to_file(+atom,+callable)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="stop_redirect_to_file/0"> </div>
+
+.. index:: stop_redirect_to_file/0
+.. _dump_trace/0::stop_redirect_to_file/0:
+
+``stop_redirect_to_file/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Stops redirecting debugger trace messages to a file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``stop_redirect_to_file`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

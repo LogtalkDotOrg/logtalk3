@@ -7271,6 +7271,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`shell <shell/0::start/0>`
 
+``start_redirect_to_file/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dump_trace <dump_trace/0::start_redirect_to_file/2>`
+
 ``started_by/2``
 ----------------
 
@@ -7290,6 +7300,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::starts/2>`
+
+``stop_redirect_to_file/0``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`dump_trace <dump_trace/0::stop_redirect_to_file/0>`
 
 ``stream_to_bytes/2``
 ---------------------

@@ -82,8 +82,11 @@ debugger, consult the debugging section of the User Manual:
 The `debugger_messages.lgt` source file defines the default debugger
 message translations.
 
-The `dump_trace.lgt` contains a simple code example on how to redirect
-a goal trace to a file.
+The `dump_trace.lgt` provides a simple solution for dumping a goal trace
+to a file. For example:
+
+	| ?- dump_trace::start_redirect_to_file('trace.txt', some_goal),
+	     dump_trace::stop_redirect_to_file.
 
 
 Alternative debugger tools

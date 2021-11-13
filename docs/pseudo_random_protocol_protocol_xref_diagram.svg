@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-144 325,-144 325,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol pseudo_random_protocol</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;12, 21:32</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;13, 18:29</text>
 <g id="clust1" class="cluster">
 <title>cluster_pseudo_random_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="pseudo_random_protocol">
 <path fill="snow" stroke="dimgray" d="M57.5,-49C57.5,-49 263.5,-49 263.5,-49 269.5,-49 275.5,-55 275.5,-61 275.5,-61 275.5,-120 275.5,-120 275.5,-126 269.5,-132 263.5,-132 263.5,-132 57.5,-132 57.5,-132 51.5,-132 45.5,-126 45.5,-120 45.5,-120 45.5,-61 45.5,-61 45.5,-55 51.5,-49 57.5,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/da1b904fb338cb0213d64d8c5e20b502297dd0fd/library/random/pseudo_random_protocol.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/da1b904fb338cb0213d64d8c5e20b502297dd0fd/library/random/pseudo_random_protocol.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/library/random/pseudo_random_protocol.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/library/random/pseudo_random_protocol.lgt">
 <text text-anchor="start" x="57.5" y="-115.5" font-family="Courier,monospace" font-size="10.00" fill="dimgray">pseudo_random_protocol</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- get_seed/1 -->
 <g id="node1" class="node">
 <title>get_seed/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/da1b904fb338cb0213d64d8c5e20b502297dd0fd/library/random/pseudo_random_protocol.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/da1b904fb338cb0213d64d8c5e20b502297dd0fd/library/random/pseudo_random_protocol.lgt#L33">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/library/random/pseudo_random_protocol.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/library/random/pseudo_random_protocol.lgt#L33">
 <polygon fill="springgreen" stroke="black" points="265.5,-95 169.5,-95 169.5,-59 265.5,-59 265.5,-95"/>
 <text text-anchor="start" x="177.5" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="190" y="-79.2" font-family="Courier,monospace" font-size="11.00">get_seed/1</text>
@@ -41,7 +41,7 @@
 <!-- set_seed/1 -->
 <g id="node2" class="node">
 <title>set_seed/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/da1b904fb338cb0213d64d8c5e20b502297dd0fd/library/random/pseudo_random_protocol.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/da1b904fb338cb0213d64d8c5e20b502297dd0fd/library/random/pseudo_random_protocol.lgt#L40">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/library/random/pseudo_random_protocol.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/library/random/pseudo_random_protocol.lgt#L40">
 <polygon fill="springgreen" stroke="black" points="151.5,-95 55.5,-95 55.5,-59 151.5,-59 151.5,-95"/>
 <text text-anchor="start" x="63.5" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="76" y="-79.2" font-family="Courier,monospace" font-size="11.00">set_seed/1</text>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>debugger &mdash; Logtalk APIs v3.52.0-b03 documentation</title>
+  <title>dump_trace &mdash; Logtalk APIs v3.52.0-b03 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -29,8 +29,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="debugger_messages" href="debugger_messages_0.html" />
-    <link rel="prev" title="debug_messages" href="debug_messages_0.html" />
+    <link rel="next" title="observer" href="observer_0.html" />
+    <link rel="prev" title="debuggerp" href="debuggerp_0.html" />
    
 </head>
 
@@ -70,10 +70,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><code class="docutils literal notranslate"><span class="pre">debug_messages</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#debugger"><code class="docutils literal notranslate"><span class="pre">debugger</span></code></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugger_0.html">debugger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="debugger_messages_0.html">debugger_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="debuggerp_0.html">debuggerp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dump_trace_0.html">dump_trace</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dump_trace</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dependents"><code class="docutils literal notranslate"><span class="pre">dependents</span></code></a></li>
@@ -166,9 +166,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="library_index.html">Libraries</a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">debugger</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">dump_trace</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/debugger_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/dump_trace_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -176,14 +176,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="debugger-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="debugger">
-<h1><code class="docutils literal notranslate"><span class="pre">debugger</span></code><a class="headerlink" href="#debugger" title="Permalink to this headline"></a></h1>
-<p>Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.</p>
+  <p class="right" id="dump-trace-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="dump-trace">
+<h1><code class="docutils literal notranslate"><span class="pre">dump_trace</span></code><a class="headerlink" href="#dump-trace" title="Permalink to this headline"></a></h1>
+<p>Simple solution for redirecting a debugger trace to a file.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 4:11:0</div>
-<div class="line"><strong>Date:</strong> 2021-10-01</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2021-11-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -192,18 +192,9 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="debuggerp_0.html#debuggerp-0"><span class="std std-ref">debuggerp</span></a></div>
-</div>
-<div class="line"><strong>Provides:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-debug-handler-provider-1"><span class="std std-ref">logtalk::debug_handler_provider/1</span></a></div>
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-debug-handler-2"><span class="std std-ref">logtalk::debug_handler/2</span></a></div>
-</div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
+<div class="line"><a class="reference internal" href="debugger_0.html#debugger-0"><span class="std std-ref">debugger</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -215,174 +206,75 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="debuggerp_0.html#debuggerp-0-debug-0"><span class="std std-ref">debug/0</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-debugging-0"><span class="std std-ref">debugging/0</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-debugging-1"><span class="std std-ref">debugging/1</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-leash-1"><span class="std std-ref">leash/1</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-leashing-1"><span class="std std-ref">leashing/1</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-nodebug-0"><span class="std std-ref">nodebug/0</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-nospy-1"><span class="std std-ref">nospy/1</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-nospy-4"><span class="std std-ref">nospy/4</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-nospyall-0"><span class="std std-ref">nospyall/0</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-notrace-0"><span class="std std-ref">notrace/0</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-reset-0"><span class="std std-ref">reset/0</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-spy-1"><span class="std std-ref">spy/1</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-spy-4"><span class="std std-ref">spy/4</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-spying-1"><span class="std std-ref">spying/1</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-spying-4"><span class="std std-ref">spying/4</span></a>  <a class="reference internal" href="debuggerp_0.html#debuggerp-0-trace-0"><span class="std std-ref">trace/0</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#debugging-0" id="id4"><code class="docutils literal notranslate"><span class="pre">debugging_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tracing-0" id="id5"><code class="docutils literal notranslate"><span class="pre">tracing_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#skipping-0" id="id6"><code class="docutils literal notranslate"><span class="pre">skipping_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#quasi-skipping-0" id="id7"><code class="docutils literal notranslate"><span class="pre">quasi_skipping_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leaping-1" id="id8"><code class="docutils literal notranslate"><span class="pre">leaping_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#spying-line-number-2" id="id9"><code class="docutils literal notranslate"><span class="pre">spying_line_number_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#spying-predicate-3" id="id10"><code class="docutils literal notranslate"><span class="pre">spying_predicate_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#spying-context-4" id="id11"><code class="docutils literal notranslate"><span class="pre">spying_context_/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leashing-1" id="id12"><code class="docutils literal notranslate"><span class="pre">leashing_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#invocation-number-1" id="id13"><code class="docutils literal notranslate"><span class="pre">invocation_number_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#jump-to-invocation-number-1" id="id14"><code class="docutils literal notranslate"><span class="pre">jump_to_invocation_number_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#zap-to-port-1" id="id15"><code class="docutils literal notranslate"><span class="pre">zap_to_port_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#write-max-depth-1" id="id16"><code class="docutils literal notranslate"><span class="pre">write_max_depth_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#start-redirect-to-file-2" id="id2"><code class="docutils literal notranslate"><span class="pre">start_redirect_to_file/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#stop-redirect-to-file-0" id="id3"><code class="docutils literal notranslate"><span class="pre">stop_redirect_to_file/0</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<div id="start_redirect_to_file/2"> </div><section id="start-redirect-to-file-2">
+<span id="dump-trace-0-start-redirect-to-file-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">start_redirect_to_file/2</span></code></a><a class="headerlink" href="#start-redirect-to-file-2" title="Permalink to this headline"></a></h3>
+<p>Starts redirecting debugger trace messages to a file.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">start_redirect_to_file(File,Goal)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">start_redirect_to_file(*,0)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">start_redirect_to_file(+atom,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="stop_redirect_to_file/0"> </div></section>
+<section id="stop-redirect-to-file-0">
+<span id="dump-trace-0-stop-redirect-to-file-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">stop_redirect_to_file/0</span></code></a><a class="headerlink" href="#stop-redirect-to-file-0" title="Permalink to this headline"></a></h3>
+<p>Stops redirecting debugger trace messages to a file.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stop_redirect_to_file</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
-<div id="debugging_/0"> </div><section id="debugging-0">
-<span id="debugger-0-debugging-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">debugging_/0</span></code></a><a class="headerlink" href="#debugging-0" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="tracing_/0"> </div></section>
-<section id="tracing-0">
-<span id="debugger-0-tracing-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tracing_/0</span></code></a><a class="headerlink" href="#tracing-0" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="skipping_/0"> </div></section>
-<section id="skipping-0">
-<span id="debugger-0-skipping-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">skipping_/0</span></code></a><a class="headerlink" href="#skipping-0" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="quasi_skipping_/0"> </div></section>
-<section id="quasi-skipping-0">
-<span id="debugger-0-quasi-skipping-0"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">quasi_skipping_/0</span></code></a><a class="headerlink" href="#quasi-skipping-0" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="leaping_/1"> </div></section>
-<section id="leaping-1">
-<span id="debugger-0-leaping-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">leaping_/1</span></code></a><a class="headerlink" href="#leaping-1" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="spying_line_number_/2"> </div></section>
-<section id="spying-line-number-2">
-<span id="debugger-0-spying-line-number-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">spying_line_number_/2</span></code></a><a class="headerlink" href="#spying-line-number-2" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="spying_predicate_/3"> </div></section>
-<section id="spying-predicate-3">
-<span id="debugger-0-spying-predicate-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">spying_predicate_/3</span></code></a><a class="headerlink" href="#spying-predicate-3" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="spying_context_/4"> </div></section>
-<section id="spying-context-4">
-<span id="debugger-0-spying-context-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">spying_context_/4</span></code></a><a class="headerlink" href="#spying-context-4" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="leashing_/1"> </div></section>
-<section id="leashing-1">
-<span id="debugger-0-leashing-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">leashing_/1</span></code></a><a class="headerlink" href="#leashing-1" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="invocation_number_/1"> </div></section>
-<section id="invocation-number-1">
-<span id="debugger-0-invocation-number-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invocation_number_/1</span></code></a><a class="headerlink" href="#invocation-number-1" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="jump_to_invocation_number_/1"> </div></section>
-<section id="jump-to-invocation-number-1">
-<span id="debugger-0-jump-to-invocation-number-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">jump_to_invocation_number_/1</span></code></a><a class="headerlink" href="#jump-to-invocation-number-1" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="zap_to_port_/1"> </div></section>
-<section id="zap-to-port-1">
-<span id="debugger-0-zap-to-port-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">zap_to_port_/1</span></code></a><a class="headerlink" href="#zap-to-port-1" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-<div id="write_max_depth_/1"> </div></section>
-<section id="write-max-depth-1">
-<span id="debugger-0-write-max-depth-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">write_max_depth_/1</span></code></a><a class="headerlink" href="#write-max-depth-1" title="Permalink to this headline"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-</section>
-<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
@@ -393,8 +285,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="debug_messages_0.html" class="btn btn-neutral float-left" title="debug_messages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="debugger_messages_0.html" class="btn btn-neutral float-right" title="debugger_messages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="debuggerp_0.html" class="btn btn-neutral float-left" title="debuggerp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="observer_0.html" class="btn btn-neutral float-right" title="observer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

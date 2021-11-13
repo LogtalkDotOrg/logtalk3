@@ -27,7 +27,8 @@
 	logtalk_load([
 		debuggerp,
 		debugger,
-		debugger_messages
+		debugger_messages,
+		dump_trace
 	], [
 		optimize(on)
 	])

@@ -78,6 +78,9 @@ available the de facto standard `format/2-3` predicates.
 Tools
 -----
 
+* CHANGED: The `debugger` tool loader file to also load the `dump_trace`
+object.
+
 * ADDED: Support for defining, saving, and restoring a simple form of packs
 virtual environments.
 
