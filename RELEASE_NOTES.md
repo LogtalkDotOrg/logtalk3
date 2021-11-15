@@ -132,6 +132,9 @@ Tests
 * ADDED: Tests for the valid syntaxes of the Prolog standard `dynamic/1`,
 `discontiguous/1`, `meta_predicate/1`, and `multifile/1` directives.
 
+* ADDED: Additional tests for the `writeq/2` predicate for atoms that require
+quoting to be input back correctly.
+
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.
 
