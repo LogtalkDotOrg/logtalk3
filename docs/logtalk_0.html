@@ -184,8 +184,8 @@
 <p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:19:0</div>
-<div class="line"><strong>Date:</strong> 2021-01-03</div>
+<div class="line"><strong>Version:</strong> 1:20:0</div>
+<div class="line"><strong>Date:</strong> 2021-11-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -477,6 +477,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">trace_event(&#64;callable,&#64;execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Unification events: Generated after a successful unification with a fact - <code class="docutils literal notranslate"><span class="pre">fact(Entity,Fact,Clause,File,Line)</span></code> - or a rule head - <code class="docutils literal notranslate"><span class="pre">rule(Entity,Head,Clause,File,Line)</span></code>.</p></li>
+<li><p>Goal events: Generated when calling a goal: <code class="docutils literal notranslate"><span class="pre">top_goal(Goal,CompiledGoal)</span></code> or <code class="docutils literal notranslate"><span class="pre">goal(Goal,CompiledGoal)</span></code>.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <div id="debug_handler_provider/1"> </div></section>
 <section id="debug-handler-provider-1">
@@ -502,7 +511,7 @@
 <div id="debug_handler/2"> </div></section>
 <section id="debug-handler-2">
 <span id="logtalk-0-debug-handler-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code></a><a class="headerlink" href="#debug-handler-2" title="Permalink to this headline"></a></h3>
-<p>Debug event handler. The defined events are unification events - <code class="docutils literal notranslate"><span class="pre">fact(Entity,Fact,Clause,File,Line)</span></code> and <code class="docutils literal notranslate"><span class="pre">rule(Entity,Head,Clause,File,Line)</span></code> - and goal events - <code class="docutils literal notranslate"><span class="pre">top_goal(Goal,CompiledGoal)</span></code> and <code class="docutils literal notranslate"><span class="pre">goal(Goal,CompiledGoal)</span></code>.</p>
+<p>Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -519,6 +528,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(?entity_identifier,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Unification events: Generated after a successful unification with a fact - <code class="docutils literal notranslate"><span class="pre">fact(Entity,Fact,Clause,File,Line)</span></code> - or a rule head - <code class="docutils literal notranslate"><span class="pre">rule(Entity,Head,Clause,File,Line)</span></code>.</p></li>
+<li><p>Goal events: Generated when calling a goal: <code class="docutils literal notranslate"><span class="pre">top_goal(Goal,CompiledGoal)</span></code> or <code class="docutils literal notranslate"><span class="pre">goal(Goal,CompiledGoal)</span></code>.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <div id="expand_library_path/2"> </div></section>
 <section id="expand-library-path-2">

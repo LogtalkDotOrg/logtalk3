@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:19:0,
+		version is 1:20:0,
 		author is 'Paulo Moura',
-		date is 2021-01-03,
+		date is 2021-11-15,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -148,7 +148,11 @@
 	:- mode(trace_event(@callable, @execution_context), zero).
 	:- info(trace_event/2, [
 		comment is 'Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.',
-		argnames is ['Event', 'ExecutionContext']
+		argnames is ['Event', 'ExecutionContext'],
+		remarks is [
+			'Unification events' - 'Generated after a successful unification with a fact - ``fact(Entity,Fact,Clause,File,Line)`` - or a rule head - ``rule(Entity,Head,Clause,File,Line)``.',
+			'Goal events' - 'Generated when calling a goal: ``top_goal(Goal,CompiledGoal)`` or ``goal(Goal,CompiledGoal)``.'
+		]
 	]).
 
 	:- public(debug_handler_provider/1).
@@ -163,8 +167,12 @@
 	:- multifile(debug_handler/2).
 	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
 	:- info(debug_handler/2, [
-		comment is 'Debug event handler. The defined events are unification events - ``fact(Entity,Fact,Clause,File,Line)`` and ``rule(Entity,Head,Clause,File,Line)`` - and goal events - ``top_goal(Goal,CompiledGoal)`` and ``goal(Goal,CompiledGoal)``.',
-		argnames is ['Event', 'ExecutionContext']
+		comment is 'Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).',
+		argnames is ['Event', 'ExecutionContext'],
+		remarks is [
+			'Unification events' - 'Generated after a successful unification with a fact - ``fact(Entity,Fact,Clause,File,Line)`` - or a rule head - ``rule(Entity,Head,Clause,File,Line)``.',
+			'Goal events' - 'Generated when calling a goal: ``top_goal(Goal,CompiledGoal)`` or ``goal(Goal,CompiledGoal)``.'
+		]
 	]).
 
 	% file and library predicates

@@ -60,6 +60,9 @@ Documentation
 * ADDED: Section on creating and using virtual environments to the `packs`
 tool documentation.
 
+* IMPROVED: Documentation of the `logtalk` built-in object `trace_event/2`
+and `debug_handler/2` predicates.
+
 * UPDATED: The documentation of the `logtalk_library_path/2` predicate for
 the `logtalk_packs` library alias.
 
