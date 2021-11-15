@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2018-07-03,
+		date is 2021-11-15,
 		comment is 'Unit tests for the include/1 built-in directive.'
 	]).
 
@@ -37,121 +37,123 @@
 
 	:- include('file.pl').
 
-	test(include_1_01) :-
-		findall(X, {a(X)}, Xs),
-		Xs == [1, 2, 3].
+	test(include_1_01, true(Xs == [1, 2, 3])) :-
+		findall(X, {a(X)}, Xs).
 
-	test(include_1_02) :-
-		findall(X, {b(_, X)}, Xs),
-		Xs == [1, 2, 3].
+	test(include_1_02, true(Xs == [1, 2, 3])) :-
+		findall(X, {b(_, X)}, Xs).
 
-	test(include_1_03) :-
-		\+ {current_predicate(c/3)}.
+	test(include_1_03, false) :-
+		{current_predicate(c/3)}.
 
-	test(include_1_04) :-
-		findall(X, a(X), Xs),
-		Xs == [1, 2, 3].
+	test(include_1_04, true(Xs == [1, 2, 3])) :-
+		findall(X, a(X), Xs).
 
-	test(include_1_05) :-
-		findall(X, b(_, X), Xs),
-		Xs == [1, 2, 3].
+	test(include_1_05, true(Xs == [1, 2, 3])) :-
+		findall(X, b(_, X), Xs).
 
-	test(include_1_06) :-
-		findall(X-Y, foo(X,Y), Pairs),
-		Pairs == [a-b, b-c, c-d].
+	test(include_1_06, true(Pairs == [a-b, b-c, c-d])) :-
+		findall(X-Y, foo(X,Y), Pairs).
 
-	test(include_1_07) :-
-		\+ current_predicate(c/3).
+	test(include_1_07, false) :-
+		current_predicate(c/3).
 
 	% test multiple initialization/1 directives
 	% in main file and in the included files
 
-	test(include_1_08) :-
+	test(include_1_08, true) :-
 		main<<a,
 		main<<i(main_1).
 
-	test(include_1_09) :-
+	test(include_1_09, true) :-
 		main<<a,
 		main<<i(main_2).
 
-	test(include_1_10) :-
+	test(include_1_10, true) :-
 		main<<b,
 		main<<i(include_1_1).
 
-	test(include_1_11) :-
+	test(include_1_11, true) :-
 		main<<b,
 		main<<i(include_1_2).
 
-	test(include_1_12) :-
+	test(include_1_12, true) :-
 		main<<c,
 		main<<i(include_2).
 
 	% test multiple initialization/1 directives order
 
-	test(include_1_13) :-
-		findall(Arg, main<<i(Arg), Args),
-		Args == [main_1, include_1_1, include_2, include_1_2, main_2].
+	test(include_1_13, true(Args == [main_1,include_1_1,include_2,include_1_2,main_2])) :-
+		findall(Arg, main<<i(Arg), Args).
 
 	% test reflection API
 
-	test(include_1_14) :-
+	test(include_1_14, true) :-
 		object_property(main, declares(b/0, Properties)),
 		memberchk(include(Include1), Properties),
 		object_property(main, file(_,Directory)),
 		decompose_file_name(Include1, Directory, include_1, '.pl').
 
-	test(include_1_15) :-
+	test(include_1_15, true) :-
 		object_property(main, declares(b/0, Properties)),
 		memberchk(line_count(Line), Properties),
 		integer(Line).
 
-	test(include_1_16) :-
+	test(include_1_16, true) :-
 		object_property(main, defines(b/0, Properties)),
 		memberchk(include(Include1), Properties),
 		object_property(main, file(_,Directory)),
 		decompose_file_name(Include1, Directory, include_1, '.pl').
 
-	test(include_1_17) :-
+	test(include_1_17, true) :-
 		object_property(main, defines(b/0, Properties)),
 		memberchk(line_count(Line), Properties),
 		integer(Line).
 
-	test(include_1_18) :-
+	test(include_1_18, true) :-
 		object_property(main, declares(c/0, Properties)),
 		memberchk(include(Include2), Properties),
 		object_property(main, file(_,Directory)),
 		decompose_file_name(Include2, Directory, include_2, '.pl').
 
-	test(include_1_19) :-
+	test(include_1_19, true) :-
 		object_property(main, declares(c/0, Properties)),
 		memberchk(line_count(Line), Properties),
 		integer(Line).
 
-	test(include_1_20) :-
+	test(include_1_20, true) :-
 		object_property(main, defines(c/0, Properties)),
 		memberchk(include(Include2), Properties),
 		object_property(main, file(_,Directory)),
 		decompose_file_name(Include2, Directory, include_2, '.pl').
 
-	test(include_1_21) :-
+	test(include_1_21, true) :-
 		object_property(main, defines(c/0, Properties)),
 		memberchk(line_count(Line), Properties),
 		integer(Line).
 
-	test(include_1_22) :-
-		{plain_1(X)},
-		X == 1.
+	% tests for conditional compilation directives in included files
 
-	test(include_1_23) :-
-		{up::plain_1(X)},
-		X == 1.
+	test(include_1_22, false) :-
+		object_property(main, defines(bar/0, _)).
 
-	test(include_1_24) :-
-		{plain_2(X)},
-		X == 1.
+	test(include_1_23, true) :-
+		object_property(main, defines(baz/0, Properties)),
+		memberchk(line_count(Line), Properties),
+		integer(Line).
 
-	test(include_1_25) :-
-		{sub::plain_2(X)},
-		X == 1.
+	% other tests
+
+	test(include_1_24, true(X == 1)) :-
+		{plain_1(X)}.
+
+	test(include_1_25, true(X == 1)) :-
+		{up::plain_1(X)}.
+
+	test(include_1_26, true(X == 1)) :-
+		{plain_2(X)}.
+
+	test(include_1_27, true(X == 1)) :-
+		{sub::plain_2(X)}.
 
 :- end_object.

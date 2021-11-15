@@ -69,7 +69,7 @@ The ``debugger_messages.lgt`` source file defines the default debugger
 message translations.
 
 The ``dump_trace.lgt`` provides a simple solution for dumping a goal
-trace to a file:
+trace to a file. For example:
 
 ::
 

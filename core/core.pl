@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 52, 0, b03)).
+'$lgt_version_data'(logtalk(3, 52, 0, b04)).
 
 
 
@@ -8498,6 +8498,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % compiles a list of file terms (directives, clauses, or grammar rules)
 % found in an included file
+
+'$lgt_compile_include_file_terms'([Term-_| Terms], File, Ctx) :-
+	'$lgt_pp_cc_skipping_',
+	% we're performing conditional compilation and skipping terms ...
+	\+ '$lgt_is_conditional_compilation_directive'(Term),
+	% ... except for conditional compilation directives
+	!,
+	'$lgt_compile_include_file_terms'(Terms, File, Ctx).
 
 '$lgt_compile_include_file_terms'([Term-sd(VariableNames,Singletons,Lines)| Terms], File, Ctx) :-
 	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),

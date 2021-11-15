@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.52.0 - December ??, 2021
+3.52.0 - November ??, 2021
 ==========================
 
 Logtalk compiler and runtime
@@ -31,6 +31,8 @@ Logtalk compiler and runtime
 * IMPROVED: Generalized the linter checks for `is/2` and `(=:=)/2` goals to
 cases where the expression arguments are not ground but their type can be
 inferred.
+
+* FIXED: Processing of conditional compilation directives in included files.
 
 * FIXED: Duplicated linter warnings for some DEC-10 Prolog I/O predicates.
 

@@ -7,3 +7,9 @@ b.
 :- include('include_2.pl').
 
 :- initialization(assertz(i(include_1_2))).
+
+:- if(fail).
+	bar.
+:- else.
+	baz.
+:- endif.
