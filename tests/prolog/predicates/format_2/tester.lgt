@@ -23,6 +23,10 @@
 	set_logtalk_flag(report, warnings),
 	set_logtalk_flag(suspicious_calls, silent),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load([tests_atom, tests_codes, tests_chars], [hook(lgtunit)]),
+	lgtunit::run_test_sets([
+		tests_atom,
+		tests_codes,
+		tests_chars
+	])
 )).

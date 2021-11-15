@@ -132,6 +132,10 @@ Tests
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.
 
+* UPDATED: Tests for the de facto standard `format/2-3` predicates to also
+check format strings specified using a list of character codes or a list of
+characters.
+
 
 3.51.0 - October 26, 2021
 =========================
