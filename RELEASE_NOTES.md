@@ -78,6 +78,8 @@ Library
 * ADDED: Library `format` that abstracts how the different backends make
 available the de facto standard `format/2-3` predicates.
 
+* ADDED: Additional tests for the `coroutining` library.
+
 * IMPROVED: Performance of the `arbitrary` library tests.
 
 Tools

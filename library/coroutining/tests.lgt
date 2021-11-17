@@ -23,25 +23,39 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-11-28,
+		date is 2021-11-17,
 		comment is 'Unit tests for the "coroutining" library.'
 	]).
 
 	:- uses(coroutining, [
-		dif/2, freeze/2, frozen/2, when/2
+		dif/2, dif/1, freeze/2, frozen/2, when/2
 	]).
 
 	cover(coroutining).
 
 	% dif/2 tests
 
-	test(coroutining_dif_2_01, true) :-
-		\+ dif(X, X).
+	test(coroutining_dif_2_01, false) :-
+		dif(X, X).
 
 	test(coroutining_dif_2_02, true) :-
 		dif(X, Y), X = 1, Y = 2.
+
+	test(coroutining_dif_2_03, false) :-
+		dif(X, Y), X = 1, Y = 1.
+
+	% dif/1 tests
+
+	test(coroutining_dif_1_01, false) :-
+		dif([X, X, X]).
+
+	test(coroutining_dif_1_02, true) :-
+		dif([X, Y, Z]), X = 1, Y = 2, Z = 3.
+
+	test(coroutining_dif_1_03, false) :-
+		dif([X, Y, Z]), X = 1, Y = 2, Z = 1.
 
 	% freeze/2 tests
 
@@ -60,10 +74,9 @@
 		freeze(_, _ = 2),
 		frozen(_, Goal).
 
-	- test(coroutining_frozen_2_02, true) :-
-		freeze(X, Y = 2),
-		frozen(X, Goal),
-		^^variant(Goal, Y = 2).
+	test(coroutining_frozen_2_02, true(nonvar(Goal))) :-
+		freeze(X, write(done)),
+		frozen(X, Goal).
 
 	% when/2 tests
 
