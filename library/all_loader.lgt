@@ -50,6 +50,7 @@
 		expecteds(loader),
 		expand_library_alias_paths(loader),
 		edcg(loader),
+		dif(loader),
 		coroutining(loader),
 		zippers(loader),
 		reader(loader),

@@ -1,0 +1,99 @@
+.. index:: dif
+.. _dif/0:
+
+.. rst-class:: right
+
+**object**
+
+``dif``
+=======
+
+Provides dif/2 and derived predicates.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2021-11-17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Supported backend Prolog systems: B-Prolog, ECLiPSe, Scryer Prolog, SICStus Prolog, SWI-Prolog, and YAP.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="dif/2"> </div>
+
+.. index:: dif/2
+.. _dif/0::dif/2:
+
+``dif/2``
+^^^^^^^^^
+
+Sets a constraint that is true iff the two terms are different.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dif(Term1,Term2)``
+| **Mode and number of proofs:**
+|    ``dif(+term,+term)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="dif/1"> </div>
+
+.. index:: dif/1
+.. _dif/0::dif/1:
+
+``dif/1``
+^^^^^^^^^
+
+Sets a set of constraints that are true iff all terms in a list are different.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dif(Terms)``
+| **Mode and number of proofs:**
+|    ``dif(+list(term))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

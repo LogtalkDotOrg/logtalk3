@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on November 12, 2021
+%  Last updated on November 17, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -111,6 +111,7 @@ logtalk_library_path(csv, library('csv/')).
 logtalk_library_path(dates, library('dates/')).
 logtalk_library_path(dependents, library('dependents/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
+logtalk_library_path(dif, library('dif/')).
 logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).

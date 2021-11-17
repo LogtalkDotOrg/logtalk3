@@ -37,6 +37,7 @@ directory in the ``NOTES.md`` file.
    dates
    dependents
    dictionaries
+   dif
    edcg
    events
    expand_library_alias_paths

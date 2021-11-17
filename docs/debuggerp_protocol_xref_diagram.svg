@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-144 1439,-144 1439,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol debuggerp</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;13, 18:29</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;17, 12:12</text>
 <g id="clust1" class="cluster">
 <title>cluster_debuggerp_protocol</title>
 <g id="a_clust1"><a xlink:title="debuggerp">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 1415,-49 1415,-49 1421,-49 1427,-55 1427,-61 1427,-61 1427,-120 1427,-120 1427,-126 1421,-132 1415,-132 1415,-132 20,-132 20,-132 14,-132 8,-126 8,-120 8,-120 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt">
 <text text-anchor="start" x="20.5" y="-115.5" font-family="Courier,monospace" font-size="10.00" fill="dimgray">debuggerp</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- reset/0 -->
 <g id="node1" class="node">
 <title>reset/0</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L42">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L42">
 <polygon fill="springgreen" stroke="black" points="1416.5,-95 1351.5,-95 1351.5,-59 1416.5,-59 1416.5,-95"/>
 <text text-anchor="start" x="1360" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1365" y="-79.2" font-family="Courier,monospace" font-size="11.00">reset/0</text>
@@ -41,7 +41,7 @@
 <!-- debug/0 -->
 <g id="node2" class="node">
 <title>debug/0</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L48">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L48">
 <polygon fill="springgreen" stroke="black" points="1333.5,-95 1268.5,-95 1268.5,-59 1333.5,-59 1333.5,-95"/>
 <text text-anchor="start" x="1277" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1282" y="-79.2" font-family="Courier,monospace" font-size="11.00">debug/0</text>
@@ -55,7 +55,7 @@
 <!-- nodebug/0 -->
 <g id="node3" class="node">
 <title>nodebug/0</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L54">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L54">
 <polygon fill="springgreen" stroke="black" points="1250,-95 1174,-95 1174,-59 1250,-59 1250,-95"/>
 <text text-anchor="start" x="1182" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1187" y="-79.2" font-family="Courier,monospace" font-size="11.00">nodebug/0</text>
@@ -69,7 +69,7 @@
 <!-- debugging/0 -->
 <g id="node4" class="node">
 <title>debugging/0</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L60">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L60">
 <polygon fill="springgreen" stroke="black" points="1155.5,-95 1068.5,-95 1068.5,-59 1155.5,-59 1155.5,-95"/>
 <text text-anchor="start" x="1077" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1082" y="-79.2" font-family="Courier,monospace" font-size="11.00">debugging/0</text>
@@ -83,7 +83,7 @@
 <!-- debugging/1 -->
 <g id="node5" class="node">
 <title>debugging/1</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L66">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L66">
 <polygon fill="springgreen" stroke="black" points="1050.5,-95 963.5,-95 963.5,-59 1050.5,-59 1050.5,-95"/>
 <text text-anchor="start" x="972" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="977" y="-79.2" font-family="Courier,monospace" font-size="11.00">debugging/1</text>
@@ -97,7 +97,7 @@
 <!-- trace/0 -->
 <g id="node6" class="node">
 <title>trace/0</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L73">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L73">
 <polygon fill="springgreen" stroke="black" points="945.5,-95 880.5,-95 880.5,-59 945.5,-59 945.5,-95"/>
 <text text-anchor="start" x="889" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="894" y="-79.2" font-family="Courier,monospace" font-size="11.00">trace/0</text>
@@ -111,7 +111,7 @@
 <!-- notrace/0 -->
 <g id="node7" class="node">
 <title>notrace/0</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L79">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L79">
 <polygon fill="springgreen" stroke="black" points="862,-95 786,-95 786,-59 862,-59 862,-95"/>
 <text text-anchor="start" x="794" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="799" y="-79.2" font-family="Courier,monospace" font-size="11.00">notrace/0</text>
@@ -125,7 +125,7 @@
 <!-- spy/1 -->
 <g id="node8" class="node">
 <title>spy/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L85">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L85">
 <polygon fill="springgreen" stroke="black" points="768,-95 714,-95 714,-59 768,-59 768,-95"/>
 <text text-anchor="start" x="722" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="727" y="-79.2" font-family="Courier,monospace" font-size="11.00">spy/1</text>
@@ -139,7 +139,7 @@
 <!-- spying/1 -->
 <g id="node9" class="node">
 <title>spying/1</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L93">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L93">
 <polygon fill="springgreen" stroke="black" points="696,-95 626,-95 626,-59 696,-59 696,-95"/>
 <text text-anchor="start" x="634" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="639" y="-79.2" font-family="Courier,monospace" font-size="11.00">spying/1</text>
@@ -153,7 +153,7 @@
 <!-- spy/4 -->
 <g id="node10" class="node">
 <title>spy/4</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L100">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L100">
 <polygon fill="springgreen" stroke="black" points="608,-95 554,-95 554,-59 608,-59 608,-95"/>
 <text text-anchor="start" x="562" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="567" y="-79.2" font-family="Courier,monospace" font-size="11.00">spy/4</text>
@@ -167,7 +167,7 @@
 <!-- spying/4 -->
 <g id="node11" class="node">
 <title>spying/4</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L107">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L107">
 <polygon fill="springgreen" stroke="black" points="536,-95 466,-95 466,-59 536,-59 536,-95"/>
 <text text-anchor="start" x="474" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="479" y="-79.2" font-family="Courier,monospace" font-size="11.00">spying/4</text>
@@ -181,7 +181,7 @@
 <!-- nospy/1 -->
 <g id="node12" class="node">
 <title>nospy/1</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L114">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L114">
 <polygon fill="springgreen" stroke="black" points="447.5,-95 382.5,-95 382.5,-59 447.5,-59 447.5,-95"/>
 <text text-anchor="start" x="391" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="396" y="-79.2" font-family="Courier,monospace" font-size="11.00">nospy/1</text>
@@ -195,7 +195,7 @@
 <!-- nospy/4 -->
 <g id="node13" class="node">
 <title>nospy/4</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L123">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L123">
 <polygon fill="springgreen" stroke="black" points="364.5,-95 299.5,-95 299.5,-59 364.5,-59 364.5,-95"/>
 <text text-anchor="start" x="308" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="313" y="-79.2" font-family="Courier,monospace" font-size="11.00">nospy/4</text>
@@ -209,7 +209,7 @@
 <!-- nospyall/0 -->
 <g id="node14" class="node">
 <title>nospyall/0</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L130">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L130">
 <polygon fill="springgreen" stroke="black" points="281.5,-95 200.5,-95 200.5,-59 281.5,-59 281.5,-95"/>
 <text text-anchor="start" x="209" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="214" y="-79.2" font-family="Courier,monospace" font-size="11.00">nospyall/0</text>
@@ -223,7 +223,7 @@
 <!-- leash/1 -->
 <g id="node15" class="node">
 <title>leash/1</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L136">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L136">
 <polygon fill="springgreen" stroke="black" points="182.5,-95 117.5,-95 117.5,-59 182.5,-59 182.5,-95"/>
 <text text-anchor="start" x="126" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="131" y="-79.2" font-family="Courier,monospace" font-size="11.00">leash/1</text>
@@ -237,7 +237,7 @@
 <!-- leashing/1 -->
 <g id="node16" class="node">
 <title>leashing/1</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9faf5dbd41dcda13eefe9bff6f1dfa22e6d84b6c/tools/debugger/debuggerp.lgt#L144">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/debugger/debuggerp.lgt#L144">
 <polygon fill="springgreen" stroke="black" points="99.5,-95 18.5,-95 18.5,-59 99.5,-59 99.5,-95"/>
 <text text-anchor="start" x="27" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="32" y="-79.2" font-family="Courier,monospace" font-size="11.00">leashing/1</text>
