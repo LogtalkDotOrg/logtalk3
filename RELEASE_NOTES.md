@@ -140,6 +140,9 @@ quoting to be input back correctly.
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.
 
+* ADDED: Tests for the de facto standard `format/2-3` predicates for using the
+back-quote character for specifying a table fill character in format strings.
+
 * UPDATED: Tests for the de facto standard `format/2-3` predicates to also
 check format strings specified using a list of character codes or a list of
 characters.

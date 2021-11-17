@@ -350,10 +350,15 @@
 
 	:- endif.
 
-	test(lgt_format_2_tab_table_fill_character, true(Assertion)) :-
+	test(lgt_format_2_tab_table_fill_character_code, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~61t~8|", [])},
 		^^text_output_assertion('========', Assertion).
+
+	test(lgt_format_2_tab_table_fill_character, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~`0t~2r~16+", [0xFF])},
+		^^text_output_assertion('0000000011111111', Assertion).
 
 	test(lgt_format_2_unbound_first_argument, error(instantiation_error)) :-
 		^^set_text_output(''),
