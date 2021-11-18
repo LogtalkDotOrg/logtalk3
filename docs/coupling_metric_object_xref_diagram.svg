@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-734 1195,-734 1195,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object coupling_metric</text>
-<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;17, 12:12</text>
+<text text-anchor="start" x="8" y="-7" font-family="Courier,monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;18, 19:47</text>
 <g id="clust1" class="cluster">
 <title>cluster_coupling_metric_object</title>
 <g id="a_clust1"><a xlink:title="coupling_metric">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 1171,-49 1171,-49 1177,-49 1183,-55 1183,-61 1183,-61 1183,-710 1183,-710 1183,-716 1177,-722 1171,-722 1171,-722 20,-722 20,-722 14,-722 8,-716 8,-710 8,-710 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt">
 <text text-anchor="start" x="20.5" y="-705.5" font-family="Courier,monospace" font-size="10.00" fill="dimgray">coupling_metric</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- entity_score/2 -->
 <g id="node1" class="node">
 <title>entity_score/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45">
 <polygon fill="cornsilk" stroke="black" points="839.5,-685 736.5,-685 736.5,-649 839.5,-649 839.5,-685"/>
 <text text-anchor="start" x="745" y="-669.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="750" y="-669.2" font-family="Courier,monospace" font-size="11.00">entity_score/2</text>
@@ -41,7 +41,7 @@
 <!-- efferent_coupling/3 -->
 <g id="node2" class="node">
 <title>efferent_coupling/3</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L61">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L61">
 <polygon fill="cornsilk" stroke="black" points="363.5,-567 232.5,-567 232.5,-531 363.5,-531 363.5,-567"/>
 <text text-anchor="start" x="241" y="-551.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="246" y="-551.2" font-family="Courier,monospace" font-size="11.00">efferent_coupling/3</text>
@@ -55,12 +55,12 @@
 <!-- entity_score/2&#45;&gt;efferent_coupling/3 -->
 <g id="edge1" class="edge">
 <title>entity_score/2&#45;&gt;efferent_coupling/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M736.49,-653.81C649.69,-633.26 473.95,-591.65 373.3,-567.83"/>
 <polygon fill="black" stroke="black" points="374.04,-564.4 363.5,-565.51 372.43,-571.22 374.04,-564.4"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45">
 <text text-anchor="start" x="557" y="-605.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- afferent_coupling/3 -->
 <g id="node5" class="node">
 <title>afferent_coupling/3</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L88">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L88">
 <polygon fill="cornsilk" stroke="black" points="751.5,-567 620.5,-567 620.5,-531 751.5,-531 751.5,-567"/>
 <text text-anchor="start" x="629" y="-551.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="634" y="-551.2" font-family="Courier,monospace" font-size="11.00">afferent_coupling/3</text>
@@ -82,12 +82,12 @@
 <!-- entity_score/2&#45;&gt;afferent_coupling/3 -->
 <g id="edge2" class="edge">
 <title>entity_score/2&#45;&gt;afferent_coupling/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M772.95,-648.88C755.77,-629.35 727.53,-597.23 707.91,-574.92"/>
 <polygon fill="black" stroke="black" points="710.34,-572.38 701.11,-567.19 705.09,-577.01 710.34,-572.38"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45">
 <text text-anchor="start" x="740" y="-605.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- abstractness/3 -->
 <g id="node9" class="node">
 <title>abstractness/3</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L133">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L133">
 <polygon fill="cornsilk" stroke="black" points="1084.5,-449 981.5,-449 981.5,-413 1084.5,-413 1084.5,-449"/>
 <text text-anchor="start" x="990" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="995" y="-433.2" font-family="Courier,monospace" font-size="11.00">abstractness/3</text>
@@ -109,12 +109,12 @@
 <!-- entity_score/2&#45;&gt;abstractness/3 -->
 <g id="edge3" class="edge">
 <title>entity_score/2&#45;&gt;abstractness/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M784.03,-648.76C778.71,-621.09 772.63,-566.31 798,-531 819.15,-501.56 909.38,-469.28 971.67,-449.84"/>
 <polygon fill="black" stroke="black" points="972.89,-453.12 981.42,-446.83 970.83,-446.44 972.89,-453.12"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45">
 <text text-anchor="start" x="798" y="-546.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- entity_score/2&#45;&gt;^^current_entity/1 -->
 <g id="edge16" class="edge">
 <title>entity_score/2&#45;&gt;^^current_entity/1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M803.35,-648.88C820.86,-629.35 849.66,-597.23 869.66,-574.92"/>
 <polygon fill="black" stroke="black" points="872.52,-576.97 876.59,-567.19 867.31,-572.3 872.52,-576.97"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45">
 <text text-anchor="start" x="843" y="-605.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- entity_score/2&#45;&gt;^^entity_kind/2 -->
 <g id="edge17" class="edge">
 <title>entity_score/2&#45;&gt;^^entity_kind/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M823.27,-648.88C865.54,-628.37 936.43,-593.96 982.45,-571.62"/>
 <polygon fill="black" stroke="black" points="984.12,-574.7 991.59,-567.19 981.07,-568.4 984.12,-574.7"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L45">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L45">
 <text text-anchor="start" x="914" y="-605.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -170,7 +170,7 @@
 <!-- efferent_coupling_protocol/4 -->
 <g id="node3" class="node">
 <title>efferent_coupling_protocol/4</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L68">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L68">
 <polygon fill="cornsilk" stroke="black" points="198,-449 18,-449 18,-413 198,-413 198,-449"/>
 <text text-anchor="start" x="26" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-433.2" font-family="Courier,monospace" font-size="11.00">efferent_coupling_protocol/4</text>
@@ -184,12 +184,12 @@
 <!-- efferent_coupling/3&#45;&gt;efferent_coupling_protocol/4 -->
 <g id="edge4" class="edge">
 <title>efferent_coupling/3&#45;&gt;efferent_coupling_protocol/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L61" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L61" xlink:title="calls">
 <path fill="none" stroke="black" d="M269.96,-530.88C236.85,-510.67 181.64,-476.96 145.03,-454.61"/>
 <polygon fill="black" stroke="black" points="146.51,-451.41 136.15,-449.19 142.86,-457.38 146.51,-451.41"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L61">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L61">
 <text text-anchor="start" x="208" y="-487.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -197,7 +197,7 @@
 <!-- efferent_coupling_other/5 -->
 <g id="node4" class="node">
 <title>efferent_coupling_other/5</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76">
 <polygon fill="cornsilk" stroke="black" points="380,-449 216,-449 216,-413 380,-413 380,-449"/>
 <text text-anchor="start" x="224" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="229" y="-433.2" font-family="Courier,monospace" font-size="11.00">efferent_coupling_other/5</text>
@@ -211,12 +211,12 @@
 <!-- efferent_coupling/3&#45;&gt;efferent_coupling_other/5 -->
 <g id="edge5" class="edge">
 <title>efferent_coupling/3&#45;&gt;efferent_coupling_other/5</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L63" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M298,-530.88C298,-512.04 298,-481.47 298,-459.3"/>
 <polygon fill="black" stroke="black" points="301.5,-459.19 298,-449.19 294.5,-459.19 301.5,-459.19"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L63">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L63">
 <text text-anchor="start" x="298" y="-487.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -224,7 +224,7 @@
 <!-- unvisited_ancestor/4 -->
 <g id="node10" class="node">
 <title>unvisited_ancestor/4</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180">
 <polygon fill="cornsilk" stroke="black" points="154,-331 18,-331 18,-295 154,-295 154,-331"/>
 <text text-anchor="start" x="26" y="-315.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-315.2" font-family="Courier,monospace" font-size="11.00">unvisited_ancestor/4</text>
@@ -238,12 +238,12 @@
 <!-- efferent_coupling_protocol/4&#45;&gt;unvisited_ancestor/4 -->
 <g id="edge6" class="edge">
 <title>efferent_coupling_protocol/4&#45;&gt;unvisited_ancestor/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L68" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L68" xlink:title="calls">
 <path fill="none" stroke="black" d="M104.75,-412.88C101.18,-394.04 95.38,-363.47 91.18,-341.3"/>
 <polygon fill="black" stroke="black" points="94.56,-340.36 89.26,-331.19 87.68,-341.66 94.56,-340.36"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L68">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L68">
 <text text-anchor="start" x="98" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -251,12 +251,12 @@
 <!-- efferent_coupling_other/5&#45;&gt;unvisited_ancestor/4 -->
 <g id="edge7" class="edge">
 <title>efferent_coupling_other/5&#45;&gt;unvisited_ancestor/4</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M266.72,-412.88C229.45,-392.49 167.12,-358.39 126.29,-336.04"/>
 <polygon fill="black" stroke="black" points="127.86,-332.92 117.41,-331.19 124.5,-339.06 127.86,-332.92"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76">
 <text text-anchor="start" x="198" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -264,7 +264,7 @@
 <!-- unvisited_call/3 -->
 <g id="node11" class="node">
 <title>unvisited_call/3</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185">
 <polygon fill="cornsilk" stroke="black" points="286,-331 172,-331 172,-295 286,-295 286,-331"/>
 <text text-anchor="start" x="180" y="-315.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="185" y="-315.2" font-family="Courier,monospace" font-size="11.00">unvisited_call/3</text>
@@ -278,12 +278,12 @@
 <!-- efferent_coupling_other/5&#45;&gt;unvisited_call/3 -->
 <g id="edge8" class="edge">
 <title>efferent_coupling_other/5&#45;&gt;unvisited_call/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M287.82,-412.88C276.35,-393.61 257.6,-362.07 244.35,-339.81"/>
 <polygon fill="black" stroke="black" points="247.34,-337.99 239.22,-331.19 241.33,-341.57 247.34,-337.99"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L76">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L76">
 <text text-anchor="start" x="265" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -291,7 +291,7 @@
 <!-- afferent_coupling_protocol/2 -->
 <g id="node6" class="node">
 <title>afferent_coupling_protocol/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L95">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L95">
 <polygon fill="cornsilk" stroke="black" points="578,-449 398,-449 398,-413 578,-413 578,-449"/>
 <text text-anchor="start" x="406" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="411" y="-433.2" font-family="Courier,monospace" font-size="11.00">afferent_coupling_protocol/2</text>
@@ -305,12 +305,12 @@
 <!-- afferent_coupling/3&#45;&gt;afferent_coupling_protocol/2 -->
 <g id="edge9" class="edge">
 <title>afferent_coupling/3&#45;&gt;afferent_coupling_protocol/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L88" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M656.78,-530.88C622.13,-510.58 564.26,-476.68 526.11,-454.33"/>
 <polygon fill="black" stroke="black" points="527.73,-451.22 517.34,-449.19 524.19,-457.26 527.73,-451.22"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L88">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L88">
 <text text-anchor="start" x="592" y="-487.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -318,7 +318,7 @@
 <!-- afferent_coupling_category/2 -->
 <g id="node7" class="node">
 <title>afferent_coupling_category/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L106">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L106">
 <polygon fill="cornsilk" stroke="black" points="776,-449 596,-449 596,-413 776,-413 776,-449"/>
 <text text-anchor="start" x="604" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="609" y="-433.2" font-family="Courier,monospace" font-size="11.00">afferent_coupling_category/2</text>
@@ -332,12 +332,12 @@
 <!-- afferent_coupling/3&#45;&gt;afferent_coupling_category/2 -->
 <g id="edge10" class="edge">
 <title>afferent_coupling/3&#45;&gt;afferent_coupling_category/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L90" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M686,-530.88C686,-512.04 686,-481.47 686,-459.3"/>
 <polygon fill="black" stroke="black" points="689.5,-459.19 686,-449.19 682.5,-459.19 689.5,-459.19"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L90">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L90">
 <text text-anchor="start" x="686" y="-487.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -345,7 +345,7 @@
 <!-- afferent_coupling_object/2 -->
 <g id="node8" class="node">
 <title>afferent_coupling_object/2</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121">
 <polygon fill="cornsilk" stroke="black" points="963.5,-449 794.5,-449 794.5,-413 963.5,-413 963.5,-449"/>
 <text text-anchor="start" x="803" y="-433.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="808" y="-433.2" font-family="Courier,monospace" font-size="11.00">afferent_coupling_object/2</text>
@@ -359,12 +359,12 @@
 <!-- afferent_coupling/3&#45;&gt;afferent_coupling_object/2 -->
 <g id="edge11" class="edge">
 <title>afferent_coupling/3&#45;&gt;afferent_coupling_object/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L92" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.12,-530.93C717.44,-517.29 738.87,-498.31 760,-485 779.66,-472.61 802.72,-461.63 823.27,-452.92"/>
 <polygon fill="black" stroke="black" points="824.62,-456.15 832.51,-449.08 821.94,-449.68 824.62,-456.15"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L92">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L92">
 <text text-anchor="start" x="760" y="-487.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -386,12 +386,12 @@
 <!-- afferent_coupling_protocol/2&#45;&gt;list::length/2 -->
 <g id="edge21" class="edge">
 <title>afferent_coupling_protocol/2&#45;&gt;list::length/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L95" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M468.52,-412.88C446,-393.09 408.78,-360.38 383.36,-338.05"/>
 <polygon fill="black" stroke="black" points="385.38,-335.16 375.56,-331.19 380.76,-340.42 385.38,-335.16"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L95">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L95">
 <text text-anchor="start" x="425" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -399,12 +399,12 @@
 <!-- afferent_coupling_category/2&#45;&gt;list::length/2 -->
 <g id="edge22" class="edge">
 <title>afferent_coupling_category/2&#45;&gt;list::length/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L106" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L106" xlink:title="calls">
 <path fill="none" stroke="black" d="M637.31,-412.88C577.88,-391.99 477.49,-356.7 414.08,-334.42"/>
 <polygon fill="black" stroke="black" points="415.22,-331.11 404.62,-331.09 412.9,-337.71 415.22,-331.11"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L106">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L106">
 <text text-anchor="start" x="530" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -412,7 +412,7 @@
 <!-- entity_sends_message_to_object/2 -->
 <g id="node14" class="node">
 <title>entity_sends_message_to_object/2</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L203">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L203">
 <polygon fill="cornsilk" stroke="black" points="628,-331 426,-331 426,-295 628,-295 628,-331"/>
 <text text-anchor="start" x="434" y="-315.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="439" y="-315.2" font-family="Courier,monospace" font-size="11.00">entity_sends_message_to_object/2</text>
@@ -426,12 +426,12 @@
 <!-- afferent_coupling_object/2&#45;&gt;entity_sends_message_to_object/2 -->
 <g id="edge12" class="edge">
 <title>afferent_coupling_object/2&#45;&gt;entity_sends_message_to_object/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M847.02,-412.88C820.12,-399.03 780.36,-379.78 744,-367 705.29,-353.39 661.52,-341.98 623.47,-333.27"/>
 <polygon fill="black" stroke="black" points="623.95,-329.79 613.42,-331 622.4,-336.62 623.95,-329.79"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121">
 <text text-anchor="start" x="766" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -439,7 +439,7 @@
 <!-- entity_updates_object_predicate/2 -->
 <g id="node15" class="node">
 <title>entity_updates_object_predicate/2</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L215">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L215">
 <polygon fill="cornsilk" stroke="black" points="854,-331 646,-331 646,-295 854,-295 854,-331"/>
 <text text-anchor="start" x="654" y="-315.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="659" y="-315.2" font-family="Courier,monospace" font-size="11.00">entity_updates_object_predicate/2</text>
@@ -453,12 +453,12 @@
 <!-- afferent_coupling_object/2&#45;&gt;entity_updates_object_predicate/2 -->
 <g id="edge13" class="edge">
 <title>afferent_coupling_object/2&#45;&gt;entity_updates_object_predicate/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M863.23,-412.85C851.01,-399.85 833.45,-381.76 817,-367 805.72,-356.88 792.77,-346.39 781.28,-337.44"/>
 <polygon fill="black" stroke="black" points="783.27,-334.56 773.21,-331.23 779,-340.1 783.27,-334.56"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121">
 <text text-anchor="start" x="827" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -466,12 +466,12 @@
 <!-- afferent_coupling_object/2&#45;&gt;list::length/2 -->
 <g id="edge24" class="edge">
 <title>afferent_coupling_object/2&#45;&gt;list::length/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M794.34,-413.46C703.6,-395.38 555.18,-364.74 417.43,-331.03"/>
 <polygon fill="black" stroke="black" points="418.07,-327.58 407.53,-328.6 416.4,-334.38 418.07,-327.58"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121">
 <text text-anchor="start" x="606" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -493,12 +493,12 @@
 <!-- afferent_coupling_object/2&#45;&gt;list::append/2 -->
 <g id="edge23" class="edge">
 <title>afferent_coupling_object/2&#45;&gt;list::append/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M885.64,-412.88C893.02,-393.86 905.03,-362.91 913.64,-340.7"/>
 <polygon fill="black" stroke="black" points="916.98,-341.78 917.33,-331.19 910.45,-339.24 916.98,-341.78"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L121">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L121">
 <text text-anchor="start" x="902" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -506,12 +506,12 @@
 <!-- abstractness/3&#45;&gt;list::length/2 -->
 <g id="edge26" class="edge">
 <title>abstractness/3&#45;&gt;list::length/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M1011.77,-412.94C991.73,-397.91 960.19,-376.9 929,-367 714.76,-298.98 643.87,-367.74 417.93,-330.9"/>
 <polygon fill="black" stroke="black" points="418.19,-327.4 407.75,-329.19 417.03,-334.3 418.19,-327.4"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134">
 <text text-anchor="start" x="953" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -533,12 +533,12 @@
 <!-- abstractness/3&#45;&gt;list::memberchk/2 -->
 <g id="edge25" class="edge">
 <title>abstractness/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M1044.8,-412.88C1058.16,-393.52 1080.04,-361.79 1095.41,-339.51"/>
 <polygon fill="black" stroke="black" points="1098.35,-341.41 1101.15,-331.19 1092.59,-337.43 1098.35,-341.41"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134">
 <text text-anchor="start" x="1075" y="-369.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -560,12 +560,12 @@
 <!-- abstractness/3&#45;&gt;list::member/2 -->
 <g id="edge27" class="edge">
 <title>abstractness/3&#45;&gt;list::member/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M1032.38,-412.65C1030.33,-383.28 1021.59,-324.12 985,-295 863.32,-198.17 448.3,-241.7 276.74,-212.84"/>
 <polygon fill="black" stroke="black" points="277.25,-209.37 266.78,-211.03 275.99,-216.26 277.25,-209.37"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L134">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L134">
 <text text-anchor="start" x="1012" y="-310.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -573,12 +573,12 @@
 <!-- unvisited_ancestor/4&#45;&gt;list::member/2 -->
 <g id="edge28" class="edge">
 <title>unvisited_ancestor/4&#45;&gt;list::member/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M105.03,-294.88C127.04,-275.09 163.42,-242.38 188.26,-220.05"/>
 <polygon fill="black" stroke="black" points="190.79,-222.48 195.89,-213.19 186.11,-217.27 190.79,-222.48"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180">
 <text text-anchor="start" x="155" y="-251.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -597,12 +597,12 @@
 <!-- unvisited_ancestor/4&#45;&gt;^^ancestor/4 -->
 <g id="edge18" class="edge">
 <title>unvisited_ancestor/4&#45;&gt;^^ancestor/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M86,-294.88C86,-276.04 86,-245.47 86,-223.3"/>
 <polygon fill="black" stroke="black" points="89.5,-223.19 86,-213.19 82.5,-223.19 89.5,-223.19"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L180">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L180">
 <text text-anchor="start" x="86" y="-251.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -610,7 +610,7 @@
 <!-- external_call/4 -->
 <g id="node12" class="node">
 <title>external_call/4</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190">
 <polygon fill="cornsilk" stroke="black" points="393.5,-213 284.5,-213 284.5,-177 393.5,-177 393.5,-213"/>
 <text text-anchor="start" x="293" y="-197.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="298" y="-197.2" font-family="Courier,monospace" font-size="11.00">external_call/4</text>
@@ -624,12 +624,12 @@
 <!-- unvisited_call/3&#45;&gt;external_call/4 -->
 <g id="edge14" class="edge">
 <title>unvisited_call/3&#45;&gt;external_call/4</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="calls">
 <path fill="none" stroke="black" d="M245.23,-294.88C263.83,-275.27 294.48,-242.95 315.65,-220.63"/>
 <polygon fill="black" stroke="black" points="318.36,-222.85 322.7,-213.19 313.28,-218.03 318.36,-222.85"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185">
 <text text-anchor="start" x="287" y="-251.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -637,12 +637,12 @@
 <!-- unvisited_call/3&#45;&gt;list::member/2 -->
 <g id="edge29" class="edge">
 <title>unvisited_call/3&#45;&gt;list::member/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="calls">
 <path fill="none" stroke="black" d="M226.93,-294.88C224.66,-276.04 220.97,-245.47 218.3,-223.3"/>
 <polygon fill="black" stroke="black" points="221.75,-222.69 217.07,-213.19 214.8,-223.53 221.75,-222.69"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L185">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L185">
 <text text-anchor="start" x="222" y="-251.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -650,7 +650,7 @@
 <!-- external_call_/3 -->
 <g id="node13" class="node">
 <title>external_call_/3</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L198">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L198">
 <polygon fill="cornsilk" stroke="black" points="264,-95 150,-95 150,-59 264,-59 264,-95"/>
 <text text-anchor="start" x="158" y="-79.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="163" y="-79.2" font-family="Courier,monospace" font-size="11.00">external_call_/3</text>
@@ -664,12 +664,12 @@
 <!-- external_call/4&#45;&gt;external_call_/3 -->
 <g id="edge15" class="edge">
 <title>external_call/4&#45;&gt;external_call_/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="calls">
 <path fill="none" stroke="black" d="M319.52,-176.88C297,-157.09 259.78,-124.38 234.36,-102.05"/>
 <polygon fill="black" stroke="black" points="236.38,-99.16 226.56,-95.19 231.76,-104.42 236.38,-99.16"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190">
 <text text-anchor="start" x="276" y="-133.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -688,12 +688,12 @@
 <!-- external_call/4&#45;&gt;^^entity_calls/3 -->
 <g id="edge19" class="edge">
 <title>external_call/4&#45;&gt;^^entity_calls/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="calls">
 <path fill="none" stroke="black" d="M339,-176.88C339,-158.04 339,-127.47 339,-105.3"/>
 <polygon fill="black" stroke="black" points="342.5,-105.19 339,-95.19 335.5,-105.19 342.5,-105.19"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L190">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L190">
 <text text-anchor="start" x="339" y="-133.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -712,12 +712,12 @@
 <!-- external_call/4&#45;&gt;^^entity_updates/3 -->
 <g id="edge20" class="edge">
 <title>external_call/4&#45;&gt;^^entity_updates/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L194" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L194" xlink:title="calls">
 <path fill="none" stroke="black" d="M359.36,-176.88C383.01,-157.01 422.16,-124.1 448.74,-101.76"/>
 <polygon fill="black" stroke="black" points="451.15,-104.3 456.55,-95.19 446.65,-98.94 451.15,-104.3"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L194" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L194">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L194" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L194">
 <text text-anchor="start" x="412" y="-133.8" font-family="Courier,monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -725,7 +725,7 @@
 <!-- entity_score//2 -->
 <g id="node16" class="node">
 <title>entity_score//2</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/071a8ea54f71195e9aec1568b51726f3a39ac6b5/tools/code_metrics/coupling_metric.lgt#L227">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00ea0ef7ab8123e2100dcb8b4438acc57114cd01/tools/code_metrics/coupling_metric.lgt#L227">
 <polygon fill="cornsilk" stroke="black" points="423.5,-685 314.5,-685 314.5,-649 423.5,-649 423.5,-685"/>
 <text text-anchor="start" x="323" y="-669.8" font-family="Courier,monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="328" y="-669.2" font-family="Courier,monospace" font-size="11.00">entity_score//2</text>
