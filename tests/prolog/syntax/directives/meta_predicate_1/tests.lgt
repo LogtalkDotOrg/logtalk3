@@ -36,7 +36,7 @@ mp2(Closure, Argument) :-
 		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2021-11-12,
-		comment is 'Unit tests for the de facto Prolog standard meta_predicate/1 directive.'
+		comment is 'Unit tests for the de facto Prolog standard meta_predicate/1 directive syntax.'
 	]).
 
 	test(meta_predicate_1_goal, true(Template == mp1(0))) :-

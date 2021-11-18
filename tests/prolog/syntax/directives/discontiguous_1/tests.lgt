@@ -32,7 +32,7 @@
 		version is 0:0:0,
 		author is 'Paulo Moura',
 		date is 2021-11-11,
-		comment is 'Unit tests for the ISO Prolog standard discontiguous/1 directive.'
+		comment is 'Unit tests for the ISO Prolog standard discontiguous/1 directive syntax.'
 	]).
 
 :- end_object.

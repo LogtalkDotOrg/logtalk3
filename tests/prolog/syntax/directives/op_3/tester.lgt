@@ -19,31 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% test all possible syntaxes for the directive
-:- multifile(a/0).
-:- multifile((b/1, c/2)).
-:- multifile([d/3, e/4]).
-
-
-:- object(tests,
-	extends(lgtunit)).
-
-	:- info([
-		version is 0:1:0,
-		author is 'Paulo Moura',
-		date is 2021-11-11,
-		comment is 'Unit tests for the ISO Prolog standard multifile/1 directive syntax.'
-	]).
-
-	test(multifile_1_single) :-
-		{predicate_property(a, (multifile))}.
-
-	test(multifile_1_conjunction) :-
-		{predicate_property(b(_), (multifile)),
-		 predicate_property(c(_,_), (multifile))}.
-
-	test(multifile_1_list) :-
-		{predicate_property(d(_,_,_), (multifile)),
-		 predicate_property(e(_,_,_,_), (multifile))}.
-
-:- end_object.
+:- initialization((
+	set_logtalk_flag(report, warnings),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
+)).

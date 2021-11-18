@@ -32,7 +32,7 @@
 		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2021-11-11,
-		comment is 'Unit tests for the ISO Prolog standard dynamic/1 directive.'
+		comment is 'Unit tests for the ISO Prolog standard dynamic/1 directive syntax.'
 	]).
 
 	test(dynamic_1_single) :-

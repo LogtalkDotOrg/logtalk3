@@ -135,7 +135,7 @@ Tests
 -----
 
 * ADDED: Tests for the valid syntaxes of the Prolog standard `dynamic/1`,
-`discontiguous/1`, `meta_predicate/1`, and `multifile/1` directives.
+`discontiguous/1`, `meta_predicate/1`, `multifile/1`, and `op/3` directives.
 
 * ADDED: Tests for the Prolog standard `discontiguous/1`, `ensure_loaded/1`,
 `include/1`, `initialization/1`, `multifile/1`, and `op/3` directives.
