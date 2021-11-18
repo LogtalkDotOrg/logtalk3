@@ -48,7 +48,8 @@
 
 	test(lgt_format_2_write_variable, true((Chars = ['_', Char| _], Char \== '_'))) :-
 		^^set_text_output(''),
-		{format("~w", [_])},
+		A = A,	% avoid singleton warnings
+		{format("~w", [A])},
 		^^text_output_contents(Chars).
 
 	test(lgt_format_2_quoted, true(Assertion)) :-
@@ -58,7 +59,8 @@
 
 	test(lgt_format_2_quoted_variable, true((Chars = ['_', Char| _], Char \== '_'))) :-
 		^^set_text_output(''),
-		{format("~q", [_])},
+		A = A,	% avoid singleton warnings
+		{format("~q", [A])},
 		^^text_output_contents(Chars).
 
 	test(lgt_format_2_canonical, true(Assertion)) :-

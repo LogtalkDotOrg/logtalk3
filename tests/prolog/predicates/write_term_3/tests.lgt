@@ -305,16 +305,18 @@
 		{writeq(out, 5 rem 3)},
 		^^text_output_assertion(out, '5 rem 3', Assertion).
 
-	% writing of variables withoiut using numbervars/1 or variable_names/1 options
+	% writing of variables without using numbervars/1 or variable_names/1 options
 
 	test(lgt_write_term_3_57, true((Chars = ['_', Char| _], Char \== '_'))) :-
 		^^set_text_output(''),
-		{write(_)},
+		A = A,	% avoid singleton warnings
+		{write(A)},
 		^^text_output_contents(Chars).
 
 	test(lgt_write_term_3_58, true((Chars = ['_', Char| _], Char \== '_'))) :-
 		^^set_text_output(''),
-		{writeq(_)},
+		A = A,	% avoid singleton warnings
+		{writeq(A)},
 		^^text_output_contents(Chars).
 
 	% check detection of invalid options
