@@ -137,8 +137,8 @@ Tests
 * ADDED: Tests for the valid syntaxes of the Prolog standard `dynamic/1`,
 `discontiguous/1`, `meta_predicate/1`, and `multifile/1` directives.
 
-* ADDED: Tests for the Prolog standard `ensure_loaded/1`, `include/1`, and
-`initialization/1` directives.
+* ADDED: Tests for the Prolog standard `ensure_loaded/1`, `include/1`,
+`initialization/1`, and `multifile/1` directives.
 
 * ADDED: Tests for the Prolog standard compound term syntax.
 
