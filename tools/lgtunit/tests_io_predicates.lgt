@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-05-17,
+		date is 2021-11-18,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -67,6 +67,20 @@
 		^^text_output_assertion(alias, foo, Assertion),
 		^^clean_text_output.
 
+	% set_text_output/1 + text_output_contents/1 + clean_text_output/0 tests
+
+	test(text_output_03, deterministic(Contents == [f,o,o])) :-
+		^^set_text_output(foo),
+		^^text_output_contents(Contents),
+		^^clean_text_output.
+
+	% set_text_output/2 + text_output_contents/2 + clean_text_output/0 tests
+
+	test(text_output_04, deterministic(Contents == [f,o,o])) :-
+		^^set_text_output(alias, foo),
+		^^text_output_contents(alias, Contents),
+		^^clean_text_output.
+
 	% set_binary_output/1 + check_binary_output/1 + clean_text_output/0 tests
 
 	test(binary_output_01, deterministic) :-
@@ -93,6 +107,20 @@
 	test(binary_output_04, deterministic(Assertion)) :-
 		^^set_binary_output(alias, [65,66,67]),
 		^^binary_output_assertion(alias, [65,66,67], Assertion),
+		^^clean_binary_output.
+
+	% set_binary_output/1 + binary_output_contents/1 + clean_binary_output/0 tests
+
+	test(binary_output_05, deterministic(Bytes == [65,66,67])) :-
+		^^set_binary_output([65,66,67]),
+		^^binary_output_contents(Bytes),
+		^^clean_binary_output.
+
+	% set_binary_output/2 + binary_output_contents/2 + clean_text_output/0 tests
+
+	test(binary_output_06, deterministic(Bytes == [65,66,67])) :-
+		^^set_binary_output(alias, [65,66,67]),
+		^^binary_output_contents(alias, Bytes),
 		^^clean_binary_output.
 
 	% set_text_input/1 + check_text_input/1 + clean_text_input/0 tests

@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 10:4:0
-| **Date:** 2021-10-03
+| **Version:** 10:5:0
+| **Date:** 2021-11-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -1465,6 +1465,75 @@ Returns an assertion for checking that the temporary file being written have the
 
 .. raw:: html
 
+   <div id="text_output_contents/3"> </div>
+
+.. index:: text_output_contents/3
+.. _lgtunit/0::text_output_contents/3:
+
+``text_output_contents/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the contents of the temporary file (open with the given options and alias) being written.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``text_output_contents(Alias,Contents,Options)``
+| **Mode and number of proofs:**
+|    ``text_output_contents(+atom,-list(character),+list(stream_option))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="text_output_contents/2"> </div>
+
+.. index:: text_output_contents/2
+.. _lgtunit/0::text_output_contents/2:
+
+``text_output_contents/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the contents of the temporary file (open with default options and alias) being written.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``text_output_contents(Alias,Contents)``
+| **Mode and number of proofs:**
+|    ``text_output_contents(+atom,-list(character))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="text_output_contents/1"> </div>
+
+.. index:: text_output_contents/1
+.. _lgtunit/0::text_output_contents/1:
+
+``text_output_contents/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the contents of the temporary file being written.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``text_output_contents(Contents)``
+| **Mode and number of proofs:**
+|    ``text_output_contents(-list(character))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="clean_text_output/0"> </div>
 
 .. index:: clean_text_output/0
@@ -1641,6 +1710,52 @@ Returns an assertion for checking that the temporary file have the expected bina
 |    ``binary_output_assertion(Bytes,Assertion)``
 | **Mode and number of proofs:**
 |    ``binary_output_assertion(+list(byte),--callable)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="binary_output_contents/2"> </div>
+
+.. index:: binary_output_contents/2
+.. _lgtunit/0::binary_output_contents/2:
+
+``binary_output_contents/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the binary contents of the temporary file (referenced by the given alias) being written.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_output_contents(Alias,Bytes)``
+| **Mode and number of proofs:**
+|    ``binary_output_contents(+atom,-list(byte))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="binary_output_contents/1"> </div>
+
+.. index:: binary_output_contents/1
+.. _lgtunit/0::binary_output_contents/1:
+
+``binary_output_contents/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the binary contents of the temporary file being written.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binary_output_contents(Bytes)``
+| **Mode and number of proofs:**
+|    ``binary_output_contents(-list(byte))`` - ``one``
 
 
 ------------

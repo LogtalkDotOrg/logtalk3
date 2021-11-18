@@ -91,6 +91,9 @@ Tools
 * CHANGED: The `debugger` tool loader file to also load the `dump_trace`
 object.
 
+* ADDED: Predicates `text_output_contents/1-3` and `binary_output_contents/1-2`
+to the `lgtunit` tool.
+
 * ADDED: Support for defining, saving, and restoring a simple form of packs
 virtual environments.
 

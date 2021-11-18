@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 10:4:0,
+		version is 10:5:0,
 		author is 'Paulo Moura',
-		date is 2021-10-03,
+		date is 2021-11-18,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -487,6 +487,27 @@
 		argnames is ['Contents', 'Assertion']
 	]).
 
+	:- protected(text_output_contents/3).
+	:- mode(text_output_contents(+atom, -list(character), +list(stream_option)), one).
+	:- info(text_output_contents/3, [
+		comment is 'Returns the contents of the temporary file (open with the given options and alias) being written.',
+		argnames is ['Alias', 'Contents', 'Options']
+	]).
+
+	:- protected(text_output_contents/2).
+	:- mode(text_output_contents(+atom, -list(character)), one).
+	:- info(text_output_contents/2, [
+		comment is 'Returns the contents of the temporary file (open with default options and alias) being written.',
+		argnames is ['Alias', 'Contents']
+	]).
+
+	:- protected(text_output_contents/1).
+	:- mode(text_output_contents(-list(character)), one).
+	:- info(text_output_contents/1, [
+		comment is 'Returns the contents of the temporary file being written.',
+		argnames is ['Contents']
+	]).
+
 	:- protected(clean_text_output/0).
 	:- mode(clean_text_output, one).
 	:- info(clean_text_output/0, [
@@ -540,6 +561,20 @@
 	:- info(binary_output_assertion/2, [
 		comment is 'Returns an assertion for checking that the temporary file have the expected binary contents.',
 		argnames is ['Bytes', 'Assertion']
+	]).
+
+	:- protected(binary_output_contents/2).
+	:- mode(binary_output_contents(+atom, -list(byte)), one).
+	:- info(binary_output_contents/2, [
+		comment is 'Returns the binary contents of the temporary file (referenced by the given alias) being written.',
+		argnames is ['Alias', 'Bytes']
+	]).
+
+	:- protected(binary_output_contents/1).
+	:- mode(binary_output_contents(-list(byte)), one).
+	:- info(binary_output_contents/1, [
+		comment is 'Returns the binary contents of the temporary file being written.',
+		argnames is ['Bytes']
 	]).
 
 	:- protected(clean_binary_output/0).
@@ -2664,6 +2699,28 @@
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output.
 
+	text_output_contents(Alias, Contents, Options) :-
+		close(Alias),
+		os::absolute_file_name('test_output.text', Path),
+		open(Path, read, InputStream, Options),
+		get_text_contents(InputStream, Contents),
+		clean_text_output.
+
+	text_output_contents(Alias, Contents) :-
+		close(Alias),
+		os::absolute_file_name('test_output.text', Path),
+		open(Path, read, InputStream),
+		get_text_contents(InputStream, Contents),
+		clean_text_output.
+
+	text_output_contents(Contents) :-
+		current_output(OutputStream),
+		close(OutputStream),
+		os::absolute_file_name('test_output.text', Path),
+		open(Path, read, InputStream),
+		get_text_contents(InputStream, Contents),
+		clean_text_output.
+
 	clean_text_output :-
 		clean_file('test_output.text', _).
 
@@ -2711,6 +2768,21 @@
 		os::absolute_file_name('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
+		clean_binary_output.
+
+	binary_output_contents(Alias, Contents) :-
+		close(Alias),
+		os::absolute_file_name('test_output.binary', Path),
+		open(Path, read, InputStream, [type(binary)]),
+		get_binary_contents(InputStream, Contents),
+		clean_binary_output.
+
+	binary_output_contents(Contents) :-
+		current_output(OutputStream),
+		close(OutputStream),
+		os::absolute_file_name('test_output.binary', Path),
+		open(Path, read, InputStream, [type(binary)]),
+		get_binary_contents(InputStream, Contents),
 		clean_binary_output.
 
 	clean_binary_output :-
@@ -2816,6 +2888,15 @@
 			get_chars(Stream, Rest, NextCountdown)
 		).
 
+	get_text_contents(Stream, Chars) :-
+		get_char(Stream, Char),
+		(	Char == end_of_file ->
+			Chars = [],
+			close(Stream)
+		;	Chars = [Char| Rest],
+			get_text_contents(Stream, Rest)
+		).
+
 	write_binary_contents([], _).
 	write_binary_contents([Byte| Bytes], Stream) :-
 		put_byte(Stream, Byte),
@@ -2836,6 +2917,15 @@
 		;	Bytes = [Byte| Rest],
 			NextCountdown is Countdown - 1,
 			get_bytes(Stream, Rest, NextCountdown)
+		).
+
+	get_binary_contents(Stream, Bytes) :-
+		get_byte(Stream, Byte),
+		(	Byte == -1 ->
+			close(Stream),
+			Bytes = []
+		;	Bytes = [Byte| Rest],
+			get_binary_contents(Stream, Rest)
 		).
 
 	closed_input_stream(ReadStream, Options) :-
