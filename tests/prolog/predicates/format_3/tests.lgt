@@ -46,10 +46,20 @@
 		{format(out, "~w", ['ABC'])},
 		^^text_output_assertion(out, 'ABC', Assertion).
 
+	test(lgt_format_3_write_variable, true((Chars = ['_', Char| _], Char \== '_'))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~w", [_])},
+		^^text_output_contents(out, Chars).
+
 	test(lgt_format_3_quoted, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~q", ['ABC'])},
 		^^text_output_assertion(out, '\'ABC\'', Assertion).
+
+	test(lgt_format_3_quoted_variable, true((Chars = ['_', Char| _], Char \== '_'))) :-
+		^^set_text_output(out, ''),
+		{format(out, "~q", [_])},
+		^^text_output_contents(out, Chars).
 
 	test(lgt_format_3_canonical, true(Assertion)) :-
 		^^set_text_output(out, ''),
