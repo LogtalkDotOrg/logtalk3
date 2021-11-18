@@ -137,7 +137,10 @@ Tests
 * ADDED: Tests for the valid syntaxes of the Prolog standard `dynamic/1`,
 `discontiguous/1`, `meta_predicate/1`, and `multifile/1` directives.
 
-* ADDED: Tests for Prolog standard compound term syntax.
+* ADDED: Tests for the Prolog standard `ensure_loaded/1` and `include/1`
+directives.
+
+* ADDED: Tests for the Prolog standard compound term syntax.
 
 * ADDED: Additional tests for the `writeq/2` predicate for atoms that require
 quoting to be input back correctly.
