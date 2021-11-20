@@ -79,6 +79,7 @@
 <li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">format</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#portability">Portability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -159,14 +160,27 @@
 facto standard <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code> predicates are made available by the
 supported backend Prolog systems. Some system provide these predicates
 as built-in predicates while others make them available using a library
-that must be explicitly loaded. Note that some Prolog systems provide
-only a subset of the expected format specifiers. Notably, table related
-format specifiers are only fully supported by a few systems. For wide
-portability, use atoms for the format specifier argument.</p>
+that must be explicitly loaded.</p>
 <p>Calls to the library predicates are inlined when compiled with the
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on for most of the backends. When that’s the
 case, there is no overhead compared with calling the abstracted
 predicates directly.</p>
+<section id="portability">
+<h2>Portability<a class="headerlink" href="#portability" title="Permalink to this headline"></a></h2>
+<p>Some Prolog systems provide only a subset of the expected format
+specifiers. Notably, table related format specifiers are only fully
+supported by a few systems. See the section below on testing.</p>
+<p>Only some of the supported Prolog backends provide implementations of
+the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code> predicates that allow using not only an atom or a
+list of character codes for the format string (as de facto standard) but
+also using a list of characters. These currently include ECLiPSe, LVM,
+Scryer Prolog, SICStus Prolog, SWI-Prolog, and YAP. Therefore, when wide
+portability is sought, atoms must be used for the format specifier
+argument. Some systems, like Scryer Prolog and Tau Prolog, only accept a
+list of characters for the format string. In this case, this library
+will convert the atom format string before calling these systems native
+implementations.</p>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>Open the
