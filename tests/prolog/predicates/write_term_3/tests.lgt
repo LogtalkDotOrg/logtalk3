@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:21:0,
+		version is 1:21:1,
 		author is 'Paulo Moura',
-		date is 2021-11-18,
+		date is 2021-11-22,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -307,13 +307,13 @@
 
 	% writing of variables without using numbervars/1 or variable_names/1 options
 
-	test(lgt_write_term_3_57, true((Chars = ['_', Char| _], Char \== '_'))) :-
+	test(lgt_write_term_3_57, true(Chars = ['_', _| _])) :-
 		^^set_text_output(''),
 		A = A,	% avoid singleton warnings
 		{write(A)},
 		^^text_output_contents(Chars).
 
-	test(lgt_write_term_3_58, true((Chars = ['_', Char| _], Char \== '_'))) :-
+	test(lgt_write_term_3_58, true(Chars = ['_', _| _])) :-
 		^^set_text_output(''),
 		A = A,	% avoid singleton warnings
 		{writeq(A)},
