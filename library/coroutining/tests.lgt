@@ -78,13 +78,16 @@
 	% frozen/2 tests
 
 	test(coroutining_frozen_2_01, true(Goal == true)) :-
+		frozen(1, Goal).
+
+	test(coroutining_frozen_2_02, true(Goal == true)) :-
 		frozen(_, Goal).
 
-	test(coroutining_frozen_2_02, true(term::subterm(write(done),Goal))) :-
+	test(coroutining_frozen_2_03, true(term::subterm(write(done),Goal))) :-
 		freeze(X, write(done)),
 		frozen(X, Goal).
 
-	test(coroutining_frozen_2_03, true) :-
+	test(coroutining_frozen_2_04, true) :-
 		^^set_text_output(''),
 		freeze(X, write(foo)),
 		freeze(X, write(bar)),
@@ -110,6 +113,11 @@
 
 	test(coroutining_when_2_06, true(Y == 2)) :-
 		when(nonvar(X), unify_y(Y)), X = 1.
+
+	test(coroutining_when_2_07, true(X-Y == 1-2)) :-
+		when(ground(Z), X = 1),
+		when(ground(Z), Y = 2),
+		Z = 3.
 
 	% auxiliary predicates
 
