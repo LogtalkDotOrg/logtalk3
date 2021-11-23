@@ -148,6 +148,9 @@ Tests
 * ADDED: Additional tests for the `writeq/2` predicate for atoms that require
 quoting to be input back correctly.
 
+* ADDED: Tests for the `write_term/3` predicate for writing of compound terms
+with `(,)/2` arguments.
+
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.
 
