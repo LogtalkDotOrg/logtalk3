@@ -54,6 +54,9 @@ passed by other scripts (e.g. `logtalk_tester` script) that call it.
 predicate to be called from within objects and categories without requiring
 overriding its meta-predicate template.
 
+* FIXED: The YAP adapter file definition of the internal predicate
+`'$lgt_load_prolog_file'/1`.
+
 Documentation
 -------------
 
