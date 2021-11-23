@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-11-17,
+		date is 2021-11-23,
 		comment is 'Unit tests for the "coroutining" library.'
 	]).
 
@@ -68,15 +68,28 @@
 	test(coroutining_freeze_2_03, true(Y == 2)) :-
 		freeze(X, unify_y(Y)), X = 1.
 
+	test(coroutining_freeze_2_04, true(Assertion)) :-
+		^^set_text_output(''),
+		freeze(X, write(foo)),
+		freeze(X, write(bar)),
+		X = 1,
+		^^text_output_assertion('foobar', Assertion).
+
 	% frozen/2 tests
 
 	test(coroutining_frozen_2_01, true(Goal == true)) :-
-		freeze(_, _ = 2),
 		frozen(_, Goal).
 
-	test(coroutining_frozen_2_02, true(nonvar(Goal))) :-
+	test(coroutining_frozen_2_02, true(term::subterm(write(done),Goal))) :-
 		freeze(X, write(done)),
 		frozen(X, Goal).
+
+	test(coroutining_frozen_2_03, true) :-
+		^^set_text_output(''),
+		freeze(X, write(foo)),
+		freeze(X, write(bar)),
+		^^assertion(term::subterm(write(foo),Goal)),
+		^^assertion(term::subterm(write(bar),Goal)).
 
 	% when/2 tests
 
