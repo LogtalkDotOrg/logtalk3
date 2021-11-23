@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Paulo Moura',
-		date is 2021-11-18,
+		date is 2021-11-23,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -69,14 +69,14 @@
 
 	% set_text_output/1 + text_output_contents/1 + clean_text_output/0 tests
 
-	test(text_output_03, deterministic(Contents == [f,o,o])) :-
+	test(text_output_05, deterministic(Contents == [f,o,o])) :-
 		^^set_text_output(foo),
 		^^text_output_contents(Contents),
 		^^clean_text_output.
 
 	% set_text_output/2 + text_output_contents/2 + clean_text_output/0 tests
 
-	test(text_output_04, deterministic(Contents == [f,o,o])) :-
+	test(text_output_06, deterministic(Contents == [f,o,o])) :-
 		^^set_text_output(alias, foo),
 		^^text_output_contents(alias, Contents),
 		^^clean_text_output.
