@@ -81,23 +81,23 @@ Some Logtalk features are optional and require compatible support for specific
 (and sometimes not yet standard) features by the backend Prolog compilers. The
 following table summarizes the availability of these features:
 
-|  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  
-| :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
-|  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |  
-|  Ciao Prolog     |      yes      |       no      |       no      |       no      |       no      |  
-|  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |  
-|  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |  
-|  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |  
-|  JIProlog        |       no      |       no      |      yes      |       no      |       no      |  
-|  LVM             |       no      |       no      |      yes      |       no      |       no      |  
-|  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |  
-|  Scryer Prolog   |       no      |       no      |       no      |       no      |       no      |  
-|  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |  
-|  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |  
-|  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |  
-|  Trealla Prolog  |       no      |       no      |      yes      |       no      |       no      |  
-|  XSB             |      yes      |       no      |       no      |       no      |       no      |  
-|  YAP             |      yes      |      yes      |      yes      |       no      |       no      |  
+|  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  Unbound Ints |  
+| :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
+|  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |       no      |  
+|  Ciao Prolog     |      yes      |       no      |       no      |       no      |       no      |       no      |  
+|  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |       no      |  
+|  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |      yes      |  
+|  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |       no      |  
+|  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |  
+|  LVM             |       no      |       no      |      yes      |       no      |       no      |      yes      |  
+|  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |  
+|  Scryer Prolog   |       no      |       no      |       no      |       no      |       no      |      yes      |  
+|  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
+|  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |  
+|  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |       no      |  
+|  Trealla Prolog  |       no      |       no      |      yes      |       no      |       no      |      yes      |  
+|  XSB             |      yes      |       no      |       no      |       no      |       no      |       no      |  
+|  YAP             |      yes      |      yes      |      yes      |       no      |       no      |      yes      |  
 
 A value of "yes" means at least partial support (but some limitations may be
 present and a recent version of the Prolog system may be required). A value
@@ -105,6 +105,18 @@ of "no" may simply mean that the backend Prolog compiler either does not
 provide a *compatible* implementation of the required features or that the
 implementation is too buggy to be used. For "partial" values, see the Prolog
 system notes.
+
+Support for these features (with the exception of unbound integer arithmetic)
+can be tested using the `tabling`, `coinduction`, `unicode`, `engines`, and
+`threads` Logtalk flags. For some systems, such as YAP, support for some
+features may depend on the options used when the system was compiled. Some
+other systems, such as ECLiPSe, only recently implemented features such as
+threads. Thus, the best practice is to always test for a feature instead of
+simply testing for a Prolog backend.
+
+Support for unbound integer arithmetic can be checked using the `bounded`
+Prolog flag. This feature is not strictly required by the compiler/runtime
+but it's necessary for some libraries such as `cbor`.
 
 
 template adapter file
