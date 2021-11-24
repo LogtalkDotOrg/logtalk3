@@ -1,4 +1,4 @@
-.TH cxlgt 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH cxlgt 1 "November 24, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
 
 .SH NAME
 cxlgt \- Logtalk integration script for CxProlog
@@ -8,7 +8,7 @@ cxlgt \- Logtalk integration script for CxProlog
 [\fB--goal \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBcxlgt\fR is a Logtalk integration script for CxProlog. It automatically loads the CxProlog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories.
+\fBcxlgt\fR is a Logtalk integration script for CxProlog. It automatically loads the CxProlog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBcxprolog\fR executable \fB--script\fR option to load the Logtalk files. It passes any options to the \fBcxprolog\fR executable; see the CxProlog documention for the available options.
 
 .SH OPTIONS
 .TP

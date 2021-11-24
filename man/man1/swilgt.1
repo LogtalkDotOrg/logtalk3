@@ -1,4 +1,4 @@
-.TH swilgt 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH swilgt 1 "November 24, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
 
 .SH NAME
 swilgt \- Logtalk integration script for SWI-Prolog
@@ -8,7 +8,7 @@ swilgt \- Logtalk integration script for SWI-Prolog
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBswilgt\fR is a Logtalk integration script for SWI-Prolog. It automatically loads the SWI-Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories.
+\fBswilgt\fR is a Logtalk integration script for SWI-Prolog. It automatically loads the SWI-Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBswipl\fR executable \fB-s\fR option to load the Logtalk files. It passes any options to the \fBswipl\fR executable; see the SWI-Prolog documention for the available options.
 
 .SH OPTIONS
 .TP

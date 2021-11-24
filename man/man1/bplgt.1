@@ -1,4 +1,4 @@
-.TH bplgt 1 "June 10, 2021" "Logtalk 3.48.0" "Logtalk Documentation"
+.TH bplgt 1 "November 24, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
 
 .SH NAME
 bplgt \- Logtalk integration script for B-Prolog
@@ -8,7 +8,7 @@ bplgt \- Logtalk integration script for B-Prolog
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBbplgt\fR is a Logtalk integration script for B-Prolog. It automatically loads the B-Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories.
+\fBbplgt\fR is a Logtalk integration script for B-Prolog. It automatically loads the B-Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBbp\fR executable \fB-i\fR option to load the Logtalk files. It passes any options to the \fBbp\fR executable; see the B-Prolog documention for the available options.
 
 .SH OPTIONS
 .TP

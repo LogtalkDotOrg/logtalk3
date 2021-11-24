@@ -1,4 +1,4 @@
-.TH xsblgt 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH xsblgt 1 "November 24, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
 
 .SH NAME
 xsblgt \- Logtalk integration script for XSB
@@ -8,7 +8,7 @@ xsblgt \- Logtalk integration script for XSB
 [\fB-e \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBxsblgt\fR is a Logtalk integration script for XSB. It automatically loads the XSB adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories.
+\fBxsblgt\fR is a Logtalk integration script for XSB. It automatically loads the XSB adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBxsb\fR executable \fB-e\fR option to load the Logtalk files. It passes any options to the \fBxsb\fR executable; see the XSB documention for the available options.
 
 .SH OPTIONS
 .TP

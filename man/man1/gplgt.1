@@ -1,4 +1,4 @@
-.TH gplgt 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH gplgt 1 "November 24, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
 
 .SH NAME
 gplgt \- Logtalk integration script for GNU Prolog
@@ -8,7 +8,7 @@ gplgt \- Logtalk integration script for GNU Prolog
 [\fB--query-goal \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBgplgt\fR is a Logtalk integration script for GNU Prolog. It automatically loads the GNU Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories.
+\fBgplgt\fR is a Logtalk integration script for GNU Prolog. It automatically loads the GNU Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBgprolog\fR executable \fB--entry-goal\fR option to load the Logtalk files. It passes any options to the \fBgprolog\fR executable; see the GNU Prolog documention for the available options.
 
 .SH OPTIONS
 .TP

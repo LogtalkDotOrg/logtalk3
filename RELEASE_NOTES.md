@@ -66,6 +66,8 @@ tool documentation.
 * IMPROVED: Documentation of the `logtalk` built-in object `trace_event/2`
 and `debug_handler/2` predicates.
 
+* IMPROVED: Man pages of the integration scripts.
+
 * UPDATED: The documentation of the `logtalk_library_path/2` predicate for
 the `logtalk_packs` library alias.
 
