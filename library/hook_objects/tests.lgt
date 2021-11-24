@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:3,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-07-26,
+		date is 2021-11-24,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -233,6 +233,16 @@ goal_expansion(X = 1, X = 2).
 
 	test(object_wrapper_hook_02, true(prolog_source_file_02<<b)) :-
 		logtalk_load('test_files/prolog_source_file_02', [hook(object_wrapper_hook)]).
+
+	% tests for the object_wrapper_hook/1 object | term_expansion/2
+
+	test(object_wrapper_hook_1_01, true(current_object(prolog_source_file_01))) :-
+		logtalk_load('test_files/test_protocol'),
+		logtalk_load('test_files/prolog_source_file_01', [hook(object_wrapper_hook(test_protocol))]).
+
+	test(object_wrapper_hook_1_02, true(prolog_source_file_02::b)) :-
+		logtalk_load('test_files/test_protocol'),
+		logtalk_load('test_files/prolog_source_file_02', [hook(object_wrapper_hook(test_protocol))]).
 
 	% tests for the suppress_goal_hook object | goal_expansion/2
 
