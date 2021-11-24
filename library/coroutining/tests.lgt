@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2021-11-23,
+		date is 2021-11-24,
 		comment is 'Unit tests for the "coroutining" library.'
 	]).
 
@@ -118,6 +118,9 @@
 		when(ground(Z), X = 1),
 		when(ground(Z), Y = 2),
 		Z = 3.
+
+	cleanup :-
+		^^clean_text_output.
 
 	% auxiliary predicates
 
