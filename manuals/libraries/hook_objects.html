@@ -256,11 +256,12 @@ to instantiate the parameter to the name of the module. For example:</p>
 </section>
 <section id="wrap-the-contents-of-a-plain-prolog-file-as-an-object">
 <h3>Wrap the contents of a plain Prolog file as an object<a class="headerlink" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object" title="Permalink to this headline"></a></h3>
-<p>Load the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook.lgt</span></code>, which defines the parametric hook
-object <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code>. Use it to wrap the contents of a plain
-Prolog file as an object named after the file. Can be used to apply
-Logtalk developer tools to plain Prolog code or when porting Prolog
-application to Logtalk. For example:</p>
+<p>Load the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook.lgt</span></code>, which defines the
+<code class="docutils literal notranslate"><span class="pre">object_wrapper_hook/0-1</span></code> hook objects. Use them to wrap the contents
+of a plain Prolog file as an object named after the file, optionally
+implementing a protocol. Can be used to apply Logtalk developer tools to
+plain Prolog code or when porting Prolog application to Logtalk. For
+example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;plain.pl&#39;</span>, [hook(object_wrapper_hook)]).
 ...
 
@@ -268,9 +269,23 @@ application to Logtalk. For example:</p>
 yes
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> sets the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag to
-<code class="docutils literal notranslate"><span class="pre">allow</span></code> for the generated object. This enables calling the predicates
-using the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> context-switching control construct.</p>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;world_1.pl&#39;</span>, [hook(object_wrapper_hook(some_protocol))]).
+...
+
+| <span class="o">?-</span> <span class="k">current_object</span>(world_1).
+yes
+
+| <span class="o">?-</span> <span class="k">implements_protocol</span>(world_1, <span class="nv">Protocol</span>).
+<span class="nv">Protocol</span> <span class="o">=</span> some_protocol
+yes
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> object sets the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>
+flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for the generated object. This enables calling the
+predicates using the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> context-switching control construct. But
+it’s usually better to define a protocol for the predicates being
+encapsulated and use instead the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook/1</span></code> object.</p>
 </section>
 <section id="outputting-term-expansion-results-to-a-stream">
 <h3>Outputting term-expansion results to a stream<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream" title="Permalink to this headline"></a></h3>

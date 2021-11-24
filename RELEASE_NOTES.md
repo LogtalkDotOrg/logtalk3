@@ -86,6 +86,9 @@ available the de facto standard `format/2-3` predicates.
 * ADDED: Library `dif` that abstracts how the different backends make
 available the `dif/2` predicate when implemented.
 
+* ADDED: Parametric object `object_wrapper_hook/1` to the `hook_objects`
+library.
+
 * ADDED: Additional tests for the `coroutining` library.
 
 * IMPROVED: Performance of the `arbitrary` library tests.

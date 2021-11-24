@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>write_to_stream_hook(Stream,Options) &mdash; Logtalk APIs v3.52.0-b04 documentation</title>
+  <title>object_wrapper_hook(Protocol) &mdash; Logtalk APIs v3.52.0-b04 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -29,8 +29,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="html" href="html_0.html" />
-    <link rel="prev" title="write_to_stream_hook(Stream)" href="write_to_stream_hook_1.html" />
+    <link rel="next" title="print_goal_hook" href="print_goal_hook_0.html" />
+    <link rel="prev" title="object_wrapper_hook" href="object_wrapper_hook_0.html" />
    
 </head>
 
@@ -93,12 +93,12 @@
 <li class="toctree-l3"><a class="reference internal" href="grammar_rules_hook_0.html">grammar_rules_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="identity_hook_0.html">identity_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="object_wrapper_hook_0.html">object_wrapper_hook</a></li>
-<li class="toctree-l3"><a class="reference internal" href="object_wrapper_hook_1.html">object_wrapper_hook(Protocol)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">object_wrapper_hook(Protocol)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="print_goal_hook_0.html">print_goal_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="prolog_module_hook_1.html">prolog_module_hook(Module)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="suppress_goal_hook_0.html">suppress_goal_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="write_to_stream_hook_1.html">write_to_stream_hook(Stream)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">write_to_stream_hook(Stream,Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="write_to_stream_hook_2.html">write_to_stream_hook(Stream,Options)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><code class="docutils literal notranslate"><span class="pre">html</span></code></a></li>
@@ -174,9 +174,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="library_index.html">Libraries</a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,Options)</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">object_wrapper_hook(Protocol)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/write_to_stream_hook_2.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/object_wrapper_hook_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -184,14 +184,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="write-to-stream-hook-2"><span id="index-0"></span><strong>object</strong></p>
-<section id="write-to-stream-hook-stream-options">
-<h1><code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,Options)</span></code><a class="headerlink" href="#write-to-stream-hook-stream-options" title="Permalink to this headline"></a></h1>
-<p>This hook object writes term-expansion results to a stream using a list of <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> options. The terms are terminated by a period and a new line.</p>
+  <p class="right" id="object-wrapper-hook-1"><span id="index-0"></span><strong>object</strong></p>
+<section id="object-wrapper-hook-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">object_wrapper_hook(Protocol)</span></code><a class="headerlink" href="#object-wrapper-hook-protocol" title="Permalink to this headline"></a></h1>
+<p>Use this object to wrap the contents of a plain Prolog file in an object named after the file that implements the given protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2020-02-16</div>
+<div class="line"><strong>Date:</strong> 2021-11-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -203,6 +203,10 @@
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="expanding_0.html#expanding-0"><span class="std std-ref">expanding</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -242,7 +246,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="backend_adapter_hook_0.html#backend-adapter-hook-0"><span class="std std-ref">backend_adapter_hook</span></a>, <a class="reference internal" href="default_workflow_hook_0.html#default-workflow-hook-0"><span class="std std-ref">default_workflow_hook</span></a>, <a class="reference internal" href="identity_hook_0.html#identity-hook-0"><span class="std std-ref">identity_hook</span></a>, <a class="reference internal" href="grammar_rules_hook_0.html#grammar-rules-hook-0"><span class="std std-ref">grammar_rules_hook</span></a>, <a class="reference internal" href="prolog_module_hook_1.html#prolog-module-hook-1"><span class="std std-ref">prolog_module_hook(Module)</span></a>, <a class="reference internal" href="object_wrapper_hook_0.html#object-wrapper-hook-0"><span class="std std-ref">object_wrapper_hook</span></a>, <a class="reference internal" href="write_to_stream_hook_1.html#write-to-stream-hook-1"><span class="std std-ref">write_to_stream_hook(Stream)</span></a>, <a class="reference internal" href="print_goal_hook_0.html#print-goal-hook-0"><span class="std std-ref">print_goal_hook</span></a>, <a class="reference internal" href="suppress_goal_hook_0.html#suppress-goal-hook-0"><span class="std std-ref">suppress_goal_hook</span></a></p>
+<p><a class="reference internal" href="object_wrapper_hook_0.html#object-wrapper-hook-0"><span class="std std-ref">object_wrapper_hook</span></a>, <a class="reference internal" href="backend_adapter_hook_0.html#backend-adapter-hook-0"><span class="std std-ref">backend_adapter_hook</span></a>, <a class="reference internal" href="default_workflow_hook_0.html#default-workflow-hook-0"><span class="std std-ref">default_workflow_hook</span></a>, <a class="reference internal" href="grammar_rules_hook_0.html#grammar-rules-hook-0"><span class="std std-ref">grammar_rules_hook</span></a>, <a class="reference internal" href="prolog_module_hook_1.html#prolog-module-hook-1"><span class="std std-ref">prolog_module_hook(Module)</span></a>, <a class="reference internal" href="write_to_stream_hook_2.html#write-to-stream-hook-2"><span class="std std-ref">write_to_stream_hook(Stream,Options)</span></a>, <a class="reference internal" href="write_to_stream_hook_1.html#write-to-stream-hook-1"><span class="std std-ref">write_to_stream_hook(Stream)</span></a>, <a class="reference internal" href="print_goal_hook_0.html#print-goal-hook-0"><span class="std std-ref">print_goal_hook</span></a>, <a class="reference internal" href="suppress_goal_hook_0.html#suppress-goal-hook-0"><span class="std std-ref">suppress_goal_hook</span></a></p>
 </div>
 </section>
 </section>
@@ -251,8 +255,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="write_to_stream_hook_1.html" class="btn btn-neutral float-left" title="write_to_stream_hook(Stream)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="html_0.html" class="btn btn-neutral float-right" title="html" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="object_wrapper_hook_0.html" class="btn btn-neutral float-left" title="object_wrapper_hook" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="print_goal_hook_0.html" class="btn btn-neutral float-right" title="print_goal_hook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

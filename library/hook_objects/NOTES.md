@@ -110,10 +110,11 @@ instantiate the parameter to the name of the module. For example:
 
 ### Wrap the contents of a plain Prolog file as an object
 
-Load the `object_wrapper_hook.lgt`, which defines the parametric hook object
-`object_wrapper_hook`. Use it to wrap the contents of a plain Prolog file as an
-object named after the file. Can be used to apply Logtalk developer tools to
-plain Prolog code or when porting Prolog application to Logtalk. For example:
+Load the `object_wrapper_hook.lgt`, which defines the `object_wrapper_hook/0-1`
+hook objects. Use them to wrap the contents of a plain Prolog file as an
+object named after the file, optionally implementing a protocol. Can be used
+to apply Logtalk developer tools to plain Prolog code or when porting Prolog
+application to Logtalk. For example:
 
 	| ?- logtalk_load('plain.pl', [hook(object_wrapper_hook)]).
 	...
@@ -121,9 +122,23 @@ plain Prolog code or when porting Prolog application to Logtalk. For example:
 	| ?- current_object(plain).
 	yes
 
-The `object_wrapper_hook` sets the `context_switching_calls` flag to `allow`
-for the generated object. This enables calling the predicates using the `<</2`
-context-switching control construct.
+Or:
+
+	| ?- logtalk_load('world_1.pl', [hook(object_wrapper_hook(some_protocol))]).
+	...
+
+	| ?- current_object(world_1).
+	yes
+
+	| ?- implements_protocol(world_1, Protocol).
+	Protocol = some_protocol
+	yes
+
+The `object_wrapper_hook` object sets the `context_switching_calls` flag to
+`allow` for the generated object. This enables calling the predicates using
+the `<</2` context-switching control construct. But it's usually better to
+define a protocol for the predicates being encapsulated and use instead the
+`object_wrapper_hook/1` object.
 
 ### Outputting term-expansion results to a stream
 
