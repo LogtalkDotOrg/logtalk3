@@ -82,7 +82,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   DOT diagram files to SVG files conversion script  
-//   Last updated on August 4, 2021
+//   Last updated on November 25, 2021
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -91,7 +91,7 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 	if (FSObject.GetExtensionName(dot_file) == "dot") {
 		WScript.Echo("  converting " + dot_file);
 		var svg_file = WshShell.CurrentDirectory + "\\" + FSObject.GetBaseName(dot_file) + ".svg";
-		WshShell.Run(command + ".exe -Tsvg -o\"" + svg_file + "\" \"" + dot_file + "\"", true);
+		WshShell.Run(command + ".exe -Tsvg -Gfontnames=svg -o\"" + svg_file + "\" \"" + dot_file + "\"", true);
 	}
 }
 
