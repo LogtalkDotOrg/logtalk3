@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-11-12,
+		date is 2021-11-25,
 		comment is 'Unit tests for the "format" library.'
 	]).
 
@@ -35,14 +35,38 @@
 
 	cover(format).
 
-	test(format_format_2_01, true(Assertion)) :-
+	test(format_format_2_atom, true(Assertion)) :-
 		^^set_text_output(''),
 		format('~w~n', [foo]),
 		^^text_output_assertion('foo\n', Assertion).
 
-	test(format_format_3_01, true(Assertion)) :-
+	test(format_format_2_codes, true(Assertion)) :-
+		^^set_text_output(''),
+		atom_codes('~w~n', Codes),
+		format(Codes, [foo]),
+		^^text_output_assertion('foo\n', Assertion).
+
+	test(format_format_2_chars, true(Assertion)) :-
+		^^set_text_output(''),
+		atom_chars('~w~n', Chars),
+		format(Chars, [foo]),
+		^^text_output_assertion('foo\n', Assertion).
+
+	test(format_format_3_atom, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		format(out, '~w~n', [bar]),
+		^^text_output_assertion(out, 'bar\n', Assertion).
+
+	test(format_format_3_codes, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		atom_codes('~w~n', Codes),
+		format(out, Codes, [bar]),
+		^^text_output_assertion(out, 'bar\n', Assertion).
+
+	test(format_format_3_chars, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		atom_chars('~w~n', Chars),
+		format(out, Chars, [bar]),
 		^^text_output_assertion(out, 'bar\n', Assertion).
 
 	cleanup :-
