@@ -1,4 +1,4 @@
-.TH quintuslgt 1 "November 24, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
+.TH quintuslgt 1 "November 25, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
 
 .SH NAME
 quintuslgt \- Logtalk integration script for Quintus Prolog
@@ -7,7 +7,7 @@ quintuslgt \- Logtalk integration script for Quintus Prolog
 .B quintuslgt
 
 .SH DESCRIPTION
-\fBquintuslgt\fR is a Logtalk integration script for Quintus Prolog. It automatically loads the Quintus Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBprolog\fR executable \fB+l\fR option to load the Logtalk files. It passes any options to the \fBprolog\fR executable; see the YAP documention for the available options.
+\fBquintuslgt\fR is a Logtalk integration script for Quintus Prolog. It automatically loads the Quintus Prolog adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBprolog\fR executable \fB+l\fR option to load the Logtalk files. It passes any options to the \fBprolog\fR executable; see the Quintus Prolog documention for the available options.
 
 .SH REQUIREMENTS
 Quintus Prolog 3.3 (or later versions) is required. This integration script looks for a "prolog" executable in the system path.
@@ -38,6 +38,15 @@ The default table of library names and paths.
 Logtalk settings file (for overriding default settings in the adapter files). May not exist.
 .TP
 .BI $LOGTALKUSER/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $HOME/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $XDG_CONFIG_HOME/logtalk/settings.lgt
+Logtalk settings file (for overriding default settings in the adapter files). May not exist.
+.TP
+.BI $HOME/.config/logtalk/settings.lgt
 Logtalk settings file (for overriding default settings in the adapter files). May not exist.
 
 .SH "SEE ALSO"
