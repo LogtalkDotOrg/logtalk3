@@ -23,9 +23,9 @@
 	implements(graph_language_protocol)).
 
 	:- info([
-		version is 3:5:0,
+		version is 3:6:0,
 		author is 'Paulo Moura',
-		date is 2021-08-04,
+		date is 2021-11-25,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -64,13 +64,13 @@
 		write_key_value_nl(Stream, clusterrank, local),
 		write_key_value_nl(Stream, labeljust, l),
 		write_key_value_nl(Stream, margin, '1.0'),
-		write_key_value_nl(Stream, fontname, 'Courier'),
+		write_key_value_nl(Stream, fontname, 'Monospace'),
 		write_key_value_nl(Stream, fontsize, 10),
 		write_key_value_nl(Stream, fontcolor, dimgray),
 		write_key_value_nl(Stream, pencolor, dimgray),
 		write_key_value_nl(Stream, stylesheet, 'diagrams.css'),
-		write(Stream, 'node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]\n'),
-		write(Stream, 'edge [fontname="Courier",fontsize="9"]\n'),
+		write(Stream, 'node [shape="ellipse",style="filled",fillcolor="white",fontname="Monospace",fontsize="9"]\n'),
+		write(Stream, 'edge [fontname="Monospace",fontsize="9"]\n'),
 		diagram_label(Options, Label),
 		write_key_value_nl(Stream, label, Label),
 		nl(Stream).

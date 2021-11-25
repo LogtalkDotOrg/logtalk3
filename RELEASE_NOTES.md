@@ -96,6 +96,10 @@ library.
 Tools
 -----
 
+* CHANGED: The `diagrams` tool `dot` graph language export now uses the
+generic `Monospace` font name and output SVG files using the `dot` command
+`-Gfontnames=svg` option to avoid issues with text overflowing boxes.
+
 * CHANGED: The `debugger` tool loader file to also load the `dump_trace`
 object.
 
