@@ -28,9 +28,9 @@ content(strong('Hello world!')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:3:1,
 		author is 'Paulo Moura',
-		date is 2021-03-30,
+		date is 2021-11-25,
 		comment is 'Unit tests for the "html" library.'
 	]).
 
@@ -101,5 +101,11 @@ content(strong('Hello world!')).
 		current_output(Stream),
 		html5::generate(stream(Stream), span(user::content)),
 		^^text_output_assertion('<span><strong>Hello world!</strong></span>', Assertion).
+
+	cleanup :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'foo.html', File),
+		catch(ignore(os::delete_file(File)), _, true).
 
 :- end_object.
