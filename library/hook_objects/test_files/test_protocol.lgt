@@ -1,6 +1,6 @@
 
 :- protocol(test_protocol).
 
-	:- public(b/0).
+	:- public(d/0).
 
 :- end_protocol.
