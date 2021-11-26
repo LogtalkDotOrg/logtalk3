@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on October 12, 2021
+%  Last updated on November 26, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -148,18 +148,10 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_meta_predicate'(abolish_table_pred(_), abolish_table_pred(0), predicate).
 '$lgt_prolog_meta_predicate'(abolish_table_pred(_, _), abolish_table_pred(0, *), predicate).
 
-'$lgt_prolog_meta_predicate'(thread_create(_, _, _), thread_create(0, *, *), predicate).
-'$lgt_prolog_meta_predicate'(thread_create(_, _), thread_create(0, *), predicate).
-'$lgt_prolog_meta_predicate'(thread_create(_), thread_create(0), predicate).
-'$lgt_prolog_meta_predicate'(thread_signal(_, _), thread_signal(*, 0), predicate).
-'$lgt_prolog_meta_predicate'(with_mutex(_, _), with_mutex(*, 0), predicate).
-
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
 
 '$lgt_prolog_meta_directive'(index(_, _), index(/, *)).
-'$lgt_prolog_meta_directive'(thread_private(_), thread_private(/)).
-'$lgt_prolog_meta_directive'(thread_shared(_), thread_shared(/)).
 '$lgt_prolog_meta_directive'(use_subsumptive_tabling(_), use_subsumptive_tabling(/)).
 '$lgt_prolog_meta_directive'(use_variant_tabling(_), use_variant_tabling(/)).
 
@@ -244,11 +236,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, supported).
 '$lgt_prolog_feature'(engines, unsupported).
-'$lgt_prolog_feature'(threads, Threads) :-
-	(	xsb_configuration(engine_mode, 'multi-threading') ->
-		Threads = supported
-	;	Threads = unsupported
-	).
+'$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 '$lgt_prolog_feature'(unicode, unsupported).
@@ -600,47 +588,6 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 
 '$lgt_prolog_goal_expansion'(_, _) :-
 	fail.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  multi-threading predicates
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% thread_property(+atom, ?nonvar) -- built-in
-
-
-% thread_self(?atom) -- built-in
-
-
-% thread_create(@callable, -thread_id, +list) -- built-in
-
-
-% thread_join(+atom, -nonvar) -- built-in
-
-
-% thread_detach(+atom) -- built-in
-
-
-% thread_exit(@term) -- built-in
-
-
-% thread_send_message(+atom, @callable) -- built-in
-
-
-% thread_peek_message(+atom, ?callable) -- built-in
-
-
-% thread_get_message(+atom, ?callable) -- built-in
-
-
-% thread_get_message(?callable) -- built-in
-
-
-% thread_signal(Thread, _Signal) -- built-in
 
 
 
