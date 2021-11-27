@@ -21,11 +21,13 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
+	(	Dialect == b; Dialect == eclipse; Dialect == sicstus;
+		Dialect == scryer; Dialect == swi; Dialect == xsb; Dialect == yap
+	)
 )).
 
 	:- initialization((
-		logtalk_load(coroutining(loader)),
+		logtalk_load(dif(loader)),
 		logtalk_load([figures, figures_split], [optimize(on)])
 	)).
 

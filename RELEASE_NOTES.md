@@ -148,6 +148,9 @@ Examples
 
 * UPDATED: The `errors` example to illustrate the generalized linter checks.
 
+* UPDATED: The `figures` example to use the new `dif` library instead of the
+`coroutining` library to allow running with some more backend Prolog systems.
+
 Tests
 -----
 

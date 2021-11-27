@@ -44,6 +44,6 @@ ensuring all different variables to be bound to different objects, is
 essential in this example. Such an extension is also available in
 Prolog III.)".
 
-Note that the use of the coroutining library limits the backend Prolog
-systems that can be used to run this example to ECLiPSe, SICStus PRolog,
-SWI-Prolog, and YAP.
+Note that the use of the `dif` library limits the backend Prolog systems
+that can be used to run this example to B-Prolog, ECLiPSe, SICStus PRolog,
+Scryer Prolog, SWI-Prolog, XSB, and YAP.

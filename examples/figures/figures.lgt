@@ -29,14 +29,16 @@
 )).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-06-08,
+		date is 2021-11-27,
 		comment is 'Example of network modeling for recognizing polyhedra represented as a graph.',
 		source is '"A framework for network modeling in Prolog", Zdravko I. Markov, IJCAI, 1989.'
 	]).
 
-	:- uses(coroutining, [dif/1]).
+	:- uses(dif, [
+		dif/1
+	]).
 
 	% graph representation of polyhedra
 	:- public(edge/4).
