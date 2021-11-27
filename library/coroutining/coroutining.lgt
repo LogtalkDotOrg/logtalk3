@@ -22,9 +22,9 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2020-05-19,
+		date is 2021-11-27,
 		comment is 'Coroutining predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
@@ -46,7 +46,7 @@
 	]).
 
 	:- public(freeze/2).
-	:- meta_predicate(freeze(*,0)).
+	:- meta_predicate(freeze(*, 0)).
 	:- mode(freeze(+term, +callable), zero_or_more).
 	:- info(freeze/2, [
 		comment is 'Delays the execution of a goal until a variable is bound.',
@@ -61,7 +61,7 @@
 	]).
 
 	:- public(when/2).
-	:- meta_predicate(when(*,0)).
+	:- meta_predicate(when(*, 0)).
 	:- mode(when(+callable, +callable), zero_or_more).
 	:- info(when/2, [
 		comment is 'Calls ``Goal`` when ``Condition`` becomes true. The portable conditions are: ``nonvar/1``, ``ground/1``, ``(,)/2``, and ``(;)/2``.',
@@ -112,6 +112,22 @@
 
 		when(Condition, Goal) :-
 			when:when(Condition, Goal).
+
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+		:- meta_predicate(constraintLib:when(*, 0)).
+
+		dif(Term1, Term2) :-
+			constraintLib:when(?=(Term1, Term2), Term1 \== Term2).
+
+		freeze(Variable, Goal) :-
+			constraintLib:when(nonvar(Variable), Goal).
+
+		frozen(_, _) :-
+			fail.
+
+		when(Condition, Goal) :-
+			constraintLib:when(Condition, Goal).
 
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 

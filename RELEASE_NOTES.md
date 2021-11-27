@@ -89,6 +89,8 @@ available the `dif/2` predicate when implemented.
 * ADDED: Parametric object `object_wrapper_hook/1` to the `hook_objects`
 library.
 
+* ADDED: Partial support for XSB to the `coroutining` library.
+
 * ADDED: Additional tests for the `coroutining` library.
 
 * IMPROVED: Performance of the `arbitrary` library tests.

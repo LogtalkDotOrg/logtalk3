@@ -22,7 +22,7 @@
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
 	(	Dialect == b; Dialect == eclipse; Dialect == sicstus;
-		Dialect == scryer; Dialect == swi; Dialect == yap
+		Dialect == scryer; Dialect == swi; Dialect == xsb; Dialect == yap
 	)
 )).
 
@@ -32,6 +32,8 @@
 		:- use_module(library(dif)).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(dif), []).
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+		:- use_module(constraintLib, []).
 	:- endif.
 
 	:- initialization((

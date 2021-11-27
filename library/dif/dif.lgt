@@ -22,9 +22,9 @@
 :- object(dif).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-11-17,
+		date is 2021-11-27,
 		comment is 'Provides dif/2 and derived predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, Scryer Prolog, SICStus Prolog, SWI-Prolog, and YAP.'
@@ -69,6 +69,11 @@
 
 		dif(Term1, Term2) :-
 			dif:dif(Term1, Term2).
+
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+		dif(Term1, Term2) :-
+			constraintLib:when(?=(Term1, Term2), Term1 \== Term2).
 
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
