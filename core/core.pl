@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 52, 0, b04)).
+'$lgt_version_data'(logtalk(3, 52, 0, b05)).
 
 
 
@@ -16881,29 +16881,48 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % messages to the pseudo-object "user"
 
+'$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
+	Obj == user,
+	'$lgt_check'(var_or_callable, Pred),
+	callable(Pred),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_iso_spec_predicate'(Pred),
+	\+ '$lgt_built_in_method'(Pred, _, _, _),
+	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])
+	),
+	fail.
+
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, _, Ctx) :-
 	Obj == user,
 	!,
-	'$lgt_check'(var_or_callable, Pred),
-	(	callable(Pred) ->
-		TPred = Pred,
-		(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-			'$lgt_compiler_flag'(suspicious_calls, warning),
-			'$lgt_iso_spec_predicate'(Pred),
-			\+ '$lgt_built_in_method'(Pred, _, _, _),
-			\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
-			'$lgt_increment_compiling_warnings_counter',
-			'$lgt_source_file_context'(File, Lines, Type, Entity),
-			'$lgt_print_message'(
-				warning(suspicious_calls),
-				suspicious_call(File, Lines, Type, Entity, user::Pred, [Pred])
-			) ->
-			true
-		;	true
+	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, _)
+			% built-in Prolog meta-predicate declared in the adapter file in use
+		;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
+			% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
+		;	'$lgt_pp_meta_predicate_'(user::Pred, user::Meta, _, _)
+			% we're either providing a meta-predicate template or overriding the original
+			% meta-predicate template
+		) ->
+		% meta-predicate
+		Pred =.. [Functor| Args],
+		Meta =.. [Functor| MArgs],
+		(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
+			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, _) ->
+			TPred =.. [Functor| TArgs]
+		;	% meta-predicate template is not usable
+			throw(domain_error(meta_predicate_template, Meta))
 		)
-	;	% var(Pred),
-		TPred = call(Pred)
-	).
+	;	% non meta-predicate
+		TPred = Pred
+	),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head).
 
 % suppress debug messages when compiling in optimized mode
 

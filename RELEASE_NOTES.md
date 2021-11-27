@@ -38,6 +38,9 @@ inferred.
 
 * FIXED: The pack library paths to always end with a slash.
 
+* FIXED: Explicit messages to the `user` pseudo-object when the predicate
+being called is a meta-predicate.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -167,6 +170,8 @@ quoting to be input back correctly.
 
 * ADDED: Tests for the `write_term/3` predicate for writing of compound terms
 with `(,)/2` arguments.
+
+* ADDED: Additional test for the `::/2` message-sending control construct.
 
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.

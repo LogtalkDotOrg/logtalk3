@@ -63,9 +63,9 @@ send_to_object_test_object(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-01-28,
+		date is 2021-11-27,
 		comment is 'Unit tests for the (::)/2 built-in control construct.'
 	]).
 
@@ -207,5 +207,12 @@ send_to_object_test_object(2).
 
 	fails(send_to_object_2_37) :-
 		test_object(_)::q(_, _).
+
+	succeeds(send_to_object_2_38) :-
+		user::once(foo42).
+
+	% auxiliary predicates
+
+	foo42.
 
 :- end_object.
