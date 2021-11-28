@@ -173,6 +173,8 @@ with `(,)/2` arguments.
 
 * ADDED: Additional test for the `::/2` message-sending control construct.
 
+* ADDED: Additional test for the `use_module/2` Logtalk directive.
+
 * ADDED: Tests for the Logtalk `predicate_property/2` method to check for
 predicate declaration and definition term position properties.
 

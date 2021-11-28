@@ -23,15 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-03,
+		date is 2021-11-28,
 		comment is 'Unit tests for the use_module/2 built-in directive.'
 	]).
 
 	% test all possible syntaxes for the directive
 	:- use_module(module, [
 		p/1, q/1 as a1/1, r/1:a2/1, s(1, Atom) as a3(Atom), t(_Index_, Value) as a4(Value)
+	]).
+
+	:- use_module(user, [
+		bar/1
 	]).
 
 	test(use_module_2_01, true(X == 1)) :-
@@ -48,5 +52,12 @@
 
 	test(use_module_2_05, true(Xs == [x,y,z])) :-
 		findall(X, a4(X), Xs).
+
+	test(use_module_2_06, true(X == 4)) :-
+		bar(baz(X)).
+
+	% auxiliary predicates
+
+	baz(4).
 
 :- end_object.
