@@ -149,6 +149,8 @@ always compiled in non-debug mode.
 Examples
 --------
 
+* UPDATED: The `coinduction` example tests to use explicit assertions.
+
 * UPDATED: The `errors` example to illustrate the generalized linter checks.
 
 * UPDATED: The `figures` example to use the new `dif` library instead of the
