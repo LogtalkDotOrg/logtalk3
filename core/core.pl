@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 52, 0, b05)).
+'$lgt_version_data'(logtalk(3, 52, 0, b06)).
 
 
 
@@ -16900,8 +16900,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, _, Ctx) :-
 	Obj == user,
+	callable(Pred),
 	!,
-	(	(	'$lgt_prolog_meta_predicate'(Pred, Meta, _)
+	(	\+ '$lgt_prolog_built_in_database_predicate'(Pred),
+		% the meta-predicate templates for the backend Prolog database predicates are
+		% usually not usable from Logtalk due the ambiguity of the ":" meta-argument
+		% qualifier but they pose no problems when operating in "user"; in this
+		% particular case, the call can be compiled as-is
+		(	'$lgt_prolog_meta_predicate'(Pred, Meta, _)
 			% built-in Prolog meta-predicate declared in the adapter file in use
 		;	catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail)
 			% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
@@ -24810,6 +24816,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_iso_database_predicate'(clause(_, _)).
 '$lgt_iso_database_predicate'(retract(_)).
 '$lgt_iso_database_predicate'(retractall(_)).
+'$lgt_iso_database_predicate'(current_predicate(_)).
+'$lgt_iso_database_predicate'(predicate_property(_, _)).
 
 
 
