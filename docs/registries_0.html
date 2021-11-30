@@ -187,8 +187,8 @@
 <p>Registry handling predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:33:0</div>
-<div class="line"><strong>Date:</strong> 2021-11-06</div>
+<div class="line"><strong>Version:</strong> 0:34:0</div>
+<div class="line"><strong>Date:</strong> 2021-11-30</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -229,7 +229,7 @@
 <ul>
 <li><p><a class="reference internal" href="#list-0" id="id2"><code class="docutils literal notranslate"><span class="pre">list/0</span></code></a></p></li>
 <li><p><a class="reference internal" href="#describe-1" id="id3"><code class="docutils literal notranslate"><span class="pre">describe/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#defined-3" id="id4"><code class="docutils literal notranslate"><span class="pre">defined/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#defined-4" id="id4"><code class="docutils literal notranslate"><span class="pre">defined/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#add-3" id="id5"><code class="docutils literal notranslate"><span class="pre">add/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#add-2" id="id6"><code class="docutils literal notranslate"><span class="pre">add/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#add-1" id="id7"><code class="docutils literal notranslate"><span class="pre">add/1</span></code></a></p></li>
@@ -294,10 +294,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="defined/3"> </div></section>
-<section id="defined-3">
-<span id="registries-0-defined-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">defined/3</span></code></a><a class="headerlink" href="#defined-3" title="Permalink to this headline"></a></h3>
-<p>Enumerates by backtracking all defined registries and how they are defined (<code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">archive</span></code>, or <code class="docutils literal notranslate"><span class="pre">directory</span></code>) plus if they are pinned.</p>
+<div id="defined/4"> </div></section>
+<section id="defined-4">
+<span id="registries-0-defined-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">defined/4</span></code></a><a class="headerlink" href="#defined-4" title="Permalink to this headline"></a></h3>
+<p>Enumerates by backtracking all defined registries, their definition URL, how they are defined (<code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">archive</span></code>, or <code class="docutils literal notranslate"><span class="pre">directory</span></code>), and if they are pinned.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -307,11 +307,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">defined(Registry,HowDefined,Pinned)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defined(Registry,URL,HowDefined,Pinned)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">defined(?atom,?atom,?boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">defined(?atom,?atom,?atom,?boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

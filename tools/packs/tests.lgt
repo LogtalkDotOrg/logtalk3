@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
 		date is 2021-11-30,
 		comment is 'Unit tests for the "packs" tool.'
@@ -88,9 +88,9 @@
 		^^suppress_text_output,
 		registries::list.
 
-	test(packs_registries_defined_3_01, false) :-
+	test(packs_registries_defined_4_01, false) :-
 		^^suppress_text_output,
-		registries::defined(_, _, _).
+		registries::defined(_, _, _, _).
 
 	test(packs_packs_available_0_01, true) :-
 		^^suppress_text_output,
@@ -165,9 +165,9 @@
 		atomic_list_concat(['file://', Directory, 'test_files/local_1_d'], URL),
 		registries::add(URL).
 
-	test(packs_registries_defined_3_02, true(Registries == [local_1_d])) :-
+	test(packs_registries_defined_4_02, true(Registries == [local_1_d])) :-
 		^^suppress_text_output,
-		findall(Registry, registries::defined(Registry, _, _), Registries).
+		findall(Registry, registries::defined(Registry, _, _, _), Registries).
 
 	test(packs_registries_lint_1_01, true) :-
 		^^suppress_text_output,
@@ -280,9 +280,9 @@
 		atomic_list_concat(['file://', Directory, 'test_files/local_2_d'], URL),
 		registries::add(URL).
 
-	test(packs_registries_defined_3_03, true(Registries == [local_1_d, local_2_d])) :-
+	test(packs_registries_defined_4_03, true(Registries == [local_1_d, local_2_d])) :-
 		^^suppress_text_output,
-		findall(Registry, registries::defined(Registry, _, _), Registries0),
+		findall(Registry, registries::defined(Registry, _, _, _), Registries0),
 		list::msort(Registries0, Registries).
 
 	test(packs_registries_unpin_0_01, true) :-
@@ -291,7 +291,7 @@
 
 	test(packs_registries_unpin_0_02, false) :-
 		^^suppress_text_output,
-		registries::defined(_, _, true).
+		registries::defined(_, _, _, true).
 
 	test(packs_registries_pin_0_01, true) :-
 		^^suppress_text_output,
@@ -299,7 +299,7 @@
 
 	test(packs_registries_pin_0_02, true(Registries == [local_1_d, local_2_d])) :-
 		^^suppress_text_output,
-		findall(Registry, registries::defined(Registry, _, true), Registries0),
+		findall(Registry, registries::defined(Registry, _, _, true), Registries0),
 		list::msort(Registries0, Registries).
 
 	test(packs_packs_install_3_01, true) :-

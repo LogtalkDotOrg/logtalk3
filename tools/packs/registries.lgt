@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2021-11-06,
+		date is 2021-11-30,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -42,11 +42,11 @@
 		argnames is ['Registry']
 	]).
 
-	:- public(defined/3).
-	:- mode(defined(?atom, ?atom, ?boolean), zero_or_more).
-	:- info(defined/3, [
-		comment is 'Enumerates by backtracking all defined registries and how they are defined (``git``, ``archive``, or ``directory``) plus if they are pinned.',
-		argnames is ['Registry', 'HowDefined', 'Pinned']
+	:- public(defined/4).
+	:- mode(defined(?atom, ?atom, ?atom, ?boolean), zero_or_more).
+	:- info(defined/4, [
+		comment is 'Enumerates by backtracking all defined registries, their definition URL, how they are defined (``git``, ``archive``, or ``directory``), and if they are pinned.',
+		argnames is ['Registry', 'URL', 'HowDefined', 'Pinned']
 	]).
 
 	:- public(add/3).
@@ -205,8 +205,8 @@
 	list :-
 		print_message(information, packs, @'Defined registries:'),
 		findall(
-			defined(Registry, HowDefined, Pinned),
-			defined(Registry, HowDefined, Pinned),
+			defined(Registry, _, HowDefined, Pinned),
+			defined(Registry, _, HowDefined, Pinned),
 			DefinedRegistries
 		),
 		(	DefinedRegistries == [] ->
@@ -230,7 +230,7 @@
 			fail
 		).
 
-	defined(Registry, HowDefined, Pinned) :-
+	defined(Registry, URL, HowDefined, Pinned) :-
 		check(var_or(atom), Registry),
 		check(var_or(atom), HowDefined),
 		check(var_or(boolean), Pinned),
@@ -419,7 +419,7 @@
 	delete :-
 		print_message(comment, packs, @'Deleting all registries'),
 		forall(
-			defined(Registry, _, _),
+			defined(Registry, _, _, _),
 			delete(Registry, [force(true)])
 		),
 		print_message(comment, packs, @'Deleted all registries').
@@ -475,13 +475,8 @@
 	% the defined registries if the update for one of them fails
 	update :-
 		print_message(comment, packs, @'Updating defined registries:'),
-		defined(Registry, HowDefined, Pinned),
+		defined(Registry, URL, _, Pinned),
 		(	Pinned == true ->
-			registry_object(Registry, RegistryObject),
-			(	HowDefined == git ->
-				RegistryObject::clone(URL)
-			;	RegistryObject::archive(URL)
-			),
 			print_message(comment, packs, pinned_registry(Registry, URL))
 		;	update(Registry, [])
 		),
@@ -605,7 +600,7 @@
 		).
 
 	pin :-
-		defined(Registry, _, false),
+		defined(Registry, _, _, false),
 			pin_file(Registry, File),
 			ensure_file(File),
 		fail.
@@ -622,7 +617,7 @@
 		).
 
 	unpin :-
-		defined(Registry, _, true),
+		defined(Registry, _, _, true),
 			pin_file(Registry, File),
 			file_exists(File),
 			delete_file(File),

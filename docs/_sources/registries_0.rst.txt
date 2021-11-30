@@ -11,8 +11,8 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:33:0
-| **Date:** 2021-11-06
+| **Version:** 0:34:0
+| **Date:** 2021-11-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -87,23 +87,23 @@ Prints all registry entries.
 
 .. raw:: html
 
-   <div id="defined/3"> </div>
+   <div id="defined/4"> </div>
 
-.. index:: defined/3
-.. _registries/0::defined/3:
+.. index:: defined/4
+.. _registries/0::defined/4:
 
-``defined/3``
+``defined/4``
 ^^^^^^^^^^^^^
 
-Enumerates by backtracking all defined registries and how they are defined (``git``, ``archive``, or ``directory``) plus if they are pinned.
+Enumerates by backtracking all defined registries, their definition URL, how they are defined (``git``, ``archive``, or ``directory``), and if they are pinned.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``defined(Registry,HowDefined,Pinned)``
+|    ``defined(Registry,URL,HowDefined,Pinned)``
 | **Mode and number of proofs:**
-|    ``defined(?atom,?atom,?boolean)`` - ``zero_or_more``
+|    ``defined(?atom,?atom,?atom,?boolean)`` - ``zero_or_more``
 
 
 ------------

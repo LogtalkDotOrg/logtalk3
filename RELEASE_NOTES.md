@@ -116,6 +116,9 @@ object.
 * CHANGED: The `packs` tool `save/1` and `restore/1-2` predicates to save and
 restore pinning status.
 
+* CHANGED: The `packs` tool `registries` object predicate `defined/3` to
+`defined/4`.
+
 * ADDED: Predicates `text_output_contents/1-3` and `binary_output_contents/1-2`
 to the `lgtunit` tool.
 

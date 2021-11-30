@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:38:1,
+		version is 0:39:0,
 		author is 'Paulo Moura',
 		date is 2021-11-30,
 		comment is 'Pack handling predicates.'
@@ -891,12 +891,7 @@
 		sort(Registries, SortedRegistries),
 		forall(
 			member(Registry, SortedRegistries),
-			(	registries::directory(Registry, Directory),
-				path_concat(Directory, 'URL.packs', URLFile),
-				file_exists(URLFile),
-				open(URLFile, read, URLStream),
-				read(URLStream, URL),
-				close(URLStream),
+			(	registries::defined(Registry, URL, _, _),
 				writeq(Stream, registry(Registry, URL)), write(Stream, '.\n')
 			)
 		),
@@ -905,7 +900,7 @@
 			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
 		),
 		forall(
-			(member(Registry, SortedRegistries), registries::defined(Registry, _, true)),
+			(member(Registry, SortedRegistries), registries::defined(Registry, _, _, true)),
 			(writeq(Stream, pinned_registry(Registry)), write(Stream, '.\n'))
 		),
 		forall(
