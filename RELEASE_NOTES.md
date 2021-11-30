@@ -41,6 +41,9 @@ inferred.
 * FIXED: Explicit messages to the `user` pseudo-object when the predicate
 being called is a meta-predicate.
 
+* FIXED: Avoid a warning when embedding Logtalk due to the definition of the
+`forward/1` predicate in the `user` pseudo-object.
+
 Prolog adapter and integration files
 ------------------------------------
 

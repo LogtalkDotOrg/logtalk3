@@ -11,8 +11,8 @@
 Pseudo-object representing the plain Prolog database. Can be used as a monitor by defining ``before/3`` and ``after/3`` predicates. Can be used as a hook object by defining ``term_expansion/2`` and ``goal_expansion/2`` multifile and dynamic predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:4:2
-| **Date:** 2021-08-20
+| **Version:** 1:4:3
+| **Date:** 2021-11-30
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, dynamic_declarations, threaded``
