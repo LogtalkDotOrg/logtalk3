@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:27:0,
+		version is 0:28:0,
 		author is 'Paulo Moura',
-		date is 2021-09-21,
+		date is 2021-11-30,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -199,6 +199,17 @@
 
 	test(os_delete_file_1_02, error(_)) :-
 		os::delete_file(non_existing_file).
+
+	test(os_copy_file_2_01, true) :-
+		this(This),
+		object_property(This, file(Path)),
+		object_property(This, file(_, Directory)),
+		os::path_concat(Directory, test_copy_file, FileCopy),
+		os::copy_file(Path, FileCopy),
+		os::file_exists(FileCopy).
+
+	test(os_copy_file_2_02, error(_)) :-
+		os::copy_file(non_existing_file, some_file).
 
 	test(os_rename_file_2_01, true) :-
 		this(This),
@@ -583,6 +594,8 @@
 		catch(ignore(os::delete_file(TestFile1)), _, true),
 		os::path_concat(Directory, test_file_2, TestFile2),
 		catch(ignore(os::delete_file(TestFile2)), _, true),
+		os::path_concat(Directory, test_copy_file, TestCopyFile),
+		catch(ignore(os::delete_file(TestCopyFile)), _, true),
 		os::path_concat(Directory, test_sub_directory, SubDirectory),
 		catch(ignore(os::delete_directory(SubDirectory)), _, true),
 		os::path_concat(Directory, 'sub_directory1/sub_directory2/sub_directory3', SubDirectory3),

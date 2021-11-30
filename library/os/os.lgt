@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:86:1,
+		version is 1:87:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2021-11-30,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -162,6 +162,11 @@
 		file_permission(File, Permission) :-
 			absolute_file_name(File, ExpandedPath),
 			{access_file(ExpandedPath, Permission)}.
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			{copy_file(FilePath, CopyPath)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
@@ -285,6 +290,11 @@
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
 			{delete_file(ExpandedPath)}.
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			{copy_file(FilePath, CopyPath)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
@@ -430,6 +440,14 @@
 			(	{path_sysop(exists, ExpandedPath)} ->
 				{path_sysop(rm, ExpandedPath)}
 			;	existence_error(file, File)
+			).
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			(	{path_sysop(exists, FilePath)} ->
+				{path_sysop(copy, FilePath, CopyPath)}
+			;	existence_error(file, FilePath)
 			).
 
 		rename_file(Old, New) :-
@@ -663,6 +681,11 @@
 				{delete_file(ExpandedPath)}
 			;	existence_error(file, File)
 			).
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			{copy_file(FilePath, CopyPath)}.
 
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldPath),
@@ -1086,6 +1109,11 @@
 			{absolute_file_name(File, ExpandedPath),
 			 delete_file(ExpandedPath)}.
 
+		copy_file(File, Copy) :-
+			{absolute_file_name(File, FilePath),
+			 absolute_file_name(Copy, CopyPath),
+			 rename_file(FilePath, CopyPath)}.
+
 		rename_file(Old, New) :-
 			{absolute_file_name(Old, OldPath),
 			 absolute_file_name(New, NewPath),
@@ -1204,6 +1232,14 @@
 		delete_file(File) :-
 			{absolute_file_name(File, ExpandedPath),
 			 fs_delete(ExpandedPath)}.
+
+		copy_file(File, Copy) :-
+			{absolute_file_name(File, FilePath),
+			 absolute_file_name(Copy, CopyPath),
+			 buffer_new(Buffer),
+			 open(FilePath, read,  Input),  get_block(Input,  Buffer), close(Input),
+			 open(CopyPath, write, Output), put_block(Output, Buffer), close(Output),
+			 buffer_delete(Buffer)}.
 
 		rename_file(Old, New) :-
 			{absolute_file_name(Old, OldPath),
@@ -1941,6 +1977,11 @@
 			absolute_file_name(File, ExpandedPath),
 			{file_permission(ExpandedPath, Permission)}.
 
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			{copy_file(FilePath, CopyPath)}.
+
 		rename_file(Old, New) :-
 			absolute_file_name(Old, OldExpandedPath),
 			absolute_file_name(New, NewExpandedPath),
@@ -2411,6 +2452,31 @@
 			backslashes_to_slashes(OSPathChars, PathChars).
 		backslashes_to_slashes([Char| OSPathChars], [Char| PathChars]) :-
 			backslashes_to_slashes(OSPathChars, PathChars).
+
+	:- endif.
+
+
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == gnu; Dialect == quintus; Dialect == scryer; Dialect == sicstus; Dialect == trealla)
+	)).
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			open(FilePath, read, Input, [type(binary)]),
+			open(CopyPath, write, Output, [type(binary)]),
+			get_byte(Input, Byte),
+			copy_file_bytes(Byte, Input, Output),
+			close(Input),
+			close(Output).
+
+		copy_file_bytes(-1, _, _) :-
+			!.
+		copy_file_bytes(Byte, Input, Output) :-
+			put_byte(Output, Byte),
+			get_byte(Input, Next),
+			copy_file_bytes(Next, Input, Output).
 
 	:- endif.
 

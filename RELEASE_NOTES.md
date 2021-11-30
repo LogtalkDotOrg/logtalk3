@@ -99,6 +99,8 @@ library.
 
 * ADDED: Additional tests for the `coroutining` library.
 
+* ADDED: Predicate `copy_file/2` to the `os` library.
+
 * IMPROVED: Performance of the `arbitrary` library tests.
 
 Tools

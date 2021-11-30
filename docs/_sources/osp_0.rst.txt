@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:31:0
-| **Date:** 2021-07-21
+| **Version:** 1:32:0
+| **Date:** 2021-11-30
 
 | **Compilation flags:**
 |    ``static``
@@ -594,6 +594,29 @@ True iff the specified file has the specified permission (``read``, ``write``, o
 |    ``file_permission(File,Permission)``
 | **Mode and number of proofs:**
 |    ``file_permission(+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="copy_file/2"> </div>
+
+.. index:: copy_file/2
+.. _osp/0::copy_file/2:
+
+``copy_file/2``
+^^^^^^^^^^^^^^^
+
+Copies a file. Throws an error if the original file does not exist or if the copy cannot be created.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``copy_file(File,Copy)``
+| **Mode and number of proofs:**
+|    ``copy_file(+atom,+atom)`` - ``one_or_error``
 
 
 ------------
