@@ -113,6 +113,9 @@ generic `Monospace` font name and output SVG files using the `dot` command
 * CHANGED: The `debugger` tool loader file to also load the `dump_trace`
 object.
 
+* CHANGED: The `packs` tool `save/1` and `restore/1-2` predicates to save and
+restore pinning status.
+
 * ADDED: Predicates `text_output_contents/1-3` and `binary_output_contents/1-2`
 to the `lgtunit` tool.
 

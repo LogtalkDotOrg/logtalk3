@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:37:0
-| **Date:** 2021-11-11
+| **Version:** 0:38:0
+| **Date:** 2021-11-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -666,7 +666,7 @@ Cleans all archives for all packs.
 ``save/1``
 ^^^^^^^^^^
 
-Saves a list of all installed packs and their registries and versions to a file.
+Saves a list of all defined registries and installed packs plus pinning status to a file.
 
 | **Compilation flags:**
 |    ``static``
@@ -689,7 +689,7 @@ Saves a list of all installed packs and their registries and versions to a file.
 ``restore/2``
 ^^^^^^^^^^^^^
 
-Restores a list of registries and packs from a file using the given options. Fails if restoring is not possible.
+Restores a list of registries and packs plus their pinning status from a file using the given options. Fails if restoring is not possible.
 
 | **Compilation flags:**
 |    ``static``
@@ -720,7 +720,7 @@ Restores a list of registries and packs from a file using the given options. Fai
 ``restore/1``
 ^^^^^^^^^^^^^
 
-Restores a list of registries and packs from a file using the ``force(true)`` option. Fails if restoring is not possible.
+Restores a list of registries and packs plus their pinning status from a file using the ``force(true)`` option. Fails if restoring is not possible.
 
 | **Compilation flags:**
 |    ``static``

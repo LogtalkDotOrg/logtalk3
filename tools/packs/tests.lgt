@@ -269,7 +269,7 @@
 
 	test(packs_packs_uninstall_1_02, false) :-
 		^^suppress_text_output,
-		packs::installed(local_1_d, bar, Version, Pinned).
+		packs::installed(local_1_d, bar, _, _).
 
 	% add a second local registry
 

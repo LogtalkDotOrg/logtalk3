@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
-		date is 2021-11-11,
+		date is 2021-11-30,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -233,14 +233,14 @@
 	:- public(save/1).
 	:- mode(save(+atom), one).
 	:- info(save/1, [
-		comment is 'Saves a list of all installed packs and their registries and versions to a file.',
+		comment is 'Saves a list of all defined registries and installed packs plus pinning status to a file.',
 		argnames is ['File']
 	]).
 
 	:- public(restore/2).
 	:- mode(restore(+atom, ++list(compound)), zero_or_one).
 	:- info(restore/2, [
-		comment is 'Restores a list of registries and packs from a file using the given options. Fails if restoring is not possible.',
+		comment is 'Restores a list of registries and packs plus their pinning status from a file using the given options. Fails if restoring is not possible.',
 		argnames is ['File', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``false``.',
@@ -254,7 +254,7 @@
 	:- public(restore/1).
 	:- mode(restore(+atom), zero_or_one).
 	:- info(restore/1, [
-		comment is 'Restores a list of registries and packs from a file using the ``force(true)`` option. Fails if restoring is not possible.',
+		comment is 'Restores a list of registries and packs plus their pinning status from a file using the ``force(true)`` option. Fails if restoring is not possible.',
 		argnames is ['File']
 	]).
 
@@ -904,6 +904,14 @@
 			installed_pack(Registry, Pack, Version, _),
 			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
 		),
+		forall(
+			registries::defined(Registry, _, true),
+			(writeq(Stream, pinned_registry(Registry)), write(Stream, '.\n'))
+		),
+		forall(
+			installed_pack(_, Pack, _, true),
+			(writeq(Stream, pinned_pack(Pack)), write(Stream, '.\n'))
+		),
 		close(Stream),
 		print_message(comment, packs, @'Saved current registries/packs setup').
 
@@ -933,6 +941,22 @@
 		).
 	restore(pack(Registry, Pack, Version), Stream, Options) :-
 		(	install(Registry, Pack, Version, Options) ->
+			read(Stream, Term),
+			restore(Term, Stream, Options)
+		;	close(Stream),
+			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			fail
+		).
+	restore(pinned_registry(Registry), Stream, Options) :-
+		(	registries::pin(Registry) ->
+			read(Stream, Term),
+			restore(Term, Stream, Options)
+		;	close(Stream),
+			print_message(error, packs, @'Restoring registries/packs setup failed'),
+			fail
+		).
+	restore(pinned_pack(Pack), Stream, Options) :-
+		(	pin(Pack) ->
 			read(Stream, Term),
 			restore(Term, Stream, Options)
 		;	close(Stream),
