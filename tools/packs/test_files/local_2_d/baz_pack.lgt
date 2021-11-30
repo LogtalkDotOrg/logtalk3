@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-10-21,
+		date is 2021-11-30,
 		comment is 'A local pack for testing.'
 	]).
 
@@ -34,12 +34,12 @@
 
 	license('Apache-2.0').
 
-	home('file:///home/janedoe/baz').
+	home('file://test_files/baz').
 
 	version(
 		1:0:0,
 		stable,
-		'file:///home/janedoe/baz/v1.0.0.tar.gz',
+		'file://test_files/baz',
 		none,
 		[],
 		all

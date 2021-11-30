@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2021-11-11,
+		date is 2021-11-30,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -43,10 +43,18 @@
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
-		registries::clean.
+		registries::clean,
+		% the sample packs are defined using relative paths, which require
+		% setting the working directory; but this hack to allows testing
+		% pack installation may not work with all backend Prolog systems
+		object_property(packs, file(_, Directory)),
+		os::change_directory(Directory).
 
 	cleanup :-
-		setup.
+		setup,
+		object_property(packs, file(_, Directory)),
+		atom_concat(Directory, 'test_files/setup.txt', Setup),
+		catch(ignore(os::delete_file(Setup)), _, true).
 
 	% we start with no defined registries or installed packs
 
@@ -247,6 +255,22 @@
 		^^suppress_text_output,
 		packs::dependents(foo).
 
+	test(packs_packs_install_1_01, true) :-
+		^^suppress_text_output,
+		packs::install(bar).
+
+	test(packs_packs_install_1_02, true(Version-Pinned == (1:0:0)-false)) :-
+		^^suppress_text_output,
+		packs::installed(local_1_d, bar, Version, Pinned).
+
+	test(packs_packs_uninstall_1_01, true) :-
+		^^suppress_text_output,
+		packs::uninstall(bar).
+
+	test(packs_packs_uninstall_1_02, false) :-
+		^^suppress_text_output,
+		packs::installed(local_1_d, bar, Version, Pinned).
+
 	% add a second local registry
 
 	test(packs_registries_add_1_02, true) :-
@@ -277,5 +301,34 @@
 		^^suppress_text_output,
 		findall(Registry, registries::defined(Registry, _, true), Registries0),
 		list::msort(Registries0, Registries).
+
+	test(packs_packs_install_3_01, true) :-
+		^^suppress_text_output,
+		packs::install(local_1_d, foo, 1:0:0).
+
+	test(packs_packs_install_3_02, true(Version-Pinned == (1:0:0)-false)) :-
+		^^suppress_text_output,
+		packs::installed(local_2_d, baz, Version, Pinned).
+
+	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
+		^^suppress_text_output,
+		packs::dependents(local_2_d, baz, Dependents).
+
+	% save and restore setups
+
+	test(packs_packs_save_1_01, true(os::file_exists(Setup))) :-
+		^^suppress_text_output,
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'test_files/setup.txt', Setup),
+		packs::save(Setup).
+
+	test(packs_packs_restore_1_01, true) :-
+		^^suppress_text_output,
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'test_files/setup.txt', Setup),
+		setup,
+		packs::restore(Setup).
 
 :- end_object.
