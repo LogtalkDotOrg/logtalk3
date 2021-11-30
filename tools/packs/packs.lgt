@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:38:0,
+		version is 0:38:1,
 		author is 'Paulo Moura',
 		date is 2021-11-30,
 		comment is 'Pack handling predicates.'
@@ -233,7 +233,7 @@
 	:- public(save/1).
 	:- mode(save(+atom), one).
 	:- info(save/1, [
-		comment is 'Saves a list of all defined registries and installed packs plus pinning status to a file.',
+		comment is 'Saves a list of all installed packs and their registries plus pinning status to a file. Registries without installed packs are not saved.',
 		argnames is ['File']
 	]).
 
@@ -881,16 +881,16 @@
 	% save and restore predicates
 
 	save(File) :-
-		print_message(comment, packs, @'Saving current registries/packs setup'),
+		print_message(comment, packs, @'Saving current packs setup'),
 		open(File, write, Stream),
 		findall(
 			Registry,
 			installed_pack(Registry, _, _, _),
 			Registries
 		),
-		sort(Registries, Sorted),
+		sort(Registries, SortedRegistries),
 		forall(
-			member(Registry, Sorted),
+			member(Registry, SortedRegistries),
 			(	registries::directory(Registry, Directory),
 				path_concat(Directory, 'URL.packs', URLFile),
 				file_exists(URLFile),
@@ -905,7 +905,7 @@
 			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
 		),
 		forall(
-			registries::defined(Registry, _, true),
+			(member(Registry, SortedRegistries), registries::defined(Registry, _, true)),
 			(writeq(Stream, pinned_registry(Registry)), write(Stream, '.\n'))
 		),
 		forall(
@@ -913,17 +913,17 @@
 			(writeq(Stream, pinned_pack(Pack)), write(Stream, '.\n'))
 		),
 		close(Stream),
-		print_message(comment, packs, @'Saved current registries/packs setup').
+		print_message(comment, packs, @'Saved current packs setup').
 
 	restore(File, UserOptions) :-
-		print_message(comment, packs, @'Restoring registries/packs setup'),
+		print_message(comment, packs, @'Restoring packs setup'),
 		check(file, File),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		open(File, read, Stream),
 		read(Stream, Term),
 		restore(Term, Stream, Options),
-		print_message(comment, packs, @'Restored registries/packs setup').
+		print_message(comment, packs, @'Restored packs setup').
 
 	restore(File) :-
 		restore(File, [force(true)]).

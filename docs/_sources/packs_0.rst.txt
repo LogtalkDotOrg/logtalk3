@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:38:0
+| **Version:** 0:38:1
 | **Date:** 2021-11-30
 
 | **Compilation flags:**
@@ -666,7 +666,7 @@ Cleans all archives for all packs.
 ``save/1``
 ^^^^^^^^^^
 
-Saves a list of all defined registries and installed packs plus pinning status to a file.
+Saves a list of all installed packs and their registries plus pinning status to a file. Registries without installed packs are not saved.
 
 | **Compilation flags:**
 |    ``static``
