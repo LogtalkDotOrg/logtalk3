@@ -149,6 +149,9 @@ always compiled in non-debug mode.
 Examples
 --------
 
+* CHANGED: The `books` example to avoid test failures due to irrelevant float
+printing issues.
+
 * UPDATED: The `coinduction` example tests to use explicit assertions.
 
 * UPDATED: The `errors` example to illustrate the generalized linter checks.

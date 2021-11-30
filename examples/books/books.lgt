@@ -38,16 +38,16 @@ extra('The Half-Blood Prince',    audio_cd).
 extra('The Deathly Hallows',      horcrux_set).
 
 % weight(Extra, Weight)
-weight(quidditch_set, 223).
-weight(horcrux_set,   123).
+weight(quidditch_set, 2000).
+weight(horcrux_set,   1000).
 
 
 :- object(data_acquisition).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-11-22,
+		date is 2021-11-30,
 		comment is 'Data acquisition example, decoupled from data processing.'
 	]).
 
@@ -128,7 +128,7 @@ weight(horcrux_set,   123).
 
 	print_extra_kg(Extra-WeightGrams) :-
 		write('  with free '), write(Extra),
-		optional(WeightGrams)::map([Grams,Kilos]>>(Kilos is Grams / 1000.0), WeightKilos),
+		optional(WeightGrams)::map([Grams,Kilos]>>(Kilos is Grams // 1000), WeightKilos),
 		optional(WeightKilos)::if_present([Kilograms]>>(write(' at '), write(Kilograms), write(' kg'))),
 		nl.
 
