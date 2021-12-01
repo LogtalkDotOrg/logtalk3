@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-262 884,-262 884,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category counters</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;30, 21:59</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;12&#45;01, 17:07</text>
 <g id="clust1" class="cluster">
 <title>cluster_counters_category</title>
 <g id="a_clust1"><a xlink:title="counters">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 860,-49 860,-49 866,-49 872,-55 872,-61 872,-61 872,-238 872,-238 872,-244 866,-250 860,-250 860,-250 20,-250 20,-250 14,-250 8,-244 8,-238 8,-238 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt">
 <text text-anchor="start" x="20.5" y="-233.5" font-family="Monospace" font-size="10.00" fill="dimgray">counters</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- counter/2 -->
 <g id="node1" class="node">
 <title>counter/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L32">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L32">
 <polygon fill="springgreen" stroke="black" points="862,-213 774,-213 774,-177 862,-177 862,-213"/>
 <text text-anchor="start" x="782" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="788" y="-197.2" font-family="Monospace" font-size="11.00">counter/2</text>
@@ -41,7 +41,7 @@
 <!-- ::counter_/2 -->
 <g id="node7" class="node">
 <title>::counter_/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L77">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L77">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="561,-95 453,-95 453,-59 561,-59 561,-95"/>
 <text text-anchor="start" x="461" y="-79.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="467" y="-79.2" font-family="Monospace" font-size="11.00">::counter_/2</text>
@@ -55,12 +55,12 @@
 <!-- counter/2&#45;&gt;::counter_/2 -->
 <g id="edge1" class="edge">
 <title>counter/2&#45;&gt;::counter_/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L74" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M773.77,-177.5C718.06,-156.72 622.32,-121.01 561.96,-98.5"/>
 <polygon fill="black" stroke="black" points="563.19,-95.22 552.59,-95.01 560.74,-101.78 563.19,-95.22"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L74">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L74">
 <text text-anchor="start" x="671" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- increment_counter/1 -->
 <g id="node2" class="node">
 <title>increment_counter/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L39">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L39">
 <polygon fill="springgreen" stroke="black" points="756,-213 602,-213 602,-177 756,-177 756,-213"/>
 <text text-anchor="start" x="610" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="616" y="-197.2" font-family="Monospace" font-size="11.00">increment_counter/1</text>
@@ -82,12 +82,12 @@
 <!-- increment_counter/1&#45;&gt;::counter_/2 -->
 <g id="edge2" class="edge">
 <title>increment_counter/1&#45;&gt;::counter_/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L77" xlink:title="updates">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L77" xlink:title="updates">
 <path fill="none" stroke="black" d="M653.62,-176.88C624.28,-157.09 575.78,-124.38 542.65,-102.05"/>
 <polygon fill="black" stroke="black" points="542.43,-101.9 535.22,-101.86 532.48,-95.19 539.69,-95.23 542.43,-101.9"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L77">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L77">
 <text text-anchor="start" x="598" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- decrement_counter/1 -->
 <g id="node3" class="node">
 <title>decrement_counter/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L46">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L46">
 <polygon fill="springgreen" stroke="black" points="584,-213 430,-213 430,-177 584,-177 584,-213"/>
 <text text-anchor="start" x="438" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="444" y="-197.2" font-family="Monospace" font-size="11.00">decrement_counter/1</text>
@@ -109,12 +109,12 @@
 <!-- decrement_counter/1&#45;&gt;::counter_/2 -->
 <g id="edge3" class="edge">
 <title>decrement_counter/1&#45;&gt;::counter_/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L82" xlink:title="updates">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L82" xlink:title="updates">
 <path fill="none" stroke="black" d="M507,-176.88C507,-158.64 507,-129.4 507,-107.44"/>
 <polygon fill="black" stroke="black" points="507,-107.19 503,-101.19 507,-95.19 511,-101.19 507,-107.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L82">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L82">
 <text text-anchor="start" x="507" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <!-- reset_counter/1 -->
 <g id="node4" class="node">
 <title>reset_counter/1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L53">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L53">
 <polygon fill="springgreen" stroke="black" points="412,-213 284,-213 284,-177 412,-177 412,-213"/>
 <text text-anchor="start" x="292" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="298" y="-197.2" font-family="Monospace" font-size="11.00">reset_counter/1</text>
@@ -136,12 +136,12 @@
 <!-- reset_counter/1&#45;&gt;::counter_/2 -->
 <g id="edge4" class="edge">
 <title>reset_counter/1&#45;&gt;::counter_/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L87" xlink:title="updates">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L87" xlink:title="updates">
 <path fill="none" stroke="black" d="M371.46,-176.88C398.47,-157.18 443.03,-124.67 473.64,-102.34"/>
 <polygon fill="black" stroke="black" points="473.75,-102.26 476.24,-95.49 483.44,-95.19 480.95,-101.95 473.75,-102.26"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L87">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L87">
 <text text-anchor="start" x="432" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <!-- reset_counters/0 -->
 <g id="node5" class="node">
 <title>reset_counters/0</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L60">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L60">
 <polygon fill="springgreen" stroke="black" points="266,-213 132,-213 132,-177 266,-177 266,-213"/>
 <text text-anchor="start" x="140" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="146" y="-197.2" font-family="Monospace" font-size="11.00">reset_counters/0</text>
@@ -163,12 +163,12 @@
 <!-- reset_counters/0&#45;&gt;::counter_/2 -->
 <g id="edge5" class="edge">
 <title>reset_counters/0&#45;&gt;::counter_/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L91" xlink:title="updates">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L91" xlink:title="updates">
 <path fill="none" stroke="black" d="M244.45,-176.88C299.04,-156.32 390.66,-121.81 449.96,-99.48"/>
 <polygon fill="black" stroke="black" points="450.14,-99.42 454.34,-93.56 461.37,-95.19 457.16,-101.04 450.14,-99.42"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L91">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L91">
 <text text-anchor="start" x="362" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -176,7 +176,7 @@
 <!-- counter_/2 -->
 <g id="node6" class="node">
 <title>counter_/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/library/counters.lgt#L66">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/library/counters.lgt#L66">
 <polygon fill="#ff6a6a" stroke="black" points="114,-213 18,-213 18,-177 114,-177 114,-213"/>
 <text text-anchor="start" x="26" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="32.5" y="-197.2" font-family="Monospace" font-size="11.00">counter_/2</text>

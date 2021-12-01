@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-1442 1742,-1442 1742,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object dead_code_scanner</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;11&#45;30, 21:59</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;12&#45;01, 17:07</text>
 <g id="clust1" class="cluster">
 <title>cluster_dead_code_scanner_object</title>
 <g id="a_clust1"><a xlink:title="dead_code_scanner">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 1686,-49 1686,-49 1692,-49 1698,-55 1698,-61 1698,-61 1698,-1418 1698,-1418 1698,-1424 1692,-1430 1686,-1430 1686,-1430 20,-1430 20,-1430 14,-1430 8,-1424 8,-1418 8,-1418 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt">
 <text text-anchor="start" x="20.5" y="-1413.5" font-family="Monospace" font-size="10.00" fill="dimgray">dead_code_scanner</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- entity/1 -->
 <g id="node1" class="node">
 <title>entity/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L47">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L47">
 <polygon fill="springgreen" stroke="black" points="1102.5,-1275 1021.5,-1275 1021.5,-1239 1102.5,-1239 1102.5,-1275"/>
 <text text-anchor="start" x="1030" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1036" y="-1259.2" font-family="Monospace" font-size="11.00">entity/1</text>
@@ -41,7 +41,7 @@
 <!-- process_entity/2 -->
 <g id="node24" class="node">
 <title>process_entity/2</title>
-<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396">
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396">
 <polygon fill="cornsilk" stroke="black" points="1106,-921 972,-921 972,-885 1106,-885 1106,-921"/>
 <text text-anchor="start" x="980" y="-905.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="986" y="-905.2" font-family="Monospace" font-size="11.00">process_entity/2</text>
@@ -55,12 +55,12 @@
 <!-- entity/1&#45;&gt;process_entity/2 -->
 <g id="edge35" class="edge">
 <title>entity/1&#45;&gt;process_entity/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M1060.86,-1238.54C1057.13,-1181.53 1045.3,-1000.47 1040.78,-931.26"/>
 <polygon fill="black" stroke="black" points="1044.26,-930.9 1040.12,-921.15 1037.28,-931.35 1044.26,-930.9"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
 <text text-anchor="start" x="1050" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- write_scan_header/1 -->
 <g id="node28" class="node">
 <title>write_scan_header/1</title>
-<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472">
+<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472">
 <polygon fill="cornsilk" stroke="black" points="838,-1157 684,-1157 684,-1121 838,-1121 838,-1157"/>
 <text text-anchor="start" x="692" y="-1141.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="698" y="-1141.2" font-family="Monospace" font-size="11.00">write_scan_header/1</text>
@@ -82,12 +82,12 @@
 <!-- entity/1&#45;&gt;write_scan_header/1 -->
 <g id="edge34" class="edge">
 <title>entity/1&#45;&gt;write_scan_header/1</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M1044.02,-1238.82C1028.11,-1224.54 1003.67,-1204.73 979,-1193 955.71,-1181.93 898.18,-1168.13 848.07,-1157.39"/>
 <polygon fill="black" stroke="black" points="848.67,-1153.93 838.16,-1155.28 847.22,-1160.78 848.67,-1153.93"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
 <text text-anchor="start" x="996" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- write_scan_footer/1 -->
 <g id="node29" class="node">
 <title>write_scan_footer/1</title>
-<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478">
+<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478">
 <polygon fill="cornsilk" stroke="black" points="646,-1157 492,-1157 492,-1121 646,-1121 646,-1157"/>
 <text text-anchor="start" x="500" y="-1141.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="506" y="-1141.2" font-family="Monospace" font-size="11.00">write_scan_footer/1</text>
@@ -109,12 +109,12 @@
 <!-- entity/1&#45;&gt;write_scan_footer/1 -->
 <g id="edge36" class="edge">
 <title>entity/1&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M1021.49,-1243.02C1016.3,-1241.56 1011.05,-1240.18 1006,-1239 910.37,-1216.69 882.76,-1228.76 788,-1203 776.05,-1199.75 773.76,-1196.87 762,-1193 724.59,-1180.7 682.47,-1168.9 647.15,-1159.57"/>
 <polygon fill="black" stroke="black" points="647.94,-1156.16 637.37,-1157.01 646.16,-1162.93 647.94,-1156.16"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
 <text text-anchor="start" x="788" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- entity/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge70" class="edge">
 <title>entity/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M1065.05,-1238.77C1067.42,-1226.05 1070.98,-1208.34 1075,-1193 1083.52,-1160.5 1087.61,-1152.95 1098,-1121 1121.61,-1048.41 1153.19,-1033.22 1149,-957 1146.11,-904.32 1159.06,-886.46 1136,-839 1130.72,-828.13 1122.25,-818.22 1113.58,-809.99"/>
 <polygon fill="black" stroke="black" points="1115.77,-807.25 1105.97,-803.21 1111.11,-812.48 1115.77,-807.25"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L382">
 <text text-anchor="start" x="1146" y="-1018.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <!-- file/1 -->
 <g id="node2" class="node">
 <title>file/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L54">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L54">
 <polygon fill="springgreen" stroke="black" points="253,-1275 185,-1275 185,-1239 253,-1239 253,-1275"/>
 <text text-anchor="start" x="193" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="199" y="-1259.2" font-family="Monospace" font-size="11.00">file/1</text>
@@ -163,7 +163,7 @@
 <!-- locate_file/2 -->
 <g id="node25" class="node">
 <title>locate_file/2</title>
-<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L411">
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L411">
 <polygon fill="cornsilk" stroke="black" points="174,-1157 60,-1157 60,-1121 174,-1121 174,-1157"/>
 <text text-anchor="start" x="68" y="-1141.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="74" y="-1141.2" font-family="Monospace" font-size="11.00">locate_file/2</text>
@@ -177,12 +177,12 @@
 <!-- file/1&#45;&gt;locate_file/2 -->
 <g id="edge38" class="edge">
 <title>file/1&#45;&gt;locate_file/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
 <path fill="none" stroke="black" d="M208.55,-1238.94C200.18,-1225.82 187.76,-1207.54 175,-1193 166.06,-1182.8 155.31,-1172.53 145.51,-1163.79"/>
 <polygon fill="black" stroke="black" points="147.74,-1161.08 137.91,-1157.13 143.13,-1166.35 147.74,-1161.08"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
 <text text-anchor="start" x="183" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,7 +190,7 @@
 <!-- process_file/1 -->
 <g id="node27" class="node">
 <title>process_file/1</title>
-<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
+<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
 <polygon fill="cornsilk" stroke="black" points="825.5,-1039 704.5,-1039 704.5,-1003 825.5,-1003 825.5,-1039"/>
 <text text-anchor="start" x="713" y="-1023.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="719" y="-1023.2" font-family="Monospace" font-size="11.00">process_file/1</text>
@@ -204,12 +204,12 @@
 <!-- file/1&#45;&gt;process_file/1 -->
 <g id="edge40" class="edge">
 <title>file/1&#45;&gt;process_file/1</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
 <path fill="none" stroke="black" d="M219.15,-1239C219.8,-1206.55 223.07,-1137.56 239,-1121 242.96,-1116.88 552,-1060.53 694.47,-1034.73"/>
 <polygon fill="black" stroke="black" points="695.22,-1038.16 704.44,-1032.93 693.98,-1031.27 695.22,-1038.16"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
 <text text-anchor="start" x="239" y="-1136.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- file/1&#45;&gt;write_scan_header/1 -->
 <g id="edge39" class="edge">
 <title>file/1&#45;&gt;write_scan_header/1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
 <path fill="none" stroke="black" d="M253.06,-1242.85C257.7,-1241.38 262.43,-1240.04 267,-1239 411.27,-1206.08 454.21,-1237.97 598,-1203 639.05,-1193.02 683.67,-1175.25 715.83,-1161.13"/>
 <polygon fill="black" stroke="black" points="717.26,-1164.32 724.98,-1157.06 714.42,-1157.93 717.26,-1164.32"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
 <text text-anchor="start" x="630" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -230,12 +230,12 @@
 <!-- file/1&#45;&gt;write_scan_footer/1 -->
 <g id="edge41" class="edge">
 <title>file/1&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="calls">
 <path fill="none" stroke="black" d="M224.39,-1238.96C229.93,-1224.37 240.02,-1204.02 256,-1193 260.71,-1189.75 390.96,-1168.43 481.93,-1153.84"/>
 <polygon fill="black" stroke="black" points="482.67,-1157.26 491.99,-1152.22 481.56,-1150.35 482.67,-1157.26"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L404">
 <text text-anchor="start" x="256" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -243,7 +243,7 @@
 <!-- directory/1 -->
 <g id="node3" class="node">
 <title>directory/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L61">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L61">
 <polygon fill="springgreen" stroke="black" points="1225.5,-1275 1124.5,-1275 1124.5,-1239 1225.5,-1239 1225.5,-1275"/>
 <text text-anchor="start" x="1133" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1139" y="-1259.2" font-family="Monospace" font-size="11.00">directory/1</text>
@@ -257,7 +257,7 @@
 <!-- output_directory_files/1 -->
 <g id="node23" class="node">
 <title>output_directory_files/1</title>
-<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
 <polygon fill="cornsilk" stroke="black" points="1043.5,-1157 856.5,-1157 856.5,-1121 1043.5,-1121 1043.5,-1157"/>
 <text text-anchor="start" x="865" y="-1141.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="871" y="-1141.2" font-family="Monospace" font-size="11.00">output_directory_files/1</text>
@@ -271,12 +271,12 @@
 <!-- directory/1&#45;&gt;output_directory_files/1 -->
 <g id="edge31" class="edge">
 <title>directory/1&#45;&gt;output_directory_files/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1164.92,-1238.9C1155.7,-1224.68 1140.81,-1204.9 1123,-1193 1101.33,-1178.52 1075.52,-1167.86 1050.55,-1160.06"/>
 <polygon fill="black" stroke="black" points="1051.24,-1156.61 1040.66,-1157.1 1049.24,-1163.32 1051.24,-1156.61"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
 <text text-anchor="start" x="1135" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -284,12 +284,12 @@
 <!-- directory/1&#45;&gt;write_scan_header/1 -->
 <g id="edge30" class="edge">
 <title>directory/1&#45;&gt;write_scan_header/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1140.72,-1238.88C1111.41,-1224.84 1067.78,-1205.32 1028,-1193 1023.58,-1191.63 924.51,-1172.08 848.34,-1157.11"/>
 <polygon fill="black" stroke="black" points="848.71,-1153.62 838.23,-1155.13 847.36,-1160.49 848.71,-1153.62"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
 <text text-anchor="start" x="1056" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -297,12 +297,12 @@
 <!-- directory/1&#45;&gt;write_scan_footer/1 -->
 <g id="edge32" class="edge">
 <title>directory/1&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1124.25,-1241.68C1120.12,-1240.7 1116,-1239.8 1112,-1239 990.24,-1214.77 953.35,-1240.5 835,-1203 825.9,-1200.12 824.97,-1196.25 816,-1193 786.96,-1182.47 715.11,-1167.48 656.34,-1156.13"/>
 <polygon fill="black" stroke="black" points="656.76,-1152.65 646.28,-1154.2 655.44,-1159.52 656.76,-1152.65"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
 <text text-anchor="start" x="835" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -310,12 +310,12 @@
 <!-- directory/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge67" class="edge">
 <title>directory/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1176.53,-1238.96C1176.91,-1225.51 1175.53,-1206.78 1167,-1193 1151.81,-1168.48 1126.61,-1182.43 1113,-1157 1084.75,-1104.21 1158.31,-1095.54 1178,-1039 1191.17,-1001.18 1162.86,-925.07 1154,-885 1149.46,-864.48 1153.9,-856.97 1143,-839 1136.17,-827.74 1126.14,-817.6 1116.18,-809.29"/>
 <polygon fill="black" stroke="black" points="1118.29,-806.49 1108.27,-803.03 1113.94,-811.98 1118.29,-806.49"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
 <text text-anchor="start" x="1181" y="-1018.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -337,12 +337,12 @@
 <!-- directory/1&#45;&gt;os::absolute_file_name/2 -->
 <g id="edge65" class="edge">
 <title>directory/1&#45;&gt;os::absolute_file_name/2</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1225.75,-1243.74C1257.24,-1234.94 1297.86,-1221.39 1331,-1203 1349.99,-1192.46 1368.9,-1177.08 1383.22,-1164.16"/>
 <polygon fill="black" stroke="black" points="1385.71,-1166.63 1390.68,-1157.27 1380.96,-1161.48 1385.71,-1166.63"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
 <text text-anchor="start" x="1344" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -364,12 +364,12 @@
 <!-- directory/1&#45;&gt;os::directory_exists/1 -->
 <g id="edge66" class="edge">
 <title>directory/1&#45;&gt;os::directory_exists/1</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1180.02,-1238.88C1185.57,-1219.95 1194.58,-1189.19 1201.09,-1167"/>
 <polygon fill="black" stroke="black" points="1204.51,-1167.77 1203.96,-1157.19 1197.79,-1165.8 1204.51,-1167.77"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L361">
 <text text-anchor="start" x="1193" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -377,7 +377,7 @@
 <!-- rdirectory/1 -->
 <g id="node4" class="node">
 <title>rdirectory/1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L68">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L68">
 <polygon fill="springgreen" stroke="black" points="1385,-1393 1277,-1393 1277,-1357 1385,-1357 1385,-1393"/>
 <text text-anchor="start" x="1285" y="-1377.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1291" y="-1377.2" font-family="Monospace" font-size="11.00">rdirectory/1</text>
@@ -391,7 +391,7 @@
 <!-- output_rdirectory/1 -->
 <g id="node21" class="node">
 <title>output_rdirectory/1</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
 <polygon fill="cornsilk" stroke="black" points="1595,-1275 1441,-1275 1441,-1239 1595,-1239 1595,-1275"/>
 <text text-anchor="start" x="1449" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1455" y="-1259.2" font-family="Monospace" font-size="11.00">output_rdirectory/1</text>
@@ -405,12 +405,12 @@
 <!-- rdirectory/1&#45;&gt;output_rdirectory/1 -->
 <g id="edge26" class="edge">
 <title>rdirectory/1&#45;&gt;output_rdirectory/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1358.59,-1356.88C1391.19,-1336.67 1445.52,-1302.96 1481.55,-1280.61"/>
 <polygon fill="black" stroke="black" points="1483.64,-1283.43 1490.29,-1275.19 1479.95,-1277.48 1483.64,-1283.43"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
 <text text-anchor="start" x="1430" y="-1313.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -418,12 +418,12 @@
 <!-- rdirectory/1&#45;&gt;write_scan_header/1 -->
 <g id="edge25" class="edge">
 <title>rdirectory/1&#45;&gt;write_scan_header/1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1276.74,-1373.63C1201.26,-1370.15 1064.86,-1352.63 985,-1275 957.58,-1248.35 986.64,-1219.41 959,-1193 950.42,-1184.8 897.05,-1170.76 847.88,-1159.19"/>
 <polygon fill="black" stroke="black" points="848.65,-1155.78 838.12,-1156.91 847.06,-1162.6 848.65,-1155.78"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
 <text text-anchor="start" x="985" y="-1254.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -431,12 +431,12 @@
 <!-- rdirectory/1&#45;&gt;write_scan_footer/1 -->
 <g id="edge27" class="edge">
 <title>rdirectory/1&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1276.87,-1371.15C1104.41,-1361.56 575.93,-1328.06 522,-1275 495.83,-1249.25 497.34,-1226.66 512,-1193 516.93,-1181.68 525.61,-1171.68 534.73,-1163.51"/>
 <polygon fill="black" stroke="black" points="536.99,-1166.19 542.42,-1157.09 532.5,-1160.81 536.99,-1166.19"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
 <text text-anchor="start" x="522" y="-1254.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -444,12 +444,12 @@
 <!-- rdirectory/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge61" class="edge">
 <title>rdirectory/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1385.22,-1365.3C1444.4,-1353.5 1539.34,-1327.54 1604,-1275 1701.14,-1196.07 1748.76,-1105.55 1677,-1003 1565.61,-843.81 1324.51,-800.99 1185.84,-789.74"/>
 <polygon fill="black" stroke="black" points="1185.86,-786.23 1175.62,-788.95 1185.32,-793.21 1185.86,-786.23"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
 <text text-anchor="start" x="1710" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -457,12 +457,12 @@
 <!-- rdirectory/1&#45;&gt;os::absolute_file_name/2 -->
 <g id="edge59" class="edge">
 <title>rdirectory/1&#45;&gt;os::absolute_file_name/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1336.66,-1356.79C1349.96,-1316.39 1383.24,-1215.23 1399.2,-1166.74"/>
 <polygon fill="black" stroke="black" points="1402.53,-1167.82 1402.33,-1157.23 1395.88,-1165.64 1402.53,-1167.82"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
 <text text-anchor="start" x="1374" y="-1254.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -470,12 +470,12 @@
 <!-- rdirectory/1&#45;&gt;os::directory_exists/1 -->
 <g id="edge60" class="edge">
 <title>rdirectory/1&#45;&gt;os::directory_exists/1</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1322.03,-1356.79C1300.88,-1316.22 1247.78,-1214.38 1222.63,-1166.13"/>
 <polygon fill="black" stroke="black" points="1225.71,-1164.48 1217.98,-1157.23 1219.5,-1167.72 1225.71,-1164.48"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L335">
 <text text-anchor="start" x="1278" y="-1254.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -483,7 +483,7 @@
 <!-- library/1 -->
 <g id="node5" class="node">
 <title>library/1</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L75">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L75">
 <polygon fill="springgreen" stroke="black" points="647,-1275 559,-1275 559,-1239 647,-1239 647,-1275"/>
 <text text-anchor="start" x="567" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="573" y="-1259.2" font-family="Monospace" font-size="11.00">library/1</text>
@@ -497,12 +497,12 @@
 <!-- library/1&#45;&gt;output_directory_files/1 -->
 <g id="edge23" class="edge">
 <title>library/1&#45;&gt;output_directory_files/1</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
 <path fill="none" stroke="black" d="M647.09,-1241.23C650.09,-1240.42 653.08,-1239.66 656,-1239 770.62,-1212.95 822.25,-1271.17 918,-1203 930.18,-1194.33 938.02,-1179.62 942.89,-1166.6"/>
 <polygon fill="black" stroke="black" points="946.21,-1167.7 946.05,-1157.1 939.57,-1165.48 946.21,-1167.7"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
 <text text-anchor="start" x="927" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -510,12 +510,12 @@
 <!-- library/1&#45;&gt;write_scan_header/1 -->
 <g id="edge22" class="edge">
 <title>library/1&#45;&gt;write_scan_header/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
 <path fill="none" stroke="black" d="M626.31,-1238.88C653.62,-1218.84 698.98,-1185.53 729.43,-1163.18"/>
 <polygon fill="black" stroke="black" points="731.6,-1165.93 737.59,-1157.19 727.46,-1160.28 731.6,-1165.93"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
 <text text-anchor="start" x="686" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -523,12 +523,12 @@
 <!-- library/1&#45;&gt;write_scan_footer/1 -->
 <g id="edge24" class="edge">
 <title>library/1&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
 <path fill="none" stroke="black" d="M558.93,-1238.98C543.45,-1230.62 527.74,-1218.85 519,-1203 511.29,-1189.03 520.43,-1174.97 532.91,-1163.7"/>
 <polygon fill="black" stroke="black" points="535.49,-1166.11 540.99,-1157.06 531.04,-1160.7 535.49,-1166.11"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
 <text text-anchor="start" x="519" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -550,12 +550,12 @@
 <!-- library/1&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge57" class="edge">
 <title>library/1&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
 <path fill="none" stroke="black" d="M558.81,-1242.06C525.15,-1230.83 482.26,-1214.99 468,-1203 449.68,-1187.6 446.46,-1180.05 440,-1157 429.14,-1118.27 451.15,-1074.6 468.84,-1047.68"/>
 <polygon fill="black" stroke="black" points="471.87,-1049.46 474.62,-1039.23 466.09,-1045.51 471.87,-1049.46"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
 <text text-anchor="start" x="440" y="-1136.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -563,12 +563,12 @@
 <!-- library/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge58" class="edge">
 <title>library/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="calls">
 <path fill="none" stroke="black" d="M564.36,-1238.77C547.03,-1229.78 527.13,-1217.6 512,-1203 484.19,-1176.15 464.45,-1154.91 483,-1121 515.42,-1061.73 574.64,-1095.94 611,-1039 648.18,-980.78 585.65,-936.22 632,-885 677.51,-834.72 860.14,-807.61 978.29,-795.04"/>
 <polygon fill="black" stroke="black" points="978.87,-798.5 988.45,-793.98 978.14,-791.54 978.87,-798.5"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L326">
 <text text-anchor="start" x="623" y="-1018.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -576,7 +576,7 @@
 <!-- rlibrary/1 -->
 <g id="node6" class="node">
 <title>rlibrary/1</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L82">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L82">
 <polygon fill="springgreen" stroke="black" points="336.5,-1393 241.5,-1393 241.5,-1357 336.5,-1357 336.5,-1393"/>
 <text text-anchor="start" x="250" y="-1377.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="256" y="-1377.2" font-family="Monospace" font-size="11.00">rlibrary/1</text>
@@ -590,7 +590,7 @@
 <!-- output_rlibrary/1 -->
 <g id="node19" class="node">
 <title>output_rlibrary/1</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315">
 <polygon fill="cornsilk" stroke="black" points="476.5,-1275 335.5,-1275 335.5,-1239 476.5,-1239 476.5,-1275"/>
 <text text-anchor="start" x="344" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="350" y="-1259.2" font-family="Monospace" font-size="11.00">output_rlibrary/1</text>
@@ -604,12 +604,12 @@
 <!-- rlibrary/1&#45;&gt;output_rlibrary/1 -->
 <g id="edge18" class="edge">
 <title>rlibrary/1&#45;&gt;output_rlibrary/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M306.26,-1356.88C326.14,-1337.18 358.93,-1304.67 381.45,-1282.34"/>
 <polygon fill="black" stroke="black" points="384.03,-1284.71 388.67,-1275.19 379.1,-1279.74 384.03,-1284.71"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
 <text text-anchor="start" x="351" y="-1313.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -617,12 +617,12 @@
 <!-- rlibrary/1&#45;&gt;write_scan_header/1 -->
 <g id="edge17" class="edge">
 <title>rlibrary/1&#45;&gt;write_scan_header/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M336.59,-1369.49C439.43,-1358.8 677.85,-1328.75 736,-1275 765.44,-1247.79 766.99,-1198.07 764.59,-1167.16"/>
 <polygon fill="black" stroke="black" points="768.06,-1166.69 763.61,-1157.08 761.09,-1167.37 768.06,-1166.69"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
 <text text-anchor="start" x="757" y="-1254.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -630,12 +630,12 @@
 <!-- rlibrary/1&#45;&gt;write_scan_footer/1 -->
 <g id="edge19" class="edge">
 <title>rlibrary/1&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M285.91,-1356.92C281.94,-1329.96 277.86,-1276.72 299,-1239 316.12,-1208.44 331.27,-1207.84 363,-1193 400.31,-1175.55 444.21,-1163.24 481.88,-1154.91"/>
 <polygon fill="black" stroke="black" points="482.78,-1158.3 491.82,-1152.77 481.3,-1151.46 482.78,-1158.3"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
 <text text-anchor="start" x="299" y="-1254.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -643,12 +643,12 @@
 <!-- rlibrary/1&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge54" class="edge">
 <title>rlibrary/1&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M256.62,-1356.91C204.84,-1327.1 112.2,-1262.15 143,-1193 152.73,-1171.15 165.32,-1173.11 183,-1157 200.43,-1141.11 201.9,-1133.35 222,-1121 281.31,-1084.56 356.17,-1058.19 411.35,-1041.88"/>
 <polygon fill="black" stroke="black" points="412.44,-1045.2 421.06,-1039.05 410.49,-1038.48 412.44,-1045.2"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
 <text text-anchor="start" x="143" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -656,12 +656,12 @@
 <!-- rlibrary/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge55" class="edge">
 <title>rlibrary/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="calls">
 <path fill="none" stroke="black" d="M251.35,-1356.83C231.83,-1347.3 207.95,-1334.62 188,-1321 109.56,-1267.45 79.91,-1247.47 51,-1157 39.19,-1120.03 53.7,-1102.58 81,-1075 101.29,-1054.5 120.25,-1063.79 135,-1039 170.14,-979.94 100.77,-933.96 149,-885 206.34,-826.79 746.92,-799.01 978.03,-789.72"/>
 <polygon fill="black" stroke="black" points="978.28,-793.21 988.13,-789.32 978,-786.22 978.28,-793.21"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L306">
 <text text-anchor="start" x="81" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -669,7 +669,7 @@
 <!-- all/0 -->
 <g id="node7" class="node">
 <title>all/0</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L89">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L89">
 <polygon fill="springgreen" stroke="black" points="727,-1275 665,-1275 665,-1239 727,-1239 727,-1275"/>
 <text text-anchor="start" x="673" y="-1259.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="679" y="-1259.2" font-family="Monospace" font-size="11.00">all/0</text>
@@ -683,12 +683,12 @@
 <!-- all/0&#45;&gt;process_entity/2 -->
 <g id="edge45" class="edge">
 <title>all/0&#45;&gt;process_entity/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="calls">
 <path fill="none" stroke="black" d="M697.62,-1238.83C698.52,-1228.47 699.55,-1214.99 700,-1203 700.17,-1198.56 701.33,-1197.24 700,-1193 694.18,-1174.41 680.82,-1175.59 675,-1157 670.22,-1141.73 669.59,-1136.06 675,-1121 683.97,-1096.05 690.87,-1089.61 713,-1075 760.18,-1043.85 790.88,-1074.34 835,-1039 849.29,-1027.56 840.66,-1014.38 855,-1003 900.61,-966.79 931.42,-997.57 981,-967 996.68,-957.34 1010.76,-942.27 1021.12,-929.3"/>
 <polygon fill="black" stroke="black" points="1024.06,-931.22 1027.38,-921.16 1018.51,-926.96 1024.06,-931.22"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L460">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L460">
 <text text-anchor="start" x="713" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -696,12 +696,12 @@
 <!-- all/0&#45;&gt;write_scan_header/1 -->
 <g id="edge44" class="edge">
 <title>all/0&#45;&gt;write_scan_header/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.08,-1238.8C711.84,-1226.09 721.35,-1208.38 730,-1193 734.99,-1184.13 740.56,-1174.5 745.6,-1165.92"/>
 <polygon fill="black" stroke="black" points="748.74,-1167.49 750.8,-1157.1 742.71,-1163.94 748.74,-1167.49"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L460">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L460" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L460">
 <text text-anchor="start" x="730" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -709,12 +709,12 @@
 <!-- all/0&#45;&gt;write_scan_footer/1 -->
 <g id="edge46" class="edge">
 <title>all/0&#45;&gt;write_scan_footer/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L469" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L469" xlink:title="calls">
 <path fill="none" stroke="black" d="M665,-1242.8C661.96,-1241.52 658.92,-1240.23 656,-1239 617.82,-1222.9 593.23,-1237.31 570,-1203 562.98,-1192.63 562.04,-1178.94 563.14,-1166.97"/>
 <polygon fill="black" stroke="black" points="566.61,-1167.41 564.54,-1157.02 559.68,-1166.44 566.61,-1167.41"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L469" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L469">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L469" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L469">
 <text text-anchor="start" x="570" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -722,7 +722,7 @@
 <!-- predicates/2 -->
 <g id="node8" class="node">
 <title>predicates/2</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L95">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L95">
 <polygon fill="springgreen" stroke="black" points="126,-1039 18,-1039 18,-1003 126,-1003 126,-1039"/>
 <text text-anchor="start" x="26" y="-1023.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="32" y="-1023.2" font-family="Monospace" font-size="11.00">predicates/2</text>
@@ -736,7 +736,7 @@
 <!-- predicate/2 -->
 <g id="node9" class="node">
 <title>predicate/2</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L102">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L102">
 <polygon fill="springgreen" stroke="black" points="119.5,-921 18.5,-921 18.5,-885 119.5,-885 119.5,-921"/>
 <text text-anchor="start" x="27" y="-905.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="33" y="-905.2" font-family="Monospace" font-size="11.00">predicate/2</text>
@@ -750,12 +750,12 @@
 <!-- predicates/2&#45;&gt;predicate/2 -->
 <g id="edge1" class="edge">
 <title>predicates/2&#45;&gt;predicate/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L109" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L109" xlink:title="calls">
 <path fill="none" stroke="black" d="M71.56,-1002.88C71.07,-984.04 70.28,-953.47 69.71,-931.3"/>
 <polygon fill="black" stroke="black" points="73.2,-931.09 69.44,-921.19 66.2,-931.27 73.2,-931.09"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L109">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L109">
 <text text-anchor="start" x="70" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -763,7 +763,7 @@
 <!-- predicate/4 -->
 <g id="node10" class="node">
 <title>predicate/4</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
 <polygon fill="cornsilk" stroke="black" points="691.5,-803 590.5,-803 590.5,-767 691.5,-767 691.5,-803"/>
 <text text-anchor="start" x="599" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="605" y="-787.2" font-family="Monospace" font-size="11.00">predicate/4</text>
@@ -777,12 +777,12 @@
 <!-- predicate/2&#45;&gt;predicate/4 -->
 <g id="edge2" class="edge">
 <title>predicate/2&#45;&gt;predicate/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L115" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L115" xlink:title="calls">
 <path fill="none" stroke="black" d="M74.1,-884.98C79.5,-870.19 89.55,-849.53 106,-839 183.23,-789.58 457.05,-784.8 580.21,-785.25"/>
 <polygon fill="black" stroke="black" points="580.21,-788.75 590.23,-785.3 580.25,-781.75 580.21,-788.75"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L115">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L115">
 <text text-anchor="start" x="106" y="-841.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -790,7 +790,7 @@
 <!-- non_scoped_predicate/4 -->
 <g id="node11" class="node">
 <title>non_scoped_predicate/4</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
 <polygon fill="cornsilk" stroke="black" points="397,-567 223,-567 223,-531 397,-531 397,-567"/>
 <text text-anchor="start" x="231" y="-551.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="237" y="-551.2" font-family="Monospace" font-size="11.00">non_scoped_predicate/4</text>
@@ -804,12 +804,12 @@
 <!-- predicate/4&#45;&gt;non_scoped_predicate/4 -->
 <g id="edge3" class="edge">
 <title>predicate/4&#45;&gt;non_scoped_predicate/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M590.38,-768.29C543.83,-752.24 474.45,-724.12 423,-685 381.99,-653.82 345.99,-605.17 326.19,-575.58"/>
 <polygon fill="black" stroke="black" points="329,-573.47 320.58,-567.04 323.15,-577.32 329,-573.47"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
 <text text-anchor="start" x="423" y="-664.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -817,7 +817,7 @@
 <!-- used_by_scoped_predicate/2 -->
 <g id="node16" class="node">
 <title>used_by_scoped_predicate/2</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267">
 <polygon fill="cornsilk" stroke="black" points="660,-685 460,-685 460,-649 660,-649 660,-685"/>
 <text text-anchor="start" x="468" y="-669.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="474" y="-669.2" font-family="Monospace" font-size="11.00">used_by_scoped_predicate/2</text>
@@ -831,12 +831,12 @@
 <!-- predicate/4&#45;&gt;used_by_scoped_predicate/2 -->
 <g id="edge4" class="edge">
 <title>predicate/4&#45;&gt;used_by_scoped_predicate/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M629.05,-766.88C615.53,-747.52 593.37,-715.79 577.81,-693.51"/>
 <polygon fill="black" stroke="black" points="580.6,-691.38 572,-685.19 574.86,-695.39 580.6,-691.38"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
 <text text-anchor="start" x="602" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -844,7 +844,7 @@
 <!-- entity_property/2 -->
 <g id="node18" class="node">
 <title>entity_property/2</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L295" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L295">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L295" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L295">
 <polygon fill="cornsilk" stroke="black" points="603.5,-95 462.5,-95 462.5,-59 603.5,-59 603.5,-95"/>
 <text text-anchor="start" x="471" y="-79.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="477" y="-79.2" font-family="Monospace" font-size="11.00">entity_property/2</text>
@@ -858,12 +858,12 @@
 <!-- predicate/4&#45;&gt;entity_property/2 -->
 <g id="edge5" class="edge">
 <title>predicate/4&#45;&gt;entity_property/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M667.94,-766.84C695.71,-746.81 735,-710.9 735,-668 735,-668 735,-668 735,-194 735,-160.51 650.43,-121.79 590.74,-98.64"/>
 <polygon fill="black" stroke="black" points="591.97,-95.36 581.38,-95.06 589.47,-101.9 591.97,-95.36"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
 <text text-anchor="start" x="735" y="-428.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -885,12 +885,12 @@
 <!-- predicate/4&#45;&gt;list::member/2 -->
 <g id="edge47" class="edge">
 <title>predicate/4&#45;&gt;list::member/2</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="calls">
 <path fill="none" stroke="black" d="M652.88,-766.89C689.62,-712.23 799,-535.83 799,-373 799,-373 799,-373 799,-194 799,-151.91 760.34,-119.87 727.46,-100.25"/>
 <polygon fill="black" stroke="black" points="728.79,-96.98 718.38,-95.04 725.31,-103.05 728.79,-96.98"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L120">
 <text text-anchor="start" x="796" y="-428.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -912,12 +912,12 @@
 <!-- predicate/4&#45;&gt;list::memberchk/2 -->
 <g id="edge48" class="edge">
 <title>predicate/4&#45;&gt;list::memberchk/2</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L131" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M647.44,-766.79C654.36,-747.28 664.93,-714.37 669,-685 678.48,-616.64 673.32,-595.59 649,-531 638.88,-504.13 621.18,-476.56 607.44,-457.36"/>
 <polygon fill="black" stroke="black" points="610.18,-455.17 601.45,-449.16 604.53,-459.3 610.18,-455.17"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L131">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L131">
 <text text-anchor="start" x="672" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -925,7 +925,7 @@
 <!-- inherited_scope_directive/2 -->
 <g id="node12" class="node">
 <title>inherited_scope_directive/2</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L203">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L203">
 <polygon fill="cornsilk" stroke="black" points="478.5,-449 271.5,-449 271.5,-413 478.5,-413 478.5,-449"/>
 <text text-anchor="start" x="280" y="-433.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="286" y="-433.2" font-family="Monospace" font-size="11.00">inherited_scope_directive/2</text>
@@ -939,12 +939,12 @@
 <!-- non_scoped_predicate/4&#45;&gt;inherited_scope_directive/2 -->
 <g id="edge8" class="edge">
 <title>non_scoped_predicate/4&#45;&gt;inherited_scope_directive/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M319.59,-530.88C330.34,-511.69 347.91,-480.35 360.37,-458.1"/>
 <polygon fill="black" stroke="black" points="363.53,-459.62 365.37,-449.19 357.43,-456.2 363.53,-459.62"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
 <text text-anchor="start" x="344" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -952,7 +952,7 @@
 <!-- local_scope_directive/2 -->
 <g id="node15" class="node">
 <title>local_scope_directive/2</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257">
 <polygon fill="cornsilk" stroke="black" points="342,-213 162,-213 162,-177 342,-177 342,-213"/>
 <text text-anchor="start" x="170" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="176" y="-197.2" font-family="Monospace" font-size="11.00">local_scope_directive/2</text>
@@ -966,12 +966,12 @@
 <!-- non_scoped_predicate/4&#45;&gt;local_scope_directive/2 -->
 <g id="edge7" class="edge">
 <title>non_scoped_predicate/4&#45;&gt;local_scope_directive/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M282.53,-530.92C269.92,-521.74 255.85,-509.36 247,-495 218.73,-449.11 225.26,-430.54 219,-377 212.53,-321.7 230.17,-257.8 242.08,-222.65"/>
 <polygon fill="black" stroke="black" points="245.42,-223.7 245.42,-213.11 238.81,-221.39 245.42,-223.7"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
 <text text-anchor="start" x="219" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -979,12 +979,12 @@
 <!-- non_scoped_predicate/4&#45;&gt;entity_property/2 -->
 <g id="edge6" class="edge">
 <title>non_scoped_predicate/4&#45;&gt;entity_property/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M244.48,-530.87C197.69,-514.23 143,-483.72 143,-432 143,-432 143,-432 143,-194 143,-130.06 338.04,-98.54 452.26,-85.57"/>
 <polygon fill="black" stroke="black" points="452.82,-89.03 462.37,-84.44 452.05,-82.07 452.82,-89.03"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
 <text text-anchor="start" x="143" y="-310.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -992,12 +992,12 @@
 <!-- non_scoped_predicate/4&#45;&gt;list::member/2 -->
 <g id="edge49" class="edge">
 <title>non_scoped_predicate/4&#45;&gt;list::member/2</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M299.07,-530.96C287.52,-511.88 270.03,-479.6 263,-449 255.34,-415.65 248.26,-326.34 262,-295 283.59,-245.74 317.3,-254.92 351,-213 362.61,-198.56 357.55,-188.59 372,-177 391.07,-161.71 526.06,-121.84 611.5,-97.62"/>
 <polygon fill="black" stroke="black" points="612.48,-100.98 621.15,-94.89 610.57,-94.24 612.48,-100.98"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
 <text text-anchor="start" x="262" y="-310.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1005,12 +1005,12 @@
 <!-- non_scoped_predicate/4&#45;&gt;list::memberchk/2 -->
 <g id="edge50" class="edge">
 <title>non_scoped_predicate/4&#45;&gt;list::memberchk/2</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="calls">
 <path fill="none" stroke="black" d="M388.93,-531C422.21,-522.38 460.84,-510.42 494,-495 516.96,-484.32 540.63,-468.42 558.48,-455.27"/>
 <polygon fill="black" stroke="black" points="560.84,-457.87 566.74,-449.07 556.64,-452.27 560.84,-457.87"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L181">
 <text text-anchor="start" x="513" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1018,7 +1018,7 @@
 <!-- inherited_scope_directive/3 -->
 <g id="node13" class="node">
 <title>inherited_scope_directive/3</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219">
 <polygon fill="cornsilk" stroke="black" points="505.5,-331 298.5,-331 298.5,-295 505.5,-295 505.5,-331"/>
 <text text-anchor="start" x="307" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="313" y="-315.2" font-family="Monospace" font-size="11.00">inherited_scope_directive/3</text>
@@ -1032,12 +1032,12 @@
 <!-- inherited_scope_directive/2&#45;&gt;inherited_scope_directive/3 -->
 <g id="edge9" class="edge">
 <title>inherited_scope_directive/2&#45;&gt;inherited_scope_directive/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L203" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M378.98,-412.88C383.39,-393.95 390.55,-363.19 395.71,-341"/>
 <polygon fill="black" stroke="black" points="399.14,-341.72 398,-331.19 392.32,-340.13 399.14,-341.72"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L203">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L203">
 <text text-anchor="start" x="389" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1045,7 +1045,7 @@
 <!-- ancestor/4 -->
 <g id="node14" class="node">
 <title>ancestor/4</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L227">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L227">
 <polygon fill="cornsilk" stroke="black" points="475.5,-213 380.5,-213 380.5,-177 475.5,-177 475.5,-213"/>
 <text text-anchor="start" x="389" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="395" y="-197.2" font-family="Monospace" font-size="11.00">ancestor/4</text>
@@ -1059,12 +1059,12 @@
 <!-- inherited_scope_directive/3&#45;&gt;ancestor/4 -->
 <g id="edge10" class="edge">
 <title>inherited_scope_directive/3&#45;&gt;ancestor/4</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M405.84,-294.88C410.08,-275.95 416.97,-245.19 421.95,-223"/>
 <polygon fill="black" stroke="black" points="425.38,-223.71 424.15,-213.19 418.55,-222.18 425.38,-223.71"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219">
 <text text-anchor="start" x="415" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1072,12 +1072,12 @@
 <!-- inherited_scope_directive/3&#45;&gt;local_scope_directive/2 -->
 <g id="edge11" class="edge">
 <title>inherited_scope_directive/3&#45;&gt;local_scope_directive/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M379.87,-294.88C354.05,-274.92 311.24,-241.82 282.35,-219.47"/>
 <polygon fill="black" stroke="black" points="284.28,-216.54 274.22,-213.19 279.99,-222.07 284.28,-216.54"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L219">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L219">
 <text text-anchor="start" x="331" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1085,12 +1085,12 @@
 <!-- local_scope_directive/2&#45;&gt;entity_property/2 -->
 <g id="edge12" class="edge">
 <title>local_scope_directive/2&#45;&gt;entity_property/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="calls">
 <path fill="none" stroke="black" d="M250.72,-176.89C250.66,-162.66 253.03,-142.88 265,-131 291.04,-105.18 383.42,-91.21 452.48,-84.2"/>
 <polygon fill="black" stroke="black" points="452.88,-87.68 462.49,-83.22 452.2,-80.71 452.88,-87.68"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257">
 <text text-anchor="start" x="265" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1098,12 +1098,12 @@
 <!-- local_scope_directive/2&#45;&gt;list::member/2 -->
 <g id="edge51" class="edge">
 <title>local_scope_directive/2&#45;&gt;list::member/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="calls">
 <path fill="none" stroke="black" d="M267.05,-176.96C281.2,-162.16 303.78,-141.49 328,-131 442.17,-81.53 485.28,-116.43 611.12,-95.18"/>
 <polygon fill="black" stroke="black" points="611.9,-98.6 621.13,-93.4 610.67,-91.71 611.9,-98.6"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L257">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L257">
 <text text-anchor="start" x="328" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1111,7 +1111,7 @@
 <!-- used_by_scoped_predicate/6 -->
 <g id="node17" class="node">
 <title>used_by_scoped_predicate/6</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L274">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L274">
 <polygon fill="cornsilk" stroke="black" points="640,-567 440,-567 440,-531 640,-531 640,-567"/>
 <text text-anchor="start" x="448" y="-551.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="454" y="-551.2" font-family="Monospace" font-size="11.00">used_by_scoped_predicate/6</text>
@@ -1125,12 +1125,12 @@
 <!-- used_by_scoped_predicate/2&#45;&gt;used_by_scoped_predicate/6 -->
 <g id="edge14" class="edge">
 <title>used_by_scoped_predicate/2&#45;&gt;used_by_scoped_predicate/6</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="calls">
 <path fill="none" stroke="black" d="M557.05,-648.88C553.8,-630.04 548.53,-599.47 544.71,-577.3"/>
 <polygon fill="black" stroke="black" points="548.11,-576.45 542.96,-567.19 541.21,-577.64 548.11,-576.45"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267">
 <text text-anchor="start" x="550" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1138,12 +1138,12 @@
 <!-- used_by_scoped_predicate/2&#45;&gt;entity_property/2 -->
 <g id="edge13" class="edge">
 <title>used_by_scoped_predicate/2&#45;&gt;entity_property/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="calls">
 <path fill="none" stroke="black" d="M580.68,-648.91C601.23,-630.75 632.06,-600.13 649,-567 697.84,-471.45 688.6,-437.7 700,-331 701.7,-315.09 705.15,-310.15 700,-295 672.29,-213.57 600.33,-138.85 560.51,-102.03"/>
 <polygon fill="black" stroke="black" points="562.74,-99.33 552.99,-95.18 558.03,-104.5 562.74,-99.33"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L267">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L267">
 <text text-anchor="start" x="696" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1151,12 +1151,12 @@
 <!-- used_by_scoped_predicate/6&#45;&gt;inherited_scope_directive/2 -->
 <g id="edge16" class="edge">
 <title>used_by_scoped_predicate/6&#45;&gt;inherited_scope_directive/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="calls">
 <path fill="none" stroke="black" d="M515.65,-530.88C487.14,-510.84 439.76,-477.53 407.97,-455.18"/>
 <polygon fill="black" stroke="black" points="409.64,-452.07 399.45,-449.19 405.61,-457.8 409.64,-452.07"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279">
 <text text-anchor="start" x="462" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1164,12 +1164,12 @@
 <!-- used_by_scoped_predicate/6&#45;&gt;entity_property/2 -->
 <g id="edge15" class="edge">
 <title>used_by_scoped_predicate/6&#45;&gt;entity_property/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="calls">
 <path fill="none" stroke="black" d="M523.96,-530.85C515.99,-521.12 507.17,-508.27 503,-495 501.67,-490.76 502.83,-489.44 503,-485 505.67,-416.4 509.9,-399.46 515,-331 521.12,-248.88 527.9,-151.73 531.12,-105.33"/>
 <polygon fill="black" stroke="black" points="534.62,-105.4 531.82,-95.18 527.64,-104.92 534.62,-105.4"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279">
 <text text-anchor="start" x="517" y="-310.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1177,12 +1177,12 @@
 <!-- used_by_scoped_predicate/6&#45;&gt;list::member/2 -->
 <g id="edge52" class="edge">
 <title>used_by_scoped_predicate/6&#45;&gt;list::member/2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L274" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L274" xlink:title="calls">
 <path fill="none" stroke="black" d="M576.95,-530.96C607.46,-514.66 648.75,-486.96 668,-449 671.87,-441.37 671.69,-303.55 672,-295 674.46,-226.67 678.45,-146.29 680.57,-105.19"/>
 <polygon fill="black" stroke="black" points="684.07,-105.32 681.09,-95.15 677.08,-104.96 684.07,-105.32"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L274">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L274">
 <text text-anchor="start" x="672" y="-310.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1190,12 +1190,12 @@
 <!-- used_by_scoped_predicate/6&#45;&gt;list::memberchk/2 -->
 <g id="edge53" class="edge">
 <title>used_by_scoped_predicate/6&#45;&gt;list::memberchk/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="calls">
 <path fill="none" stroke="black" d="M547.08,-530.88C554.95,-511.86 567.76,-480.91 576.95,-458.7"/>
 <polygon fill="black" stroke="black" points="580.3,-459.76 580.89,-449.19 573.83,-457.09 580.3,-459.76"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L279">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L279">
 <text text-anchor="start" x="565" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1203,7 +1203,7 @@
 <!-- sub_library/2 -->
 <g id="node20" class="node">
 <title>sub_library/2</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L321">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L321">
 <polygon fill="cornsilk" stroke="black" points="390,-1157 276,-1157 276,-1121 390,-1121 390,-1157"/>
 <text text-anchor="start" x="284" y="-1141.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="290" y="-1141.2" font-family="Monospace" font-size="11.00">sub_library/2</text>
@@ -1217,12 +1217,12 @@
 <!-- output_rlibrary/1&#45;&gt;sub_library/2 -->
 <g id="edge20" class="edge">
 <title>output_rlibrary/1&#45;&gt;sub_library/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="calls">
 <path fill="none" stroke="black" d="M395.23,-1238.88C383.1,-1219.61 363.25,-1188.07 349.24,-1165.81"/>
 <polygon fill="black" stroke="black" points="352.1,-1163.79 343.82,-1157.19 346.18,-1167.51 352.1,-1163.79"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315">
 <text text-anchor="start" x="371" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1230,12 +1230,12 @@
 <!-- output_rlibrary/1&#45;&gt;output_directory_files/1 -->
 <g id="edge21" class="edge">
 <title>output_rlibrary/1&#45;&gt;output_directory_files/1</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="calls">
 <path fill="none" stroke="black" d="M476.87,-1241.26C481.64,-1240.45 486.38,-1239.68 491,-1239 657.08,-1214.51 710.63,-1264.07 867,-1203 878.94,-1198.34 903.11,-1179.52 922.3,-1163.66"/>
 <polygon fill="black" stroke="black" points="924.73,-1166.18 930.17,-1157.09 920.25,-1160.81 924.73,-1166.18"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L315">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L315">
 <text text-anchor="start" x="883" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1243,12 +1243,12 @@
 <!-- sub_library/2&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge56" class="edge">
 <title>sub_library/2&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L321" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L321" xlink:title="calls">
 <path fill="none" stroke="black" d="M346.82,-1120.86C358.27,-1107.36 375.45,-1088.6 393,-1075 407.97,-1063.39 425.8,-1052.75 441.94,-1044.09"/>
 <polygon fill="black" stroke="black" points="443.99,-1046.97 451.22,-1039.23 440.74,-1040.77 443.99,-1046.97"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L321">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L321">
 <text text-anchor="start" x="393" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1256,7 +1256,7 @@
 <!-- sub_directory/2 -->
 <g id="node22" class="node">
 <title>sub_directory/2</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356">
 <polygon fill="cornsilk" stroke="black" points="1668,-1157 1540,-1157 1540,-1121 1668,-1121 1668,-1157"/>
 <text text-anchor="start" x="1548" y="-1141.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1554" y="-1141.2" font-family="Monospace" font-size="11.00">sub_directory/2</text>
@@ -1270,12 +1270,12 @@
 <!-- output_rdirectory/1&#45;&gt;sub_directory/2 -->
 <g id="edge28" class="edge">
 <title>output_rdirectory/1&#45;&gt;sub_directory/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="calls">
 <path fill="none" stroke="black" d="M1530.69,-1238.88C1545.04,-1219.52 1568.57,-1187.79 1585.09,-1165.51"/>
 <polygon fill="black" stroke="black" points="1588.11,-1167.3 1591.26,-1157.19 1582.49,-1163.14 1588.11,-1167.3"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
 <text text-anchor="start" x="1563" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1283,12 +1283,12 @@
 <!-- output_rdirectory/1&#45;&gt;output_directory_files/1 -->
 <g id="edge29" class="edge">
 <title>output_rdirectory/1&#45;&gt;output_directory_files/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="calls">
 <path fill="none" stroke="black" d="M1440.98,-1238.97C1381.94,-1226.03 1298.41,-1207.97 1225,-1193 1167.49,-1181.28 1103.06,-1168.82 1051.04,-1158.94"/>
 <polygon fill="black" stroke="black" points="1051.61,-1155.48 1041.14,-1157.06 1050.31,-1162.36 1051.61,-1155.48"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
 <text text-anchor="start" x="1273" y="-1195.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1296,12 +1296,12 @@
 <!-- output_rdirectory/1&#45;&gt;list::member/2 -->
 <g id="edge62" class="edge">
 <title>output_rdirectory/1&#45;&gt;list::member/2</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="calls">
 <path fill="none" stroke="black" d="M1522.71,-1238.61C1529.14,-1210.74 1537.12,-1155.68 1511,-1121 1443.7,-1031.62 1343.78,-1125.65 1273,-1039 1251.45,-1012.61 1263,-997.07 1263,-963 1263,-963 1263,-963 1263,-194 1263,-91.06 907.85,-78.18 752.89,-77.46"/>
 <polygon fill="black" stroke="black" points="752.54,-73.96 742.53,-77.42 752.52,-80.96 752.54,-73.96"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L345">
 <text text-anchor="start" x="1263" y="-664.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1323,12 +1323,12 @@
 <!-- sub_directory/2&#45;&gt;logtalk::loaded_file/1 -->
 <g id="edge63" class="edge">
 <title>sub_directory/2&#45;&gt;logtalk::loaded_file/1</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M1600.61,-1120.88C1596.85,-1101.95 1590.75,-1071.19 1586.35,-1049"/>
 <polygon fill="black" stroke="black" points="1589.79,-1048.31 1584.41,-1039.19 1582.92,-1049.68 1589.79,-1048.31"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356">
 <text text-anchor="start" x="1593" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1350,12 +1350,12 @@
 <!-- sub_directory/2&#45;&gt;os::decompose_file_name/3 -->
 <g id="edge64" class="edge">
 <title>sub_directory/2&#45;&gt;os::decompose_file_name/3</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="calls">
 <path fill="none" stroke="black" d="M1570.8,-1120.88C1531.17,-1100.45 1464.82,-1066.25 1421.48,-1043.9"/>
 <polygon fill="black" stroke="black" points="1422.83,-1040.66 1412.34,-1039.19 1419.62,-1046.88 1422.83,-1040.66"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L356">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L356">
 <text text-anchor="start" x="1498" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1363,12 +1363,12 @@
 <!-- output_directory_files/1&#45;&gt;process_file/1 -->
 <g id="edge33" class="edge">
 <title>output_directory_files/1&#45;&gt;process_file/1</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M916.21,-1120.83C897.3,-1110.9 873.48,-1097.86 853,-1085 833.35,-1072.66 812.19,-1057.57 795.54,-1045.25"/>
 <polygon fill="black" stroke="black" points="797.38,-1042.26 787.27,-1039.09 793.2,-1047.87 797.38,-1042.26"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
 <text text-anchor="start" x="853" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1376,12 +1376,12 @@
 <!-- output_directory_files/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge68" class="edge">
 <title>output_directory_files/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M975.08,-1120.8C1019.71,-1088.19 1110.13,-1012.35 1130,-921 1137.74,-885.39 1143.11,-873 1130,-839 1125.9,-828.36 1118.56,-818.53 1110.83,-810.3"/>
 <polygon fill="black" stroke="black" points="1113.27,-807.78 1103.71,-803.21 1108.33,-812.75 1113.27,-807.78"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
 <text text-anchor="start" x="1117" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1403,12 +1403,12 @@
 <!-- output_directory_files/1&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge69" class="edge">
 <title>output_directory_files/1&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M966.21,-1120.68C989.28,-1093.85 1026.15,-1041.34 1001,-1003 982.42,-974.67 900.87,-943.85 840.57,-924.25"/>
 <polygon fill="black" stroke="black" points="841.31,-920.81 830.72,-921.09 839.17,-927.48 841.31,-920.81"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L371">
 <text text-anchor="start" x="1009" y="-1018.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1416,12 +1416,12 @@
 <!-- process_entity/2&#45;&gt;predicate/4 -->
 <g id="edge37" class="edge">
 <title>process_entity/2&#45;&gt;predicate/4</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="calls">
 <path fill="none" stroke="black" d="M980.27,-884.88C905.57,-863.11 777.2,-825.7 701.61,-803.66"/>
 <polygon fill="black" stroke="black" points="702.33,-800.23 691.75,-800.79 700.38,-806.95 702.33,-800.23"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396">
 <text text-anchor="start" x="851" y="-841.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1429,12 +1429,12 @@
 <!-- process_entity/2&#45;&gt;logtalk::print_message/3 -->
 <g id="edge71" class="edge">
 <title>process_entity/2&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="calls">
 <path fill="none" stroke="black" d="M1045.34,-884.88C1052.39,-865.86 1063.87,-834.91 1072.1,-812.7"/>
 <polygon fill="black" stroke="black" points="1075.44,-813.78 1075.63,-803.19 1068.87,-811.35 1075.44,-813.78"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L396">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L396">
 <text text-anchor="start" x="1061" y="-841.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1442,7 +1442,7 @@
 <!-- add_extension/2 -->
 <g id="node26" class="node">
 <title>add_extension/2</title>
-<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437">
+<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437">
 <polygon fill="cornsilk" stroke="black" points="292,-1039 164,-1039 164,-1003 292,-1003 292,-1039"/>
 <text text-anchor="start" x="172" y="-1023.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="178" y="-1023.2" font-family="Monospace" font-size="11.00">add_extension/2</text>
@@ -1456,12 +1456,12 @@
 <!-- locate_file/2&#45;&gt;add_extension/2 -->
 <g id="edge42" class="edge">
 <title>locate_file/2&#45;&gt;add_extension/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="calls">
 <path fill="none" stroke="black" d="M112.68,-1120.83C110.29,-1107.31 109.34,-1088.55 118,-1075 126.79,-1061.24 140.25,-1050.97 154.77,-1043.32"/>
 <polygon fill="black" stroke="black" points="156.44,-1046.4 163.92,-1038.9 153.39,-1040.1 156.44,-1046.4"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L419">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L419">
 <text text-anchor="start" x="118" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1469,12 +1469,12 @@
 <!-- locate_file/2&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge72" class="edge">
 <title>locate_file/2&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L411" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L411" xlink:title="calls">
 <path fill="none" stroke="black" d="M128.16,-1120.88C138.68,-1106.24 155.81,-1085.86 176,-1075 192.94,-1065.89 284.68,-1050.9 364.33,-1039.17"/>
 <polygon fill="black" stroke="black" points="365.09,-1042.6 374.47,-1037.69 364.07,-1035.67 365.09,-1042.6"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L411">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L411">
 <text text-anchor="start" x="176" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1482,12 +1482,12 @@
 <!-- locate_file/2&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge73" class="edge">
 <title>locate_file/2&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="calls">
+<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="calls">
 <path fill="none" stroke="black" d="M123.81,-1120.96C130.43,-1106.58 141.86,-1086.53 158,-1075 211.33,-1036.91 243.77,-1070.95 301,-1039 321.03,-1027.82 317.24,-1012.77 338,-1003 472.29,-939.8 529.51,-1014.88 670,-967 696.62,-957.93 723.62,-941.06 743.3,-927.07"/>
 <polygon fill="black" stroke="black" points="745.5,-929.79 751.53,-921.07 741.38,-924.13 745.5,-929.79"/>
 </a>
 </g>
-<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L419">
+<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L419">
 <text text-anchor="start" x="338" y="-1018.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1509,12 +1509,12 @@
 <!-- add_extension/2&#45;&gt;os::decompose_file_name/4 -->
 <g id="edge74" class="edge">
 <title>add_extension/2&#45;&gt;os::decompose_file_name/4</title>
-<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="calls">
+<g id="a_edge74"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="calls">
 <path fill="none" stroke="black" d="M231.98,-1002.88C236.39,-983.95 243.55,-953.19 248.71,-931"/>
 <polygon fill="black" stroke="black" points="252.14,-931.72 251,-921.19 245.32,-930.13 252.14,-931.72"/>
 </a>
 </g>
-<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437">
+<g id="a_edge74&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437">
 <text text-anchor="start" x="242" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1536,12 +1536,12 @@
 <!-- add_extension/2&#45;&gt;logtalk::file_type_extension/2 -->
 <g id="edge75" class="edge">
 <title>add_extension/2&#45;&gt;logtalk::file_type_extension/2</title>
-<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="calls">
+<g id="a_edge75"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="calls">
 <path fill="none" stroke="black" d="M265.77,-1002.88C311.24,-982.28 387.62,-947.67 436.9,-925.34"/>
 <polygon fill="black" stroke="black" points="438.41,-928.5 446.07,-921.19 435.52,-922.13 438.41,-928.5"/>
 </a>
 </g>
-<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L437">
+<g id="a_edge75&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L437">
 <text text-anchor="start" x="363" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1549,12 +1549,12 @@
 <!-- process_file/1&#45;&gt;process_entity/2 -->
 <g id="edge43" class="edge">
 <title>process_file/1&#45;&gt;process_entity/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="calls">
 <path fill="none" stroke="black" d="M825.72,-1004.08C857.67,-994.85 897.14,-982.06 931,-967 956.68,-955.57 984.02,-939.59 1004.76,-926.58"/>
 <polygon fill="black" stroke="black" points="1006.66,-929.52 1013.23,-921.21 1002.91,-923.61 1006.66,-929.52"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
 <text text-anchor="start" x="949" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1562,12 +1562,12 @@
 <!-- process_file/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge76" class="edge">
 <title>process_file/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge76"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="calls">
+<g id="a_edge76"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="calls">
 <path fill="none" stroke="black" d="M790.55,-1002.82C818.17,-983.88 863.05,-951.95 899,-921 916.15,-906.24 917.53,-899.39 935,-885 970.23,-855.98 1014,-827.34 1044.57,-808.4"/>
 <polygon fill="black" stroke="black" points="1046.54,-811.3 1053.22,-803.08 1042.87,-805.34 1046.54,-811.3"/>
 </a>
 </g>
-<g id="a_edge76&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
+<g id="a_edge76&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
 <text text-anchor="start" x="935" y="-900.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1575,12 +1575,12 @@
 <!-- process_file/1&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge77" class="edge">
 <title>process_file/1&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge77"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="calls">
+<g id="a_edge77"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="calls">
 <path fill="none" stroke="black" d="M766.18,-1002.88C767.48,-984.04 769.59,-953.47 771.12,-931.3"/>
 <polygon fill="black" stroke="black" points="774.62,-931.4 771.81,-921.19 767.63,-930.92 774.62,-931.4"/>
 </a>
 </g>
-<g id="a_edge77&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
+<g id="a_edge77&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L449">
 <text text-anchor="start" x="769" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1588,12 +1588,12 @@
 <!-- write_scan_header/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge78" class="edge">
 <title>write_scan_header/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge78"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="calls">
+<g id="a_edge78"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="calls">
 <path fill="none" stroke="black" d="M826.21,-1120.97C857.11,-1111.92 894.15,-1099.63 926,-1085 961.54,-1068.68 975.58,-1068.71 1001,-1039 1012.27,-1025.83 1005.69,-1016.93 1016,-1003 1032.99,-980.03 1102.84,-946.85 1115,-921 1131.79,-885.3 1113.67,-840.13 1098.38,-812.15"/>
 <polygon fill="black" stroke="black" points="1101.36,-810.31 1093.36,-803.36 1095.28,-813.78 1101.36,-810.31"/>
 </a>
 </g>
-<g id="a_edge78&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472">
+<g id="a_edge78&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472">
 <text text-anchor="start" x="1076" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1615,12 +1615,12 @@
 <!-- write_scan_header/1&#45;&gt;os::date_time/7 -->
 <g id="edge79" class="edge">
 <title>write_scan_header/1&#45;&gt;os::date_time/7</title>
-<g id="a_edge79"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="calls">
+<g id="a_edge79"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="calls">
 <path fill="none" stroke="black" d="M819.08,-1120.96C841.27,-1112.55 865.83,-1100.76 885,-1085 897.15,-1075.02 907.28,-1060.74 914.65,-1048.3"/>
 <polygon fill="black" stroke="black" points="917.89,-1049.68 919.73,-1039.25 911.78,-1046.26 917.89,-1049.68"/>
 </a>
 </g>
-<g id="a_edge79&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L472">
+<g id="a_edge79&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L472">
 <text text-anchor="start" x="894" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1628,12 +1628,12 @@
 <!-- write_scan_footer/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge80" class="edge">
 <title>write_scan_footer/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge80"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="calls">
+<g id="a_edge80"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="calls">
 <path fill="none" stroke="black" d="M595.93,-1120.98C620.47,-1103.72 655.07,-1074.54 670,-1039 696.78,-975.26 604.89,-939.05 648,-885 688.52,-834.2 863.1,-807.42 978.11,-795.02"/>
 <polygon fill="black" stroke="black" points="978.78,-798.47 988.36,-793.94 978.05,-791.51 978.78,-798.47"/>
 </a>
 </g>
-<g id="a_edge80&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478">
+<g id="a_edge80&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478">
 <text text-anchor="start" x="657" y="-959.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1641,12 +1641,12 @@
 <!-- write_scan_footer/1&#45;&gt;os::date_time/7 -->
 <g id="edge81" class="edge">
 <title>write_scan_footer/1&#45;&gt;os::date_time/7</title>
-<g id="a_edge81"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="calls">
+<g id="a_edge81"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="calls">
 <path fill="none" stroke="black" d="M627.84,-1120.9C662.13,-1110.79 706.13,-1097.54 745,-1085 787.09,-1071.42 834.28,-1055.15 870.19,-1042.55"/>
 <polygon fill="black" stroke="black" points="871.74,-1045.71 880.01,-1039.1 869.41,-1039.11 871.74,-1045.71"/>
 </a>
 </g>
-<g id="a_edge81&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a2a673704b28e30d214fc7926248b6475429ea50/tools/dead_code_scanner/dead_code_scanner.lgt#L478">
+<g id="a_edge81&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80bca11e23513ba9dee0b90ea6273fe532329b3a/tools/dead_code_scanner/dead_code_scanner.lgt#L478">
 <text text-anchor="start" x="775" y="-1077.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
