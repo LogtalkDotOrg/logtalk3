@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
 		date is 2021-12-01,
 		comment is 'Unit tests for the "packs" tool.'
@@ -231,7 +231,7 @@
 	test(packs_registries_add_2_01, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/local_2_d'], URL),
+		atomic_list_concat(['file://', Directory, 'test_files/local_2_d.zip'], URL),
 		registries::add(local_2_d, URL).
 
 	test(packs_registries_defined_4_03, true(Registries == [local_1_d, local_2_d])) :-
