@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:35:0,
 		author is 'Paulo Moura',
-		date is 2021-11-30,
+		date is 2021-12-01,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -735,14 +735,6 @@
 		).
 
 	% auxiliary predicates
-
-	registry_directory(Registry, Directory) :-
-		registry_object(Registry, _),
-		^^logtalk_packs(LogtalkPacks),
-		path_concat(LogtalkPacks, registries, RegistriesDirectory),
-		directory_files(RegistriesDirectory, Registries, [type(directory), dot_files(false), paths(relative)]),
-		member(Registry, Registries),
-		path_concat(RegistriesDirectory, Registry, Directory).
 
 	registry_object(Registry, RegistryObject) :-
 		(	var(Registry) ->
