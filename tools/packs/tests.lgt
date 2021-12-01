@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2021-12-01,
 		comment is 'Unit tests for the "packs" tool.'
@@ -358,5 +358,12 @@
 
 	test(packs_registries_delete_1_01, true) :-
 		registries::delete(local_1_d).
+
+	% supress all packs tool messages to not pollute the unit tests output
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	logtalk::message_hook(_Message, _Kind, packs, _Tokens).
 
 :- end_object.
