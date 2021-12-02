@@ -145,6 +145,9 @@ behind.
 prior to re-adding it when using the `force(true)` option to prevent a git
 cloning failure.
 
+* FIXED: The `packs` tool `registries::clean/0` predicate to delete all
+registry archives instead of only of those registries that are defined.
+
 * FIXED: The `packs` tool `logtalk_packs/1` predicate to return a path using
 the backend internal format instead of the operating-system format.
 

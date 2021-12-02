@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:35:0,
+		version is 0:36:0,
 		author is 'Paulo Moura',
-		date is 2021-12-01,
+		date is 2021-12-02,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -539,13 +539,18 @@
 		).
 
 	clean :-
+		print_message(comment, packs, @'Cleaning all registry archives'),
 		^^logtalk_packs(LogtalkPacks),
-		path_concat(LogtalkPacks, registries, Directory),
-		directory_files(Directory, Registries, [type(directory), dot_files(false)]),
+		path_concat(LogtalkPacks, archives, Archives),
+		path_concat(Archives, registries, ArchivesRegistries),
+		directory_files(ArchivesRegistries, Registries, [type(directory), dot_files(false), paths(absolute)]),
 		member(Registry, Registries),
-		delete_archives(Registry),
+		directory_files(Registry, Files, [type(regular), dot_files(false), paths(absolute)]),
+		forall(member(File, Files), delete_file(File)),
+		delete_directory(Registry),
 		fail.
-	clean.
+	clean :-
+		print_message(comment, packs, @'Cleaned all registry archives').
 
 	delete_archives(Registry) :-
 		^^logtalk_packs(LogtalkPacks),
@@ -554,7 +559,8 @@
 		path_concat(ArchivesRegistries, Registry, ArchivesRegistriesRegistry),
 		(	directory_exists(ArchivesRegistriesRegistry) ->
 			directory_files(ArchivesRegistriesRegistry, Files, [type(regular), dot_files(false), paths(absolute)]),
-			forall(member(File, Files), delete_file(File))
+			forall(member(File, Files), delete_file(File)),
+			delete_directory(ArchivesRegistriesRegistry)
 		;	true
 		).
 
