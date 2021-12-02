@@ -830,3 +830,6 @@ possible fix is under discussion.
 XSB have an odd bug (likely in its parser) when reading files that may
 cause a pack installed version to be reported as the ``end_of_file``
 atom.
+
+Some tests fail on Windows when using ECLiPSe or XSB due to file path
+representation issues.
