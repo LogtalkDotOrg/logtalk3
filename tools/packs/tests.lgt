@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Unit tests for the "packs" tool.'
@@ -342,6 +342,20 @@
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
 		setup,
 		packs::restore(Setup).
+
+	% broken registry and pack specs
+
+	test(packs_registries_add_1_02, true) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		atomic_list_concat(['file://', Directory, 'test_files/broken_d'], URL),
+		registries::add(URL).
+
+	test(packs_registries_lint_1_02, false) :-
+		registries::lint(broken_d).
+
+	test(packs_packs_lint_1_02, false) :-
+		packs::lint(broken).
 
 	% uninstall packs
 

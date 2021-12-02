@@ -119,6 +119,9 @@ restore pinning status.
 * CHANGED: The `packs` tool `registries` object predicate `defined/3` to
 `defined/4`.
 
+* CHANGED: The `packs` tool `lint/1-2` predicates to fail when specification
+errors are detected.
+
 * ADDED: Predicates `text_output_contents/1-3` and `binary_output_contents/1-2`
 to the `lgtunit` tool.
 

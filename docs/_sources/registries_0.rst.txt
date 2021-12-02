@@ -11,7 +11,7 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:37:0
+| **Version:** 0:38:0
 | **Date:** 2021-12-02
 
 | **Compilation flags:**
@@ -416,7 +416,7 @@ Enumerates by backtracking all packs provided by a registry.
 ``lint/1``
 ^^^^^^^^^^
 
-Checks the registry specification. Fails if the registry is not defined.
+Checks the registry specification. Fails if the registry is not defined or if linting detects errors.
 
 | **Compilation flags:**
 |    ``static``

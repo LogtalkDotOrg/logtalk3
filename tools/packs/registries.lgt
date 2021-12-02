@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Registry handling predicates.'
@@ -156,7 +156,7 @@
 	:- public(lint/1).
 	:- mode(lint(+atom), zero_or_one).
 	:- info(lint/1, [
-		comment is 'Checks the registry specification. Fails if the registry is not defined.',
+		comment is 'Checks the registry specification. Fails if the registry is not defined or if linting detects errors.',
 		argnames is ['Registry']
 	]).
 
@@ -700,44 +700,53 @@
 		atom_concat(Registry, '_registry', ExpectedRegistryObject),
 		(	RegistryObject == ExpectedRegistryObject ->
 			true
-		;	print_message(warning, packs, 'Registry object expected name is ~q but ~q is used!'+[ExpectedRegistryObject, RegistryObject])
+		;	print_message(warning, packs, 'Registry object expected name is ~q but ~q is used!'+[ExpectedRegistryObject, RegistryObject]),
+			fail
 		).
 	lint_check(description, _Registry, RegistryObject) :-
 		(	RegistryObject::description(_) ->
 			true
-		;	print_message(warning, packs, @'The description/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The description/1 predicate is missing or failed safety check!'),
+			fail
 		).
 	lint_check(home, _Registry, RegistryObject) :-
 		(	RegistryObject::home(_) ->
 			true
-		;	print_message(warning, packs, @'The home/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The home/1 predicate is missing or failed safety check!'),
+			fail
 		).
 	lint_check(clone, Registry, RegistryObject) :-
 		(	RegistryObject::clone(URL) ->
 			lint_check_clone_url(Registry, URL)
-		;	print_message(warning, packs, @'The clone/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The clone/1 predicate is missing or failed safety check!'),
+			fail
 		).
 	lint_check(archive, _Registry, RegistryObject) :-
 		(	RegistryObject::archive(URL) ->
 			lint_check_archive_url(URL)
-		;	print_message(warning, packs, @'The archive/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The archive/1 predicate is missing or failed safety check!'),
+			fail
 		).
 
 	lint_check_clone_url(Registry, URL):-
 		decompose_file_name(URL, _, Name, Extension),
 		(	Extension \== '.git' ->
-			print_message(warning, packs, 'Git cloning URL should end with ".git"!')
+			print_message(warning, packs, 'Git cloning URL should end with ".git"!'),
+			fail
 		;	Name == Registry ->
 			true
-		;	print_message(warning, packs, 'Git repos should have the same name as the registry!')
+		;	print_message(warning, packs, 'Git repos should have the same name as the registry!'),
+			fail
 		).
 	lint_check_archive_url(URL) :-
 		decompose_file_name(URL, _, _, Extension),
 		(	^^supported_archive(Extension) ->
 			true
 		;	Extension == '' ->
-			print_message(warning, packs, 'Archive extension missing!')
-		;	print_message(warning, packs, 'Archive extension not supported!')
+			print_message(warning, packs, 'Archive extension missing!'),
+			fail
+		;	print_message(warning, packs, 'Archive extension not supported!'),
+			fail
 		).
 
 	% auxiliary predicates

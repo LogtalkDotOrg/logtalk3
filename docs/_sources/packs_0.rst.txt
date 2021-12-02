@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:41:0
+| **Version:** 0:42:0
 | **Date:** 2021-12-02
 
 | **Compilation flags:**
@@ -812,7 +812,7 @@ Prints a list of all installed packs that depend on the given pack if unique fro
 ``lint/2``
 ^^^^^^^^^^
 
-Checks the pack specification. Fails if the pack is unknown.
+Checks the pack specification. Fails if the pack is unknown or if linting detects errors.
 
 | **Compilation flags:**
 |    ``static``
@@ -835,7 +835,7 @@ Checks the pack specification. Fails if the pack is unknown.
 ``lint/1``
 ^^^^^^^^^^
 
-Checks the pack specification. Fails if the pack is unknown or available from multiple registries.
+Checks the pack specification. Fails if the pack is unknown, or available from multiple registries, or if linting detects errors.
 
 | **Compilation flags:**
 |    ``static``

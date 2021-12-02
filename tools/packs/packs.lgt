@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:41:0,
+		version is 0:42:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Pack handling predicates.'
@@ -282,14 +282,14 @@
 	:- public(lint/2).
 	:- mode(lint(+atom, +atom), zero_or_one).
 	:- info(lint/2, [
-		comment is 'Checks the pack specification. Fails if the pack is unknown.',
+		comment is 'Checks the pack specification. Fails if the pack is unknown or if linting detects errors.',
 		argnames is ['Registry', 'Pack']
 	]).
 
 	:- public(lint/1).
 	:- mode(lint(+atom), zero_or_one).
 	:- info(lint/1, [
-		comment is 'Checks the pack specification. Fails if the pack is unknown or available from multiple registries.',
+		comment is 'Checks the pack specification. Fails if the pack is unknown, or available from multiple registries, or if linting detects errors.',
 		argnames is ['Pack']
 	]).
 
@@ -1098,26 +1098,31 @@
 		atom_concat(Pack, '_pack', ExpectedPackObject),
 		(	PackObject == ExpectedPackObject ->
 			true
-		;	print_message(warning, packs, 'Pack object expected name is ~q but ~q is used!'+[ExpectedPackObject, PackObject])
+		;	print_message(warning, packs, 'Pack object expected name is ~q but ~q is used!'+[ExpectedPackObject, PackObject]),
+			fail
 		).
 	lint_check(description, _Pack, PackObject) :-
 		(	PackObject::description(_) ->
 			true
-		;	print_message(warning, packs, @'The description/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The description/1 predicate is missing or failed safety check!'),
+			fail
 		).
 	lint_check(license, _Pack, PackObject) :-
 		(	PackObject::license(_) ->
 			true
-		;	print_message(warning, packs, @'The license/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The license/1 predicate is missing or failed safety check!'),
+			fail
 		).
 	lint_check(home, _Pack, PackObject) :-
 		(	PackObject::home(_) ->
 			true
-		;	print_message(warning, packs, @'The home/1 predicate is missing or failed safety check!')
+		;	print_message(warning, packs, @'The home/1 predicate is missing or failed safety check!'),
+			fail
 		).
 	lint_check(version, Pack, PackObject) :-
 		(	\+ PackObject::version(_, _, _, _, _, _) ->
-			print_message(warning, packs, @'The version/6 predicate is missing or failed safety check!')
+			print_message(warning, packs, @'The version/6 predicate is missing or failed safety check!'),
+			fail
 		;	lint_check_versions(Pack, PackObject)
 		).
 
@@ -1125,11 +1130,13 @@
 		PackObject::version(Version, Status, URL, CheckSum, Dependencies, Portability),
 		(	valid_version(Version) ->
 			true
-		;	print_message(warning, packs, 'Invalid pack version: ~q'+[Version])
+		;	print_message(warning, packs, 'Invalid pack version: ~q'+[Version]),
+			fail
 		),
 		(	valid_status(Status) ->
 			true
-		;	print_message(warning, packs, 'Unknown pack status: ~q'+[Status])
+		;	print_message(warning, packs, 'Unknown pack status: ~q'+[Status]),
+			fail
 		),
 		decompose_file_name(URL, _, Name, Extension),
 		(	sub_atom(URL, 0, _, _, 'file://') ->
@@ -1137,34 +1144,41 @@
 				true
 			;	^^supported_archive(Extension) ->
 				true
-			;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL])
+			;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL]),
+			fail
 			)
 		;	^^supported_archive(Extension) ->
 			true
-		;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL])
+		;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL]),
+			fail
 		),
 		(	CheckSum == none, sub_atom(URL, 0, _, _, 'file://') ->
 			true
 		;	CheckSum = sha256-Hash, atom(Hash) ->
 			true
-		;	print_message(warning, packs, 'Invalid pack checksum: ~q'+[CheckSum])
+		;	print_message(warning, packs, 'Invalid pack checksum: ~q'+[CheckSum]),
+			fail
 		),
 		(	Dependencies == [] ->
 			true
 		;	Dependencies \= [_| _] ->
-			print_message(warning, packs, 'Invalid pack dependencies: ~q'+[Dependencies])
+			print_message(warning, packs, 'Invalid pack dependencies: ~q'+[Dependencies]),
+			fail
 		;	member(Dependency, Dependencies),
 			\+ valid_dependency(Dependency, Pack) ->
-			print_message(warning, packs, 'Invalid pack dependency: ~q'+[Dependency])
+			print_message(warning, packs, 'Invalid pack dependency: ~q'+[Dependency]),
+			fail
 		;	true
 		),
 		(	Portability == all ->
 			true
 		;	Portability \= [_| _] ->
-			print_message(warning, packs, 'Invalid pack portability: ~q'+[Portability])
+			print_message(warning, packs, 'Invalid pack portability: ~q'+[Portability]),
+			fail
 		;	member(Backend, Portability),
 			\+ valid_backend(Backend) ->
-			print_message(warning, packs, 'Unknown Prolog backend: ~q'+[Backend])
+			print_message(warning, packs, 'Unknown Prolog backend: ~q'+[Backend]),
+			fail
 		;	true
 		),
 		fail.
