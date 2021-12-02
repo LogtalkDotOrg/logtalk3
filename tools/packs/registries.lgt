@@ -182,10 +182,10 @@
 	]).
 
 	:- uses(os, [
-		decompose_file_name/3, decompose_file_name/4, delete_file/1,
-		directory_exists/1, directory_files/3, ensure_file/1, file_exists/1,
-		internal_os_path/2, make_directory_path/1, operating_system_type/1,
-		path_concat/3, shell/1
+		decompose_file_name/3, decompose_file_name/4, delete_directory/1,
+		delete_file/1, directory_exists/1, directory_files/3, ensure_file/1,
+		file_exists/1, internal_os_path/2, make_directory_path/1,
+		operating_system_type/1, path_concat/3, shell/1
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
