@@ -41,7 +41,7 @@
 		stable,
 		'file://test_files/foo',
 		none,
-		[local_2_d::baz @>= 1:0:0],
+		[logtalk @>= 3:42:0, local_2_d::baz @>= 1:0:0, local_2_d::baz @< 2:0:0],
 		all
 	).
 
