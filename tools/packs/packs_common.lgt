@@ -22,7 +22,7 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Common predicates for the packs tool objects.'
@@ -31,13 +31,19 @@
 	:- public(setup/0).
 	:- mode(setup, one).
 	:- info(setup/0, [
-		comment is 'Setup registries and packs directory structure.'
+		comment is 'Ensures that registries and packs directory structure exists. Preserves any defined registries and installed packs.'
+	]).
+
+	:- public(reset/0).
+	:- mode(reset, one).
+	:- info(reset/0, [
+		comment is 'Resets registries and packs directory structure. Deletes any defined registries and installed packs.'
 	]).
 
 	:- public(verify_commands_availability/0).
 	:- mode(verify_commands_availability, zero_or_one).
 	:- info(verify_commands_availability/0, [
-		comment is 'Verify required shell commands availability. Fails printing an error message if a command is missing.'
+		comment is 'Verifies required shell commands availability. Fails printing an error message if a command is missing.'
 	]).
 
 	:- public(help/0).
@@ -172,6 +178,10 @@
 		path_concat/3
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	help :-
 		print_message(help, packs, help).
 
@@ -187,6 +197,17 @@
 		make_directory_path(ArchivesRegistries),
 		path_concat(Archives, 'packs', ArchivesPacks),
 		make_directory_path(ArchivesPacks).
+
+	reset :-
+		logtalk_packs(LogtalkPacks),
+		internal_os_path(LogtalkPacks, LogtalkPacksOS),
+		(	operating_system_type(windows) ->
+			atomic_list_concat(['del /s /q "', LogtalkPacksOS, '" > nul && rmdir /s /q "', LogtalkPacksOS, '" > nul'], Command)
+		;	% assume unix
+			atomic_list_concat(['rm -rf "',  LogtalkPacksOS, '"'], Command)
+		),
+		command(Command, reset_failed(LogtalkPacks)),
+		setup.
 
 	logtalk_packs(LogtalkPacks) :-
 		(	expand_library_path(logtalk_packs, LogtalkPacks) ->

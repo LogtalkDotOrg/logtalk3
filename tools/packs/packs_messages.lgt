@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:24:0,
 		author is 'Paulo Moura',
-		date is 2021-11-04,
+		date is 2021-12-02,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -75,6 +75,9 @@
 
 	message_tokens(logtalk_packs(LogtalkPacks)) -->
 		['Logtalk packs storage directory: ~w'-[LogtalkPacks], nl].
+
+	message_tokens(reset_failed(LogtalkPacks)) -->
+		['Reset of registries and packs directory structure failed: ~q'-[LogtalkPacks], nl].
 
 	% registry add messages
 

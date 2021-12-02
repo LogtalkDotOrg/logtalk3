@@ -133,7 +133,7 @@ and registries using the `logtalk_packs` library alias (which can be defined
 e.g. in a settings file).
 
 * ADDED: Predicates `logtalk_packs/0-1`, `readme/1`, `delete/0`, `pin/0`,
-`unpin/0`, and `uninstall/0` to the `packs` tool.
+`unpin/0`, `uninstall/0`, and `reset/0` to the `packs` tool.
 
 * IMPROVED: The `packs` tool to handle all dependency relations including
 range dependencies.

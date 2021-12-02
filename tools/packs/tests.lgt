@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Unit tests for the "packs" tool.'
@@ -40,10 +40,6 @@
 	cover(packs_specs_hook).
 
 	setup :-
-		packs::uninstall,
-		packs::clean,
-		registries::delete,
-		registries::clean,
 		% the sample packs are defined using relative paths, which require
 		% setting the working directory; but this hack to allows testing
 		% pack installation may not work with all backend Prolog systems
@@ -51,7 +47,7 @@
 		os::change_directory(Directory).
 
 	cleanup :-
-		setup,
+		packs::reset,
 		object_property(packs, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
 		catch(ignore(os::delete_file(Setup)), _, true).

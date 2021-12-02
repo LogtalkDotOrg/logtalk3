@@ -11,7 +11,7 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:21:0
+| **Version:** 0:22:0
 | **Date:** 2021-12-02
 
 | **Compilation flags:**
@@ -21,6 +21,7 @@ Common predicates for the packs tool objects.
 | **Uses:**
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
@@ -45,13 +46,34 @@ Public predicates
 ``setup/0``
 ^^^^^^^^^^^
 
-Setup registries and packs directory structure.
+Ensures that registries and packs directory structure exists. Preserves any defined registries and installed packs.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
 |    ``setup`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="reset/0"> </div>
+
+.. index:: reset/0
+.. _packs_common/0::reset/0:
+
+``reset/0``
+^^^^^^^^^^^
+
+Resets registries and packs directory structure. Deletes any defined registries and installed packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``reset`` - ``one``
 
 
 ------------
@@ -66,7 +88,7 @@ Setup registries and packs directory structure.
 ``verify_commands_availability/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Verify required shell commands availability. Fails printing an error message if a command is missing.
+Verifies required shell commands availability. Fails printing an error message if a command is missing.
 
 | **Compilation flags:**
 |    ``static``
