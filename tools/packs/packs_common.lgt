@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:21:0,
 		author is 'Paulo Moura',
-		date is 2021-11-06,
+		date is 2021-12-02,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -167,9 +167,9 @@
 	]).
 
 	:- uses(os, [
-		absolute_file_name/2, ensure_file/1, environment_variable/2,
+		environment_variable/2, operating_system_type/1, shell/1,
 		file_exists/1, internal_os_path/2, make_directory_path/1,
-		operating_system_type/1, path_concat/3, shell/1
+		path_concat/3
 	]).
 
 	help :-

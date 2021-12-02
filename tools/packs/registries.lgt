@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:37:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Registry handling predicates.'
@@ -178,7 +178,7 @@
 	]).
 
 	:- uses(logtalk, [
-		expand_library_path/2, loaded_file_property/2, print_message/3
+		loaded_file_property/2, print_message/3
 	]).
 
 	:- uses(os, [

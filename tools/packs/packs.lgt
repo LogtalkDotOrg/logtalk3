@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:41:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Pack handling predicates.'
@@ -304,7 +304,7 @@
 	]).
 
 	:- uses(logtalk, [
-		expand_library_path/2, print_message/3
+		print_message/3
 	]).
 
 	:- uses(os, [
@@ -1505,11 +1505,6 @@
 		read(Stream, Version),
 		close(Stream).
 
-	version_file(Pack, File) :-
-		check(atom, Pack),
-		directory(Pack, Directory),
-		path_concat(Directory, 'VERSION.packs', File).
-
 	% installed pack registry data handling
 
 	save_registry(Path, Registry) :-
@@ -1524,11 +1519,6 @@
 		open(File, read, Stream),
 		read(Stream, Registry),
 		close(Stream).
-
-	registry_file(Pack, File) :-
-		check(atom, Pack),
-		directory(Pack, Directory),
-		path_concat(Directory, 'REGISTRY.packs', File).
 
 	% Logtalk + Prolog backend identifier table
 
