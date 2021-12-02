@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:42:0,
+		version is 0:43:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Pack handling predicates.'
@@ -534,6 +534,10 @@
 			atom_concat(Name, Extension, Archive),
 			print_message(error, packs, unsupported_archive_format(Archive)),
 			fail
+		;	sub_atom(URL, 0, _, _, 'file://') ->
+			atom_concat('file://', Path, URL),
+			internal_os_path(Path, OSPath),
+			install_pack_archive(Registry, Pack, Version, OSPath, CheckSum, Options)
 		;	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options)
 		).
 
@@ -1461,8 +1465,8 @@
 		(	file_exists(Archive) ->
 			true
 		;	(	member(verbose(true), Options) ->
-				atomic_list_concat(['curl -v -L -o "',    Archive, '" ', URL], Command)
-			;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" ', URL], Command)
+				atomic_list_concat(['curl -v -L -o "',    Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Archive))
 		).

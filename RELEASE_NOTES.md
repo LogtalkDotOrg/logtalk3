@@ -160,6 +160,8 @@ the backend internal format instead of the operating-system format.
 * FIXED: Workaround `packs` tool portability issue with Ciao Prolog due to
 this system lack of supported for standard multifile predicate semantics.
 
+* FIXED: Installing a pack from a local archive.
+
 * FIXED: Missing `tutor` tool explanation for non-tail recursive non-terminal
 definitions.
 

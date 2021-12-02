@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:38:0,
+		version is 0:39:0,
 		author is 'Paulo Moura',
 		date is 2021-12-02,
 		comment is 'Registry handling predicates.'
@@ -782,8 +782,8 @@
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesRegistriesRegistry),
 		(	member(verbose(true), Options) ->
-			atomic_list_concat(['curl -v -L -o "',    Archive, '" ', URL], Command)
-		;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" ', URL], Command)
+			atomic_list_concat(['curl -v -L -o "',    Archive, '" "', URL, '"'], Command)
+		;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 		),
 		^^command(Command, registry_download_failed(Registry, URL)).
 
