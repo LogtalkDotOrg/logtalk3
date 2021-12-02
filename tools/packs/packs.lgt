@@ -534,10 +534,6 @@
 			atom_concat(Name, Extension, Archive),
 			print_message(error, packs, unsupported_archive_format(Archive)),
 			fail
-		;	sub_atom(URL, 0, _, _, 'file://') ->
-			atom_concat('file://', Path, URL),
-			internal_os_path(Path, OSPath),
-			install_pack_archive(Registry, Pack, Version, OSPath, CheckSum, Options)
 		;	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options)
 		).
 
