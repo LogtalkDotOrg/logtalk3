@@ -37,12 +37,21 @@
 	home('file://test_files/foo').
 
 	version(
+		2:0:0,
+		stable,
+		'file://test_files/foo',
+		none,
+		[logtalk @>= 3:42:0, local_2_d::baz @>= 1:0:0, local_2_d::baz @< 2:0:0],
+		[eclipse, gnu, swi, sicstus, yap, trealla, xsb]
+	).
+
+	version(
 		1:0:0,
 		stable,
 		'file://test_files/foo',
 		none,
 		[logtalk @>= 3:42:0, local_2_d::baz @>= 1:0:0, local_2_d::baz @< 2:0:0],
-		all
+		[eclipse, gnu, swi, sicstus, yap, xsb]
 	).
 
 :- end_object.

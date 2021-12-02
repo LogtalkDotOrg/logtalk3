@@ -141,6 +141,9 @@ or updated requires a different backend from the one running the tool.
 * UPDATED: The `packs::clean/0` predicate to not leave empty directories
 behind.
 
+* FIXED: The `packs` tool `packs::dependents/1-3` predicates to avoid
+duplicated results.
+
 * FIXED: The `packs` tool `registries::add/3` predicate to delete a registry
 prior to re-adding it when using the `force(true)` option to prevent a git
 cloning failure.

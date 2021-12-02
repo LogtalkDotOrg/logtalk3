@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2021-12-01,
+		date is 2021-12-02,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -267,11 +267,11 @@
 	test(packs_packs_update_1_01, true) :-
 		packs::update(baz).
 
-	test(packs_packs_update_2_01, true) :-
-		packs::update(foo, [clean(true)]).
+	test(packs_packs_update_2_03, true) :-
+		packs::update(baz, [force(true)]).
 
-	test(packs_packs_update_3_03, true) :-
-		packs::update(baz, 1:0:0, [force(true)]).
+	test(packs_packs_update_3_01, true) :-
+		packs::update(foo, 2:0:0, [clean(true)]).
 
 	% clean pack archives
 

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2021-11-30,
+		date is 2021-12-02,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1024,10 +1024,9 @@
 		).
 
 	pack_dependents(Registry, Pack, Dependents) :-
-		findall(
-			Dependent,
-			pack_dependent(Registry, Pack, Dependent),
-			Dependents
+		(	setof(Dependent, pack_dependent(Registry, Pack, Dependent), Dependents) ->
+			true
+		;	Dependents = []
 		).
 
 	pack_dependent(Registry, Pack, Dependent) :-
