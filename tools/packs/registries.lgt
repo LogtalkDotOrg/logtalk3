@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2021-12-02,
+		date is 2021-12-03,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -240,15 +240,12 @@
 		member(Registry, Registries),
 		path_concat(Directory, Registry, Path),
 		read_url(Path, URL),
-		decompose_file_name(URL, _, Name, Extension),
+		decompose_file_name(URL, _, _, Extension),
 		(	Extension == '.git' ->
 			HowDefined = git
-		;	Name == Registry ->
-			HowDefined = directory
-		;	Name == Extension, Extension == '' ->
-			% URL ends with a /
-			HowDefined = directory
-		;	HowDefined = archive
+		;	^^supported_archive(Extension) ->
+			HowDefined = archive
+		;	HowDefined = directory
 		),
 		(	pinned(Registry) ->
 			Pinned = true

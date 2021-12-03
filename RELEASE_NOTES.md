@@ -163,6 +163,10 @@ this system lack of supported for standard multifile predicate semantics.
 * FIXED: Adding a registry or installing a pack from a local archive using a
 URL with non-escaped spaces.
 
+* FIXED: Bug in the `packs` tool `registries::defined/4` predicate report on
+how a registry is installed which could return `directory` for registries
+defined via archives.
+
 * FIXED: A `packs` tool typo in the identifier for the Trealla Prolog backend.
 
 * FIXED: Missing `tutor` tool explanation for non-tail recursive non-terminal
