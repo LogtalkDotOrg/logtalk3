@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:40:1,
 		author is 'Paulo Moura',
 		date is 2021-12-03,
 		comment is 'Registry handling predicates.'
@@ -205,8 +205,8 @@
 	list :-
 		print_message(information, packs, @'Defined registries:'),
 		findall(
-			defined(Registry, _, HowDefined, Pinned),
-			defined(Registry, _, HowDefined, Pinned),
+			defined(Registry, URL, HowDefined, Pinned),
+			defined(Registry, URL, HowDefined, Pinned),
 			DefinedRegistries
 		),
 		(	DefinedRegistries == [] ->
