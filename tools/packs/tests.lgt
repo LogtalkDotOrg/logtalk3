@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2021-12-02,
+		date is 2021-12-03,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -333,11 +333,34 @@
 		packs::save(Setup).
 
 	test(packs_packs_restore_1_01, true) :-
+		packs::uninstall,
+		packs::clean,
+		registries::delete,
+		registries::clean.
+
+	test(packs_packs_restore_1_02, false) :-
+		packs::installed(_, _, _, _).
+
+	test(packs_packs_restore_1_03, false) :-
+		registries::defined(_, _, _, _).
+
+	test(packs_packs_restore_1_04, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
-		setup,
 		packs::restore(Setup).
+
+	test(packs_packs_restore_1_05, true(HowDefined-Pinned == directory-true)) :-
+		registries::defined(local_1_d, _, HowDefined, Pinned).
+
+	test(packs_packs_restore_1_06, true(HowDefined-Pinned == archive-true)) :-
+		registries::defined(local_2_d, _, HowDefined, Pinned).
+
+	test(packs_packs_restore_1_07, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::installed(local_1_d, foo, Version, Pinned).
+
+	test(packs_packs_restore_1_08, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(local_2_d, baz, Version, Pinned).
 
 	% broken registry and pack specs
 
