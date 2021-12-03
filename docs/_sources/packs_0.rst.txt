@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:44:0
+| **Version:** 0:45:0
 | **Date:** 2021-12-03
 
 | **Compilation flags:**
@@ -658,6 +658,26 @@ Cleans all archives for all packs.
 
 .. raw:: html
 
+   <div id="save/2"> </div>
+
+.. index:: save/2
+.. _packs/0::save/2:
+
+``save/2``
+^^^^^^^^^^
+
+Saves a list of all installed packs and registries plus pinning status to a file. Registries without installed packs are saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``save(File,Options)``
+
+------------
+
+.. raw:: html
+
    <div id="save/1"> </div>
 
 .. index:: save/1
@@ -674,6 +694,7 @@ Saves a list of all installed packs and their registries plus pinning status to 
 | **Template:**
 |    ``save(File)``
 | **Mode and number of proofs:**
+|    ``save(+atom)`` - ``one``
 |    ``save(+atom)`` - ``one``
 
 

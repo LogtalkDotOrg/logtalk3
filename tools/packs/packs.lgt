@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:44:0,
+		version is 0:45:0,
 		author is 'Paulo Moura',
 		date is 2021-12-03,
 		comment is 'Pack handling predicates.'
@@ -228,6 +228,13 @@
 	:- mode(clean, one).
 	:- info(clean/0, [
 		comment is 'Cleans all archives for all packs.'
+	]).
+
+	:- public(save/2).
+	:- mode(save(+atom), one).
+	:- info(save/2, [
+		comment is 'Saves a list of all installed packs and registries plus pinning status to a file. Registries without installed packs are saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).',
+		argnames is ['File', 'Options']
 	]).
 
 	:- public(save/1).
@@ -880,13 +887,14 @@
 
 	% save and restore predicates
 
-	save(File) :-
-		print_message(comment, packs, @'Saving current packs setup'),
+	save(File, UserOptions) :-
+		print_message(comment, packs, @'Saving current setup'),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		open(File, write, Stream),
-		findall(
-			Registry,
-			installed_pack(Registry, _, _, _),
-			Registries
+		(	member(save(all), Options) ->
+			findall(Registry, registries::defined(Registry, _, _, _), Registries)
+		;	findall(Registry, installed_pack(Registry, _, _, _), Registries)
 		),
 		sort(Registries, SortedRegistries),
 		forall(
@@ -908,17 +916,20 @@
 			(writeq(Stream, pinned_pack(Pack)), write(Stream, '.\n'))
 		),
 		close(Stream),
-		print_message(comment, packs, @'Saved current packs setup').
+		print_message(comment, packs, @'Saved current setup').
+
+	save(File) :-
+		save(File, [save(installed)]).
 
 	restore(File, UserOptions) :-
-		print_message(comment, packs, @'Restoring packs setup'),
+		print_message(comment, packs, @'Restoring setup'),
 		check(file, File),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		open(File, read, Stream),
 		read(Stream, Term),
 		restore(Term, Stream, Options),
-		print_message(comment, packs, @'Restored packs setup').
+		print_message(comment, packs, @'Restored setup').
 
 	restore(File) :-
 		restore(File, [force(true)]).
@@ -1559,6 +1570,7 @@
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
+	default_option(save(installed)).
 
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
@@ -1570,5 +1582,7 @@
 		valid(boolean, Boolean).
 	valid_option(checksig(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(save(What)) :-
+		once((What == all; What == installed)).
 
 :- end_object.

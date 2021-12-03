@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:40:1,
+		version is 0:41:0,
 		author is 'Paulo Moura',
 		date is 2021-12-03,
 		comment is 'Registry handling predicates.'
@@ -581,6 +581,7 @@
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
+	default_option(save(installed)).
 
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
@@ -592,6 +593,8 @@
 		valid(boolean, Boolean).
 	valid_option(checksig(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(save(What)) :-
+		once((What == all; What == installed)).
 
 	% pinned registry handling
 
