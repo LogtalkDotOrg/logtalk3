@@ -652,8 +652,26 @@ with additional type definitions as both `type` and `arbitrary` entities are
 user extensible by defining clauses for their multifile predicates.
 
 The user can define new types to use in the property mode templates to use
-with its QuickCheck tests by defining clauses for the `arbitrary` library
-category multifile predicates.
+with its QuickCheck tests by defining clauses for the `type` library object
+and the `arbitrary` library category multifile predicates. QuickCheck will
+use the later to generate arbitrary input arguments and the former to verify
+output arguments. As a toy example, assume that the property mode template
+have an argument of type `bit` with possible values `0` and `1`. We would
+then need to define:
+
+	:- multifile(type::type/1).
+	type::type(bit).
+
+	:- multifile(type::check/2).
+	type::check(bit, Term) :-
+		once((Term == 0; Term == 1)).
+
+	:- multifile(arbitrary::arbitrary/1).
+	arbitrary::arbitrary(bit).
+
+	:- multifile(arbitrary::arbitrary/2).
+	arbitrary::arbitrary(bit, Arbitrary) :- 
+	   random::member(Arbitrary, [0, 1]).
 
 
 Skipping tests

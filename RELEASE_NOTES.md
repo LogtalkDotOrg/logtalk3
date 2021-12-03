@@ -74,6 +74,8 @@ and `debug_handler/2` predicates.
 
 * IMPROVED: Man pages of the integration scripts.
 
+* IMPROVED: Documentation on using the `lgtunit` tool QuickCheck support.
+
 * UPDATED: The documentation of the `logtalk_library_path/2` predicate for
 the `logtalk_packs` library alias.
 

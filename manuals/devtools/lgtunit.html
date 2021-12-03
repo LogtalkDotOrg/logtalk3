@@ -827,8 +827,27 @@ or your own, can contribute with additional type definitions as both
 <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> entities are user extensible by defining
 clauses for their multifile predicates.</p>
 <p>The user can define new types to use in the property mode templates to
-use with its QuickCheck tests by defining clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code>
-library category multifile predicates.</p>
+use with its QuickCheck tests by defining clauses for the <code class="docutils literal notranslate"><span class="pre">type</span></code>
+library object and the <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> library category multifile
+predicates. QuickCheck will use the later to generate arbitrary input
+arguments and the former to verify output arguments. As a toy example,
+assume that the property mode template have an argument of type <code class="docutils literal notranslate"><span class="pre">bit</span></code>
+with possible values <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>. We would then need to define:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
+type<span class="o">::</span>type(bit).
+
+<span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>check<span class="o">/</span><span class="m">2</span>).
+type<span class="o">::</span>check(bit, <span class="nv">Term</span>) <span class="o">:-</span>
+    <span class="k">once</span>((<span class="nv">Term</span> <span class="o">==</span> <span class="m">0</span><span class="o">;</span> <span class="nv">Term</span> <span class="o">==</span> <span class="m">1</span>)).
+
+<span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">1</span>).
+arbitrary<span class="o">::</span>arbitrary(bit).
+
+<span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">2</span>).
+arbitrary<span class="o">::</span>arbitrary(bit, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
+   random<span class="o">::</span>member(<span class="nv">Arbitrary</span>, [<span class="m">0</span>, <span class="m">1</span>]).
+</pre></div>
+</div>
 </section>
 <section id="skipping-tests">
 <h2>Skipping tests<a class="headerlink" href="#skipping-tests" title="Permalink to this headline"></a></h2>
