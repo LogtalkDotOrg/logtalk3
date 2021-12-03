@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:43:0,
+		version is 0:44:0,
 		author is 'Paulo Moura',
-		date is 2021-12-02,
+		date is 2021-12-03,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1221,7 +1221,7 @@
 	valid_backend(sicstus).
 	valid_backend(swi).
 	valid_backend(tau).
-	valid_backend(treala).
+	valid_backend(trealla).
 	valid_backend(xsb).
 	valid_backend(yap).
 
