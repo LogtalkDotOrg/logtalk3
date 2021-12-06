@@ -26784,7 +26784,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check'(list(Type), Term, Context) :-
-	'$lgt_check_list'(list, Term, Term, Context),
+	'$lgt_check_list'(list(Type), Term, Term, Context),
 	forall('$lgt_member'(Item, Term), '$lgt_check'(Type, Item, Context)).
 
 '$lgt_check'(object, Term, Context) :-
@@ -27148,14 +27148,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_check_list'(list, Term, Original, Context) :-
+'$lgt_check_list'(Type, Term, Original, Context) :-
 	(	var(Term) ->
 		throw(error(instantiation_error, Context))
 	;	Term == [] ->
 		true
 	;	Term = [_| Tail] ->
-		'$lgt_check_list'(list, Tail, Original, Context)
-	;	throw(error(type_error(list, Original), Context))
+		'$lgt_check_list'(Type, Tail, Original, Context)
+	;	throw(error(type_error(Type, Original), Context))
 	).
 
 
