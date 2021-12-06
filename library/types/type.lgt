@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:30:0,
+		version is 1:31:0,
 		author is 'Paulo Moura',
-		date is 2021-03-12,
+		date is 2021-12-06,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -909,21 +909,13 @@
 		).
 
 	check(list, Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term) ->
-			true
-		;	throw(type_error(list, Term))
-		).
+		check_list(list, Term, Term).
 
 	check(non_empty_list, Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	Term == [] ->
+		check_list(non_empty_list, Term, Term),
+		(	Term == [] ->
 			throw(type_error(non_empty_list, Term))
-		;	is_list(Term) ->
-			true
-		;	throw(type_error(non_empty_list, Term))
+		;	true
 		).
 
 	check(partial_list, Term) :-
@@ -943,27 +935,22 @@
 		).
 
 	check(list(Type), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term) ->
-			is_list_of_type(Term, Type)
+		check_list(list(Type), Term, Term),
+		(	is_list_of_type(Term, Type) ->
+			true
 		;	throw(type_error(list(Type), Term))
 		).
 
 	check(list(Type, Length), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term, 0, Length) ->
-			is_list_of_type(Term, Type)
+		check_list_length(list(Type, Length), Length, Term, 0, Term),
+		(	is_list_of_type(Term, Type) ->
+			true
 		;	throw(type_error(list(Type,Length), Term))
 		).
 
 	check(list(Type, Min, Max), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	\+ is_list(Term) ->
-			throw(type_error(list(Type,Min,Max), Term))
-		;	is_list_of_type(Term, Type) ->
+		check_list(list(Type, Min, Max), Term, Term),
+		(	is_list_of_type(Term, Type) ->
 			(	list::min(Term, MinOfTerm),
 				MinOfTerm @< Min ->
 				throw(type_error(list(Type,Min,Max), Term))
@@ -976,11 +963,8 @@
 		).
 
 	check(list(Type, Length, Min, Max), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	\+ is_list(Term, 0, Length) ->
-			throw(type_error(list(Type,Length,Min,Max), Term))
-		;	is_list_of_type(Term, Type) ->
+		check_list_length(list(Type, Length, Min, Max), Length, Term, 0, Term),
+		(	is_list_of_type(Term, Type) ->
 			(	list::min(Term, MinOfTerm),
 				MinOfTerm @< Min ->
 				throw(type_error(list(Type,Length,Min,Max), Term))
@@ -993,12 +977,11 @@
 		).
 
 	check(non_empty_list(Type), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	Term == [] ->
+		check_list(non_empty_list(Type), Term, Term),
+		(	Term == [] ->
 			throw(type_error(non_empty_list(Type), Term))
-		;	is_list(Term) ->
-			is_list_of_type(Term, Type)
+		;	is_list_of_type(Term, Type) ->
+			true
 		;	throw(type_error(non_empty_list(Type), Term))
 		).
 
@@ -1019,34 +1002,30 @@
 		).
 
 	check(codes, Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term) ->
-			is_list_of_type(Term, character_code)
+		check_list(codes, Term, Term),
+		(	is_list_of_type(Term, character_code) ->
+			true
 		;	throw(type_error(codes, Term))
 		).
 
 	check(codes(CharSet), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term) ->
-			is_list_of_type(Term, code(CharSet))
+		check_list(codes(CharSet), Term, Term),
+		(	is_list_of_type(Term, code(CharSet)) ->
+			true
 		;	throw(type_error(codes(CharSet), Term))
 		).
 
 	check(chars, Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term) ->
-			is_list_of_type(Term, character)
+		check_list(chars, Term, Term),
+		(	is_list_of_type(Term, character) ->
+			true
 		;	throw(type_error(chars, Term))
 		).
 
 	check(chars(CharSet), Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	is_list(Term) ->
-			is_list_of_type(Term, char(CharSet))
+		check_list(chars(CharSet), Term, Term),
+		(	is_list_of_type(Term, char(CharSet)) ->
+			true
 		;	throw(type_error(chars(CharSet), Term))
 		).
 
@@ -1175,6 +1154,30 @@
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies
 
+	check_list(Type, Term, Original) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term == [] ->
+			true
+		;	Term = [_| Tail] ->
+			check_list(Type, Tail, Original)
+		;	throw(type_error(Type, Original))
+		).
+
+	check_list_length(Type, Length, Term, Length0, Original) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term == [] ->
+			(	Length = Length0 ->
+				true
+			;	throw(type_error(Type, Original))
+			)
+		;	Term = [_| Tail] ->
+			Length1 is Length0 + 1,
+			check_list_length(Type, Length, Tail, Length1, Original)
+		;	throw(type_error(Type, Original))
+		).
+
 	code_upper_limit(Upper) :-
 		current_logtalk_flag(unicode, Unicode),
 		code_upper_limit(Unicode, Upper).
@@ -1203,23 +1206,6 @@
 		0 =< Code, Code =< 65535.
 	valid_character_code(unicode_full, Code) :-
 		0 =< Code, Code =< 1114111.
-
-	is_list(Var) :-
-		var(Var),
-		!,
-		fail.
-	is_list([]).
-	is_list([_| Tail]) :-
-		is_list(Tail).
-
-	is_list(Var, _, _) :-
-		var(Var),
-		!,
-		fail.
-	is_list([], Length, Length).
-	is_list([_| Tail], Length0, Length) :-
-		Length1 is Length0 + 1,
-		is_list(Tail, Length1, Length).
 
 	is_partial_list(Var) :-
 		var(Var),

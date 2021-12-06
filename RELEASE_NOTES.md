@@ -91,6 +91,11 @@ work with all supported backends.
 Library
 -------
 
+* FIXED: The `type` library object type-checking for the list, chars, and
+codes types to always throw instantiation errors whenever the term being
+checked is a partial list. Before, a type error would be throw if the term
+was a partial list but not a variable.
+
 * ADDED: Library `format` that abstracts how the different backends make
 available the de facto standard `format/2-3` predicates.
 
