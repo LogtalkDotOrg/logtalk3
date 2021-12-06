@@ -44,6 +44,9 @@ being called is a meta-predicate.
 * FIXED: Avoid a warning when embedding Logtalk due to the definition of the
 `forward/1` predicate in the `user` pseudo-object.
 
+* FIXED: A partial list of terminals in the first argument of a grammar rule
+body to generate an instantiation error as per the standardization proposal.
+
 Prolog adapter and integration files
 ------------------------------------
 

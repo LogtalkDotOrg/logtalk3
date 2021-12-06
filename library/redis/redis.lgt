@@ -22,9 +22,9 @@
 :- object(redis).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2020-10-04,
+		date is 2021-12-06,
 		comment is 'Redis client. Inspired by Sean Charles GNU Prolog Redis client.',
 		remarks is [
 			'Command representation' - 'Use the Redis command name as the functor of a compound term where the arguments are the command arguments.',
@@ -228,7 +228,7 @@
 		{	length(Arguments, Length),
 			number_codes(Length, Codes)
 		},
-		[42| Codes], [13, 10],
+		codes([42| Codes]), [13, 10],
 		parse_request_arguments(Arguments).
 
 	parse_request_arguments([]) -->
@@ -242,7 +242,7 @@
 			length(Bytes, Length),
 			number_codes(Length, Codes)
 		},
-		[36| Codes], [13, 10| Bytes], [13, 10].
+		codes([36| Codes]), codes([13, 10| Bytes]), [13, 10].
 
 	parse_argument(Head, Codes) :-
 		atom(Head),
@@ -338,6 +338,11 @@
 		;	[Byte],
 			parse_line(Input)
 		).
+
+	codes([]) -->
+		[].
+	codes([Code| Codes]) -->
+		[Code], codes(Codes).
 
 	print_reply([]).
 	print_reply([Head| Tail]) :-

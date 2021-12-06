@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:10:1,
+		version is 0:10:2,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-05-17,
+		date is 2021-12-04,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -224,7 +224,7 @@
 	encode(Number) -->
 		{number(Number)},
 		!,
-		{number_codes(Number, [Code| Codes])}, [Code| Codes].
+		{number_codes(Number, [Code| Codes])}, codes([Code| Codes]).
 
 	encode(@Literal) -->
 		!, {atom(Literal)}, encode_literal(Literal).
@@ -295,6 +295,11 @@
 		!, [0'\\, 0't], encode_string(Codes).
 	encode_string(Code, Codes) -->
 		[Code], encode_string(Codes).
+
+	codes([]) -->
+		[].
+	codes([Code| Codes]) -->
+		[Code], codes(Codes).
 
 	% auxiliary predicates
 

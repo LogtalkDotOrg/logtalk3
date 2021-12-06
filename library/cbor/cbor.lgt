@@ -22,9 +22,9 @@
 :- object(cbor(_StringRepresentation_)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:11:1,
 		author is 'Paulo Moura',
-		date is 2021-03-08,
+		date is 2021-12-06,
 		comment is 'Concise Binary Object Representation (CBOR) format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding CBOR strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -96,22 +96,22 @@
 
 	% UTF-8 string (0x00..0x17 bytes follow)
 	encode_utf_8_string(Length, Bytes) -->
-		{Length =< 0x17}, !, {Byte is Length + 0x60}, [Byte| Bytes].
+		{Length =< 0x17}, !, {Byte is Length + 0x60}, bytes([Byte| Bytes]).
 	% UTF-8 string (one-byte uint8_t for n, and then n bytes follow)
 	encode_utf_8_string(Length, Bytes) -->
-		{Length =< 0xff}, !, [0x78, Length| Bytes].
+		{Length =< 0xff}, !, bytes([0x78, Length| Bytes]).
 	% UTF-8 string (two-byte uint16_t for n, and then n bytes follow)
 	encode_utf_8_string(Length, [Byte| Bytes]) -->
 		{Length =< 0xffff}, !, {integer_to_bytes(Length, LengthBytes)},
-		[0x79| LengthBytes], [Byte| Bytes].
+		bytes([0x79| LengthBytes]), bytes([Byte| Bytes]).
 	% UTF-8 string (four-byte uint32_t for n, and then n bytes follow)
 	encode_utf_8_string(Length, [Byte| Bytes]) -->
 		{Length =< 0xffffffff}, !, {integer_to_bytes(Length, LengthBytes)},
-		[0x7a| LengthBytes], [Byte| Bytes].
+		bytes([0x7a| LengthBytes]), bytes([Byte| Bytes]).
 	% UTF-8 string (eight-byte uint64_t for n, and then n bytes follow)
 	encode_utf_8_string(Length, [Byte| Bytes]) -->
 		{Length =< 0xffffffffffffffff}, !, {integer_to_bytes(Length, LengthBytes)},
-		[0x7b| LengthBytes], [Byte| Bytes].
+		bytes([0x7b| LengthBytes]), bytes([Byte| Bytes]).
 
 	encode_list(Term) -->
 		{var(Term), instantiation_error}.
@@ -156,13 +156,13 @@
 		[0xc2], encode_byte_string(Length, Bytes).
 	encode_positive_integer(N) -->
 		{N > 0xffffffff}, !, {integer_to_bytes(8, N, Bytes)},
-		[0x1b| Bytes].
+		bytes([0x1b| Bytes]).
 	encode_positive_integer(N) -->
 		{N > 0xffff}, !, {integer_to_bytes(4, N, Bytes)},
-		[0x1a| Bytes].
+		bytes([0x1a| Bytes]).
 	encode_positive_integer(N) -->
 		{N > 0xff}, !, {integer_to_bytes(2, N, Bytes)},
-		[0x19| Bytes].
+		bytes([0x19| Bytes]).
 	encode_positive_integer(N) -->
 		{N > 0x17}, !,
 		[0x18, N].
@@ -178,13 +178,13 @@
 		[0x38, Byte].
 	encode_negative_integer(N) -->
 		{N >= -0xffff - 1}, !, {M is -1 - N, integer_to_bytes(2, M, Bytes)},
-		[0x39| Bytes].
+		bytes([0x39| Bytes]).
 	encode_negative_integer(N) -->
 		{N >= -0xffffffff - 1}, !, {M is -1 - N, integer_to_bytes(4, M, Bytes)},
-		[0x3a| Bytes].
+		bytes([0x3a| Bytes]).
 	encode_negative_integer(N) -->
 		{N >= -0xffffffffffffffff - 1}, !, {M is -1 - N, integer_to_bytes(8, M, Bytes)},
-		[0x3b| Bytes].
+		bytes([0x3b| Bytes]).
 	encode_negative_integer(N) -->
 		{Inv is -1 - N, int_num_bytes(Inv, Length), integer_to_bytes(Inv, Bytes)},
 		[0xc3], encode_byte_string(Length, Bytes).
@@ -192,23 +192,23 @@
 	% byte string (0x00..0x17 bytes follow)
 	encode_byte_string(Length, Bytes) -->
 		{Length =< 0x17}, !, {Size is Length + 0x40},
-		[Size| Bytes].
+		bytes([Size| Bytes]).
 	% byte string (one-byte uint8_t for n, and then n bytes follow)
 	encode_byte_string(Length, Bytes) -->
 		{Length =< 0xff}, !,
-		[0x58, Length| Bytes].
+		bytes([0x58, Length| Bytes]).
 	% byte string (two-byte uint16_t for n, and then n bytes follow)
 	encode_byte_string(Length, [Byte| Bytes]) -->
 		{Length =< 0xffff}, !, {integer_to_bytes(2, Length, Size)},
-		[0x59| Size], [Byte| Bytes].
+		bytes([0x59| Size]), bytes([Byte| Bytes]).
 	% byte string (four-byte uint32_t for n, and then n bytes follow)
 	encode_byte_string(Length, [Byte| Bytes]) -->
 		{Length =< 0xffffffff}, !, {integer_to_bytes(4, Length, Size)},
-		[0x5a| Size], [Byte| Bytes].
+		bytes([0x5a| Size]), bytes([Byte| Bytes]).
 	% byte string (eight-byte uint64_t for n, and then n bytes follow)
 	encode_byte_string(Length, [Byte| Bytes]) -->
 		{Length =< 0xffffffffffffffff}, !, {integer_to_bytes(8, Length, Size)},
-		[0x5b| Size], [Byte| Bytes].
+		bytes([0x5b| Size]), bytes([Byte| Bytes]).
 	encode_byte_string(_, _) -->
 		{representation_error(byte_string)}.
 
@@ -221,13 +221,13 @@
 		[0xd8, Tag], encode(Data).
 	encode_tag(Tag, Data) -->
 		{Tag =< 0xffff}, !, {integer_to_bytes(2, Tag, Bytes)},
-		[0xd9| Bytes], encode(Data).
+		bytes([0xd9| Bytes]), encode(Data).
 	encode_tag(Tag, Data) -->
 		{Tag =< 0xffffff}, !, {integer_to_bytes(4, Tag, Bytes)},
-		[0xda| Bytes], encode(Data).
+		bytes([0xda| Bytes]), encode(Data).
 	encode_tag(Tag, Data) -->
 		{Tag =< 0xffffffff}, !, {integer_to_bytes(8, Tag, Bytes)},
-		[0xdb| Bytes], encode(Data).
+		bytes([0xdb| Bytes]), encode(Data).
 	encode_tag(_, _) -->
 		{representation_error(tag)}.
 
@@ -558,6 +558,11 @@
 		{double_precision_to_float(Byte7, Byte6, Byte5, Byte4, Byte3, Byte2, Byte1, Byte0, Float)}.
 
 	% auxiliary non-terminals
+
+	bytes([]) -->
+		[].
+	bytes([Byte| Bytes]) -->
+		[Byte], bytes(Bytes).
 
 	bytes(0, []) -->
 		!, [].

@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 52, 0, b06)).
+'$lgt_version_data'(logtalk(3, 52, 0, b07)).
 
 
 
@@ -23939,14 +23939,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % translates a list of terminals
 
-'$lgt_dcg_terminals'(Terminals, S0, S, Goal) :-
-	'$lgt_check'(nonvar, Terminals),
-	(	'$lgt_is_list'(Terminals) ->
-		'$lgt_append'(Terminals, S, List),
-		Goal = (S0 = List)
-	;	'$lgt_check'(list_or_partial_list, Terminals),
-		Goal = {'$lgt_append'(Terminals, S, S0)}
-	).
+'$lgt_dcg_terminals'(Terminals, S0, S, S0 = List) :-
+	'$lgt_check'(list, Terminals),
+	'$lgt_append'(Terminals, S, List).
 
 
 
@@ -26778,12 +26773,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check'(list, Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	'$lgt_is_list'(Term) ->
-		true
-	;	throw(error(type_error(list, Term), Context))
-	).
+	'$lgt_check_list'(list, Term, Term, Context).
 
 '$lgt_check'(list_or_partial_list, Term, Context) :-
 	(	var(Term) ->
@@ -26794,12 +26784,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check'(list(Type), Term, Context) :-
-	(	var(Term) ->
-		throw(error(instantiation_error, Context))
-	;	'$lgt_is_list'(Term) ->
-		forall('$lgt_member'(Item, Term), '$lgt_check'(Type, Item, Context))
-	;	throw(error(type_error(list, Term), Context))
-	).
+	'$lgt_check_list'(list, Term, Term, Context),
+	forall('$lgt_member'(Item, Term), '$lgt_check'(Type, Item, Context)).
 
 '$lgt_check'(object, Term, Context) :-
 	(	var(Term) ->
@@ -27159,6 +27145,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check'(atom, Key, Context),
 		'$lgt_check'(nonvar, Value, Context)
 	;	throw(error(type_error(key_value_info_pair, Term), Context))
+	).
+
+
+'$lgt_check_list'(list, Term, Original, Context) :-
+	(	var(Term) ->
+		throw(error(instantiation_error, Context))
+	;	Term == [] ->
+		true
+	;	Term = [_| Tail] ->
+		'$lgt_check_list'(list, Tail, Original, Context)
+	;	throw(error(type_error(list, Original), Context))
 	).
 
 
