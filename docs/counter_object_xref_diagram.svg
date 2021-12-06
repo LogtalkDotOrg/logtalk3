@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-380 608,-380 608,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object counter</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;12&#45;03, 12:45</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;12&#45;06, 18:57</text>
 <g id="clust1" class="cluster">
 <title>cluster_counter_object</title>
 <g id="a_clust1"><a xlink:title="counter">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 584,-49 584,-49 590,-49 596,-55 596,-61 596,-61 596,-356 596,-356 596,-362 590,-368 584,-368 584,-368 20,-368 20,-368 14,-368 8,-362 8,-356 8,-356 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt">
 <text text-anchor="start" x="20.5" y="-351.5" font-family="Monospace" font-size="10.00" fill="dimgray">counter</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- increment/0 -->
 <g id="node1" class="node">
 <title>increment/0</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L46">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L46">
 <polygon fill="springgreen" stroke="black" points="585.5,-213 484.5,-213 484.5,-177 585.5,-177 585.5,-213"/>
 <text text-anchor="start" x="493" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="499" y="-197.2" font-family="Monospace" font-size="11.00">increment/0</text>
@@ -41,7 +41,7 @@
 <!-- c/1 -->
 <g id="node6" class="node">
 <title>c/1</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L79">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L79">
 <polygon fill="#ff6a6a" stroke="black" points="326,-95 230,-95 230,-59 326,-59 326,-95"/>
 <text text-anchor="start" x="238" y="-79.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="268" y="-79.2" font-family="Monospace" font-size="11.00">c/1</text>
@@ -55,12 +55,12 @@
 <!-- increment/0&#45;&gt;c/1 -->
 <g id="edge4" class="edge">
 <title>increment/0&#45;&gt;c/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L86" xlink:title="updates">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L86" xlink:title="updates">
 <path fill="none" stroke="black" d="M497.08,-176.88C452,-156.54 376.66,-122.53 327.15,-100.18"/>
 <polygon fill="black" stroke="black" points="327.01,-100.12 319.9,-101.3 316.08,-95.19 323.19,-94.01 327.01,-100.12"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L86">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L86" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L86">
 <text text-anchor="start" x="414" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- increase/1 -->
 <g id="node2" class="node">
 <title>increase/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L52">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L52">
 <polygon fill="springgreen" stroke="black" points="466.5,-213 371.5,-213 371.5,-177 466.5,-177 466.5,-213"/>
 <text text-anchor="start" x="380" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="386" y="-197.2" font-family="Monospace" font-size="11.00">increase/1</text>
@@ -82,12 +82,12 @@
 <!-- increase/1&#45;&gt;c/1 -->
 <g id="edge5" class="edge">
 <title>increase/1&#45;&gt;c/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L91" xlink:title="updates">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L91" xlink:title="updates">
 <path fill="none" stroke="black" d="M398.39,-176.84C383.13,-164.15 361.8,-146.46 343,-131 331.81,-121.8 319.49,-111.74 308.62,-102.88"/>
 <polygon fill="black" stroke="black" points="308.42,-102.72 301.24,-102.03 299.11,-95.14 306.29,-95.83 308.42,-102.72"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L91">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L91">
 <text text-anchor="start" x="353" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- set/1 -->
 <g id="node3" class="node">
 <title>set/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L59">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L59">
 <polygon fill="springgreen" stroke="black" points="353,-213 291,-213 291,-177 353,-177 353,-213"/>
 <text text-anchor="start" x="299" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="305" y="-197.2" font-family="Monospace" font-size="11.00">set/1</text>
@@ -109,12 +109,12 @@
 <!-- set/1&#45;&gt;c/1 -->
 <g id="edge6" class="edge">
 <title>set/1&#45;&gt;c/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L96" xlink:title="updates">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L96" xlink:title="updates">
 <path fill="none" stroke="black" d="M315.51,-176.88C308.49,-158.38 297.18,-128.58 288.82,-106.52"/>
 <polygon fill="black" stroke="black" points="288.77,-106.41 282.91,-102.22 284.52,-95.19 290.39,-99.38 288.77,-106.41"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L96">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L96">
 <text text-anchor="start" x="301" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <!-- value/1 -->
 <g id="node4" class="node">
 <title>value/1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L66">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L66">
 <polygon fill="springgreen" stroke="black" points="272.5,-213 197.5,-213 197.5,-177 272.5,-177 272.5,-213"/>
 <text text-anchor="start" x="206" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="212" y="-197.2" font-family="Monospace" font-size="11.00">value/1</text>
@@ -136,12 +136,12 @@
 <!-- value/1&#45;&gt;c/1 -->
 <g id="edge1" class="edge">
 <title>value/1&#45;&gt;c/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L100" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M241.34,-176.88C248.39,-157.86 259.87,-126.91 268.1,-104.7"/>
 <polygon fill="black" stroke="black" points="271.44,-105.78 271.63,-95.19 264.87,-103.35 271.44,-105.78"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L100">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L100">
 <text text-anchor="start" x="257" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <!-- reset/0 -->
 <g id="node5" class="node">
 <title>reset/0</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L73">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L73">
 <polygon fill="springgreen" stroke="black" points="179.5,-213 104.5,-213 104.5,-177 179.5,-177 179.5,-213"/>
 <text text-anchor="start" x="113" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="119" y="-197.2" font-family="Monospace" font-size="11.00">reset/0</text>
@@ -163,12 +163,12 @@
 <!-- reset/0&#45;&gt;c/1 -->
 <g id="edge7" class="edge">
 <title>reset/0&#45;&gt;c/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L103" xlink:title="updates">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L103" xlink:title="updates">
 <path fill="none" stroke="black" d="M160.8,-176.94C175,-164.14 195.05,-146.27 213,-131 223.95,-121.68 236.13,-111.66 246.96,-102.88"/>
 <polygon fill="black" stroke="black" points="247.11,-102.75 249.26,-95.87 256.44,-95.2 254.29,-102.09 247.11,-102.75"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L103">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L103">
 <text text-anchor="start" x="213" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -176,7 +176,7 @@
 <!-- init/0 -->
 <g id="node7" class="node">
 <title>init/0</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L82">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L82">
 <polygon fill="cornsilk" stroke="black" points="86,-213 18,-213 18,-177 86,-177 86,-213"/>
 <text text-anchor="start" x="26" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="32" y="-197.2" font-family="Monospace" font-size="11.00">init/0</text>
@@ -190,12 +190,12 @@
 <!-- init/0&#45;&gt;c/1 -->
 <g id="edge3" class="edge">
 <title>init/0&#45;&gt;c/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L82" xlink:title="updates">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L82" xlink:title="updates">
 <path fill="none" stroke="black" d="M79.81,-176.91C101.59,-163.77 132.81,-145.49 161,-131 182.17,-120.12 206.02,-109.1 226.65,-99.95"/>
 <polygon fill="black" stroke="black" points="226.75,-99.9 230.63,-93.82 237.73,-95.07 233.85,-101.15 226.75,-99.9"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L82">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L82">
 <text text-anchor="start" x="161" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -203,7 +203,7 @@
 <!-- (:&#45;)/1 -->
 <g id="node8" class="node">
 <title>(:&#45;)/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L44">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L44">
 <polygon fill="bisque" stroke="black" points="86,-331 18,-331 18,-295 86,-295 86,-331"/>
 <text text-anchor="start" x="26" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="32" y="-315.2" font-family="Monospace" font-size="11.00">(:&#45;)/1</text>
@@ -217,12 +217,12 @@
 <!-- (:&#45;)/1&#45;&gt;init/0 -->
 <g id="edge2" class="edge">
 <title>(:&#45;)/1&#45;&gt;init/0</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L44" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M52,-294.88C52,-276.04 52,-245.47 52,-223.3"/>
 <polygon fill="black" stroke="black" points="55.5,-223.19 52,-213.19 48.5,-223.19 55.5,-223.19"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5b8b84ca3081b7661727563661eb8ff7c01e68fe/contributions/verdi_neruda/counter.lgt#L44">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/971a9a88ef81855fcdcffea00c70833370b0699a/contributions/verdi_neruda/counter.lgt#L44">
 <text text-anchor="start" x="52" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
