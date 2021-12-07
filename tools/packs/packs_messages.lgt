@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:24:1,
+		version is 0:24:2,
 		author is 'Paulo Moura',
-		date is 2021-12-03,
+		date is 2021-12-07,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -52,12 +52,12 @@
 			'  Add a new registry:   registries::add(Registry, URL).'-[], nl,
 			'  Delete a registry:    registries::delete(Registry).'-[], nl, nl,
 			'  Print registry data:  registries::describe(Registry).'-[], nl,
-			'  Registry readme file: registries::readme(Path).'-[], nl, nl,
+			'  Registry readme file: registries::readme(Registry).'-[], nl, nl,
 			'  List available packs: packs::available.'-[], nl,
 			'  List installed packs: packs::installed.'-[], nl, nl,
 			'  Print pack data:      packs::describe(Pack).'-[], nl,
 			'                        packs::describe(Registry, Pack).'-[], nl,
-			'  Pack readme file:     packs::readme(Path).'-[], nl, nl,
+			'  Pack readme file:     packs::readme(Pack).'-[], nl, nl,
 			'  Install a pack:       packs::install(Pack).'-[], nl,
 			'                        packs::install(Registry, Pack).'-[], nl,
 			'                        packs::install(Registry, Pack, Version).'-[], nl, nl,

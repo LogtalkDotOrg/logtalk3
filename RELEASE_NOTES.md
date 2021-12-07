@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: A partial list of terminals in the first argument of a grammar rule
+body to generate an instantiation error as per the standardization proposal.
+
 * IMPROVED: Generalized the linter checks for `is/2` and `(=:=)/2` goals to
 cases where the expression arguments are not ground but their type can be
 inferred.
@@ -43,9 +46,6 @@ being called is a meta-predicate.
 
 * FIXED: Avoid a warning when embedding Logtalk due to the definition of the
 `forward/1` predicate in the `user` pseudo-object.
-
-* FIXED: A partial list of terminals in the first argument of a grammar rule
-body to generate an instantiation error as per the standardization proposal.
 
 Prolog adapter and integration files
 ------------------------------------
