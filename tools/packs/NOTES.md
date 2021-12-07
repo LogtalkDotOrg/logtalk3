@@ -138,6 +138,21 @@ manually modify the contents of these directories. Multiple and independent
 registry/pack setups are possible using _virtual environments_ as explained
 next.
 
+Your registries and packs setup can be saved and restored (e.g. in a different
+system) by using the `packs::save/2` and `packs::restore/1-2` predicates. For
+example:
+
+	| ?- packs::save(my_setup, [save(all)]).
+	...
+
+Then, in the destination system:
+
+	| ?- packs::restore(my_setup).
+	...
+
+If necessary, before restoring, the `packs::reset/0` predicate can be called
+to delete any defined registries and installed packs.
+
 
 Virtual environments
 --------------------
@@ -167,10 +182,17 @@ can set environment variables when changing to an application directory
 (see e.g. [direnv](https://github.com/direnv/direnv)).
 
 A virtual environment setup (i.e. the currently defined registries and
-installed packs) can be saved into a file (e.g. `requirements.lgt`) and
-restored using the `packs::save/1` and `packs::restore/1-2` predicates.
-The file uses a simple format with `registry/2` and `pack/3` facts (in
-this order) and can be manually created or edited if necessary. For example:
+installed packs) can be saved into a file (e.g. `requirements.lgt`) using
+the `packs::save/1` predicate:
+
+	| ?- packs::save('requirements.lgt').
+	...
+
+This query saves a listing of all the installed packs and their registries.
+Using the saved file, the virtual environment setup can then be restored
+using the `packs::restore/1-2` predicates. The file uses a simple format with
+`registry/2` and `pack/3` facts (in this order) and can be manually created
+or edited if necessary. For example:
 
 	registry(talkshow, 'https://github.com/LogtalkDotOrg/talkshow.git').
 	pack(talkshow, logtalk, 3:45:0).
@@ -191,7 +213,7 @@ A suitable named sub-directory can also be used. The application requirements
 can then be fulfilled by starting Logtalk from the application directory (so
 that the application settings file is loaded) and running once the query:
 
-	| ?- {packs(loader)}, packs::restore('requirements.lgt).
+	| ?- {packs(loader)}, packs::restore('requirements.lgt').
 
 The application `loader.lgt` file can then load the required packs using their
 loader files:

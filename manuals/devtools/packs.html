@@ -248,6 +248,20 @@ the <code class="docutils literal notranslate"><span class="pre">packs</span></c
 the contents of these directories. Multiple and independent
 registry/pack setups are possible using <em>virtual environments</em> as
 explained next.</p>
+<p>Your registries and packs setup can be saved and restored (e.g. in a
+different system) by using the <code class="docutils literal notranslate"><span class="pre">packs::save/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code> predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>save(my_setup, [save(all)]).
+...
+</pre></div>
+</div>
+<p>Then, in the destination system:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>restore(my_setup).
+...
+</pre></div>
+</div>
+<p>If necessary, before restoring, the <code class="docutils literal notranslate"><span class="pre">packs::reset/0</span></code> predicate can be
+called to delete any defined registries and installed packs.</p>
 </section>
 <section id="virtual-environments">
 <h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this headline"></a></h2>
@@ -277,10 +291,16 @@ application directory (see e.g.
 <a class="reference external" href="https://github.com/direnv/direnv">direnv</a>).</p>
 <p>A virtual environment setup (i.e. the currently defined registries and
 installed packs) can be saved into a file (e.g. <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>)
-and restored using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> and <code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code>
-predicates. The file uses a simple format with <code class="docutils literal notranslate"><span class="pre">registry/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">pack/3</span></code> facts (in this order) and can be manually created or edited
-if necessary. For example:</p>
+using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>save(<span class="s">&#39;requirements.lgt&#39;</span>).
+...
+</pre></div>
+</div>
+<p>This query saves a listing of all the installed packs and their
+registries. Using the saved file, the virtual environment setup can then
+be restored using the <code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code> predicates. The file uses a
+simple format with <code class="docutils literal notranslate"><span class="pre">registry/2</span></code> and <code class="docutils literal notranslate"><span class="pre">pack/3</span></code> facts (in this order)
+and can be manually created or edited if necessary. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>registry(talkshow, <span class="s">&#39;https://github.com/LogtalkDotOrg/talkshow.git&#39;</span>).
 pack(talkshow, logtalk, <span class="m">3</span><span class="o">:</span><span class="m">45</span><span class="o">:</span><span class="m">0</span>).
 pack(talkshow, lflat, <span class="m">2</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>).
@@ -301,7 +321,7 @@ Typically, an application directory will include <code class="docutils literal n
 requirements can then be fulfilled by starting Logtalk from the
 application directory (so that the application settings file is loaded)
 and running once the query:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>packs(loader)<span class="k">}</span>, packs<span class="o">::</span>restore(<span class="s">&#39;requirements.lgt).</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>packs(loader)<span class="k">}</span>, packs<span class="o">::</span>restore(<span class="s">&#39;requirements.lgt&#39;</span>).
 </pre></div>
 </div>
 <p>The application <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file can then load the required packs
