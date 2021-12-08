@@ -25,7 +25,10 @@ RELEASE NOTES
 3.53.0 - December ??, 2021
 ==========================
 
+Examples
+--------
 
+* UPDATED: The `attvars` example tests to use explicit assertions.
 
 
 3.52.0 - December 7, 2021
