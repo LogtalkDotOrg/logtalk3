@@ -19,16 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% to avoid problems with backend Prolog compilers such as ECLiPSe where
+% reloading a file defining clauses for a multifile predicate results in
+% the duplication of the clauses, below we load the required libraries
+% for the "lgtunit" tool separately so that we can load the "random"
+% library under testing in debug mode
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	% we need to load the lgtunit tool first as it uses the random library,
-	% which we must recompile in order to collect code coverage information
-	logtalk_load(lgtunit(loader)),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(
-		[random(random_protocol), random(pseudo_random_protocol), random(random), random(backend_random), random(fast_random)],
-		[debug(on), source_data(on)]
+		[random_protocol, pseudo_random_protocol, random, backend_random, fast_random],
+		[debug(on), source_data(on), clean(on)]
 	),
+	logtalk_load(types(loader)),
+	logtalk_load([arbitrary(arbitrary)], [optimize(on)]),
+	logtalk_load(os(loader)),
+	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		tests(random),

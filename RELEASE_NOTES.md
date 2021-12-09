@@ -25,6 +25,13 @@ RELEASE NOTES
 3.53.0 - December ??, 2021
 ==========================
 
+Library
+-------
+
+* IMPROVED: Tests driver files for the `arbitrary` and `random` libraries to
+avoid reloading of files and and to explicit clean up intermediate files for
+the code being tested.
+
 Examples
 --------
 
