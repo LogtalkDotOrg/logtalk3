@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-02-12,
+		date is 2021-12-09,
 		comment is 'Unit tests for the ISO Prolog standard subsumes_term/2 built-in predicate.'
 	]).
 
@@ -57,5 +57,42 @@
 
 	succeeds(lgt_subsumes_term_2_07) :-
 		{subsumes_term(c(A, [e(A)]), c(B, [e(B)]))}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		succeeds(lgt_subsumes_term_2_08) :-
+			X = f(X),
+			{subsumes_term(f(_), f(X))}.
+
+		fails(lgt_subsumes_term_2_09) :-
+			X = f(X),
+			{subsumes_term(f(X), f(_))}.
+
+		succeeds(lgt_subsumes_term_2_10) :-
+			X = f(X),
+			{subsumes_term(X, X)}.
+
+	:- else.
+
+		- succeeds(lgt_subsumes_term_2_08) :-
+			% STO; Undefined.
+			X = f(X),
+			{subsumes_term(f(_), f(X))}.
+
+		- fails(lgt_subsumes_term_2_09) :-
+			% STO; Undefined.
+			X = f(X),
+			{subsumes_term(f(X), f(_))}.
+
+		- succeeds(lgt_subsumes_term_2_10) :-
+			% STO; Undefined.
+			X = f(X),
+			{subsumes_term(X, X)}.
+
+	:- endif.
 
 :- end_object.

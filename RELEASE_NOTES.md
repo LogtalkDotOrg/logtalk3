@@ -33,8 +33,11 @@ Examples
 Tests
 -----
 
-* ADDED: Additional test for the `throw/1` control construct when the exception
-term is a cyclic term.
+* ADDED: Additional test for the standard `throw/1` control construct when
+the exception term is a cyclic term.
+
+* ADDED: Additional tests for the standard `subsumes_term/2` predicate with
+cyclic term arguments.
 
 
 3.52.0 - December 7, 2021

@@ -45,14 +45,14 @@
 
 		throws(lgt_throw_1_03, f(_)) :-
 			X = f(X),
-			throw(X).
+			{throw(X)}.
 
 	:- else.
 
 		- throws(lgt_throw_1_03, f(_)) :-
 			% STO; Undefined.
 			X = f(X),
-			throw(X).
+			{throw(X)}.
 
 	:- endif.
 
