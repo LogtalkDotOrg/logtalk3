@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-02-20,
+		date is 2021-12-09,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
 	]).
 
@@ -161,5 +161,36 @@
 
 	fails(lgt_term_comparison_37) :-
 		{'@<'(a//0, a/0)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		succeeds(lgt_term_comparison_38) :-
+			{X = f(X), Y = f(Y), X @>= Y}.
+
+		fails(lgt_term_comparison_39) :-
+			{X = f(X), Y = f(Y), X @< Y}.
+
+		succeeds(lgt_term_comparison_40) :-
+			{X = f(X), Y = f(Y), X == Y}.
+
+	:- else.
+
+		- succeeds(lgt_term_comparison_38) :-
+			% STO; Undefined.
+			{X = f(X), Y = f(Y), X @>= Y}.
+
+		- fails(lgt_term_comparison_39) :-
+			% STO; Undefined.
+			{X = f(X), Y = f(Y), X @< Y}.
+
+		- succeeds(lgt_term_comparison_40) :-
+			% STO; Undefined.
+			{X = f(X), Y = f(Y), X == Y}.
+
+	:- endif.
 
 :- end_object.
