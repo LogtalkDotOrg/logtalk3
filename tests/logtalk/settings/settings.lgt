@@ -20,6 +20,6 @@
 
 
 :- initialization((
-	set_logtalk_flag(tail_recursive, warning),
-	set_logtalk_flag(reload, always)
+	set_logtalk_flag(duplicated_clauses, warning),
+	set_logtalk_flag(tail_recursive, warning)
 )).

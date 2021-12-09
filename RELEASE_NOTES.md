@@ -33,6 +33,9 @@ Examples
 Tests
 -----
 
+* CHANGED: Tests for Logtalk settings file to avoid issues with some backends
+where reloading files can be problematic.
+
 * ADDED: Additional test for the standard `throw/1` control construct when
 the exception term is a cyclic term.
 

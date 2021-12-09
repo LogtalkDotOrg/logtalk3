@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-09-29,
+		date is 2021-12-09,
 		comment is 'Unit tests for loading of settings files.'
 	]).
 
 	test(settings_file_default_flag_values_override, true) :-
-		current_logtalk_flag(tail_recursive, warning),
-		current_logtalk_flag(reload, always).
+		current_logtalk_flag(duplicated_clauses, warning),
+		current_logtalk_flag(tail_recursive, warning).
 
 :- end_object.
