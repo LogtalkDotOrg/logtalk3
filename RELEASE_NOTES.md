@@ -30,6 +30,12 @@ Examples
 
 * UPDATED: The `attvars` example tests to use explicit assertions.
 
+Tests
+-----
+
+* ADDED: Additional test for the `throw/1` control construct when the exception
+term is a cyclic term.
+
 
 3.52.0 - December 7, 2021
 =========================

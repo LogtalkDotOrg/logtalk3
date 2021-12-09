@@ -23,35 +23,54 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2018-02-27,
+		date is 2021-12-09,
 		comment is 'Unit tests for the ISO Prolog standard throw/1 control construct.'
 	]).
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_throw_1_1, error(instantiation_error,_)) :-
+	throws(lgt_throw_1_01, error(instantiation_error,_)) :-
 		{throw(_)}.
 
-	throws(lgt_throw_1_2, my_error) :-
+	throws(lgt_throw_1_02, my_error) :-
 		{throw(my_error)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		throws(lgt_throw_1_03, f(_)) :-
+			X = f(X),
+			throw(X).
+
+	:- else.
+
+		- throws(lgt_throw_1_03, f(_)) :-
+			% STO; Undefined.
+			X = f(X),
+			throw(X).
+
+	:- endif.
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_throw_1_3, a) :-
+	throws(eclipse_throw_1_04, a) :-
 		{throw(a)}.
 
-	throws(eclipse_throw_1_4, 1) :-
+	throws(eclipse_throw_1_05, 1) :-
 		{throw(1)}.
 
-	throws(eclipse_throw_1_5, 1.0) :-
+	throws(eclipse_throw_1_06, 1.0) :-
 		{throw(1.0)}.
 
-	throws(eclipse_throw_1_6, f(a)) :-
+	throws(eclipse_throw_1_07, f(a)) :-
 		{throw(f(a))}.
 
-	succeeds(eclipse_throw_1_7) :-
+	succeeds(eclipse_throw_1_08) :-
 		{catch(throw(f(_)), T, true)},
 		^^variant(T, f(_)).
 
