@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:10:1,
 		author is 'Paulo Moura',
-		date is 2021-09-13,
+		date is 2021-12-09,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -68,7 +68,7 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.12.2.1 NOTE
 
-	succeeds(iso_peek_char_2_07) :-
+	succeeds(iso_peek_code_2_07) :-
 		^^set_text_input(st_i, 'qwerty', [reposition(true)]),
 		stream_property(S, alias(st_i)),
 		stream_property(S, position(P0)),
