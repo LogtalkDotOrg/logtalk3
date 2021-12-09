@@ -91,12 +91,21 @@
 			X = f(X),
 			{numbervars(X, 0, N)}.
 
+		test(lgt_numbervars_3_12, true((N == 3, A == '$VAR'(0), B == '$VAR'(1), C == '$VAR'(2)))) :-
+			L = [A,B,C| L],
+			{numbervars(L, 0, N)}.
+
 	:- else.
 
 		- test(lgt_numbervars_3_11, true(N == 0)) :-
 			% STO; Undefined.
 			X = f(X),
 			{numbervars(X, 0, N)}.
+
+		- test(lgt_numbervars_3_12, true((N == 3, A == '$VAR'(0), B == '$VAR'(1), C == '$VAR'(2)))) :-
+			% STO; Undefined.
+			L = [A,B,C| L],
+			{numbervars(L, 0, N)}.
 
 	:- endif.
 
