@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-08-23,
+		date is 2021-12-09,
 		comment is 'Unit tests for the ISO Prolog standard ground/1 built-in predicate.'
 	]).
 
@@ -59,5 +59,24 @@
 
 	succeeds(lgt_ground_1_07) :-
 		{ground('$VAR'(0))}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		succeeds(lgt_ground_1_08) :-
+			X = f(X),
+			{ground(X)}.
+
+	:- else.
+
+		- succeeds(lgt_ground_1_08) :-
+			% STO; Undefined.
+			X = f(X),
+			{ground(X)}.
+
+	:- endif.
 
 :- end_object.
