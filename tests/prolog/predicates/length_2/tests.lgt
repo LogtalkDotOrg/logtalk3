@@ -29,9 +29,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-09-11,
+		date is 2021-12-09,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -101,5 +101,26 @@
 
 	test(commons_length_2_22, false) :-
 		{length([1, 2, 3, 4, 5| _], 2)}.
+
+	% tests from the Logtalk portability work
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(commons_length_2_23, error(_)) :-
+			L = [_| L],
+			{length(L, _)}.
+
+	:- else.
+
+		- test(commons_length_2_23, error(_)) :-
+			% STO; Undefined.
+			L = [_| L],
+			{length(L, _)}.
+
+	:- endif.
 
 :- end_object.
