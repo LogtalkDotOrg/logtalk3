@@ -46,8 +46,8 @@ where reloading files can be problematic.
 * ADDED: Additional test for the standard `throw/1` control construct when
 the exception term is a cyclic term.
 
-* ADDED: Additional tests for the standard `ground/1` and `subsumes_term/2`
-predicates with cyclic term arguments.
+* ADDED: Additional tests for the standard `ground/1`, `numbervars/3`, and
+`subsumes_term/2` predicates with cyclic term arguments.
 
 
 3.52.0 - December 7, 2021

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-12-09,
+		date is 2021-12-09,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
@@ -78,5 +78,26 @@
 
 	test(commons_numbervars_3_10, error(type_error(integer,a))) :-
 		{numbervars(_, 1, a)}.
+
+	% tests from the Logtalk portability work
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_numbervars_3_11, true(N == 0)) :-
+			X = f(X),
+			{numbervars(X, 0, N)}.
+
+	:- else.
+
+		- test(lgt_numbervars_3_11, true(N == 0)) :-
+			% STO; Undefined.
+			X = f(X),
+			{numbervars(X, 0, N)}.
+
+	:- endif.
 
 :- end_object.
