@@ -60,12 +60,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_copy_term_2_09, true) :-
 			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
+
 	:- else.
+
 		- test(iso_copy_term_2_09, true) :-
 			% STO; Undefined
 			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
+
 	:- endif.
 
 	% ISO/IEC 13211-1:1995(E) standard, section 8.5.4.1 NOTE
@@ -80,5 +84,26 @@
 		Term1 = a(X, Y),
 		Term2 = a(Z, W),
 		{copy_term(Term1, Term2)}.
+
+	% tests from the Logtalk portability work
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_copy_term_2_12, true(Z == X)) :-
+			X = f(X),
+			{copy_term(foo(X,Y), foo(Z,Y))}.
+
+	:- else.
+
+		- test(lgt_copy_term_2_12, true(Z == X)) :-
+			% STO; Undefined
+			X = f(X),
+			{copy_term(foo(X,Y), foo(Z,Y))}.
+
+	:- endif.
 
 :- end_object.
