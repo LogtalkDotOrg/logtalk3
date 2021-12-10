@@ -18298,21 +18298,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(Goal),
 	!.
 
-'$lgt_fold_left_unifications'((Term1 = Term2), Folded) :-
-	\+ \+ (Term1 = Term2, acyclic_term(Term1)),
-	!,
-	(	Term1 = Term2 ->
-		Folded = true
-	;	Folded = fail
-	).
+'$lgt_fold_left_unifications'((Term1 = Term2), true) :-
+	unify_with_occurs_check(Term1, Term2),
+	!.
 
 '$lgt_fold_left_unifications'(((Term1 = Term2), Goal), Folded) :-
-	\+ \+ (Term1 = Term2, acyclic_term(Term1)),
+	unify_with_occurs_check(Term1, Term2),
 	!,
-	(	Term1 = Term2 ->
-		'$lgt_fold_left_unifications'(Goal, Folded)
-	;	Folded = fail
-	).
+	'$lgt_fold_left_unifications'(Goal, Folded).
 
 '$lgt_fold_left_unifications'(Goal, Goal).
 

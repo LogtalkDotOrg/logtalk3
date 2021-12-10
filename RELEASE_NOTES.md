@@ -25,6 +25,12 @@ RELEASE NOTES
 3.53.0 - December ??, 2021
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Simplified folding of left unifications when compiling clauses in
+optimized mode.
+
 Library
 -------
 
