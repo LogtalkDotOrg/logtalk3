@@ -72,6 +72,9 @@ a(baz(_), z/2, 1).
 a(baz(_), z/2, 2).
 a(baz(_), z/2, 3).
 
+f(_, 1, a).
+f(_, 2, b).
+
 % avoid conflicts with a possible member/2 built-in predicate
 setof_3_member(X, [X| _]).
 setof_3_member(X, [_| L]) :-
@@ -82,9 +85,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-12-13,
+		date is 2021-12-10,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -267,5 +270,24 @@ setof_3_member(X, [_| L]) :-
 
 	test(lgt_setof_3_35, error(instantiation_error)) :-
 		{setof(_X, _Y^_Z, _L)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_setof_3_36, true(LL == [a-[1], b-[2]])) :-
+			X = f(X,Y,Z),
+			findall(Z-L, {setof(Y, X, L)}, LL).
+
+	:- else.
+
+		- test(lgt_setof_3_36, true(LL == [a-[1], b-[2]])) :-
+			% STO; Undefined
+			X = f(X,Y,Z),
+			findall(Z-L, {setof(Y, X, L)}, LL).
+
+	:- endif.
 
 :- end_object.

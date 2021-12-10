@@ -41,14 +41,17 @@ c(2, b, 'B').
 c(1, a, 'A').
 c(3, c, 'C').
 
+f(_, 1, a).
+f(_, 2, b).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-09-13,
+		date is 2021-12-10,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -142,6 +145,25 @@ c(3, c, 'C').
 
 	test(lgt_bagof_3_21, true(L == ['B', 'A', 'C'])) :-
 		{bagof(Z, t(X,Y)^c(X,Y,Z), L)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_bagof_3_22, true(LL == [a-[1], b-[2]])) :-
+			X = f(X,Y,Z),
+			findall(Z-L, {bagof(Y, X, L)}, LL).
+
+	:- else.
+
+		- test(lgt_bagof_3_22, true(LL == [a-[1], b-[2]])) :-
+			% STO; Undefined
+			X = f(X,Y,Z),
+			findall(Z-L, {bagof(Y, X, L)}, LL).
+
+	:- endif.
 
 	% auxiliary predicates
 
