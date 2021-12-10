@@ -19,13 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% database for tests from the Logtalk portability work
+
+f(_, 1).
+f(_, 2).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-08-24,
+		date is 2021-12-10,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -66,6 +72,27 @@
 
 	test(eclipse_findall_3_10, error(type_error(list,12))) :-
 		{findall(X, (X=2; X=1), 12)}.
+
+	% tests from the Logtalk portability work
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_findall_3_11, true(L == [1,2])) :-
+			X = f(X,Y),
+			{findall(Y, X, L)}.
+
+	:- else.
+
+		- test(lgt_findall_3_11, true(L == [1,2])) :-
+			% STO; Undefined
+			X = f(X,Y),
+			{findall(Y, X, L)}.
+
+	:- endif.
 
 	% auxiliary predicates
 
