@@ -11,8 +11,8 @@
 Provides dif/2 and derived predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2021-11-27
+| **Version:** 1:2:0
+| **Date:** 2021-12-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,7 +24,7 @@ Provides dif/2 and derived predicates.
 
 | **Remarks:**
 
-   - Supported backend Prolog systems: B-Prolog, ECLiPSe, Scryer Prolog, SICStus Prolog, SWI-Prolog, and YAP.
+   - Supported backend Prolog systems: B-Prolog, ECLiPSe, Scryer Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.
 
 | **Inherited public predicates:**
 |    (none)

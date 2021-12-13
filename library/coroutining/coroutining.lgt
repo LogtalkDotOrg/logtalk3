@@ -22,12 +22,12 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2021-11-27,
+		date is 2021-12-13,
 		comment is 'Coroutining predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
+			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.'
 		]
 	]).
 
@@ -109,6 +109,23 @@
 
 		frozen(Variable, Goal) :-
 			user:frozen(Variable, Goal).
+
+		when(Condition, Goal) :-
+			when:when(Condition, Goal).
+
+	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
+
+		:- meta_predicate(freeze:freeze(*, 0)).
+		:- meta_predicate(when:when(*, 0)).
+
+		dif(Term1, Term2) :-
+			dif:dif(Term1, Term2).
+
+		freeze(Variable, Goal) :-
+			freeze:freeze(Variable, Goal).
+
+		frozen(Variable, Goal) :-
+			freeze:frozen(Variable, Goal).
 
 		when(Condition, Goal) :-
 			when:when(Condition, Goal).

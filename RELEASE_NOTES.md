@@ -34,12 +34,19 @@ construct.
 * IMPROVED: Simplified folding of left unifications when compiling clauses in
 optimized mode.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Trealla Prolog adapter file to require version 1.17.0 or later.
+
 Library
 -------
 
 * IMPROVED: Tests driver files for the `arbitrary` and `random` libraries to
 avoid reloading of files and and to explicit clean up intermediate files for
 the code being tested.
+
+* UPDATED: The `dif` and `coroutining` libraries for use with Trealla Prolog.
 
 Examples
 --------
