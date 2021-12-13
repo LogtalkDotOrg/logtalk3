@@ -12325,6 +12325,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ functor(Goal, (::), 2),
 	throw(domain_error(message_sending_goal, Goal)).
 
+'$lgt_compile_body'([Alias::Pred], TPred, DPred, Ctx) :-
+	callable(Alias),
+	'$lgt_pp_object_alias_'(Obj, Alias, Ctx),
+	!,
+	'$lgt_compile_body'([Obj::Pred], TPred, DPred, Ctx).
+
 '$lgt_compile_body'([Obj::Pred], TPred, '$lgt_debug'(goal([Obj::Pred], TPred), ExCtx), Ctx) :-
 	!,
 	% as delegation keeps the original sender, we cannot use a recursive call

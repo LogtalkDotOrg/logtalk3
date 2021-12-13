@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for using object aliases in the message delegation control
+construct.
+
 * IMPROVED: Simplified folding of left unifications when compiling clauses in
 optimized mode.
 

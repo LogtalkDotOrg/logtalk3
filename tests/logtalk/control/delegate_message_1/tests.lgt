@@ -71,13 +71,27 @@
 
 
 
+:- object(test_object_alias).
+
+	:- uses([
+		delegate_message_test_object_1 as delegate
+	]).
+
+	:- public(w/1).
+	w(Sender) :-
+		[delegate::s(Sender)].
+
+:- end_object.
+
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-03-26,
+		date is 2021-12-13,
 		comment is 'Unit tests for the []/1 built-in control construct.'
 	]).
 
@@ -101,19 +115,23 @@
 		{delegate_message_test_object_2::t(X)},
 		X == user.
 
-	throws(delegate_message_1_06, error(instantiation_error, logtalk(logtalk<<[_], _))) :-
+	succeeds(delegate_message_1_06) :-
+		{test_object_alias::w(X)},
+		X == user.
+
+	throws(delegate_message_1_07, error(instantiation_error, logtalk(logtalk<<[_], _))) :-
 		% delay the error to runtime
 		{logtalk << [_]}.
 
-	throws(delegate_message_1_07, error(type_error(callable, 1), logtalk(logtalk<<[1], _))) :-
+	throws(delegate_message_1_08, error(type_error(callable, 1), logtalk(logtalk<<[1], _))) :-
 		% delay the error to runtime
 		{logtalk << [1]}.
 
-	throws(delegate_message_1_08, error(domain_error(message_sending_goal, foo), logtalk(logtalk<<[foo], _))) :-
+	throws(delegate_message_1_09, error(domain_error(message_sending_goal, foo), logtalk(logtalk<<[foo], _))) :-
 		% delay the error to runtime
 		{logtalk << [foo]}.
 
-	throws(delegate_message_1_09, error(permission_error(access, object, user), logtalk([user::foo], _))) :-
+	throws(delegate_message_1_10, error(permission_error(access, object, user), logtalk([user::foo], _))) :-
 		{delegate_message_test_object_2::u}.
 
 :- end_object.
