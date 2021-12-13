@@ -56,8 +56,9 @@ where reloading files can be problematic.
 the exception term is a cyclic term.
 
 * ADDED: Additional tests for the standard term comparison, `bagof/3`,
-`copy_term/2`, `findall/3`, `ground/1`, `length/2`, `numbervars/3`, `setof/3`,
-and `subsumes_term/2` predicates with cyclic term arguments.
+`compare/3`, `copy_term/2`, `findall/3`, `ground/1`, `length/2`,
+`numbervars/3`, `setof/3`, and `subsumes_term/2` predicates with cyclic
+term arguments.
 
 
 3.52.0 - December 7, 2021

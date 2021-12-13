@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-09-25,
+		date is 2021-12-13,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
@@ -121,5 +121,26 @@
 
 	test(lgt_compare_3_29, true(Order == (>))) :-
 		{compare(Order, 1+2, 1)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_compare_3_30, true(Order == (<))) :-
+			X = [0,1| X],
+			Y = [0,2| Y],
+			{compare(Order, a(1,X), a(1,Y))}.
+
+	:- else.
+
+		- test(lgt_compare_3_30, true(Order == (<))) :-
+			% STO; Undefined
+			X = [0,1| X],
+			Y = [0,2| Y],
+			{compare(Order, a(1,X), a(1,Y))}.
+
+	:- endif.
 
 :- end_object.
