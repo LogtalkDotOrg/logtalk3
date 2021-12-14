@@ -67,6 +67,8 @@ the exception term is a cyclic term.
 `numbervars/3`, `setof/3`, and `subsumes_term/2` predicates with cyclic
 term arguments.
 
+* ADDED: Additional tests for the `sort/2` and `msort/2` predicates.
+
 
 3.52.0 - December 7, 2021
 =========================
