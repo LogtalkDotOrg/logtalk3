@@ -27,7 +27,11 @@
 :- elif(current_logtalk_flag(prolog_dialect, quintus)).
 	:- [library(date)].
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-	:- use_module(library(system3), [shell/2]).
+	:- if((current_logtalk_flag(prolog_version, v(Major,Minor,Patch)), v(Major,Minor,Patch) @< v(4,7,1))).
+		:- use_module(library(system3), [shell/2]).
+	:- else.
+		:- use_module(library(process), [process_create/3]).
+	:- endif.
 :- elif(current_logtalk_flag(prolog_dialect, scryer)).
 	:- use_module(library(lists)).
 	:- use_module(library(files)).
@@ -51,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:87:0,
+		version is 1:87:1,
 		author is 'Paulo Moura',
-		date is 2021-11-30,
+		date is 2021-12-14,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -735,14 +739,35 @@
 		pid(PID) :-
 			{pid(PID)}.
 
-		shell(Command, Status) :-
-			{shell(Command, Status)},
-			!.	% workaround SICStus Prolog bug in shell/2
+		:- if((current_logtalk_flag(prolog_version, v(Major,Minor,Patch)), v(Major,Minor,Patch) @< v(4,7,1))).
 
-		shell(Command) :-
-			{shell(Command, Status)},
-			!,	% workaround SICStus Prolog bug in shell/2
-			Status =:= 0.
+			shell(Command, Status) :-
+				{shell(Command, Status)},
+				!.	% workaround SICStus Prolog bug in shell/2
+
+			shell(Command) :-
+				{shell(Command, Status)},
+				!,	% workaround SICStus Prolog bug in shell/2
+				Status =:= 0.
+
+		:- else.
+
+			shell(Command, Status) :-
+				{current_directory(Directory, Directory)},
+				(	{environ('COMSPEC', _)} ->
+					% assume windows
+					atom_concat('cmd.exe /Q /C ', Command, Command1),
+					{process_create(Command1, [], [commandline(true), cwd(Directory), wait(Exit)])}
+				;	% assume POSIX
+					{atomic_list_concat(['/bin/sh -c \'', Command, '\''], Command1)},
+					{process_create(Command1, [], [commandline(true), cwd(Directory), wait(Exit)])}
+				),
+				Exit = exit(Status).
+
+			shell(Command) :-
+				shell(Command, 0).
+
+		:- endif.
 
 		is_absolute_file_name(Path) :-
 			operating_system_type(Type),

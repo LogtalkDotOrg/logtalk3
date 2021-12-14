@@ -48,6 +48,9 @@ the code being tested.
 
 * UPDATED: The `dif` and `coroutining` libraries for use with Trealla Prolog.
 
+* UPDATED: The `os` library for fixes in the upcoming SICStus Prolog 4.7.1
+version.
+
 Ports
 -----
 
