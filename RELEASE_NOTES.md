@@ -76,6 +76,11 @@ term arguments.
 
 * ADDED: Additional tests for the `sort/2` and `msort/2` predicates.
 
+Installers and installation scripts
+-----------------------------------
+
+* ADDED: Trealla Prolog embedding script.
+
 
 3.52.0 - December 7, 2021
 =========================
