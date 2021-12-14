@@ -48,6 +48,13 @@ the code being tested.
 
 * UPDATED: The `dif` and `coroutining` libraries for use with Trealla Prolog.
 
+Ports
+-----
+
+* FIXED: Workaround Metgol port `find_duplicate` example portability issue to
+avoid failures when run on backends that type-check the second argument of the
+`msort/2` predicate.
+
 Examples
 --------
 

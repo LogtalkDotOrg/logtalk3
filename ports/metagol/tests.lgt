@@ -39,9 +39,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2019-05-07,
+		date is 2021-12-14,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
@@ -118,10 +118,7 @@
 			]
 		).
 
-	test(metagol_find_duplicate_1, true, [
-					condition(\+ current_logtalk_flag(prolog_dialect,eclipse)),
-					note('ECLiPSe msort/2 predicate type-checks output argument')
-			]) :-
+	test(metagol_find_duplicate_1) :-
 		find_duplicate::learn(Clauses), !,
 		^^variant(
 			Clauses,

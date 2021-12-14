@@ -70,7 +70,10 @@
 	element([_|T],X) :-
 		element(T,X).
 	mergesort([H|T],B) :-
-		msort([H|T],B).
+		% avoid test failure with backends that type-check
+		% the msort/2 predicate second argument
+		msort([H|T],B0),
+		B0 = B.
 
 	%% functional test
 	func_test(Atom1, Atom2, Condition):-
