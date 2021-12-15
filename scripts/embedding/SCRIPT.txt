@@ -88,4 +88,4 @@ $ lvmpl -f logtalk.pl -f application.pl
 $ cd $LOGTALKHOME/scripts/embedding/lvm/
 $ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect/
-$ lvmpl -f logtalk.pl -f application.pl
+$ tpl -l logtalk.pl -l application.pl
