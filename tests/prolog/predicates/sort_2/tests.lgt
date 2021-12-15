@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-12-14,
+		date is 2021-12-15,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -82,19 +82,22 @@
 
 	% tests from the Logtalk portability work
 
-	test(eclipse_sort_2_12, error(type_error(list,[a,b,c|d]))) :-
+	test(lgt_sort_2_12, error(type_error(list,[a,b|c]))) :-
+		{sort([a,b|c],_)}.
+
+	test(lgt_sort_2_13, error(type_error(list,[a,b,c|d]))) :-
 		{sort([a,b,c], [a,b,c|d])}.
 
-	test(lgt_sort_2_13, true(Sorted == [[a,b],[c,d],[e]])) :-
+	test(lgt_sort_2_14, true(Sorted == [[a,b],[c,d],[e]])) :-
 		{sort([[e],[c,d],[a,b]], Sorted)}.
 
-	test(lgt_sort_2_14, true(Second == 2)) :-
+	test(lgt_sort_2_15, true(Second == 2)) :-
 		{sort([4,1,3,2,7], [_, Second| _])}.
 
-	test(lgt_sort_2_15, true(Others == [2,3,4,7])) :-
+	test(lgt_sort_2_16, true(Others == [2,3,4,7])) :-
 		{sort([4,1,3,2,7], [_| Others])}.
 
-	test(lgt_sort_2_16, false) :-
+	test(lgt_sort_2_17, false) :-
 		{sort([2], [3])}.
 
 :- end_object.

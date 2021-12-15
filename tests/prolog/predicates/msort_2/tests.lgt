@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-12-14,
+		date is 2021-12-15,
 		comment is 'Unit tests for the de facto Prolog standard msort/2 built-in predicate.'
 	]).
 
@@ -75,13 +75,16 @@
 	test(lgt_msort_2_10, error(type_error(list,[a|b]))) :-
 		{msort([a|b],_)}.
 
-	test(lgt_msort_2_11, error(type_error(list,3))) :-
+	test(lgt_msort_2_11, error(type_error(list,[a,b|c]))) :-
+		{msort([a,b|c],_)}.
+
+	test(lgt_msort_2_12, error(type_error(list,3))) :-
 		{msort([], 3)}.
 
-	test(lgt_msort_2_12, error(type_error(list,[a,a,b|d]))) :-
+	test(lgt_msort_2_13, error(type_error(list,[a,a,b|d]))) :-
 		{msort([a,b,a], [a,a,b|d])}.
 
-	test(lgt_msort_2_13, false) :-
+	test(lgt_msort_2_14, false) :-
 		{msort([2], [3])}.
 
 :- end_object.
