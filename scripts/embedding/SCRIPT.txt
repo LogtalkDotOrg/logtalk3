@@ -31,7 +31,6 @@ $ ~/collect/logtalk
 $ cd $LOGTALKHOME/scripts/embedding/gprolog/
 $ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect -l ~/logtalk/examples/searching/loader.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -p ~/logtalk/paths/paths.pl
 $ ~/collect/logtalk
-...
 | ?- farmer::initial_state(Initial), depth_first(10)::solve(farmer, Initial, Path), farmer::print_path(Path).
 
 
@@ -81,6 +80,7 @@ $ cd $LOGTALKHOME/scripts/embedding/lvm/
 $ ./lvm_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect/
 $ lvmpl -f logtalk.pl -f application.pl
+?- wumpus::main.
 
 
 % create Trealla Prolog files for embedding the "wumpus" text adventure example:
@@ -89,3 +89,4 @@ $ cd $LOGTALKHOME/scripts/embedding/trealla/
 $ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect/
 $ tpl -l logtalk.pl -l application.pl
+?- wumpus::main.
