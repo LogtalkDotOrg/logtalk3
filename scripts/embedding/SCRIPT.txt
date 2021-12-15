@@ -85,7 +85,7 @@ $ lvmpl -f logtalk.pl -f application.pl
 
 % create Trealla Prolog files for embedding the "wumpus" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/lvm/
+$ cd $LOGTALKHOME/scripts/embedding/trealla/
 $ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
 $ cd ~/collect/
 $ tpl -l logtalk.pl -l application.pl

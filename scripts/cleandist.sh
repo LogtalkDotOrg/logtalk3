@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Distribution clean script for packaging
-##   Last updated on June 5, 2021
+##   Last updated on December 15, 2021
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -48,6 +48,7 @@ chmod a+x scripts/embedding/jiprolog/*.sh
 chmod a+x scripts/embedding/lvm/*.sh
 chmod a+x scripts/embedding/sicstus/*.sh
 chmod a+x scripts/embedding/swipl/*.sh
+chmod a+x scripts/embedding/trealla/*.sh
 chmod a+x scripts/embedding/xsb/*.sh
 chmod a+x scripts/embedding/yap/*.sh
 chmod a+x scripts/debian/postinst
