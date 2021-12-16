@@ -20,10 +20,8 @@
 
 
 :- initialization((
-	logtalk_load_context(directory, Directory),
-	atom_concat(Directory, 'test_files/logtalk_packs/', LogtalkPacks),
 	retractall(logtalk_library_path(logtalk_packs, _)),
-	assertz(logtalk_library_path(logtalk_packs, LogtalkPacks)),
+	assertz(logtalk_library_path(logtalk_packs, '$LOGTALKUSER/scratch/lp')),
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(os(loader)),
