@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2021-12-16,
+		date is 2021-12-03,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -55,11 +55,15 @@
 	% we start with no defined registries or installed packs
 
 	test(packs_registries_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
-		logtalk::expand_library_path(logtalk_user('scratch/lp/'), Storage),
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
 		registries::logtalk_packs(LogtalkPacks).
 
 	test(packs_packs_logtalk_packs_1_01, true(LogtalkPacks == Storage)) :-
-		logtalk::expand_library_path(logtalk_user('scratch/lp/'), Storage),
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'test_files/logtalk_packs/', Storage),
 		packs::logtalk_packs(LogtalkPacks).
 
 	test(packs_registries_logtalk_packs_0_01, true) :-
@@ -149,8 +153,9 @@
 		registries::directory(local_1_d, Directory).
 
 	test(packs_registries_readme_2_01, true(Readme == File)) :-
-		logtalk::expand_library_path(logtalk_user('scratch/lp/'), Storage),
-		atom_concat(Storage, 'registries/local_1_d/README.md', File),
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', File),
 		registries::readme(local_1_d, Readme).
 
 	test(packs_registries_readme_1_01, true) :-
