@@ -37,6 +37,8 @@ optimized mode.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The LVM adapter file to require version 2.2.0 or later.
+
 * UPDATED: The Trealla Prolog adapter file to require version 1.17.0 or later.
 
 Library
