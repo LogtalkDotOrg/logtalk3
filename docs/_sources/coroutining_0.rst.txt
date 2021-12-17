@@ -12,7 +12,7 @@ Coroutining predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 0:5:0
-| **Date:** 2021-12-13
+| **Date:** 2021-12-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,7 +24,7 @@ Coroutining predicates.
 
 | **Remarks:**
 
-   - Supported backend Prolog systems: ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.
+   - Supported backend Prolog systems: ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.
 
 | **Inherited public predicates:**
 |    (none)

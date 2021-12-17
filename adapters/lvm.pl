@@ -585,7 +585,7 @@
 % '$lgt_copy_term_without_constraints'(@term, ?term)
 
 '$lgt_copy_term_without_constraints'(Term, Copy) :-
-	copy_term(Term, Copy).
+	copy_term_nat(Term, Copy).
 
 
 

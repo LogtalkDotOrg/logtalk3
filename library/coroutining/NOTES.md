@@ -23,9 +23,9 @@ ________________________________________________________________________
 
 The `coroutining` object provides a portable abstraction over how common
 coroutining predicates are made available by the supported backend Prolog
-systems (ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP) that
-provide them. Partial support for XSB is provided (the predicate `frozen/2`
-is not available and calls to it fail).
+systems (ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP)
+that provide them. Partial support for XSB is provided (the predicate
+`frozen/2` is not available and calls to it fail).
 
 Calls to the library predicates are inlined when compiled with the `optimize`
 flag turned on. In this case, there is no overhead compared with calling the

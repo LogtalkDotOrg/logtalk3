@@ -48,7 +48,8 @@ Library
 avoid reloading of files and and to explicit clean up intermediate files for
 the code being tested.
 
-* UPDATED: The `dif` and `coroutining` libraries for use with Trealla Prolog.
+* UPDATED: The `dif` and `coroutining` libraries for use with the LVM and
+Trealla Prolog backends.
 
 * UPDATED: The `os` library for fixes in the upcoming SICStus Prolog 4.7.1
 version.
@@ -69,6 +70,8 @@ Examples
 --------
 
 * UPDATED: The `attvars` example tests to use explicit assertions.
+
+* UPDATED: The `figures` example to run using the LVM backend.
 
 Tests
 -----
