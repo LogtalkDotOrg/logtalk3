@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:45:0,
+		version is 0:45:1,
 		author is 'Paulo Moura',
-		date is 2021-12-03,
+		date is 2021-12-17,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1437,8 +1437,8 @@
 		internal_os_path(Directory0, Directory),
 		(	operating_system_type(windows) ->
 			(	member(verbose(true), Options) ->
-				atomic_list_concat(['del /s /q "', Directory, '" && rmdir /s /q "',       Directory, '"'],       Command)
-			;	atomic_list_concat(['del /s /q "', Directory, '" > nul && rmdir /s /q "', Directory, '" > nul'], Command)
+				atomic_list_concat(['del /f /s /q "', Directory, '" && rmdir /s /q "',       Directory, '"'],       Command)
+			;	atomic_list_concat(['del /f /s /q "', Directory, '" > nul && rmdir /s /q "', Directory, '" > nul'], Command)
 			)
 		;	% assume unix
 			(	member(verbose(true), Options) ->

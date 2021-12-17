@@ -51,6 +51,11 @@ the code being tested.
 * UPDATED: The `os` library for fixes in the upcoming SICStus Prolog 4.7.1
 version.
 
+Tools
+-----
+
+* CHANGED: The `packs` tool delete commands on Windows to use the force option.
+
 Ports
 -----
 

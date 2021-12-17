@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:22:1,
 		author is 'Paulo Moura',
-		date is 2021-12-02,
+		date is 2021-12-17,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -202,7 +202,7 @@
 		logtalk_packs(LogtalkPacks),
 		internal_os_path(LogtalkPacks, LogtalkPacksOS),
 		(	operating_system_type(windows) ->
-			atomic_list_concat(['del /s /q "', LogtalkPacksOS, '" > nul && rmdir /s /q "', LogtalkPacksOS, '" > nul'], Command)
+			atomic_list_concat(['del /f /s /q "', LogtalkPacksOS, '" > nul && rmdir /s /q "', LogtalkPacksOS, '" > nul'], Command)
 		;	% assume unix
 			atomic_list_concat(['rm -rf "',  LogtalkPacksOS, '"'], Command)
 		),
