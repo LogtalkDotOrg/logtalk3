@@ -71,7 +71,8 @@ Examples
 
 * UPDATED: The `attvars` example tests to use explicit assertions.
 
-* UPDATED: The `figures` example to run using the LVM backend.
+* UPDATED: The `figures` example to run using the LVM and Trealla Prolog
+backends.
 
 Tests
 -----
