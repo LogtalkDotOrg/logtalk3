@@ -89,6 +89,9 @@ term arguments.
 
 * ADDED: Additional tests for the `sort/2` and `msort/2` predicates.
 
+* IMPROVED: Simplify the tests driver file for the Logtalk `use_module/2`
+directive.
+
 * UPDATED: The tests for the `length/2` predicate to also check the Ciao Prolog
 library definition of the predicate.
 

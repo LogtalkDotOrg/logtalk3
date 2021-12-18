@@ -24,19 +24,15 @@
 	(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == trealla; Dialect == yap)
 )).
 
-	:- initialization((
-		logtalk_load_context(directory, Directory),
-		atom_concat(Directory, module, Path),
-		use_module(Path)
-	)).
+	:- use_module(module).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(plain),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
-		% the test/1 object parameter is used for testing
-		% predicate shortcuts declared in uses/2 directives
+		% the test/1 object parameter is used for testing predicate
+		% shortcuts declared in use_module/2 directives
 		tests(2)::run
 	)).
 
