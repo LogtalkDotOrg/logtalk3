@@ -19,7 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, xsb)).
+:- if(current_logtalk_flag(prolog_dialect, ciao)).
+	:- use_module(library(classic/classic_predicates)).
+:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	:- import(from(/(between,3), basics)).
 	:- import(from(/(length,2), basics)).
 :- endif.
