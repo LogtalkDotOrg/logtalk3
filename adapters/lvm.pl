@@ -123,18 +123,14 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_prolog_meta_predicate'(*->(_, _), *->(0, 0), control_construct).
-'$lgt_prolog_meta_predicate'(call_det(_, _), call_det(0, *), predicate).
-'$lgt_prolog_meta_predicate'(if(_, _, _), if(0, 0, 0), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _), maplist(1, *), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _, _), maplist(1, *, *), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _, _, _), maplist(1, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _, _, _, _), maplist(1, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _, _, _, _, _), maplist(1, *, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _, _, _, _, _, _), maplist(1, *, *, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(maplist(_, _, _, _, _, _, _, _), maplist(1, *, *, *, *, *, *, *), predicate).
-'$lgt_prolog_meta_predicate'(not(_), not(0), predicate).
-'$lgt_prolog_meta_predicate'(time(_), time(0), predicate).
+'$lgt_prolog_meta_predicate'(Callable, Template, Kind) :-
+	predicate_property(Callable, meta_predicate(Template)),
+	predicate_property(Callable, built_in),
+	(	predicate_property(Callable, control_construct) ->
+		Kind = control_construct
+	;	Kind = predicate
+	),
+	!.
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
