@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 2.2.0 and later versions
-%  Last updated on December 17, 2021
+%  Last updated on December 20, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -559,6 +559,7 @@
 '$lgt_logtalk_prolog_encoding'('ISO-8859-1', 'ISO-8859-1', _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-2', 'ISO-8859-2', _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-4', 'ISO-8859-4', _).
+'$lgt_logtalk_prolog_encoding'('ISO-8859-5', 'ISO-8859-5', _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-9', 'ISO-8859-9', _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-10', 'ISO-8859-10', _).
 '$lgt_logtalk_prolog_encoding'('ISO-8859-15', 'ISO-8859-15', _).
