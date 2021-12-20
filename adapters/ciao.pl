@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.20.0
-%  Last updated on October 25, 2021
+%  Last updated on December 20, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -162,9 +162,6 @@
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(Spec, *) :-
 	var(Spec),
 	!.
-'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(?, *).
-'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(+, *).
-'$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(-, *).
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(goal, 0).
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(pred(N), M) :-
 	M is N - 1.
