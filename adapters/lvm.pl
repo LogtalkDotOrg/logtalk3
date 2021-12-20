@@ -167,6 +167,8 @@
 % table of non-standard database built-in predicates
 
 '$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(listing(_)).
+'$lgt_prolog_database_predicate'(listing(_, _)).
 
 
 % '$lgt_prolog_predicate_property'(?callable)
