@@ -209,7 +209,8 @@
 		logtalk_packs(LogtalkPacks),
 		internal_os_path(LogtalkPacks, LogtalkPacksOS),
 		(	operating_system_type(windows) ->
-			atomic_list_concat(['del /f /s /q "', LogtalkPacksOS, '" > nul && rmdir /s /q "', LogtalkPacksOS, '" > nul'], Command)
+			windows_rmdir_command(Rmdir),
+			atomic_list_concat(['del /f /s /q "', LogtalkPacksOS, '" > nul && ', Rmdir, ' "', LogtalkPacksOS, '" > nul'], Command)
 		;	% assume unix
 			atomic_list_concat(['rm -rf "',  LogtalkPacksOS, '"'], Command)
 		),
