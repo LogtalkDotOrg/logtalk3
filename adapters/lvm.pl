@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 2.2.0 and later versions
-%  Last updated on December 20, 2021
+%  Last updated on December 21, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -237,7 +237,11 @@
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
-'$lgt_prolog_feature'(coinduction, unsupported).
+'$lgt_prolog_feature'(coinduction, Status) :-
+	(	predicate_property(cyclic_term(_), built_in) ->
+		Status = supported
+	;	Status = unsupported
+	).
 '$lgt_prolog_feature'(unicode, full).
 
 
