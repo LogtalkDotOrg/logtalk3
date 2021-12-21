@@ -287,8 +287,8 @@
 	supported_archive('.tz2').
 	supported_archive('.tbz2').
 
-	windows_rmdir_command('rm -rf') :-
-		file_exists('"C:\\Program Files\\Git\\usr\bin\\rm.exe"'),
+	windows_rmdir_command('"C:\\Program Files\\Git\\usr\\bin\\rm.exe" -rf') :-
+		file_exists('C:\\Program Files\\Git\\usr\\bin\\rm.exe'),
 		!.
 	% use broken Windows command
 	windows_rmdir_command('rmdir /s /q').
