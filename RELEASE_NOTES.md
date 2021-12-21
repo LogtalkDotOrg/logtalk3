@@ -59,6 +59,8 @@ Tools
 
 * CHANGED: The `packs` tool delete commands on Windows to use the force option.
 
+* UPDATED: Added `git` command to the requirements list for the `packs` tool. 
+
 Ports
 -----
 

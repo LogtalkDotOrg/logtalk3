@@ -32,6 +32,7 @@ required:
 -  ``curl``
 -  ``bsdtar`` (provided by ``libarchive``)
 -  ``gpg`` (provided by ``gnupg2``)
+-  ``git``
 
 The tool uses ``bsdtar`` instead of GNU ``tar`` so that it can
 uncompress ``.zip`` archives (``unzip`` doesn't provide the desired
@@ -44,11 +45,16 @@ On Windows systems, the following shell commands are required:
 -  ``curl.exe``
 -  ``tar.exe``
 -  ``gpg``
+-  ``git``
 
-In recent Windows 10 builds, only ``gpg`` should require installation.
-You can download the GnuPG software from:
+In recent Windows 10 builds, only ``gpg`` and ``git`` should require
+installation. You can download the GnuPG software from:
 
 https://www.gnupg.org/
+
+You can download Git from:
+
+https://gitforwindows.org
 
 On macOS systems, Apple bundles both ``curl`` and BSD ``tar`` (under the
 name ``tar``; you can simply create a ``bsdtar`` alias or install a more
