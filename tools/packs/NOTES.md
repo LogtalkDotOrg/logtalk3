@@ -777,8 +777,17 @@ startup, the above definition could be added there.
 Known issues
 ------------
 
-Using the `verbose(true)` option on Windows system may not provide the
+Using the `verbose(true)` option on Windows systems may not provide the
 shell commands output depending on the backend.
+
+On Windows systems, the reset, delete, and uninstall predicates may fail
+to delete all affected folders and files due to a operating-system bug.
+For details, see:
+
+https://github.com/microsoft/terminal/issues/309
+
+The workaround is to use the Windows File Explorer to delete the left-over
+folders and files.
 
 When using Ciao Prolog 1.20.0, a workaround is used for this system
 non-standard support for multifile predicates.
