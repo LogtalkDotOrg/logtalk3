@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:41:1,
+		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2021-12-17,
+		date is 2021-12-21,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -166,13 +166,6 @@
 		comment is 'Checks all registry specifications.'
 	]).
 
-	:- private(deleted_registry_/1).
-	:- dynamic(deleted_registry_/1).
-	:- mode(deleted_registry_(?atom), zero_or_one).
-	:- info(deleted_registry_/1, [
-		comment is 'Table of deleted registries.',
-		argnames is ['Registry']
-	]).
 	:- uses(list, [
 		member/2
 	]).
@@ -263,11 +256,11 @@
 			RegistryObject::name(Registry),
 			!
 		),
-		\+ deleted_registry_(Registry),
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, registries, Registries),
 		path_concat(Registries, Registry, Directory),
-		directory_exists(Directory).
+		directory_exists(Directory),
+		read_url(Directory, _).
 
 	directory(Directory) :-
 		^^logtalk_packs(LogtalkPacks),
@@ -336,7 +329,6 @@
 		),
 		save_url(Path, URL),
 		^^load_registry(Path),
-		retractall(deleted_registry_(Registry)),
 		(	member(clean(true), Options) ->
 			delete_archives(Registry)
 		;	true
@@ -400,7 +392,6 @@
 				)
 			),
 			^^command(Command, registry_deletion_failed(Registry, Directory)),
-			assertz(deleted_registry_(Registry)),
 			(	member(clean(true), Options) ->
 				delete_archives(Registry)
 			;	true
@@ -427,10 +418,7 @@
 		check(atom, Registry),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	deleted_registry_(Registry) ->
-			print_message(error, packs, unknown_registry(Registry)),
-			fail
-		;	registry_object(Registry, RegistryObject) ->
+		(	registry_object(Registry, RegistryObject) ->
 			(	pinned(Registry),
 				member(force(false), Options) ->
 				print_message(error, packs, cannot_update_pinned_registry(Registry)),
@@ -759,7 +747,7 @@
 			RegistryObject::name(Registry),
 			!
 		),
-		\+ deleted_registry_(Registry).
+		directory(Registry, _).
 
 	clone(Registry, URL, Path, Options) :-
 		^^logtalk_packs(LogtalkPacks),

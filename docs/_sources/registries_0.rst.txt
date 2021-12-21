@@ -11,8 +11,8 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:41:1
-| **Date:** 2021-12-17
+| **Version:** 0:42:0
+| **Date:** 2021-12-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -458,28 +458,7 @@ Protected predicates
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="deleted_registry_/1"> </div>
-
-.. index:: deleted_registry_/1
-.. _registries/0::deleted_registry_/1:
-
-``deleted_registry_/1``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Table of deleted registries.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``deleted_registry_(Registry)``
-| **Mode and number of proofs:**
-|    ``deleted_registry_(?atom)`` - ``zero_or_one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

@@ -59,6 +59,8 @@ Tools
 
 * CHANGED: The `packs` tool delete commands on Windows to use the force option.
 
+* IMPROVED: The `packs` tool handling of deleted registries.
+
 * UPDATED: Added `git` command to the requirements list for the `packs` tool. 
 
 Ports
