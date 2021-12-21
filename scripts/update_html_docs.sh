@@ -152,7 +152,7 @@ mv _conf.py conf.py
 make clean
 make html
 make info
-make linkcheck
+#make linkcheck
 cp -R _build/html/* ../
 cp _build/texinfo/LogtalkAPIs-*.info ../
 make clean

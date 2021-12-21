@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:43:0,
+		version is 0:42:0,
 		author is 'Paulo Moura',
 		date is 2021-12-21,
 		comment is 'Registry handling predicates.'
@@ -381,10 +381,9 @@
 			),
 			internal_os_path(Directory0, Directory),
 			(	operating_system_type(windows) ->
-				^^windows_rmdir_command(Rmdir),
 				(	member(verbose(true), Options) ->
-					atomic_list_concat(['del /f /s /q "', Directory, '" && ', Rmdir, ' "',            Directory, '"'],            Command)
-				;	atomic_list_concat(['del /f /s /q "', Directory, '" > nul 2>&1 && ', Rmdir, ' "', Directory, '" > nul 2>&1'], Command)
+					atomic_list_concat(['del /f /s /q "', Directory, '" && rmdir /s /q "',            Directory, '"'],            Command)
+				;	atomic_list_concat(['del /f /s /q "', Directory, '" > nul 2>&1 && rmdir /s /q "', Directory, '" > nul 2>&1'], Command)
 				)
 			;	% assume unix
 				(	member(verbose(true), Options) ->

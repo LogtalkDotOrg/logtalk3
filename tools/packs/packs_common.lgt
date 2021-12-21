@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:22:1,
 		author is 'Paulo Moura',
-		date is 2021-12-21,
+		date is 2021-12-17,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -161,13 +161,6 @@
 		argnames is ['Command']
 	]).
 
-	:- protected(windows_rmdir_command/1).
-	:- mode(windows_rmdir_command(-atom), one).
-	:- info(windows_rmdir_command/1, [
-		comment is 'Returns the name of the command plus option to recursively delete a directory on Windows operating-systems.',
-		argnames is ['Command']
-	]).
-
 	:- protected(supported_archive/1).
 	:- mode(supported_archive(+atom), zero_or_one).
 	:- info(supported_archive/1, [
@@ -209,8 +202,7 @@
 		logtalk_packs(LogtalkPacks),
 		internal_os_path(LogtalkPacks, LogtalkPacksOS),
 		(	operating_system_type(windows) ->
-			windows_rmdir_command(Rmdir),
-			atomic_list_concat(['del /f /s /q "', LogtalkPacksOS, '" > nul && ', Rmdir, ' "', LogtalkPacksOS, '" > nul'], Command)
+			atomic_list_concat(['del /f /s /q "', LogtalkPacksOS, '" > nul && rmdir /s /q "', LogtalkPacksOS, '" > nul'], Command)
 		;	% assume unix
 			atomic_list_concat(['rm -rf "',  LogtalkPacksOS, '"'], Command)
 		),
@@ -287,12 +279,6 @@
 	supported_archive('.tbz').
 	supported_archive('.tz2').
 	supported_archive('.tbz2').
-
-	windows_rmdir_command('"C:\\Program Files\\Git\\usr\\bin\\rm.exe" -rf') :-
-		file_exists('C:\\Program Files\\Git\\usr\\bin\\rm.exe'),
-		!.
-	% use broken Windows command
-	windows_rmdir_command('rmdir /s /q').
 
 	readme_file_path(Directory, ReadMeFile) :-
 		readme_file_name(Basename),

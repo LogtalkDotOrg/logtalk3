@@ -63,9 +63,6 @@ Tools
 
 * UPDATED: Added `git` command to the requirements list for the `packs` tool. 
 
-* FIXED: Try to workaround a known Windows systems bug in the `rmdir` command
-by using the `rm` command provided by Git Bash for Windows when available.
-
 Ports
 -----
 
