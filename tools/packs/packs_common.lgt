@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:22:1,
+		version is 0:23:0,
 		author is 'Paulo Moura',
-		date is 2021-12-17,
+		date is 2021-12-21,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -161,6 +161,13 @@
 		argnames is ['Command']
 	]).
 
+	:- protected(windows_rmdir_command/1).
+	:- mode(windows_rmdir_command(-atom), one).
+	:- info(windows_rmdir_command/1, [
+		comment is 'Returns the name of the command plus option to recursively delete a directory on Windows operating-systems.',
+		argnames is ['Command']
+	]).
+
 	:- protected(supported_archive/1).
 	:- mode(supported_archive(+atom), zero_or_one).
 	:- info(supported_archive/1, [
@@ -279,6 +286,12 @@
 	supported_archive('.tbz').
 	supported_archive('.tz2').
 	supported_archive('.tbz2').
+
+	windows_rmdir_command('rm -rf') :-
+		file_exists('"C:\\Program Files\\Git\\usr\bin\\rm.exe"'),
+		!.
+	% use broken Windows command
+	windows_rmdir_command('rmdir /s /q').
 
 	readme_file_path(Directory, ReadMeFile) :-
 		readme_file_name(Basename),

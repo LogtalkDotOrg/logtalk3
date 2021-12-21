@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:22:1
-| **Date:** 2021-12-17
+| **Version:** 0:23:0
+| **Date:** 2021-12-21
 
 | **Compilation flags:**
 |    ``static``
@@ -481,6 +481,29 @@ Returns the name of the tar command to be used depending on the operating-system
 |    ``tar_command(Command)``
 | **Mode and number of proofs:**
 |    ``tar_command(-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="windows_rmdir_command/1"> </div>
+
+.. index:: windows_rmdir_command/1
+.. _packs_common/0::windows_rmdir_command/1:
+
+``windows_rmdir_command/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the name of the command plus option to recursively delete a directory on Windows operating-systems.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``windows_rmdir_command(Command)``
+| **Mode and number of proofs:**
+|    ``windows_rmdir_command(-atom)`` - ``one``
 
 
 ------------
