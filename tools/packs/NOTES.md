@@ -782,7 +782,8 @@ shell commands output depending on the backend.
 
 On Windows systems, the reset, delete, and uninstall predicates may fail
 to delete all affected folders and files due to a operating-system bug.
-For details, see:
+Depending on the backend, this bug may cause some of the tests to fail.
+For details on this bug, see:
 
 https://github.com/microsoft/terminal/issues/309
 

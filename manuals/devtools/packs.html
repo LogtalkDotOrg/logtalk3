@@ -855,8 +855,15 @@ startup, the above definition could be added there.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option on Windows system may not provide the
-shell commands output depending on the backend.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option on Windows systems may not provide
+the shell commands output depending on the backend.</p>
+<p>On Windows systems, the reset, delete, and uninstall predicates may fail
+to delete all affected folders and files due to a operating-system bug.
+Depending on the backend, this bug may cause some of the tests to fail.
+For details on this bug, see:</p>
+<p><a class="reference external" href="https://github.com/microsoft/terminal/issues/309">https://github.com/microsoft/terminal/issues/309</a></p>
+<p>The workaround is to use the Windows File Explorer to delete the
+left-over folders and files.</p>
 <p>When using Ciao Prolog 1.20.0, a workaround is used for this system
 non-standard support for multifile predicates.</p>
 <p>When using GNU Prolog 1.5.0 as the backend on Windows, you may get an
