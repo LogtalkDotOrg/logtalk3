@@ -44,7 +44,7 @@
 		test_object::asserta(a(3), Ref1),
 		test_object::asserta(a(4), Ref2).
 
-	test(asserta_2_05, error(_)) :-
+	test(asserta_2_05, error(uninstantiation_error(_))) :-
 		test_object::asserta(a(5), ref).
 
 	test(assertz_2_01, true(X == 0)) :-
@@ -62,7 +62,7 @@
 		test_object::assertz(z(3), Ref1),
 		test_object::assertz(z(4), Ref2).
 
-	test(assertz_2_05, error(_)) :-
+	test(assertz_2_05, error(uninstantiation_error(_))) :-
 		test_object::assertz(a(5), ref).
 
 	test(clause_3_01, true((Y == 1, Body == true))) :-
@@ -86,6 +86,10 @@
 		test_object::assertz(y(6), Ref),
 		test_object::clause(_, _, Ref).
 
+	test(clause_3_06, error(type_error(_, 3.14))) :-
+		test_object::assertz(y(7), _),
+		test_object::clause(y(_), _, 3.14).
+
 	test(erase_1_01, true(L == [])) :-
 		test_object::assertz(b(1), Ref),
 		erase(Ref),
@@ -99,6 +103,9 @@
 
 	test(erase_1_03, error(instantiation_error)) :-
 		erase(_).
+
+	test(erase_1_04, error(type_error(_, 3.14))) :-
+		erase(3.14).
 
 	cleanup :-
 		test_object::abolish(a/1),
