@@ -23,33 +23,39 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-12-24,
+		date is 2021-12-22,
 		comment is 'Unit tests for the database built-in methods that take a clause reference argument.'
 	]).
 
-	test(asserta_2_01, true(X == 1)) :-
-		test_object::asserta(a(1), _),
+	test(asserta_2_01, true(X == 0)) :-
+		test_object::asserta(a(0), _),
 		test_object::a(X).
 
-	test(asserta_2_02, true(Ref1 \== Ref2)) :-
+	test(asserta_2_02, true(nonvar(Ref))) :-
+		test_object::asserta(a(1), Ref).
+
+	test(asserta_2_03, true(Ref1 \== Ref2)) :-
 		test_object::asserta(a(2), Ref1),
 		test_object::asserta(a(2), Ref2).
 
-	test(asserta_2_03, true(Ref1 \== Ref2)) :-
+	test(asserta_2_04, true(Ref1 \== Ref2)) :-
 		test_object::asserta(a(3), Ref1),
 		test_object::asserta(a(4), Ref2).
 
-	test(assertz_2_01, true(X == 1)) :-
-		test_object::assertz(z(1), _),
+	test(assertz_2_01, true(X == 0)) :-
+		test_object::assertz(z(0), _),
 		test_object::z(X).
 
-	test(assertz_2_02, true(Ref1 \== Ref2)) :-
+	test(assertz_2_02, true(nonvar(Ref))) :-
+		test_object::assertz(z(1), Ref).
+
+	test(assertz_2_03, true(Ref1 \== Ref2)) :-
 		test_object::assertz(z(2), Ref1),
 		test_object::assertz(z(2), Ref2).
 
-	test(assertz_2_03, true(Ref1 \== Ref2)) :-
+	test(assertz_2_04, true(Ref1 \== Ref2)) :-
 		test_object::assertz(z(3), Ref1),
 		test_object::assertz(z(4), Ref2).
 
@@ -71,6 +77,9 @@
 		test_object::assertz(b(3), _),
 		erase(Ref),
 		findall(X, test_object::b(X), L).
+
+	test(erase_1_03, error(_)) :-
+		erase(_).
 
 	cleanup :-
 		test_object::abolish(a/1),

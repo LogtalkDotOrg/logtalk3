@@ -94,6 +94,9 @@ term arguments.
 
 * ADDED: Additional tests for the `sort/2` and `msort/2` predicates.
 
+* ADDED: Additional tests for the database built-in methods that take a clause
+reference argument.
+
 * IMPROVED: Simplify the tests driver file for the Logtalk `use_module/2`
 directive.
 
