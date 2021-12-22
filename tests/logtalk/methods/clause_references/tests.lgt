@@ -82,6 +82,10 @@
 		test_object::assertz(y(5), _),
 		test_object::clause(y(5), _, Ref).
 
+	test(clause_3_05, error(instantiation_error)) :-
+		test_object::assertz(y(6), Ref),
+		test_object::clause(_, _, Ref).
+
 	test(erase_1_01, true(L == [])) :-
 		test_object::assertz(b(1), Ref),
 		erase(Ref),
@@ -93,7 +97,7 @@
 		erase(Ref),
 		findall(X, test_object::b(X), L).
 
-	test(erase_1_03, error(_)) :-
+	test(erase_1_03, error(instantiation_error)) :-
 		erase(_).
 
 	cleanup :-
