@@ -44,6 +44,9 @@
 		test_object::asserta(a(3), Ref1),
 		test_object::asserta(a(4), Ref2).
 
+	test(asserta_2_05, error(_)) :-
+		test_object::asserta(a(5), ref).
+
 	test(assertz_2_01, true(X == 0)) :-
 		test_object::assertz(z(0), _),
 		test_object::z(X).
@@ -59,6 +62,9 @@
 		test_object::assertz(z(3), Ref1),
 		test_object::assertz(z(4), Ref2).
 
+	test(assertz_2_05, error(_)) :-
+		test_object::assertz(a(5), ref).
+
 	test(clause_3_01, true((Y == 1, Body == true))) :-
 		test_object::assertz(y(1), Ref),
 		test_object::clause(y(Y), Body, Ref).
@@ -66,6 +72,15 @@
 	test(clause_3_02, true(Ref1 == Ref2)) :-
 		test_object::assertz(y(2), Ref1),
 		test_object::clause(y(2), true, Ref2).
+
+	test(clause_3_03, true(nonvar(Ref))) :-
+		test_object::assertz(y(3), _),
+		test_object::clause(y(_), _, Ref).
+
+	test(clause_3_04, false) :-
+		test_object::assertz(y(4), Ref),
+		test_object::assertz(y(5), _),
+		test_object::clause(y(5), _, Ref).
 
 	test(erase_1_01, true(L == [])) :-
 		test_object::assertz(b(1), Ref),
