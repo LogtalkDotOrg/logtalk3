@@ -94,6 +94,9 @@ term arguments.
 
 * ADDED: Additional tests for the `sort/2` and `msort/2` predicates.
 
+* ADDED: Test set for the de facto standard Prolog built-in predicates that
+take a clause reference argument.
+
 * ADDED: Additional tests for the database built-in methods that take a clause
 reference argument.
 
