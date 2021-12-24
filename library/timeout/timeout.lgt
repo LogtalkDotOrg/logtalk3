@@ -22,12 +22,12 @@
 :- object(timeout).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
 		date is 2021-12-24,
 		comment is 'Predicates for calling goal with a time limit.',
 		remarks is [
-			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, XSB, and YAP.'
+			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.'
 		]
 	]).
 
@@ -128,6 +128,30 @@
 				(	var(Error) ->
 					Result = true
 				;	Error == time_limit_exceeded ->
+					Result = timeout
+				;	Result = error(Error)
+				)
+			;	Result = fail
+			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
+
+		:- meta_predicate(user::call_with_time_limit(*, 0)).
+
+		call_with_timeout(Goal, Time) :-
+			MilliSeconds is truncate(Time * 1000),
+			catch(
+				call_with_time_limit(MilliSeconds, Goal),
+				error(time_limit_exceeded(_, _), _),
+				throw(timeout(Goal))
+			).
+
+		call_with_timeout(Goal, Time, Result) :-
+			MilliSeconds is truncate(Time * 1000),
+			(	catch(call_with_time_limit(MilliSeconds, Goal), Error, true) ->
+				(	var(Error) ->
+					Result = true
+				;	Error = error(time_limit_exceeded(_, _), _) ->
 					Result = timeout
 				;	Result = error(Error)
 				)

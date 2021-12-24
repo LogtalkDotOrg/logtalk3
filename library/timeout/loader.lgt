@@ -21,7 +21,10 @@
 
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
-	(Dialect == b; Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == xsb; Dialect == yap)
+	(	Dialect == b; Dialect == eclipse; Dialect == sicstus;
+		Dialect == swi; Dialect == xsb; Dialect == yap;
+		Dialect == trealla, predicate_property(call_with_time_limit(_,_), built_in)
+	)
 )).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).

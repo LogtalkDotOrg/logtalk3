@@ -44,6 +44,8 @@ Prolog adapter and integration files
 Library
 -------
 
+* ADDED: Support to the `timeout` library for the Trealla Prolog backend.
+
 * IMPROVED: Tests driver files for the `arbitrary` and `random` libraries to
 avoid reloading of files and and to explicit clean up intermediate files for
 the code being tested.
