@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-380 786,-380 786,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object halstead_metric/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;12&#45;24, 12:03</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2021&#45;12&#45;24, 14:47</text>
 <g id="clust1" class="cluster">
 <title>cluster_halstead_metric_1_object</title>
 <g id="a_clust1"><a xlink:title="halstead_metric(Stroud)">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 762,-49 762,-49 768,-49 774,-55 774,-61 774,-61 774,-356 774,-356 774,-362 768,-368 762,-368 762,-368 20,-368 20,-368 14,-368 8,-362 8,-356 8,-356 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt">
 <text text-anchor="start" x="20.5" y="-351.5" font-family="Monospace" font-size="10.00" fill="dimgray">halstead_metric(Stroud)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- entity_score/2 -->
 <g id="node1" class="node">
 <title>entity_score/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53">
 <polygon fill="cornsilk" stroke="black" points="604.5,-331 483.5,-331 483.5,-295 604.5,-295 604.5,-331"/>
 <text text-anchor="start" x="492" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="498" y="-315.2" font-family="Monospace" font-size="11.00">entity_score/2</text>
@@ -41,7 +41,7 @@
 <!-- predicate_data/6 -->
 <g id="node2" class="node">
 <title>predicate_data/6</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79">
 <polygon fill="cornsilk" stroke="black" points="452,-213 318,-213 318,-177 452,-177 452,-213"/>
 <text text-anchor="start" x="326" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="332" y="-197.2" font-family="Monospace" font-size="11.00">predicate_data/6</text>
@@ -55,12 +55,12 @@
 <!-- entity_score/2&#45;&gt;predicate_data/6 -->
 <g id="edge1" class="edge">
 <title>entity_score/2&#45;&gt;predicate_data/6</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="calls">
 <path fill="none" stroke="black" d="M520.54,-294.88C493.06,-274.84 447.41,-241.53 416.77,-219.18"/>
 <polygon fill="black" stroke="black" points="418.7,-216.25 408.56,-213.19 414.57,-221.91 418.7,-216.25"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53">
 <text text-anchor="start" x="469" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- entity_score/2&#45;&gt;^^current_entity/1 -->
 <g id="edge3" class="edge">
 <title>entity_score/2&#45;&gt;^^current_entity/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="calls">
 <path fill="none" stroke="black" d="M544,-294.88C544,-276.04 544,-245.47 544,-223.3"/>
 <polygon fill="black" stroke="black" points="547.5,-223.19 544,-213.19 540.5,-223.19 547.5,-223.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53">
 <text text-anchor="start" x="544" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,12 +103,12 @@
 <!-- entity_score/2&#45;&gt;^^entity_kind/2 -->
 <g id="edge4" class="edge">
 <title>entity_score/2&#45;&gt;^^entity_kind/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="calls">
 <path fill="none" stroke="black" d="M567.02,-294.88C593.98,-274.84 638.77,-241.53 668.83,-219.18"/>
 <polygon fill="black" stroke="black" points="670.95,-221.96 676.89,-213.19 666.77,-216.34 670.95,-221.96"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L53">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L53">
 <text text-anchor="start" x="626" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -116,7 +116,7 @@
 <!-- predicate_arity/2 -->
 <g id="node3" class="node">
 <title>predicate_arity/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L166">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L166" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L166">
 <polygon fill="cornsilk" stroke="black" points="159.5,-95 18.5,-95 18.5,-59 159.5,-59 159.5,-95"/>
 <text text-anchor="start" x="27" y="-79.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="33" y="-79.2" font-family="Monospace" font-size="11.00">predicate_arity/2</text>
@@ -130,12 +130,12 @@
 <!-- predicate_data/6&#45;&gt;predicate_arity/2 -->
 <g id="edge2" class="edge">
 <title>predicate_data/6&#45;&gt;predicate_arity/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M341.32,-176.88C288.42,-156.15 199.33,-121.24 142.4,-98.93"/>
 <polygon fill="black" stroke="black" points="143.44,-95.58 132.86,-95.19 140.89,-102.09 143.44,-95.58"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87">
 <text text-anchor="start" x="245" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- predicate_data/6&#45;&gt;list::length/2 -->
 <g id="edge5" class="edge">
 <title>predicate_data/6&#45;&gt;list::length/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M363.31,-176.88C338.01,-156.92 296.06,-123.82 267.74,-101.47"/>
 <polygon fill="black" stroke="black" points="269.8,-98.63 259.78,-95.19 265.46,-104.13 269.8,-98.63"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79">
 <text text-anchor="start" x="315" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -184,12 +184,12 @@
 <!-- predicate_data/6&#45;&gt;numberlist::sum/2 -->
 <g id="edge6" class="edge">
 <title>predicate_data/6&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M385.3,-176.88C385.62,-158.04 386.15,-127.47 386.53,-105.3"/>
 <polygon fill="black" stroke="black" points="390.03,-105.25 386.7,-95.19 383.03,-105.12 390.03,-105.25"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L79">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L79">
 <text text-anchor="start" x="386" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -211,12 +211,12 @@
 <!-- predicate_data/6&#45;&gt;pairs::values/2 -->
 <g id="edge7" class="edge">
 <title>predicate_data/6&#45;&gt;pairs::values/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M407.87,-176.88C434.66,-156.84 479.16,-123.53 509.03,-101.18"/>
 <polygon fill="black" stroke="black" points="511.13,-103.98 517.04,-95.19 506.93,-98.38 511.13,-103.98"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87">
 <text text-anchor="start" x="467" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -238,12 +238,12 @@
 <!-- predicate_data/6&#45;&gt;list::memberchk/2 -->
 <g id="edge8" class="edge">
 <title>predicate_data/6&#45;&gt;list::memberchk/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M430.45,-176.88C485.61,-156.11 578.58,-121.09 637.8,-98.79"/>
 <polygon fill="black" stroke="black" points="639.24,-101.99 647.37,-95.19 636.78,-95.44 639.24,-101.99"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L87">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L87">
 <text text-anchor="start" x="548" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -251,7 +251,7 @@
 <!-- entity_score//2 -->
 <g id="node4" class="node">
 <title>entity_score//2</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/261dba8e72dd07f5fb5891a52d53f8dbac37f16a/tools/code_metrics/halstead_metric.lgt#L172">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c017d0066c17c9fd68388dafe935f5fdc81cb730/tools/code_metrics/halstead_metric.lgt#L172">
 <polygon fill="cornsilk" stroke="black" points="306,-331 178,-331 178,-295 306,-295 306,-331"/>
 <text text-anchor="start" x="186" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="192" y="-315.2" font-family="Monospace" font-size="11.00">entity_score//2</text>
