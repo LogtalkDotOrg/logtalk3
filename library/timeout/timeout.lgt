@@ -22,7 +22,7 @@
 :- object(timeout).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
 		date is 2021-12-24,
 		comment is 'Predicates for calling goal with a time limit.',
@@ -136,19 +136,15 @@
 
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
 
-		:- meta_predicate(user::call_with_time_limit(*, 0)).
-
 		call_with_timeout(Goal, Time) :-
-			MilliSeconds is truncate(Time * 1000),
 			catch(
-				call_with_time_limit(MilliSeconds, Goal),
+				call_with_time_limit(Time, Goal),
 				error(time_limit_exceeded(_, _), _),
 				throw(timeout(Goal))
 			).
 
 		call_with_timeout(Goal, Time, Result) :-
-			MilliSeconds is truncate(Time * 1000),
-			(	catch(call_with_time_limit(MilliSeconds, Goal), Error, true) ->
+			(	catch(call_with_time_limit(Time, Goal), Error, true) ->
 				(	var(Error) ->
 					Result = true
 				;	Error = error(time_limit_exceeded(_, _), _) ->
