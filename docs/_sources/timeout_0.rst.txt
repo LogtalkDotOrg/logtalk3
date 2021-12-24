@@ -11,8 +11,8 @@
 Predicates for calling goal with a time limit.
 
 | **Author:** Paulo Moura
-| **Version:** 0:6:0
-| **Date:** 2019-12-02
+| **Version:** 0:7:0
+| **Date:** 2021-12-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,7 +24,7 @@ Predicates for calling goal with a time limit.
 
 | **Remarks:**
 
-   - Supported backend Prolog systems: B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, XSB, and YAP.
+   - Supported backend Prolog systems: B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.
 
 | **Inherited public predicates:**
 |    (none)

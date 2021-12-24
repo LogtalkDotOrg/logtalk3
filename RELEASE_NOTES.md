@@ -54,6 +54,8 @@ Trealla Prolog backends.
 * UPDATED: The `os` library for fixes in the upcoming SICStus Prolog 4.7.1
 version.
 
+* FIXED: The `timeout` library for the YAP backend.
+
 Tools
 -----
 
