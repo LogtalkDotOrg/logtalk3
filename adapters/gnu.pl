@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on November 7, 2021
+%  Last updated on December 25, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -89,6 +89,9 @@
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
+'$lgt_predicate_property'(Pred, foreign) :-
+	predicate_property(Pred, native_code),
+	\+ predicate_property(Pred, built_in).
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
 
