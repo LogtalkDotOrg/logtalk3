@@ -40,6 +40,9 @@ Prolog adapter and integration files
 * ADDED: GNU Prolog adapter file support for inlining calls to foreign
 predicates.
 
+* UPDATED: The GNU Prolog adapter file table of proprietary predicate
+properties.
+
 * UPDATED: The LVM adapter file to require version 2.2.0 or later.
 
 * UPDATED: The Trealla Prolog adapter file to require version 1.17.27 or later.

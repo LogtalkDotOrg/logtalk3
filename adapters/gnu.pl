@@ -173,8 +173,12 @@ setup_call_cleanup(_, _, _) :-
 % table of proprietary predicate properties; used by the
 % compiler when checking if a predicate property is valid
 
-'$lgt_prolog_predicate_property'(_) :-
-	fail.
+'$lgt_prolog_predicate_property'(built_in_fd).
+'$lgt_prolog_predicate_property'(control_construct).
+'$lgt_prolog_predicate_property'(monofile).
+'$lgt_prolog_predicate_property'(native_code).
+'$lgt_prolog_predicate_property'(prolog_file(_)).
+'$lgt_prolog_predicate_property'(prolog_line_).
 
 
 
