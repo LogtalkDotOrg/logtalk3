@@ -47,6 +47,11 @@ properties.
 
 * UPDATED: The Trealla Prolog adapter file to require version 1.17.27 or later.
 
+Documentation
+-------------
+
+* ADDED: Handbook section on calling Prolog foreign predicates.
+
 Library
 -------
 

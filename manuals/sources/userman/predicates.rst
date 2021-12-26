@@ -1781,6 +1781,28 @@ The third argument can be either the atom ``predicate`` or the atom
 ``control_construct``, a distinction that is useful when compiling in
 debug mode.
 
+.. _predicates_prolog_foreign:
+
+Calling Prolog foreign predicates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Prolog systems often support defining `foreign` predicates, i.e. predicates
+defined using languages other than Prolog using a `foreign language interface`.
+There isn't, however, any standard for defining, making available, and
+recognizing foreign predicates. From a Logtalk perspective, the two most
+common scenarios are calling a foreign predicate (from within an object or a
+category) and making a set of foreign predicates available as part of an
+object (or category) protocol. Assuming, as this is the most common case,
+that foreign predicates are globally visible once made available (using a
+Prolog system specific loading or linking procedure), we can simply call
+them as user-defined plain predicates, as explained in the next section.
+When defining an object (or category) that makes available foreign
+predicates, the advisable solution is to name the predicates after the
+object (or category) and then define object (or category) predicates that
+call the foreign predicates. Most backend adapter files include support for
+recognizing foreign predicates that allows the Logtalk compiler to inline
+calls to the predicates (thus avoiding call indirection overheads).
+
 .. _predicates_prolog_user:
 
 Calling Prolog user-defined plain predicates
