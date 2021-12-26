@@ -89,6 +89,11 @@
 
 % '$lgt_predicate_property'(+callable, ?predicate_property)
 
+:- dynamic('$lgt_gnu_foreign_'/1).
+
+'$lgt_predicate_property'(Pred, foreign) :-
+	\+ predicate_property(Pred, native_code),
+	'$lgt_gnu_foreign_'(Pred).
 '$lgt_predicate_property'(Pred, foreign) :-
 	predicate_property(Pred, native_code),
 	\+ predicate_property(Pred, built_in).
@@ -535,6 +540,9 @@ setup_call_cleanup(_, _, _) :-
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
+'$lgt_prolog_term_expansion'(begin_of_file, begin_of_file) :-
+	retractall('$lgt_gnu_foreign_'(_)).
+
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	nonvar(Directive),
 	% allow first-argument indexing
@@ -543,8 +551,14 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_gnu_directive_expansion'(built_in, {:- built_in}) :-
 	\+ logtalk_load_context(entity_type, _).
 '$lgt_gnu_directive_expansion'(built_in_fd, {:- built_in_fd}).
-'$lgt_gnu_directive_expansion'(foreign(Template, Options), {:- foreign(Template, Options)}).
-'$lgt_gnu_directive_expansion'(foreign(Template), {:- foreign(Template)}).
+'$lgt_gnu_directive_expansion'(foreign(Template, Options), {:- foreign(Template, Options)}) :-
+	functor(Template, Functor, Arity),
+	functor(TTemplate, Functor, Arity),
+	assertz('$lgt_gnu_foreign_'(TTemplate)).
+'$lgt_gnu_directive_expansion'(foreign(Template), {:- foreign(Template)}) :-
+	functor(Template, Functor, Arity),
+	functor(TTemplate, Functor, Arity),
+	assertz('$lgt_gnu_foreign_'(TTemplate)).
 '$lgt_gnu_directive_expansion'(op(Priority, Specifier, ':'(Module,Operators)), {:- op(Priority, Specifier, Operators)}) :-
 	Module == user.
 
