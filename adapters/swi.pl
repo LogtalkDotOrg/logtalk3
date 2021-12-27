@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on October 12, 2021
+%  Last updated on December 27, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -235,6 +235,7 @@
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(_ =@= _).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(_ \=@= _).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(?=(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_number(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_string(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
@@ -262,7 +263,10 @@
 % table of proprietary predicate properties; used by the
 % compiler when checking if a predicate property is valid
 
+'$lgt_prolog_predicate_property'(discontiguous).
 '$lgt_prolog_predicate_property'(indexed(_)).
+'$lgt_prolog_predicate_property'(monotonic).
+'$lgt_prolog_predicate_property'(opaque).
 '$lgt_prolog_predicate_property'(tabled).
 '$lgt_prolog_predicate_property'(tabled(_)).
 '$lgt_prolog_predicate_property'(thread_local).
