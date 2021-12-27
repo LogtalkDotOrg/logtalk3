@@ -45,13 +45,13 @@ properties.
 
 * UPDATED: The LVM adapter file to require version 2.2.0 or later.
 
-* UPDATED: The LVM adapter file table of candidate tautology and falsehood
-goals.
-
 * UPDATED: The SWI-Prolog adapter file tables of proprietary predicate
 properties and candidate tautology and falsehood goals.
 
 * UPDATED: The Trealla Prolog adapter file to require version 1.17.27 or later.
+
+* UPDATED: The Trealla adapter file table of candidate tautology and falsehood
+goals.
 
 Documentation
 -------------
