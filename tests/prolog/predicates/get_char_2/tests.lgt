@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2020-10-18,
+		date is 2021-12-27,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -137,6 +137,14 @@
 	throws(lgt_get_char_2_20, error(permission_error(input,binary_stream,_),_)) :-
 		^^set_binary_input(s, []),
 		{get_char(s, _)}.
+
+	throws(lgt_get_char_2_21, error(type_error(in_character,ab),_)) :-
+		^^set_text_input('foo'),
+		{get_char(ab)}.
+
+	throws(lgt_get_char_2_22, error(type_error(in_character,ab),_)) :-
+		^^set_text_input(st_i, 'foo'),
+		{get_char(st_i, ab)}.
 
 	cleanup :-
 		^^clean_file(t),

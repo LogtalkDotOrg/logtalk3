@@ -113,6 +113,9 @@ the exception term is a cyclic term.
 `numbervars/3`, `setof/3`, and `subsumes_term/2` predicates with cyclic
 term arguments.
 
+* ADDED: Additional tests for the standard `get_byte/1-2`, `get_char/1-2`, and
+`get_code/1-2` predicates.
+
 * ADDED: Additional tests for the `sort/2` and `msort/2` predicates.
 
 * ADDED: Test set for the de facto standard Prolog built-in predicates that

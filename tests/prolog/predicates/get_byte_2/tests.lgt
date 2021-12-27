@@ -156,6 +156,10 @@
 		^^set_binary_input(st_i, [0,0,0]),
 		{get_byte(st_i, 0)}.
 
+	throws(lgt_get_byte_2_27, error(type_error(in_byte,256),_)) :-
+		^^set_binary_input([]),
+		{get_byte(256)}.
+
 	cleanup :-
 		^^clean_text_input,
 		^^clean_binary_input,
