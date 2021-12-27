@@ -114,7 +114,8 @@ the exception term is a cyclic term.
 term arguments.
 
 * ADDED: Additional tests for the standard `get_byte/1-2`, `get_char/1-2`,
-`get_code/1-2`, `open/4`, and `sort/2` predicates.
+`get_code/1-2`, `open/4`, `put_byte/1-2`, `put_char/1-2`, `put_code/1-2`, and
+`sort/2` predicates.
 
 * ADDED: Additional tests for the de fato standard `msort/2` predicate.
 

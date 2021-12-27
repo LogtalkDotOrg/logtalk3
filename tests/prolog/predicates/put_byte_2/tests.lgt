@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2020-11-06,
+		date is 2021-12-27,
 		comment is 'Unit tests for the ISO Prolog standard put_byte/1-2 built-in predicates.'
 	]).
 
@@ -96,22 +96,30 @@
 		^^set_text_output(s, ''),
 		{put_byte(s, 99)}.
 
-	test(lgt_put_byte_2_16, true(Assertion)) :-
+	test(lgt_put_byte_2_16, error(type_error(byte,256))) :-
+		^^set_binary_output([]),
+		{put_byte(256)}.
+
+	test(lgt_put_byte_2_17, error(type_error(byte,256))) :-
+		^^set_binary_output(st_o, []),
+		{put_byte(st_o, 256)}.
+
+	test(lgt_put_byte_2_18, true(Assertion)) :-
 		^^set_binary_output([252,253,254]),
 		{put_byte(255)},
 		^^binary_output_assertion([252,253,254,255], Assertion).
 
-	test(lgt_put_byte_2_17, true(Assertion)) :-
+	test(lgt_put_byte_2_19, true(Assertion)) :-
 		^^set_binary_output(st_o, [252,253,254]),
 		{put_byte(st_o, 255)},
 		^^binary_output_assertion(st_o, [252,253,254,255], Assertion).
 
-	test(lgt_put_byte_2_18, true(Assertion)) :-
+	test(lgt_put_byte_2_20, true(Assertion)) :-
 		^^set_binary_output([3,2,1]),
 		{put_byte(0)},
 		^^binary_output_assertion([3,2,1,0], Assertion).
 
-	test(lgt_put_byte_2_19, true(Assertion)) :-
+	test(lgt_put_byte_2_21, true(Assertion)) :-
 		^^set_binary_output(st_o, [3,2,1]),
 		{put_byte(st_o, 0)},
 		^^binary_output_assertion(st_o, [3,2,1,0], Assertion).

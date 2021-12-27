@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-10-18,
+		date is 2021-12-27,
 		comment is 'Unit tests for the ISO Prolog standard put_code/1-2 built-in predicates.'
 	]).
 
@@ -92,6 +92,16 @@
 	test(lgt_put_code_2_14, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{put_code(s, 1)}.
+
+	test(lgt_put_code_2_15, error(type_error(integer,65.0))) :-
+		^^set_text_output(''),
+		{put_code(65.0)},
+		^^check_text_output('').
+
+	test(lgt_put_code_2_16, error(type_error(integer,65.0))) :-
+		^^set_text_output(st_o, ''),
+		{put_code(st_o, 65.0)},
+		^^check_text_output(st_o, '').
 
 	cleanup :-
 		^^clean_file(t),
