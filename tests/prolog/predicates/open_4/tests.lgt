@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-08-16,
+		date is 2021-12-27,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -145,6 +145,12 @@
 
 	test(wg17_open_4_32, error(domain_error(stream_option,type(nontype)))) :-
 		{open(foo, write, _, [type(nontype)])}.
+
+	test(lgt_open_4_33, error(domain_error(stream_option,foobar(1)))) :-
+		{open(foo, write, _, [foobar(1)])}.
+
+	test(lgt_open_4_34, error(domain_error(stream_option,foobar(a,1)))) :-
+		{open(foo, write, _, [foobar(a,1)])}.
 
 	cleanup :-
 		^^clean_file(roger_data),
