@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 1.17.0 and later versions
-%  Last updated on December 13, 2021
+%  Last updated on December 27, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
@@ -154,8 +154,12 @@
 % valid candidates are proprietary built-in predicates with
 % no side-effects when called with ground arguments
 
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(?=(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(plus(_, _, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(succ(_, _)).
 
 
 % '$lgt_prolog_database_predicate'(@callable)
