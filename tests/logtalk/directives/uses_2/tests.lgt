@@ -53,7 +53,9 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
+		(	Dialect == eclipse; Dialect == lvm; Dialect == sicstus;
+			Dialect = swi; Dialect = trealla; Dialect = yap
+		)
 	)).
 
 	:- uses(user, [bar/1]).
@@ -139,9 +141,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-01-23,
+		date is 2021-12-29,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
@@ -166,7 +168,9 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == sicstus; Dialect = swi; Dialect = yap)
+		(	Dialect == eclipse; Dialect == lvm; Dialect == sicstus;
+			Dialect = swi; Dialect = trealla; Dialect = yap
+		)
 	)).
 
 		test(uses_2_06, true(X == 2)) :-
