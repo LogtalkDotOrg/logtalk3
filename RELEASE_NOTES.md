@@ -87,7 +87,7 @@ Tools
 Ports
 -----
 
-* FIXED: Workaround Metgol port `find_duplicate` example portability issue to
+* FIXED: Workaround Metagol port `find_duplicate` example portability issue to
 avoid failures when run on backends that type-check the second argument of the
 `msort/2` predicate.
 
@@ -117,7 +117,8 @@ term arguments.
 `get_code/1-2`, `open/4`, `put_byte/1-2`, `put_char/1-2`, `put_code/1-2`,
 `sort/2`, and `write_term/3` predicates.
 
-* ADDED: Additional tests for the de fato standard `msort/2` predicate.
+* ADDED: Additional tests for the de facto standard `predicate_property/2` and
+`msort/2` predicates.
 
 * ADDED: Test set for the de facto standard Prolog built-in predicates that
 take a clause reference argument.

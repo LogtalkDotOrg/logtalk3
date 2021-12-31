@@ -34,9 +34,9 @@ elk(X) :- moose(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-12-09,
+		date is 2021-12-31,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 
@@ -85,5 +85,40 @@ elk(X) :- moose(X).
 
 	test(commons_predicate_property_2_12, error(domain_error(predicate_property,foobar))) :-
 		{predicate_property(atom_chars(_,_), foobar)}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_predicate_property_2_13, true(Template == (0,0))) :-
+		{predicate_property((_,_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_14, true(Template == (0;0))) :-
+		{predicate_property((_;_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_15, true(Template == (0->0))) :-
+		{predicate_property((_->_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_16, true(Template == '*->'(0,0)), [condition({predicate_property('*->'(_,_), built_in)})]) :-
+		{predicate_property('*->'(_,_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_17, true(Template == if(0,0,0)), [condition({predicate_property(if(_,_,_), built_in)})]) :-
+		{predicate_property(if(_,_,_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_18, true(Template == call(0))) :-
+		{predicate_property(call(_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_19, subsumes(catch(0,_,0),Template)) :-
+		{predicate_property(catch(_,_,_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_20, true(Template == once(0))) :-
+		{predicate_property(once(_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_21, subsumes(bagof(_,0,_),Template)) :-
+		{predicate_property(bagof(_,_,_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_22, subsumes(setof(_,0,_),Template)) :-
+		{predicate_property(setof(_,_,_), meta_predicate(Template))}.
+
+	test(lgt_predicate_property_2_23, subsumes(findall(_,0,_,_),Template), [condition({predicate_property(findall(_,_,_,_), built_in)})]) :-
+		{predicate_property(findall(_,_,_,_), meta_predicate(Template))}.
 
 :- end_object.
