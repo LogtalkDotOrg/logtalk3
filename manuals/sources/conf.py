@@ -22,7 +22,7 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = u'The Logtalk Handbook'
-copyright = u'1998-2021, Paulo Moura'
+copyright = u'1998-2022, Paulo Moura'
 author = u'Paulo Moura'
 
 # The short X.Y version

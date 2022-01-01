@@ -5,7 +5,7 @@
 %  Last updated on August 2, 2012
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
-%  Copyright 1998-2021 Paulo Moura <pmoura@logtalk.org>
+%  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
