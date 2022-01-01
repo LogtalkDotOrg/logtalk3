@@ -53,6 +53,9 @@ properties and candidate tautology and falsehood goals.
 * UPDATED: The Trealla adapter file table of candidate tautology and falsehood
 goals.
 
+* FIXED: Skipping of discontiguous predicate clauses warnings in the SICStus
+Prolog adapter file.
+
 Documentation
 -------------
 
