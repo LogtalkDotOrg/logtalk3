@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-11-08,
+		date is 2022-01-02,
 		comment is 'Unit tests for the ISO Prolog standard double quoted term syntax.'
 	]).
 
@@ -96,6 +96,16 @@
 		^^set_text_input('"". '),
 		set_prolog_flag(double_quotes, atom),
 		{read(T)}.
+
+	% invalid double-quoted terms
+
+	test(lgt_double_quoted_term_13, error(syntax_error(_))) :-
+		^^set_text_input('"a\nb". '),
+		{read(_)}.
+
+	test(lgt_double_quoted_term_14, error(syntax_error(_))) :-
+		^^set_text_input('"a\tb". '),
+		{read(_)}.
 
 	cleanup :-
 		^^clean_text_input.
