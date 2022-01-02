@@ -111,6 +111,8 @@ where reloading files can be problematic.
 * ADDED: Additional test for the standard `throw/1` control construct when
 the exception term is a cyclic term.
 
+* ADDED: Tests for invalid quoted atoms that contain layout characters.
+
 * ADDED: Additional tests for the standard term comparison, `bagof/3`,
 `compare/3`, `copy_term/2`, `findall/3`, `ground/1`, `length/2`,
 `numbervars/3`, `setof/3`, and `subsumes_term/2` predicates with cyclic
