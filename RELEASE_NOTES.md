@@ -56,6 +56,9 @@ goals.
 * FIXED: Skipping of discontiguous predicate clauses warnings in the SICStus
 Prolog adapter file.
 
+* FIXED: Override the meta-predicate template for the `current_op/3` built-in
+predicate in the SWI-Prolog adapter file.
+
 Documentation
 -------------
 
@@ -113,7 +116,7 @@ the exception term is a cyclic term.
 
 * ADDED: Tests for invalid quoted atoms that contain layout characters.
 
-* ADDED: Tests for invalid double-quoted atoms that contain layout characters.
+* ADDED: Tests for invalid double-quoted terms that contain layout characters.
 
 * ADDED: Additional tests for the standard term comparison, `bagof/3`,
 `compare/3`, `copy_term/2`, `findall/3`, `ground/1`, `length/2`,

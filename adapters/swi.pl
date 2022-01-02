@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on December 27, 2021
+%  Last updated on January 2, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -197,6 +197,7 @@
 '$lgt_prolog_meta_predicate'(with_output_to(_, _), with_output_to(*, 0), predicate).
 % workaround problematic meta-predicate declarations:
 '$lgt_prolog_meta_predicate'(consult(_), consult(*), predicate).
+'$lgt_prolog_meta_predicate'(current_op(_, _, _), current_op(*, *, *), predicate).
 '$lgt_prolog_meta_predicate'(ensure_loaded(_), ensure_loaded(*), predicate).
 '$lgt_prolog_meta_predicate'(format(_, _), format(*, *), predicate).
 '$lgt_prolog_meta_predicate'(format(_, _, _), format(*, *, *), predicate).
