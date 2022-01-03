@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2020-11-06,
+		date is 2021-12-27,
 		comment is 'Unit tests for the ISO Prolog standard get_byte/1-2 built-in predicates.'
 	]).
 
