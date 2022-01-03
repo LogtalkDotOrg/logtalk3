@@ -90,7 +90,10 @@ Tools
 
 * IMPROVED: The `packs` tool handling of deleted registries.
 
-* UPDATED: Added `git` command to the requirements list for the `packs` tool. 
+* UPDATED: Added `git` command to the requirements list for the `packs` tool.
+
+* UPDATED: The `diagrams`, `lgtdoc`, and `packs` tools to use the `options`
+library `option/2` predicate.
 
 Ports
 -----

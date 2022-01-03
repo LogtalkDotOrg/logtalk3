@@ -20,17 +20,18 @@
 
 
 :- object(dot_graph_language,
-	implements(graph_language_protocol)).
+	implements(graph_language_protocol),
+	imports(options)).
 
 	:- info([
-		version is 3:6:0,
+		version is 3:7:0,
 		author is 'Paulo Moura',
-		date is 2021-11-25,
+		date is 2022-01-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	:- uses(term_io, [
@@ -54,7 +55,7 @@
 		write(Stream, 'digraph "'),
 		write(Stream, Identifier),
 		write(Stream, '" {\n'),
-		memberchk(layout(Layout), Options),
+		^^option(layout(Layout), Options),
 		convert_layout(Layout, RankDir),
 		write_key_value_nl(Stream, rankdir, RankDir),
 		write_key_value_nl(Stream, ranksep, '1.0'),
@@ -81,13 +82,13 @@
 	convert_layout(right_to_left, 'RL').
 
 	diagram_label(Options, Label) :-
-		memberchk(title(Title), Options),
-		memberchk(description(Description), Options),
+		^^option(title(Title), Options),
+		^^option(description(Description), Options),
 		(	Title \== '' ->
 			atomic_list_concat([Title, '\\l', Description, '\\l'], Label0)
 		;	atomic_list_concat([Description, '\\l'], Label0)
 		),
-		(	memberchk(date(true), Options),
+		(	^^option(date(true), Options),
 			catch(os::date_time(Year, Month, Day, Hours, Minutes, _, _), _, fail) ->
 			integer_to_padded_atom(Month, PaddedMonth),
 			integer_to_padded_atom(Day, PaddedDay),
@@ -164,7 +165,7 @@
 		write(Stream, Identifier),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, shape, Shape),
-		(	memberchk(url(URL), Options),
+		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, tooltip, URL)
@@ -184,7 +185,7 @@
 		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),
 		write_escaped_term(Stream, Label),
 		write(Stream, '</FONT></TD><TD> </TD></TR>'),
-		(	memberchk(node_type_captions(true), Options),
+		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
 			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7">'),
 			write_escaped_term(Stream, Caption),
@@ -240,7 +241,7 @@
 		write(Stream, End),
 		write(Stream, '" ['),
 		write_key_value_comma(Stream, arrowhead, ArrowHead),
-		(	memberchk(url(URL), Options),
+		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_comma(Stream, 'URL', URL),
 			write_key_value_comma(Stream, labeltooltip, URL)

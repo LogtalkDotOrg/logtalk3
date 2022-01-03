@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:45:1,
+		version is 0:46:0,
 		author is 'Paulo Moura',
-		date is 2021-12-17,
+		date is 2022-01-03,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -478,7 +478,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		(	installed_pack(_, Pack, _, _),
-			member(force(false), Options) ->
+			^^option(force(false), Options) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
 		;	registry_pack(Registry, Pack, PackObject) ->
@@ -553,7 +553,7 @@
 		make_pack_installation_directory(Pack, Path, OSPath),
 		path_concat(Directory, '.git', Git),
 		(	directory_exists(Git) ->
-			(	member(verbose(true), Options) ->
+			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
 			;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 			),
@@ -572,11 +572,11 @@
 
 	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
 		download(Registry, Pack, URL, Archive, Options),
-		(	member(checksum(true), Options) ->
+		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
-		(	member(checksig(true), Options) ->
+		(	^^option(checksig(true), Options) ->
 			atom_concat(URL, '.asc', URLSig),
 			download(Registry, Pack, URLSig, ArchiveSig, Options),
 			verify_checksig(Pack, Archive, ArchiveSig, Options)
@@ -586,7 +586,7 @@
 		save_version(Path, Version),
 		save_registry(Path, Registry),
 		^^print_readme_file_path(Path),
-		(	member(clean(true), Options) ->
+		(	^^option(clean(true), Options) ->
 			delete_archives(Registry, Pack)
 		;	true
 		).
@@ -599,12 +599,12 @@
 		^^merge_options(UserOptions, Options),
 		(	installed_pack(Registry, Pack, _, Pinned) ->
 			(	Pinned == true,
-				member(force(false), Options) ->
+				^^option(force(false), Options) ->
 				print_message(error, packs, cannot_uninstall_pinned_pack(Pack)),
 				fail
 			;	dependents(Registry, Pack, Dependents),
 				Dependents \== [],
-				member(force(false), Options) ->
+				^^option(force(false), Options) ->
 				print_message(error, packs, cannot_uninstall_pack_with_dependents(Pack, Dependents)),
 				fail
 			;	print_message(comment, packs, uninstalling_pack(Registry, Pack)),
@@ -798,7 +798,7 @@
 		;	print_message(error, packs, unknown_pack_version(Registry, Pack, NewVersion)),
 			fail
 		),
-		(	member(clean(true), Options) ->
+		(	^^option(clean(true), Options) ->
 			delete_archives(Registry, Pack)
 		;	true
 		).
@@ -815,7 +815,7 @@
 			print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion))
 		;	print_message(comment, packs, up_to_date_pack(Registry, Pack, Version))
 		),
-		(	member(clean(true), Options) ->
+		(	^^option(clean(true), Options) ->
 			delete_archives(Registry, Pack)
 		;	true
 		).
@@ -892,7 +892,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		open(File, write, Stream),
-		(	member(save(all), Options) ->
+		(	^^option(save(all), Options) ->
 			findall(Registry, registries::defined(Registry, _, _, _), Registries)
 		;	findall(Registry, installed_pack(Registry, _, _, _), Registries)
 		),
@@ -1436,18 +1436,18 @@
 		directory(Pack, Directory0),
 		internal_os_path(Directory0, Directory),
 		(	operating_system_type(windows) ->
-			(	member(verbose(true), Options) ->
+			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['del /f /s /q "', Directory, '" && rmdir /s /q "',       Directory, '"'],       Command)
 			;	atomic_list_concat(['del /f /s /q "', Directory, '" > nul && rmdir /s /q "', Directory, '" > nul'], Command)
 			)
 		;	% assume unix
-			(	member(verbose(true), Options) ->
+			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['rm -rvf "', Directory, '"'], Command)
 			;	atomic_list_concat(['rm -rf "',  Directory, '"'], Command)
 			)
 		),
 		^^command(Command, pack_uninstall_failed(Pack, Directory)),
-		(	member(clean(true), Options) ->
+		(	^^option(clean(true), Options) ->
 			delete_archives(Registry, Pack)
 		;	true
 		).
@@ -1471,7 +1471,7 @@
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
 			true
-		;	(	member(verbose(true), Options) ->
+		;	(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['curl -v -L -o "',    Archive, '" "', URL, '"'], Command)
 			;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
@@ -1483,13 +1483,13 @@
 		verify_checksum(OS, Pack, Archive, CheckSum, Options).
 
 	verify_checksum(unix, Pack, Archive, sha256-CheckSum, Options) :-
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | sha256sum --check'],          Command)
 		;	atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | sha256sum --check --status'], Command)
 		),
 		^^command(Command, pack_archive_checksum_failed(Pack, Archive)).
 	verify_checksum(windows, Pack, Archive, sha256-CheckSum, Options) :-
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['certutil -v -hashfile "', Archive, '" SHA256 | find /v "hash" | find "', CheckSum, '" > nul'], Command)
 		;	atomic_list_concat(['certutil -hashfile "',    Archive, '" SHA256 | find /v "hash" | find "', CheckSum, '" > nul'], Command)
 		),
@@ -1498,7 +1498,7 @@
 		verify_checksum(unix, Pack, Archive, sha256-CheckSum, Options).
 
 	verify_checksig(Pack, Archive, ArchiveSig, Options) :-
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['gpg -v --verify "', ArchiveSig, '" "', Archive, '"'],                  Command)
 		;	operating_system_type(windows) ->
 			atomic_list_concat(['gpg --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
@@ -1509,7 +1509,7 @@
 	uncompress(Pack, Archive, Path, Options) :-
 		make_pack_installation_directory(Pack, Path, OSPath),
 		^^tar_command(Tar),
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat([Tar, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		;	atomic_list_concat([Tar, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		),

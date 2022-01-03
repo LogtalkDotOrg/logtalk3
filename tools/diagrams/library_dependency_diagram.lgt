@@ -23,16 +23,16 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:27:0,
+		version is 2:28:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2022-01-03,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	:- private(sub_diagrams_/1).
@@ -64,7 +64,7 @@
 	% second, output edges for all libraries that this library refers to
 	output_library(Library, Directory, Options) :-
 		depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind),
-		memberchk(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		\+ member(OtherLibrary, ExcludedLibraries),
 		% ensure that this dependency is not already recorded
 		\+ ^^edge(Directory, OtherDirectory, _, _, _),
@@ -144,7 +144,7 @@
 
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
-		memberchk(zoom(true), Options),
+		^^option(zoom(true), Options),
 		sub_diagrams_(Library),
 		entity_diagram(Format)::library(Library, Options),
 		fail.

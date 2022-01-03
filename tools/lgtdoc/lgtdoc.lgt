@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 6:2:1,
+		version is 6:3:0,
 		author is 'Paulo Moura',
-		date is 2021-10-19,
+		date is 2022-01-03,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -79,7 +79,7 @@
 		reset,
 		logtalk::expand_library_path(Library, TopPath),
 		^^merge_options(UserOptions, Options),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options).
 
@@ -87,8 +87,8 @@
 		rlibrary(Library, []).
 
 	output_rlibrary(TopPath, Options) :-
-		memberchk(exclude_paths(ExcludedPaths), Options),
-		memberchk(exclude_prefixes(ExcludedPrefixes), Options),
+		^^option(exclude_paths(ExcludedPaths), Options),
+		^^option(exclude_prefixes(ExcludedPrefixes), Options),
 		forall(
 			sub_library(TopPath, ExcludedPaths, ExcludedPrefixes, LibraryPath),
 			output_directory_files(LibraryPath, Options)
@@ -110,7 +110,7 @@
 		reset,
 		logtalk::expand_library_path(Library, Path),
 		^^merge_options(UserOptions, Options),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_directory_files(Path, Options),
 		write_indexes(Options).
@@ -123,7 +123,7 @@
 		reset,
 		os::absolute_file_name(Directory, Path),
 		^^merge_options(UserOptions, Options),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_rdirectory(Path, Options).
 
@@ -131,8 +131,8 @@
 		rdirectory(Directory, []).
 
 	output_rdirectory(Directory, Options) :-
-		memberchk(exclude_paths(ExcludedPaths), Options),
-		memberchk(exclude_prefixes(ExcludedPrefixes), Options),
+		^^option(exclude_paths(ExcludedPaths), Options),
+		^^option(exclude_prefixes(ExcludedPrefixes), Options),
 		setof(
 			SubDirectory,
 			sub_directory(Directory, ExcludedPaths, ExcludedPrefixes, SubDirectory),
@@ -159,7 +159,7 @@
 		reset,
 		os::absolute_file_name(Directory, Path),
 		^^merge_options(UserOptions, Options),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		output_directory_files(Path, Options),
 		write_indexes(Options).
@@ -172,7 +172,7 @@
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		memberchk(exclude_files(ExcludedFiles), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		\+ member(Path, ExcludedFiles),
@@ -189,7 +189,7 @@
 		reset,
 		locate_file(Source, Basename, Directory, StreamOptions),
 		^^merge_options(UserOptions, Options),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		os::make_directory(XMLDirectory),
 		process(Basename, Directory, Options, StreamOptions).
 
@@ -200,8 +200,8 @@
 		^^check_options(UserOptions),
 		reset,
 		^^merge_options(UserOptions, Options),
-		memberchk(xml_docs_directory(XMLDirectory), Options),
-		memberchk(exclude_prefixes(ExcludedPrefixes), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
+		^^option(exclude_prefixes(ExcludedPrefixes), Options),
 		os::make_directory(XMLDirectory),
 		(	logtalk::loaded_file_property(Path, directory(Directory)),
 			\+ (
@@ -261,8 +261,8 @@
 		).
 
 	process(File, Path, Options, StreamOptions) :-
-		memberchk(exclude_entities(ExcludedEntities), Options),
-		memberchk(omit_path_prefixes(Prefixes), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
+		^^option(omit_path_prefixes(Prefixes), Options),
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
 		functor(Entity, Functor, _),
@@ -290,7 +290,7 @@
 	% writes to disk the entity documentation in XML format
 
 	write_entity_doc(Entity, Type, Options, StreamOptions) :-
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		entity_doc_file_name(Entity, File),
 		atom_concat(XMLDirectory, File, XMLFile),
 		convert_stream_options(StreamOptions, ConvertedStreamOptions),
@@ -358,13 +358,13 @@
 		write_entity_xml_footer(Stream).
 
 	write_entity_xml_header(Stream, Options, StreamOptions) :-
-		memberchk(xml_spec_reference(XMLSRef), Options),
+		^^option(xml_spec_reference(XMLSRef), Options),
 		(	member(encoding(Encoding), StreamOptions) ->
 			true
 		;	Encoding = 'UTF-8'
 		),
-		memberchk(xml_spec(XMLSpec), Options),
-		memberchk(entity_xsl_file(XSL), Options),
+		^^option(xml_spec(XMLSpec), Options),
+		^^option(entity_xsl_file(XSL), Options),
 		once(kind_ref_doctype_xsd(entity, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream).
 
@@ -1413,16 +1413,16 @@
 	:- meta_predicate(write_index(*, 4, *, *)).
 
 	write_index(Type, Functor, File, Options) :-
-		memberchk(xml_docs_directory(XMLDirectory), Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
 		atom_concat(XMLDirectory, File, XMLFile),
 		open(XMLFile, write, Stream),
-		memberchk(xml_spec_reference(XMLSRef), Options),
+		^^option(xml_spec_reference(XMLSRef), Options),
 		(	member(encoding(Encoding), Options) ->
 			true
 		;	Encoding = 'UTF-8'
 		),
-		memberchk(xml_spec(XMLSpec), Options),
-		memberchk(index_xsl_file(XSL), Options),
+		^^option(xml_spec(XMLSpec), Options),
+		^^option(index_xsl_file(XSL), Options),
 		once(kind_ref_doctype_xsd(index, XMLSRef, DocTypeURL, XSDURL)),
 		write_xml_header(XMLSRef, Encoding, XMLSpec, DocTypeURL, XSL, XSDURL, Stream),
 		write_xml_element(Stream, type, [], Type),

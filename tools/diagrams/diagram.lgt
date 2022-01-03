@@ -23,15 +23,15 @@
 	extends(options)).
 
 	:- info([
-		version is 2:49:1,
+		version is 2:50:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2022-01-03,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
 
 	:- uses(list, [
-		append/3, member/2, memberchk/2
+		append/3, member/2
 	]).
 	:- uses(pairs, [
 		keys/2
@@ -151,7 +151,7 @@
 	output_all_libraries(Options) :-
 		self(Self),
 		format_object(Format),
-		memberchk(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		logtalk_library_path(Library, _),
 		\+ member(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Directory),
@@ -260,14 +260,14 @@
 		::output_sub_diagrams(UserOptions).
 
 	output_library(_Library, Directory, Options) :-
-		memberchk(exclude_files(ExcludedFiles), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		::not_excluded_file(ExcludedFiles, Path, Basename),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_Library, Directory, Options) :-
-		memberchk(exclude_files(ExcludedFiles), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
@@ -729,7 +729,7 @@
 
 	output_rlibrary(TopLibrary, TopPath, Options) :-
 		format_object(Format),
-		memberchk(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
 		add_link_options(TopPath, Options, TopGraphOptions),
 		omit_path_prefix(TopPath, Options, TopRelative),
@@ -769,7 +769,7 @@
 	]).
 
 	output_rdirectory(Project, TopPath, Options) :-
-		memberchk(exclude_directories(ExcludedDirectories), Options),
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		add_link_options(TopPath, Options, TopGraphOptions),
 		::output_library(Project, TopPath, TopGraphOptions),
 		sub_directory(TopPath, ExcludedDirectories, Directory, Path),
@@ -893,7 +893,7 @@
 	]).
 
 	output_edges(Options) :-
-		memberchk(externals(Externals), Options),
+		^^option(externals(Externals), Options),
 		format_object(Format),
 		output_edges(Externals, Format).
 
@@ -985,7 +985,7 @@
 		::diagram_name_suffix(Suffix),
 		atom_concat(Name0, Suffix, Name),
 		Format::output_file_name(Name, Basename),
-		memberchk(output_directory(Directory), Options),
+		^^option(output_directory(Directory), Options),
 		os::make_directory(Directory),
 		atom_concat(Directory, Basename, Path).
 
@@ -1175,7 +1175,7 @@
 	]).
 
 	filter_file_extension(Basename, Options, Name) :-
-		memberchk(file_extensions(Boolean), Options),
+		^^option(file_extensions(Boolean), Options),
 		(	Boolean == true ->
 			Name = Basename
 		;	os::decompose_file_name(Basename, _, Name, _)
@@ -1192,10 +1192,10 @@
 		(	member(path_url_prefixes(PathPrefix, CodePrefix, DocPrefix), Options),
 			atom_concat(PathPrefix, _, Path) ->
 			true
-		;	memberchk(url_prefixes(CodePrefix, DocPrefix), Options)
+		;	^^option(url_prefixes(CodePrefix, DocPrefix), Options)
 		),
 		!,
-		memberchk(omit_path_prefixes(Prefixes), Options),
+		^^option(omit_path_prefixes(Prefixes), Options),
 		(	member(Path, Prefixes) ->
 			(	CodePrefix == '' ->
 				CodeURL = './',
@@ -1211,7 +1211,7 @@
 		),
 		LinkingOptions = [url(CodeURL), urls(CodeURL,DocPrefix), tooltip(Suffix)| Options].
 	add_link_options(Path, Options, LinkingOptions) :-
-		memberchk(omit_path_prefixes(Prefixes), Options),
+		^^option(omit_path_prefixes(Prefixes), Options),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
 			true
@@ -1227,7 +1227,7 @@
 	]).
 
 	omit_path_prefix(Path, Options, Relative) :-
-		memberchk(omit_path_prefixes(Prefixes), Options),
+		^^option(omit_path_prefixes(Prefixes), Options),
 		(	member(Path, Prefixes) ->
 			Relative = './'
 		;	member(Prefix, Prefixes),

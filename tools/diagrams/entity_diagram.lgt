@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:50:0,
+		version is 2:51:0,
 		author is 'Paulo Moura',
-		date is 2021-08-04,
+		date is 2022-01-03,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -166,14 +166,14 @@
 	output_missing_externals(_).
 
 	output_sub_diagrams(Options) :-
-		memberchk(zoom(true), Options),
+		^^option(zoom(true), Options),
 		included_entity_(Entity),
 		% use the {}/1 control construct to avoid a warning due to the circular
 		% reference between this object and the xref_diagram object
 		{xref_diagram::entity(Entity, Options)},
 		fail.
 	output_sub_diagrams(Options) :-
-		memberchk(zoom(true), Options),
+		^^option(zoom(true), Options),
 		included_module_(Module),
 		% use the {}/1 control construct to avoid a warning due to the circular
 		% reference between this object and the xref_diagram object
@@ -182,7 +182,7 @@
 	output_sub_diagrams(_).
 
 	process(Basename, Directory, Options) :-
-		memberchk(exclude_entities(ExcludedEntities), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
 		protocol_property(Protocol, file(Basename, Directory)),
 		\+ member(Protocol, ExcludedEntities),
 		add_entity_documentation_url(logtalk, Protocol, Options, ProtocolOptions),
@@ -190,7 +190,7 @@
 		assertz(included_entity_(Protocol)),
 		fail.
 	process(Basename, Directory, Options) :-
-		memberchk(exclude_entities(ExcludedEntities), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, file(Basename, Directory)),
 		\+ member(Object, ExcludedEntities),
 		add_entity_documentation_url(logtalk, Object, Options, ObjectOptions),
@@ -198,7 +198,7 @@
 		assertz(included_entity_(Object)),
 		fail.
 	process(Basename, Directory, Options) :-
-		memberchk(exclude_entities(ExcludedEntities), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, file(Basename, Directory)),
 		\+ member(Category, ExcludedEntities),
 		add_entity_documentation_url(logtalk, Category, Options, CategoryOptions),
@@ -206,7 +206,7 @@
 		assertz(included_entity_(Category)),
 		fail.
 	process(Basename, Directory, Options) :-
-		memberchk(exclude_entities(ExcludedEntities), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
 		atom_concat(Directory, Basename, Path),
 		modules_diagram_support::module_property(Module, file(Path)),
 		\+ member(Module, ExcludedEntities),
@@ -217,11 +217,11 @@
 	process(_, _, _).
 
 	add_entity_documentation_url(Kind, Entity, Options, EntityOptions) :-
-		memberchk(urls(_, DocPrefix), Options),
+		^^option(urls(_, DocPrefix), Options),
 		(	DocPrefix \== '' ->
 			entity_to_html_name(Kind, Entity, Name),
 			atom_concat(DocPrefix, Name, DocURL0),
-			memberchk(entity_url_suffix_target(Suffix, _), Options),
+			^^option(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(DocURL0, Suffix, DocURL),
 			EntityOptions = [url(DocURL)| Options]
 		;	EntityOptions = [url('')| Options]
@@ -234,7 +234,7 @@
 			atom_concat(Prefix, _, Path) ->
 			entity_to_html_name(module, Entity, Name),
 			atom_concat(DocPrefix, Name, DocURL0),
-			memberchk(entity_url_suffix_target(Suffix, _), Options),
+			^^option(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(DocURL0, Suffix, DocURL),
 			EntityOptions = [url(DocURL)| Options]
 		;	EntityOptions = [url('')| Options]
@@ -256,7 +256,7 @@
 			) ->
 			entity_to_html_name(logtalk, Entity, Name),
 			atom_concat(DocPrefix, Name, DocURL0),
-			memberchk(entity_url_suffix_target(Suffix, _), Options),
+			^^option(entity_url_suffix_target(Suffix, _), Options),
 			atom_concat(DocURL0, Suffix, DocURL),
 			EntityOptions = [url(DocURL)| Options]
 		;	EntityOptions = [url('')| Options]
@@ -291,7 +291,7 @@
 			) ->
 			% third, cut down when specified local path prefix
 			% before constructing the final code URL
-			memberchk(omit_path_prefixes(PathPrefixes), Options),
+			^^option(omit_path_prefixes(PathPrefixes), Options),
 			(	member(PathPrefix, PathPrefixes),
 				atom_concat(PathPrefix, RelativePath, Path) ->
 				true

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:42:0,
+		version is 0:43:0,
 		author is 'Paulo Moura',
-		date is 2021-12-21,
+		date is 2022-01-03,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -299,7 +299,7 @@
 	add_registry(Registry, URL, Options) :-
 		print_message(comment, packs, adding_registry(Registry)),
 		(	registry_object(Registry, _) ->
-			(	member(force(false), Options) ->
+			(	^^option(force(false), Options) ->
 				print_message(error, packs, registry_already_defined(Registry)),
 				fail
 			;	delete(Registry, Options)
@@ -329,7 +329,7 @@
 		),
 		save_url(Path, URL),
 		^^load_registry(Path),
-		(	member(clean(true), Options) ->
+		(	^^option(clean(true), Options) ->
 			delete_archives(Registry)
 		;	true
 		),
@@ -345,7 +345,7 @@
 		make_registry_installation_directory(Registry, Path, OSPath),
 		path_concat(Directory, '.git', Git),
 		(	directory_exists(Git) ->
-			(	member(verbose(true), Options) ->
+			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
 			;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 			),
@@ -368,31 +368,31 @@
 		print_message(comment, packs, deleting_registry(Registry)),
 		(	directory(Registry, Directory0) ->
 			(	pinned(Registry),
-				member(force(false), Options) ->
+				^^option(force(false), Options) ->
 				print_message(error, packs, cannot_delete_pinned_registry(Registry)),
 				fail
 			;	true
 			),
 			(	installed_registry_packs(Registry),
-				member(force(false), Options) ->
+				^^option(force(false), Options) ->
 				print_message(error, packs, cannot_delete_registry_with_installed_packs(Registry)),
 				fail
 			;	true
 			),
 			internal_os_path(Directory0, Directory),
 			(	operating_system_type(windows) ->
-				(	member(verbose(true), Options) ->
+				(	^^option(verbose(true), Options) ->
 					atomic_list_concat(['del /f /s /q "', Directory, '" && rmdir /s /q "',            Directory, '"'],            Command)
 				;	atomic_list_concat(['del /f /s /q "', Directory, '" > nul 2>&1 && rmdir /s /q "', Directory, '" > nul 2>&1'], Command)
 				)
 			;	% assume unix
-				(	member(verbose(true), Options) ->
+				(	^^option(verbose(true), Options) ->
 					atomic_list_concat(['rm -rvf "', Directory, '"'], Command)
 				;	atomic_list_concat(['rm -rf "',  Directory, '"'], Command)
 				)
 			),
 			^^command(Command, registry_deletion_failed(Registry, Directory)),
-			(	member(clean(true), Options) ->
+			(	^^option(clean(true), Options) ->
 				delete_archives(Registry)
 			;	true
 			),
@@ -420,7 +420,7 @@
 		^^merge_options(UserOptions, Options),
 		(	registry_object(Registry, RegistryObject) ->
 			(	pinned(Registry),
-				member(force(false), Options) ->
+				^^option(force(false), Options) ->
 				print_message(error, packs, cannot_update_pinned_registry(Registry)),
 				fail
 			;	true
@@ -443,7 +443,7 @@
 			;	object_property(RegistryObject, file(File)),
 				loaded_file_property(File, parent(Loader)),
 				logtalk_load(Loader, [reload(always), source_data(on), hook(registry_loader_hook)]),
-				(	member(clean(true), Options) ->
+				(	^^option(clean(true), Options) ->
 					delete_archives(Registry)
 				;	true
 				),
@@ -502,7 +502,7 @@
 	update_clone(Registry, URL, Path, true, Options) :-
 		print_message(comment, packs, updating_registry(Registry, URL)),
 		internal_os_path(Path, OSPath),
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['git -C "', OSPath, '" pull -v'], Command)
 		;	atomic_list_concat(['git -C "', OSPath, '" pull -q'], Command)
 		),
@@ -754,7 +754,7 @@
 		path_concat(LogtalkPacks, registries, Registries),
 		path_concat(Registries, Registry, Path),
 		internal_os_path(Path, OSPath),
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['git clone -v ', URL, ' "', OSPath, '"'], Command)
 		;	atomic_list_concat(['git clone -q ', URL, ' "', OSPath, '"'], Command)
 		),
@@ -769,7 +769,7 @@
 		path_concat(ArchivesRegistriesRegistry, Basename, Archive0),
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesRegistriesRegistry),
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['curl -v -L -o "',    Archive, '" "', URL, '"'], Command)
 		;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 		),
@@ -778,7 +778,7 @@
 	uncompress(Registry, Archive, Path, Options) :-
 		make_registry_installation_directory(Registry, Path, OSPath),
 		^^tar_command(Tar),
-		(	member(verbose(true), Options) ->
+		(	^^option(verbose(true), Options) ->
 			atomic_list_concat([Tar, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		;	atomic_list_concat([Tar, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		),

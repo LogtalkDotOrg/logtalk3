@@ -3,16 +3,16 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:14:1,
+		version is 2:15:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2022-01-03,
 		comment is 'Common predicates for generating library diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), entity_diagram(_)]
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	:- uses(user, [
@@ -107,9 +107,9 @@
 	output_externals(_).
 
 	add_library_documentation_url(logtalk, Options, Library, NodeOptions) :-
-		(	memberchk(urls(_, DocPrefix), Options),
+		(	^^option(urls(_, DocPrefix), Options),
 			DocPrefix \== '' ->
-			memberchk(entity_url_suffix_target(Suffix, Target), Options),
+			^^option(entity_url_suffix_target(Suffix, Target), Options),
 			atomic_list_concat([DocPrefix, Suffix, Target, Library], URL),
 			NodeOptions = [url(URL)| Options]
 		;	NodeOptions = [url('')| Options]

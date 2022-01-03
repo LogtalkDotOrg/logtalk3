@@ -23,16 +23,16 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1:19:0,
+		version is 1:20:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2022-01-03,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	:- private(sub_diagram_/2).
@@ -62,7 +62,7 @@
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
 		),
 		% look for a file in another directory that have this file as parent
-		(	memberchk(exclude_directories(ExcludedDirectories), Options),
+		(	^^option(exclude_directories(ExcludedDirectories), Options),
 			logtalk::loaded_file_property(Other, parent(File)),
 			logtalk::loaded_file_property(Other, directory(OtherDirectory)),
 			OtherDirectory \== Directory,
@@ -87,7 +87,7 @@
 
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
-		memberchk(zoom(true), Options),
+		^^option(zoom(true), Options),
 		sub_diagram_(Project, Directory),
 		file_load_diagram(Format)::directory(Project, Directory, Options),
 		fail.

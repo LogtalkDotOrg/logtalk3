@@ -11,8 +11,8 @@
 Predicates for generating graph files in the DOT language (version 2.36.0 or later).
 
 | **Author:** Paulo Moura
-| **Version:** 3:6:0
-| **Date:** 2021-11-25
+| **Version:** 3:7:0
+| **Date:** 2022-01-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Predicates for generating graph files in the DOT language (version 2.36.0 or lat
 
 | **Implements:**
 |    ``public`` :ref:`graph_language_protocol <graph_language_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
 | **Provides:**
 |    :ref:`graph_language_registry::language_object/2 <graph_language_registry/0::language_object/2>`
 | **Uses:**
@@ -32,7 +34,7 @@ Predicates for generating graph files in the DOT language (version 2.36.0 or lat
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`graph_language_protocol/0::edge/6`  :ref:`graph_language_protocol/0::file_footer/3`  :ref:`graph_language_protocol/0::file_header/3`  :ref:`graph_language_protocol/0::graph_footer/5`  :ref:`graph_language_protocol/0::graph_header/5`  :ref:`graph_language_protocol/0::node/7`  :ref:`graph_language_protocol/0::output_file_name/2`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`graph_language_protocol/0::edge/6`  :ref:`graph_language_protocol/0::file_footer/3`  :ref:`graph_language_protocol/0::file_header/3`  :ref:`graph_language_protocol/0::graph_footer/5`  :ref:`graph_language_protocol/0::graph_header/5`  :ref:`graph_language_protocol/0::node/7`  :ref:`options_protocol/0::option/2`  :ref:`graph_language_protocol/0::output_file_name/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

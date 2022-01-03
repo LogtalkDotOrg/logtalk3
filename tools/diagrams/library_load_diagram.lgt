@@ -23,16 +23,16 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:27:0,
+		version is 2:28:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2022-01-03,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	:- private(sub_diagrams_/1).
@@ -68,7 +68,7 @@
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
 		),
 		% look for a file in another library that have this file as parent
-		(	memberchk(exclude_libraries(ExcludedLibraries), Options),
+		(	^^option(exclude_libraries(ExcludedLibraries), Options),
 			logtalk::loaded_file_property(Other, parent(File)),
 			logtalk::loaded_file_property(Other, library(OtherLibrary)),
 			Library \== OtherLibrary,
@@ -88,7 +88,7 @@
 			logtalk_library_path(OtherLibrary, _),
 			logtalk::expand_library_path(OtherLibrary, OtherDirectory) ->
 			% file found in a directory corresponding to a Logtalk library
-			memberchk(exclude_libraries(ExcludedLibraries), Options),
+			^^option(exclude_libraries(ExcludedLibraries), Options),
 			\+ member(OtherLibrary, ExcludedLibraries),
 			^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
 		;	modules_diagram_support::module_property(OtherLibrary, file(Other)) ->
@@ -104,7 +104,7 @@
 
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
-		memberchk(zoom(true), Options),
+		^^option(zoom(true), Options),
 		sub_diagrams_(Library),
 		entity_diagram(Format)::library(Library, Options),
 		fail.

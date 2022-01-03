@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:63:1,
+		version is 2:64:0,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2022-01-03,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -326,7 +326,7 @@
 			number_codes(EntityArity, EntityArityCodes),
 			atom_codes(EntityArityAtom, [0'_| EntityArityCodes]),
 			atom_concat(DocURL0, EntityArityAtom, DocURL1),
-			memberchk(entity_url_suffix_target(Suffix, Target), Options),
+			^^option(entity_url_suffix_target(Suffix, Target), Options),
 			atom_concat(DocURL1, Suffix, DocURL2),
 			(	Target == '' ->
 				DocURL = DocURL2
@@ -371,11 +371,11 @@
 			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
 				atom_concat(Prefix, _, Path) ->
 				true
-			;	memberchk(url_prefixes(CodePrefix, _), Options)
+			;	^^option(url_prefixes(CodePrefix, _), Options)
 			),
 			% third, cut down any specified local path prefix
 			% before constructing the final code URL
-			memberchk(omit_path_prefixes(PathPrefixes), Options),
+			^^option(omit_path_prefixes(PathPrefixes), Options),
 			(	member(PathPrefix, PathPrefixes),
 				atom_concat(PathPrefix, RelativePath, Path) ->
 				atom_concat(CodePrefix, RelativePath, CodeURL0)
@@ -676,13 +676,13 @@
 		(	modules_diagram_support::module_property(Module, defines(Predicate,Properties)) ->
 			add_predicate_code_url(Options, module, Module, Properties, PredicateOptions),
 			^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, PredicateOptions)
-		;	memberchk(node_type_captions(Boolean), Options),
+		;	^^option(node_type_captions(Boolean), Options),
 			^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, [node_type_captions(Boolean)])
 		),
 		fail.
 	output_externals(Options) :-
 		retract(external_predicate_(Predicate)),
-		memberchk(node_type_captions(Boolean), Options),
+		^^option(node_type_captions(Boolean), Options),
 		^^output_node(Predicate, Predicate, external, [], external_predicate, [node_type_captions(Boolean)]),
 		fail.
 	output_externals(_).
