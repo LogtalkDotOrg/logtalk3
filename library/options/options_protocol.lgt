@@ -22,7 +22,7 @@
 :- protocol(options_protocol).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2022-01-03,
 		comment is 'Options protocol.',
@@ -86,8 +86,15 @@
 	:- public(option/2).
 	:- mode(option(+compound, +list(compound)), zero_or_one).
 	:- info(option/2, [
-		comment is 'True iff ``Option`` unifies with an element of the ``options`` list.',
+		comment is 'True iff ``Option`` unifies with the first occurrence of the same option in the ``Options`` list.',
 		argnames is ['Option', 'Options']
+	]).
+
+	:- public(option/3).
+	:- mode(option(+compound, +list(compound), +compound), zero_or_one).
+	:- info(option/3, [
+		comment is 'True iff ``Option`` unifies with the first occurrence of the same option in the ``Options`` list or, when that is not the case, if ``Option`` unifies with ``Default``.',
+		argnames is ['Option', 'Options', 'Default']
 	]).
 
 	:- protected(merge_options/2).

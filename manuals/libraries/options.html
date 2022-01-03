@@ -184,15 +184,56 @@ file:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> category is usually imported by the root object of the
 developer tool or application. The importing object should define the
 <code class="docutils literal notranslate"><span class="pre">default_option/1</span></code> predicate and, if option type-checking is required,
-the <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicate. This library requires options to be
-represented by compound terms but leaves otherwise to the clients the
-actual representation.</p>
+the <code class="docutils literal notranslate"><span class="pre">valid_option/1</span></code> predicate must be defined for each option. This
+library requires options to be represented by compound terms where the
+functor is the option name (e.g. <code class="docutils literal notranslate"><span class="pre">trim(true)</span></code> or (<code class="docutils literal notranslate"><span class="pre">box(0,2)</span></code>)). The
+<code class="docutils literal notranslate"><span class="pre">option/2-3</span></code> can be used to get or test an option given a list of
+options. When an option appears multiple times in a list, the
+<code class="docutils literal notranslate"><span class="pre">option/2-3</span></code> predicates get or test the first (leftmost) occurrence.</p>
 <p>The library also supports a user-defined <code class="docutils literal notranslate"><span class="pre">fix_option/2</span></code> predicate. An
 usage example is when an option value can be a relative file path that
 should be expanded before used. Another usage example would be
 converting from a user-friendly option to a form more suitable for
 internal processing. When a call to the <code class="docutils literal notranslate"><span class="pre">fix_option/2</span></code> predicate
 fails, the option is used as-is.</p>
+<p>A simple example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
+    <span class="k">imports</span>(options)).
+
+<span class="p">    :- </span><span class="k">uses</span>(type, [
+        valid<span class="o">/</span><span class="m">2</span>
+    ]).
+
+<span class="p">    :- </span><span class="k">public</span>(p<span class="o">/</span><span class="m">0</span>).
+    p <span class="o">:-</span>
+        <span class="c">% use default options</span>
+        p([]).
+
+<span class="p">    :- </span><span class="k">public</span>(p<span class="o">/</span><span class="m">1</span>).
+    p(<span class="nv">UserOptions</span>) <span class="o">:-</span>
+        <span class="o">^^</span>check_options(<span class="nv">UserOptions</span>),
+        <span class="c">% construct the full set of options from</span>
+        <span class="c">% the user options and the default options</span>
+        <span class="o">^^</span>merge_options(<span class="nv">UserOptions</span>, <span class="nv">Options</span>),
+        ...
+        <span class="c">% query an option</span>
+        <span class="o">^^</span>option(baz(<span class="nv">Boolean</span>), <span class="nv">Options</span>),
+        q(<span class="nv">Boolean</span>),
+        ...
+
+    default_option(baz(<span class="k">true</span>)).
+    ...
+
+    valid_option(baz(<span class="nv">Boolean</span>)) <span class="o">:-</span>
+        valid(boolean, <span class="nv">Boolean</span>).
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Note that you can use protected or private import of the <code class="docutils literal notranslate"><span class="pre">options</span></code>
+category if you don’t want to add its public predicates to the object
+protocol.</p>
 </section>
 </section>
 

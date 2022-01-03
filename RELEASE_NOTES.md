@@ -64,10 +64,12 @@ Documentation
 
 * ADDED: Handbook section on calling Prolog foreign predicates.
 
+* IMPROVED: Documentation of the `options` library.
+
 Library
 -------
 
-* ADDED: Predicate `option/2` to the `options` library.
+* ADDED: Predicates `option/2-3` to the `options` library.
 
 * ADDED: Support to the `timeout` library for the Trealla Prolog backend.
 

@@ -23,14 +23,14 @@
 	implements(options_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2022-01-03,
-		comment is 'Options processing predicates.'
+		comment is 'Options processing predicates. Options are represented by compound terms where the functor is the option name.'
 	]).
 
 	:- uses(list, [
-		append/3, member/2
+		append/3, member/2, memberchk/2
 	]).
 
 	check_options(Options) :-
@@ -71,10 +71,19 @@
 	default_options(DefaultOptions) :-
 		findall(DefaultOption, ::default_option(DefaultOption), DefaultOptions).
 
-	option(Option, [Option| _]) :-
-		!.
-	option(Option, [_| Options]) :-
-		option(Option, Options).
+	option(Option, Options) :-
+		functor(Option, Functor, Arity),
+		functor(Template, Functor, Arity),
+		memberchk(Template, Options),
+		Option = Template.
+
+	option(Option, Options, Default) :-
+		functor(Option, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	member(Template, Options) ->
+			Option = Template
+		;	Option = Default
+		).
 
 	merge_options(UserOptions, Options) :-
 		findall(

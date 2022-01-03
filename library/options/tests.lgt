@@ -46,6 +46,26 @@
 		test_object::default_options(Options),
 		test_object::option(a(2), Options).
 
+	test(options_option_2_03, true(Option == bar)) :-
+		test_object::default_options(Options),
+		test_object::option(c(Option), [c(bar)| Options]).
+
+	test(options_option_3_01, true(Option == foo)) :-
+		test_object::default_options(Options),
+		test_object::option(c(Option), Options, c(bar)).
+
+	test(options_option_3_02, false) :-
+		test_object::default_options(Options),
+		test_object::option(c(baz), Options, c(baz)).
+
+	test(options_option_3_03, true(Option == bar)) :-
+		test_object::default_options(Options),
+		test_object::option(c(Option), [c(bar)| Options], c(baz)).
+
+	test(options_option_3_04, true(Option == 42)) :-
+		test_object::default_options(Options),
+		test_object::option(o(Option), Options, o(42)).
+
 	test(options_valid_option_01, true) :-
 		test_object::valid_option(a(42)).
 

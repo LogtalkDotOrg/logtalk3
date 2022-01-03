@@ -11,7 +11,7 @@
 Options protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:2:0
 | **Date:** 2022-01-03
 
 | **Compilation flags:**
@@ -203,7 +203,7 @@ Returns a list of the default options.
 ``option/2``
 ^^^^^^^^^^^^
 
-True iff ``Option`` unifies with an element of the ``options`` list.
+True iff ``Option`` unifies with the first occurrence of the same option in the ``Options`` list.
 
 | **Compilation flags:**
 |    ``static``
@@ -212,6 +212,29 @@ True iff ``Option`` unifies with an element of the ``options`` list.
 |    ``option(Option,Options)``
 | **Mode and number of proofs:**
 |    ``option(+compound,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="option/3"> </div>
+
+.. index:: option/3
+.. _options_protocol/0::option/3:
+
+``option/3``
+^^^^^^^^^^^^
+
+True iff ``Option`` unifies with the first occurrence of the same option in the ``Options`` list or, when that is not the case, if ``Option`` unifies with ``Default``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``option(Option,Options,Default)``
+| **Mode and number of proofs:**
+|    ``option(+compound,+list(compound),+compound)`` - ``zero_or_one``
 
 
 ------------
