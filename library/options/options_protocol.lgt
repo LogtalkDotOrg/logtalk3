@@ -22,9 +22,9 @@
 :- protocol(options_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-02-01,
+		date is 2022-01-03,
 		comment is 'Options protocol.',
 		see_also is [options]
 	]).
@@ -81,6 +81,13 @@
 	:- info(default_options/1, [
 		comment is 'Returns a list of the default options.',
 		argnames is ['Options']
+	]).
+
+	:- public(option/2).
+	:- mode(option(+compound, +list(compound)), zero_or_one).
+	:- info(option/2, [
+		comment is 'True iff ``Option`` unifies with an element of the ``options`` list.',
+		argnames is ['Option', 'Options']
 	]).
 
 	:- protected(merge_options/2).

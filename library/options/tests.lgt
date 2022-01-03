@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-01-24,
+		date is 2022-01-03,
 		comment is 'Unit tests for the "options" library.'
 	]).
 
@@ -37,6 +37,14 @@
 	test(options_default_options_01, true(Options == [a(1),b(2.4),c(foo)])) :-
 		test_object::default_options(Options0),
 		sort(Options0, Options).
+
+	test(options_option_2_01, true(Option == foo)) :-
+		test_object::default_options(Options),
+		test_object::option(c(Option), Options).
+
+	test(options_option_2_02, false) :-
+		test_object::default_options(Options),
+		test_object::option(a(2), Options).
 
 	test(options_valid_option_01, true) :-
 		test_object::valid_option(a(42)).

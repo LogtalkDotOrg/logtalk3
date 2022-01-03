@@ -23,9 +23,9 @@
 	implements(options_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-02-01,
+		date is 2022-01-03,
 		comment is 'Options processing predicates.'
 	]).
 
@@ -70,6 +70,11 @@
 
 	default_options(DefaultOptions) :-
 		findall(DefaultOption, ::default_option(DefaultOption), DefaultOptions).
+
+	option(Option, [Option| _]) :-
+		!.
+	option(Option, [_| Options]) :-
+		option(Option, Options).
 
 	merge_options(UserOptions, Options) :-
 		findall(

@@ -67,6 +67,8 @@ Documentation
 Library
 -------
 
+* ADDED: Predicate `option/2` to the `options` library.
+
 * ADDED: Support to the `timeout` library for the Trealla Prolog backend.
 
 * IMPROVED: Tests driver files for the `arbitrary` and `random` libraries to
