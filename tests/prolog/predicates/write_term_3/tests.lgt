@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:23:0,
+		version is 1:24:0,
 		author is 'Paulo Moura',
-		date is 2021-12-28,
+		date is 2022-01-04,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -154,6 +154,8 @@
 		{write_term(out, 1+2, [ignore_ops(true)])},
 		^^text_output_assertion(out, '+(1,2)', Assertion).
 
+	% graphic tokens that start with a comment open character sequence require quoting
+
 	test(lgt_write_term_3_29, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, '%', [quoted(true)])},
@@ -171,118 +173,160 @@
 
 	test(lgt_write_term_3_32, true(Assertion)) :-
 		^^set_text_output(out, ''),
+		{write_term(out, ':%', [quoted(true)])},
+		^^text_output_assertion(out, '\':%\'', Assertion).
+
+	test(lgt_write_term_3_33, true(Assertion)) :-
+		^^set_text_output(out, ''),
 		{write_term(out, '/*', [quoted(true)])},
 		^^text_output_assertion(out, '\'/*\'', Assertion).
 
-	test(lgt_write_term_3_33, true(Assertion)) :-
+	test(lgt_write_term_3_34, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{write_term(out, ' /*', [quoted(true)])},
+		^^text_output_assertion(out, '\' /*\'', Assertion).
+
+	test(lgt_write_term_3_35, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, '/*text', [quoted(true)])},
 		^^text_output_assertion(out, '\'/*text\'', Assertion).
 
-	test(lgt_write_term_3_34, true(Assertion)) :-
+	% graphic tokens that don't start with a comment open character sequence don't require quoting
+
+	test(lgt_write_term_3_36, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{write_term(out, ':/*', [quoted(true)])},
+		^^text_output_assertion(out, ':/*', Assertion).
+
+	test(lgt_write_term_3_37, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{write_term(out, '*/', [quoted(true)])},
+		^^text_output_assertion(out, '*/', Assertion).
+
+	test(lgt_write_term_3_38, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{write_term(out, ':=:', [quoted(true)])},
+		^^text_output_assertion(out, ':=:', Assertion).
+
+	test(lgt_write_term_3_39, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{write_term(out, '$#$', [quoted(true)])},
+		^^text_output_assertion(out, '$#$', Assertion).
+
+	% variable_names/1 option tests
+
+	test(lgt_write_term_3_40, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C])])},
 		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
-	test(lgt_write_term_3_35, true(Assertion)) :-
+	test(lgt_write_term_3_41, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=A])])},
 		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
-	test(lgt_write_term_3_36, true(Assertion)) :-
+	test(lgt_write_term_3_42, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=42])])},
 		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
-	test(lgt_write_term_3_37, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_43, true(Chars = ['_', _| _])) :-
 		^^set_text_output(out, ''),
 		{write_term(out, _, [variable_names(['Y'=_])])},
 		^^text_output_contents(out, Chars).
 
-	test(lgt_write_term_3_38, true(Assertion)) :-
+	test(lgt_write_term_3_44, true(Chars = ['_', _| _])) :-
+		^^set_text_output(out, ''),
+		X = X,  % avoid a singleton warning
+		{write_term(out, X, [variable_names(['Y'=_])])},
+		^^text_output_contents(out, Chars).
+
+	% wroting of ()'s terms must preserve the ()'s
+
+	test(lgt_write_term_3_45, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, [(1,2,3)], [])},
 		^^text_output_assertion(out, '[(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_39, true(Assertion)) :-
+	test(lgt_write_term_3_46, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, [a,(1,2,3)], [])},
 		^^text_output_assertion(out, '[a,(1,2,3)]', Assertion).
 
-	test(lgt_write_term_3_40, true(Assertion)) :-
+	test(lgt_write_term_3_47, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_canonical(out, [(1,2,3)])},
 		^^text_output_assertion(out, '\'.\'(\',\'(1,\',\'(2,3)),[])', Assertion).
 
-	test(lgt_write_term_3_41, true(Assertion)) :-
+	test(lgt_write_term_3_48, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{write_canonical(out, [a,(1,2,3)])},
 		^^text_output_assertion(out, '\'.\'(a,\'.\'(\',\'(1,\',\'(2,3)),[]))', Assertion).
 
 	% [] and {} are atoms that don't require quoting
 
-	test(lgt_write_term_3_42, true(Assertion)) :-
+	test(lgt_write_term_3_49, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '[]')},
 		^^text_output_assertion(out, '[]', Assertion).
 
-	test(lgt_write_term_3_43, true(Assertion)) :-
+	test(lgt_write_term_3_50, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, [])},
 		^^text_output_assertion(out, '[]', Assertion).
 
-	test(lgt_write_term_3_44, true(Assertion)) :-
+	test(lgt_write_term_3_51, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '{}')},
 		^^text_output_assertion(out, '{}', Assertion).
 
-	test(lgt_write_term_3_45, true(Assertion)) :-
+	test(lgt_write_term_3_52, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, {})},
 		^^text_output_assertion(out, '{}', Assertion).
 
 	% the ",", "|", and "." characters require quoting
 
-	test(lgt_write_term_3_46, true(Assertion)) :-
+	test(lgt_write_term_3_53, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, ',')},
 		^^text_output_assertion(out, '\',\'', Assertion).
 
-	test(lgt_write_term_3_47, true(Assertion)) :-
+	test(lgt_write_term_3_54, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '|')},
 		^^text_output_assertion(out, '\'|\'', Assertion).
 
-	test(lgt_write_term_3_48, true(Assertion)) :-
+	test(lgt_write_term_3_55, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '.')},
 		^^text_output_assertion(out, '\'.\'', Assertion).
 
 	% atoms that start with a "_" character require quoting
 
-	test(lgt_write_term_3_49, true(Assertion)) :-
+	test(lgt_write_term_3_56, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '_')},
 		^^text_output_assertion(out, '\'_\'', Assertion).
 
-	test(lgt_write_term_3_50, true(Assertion)) :-
+	test(lgt_write_term_3_57, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '_1')},
 		^^text_output_assertion(out, '\'_1\'', Assertion).
 
-	test(lgt_write_term_3_51, true(Assertion)) :-
+	test(lgt_write_term_3_58, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '_A')},
 		^^text_output_assertion(out, '\'_A\'', Assertion).
 
 	% quoted writing of escape sequences should preserve them
 
-	test(lgt_write_term_3_52, true(Assertion)) :-
+	test(lgt_write_term_3_59, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '\n')},
 		^^text_output_assertion(out, '\'\\n\'', Assertion).
 
-	test(lgt_write_term_3_53, true(Assertion)) :-
+	test(lgt_write_term_3_60, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, '\t')},
 		^^text_output_assertion(out, '\'\\t\'', Assertion).
@@ -290,35 +334,35 @@
 	% space before and after an operator must be preserved
 	% when required to parse the term back
 
-	test(lgt_write_term_3_54, true(Assertion)) :-
+	test(lgt_write_term_3_61, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, a is b)},
 		^^text_output_assertion(out, 'a is b', Assertion).
 
-	test(lgt_write_term_3_55, true(Assertion)) :-
+	test(lgt_write_term_3_62, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, 5 div 3)},
 		^^text_output_assertion(out, '5 div 3', Assertion).
 
-	test(lgt_write_term_3_56, true(Assertion)) :-
+	test(lgt_write_term_3_63, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, 5 mod 3)},
 		^^text_output_assertion(out, '5 mod 3', Assertion).
 
-	test(lgt_write_term_3_57, true(Assertion)) :-
+	test(lgt_write_term_3_64, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{writeq(out, 5 rem 3)},
 		^^text_output_assertion(out, '5 rem 3', Assertion).
 
 	% writing of variables without using numbervars/1 or variable_names/1 options
 
-	test(lgt_write_term_3_58, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_65, true(Chars = ['_', _| _])) :-
 		^^set_text_output(''),
 		A = A,	% avoid singleton warnings
 		{write(A)},
 		^^text_output_contents(Chars).
 
-	test(lgt_write_term_3_59, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_66, true(Chars = ['_', _| _])) :-
 		^^set_text_output(''),
 		A = A,	% avoid singleton warnings
 		{writeq(A)},
@@ -326,81 +370,81 @@
 
 	% writing of compound terms with (,)/2 arguments
 
-	test(lgt_write_term_3_60, true(Assertion)) :-
+	test(lgt_write_term_3_67, true(Assertion)) :-
 		^^set_text_output(''),
 		{write(a((b,c)))},
 		^^text_output_assertion('a((b,c))', Assertion).
 
-	test(lgt_write_term_3_61, true(Assertion)) :-
+	test(lgt_write_term_3_68, true(Assertion)) :-
 		^^set_text_output(''),
 		{write(a(b,(c,d)))},
 		^^text_output_assertion('a(b,(c,d))', Assertion).
 
-	test(lgt_write_term_3_62, true(Assertion)) :-
+	test(lgt_write_term_3_69, true(Assertion)) :-
 		^^set_text_output(''),
 		{write(a((b,c),d))},
 		^^text_output_assertion('a((b,c),d)', Assertion).
 
 	% the default value for the quoted/1, ignore_ops/1, and numbervars/1 options is false
 
-	test(lgt_write_term_3_63, true(Assertion)) :-
+	test(lgt_write_term_3_70, true(Assertion)) :-
 		^^set_text_output(''),
 		{write_term('A', [])},
 		^^text_output_assertion('A', Assertion).
 
-	test(lgt_write_term_3_64, true(Assertion)) :-
+	test(lgt_write_term_3_71, true(Assertion)) :-
 		^^set_text_output(''),
 		{write_term(+1, [])},
 		^^text_output_assertion('+1', Assertion).
 
-	test(lgt_write_term_3_65, true(Assertion)) :-
+	test(lgt_write_term_3_72, true(Assertion)) :-
 		^^set_text_output(''),
 		{write_term('$VAR'(0), [])},
 		^^text_output_assertion('$VAR(0)', Assertion).
 
 	% check detection of invalid options
 
-	test(sics_write_term_3_66, error(instantiation_error)) :-
+	test(sics_write_term_3_73, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(_)])}.
 
-	test(sics_write_term_3_67, error(domain_error(write_option,quoted(fail)))) :-
+	test(sics_write_term_3_74, error(domain_error(write_option,quoted(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(fail)])}.
 
-	test(sics_write_term_3_68, error(instantiation_error)) :-
+	test(sics_write_term_3_75, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(_)])}.
 
-	test(sics_write_term_3_69, error(domain_error(write_option,ignore_ops(fail)))) :-
+	test(sics_write_term_3_76, error(domain_error(write_option,ignore_ops(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(fail)])}.
 
-	test(sics_write_term_3_70, error(instantiation_error)) :-
+	test(sics_write_term_3_77, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(_)])}.
 
-	test(sics_write_term_3_71, error(domain_error(write_option,numbervars(fail)))) :-
+	test(sics_write_term_3_78, error(domain_error(write_option,numbervars(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(fail)])}.
 
-	test(sics_write_term_3_72, error(instantiation_error)) :-
+	test(sics_write_term_3_79, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(_)])}.
 
-	test(sics_write_term_3_73, error(domain_error(write_option,variable_names(a)))) :-
+	test(sics_write_term_3_80, error(domain_error(write_option,variable_names(a)))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(a)])}.
 
-	test(sics_write_term_3_74, error(instantiation_error)) :-
+	test(sics_write_term_3_81, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
-	test(sics_write_term_3_75, error(instantiation_error)) :-
+	test(sics_write_term_3_82, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 
-	test(lgt_write_term_3_76, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
+	test(lgt_write_term_3_83, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|a])])}.
 
