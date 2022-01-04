@@ -125,6 +125,9 @@ the exception term is a cyclic term.
 
 * ADDED: Tests for invalid double-quoted terms that contain layout characters.
 
+* ADDED: Tests for the Prolog `lsb/1` and `msb/1` built-in functions when
+available.
+
 * ADDED: Additional tests for the standard term comparison, `bagof/3`,
 `compare/3`, `copy_term/2`, `findall/3`, `ground/1`, `length/2`,
 `numbervars/3`, `setof/3`, and `subsumes_term/2` predicates with cyclic
