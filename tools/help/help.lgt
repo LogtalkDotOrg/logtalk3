@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:27:0,
+		version is 0:28:0,
 		author is 'Paulo Moura',
-		date is 2020-08-18,
+		date is 2022-01-05,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -39,6 +39,10 @@
 	:- mode(help, one).
 	:- info(help/0, [
 		comment is 'Prints instructions on how to use the help tool.'
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	help :-
@@ -490,21 +494,15 @@
 			fail
 		;	os::environment_variable('COMSPEC', _) ->
 			% assume we're running on Windows
-			atom_concat('cmd /c start "" "file:///%LOGTALKHOME%', Path, Command0),
-			atom_concat(Command0, File, Command1),
-			atom_concat(Command1, '"', Command),
+			atomic_list_concat(['cmd /c start "" "file:///%LOGTALKHOME%', Path, File, '"'], Command),
 			os::shell(Command)
 		;	os::shell('uname -s | grep Darwin 1> /dev/null') ->
 			% assume we're running on macOS
-			atom_concat('open "file://$LOGTALKHOME', Path, Command0),
-			atom_concat(Command0, File, Command1),
-			atom_concat(Command1, '" > /dev/null 2>&1', Command),
+			atomic_list_concat(['open "file://$LOGTALKHOME', Path, File, '" > /dev/null 2>&1'], Command),
 			os::shell(Command)
 		;	os::shell('uname -s | grep Linux 1> /dev/null') ->
 			% assume we're running on Linux
-			atom_concat('xdg-open "file://$LOGTALKHOME', Path, Command0),
-			atom_concat(Command0, File, Command1),
-			atom_concat(Command1, '" > /dev/null 2>&1', Command),
+			atomic_list_concat(['xdg-open "file://$LOGTALKHOME', Path, File, '" > /dev/null 2>&1'], Command),
 			os::shell(Command)
 		;	% we couldn't find which operating-system are we running on
 			write('Unsupported operating-system.'), nl

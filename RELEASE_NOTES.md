@@ -97,6 +97,8 @@ Tools
 * UPDATED: The `diagrams`, `lgtdoc`, and `packs` tools to use the `options`
 library `option/2` predicate.
 
+* UPDATED: The `help` tool to use the `atomic_list_concat/2` predicate.
+
 Ports
 -----
 
