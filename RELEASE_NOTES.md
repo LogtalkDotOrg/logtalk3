@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `clause/3` method support to allow the first two arguments to
+be unbound if the third argument is bound as per the de facto standard.
+
 * ADDED: Support for using object aliases in the message delegation control
 construct.
 

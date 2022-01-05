@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 53, 0, b01)).
+'$lgt_version_data'(logtalk(3, 53, 0, b02)).
 
 
 
@@ -4838,9 +4838,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_clause'(Obj, Head, Body, Ref, Sender, TestScope, ExCtx) :-
 	'$lgt_check'(object_identifier, Obj, logtalk(Obj::clause(Head, Body, Ref), ExCtx)),
-	'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(clause(Head, Body, Ref), ExCtx)),
+	(	var(Ref) ->
+		'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(clause(Head, Body, Ref), ExCtx)),
+		'$lgt_check'(clause_or_partial_clause, (Head:-Body), logtalk(clause(Head, Body, Ref), ExCtx))
+	;	'$lgt_check'(var_or_callable, Head, logtalk(clause(Head, Body, Ref), ExCtx)),
+		'$lgt_check'(var_or_callable, Body, logtalk(clause(Head, Body, Ref), ExCtx))
+	),
 	'$lgt_clause_checked'(Obj, Head, Body, Ref, Sender, TestScope, ExCtx).
 
+
+'$lgt_clause_checked'(Obj, Head, Body, Ref, _, _, _) :-
+	nonvar(Ref),
+	!,
+	clause(THead, TBody, Ref),
+	'$lgt_current_object_'(Obj, _, _, Def, _, _, _, _, DDef, _, _),
+	once((call(DDef, Head, _, THead); call(Def, Head, _, THead))),
+	(	TBody = ('$lgt_nop'(Body), _) ->
+		% rules (compiled both in normal and debug mode)
+		true
+	;	TBody = '$lgt_debug'(fact(_, _, _, _, _), _) ->
+		% facts compiled in debug mode
+		Body = true
+	;	% facts compiled in normal mode
+		TBody = Body
+	).
 
 '$lgt_clause_checked'(Obj, Head, Body, Ref, Sender, _, _) :-
 	'$lgt_db_lookup_cache_'(Obj, Head, Sender, THead, _),

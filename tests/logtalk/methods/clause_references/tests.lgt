@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-12-22,
+		date is 2022-01-05,
 		comment is 'Unit tests for the database built-in methods that take a clause reference argument.'
 	]).
 
@@ -82,9 +82,9 @@
 		test_object::assertz(y(5), _),
 		test_object::clause(y(5), _, Ref).
 
-	test(clause_3_05, error(instantiation_error)) :-
+	test(clause_3_05, true(Head-Body == y(6)-true)) :-
 		test_object::assertz(y(6), Ref),
-		test_object::clause(_, _, Ref).
+		test_object::clause(Head, Body, Ref).
 
 	test(clause_3_06, error(type_error(_, 3.14))) :-
 		test_object::assertz(y(7), _),
