@@ -157,6 +157,12 @@ directive.
 * UPDATED: The tests for the `length/2` predicate to also check the Ciao Prolog
 library definition of the predicate.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Experimental `vscode_message_streamer` category for supporting the
+new version of the Visual Studio Code text editor Logtalk plug-in.
+
 Installers and installation scripts
 -----------------------------------
 
