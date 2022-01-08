@@ -161,7 +161,8 @@ IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
 * ADDED: Experimental `vscode_message_streamer` category for supporting the
-new version of the Visual Studio Code text editor Logtalk plug-in.
+new version of the Visual Studio Code text editor Logtalk plug-in. Contributed
+by Jacob Friedman.
 
 Installers and installation scripts
 -----------------------------------

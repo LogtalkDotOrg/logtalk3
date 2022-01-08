@@ -16048,11 +16048,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_check_for_tautology_or_falsehood_goal'(compile(user,_,_), Goal) :-
-	(	(	'$lgt_candidate_tautology_or_falsehood_goal'(Goal)
+	(	ground(Goal),
+		'$lgt_compiler_flag'(always_true_or_false_goals, warning),
+		(	'$lgt_candidate_tautology_or_falsehood_goal'(Goal)
 		;	'$lgt_candidate_tautology_or_falsehood_goal_hook'(Goal)
-		),
-		ground(Goal),
-		'$lgt_compiler_flag'(always_true_or_false_goals, warning) ->
+		) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		(	call(Goal) ->
