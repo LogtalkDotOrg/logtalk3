@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:24:0,
+		version is 1:25:0,
 		author is 'Paulo Moura',
-		date is 2022-01-04,
+		date is 2022-01-10,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -402,49 +402,106 @@
 		{write_term('$VAR'(0), [])},
 		^^text_output_assertion('$VAR(0)', Assertion).
 
+	% write quote of compound terms whose functor is a prefix operator
+
+	test(lgt_write_term_3_73, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(0))},
+		^^text_output_assertion('- (0)', Assertion).
+
+	test(lgt_write_term_3_74, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(1))},
+		^^text_output_assertion('- (1)', Assertion).
+
+	test(lgt_write_term_3_75, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(+(1))},
+		^^text_output_assertion('+1', Assertion).
+
+	test(lgt_write_term_3_76, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(-1))},
+		^^text_output_assertion('- -1', Assertion).
+
+	test(lgt_write_term_3_77, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(+1))},
+		^^text_output_assertion('- +1', Assertion).
+
+	test(lgt_write_term_3_78, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(+(+1))},
+		^^text_output_assertion('+ +1', Assertion).
+
+	test(lgt_write_term_3_79, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(-1-1))},
+		^^text_output_assertion('- (-1-1)', Assertion).
+
+	test(lgt_write_term_3_80, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(1.0))},
+		^^text_output_assertion('- (1.0)', Assertion).
+
+	test(lgt_write_term_3_81, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(-1.0))},
+		^^text_output_assertion('- -1.0', Assertion).
+
+	test(lgt_write_term_3_82, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(-))},
+		^^text_output_assertion('- (-)', Assertion).
+
+	test(lgt_write_term_3_83, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(-(abc))},
+		^^text_output_assertion('-abc', Assertion).
+
 	% check detection of invalid options
 
-	test(sics_write_term_3_73, error(instantiation_error)) :-
+	test(sics_write_term_3_84, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(_)])}.
 
-	test(sics_write_term_3_74, error(domain_error(write_option,quoted(fail)))) :-
+	test(sics_write_term_3_85, error(domain_error(write_option,quoted(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(fail)])}.
 
-	test(sics_write_term_3_75, error(instantiation_error)) :-
+	test(sics_write_term_3_86, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(_)])}.
 
-	test(sics_write_term_3_76, error(domain_error(write_option,ignore_ops(fail)))) :-
+	test(sics_write_term_3_87, error(domain_error(write_option,ignore_ops(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(fail)])}.
 
-	test(sics_write_term_3_77, error(instantiation_error)) :-
+	test(sics_write_term_3_88, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(_)])}.
 
-	test(sics_write_term_3_78, error(domain_error(write_option,numbervars(fail)))) :-
+	test(sics_write_term_3_89, error(domain_error(write_option,numbervars(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(fail)])}.
 
-	test(sics_write_term_3_79, error(instantiation_error)) :-
+	test(sics_write_term_3_90, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(_)])}.
 
-	test(sics_write_term_3_80, error(domain_error(write_option,variable_names(a)))) :-
+	test(sics_write_term_3_91, error(domain_error(write_option,variable_names(a)))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(a)])}.
 
-	test(sics_write_term_3_81, error(instantiation_error)) :-
+	test(sics_write_term_3_92, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
-	test(sics_write_term_3_82, error(instantiation_error)) :-
+	test(sics_write_term_3_93, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 
-	test(lgt_write_term_3_83, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
+	test(lgt_write_term_3_94, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|a])])}.
 
