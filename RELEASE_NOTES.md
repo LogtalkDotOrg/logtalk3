@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * CHANGED: The `clause/3` method support to allow the first two arguments to
 be unbound if the third argument is bound as per the de facto standard.
 
+* CHANGED: Shorter warning message when a possibly incompatible backend Prolog
+compiler version is detected.
+
 * ADDED: Support for using object aliases in the message delegation control
 construct.
 
