@@ -108,6 +108,8 @@ library `option/2` predicate.
 Ports
 -----
 
+* UPDATED: The `metagol` port to run when using LVM as the backend compiler.
+
 * FIXED: Workaround Metagol port `find_duplicate` example portability issue to
 avoid failures when run on backends that type-check the second argument of the
 `msort/2` predicate.
