@@ -46,7 +46,7 @@ predicates.
 * UPDATED: The GNU Prolog adapter file table of proprietary predicate
 properties.
 
-* UPDATED: The LVM adapter file to require version 2.2.0 or later.
+* UPDATED: The LVM adapter file to require version 3.0.0 or later.
 
 * UPDATED: The SWI-Prolog adapter file tables of proprietary predicate
 properties and candidate tautology and falsehood goals.

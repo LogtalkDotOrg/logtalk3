@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 2.2.0 and later versions
-%  Last updated on December 21, 2021
+%  Adapter file for LVM 3.0.0 and later versions
+%  Last updated on January 11, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -166,6 +166,10 @@
 % table of non-standard database built-in predicates
 
 '$lgt_prolog_database_predicate'(assert(_)).
+'$lgt_prolog_database_predicate'(assert(_, _)).
+'$lgt_prolog_database_predicate'(asserta(_, _)).
+'$lgt_prolog_database_predicate'(assertz(_, _)).
+'$lgt_prolog_database_predicate'(clause(_, _, _)).
 '$lgt_prolog_database_predicate'(listing(_)).
 '$lgt_prolog_database_predicate'(listing(_, _)).
 
@@ -230,7 +234,7 @@
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(2, 2, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(3, 0, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
