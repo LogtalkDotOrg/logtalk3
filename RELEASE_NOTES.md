@@ -108,6 +108,9 @@ library `option/2` predicate.
 Ports
 -----
 
+* CHANGED: The `metagol` port to skip three long running tests when the tests
+are run automated.
+
 * UPDATED: The `metagol` port to run when using LVM as the backend compiler.
 
 * FIXED: Workaround Metagol port `find_duplicate` example portability issue to

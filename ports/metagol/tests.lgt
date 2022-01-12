@@ -39,9 +39,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-12-14,
+		date is 2022-01-12,
 		comment is 'Unit tests for the "metagol" example.'
 	]).
 
@@ -95,7 +95,8 @@
 			]
 		).
 
-	test(metagol_droplasts2_1) :-
+	% time-consuming test only run when the tests are being run manually instead of automatically
+	test(metagol_droplasts2_1, true, [condition(\+ current_object(automation_report))]) :-
 		droplasts2::learn(Clauses), !,
 		^^variant(
 			Clauses,
@@ -212,7 +213,8 @@
 			]
 		).
 
-	test(metagol_kinship1_2) :-
+	% time-consuming test only run when the tests are being run manually instead of automatically
+	test(metagol_kinship1_2, true, [condition(\+ current_object(automation_report))]) :-
 		^^suppress_text_output,
 		kinship1::learn2, !.
 
@@ -268,7 +270,8 @@
 			]
 		).
 
-	test(metagol_robots_2) :-
+	% time-consuming test only run when the tests are being run manually instead of automatically
+	test(metagol_robots_2, true, [condition(\+ current_object(automation_report))]) :-
 		robots::learn2(Clauses), !,
 		^^variant(
 			Clauses,

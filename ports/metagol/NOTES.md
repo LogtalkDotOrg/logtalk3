@@ -34,8 +34,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ________________________________________________________________________
 
 
-To load this port and for sample queries, please see the `SCRIPT.txt`
-file.
+To load this port and for sample queries, please see the `SCRIPT.txt` file.
+To run the tests, load the `tester.lgt` file (there are three lengthy tests
+that only run when the tests are being run manually instead of automatically).
 
 This folder contains a Logtalk port of `metagol`, an inductive logic
 programming (ILP) system based on meta-interpretive learning available
