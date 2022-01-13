@@ -48,9 +48,13 @@ Usage
 
 To use this tool, simply load it and if necessary define the `issue_server`
 Logtalk flag. The possible values for this flag are the atoms `github` (the
-default value) and `gitlab`. Prior to running the tests, the CLI must be
-used to authenticate and login to the server where the bug report issues
-will be created:
+default value) and `gitlab`. The `logtalk_tester` automation script accepts
+a `-b` option for automatically use this tool. For example:
+
+	$ logtalk_tester -p gnu -b github
+
+Prior to running the tests, the CLI must be used to authenticate and login
+to the server where the bug report issues will be created:
 
 - GitHub: `gh auth login`
 - GitLab: `glab auth login`

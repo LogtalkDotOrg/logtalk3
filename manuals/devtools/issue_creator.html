@@ -151,9 +151,14 @@ installation instructions see:</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p>To use this tool, simply load it and if necessary define the
 <code class="docutils literal notranslate"><span class="pre">issue_server</span></code> Logtalk flag. The possible values for this flag are the
-atoms <code class="docutils literal notranslate"><span class="pre">github</span></code> (the default value) and <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>. Prior to running
-the tests, the CLI must be used to authenticate and login to the server
-where the bug report issues will be created:</p>
+atoms <code class="docutils literal notranslate"><span class="pre">github</span></code> (the default value) and <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option for
+automatically use this tool. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -b github
+</pre></div>
+</div>
+<p>Prior to running the tests, the CLI must be used to authenticate and
+login to the server where the bug report issues will be created:</p>
 <ul class="simple">
 <li><p>GitHub: <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span></code></p></li>
 <li><p>GitLab: <code class="docutils literal notranslate"><span class="pre">glab</span> <span class="pre">auth</span> <span class="pre">login</span></code></p></li>
