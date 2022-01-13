@@ -1,0 +1,57 @@
+.. index:: issue_creator
+.. _issue_creator/0:
+
+.. rst-class:: right
+
+**object**
+
+``issue_creator``
+=================
+
+Support for automatically creating issues for failed tests.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2022-01-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
+| **Uses:**
+|    :ref:`os <os/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

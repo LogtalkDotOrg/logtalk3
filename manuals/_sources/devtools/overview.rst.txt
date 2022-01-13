@@ -15,6 +15,7 @@ The following developer tools are available, each one with its own
 -  ``diagrams``
 -  ``doclet``
 -  ``help``
+-  ``issue_creator``
 -  ``lgtdoc``
 -  ``lgtunit``
 -  ``linter``

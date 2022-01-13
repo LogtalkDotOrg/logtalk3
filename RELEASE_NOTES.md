@@ -96,6 +96,12 @@ Tools
 
 * CHANGED: The `packs` tool delete commands on Windows to use the force option.
 
+* ADDED: New experimental tool, `issue_creator`, for automatically creating
+bug report issues for failed tests in GitHub or GitLab servers.
+
+* ADDED: Command-line option to the `logtalk_tester` script to setup and use
+the new `issue_creator` tool.
+
 * IMPROVED: The `packs` tool handling of deleted registries.
 
 * UPDATED: Added `git` command to the requirements list for the `packs` tool.

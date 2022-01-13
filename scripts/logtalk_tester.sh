@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on September 21, 2021
+##   Last updated on January 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 8.0"
+	echo "$(basename "$0") 9.0"
 	exit 0
 }
 
@@ -78,6 +78,7 @@ wipe='false'
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
+issue_creator=""
 url=""
 
 # use GNU sed if available instead of BSD sed
@@ -131,6 +132,9 @@ run_testset() {
 		flag_goal="set_logtalk_flag(suppress_path_prefix,'$prefix')"
 	else
 		flag_goal="true"
+	fi
+	if [ "$issue_server" != "" ] ; then
+		flag_goal="logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'$issue_server'),$flag_goal"
 	fi
 	if [ "$url" != "" ] ; then
 		flag_goal="set_logtalk_flag(tests_base_url,'$url'),$flag_goal"
@@ -309,6 +313,7 @@ usage_help()
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
 	echo "  -s suppress path prefix (default is $prefix)"
+	echo "  -b bug report server (valid values are github and gitlab; no default)"
 	echo "  -u base URL to generate links to test files (no default)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (valid values are none and xml)"
@@ -324,7 +329,7 @@ usage_help()
 	echo
 }
 
-while getopts "vp:o:m:f:d:t:n:s:u:c:l:g:r:i:wh" option
+while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:g:r:i:wh" option
 do
 	case $option in
 		v) print_version;;
@@ -336,6 +341,7 @@ do
 		t) t_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
+		b) b_arg="$OPTARG";;
 		u) u_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
@@ -514,6 +520,10 @@ fi
 
 if [ "$s_arg" != "" ] ; then
 	prefix="$s_arg"
+fi
+
+if [ "$b_arg" != "" ] ; then
+	issue_server="$b_arg"
 fi
 
 if [ "$u_arg" != "" ] ; then

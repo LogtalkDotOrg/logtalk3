@@ -36,6 +36,7 @@ directory in the ``NOTES.md`` file.
    diagrams
    doclet
    help
+   issue_creator
    lgtdoc
    lgtunit
    linter

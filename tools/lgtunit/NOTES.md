@@ -1433,6 +1433,13 @@ In this case, you can use the XSLT parameter `host` to indicate which service
 are you running.
 
 
+Automatically creating bug reports at issue trackers
+----------------------------------------------------
+
+To automatically create bug report issues for failed tests in GitHub or GitLab
+servers, see the `issue_tracker` tool.
+
+
 Minimizing test results output
 ------------------------------
 
