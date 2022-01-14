@@ -31,14 +31,18 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2022-01-13,
+		date is 2022-01-14,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.'
 	]).
 
+	:- uses(git, [
+		commit_hash_abbreviated/2
+	]).
+
 	:- uses(os, [
-		shell/1
+		decompose_file_name/3, shell/1
 	]).
 
 	:- uses(term_io, [
@@ -68,6 +72,8 @@
 		shell(Command).
 
 	command(Object, Test, File, Position, Reason, Note, Time, Command) :-
+		decompose_file_name(File, Directory, _),
+		commit_hash_abbreviated(Directory, Hash),
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(test_unit_name, TestSet)},
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
@@ -77,7 +83,7 @@
 		),
 		title(Test, TestSet, Title),
 		escape_double_quotes(Title, EscapedTitle),
-		description(Object, ShortFile, Position, Reason, Note, Time, Description),
+		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Description),
 		escape_double_quotes(Description, EscapedDescription),
 		issue_server(Server),
 		command(Server, EscapedTitle, EscapedDescription, Command).
@@ -91,7 +97,7 @@
 		to_atom(Test, TestAtom),
 		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed: '], Title).
 
-	description(Object, File, Position, Reason, Note, Time, Description) :-
+	description(Object, File, Position, Reason, Note, Time, Hash, Description) :-
 		to_atom(Object, ObjectAtom),
 		to_atom(Position, PositionAtom),
 		to_atom(Reason, ReasonAtom),
@@ -102,7 +108,8 @@
 			'Test file:   ', File, ':', PositionAtom, '\n', '\n',
 			'Failure:     ', ReasonAtom, '\n', '\n',
 			'Note:        ', NoteAtom,  '\n', '\n',
-			'Time:        ', TimeAtom, '\n'
+			'Time:        ', TimeAtom, '\n',
+			'Commit hash: ', Hash, '\n'
 		], Description).
 
 	issue_server(Server) :-

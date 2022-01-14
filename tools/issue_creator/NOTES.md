@@ -53,8 +53,10 @@ a `-b` option for automatically use this tool. For example:
 
 	$ logtalk_tester -p gnu -b github
 
-Prior to running the tests, the CLI must be used to authenticate and login
-to the server where the bug report issues will be created:
+In this case, the script must be called from a git repo directory or one of
+its sub-directories. Moreover, prior to running the tests, the CLI must be
+used to authenticate and login to the server where the bug report issues will
+be created:
 
 - GitHub: `gh auth login`
 - GitLab: `glab auth login`
@@ -65,5 +67,5 @@ See the CLIs documentation for details.
 Known issues
 ------------
 
-This tool is in an early stage of development and changes are thus to be
-expected. Your feedback is most appreciated.
+This tool is in an early stage of development and changes are to be expected.
+Your feedback is most appreciated.

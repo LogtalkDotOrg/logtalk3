@@ -8,11 +8,11 @@
 ``issue_creator``
 =================
 
-Support for automatically creating issues for failed tests.
+Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2022-01-13
+| **Version:** 0:2:0
+| **Date:** 2022-01-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -21,6 +21,7 @@ Support for automatically creating issues for failed tests.
 | **Provides:**
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
+|    :ref:`git <git/0>`
 |    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
 |    :ref:`user <user/0>`
