@@ -35,7 +35,7 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2022-01-14,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.'
@@ -96,9 +96,9 @@
 		command(Server, EscapedTitle, EscapedDescription, Command).
 
 	command(github, Title, Description, Command) :-
-		atomic_list_concat(['gh issue create --title "', Title, '" --body "', Description, '"'], Command).
+		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\''], Command).
 	command(gitlab, Title, Description, Command) :-
-		atomic_list_concat(['glab issue create --title "', Title, '" --description "', Description, '"'], Command).
+		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\''], Command).
 
 	title(Test, TestSet, Title) :-
 		to_atom(Test, TestAtom),
@@ -121,7 +121,7 @@
 		),
 		to_atom(Time, TimeAtom),
 		writeq(atomic_list_concat([
-			'Test object: \\`', ObjectAtom, '\\`\n',
+			'Test object: `', ObjectAtom, '`\n',
 			'Test file: ',  URL, '\n\n',
 			'Failure:\n',     ReasonAtom, '\n\n',
 			'Note: ',  NoteAtom,  '\n\n',
@@ -129,7 +129,7 @@
 			'Commit hash: ',  Hash, '\n'
 		], Description)), nl,
 		atomic_list_concat([
-			'Test object: \\`', ObjectAtom, '\\`\n',
+			'Test object: `', ObjectAtom, '`\n',
 			'Test file: ',  URL, '\n\n',
 			'Failure:\n',     ReasonAtom, '\n\n',
 			'Note: ',  NoteAtom,  '\n\n',
@@ -166,52 +166,52 @@
 		atom_chars(EscapedAtom, EscapedChars).
 
 	escape_double_quotes_in_chars([], []).
-	escape_double_quotes_in_chars(['"'| Chars], ['\\', '"'| EscapedChars]) :-
+	escape_double_quotes_in_chars(['\''| Chars], ['\'', '\\', '\'', '\''| EscapedChars]) :-
 		!,
 		escape_double_quotes_in_chars(Chars, EscapedChars).
 	escape_double_quotes_in_chars([Char| Chars], [Char| EscapedChars]) :-
 		escape_double_quotes_in_chars(Chars, EscapedChars).
 
-	failure_reason_to_atom(success_instead_of_failure, '\ttest goal succeeded but should have failed').
+	failure_reason_to_atom(success_instead_of_failure, '&emsp;test goal succeeded but should have failed').
 	failure_reason_to_atom(success_instead_of_error(ExpectedError), ReasonAtom) :-
 		to_atom(ExpectedError, ExpectedErrorAtom),
-		atomic_list_concat(['\ttest goal succeeded but should have thrown an error:\n', '\t\texpected \\`', ExpectedErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal succeeded but should have thrown an error:\n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`'], ReasonAtom).
 
-	failure_reason_to_atom(failure_instead_of_success, '\ttest goal failed but should have succeeded').
+	failure_reason_to_atom(failure_instead_of_success, '&emsp;test goal failed but should have succeeded').
 	failure_reason_to_atom(failure_instead_of_error(ExpectedError), ReasonAtom) :-
 		to_atom(ExpectedError, ExpectedErrorAtom),
-		atomic_list_concat(['\ttest goal failed but should have thrown an error:\n', '\t\texpected \\`', ExpectedErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal failed but should have thrown an error:\n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`'], ReasonAtom).
 
-	failure_reason_to_atom(non_deterministic_success, '\ttest goal succeeded non-deterministically').
+	failure_reason_to_atom(non_deterministic_success, '&emsp;test goal succeeded non-deterministically').
 
 	failure_reason_to_atom(error_instead_of_failure(Error), ReasonAtom) :-
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['\ttest goal throws an error but should have failed: \\`', ErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal throws an error but should have failed: `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, error(Error,_))), ReasonAtom) :-
 		failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, Error)), ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, Error)), ReasonAtom) :-
 		to_atom(Assertion, AssertionAtom),
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['\ttest assertion throws an error: \\`', AssertionAtom, '\\` - \\`', ErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test assertion throws an error: `', AssertionAtom, '` - `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(assertion_failure(Assertion)), ReasonAtom) :-
 		to_atom(Assertion, AssertionAtom),
-		atomic_list_concat(['\ttest assertion failed: \\`', AssertionAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test assertion failed: `', AssertionAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(error_instead_of_success(Error), ReasonAtom) :-
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['\ttest goal throws an error but should have succeeded: \\`', ErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal throws an error but should have succeeded: `', ErrorAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(wrong_error(ExpectedError, Error), ReasonAtom) :-
 		to_atom(ExpectedError, ExpectedErrorAtom),
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['\ttest goal throws the wrong error:\n', '\t\texpected \\`', ExpectedErrorAtom, '\\`\n\t\tbut got \\`', ErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal throws the wrong error:\n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`\n&emsp;&emsp;but got `', ErrorAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(quick_check_failed(Goal, Test, Shrinks, Seed), ReasonAtom) :-
 		to_atom(Goal, GoalAtom),
 		to_atom(Test, TestAtom),
 		to_atom(Seed, SeedAtom),
 		(	Shrinks == 1 ->
-			atomic_list_concat(['\tquick check test failure (at test \\`', TestAtom, '\\` after ', Shrinks, ' shrink with starting seed \\`', SeedAtom, '\\`): \\`', GoalAtom], ReasonAtom)
-		;	atomic_list_concat(['\tquick check test failure (at test \\`', TestAtom, '\\` after ', Shrinks, ' shrinks with starting seed \\`', SeedAtom, '\\`): \\`', GoalAtom], ReasonAtom)
+			atomic_list_concat(['&emsp;quick check test failure (at test `', TestAtom, '` after ', Shrinks, ' shrink with starting seed `', SeedAtom, '`): `', GoalAtom], ReasonAtom)
+		;	atomic_list_concat(['&emsp;quick check test failure (at test `', TestAtom, '` after ', Shrinks, ' shrinks with starting seed `', SeedAtom, '`): `', GoalAtom], ReasonAtom)
 		).
 
 	failure_reason_to_atom(quick_check_error(error(Error,_), Goal, Test, Seed), ReasonAtom) :-
@@ -220,16 +220,16 @@
 		to_atom(Test, TestAtom),
 		to_atom(Seed, SeedAtom),
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['\tquick check test error (at test \\`', TestAtom, '\\` with starting seed \\`', SeedAtom, '\\`): \\`', ErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;quick check test error (at test `', TestAtom, '` with starting seed `', SeedAtom, '`): `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(quick_check_error(Error, Culprit), ReasonAtom) :-
 		to_atom(Error, ErrorAtom),
 		to_atom(Culprit, CulpritAtom),
-		atomic_list_concat(['\tquick check test error (caused by ', ErrorAtom, '): \\`', CulpritAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;quick check test error (caused by ', ErrorAtom, '): `', CulpritAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(step_error(Step, Error), ReasonAtom) :-
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['\t', Step, ' goal throws an error but should have succeeded: \\`', ErrorAtom, '\\`'], ReasonAtom).
+		atomic_list_concat(['&emsp;', Step, ' goal throws an error but should have succeeded: `', ErrorAtom, '`'], ReasonAtom).
 	failure_reason_to_atom(step_failure(Step), ReasonAtom) :-
-		atomic_list_concat(['\t', Step, ' goal failed but should have succeeded'], ReasonAtom).
+		atomic_list_concat(['&emsp;', Step, ' goal failed but should have succeeded'], ReasonAtom).
 
 :- end_object.
