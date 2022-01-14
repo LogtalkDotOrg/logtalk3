@@ -19,19 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% define a flag to allow the logtalk_tester script to pass the
-% option to suppress the test file and directory path prefix
 :- initialization((
+	% define a flag to allow the logtalk_tester script to pass the
+	% option to supress the test file and directory path prefix
 	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
-	create_logtalk_flag(test_unit_name, '', [type(atom), keep(true)]),
-	create_logtalk_flag(issue_server, '', [type(atom), keep(true)])
+	% define a flag to allow the logtalk_tester script to pass the type of
+	% server used for issue tracker where the bug reports will be created
+	create_logtalk_flag(issue_server, '', [type(atom), keep(true)]),
+	% define a flag to allow the logtalk_tester script to pass the
+	% base URL for generating links to test files
+	create_logtalk_flag(tests_base_url, '', [type(atom), keep(true)])
 )).
 
 
 :- object(issue_creator).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2022-01-14,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.'
@@ -46,7 +50,7 @@
 	]).
 
 	:- uses(term_io, [
-		write_to_atom/2
+		write_term_to_atom/3
 	]).
 
 	:- uses(user, [
@@ -75,13 +79,16 @@
 		decompose_file_name(File, Directory, _),
 		commit_hash_abbreviated(Directory, Hash),
 		% bypass the compiler as the flags are only created after loading this file
-		{current_logtalk_flag(test_unit_name, TestSet)},
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
-		(	atom_concat(Prefix, Suffix, File) ->
-			ShortFile = Suffix
+		(	atom_concat(Prefix, ShortFile, File) ->
+			true
 		;	ShortFile = File
 		),
-		title(Test, TestSet, Title),
+		(	atom_concat(Prefix, ShortDirectory, Directory) ->
+			true
+		;	ShortDirectory = Directory
+		),
+		title(Test, ShortDirectory, Title),
 		escape_double_quotes(Title, EscapedTitle),
 		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Description),
 		escape_double_quotes(Description, EscapedDescription),
@@ -95,27 +102,52 @@
 
 	title(Test, TestSet, Title) :-
 		to_atom(Test, TestAtom),
-		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed: '], Title).
+		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed'], Title).
 
 	description(Object, File, Position, Reason, Note, Time, Hash, Description) :-
 		to_atom(Object, ObjectAtom),
-		to_atom(Position, PositionAtom),
-		to_atom(Reason, ReasonAtom),
-		to_atom(Note, NoteAtom),
+		(	tests_url(File, Position, URL) ->
+			true
+		;	to_atom(Position, PositionAtom),
+			atomic_list_concat([File, ':', PositionAtom], URL)
+		),
+		(	failure_reason_to_atom(Reason, ReasonAtom) ->
+			true
+		;	to_atom(Reason, ReasonAtom)
+		),
+		(	Note == '' ->
+			NoteAtom = '(none)'
+		;	to_atom(Note, NoteAtom)
+		),
 		to_atom(Time, TimeAtom),
+		writeq(atomic_list_concat([
+			'Test object: \\`', ObjectAtom, '\\`\n',
+			'Test file: ',  URL, '\n\n',
+			'Failure:\n',     ReasonAtom, '\n\n',
+			'Note: ',  NoteAtom,  '\n\n',
+			'Time: ',  TimeAtom, ' seconds\n',
+			'Commit hash: ',  Hash, '\n'
+		], Description)), nl,
 		atomic_list_concat([
-			'Test object: ', ObjectAtom, '\n',
-			'Test file:   ', File, ':', PositionAtom, '\n', '\n',
-			'Failure:     ', ReasonAtom, '\n', '\n',
-			'Note:        ', NoteAtom,  '\n', '\n',
-			'Time:        ', TimeAtom, '\n',
-			'Commit hash: ', Hash, '\n'
+			'Test object: \\`', ObjectAtom, '\\`\n',
+			'Test file: ',  URL, '\n\n',
+			'Failure:\n',     ReasonAtom, '\n\n',
+			'Note: ',  NoteAtom,  '\n\n',
+			'Time: ',  TimeAtom, ' seconds\n',
+			'Commit hash: ',  Hash, '\n'
 		], Description).
 
 	issue_server(Server) :-
 		% bypass the compiler as the flag is only created after loading this file
 		{current_logtalk_flag(issue_server, Server0)},
 		server(Server0, Server).
+
+	tests_url(Short, Position, URL) :-
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(tests_base_url, BaseURL)},
+		BaseURL \== '',
+		Position = Line-_,
+		atomic_list_concat([BaseURL, Short, '#L', Line], URL).
 
 	server('',     github).  % default
 	server(github, github).
@@ -124,7 +156,8 @@
 	to_atom(Term, Atom) :-
 		(	atom(Term) ->
 			Atom = Term
-		;	write_to_atom(Term, Atom)
+		;	numbervars(Term, 0, _),
+			write_term_to_atom(Term, Atom, [numbervars(true), quoted(true)])
 		).
 
 	escape_double_quotes(Atom, EscapedAtom) :-
@@ -138,5 +171,65 @@
 		escape_double_quotes_in_chars(Chars, EscapedChars).
 	escape_double_quotes_in_chars([Char| Chars], [Char| EscapedChars]) :-
 		escape_double_quotes_in_chars(Chars, EscapedChars).
+
+	failure_reason_to_atom(success_instead_of_failure, '\ttest goal succeeded but should have failed').
+	failure_reason_to_atom(success_instead_of_error(ExpectedError), ReasonAtom) :-
+		to_atom(ExpectedError, ExpectedErrorAtom),
+		atomic_list_concat(['\ttest goal succeeded but should have thrown an error:\n', '\t\texpected \\`', ExpectedErrorAtom, '\\`'], ReasonAtom).
+
+	failure_reason_to_atom(failure_instead_of_success, '\ttest goal failed but should have succeeded').
+	failure_reason_to_atom(failure_instead_of_error(ExpectedError), ReasonAtom) :-
+		to_atom(ExpectedError, ExpectedErrorAtom),
+		atomic_list_concat(['\ttest goal failed but should have thrown an error:\n', '\t\texpected \\`', ExpectedErrorAtom, '\\`'], ReasonAtom).
+
+	failure_reason_to_atom(non_deterministic_success, '\ttest goal succeeded non-deterministically').
+
+	failure_reason_to_atom(error_instead_of_failure(Error), ReasonAtom) :-
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['\ttest goal throws an error but should have failed: \\`', ErrorAtom, '\\`'], ReasonAtom).
+	failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, error(Error,_))), ReasonAtom) :-
+		failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, Error)), ReasonAtom).
+	failure_reason_to_atom(error_instead_of_success(assertion_error(Assertion, Error)), ReasonAtom) :-
+		to_atom(Assertion, AssertionAtom),
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['\ttest assertion throws an error: \\`', AssertionAtom, '\\` - \\`', ErrorAtom, '\\`'], ReasonAtom).
+	failure_reason_to_atom(error_instead_of_success(assertion_failure(Assertion)), ReasonAtom) :-
+		to_atom(Assertion, AssertionAtom),
+		atomic_list_concat(['\ttest assertion failed: \\`', AssertionAtom, '\\`'], ReasonAtom).
+	failure_reason_to_atom(error_instead_of_success(Error), ReasonAtom) :-
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['\ttest goal throws an error but should have succeeded: \\`', ErrorAtom, '\\`'], ReasonAtom).
+
+	failure_reason_to_atom(wrong_error(ExpectedError, Error), ReasonAtom) :-
+		to_atom(ExpectedError, ExpectedErrorAtom),
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['\ttest goal throws the wrong error:\n', '\t\texpected \\`', ExpectedErrorAtom, '\\`\n\t\tbut got \\`', ErrorAtom, '\\`'], ReasonAtom).
+
+	failure_reason_to_atom(quick_check_failed(Goal, Test, Shrinks, Seed), ReasonAtom) :-
+		to_atom(Goal, GoalAtom),
+		to_atom(Test, TestAtom),
+		to_atom(Seed, SeedAtom),
+		(	Shrinks == 1 ->
+			atomic_list_concat(['\tquick check test failure (at test \\`', TestAtom, '\\` after ', Shrinks, ' shrink with starting seed \\`', SeedAtom, '\\`): \\`', GoalAtom], ReasonAtom)
+		;	atomic_list_concat(['\tquick check test failure (at test \\`', TestAtom, '\\` after ', Shrinks, ' shrinks with starting seed \\`', SeedAtom, '\\`): \\`', GoalAtom], ReasonAtom)
+		).
+
+	failure_reason_to_atom(quick_check_error(error(Error,_), Goal, Test, Seed), ReasonAtom) :-
+		failure_reason_to_atom(quick_check_error(Error, Goal, Test, Seed), ReasonAtom).
+	failure_reason_to_atom(quick_check_error(Error, _Goal, Test, Seed), ReasonAtom) :-
+		to_atom(Test, TestAtom),
+		to_atom(Seed, SeedAtom),
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['\tquick check test error (at test \\`', TestAtom, '\\` with starting seed \\`', SeedAtom, '\\`): \\`', ErrorAtom, '\\`'], ReasonAtom).
+	failure_reason_to_atom(quick_check_error(Error, Culprit), ReasonAtom) :-
+		to_atom(Error, ErrorAtom),
+		to_atom(Culprit, CulpritAtom),
+		atomic_list_concat(['\tquick check test error (caused by ', ErrorAtom, '): \\`', CulpritAtom, '\\`'], ReasonAtom).
+
+	failure_reason_to_atom(step_error(Step, Error), ReasonAtom) :-
+		to_atom(Error, ErrorAtom),
+		atomic_list_concat(['\t', Step, ' goal throws an error but should have succeeded: \\`', ErrorAtom, '\\`'], ReasonAtom).
+	failure_reason_to_atom(step_failure(Step), ReasonAtom) :-
+		atomic_list_concat(['\t', Step, ' goal failed but should have succeeded'], ReasonAtom).
 
 :- end_object.

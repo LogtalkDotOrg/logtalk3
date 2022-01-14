@@ -19,12 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% define a flag to allow the logtalk_tester script to pass the
-% option to suppress the test file and directory path prefix
 :- initialization((
-	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
 	create_logtalk_flag(test_results_directory, './', [type(atom), keep(true)]),
-	create_logtalk_flag(test_unit_name, '', [type(atom), keep(true)])
+	create_logtalk_flag(test_unit_name, '', [type(atom), keep(true)]),
+	% define a flag to allow the logtalk_tester script to pass the
+	% option to suppress the test file and directory path prefix
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
+	% define a flag to allow the logtalk_tester script to pass the
+	% base URL for generating links to test files
+	create_logtalk_flag(tests_base_url, '', [type(atom), keep(true)])
 )).
 
 
