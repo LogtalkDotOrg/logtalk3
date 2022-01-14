@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(git, [
-		commit_hash_abbreviated/2
+		commit_hash_abbreviated/2, commit_author/2, commit_date/2
 	]).
 
 	:- uses(os, [
@@ -78,6 +78,8 @@
 	command(Object, Test, File, Position, Reason, Note, Time, Command) :-
 		decompose_file_name(File, Directory, _),
 		commit_hash_abbreviated(Directory, Hash),
+		commit_author(Directory, Author),
+		commit_date(Directory, Date),
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
 		(	atom_concat(Prefix, ShortFile, File) ->
@@ -90,7 +92,7 @@
 		),
 		title(Test, ShortDirectory, Title),
 		escape_double_quotes(Title, EscapedTitle),
-		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Description),
+		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Description),
 		escape_double_quotes(Description, EscapedDescription),
 		issue_server(Server),
 		command(Server, EscapedTitle, EscapedDescription, Command).
@@ -104,7 +106,7 @@
 		to_atom(Test, TestAtom),
 		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed'], Title).
 
-	description(Object, File, Position, Reason, Note, Time, Hash, Description) :-
+	description(Object, File, Position, Reason, Note, Time, Hash, Author, Date, Description) :-
 		to_atom(Object, ObjectAtom),
 		(	tests_url(File, Position, URL) ->
 			true
@@ -120,21 +122,17 @@
 		;	to_atom(Note, NoteAtom)
 		),
 		to_atom(Time, TimeAtom),
-		writeq(atomic_list_concat([
-			'Test object: `', ObjectAtom, '`\n',
-			'Test file: ',  URL, '\n\n',
-			'Failure:\n',     ReasonAtom, '\n\n',
-			'Note: ',  NoteAtom,  '\n\n',
-			'Time: ',  TimeAtom, ' seconds\n',
-			'Commit hash: ',  Hash, '\n'
-		], Description)), nl,
+		to_atom(Author, AuthorAtom),
+		to_atom(Date, DateAtom),
 		atomic_list_concat([
 			'Test object: `', ObjectAtom, '`\n',
 			'Test file: ',  URL, '\n\n',
 			'Failure:\n',     ReasonAtom, '\n\n',
 			'Note: ',  NoteAtom,  '\n\n',
-			'Time: ',  TimeAtom, ' seconds\n',
-			'Commit hash: ',  Hash, '\n'
+			'Time: ',  TimeAtom, ' seconds\n\n',
+			'Commit hash: ',  Hash, '\n',
+			'Commit author: ',  AuthorAtom, '\n',
+			'Commit date: ',  DateAtom, '\n'
 		], Description).
 
 	issue_server(Server) :-
