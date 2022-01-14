@@ -72,6 +72,8 @@ Documentation
 
 * IMPROVED: Documentation of the `options` library.
 
+* IMPROVED: Documentation of the `logtalk_tester` automation script.
+
 Library
 -------
 

@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "January 13, 2022" "Logtalk 3.53.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "January 14, 2022" "Logtalk 3.53.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -59,10 +59,10 @@ Name of the tests driver and sourced files (minus file name extensions). Default
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.
 .TP
 .BI \-b
-Bug report server. Valid values are \fIgithub\fR and \fIgitlab\fR. (no default). Use of this option requires the script to be called from a git repo directory or from one its sub-directories.
+Bug report server. Valid values are \fIgithub\fR and \fIgitlab\fR. (no default). Use of this option requires the script to be called from a git repo directory or from one its sub-directories and the use of the \fI-s\fR and \fI-u\fR options.
 .TP
 .BI \-u
-Base URL for generating links to test files (no default).
+Base URL for generating links to test files (no default). Must end with a slash and usually includes a git hash so that the link remanis valid if the test files are later updated.
 .TP
 .BI \-c
 Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fInone\fR.
@@ -131,7 +131,7 @@ Run all tests on the current directory and sub-directories using the Tau Prolog 
 .PP
 .TP
 Run the Logtalk distribution tests using the Trealla Prolog backend, passing a base URL that can be used for creating links to the test files:
-\fBlogtalk_tester -p trealla -f xunit_net_v2 -s "$HOME/logtalk/" -u https://github.com/LogtalkDotOrg/logtalk3/tree/master/\fR
+\fBlogtalk_tester -p trealla -f xunit_net_v2 -s "$HOME/logtalk/" -u https://github.com/LogtalkDotOrg/logtalk3/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/\fR
 .PP
 .TP
 Run all tests on the current directory and sub-directories using the YAP backend with its disable signal handling option:
