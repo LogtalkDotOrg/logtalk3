@@ -35,14 +35,15 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2022-01-14,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.'
 	]).
 
 	:- uses(git, [
-		commit_hash_abbreviated/2, commit_author/2, commit_date/2
+		commit_hash_abbreviated/2, commit_author/2,
+		commit_date/2, commit_message/2, commit_log/3
 	]).
 
 	:- uses(os, [
@@ -80,6 +81,8 @@
 		commit_hash_abbreviated(Directory, Hash),
 		commit_author(Directory, Author),
 		commit_date(Directory, Date),
+		commit_message(Directory, Message),
+		commit_log(Directory, '%aL', Assignee),
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
 		(	atom_concat(Prefix, ShortFile, File) ->
@@ -92,21 +95,21 @@
 		),
 		title(Test, ShortDirectory, Title),
 		escape_double_quotes(Title, EscapedTitle),
-		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Description),
+		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Message, Description),
 		escape_double_quotes(Description, EscapedDescription),
 		issue_server(Server),
-		command(Server, EscapedTitle, EscapedDescription, Command).
+		command(Server, EscapedTitle, EscapedDescription, Assignee, Command).
 
-	command(github, Title, Description, Command) :-
-		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\''], Command).
-	command(gitlab, Title, Description, Command) :-
-		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\''], Command).
+	command(github, Title, Description, Assignee, Command) :-
+		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label bug --assignee ', Assignee], Command).
+	command(gitlab, Title, Description, Assignee, Command) :-
+		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label bug --assignee ', Assignee], Command).
 
 	title(Test, TestSet, Title) :-
 		to_atom(Test, TestAtom),
 		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed'], Title).
 
-	description(Object, File, Position, Reason, Note, Time, Hash, Author, Date, Description) :-
+	description(Object, File, Position, Reason, Note, Time, Hash, Author, Date, Message, Description) :-
 		to_atom(Object, ObjectAtom),
 		(	tests_url(File, Position, URL) ->
 			true
@@ -124,6 +127,7 @@
 		to_atom(Time, TimeAtom),
 		to_atom(Author, AuthorAtom),
 		to_atom(Date, DateAtom),
+		to_atom(Message, MessageAtom),
 		atomic_list_concat([
 			'Test object: `', ObjectAtom, '`\n',
 			'Test file: ',  URL, '\n\n',
@@ -132,7 +136,8 @@
 			'Time: ',  TimeAtom, ' seconds\n\n',
 			'Commit hash: ',  Hash, '\n',
 			'Commit author: ',  AuthorAtom, '\n',
-			'Commit date: ',  DateAtom, '\n'
+			'Commit date: ',  DateAtom, '\n',
+			'Commit message:\n&emsp;',  MessageAtom, '\n'
 		], Description).
 
 	issue_server(Server) :-
