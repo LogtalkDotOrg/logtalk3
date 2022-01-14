@@ -153,19 +153,28 @@ installation instructions see:</p>
 <code class="docutils literal notranslate"><span class="pre">issue_server</span></code> Logtalk flag. The possible values for this flag are the
 atoms <code class="docutils literal notranslate"><span class="pre">github</span></code> (the default value) and <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>. The
 <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option for
-automatically use this tool. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -b github
+automatically use this tool (see the script man page for details). For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester \
+    -p gnu \
+    -b github \
+    -s &quot;/home/jdoe/foo/&quot; \
+    -u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
 </pre></div>
 </div>
-<p>In this case, the script must be called from a git repo directory or one
-of its sub-directories. Moreover, prior to running the tests, the CLI
-must be used to authenticate and login to the server where the bug
-report issues will be created:</p>
+<p>In this case, the script <strong>must</strong> be called from a git repo directory or
+one of its sub-directories, which is a common setup in CI/CD pipelines.
+Moreover, prior to running the tests, the CLI must be used to
+authenticate and login to the server where the bug report issues will be
+created:</p>
 <ul class="simple">
 <li><p>GitHub: <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span></code></p></li>
 <li><p>GitLab: <code class="docutils literal notranslate"><span class="pre">glab</span> <span class="pre">auth</span> <span class="pre">login</span></code></p></li>
 </ul>
-<p>See the CLIs documentation for details.</p>
+<p>See the CLIs documentation for details. Typically, the <code class="docutils literal notranslate"><span class="pre">auth</span></code> command
+is called from the CI/CD pipeline definition scripts.</p>
+<p>The bug reports are created using the label <code class="docutils literal notranslate"><span class="pre">bug</span></code> and assigned to the
+author of the latest commit of the git repo.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>

@@ -49,19 +49,28 @@ Usage
 To use this tool, simply load it and if necessary define the `issue_server`
 Logtalk flag. The possible values for this flag are the atoms `github` (the
 default value) and `gitlab`. The `logtalk_tester` automation script accepts
-a `-b` option for automatically use this tool. For example:
+a `-b` option for automatically use this tool (see the script man page for
+details). For example:
 
-	$ logtalk_tester -p gnu -b github
+	$ logtalk_tester \
+		-p gnu \
+		-b github \
+		-s "/home/jdoe/foo/" \
+		-u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
 
-In this case, the script must be called from a git repo directory or one of
-its sub-directories. Moreover, prior to running the tests, the CLI must be
-used to authenticate and login to the server where the bug report issues will
-be created:
+In this case, the script **must** be called from a git repo directory or one
+of its sub-directories, which is a common setup in CI/CD pipelines. Moreover,
+prior to running the tests, the CLI must be used to authenticate and login to
+the server where the bug report issues will be created:
 
 - GitHub: `gh auth login`
 - GitLab: `glab auth login`
 
-See the CLIs documentation for details.
+See the CLIs documentation for details. Typically, the `auth` command is
+called from the CI/CD pipeline definition scripts.
+
+The bug reports are created using the label `bug` and assigned to the author
+of the latest commit of the git repo.
 
 
 Known issues
