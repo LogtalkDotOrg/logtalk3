@@ -23,15 +23,15 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2021-07-23,
+		date is 2022-01-14,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
 	:- uses(os, [
-		change_directory/1, delete_file/1, internal_os_path/2,
-		path_concat/3, pid/1, temporary_directory/1, shell/1
+		delete_file/1, internal_os_path/2, path_concat/3,
+		pid/1, temporary_directory/1, shell/1
 	]).
 
 	:- if(os::operating_system_type(windows)).

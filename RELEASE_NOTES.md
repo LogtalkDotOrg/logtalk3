@@ -93,6 +93,8 @@ version.
 
 * FIXED: The `timeout` library for the YAP backend.
 
+* FIXED: Deleted unused predicate in the `git` library.
+
 Tools
 -----
 
