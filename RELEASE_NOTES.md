@@ -113,6 +113,8 @@ library `option/2` predicate.
 
 * UPDATED: The `help` tool to use the `atomic_list_concat/2` predicate.
 
+* FIXED: The `lgtunit` tool error message for a failed test step.
+
 Ports
 -----
 

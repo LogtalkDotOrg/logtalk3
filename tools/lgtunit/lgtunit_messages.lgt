@@ -22,9 +22,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 5:1:0,
+		version is 5:1:1,
 		author is 'Paulo Moura',
-		date is 2021-07-07,
+		date is 2022-01-14,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -307,7 +307,7 @@
 	failed_test_reason(step_error(Step, Error)) -->
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
 	failed_test_reason(step_failure(Step)) -->
-		['  ~w goal failed but should have succeeded: ~q'-[Step], nl].
+		['  ~w goal failed but should have succeeded'-[Step], nl].
 
 	failed_cleanup_reason(error(Error), _Object, Test) -->
 		['  test ~q cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
