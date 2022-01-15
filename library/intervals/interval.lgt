@@ -23,9 +23,9 @@
 	implements(intervalp)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2019-05-21,
+		date is 2022-01-15,
 		comment is 'Basic temporal interval relations. An interval is represented by a compound term, ``i/2``, with two ground arguments, the start and end points.'
 	]).
 
@@ -91,7 +91,7 @@
 		started_by/2 as    si/2,
 		during/2 as        d/2,
 		contains/2 as      di/2,
-		contains/2 as      f/2,
+		finishes/2 as      f/2,
 		finished_by/2 as   fi/2,
 		equal/2 as         eq/2
 	]).
@@ -127,7 +127,7 @@
 		contains(Interval1, Interval2).
 
 	f(Interval1, Interval2) :-
-		contains(Interval1, Interval2).
+		finishes(Interval1, Interval2).
 
 	fi(Interval1, Interval2) :-
 		finished_by(Interval1, Interval2).

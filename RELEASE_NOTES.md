@@ -95,6 +95,8 @@ version.
 
 * FIXED: Deleted unused predicate in the `git` library.
 
+* FIXED: The `intervals` library `f/2` shortcut for the `finishes/2` predicate.
+
 Tools
 -----
 

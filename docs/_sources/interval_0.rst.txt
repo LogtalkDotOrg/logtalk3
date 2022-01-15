@@ -11,8 +11,8 @@
 Basic temporal interval relations. An interval is represented by a compound term, ``i/2``, with two ground arguments, the start and end points.
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2019-05-21
+| **Version:** 1:2:1
+| **Date:** 2022-01-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,7 +31,7 @@ Basic temporal interval relations. An interval is represented by a compound term
 |    ``intervalp`` ``started_by/2`` as ``si/2``
 |    ``intervalp`` ``during/2`` as ``d/2``
 |    ``intervalp`` ``contains/2`` as ``di/2``
-|    ``intervalp`` ``contains/2`` as ``f/2``
+|    ``intervalp`` ``finishes/2`` as ``f/2``
 |    ``intervalp`` ``finished_by/2`` as ``fi/2``
 |    ``intervalp`` ``equal/2`` as ``eq/2``
 
