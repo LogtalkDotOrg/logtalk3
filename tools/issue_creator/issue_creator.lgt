@@ -24,8 +24,10 @@
 	% option to supress the test file and directory path prefix
 	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
 	% define a flag to allow the logtalk_tester script to pass the type of
-	% server used for issue tracker where the bug reports will be created
+	% server hosting the issue tracker where the bug reports will be created
 	create_logtalk_flag(issue_server, '', [type(atom), keep(true)]),
+	% define a flag to allow the user to define the bug reports label(s)
+	create_logtalk_flag(issue_labels, bug, [type(atom), keep(true)]),
 	% define a flag to allow the logtalk_tester script to pass the
 	% base URL for generating links to test files
 	create_logtalk_flag(tests_base_url, '', [type(atom), keep(true)])
@@ -35,9 +37,9 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2022-01-14,
+		date is 2022-01-15,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.'
 	]).
 
@@ -98,12 +100,15 @@
 		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Message, Description),
 		escape_double_quotes(Description, EscapedDescription),
 		issue_server(Server),
-		command(Server, EscapedTitle, EscapedDescription, Assignee, Command).
+		% bypass the compiler as the flags are only created after loading this file
+		{current_logtalk_flag(issue_labels, Labels)},
+		command(Server, EscapedTitle, EscapedDescription, Labels, Assignee, Command),
+		writeq(Command), nl.
 
-	command(github, Title, Description, Assignee, Command) :-
-		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label bug --assignee ', Assignee], Command).
-	command(gitlab, Title, Description, Assignee, Command) :-
-		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label bug --assignee ', Assignee], Command).
+	command(github, Title, Description, Labels, Assignee, Command) :-
+		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label ', Labels, ' --assignee ', Assignee], Command).
+	command(gitlab, Title, Description, Labels, Assignee, Command) :-
+		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label ', Labels, ' --assignee ', Assignee], Command).
 
 	title(Test, TestSet, Title) :-
 		to_atom(Test, TestAtom),

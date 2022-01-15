@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 13, 2022
+##   Last updated on January 15, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 9.0"
+	echo "$(basename "$0") 10.0"
 	exit 0
 }
 
@@ -78,7 +78,8 @@ wipe='false'
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
-issue_creator=""
+issue_server="github"
+issue_labels="bug"
 url=""
 
 # use GNU sed if available instead of BSD sed
@@ -134,7 +135,7 @@ run_testset() {
 		flag_goal="true"
 	fi
 	if [ "$issue_server" != "" ] ; then
-		flag_goal="logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'$issue_server'),$flag_goal"
+		flag_goal="logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'$issue_server'),set_logtalk_flag(issue_labels,'$issue_labels'),$flag_goal"
 	fi
 	if [ "$url" != "" ] ; then
 		flag_goal="set_logtalk_flag(tests_base_url,'$url'),$flag_goal"
@@ -523,7 +524,11 @@ if [ "$s_arg" != "" ] ; then
 fi
 
 if [ "$b_arg" != "" ] ; then
-	issue_server="$b_arg"
+	issue_server="$(echo "$b_arg" | cut -d':' -f1)"
+	labels="$(echo "$b_arg" | cut -d':' -f2)"
+	if [ "$labels" != "" ] && [ "$labels" != "$issue_server" ] ; then
+		issue_labels="$labels"
+	fi
 fi
 
 if [ "$u_arg" != "" ] ; then

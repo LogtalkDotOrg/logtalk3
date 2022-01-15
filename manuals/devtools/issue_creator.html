@@ -173,8 +173,19 @@ created:</p>
 </ul>
 <p>See the CLIs documentation for details. Typically, the <code class="docutils literal notranslate"><span class="pre">auth</span></code> command
 is called from the CI/CD pipeline definition scripts.</p>
-<p>The bug reports are created using the label <code class="docutils literal notranslate"><span class="pre">bug</span></code> and assigned to the
-author of the latest commit of the git repo.</p>
+<p>The bug reports are created using by default the label <code class="docutils literal notranslate"><span class="pre">bug</span></code> and
+assigned to the author of the latest commit of the git repo. The <code class="docutils literal notranslate"><span class="pre">-b</span></code>
+option can be used to override the label with a comma separated set of
+labels. For example, to use both <code class="docutils literal notranslate"><span class="pre">bug</span></code> and <code class="docutils literal notranslate"><span class="pre">auto</span></code> labels:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester \
+    -p gnu \
+    -b github:bug,auto \
+    -s &quot;/home/jdoe/foo/&quot; \
+    -u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
+</pre></div>
+</div>
+<p>Note that the labels <strong>must</strong> be predefined in the issue tracker server
+for the bug report to be successfully created.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>

@@ -52,8 +52,21 @@ created:
 See the CLIs documentation for details. Typically, the ``auth`` command
 is called from the CI/CD pipeline definition scripts.
 
-The bug reports are created using the label ``bug`` and assigned to the
-author of the latest commit of the git repo.
+The bug reports are created using by default the label ``bug`` and
+assigned to the author of the latest commit of the git repo. The ``-b``
+option can be used to override the label with a comma separated set of
+labels. For example, to use both ``bug`` and ``auto`` labels:
+
+::
+
+   $ logtalk_tester \
+       -p gnu \
+       -b github:bug,auto \
+       -s "/home/jdoe/foo/" \
+       -u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
+
+Note that the labels **must** be predefined in the issue tracker server
+for the bug report to be successfully created.
 
 Known issues
 ------------
