@@ -42,15 +42,16 @@ This tool can be loaded using the query:
 
 	| ?- logtalk_load(issue_creator(loader)).
 
+But in the most common usage scenario, this tool is automatically loaded by
+the `logtalk_tester` automation script.
+
 
 Usage
 -----
 
-To use this tool, simply load it and if necessary define the `issue_server`
-Logtalk flag. The possible values for this flag are the atoms `github` (the
-default value) and `gitlab`. The `logtalk_tester` automation script accepts
-a `-b` option for automatically use this tool (see the script man page for
-details). For example:
+The `logtalk_tester` automation script accepts a `-b` option for automatically
+using this tool (see the script man page for details). In the most simple case,
+this option possible values are `github` and `gitlab`. For example:
 
 	$ logtalk_tester \
 		-p gnu \
@@ -58,7 +59,7 @@ details). For example:
 		-s "/home/jdoe/foo/" \
 		-u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
 
-In this case, the script **must** be called from a git repo directory or one
+The `logtalk_tester` script **must** be called from a git repo directory or one
 of its sub-directories, which is a common setup in CI/CD pipelines. Moreover,
 prior to running the tests, the CLI must be used to authenticate and login to
 the server where the bug report issues will be created:
@@ -70,9 +71,9 @@ See the CLIs documentation for details. Typically, the `auth` command is
 called from the CI/CD pipeline definition scripts.
 
 The bug reports are created using by default the label `bug` and assigned to
-the author of the latest commit of the git repo. The `-b` option can be used
-to override the label with a comma separated set of labels. For example, to
-use both `bug` and `auto` labels:
+the author of the latest commit of the git repo. The `-b` option can also be
+used to override the label with a comma separated set of labels. For example,
+to use both `bug` and `auto` labels:
 
 	$ logtalk_tester \
 		-p gnu \

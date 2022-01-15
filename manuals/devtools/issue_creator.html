@@ -146,15 +146,15 @@ installation instructions see:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(issue_creator(loader)).
 </pre></div>
 </div>
+<p>But in the most common usage scenario, this tool is automatically loaded
+by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
-<p>To use this tool, simply load it and if necessary define the
-<code class="docutils literal notranslate"><span class="pre">issue_server</span></code> Logtalk flag. The possible values for this flag are the
-atoms <code class="docutils literal notranslate"><span class="pre">github</span></code> (the default value) and <code class="docutils literal notranslate"><span class="pre">gitlab</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option for
-automatically use this tool (see the script man page for details). For
-example:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option for
+automatically using this tool (see the script man page for details). In
+the most simple case, this option possible values are <code class="docutils literal notranslate"><span class="pre">github</span></code> and
+<code class="docutils literal notranslate"><span class="pre">gitlab</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester \
     -p gnu \
     -b github \
@@ -162,11 +162,11 @@ example:</p>
     -u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
 </pre></div>
 </div>
-<p>In this case, the script <strong>must</strong> be called from a git repo directory or
-one of its sub-directories, which is a common setup in CI/CD pipelines.
-Moreover, prior to running the tests, the CLI must be used to
-authenticate and login to the server where the bug report issues will be
-created:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script <strong>must</strong> be called from a git repo
+directory or one of its sub-directories, which is a common setup in
+CI/CD pipelines. Moreover, prior to running the tests, the CLI must be
+used to authenticate and login to the server where the bug report issues
+will be created:</p>
 <ul class="simple">
 <li><p>GitHub: <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span></code></p></li>
 <li><p>GitLab: <code class="docutils literal notranslate"><span class="pre">glab</span> <span class="pre">auth</span> <span class="pre">login</span></code></p></li>
@@ -175,8 +175,8 @@ created:</p>
 is called from the CI/CD pipeline definition scripts.</p>
 <p>The bug reports are created using by default the label <code class="docutils literal notranslate"><span class="pre">bug</span></code> and
 assigned to the author of the latest commit of the git repo. The <code class="docutils literal notranslate"><span class="pre">-b</span></code>
-option can be used to override the label with a comma separated set of
-labels. For example, to use both <code class="docutils literal notranslate"><span class="pre">bug</span></code> and <code class="docutils literal notranslate"><span class="pre">auto</span></code> labels:</p>
+option can also be used to override the label with a comma separated set
+of labels. For example, to use both <code class="docutils literal notranslate"><span class="pre">bug</span></code> and <code class="docutils literal notranslate"><span class="pre">auto</span></code> labels:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester \
     -p gnu \
     -b github:bug,auto \
