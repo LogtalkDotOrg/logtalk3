@@ -11,8 +11,8 @@
 Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.
 
 | **Author:** Paulo Moura
-| **Version:** 0:6:0
-| **Date:** 2022-01-15
+| **Version:** 0:7:0
+| **Date:** 2022-01-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,7 +27,8 @@ Support for automatically creating bug report issues for failed tests in GitHub 
 |    :ref:`user <user/0>`
 
 | **Remarks:**
-|    (none)
+
+   - Usage: This tool is automatically loaded and used from the ``logtalk_tester`` automation script.
 
 | **Inherited public predicates:**
 |    (none)

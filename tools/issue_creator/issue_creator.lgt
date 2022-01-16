@@ -26,7 +26,7 @@
 	% define a flag to allow the logtalk_tester script to pass the type of
 	% server hosting the issue tracker where the bug reports will be created
 	create_logtalk_flag(issue_server, '', [type(atom), keep(true)]),
-	% define a flag to allow the user to define the bug reports label(s)
+	% define a flag to allow the logtalk_tester script to pass the bug reports label(s)
 	create_logtalk_flag(issue_labels, bug, [type(atom), keep(true)]),
 	% define a flag to allow the logtalk_tester script to pass the
 	% base URL for generating links to test files
@@ -37,10 +37,13 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2022-01-15,
-		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.'
+		date is 2022-01-16,
+		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
+		remarks is [
+			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script.'
+		]
 	]).
 
 	:- uses(git, [
