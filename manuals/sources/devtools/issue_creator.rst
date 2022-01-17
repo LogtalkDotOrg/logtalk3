@@ -47,11 +47,13 @@ CI/CD pipelines. Moreover, prior to running the tests, the CLI must be
 used to authenticate and login to the server where the bug report issues
 will be created:
 
--  GitHub: ``gh auth login``
--  GitLab: ``glab auth login``
+-  GitHub:
+   ``gh auth login --hostname <string> --with-token < token.txt``
+-  GitLab: ``glab auth login --hostname <string> --token <string>``
 
-See the CLIs documentation for details. Typically, the ``auth`` command
-is called from the CI/CD pipeline definition scripts.
+The access token must ensure the necessary scopes that allow bug reports
+to be created. See the CLIs documentation for details. Typically, the
+``auth`` command is called from the CI/CD pipeline definition scripts.
 
 The bug reports are created using by default the label ``bug`` and
 assigned to the author of the latest commit of the git repo. The ``-b``
