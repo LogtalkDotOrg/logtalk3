@@ -37,7 +37,7 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
 		date is 2022-01-17,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
@@ -75,9 +75,15 @@
 
 	% failed tests
 	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
+		\+ flaky_test_failure(Note),
 		create_bug_report(Object, Test, File, Position, Reason, Note, Time).
 	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
+		\+ flaky_test_failure(Note),
 		create_bug_report(Object, Test, File, Position, non_deterministic_success, Note, Time).
+
+	flaky_test_failure(Note) :-
+		atom(Note),
+		sub_atom(Note, _, _, _, flaky), !.
 
 	create_bug_report(Object, Test, File, Position, Reason, Note, Time) :-
 		decompose_file_name(File, Directory, _),

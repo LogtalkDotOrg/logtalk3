@@ -69,8 +69,13 @@ of labels. For example, to use both ``bug`` and ``auto`` labels:
 Note that the labels **must** be predefined in the issue tracker server
 for the bug report to be successfully created.
 
+But reports are only created for non-flaky tests. The bug report title
+and labels are used to prevent creating duplicated bug reports.
+Therefore, the same labels should be used for multiple runs of the same
+tests and preserved when editing the bug reports.
+
 Known issues
 ------------
 
-This tool is in an early stage of development and changes are to be
-expected. Your feedback is most appreciated.
+This tool is in a beta stage of development. Your feedback is most
+appreciated.
