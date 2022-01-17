@@ -37,9 +37,9 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2022-01-16,
+		date is 2022-01-17,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
 		remarks is [
 			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script.'
@@ -75,13 +75,11 @@
 
 	% failed tests
 	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
-		command(Object, Test, File, Position, Reason, Note, Time, Command),
-		shell(Command).
+		create_bug_report(Object, Test, File, Position, Reason, Note, Time).
 	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
-		command(Object, Test, File, Position, non_deterministic_success, Note, Time, Command),
-		shell(Command).
+		create_bug_report(Object, Test, File, Position, non_deterministic_success, Note, Time).
 
-	command(Object, Test, File, Position, Reason, Note, Time, Command) :-
+	create_bug_report(Object, Test, File, Position, Reason, Note, Time) :-
 		decompose_file_name(File, Directory, _),
 		commit_hash_abbreviated(Directory, Hash),
 		commit_author(Directory, Author),
@@ -98,20 +96,29 @@
 			true
 		;	ShortDirectory = Directory
 		),
+		issue_server(Server),
 		title(Test, ShortDirectory, Title),
+		% bypass the compiler as the flags are only created after loading this file
+		{current_logtalk_flag(issue_labels, Labels)},
+		is_new_issue(Server, Title, Labels),
 		escape_double_quotes(Title, EscapedTitle),
 		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Message, Description),
 		escape_double_quotes(Description, EscapedDescription),
-		issue_server(Server),
-		% bypass the compiler as the flags are only created after loading this file
-		{current_logtalk_flag(issue_labels, Labels)},
-		command(Server, EscapedTitle, EscapedDescription, Labels, Assignee, Command),
-		writeq(Command), nl.
+		create_bug_report(Server, EscapedTitle, EscapedDescription, Labels, Assignee).
 
-	command(github, Title, Description, Labels, Assignee, Command) :-
-		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label ', Labels, ' --assignee ', Assignee], Command).
-	command(gitlab, Title, Description, Labels, Assignee, Command) :-
-		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label ', Labels, ' --assignee ', Assignee], Command).
+	is_new_issue(github, Title, Labels) :-
+		atomic_list_concat(['gh issue list --label ', Labels, ' --state open --search "', Title, ' in:title" | grep -q -s OPEN >/dev/null 2>&1'], Command),
+		\+ shell(Command).
+	is_new_issue(gitlab, Title, Labels) :-
+		atomic_list_concat(['glab issue list --label ', Labels, ' --in title --search "', Title, '" | grep -q -s "No open issues match your search" >/dev/null 2>&1'], Command),
+		shell(Command).
+
+	create_bug_report(github, Title, Description, Labels, Assignee) :-
+		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
+		shell(Command).
+	create_bug_report(gitlab, Title, Description, Labels, Assignee) :-
+		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
+		shell(Command).
 
 	title(Test, TestSet, Title) :-
 		to_atom(Test, TestAtom),
