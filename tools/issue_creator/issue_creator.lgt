@@ -37,7 +37,7 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
 		date is 2022-01-17,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
@@ -52,7 +52,7 @@
 	]).
 
 	:- uses(os, [
-		decompose_file_name/3, shell/1
+		decompose_file_name/3, operating_system_type/1, shell/1
 	]).
 
 	:- uses(term_io, [
@@ -97,26 +97,45 @@
 		;	ShortDirectory = Directory
 		),
 		issue_server(Server),
+		operating_system_type(OperatingSystem),
 		title(Test, ShortDirectory, Title),
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(issue_labels, Labels)},
-		is_new_issue(Server, Title, Labels),
+		is_new_issue(Server, OperatingSystem, Title, Labels),
 		escape_double_quotes(Title, EscapedTitle),
 		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Message, Description),
 		escape_double_quotes(Description, EscapedDescription),
-		create_bug_report(Server, EscapedTitle, EscapedDescription, Labels, Assignee).
+		create_bug_report(Server, OperatingSystem, EscapedTitle, EscapedDescription, Labels, Assignee).
 
-	is_new_issue(github, Title, Labels) :-
+	is_new_issue(github, windows, Title, Labels) :-
+		!,
+		atomic_list_concat(['gh issue list --label ', Labels, ' --state open --search "', Title, ' in:title" | find "OPEN" > nul'], Command),
+		\+ shell(Command).
+	is_new_issue(github, _, Title, Labels) :-
 		atomic_list_concat(['gh issue list --label ', Labels, ' --state open --search "', Title, ' in:title" | grep -q -s OPEN >/dev/null 2>&1'], Command),
 		\+ shell(Command).
-	is_new_issue(gitlab, Title, Labels) :-
+
+	is_new_issue(gitlab, windows, Title, Labels) :-
+		!,
+		atomic_list_concat(['glab issue list --label ', Labels, ' --in title --search "', Title, '" | find "No open issues match your search" > nul'], Command),
+		shell(Command).
+	is_new_issue(gitlab, _, Title, Labels) :-
 		atomic_list_concat(['glab issue list --label ', Labels, ' --in title --search "', Title, '" | grep -q -s "No open issues match your search" >/dev/null 2>&1'], Command),
 		shell(Command).
 
-	create_bug_report(github, Title, Description, Labels, Assignee) :-
+	create_bug_report(github, windows, Title, Description, Labels, Assignee) :-
+		!,
 		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
 		shell(Command).
-	create_bug_report(gitlab, Title, Description, Labels, Assignee) :-
+	create_bug_report(github, _, Title, Description, Labels, Assignee) :-
+		atomic_list_concat(['gh issue create --title \'', Title, '\' --body \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
+		shell(Command).
+
+	create_bug_report(gitlab, windows, Title, Description, Labels, Assignee) :-
+		!,
+		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' > nul'], Command),
+		shell(Command).
+	create_bug_report(gitlab, _, Title, Description, Labels, Assignee) :-
 		atomic_list_concat(['glab issue create --title \'', Title, '\' --description \'', Description, '\' --label ', Labels, ' --assignee ', Assignee, ' >/dev/null 2>&1'], Command),
 		shell(Command).
 
