@@ -74,6 +74,9 @@ Documentation
 
 * IMPROVED: Documentation of the `logtalk_tester` automation script.
 
+* FIXED: Sidebar links between the Handbook and the APIs from pages other than
+the root pages.
+
 Library
 -------
 
