@@ -134,12 +134,12 @@
 <span id="methods-phrase-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">phrase//1</span></code><a class="headerlink" href="#phrase-1" title="Permalink to this headline"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">phrase</span>(<span class="nv">NonTerminal</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">phrase</span>(<span class="nv">GrammarRuleBody</span>)
 </pre></div>
 </div>
-<p>This non-terminal takes a non-terminal or a grammar rule body and parses
-it using the implicit difference list of tokens. A common use is to wrap
-what otherwise would be a naked variable in a grammar rule body.</p>
+<p>This non-terminal takes a grammar rule body and parses it using the implicit
+difference list of tokens. A common use is to wrap what otherwise would be a
+naked variable in a grammar rule body.</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
@@ -150,13 +150,13 @@ what otherwise would be a naked variable in a grammar rule body.</p>
 <section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">NonTerminal</span></code> is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">GrammarRuleBody</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">NonTerminal</span></code> is neither a variable nor a callable term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">GrammarRuleBody</span></code> is neither a variable nor a callable term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">NonTerminal)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">GrammarRuleBody)</span></code></div>
 </div>
 </div>
 </section>

@@ -27,11 +27,11 @@ Description
 
 ::
 
-   phrase(NonTerminal)
+   phrase(GrammarRuleBody)
 
-This non-terminal takes a non-terminal or a grammar rule body and parses
-it using the implicit difference list of tokens. A common use is to wrap
-what otherwise would be a naked variable in a grammar rule body.
+This non-terminal takes a grammar rule body and parses it using the implicit
+difference list of tokens. A common use is to wrap what otherwise would be a
+naked variable in a grammar rule body.
 
 Modes and number of proofs
 --------------------------
@@ -43,10 +43,10 @@ Modes and number of proofs
 Errors
 ------
 
-| ``NonTerminal`` is a variable:
+| ``GrammarRuleBody`` is a variable:
 |     ``instantiation_error``
-| ``NonTerminal`` is neither a variable nor a callable term:
-|     ``type_error(callable, NonTerminal)``
+| ``GrammarRuleBody`` is neither a variable nor a callable term:
+|     ``type_error(callable, GrammarRuleBody)``
 
 Examples
 --------
