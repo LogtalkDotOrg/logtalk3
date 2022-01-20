@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on November 12, 2021
+Last updated on January 20, 2021
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>  
@@ -249,7 +249,7 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 2.2.0 and later versions
+LVM 3.0.0 and later versions
 ----------------------------
 
 	lvm.pl
@@ -427,7 +427,7 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla Prolog 1.17.27 and later versions
+Trealla Prolog 1.20.12 and later versions
 -----------------------------------------
 
 	trealla.pl

@@ -54,7 +54,7 @@ properties.
 * UPDATED: The SWI-Prolog adapter file tables of proprietary predicate
 properties and candidate tautology and falsehood goals.
 
-* UPDATED: The Trealla Prolog adapter file to require version 1.17.27 or later.
+* UPDATED: The Trealla Prolog adapter file to require version 1.20.12 or later.
 
 * UPDATED: The Trealla adapter file table of candidate tautology and falsehood
 goals.
