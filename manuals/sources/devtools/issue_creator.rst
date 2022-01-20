@@ -71,6 +71,9 @@ of labels. For example, to use both ``bug`` and ``auto`` labels:
 Note that the labels **must** be predefined in the issue tracker server
 for the bug report to be successfully created.
 
+The bug reports use Markdown formatting, which is the default in GitHub
+and GitLab issue trackers.
+
 But reports are only created for non-flaky tests. The bug report title
 and labels are used to prevent creating duplicated bug reports.
 Therefore, the same labels should be used for multiple runs of the same

@@ -37,9 +37,9 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2022-01-17,
+		date is 2022-01-20,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
 		remarks is [
 			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script.'
@@ -169,14 +169,14 @@
 		to_atom(Date, DateAtom),
 		to_atom(Message, MessageAtom),
 		atomic_list_concat([
-			'Test object: `', ObjectAtom, '`\n',
+			'Test object: `', ObjectAtom, '`  \n',
 			'Test file: ',  URL, '\n\n',
 			'Failure:\n',     ReasonAtom, '\n\n',
 			'Note: ',  NoteAtom,  '\n\n',
 			'Time: ',  TimeAtom, ' seconds\n\n',
-			'Commit hash: ',  Hash, '\n',
-			'Commit author: ',  AuthorAtom, '\n',
-			'Commit date: ',  DateAtom, '\n',
+			'Commit hash: ',  Hash, '  \n',
+			'Commit author: ',  AuthorAtom, '  \n',
+			'Commit date: ',  DateAtom, '  \n',
 			'Commit message:\n&emsp;',  MessageAtom, '\n'
 		], Description).
 
