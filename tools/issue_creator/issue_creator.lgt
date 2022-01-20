@@ -37,7 +37,7 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2022-01-20,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
@@ -47,7 +47,7 @@
 	]).
 
 	:- uses(git, [
-		commit_hash_abbreviated/2, commit_author/2,
+		branch/2, commit_hash_abbreviated/2, commit_author/2,
 		commit_date/2, commit_message/2, commit_log/3
 	]).
 
@@ -87,6 +87,7 @@
 
 	create_bug_report(Object, Test, File, Position, Reason, Note, Time) :-
 		decompose_file_name(File, Directory, _),
+		branch(Directory, Branch),
 		commit_hash_abbreviated(Directory, Hash),
 		commit_author(Directory, Author),
 		commit_date(Directory, Date),
@@ -109,7 +110,7 @@
 		{current_logtalk_flag(issue_labels, Labels)},
 		is_new_issue(Server, OperatingSystem, Title, Labels),
 		escape_double_quotes(Title, EscapedTitle),
-		description(Object, ShortFile, Position, Reason, Note, Time, Hash, Author, Date, Message, Description),
+		description(Object, ShortFile, Position, Reason, Note, Time, Branch, Hash, Author, Date, Message, Description),
 		escape_double_quotes(Description, EscapedDescription),
 		create_bug_report(Server, OperatingSystem, EscapedTitle, EscapedDescription, Labels, Assignee).
 
@@ -149,7 +150,7 @@
 		to_atom(Test, TestAtom),
 		atomic_list_concat(['Test ', TestAtom, ' of test set ', TestSet, ' failed'], Title).
 
-	description(Object, File, Position, Reason, Note, Time, Hash, Author, Date, Message, Description) :-
+	description(Object, File, Position, Reason, Note, Time, Branch, Hash, Author, Date, Message, Description) :-
 		to_atom(Object, ObjectAtom),
 		(	tests_url(File, Position, URL) ->
 			true
@@ -171,13 +172,14 @@
 		atomic_list_concat([
 			'Test object: `', ObjectAtom, '`  \n',
 			'Test file: ',  URL, '\n\n',
-			'Failure:\n',     ReasonAtom, '\n\n',
+			'Failure:  \n',     ReasonAtom, '\n\n',
 			'Note: ',  NoteAtom,  '\n\n',
 			'Time: ',  TimeAtom, ' seconds\n\n',
+			'Git branch: ',  Branch, '  \n',
 			'Commit hash: ',  Hash, '  \n',
 			'Commit author: ',  AuthorAtom, '  \n',
 			'Commit date: ',  DateAtom, '  \n',
-			'Commit message:\n&emsp;',  MessageAtom, '\n'
+			'Commit message:  \n&emsp;',  MessageAtom, '\n'
 		], Description).
 
 	issue_server(Server) :-
@@ -218,12 +220,12 @@
 	failure_reason_to_atom(success_instead_of_failure, '&emsp;test goal succeeded but should have failed').
 	failure_reason_to_atom(success_instead_of_error(ExpectedError), ReasonAtom) :-
 		to_atom(ExpectedError, ExpectedErrorAtom),
-		atomic_list_concat(['&emsp;test goal succeeded but should have thrown an error:\n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal succeeded but should have thrown an error:  \n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(failure_instead_of_success, '&emsp;test goal failed but should have succeeded').
 	failure_reason_to_atom(failure_instead_of_error(ExpectedError), ReasonAtom) :-
 		to_atom(ExpectedError, ExpectedErrorAtom),
-		atomic_list_concat(['&emsp;test goal failed but should have thrown an error:\n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal failed but should have thrown an error:  \n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(non_deterministic_success, '&emsp;test goal succeeded non-deterministically').
 
@@ -246,7 +248,7 @@
 	failure_reason_to_atom(wrong_error(ExpectedError, Error), ReasonAtom) :-
 		to_atom(ExpectedError, ExpectedErrorAtom),
 		to_atom(Error, ErrorAtom),
-		atomic_list_concat(['&emsp;test goal throws the wrong error:\n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`\n&emsp;&emsp;but got `', ErrorAtom, '`'], ReasonAtom).
+		atomic_list_concat(['&emsp;test goal throws the wrong error:  \n', '&emsp;&emsp;expected `', ExpectedErrorAtom, '`  \n&emsp;&emsp;but got `', ErrorAtom, '`'], ReasonAtom).
 
 	failure_reason_to_atom(quick_check_failed(Goal, Test, Shrinks, Seed), ReasonAtom) :-
 		to_atom(Goal, GoalAtom),
