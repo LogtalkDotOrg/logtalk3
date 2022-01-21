@@ -25,7 +25,10 @@ RELEASE NOTES
 3.54.0 - February ??, 2022
 ==========================
 
+Documentation
+-------------
 
+* UPDATED: The `issue_creator` tool documentation section on known issues.
 
 
 3.53.0 - January 20, 2022

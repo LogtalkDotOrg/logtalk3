@@ -97,4 +97,7 @@ when editing the bug reports.
 Known issues
 ------------
 
+GitLab creates CI/CD pipelines in a detached HEAD state. As a consequence,
+the bug reports always show "Git branch: HEAD".
+
 This tool is in a beta stage of development. Your feedback is most appreciated.
