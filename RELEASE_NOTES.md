@@ -28,6 +28,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `git` library.
+
 * UPDATED: The `issue_creator` tool documentation section on known issues.
 
 

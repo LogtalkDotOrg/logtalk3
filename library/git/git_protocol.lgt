@@ -22,58 +22,58 @@
 :- protocol(git_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-11-12,
-		comment is 'Predicates for accessing a git project current branch and latest commit data.'
+		date is 2022-01-21,
+		comment is 'Predicates for accessing a git project current branch, commit log, and latest commit data.'
 	]).
 
 	:- public(branch/2).
 	:- mode(branch(+atom, ?atom), zero_or_one).
 	:- info(branch/2, [
-		comment is 'Returns the name of the current git branch.',
+		comment is 'Returns the name of the current git branch. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Branch']
 	]).
 
 	:- public(commit_author/2).
 	:- mode(commit_author(+atom, -atom), zero_or_one).
 	:- info(commit_author/2, [
-		comment is 'Returns the latest commit author.',
+		comment is 'Returns the latest commit author. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Author']
 	]).
 
 	:- public(commit_date/2).
 	:- mode(commit_date(+atom, -atom), zero_or_one).
 	:- info(commit_date/2, [
-		comment is 'Returns the latest commit date (strict ISO 8601 format).',
+		comment is 'Returns the latest commit date (strict ISO 8601 format). Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Date']
 	]).
 
 	:- public(commit_hash/2).
 	:- mode(commit_hash(+atom, -atom), zero_or_one).
 	:- info(commit_hash/2, [
-		comment is 'Returns the latest commit hash.',
+		comment is 'Returns the latest commit hash. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Hash']
 	]).
 
 	:- public(commit_hash_abbreviated/2).
 	:- mode(commit_hash_abbreviated(+atom, -atom), zero_or_one).
 	:- info(commit_hash_abbreviated/2, [
-		comment is 'Returns the latest commit abbreviated hash.',
+		comment is 'Returns the latest commit abbreviated hash. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Hash']
 	]).
 
 	:- public(commit_message/2).
 	:- mode(commit_message(+atom, -atom), zero_or_one).
 	:- info(commit_message/2, [
-		comment is 'Returns the latest commit message.',
+		comment is 'Returns the latest commit message. Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Message']
 	]).
 
 	:- public(commit_log/3).
 	:- mode(commit_log(+atom, +atom, -atom), zero_or_one).
 	:- info(commit_log/3, [
-		comment is 'Returns the git latest commit log output for the given format (see e.g. https://git-scm.com/docs/pretty-formats).',
+		comment is 'Returns the git latest commit log output for the given format (see e.g. https://git-scm.com/docs/pretty-formats). Fails if the directory is not a git repo or a sub-directory of a git repo directory.',
 		argnames is ['Directory', 'Format', 'Output']
 	]).
 
