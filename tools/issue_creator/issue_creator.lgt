@@ -42,7 +42,7 @@
 		date is 2022-01-20,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
 		remarks is [
-			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script when using its ``-b`` option.'
+			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script when using its ``-b`` option. See the script man page for details.'
 		]
 	]).
 

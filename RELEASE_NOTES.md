@@ -35,6 +35,10 @@ Documentation
 Tools
 -----
 
+* UPDATED: The Windows `lgt2rst.js` JScript to provide the same support for a
+user-defined `custom.css` file when called with the `-s` option to customize
+the Sphinx Read the Docs theme as found in the `lgt2rst.sh` Bash script.
+
 * FIXED: The `lgtdoc` tool `lgt2rst` scripts to avoid an error due to changes
 in recent versions of the Sphinx `sphinx-quickstart` command.
 

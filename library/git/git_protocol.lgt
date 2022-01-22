@@ -25,7 +25,7 @@
 		version is 1:1:0,
 		author is 'Paulo Moura',
 		date is 2022-01-21,
-		comment is 'Predicates for accessing a git project current branch, commit log, and latest commit data.'
+		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
 	:- public(branch/2).
