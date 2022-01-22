@@ -32,6 +32,12 @@ Documentation
 
 * UPDATED: The `issue_creator` tool documentation section on known issues.
 
+Tools
+-----
+
+* FIXED: The `lgtdoc` tool `lgt2rst` scripts to avoid an error due to changes
+in recent versions of the Sphinx `sphinx-quickstart` command.
+
 
 3.53.0 - January 20, 2022
 =========================

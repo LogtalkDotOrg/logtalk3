@@ -2,7 +2,7 @@
 //
 //   XML documenting files to reStructuredText files conversion script
 //
-//   Last updated on July 30, 2021
+//   Last updated on January 22, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -199,6 +199,13 @@ if (sphinx) {
 	WScript.Echo("");
 	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.rst", WshShell.CurrentDirectory + "\\index.backup");
 	WshShell.Run("sphinx-quickstart --templatedir=\"$LOGTALKUSER\\tools\\lgtdoc\\xml\"", 1, true);
+	if (!FSObject.FolderExists(WshShell.CurrentDirectory + "\\_static")) {
+		FSObject.CreateFolder(WshShell.CurrentDirectory + "\\_static");
+	}
+	if (!FSObject.FolderExists(WshShell.CurrentDirectory + "\\_static\\css")) {
+		FSObject.CreateFolder(WshShell.CurrentDirectory + "\\_static\\css");
+	}
+	FSObject.CopyFile(logtalk_user + "\\tools\\lgtdoc\\xml\\css\\sphinx\\custom.css", WshShell.CurrentDirectory + "\\_static\\css\\custom.css");
 	FSObject.DeleteFile(WshShell.CurrentDirectory + "\\index.rst");
 	FSObject.MoveFile(WshShell.CurrentDirectory + "\\index.backup", WshShell.CurrentDirectory + "\\index.rst");
 	WScript.Echo("");
