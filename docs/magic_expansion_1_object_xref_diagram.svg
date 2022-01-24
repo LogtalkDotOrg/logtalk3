@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-380 486,-380 486,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object magic_expansion/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;01&#45;20, 14:46</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;01&#45;24, 14:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_magic_expansion_1_object</title>
 <g id="a_clust1"><a xlink:title="magic_expansion(_)">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 462,-49 462,-49 468,-49 474,-55 474,-61 474,-61 474,-356 474,-356 474,-362 468,-368 462,-368 462,-368 20,-368 20,-368 14,-368 8,-362 8,-356 8,-356 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt">
 <text text-anchor="start" x="20.5" y="-351.5" font-family="Monospace" font-size="10.00" fill="dimgray">magic_expansion(_)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- goal_expansion/2 -->
 <g id="node1" class="node">
 <title>goal_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L51">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L51">
 <polygon fill="cornsilk" stroke="black" points="457.5,-331 320.5,-331 320.5,-295 457.5,-295 457.5,-331"/>
 <text text-anchor="start" x="329" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="335" y="-315.2" font-family="Monospace" font-size="11.00">goal_expansion/2</text>
@@ -52,12 +52,12 @@
 <!-- goal_expansion/2&#45;&gt;^^goal_expansion/2 -->
 <g id="edge3" class="edge">
 <title>goal_expansion/2&#45;&gt;^^goal_expansion/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L51" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M389,-294.88C389,-276.04 389,-245.47 389,-223.3"/>
 <polygon fill="black" stroke="black" points="392.5,-223.19 389,-213.19 385.5,-223.19 392.5,-223.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L51">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L51">
 <text text-anchor="start" x="389" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- term_expansion/2 -->
 <g id="node2" class="node">
 <title>term_expansion/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L54">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L54">
 <polygon fill="cornsilk" stroke="black" points="302.5,-331 165.5,-331 165.5,-295 302.5,-295 302.5,-331"/>
 <text text-anchor="start" x="174" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="180" y="-315.2" font-family="Monospace" font-size="11.00">term_expansion/2</text>
@@ -79,7 +79,7 @@
 <!-- magic_clause/5 -->
 <g id="node3" class="node">
 <title>magic_clause/5</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61">
 <polygon fill="cornsilk" stroke="black" points="295.5,-213 172.5,-213 172.5,-177 295.5,-177 295.5,-213"/>
 <text text-anchor="start" x="181" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="187" y="-197.2" font-family="Monospace" font-size="11.00">magic_clause/5</text>
@@ -93,12 +93,12 @@
 <!-- term_expansion/2&#45;&gt;magic_clause/5 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;magic_clause/5</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L54" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L54" xlink:title="calls">
 <path fill="none" stroke="black" d="M234,-294.88C234,-276.04 234,-245.47 234,-223.3"/>
 <polygon fill="black" stroke="black" points="237.5,-223.19 234,-213.19 230.5,-223.19 237.5,-223.19"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L54">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L54">
 <text text-anchor="start" x="234" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -120,12 +120,12 @@
 <!-- magic_clause/5&#45;&gt;magic::magicise/4 -->
 <g id="edge4" class="edge">
 <title>magic_clause/5&#45;&gt;magic::magicise/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="calls">
 <path fill="none" stroke="black" d="M212.75,-176.88C187.97,-156.92 146.88,-123.82 119.13,-101.47"/>
 <polygon fill="black" stroke="black" points="121.32,-98.73 111.33,-95.19 116.93,-104.19 121.32,-98.73"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61">
 <text text-anchor="start" x="166" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -147,12 +147,12 @@
 <!-- magic_clause/5&#45;&gt;list::member/2 -->
 <g id="edge5" class="edge">
 <title>magic_clause/5&#45;&gt;list::member/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="calls">
 <path fill="none" stroke="black" d="M235.03,-176.88C236.17,-158.04 238.01,-127.47 239.35,-105.3"/>
 <polygon fill="black" stroke="black" points="242.85,-105.38 239.96,-95.19 235.87,-104.96 242.85,-105.38"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61">
 <text text-anchor="start" x="237" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -171,12 +171,12 @@
 <!-- magic_clause/5&#45;&gt;::flatten_goals/3 -->
 <g id="edge2" class="edge">
 <title>magic_clause/5&#45;&gt;::flatten_goals/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="calls">
 <path fill="none" stroke="black" d="M257.31,-176.88C284.62,-156.84 329.98,-123.53 360.43,-101.18"/>
 <polygon fill="black" stroke="black" points="362.6,-103.93 368.59,-95.19 358.46,-98.28 362.6,-103.93"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a79bbccb2a68257471d64b685f29e8f961b07729/contributions/verdi_neruda/magic_expansion.lgt#L61">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/22bbb3d12dbc3e3d1a364ff6bd8b5f36d7436150/contributions/verdi_neruda/magic_expansion.lgt#L61">
 <text text-anchor="start" x="317" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
