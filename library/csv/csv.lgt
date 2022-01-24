@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2021-09-24,
+		date is 2022-01-24,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
@@ -210,14 +210,18 @@
 	csv(keep, Rows) -->
 		records(Rows).
 
-	records([Record| Records]) --> record(Record, false), cr_lf, !, records(Records), {dbg('New Record'-Record)}.
-	records([Record]) --> record(Record, false), !, cr_lf_optional, {dbg('Last Record'-Record)}.
-	records([]) --> cr_lf_optional, {dbg('Empty Record'-'')}.
+	records([Record| Records]) -->
+		record(Record, false), !, {dbg('New Record'-Record)}, rest_records(Records).
+	records([]) -->
+		cr_lf_optional, {dbg('Empty Record'-'')}.
+
+	rest_records(Records) -->
+		cr_lf, !, records(Records).
+	rest_records([]) -->
+		[].
 
 	record([Field| Fields], _Next) -->
-		[Code], field(Code, Field, _IgnoreQuotes_), separator(_Separator_), !, {dbg(field-Field)}, record(Fields, true).
-	record([Field], _Next) -->
-		[Code], field(Code, Field, _IgnoreQuotes_), !, {dbg(field-Field)}.
+		[Code], field(Code, Field, _IgnoreQuotes_), !, {dbg(field-Field)}, fields(Fields).
 	record([''| Fields], _Next) -->
 		separator(_Separator_), !, {dbg(field-'')}, record(Fields, true).
 	record([''], true) -->
@@ -233,6 +237,11 @@
 
 	spaces --> [32], spaces.
 	spaces --> [].
+
+	fields(Fields) -->
+		separator(_Separator_), !, record(Fields, true).
+	fields([]) -->
+		[].
 
 	field(0'", Atom, true) -->
 		!, {dbg('>>>'-0'")}, escaped(true, Codes), {atom_codes(Atom, Codes)}.

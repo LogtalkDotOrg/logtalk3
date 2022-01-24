@@ -32,6 +32,11 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+Library
+-------
+
+* IMPROVED: Performance of the `csv` library when parsing large CSV files.
+
 Tools
 -----
 
