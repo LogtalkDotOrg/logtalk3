@@ -232,10 +232,10 @@
 	separator(semicolon) --> [0';], spaces.
 	separator(colon) --> [0':], spaces.
 
-	tabs --> [0'\t], tabs.
+	tabs --> [0'\t], !, tabs.
 	tabs --> [].
 
-	spaces --> [32], spaces.
+	spaces --> [32], !, spaces.
 	spaces --> [].
 
 	fields(Fields) -->
@@ -258,12 +258,17 @@
 	escaped(false, QData) -->
 		data(Data), [0'"], {list::append(Data, [0'"], QData), dbg('<<<'-0'")}.
 
-	non_escaped([Code| Codes]) --> textdata(Code), non_escaped(Codes).
-	non_escaped([]) --> [].
+	non_escaped([Code| Codes]) -->
+		textdata(Code), !, non_escaped(Codes).
+	non_escaped([]) -->
+		[].
 
-	data([0'", 0'"| Data]) --> [0'", 0'"], !, data(Data).
-	data([Code| Data]) --> data_item(Code), !, data(Data).
-	data([]) --> [].
+	data([0'", 0'"| Data]) -->
+		[0'", 0'"], !, data(Data).
+	data([Code| Data]) -->
+		data_item(Code), !, data(Data).
+	data([]) -->
+		[].
 
 	data_item(Code) -->
 		[Code],
