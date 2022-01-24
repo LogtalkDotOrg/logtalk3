@@ -39,8 +39,12 @@ Tools
 user-defined `custom.css` file when called with the `-s` option to customize
 the Sphinx Read the Docs theme as found in the `lgt2rst.sh` Bash script.
 
-* FIXED: The `lgtdoc` tool `lgt2rst` scripts to avoid an error due to changes
-in recent versions of the Sphinx `sphinx-quickstart` command.
+* FIXED: The `lgtdoc` tool `lgt2rst` scripts to avoid an error when called
+with the `-s` option due to changes in recent versions of the Sphinx
+`sphinx-quickstart` command.
+
+* FIXED: The `logtalk_tester` script to only setup and use the `issue_creator`
+tool when the `-b` option is used as per documentation.
 
 
 3.53.0 - January 20, 2022

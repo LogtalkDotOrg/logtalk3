@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 15, 2022
+##   Last updated on January 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.0"
+	echo "$(basename "$0") 10.1"
 	exit 0
 }
 
@@ -78,7 +78,7 @@ wipe='false'
 # disable timeouts to maintain backward compatibility
 timeout=0
 prefix="$HOME/"
-issue_server="github"
+issue_server=""
 issue_labels="bug"
 url=""
 
@@ -529,6 +529,11 @@ if [ "$b_arg" != "" ] ; then
 	if [ "$labels" != "" ] && [ "$labels" != "$issue_server" ] ; then
 		issue_labels="$labels"
 	fi
+	if [ "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] ; then
+		echo "Error! Issue tracker server must be either github or gitlab: $b_arg" >&2
+		usage_help
+		exit 1
+	fi		
 fi
 
 if [ "$u_arg" != "" ] ; then
