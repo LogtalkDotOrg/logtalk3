@@ -30,7 +30,7 @@ Documentation
 
 * IMPROVED: Documentation of the `git` library.
 
-* UPDATED: The `issue_creator` tool documentation section on known issues.
+* IMPROVED: Documentation of the `issue_creator` tool.
 
 Tools
 -----

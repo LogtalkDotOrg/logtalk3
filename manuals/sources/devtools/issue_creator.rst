@@ -44,8 +44,8 @@ the most simple case, this option possible values are ``github`` and
 The ``logtalk_tester`` script **must** be called from a git repo
 directory or one of its sub-directories, which is a common setup in
 CI/CD pipelines. Moreover, prior to running the tests, the CLI must be
-used to authenticate and login to the server where the bug report issues
-will be created:
+used, if required, to authenticate and login to the server where the bug
+report issues will be created:
 
 -  GitHub:
    ``gh auth login --hostname <string> --with-token < token.txt``
@@ -54,6 +54,8 @@ will be created:
 The access token must ensure the necessary scopes that allow bug reports
 to be created. See the CLIs documentation for details. Typically, the
 ``auth`` command is called from the CI/CD pipeline definition scripts.
+However, depending on the CI/CD workflow, the authentication may be done
+implicitly.
 
 The bug reports are created using by default the label ``bug`` and
 assigned to the author of the latest commit of the git repo. The ``-b``
