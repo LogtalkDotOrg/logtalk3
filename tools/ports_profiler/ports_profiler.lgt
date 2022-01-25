@@ -25,9 +25,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2021-05-04,
+		date is 2022-01-25,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -70,6 +70,10 @@
 	:- info(port_/5, [
 		comment is 'Internal table of collected port profiling data.',
 		argnames is ['Port', 'Entity', 'Functor', 'Arity', 'Count']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	% there can only be one debug handler provider loaded at the same time;
@@ -364,16 +368,13 @@
 
 	entity_to_padded_atom(Functor/Arity, MaximumWidth, Atom) :-
 		(	Arity =:= 0 ->
-			Atom1 = Functor
-		;	atom_concat(Functor, '/', Atom0),
-			number_codes(Arity, Codes),
-			atom_codes(ArityAtom, Codes),
-			atom_concat(Atom0, ArityAtom, Atom1)
+			Atom0 = Functor
+		;	atomic_list_concat([Functor, '/', Arity], Atom0)
 		),
-		atom_length(Atom1, Length1),
-		PadLength is MaximumWidth + 2 - Length1,
+		atom_length(Atom0, Length),
+		PadLength is MaximumWidth + 2 - Length,
 		generate_atom(PadLength, ' ', Pad),
-		atom_concat(Atom1, Pad, Atom).
+		atom_concat(Atom0, Pad, Atom).
 
 	predicate_to_padded_atom(Entity, Functor/Arity0, MaximumWidth, Atom) :-
 		(	current_object(Entity),
@@ -412,14 +413,14 @@
 		generate_atom(Length, '-', Ruler).
 
 	generate_atom(Length, Character, Atom) :-
-		generate_atom(Length, Character, '', Atom).
+		generate_atom(Length, Character, [], Atom).
 
-	generate_atom(0, _, Atom, Atom) :-
-		!.
-	generate_atom(Length0, Character, Atom0, Atom) :-
-		atom_concat(Character, Atom0, Atom1),
+	generate_atom(0, _, List, Atom) :-
+		!,
+		atomic_list_concat(List, Atom).
+	generate_atom(Length0, Character, Acc, Atom) :-
 		Length1 is Length0 - 1,
-		generate_atom(Length1, Character, Atom1, Atom).
+		generate_atom(Length1, Character, [Character| Acc], Atom).
 
 	% silence warnings as we meta-call the first argument as-is as it's already compiled
 	:- meta_predicate(call_goal(*, *)).

@@ -11,8 +11,8 @@
 Predicate execution box model port profiler.
 
 | **Author:** Paulo Moura
-| **Version:** 1:9:0
-| **Date:** 2021-05-04
+| **Version:** 1:10:0
+| **Date:** 2022-01-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,7 @@ Predicate execution box model port profiler.
 |    :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
 | **Uses:**
 |    :ref:`logtalk <logtalk/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
