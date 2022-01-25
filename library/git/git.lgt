@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:0:2,
 		author is 'Paulo Moura',
-		date is 2022-01-14,
+		date is 2022-01-25,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -92,11 +92,11 @@
 
 	:- endif.
 
-	commit_author(Directory, Hash) :-
-		commit_log(Directory, '%an', Hash).
+	commit_author(Directory, Author) :-
+		commit_log(Directory, '%an', Author).
 
-	commit_date(Directory, Hash) :-
-		commit_log(Directory, '%aI', Hash).
+	commit_date(Directory, Date) :-
+		commit_log(Directory, '%aI', Date).
 
 	commit_hash(Directory, Hash) :-
 		commit_log(Directory, '%H', Hash).
