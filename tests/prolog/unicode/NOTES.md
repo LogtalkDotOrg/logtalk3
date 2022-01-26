@@ -111,4 +111,6 @@ terms using the `\uXXXX` and `\UXXXXXXXX` escape sequences. The `\uXXXX`
 escape sequence, using four hexadecimal digits, covers the Basic Multilingual
 Plane (BMP). The `\UXXXXXXXX` escape sequence, using eight hexadecimal digits,
 covers the full Unicode code points space. The use of code points makes these
-escape sequences independent of the chosen Unicode text encoding.
+escape sequences independent of both the chosen Unicode text encoding and the
+Prolog system internal character set (thus providing better portability than
+the ISO Prolog Core standard octal and hexadecimal escape sequences).
