@@ -53,6 +53,11 @@ with the `-s` option due to changes in recent versions of the Sphinx
 * FIXED: The `logtalk_tester` script to only setup and use the `issue_creator`
 tool when the `-b` option is used as per documentation.
 
+Tests
+-----
+
+* ADDED: Additional tests for the Prolog standard `arg/3` predicate.
+
 
 3.53.0 - January 20, 2022
 =========================

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:1,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-08-28,
+		date is 2022-01-26,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -110,5 +110,13 @@
 
 	test(lgt_arg_3_20, true(Arg == (1,2,3))) :-
 		{arg(1, {1,2,3}, Arg)}.
+
+	test(lgt_arg_3_21, error(instantiation_error)) :-
+		% try to delay the expected error to runtime
+		{G = arg(_, foo(a,b), _), call(G)}.
+
+	test(lgt_arg_3_22, error(instantiation_error)) :-
+		% try to delay the expected error to runtime
+		{G = arg(_, foo(a,b), c), call(G)}.
 
 :- end_object.
