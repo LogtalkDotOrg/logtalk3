@@ -56,6 +56,9 @@ tool when the `-b` option is used as per documentation.
 Tests
 -----
 
+* ADDED: Additional test for the Prolog standard `catch/3` control construct.
+Suggested by Andrew Davison.
+
 * ADDED: Additional tests for the Prolog standard `arg/3` predicate.
 
 

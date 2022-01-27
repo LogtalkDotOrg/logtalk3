@@ -41,14 +41,18 @@ p.
 p :-
 	throw(b).
 
+q :-
+	catch((true; throw(err)), E, write(E)),
+	fail.
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-05-12,
+		date is 2022-01-27,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -101,6 +105,11 @@ p :-
 		current_output(S),
 		{catch(true, _, write(S, demoen))},
 		^^text_output_assertion('', Assertion).
+
+	test(lgt_catch_3_13, true(Assertion)) :-
+		^^set_text_output(''),
+		ignore({q}),
+		^^text_output_assertion('err', Assertion).
 
 	% auxiliary predicates
 
