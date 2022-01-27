@@ -165,6 +165,10 @@ that must be explicitly loaded.</p>
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on for most of the backends. When that’s the
 case, there is no overhead compared with calling the abstracted
 predicates directly.</p>
+<p>This library provides linter checks for calls to the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code>
+predicates. Given the differences between implementation of these
+predicates among Prolog systems, the linter checks focus on detecting
+common errors such as missing arguments and too many arguments.</p>
 <section id="portability">
 <h2>Portability<a class="headerlink" href="#portability" title="Permalink to this headline"></a></h2>
 <p>Some Prolog systems provide only a subset of the expected format

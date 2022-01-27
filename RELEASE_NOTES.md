@@ -25,6 +25,11 @@ RELEASE NOTES
 3.54.0 - February ??, 2022
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Support to user-defined linter warning messages for suspicious calls.
+
 Documentation
 -------------
 
@@ -36,6 +41,8 @@ Documentation
 
 Library
 -------
+
+* ADDED: Linter checks for `format/2-3` goals to the `format` library.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
 

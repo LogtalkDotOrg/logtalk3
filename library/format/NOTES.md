@@ -32,6 +32,11 @@ Calls to the library predicates are inlined when compiled with the
 case, there is no overhead compared with calling the abstracted
 predicates directly.
 
+This library provides linter checks for calls to the `format/2-3` predicates.
+Given the differences between implementation of these predicates among Prolog
+systems, the linter checks focus on detecting common errors such as missing
+arguments and too many arguments.
+
 
 Portability
 -----------

@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:104:0,
+		version is 1:105:0,
 		author is 'Paulo Moura',
-		date is 2022-01-11,
+		date is 2022-01-27,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -928,6 +928,10 @@
 		['in ~w goal contains singleton variables ~q'-[Predicate, [Singleton| Singletons]], nl].
 	suspicious_call_reason(missing_else_part) -->
 		['as else part of the conditional is missing'-[], nl].
+	suspicious_call_reason(as(Text)) -->
+		['as ~w'-[Text], nl].
+	suspicious_call_reason(due_to(Text)) -->
+		['due to ~w'-[Text], nl].
 
 	missing_entities([]) -->
 		[].
