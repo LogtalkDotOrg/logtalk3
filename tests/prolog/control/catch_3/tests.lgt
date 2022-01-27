@@ -111,6 +111,9 @@ q :-
 		ignore({q}),
 		^^text_output_assertion('err', Assertion).
 
+	cleanup :-
+		^^clean_text_output.
+
 	% auxiliary predicates
 
 	one(1).
