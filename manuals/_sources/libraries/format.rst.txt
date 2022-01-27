@@ -23,8 +23,8 @@ Only some of the supported Prolog backends provide implementations of
 the ``format/2-3`` predicates that allow using not only an atom or a
 list of character codes for the format string (as de facto standard) but
 also using a list of characters. These currently include ECLiPSe, LVM,
-Scryer Prolog, SICStus Prolog, SWI-Prolog, and YAP. Therefore, when wide
-portability is sought, atoms must be used for the format specifier
+SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP. Therefore, when
+wide portability is sought, atoms must be used for the format specifier
 argument. Some systems, like Scryer Prolog and Tau Prolog, only accept a
 list of characters for the format string. In this case, this library
 will convert the atom format string before calling these systems native

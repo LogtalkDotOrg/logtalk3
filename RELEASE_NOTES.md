@@ -32,6 +32,8 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+* FIXED: Portability notes in the documentation of the `format` library.
+
 Library
 -------
 
