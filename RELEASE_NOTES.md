@@ -39,6 +39,11 @@ Documentation
 
 * FIXED: Portability notes in the documentation of the `format` library.
 
+* FIXED: The `settings-sample.lgt` sample code for handling third-party
+libraries to avoid an endless loop due to the packs support. Note that
+this sample code is deprecated by the `packs` tool. Thanks to Paul Brown
+for the bug report.
+
 Library
 -------
 
