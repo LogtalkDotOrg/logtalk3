@@ -434,7 +434,7 @@
 	% functor/3
 
 	test(lgt_unbounded_functor_01, true, [condition(current_prolog_flag(max_arity, unbounded))]) :-
-		functor(Term, t, 1844674407370909797907654848955145546336677616).
+		functor(_, t, 1844674407370909797907654848955145546336677616).
 
 	test(lgt_unbounded_functor_02, true(Name-Arity == t-1844674407370909797907654848955145546336677616), [condition(current_prolog_flag(max_arity, unbounded))]) :-
 		functor(Term, t, 1844674407370909797907654848955145546336677616),
