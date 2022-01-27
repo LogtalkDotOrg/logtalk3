@@ -15,7 +15,9 @@ predicates directly.
 This library provides linter checks for calls to the ``format/2-3``
 predicates. Given the differences between implementation of these
 predicates among Prolog systems, the linter checks focus on detecting
-common errors such as missing arguments and too many arguments.
+common errors such as missing arguments and too many arguments. The
+linter warnings are printed when the ``suspicious_calls`` flag is set to
+``warning`` (its usual default).
 
 Portability
 -----------

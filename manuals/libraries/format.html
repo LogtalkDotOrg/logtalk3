@@ -168,7 +168,9 @@ predicates directly.</p>
 <p>This library provides linter checks for calls to the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code>
 predicates. Given the differences between implementation of these
 predicates among Prolog systems, the linter checks focus on detecting
-common errors such as missing arguments and too many arguments.</p>
+common errors such as missing arguments and too many arguments. The
+linter warnings are printed when the <code class="docutils literal notranslate"><span class="pre">suspicious_calls</span></code> flag is set to
+<code class="docutils literal notranslate"><span class="pre">warning</span></code> (its usual default).</p>
 <section id="portability">
 <h2>Portability<a class="headerlink" href="#portability" title="Permalink to this headline"></a></h2>
 <p>Some Prolog systems provide only a subset of the expected format
