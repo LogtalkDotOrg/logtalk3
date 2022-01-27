@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-06-21,
+		date is 2022-01-27,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -430,6 +430,29 @@
 
 	test(lgt_unbounded_number_codes_02, true(N == 1844674407370909797907654848955145546336677616)) :-
 		number_codes(N, [49,56,52,52,54,55,52,52,48,55,51,55,48,57,48,57,55,57,55,57,48,55,54,53,52,56,52,56,57,53,53,49,52,53,53,52,54,51,51,54,54,55,55,54,49,54]).
+
+	% functor/3
+
+	test(lgt_unbounded_functor_01, true, [condition(current_prolog_flag(max_arity, unbounded))]) :-
+		functor(Term, t, 1844674407370909797907654848955145546336677616).
+
+	test(lgt_unbounded_functor_02, true(Name-Arity == t-1844674407370909797907654848955145546336677616), [condition(current_prolog_flag(max_arity, unbounded))]) :-
+		functor(Term, t, 1844674407370909797907654848955145546336677616),
+		functor(Term, Name, Arity).
+
+	% arg/3
+
+	test(lgt_unbounded_arg_01, false, [condition(current_prolog_flag(max_arity, unbounded))]) :-
+		arg(1844674407370909797907654848955145546336677616, t(1,2,3), _).
+
+	test(lgt_unbounded_arg_02, true(var(Arg)), [condition(current_prolog_flag(max_arity, unbounded))]) :-
+		functor(Term, t, 1844674407370909797907654848955145546336677616),
+		arg(1844674407370909797907654848955145546336677610, Term, Arg).
+
+	test(lgt_unbounded_arg_03, true(Arg == abc), [condition(current_prolog_flag(max_arity, unbounded))]) :-
+		functor(Term, t, 1844674407370909797907654848955145546336677616),
+		arg(1844674407370909797907654848955145546336677610, Term, abc),
+		arg(1844674407370909797907654848955145546336677610, Term, Arg).
 
 	% auxiliary predicates for delaying tests to runtime
 

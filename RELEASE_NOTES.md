@@ -70,6 +70,9 @@ Suggested by Andrew Davison.
 
 * ADDED: Additional tests for the Prolog standard `arg/3` predicate.
 
+* ADDED: Additional tests for unbound integers when used in `functor/3` and
+`arg/3` predicate calls.
+
 
 3.53.0 - January 20, 2022
 =========================
