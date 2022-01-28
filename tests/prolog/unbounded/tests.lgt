@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2022-01-27,
+		date is 2022-01-28,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -442,7 +442,7 @@
 
 	% arg/3
 
-	test(lgt_unbounded_arg_01, false, [condition(current_prolog_flag(max_arity, unbounded))]) :-
+	test(lgt_unbounded_arg_01, false) :-
 		arg(1844674407370909797907654848955145546336677616, t(1,2,3), _).
 
 	test(lgt_unbounded_arg_02, true(var(Arg)), [condition(current_prolog_flag(max_arity, unbounded))]) :-
