@@ -37,6 +37,8 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+* UPDATED: The `packs` tool documentation on known issues.
+
 * FIXED: Portability notes in the documentation of the `format` library.
 
 * FIXED: The `settings-sample.lgt` sample code for handling third-party
