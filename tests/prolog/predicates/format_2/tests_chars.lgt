@@ -6,9 +6,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:11:1,
+		version is 1:11:2,
 		author is 'Paulo Moura',
-		date is 2021-11-22,
+		date is 2022-02-01,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate with format strings specified using lists of chars.'
 	]).
 

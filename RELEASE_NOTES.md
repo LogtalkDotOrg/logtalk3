@@ -86,6 +86,9 @@ Suggested by Andrew Davison.
 * FIXED: Test for the `bagof/3` standard predicate that used a unification
 goal as assertion.
 
+* FIXED: Tests for the `format/2-3` de facto standard predicates that used
+unification goals as assertions.
+
 
 3.53.0 - January 20, 2022
 =========================

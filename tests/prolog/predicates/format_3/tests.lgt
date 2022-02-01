@@ -46,7 +46,7 @@
 		{format(out, "~w", ['ABC'])},
 		^^text_output_assertion(out, 'ABC', Assertion).
 
-	test(lgt_format_3_write_variable, true(Chars = ['_', _| _])) :-
+	test(lgt_format_3_write_variable, subsumes(['_', _| _], Chars)) :-
 		^^set_text_output(out, ''),
 		A = A,	% avoid singleton warnings
 		{format(out, "~w", [A])},
@@ -57,7 +57,7 @@
 		{format(out, "~q", ['ABC'])},
 		^^text_output_assertion(out, '\'ABC\'', Assertion).
 
-	test(lgt_format_3_quoted_variable, true(Chars = ['_', _| _])) :-
+	test(lgt_format_3_quoted_variable, subsumes(['_', _| _], Chars)) :-
 		^^set_text_output(out, ''),
 		A = A,	% avoid singleton warnings
 		{format(out, "~q", [A])},
