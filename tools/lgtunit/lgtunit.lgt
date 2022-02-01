@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 10:5:0,
+		version is 10:6:0,
 		author is 'Paulo Moura',
-		date is 2021-11-18,
+		date is 2022-02-01,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1487,15 +1487,19 @@
 	valid_test_outcome(balls(_)).
 
 	convert_test_outcome(true, _, Goal, true, Goal).
-	convert_test_outcome(true(Assertion), _, Goal, true, (Goal, lgtunit::assertion(Assertion,Assertion))).
+	convert_test_outcome(true(Assertion), Test, Goal, true, (Goal, lgtunit::assertion(Assertion,Assertion))) :-
+		lint_check_assertion(Test, Assertion).
 	convert_test_outcome(deterministic, Test, Goal, deterministic(Deterministic), lgtunit::deterministic(Head,Deterministic)) :-
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic(Deterministic), (lgtunit::deterministic(Head,Deterministic), lgtunit::assertion(Assertion,Assertion))) :-
+		lint_check_assertion(Test, Assertion),
 		compile_deterministic_test_aux_predicate(Test, Goal, Head).
 	convert_test_outcome(subsumes(Expected, Result), _, Goal, true, (Goal, lgtunit::assertion(subsumes_term(Expected,Result),subsumes_term(Expected,Result)))).
 	convert_test_outcome(variant(Term1, Term2), _, Goal, true, (Goal, lgtunit::assertion(variant(Term1,Term2),lgtunit::variant(Term1,Term2)))).
-	convert_test_outcome(exists(Assertion), _, Goal, true, (Goal, Assertion)).
-	convert_test_outcome(all(Assertion), _, Goal, true, \+ (Goal, \+ lgtunit::assertion(Assertion,Assertion))).
+	convert_test_outcome(exists(Assertion), Test, Goal, true, (Goal, Assertion)) :-
+		lint_check_assertion(Test, Assertion).
+	convert_test_outcome(all(Assertion), Test, Goal, true, \+ (Goal, \+ lgtunit::assertion(Assertion,Assertion))) :-
+		lint_check_assertion(Test, Assertion).
 	convert_test_outcome(fail, _, Goal, fail, Goal).
 	convert_test_outcome(false, _, Goal, fail, Goal).
 	convert_test_outcome(error(Ball), _, Goal, [error(Ball,_)], Goal).
@@ -1503,6 +1507,16 @@
 		map_errors(Balls, Errors).
 	convert_test_outcome(ball(Ball), _, Goal, [Ball], Goal).
 	convert_test_outcome(balls(Balls), _, Goal, Balls, Goal).
+
+	lint_check_assertion(_, Assertion) :-
+		var(Assertion),
+		!.
+	lint_check_assertion(Test, Term1 = Term2) :-
+		once((var(Term1); var(Term2))),
+		!,
+		% undo numbervars of variables in the message term when priting by using double negation
+		\+ \+ print_message(warning, lgtunit, assertion_uses_unification(Test, Term1 = Term2)).
+	lint_check_assertion(_, _).
 
 	map_errors([], []).
 	map_errors([Ball| Balls], [error(Ball,_)| Errors]) :-

@@ -59,6 +59,9 @@ goals as assertions.
 Tools
 -----
 
+* ADDED: A `lgtunit` tool lint check for the use of unification goals in test
+outcome assertions.
+
 * IMPROVED: Performance of the `ports_profiler` tool.
 
 * UPDATED: The Windows `lgt2rst.js` JScript to provide the same support for a

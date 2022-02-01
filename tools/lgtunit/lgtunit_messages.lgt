@@ -22,9 +22,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 5:1:1,
+		version is 5:2:0,
 		author is 'Paulo Moura',
-		date is 2022-01-14,
+		date is 2022-02-01,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -261,6 +261,11 @@
 
 	message_tokens(invalid_test_outcome(Test, Outcome)) -->
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
+
+	% linter warnings
+
+	message_tokens(assertion_uses_unification(Test, Assertion)) -->
+		['test ~q assertion uses a unification goal: ~q'-[Test, Assertion], nl].
 
 	% auxiliary grammar rules
 
