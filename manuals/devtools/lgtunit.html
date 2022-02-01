@@ -921,7 +921,11 @@ Floating-point numbers can be compared using the <code class="docutils literal n
 <code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code>, <code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code> predicates provided by <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>. Using the
 <code class="docutils literal notranslate"><span class="pre">=/2</span></code> term unification built-in predicate is almost always an error as
-it would mask test goals failing to bind output arguments.</p>
+it would mask test goals failing to bind output arguments. The
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool implements a linter check for the use of unification
+goals in test outcome assertions. In the rare cases that a unification
+goal is intended, wrapping the <code class="docutils literal notranslate"><span class="pre">(=)/2</span></code> goal using the <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> control
+construct avoids the linter warning.</p>
 </section>
 <section id="testing-local-predicates">
 <h2>Testing local predicates<a class="headerlink" href="#testing-local-predicates" title="Permalink to this headline"></a></h2>

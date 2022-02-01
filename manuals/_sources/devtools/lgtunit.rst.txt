@@ -847,7 +847,11 @@ Floating-point numbers can be compared using the ``=~=/2``,
 ``approximately_equal/3``, ``essentially_equal/3``, and
 ``tolerance_equal/4`` predicates provided by ``lgtunit``. Using the
 ``=/2`` term unification built-in predicate is almost always an error as
-it would mask test goals failing to bind output arguments.
+it would mask test goals failing to bind output arguments. The
+``lgtunit`` tool implements a linter check for the use of unification
+goals in test outcome assertions. In the rare cases that a unification
+goal is intended, wrapping the ``(=)/2`` goal using the ``{}/1`` control
+construct avoids the linter warning.
 
 Testing local predicates
 ------------------------
