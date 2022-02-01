@@ -83,8 +83,8 @@ Suggested by Andrew Davison.
 * ADDED: Additional tests for unbound integers when used in `functor/3` and
 `arg/3` predicate calls.
 
-* FIXED: Test for the `bagof/3` standard predicate that used a unification
-goal as assertion.
+* FIXED: Tests for the `bagof/3`, `term_variables/2`, and `write_term/3`
+standard predicates that used unification goals as assertions.
 
 * FIXED: Tests for the `format/2-3` de facto standard predicates that used
 unification goals as assertions.

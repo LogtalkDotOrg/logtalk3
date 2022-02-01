@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:25:0,
+		version is 1:25:1,
 		author is 'Paulo Moura',
-		date is 2022-01-10,
+		date is 2022-02-01,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -230,12 +230,12 @@
 		{write_term(out, foo(A,B,C), [variable_names(['X'=A,'Y'=B,'Z'=C,'W'=42])])},
 		^^text_output_assertion(out, 'foo(X,Y,Z)', Assertion).
 
-	test(lgt_write_term_3_43, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_43, subsumes(['_', _| _], Chars)) :-
 		^^set_text_output(out, ''),
 		{write_term(out, _, [variable_names(['Y'=_])])},
 		^^text_output_contents(out, Chars).
 
-	test(lgt_write_term_3_44, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_44, subsumes(['_', _| _], Chars)) :-
 		^^set_text_output(out, ''),
 		X = X,  % avoid a singleton warning
 		{write_term(out, X, [variable_names(['Y'=_])])},
@@ -356,13 +356,13 @@
 
 	% writing of variables without using numbervars/1 or variable_names/1 options
 
-	test(lgt_write_term_3_65, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_65, subsumes(['_', _| _], Chars)) :-
 		^^set_text_output(''),
 		A = A,	% avoid singleton warnings
 		{write(A)},
 		^^text_output_contents(Chars).
 
-	test(lgt_write_term_3_66, true(Chars = ['_', _| _])) :-
+	test(lgt_write_term_3_66, subsumes(['_', _| _], Chars)) :-
 		^^set_text_output(''),
 		A = A,	% avoid singleton warnings
 		{writeq(A)},

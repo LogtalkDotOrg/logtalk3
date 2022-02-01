@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2020-01-06,
+		date is 2022-02-01,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -62,10 +62,10 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		test(iso_term_variables_2_07, true(Vars = [_, _])) :-
+		test(iso_term_variables_2_07, subsumes([_, _], Vars)) :-
 			{term_variables(_X+Vars, Vars)}.
 	:- else.
-		- test(iso_term_variables_2_07, true(Vars = [_, _])) :-
+		- test(iso_term_variables_2_07, subsumes([_, _], Vars)) :-
 			% STO; Undefined.
 			{term_variables(_X+Vars, Vars)}.
 	:- endif.
