@@ -53,6 +53,9 @@ Library
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
 
+* FIXED: Two tests for the `nested_dictionaries` library that used unification
+goals as assertions.
+
 Tools
 -----
 

@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2021-04-09,
+		date is 2022-02-01,
 		comment is 'Unit tests for the "nested_dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -204,7 +204,7 @@
 		lookup_in([time, value], Value, Dict2),
 		lookup_in([time, unit], Unit, Dict2).
 
-	test(nested_dictionaries_obj_update_in_4_a_list, true(Ans = [])) :-
+	test(nested_dictionaries_obj_update_in_4_a_list, true(Ans == [])) :-
 		test_dict(Dict0),
 		update_in(Dict0, [ingredients], [], Dict),
 		lookup_in([ingredients], Ans, Dict).
@@ -312,7 +312,7 @@
 		delete_in(Dictionary, [time, unit], Unit, NewDictionary),
 		\+ lookup_in([time, unit], _, NewDictionary).
 
-	test(nested_dictionaries_delete_in_4_deep_dict, true(Value = Empty)) :-
+	test(nested_dictionaries_delete_in_4_deep_dict, variant(Value, Empty)) :-
 		new(Empty),
 		deep_dict(Deep),
 		deep_dict_keys_full_path_to_empty_value(Path),
