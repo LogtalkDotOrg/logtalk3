@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:4:1,
 		author is 'Paulo Moura',
-		date is 2021-08-25,
+		date is 2022-02-01,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -66,7 +66,8 @@
 		^^set_text_input(st_i, 'Γβα.', [encoding('UTF-8')]),
 		{read(st_i, Term)}.
 
-	test(lgt_unicode_variable_unifying, true(Term1 = Term2)) :-
+	% use the {}/1 control construct ot avoid a linter warning
+	test(lgt_unicode_variable_unifying, true({Term1 = Term2})) :-
 		^^set_text_input(st_i, 'Γβα. Δεη.', [encoding('UTF-8')]),
 		{read(st_i, Term1), read(st_i, Term2)}.
 

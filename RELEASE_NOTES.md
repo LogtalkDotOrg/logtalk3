@@ -89,6 +89,9 @@ goal as assertion.
 * FIXED: Tests for the `format/2-3` de facto standard predicates that used
 unification goals as assertions.
 
+* FIXED: Avoid a linter warning from the `lgtunit` tool in a Unicode test for
+variable unification.
+
 
 3.53.0 - January 20, 2022
 =========================
