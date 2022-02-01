@@ -83,6 +83,9 @@ Suggested by Andrew Davison.
 * ADDED: Additional tests for unbound integers when used in `functor/3` and
 `arg/3` predicate calls.
 
+* FIXED: Test for the `bagof/3` standard predicate that used a unification
+goal as assertion.
+
 
 3.53.0 - January 20, 2022
 =========================

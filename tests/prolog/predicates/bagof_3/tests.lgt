@@ -49,9 +49,9 @@ f(_, 2, b).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2021-12-10,
+		date is 2022-02-01,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -118,7 +118,7 @@ f(_, 2, b).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.2.1 NOTES
 
-	test(iso_bagof_3_15, true(LL = [_])) :-
+	test(iso_bagof_3_15, subsumes([_], LL)) :-
 		findall(L, {bagof(X, a(X), L)}, LL).
 
 	test(iso_bagof_3_16, true(var(X))) :-
