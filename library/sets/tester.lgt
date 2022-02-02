@@ -24,9 +24,9 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([setp, set, set1], [debug(on), source_data(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
+	logtalk_load([tests, tests_comparingp], [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		tests(set),
-		tests(set(integer))
+		tests_comparingp
 	])
 )).
