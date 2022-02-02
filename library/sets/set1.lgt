@@ -76,12 +76,20 @@
 	compare(>, Term1, Term2) :-
 		_Type_::(Term1 > Term2),!.
 
+	:- private(iso_compare/3).
+	iso_compare(Order, Term1, Term2) :-
+		{ compare(Order, Term1, Term2) }.
+
+	:- private(iso_sort/2).
+	iso_sort(List, Set) :-
+		{ sort(List, Set) }.
+
 	as_set(List, Set) :-
-		sort(List, Set).
+		catch(sort(List, Set), error(existence_error(_, _), _), iso_sort(List, Set)).
 
 	insert([], Element, [Element]).
 	insert([Head| Tail], Element, Set) :-
-		compare(Order, Head, Element),
+		catch(compare(Order, Head, Element), error(existence_error(_, _), _), iso_compare(Order, Head, Element)),
 		insert(Order, Head, Tail, Element, Set).
 
 	insert(<, Head, Tail, Element, [Head| Set]) :-

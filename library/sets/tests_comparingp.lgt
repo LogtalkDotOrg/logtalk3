@@ -70,6 +70,9 @@
         set(reverse_int)::as_set([r1, r2, r3, r4], Set),
         length(Set, N).
 
+    test(as_set_2_02, deterministic(Set == [1, 2, 3])) :-
+        set(integer)::as_set([3, 3, 2, 1], Set).
+
     % insert/3 tests
     test(insert_3_01, deterministic(N == 2)) :-
         set(reverse_int)::as_set([r3], Set),
