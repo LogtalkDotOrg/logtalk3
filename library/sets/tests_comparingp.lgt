@@ -21,6 +21,10 @@
 :- object(reverse_int, implements(comparingp)).
 
     :- public(n/1).
+    :- public(valid/1).
+    valid(X) :-
+        X::n(N),
+        integer(N).
 
     X > Y :-
         X::n(N0),
@@ -60,23 +64,38 @@
 
     cover(set(reverse_int)).
 
-    test(as_set, deterministic(N == 3)) :-
+    % as_set/2 tests
+
+    test(as_set_2_01, deterministic(N == 3)) :-
         set(reverse_int)::as_set([r1, r2, r3, r4], Set),
         length(Set, N).
 
-    test(insert, deterministic(N == 2)) :-
+    % insert/3 tests
+    test(insert_3_01, deterministic(N == 2)) :-
         set(reverse_int)::as_set([r3], Set),
         set(reverse_int)::insert(Set, r4, Set1),
         length(Set1, N).
 
-    test(insert, deterministic(N == 2)) :-
+    test(insert_3_02, deterministic(N == 2)) :-
         set(reverse_int)::as_set([r1, r3], Set),
         set(reverse_int)::insert(Set, r2, Set1),
         length(Set1, N).
 
-    test(insert_all, deterministic(N == 3)) :-
+    % insert_all/3 tests
+
+    test(insert_all_3_01, deterministic(N == 3)) :-
         set(reverse_int)::as_set([r1], Set),
         set(reverse_int)::insert_all([r3, r2, r4], Set, Set1),
         length(Set1, N).
+
+    % valid/1 tests
+
+	test(set_valid_1_01, deterministic) :-
+		set(reverse_int)::as_set([], Set),
+		set(reverse_int)::valid(Set).
+
+	test(set_valid_1_02, deterministic) :-
+		set(reverse_int)::as_set([r1,r3,r4], Set),
+		set(reverse_int)::valid(Set).
 
 :- end_object.

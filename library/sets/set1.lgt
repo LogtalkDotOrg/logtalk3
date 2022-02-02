@@ -112,7 +112,7 @@
 	check_order([Element2| Set], Element1) :-
 		_Type_::valid(Element1),
 		_Type_::valid(Element2),
-		Element2 @> Element1,
+		_Type_::(Element2 > Element1),
 		check_order(Set, Element2).
 
 	check(Term) :-
