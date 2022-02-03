@@ -68,25 +68,25 @@
 
     test(as_set_2_01, deterministic(N == 3)) :-
         set(reverse_int)::as_set([r1, r2, r3, r4], Set),
-        length(Set, N).
+        list::length(Set, N).
 
     % insert/3 tests
     test(insert_3_01, deterministic(N == 2)) :-
         set(reverse_int)::as_set([r3], Set),
         set(reverse_int)::insert(Set, r4, Set1),
-        length(Set1, N).
+        list::length(Set1, N).
 
     test(insert_3_02, deterministic(N == 2)) :-
         set(reverse_int)::as_set([r1, r3], Set),
         set(reverse_int)::insert(Set, r2, Set1),
-        length(Set1, N).
+        list::length(Set1, N).
 
     % insert_all/3 tests
 
     test(insert_all_3_01, deterministic(N == 3)) :-
         set(reverse_int)::as_set([r1], Set),
         set(reverse_int)::insert_all([r3, r2, r4], Set, Set1),
-        length(Set1, N).
+        list::length(Set1, N).
 
     % valid/1 tests
 
