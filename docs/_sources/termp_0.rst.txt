@@ -11,22 +11,21 @@
 Term utility predicates protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:33:0
-| **Date:** 2021-04-13
+| **Version:** 1:34:0
+| **Date:** 2022-02-03
 
 | **Compilation flags:**
 |    ``static``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Extends:**
+|    ``public`` :ref:`comparingp <comparingp/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`comparingp/0::(<)/2`  :ref:`comparingp/0::(=:=)/2`  :ref:`comparingp/0::(=<)/2`  :ref:`comparingp/0::(=\=)/2`  :ref:`comparingp/0::(>)/2`  :ref:`comparingp/0::(>=)/2`  
 
 .. contents::
    :local:
@@ -383,12 +382,12 @@ Replaces all ``'$VAR'(N)`` sub-terms in a term with fresh variables for all valu
 Protected predicates
 --------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

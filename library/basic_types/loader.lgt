@@ -21,6 +21,7 @@
 
 :- initialization(
 	logtalk_load([
+		types(comparingp),
 		types(termp), types(term),
 		types(atomic),
 		types(atom),

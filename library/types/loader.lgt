@@ -21,6 +21,7 @@
 
 :- initialization(
 	logtalk_load([
+		comparingp,
 		termp, term,
 		atomic,
 		atom, callable,
@@ -32,7 +33,6 @@
 		difflist,
 		numberlistp, numberlist,
 		varlistp, varlist,
-		comparingp,
 		type
 	], [
 		optimize(on)

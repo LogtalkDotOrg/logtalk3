@@ -19,14 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(term,
 	implements(termp)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2021-03-25,
+		date is 2022-02-03,
 		comment is 'Term utility predicates.'
 	]).
 
@@ -38,14 +37,14 @@
 	depth(Var, Acc, MaxSoFar, Depth) :-
 		var(Var),
 		!,
-		(	Acc > MaxSoFar ->
+		(	{Acc > MaxSoFar} ->
 			Depth = Acc
 		;	Depth = MaxSoFar
 		).
 	depth(Atomic, Acc, MaxSoFar, Depth) :-
 		atomic(Atomic),
 		!,
-		(	Acc > MaxSoFar ->
+		(	{Acc > MaxSoFar} ->
 			Depth = Acc
 		;	Depth = MaxSoFar
 		).
@@ -74,7 +73,7 @@
 		occurs(Var, Arg),
 		!.
 	occurs(N, Var, Term) :-
-		N > 1,
+		{N > 1},
 		N2 is N - 1,
 		occurs(N2, Var, Term).
 
@@ -92,7 +91,7 @@
 		arg(N, Term, Arg),
 		subterm(Sub, Arg).
 	subterm(N, Sub, Term) :-
-		N > 1,
+		{N > 1},
 		M is N-1,
 		subterm(M, Sub, Term).
 
@@ -158,7 +157,7 @@
 		!,
 		Copy = Term.
 	varnumbers('$VAR'(N), From, Pairs0, Pairs, Var) :-
-		N >= From,
+		{N >= From},
 		!,
 		(	member(N-Var, Pairs0) ->
 			Pairs = Pairs0
@@ -178,6 +177,26 @@
 
 	varnumbers(Term, Copy) :-
 		varnumbers(Term, 0, Copy).
+
+	% implementation of the comparingp protocol predicates
+
+	Term1 < Term2 :-
+		Term1 @< Term2.
+
+	Term1 =< Term2 :-
+		Term1 @=< Term2.
+
+	Term1 > Term2 :-
+		Term1 @> Term2.
+
+	Term1 >= Term2 :-
+		Term1 @>= Term2.
+
+	Term1 =:= Term2 :-
+		Term1 == Term2.
+
+	Term1 =\= Term2 :-
+		Term1 \== Term2.
 
 	% auxiliary predicates (as this is a root object
 	% we avoid a dependency on descendant objects)
