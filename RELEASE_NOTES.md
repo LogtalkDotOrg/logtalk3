@@ -49,6 +49,13 @@ for the bug report.
 Library
 -------
 
+* CHANGED: The `basic_types` library loader to also load the `comparingp`
+protocol.
+
+* CHANGED: The `types` library `termp` protocol to extend the `comparingp`
+protocol and the `term` and `number` objects to provide implementations of
+the comparison predicates.
+
 * ADDED: Linter checks for `format/2-3` goals to the `format` library.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.

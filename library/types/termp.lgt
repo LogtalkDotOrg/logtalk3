@@ -19,12 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(termp).
+:- protocol(termp,
+	extends(comparingp)).
 
 	:- info([
-		version is 1:33:0,
+		version is 1:34:0,
 		author is 'Paulo Moura',
-		date is 2021-04-13,
+		date is 2022-02-03,
 		comment is 'Term utility predicates protocol.',
 		see_also is [term]
 	]).

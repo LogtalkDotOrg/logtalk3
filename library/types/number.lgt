@@ -23,9 +23,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2021-10-03,
+		date is 2022-02-03,
 		comment is 'Number data type predicates.'
 	]).
 
@@ -60,13 +60,13 @@
 	]).
 
 	approximately_equal(Number1, Number2, Epsilon) :-
-		abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon.
+		{abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon}.
 
 	essentially_equal(Number1, Number2, Epsilon) :-
-		abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon.
+		{abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon}.
 
 	tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance) :-
-		abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance).
+		{abs(Number1 - Number2) =< max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance)}.
 
 	'=~='([], []) :-
 		!.
@@ -76,10 +76,10 @@
 		'=~='(Floats1, Floats2).
 	'=~='(Float1, Float2) :-
 		(	% first test the absolute error, for meaningful results with numbers very close to zero:
-			epsilon(Epsilon), abs(Float1 - Float2) < 100*Epsilon ->
+			epsilon(Epsilon), {abs(Float1 - Float2) < 100*Epsilon} ->
 			true
 		;	% if that fails, test the relative error (99.999% accuracy):
-			abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))
+			{abs(Float1 - Float2) < 0.00001 * max(abs(Float1), abs(Float2))}
 		).
 
 	:- if((
@@ -107,5 +107,26 @@
 			instantiation_error
 		;	type_error(number, Term)
 		).
+
+	% redefinition of the implementation of "comparingp" protocol
+	% predicates that are inherited from "term" object
+
+	Term1 < Term2 :-
+		{Term1 < Term2}.
+
+	Term1 =< Term2 :-
+		{Term1 =< Term2}.
+
+	Term1 > Term2 :-
+		{Term1 > Term2}.
+
+	Term1 >= Term2 :-
+		{Term1 >= Term2}.
+
+	Term1 =:= Term2 :-
+		{Term1 =:= Term2}.
+
+	Term1 =\= Term2 :-
+		{Term1 =\= Term2}.
 
 :- end_object.
