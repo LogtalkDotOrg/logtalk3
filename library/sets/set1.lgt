@@ -24,8 +24,8 @@
 
 	:- info([
 		version is 1:24:0,
-		author is 'Paulo Moura',
-		date is 2018-07-11,
+		author is 'Paulo Moura and Adrian Arroyo',
+		date is 2022-02-03,
 		comment is 'Set predicates with elements constrained to a single type and custom comparing rules.',
 		parnames is ['Type']
 	]).
@@ -76,20 +76,12 @@
 	compare(>, Term1, Term2) :-
 		_Type_::(Term1 > Term2),!.
 
-	:- private(iso_compare/3).
-	iso_compare(Order, Term1, Term2) :-
-		{ compare(Order, Term1, Term2) }.
-
-	:- private(iso_sort/2).
-	iso_sort(List, Set) :-
-		{ sort(List, Set) }.
-
 	as_set(List, Set) :-
-		catch(sort(List, Set), error(existence_error(_, _), _), iso_sort(List, Set)).
+		sort(List, Set).
 
 	insert([], Element, [Element]).
 	insert([Head| Tail], Element, Set) :-
-		catch(compare(Order, Head, Element), error(existence_error(_, _), _), iso_compare(Order, Head, Element)),
+		compare(Order, Head, Element),
 		insert(Order, Head, Tail, Element, Set).
 
 	insert(<, Head, Tail, Element, [Head| Set]) :-
