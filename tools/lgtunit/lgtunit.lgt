@@ -55,7 +55,7 @@
 	:- mode(run(++callable), zero_or_one).
 	:- mode(run(++list(callable)), zero_or_one).
 	:- info(run/1, [
-		comment is 'Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails.',
+		comment is 'Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails. Also fails if the test does not exist.',
 		argnames is ['Tests']
 	]).
 
