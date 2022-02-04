@@ -156,10 +156,10 @@
 
 	% sharing of variables between setup/1 and cleanup/1 option and the test body
 
-	test(test_setup_variable_sharing, true(N == 2), [setup(setup_goal(M))]) :-
+	test(setup_variable_sharing, true(N == 2), [setup(setup_goal(M))]) :-
 		N is M + 1.
 
-	test(test_cleanup_variable_sharing, true, [cleanup(cleanup_goal(N))]) :-
+	test(cleanup_variable_sharing, true, [cleanup(cleanup_goal(N))]) :-
 		N is 1.
 
 	% flaky tests

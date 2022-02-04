@@ -1204,8 +1204,8 @@
 	option_goal(Option, Goal) :-
 		(	control_construct(Option) ->
 			Goal = Option
-		;	sender(Sender),
-			Goal = Sender<<Option
+		;	self(Self),
+			Goal = Self<<Option
 		).
 
 	control_construct(_::_).

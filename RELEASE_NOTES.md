@@ -83,6 +83,9 @@ the Sphinx Read the Docs theme as found in the `lgt2rst.sh` Bash script.
 with the `-s` option due to changes in recent versions of the Sphinx
 `sphinx-quickstart` command.
 
+* FIXED: The `lgtunit::run/1` predicate when the test defines `setup/1` or
+`cleanup/1` options. Thanks to Trystan Lapointe-Majumdar for the bug report.
+
 * FIXED: The `logtalk_tester` script to only setup and use the `issue_creator`
 tool when the `-b` option is used as per documentation.
 
