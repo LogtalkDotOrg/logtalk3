@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 10:6:0,
+		version is 11:0:0,
 		author is 'Paulo Moura',
-		date is 2022-02-01,
+		date is 2022-02-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1587,7 +1587,9 @@
 
 	compile_test_step_aux_predicate(Test, Step, Goal, Head) :-
 		test_name_to_atom_prefix(Test, Prefix),
-		atom_concat(Prefix, Step, Head),
+		atom_concat(Prefix, Step, Functor),
+		term_variables(Goal, Variables),
+		Head =.. [Functor| Variables],
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	compile_deterministic_test_aux_predicate(Test, Goal, Head) :-

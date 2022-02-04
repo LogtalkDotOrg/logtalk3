@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2021-09-15,
+		date is 2022-02-04,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -154,6 +154,14 @@
 	test(test_3_13b, all(integer(N)), []) :-
 		(N = 13; N = 17; N = 42).
 
+	% sharing of variables between setup/1 and cleanup/1 option and the test body
+
+	test(test_setup_variable_sharing, true(N == 2), [setup(setup_goal(M))]) :-
+		N is M + 1.
+
+	test(test_cleanup_variable_sharing, true, [cleanup(cleanup_goal(N))]) :-
+		N is 1.
+
 	% flaky tests
 
 	test(test_flaky_01, true, [note('flaky; test expected to fail')]) :-
@@ -206,6 +214,11 @@
 
 	% auxiliary predicates for checking that condition/1, setup/1, cleanup/1,
 	% and note/1 options in the test/3 dialect are processed
+
+	setup_goal(1).
+
+	cleanup_goal(N) :-
+		N == 1.
 
 	:- public(r/1).
 	:- dynamic(r/1).

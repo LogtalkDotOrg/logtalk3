@@ -66,6 +66,10 @@ goals as assertions.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool to allow sharing variables between a test body
+and its `setup/1` and `cleanup/1` options. Thanks to Trystan Lapointe-Majumdar
+for the use case.
+
 * ADDED: A `lgtunit` tool lint check for the use of unification goals in test
 outcome assertions.
 

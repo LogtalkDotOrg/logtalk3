@@ -1047,7 +1047,8 @@ Per test setup and cleanup goals can be defined using the ``test/3``
 dialect and the ``setup/1`` and ``cleanup/1`` options. The test is
 skipped when the setup goal fails or throws an error. Note that a broken
 test cleanup goal doesn't affect the test but may adversely affect any
-following tests.
+following tests. Variables in the setup and cleanup goals are shared
+with the test body.
 
 Test annotations
 ----------------

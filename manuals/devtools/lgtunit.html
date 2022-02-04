@@ -1094,7 +1094,8 @@ goal fails or throws an error. For example:</p>
 dialect and the <code class="docutils literal notranslate"><span class="pre">setup/1</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> options. The test is
 skipped when the setup goal fails or throws an error. Note that a broken
 test cleanup goal doesn’t affect the test but may adversely affect any
-following tests.</p>
+following tests. Variables in the setup and cleanup goals are shared
+with the test body.</p>
 </section>
 <section id="test-annotations">
 <h2>Test annotations<a class="headerlink" href="#test-annotations" title="Permalink to this headline"></a></h2>
