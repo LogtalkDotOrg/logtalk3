@@ -24,7 +24,7 @@ built-in predicates, and stream properties), `encodings` (for UTF-8,
 UTF-16, and UTF-32 encodings, with and without a BOM), and `syntax` (for
 the `\uXXXX` and `\UXXXXXXXX` escape sequences). The `encodings` test set
 is only enabled for backends supporting all the above encodings (currently,
-CxProlog and SICStus Prolog).
+CxProlog, LVM, SICStus Prolog, and Trealla Prolog).
 
 The tests are based on an extended version of the October 5, 2009 WG17 ISO
 Prolog Core revision standardization proposal, which specifies the following
