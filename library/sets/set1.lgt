@@ -44,12 +44,6 @@
 		argnames is ['List', 'Pivot', 'Lowers', 'Biggers']
 	]).
 
-	:- private(compare/3).
-	:- info(compare/3, [
-		comment is 'Compares two elements using custo comparing rules.',
-		argnames is ['Order', 'Term1', 'Term2']
-	]).
-
 	sort([], []).
 	sort([P| L], S) :-
 		partition(L, P, Small, Large),
@@ -67,21 +61,18 @@
 		),
 		partition(L1, P, Small1, Large1).
 
-	compare(<, Term1, Term2) :-
-		_Type_::(Term1 < Term2),!.
-
-	compare(=, Term1, Term2) :-
-		_Type_::(Term1 =:= Term2),!.
-
-	compare(>, Term1, Term2) :-
-		_Type_::(Term1 > Term2),!.
-
 	as_set(List, Set) :-
 		sort(List, Set).
 
 	insert([], Element, [Element]).
 	insert([Head| Tail], Element, Set) :-
-		compare(Order, Head, Element),
+		(
+			_Type_::(Head < Element) ->
+			Order = <
+		;   _Type_::(Head =:= Element) ->
+			Order = =
+		;   Order = >
+		),
 		insert(Order, Head, Tail, Element, Set).
 
 	insert(<, Head, Tail, Element, [Head| Set]) :-
