@@ -8,11 +8,11 @@
 ``set(Type)``
 =============
 
-Set predicates with elements constrained to a single type.
+Set predicates with elements constrained to a single type and custom comparing rules.
 
-| **Author:** Paulo Moura
-| **Version:** 1:23:0
-| **Date:** 2018-07-11
+| **Author:** Paulo Moura and Adrian Arroyo
+| **Version:** 1:24:0
+| **Date:** 2022-02-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -20,6 +20,8 @@ Set predicates with elements constrained to a single type.
 
 | **Extends:**
 |    ``public`` :ref:`set <set/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
@@ -44,7 +46,51 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. raw:: html
+
+   <div id="sort/2"> </div>
+
+.. index:: sort/2
+.. _set/1::sort/2:
+
+``sort/2``
+^^^^^^^^^^
+
+Sorts a list in ascending order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sort(List,Sorted)``
+| **Mode and number of proofs:**
+|    ``sort(+list,-list)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="partition/4"> </div>
+
+.. index:: partition/4
+.. _set/1::partition/4:
+
+``partition/4``
+^^^^^^^^^^^^^^^
+
+List partition in two sub-lists using a pivot.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``partition(List,Pivot,Lowers,Biggers)``
+| **Mode and number of proofs:**
+|    ``partition(+list,+nonvar,-list,-list)`` - ``one``
+
+
+------------
 
 Operators
 ---------
