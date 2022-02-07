@@ -158,10 +158,11 @@
   <section id="sets">
 <h1><code class="docutils literal notranslate"><span class="pre">sets</span></code><a class="headerlink" href="#sets" title="Permalink to this headline"></a></h1>
 <p>This library provides a set protocol and two implementations of this
-protocol using ordered lists, one of them a parametric object that takes
-the type of the set elements as a parameter. Although representing sets
-as ordered lists is a common representation, is best practice to regard
-sets as opaque terms and only access them using the library predicates.</p>
+protocol using <em>ordered lists</em>, one of them a parametric object that
+takes the type of the set elements as a parameter. Although representing
+sets as ordered lists is a common representation, is best practice to
+regard sets as opaque terms and only access them using the library
+predicates.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>Open the
@@ -195,7 +196,7 @@ yes
 <p>You can also create a new set with all unique elements from a list of
 terms by using the <code class="docutils literal notranslate"><span class="pre">as_set/2</span></code> predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> set<span class="o">::</span>as_set([<span class="m">1</span>,<span class="m">3</span>,<span class="m">2</span>,<span class="m">1</span>,<span class="m">2</span>], <span class="nv">Set</span>).
-<span class="nv">Set</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>
+<span class="nv">Set</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>]
 yes
 </pre></div>
 </div>
@@ -210,6 +211,41 @@ yes
 <span class="nv">Set2</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">7</span>],
 <span class="nv">Intersection</span> <span class="o">=</span> [<span class="m">1</span>, <span class="m">2</span>],
 <span class="nv">Difference</span> <span class="o">=</span> [<span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, <span class="m">7</span>]
+yes
+</pre></div>
+</div>
+<p>When working with a custom type of set elements, the corresponding
+object must implement the <code class="docutils literal notranslate"><span class="pre">comparingp</span></code> protocol. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p"> :- </span><span class="k">object</span>(rainbow_colors,
+    <span class="k">implements</span>(comparingp)).
+
+    order(red,    <span class="m">1</span>).
+    order(orange, <span class="m">2</span>).
+    order(yellow, <span class="m">3</span>).
+    order(green,  <span class="m">4</span>).
+    order(blue,   <span class="m">5</span>).
+    order(indigo, <span class="m">6</span>).
+    order(violet, <span class="m">7</span>).
+
+    <span class="nv">Color1</span> <span class="o">&lt;</span> <span class="nv">Color2</span> <span class="o">:-</span>
+        order(<span class="nv">Color1</span>, <span class="nv">N1</span>),
+        order(<span class="nv">Color2</span>, <span class="nv">N2</span>),
+        <span class="k">{</span><span class="nv">N1</span> <span class="o">&lt;</span> <span class="nv">N2</span><span class="k">}</span>.
+
+    <span class="nv">Color1</span> <span class="o">=&lt;</span> <span class="nv">Color2</span> <span class="o">:-</span>
+        order(<span class="nv">Color1</span>, <span class="nv">N1</span>),
+        order(<span class="nv">Color2</span>, <span class="nv">N2</span>),
+        <span class="k">{</span><span class="nv">N1</span> <span class="o">=&lt;</span> <span class="nv">N2</span><span class="k">}</span>.
+
+    ...
+
+<span class="p">:- </span><span class="k">end_protocol</span>.
+</pre></div>
+</div>
+<p>We can then use this object with the <code class="docutils literal notranslate"><span class="pre">set/1</span></code> parametric object. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> set(rainbow_colors)<span class="o">::</span>as_set([blue, yellow, violet], <span class="nv">Set</span>).
+<span class="nv">Set</span> <span class="o">=</span> [yellow, blue, violet]
 yes
 </pre></div>
 </div>

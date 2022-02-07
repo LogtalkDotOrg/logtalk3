@@ -22,7 +22,7 @@ ________________________________________________________________________
 ======
 
 This library provides a set protocol and two implementations of this protocol
-using ordered lists, one of them a parametric object that takes the type of
+using *ordered lists*, one of them a parametric object that takes the type of
 the set elements as a parameter. Although representing sets as ordered lists
 is a common representation, is best practice to regard sets as opaque terms
 and only access them using the library predicates.
@@ -67,7 +67,7 @@ You can also create a new set with all unique elements from a list of terms
 by using the `as_set/2` predicate. For example:
 
 	| ?- set::as_set([1,3,2,1,2], Set).
-	Set = [1, 2, 3
+	Set = [1, 2, 3]
 	yes
 
 Predicates are provided for the most common set operations. For example:
@@ -82,6 +82,40 @@ Predicates are provided for the most common set operations. For example:
 	Set2 = [1, 2, 4, 5, 7],
 	Intersection = [1, 2],
 	Difference = [3, 4, 5, 7]
+	yes
+
+When working with a custom type of set elements, the corresponding object
+must implement the `comparingp` protocol. For example:
+
+	 :- object(rainbow_colors,
+	 	implements(comparingp)).
+
+		order(red,    1).
+		order(orange, 2).
+		order(yellow, 3).
+		order(green,  4).
+		order(blue,   5).
+		order(indigo, 6).
+		order(violet, 7).
+
+	    Color1 < Color2 :-
+			order(Color1, N1),
+			order(Color2, N2),
+	        {N1 < N2}.
+
+	    Color1 =< Color2 :-
+			order(Color1, N1),
+			order(Color2, N2),
+	        {N1 =< N2}.
+
+		...
+
+	:- end_protocol.
+
+We can then use this object with the `set/1` parametric object. For example:
+
+	| ?- set(rainbow_colors)::as_set([blue, yellow, violet], Set).
+	Set = [yellow, blue, violet]
 	yes
 
 For details on these and other provided predicates, consult the library
