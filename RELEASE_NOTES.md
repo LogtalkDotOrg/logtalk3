@@ -100,6 +100,9 @@ Suggested by Andrew Davison.
 
 * ADDED: Additional tests for the Prolog standard `arg/3` predicate.
 
+* ADDED: Additional test for the Prolog standard `findall/3` predicate after
+a bug report and discussion with Jos De Roo and José Antonio Riaza Valverde.
+
 * ADDED: Additional tests for unbound integers when used in `functor/3` and
 `arg/3` predicate calls.
 
