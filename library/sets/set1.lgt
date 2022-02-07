@@ -56,8 +56,8 @@
 		(	_Type_::(X < P) ->
 			Small = [X| Small1], Large = Large1
 		;	_Type_::(X =:= P) ->
-            Small = Small1, Large = Large1  
-        ;   Small = Small1, Large = [X| Large1]
+			Small = Small1, Large = Large1
+		;	Small = Small1, Large = [X| Large1]
 		),
 		partition(L1, P, Small1, Large1).
 
@@ -66,12 +66,11 @@
 
 	insert([], Element, [Element]).
 	insert([Head| Tail], Element, Set) :-
-		(
-			_Type_::(Head < Element) ->
-			Order = <
-		;   _Type_::(Head =:= Element) ->
-			Order = =
-		;   Order = >
+		(	_Type_::(Head < Element) ->
+			Order = (<)
+		;	_Type_::(Head =:= Element) ->
+			Order = (=)
+		;	Order = (>)
 		),
 		insert(Order, Head, Tail, Element, Set).
 
