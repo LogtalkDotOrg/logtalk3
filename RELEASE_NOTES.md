@@ -49,6 +49,9 @@ for the bug report.
 Library
 -------
 
+* CHANGED: The `set(_Type_)` object now takes into account the `comparingp`
+protocol.
+
 * CHANGED: The `basic_types` library loader to also load the `comparingp`
 protocol.
 
