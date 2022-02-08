@@ -295,6 +295,56 @@ directive in the source file itself. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, hook_object).
 </pre></div>
 </div>
+<p>To use multiple hook objects in the same source file, simple write each
+directive before the block of code that it should handle. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(h1,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>((<span class="o">:-</span> public(a<span class="o">/</span><span class="m">0</span>)), (<span class="o">:-</span> public(b<span class="o">/</span><span class="m">0</span>))).
+    <span class="k">term_expansion</span>(a, b).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(h2,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>((<span class="o">:-</span> public(a<span class="o">/</span><span class="m">0</span>)), (<span class="o">:-</span> public(c<span class="o">/</span><span class="m">0</span>))).
+    <span class="k">term_expansion</span>(a, c).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, h1).
+
+<span class="p">:- </span><span class="k">object</span>(s1).
+
+<span class="p">    :- </span><span class="k">public</span>(a<span class="o">/</span><span class="m">0</span>).
+    a.
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+
+<span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, h2).
+
+<span class="p">:- </span><span class="k">object</span>(s2).
+
+<span class="p">    :- </span><span class="k">public</span>(a<span class="o">/</span><span class="m">0</span>).
+    a.
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- {h1, h2, s}.
+...
+
+| ?- s1::b.
+yes
+
+| ?- s2::c.
+yes
+</pre></div>
+</div>
 <p>It is also possible to define a default hook object by defining a global
 value for the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag by calling the <a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a>
 predicate. For example:</p>

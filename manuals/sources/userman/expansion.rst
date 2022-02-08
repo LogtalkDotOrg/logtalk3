@@ -214,6 +214,61 @@ directive in the source file itself. For example:
 
    :- set_logtalk_flag(hook, hook_object).
 
+To use multiple hook objects in the same source file, simple write each
+directive before the block of code that it should handle. For example:
+
+::
+
+   :- object(h1,
+       implements(expanding)).
+   
+       term_expansion((:- public(a/0)), (:- public(b/0))).
+       term_expansion(a, b).
+   
+   :- end_object.
+
+::
+
+   :- object(h2,
+       implements(expanding)).
+   
+       term_expansion((:- public(a/0)), (:- public(c/0))).
+       term_expansion(a, c).
+   
+   :- end_object.
+
+::
+
+   :- set_logtalk_flag(hook, h1).
+   
+   :- object(s1).
+   
+       :- public(a/0).
+       a.
+   
+   :- end_object.
+   
+   
+   :- set_logtalk_flag(hook, h2).
+   
+   :- object(s2).
+   
+       :- public(a/0).
+       a.
+   
+   :- end_object.
+
+.. code-block:: text
+
+   | ?- {h1, h2, s}.
+   ...
+
+   | ?- s1::b.
+   yes
+
+   | ?- s2::c.
+   yes
+
 It is also possible to define a default hook object by defining a global
 value for the ``hook`` flag by calling the :ref:`predicates_set_logtalk_flag_2`
 predicate. For example:
