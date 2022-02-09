@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on January 20, 2021
+Last updated on February 9, 2021
 
 This file is part of Logtalk <https://logtalk.org/>  
 Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>  
@@ -412,7 +412,7 @@ Messages sent from modules (including `user`) use static binding when the
 Logtalk `optimize` flag is turned on before compiling the module files.
 
 
-Tau Prolog 0.3.1 and later versions
+Tau Prolog 0.3.2 and later versions
 -----------------------------------
 
 	tau.pl

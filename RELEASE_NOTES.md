@@ -30,6 +30,11 @@ Logtalk compiler and runtime
 
 * ADDED: Support to user-defined linter warning messages for suspicious calls.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Tau Prolog adapter file to require version 0.3.2 or later.
+
 Documentation
 -------------
 
