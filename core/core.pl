@@ -330,8 +330,8 @@
 :- dynamic('$lgt_pp_use_module_non_terminal_'/6).
 % '$lgt_pp_entity_info_'(List)
 :- dynamic('$lgt_pp_entity_info_'/1).
-% '$lgt_pp_predicate_info_'(Predicate, List)
-:- dynamic('$lgt_pp_predicate_info_'/2).
+% '$lgt_pp_predicate_info_'(Predicate, List, File, Lines)
+:- dynamic('$lgt_pp_predicate_info_'/4).
 
 % '$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, Prefix, Dcl, Scope)
 :- dynamic('$lgt_pp_implemented_protocol_'/5).
@@ -7553,7 +7553,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, _) :-
-	'$lgt_pp_predicate_info_'(Predicate, Info),
+	'$lgt_pp_predicate_info_'(Predicate, Info, _, _),
 		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Predicate, info(Info)))),
 	fail.
 
@@ -8087,7 +8087,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_entity_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_entity_'(_, _, _)),
 	retractall('$lgt_pp_entity_info_'(_)),
-	retractall('$lgt_pp_predicate_info_'(_, _)),
+	retractall('$lgt_pp_predicate_info_'(_, _, _, _)),
 	retractall('$lgt_pp_directive_'(_)),
 	retractall('$lgt_pp_synchronized_'(_, _, _, _)),
 	retractall('$lgt_pp_predicate_mutex_counter_'(_)),
@@ -9719,13 +9719,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % info/2 predicate directive
 
-'$lgt_compile_logtalk_directive'(info(Pred, Pairs), _) :-
+'$lgt_compile_logtalk_directive'(info(Pred, Pairs), Ctx) :-
+	'$lgt_source_file_context'(Ctx, File, Lines),
 	(	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity) ->
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
-		assertz('$lgt_pp_predicate_info_'(Functor/Arity, TPairs))
+		assertz('$lgt_pp_predicate_info_'(Functor/Arity, TPairs, File, Lines))
 	;	'$lgt_valid_non_terminal_indicator'(Pred, Functor, Arity, ExtArity) ->
 		'$lgt_compile_predicate_info_directive'(Pairs, Functor, Arity, TPairs),
-		assertz('$lgt_pp_predicate_info_'(Functor/ExtArity, TPairs))
+		assertz('$lgt_pp_predicate_info_'(Functor/ExtArity, TPairs, File, Lines))
 	;	var(Pred) ->
 		throw(instantiation_error)
 	;	throw(type_error(predicate_indicator, Pred))
@@ -21424,12 +21425,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	fail.
 
-% reports missing scope directives for mode directives
+% reports missing scope directives for mode2 and info/2 directives
 
 '$lgt_report_missing_directives'(Type, Entity) :-
-	'$lgt_pp_mode_'(Mode, _, File, Lines),
+	(	'$lgt_pp_mode_'(Mode, _, File, Lines),
+		functor(Mode, Functor, Arity),
+		Directive = mode
+	;	'$lgt_pp_predicate_info_'(Functor/Arity, _, File, Lines),
+		Directive = info
+	),
 	% documented predicate or non-terminal
-	functor(Mode, Functor, Arity),
 	\+ '$lgt_pp_non_terminal_'(Functor, Arity, _),
 	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
 	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
@@ -21438,7 +21443,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_scope_directive(File, Lines, Type, Entity, mode, Functor/Arity)
+		missing_scope_directive(File, Lines, Type, Entity, Directive, Functor/Arity)
 	),
 	fail.
 

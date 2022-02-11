@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Linter warning for missing predicate scope directive when a `info/2`
+directive exists.
+
 * ADDED: Support to user-defined linter warning messages for suspicious calls.
 
 Prolog adapter and integration files
