@@ -1,0 +1,262 @@
+.. index:: blank_grammars(Format)
+.. _blank_grammars/1:
+
+.. rst-class:: right
+
+**object**
+
+``blank_grammars(Format)``
+==========================
+
+Blank grammars.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2022-02-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="white_space//0"> </div>
+
+.. index:: white_space//0
+.. _blank_grammars/1::white_space//0:
+
+``white_space//0``
+^^^^^^^^^^^^^^^^^^
+
+Consumes a single space or tab.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``white_space`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="white_spaces//0"> </div>
+
+.. index:: white_spaces//0
+.. _blank_grammars/1::white_spaces//0:
+
+``white_spaces//0``
+^^^^^^^^^^^^^^^^^^^
+
+Consumes zero or more spaces and tabs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``white_spaces`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="space//0"> </div>
+
+.. index:: space//0
+.. _blank_grammars/1::space//0:
+
+``space//0``
+^^^^^^^^^^^^
+
+Consumes a single space.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``space`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="spaces//0"> </div>
+
+.. index:: spaces//0
+.. _blank_grammars/1::spaces//0:
+
+``spaces//0``
+^^^^^^^^^^^^^
+
+Consumes zero or more spaces.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``spaces`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="tab//0"> </div>
+
+.. index:: tab//0
+.. _blank_grammars/1::tab//0:
+
+``tab//0``
+^^^^^^^^^^
+
+Consumes a single tab.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``tab`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="tabs//0"> </div>
+
+.. index:: tabs//0
+.. _blank_grammars/1::tabs//0:
+
+``tabs//0``
+^^^^^^^^^^^
+
+Consumes zero or more tabs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``tabs`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="new_line//0"> </div>
+
+.. index:: new_line//0
+.. _blank_grammars/1::new_line//0:
+
+``new_line//0``
+^^^^^^^^^^^^^^^
+
+Consumes a single new line.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``new_line`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="new_lines//0"> </div>
+
+.. index:: new_lines//0
+.. _blank_grammars/1::new_lines//0:
+
+``new_lines//0``
+^^^^^^^^^^^^^^^^
+
+Consumes zero or more new lines.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``new_lines`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="blank//0"> </div>
+
+.. index:: blank//0
+.. _blank_grammars/1::blank//0:
+
+``blank//0``
+^^^^^^^^^^^^
+
+Consumes a single space, tab, or new line.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``blank`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="blanks//0"> </div>
+
+.. index:: blanks//0
+.. _blank_grammars/1::blanks//0:
+
+``blanks//0``
+^^^^^^^^^^^^^
+
+Consumes zero or more spaces, tabs, or new lines.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``blanks`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

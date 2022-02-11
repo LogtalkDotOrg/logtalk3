@@ -45,6 +45,7 @@ directory in the ``NOTES.md`` file.
    format
    gensym
    git
+   grammars
    heaps
    hierarchies
    hook_flows

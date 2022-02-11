@@ -69,6 +69,8 @@ protocol.
 protocol and the `term` and `number` objects to provide implementations of
 the comparison predicates.
 
+* ADDED: New `grammars` library providing DCGs for common parsing tasks.
+
 * ADDED: Linter checks for `format/2-3` goals to the `format` library.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.

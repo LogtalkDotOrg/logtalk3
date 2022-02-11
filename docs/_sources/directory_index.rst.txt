@@ -297,6 +297,17 @@ To load an entity, always load the library that includes it using the goal ``log
    git <git_0>
    git_protocol <git_protocol_0>
 
+``library/grammars/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   blank_grammars(Format) <blank_grammars_1>
+   number_grammars(Format) <number_grammars_1>
+
 ``library/heaps/``
 ------------------
 

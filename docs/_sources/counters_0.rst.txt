@@ -11,8 +11,8 @@
 Named integer counters. Counter names can be any nonvar term.
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2011-01-03
+| **Version:** 1:0:1
+| **Date:** 2022-02-11
 
 | **Compilation flags:**
 |    ``static``
@@ -136,6 +136,8 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 
 ``reset_counters/0``
 ^^^^^^^^^^^^^^^^^^^^
+
+Resets all existing named counters to zero.
 
 | **Compilation flags:**
 |    ``static``

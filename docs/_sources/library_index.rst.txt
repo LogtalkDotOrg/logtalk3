@@ -343,6 +343,17 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    git <git_0>
    git_protocol <git_protocol_0>
 
+``grammars``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   blank_grammars(Format) <blank_grammars_1>
+   number_grammars(Format) <number_grammars_1>
+
 ``heaps``
 ---------
 

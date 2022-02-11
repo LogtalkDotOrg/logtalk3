@@ -1,0 +1,261 @@
+.. index:: number_grammars(Format)
+.. _number_grammars/1:
+
+.. rst-class:: right
+
+**object**
+
+``number_grammars(Format)``
+===========================
+
+Number grammars.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2022-02-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="bit//1"> </div>
+
+.. index:: bit//1
+.. _number_grammars/1::bit//1:
+
+``bit//1``
+^^^^^^^^^^
+
+Parses a single bit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``bit(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="bits//1"> </div>
+
+.. index:: bits//1
+.. _number_grammars/1::bits//1:
+
+``bits//1``
+^^^^^^^^^^^
+
+Parses a sequence of one of more bits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``bits(?list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="digit//1"> </div>
+
+.. index:: digit//1
+.. _number_grammars/1::digit//1:
+
+``digit//1``
+^^^^^^^^^^^^
+
+Parses a single decimal digit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``digit(?atomic)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="digits//1"> </div>
+
+.. index:: digits//1
+.. _number_grammars/1::digits//1:
+
+``digits//1``
+^^^^^^^^^^^^^
+
+Parses a sequence of zero of more digits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``digits(?list(atomic))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="hex_digit//1"> </div>
+
+.. index:: hex_digit//1
+.. _number_grammars/1::hex_digit//1:
+
+``hex_digit//1``
+^^^^^^^^^^^^^^^^
+
+Parses a single hexa-decimal digit.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``hex_digit(?atomic)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="hex_digits//1"> </div>
+
+.. index:: hex_digits//1
+.. _number_grammars/1::hex_digits//1:
+
+``hex_digits//1``
+^^^^^^^^^^^^^^^^^
+
+Parses a sequence of zero or more hexa-decimal digits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``hex_digits(?list(atomic))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="sign//1"> </div>
+
+.. index:: sign//1
+.. _number_grammars/1::sign//1:
+
+``sign//1``
+^^^^^^^^^^^
+
+Parses a number sign.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``sign(?atomic)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="natural//1"> </div>
+
+.. index:: natural//1
+.. _number_grammars/1::natural//1:
+
+``natural//1``
+^^^^^^^^^^^^^^
+
+Parses a natural number (a non signed integer).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``natural(?non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="integer//1"> </div>
+
+.. index:: integer//1
+.. _number_grammars/1::integer//1:
+
+``integer//1``
+^^^^^^^^^^^^^^
+
+Parses an integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``integer(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="float//1"> </div>
+
+.. index:: float//1
+.. _number_grammars/1::float//1:
+
+``float//1``
+^^^^^^^^^^^^
+
+Parses a float.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``float(?float)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -19,13 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(counters).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2011-01-03,
+		date is 2022-02-11,
 		comment is 'Named integer counters. Counter names can be any nonvar term.'
 	]).
 
@@ -59,7 +58,7 @@
 
 	:- public(reset_counters/0).
 	:- mode(reset_counters, one).
-	:- info(reset_counter/0, [
+	:- info(reset_counters/0, [
 		comment is 'Resets all existing named counters to zero.'
 	]).
 

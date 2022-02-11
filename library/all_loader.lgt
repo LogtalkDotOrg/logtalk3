@@ -58,6 +58,7 @@
 		timeout(loader),
 		gensym(loader),
 		git(loader),
+		grammars(loader),
 		csv(loader),
 		json(loader),
 		cbor(loader),

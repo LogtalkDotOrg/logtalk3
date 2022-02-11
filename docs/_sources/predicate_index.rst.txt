@@ -669,6 +669,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`integer <integer/0::between/3>`
 * :ref:`random_protocol <random_protocol/0::between/3>`
 
+``bit//1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::bit//1>`
+
+``bits//1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::bits//1>`
+
+``blank//0``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::blank//0>`
+
+``blanks//0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::blanks//0>`
+
 ``body_pred/1``
 ---------------
 
@@ -1934,6 +1974,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`coroutining <coroutining/0::dif/2>`
 * :ref:`dif <dif/0::dif/2>`
 
+``digit//1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::digit//1>`
+
+``digits//1``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::digits//1>`
+
 ``directories/1``
 -----------------
 
@@ -2812,6 +2872,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`listp <listp/0::flatten/2>`
 * :ref:`varlistp <varlistp/0::flatten/2>`
 
+``float//1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::float//1>`
+
 ``fold_left/4``
 ---------------
 
@@ -3342,6 +3412,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`help <help/0::help/0>`
 * :ref:`packs_common <packs_common/0::help/0>`
 
+``hex_digit//1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::hex_digit//1>`
+
+``hex_digits//1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::hex_digits//1>`
+
 ``home/1``
 ----------
 
@@ -3644,6 +3734,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::instances/1>`
+
+``integer//1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::integer//1>`
 
 ``internal_os_path/2``
 ----------------------
@@ -5090,6 +5190,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::name_of_month/3>`
 
+``natural//1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::natural//1>`
+
 ``new/1``
 ---------
 
@@ -5123,6 +5233,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::new/3>`
+
+``new_line//0``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::new_line//0>`
+
+``new_lines//0``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::new_lines//0>`
 
 ``next/2``
 ----------
@@ -7142,6 +7272,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arbitrary <arbitrary/0::shrinker/1>`
 
+``sign//1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::sign//1>`
+
 ``singletons/2``
 ----------------
 
@@ -7223,6 +7363,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`modules_diagram_support <modules_diagram_support/0::source_file_extension/1>`
+
+``space//0``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::space//0>`
+
+``spaces//0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::spaces//0>`
 
 ``split/3``
 -----------
@@ -7619,6 +7779,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`setp <setp/0::symdiff/3>`
+
+``tab//0``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::tab//0>`
+
+``tabs//0``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::tabs//0>`
 
 ``take/3``
 ----------
@@ -8232,6 +8412,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`loopp <loopp/0::whiledo/2>`
+
+``white_space//0``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::white_space//0>`
+
+``white_spaces//0``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`blank_grammars(Format) <blank_grammars/1::white_spaces//0>`
 
 ``with_output_to/2``
 --------------------
