@@ -463,10 +463,10 @@ using a ``file://`` URL) or for downloading as a ``.zip``, ``.tar.gz``,
 or ``.tar.bz2`` archive. The checksum for the archive must use the
 SHA-256 hash algorithm (``sha256``). The pack may optionally be signed.
 
-The pack sources should contain ``LICENSE`` and ``README.md`` files. The
-path to the ``README.md`` file is printed when the pack is installed or
-updated. It can also be queried using the ``packs::directory/2``
-predicate.
+The pack sources should contain ``LICENSE``, ``README.md``, and
+``loader.lgt`` (or ``loader.logtalk``) files. The path to the
+``README.md`` file is printed when the pack is installed or updated. It
+can also be queried using the ``packs::directory/2`` predicate.
 
 Pack versions
 -------------
@@ -625,10 +625,20 @@ predicate. For example:
    | ?- packs::install(bar).
 
 Any pack dependencies are also checked and installed or updated if
-necessary. Packs becomes available for loading immediately after
-successful installation (no restarting of the Logtalk session is
-required). Other install predicates are available to disambiguate
+necessary. Other install predicates are available to disambiguate
 between registries and to install a specific pack version.
+
+Packs becomes available for loading immediately after successful
+installation (no restarting of the Logtalk session is required). For
+example, after the pack ``bar`` is installed, you can load it at the
+top-level by typing:
+
+::
+
+   | ?- {bar(loader)}.
+
+or load it from a loader file using the goal
+``logtalk_load(bar(loader))``.
 
 After updating the defined registries, outdated packs can be listed
 using the ``packs::outdated/0`` predicate. You can update all outdated
