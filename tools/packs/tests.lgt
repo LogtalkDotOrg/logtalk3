@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
-		date is 2021-12-03,
+		date is 2022-02-12,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -221,6 +221,9 @@
 
 	test(packs_packs_uninstall_1_02, false) :-
 		packs::installed(local_1_d, bar, _, _).
+
+	test(packs_packs_outdated_1_01, true) :-
+		packs::outdated(local_1_d).
 
 	% add a second local registry
 

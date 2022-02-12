@@ -229,6 +229,7 @@ any missing command.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(packs(tester)).
 </pre></div>
 </div>
+<p>The tests can be run without interfering with the user packs setup.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
@@ -459,8 +460,8 @@ details of a registry:</p>
 </div>
 <p>To update all registries, use the <code class="docutils literal notranslate"><span class="pre">registries::update/0</span></code> predicate. To
 update a single registry, use the <code class="docutils literal notranslate"><span class="pre">registries::update/1-2</span></code> predicates.
-After updating, you can use the <code class="docutils literal notranslate"><span class="pre">packs::outdated/0</span></code> predicate to list
-any outdated packs.</p>
+After updating, you can use the <code class="docutils literal notranslate"><span class="pre">packs::outdated/0-1</span></code> predicates to
+list any outdated packs.</p>
 <p>Registries can also be deleted using the <code class="docutils literal notranslate"><span class="pre">registries::delete/1-2</span></code>
 predicate. By default, any registries with installed packs cannot be
 deleted. If you force deletion (by using the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option),

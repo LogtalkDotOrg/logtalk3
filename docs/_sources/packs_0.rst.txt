@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:46:0
-| **Date:** 2022-01-03
+| **Version:** 0:47:0
+| **Date:** 2022-02-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -172,6 +172,27 @@ Enumerates by backtracking all installed but outdated packs (together with the c
 |    ``outdated(Registry,Pack,Version,LatestVersion)``
 | **Mode and number of proofs:**
 |    ``outdated(?atom,?atom,?compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="outdated/1"> </div>
+
+.. index:: outdated/1
+.. _packs/0::outdated/1:
+
+``outdated/1``
+^^^^^^^^^^^^^^
+
+Lists all the packs from the given registry that are installed but outdated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``outdated(+atom)`` - ``one``
 
 
 ------------

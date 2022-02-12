@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:46:0,
+		version is 0:47:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2022-02-12,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -67,6 +67,12 @@
 	:- info(outdated/4, [
 		comment is 'Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available).',
 		argnames is ['Registry', 'Pack', 'Version', 'LatestVersion']
+	]).
+
+	:- public(outdated/1).
+	:- mode(outdated(+atom), one).
+	:- info(outdated/1, [
+		comment is 'Lists all the packs from the given registry that are installed but outdated.'
 	]).
 
 	:- public(outdated/0).
@@ -427,6 +433,18 @@
 		check(var_or(atom), Pack),
 		check(var_or(compound), Version),
 		outdated_pack(Registry, Pack, Version, LatestVersion).
+
+	outdated(Registry) :-
+		check(atom, Registry),
+		print_message(information, packs, 'Outdated packs from the ~q registry:'+[Registry]),
+		outdated(Registry, Pack, Version, LatestVersion),
+		print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion)),
+		fail.
+	outdated(Registry) :-
+		\+ outdated_pack(Registry, _, _, _),
+		print_message(information, packs, @'  (none)'),
+		fail.
+	outdated(_).
 
 	outdated :-
 		print_message(information, packs, @'Outdated packs:'),

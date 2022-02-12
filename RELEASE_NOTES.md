@@ -88,6 +88,8 @@ for the use case.
 * ADDED: A `lgtunit` tool lint check for the use of unification goals in test
 outcome assertions.
 
+* ADDED: Predicate `packs::outdated/1` to list outdated packs from a registry.
+
 * IMPROVED: Performance of the `ports_profiler` tool.
 
 * UPDATED: The Windows `lgt2rst.js` JScript to provide the same support for a

@@ -105,6 +105,8 @@ Then, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(packs(tester)).
 
+The tests can be run without interfering with the user packs setup.
+
 Usage
 -----
 
@@ -375,8 +377,8 @@ details of a registry:
 
 To update all registries, use the ``registries::update/0`` predicate. To
 update a single registry, use the ``registries::update/1-2`` predicates.
-After updating, you can use the ``packs::outdated/0`` predicate to list
-any outdated packs.
+After updating, you can use the ``packs::outdated/0-1`` predicates to
+list any outdated packs.
 
 Registries can also be deleted using the ``registries::delete/1-2``
 predicate. By default, any registries with installed packs cannot be
