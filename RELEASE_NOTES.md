@@ -75,6 +75,10 @@ the comparison predicates.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
 
+* IMPROVED: The `type` library object implementation of the `atom(CharSet)`,
+`atom(CharSet, Length)`, and `non_empty_atom(CharSet)` types to avoid using
+`catch/3` goals.
+
 * FIXED: Two tests for the `nested_dictionaries` library that used unification
 goals as assertions.
 

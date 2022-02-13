@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:31:0,
+		version is 1:32:0,
 		author is 'Paulo Moura',
-		date is 2021-12-06,
+		date is 2022-02-13,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -492,7 +492,7 @@
 			throw(instantiation_error)
 		;	atom(Term),
 			atom_codes(Term, Codes),
-			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
+			forall(member(Code, Codes), valid_character_code(CharSet, Code)) ->
 			true
 		;	throw(type_error(atom(CharSet), Term))
 		).
@@ -506,7 +506,7 @@
 			;	throw(type_error(atom(CharSet,Length), Term))
 			),
 			atom_codes(Term, Codes),
-			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
+			forall(member(Code, Codes), valid_character_code(CharSet, Code)) ->
 			true
 		;	throw(type_error(atom(CharSet,Length), Term))
 		).
@@ -537,7 +537,7 @@
 			throw(type_error(non_empty_atom(CharSet), Term))
 		;	atom(Term),
 			atom_codes(Term, Codes),
-			catch(check(list(character_code(CharSet)), Codes), _, fail) ->
+			forall(member(Code, Codes), valid_character_code(CharSet, Code)) ->
 			true
 		;	var(Term) ->
 			throw(instantiation_error)
