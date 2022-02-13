@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Linter warning for `catch/3` goals that catch all exceptions by
+using an anonymous variable in the second argument. Controlled by the new
+`catchall_catch` flag, whose default value is `silent`.
+
 * ADDED: Linter warning for missing predicate scope directive when a `info/2`
 directive exists.
 

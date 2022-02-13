@@ -12663,6 +12663,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % error handling and throwing predicates
 
+'$lgt_compile_body'(catch(Goal, Catcher, Recovery), _, _, Ctx) :-
+	var(Catcher),
+	term_variables(Recovery, Variables),
+	\+ '$lgt_member_var'(Catcher, Variables),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(catchall_catch, warning),
+	% reinstate relation between term variables and their names
+	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, _, _, _),
+	\+ (
+		'$lgt_member'(_=Var, VariableNames),
+		Catcher == Var
+	),
+	% assume that Catcher is an anonymous variable
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, catch(Goal, Catcher, Recovery), reason(catchall_catch))
+	),
+	fail.
+
 '$lgt_compile_body'(catch(Goal, Catcher, Recovery), catch(TGoal, Catcher, TRecovery), '$lgt_debug'(goal(catch(Goal, Catcher, Recovery), catch(DGoal, Catcher, DRecovery)), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
@@ -23435,6 +23457,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(duplicated_clauses).
 '$lgt_valid_flag'(tail_recursive).
 '$lgt_valid_flag'(disjunctions).
+'$lgt_valid_flag'(catchall_catch).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -23556,6 +23579,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(disjunctions, silent) :- !.
 '$lgt_valid_flag_value'(disjunctions, warning) :- !.
+
+'$lgt_valid_flag_value'(catchall_catch, silent) :- !.
+'$lgt_valid_flag_value'(catchall_catch, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.

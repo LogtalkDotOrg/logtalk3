@@ -905,6 +905,15 @@ Lint flags
    Controls warnings on clauses where the body is a disjunction. Possible
    option values are ``warning`` (the usual default) and ``silent``.
 
+.. _flag_catchall_catch:
+.. index:: pair: catchall_catch; Flag
+
+``catchall_catch(Option)``
+   Controls warnings on ``catch/3`` goals that catch all exceptions. Possible
+   option values are ``warning`` and ``silent`` (the usual default). Lack of
+   standardization often makes it tricky or cumbersome to avoid too generic
+   ``catch/3`` goals when writing portable code.
+
 .. _flag_tail_recursive:
 .. index:: pair: tail_recursive; Flag
 

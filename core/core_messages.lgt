@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:105:0,
+		version is 1:106:0,
 		author is 'Paulo Moura',
-		date is 2022-01-27,
+		date is 2022-02-13,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -249,6 +249,7 @@
 		 current_logtalk_flag(naming, Naming),
 		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
 		 current_logtalk_flag(disjunctions, Disjunctions),
+		 current_logtalk_flag(catchall_catch, CatchallCatch),
 		 current_logtalk_flag(tail_recursive, TailRecursive),
 		 current_logtalk_flag(portability, Portability),
 		 current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
@@ -295,7 +296,7 @@
 			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
 			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
-			'  disjunctions: ~w, tail_recursive: ~w'-[Disjunctions, TailRecursive], nl,
+			'  disjunctions: ~w, catchall_catch: ~w, tail_recursive: ~w'-[Disjunctions, CatchallCatch, TailRecursive], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,
@@ -928,6 +929,8 @@
 		['in ~w goal contains singleton variables ~q'-[Predicate, [Singleton| Singletons]], nl].
 	suspicious_call_reason(missing_else_part) -->
 		['as else part of the conditional is missing'-[], nl].
+	suspicious_call_reason(catchall_catch) -->
+		['as all exceptions are catched'-[], nl].
 	suspicious_call_reason(as(Text)) -->
 		['as ~w'-[Text], nl].
 	suspicious_call_reason(due_to(Text)) -->
