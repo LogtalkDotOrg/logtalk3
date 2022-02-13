@@ -45,6 +45,8 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: Handbook documentation for the new `catchall_catch` linter flag.
+
 * IMPROVED: Documentation of the `git` library.
 
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
@@ -99,6 +101,9 @@ outcome assertions.
 * ADDED: Predicate `packs::outdated/1` to list outdated packs from a registry.
 
 * IMPROVED: Performance of the `ports_profiler` tool.
+
+* UPDATED: The `tutor` tool to explain compiler warnings when using the new
+`catchall_catch` linter flag.
 
 * UPDATED: The Windows `lgt2rst.js` JScript to provide the same support for a
 user-defined `custom.css` file when called with the `-s` option to customize

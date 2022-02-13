@@ -12680,8 +12680,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
-		suspicious_call(File, Lines, Type, Entity, catch(Goal, Catcher, Recovery), reason(catchall_catch))
+		warning(catchall_catch),
+		catchall_catch(File, Lines, Type, Entity, catch(Goal, Catcher, Recovery))
 	),
 	fail.
 

@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:41:0,
 		author is 'Paulo Moura',
-		date is 2021-11-07,
+		date is 2022-02-13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -684,6 +684,14 @@
 	explain(disjunction_as_body(_, _, _, _, _, _)) -->
 		[	'Coding guidelines advise using separate clauses instead of a single'-[], nl,
 			'clause with a disjunction as body for improved code readability.'-[], nl, nl
+		].
+
+	% catch/3 goals that catch all exceptions
+
+	explain(catchall_catch(_, _, _, _, _)) -->
+		[	'Catching all exceptions may cause critical errors to be ignored (e.g.'-[], nl,
+			'resource errors). If possible, catch only the expected exception. When'-[], nl,
+			'multiple exceptions are expected, filter them using the recovery goal.'-[], nl, nl
 		].
 
 	% naming guidelines messages

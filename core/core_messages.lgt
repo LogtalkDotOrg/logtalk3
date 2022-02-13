@@ -680,6 +680,12 @@
 		['Predicate ~q clause body is a disjunction'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
+	% catch/3 goals that catch all exceptions
+
+	message_tokens(catchall_catch(File, Lines, Type, Entity, Goal)) -->
+		['The ~q goal catches all exceptions'-[Goal], nl],
+		message_context(File, Lines, Type, Entity).
+
 	% naming guidelines messages
 
 	message_tokens(camel_case_entity_name(File, Lines, Type, Entity)) -->
@@ -929,8 +935,6 @@
 		['in ~w goal contains singleton variables ~q'-[Predicate, [Singleton| Singletons]], nl].
 	suspicious_call_reason(missing_else_part) -->
 		['as else part of the conditional is missing'-[], nl].
-	suspicious_call_reason(catchall_catch) -->
-		['as all exceptions are catched'-[], nl].
 	suspicious_call_reason(as(Text)) -->
 		['as ~w'-[Text], nl].
 	suspicious_call_reason(due_to(Text)) -->
