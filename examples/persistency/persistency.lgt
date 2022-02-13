@@ -22,9 +22,9 @@
 :- object(persistency).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2019-11-18,
+		date is 2022-02-13,
 		comment is 'Simple example of object dynamic state persistency across loads.'
 	]).
 
@@ -83,7 +83,10 @@
 	reset :-
 		retractall(state_(_)),
 		logtalk::expand_library_path(persistency('state.pl'), Path),
-		catch(ignore(os::delete_file(Path)), _, true),
+		(	os::file_exists(Path) ->
+			os::delete_file(Path)
+		;	true
+		),
 		open(Path, write, Stream),
 		close(Stream).
 

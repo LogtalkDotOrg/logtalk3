@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2019-11-28,
+		date is 2022-02-13,
 		comment is 'Unit tests for the "serialization" example.'
 	]).
 
@@ -58,6 +58,9 @@
 		this(This),
 		object_property(This, file(_,Directory)),
 		atom_concat(Directory, abc_objects, File),
-		catch(ignore(os::delete_file(File)), _, true).
+		(	os::file_exists(File) ->
+			os::delete_file(File)
+		;	true
+		).
 
 :- end_object.

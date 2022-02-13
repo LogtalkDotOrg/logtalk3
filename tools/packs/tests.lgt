@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:18:1,
 		author is 'Paulo Moura',
-		date is 2022-02-12,
+		date is 2022-02-13,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -50,7 +50,10 @@
 		packs::reset,
 		object_property(packs, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
-		catch(ignore(os::delete_file(Setup)), _, true).
+		(	os::file_exists(Setup) ->
+			os::delete_file(Setup)
+		;	true
+		).
 
 	% we start with no defined registries or installed packs
 

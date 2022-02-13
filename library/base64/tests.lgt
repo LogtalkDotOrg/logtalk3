@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2021-03-13,
+		date is 2022-02-13,
 		comment is 'Unit tests for the "base64" library.'
 	]).
 
@@ -36,7 +36,10 @@
 		this(This),
 		object_property(This, file(_, Directory)),
 		os::path_concat(Directory, 'test_files/dump_base64.txt', Path),
-		catch(os::delete_file(Path), _, true).
+		(	os::file_exists(Path) ->
+			os::delete_file(Path)
+		;	true
+		).
 
 	test(base64_parse_2_atom, true) :-
 		base64::parse(atom('VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4='), Bytes),

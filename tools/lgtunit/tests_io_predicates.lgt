@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:1,
+		version is 0:6:2,
 		author is 'Paulo Moura',
-		date is 2021-11-23,
+		date is 2022-02-13,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -298,6 +298,9 @@
 		^^stream_position(Position).
 
 	cleanup :-
-		catch(ignore(os::delete_file(foo42)), _, true).
+		(	os::file_exists(foo42) ->
+			os::delete_file(foo42)
+		;	true
+		).
 
 :- end_object.

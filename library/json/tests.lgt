@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:12:1,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-07-19,
+		date is 2022-02-13,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.',
 		parameters is [
 			'Collection' - 'JSON files directory.'
@@ -56,8 +56,11 @@
 	cover(json(_)).
 
 	setup :-
-		file_path('test_files/simple/output01.json', Path1),
-		catch(os::delete_file(Path1), _, true).
+		file_path('test_files/simple/output01.json', Path),
+		(	os::file_exists(Path) ->
+			os::delete_file(Path)
+		;	true
+		).
 
 	cleanup :-
 		setup.

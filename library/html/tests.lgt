@@ -28,9 +28,9 @@ content(strong('Hello world!')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:1,
+		version is 0:3:2,
 		author is 'Paulo Moura',
-		date is 2021-11-25,
+		date is 2022-02-13,
 		comment is 'Unit tests for the "html" library.'
 	]).
 
@@ -106,6 +106,9 @@ content(strong('Hello world!')).
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'foo.html', File),
-		catch(ignore(os::delete_file(File)), _, true).
+		(	os::file_exists(File) ->
+			os::delete_file(File)
+		;	true
+		).
 
 :- end_object.

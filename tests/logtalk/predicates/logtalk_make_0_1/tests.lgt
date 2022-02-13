@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:2,
+		version is 0:5:3,
 		author is 'Paulo Moura',
-		date is 2021-06-09,
+		date is 2022-02-13,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
 
@@ -38,9 +38,9 @@
 
 	cleanup :-
 		main_file(Main),
-		catch(ignore(os::delete_file(Main)), _, true),
+		(os::file_exists(Main) -> os::delete_file(Main); true),
 		included_file(Included),
-		catch(ignore(os::delete_file(Included)), _, true),
+		(os::file_exists(Included) -> os::delete_file(Included); true),
 		retractall(target_action_(_)).
 
 	% logtalk_make/0 tests

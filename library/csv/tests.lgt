@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Jacinto Dávila',
-		date is 2021-09-24,
+		date is 2022-02-13,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -38,11 +38,11 @@
 
 	setup :-
 		file_path('test_files/output00.csv', Path1),
-		catch(os::delete_file(Path1), _, true),
+		(os::file_exists(Path1) -> os::delete_file(Path1); true),
 		file_path('test_files/output01.csv', Path2),
-		catch(os::delete_file(Path2), _, true),
+		(os::file_exists(Path2) -> os::delete_file(Path2); true),
 		file_path('test_files/output02.csv', Path3),
-		catch(os::delete_file(Path3), _, true).
+		(os::file_exists(Path3) -> os::delete_file(Path3); true).
 
 	cleanup :-
 		setup.

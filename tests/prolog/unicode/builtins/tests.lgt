@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:11:1,
 		author is 'Paulo Moura',
-		date is 2021-08-12,
+		date is 2022-02-13,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -628,11 +628,11 @@
 		^^clean_text_input,
 		^^clean_text_output,
 		file_path(sample_utf_8, Path1),
-		catch(ignore(os::delete_file(Path1)), _, true),
+		(os::file_exists(Path1) -> os::delete_file(Path1); true),
 		file_path(sample_utf_8_bom, Path2),
-		catch(ignore(os::delete_file(Path2)), _, true),
+		(os::file_exists(Path2) -> os::delete_file(Path2); true),
 		file_path(sample_utf_8_no_bom, Path3),
-		catch(ignore(os::delete_file(Path3)), _, true).
+		(os::file_exists(Path3) -> os::delete_file(Path3); true).
 
 	% auxiliary predicates
 
