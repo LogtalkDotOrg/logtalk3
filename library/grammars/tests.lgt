@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:0:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2022-02-11,
+		date is 2022-02-14,
 		comment is 'Unit tests for the "grammars" library.',
 		parnames is ['Format']
 	]).
@@ -87,6 +87,16 @@
 	test(blanks, deterministic(Output == 'foo')) :-
 		convert('\n\n\t foo', Input),
 		phrase(blank_grammars(_Format_)::blanks, Input, Rest),
+		convert(Output, Rest).
+
+	test(control, deterministic(Output == '\v foo')) :-
+		convert('\a\v foo', Input),
+		phrase(blank_grammars(_Format_)::control, Input, Rest),
+		convert(Output, Rest).
+
+	test(controls, deterministic(Output == ' foo')) :-
+		convert('\a\v foo', Input),
+		phrase(blank_grammars(_Format_)::controls, Input, Rest),
 		convert(Output, Rest).
 
 	% number_grammars tests

@@ -22,9 +22,9 @@
 :- object(blank_grammars(_Format_)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2022-02-11,
+		date is 2022-02-14,
 		comment is 'Blank grammars.',
 		parnames is ['Format']
 	]).
@@ -87,6 +87,18 @@
 	:- mode(blanks, one).
 	:- info(blanks//0, [
 		comment is 'Consumes zero or more spaces, tabs, or new lines.'
+	]).
+
+	:- public(control//0).
+	:- mode(control, zero_or_one).
+	:- info(control//0, [
+		comment is 'Consumes a single control character or character code. Support for the null control character depends on the Prolog backend.'
+	]).
+
+	:- public(controls//0).
+	:- mode(controls, one).
+	:- info(controls//0, [
+		comment is 'Consumes zero or more control characters or character codes. Support for the null control character depends on the Prolog backend.'
 	]).
 
 	white_space -->
@@ -177,6 +189,32 @@
 	blanks -->
 		blank(_Format_), !, blanks.
 	blanks -->
+		[].
+
+	control -->
+		control(_Format_).
+
+	% some Prolog systems either don't support the null character or
+	% provide buggy results when calling char_code/2 with a code of zero
+	:- if((catch(char_code(Char,0), _, fail), atom_length(Char,1))).
+
+		control(chars) -->
+			[Char], {char_code(Char, Code), 0 =< Code, Code =< 31}.
+		control(codes) -->
+			[Code], {0 =< Code, Code =< 31}.
+
+	:- else.
+
+		control(chars) -->
+			[Char], {char_code(Char, Code), 1 =< Code, Code =< 31}.
+		control(codes) -->
+			[Code], {1 =< Code, Code =< 31}.
+
+	:- endif.
+
+	controls -->
+		control(_Format_), !, controls.
+	controls -->
 		[].
 
 :- end_object.
