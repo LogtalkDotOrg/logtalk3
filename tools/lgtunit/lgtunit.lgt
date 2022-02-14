@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 11:0:0,
+		version is 11:1:0,
 		author is 'Paulo Moura',
-		date is 2022-02-04,
+		date is 2022-02-14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -249,7 +249,7 @@
 	:- protected(run_tests/1).
 	:- mode(run_tests(+atom), one).
 	:- info(run_tests/1, [
-		comment is 'Runs a list of defined tests.',
+		comment is 'Runs all the tests defined in the given file.',
 		argnames is ['File']
 	]).
 
@@ -868,16 +868,22 @@
 		reset_test_counters,
 		reset_coverage_results,
 		run_setup,
-		forall(member(Test, Tests), run_test(Test)),
+		self(Object),
+		object_property(Object, file(File)),
+		forall(
+			member(Test, Tests),
+			run_test_from_file(Test, File)
+		),
 		run_cleanup,
 		write_tests_results,
 		write_coverage_results.
 
-	run_test(Test) :-
-		self(Object),
-		::test(Test, Spec),
-		object_property(Object, file(File)),
-		run_test(Spec, File).
+	run_test_from_file(Test, File) :-
+		(	::test(Test, Spec) ->
+			run_test(Spec, File)
+		;	print_message(warning, lgtunit, 'Unknown test: ~q'+[Test]),
+			fail
+		).
 
 	run_test(Spec, File) :-
 		% save the current input and output streams
