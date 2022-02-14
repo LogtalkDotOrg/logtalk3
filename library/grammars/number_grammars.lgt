@@ -22,9 +22,9 @@
 :- object(number_grammars(_Format_)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2022-02-11,
+		date is 2022-02-14,
 		comment is 'Number grammars.',
 		parnames is ['Format']
 	]).
@@ -87,6 +87,12 @@
 	:- mode(float(?float), zero_or_one).
 	:- info(float//1, [
 		comment is 'Parses a float.'
+	]).
+
+	:- public(number//1).
+	:- mode(number(?number), zero_or_one).
+	:- info(number//1, [
+		comment is 'Parses a number (an integer or a float).'
 	]).
 
 	:- uses(list, [
@@ -184,12 +190,49 @@
 	float(Float) -->
 		float(_Format_, Float).
 
-	float(chars, Float) -->
-		mantissa(chars, Mantissa), radix(chars, Radix),
-		{append(Mantissa, Radix, Chars), number_chars(Float, Chars)}.
-	float(codes, Float) -->
-		mantissa(codes, Mantissa), radix(codes, Radix),
-		{append(Mantissa, Radix, Codes), number_codes(Float, Codes)}.
+	float(chars, Number) -->
+		float_elements(chars, Elements), {number_chars(Number,Elements)}.
+	float(codes, Number) -->
+		float_elements(codes, Elements), {number_codes(Number,Elements)}.
+
+	float_elements(_Format_, FloatElements) -->
+		integer_elements(_Format_, Elements),
+		(	dot(_Format_, Dot), digit(_Format_, Digit1), digits(_Format_, Digits1) ->
+			{append(Elements, [Dot, Digit1| Digits1], MantissaElements)}
+		;	{MantissaElements = Elements}
+		),
+		radix(_Format_, RadixElements),
+		(	{MantissaElements == Elements} ->
+			{RadixElements \== []},
+			(	{_Format_ == chars} ->
+				{append(MantissaElements, ['.', '0'| RadixElements], FloatElements)}
+			;	{append(MantissaElements, [0'., 0'0| RadixElements], FloatElements)}
+			)
+		;	{append(MantissaElements, RadixElements, FloatElements)}
+		).
+
+	number(Number) -->
+		number(_Format_, Number).
+
+	number(chars, Number) -->
+		number_elements(chars, Elements), {number_chars(Number,Elements)}.
+	number(codes, Number) -->
+		number_elements(codes, Elements), {number_codes(Number,Elements)}.
+
+	number_elements(_Format_, NumberElements) -->
+		integer_elements(_Format_, Elements),
+		(	dot(_Format_, Dot), digit(_Format_, Digit1), digits(_Format_, Digits1) ->
+			{append(Elements, [Dot, Digit1| Digits1], MantissaElements)}
+		;	{MantissaElements = Elements}
+		),
+		radix(_Format_, RadixElements),
+		(	{RadixElements \== [], MantissaElements == Elements} ->
+			(	{_Format_ == chars} ->
+				{append(MantissaElements, ['.', '0'| RadixElements], NumberElements)}
+			;	{append(MantissaElements, [0'., 0'0| RadixElements], NumberElements)}
+			)
+		;	{append(MantissaElements, RadixElements, NumberElements)}
+		).
 
 	mantissa(_Format_, Mantissa) -->
 		integer_elements(_Format_, Digits0), dot(_Format_, Dot), digit(_Format_, Digit1), digits(_Format_, Digits1),

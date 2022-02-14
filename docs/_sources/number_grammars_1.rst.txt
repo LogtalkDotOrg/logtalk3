@@ -11,8 +11,8 @@
 Number grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2022-02-11
+| **Version:** 0:2:0
+| **Date:** 2022-02-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -240,6 +240,27 @@ Parses a float.
 
 | **Mode and number of proofs:**
 |    ``float(?float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="number//1"> </div>
+
+.. index:: number//1
+.. _number_grammars/1::number//1:
+
+``number//1``
+^^^^^^^^^^^^^
+
+Parses a number (an integer or a float).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``number(?number)`` - ``zero_or_one``
 
 
 ------------

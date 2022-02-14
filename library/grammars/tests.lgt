@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
 		date is 2022-02-14,
 		comment is 'Unit tests for the "grammars" library.',
@@ -155,6 +155,10 @@
 		phrase(number_grammars(_Format_)::integer(Integer), Input, Rest),
 		convert(Output, Rest).
 
+	test(non_float, false) :-
+		convert('42foo', Input),
+		phrase(number_grammars(_Format_)::float(_), Input, _).
+
 	test(float, deterministic(Float-Output == 12.34-'foo')) :-
 		convert('12.34foo', Input),
 		phrase(number_grammars(_Format_)::float(Float), Input, Rest),
@@ -183,6 +187,51 @@
 	test(float_radix_sign_negative, deterministic((Float =~= 12.34e+7, Output == 'foo'))) :-
 		convert('12.34e+7foo', Input),
 		phrase(number_grammars(_Format_)::float(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(float_integer_radix, deterministic((Float =~= 42.0e+7, Output == 'foo'))) :-
+		convert('42e7foo', Input),
+		phrase(number_grammars(_Format_)::float(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_integer, deterministic(Float-Output == 42-'foo')) :-
+		convert('42foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_float, deterministic(Float-Output == 12.34-'foo')) :-
+		convert('12.34foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_sign_positive, deterministic(Float-Output == 12.34-'foo')) :-
+		convert('+12.34foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_sign_negative, deterministic(Float-Output == -12.34-'foo')) :-
+		convert('-12.34foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_integer_radix, deterministic((Float =~= 42.0e+7, Output == 'foo'))) :-
+		convert('42e7foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_float_radix, deterministic((Float =~= 12.34e+7, Output == 'foo'))) :-
+		convert('12.34e7foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_radix_sign_positive, deterministic((Float =~= 12.34e-7, Output == 'foo'))) :-
+		convert('12.34e-7foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
+		convert(Output, Rest).
+
+	test(number_radix_sign_negative, deterministic((Float =~= 12.34e+7, Output == 'foo'))) :-
+		convert('12.34e+7foo', Input),
+		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
 		convert(Output, Rest).
 
 	% auxiliary predicates
