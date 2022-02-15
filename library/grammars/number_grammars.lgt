@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2022-02-14,
+		date is 2022-02-15,
 		comment is 'Number grammars.',
 		parnames is ['Format']
 	]).
@@ -65,12 +65,6 @@
 		comment is 'Parses a sequence of zero or more hexa-decimal digits.'
 	]).
 
-	:- public(sign//1).
-	:- mode(sign(?atomic), zero_or_one).
-	:- info(sign//1, [
-		comment is 'Parses a number sign.'
-	]).
-
 	:- public(natural//1).
 	:- mode(natural(?non_negative_integer), zero_or_one).
 	:- info(natural//1, [
@@ -93,6 +87,18 @@
 	:- mode(number(?number), zero_or_one).
 	:- info(number//1, [
 		comment is 'Parses a number (an integer or a float).'
+	]).
+
+	:- public(sign//1).
+	:- mode(sign(?atomic), zero_or_one).
+	:- info(sign//1, [
+		comment is 'Parses a number sign.'
+	]).
+
+	:- public(dot//1).
+	:- mode(dot(?atomic), zero_or_one).
+	:- info(dot//1, [
+		comment is 'Parses a decimal dot.'
 	]).
 
 	:- uses(list, [

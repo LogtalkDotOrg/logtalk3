@@ -11,8 +11,8 @@
 Blank grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2022-02-14
+| **Version:** 0:1:0
+| **Date:** 2022-02-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -241,48 +241,6 @@ Consumes zero or more spaces, tabs, or new lines.
 
 | **Mode and number of proofs:**
 |    ``blanks`` - ``one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="control//0"> </div>
-
-.. index:: control//0
-.. _blank_grammars/1::control//0:
-
-``control//0``
-^^^^^^^^^^^^^^
-
-Consumes a single control character or character code. Support for the null control character depends on the Prolog backend.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``control`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
-   <div id="controls//0"> </div>
-
-.. index:: controls//0
-.. _blank_grammars/1::controls//0:
-
-``controls//0``
-^^^^^^^^^^^^^^^
-
-Consumes zero or more control characters or character codes. Support for the null control character depends on the Prolog backend.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``controls`` - ``one``
 
 
 ------------

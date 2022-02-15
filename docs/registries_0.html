@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>registries &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -184,7 +183,7 @@
            <div itemprop="articleBody">
              
   <p class="right" id="registries-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="registries">
+<div class="section" id="registries">
 <h1><code class="docutils literal notranslate"><span class="pre">registries</span></code><a class="headerlink" href="#registries" title="Permalink to this headline"></a></h1>
 <p>Registry handling predicates.</p>
 <div class="line-block">
@@ -253,9 +252,9 @@
 <li><p><a class="reference internal" href="#operators" id="id21">Operators</a></p></li>
 </ul>
 </div>
-<section id="public-predicates">
+<div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="list/0"> </div><section id="list-0">
+<div id="list/0"> </div><div class="section" id="list-0">
 <span id="registries-0-list-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">list/0</span></code></a><a class="headerlink" href="#list-0" title="Permalink to this headline"></a></h3>
 <p>Prints a list of all defined registries, including how defined (<code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">archive</span></code>, or <code class="docutils literal notranslate"><span class="pre">directory</span></code>) and  if they are pinned.</p>
 <div class="line-block">
@@ -271,8 +270,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="describe/1"> </div></section>
-<section id="describe-1">
+<div id="describe/1"> </div></div>
+<div class="section" id="describe-1">
 <span id="registries-0-describe-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">describe/1</span></code></a><a class="headerlink" href="#describe-1" title="Permalink to this headline"></a></h3>
 <p>Prints all registry entries.</p>
 <div class="line-block">
@@ -292,8 +291,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="defined/4"> </div></section>
-<section id="defined-4">
+<div id="defined/4"> </div></div>
+<div class="section" id="defined-4">
 <span id="registries-0-defined-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">defined/4</span></code></a><a class="headerlink" href="#defined-4" title="Permalink to this headline"></a></h3>
 <p>Enumerates by backtracking all defined registries, their definition URL, how they are defined (<code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">archive</span></code>, or <code class="docutils literal notranslate"><span class="pre">directory</span></code>), and if they are pinned.</p>
 <div class="line-block">
@@ -313,8 +312,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="add/3"> </div></section>
-<section id="add-3">
+<div id="add/3"> </div></div>
+<div class="section" id="add-3">
 <span id="registries-0-add-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add/3</span></code></a><a class="headerlink" href="#add-3" title="Permalink to this headline"></a></h3>
 <p>Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension or a an archive extension. A <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL can be used for a local directory.</p>
 <div class="line-block">
@@ -345,8 +344,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="add/2"> </div></section>
-<section id="add-2">
+<div id="add/2"> </div></div>
+<div class="section" id="add-2">
 <span id="registries-0-add-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add/2</span></code></a><a class="headerlink" href="#add-2" title="Permalink to this headline"></a></h3>
 <p>Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension or a an archive extension. A <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL can be used for a local directory.</p>
 <div class="line-block">
@@ -374,8 +373,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="add/1"> </div></section>
-<section id="add-1">
+<div id="add/1"> </div></div>
+<div class="section" id="add-1">
 <span id="registries-0-add-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">add/1</span></code></a><a class="headerlink" href="#add-1" title="Permalink to this headline"></a></h3>
 <p>Adds a new registry from a git cloning or local directory URL using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension. A <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL can be used for a local directory.</p>
 <div class="line-block">
@@ -404,8 +403,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="update/2"> </div></section>
-<section id="update-2">
+<div id="update/2"> </div></div>
+<div class="section" id="update-2">
 <span id="registries-0-update-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">update/2</span></code></a><a class="headerlink" href="#update-2" title="Permalink to this headline"></a></h3>
 <p>Updates a defined registry using the specified options. Fails if the registry is not defined.</p>
 <div class="line-block">
@@ -435,8 +434,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="update/1"> </div></section>
-<section id="update-1">
+<div id="update/1"> </div></div>
+<div class="section" id="update-1">
 <span id="registries-0-update-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">update/1</span></code></a><a class="headerlink" href="#update-1" title="Permalink to this headline"></a></h3>
 <p>Updates a defined registry using default options. Fails if the registry is not defined.</p>
 <div class="line-block">
@@ -456,8 +455,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="update/0"> </div></section>
-<section id="update-0">
+<div id="update/0"> </div></div>
+<div class="section" id="update-0">
 <span id="registries-0-update-0"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">update/0</span></code></a><a class="headerlink" href="#update-0" title="Permalink to this headline"></a></h3>
 <p>Updates all defined registries using default options.</p>
 <div class="line-block">
@@ -473,8 +472,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="delete/2"> </div></section>
-<section id="delete-2">
+<div id="delete/2"> </div></div>
+<div class="section" id="delete-2">
 <span id="registries-0-delete-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">delete/2</span></code></a><a class="headerlink" href="#delete-2" title="Permalink to this headline"></a></h3>
 <p>Deletes a registry using the specified options (if not pinned).</p>
 <div class="line-block">
@@ -504,8 +503,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="delete/1"> </div></section>
-<section id="delete-1">
+<div id="delete/1"> </div></div>
+<div class="section" id="delete-1">
 <span id="registries-0-delete-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">delete/1</span></code></a><a class="headerlink" href="#delete-1" title="Permalink to this headline"></a></h3>
 <p>Deletes a registry using default options.</p>
 <div class="line-block">
@@ -525,8 +524,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="delete/0"> </div></section>
-<section id="delete-0">
+<div id="delete/0"> </div></div>
+<div class="section" id="delete-0">
 <span id="registries-0-delete-0"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">delete/0</span></code></a><a class="headerlink" href="#delete-0" title="Permalink to this headline"></a></h3>
 <p>Deletes all registries using the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option.</p>
 <div class="line-block">
@@ -542,8 +541,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="clean/1"> </div></section>
-<section id="clean-1">
+<div id="clean/1"> </div></div>
+<div class="section" id="clean-1">
 <span id="registries-0-clean-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">clean/1</span></code></a><a class="headerlink" href="#clean-1" title="Permalink to this headline"></a></h3>
 <p>Cleans all registry archives. Fails if the registry is not defined.</p>
 <div class="line-block">
@@ -563,8 +562,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="clean/0"> </div></section>
-<section id="clean-0">
+<div id="clean/0"> </div></div>
+<div class="section" id="clean-0">
 <span id="registries-0-clean-0"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">clean/0</span></code></a><a class="headerlink" href="#clean-0" title="Permalink to this headline"></a></h3>
 <p>Cleans all archives for all registries.</p>
 <div class="line-block">
@@ -580,8 +579,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="provides/2"> </div></section>
-<section id="provides-2">
+<div id="provides/2"> </div></div>
+<div class="section" id="provides-2">
 <span id="registries-0-provides-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">provides/2</span></code></a><a class="headerlink" href="#provides-2" title="Permalink to this headline"></a></h3>
 <p>Enumerates by backtracking all packs provided by a registry.</p>
 <div class="line-block">
@@ -601,8 +600,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="lint/1"> </div></section>
-<section id="lint-1">
+<div id="lint/1"> </div></div>
+<div class="section" id="lint-1">
 <span id="registries-0-lint-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">lint/1</span></code></a><a class="headerlink" href="#lint-1" title="Permalink to this headline"></a></h3>
 <p>Checks the registry specification. Fails if the registry is not defined or if linting detects errors.</p>
 <div class="line-block">
@@ -622,8 +621,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="lint/0"> </div></section>
-<section id="lint-0">
+<div id="lint/0"> </div></div>
+<div class="section" id="lint-0">
 <span id="registries-0-lint-0"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">lint/0</span></code></a><a class="headerlink" href="#lint-0" title="Permalink to this headline"></a></h3>
 <p>Checks all registry specifications.</p>
 <div class="line-block">
@@ -638,22 +637,22 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">lint</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="protected-predicates">
+<div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="private-predicates">
+</div>
+<div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="operators">
+</div>
+<div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

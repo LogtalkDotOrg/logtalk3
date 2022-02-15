@@ -11,8 +11,8 @@
 Number grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2022-02-14
+| **Version:** 0:1:0
+| **Date:** 2022-02-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -246,21 +246,21 @@ Parses a float.
 
 .. raw:: html
 
-   <div id="number//1"> </div>
+   <div id="dot//1"> </div>
 
-.. index:: number//1
-.. _number_grammars/1::number//1:
+.. index:: dot//1
+.. _number_grammars/1::dot//1:
 
-``number//1``
-^^^^^^^^^^^^^
+``dot//1``
+^^^^^^^^^^
 
-Parses a number (an integer or a float).
+Parses a decimal dot.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``number(?number)`` - ``zero_or_one``
+|    ``dot(?atomic)`` - ``zero_or_one``
 
 
 ------------

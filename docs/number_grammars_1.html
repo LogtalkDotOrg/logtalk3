@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>number_grammars(Format) &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -30,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="heap(Order)" href="heap_1.html" />
-    <link rel="prev" title="blank_grammars(Format)" href="blank_grammars_1.html" />
+    <link rel="prev" title="ip_grammars(Format)" href="ip_grammars_1.html" />
    
 </head>
 
@@ -85,6 +84,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#grammars"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="blank_grammars_1.html">blank_grammars(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_grammars_1.html">ip_grammars(Format)</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">number_grammars(Format)</a></li>
 </ul>
 </li>
@@ -178,13 +178,13 @@
            <div itemprop="articleBody">
              
   <p class="right" id="number-grammars-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="number-grammars-format">
+<div class="section" id="number-grammars-format">
 <h1><code class="docutils literal notranslate"><span class="pre">number_grammars(Format)</span></code><a class="headerlink" href="#number-grammars-format" title="Permalink to this headline"></a></h1>
 <p>Number grammars.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:2:0</div>
-<div class="line"><strong>Date:</strong> 2022-02-14</div>
+<div class="line"><strong>Version:</strong> 0:1:0</div>
+<div class="line"><strong>Date:</strong> 2022-02-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -224,7 +224,7 @@
 <li><p><a class="reference internal" href="#natural-1" id="id9"><code class="docutils literal notranslate"><span class="pre">natural//1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#integer-1" id="id10"><code class="docutils literal notranslate"><span class="pre">integer//1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#float-1" id="id11"><code class="docutils literal notranslate"><span class="pre">float//1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#number-1" id="id12"><code class="docutils literal notranslate"><span class="pre">number//1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dot-1" id="id12"><code class="docutils literal notranslate"><span class="pre">dot//1</span></code></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
@@ -232,9 +232,9 @@
 <li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
 </ul>
 </div>
-<section id="public-predicates">
+<div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="bit//1"> </div><section id="bit-1">
+<div id="bit//1"> </div><div class="section" id="bit-1">
 <span id="number-grammars-1-bit-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">bit//1</span></code></a><a class="headerlink" href="#bit-1" title="Permalink to this headline"></a></h3>
 <p>Parses a single bit.</p>
 <div class="line-block">
@@ -250,8 +250,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="bits//1"> </div></section>
-<section id="bits-1">
+<div id="bits//1"> </div></div>
+<div class="section" id="bits-1">
 <span id="number-grammars-1-bits-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">bits//1</span></code></a><a class="headerlink" href="#bits-1" title="Permalink to this headline"></a></h3>
 <p>Parses a sequence of one of more bits.</p>
 <div class="line-block">
@@ -267,8 +267,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="digit//1"> </div></section>
-<section id="digit-1">
+<div id="digit//1"> </div></div>
+<div class="section" id="digit-1">
 <span id="number-grammars-1-digit-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">digit//1</span></code></a><a class="headerlink" href="#digit-1" title="Permalink to this headline"></a></h3>
 <p>Parses a single decimal digit.</p>
 <div class="line-block">
@@ -284,8 +284,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="digits//1"> </div></section>
-<section id="digits-1">
+<div id="digits//1"> </div></div>
+<div class="section" id="digits-1">
 <span id="number-grammars-1-digits-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">digits//1</span></code></a><a class="headerlink" href="#digits-1" title="Permalink to this headline"></a></h3>
 <p>Parses a sequence of zero of more digits.</p>
 <div class="line-block">
@@ -301,8 +301,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="hex_digit//1"> </div></section>
-<section id="hex-digit-1">
+<div id="hex_digit//1"> </div></div>
+<div class="section" id="hex-digit-1">
 <span id="number-grammars-1-hex-digit-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">hex_digit//1</span></code></a><a class="headerlink" href="#hex-digit-1" title="Permalink to this headline"></a></h3>
 <p>Parses a single hexa-decimal digit.</p>
 <div class="line-block">
@@ -318,8 +318,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="hex_digits//1"> </div></section>
-<section id="hex-digits-1">
+<div id="hex_digits//1"> </div></div>
+<div class="section" id="hex-digits-1">
 <span id="number-grammars-1-hex-digits-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">hex_digits//1</span></code></a><a class="headerlink" href="#hex-digits-1" title="Permalink to this headline"></a></h3>
 <p>Parses a sequence of zero or more hexa-decimal digits.</p>
 <div class="line-block">
@@ -335,8 +335,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="sign//1"> </div></section>
-<section id="sign-1">
+<div id="sign//1"> </div></div>
+<div class="section" id="sign-1">
 <span id="number-grammars-1-sign-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">sign//1</span></code></a><a class="headerlink" href="#sign-1" title="Permalink to this headline"></a></h3>
 <p>Parses a number sign.</p>
 <div class="line-block">
@@ -352,8 +352,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="natural//1"> </div></section>
-<section id="natural-1">
+<div id="natural//1"> </div></div>
+<div class="section" id="natural-1">
 <span id="number-grammars-1-natural-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">natural//1</span></code></a><a class="headerlink" href="#natural-1" title="Permalink to this headline"></a></h3>
 <p>Parses a natural number (a non signed integer).</p>
 <div class="line-block">
@@ -369,8 +369,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="integer//1"> </div></section>
-<section id="integer-1">
+<div id="integer//1"> </div></div>
+<div class="section" id="integer-1">
 <span id="number-grammars-1-integer-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">integer//1</span></code></a><a class="headerlink" href="#integer-1" title="Permalink to this headline"></a></h3>
 <p>Parses an integer.</p>
 <div class="line-block">
@@ -386,8 +386,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="float//1"> </div></section>
-<section id="float-1">
+<div id="float//1"> </div></div>
+<div class="section" id="float-1">
 <span id="number-grammars-1-float-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">float//1</span></code></a><a class="headerlink" href="#float-1" title="Permalink to this headline"></a></h3>
 <p>Parses a float.</p>
 <div class="line-block">
@@ -403,10 +403,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="number//1"> </div></section>
-<section id="number-1">
-<span id="number-grammars-1-number-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">number//1</span></code></a><a class="headerlink" href="#number-1" title="Permalink to this headline"></a></h3>
-<p>Parses a number (an integer or a float).</p>
+<div id="dot//1"> </div></div>
+<div class="section" id="dot-1">
+<span id="number-grammars-1-dot-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">dot//1</span></code></a><a class="headerlink" href="#dot-1" title="Permalink to this headline"></a></h3>
+<p>Parses a decimal dot.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -416,31 +416,31 @@
 <div class="line-block">
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">number(?number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dot(?atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="protected-predicates">
+<div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="private-predicates">
+</div>
+<div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="operators">
+</div>
+<div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="blank_grammars_1.html" class="btn btn-neutral float-left" title="blank_grammars(Format)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ip_grammars_1.html" class="btn btn-neutral float-left" title="ip_grammars(Format)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="heap_1.html" class="btn btn-neutral float-right" title="heap(Order)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

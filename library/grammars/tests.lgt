@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2022-02-14,
+		date is 2022-02-15,
 		comment is 'Unit tests for the "grammars" library.',
 		parnames is ['Format']
 	]).
@@ -36,6 +36,7 @@
 
 	cover(blank_grammars(_)).
 	cover(number_grammars(_)).
+	cover(ip_grammars(_)).
 
 	% blank_grammars tests
 
@@ -233,6 +234,20 @@
 		convert('12.34e+7foo', Input),
 		phrase(number_grammars(_Format_)::number(Float), Input, Rest),
 		convert(Output, Rest).
+
+	% ip_grammars tests
+
+	test(ip_ipv4_home, true(List == [127,0,0,1])) :-
+		convert('127.0.0.1', Input),
+		phrase(ip_grammars(_Format_)::ipv4(List), Input).
+
+	test(ip_ipv4_broadcast, true(List == [255,255,255,255])) :-
+		convert('255.255.255.255', Input),
+		phrase(ip_grammars(_Format_)::ipv4(List), Input).
+
+	test(ip_ipv6, true(List == [8193,3512,34211,0,0,35374,880,29492])) :-
+		convert('2001:0db8:85a3:0000:0000:8a2e:0370:7334', Input),
+		phrase(ip_grammars(_Format_)::ipv6(List), Input).
 
 	% auxiliary predicates
 

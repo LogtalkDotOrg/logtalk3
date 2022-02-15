@@ -1243,16 +1243,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`intervalp <intervalp/0::contains/2>`
 
-``control//0``
---------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`blank_grammars(Format) <blank_grammars/1::control//0>`
-
 ``control_construct/4``
 -----------------------
 
@@ -1262,16 +1252,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`help <help/0::control_construct/4>`
-
-``controls//0``
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`blank_grammars(Format) <blank_grammars/1::controls//0>`
 
 ``copy_file/2``
 ---------------
@@ -2187,6 +2167,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`doclet <doclet/0::doc_goal/1>`
+
+``dot//1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`number_grammars(Format) <number_grammars/1::dot//1>`
 
 ``dowhile/2``
 -------------
@@ -3835,6 +3825,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`java_access_protocol <java_access_protocol/0::invoke/2>`
+
+``ipv4//1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ip_grammars(Format) <ip_grammars/1::ipv4//1>`
+
+``ipv6//1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ip_grammars(Format) <ip_grammars/1::ipv6//1>`
 
 ``is_absolute_file_name/1``
 ---------------------------
@@ -5498,16 +5508,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::null_device_path/1>`
-
-``number//1``
--------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`number_grammars(Format) <number_grammars/1::number//1>`
 
 ``number_of_tests/1``
 ---------------------

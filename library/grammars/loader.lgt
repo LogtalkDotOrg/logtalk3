@@ -23,7 +23,8 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load([
 		blank_grammars,
-		number_grammars
+		number_grammars,
+		ip_grammars
 	], [
 		optimize(on)
 	])

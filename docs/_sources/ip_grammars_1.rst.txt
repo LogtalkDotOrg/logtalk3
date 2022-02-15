@@ -1,0 +1,93 @@
+.. index:: ip_grammars(Format)
+.. _ip_grammars/1:
+
+.. rst-class:: right
+
+**object**
+
+``ip_grammars(Format)``
+=======================
+
+IP address grammars.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2022-02-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`number_grammars(Format) <number_grammars/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="ipv4//1"> </div>
+
+.. index:: ipv4//1
+.. _ip_grammars/1::ipv4//1:
+
+``ipv4//1``
+^^^^^^^^^^^
+
+Parses a sequence of one of more bits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``ipv4(?list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="ipv6//1"> </div>
+
+.. index:: ipv6//1
+.. _ip_grammars/1::ipv6//1:
+
+``ipv6//1``
+^^^^^^^^^^^
+
+Parses a sequence of zero of more digits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``ipv6(?list(atomic))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

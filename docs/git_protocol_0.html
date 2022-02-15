@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>git_protocol &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -178,7 +177,7 @@
            <div itemprop="articleBody">
              
   <p class="right" id="git-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="git-protocol">
+<div class="section" id="git-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">git_protocol</span></code><a class="headerlink" href="#git-protocol" title="Permalink to this headline"></a></h1>
 <p>Predicates for accessing a git project current branch and latest commit data.</p>
 <div class="line-block">
@@ -228,9 +227,9 @@
 <li><p><a class="reference internal" href="#operators" id="id11">Operators</a></p></li>
 </ul>
 </div>
-<section id="public-predicates">
+<div class="section" id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="branch/2"> </div><section id="branch-2">
+<div id="branch/2"> </div><div class="section" id="branch-2">
 <span id="git-protocol-0-branch-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">branch/2</span></code></a><a class="headerlink" href="#branch-2" title="Permalink to this headline"></a></h3>
 <p>Returns the name of the current git branch. Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -250,8 +249,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="commit_author/2"> </div></section>
-<section id="commit-author-2">
+<div id="commit_author/2"> </div></div>
+<div class="section" id="commit-author-2">
 <span id="git-protocol-0-commit-author-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">commit_author/2</span></code></a><a class="headerlink" href="#commit-author-2" title="Permalink to this headline"></a></h3>
 <p>Returns the latest commit author. Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -271,8 +270,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="commit_date/2"> </div></section>
-<section id="commit-date-2">
+<div id="commit_date/2"> </div></div>
+<div class="section" id="commit-date-2">
 <span id="git-protocol-0-commit-date-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">commit_date/2</span></code></a><a class="headerlink" href="#commit-date-2" title="Permalink to this headline"></a></h3>
 <p>Returns the latest commit date (strict ISO 8601 format). Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -292,8 +291,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="commit_hash/2"> </div></section>
-<section id="commit-hash-2">
+<div id="commit_hash/2"> </div></div>
+<div class="section" id="commit-hash-2">
 <span id="git-protocol-0-commit-hash-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">commit_hash/2</span></code></a><a class="headerlink" href="#commit-hash-2" title="Permalink to this headline"></a></h3>
 <p>Returns the latest commit hash. Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -313,8 +312,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="commit_hash_abbreviated/2"> </div></section>
-<section id="commit-hash-abbreviated-2">
+<div id="commit_hash_abbreviated/2"> </div></div>
+<div class="section" id="commit-hash-abbreviated-2">
 <span id="git-protocol-0-commit-hash-abbreviated-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">commit_hash_abbreviated/2</span></code></a><a class="headerlink" href="#commit-hash-abbreviated-2" title="Permalink to this headline"></a></h3>
 <p>Returns the latest commit abbreviated hash. Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -334,8 +333,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="commit_message/2"> </div></section>
-<section id="commit-message-2">
+<div id="commit_message/2"> </div></div>
+<div class="section" id="commit-message-2">
 <span id="git-protocol-0-commit-message-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">commit_message/2</span></code></a><a class="headerlink" href="#commit-message-2" title="Permalink to this headline"></a></h3>
 <p>Returns the latest commit message. Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -355,8 +354,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="commit_log/3"> </div></section>
-<section id="commit-log-3">
+<div id="commit_log/3"> </div></div>
+<div class="section" id="commit-log-3">
 <span id="git-protocol-0-commit-log-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">commit_log/3</span></code></a><a class="headerlink" href="#commit-log-3" title="Permalink to this headline"></a></h3>
 <p>Returns the git latest commit log output for the given format (see e.g. <a class="reference external" href="https://git-scm.com/docs/pretty-formats">https://git-scm.com/docs/pretty-formats</a>). Fails if the directory is not a git repo or a sub-directory of a git repo directory.</p>
 <div class="line-block">
@@ -375,22 +374,22 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">commit_log(+atom,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 <hr class="docutils" />
-<section id="protected-predicates">
+<div class="section" id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</section>
-<section id="private-predicates">
+</div>
+<div class="section" id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</section>
-<section id="operators">
+</div>
+<div class="section" id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

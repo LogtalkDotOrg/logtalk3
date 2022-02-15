@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logtalk APIs &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -100,7 +99,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="logtalk-apis">
+  <div class="section" id="logtalk-apis">
 <h1>Logtalk APIs<a class="headerlink" href="#logtalk-apis" title="Permalink to this headline"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
@@ -287,6 +286,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="blank_grammars_1.html">blank_grammars(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_grammars_1.html">ip_grammars(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="number_grammars_1.html">number_grammars(Format)</a></li>
 </ul>
 </li>
@@ -725,6 +725,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-grammars"><code class="docutils literal notranslate"><span class="pre">library/grammars/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="blank_grammars_1.html">blank_grammars(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_grammars_1.html">ip_grammars(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="number_grammars_1.html">number_grammars(Format)</a></li>
 </ul>
 </li>
@@ -1171,6 +1172,7 @@
 <li class="toctree-l3"><a class="reference internal" href="inheritance_diagram_1.html">inheritance_diagram(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="integer_0.html">integer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="interval_0.html">interval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ip_grammars_1.html">ip_grammars(Format)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso8601_0.html">iso8601</a></li>
 <li class="toctree-l3"><a class="reference internal" href="issue_creator_0.html">issue_creator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="java_0.html">java</a></li>
@@ -1687,13 +1689,7 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#contains-2"><code class="docutils literal notranslate"><span class="pre">contains/2</span></code></a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#control-0"><code class="docutils literal notranslate"><span class="pre">control//0</span></code></a><ul class="simple">
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#control-construct-4"><code class="docutils literal notranslate"><span class="pre">control_construct/4</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#controls-0"><code class="docutils literal notranslate"><span class="pre">controls//0</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#copy-file-2"><code class="docutils literal notranslate"><span class="pre">copy_file/2</span></code></a><ul class="simple">
@@ -1961,6 +1957,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#doc-goal-1"><code class="docutils literal notranslate"><span class="pre">doc_goal/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#dot-1"><code class="docutils literal notranslate"><span class="pre">dot//1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#dowhile-2"><code class="docutils literal notranslate"><span class="pre">dowhile/2</span></code></a><ul class="simple">
@@ -2444,6 +2443,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#invoke-2"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#ipv4-1"><code class="docutils literal notranslate"><span class="pre">ipv4//1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#ipv6-1"><code class="docutils literal notranslate"><span class="pre">ipv6//1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#is-absolute-file-name-1"><code class="docutils literal notranslate"><span class="pre">is_absolute_file_name/1</span></code></a><ul class="simple">
@@ -2930,9 +2935,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#null-device-path-1"><code class="docutils literal notranslate"><span class="pre">null_device_path/1</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#number-1"><code class="docutils literal notranslate"><span class="pre">number//1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#number-of-tests-1"><code class="docutils literal notranslate"><span class="pre">number_of_tests/1</span></code></a><ul class="simple">
@@ -3857,15 +3859,15 @@
 </li>
 </ul>
 </div>
-</section>
-<section id="indices-and-tables">
+</div>
+<div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<p>Generated on Mon Feb 14 19:10:40 WET 2022</p>
-</section>
+<p>Generated on Tue Feb 15 17:46:05 WET 2022</p>
+</div>
 
 
            </div>

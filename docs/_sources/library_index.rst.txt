@@ -352,6 +352,7 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
 
    blank_grammars(Format) <blank_grammars_1>
+   ip_grammars(Format) <ip_grammars_1>
    number_grammars(Format) <number_grammars_1>
 
 ``heaps``
