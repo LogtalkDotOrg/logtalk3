@@ -24,7 +24,7 @@
 	:- multifile(primary::p/3).
 	primary::p(Priority, Associativity, Operator) :-
 		% the next call must use the "secondary" object
-		% database, not the "primary" object database 
+		% database, not the "primary" object database
 		current_op(Priority, Associativity, Operator).
 
 	% scoped operarors; seen by the reflection built-in methods

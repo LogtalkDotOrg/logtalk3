@@ -150,8 +150,8 @@
 	succeeds(object_property_2_17) :-
 		object_property(test_object, defines(e/5, Properties5)),
 		\+ member(line_count(_LC5), Properties5),
-		member(number_of_clauses(NC5), Properties5), NC5 == 0,	
-		member(number_of_rules(NR5), Properties5), NR5 == 0.		
+		member(number_of_clauses(NC5), Properties5), NC5 == 0,
+		member(number_of_rules(NR5), Properties5), NR5 == 0.
 
 	% predicate call properties
 
@@ -196,7 +196,7 @@
 			Updaters
 		),
 		Updaters == [updater1/0, updater2/0, updater3/0, updater4/0, updater5/0, updater6/0].
-		
+
 	succeeds(object_property_2_24) :-
 		forall(
 			object_property(test_object, updates(c/3, Properties)),
@@ -213,7 +213,7 @@
 			Updaters
 		),
 		Updaters == [updater1s/0, updater2s/0, updater3s/0, updater4s/0, updater5s/0, updater6s/0].
-		
+
 	succeeds(object_property_2_26) :-
 		forall(
 			object_property(test_object, updates(::c/3, Properties)),
@@ -230,7 +230,7 @@
 			Updaters
 		),
 		Updaters == [updater1o/0, updater2o/0, updater3o/0, updater4o/0, updater5o/0, updater6o/0].
-		
+
 	succeeds(object_property_2_28) :-
 		forall(
 			object_property(test_object, updates(logtalk::c/3, Properties)),

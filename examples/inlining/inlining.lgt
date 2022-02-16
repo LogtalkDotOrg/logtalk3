@@ -71,7 +71,7 @@ t(6, 'C', 'C').
 
 	% another common case is to define accessors to a plain Prolog table
 	% (see the uses/2 directive above)
-	
+
 	a(N, C) :-
 		t(N, C, 'A').
 

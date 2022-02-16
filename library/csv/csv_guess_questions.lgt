@@ -28,13 +28,13 @@
 		comment is 'Support for asking questions when guessing the separator and the record arity of CSV files.'
 	]).
 
-    :- multifile(logtalk::message_tokens//2).
-    :- dynamic(logtalk::message_tokens//2).
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
 
-    % abstract the question text using the atom ultimate_question
-    % the second argument, hitchhikers, is the application component
-    logtalk::message_tokens(guess_row(Row), csv) -->
-        ['Is this the proper reading of a line of this file (y/n)? ~q'-[Row], nl].
+	% abstract the question text using the atom ultimate_question
+	% the second argument, hitchhikers, is the application component
+	logtalk::message_tokens(guess_row(Row), csv) -->
+		['Is this the proper reading of a line of this file (y/n)? ~q'-[Row], nl].
 
 	% asking about a possible combination
 	logtalk::message_tokens(i_suggest_separator(Row, Sep), csv) -->
@@ -44,11 +44,11 @@
 	logtalk::message_tokens(i_suggest_arity(Row, Arity), csv) -->
 		['For ~q, I guess the arity is ~w'-[Row, Arity], nl].
 
-   :- multifile(logtalk::question_prompt_stream/4).
-   :- dynamic(logtalk::question_prompt_stream/4).
+	:- multifile(logtalk::question_prompt_stream/4).
+	:- dynamic(logtalk::question_prompt_stream/4).
 
-   % the prompt is specified here instead of being part of the question text
-   % as it will be repeated if the answer doesn't satisfy the question closure
-   logtalk::question_prompt_stream(question, csv, '> ', user_input).
+	% the prompt is specified here instead of being part of the question text
+	% as it will be repeated if the answer doesn't satisfy the question closure
+	logtalk::question_prompt_stream(question, csv, '> ', user_input).
 
 :- end_category.

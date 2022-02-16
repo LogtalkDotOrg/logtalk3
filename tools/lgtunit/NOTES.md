@@ -208,10 +208,10 @@ implementation being tested. For example, assume that we want to run the
 same set of tests for the library `random_protocol` protocol. We can write:
 
 	:- object(tests(_RandomObject_),
-	    extends(lgtunit)).
+		extends(lgtunit)).
 	
 		:- uses(_RandomObject_, [
-		    random/1, between/3, member/2,
+			random/1, between/3, member/2,
 			...
 		]).
 
@@ -545,7 +545,7 @@ definition:
 
 	every_other([], []). 
 	every_other([_, X| L], [X | R]) :- 
-	        every_other(L, R). 
+		every_other(L, R). 
 
 The predicate is supposed to construct a list by taking every other element
 of an input list. Cursory testing may fail to notice the bug:
@@ -671,7 +671,7 @@ then need to define:
 
 	:- multifile(arbitrary::arbitrary/2).
 	arbitrary::arbitrary(bit, Arbitrary) :- 
-	   random::member(Arbitrary, [0, 1]).
+		random::member(Arbitrary, [0, 1]).
 
 
 Skipping tests

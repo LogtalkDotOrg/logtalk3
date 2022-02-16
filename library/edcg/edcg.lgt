@@ -275,11 +275,12 @@ SOFTWARE.
 	'_merge_acc'([], [], G1, G1, [], G2, G2, []) :- !.
 	'_merge_acc'([acc(Acc,OL,R)|Accs], [acc(Acc,L1,R)|Accs1], G1, NG1,
 			 [acc(Acc,L2,R)|Accs2], G2, NG2, [acc(Acc,NL,R)|NewAccs]) :- !,
-		( ( OL == L1, OL \== L2 ) ->
-		  MG1 = (G1,L1=L2), MG2 = G2, NL = L2
-			; ( OL == L2, OL \== L1 ) ->
-		  MG2 = (G2,L2=L1), MG1 = G1, NL = L1
-			; MG1 = G1, MG2 = G2, L1 = L2, L2 = NL ),
+		(	(OL == L1, OL \== L2) ->
+			MG1 = (G1,L1=L2), MG2 = G2, NL = L2
+		;	(OL == L2, OL \== L1) ->
+			MG2 = (G2,L2=L1), MG1 = G1, NL = L1
+		;	MG1 = G1, MG2 = G2, L1 = L2, L2 = NL
+		),
 		'_merge_acc'(Accs, Accs1, MG1, NG1, Accs2, MG2, NG2, NewAccs).
 
 

@@ -118,7 +118,7 @@
 
 	process_library(Library) :-
 		library_score(Library, Score),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).		
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	rlibrary_score(Library, Score) :-
 		library_score(Library, LibraryScore),
@@ -141,7 +141,7 @@
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),
-		print_message(information, code_metrics, unique_predicates_nodes(Score)).		
+		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	all_score(Score) :-
 		findall(

@@ -77,11 +77,11 @@ a(1).
 		List == [expanding-(public), forwarding-(public), monitoring-(public)].
 
 	% sending messages to "user"
-	
+
 	test(user_11) :-
 		{user::a(X)},
 		X == 1.
-	
+
 	test(user_12) :-
 		user::a(X),
 		X == 1.

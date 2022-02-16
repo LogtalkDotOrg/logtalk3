@@ -87,7 +87,7 @@
 		jj(0).
 	test(if_if_endif_1) :-
 		jj(1), jj(2),
-		jj(3), \+ jj(4), 
+		jj(3), \+ jj(4),
 		jj(5), jj(6), \+ jj(7),
 		jj(8), \+ jj(9), jj(10),
 		jj(11),

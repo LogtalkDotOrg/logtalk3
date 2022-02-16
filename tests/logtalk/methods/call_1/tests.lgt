@@ -40,5 +40,5 @@
 	list(NonTerminal, [Head| Tail]) --> call(NonTerminal, Head), list(NonTerminal, Tail).
 
 	next(Next) --> [Element], {Next is Element + 1}.
-	
+
 :- end_object.

@@ -23094,14 +23094,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_contains_variable'(Term, Variable) :-
-    Term == Variable.
+	Term == Variable.
 
 '$lgt_contains_variable'(Term, Variable) :-
-    compound(Term),
+	compound(Term),
 	functor(Term, _, Arity),
 	'$lgt_between'(1, Arity, N),
-    arg(N, Term, Argument),
-    '$lgt_contains_variable'(Argument, Variable).
+	arg(N, Term, Argument),
+	'$lgt_contains_variable'(Argument, Variable).
 
 
 '$lgt_count_variable_occurrences'(Term, Variable, N) :-

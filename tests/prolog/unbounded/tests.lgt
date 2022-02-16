@@ -311,7 +311,7 @@
 
 	test(lgt_unbounded_less_or_equal_03, false) :-
 		small(Value),
-		 Value =< -1844674407370909797907654848955145546336677616.
+		Value =< -1844674407370909797907654848955145546336677616.
 
 	test(lgt_unbounded_less_or_equal_04, true) :-
 		small(Value),
@@ -347,7 +347,7 @@
 
 	test(lgt_unbounded_greater_or_equal_03, true) :-
 		small(Value),
-		 Value >= -1844674407370909797907654848955145546336677616.
+		Value >= -1844674407370909797907654848955145546336677616.
 
 	test(lgt_unbounded_greater_or_equal_04, false) :-
 		small(Value),

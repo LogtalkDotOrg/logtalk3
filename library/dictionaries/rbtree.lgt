@@ -488,7 +488,7 @@
 		black(T1,KD,VD,black(Ep,KE,VE,Fi)),done) :- !,
 		fixup2(red(black(Al,KA,VA,Be),KB,VB,black(Ga,KC,VC,De)),
 			T1,
-	                _).
+			_).
 	%
 	% case 2: x moves up, change one to red
 	%

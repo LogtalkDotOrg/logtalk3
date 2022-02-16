@@ -21,7 +21,7 @@
 
 % Logtalk encapsulates predicates, which can play the role of both attributes
 % and methods as found in other object-oriented languages; in addition, instead
-% of an assignment operator, Logtalk provides database update methods that can 
+% of an assignment operator, Logtalk provides database update methods that can
 % target "this", "self", or any object (depending on the scope of the predicate
 % being modified); this makes it trivial to define instance methods
 
@@ -42,7 +42,7 @@
 
 
 % this instance simply inherits the method/0 predicate
-		
+
 :- object(instance1,
 	instantiates(root)).
 

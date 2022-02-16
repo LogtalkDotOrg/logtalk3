@@ -61,7 +61,7 @@ context_switch_test_object(3).
 		% delay the error to runtime
 		{logtalk << _}.
 
-	throws(context_switch_2_03, error(type_error(object_identifier, 3), logtalk(3<<goal,_))) :- 
+	throws(context_switch_2_03, error(type_error(object_identifier, 3), logtalk(3<<goal,_))) :-
 		% delay the error to runtime
 		{3 << goal}.
 

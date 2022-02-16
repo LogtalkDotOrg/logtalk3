@@ -103,7 +103,7 @@
 	trace(true, _) :-
 		!.
 	trace((A, B), Depth) :-
-		!, 
+		!,
 		trace(A, Depth),
 		trace(B, Depth).
 	trace(A, Depth) :-

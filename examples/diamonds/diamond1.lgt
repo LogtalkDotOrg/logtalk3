@@ -20,11 +20,11 @@
 
 
 /*
-These objects illustrate a variant of the "diamond problem" using 
+These objects illustrate a variant of the "diamond problem" using
 a prototype hierarchy.
 
-In this simple case, the inherited definition which will be used in the  
-bottom object is determined by the Logtalk predicate lookup algorithm. 
+In this simple case, the inherited definition which will be used in the
+bottom object is determined by the Logtalk predicate lookup algorithm.
 */
 
 

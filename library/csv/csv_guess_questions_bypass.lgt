@@ -28,9 +28,9 @@
 		comment is 'Support for bypassing asking questions when guessing the separator and the record arity of CSV files when running tests.'
 	]).
 
-    :- multifile(logtalk::question_hook/6).
-    :- dynamic(logtalk::question_hook/6).
+	:- multifile(logtalk::question_hook/6).
+	:- dynamic(logtalk::question_hook/6).
 
-    logtalk::question_hook(guess_row(_), question, csv, _, _, y).
+	logtalk::question_hook(guess_row(_), question, csv, _, _, y).
 
 :- end_category.

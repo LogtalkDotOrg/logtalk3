@@ -31,7 +31,7 @@
 	:- private(counter_value_/2).
 	:- dynamic(counter_value_/2).
 
-	% load the counters persistent database file when the object is compiled and loaded 
+	% load the counters persistent database file when the object is compiled and loaded
 	:- include('counters.pl').
 
 	counter(Counter, Value) :-

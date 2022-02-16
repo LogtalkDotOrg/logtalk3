@@ -21,7 +21,9 @@
 
 /* Who Stole the cake logical puzzle, Copyright (c) Kevin Stone
 
-During a recent police investigation, Chief Inspector Stone was interviewing five local villains to try and identify who stole Mrs Archer's cake from the mid-summers fayre. Below is a summary of their statements:
+During a recent police investigation, Chief Inspector Stone was interviewing
+five local villains to try and identify who stole Mrs Archer's cake from the
+mid-summers fayre. Below is a summary of their statements:
 
 Arnold:  it wasn't Edward
          it was Brian
@@ -38,7 +40,8 @@ Derek:   it was Charlie
 Edward:  it was Derek
          it wasn't Arnold
 
-It was well known that each suspect told exactly one lie. Can you determine who stole the cake?
+It was well known that each suspect told exactly one lie. Can you determine
+who stole the cake?
 
 Published on the web:
 	http://www.brainbashers.com/showpuzzles.asp?puzzle=ZFSC

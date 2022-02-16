@@ -45,7 +45,7 @@
 		This == context_1_test_object,
 		Self == context_1_test_object,
 		MetaCallContext == [],
-		CoinductionStack == [].		
+		CoinductionStack == [].
 
 	test(context_3) :-
 		catch({context_1_test_object::bar(1)}, error(Error,logtalk(Call,ExecutionContext)), true),
@@ -57,7 +57,7 @@
 		This == context_1_test_object,
 		Self == context_1_test_object,
 		MetaCallContext == [],
-		CoinductionStack == [].		
+		CoinductionStack == [].
 
 	test(context_4) :-
 		catch({logtalk::message_hook(a,b,c,d)}, error(Error,logtalk(Call,ExecutionContext)), true),
@@ -69,6 +69,6 @@
 		This == logtalk,
 		Self == logtalk,
 		MetaCallContext == [],
-		CoinductionStack == [].		
+		CoinductionStack == [].
 
 :- end_object.

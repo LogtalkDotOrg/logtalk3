@@ -109,7 +109,7 @@
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, TotalSize),
-		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).		
+		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
 
 	library_score(Library, Size) :-
 		logtalk::expand_library_path(Library, Directory),

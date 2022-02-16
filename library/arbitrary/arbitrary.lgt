@@ -1019,8 +1019,9 @@
 	edge_case(non_negative_float, 1.0).
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx;
-		 Dialect == tau; Dialect == lvm; Dialect == scryer; Dialect == trealla)
+		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx;
+			Dialect == tau; Dialect == lvm; Dialect == scryer; Dialect == trealla
+		)
 	)).
 		edge_case(float, Epsilon) :-
 			Epsilon is epsilon.

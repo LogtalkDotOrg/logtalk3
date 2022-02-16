@@ -128,9 +128,9 @@
 		X2 is X1-1.
 
 	move_right(world(X1-Y1,Bpos,false),world(X2-Y1,Bpos,false)) :-
-	  max_right(MAXRIGHT),
-	  X1 < MAXRIGHT,
-	  X2 is X1+1.
+		max_right(MAXRIGHT),
+		X1 < MAXRIGHT,
+		X2 is X1+1.
 
 	move_right(world(X1-Y1,_,true),world(X2-Y1,X2-Y1,true)) :-
 		max_right(MAXRIGHT),

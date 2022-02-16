@@ -36,11 +36,11 @@
 	test(prototypes_1) :-
 		findall(P, (alf::current_predicate(F/A), functor(P,F,A), alf::P), Solutions),
 		Solutions == [
-			chases('Lucky'), 
-			favorite_food(cats), 
-			motto('Are you going to finish that sandwich?'), 
-			name('Gordon Shumway'), 
-			planet('Melmac'), 
+			chases('Lucky'),
+			favorite_food(cats),
+			motto('Are you going to finish that sandwich?'),
+			name('Gordon Shumway'),
+			planet('Melmac'),
 			stomachs(8)].
 
 	test(prototypes_2) :-

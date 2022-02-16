@@ -183,7 +183,7 @@
 
 	process_library(Library) :-
 		library_score(Library, Score),
-		print_message(information, code_metrics, cyclomatic_complexity(Score)).		
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	rlibrary_score(Library, Score) :-
 		setof(
@@ -202,7 +202,7 @@
 
 	process_rlibrary(Library) :-
 		rlibrary_score(Library, Score),
-		print_message(information, code_metrics, cyclomatic_complexity(Score)).		
+		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	all_score(Score) :-
 		findall(

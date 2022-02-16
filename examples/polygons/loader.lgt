@@ -23,7 +23,7 @@
 	logtalk_load([events(loader), basic_types(loader), meta(loader), hierarchies(loader)]),
 	logtalk_load(roots(loader)),
 	logtalk_load(relations(loader)),
-	% compile messages with event support and turn event support on in order to 
+	% compile messages with event support and turn event support on in order to
 	% allow the constrained relation "concentric" to perform its magic:
 	logtalk_load(polygons, [events(allow)]),
 	set_logtalk_flag(events, allow)

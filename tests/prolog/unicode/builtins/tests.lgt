@@ -486,21 +486,21 @@
 		file_path(sample_utf_8, Path),
 		open(Path, write, Stream, [encoding('UTF-8')]),
 		stream_property(Stream, encoding(Encoding)),
-		 stream_property(Stream, bom(BOM)),
+		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_02, true(Encoding-BOM == 'UTF-8'-false)) :-
 		file_path(sample_utf_8_no_bom, Path),
 		open(Path, write, Stream, [encoding('UTF-8'), bom(false)]),
 		stream_property(Stream, encoding(Encoding)),
-		 stream_property(Stream, bom(BOM)),
+		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_03, true(Encoding-BOM == 'UTF-8'-true)) :-
 		file_path(sample_utf_8_bom, Path),
 		open(Path, write, Stream, [encoding('UTF-8'), bom(true)]),
 		stream_property(Stream, encoding(Encoding)),
-		 stream_property(Stream, bom(BOM)),
+		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_04, true(Encoding == 'UTF-8')) :-
@@ -521,7 +521,7 @@
 		close(Output),
 		open(Path, read, Input),
 		stream_property(Input, encoding(Encoding)),
-		 stream_property(Input, bom(BOM)),
+		stream_property(Input, bom(BOM)),
 		close(Input).
 
 	% binary streams should not have bom/1 or encoding/1 properties

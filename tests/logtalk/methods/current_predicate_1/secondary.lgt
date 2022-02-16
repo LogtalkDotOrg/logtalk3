@@ -24,7 +24,7 @@
 	:- multifile(primary::p/1).
 	primary::p(Predicate) :-
 		% the next call must use the "secondary" object
-		% database, not the "primary" object database 
+		% database, not the "primary" object database
 		current_predicate(Predicate).
 
 	:- public(a/1).

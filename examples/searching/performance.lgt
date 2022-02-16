@@ -96,11 +96,13 @@
 
 	branching(Minimum, Average, Maximum) :-
 		findall(
-			Length, 
-			(transitions_(State1, _, _),
-			 findall(State2, transitions_(State1, State2, _), States2),
-			 length(States2, Length)),
-			Lengths),
+			Length,
+			(	transitions_(State1, _, _),
+				findall(State2, transitions_(State1, State2, _), States2),
+				length(States2, Length)
+			),
+			Lengths
+		),
 		min(Lengths, Minimum),
 		max(Lengths, Maximum),
 		sum(Lengths, Sum),

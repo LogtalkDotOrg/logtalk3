@@ -62,7 +62,7 @@
 		sequence(Start, Sequence).
 
 	sequence(1, [1]) :-
-		!. 
+		!.
 	sequence(N, [N| Sequence]) :-
 		(	N mod 2 =:= 0 ->
 			M is N // 2
@@ -77,7 +77,7 @@
 
 	sequence(1) :-
 		!,
-		write(1), nl. 
+		write(1), nl.
 	sequence(N) :-
 		write(N), write(' '),
 		(	N mod 2 =:= 0 ->

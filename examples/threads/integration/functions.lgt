@@ -97,7 +97,7 @@
 	eval(f2, X, Y) :-
 		Y is 5.0/(1.0 + 4.0*X*X).
 
-	% (4*x-x*x*x)exp(x*x) [0,2] integral = (e**4-5)/2 = 24.79907 
+	% (4*x-x*x*x)exp(x*x) [0,2] integral = (e**4-5)/2 = 24.79907
 	eval(f3, X, Y) :-
 		Y is (4.0*X-X*X*X)*exp(X*X).
 

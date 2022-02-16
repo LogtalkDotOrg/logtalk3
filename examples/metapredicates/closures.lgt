@@ -26,7 +26,7 @@
 :- object(metapreds).
 
 	% the meta_predicate/1 directive below changes the interpretation of meta-calls on apply/2
-	% clauses; the integer argument ("1") implies that the first argument is a closure that will 
+	% clauses; the integer argument ("1") implies that the first argument is a closure that will
 	% be used to construct a goal by appending exactly one additional argument
 
 	:- public(apply/2).

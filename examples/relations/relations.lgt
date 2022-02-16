@@ -381,10 +381,11 @@
 	plays_role_n_times(Object, Role, Number) :-
 		::descriptor(Descriptor),
 		nth1(Position, Descriptor, Role),
-		setof(Tuple,
-			(::tuple(Tuple),
-			 nth1(Position, Tuple, Object)), 
-			Tuples),
+		setof(
+			Tuple,
+			(::tuple(Tuple), nth1(Position, Tuple, Object)),
+			Tuples
+		),
 		length(Tuples, Number).
 
 	domains(Domains) :-
@@ -578,7 +579,7 @@
 	lower_cardinality(I, J) :-
 		integer(I),
 		integer(J),
-		I < J. 
+		I < J.
 
 	free(Options) :-
 		::remove_all_tuples,
@@ -695,8 +696,9 @@
 		self(Self),
 		(	Self \= Sender ->
 			forall(
-				(::activ_point(Role, after, Message),
-				 ::plays_role_in_tuple(Object, Role, Tuple)),
+				(	::activ_point(Role, after, Message),
+					::plays_role_in_tuple(Object, Role, Tuple)
+				),
 				::propagate(after, Message, Object, Role, Tuple))
 		;	true
 		),

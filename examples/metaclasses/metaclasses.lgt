@@ -41,7 +41,7 @@
 % are interpreted as instances, classes, or both.
 
 % to work with classes and instances in Logtalk, we must define at least
-% one metaclass; 
+% one metaclass;
 
 % a common solution to avoid a infinite regression is to make a class its
 % own metaclass:

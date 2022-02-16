@@ -47,17 +47,17 @@
 
 	%% background knowledge
 	my_double(A,B) :-
-	    integer(A),
-	    (ground(B) -> integer(B); true),
-	    B is A*2.
+		integer(A),
+		(ground(B) -> integer(B); true),
+		B is A*2.
 	my_succ(A,B) :-
-	    integer(A),
-	    (ground(B) -> integer(B); true),
-	    succ(A,B).
+		integer(A),
+		(ground(B) -> integer(B); true),
+		succ(A,B).
 	my_length(A,B) :-
-	    is_list(A),
-	    (ground(B) -> integer(B); true),
-	    length(A,B).
+		is_list(A),
+		(ground(B) -> integer(B); true),
+		length(A,B).
 
 	:- meta_predicate(map(*, *, 2)).
 	map([],[],_F).

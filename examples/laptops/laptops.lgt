@@ -152,7 +152,7 @@
 	describe :-
 		::mainboard(Mainboard), Mainboard::describe,
 		::display(Display), Display::describe,
-		::keyboard(Keyboard), Keyboard::describe.		
+		::keyboard(Keyboard), Keyboard::describe.
 
 :- end_category.
 

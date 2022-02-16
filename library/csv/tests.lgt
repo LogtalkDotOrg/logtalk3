@@ -63,17 +63,17 @@
 	% following: https://www.rfc-editor.org/rfc/rfc4180.txt
 
 	%1.  Each record is located on a separate line, delimited by a line
-    %    break (CRLF).  For example:
-    %    aaa,bbb,ccc CRLF
-    %    zzz,yyy,xxx CRLF
+	%    break (CRLF).  For example:
+	%    aaa,bbb,ccc CRLF
+	%    zzz,yyy,xxx CRLF
 	test(csv_read_sample_csv_crlf_ending, true(Rows == [[aaa,bbb,ccc],[zzz,yyy,xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/crlf_ending.csv', Path),
 		csv::read_file(Path, Rows).
 
 	%    without CRLF in the last row
-    %    aaa,bbb,ccc CRLF
-    %    zzz,yyy,xxx
+	%    aaa,bbb,ccc CRLF
+	%    zzz,yyy,xxx
 	test(csv_read_sample_csv_no_crlf_at_end, true(Rows == [[aaa,bbb,ccc],[zzz,yyy,xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/no_crlf_at_end.csv', Path),

@@ -475,9 +475,9 @@
 		 cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)}.
 
 	cbor_utf_8_string_to_string_term(atom, Codes, Atom) :-
-		 atom_codes(Atom, Codes).
+		atom_codes(Atom, Codes).
 	cbor_utf_8_string_to_string_term(chars, Codes, chars(Chars)) :-
-		 codes_to_chars(Codes, Chars).
+		codes_to_chars(Codes, Chars).
 	cbor_utf_8_string_to_string_term(codes, Codes, codes(Codes)).
 
 	codes_to_chars([], []).

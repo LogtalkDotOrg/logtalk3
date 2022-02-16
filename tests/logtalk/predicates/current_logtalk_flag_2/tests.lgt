@@ -145,7 +145,7 @@
 		ground(Value),
 		callable(Value),
 		functor(Value, v, 3).
-		
+
 	succeeds(prolog_compatible_version) :-
 		current_logtalk_flag(prolog_compatible_version, Value),
 		ground(Value),
