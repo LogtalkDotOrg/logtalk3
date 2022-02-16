@@ -77,12 +77,12 @@ For more information see:
 	}
 
 	@inproceedings{AnconaSAC12,
-	  author = {Ancona, D.},
-	  title = {Regular corecursion in {P}rolog},
-	  booktitle = {A{CM} {S}ymposium on {A}pplied {C}omputing ({SAC} 2012)},
-	  ftp = {ftp://ftp.disi.unige.it/person/AnconaD/AnconaSAC12.pdf},
-	  keywords = {coinduction,corecursion},
-	  year = 2012
+		author = {Ancona, D.},
+		title = {Regular corecursion in {P}rolog},
+		booktitle = {A{CM} {S}ymposium on {A}pplied {C}omputing ({SAC} 2012)},
+		ftp = {ftp://ftp.disi.unige.it/person/AnconaD/AnconaSAC12.pdf},
+		keywords = {coinduction,corecursion},
+		year = 2012
 	}
 
 	@inproceedings{pmoura13b,

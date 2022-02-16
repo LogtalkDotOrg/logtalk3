@@ -20,18 +20,18 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This example shows the use of meta-predicates in Logtalk. Meta-predicates are 
-predicates whose head includes arguments that will be called as goals in the 
+This example shows the use of meta-predicates in Logtalk. Meta-predicates are
+predicates whose head includes arguments that will be called as goals in the
 body of the predicate definition.
 
 This example defines the following objects:
 
 - `company`  
-    usage example of the `map_reduce/5` meta-predicate
+	usage example of the `map_reduce/5` meta-predicate
 
 - `fibonacci`  
-    example of calculating Fibonacci numbers using the `fold_left/4`
-    meta-predicate
+	example of calculating Fibonacci numbers using the `fold_left/4`
+	meta-predicate
 
 - `sort(_)`  
 	this is a parametric object containing a method that implements the

@@ -209,7 +209,7 @@
 		respond(['You can''t get to ', Room, ' from here']),
 		fail.
 
-	 % update the logicbase with the new room
+	% update the logicbase with the new room
 	moveto(Room) :-
 		retractall(here(_)),
 		asserta(here(Room)).
@@ -264,7 +264,7 @@
 		respond(['There is no ',Thing,' here']),
 		fail.
 
-	 % recursive definition to find things contained in things etc
+	% recursive definition to find things contained in things etc
 	contains(Thing, Here) :-
 		location(Thing, Here).
 	contains(Thing, Here) :-

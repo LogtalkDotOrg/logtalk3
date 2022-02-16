@@ -18,11 +18,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% integration code for XPCE 6.6.21 and later versions supporting Logtalk 
+% integration code for XPCE 6.6.21 and later versions supporting Logtalk
 % message sending goals as call-backs goals
 %
 % with this file you can use the syntax:
-% 
+%
 %    logtalk(Object, MessageFunctor, MessageArg1, MessageArg2, ...)
 %
 % as an alternative to XPCE's message(...) call-backs

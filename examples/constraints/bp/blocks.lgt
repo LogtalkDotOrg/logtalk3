@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-/******************************************************************* 
+/*******************************************************************
    by Neng-Fa Zhou, 2001.
    Solve the blocks world planning problem as a CSP.
    Based on the modeling described in:
    "CPlan: A Constraint Programming Approach to Planning", AAAI'99,
    by Peter va Beek and Xinguang Chen.
-   One difference from the modeling is that goal-relevant 
+   One difference from the modeling is that goal-relevant
    constraints are employed.
 ********************************************************************/
 
@@ -92,7 +92,7 @@
 		functor(S1,_,N),
 		add_moved_block(S1,S2,N,Plan,PlanR),
 		extract_plan([S2|States],PlanR).
- 
+
 	add_moved_block(S1,S2,I,Plan,PlanR) :-I=:=0,!,Plan=PlanR.
 	add_moved_block(S1,S2,I,Plan,PlanR) :-
 		arg(I,S1,block(_,Below1)),
@@ -109,13 +109,13 @@
 		label(States).
 	label([]).
 
-/* 
+/*
    A plan is a list of states each of which is a structure of the following form:
-   
+
    state(block(A1,B1),block(A2,B2),...,block(An,Bn))
 
    where Ai and Bi are two variables that tell what are the blocks above and below
-   the block i, respectively. Ai is 0 if the block is clear and Bi is 0 if the block 
+   the block i, respectively. Ai is 0 if the block is clear and Bi is 0 if the block
    is on the table
 */
 	generate_states(Prob,N,States) :-N>0,!,
@@ -135,8 +135,8 @@
 	declare_domains(State,I,N) :-I>N,!.
 	declare_domains(State,I,N) :-
 		arg(I,State,block(Above,Below)),
-		domain(Above,0,N), 
-		domain(Below,0,N), 
+		domain(Above,0,N),
+		domain(Below,0,N),
 		I1 is I+1,
 		declare_domains(State,I1,N).
 
@@ -153,7 +153,7 @@
 /*
   The following constraints ensure that a state is valid:
   (1) If block i is above block j, then block j is below block i, and vice versa.
-  (2) For each block, there is at most one block above it and there is 
+  (2) For each block, there is at most one block above it and there is
 	  also at most one block below it.
 */
 	state_constraints(State) :-
@@ -220,8 +220,8 @@
 		arg(I,GoalState,block(A,B)),
 		(B=\=0->block_in_final_position(B,S,GoalState);true).
 
-	/* 
-	   No two states in a plan can be the same. Action constraints already guarantee that 
+	/*
+	   No two states in a plan can be the same. Action constraints already guarantee that
 	   any two neiboring states are different
 	*/
 	no_cycle_constraints([_]) :-!.
@@ -247,8 +247,8 @@
 		I1 is I-1,
 		different_states(I1,S1,S2,Sum+Same).
 
-	/* 
-	   blocks are numbered 1,2,3, and so on. 
+	/*
+	   blocks are numbered 1,2,3, and so on.
 	   clear(B,S): the block B is clear in state S.
 	   on_table(B,S): the block B is on table in state S.
 	   on(B1,B2,S): block B1 is one Block B2 in state S.

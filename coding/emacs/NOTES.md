@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains a `logtalk.el` file that provides syntax 
-highlighting for editing Logtalk source files with the Emacs text 
+This directory contains a `logtalk.el` file that provides syntax
+highlighting for editing Logtalk source files with the Emacs text
 editor:
 
 	http://www.gnu.org/software/emacs/emacs.html
