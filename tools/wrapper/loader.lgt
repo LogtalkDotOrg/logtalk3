@@ -21,5 +21,5 @@
 
 :- initialization((
 	logtalk_load(os(loader)),
-	logtalk_load(wrapper)
+	logtalk_load(wrapper, [optimize(on)])
 )).
