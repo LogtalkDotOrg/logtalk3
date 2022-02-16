@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-262 369,-262 369,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object object_wrapper_hook/1</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;02&#45;16, 11:11</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;02&#45;16, 17:35</text>
 <g id="clust1" class="cluster">
 <title>cluster_object_wrapper_hook_1_object</title>
 <g id="a_clust1"><a xlink:title="object_wrapper_hook(Protocol)">
 <path fill="snow" stroke="dimgray" d="M85.5,-49C85.5,-49 279.5,-49 279.5,-49 285.5,-49 291.5,-55 291.5,-61 291.5,-61 291.5,-238 291.5,-238 291.5,-244 285.5,-250 279.5,-250 279.5,-250 85.5,-250 85.5,-250 79.5,-250 73.5,-244 73.5,-238 73.5,-238 73.5,-61 73.5,-61 73.5,-55 79.5,-49 85.5,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt">
 <text text-anchor="start" x="86" y="-233.5" font-family="Monospace" font-size="10.00" fill="dimgray">object_wrapper_hook(Protocol)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- term_expansion/2 -->
 <g id="node1" class="node">
 <title>term_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt#L69">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt#L69">
 <polygon fill="cornsilk" stroke="black" points="251,-213 114,-213 114,-177 251,-177 251,-213"/>
 <text text-anchor="start" x="122.5" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="128.5" y="-197.2" font-family="Monospace" font-size="11.00">term_expansion/2</text>
@@ -55,12 +55,12 @@
 <!-- term_expansion/2&#45;&gt;os::decompose_file_name/4 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;os::decompose_file_name/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt#L69" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt#L69" xlink:title="calls">
 <path fill="none" stroke="black" d="M182.5,-176.88C182.5,-158.04 182.5,-127.47 182.5,-105.3"/>
 <polygon fill="black" stroke="black" points="186,-105.19 182.5,-95.19 179,-105.19 186,-105.19"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb2d2f45ff3b78ecc40115456b8fe4ec27e28f/library/hook_objects/object_wrapper_hook.lgt#L69">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5358acc0018b764860fa60186233dde83b2532b8/library/hook_objects/object_wrapper_hook.lgt#L69">
 <text text-anchor="start" x="182.5" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
