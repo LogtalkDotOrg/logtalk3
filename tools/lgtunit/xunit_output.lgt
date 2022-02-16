@@ -107,9 +107,9 @@
 		testsuite_time(Object, Time),
 		testsuite_timestamp(TimeStamp),
 		write_xml_open_tag(testsuite,
-			[package-Package, name-Name,
-			 tests-Tests, errors-Errors, failures-Failures, skipped-Skipped,
-			 time-Time, timestamp-TimeStamp
+			[	package-Package, name-Name,
+				tests-Tests, errors-Errors, failures-Failures, skipped-Skipped,
+				time-Time, timestamp-TimeStamp
 			]
 		),
 		write_test_elements(Object),

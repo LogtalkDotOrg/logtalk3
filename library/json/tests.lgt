@@ -69,7 +69,8 @@
 		parse(codes([0'[, 0'1, 0']]), _Term).
 
 	test(parse_skip_ws, true) :-
-		 atom_codes('\r\t\n {"a":"b"}', Codes), json::parse(codes(Codes), _Obj).
+		atom_codes('\r\t\n {"a":"b"}', Codes),
+		json::parse(codes(Codes), _Obj).
 
 	test(parse_simple_glossary_json, true) :-
 		file_path('test_files/json_org/simple_glossary.json', Path),

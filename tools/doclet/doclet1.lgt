@@ -66,7 +66,7 @@
 
 	cd_docs(CD) :-
 		docs_path(DocsPath),
-		atom_concat('cd ', DocsPath, CD).		
+		atom_concat('cd ', DocsPath, CD).
 
 :- end_object.
 

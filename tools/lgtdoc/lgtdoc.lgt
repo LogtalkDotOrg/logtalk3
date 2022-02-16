@@ -390,8 +390,10 @@
 		(	XMLSpec == dtd ->
 			write_xml_open_tag(Stream, DocType, [])
 		;	write_xml_open_tag(Stream, DocType,
-				['xmlns:xsi'-'http://www.w3.org/2001/XMLSchema-instance',
-				 'xsi:noNamespaceSchemaLocation'-XSDURL])
+				[	'xmlns:xsi'-'http://www.w3.org/2001/XMLSchema-instance',
+					'xsi:noNamespaceSchemaLocation'-XSDURL
+				]
+			)
 		).
 
 	xml_header_text(Version, Encoding, Standalone, Text) :-

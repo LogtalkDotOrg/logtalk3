@@ -110,7 +110,7 @@
 			[	name-Name, 'config-file'-ConfigFile, 'test-framework'-lgtunit,
 				'run-date'-RunDate, 'run-time'-RunTime,
 				time-Time,
-			 	total-Total, passed-Passed, failed-Failed, skipped-Skipped, errors-0
+				total-Total, passed-Passed, failed-Failed, skipped-Skipped, errors-0
 			]
 		),
 		write_errors_element(Object),
@@ -145,7 +145,7 @@
 		collection_time(Object, Time),
 		write_xml_open_tag(collection,
 			[	name-Name, time-Time,
-			 	total-Total, passed-Passed, failed-Failed, skipped-Skipped
+				total-Total, passed-Passed, failed-Failed, skipped-Skipped
 			]
 		),
 		write_test_elements(Object),

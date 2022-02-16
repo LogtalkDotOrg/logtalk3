@@ -105,7 +105,7 @@
 	country_code("DE").
 	country_code("GI").
 	country_code("GR").
-	country_code("GL").  
+	country_code("GL").
 	country_code("GT").
 	country_code("HU").
 	country_code("IS").

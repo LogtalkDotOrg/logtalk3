@@ -2,13 +2,13 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
-%  SPDX-License-Identifier: Apache-2.0
+%  SPDX-License-Identifier: OSL-2.1
 %
-%  Licensed under the Apache License, Version 2.0 (the "License");
+%  Licensed under the Open Software License, Version 2.1 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
 %
-%      http://www.apache.org/licenses/LICENSE-2.0
+%      https://opensource.org/licenses/OSL-2.1
 %
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,11 +20,11 @@
 
 
 /*
-This file contains an adaptation to Logtalk of code for logical assignment 
-of Prolog terms developed by Nobukuni Kino. For more information, please 
+This file contains an adaptation to Logtalk of code for logical assignment
+of Prolog terms developed by Nobukuni Kino. For more information, please
 consult the URL http://www.kprolog.com/en/logical_assignment/
 
-As a derivative work, this file is licensed under the Open Software License 
+As a derivative work, this file is licensed under the Open Software License
 version 2.1 (http://opensource.org/licenses/osl-2.1.php).
 */
 

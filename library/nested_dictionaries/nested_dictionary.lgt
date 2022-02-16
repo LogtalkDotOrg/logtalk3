@@ -123,14 +123,14 @@
 		update_in(Keys, SubDict, NextKey, OldValue, NewValue, NewSubDict).
 
 	insert_in(OldDict, [Key| Keys], Value, NewDict) :-
-        insert_in(Keys, OldDict, Key, Value, NewDict).
+		insert_in(Keys, OldDict, Key, Value, NewDict).
 
-    insert_in([], OldDict, Key, Value, NewDict) :-
-        ^^insert(OldDict, Key, Value, NewDict).
-    insert_in([NextKey| Keys], OldDict, Key, Value, NewDict) :-
-        ^^lookup(Key, SubDict, OldDict),
-        ^^update(OldDict, Key, NewDict0, NewDict),
-        insert_in(Keys, SubDict, NextKey, Value, NewDict0).
+	insert_in([], OldDict, Key, Value, NewDict) :-
+		^^insert(OldDict, Key, Value, NewDict).
+	insert_in([NextKey| Keys], OldDict, Key, Value, NewDict) :-
+		^^lookup(Key, SubDict, OldDict),
+		^^update(OldDict, Key, NewDict0, NewDict),
+		insert_in(Keys, SubDict, NextKey, Value, NewDict0).
 
 	delete_in(OldDict, [Key| Keys], Value, NewDict) :-
 		delete_in(Keys, OldDict, Key, Value, NewDict).
@@ -138,6 +138,6 @@
 	delete_in([], OldDict, Key, Value, NewDict) :-
 		^^delete(OldDict, Key, Value, NewDict).
 	delete_in([NextKey| Keys], OldDict, Key, Value, NewDict) :-
-        ^^lookup(Key, SubDict, OldDict),
-        ^^update(OldDict, Key, NewDict0, NewDict),
+		^^lookup(Key, SubDict, OldDict),
+		^^update(OldDict, Key, NewDict0, NewDict),
 		delete_in(Keys, SubDict, NextKey, Value, NewDict0).

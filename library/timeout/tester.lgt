@@ -28,7 +28,7 @@
 )).
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
-	    :- ensure_loaded(library(timeout)).
+		:- ensure_loaded(library(timeout)).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 		:- use_module(library(timeout), []).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).

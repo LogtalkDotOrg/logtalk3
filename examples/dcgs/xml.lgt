@@ -45,8 +45,9 @@
 			phrase(term(Term, Interpretation), List).
 
 	term(Term, Interpretation) -->
-		{nonvar(Term), nonvar(Interpretation),
-		 Interpretation =.. [Functor| Tags], Term =.. [Functor| Args]},
+		{	nonvar(Term), nonvar(Interpretation),
+			Interpretation =.. [Functor| Tags], Term =.. [Functor| Args]
+		},
 		open_tag(Functor),
 		arguments(Tags, Args),
 		close_tag(Functor).

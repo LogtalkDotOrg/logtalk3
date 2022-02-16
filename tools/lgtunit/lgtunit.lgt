@@ -1861,8 +1861,9 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx;
-		 Dialect == tau; Dialect == lvm; Dialect == scryer; Dialect == trealla)
+		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx;
+			Dialect == tau; Dialect == lvm; Dialect == scryer; Dialect == trealla
+		)
 	)).
 		epsilon(Epsilon) :-
 			Epsilon is epsilon.

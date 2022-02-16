@@ -52,8 +52,9 @@
 		).
 
 	data(Predicate, Calls, Retries) :-
-		{profile_data(Predicate, calls, Calls),
-		 profile_data(Predicate, retries, Retries)}.
+		{	profile_data(Predicate, calls, Calls),
+			profile_data(Predicate, retries, Retries)
+		}.
 
 	write_profile_data(Data) :-
 		format('~*c~n',[64,0'-]),

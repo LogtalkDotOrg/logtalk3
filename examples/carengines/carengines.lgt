@@ -20,12 +20,12 @@
 
 
 /*
-This is a simple example of category composition, i.e. extending of 
-categories by other categories in order to provide modified components 
+This is a simple example of category composition, i.e. extending of
+categories by other categories in order to provide modified components
 for building objects, using car engines.
 
-The example defines a car engine protocol, "carenginep", a standard engine 
-(classic), and an improved version of it, "sport". Both engines are then 
+The example defines a car engine protocol, "carenginep", a standard engine
+(classic), and an improved version of it, "sport". Both engines are then
 imported in two car models, "sedan" and "coupe".
 */
 
@@ -46,7 +46,7 @@ imported in two car models, "sedan" and "coupe".
 :- end_protocol.
 
 
-% second, we can define a typical engine as a category, which will be used 
+% second, we can define a typical engine as a category, which will be used
 % when "assembling" cars:
 
 :- category(classic,
@@ -62,7 +62,7 @@ imported in two car models, "sedan" and "coupe".
 :- end_category.
 
 
-% next, we define a souped up version of the previous engine, which differs 
+% next, we define a souped up version of the previous engine, which differs
 % from the standard one only in its reference and in its horsepower:
 
 :- category(sport,

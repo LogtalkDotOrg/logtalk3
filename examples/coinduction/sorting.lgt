@@ -37,7 +37,7 @@
 		sort(List, [], Sorted).
 
 	sort([], Sorted, Sorted).
-	sort([Pivot| Rest], Acc, Sorted) :- 
+	sort([Pivot| Rest], Acc, Sorted) :-
 		partition(Rest, Pivot, Smaller0, Bigger0),
 		sort(Smaller0, [Pivot| Bigger], Sorted),
 		sort(Bigger0, Acc, Bigger).

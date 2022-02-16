@@ -46,7 +46,7 @@
 
 		cover(mdt_paths_first).
 		cover(mdt_paths_min).
-	
+
 	:- endif.
 
 	test(tabling_1) :-

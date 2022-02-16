@@ -20,15 +20,15 @@
 
 
 % Natural Language Processing in Prolog using Definite Clause Grammar rules
-% 
-% This example is a straightforward adaptation of the original plain Prolog 
+%
+% This example is a straightforward adaptation of the original plain Prolog
 % code described in the paper:
 %
-%	Tokenization using DCG Rules 
-%	Michael A. Covington 
-%	Artificial Intelligence Center 
-%	The University of Georgia 
-%	Athens, Georgia 30602-7415 U.S.A. 
+%	Tokenization using DCG Rules
+%	Michael A. Covington
+%	Artificial Intelligence Center
+%	The University of Georgia
+%	Athens, Georgia 30602-7415 U.S.A.
 %	2000 April 21
 %
 % A copy of the paper is available at:
@@ -111,7 +111,7 @@
 	% Classifies a character (ASCII code) as blank, numeric, uppercase, lowercase, or special.
 	% Adapted from Covington 1994.
 
-	char_type(Code, Type) :-	% blanks, other ctrl codes 
+	char_type(Code, Type) :-	% blanks, other ctrl codes
 		Code =< 32,
 		!,
 		Type = blank.

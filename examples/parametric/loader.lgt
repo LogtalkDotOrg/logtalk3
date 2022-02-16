@@ -20,7 +20,7 @@
 
 
 /*
-On POSIX systems, the compilation of this example may generate invalid 
+On POSIX systems, the compilation of this example may generate invalid
 file names for the XML documenting files.
 */
 

@@ -169,7 +169,7 @@
 	remove_all_tuples :-
 		retractall(tuple_(_, _)),
 		abolish_events(_, _, _, _, block_stack).
-	
+
 	tuple(Top-Bottom) :-
 		tuple_(Top, Bottom).
 
@@ -183,7 +183,7 @@
 				Bottom::position(X, Yb) ->
 				% bottom block is already below the new position of the moved block
 				true
-			;	% bottom block didn't move along 
+			;	% bottom block didn't move along
 				remove_tuple(Block-Bottom)
 			)
 		;	true
@@ -229,11 +229,12 @@
 		last(Ys, Ymax),
 		% draw a representation of the position of all the blocks
 		fordownto(Y, Ymax, 1,
-			(write('|'),
-			 forto(X, 1, Xmax,
-				(member((Block, X, Y), Blocks) -> write(Block); write('.'))
-			 ),
-			 nl)
+			(	write('|'),
+				forto(X, 1, Xmax,
+					(member((Block, X, Y), Blocks) -> write(Block); write('.'))
+				),
+				nl
+			)
 		),
 		write('-'),
 		forto(X, 1, Xmax, write('-')), nl.

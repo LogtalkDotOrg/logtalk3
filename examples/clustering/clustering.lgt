@@ -72,7 +72,7 @@
 			)
 		),
 		java('org.apache.commons.math3.ml.clustering.KMeansPlusPlusClusterer')::new([NumberOfClusters, MaxIterations], KMeansPlusPlusClusterer),
-	    catch(
+		catch(
 			java(KMeansPlusPlusClusterer, Results)::cluster(List),
 			error(_, JavaException),
 			convert_cluster_java_exception(JavaException, Context)

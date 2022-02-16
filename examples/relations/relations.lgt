@@ -685,8 +685,9 @@
 		self(Self),
 		(	Self \= Sender ->
 			forall(
-				(::activ_point(Role, before, Message),
-				 ::plays_role_in_tuple(Object, Role, Tuple)),
+				(	::activ_point(Role, before, Message),
+					::plays_role_in_tuple(Object, Role, Tuple)
+				),
 				::propagate(before, Message, Object, Role, Tuple))
 		;	true
 		),

@@ -112,9 +112,10 @@
 			).
 
 		data(Spec, CallsData, ChoicePointsData, InstructionsData) :-
-			{profile_data(Spec, calls, predicate, CallsData),
-			 profile_data(Spec, choice_points, predicate, ChoicePointsData),
-			 profile_data(Spec, instructions, predicate, InstructionsData)}.
+			{	profile_data(Spec, calls, predicate, CallsData),
+				profile_data(Spec, choice_points, predicate, ChoicePointsData),
+				profile_data(Spec, instructions, predicate, InstructionsData)
+			}.
 
 		write_profile_data(Data) :-
 			format("~*c~n",[82,0'-]),
@@ -137,10 +138,12 @@
 			data(user:_, CallsData, ChoicePointsData, InstructionsData),
 			(	setof(
 					Calls-[Functor/Arity,ChoicePoints,Instructions],
-					Type^TFunctor^TArity^(member((user:TFunctor/TArity)-Calls, CallsData), Calls > 0,
-					 logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, Type, Functor/Arity),
-					 member((user:TFunctor/TArity)-ChoicePoints, ChoicePointsData),
-					 member((user:TFunctor/TArity)-Instructions, InstructionsData)),
+					Type^TFunctor^TArity^(
+						member((user:TFunctor/TArity)-Calls, CallsData), Calls > 0,
+						logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, Type, Functor/Arity),
+						member((user:TFunctor/TArity)-ChoicePoints, ChoicePointsData),
+						member((user:TFunctor/TArity)-Instructions, InstructionsData)
+					),
 					Data) ->
 				write_entity_profile_data(Entity, Data)
 			;	write_entity_profile_data(Entity, [])

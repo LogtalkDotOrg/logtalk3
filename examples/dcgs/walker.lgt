@@ -44,7 +44,7 @@
 	moves(Start, Ending) -->
 		move(Start, Temp), moves(Temp, Ending).
 	moves(Ending, Ending) -->
-		[]. 
+		[].
 
 	move((X0, Y0), (X, Y)) --> [ n(S)], {X is X0, Y is Y0 + S}.
 	move((X0, Y0), (X, Y)) --> [ne(S)], {X is X0 + S / sqrt(2), Y is Y0 + S / sqrt(2)}.

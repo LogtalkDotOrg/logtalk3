@@ -167,10 +167,13 @@
 		setof(Y, Brick^X^ member((Brick,X,Y), Bricks), Ys),
 		last(Ys, Ymax),
 		fordownto(Y, Ymax, 1,
-			(write('|'),
-			 forto(X, 1, Xmax,
-				(member((Brick, X, Y), Bricks) -> write(Brick); write('.'))),
-			 nl)),
+			(	write('|'),
+			 	forto(X, 1, Xmax,
+					(member((Brick, X, Y), Bricks) -> write(Brick); write('.'))
+				),
+			 	nl
+			)
+		),
 		write('-'),
 		forto(X, 1, Xmax, write('-')), nl.
 

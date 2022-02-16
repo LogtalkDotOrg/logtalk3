@@ -213,9 +213,9 @@
 		[].
 
 	json_string_to_string_term(atom, Codes, Atom) :-
-		 atom_codes(Atom, Codes).
+		atom_codes(Atom, Codes).
 	json_string_to_string_term(chars, Codes, chars(Chars)) :-
-		 codes_to_chars(Codes, Chars).
+		codes_to_chars(Codes, Chars).
 	json_string_to_string_term(codes, Codes, codes(Codes)).
 
 	encode(Term) -->

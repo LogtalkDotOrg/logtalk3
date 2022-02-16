@@ -191,8 +191,9 @@
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
 	connect_to_server(Host, Port, redis(Socket, Socket, Socket)) :-
-		{socket(Socket, _),
-		 socket_connect(Socket, Port, Host, _)}.
+		{	socket(Socket, _),
+			socket_connect(Socket, Port, Host, _)
+		}.
 
 	disconnect_from_server(redis(_, _, Socket)) :-
 		{socket_close(Socket, _)}.

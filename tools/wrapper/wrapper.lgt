@@ -854,8 +854,9 @@
 	:- if(current_logtalk_flag(prolog_dialect, swi)).
 
 		module_exported_predicate(Module, Predicate) :-
-			{current_module(Module),
-			 module_property(Module, exports(Exports))},
+			{	current_module(Module),
+				module_property(Module, exports(Exports))
+			},
 			member(Predicate, Exports).
 
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
@@ -868,15 +869,17 @@
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		module_exported_predicate(Module, Functor/Arity) :-
-			{current_module(Module),
-			 predicate_property(':'(Module,Goal), exported)},
+			{	current_module(Module),
+				predicate_property(':'(Module,Goal), exported)
+			},
 			functor(Goal, Functor, Arity).
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		module_exported_predicate(Module, Predicate) :-
-			{current_module(Module),
-			 get_module_info(Module, interface, Exports)},
+			{	current_module(Module),
+				get_module_info(Module, interface, Exports)
+			},
 			member(export(Predicate), Exports).
 
 	:- else.

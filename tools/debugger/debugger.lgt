@@ -499,9 +499,10 @@
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
 		call_goal(TGoal, Deterministic) :-
-			{sepia_kernel:get_cut(Before),
-			 call(TGoal),
-			 sepia_kernel:get_cut(After)},
+			{	sepia_kernel:get_cut(Before),
+				call(TGoal),
+				sepia_kernel:get_cut(After)
+			},
 			(	Before == After ->
 				!,
 				Deterministic = true
