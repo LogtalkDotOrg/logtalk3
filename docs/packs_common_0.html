@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>packs_common &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -183,7 +184,7 @@
            <div itemprop="articleBody">
              
   <p class="right" id="packs-common-0"><span id="index-0"></span><strong>category</strong></p>
-<div class="section" id="packs-common">
+<section id="packs-common">
 <h1><code class="docutils literal notranslate"><span class="pre">packs_common</span></code><a class="headerlink" href="#packs-common" title="Permalink to this headline"></a></h1>
 <p>Common predicates for the packs tool objects.</p>
 <div class="line-block">
@@ -252,9 +253,9 @@
 <li><p><a class="reference internal" href="#operators" id="id25">Operators</a></p></li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="setup/0"> </div><div class="section" id="setup-0">
+<div id="setup/0"> </div><section id="setup-0">
 <span id="packs-common-0-setup-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">setup/0</span></code></a><a class="headerlink" href="#setup-0" title="Permalink to this headline"></a></h3>
 <p>Ensures that registries and packs directory structure exists. Preserves any defined registries and installed packs.</p>
 <div class="line-block">
@@ -270,8 +271,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="reset/0"> </div></div>
-<div class="section" id="reset-0">
+<div id="reset/0"> </div></section>
+<section id="reset-0">
 <span id="packs-common-0-reset-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Permalink to this headline"></a></h3>
 <p>Resets registries and packs directory structure. Deletes any defined registries and installed packs.</p>
 <div class="line-block">
@@ -287,8 +288,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="verify_commands_availability/0"> </div></div>
-<div class="section" id="verify-commands-availability-0">
+<div id="verify_commands_availability/0"> </div></section>
+<section id="verify-commands-availability-0">
 <span id="packs-common-0-verify-commands-availability-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">verify_commands_availability/0</span></code></a><a class="headerlink" href="#verify-commands-availability-0" title="Permalink to this headline"></a></h3>
 <p>Verifies required shell commands availability. Fails printing an error message if a command is missing.</p>
 <div class="line-block">
@@ -304,8 +305,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="help/0"> </div></div>
-<div class="section" id="help-0">
+<div id="help/0"> </div></section>
+<section id="help-0">
 <span id="packs-common-0-help-0"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">help/0</span></code></a><a class="headerlink" href="#help-0" title="Permalink to this headline"></a></h3>
 <p>Provides help about the main predicates.</p>
 <div class="line-block">
@@ -321,8 +322,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="pin/1"> </div></div>
-<div class="section" id="pin-1">
+<div id="pin/1"> </div></section>
+<section id="pin-1">
 <span id="packs-common-0-pin-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">pin/1</span></code></a><a class="headerlink" href="#pin-1" title="Permalink to this headline"></a></h3>
 <p>Pins a resource (pack or registry) preventing it from being updated, uninstalled, or deleted. Fails if the resource is not found.</p>
 <div class="line-block">
@@ -342,8 +343,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="pin/0"> </div></div>
-<div class="section" id="pin-0">
+<div id="pin/0"> </div></section>
+<section id="pin-0">
 <span id="packs-common-0-pin-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">pin/0</span></code></a><a class="headerlink" href="#pin-0" title="Permalink to this headline"></a></h3>
 <p>Pins all resource (packs or registries) preventing them from being updated, uninstalled, or deleted. Note that resources added after calling this predicate will not be pinned.</p>
 <div class="line-block">
@@ -359,8 +360,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="unpin/1"> </div></div>
-<div class="section" id="unpin-1">
+<div id="unpin/1"> </div></section>
+<section id="unpin-1">
 <span id="packs-common-0-unpin-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">unpin/1</span></code></a><a class="headerlink" href="#unpin-1" title="Permalink to this headline"></a></h3>
 <p>Unpins a resource (pack or registry), allowing it to be updated, uninstalled, or deleted. Fails if the resource is not found.</p>
 <div class="line-block">
@@ -380,8 +381,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="unpin/0"> </div></div>
-<div class="section" id="unpin-0">
+<div id="unpin/0"> </div></section>
+<section id="unpin-0">
 <span id="packs-common-0-unpin-0"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">unpin/0</span></code></a><a class="headerlink" href="#unpin-0" title="Permalink to this headline"></a></h3>
 <p>Unpins all resources (packs or registries), allowing them to be updated, uninstalled, or deleted.</p>
 <div class="line-block">
@@ -397,8 +398,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="pinned/1"> </div></div>
-<div class="section" id="pinned-1">
+<div id="pinned/1"> </div></section>
+<section id="pinned-1">
 <span id="packs-common-0-pinned-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">pinned/1</span></code></a><a class="headerlink" href="#pinned-1" title="Permalink to this headline"></a></h3>
 <p>True iff the resource (pack or registry) is defined or installed and if it is pinned.</p>
 <div class="line-block">
@@ -418,8 +419,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="directory/2"> </div></div>
-<div class="section" id="directory-2">
+<div id="directory/2"> </div></section>
+<section id="directory-2">
 <span id="packs-common-0-directory-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a><a class="headerlink" href="#directory-2" title="Permalink to this headline"></a></h3>
 <p>Enumerates by backtracking all packs or registries and respective installation or definition directories.</p>
 <div class="line-block">
@@ -439,8 +440,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="directory/1"> </div></div>
-<div class="section" id="directory-1">
+<div id="directory/1"> </div></section>
+<section id="directory-1">
 <span id="packs-common-0-directory-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Permalink to this headline"></a></h3>
 <p>Returns the directory where the registries or the packs are installed.</p>
 <div class="line-block">
@@ -460,8 +461,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="readme/2"> </div></div>
-<div class="section" id="readme-2">
+<div id="readme/2"> </div></section>
+<section id="readme-2">
 <span id="packs-common-0-readme-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme/2</span></code></a><a class="headerlink" href="#readme-2" title="Permalink to this headline"></a></h3>
 <p>Returns the path to the resource (pack or registry) readme file using the internal backend format. Fails if the resource is not defined or installed or if no readme file is found for it.</p>
 <div class="line-block">
@@ -481,8 +482,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="readme/1"> </div></div>
-<div class="section" id="readme-1">
+<div id="readme/1"> </div></section>
+<section id="readme-1">
 <span id="packs-common-0-readme-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme/1</span></code></a><a class="headerlink" href="#readme-1" title="Permalink to this headline"></a></h3>
 <p>Prints the path to the resource (pack or registry) readme file using the native operating-system format. Fails if the resource is not defined or installed or if no readme file is found for it.</p>
 <div class="line-block">
@@ -502,8 +503,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="logtalk_packs/1"> </div></div>
-<div class="section" id="logtalk-packs-1">
+<div id="logtalk_packs/1"> </div></section>
+<section id="logtalk-packs-1">
 <span id="packs-common-0-logtalk-packs-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code></a><a class="headerlink" href="#logtalk-packs-1" title="Permalink to this headline"></a></h3>
 <p>Returns the directory (using the internal backend format) where the registries, packs, and archives are installed.</p>
 <div class="line-block">
@@ -523,8 +524,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="logtalk_packs/0"> </div></div>
-<div class="section" id="logtalk-packs-0">
+<div id="logtalk_packs/0"> </div></section>
+<section id="logtalk-packs-0">
 <span id="packs-common-0-logtalk-packs-0"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/0</span></code></a><a class="headerlink" href="#logtalk-packs-0" title="Permalink to this headline"></a></h3>
 <p>Prints the directory (using the native operating-system format) where the registries, packs, and archives are installed.</p>
 <div class="line-block">
@@ -539,12 +540,12 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
-<div id="readme_file_path/2"> </div><div class="section" id="readme-file-path-2">
+<div id="readme_file_path/2"> </div><section id="readme-file-path-2">
 <span id="packs-common-0-readme-file-path-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme_file_path/2</span></code></a><a class="headerlink" href="#readme-file-path-2" title="Permalink to this headline"></a></h3>
 <p>Returns the absolute path for the given directory readme file if it exists.</p>
 <div class="line-block">
@@ -564,8 +565,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="print_readme_file_path/1"> </div></div>
-<div class="section" id="print-readme-file-path-1">
+<div id="print_readme_file_path/1"> </div></section>
+<section id="print-readme-file-path-1">
 <span id="packs-common-0-print-readme-file-path-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_readme_file_path/1</span></code></a><a class="headerlink" href="#print-readme-file-path-1" title="Permalink to this headline"></a></h3>
 <p>Prints the absolute path for the given directory readme file if it exists. Succeeds otherwise.</p>
 <div class="line-block">
@@ -585,8 +586,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="command/2"> </div></div>
-<div class="section" id="command-2">
+<div id="command/2"> </div></section>
+<section id="command-2">
 <span id="packs-common-0-command-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">command/2</span></code></a><a class="headerlink" href="#command-2" title="Permalink to this headline"></a></h3>
 <p>Executes a shell command. Prints an error message and fails if the command fails.</p>
 <div class="line-block">
@@ -606,8 +607,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="load_registry/1"> </div></div>
-<div class="section" id="load-registry-1">
+<div id="load_registry/1"> </div></section>
+<section id="load-registry-1">
 <span id="packs-common-0-load-registry-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">load_registry/1</span></code></a><a class="headerlink" href="#load-registry-1" title="Permalink to this headline"></a></h3>
 <p>Loads all registry files from the given directory.</p>
 <div class="line-block">
@@ -627,8 +628,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="tar_command/1"> </div></div>
-<div class="section" id="tar-command-1">
+<div id="tar_command/1"> </div></section>
+<section id="tar-command-1">
 <span id="packs-common-0-tar-command-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tar_command/1</span></code></a><a class="headerlink" href="#tar-command-1" title="Permalink to this headline"></a></h3>
 <p>Returns the name of the tar command to be used depending on the operating-system.</p>
 <div class="line-block">
@@ -648,8 +649,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="supported_archive/1"> </div></div>
-<div class="section" id="supported-archive-1">
+<div id="supported_archive/1"> </div></section>
+<section id="supported-archive-1">
 <span id="packs-common-0-supported-archive-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">supported_archive/1</span></code></a><a class="headerlink" href="#supported-archive-1" title="Permalink to this headline"></a></h3>
 <p>True iff the archive format is supported.</p>
 <div class="line-block">
@@ -668,18 +669,18 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">supported_archive(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="private-predicates">
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>logtalk &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -181,7 +182,7 @@
            <div itemprop="articleBody">
              
   <p class="right" id="logtalk-0"><span id="index-0"></span><strong>object</strong></p>
-<div class="section" id="logtalk">
+<section id="logtalk">
 <h1><code class="docutils literal notranslate"><span class="pre">logtalk</span></code><a class="headerlink" href="#logtalk" title="Permalink to this headline"></a></h1>
 <p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
 <div class="line-block">
@@ -261,9 +262,9 @@
 <li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="print_message/3"> </div><div class="section" id="print-message-3">
+<div id="print_message/3"> </div><section id="print-message-3">
 <span id="logtalk-0-print-message-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_message/3</span></code></a><a class="headerlink" href="#print-message-3" title="Permalink to this headline"></a></h3>
 <p>Prints a message of the given kind for the specified component.</p>
 <div class="line-block">
@@ -283,8 +284,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="print_message_tokens/3"> </div></div>
-<div class="section" id="print-message-tokens-3">
+<div id="print_message_tokens/3"> </div></section>
+<section id="print-message-tokens-3">
 <span id="logtalk-0-print-message-tokens-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code></a><a class="headerlink" href="#print-message-tokens-3" title="Permalink to this headline"></a></h3>
 <p>Print the messages tokens to the given stream, prefixing each line with the specified atom.</p>
 <div class="line-block">
@@ -304,8 +305,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="print_message_token/4"> </div></div>
-<div class="section" id="print-message-token-4">
+<div id="print_message_token/4"> </div></section>
+<section id="print-message-token-4">
 <span id="logtalk-0-print-message-token-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></a><a class="headerlink" href="#print-message-token-4" title="Permalink to this headline"></a></h3>
 <p>User-defined hook predicate for printing a message token (<code class="docutils literal notranslate"><span class="pre">at_same_line</span></code>, <code class="docutils literal notranslate"><span class="pre">nl</span></code>, <code class="docutils literal notranslate"><span class="pre">flush</span></code>, <code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code>, <code class="docutils literal notranslate"><span class="pre">term(Term,Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">ansi(Attributes,Format,Arguments)</span></code>, <code class="docutils literal notranslate"><span class="pre">begin(Kind,Variable)</span></code>, and <code class="docutils literal notranslate"><span class="pre">end(Variable)</span></code>).</p>
 <div class="line-block">
@@ -325,8 +326,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="message_tokens//2"> </div></div>
-<div class="section" id="message-tokens-2">
+<div id="message_tokens//2"> </div></section>
+<section id="message-tokens-2">
 <span id="logtalk-0-message-tokens-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code></a><a class="headerlink" href="#message-tokens-2" title="Permalink to this headline"></a></h3>
 <p>User-defined hook grammar rule for converting a message into a list of tokens (<code class="docutils literal notranslate"><span class="pre">at_same_line</span></code>, <code class="docutils literal notranslate"><span class="pre">nl</span></code>, <code class="docutils literal notranslate"><span class="pre">flush</span></code>, <code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code>, <code class="docutils literal notranslate"><span class="pre">term(Term,Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">ansi(Attributes,Format,Arguments)</span></code>, <code class="docutils literal notranslate"><span class="pre">begin(Kind,Variable)</span></code>, and <code class="docutils literal notranslate"><span class="pre">end(Variable)</span></code>).</p>
 <div class="line-block">
@@ -346,8 +347,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="message_prefix_stream/4"> </div></div>
-<div class="section" id="message-prefix-stream-4">
+<div id="message_prefix_stream/4"> </div></section>
+<section id="message-prefix-stream-4">
 <span id="logtalk-0-message-prefix-stream-4"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">message_prefix_stream/4</span></code></a><a class="headerlink" href="#message-prefix-stream-4" title="Permalink to this headline"></a></h3>
 <p>Message line prefix and output stream to be used when printing a message given its kind and component.</p>
 <div class="line-block">
@@ -367,8 +368,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="message_hook/4"> </div></div>
-<div class="section" id="message-hook-4">
+<div id="message_hook/4"> </div></section>
+<section id="message-hook-4">
 <span id="logtalk-0-message-hook-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code></a><a class="headerlink" href="#message-hook-4" title="Permalink to this headline"></a></h3>
 <p>User-defined hook predicate for intercepting message printing calls.</p>
 <div class="line-block">
@@ -388,8 +389,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="ask_question/5"> </div></div>
-<div class="section" id="ask-question-5">
+<div id="ask_question/5"> </div></section>
+<section id="ask-question-5">
 <span id="logtalk-0-ask-question-5"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code></a><a class="headerlink" href="#ask-question-5" title="Permalink to this headline"></a></h3>
 <p>Asks a question and reads the answer until the check predicate is true.</p>
 <div class="line-block">
@@ -413,8 +414,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="question_hook/6"> </div></div>
-<div class="section" id="question-hook-6">
+<div id="question_hook/6"> </div></section>
+<section id="question-hook-6">
 <span id="logtalk-0-question-hook-6"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code></a><a class="headerlink" href="#question-hook-6" title="Permalink to this headline"></a></h3>
 <p>User-defined hook predicate for intercepting question asking calls.</p>
 <div class="line-block">
@@ -438,8 +439,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="question_prompt_stream/4"> </div></div>
-<div class="section" id="question-prompt-stream-4">
+<div id="question_prompt_stream/4"> </div></section>
+<section id="question-prompt-stream-4">
 <span id="logtalk-0-question-prompt-stream-4"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">question_prompt_stream/4</span></code></a><a class="headerlink" href="#question-prompt-stream-4" title="Permalink to this headline"></a></h3>
 <p>Prompt and input stream to be used when asking a question given its kind and component.</p>
 <div class="line-block">
@@ -459,8 +460,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="trace_event/2"> </div></div>
-<div class="section" id="trace-event-2">
+<div id="trace_event/2"> </div></section>
+<section id="trace-event-2">
 <span id="logtalk-0-trace-event-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">trace_event/2</span></code></a><a class="headerlink" href="#trace-event-2" title="Permalink to this headline"></a></h3>
 <p>Trace event handler. The runtime calls all trace event handlers using a failure-driven loop before calling the debug event handler.</p>
 <div class="line-block">
@@ -489,8 +490,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="debug_handler_provider/1"> </div></div>
-<div class="section" id="debug-handler-provider-1">
+<div id="debug_handler_provider/1"> </div></section>
+<section id="debug-handler-provider-1">
 <span id="logtalk-0-debug-handler-provider-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">debug_handler_provider/1</span></code></a><a class="headerlink" href="#debug-handler-provider-1" title="Permalink to this headline"></a></h3>
 <p>Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.</p>
 <div class="line-block">
@@ -510,8 +511,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="debug_handler/2"> </div></div>
-<div class="section" id="debug-handler-2">
+<div id="debug_handler/2"> </div></section>
+<section id="debug-handler-2">
 <span id="logtalk-0-debug-handler-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code></a><a class="headerlink" href="#debug-handler-2" title="Permalink to this headline"></a></h3>
 <p>Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).</p>
 <div class="line-block">
@@ -540,8 +541,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="expand_library_path/2"> </div></div>
-<div class="section" id="expand-library-path-2">
+<div id="expand_library_path/2"> </div></section>
+<section id="expand-library-path-2">
 <span id="logtalk-0-expand-library-path-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code></a><a class="headerlink" href="#expand-library-path-2" title="Permalink to this headline"></a></h3>
 <p>Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.</p>
 <div class="line-block">
@@ -562,8 +563,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="loaded_file/1"> </div></div>
-<div class="section" id="loaded-file-1">
+<div id="loaded_file/1"> </div></section>
+<section id="loaded-file-1">
 <span id="logtalk-0-loaded-file-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code></a><a class="headerlink" href="#loaded-file-1" title="Permalink to this headline"></a></h3>
 <p>Enumerates, by backtracking, all loaded files, returning their full paths.</p>
 <div class="line-block">
@@ -583,8 +584,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="loaded_file_property/2"> </div></div>
-<div class="section" id="loaded-file-property-2">
+<div id="loaded_file_property/2"> </div></section>
+<section id="loaded-file-property-2">
 <span id="logtalk-0-loaded-file-property-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a><a class="headerlink" href="#loaded-file-property-2" title="Permalink to this headline"></a></h3>
 <p>Enumerates, by backtracking, loaded file properties.</p>
 <div class="line-block">
@@ -624,8 +625,8 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div id="file_type_extension/2"> </div></div>
-<div class="section" id="file-type-extension-2">
+<div id="file_type_extension/2"> </div></section>
+<section id="file-type-extension-2">
 <span id="logtalk-0-file-type-extension-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code></a><a class="headerlink" href="#file-type-extension-2" title="Permalink to this headline"></a></h3>
 <p>Enumerates, by backtracking, all defined file type extensions. The defined types are: <code class="docutils literal notranslate"><span class="pre">source</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, <code class="docutils literal notranslate"><span class="pre">prolog</span></code>, and <code class="docutils literal notranslate"><span class="pre">tmp</span></code>. The source type returns both <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> and <code class="docutils literal notranslate"><span class="pre">prolog</span></code> type extensions.</p>
 <div class="line-block">
@@ -645,8 +646,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="compile_aux_clauses/1"> </div></div>
-<div class="section" id="compile-aux-clauses-1">
+<div id="compile_aux_clauses/1"> </div></section>
+<section id="compile-aux-clauses-1">
 <span id="logtalk-0-compile-aux-clauses-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code></a><a class="headerlink" href="#compile-aux-clauses-1" title="Permalink to this headline"></a></h3>
 <p>Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> or <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> hook predicate definitions.</p>
 <div class="line-block">
@@ -666,8 +667,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="entity_prefix/2"> </div></div>
-<div class="section" id="entity-prefix-2">
+<div id="entity_prefix/2"> </div></section>
+<section id="entity-prefix-2">
 <span id="logtalk-0-entity-prefix-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">entity_prefix/2</span></code></a><a class="headerlink" href="#entity-prefix-2" title="Permalink to this headline"></a></h3>
 <p>Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.</p>
 <div class="line-block">
@@ -687,8 +688,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="compile_predicate_heads/4"> </div></div>
-<div class="section" id="compile-predicate-heads-4">
+<div id="compile_predicate_heads/4"> </div></section>
+<section id="compile-predicate-heads-4">
 <span id="logtalk-0-compile-predicate-heads-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads/4</span></code></a><a class="headerlink" href="#compile-predicate-heads-4" title="Permalink to this headline"></a></h3>
 <p>Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
 <div class="line-block">
@@ -710,8 +711,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="compile_predicate_indicators/3"> </div></div>
-<div class="section" id="compile-predicate-indicators-3">
+<div id="compile_predicate_indicators/3"> </div></section>
+<section id="compile-predicate-indicators-3">
 <span id="logtalk-0-compile-predicate-indicators-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators/3</span></code></a><a class="headerlink" href="#compile-predicate-indicators-3" title="Permalink to this headline"></a></h3>
 <p>Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
 <div class="line-block">
@@ -733,8 +734,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="decompile_predicate_heads/4"> </div></div>
-<div class="section" id="decompile-predicate-heads-4">
+<div id="decompile_predicate_heads/4"> </div></section>
+<section id="decompile-predicate-heads-4">
 <span id="logtalk-0-decompile-predicate-heads-4"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads/4</span></code></a><a class="headerlink" href="#decompile-predicate-heads-4" title="Permalink to this headline"></a></h3>
 <p>Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.</p>
 <div class="line-block">
@@ -756,8 +757,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="decompile_predicate_indicators/4"> </div></div>
-<div class="section" id="decompile-predicate-indicators-4">
+<div id="decompile_predicate_indicators/4"> </div></section>
+<section id="decompile-predicate-indicators-4">
 <span id="logtalk-0-decompile-predicate-indicators-4"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code></a><a class="headerlink" href="#decompile-predicate-indicators-4" title="Permalink to this headline"></a></h3>
 <p>Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.</p>
 <div class="line-block">
@@ -779,8 +780,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="execution_context/7"> </div></div>
-<div class="section" id="execution-context-7">
+<div id="execution_context/7"> </div></section>
+<section id="execution-context-7">
 <span id="logtalk-0-execution-context-7"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">execution_context/7</span></code></a><a class="headerlink" href="#execution-context-7" title="Permalink to this headline"></a></h3>
 <p>Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
 <div class="line-block">
@@ -799,22 +800,22 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">execution_context(?nonvar,?entity_identifier,?object_identifier,?object_identifier,?object_identifier,&#64;list(callable),&#64;list(callable))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="private-predicates">
+</section>
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>blank_grammars(Format) &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -178,13 +179,13 @@
            <div itemprop="articleBody">
              
   <p class="right" id="blank-grammars-1"><span id="index-0"></span><strong>object</strong></p>
-<div class="section" id="blank-grammars-format">
+<section id="blank-grammars-format">
 <h1><code class="docutils literal notranslate"><span class="pre">blank_grammars(Format)</span></code><a class="headerlink" href="#blank-grammars-format" title="Permalink to this headline"></a></h1>
 <p>Blank grammars.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:1:0</div>
-<div class="line"><strong>Date:</strong> 2022-02-11</div>
+<div class="line"><strong>Version:</strong> 0:3:0</div>
+<div class="line"><strong>Date:</strong> 2022-02-16</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -224,16 +225,20 @@
 <li><p><a class="reference internal" href="#new-lines-0" id="id9"><code class="docutils literal notranslate"><span class="pre">new_lines//0</span></code></a></p></li>
 <li><p><a class="reference internal" href="#blank-0" id="id10"><code class="docutils literal notranslate"><span class="pre">blank//0</span></code></a></p></li>
 <li><p><a class="reference internal" href="#blanks-0" id="id11"><code class="docutils literal notranslate"><span class="pre">blanks//0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#non-blank-1" id="id12"><code class="docutils literal notranslate"><span class="pre">non_blank//1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#non-blanks-1" id="id13"><code class="docutils literal notranslate"><span class="pre">non_blanks//1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#control-0" id="id14"><code class="docutils literal notranslate"><span class="pre">control//0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#controls-0" id="id15"><code class="docutils literal notranslate"><span class="pre">controls//0</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id12">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="white_space//0"> </div><div class="section" id="white-space-0">
+<div id="white_space//0"> </div><section id="white-space-0">
 <span id="blank-grammars-1-white-space-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">white_space//0</span></code></a><a class="headerlink" href="#white-space-0" title="Permalink to this headline"></a></h3>
 <p>Consumes a single space or tab.</p>
 <div class="line-block">
@@ -249,8 +254,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="white_spaces//0"> </div></div>
-<div class="section" id="white-spaces-0">
+<div id="white_spaces//0"> </div></section>
+<section id="white-spaces-0">
 <span id="blank-grammars-1-white-spaces-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">white_spaces//0</span></code></a><a class="headerlink" href="#white-spaces-0" title="Permalink to this headline"></a></h3>
 <p>Consumes zero or more spaces and tabs.</p>
 <div class="line-block">
@@ -266,8 +271,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="space//0"> </div></div>
-<div class="section" id="space-0">
+<div id="space//0"> </div></section>
+<section id="space-0">
 <span id="blank-grammars-1-space-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">space//0</span></code></a><a class="headerlink" href="#space-0" title="Permalink to this headline"></a></h3>
 <p>Consumes a single space.</p>
 <div class="line-block">
@@ -283,8 +288,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="spaces//0"> </div></div>
-<div class="section" id="spaces-0">
+<div id="spaces//0"> </div></section>
+<section id="spaces-0">
 <span id="blank-grammars-1-spaces-0"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">spaces//0</span></code></a><a class="headerlink" href="#spaces-0" title="Permalink to this headline"></a></h3>
 <p>Consumes zero or more spaces.</p>
 <div class="line-block">
@@ -300,8 +305,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="tab//0"> </div></div>
-<div class="section" id="tab-0">
+<div id="tab//0"> </div></section>
+<section id="tab-0">
 <span id="blank-grammars-1-tab-0"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tab//0</span></code></a><a class="headerlink" href="#tab-0" title="Permalink to this headline"></a></h3>
 <p>Consumes a single tab.</p>
 <div class="line-block">
@@ -317,8 +322,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="tabs//0"> </div></div>
-<div class="section" id="tabs-0">
+<div id="tabs//0"> </div></section>
+<section id="tabs-0">
 <span id="blank-grammars-1-tabs-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tabs//0</span></code></a><a class="headerlink" href="#tabs-0" title="Permalink to this headline"></a></h3>
 <p>Consumes zero or more tabs.</p>
 <div class="line-block">
@@ -334,8 +339,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="new_line//0"> </div></div>
-<div class="section" id="new-line-0">
+<div id="new_line//0"> </div></section>
+<section id="new-line-0">
 <span id="blank-grammars-1-new-line-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new_line//0</span></code></a><a class="headerlink" href="#new-line-0" title="Permalink to this headline"></a></h3>
 <p>Consumes a single new line.</p>
 <div class="line-block">
@@ -351,8 +356,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="new_lines//0"> </div></div>
-<div class="section" id="new-lines-0">
+<div id="new_lines//0"> </div></section>
+<section id="new-lines-0">
 <span id="blank-grammars-1-new-lines-0"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new_lines//0</span></code></a><a class="headerlink" href="#new-lines-0" title="Permalink to this headline"></a></h3>
 <p>Consumes zero or more new lines.</p>
 <div class="line-block">
@@ -368,10 +373,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="blank//0"> </div></div>
-<div class="section" id="blank-0">
+<div id="blank//0"> </div></section>
+<section id="blank-0">
 <span id="blank-grammars-1-blank-0"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">blank//0</span></code></a><a class="headerlink" href="#blank-0" title="Permalink to this headline"></a></h3>
-<p>Consumes a single space, tab, or new line.</p>
+<p>Consumes a single space, tab, vertical tab, line feed, or new line.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -385,10 +390,10 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="blanks//0"> </div></div>
-<div class="section" id="blanks-0">
+<div id="blanks//0"> </div></section>
+<section id="blanks-0">
 <span id="blank-grammars-1-blanks-0"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">blanks//0</span></code></a><a class="headerlink" href="#blanks-0" title="Permalink to this headline"></a></h3>
-<p>Consumes zero or more spaces, tabs, or new lines.</p>
+<p>Consumes zero or more spaces, tabs, vertical tabs, line feeds, or new lines.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -401,22 +406,90 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">blanks</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<hr class="docutils" />
+<div id="non_blank//1"> </div></section>
+<section id="non-blank-1">
+<span id="blank-grammars-1-non-blank-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">non_blank//1</span></code></a><a class="headerlink" href="#non-blank-1" title="Permalink to this headline"></a></h3>
+<p>Returns a single non-blank character or character code.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">non_blank(-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<div id="non_blanks//1"> </div></section>
+<section id="non-blanks-1">
+<span id="blank-grammars-1-non-blanks-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">non_blanks//1</span></code></a><a class="headerlink" href="#non-blanks-1" title="Permalink to this headline"></a></h3>
+<p>Returns a (possibly empty) list of non-blank characters or character codes.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">non_blanks(-list(atomic))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="control//0"> </div></section>
+<section id="control-0">
+<span id="blank-grammars-1-control-0"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">control//0</span></code></a><a class="headerlink" href="#control-0" title="Permalink to this headline"></a></h3>
+<p>Consumes a single control character or character code. Support for the null control character depends on the Prolog backend.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">control</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="controls//0"> </div></section>
+<section id="controls-0">
+<span id="blank-grammars-1-controls-0"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">controls//0</span></code></a><a class="headerlink" href="#controls-0" title="Permalink to this headline"></a></h3>
+<p>Consumes zero or more control characters or character codes. Support for the null control character depends on the Prolog backend.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">controls</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="private-predicates">
+</section>
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
 <p>(none)</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

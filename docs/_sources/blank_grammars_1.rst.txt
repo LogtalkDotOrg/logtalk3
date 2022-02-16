@@ -11,8 +11,8 @@
 Blank grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2022-02-11
+| **Version:** 0:3:0
+| **Date:** 2022-02-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -213,7 +213,7 @@ Consumes zero or more new lines.
 ``blank//0``
 ^^^^^^^^^^^^
 
-Consumes a single space, tab, or new line.
+Consumes a single space, tab, vertical tab, line feed, or new line.
 
 | **Compilation flags:**
 |    ``static``
@@ -234,13 +234,97 @@ Consumes a single space, tab, or new line.
 ``blanks//0``
 ^^^^^^^^^^^^^
 
-Consumes zero or more spaces, tabs, or new lines.
+Consumes zero or more spaces, tabs, vertical tabs, line feeds, or new lines.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
 |    ``blanks`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="non_blank//1"> </div>
+
+.. index:: non_blank//1
+.. _blank_grammars/1::non_blank//1:
+
+``non_blank//1``
+^^^^^^^^^^^^^^^^
+
+Returns a single non-blank character or character code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``non_blank(-atomic)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="non_blanks//1"> </div>
+
+.. index:: non_blanks//1
+.. _blank_grammars/1::non_blanks//1:
+
+``non_blanks//1``
+^^^^^^^^^^^^^^^^^
+
+Returns a (possibly empty) list of non-blank characters or character codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``non_blanks(-list(atomic))`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="control//0"> </div>
+
+.. index:: control//0
+.. _blank_grammars/1::control//0:
+
+``control//0``
+^^^^^^^^^^^^^^
+
+Consumes a single control character or character code. Support for the null control character depends on the Prolog backend.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``control`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="controls//0"> </div>
+
+.. index:: controls//0
+.. _blank_grammars/1::controls//0:
+
+``controls//0``
+^^^^^^^^^^^^^^^
+
+Consumes zero or more control characters or character codes. Support for the null control character depends on the Prolog backend.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``controls`` - ``one``
 
 
 ------------

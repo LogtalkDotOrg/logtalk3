@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2022-02-15,
+		date is 2022-02-16,
 		comment is 'Unit tests for the "grammars" library.',
 		parnames is ['Format']
 	]).
@@ -88,6 +88,18 @@
 	test(blanks, deterministic(Output == 'foo')) :-
 		convert('\n\n\t foo', Input),
 		phrase(blank_grammars(_Format_)::blanks, Input, Rest),
+		convert(Output, Rest).
+
+	test(non_blank, deterministic(Atom-Output == f-'oo bar')) :-
+		convert('foo bar', Input),
+		phrase(blank_grammars(_Format_)::non_blank(NonBlank), Input, Rest),
+		convert(Atom, [NonBlank]),
+		convert(Output, Rest).
+
+	test(non_blanks, deterministic(Atom-Output == foo-' bar')) :-
+		convert('foo bar', Input),
+		phrase(blank_grammars(_Format_)::non_blanks(NonBlanks), Input, Rest),
+		convert(Atom, NonBlanks),
 		convert(Output, Rest).
 
 	test(control, deterministic(Output == '\v foo')) :-

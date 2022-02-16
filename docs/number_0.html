@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>number &mdash; Logtalk APIs v3.54.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -198,7 +199,7 @@
            <div itemprop="articleBody">
              
   <p class="right" id="number-0"><span id="index-0"></span><strong>object</strong></p>
-<div class="section" id="number">
+<section id="number">
 <h1><code class="docutils literal notranslate"><span class="pre">number</span></code><a class="headerlink" href="#number" title="Permalink to this headline"></a></h1>
 <p>Number data type predicates.</p>
 <div class="line-block">
@@ -249,9 +250,9 @@
 </li>
 </ul>
 </div>
-<div class="section" id="public-predicates">
+<section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
-<div id="approximately_equal/3"> </div><div class="section" id="approximately-equal-3">
+<div id="approximately_equal/3"> </div><section id="approximately-equal-3">
 <span id="number-0-approximately-equal-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code></a><a class="headerlink" href="#approximately-equal-3" title="Permalink to this headline"></a></h3>
 <p>Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.</p>
 <div class="line-block">
@@ -271,8 +272,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="essentially_equal/3"> </div></div>
-<div class="section" id="essentially-equal-3">
+<div id="essentially_equal/3"> </div></section>
+<section id="essentially-equal-3">
 <span id="number-0-essentially-equal-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code></a><a class="headerlink" href="#essentially-equal-3" title="Permalink to this headline"></a></h3>
 <p>Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =&lt; min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.</p>
 <div class="line-block">
@@ -292,8 +293,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="tolerance_equal/4"> </div></div>
-<div class="section" id="tolerance-equal-4">
+<div id="tolerance_equal/4"> </div></section>
+<section id="tolerance-equal-4">
 <span id="number-0-tolerance-equal-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tolerance_equal/4</span></code></a><a class="headerlink" href="#tolerance-equal-4" title="Permalink to this headline"></a></h3>
 <p>Compares two numbers for close equality given relative and absolute tolerances using the de facto standard formula abs(Number1 - Number2) =&lt; max(RelativeTolerance * max(abs(Number1), abs(Number2)), AbsoluteTolerance). No type-checking.</p>
 <div class="line-block">
@@ -313,8 +314,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div id="=~= / 2"> </div></div>
-<div class="section" id="number-0-2">
+<div id="=~= / 2"> </div></section>
+<section id="number-0-2">
 <span id="index-4"></span><span id="id1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">=~=</span> <span class="pre">/</span> <span class="pre">2</span></code></a><a class="headerlink" href="#number-0-2" title="Permalink to this headline"></a></h3>
 <p>Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.</p>
 <div class="line-block">
@@ -334,20 +335,20 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">=~=(+list(number),+list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="protected-predicates">
+<section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</div>
-<div class="section" id="private-predicates">
+</section>
+<section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
-</div>
-<div class="section" id="operators">
+</section>
+<section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
-<div class="section" id="op-700-xfx">
+<section id="op-700-xfx">
 <h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">op(700,xfx,=~=)</span></code></a><a class="headerlink" href="#op-700-xfx" title="Permalink to this headline"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Scope:</strong></div>
@@ -355,9 +356,9 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code></div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

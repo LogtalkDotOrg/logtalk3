@@ -22,9 +22,9 @@
 :- object(blank_grammars(_Format_)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2022-02-14,
+		date is 2022-02-16,
 		comment is 'Blank grammars.',
 		parnames is ['Format']
 	]).
@@ -80,13 +80,25 @@
 	:- public(blank//0).
 	:- mode(blank, zero_or_one).
 	:- info(blank//0, [
-		comment is 'Consumes a single space, tab, or new line.'
+		comment is 'Consumes a single space, tab, vertical tab, line feed, or new line.'
 	]).
 
 	:- public(blanks//0).
 	:- mode(blanks, one).
 	:- info(blanks//0, [
-		comment is 'Consumes zero or more spaces, tabs, or new lines.'
+		comment is 'Consumes zero or more spaces, tabs, vertical tabs, line feeds, or new lines.'
+	]).
+
+	:- public(non_blank//1).
+	:- mode(non_blank(-atomic), zero_or_one).
+	:- info(non_blank//1, [
+		comment is 'Returns a single non-blank character or character code.'
+	]).
+
+	:- public(non_blanks//1).
+	:- mode(non_blanks(-list(atomic)), one).
+	:- info(non_blanks//1, [
+		comment is 'Returns a (possibly empty) list of non-blank characters or character codes.'
 	]).
 
 	:- public(control//0).
@@ -179,16 +191,32 @@
 	blank -->
 		blank(_Format_).
 
-	blank(_Format_) -->
-		space(_Format_), !.
-	blank(_Format_) -->
-		tab(_Format_), !.
-	blank(_Format_) -->
-		new_line(_Format_).
+	blank(chars) -->
+		[Blank], {blank_char(Blank)}.
+	blank(codes) -->
+		[Blank], {blank_code(Blank)}.
 
 	blanks -->
 		blank(_Format_), !, blanks.
 	blanks -->
+		[].
+
+	non_blank(NonBlank) -->
+		non_blank(_Format_, NonBlank).
+
+	non_blank(chars, NonBlank) -->
+		[NonBlank], {\+ blank_char(NonBlank)}.
+	non_blank(codes, NonBlank) -->
+		[NonBlank], {\+ blank_code(NonBlank)}.
+
+	non_blanks(NonBlanks) -->
+		non_blanks(_Format_, NonBlanks).
+
+	non_blanks(_Format_, [NonBlank| NonBlanks]) -->
+		non_blank(_Format_, NonBlank),
+		!,
+		non_blanks(_Format_, NonBlanks).
+	non_blanks(_, []) -->
 		[].
 
 	control -->
@@ -216,5 +244,21 @@
 		control(_Format_), !, controls.
 	controls -->
 		[].
+
+	% auxiliary predicates
+
+	blank_char(' ').
+	blank_char('\t').
+	blank_char('\n').
+	blank_char('\v').
+	blank_char('\f').
+	blank_char('\r').
+
+	blank_code(32).
+	blank_code( 9).
+	blank_code(10).
+	blank_code(11).
+	blank_code(12).
+	blank_code(13).
 
 :- end_object.

@@ -12,7 +12,7 @@ IP address grammars.
 
 | **Author:** Paulo Moura
 | **Version:** 0:1:0
-| **Date:** 2022-02-11
+| **Date:** 2022-02-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -44,7 +44,7 @@ Public predicates
 ``ipv4//1``
 ^^^^^^^^^^^
 
-Parses a sequence of one of more bits.
+Parses an IPv4 network address in the format XXX.XXX.XXX.XXX where each XXX is an octet (i.e. an integer between 0 and 255).
 
 | **Compilation flags:**
 |    ``static``
@@ -65,13 +65,13 @@ Parses a sequence of one of more bits.
 ``ipv6//1``
 ^^^^^^^^^^^
 
-Parses a sequence of zero of more digits.
+Parses an IPv6 network address in the format XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX where each X is a hexadecimal digit.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``ipv6(?list(atomic))`` - ``one``
+|    ``ipv6(?list(integer))`` - ``one``
 
 
 ------------

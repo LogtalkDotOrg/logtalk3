@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 11:0:0
-| **Date:** 2022-02-04
+| **Version:** 11:1:0
+| **Date:** 2022-02-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -680,7 +680,7 @@ Runs all defined unit tests.
 ``run_tests/1``
 ^^^^^^^^^^^^^^^
 
-Runs a list of defined tests.
+Runs all the tests defined in the given file.
 
 | **Compilation flags:**
 |    ``static``

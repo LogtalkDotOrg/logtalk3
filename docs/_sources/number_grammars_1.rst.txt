@@ -11,8 +11,8 @@
 Number grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2022-02-11
+| **Version:** 0:2:0
+| **Date:** 2022-02-15
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -162,27 +162,6 @@ Parses a sequence of zero or more hexa-decimal digits.
 
 .. raw:: html
 
-   <div id="sign//1"> </div>
-
-.. index:: sign//1
-.. _number_grammars/1::sign//1:
-
-``sign//1``
-^^^^^^^^^^^
-
-Parses a number sign.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Mode and number of proofs:**
-|    ``sign(?atomic)`` - ``zero_or_one``
-
-
-------------
-
-.. raw:: html
-
    <div id="natural//1"> </div>
 
 .. index:: natural//1
@@ -240,6 +219,48 @@ Parses a float.
 
 | **Mode and number of proofs:**
 |    ``float(?float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="number//1"> </div>
+
+.. index:: number//1
+.. _number_grammars/1::number//1:
+
+``number//1``
+^^^^^^^^^^^^^
+
+Parses a number (an integer or a float).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``number(?number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="sign//1"> </div>
+
+.. index:: sign//1
+.. _number_grammars/1::sign//1:
+
+``sign//1``
+^^^^^^^^^^^
+
+Parses a number sign.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``sign(?atomic)`` - ``zero_or_one``
 
 
 ------------
