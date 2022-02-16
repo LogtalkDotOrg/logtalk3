@@ -356,7 +356,7 @@ implementations:</p>
         tests(backend_random),
         tests(fast_random),
         tests(random)
-    ]).
+     ]).
 </pre></div>
 </div>
 </section>
@@ -722,7 +722,7 @@ counter-example to confirm the bug fix by calling the
 example, assume the following broken predicate definition:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>every_other([], []).
 every_other([<span class="nv">_</span>, <span class="nv">X</span>| <span class="nv">L</span>], [<span class="nv">X</span> | <span class="nv">R</span>]) <span class="o">:-</span>
-        every_other(<span class="nv">L</span>, <span class="nv">R</span>).
+    every_other(<span class="nv">L</span>, <span class="nv">R</span>).
 </pre></div>
 </div>
 <p>The predicate is supposed to construct a list by taking every other
@@ -755,8 +755,8 @@ every_other([<span class="nv">_</span>| <span class="nv">T</span>], <span class=
 <p>By retesting with the same seed that uncovered the bug, the same random
 test that found the bug will be generated and run again:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(
-         every_other(<span class="o">+</span>list(integer), <span class="o">-</span>list(integer)),
-         [rs(seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>))]
+        every_other(<span class="o">+</span>list(integer), <span class="o">-</span>list(integer)),
+        [rs(seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>))]
      ).
 <span class="c">% 100 random tests passed, 0 discarded</span>
 <span class="c">% starting seed: seed(3172,9814,20125)</span>
@@ -779,7 +779,7 @@ complementing each other to ensure the required code coverage.</p>
             <span class="o">-</span>list(atom),
             <span class="o">-</span>list(integer)
         )
-    ).
+     ).
 <span class="c">% 100 random tests passed, 0 discarded</span>
 <span class="c">% starting seed: seed(3172,9814,20125)</span>
 yes
@@ -847,7 +847,7 @@ arbitrary<span class="o">::</span>arbitrary(bit).
 
 <span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">2</span>).
 arbitrary<span class="o">::</span>arbitrary(bit, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
-   random<span class="o">::</span>member(<span class="nv">Arbitrary</span>, [<span class="m">0</span>, <span class="m">1</span>]).
+    random<span class="o">::</span>member(<span class="nv">Arbitrary</span>, [<span class="m">0</span>, <span class="m">1</span>]).
 </pre></div>
 </div>
 </section>

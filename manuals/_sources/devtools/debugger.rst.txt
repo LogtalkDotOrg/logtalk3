@@ -86,13 +86,13 @@ Logtalk queries can be traced using this tool by using the
 
 ::
 
-    | ?- gtrace(foo::bar).
+   | ?- gtrace(foo::bar).
 
 or:
 
 ::
 
-    | ?- gtrace, foo::bar.
+   | ?- gtrace, foo::bar.
 
 You can also use the ``gspy/1`` predicate to spy a Logtalk predicate
 specified as ``Entity::Functor/Arity`` when using the graphical tracer.

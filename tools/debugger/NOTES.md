@@ -97,11 +97,11 @@ Logtalk provides basic support for the SWI-Prolog graphical tracer. The
 queries can be traced using this tool by using the `gtrace/0-1` predicates.
 For example:
 
-	 | ?- gtrace(foo::bar).
+	| ?- gtrace(foo::bar).
 
 or:
 
-	 | ?- gtrace, foo::bar.
+	| ?- gtrace, foo::bar.
 
 You can also use the `gspy/1` predicate to spy a Logtalk predicate specified
 as `Entity::Functor/Arity` when using the graphical tracer. When using this

@@ -242,7 +242,7 @@ implementations:
            tests(backend_random),
            tests(fast_random),
            tests(random)
-       ]).
+        ]).
 
 Test dialects
 -------------
@@ -612,7 +612,7 @@ example, assume the following broken predicate definition:
 
    every_other([], []). 
    every_other([_, X| L], [X | R]) :- 
-           every_other(L, R). 
+       every_other(L, R). 
 
 The predicate is supposed to construct a list by taking every other
 element of an input list. Cursory testing may fail to notice the bug:
@@ -653,8 +653,8 @@ test that found the bug will be generated and run again:
 ::
 
    | ?- lgtunit::quick_check(
-            every_other(+list(integer), -list(integer)),
-            [rs(seed(3172,9814,20125))]
+           every_other(+list(integer), -list(integer)),
+           [rs(seed(3172,9814,20125))]
         ).
    % 100 random tests passed, 0 discarded
    % starting seed: seed(3172,9814,20125)
@@ -682,7 +682,7 @@ Another example using a Prolog module predicate:
                -list(atom),
                -list(integer)
            )
-       ).
+        ).
    % 100 random tests passed, 0 discarded
    % starting seed: seed(3172,9814,20125)
    yes
@@ -759,7 +759,7 @@ with possible values ``0`` and ``1``. We would then need to define:
 
    :- multifile(arbitrary::arbitrary/2).
    arbitrary::arbitrary(bit, Arbitrary) :- 
-      random::member(Arbitrary, [0, 1]).
+       random::member(Arbitrary, [0, 1]).
 
 Skipping tests
 --------------

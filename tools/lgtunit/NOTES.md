@@ -234,7 +234,7 @@ Or use the `lgtunit::run_test_sets/1` predicate to test all the implementations:
 			tests(backend_random),
 			tests(fast_random),
 			tests(random)
-		]).
+	     ]).
 
 
 Test dialects
@@ -578,8 +578,8 @@ By retesting with the same seed that uncovered the bug, the same random test
 that found the bug will be generated and run again:
 
 	| ?- lgtunit::quick_check(
-	         every_other(+list(integer), -list(integer)),
-	         [rs(seed(3172,9814,20125))]
+			every_other(+list(integer), -list(integer)),
+			[rs(seed(3172,9814,20125))]
 	     ).
 	% 100 random tests passed, 0 discarded
 	% starting seed: seed(3172,9814,20125)
@@ -603,7 +603,7 @@ Another example using a Prolog module predicate:
 				-list(atom),
 				-list(integer)
 			)
-		).
+	     ).
 	% 100 random tests passed, 0 discarded
 	% starting seed: seed(3172,9814,20125)
 	yes
@@ -643,7 +643,7 @@ value generators by writing:
 	| ?- forall(
 			(type::type(Type), ground(Type), type::arbitrary(Type)),
 			lgtunit::quick_check(type::valid({Type}, +Type))
-		 ).
+	     ).
 
 You can find the list of the basic supported types for using in the template
 in the API documentation for the library entities `type` and `arbitrary`. Note

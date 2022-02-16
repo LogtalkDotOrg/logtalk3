@@ -5,6 +5,14 @@ This library provides Definite Clause Grammars (DCGs) for common parsing
 tasks. The DCGs support parsing both lists of characters (aka chars) and
 lists of character codes (aka codes).
 
+Currently, three groups of DCGs are available, each defined in its own
+file:
+
+-  blanks (``blank_grammars.lgt``)
+-  numbers (``number_grammars.lgt``)
+-  IP addresses (``ip_grammars.lgt``; depends on
+   ``number_grammars.lgt``)
+
 API documentation
 -----------------
 
