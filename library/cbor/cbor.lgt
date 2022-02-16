@@ -340,8 +340,9 @@
 	decode(Byte, String) -->
 		{0x60 =< Byte, Byte =< 0x77}, !,
 		{Length is Byte - 0x60}, bytes(Length, Bytes),
-		{bytes_to_utf_8_codes(Bytes, Codes),
-		 cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)}.
+		{	bytes_to_utf_8_codes(Bytes, Codes),
+			cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)
+		}.
 	% UTF-8 string (one-byte uint8_t for n, and then n bytes follow)
 	decode(0x78, String) -->
 		!, decode_utf_8_string(1, String).
@@ -471,8 +472,9 @@
 		bytes_reversed(N, LengthBytes),
 		{bytes_to_integer(LengthBytes, Length)},
 		bytes(Length, Bytes),
-		{bytes_to_utf_8_codes(Bytes, Codes),
-		 cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)}.
+		{	bytes_to_utf_8_codes(Bytes, Codes),
+			cbor_utf_8_string_to_string_term(_StringRepresentation_, Codes, String)
+		}.
 
 	cbor_utf_8_string_to_string_term(atom, Codes, Atom) :-
 		atom_codes(Atom, Codes).

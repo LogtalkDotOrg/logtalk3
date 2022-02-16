@@ -139,8 +139,8 @@
 		['Reloading files in ~w mode'-[Mode], nl].
 
 	message_tokens(modified_files_reloaded) -->
-		['Reloaded all Logtalk source files modified or that required'-[], nl,
-		 'recompilation due to a change to the compilation mode'-[], nl
+		[	'Reloaded all Logtalk source files modified or that required'-[], nl,
+			'recompilation due to a change to the compilation mode'-[], nl
 		].
 
 	message_tokens(intermediate_files_deleted) -->
@@ -230,8 +230,8 @@
 	% startup messages
 
 	message_tokens(possibly_incompatible_prolog_version(v(Major,Minor,Patch), v(Major0,Minor0,Patch0))) -->
-		['Possibly incompatible backend Prolog compiler version detected!'-[], nl,
-		 'Running version ~d.~d.~d but version ~d.~d.~d (or later) is advised.'-[Major, Minor, Patch, Major0, Minor0, Patch0], nl
+		[	'Possibly incompatible backend Prolog compiler version detected!'-[], nl,
+			'Running version ~d.~d.~d but version ~d.~d.~d (or later) is advised.'-[Major, Minor, Patch, Major0, Minor0, Patch0], nl
 		].
 
 	message_tokens(banner) -->
@@ -242,51 +242,52 @@
 		).
 
 	message_tokens(default_flags) -->
-		{current_logtalk_flag(unknown_entities, UnknownEntities),
-		 current_logtalk_flag(unknown_predicates, UnknownPredicates),
-		 current_logtalk_flag(undefined_predicates, UndefinedPredicates),
-		 current_logtalk_flag(steadfastness, Steadfastness),
-		 current_logtalk_flag(naming, Naming),
-		 current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
-		 current_logtalk_flag(disjunctions, Disjunctions),
-		 current_logtalk_flag(catchall_catch, CatchallCatch),
-		 current_logtalk_flag(tail_recursive, TailRecursive),
-		 current_logtalk_flag(portability, Portability),
-		 current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
-		 current_logtalk_flag(redefined_operators, RedefinedOperators),
-		 current_logtalk_flag(deprecated, Deprecated),
-		 current_logtalk_flag(missing_directives, Missing),
-		 current_logtalk_flag(duplicated_directives, Duplicated),
-		 current_logtalk_flag(trivial_goal_fails, Trivial),
-		 current_logtalk_flag(always_true_or_false_goals, Always),
-		 current_logtalk_flag(lambda_variables, Lambda),
-		 current_logtalk_flag(suspicious_calls, SuspiciousCalls),
-		 current_logtalk_flag(singleton_variables, Singletons),
-		 current_logtalk_flag(underscore_variables, Underscore),
-		 current_logtalk_flag(complements, Complements),
-		 current_logtalk_flag(dynamic_declarations, DynamicDeclarations),
-		 current_logtalk_flag(context_switching_calls, ContextCalls),
-		 current_logtalk_flag(events, Events),
-		 current_logtalk_flag(report, Report),
-		 current_logtalk_flag(scratch_directory, ScratchDirectory),
-		 current_logtalk_flag(code_prefix, Code),
-		 (current_logtalk_flag(hook, Hook) -> true; Hook = n/d),
-		 current_logtalk_flag(optimize, Optimize),
-		 current_logtalk_flag(source_data, SourceData),
-		 current_logtalk_flag(clean, Clean),
-		 current_logtalk_flag(debug, Debug),
-		 current_logtalk_flag(reload, Reload),
-		 current_logtalk_flag(prolog_compiler, PrologCompiler),
-		 current_logtalk_flag(prolog_loader, PrologLoader),
-		 current_logtalk_flag(prolog_dialect, PrologDialect),
-		 current_logtalk_flag(modules, Modules),
-		 current_logtalk_flag(engines, Engines),
-		 current_logtalk_flag(threads, Threads),
-		 current_logtalk_flag(tabling, Tabling),
-		 current_logtalk_flag(coinduction, Coinduction),
-		 current_logtalk_flag(unicode, Unicode),
-		 current_logtalk_flag(encoding_directive, Encodings),
-		 ground_term_copy(Hook, GroundHook)},
+		{	current_logtalk_flag(unknown_entities, UnknownEntities),
+			current_logtalk_flag(unknown_predicates, UnknownPredicates),
+			current_logtalk_flag(undefined_predicates, UndefinedPredicates),
+			current_logtalk_flag(steadfastness, Steadfastness),
+			current_logtalk_flag(naming, Naming),
+			current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
+			current_logtalk_flag(disjunctions, Disjunctions),
+			current_logtalk_flag(catchall_catch, CatchallCatch),
+			current_logtalk_flag(tail_recursive, TailRecursive),
+			current_logtalk_flag(portability, Portability),
+			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
+			current_logtalk_flag(redefined_operators, RedefinedOperators),
+			current_logtalk_flag(deprecated, Deprecated),
+			current_logtalk_flag(missing_directives, Missing),
+			current_logtalk_flag(duplicated_directives, Duplicated),
+			current_logtalk_flag(trivial_goal_fails, Trivial),
+			current_logtalk_flag(always_true_or_false_goals, Always),
+			current_logtalk_flag(lambda_variables, Lambda),
+			current_logtalk_flag(suspicious_calls, SuspiciousCalls),
+			current_logtalk_flag(singleton_variables, Singletons),
+			current_logtalk_flag(underscore_variables, Underscore),
+			current_logtalk_flag(complements, Complements),
+			current_logtalk_flag(dynamic_declarations, DynamicDeclarations),
+			current_logtalk_flag(context_switching_calls, ContextCalls),
+			current_logtalk_flag(events, Events),
+			current_logtalk_flag(report, Report),
+			current_logtalk_flag(scratch_directory, ScratchDirectory),
+			current_logtalk_flag(code_prefix, Code),
+			(current_logtalk_flag(hook, Hook) -> true; Hook = n/d),
+			current_logtalk_flag(optimize, Optimize),
+			current_logtalk_flag(source_data, SourceData),
+			current_logtalk_flag(clean, Clean),
+			current_logtalk_flag(debug, Debug),
+			current_logtalk_flag(reload, Reload),
+			current_logtalk_flag(prolog_compiler, PrologCompiler),
+			current_logtalk_flag(prolog_loader, PrologLoader),
+			current_logtalk_flag(prolog_dialect, PrologDialect),
+			current_logtalk_flag(modules, Modules),
+			current_logtalk_flag(engines, Engines),
+			current_logtalk_flag(threads, Threads),
+			current_logtalk_flag(tabling, Tabling),
+			current_logtalk_flag(coinduction, Coinduction),
+			current_logtalk_flag(unicode, Unicode),
+			current_logtalk_flag(encoding_directive, Encodings),
+			ground_term_copy(Hook, GroundHook)
+		},
 		[
 			'Default lint compilation flags: '-[], nl,
 			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
@@ -317,10 +318,10 @@
 	% help
 
 	message_tokens(help) -->
-		['For Logtalk help on libraries, entities, and built-in features, use:'-[], nl,
-		 '?- {help(loader)}. or ?- logtalk_load(help(loader)).'-[], nl, nl,
-		 'For Logtalk compiler warnings/errors explanations and fix suggestions, use:'-[], nl,
-		 '?- {tutor(loader)}. or ?- logtalk_load(tutor(loader)).'-[], nl, nl
+		[	'For Logtalk help on libraries, entities, and built-in features, use:'-[], nl,
+			'?- {help(loader)}. or ?- logtalk_load(help(loader)).'-[], nl, nl,
+			'For Logtalk compiler warnings/errors explanations and fix suggestions, use:'-[], nl,
+			'?- {tutor(loader)}. or ?- logtalk_load(tutor(loader)).'-[], nl, nl
 		].
 
 	% settings files messages
@@ -332,12 +333,12 @@
 	message_tokens(error_loading_settings_file(Path)) -->
 		['Errors found while loading settings file from directory ~w'-[Path], nl, nl].
 	message_tokens(no_settings_file_found(allow)) -->
-		['No settings file found in startup, Logtalk user, home, or config directories.'-[], nl,
-		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
+		[	'No settings file found in startup, Logtalk user, home, or config directories.'-[], nl,
+			'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
 		].
 	message_tokens(no_settings_file_found(restrict)) -->
-		['No settings file found in the Logtalk user or user home directories.'-[], nl,
-		 'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
+		[	'No settings file found in the Logtalk user or user home directories.'-[], nl,
+			'Using default flag values set in the backend Prolog compiler adapter file.'-[], nl, nl
 		].
 
 	% debugging messages
@@ -358,15 +359,15 @@
 	% compiler error and warning messages
 
 	message_tokens(loading_failure(File)) -->
-		['Unexpected failure while loading the code generated for the file:'-[], nl,
-		 '  ~w'-[File], nl,
-		 'Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
+		[	'Unexpected failure while loading the code generated for the file:'-[], nl,
+			'  ~w'-[File], nl,
+			'Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
 		].
 
 	message_tokens(loading_error(File, Error)) -->
-		['Unexpected error while loading the code generated for the file:'-[], nl,
-		 '  ~w'-[File], nl,
-		 '  '-[]
+		[	'Unexpected error while loading the code generated for the file:'-[], nl,
+			'  ~w'-[File], nl,
+			'  '-[]
 		],
 		error_term_tokens(Error),
 		['Likely bug in the backend Prolog compiler. Please file a bug report.'-[], nl
@@ -571,8 +572,9 @@
 	% other warning messages
 
 	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
-		['Complementing category will be ignored: ~q'-[Category], nl,
-		 'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl],
+		[	'Complementing category will be ignored: ~q'-[Category], nl,
+			'Complemented object, ~q, compiled with complementing categories support turned off'-[Object], nl
+		],
 		message_context(File, Lines).
 
 	message_tokens(declared_static_predicate_called_but_not_defined(File, Lines, Type, Entity, Predicate)) -->

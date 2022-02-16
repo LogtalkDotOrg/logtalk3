@@ -188,10 +188,11 @@
 			{get_time(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
-			{get_time(TimeStamp),
-			 stamp_date_time(TimeStamp, date(Year,Month,Day,Hours,Minutes,Seconds0,_,_,_), local),
-			 Seconds is truncate(float_integer_part(Seconds0)),
-			 Milliseconds is round(float_fractional_part(Seconds0)*1000)}.
+			{	get_time(TimeStamp),
+				stamp_date_time(TimeStamp, date(Year,Month,Day,Hours,Minutes,Seconds0,_,_,_), local),
+				Seconds is truncate(float_integer_part(Seconds0)),
+				Milliseconds is round(float_fractional_part(Seconds0)*1000)
+			}.
 
 		cpu_time(Seconds) :-
 			{statistics(cputime, Seconds)}.
@@ -230,8 +231,9 @@
 
 		:- if((current_prolog_flag(version_data, yap(Major,Minor,_,_)), (Major,Minor) @< (6,3))).
 		absolute_file_name(Path, ExpandedPath) :-
-			{working_directory(Current, Current),
-			 absolute_file_name(Path, [access(none), file_type(txt), relative_to(Current)], ExpandedPath)}.
+			{	working_directory(Current, Current),
+				absolute_file_name(Path, [access(none), file_type(txt), relative_to(Current)], ExpandedPath)
+			}.
 		:- else.
 		absolute_file_name(Path, ExpandedPath) :-
 			{working_directory(Current, Current)},
@@ -271,13 +273,15 @@
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(directory))}.
+			{	file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(directory))
+			}.
 
 		file_exists(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(regular))}.
+			{	file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(regular))
+			}.
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, ExpandedPath),
@@ -349,12 +353,14 @@
 			Status =:= 0.
 
 		is_absolute_file_name(Path) :-
-			{expand_atom(Path, EnvVarExpandedPath),
-			 path_sysop(isabsolute, EnvVarExpandedPath)}.
+			{	expand_atom(Path, EnvVarExpandedPath),
+				path_sysop(isabsolute, EnvVarExpandedPath)
+			}.
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{expand_atom(Path, EnvVarExpandedPath),
-			 path_sysop(expand, EnvVarExpandedPath, ExpandedPath0)},
+			{	expand_atom(Path, EnvVarExpandedPath),
+				path_sysop(expand, EnvVarExpandedPath, ExpandedPath0)
+			},
 			ExpandedPath = ExpandedPath0.
 
 		internal_os_path(Path, OSPath) :-
@@ -396,13 +402,15 @@
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{path_sysop(exists, ExpandedPath),
-			 path_sysop(isdir, ExpandedPath)}.
+			{	path_sysop(exists, ExpandedPath),
+				path_sysop(isdir, ExpandedPath)
+			}.
 
 		file_exists(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{path_sysop(exists, ExpandedPath),
-			 path_sysop(isplain, ExpandedPath)}.
+			{	path_sysop(exists, ExpandedPath),
+				path_sysop(isplain, ExpandedPath)
+			}.
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, ExpandedPath),
@@ -521,51 +529,62 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 delete_directory(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				delete_directory(ExpandedPath)
+			}.
 
 		change_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 change_directory(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				change_directory(ExpandedPath)
+			}.
 
 		working_directory(Directory) :-
-			{working_directory(Directory0),
-			 absolute_file_name(Directory0, Directory)}.
+			{	working_directory(Directory0),
+				absolute_file_name(Directory0, Directory)
+			}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Directory, Path),
-			 directory_files(Path, Files)}.
+			{	absolute_file_name(Directory, Path),
+				directory_files(Path, Files)
+			}.
 
 		directory_exists(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(directory))}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(directory))
+			}.
 
 		file_exists(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(regular))}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(regular))
+			}.
 
 		file_modification_time(File, Time) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_property(ExpandedPath, last_modification(Time))}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_property(ExpandedPath, last_modification(Time))
+			}.
 
 		file_size(File, Size) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_property(ExpandedPath, size(Size))}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_property(ExpandedPath, size(Size))
+			}.
 
 		file_permission(File, Permission) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_permission(ExpandedPath, Permission)}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_permission(ExpandedPath, Permission)
+			}.
 
 		delete_file(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 delete_file(ExpandedPath)}.
+			{	absolute_file_name(File, ExpandedPath),
+				delete_file(ExpandedPath)
+			}.
 
 		rename_file(Old, New) :-
-			{absolute_file_name(Old, OldPath),
-			 absolute_file_name(New, NewPath),
-			 rename_file(OldPath, NewPath)}.
+			{	absolute_file_name(Old, OldPath),
+				absolute_file_name(New, NewPath),
+				rename_file(OldPath, NewPath)
+			}.
 
 		environment_variable(Variable, Value) :-
 			{environ(Variable, Value)}.
@@ -611,15 +630,16 @@
 			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{expand_environment(Path, ExpandedPath0),
-			 (	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
-			 	;	sub_atom(ExpandedPath0, 1, 1, _, ':')
-			 	) ->
-			 	ExpandedPath = ExpandedPath0
-			 ;	working_directory(Current),
-			 	atom_concat(Current, '/', Directory),
-			 	atom_concat(Directory, ExpandedPath0, ExpandedPath)
-			 )}.
+			{	expand_environment(Path, ExpandedPath0),
+				(	(	sub_atom(ExpandedPath0, 0, 1, _, '/')
+					;	sub_atom(ExpandedPath0, 1, 1, _, ':')
+					) ->
+					ExpandedPath = ExpandedPath0
+				;	working_directory(Current),
+					atom_concat(Current, '/', Directory),
+					atom_concat(Directory, ExpandedPath0, ExpandedPath)
+				)
+			}.
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -651,21 +671,23 @@
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{file_exists(ExpandedPath),
-			 (	% workaround B-Prolog bug on Windows where file_exists/1
-			 	% succeeds but file_property/2 throws a file existence error
-			 	catch(file_property(ExpandedPath, type(directory)), _, fail) ->
-			 	true
-			 ;	% workaround B-Prolog bug on Windows where
-			 	% drives are not recognized as directories
-			 	environ('COMSPEC', _),
-			 	sub_atom(ExpandedPath, 1, 1, 0, ':')
-			 )}.
+			{	file_exists(ExpandedPath),
+				(	% workaround B-Prolog bug on Windows where file_exists/1
+					% succeeds but file_property/2 throws a file existence error
+					catch(file_property(ExpandedPath, type(directory)), _, fail) ->
+					true
+				;	% workaround B-Prolog bug on Windows where
+					% drives are not recognized as directories
+					environ('COMSPEC', _),
+					sub_atom(ExpandedPath, 1, 1, 0, ':')
+				)
+			}.
 
 		file_exists(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(regular))}.
+			{	file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(regular))
+			}.
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, ExpandedPath),
@@ -783,8 +805,9 @@
 			).
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{current_directory(Directory),
-			 absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])}.
+			{	current_directory(Directory),
+				absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])
+			}.
 
 		internal_os_path(Path, OSPath) :-
 			internal_os_path_portable(Path, OSPath).
@@ -812,11 +835,12 @@
 		directory_files(Directory, Files) :-
 			absolute_file_name(Directory, Path),
 			% ensure an existence error when the directory does not exist
-			{current_directory(Current, Path),
-			 current_directory(_, Current),
-			 findall(File1, file_member_of_directory(Path, File1, _), Files1),
-			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
-			 append(['.', '..'| Directories1], Files1, Files)}.
+			{	current_directory(Current, Path),
+				current_directory(_, Current),
+				findall(File1, file_member_of_directory(Path, File1, _), Files1),
+				findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
+				append(['.', '..'| Directories1], Files1, Files)
+			}.
 
 		directory_exists(Directory) :-
 			% workaround issue with directories like "c:" not
@@ -893,15 +917,16 @@
 			{get_flag(pid, PID)}.
 
 		shell(Command, Status) :-
-			{(	getenv('SHELL', Shell) ->
-			 	exec([Shell, '-c', Command], [], Pid),
-   			 	wait(Pid, Code),
-   			 	Status is Code >> 8 /\ 255
-			 ;	getenv('COMSPEC', _),
-			 	sh(Command) ->
-				Status is 0
-			 ;	Status is 1
-			 )}.
+			{	(	getenv('SHELL', Shell) ->
+					exec([Shell, '-c', Command], [], Pid),
+					wait(Pid, Code),
+					Status is Code >> 8 /\ 255
+				;	getenv('COMSPEC', _),
+					sh(Command) ->
+					Status is 0
+				;	Status is 1
+				)
+			}.
 
 		shell(Command) :-
 			shell(Command, 0).
@@ -910,8 +935,9 @@
 			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
-			{os_file_name(InternalPath, Path),
-			 canonical_path_name(InternalPath, ExpandedPath)}.
+			{	os_file_name(InternalPath, Path),
+				canonical_path_name(InternalPath, ExpandedPath)
+			}.
 
 		internal_os_path(InternalPath, OSPath) :-
 			{os_file_name(InternalPath, OSPath)}.
@@ -930,7 +956,7 @@
 			context(Context),
 			absolute_file_name(Directory, ExpandedPath),
 			(	{exists(ExpandedPath)} ->
-			 	{delete(ExpandedPath)}
+				{delete(ExpandedPath)}
 			;	throw(error(existence_error(directory,Directory), logtalk(delete_directory(Directory),Context)))
 			).
 
@@ -938,34 +964,38 @@
 			context(Context),
 			absolute_file_name(Directory, ExpandedPath),
 			(	{exists(ExpandedPath)} ->
-			 	{cd(ExpandedPath)}
+				{cd(ExpandedPath)}
 			;	throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
 			).
 
 		working_directory(Directory) :-
-			{getcwd(DirectoryString),
-			 atom_string(Directory, DirectoryString)}.
+			{	getcwd(DirectoryString),
+				atom_string(Directory, DirectoryString)
+			}.
 
 		directory_files(Directory, Files) :-
 			context(Context),
 			absolute_file_name(Directory, ExpandedPath),
-			{(	exists(ExpandedPath) ->
-   			 	read_directory(ExpandedPath, '*', Directories0, Files0),
-   			 	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
-   			 	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
-   			 	append(['.', '..'| Directories1], Files1, Files)
-			 ;	throw(error(existence_error(directory,Directory), logtalk(directory_files(Directory,Files),Context)))
-			 )}.
+			{	(	exists(ExpandedPath) ->
+					read_directory(ExpandedPath, '*', Directories0, Files0),
+					findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
+					findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
+					append(['.', '..'| Directories1], Files1, Files)
+				;	throw(error(existence_error(directory,Directory), logtalk(directory_files(Directory,Files),Context)))
+				)
+			}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{exists(ExpandedPath),
-			 get_file_info(ExpandedPath, type, directory)}.
+			{	exists(ExpandedPath),
+				get_file_info(ExpandedPath, type, directory)
+			}.
 
 		file_exists(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{exists(ExpandedPath),
-			 get_file_info(ExpandedPath, type, file)}.
+			{	exists(ExpandedPath),
+				get_file_info(ExpandedPath, type, file)
+			}.
 
 		file_modification_time(File, Time) :-
 			context(Context),
@@ -1011,7 +1041,7 @@
 			context(Context),
 			absolute_file_name(File, ExpandedPath),
 			(	{exists(ExpandedPath)} ->
-			 	{delete(ExpandedPath)}
+				{delete(ExpandedPath)}
 			;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
 			).
 
@@ -1019,21 +1049,23 @@
 			context(Context),
 			absolute_file_name(Old, OldPath),
 			(	{exists(OldPath)} ->
-   			 	absolute_file_name(New, NewPath),
-   			 	{rename(OldPath, NewPath)}
+				absolute_file_name(New, NewPath),
+				{rename(OldPath, NewPath)}
 			;	throw(error(existence_error(file,Old), logtalk(rename_file(Old,New),Context)))
 			).
 
 		environment_variable(Variable, Value) :-
-			{getenv(Variable, ValueString),
-			 atom_string(Value, ValueString)}.
+			{	getenv(Variable, ValueString),
+				atom_string(Value, ValueString)
+			}.
 
 		time_stamp(Time) :-
 			{get_flag(unix_time, Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{get_flag(unix_time, Time),
-			 local_time(Year, Month, Day, Hours, Minutes, Seconds, _, Time)}.
+			{	get_flag(unix_time, Time),
+				local_time(Year, Month, Day, Hours, Minutes, Seconds, _, Time)
+			}.
 
 		cpu_time(Time) :-
 			{cputime(Time)}.
@@ -1086,63 +1118,76 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 delete_directory(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				delete_directory(ExpandedPath)
+			}.
 
 		change_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 cd(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				cd(ExpandedPath)
+			}.
 
 		working_directory(Directory) :-
 			{working_directory(Directory, Directory)}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Directory, Path),
-			 directory_files(Path, Files)}.
+			{	absolute_file_name(Directory, Path),
+				directory_files(Path, Files)
+			}.
 
 		directory_exists(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(directory))}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(directory))
+			}.
 
 		file_exists(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath),
-			 file_property(ExpandedPath, type(regular))}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_exists(ExpandedPath),
+				file_property(ExpandedPath, type(regular))
+			}.
 
 		file_modification_time(File, Time) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_property(ExpandedPath, mod_time(Time))}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_property(ExpandedPath, mod_time(Time))
+			}.
 
 		file_size(File, Size) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_property(ExpandedPath, size(Size))}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_property(ExpandedPath, size(Size))
+			}.
 
 		file_permission(File, read) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath, 4)}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_exists(ExpandedPath, 4)
+			}.
 
 		file_permission(File, write) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath, 2)}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_exists(ExpandedPath, 2)
+			}.
 
 		file_permission(File, execute) :-
-			{absolute_file_name(File, ExpandedPath),
-			 file_exists(ExpandedPath, 1)}.
+			{	absolute_file_name(File, ExpandedPath),
+				file_exists(ExpandedPath, 1)
+			}.
 
 		delete_file(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 delete_file(ExpandedPath)}.
+			{	absolute_file_name(File, ExpandedPath),
+				delete_file(ExpandedPath)
+			}.
 
 		copy_file(File, Copy) :-
-			{absolute_file_name(File, FilePath),
-			 absolute_file_name(Copy, CopyPath),
-			 rename_file(FilePath, CopyPath)}.
+			{	absolute_file_name(File, FilePath),
+				absolute_file_name(Copy, CopyPath),
+				rename_file(FilePath, CopyPath)
+			}.
 
 		rename_file(Old, New) :-
-			{absolute_file_name(Old, OldPath),
-			 absolute_file_name(New, NewPath),
-			 rename_file(OldPath, NewPath)}.
+			{	absolute_file_name(Old, OldPath),
+				absolute_file_name(New, NewPath),
+				rename_file(OldPath, NewPath)
+			}.
 
 		environment_variable(Variable, Value) :-
 			{getenvstr(Variable, String)},
@@ -1208,37 +1253,44 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 fs_delete(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				fs_delete(ExpandedPath)
+			}.
 
 		change_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 fs_cwd(_, ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				fs_cwd(_, ExpandedPath)
+			}.
 
 		working_directory(Directory) :-
 			{fs_cwd(Directory)}.
 
 		directory_files(Directory, Files) :-
-			{absolute_file_name(Directory, Path),
-			 fs_cwd(CurrentDirectory, Path),
-			 fs_files(Files),
-			 fs_cwd(_, CurrentDirectory)}.
+			{	absolute_file_name(Directory, Path),
+				fs_cwd(CurrentDirectory, Path),
+				fs_files(Files),
+				fs_cwd(_, CurrentDirectory)
+			}.
 
 		directory_exists(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 fs_exists_dir(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				fs_exists_dir(ExpandedPath)
+			}.
 
 		file_exists(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 fs_exists_file(ExpandedPath)}.
+			{	absolute_file_name(File, ExpandedPath),
+				fs_exists_file(ExpandedPath)
+			}.
 
 		file_modification_time(File, Time) :-
-			{absolute_file_name(File, ExpandedPath),
-			 fs_property(ExpandedPath, time, [_, Time])}.
+			{	absolute_file_name(File, ExpandedPath),
+				fs_property(ExpandedPath, time, [_, Time])
+			}.
 
 		file_size(File, Size) :-
-			{absolute_file_name(File, ExpandedPath),
-			 fs_property(ExpandedPath, size, Size)}.
+			{	absolute_file_name(File, ExpandedPath),
+				fs_property(ExpandedPath, size, Size)
+			}.
 
 		file_permission(File, read) :-
 			(	{absolute_file_name(File, ExpandedPath)},
@@ -1255,21 +1307,24 @@
 			).
 
 		delete_file(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 fs_delete(ExpandedPath)}.
+			{	absolute_file_name(File, ExpandedPath),
+				fs_delete(ExpandedPath)
+			}.
 
 		copy_file(File, Copy) :-
-			{absolute_file_name(File, FilePath),
-			 absolute_file_name(Copy, CopyPath),
-			 buffer_new(Buffer),
-			 open(FilePath, read,  Input),  get_block(Input,  Buffer), close(Input),
-			 open(CopyPath, write, Output), put_block(Output, Buffer), close(Output),
-			 buffer_delete(Buffer)}.
+			{	absolute_file_name(File, FilePath),
+				absolute_file_name(Copy, CopyPath),
+				buffer_new(Buffer),
+				open(FilePath, read,  Input),  get_block(Input,  Buffer), close(Input),
+				open(CopyPath, write, Output), put_block(Output, Buffer), close(Output),
+				buffer_delete(Buffer)
+			}.
 
 		rename_file(Old, New) :-
-			{absolute_file_name(Old, OldPath),
-			 absolute_file_name(New, NewPath),
-			 fs_rename(OldPath, NewPath)}.
+			{	absolute_file_name(Old, OldPath),
+				absolute_file_name(New, NewPath),
+				fs_rename(OldPath, NewPath)
+			}.
 
 		environment_variable(Variable, Value) :-
 			{os_env(Variable, Value)}.
@@ -1355,8 +1410,9 @@
 			{os(system(Command))}.
 
 		change_directory(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 chdir(ExpandedPath)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				chdir(ExpandedPath)
+			}.
 
 		working_directory(Directory) :-
 			{getcwd(Directory)}.
@@ -1365,43 +1421,52 @@
 			throw(not_available(directory_files/2)).
 
 		directory_exists(Directory) :-
-			{absolute_file_name(Directory, ExpandedPath),
-			 access(ExpandedPath, 4, 0)}.
+			{	absolute_file_name(Directory, ExpandedPath),
+				access(ExpandedPath, 4, 0)
+			}.
 
 		file_exists(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 access(ExpandedPath, 4, 0)}.
+			{	absolute_file_name(File, ExpandedPath),
+				access(ExpandedPath, 4, 0)
+			}.
 
 		file_modification_time(File, Time) :-
-			{absolute_file_name(File, ExpandedPath),
-			 stat(ExpandedPath, stat(Time, _))}.
+			{	absolute_file_name(File, ExpandedPath),
+				stat(ExpandedPath, stat(Time, _))
+			}.
 
 		file_size(File, Size) :-
-			{absolute_file_name(File, ExpandedPath),
-			 stat(ExpandedPath, stat(_, Size))}.
+			{	absolute_file_name(File, ExpandedPath),
+				stat(ExpandedPath, stat(_, Size))
+			}.
 
 		file_permission(File, read) :-
-			{absolute_file_name(File, ExpandedPath),
-			 access(ExpandedPath, 4, 0)}.
+			{	absolute_file_name(File, ExpandedPath),
+				access(ExpandedPath, 4, 0)
+			}.
 
 		file_permission(File, write) :-
-			{absolute_file_name(File, ExpandedPath),
-			 access(ExpandedPath, 2, 0)}.
+			{	absolute_file_name(File, ExpandedPath),
+				access(ExpandedPath, 2, 0)
+			}.
 
 		file_permission(File, execute) :-
-			{absolute_file_name(File, ExpandedPath),
-			 access(ExpandedPath, 1, 0)}.
+			{	absolute_file_name(File, ExpandedPath),
+				access(ExpandedPath, 1, 0)
+			}.
 
 		delete_file(File) :-
-			{absolute_file_name(File, ExpandedPath),
-			 access(ExpandedPath, 4, 0)},
+			{	absolute_file_name(File, ExpandedPath),
+				access(ExpandedPath, 4, 0)
+			},
 			atom_concat('rm "', ExpandedPath, Command0),
 			atom_concat(Command0, '"', Command),
 			{os(system(Command))}.
 
 		rename_file(Old, New) :-
-			{absolute_file_name(Old, OldPath),
-			 absolute_file_name(New, NewPath)},
+			{	absolute_file_name(Old, OldPath),
+				absolute_file_name(New, NewPath)
+			},
 			atom_concat('mv "', OldPath, Command0),
 			atom_concat(Command0, '" "', Command1),
 			atom_concat(Command1, NewPath, Command2),
@@ -1513,9 +1578,10 @@
 
 		directory_files(Directory, Files) :-
 			absolute_file_name(Directory, Path),
-			{findall(File1, file_member_of_directory(Path, File1, _), Files1),
-			 findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
-			 append(['.', '..'| Directories1], Files1, Files)}.
+			{	findall(File1, file_member_of_directory(Path, File1, _), Files1),
+				findall(Directory1, directory_member_of_directory(Directory, Directory1, _), Directories1),
+				append(['.', '..'| Directories1], Files1, Files)
+			}.
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -1523,8 +1589,9 @@
 
 		file_exists(File) :-
 			absolute_file_name(File, Path),
-			{file_exists(Path),
-			 file_property(Path, size_in_bytes, _)}.
+			{	file_exists(Path),
+				file_property(Path, size_in_bytes, _)
+			}.
 
 		file_modification_time(File, Time) :-
 			absolute_file_name(File, Path),
@@ -1800,14 +1867,15 @@
 			{get_time(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
-			{get_time(Time),
-			 time_property(Time, year(Year)),
-			 time_property(Time, month(Month0)), Month is Month0 + 1,
-			 time_property(Time, day(Day)),
-			 time_property(Time, hours(Hours)),
-			 time_property(Time, minutes(Minutes)),
-			 time_property(Time, seconds(Seconds)),
-			 time_property(Time, milliseconds(Milliseconds))}.
+			{	get_time(Time),
+				time_property(Time, year(Year)),
+				time_property(Time, month(Month0)), Month is Month0 + 1,
+				time_property(Time, day(Day)),
+				time_property(Time, hours(Hours)),
+				time_property(Time, minutes(Minutes)),
+				time_property(Time, seconds(Seconds)),
+				time_property(Time, milliseconds(Milliseconds))
+			}.
 
 		cpu_time(Seconds) :-
 			{statistics(runtime, [Milliseconds| _])},

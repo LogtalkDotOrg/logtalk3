@@ -559,14 +559,17 @@
 	loaded_file_property(includes(File), Basename, Directory, _, _, _, _, _) :-
 		{'$lgt_included_file_'(File, Basename, Directory, _)}.
 	loaded_file_property(object(Object), Basename, Directory, _, _, _, _, _) :-
-		{'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-		 '$lgt_entity_property_'(Object, file_lines(Basename, Directory, _, _))}.
+		{	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+			'$lgt_entity_property_'(Object, file_lines(Basename, Directory, _, _))
+		}.
 	loaded_file_property(protocol(Protocol), Basename, Directory, _, _, _, _, _) :-
-		{'$lgt_current_protocol_'(Protocol, _, _, _, _),
-		 '$lgt_entity_property_'(Protocol, file_lines(Basename, Directory, _, _))}.
+		{	'$lgt_current_protocol_'(Protocol, _, _, _, _),
+			'$lgt_entity_property_'(Protocol, file_lines(Basename, Directory, _, _))
+		}.
 	loaded_file_property(category(Category), Basename, Directory, _, _, _, _, _) :-
-		{'$lgt_current_category_'(Category, _, _, _, _, _),
-		 '$lgt_entity_property_'(Category, file_lines(Basename, Directory, _, _))}.
+		{	'$lgt_current_category_'(Category, _, _, _, _, _),
+			'$lgt_entity_property_'(Category, file_lines(Basename, Directory, _, _))
+		}.
 	loaded_file_property(library(Library), _, Directory, _, _, _, _, _) :-
 		logtalk_library_path(Library, _),
 		{'$lgt_expand_library_alias'(Library, Directory)}, !.

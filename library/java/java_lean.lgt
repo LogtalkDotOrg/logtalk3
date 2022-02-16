@@ -50,13 +50,13 @@
 		;	set_java_field(Reference, Field, Value)
 		).
 
-	new(Parameters, Instance) :- 
+	new(Parameters, Instance) :-
 		parameter(1, Class),
 		new_java_class(Class, Handle),
 		new_java_object(Handle, Parameters, Instance),
 		parameter(2, Instance).
 
-	new(Instance) :- 
+	new(Instance) :-
 		new([], Instance).
 
 	invoke(Message) :-
