@@ -49,7 +49,7 @@ Documentation
 
 * IMPROVED: Documentation of the `git` library.
 
-* IMPROVED: Documentation of the `issue_creator` and `packs` tools.
+* IMPROVED: Documentation of the `issue_creator`, `linter`, and `packs` tools.
 
 * IMPROVED: Handbook documentation on the term-expansion mechanism.
 
