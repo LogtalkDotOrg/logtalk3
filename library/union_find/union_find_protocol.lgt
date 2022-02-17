@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'José Antonio Riaza Valverde; adapted to Logtalk by Paulo Moura',
 		date is 2022-02-17,
-		comment is 'Union find data structure protocol.',
+		comment is 'Union-find data structure protocol.',
 		see_also is [union_find]
 	]).
 
@@ -47,14 +47,14 @@
 	:- public(union/4).
 	:- mode(union(+union_find, +element, +element, ?union_find), zero_or_one).
 	:- info(union/4, [
-		comment is 'Joins the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.',
+		comment is 'Merges the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.',
 		argnames is ['UnionFind', 'Element1', 'Element2', 'NewUnionFind']
 	]).
 
 	:- public(union_all/3).
 	:- mode(union_all(+union_find, +list(element), ?union_find), zero_or_one).
 	:- info(union_all/3, [
-		comment is 'Joins the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.',
+		comment is 'Merges the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.',
 		argnames is ['UnionFind', 'Elements', 'NewUnionFind']
 	]).
 
@@ -72,7 +72,10 @@
 	:- mode(find(+union_find, +element, ?element, ?rank, ?union_find), zero_or_one).
 	:- info(find/5, [
 		comment is 'Same as the ``find/4`` predicate, but returning also the rank of the root. Fails if the element is not found.',
-		argnames is ['UnionFind', 'Element', 'Root', 'Rank', 'UnionFindOut']
+		argnames is ['UnionFind', 'Element', 'Root', 'Rank', 'UnionFindOut'],
+		remarks is [
+			'Path compression' - 'The structure of the tree containing the element is flattened by making every node point to the root whenever this predicate is used on it.'
+		]
 	]).
 
 	:- public(disjoint_sets/2).

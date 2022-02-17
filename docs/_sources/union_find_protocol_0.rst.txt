@@ -8,7 +8,7 @@
 ``union_find_protocol``
 =======================
 
-Union find data structure protocol.
+Union-find data structure protocol.
 
 | **Author:** José Antonio Riaza Valverde; adapted to Logtalk by Paulo Moura
 | **Version:** 1:0:0
@@ -91,7 +91,7 @@ Makes a new set by creating a new element with a unique key ``Element``, a rank 
 ``union/4``
 ^^^^^^^^^^^
 
-Joins the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.
+Merges the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.
 
 | **Compilation flags:**
 |    ``static``
@@ -114,7 +114,7 @@ Joins the two trees, if distinct, that contain the given elements. The trees are
 ``union_all/3``
 ^^^^^^^^^^^^^^^
 
-Joins the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.
+Merges the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.
 
 | **Compilation flags:**
 |    ``static``
@@ -173,6 +173,10 @@ Same as the ``find/4`` predicate, but returning also the rank of the root. Fails
 |    ``find(UnionFind,Element,Root,Rank,UnionFindOut)``
 | **Mode and number of proofs:**
 |    ``find(+union_find,+element,?element,?rank,?union_find)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Path compression: The structure of the tree containing the element is flattened by making every node point to the root whenever this predicate is used on it.
 
 
 ------------

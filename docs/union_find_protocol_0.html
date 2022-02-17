@@ -181,7 +181,7 @@
   <p class="right" id="union-find-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="union-find-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">union_find_protocol</span></code><a class="headerlink" href="#union-find-protocol" title="Permalink to this headline"></a></h1>
-<p>Union find data structure protocol.</p>
+<p>Union-find data structure protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> José Antonio Riaza Valverde; adapted to Logtalk by Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
@@ -275,7 +275,7 @@
 <div id="union/4"> </div></section>
 <section id="union-4">
 <span id="union-find-protocol-0-union-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">union/4</span></code></a><a class="headerlink" href="#union-4" title="Permalink to this headline"></a></h3>
-<p>Joins the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.</p>
+<p>Merges the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -296,7 +296,7 @@
 <div id="union_all/3"> </div></section>
 <section id="union-all-3">
 <span id="union-find-protocol-0-union-all-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">union_all/3</span></code></a><a class="headerlink" href="#union-all-3" title="Permalink to this headline"></a></h3>
-<p>Joins the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.</p>
+<p>Merges the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -363,6 +363,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">find(+union_find,+element,?element,?rank,?union_find)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Path compression: The structure of the tree containing the element is flattened by making every node point to the root whenever this predicate is used on it.</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <div id="disjoint_sets/2"> </div></section>
 <section id="disjoint-sets-2">
