@@ -77,6 +77,9 @@ the comparison predicates.
 
 * ADDED: New `grammars` library providing DCGs for common parsing tasks.
 
+* ADDED: New `union_find` library, a portable port of a Prolog library written
+by José Antonio Riaza Valverde.
+
 * ADDED: Linter checks for `format/2-3` goals to the `format` library.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.

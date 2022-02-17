@@ -1,0 +1,221 @@
+.. index:: union_find_protocol
+.. _union_find_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``union_find_protocol``
+=======================
+
+Union find data structure protocol.
+
+| **Author:** José Antonio Riaza Valverde; adapted to Logtalk by Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-02-17
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="new/2"> </div>
+
+.. index:: new/2
+.. _union_find_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates a new union-find data structure with a list of elements as keys.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Elements,UnionFind)``
+| **Mode and number of proofs:**
+|    ``new(+list(element),?union_find)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="make_set/3"> </div>
+
+.. index:: make_set/3
+.. _union_find_protocol/0::make_set/3:
+
+``make_set/3``
+^^^^^^^^^^^^^^
+
+Makes a new set by creating a new element with a unique key ``Element``, a rank of ``0``, and a parent pointer to itself. The parent pointer to itself indicates that the element is the representative member of its own set.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``make_set(UnionFind,Element,NewUnionFind)``
+| **Mode and number of proofs:**
+|    ``make_set(+union_find,+element,?union_find)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="union/4"> </div>
+
+.. index:: union/4
+.. _union_find_protocol/0::union/4:
+
+``union/4``
+^^^^^^^^^^^
+
+Joins the two trees, if distinct, that contain the given elements. The trees are joined by attaching the shorter tree (by rank) to the root of the taller tree. Fails if any of the elements is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``union(UnionFind,Element1,Element2,NewUnionFind)``
+| **Mode and number of proofs:**
+|    ``union(+union_find,+element,+element,?union_find)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="union_all/3"> </div>
+
+.. index:: union_all/3
+.. _union_find_protocol/0::union_all/3:
+
+``union_all/3``
+^^^^^^^^^^^^^^^
+
+Joins the distinct trees for all the given elements returning the resulting union-find data structure. Fails if any of the elements is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``union_all(UnionFind,Elements,NewUnionFind)``
+| **Mode and number of proofs:**
+|    ``union_all(+union_find,+list(element),?union_find)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="find/4"> </div>
+
+.. index:: find/4
+.. _union_find_protocol/0::find/4:
+
+``find/4``
+^^^^^^^^^^
+
+Finds the root element of a set by following the chain of parent pointers from the given element. Root is the representative member of the set to which the element belongs, and may be element itself. Fails if the element is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``find(UnionFind,Element,Root,NewUnionFind)``
+| **Mode and number of proofs:**
+|    ``find(+union_find,+element,?element,?union_find)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Path compression: The structure of the tree containing the element is flattened by making every node point to the root whenever this predicate is used on it.
+
+
+------------
+
+.. raw:: html
+
+   <div id="find/5"> </div>
+
+.. index:: find/5
+.. _union_find_protocol/0::find/5:
+
+``find/5``
+^^^^^^^^^^
+
+Same as the ``find/4`` predicate, but returning also the rank of the root. Fails if the element is not found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``find(UnionFind,Element,Root,Rank,UnionFindOut)``
+| **Mode and number of proofs:**
+|    ``find(+union_find,+element,?element,?rank,?union_find)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="disjoint_sets/2"> </div>
+
+.. index:: disjoint_sets/2
+.. _union_find_protocol/0::disjoint_sets/2:
+
+``disjoint_sets/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the list of disjoint sets in the given union-find data structure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``disjoint_sets(UnionFind,Sets)``
+| **Mode and number of proofs:**
+|    ``disjoint_sets(+union_find,?sets)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`union_find <union_find/0>`
+

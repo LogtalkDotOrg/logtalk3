@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on February 11, 2022
+##   Last updated on February 17, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -107,6 +107,7 @@ sed '1,19d' ../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/t
 sed '1,19d' ../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
 sed '1,19d' ../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
 cat ../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
+sed '1,19d' ../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
 sed '1,19d' ../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
 

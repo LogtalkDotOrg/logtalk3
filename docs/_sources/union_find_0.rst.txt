@@ -1,0 +1,58 @@
+.. index:: union_find
+.. _union_find/0:
+
+.. rst-class:: right
+
+**object**
+
+``union_find``
+==============
+
+Union find data structure implementation.
+
+| **Author:** José Antonio Riaza Valverde; adapted to Logtalk by Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-02-17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`union_find_protocol <union_find_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`compound <compound/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`set <set/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`comparingp/0::(<)/2`  :ref:`comparingp/0::(=:=)/2`  :ref:`comparingp/0::(=<)/2`  :ref:`comparingp/0::(=\=)/2`  :ref:`comparingp/0::(>)/2`  :ref:`comparingp/0::(>=)/2`  :ref:`termp/0::check/1`  :ref:`termp/0::depth/2`  :ref:`union_find_protocol/0::disjoint_sets/2`  :ref:`union_find_protocol/0::find/4`  :ref:`union_find_protocol/0::find/5`  :ref:`termp/0::ground/1`  :ref:`union_find_protocol/0::make_set/3`  :ref:`termp/0::new/1`  :ref:`union_find_protocol/0::new/2`  :ref:`termp/0::numbervars/1`  :ref:`termp/0::numbervars/3`  :ref:`termp/0::occurs/2`  :ref:`termp/0::singletons/2`  :ref:`termp/0::subsumes/2`  :ref:`termp/0::subterm/2`  :ref:`union_find_protocol/0::union/4`  :ref:`union_find_protocol/0::union_all/3`  :ref:`termp/0::valid/1`  :ref:`termp/0::variables/2`  :ref:`termp/0::variant/2`  :ref:`termp/0::varnumbers/2`  :ref:`termp/0::varnumbers/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

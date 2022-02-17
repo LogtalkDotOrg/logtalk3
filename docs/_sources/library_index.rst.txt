@@ -820,6 +820,17 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    varlist <varlist_0>
    varlistp <varlistp_0>
 
+``union_find``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   union_find <union_find_0>
+   union_find_protocol <union_find_protocol_0>
+
 ``uuid``
 --------
 

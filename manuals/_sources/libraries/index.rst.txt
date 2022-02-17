@@ -72,5 +72,6 @@ directory in the ``NOTES.md`` file.
    timeout
    types
    unicode_data
+   union_find
    uuid
    zippers

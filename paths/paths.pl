@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on February 11, 2022
+%  Last updated on February 17, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -146,6 +146,7 @@ logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(types, library('types/')).
+logtalk_library_path(union_find, library('union_find/')).
 logtalk_library_path(uuid, library('uuid/')).
 logtalk_library_path(zippers, library('zippers/')).
 

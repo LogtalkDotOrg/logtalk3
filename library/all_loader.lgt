@@ -66,6 +66,7 @@
 		uuid(loader),
 		html(loader),
 		format(loader),
+		union_find(loader),
 		cloning,
 		counters,
 		streamvars

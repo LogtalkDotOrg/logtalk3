@@ -2178,6 +2178,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`setp <setp/0::disjoint/2>`
 
+``disjoint_sets/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`union_find_protocol <union_find_protocol/0::disjoint_sets/2>`
+
 ``doc_goal/1``
 --------------
 
@@ -2819,6 +2829,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`optional(Optional) <optional/1::filter/2>`
+
+``find/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`union_find_protocol <union_find_protocol/0::find/4>`
+
+``find/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`union_find_protocol <union_find_protocol/0::find/5>`
 
 ``findall_member/4``
 --------------------
@@ -4744,6 +4774,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::make_directory_path/1>`
 
+``make_set/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`union_find_protocol <union_find_protocol/0::make_set/3>`
+
 ``manhattan_distance/3``
 ------------------------
 
@@ -5273,6 +5313,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
 * :ref:`streamvars <streamvars/0::new/2>`
+* :ref:`union_find_protocol <union_find_protocol/0::new/2>`
 
 ``new/3``
 ---------
@@ -8120,6 +8161,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`setp <setp/0::union/4>`
+* :ref:`union_find_protocol <union_find_protocol/0::union/4>`
+
+``union_all/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`union_find_protocol <union_find_protocol/0::union_all/3>`
 
 ``unpin/0``
 -----------
