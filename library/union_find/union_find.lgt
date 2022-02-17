@@ -35,12 +35,8 @@
 		new/1, insert/4, lookup/3
 	]).
 
-	:- uses(set, [
-		as_set/2
-	]).
-
 	new(List, UnionFind) :-
-		as_set(List, Set),
+		sort(List, Set),
 		new(UnionFind0),
 		union_find(Set, 1, UnionFind0, UnionFind).
 

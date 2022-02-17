@@ -31,7 +31,7 @@ predicates can be safely used in multi-threaded applications.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#term_io](../../docs/library_index.html#term_io)
+Open the [../../docs/library_index.html#term-io](../../docs/library_index.html#term-io)
 link in a web browser.
 
 

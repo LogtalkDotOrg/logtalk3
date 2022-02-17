@@ -12,7 +12,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#term_io <../../docs/library_index.html#term_io>`__
+`../../docs/library_index.html#term-io <../../docs/library_index.html#term-io>`__
 link in a web browser.
 
 Loading

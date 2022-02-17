@@ -29,7 +29,7 @@ files. It is mainly used when embedding Logtalk and Logtalk applications.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#expand_library_alias_paths](../../docs/library_index.html#expand_library_alias_paths)
+Open the [../../docs/library_index.html#expand-library-alias-paths](../../docs/library_index.html#expand-library-alias-paths)
 link in a web browser.
 
 

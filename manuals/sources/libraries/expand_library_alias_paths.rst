@@ -10,7 +10,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#expand_library_alias_paths <../../docs/library_index.html#expand_library_alias_paths>`__
+`../../docs/library_index.html#expand-library-alias-paths <../../docs/library_index.html#expand-library-alias-paths>`__
 link in a web browser.
 
 Loading

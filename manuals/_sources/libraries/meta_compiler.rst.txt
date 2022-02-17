@@ -8,7 +8,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#meta_compiler <../../docs/library_index.html#meta_compiler>`__
+`../../docs/library_index.html#meta-compiler <../../docs/library_index.html#meta-compiler>`__
 link in a web browser.
 
 Loading

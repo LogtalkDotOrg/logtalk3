@@ -11,7 +11,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#hook_objects <../../docs/library_index.html#hook_objects>`__
+`../../docs/library_index.html#hook-objects <../../docs/library_index.html#hook-objects>`__
 link in a web browser.
 
 Loading

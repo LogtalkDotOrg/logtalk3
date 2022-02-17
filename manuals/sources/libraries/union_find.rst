@@ -10,7 +10,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#union_find <../../docs/library_index.html#union_find>`__
+`../../docs/library_index.html#union-find <../../docs/library_index.html#union-find>`__
 link in a web browser.
 
 Loading

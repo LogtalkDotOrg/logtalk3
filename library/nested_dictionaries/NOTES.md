@@ -34,7 +34,7 @@ introduce incompatible changes.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#nested_dictionaries](../../docs/library_index.html#nested_dictionaries)
+Open the [../../docs/library_index.html#nested-dictionaries](../../docs/library_index.html#nested-dictionaries)
 link in a web browser.
 
 

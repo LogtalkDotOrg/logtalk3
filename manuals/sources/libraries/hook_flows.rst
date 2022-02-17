@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#hook_flows <../../docs/library_index.html#hook_flows>`__
+`../../docs/library_index.html#hook-flows <../../docs/library_index.html#hook-flows>`__
 link in a web browser.
 
 Loading

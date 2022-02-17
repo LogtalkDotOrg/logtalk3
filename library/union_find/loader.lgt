@@ -23,7 +23,6 @@
 :- initialization((
 	logtalk_load(basic_types(loader)),
 	logtalk_load(dictionaries(loader)),
-	logtalk_load(sets(loader)),
 	logtalk_load([
 		union_find_protocol,
 		union_find

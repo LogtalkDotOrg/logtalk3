@@ -13,7 +13,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#nested_dictionaries <../../docs/library_index.html#nested_dictionaries>`__
+`../../docs/library_index.html#nested-dictionaries <../../docs/library_index.html#nested-dictionaries>`__
 link in a web browser.
 
 Loading
