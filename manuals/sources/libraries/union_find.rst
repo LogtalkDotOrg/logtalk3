@@ -1,8 +1,23 @@
 ``union_find``
 ==============
 
-This library implements a disjoint-set data structure, aka a union-find
-structure. For a discussion on this data structure, see e.g.
+This library implements a union-find data structure. This structure
+tracks a set of elements partitioned into a number of disjoint
+(non-overlapping) subsets. It provides fast operations to add new sets,
+to merge existing sets, and to determine whether elements are in the
+same set. This implementation of the union-find algorithm provides the
+following features:
+
+-  Path compression: Path compression flattens the structure of the tree
+   by making every node point to the root whenever a find predicate is
+   used on it.
+
+-  Union by rank: Union predicates always attach the shorter tree to the
+   root of the taller tree. Thus, the resulting tree is no taller than
+   the originals unless they were of equal height, in which case the
+   resulting tree is taller by one node.
+
+For a general and extended discussion on this data structure, see e.g.
 
 https://en.wikipedia.org/wiki/Disjoint-set_data_structure
 
@@ -34,13 +49,45 @@ To test this library predicates, load the ``tester.lgt`` file:
 Usage
 -----
 
-To create a new union-find structure, use the ``new/2`` predicate:
+An usage example is Kruskal's algorithm, a minimum-spanning-tree
+algorithm which finds an edge of the least possible weight that connects
+any two trees in the forest. It is a greedy algorithm in graph theory as
+it finds a minimum spanning tree for a connected weighted graph adding
+increasing cost arcs at each step.
 
 ::
 
-   | ?- union_find::new(UnionFind).
-   UnionFind = ...
-   yes
+   :- object(kruskal).
 
-For details on these and other provided predicates, consult the library
-API documentation.
+       :- public(kruskal/2).
+
+       :- uses(union_find, [
+           new/2, find/4, union/4
+       ]).
+
+       kruskal(g(Vertices-Edges), g(Vertices-Tree)) :-
+           new(Vertices, UF),
+           keysort(Edges, Sorted),
+           kruskal(UF, Sorted, Tree).
+
+       kruskal(_, [], []).
+       kruskal(UF0, [Edge|Edges], [Edge|Tree]) :-
+           Edge = _-(V1, V2),
+           find(UF0, V1, R1, UF1),
+           find(UF1, V2, R2, UF2),
+           R1 \== R2, !,
+           union(UF2, V1, V2, UF3),
+           kruskal(UF3, Edges, Tree).
+       kruskal(UF, [_|Edges], Tree) :-
+           kruskal(UF, Edges, Tree).
+
+   :- end_object.
+
+Sample query:
+
+::
+
+   | ?- kruskal::kruskal(g([a,b,c,d,e,f,g]-[7-(a,b), 5-(a,d), 8-(b,c), 7-(b,e), 9-(b,d), 5-(c,e), 15-(d,e), 6-(d,f), 8-(e,f), 9-(e,g), 11-(f,g)]), Tree).
+
+   Tree = g([a,b,c,d,e,f,g]-[5-(a,d),5-(c,e),6-(d,f),7-(a,b),7-(b,e),9-(e,g)])
+   yes

@@ -158,8 +158,22 @@
              
   <section id="union-find">
 <h1><code class="docutils literal notranslate"><span class="pre">union_find</span></code><a class="headerlink" href="#union-find" title="Permalink to this headline"></a></h1>
-<p>This library implements a disjoint-set data structure, aka a union-find
-structure. For a discussion on this data structure, see e.g.</p>
+<p>This library implements a union-find data structure. This structure
+tracks a set of elements partitioned into a number of disjoint
+(non-overlapping) subsets. It provides fast operations to add new sets,
+to merge existing sets, and to determine whether elements are in the
+same set. This implementation of the union-find algorithm provides the
+following features:</p>
+<ul class="simple">
+<li><p>Path compression: Path compression flattens the structure of the tree
+by making every node point to the root whenever a find predicate is
+used on it.</p></li>
+<li><p>Union by rank: Union predicates always attach the shorter tree to the
+root of the taller tree. Thus, the resulting tree is no taller than
+the originals unless they were of equal height, in which case the
+resulting tree is taller by one node.</p></li>
+</ul>
+<p>For a general and extended discussion on this data structure, see e.g.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">https://en.wikipedia.org/wiki/Disjoint-set_data_structure</a></p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
@@ -183,14 +197,45 @@ link in a web browser.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
-<p>To create a new union-find structure, use the <code class="docutils literal notranslate"><span class="pre">new/2</span></code> predicate:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> union_find<span class="o">::</span>new(<span class="nv">UnionFind</span>).
-<span class="nv">UnionFind</span> <span class="o">=</span> ...
+<p>An usage example is Kruskal’s algorithm, a minimum-spanning-tree
+algorithm which finds an edge of the least possible weight that connects
+any two trees in the forest. It is a greedy algorithm in graph theory as
+it finds a minimum spanning tree for a connected weighted graph adding
+increasing cost arcs at each step.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(kruskal).
+
+<span class="p">    :- </span><span class="k">public</span>(kruskal<span class="o">/</span><span class="m">2</span>).
+
+<span class="p">    :- </span><span class="k">uses</span>(union_find, [
+        new<span class="o">/</span><span class="m">2</span>, find<span class="o">/</span><span class="m">4</span>, union<span class="o">/</span><span class="m">4</span>
+    ]).
+
+    kruskal(g(<span class="nv">Vertices</span><span class="o">-</span><span class="nv">Edges</span>), g(<span class="nv">Vertices</span><span class="o">-</span><span class="nv">Tree</span>)) <span class="o">:-</span>
+        new(<span class="nv">Vertices</span>, <span class="nv">UF</span>),
+        <span class="k">keysort</span>(<span class="nv">Edges</span>, <span class="nv">Sorted</span>),
+        kruskal(<span class="nv">UF</span>, <span class="nv">Sorted</span>, <span class="nv">Tree</span>).
+
+    kruskal(<span class="nv">_</span>, [], []).
+    kruskal(<span class="nv">UF0</span>, [<span class="nv">Edge</span>|<span class="nv">Edges</span>], [<span class="nv">Edge</span>|<span class="nv">Tree</span>]) <span class="o">:-</span>
+        <span class="nv">Edge</span> <span class="o">=</span> <span class="nv">_</span><span class="o">-</span>(<span class="nv">V1</span>, <span class="nv">V2</span>),
+        find(<span class="nv">UF0</span>, <span class="nv">V1</span>, <span class="nv">R1</span>, <span class="nv">UF1</span>),
+        find(<span class="nv">UF1</span>, <span class="nv">V2</span>, <span class="nv">R2</span>, <span class="nv">UF2</span>),
+        <span class="nv">R1</span> <span class="o">\==</span> <span class="nv">R2</span>, <span class="o">!</span>,
+        union(<span class="nv">UF2</span>, <span class="nv">V1</span>, <span class="nv">V2</span>, <span class="nv">UF3</span>),
+        kruskal(<span class="nv">UF3</span>, <span class="nv">Edges</span>, <span class="nv">Tree</span>).
+    kruskal(<span class="nv">UF</span>, [<span class="nv">_</span>|<span class="nv">Edges</span>], <span class="nv">Tree</span>) <span class="o">:-</span>
+        kruskal(<span class="nv">UF</span>, <span class="nv">Edges</span>, <span class="nv">Tree</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Sample query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> kruskal<span class="o">::</span>kruskal(g([a,b,c,d,<span class="o">e</span>,f,g]<span class="o">-</span>[<span class="m">7</span><span class="o">-</span>(a,b), <span class="m">5</span><span class="o">-</span>(a,d), <span class="m">8</span><span class="o">-</span>(b,c), <span class="m">7</span><span class="o">-</span>(b,<span class="o">e</span>), <span class="m">9</span><span class="o">-</span>(b,d), <span class="m">5</span><span class="o">-</span>(c,<span class="o">e</span>), <span class="m">15</span><span class="o">-</span>(d,<span class="o">e</span>), <span class="m">6</span><span class="o">-</span>(d,f), <span class="m">8</span><span class="o">-</span>(<span class="o">e</span>,f), <span class="m">9</span><span class="o">-</span>(<span class="o">e</span>,g), <span class="m">11</span><span class="o">-</span>(f,g)]), <span class="nv">Tree</span>).
+
+<span class="nv">Tree</span> <span class="o">=</span> g([a,b,c,d,<span class="o">e</span>,f,g]<span class="o">-</span>[<span class="m">5</span><span class="o">-</span>(a,d),<span class="m">5</span><span class="o">-</span>(c,<span class="o">e</span>),<span class="m">6</span><span class="o">-</span>(d,f),<span class="m">7</span><span class="o">-</span>(a,b),<span class="m">7</span><span class="o">-</span>(b,<span class="o">e</span>),<span class="m">9</span><span class="o">-</span>(<span class="o">e</span>,g)])
 yes
 </pre></div>
 </div>
-<p>For details on these and other provided predicates, consult the library
-API documentation.</p>
 </section>
 </section>
 
