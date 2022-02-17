@@ -39,11 +39,11 @@ cases where the number of elements is relatively small and performance
 is not critical, ``bintree`` can be a good choice. For other cases,
 ``avltree`` or ``rbtree`` are likely better choices. If you want to
 compare the performance of the implementations, either define an object
-alias or use an ``uses/2`` directive so that you can switch between
+alias or use a ``uses/2`` directive so that you can switch between
 implementations by simply changing the alias definition or the first
 argument of the directive. Note that you can switch between
 implementations at runtime without code changes by using a parameter
-variable in the first argument of an ``uses/2`` directive.
+variable in the first argument of a ``uses/2`` directive.
 
 To create a new dictionary, you can use the ``new/1`` predicate. For
 example:

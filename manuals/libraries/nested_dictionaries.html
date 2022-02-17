@@ -191,11 +191,11 @@ For cases where the number of elements is relatively small and
 performance is not critical, <code class="docutils literal notranslate"><span class="pre">nbintree</span></code> can be a good choice. For
 other cases, <code class="docutils literal notranslate"><span class="pre">navltree</span></code> or <code class="docutils literal notranslate"><span class="pre">nrbtree</span></code> are likely better choices. If
 you want to compare the performance of the implementations, either
-define an object alias or use an <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive so that you can
+define an object alias or use a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive so that you can
 switch between implementations by simply changing the alias definition
 or the first argument of the directive. Note that you can switch between
 implementations at runtime without code changes by using a parameter
-variable in the first argument of an <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive.</p>
+variable in the first argument of a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive.</p>
 <p>To create an empty nested dictionary, you can use the <code class="docutils literal notranslate"><span class="pre">new/1</span></code>
 predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> navltree<span class="o">::</span>new(<span class="nv">Dictionary</span>).
