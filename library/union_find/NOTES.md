@@ -82,20 +82,21 @@ each step.
 		]).
 	
 		kruskal(g(Vertices-Edges), g(Vertices-Tree)) :-
-			new(Vertices, UF),
+			new(Vertices, UnionFind),
 			keysort(Edges, Sorted),
-			kruskal(UF, Sorted, Tree).
+			kruskal(UnionFind, Sorted, Tree).
 	
 		kruskal(_, [], []).
-		kruskal(UF0, [Edge|Edges], [Edge|Tree]) :-
-			Edge = _-(V1, V2),
-			find(UF0, V1, R1, UF1),
-			find(UF1, V2, R2, UF2),
-			R1 \== R2, !,
-			union(UF2, V1, V2, UF3),
-			kruskal(UF3, Edges, Tree).
-		kruskal(UF, [_|Edges], Tree) :-
-			kruskal(UF, Edges, Tree).
+		kruskal(UnionFind0, [Edge| Edges], [Edge| Tree]) :-
+			Edge = _-(Vertex1, Vertex2),
+			find(UnionFind0, Vertex1, Root1, UnionFind1),
+			find(UnionFind1, Vertex2, Root2, UnionFind2),
+			Root1 \== Root2,
+			!,
+			union(UnionFind2, Vertex1, Vertex2, UnionFind3),
+			kruskal(UnionFind3, Edges, Tree).
+		kruskal(UnionFind, [_| Edges], Tree) :-
+			kruskal(UnionFind, Edges, Tree).
 	
 	:- end_object.
 

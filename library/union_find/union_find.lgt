@@ -27,7 +27,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'José Antonio Riaza Valverde; adapted to Logtalk by Paulo Moura',
-		date is 2022-02-17,
+		date is 2022-02-18,
 		comment is 'Union find data structure implementation.'
 	]).
 
@@ -46,24 +46,24 @@
 		J is I + 1,
 		union_find(Xs, J, UnionFind1, UnionFind).
 
-	make_set(UF0, X, UF1) :-
-		\+ lookup(X, _, UF0),
-		insert(UF0, X, (X-0), UF1).
+	make_set(UnionFind0, X, UnionFind) :-
+		\+ lookup(X, _, UnionFind0),
+		insert(UnionFind0, X, (X-0), UnionFind).
 
 	union(UnionFind0, I, J, UnionFind) :-
-		find(UnionFind0, I, X, RankI, UF2),
-		find(UF2, J, Y, RankJ, UF3),
+		find(UnionFind0, I, X, RankI, UnionFind1),
+		find(UnionFind1, J, Y, RankJ, UnionFind2),
 		(	X \== Y ->
 			(	RankI < RankJ ->
-				insert(UF3, X, Y-RankI, UnionFind)
+				insert(UnionFind2, X, Y-RankI, UnionFind)
 			;	(	RankI > RankJ ->
-					insert(UF3, Y, X-RankJ, UnionFind)
-				;	insert(UF3, Y, X-RankJ, UF4),
+					insert(UnionFind2, Y, X-RankJ, UnionFind)
+				;	insert(UnionFind2, Y, X-RankJ, UnionFind3),
 					SrankI is RankI + 1,
-					insert(UF4, X, X-SrankI, UnionFind)
+					insert(UnionFind3, X, X-SrankI, UnionFind)
 				)
 			)
-		;	UnionFind = UF3
+		;	UnionFind = UnionFind2
 		).
 
 	union_all(UnionFind, [], UnionFind).
