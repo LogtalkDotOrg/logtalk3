@@ -31,9 +31,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2022-02-19,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -83,25 +83,28 @@
 	test(commons_length_2_15, error(type_error(list,a))) :-
 		{length(a, 1)}.
 
-	test(commons_length_2_16, error(type_error(list,[_,_|a]))) :-
-		{length([_, _| a], _)}.
+	test(commons_length_2_16, error(type_error(list,1))) :-
+		{length(1, 1)}.
 
 	test(commons_length_2_17, error(type_error(list,[_,_|a]))) :-
-		{length([_, _| a], 0)}.
+		{length([_, _| a], _)}.
 
 	test(commons_length_2_18, error(type_error(list,[_,_|a]))) :-
+		{length([_, _| a], 0)}.
+
+	test(commons_length_2_19, error(type_error(list,[_,_|a]))) :-
 		{length([_, _| a], 3)}.
 
-	test(commons_length_2_19, error(domain_error(not_less_than_zero,-1))) :-
+	test(commons_length_2_20, error(domain_error(not_less_than_zero,-1))) :-
 		{length(_, -1)}.
 
-	test(commons_length_2_20, error(domain_error(not_less_than_zero,-1))) :-
+	test(commons_length_2_21, error(domain_error(not_less_than_zero,-1))) :-
 		{length([], -1)}.
 
-	test(commons_length_2_21, true(Tail == [])) :-
+	test(commons_length_2_22, true(Tail == [])) :-
 		{length([1, 2| Tail], 2)}.
 
-	test(commons_length_2_22, false) :-
+	test(commons_length_2_23, false) :-
 		{length([1, 2, 3, 4, 5| _], 2)}.
 
 	% tests from the Logtalk portability work
@@ -112,7 +115,7 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		test(commons_length_2_23, error(_)) :-
+		test(commons_length_2_24, error(_)) :-
 			L = [_| L],
 			{length(L, _)}.
 
