@@ -138,7 +138,7 @@ a bug report and discussion with Jos De Roo and José Antonio Riaza Valverde.
 * ADDED: Additional tests for unbound integers when used in `functor/3` and
 `arg/3` predicate calls.
 
-* ADDED: Additional test for the `length/2` de facto standard predicate.
+* ADDED: Additional tests for the `length/2` de facto standard predicate.
 
 * FIXED: Tests for the `bagof/3`, `term_variables/2`, and `write_term/3`
 standard predicates that used unification goals as assertions.

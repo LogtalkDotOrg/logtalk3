@@ -119,12 +119,21 @@
 			L = [_| L],
 			{length(L, _)}.
 
+		test(commons_length_2_25, error(_)) :-
+			L = [_| L],
+			{length(L, 3)}.
+
 	:- else.
 
-		- test(commons_length_2_23, error(_)) :-
+		- test(commons_length_2_24, error(_)) :-
 			% STO; Undefined.
 			L = [_| L],
 			{length(L, _)}.
+
+		- test(commons_length_2_25, error(_)) :-
+			% STO; Undefined.
+			L = [_| L],
+			{length(L, 3)}.
 
 	:- endif.
 
