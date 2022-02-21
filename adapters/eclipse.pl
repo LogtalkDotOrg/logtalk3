@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on February 13, 2022
+%  Last updated on February 21, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -559,7 +559,13 @@ forall(Generate, Test) :-
 	% and loading of .eco files when using the output:eco option
 	'$lgt_file_extension'(object, Extension),
 	atom_concat(Path, Extension, File),
-	compile(Path, Options).
+	get_stream(log_output, Stream),
+	set_stream(log_output, null),
+	(	compile(Path, Options) ->
+		set_stream(log_output, Stream)
+	;	set_stream(log_output, Stream),
+		fail
+	).
 
 
 % '$lgt_load_prolog_file'(+atom)
