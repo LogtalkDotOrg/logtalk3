@@ -383,6 +383,14 @@ numbervars(Term, From, Next) :-
 	?????
 
 
+% '$lgt_load_prolog_file'(+atom)
+%
+% compile and (re)load a Prolog file (used in standards compliance tests)
+
+'$lgt_load_prolog_file'(File) :-
+	?????
+
+
 % '$lgt_file_modification_time'(+atom, -nonvar)
 %
 % gets a file modification time, assumed to be an opaque term but comparable

@@ -452,7 +452,7 @@ findall(Term, Goal, List, Tail) :-
 
 % '$lgt_load_prolog_file'(+atom)
 %
-% compile and (re)load a Prolog file
+% compile and (re)load a Prolog file (used in standards compliance tests)
 
 '$lgt_load_prolog_file'(File) :-
 	load(File).
