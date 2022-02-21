@@ -665,3 +665,16 @@
 	baz.
 
 :- end_object.
+
+
+
+:- object(catches).
+
+	foo :-
+		catch(bar, _, baz).
+
+	bar.
+
+	baz.
+
+:- end_object.

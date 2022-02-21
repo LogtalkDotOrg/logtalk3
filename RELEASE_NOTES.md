@@ -124,6 +124,11 @@ with the `-s` option due to changes in recent versions of the Sphinx
 * FIXED: The `logtalk_tester` script to only setup and use the `issue_creator`
 tool when the `-b` option is used as per documentation.
 
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate the new `catch/3` lint check.
+
 Tests
 -----
 

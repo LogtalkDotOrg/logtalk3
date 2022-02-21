@@ -44,6 +44,7 @@
 			steadfastness(warning),
 			naming(warning),
 			disjunctions(warning),
+			catchall_catch(warning),
 			report(on)
 		]
 	)
