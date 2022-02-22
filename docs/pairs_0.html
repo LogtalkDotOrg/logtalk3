@@ -205,8 +205,8 @@
 <p>Useful predicates over lists of pairs (key-value terms).</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:5:0</div>
-<div class="line"><strong>Date:</strong> 2019-03-08</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2021-02-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -242,13 +242,15 @@
 <li><p><a class="reference internal" href="#keys-2" id="id3"><code class="docutils literal notranslate"><span class="pre">keys/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#values-2" id="id4"><code class="docutils literal notranslate"><span class="pre">values/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#transpose-2" id="id5"><code class="docutils literal notranslate"><span class="pre">transpose/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#group-by-key-2" id="id6"><code class="docutils literal notranslate"><span class="pre">group_by_key/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#map-3" id="id7"><code class="docutils literal notranslate"><span class="pre">map/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#group-sorted-by-key-2" id="id6"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#group-consecutive-by-key-2" id="id7"><code class="docutils literal notranslate"><span class="pre">group_consecutive_by_key/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#group-by-key-2" id="id8"><code class="docutils literal notranslate"><span class="pre">group_by_key/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#map-3" id="id9"><code class="docutils literal notranslate"><span class="pre">map/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id10">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id11">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
@@ -337,10 +339,52 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="group_sorted_by_key/2"> </div></section>
+<section id="group-sorted-by-key-2">
+<span id="pairs-0-group-sorted-by-key-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code></a><a class="headerlink" href="#group-sorted-by-key-2" title="Permalink to this headline"></a></h3>
+<p>Groups pairs by key by sorting them and then constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. Relative order of values per key is kept. Resulting list of pairs is sorted by key.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key(Pairs,Groups)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key(+list(pair),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="group_consecutive_by_key/2"> </div></section>
+<section id="group-consecutive-by-key-2">
+<span id="pairs-0-group-consecutive-by-key-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_consecutive_by_key/2</span></code></a><a class="headerlink" href="#group-consecutive-by-key-2" title="Permalink to this headline"></a></h3>
+<p>Groups pairs by constructing new pairs by grouping all values for consecutive key in a list. Keys are compared using equality. The relative order of the values for the same key is kept.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">group_consecutive_by_key(Pairs,Groups)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">group_consecutive_by_key(+list(pair),-list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="group_by_key/2"> </div></section>
 <section id="group-by-key-2">
-<span id="pairs-0-group-by-key-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_by_key/2</span></code></a><a class="headerlink" href="#group-by-key-2" title="Permalink to this headline"></a></h3>
-<p>Groups pairs by key by constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. The relative order of the values for the same key is kept. The resulting list of pairs is sorted by key.</p>
+<span id="pairs-0-group-by-key-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_by_key/2</span></code></a><a class="headerlink" href="#group-by-key-2" title="Permalink to this headline"></a></h3>
+<p>Same as the <code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code> predicate. Deprecated.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -360,7 +404,7 @@
 <hr class="docutils" />
 <div id="map/3"> </div></section>
 <section id="map-3">
-<span id="pairs-0-map-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">map/3</span></code></a><a class="headerlink" href="#map-3" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-map-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">map/3</span></code></a><a class="headerlink" href="#map-3" title="Permalink to this headline"></a></h3>
 <p>Maps a list into pairs using a closure that applies to each list element to compute its key.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

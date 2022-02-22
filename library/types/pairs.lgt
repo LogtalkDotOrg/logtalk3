@@ -22,8 +22,8 @@
 :- object(pairs).
 
 	:- info([
-		version is 1:5:0,
-		date is 2019-03-08,
+		version is 2:0:0,
+		date is 2021-02-22,
 		author is 'Paulo Moura',
 		comment is 'Useful predicates over lists of pairs (key-value terms).',
 		remarks is [
@@ -60,10 +60,24 @@
 		argnames is ['Pairs', 'TransposedPairs']
 	]).
 
+	:- public(group_sorted_by_key/2).
+	:- mode(group_sorted_by_key(+list(pair), -list(pair)), one).
+	:- info(group_sorted_by_key/2, [
+		comment is 'Groups pairs by key by sorting them and then constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. Relative order of values per key is kept. Resulting list of pairs is sorted by key.',
+		argnames is ['Pairs', 'Groups']
+	]).
+
+	:- public(group_consecutive_by_key/2).
+	:- mode(group_consecutive_by_key(+list(pair), -list(pair)), one).
+	:- info(group_consecutive_by_key/2, [
+		comment is 'Groups pairs by constructing new pairs by grouping all values for consecutive key in a list. Keys are compared using equality. The relative order of the values for the same key is kept.',
+		argnames is ['Pairs', 'Groups']
+	]).
+
 	:- public(group_by_key/2).
 	:- mode(group_by_key(+list(pair), -list(pair)), one).
 	:- info(group_by_key/2, [
-		comment is 'Groups pairs by key by constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. The relative order of the values for the same key is kept. The resulting list of pairs is sorted by key.',
+		comment is 'Same as the ``group_sorted_by_key/2`` predicate. Deprecated.',
 		argnames is ['Pairs', 'Groups']
 	]).
 
@@ -102,21 +116,36 @@
 	transpose([Key-Value| Pairs], [Value-Key| TransposedPairs]) :-
 		transpose(Pairs, TransposedPairs).
 
-	group_by_key(Pairs, Groups) :-
+	group_sorted_by_key(Pairs, Groups) :-
 		keysort(Pairs, PairsSorted),
-		group(PairsSorted, Groups).
+		group_sorted(PairsSorted, Groups).
 
-	group([], []).
-	group([Key-Value| Pairs], [Key-[Value| Values]| Groups]) :-
-		group(Pairs, Key, Values, Groups).
+	group_sorted([], []).
+	group_sorted([Key-Value| Pairs], [Key-[Value| Values]| Groups]) :-
+		group_sorted(Pairs, Key, Values, Groups).
 
-	group([], _, [], []).
-	group([Key-Value| Pairs], LookupKey, [Value| Values], Groups) :-
+	group_sorted([], _, [], []).
+	group_sorted([Key-Value| Pairs], LookupKey, [Value| Values], Groups) :-
 		Key == LookupKey,
 		!,
-		group(Pairs, LookupKey, Values, Groups).
-	group([Key-Value| Pairs], _, [], [Key-[Value| Values]| Groups]) :-
-		group(Pairs, Key, Values, Groups).
+		group_sorted(Pairs, LookupKey, Values, Groups).
+	group_sorted([Key-Value| Pairs], _, [], [Key-[Value| Values]| Groups]) :-
+		group_sorted(Pairs, Key, Values, Groups).
+
+	group_consecutive_by_key([], []).
+	group_consecutive_by_key([Key-Value| KeyValues0], [Key-[Value| Values]| KeyValues]) :-
+        equal_key(Key, KeyValues0, Values, KeyValues1),
+        group_consecutive_by_key(KeyValues1, KeyValues).
+
+	equal_key(Key, [Key0-Value| KeyValues0], [Value| Values], KeyValues) :-
+		Key == Key0,
+		!,
+		equal_key(Key, KeyValues0, Values, KeyValues).
+	equal_key(_, KeyValues, [], KeyValues).
+
+	% deprecated
+	group_by_key(Pairs, Groups) :-
+		group_sorted_by_key(Pairs, Groups).
 
 	map(Closure, List, Pairs) :-
 		map_(List, Closure, Pairs).

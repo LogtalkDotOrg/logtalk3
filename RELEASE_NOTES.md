@@ -83,6 +83,9 @@ the comparison predicates.
 * ADDED: New `union_find` library, a portable port of a Prolog library written
 by José Antonio Riaza Valverde.
 
+* ADDED: Predicates `group_sorted_by_key/2` and `group_consecutive_by_key/2`
+to the `pairs` library object. Deprecated the `group_by_key/2` predicate.
+
 * ADDED: Linter checks for `format/2-3` goals to the `format` library.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
