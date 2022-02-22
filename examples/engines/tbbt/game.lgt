@@ -22,9 +22,9 @@
 :- object(game).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2020-05-16,
+		date is 2022-02-22,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
@@ -94,7 +94,7 @@
 
 	handle_result(win, Me) :-
 		threaded_engine_post(writer, '~w:I win! I''m the best!\n'-[Me]).
-	handle_result(loose, Me) :-
+	handle_result(lose, Me) :-
 		threaded_engine_post(writer, '~w:Penny distracted me! It''s Penny''s fault!\n'-[Me]).
 	handle_result(draw, Me) :-
 		loop(Me).
@@ -138,24 +138,24 @@
 		).
 
 	% Scissors cuts Paper
-	final_move(scissors, paper, win, loose).
+	final_move(scissors, paper, win, lose).
 	% Paper covers Rock
-	final_move(paper, rock, win, loose).
+	final_move(paper, rock, win, lose).
 	% Rock crushes Lizard
-	final_move(rock, lizard, win, loose).
+	final_move(rock, lizard, win, lose).
 	% Lizard poisons Spock
-	final_move(lizard, spock, win, loose).
+	final_move(lizard, spock, win, lose).
 	% Spock smashes Scissors
-	final_move(spock, scissors, win, loose).
+	final_move(spock, scissors, win, lose).
 	% Scissors decapitates Lizard
-	final_move(scissors, lizard, win, loose).
+	final_move(scissors, lizard, win, lose).
 	% Lizard eats Paper
-	final_move(lizard, paper, win, loose).
+	final_move(lizard, paper, win, lose).
 	% Paper disproves Spock
-	final_move(paper, spock, win, loose).
+	final_move(paper, spock, win, lose).
 	% Spock vaporizes Rock
-	final_move(spock, rock, win, loose).
+	final_move(spock, rock, win, lose).
 	% (and as it always has) Rock crushes Scissors
-	final_move(rock, scissors, win, loose).
+	final_move(rock, scissors, win, lose).
 
 :- end_object.
