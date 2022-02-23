@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-08-14,
+		date is 2022-02-23,
 		comment is 'Unit tests for the ISO Prolog standard keysort/2 built-in predicate.'
 	]).
 
@@ -99,5 +99,11 @@
 
 	test(lgt_keysort_2_18, true(Others == [b-2,c-3,d-4,g-7])) :-
 		{keysort([d-4,a-1,c-3,b-2,g-7], [_| Others])}.
+
+	test(lgt_keysort_2_19, true(Sorted == [a-pple,p-each,s-traw,s-pork])) :-
+		{keysort([p-each,s-traw,a-pple,s-pork], Sorted)}.
+
+	test(lgt_keysort_2_20, true(Sorted == [1-8,1-7,2-6,4-1,9-8,9-7,9-9])) :-
+		{keysort([9-8,1-8,9-7,9-9,4-1,2-6,1-7], Sorted)}.
 
 :- end_object.
