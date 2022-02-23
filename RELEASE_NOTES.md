@@ -118,6 +118,8 @@ outcome assertions.
 user-defined `custom.css` file when called with the `-s` option to customize
 the Sphinx Read the Docs theme as found in the `lgt2rst.sh` Bash script.
 
+* IMPROVED: The performance pf the `ports_profiler` tool.
+
 * IMPROVED: The `lgtunit::run/1` predicate to print a warning on unknown tests.
 
 * FIXED: The `lgtdoc` tool `lgt2rst` scripts to avoid an error when called

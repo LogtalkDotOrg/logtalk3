@@ -11,8 +11,8 @@
 Predicate execution box model port profiler.
 
 | **Author:** Paulo Moura
-| **Version:** 1:10:0
-| **Date:** 2022-01-25
+| **Version:** 1:11:0
+| **Date:** 2022-02-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -176,6 +176,29 @@ Internal table of collected port profiling data.
 |    ``port_(Port,Entity,Functor,Arity,Count)``
 | **Mode and number of proofs:**
 |    ``port_(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="entity_defines_/2"> </div>
+
+.. index:: entity_defines_/2
+.. _ports_profiler/0::entity_defines_/2:
+
+``entity_defines_/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Internal cache for profiled predicates.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``entity_defines_(Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``entity_defines_(?entity_identifier,?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------

@@ -25,9 +25,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2022-01-25,
+		date is 2022-02-23,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -70,6 +70,14 @@
 	:- info(port_/5, [
 		comment is 'Internal table of collected port profiling data.',
 		argnames is ['Port', 'Entity', 'Functor', 'Arity', 'Count']
+	]).
+
+	:- private(entity_defines_/2).
+	:- dynamic(entity_defines_/2).
+	:- mode(entity_defines_(?entity_identifier, ?predicate_indicator), zero_or_more).
+	:- info(entity_defines_/2, [
+		comment is 'Internal cache for profiled predicates.',
+		argnames is ['Entity', 'Predicate']
 	]).
 
 	:- uses(user, [
@@ -142,12 +150,16 @@
 		).
 
 	entity_defines(Entity, Predicate) :-
+		entity_defines_(Entity, Predicate),
+		!.
+	entity_defines(Entity, Predicate) :-
 		(	current_object(Entity) ->
 			object_property(Entity, defines(Predicate, Properties))
 		;	category_property(Entity, defines(Predicate, Properties))
 		),
 		% only consider user-defined predicates
-		\+ member(auxiliary, Properties).
+		\+ member(auxiliary, Properties),
+		assertz(entity_defines_(Entity, Predicate)).
 
 	exception(Goal, Error, Entity) :-
 		port(Goal, exception, Entity),
@@ -168,7 +180,8 @@
 		).
 
 	reset :-
-		retractall(port_(_, _, _, _, _)).
+		retractall(port_(_, _, _, _, _)),
+		retractall(entity_defines_(_, _)).
 
 	data(Entity) :-
 		entity_spec_to_template(Entity, EntityTemplate),
