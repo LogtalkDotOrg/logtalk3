@@ -569,7 +569,7 @@ Prolog file and then load it and create the diagram:
 An alternative is to use the `object_wrapper_hook` provided by the
 `hook_objects` library:
 
-	| ?- logtalk_load(hook_objects(object_wrapper_hook)).
+	| ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
 	...
 
 	| ?- logtalk_load(code, [hook(object_wrapper_hook)]),

@@ -52,7 +52,8 @@ Documentation
 
 * IMPROVED: Documentation of the `git` library.
 
-* IMPROVED: Documentation of the `issue_creator`, `linter`, and `packs` tools.
+* IMPROVED: Documentation of the developer tools on applying them to plain
+Prolog code.
 
 * IMPROVED: Handbook documentation on the term-expansion mechanism.
 

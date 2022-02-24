@@ -1090,7 +1090,7 @@ The object can also declare as public the top Prolog predicates to simplify
 writing the tests. In alternative, we can use the `object_wrapper_hook`
 provided by the `hook_objects` library:
 
-	| ?- logtalk_load(hook_objects(object_wrapper_hook)).
+	| ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
 	...
 
 	| ?- logtalk_load(plain, [hook(object_wrapper_hook)]).

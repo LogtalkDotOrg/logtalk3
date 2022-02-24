@@ -127,7 +127,7 @@ In alternative, use the ``object_wrapper_hook`` provided by the
 
 ::
 
-   | ?- logtalk_load(hook_objects(object_wrapper_hook)).
+   | ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
    ...
 
    | ?- logtalk_load(code, [hook(object_wrapper_hook), source_data(on)]).

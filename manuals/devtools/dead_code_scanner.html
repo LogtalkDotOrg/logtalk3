@@ -256,7 +256,7 @@ the Prolog file and then load it in debug mode:</p>
 </div>
 <p>In alternative, use the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
 <code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(object_wrapper_hook)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>([os(loader), hook_objects(object_wrapper_hook)]).
 ...
 
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), source_data(on), optimize(on)]).
