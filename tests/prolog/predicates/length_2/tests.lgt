@@ -31,9 +31,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2022-02-19,
+		date is 2022-02-24,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -107,6 +107,9 @@
 	test(commons_length_2_23, false) :-
 		{length([1, 2, 3, 4, 5| _], 2)}.
 
+	- test(commons_length_2_24, error(resource_error(finite_memory))) :-
+		{length(L, L)}.
+
 	% tests from the Logtalk portability work
 
 	:- if((
@@ -115,22 +118,22 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		test(commons_length_2_24, error(_)) :-
+		test(commons_length_2_25, error(_)) :-
 			L = [_| L],
 			{length(L, _)}.
 
-		test(commons_length_2_25, error(_)) :-
+		test(commons_length_2_26, error(_)) :-
 			L = [_| L],
 			{length(L, 3)}.
 
 	:- else.
 
-		- test(commons_length_2_24, error(_)) :-
+		- test(commons_length_2_25, error(_)) :-
 			% STO; Undefined.
 			L = [_| L],
 			{length(L, _)}.
 
-		- test(commons_length_2_25, error(_)) :-
+		- test(commons_length_2_26, error(_)) :-
 			% STO; Undefined.
 			L = [_| L],
 			{length(L, 3)}.
