@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:18:1,
+		version is 0:18:2,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-02-26,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -140,7 +140,8 @@
 	test(packs_registries_add_1_01, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/local_1_d'], URL),
+		atomic_list_concat(['file://', Directory, 'test_files/local_1_d'], URL0),
+		encode_spaces(URL0, URL),
 		registries::add(URL).
 
 	test(packs_registries_defined_4_02, true(Registries == [local_1_d])) :-
@@ -233,7 +234,8 @@
 	test(packs_registries_add_2_01, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/local_2_d.zip'], URL),
+		atomic_list_concat(['file://', Directory, 'test_files/local_2_d.zip'], URL0),
+		encode_spaces(URL0, URL),
 		registries::add(local_2_d, URL).
 
 	test(packs_registries_defined_4_03, true(Registries == [local_1_d, local_2_d])) :-
@@ -373,7 +375,8 @@
 	test(packs_registries_add_1_02, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/broken_d'], URL),
+		atomic_list_concat(['file://', Directory, 'test_files/broken_d'], URL0),
+		encode_spaces(URL0, URL),
 		registries::add(URL).
 
 	test(packs_registries_lint_1_02, false) :-
@@ -404,5 +407,19 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(_Message, _Kind, packs, _Tokens).
+
+	% auxiliary predicates
+
+	encode_spaces(URL0, URL) :-
+		atom_chars(URL0, Chars0),
+		encode_spaces_in_list(Chars0, Chars),
+		atom_chars(URL, Chars).
+
+	encode_spaces_in_list([], []).
+	encode_spaces_in_list([' '| Chars0], ['%','2','0'| Chars]) :-
+		!,
+		encode_spaces_in_list(Chars0, Chars).
+	encode_spaces_in_list([Char| Chars0], [Char| Chars]) :-
+		encode_spaces_in_list(Chars0, Chars).
 
 :- end_object.
