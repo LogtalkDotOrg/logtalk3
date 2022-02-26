@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:22:1
-| **Date:** 2021-12-17
+| **Version:** 0:23:0
+| **Date:** 2022-02-26
 
 | **Compilation flags:**
 |    ``static``
@@ -504,6 +504,29 @@ True iff the archive format is supported.
 |    ``supported_archive(Extension)``
 | **Mode and number of proofs:**
 |    ``supported_archive(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="decode_url_spaces/2"> </div>
+
+.. index:: decode_url_spaces/2
+.. _packs_common/0::decode_url_spaces/2:
+
+``decode_url_spaces/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes encoded spaces (%20) in URLs to spaces.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_url_spaces(URL,Decoded)``
+| **Mode and number of proofs:**
+|    ``decode_url_spaces(+atom,-atom)`` - ``one``
 
 
 ------------

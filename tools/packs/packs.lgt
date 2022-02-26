@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:47:0,
+		version is 0:48:0,
 		author is 'Paulo Moura',
-		date is 2022-02-12,
+		date is 2022-02-26,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -563,7 +563,8 @@
 		).
 
 	install_pack_directory(Registry, Pack, Version, URL, Options) :-
-		atom_concat('file://', Directory0, URL),
+		^^decode_url_spaces(URL, Decoded),
+		atom_concat('file://', Directory0, Decoded),
 		(	sub_atom(Directory0, _, _, 0, '/') ->
 			sub_atom(Directory0, _, _, 1, Directory)
 		;	Directory = Directory0

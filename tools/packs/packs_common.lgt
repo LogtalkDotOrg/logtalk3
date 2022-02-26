@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:22:1,
+		version is 0:23:0,
 		author is 'Paulo Moura',
-		date is 2021-12-17,
+		date is 2022-02-26,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -168,6 +168,13 @@
 		argnames is ['Extension']
 	]).
 
+	:- protected(decode_url_spaces/2).
+	:- mode(decode_url_spaces(+atom, -atom), one).
+	:- info(decode_url_spaces/2, [
+		comment is 'Decodes encoded spaces (%20) in URLs to spaces.',
+		argnames is ['URL', 'Decoded']
+	]).
+
 	:- uses(logtalk, [
 		expand_library_path/2, print_message/3
 	]).
@@ -297,5 +304,17 @@
 	readme_file_name('Readme.md').
 	readme_file_name('readme.md').
 	readme_file_name('README').
+
+	decode_url_spaces(URL0, URL) :-
+		atom_chars(URL0, Chars0),
+		decode_url_spaces_in_list(Chars0, Chars),
+		atom_chars(URL, Chars).
+
+	decode_url_spaces_in_list([], []).
+	decode_url_spaces_in_list(['%','2','0'| Chars0], [' '| Chars]) :-
+		!,
+		decode_url_spaces_in_list(Chars0, Chars).
+	decode_url_spaces_in_list([Char| Chars0], [Char| Chars]) :-
+		decode_url_spaces_in_list(Chars0, Chars).
 
 :- end_category.

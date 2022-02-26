@@ -135,6 +135,9 @@ tool when the `-b` option is used as per documentation.
 
 * FIXED: The `packs` tool tests that construct URLs to escape spaces.
 
+* FIXED: The `packs` tool to decode file URL encoded spaces when extracting
+directory paths.
+
 Examples
 --------
 
