@@ -879,6 +879,8 @@ error on ``directory_files/2`` calls. For details and a workaround, see:
 
 https://github.com/didoudiaz/gprolog/issues/4
 
+This issue is fixed in the GNU Prolog 1.5.1 version.
+
 Using SICStus Prolog as the backend on Windows doesn't currently work in
 version 4.7.0 and earlier versions. The underlying issues are fixed in
 the SICStus Prolog 4.7.1 version.
