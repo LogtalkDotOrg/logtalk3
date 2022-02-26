@@ -471,7 +471,8 @@
 		print_message(comment, packs, @'Registries updating completed').
 
 	update_directory(Registry, URL, Path, Updated, Options) :-
-		atom_concat('file://', Directory0, URL),
+		^^decode_url_spaces(URL, Decoded),
+		atom_concat('file://', Directory0, Decoded),
 		(	sub_atom(Directory0, _, _, 0, '/') ->
 			sub_atom(Directory0, _, _, 1, Directory)
 		;	Directory = Directory0
