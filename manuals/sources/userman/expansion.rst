@@ -452,7 +452,7 @@ The ``term_expansion/2`` and ``goal_expansion/2`` predicates can be
 that expansions can often be manually tested by sending
 :ref:`methods_expand_term_2` and :ref:`methods_expand_goal_2`
 messages to a hook object with the term or goal whose expansion you want to
-check as argument. Another alternative to the debugging tools is to use a
+check as argument. An alternative to the debugging tools is to use a
 :term:`monitor` for the runtime messages that call the predicates. For example,
 assume a ``expansions_debug.lgt`` file with the contents:
 
@@ -513,3 +513,25 @@ as the monitor object:
 
    | ?- define_events(after, edcg, _, Sender, user).
    yes
+
+Another alternative is to use a pipeline of hook objects with the library
+``hook_pipeline/1`` and ``write_to_stream_hook`` objects to write the
+expansion results to a file. For example, using the ``unique.lgt`` test
+file from the ``edcgs`` library directory:
+
+.. code-block:: text
+
+   | ?- {hook_flows(loader), hook_objects(loader)}.
+   ...
+   
+   | ?- open('unique_expanded.lgt', write, Stream),
+        logtalk_compile(
+            unique,
+            [hook(hook_pipeline([edcg,write_to_stream_hook(Stream,[quoted(true)])]))]
+        ),
+        close(Stream).
+   ...
+
+The generated ``unique_expanded.lgt`` file will contain the clauses resulting
+from the expansion of the EDCG rules found in the ``unique.lgt`` file by the
+``edcg`` hook object expansion.

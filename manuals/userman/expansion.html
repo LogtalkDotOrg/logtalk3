@@ -502,7 +502,7 @@ supported backend Prolog compilers.</p>
 that expansions can often be manually tested by sending
 <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> and <a class="reference internal" href="../refman/methods/expand_goal_2.html#methods-expand-goal-2"><span class="std std-ref">expand_goal/2</span></a>
 messages to a hook object with the term or goal whose expansion you want to
-check as argument. Another alternative to the debugging tools is to use a
+check as argument. An alternative to the debugging tools is to use a
 <a class="reference internal" href="../glossary.html#term-monitor"><span class="xref std std-term">monitor</span></a> for the runtime messages that call the predicates. For example,
 assume a <code class="docutils literal notranslate"><span class="pre">expansions_debug.lgt</span></code> file with the contents:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>(
@@ -558,6 +558,25 @@ yes
 yes
 </pre></div>
 </div>
+<p>Another alternative is to use a pipeline of hook objects with the library
+<code class="docutils literal notranslate"><span class="pre">hook_pipeline/1</span></code> and <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook</span></code> objects to write the
+expansion results to a file. For example, using the <code class="docutils literal notranslate"><span class="pre">unique.lgt</span></code> test
+file from the <code class="docutils literal notranslate"><span class="pre">edcgs</span></code> library directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- {hook_flows(loader), hook_objects(loader)}.
+...
+
+| ?- open(&#39;unique_expanded.lgt&#39;, write, Stream),
+     logtalk_compile(
+         unique,
+         [hook(hook_pipeline([edcg,write_to_stream_hook(Stream,[quoted(true)])]))]
+     ),
+     close(Stream).
+...
+</pre></div>
+</div>
+<p>The generated <code class="docutils literal notranslate"><span class="pre">unique_expanded.lgt</span></code> file will contain the clauses resulting
+from the expansion of the EDCG rules found in the <code class="docutils literal notranslate"><span class="pre">unique.lgt</span></code> file by the
+<code class="docutils literal notranslate"><span class="pre">edcg</span></code> hook object expansion.</p>
 </section>
 </section>
 
