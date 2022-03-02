@@ -22,9 +22,9 @@
 :- object(format).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2022-01-27,
+		date is 2022-03-02,
 		comment is 'Formatted output predicates.'
 	]).
 
@@ -155,13 +155,13 @@
 
 	verify_arguments_chars([], [_| _], due_to('too many arguments')) :-
 		!.
-	verify_arguments_chars([Char| Chars], [], due_to('too few arguments')) :-
-		phrase(control_sequence, [Char| Chars], _),
-		!.
 	verify_arguments_chars(['~'| Chars], Arguments, Reason) :-
 		phrase(non_arg_control_sequence, Chars, Rest),
 		!,
 		verify_arguments_chars(Rest, Arguments, Reason).
+	verify_arguments_chars(['~'| Chars], [], due_to('too few arguments')) :-
+		phrase(control_sequence, Chars, _),
+		!.
 	verify_arguments_chars(['~'| Chars], [_| Arguments], Reason) :-
 		!,
 		phrase(control_sequence, Chars, Rest),
