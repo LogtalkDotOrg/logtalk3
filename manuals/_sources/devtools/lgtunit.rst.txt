@@ -1194,6 +1194,7 @@ the depth of printed terms that can be useful:
 
 -  CxProlog: ``write_depth/2`` predicate
 -  ECLiPSe: ``print_depth`` flag
+-  LVM 3.2.0 or later: ``answer_write_options`` flag
 -  SICStus Prolog: ``toplevel_print_options`` flag
 -  SWI-Prolog 7.1.10 or earlier: ``toplevel_print_options`` flag
 -  SWI-Prolog 7.1.11 or later: ``answer_write_options`` flag
