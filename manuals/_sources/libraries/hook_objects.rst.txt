@@ -112,11 +112,11 @@ Wrap the contents of a plain Prolog file as an object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Load the ``object_wrapper_hook.lgt``, which defines the
-``object_wrapper_hook/0-1`` hook objects. Use them to wrap the contents
-of a plain Prolog file as an object named after the file, optionally
-implementing a protocol. Can be used to apply Logtalk developer tools to
-plain Prolog code or when porting Prolog application to Logtalk. For
-example:
+``object_wrapper_hook/0-2`` hook objects. Use them to wrap the contents
+of a plain Prolog file as an object named after the file (optionally
+implementing a protocol) or an object with the given name and object
+relations. Can be used to apply Logtalk developer tools to plain Prolog
+code or when porting Prolog application to Logtalk. For example:
 
 ::
 
@@ -140,11 +140,25 @@ Or:
    Protocol = some_protocol
    yes
 
+Or:
+
+::
+
+   | ?- logtalk_load('foo.pl', [hook(object_wrapper_hook(bar,[imports(some_category))]).
+   ...
+
+   | ?- current_object(bar).
+   yes
+
+   | ?- imports_category(bar, Category).
+   Category = some_category
+   yes
+
 The ``object_wrapper_hook`` object sets the ``context_switching_calls``
 flag to ``allow`` for the generated object. This enables calling the
 predicates using the ``<</2`` context-switching control construct. But
 it's usually better to define a protocol for the predicates being
-encapsulated and use instead the ``object_wrapper_hook/1`` object.
+encapsulated and use instead the ``object_wrapper_hook/1-2`` objects.
 
 Outputting term-expansion results to a stream
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
