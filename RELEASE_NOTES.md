@@ -98,6 +98,8 @@ to the `pairs` library object. Deprecated the `group_by_key/2` predicate.
 * ADDED: Parametric object ` object_wrapper_hook/2` to the `hook_objects`
 library.
 
+* ADDED: ECLiPSe implementation for the `os::copy_file/2` library predicate.
+
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
 
 * IMPROVED: The `type` library object implementation of the `atom(CharSet)`,

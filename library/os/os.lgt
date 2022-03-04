@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:87:1,
+		version is 1:88:0,
 		author is 'Paulo Moura',
-		date is 2021-12-14,
+		date is 2022-03-04,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1043,6 +1043,21 @@
 			(	{exists(ExpandedPath)} ->
 				{delete(ExpandedPath)}
 			;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
+			).
+
+		copy_file(File, Copy) :-
+			context(Context),
+			absolute_file_name(File, FilePath),
+			(	{exists(FilePath)} ->
+				absolute_file_name(Copy, CopyPath),
+				{os_file_name(FilePath, OSFilePath)},
+				{os_file_name(CopyPath, OSCopyPath)},
+				(	operating_system_type(windows) ->
+					{atomic_list_concat(['copy "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
+				;	{atomic_list_concat(['cp "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
+				),
+				shell(Command)
+			;	throw(error(existence_error(file,File), logtalk(copy_file(File, Copy),Context)))
 			).
 
 		rename_file(Old, New) :-
