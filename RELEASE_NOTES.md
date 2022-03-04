@@ -37,6 +37,10 @@ directive exists.
 
 * ADDED: Support to user-defined linter warning messages for suspicious calls.
 
+* FIXED: Ensure that intermediate Prolog files are disregarded when reloading
+a file due to different compilation flags instead of timestamp differences
+when compiling with the `clean` flag turned off.
+
 Prolog adapter and integration files
 ------------------------------------
 

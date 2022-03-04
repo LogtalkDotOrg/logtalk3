@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcN' for release candidates (with N being a natural number),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 54, 0, b01)).
+'$lgt_version_data'(logtalk(3, 54, 0, b02)).
 
 
 
@@ -6545,17 +6545,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_save_file_loading_dependency'(SourceFile)
 		;	% we're reloading a source file
 			'$lgt_print_message'(silent(loading), reloading_file(SourceFile, Flags)),
-			'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags),
+			'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags, reloading),
 			'$lgt_print_message'(comment(loading), reloaded_file(SourceFile, Flags))
 		)
 	;	% first time loading this source file or previous attempt failed due to compilation error
 		'$lgt_print_message'(silent(loading), loading_file(SourceFile, Flags)),
-		'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags),
+		'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags, loading),
 		'$lgt_print_message'(comment(loading), loaded_file(SourceFile, Flags))
 	).
 
 
-'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags) :-
+'$lgt_compile_and_load_file'(Directory, Name, Extension, Basename, SourceFile, Flags, Action) :-
 	'$lgt_object_file_names'(Directory, Name, Extension, ObjectFilePid, ObjectFileDialect),
 	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
 	(	'$lgt_compiler_flag'(clean, on) ->
@@ -6572,7 +6572,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% a syntax error while reading the terms in a source file results
 	% in a printed message and failure instead of an exception but we
 	% need to pass the failure up to the caller
-	(	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, loading) ->
+	(	'$lgt_compile_file'(SourceFile, Flags, ObjectFile, Action) ->
 		true
 	;	retractall('$lgt_file_loading_stack_'(SourceFile, Directory)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile),
@@ -6803,7 +6803,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles to disk a source file
 
 '$lgt_compile_file'(SourceFile, Flags, ObjectFile, Action) :-
-	(	% interpret a clean(on) setting as (also) meaning that any
+	(	% ensure that we disregard any existing the intermediate Prolog file
+		% if we're reloading as that may be required due to different flags
+		Action \== reloading,
+		% interpret a clean(on) setting as (also) meaning that any
 		% existing intermediate Prolog files should be disregarded
 		'$lgt_compiler_flag'(clean, off),
 		'$lgt_file_exists'(ObjectFile),
