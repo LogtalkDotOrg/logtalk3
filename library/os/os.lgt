@@ -1045,21 +1045,6 @@
 			;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
 			).
 
-		copy_file(File, Copy) :-
-			context(Context),
-			absolute_file_name(File, FilePath),
-			(	{exists(FilePath)} ->
-				absolute_file_name(Copy, CopyPath),
-				{os_file_name(FilePath, OSFilePath)},
-				{os_file_name(CopyPath, OSCopyPath)},
-				(	operating_system_type(windows) ->
-					{atomic_list_concat(['copy "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
-				;	{atomic_list_concat(['cp "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
-				),
-				shell(Command)
-			;	throw(error(existence_error(file,File), logtalk(copy_file(File, Copy),Context)))
-			).
-
 		rename_file(Old, New) :-
 			context(Context),
 			absolute_file_name(Old, OldPath),
@@ -1190,12 +1175,6 @@
 		delete_file(File) :-
 			{	absolute_file_name(File, ExpandedPath),
 				delete_file(ExpandedPath)
-			}.
-
-		copy_file(File, Copy) :-
-			{	absolute_file_name(File, FilePath),
-				absolute_file_name(Copy, CopyPath),
-				rename_file(FilePath, CopyPath)
 			}.
 
 		rename_file(Old, New) :-
@@ -2566,7 +2545,10 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == gnu; Dialect == quintus; Dialect == scryer; Dialect == sicstus; Dialect == trealla)
+		(	Dialect == ciao; Dialect == eclipse; Dialect == gnu; Dialect == ji;
+			Dialect == quintus; Dialect == scryer; Dialect == sicstus; Dialect == tau;
+			Dialect == trealla
+		)
 	)).
 
 		copy_file(File, Copy) :-
