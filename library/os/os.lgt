@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:88:0,
+		version is 1:88:1,
 		author is 'Paulo Moura',
-		date is 2022-03-04,
+		date is 2022-03-05,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1158,18 +1158,30 @@
 			}.
 
 		file_permission(File, read) :-
+			context(Context),
 			{	absolute_file_name(File, ExpandedPath),
-				file_exists(ExpandedPath, 4)
+				(	file_exists(ExpandedPath) ->
+					file_exists(ExpandedPath, 4)
+				;	throw(error(existence_error(file,File), logtalk(file_permission(File, read),Context)))
+				)
 			}.
 
 		file_permission(File, write) :-
+			context(Context),
 			{	absolute_file_name(File, ExpandedPath),
-				file_exists(ExpandedPath, 2)
+				(	file_exists(ExpandedPath) ->
+					file_exists(ExpandedPath, 2)
+				;	throw(error(existence_error(file,File), logtalk(file_permission(File, read),Context)))
+				)
 			}.
 
 		file_permission(File, execute) :-
+			context(Context),
 			{	absolute_file_name(File, ExpandedPath),
-				file_exists(ExpandedPath, 1)
+				(	file_exists(ExpandedPath) ->
+					file_exists(ExpandedPath, 1)
+				;	throw(error(existence_error(file,File), logtalk(file_permission(File, read),Context)))
+				)
 			}.
 
 		delete_file(File) :-

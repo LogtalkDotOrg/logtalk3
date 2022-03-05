@@ -110,6 +110,9 @@ Prolog, ECLiPSE, JIProlog, and Tau Prolog.
 * FIXED: Two tests for the `nested_dictionaries` library that used unification
 goals as assertions.
 
+* FIXED: Implementation of the `os::file_permission/2` predicate for Ciao
+Prolog to throw an exception on non-existing files.
+
 Tools
 -----
 
