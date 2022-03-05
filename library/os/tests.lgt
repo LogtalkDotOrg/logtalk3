@@ -611,6 +611,10 @@
 		os::path_concat(Directory, 'a/b', BEnsureDirectory2),
 		(os::directory_exists(BEnsureDirectory2) -> os::delete_directory(BEnsureDirectory2); true),
 		os::path_concat(Directory, 'a', AEnsureDirectory2),
-		(os::directory_exists(AEnsureDirectory2) -> os::delete_directory(AEnsureDirectory2); true).
+		(os::directory_exists(AEnsureDirectory2) -> os::delete_directory(AEnsureDirectory2); true),
+		os::path_concat(Directory, '1/2', OneTwoEnsureDirectory),
+		(os::directory_exists(OneTwoEnsureDirectory) -> os::delete_directory(OneTwoEnsureDirectory); true),
+		os::path_concat(Directory, '1', OneEnsureDirectory),
+		(os::directory_exists(OneEnsureDirectory) -> os::delete_directory(OneEnsureDirectory); true).
 
 :- end_object.
