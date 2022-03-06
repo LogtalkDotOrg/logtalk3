@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:89:0,
+		version is 1:89:1,
 		author is 'Paulo Moura',
-		date is 2022-03-05,
+		date is 2022-03-06,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1046,7 +1046,6 @@
 			).
 
 		copy_file(File, Copy) :-
-			context(Context),
 			absolute_file_name(File, FilePath),
 			(	{exists(FilePath)} ->
 				absolute_file_name(Copy, CopyPath),
@@ -1057,7 +1056,8 @@
 				;	{atomic_list_concat(['cp "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
 				),
 				shell(Command)
-			;	throw(error(existence_error(file,File), logtalk(copy_file(File, Copy),Context)))
+			;	context(Context),
+				throw(error(existence_error(file,File), logtalk(copy_file(File, Copy),Context)))
 			).
 
 		rename_file(Old, New) :-
@@ -2195,16 +2195,25 @@
 
 		change_directory(Directory) :-
 			expand_path_chars(Directory, ExpandedPathChars),
-			{working_directory(_, ExpandedPathChars)}.
+			(	{directory_exists(ExpandedPathChars)} ->
+				{working_directory(_, ExpandedPathChars)}
+			;	context(Context),
+				throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
+			).
 
 		working_directory(Directory) :-
 			{working_directory(DirectoryChars, DirectoryChars)},
 			atom_chars(Directory, DirectoryChars).
 
-		directory_files(Directory, ['.', '..'| Files]) :-
+		directory_files(Directory, Files) :-
 			expand_path_chars(Directory, ExpandedPathChars),
-			{directory_files(ExpandedPathChars, FilesChars)},
-			chars_to_atom(FilesChars, Files).
+			(	{directory_exists(ExpandedPathChars)} ->
+				{directory_files(ExpandedPathChars, FilesChars)},
+				chars_to_atom(FilesChars, Files0),
+				Files = ['.', '..'| Files0]
+			;	context(Context),
+				throw(error(existence_error(directory,Directory), logtalk(directory_files(Directory,Files),Context)))
+			).
 
 		chars_to_atom([], []).
 		chars_to_atom([FileChars| FilesChars], [File| Files]) :-
@@ -2585,20 +2594,18 @@
 
 		copy_file(File, Copy) :-
 			absolute_file_name(File, FilePath),
-			absolute_file_name(Copy, CopyPath),
-			open(FilePath, read, Input, [type(binary)]),
-			open(CopyPath, write, Output, [type(binary)]),
-			get_byte(Input, Byte),
-			copy_file_bytes(Byte, Input, Output),
-			close(Input),
-			close(Output).
-
-		copy_file_bytes(-1, _, _) :-
-			!.
-		copy_file_bytes(Byte, Input, Output) :-
-			put_byte(Output, Byte),
-			get_byte(Input, Next),
-			copy_file_bytes(Next, Input, Output).
+			(	file_exists(FilePath) ->
+				absolute_file_name(Copy, CopyPath),
+				internal_os_path(FilePath, OSFilePath),
+				internal_os_path(CopyPath, OSCopyPath),
+				(	operating_system_type(windows) ->
+					{atomic_list_concat(['copy "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
+				;	{atomic_list_concat(['cp "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
+				),
+				shell(Command)
+			;	context(Context),
+				throw(error(existence_error(file,File), logtalk(copy_file(File,Copy),Context)))
+			).
 
 	:- endif.
 

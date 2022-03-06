@@ -99,7 +99,7 @@ to the `pairs` library object. Deprecated the `group_by_key/2` predicate.
 library.
 
 * ADDED: Implementation for the `os::copy_file/2` library predicate for Ciao
-Prolog, ECLiPSE, JIProlog, and Tau Prolog.
+Prolog, ECLiPSe, JIProlog, and Tau Prolog.
 
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
 
@@ -112,6 +112,10 @@ goals as assertions.
 
 * FIXED: Implementation of the `os::file_permission/2` predicate for Ciao
 Prolog to throw an exception on non-existing files.
+
+* FIXED: Implementation of the `os` library predicates `change_directory/2`
+and `directory_files/2` for Scryer Prolog to throw an exception on non-existing
+directories.
 
 Tools
 -----
