@@ -55,7 +55,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:89:2,
+		version is 1:90:0,
 		author is 'Paulo Moura',
 		date is 2022-03-06,
 		comment is 'Portable operating-system access predicates.',
@@ -1986,6 +1986,11 @@
 			absolute_file_name(New, NewExpandedPath),
 			{rename_file(OldExpandedPath, NewExpandedPath)}.
 
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FileExpandedPath),
+			absolute_file_name(Copy, CopyExpandedPath),
+			{copy_file(FileExpandedPath, CopyExpandedPath)}.
+
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
 			{delete_file(ExpandedPath)}.
@@ -2571,8 +2576,8 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == gnu; Dialect == ji; Dialect == quintus; Dialect == scryer;
-			Dialect == sicstus; Dialect == tau; Dialect == trealla
+		(	Dialect == gnu; Dialect == ji; Dialect == quintus;
+			Dialect == scryer; Dialect == sicstus; Dialect == tau
 		)
 	)).
 

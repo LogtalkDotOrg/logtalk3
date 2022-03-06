@@ -89,6 +89,10 @@ protocol.
 protocol and the `term` and `number` objects to provide implementations of
 the comparison predicates.
 
+* CHANGED: Implementation of the `os::copy_file/2` library predicate for
+Trealla Prolog to use the new native built-in predicate introduced in
+version 1.23.14.
+
 * ADDED: New `grammars` library providing DCGs for common parsing tasks.
 
 * ADDED: New `union_find` library, a portable port of a Prolog library written
