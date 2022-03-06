@@ -50,6 +50,8 @@ Prolog adapter and integration files
 
 * UPDATED: The Tau Prolog adapter file to require version 0.3.2 or later.
 
+* UPDATED: The Trealla Prolog adapter file to require version 1.23.14 or later.
+
 * UPDATED: The ECLiPSe adapter file to suppress intermediate Prolog file
 compilation log messages when compiling and loading Logtalk source files.
 
