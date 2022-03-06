@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Scryer Prolog
-%  Last updated on February 13, 2022
+%  Adapter file for Scryer Prolog 0.9.0 and later versions
+%  Last updated on March 6, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -224,8 +224,8 @@
 % backend Prolog compiler supported features (that are compatible with Logtalk)
 
 '$lgt_prolog_feature'(prolog_dialect, scryer).
-'$lgt_prolog_feature'(prolog_version, v(0, 8, 128)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 8, 128))).
+'$lgt_prolog_feature'(prolog_version, v(0, 9, 0)).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(0, 9, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, unsupported).

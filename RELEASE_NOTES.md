@@ -46,6 +46,8 @@ Prolog adapter and integration files
 
 * UPDATED: The LVM adapter file to require version 3.2.0 or later.
 
+* UPDATED: The Scryer Prolog adapter file to require version 0.9.0 or later.
+
 * UPDATED: The Tau Prolog adapter file to require version 0.3.2 or later.
 
 * UPDATED: The ECLiPSe adapter file to suppress intermediate Prolog file
