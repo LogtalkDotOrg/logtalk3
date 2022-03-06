@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:28:1,
+		version is 0:29:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-03-06,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -129,10 +129,10 @@
 
 	test(os_wall_time_1_02, true) :-
 		os::wall_time(Seconds0),
-		os::sleep(3),
+		os::sleep(1),
 		os::wall_time(Seconds1),
-		2.5 =< Seconds1 - Seconds0,
-		Seconds1 - Seconds0 =< 3.5.
+		0.5 =< Seconds1 - Seconds0,
+		Seconds1 - Seconds0 =< 1.5.
 
 	test(os_operating_system_type_1_01, true((Type == unix; Type == windows; Type == unknown))) :-
 		os::operating_system_type(Type).
