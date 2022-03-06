@@ -119,6 +119,9 @@ Prolog to throw an exception on non-existing files.
 and `directory_files/2` for Scryer Prolog to throw an exception on non-existing
 directories.
 
+* FIXED: Implementation of the `os::change_directory/2` library predicate for
+YAP to throw an exception on a non-existing directory.
+
 Tools
 -----
 

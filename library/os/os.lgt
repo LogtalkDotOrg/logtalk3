@@ -55,7 +55,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:89:1,
+		version is 1:89:2,
 		author is 'Paulo Moura',
 		date is 2022-03-06,
 		comment is 'Portable operating-system access predicates.',
@@ -262,7 +262,10 @@
 
 		change_directory(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
-			{cd(ExpandedPath)}.
+			(	{file_exists(ExpandedPath)} ->
+				{cd(ExpandedPath)}
+			;	existence_error(directory, Directory)
+			).
 
 		working_directory(Directory) :-
 			{getcwd(Directory)}.
@@ -953,19 +956,17 @@
 			make_directory_path_portable(Directory).
 
 		delete_directory(Directory) :-
-			context(Context),
 			absolute_file_name(Directory, ExpandedPath),
 			(	{exists(ExpandedPath)} ->
 				{delete(ExpandedPath)}
-			;	throw(error(existence_error(directory,Directory), logtalk(delete_directory(Directory),Context)))
+			;	existence_error(directory,Directory)
 			).
 
 		change_directory(Directory) :-
-			context(Context),
 			absolute_file_name(Directory, ExpandedPath),
 			(	{exists(ExpandedPath)} ->
 				{cd(ExpandedPath)}
-			;	throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
+			;	existence_error(directory,Directory)
 			).
 
 		working_directory(Directory) :-
@@ -974,14 +975,13 @@
 			}.
 
 		directory_files(Directory, Files) :-
-			context(Context),
 			absolute_file_name(Directory, ExpandedPath),
 			{	(	exists(ExpandedPath) ->
 					read_directory(ExpandedPath, '*', Directories0, Files0),
 					findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
 					findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
 					append(['.', '..'| Directories1], Files1, Files)
-				;	throw(error(existence_error(directory,Directory), logtalk(directory_files(Directory,Files),Context)))
+				;	existence_error(directory,Directory)
 				)
 			}.
 
@@ -998,51 +998,45 @@
 			}.
 
 		file_modification_time(File, Time) :-
-			context(Context),
 			(	absolute_file_name(File, ExpandedPath),
 				{exists(ExpandedPath)} ->
 				{get_file_info(ExpandedPath, mtime, Time)}
-			;	throw(error(existence_error(file,File), logtalk(file_modification_time(File,Time),Context)))
+			;	existence_error(file, File)
 			).
 
 		file_size(File, Size) :-
-			context(Context),
 			(	absolute_file_name(File, ExpandedPath),
 				{exists(ExpandedPath)} ->
 				{get_file_info(ExpandedPath, size, Size)}
-			;	throw(error(existence_error(file,File), logtalk(file_size(File,Size),Context)))
+			;	existence_error(file, File)
 			).
 
 		file_permission(File, read) :-
-			context(Context),
 			(	absolute_file_name(File, ExpandedPath),
 				{exists(ExpandedPath)} ->
 				{get_file_info(ExpandedPath, readable, on)}
-			;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
+			;	existence_error(file, File)
 			).
 
 		file_permission(File, write) :-
-			context(Context),
 			(	absolute_file_name(File, ExpandedPath),
 				{exists(ExpandedPath)} ->
 				{get_file_info(ExpandedPath, writable, on)}
-			;	throw(error(existence_error(file,File), logtalk(file_permission(File,read),Context)))
+			;	existence_error(file, File)
 			).
 
 		file_permission(File, execute) :-
-			context(Context),
 			(	absolute_file_name(File, ExpandedPath),
 				{exists(ExpandedPath)} ->
 				{get_file_info(ExpandedPath, executable, on)}
-			;	throw(error(existence_error(file,File), logtalk(file_permission(File,execute),Context)))
+			;	existence_error(file, File)
 			).
 
 		delete_file(File) :-
-			context(Context),
 			absolute_file_name(File, ExpandedPath),
 			(	{exists(ExpandedPath)} ->
 				{delete(ExpandedPath)}
-			;	throw(error(existence_error(file,File), logtalk(delete_file(File),Context)))
+			;	existence_error(file, File)
 			).
 
 		copy_file(File, Copy) :-
@@ -1056,17 +1050,15 @@
 				;	{atomic_list_concat(['cp "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
 				),
 				shell(Command)
-			;	context(Context),
-				throw(error(existence_error(file,File), logtalk(copy_file(File, Copy),Context)))
+			;	existence_error(file, File)
 			).
 
 		rename_file(Old, New) :-
-			context(Context),
 			absolute_file_name(Old, OldPath),
 			(	{exists(OldPath)} ->
 				absolute_file_name(New, NewPath),
 				{rename(OldPath, NewPath)}
-			;	throw(error(existence_error(file,Old), logtalk(rename_file(Old,New),Context)))
+			;	existence_error(file, Old)
 			).
 
 		environment_variable(Variable, Value) :-
@@ -1173,31 +1165,25 @@
 			}.
 
 		file_permission(File, read) :-
-			context(Context),
-			{	absolute_file_name(File, ExpandedPath),
-				(	file_exists(ExpandedPath) ->
-					file_exists(ExpandedPath, 4)
-				;	throw(error(existence_error(file,File), logtalk(file_permission(File, read),Context)))
-				)
-			}.
+			{absolute_file_name(File, ExpandedPath)},
+			(	{file_exists(ExpandedPath)} ->
+				{file_exists(ExpandedPath, 4)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(File, write) :-
-			context(Context),
-			{	absolute_file_name(File, ExpandedPath),
-				(	file_exists(ExpandedPath) ->
-					file_exists(ExpandedPath, 2)
-				;	throw(error(existence_error(file,File), logtalk(file_permission(File, read),Context)))
-				)
-			}.
+			{absolute_file_name(File, ExpandedPath)},
+			(	{file_exists(ExpandedPath)} ->
+				{file_exists(ExpandedPath, 2)}
+			;	existence_error(file, File)
+			).
 
 		file_permission(File, execute) :-
-			context(Context),
-			{	absolute_file_name(File, ExpandedPath),
-				(	file_exists(ExpandedPath) ->
-					file_exists(ExpandedPath, 1)
-				;	throw(error(existence_error(file,File), logtalk(file_permission(File, read),Context)))
-				)
-			}.
+			{absolute_file_name(File, ExpandedPath)},
+			(	{file_exists(ExpandedPath)} ->
+				{file_exists(ExpandedPath, 1)}
+			;	existence_error(file, File)
+			).
 
 		delete_file(File) :-
 			{	absolute_file_name(File, ExpandedPath),
@@ -2197,8 +2183,7 @@
 			expand_path_chars(Directory, ExpandedPathChars),
 			(	{directory_exists(ExpandedPathChars)} ->
 				{working_directory(_, ExpandedPathChars)}
-			;	context(Context),
-				throw(error(existence_error(directory,Directory), logtalk(change_directory(Directory),Context)))
+			;	existence_error(directory, Directory)
 			).
 
 		working_directory(Directory) :-
@@ -2211,8 +2196,7 @@
 				{directory_files(ExpandedPathChars, FilesChars)},
 				chars_to_atom(FilesChars, Files0),
 				Files = ['.', '..'| Files0]
-			;	context(Context),
-				throw(error(existence_error(directory,Directory), logtalk(directory_files(Directory,Files),Context)))
+			;	existence_error(directory, Directory)
 			).
 
 		chars_to_atom([], []).
@@ -2603,8 +2587,7 @@
 				;	{atomic_list_concat(['cp "', OSFilePath, '" "', OSCopyPath, '"'], Command)}
 				),
 				shell(Command)
-			;	context(Context),
-				throw(error(existence_error(file,File), logtalk(copy_file(File,Copy),Context)))
+			;	existence_error(file, File)
 			).
 
 	:- endif.
