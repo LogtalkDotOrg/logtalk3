@@ -55,7 +55,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:90:1,
+		version is 1:90:2,
 		author is 'Paulo Moura',
 		date is 2022-03-07,
 		comment is 'Portable operating-system access predicates.',
@@ -2276,7 +2276,8 @@
 		wall_time(0.0).
 
 		operating_system_type(Type) :-
-			(	{getenv("COMSPEC", _)} ->
+			atom_chars('COMSPEC', Chars),
+			(	{getenv(Chars, _)} ->
 				Type = windows
 			;	Type = unix
 			).

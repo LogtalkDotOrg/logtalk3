@@ -128,8 +128,9 @@ directories.
 * FIXED: Implementation of the `os::change_directory/2` library predicate for
 YAP to throw an exception on a non-existing directory.
 
-* FIXED: The `os::date_time/7` library predicate for Scryer Prolog when the
-`double_quotes` flag is set to `codes`.
+* FIXED: The `os` library `date_time/7` and `operating_system_type/1`
+predicates for Scryer Prolog when the `double_quotes` flag is set to
+`codes`.
 
 Tools
 -----
