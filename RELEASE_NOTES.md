@@ -176,6 +176,8 @@ Examples
 
 * UPDATED: The `errors` example to illustrate the new `catch/3` lint check.
 
+* FIXED: Float comparison in test for the `dcgs` example.
+
 Tests
 -----
 

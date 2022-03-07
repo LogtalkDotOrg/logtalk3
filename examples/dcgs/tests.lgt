@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:14:0,
+		version is 1:14:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2021-03-15,
+		date is 2022-03-07,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -65,12 +65,14 @@
 	test(dcgs_10, true(Solutions == [[pwd,'cd ..','ls -a']])) :-
 		findall(L, shell::parse("pwd; cd ..; ls -a", L), Solutions).
 
-	% test 11.  % complicated because of comparison of floats
 	test(dcgs_11, true) :-
 		tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens),
-		Tokens = [Tok1, Tok2, Tok3, Number| Rest],
-		Number =~= 1048576.24,	% Wow the error is huge (>3)
-		Tok1 == we, Tok2 == owe, Tok3 == ('$'), Rest == [to,agent,7,for,version,3.14159,!].
+		Tokens = [Tok1, Tok2, Tok3, Tok4, Tok5, Tok6, Tok7, Tok8, Tok9, Tok10, Tok11],
+		^^assertion([Tok1, Tok2, Tok3] ==  [we, owe, ('$')]),
+		^^assertion(Tok4 =~= 1048576.24),
+		^^assertion([Tok5, Tok6, Tok7, Tok8, Tok9] == [to, agent, 7, for, version]),
+		^^assertion(Tok10 =~= 3.14159),
+		^^assertion(Tok11 == !).
 
 	test(dcgs_12, true([A, B] =~= [-0.94974746830583223, 6.9497474683058318])) :-
 		findall(Ending, walker::walk([n(5), e(4), s(2), nw(8), s(5), se(1), n(4)], Ending), Endings),
