@@ -185,6 +185,9 @@ examples to not require setting the `double_quotes` flag.
 Tests
 -----
 
+* CHANGED: The `number_codes/2` standard predicate tests to not require
+setting the `double_quotes` flag.
+
 * ADDED: Additional test for the Prolog standard `catch/3` control construct.
 Suggested by Andrew Davison.
 

@@ -19,16 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_prolog_flag(double_quotes, codes).
-
-
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-09-13,
+		date is 2022-03-07,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -99,13 +96,13 @@
 		{number_chars(X, [' ','0','b','1','1','1']), number_codes(X, Y)},
 		X == 7, Y == [55].
 
-	- test(sics_number_codes_2_22, true(N == 10)) :-
-		{number_codes(N, "0'\n")}.
+	test(sics_number_codes_2_22, true(N == 10)) :-
+		{number_codes(N, [48,39,92,110])}. % 0'\n
 
 	test(sics_number_codes_2_23, error(syntax_error(_))) :-
 		% the original test used "ä" but that rises portability issues
 		% due to the lack of a standard way to specify text encodings
-		{number_codes(_N, "a")}.
+		{number_codes(_N, [97])}.
 
 	test(sics_number_codes_2_24, error(syntax_error(_))) :-
 		{number_codes(_X, [0'0,0'x,0'0,0'.,0'0])}.
