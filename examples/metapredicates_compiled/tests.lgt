@@ -19,9 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_prolog_flag(double_quotes, codes).	% for the "grammar" object tests
-
-
 % entities for testing meta-predicates calling meta-predicates and passing
 % closures corresponding to control constructs
 
@@ -204,9 +201,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-01-29,
+		date is 2022-03-07,
 		comment is 'Unit tests for the "metapredicates_compiled" example.'
 	]).
 
@@ -340,8 +337,8 @@
 	test(metapredicates_compiled_37, true(L == [2, 1, 3])) :-
 		wrappers_client::s(L).
 
-	test(metapredicates_compiled_38, true(Codes == [49, 50, 51])) :-
-		grammar::codes("123", Codes).
+	test(metapredicates_compiled_38, true(Tokens == [abc,def,ghi])) :-
+		grammar::codes([abc,def,ghi], Tokens).
 
 	test(metapredicates_compiled_39, true(Left == '(((((((((0+1)+2)+3)+4)+5)+6)+7)+8)+9)')) :-
 		folds::left(Left).

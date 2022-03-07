@@ -175,6 +175,9 @@ directory paths.
 Examples
 --------
 
+* CHANGED: The tests for the `metapredicates` and `metapredicates_compiled`
+examples to not require setting the `double_quotes` flag.
+
 * UPDATED: The `errors` example to illustrate the new `catch/3` lint check.
 
 * FIXED: Float comparison in test for the `dcgs` example.

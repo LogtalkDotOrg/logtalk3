@@ -19,9 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- set_prolog_flag(double_quotes, codes).
-
-
 :- object(grammar).
 
 	:- public(codes/2).
