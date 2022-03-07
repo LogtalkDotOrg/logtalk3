@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:90:0,
+		version is 1:90:1,
 		author is 'Paulo Moura',
-		date is 2022-03-06,
+		date is 2022-03-07,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2248,12 +2248,27 @@
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{
 				current_time(Time),
-				memberchk('Y'=YearChars,    Time), number_chars(Year, YearChars),
-				memberchk('m'=MonthChars,   Time), number_chars(Month, MonthChars),
-				memberchk('d'=DayChars,     Time), number_chars(Day, DayChars),
-				memberchk('H'=HoursChars,   Time), number_chars(Hours, HoursChars),
-				memberchk('M'=MinutesChars, Time), number_chars(Minutes, MinutesChars),
-				memberchk('S'=SecondsChars, Time), number_chars(Seconds, SecondsChars)
+				memberchk('Y'=YearChars,    Time),
+				memberchk('m'=MonthChars,   Time),
+				memberchk('d'=DayChars,     Time),
+				memberchk('H'=HoursChars,   Time),
+				memberchk('M'=MinutesChars, Time),
+				memberchk('S'=SecondsChars, Time),
+				(	current_prolog_flag(double_quotes, chars) ->
+					number_chars(Year, YearChars),
+					number_chars(Month, MonthChars),
+					number_chars(Day, DayChars),
+					number_chars(Hours, HoursChars),
+					number_chars(Minutes, MinutesChars),
+					number_chars(Seconds, SecondsChars)
+				;	% assume codes
+					number_codes(Year, YearChars),
+					number_codes(Month, MonthChars),
+					number_codes(Day, DayChars),
+					number_codes(Hours, HoursChars),
+					number_codes(Minutes, MinutesChars),
+					number_codes(Seconds, SecondsChars)
+				)
 			}.
 
 		cpu_time(0.0).
