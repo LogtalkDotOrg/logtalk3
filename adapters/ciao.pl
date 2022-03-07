@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Ciao Prolog 1.20.0
-%  Last updated on February 13, 2022
+%  Adapter file for Ciao Prolog 1.21.0
+%  Last updated on March 7, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -240,7 +240,7 @@
 '$lgt_prolog_feature'(prolog_dialect, ciao).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, ciao(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,20,0))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(1,21,0))).
 
 '$lgt_prolog_feature'(encoding_directive, unsupported).
 '$lgt_prolog_feature'(tabling, supported).
