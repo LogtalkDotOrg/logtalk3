@@ -22,18 +22,20 @@
 :- object(type).
 
 	:- info([
-		version is 1:32:0,
+		version is 1:33:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-03-08,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
 			'Prolog module related types (when the backend compiler supports modules)' - '``module``, ``module_identifier``, ``qualified_callable``',
 			'Prolog base types' - '``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``',
-			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``, ``hex_char``',
+			'Atom derived types' - '``non_quoted_atom``, ``non_empty_atom``, ``boolean``, ``character``, ``in_character``, ``char``, ``operator_specifier``, ``hex_char``',
+			'Atom derived parametric types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom(CharSet)``, ``character(CharSet)``, ``in_character(CharSet)``, ``char(CharSet)``',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``',
 			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``',
-			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``, ``hex_code``',
+			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``in_byte``, ``character_code``, ``in_character_code``, ``code``, ``operator_priority``, ``hex_code``',
+			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``',
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``',
@@ -161,8 +163,11 @@
 	type(non_positive_integer).
 	type(non_negative_integer).
 	type(byte).
+	type(in_byte).
 	type(character_code).
+	type(in_character_code).
 	type(character_code(_Charset)).
+	type(in_character_code(_Charset)).
 	type(code).
 	type(code(_Charset)).
 	type(operator_priority).
@@ -175,7 +180,9 @@
 	type(non_empty_atom(_Charset)).
 	type(boolean).
 	type(character).
+	type(in_character).
 	type(character(_Charset)).
+	type(in_character(_Charset)).
 	type(char).
 	type(char(_Charset)).
 	type(order).
@@ -566,11 +573,38 @@
 		;	throw(domain_error(character, Term))
 		).
 
+	check(in_character, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ atom(Term) ->
+			throw(type_error(atom, Term))
+		;	Term == end_of_file ->
+			true
+		;	atom_length(Term, 1) ->
+			true
+		;	throw(domain_error(character, Term))
+		).
+
 	check(character(CharSet), Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	\+ atom(Term) ->
 			throw(type_error(atom, Term))
+		;	\+ atom_length(Term, 1) ->
+			throw(domain_error(character(CharSet), Term))
+		;	char_code(Term, Code),
+			valid_character_code(CharSet, Code) ->
+			true
+		;	throw(domain_error(character(CharSet), Term))
+		).
+
+	check(in_character(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ atom(Term) ->
+			throw(type_error(atom, Term))
+		;	Term == end_of_file ->
+			true
 		;	\+ atom_length(Term, 1) ->
 			throw(domain_error(character(CharSet), Term))
 		;	char_code(Term, Code),
@@ -785,6 +819,16 @@
 		;	throw(domain_error(byte, Term))
 		).
 
+	check(in_byte, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	-1 =< Term, Term =< 255 ->
+			true
+		;	throw(domain_error(byte, Term))
+		).
+
 	check(character_code, Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
@@ -796,11 +840,34 @@
 		;	throw(domain_error(character_code, Term))
 		).
 
+	check(in_character_code, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	code_upper_limit(Upper),
+			-1 =< Term, Term =< Upper ->
+			true
+		;	throw(domain_error(character_code, Term))
+		).
+
 	check(character_code(CharSet), Term) :-
 		(	var(Term) ->
 			throw(instantiation_error)
 		;	\+ integer(Term) ->
 			throw(type_error(integer, Term))
+		;	valid_character_code(CharSet, Term) ->
+			true
+		;	throw(domain_error(character_code(CharSet), Term))
+		).
+
+	check(in_character_code(CharSet), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ integer(Term) ->
+			throw(type_error(integer, Term))
+		;	Term == -1 ->
+			true
 		;	valid_character_code(CharSet, Term) ->
 			true
 		;	throw(domain_error(character_code(CharSet), Term))

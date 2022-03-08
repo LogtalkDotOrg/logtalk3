@@ -111,6 +111,10 @@ library.
 * ADDED: Implementation for the `os::copy_file/2` library predicate for Ciao
 Prolog, ECLiPSe, JIProlog, and Tau Prolog.
 
+* ADDED: Types `in_character`, `in_character(CharSet)`, `in_character_code`,
+`in_character_code(CharSet)`, and `in_byte` to the `arbitrary` and `types`
+libraries.
+
 * IMPROVED: Performance of the `csv` library when parsing large CSV files.
 
 * IMPROVED: The `type` library object implementation of the `atom(CharSet)`,

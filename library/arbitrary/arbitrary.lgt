@@ -23,18 +23,20 @@
 	complements(type)).
 
 	:- info([
-		version is 2:19:0,
+		version is 2:20:0,
 		author is 'Paulo Moura',
-		date is 2021-09-13,
+		date is 2022-03-08,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
 			'Prolog module related types (when the backend compiler supports modules)' - '``module``, ``module_identifier``, ``qualified_callable``',
 			'Prolog base types' - '``term``, ``var``, ``nonvar``, ``atomic``, ``atom``, ``number``, ``integer``, ``float``, ``compound``, ``callable``, ``ground``',
-			'Atom derived types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``character(CharSet)``, ``char``, ``char(CharSet)``, ``operator_specifier``, ``hex_char``',
+			'Atom derived types' - '``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``in_character``, ``char``, ``operator_specifier``, ``hex_char``',
+			'Atom derived parametric types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom(CharSet)``, ``character(CharSet)``, ``in_character(CharSet)``, ``char(CharSet)``',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``',
 			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float``, ``probability``',
-			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``character_code``, ``character_code(CharSet)``, ``code``, ``code(CharSet)``, ``operator_priority``, ``hex_code``',
+			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``in_byte``, ``character_code``, ``in_character_code``, ``code``, ``operator_priority``, ``hex_code``',
+			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``',
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``',
@@ -50,7 +52,7 @@
 
 	:- uses(integer, [between/3 as for/3]).
 	:- uses(list, [append/3, length/2]).
-	:- uses(fast_random, [between/3, member/2, permutation/2, random/1]).
+	:- uses(fast_random, [between/3, maybe/2, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
 	:- multifile(arbitrary/1).
@@ -159,8 +161,11 @@
 	arbitrary(non_positive_integer).
 	arbitrary(non_negative_integer).
 	arbitrary(byte).
+	arbitrary(in_byte).
 	arbitrary(character_code).
+	arbitrary(in_character_code).
 	arbitrary(character_code(_CharSet)).
+	arbitrary(in_character_code(_CharSet)).
 	arbitrary(code).
 	arbitrary(code(_CharSet)).
 	arbitrary(operator_priority).
@@ -168,7 +173,9 @@
 	% atom derived types
 	arbitrary(boolean).
 	arbitrary(character).
+	arbitrary(in_character).
 	arbitrary(character(_CharSet)).
+	arbitrary(in_character(_CharSet)).
 	arbitrary(char).
 	arbitrary(char(_CharSet)).
 	arbitrary(order).
@@ -340,9 +347,24 @@
 		arbitrary(character_code, Code),
 		char_code(Arbitrary, Code).
 
+	arbitrary(in_character, Arbitrary) :-
+		% ascii_full
+		arbitrary(in_character_code, Code),
+		(	Code == -1 ->
+			Arbitrary = end_of_file
+		;	char_code(Arbitrary, Code)
+		).
+
 	arbitrary(character(CharSet), Arbitrary) :-
 		arbitrary(character_code(CharSet), Code),
 		char_code(Arbitrary, Code).
+
+	arbitrary(in_character(CharSet), Arbitrary) :-
+		arbitrary(in_character_code(CharSet), Code),
+		(	Code == -1 ->
+			Arbitrary = end_of_file
+		;	char_code(Arbitrary, Code)
+		).
 
 	arbitrary(char, Arbitrary) :-
 		arbitrary(character, Arbitrary).
@@ -435,10 +457,21 @@
 	arbitrary(byte, Arbitrary) :-
 		between(0, 255, Arbitrary).
 
+	arbitrary(in_byte, Arbitrary) :-
+		between(-1, 255, Arbitrary).
+
 	arbitrary(character_code, Arbitrary) :-
 		% ascii_full
 		first_valid_character_code(First),
 		between(First, 127, Arbitrary).
+
+	arbitrary(in_character_code, Arbitrary) :-
+		% ascii_full
+		(	maybe(1, 127) ->
+			Arbitrary = -1
+		;	first_valid_character_code(First),
+			between(First, 127, Arbitrary)
+		).
 
 	arbitrary(character_code(CharSet), Arbitrary) :-
 		first_valid_character_code(First),
@@ -458,6 +491,27 @@
 			arbitrary_unicode_code_point(First, 1114111, Arbitrary)
 		;	% default to ASCII printable
 			between(32, 126, Arbitrary)
+		).
+
+	arbitrary(in_character_code(CharSet), Arbitrary) :-
+		(	CharSet == ascii_full ->
+			Low = 1, High = 127
+		;	CharSet == ascii_printable ->
+			Low = 32, High = 126
+		;	CharSet == ascii_identifier ->
+			Low = 1, High = 64
+		;	CharSet == byte ->
+			Low = 1, High = 255
+		;	CharSet == unicode_bmp ->
+			Low = 1, High = 65535
+		;	CharSet == unicode_full ->
+			Low = 1, High = 1114111
+		;	% default to ASCII printable
+			Low = 32, High = 126
+		),
+		(	maybe(Low, High) ->
+			Arbitrary = -1
+		;	arbitrary(character_code(CharSet), Arbitrary)
 		).
 
 	arbitrary(code, Arbitrary) :-
