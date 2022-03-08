@@ -197,8 +197,8 @@ setting the `double_quotes` flag.
 * ADDED: Additional test for the Prolog standard `catch/3` control construct.
 Suggested by Andrew Davison.
 
-* ADDED: Additional tests for the Prolog standard `arg/3` and `keysort/2`
-predicates.
+* ADDED: Additional tests for the Prolog standard `arg/3`, `keysort/2`, and
+`=../2` predicates.
 
 * ADDED: Additional test for the Prolog standard `findall/3` predicate after
 a bug report and discussion with Jos De Roo and José Antonio Riaza Valverde.

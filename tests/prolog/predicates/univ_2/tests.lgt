@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-07-29,
+		date is 2022-03-08,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -129,6 +129,9 @@
 
 	test(lgt_univ_2_26, true(L == [1.0])) :-
 		{1.0 =.. L}.
+
+	test(lgt_univ_2_27, true(T == f(A,B,C))) :-
+		{L = [A,B,C], T =.. [f| L]}.
 
 	% auxiliary predicates
 
