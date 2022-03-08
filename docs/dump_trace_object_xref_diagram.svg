@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-262 709,-262 709,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object dump_trace</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;03&#45;06, 21:10</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;03&#45;08, 12:30</text>
 <g id="clust1" class="cluster">
 <title>cluster_dump_trace_object</title>
 <g id="a_clust1"><a xlink:title="dump_trace">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 685,-49 685,-49 691,-49 697,-55 697,-61 697,-61 697,-238 697,-238 697,-244 691,-250 685,-250 685,-250 20,-250 20,-250 14,-250 8,-244 8,-238 8,-238 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt">
 <text text-anchor="start" x="20.5" y="-233.5" font-family="Monospace" font-size="10.00" fill="dimgray">dump_trace</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- start_redirect_to_file/2 -->
 <g id="node1" class="node">
 <title>start_redirect_to_file/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L34">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L34">
 <polygon fill="springgreen" stroke="black" points="549.5,-213 358.5,-213 358.5,-177 549.5,-177 549.5,-213"/>
 <text text-anchor="start" x="367" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="373" y="-197.2" font-family="Monospace" font-size="11.00">start_redirect_to_file/2</text>
@@ -41,7 +41,7 @@
 <!-- logtalk::message_hook/4 -->
 <g id="node3" class="node">
 <title>logtalk::message_hook/4</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48">
 <polygon fill="cornsilk" stroke="black" points="364,-95 180,-95 180,-59 364,-59 364,-95"/>
 <text text-anchor="start" x="188" y="-79.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="194" y="-79.2" font-family="Monospace" font-size="11.00">logtalk::message_hook/4</text>
@@ -55,12 +55,12 @@
 <!-- start_redirect_to_file/2&#45;&gt;logtalk::message_hook/4 -->
 <g id="edge4" class="edge">
 <title>start_redirect_to_file/2&#45;&gt;logtalk::message_hook/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="updates">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="updates">
 <path fill="none" stroke="black" d="M427.15,-176.88C395.96,-157.01 344.33,-124.1 309.27,-101.76"/>
 <polygon fill="black" stroke="black" points="309.08,-101.64 301.87,-101.78 298.96,-95.19 306.17,-95.04 309.08,-101.64"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48">
 <text text-anchor="start" x="368" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- start_redirect_to_file/2&#45;&gt;debugger::trace/0 -->
 <g id="edge1" class="edge">
 <title>start_redirect_to_file/2&#45;&gt;debugger::trace/0</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M454,-176.88C454,-158.04 454,-127.47 454,-105.3"/>
 <polygon fill="black" stroke="black" points="457.5,-105.19 454,-95.19 450.5,-105.19 457.5,-105.19"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48">
 <text text-anchor="start" x="454" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- start_redirect_to_file/2&#45;&gt;debugger::leash/1 -->
 <g id="edge2" class="edge">
 <title>start_redirect_to_file/2&#45;&gt;debugger::leash/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="calls">
 <path fill="none" stroke="black" d="M477.76,-176.88C505.58,-156.84 551.81,-123.53 582.83,-101.18"/>
 <polygon fill="black" stroke="black" points="585.08,-103.87 591.15,-95.19 580.99,-98.19 585.08,-103.87"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L48">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L48">
 <text text-anchor="start" x="539" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <!-- stop_redirect_to_file/0 -->
 <g id="node2" class="node">
 <title>stop_redirect_to_file/0</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L42">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L42">
 <polygon fill="springgreen" stroke="black" points="283,-213 99,-213 99,-177 283,-177 283,-213"/>
 <text text-anchor="start" x="107" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="113" y="-197.2" font-family="Monospace" font-size="11.00">stop_redirect_to_file/0</text>
@@ -136,12 +136,12 @@
 <!-- stop_redirect_to_file/0&#45;&gt;logtalk::message_hook/4 -->
 <g id="edge5" class="edge">
 <title>stop_redirect_to_file/0&#45;&gt;logtalk::message_hook/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L64" xlink:title="updates">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L64" xlink:title="updates">
 <path fill="none" stroke="black" d="M202.95,-176.88C216.11,-158.04 237.46,-127.47 252.93,-105.3"/>
 <polygon fill="black" stroke="black" points="253.13,-105.03 253.28,-97.82 260,-95.19 259.84,-102.4 253.13,-105.03"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L64">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L64">
 <text text-anchor="start" x="233" y="-133.8" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- stop_redirect_to_file/0&#45;&gt;debugger::reset/0 -->
 <g id="edge3" class="edge">
 <title>stop_redirect_to_file/0&#45;&gt;debugger::reset/0</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L64" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L64" xlink:title="calls">
 <path fill="none" stroke="black" d="M176.1,-176.88C159.09,-157.35 131.12,-125.23 111.7,-102.92"/>
 <polygon fill="black" stroke="black" points="114.17,-100.43 104.96,-95.19 108.89,-105.03 114.17,-100.43"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/79da40c5ff06760c1076d5e519783c0518a53628/tools/debugger/dump_trace.lgt#L64">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/af58a2b9fd12e44dbf1b2ae4f3291a3f3cce1f6b/tools/debugger/dump_trace.lgt#L64">
 <text text-anchor="start" x="143" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
