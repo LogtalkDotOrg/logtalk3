@@ -55,7 +55,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:91:0,
+		version is 1:91:1,
 		author is 'Paulo Moura',
 		date is 2022-03-10,
 		comment is 'Portable operating-system access predicates.',
@@ -765,7 +765,10 @@
 		sleep(Seconds) :-
 			number_codes(Seconds, Codes),
 			atom_codes(SecondsAtom, Codes),
-			atom_concat('sleep ', SecondsAtom, Command),
+			(	{environ('COMSPEC', _)} ->
+				atom_concat('timeout ', SecondsAtom, Command)
+			;	atom_concat('sleep ', SecondsAtom, Command)
+			),
 			{system(Command)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).

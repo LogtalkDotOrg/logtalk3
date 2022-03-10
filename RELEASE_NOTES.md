@@ -138,6 +138,9 @@ YAP to throw an exception on a non-existing directory.
 predicates for Scryer Prolog when the `double_quotes` flag is set to
 `codes`.
 
+* FIXED: Implementation of the `os::sleep/1` library predicate for B-Prolog
+when running on Windows.
+
 Tools
 -----
 
