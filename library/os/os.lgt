@@ -636,7 +636,7 @@
 			{system(Command, Status)}.
 
 		shell(Command) :-
-			{system(Command)}.
+			{system(Command, 0)}.
 
 		is_absolute_file_name(Path) :-
 			absolute_file_name(Path, Path).
