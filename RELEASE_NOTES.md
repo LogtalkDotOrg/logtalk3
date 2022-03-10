@@ -159,7 +159,7 @@ outcome assertions.
 user-defined `custom.css` file when called with the `-s` option to customize
 the Sphinx Read the Docs theme as found in the `lgt2rst.sh` Bash script.
 
-* IMPROVED: The performance pf the `ports_profiler` tool.
+* IMPROVED: The performance of the `ports_profiler` tool.
 
 * IMPROVED: The `lgtunit::run/1` predicate to print a warning on unknown tests.
 
@@ -196,6 +196,9 @@ setting the `double_quotes` flag.
 
 * ADDED: Additional test for the Prolog standard `catch/3` control construct.
 Suggested by Andrew Davison.
+
+* ADDED: Additional test for the Prolog de facto standard `(*->)/2` control
+construct. Suggested by Andrew Davison.
 
 * ADDED: Additional tests for the Prolog standard `arg/3`, `keysort/2`, and
 `=../2` predicates.

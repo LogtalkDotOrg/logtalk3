@@ -48,9 +48,9 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-12-26,
+		date is 2022-03-10,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 
@@ -126,6 +126,9 @@ condition_opaque_to_cut_3(2).
 		% try to delay the error to runtime
 		three(Three),
 		{';'('*->'(fail, true), Three)}.
+
+	test(lgt_soft_cut_2_3_21, true(L == [1,2])) :-
+		findall(X, {((X=1;X=2) *-> true ; true)}, L).
 
 	% auxiliary predicates
 
