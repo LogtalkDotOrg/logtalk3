@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:90:2,
+		version is 1:91:0,
 		author is 'Paulo Moura',
-		date is 2022-03-07,
+		date is 2022-03-10,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -582,6 +582,15 @@
 			{	absolute_file_name(File, ExpandedPath),
 				delete_file(ExpandedPath)
 			}.
+
+		:- if(predicate_property(copy_file(_,_), built_in)).
+
+			copy_file(File, Copy) :-
+				absolute_file_name(File, FilePath),
+				absolute_file_name(Copy, CopyPath),
+				{copy_file(FilePath, CopyPath)}.
+
+		:- endif.
 
 		rename_file(Old, New) :-
 			{	absolute_file_name(Old, OldPath),
@@ -2592,8 +2601,8 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == gnu; Dialect == ji; Dialect == quintus;
-			Dialect == scryer; Dialect == sicstus; Dialect == tau
+		(	Dialect == gnu, \+ predicate_property(copy_file(_,_), built_in); Dialect == ji;
+			Dialect == quintus; Dialect == scryer; Dialect == sicstus; Dialect == tau
 		)
 	)).
 
