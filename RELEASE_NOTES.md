@@ -141,6 +141,9 @@ predicates for Scryer Prolog when the `double_quotes` flag is set to
 * FIXED: Implementation of the `os` library `shell/1` and `sleep/1` library
 predicates for B-Prolog when running on Windows.
 
+* FIXED: The `os::path_concat/3` library predicate to use the
+`os::is_absolute_file_name/1` predicate to check for absolute paths.
+
 Tools
 -----
 

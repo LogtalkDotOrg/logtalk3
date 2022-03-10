@@ -55,7 +55,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:91:1,
+		version is 1:92:0,
 		author is 'Paulo Moura',
 		date is 2022-03-10,
 		comment is 'Portable operating-system access predicates.',
@@ -2312,7 +2312,7 @@
 				Path = Prefix
 			;	atom_concat(Prefix, '/', Path)
 			)
-		;	absolute_file_name(Suffix, Suffix) ->
+		;	is_absolute_file_name(Suffix) ->
 			Path = Suffix
 		;	sub_atom(Prefix, _, 1, 0, '/') ->
 			atom_concat(Prefix, Suffix, Path)
