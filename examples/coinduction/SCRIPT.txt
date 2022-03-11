@@ -135,17 +135,12 @@ Z = [1|_S1], % where
 false.
 
 | ?- Z = [1,2| Z], lists::append(X, Y, Z).
-Z = [1, 2|Z],
-X = [],
-Y = [1, 2|Z] ;
+Z = Y, Y = [1, 2|Y],
+X = [] ;
 Z = [1, 2|Z],
 X = [1],
 Y = [2|Z] ;
-Z = X, X = [1|_S1], % where
-    _S1 = [2, 1|_S1] ;
-Z = [1, 2|Z],
-X = [1, 2],
-Y = [1, 2|Z] ;
+Z = X, X = [1, 2|X] ;
 false.
 
 
@@ -167,12 +162,12 @@ false.
 
 % sorting example:
 
-?- X=[1-2,2-3,1-4|X], sorting::keysort(X, L).
+?- X = [1-2,2-3,1-4|X], sorting::keysort(X, L).
 X = [1-2, 2-3, 1-4|X],
 L = [1-2|_S1], % where
     _S1 = [1-2|_S1] .
 
-?- X=[1-2,2-3|Y], Y = [1-4|Y], sorting::keysort(X, L).
+?- X = [1-2,2-3|Y], Y = [1-4|Y], sorting::keysort(X, L).
 X = [1-2, 2-3|_S1], % where
     _S1 = [1-4|_S1],
 Y = [1-4|_S1],
