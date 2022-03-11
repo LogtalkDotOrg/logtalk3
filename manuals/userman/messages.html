@@ -216,11 +216,12 @@ defined, the message simply fails (as per the <a class="reference internal" href
 <span id="messages-broadcasting"></span><h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this headline"></a></h2>
 <p>In the Logtalk context, <em>broadcasting</em> is interpreted as the sending of
 several messages to the same object. This can be achieved by using the
-message sending method described above. However, for convenience,
-Logtalk implements an extended syntax for message sending that may
-improve program readability in some cases. This extended syntax uses the
-<code class="docutils literal notranslate"><span class="pre">(,)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs. For example, if
-we wish to send several messages to the same object, we can write:</p>
+message sending control construct described above. However, for convenience,
+Logtalk implements an extended syntax for message sending that may improve
+program readability in some cases. This extended syntax uses the <code class="docutils literal notranslate"><span class="pre">(,)/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs (plus the <code class="docutils literal notranslate"><span class="pre">(*-&gt;)/2</span></code> soft-cut
+control construct when provided by the backend Prolog compiler). For example,
+if we wish to send several messages to the same object, we can write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- Object::(Message1, Message2, ...).
 </pre></div>
 </div>

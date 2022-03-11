@@ -126,11 +126,12 @@ Broadcasting
 
 In the Logtalk context, *broadcasting* is interpreted as the sending of
 several messages to the same object. This can be achieved by using the
-message sending method described above. However, for convenience,
-Logtalk implements an extended syntax for message sending that may
-improve program readability in some cases. This extended syntax uses the
-``(,)/2``, ``(;)/2``, and ``(->)/2`` control constructs. For example, if
-we wish to send several messages to the same object, we can write:
+message sending control construct described above. However, for convenience,
+Logtalk implements an extended syntax for message sending that may improve
+program readability in some cases. This extended syntax uses the ``(,)/2``,
+``(;)/2``, and ``(->)/2`` control constructs (plus the ``(*->)/2`` soft-cut
+control construct when provided by the backend Prolog compiler). For example,
+if we wish to send several messages to the same object, we can write:
 
 .. code-block:: text
 

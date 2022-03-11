@@ -71,6 +71,9 @@ Prolog code.
 
 * UPDATED: The `packs` tool documentation on known issues.
 
+* FIXED: Mention the soft-cut control construct in the Handbook section on
+messages broadcasting.
+
 * FIXED: Portability notes in the documentation of the `format` library.
 
 * FIXED: The `settings-sample.lgt` sample code for handling third-party
