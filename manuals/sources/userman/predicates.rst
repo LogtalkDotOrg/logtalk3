@@ -1267,6 +1267,18 @@ for printing messages. Some of them are counterparts to standard Prolog
 built-in predicates that take into account Logtalk semantics. Similar to
 Prolog built-in predicates, built-in methods cannot not be redefined.
 
+.. _predicates_logic:
+
+Logic and control methods
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``!/0``, ``true/0``, ``fail/0``, ``false/0``, and ``repeat/0`` standard
+control constructs and logic predicates are interpreted as built-in public
+methods and thus can be used as messages to any object. In practice, they
+are only used as messages when sending multiple messages to the same object
+(see the section on :ref:`message broadcasting <messages_broadcasting>`).
+
+
 .. _predicates_context:
 
 Execution context methods

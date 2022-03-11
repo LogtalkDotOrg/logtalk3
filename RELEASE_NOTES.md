@@ -60,6 +60,8 @@ compilation log messages when compiling and loading Logtalk source files.
 Documentation
 -------------
 
+* ADDED: Handbook section on the logic and control built-in public methods.
+
 * ADDED: Handbook documentation for the new `catchall_catch` linter flag.
 
 * IMPROVED: Documentation of the `git` library.

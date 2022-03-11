@@ -91,6 +91,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#definite-clause-grammar-rules">Definite clause grammar rules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#built-in-methods">Built-in methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logic-and-control-methods">Logic and control methods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#execution-context-methods">Execution context methods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#error-handling-and-throwing-methods">Error handling and throwing methods</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#database-methods">Database methods</a></li>
@@ -1225,6 +1226,14 @@ inspect objects, for database handling, for term and goal expansion, and
 for printing messages. Some of them are counterparts to standard Prolog
 built-in predicates that take into account Logtalk semantics. Similar to
 Prolog built-in predicates, built-in methods cannot not be redefined.</p>
+<section id="logic-and-control-methods">
+<span id="predicates-logic"></span><h3>Logic and control methods<a class="headerlink" href="#logic-and-control-methods" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">true/0</span></code>, <code class="docutils literal notranslate"><span class="pre">fail/0</span></code>, <code class="docutils literal notranslate"><span class="pre">false/0</span></code>, and <code class="docutils literal notranslate"><span class="pre">repeat/0</span></code> standard
+control constructs and logic predicates are interpreted as built-in public
+methods and thus can be used as messages to any object. In practice, they
+are only used as messages when sending multiple messages to the same object
+(see the section on <a class="reference internal" href="messages.html#messages-broadcasting"><span class="std std-ref">message broadcasting</span></a>).</p>
+</section>
 <section id="execution-context-methods">
 <span id="predicates-context"></span><h3>Execution context methods<a class="headerlink" href="#execution-context-methods" title="Permalink to this headline"></a></h3>
 <p>Logtalk defines five built-in private methods to access an object
