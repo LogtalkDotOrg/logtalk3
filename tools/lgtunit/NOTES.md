@@ -523,9 +523,9 @@ steps. For example:
 	*     starting seed: seed(1341,12174,18263)
 	no
 
-The template can be a `::/2`, `<</2`, or `:/2` qualified callable term. When
+The template can be a `(::)/2`, `(<<)/2`, or `(:)/2` qualified callable term. When
 the template is an unqualified callable term, it will be used to construct a
-goal to be called in the context of the *sender* using the `<</2` debugging
+goal to be called in the context of the *sender* using the `(<<)/2` debugging
 control construct. Another simple example by passing a template that will
 trigger a failed test (as the `random::random/1` predicate always returns
 non-negative floats):
@@ -994,7 +994,7 @@ in a `tests` object and that the identifier of test to be debugged is `test_foo`
 
 You can also compile the code and the tests in debug mode but without using
 the `hook/1` compiler option for the tests compilation. Assuming that the
-`context_switching_calls` flag is set to `allow`, you can then use the `<</2`
+`context_switching_calls` flag is set to `allow`, you can then use the `(<<)/2`
 debugging control construct to debug the tests. For example, assuming that
 the identifier of test to be debugged is `test_foo` and that you used the
 `test/1` dialect:
@@ -1098,7 +1098,7 @@ provided by the `hook_objects` library:
 	...
 
 These workarounds may thus allow generating code coverage data also for Prolog
-code by defining tests that use the `<</2` debugging control construct to call
+code by defining tests that use the `(<<)/2` debugging control construct to call
 the Prolog predicates.
 
 See also the section below on exporting code coverage results to XML files,
@@ -1219,7 +1219,7 @@ tests object:
 The reason this is required is that the `assertion/1-2` predicates are
 declared as meta-predicates and thus assertion goals are called in the
 context of the _sender_, which would be the `lgtunit` object in the case
-of a `^^/2` call (as it preserves both _self_ and _sender_ and the tests
+of a `(^^)/2` call (as it preserves both _self_ and _sender_ and the tests
 are internally run by a message sent from the `lgtunit` object to the
 tests object).
 

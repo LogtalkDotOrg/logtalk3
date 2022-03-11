@@ -24,8 +24,8 @@ This folder contains a set of simple examples illustrating how to use B-Prolog
 constraint support with Logtalk. These examples are adapted with permission 
 from the original author, Neng-Fa Zhou.
 
-The B-Prolog `::/2` finite-domain built-in predicate clashes with the Logtalk 
-`::/2` message sending operator. The solution is to use instead the alternative
+The B-Prolog `(::)/2` finite-domain built-in predicate clashes with the Logtalk 
+`(::)/2` message sending operator. The solution is to use instead the alternative
 B-Prolog `in/2` built-in predicate.
 
 The built-in `predicate_property/2` predicate fails to report some of the 

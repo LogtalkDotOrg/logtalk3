@@ -701,12 +701,12 @@ shrink steps. For example:</p>
 no
 </pre></div>
 </div>
-<p>The template can be a <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> qualified callable
-term. When the template is an unqualified callable term, it will be used
-to construct a goal to be called in the context of the <em>sender</em> using
-the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control construct. Another simple example by
-passing a template that will trigger a failed test (as the
-<code class="docutils literal notranslate"><span class="pre">random::random/1</span></code> predicate always returns non-negative floats):</p>
+<p>The template can be a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> qualified
+callable term. When the template is an unqualified callable term, it
+will be used to construct a goal to be called in the context of the
+<em>sender</em> using the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct. Another
+simple example by passing a template that will trigger a failed test (as
+the <code class="docutils literal notranslate"><span class="pre">random::random/1</span></code> predicate always returns non-negative floats):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(random<span class="o">::</span>random(<span class="o">-</span>negative_float)).
 <span class="o">*</span>     quick check test failure (at test <span class="m">1</span> after <span class="m">0</span> shrinks)<span class="o">:</span>
 <span class="o">*</span>       random<span class="o">::</span>random(<span class="m">0.09230089279334841</span>)
@@ -1157,7 +1157,7 @@ identifier of test to be debugged is <code class="docutils literal notranslate">
 <p>You can also compile the code and the tests in debug mode but without
 using the <code class="docutils literal notranslate"><span class="pre">hook/1</span></code> compiler option for the tests compilation. Assuming
 that the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code>, you can
-then use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control construct to debug the tests.
+then use the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct to debug the tests.
 For example, assuming that the identifier of test to be debugged is
 <code class="docutils literal notranslate"><span class="pre">test_foo</span></code> and that you used the <code class="docutils literal notranslate"><span class="pre">test/1</span></code> dialect:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
@@ -1259,7 +1259,7 @@ simplify writing the tests. In alternative, we can use the
 </pre></div>
 </div>
 <p>These workarounds may thus allow generating code coverage data also for
-Prolog code by defining tests that use the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> debugging control
+Prolog code by defining tests that use the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control
 construct to call the Prolog predicates.</p>
 <p>See also the section below on exporting code coverage results to XML
 files, which can be easily converted and published as e.g. HTML reports.</p>
@@ -1406,7 +1406,7 @@ following directive to the tests object:</p>
 <p>The reason this is required is that the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates are
 declared as meta-predicates and thus assertion goals are called in the
 context of the <em>sender</em>, which would be the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object in the
-case of a <code class="docutils literal notranslate"><span class="pre">^^/2</span></code> call (as it preserves both <em>self</em> and <em>sender</em> and
+case of a <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code> call (as it preserves both <em>self</em> and <em>sender</em> and
 the tests are internally run by a message sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
 object to the tests object).</p>
 <p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-4</span></code> predicates are meta-predicates, turning on the

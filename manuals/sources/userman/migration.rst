@@ -190,7 +190,7 @@ Assuming that this is the case, apply the following steps:
    arguments that will be appended to construct a goal. Arguments which
    are not meta-arguments are represented by the ``*`` character.
 #. Convert any explicit qualified calls to module predicates to messages
-   by replacing the ``:/2`` operator with the
+   by replacing the ``(:)/2`` operator with the
    :ref:`control_send_to_object_2` message
    sending operator when the referenced modules are also being
    converted into objects. Calls in the pseudo-module ``user`` can
@@ -206,7 +206,7 @@ Assuming that this is the case, apply the following steps:
    :ref:`directives_dynamic_1` directives
    for each dynamic predicate.
 #. If your module declares or defines clauses for multifile module
-   predicates, replace the ``:/2`` functor by ``::/2`` in the
+   predicates, replace the ``(:)/2`` functor by ``(::)/2`` in the
    ``multifile/1`` directives and in the clause heads for all modules
    defining the multifile predicates that are also being converted into
    objects; if that is not the case, just keep the ``multifile/1``
@@ -484,8 +484,8 @@ to find the actual module name.
 
 Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
 in ``use_module/2`` directives used within object and categories. For
-example, the ECLiPSe IC Constraint Solvers define a ``::/2`` variable
-domain operator that clashes with the Logtalk ``::/2`` message sending
+example, the ECLiPSe IC Constraint Solvers define a ``(::)/2`` variable
+domain operator that clashes with the Logtalk ``(::)/2`` message sending
 operator. We can solve the conflict by writing:
 
 ::
@@ -493,7 +493,7 @@ operator. We can solve the conflict by writing:
    :- use_module(ic, [(::)/2 as ins/2]).
 
 With this directive, calls to the ``ins/2`` predicate alias will be
-automatically compiled by Logtalk to calls to the ``::/2`` predicate in
+automatically compiled by Logtalk to calls to the ``(::)/2`` predicate in
 the ``ic`` module.
 
 Logtalk allows you to send a message to a module in order to call one of

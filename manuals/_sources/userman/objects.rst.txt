@@ -762,7 +762,7 @@ The following object properties are supported:
 ``calls(Call, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for predicate calls made by the object (``Call``
    is either a predicate indicator or a control construct such as
-   ``::/1-2`` or ``^^/1`` with a predicate indicator as argument; note
+   ``(::)/1-2`` or ``(^^)/1`` with a predicate indicator as argument; note
    that ``Call`` may not be ground in case of a call to a control
    construct where its argument is only know at runtime; the properties
    include ``caller(Caller)``, ``alias(Alias)``, and
@@ -773,7 +773,7 @@ The following object properties are supported:
    List of :ref:`properties <grammar_entity_properties>` for dynamic predicate updates (and also access
    using the ``clause/2`` predicate) made by the object (``Predicate``
    is either a predicate indicator or a control construct such as
-   ``::/1-2`` or ``:/2`` with a predicate indicator as argument; note
+   ``(::)/1-2`` or ``(:)/2`` with a predicate indicator as argument; note
    that ``Predicate`` may not be ground in case of a control construct
    argument only know at runtime; the properties include
    ``updater(Updater)``, ``alias(Alias)``, and ``line_count(Line)`` with

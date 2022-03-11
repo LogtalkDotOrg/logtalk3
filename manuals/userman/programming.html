@@ -940,7 +940,7 @@ consequence for objects already compiled and loaded.</p>
 </dd>
 </dl>
 <span class="target" id="flag-context-switching-calls"></span><dl class="simple" id="index-36">
-<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls(Option)</span></code></dt><dd><p>Allows context switching calls (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code>) to be either allowed or
+<dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls(Option)</span></code></dt><dd><p>Allows context switching calls (<code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code>) to be either allowed or
 denied. Possible option values are <code class="docutils literal notranslate"><span class="pre">allow</span></code> and <code class="docutils literal notranslate"><span class="pre">deny</span></code>. The
 default flag vale is <code class="docutils literal notranslate"><span class="pre">allow</span></code>. Note that changing this option is of
 no consequence for objects already compiled and loaded.</p>
@@ -1168,10 +1168,10 @@ predicate allows the compiler to optimize local calls to the database
 methods (e.g. <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> and <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) that
 modify the predicate.</p>
 <p>Sending a <a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> implies <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> but
-there are often cases where <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> is misused
+there are often cases where <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> is misused
 to call an imported or inherited predicate that is never going to be
 redefined in a descendant. In these cases, a <a class="reference internal" href="../glossary.html#term-super-call"><span class="xref std std-term">super call</span></a>,
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>, can be used instead with
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a>, can be used instead with
 the benefit of often enabling static binding. Most of the guidelines for
 writing efficient Prolog code also apply to Logtalk code. In particular,
 define your predicates to take advantage of first-argument indexing. In

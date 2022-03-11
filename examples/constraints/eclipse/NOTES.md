@@ -36,7 +36,7 @@ The Constraint Solver libraries are loaded from the "loader.lgt" auxiliary
 loader file. These libraries must always be loaded prior to compilation of 
 the individual example files.
 
-We must define an alias for the ECLiPSe "ic" library operator ::/2 in order 
-to avoid conflicts with the ::/2 Logtalk message sending operator. In the 
-examples, the operator ins/2 was chosen as the alias for the ::/2 operator.
-ECLiPSE 6.0#78 adds an alias in_set_range/2 for ::/2 that could also be used.
+We must define an alias for the ECLiPSe "ic" library operator (::)/2 in order 
+to avoid conflicts with the (::)/2 Logtalk message sending operator. In the 
+examples, the operator ins/2 was chosen as the alias for the (::)/2 operator.
+ECLiPSE 6.0#78 adds an alias in_set_range/2 for (::)/2 that could also be used.

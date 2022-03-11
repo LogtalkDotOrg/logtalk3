@@ -502,7 +502,7 @@ non-public predicates, we can instead simply type:
    C = 3
    yes
 
-The ``<</2`` control construct works by switching the execution context
+The ``(<<)/2`` control construct works by switching the execution context
 to the object in the first argument and then compiling and executing the
 second argument within that context:
 
@@ -516,15 +516,15 @@ second argument within that context:
 
    yes
 
-As exemplified above, the ``<</2`` control construct allows you to call
+As exemplified above, the ``(<<)/2`` control construct allows you to call
 an object local and private predicates. However, it is important to
 stress that we are not bypassing or defeating an object predicate scope
 directives. The calls take place within the context of the specified
-object, not within the context of the object making the ``<</2`` call.
-Thus, the ``<</2`` control construct implements a form of
+object, not within the context of the object making the ``(<<)/2`` call.
+Thus, the ``(<<)/2`` control construct implements a form of
 *execution-context switching*.
 
-The availability of the ``<</2`` control construct is controlled by the
+The availability of the ``(<<)/2`` control construct is controlled by the
 :ref:`context_switching_calls <flag_context_switching_calls>` compiler
 flag (its default value is defined in the adapter files of the backend
 Prolog compilers).

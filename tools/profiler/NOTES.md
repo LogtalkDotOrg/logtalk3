@@ -57,7 +57,7 @@ SWI-Prolog, and YAP. The tool includes two files:
 Logtalk also supports the YAP tick profiler (using the latest YAP development
 version) and the SWI-Prolog XPCE profiler. When using the XPCE profiler,
 you can avoid profiling the Logtalk compiler (which is invoked e.g. when
-you use the `::/2` message-sending operator at the top-level interpreter) by
+you use the `(::)/2` message-sending operator at the top-level interpreter) by
 compiling your code with the `optimize` flag turned on:
 
 	?- set_logtalk_flag(optimize, on).

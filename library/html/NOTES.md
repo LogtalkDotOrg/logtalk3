@@ -129,7 +129,7 @@ Working with callbacks to generate content
 
 Often we need to programmatically generate HTML content from queries. In other
 cases, we may have fixed content that we don't want to keep repeating (e.g. a
-navigation bar). The library supports a `::/2` pseudo-element that sends a
+navigation bar). The library supports a `(::)/2` pseudo-element that sends a
 message to an object to retrieve content. As an example, assume the following
 predicate definition in `user`:
 

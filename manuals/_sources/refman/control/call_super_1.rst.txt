@@ -16,11 +16,11 @@
    limitations under the License.
 
 
-.. index:: pair: ^^/1; Control construct
+.. index:: pair: (^^)/1; Control construct
 .. _control_call_super_1:
 
-``^^/1``
-========
+``(^^)/1``
+==========
 
 Description
 -----------

@@ -205,7 +205,7 @@ library:
 	          source_data(on), context_switching_calls(allow)]
 	     ).
 
-In this second alternative, you can then use the `<</2` context switch
+In this second alternative, you can then use the `(<<)/2` context switch
 control construct to call the wrapped predicates. E.g.
 
 	| ?- code<<foo(X, Y).

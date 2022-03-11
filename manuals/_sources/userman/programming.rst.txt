@@ -973,7 +973,7 @@ Optional features compilation flags
 .. index:: pair: context_switching_calls; Flag
 
 ``context_switching_calls(Option)``
-   Allows context switching calls (``<</2``) to be either allowed or
+   Allows context switching calls (``(<<)/2``) to be either allowed or
    denied. Possible option values are ``allow`` and ``deny``. The
    default flag vale is ``allow``. Note that changing this option is of
    no consequence for objects already compiled and loaded.

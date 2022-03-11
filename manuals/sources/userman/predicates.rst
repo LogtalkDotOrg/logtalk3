@@ -822,7 +822,7 @@ access/update the correct definition, contained in the object receiving
 the messages. The alternative, storing the variable values in *this*,
 such that each object importing the category will have its own
 definition for the ``value_/2`` private predicate is simple: just omit
-the use of the ``::/1`` control construct in the code above.
+the use of the ``(::)/1`` control construct in the code above.
 
 A category can only contain clauses for static predicates. Nevertheless,
 as the example above illustrates, there are no restrictions in declaring
@@ -1199,10 +1199,10 @@ grammar rules for parsing determiners, nouns, and verbs. For example:
 
    :- end_category.
 
-Along with the message sending operators (``::/1``, ``::/2``, and ``^^/1``),
-we may also use other control constructs such as ``\+/1``, ``!/0``, ``;/2``,
-``->/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the ```:/2`` control construct.
+Along with the message sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``),
+we may also use other control constructs such as ``(\+)/1``, ``!/0``, ``(;)/2``,
+``(->)/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
+compiler that supports modules, we may also use the ```(:)/2`` control construct.
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
 ``phrase/3``.

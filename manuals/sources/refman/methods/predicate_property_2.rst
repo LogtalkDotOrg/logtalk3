@@ -41,7 +41,7 @@ is listed in a :ref:`directives_uses_2` or :ref:`directives_use_module_2`
 directive, properties are enumerated for the referenced object or module
 predicate.
 
-When ``Predicate`` is bound at compile time to a ``:/2`` term, this
+When ``Predicate`` is bound at compile time to a ``(:)/2`` term, this
 predicate enumerates properties for module predicates (assuming that
 the :term:`backend Prolog compiler` supports modules).
 

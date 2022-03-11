@@ -98,7 +98,7 @@ control construct:
 This control construct can only be used within objects and categories
 (in the top-level interpreter, the *sender* is always the pseudo-object
 ``user`` so using this control construct would be equivalent to use the
-``::/2`` message sending control construct).
+``(::)/2`` message sending control construct).
 
 Sending a message to *self*
 ---------------------------
@@ -143,7 +143,7 @@ This is semantically equivalent to:
 
    | ?- Object::Message1, Object::Message2, ... .
 
-This extended syntax may also be used with the ``::/1`` message sending
+This extended syntax may also be used with the ``(::)/1`` message sending
 control construct.
 
 .. _messages_super:
@@ -175,7 +175,7 @@ call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
 :term:`static binding`, this control construct allows imported and inherited
 predicates to be called with the same performance of local predicates.
-As with the message sending control constructs, the ``^^/1`` call simply
+As with the message sending control constructs, the ``(^^)/1`` call simply
 fails when the predicate is declared but not defined (as per the
 :term:`closed-world assumption`).
 
@@ -208,7 +208,7 @@ we just need to write something like:
        ...,
        % get self reference
        self(Self),
-       % send a message to self using ::/2
+       % send a message to self using (::)/2
        Self::Message,
        ... .
 
@@ -219,7 +219,7 @@ containing the predicate definition, we can write:
 
    Predicate :-
        ...,
-       % send a message to self using ::/2
+       % send a message to self using (::)/2
        % sender will be the pseudo-object user
        self(Self),
        {Self::Message},
@@ -266,10 +266,10 @@ For a detailed discussion on message sending performance, see the
    ---------------------------
    
    Logtalk supports both :term:`static binding` and :term:`dynamic binding`.
-   Static binding is used whenever messages are sent (using the ``::/2`` control
+   Static binding is used whenever messages are sent (using the ``(::)/2`` control
    construct) to static objects already loaded and with the
    :ref:`optimize <flag_optimize>` compiler flag turned on. When that is not
-   the case (or when using the ``::/1`` control construct), Logtalk uses dynamic
+   the case (or when using the ``(::)/1`` control construct), Logtalk uses dynamic
    binding coupled with a caching mechanism that avoids repeated lookups of
    predicate declarations and predicate definitions. This is a solution common
    to other programming languages supporting dynamic binding. :term:`Message
@@ -303,12 +303,12 @@ For a detailed discussion on message sending performance, see the
    calls:
    
    checking for *before* events
-      one call to the built-in predicate ``\+/1`` and a call to its
+      one call to the built-in predicate ``(\+)/1`` and a call to its
       argument, assuming that no events are defined
    method call using the cached lookup
       one call to a dynamic predicate (the cache entry)
    checking for *after* events
-      one call to the built-in predicate ``\+/1`` and a call to its
+      one call to the built-in predicate ``(\+)/1`` and a call to its
       argument, assuming that no events are defined
    
    Given that events can be dynamically defined at runtime, there is no

@@ -407,8 +407,8 @@ and <code class="docutils literal notranslate"><span class="pre">parameter/2</sp
 unification. The drawback of this second solution is that we must check
 all calls of <code class="docutils literal notranslate"><span class="pre">this/1</span></code> if we change the object name. Note that we can’t
 use these method with the message sending operators
-(<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, or
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>).</p>
+(<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, or
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a>).</p>
 <p>A third alternative to access object parameters is to use
 <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>. Although parameter variables
 introduce a concept of entity global variables, their unique syntax,
@@ -711,7 +711,7 @@ applicable); <code class="docutils literal notranslate"><span class="pre">Direct
 applicable)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code></dt><dd><p>The object supports context switching calls (i.e. can be used with
-the <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a> debugging control construct)</p>
+the <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">(&lt;&lt;)/2</span></a> debugging control construct)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">dynamic_declarations</span></code></dt><dd><p>The object supports dynamic declarations of predicates</p>
 </dd>
@@ -753,7 +753,7 @@ being the begin line of the alias directive)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for predicate calls made by the object (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
 is either a predicate indicator or a control construct such as
-<code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> with a predicate indicator as argument; note
+<code class="docutils literal notranslate"><span class="pre">(::)/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Call</span></code> may not be ground in case of a call to a control
 construct where its argument is only know at runtime; the properties
 include <code class="docutils literal notranslate"><span class="pre">caller(Caller)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and
@@ -764,7 +764,7 @@ predicate clause or directive making the call)</p>
 <dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for dynamic predicate updates (and also access
 using the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> predicate) made by the object (<code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
 is either a predicate indicator or a control construct such as
-<code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> with a predicate indicator as argument; note
+<code class="docutils literal notranslate"><span class="pre">(::)/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> may not be ground in case of a control construct
 argument only know at runtime; the properties include
 <code class="docutils literal notranslate"><span class="pre">updater(Updater)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with

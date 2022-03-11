@@ -39,7 +39,7 @@ Currently, this tool supports the profilers provided with SICStus Prolog
 Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
-invoked e.g. when you use the ``::/2`` message-sending operator at the
+invoked e.g. when you use the ``(::)/2`` message-sending operator at the
 top-level interpreter) by compiling your code with the ``optimize`` flag
 turned on:
 

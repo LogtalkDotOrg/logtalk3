@@ -817,7 +817,7 @@ code.</p>
 <span id="predicates-categories"></span><h3>Category predicates<a class="headerlink" href="#category-predicates" title="Permalink to this headline"></a></h3>
 <p>Because a category can be imported by multiple objects, dynamic private
 predicates must be called either in the context of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a>, using the
-<a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> control structure, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, or
+<a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> control structure, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, or
 in the context of <a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e. in the context of the object importing
 the category). For example, if we want to define a category implementing
 variables using destructive assignment where the variable values are stored
@@ -845,7 +845,7 @@ access/update the correct definition, contained in the object receiving
 the messages. The alternative, storing the variable values in <em>this</em>,
 such that each object importing the category will have its own
 definition for the <code class="docutils literal notranslate"><span class="pre">value_/2</span></code> private predicate is simple: just omit
-the use of the <code class="docutils literal notranslate"><span class="pre">::/1</span></code> control construct in the code above.</p>
+the use of the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> control construct in the code above.</p>
 <p>A category can only contain clauses for static predicates. Nevertheless,
 as the example above illustrates, there are no restrictions in declaring
 and calling dynamic predicates from inside a category.</p>
@@ -1169,10 +1169,10 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">::/1</span></code>, <code class="docutils literal notranslate"><span class="pre">::/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">^^/1</span></code>),
-we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">\+/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">;/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">-&gt;/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">`:/2</span></code> control construct.
+<p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">(::)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code>),
+we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. When using a backend Prolog
+compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">`(:)/2</span></code> control construct.
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
 <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>.</p>
@@ -1421,7 +1421,7 @@ built-in private meta-predicate must be used in the implementation of
 meta-predicates which work with <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> instead of goals.
 In addition, Logtalk supports the built-in private meta-predicates
 <a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a>, <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>, and
-<a class="reference internal" href="../refman/methods/not_1.html#methods-not-1"><span class="std std-ref">\\+/1</span></a>. These methods cannot be used as messages to objects.</p>
+<a class="reference internal" href="../refman/methods/not_1.html#methods-not-1"><span class="std std-ref">(\+)/1</span></a>. These methods cannot be used as messages to objects.</p>
 </section>
 <section id="all-solutions-methods">
 <span id="predicates-solutions"></span><h3>All solutions methods<a class="headerlink" href="#all-solutions-methods" title="Permalink to this headline"></a></h3>

@@ -16,11 +16,11 @@
    limitations under the License.
 
 
-.. index:: pair: <</2; Control construct
+.. index:: pair: (<<)/2; Control construct
 .. _control_context_switch_2:
 
-``<</2``
-========
+``(<<)/2``
+==========
 
 Description
 -----------
@@ -47,7 +47,7 @@ Its operational semantics is equivalent to the goal conjunction
 ``(call(Proxy), Proxy<<Goal)``. I.e. ``Proxy`` is proved within the
 context of the pseudo-object :ref:`user <objects_user>` and, if successful,
 the goal term is used as a parametric object identifier. Exceptions thrown
-when proving ``Proxy`` are handled by the ``<</2`` control construct.
+when proving ``Proxy`` are handled by the ``(<<)/2`` control construct.
 This syntax construct supports backtracking over the ``{Proxy}`` goal.
 
 Caveat: although the goal argument is fully compiled before calling,

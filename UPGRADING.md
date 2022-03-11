@@ -107,16 +107,16 @@ Deprecated directives, control constructs, and flags
 ----------------------------------------------------
 
 The `:/1` control construct is deprecated and only available up to version
-3.18.0. Its functionality is now subsumed by the `^^/1` control construct
+3.18.0. Its functionality is now subsumed by the `(^^)/1` control construct
 (aka "super" control construct), which have been generalized to allow
 calling any imported or inherited predicate. In addition, static binding
-support for the `^^/1` control construct have been implemented (enabled by
+support for the `(^^)/1` control construct have been implemented (enabled by
 turning on the `optimize` compiler flag).
 
 The documentation only directives `calls/1` and `uses/1` are deprecated and
 only available up to version 3.18.0. The reflection API in Logtalk 3.x now
 returns all object (and module) dependencies found on sufficiently instantiated
-`::/2` and `:/2` calls when compiling an object or a category.
+`(::)/2` and `(:)/2` calls when compiling an object or a category.
 
 The `alias/3` directive is deprecated and replaced by the new `alias/2`
 directive.

@@ -135,7 +135,7 @@ B-Prolog 8.1 and later versions
 
 	b.pl
 
-Note that this adapter file redefines the B-Prolog `::/2` finite-domain
+Note that this adapter file redefines the B-Prolog `(::)/2` finite-domain
 built-in predicate (you may use the alternative `in/2` built-in predicate
 instead).
 
@@ -189,14 +189,14 @@ ECLiPSe 6.1#143 or later versions
 
 	eclipse.pl
 
-There is a clash between Logtalk and ECLiPSe regarding the `::/2` operator.
-You may still use the `::/2` operator defined on the ECLiPSe constraint 
+There is a clash between Logtalk and ECLiPSe regarding the `(::)/2` operator.
+You may still use the `(::)/2` operator defined on the ECLiPSe constraint 
 solver libraries by using explicit module qualification by writing 
 `{library:(Var::Domain)}` (replace `library` by the actual library name; 
 the `{}/1` control construct allows you to bypass the Logtalk compiler).
 
-ECLiPSe defines an alias `in_set_range/2` for `::/2` that can be used to
-avoid conflicts with Logtalk `::/2` message sending operator.
+ECLiPSe defines an alias `in_set_range/2` for `(::)/2` that can be used to
+avoid conflicts with Logtalk `(::)/2` message sending operator.
 
 Adopted from an adapter file written and tested with help of Taner Bilgic 
 for Logtalk 1.x.

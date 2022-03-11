@@ -147,7 +147,7 @@ can be imported by more than one object. Thus, the calls to the built-in
 methods that handle the private dynamic predicate (such as
 <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> or <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) must be made
 either in the context of <em>self</em>, using the <em>message to self</em> control
-structure, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, or in
+structure, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, or in
 the context of <em>this</em> (i.e. in the context of the object importing the
 category). This way, we ensure that when we call one of the attribute
 predicates on an object, the intended object own definition of
@@ -189,7 +189,7 @@ straightforward. For example, if opting for storing the attributes in
 </pre></div>
 </div>
 <p>The alternative, opting for storing the attributes on <em>this</em>, is
-similar: just delete the uses of the <code class="docutils literal notranslate"><span class="pre">::/1</span></code> control structure from the
+similar: just delete the uses of the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> control structure from the
 code above.</p>
 <p>We have two new directives, <a class="reference internal" href="../refman/directives/category_1_4.html#directives-category-1-4"><span class="std std-ref">category/1-4</span></a> and
 <a class="reference internal" href="../refman/directives/end_category_0.html#directives-end-category-0"><span class="std std-ref">end_category/0</span></a>, that

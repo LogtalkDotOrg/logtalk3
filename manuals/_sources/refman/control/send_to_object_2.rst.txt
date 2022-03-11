@@ -16,11 +16,11 @@
    limitations under the License.
 
 
-.. index:: pair: ::/2; Control construct
+.. index:: pair: (::)/2; Control construct
 .. _control_send_to_object_2:
 
-``::/2``
-========
+``(::)/2``
+==========
 
 Description
 -----------
@@ -44,7 +44,7 @@ Its operational semantics is equivalent to the conjunction
 ``(call(Proxy), Proxy::Message)``. I.e. ``Proxy`` is proved
 within the context of the pseudo-object :ref:`user <objects_user>` and,
 if successful, the ``Proxy`` term is used as an object identifier.
-Exceptions thrown when proving ``Proxy`` are handled by the ``::/2``
+Exceptions thrown when proving ``Proxy`` are handled by the ``(::)/2``
 control construct. This construct construct supports backtracking over
 the ``{Proxy}`` goal.
 

@@ -105,7 +105,7 @@ straightforward. For example, if opting for storing the attributes in
    :- end_category.
 
 The alternative, opting for storing the attributes on *this*, is
-similar: just delete the uses of the ``::/1`` control structure from the
+similar: just delete the uses of the ``(::)/1`` control structure from the
 code above.
 
 We have two new directives, :ref:`directives_category_1_4` and

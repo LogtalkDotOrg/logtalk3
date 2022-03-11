@@ -546,7 +546,7 @@ unification port</p>
 </section>
 <section id="context-switching-calls">
 <span id="debugging-context"></span><h2>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Permalink to this headline"></a></h2>
-<p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">&lt;&lt;/2</span></a>,
+<p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">(&lt;&lt;)/2</span></a>,
 which allows the execution of a query within the context of an object.
 Common debugging uses include checking an object local predicates (e.g.
 predicates representing internal dynamic state) and sending a message
@@ -579,7 +579,7 @@ C = 3
 yes
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct works by switching the execution context
+<p>The <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> control construct works by switching the execution context
 to the object in the first argument and then compiling and executing the
 second argument within that context:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- broken &lt;&lt; (self(Self), sender(Sender), this(This)).
@@ -591,14 +591,14 @@ This = broken
 yes
 </pre></div>
 </div>
-<p>As exemplified above, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct allows you to call
+<p>As exemplified above, the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> control construct allows you to call
 an object local and private predicates. However, it is important to
 stress that we are not bypassing or defeating an object predicate scope
 directives. The calls take place within the context of the specified
-object, not within the context of the object making the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> call.
-Thus, the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct implements a form of
+object, not within the context of the object making the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> call.
+Thus, the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> control construct implements a form of
 <em>execution-context switching</em>.</p>
-<p>The availability of the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/2</span></code> control construct is controlled by the
+<p>The availability of the <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> control construct is controlled by the
 <a class="reference internal" href="programming.html#flag-context-switching-calls"><span class="std std-ref">context_switching_calls</span></a> compiler
 flag (its default value is defined in the adapter files of the backend
 Prolog compilers).</p>

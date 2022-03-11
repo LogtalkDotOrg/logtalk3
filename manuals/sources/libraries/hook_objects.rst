@@ -156,7 +156,7 @@ Or:
 
 The ``object_wrapper_hook`` object sets the ``context_switching_calls``
 flag to ``allow`` for the generated object. This enables calling the
-predicates using the ``<</2`` context-switching control construct. But
+predicates using the ``(<<)/2`` context-switching control construct. But
 it's usually better to define a protocol for the predicates being
 encapsulated and use instead the ``object_wrapper_hook/1-2`` objects.
 

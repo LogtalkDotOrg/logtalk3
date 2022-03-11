@@ -149,7 +149,7 @@ constructs and is neither a meta-predicate nor a coinductive predicate,
 the execution-context argument is simply passed between goals. In this
 case, with most backend Prolog virtual machines, the cost of this extra
 argument is null or negligible. When the execution-context needs to be
-accessed (e.g. to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>
+accessed (e.g. to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>
 call) there may be a small inherent overhead due to the access to the
 individual arguments of the compound term used to represent the
 execution-context.</p>
@@ -176,7 +176,7 @@ calls.</p>
 <section id="calls-to-imported-or-inherited-predicates">
 <h2>Calls to imported or inherited predicates<a class="headerlink" href="#calls-to-imported-or-inherited-predicates" title="Permalink to this headline"></a></h2>
 <p>Assuming the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on and a
-static predicate, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> calls have zero overhead
+static predicate, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> calls have zero overhead
 in terms of number of inferences.</p>
 </section>
 <section id="calls-to-module-predicates">
@@ -211,7 +211,7 @@ of globally and thus minimizing the performance impact).</p>
 does indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
 have an impact on dynamic binding performance.</p>
-<p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> calls) always
+<p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> calls) always
 use dynamic binding as the object that receives the message is only know
 at runtime.</p>
 <p>Messages sent from Prolog modules may use static binding depending on the

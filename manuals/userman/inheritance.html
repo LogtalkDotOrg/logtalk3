@@ -159,9 +159,9 @@ alternative names for inherited predicates, for solving inheritance
 conflicts, and for giving access to all inherited definitions (thus
 overriding the default search procedure).</p>
 <p>The search procedures are used when sending a message (using the
-<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a>, and
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, and
 <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> control constructs) and when making <em>super</em>
-calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control construct). The exact
+calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control construct). The exact
 details of the search procedures depend on the role played by the object
 receiving the message or making the <em>super</em> call, as explained next. The
 search procedures are also used by the <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
@@ -265,7 +265,7 @@ yes
 <span id="inheritance-specialization"></span><h3>Specializing inherited predicate definitions<a class="headerlink" href="#specializing-inherited-predicate-definitions" title="Permalink to this headline"></a></h3>
 <p>Specialization of inherited definitions: the new definition calls the
 inherited definition and makes additional calls. This is accomplished
-by calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator
+by calling the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> <em>super call</em> operator
 in the new definition. For example, assume a <code class="docutils literal notranslate"><span class="pre">init/0</span></code> predicate
 that must account for object specific initializations along the
 inheritance chain:</p>
@@ -302,7 +302,7 @@ yes
 <p>Union of the new with the inherited definitions: all the definitions are
 taken into account, the calling order being defined by the inheritance
 mechanisms. This can be accomplished by writing a clause that just calls,
-using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator, the inherited
+using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> <em>super call</em> operator, the inherited
 definitions. The relative position of this clause among the other definition
 clauses sets the calling order for the local and inherited definitions. For
 example:</p>
@@ -340,7 +340,7 @@ no
 <p>The selective inheritance of predicate definitions (also known as
 differential inheritance) is normally used in the representation
 of exceptions to inherited default definitions. We can use the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> <em>super call</em> operator to test and possibly
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> <em>super call</em> operator to test and possibly
 reject some of the inherited definitions. A common example is representing
 flightless birds:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).

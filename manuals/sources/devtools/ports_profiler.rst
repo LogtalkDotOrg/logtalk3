@@ -209,8 +209,8 @@ In alternative, use the ``object_wrapper_hook`` provided by the
              source_data(on), context_switching_calls(allow)]
         ).
 
-In this second alternative, you can then use the ``<</2`` context switch
-control construct to call the wrapped predicates. E.g.
+In this second alternative, you can then use the ``(<<)/2`` context
+switch control construct to call the wrapped predicates. E.g.
 
 ::
 

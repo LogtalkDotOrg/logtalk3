@@ -242,13 +242,13 @@ bound by the calls to the monitor event handlers.</p>
 <span id="events-generation"></span><h2>Event generation<a class="headerlink" href="#event-generation" title="Permalink to this headline"></a></h2>
 <p>Assuming that the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for
 the object (or category) sending the messages we want to observe, for each
-message that is sent using the <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control
+message that is sent using the <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> control
 construct, the runtime system automatically generates two events.
 The first — <em>before event</em> — is generated when the message is sent. The
 second — <em>after event</em> — is generated after the message has successfully
 been executed.</p>
-<p>Note that <em>self</em> messages (using the <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> control
-construct) or <em>super</em> calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control
+<p>Note that <em>self</em> messages (using the <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> control
+construct) or <em>super</em> calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control
 construct) don’t generate events.</p>
 </section>
 <section id="communicating-events-to-monitors">

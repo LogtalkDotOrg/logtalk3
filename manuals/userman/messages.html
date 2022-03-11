@@ -173,7 +173,7 @@ in the Prolog ISO standard.</p>
 <section id="sending-a-message-to-an-object">
 <span id="messages-sending"></span><h2>Sending a message to an object<a class="headerlink" href="#sending-a-message-to-an-object" title="Permalink to this headline"></a></h2>
 <p>Sending a message to an object is accomplished by using the
-<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct:</p>
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> control construct:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>, ...
 </pre></div>
 </div>
@@ -194,14 +194,14 @@ control construct:</p>
 <p>This control construct can only be used within objects and categories
 (in the top-level interpreter, the <em>sender</em> is always the pseudo-object
 <code class="docutils literal notranslate"><span class="pre">user</span></code> so using this control construct would be equivalent to use the
-<code class="docutils literal notranslate"><span class="pre">::/2</span></code> message sending control construct).</p>
+<code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending control construct).</p>
 </section>
 <section id="sending-a-message-to-self">
 <h2>Sending a message to <em>self</em><a class="headerlink" href="#sending-a-message-to-self" title="Permalink to this headline"></a></h2>
 <p>While defining a predicate, we sometimes need to send a message to
 <em>self</em>, i.e., to the same object that has received the original message.
 This is done in Logtalk through the
-<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> control construct:</p>
+<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> control construct:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="o">::</span><span class="nv">Message</span>, ....
 </pre></div>
 </div>
@@ -229,7 +229,7 @@ if we wish to send several messages to the same object, we can write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- Object::Message1, Object::Message2, ... .
 </pre></div>
 </div>
-<p>This extended syntax may also be used with the <code class="docutils literal notranslate"><span class="pre">::/1</span></code> message sending
+<p>This extended syntax may also be used with the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> message sending
 control construct.</p>
 </section>
 <section id="calling-imported-and-inherited-predicates">
@@ -237,7 +237,7 @@ control construct.</p>
 <p>When redefining a predicate, sometimes we need to call the inherited
 definition in the new code. This functionality, introduced by the
 Smalltalk language through the <code class="docutils literal notranslate"><span class="pre">super</span></code> primitive, is available in
-Logtalk using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control construct:</p>
+Logtalk using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control construct:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="o">^^</span><span class="nv">Predicate</span>, ....
 </pre></div>
 </div>
@@ -254,7 +254,7 @@ call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
 <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>, this control construct allows imported and inherited
 predicates to be called with the same performance of local predicates.
-As with the message sending control constructs, the <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> call simply
+As with the message sending control constructs, the <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code> call simply
 fails when the predicate is declared but not defined (as per the
 <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 </section>
@@ -262,12 +262,12 @@ fails when the predicate is declared but not defined (as per the
 <span id="messages-events"></span><h2>Message sending and event generation<a class="headerlink" href="#message-sending-and-event-generation" title="Permalink to this headline"></a></h2>
 <p>Assuming the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for the
 object (or category) sending a message using the
-<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">::/2</span></a> control construct, two events are generated,
+<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> control construct, two events are generated,
 one before and one after the message execution.
 Messages that are sent using the
-<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">::/1</span></a> (message to <em>self</em>)
+<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> (message to <em>self</em>)
 control construct or the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> super mechanism
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> super mechanism
 described above do not generate any events. The rationale behind this
 distinction is that messages to <em>self</em> and <em>super</em> calls are only used
 internally in the definition of methods or to execute additional
@@ -280,7 +280,7 @@ we just need to write something like:</p>
     ...,
     <span class="c">% get self reference</span>
     <span class="k">self</span>(<span class="nv">Self</span>),
-    <span class="c">% send a message to self using ::/2</span>
+    <span class="c">% send a message to self using (::)/2</span>
     <span class="nv">Self</span><span class="o">::</span><span class="nv">Message</span>,
     ... .
 </pre></div>
@@ -289,7 +289,7 @@ we just need to write something like:</p>
 containing the predicate definition, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Predicate</span> <span class="o">:-</span>
     ...,
-    <span class="c">% send a message to self using ::/2</span>
+    <span class="c">% send a message to self using (::)/2</span>
     <span class="c">% sender will be the pseudo-object user</span>
     <span class="k">self</span>(<span class="nv">Self</span>),
     <span class="k">{</span><span class="nv">Self</span><span class="o">::</span><span class="nv">Message</span><span class="k">}</span>,

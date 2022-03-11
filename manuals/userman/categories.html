@@ -216,7 +216,7 @@ of a category is needed for importing on several unrelated objects). The
 preferred way of composing several categories is by importing them into
 an object. When a category overrides a predicate defined in an extended
 category, the overridden definition can still be called by using the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a> control construct.</p>
+<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control construct.</p>
 <p>Categories cannot inherit from objects. In addition, categories cannot
 define clauses for dynamic predicates. This restriction applies because
 a category can be imported by several objects and because we cannot use
@@ -579,7 +579,7 @@ being the begin line of the alias directive)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">calls(Call,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for predicate calls made by the category (<code class="docutils literal notranslate"><span class="pre">Call</span></code>
 is either a predicate indicator or a control construct such as
-<code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">^^/1</span></code> with a predicate indicator as argument; note
+<code class="docutils literal notranslate"><span class="pre">(::)/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Call</span></code> may not be ground in case of a call to a control
 construct where its argument is only know at runtime; the properties
 include <code class="docutils literal notranslate"><span class="pre">caller(Caller)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and
@@ -590,7 +590,7 @@ predicate clause or directive making the call)</p>
 <dt><code class="docutils literal notranslate"><span class="pre">updates(Predicate,</span> <span class="pre">Properties)</span></code></dt><dd><p>List of <a class="reference internal" href="../refman/grammar.html#grammar-entity-properties"><span class="std std-ref">properties</span></a> for dynamic predicate updates (and also access
 using the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> predicate) made by the object (<code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
 is either a predicate indicator or a control construct such as
-<code class="docutils literal notranslate"><span class="pre">::/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">:/2</span></code> with a predicate indicator as argument; note
+<code class="docutils literal notranslate"><span class="pre">(::)/1-2</span></code> or <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> with a predicate indicator as argument; note
 that <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> may not be ground in case of a control construct
 argument only know at runtime; the properties include
 <code class="docutils literal notranslate"><span class="pre">updater(Updater)</span></code>, <code class="docutils literal notranslate"><span class="pre">alias(Alias)</span></code>, and <code class="docutils literal notranslate"><span class="pre">line_count(Line)</span></code> with
@@ -701,7 +701,7 @@ the category by simply sending a message to <em>self</em>. For example:</p>
 specialized/overridden in a descendant object as the predicate definition
 lookup will start from <em>self</em>.</p>
 <p>A direct call to a predicate definition found in an imported category can
-be made using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">^^/1</span></a>
+be made using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a>
 control construct. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(worker,
     <span class="k">imports</span>(output)).
