@@ -25,7 +25,8 @@
 % derived from a related question by Richard O'Keefe on the SWI-Prolog
 % mailing list on May 6, 2012
 
-:- object(dcg).
+
+:- object(library).
 
 	:- public(list//2).
 	:- meta_non_terminal(list(1, *)).
@@ -42,22 +43,26 @@
 :- end_object.
 
 
-
 :- object(client).
 
 	:- public(print/0).
 
-	print :-
-		phrase(dcg::list(print, [1,2,3]), [one, two, three]),
-		phrase(dcg::list(print, [a,b,c]), [one, two, three]).
+	:- uses(library, [
+		list//2
+	]).
 
-	print(N, [Element| Result], Result) :-
-		write(N-Element), nl.
+	print :-
+		% use implicit message sending thanks to the uses/2 directive above
+		phrase(list(print, [1,2,3]), [one, two, three]),
+		phrase(list(print, [a,b,c]), [one, two, three]).
+
+	print(N) --> [Element], {write(N-Element), nl}.
 
 	:- public(successors/2).
 
 	successors(Elements, Successors) :-
-		phrase(dcg::list(next, Successors), Elements).
+		% but we can also use explicit message sending
+		phrase(library::list(next, Successors), Elements).
 
 	next(Next, [Element| Result], Result) :-
 		Next is Element + 1.

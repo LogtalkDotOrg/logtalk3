@@ -200,7 +200,7 @@ yes
 ...
 
 
-% try the meta_non_terminal/1 + call//N example:
+% try the meta_non_terminal/1 + call//N examples:
 
 | ?- client::print.
 
@@ -210,6 +210,11 @@ yes
 a-one
 b-two
 c-three
+yes
+
+| ?- client::successors([1,2,3], Successors).
+
+Successors = [2, 3, 4]
 yes
 
 

@@ -197,6 +197,9 @@ examples to not require setting the `double_quotes` flag.
 
 * UPDATED: The `errors` example to illustrate the new `catch/3` lint check.
 
+* IMPROVED: The `dcgs` individual usage example of the `meta_non_terminal/1`
+directive.
+
 * FIXED: Float comparison in test for the `dcgs` example.
 
 Tests
