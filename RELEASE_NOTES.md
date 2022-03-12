@@ -197,6 +197,8 @@ examples to not require setting the `double_quotes` flag.
 
 * UPDATED: The `errors` example to illustrate the new `catch/3` lint check.
 
+* UPDATED: The `roots` example to use the `existence_error/2` built-in method.
+
 * IMPROVED: The `dcgs` individual usage example of the `meta_non_terminal/1`
 directive.
 

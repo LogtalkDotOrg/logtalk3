@@ -22,9 +22,9 @@
 :- category(initialization).
 
 	:- info([
-		version is 1:13:0,
+		version is 1:14:0,
 		author is 'Paulo Moura',
-		date is 2019-03-08,
+		date is 2022-03-12,
 		comment is 'Object initialization protocol.'
 	]).
 
@@ -157,8 +157,7 @@
 		process_init_options(Options).
 
 	process_init_option(_Option) :-
-		context(Context),
-		throw(error(existence_error(predicate_definition), Context)).
+		existence_error(predicate_definition, process_init_option/1).
 
 	free(Options) :-
 		valid_free_options(Options),
@@ -182,8 +181,7 @@
 		process_free_options(Options).
 
 	process_free_option(_Option) :-
-		context(Context),
-		throw(error(existence_error(predicate_definition), Context)).
+		existence_error(predicate_definition, process_free_option/1).
 
 	merge_options([], Defaults, Defaults).
 	merge_options([Option-Value| Options], Defaults, [Option-Value| Options2]) :-
