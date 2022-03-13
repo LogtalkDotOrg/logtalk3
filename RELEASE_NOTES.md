@@ -216,8 +216,8 @@ Suggested by Andrew Davison.
 * ADDED: Additional test for the Prolog de facto standard `(*->)/2` control
 construct. Suggested by Andrew Davison.
 
-* ADDED: Additional tests for the Prolog standard `arg/3`, `keysort/2`, and
-`=../2` predicates.
+* ADDED: Additional tests for the Prolog standard `arg/3`, `keysort/2`,
+`sort/2`, and `=../2` predicates.
 
 * ADDED: Additional test for the Prolog standard `findall/3` predicate after
 a bug report and discussion with Jos De Roo and José Antonio Riaza Valverde.

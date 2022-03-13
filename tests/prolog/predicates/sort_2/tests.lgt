@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-12-15,
+		date is 2022-03-13,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -99,5 +99,22 @@
 
 	test(lgt_sort_2_17, false) :-
 		{sort([2], [3])}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_sort_2_18, error(type_error(list,L))) :-
+			{L = [3,1,2| L], sort(L, _)}.
+
+	:- else.
+
+		- test(lgt_sort_2_18, error(type_error(list,L))) :-
+			% STO; Undefined.
+			{L = [3,1,2| L], sort(L, _)}.
+
+	:- endif.
 
 :- end_object.
