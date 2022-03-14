@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2022-03-08,
+		date is 2022-03-14,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -78,12 +78,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_univ_2_15, true) :-
 			{f(X) =.. [f,u(X)]}.
+
 	:- else.
+
 		- test(iso_univ_2_15, true) :-
 			% STO; Undefined
 			{f(X) =.. [f,u(X)]}.
+
 	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
@@ -132,6 +136,23 @@
 
 	test(lgt_univ_2_27, true(T == f(A,B,C))) :-
 		{L = [A,B,C], T =.. [f| L]}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_univ_2_28, true(L == [f,f(X)])) :-
+			{X = f(X), X =.. L}.
+
+	:- else.
+
+		- test(lgt_univ_2_28, true(L == [f,f(X)])) :-
+			% STO; Undefined
+			{X = f(X), X =.. L}.
+
+	:- endif.
 
 	% auxiliary predicates
 

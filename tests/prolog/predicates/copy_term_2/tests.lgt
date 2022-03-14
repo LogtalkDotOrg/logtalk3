@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-09-13,
+		date is 2022-03-14,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
 	]).
 
@@ -97,12 +97,19 @@
 			X = f(X),
 			{copy_term(foo(X,Y), foo(Z,Y))}.
 
+		test(lgt_copy_term_2_13, true((V = [_, _, _| T], V == T))) :-
+			{L = [_, _, _| L], copy_term(L, V)}.
+
 	:- else.
 
 		- test(lgt_copy_term_2_12, true(Z == X)) :-
 			% STO; Undefined
 			X = f(X),
 			{copy_term(foo(X,Y), foo(Z,Y))}.
+
+		- test(lgt_copy_term_2_13, true((V = [_, _, _| T], V == T))) :-
+			% STO; Undefined
+			{L = [_, _, _| L], copy_term(L, V)}.
 
 	:- endif.
 

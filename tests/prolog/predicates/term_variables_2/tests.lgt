@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-02-01,
+		date is 2022-03-14,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -62,12 +62,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_term_variables_2_07, subsumes([_, _], Vars)) :-
 			{term_variables(_X+Vars, Vars)}.
+
 	:- else.
+
 		- test(iso_term_variables_2_07, subsumes([_, _], Vars)) :-
 			% STO; Undefined.
 			{term_variables(_X+Vars, Vars)}.
+
 	:- endif.
 
 	% tests from the ECLiPSe test suite
@@ -85,5 +89,22 @@
 
 	test(lgt_term_variables_2_11, true(Vs == [Z])) :-
 		{term_variables([Z,Z], Vs)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_term_variables_2_12, true(Vars == [])) :-
+			{X = f(X,X), term_variables(X, Vars)}.
+
+	:- else.
+
+		- test(lgt_term_variables_2_12, true(Vars == [])) :-
+			% STO; Undefined.
+			{X = f(X,X), term_variables(X, Vars)}.
+
+	:- endif.
 
 :- end_object.
