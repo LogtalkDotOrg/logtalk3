@@ -23,6 +23,7 @@ Built-in methods
 .. toctree::
    :maxdepth: 2
 
+   logic_and_control_methods
    context_methods
    reflection_methods
    database_methods

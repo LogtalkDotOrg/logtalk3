@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fail/0 &mdash; The Logtalk Handbook v3.54.0-b02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="false/0" href="false_0.html" />
+    <link rel="prev" title="true/0" href="true_0.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> The Logtalk Handbook
+            <img src="../../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.54.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../userman/index.html">User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../grammar.html">Grammar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control/index.html">Control constructs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directives/index.html">Directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predicates/index.html">Built-in predicates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Built-in methods</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="logic_and_control_methods.html">Logic and control</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cut_0.html"><code class="docutils literal notranslate"><span class="pre">!/0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="true_0.html"><code class="docutils literal notranslate"><span class="pre">true/0</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">fail/0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="false_0.html"><code class="docutils literal notranslate"><span class="pre">false/0</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="repeat_0.html"><code class="docutils literal notranslate"><span class="pre">repeat/0</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="context_methods.html">Execution context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reflection_methods.html">Reflection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database_methods.html">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta_call_methods.html">Meta-calls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error_handling_methods.html">Error handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="solution_methods.html">All solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event_methods.html">Event handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="forwarding_methods.html">Message forwarding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dcg_methods.html">Definite clause grammar rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expansion_methods.html">Term and goal expansion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coinduction_methods.html">Coinduction hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="printing_methods.html">Message printing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Reference Manual</a> &raquo;</li>
+          <li><a href="index.html">Built-in methods</a> &raquo;</li>
+          <li><a href="logic_and_control_methods.html">Logic and control</a> &raquo;</li>
+      <li><code class="docutils literal notranslate"><span class="pre">fail/0</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/fail_0.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fail-0">
+<span id="methods-fail-0"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">fail/0</span></code><a class="headerlink" href="#fail-0" title="Permalink to this headline"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">fail</span>
+</pre></div>
+</div>
+<p>Always fails. See also the ISO Prolog standard definition. This built-in
+method is declared as a public method and can be used as a message to an
+object.</p>
+</section>
+<section id="modes-and-number-of-proofs">
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">fail</span> <span class="o">-</span> one
+</pre></div>
+</div>
+</section>
+<section id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<p>(none)</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="cut_0.html#methods-cut-0"><span class="std std-ref">!/0</span></a>,
+<a class="reference internal" href="true_0.html#methods-true-0"><span class="std std-ref">true/0</span></a>,
+<a class="reference internal" href="false_0.html#methods-false-0"><span class="std std-ref">false/0</span></a>,
+<a class="reference internal" href="repeat_0.html#methods-repeat-0"><span class="std std-ref">repeat/0</span></a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="true_0.html" class="btn btn-neutral float-left" title="true/0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="false_0.html" class="btn btn-neutral float-right" title="false/0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2022, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

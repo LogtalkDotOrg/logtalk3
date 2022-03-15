@@ -29,7 +29,7 @@ Description
 
    catch(Goal, Catcher, Recovery)
 
-Catches exceptions thrown by a goal. See the ISO Prolog standard
+Catches exceptions thrown by a goal. See also the ISO Prolog standard
 definition. This built-in meta-predicate is declared as a private method
 and thus cannot be used as a message to an object.
 
