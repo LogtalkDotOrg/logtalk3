@@ -227,6 +227,9 @@ a bug report and discussion with Jos De Roo and José Antonio Riaza Valverde.
 
 * ADDED: Additional tests for the `length/2` de facto standard predicate.
 
+* UPDATED: The tests for the `setup_call_cleanup/3` predicate to also run
+using the Scryer Prolog backend.
+
 * FIXED: Tests for the `bagof/3`, `term_variables/2`, and `write_term/3`
 standard predicates that used unification goals as assertions.
 
