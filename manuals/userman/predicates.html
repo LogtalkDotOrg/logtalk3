@@ -1228,10 +1228,11 @@ built-in predicates that take into account Logtalk semantics. Similar to
 Prolog built-in predicates, built-in methods cannot not be redefined.</p>
 <section id="logic-and-control-methods">
 <span id="predicates-logic"></span><h3>Logic and control methods<a class="headerlink" href="#logic-and-control-methods" title="Permalink to this headline"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">true/0</span></code>, <code class="docutils literal notranslate"><span class="pre">fail/0</span></code>, <code class="docutils literal notranslate"><span class="pre">false/0</span></code>, and <code class="docutils literal notranslate"><span class="pre">repeat/0</span></code> standard
-control constructs and logic predicates are interpreted as built-in public
-methods and thus can be used as messages to any object. In practice, they
-are only used as messages when sending multiple messages to the same object
+<p>The <a class="reference internal" href="../refman/methods/cut_0.html#methods-cut-0"><span class="std std-ref">!/0</span></a>, <a class="reference internal" href="../refman/methods/true_0.html#methods-true-0"><span class="std std-ref">true/0</span></a>, <a class="reference internal" href="../refman/methods/fail_0.html#methods-fail-0"><span class="std std-ref">fail/0</span></a>,
+<a class="reference internal" href="../refman/methods/false_0.html#methods-false-0"><span class="std std-ref">false/0</span></a>, and <a class="reference internal" href="../refman/methods/repeat_0.html#methods-repeat-0"><span class="std std-ref">repeat/0</span></a> standard control
+constructs and logic predicates are interpreted as built-in public methods
+and thus can be used as messages to any object. In practice, they are only
+used as messages when sending multiple messages to the same object
 (see the section on <a class="reference internal" href="messages.html#messages-broadcasting"><span class="std std-ref">message broadcasting</span></a>).</p>
 </section>
 <section id="execution-context-methods">

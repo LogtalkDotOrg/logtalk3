@@ -1272,10 +1272,11 @@ Prolog built-in predicates, built-in methods cannot not be redefined.
 Logic and control methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``!/0``, ``true/0``, ``fail/0``, ``false/0``, and ``repeat/0`` standard
-control constructs and logic predicates are interpreted as built-in public
-methods and thus can be used as messages to any object. In practice, they
-are only used as messages when sending multiple messages to the same object
+The :ref:`methods_cut_0`, :ref:`methods_true_0`, :ref:`methods_fail_0`,
+:ref:`methods_false_0`, and :ref:`methods_repeat_0` standard control
+constructs and logic predicates are interpreted as built-in public methods
+and thus can be used as messages to any object. In practice, they are only
+used as messages when sending multiple messages to the same object
 (see the section on :ref:`message broadcasting <messages_broadcasting>`).
 
 
