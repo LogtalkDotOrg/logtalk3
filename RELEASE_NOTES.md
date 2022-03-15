@@ -163,6 +163,8 @@ outcome assertions.
 
 * IMPROVED: Performance of the `ports_profiler` tool.
 
+* UPDATED: The `help` tool for the new Handbook logic and control method pages.
+
 * UPDATED: The `tutor` tool to explain compiler warnings when using the new
 `catchall_catch` linter flag.
 

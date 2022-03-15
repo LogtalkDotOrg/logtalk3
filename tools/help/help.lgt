@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:28:0,
+		version is 0:29:0,
 		author is 'Paulo Moura',
-		date is 2022-01-05,
+		date is 2022-03-15,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -317,6 +317,12 @@
 		comment is 'Provides access to the HTML documenting files describing built-in methods.',
 		argnames is ['Functor', 'Arity', 'Directory', 'Basename']
 	]).
+
+	built_in_method(!, 0, '/manuals/refman/methods/', 'cut_0.html').
+	built_in_method(true, 0, '/manuals/refman/methods/', 'true_0.html').
+	built_in_method(fail, 0, '/manuals/refman/methods/', 'fail_0.html').
+	built_in_method(false, 0, '/manuals/refman/methods/', 'false_0.html').
+	built_in_method(repeat, 0, '/manuals/refman/methods/', 'repeat_0.html').
 
 	built_in_method(parameter, 2, '/manuals/refman/methods/', 'parameter_2.html').
 	built_in_method(self, 1, '/manuals/refman/methods/', 'self_1.html').
