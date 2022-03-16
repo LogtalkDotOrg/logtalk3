@@ -241,6 +241,12 @@ unification goals as assertions.
 * FIXED: Avoid a linter warning from the `lgtunit` tool in a Unicode test for
 variable unification.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Code completion support for the new `catchall_catch` flag to the
+jEdit, SubEthaEdit, Sublime Text, TextMate, and Vim text editors.
+
 
 3.53.0 - January 20, 2022
 =========================

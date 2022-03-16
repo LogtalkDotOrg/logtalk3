@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by      Paulo Moura
-	version         1.111
+	version         1.112
 	created on      May 5, 2002
-	last revised    July 31, 2020
+	last revised    March 16, 2022
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -456,6 +456,7 @@
 			<NULL>always_true_or_false_goals</NULL>
 			<NULL>lambda_variables</NULL>
 			<NULL>suspicious_calls</NULL>
+			<NULL>catchall_catch</NULL>
 			<NULL>complements</NULL>
 			<NULL>dynamic_declarations</NULL>
 			<NULL>events</NULL>
