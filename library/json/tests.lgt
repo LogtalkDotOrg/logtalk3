@@ -20,17 +20,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests(_Collection_),
+:- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:1,
+		version is 0:13:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-02-13,
-		comment is 'Tests for different collections of JSON files and other media in JSON format.',
-		parameters is [
-			'Collection' - 'JSON files directory.'
-		]
+		date is 2022-03-18,
+		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
 	:- uses(json, [
@@ -64,6 +61,9 @@
 
 	cleanup :-
 		setup.
+
+	collection('test_files/json_org').
+	collection('test_files/simple').
 
 	test(parse_codes, true) :-
 		parse(codes([0'[, 0'1, 0']]), _Term).
@@ -111,11 +111,20 @@
 		parse(atom('[1,2,{"a":"b"}]'), Prolog),
 		generate(atom(Atom), Prolog).
 
-	test(parse_or_fail_files, true) :-
-		file_path(_Collection_, Directory),
-		directory_files(Directory, Files, [type(regular), extensions(['.json'])]),
-		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))),
+	test(parse_simple_valid_files, true) :-
+		file_path('test_files/simple', Directory),
+		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
+		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))).
+
+	test(parse_simple_invalid_files, true) :-
+		file_path('test_files/json_org', Directory),
+		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(fail_named(File, Files), assertion(File, (catch(json::parse(file(File), _), Error, true), nonvar(Error)))).
+
+	test(parse_json_org_valid_files, true) :-
+		file_path('test_files/json_org', Directory),
+		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
+		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))).
 
 	test(roundtrip_hexadecimals, true(roundtrip(File))) :-
 		^^suppress_text_output,
@@ -127,9 +136,9 @@
 	test(encode_pair_string_object, true( A == '{"a":{"b":"c"}}' ) ) :-
 		generate(atom(A), {a-{b-c}}).
 
-	test(roundtrip, true) :-
-		file_path(_Collection_, Directory),
-		directory_files(Directory, Files, [type(regular), extensions(['.json'])]),
+	test(roundtrip_simple_files, true) :-
+		file_path('test_files/simple', Directory),
+		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(roundtrip_named(File, Files), assertion(roundtrip(File))).
 
 	test(term_rountrip_compound_object, true(Term=={ vars-['SubClass', 'Comment'], unifications-[ {'SubClass'-'NodeSignal', 'Comment'-'A node signal'}, {'SubClass'-'InvariantSignal', 'Comment'-'A graph invariant signal'} ] }), [note(term(Term))]) :-
@@ -166,24 +175,18 @@
 
 	% auxiliary predicates
 
-	regular_member(Path, Files) :-
+	regular_member(File, Files) :-
 		member(File, Files),
-		\+ sub_atom(File, _Before, _Length, _After, fail),
-		\+ sub_atom(File, _Before, _Length, _After, roundtrip),
-		path_concat(_Collection_, File, FullName),
-		file_path(FullName, Path).
+		\+ sub_atom(File, _, _, _, to_fail_),
+		\+ sub_atom(File, _, _, _, roundtrip_).
 
-	fail_named(Path, Files) :-
+	fail_named(File, Files) :-
 		member(File, Files),
-		sub_atom(File, _Before, _Length, _After, fail),
-		path_concat(_Collection_, File, FullName),
-		file_path(FullName, Path).
+		\+ \+ sub_atom(File, _, _, _, to_fail_).
 
-	roundtrip_named(Path, Files) :-
+	roundtrip_named(File, Files) :-
 		member(File, Files),
-		sub_atom(File, _Before, _Length, _After, roundtrip),
-		path_concat(_Collection_, File, FullName),
-		file_path(FullName, Path).
+		\+ \+ sub_atom(File, _, _, _, roundtrip_).
 
 	roundtrip(File) :-
 		parse(file(File), Prolog), generate(codes(Codes), Prolog),

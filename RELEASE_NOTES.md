@@ -149,6 +149,8 @@ predicates for B-Prolog when running on Windows.
 * FIXED: The `os::path_concat/3` library predicate to use the
 `os::is_absolute_file_name/1` predicate to check for absolute paths.
 
+* FIXED: Tests for the `json` library to be run only once.
+
 Tools
 -----
 

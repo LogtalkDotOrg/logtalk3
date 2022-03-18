@@ -27,8 +27,5 @@
 	logtalk_load([json_protocol, json], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
-	lgtunit::run_test_sets([
-		tests('test_files/json_org'),
-		tests('test_files/simple')
-	])
+	tests::run
 )).
