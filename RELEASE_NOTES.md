@@ -221,8 +221,8 @@ Suggested by Andrew Davison.
 construct. Suggested by Andrew Davison.
 
 * ADDED: Additional tests for the Prolog standard `arg/3`, `copy_term/2`,
-`keysort/2`, `sort/2`, `unify_with_occurs_check/2`, `term_variables/2`, and
-`=../2` predicates.
+`keysort/2`, `sort/2`, `term_variables/2`, `unify_with_occurs_check/2`,
+`write_term/3`, and `(=..)/2` predicates.
 
 * ADDED: Additional test for the Prolog standard `findall/3` predicate after
 a bug report and discussion with Jos De Roo and José Antonio Riaza Valverde.
