@@ -33,7 +33,7 @@
 	:- set_logtalk_flag(lambda_variables, silent).
 
 	:- public(aa//1).
-
+	% convert between a list of tokens and a list of duplicated tokens
 	aa([]) --> [].
 	aa([X,X|Xs]) --> {X}/[[X|Y],Y]>>true, aa(Xs).
 
@@ -42,7 +42,6 @@
 	% the same functionality could be simply implemented as follows:
 
 	:- public(bb//1).
-
 	bb([]) --> [].
 	bb([X,X|Xs]) --> [X], bb(Xs).
 
