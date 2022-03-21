@@ -466,52 +466,62 @@
 
 	test(lgt_write_term_3_85, true(Assertion)) :-
 		^^set_text_output(''),
+		{writeq(+(abc(def)))},
+		^^text_output_assertion('+abc(def)', Assertion).
+
+	test(lgt_write_term_3_86, true(Assertion)) :-
+		^^set_text_output(''),
 		{writeq(-(-(abc)))},
 		^^text_output_assertion('- -abc', Assertion).
 
+	test(lgt_write_term_3_87, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(+(+(abc)))},
+		^^text_output_assertion('+ +abc', Assertion).
+
 	% check detection of invalid options
-
-	test(sics_write_term_3_86, error(instantiation_error)) :-
-		^^suppress_text_output,
-		{write_term(1, [quoted(_)])}.
-
-	test(sics_write_term_3_87, error(domain_error(write_option,quoted(fail)))) :-
-		^^suppress_text_output,
-		{write_term(1, [quoted(fail)])}.
 
 	test(sics_write_term_3_88, error(instantiation_error)) :-
 		^^suppress_text_output,
-		{write_term(1, [ignore_ops(_)])}.
+		{write_term(1, [quoted(_)])}.
 
-	test(sics_write_term_3_89, error(domain_error(write_option,ignore_ops(fail)))) :-
+	test(sics_write_term_3_89, error(domain_error(write_option,quoted(fail)))) :-
 		^^suppress_text_output,
-		{write_term(1, [ignore_ops(fail)])}.
+		{write_term(1, [quoted(fail)])}.
 
 	test(sics_write_term_3_90, error(instantiation_error)) :-
 		^^suppress_text_output,
-		{write_term(1, [numbervars(_)])}.
+		{write_term(1, [ignore_ops(_)])}.
 
-	test(sics_write_term_3_91, error(domain_error(write_option,numbervars(fail)))) :-
+	test(sics_write_term_3_91, error(domain_error(write_option,ignore_ops(fail)))) :-
 		^^suppress_text_output,
-		{write_term(1, [numbervars(fail)])}.
+		{write_term(1, [ignore_ops(fail)])}.
 
 	test(sics_write_term_3_92, error(instantiation_error)) :-
 		^^suppress_text_output,
-		{write_term(1, [variable_names(_)])}.
+		{write_term(1, [numbervars(_)])}.
 
-	test(sics_write_term_3_93, error(domain_error(write_option,variable_names(a)))) :-
+	test(sics_write_term_3_93, error(domain_error(write_option,numbervars(fail)))) :-
 		^^suppress_text_output,
-		{write_term(1, [variable_names(a)])}.
+		{write_term(1, [numbervars(fail)])}.
 
 	test(sics_write_term_3_94, error(instantiation_error)) :-
 		^^suppress_text_output,
+		{write_term(1, [variable_names(_)])}.
+
+	test(sics_write_term_3_95, error(domain_error(write_option,variable_names(a)))) :-
+		^^suppress_text_output,
+		{write_term(1, [variable_names(a)])}.
+
+	test(sics_write_term_3_96, error(instantiation_error)) :-
+		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
-	test(sics_write_term_3_95, error(instantiation_error)) :-
+	test(sics_write_term_3_97, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 
-	test(lgt_write_term_3_96, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
+	test(lgt_write_term_3_98, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|a])])}.
 
