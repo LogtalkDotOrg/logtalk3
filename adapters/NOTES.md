@@ -89,7 +89,7 @@ following table summarizes the availability of these features:
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |      yes      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |       no      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |  
-|  LVM             |       no      |       no      |      yes      |       no      |       no      |      yes      |  
+|  LVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |  
 |  Scryer Prolog   |       no      |       no      |       no      |       no      |       no      |      yes      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
@@ -249,7 +249,7 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 3.0.0 and later versions
+LVM 3.3.0 and later versions
 ----------------------------
 
 	lvm.pl
@@ -272,7 +272,7 @@ of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
 current release using version 3.5 for Windows for testing.
 
 
-Scryer Prolog 0.8.128 and later versions
+Scryer Prolog 0.9.0 and later versions
 ----------------------------------------
 
 	scryer.pl

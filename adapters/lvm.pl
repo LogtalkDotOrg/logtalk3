@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 3.2.0 and later versions
-%  Last updated on March 2, 2022
+%  Adapter file for LVM 3.3.0 and later versions
+%  Last updated on March 22, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -234,18 +234,14 @@
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(3, 2, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(3, 3, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
-'$lgt_prolog_feature'(coinduction, Status) :-
-	(	predicate_property(cyclic_term(_), built_in) ->
-		Status = supported
-	;	Status = unsupported
-	).
+'$lgt_prolog_feature'(coinduction, supported).
 '$lgt_prolog_feature'(unicode, full).
 
 

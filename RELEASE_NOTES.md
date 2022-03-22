@@ -46,7 +46,7 @@ Prolog adapter and integration files
 
 * UPDATED: The Ciao Prolog adapter file to require version 1.21.0 or later.
 
-* UPDATED: The LVM adapter file to require version 3.2.0 or later.
+* UPDATED: The LVM adapter file to require version 3.3.0 or later.
 
 * UPDATED: The Scryer Prolog adapter file to require version 0.9.0 or later.
 
