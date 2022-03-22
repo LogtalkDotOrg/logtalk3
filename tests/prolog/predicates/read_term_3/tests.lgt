@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2021-07-07,
+		date is 2022-03-22,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -227,6 +227,16 @@
 	test(lgt_read_term_3_36, error(domain_error(read_option,singletons([_|a])))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [singletons([_|a])])}.
+
+	% check detection of incomplete hexadecimal character escapes
+
+	test(lgt_read_term_3_37, error(syntax_error(_))) :-
+		^^set_text_input('\\x'),
+		{read(_)}.
+
+	test(lgt_read_term_3_38, error(syntax_error(_))) :-
+		^^set_text_input('\\x11'),
+		{read(_)}.
 
 	cleanup :-
 		^^clean_text_input,
