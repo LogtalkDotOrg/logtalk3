@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on January 7, 2020
+##   Last updated on March 22, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 #############################################################################
 
 
-git clone --depth=1 git://github.com/LogtalkDotOrg/logtalk3.git lgtclone
+git clone --depth=1 https://github.com/LogtalkDotOrg/logtalk3.git lgtclone
 version=$(sed -e 's/-stable$//' < lgtclone/VERSION.txt)
 mv lgtclone "logtalk-$version"
 

@@ -244,6 +244,11 @@ unification goals as assertions.
 * FIXED: Avoid a linter warning from the `lgtunit` tool in a Unicode test for
 variable unification.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `build_release.sh` script to use a HTTPS git clone URL.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
