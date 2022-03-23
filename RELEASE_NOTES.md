@@ -22,6 +22,21 @@ RELEASE NOTES
 =============
 
 
+3.55.0 - April ??, 2022
+=======================
+
+Documentation
+-------------
+
+* IMPROVED: Handbook sections on defining meta-predicates and grammar rules.
+
+Examples
+--------
+
+* UPDATED: The `dcgs` example to illustrate the definition and use of
+meta-non-terminals.
+
+
 3.54.0 - March 22, 2022
 =======================
 

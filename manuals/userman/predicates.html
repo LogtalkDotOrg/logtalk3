@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Predicates &mdash; The Logtalk Handbook v3.54.0 documentation</title>
+  <title>Predicates &mdash; The Logtalk Handbook v3.55.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -43,7 +43,7 @@
             <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.54.0
+                3.55.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -187,11 +187,11 @@ semantics.</p>
 <p>For practical and performance reasons, some predicate names have a fixed
 interpretation. These predicates are declared in the built-protocols.
 They are: <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>,
-declared in the <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.54.0)"><span class="xref std std-ref">expanding</span></a> protocol;
+declared in the <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.55.0)"><span class="xref std std-ref">expanding</span></a> protocol;
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, declared in the
-<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.54.0)"><span class="xref std std-ref">monitoring</span></a> protocol; and
+<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.55.0)"><span class="xref std std-ref">monitoring</span></a> protocol; and
 <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a>, declared in the
-<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.54.0)"><span class="xref std std-ref">forwarding</span></a> protocol.
+<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.55.0)"><span class="xref std std-ref">forwarding</span></a> protocol.
 By default, the compiler prints a warning when
 a definition for one of these predicates is found but the reference to
 the corresponding built-in protocol is missing.</p>
@@ -907,6 +907,24 @@ call_all([<span class="nv">Goal</span>| <span class="nv">Goals</span>]) <span cl
 corresponding argument in the meta-predicate definiton to be a
 non-variable term and instructs the compiler to look into the argument
 sub-terms for goal and closure meta-variables.</p>
+<p>When a meta-predicate calls another meta-predicate, both predicates require
+<code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives. For example, the <code class="docutils literal notranslate"><span class="pre">map/2</span></code> meta-predicate
+defined above is usually implemented by exchanging the argument order to
+take advantage of first-argument indexing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(map(<span class="m">1</span>, <span class="o">*</span>)).
+map(<span class="nv">Closure</span>, <span class="nv">List</span>) <span class="o">:-</span>
+    map_(<span class="nv">List</span>, <span class="nv">Closure</span>).
+
+<span class="p">:- </span><span class="k">meta_predicate</span>(map_(<span class="o">*</span>, <span class="m">1</span>)).
+map_([], <span class="nv">_</span>).
+map_([<span class="nv">Head</span>| <span class="nv">Tail</span>], <span class="nv">Closure</span>) <span class="o">:-</span>
+    <span class="k">call</span>(<span class="nv">Closure</span>, <span class="nv">Head</span>),
+    map_(<span class="nv">Tail</span>, <span class="nv">Closure</span>).
+</pre></div>
+</div>
+<p>Note that Logtalk, unlike most Prolog module systems, is not based on a
+predicate prefixing mechanism. Thus, the meta-argument calling context
+is not part of the meta-argument itself.</p>
 </section>
 <section id="lambda-expressions">
 <span id="predicates-lambdas"></span><h3>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this headline"></a></h3>
@@ -1067,8 +1085,8 @@ the code without changes.</p>
 </section>
 <section id="definite-clause-grammar-rules">
 <span id="predicates-dcgs"></span><h2>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Permalink to this headline"></a></h2>
-<p>Definite clause grammar rules provide a convenient notation to represent
-the rewrite rules common of most grammars in Prolog. In Logtalk,
+<p>Definite clause grammar rules (DCGs) provide a convenient notation to
+represent the rewrite rules common of most grammars in Prolog. In Logtalk,
 definite clause grammar rules can be encapsulated in objects and
 categories. Currently, the ISO/IEC WG17 group is working on a draft
 specification for a definite clause grammars Prolog standard. Therefore,
@@ -1124,11 +1142,11 @@ the corresponding scope directive would be:</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">//</span></code> infix operator used above tells the Logtalk compiler that the
-scope directive refers to a grammar rule non-terminal, not to a
-predicate. The idea is that the predicate corresponding to the
-translation of the <code class="docutils literal notranslate"><span class="pre">expr//1</span></code> non-terminal will have a number of
-arguments equal to one plus the number of additional arguments necessary
-for processing the implicit difference list of tokens.</p>
+scope directive refers to a grammar rule non-terminal, not to a predicate.
+The idea is that the predicate corresponding to the translation of the
+<code class="docutils literal notranslate"><span class="pre">expr//1</span></code> non-terminal will have a number of arguments equal to one plus
+the number of additional arguments necessary for processing the implicit
+difference list of tokens.</p>
 <p>In the body of a grammar rule, we can call rules that are inherited from
 ancestor objects, imported from categories, or contained in other
 objects. This is accomplished by using non-terminals as messages. Using
@@ -1172,7 +1190,7 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
 <p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">(::)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code>),
 we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">`(:)/2</span></code> control construct.
+compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> control construct.
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
 <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>.</p>
@@ -1205,7 +1223,12 @@ yes
 </div>
 <p>This is the expected result as the expansion of the grammar rule into a
 clause leaves the <code class="docutils literal notranslate"><span class="pre">{bar}</span></code> goal untouched, which, in turn, is converted
-into the goal <code class="docutils literal notranslate"><span class="pre">bar</span></code> when the clause is compiled.</p>
+into the goal <code class="docutils literal notranslate"><span class="pre">bar</span></code> when the clause is compiled. Note that we tested
+the <code class="docutils literal notranslate"><span class="pre">bypass::foo//0</span></code> non-terminal by calling the <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code> built-in
+method in the context of the <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> built-in object. This workaround
+is necessary due to the Prolog backend implementation of the <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>
+predicate no being aware of the Logtalk <code class="docutils literal notranslate"><span class="pre">::/2</span></code> message-sending control
+construct semantics.</p>
 <p>A grammar rule non-terminal may be declared as dynamic or discontiguous,
 as any object predicate, using the same <code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code> notation
 illustrated above for the scope directives. In addition, grammar rule

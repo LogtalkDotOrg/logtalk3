@@ -898,6 +898,27 @@ corresponding argument in the meta-predicate definiton to be a
 non-variable term and instructs the compiler to look into the argument
 sub-terms for goal and closure meta-variables.
 
+When a meta-predicate calls another meta-predicate, both predicates require
+``meta_predicate/1`` directives. For example, the ``map/2`` meta-predicate
+defined above is usually implemented by exchanging the argument order to
+take advantage of first-argument indexing:
+
+::
+
+   :- meta_predicate(map(1, *)).
+   map(Closure, List) :-
+       map_(List, Closure).
+   
+   :- meta_predicate(map_(*, 1)).
+   map_([], _).
+   map_([Head| Tail], Closure) :-
+       call(Closure, Head),
+       map_(Tail, Closure).
+
+Note that Logtalk, unlike most Prolog module systems, is not based on a
+predicate prefixing mechanism. Thus, the meta-argument calling context
+is not part of the meta-argument itself.
+
 .. _predicates_lambdas:
 
 Lambda expressions
@@ -1086,8 +1107,8 @@ the code without changes.
 Definite clause grammar rules
 -----------------------------
 
-Definite clause grammar rules provide a convenient notation to represent
-the rewrite rules common of most grammars in Prolog. In Logtalk,
+Definite clause grammar rules (DCGs) provide a convenient notation to
+represent the rewrite rules common of most grammars in Prolog. In Logtalk,
 definite clause grammar rules can be encapsulated in objects and
 categories. Currently, the ISO/IEC WG17 group is working on a draft
 specification for a definite clause grammars Prolog standard. Therefore,
@@ -1149,11 +1170,11 @@ the corresponding scope directive would be:
    :- public(expr//1). 
 
 The ``//`` infix operator used above tells the Logtalk compiler that the
-scope directive refers to a grammar rule non-terminal, not to a
-predicate. The idea is that the predicate corresponding to the
-translation of the ``expr//1`` non-terminal will have a number of
-arguments equal to one plus the number of additional arguments necessary
-for processing the implicit difference list of tokens.
+scope directive refers to a grammar rule non-terminal, not to a predicate.
+The idea is that the predicate corresponding to the translation of the
+``expr//1`` non-terminal will have a number of arguments equal to one plus
+the number of additional arguments necessary for processing the implicit
+difference list of tokens.
 
 In the body of a grammar rule, we can call rules that are inherited from
 ancestor objects, imported from categories, or contained in other
@@ -1202,7 +1223,7 @@ grammar rules for parsing determiners, nouns, and verbs. For example:
 Along with the message sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``),
 we may also use other control constructs such as ``(\+)/1``, ``!/0``, ``(;)/2``,
 ``(->)/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the ```(:)/2`` control construct.
+compiler that supports modules, we may also use the ``(:)/2`` control construct.
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
 ``phrase/3``.
@@ -1240,7 +1261,12 @@ After compiling and loading this code, we may try the following query:
 
 This is the expected result as the expansion of the grammar rule into a
 clause leaves the ``{bar}`` goal untouched, which, in turn, is converted
-into the goal ``bar`` when the clause is compiled.
+into the goal ``bar`` when the clause is compiled. Note that we tested
+the ``bypass::foo//0`` non-terminal by calling the ``phrase/3`` built-in
+method in the context of the ``logtalk`` built-in object. This workaround
+is necessary due to the Prolog backend implementation of the ``phrase/3``
+predicate no being aware of the Logtalk ``::/2`` message-sending control
+construct semantics.
 
 A grammar rule non-terminal may be declared as dynamic or discontiguous,
 as any object predicate, using the same ``Name//Arity`` notation

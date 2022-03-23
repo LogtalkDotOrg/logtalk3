@@ -3484,11 +3484,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % current Logtalk version for use with the current_logtalk_flag/2 predicate
 %
-% the last argument is an atom: 'aN' for alpha versions, 'bN' for beta
-% versions, 'rcN' for release candidates (with N being a natural number),
+% the last argument is an atom: 'aNN' for alpha versions, 'bNN' for beta
+% versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 54, 0, stable)).
+'$lgt_version_data'(logtalk(3, 55, 0, b01)).
 
 
 

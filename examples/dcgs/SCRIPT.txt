@@ -224,12 +224,12 @@ yes
 
 | ?- logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]).
 
-Duplicates == [a,a,b,b,c,c]
+Duplicates = [a,a,b,b,c,c]
 yes
 
 | ?- logtalk << phrase(lambdas::aa([a,a,b,b,c,c]), Singletons).
 
-Singletons == [a,b,c]
+Singletons = [a,b,c]
 yes
 
 
@@ -245,3 +245,11 @@ yes
 []
 Copy = [1, 2, 3, 4, 5] ;
 no
+
+
+% use a meta-non-terminal:
+
+| ?- logtalk << phrase(meta::repeat(bases::octal, 2, 4, Digits), [3,7,4,1,0,3,6], Rest).
+
+Digits = [3,7,4,1], Rest = [0,3,6]
+yes
