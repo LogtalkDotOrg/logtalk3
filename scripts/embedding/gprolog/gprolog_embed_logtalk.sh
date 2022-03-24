@@ -194,12 +194,15 @@ fi
 
 mkdir -p "$directory"
 
-if [ "$temporary" == "" ] ; then
+if [ "$temporary" != "" ] ; then
+	mkdir -p "$temporary"
+else
 	temporary=$(mktemp -d)
-	if [[ ! "$temporary" || ! -d "$temporary" ]]; then
-		echo "Could not create temporary directory!"
-		exit 1
-	fi
+fi
+
+if [[ ! "$temporary" || ! -d "$temporary" ]]; then
+	echo "Could not create temporary directory!"
+	exit 1
 fi
 
 cd "$temporary" || exit 1
