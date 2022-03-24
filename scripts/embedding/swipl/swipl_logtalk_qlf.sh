@@ -287,7 +287,7 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	swipl -g "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader')" -t "halt"
-	cat $(ls -rt "$temporary/application"/*.pl) > application.pl
+	cat $(ls -rt *.pl) > application.pl
 	swipl -g "consult('$directory/logtalk'),qcompile(application)" -t "halt"
 	mv application.qlf "$directory"
 fi
