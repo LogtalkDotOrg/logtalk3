@@ -36,6 +36,14 @@ Examples
 * UPDATED: The `dcgs` example to illustrate the definition and use of
 meta-non-terminals.
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: Embedding examples.
+
+* UPDATED: The SWI-Prolog embedding script to allow specifying the temporary
+directory to be used for intermediate files.
+
 
 3.54.0 - March 22, 2022
 =======================

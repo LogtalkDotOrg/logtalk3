@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 % create a GNU Prolog executable that includes the Logtalk compiler/runtime:
 
-$ cd $LOGTALKHOME/scripts/embedding/gprolog/
+$ cd "$LOGTALKHOME/scripts/embedding/gprolog/"
 $ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect
 $ ~/collect/logtalk
 
@@ -28,16 +28,16 @@ $ ~/collect/logtalk
 % create a GNU Prolog executable that includes the Logtalk compiler/runtime
 % and the "searching" example:
 
-$ cd $LOGTALKHOME/scripts/embedding/gprolog/
-$ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect -l ~/logtalk/examples/searching/loader.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -p ~/logtalk/paths/paths.pl
+$ cd "$LOGTALKHOME/scripts/embedding/gprolog/"
+$ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/searching/loader.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt" -p "$LOGTALKUSER/paths/paths.pl"
 $ ~/collect/logtalk
 | ?- farmer::initial_state(Initial), depth_first(10)::solve(farmer, Initial, Path), farmer::print_path(Path).
 
 
-% create a SWI-Prolog QLF files from the "spider" text adventure example:
+% create SWI-Prolog QLF files from the "spider" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/swipl/
-$ ./swipl_logtalk_qlf.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd "$LOGTALKHOME/scripts/embedding/swipl/"
+$ ./swipl_logtalk_qlf.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/spider.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt"
 $ cd ~/collect
 $ swipl -g "[logtalk, application]"
 ?- spider::start.
@@ -45,15 +45,15 @@ $ swipl -g "[logtalk, application]"
 
 % create a SWI-Prolog saved state from the "spider" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/swipl/
-$ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l ~/logtalk/examples/adventure/spider.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(spider,start)"
+$ cd "$LOGTALKHOME/scripts/embedding/swipl/"
+$ ./swipl_logtalk_qlf.sh -c -x -d "$HOME"/collect -n spider -l "$LOGTALKUSER/examples/adventure/spider.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt" -g "'::'(spider,start)"
 $ ~/collect/spider
 
 
 % create a SICStus Prolog pre-compiled version of the "sleepy" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/sicstus/
-$ ./sicstus_logtalk_po.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd "$LOGTALKHOME/scripts/embedding/sicstus/"
+$ ./sicstus_logtalk_po.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/sleepy.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt"
 $ cd ~/collect
 $ sicstus --goal "load_files(['logtalk.po','application.po'])."
 ?- sleepy::start.
@@ -61,23 +61,23 @@ $ sicstus --goal "load_files(['logtalk.po','application.po'])."
 
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/sicstus/
-$ ./sicstus_logtalk_po.sh -c -x -d "$HOME"/collect -n sleepy -l ~/logtalk/examples/adventure/sleepy.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(sleepy,start)"
+$ cd "$LOGTALKHOME/scripts/embedding/sicstus/"
+$ ./sicstus_logtalk_po.sh -c -x -d "$HOME"/collect -n sleepy -l "$LOGTALKUSER/examples/adventure/sleepy.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt" -g "'::'(sleepy,start)"
 $ cd ~/collect
 $ ./sleepy.sav
 
 
 % create a YAP saved state from the "wumpus" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/yap/
-$ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt -g "'::'(wumpus,main)"
+$ cd "$LOGTALKHOME/scripts/embedding/yap/"
+$ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt" -g "'::'(wumpus,main)"
 $ ~/collect/wumpus
 
 
 % create LVM Prolog files for embedding the "wumpus" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/lvm/
-$ ./lvm_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd "$LOGTALKHOME/scripts/embedding/lvm/"
+$ ./lvm_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt"
 $ cd ~/collect/
 $ lvmpl -f logtalk.pl -f application.pl
 ?- wumpus::main.
@@ -85,8 +85,8 @@ $ lvmpl -f logtalk.pl -f application.pl
 
 % create Trealla Prolog files for embedding the "wumpus" text adventure example:
 
-$ cd $LOGTALKHOME/scripts/embedding/trealla/
-$ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l ~/logtalk/examples/adventure/wumpus.lgt -s ~/logtalk/scripts/embedding/settings-embedding-sample.lgt
+$ cd "$LOGTALKHOME/scripts/embedding/trealla/"
+$ ./trealla_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt" -s "$LOGTALKUSER/logtalk/scripts/embedding/settings-embedding-sample.lgt"
 $ cd ~/collect/
 $ tpl -l logtalk.pl -l application.pl
 ?- wumpus::main.
