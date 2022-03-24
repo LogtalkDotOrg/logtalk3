@@ -26,7 +26,10 @@ If you're using Windows, a possible solution to run these scripts is
 to install either the
 [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/)
 or [Git for Windows](https://gitforwindows.org). Both provide access
-to a Bash shell.
+to a Bash shell. In the later case, use full paths with forward slashes
+(e.g. `C:/Users/jdoe/collect`) and without environment variables. You
+may also need to specify the temporary directory for intermediate files
+using the scripts `-t` option.
 
 These scripts allow pre-compilation of the Logtalk compiler/runtime
 and optionally of a Logtalk application. This is a common requirement
