@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on October 27, 2019
+##   Last updated on March 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.12"
+	echo "$(basename "$0") 0.13"
 	exit 0
 }
 
@@ -102,6 +102,7 @@ fi
 saved_state="false"
 goal="true"
 directory="$(pwd -P)"
+temporary=""
 name="application"
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
@@ -114,7 +115,7 @@ usage_help()
 	echo "code given its loader file. It can also generate a standalone saved state."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-x] [-d directory] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
+	echo "  $(basename "$0") [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -122,6 +123,7 @@ usage_help()
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -x also generate a standalone saved state"
 	echo "  -d directory for generated .po files (absolute path; default is current directory)"
+	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path)"
@@ -132,12 +134,13 @@ usage_help()
 	echo
 }
 
-while getopts "cxd:n:p:s:l:g:vh" option
+while getopts "cxd:t:n:p:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
 		x) saved_state="true";;
 		d) d_arg="$OPTARG";;
+		t) t_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
@@ -151,6 +154,10 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$t_arg" != "" ] ; then
+	temporary="$t_arg"
 fi
 
 if [ "$n_arg" != "" ] ; then
@@ -194,10 +201,12 @@ fi
 
 mkdir -p "$directory"
 
-temporary=$(mktemp -d)
-if [[ ! "$temporary" || ! -d "$temporary" ]]; then
-  echo "Could not create temporary directory!"
-  exit 1
+if [ "$temporary" == "" ] ; then
+	temporary=$(mktemp -d)
+	if [[ ! "$temporary" || ! -d "$temporary" ]]; then
+		echo "Could not create temporary directory!"
+		exit 1
+	fi
 fi
 
 cd "$temporary" || exit 1
@@ -264,7 +273,7 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
-	cat $(ls -rt "$temporary/application"/*.pl) > application.pl
+	cat $(ls -rt *.pl) > application.pl
 	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_prolog_flag(discontiguous_warnings,off),compile(application),save_files(application,application),halt."
 	mv application.po "$directory"
 fi

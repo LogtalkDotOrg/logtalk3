@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on October 27, 2019
+##   Last updated on March 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.12"
+	echo "$(basename "$0") 0.13"
 	exit 0
 }
 
@@ -100,6 +100,7 @@ fi
 
 # default values
 directory="$(pwd -P)"
+temporary=""
 paths="$LOGTALKHOME/paths/paths_core.pl"
 compile="false"
 
@@ -111,13 +112,14 @@ usage_help()
 	echo "given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-p paths] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -d directory for generated Prolog files (absolute path; default is current directory)"
+	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path)"
 	echo "  -l loader file for the application (absolute path)"
@@ -126,11 +128,12 @@ usage_help()
 	echo
 }
 
-while getopts "cd:p:l:s:vh" option
+while getopts "cd:t:p:l:s:vh" option
 do
 	case $option in
 		c) compile="true";;
 		d) d_arg="$OPTARG";;
+		t) t_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
@@ -142,6 +145,10 @@ done
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
+fi
+
+if [ "$t_arg" != "" ] ; then
+	temporary="$t_arg"
 fi
 
 if [ "$p_arg" != "" ] ; then
@@ -177,10 +184,12 @@ fi
 
 mkdir -p "$directory"
 
-temporary=$(mktemp -d)
-if [[ ! "$temporary" || ! -d "$temporary" ]]; then
-  echo "Could not create temporary directory!"
-  exit 1
+if [ "$temporary" == "" ] ; then
+	temporary=$(mktemp -d)
+	if [[ ! "$temporary" || ! -d "$temporary" ]]; then
+		echo "Could not create temporary directory!"
+		exit 1
+	fi
 fi
 
 cd "$temporary" || exit 1
@@ -262,7 +271,7 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	eclipse -L iso -t user -f "$directory/logtalk.eco" -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
-	cat $(ls -rt "$temporary/application"/*.pl) > application.pl
+	cat $(ls -rt *.pl) > application.pl
 	eclipse -L iso -t user -f "$directory/logtalk.eco" -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	mv application.eco "$directory"
 fi
