@@ -41,6 +41,8 @@ Tests
 
 * ADDED: Additional tests for Prolog unbounded integer arithmetic support.
 
+* ADDED: Additional test for Prolog standard `(-)/1` arithmetic function.
+
 Installers and installation scripts
 -----------------------------------
 
