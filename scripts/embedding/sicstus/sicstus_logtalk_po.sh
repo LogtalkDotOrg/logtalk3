@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on March 25, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -269,15 +269,15 @@ else
 		> logtalk.pl
 fi
 
-sicstus$extension --goal "set_prolog_flag(discontiguous_warnings,off),compile(logtalk),save_files(logtalk,logtalk),halt."
+sicstus --goal "set_prolog_flag(discontiguous_warnings,off),compile(logtalk),save_files(logtalk,logtalk),halt."
 mv logtalk.po "$directory"
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
+	sicstus --goal "load_files('$directory/logtalk.po'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
 	cat $(ls -rt *.pl) > application.pl
-	sicstus$extension --goal "load_files('$directory/logtalk.po'),set_prolog_flag(discontiguous_warnings,off),compile(application),save_files(application,application),halt."
+	sicstus --goal "load_files('$directory/logtalk.po'),set_prolog_flag(discontiguous_warnings,off),compile(application),save_files(application,application),halt."
 	mv application.po "$directory"
 fi
 
