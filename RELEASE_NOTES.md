@@ -36,6 +36,11 @@ Examples
 * UPDATED: The `dcgs` example to illustrate the definition and use of
 meta-non-terminals.
 
+Tests
+-----
+
+* ADDED: Additional tests for Prolog unbounded integer arithmetic support.
+
 Installers and installation scripts
 -----------------------------------
 

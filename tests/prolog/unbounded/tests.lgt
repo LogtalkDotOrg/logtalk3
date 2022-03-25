@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2022-01-28,
+		date is 2022-03-25,
 		comment is 'Unit tests for unbounded integer arithmetic.'
 	]).
 
@@ -403,9 +403,17 @@
 		real(Value),
 		N is round(Value).
 
+	test(lgt_unbounded_round_02, true(N == 100000000000000005366162204393472)) :-
+		real(Value),
+		N is round(Value).
+
 	% truncate/1
 
 	test(lgt_unbounded_truncate_01, true(integer(N))) :-
+		real(Value),
+		N is truncate(Value).
+
+	test(lgt_unbounded_truncate_02, true(N == 100000000000000005366162204393472)) :-
 		real(Value),
 		N is truncate(Value).
 
@@ -414,6 +422,20 @@
 	test(lgt_unbounded_ceiling_01, true(integer(N))) :-
 		real(Value),
 		N is ceiling(Value).
+
+	test(lgt_unbounded_ceiling_02, true(N == 100000000000000005366162204393472)) :-
+		real(Value),
+		N is ceiling(Value).
+
+	% floor/1
+
+	test(lgt_unbounded_floor_01, true(integer(N))) :-
+		real(Value),
+		N is floor(Value).
+
+	test(lgt_unbounded_floor_02, true(N == 100000000000000005366162204393472)) :-
+		real(Value),
+		N is floor(Value).
 
 	% number_chars/2
 
@@ -439,6 +461,9 @@
 	test(lgt_unbounded_functor_02, true(Name-Arity == t-1844674407370909797907654848955145546336677616), [condition(current_prolog_flag(max_arity, unbounded))]) :-
 		functor(Term, t, 1844674407370909797907654848955145546336677616),
 		functor(Term, Name, Arity).
+
+	test(lgt_unbounded_functor_03, error(representation_error(max_arity)), [condition((current_prolog_flag(max_arity, Bound), integer(Bound)))]) :-
+		functor(_, t, 1844674407370909797907654848955145546336677616).
 
 	% arg/3
 
