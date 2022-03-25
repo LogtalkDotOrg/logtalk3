@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2022-03-25,
 		comment is 'Unit tests for unbounded integer arithmetic.'
@@ -397,6 +397,11 @@
 		big(Value),
 		integer(Value).
 
+	test(lgt_unbounded_integer_02, true) :-
+		big(Value),
+		Negative is -Value,
+		integer(Negative).
+
 	% round/1
 
 	test(lgt_unbounded_round_01, true(integer(N))) :-
@@ -478,6 +483,9 @@
 		functor(Term, t, 1844674407370909797907654848955145546336677616),
 		arg(1844674407370909797907654848955145546336677610, Term, abc),
 		arg(1844674407370909797907654848955145546336677610, Term, Arg).
+
+	test(lgt_unbounded_arg_04, error(domain_error(not_less_than_zero, -1844674407370909797907654848955145546336677610))) :-
+		arg(-1844674407370909797907654848955145546336677610, t(1,2,3), _).
 
 	% auxiliary predicates for delaying tests to runtime
 
