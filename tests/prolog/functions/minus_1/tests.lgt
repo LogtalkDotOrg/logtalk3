@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-03-25,
+		date is 2022-03-26,
 		comment is 'Unit tests for the ISO Prolog standard (-)/1 built-in function.'
 	]).
 
@@ -60,7 +60,10 @@
 		;	true
 		).
 
-	test(lgt_minus_1_06, true((N == 42, M == -42))) :-
+	test(lgt_minus_1_06, true((N == -42))) :-
+		{N = - 42}.
+
+	test(lgt_minus_1_07, true((N == 42, M == -42))) :-
 		{N = 42, M is - N}.
 
 	% auxiliary predicates used to delay errors to runtime
