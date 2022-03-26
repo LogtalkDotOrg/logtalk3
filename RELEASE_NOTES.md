@@ -30,6 +30,12 @@ Documentation
 
 * IMPROVED: Handbook sections on defining meta-predicates and grammar rules.
 
+Library
+-------
+
+* UPDATED: The `os::copy_file/2` library predicate for Tau Prolog to use its
+native definition when available.
+
 Examples
 --------
 
