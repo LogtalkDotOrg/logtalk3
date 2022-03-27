@@ -49,6 +49,9 @@ Tests
 
 * ADDED: Additional test for Prolog standard `(-)/1` arithmetic function.
 
+* FIXED: Portability of the Prolog de facto standard `(*->)/2` control
+construct tests.
+
 Installers and installation scripts
 -----------------------------------
 
