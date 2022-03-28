@@ -474,15 +474,18 @@ Term write depth
 
 The terms written by the debugger can be quite large depending on the
 application being debugged. As described in the previous section, the
-debugger accepts a command to set the maximum write term depth for
-compound terms. This commmand requires that the used backend supports
-the non-standard but common ``write_term/3`` predicate ``max_depth/1``
-option. When the compound term being written is deeply nested, the
-sub-terms are only written up to the specified depth. For example:
+debugger accepts the ``<`` command to set the maximum write term depth
+for compound terms. This commmand requires that the used
+:term:`backend Prolog compiler` supports the non-standard but common
+``max_depth/1`` option for the ``write_term/3`` predicate. When the
+compound term being written is deeply nested, the sub-terms are only
+written up to the specified depth with the omitted sub-terms replaced
+usually by ``...``. For example:
 
 ::
 
    | ?- write_term([0,1,2,3,4,5,6,7,8,9], [max_depth(5)]).
+   
    [0,1,2,3,4|...]
    yes
 
@@ -494,11 +497,11 @@ terms without a depth limit, set it explicitly to zero if necessary.
 Custom term writing
 ~~~~~~~~~~~~~~~~~~~
 
-The implicit use of the traditional ``print/1`` predicate (via the
+The implicit use of the traditional ``print/1`` predicate (using the
 ``p`` command) and the ``portray/1`` user-defined hook predicate
-requires backend support for these predicates. See the documentation
-of the backend you intend to use for details. As an example, assuming
-the following ``portray/1`` definition:
+requires backend Prolog compiler support for these predicates. See
+the documentation of the backend you intend to use for details. As
+an example, assuming the following ``portray/1`` definition:
 
 ::
 

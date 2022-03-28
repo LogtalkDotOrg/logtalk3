@@ -33,6 +33,8 @@ tool.
 
 * IMPROVED: Handbook sections on defining meta-predicates and grammar rules.
 
+* IMPROVED: Handbook section on the `{}/1` control construct.
+
 Library
 -------
 

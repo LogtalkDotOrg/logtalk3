@@ -122,28 +122,37 @@
 <span id="index-0"></span><span id="id1"></span><h1><code class="docutils literal notranslate"><span class="pre">{}/1</span></code><a class="headerlink" href="#control-external-call-1" title="Permalink to this headline"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">{</span><span class="nv">Term</span><span class="k">}</span>
-<span class="k">{</span><span class="nv">Goal</span><span class="k">}</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">{</span><span class="nv">Goal</span><span class="k">}</span>
+<span class="k">{</span><span class="nv">Closure</span><span class="k">}</span>
+<span class="k">{</span><span class="nv">Term</span><span class="k">}</span>
 </pre></div>
 </div>
-<p>This control construct allows the programmer to bypass the Logtalk compiler.
-It can also be used to wrap a source file term (either a clause or a directive)
-to bypass the <a class="reference internal" href="../../userman/expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>. Similarly,
-it can also be used to wrap a goal to bypass the goal-expansion mechanism. When
-used to wrap a goal, it is opaque to cuts and the argument is called within
-the context of the pseudo-object <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a>. It is also possible
-to use <code class="docutils literal notranslate"><span class="pre">{Closure}</span></code> as the first argument of <a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> calls. In
-this case, <code class="docutils literal notranslate"><span class="pre">Closure</span></code> will be extended with the remaining arguments of
-the <code class="docutils literal notranslate"><span class="pre">call/2-N</span></code> call in order to construct a goal that will be called
-within the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>. It can also be used as a message to any
-object. This is useful when the message is e.g. a conjunction of
-messages, some of which being calls to Prolog built-in predicates.</p>
-<p>This control construct may also be used in place of an object identifier
-when sending a message. In this case, the result of proving its argument
-as a goal (within the context of the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>) is used as
-an object identifier in the message sending call. This feature is mainly
-used with <a class="reference internal" href="../../glossary.html#term-parametric-object"><span class="xref std std-term">parametric objects</span></a> when their
-identifiers correspond to predicates defined in <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p>
+<p>This control construct allows the programmer to bypass the Logtalk compiler
+(including its linter but not its optimizer) in multiple contexts:</p>
+<ul class="simple">
+<li><p>Calling a goal as-is (from within an object or category) in the context of
+the <a class="reference internal" href="../../userman/objects.html#objects-user"><span class="std std-ref">user</span></a> pseudo-object.</p></li>
+<li><p>Extending a closure as-is with the remaining arguments of a
+<a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/2-N</span></a> call in order to construct a goal that will
+be called within the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object.</p></li>
+<li><p>Wrapping a source file term (either a clause or a directive) or a source file
+goal to bypass the <a class="reference internal" href="../../userman/expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>.</p></li>
+<li><p>Using it in place of an object identifier when sending a message. In this
+case, its argument is proved as a goal within the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code>
+pseudo-object with the resulting term being used as an object identifier
+in the message sending goal. This feature is mainly used with
+<a class="reference internal" href="../../glossary.html#term-parametric-object"><span class="xref std std-term">parametric objects</span></a> when their identifiers
+correspond to predicates defined in <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p></li>
+<li><p>Using it as a message to an object. This is mainly useful when the message is
+e.g. a <a class="reference internal" href="../../userman/messages.html#messages-broadcasting"><span class="std std-ref">conjunction of messages</span></a>, some of which
+being calls to Prolog built-in predicates.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This control construct is opaque to cuts when used to wrap a goal (thus
+ensuring the same semantics independently of the argument being bound at
+compile time or at runtime).</p>
+</div>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
@@ -154,15 +163,6 @@ identifiers correspond to predicates defined in <code class="docutils literal no
 <section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is neither a variable nor a callable term:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Term)</span></code></div>
-<div class="line"><br /></div>
-</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Goal</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
@@ -170,21 +170,40 @@ identifiers correspond to predicates defined in <code class="docutils literal no
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Goal</span></code> is neither a variable nor a callable term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Goal)</span></code></div>
+<div class="line"><br /></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Closure</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Closure</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Closure)</span></code></div>
+<div class="line"><br /></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Term)</span></code></div>
 </div>
 </div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% bypass the compiler for the next term:</span>
-<span class="k">{</span><span class="o">:-</span> load_foreign_resource(file)<span class="k">}</span>.
-
-<span class="c">% overload the standard &lt;/2 operator:</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% overload the standard (&lt;)/2 operator by</span>
+<span class="c">% calling its standard built-in definition:</span>
 <span class="nv">N1</span><span class="o">/</span><span class="nv">D1</span> <span class="o">&lt;</span> <span class="nv">N2</span><span class="o">/</span><span class="nv">D2</span> <span class="o">:-</span>
     <span class="k">{</span><span class="nv">N1</span><span class="o">*</span><span class="nv">D2</span> <span class="o">&lt;</span> <span class="nv">N2</span><span class="o">*</span><span class="nv">D1</span><span class="k">}</span>.
 
 <span class="c">% call a closure in the context of &quot;user&quot;:</span>
 call_in_user(<span class="nv">F</span>, <span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>) <span class="o">:-</span>
     <span class="k">call</span>(<span class="k">{</span><span class="nv">F</span><span class="k">}</span>, <span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>).
+
+<span class="c">% bypass the compiler for a proprietary backend directive:</span>
+<span class="k">{</span><span class="o">:-</span> load_foreign_resource(file)<span class="k">}</span>.
 
 <span class="c">% use parametric object proxies:</span>
 | <span class="o">?-</span> <span class="k">{</span>circle(<span class="nv">Id</span>, <span class="nv">Radius</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>area(<span class="nv">Area</span>).
