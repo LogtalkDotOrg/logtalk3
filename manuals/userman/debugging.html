@@ -86,6 +86,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#tracing-program-execution">Tracing program execution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-using-spy-points">Debugging using spy points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-commands">Debugging commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-term-writing">Customizing term writing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#term-write-depth">Term write depth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-term-writing">Custom term writing</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#context-switching-calls">Context-switching calls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-messages">Debugging messages</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#meta-messages">Meta-messages</a></li>
@@ -544,6 +549,50 @@ unification port</p>
 </dd>
 </dl>
 </section>
+<section id="customizing-term-writing">
+<span id="debugging-term-write"></span><h2>Customizing term writing<a class="headerlink" href="#customizing-term-writing" title="Permalink to this headline"></a></h2>
+<p>Debugging complex applications often requires customizing term writing.
+The available options are limiting the writing depth of large compound
+terms and defining the traditional <code class="docutils literal notranslate"><span class="pre">portray/1</span></code> to define how a term
+should be printed when using the <code class="docutils literal notranslate"><span class="pre">p</span></code> command at a leashed port.</p>
+<section id="term-write-depth">
+<span id="debugging-term-write-depth"></span><h3>Term write depth<a class="headerlink" href="#term-write-depth" title="Permalink to this headline"></a></h3>
+<p>The terms written by the debugger can be quite large depending on the
+application being debugged. As described in the previous section, the
+debugger accepts a command to set the maximum write term depth for
+compound terms. This commmand requires that the used backend supports
+the non-standard but common <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate <code class="docutils literal notranslate"><span class="pre">max_depth/1</span></code>
+option. When the compound term being written is deeply nested, the
+sub-terms are only written up to the specified depth. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">write_term</span>([<span class="m">0</span>,<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>,<span class="m">4</span>,<span class="m">5</span>,<span class="m">6</span>,<span class="m">7</span>,<span class="m">8</span>,<span class="m">9</span>], [max_depth(<span class="m">5</span>)]).
+[<span class="m">0</span>,<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>,<span class="m">4</span>|...]
+yes
+</pre></div>
+</div>
+<p>The default maximum depth depends on the backend. To print compound
+terms without a depth limit, set it explicitly to zero if necessary.</p>
+</section>
+<section id="custom-term-writing">
+<span id="id2"></span><h3>Custom term writing<a class="headerlink" href="#custom-term-writing" title="Permalink to this headline"></a></h3>
+<p>The implicit use of the traditional <code class="docutils literal notranslate"><span class="pre">print/1</span></code> predicate (via the
+<code class="docutils literal notranslate"><span class="pre">p</span></code> command) and the <code class="docutils literal notranslate"><span class="pre">portray/1</span></code> user-defined hook predicate
+requires backend support for these predicates. See the documentation
+of the backend you intend to use for details. As an example, assuming
+the following <code class="docutils literal notranslate"><span class="pre">portray/1</span></code> definition:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>portray(<span class="o">e</span>(<span class="nv">V1</span>,<span class="nv">V2</span>)) <span class="o">:-</span>
+    format(<span class="s">&#39;~q ---&gt; ~q~n&#39;</span>, [<span class="nv">V1</span>,<span class="nv">V2</span>]).
+</pre></div>
+</div>
+<p>Calling the <code class="docutils literal notranslate"><span class="pre">print/1</span></code> predicate with e.g. a <code class="docutils literal notranslate"><span class="pre">e(x1,x7)</span></code> compound term
+argument will output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- print(e(x1,x7)).
+
+x1 ---&gt; x7
+yes
+</pre></div>
+</div>
+</section>
+</section>
 <section id="context-switching-calls">
 <span id="debugging-context"></span><h2>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Permalink to this headline"></a></h2>
 <p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">(&lt;&lt;)/2</span></a>,
@@ -604,7 +653,7 @@ flag (its default value is defined in the adapter files of the backend
 Prolog compilers).</p>
 </section>
 <section id="debugging-messages">
-<span id="id2"></span><h2>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline"></a></h2>
+<span id="id3"></span><h2>Debugging messages<a class="headerlink" href="#debugging-messages" title="Permalink to this headline"></a></h2>
 <p>Calls to the <a class="reference internal" href="../refman/methods/print_message_3.html#methods-print-message-3"><span class="std std-ref">logtalk::print_message/3</span></a>
 predicate where the message kind is either <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code> are
 only printed, by default, when the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> flag is turned

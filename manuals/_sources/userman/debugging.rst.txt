@@ -457,6 +457,64 @@ point for user interaction. The commands available are as follows:
 ``?`` — extended help
    prints list of command options
 
+.. _debugging_term_write:
+
+Customizing term writing
+------------------------
+
+Debugging complex applications often requires customizing term writing.
+The available options are limiting the writing depth of large compound
+terms and defining the traditional ``portray/1`` to define how a term
+should be printed when using the ``p`` command at a leashed port.
+
+.. _debugging_term_write_depth:
+
+Term write depth
+~~~~~~~~~~~~~~~~
+
+The terms written by the debugger can be quite large depending on the
+application being debugged. As described in the previous section, the
+debugger accepts a command to set the maximum write term depth for
+compound terms. This commmand requires that the used backend supports
+the non-standard but common ``write_term/3`` predicate ``max_depth/1``
+option. When the compound term being written is deeply nested, the
+sub-terms are only written up to the specified depth. For example:
+
+::
+
+   | ?- write_term([0,1,2,3,4,5,6,7,8,9], [max_depth(5)]).
+   [0,1,2,3,4|...]
+   yes
+
+The default maximum depth depends on the backend. To print compound
+terms without a depth limit, set it explicitly to zero if necessary.
+
+.. _debugging_term_write_depth:
+
+Custom term writing
+~~~~~~~~~~~~~~~~~~~
+
+The implicit use of the traditional ``print/1`` predicate (via the
+``p`` command) and the ``portray/1`` user-defined hook predicate
+requires backend support for these predicates. See the documentation
+of the backend you intend to use for details. As an example, assuming
+the following ``portray/1`` definition:
+
+::
+
+   portray(e(V1,V2)) :-
+       format('~q ---> ~q~n', [V1,V2]).
+
+Calling the ``print/1`` predicate with e.g. a ``e(x1,x7)`` compound term
+argument will output:
+
+.. code-block:: text
+
+   | ?- print(e(x1,x7)).
+
+   x1 ---> x7
+   yes
+
 .. _debugging_context:
 
 Context-switching calls

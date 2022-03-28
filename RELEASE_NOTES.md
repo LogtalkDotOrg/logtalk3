@@ -28,6 +28,9 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: Handbook section on customizing term writing when using the `debugger`
+tool.
+
 * IMPROVED: Handbook sections on defining meta-predicates and grammar rules.
 
 Library
