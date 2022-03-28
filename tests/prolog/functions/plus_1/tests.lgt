@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-23,
+		date is 2022-03-28,
 		comment is 'Unit tests for the ISO Prolog standard (+)/1 built-in function.'
 	]).
 
@@ -50,6 +50,15 @@
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is + Foo}.
+
+	test(lgt_plus_1_05, true(A == 42)) :-
+		{A is + 42}.
+
+	test(lgt_plus_1_06, true(A == -42)) :-
+		{A is + -42}.
+
+	test(lgt_plus_1_07, true((N == -42, M == -42))) :-
+		{N = -42, M is + N}.
 
 	% auxiliary predicates used to delay errors to runtime
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-22,
+		date is 2022-03-28,
 		comment is 'Unit tests for the ISO Prolog standard (+)/2 built-in function.'
 	]).
 
@@ -74,6 +74,12 @@
 	test(lgt_plus_2_09, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		current_prolog_flag(max_integer, Max),
 		{_X is Max + 1}.
+
+	test(lgt_plus_2_10, true((C == 49))) :-
+		{C is 42 + 7}.
+
+	test(lgt_plus_2_11, true((A == 42, B == 7, C == 49))) :-
+		{A = 42, B = 7, C is A + B}.
 
 	% auxiliary predicates used to delay errors to runtime
 
