@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-11-04,
+		date is 2022-03-28,
 		comment is 'Unit tests for the ISO Prolog standard (\\)/1 built-in function.'
 	]).
 
@@ -67,6 +67,10 @@
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is '\\'(Foo)}.
+
+	test(lgt_bitwise_complement_1_09, true((X == 2, Y \== 2))) :-
+		% make no assumption about the representation of negative integers
+		{X = 2, Y is \(X)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
