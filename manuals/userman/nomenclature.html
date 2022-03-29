@@ -197,10 +197,10 @@ be used to load Logtalk source files.</p>
 feature made available using a set of built-in predicates like <code class="docutils literal notranslate"><span class="pre">trace/0</span></code>
 and <code class="docutils literal notranslate"><span class="pre">spy/1</span></code>. But in Logtalk the <a class="reference internal" href="debugging.html#debugging-debugging"><span class="std std-ref">default debugger</span></a>
 is a regular application, implemented using a public
-<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection</span></a> API. This means that the debugger
+<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a>. This means that the debugger
 must be explicitly loaded (either automatically from a <a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>
-or from the top-level). It also means that the debugger can be easily
-extended or replaced by an alternative application.</p>
+at startup or from the top-level). It also means that the debugger can be
+easily extended or replaced by an alternative application.</p>
 </dd>
 <dt><strong>directive operators</strong></dt><dd><p>Some Prolog systems declare directive names as operators (e.g. <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>,
 <code class="docutils literal notranslate"><span class="pre">multifile</span></code>, …). This is not required by the ISO Prolog Core standard.
@@ -218,10 +218,12 @@ with explicit module-qualified heads.</p>
 both load the module files and declare that the (implicitly or explicitly)
 imported predicates can be used with implicit module qualification.
 But Logtalk separates entity (object, protocol, category, or module)
-predicate <em>usage</em> declarations (via <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or its own
-<a class="reference internal" href="../refman/directives/use_module_1.html#directives-use-module-1"><span class="std std-ref">use_module/1</span></a> and <a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a>
-directives) from <em>loading</em> goals, which use an explicit and disciplined
-approach with <em>loader</em> files.</p>
+predicate <em>usage</em> declarations (via <a class="reference internal" href="../refman/directives/uses_1.html#directives-uses-1"><span class="std std-ref">uses/1</span></a> and
+<a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or its own <a class="reference internal" href="../refman/directives/use_module_1.html#directives-use-module-1"><span class="std std-ref">use_module/1</span></a> and
+<a class="reference internal" href="../refman/directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directives) from <em>loading</em> goals (using the
+<a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> and <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a>
+predicates), called using an explicit and disciplined approach from
+<a class="reference internal" href="../glossary.html#term-loader-file"><span class="xref std std-term">loader files</span></a>.</p>
 </dd>
 <dt><strong>flags scope</strong></dt><dd><p>The <a class="reference internal" href="../refman/directives/set_logtalk_flag_2.html#directives-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> <strong>directive</strong> is always local
 to the entity or source file that contains it. Only calls to the
@@ -237,7 +239,8 @@ where the semantics of implicitly qualified calls is different from
 explicitly qualified calls.</p>
 </dd>
 <dt><strong>operators scope</strong></dt><dd><p>Operators declared inside an entity (object, protocol, or category) are
-local to the entity.</p>
+local to the entity. But operators defined in a source file but outside
+and entity are global for compatibility with existing Prolog code.</p>
 </dd>
 <dt><strong>predicates scope</strong></dt><dd><p>In plain Prolog, all predicates are visible. In a Prolog module, a
 predicate can be exported or local. In Logtalk, a predicate can be

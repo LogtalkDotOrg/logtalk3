@@ -98,10 +98,10 @@ found elsewhere in this Handbook.
    feature made available using a set of built-in predicates like ``trace/0``
    and ``spy/1``. But in Logtalk the :ref:`default debugger <debugging_debugging>`
    is a regular application, implemented using a public
-   :ref:`reflection <reflection_reflection>` API. This means that the debugger
+   :ref:`reflection API <reflection_reflection>`. This means that the debugger
    must be explicitly loaded (either automatically from a :term:`settings file`
-   or from the top-level). It also means that the debugger can be easily
-   extended or replaced by an alternative application.
+   at startup or from the top-level). It also means that the debugger can be
+   easily extended or replaced by an alternative application.
 
 **directive operators**
    Some Prolog systems declare directive names as operators (e.g. ``dynamic``,
@@ -122,10 +122,12 @@ found elsewhere in this Handbook.
    both load the module files and declare that the (implicitly or explicitly)
    imported predicates can be used with implicit module qualification.
    But Logtalk separates entity (object, protocol, category, or module)
-   predicate *usage* declarations (via :ref:`directives_uses_2` or its own
-   :ref:`directives_use_module_1` and :ref:`directives_use_module_2`
-   directives) from *loading* goals, which use an explicit and disciplined
-   approach with *loader* files.
+   predicate *usage* declarations (via :ref:`directives_uses_1` and
+   :ref:`directives_uses_2` or its own :ref:`directives_use_module_1` and
+   :ref:`directives_use_module_2` directives) from *loading* goals (using the
+   :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_load_2`
+   predicates), called using an explicit and disciplined approach from
+   :term:`loader files <loader file>`.
 
 **flags scope**
    The :ref:`directives_set_logtalk_flag_2` **directive** is always local
@@ -144,7 +146,8 @@ found elsewhere in this Handbook.
 
 **operators scope**
    Operators declared inside an entity (object, protocol, or category) are
-   local to the entity.
+   local to the entity. But operators defined in a source file but outside
+   and entity are global for compatibility with existing Prolog code.
 
 **predicates scope**
    In plain Prolog, all predicates are visible. In a Prolog module, a
