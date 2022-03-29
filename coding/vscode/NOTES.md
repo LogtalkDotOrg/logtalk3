@@ -19,12 +19,11 @@ ________________________________________________________________________
 
 
 DEPRECATED: For a more full featured Logtalk extension for the Visual Studio
-Code text editor see instead:
+Code text editor use instead:
 
-https://marketplace.visualstudio.com/items?itemName=arthurwang.vsc-logtalk#overview
+https://github.com/jacobfriedman/vsc-logtalk
 
 Notes for the contents of this directory follows.
-
 
 This directory contains a preliminary extension for editing Logtalk source
 files with the Visual Studio Code text editor: 

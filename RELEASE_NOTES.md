@@ -77,6 +77,11 @@ Installers and installation scripts
 to be used for intermediate files. This option is required for some backends
 when running the scripts on windows.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Documentation of the Visual Studio Code text editor Logtalk plug-in.
+
 
 3.54.0 - March 22, 2022
 =======================
