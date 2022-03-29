@@ -81,6 +81,18 @@ and labels are used to prevent creating duplicated bug reports.
 Therefore, the same labels should be used for multiple runs of the same
 tests and preserved when editing the bug reports.
 
+There are cases where we may want to postpone or temporarily disable the
+automatic creation of bug reports. E.g. a WIP branch that's known to
+break multiple tests. A solution is to define a pull/merge request
+label, e.g. ``NO_AUTO_BUG_REPORTS``, that can then be checked by the
+CI/CD workflow. For example, we can test the presence of that label to
+set a ``AUTO_BUG_REPORTS`` environment variable to either an empty
+string or a ``-b`` option and use:
+
+::
+
+   logtalk_tester.sh $AUTO_BUG_REPORTS -p ...
+
 Known issues
 ------------
 

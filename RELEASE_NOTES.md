@@ -48,6 +48,11 @@ Examples
 * UPDATED: The `dcgs` example to illustrate the definition and use of
 meta-non-terminals.
 
+Tools
+-----
+
+* IMPROVED: Documentation of the `issue_creator` tool.
+
 Tests
 -----
 

@@ -196,6 +196,16 @@ and GitLab issue trackers.</p>
 and labels are used to prevent creating duplicated bug reports.
 Therefore, the same labels should be used for multiple runs of the same
 tests and preserved when editing the bug reports.</p>
+<p>There are cases where we may want to postpone or temporarily disable the
+automatic creation of bug reports. E.g. a WIP branch that’s known to
+break multiple tests. A solution is to define a pull/merge request
+label, e.g. <code class="docutils literal notranslate"><span class="pre">NO_AUTO_BUG_REPORTS</span></code>, that can then be checked by the
+CI/CD workflow. For example, we can test the presence of that label to
+set a <code class="docutils literal notranslate"><span class="pre">AUTO_BUG_REPORTS</span></code> environment variable to either an empty
+string or a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option and use:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_tester.sh $AUTO_BUG_REPORTS -p ...
+</pre></div>
+</div>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
