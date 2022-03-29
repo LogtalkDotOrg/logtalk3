@@ -31,7 +31,8 @@ Documentation
 * ADDED: Handbook section on customizing term writing when using the `debugger`
 tool.
 
-* IMPROVED: Handbook sections on defining meta-predicates and grammar rules.
+* IMPROVED: Handbook sections on objects, inheritance, defining grammar rules,
+and defining meta-predicates.
 
 * IMPROVED: Handbook section on the `{}/1` control construct.
 

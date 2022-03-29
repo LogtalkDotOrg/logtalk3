@@ -32,7 +32,7 @@ Logtalk, defines two built-in objects, :ref:`user <apis:user/0>` and
 :ref:`logtalk <apis:logtalk/0>`, which are described at the end of this
 section.
 
-.. _objects_kind:
+.. _objects_roles:
 
 Objects, prototypes, classes, and instances
 -------------------------------------------
@@ -82,12 +82,13 @@ Classes
 ~~~~~~~
 
 Classes are used to represent abstractions of common properties of sets
-of objects. Classes provide an ideal structuring solution when you want
-to express hierarchies of abstractions or work with many similar
+of objects. Classes often provide an ideal structuring solution when you
+want to express hierarchies of abstractions or work with many similar
 objects. Classes are used indirectly through *instantiation*. Contrary
 to most object-oriented programming languages, instances can be created
 both dynamically at runtime or defined in a source file like other
-objects.
+objects. Using classes in requires defining at least one :term:`metaclass`,
+as explained below.
 
 .. _objects_defining:
 
@@ -223,7 +224,7 @@ of objects that provide the basis of a reflective system [Cointe87]_,
 
 
    % default root of the inheritance graph
-   % predicates common to all objects
+   % providing predicates common to all objects
 
    :- object(object,
        instantiates(class)).
@@ -231,7 +232,7 @@ of objects that provide the basis of a reflective system [Cointe87]_,
    :- end_object.
 
 
-   % default metaclass for all classes
+   % default metaclass for all classes providing
    % predicates common to all instantiable classes
 
    :- object(class,
@@ -242,7 +243,7 @@ of objects that provide the basis of a reflective system [Cointe87]_,
 
 
    % default metaclass for all abstract classes
-   % predicates common to all classes
+   % providing predicates common to all classes
 
    :- object(abstract_class,
        instantiates(class),
@@ -254,7 +255,7 @@ Note that with these instantiation and specialization relations,
 ``object``, ``class``, and ``abstract_class`` are, at the same time,
 classes and instances of some class. In addition, each object inherits
 its own predicates and the predicates of the other two objects without
-any inheritance loop problems.
+any inheritance loop.
 
 When a full-blown reflective system solution is not needed, the above
 scheme can be simplified by making an object an instance of itself, i.e.

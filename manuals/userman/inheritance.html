@@ -67,13 +67,13 @@
 <li class="toctree-l2"><a class="reference internal" href="predicates.html">Predicates</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Inheritance</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#protocol-inheritance">Protocol inheritance</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#search-order-for-prototype-hierarchies">Search order for prototype hierarchies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#search-order-for-class-hierarchies">Search order for class hierarchies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lookup-order-for-prototype-hierarchies">Lookup order for prototype hierarchies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lookup-order-for-class-hierarchies">Lookup order for class hierarchies</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#implementation-inheritance">Implementation inheritance</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#inheritance-implementation-prototype">Search order for prototype hierarchies</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#inheritance-implementation-class">Search order for class hierarchies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inheritance-implementation-prototype">Lookup order for prototype hierarchies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inheritance-implementation-class">Lookup order for class hierarchies</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#redefining-inherited-predicate-definitions">Redefining inherited predicate definitions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#specializing-inherited-predicate-definitions">Specializing inherited predicate definitions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#union-of-inherited-and-local-predicate-definitions">Union of inherited and local predicate definitions</a></li>
@@ -143,29 +143,32 @@
              
   <section id="inheritance">
 <span id="inheritance-inheritance"></span><h1>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline"></a></h1>
-<p>The inheritance mechanisms found on object-oriented programming
-languages allow the specialization of previously defined objects,
-avoiding the unnecessary repetition of code and allowing the definition
-of common functionality for sets of objects. In the context of logic
-programming, we can interpret inheritance as a form of <em>theory extension</em>:
-an object will virtually contain, besides its own predicates, all the
-predicates inherited from other objects that are not redefined locally.</p>
-<p>Logtalk uses a depth-first search procedure for finding predicate
-declarations and predicate definitions, as explained below. The search
-procedures locate the entities holding the <a class="reference internal" href="../glossary.html#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a>
-and the <a class="reference internal" href="../glossary.html#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> using the predicate name and arity.
-The <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive may be used for defining
-alternative names for inherited predicates, for solving inheritance
-conflicts, and for giving access to all inherited definitions (thus
-overriding the default search procedure).</p>
-<p>The search procedures are used when sending a message (using the
+<p>The inheritance mechanisms found on object-oriented programming languages
+allow the specialization of previously defined objects, avoiding the
+unnecessary repetition of code and allowing the definition of common
+functionality for sets of objects. In the context of logic programming,
+we can interpret inheritance as a form of <em>theory extension</em>: an object
+will virtually contain, besides its own predicates, all the predicates
+inherited from other objects that are not redefined locally. Inheritance
+is not, however, the only mechanism for theory extension. Logtalk also
+supports <em>composition</em> using <a class="reference internal" href="categories.html#categories-categories"><span class="std std-ref">categories</span></a>.</p>
+<p>Logtalk uses a depth-first lookup procedure for finding predicate declarations
+and predicate definitions, as explained below, when a <a class="reference internal" href="messages.html#messages-messages"><span class="std std-ref">message</span></a>
+is sent to an object. The lookup procedures locate the entity holding the
+<a class="reference internal" href="../glossary.html#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a> and the entity holding the <a class="reference internal" href="../glossary.html#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a>
+using the predicate name and arity. The <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive
+may be used for defining alternative names for inherited predicates, for
+solving inheritance conflicts, and for giving access to all inherited
+definitions (thus overriding the default lookup procedure).</p>
+<p>The lookup procedures are used when sending a message (using the
 <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, and
 <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> control constructs) and when making <em>super</em>
 calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control construct). The exact
-details of the search procedures depend on the role played by the object
-receiving the message or making the <em>super</em> call, as explained next. The
-search procedures are also used by the <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
-and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a> reflection predicates.</p>
+details of the lookup procedures depend on the <a class="reference internal" href="objects.html#objects-roles"><span class="std std-ref">role</span></a>
+played by the object receiving the message or making the <em>super</em> call, as
+explained next. The lookup procedures are also used by the
+<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>
+reflection predicates.</p>
 <section id="protocol-inheritance">
 <span id="inheritance-protocol"></span><h2>Protocol inheritance<a class="headerlink" href="#protocol-inheritance" title="Permalink to this headline"></a></h2>
 <p>Protocol inheritance refers to the inheritance of predicate declarations
@@ -173,24 +176,23 @@ and <a class="reference internal" href="../refman/methods/predicate_property_2.h
 in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
 protocols and a protocol may extend several protocols.</p>
-<section id="search-order-for-prototype-hierarchies">
-<span id="inheritance-protocol-prototype"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#search-order-for-prototype-hierarchies" title="Permalink to this headline"></a></h3>
-<p>The search order for predicate declarations is first the object, second
+<section id="lookup-order-for-prototype-hierarchies">
+<span id="inheritance-protocol-prototype"></span><h3>Lookup order for prototype hierarchies<a class="headerlink" href="#lookup-order-for-prototype-hierarchies" title="Permalink to this headline"></a></h3>
+<p>The lookup order for predicate declarations is first the object, second
 the implemented protocols (and the protocols that these may extend),
-third the imported categories (and the protocols that they may
-implement), and last the objects that the object extends. This search is
-performed in depth-first order. When an object inherits two different
-declarations for the same predicate, by default, only the first one will
-be considered.</p>
+third the imported categories (and the protocols that they may implement),
+and finally the objects that the object extends. This lookup is performed
+in depth-first order. When an object inherits two different declarations
+for the same predicate, by default, only the first one will be considered.</p>
 </section>
-<section id="search-order-for-class-hierarchies">
-<span id="inheritance-protocol-class"></span><h3>Search order for class hierarchies<a class="headerlink" href="#search-order-for-class-hierarchies" title="Permalink to this headline"></a></h3>
-<p>The search order for predicate declarations starts in the object
-classes. Following the classes declaration order, the search starts in
+<section id="lookup-order-for-class-hierarchies">
+<span id="inheritance-protocol-class"></span><h3>Lookup order for class hierarchies<a class="headerlink" href="#lookup-order-for-class-hierarchies" title="Permalink to this headline"></a></h3>
+<p>The lookup order for predicate declarations starts in the object
+classes. Following the classes declaration order, the lookup starts in
 the classes implemented protocols (and the protocols that these may
 extend), second the classes imported categories (and the protocols that
-they may implement), and last the superclasses of the object classes.
-This search is performed in depth-first order. If the object inherits
+they may implement), and finally the superclasses of the object classes.
+This lookup is performed in depth-first order. If the object inherits
 two different declarations for the same predicate, by default only the
 first one will be considered.</p>
 </section>
@@ -203,16 +205,16 @@ supports multi-inheritance of implementation: an object may import
 several categories or extend, specialize, or instantiate several
 objects.</p>
 <section id="inheritance-implementation-prototype">
-<span id="id1"></span><h3>Search order for prototype hierarchies<a class="headerlink" href="#inheritance-implementation-prototype" title="Permalink to this headline"></a></h3>
-<p>The search order for predicate definitions is similar to the search for
+<span id="id1"></span><h3>Lookup order for prototype hierarchies<a class="headerlink" href="#inheritance-implementation-prototype" title="Permalink to this headline"></a></h3>
+<p>The lookup order for predicate definitions is similar to the lookup for
 predicate declarations except that implemented protocols are ignored (as
 they can only contain predicate directives).</p>
 </section>
 <section id="inheritance-implementation-class">
-<span id="id2"></span><h3>Search order for class hierarchies<a class="headerlink" href="#inheritance-implementation-class" title="Permalink to this headline"></a></h3>
-<p>The search order for predicate definitions is similar to the search for
+<span id="id2"></span><h3>Lookup order for class hierarchies<a class="headerlink" href="#inheritance-implementation-class" title="Permalink to this headline"></a></h3>
+<p>The lookup order for predicate definitions is similar to the lookup for
 predicate declarations except that implemented protocols are ignored (as
-they can only contain predicate directives) and that the search starts
+they can only contain predicate directives) and that the lookup starts
 at the instance itself (that received the message) before proceeding, if
 no predicate definition is found there, to the instance classes and then
 to the class superclasses.</p>
@@ -433,15 +435,15 @@ used.</p>
 <p>Logtalk supports multi-inheritance by enabling an object to extend,
 instantiate, or specialize more than one object. Likewise, a protocol
 may extends multiple protocols and a category may extend multiple
-categories. In this case, the depth-first search algorithms described
+categories. In this case, the depth-first lookup algorithms described
 above traverse the list of entities per relation from left to right.
 Consider as an example the following object opening directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
     <span class="k">extends</span>((bar, baz))).
 </pre></div>
 </div>
-<p>The search will look first into the parent object <cite>bar</cite> and its related
-entities before looking into the parent object <cite>baz</cite>. The
+<p>The lookup procedure will look first into the parent object <cite>bar</cite> and
+its related entities before looking into the parent object <cite>baz</cite>. The
 <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive can always be used to
 solve multi-inheritance conflicts. It should also be noted that the
 multi-inheritance support does not affect performance when we use
@@ -459,7 +461,7 @@ their apparent capability of modeling complex situations. However, they
 include a potential for conflict between inherited definitions whose
 variety does not allow a single and satisfactory solution for all the
 cases.</p>
-<p>Until now, no solution that we might consider satisfactory for all the
+<p>No solution that we might consider satisfactory for all the
 problems presented by the multiple inheritance mechanisms has been
 found. From the simplicity of some extensions that use the Prolog search
 strategy like <a class="reference internal" href="../bibliography.html#mccabe92" id="id3"><span>[McCabe92]</span></a> or <a class="reference internal" href="../bibliography.html#moss94" id="id4"><span>[Moss94]</span></a> and to the sophisticated algorithms
