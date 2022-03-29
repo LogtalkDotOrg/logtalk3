@@ -26,8 +26,27 @@ using Inno Setup 6.0.2 Unicode (or a later version):
 The Inno Setup script, `logtalk.iss`, assumes that a checkout of the
 Logtalk repository exists in the `C:\lgt3git` directory.
 
+The default location for the Logtalk system files installation when the
+`%LOGTALKHOME%` environment variable is not defined is:
+
+- For admin users installations:
+	* `C:\Program Files (x86)\Logtalk` on 64-bit Windows
+	* `C:\Program Files\Logtalk` on 32-bit Windows
+
+- For non-admin users installations:	
+	* `%LOCALAPPDATA%\Logtalk`
+
+The default location for the Logtalk user files installation when the
+`%LOGTALKUSER%` environment variable is not defined is:
+
+- `%USERPROFILE%\Documents\Logtalk`
+
+This `%LOGTALKUSER%` directory can be re-created by re-running the
+installer and choosing the corresponding installation option or by
+running the `logtalk_user_setup.bat` script.
+
 The installer creates integration shortcuts that start Logtalk in the
-`%LOGTALKUSER` directory. You can edit the building script and change
+`%LOGTALKUSER%` directory. You can edit the building script and change
 the `Start in` setting to `%CD%`. However, this works on Windows XP
 but is ignored on Windows 7.
 

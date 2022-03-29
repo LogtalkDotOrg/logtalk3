@@ -36,6 +36,8 @@ and defining meta-predicates.
 
 * IMPROVED: Handbook section on the `{}/1` control construct.
 
+* IMPROVED: Documentation of the Windows installer.
+
 Library
 -------
 
