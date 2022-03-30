@@ -109,6 +109,11 @@
 		current_prolog_flag(max_integer, Max),
 		{_X is Max^Max}.
 
+	test(lgt_integer_power_2_19, error(evaluation_error(float_overflow))) :-
+		% try to delay the error to runtime
+		big_float(Big),
+		{_X is Big^1234567}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -116,5 +121,7 @@
 	foo(0, foo).
 	foo(1, foo(1)).
 	foo(2, foo(1,2)).
+
+	big_float(1.0e+300).
 
 :- end_object.
