@@ -105,6 +105,15 @@
 		big_float(Big),
 		{_X is '**'(Big, Big)}.
 
+	test(lgt_power_2_16, true) :-
+		% try to delay the error to runtime
+		small_float(Small),
+		catch({X is '**'(Small, 2)}, Error, true),
+		(	var(Error) ->
+			X == 0.0
+		;	subsumes_term(error(evaluation_error(underflow),_), Error)
+		).
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -116,5 +125,7 @@
 	negative(-1).
 
 	big_float(1.0e+300).
+
+	small_float(1.0e-300).
 
 :- end_object.
