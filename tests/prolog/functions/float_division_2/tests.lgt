@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-23,
+		date is 2022-03-30,
 		comment is 'Unit tests for the ISO Prolog standard (/)/2 built-in function.'
 	]).
 
@@ -79,6 +79,15 @@
 	test(lgt_float_division_2_10, true(float(X))) :-
 		{X is 4 / 2}.
 
+	test(lgt_float_division_2_11, true) :-
+		% try to delay the error to runtime
+		small_float(Small),
+		catch({X is Small / 100000}, Error, true),
+		(	var(Error) ->
+			X == 0.0
+		;	subsumes_term(error(evaluation_error(underflow),_), Error)
+		).
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -88,5 +97,7 @@
 	foo(2, foo(1,2)).
 
 	zero(0).
+
+	small_float(1.0e-320).
 
 :- end_object.
