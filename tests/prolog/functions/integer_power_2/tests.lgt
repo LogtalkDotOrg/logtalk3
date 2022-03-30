@@ -114,6 +114,16 @@
 		big_float(Big),
 		{_X is Big^1234567}.
 
+	test(lgt_integer_power_2_20, error(evaluation_error(undefined))) :-
+		% try to delay the error to runtime
+		negative(Negative),
+		{_X is Negative ^ 7.5}.
+
+	test(lgt_integer_power_2_21, error(evaluation_error(undefined))) :-
+		% try to delay the error to runtime
+		zero(Zero),
+		{_X is Zero ^ -42}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -123,5 +133,9 @@
 	foo(2, foo(1,2)).
 
 	big_float(1.0e+300).
+
+	negative(-42).
+
+	zero(0).
 
 :- end_object.
