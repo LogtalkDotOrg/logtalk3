@@ -95,7 +95,7 @@
 	test(lgt_multiplication_2_15, true) :-
 		% try to delay the error to runtime
 		small_float(Small),
-		catch({X is Small * Small}, Error, true),
+		catch({X is Small * 1.0e-6}, Error, true),
 		(	var(Error) ->
 			X == 0.0
 		;	subsumes_term(error(evaluation_error(underflow),_), Error)

@@ -76,8 +76,11 @@
 		zero(Zero),
 		{_X is 3 / Zero}.
 
-	test(lgt_float_division_2_10, true(float(X))) :-
-		{X is 4 / 2}.
+	test(lgt_float_division_2_10, error(evaluation_error(float_overflow))) :-
+		% try to delay the error to runtime
+		big_float(Big),
+		small_float(Small),
+		{_X is Big / Small}.
 
 	test(lgt_float_division_2_11, true) :-
 		% try to delay the error to runtime
@@ -88,6 +91,15 @@
 		;	subsumes_term(error(evaluation_error(underflow),_), Error)
 		).
 
+	test(lgt_float_division_2_12, true(X == 6.25)) :-
+		{X is 12.5 / 2}.
+
+	test(lgt_float_division_2_13, true(float(X))) :-
+		{X is 4 / 2}.
+
+	test(lgt_float_division_2_14, true(X == 2.0)) :-
+		{X is 4 / 2}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -97,6 +109,8 @@
 	foo(2, foo(1,2)).
 
 	zero(0).
+
+	big_float(1.0e+300).
 
 	small_float(1.0e-320).
 
