@@ -43,81 +43,76 @@ foo(X) :- call(X), call(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-10-20,
+		date is 2022-03-30,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.9.3.4
 
-	succeeds(iso_retract_1_01) :-
+	test(iso_retract_1_01, true) :-
 		{retract(legs(octopus, 8))}.
 
-	fails(iso_retract_1_02) :-
+	test(iso_retract_1_02, false) :-
 		{retract(legs(spider, 6))}.
 
-	succeeds(iso_retract_1_03) :-
-		{retract((legs(X, 2) :- T))},
-		T == bird(X).
+	test(iso_retract_1_03, true(T == bird(X))) :-
+		{retract((legs(X, 2) :- T))}.
 
-	succeeds(iso_retract_1_04) :-
-		findall(X-Y-Z, {retract((legs(X,Y) :- Z))}, L),
-		^^variant(L, [A-4-animal(A), B-6-insect(B), spider-8-true]).
+	test(iso_retract_1_04, variant(L, [A-4-animal(A), B-6-insect(B), spider-8-true])) :-
+		findall(X-Y-Z, {retract((legs(X,Y) :- Z))}, L).
 
-	fails(iso_retract_1_05) :-
+	test(iso_retract_1_05, false) :-
 		{retract((legs(_X,_Y) :- _Z))}.
 
-	succeeds(iso_retract_1_06) :-
+	test(iso_retract_1_06, true(I == ant)) :-
 		{	retract(insect(I)),
-		%	write(I), nl,
 			retract(insect(bee))
-		},
-		I == ant.
+		}.
 
 	:- if((
 		current_logtalk_flag(coinduction, supported),
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_retract_1_07) :-
+
+		test(iso_retract_1_07, true) :-
 			{retract((foo(A) :- A,call(A)))}.
+
 	:- else.
-		- succeeds(iso_retract_1_07) :-
+
+		- test(iso_retract_1_07, true) :-
 			% STO; Undefined
 			{retract((foo(A) :- A,call(A)))}.
+
 	:- endif.
 
-	succeeds(iso_retract_1_08) :-
-		{retract((foo(C) :- A -> B))},
-		A == call(C), B == call(C).
+	test(iso_retract_1_08, true(A-B == call(C)-call(C))) :-
+		{retract((foo(C) :- A -> B))}.
 
-	throws(iso_retract_1_09, error(instantiation_error,_)) :-
+	test(iso_retract_1_09, error(instantiation_error)) :-
 		{retract((_X :- in_eec(_Y)))}.
 
-	throws(iso_retract_1_10, error(type_error(callable,4),_)) :-
+	test(iso_retract_1_10, error(type_error(callable,4))) :-
 		{retract((4 :- _X))}.
 
-	throws(iso_retract_1_11, [error(permission_error(modify,static_procedure,atom/1),_), error(permission_error(modify,static_procedure,':'(user,atom/1)),_)]) :-
+	test(iso_retract_1_11, errors([permission_error(modify,static_procedure,atom/1), permission_error(modify,static_procedure,':'(user,atom/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retract((atom(X) :- X =='[]'))}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_retract_1_12, error(instantiation_error,_)) :-
+	test(lgt_retract_1_12, error(instantiation_error)) :-
 		{retract(_)}.
 
-	throws(lgt_retract_1_13, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
+	test(lgt_retract_1_13, errors([permission_error(modify,static_procedure,elk/1), permission_error(modify,static_procedure,':'(user,elk/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retract((elk(_) :- _))}.
 
 	% tests from the ECLiPSe test suite
 
-	fails(eclipse_retract_1_14) :-
+	test(eclipse_retract_1_14, false) :-
 		{retract(mammal(_))}.
 
 :- end_object.
