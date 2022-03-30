@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-11-05,
+		date is 2022-03-30,
 		comment is 'Unit tests for the ISO Prolog standard (**)/2 built-in function.'
 	]).
 
@@ -100,6 +100,11 @@
 		negative(Negative),
 		{_X is '**'(0, Negative)}.
 
+	test(lgt_power_2_15, error(evaluation_error(float_overflow))) :-
+		% try to delay the error to runtime
+		big_float(Big),
+		{_X is '**'(Big, Big)}.
+
 	% auxiliary predicates used to delay errors to runtime
 
 	variable(_).
@@ -109,5 +114,7 @@
 	foo(2, foo(1,2)).
 
 	negative(-1).
+
+	big_float(1.0e+300).
 
 :- end_object.
