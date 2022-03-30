@@ -1,18 +1,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample embedding settings file
-%  Last updated on September 26, 2018
+%  Last updated on March 30, 2022
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +23,7 @@
 
 
 %  This is a sample embedding settings file for use when embedding Logtalk
-%  applications.
+%  applications. Customize it for your specific application.
 
 
 %  To define a "library" alias for your application while making it
@@ -74,7 +74,7 @@ logtalk_library_path(my_application_libraries, my_application('libraries/')).
 	set_logtalk_flag(optimize, on),
 	% do not save source file data
 	set_logtalk_flag(source_data, off),
-	% lock your entities to prevent breaking encapsulation
+	% lock your entities by default to prevent breaking encapsulation
 	set_logtalk_flag(events, deny),
 	set_logtalk_flag(complements, deny),
 	set_logtalk_flag(dynamic_declarations, deny),
