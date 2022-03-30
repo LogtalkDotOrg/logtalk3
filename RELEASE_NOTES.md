@@ -62,6 +62,8 @@ Tests
 
 * ADDED: Additional tests for Prolog unbounded integer arithmetic support.
 
+* ADDED: Additional tests for Prolog standard `(*)/2` arithmetic function.
+
 * ADDED: Sanity tests for Prolog standard `(+)/1-2`, `(-)/1-2`, and `(\)/1`
 arithmetic functions.
 
