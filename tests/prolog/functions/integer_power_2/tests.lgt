@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-01-26,
+		date is 2022-03-30,
 		comment is 'Unit tests for the ISO Prolog standard (^)/2 built-in function.'
 	]).
 
@@ -103,6 +103,11 @@
 		% try to delay the error to runtime
 		foo(2, Foo),
 		{_X is Foo^3}.
+
+	test(lgt_integer_power_2_18, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+		% try to delay the error to runtime
+		current_prolog_flag(max_integer, Max),
+		{_X is Max^Max}.
 
 	% auxiliary predicates used to delay errors to runtime
 
