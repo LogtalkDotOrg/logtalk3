@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:27:0,
+		version is 1:28:0,
 		author is 'Paulo Moura',
-		date is 2022-03-22,
+		date is 2022-03-30,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -402,7 +402,7 @@
 		{write_term('$VAR'(0), [])},
 		^^text_output_assertion('$VAR(0)', Assertion).
 
-	% write quote of compound terms whose functor is a prefix operator
+	% writing of quote of compound terms whose functor is a prefix operator
 
 	test(lgt_write_term_3_073, true(Assertion)) :-
 		^^set_text_output(''),
@@ -525,7 +525,7 @@
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|a])])}.
 
-	% write of hexadecimal character escapes
+	% writing of hexadecimal character escapes
 
 	test(lgt_write_term_3_099, true(Assertion)) :-
 		^^set_text_output(''),
@@ -536,6 +536,18 @@
 		^^set_text_output(''),
 		{writeq('\x11\')},
 		^^text_output_assertion('\'\\x11\\\'', Assertion).
+
+	% writing of floating-point numbers with a zero fractional part to check that ".0" is not omitted
+
+	test(lgt_write_term_3_101, true(Assertion)) :-
+		^^set_text_output(''),
+		{writeq(1.0)},
+		^^text_output_assertion('1.0', Assertion).
+
+	test(lgt_write_term_3_102, subsumes(['1','.','0'| _], Contents)) :-
+		^^set_text_output(''),
+		{writeq(1.0e+64)},
+		^^text_output_contents(Contents).
 
 	cleanup :-
 		^^clean_binary_output,

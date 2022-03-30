@@ -67,6 +67,8 @@ Tests
 * ADDED: Sanity tests for Prolog standard `(+)/1-2`, `(-)/1-2`, and `(\)/1`
 arithmetic functions.
 
+* ADDED: Additional tests for the Prolog standard `write_term/3` predicate.
+
 * FIXED: Portability of the Prolog de facto standard `(*->)/2` control
 construct tests.
 
