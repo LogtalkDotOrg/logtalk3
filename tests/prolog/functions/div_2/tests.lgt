@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-07-22,
+		date is 2022-03-31,
 		comment is 'Unit tests for the ISO Prolog standard div/2 built-in function.'
 	]).
 
@@ -43,23 +43,32 @@
 	test(lgt_div_2_04, true(X == -3)) :-
 		{X is div(-5, 2)}.
 
-	test(lgt_div_2_05, error(instantiation_error)) :-
+	test(lgt_div_2_05, true(X == -1)) :-
+		{X is div(1, -12)}.
+
+	test(lgt_div_2_06, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is div(77, N)}.
 
-	test(lgt_div_2_06, error(type_error(evaluable,foo/0))) :-
+	test(lgt_div_2_07, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is div(Foo, 77)}.
 
-	test(lgt_div_2_07, error(type_error(integer,7.5))) :-
+	test(lgt_div_2_08, error(type_error(integer,7.5))) :-
 		% try to delay the expected error to runtime
-		{G = (_X is div(7.5, 2)), call(G)}.
+		real(Float),
+		{_X is div(Float, 2)}.
 
-	test(lgt_div_2_08, error(evaluation_error(zero_divisor))) :-
+	test(lgt_div_2_09, error(evaluation_error(zero_divisor))) :-
 		% try to delay the expected error to runtime
-		{G = (_X is div(7, 0)), call(G)}.
+		zero(Zero),
+		{_X is div(7, Zero)}.
+
+	test(lgt_div_2_10, error(evaluation_error(int_overflow)), [condition(verify_min_max_integers)]) :-
+		current_prolog_flag(min_integer, Min),
+		{_X is div(Min, -1)}.
 
 	% auxiliary predicates used to delay errors to runtime
 
@@ -67,5 +76,15 @@
 
 	foo(0, foo).
 	foo(1, foo(1)).
+
+	real(7.5).
+
+	zero(0).
+
+	verify_min_max_integers :-
+		current_prolog_flag(bounded, true),
+		current_prolog_flag(min_integer, Min),
+		current_prolog_flag(max_integer, Max),
+		Min < -Max.
 
 :- end_object.

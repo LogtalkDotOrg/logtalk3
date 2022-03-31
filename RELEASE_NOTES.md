@@ -63,7 +63,7 @@ Tests
 * ADDED: Additional tests for the Prolog unbounded integer arithmetic support.
 
 * ADDED: Additional tests for the Prolog standard `(*)/2`, `(/)/2`, `(^)/2`,
-and `(**)/2` arithmetic functions.
+`(**)/2`, and `div/2` arithmetic functions.
 
 * ADDED: Sanity tests for Prolog standard `(+)/1-2`, `(-)/1-2`, and `(\)/1`
 arithmetic functions.
