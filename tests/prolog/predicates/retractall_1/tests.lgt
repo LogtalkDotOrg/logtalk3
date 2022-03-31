@@ -41,29 +41,29 @@ b(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-05-12,
+		date is 2022-03-31,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.9.5.4
 
-	succeeds(iso_retractall_1_01) :-
+	test(iso_retractall_1_01, true) :-
 		{retractall(insect(bee))}.
 
-	succeeds(iso_retractall_1_02) :-
+	test(iso_retractall_1_02, true) :-
 		{retractall(insect(_))}.
 
-	succeeds(iso_retractall_1_03) :-
+	test(iso_retractall_1_03, true) :-
 		{retractall(insect(spider))}.
 
-	throws(iso_retractall_1_04, error(type_error(callable,3),_)) :-
+	test(iso_retractall_1_04, error(type_error(callable,3))) :-
 		% try to delay the error to runtime
 		three(Three),
 		{retractall(Three)}.
 
-	throws(iso_retractall_1_05, [error(permission_error(modify,static_procedure,retractall/1),_), error(permission_error(modify,static_procedure,':'(user,retractall/1)),_)]) :-
+	test(iso_retractall_1_05, errors([permission_error(modify,static_procedure,retractall/1), permission_error(modify,static_procedure,':'(user,retractall/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(retractall(_))}.
 
@@ -72,25 +72,24 @@ b(3).
 	throws(lgt_retractall_1_06, error(instantiation_error,_)) :-
 		{retractall(_)}.
 
-	succeeds(lgt_retractall_1_07) :-
+	test(lgt_retractall_1_07, true) :-
 		{retractall(a(_)), \+ a(_)}.
 
 	% tests from the ECLiPSe test suite
 
-	succeeds(eclipse_retractall_1_08) :-
+	test(eclipse_retractall_1_08, true(I == beetle(stag))) :-
 		{	assertz(insect(fly(house))),
 			assertz(insect(beetle(stag))),
 			assertz(insect(fly(fruit))),
 			retractall(insect(fly(_))),
 			\+ insect(fly(_)),
 			insect(I)
-		},
-		I == beetle(stag).
+		}.
 
-	succeeds(eclipse_retractall_1_09) :-
+	test(eclipse_retractall_1_09, true) :-
 		{retractall(mammal(_))}.
 
-	throws(eclipse_retractall_1_10, [error(permission_error(modify,static_procedure,elk/1),_), error(permission_error(modify,static_procedure,':'(user,elk/1)),_)]) :-
+	test(eclipse_retractall_1_10, errors([permission_error(modify,static_procedure,elk/1), permission_error(modify,static_procedure,':'(user,elk/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(elk(_))}.
 
