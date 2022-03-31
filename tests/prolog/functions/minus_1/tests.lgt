@@ -58,7 +58,6 @@
 		{_X is - Foo}.
 
 	test(lgt_minus_1_07, error(evaluation_error(int_overflow)), [condition(verify_min_max_integers)]) :-
-		% try to delay any error to runtime
 		current_prolog_flag(min_integer, Min),
 		{_X is - Min}.
 

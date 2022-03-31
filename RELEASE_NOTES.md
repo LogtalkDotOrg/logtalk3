@@ -60,15 +60,17 @@ Tools
 Tests
 -----
 
-* ADDED: Additional tests for Prolog unbounded integer arithmetic support.
+* ADDED: Additional tests for the Prolog unbounded integer arithmetic support.
 
-* ADDED: Additional tests for Prolog standard `(*)/2`, `(/)/2`, `(^)/2`, and
-`(**)/2` arithmetic functions.
+* ADDED: Additional tests for the Prolog standard `(*)/2`, `(/)/2`, `(^)/2`,
+and `(**)/2` arithmetic functions.
 
 * ADDED: Sanity tests for Prolog standard `(+)/1-2`, `(-)/1-2`, and `(\)/1`
 arithmetic functions.
 
 * ADDED: Additional tests for the Prolog standard `write_term/3` predicate.
+
+* IMPROVED: Tests for the Prolog standard `(//)/2` arithmetic function.
 
 * FIXED: Portability of the Prolog de facto standard `(*->)/2` control
 construct tests.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-21,
+		date is 2022-03-31,
 		comment is 'Unit tests for the ISO Prolog standard (//)/2 built-in function.'
 	]).
 
@@ -86,14 +86,9 @@
 		zero(Zero),
 		{_X is 3 // Zero}.
 
-	test(lgt_integer_division_2_12, true, [condition(current_prolog_flag(bounded,true))]) :-
-		% try to delay any error to runtime
+	test(lgt_integer_division_2_12, error(evaluation_error(int_overflow)), [condition(verify_min_max_integers)]) :-
 		current_prolog_flag(min_integer, Min),
-		{catch(X is Min // -1, error(Error, _), Error == evaluation_error(int_overflow))},
-		(	var(Error) ->
-			X > 0
-		;	true
-		).
+		{_X is Min // -1}.
 
 	% auxiliary predicates used to delay errors to runtime
 
@@ -106,5 +101,11 @@
 	float_value(3.14).
 
 	zero(0).
+
+	verify_min_max_integers :-
+		current_prolog_flag(bounded, true),
+		current_prolog_flag(min_integer, Min),
+		current_prolog_flag(max_integer, Max),
+		Min < -Max.
 
 :- end_object.
