@@ -68,6 +68,8 @@ and `(**)/2` arithmetic functions.
 * ADDED: Sanity tests for Prolog standard `(+)/1-2`, `(-)/1-2`, and `(\)/1`
 arithmetic functions.
 
+* ADDED: Integer overflow tests for the `succ/2` and `plus/3` predicates.
+
 * ADDED: Additional tests for the Prolog standard `write_term/3` predicate.
 
 * IMPROVED: Tests for the Prolog standard `(//)/2` arithmetic function.

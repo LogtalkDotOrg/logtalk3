@@ -23,42 +23,46 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-09-24,
+		date is 2022-03-31,
 		comment is 'Unit tests for the de facto Prolog standard succ/2 built-in predicate.'
 	]).
 
 	% tests from the Logtalk portability work
 
-	test(lgt_succ_2_01, error(instantiation_error)) :-
-		{succ(_, _)}.
-
-	test(lgt_succ_2_02, error(type_error(integer,a))) :-
-		{succ(a, _)}.
-
-	test(lgt_succ_2_03, error(type_error(integer,a))) :-
-		{succ(_, a)}.
-
-	test(lgt_succ_2_04, error(domain_error(not_less_than_zero, -1))) :-
-		{succ(-1, _)}.
-
-	test(lgt_succ_2_05, error(domain_error(not_less_than_zero, -1))) :-
-		{succ(_, -1)}.
-
-	test(lgt_succ_2_06, true(N == 2)) :-
+	test(lgt_succ_2_01, true(N == 2)) :-
 		{succ(1, N)}.
 
-	test(lgt_succ_2_07, true(N == 1)) :-
+	test(lgt_succ_2_02, true(N == 1)) :-
 		{succ(N, 2)}.
 
-	test(lgt_succ_2_08, fail) :-
+	test(lgt_succ_2_03, fail) :-
 		{succ(3, 2)}.
 
-	test(lgt_succ_2_09, fail) :-
+	test(lgt_succ_2_04, fail) :-
 		{succ(_, 0)}.
 
-	test(lgt_succ_2_10, deterministic) :-
+	test(lgt_succ_2_05, deterministic) :-
 		{succ(1, 2)}.
+
+	test(lgt_succ_2_06, error(instantiation_error)) :-
+		{succ(_, _)}.
+
+	test(lgt_succ_2_07, error(type_error(integer,a))) :-
+		{succ(a, _)}.
+
+	test(lgt_succ_2_08, error(type_error(integer,a))) :-
+		{succ(_, a)}.
+
+	test(lgt_succ_2_09, error(domain_error(not_less_than_zero, -1))) :-
+		{succ(-1, _)}.
+
+	test(lgt_succ_2_10, error(domain_error(not_less_than_zero, -1))) :-
+		{succ(_, -1)}.
+
+	test(lgt_succ_2_11, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+		current_prolog_flag(max_integer, Max),
+		{succ(Max, _)}.
 
 :- end_object.

@@ -23,60 +23,61 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-09-24,
+		date is 2022-03-31,
 		comment is 'Unit tests for the de facto Prolog standard plus/3 built-in predicate.'
 	]).
 
-	condition :-
-		predicate_property(plus(_,_,_), _).
-
 	% tests from the Logtalk portability work
 
-	test(lgt_plus_3_01, error(instantiation_error)) :-
-		{plus(_, _, _)}.
-
-	test(lgt_plus_3_02, error(instantiation_error)) :-
-		{plus(1, _, _)}.
-
-	test(lgt_plus_3_03, error(instantiation_error)) :-
-		{plus(_, 1, _)}.
-
-	test(lgt_plus_3_04, error(instantiation_error)) :-
-		{plus(_, _, 1)}.
-
-	test(lgt_plus_3_05, error(type_error(integer,a))) :-
-		{plus(a, 1, _)}.
-
-	test(lgt_plus_3_06, error(type_error(integer,a))) :-
-		{plus(1, a, _)}.
-
-	test(lgt_plus_3_07, error(type_error(integer,a))) :-
-		{plus(_, 1, a)}.
-
-	test(lgt_plus_3_08, true(N == 3)) :-
+	test(lgt_plus_3_01, true(N == 3)) :-
 		{plus(1, 2, N)}.
 
-	test(lgt_plus_3_09, true(N == 2)) :-
+	test(lgt_plus_3_02, true(N == 2)) :-
 		{plus(1, N, 3)}.
 
-	test(lgt_plus_3_10, true(N == 1)) :-
+	test(lgt_plus_3_03, true(N == 1)) :-
 		{plus(N, 2, 3)}.
 
-	test(lgt_plus_3_11, fail) :-
+	test(lgt_plus_3_04, fail) :-
 		{plus(1, 2, 4)}.
 
-	test(lgt_plus_3_12, deterministic) :-
+	test(lgt_plus_3_05, deterministic) :-
 		{plus(1, 2, 3)}.
 
-	test(lgt_plus_3_13, deterministic) :-
+	test(lgt_plus_3_06, deterministic) :-
 		{plus(_, 2, 3)}.
 
-	test(lgt_plus_3_14, deterministic) :-
+	test(lgt_plus_3_07, deterministic) :-
 		{plus(1, _, 3)}.
 
-	test(lgt_plus_3_15, deterministic) :-
+	test(lgt_plus_3_08, deterministic) :-
 		{plus(1, 2, _)}.
+
+	test(lgt_plus_3_09, error(instantiation_error)) :-
+		{plus(_, _, _)}.
+
+	test(lgt_plus_3_10, error(instantiation_error)) :-
+		{plus(1, _, _)}.
+
+	test(lgt_plus_3_11, error(instantiation_error)) :-
+		{plus(_, 1, _)}.
+
+	test(lgt_plus_3_12, error(instantiation_error)) :-
+		{plus(_, _, 1)}.
+
+	test(lgt_plus_3_13, error(type_error(integer,a))) :-
+		{plus(a, 1, _)}.
+
+	test(lgt_plus_3_14, error(type_error(integer,a))) :-
+		{plus(1, a, _)}.
+
+	test(lgt_plus_3_15, error(type_error(integer,a))) :-
+		{plus(_, 1, a)}.
+
+	test(lgt_plus_3_16, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+		current_prolog_flag(max_integer, Max),
+		{plus(Max, 1, _)}.
 
 :- end_object.
