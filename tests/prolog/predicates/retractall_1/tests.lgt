@@ -36,14 +36,20 @@ a(X) :- b(X).
 
 b(3).
 
+:- dynamic(c/2).
+c(1,   a).
+c(1, 'A').
+c(2, b).
+c(2, 'B').
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-03-31,
+		date is 2022-04-01,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
@@ -75,9 +81,14 @@ b(3).
 	test(lgt_retractall_1_07, true) :-
 		{retractall(a(_)), \+ a(_)}.
 
+	test(lgt_retractall_1_08, true(L == [b,'B'])) :-
+		{	retractall(c(1, _)),
+			findall(X, c(_, X), L)
+		}.
+
 	% tests from the ECLiPSe test suite
 
-	test(eclipse_retractall_1_08, true(I == beetle(stag))) :-
+	test(eclipse_retractall_1_09, true(I == beetle(stag))) :-
 		{	assertz(insect(fly(house))),
 			assertz(insect(beetle(stag))),
 			assertz(insect(fly(fruit))),
@@ -86,10 +97,10 @@ b(3).
 			insect(I)
 		}.
 
-	test(eclipse_retractall_1_09, true) :-
+	test(eclipse_retractall_1_10, true) :-
 		{retractall(mammal(_))}.
 
-	test(eclipse_retractall_1_10, errors([permission_error(modify,static_procedure,elk/1), permission_error(modify,static_procedure,':'(user,elk/1))])) :-
+	test(eclipse_retractall_1_11, errors([permission_error(modify,static_procedure,elk/1), permission_error(modify,static_procedure,':'(user,elk/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(elk(_))}.
 
