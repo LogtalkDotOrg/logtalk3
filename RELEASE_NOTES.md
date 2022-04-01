@@ -86,6 +86,11 @@ Installers and installation scripts
 to be used for intermediate files. This option is required for some backends
 when running the scripts on windows.
 
+* FIXED: The `logtalk_user_setup.js` script to avoid an error when creating
+the symbolic link to the `lgt2svg.js` script.
+
+* FIXED: Outdated but harmless commands in the `logtalk_user_setup.sh` script.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

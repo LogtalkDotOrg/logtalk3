@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   Logtalk user folder setup script
-//   Last updated on October 12, 2021
+//   Last updated on April 1, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -129,6 +129,7 @@ FSObject.CopyFile(logtalk_home + "\\tester-sample.lgt", logtalk_user + "\\tester
 FSObject.CopyFile(logtalk_home + "\\tests-sample.lgt", logtalk_user + "\\tests-sample.lgt");
 FSObject.CopyFile(logtalk_home + "\\VERSION.txt", logtalk_user + "\\VERSION.txt");
 
+FSObject.DeleteFile(logtalk_user + "\\tools\\diagrams\\lgt2*.*");
 FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2*.*");
 FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd");
 FSObject.DeleteFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_entity.xsd");
