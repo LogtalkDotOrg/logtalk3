@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports, and
 ##   contributions documentation
 ## 
-##   Last updated on January 13, 2022
+##   Last updated on April 2, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -55,7 +55,7 @@ else
 fi
 
 print_version() {
-	echo "$(basename "$0") 0.18"
+	echo "$(basename "$0") 0.19"
 	exit 0
 }
 
@@ -110,10 +110,10 @@ elif [ "$p_arg" == "ji" ] ; then
 	logtalk="jiplgt$extension -n -g"
 elif [ "$p_arg" == "lvm" ] ; then
 	prolog='LVM'
-	logtalk="lvmlgt$extension $i_arg -g"
+	logtalk="lvmlgt$extension -g"
 elif [ "$p_arg" == "scryer" ] ; then
 	prolog='Scryer Prolog'
-	logtalk="scryerlgt$extension $i_arg -g"
+	logtalk="scryerlgt$extension -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"
@@ -122,13 +122,13 @@ elif [ "$p_arg" == "swi" ] ; then
 	logtalk="swilgt$extension -g"
 elif [ "$p_arg" == "swipack" ] ; then
 	prolog='SWI-Prolog'
-	logtalk="swipl $i_arg -g"
+	logtalk="swipl -g"
 elif [ "$p_arg" == "tau" ] ; then
 	prolog='Tau Prolog'
-	logtalk="taulgt$extension $i_arg -g"
+	logtalk="taulgt$extension -g"
 elif [ "$p_arg" == "trealla" ] ; then
 	prolog='Trealla Prolog'
-	logtalk="tplgt$extension $i_arg -g"
+	logtalk="tplgt$extension -g"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk="xsblgt$extension -e"

@@ -40,6 +40,9 @@ and defining meta-predicates.
 
 * IMPROVED: Documentation of the Windows installer.
 
+* FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts when
+using some of the non-default backends.
+
 Library
 -------
 
