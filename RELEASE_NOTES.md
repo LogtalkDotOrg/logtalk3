@@ -92,6 +92,9 @@ Installers and installation scripts
 to be used for intermediate files. This option is required for some backends
 when running the scripts on windows.
 
+* UPDATED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
+optionally generate packs documentation and diagrams.
+
 * FIXED: The `logtalk_user_setup.js` script to avoid an error when creating
 the symbolic link to the `lgt2svg.js` script.
 

@@ -2,10 +2,10 @@
 
 #############################################################################
 ## 
-##   Logtalk script for updating the HTML core, library, tools, ports, and
-##   contributions documentation
+##   Logtalk script for updating the HTML core, library, tools, ports,
+##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on April 2, 2022
+##   Last updated on April 3, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -44,18 +44,28 @@ fi
 backend=swipl
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
+include_packs='false'
+if [ "$LOGTALKPACKS" != "" ] ; then
+	logtalk_packs='$LOGTALKPACKS/'
+else
+	logtalk_packs='$HOME/logtalk_packs/'
+fi
 
 cwd=$(pwd)
 
+set_goal() {
 # documentation goal
-if [ "$LOGTALKPACKS" != "" ] ; then
-	goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/']),exclude_prefixes(['$HOME/logtalk_packs/','$LOGTALKPACKS/'])]),halt."
-else
-	goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/']),exclude_prefixes(['$HOME/logtalk_packs/'])]),halt."
-fi
+	if [ "$include_packs" == 'true' ] ; then
+		goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/', '$logtalk_packs'])]),halt."
+	elif [ "$LOGTALKPACKS" != "" ] ; then
+		goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/']),exclude_prefixes(['$HOME/logtalk_packs/','$LOGTALKPACKS/'])]),halt."
+	else
+		goal="set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/']),exclude_prefixes(['$HOME/logtalk_packs/'])]),halt."
+	fi
+}
 
 print_version() {
-	echo "$(basename "$0") 0.19"
+	echo "$(basename "$0") 0.20"
 	exit 0
 }
 
@@ -66,24 +76,26 @@ usage_help()
 	echo "This script updates the HTML documentation of the library and the development tools."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-p prolog]"
+	echo "  $(basename "$0") [-p prolog] [-i]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
 	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "  -i include all installed packs"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
 
-while getopts "vp:m:d:h" option
+while getopts "vip:m:d:h" option
 do
 	case $option in
 		v) print_version;;
 		p) p_arg="$OPTARG";;
+		i) include_packs='true';;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -145,6 +157,7 @@ elif [ ! "$(command -v $backend)" ] ; then
 	exit 1
 fi
 
+set_goal
 $logtalk "$goal"
 cd "$cwd/../docs/sources" || exit 1
 lgt2rst -t "Logtalk APIs"
