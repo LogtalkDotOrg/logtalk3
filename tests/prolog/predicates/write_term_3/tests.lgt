@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:28:0,
+		version is 1:29:0,
 		author is 'Paulo Moura',
-		date is 2022-03-30,
+		date is 2022-04-03,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -385,166 +385,251 @@
 		{write(a((b,c),d))},
 		^^text_output_assertion('a((b,c),d)', Assertion).
 
-	% the default value for the quoted/1, ignore_ops/1, and numbervars/1 options is false
+	% writing of compound terms with (;)/2 arguments
 
 	test(lgt_write_term_3_070, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b;c)))},
+		^^text_output_assertion('a((b;c))', Assertion).
+
+	test(lgt_write_term_3_071, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a(b,(c;d)))},
+		^^text_output_assertion('a(b,(c;d))', Assertion).
+
+	test(lgt_write_term_3_072, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b;c),d))},
+		^^text_output_assertion('a((b;c),d)', Assertion).
+
+	% writing of compound terms with (:-)/2 arguments
+
+	test(lgt_write_term_3_073, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b:-c)))},
+		^^text_output_assertion('a((b:-c))', Assertion).
+
+	test(lgt_write_term_3_074, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a(b,(c:-d)))},
+		^^text_output_assertion('a(b,(c:-d))', Assertion).
+
+	test(lgt_write_term_3_075, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b:-c),d))},
+		^^text_output_assertion('a((b:-c),d)', Assertion).
+
+	% writing of compound terms with (-->)/2 arguments
+
+	test(lgt_write_term_3_076, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b-->c)))},
+		^^text_output_assertion('a((b-->c))', Assertion).
+
+	test(lgt_write_term_3_077, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a(b,(c-->d)))},
+		^^text_output_assertion('a(b,(c-->d))', Assertion).
+
+	test(lgt_write_term_3_078, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b-->c),d))},
+		^^text_output_assertion('a((b-->c),d)', Assertion).
+
+	% writing of compound terms with (->)/2 arguments
+
+	test(lgt_write_term_3_079, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b->c)))},
+		^^text_output_assertion('a((b->c))', Assertion).
+
+	test(lgt_write_term_3_080, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a(b,(c->d)))},
+		^^text_output_assertion('a(b,(c->d))', Assertion).
+
+	test(lgt_write_term_3_081, true(Assertion)) :-
+		^^set_text_output(''),
+		{write(a((b->c),d))},
+		^^text_output_assertion('a((b->c),d)', Assertion).
+
+	% writing of compound terms with (*->)/2 arguments
+
+	test(lgt_write_term_3_082, true(Assertion), [condition(predicate_property('*->'(_,_), built_in))]) :-
+		^^set_text_output(''),
+		{write(a('*->'(b,c)))},
+		^^text_output_assertion('a((b*->c))', Assertion).
+
+	test(lgt_write_term_3_083, true(Assertion), [condition(predicate_property('*->'(_,_), built_in))]) :-
+		^^set_text_output(''),
+		{write(a(b,'*->'(c,d)))},
+		^^text_output_assertion('a(b,(c*->d))', Assertion).
+
+	test(lgt_write_term_3_084, true(Assertion), [condition(predicate_property('*->'(_,_), built_in))]) :-
+		^^set_text_output(''),
+		{write(a('*->'(b,c),d))},
+		^^text_output_assertion('a((b*->c),d)', Assertion).
+
+	% the default value for the quoted/1, ignore_ops/1, and numbervars/1 options is false
+
+	test(lgt_write_term_3_085, true(Assertion)) :-
 		^^set_text_output(''),
 		{write_term('A', [])},
 		^^text_output_assertion('A', Assertion).
 
-	test(lgt_write_term_3_071, true(Assertion)) :-
+	test(lgt_write_term_3_086, true(Assertion)) :-
 		^^set_text_output(''),
 		{write_term(+1, [])},
 		^^text_output_assertion('+1', Assertion).
 
-	test(lgt_write_term_3_072, true(Assertion)) :-
+	test(lgt_write_term_3_087, true(Assertion)) :-
 		^^set_text_output(''),
 		{write_term('$VAR'(0), [])},
 		^^text_output_assertion('$VAR(0)', Assertion).
 
 	% writing of quote of compound terms whose functor is a prefix operator
 
-	test(lgt_write_term_3_073, true(Assertion)) :-
+	test(lgt_write_term_3_088, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(0))},
 		^^text_output_assertion('- (0)', Assertion).
 
-	test(lgt_write_term_3_074, true(Assertion)) :-
+	test(lgt_write_term_3_089, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(1))},
 		^^text_output_assertion('- (1)', Assertion).
 
-	test(lgt_write_term_3_075, true(Assertion)) :-
+	test(lgt_write_term_3_090, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(+(1))},
 		^^text_output_assertion('+1', Assertion).
 
-	test(lgt_write_term_3_076, true(Assertion)) :-
+	test(lgt_write_term_3_091, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(-1))},
 		^^text_output_assertion('- -1', Assertion).
 
-	test(lgt_write_term_3_077, true(Assertion)) :-
+	test(lgt_write_term_3_092, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(+1))},
 		^^text_output_assertion('- +1', Assertion).
 
-	test(lgt_write_term_3_078, true(Assertion)) :-
+	test(lgt_write_term_3_093, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(+(+1))},
 		^^text_output_assertion('+ +1', Assertion).
 
-	test(lgt_write_term_3_079, true(Assertion)) :-
+	test(lgt_write_term_3_094, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(-1-1))},
 		^^text_output_assertion('- (-1-1)', Assertion).
 
-	test(lgt_write_term_3_080, true(Assertion)) :-
+	test(lgt_write_term_3_095, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(1.0))},
 		^^text_output_assertion('- (1.0)', Assertion).
 
-	test(lgt_write_term_3_081, true(Assertion)) :-
+	test(lgt_write_term_3_096, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(-1.0))},
 		^^text_output_assertion('- -1.0', Assertion).
 
-	test(lgt_write_term_3_082, true(Assertion)) :-
+	test(lgt_write_term_3_097, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(-))},
 		^^text_output_assertion('- (-)', Assertion).
 
-	test(lgt_write_term_3_083, true(Assertion)) :-
+	test(lgt_write_term_3_098, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(abc))},
 		^^text_output_assertion('-abc', Assertion).
 
-	test(lgt_write_term_3_084, true(Assertion)) :-
+	test(lgt_write_term_3_099, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(abc(def)))},
 		^^text_output_assertion('-abc(def)', Assertion).
 
-	test(lgt_write_term_3_085, true(Assertion)) :-
+	test(lgt_write_term_3_100, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(+(abc(def)))},
 		^^text_output_assertion('+abc(def)', Assertion).
 
-	test(lgt_write_term_3_086, true(Assertion)) :-
+	test(lgt_write_term_3_101, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(-(-(abc)))},
 		^^text_output_assertion('- -abc', Assertion).
 
-	test(lgt_write_term_3_087, true(Assertion)) :-
+	test(lgt_write_term_3_102, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(+(+(abc)))},
 		^^text_output_assertion('+ +abc', Assertion).
 
 	% check detection of invalid options
 
-	test(sics_write_term_3_088, error(instantiation_error)) :-
+	test(sics_write_term_3_103, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(_)])}.
 
-	test(sics_write_term_3_089, error(domain_error(write_option,quoted(fail)))) :-
+	test(sics_write_term_3_104, error(domain_error(write_option,quoted(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [quoted(fail)])}.
 
-	test(sics_write_term_3_090, error(instantiation_error)) :-
+	test(sics_write_term_3_105, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(_)])}.
 
-	test(sics_write_term_3_091, error(domain_error(write_option,ignore_ops(fail)))) :-
+	test(sics_write_term_3_106, error(domain_error(write_option,ignore_ops(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [ignore_ops(fail)])}.
 
-	test(sics_write_term_3_092, error(instantiation_error)) :-
+	test(sics_write_term_3_107, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(_)])}.
 
-	test(sics_write_term_3_093, error(domain_error(write_option,numbervars(fail)))) :-
+	test(sics_write_term_3_108, error(domain_error(write_option,numbervars(fail)))) :-
 		^^suppress_text_output,
 		{write_term(1, [numbervars(fail)])}.
 
-	test(sics_write_term_3_094, error(instantiation_error)) :-
+	test(sics_write_term_3_109, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(_)])}.
 
-	test(sics_write_term_3_095, error(domain_error(write_option,variable_names(a)))) :-
+	test(sics_write_term_3_110, error(domain_error(write_option,variable_names(a)))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(a)])}.
 
-	test(sics_write_term_3_096, error(instantiation_error)) :-
+	test(sics_write_term_3_111, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names([_='A'])])}.
 
-	test(sics_write_term_3_097, error(instantiation_error)) :-
+	test(sics_write_term_3_112, error(instantiation_error)) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|_])])}.
 
-	test(lgt_write_term_3_098, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
+	test(lgt_write_term_3_113, error(domain_error(write_option,variable_names(['A'=_|a])))) :-
 		^^suppress_text_output,
 		{write_term(1, [variable_names(['A'=_|a])])}.
 
 	% writing of hexadecimal character escapes
 
-	test(lgt_write_term_3_099, true(Assertion)) :-
+	test(lgt_write_term_3_114, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq('\x2\')},
 		^^text_output_assertion('\'\\x2\\\'', Assertion).
 
-	test(lgt_write_term_3_100, true(Assertion)) :-
+	test(lgt_write_term_3_115, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq('\x11\')},
 		^^text_output_assertion('\'\\x11\\\'', Assertion).
 
 	% writing of floating-point numbers with a zero fractional part to check that ".0" is not omitted
 
-	test(lgt_write_term_3_101, true(Assertion)) :-
+	test(lgt_write_term_3_116, true(Assertion)) :-
 		^^set_text_output(''),
 		{writeq(1.0)},
 		^^text_output_assertion('1.0', Assertion).
 
-	test(lgt_write_term_3_102, subsumes(['1','.','0'| _], Contents)) :-
+	test(lgt_write_term_3_117, subsumes(['1','.','0'| _], Contents)) :-
 		^^set_text_output(''),
 		{writeq(1.0e+64)},
 		^^text_output_contents(Contents).
