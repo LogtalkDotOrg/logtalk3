@@ -58,7 +58,7 @@ meta-non-terminals.
 Tools
 -----
 
-* IMPROVED: Documentation of the `issue_creator` tool.
+* IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
 Tests
 -----

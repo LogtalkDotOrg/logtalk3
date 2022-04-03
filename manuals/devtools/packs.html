@@ -728,9 +728,9 @@ installed or updated. It can also be retrieved at any time by using the
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>readme(lflat, <span class="nv">Path</span>).
 </pre></div>
 </div>
-<p>Additional documentation, including full API documentation, may also be
-available from the pack home page, which can be printed by using the
-<code class="docutils literal notranslate"><span class="pre">describe/1-2</span></code> predicates. For example:</p>
+<p>Additional documentation may also be available from the pack home page,
+which can be printed by using the <code class="docutils literal notranslate"><span class="pre">describe/1-2</span></code> predicates. For
+example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>describe(lflat).
 
 <span class="c">% Registry:    ...</span>
@@ -742,6 +742,24 @@ available from the pack home page, which can be printed by using the
 ...
 </pre></div>
 </div>
+<p>The pack API documentation can be generated using the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>lflat(loader)<span class="k">}</span>,
+     <span class="k">{</span>lgtdoc(loader)<span class="k">}</span>,
+     logtalk<span class="o">::</span>expand_library_path(lflat, <span class="nv">Path</span>),
+     lgtdoc<span class="o">::</span>rdirectory(<span class="nv">Path</span>).
+...
+</pre></div>
+</div>
+<p>This query creates a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code> directory in the current directory.
+The XML documentation files can then be converted into a final format,
+e.g. HTML, using on the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool provided scripts. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
+$ lgt2html
+</pre></div>
+</div>
+<p>For more details and alternatives, see the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool
+documentation.</p>
 </section>
 <section id="pinning-registries-and-packs">
 <h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Permalink to this headline"></a></h2>

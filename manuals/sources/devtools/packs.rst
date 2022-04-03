@@ -695,9 +695,9 @@ installed or updated. It can also be retrieved at any time by using the
 
    | ?- packs::readme(lflat, Path).
 
-Additional documentation, including full API documentation, may also be
-available from the pack home page, which can be printed by using the
-``describe/1-2`` predicates. For example:
+Additional documentation may also be available from the pack home page,
+which can be printed by using the ``describe/1-2`` predicates. For
+example:
 
 ::
 
@@ -710,6 +710,29 @@ available from the pack home page, which can be printed by using the
    % Home:        https://github.com/l-flat/lflat
    % Versions:
    ...
+
+The pack API documentation can be generated using the ``lgtdoc`` tool.
+For example:
+
+::
+
+   | ?- {lflat(loader)},
+        {lgtdoc(loader)},
+        logtalk::expand_library_path(lflat, Path),
+        lgtdoc::rdirectory(Path).
+   ...
+
+This query creates a ``xml_docs`` directory in the current directory.
+The XML documentation files can then be converted into a final format,
+e.g. HTML, using on the ``lgtdoc`` tool provided scripts. For example:
+
+::
+
+   $ cd xml_docs
+   $ lgt2html
+
+For more details and alternatives, see the ``lgtdoc`` tool
+documentation.
 
 Pinning registries and packs
 ----------------------------
