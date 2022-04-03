@@ -46,6 +46,8 @@ using some of the non-default backends.
 Library
 -------
 
+* ADDED: Library file `packs_loader.lgt` for loading all installed packs.
+
 * UPDATED: The `os::copy_file/2` library predicate for Tau Prolog to use its
 native definition when available.
 
