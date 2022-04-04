@@ -25,6 +25,12 @@ RELEASE NOTES
 3.55.0 - April ??, 2022
 =======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Experimental Windows PowerShell integration scripts for selected
+backend Prolog systems. Collaborative work with Hans N. Beck.
+
 Documentation
 -------------
 
@@ -85,6 +91,9 @@ construct tests.
 
 Installers and installation scripts
 -----------------------------------
+
+* ADDED: Experimental Windows PowerShell `logtalk_user_setup.ps1` script.
+Collaborative work with Hans N. Beck.
 
 * IMPROVED: Sample embedding script examples and documentation.
 
