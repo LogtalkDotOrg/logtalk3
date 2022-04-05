@@ -104,6 +104,9 @@ when running the scripts on windows.
 * UPDATED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts to
 optionally generate packs documentation and diagrams.
 
+* UPDATED: The Windows installer to copy the PowerShell integration and setup
+scripts to the system directory.
+
 * FIXED: The `logtalk_user_setup.js` script to avoid an error when creating
 the symbolic link to the `lgt2svg.js` script.
 
