@@ -95,6 +95,9 @@ Installers and installation scripts
 * ADDED: Experimental Windows PowerShell `logtalk_user_setup.ps1` script.
 Collaborative work with Hans N. Beck.
 
+* ADDED: Experimental Windows PowerShell embedding scripts for selected
+backends. Collaborative work with Hans N. Beck.
+
 * IMPROVED: Sample embedding script examples and documentation.
 
 * UPDATED: Sample embedding scripts to allow specifying the temporary directory
