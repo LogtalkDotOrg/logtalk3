@@ -1,8 +1,8 @@
 
 #############################################################################
 ## 
-##   This script creates a SWI-Prolog logtalk.qlf file with the Logtalk
-##   compiler and runtime and optionally an application.qlf file with a
+##   This script creates a SICStus Prolog logtalk.po file with the Logtalk
+##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
 ##   Last updated on April 5, 2022
@@ -34,7 +34,6 @@ param(
 	[String]$t,
 	[String]$n = "application",
 	[String]$p = ($env:LOGTALKHOME + '\paths\paths_core.pl'),
-	[String]$k = ($env:LOGTALKHOME + '\adapters\swihooks.pl'),
 	[String]$s, 
 	[String]$l,
 	[String]$g = "true",
@@ -96,7 +95,7 @@ function Get-Usage() {
 	Write-Output "code given its loader file. It can also generate a standalone saved state."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ($myName + " [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-k hooks] [-s settings] [-l loader] [-g goal]")
+	Write-Output ($myName + " [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]")
 	Write-Output ($myName + " -v")
 	Write-Output ($myName + " -h")
 	Write-Output ""
@@ -107,7 +106,6 @@ function Get-Usage() {
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
-	Write-Output ("  -k hooks file (absolute path; default is " + $k + ")")
 	Write-Output "  -s settings file (absolute path)"
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output "  -g startup goal for the saved state in canonical syntax (default is true)"
@@ -130,12 +128,6 @@ function Check-Parameters() {
 
 	if (-not(Test-Path $p)) { # cannot be ""
 		Write-Output ("The " + $p + " library paths file does not exist!")
-		Start-Sleep -Seconds 2
-		Exit
-	}
-
-	if (-not(Test-Path $k)) { # cannot be ""
-		Write-Output ("The " + $k + " hooks file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -221,22 +213,22 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item ($env:LOGTALKHOME + '\adapters\swi.pl') .
+Copy-Item ($env:LOGTALKHOME + '\adapters\sicstus.pl') .
 Copy-Item ($env:LOGTALKHOME + '\core\core.pl') .
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 
-$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "])"
-swilgt -g $GoalParam -t "halt" 
+$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt."
+sicstuslgt --goal $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "])"
-	swilgt -g $GoalParam -t "halt"
+	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
+	sicstuslgt --goal $GoalParam
 } else {
 	Copy-Item $p ($t + '\paths_lgt.pl')
 }
 
 if ($s -eq "") {
-	Get-Content -Path swi.pl,
+	Get-Content -Path sicstus.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -244,16 +236,15 @@ if ($s -eq "") {
 		user*_lgt.pl,
 		logtalk*_lgt.pl,
 		core_messages_*lgt.pl,
-		core.pl,
-		$k | Set-Content logtalk.pl
+		core.pl | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "])"
-		swilgt -g $GoalParam -t "halt"
+		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
+		sicstuslgt --goal $GoalParam
 	} else {
-		$GoalParam = "logtalk_compile('" + $settings.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "])" 
+		$GoalParam = "logtalk_compile('" + $settings.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
-	Get-Content -Path swi.pl,
+	Get-Content -Path sicstus.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -262,13 +253,12 @@ if ($s -eq "") {
 		logtalk*_lgt.pl,
 		core_messages*_lgt.pl,
 		settings*_lgt.pl,
-		core.pl,
-		$k | Set-Content logtalk.pl
+		core.pl | Set-Content logtalk.pl
 }
 
-swipl -g "qcompile(logtalk)" -t "halt"
+sicstus --goal "set_prolog_flag(discontiguous_warnings,off),compile(logtalk),save_files(logtalk,logtalk),halt."
 
-Move-item -Path ./logtalk.qlf -Destination $d
+Move-item -Path ./logtalk.po -Destination $d
 
 if ($l -ne "") {
 	try {
@@ -280,29 +270,29 @@ if ($l -ne "") {
 		Exit 
 	}
 
-	$GoalParam = "consult('" + $d.Replace('\', '/') +  "/logtalk'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "')" 
+	$GoalParam = "load_files('" + $d.Replace('\', '/') +  "/logtalk.po'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt." 
 
-	swipl -g $GoalParam -t "halt"
+	sicstus --goal $GoalParam
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
 		Set-Content application.pl
 
-	$GoalParam = "consult('" + $d.Replace('\', '/') +  "/logtalk'), qcompile(application)"
-	swipl -g $GoalParam -t "halt"
+	$GoalParam = "load_files('" + $d.Replace('\', '/') +  "/logtalk.po'), set_prolog_flag(discontiguous_warnings,off), compile(application), save_files(application,application), halt."
+	sicstus --goal $GoalParam
 
-	Copy-Item application.qlf $d
+	Move-Item -Path ./application.po -Destination $d
 	Pop-Location
 }
 
 if ($x -eq $true) {
 	Set-Location $d
 	if ($l -ne "") {
-		$GoalParam = "[logtalk, application], qsave_program('" + $n + "', [goal($g), stand_alone(true)])"
-		swipl -g $GoalParam -t "halt"
+		$GoalParam = "load_files(['logtalk.po','application.po']), save_program('" + $n + "', " + $g + "), halt."
+		sicstus --goal $GoalParam
 	} else {
-		$GoalParam = "[logtalk], qsave_program('" + $n + "', [goal($g), stand_alone(true)])"
-		swipl -g $GoalParam -t "halt"
+		$GoalParam = "load_files(['logtalk.po']), save_program('" + $n + "', '" + $g + "'), halt."
+		sicstus --goal $GoalParam
 	}
 }
 
