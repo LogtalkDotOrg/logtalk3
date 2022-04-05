@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on March 25, 2022
+##   Last updated on April 5, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.14"
+	echo "$(basename "$0") 0.15"
 	exit 0
 }
 
@@ -112,7 +112,7 @@ usage_help()
 	echo 
 	echo "This script creates a SICStus Prolog logtalk.po file with the Logtalk compiler"
 	echo "and runtime and an optional application.po file from an application source"
-	echo "code given its loader file. It can also generate a standalone saved state."
+	echo "code given its loader file. It can also generate a saved state."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
