@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for XSB
-##   Last updated on April 4, 2022
+##   Last updated on April 5, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -77,13 +77,13 @@ Get-Logtalkuser
 
 $env:LOGTALK_STARTUP_DIRECTORY= $pwd
 
-$sourcen = $env:LOGTALKHOME + '\integration\logtalk_xsb.pl'
+$source = $env:LOGTALKHOME + '\integration\logtalk_xsb.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    xsb64.bat -l -e "['$sourcen']." $args[0..$n] -- $args[$args.Count-1]
+    xsb64.bat -l -e "['$source']." $args[0..$n] -- $args[$args.Count-1]
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    xsb64.bat -l -e "['$sourcen']." -- $args[$args.Count-1]
+    xsb64.bat -l -e "['$source']." -- $args[$args.Count-1]
 } else {
-    xsb64.bat -l -e "['$sourcen']." $args
+    xsb64.bat -l -e "['$source']." $args
 }

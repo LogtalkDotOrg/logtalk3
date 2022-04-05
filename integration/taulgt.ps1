@@ -1,6 +1,6 @@
 #############################################################################
 ## 
-##   Integration script for ECLiPSe
+##   Integration script for Tau Prolog
 ##   Last updated on April 5, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -77,13 +77,13 @@ Get-Logtalkuser
 
 $env:LOGTALK_STARTUP_DIRECTORY= $pwd
 
-$source = $env:LOGTALKHOME + '\integration\logtalk_eclipse.pl'
+$source = $env:LOGTALKHOME + '\integration\logtalk_tau.js'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    eclipse.exe -L iso -t user -f $source $args[0..$n] -- $args[$args.Count-1]
+    node --stack_size=10000 $source $args[0..$n] -- $args[$args.Count-1]
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    eclipse.exe -L iso -t user -f $source -- $args[$args.Count-1]
+    node --stack_size=10000 $source -- $args[$args.Count-1]
 } else {
-    eclipse.exe -L iso -t user -f $source $args
+    node --stack_size=10000 $source $args
 }

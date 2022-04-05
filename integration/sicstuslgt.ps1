@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for SICStus Prolog
-##   Last updated on April 4, 2022
+##   Last updated on April 5, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -77,13 +77,13 @@ Get-Logtalkuser
 
 $env:LOGTALK_STARTUP_DIRECTORY= $pwd
 
-$sourcen = $env:LOGTALKHOME + '\integration\logtalk_sicstus.pl'
+$source = $env:LOGTALKHOME + '\integration\logtalk_sicstus.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    sicstus.exe -l $sourcen $args[0..$n] -- $args[$args.Count-1]
+    sicstus.exe -l $source $args[0..$n] -- $args[$args.Count-1]
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    sicstus.exe -l $sourcen -- $args[$args.Count-1]
+    sicstus.exe -l $source -- $args[$args.Count-1]
 } else {
-    sicstus.exe -l $sourcen $args
+    sicstus.exe -l $source $args
 }
