@@ -75,6 +75,28 @@ if (Test-Path $env:LOGTALKHOME) {
 
 Get-Logtalkuser
 
+# Check for existence
+if (Test-Path $env:LOGTALKUSER) {
+	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
+		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
+		Write-Output "Creating an up-to-date Logtalk user directory..."
+		logtalk_user_setup
+	} else {
+		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
+		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
+		if ($user_version -lt $system_version) {
+			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
+			Write-Output "    $user_version < $system_version"
+			Write-Output "Creating an up-to-date Logtalk user directory..."
+			logtalk_user_setup
+		}
+	}
+} else {
+	Write-Output "Cannot find %LOGTALKUSER% directory! Creating a new Logtalk user directory"
+	Write-Output "by running the logtalk_user_setup shell script:"
+	logtalk_user_setup
+}
+
 $env:LOGTALK_STARTUP_DIRECTORY= $pwd
 
 $source = '$LOGTALKHOME/integration/logtalk_gp.pl'

@@ -1,6 +1,6 @@
 #############################################################################
 ## 
-##   Integration script for Tau Prolog
+##   Integration script for LVM
 ##   Last updated on April 5, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -99,13 +99,13 @@ if (Test-Path $env:LOGTALKUSER) {
 
 $env:LOGTALK_STARTUP_DIRECTORY= $pwd
 
-$source = $env:LOGTALKHOME + '\integration\logtalk_tau.js'
+$source = $env:LOGTALKHOME + '\integration\logtalk_lvm.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    node --stack_size=10000 $source $args[0..$n] -- $args[$args.Count-1]
+    lvmpl.exe -f $source $args[0..$n] -- $args[$args.Count-1]
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    node --stack_size=10000 $source -- $args[$args.Count-1]
+    lvmpl.exe -f $source -- $args[$args.Count-1]
 } else {
-    node --stack_size=10000 $source $args
+    lvmpl.exe -f $source $args
 }
