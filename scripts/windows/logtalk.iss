@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on April 5, 2022
+; Last updated on April 6, 2022
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -692,6 +692,8 @@ begin
     else if RegQueryStringValue(HKLM64, 'Software\YAP\Prolog64\', 'cwd', Home) then
       Result := Home + '\bin\yap.exe'
     else if RegQueryStringValue(HKLM32, 'Software\YAP\Prolog64\', 'cwd', Home) then
+      Result := Home + '\bin\yap.exe'
+    else if RegQueryStringValue(HKLM64, 'Software\YAP\Prolog\', 'home', Home) then
       Result := Home + '\bin\yap.exe'
     else
       Result := 'prolog_compiler_not_installed'
