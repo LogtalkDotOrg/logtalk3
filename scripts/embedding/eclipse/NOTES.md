@@ -39,3 +39,5 @@ Usage
 
 Use `eclipse_logtalk_eco.sh -h` for a list and description of the script
 options.
+
+See the script usage examples in the `../SCRIPT.txt` file.

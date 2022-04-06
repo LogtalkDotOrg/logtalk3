@@ -49,3 +49,5 @@ Usage
 
 Use `jiprolog_logtalk_jip.sh -h` for a list and description of the script
 options.
+
+See the script usage examples in the `../SCRIPT.txt` file.

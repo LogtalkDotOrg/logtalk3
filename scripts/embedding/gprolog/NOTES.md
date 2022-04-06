@@ -46,6 +46,8 @@ directive calling the startup goal. For example:
 To avoid syntax errors, you may need to use canonical notation in the argument
 of the directive as exemplified.
 
+See the script usage examples in the `../SCRIPT.txt` file.
+
 Known issues
 ------------
 

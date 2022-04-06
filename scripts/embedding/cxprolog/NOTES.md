@@ -32,3 +32,5 @@ Usage
 
 Use `cxprolog_logtalk_pl.sh -h` for a list and description of the script
 options.
+
+See the script usage examples in the `../SCRIPT.txt` file.

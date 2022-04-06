@@ -64,7 +64,7 @@ $ sicstus --goal "load_files(['logtalk.po','application.po'])."
 $ cd "$LOGTALKHOME/scripts/embedding/sicstus/"
 $ ./sicstus_logtalk_po.sh -c -x -d "$HOME"/collect -n sleepy -l "$LOGTALKUSER/examples/adventure/sleepy.lgt" -s "$LOGTALKUSER/scripts/embedding/settings-embedding-sample.lgt" -g "'::'(sleepy,start)"
 $ cd ~/collect
-$ ./sleepy.sav
+$ sicstus -r sleepy.sav
 
 
 % create a YAP saved state from the "wumpus" text adventure example:

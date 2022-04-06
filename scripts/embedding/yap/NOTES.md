@@ -27,11 +27,11 @@ The following scripts are provided:
 	creates a `logtalk.pl` file with the Logtalk compiler and runtime
 	and an optional `application.pl` file for an application
 
-See the script usage examples in the `../SCRIPT.txt` file on how to
-create a YAP saved state that includes a Logtalk application.
-
 Usage
 -----
 
 Use `yap_logtalk_pl.sh -h` for a list and description of the script
 options.
+
+See the script usage examples in the `../SCRIPT.txt` file on how to
+create a YAP saved state that includes a Logtalk application.

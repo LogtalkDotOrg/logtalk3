@@ -32,16 +32,19 @@ For example:
 
 	| ?- loader:load(logtalk).
 
+Usage
+-----
+
+Use `xsb_logtalk_xwam.sh -h` for a list and description of the script
+options.
+
+See the script usage examples in the `../SCRIPT.txt` file.
+
 Known issues
 ------------
 
 A ISO Prolog standard compliance bug in the handling of `initialization/1`
 directives by XSB currently prevents passing a settings file to the script.
 The same bug may also result also in predicate redefined warnings when
-loading generated `application.xwam` files.
-
-Usage
------
-
-Use `xsb_logtalk_xwam.sh -h` for a list and description of the script
-options.
+loading generated `application.xwam` files. This bug may be fixed in
+recent XSB versions.

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 This directory contains example scripts for creating SICStus Prolog `.po`
-files from Logtalk core files and Logtalk source files.
+files plus saved states from Logtalk core files and Logtalk source files.
 
 The following scripts are provided:
 
@@ -27,13 +27,14 @@ The following scripts are provided:
 	creates a `logtalk.po` file with the Logtalk compiler and runtime
 	and an optional `application.po` file for an application
 
-The `.po` files can be loaded using the `load_files/1-2` predicates.
-
-See the script usage examples in the `../SCRIPT.txt` file on how to
-create a SICStus Prolog saved state that includes a Logtalk application.
+The `.po` files can be loaded using the `load_files/1-2` predicates. The
+saved states can be loaded using `sicstus -r SavedStateFile`.
 
 Usage
 -----
 
 Use `sicstus_logtalk_po.sh -h` for a list and description of the script
 options.
+
+See the script usage examples in the `../SCRIPT.txt` file on how to
+create a SICStus Prolog saved state that includes a Logtalk application.
