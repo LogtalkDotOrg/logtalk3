@@ -94,7 +94,7 @@ function Get-Usage() {
 	Write-Output "code given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ($myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]")
+	Write-Output ($myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
 	Write-Output ($myName + " -v")
 	Write-Output ($myName + " -h")
 	Write-Output ""
@@ -106,7 +106,6 @@ function Get-Usage() {
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output "  -s settings file (absolute path)"
 	Write-Output "  -l loader file for the application (absolute path)"
-	Write-Output "  -g startup goal for the saved state in canonical syntax (default is true)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -254,7 +253,7 @@ if ($s -eq "") {
 		core.pl | Set-Content logtalk.pl
 }
 
-Move-item -Path ./logtalk.pl -Destination $d
+Move-item -Path logtalk.pl -Destination $d
 
 if ($l -ne "") {
 	try {
@@ -274,7 +273,7 @@ if ($l -ne "") {
 		Get-Content |
 		Set-Content application.pl
 
-	Move-Item -Path ./application.pl -Destination $d
+	Move-Item -Path application.pl -Destination $d
 	Pop-Location
 }
 

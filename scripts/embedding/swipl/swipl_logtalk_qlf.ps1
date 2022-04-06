@@ -268,7 +268,7 @@ if ($s -eq "") {
 
 swipl -g "qcompile(logtalk)" -t "halt"
 
-Move-item -Path ./logtalk.qlf -Destination $d
+Move-item -Path logtalk.qlf -Destination $d
 
 if ($l -ne "") {
 	try {

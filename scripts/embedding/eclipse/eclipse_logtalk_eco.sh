@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on April 6, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -237,9 +237,9 @@ fi
 
 if [ "$settings" != "" ] ; then
 	if [ "$compile" != "false" ] ; then
-		eclipselgt$extension  -L iso -t user -e "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
+		eclipselgt$extension -e "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
 	else
-		eclipselgt$extension -L iso -t user -e "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
+		eclipselgt$extension -e "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
 	cat \
 		eclipse.pl \
