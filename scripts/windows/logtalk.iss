@@ -687,13 +687,21 @@ begin
   if IsWin64 then
     if RegQueryStringValue(HKLM64, 'Software\YAP\Prolog64\', 'home', Home) then
       Result := Home + '\bin\yap.exe'
+    else if RegQueryStringValue(HKLM64, 'Software\YAP\Prolog64\', 'cwd', Home) then
+      Result := Home + '\bin\yap.exe'
     else if RegQueryStringValue(HKLM32, 'Software\YAP\Prolog64\', 'home', Home) then
       Result := Home + '\bin\yap.exe'
+    else if RegQueryStringValue(HKLM32, 'Software\YAP\Prolog64\', 'cwd', Home) then
+      Result := Home + '\bin\yap.exe'
     else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'home', Home) then
+      Result := Home + '\bin\yap.exe'
+    else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'cwd', Home) then
       Result := Home + '\bin\yap.exe'
     else
       Result := 'prolog_compiler_not_installed'
   else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'home', Home) then
+    Result := Home + '\bin\yap.exe'
+  else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'cwd', Home) then
     Result := Home + '\bin\yap.exe'
   else
     Result := 'prolog_compiler_not_installed'
@@ -721,13 +729,21 @@ begin
   if IsWin64 then
     if RegQueryStringValue(HKLM64, 'Software\YAP\Prolog64\', 'home', Home) then
       Result := Home + '\bin\yap-win.exe'
+    else if RegQueryStringValue(HKLM64, 'Software\YAP\Prolog64\', 'cwd', Home) then
+      Result := Home + '\bin\yap-win.exe'
     else if RegQueryStringValue(HKLM32, 'Software\YAP\Prolog64\', 'home', Home) then
       Result := Home + '\bin\yap-win.exe'
+    else if RegQueryStringValue(HKLM32, 'Software\YAP\Prolog64\', 'cwd', Home) then
+      Result := Home + '\bin\yap-win.exe'
     else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'home', Home) then
+      Result := Home + '\bin\yap-win.exe'
+    else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'cwd', Home) then
       Result := Home + '\bin\yap-win.exe'
     else
       Result := 'prolog_compiler_not_installed'
   else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'home', Home) then
+    Result := Home + '\bin\yap-win.exe'
+  else if RegQueryStringValue(HKLM, 'Software\YAP\Prolog\', 'cwd', Home) then
     Result := Home + '\bin\yap-win.exe'
   else
     Result := 'prolog_compiler_not_installed'
