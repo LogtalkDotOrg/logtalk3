@@ -2,10 +2,11 @@
 
 #############################################################################
 ## 
-##   This script creates a XSB logtalk.xwam file
-##   with the Logtalk compiler and runtime
+##   This script creates a XSB logtalk.xwam file with the Logtalk compiler
+##   and runtime and optionally an application.xwam file with a Logtalk
+##   application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on April 6, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -136,7 +137,7 @@ usage_help()
 {
 	echo 
 	echo "This script creates a XSB logtalk.xwam file with the Logtalk compiler and"
-	echo "runtime and an optional application.pl file from an application source"
+	echo "runtime and an optional application.xwam file from an application source"
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
