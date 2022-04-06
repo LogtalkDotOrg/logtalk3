@@ -1,9 +1,8 @@
 
 #############################################################################
 ## 
-##   This script creates a XSB logtalk.xwam file with the Logtalk compiler
-##   and runtime and optionally an application.xwam file with a Logtalk
-##   application
+##   This script creates a new GNU Prolog top-level interpreter
+##   that embeds Logtalk and optionally a Logtalk application
 ## 
 ##   Last updated on April 6, 2022
 ## 
@@ -44,7 +43,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.14")
+	Write-Output ($myName + " 0.13")
 }
 
 function Get-Logtalkhome {
@@ -90,9 +89,9 @@ function Get-Usage() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
-	Write-Output "This script creates a XSB logtalk.xwam file with the Logtalk compiler and"
-	Write-Output "runtime and an optional application.xwam file from an application source"
-	Write-Output "code given its loader file."
+	Write-Output "This script creates a new GNU Prolog top-level interpreter that embeds the"
+	Write-Output "Logtalk compiler and runtime and an optional application from an application"
+	Write-Output "source code given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ($myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
@@ -211,52 +210,29 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item ($env:LOGTALKHOME + '\adapters\xsb.pl') .
+Copy-Item ($env:LOGTALKHOME + '\adapters\gnu.pl') .
 Copy-Item ($env:LOGTALKHOME + '\core\core.pl') .
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 
-$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt."
-xsblgt -e $GoalParam 
+$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt"
+gplgt --query-goal $GoalParam
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
-	xsblgt -e $GoalParam
+	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
+	gplgt --query-goal $GoalParam
 } else {
 	Copy-Item $p ($t + '\paths_lgt.pl')
 }
 
 if ($s -eq "") {
-	Get-Content -Path xsb.pl,
-		paths_*.P,
-		expanding*_lgt.P,
-		monitoring*_lgt.P,
-		forwarding*_lgt.P,
-		user*_lgt.P,
-		logtalk*_lgt.P,
-		core_messages_*lgt.P,
-		core.pl | Set-Content logtalk.pl
+	Set-Content -Path settings_lgt.pl -Value ""
+} elseif ($c -eq $true) {
+	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
+	gplgt --query-goal $GoalParam
 } else {
-	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
-		xsblgt -e $GoalParam
-	} else {
-		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
-	}
-	Get-Content -Path xsb.pl,
-		paths_*.P,
-		expanding*_lgt.P,
-		monitoring*_lgt.P,
-		forwarding*_lgt.P,
-		user*_lgt.P,
-		logtalk*_lgt.P,
-		core_messages*_lgt.P,
-		settings*_lgt.P,
-		core.pl | Set-Content logtalk.pl
+	$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
+	gplgt --query-goal $GoalParam
 }
-
-xsb64 -e "compile(logtalk)." -e "halt."
-
-Move-item -Path logtalk.xwam -Destination $d
 
 if ($l -ne "") {
 	try {
@@ -268,17 +244,27 @@ if ($l -ne "") {
 		Exit 
 	}
 
-	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt." 
+	if ($s -ne "") {
+		Copy-Item -Path $s -Destination .
+	}
 
-	xsblgt -e $GoalParam
-	Get-Item *.P | 
+	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt" 
+	gplgt --query-goal $GoalParam
+
+	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
-		Set-Content application.P
+		Set-Content application.pl
 
-	xsblgt -e "compile(application)." -e "halt."
-	Move-Item -Path application.xwam -Destination $d
 	Pop-Location
+} else {
+	Set-Content -Path application.pl -Value ""
+}
+
+if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
+	gplc $args[$args.Count-1] -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) application.pl $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
+} else {
+	gplc -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) application.pl $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
 }
 
 Pop-Location

@@ -152,7 +152,7 @@ function Check-Parameters() {
 		try {
 			New-Item $d -ItemType Directory
 		} catch {
-			Write-Output ("Could not create temporary directory! at " + $d)
+			Write-Output ("Could not create destination directory! at " + $d)
 			Start-Sleep -Seconds 2
 			Exit 
 		}
@@ -242,7 +242,7 @@ if ($s -eq "") {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
 		sicstuslgt --goal $GoalParam
 	} else {
-		$GoalParam = "logtalk_compile('" + $settings.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
+		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
 	Get-Content -Path sicstus.pl,
 		paths_*.pl,
