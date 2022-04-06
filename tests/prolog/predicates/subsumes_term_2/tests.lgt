@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2022-04-06,
 		comment is 'Unit tests for the ISO Prolog standard subsumes_term/2 built-in predicate.'
 	]).
 
@@ -56,7 +56,28 @@
 	% tests from the Logtalk portability work
 
 	succeeds(lgt_subsumes_term_2_07) :-
-		{subsumes_term(c(A, [e(A)]), c(B, [e(B)]))}.
+		{subsumes_term(A, A)}.
+
+	succeeds(lgt_subsumes_term_2_08) :-
+		{subsumes_term(t(A,B), t(A,B))}.
+
+	succeeds(lgt_subsumes_term_2_09) :-
+		{subsumes_term(A-B, A-B)}.
+
+	succeeds(lgt_subsumes_term_2_10) :-
+		{subsumes_term(c(A, [e(B)]), c(A, [e(B)]))}.
+
+	succeeds(lgt_subsumes_term_2_11) :-
+		{subsumes_term(_A, _B)}.
+
+	succeeds(lgt_subsumes_term_2_12) :-
+		{subsumes_term(t(_A,_B), t(_C,_D))}.
+
+	succeeds(lgt_subsumes_term_2_13) :-
+		{subsumes_term(_A-_B, _C-_D)}.
+
+	succeeds(lgt_subsumes_term_2_14) :-
+		{subsumes_term(c(_A, [e(_B)]), c(_C, [e(_D)]))}.
 
 	:- if((
 		current_logtalk_flag(coinduction, supported),
@@ -64,31 +85,31 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		succeeds(lgt_subsumes_term_2_08) :-
+		succeeds(lgt_subsumes_term_2_15) :-
 			X = f(X),
 			{subsumes_term(f(_), f(X))}.
 
-		fails(lgt_subsumes_term_2_09) :-
+		fails(lgt_subsumes_term_2_16) :-
 			X = f(X),
 			{subsumes_term(f(X), f(_))}.
 
-		succeeds(lgt_subsumes_term_2_10) :-
+		succeeds(lgt_subsumes_term_2_17) :-
 			X = f(X),
 			{subsumes_term(X, X)}.
 
 	:- else.
 
-		- succeeds(lgt_subsumes_term_2_08) :-
+		- succeeds(lgt_subsumes_term_2_15) :-
 			% STO; Undefined.
 			X = f(X),
 			{subsumes_term(f(_), f(X))}.
 
-		- fails(lgt_subsumes_term_2_09) :-
+		- fails(lgt_subsumes_term_2_16) :-
 			% STO; Undefined.
 			X = f(X),
 			{subsumes_term(f(X), f(_))}.
 
-		- succeeds(lgt_subsumes_term_2_10) :-
+		- succeeds(lgt_subsumes_term_2_17) :-
 			% STO; Undefined.
 			X = f(X),
 			{subsumes_term(X, X)}.

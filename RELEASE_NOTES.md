@@ -81,8 +81,8 @@ arithmetic functions.
 
 * ADDED: Integer overflow tests for the `succ/2` and `plus/3` predicates.
 
-* ADDED: Additional tests for the Prolog standard `retractall/1` and
-`write_term/3` predicates.
+* ADDED: Additional tests for the Prolog standard `retractall/1`,
+`subsumes_term/2`, and `write_term/3` predicates.
 
 * IMPROVED: Tests for the Prolog standard `(//)/2` arithmetic function.
 
