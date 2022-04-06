@@ -47,9 +47,9 @@ c(2, 'B').
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-04-01,
+		date is 2022-04-06,
 		comment is 'Unit tests for the ISO Prolog standard retractall/1 built-in predicate.'
 	]).
 
@@ -103,6 +103,20 @@ c(2, 'B').
 	test(eclipse_retractall_1_11, errors([permission_error(modify,static_procedure,elk/1), permission_error(modify,static_procedure,':'(user,elk/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{retractall(elk(_))}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_retractall_1_12, errors([permission_error(modify,static_procedure,true/0), permission_error(modify,static_procedure,':'(user,true/0))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retractall(true)}.
+
+	test(lgt_retractall_1_13, errors([permission_error(modify,static_procedure,catch/3), permission_error(modify,static_procedure,':'(user,catch/3))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retractall(catch(_,_,_))}.
+
+	test(lgt_retractall_1_14, errors([permission_error(modify,static_procedure,repeat/0), permission_error(modify,static_procedure,':'(user,repeat/0))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retractall(repeat)}.
 
 	% auxiliary predicates
 

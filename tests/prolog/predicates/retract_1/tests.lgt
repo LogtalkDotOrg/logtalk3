@@ -43,9 +43,9 @@ foo(X) :- call(X), call(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-03-30,
+		date is 2022-04-06,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'
 	]).
 
@@ -114,5 +114,23 @@ foo(X) :- call(X), call(X).
 
 	test(eclipse_retract_1_14, false) :-
 		{retract(mammal(_))}.
+
+	% tests from the Logtalk portability work
+
+	test(eclipse_retract_1_15, errors([permission_error(modify,static_procedure,retract/1), permission_error(modify,static_procedure,':'(user,retract/1))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retract((retract(_) :- _))}.
+
+	test(eclipse_retract_1_16, errors([permission_error(modify,static_procedure,true/0), permission_error(modify,static_procedure,':'(user,true/0))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retract(true)}.
+
+	test(eclipse_retract_1_17, errors([permission_error(modify,static_procedure,catch/3), permission_error(modify,static_procedure,':'(user,catch/3))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retract((catch(_,_,_) :- _))}.
+
+	test(eclipse_retract_1_18, errors([permission_error(modify,static_procedure,repeat/0), permission_error(modify,static_procedure,':'(user,repeat/0))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{retract((repeat :- _))}.
 
 :- end_object.
