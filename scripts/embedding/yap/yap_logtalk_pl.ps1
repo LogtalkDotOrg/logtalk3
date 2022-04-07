@@ -5,7 +5,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 6, 2022
+##   Last updated on April 7, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -44,7 +44,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.13")
+	Write-Output ($myName + " 0.14")
 }
 
 function Get-Logtalkhome {
@@ -248,10 +248,10 @@ if ($s -eq "") {
 } else {
 	if ($c -eq $true) {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
-		yaplgt -g $GoalParam
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
+	yaplgt -g $GoalParam
 	Get-Content -Path yap.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -262,10 +262,8 @@ if ($s -eq "") {
 		core_messages*_lgt.pl,
 		settings*_lgt.pl,
 		core.pl,
-		$k | Set-Content logtalk.pl
+		$k | Set-Content $d/logtalk.pl
 }
-
-Move-item -Path logtalk.pl -Destination $d
 
 if ($l -ne "") {
 	try {
@@ -283,9 +281,8 @@ if ($l -ne "") {
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
-		Set-Content application.pl
+		Set-Content $d/application.pl
 
-	Move-Item -Path application.pl -Destination $d
 	Pop-Location
 }
 

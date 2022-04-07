@@ -255,9 +255,9 @@ if ($l -ne "") {
 }
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
-	gplc $args[$args.Count-1] -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) application.pl $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
+	gplc $args[$args.Count-1] -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) $(ls application/*.pl | sort LastWriteTime | % {$_.FullName}) $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
 } else {
-	gplc -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) $(ls application/*.pl | sort LastWriteTime) $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
+	gplc -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) $(ls application/*.pl | sort LastWriteTime | % {$_.FullName}) $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
 }
 
 Pop-Location

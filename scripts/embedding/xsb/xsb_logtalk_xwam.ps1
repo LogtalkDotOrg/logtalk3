@@ -5,7 +5,7 @@
 ##   and runtime and optionally an application.xwam file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 6, 2022
+##   Last updated on April 7, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -238,10 +238,10 @@ if ($s -eq "") {
 } else {
 	if ($c -eq $true) {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
-		xsblgt -e $GoalParam
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
+	xsblgt -e $GoalParam
 	Get-Content -Path xsb.pl,
 		paths_*.P,
 		expanding*_lgt.P,

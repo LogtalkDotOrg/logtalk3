@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on April 7, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -267,7 +267,7 @@ if [ "$settings" != "" ] ; then
 		settings*.yap \
 		core.pl \
 		"$hooks" \
-		> logtalk.pl
+		> "$directory"/logtalk.pl
 else
 	cat \
 		yap.pl \
@@ -280,10 +280,8 @@ else
 		core_messages*_lgt.yap \
 		core.pl \
 		"$hooks" \
-		> logtalk.pl
+		> "$directory"/logtalk.pl
 fi
-
-mv logtalk.pl "$directory"
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"

@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on April 5, 2022
+##   Last updated on April 7, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -249,10 +249,10 @@ if ($s -eq "") {
 } else {
 	if ($c -eq $true) {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "])"
-		swilgt -g $GoalParam -t "halt"
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "])" 
 	}
+	swilgt -g $GoalParam -t "halt"
 	Get-Content -Path swi.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,

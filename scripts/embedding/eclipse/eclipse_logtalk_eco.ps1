@@ -44,7 +44,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.14")
+	Write-Output ($myName + " 0.15")
 }
 
 function Get-Logtalkhome {
@@ -254,10 +254,10 @@ if ($s -eq "") {
 } else {
 	if ($c -eq $true) {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
-		eclipselgt -e $GoalParam
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
 	}
+	eclipselgt -e $GoalParam
 	Get-Content -Path eclipse.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -285,9 +285,8 @@ if ($l -ne "") {
 	}
 
 	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt" 
+	eclipselgt -e $GoalParam
 
-	Copy-item -Path $d/logtalk.eco -Destination .
-	eclipse -L iso -t user -f logtalk.eco -e $GoalParam
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
@@ -295,6 +294,7 @@ if ($l -ne "") {
 
 	eclipse -L iso -t user -f logtalk.eco -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	Move-Item -Path application.eco -Destination $d
+
 	Pop-Location
 }
 

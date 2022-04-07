@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on April 7, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.14"
+	echo "$(basename "$0") 0.15"
 	exit 0
 }
 
@@ -237,7 +237,7 @@ if [ "$settings" != "" ] ; then
 		core_messages*_lgt.pl \
 		settings*.pl \
 		core.pl \
-		> logtalk.pl
+		> "$directory"/logtalk.pl
 else
 	cat \
 		cx.pl \
@@ -249,15 +249,13 @@ else
 		logtalk*_lgt.pl \
 		core_messages*_lgt.pl \
 		core.pl \
-		> logtalk.pl
+		> "$directory"/logtalk.pl
 fi
-
-mv logtalk.pl "$directory"
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	cxprolog --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
+	cxlgt$extension --goal "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
 	cat $(ls -rt *.pl) > "$directory"/application.pl
 fi
 

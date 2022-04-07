@@ -1,9 +1,9 @@
 
 #############################################################################
 ## 
-##   This script creates a SICStus Prolog logtalk.po file with the Logtalk
-##   compiler and runtime and optionally an application.po file with a
-##   Logtalk application
+##   This script creates a CxProlog logtalk.pl file with the Logtalk
+##   compiler and runtime and optionally an application.pl file with
+##   a Logtalk application
 ## 
 ##   Last updated on April 7, 2022
 ## 
@@ -90,25 +90,23 @@ function Get-Usage() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
-	Write-Output "This script creates a SICStus Prolog logtalk.po file with the Logtalk compiler"
-	Write-Output "and runtime and an optional application.po file from an application source"
-	Write-Output "code given its loader file. It can also generate a saved state."
+	Write-Output "This script creates a CxProlog logtalk.pl file with the Logtalk compiler and"
+	Write-Output "runtime and an optional application.pl file from an application source code"
+	Write-Output "given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ($myName + " [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]")
+	Write-Output ($myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
 	Write-Output ($myName + " -v")
 	Write-Output ($myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -c compile library alias paths in paths and settings files"
-	Write-Output "  -x also generate a standalone saved state"
 	Write-Output "  -d directory for generated QLF files (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output "  -s settings file (absolute path)"
 	Write-Output "  -l loader file for the application (absolute path)"
-	Write-Output "  -g startup goal for the saved state in canonical syntax (default is true)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -213,22 +211,22 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item ($env:LOGTALKHOME + '\adapters\sicstus.pl') .
+Copy-Item ($env:LOGTALKHOME + '\adapters\cx.pl') .
 Copy-Item ($env:LOGTALKHOME + '\core\core.pl') .
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 
-$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt."
-sicstuslgt --goal $GoalParam 
+$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt"
+cxlgt --goal $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
-	sicstuslgt --goal $GoalParam
+	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
+	cxlgt --goal $GoalParam
 } else {
 	Copy-Item $p ($t + '\paths_lgt.pl')
 }
 
 if ($s -eq "") {
-	Get-Content -Path sicstus.pl,
+	Get-Content -Path cx.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -239,12 +237,12 @@ if ($s -eq "") {
 		core.pl | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
+		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
 	} else {
-		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
+		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
 	}
-	sicstuslgt --goal $GoalParam
-	Get-Content -Path sicstus.pl,
+	cxlgt --goal $GoalParam
+	Get-Content -Path cx.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -253,12 +251,8 @@ if ($s -eq "") {
 		logtalk*_lgt.pl,
 		core_messages*_lgt.pl,
 		settings*_lgt.pl,
-		core.pl | Set-Content logtalk.pl
+		core.pl | Set-Content $d/logtalk.pl
 }
-
-sicstus --goal "set_prolog_flag(discontiguous_warnings,off),compile(logtalk),save_files(logtalk,logtalk),halt."
-
-Move-item -Path logtalk.po -Destination $d
 
 if ($l -ne "") {
 	try {
@@ -270,30 +264,15 @@ if ($l -ne "") {
 		Exit 
 	}
 
-	$GoalParam = "load_files('" + $d.Replace('\', '/') +  "/logtalk.po'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt." 
+	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt" 
 
-	sicstus --goal $GoalParam
+	cxlgt --goal $GoalParam
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
-		Set-Content application.pl
+		Set-Content $d/application.pl
 
-	$GoalParam = "load_files('" + $d.Replace('\', '/') +  "/logtalk.po'), set_prolog_flag(discontiguous_warnings,off), compile(application), save_files(application,application), halt."
-	sicstus --goal $GoalParam
-
-	Move-Item -Path application.po -Destination $d
 	Pop-Location
-}
-
-if ($x -eq $true) {
-	Set-Location $d
-	if ($l -ne "") {
-		$GoalParam = "load_files(['logtalk.po','application.po']), save_program('" + $n + "', " + $g + "), halt."
-		sicstus --goal $GoalParam
-	} else {
-		$GoalParam = "load_files(['logtalk.po']), save_program('" + $n + "', '" + $g + "'), halt."
-		sicstus --goal $GoalParam
-	}
 }
 
 Pop-Location
