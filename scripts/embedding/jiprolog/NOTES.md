@@ -34,7 +34,9 @@ by creating a `init.pl` with the contents:
 	:- load('logtalk.jip').
 	:- load('application.jip').
 
-And then typing:
+Possibly also with an `initialization/1` directive to auto-start the
+application (using any Logtalk goal in canonical notation). And then
+typing:
 
 	$ jar cf logtalk.jar init.pl *.jip
 
