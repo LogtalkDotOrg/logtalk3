@@ -1,8 +1,8 @@
 
 #############################################################################
 ## 
-##   This script creates a Trealla Prolog logtalk.pl file with the Logtalk
-##   compiler and runtime and optionally an application.pl file with
+##   This script creates a JIProlog logtalk.jip file with the Logtalk
+##   compiler and runtime and optionally an application.jip file with
 ##   a Logtalk application
 ## 
 ##   Last updated on April 7, 2022
@@ -44,7 +44,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.3")
+	Write-Output ($myName + " 0.13")
 }
 
 function Get-Logtalkhome {
@@ -211,22 +211,22 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item ($env:LOGTALKHOME + '\adapters\trealla.pl') .
+Copy-Item ($env:LOGTALKHOME + '\adapters\ji.pl') .
 Copy-Item ($env:LOGTALKHOME + '\core\core.pl') .
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 
 $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt"
-tplgt -g $GoalParam 
+jiplgt -g $GoalParam 
 
 if ($c -eq $true) {
 	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
-	tplgt -g $GoalParam
+	jiplgt -g $GoalParam
 } else {
 	Copy-Item $p ($t + '\paths_lgt.pl')
 }
 
 if ($s -eq "") {
-	Get-Content -Path trealla.pl,
+	Get-Content -Path ji.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -234,15 +234,15 @@ if ($s -eq "") {
 		user*_lgt.pl,
 		logtalk*_lgt.pl,
 		core_messages_*lgt.pl,
-		core.pl | Set-Content $d/logtalk.pl
+		core.pl | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
 	}
-	tplgt -g $GoalParam
-	Get-Content -Path trealla.pl,
+	jiplgt -g $GoalParam
+	Get-Content -Path ji.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -251,8 +251,12 @@ if ($s -eq "") {
 		logtalk*_lgt.pl,
 		core_messages*_lgt.pl,
 		settings*_lgt.pl,
-		core.pl | Set-Content $d/logtalk.pl
+		core.pl | Set-Content logtalk.pl
 }
+
+java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),compile('logtalk.pl'),halt"
+
+Move-item -Path logtalk.jip -Destination $d
 
 if ($l -ne "") {
 	try {
@@ -266,11 +270,14 @@ if ($l -ne "") {
 
 	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt" 
 
-	tplgt -g $GoalParam
+	jiplgt -g $GoalParam
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
-		Set-Content $d/application.pl
+		Set-Content application.pl
+
+	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('$d/logtalk.jip'),compile('application.pl'),halt"
+	Move-item -Path application.jip -Destination $d
 
 	Pop-Location
 }

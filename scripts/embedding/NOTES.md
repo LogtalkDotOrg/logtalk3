@@ -23,13 +23,17 @@ compilers for embedding Logtalk and Logtalk applications. See the
 `SCRIPT.txt` file for usage examples.
 
 If you're using Windows, experimental PowerShell scripts are available
-for selected backends. In alternative, a possible solution to run the
-Bash shell scripts is to install either the
-[Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/)
+for selected backends. Using the PowerShell scripts may require first
+changing the execution policy:
+
+	PowerShell.exe -ExecutionPolicy Unrestricted
+
+In alternative, a possible solution to run the Bash shell scripts is to
+install either the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/)
 or [Git for Windows](https://gitforwindows.org). Both provide access
 to a Bash shell. In both cases, use full paths with forward slashes
 (e.g. `C:/Users/jdoe/collect`) and without environment variables. You
-may need to specify the temporary directory for intermediate files using
+must also specify the temporary directory for intermediate files using
 the scripts `-t` option. Also, symbolic links may not work and use of
 actual paths to files may be required.
 
@@ -40,7 +44,9 @@ systems. These sample scripts should be regarded as starting points as
 actual use requires customization (e.g. the starting goal, inclusion of
 a top-level interpreter, etc). The scripts also accept command-lines
 options for specifying a paths files and a settings file to be used to
-compile any application files. See the `settings-embedding-sample.lgt`
+compile any application files. The paths file must provide definitions
+for the `logtalk_library_path/2` predicate for all libraries loaded by
+the application being embedded. See the `settings-embedding-sample.lgt`
 file for settings suggestions for embedding applications.
 
 An alternative, available in some backend Prolog compilers such as

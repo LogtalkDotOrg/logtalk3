@@ -233,7 +233,7 @@ if ($s -eq "") {
 		user*_lgt.pl,
 		logtalk*_lgt.pl,
 		core_messages_*lgt.pl,
-		core.pl | Set-Content logtalk.pl
+		core.pl | Set-Content $d/logtalk.pl
 } else {
 	if ($c -eq $true) {
 		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
