@@ -44,7 +44,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.13")
+	Write-Output ($myName + " 0.14")
 }
 
 function Get-Logtalkhome {
@@ -254,7 +254,7 @@ if ($s -eq "") {
 		core.pl | Set-Content logtalk.pl
 }
 
-java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),compile('logtalk.pl'),halt"
+java -jar -DLOGTALKHOME=$env:LOGTALKHOME -DLOGTALKUSER=$env:LOGTALKUSER -DHOME=$env:HOMEPROFILE $env:JIP_HOME/jipconsole.jar -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),op(700,xfx,as),op(200,fy,@),compile('logtalk.pl'),halt"
 
 Move-item -Path logtalk.jip -Destination $d
 
@@ -276,7 +276,7 @@ if ($l -ne "") {
 		Get-Content |
 		Set-Content application.pl
 
-	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('$d/logtalk.jip'),compile('application.pl'),halt"
+	jiplgt -g "compile('application.pl'),halt"
 	Move-item -Path application.jip -Destination $d
 
 	Pop-Location

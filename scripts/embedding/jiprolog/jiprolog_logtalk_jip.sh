@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.jip file with
 ##   a Logtalk application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on April 7, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -252,16 +252,16 @@ else
 		> logtalk.pl
 fi
 
-java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),compile('logtalk.pl'),halt"
+java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),op(700,xfx,as),op(200,fy,@),compile('logtalk.pl'),halt"
 
 mv logtalk.jip "$directory"
 
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('$directory/logtalk.jip'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
+	jiplgt$extension -g "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
 	cat $(ls -rt *.pl) > application.pl
-	java -jar -DLOGTALKHOME="$LOGTALKHOME" -DLOGTALKUSER="$LOGTALKUSER" -DHOME="$HOME" "$JIP_HOME/jipconsole.jar" -n -g "op(600,xfy,::),op(600,fy,::),op(600,fy,^^),op(600,fy,:),load('$directory/logtalk.jip'),compile('application.pl'),halt"
+	jiplgt$extension -g "compile('application.pl'),halt"
 	mv application.jip "$directory"
 fi
 
