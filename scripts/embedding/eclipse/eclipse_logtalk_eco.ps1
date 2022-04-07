@@ -211,8 +211,8 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item ($env:LOGTALKHOME + '\adapters\eclipse.pl') .
-Copy-Item ($env:LOGTALKHOME + '\core\core.pl') .
+Copy-Item -Path ($env:LOGTALKHOME + '\adapters\eclipse.pl') -Destination .
+Copy-Item -Path ($env:LOGTALKHOME + '\core\core.pl') -Destination .
 
 Set-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_current_protocol_'/5)."
 Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_current_category_'/6)."
@@ -238,7 +238,7 @@ if ($c -eq $true) {
 	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
 	eclipselgt -e $GoalParam
 } else {
-	Copy-Item $p ($t + '\paths_lgt.pl')
+	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
 if ($s -eq "") {

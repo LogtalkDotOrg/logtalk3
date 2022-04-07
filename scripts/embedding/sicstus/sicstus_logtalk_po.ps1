@@ -213,8 +213,8 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item ($env:LOGTALKHOME + '\adapters\sicstus.pl') .
-Copy-Item ($env:LOGTALKHOME + '\core\core.pl') .
+Copy-Item -Path ($env:LOGTALKHOME + '\adapters\sicstus.pl') -Destination .
+Copy-Item -Path ($env:LOGTALKHOME + '\core\core.pl') -Destination .
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 
 $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt."
@@ -224,7 +224,7 @@ if ($c -eq $true) {
 	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
 	sicstuslgt --goal $GoalParam
 } else {
-	Copy-Item $p ($t + '\paths_lgt.pl')
+	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
 if ($s -eq "") {
