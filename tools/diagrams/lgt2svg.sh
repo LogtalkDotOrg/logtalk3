@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on November 25, 2021
+##   Last updated on April 8, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -82,7 +82,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -147,12 +147,12 @@ if [ $count != 0 ] ; then
 	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 	for file in ./*.dot; do
 		echo -n "  converting $(basename "$file") "
-		flag=1
+		converted=1
 		counter=16
-		while [ $flag -eq 1 ] && [ $counter -gt 0 ] ; do
-			$command -q -Tsvg -Gfontnames=svg -o"${file%.*}.svg" ${args[@]} "$file" 2>/dev/null | cat
+		while [ $converted -eq 1 ] && [ $counter -gt 0 ] ; do
+			$command -q -Tsvg -Gfontnames=svg -o "${file%.*}.svg" ${args[@]} "$file" 2>/dev/null | cat
 			if [ "${PIPESTATUS[0]}" == 0 ] ; then
-				flag=0
+				converted=0
 			fi
 			(( --counter ))
 			echo -n "."

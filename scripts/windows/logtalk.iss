@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on April 7, 2022
+; Last updated on April 8, 2022
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -128,6 +128,7 @@ Source: "{#MyBaseDir}\scripts\embedding\xsb\*.ps1"; DestDir: "{win}"; Components
 Source: "{#MyBaseDir}\scripts\embedding\yap\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\integration\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\diagrams\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
+Source: "{#MyBaseDir}\tools\diagrams\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 
 [INI]
