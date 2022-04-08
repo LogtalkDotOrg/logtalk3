@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for Quintus Prolog
-##   Last updated on April 5, 2022
+##   Last updated on April 8, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -103,9 +103,9 @@ $source = $env:LOGTALKHOME + '\integration\logtalk_quintus.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    prolog +l $source +z $env:LOGTALKHOME $env:LOGTALKUSER $env:LOGTALK_STARTUP_DIRECTORY -- $args[$args.Count-1]
+    prolog +l $source +z $env:LOGTALKHOME $env:LOGTALKUSER $env:LOGTALK_STARTUP_DIRECTORY -- (-Split $args[$args.Count-1])
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    prolog +l $source +z $env:LOGTALKHOME $env:LOGTALKUSER $env:LOGTALK_STARTUP_DIRECTORY -- $args[$args.Count-1]
+    prolog +l $source +z $env:LOGTALKHOME $env:LOGTALKUSER $env:LOGTALK_STARTUP_DIRECTORY -- (-Split $args[$args.Count-1])
 } else {
     prolog +l $source +z $env:LOGTALKHOME $env:LOGTALKUSER $env:LOGTALK_STARTUP_DIRECTORY $args
 }

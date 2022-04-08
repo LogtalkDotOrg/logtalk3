@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for GNU Prolog
-##   Last updated on April 5, 2022
+##   Last updated on April 8, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -103,9 +103,9 @@ $source = '$LOGTALKHOME/integration/logtalk_gp.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    gprolog.exe --entry-goal "['$source']" $args[0..$n] -- $args[$args.Count-1]
+    gprolog.exe --entry-goal "['$source']" $args[0..$n] -- (-Split $args[$args.Count-1])
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    gprolog.exe --entry-goal "['$source']" -- $args[$args.Count-1]
+    gprolog.exe --entry-goal "['$source']" -- (-Split $args[$args.Count-1])
 } else {
     gprolog.exe --entry-goal "['$source']" $args
 }

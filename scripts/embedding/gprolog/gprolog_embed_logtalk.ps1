@@ -4,7 +4,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on April 7, 2022
+##   Last updated on April 8, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -255,7 +255,7 @@ if ($l -ne "") {
 }
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
-	gplc $args[$args.Count-1] -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) $(ls application/*.pl | sort LastWriteTime | % {$_.FullName}) $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
+	gplc (-Split $args[$args.Count-1]) -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) $(ls application/*.pl | sort LastWriteTime | % {$_.FullName}) $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
 } else {
 	gplc -o "$d"/"$n" gnu.pl $(ls expanding*_lgt.pl | % {$_.FullName}) $(ls monitoring*_lgt.pl | % {$_.FullName}) $(ls forwarding*_lgt.pl | % {$_.FullName})  $(ls user*_lgt.pl | % {$_.FullName}) $(ls logtalk*_lgt.pl | % {$_.FullName}) $(ls core_messages*_lgt.pl | % {$_.FullName}) $(ls application/*.pl | sort LastWriteTime | % {$_.FullName}) $(ls settings*_lgt.pl | % {$_.FullName}) core.pl $(ls paths*_lgt.pl | % {$_.FullName})
 }

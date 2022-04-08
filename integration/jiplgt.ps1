@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for JIProlog
-##   Last updated on April 5, 2022
+##   Last updated on April 8, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -103,9 +103,9 @@ $source = $env:LOGTALKHOME + '\integration\logtalk_ji.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    java -jar -DLOGTALKHOME=$env:LOGTALKHOME -DLOGTALKUSER=$env:LOGTALKUSER -DHOME=$env:HOMEPROFILE $env:JIP_HOME\jipconsole.jar -c $source $args[0..$n] -- $args[$args.Count-1]
+    java -jar -DLOGTALKHOME=$env:LOGTALKHOME -DLOGTALKUSER=$env:LOGTALKUSER -DHOME=$env:HOMEPROFILE $env:JIP_HOME\jipconsole.jar -c $source $args[0..$n] -- (-Split $args[$args.Count-1])
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    java -jar -DLOGTALKHOME=$env:LOGTALKHOME -DLOGTALKUSER=$env:LOGTALKUSER -DHOME=$env:HOMEPROFILE $env:JIP_HOME\jipconsole.jar -c $source -- $args[$args.Count-1]
+    java -jar -DLOGTALKHOME=$env:LOGTALKHOME -DLOGTALKUSER=$env:LOGTALKUSER -DHOME=$env:HOMEPROFILE $env:JIP_HOME\jipconsole.jar -c $source -- (-Split $args[$args.Count-1])
 } else {
     java -jar -DLOGTALKHOME=$env:LOGTALKHOME -DLOGTALKUSER=$env:LOGTALKUSER -DHOME=$env:HOMEPROFILE $env:JIP_HOME\jipconsole.jar -c $source $args
 }

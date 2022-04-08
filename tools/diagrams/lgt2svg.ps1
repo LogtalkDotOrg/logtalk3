@@ -167,9 +167,9 @@ if ($count -gt 0) {
 		$counter = 16
 		While (($converted -eq 1) -and ($counter -gt 0)) {
 			if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
-				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $args[$args.Count-1] $_.Name
+				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $args[$args.Count-1]) $_.Name
 			} elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $args[$args.Count-1] $_.Name
+				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $args[$args.Count-1]) $_.Name
 			} else {
 				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $_.Name
 			}
