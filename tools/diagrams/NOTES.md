@@ -239,6 +239,7 @@ Sample helper scripts are provided for converting `.dot` files to `.svg`
 files:
 
 - `lgt2svg.sh` for POSIX systems
+- `lgt2svg.ps1` for Windows systems
 - `lgt2svg.js` and `lgt2svg.bat` for Windows systems
 
 The scripts assume that the Graphviz command-line executables are available

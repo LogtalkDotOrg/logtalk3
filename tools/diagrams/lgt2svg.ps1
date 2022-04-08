@@ -88,7 +88,7 @@ function Get-Usage() {
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -v print version"
-	Write-Output "  -c Graphviz command (valid values are dot, circo, fdp and neato; default is $command)"
+	Write-Output "  -c Graphviz command (valid values are dot, circo, fdp and neato; default is $c)"
 	Write-Output "  --% addtional arguments to be passed to the Graphviz command (no default)"
 	Write-Output "  -h print help"
 	Write-Output ""
@@ -166,7 +166,13 @@ if ($count -gt 0) {
 		$converted = 1
 		$counter = 16
 		While (($converted -eq 1) -and ($counter -gt 0)) {
-			& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $_.Name
+			if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
+				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $args[$args.Count-1] $_.Name
+			} elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
+				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $args[$args.Count-1] $_.Name
+			} else {
+				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $_.Name
+			}
 			if ($?) {
 				$converted = 0
 			}
