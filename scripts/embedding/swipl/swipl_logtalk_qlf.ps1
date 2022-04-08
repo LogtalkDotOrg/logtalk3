@@ -60,10 +60,6 @@ function Get-Logtalkhome {
 			"C:\Program Files\Logtalk",
 			"%LOCALAPPDATA%\Logtalk"
 		)
-		# One possibility is using HOME environment
-		if (-not ($null -eq $env:HOME)) {
-			$DEFAULTPATHS += $env:HOME + '\logtalk' #TODO really correct for windows?
-		}
 		
 		# Checking all possibilites
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
