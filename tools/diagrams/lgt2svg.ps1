@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on April 8, 2022
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -78,13 +78,13 @@ function Get-Usage() {
 	Write-Output "in the current directory to SVG files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ($myName + " [-c command] [--% arguments]")
-	Write-Output ($myName + " -v")
-	Write-Output ($myName + " -h")
+	Write-Output ("  " + $myName + " [-c command] [--% arguments]")
+	Write-Output ("  " + $myName + " -v")
+	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -v print version"
-	Write-Output "  -c Graphviz command (valid values are dot, circo, fdp and neato; default is $c)"
+	Write-Output ("  -c Graphviz command (valid values are dot, circo, fdp and neato; default is " + $c + ")")
 	Write-Output "  --% addtional arguments to be passed to the Graphviz command (no default)"
 	Write-Output "  -h print help"
 	Write-Output ""
