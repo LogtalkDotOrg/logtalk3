@@ -95,6 +95,9 @@ construct tests.
 Installers and installation scripts
 -----------------------------------
 
+* CHANGED: The embedding scripts default values for the paths and settings
+files to, respectively, `paths.pl` and `settings-embedding-sample.lgt`.
+
 * ADDED: Experimental Windows PowerShell `logtalk_user_setup.ps1` script.
 Collaborative work with Hans N. Beck.
 

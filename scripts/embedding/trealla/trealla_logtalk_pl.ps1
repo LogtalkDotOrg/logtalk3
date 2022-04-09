@@ -33,7 +33,8 @@ param(
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
-	[String]$p = ($env:LOGTALKHOME + '\paths\paths_core.pl'),
+	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
+	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
 	[String]$s, 
 	[String]$l,
 	[String]$g = "true",
@@ -44,7 +45,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.3")
+	Write-Output ($myName + " 0.4")
 }
 
 function Get-Logtalkhome {
@@ -101,7 +102,7 @@ function Get-Usage() {
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
-	Write-Output "  -s settings file (absolute path)"
+	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"

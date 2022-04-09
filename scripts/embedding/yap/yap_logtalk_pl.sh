@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.pl file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 7, 2022
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.14"
+	echo "$(basename "$0") 0.15"
 	exit 0
 }
 
@@ -104,7 +104,8 @@ goal="true"
 directory="$(pwd -P)"
 temporary=""
 name="application"
-paths="$LOGTALKHOME/paths/paths_core.pl"
+paths="$LOGTALKHOME/paths/paths.pl"
+settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 hooks="$LOGTALKHOME/adapters/yaphooks.pl"
 compile="false"
 
@@ -128,7 +129,7 @@ usage_help()
 	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -k hooks file (absolute path; default is $hooks)"
-	echo "  -s settings file (absolute path)"
+	echo "  -s settings file (absolute path; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -g startup goal for the saved state in canonical syntax (default is true)"
 	echo "  -v print version of $(basename "$0")"

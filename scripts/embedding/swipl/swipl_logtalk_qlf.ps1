@@ -33,7 +33,8 @@ param(
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
-	[String]$p = ($env:LOGTALKHOME + '\paths\paths_core.pl'),
+	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
+	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
 	[String]$k = ($env:LOGTALKHOME + '\adapters\swihooks.pl'),
 	[String]$s, 
 	[String]$l,
@@ -45,7 +46,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.14")
+	Write-Output ($myName + " 0.15")
 }
 
 function Get-Logtalkhome {
@@ -104,7 +105,7 @@ function Get-Usage() {
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output ("  -k hooks file (absolute path; default is " + $k + ")")
-	Write-Output "  -s settings file (absolute path)"
+	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output "  -g startup goal for the saved state in canonical syntax (default is true)"
 	Write-Output ("  -v print version of " +  $myName)

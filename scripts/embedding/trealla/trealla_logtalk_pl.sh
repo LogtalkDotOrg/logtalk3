@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on April 7, 2022
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.4"
 	exit 0
 }
 
@@ -101,7 +101,8 @@ fi
 # default values
 directory="$(pwd -P)"
 temporary=""
-paths="$LOGTALKHOME/paths/paths_core.pl"
+paths="$LOGTALKHOME/paths/paths.pl"
+settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
 
 usage_help()
@@ -121,7 +122,7 @@ usage_help()
 	echo "  -d directory for generated Prolog files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path)"
+	echo "  -s settings file (absolute path; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"

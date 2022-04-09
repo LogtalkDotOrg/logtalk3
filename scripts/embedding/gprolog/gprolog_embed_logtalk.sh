@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on March 24, 2022
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -101,7 +101,8 @@ fi
 directory="$(pwd -P)"
 temporary=""
 name="logtalk"
-paths="$LOGTALKHOME/paths/paths_core.pl"
+paths="$LOGTALKHOME/paths/paths.pl"
+settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
 
 usage_help()
@@ -122,7 +123,7 @@ usage_help()
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated top-level (default is logtalk)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path)"
+	echo "  -s settings file (absolute path; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -- arguments to be passed to gplc (no default)"
 	echo "  -v print version of $(basename "$0")"
