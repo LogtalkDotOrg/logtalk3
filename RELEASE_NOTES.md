@@ -68,6 +68,9 @@ Tools
 
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
+* FIXED: The `lgtdoc` Bash shell scripts help text content failed to list the
+version option.
+
 Tests
 -----
 

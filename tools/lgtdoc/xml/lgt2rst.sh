@@ -4,7 +4,7 @@
 ## 
 ##   XML documenting files to reStructuredText files conversion script
 ## 
-##   Last updated on January 22, 2022
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 4.0"
+	echo "$(basename "$0") 4.1"
 	exit 0
 }
 
@@ -110,10 +110,10 @@ usage_help()
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor] [-s] [-m]"
+	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of $(basename "$0")"
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
@@ -121,6 +121,7 @@ usage_help()
 	echo "  -s run sphinx-quickstart script"
 	echo "  -m run make html (requires also using the -s option)"
 	echo "  -- arguments to be passed to sphinx-quickstart script (no default)"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }

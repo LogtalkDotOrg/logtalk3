@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on October 24, 2019
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 1.0"
+	echo "$(basename "$0") 1.1"
 	exit 0
 }
 
@@ -97,13 +97,14 @@ usage_help()
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-f format] [-i index] [-t title]"
+	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of $(basename "$0")"
 	echo "  -f format of the index file (either xhtml or html; default is $format)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on July 30, 2021
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.0"
+	echo "$(basename "$0") 2.1"
 	exit 0
 }
 
@@ -111,15 +111,16 @@ usage_help()
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-f format] [-d directory] [-i index] [-t title] [-p processor]"
+	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version of $(basename "$0")"
 	echo "  -f output file format (either xhtml or html; default is $format)"
 	echo "  -d output directory for the generated files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
+	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
