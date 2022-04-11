@@ -68,6 +68,9 @@ Tools
 
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
+* UPDATED: The `lgtdoc` tool `lgt2pdf.sh` script to support using the FOP 2.x
+processor.
+
 * FIXED: The `lgtdoc` Bash shell scripts help text content failed to list the
 version option.
 

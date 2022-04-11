@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on April 9, 2022
+##   Last updated on April 11, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 1.2"
+	echo "$(basename "$0") 2.0"
 	exit 0
 }
 
@@ -92,6 +92,7 @@ format=a4
 # format=us
 
 processor=fop
+# processor=fop2
 # processor=xep
 # processor=xinc
 
@@ -146,7 +147,7 @@ elif [ "$d_arg" != "" ] ; then
 	directory=$d_arg
 fi
 
-if [ "$p_arg" != "" ] && [ "$p_arg" != "fop" ] && [ "$p_arg" != "xep" ] && [ "$p_arg" != "xinc" ] ; then
+if [ "$p_arg" != "" ] && [ "$p_arg" != "fop" ] && [ "$p_arg" != "fop2" ] && [ "$p_arg" != "xep" ] && [ "$p_arg" != "xinc" ] ; then
 	echo "Error! Unsupported XSL-FO processor: $p_arg" >&2
 	usage_help
 	exit 1

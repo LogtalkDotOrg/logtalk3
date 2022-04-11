@@ -159,6 +159,9 @@ Brief description of each directory and file in this folder:
 		* [Lunasil Xinc processor](http://www.lunasil.com/index.html) (tested with version 2.02)  
 		* [RenderX XEP processor](http://www.renderx.com/) (tested with version 3.8.1)  
 
+	FOP 2.x is also supported but requires generating the XML documentation
+	files using the option `xml_spec(xsd)`.
+
 	The scripts should be called from the directory containing the XML
 	files you wish to convert. Call the scripts with the help option for
 	a description of the available optional parameters (type `cscript
