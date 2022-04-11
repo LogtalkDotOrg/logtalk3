@@ -120,7 +120,7 @@ usage_help()
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -v print version"
 	echo "  -h help"
 	echo
 }

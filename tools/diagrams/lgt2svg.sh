@@ -103,9 +103,9 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -v print version"
 	echo "  -c Graphviz command (valid values are dot, circo, fdp and neato; default is $command)"
 	echo "  -- addtional arguments to be passed to the Graphviz command (no default)"
+	echo "  -v print version"
 	echo "  -h print help"
 	echo
 }

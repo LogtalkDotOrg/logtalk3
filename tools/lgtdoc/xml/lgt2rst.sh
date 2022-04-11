@@ -121,7 +121,7 @@ usage_help()
 	echo "  -s run sphinx-quickstart script"
 	echo "  -m run make html (requires also using the -s option)"
 	echo "  -- arguments to be passed to sphinx-quickstart script (no default)"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -v print version"
 	echo "  -h help"
 	echo
 }

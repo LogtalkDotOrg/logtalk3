@@ -109,7 +109,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -v print version"
 	echo "  -h help"
 	echo
 }

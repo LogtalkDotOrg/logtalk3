@@ -104,7 +104,7 @@ usage_help()
 	echo "  -f format of the index file (either xhtml or html; default is $format)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -v print version"
 	echo "  -h help"
 	echo
 }

@@ -83,9 +83,9 @@ function Get-Usage() {
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output "  -v print version"
 	Write-Output ("  -c Graphviz command (valid values are dot, circo, fdp and neato; default is " + $c + ")")
 	Write-Output "  --% addtional arguments to be passed to the Graphviz command (no default)"
+	Write-Output "  -v print version"
 	Write-Output "  -h print help"
 	Write-Output ""
 }

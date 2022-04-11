@@ -112,7 +112,7 @@ usage_help()
 	echo "  -f paper format (either a4 or us; default is $format)"
 	echo "  -d output directory for the PDF files (default is $directory)"
 	echo "  -p XSL-FO processor (either fop, xep, or xinc; default is $processor)"
-	echo "  -v print version of $(basename "$0")"
+	echo "  -v print version"
 	echo "  -h help"
 	echo
 }
