@@ -5,7 +5,7 @@
 ##   and runtime and optionally an application.xwam file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on April 11, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -145,7 +145,7 @@ function Check-Parameters() {
 
 	if (-not (Test-Path $d)) {
 		try {
-			New-Item $d -ItemType Directory
+			New-Item $d -ItemType Directory > $null
 		} catch {
 			Write-Output ("Could not create destination directory! at " + $d)
 			Start-Sleep -Seconds 2
@@ -155,7 +155,7 @@ function Check-Parameters() {
 
 	if (-not (Test-Path $t)) {
 		try {
-			New-Item $t -ItemType Directory
+			New-Item $t -ItemType Directory > $null
 		} catch {
 			Write-Output ("Could not create temporary directory! at " + $t)
 			Start-Sleep -Seconds 2
@@ -257,7 +257,7 @@ Move-item -Path logtalk.xwam -Destination $d
 
 if ($l -ne "") {
 	try {
-		New-Item $t/application -ItemType Directory
+		New-Item $t/application -ItemType Directory > $null
 		Push-Location $t/application
 	} catch {
 		Write-Output ("Could not create temporary directory! at " + $t + "/application")

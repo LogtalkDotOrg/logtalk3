@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on April 5, 2022
+##   Last updated on April 11, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -96,7 +96,7 @@ function Create-Logtalkuser-Directory {
 		Write-Output ""
 		Write-Output ("    " + $env:LOGTALKUSER)
 		Write-Output ""
-		New-Item -Path $env:LOGTALKUSER -ItemType directory
+		New-Item -Path $env:LOGTALKUSER -ItemType directory > $null
 		if (Test-Path $env:LOGTALKUSER-$date\settings.lgt) {
 			Copy-Item $env:LOGTALKUSER-$date\settings.lgt -Destination $env:LOGTALKUSER
 			Write-Output "Copied your old \"settings.lgt\" file to the new \"\%LOGTALKUSER\%\" directory."
@@ -106,14 +106,14 @@ function Create-Logtalkuser-Directory {
 			Write-Output "Copied your old \"settings.logtalk\" file to the new \"\%LOGTALKUSER\%\" directory."
 		}
 		if (Test-Path $env:LOGTALKUSER-$date\packs) {
-			New-Item -Path $env:LOGTALKUSER\packs -ItemType directory
+			New-Item -Path $env:LOGTALKUSER\packs -ItemType directory > $null
 			Copy-Item -Path $env:LOGTALKUSER-$date\packs -Destination $env:LOGTALKUSER\packs -Recurse
 			Write-Output "Copied your packs to the new \"\%LOGTALKUSER\%\" directory."
 		}
 	} else {
 		Write-Output "Creating a new %LOGTALKUSER% directory:"
 		Write-Output ("    " + $env:LOGTALKUSER)
-		New-Item -Path $env:LOGTALKUSER -ItemType directory
+		New-Item -Path $env:LOGTALKUSER -ItemType directory > $null
 	}
 
 	Write-Output "Copying Logtalk files and directories..."
@@ -138,34 +138,34 @@ function Create-Logtalkuser-Directory {
 	Remove-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.dtd
 	Remove-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.rng
 	Remove-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.xsd
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\ACKNOWLEDGMENTS.md -Target $env:LOGTALKHOME\ACKNOWLEDGMENTS.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\BIBLIOGRAPHY.bib -Target $env:LOGTALKHOME\BIBLIOGRAPHY.bib
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\CONTRIBUTING.md -Target $env:LOGTALKHOME\CONTRIBUTING.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\CUSTOMIZE.md -Target $env:LOGTALKHOME\CUSTOMIZE.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\INSTALL.md -Target $env:LOGTALKHOME\INSTALL.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\LICENSE.txt -Target $env:LOGTALKHOME\LICENSE.txt
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\QUICK_START.md -Target $env:LOGTALKHOME\QUICK_START.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\README.md -Target $env:LOGTALKHOME\README.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\RELEASE_NOTES.md -Target $env:LOGTALKHOME\RELEASE_NOTES.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\UPGRADING.md -Target $env:LOGTALKHOME\UPGRADING.md
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\adapters -Target $env:LOGTALKHOME\adapters
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\coding -Target $env:LOGTALKHOME\coding
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\integration -Target $env:LOGTALKHOME\integration
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\manuals -Target $env:LOGTALKHOME\manuals
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\paths -Target $env:LOGTALKHOME\paths
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\scripts -Target $env:LOGTALKHOME\scripts
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\diagrams\lgt2svg.bat -Target $env:LOGTALKHOME\tools\diagrams\lgt2svg.bat
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2html.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2html.bat
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2pdf.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2pdf.bat
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2xml.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2xml.bat
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2md.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2md.bat
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2txt.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2txt.bat
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.rng
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.rng
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\ACKNOWLEDGMENTS.md -Target $env:LOGTALKHOME\ACKNOWLEDGMENTS.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\BIBLIOGRAPHY.bib -Target $env:LOGTALKHOME\BIBLIOGRAPHY.bib > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\CONTRIBUTING.md -Target $env:LOGTALKHOME\CONTRIBUTING.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\CUSTOMIZE.md -Target $env:LOGTALKHOME\CUSTOMIZE.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\INSTALL.md -Target $env:LOGTALKHOME\INSTALL.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\LICENSE.txt -Target $env:LOGTALKHOME\LICENSE.txt > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\QUICK_START.md -Target $env:LOGTALKHOME\QUICK_START.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\README.md -Target $env:LOGTALKHOME\README.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\RELEASE_NOTES.md -Target $env:LOGTALKHOME\RELEASE_NOTES.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\UPGRADING.md -Target $env:LOGTALKHOME\UPGRADING.md > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\adapters -Target $env:LOGTALKHOME\adapters > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\coding -Target $env:LOGTALKHOME\coding > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\integration -Target $env:LOGTALKHOME\integration > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\manuals -Target $env:LOGTALKHOME\manuals > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\paths -Target $env:LOGTALKHOME\paths > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\scripts -Target $env:LOGTALKHOME\scripts > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\diagrams\lgt2svg.bat -Target $env:LOGTALKHOME\tools\diagrams\lgt2svg.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2html.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2html.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2pdf.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2pdf.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2xml.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2xml.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2md.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2md.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2txt.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2txt.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.rng > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.rng > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd > $null
 
 	Write-Output "Finished copying Logtalk files and directories."
 	Write-Output ""
