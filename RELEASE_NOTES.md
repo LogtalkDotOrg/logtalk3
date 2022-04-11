@@ -73,6 +73,8 @@ version option.
 
 * FIXED: Broken `lgtdoc` tool `logtalk_entity_to_txt.xsl` file.
 
+* FIXED: The `lgtdoc` tool `lgt2txt.sh` script to use the correct XSLT files.
+
 Tests
 -----
 

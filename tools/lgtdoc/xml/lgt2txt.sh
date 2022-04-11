@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on April 9, 2022
+##   Last updated on April 11, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.1"
+	echo "$(basename "$0") 2.2"
 	exit 0
 }
 
@@ -85,8 +85,8 @@ elif ! [ -d "$LOGTALKUSER" ]; then
 fi
 echo
 
-entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_md.xsl"
-index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_md.xsl"
+entity_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_txt.xsl"
+index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_txt.xsl"
 
 processor=xsltproc
 # processor=xalan
