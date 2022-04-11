@@ -71,6 +71,8 @@ Tools
 * FIXED: The `lgtdoc` Bash shell scripts help text content failed to list the
 version option.
 
+* FIXED: Broken `lgtdoc` tool `logtalk_entity_to_txt.xsl` file.
+
 Tests
 -----
 

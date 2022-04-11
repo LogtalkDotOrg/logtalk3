@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into text files
-%  Last updated on July 29, 2021
+%  Last updated on April 11, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -195,10 +195,8 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>(none)</xsl:text><xsl:value-of select="$nl2" />
-			</div>
 		</xsl:otherwise>
 	</xsl:choose>
-	</div>
 	<xsl:value-of select="$hr2" />
 	<xsl:text>Public predicates</xsl:text><xsl:value-of select="$nl2" />
 	<xsl:choose>
