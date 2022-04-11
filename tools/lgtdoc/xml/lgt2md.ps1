@@ -91,8 +91,9 @@ function Get-Usage() {
 
 function Check-Parameters() {
 
-	if ($h -eq $true) {
-		Get-Usage
+	if (-not(Test-Path $d)) { # cannot be ""
+		Write-Output ("The " + $p + " output directory does not exist!")
+		Start-Sleep -Seconds 2
 		Exit
 	}
 
@@ -101,9 +102,8 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if (-not(Test-Path $d)) { # cannot be ""
-		Write-Output ("The " + $p + " output directory does not exist!")
-		Start-Sleep -Seconds 2
+	if ($h -eq $true) {
+		Get-Usage
 		Exit
 	}
 
