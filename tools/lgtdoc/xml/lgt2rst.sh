@@ -3,7 +3,6 @@
 #############################################################################
 ## 
 ##   XML documenting files to reStructuredText files conversion script
-## 
 ##   Last updated on April 11, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -26,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 4.2"
+	echo "$(basename "$0") 4.3"
 	exit 0
 }
 
@@ -157,7 +156,7 @@ create_index_file()
 			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
 			entity=${name%_*}
 			pars=${name##*_}
-			echo "  indexing $name.html"
+			echo "  indexing $name.rst"
 			if [ $pars -gt 0 ]
 			then
 				echo "* ["$entity"/"$pars"]("$name".rst)" >> "$index_file"

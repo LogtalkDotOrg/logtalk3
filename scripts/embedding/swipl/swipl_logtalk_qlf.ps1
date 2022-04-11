@@ -155,7 +155,7 @@ function Check-Parameters() {
 
 	if (-not (Test-Path $d)) {
 		try {
-			New-Item $d -ItemType Directory > $null
+			New-Item -Path $d -ItemType Directory > $null
 		} catch {
 			Write-Output ("Could not create destination directory! at " + $d)
 			Start-Sleep -Seconds 2
@@ -165,7 +165,7 @@ function Check-Parameters() {
 
 	if (-not (Test-Path $t)) {
 		try {
-			New-Item $t -ItemType Directory > $null
+			New-Item -Path $t -ItemType Directory > $null
 		} catch {
 			Write-Output ("Could not create temporary directory! at " + $t)
 			Start-Sleep -Seconds 2
@@ -269,7 +269,7 @@ Move-item -Path logtalk.qlf -Destination $d
 
 if ($l -ne "") {
 	try {
-		New-Item $t/application -ItemType Directory > $null
+		New-Item -Path $t/application -ItemType Directory > $null
 		Push-Location $t/application
 	} catch {
 		Write-Output ("Could not create temporary directory! at " + $t + "/application")
