@@ -1,7 +1,7 @@
 #############################################################################
 ## 
-##   XML documenting files to plain text conversion script 
-##   Last updated on April 11, 2022
+##   XML documenting files to Mardown text files conversion script 
+##   Last updated on April 9, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.2")
+	Write-Output ($myName + " 2.1")
 }
 
 function Get-Logtalkhome {
@@ -75,7 +75,7 @@ function Get-Usage() {
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
 	Write-Output "This script converts all Logtalk XML documenting files in the"
-	Write-Output "current directory to text files"
+	Write-Output "current directory to Markdown text files"
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-d directory]")
@@ -149,8 +149,8 @@ if (Test-Path $env:LOGTALKUSER) {
 	logtalk_user_setup
 }
 
-$entity_xslt =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_txt.xsl"
-$index_xslt  =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_index_to_txt.xsl"
+$entity_xslt =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_md.xsl"
+$index_xslt  =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_index_to_md.xsl"
 
 if (!(Test-Path "logtalk_entity.dtd")) {
 	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd -Destination .
@@ -198,9 +198,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 		if (Select-String -Path $_ -Pattern '<logtalk_entity>' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output ("  converting " + $_.Name)
 			$file = Join-Path $pwd $_.Name
-			$text = Join-Path $d ($_.BaseName + ".txt")
+			$md = Join-Path $d ($_.BaseName + ".md")
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-			$writer = [System.Xml.XmlTextWriter]::Create($text, $xml_writer_settings)
+			$writer = [System.Xml.XmlTextWriter]::Create($md, $xml_writer_settings)
 			$entity_xslt_object.Transform($reader, $writer)
 		}
 	}
@@ -209,9 +209,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 		if (Select-String -Path $_ -Pattern '<logtalk_index>' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output ("  converting " + $_.Name)
 			$file = Join-Path $pwd $_.Name
-			$text = Join-Path $d ($_.BaseName + ".txt")
+			$md = Join-Path $d ($_.BaseName + ".md")
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-			$writer = [System.Xml.XmlTextWriter]::Create($text, $xml_writer_settings)
+			$writer = [System.Xml.XmlTextWriter]::Create($md, $xml_writer_settings)
 			$index_xslt_object.Transform($reader, $writer)
 		}
 	}
