@@ -80,9 +80,9 @@ function Get-Usage() {
 	Write-Output "documenting files in the current directory"
 	Write-Output
 	Write-Output "Usage:"
-	Write-Output "  $(basename "$0") [-f format] [-i index] [-t title]"
-	Write-Output "  $(basename "$0") -v"
-	Write-Output "  $(basename "$0") -h"
+	Write-Output ("  " + $myName + " [-f format] [-i index] [-t title]")
+	Write-Output ("  " + $myName + " -v")
+	Write-Output ("  " + $myName + " -h")
 	Write-Output
 	Write-Output "Optional arguments:"
 	Write-Output ("  -f output file format (either xhtml or html; default is " + $f + ")")
