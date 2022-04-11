@@ -126,7 +126,7 @@ do
 done
 
 if [ "$d_arg" != "" ] && [ ! -d "$d_arg" ] ; then
-	echo "Error! directory does not exists: $d_arg" >&2
+	echo "Error! output directory does not exists: $d_arg" >&2
 	usage_help
 	exit 1
 elif [ "$d_arg" != "" ] ; then

@@ -32,7 +32,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.1")
+	Write-Output ($myName + " 2.2")
 }
 
 function Get-Logtalkhome {
@@ -172,9 +172,8 @@ if (!(Test-Path "logtalk_index.xsd")) {
 	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd -Destination .
 }
 
-Write-Output "Converting XML files..."
-
 if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
+	Write-Output "Converting XML files..."
 
 	$xslt_settings = New-Object System.Xml.Xsl.XsltSettings
 	$xslt_settings.EnableDocumentFunction = 1
@@ -195,7 +194,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 
 	Get-ChildItem -Path .\*.xml |
 	Foreach-Object {
-		if (Select-String -Path $_ -Pattern '<logtalk_entity>' -CaseSensitive -SimpleMatch -Quiet) {
+		if (Select-String -Path $_ -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output ("  converting " + $_.Name)
 			$file = Join-Path $pwd $_.Name
 			$md = Join-Path $d ($_.BaseName + ".md")
@@ -206,7 +205,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	}
 	Get-ChildItem -Path . -Filter .\*.xml |
 	Foreach-Object {
-		if (Select-String -Path $_ -Pattern '<logtalk_index>' -CaseSensitive -SimpleMatch -Quiet) {
+		if (Select-String -Path $_ -Pattern '<logtalk_index' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output ("  converting " + $_.Name)
 			$file = Join-Path $pwd $_.Name
 			$md = Join-Path $d ($_.BaseName + ".md")

@@ -184,7 +184,7 @@ function Create-Index-File() {
 		Add-Content -Path $i -Value "    <li><a href=`"entity_index.xml`">Entity index</a></li>"
 		Add-Content -Path $i -Value "    <li><a href=`"predicate_index.xml`">Predicate index</a></li>"
 	} else {
-		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity>' -CaseSensitive -SimpleMatch -Quiet |
+		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
 		Foreach-Object {
 			Write-Output ("  indexing " + $_.BaseName + ".html")
 			Add-Content -Path $i -Value "    <li><a href=`"$name.html`">" + $_.BaseName + "</a></li>"
@@ -274,6 +274,7 @@ if (!(Test-Path "logtalk_index_to_xml.xsl")) {
 }
 
 if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
+	Write-Output "Indexing XML files..."
 	Write-Output ""
 	Write-Output ("generating " + $i + " file...")
 	Create-Index-File

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on April 9, 2022
+##   Last updated on April 11, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.1"
+	echo "$(basename "$0") 2.2"
 	exit 0
 }
 
@@ -203,7 +203,7 @@ elif [ "$f_arg" != "" ] ; then
 fi
 
 if [ "$d_arg" != "" ] && [ ! -d "$d_arg" ] ; then
-	echo "Error! directory does not exists: $d_arg" >&2
+	echo "Error! output directory does not exists: $d_arg" >&2
 	usage_help
 	exit 1
 elif [ "$d_arg" != "" ] ; then
