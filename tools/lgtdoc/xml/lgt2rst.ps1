@@ -120,7 +120,8 @@ function Create-Index-File() {
 	New-Item -Path . -Name $i -ItemType "file" -Force > $null
 
 	Add-Content -Path $i -Value ""
-	$underline = "=" * $i.Length
+	Add-Content -Path $i -Value $t
+	$underline = "=" * $t.Length
 	Add-Content -Path $i -Value $underline
 	Add-Content -Path $i -Value ""
 	Add-Content -Path $i -Value ""
