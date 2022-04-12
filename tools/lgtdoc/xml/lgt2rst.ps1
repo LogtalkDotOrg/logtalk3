@@ -148,8 +148,6 @@ function Create-Index-File() {
 		}
 	}
 
-	Add-Content -Path $i -Value "</ul>"
-
 	$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
 
 	Add-Content -Path $i -Value ""
@@ -228,9 +226,6 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	$xml_reader_settings = New-Object System.Xml.XmlReaderSettings
 	$xml_reader_settings.DtdProcessing = 1
 
-	$xml_writer_settings = New-Object System.Xml.XmlWriterSettings
-	$xml_writer_settings.ConformanceLevel = 0
-
 	$xml_url_resolver = New-Object System.Xml.XmlUrlResolver
 
 	$entity_xslt_object = New-Object System.Xml.Xsl.XslCompiledTransform;
@@ -246,7 +241,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$file = Join-Path $pwd $_.Name
 			$rst = Join-Path $d ($_.BaseName + ".rst")
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-            $fs = New-Object IO.FileStream $rst , 'Append', 'Write', 'Read'
+            $fs = New-Object IO.FileStream $rst, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$entity_xslt_object.Transform($reader, $null, $writer)
 		}
@@ -258,7 +253,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$file = Join-Path $pwd $_.Name
 			$rst = Join-Path $d ($_.BaseName + ".rst")
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-            $fs = New-Object IO.FileStream $rst , 'Append', 'Write', 'Read'
+            $fs = New-Object IO.FileStream $rst, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$index_xslt_object.Transform($reader, $null, $writer)
 		}
@@ -270,7 +265,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Write-Output ($i + " file generated")
 	Write-Output ""
 	if ($s -eq $true) {
-		Move-Item -Path index.rst  -Destination index.rst.backup
+		Move-Item -Path index.rst -Destination index.rst.backup -Force
 		if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
 			sphinx-quickstart --templatedir=$env:LOGTALKUSER\tools\lgtdoc\xml -- (-Split $args[$args.Count-1])		
 		} else {
@@ -280,7 +275,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			New-Item -Path _static\css -ItemType Directory > $null
 		}
 		Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\css\sphinx\custom.css -Destination _static\css\custom.css
-		Move-Item -Path index.rst.backup -Destination index.rst
+		Move-Item -Path index.rst.backup -Destination index.rst -Force
 	}
 	if ($s -eq $true -and $m -eq $true) {
 		.\make html
