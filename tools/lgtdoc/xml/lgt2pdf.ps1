@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on April 11, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -185,7 +185,7 @@ if (!(Test-Path "logtalk_entity.xsd")) {
 
 
 if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
-	Write-Output "Converting XML files..."
+	Write-Output "Converting XML files to PDF files..."
 
 	Get-ChildItem -Path .\*.xml |
 	Foreach-Object {

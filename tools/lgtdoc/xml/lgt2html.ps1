@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on April 11, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -241,7 +241,7 @@ if (!(Test-Path "$d\logtalk.css")) {
 }
 
 if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
-	Write-Output "Converting XML files..."
+	Write-Output "Converting XML files to (X)HTML files..."
 	
 	$xslt_settings = New-Object System.Xml.Xsl.XsltSettings
 	$xslt_settings.EnableDocumentFunction = 1

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to PDF conversion script 
-//   Last updated on November 3, 2014
+//   Last updated on April 12, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -127,7 +127,7 @@ if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.xsd")) {
 }
 
 WScript.Echo("");
-WScript.Echo("converting XML files to PDF...");
+WScript.Echo("Converting XML files to PDF files...");
 
 var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 

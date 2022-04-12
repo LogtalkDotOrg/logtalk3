@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on April 11, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -175,7 +175,7 @@ fi
 
 if grep -q "<logtalk" ./*.xml ; then
 	echo
-	echo "converting XML files to PDF..."
+	echo "Converting XML files to PDF files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
 		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to (X)HTML conversion script 
-//   Last updated on July 30, 2021
+//   Last updated on April 12, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -166,7 +166,7 @@ if (!FSObject.FileExists(directory + "\\logtalk.css")) {
 }
 
 WScript.Echo("");
-WScript.Echo("converting XML files...");
+WScript.Echo("Converting XML files to (X)HTML files...");
 
 var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to XML conversion script 
-//   Last updated on July 5, 2016
+//   Last updated on April 12, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -128,6 +128,7 @@ if (!FSObject.FileExists(directory + "\\logtalk_index_to_xml.xsl")) {
 	FSObject.CopyFile(logtalk_user + "\\tools\\lgtdoc\\xml\\logtalk_index_to_xml.xsl", directory + "\\logtalk_index_to_xml.xsl");
 }
 
+WScript.Echo("Indexing XML files...");
 WScript.Echo("");
 WScript.Echo("generating index file...");
 

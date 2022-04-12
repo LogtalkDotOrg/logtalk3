@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to plain text conversion script 
-//   Last updated on July 30, 2016
+//   Last updated on April 12, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -121,7 +121,7 @@ if (!FSObject.FileExists(directory + "\\logtalk.css")) {
 }
 
 WScript.Echo("");
-WScript.Echo("converting XML files...");
+WScript.Echo("Converting XML files to plain text files...");
 
 var files = new Enumerator(FSObject.GetFolder(WshShell.CurrentDirectory).Files);
 
@@ -164,7 +164,7 @@ WScript.Quit(0);
 function usage_help() {
 	WScript.Echo("");
 	WScript.Echo("This script converts all Logtalk XML files documenting files in the");
-	WScript.Echo("current directory to text files");
+	WScript.Echo("current directory to plain text files");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
 	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/p:processor]");

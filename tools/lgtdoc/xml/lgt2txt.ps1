@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on April 11, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,7 @@ function Get-Usage() {
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
 	Write-Output "This script converts all Logtalk XML documenting files in the"
-	Write-Output "current directory to text files"
+	Write-Output "current directory to plain text files"
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-d directory]")
@@ -174,7 +174,7 @@ if (!(Test-Path "logtalk_index.xsd")) {
 
 
 if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
-	Write-Output "Converting XML files..."
+	Write-Output "Converting XML files to plain text files..."
 
 	$xslt_settings = New-Object System.Xml.Xsl.XsltSettings
 	$xslt_settings.EnableDocumentFunction = 1

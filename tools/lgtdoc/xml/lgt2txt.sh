@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on April 11, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -99,7 +99,7 @@ usage_help()
 {
 	echo 
 	echo "This script converts all Logtalk XML documenting files in the"
-	echo "current directory to text files"
+	echo "current directory to plain text files"
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory] [-p processor]"
@@ -163,7 +163,7 @@ fi
 
 if grep -q "<logtalk" ./*.xml ; then
 	echo
-	echo "converting XML files to text files..."
+	echo "Converting XML files to plain text files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
 		echo "  converting $(basename "$file")"
 		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"

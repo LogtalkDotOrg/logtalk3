@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on April 9, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -225,6 +225,7 @@ if ! [ -e "./logtalk_index_to_xml.xsl" ] ; then
 fi
 
 if [ $( (ls ./*.xml | wc -l) 2> /dev/null) -gt 0 ] ; then
+	echo "Indexing XML files..."
 	echo
 	echo "generating $(basename "$index_file") file..."
 	create_index_file
