@@ -90,7 +90,8 @@ function Get-Usage() {
 	Write-Output ("  -d output directory for the generated files (default is " + $d + ")")
 	Write-Output ("  -i name of the index file (default is " + $i + ")")
 	Write-Output ("  -t title to be used in the index file (default is `"" + $t + "`")")
-	Write-Output "  --% arguments to be passed to sphinx-quickstart script (no default)"
+	Write-Output "  -s run sphinx-quickstart script"
+	Write-Output "  -m run make html (requires also using the -s option)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
@@ -267,11 +268,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Write-Output ""
 	if ($s -eq $true) {
 		Move-Item -Path index.rst -Destination index.rst.backup -Force
-		if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
-			sphinx-quickstart --templatedir=$env:LOGTALKUSER\tools\lgtdoc\xml -- (-Split $args[$args.Count-1])		
-		} else {
-			sphinx-quickstart --templatedir=$env:LOGTALKUSER\tools\lgtdoc\xml
-		}
+		sphinx-quickstart --templatedir=$env:LOGTALKUSER\tools\lgtdoc\xml
 		if (-not (Test-Path _static\css)) {
 			New-Item -Path _static\css -ItemType Directory > $null
 		}
