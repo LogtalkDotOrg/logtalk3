@@ -27,11 +27,12 @@ XSLT, CSS, and HTML 4 or XHTML 1.0.
 
 The shell and command-line scripts should be called from the directory
 containing the XML documenting files that you wish to convert. See the
-description of each script below for details. The `.sh` files are bash
-shell scripts while the `.js` files are JScript command-line scripts for
-Windows (requiring WSH 5.6 or later version). These scripts assumes that
-the `LOGTALKHOME` and `LOGTALKUSER` environment variables are defined and
-that the chosen XSLT processor is available in the path.
+description of each script below for details. The `.sh` files are Bash
+shell scripts for POSIX systems, the `.ps1` are PowerShell scripts for
+Windows, and the `.js` files are JScript command-line scripts also for
+Windows (requiring WSH 5.6 or later version; deprecated). These scripts
+assume that the `LOGTALKHOME` and `LOGTALKUSER` environment variables
+are defined and that the chosen XSLT processor is available in the path.
 
 **MAKE SURE THAT THE XSL PROCESSORS AND ANY ADDITIONAL THIRD-PARTY SOFTWARE
 YOU INTEND TO USE ARE PROPERLY INSTALLED AND WORKING BEFORE RUNNING THESE
@@ -151,7 +152,7 @@ Brief description of each directory and file in this folder:
 	Cascade style sheet file to render the HTML/XHTML output of the XSL
 	files in a web browser.
 
-- `lgt2pdf.sh` and `lgt2pdf.js`
+- `lgt2pdf.sh`, `lgt2pdf.ps1`, and `lgt2pdf.js`
 	Sample scripts to batch convert XML files to PDF files
 
 	Supported XSL-FO processors:  
@@ -169,7 +170,7 @@ Brief description of each directory and file in this folder:
 	installation, you may simply need to type `lgt2pdf` in order to run
 	the script).
 
-- `lgt2html.sh` and `lgt2html.js`  
+- `lgt2html.sh`, `lgt2html.ps1`, and `lgt2html.js`  
 	Sample scripts to batch convert XML files to HTML files. These
 	scripts also generate an `index.html` file which contains links
 	to all the converted files.
@@ -187,7 +188,7 @@ Brief description of each directory and file in this folder:
 	`lgt2html.sh -h`; depending on your Logtalk installation, you may simply
 	need to type `lgt2html` in order to run the script).
 
-- `lgt2xml.sh` and `lgt2xml.js`  
+- `lgt2xml.sh`, `lgt2xml.ps1`, and `lgt2xml.js`  
 
 	Sample scripts for indexing the XML files in the current directory by
 	generating an `index.html` file which contains links to all the files.
@@ -203,7 +204,7 @@ Brief description of each directory and file in this folder:
 	`lgt2xml.sh -h`; depending on your Logtalk installation, you may simply
 	need to type `lgt2xml` in order to run the script).
 
-- `lgt2md.sh` and `lgt2md.js`  
+- `lgt2md.sh`, `lgt2md.ps1`, and `lgt2md.js`  
 	Sample scripts to batch convert XML files to Markdown text files.
 
 	The scripts should be called from the directory containing the XML files
@@ -212,7 +213,7 @@ Brief description of each directory and file in this folder:
 	`lgt2md.sh -h`; depending on your Logtalk installation, you may simply
 	need to type `lgt2md` in order to run the script).
 
-- `lgt2rst.sh` and `lgt2rst.js`  
+- `lgt2rst.sh`, `lgt2rst.ps1`, and `lgt2rst.js`  
 	Sample scripts to batch convert XML files to reStructuredText files and
 	optionally generate Sphinx HTML files.
 
@@ -234,15 +235,15 @@ Brief description of each directory and file in this folder:
 	`lgt2rst.sh` POSIX script.
 
 	Required software:  
-		* [Sphinx](https://www.sphinx-doc.org/) (tested with version 3.4.2)  
-		* [Pygments](https://pygments.org/) (tested with version 2.7.3)
+		* [Sphinx](https://www.sphinx-doc.org/) (tested with version 4.5.0)  
+		* [Pygments](https://pygments.org/) (tested with version 2.11.2)
 
 	Sphinx includes default themes. The Logtalk documentation uses the
 	[Read the Docs theme](https://github.com/readthedocs/sphinx_rtd_theme)
-	(tested with version 0.5.1).
+	(tested with version 1.0.0) with some CSS changes.
 
-- `lgt2txt.sh` and `lgt2txt.js`  
-	Sample scripts to batch convert XML files to text files.
+- `lgt2txt.sh`, `lgt2txt.ps1`, and `lgt2txt.js`  
+	Sample scripts to batch convert XML files to plain text files.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description

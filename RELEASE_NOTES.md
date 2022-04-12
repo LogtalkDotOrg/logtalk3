@@ -68,6 +68,8 @@ Tools
 
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
+* UPDATED: Documentation of the `lgtdoc` tool for the new PowerShell scripts.
+
 * UPDATED: The `lgtdoc` tool `lgt2pdf.sh` script to support using the FOP 2.x
 processor.
 
