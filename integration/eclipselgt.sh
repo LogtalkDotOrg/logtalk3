@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for ECLiPSe
-##   Last updated on May 17, 2018
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -24,10 +24,9 @@
 #############################################################################
 
 
-
 if ! [ "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME should be defined first, pointing"
-	echo "to your Logtalk installation directory!"
+	echo "The environment variable LOGTALKHOME should be defined first"
+	echo "pointing to your Logtalk installation directory!"
 	echo "Trying the default locations for the Logtalk installation..."
 	if [ -d "/usr/local/share/logtalk" ]; then
 		LOGTALKHOME=/usr/local/share/logtalk

@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for YAP
-##   Last updated on April 8, 2022
+##   Last updated on April 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -21,19 +21,20 @@
 ## 
 #############################################################################
 
+
 function Get-Logtalkhome {
 	if ($null -eq $env:LOGTALKHOME) 
 	{
-		Write-Output "The environment variable LOGTALKHOME should be defined first, pointing"
-		Write-Output "to your Logtalk installation directory!"
+		Write-Output "The environment variable LOGTALKHOME should be defined first,"
+		Write-Output "pointing to your Logtalk installation directory!"
 		Write-Output "Trying the default locations for the Logtalk installation..."
-		
+
 		$DEFAULTPATHS = [string[]](
 			"C:\Program Files (x86)\Logtalk",
 			"C:\Program Files\Logtalk",
 			"%LOCALAPPDATA%\Logtalk"
 		)
-		
+
 		# Checking all possibilites
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
 			Write-Output ("Looking for: " + $DEFAULTPATH)
@@ -59,10 +60,7 @@ function Get-Logtalkuser {
 Get-Logtalkhome
 
 # Check for existence
-if (Test-Path $env:LOGTALKHOME) {
-	Write-Output ("Using Logtalk installation found at: " + $env:LOGTALKHOME)
-	Write-Output ""
-} else {
+if (!(Test-Path $env:LOGTALKHOME)) {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Write-Output ""
 	Start-Sleep -Seconds 2
