@@ -182,9 +182,6 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	$xml_reader_settings = New-Object System.Xml.XmlReaderSettings
 	$xml_reader_settings.DtdProcessing = 1
 
-	$xml_writer_settings = New-Object System.Xml.XmlWriterSettings
-	$xml_writer_settings.ConformanceLevel = 0
-
 	$xml_url_resolver = New-Object System.Xml.XmlUrlResolver
 
 	$entity_xslt_object = New-Object System.Xml.Xsl.XslCompiledTransform;
@@ -200,8 +197,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$file = Join-Path $pwd $_.Name
 			$text = Join-Path $d ($_.BaseName + ".txt")
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-			$writer = [System.Xml.XmlTextWriter]::Create($text, $xml_writer_settings)
-			$entity_xslt_object.Transform($reader, $writer)
+            $fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
+			$writer = New-Object System.IO.StreamWriter($fs)
+			$entity_xslt_object.Transform($reader, $null, $writer)
 		}
 	}
 	Get-ChildItem -Path . -Filter .\*.xml |
@@ -211,8 +209,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$file = Join-Path $pwd $_.Name
 			$text = Join-Path $d ($_.BaseName + ".txt")
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-			$writer = [System.Xml.XmlTextWriter]::Create($text, $xml_writer_settings)
-			$index_xslt_object.Transform($reader, $writer)
+            $fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
+			$writer = New-Object System.IO.StreamWriter($fs)
+			$entity_xslt_object.Transform($reader, $null, $writer)
 		}
 	}
 	Write-Output "conversion done"
