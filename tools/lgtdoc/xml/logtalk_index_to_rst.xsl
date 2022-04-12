@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on June 6, 2019
+%  Last updated on April 12, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -77,7 +77,7 @@
 		<xsl:value-of select="$nl2" />
 		<xsl:text>Libraries</xsl:text>
 		<xsl:value-of select="$nl" />
-		<xsl:text>=============</xsl:text>
+		<xsl:text>=========</xsl:text>
 		<xsl:value-of select="$nl2" />
 		<xsl:text>To load any library, use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``.</xsl:text>
 		<xsl:value-of select="$nl2" />
@@ -87,7 +87,7 @@
 		<xsl:value-of select="$nl2" />
 		<xsl:text>Directories</xsl:text>
 		<xsl:value-of select="$nl" />
-		<xsl:text>===============</xsl:text>
+		<xsl:text>===========</xsl:text>
 		<xsl:value-of select="$nl2" />
 		<xsl:text>To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of using its path. The library loader file ensures that all the required dependencies are also loaded.</xsl:text>
 		<xsl:value-of select="$nl2" />
@@ -97,7 +97,7 @@
 		<xsl:value-of select="$nl2" />
 		<xsl:text>Entities</xsl:text>
 		<xsl:value-of select="$nl" />
-		<xsl:text>============</xsl:text>
+		<xsl:text>========</xsl:text>
 		<xsl:value-of select="$nl2" />
 		<xsl:text>To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded.</xsl:text>
 		<xsl:value-of select="$nl2" />
@@ -107,7 +107,7 @@
 		<xsl:value-of select="$nl2" />
 		<xsl:text>Predicates</xsl:text>
 		<xsl:value-of select="$nl" />
-		<xsl:text>===============</xsl:text>
+		<xsl:text>==========</xsl:text>
 		<xsl:value-of select="$nl2" />
 		<xsl:text>This index lists all entities *declaring* a given predicate. To load an entity providing the predicate that you want to call, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded.</xsl:text>
 		<xsl:value-of select="$nl2" />
