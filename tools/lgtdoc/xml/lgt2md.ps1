@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to Markdown text files conversion script 
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.2")
+	Write-Output ($myName + " 2.3")
 }
 
 function Get-Logtalkhome {
@@ -107,6 +107,33 @@ function Check-Parameters() {
 		Exit
 	}
 
+}
+
+function Create-Index-File() {
+	New-Item -Path . -Name $i -ItemType "file" -Force > $null
+
+	Add-Content -Path $i -Value ""
+	Add-Content -Path $i -Value ("# " + $t)
+	Add-Content -Path $i -Value ""
+	Add-Content -Path $i -Value ""
+
+	if (Test-Path "directory_index.xml") {
+		Add-Content -Path $i -Value "* [Library index](library_index.md)"
+		Add-Content -Path $i -Value "* [Directory index](directory_index.md)"
+		Add-Content -Path $i -Value "* [Entity index](entity_index.md)"
+		Add-Content -Path $i -Value "* [Predicate index](predicate_index.md)"
+	} else {
+		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
+		Foreach-Object {
+			Write-Output ("  indexing " + $_.BaseName + ".rst")
+			Add-Content -Path $i -Value "(* [" + $_.BaseName + "](" + $_.BaseName + ".md)")
+		}
+	}
+
+	$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
+
+	Add-Content -Path $i -Value ""
+	Add-Content -Path $i -Value ("Generated on " + $date)
 }
 
 ###################### here it starts ############################ 
@@ -214,6 +241,10 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 		}
 	}
 	Write-Output "conversion done"
+	Write-Output ""
+	Write-Output ("generating " + $i + " file...")
+	Create-Index-File
+	Write-Output ($i + " file generated")
 	Write-Output ""
 } else {
 	Write-Output ""
