@@ -87,6 +87,9 @@ file.
 Tests
 -----
 
+* ADDED: Basic tests for the new `occurs_check` flag that is becoming de facto
+standard.
+
 * ADDED: Additional tests for the Prolog unbounded integer arithmetic support.
 
 * ADDED: Additional tests for the Prolog standard `(*)/2`, `(/)/2`, `(^)/2`,

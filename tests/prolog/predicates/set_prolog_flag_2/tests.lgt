@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-07-08,
+		date is 2022-04-13,
 		comment is 'Unit tests for the ISO Prolog standard set_prolog_flag/2 built-in predicate.'
 	]).
 
@@ -82,5 +82,16 @@
 			{current_prolog_flag(Flag, Value)},
 			assertion(flag(Flag), catch({set_prolog_flag(Flag, Value)}, error(Error,_), Error \== domain_error(prolog_flag,Flag)))
 		).
+
+	% tests for the new occurs_check flag that's becoming a de facto standard
+
+	test(lgt_set_prolog_flag_2_14, false, [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
+		{set_prolog_flag(occurs_check, true), X = f(X)}.
+
+	test(lgt_set_prolog_flag_2_15, true, [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
+		{set_prolog_flag(occurs_check, false), X = f(X)}.
+
+	test(lgt_set_prolog_flag_2_16, error(_), [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
+		{set_prolog_flag(occurs_check, error), X = f(X)}.
 
 :- end_object.
