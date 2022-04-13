@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -36,7 +36,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 4.3")
+	Write-Output ($myName + " 4.5")
 }
 
 function Get-Logtalkhome {
@@ -143,10 +143,13 @@ function Create-Index-File() {
 		Add-Content -Path $i -Value '* :ref:`genindex`'
 		Add-Content -Path $i -Value '* :ref:`search`'
 	} else {
+		Add-Content -Path $i -Value ".. toctree::"
+		Add-Content -Path $i -Value "   :maxdepth: 1"
+		Add-Content -Path $i -Value ""
 		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
 		Foreach-Object {
 			Write-Output ("  indexing " + $_.BaseName + ".rst")
-			Add-Content -Path $i -Value ("* [" + $entity + "](" + $_.BaseName + ".rst)")
+			Add-Content -Path $i -Value ("   " + $entity + " <" + $_.BaseName + ">")
 		}
 	}
 

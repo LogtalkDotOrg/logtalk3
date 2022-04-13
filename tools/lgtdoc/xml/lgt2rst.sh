@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 4.4"
+	echo "$(basename "$0") 4.5"
 	exit 0
 }
 
@@ -152,6 +152,9 @@ create_index_file()
 		echo "* :ref:\`genindex\`" >> "$index_file"
 		echo "* :ref:\`search\`" >> "$index_file"
 	else
+		echo ".. toctree::" >> "$index_file"
+		echo "   :maxdepth: 1" >> "$index_file"
+		echo "" >> "$index_file"
 		for file in $(grep -l "<logtalk_entity" ./*.xml); do
 			base="${file##*/}"
 			name="${base%.*}"
@@ -160,9 +163,9 @@ create_index_file()
 			echo "  indexing $name.rst"
 			if [ $pars -gt 0 ]
 			then
-				echo "* ["$entity"/"$pars"]("$name".rst)" >> "$index_file"
+				echo "   $entity/$pars <$name>" >> "$index_file"
 			else
-				echo "* ["$entity"]("$name".rst)" >> "$index_file"
+				echo "   $entity <$name>" >> "$index_file"
 			fi
 		done
 	fi

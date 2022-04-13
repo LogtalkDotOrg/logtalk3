@@ -80,6 +80,10 @@ version option.
 
 * FIXED: The `lgtdoc` tool `lgt2txt.sh` script to use the correct XSLT files.
 
+* FIXED: The `lgtdoc` tool `lgt2rst.sh` script to generate correct `index.rst`
+files when indexing a directory of XML documenting files without any index XML
+file.
+
 Tests
 -----
 
