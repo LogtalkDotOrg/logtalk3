@@ -148,8 +148,14 @@ function Create-Index-File() {
 		Add-Content -Path $i -Value ""
 		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
 		Foreach-Object {
+			$entity = ($_.BaseName -replace '_[^_]*$')
+			$pars   = ($_.BaseName -replace '.*_')
 			Write-Output ("  indexing " + $_.BaseName + ".rst")
-			Add-Content -Path $i -Value ("   " + $entity + " <" + $_.BaseName + ">")
+			if ($pars -gt 0) {
+				Add-Content -Path $i -Value ("   " + $entity + "/" + $pars + " <" + $_.BaseName + ">")
+			} else {
+				Add-Content -Path $i -Value ("   " + $entity + " <" + $_.BaseName + ">")
+			}
 		}
 	}
 

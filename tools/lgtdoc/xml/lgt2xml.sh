@@ -146,12 +146,12 @@ create_index_file()
 			name="${base%.*}"
 			entity="${name%_*}"
 			pars="${name##*_}"
-			echo "  indexing $file"
+			echo "  indexing $base"
 			if [ $pars -gt 0 ]
 			then
-				echo "    <li><a href=\"$file\">$entity/$pars</a></li>" >> "$index_file"
+				echo "    <li><a href=\"$base\">$entity/$pars</a></li>" >> "$index_file"
 			else
-				echo "    <li><a href=\"$file\">$entity</a></li>" >> "$index_file"
+				echo "    <li><a href=\"$base\">$entity</a></li>" >> "$index_file"
 			fi
 		done
 	fi

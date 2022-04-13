@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -35,7 +35,7 @@ param(
 function Get-ScriptVersion {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.2")
+	Write-Output ($myName + " 2.3")
 }
 
 function Get-Logtalkhome {
@@ -154,8 +154,14 @@ function Create-Index-File() {
 	} else {
 		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
 		Foreach-Object {
+			$entity = ($_.BaseName -replace '_[^_]*$')
+			$pars   = ($_.BaseName -replace '.*_')
 			Write-Output ("  indexing " + $_.BaseName + ".html")
-			Add-Content -Path $i -Value "    <li><a href=`"$name.html`">" + $_.BaseName + "</a></li>"
+			if ($pars -gt 0) {
+				Add-Content -Path $i -Value ("    <li><a href=`"" + $_.BaseName + ".html`">" + $entity + "/" + $pars + "</a></li>")
+			} else {
+				Add-Content -Path $i -Value ("    <li><a href=`"" + $_.BaseName + ".html`">" + $entity + "</a></li>")
+			}
 		}
 	}
 

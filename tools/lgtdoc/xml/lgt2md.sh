@@ -137,7 +137,7 @@ create_index_file()
 			name="${base%.*}"
 			entity="${name%_*}"
 			pars="${name##*_}"
-			echo "  indexing $name.html"
+			echo "  indexing $name.md"
 			if [ $pars -gt 0 ]
 			then
 				echo "* ["$entity"/"$pars"]("$name".md)" >> "$index_file"

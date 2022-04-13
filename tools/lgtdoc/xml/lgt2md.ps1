@@ -25,6 +25,8 @@
 param(
 	[Parameter()]
 	[String]$d = $pwd, 
+	[String]$i = "index.md", 
+	[String]$t = "Documentation index", 
 	[Switch]$v,
 	[Switch]$h
 )
@@ -78,12 +80,14 @@ function Get-Usage() {
 	Write-Output "current directory to Markdown text files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d directory]")
+	Write-Output ("  " + $myName + " [-d directory] [-i index] [-t title]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -d output directory for the generated files (default is " + $d + ")")
+	Write-Output ("  -i name of the index file (default is " + $i + ")")
+	Write-Output ("  -t title to be used in the index file (default is `"" + $t + "`")")
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
@@ -125,8 +129,14 @@ function Create-Index-File() {
 	} else {
 		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
 		Foreach-Object {
-			Write-Output ("  indexing " + $_.BaseName + ".rst")
-			Add-Content -Path $i -Value "(* [" + $_.BaseName + "](" + $_.BaseName + ".md)")
+			$entity = ($_.BaseName -replace '_[^_]*$')
+			$pars   = ($_.BaseName -replace '.*_')
+			Write-Output ("  indexing " + $_.BaseName + ".md")
+			if ($pars -gt 0) {
+				Add-Content -Path $i -Value ("* [" + $entity + "/" + $pars + "](" + $_.BaseName + ".md)")
+			} else {
+				Add-Content -Path $i -Value ("* [" + $entity + "](" + $_.BaseName + ".md)")
+			}
 		}
 	}
 
