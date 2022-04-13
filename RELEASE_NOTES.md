@@ -144,6 +144,9 @@ the symbolic link to the `lgt2svg.js` script.
 
 * FIXED: Outdated but harmless commands in the `logtalk_user_setup.sh` script.
 
+* FIXED: Broken but not required sanity test in the `update_html_docs.sh` and
+`update_svg_diagrams.sh` scripts.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

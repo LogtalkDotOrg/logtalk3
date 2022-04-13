@@ -284,5 +284,5 @@ Pop-Location
 try {
 	Remove-Item $t -Confirm -Recurse
 } catch {
-	Write-Output ("Error occurred at clean-up")
+	Write-Output "Error occurred at cleanup"
 }

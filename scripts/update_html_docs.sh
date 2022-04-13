@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on April 3, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -65,7 +65,7 @@ set_goal() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.20"
+	echo "$(basename "$0") 0.21"
 	exit 0
 }
 
@@ -149,10 +149,6 @@ elif [ "$p_arg" == "yap" ] ; then
 	logtalk="yaplgt$extension -g"
 elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported backend Prolog compiler: $p_arg" >&2
-	usage_help
-	exit 1
-elif [ ! "$(command -v $backend)" ] ; then
-	echo "Error! Default backend Prolog compiler not found: $prolog" >&2
 	usage_help
 	exit 1
 fi
