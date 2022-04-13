@@ -33,7 +33,7 @@ param(
 	[Switch]$h
 )
 
-function Get-ScriptVersion {
+function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
 	Write-Output ($myName + " 4.5")
@@ -74,7 +74,7 @@ function Get-Logtalkuser {
 	# At the end LOGTALKUSER was set already or now is set
 }
 
-function Get-Usage() {
+function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
@@ -106,12 +106,12 @@ function Check-Parameters() {
 	}
 
 	if ($v -eq $true) {
-		Get-ScriptVersion
+		Write-Script-Version
 		Exit
 	}
 
 	if ($h -eq $true) {
-		Get-Usage
+		Write-Usage-Help
 		Exit
 	}
 

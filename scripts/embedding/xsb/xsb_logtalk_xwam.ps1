@@ -5,7 +5,7 @@
 ##   and runtime and optionally an application.xwam file with a Logtalk
 ##   application
 ## 
-##   Last updated on April 11, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -42,7 +42,7 @@ param(
 	[Switch]$h
 )
 
-function Get-ScriptVersion {
+function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
 	Write-Output ($myName + " 0.15")
@@ -83,7 +83,7 @@ function Get-Logtalkuser {
 	# At the end LOGTALKUSER was set already or now is set
 }
 
-function Get-Usage() {
+function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
@@ -112,12 +112,12 @@ function Get-Usage() {
 function Check-Parameters() {
 
 	if ($h -eq $true) {
-		Get-Usage
+		Write-Usage-Help
 		Exit
 	}
 
 	if ($v -eq $true) {
-		Get-ScriptVersion
+		Write-Script-Version
 		Exit
 	}
 
