@@ -143,7 +143,7 @@ also available in the Logtalk website.
 - `windows`  
 	directory containing files used when building Windows GUI installers
 
-- `logtalk_user_setup.sh` and `logtalk_user_setup.js`  
+- `logtalk_user_setup.sh`, `logtalk_user_setup.ps1`, and `logtalk_user_setup.js`  
 	end-user scripts for copying the Logtalk user-modifiable files and
 	directories to the location pointed by the environment variable
 	`LOGTALKUSER` (defaults to `~/logtalk` on POSIX operating-systems
@@ -151,7 +151,9 @@ also available in the Logtalk website.
 	defined); must be run by each end-user in order to ensure proper
 	permissions for the copied files; the `LOGTALKHOME` environment
 	variable must be defined (pointing to the Logtalk installation
-	directory)
+	directory); the `logtalk_user_setup.ps1` script requires running
+	by a user with administration privileges due to the creation of
+	symbolic links
 - `logtalk_user_setup.bat`  
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
 

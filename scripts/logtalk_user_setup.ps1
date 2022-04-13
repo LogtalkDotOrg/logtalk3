@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on April 11, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -154,12 +154,13 @@ function Create-Logtalkuser-Directory {
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\manuals -Target $env:LOGTALKHOME\manuals > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\paths -Target $env:LOGTALKHOME\paths > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\scripts -Target $env:LOGTALKHOME\scripts > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\diagrams\lgt2svg.bat -Target $env:LOGTALKHOME\tools\diagrams\lgt2svg.bat > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2html.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2html.bat > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2pdf.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2pdf.bat > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2xml.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2xml.bat > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2md.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2md.bat > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2txt.bat -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2txt.bat > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\diagrams\lgt2svg.ps1 -Target $env:LOGTALKHOME\tools\diagrams\lgt2svg.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2html.ps1 -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2html.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2pdf.ps1 -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2pdf.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2xml.ps1 -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2xml.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2md.ps1 -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2md.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2rst.ps1 -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2rst.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\lgt2txt.ps1 -Target $env:LOGTALKHOME\tools\lgtdoc\xml\lgt2txt.ps1 > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.rng > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd > $null

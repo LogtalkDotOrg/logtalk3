@@ -111,6 +111,11 @@ Installers and installation scripts
 * CHANGED: The embedding scripts default values for the paths and settings
 files to, respectively, `paths.pl` and `settings-embedding-sample.lgt`.
 
+* CHANGED: The Windows installer and the `logtalk_user_setup.ps1` script to
+no longer make available the deprecated `.js` JScript scripts and their
+corresponding `.bat` files in the system path (replaced by the PowerShell
+scripts).
+
 * ADDED: Experimental Windows PowerShell `logtalk_user_setup.ps1` script.
 Collaborative work with Hans N. Beck.
 

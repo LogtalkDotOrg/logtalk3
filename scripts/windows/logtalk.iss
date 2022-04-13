@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on April 11, 2022
+; Last updated on April 13, 2022
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -114,7 +114,6 @@ Source: "{#MyBaseDir}\tester-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestN
 Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tests-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
-Source: "{#MyBaseDir}\scripts\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\cxprolog\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\eclipse\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
@@ -127,9 +126,7 @@ Source: "{#MyBaseDir}\scripts\embedding\trealla\*.ps1"; DestDir: "{win}"; Compon
 Source: "{#MyBaseDir}\scripts\embedding\xsb\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\yap\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\integration\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
-Source: "{#MyBaseDir}\tools\diagrams\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\diagrams\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
-Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.bat"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 
 [INI]

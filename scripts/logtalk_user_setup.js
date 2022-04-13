@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   Logtalk user folder setup script
-//   Last updated on April 1, 2022
+//   Last updated on April 13, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -181,6 +181,11 @@ link.Save();
 link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2md.js.lnk");
 link.Description = "Shortcut to lgt2md script";
 link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\lgt2md.js";
+link.Save();
+
+link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2rst.js.lnk");
+link.Description = "Shortcut to lgt2rst script";
+link.TargetPath = logtalk_home + "\\tools\\lgtdoc\\xml\\lgt2rst.js";
 link.Save();
 
 link = WshShell.CreateShortcut(logtalk_user + "\\tools\\lgtdoc\\xml\\lgt2txt.js.lnk");
