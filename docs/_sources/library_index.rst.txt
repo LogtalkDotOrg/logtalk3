@@ -2,7 +2,7 @@
 .. _library_index:
 
 Libraries
-=============
+=========
 
 To load any library, use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``.
 

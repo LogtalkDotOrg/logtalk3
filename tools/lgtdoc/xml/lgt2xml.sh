@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 1.1"
+	echo "$(basename "$0") 1.2"
 	exit 0
 }
 
@@ -142,9 +142,10 @@ create_index_file()
 		echo "    <li><a href=\"predicate_index.xml\">Predicate index</a></li>" >> "$index_file"
 	else
 		for file in $(grep -l "<logtalk_entity" ./*.xml); do
-			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
-			entity=${name%_*}
-			pars=${name##*_}
+			base="${file##*/}"
+			name="${base%.*}"
+			entity="${name%_*}"
+			pars="${name##*_}"
 			echo "  indexing $file"
 			if [ $pars -gt 0 ]
 			then

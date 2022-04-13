@@ -2,7 +2,7 @@
 .. _directory_index:
 
 Directories
-===============
+===========
 
 To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of using its path. The library loader file ensures that all the required dependencies are also loaded.
 

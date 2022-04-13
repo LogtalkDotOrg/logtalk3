@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.2"
+	echo "$(basename "$0") 2.3"
 	exit 0
 }
 
@@ -166,7 +166,8 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo "Converting XML files to plain text files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
 		echo "  converting $(basename "$file")"
-		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
+		base="${file##*/}"
+		name="${base%.*}"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.txt\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.txt\" \"$file\" \"$entity_xslt\";;
@@ -176,7 +177,8 @@ if grep -q "<logtalk" ./*.xml ; then
 	done
 	for file in $(grep -l "<logtalk_index" ./*.xml); do
 		echo "  converting $(basename "$file")"
-		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
+		base="${file##*/}"
+		name="${base%.*}"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.txt\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.txt\" \"$file\" \"$index_xslt\";;

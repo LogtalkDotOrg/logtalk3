@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.2"
+	echo "$(basename "$0") 2.3"
 	exit 0
 }
 
@@ -158,9 +158,10 @@ create_index_file()
 		echo "    <li><a href=\"predicate_index.html\">Predicate index</a></li>" >> "$index_file"
 	else
 		for file in $(grep -l "<logtalk_entity" ./*.xml); do
-			name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
-			entity=${name%_*}
-			pars=${name##*_}
+			base="${file##*/}"
+			name="${base%.*}"
+			entity="${name%_*}"
+			pars="${name##*_}"
 			echo "  indexing $name.html"
 			if [ $pars -gt 0 ]
 			then
@@ -263,7 +264,8 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo "Converting XML files to (X)HTML files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
 		echo "  converting $(basename "$file")"
-		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
+		base="${file##*/}"
+		name="${base%.*}"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.html\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.html\" \"$file\" \"$entity_xslt\";;
@@ -273,7 +275,8 @@ if grep -q "<logtalk" ./*.xml ; then
 	done
 	for file in $(grep -l "<logtalk_index" ./*.xml); do
 		echo "  converting $(basename "$file")"
-		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
+		base="${file##*/}"
+		name="${base%.*}"
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.html\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.html\" \"$file\" \"$index_xslt\";;

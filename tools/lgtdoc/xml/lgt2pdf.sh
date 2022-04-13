@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on April 12, 2022
+##   Last updated on April 13, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.0"
+	echo "$(basename "$0") 2.1"
 	exit 0
 }
 
@@ -178,7 +178,8 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo "Converting XML files to PDF files..."
 	for file in $(grep -l "<logtalk_entity" ./*.xml); do
 		echo "  converting $(basename "$file")"
-		name="$(expr "$file" : '\(.*\)\.[^./]*$' \| "$file")"
+		base="${file##*/}"
+		name="${base%.*}"
 		case $processor in
 			xinc)	eval xinc -xml \"$file\" -xsl \"$xsl\" -pdf \"$directory/$name.pdf\" 2> /dev/null;;
 			*)		eval $processor -q -xml \"$file\" -xsl \"$xsl\" -pdf \"$directory/$name.pdf\";;
