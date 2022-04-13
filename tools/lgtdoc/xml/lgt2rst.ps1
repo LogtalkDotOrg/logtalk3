@@ -142,19 +142,21 @@ function Create-Index-File() {
 		Add-Content -Path $i -Value ""
 		Add-Content -Path $i -Value '* :ref:`genindex`'
 		Add-Content -Path $i -Value '* :ref:`search`'
-	} else {
+	} elseif (Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 		Add-Content -Path $i -Value ".. toctree::"
 		Add-Content -Path $i -Value "   :maxdepth: 1"
 		Add-Content -Path $i -Value ""
-		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
+		Get-ChildItem -Path . -Filter .\*.xml |
 		Foreach-Object {
-			$entity = ($_.BaseName -replace '_[^_]*$')
-			$pars   = ($_.BaseName -replace '.*_')
-			Write-Output ("  indexing " + $_.BaseName + ".rst")
-			if ($pars -gt 0) {
-				Add-Content -Path $i -Value ("   " + $entity + "/" + $pars + " <" + $_.BaseName + ">")
-			} else {
-				Add-Content -Path $i -Value ("   " + $entity + " <" + $_.BaseName + ">")
+			if ($_ | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+				$entity = ($_.BaseName -replace '_[^_]*$')
+				$pars   = ($_.BaseName -replace '.*_')
+				Write-Output ("  indexing " + $_.BaseName + ".rst")
+				if ($pars -ne "" -and $pars/1 -gt 0) {
+					Add-Content -Path $i -Value ("   " + $entity + "/" + $pars + " <" + $_.BaseName + ">")
+				} else {
+					Add-Content -Path $i -Value ("   " + $entity + " <" + $_.BaseName + ">")
+				}
 			}
 		}
 	}

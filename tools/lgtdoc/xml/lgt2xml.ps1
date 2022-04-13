@@ -183,16 +183,18 @@ function Create-Index-File() {
 		Add-Content -Path $i -Value "    <li><a href=`"directory_index.xml`">Directory index</a></li>"
 		Add-Content -Path $i -Value "    <li><a href=`"entity_index.xml`">Entity index</a></li>"
 		Add-Content -Path $i -Value "    <li><a href=`"predicate_index.xml`">Predicate index</a></li>"
-	} else {
-		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
+	} elseif (Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+		Get-ChildItem -Path . -Filter .\*.xml |
 		Foreach-Object {
-			$entity = ($_.BaseName -replace '_[^_]*$')
-			$pars   = ($_.BaseName -replace '.*_')
-			Write-Output ("  indexing " + $_.BaseName + ".html")
-			if ($pars -gt 0) {
-				Add-Content -Path $i -Value ("    <li><a href=`" + $_.Name + "`">" + $entity + "/" + $pars + "</a></li>")
-			} else {
-				Add-Content -Path $i -Value ("    <li><a href=`" + $_.Name + "`">" + $entity + "</a></li>")
+			if ($_ | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+				$entity = ($_.BaseName -replace '_[^_]*$')
+				$pars   = ($_.BaseName -replace '.*_')
+				Write-Output ("  indexing " + $_.BaseName + ".html")
+				if ($pars -gt 0) {
+					Add-Content -Path $i -Value ("    <li><a href=`" + $_.Name + "`">" + $entity + "/" + $pars + "</a></li>")
+				} else {
+					Add-Content -Path $i -Value ("    <li><a href=`" + $_.Name + "`">" + $entity + "</a></li>")
+				}
 			}
 		}
 	}

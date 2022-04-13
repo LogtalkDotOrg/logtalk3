@@ -126,16 +126,18 @@ function Create-Index-File() {
 		Add-Content -Path $i -Value "* [Directory index](directory_index.md)"
 		Add-Content -Path $i -Value "* [Entity index](entity_index.md)"
 		Add-Content -Path $i -Value "* [Predicate index](predicate_index.md)"
-	} else {
-		Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet |
+	} elseif (Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+		Get-ChildItem -Path . -Filter .\*.xml |
 		Foreach-Object {
-			$entity = ($_.BaseName -replace '_[^_]*$')
-			$pars   = ($_.BaseName -replace '.*_')
-			Write-Output ("  indexing " + $_.BaseName + ".md")
-			if ($pars -gt 0) {
-				Add-Content -Path $i -Value ("* [" + $entity + "/" + $pars + "](" + $_.BaseName + ".md)")
-			} else {
-				Add-Content -Path $i -Value ("* [" + $entity + "](" + $_.BaseName + ".md)")
+			if ($_ | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+				$entity = ($_.BaseName -replace '_[^_]*$')
+				$pars   = ($_.BaseName -replace '.*_')
+				Write-Output ("  indexing " + $_.BaseName + ".md")
+				if ($pars -gt 0) {
+					Add-Content -Path $i -Value ("* [" + $entity + "/" + $pars + "](" + $_.BaseName + ".md)")
+				} else {
+					Add-Content -Path $i -Value ("* [" + $entity + "](" + $_.BaseName + ".md)")
+				}
 			}
 		}
 	}
