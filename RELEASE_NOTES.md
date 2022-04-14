@@ -66,6 +66,9 @@ meta-non-terminals.
 Tools
 -----
 
+* ADDED: Experimental PowerShell versions of the `update_html_docs.sh` and
+`update_svg_diagrams.sh` scripts.
+
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
 * UPDATED: Documentation of the `lgtdoc` tool for the new PowerShell scripts.
