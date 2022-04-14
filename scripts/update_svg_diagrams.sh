@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on April 13, 2022
+##   Last updated on April 14, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -39,7 +39,7 @@ fi
 
 
 # default to SWI-Prolog as the backend compiler
-backend=swipl
+backend=swi
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
 include_packs='false'

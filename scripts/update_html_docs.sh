@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on April 13, 2022
+##   Last updated on April 14, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ fi
 
 # default to SWI-Prolog as some of the documentation should be
 # generated using a multi-threaded backend Prolog compiler
-backend=swipl
+backend=swi
 prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
 include_packs='false'
