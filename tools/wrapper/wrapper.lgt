@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2019-03-08,
+		date is 2022-04-15,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'list of file name extensions used to recognize Prolog source files (default is ``[''.pl'',''.pro'',''.prolog'']``)',
@@ -660,13 +660,14 @@
 		append(UserOptions, DefaultOptions, Options).
 
 	normalize_directory_paths([], []).
-	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		os::absolute_file_name(Directory, NormalizedDirectory0),
-		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
-			NormalizedDirectory = NormalizedDirectory0
-		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
+	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
+		os::internal_os_path(Directory1, Directory0),
+		os::absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
 		),
-		normalize_directory_paths(Directories, NormalizedDirectories).
+		normalize_directory_paths(Directories0, Directories).
 
 	% by default, use the most common Prolog source file extensions:
 	default_option(prolog_extensions(['.pl', '.pro', '.prolog'])).

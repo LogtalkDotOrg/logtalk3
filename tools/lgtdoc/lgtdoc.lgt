@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 6:3:0,
+		version is 6:4:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2022-04-15,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1544,13 +1544,14 @@
 		normalize_file_paths(ExcludedPrefixes0, ExcludedPrefixes).
 
 	normalize_directory_paths([], []).
-	normalize_directory_paths([Directory| Directories], [NormalizedDirectory| NormalizedDirectories]) :-
-		os::absolute_file_name(Directory, NormalizedDirectory0),
-		(	sub_atom(NormalizedDirectory0, _, _, 0, '/') ->
-			NormalizedDirectory = NormalizedDirectory0
-		;	atom_concat(NormalizedDirectory0, '/', NormalizedDirectory)
+	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
+		os::internal_os_path(Directory1, Directory0),
+		os::absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
 		),
-		normalize_directory_paths(Directories, NormalizedDirectories).
+		normalize_directory_paths(Directories0, Directories).
 
 	normalize_file_paths([], []).
 	normalize_file_paths([File| Files], [NormalizedFile| NormalizedFiles]) :-

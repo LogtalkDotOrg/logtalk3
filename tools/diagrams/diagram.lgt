@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:50:0,
+		version is 2:51:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2022-04-15,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -323,10 +323,11 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
-		os::absolute_file_name(Directory0, Directory1),
-		(	sub_atom(Directory1, _, _, 0, '/') ->
-			Directory = Directory1
-		;	atom_concat(Directory1, '/', Directory)
+		os::internal_os_path(Directory1, Directory0),
+		os::absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
 		),
 		normalize_directory_paths(Directories0, Directories).
 
