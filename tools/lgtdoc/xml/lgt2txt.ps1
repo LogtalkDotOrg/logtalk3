@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on April 15, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -200,6 +200,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
             $fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$entity_xslt_object.Transform($reader, $null, $writer)
+			$writer.Close()
 		}
 	}
 	Get-ChildItem -Path . -Filter .\*.xml |
@@ -212,6 +213,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
             $fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$entity_xslt_object.Transform($reader, $null, $writer)
+			$writer.Close()
 		}
 	}
 	Write-Output "conversion done"
