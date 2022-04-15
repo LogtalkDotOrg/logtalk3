@@ -160,7 +160,7 @@ Push-Location ../docs
 ($logtalk + " " + ("`"$core_goal`"" -replace '\\','\\')) | Invoke-Expression
 ($logtalk + " " + ("`"$library_goal`"" -replace '\\','\\')) | Invoke-Expression
 ($logtalk + " " + ("`"$tools_goal`"" -replace '\\','\\')) | Invoke-Expression
-($logtalk + " " + ("`"$contributions_goal`"")) | Invoke-Expression
+($logtalk + " " + ("`"$contributions_goal`"" -replace '\\','\\')) | Invoke-Expression
 ($logtalk + " " + ("`"$ports_goal`"" -replace '\\','\\')) | Invoke-Expression
 
 lgt2svg
