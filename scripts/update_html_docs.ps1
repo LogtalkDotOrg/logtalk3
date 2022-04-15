@@ -125,19 +125,19 @@ if ("$p" -eq "b") {
 }
 
 if ($env:LOGTALKPACKS -ne "") {
-	$logtalk_packs = '$LOGTALKPACKS/'
+	$logtalk_packs = '$env:LOGTALKPACKS\'
 } else {
-	$logtalk_packs = '$USERPROFILE/logtalk_packs/'
+	$logtalk_packs = '$env:USERPROFILE\logtalk_packs\'
 }
 
 $cwd = $pwd
 
 if ($i -eq $true) {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/', '$logtalk_packs'])]),writeln('HERE'-'$cwd/../docs/sources'),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\', '$logtalk_packs'])]),halt."
 } elseif ($env:LOGTALKPACKS -ne "") {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/']),exclude_prefixes(['$HOME/logtalk_packs/','$LOGTALKPACKS/'])]),writeln('HERE'-'$cwd/../docs/sources'),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\']),exclude_prefixes(['$env:USERPROFILE\logtalk_packs\','$env:LOGTALKPACKS\'])]),halt."
 } else {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/']),exclude_prefixes(['$HOME/logtalk_packs/'])]),writeln('HERE'-'$cwd/../docs/sources'),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\']),exclude_prefixes(['$env:USERPROFILE\logtalk_packs\'])]),halt."
 }
 
 ($logtalk + " " + ("`"$goal`"" -replace '\\','\\')) | Invoke-Expression
