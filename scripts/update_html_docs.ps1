@@ -157,13 +157,13 @@ Copy-Item -Path _build\texinfo\LogtalkAPIs-*.info -Destination ..
 Move-Item -Path conf.py -Destination _conf.py
 Move-Item -Path browserconfig.xml -Destination browserconfig.xml.saved
 try {
-	Remove-Item .\*.xml -Recurse
+	Remove-Item .\*.xml -Recurse -Force
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
 Move-Item -Path browserconfig.xml.saved -Destination browserconfig.xml
 try {
-	Remove-Item .\*.rst -Recurse
+	Remove-Item .\*.rst -Recurse -Force
 } catch {
 	Write-Output "Error occurred at cleanup"
 }

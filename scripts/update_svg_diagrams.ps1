@@ -166,7 +166,7 @@ Push-Location ../docs
 lgt2svg
 
 try {
-	Remove-Item .\*.dot -Recurse
+	Remove-Item .\*.dot -Recurse -Force
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
