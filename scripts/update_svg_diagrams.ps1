@@ -2,7 +2,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on April 14, 2022
+##   Last updated on April 15, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -157,11 +157,11 @@ $contributions_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.co
 
 Push-Location ../docs
 
-($logtalk + " " + "`"$core_goal`"") | Invoke-Expression
-($logtalk + " " + "`"$library_goal`"") | Invoke-Expression
-($logtalk + " " + "`"$tools_goal`"") | Invoke-Expression
-($logtalk + " " + "`"$contributions_goal`"") | Invoke-Expression
-($logtalk + " " + "`"$ports_goal`"") | Invoke-Expression
+($logtalk + " " + ("`"$core_goal`"" -replace '\\','\\')) | Invoke-Expression
+($logtalk + " " + ("`"$library_goal`"" -replace '\\','\\')) | Invoke-Expression
+($logtalk + " " + ("`"$tools_goal`"" -replace '\\','\\')) | Invoke-Expression
+($logtalk + " " + ("`"$contributions_goal`"") | Invoke-Expression
+($logtalk + " " + ("`"$ports_goal`"" -replace '\\','\\')) | Invoke-Expression
 
 lgt2svg
 
