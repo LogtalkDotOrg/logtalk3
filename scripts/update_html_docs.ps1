@@ -147,25 +147,25 @@ Write-Output $pwd
 
 lgt2rst -t "Logtalk APIs"
 Move-Item -Path _conf.py -Destination conf.py
-make clean
-make html
-make info
+.\make.bat clean
+.\make.bat html
+.\make.bat info
 #make linkcheck
 Copy-Item -Path _build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path _build\texinfo\LogtalkAPIs-*.info -Destination ..
-make clean
+.\make.bat clean
 Move-Item -Path conf.py -Destination _conf.py
 Move-Item -Path browserconfig.xml -Destination browserconfig.xml.saved
-#try {
-#	Remove-Item .\*.xml -Recurse
-#} catch {
-#	Write-Output "Error occurred at cleanup"
-#}
+try {
+	Remove-Item .\*.xml -Recurse
+} catch {
+	Write-Output "Error occurred at cleanup"
+}
 Move-Item -Path browserconfig.xml.saved -Destination browserconfig.xml
-#try {
-#	Remove-Item .\*.rst -Recurse
-#} catch {
-#	Write-Output "Error occurred at cleanup"
-#}
+try {
+	Remove-Item .\*.rst -Recurse
+} catch {
+	Write-Output "Error occurred at cleanup"
+}
 
 Pop-Location
