@@ -69,8 +69,8 @@ Tools
 * CHANGED: The `diagrams`, `lgtdoc`, and `wrapper` tools to convert paths to
 internal path syntax when normalizing directories passed as options.
 
-* ADDED: Experimental PowerShell versions of the `update_html_docs.sh` and
-`update_svg_diagrams.sh` scripts.
+* ADDED: Experimental PowerShell versions of the `update_html_docs.sh`,
+`update_svg_diagrams.sh`, and `logtalk_allure_report.sh` scripts.
 
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
