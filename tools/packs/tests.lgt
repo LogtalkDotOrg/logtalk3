@@ -401,7 +401,7 @@
 	test(packs_registries_delete_1_01, true) :-
 		registries::delete(local_1_d).
 
-	% supress all packs tool messages to not pollute the unit tests output
+	% suppress all packs tool messages to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

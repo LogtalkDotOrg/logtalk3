@@ -21,7 +21,7 @@
 
 :- initialization((
 	% define a flag to allow the logtalk_tester script to pass the
-	% option to supress the test file and directory path prefix
+	% option to suppress the test file and directory path prefix
 	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
 	% define a flag to allow the logtalk_tester script to pass the type of
 	% server hosting the issue tracker where the bug reports will be created

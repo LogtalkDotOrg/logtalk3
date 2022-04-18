@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on May 4, 2021
+##   Last updated on April 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -124,7 +124,7 @@ usage_help()
 	echo "  -v print version of $(basename "$0")"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
 	echo "  -t timeout in seconds for running each doclet (default is $timeout; i.e. disabled)"
-	echo "  -s supress path prefix (default is $prefix)"
+	echo "  -s suppress path prefix (default is $prefix)"
 	echo "  -- arguments to be passed to the integration script used to run the doclets (no default)"
 	echo "  -h help"
 	echo

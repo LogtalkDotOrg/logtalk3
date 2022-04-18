@@ -247,7 +247,7 @@
 		nospy(_, _, _, _),
 		\+ spying(_, _, _, _).
 
-	% supress all messages from the "debugger" component
+	% suppress all messages from the "debugger" component
 	% to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).

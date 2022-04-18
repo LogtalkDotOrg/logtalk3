@@ -224,7 +224,7 @@
 		logtalk::expand_library_path(lgtunit, Directory),
 		rdirectory(Directory).
 
-	% supress all messages from the "dead_code_scanner"
+	% suppress all messages from the "dead_code_scanner"
 	% component to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).

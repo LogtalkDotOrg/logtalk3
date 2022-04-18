@@ -188,7 +188,7 @@
 		retractall(target_action_(_)),
 		assertz(target_action_(documentation)).
 
-	% supress all logtalk_make/0-1 messages to not pollute the unit tests output
+	% suppress all logtalk_make/0-1 messages to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
