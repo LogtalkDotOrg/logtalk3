@@ -22,13 +22,15 @@ This directory contains support files for creating Docker containers and
 shell scripts used for Logtalk documenting, testing, managing, packaging,
 and installation.
 
-Scripts extension `.sh` are Bash shells scripts for macOS, Linux, and
-similar systems.
+Scripts with a `.sh` extension are Bash shells scripts for macOS, Linux,
+and similar systems.
+
+Scripts with a `.ps1` extension are PowerShell scripts for Windows systems.
 
 Scripts with extension `.js` are JScript command-line scripts for Windows.
-They require WSH 5.6 or later version to be installed and should be run
-using `cscript.exe` from a DOS command line shell (you may download WSH 5.6
-from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
+These are deprecated. They require WSH 5.6 or later version to be installed
+and should be run using `cscript.exe` from a DOS command line shell (you may
+download WSH 5.6 from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
 Man pages are provided for all POSIX shell scripts, which can be listed
 using the `apropos logtalk` command. HTML versions of the man pages are
@@ -81,10 +83,11 @@ also available in the Logtalk website.
 	installation of the GNU `sed` command, when not available by default, is
 	strongly recommended
 
-- `logtalk_allure_report.sh`  
-	shell script for creating Allure reports (http://allure.qatools.ru); tested
-	with Allure 2.13.8; this script should be called after running the
-	`logtalk_tester.sh` shell script using the `-f xunit` command-line option
+- `logtalk_allure_report.sh` and `logtalk_allure_report.ps1`  
+	Bash shell and PowerShell scripts for creating Allure reports (http://allure.qatools.ru);
+	tested with Allure 2.13.8; these scripts should be called after running the
+	`logtalk_tester.sh` shell script using the `-f xunit` or `-f xunit_net_v2`
+	command-line options
 
 - `logtalk_doclet.sh`  
 	shell script for automating running doclets in the current directory and
@@ -157,17 +160,17 @@ also available in the Logtalk website.
 - `logtalk_user_setup.bat`  
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
 
-- `update_html_docs.sh`  
-	shell script for updating the library and tools HTML documentation requires
-	[Sphinx](https://www.sphinx-doc.org) to be installed (version 3.4.1 or later)
-	plus [Pygments](https://pygments.org) (version 2.7.3 or later) and the Sphinx
-	[Read The Docs theme](https://github.com/rtfd/sphinx_rtd_theme) (version
-	0.5.0 or later)
+- `update_html_docs.sh` and `update_html_docs.ps1`  
+	Bash shell and PowerShell scripts for updating the library and tools HTML
+	documentation requires [Sphinx](https://www.sphinx-doc.org) to be installed
+	(version 3.4.1 or later) plus [Pygments](https://pygments.org) (version
+	2.7.3 or later) and the Sphinx [Read The Docs theme](https://github.com/rtfd/sphinx_rtd_theme)
+	(version 0.5.0 or later)
 
-- `update_svg_diagrams.sh`  
-	shell script for updating the core entities, library, development
-	tools, and third-party contributions SVG diagrams; requires
-	[GraphViz](https://www.graphviz.org/) to be installed (version
+- `update_svg_diagrams.sh` and `update_svg_diagrams.ps1`  
+	Bash shell and PowerShell scripts for updating the core entities, library,
+	development tools, ports, and third-party contributions SVG diagrams;
+	requires [GraphViz](https://www.graphviz.org/) to be installed (version
 	2.43.20191029.1313 or later)
 
 - `update_man_html_versions.sh`  
