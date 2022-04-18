@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 16, 2022
+##   Last updated on April 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,7 @@ param(
 	[String]$o = "allure-report",
 	[String]$t,
 	[Switch]$p,
+	[String]$e = "",
 	[Switch]$v,
 	[Switch]$h
 )
@@ -48,7 +49,7 @@ function Write-Usage-Help() {
 	Write-Output "This script generates Allure reports."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d tests] [-i results] [-o report] [-t title] [-p]")
+	Write-Output ("  " + $myName + " [-d tests] [-i results] [-o report] [-t title] [-p] [-e pairs]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -58,7 +59,7 @@ function Write-Usage-Help() {
 	Write-Output "  -o report directory (default is $report)"
 	Write-Output "  -t report title (default is \"Allure Report\")"
 	Write-Output "  -p preprocess results but do not generate report"
-	Write-Output "  -- environment pairs (key1=value1 key2=value2 ...)"
+	Write-Output "  -e environment pairs as a string ('key1=value1,key2=value2',...')"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
@@ -83,7 +84,7 @@ if (Test-Path $o -PathType container) {
 
 New-Item -Path $i -ItemType directory -Force > $null
 try {
-	Remove-Item $i/xunit_report_*.xml -Recurse -Force
+	Remove-Item -Path $i/xunit_report_*.xml -Recurse -Force
 } catch {
 	Write-Output "Error occurred at cleanup previous results"
 }
@@ -93,6 +94,10 @@ Get-ChildItem -Path $d\xunit_report.xml -Recurse |
 Foreach-Object {
 	$counter++
 	Move-Item -Path $_.FullName -Destination ($i + "\xunit_report_" + $counter + ".xml")
+}
+
+if ($e -ne "") {
+	$e.Split(",") | Set-Content -Path $i/environment.properties
 }
 
 if ($p -eq $true) {
@@ -112,7 +117,7 @@ if (Test-Path $i\history ) {
 if (Test-Path $o\history) {
 	if (Test-Path $i\history) {
 		try {
-			Remove-Item $i\history -Confirm -Recurse
+			Remove-Item -Path $i\history -Confirm -Recurse -Force
 		} catch {
 			Write-Output "Error occurred at cleanup results history"
 		}
