@@ -59,7 +59,7 @@ function Write-Usage-Help() {
 	Write-Output "  -o report directory (default is $report)"
 	Write-Output "  -t report title (default is \"Allure Report\")"
 	Write-Output "  -p preprocess results but do not generate report"
-	Write-Output "  -e environment pairs as a string ('key1=value1,key2=value2',...')"
+	Write-Output "  -e environment pairs as a string ('key1=value1,key2=value2,...')"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
