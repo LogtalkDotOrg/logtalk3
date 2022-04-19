@@ -4,7 +4,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on April 13, 2022
+##   Last updated on April 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -203,6 +203,8 @@ if (Test-Path $env:LOGTALKUSER) {
 	Write-Output "by running the logtalk_user_setup shell script:"
 	logtalk_user_setup
 }
+
+$env:LINEDIT = 'gui=no'
 
 Push-Location
 Set-Location $t
