@@ -90,6 +90,9 @@ version option.
 files when indexing a directory of XML documenting files without any index XML
 file.
 
+* FIXED: The `logtalk_doclet.sh` script usage help function omission of the
+path suppress option.
+
 Tests
 -----
 
