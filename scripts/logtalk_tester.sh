@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 24, 2022
+##   Last updated on April 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.1"
+	echo "$(basename "$0") 10.2"
 	exit 0
 }
 
@@ -295,7 +295,7 @@ usage_help()
 	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-u url] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
