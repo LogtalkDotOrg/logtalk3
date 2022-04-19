@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on April 13, 2022
+##   Last updated on April 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -86,7 +86,7 @@ Get-Logtalkuser
 
 function Create-Logtalkuser-Directory {
 	if (Test-Path $env:LOGTALKUSER) {
-		$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
+		$date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 		Move-Item -Path $env:LOGTALKUSER -Destination $env:LOGTALKUSER-backup-$date
 		Write-Output "Created a backup of the existing %LOGTALKUSER% directory:"
 		Write-Output ""

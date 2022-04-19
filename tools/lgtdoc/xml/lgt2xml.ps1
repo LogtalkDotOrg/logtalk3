@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on April 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -201,7 +201,7 @@ function Create-Index-File() {
 
 	Add-Content -Path $i -Value "</ul>"
 
-	$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
+	$date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 
 	Add-Content -Path $i -Value ("<p>Generated on " + $date + "</p>")
 	Add-Content -Path $i -Value "</body>"
