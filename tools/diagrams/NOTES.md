@@ -240,7 +240,7 @@ files:
 
 - `lgt2svg.sh` for POSIX systems
 - `lgt2svg.ps1` for Windows systems
-- `lgt2svg.js` and `lgt2svg.bat` for Windows systems
+- `lgt2svg.js` and `lgt2svg.bat` for Windows systems (deprecated)
 
 The scripts assume that the Graphviz command-line executables are available
 from the system path (the default is the `dot` executable but the scripts
