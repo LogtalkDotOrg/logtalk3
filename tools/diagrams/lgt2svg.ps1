@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on April 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -25,6 +25,7 @@
 param(
 	[Parameter()]
 	[String]$c = "dot", 
+	[String]$a = "", 
 	[Switch]$v,
 	[Switch]$h
 )
@@ -32,7 +33,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.7")
+	Write-Output ($myName + " 0.8")
 }
 
 function Get-Logtalkhome {
@@ -78,13 +79,13 @@ function Write-Usage-Help() {
 	Write-Output "in the current directory to SVG files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c command] [--% arguments]")
+	Write-Output ("  " + $myName + " [-c command] [-a arguments]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -c Graphviz command (valid values are dot, circo, fdp and neato; default is " + $c + ")")
-	Write-Output "  --% addtional arguments to be passed to the Graphviz command (no default)"
+	Write-Output "  -a additional arguments wrapped as a string to be passed to the Graphviz command (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h print help"
 	Write-Output ""
@@ -162,10 +163,8 @@ if ($count -gt 0) {
 		$converted = 1
 		$counter = 16
 		While (($converted -eq 1) -and ($counter -gt 0)) {
-			if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
-				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $args[$args.Count-1]) $_.Name
-			} elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $args[$args.Count-1]) $_.Name
+			if ($a -ne "") {
+				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $a) $_.Name
 			} else {
 				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $_.Name
 			}

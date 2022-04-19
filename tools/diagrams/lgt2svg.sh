@@ -82,7 +82,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -104,7 +104,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -c Graphviz command (valid values are dot, circo, fdp and neato; default is $command)"
-	echo "  -- addtional arguments to be passed to the Graphviz command (no default)"
+	echo "  -- additional arguments to be passed to the Graphviz command (no default)"
 	echo "  -v print version"
 	echo "  -h print help"
 	echo
