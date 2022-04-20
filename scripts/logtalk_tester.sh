@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 19, 2022
+##   Last updated on April 20, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -362,7 +362,7 @@ if [ "$p_arg" == "" ] ; then
 	echo "Error! Backend Prolog compiler not specified!" >&2
 	usage_help
 	exit 1
-elif [ "$p_arg" == "b" ] || [ "$p_arg" == "b-prolog" ] ; then
+elif [ "$p_arg" == "b" ] ; then
 	backend=b
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
@@ -372,7 +372,7 @@ elif [ "$p_arg" == "ciao" ] ; then
 	prolog='Ciao Prolog'
 	logtalk=ciaolgt$extension
 	logtalk_call="$logtalk $i_arg -e"
-elif [ "$p_arg" == "cx" ] || [ "$p_arg" == "cxprolog" ] ; then
+elif [ "$p_arg" == "cx" ] ; then
 	backend=cx
 	prolog='CxProlog'
 	logtalk=cxlgt$extension
@@ -382,12 +382,12 @@ elif [ "$p_arg" == "eclipse" ] ; then
 	prolog='ECLiPSe'
 	logtalk=eclipselgt$extension
 	logtalk_call="$logtalk $i_arg -e"
-elif [ "$p_arg" == "gnu" ] || [ "$p_arg" == "gnu-prolog" ] ; then
+elif [ "$p_arg" == "gnu" ] ; then
 	backend=gnu
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk $i_arg --query-goal"
-elif [ "$p_arg" == "ji" ] || [ "$p_arg" == "jiprolog" ] ; then
+elif [ "$p_arg" == "ji" ] ; then
 	backend=ji
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
@@ -409,13 +409,13 @@ elif [ "$p_arg" == "scryer" ] ; then
 	prolog='Scryer Prolog'
 	logtalk=scryerlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
-elif [ "$p_arg" == "sicstus" ] || [ "$p_arg" == "sicstus-prolog" ] ; then
+elif [ "$p_arg" == "sicstus" ] ; then
 	backend=sicstus
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk $i_arg --goal"
 	dot="."
-elif [ "$p_arg" == "swi" ] || [ "$p_arg" == "swi-prolog" ] ; then
+elif [ "$p_arg" == "swi" ] ; then
 	backend=swi
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
