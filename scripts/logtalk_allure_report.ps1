@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 18, 2022
+##   Last updated on April 20, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -84,7 +84,7 @@ if (Test-Path $o -PathType container) {
 
 New-Item -Path $i -ItemType directory -Force > $null
 try {
-	Remove-Item -Path $i/xunit_report_*.xml -Recurse -Force
+	Remove-Item -Path $i\xunit_report_*.xml -Recurse -Force
 } catch {
 	Write-Output "Error occurred at cleanup previous results"
 }
