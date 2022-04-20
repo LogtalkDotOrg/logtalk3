@@ -93,6 +93,9 @@ file.
 * FIXED: The `logtalk_doclet.sh` script usage help function omission of the
 path suppress option.
 
+* FIXED: The `logtalk_doclet.sh` script spurious but harmless warnings when no
+doclets are found.
+
 Tests
 -----
 

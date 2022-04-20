@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on April 19, 2022
+##   Last updated on April 20, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.2"
+	echo "$(basename "$0") 2.3"
 	exit 0
 }
 
@@ -176,12 +176,12 @@ elif [ "$p_arg" == "ji" ] ; then
 elif [ "$p_arg" == "lvm" ] ; then
 	prolog='LVM'
 	logtalk=lvmlgt$extension
-	logtalk_call="$logtalk $i_arg -g"
-	dot="?"
+	logtalk_call="$logtalk -g"
+	dot="."
 elif [ "$p_arg" == "scryer" ] ; then
 	prolog='Scryer Prolog'
 	logtalk=scryerlgt$extension
-	logtalk_call="$logtalk $i_arg -g"
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
@@ -202,7 +202,7 @@ elif [ "$p_arg" == "tau" ] ; then
 elif [ "$p_arg" == "trealla" ] ; then
 	prolog='Trealla Prolog'
 	logtalk=tplgt$extension
-	logtalk_call="$logtalk $i_arg -g"
+	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "xsb" ] ; then
 	prolog='XSB'
 	logtalk=xsblgt$extension
@@ -251,6 +251,9 @@ rm -f "$results"/*.results
 rm -f "$results"/*.errors
 rm -f "$results"/errors.all
 rm -f "$results"/tester_versions.txt
+
+touch "$results"/*.results
+touch "$results"/*.errors
 
 start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 
