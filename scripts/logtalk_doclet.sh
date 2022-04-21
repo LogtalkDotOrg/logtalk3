@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on April 20, 2022
+##   Last updated on April 21, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -293,7 +293,7 @@ echo "***** Crashes"
 echo "*******************************************************************************"
 grep -s -a 'LOGTALK_CRASH' -- *.errors | sed 's/LOGTALK_CRASH//' | sed 's/.errors://' | sed 's|__|/|g' | sed "s|^$prefix||"
 echo "*******************************************************************************"
-echo "***** Doclet failures"
+echo "***** Failures"
 echo "*******************************************************************************"
 grep -s -a 'failed' -- *.results
 echo "*******************************************************************************"
