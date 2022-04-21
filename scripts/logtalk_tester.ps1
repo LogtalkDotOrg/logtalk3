@@ -28,7 +28,7 @@ param(
 	[String]$o = "verbose",
 	[String]$m = "normal",
 	[String]$f = "default",
-	[String]$d = ($pwd + "\logtalk_doclet_logs"),
+	[String]$d = "$pwd\logtalk_tester_logs",
 	# disable timeouts to maintain backward compatibility
 	[String]$t = 0,
 	[String]$n = "tester",
@@ -69,14 +69,9 @@ param(
 		Write-Output "%"
 		Write-Output ("% " + $unit_short)
 	}
-#	if (Test-Path "$n.sh") {
-#		if [ $# -eq 0) {
-#			source "$n.sh" -p $backend
-#		} else {
-#			source "$n.sh" "$@"
-#		}
-#		source_exit=$?
-#		if [ "$source_exit" -gt 0) {
+#	if (Test-Path $n.sh) {
+#		$source_exit = & $n.sh $a
+#		if ($source_exit -gt 0) {
 #			Write-Output "%         source $n.sh returned code $source_exit"
 #			Exit 9
 #		}
@@ -320,17 +315,17 @@ Function Check-Parameters() {
 		Write-Usage-Help
 		Exit 1
 	} elseif ($p -eq "b") {
-		$backend = b
+		$backend = 'b'
 		$prolog = 'B-Prolog'
 		$logtalk = bplgt
 		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "ciao") {
-		$backend = ciao
+		$backend = 'ciao'
 		$prolog = 'Ciao Prolog'
 		$logtalk = ciaolgt
 		$logtalk_call = "$logtalk $i -e"
 	} elseif ($p -eq "cx") {
-		$backend = cx
+		$backend = 'cx'
 		$prolog = 'CxProlog'
 		$logtalk = cxlgt
 		$logtalk_call = "$logtalk $i --goal"
@@ -340,61 +335,61 @@ Function Check-Parameters() {
 		$logtalk = eclipselgt
 		$logtalk_call = "$logtalk $i -e"
 	} elseif ($p -eq "gnu") {
-		$backend = gnu
+		$backend = 'gnu'
 		$prolog = 'GNU Prolog'
 		$logtalk = gplgt
 		$logtalk_call = "$logtalk $i --query-goal"
 	} elseif ($p -eq "ji") {
-		$backend = ji
+		$backend = 'ji'
 		$prolog = 'JIProlog'
 		$logtalk = jiplgt
 		$logtalk_call = "$logtalk $i -n -g"
 	} elseif ($p -eq "lvm") {
-		$backend = lvm
+		$backend = 'lvm'
 		$prolog = 'LVM'
 		$logtalk = lvmlgt
 		$logtalk_call = "$logtalk $i -g"
 		$dot = "."
 	} elseif ($p -eq "scryer") {
-		$backend = scryer
+		$backend = 'scryer'
 		$prolog = 'Scryer Prolog'
 		$logtalk = scryerlgt
 		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "sicstus") {
-		$backend = sicstus
+		$backend = 'sicstus'
 		$prolog = 'SICStus Prolog'
 		$logtalk = sicstuslgt
 		$logtalk_call = "$logtalk $i --goal"
 		$dot = "."
 	} elseif ($p -eq "swi") {
-		$backend = swi
+		$backend = 'swi'
 		$prolog = 'SWI-Prolog'
 		$logtalk = swilgt
 		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "swipack") {
-		$backend = swipack
+		$backend = 'swipack'
 		$prolog = 'SWI-Prolog'
 		$logtalk = swipl
 		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "tau") {
-		$backend = tau
+		$backend = 'tau'
 		$prolog = 'Tau Prolog'
 		$logtalk = taulgt
 		$logtalk_call = "$logtalk $i -g"
 		$dot = "."
 	} elseif ($p -eq "trealla") {
-		$backend = trealla
+		$backend = 'trealla'
 		$prolog = 'Trealla Prolog'
 		$logtalk = tplgt
 		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "xsb") {
-		$backend = xsb
+		$backend = 'xsb'
 		$prolog = 'XSB'
 		$logtalk = xsblgt
 		$logtalk_call = "$logtalk $i -e"
 		$dot = "."
 	} elseif ($p -eq "yap") {
-		$backend = yap
+		$backend = 'yap'
 		$prolog = 'YAP'
 		$logtalk = yaplgt
 		$logtalk_call = "$logtalk $i -g"
@@ -557,7 +552,7 @@ if ($l -eq $null) {
 		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Recurse |
 		Foreach-Object {
 			Write-Host -NoNewlinee "% running $testsets test sets: "
-			Write-Host -NoNewlinee "$counter"'\r'
+			Write-Host -NoNewlinee $counter
 			Run-TestSet $_.FullName
 			$counter++
 			Write-Output "%"
@@ -574,7 +569,7 @@ if ($l -eq $null) {
 		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Depth $level |
 		Foreach-Object {
 			Write-Host -NoNewlinee "% running $testsets test sets: "
-			Write-Host -NoNewlinee "$counter"'\r'
+			Write-Host -NoNewlinee $counter
 			Run-TestSet $_.FullName
 			$counter++
 			Write-Output "%"
@@ -601,10 +596,10 @@ $flaky = 0
 Get-ChildItem -Path . -Filter .\*.totals |
 Foreach-Object {
 	if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
-		$skipped = $skipped + $_.split("\t")[3]
-		$passed =  $passed  + $_.split("\t")[4]
-		$failed =  $failed  + $_.split("\t")[5]
-		$flaky =   $flaky   + $_.split("\t")[6]
+		$skipped = $skipped + [int]($_.split("\t")[3])
+		$passed =  $passed  + [int]($_.split("\t")[4])
+		$failed =  $failed  + [int]($_.split("\t")[5])
+		$flaky =   $flaky   + [int]($_.split("\t")[6])
 	}
 }
 
