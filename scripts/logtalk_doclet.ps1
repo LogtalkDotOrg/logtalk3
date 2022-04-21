@@ -23,9 +23,8 @@
 
 [CmdletBinding()]
 param(
-	[Parameter(Mandatory=$true)]
-	# default to SWI-Prolog as the backend compiler
-	[String]$p = "swi",
+	[Parameter()]
+	[String]$p,
 	[String]$d = "$pwd\logtalk_doclet_logs",
 	[String]$s = $env:USERPROFILE,
 	# disable timeouts to maintain backward compatibility
@@ -36,15 +35,15 @@ param(
 	[Switch]$h
 )
 
-function Write-Script-Version {
+Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
 	Write-Output ($myName + " 2.3")
 }
 
-function Run-Doclets() {
+Function Run-Doclets() {
 param(
-	[Parameter()]
+	[Parameter(Position = 0)]
 	[String]$path
 )
 	$directory = Split-Path -Path $path
@@ -66,10 +65,11 @@ param(
 	Exit 0
 }
 
-function Run-Doclet() {
+Function Run-Doclet() {
 param(
-	[Parameter()]
+	[Parameter(Position = 0)]
 	[String]$name,
+	[Parameter(Position = 1)]
 	[String]$goal
 )
 	$results_file = Join-Path $d ($name + ".results")
@@ -82,7 +82,7 @@ param(
 	return $?
 }
 
-function Write-Usage-Help() {
+Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
@@ -110,8 +110,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 }
 
-
-function Check-Parameters() {
+Function Check-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
@@ -123,7 +122,11 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if ($p -eq "b") {
+	if ($p -eq "") {
+		Write-Output ("Error! Backend Prolog compiler not specified!")
+		Write-Usage-Help
+		Exit 1
+	} elseif ($p -eq "b") {
 		$prolog='B-Prolog'
 		$logtalk="bplgt -g"
 		$logtalk_call="$logtalk -g"

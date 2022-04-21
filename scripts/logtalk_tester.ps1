@@ -23,7 +23,7 @@
 
 [CmdletBinding()]
 param(
-	[Parameter(Mandatory=$true)]
+	[Parameter()]
 	[String]$p,
 	[String]$o = "verbose",
 	[String]$m = "normal",
@@ -46,15 +46,15 @@ param(
 	[Switch]$h
 )
 
-function Write-Script-Version {
+Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
 	Write-Output ($myName + " 10.2")
 }
 
-function Run-TestSet() {
+Function Run-TestSet() {
 param(
-	[Parameter()]
+	[Parameter(Position = 0)]
 	[String]$path
 )
 	$start_time = Get-Date -UFormat %s
@@ -69,15 +69,15 @@ param(
 		Write-Output "%"
 		Write-Output ("% " + $unit_short)
 	}
-#	if (Test-Path "$driver.sh") {
+#	if (Test-Path "$n.sh") {
 #		if [ $# -eq 0) {
-#			source "$driver.sh" -p $backend
+#			source "$n.sh" -p $backend
 #		} else {
-#			source "$driver.sh" "$@"
+#			source "$n.sh" "$@"
 #		}
 #		source_exit=$?
 #		if [ "$source_exit" -gt 0) {
-#			Write-Output "%         source $driver.sh returned code $source_exit"
+#			Write-Output "%         source $n.sh returned code $source_exit"
 #			Exit 9
 #		}
 #	}
@@ -141,7 +141,7 @@ param(
 			}
 		}
 		Write-Host -NoNewline '%         clause coverage '
-		Write-Output "$(grep "^coverage" "$d/$name.totals" | cut -f 2)"
+		(Get-Content -Path $d\$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("\t")[1]
 	} elseif ($tests_exit -eq 5) {
 		if ($o -eq "verbose") {
 			Write-Output "%         broken"
@@ -172,10 +172,11 @@ param(
 	return 0
 }
 
-function Run-Tests() {
+Function Run-Tests() {
 param(
-	[Parameter()]
+	[Parameter(Position = 0)]
 	[String]$name,
+	[Parameter(Position = 1)]
 	[String]$goal
 )
 	if ($a -eq "") {
@@ -202,11 +203,13 @@ param(
 	return $exit
 }
 
-function Ensure-Format-Report() {
+Function Ensure-Format-Report() {
 param(
-	[Parameter()]
+	[Parameter(Position = 0)]
 	[String]$directory,
+	[Parameter(Position = 1)]
 	[String]$name,
+	[Parameter(Position = 2)]
 	[String]$error
 )
 	$short = $directory -replace $prefix, ""
@@ -252,7 +255,7 @@ param(
 	}
 }
 
-function Write-Usage-Help() {
+Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
@@ -300,7 +303,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 }
 
-function Check-Parameters() {
+Function Check-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
@@ -312,85 +315,89 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if ($p -eq "b") {
+	if ($p -eq "") {
+		Write-Output ("Error! Backend Prolog compiler not specified!")
+		Write-Usage-Help
+		Exit 1
+	} elseif ($p -eq "b") {
 		$backend = b
 		$prolog = 'B-Prolog'
 		$logtalk = bplgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "ciao") {
 		$backend = ciao
 		$prolog = 'Ciao Prolog'
 		$logtalk = ciaolgt
-		$logtalk_call = "$logtalk $i_arg -e"
+		$logtalk_call = "$logtalk $i -e"
 	} elseif ($p -eq "cx") {
 		$backend = cx
 		$prolog = 'CxProlog'
 		$logtalk = cxlgt
-		$logtalk_call = "$logtalk $i_arg --goal"
+		$logtalk_call = "$logtalk $i --goal"
 	} elseif ($p -eq "eclipse") {
 		$backend = eclipse
 		$prolog = 'ECLiPSe'
 		$logtalk = eclipselgt
-		$logtalk_call = "$logtalk $i_arg -e"
+		$logtalk_call = "$logtalk $i -e"
 	} elseif ($p -eq "gnu") {
 		$backend = gnu
 		$prolog = 'GNU Prolog'
 		$logtalk = gplgt
-		$logtalk_call = "$logtalk $i_arg --query-goal"
+		$logtalk_call = "$logtalk $i --query-goal"
 	} elseif ($p -eq "ji") {
 		$backend = ji
 		$prolog = 'JIProlog'
 		$logtalk = jiplgt
-		$logtalk_call = "$logtalk $i_arg -n -g"
+		$logtalk_call = "$logtalk $i -n -g"
 	} elseif ($p -eq "lvm") {
 		$backend = lvm
 		$prolog = 'LVM'
 		$logtalk = lvmlgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 		$dot = "."
 	} elseif ($p -eq "scryer") {
 		$backend = scryer
 		$prolog = 'Scryer Prolog'
 		$logtalk = scryerlgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "sicstus") {
 		$backend = sicstus
 		$prolog = 'SICStus Prolog'
 		$logtalk = sicstuslgt
-		$logtalk_call = "$logtalk $i_arg --goal"
+		$logtalk_call = "$logtalk $i --goal"
 		$dot = "."
 	} elseif ($p -eq "swi") {
 		$backend = swi
 		$prolog = 'SWI-Prolog'
 		$logtalk = swilgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "swipack") {
 		$backend = swipack
 		$prolog = 'SWI-Prolog'
 		$logtalk = swipl
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "tau") {
 		$backend = tau
 		$prolog = 'Tau Prolog'
 		$logtalk = taulgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 		$dot = "."
 	} elseif ($p -eq "trealla") {
 		$backend = trealla
 		$prolog = 'Trealla Prolog'
 		$logtalk = tplgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 	} elseif ($p -eq "xsb") {
 		$backend = xsb
 		$prolog = 'XSB'
 		$logtalk = xsblgt
-		$logtalk_call = "$logtalk $i_arg -e"
+		$logtalk_call = "$logtalk $i -e"
 		$dot = "."
 	} elseif ($p -eq "yap") {
 		$backend = yap
 		$prolog = 'YAP'
 		$logtalk = yaplgt
-		$logtalk_call = "$logtalk $i_arg -g"
+		$logtalk_call = "$logtalk $i -g"
 	} else {
 		Write-Output ("Error! Unsupported backend Prolog compiler: " + $p)
 		Write-Usage-Help
@@ -468,21 +475,19 @@ function Check-Parameters() {
 		$seed_goal = "true"
 	}
 
-	if ($p -eq "swipack") {
-		$initialization_goal = ("use_module(library(logtalk))," + $initialization_goal)
-	}
-
 }
 
 ###################### here it starts ############################ 
 
 # default argument values
 
-$backend=""
-$dot=""
-$base="$(pwd -W)"
+$backend = ""
+$dot = ""
+$base = $pwd
 
 $flag_goal = "true"
+$initialization_goal = "true"
+
 $issue_server = ""
 $issue_labels = "bug"
 
@@ -490,19 +495,23 @@ $format_default_goal = "true"
 $format_tap_goal = "logtalk_load(lgtunit(tap_report))"
 $format_xunit_goal = "logtalk_load(lgtunit(xunit_report))"
 $format_xunit_net_v2_goal = "logtalk_load(lgtunit(xunit_net_v2_report))"
-$format_goal=$format_default_goal
+$format_goal = $format_default_goal
 
 $coverage_default_goal = "true"
 $coverage_xml_goal = "logtalk_load(lgtunit(coverage_report))"
 $coverage_goal = $coverage_default_goal
 
+Check-Parameters
+
+if ($p -eq "swipack") {
+	$initialization_goal = ("use_module(library(logtalk))," + $initialization_goal)
+}
+
 $versions_goal = ("logtalk_load(library(tester_versions)),halt" + $dot)
 
-$tester_optimal_goal = ("set_logtalk_flag(optimize,on),logtalk_load($driver),halt" + $dot)
-$tester_normal_goal = ("logtalk_load($driver),halt" + $dot)
-$tester_debug_goal = ("set_logtalk_flag(debug,on),logtalk_load($driver),halt" + $dot)
-
-Check-Parameters
+$tester_optimal_goal = ("set_logtalk_flag(optimize,on),logtalk_load(" + $n + "),halt" + $dot)
+$tester_normal_goal = ("logtalk_load(" + $n + "),halt" + $dot)
+$tester_debug_goal = ("set_logtalk_flag(debug,on),logtalk_load(" + $n + "),halt" + $dot)
 
 New-Item -Path $d -ItemType directory -Force > $null
 
@@ -539,13 +548,13 @@ if ($testsets -eq 0) {
 
 if ($l -eq $null) {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include $driver.lgt $driver.logtalk -Recurse |
+		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Recurse |
 		Foreach-Object {
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include $driver.lgt $driver.logtalk -Recurse |
+		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Recurse |
 		Foreach-Object {
 			Write-Host -NoNewlinee "% running $testsets test sets: "
 			Write-Host -NoNewlinee "$counter"'\r'
@@ -556,13 +565,13 @@ if ($l -eq $null) {
 	}
 } else {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include $driver.lgt $driver.logtalk -Depth $level |
+		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Depth $level |
 		Foreach-Object {
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include $driver.lgt $driver.logtalk -Depth $level |
+		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Depth $level |
 		Foreach-Object {
 			Write-Host -NoNewlinee "% running $testsets test sets: "
 			Write-Host -NoNewlinee "$counter"'\r'
