@@ -30,7 +30,6 @@ param(
 	# disable timeouts to maintain backward compatibility
 	[String]$t = 0,
 	[String]$a = "",
-	[Switch]$i,
 	[Switch]$v,
 	[Switch]$h
 )
@@ -75,9 +74,9 @@ param(
 	$results_file = Join-Path $d ($name + ".results")
 	$errors_file  = Join-Path $d ($name + ".errors")
 	if ($t -ne 0) {
-		& $timeout_command $t $logtalk_call $goal $a > $results_file 2> $errors_file
+		& $timeout_command $t $logtalk $logtalk_option $goal $a > $results_file 2> $errors_file
 	} else {
-		& $logtalk_call $goal $a > $results_file 2> $errors_file
+		& $logtalk $logtalk_option $goal $a > $results_file 2> $errors_file
 	}
 	return $?
 }
@@ -128,67 +127,67 @@ Function Check-Parameters() {
 		Exit 1
 	} elseif ($p -eq "b") {
 		$prolog='B-Prolog'
-		$logtalk="bplgt -g"
-		$logtalk_call="$logtalk -g"
+		$logtalk="bplgt"
+		$logtalk_option="-g"
 	} elseif ($p -eq "ciao") {
 		$prolog='Ciao Prolog'
-		$logtalk="ciaolgt -e"
-		$logtalk_call="$logtalk -e"
+		$logtalk="ciaolgt"
+		$logtalk_option="-e"
 	} elseif ($p -eq "cx") {
 		$prolog='CxProlog'
-		$logtalk="cxlgt --goal"
-		$logtalk_call="$logtalk --goal"
+		$logtalk="cxlgt"
+		$logtalk_option="--goal"
 	} elseif ($p -eq "eclipse") {
 		$prolog='ECLiPSe'
-		$logtalk="eclipselgt -e"
-		$logtalk_call="$logtalk -e"
+		$logtalk="eclipselgt"
+		$logtalk_option="-e"
 	} elseif ($p -eq "gnu") {
 		$prolog='GNU Prolog'
-		$logtalk="gplgt --query-goal"
-		$logtalk_call="$logtalk --query-goal"
+		$logtalk="gplgt"
+		$logtalk_option="--query-goal"
 	} elseif ($p -eq "ji") {
 		$prolog='JIProlog'
-		$logtalk="jiplgt -n -g"
-		$logtalk_call="$logtalk -n -g"
+		$logtalk="jiplgt"
+		$logtalk_option="-n -g"
 	} elseif ($p -eq "lvm") {
 		$prolog='LVM'
-		$logtalk="lvmlgt -g"
-		$logtalk_call="$logtalk $i_arg -g"
+		$logtalk="lvmlgt"
+		$logtalk_option="-g"
 		$dot="."
 	} elseif ($p -eq "scryer") {
 		$prolog='Scryer Prolog'
-		$logtalk="scryerlgt -g"
-		$logtalk_call="$logtalk $i -g"
+		$logtalk="scryerlgt"
+		$logtalk_option="-g"
 	} elseif ($p -eq "sicstus") {
 		$prolog='SICStus Prolog'
-		$logtalk="sicstuslgt --goal"
-		$logtalk_call="$logtalk --goal"
+		$logtalk="sicstuslgt"
+		$logtalk_option="--goal"
 		$dot="."
 	} elseif ($p -eq "swi") {
 		$prolog='SWI-Prolog'
-		$logtalk="swilgt -g"
-		$logtalk_call="$logtalk -g"
+		$logtalk="swilgt"
+		$logtalk_option="-g"
 	} elseif ($p -eq "swipack") {
 		$prolog='SWI-Prolog'
-		$logtalk="swipl -g"
-		$logtalk_call="$logtalk -g"
+		$logtalk="swipl"
+		$logtalk_option="-g"
 	} elseif ($p -eq "tau") {
 		$prolog='Tau Prolog'
-		$logtalk="taulgt -g"
-		$logtalk_call="$logtalk -g"
+		$logtalk="taulgt"
+		$logtalk_option="-g"
 	} elseif ($p -eq "trealla") {
 		$prolog='Trealla Prolog'
-		$logtalk="tplgt -g"
-		$logtalk_call="$logtalk $i -g"
+		$logtalk="tplgt"
+		$logtalk_option="-g"
 	} elseif ($p -eq "xsb") {
 		$prolog='XSB'
-		$logtalk="xsblgt -e"
-		$logtalk_call="$logtalk -e"
+		$logtalk="xsblgt"
+		$logtalk_option="-e"
 		$dot="."
 	} elseif ($p -eq "yap") {
 		$prolog='YAP'
-		$logtalk="yaplgt -g"
-		$logtalk_call="$logtalk -g"
+		$logtalk="yaplgt"
+		$logtalk_option="-g"
 	} else {
 		Write-Output ("Error! Unsupported backend Prolog compiler: " + "$p")
 		Write-Usage-Help
@@ -214,7 +213,7 @@ $base = $pwd
 $dot = ""
 $prolog = 'SWI-Prolog'
 $logtalk = "swilgt"
-$logtalk_call = $logtalk + " -g"
+$logtalk_option = "-g"
 
 Check-Parameters
 
@@ -238,7 +237,7 @@ $start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 Write-Output '*******************************************************************************'
 Write-Output ("***** Batch documentation processing started @ " + $start_date)
 $tester_versions_file = Join-Path $d tester_versions.txt
-($logtalk_call + " `"" + $versions_goal + "`"") > $tester_versions_file 2> /dev/null | Invoke-Expression
+& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $tester_versions_file 2> $null
 Select-String -Path $d\tester_versions.txt -Pattern "Logtalk version:" -SimpleMatch -Raw
 (Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:"  -SimpleMatch -Raw) -replace "Prolog", $prolog
 

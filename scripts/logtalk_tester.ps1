@@ -78,7 +78,7 @@ param(
 #	}
 	# convert any forward slashes so that the derived file name is usable
 	# also convert any colon if running on Windows systems so that the derived file name is usable
-	$name = $unit -match '/' -replace '__' | -match ':' -replace '__'
+	$name = ($unit -replace '/', '__') -replace ':', '__'
 	$report_goal = "logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'" + $d + "'),set_logtalk_flag(test_unit_name,'" + $name + "')"
 	if ($s -ne "") {
 		$flag_goal = ("set_logtalk_flag(suppress_path_prefix,'" + $s + "')")
@@ -175,19 +175,18 @@ param(
 	[String]$goal
 )
 	if ($a -eq "") {
-		if ($timeout -ne 0) {
-			& $timeout_command $timeout $logtalk_call "$goal" > "$d/$name.results" 2> "$d/$name.errors"
+		if ($t -ne 0) {
+			$exit = & $timeout_command $timeout $logtalk $logtalk_option "$goal" > "$d/$name.results" 2> "$d/$name.errors"
 		} else {
-			& $logtalk_call "$goal" > "$d/$name.results" 2> "$d/$name.errors"
+			$exit = & $logtalk $logtalk_option "$goal" > "$d/$name.results" 2> "$d/$name.errors"
 		}
 	} else {
-		if ($timeout -ne 0) {
-			& $timeout_command $timeout $logtalk_call "$goal" -- (-Split $a) > "$d/$name.results" 2> "$d/$name.errors"
+		if ($t -ne 0) {
+			$exit = & $timeout_command $timeout $logtalk $logtalk_option "$goal" -- (-Split $a) > "$d/$name.results" 2> "$d/$name.errors"
 		} else {
-			& $logtalk_call "$goal" -- (-Split $a) > "$d/$name.results" 2> "$d/$name.errors"
+			$exit = & $logtalk $logtalk_option "$goal" -- (-Split $a) > "$d/$name.results" 2> "$d/$name.errors"
 		}
 	}
-	exit=$?
 	if ($exit -eq 0 -and
 		!(Select-String -Path $d\name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
 		!(Select-String -Path $d\name.total -Pattern "^object" -Quiet) -and
@@ -317,82 +316,82 @@ Function Check-Parameters() {
 	} elseif ($p -eq "b") {
 		$backend = 'b'
 		$prolog = 'B-Prolog'
-		$logtalk = bplgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "bplgt"
+		$logtalk_option = "-g"
 	} elseif ($p -eq "ciao") {
 		$backend = 'ciao'
 		$prolog = 'Ciao Prolog'
-		$logtalk = ciaolgt
-		$logtalk_call = "$logtalk $i -e"
+		$logtalk = "ciaolgt"
+		$logtalk_option = "-e"
 	} elseif ($p -eq "cx") {
 		$backend = 'cx'
 		$prolog = 'CxProlog'
-		$logtalk = cxlgt
-		$logtalk_call = "$logtalk $i --goal"
+		$logtalk = "cxlgt"
+		$logtalk_option = "--goal"
 	} elseif ($p -eq "eclipse") {
 		$backend = eclipse
 		$prolog = 'ECLiPSe'
-		$logtalk = eclipselgt
-		$logtalk_call = "$logtalk $i -e"
+		$logtalk = "eclipselgt"
+		$logtalk_option = "-e"
 	} elseif ($p -eq "gnu") {
 		$backend = 'gnu'
 		$prolog = 'GNU Prolog'
-		$logtalk = gplgt
-		$logtalk_call = "$logtalk $i --query-goal"
+		$logtalk = "gplgt"
+		$logtalk_option = "--query-goal"
 	} elseif ($p -eq "ji") {
 		$backend = 'ji'
 		$prolog = 'JIProlog'
-		$logtalk = jiplgt
-		$logtalk_call = "$logtalk $i -n -g"
+		$logtalk = "jiplgt"
+		$logtalk_option = "-n -g"
 	} elseif ($p -eq "lvm") {
 		$backend = 'lvm'
 		$prolog = 'LVM'
-		$logtalk = lvmlgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "lvmlgt"
+		$logtalk_option = "-g"
 		$dot = "."
 	} elseif ($p -eq "scryer") {
 		$backend = 'scryer'
 		$prolog = 'Scryer Prolog'
-		$logtalk = scryerlgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "scryerlgt"
+		$logtalk_option = "-g"
 	} elseif ($p -eq "sicstus") {
 		$backend = 'sicstus'
 		$prolog = 'SICStus Prolog'
-		$logtalk = sicstuslgt
-		$logtalk_call = "$logtalk $i --goal"
+		$logtalk = "sicstuslgt"
+		$logtalk_option = "--goal"
 		$dot = "."
 	} elseif ($p -eq "swi") {
 		$backend = 'swi'
 		$prolog = 'SWI-Prolog'
-		$logtalk = swilgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "swilgt"
+		$logtalk_option = "-g"
 	} elseif ($p -eq "swipack") {
 		$backend = 'swipack'
 		$prolog = 'SWI-Prolog'
-		$logtalk = swipl
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "swipl"
+		$logtalk_option = "-g"
 	} elseif ($p -eq "tau") {
 		$backend = 'tau'
 		$prolog = 'Tau Prolog'
-		$logtalk = taulgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "taulgt"
+		$logtalk_option = "-g"
 		$dot = "."
 	} elseif ($p -eq "trealla") {
 		$backend = 'trealla'
 		$prolog = 'Trealla Prolog'
-		$logtalk = tplgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "tplgt"
+		$logtalk_option = "-g"
 	} elseif ($p -eq "xsb") {
 		$backend = 'xsb'
 		$prolog = 'XSB'
-		$logtalk = xsblgt
-		$logtalk_call = "$logtalk $i -e"
+		$logtalk = "xsblgt"
+		$logtalk_option = "-e"
 		$dot = "."
 	} elseif ($p -eq "yap") {
 		$backend = 'yap'
 		$prolog = 'YAP'
-		$logtalk = yaplgt
-		$logtalk_call = "$logtalk $i -g"
+		$logtalk = "yaplgt"
+		$logtalk_option = "-g"
 	} else {
 		Write-Output ("Error! Unsupported backend Prolog compiler: " + $p)
 		Write-Usage-Help
@@ -450,7 +449,7 @@ Function Check-Parameters() {
 		}		
 	}
 
-	if ($l -ne $null) {
+	if ($l -ne "") {
 		if ($l -is [int] -and $l -ge 1) {
 			$level = $l - 1
 		} else {
@@ -458,6 +457,8 @@ Function Check-Parameters() {
 			Write-Usage-Help
 			Exit 1
 		}
+	} else {
+		$level = 999
 	}
 
 	if ($g -ne "") {
@@ -476,9 +477,13 @@ Function Check-Parameters() {
 
 # default argument values
 
-$backend = ""
+$backend = "swi"
+$logtalk = "swilgt"
+$logtalk_option = "-g"
 $dot = ""
 $base = $pwd
+
+$level = 999
 
 $flag_goal = "true"
 $initialization_goal = "true"
@@ -529,7 +534,7 @@ if (Test-Path $d\tester_versions.txt) {
 if ($o -eq "verbose") {
 	$start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 	Write-Output "% Batch testing started @ $start_date"
-	& $logtalk_call $versions_goal > $d\tester_versions.txt 2> /dev/null
+	& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $d\tester_versions.txt 2> $null
 	Select-String -Path $d\tester_versions.txt -Pattern "Logtalk version:" -SimpleMatch -Raw
 	(Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:"  -SimpleMatch -Raw) -replace "Prolog", $prolog
 }
@@ -629,7 +634,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BRO
 	Write-Output "% Broken"
 	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -SimpleMatch -Raw) -replace '\', '__') -replace $prefix, ''
 }
-if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw -CaseSensitive -SimpleMatch -Quiet) {
+if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
 	Write-Output "%"
 	Write-Output "% Timedout"
 	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\', '__') -replace $prefix, ''
