@@ -25,7 +25,8 @@ and installation.
 Scripts with a `.sh` extension are Bash shells scripts for macOS, Linux,
 and similar systems.
 
-Scripts with a `.ps1` extension are PowerShell scripts for Windows systems.
+Scripts with a `.ps1` extension are PowerShell 7.x scripts for Windows
+systems.
 
 Scripts with extension `.js` are JScript command-line scripts for Windows.
 These are deprecated. They require WSH 5.6 or later version to be installed
