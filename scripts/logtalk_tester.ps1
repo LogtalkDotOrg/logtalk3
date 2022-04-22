@@ -546,18 +546,18 @@ if ($testsets -eq 0) {
 	Exit 0
 }
 
-if ($l -eq $null) {
+if ($l -eq "") {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Recurse |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Recurse |
 		Foreach-Object {
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Recurse |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Recurse |
 		Foreach-Object {
-			Write-Host -NoNewlinee "% running $testsets test sets: "
-			Write-Host -NoNewlinee $counter
+			Write-Host -NoNewline "% running $testsets test sets: "
+			Write-Host -NoNewline $counter
 			Run-TestSet $_.FullName
 			$counter++
 			Write-Output "%"
@@ -565,16 +565,16 @@ if ($l -eq $null) {
 	}
 } else {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Depth $level |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include $n.lgt $n.logtalk -Depth $level |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
-			Write-Host -NoNewlinee "% running $testsets test sets: "
-			Write-Host -NoNewlinee $counter
+			Write-Host -NoNewline "% running $testsets test sets: "
+			Write-Host -NoNewline $counter
 			Run-TestSet $_.FullName
 			$counter++
 			Write-Output "%"
@@ -632,17 +632,17 @@ if ((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests ski
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
 	Write-Output "% Broken"
-	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -SimpleMatch -Raw) -replace '\', '__') -replace $prefix, ''
+	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
 }
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
 	Write-Output "%"
 	Write-Output "% Timedout"
-	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\', '__') -replace $prefix, ''
+	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
 }
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
 	Write-Output "% Crashed"
-	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -SimpleMatch -Raw) -replace '\', '__') -replace $prefix, ''
+	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
 }
 if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^skipped' -CaseSensitive -Quiet) {
 	Write-Output "%"
