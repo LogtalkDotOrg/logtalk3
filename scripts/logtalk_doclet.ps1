@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on April 21, 2022
+##   Last updated on April 22, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -126,68 +126,68 @@ Function Check-Parameters() {
 		Write-Usage-Help
 		Exit 1
 	} elseif ($p -eq "b") {
-		$prolog='B-Prolog'
-		$logtalk="bplgt"
-		$logtalk_option="-g"
+		$script:prolog='B-Prolog'
+		$script:logtalk="bplgt"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "ciao") {
-		$prolog='Ciao Prolog'
-		$logtalk="ciaolgt"
-		$logtalk_option="-e"
+		$script:prolog='Ciao Prolog'
+		$script:logtalk="ciaolgt"
+		$script:logtalk_option="-e"
 	} elseif ($p -eq "cx") {
-		$prolog='CxProlog'
-		$logtalk="cxlgt"
-		$logtalk_option="--goal"
+		$script:prolog='CxProlog'
+		$script:logtalk="cxlgt"
+		$script:logtalk_option="--goal"
 	} elseif ($p -eq "eclipse") {
-		$prolog='ECLiPSe'
-		$logtalk="eclipselgt"
-		$logtalk_option="-e"
+		$script:prolog='ECLiPSe'
+		$script:logtalk="eclipselgt"
+		$script:logtalk_option="-e"
 	} elseif ($p -eq "gnu") {
-		$prolog='GNU Prolog'
-		$logtalk="gplgt"
-		$logtalk_option="--query-goal"
+		$script:prolog='GNU Prolog'
+		$script:logtalk="gplgt"
+		$script:logtalk_option="--query-goal"
 	} elseif ($p -eq "ji") {
-		$prolog='JIProlog'
-		$logtalk="jiplgt"
-		$logtalk_option="-n -g"
+		$script:prolog='JIProlog'
+		$script:logtalk="jiplgt"
+		$script:logtalk_option="-n -g"
 	} elseif ($p -eq "lvm") {
-		$prolog='LVM'
-		$logtalk="lvmlgt"
-		$logtalk_option="-g"
-		$dot="."
+		$script:prolog='LVM'
+		$script:logtalk="lvmlgt"
+		$script:logtalk_option="-g"
+		$script:dot="."
 	} elseif ($p -eq "scryer") {
-		$prolog='Scryer Prolog'
-		$logtalk="scryerlgt"
-		$logtalk_option="-g"
+		$script:prolog='Scryer Prolog'
+		$script:logtalk="scryerlgt"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "sicstus") {
-		$prolog='SICStus Prolog'
-		$logtalk="sicstuslgt"
-		$logtalk_option="--goal"
-		$dot="."
+		$script:prolog='SICStus Prolog'
+		$script:logtalk="sicstuslgt"
+		$script:logtalk_option="--goal"
+		$script:dot="."
 	} elseif ($p -eq "swi") {
-		$prolog='SWI-Prolog'
-		$logtalk="swilgt"
-		$logtalk_option="-g"
+		$script:prolog='SWI-Prolog'
+		$script:logtalk="swilgt"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "swipack") {
-		$prolog='SWI-Prolog'
-		$logtalk="swipl"
-		$logtalk_option="-g"
+		$script:prolog='SWI-Prolog'
+		$script:logtalk="swipl"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "tau") {
-		$prolog='Tau Prolog'
-		$logtalk="taulgt"
-		$logtalk_option="-g"
+		$script:prolog='Tau Prolog'
+		$script:logtalk="taulgt"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "trealla") {
-		$prolog='Trealla Prolog'
-		$logtalk="tplgt"
-		$logtalk_option="-g"
+		$script:prolog='Trealla Prolog'
+		$script:logtalk="tplgt"
+		$script:logtalk_option="-g"
 	} elseif ($p -eq "xsb") {
-		$prolog='XSB'
-		$logtalk="xsblgt"
-		$logtalk_option="-e"
-		$dot="."
+		$script:prolog='XSB'
+		$script:logtalk="xsblgt"
+		$script:logtalk_option="-e"
+		$script:dot="."
 	} elseif ($p -eq "yap") {
-		$prolog='YAP'
-		$logtalk="yaplgt"
-		$logtalk_option="-g"
+		$script:prolog='YAP'
+		$script:logtalk="yaplgt"
+		$script:logtalk_option="-g"
 	} else {
 		Write-Output ("Error! Unsupported backend Prolog compiler: " + "$p")
 		Write-Usage-Help
@@ -195,7 +195,7 @@ Function Check-Parameters() {
 	}
 
 	if ($p -eq "swipack") {
-		$versions_goal = ("use_module(library(logtalk))," + $versions_goal)
+		$script:versions_goal = ("use_module(library(logtalk))," + $versions_goal)
 	}
 
 }

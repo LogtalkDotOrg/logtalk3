@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 21, 2022
+##   Last updated on April 22, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -59,7 +59,7 @@ param(
 )
 	$start_time = Get-Date -UFormat %s
 	$unit = Split-Path -Path $path
-	$unit_short = $unit -replace $prefix, ""
+	$unit_short = $unit -replace $s, ""
 	Set-Location "$unit"
 	if ($w -eq $true) {
 		Remove-Item -Path .\.lgt_tmp -Recurse -Force
@@ -206,7 +206,7 @@ param(
 	[Parameter(Position = 2)]
 	[String]$error
 )
-	$short = $directory -replace $prefix, ""
+	$short = $directory -replace $s, ""
 	if ($format -eq "xunit") {
 		$timestamp=$(date +"%Y-%m-%dT%H:%M:%S")
 		New-Item -Path . -Name $directory/xunit_report.xml -ItemType "file" -Force > $null
@@ -314,84 +314,84 @@ Function Check-Parameters() {
 		Write-Usage-Help
 		Exit 1
 	} elseif ($p -eq "b") {
-		$backend = 'b'
-		$prolog = 'B-Prolog'
-		$logtalk = "bplgt"
-		$logtalk_option = "-g"
+		$script:backend = 'b'
+		$script:prolog = 'B-Prolog'
+		$script:logtalk = "bplgt"
+		$script:logtalk_option = "-g"
 	} elseif ($p -eq "ciao") {
-		$backend = 'ciao'
-		$prolog = 'Ciao Prolog'
-		$logtalk = "ciaolgt"
-		$logtalk_option = "-e"
+		$script:backend = 'ciao'
+		$script:prolog = 'Ciao Prolog'
+		$script:logtalk = "ciaolgt"
+		$script:logtalk_option = "-e"
 	} elseif ($p -eq "cx") {
-		$backend = 'cx'
-		$prolog = 'CxProlog'
-		$logtalk = "cxlgt"
-		$logtalk_option = "--goal"
+		$script:backend = 'cx'
+		$script:prolog = 'CxProlog'
+		$script:logtalk = "cxlgt"
+		$script:logtalk_option = "--goal"
 	} elseif ($p -eq "eclipse") {
-		$backend = eclipse
-		$prolog = 'ECLiPSe'
-		$logtalk = "eclipselgt"
-		$logtalk_option = "-e"
+		$script:backend = eclipse
+		$script:prolog = 'ECLiPSe'
+		$script:logtalk = "eclipselgt"
+		$script:logtalk_option = "-e"
 	} elseif ($p -eq "gnu") {
-		$backend = 'gnu'
-		$prolog = 'GNU Prolog'
-		$logtalk = "gplgt"
-		$logtalk_option = "--query-goal"
+		$script:backend = 'gnu'
+		$script:prolog = 'GNU Prolog'
+		$script:logtalk = "gplgt"
+		$script:logtalk_option = "--query-goal"
 	} elseif ($p -eq "ji") {
-		$backend = 'ji'
-		$prolog = 'JIProlog'
-		$logtalk = "jiplgt"
-		$logtalk_option = "-n -g"
+		$script:backend = 'ji'
+		$script:prolog = 'JIProlog'
+		$script:logtalk = "jiplgt"
+		$script:logtalk_option = "-n -g"
 	} elseif ($p -eq "lvm") {
-		$backend = 'lvm'
-		$prolog = 'LVM'
-		$logtalk = "lvmlgt"
-		$logtalk_option = "-g"
-		$dot = "."
+		$script:backend = 'lvm'
+		$script:prolog = 'LVM'
+		$script:logtalk = "lvmlgt"
+		$script:logtalk_option = "-g"
+		$script:dot = "."
 	} elseif ($p -eq "scryer") {
-		$backend = 'scryer'
-		$prolog = 'Scryer Prolog'
-		$logtalk = "scryerlgt"
-		$logtalk_option = "-g"
+		$script:backend = 'scryer'
+		$script:prolog = 'Scryer Prolog'
+		$script:logtalk = "scryerlgt"
+		$script:logtalk_option = "-g"
 	} elseif ($p -eq "sicstus") {
-		$backend = 'sicstus'
-		$prolog = 'SICStus Prolog'
-		$logtalk = "sicstuslgt"
-		$logtalk_option = "--goal"
-		$dot = "."
+		$script:backend = 'sicstus'
+		$script:prolog = 'SICStus Prolog'
+		$script:logtalk = "sicstuslgt"
+		$script:logtalk_option = "--goal"
+		$script:dot = "."
 	} elseif ($p -eq "swi") {
-		$backend = 'swi'
-		$prolog = 'SWI-Prolog'
-		$logtalk = "swilgt"
-		$logtalk_option = "-g"
+		$script:backend = 'swi'
+		$script:prolog = 'SWI-Prolog'
+		$script:logtalk = "swilgt"
+		$script:logtalk_option = "-g"
 	} elseif ($p -eq "swipack") {
-		$backend = 'swipack'
-		$prolog = 'SWI-Prolog'
-		$logtalk = "swipl"
-		$logtalk_option = "-g"
+		$script:backend = 'swipack'
+		$script:prolog = 'SWI-Prolog'
+		$script:logtalk = "swipl"
+		$script:logtalk_option = "-g"
 	} elseif ($p -eq "tau") {
-		$backend = 'tau'
-		$prolog = 'Tau Prolog'
-		$logtalk = "taulgt"
-		$logtalk_option = "-g"
-		$dot = "."
+		$script:backend = 'tau'
+		$script:prolog = 'Tau Prolog'
+		$script:logtalk = "taulgt"
+		$script:logtalk_option = "-g"
+		$script:dot = "."
 	} elseif ($p -eq "trealla") {
-		$backend = 'trealla'
-		$prolog = 'Trealla Prolog'
-		$logtalk = "tplgt"
-		$logtalk_option = "-g"
+		$script:backend = 'trealla'
+		$script:prolog = 'Trealla Prolog'
+		$script:logtalk = "tplgt"
+		$script:logtalk_option = "-g"
 	} elseif ($p -eq "xsb") {
-		$backend = 'xsb'
-		$prolog = 'XSB'
-		$logtalk = "xsblgt"
-		$logtalk_option = "-e"
-		$dot = "."
+		$script:backend = 'xsb'
+		$script:prolog = 'XSB'
+		$script:logtalk = "xsblgt"
+		$script:logtalk_option = "-e"
+		$script:dot = "."
 	} elseif ($p -eq "yap") {
-		$backend = 'yap'
-		$prolog = 'YAP'
-		$logtalk = "yaplgt"
-		$logtalk_option = "-g"
+		$script:backend = 'yap'
+		$script:prolog = 'YAP'
+		$script:logtalk = "yaplgt"
+		$script:logtalk_option = "-g"
 	} else {
 		Write-Output ("Error! Unsupported backend Prolog compiler: " + $p)
 		Write-Usage-Help
@@ -411,13 +411,13 @@ Function Check-Parameters() {
 	}
 
 	if ($f -eq "default") {
-		$format_goal = $format_default_goal
+		$script:format_goal = $format_default_goal
 	} elseif ($f -eq "tap") {
-		$format_goal = $format_tap_goal
+		$script:format_goal = $format_tap_goal
 	} elseif ($f -eq "xunit") {
-		$format_goal = $format_xunit_goal
+		$script:format_goal = $format_xunit_goal
 	} elseif ($f -eq "xunit_net_v2") {
-		$format_goal = $format_xunit_net_v2_goal
+		$script:format_goal = $format_xunit_net_v2_goal
 	} else {
 		Write-Output ("Error! Unknown format: " + $f)
 		Write-Usage-Help
@@ -425,9 +425,9 @@ Function Check-Parameters() {
 	}
 
 	if ($c -eq "none") {
-		$coverage_goal = $coverage_default_goal
+		$script:coverage_goal = $coverage_default_goal
 	} elseif ($c -eq "xml") {
-		$coverage_goal = $coverage_xml_goal
+		$script:coverage_goal = $coverage_xml_goal
 	} else {
 		Write-Output ("Error! Unknown coverage report: " + $c)
 		Write-Usage-Help
@@ -436,13 +436,13 @@ Function Check-Parameters() {
 
 	if ($b -ne "") {
 		if ($b -contains ":") {
-			$issue_array = $b.Split(":")
-			$issue_server = $issue_array[0]
-			$issue_labels = $issue_array[1]
+			$script:issue_array = $b.Split(":")
+			$script:issue_server = $issue_array[0]
+			$script:issue_labels = $issue_array[1]
 		} else {
-			$issue_server = $b
+			$script:issue_server = $b
 		}
-		if ($issue_server -ne "github" -and $issue_server -ne "gitlab") {
+		if ($script:issue_server -ne "github" -and $script:issue_server -ne "gitlab") {
 			Write-Output ("Error! Issue tracker server must be either github or gitlab: " + $b)
 			Write-Usage-Help
 			Exit 1
@@ -451,24 +451,24 @@ Function Check-Parameters() {
 
 	if ($l -ne "") {
 		if ($l -is [int] -and $l -ge 1) {
-			$level = $l - 1
+			$script:level = $l - 1
 		} else {
 			Write-Output ("Error! Level must be an integer equal or greater than 1: " + $l)
 			Write-Usage-Help
 			Exit 1
 		}
 	} else {
-		$level = 999
+		$script:level = 999
 	}
 
 	if ($g -ne "") {
-		$initialization_goal = $g
+		$script:initialization_goal = $g
 	}
 
 	if ($r -ne "") {
-		$seed_goal = ("logtalk_load(arbitrary(loader)),type::set_seed(" + $r + ")")
+		$script:seed_goal = ("logtalk_load(arbitrary(loader)),type::set_seed(" + $r + ")")
 	} else {
-		$seed_goal = "true"
+		$script:seed_goal = "true"
 	}
 
 }
@@ -478,6 +478,7 @@ Function Check-Parameters() {
 # default argument values
 
 $backend = "swi"
+$prolog = "SWI-Prolog"
 $logtalk = "swilgt"
 $logtalk_option = "-g"
 $dot = ""
@@ -539,23 +540,20 @@ if ($o -eq "verbose") {
 	(Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:"  -SimpleMatch -Raw) -replace "Prolog", $prolog
 }
 
-if ($testsets -eq 0) {
-	Write-Output "%"
-	Write-Output "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
-	Write-Output "% 0 tests: 0 skipped, 0 passed, 0 failed"
-	Exit 0
-}
+$testsets = 0
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Recurse |
 		Foreach-Object {
+			$testsets++
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Recurse |
 		Foreach-Object {
+			$testsets++
 			Write-Host -NoNewline "% running $testsets test sets: "
 			Write-Host -NoNewline $counter
 			Run-TestSet $_.FullName
@@ -567,12 +565,14 @@ if ($l -eq "") {
 	if ($o -eq "verbose") {
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
+			$testsets++
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
+			$testsets++
 			Write-Host -NoNewline "% running $testsets test sets: "
 			Write-Host -NoNewline $counter
 			Run-TestSet $_.FullName
@@ -582,12 +582,19 @@ if ($l -eq "") {
 	}
 }
 
+if ($testsets -eq 0) {
+	Write-Output "%"
+	Write-Output "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
+	Write-Output "% 0 tests: 0 skipped, 0 passed, 0 failed"
+	Exit 0
+}
+
 Push-Location $d
 
 $testsetskipped = (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped').count + (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)').count
 
 $timeouts = (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_TIMEOUT').count
-$crashes =  (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_CRASH').count
+$crashed =  (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_CRASH').count
 $broken =   (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'LOGTALK_BROKEN').count
 
 $testsetruns = $testsets - $testsetskipped - $timeouts - $crashed - $broken
@@ -626,23 +633,23 @@ if ((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests ski
 	(Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
 	Write-Output "%"
 	Write-Output "% Skipped test sets"
-	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped' -SimpleMatch -Raw) -replace '% tests skipped', '') -replace '__', '/') -replace $prefix, ''
-	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -SimpleMatch -Raw) -replace '(not applicable)', '') -replace '__', '/') -replace $prefix, ''
+	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped' -SimpleMatch -Raw) -replace '% tests skipped', '') -replace '__', '/') -replace $s, ''
+	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -SimpleMatch -Raw) -replace '(not applicable)', '') -replace '__', '/') -replace $s, ''
 }
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
 	Write-Output "% Broken"
-	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
+	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -SimpleMatch -Raw) -replace '\\', '__') -replace $s, ''
 }
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
 	Write-Output "%"
 	Write-Output "% Timedout"
-	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
+	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\\', '__') -replace $s, ''
 }
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
 	Write-Output "% Crashed"
-	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
+	((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -SimpleMatch -Raw) -replace '\\', '__') -replace $s, ''
 }
 if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^skipped' -CaseSensitive -Quiet) {
 	Write-Output "%"
@@ -651,7 +658,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^skipped' -
 	Foreach-Object {
 		Get-Content $_ | ForEach-Object {
 			if (Select-String -Pattern '^skipped' -CaseSensitive) {
-				(($_.split("\t")[2] + $_.split("\t")[3]) -replace $prefix, '') -replace "\t", " - "
+				(($_.split("\t")[2] + $_.split("\t")[3]) -replace $s, '') -replace "\t", " - "
 			}
 		}
 	}
@@ -663,7 +670,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^failed' -C
 	Foreach-Object {
 		Get-Content $_ | ForEach-Object {
 			if (Select-String -Pattern '^failed' -CaseSensitive) {
-				(($_.split("\t")[1] + $_.split("\t")[2]) -replace $prefix, '') -replace "\t", " - "
+				(($_.split("\t")[1] + $_.split("\t")[2]) -replace $s, '') -replace "\t", " - "
 			}
 		}
 	}
