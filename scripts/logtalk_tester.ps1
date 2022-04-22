@@ -28,11 +28,11 @@ param(
 	[String]$o = "verbose",
 	[String]$m = "normal",
 	[String]$f = "default",
-	[String]$d = "$pwd\logtalk_tester_logs",
+	[String]$d,
 	# disable timeouts to maintain backward compatibility
 	[String]$t = 0,
 	[String]$n = "tester",
-	[String]$s = $env:USERPROFILE,
+	[String]$s,
 	[String]$b,
 	[String]$u,
 	[String]$c = "none",
@@ -58,8 +58,8 @@ param(
 	[String]$path
 )
 	$start_time = Get-Date -UFormat %s
-	$unit = Split-Path -Path $path
-	$unit_short = $unit -replace [Regex]::Escape($s), ""
+	$unit = (Split-Path -Path $path) -replace '\\', '/'
+	$unit_short = $unit -replace $prefix, ""
 	Set-Location "$unit"
 	if ($w -eq $true) {
 		Remove-Item -Path .\.lgt_tmp -Recurse -Force
@@ -98,18 +98,18 @@ param(
 		$tests_exit = Run-Tests "$name" ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_optimal_goal)
 		$mode_prefix="% (opt)   "
 	} elseif ($m -eq "normal" -or $m -eq "all") {
-		$tests_exit = Run-Tests "$name" ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_normal_goal)
+		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_normal_goal)
 		$mode_prefix="%         "
 	} elseif ($m -eq "debug" -or $m -eq "all") {
 		$tests_exit = Run-Tests "$name" ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_debug_goal)
 		$mode_prefix="% (debug) "
 	}
 
-	if ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $d\name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+	if ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
 		Write-Output "%         skipped"
-	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $d\name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
+	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
 		Write-Output "%         not applicable"
-	} elseif ($tests_exit -eq 0 -and (Test-Path $d/$name.totals) -and $o -eq "verbose") {
+	} elseif ($tests_exit -eq 0 -and (Test-Path $results/$name.totals) -and $o -eq "verbose") {
 		Get-ChildItem -Path . -Filter .\*.totals |
 		Foreach-Object {
 			if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
@@ -136,7 +136,7 @@ param(
 			}
 		}
 		Write-Host -NoNewline '%         clause coverage '
-		(Get-Content -Path $d\$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("\t")[1]
+		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("\t")[1]
 	} elseif ($tests_exit -eq 5) {
 		if ($o -eq "verbose") {
 			Write-Output "%         broken"
@@ -146,13 +146,13 @@ param(
 		if ($o -eq "verbose") {
 			Write-Output "%         timeout"
 		}
-		Add-Content -Path $d/$name.errors -Value "LOGTALK_TIMEOUT"
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_TIMEOUT"
 		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Timeout"
 	} elseif ($tests_exit -ne 0) {
 		if ($o -eq "verbose") {
 			Write-Output "%         crash"
 		}
-		Add-Content -Path $d/$name.errors -Value "LOGTALK_CRASH"
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_CRASH"
 		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Crash"
 	}
 	if ($c -eq "xml") {
@@ -176,25 +176,25 @@ param(
 )
 	if ($a -eq "") {
 		if ($t -ne 0) {
-			$exit = & $timeout_command $timeout $logtalk $logtalk_option "$goal" > "$d/$name.results" 2> "$d/$name.errors"
+			& $timeout_command $timeout $logtalk $logtalk_option (" `"" + $goal + "`"") > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			$exit = & $logtalk $logtalk_option "$goal" > "$d/$name.results" 2> "$d/$name.errors"
+			& $logtalk $logtalk_option (" `"" + $goal + "`"") > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	} else {
 		if ($t -ne 0) {
-			$exit = & $timeout_command $timeout $logtalk $logtalk_option "$goal" -- (-Split $a) > "$d/$name.results" 2> "$d/$name.errors"
+			& $timeout_command $timeout $logtalk $logtalk_option (" `"" + $goal + "`"") -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			$exit = & $logtalk $logtalk_option "$goal" -- (-Split $a) > "$d/$name.results" 2> "$d/$name.errors"
+			& $logtalk $logtalk_option (" `"" + $goal + "`"") -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
-	if ($exit -eq 0 -and
-		!(Select-String -Path $d\name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
-		!(Select-String -Path $d\name.total -Pattern "^object" -Quiet) -and
-		!(Select-String -Path $d\name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
-		Add-Content -Path $d/$name.errors -Value "LOGTALK_BROKEN"
+	if ($LASTEXITCODE -eq 0 -and
+		!(Select-String -Path $results/name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
+		!(Select-String -Path $results/name.total -Pattern "^object" -Quiet) -and
+		!(Select-String -Path $results/name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
 		return 5
 	}
-	return $exit
+	return $LASTEXITCODE
 }
 
 Function Ensure-Format-Report() {
@@ -206,7 +206,7 @@ param(
 	[Parameter(Position = 2)]
 	[String]$error
 )
-	$short = $directory -replace [Regex]::Escape($s), ""
+	$short = $directory -replace $prefix, ""
 	if ($format -eq "xunit") {
 		$timestamp=$(date +"%Y-%m-%dT%H:%M:%S")
 		New-Item -Path . -Name $directory/xunit_report.xml -ItemType "file" -Force > $null
@@ -471,6 +471,14 @@ Function Check-Parameters() {
 		$script:seed_goal = "true"
 	}
 
+	if ($d -ne "") {
+		$script:results = $d -replace '\\', '/'
+	}
+
+	if ($s -ne "") {
+		$script:prefix = $s -replace '\\', '/'
+	}
+
 }
 
 ###################### here it starts ############################ 
@@ -502,6 +510,9 @@ $coverage_default_goal = "true"
 $coverage_xml_goal = "logtalk_load(lgtunit(coverage_report))"
 $coverage_goal = $coverage_default_goal
 
+$results = (Join-Path $pwd "logtalk_tester_logs") -replace '\\', '/'
+$prefix = $env:USERPROFILE -replace '\\', '/'
+
 Check-Parameters
 
 if ($p -eq "swipack") {
@@ -514,30 +525,30 @@ $tester_optimal_goal = ("set_logtalk_flag(optimize,on),logtalk_load(" + $n + "),
 $tester_normal_goal = ("logtalk_load(" + $n + "),halt" + $dot)
 $tester_debug_goal = ("set_logtalk_flag(debug,on),logtalk_load(" + $n + "),halt" + $dot)
 
-New-Item -Path $d -ItemType directory -Force > $null
+New-Item -Path $results -ItemType directory -Force > $null
 
-if (Test-Path $d\*.results) {
-	Remove-Item -Path $d\*.results -Force
+if (Test-Path $results/*.results) {
+	Remove-Item -Path $results/*.results -Force
 }
-if (Test-Path $d\*.errors) {
-	Remove-Item -Path $d\*.errors -Force
+if (Test-Path $results/*.errors) {
+	Remove-Item -Path $results/*.errors -Force
 }
-if (Test-Path $d\*.totals) {
-	Remove-Item -Path $d\*.totals -Force
+if (Test-Path $results/*.totals) {
+	Remove-Item -Path $results/*.totals -Force
 }
-if (Test-Path $d\errors.all) {
-	Remove-Item -Path $d\errors.all -Force
+if (Test-Path $results/errors.all) {
+	Remove-Item -Path $results/errors.all -Force
 }
-if (Test-Path $d\tester_versions.txt) {
-	Remove-Item -Path $d\tester_versions.txt -Force
+if (Test-Path $results/tester_versions.txt) {
+	Remove-Item -Path $results/tester_versions.txt -Force
 }
 
 if ($o -eq "verbose") {
 	$start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 	Write-Output "% Batch testing started @ $start_date"
-	& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $d\tester_versions.txt 2> $null
-	Select-String -Path $d\tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
-	(Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
+	& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $results/tester_versions.txt 2> $null
+	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
+	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
 }
 
 $testsets = 0
@@ -633,8 +644,8 @@ if ((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests ski
 	(Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
 	Write-Output "%"
 	Write-Output "% Skipped test sets"
-	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped' -Raw -SimpleMatch) -replace '% tests skipped', '') -replace '__', '/') -replace [Regex]::Escape($s), ''
-	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -Raw -SimpleMatch) -replace '(not applicable)', '') -replace '__', '/') -replace [Regex]::Escape($s), ''
+	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped' -Raw -SimpleMatch) -replace '% tests skipped', '') -replace '__', '/') -replace $prefix, ''
+	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -Raw -SimpleMatch) -replace '(not applicable)', '') -replace '__', '/') -replace $prefix, ''
 }
 if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
@@ -642,7 +653,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BRO
 	Get-ChildItem -Path . -Filter *.errors |
 	Foreach-Object {
 		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace [Regex]::Escape($s), ''
+			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace $prefix, ''
 		}
 	}
 }
@@ -652,7 +663,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIM
 	Get-ChildItem -Path . -Filter *.errors |
 	Foreach-Object {
 		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_TIMEOUT' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace [Regex]::Escape($s), ''
+			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace $prefix, ''
 		}
 	}
 }
@@ -662,7 +673,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRA
 	Get-ChildItem -Path . -Filter *.errors |
 	Foreach-Object {
 		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace [Regex]::Escape($s), ''
+			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace $prefix, ''
 		}
 	}
 }
@@ -673,7 +684,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^skipped' -
 	Foreach-Object {
 		Get-Content $_ | ForEach-Object {
 			if (Select-String -Pattern '^skipped' -CaseSensitive) {
-				(($_.split("\t")[2] + $_.split("\t")[3]) -replace [Regex]::Escape($s), '') -replace "\t", " - "
+				(($_.split("\t")[2] + $_.split("\t")[3]) -replace $prefix, '') -replace "\t", " - "
 			}
 		}
 	}
@@ -685,7 +696,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^failed' -C
 	Foreach-Object {
 		Get-Content $_ | ForEach-Object {
 			if (Select-String -Pattern '^failed' -CaseSensitive) {
-				(($_.split("\t")[1] + $_.split("\t")[2]) -replace [Regex]::Escape($s), '') -replace "\t", " - "
+				(($_.split("\t")[1] + $_.split("\t")[2]) -replace $prefix, '') -replace "\t", " - "
 			}
 		}
 	}
