@@ -79,7 +79,7 @@ param(
 	# convert any forward slashes so that the derived file name is usable
 	# also convert any colon if running on Windows systems so that the derived file name is usable
 	$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'
-	$report_goal = "logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'" + $d + "'),set_logtalk_flag(test_unit_name,'" + $name + "')"
+	$report_goal = "logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'" + $results + "'),set_logtalk_flag(test_unit_name,'" + $name + "')"
 	if ($s -ne "") {
 		$flag_goal = ("set_logtalk_flag(suppress_path_prefix,'" + $s + "')")
 	} else {
@@ -91,43 +91,43 @@ param(
 	if ($u -ne "") {
 		$flag_goal = "set_logtalk_flag(tests_base_url,'" + $url + "')," + $flag_goal
 	}
-	if ($format -ne "default" -and $coverage -ne "none") {
+	if ($f -ne "default" -and $c -ne "none") {
 		$flag_goal = "set_logtalk_flag(tests_report_directory,'" + $unit + "/')," + $flag_goal
 	}
 	if ($m -eq "optimal" -or $m -eq "all") {
-		$tests_exit = Run-Tests "$name" ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_optimal_goal)
+		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_optimal_goal)
 		$mode_prefix="% (opt)   "
 	} elseif ($m -eq "normal" -or $m -eq "all") {
 		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_normal_goal)
 		$mode_prefix="%         "
 	} elseif ($m -eq "debug" -or $m -eq "all") {
-		$tests_exit = Run-Tests "$name" ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_debug_goal)
+		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_debug_goal)
 		$mode_prefix="% (debug) "
 	}
 
-	if ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+	if ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
 		Write-Output "%         skipped"
-	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
+	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
 		Write-Output "%         not applicable"
 	} elseif ($tests_exit -eq 0 -and (Test-Path $results/$name.totals) -and $o -eq "verbose") {
 		Get-ChildItem -Path . -Filter .\*.totals |
 		Foreach-Object {
 			if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
 				Write-Host -NoNewline $mode_prefix
-				Write-Host -NoNewline $_.split("\t")[2]
+				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[2]
 				Write-Host -NoNewline ' tests: '
-				Write-Host -NoNewline $_.split("\t")[3]
+				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[3]
 				Write-Host -NoNewline ' skipped, '
-				Write-Host -NoNewline $_.split("\t")[4]
+				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[4]
 				Write-Host -NoNewline ' passed, '
-				Write-Host -NoNewline $_.split("\t")[5]
+				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[5]
 				Write-Host -NoNewline ' failed ('		
-				Write-Host -NoNewline $_.split("\t")[6]
+				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[6]
 				Write-Output ' flaky)'
 				$end_time = Get-Date -UFormat %s
 				$duration = $end_time - $start_time
 				Write-Host -NoNewline '%         completed tests from object '
-				Write-Host -NoNewline $_.split("\t")[1]
+				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[1]
 				if ($duration -eq 1) {
 					Write-Output (" in " + $duration + " second")
 				} else {
@@ -152,7 +152,7 @@ param(
 		if ($o -eq "verbose") {
 			Write-Output "%         crash"
 		}
-		Add-Content -Path $results/$name.errors -Value "LOGTALK_CRASH"
+		Add-Content -Path $results/$n.errors -Value "LOGTALK_CRASH"
 		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Crash"
 	}
 	if ($c -eq "xml") {
@@ -188,9 +188,9 @@ param(
 		}
 	}
 	if ($LASTEXITCODE -eq 0 -and
-		!(Select-String -Path $results/name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
-		!(Select-String -Path $results/name.total -Pattern "^object" -Quiet) -and
-		!(Select-String -Path $results/name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
+		!(Select-String -Path $results/$name.totals -Pattern "^object" -Quiet) -and
+		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
 		return 5
 	}
@@ -600,7 +600,7 @@ if ($testsets -eq 0) {
 	Exit 0
 }
 
-Push-Location $d
+Push-Location $results
 
 $testsetskipped = (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped').count + (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)').count
 
@@ -619,10 +619,10 @@ $flaky = 0
 Get-ChildItem -Path . -Filter .\*.totals |
 Foreach-Object {
 	if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
-		$skipped = $skipped + [int]($_.split("\t")[3])
-		$passed =  $passed  + [int]($_.split("\t")[4])
-		$failed =  $failed  + [int]($_.split("\t")[5])
-		$flaky =   $flaky   + [int]($_.split("\t")[6])
+		$skipped = $skipped + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[3])
+		$passed =  $passed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[4])
+		$failed =  $failed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[5])
+		$flaky =   $flaky   + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[6])
 	}
 }
 
