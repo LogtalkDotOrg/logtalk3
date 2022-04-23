@@ -81,7 +81,7 @@ param(
 	$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'
 	$report_goal = "logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'" + $results + "'),set_logtalk_flag(test_unit_name,'" + $name + "')"
 	if ($s -ne "") {
-		$flag_goal = ("set_logtalk_flag(suppress_path_prefix,'" + $s + "')")
+		$flag_goal = ("set_logtalk_flag(suppress_path_prefix,'" + $prefix + "')")
 	} else {
 		$flag_goal = "true"
 	}
