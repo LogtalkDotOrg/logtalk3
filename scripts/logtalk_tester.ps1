@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 22, 2022
+##   Last updated on April 23, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -110,33 +110,29 @@ param(
 	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
 		Write-Output "%         not applicable"
 	} elseif ($tests_exit -eq 0 -and (Test-Path $results/$name.totals) -and $o -eq "verbose") {
-		Get-ChildItem -Path . -Filter .\*.totals |
-		Foreach-Object {
-			if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
-				Write-Host -NoNewline $mode_prefix
-				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[2]
-				Write-Host -NoNewline ' tests: '
-				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[3]
-				Write-Host -NoNewline ' skipped, '
-				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[4]
-				Write-Host -NoNewline ' passed, '
-				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[5]
-				Write-Host -NoNewline ' failed ('		
-				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[6]
-				Write-Output ' flaky)'
-				$end_time = Get-Date -UFormat %s
-				$duration = $end_time - $start_time
-				Write-Host -NoNewline '%         completed tests from object '
-				Write-Host -NoNewline (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[1]
-				if ($duration -eq 1) {
-					Write-Output (" in " + $duration + " second")
-				} else {
-					Write-Output (" in " + $duration + " seconds")
-				}
-			}
+		$line = (Get-Content -Path $results/$name.totals | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")
+		Write-Host -NoNewline $mode_prefix
+		Write-Host -NoNewline $line[2]
+		Write-Host -NoNewline ' tests: '
+		Write-Host -NoNewline $line[3]
+		Write-Host -NoNewline ' skipped, '
+		Write-Host -NoNewline $line[4]
+		Write-Host -NoNewline ' passed, '
+		Write-Host -NoNewline $line[5]
+		Write-Host -NoNewline ' failed ('		
+		Write-Host -NoNewline $line[6]
+		Write-Output ' flaky)'
+		$end_time = Get-Date -UFormat %s
+		$duration = $end_time - $start_time
+		Write-Host -NoNewline '%         completed tests from object '
+		Write-Host -NoNewline $line[1]
+		if ($duration -eq 1) {
+			Write-Output (" in " + $duration + " second")
+		} else {
+			Write-Output (" in " + $duration + " seconds")
 		}
 		Write-Host -NoNewline '%         clause coverage '
-		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("\t")[1]
+		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]
 	} elseif ($tests_exit -eq 5) {
 		if ($o -eq "verbose") {
 			Write-Output "%         broken"
@@ -619,10 +615,10 @@ $flaky = 0
 Get-ChildItem -Path . -Filter .\*.totals |
 Foreach-Object {
 	if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
-		$skipped = $skipped + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[3])
-		$passed =  $passed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[4])
-		$failed =  $failed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[5])
-		$flaky =   $flaky   + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("\t")[6])
+		$skipped = $skipped + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[3])
+		$passed =  $passed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[4])
+		$failed =  $failed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[5])
+		$flaky =   $flaky   + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[6])
 	}
 }
 
@@ -684,7 +680,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^skipped' -
 	Foreach-Object {
 		Get-Content $_ | ForEach-Object {
 			if (Select-String -Pattern '^skipped' -CaseSensitive) {
-				(($_.split("\t")[2] + $_.split("\t")[3]) -replace $prefix, '') -replace "\t", " - "
+				(($_.split("`t")[2] + $_.split("`t")[3]) -replace $prefix, '') -replace "`t", " - "
 			}
 		}
 	}
@@ -696,7 +692,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^failed' -C
 	Foreach-Object {
 		Get-Content $_ | ForEach-Object {
 			if (Select-String -Pattern '^failed' -CaseSensitive) {
-				(($_.split("\t")[1] + $_.split("\t")[2]) -replace $prefix, '') -replace "\t", " - "
+				(($_.split("`t")[1] + $_.split("`t")[2]) -replace $prefix, '') -replace "`t", " - "
 			}
 		}
 	}
