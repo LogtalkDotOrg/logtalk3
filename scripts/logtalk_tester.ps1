@@ -174,13 +174,13 @@ param(
 		if ($t -ne 0) {
 			& $timeout_command $timeout $logtalk $logtalk_option (" `"" + $goal + "`"") > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option (" `"" + $goal + "`"") > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $logtalk_option "$goal" > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	} else {
 		if ($t -ne 0) {
 			& $timeout_command $timeout $logtalk $logtalk_option (" `"" + $goal + "`"") -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option (" `"" + $goal + "`"") -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $logtalk_option "$goal" -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
 	if ($LASTEXITCODE -eq 0 -and
@@ -478,6 +478,8 @@ Function Check-Parameters() {
 }
 
 ###################### here it starts ############################ 
+
+$PSNativeCommandArgumentPassing = 'Standard'
 
 Push-Location
 

@@ -25,8 +25,11 @@ and installation.
 Scripts with a `.sh` extension are Bash shells scripts for macOS, Linux,
 and similar systems.
 
-Scripts with a `.ps1` extension are PowerShell 7.x scripts for Windows
-systems.
+Scripts with a `.ps1` extension are PowerShell 7.2.x scripts for Windows
+systems. The `logtalk_tester.ps1` script requires enabling an experimental
+feature:
+
+	Enable-ExperimentalFeature PSNativeCommandArgumentPassing
 
 Scripts with extension `.js` are JScript command-line scripts for Windows.
 These are deprecated. They require WSH 5.6 or later version to be installed
@@ -62,10 +65,10 @@ also available in the Logtalk website.
 	systems (must be run from this directory by a user with administration
 	privileges)
 
-- `logtalk_tester.sh`  
-	shell script for automating running unit tests in the current directory and
-	recursively in all its sub-directories by scanning for either `tester.lgt`
-	or `tester.logtalk` files;
+- `logtalk_tester.sh` and `logtalk_tester.ps1`  
+	Bash shell script and PowerShell script for automating running unit tests
+	in the current directory and recursively in all its sub-directories by
+	scanning for either `tester.lgt` or `tester.logtalk` files;
 	in its default output format, it reports, besides test results, compilation
 	warnings and errors (please note that, depending on the tests and on the
 	compilation mode, these warnings and errors might be expected);
@@ -90,10 +93,10 @@ also available in the Logtalk website.
 	`logtalk_tester.sh` shell script using the `-f xunit` or `-f xunit_net_v2`
 	command-line options
 
-- `logtalk_doclet.sh`  
-	shell script for automating running doclets in the current directory and
-	recursively in all its sub-directories by scanning for either `doclet.lgt`
-	or `doclet.logtalk` files;
+- `logtalk_doclet.sh` and `logtalk_doclet.ps1`  
+	Bash shell script and PowerShell script for automating running doclets in
+	the current directory and recursively in all its sub-directories by scanning
+	for either `doclet.lgt` or `doclet.logtalk` files;
 	you can use this script on Windows operating-systems by installing Git for
 	Windows (which provides a Bash shell implementation and is available from
 	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
