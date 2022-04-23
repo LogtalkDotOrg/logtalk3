@@ -511,7 +511,7 @@ $coverage_xml_goal = "logtalk_load(lgtunit(coverage_report))"
 $coverage_goal = $coverage_default_goal
 
 $results = (Join-Path $pwd "logtalk_tester_logs") -replace '\\', '/'
-$prefix = $env:USERPROFILE -replace '\\', '/'
+$prefix = ($env:USERPROFILE + "/") -replace '\\', '/'
 
 Check-Parameters
 
