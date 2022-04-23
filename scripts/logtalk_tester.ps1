@@ -549,41 +549,37 @@ if ($o -eq "verbose") {
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
 }
 
-$testsets = 0
+$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | Measure-Object).count
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
 		Foreach-Object {
-			$testsets++
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
 		Foreach-Object {
-			$testsets++
 			Write-Host -NoNewline "% running $testsets test sets: "
-			Write-Host -NoNewline $counter
+			Write-Host -NoNewline "$counter`r"
 			Run-TestSet $_.FullName
 			$counter++
-			Write-Output "%"
 		}
+		Write-Output "%"
 	}
 } else {
 	if ($o -eq "verbose") {
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
-			$testsets++
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
 		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
-			$testsets++
 			Write-Host -NoNewline "% running $testsets test sets: "
-			Write-Host -NoNewline $counter
+			Write-Host -NoNewline "$counter`r"
 			Run-TestSet $_.FullName
 			$counter++
 			Write-Output "%"
