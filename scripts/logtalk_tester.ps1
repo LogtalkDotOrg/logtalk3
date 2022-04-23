@@ -60,7 +60,7 @@ param(
 	$start_time = Get-Date -UFormat %s
 	$unit = (Split-Path -Path $path) -replace '\\', '/'
 	$unit_short = $unit -replace $prefix, ""
-	Set-Location "$unit"
+	Push-Location "$unit"
 	if ($w -eq $true) {
 		Remove-Item -Path .\.lgt_tmp -Recurse -Force
 		Remove-Item -Path .\lgt_tmp  -Recurse -Force
@@ -160,7 +160,7 @@ param(
 			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.xsl" -Destination .
 		}
 	}
-	return 0
+	Pop-Location
 }
 
 Function Run-Tests() {
@@ -479,6 +479,8 @@ Function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
+Push-Location
+
 # default argument values
 
 $backend = "swi"
@@ -551,14 +553,14 @@ $testsets = 0
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Recurse |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
 		Foreach-Object {
 			$testsets++
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Recurse |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
 		Foreach-Object {
 			$testsets++
 			Write-Host -NoNewline "% running $testsets test sets: "
@@ -570,14 +572,14 @@ if ($l -eq "") {
 	}
 } else {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Depth $level |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
 			$testsets++
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt") ($n + ".logtalk") -Depth $level |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
 		Foreach-Object {
 			$testsets++
 			Write-Host -NoNewline "% running $testsets test sets: "
@@ -612,9 +614,9 @@ $passed = 0
 $failed = 0
 $flaky = 0
 
-Get-ChildItem -Path . -Filter .\*.totals |
+Get-ChildItem -Path . -Filter *.totals |
 Foreach-Object {
-	if ($_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
+	if (Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Quiet) {
 		$skipped = $skipped + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[3])
 		$passed =  $passed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[4])
 		$failed =  $failed  + [int]((Get-Content -Path $_ | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")[5])
@@ -624,26 +626,33 @@ Foreach-Object {
 
 $total = $skipped + $passed + $failed
 
-if ((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern '^\*' -CaseSensitive -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '^\*' -CaseSensitive -Quiet)) {
+if ((Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
+	(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
+	(Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -CaseSensitive -Quiet) -or
+	(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -CaseSensitive -Quiet)) {
 	Write-Output "%"
 	Write-Output "% Compilation errors/warnings and failed unit tests"
 	Write-Output "% (compilation errors/warnings might be expected depending on the test)"
-	Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern '^!'  | Tee-Object -FilePath errors.all -Append
-	Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '^!'  | Tee-Object -FilePath errors.all -Append
-	Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern '^\*' | Tee-Object -FilePath errors.all -Append
-	Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '^\*' | Tee-Object -FilePath errors.all -Append
+	Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
+	Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
+	Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
+	Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
 }
-if ((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped' -CaseSensitive -SimpleMatch -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
+if ((Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern 'tests skipped' -CaseSensitive -SimpleMatch -Quiet) -or
+	(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
 	Write-Output "%"
 	Write-Output "% Skipped test sets"
-	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped' -Raw -SimpleMatch) -replace '% tests skipped', '') -replace '__', '/') -replace $prefix, ''
-	(((Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)' -Raw -SimpleMatch) -replace '(not applicable)', '') -replace '__', '/') -replace $prefix, ''
+	Get-ChildItem -Path . -Filter *.results |
+	Foreach-Object {
+		if (Get-Content -Path $_ | Select-String -Pattern 'tests skipped' -SimpleMatch -Quiet) {
+			($_.BaseName -replace '__', '/') -replace $prefix, ''
+		}
+		if (Get-Content -Path $_ | Select-String -Pattern '(not applicable)' -SimpleMatch -Quiet) {
+			($_.BaseName -replace '__', '/') -replace $prefix, ''
+		}
+	}
 }
-if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
+if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
 	Write-Output "% Broken"
 	Get-ChildItem -Path . -Filter *.errors |
@@ -653,7 +662,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BRO
 		}
 	}
 }
-if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
+if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
 	Write-Output "%"
 	Write-Output "% Timedout"
 	Get-ChildItem -Path . -Filter *.errors |
@@ -663,7 +672,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIM
 		}
 	}
 }
-if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
+if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "%"
 	Write-Output "% Crashed"
 	Get-ChildItem -Path . -Filter *.errors |
@@ -673,26 +682,28 @@ if (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRA
 		}
 	}
 }
-if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^skipped' -CaseSensitive -Quiet) {
+if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Pattern '^skipped' -CaseSensitive -Quiet) {
 	Write-Output "%"
 	Write-Output "% Skipped tests"
 	Get-ChildItem -Path . -Filter *.totals |
 	Foreach-Object {
-		Get-Content $_ | ForEach-Object {
-			if (Select-String -Pattern '^skipped' -CaseSensitive) {
-				(($_.split("`t")[2] + $_.split("`t")[3]) -replace $prefix, '') -replace "`t", " - "
+		Get-Content -Path $_ | 
+		Foreach-Object {
+			if ($_ -match '^skipped') {
+				($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ''
 			}
 		}
 	}
 }
-if (Get-ChildItem -Path . -Filter *.totals | Select-String -Pattern '^failed' -CaseSensitive -Quiet) {
+if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Pattern '^failed' -CaseSensitive -Quiet) {
 	Write-Output "%"
 	Write-Output "% Failed tests"
 	Get-ChildItem -Path . -Filter *.totals |
 	Foreach-Object {
-		Get-Content $_ | ForEach-Object {
-			if (Select-String -Pattern '^failed' -CaseSensitive) {
-				(($_.split("`t")[1] + $_.split("`t")[2]) -replace $prefix, '') -replace "`t", " - "
+		Get-Content -Path $_ | 
+		Foreach-Object {
+			if ($_ -match '^failed') {
+				($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ''
 			}
 		}
 	}
