@@ -31,6 +31,8 @@ Prolog adapter and integration files
 * ADDED: Experimental Windows PowerShell integration scripts for selected
 backend Prolog systems. Collaborative work with Hans N. Beck.
 
+* UPDATED: The Scryer Prolog adapter file to enable modules support.
+
 Documentation
 -------------
 
