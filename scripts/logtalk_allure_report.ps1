@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 20, 2022
+##   Last updated on April 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -21,7 +21,6 @@
 ## 
 #############################################################################
 
-
 [CmdletBinding()]
 param(
 	[Parameter()]
@@ -35,13 +34,13 @@ param(
 	[Switch]$h
 )
 
-function Write-Script-Version {
+Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
 	Write-Output ($myName + " 0.9")
 }
 
-function Write-Usage-Help() {
+Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
@@ -55,9 +54,9 @@ function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d tests directory (default is the current directory)"
-	Write-Output "  -i results directory (default is $results)"
-	Write-Output "  -o report directory (default is $report)"
-	Write-Output "  -t report title (default is \"Allure Report\")"
+	Write-Output "  -i results directory (default is .\allure-results)"
+	Write-Output "  -o report directory (default is .\allure-report)"
+	Write-Output "  -t report title (default is `"Allure Report`")"
 	Write-Output "  -p preprocess results but do not generate report"
 	Write-Output "  -e environment pairs as a string ('key1=value1,key2=value2,...')"
 	Write-Output "  -v print version"
@@ -65,6 +64,20 @@ function Write-Usage-Help() {
 	Write-Output ""
 }
 
+Function Check-Parameters() {
+	if ($v -eq $true) {
+		Write-Script-Version
+		Exit
+	}
+	if ($h -eq $true) {
+		Write-Usage-Help
+		Exit
+	}
+}
+
+###################### here it starts ############################ 
+
+Check-Parameters
 
 if (Test-Path $o -PathType container) {
 	if ((Test-Path $o\data) -and (Test-Path $o\export) -and (Test-Path $o\history) -and `
