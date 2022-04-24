@@ -70,7 +70,8 @@ Tools
 internal path syntax when normalizing directories passed as options.
 
 * ADDED: Experimental PowerShell versions of the `update_html_docs.sh`,
-`update_svg_diagrams.sh`, and `logtalk_allure_report.sh` scripts.
+`update_svg_diagrams.sh`, `logtalk_allure_report.sh`, `logtalk_doclet.sh`,
+and `logtalk_tester.sh` scripts.
 
 * IMPROVED: Documentation of the `issue_creator` and `packs` tools.
 
@@ -95,6 +96,9 @@ path suppress option.
 
 * FIXED: The `logtalk_doclet.sh` script spurious but harmless warnings when no
 doclets are found.
+
+* FIXED: The `logtalk_tester.sh` script to also detect timeouts using signal
+124.
 
 Tests
 -----

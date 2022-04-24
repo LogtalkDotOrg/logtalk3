@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 20, 2022
+##   Last updated on April 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.2"
+	echo "$(basename "$0") 10.3"
 	exit 0
 }
 
@@ -190,7 +190,7 @@ run_testset() {
 			echo "%         broken"
 		fi
 		ensure_format_report "$unit" "$(basename "$unit")" "Broken"
-	elif [ $tests_exit -eq 137 ] ; then
+	elif [ $tests_exit -eq 137 ] || [ $tests_exit -eq 124 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
 		fi

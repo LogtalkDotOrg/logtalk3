@@ -49,7 +49,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.2")
+	Write-Output ($myName + " 10.3")
 }
 
 Function Run-TestSet() {
@@ -138,7 +138,7 @@ param(
 			Write-Output "%         broken"
 		}
 		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Broken"
-	} elseif ($tests_exit -eq 137) {
+	} elseif ($tests_exit -eq 137 -or $tests_exit -eq 124) {
 		if ($o -eq "verbose") {
 			Write-Output "%         timeout"
 		}
@@ -148,7 +148,7 @@ param(
 		if ($o -eq "verbose") {
 			Write-Output "%         crash"
 		}
-		Add-Content -Path $results/$n.errors -Value "LOGTALK_CRASH"
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_CRASH"
 		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Crash"
 	}
 	if ($c -eq "xml") {
@@ -172,13 +172,13 @@ param(
 )
 	if ($a -eq "") {
 		if ($t -ne 0) {
-			& $timeout_command $timeout $logtalk $logtalk_option (" `"" + $goal + "`"") > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option "$goal" > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
 			& $logtalk $logtalk_option "$goal" > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	} else {
 		if ($t -ne 0) {
-			& $timeout_command $timeout $logtalk $logtalk_option (" `"" + $goal + "`"") -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option "$goal" -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
 			& $logtalk $logtalk_option "$goal" -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
 		}
@@ -493,6 +493,13 @@ $dot = ""
 $base = $pwd
 
 $level = 999
+
+if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
+	$timeout_command = "$env:Programfiles\Git\usr\bin\timeout.exe"
+} else {
+	$timeout_command = ""
+	Write-Output "Warning! Timeout support not available. The timeout option will be ignored."
+}
 
 $flag_goal = "true"
 $initialization_goal = "true"

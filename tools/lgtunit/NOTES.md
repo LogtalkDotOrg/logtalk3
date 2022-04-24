@@ -1123,6 +1123,10 @@ Alternatively, an HTML version of this man page can be found at:
 
 https://logtalk.org/man/logtalk_tester.html
 
+The `logtalk_tester.ps1` PowerShell script timeout option requires that
+Git for Windows is also installed as it requires the GNU timeout command
+bundled with it.
+
 In alternative to using the `logtalk_tester.ps1` PowerShell script, the
 Bash shell version of the automation script can also be used in Windows
 operating-systems with selected backends by using the Bash shell included
