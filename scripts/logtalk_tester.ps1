@@ -49,7 +49,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.3")
+	Write-Output ($myName + " 10.4")
 }
 
 Function Run-TestSet() {
@@ -69,13 +69,13 @@ param(
 		Write-Output "%"
 		Write-Output ("% " + $unit_short)
 	}
-#	if (Test-Path $n.sh) {
-#		$source_exit = & $n.sh $a
-#		if ($source_exit -gt 0) {
-#			Write-Output "%         source $n.sh returned code $source_exit"
-#			Exit 9
-#		}
-#	}
+	if (Test-Path ($n + ".ps1")) {
+		$source_exit = & ($n + ".ps1") $args
+		if ($source_exit -gt 0) {
+			Write-Output ("%         source " + $n + ".ps1 returned code " + $source_exit)
+			Exit 9
+		}
+	}
 	# convert any forward slashes so that the derived file name is usable
 	# also convert any colon if running on Windows systems so that the derived file name is usable
 	$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'

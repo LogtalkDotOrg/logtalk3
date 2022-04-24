@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.3"
+	echo "$(basename "$0") 10.4"
 	exit 0
 }
 
@@ -113,11 +113,7 @@ run_testset() {
 		echo "% $unit_short"
 	fi
 	if [ -f "$driver.sh" ] ; then
-		if [ $# -eq 0 ] ; then
-			source "$driver.sh" -p $backend
-		else
-			source "$driver.sh" "$@"
-		fi
+		source "$driver.sh" "$@"
 		source_exit=$?
 		if [ "$source_exit" -gt 0 ] ; then
 			echo "%         source $driver.sh returned code $source_exit"
