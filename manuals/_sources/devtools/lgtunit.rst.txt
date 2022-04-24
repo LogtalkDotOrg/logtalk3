@@ -1246,9 +1246,9 @@ files, which can be easily converted and published as e.g. HTML reports.
 Automating running tests
 ------------------------
 
-You can use the ``scripts/logtalk_tester.sh`` Bash shell script for
-automating running unit tests. See the ``scripts/NOTES.md`` file for
-details or type:
+You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
+``scripts/logtalk_tester.ps1`` PowerShell script for automating running
+unit tests. See the ``scripts/NOTES.md`` file for details or type:
 
 ::
 
@@ -1266,11 +1266,12 @@ Alternatively, an HTML version of this man page can be found at:
 
 https://logtalk.org/man/logtalk_tester.html
 
-This automation script can also be used in Windows operating-systems
-with selected backends by using the Bash shell included in the Git for
-Windows installer. That requires defining a ``.profile`` file setting
-the paths to the Logtalk scripts and the Prolog backend executables. For
-example:
+In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
+the Bash shell version of the automation script can also be used in
+Windows operating-systems with selected backends by using the Bash shell
+included in the Git for Windows installer. That requires defining a
+``.profile`` file setting the paths to the Logtalk scripts and the
+Prolog backend executables. For example:
 
 ::
 
@@ -1461,7 +1462,7 @@ HTML files for easy browsing. For example:
 Generating Allure reports
 -------------------------
 
-A shell script is provided for generating
+A Bash shell script and a PowerShell script are provided for generating
 `Allure <http://allure.qatools.ru>`__ reports. This requires exporting
 test results in xUnit XML format. A simple usage example (assuming a
 current directory containing tests):
@@ -1578,6 +1579,10 @@ web browser for the transformation. For example, using the popular
 ::
 
    $ xsltproc -o coverage_report.html coverage_report.xml
+
+On Windows operating-systems, this processor can be installed using e.g.
+Chocolatey. On a POSIX operating-systems (e.g. Linux, macOS, ...) use
+the system package manager to install it if necessary.
 
 The coverage report can include links to the source code when hosted on
 Bitbucket, GitHub, or GitLab. This requires passing the base URL as the

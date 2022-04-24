@@ -1266,9 +1266,9 @@ files, which can be easily converted and published as e.g. HTML reports.</p>
 </section>
 <section id="automating-running-tests">
 <h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Permalink to this headline"></a></h2>
-<p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script for
-automating running unit tests. See the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file for
-details or type:</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script or the
+<code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.ps1</span></code> PowerShell script for automating running
+unit tests. See the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file for details or type:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -h
 </pre></div>
 </div>
@@ -1280,11 +1280,12 @@ page for the script:</p>
 </div>
 <p>Alternatively, an HTML version of this man page can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
-<p>This automation script can also be used in Windows operating-systems
-with selected backends by using the Bash shell included in the Git for
-Windows installer. That requires defining a <code class="docutils literal notranslate"><span class="pre">.profile</span></code> file setting
-the paths to the Logtalk scripts and the Prolog backend executables. For
-example:</p>
+<p>In alternative to using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script,
+the Bash shell version of the automation script can also be used in
+Windows operating-systems with selected backends by using the Bash shell
+included in the Git for Windows installer. That requires defining a
+<code class="docutils literal notranslate"><span class="pre">.profile</span></code> file setting the paths to the Logtalk scripts and the
+Prolog backend executables. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cat ~/.profile
 # YAP
 export PATH=&quot;/C/Program Files/Yap64/bin&quot;:$PATH
@@ -1481,7 +1482,7 @@ HTML files for easy browsing. For example:</p>
 </section>
 <section id="generating-allure-reports">
 <h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Permalink to this headline"></a></h2>
-<p>A shell script is provided for generating
+<p>A Bash shell script and a PowerShell script are provided for generating
 <a class="reference external" href="http://allure.qatools.ru">Allure</a> reports. This requires exporting
 test results in xUnit XML format. A simple usage example (assuming a
 current directory containing tests):</p>
@@ -1580,6 +1581,9 @@ web browser for the transformation. For example, using the popular
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ xsltproc -o coverage_report.html coverage_report.xml
 </pre></div>
 </div>
+<p>On Windows operating-systems, this processor can be installed using e.g.
+Chocolatey. On a POSIX operating-systems (e.g. Linux, macOS, …) use
+the system package manager to install it if necessary.</p>
 <p>The coverage report can include links to the source code when hosted on
 Bitbucket, GitHub, or GitLab. This requires passing the base URL as the
 value for the <code class="docutils literal notranslate"><span class="pre">url</span></code> XSLT parameter. The exact syntax depends on the
