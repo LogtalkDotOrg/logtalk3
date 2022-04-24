@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 23, 2022
+##   Last updated on April 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -153,11 +153,11 @@ param(
 	}
 	if ($c -eq "xml") {
 		if (Test-Path $env:LOGTALKUSER) {
-			Copy-Item -Path $env:LOGTALKUSER\tools\lgtunit\coverage_report.dtd" -Destination .
-			Copy-Item -Path $env:LOGTALKUSER\tools\lgtunit\coverage_report.xsl" -Destination .
+			Copy-Item -Path $env:LOGTALKUSER\tools\lgtunit\coverage_report.dtd -Destination .
+			Copy-Item -Path $env:LOGTALKUSER\tools\lgtunit\coverage_report.xsl -Destination .
 		} elseif (Test-Path $env:LOGTALKHOME) {
-			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.dtd" -Destination .
-			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.xsl" -Destination .
+			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.dtd -Destination .
+			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.xsl -Destination .
 		}
 	}
 	Pop-Location
