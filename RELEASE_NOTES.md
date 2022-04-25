@@ -62,6 +62,9 @@ native definition when available.
 Examples
 --------
 
+* ADDED: PowerShell scripts for setting the `CLASSPATH` environment variable
+to the `clustering` and `document_converter` examples.
+
 * UPDATED: The `dcgs` example to illustrate the definition and use of
 meta-non-terminals.
 
