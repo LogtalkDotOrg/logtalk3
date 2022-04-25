@@ -140,9 +140,10 @@ if ($i -eq $true) {
 	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\']),exclude_prefixes(['$env:USERPROFILE\logtalk_packs\'])]),halt."
 }
 
-($logtalk + " " + ("`"$goal`"" -replace '\\','\\')) | Invoke-Expression
+($logtalk + " " + ("`"$goal`"" -replace '\\','/')) | Invoke-Expression
 
-Push-Location $cwd\..\docs\sources
+Push-Location $pwd\..\docs\sources
+
 lgt2rst -t "Logtalk APIs"
 if ($i -eq $true) {
 	Copy-Item -Path _templates/layout_packs.html -Destination _templates/layout.html
@@ -154,8 +155,8 @@ Move-Item -Path _conf.py -Destination conf.py
 .\make.bat html
 .\make.bat info
 #make linkcheck
-Copy-Item -Path _build\html\* -Destination .. -Recurse -Force
-Copy-Item -Path _build\texinfo\LogtalkAPIs-*.info -Destination ..
+Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
+Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..
 .\make.bat clean
 Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py

@@ -155,7 +155,7 @@ $ports_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/Logtal
 $contributions_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(contributions(loader)), inheritance_diagram::rlibrary(contributions, [title('Logtalk third-party contributions'),node_type_captions(true),zoom(true),path_url_prefixes('$env:LOGTALKUSER\',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$env:LOGTALKHOME\',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\','$env:USERPROFILE\'])]), halt."
 
 
-Push-Location ../docs
+Push-Location ..\docs
 
 ($logtalk + " " + ("`"$core_goal`"" -replace '\\', '/')) | Invoke-Expression
 ($logtalk + " " + ("`"$library_goal`"" -replace '\\', '/')) | Invoke-Expression
