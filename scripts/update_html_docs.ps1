@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on April 15, 2022
+##   Last updated on April 25, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.21")
+	Write-Output ($myName + " 0.22")
 }
 
 function Write-Usage-Help() {
@@ -143,9 +143,12 @@ if ($i -eq $true) {
 ($logtalk + " " + ("`"$goal`"" -replace '\\','\\')) | Invoke-Expression
 
 Push-Location $cwd\..\docs\sources
-Write-Output $pwd
-
 lgt2rst -t "Logtalk APIs"
+if ($i -eq $true) {
+	Copy-Item -Path _templates/layout_packs.html -Destination _templates/layout.html
+} else {
+	Copy-Item -Path _templates/layout_no_packs.html -Destination _templates/layout.html
+}
 Move-Item -Path _conf.py -Destination conf.py
 .\make.bat clean
 .\make.bat html
@@ -154,6 +157,7 @@ Move-Item -Path _conf.py -Destination conf.py
 Copy-Item -Path _build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path _build\texinfo\LogtalkAPIs-*.info -Destination ..
 .\make.bat clean
+Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py
 Move-Item -Path browserconfig.xml -Destination browserconfig.xml.saved
 try {

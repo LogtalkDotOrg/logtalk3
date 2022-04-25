@@ -48,9 +48,6 @@ and defining meta-predicates.
 
 * IMPROVED: Documentation of the Windows installer.
 
-* FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts when
-using some of the non-default backends.
-
 Library
 -------
 
@@ -167,6 +164,9 @@ the symbolic link to the `lgt2svg.js` script.
 
 * FIXED: Broken but not required sanity test in the `update_html_docs.sh` and
 `update_svg_diagrams.sh` scripts.
+
+* FIXED: The `update_html_docs.sh` and `update_svg_diagrams.sh` scripts when
+using some of the non-default backends.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

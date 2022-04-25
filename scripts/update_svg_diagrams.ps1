@@ -2,7 +2,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on April 15, 2022
+##   Last updated on April 25, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -36,7 +36,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.20")
+	Write-Output ($myName + " 0.21")
 }
 
 function Write-Usage-Help() {
@@ -64,7 +64,6 @@ function Write-Usage-Help() {
 
 $prolog='SWI-Prolog'
 $logtalk="swilgt$extension -g"
-$include_packs='false'
 
 if ($v -eq $true) {
 	Write-Script-Version
@@ -136,12 +135,13 @@ if ($env:LOGTALKPACKS -ne "") {
 $cwd = $pwd
 
 # documentation goals
+
 $core_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), inheritance_diagram::library(core,[title('Logtalk core entities'),node_type_captions(true),zoom(true),path_url_prefixes('$env:LOGTALKUSER\',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$env:LOGTALKHOME\',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\','$env:USERPROFILE\'])]), halt."
 
-if ($env:LOGTALKPACKS -ne "") {
-	$library_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), logtalk_load(library(packs_loader)), inheritance_diagram::rlibrary(library, [title('Logtalk library'),node_type_captions(true),zoom(true),path_url_prefixes('$env:LOGTALKUSER\',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$env:LOGTALKHOME\',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\', '$logtalk_packs','$env:USERPROFILE\'])]), halt."
-} else {
-	$library_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::rlibrary(library, [title('Logtalk library'),node_type_captions(true),zoom(true),path_url_prefixes('$env:LOGTALKUSER\',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$env:LOGTALKHOME\',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\','$env:USERPROFILE\'])]), halt."
+$library_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), inheritance_diagram::rlibrary(library, [title('Logtalk library'),node_type_captions(true),zoom(true),path_url_prefixes('$env:LOGTALKUSER\',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$env:LOGTALKHOME\',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\','$env:USERPROFILE\'])]), halt."
+
+if ($i -eq $true) {
+	$packs_goal="git_hash(Hash,[]), atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub), logtalk_load(diagrams(loader)), set_logtalk_flag(source_data,on), logtalk_load(library(all_loader)), logtalk_load(library(packs_loader)), inheritance_diagram::rdirectory(packs, '$logtalk_packs', [title('Logtalk packs'),node_type_captions(true),zoom(true),path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'),path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'),omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/', '$logtalk_packs','$HOME/'])]), halt."
 }
 	
 if ($env:LOGTALKPACKS -ne "") {
@@ -157,11 +157,14 @@ $contributions_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.co
 
 Push-Location ../docs
 
-($logtalk + " " + ("`"$core_goal`"" -replace '\\','\\')) | Invoke-Expression
-($logtalk + " " + ("`"$library_goal`"" -replace '\\','\\')) | Invoke-Expression
-($logtalk + " " + ("`"$tools_goal`"" -replace '\\','\\')) | Invoke-Expression
-($logtalk + " " + ("`"$contributions_goal`"" -replace '\\','\\')) | Invoke-Expression
-($logtalk + " " + ("`"$ports_goal`"" -replace '\\','\\')) | Invoke-Expression
+($logtalk + " " + ("`"$core_goal`"" -replace '\\', '/')) | Invoke-Expression
+($logtalk + " " + ("`"$library_goal`"" -replace '\\', '/')) | Invoke-Expression
+if ($i -eq $true) {
+	($logtalk + " " + ("`"$packs_goal`"" -replace '\\', '/')) | Invoke-Expression
+}
+($logtalk + " " + ("`"$tools_goal`"" -replace '\\', '/')) | Invoke-Expression
+($logtalk + " " + ("`"$contributions_goal`"" -replace '\\', '/')) | Invoke-Expression
+($logtalk + " " + ("`"$ports_goal`"" -replace '\\', '/')) | Invoke-Expression
 
 lgt2svg
 
