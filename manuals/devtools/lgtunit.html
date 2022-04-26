@@ -1272,6 +1272,13 @@ unit tests. See the <code class="docutils literal notranslate"><span class="pre"
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -h
 </pre></div>
 </div>
+<p>The scripts support the same set of options but the option for passing
+additional arguments to the tests use different syntax. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -- foo bar baz
+
+PS&gt; logtalk_tester -p gnu -a foo,bar,baz
+</pre></div>
+</div>
 <p>On POSIX systems, assuming Logtalk was installed using one of the
 provided installers or installation scripts, there is also a <code class="docutils literal notranslate"><span class="pre">man</span></code>
 page for the script:</p>
@@ -1485,10 +1492,11 @@ HTML files for easy browsing. For example:</p>
 </section>
 <section id="generating-allure-reports">
 <h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Permalink to this headline"></a></h2>
-<p>A Bash shell script and a PowerShell script are provided for generating
-<a class="reference external" href="http://allure.qatools.ru">Allure</a> reports. This requires exporting
-test results in xUnit XML format. A simple usage example (assuming a
-current directory containing tests):</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report.pl</span></code> Bash shell script and a
+<code class="docutils literal notranslate"><span class="pre">logtalk_allure_report.ps1</span></code> PowerShell script are provided for
+generating <a class="reference external" href="http://allure.qatools.ru">Allure</a> reports. This requires
+exporting test results in xUnit XML format. A simple usage example
+(assuming a current directory containing tests):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -f xunit
 $ logtalk_allure_report
 $ allure open
@@ -1515,15 +1523,25 @@ to only perform the preprocessing step:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -p
 </pre></div>
 </div>
-<p>The script also supports passing <em>environment pairs</em>, which are
+<p>The scripts also supports passing <em>environment pairs</em>, which are
 displayed in the generated Allure reports in the environment pane. This
 feature can be used to pass e.g. the backend name and the backend
-version or git commit hash. For example:</p>
+version or git commit hash. The option syntax differs, however, between
+the two scripts. For example, using the Bash script:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -- Backend=&#39;GNU Prolog&#39; Version=1.5.0
 </pre></div>
 </div>
 <p>Or:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_allure_report -- Project=&#39;Deep Thought&#39; Commit=`git rev-parse --short HEAD`
+</pre></div>
+</div>
+<p>In the case of the PowerShell script, the pairs are passed comma
+separated inside a string:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> logtalk_allure_report <span class="o">-e</span> <span class="s">&quot;Backend=&#39;GNU Prolog&#39;,Version=1.5.0&quot;</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> logtalk_allure_report <span class="o">-e</span> <span class="s">&quot;Project=&#39;Deep Thought&#39;,Commit=bf166b6&quot;</span>
 </pre></div>
 </div>
 <p>To show tests run trends in the report (e.g. when running the tests for

@@ -42,6 +42,9 @@ from <http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts`
 and `$LOGTALKHOME/integration` directories plus the backend Prolog compiler
 executable directories to the system path environment variable.
 
+Depending on the details of you Logtalk installation, you may need to type
+the scripts extensions when calling them.
+
 Man pages are provided for all POSIX shell scripts, which can be listed
 using the `apropos logtalk` command. HTML versions of the man pages are
 also available in the Logtalk website.

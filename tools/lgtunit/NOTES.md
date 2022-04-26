@@ -1114,6 +1114,13 @@ unit tests. See the `scripts/NOTES.md` file for details or type:
 
 	$ logtalk_tester -h
 
+The scripts support the same set of options but the option for passing
+additional arguments to the tests use different syntax. For example:
+
+	$ logtalk_tester -p gnu -- foo bar baz
+
+	PS> logtalk_tester -p gnu -a foo,bar,baz
+
 On POSIX systems, assuming Logtalk was installed using one of the provided
 installers or installation scripts, there is also a `man` page for the script:
 
@@ -1313,10 +1320,10 @@ HTML files for easy browsing. For example:
 Generating Allure reports
 -------------------------
 
-A Bash shell script and a PowerShell script are provided for generating
-[Allure](http://allure.qatools.ru) reports. This requires exporting test
-results in xUnit XML format. A simple usage example (assuming a current
-directory containing tests):
+A `logtalk_allure_report.pl` Bash shell script and a `logtalk_allure_report.ps1`
+PowerShell script are provided for generating [Allure](http://allure.qatools.ru)
+reports. This requires exporting test results in xUnit XML format. A simple
+usage example (assuming a current directory containing tests):
 
 	$ logtalk_tester -p gnu -f xunit
 	$ logtalk_allure_report
@@ -1342,16 +1349,26 @@ only perform the preprocessing step:
 
 	$ logtalk_allure_report -p
 
-The script also supports passing *environment pairs*, which are displayed
+The scripts also supports passing *environment pairs*, which are displayed
 in the generated Allure reports in the environment pane. This feature can
 be used to pass e.g. the backend name and the backend version or git commit
-hash. For example:
+hash. The option syntax differs, however, between the two scripts. For
+example, using the Bash script:
 
 	$ logtalk_allure_report -- Backend='GNU Prolog' Version=1.5.0
 
 Or:
 
 	$ logtalk_allure_report -- Project='Deep Thought' Commit=`git rev-parse --short HEAD`
+
+In the case of the PowerShell script, the pairs are passed comma separated
+inside a string:
+
+	PS> logtalk_allure_report -e "Backend='GNU Prolog',Version=1.5.0"
+
+Or:
+
+	PS> logtalk_allure_report -e "Project='Deep Thought',Commit=bf166b6"
 
 To show tests run trends in the report (e.g. when running the tests for
 each application source code commit), save the processed test results and
