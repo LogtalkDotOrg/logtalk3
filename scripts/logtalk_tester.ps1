@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 24, 2022
+##   Last updated on April 26, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -49,7 +49,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.4")
+	Write-Output ($myName + " 10.5")
 }
 
 Function Run-TestSet() {
@@ -178,9 +178,9 @@ param(
 		}
 	} else {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option "$goal" -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option "$goal" '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option "$goal" -- (-Split $a) > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $logtalk_option "$goal" '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
 	if ($LASTEXITCODE -eq 0 -and
@@ -286,8 +286,8 @@ Function Write-Usage-Help() {
 	Write-Output ("  -g initialization goal (default is " + $g + ")")
 	Write-Output "  -r random generator starting seed (no default)"
 	Write-Output "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
-	Write-Output "     (this option should not be used when running parallel proccess that use the same test sets)"
-	Write-Output "  -a arguments wrapped as a string to be passed to the tests (no default)"
+	Write-Output "     (this option should not be used when running parallel processes that use the same test sets)"
+	Write-Output "  -a arguments as an array (i.e. comma separated) to be passed to the tests (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
@@ -551,7 +551,7 @@ if (Test-Path $results/tester_versions.txt) {
 }
 
 if ($o -eq "verbose") {
-	$start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+	$start_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 	Write-Output "% Batch testing started @ $start_date"
 	& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $results/tester_versions.txt 2> $null
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
@@ -718,7 +718,7 @@ Write-Output ("% " + $testsets + " test sets: " + $testsetruns + " completed, " 
 Write-Output ("% " + $total + " tests: " + $skipped + " skipped, " + $passed + " passed, " + $failed + " failed (" + $flaky + " flaky)")
 
 if ($o -eq "verbose") {
-	$end_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+	$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 	Write-Output "%"
 	Write-Output ("% Batch testing ended @ " + $end_date)
 }

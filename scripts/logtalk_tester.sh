@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 24, 2022
+##   Last updated on April 26, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.4"
+	echo "$(basename "$0") 10.5"
 	exit 0
 }
 
@@ -320,7 +320,7 @@ usage_help()
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
 	echo "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
-	echo "     (this option should not be used when running parallel proccess that use the same test sets)"
+	echo "     (this option should not be used when running parallel processes that use the same test sets)"
 	echo "  -- arguments to be passed to the tests (no default)"
 	echo "  -h help"
 	echo
