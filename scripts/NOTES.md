@@ -36,6 +36,12 @@ These are deprecated. They require WSH 5.6 or later version to be installed
 and should be run using `cscript.exe` from a DOS command line shell (you may
 download WSH 5.6 from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
+You can also use the Bash scripts on Windows operating-systems by installing
+Git for Windows (which provides a Bash shell implementation and is available
+from <http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts`
+and `$LOGTALKHOME/integration` directories plus the backend Prolog compiler
+executable directories to the system path environment variable.
+
 Man pages are provided for all POSIX shell scripts, which can be listed
 using the `apropos logtalk` command. HTML versions of the man pages are
 also available in the Logtalk website.
@@ -76,11 +82,6 @@ also available in the Logtalk website.
 	that can then be processed by continuous integration servers;
 	known issue: the output of some multi-threading examples may interfere
 	with the computation of the test/skipped/passed/failed totals;
-	you can use this script on Windows operating-systems by installing Git for
-	Windows (which provides a Bash shell implementation and is available from
-	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
-	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
-	executable directories to the system path environment variable;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
 	by the GNU `coreutils` package), it will use it to run each test set if the
 	`timeout` option is set to a value greater than zero;
@@ -88,20 +89,15 @@ also available in the Logtalk website.
 	strongly recommended
 
 - `logtalk_allure_report.sh` and `logtalk_allure_report.ps1`  
-	Bash shell and PowerShell scripts for creating Allure reports (http://allure.qatools.ru);
-	tested with Allure 2.13.8; these scripts should be called after running the
-	`logtalk_tester.sh` shell script using the `-f xunit` or `-f xunit_net_v2`
-	command-line options
+	Bash shell and PowerShell scripts for creating Allure test reports
+	(http://allure.qatools.ru); tested with Allure 2.13.8; these scripts
+	should be called after running the `logtalk_tester.*` scripts using
+	the `-f xunit` or `-f xunit_net_v2` command-line options
 
 - `logtalk_doclet.sh` and `logtalk_doclet.ps1`  
 	Bash shell script and PowerShell script for automating running doclets in
 	the current directory and recursively in all its sub-directories by scanning
 	for either `doclet.lgt` or `doclet.logtalk` files;
-	you can use this script on Windows operating-systems by installing Git for
-	Windows (which provides a Bash shell implementation and is available from
-	<http://msysgit.github.io>) and by adding the `$LOGTALKHOME/scripts` and
-	`$LOGTALKHOME/integration` directories plus the backend Prolog compiler
-	executable directories to the system path environment variable;
 	if the script detects either a `timeout` or a `gtimeout` command (provided
 	by the GNU `coreutils` package), it will use it to run each doclet if the
 	`timeout` option is set to a value greater than zero
