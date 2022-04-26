@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on April 25, 2022
+##   Last updated on April 26, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -162,13 +162,13 @@ Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py
 Move-Item -Path browserconfig.xml -Destination browserconfig.xml.saved
 try {
-	Remove-Item .\*.xml -Recurse -Force
+	Remove-Item .\*.xml
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
 Move-Item -Path browserconfig.xml.saved -Destination browserconfig.xml
 try {
-	Remove-Item .\*.rst -Recurse -Force
+	Remove-Item .\*.rst
 } catch {
 	Write-Output "Error occurred at cleanup"
 }

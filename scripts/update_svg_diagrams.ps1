@@ -2,7 +2,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on April 25, 2022
+##   Last updated on April 26, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -169,7 +169,7 @@ if ($i -eq $true) {
 lgt2svg
 
 try {
-	Remove-Item .\*.dot -Recurse -Force
+	Remove-Item .\*.dot
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
