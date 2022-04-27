@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:33:0,
+		version is 1:33:1,
 		author is 'Paulo Moura',
-		date is 2022-03-08,
+		date is 2022-04-27,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -57,7 +57,7 @@
 			'Design choices' - 'The main predicates are ``valid/2`` and ``check/3``. These are defined using the predicate ``check/2``. Defining clauses for ``check/2`` instead of ``valid/2`` gives the user full control of exception terms without requiring an additional predicate.',
 			'Error context' - 'The built-in execution-context method ``context/1`` can be used to provide the calling context for errors when using the predicate ``check/3``.',
 			'Registering new types' - 'New types can be registered by defining clauses for the ``type/1`` and ``check/2`` multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
-			'Meta-types' - 'Meta-types are types that have one or more sub-types. E.g. ``var_or(Type)``. The sub-types of a meta-type can be enumerated by defining a clause for the ``meta_type/3`` multifile predicate.',
+			'Meta-types' - 'Meta-types are types that have one or more sub-type arguments. E.g. ``var_or(Type)``. The sub-types of a meta-type can be enumerated by defining a clause for the ``meta_type/3`` multifile predicate.',
 			'Character sets' - 'When testing character or character code based terms (e.g. atom), it is possible to choose a character set (``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, or ``unicode_full``) using the parameterizable types.',
 			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.'
 		],

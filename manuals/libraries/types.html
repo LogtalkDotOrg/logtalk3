@@ -160,7 +160,13 @@
 <p>This library implements predicates over standard Prolog term types and
 also term representing common data structures such as lists and pairs.</p>
 <p>It also includes a user-extensible <code class="docutils literal notranslate"><span class="pre">type</span></code> object defining type
-checking predicates over common Logtalk and Prolog term types.</p>
+checking predicates over common Logtalk and Prolog term types. The types
+define a hierarchy with the Prolog type <code class="docutils literal notranslate"><span class="pre">term</span></code> at the root (i.e.
+type-checking a predicate argument of type <code class="docutils literal notranslate"><span class="pre">term</span></code> trivially succeeds).
+Some types are only meaningful for backend Prolog systems supporting
+non-universal features (e.g. <code class="docutils literal notranslate"><span class="pre">cyclic</span></code> or <code class="docutils literal notranslate"><span class="pre">char(CharSet)</span></code> with a
+Unicode character set). See the API documentation for a full list of the
+types defined by default.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
 <p>Open the

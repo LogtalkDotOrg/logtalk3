@@ -205,8 +205,8 @@
 <p>Type checking predicates. User extensible. New types can be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:33:0</div>
-<div class="line"><strong>Date:</strong> 2022-03-08</div>
+<div class="line"><strong>Version:</strong> 1:33:1</div>
+<div class="line"><strong>Date:</strong> 2022-04-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -255,7 +255,7 @@
 <li><p>Design choices: The main predicates are <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> and <code class="docutils literal notranslate"><span class="pre">check/3</span></code>. These are defined using the predicate <code class="docutils literal notranslate"><span class="pre">check/2</span></code>. Defining clauses for <code class="docutils literal notranslate"><span class="pre">check/2</span></code> instead of <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> gives the user full control of exception terms without requiring an additional predicate.</p></li>
 <li><p>Error context: The built-in execution-context method <code class="docutils literal notranslate"><span class="pre">context/1</span></code> can be used to provide the calling context for errors when using the predicate <code class="docutils literal notranslate"><span class="pre">check/3</span></code>.</p></li>
 <li><p>Registering new types: New types can be registered by defining clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.</p></li>
-<li><p>Meta-types: Meta-types are types that have one or more sub-types. E.g. <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>. The sub-types of a meta-type can be enumerated by defining a clause for the <code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code> multifile predicate.</p></li>
+<li><p>Meta-types: Meta-types are types that have one or more sub-type arguments. E.g. <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>. The sub-types of a meta-type can be enumerated by defining a clause for the <code class="docutils literal notranslate"><span class="pre">meta_type/3</span></code> multifile predicate.</p></li>
 <li><p>Character sets: When testing character or character code based terms (e.g. atom), it is possible to choose a character set (<code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, or <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>) using the parameterizable types.</p></li>
 <li><p>Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.</p></li>
 </ul>
