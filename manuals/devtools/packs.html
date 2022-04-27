@@ -742,8 +742,9 @@ example:</p>
 ...
 </pre></div>
 </div>
-<p>The pack API documentation can be generated using the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool.
-For example:</p>
+<p>The pack API documentation can be generated using the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool
+library and directory predicates (depending on the pack source files
+organization). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>lflat(loader)<span class="k">}</span>,
      <span class="k">{</span>lgtdoc(loader)<span class="k">}</span>,
      logtalk<span class="o">::</span>expand_library_path(lflat, <span class="nv">Path</span>),
@@ -753,13 +754,19 @@ For example:</p>
 </div>
 <p>This query creates a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code> directory in the current directory.
 The XML documentation files can then be converted into a final format,
-e.g. HTML, using on the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool provided scripts. For example:</p>
+e.g. HTML, using one of the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool provided scripts. For
+example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
 $ lgt2html
 </pre></div>
 </div>
 <p>For more details and alternatives, see the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool
 documentation.</p>
+<p>It is also possible to add API documentation and diagrams for all the
+installed packs to the Logtalk distribution API documentation and
+diagrams by calling the <code class="docutils literal notranslate"><span class="pre">update_html_docs</span></code> and <code class="docutils literal notranslate"><span class="pre">update_svg_diagrams</span></code>
+scripts with the <code class="docutils literal notranslate"><span class="pre">-i</span></code> option. See the scripts documentation for
+details.</p>
 </section>
 <section id="pinning-registries-and-packs">
 <h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Permalink to this headline"></a></h2>

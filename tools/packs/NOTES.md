@@ -652,8 +652,9 @@ can be printed by using the `describe/1-2` predicates. For example:
 	% Versions:
 	...
 
-The pack API documentation can be generated using the `lgtdoc` tool. For
-example:
+The pack API documentation can be generated using the `lgtdoc` tool library
+and directory predicates (depending on the pack source files organization).
+For example:
 
 	| ?- {lflat(loader)},
 	     {lgtdoc(loader)},
@@ -663,13 +664,17 @@ example:
 
 This query creates a `xml_docs` directory in the current directory. The XML
 documentation files can then be converted into a final format, e.g. HTML,
-using on the `lgtdoc` tool provided scripts. For example:
+using one of the `lgtdoc` tool provided scripts. For example:
 
 	$ cd xml_docs
 	$ lgt2html
 
 For more details and alternatives, see the `lgtdoc` tool documentation.
 
+It is also possible to add API documentation and diagrams for all the installed
+packs to the Logtalk distribution API documentation and diagrams by calling
+the `update_html_docs` and `update_svg_diagrams` scripts with the `-i` option.
+See the scripts documentation for details.
 
 Pinning registries and packs
 ----------------------------
