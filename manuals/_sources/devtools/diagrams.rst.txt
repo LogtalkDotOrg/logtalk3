@@ -29,9 +29,9 @@ All diagrams support a comprehensive set of options, discussed below, to
 customize the final contents and appearance.
 
 Diagram generation can be easily automated using the ``doclet`` tool and
-the ``logtalk_doclet`` script. See the ``doclet`` tool examples and
-documentation for details. See also the ``diagrams`` tool ``lgt2svg``
-script.
+the ``logtalk_doclet`` scripts. See the ``doclet`` tool examples and
+documentation for details. See also the ``diagrams`` tool own
+``lgt2svg`` Bash and PowerShell scripts.
 
 API documentation
 -----------------
@@ -250,8 +250,8 @@ API documentation. See the relevant diagram options below in order to
 take advantage of these features (see the discussion below on "linking
 diagrams").
 
-Sample helper scripts are provided for converting ``.dot`` files to
-``.svg`` files:
+Sample helper scripts are provided for batch converting a directory of
+``.dot`` files to ``.svg`` files:
 
 -  ``lgt2svg.sh`` for POSIX systems
 -  ``lgt2svg.ps1`` for Windows systems

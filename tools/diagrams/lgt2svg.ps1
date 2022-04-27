@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on April 19, 2022
+##   Last updated on April 27, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.8")
+	Write-Output ($myName + " 0.9")
 }
 
 function Get-Logtalkhome {
@@ -161,7 +161,7 @@ if ($count -gt 0) {
 	Foreach-Object {
 		Write-Host -NoNewline ("  converting " + $_.Name)
 		$converted = 1
-		$counter = 16
+		$counter = 24
 		While (($converted -eq 1) -and ($counter -gt 0)) {
 			if ($a -ne "") {
 				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $a) $_.Name
