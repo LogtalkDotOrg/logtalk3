@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 26, 2022
+##   Last updated on April 27, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ param(
 	[String]$g = "true",
 	[String]$r,
 	[Switch]$w,
-	[String]$a,
+	[String[]]$a,
 	[Switch]$v,
 	[Switch]$h
 )
