@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-04-13,
+		date is 2022-04-27,
 		comment is 'Unit tests for the ISO Prolog standard set_prolog_flag/2 built-in predicate.'
 	]).
 
@@ -93,5 +93,14 @@
 
 	test(lgt_set_prolog_flag_2_16, error(_), [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
 		{set_prolog_flag(occurs_check, error), X = f(X)}.
+
+	test(lgt_set_prolog_flag_2_17, false, [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
+		{set_prolog_flag(occurs_check, true), unify_with_occurs_check(X, f(X))}.
+
+	test(lgt_set_prolog_flag_2_18, false, [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
+		{set_prolog_flag(occurs_check, false), unify_with_occurs_check(X, f(X))}.
+
+	test(lgt_set_prolog_flag_2_19, false, [condition(catch(current_prolog_flag(occurs_check,_),_,fail))]) :-
+		{set_prolog_flag(occurs_check, error), unify_with_occurs_check(X, f(X))}.
 
 :- end_object.
