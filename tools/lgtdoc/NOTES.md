@@ -28,12 +28,12 @@ a library or directory of source files, or all loaded source files. The tool
 predicates accept several options for generating the XML files, including
 the output directory.
 
-The `lgtdoc/xml` directory contains several ready to use scripts for converting
-the XML documenting files into final formats including (X)HTML, PDF, Markdown,
-and reStructuredText (for use with Sphinx), or plain text files. The scripts are
-described in their `man` pages and made available in the system path by default.
-See also the `lgtdoc/xml/NOTES.md` for details, including **required third-party
-software**.
+The `lgtdoc/xml` directory contains several ready to use Bash and PowerShell
+scripts for converting the XML documenting files into final formats including
+(X)HTML, PDF, Markdown, and reStructuredText (for use with Sphinx), or plain
+text files. The scripts are described in their `man` pages and made available
+in the system path by default. See also the `lgtdoc/xml/NOTES.md` for details,
+including the **required third-party software**.
 
 
 API documentation
