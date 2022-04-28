@@ -492,7 +492,7 @@ usually by ``...``. For example:
 The default maximum depth depends on the backend. To print compound
 terms without a depth limit, set it explicitly to zero if necessary.
 
-.. _debugging_term_write_depth:
+.. _debugging_custom_term_writing:
 
 Custom term writing
 ~~~~~~~~~~~~~~~~~~~
