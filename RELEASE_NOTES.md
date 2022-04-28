@@ -121,6 +121,8 @@ arithmetic functions.
 * ADDED: Additional tests for the Prolog standard `retract/1`, `retractall/1`,
 `subsumes_term/2`, and `write_term/3` predicates.
 
+* ADDED: Additional test for the de facto standard `(*->)/2` control construct.
+
 * IMPROVED: Tests for the Prolog standard `(//)/2` arithmetic function.
 
 * FIXED: Portability of the Prolog de facto standard `(*->)/2` control
