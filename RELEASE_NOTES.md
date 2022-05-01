@@ -25,7 +25,11 @@ RELEASE NOTES
 3.56.0 - May ??, 2022
 =====================
 
+Prolog adapter and integration files
+------------------------------------
 
+* ADDED: Experimental Scryer Prolog adapter file support for compiling Prolog
+modules as objects.
 
 
 3.55.0 - April 28, 2022

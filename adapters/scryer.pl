@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog 0.9.0 and later versions
-%  Last updated on April 24, 2022
+%  Last updated on May 1, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -578,8 +578,41 @@
 
 % '$lgt_prolog_term_expansion'(@callable, -callable)
 
-'$lgt_prolog_term_expansion'(_, _) :-
-	fail.
+'$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
+	nonvar(Directive),
+	% allow first-argument indexing
+	catch('$lgt_scryer_directive_expansion'(Directive, Expanded), _, fail).
+
+
+'$lgt_scryer_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
+	File \= [_| _],
+	% not the Logtalk use_module/1 directive
+	logtalk_load_context(entity_type, module),
+	% we're compiling a module as an object; assume referenced modules are also compiled as objects
+	!,
+	logtalk_load_context(directory, Directory),
+	'$lgt_scryer_list_of_exports'(File, Directory, Module, Imports).
+
+'$lgt_scryer_directive_expansion'(use_module(File), [{:- use_module(File)}, (:- use_module(Module, Imports))]) :-
+	File \= [_| _],
+	% not the Logtalk use_module/1 directive
+	logtalk_load_context(entity_type, _),
+	% object or category using a Prolog module
+	logtalk_load_context(directory, Directory),
+	'$lgt_scryer_list_of_exports'(File, Directory, Module, Imports),
+	use_module(File).
+
+
+'$lgt_scryer_list_of_exports'(Name, _Directory, Module, Exports) :-
+	(	atom_concat(Name, '.pl', File),
+		'$lgt_expand_path'(File, Path)
+	;	% we may be compiling Prolog module files as Logtalk objects
+		atom_concat(Name, '.lgt', File),
+		'$lgt_expand_path'(File, Path)
+	),
+	'$lgt_file_exists'(Path),
+	setup_call_cleanup(open(Path, read, In), read(In, ModuleDecl), close(In)),
+	ModuleDecl = (:- module(Module, Exports)).
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
