@@ -21,6 +21,8 @@
 
 :- if(current_logtalk_flag(prolog_dialect, eclipse)).
 	:- ensure_loaded('module.ecl').
+:- elif(current_logtalk_flag(prolog_dialect, scryer)).
+	:- use_module(module).
 :- elif(current_logtalk_flag(prolog_dialect, tau)).
 	:- use_module(module).
 :- elif(current_logtalk_flag(modules, supported)).
