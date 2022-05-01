@@ -19,9 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_logtalk_flag(modules, supported), \+ current_logtalk_flag(prolog_dialect, eclipse))).
+:- if((
+	current_logtalk_flag(modules, supported),
+	\+ current_logtalk_flag(prolog_dialect, eclipse)
+)).
 
-	:- if((current_logtalk_flag(prolog_dialect, tau); current_logtalk_flag(prolog_dialect, trealla))).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == tau; Dialect == trealla; Dialect == scryer)
+	)).
 		:- use_module(data1).
 		:- use_module(data2).
 	:- else.

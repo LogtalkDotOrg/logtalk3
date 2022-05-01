@@ -31,6 +31,11 @@ Prolog adapter and integration files
 * ADDED: Experimental Scryer Prolog adapter file support for compiling Prolog
 modules as objects.
 
+Examples
+--------
+
+* FIXED: The `module_aliases` example when using the Scryer Prolog backend.
+
 
 3.55.0 - April 28, 2022
 =======================
