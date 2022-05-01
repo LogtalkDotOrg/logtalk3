@@ -34,6 +34,9 @@ modules as objects.
 Examples
 --------
 
+* FIXED: The `bench` example to only load the `boyer` and `chat_parser`
+benchmarks when the backend provides `statistics/2` as a built-in predicate.
+
 * FIXED: The `module_aliases` example when using the Scryer Prolog backend.
 
 

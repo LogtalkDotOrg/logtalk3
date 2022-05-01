@@ -23,19 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2020-12-21,
+		date is 2022-05-01,
 		comment is 'Unit tests for the "bench" example.'
 	]).
 
-	test(boyer_01, true) :-
+	test(boyer_01, true, [condition(predicate_property(statistics(_,_), built_in))]) :-
 		boyer::top.
 
 	test(browse_01, true, [condition(predicate_property(length(_,_), built_in))]) :-
 		browse::top.
 
-	test(chat_parser_01, true) :-
+	test(chat_parser_01, true, [condition(predicate_property(statistics(_,_), built_in))]) :-
 		chat_parser::top.
 
 	test(crypt_01, true) :-
