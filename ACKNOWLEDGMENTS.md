@@ -49,6 +49,7 @@ CONTRIBUTORS
 * François Fages (meta-predicate safety bug reports)
 * Günter Kniesel (PDT support for Logtalk, feedback on Logtalk OOP features)
 * Gopal Gupta (coinduction examples)
+* Hans N. Beck (integrations and embedding PowerShell scripts)
 * Ivan Bratko (search methods in the state-space searching example)
 * Jacinto Dávila (CSV library, bug reports)
 * Jan Burse (unit tests patches and feedback)
