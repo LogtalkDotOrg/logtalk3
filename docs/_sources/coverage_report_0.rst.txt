@@ -11,8 +11,8 @@
 Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2021-04-10
+| **Version:** 3:0:0
+| **Date:** 2022-05-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,6 +56,22 @@ Private predicates
 
 ``timestamp_/6``
 ^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. raw:: html
+
+   <div id="object_file_/2"> </div>
+
+.. index:: object_file_/2
+.. _coverage_report/0::object_file_/2:
+
+``object_file_/2``
+^^^^^^^^^^^^^^^^^^
 
 | **Compilation flags:**
 |    ``dynamic``

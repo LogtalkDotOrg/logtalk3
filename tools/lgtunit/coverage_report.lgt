@@ -33,19 +33,24 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 2:0:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-04-10,
+		date is 2022-05-02,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
 		]
 	]).
 
-	% the timestamp message is printed before the message that prints
-	% the testsuite file that we require to create the XML report
+	% the timestamp message is printed before the message that provides
+	% the report directory that we may require to create the XML report
 	:- private(timestamp_/6).
 	:- dynamic(timestamp_/6).
+
+	% a parametric test object may be used; record it so that all
+	% its parameterizations can be reported
+	:- private(object_file_/2).
+	:- dynamic(object_file_/2).
 
 	% intercept all messages from the "lgtunit" object while running tests
 
@@ -59,20 +64,26 @@
 		% allow default processing of the messages
 		fail.
 
+	% start
+	message_hook(tests_started) :-
+		retractall(timestamp_(_, _, _, _, _, _)),
+		retractall(object_file_(_, _)).
+
 	% timestamp
 	message_hook(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)) :-
 		!,
-		retractall(timestamp_(_, _, _, _, _, _)),
 		assertz(timestamp_(Year, Month, Day, Hours, Minutes, Seconds)).
 
 	% start
-	message_hook(running_tests_from_object_file(_, _)) :-
+	message_hook(running_tests_from_object_file(Object, File)) :-
 		stream_property(_, alias(coverage_report)),
 		% assume output stream already created, typically as a
 		% consequence of using a parametric test object to test
 		% multiple implementations of the same protocol
+		assertz(object_file_(Object, File)),
 		!.
 	message_hook(running_tests_from_object_file(Object, File)) :-
+		assertz(object_file_(Object, File)),
 		(	% bypass the compiler as the flag is only created after loading this file
 			{current_logtalk_flag(tests_report_directory, Directory)}, Directory \== '' ->
 			true
@@ -84,15 +95,6 @@
 		write(coverage_report, '<!DOCTYPE cover SYSTEM "coverage_report.dtd">'), nl(coverage_report),
 		write(coverage_report, '<?xml-stylesheet type="text/xsl" href="coverage_report.xsl"?>'), nl(coverage_report),
 		write_xml_open_tag(cover),
-		% bypass the compiler as the flag is only created after loading this file
-		{current_logtalk_flag(suppress_path_prefix, Prefix)},
-		(	atom_concat(Prefix, Suffix, File) ->
-			write_xml_element(testsuite, Suffix)
-		;	write_xml_element(testsuite, File)
-		),
-		copy_term(Object, Copy),
-		numbervars(Copy, 0, _),
-		write_xml_element(object, Copy),
 		timestamp_(Year, Month, Day, Hours, Minutes, Seconds),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp),
 		write_xml_element(timestamp, TimeStamp),
@@ -155,6 +157,26 @@
 
 	% stop
 	message_hook(tests_ended) :-
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		write_xml_open_tag(testsets),
+		forall(
+			object_file_(Object, File),
+			(	write_xml_open_tag(testset),
+				write_xml_element(object, Object),
+				(	atom_concat(Prefix, Suffix, File) ->
+					write_xml_element(file, Suffix)
+				;	write_xml_element(file, File)
+				),
+				(	object_property(Object, lines(Line, _)) ->
+					true
+				;	Line = -1
+				),
+				write_xml_element(line, Line),
+				write_xml_close_tag(testset)
+			)
+		),
+		write_xml_close_tag(testsets),
 		write_xml_close_tag(cover),
 		close(coverage_report).
 

@@ -31,6 +31,12 @@ Prolog adapter and integration files
 * ADDED: Experimental Scryer Prolog adapter file support for compiling Prolog
 modules as objects.
 
+Tools
+-----
+
+* CHANGED: The `lgtunit` tool code coverage report format to enable reporting
+all test object parameterizations and files.
+
 Examples
 --------
 

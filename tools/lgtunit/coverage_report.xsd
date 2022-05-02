@@ -34,8 +34,6 @@
 
 <xsd:complexType name="cover">
 	<xsd:sequence>
-		<xsd:element name="testsuite"			type="xsd:string"/>
-		<xsd:element name="object"				type="xsd:string"/>
 		<xsd:element name="timestamp"			type="xsd:string"/>
 		<xsd:element name="entities"			type="entities"/>
 		<xsd:element name="entities_covered"	type="xsd:nonNegativeInteger"/>
@@ -44,6 +42,7 @@
 		<xsd:element name="clauses_covered"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="clauses_total"		type="xsd:nonNegativeInteger"/>
 		<xsd:element name="clauses_percentage"	type="xsd:decimal"/>
+		<xsd:element name="testsets"			type="testsets"/>
 	</xsd:sequence>
 </xsd:complexType>
 
@@ -85,6 +84,20 @@
 <xsd:complexType name="clauses">
 	<xsd:sequence>
 		<xsd:element name="clause"	type="xsd:nonNegativeInteger"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="testsets">
+	<xsd:sequence>
+		<xsd:element name="testset"	type="testset"	minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="testset">
+	<xsd:sequence>
+		<xsd:element name="object"		type="xsd:string"/>
+		<xsd:element name="file"		type="xsd:string"/>
+		<xsd:element name="line"		type="xsd:integer"/>
 	</xsd:sequence>
 </xsd:complexType>
 

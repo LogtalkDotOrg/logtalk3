@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing code coverage report XML files in a browser
-%  Last updated on October 25, 2019
+%  Last updated on May 2, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -50,7 +50,7 @@
 	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><xsl:value-of select="cover/testsuite" /></title>
+		<title>Logtalk Code Coverage Report</title>
 		<style type="text/css">
 			.percentage_bar {background-color: #ff4500; position: relative; font-size: small; width: 100%}
 			.percentage_bar div {height: 20px; line-height: 20px;}
@@ -67,10 +67,6 @@
 	</head>
 	<body>
 		<h1>Logtalk Code Coverage Report</h1>
-		<p>
-			<strong>Test suite file: </strong> <code><xsl:value-of select="substring-after(cover/testsuite, $prefix)" /></code><br />
-			<strong>Test suite object: </strong> <code><xsl:value-of select="cover/object" /></code>
-		</p>
 		<p>
 			<strong>Generated on: </strong> <code><xsl:value-of select="cover/timestamp" /></code>
 		</p>
@@ -105,6 +101,9 @@
 
 		<h2>Covered Entities</h2>
 		<xsl:apply-templates select="cover/entities" />
+
+		<h2>Test Sets</h2>
+		<xsl:apply-templates select="cover/testsets" />
 
 	</body>
 	</html>
@@ -192,6 +191,40 @@
 		<!-- assume GitHub or GitLab line reference syntax -->
 		<xsl:otherwise>
 			<code><a href="{$url}/{$file}#L{$line}"><xsl:value-of select="$name" /></a></code>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="cover/testsets">
+	<xsl:choose>
+		<xsl:when test="testset">
+			<table style="width:100%;">
+				<tr>
+					<th style="width:50%;">Object</th>
+					<th style="width:50%;">File</th>
+				</tr>
+				<xsl:for-each select="testset">
+					<tr>
+						<td style="width:50%;">
+							<xsl:call-template name="link">
+								<xsl:with-param name="file" select="substring-after(file, $prefix)"/>
+								<xsl:with-param name="line" select="line"/>
+								<xsl:with-param name="name" select="object"/>
+							</xsl:call-template>
+						</td>
+						<td style="width:50%;">
+						<xsl:call-template name="link">
+							<xsl:with-param name="file" select="substring-after(file, $prefix)"/>
+							<xsl:with-param name="line" select="'1'"/>
+							<xsl:with-param name="name" select="substring-after(file, $prefix)"/>
+						</xsl:call-template>
+						</td>
+					</tr>
+				</xsl:for-each>
+			</table>
+		</xsl:when>
+		<xsl:otherwise>
+			<h4>(no test sets)</h4>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>

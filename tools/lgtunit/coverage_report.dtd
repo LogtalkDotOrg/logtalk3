@@ -21,23 +21,13 @@
 -->
 
 
-<!ELEMENT cover (testsuite, object, timestamp, entities, entities_covered, entities_total, entities_percentage, clauses_covered, clauses_total, clauses_percentage)>
+<!ELEMENT cover (timestamp, entities, entities_covered, entities_total, entities_percentage, clauses_covered, clauses_total, clauses_percentage, testsets)>
 
-
-<!ELEMENT testsuite (#PCDATA)>
-
-<!ELEMENT object (#PCDATA)>
 
 <!ELEMENT timestamp (#PCDATA)>
 
-<!ELEMENT covered (#PCDATA)>
-
-<!ELEMENT total (#PCDATA)>
-
-<!ELEMENT percentage (#PCDATA)>
 
 <!ELEMENT entities (entity*)>
-
 
 <!ELEMENT entity (name, predicates, covered, total, percentage, file, line)>
 
@@ -53,3 +43,23 @@
 <!ELEMENT predicate (name, clauses, covered, total, percentage, line)>
 
 <!ELEMENT clauses (#PCDATA)>
+
+
+<!ELEMENT entities_covered (#PCDATA)>
+
+<!ELEMENT entities_total (#PCDATA)>
+
+<!ELEMENT entities_percentage (#PCDATA)>
+
+<!ELEMENT clauses_covered (#PCDATA)>
+
+<!ELEMENT clauses_total (#PCDATA)>
+
+<!ELEMENT clauses_percentage (#PCDATA)>
+
+
+<!ELEMENT testsets (testset*)>
+
+<!ELEMENT testset (object, file, line)>
+
+<!ELEMENT object (#PCDATA)>
