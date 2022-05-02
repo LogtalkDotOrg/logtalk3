@@ -46,6 +46,16 @@ benchmarks when the backend provides `statistics/2` as a built-in predicate.
 * FIXED: The `benchmarks` and `module_aliases` examples when using the Scryer
 Prolog backend.
 
+Tests
+-----
+
+* FIXED: Tests for the Logtalk `{}/1` control construct when the expected
+error may contain a module-qualified term.
+
+* FIXED: Tests for the Prolog `call/1`, `call/2-N`, `catch/3`, `findall/4`,
+and `once/1` control constructs and predicates when the expected error may
+contain a module-qualified term.
+
 
 3.55.0 - April 28, 2022
 =======================

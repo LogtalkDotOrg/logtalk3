@@ -31,9 +31,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2021-09-23,
+		date is 2022-05-02,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -70,7 +70,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _)}.
 
-	test(lgt_call_N_10, error(type_error(callable,3))) :-
+	test(lgt_call_N_10, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _)}.
@@ -80,7 +80,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _, _)}.
 
-	test(lgt_call_N_12, error(type_error(callable,3))) :-
+	test(lgt_call_N_12, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _)}.
@@ -90,7 +90,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _, _, _)}.
 
-	test(lgt_call_N_14, error(type_error(callable,3))) :-
+	test(lgt_call_N_14, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _)}.
@@ -100,7 +100,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _, _, _, _)}.
 
-	test(lgt_call_N_16, error(type_error(callable,3))) :-
+	test(lgt_call_N_16, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _)}.
@@ -110,7 +110,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _, _, _, _, _)}.
 
-	test(lgt_call_N_18, error(type_error(callable,3))) :-
+	test(lgt_call_N_18, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _, _)}.
@@ -120,7 +120,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _, _, _, _, _, _)}.
 
-	test(lgt_call_N_20, error(type_error(callable,3))) :-
+	test(lgt_call_N_20, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _, _, _)}.
@@ -130,7 +130,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		variable(X),
 		{call(X, _, _, _, _, _, _, _)}.
 
-	test(lgt_call_N_22, error(type_error(callable,3))) :-
+	test(lgt_call_N_22, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(Three),
 		{call(Three, _, _, _, _, _, _, _)}.

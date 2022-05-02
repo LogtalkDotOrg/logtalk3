@@ -50,9 +50,9 @@ q :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Paulo Moura',
-		date is 2022-01-27,
+		date is 2022-05-02,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -92,7 +92,7 @@ q :-
 	test(lgt_catch_3_09, subsumes(error(instantiation_error,_), Y)) :-
 		{catch(_, Y, true)}.
 
-	test(lgt_catch_3_10, subsumes(error(type_error(callable,1),_), Y)) :-
+	test(lgt_catch_3_10, true((subsumes_term(error(type_error(callable,1),_), Y); subsumes_term(error(type_error(callable,':'(user,1)),_), Y)))) :-
 		% try to delay the error to runtime
 		one(One),
 		{catch(One, Y, true)}.

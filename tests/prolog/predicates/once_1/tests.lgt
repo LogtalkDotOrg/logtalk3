@@ -23,25 +23,24 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2016-05-14,
+		date is 2022-05-02,
 		comment is 'Unit tests for the ISO Prolog standard once/1 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.15.2.4
 
-	succeeds(iso_once_1_01) :-
+	test(iso_once_1_01, true) :-
 		{once(!)}.
 
-	succeeds(iso_once_1_02) :-
-		findall(X, {once(!), (X=1; X=2)}, L),
-		L == [1, 2].
+	test(iso_once_1_02, true(L == [1, 2])) :-
+		findall(X, {once(!), (X=1; X=2)}, L).
 
-	succeeds(iso_once_1_03) :-
+	test(iso_once_1_03, deterministic) :-
 		{once(repeat)}.
 
-	fails(iso_once_1_04) :-
+	test(iso_once_1_04, false) :-
 		{once(fail)}.
 
 	:- if((
@@ -49,22 +48,22 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_once_1_05) :-
+		test(iso_once_1_05, true) :-
 			{once((X = f(X)))}.
 	:- else.
-		- succeeds(iso_once_1_05) :-
+		- test(iso_once_1_05, true) :-
 			% STO; Undefined
 			{once((X = f(X)))}.
 	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_once_1_06, error(type_error(callable,3),_)) :-
+	test(eddbali_once_1_06, errors([type_error(callable,3), type_error(callable,':'(user,3))])) :-
 		% try to delay the error to runtime
 		three(G),
 		{once(G)}.
 
-	throws(eddbali_once_1_07, error(instantiation_error,_)) :-
+	test(eddbali_once_1_07, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(X),
 		{once(X)}.

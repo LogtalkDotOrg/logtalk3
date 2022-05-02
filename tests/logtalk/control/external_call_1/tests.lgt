@@ -68,16 +68,16 @@ nop.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2021-05-11,
+		date is 2022-05-02,
 		comment is 'Unit tests for the {}/1 built-in control construct.'
 	]).
 
 	test(external_call_1_01, error(instantiation_error)) :-
 		external_call_test_object::p(_).
 
-	test(external_call_1_02, error(type_error(callable,1))) :-
+	test(external_call_1_02, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
 		external_call_test_object::p(1).
 
 	test(external_call_1_03, error(existence_error(predicate_declaration,atom_concat/3))) :-

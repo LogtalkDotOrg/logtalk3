@@ -42,9 +42,9 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2021-09-23,
+		date is 2022-05-02,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
@@ -82,7 +82,7 @@ a(2).
 		^^suppress_text_output,
 		{call((write(3), _X))}.
 
-	test(iso_call_1_10, error(type_error(callable,1))) :-
+	test(iso_call_1_10, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
 		^^suppress_text_output,
 		X = 1,
 		{call((write(3), call(X)))}.
@@ -90,7 +90,7 @@ a(2).
 	test(iso_call_1_11, error(instantiation_error)) :-
 		{call(_X)}.
 
-	test(iso_call_1_12, error(type_error(callable,1))) :-
+	test(iso_call_1_12, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
 		X = 1,
 		{call(X)}.
 

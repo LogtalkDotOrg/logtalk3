@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2021-05-12,
+		date is 2022-05-02,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
@@ -56,7 +56,7 @@
 	test(commons_findall_4_08, error(instantiation_error)) :-
 		{findall(_X, _Goal, _S, _T)}.
 
-	test(commons_findall_4_09, error(type_error(callable,4))) :-
+	test(commons_findall_4_09, errors([type_error(callable,4), type_error(callable,':'(user,4))])) :-
 		% try to delay the error to runtime
 		four(Four),
 		{findall(_X, Four, _S, _T)}.
