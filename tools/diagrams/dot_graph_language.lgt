@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:7:0,
+		version is 3:8:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2022-05-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -315,14 +315,19 @@
 		write(Stream, '<BR/>'),
 		write_edge_lines(Lines, Next, Stream).
 
-	% CDATA tags are not officially supported in dot as of version 2.38
-	% and are broken as they don't escape problematic characters; we try
-	% to workaround the problem by manually escaping characters but the
-	% chosen solution requires writing a term to a list of characters,
+	% CDATA tags are not officially supported in dot as of version 2.38 and
+	% are broken as they don't escape problematic characters; we try to
+	% workaround the problem by manually escaping characters but the chosen
+	% solution requires writing a non-atomic term to a list of characters,
 	% which uses a slow but portable implementation as this is a non-standard
 	% functionality that only some backend systems provide in a usable form
 	write_escaped_term(Stream, Term) :-
-		write_to_chars(Term, Chars),
+		(	atom(Term) ->
+			atom_chars(Term, Chars)
+		;	number(Term) ->
+			number_chars(Term, Chars)
+		;	write_to_chars(Term, Chars)
+		),
 		write_escaped_chars(Chars, Stream).
 
 	write_escaped_chars([], _).

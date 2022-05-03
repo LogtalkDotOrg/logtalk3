@@ -37,6 +37,8 @@ Tools
 * CHANGED: The `lgtunit` tool code coverage report format to enable reporting
 all test object parameterizations and files.
 
+* IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
+
 Examples
 --------
 
