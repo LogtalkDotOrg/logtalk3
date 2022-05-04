@@ -31,6 +31,12 @@ Prolog adapter and integration files
 * ADDED: Experimental Scryer Prolog adapter file support for compiling Prolog
 modules as objects.
 
+Library
+-------
+
+* FIXED: Typos in the `mode/2` directives for the `os` library `file_size/2`
+and `file_modification_time/2` predicates.
+
 Tools
 -----
 

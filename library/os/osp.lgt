@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:32:0,
+		version is 1:32:1,
 		author is 'Paulo Moura',
-		date is 2021-11-30,
+		date is 2022-05-04,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -189,14 +189,14 @@
 	]).
 
 	:- public(file_modification_time/2).
-	:- mode(file_modification_time(+atom, -integer), zero_or_one).
+	:- mode(file_modification_time(+atom, -integer), one_or_error).
 	:- info(file_modification_time/2, [
 		comment is 'File modification time (which can be used for comparison). Throws an error if the file does not exist.',
 		argnames is ['File', 'Time']
 	]).
 
 	:- public(file_size/2).
-	:- mode(file_size(+atom, -integer), zero_or_one).
+	:- mode(file_size(+atom, -integer), one_or_error).
 	:- info(file_size/2, [
 		comment is 'File size (in bytes). Throws an error if the file does not exist.',
 		argnames is ['File', 'Size']

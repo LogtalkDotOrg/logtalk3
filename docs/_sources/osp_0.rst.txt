@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:32:0
-| **Date:** 2021-11-30
+| **Version:** 1:32:1
+| **Date:** 2022-05-04
 
 | **Compilation flags:**
 |    ``static``
@@ -547,7 +547,7 @@ File modification time (which can be used for comparison). Throws an error if th
 | **Template:**
 |    ``file_modification_time(File,Time)``
 | **Mode and number of proofs:**
-|    ``file_modification_time(+atom,-integer)`` - ``zero_or_one``
+|    ``file_modification_time(+atom,-integer)`` - ``one_or_error``
 
 
 ------------
@@ -570,7 +570,7 @@ File size (in bytes). Throws an error if the file does not exist.
 | **Template:**
 |    ``file_size(File,Size)``
 | **Mode and number of proofs:**
-|    ``file_size(+atom,-integer)`` - ``zero_or_one``
+|    ``file_size(+atom,-integer)`` - ``one_or_error``
 
 
 ------------
