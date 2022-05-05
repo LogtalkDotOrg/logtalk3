@@ -11,8 +11,8 @@
 Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.
 
 | **Author:** Paulo Moura and Paul Fodor
-| **Version:** 2:11:0
-| **Date:** 2021-04-12
+| **Version:** 2:11:1
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -71,9 +71,13 @@ Preorder tree traversal.
 ``inorder/2``
 ^^^^^^^^^^^^^
 
+Inorder tree traversal.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``inorder(Tree,List)``
 | **Mode and number of proofs:**
 |    ``inorder(@tree,-list)`` - ``one``
 
@@ -90,9 +94,13 @@ Preorder tree traversal.
 ``postorder/2``
 ^^^^^^^^^^^^^^^
 
+Postorder tree traversal.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``postorder(Tree,List)``
 | **Mode and number of proofs:**
 |    ``postorder(@tree,-list)`` - ``one``
 

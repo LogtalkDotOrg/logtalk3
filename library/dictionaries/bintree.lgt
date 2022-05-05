@@ -24,9 +24,9 @@
 	extends(term)).
 
 	:- info([
-		version is 2:11:0,
+		version is 2:11:1,
 		author is 'Paulo Moura and Paul Fodor',
-		date is 2021-04-12,
+		date is 2022-05-05,
 		comment is 'Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, rbtree]
 	]).
@@ -40,14 +40,14 @@
 
 	:- public(inorder/2).
 	:- mode(inorder(@tree, -list), one).
-	:- info(preorder/2, [
+	:- info(inorder/2, [
 		comment is 'Inorder tree traversal.',
 		argnames is ['Tree', 'List']
 	]).
 
 	:- public(postorder/2).
 	:- mode(postorder(@tree, -list), one).
-	:- info(preorder/2, [
+	:- info(postorder/2, [
 		comment is 'Postorder tree traversal.',
 		argnames is ['Tree', 'List']
 	]).
