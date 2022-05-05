@@ -232,6 +232,11 @@ for the tests should go to separate files. In general, the tests
 themselves can be compiled in <em>optimized</em> mode. Assuming that’s the
 case, also use the <code class="docutils literal notranslate"><span class="pre">optimize(on)</span></code> compiler option for faster tests
 execution.</p>
+<p>The term-expansion performed by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object sets the test
+object <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag to <code class="docutils literal notranslate"><span class="pre">on</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code> flag to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for code coverage and
+debugging support. But these settings can always be overriden in the
+test objects.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
 exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
 under testing, the unit tests, and for automatically run all the tests

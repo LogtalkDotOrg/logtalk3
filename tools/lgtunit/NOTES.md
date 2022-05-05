@@ -106,6 +106,11 @@ separate files. In general, the tests themselves can be compiled in *optimized*
 mode. Assuming that's the case, also use the `optimize(on)` compiler option for
 faster tests execution.
 
+The term-expansion performed by the `lgtunit` object sets the test object
+`source_data` flag to `on` and the `context_switching_calls` flag to `allow`
+for code coverage and debugging support. But these settings can always be
+overriden in the test objects.
+
 The `tester-sample.lgt` file (at the root of the Logtalk distribution)
 exemplifies how to compile and load `lgtunit` tool, the source code under
 testing, the unit tests, and for automatically run all the tests after loading:
