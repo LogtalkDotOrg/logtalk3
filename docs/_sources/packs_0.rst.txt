@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:48:0
-| **Date:** 2022-02-26
+| **Version:** 0:48:1
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -694,6 +694,9 @@ Saves a list of all installed packs and registries plus pinning status to a file
 
 | **Template:**
 |    ``save(File,Options)``
+| **Mode and number of proofs:**
+|    ``save(+atom,++list(compound))`` - ``one``
+
 
 ------------
 
@@ -715,7 +718,6 @@ Saves a list of all installed packs and their registries plus pinning status to 
 | **Template:**
 |    ``save(File)``
 | **Mode and number of proofs:**
-|    ``save(+atom)`` - ``one``
 |    ``save(+atom)`` - ``one``
 
 

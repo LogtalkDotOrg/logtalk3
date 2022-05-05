@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:48:0,
+		version is 0:48:1,
 		author is 'Paulo Moura',
-		date is 2022-02-26,
+		date is 2022-05-05,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -237,7 +237,7 @@
 	]).
 
 	:- public(save/2).
-	:- mode(save(+atom), one).
+	:- mode(save(+atom, ++list(compound)), one).
 	:- info(save/2, [
 		comment is 'Saves a list of all installed packs and registries plus pinning status to a file. Registries without installed packs are saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).',
 		argnames is ['File', 'Options']
