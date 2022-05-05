@@ -125,3 +125,11 @@ a *doclet* to automate all the steps required to generate documentation.
 The *doclet* message that triggers the process can also be sent
 automatically when the ``make`` tool is used with the ``documentation``
 target.
+
+Documentation linter checks
+---------------------------
+
+When the ``missing_directives`` flag is set to ``warning`` (its usual
+default value), the ``lgtdoc`` tool prints warnings on missing entity
+``info/1`` directives and missing predicate ``info/2`` and ``mode/2``
+directives.

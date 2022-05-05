@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 6:4:0,
+		version is 6:5:0,
 		author is 'Paulo Moura',
-		date is 2022-04-15,
+		date is 2022-05-05,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -64,6 +64,10 @@
 
 	:- uses(list, [
 		member/2, memberchk/2, sort/4
+	]).
+
+	:- uses(logtalk, [
+		print_message/3
 	]).
 
 	:- uses(type, [
@@ -421,6 +425,8 @@
 		write_xml_element(Stream, compilation, [], Compilation),
 		(	entity_property(Entity, info(Info)) ->
 			write_xml_entity_info(Stream, Info)
+		;	current_logtalk_flag(missing_directives, warning) ->
+			print_message(warning, lgtdoc, 'Missing info/1 directive for ~w: ~q'+[Type, Entity])
 		;	true
 		),
 		write_xml_close_tag(Stream, entity).
@@ -904,8 +910,15 @@
 				write_xml_close_tag(Stream, (mode))
 			)
 		),
+		(	\+ member(mode(_, _), Properties),
+			current_logtalk_flag(missing_directives, warning) ->
+			print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q predicate: ~q'+[Entity, Name])
+		;	true
+		),
 		(	member(info(Info), Properties) ->
 			write_xml_predicate_info(Stream, Entity, Functor, Arity, Info)
+		;	current_logtalk_flag(missing_directives, warning) ->
+			print_message(warning, lgtdoc, 'Missing info/2 directive for ~q predicate: ~q'+[Entity, Name])
 		;	true
 		),
 		write_xml_close_tag(Stream, predicate).

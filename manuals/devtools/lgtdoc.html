@@ -78,6 +78,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#documenting-source-code">Documenting source code</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-documentation">Generating documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-linter-checks">Documentation linter checks</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html"><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code></a></li>
@@ -230,6 +231,13 @@ a <em>doclet</em> to automate all the steps required to generate documentation.
 The <em>doclet</em> message that triggers the process can also be sent
 automatically when the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool is used with the <code class="docutils literal notranslate"><span class="pre">documentation</span></code>
 target.</p>
+</section>
+<section id="documentation-linter-checks">
+<h2>Documentation linter checks<a class="headerlink" href="#documentation-linter-checks" title="Permalink to this headline"></a></h2>
+<p>When the <code class="docutils literal notranslate"><span class="pre">missing_directives</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its usual
+default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on missing entity
+<code class="docutils literal notranslate"><span class="pre">info/1</span></code> directives and missing predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code>
+directives.</p>
 </section>
 </section>
 
