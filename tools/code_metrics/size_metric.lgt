@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2019-09-23,
+		date is 2022-05-05,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
 	]).
 
@@ -129,7 +129,7 @@
 		all_score(TotalSize),
 		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
 
-	entity_score(_Entity, Size) -->
+	format_entity_score(_Entity, Size) -->
 		logtalk::message_tokens(source_code_size(Size), code_metrics).
 
 	:- multifile(logtalk::message_tokens//2).

@@ -11,8 +11,8 @@
 Entity and entity predicates documentation score.
 
 | **Author:** Paulo Moura
-| **Version:** 0:12:0
-| **Date:** 2019-09-23
+| **Version:** 0:13:0
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,7 @@ Entity and entity predicates documentation score.
    - Score customization: The individual scores of entity ``info/1`` pairs and predicate ``info/2`` pairs can be customized using the ``entity_info_pair_score_hook/3`` and ``predicate_info_pair_score_hook/4`` predicates.
 
 | **Inherited public predicates:**
-|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all_score/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::entity_score//2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library_score/2`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary_score/2`  
+|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all_score/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::format_entity_score//2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library_score/2`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary_score/2`  
 
 .. contents::
    :local:

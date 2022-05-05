@@ -23,9 +23,9 @@
 :- category(code_metric).
 
 	:- info([
-		version is 0:9:1,
+		version is 0:10:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2021-01-02,
+		date is 2022-05-05,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -130,10 +130,10 @@
 		argnames is ['Score']
 	]).
 
-	:- public(entity_score//2).
-	:- mode(entity_score(@entity_identifier, +ground), one).
-	:- info(entity_score//2, [
-		comment is 'Pretty prints the entity score.',
+	:- public(format_entity_score//2).
+	:- mode(format_entity_score(@entity_identifier, +ground), one).
+	:- info(format_entity_score//2, [
+		comment is 'Formats the entity score for pretty printing.',
 		argnames is ['Entity', 'Score']
 	]).
 
@@ -444,7 +444,7 @@
 		;	true
 		).
 
-	entity_score(_Entity, Score) -->
+	format_entity_score(_Entity, Score) -->
 		{self(Metric)},
 		['~w score: ~w'-[Metric, Score], nl].
 

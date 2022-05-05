@@ -23,9 +23,9 @@
 :- category(code_metrics_messages).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2020-02-05,
+		date is 2022-05-05,
 		comment is 'Message translations for the ``code_metrics`` tool.'
 	]).
 
@@ -91,7 +91,7 @@
 		['Entity not loaded: ~q'-[Entity], nl].
 
 	message_tokens(entity_score(Metric, Entity, Score)) -->
-		Metric::entity_score(Entity, Score).
+		Metric::format_entity_score(Entity, Score).
 
 	% auxiliary predicates
 

@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2019-09-23,
+		date is 2022-05-05,
 		comment is 'Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.'
 	]).
 
@@ -147,7 +147,7 @@
 		all_score(Score),
 		logtalk::print_message(information, code_metrics, Score).
 
-	entity_score(_Entity, number_of_clauses(Total,User)) -->
+	format_entity_score(_Entity, number_of_clauses(Total,User)) -->
 		['Number of Clauses: ~w'-[Total], nl],
 		['Number of User Clauses: ~w'-[User], nl].
 

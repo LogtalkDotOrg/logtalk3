@@ -2437,16 +2437,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::entity_score/2>`
 
-``entity_score//2``
--------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`code_metric <code_metric/0::entity_score//2>`
-
 ``enumerate/2``
 ---------------
 
@@ -3051,6 +3041,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`format <format/0::format/3>`
+
+``format_entity_score//2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`code_metric <code_metric/0::format_entity_score//2>`
 
 ``format_object/1``
 -------------------

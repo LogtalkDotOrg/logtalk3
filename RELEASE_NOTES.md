@@ -61,6 +61,9 @@ Tools
 * CHANGED: The `lgtunit` tool code coverage report format to enable reporting
 all test object parameterizations and files.
 
+* CHANGED: Renamed the `code_metrics` tool `entity_score//2` non-terminal to
+`format_entity_score//2`.
+
 * ADDED: Linter warnings for missing documentation directives to the `lgtdoc`
 tool.
 

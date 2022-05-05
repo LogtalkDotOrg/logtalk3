@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2019-09-23,
+		date is 2022-05-05,
 		comment is 'Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.'
 	]).
 
@@ -157,7 +157,7 @@
 		all_score(Score),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	entity_score(_Entity, Total) -->
+	format_entity_score(_Entity, Total) -->
 		['Number of Unique Predicates Nodes: ~w'-[Total], nl].
 
 	:- multifile(logtalk::message_tokens//2).

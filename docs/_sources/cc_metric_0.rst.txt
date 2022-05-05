@@ -11,8 +11,8 @@
 Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2018-07-18
+| **Version:** 0:3:0
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,7 +32,7 @@ Cyclomatic complexity metric. All defined predicates that are not called or upda
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all_score/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::entity_score//2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library_score/2`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary_score/2`  
+|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all_score/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::format_entity_score//2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library_score/2`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary_score/2`  
 
 .. contents::
    :local:

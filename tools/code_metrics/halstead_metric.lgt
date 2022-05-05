@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2018-07-18,
+		date is 2022-05-05,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		parameters is ['Stroud' - 'Coefficient for computing the time required to program.'],
 		remarks is [
@@ -169,7 +169,7 @@
 	predicate_arity(_:_/Arity, Arity).
 	predicate_arity(_/Arity, Arity).
 
-	entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
+	format_entity_score(_Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) -->
 		['Number of distinct predicates (declared, defined, called, or updated): ~d'-[Pn], nl],
 		['Number of predicate arguments (assumed distinct): ~d'-[PAn], nl],
 		['Number of predicate calls/updates + number of clauses: ~d'-[Cn], nl],

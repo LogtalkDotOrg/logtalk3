@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2018-07-17,
+		date is 2022-05-05,
 		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
@@ -224,7 +224,7 @@
 		% but no explicit self updates
 		Entity \= Object.
 
-	entity_score(_Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) -->
+	format_entity_score(_Entity, ce_ca_i_a(Efferent,Afferent,Instability,Abstractness)) -->
 		['Efferent coupling: ~w'-[Efferent], nl],
 		['Afferent coupling: ~w'-[Afferent], nl],
 		['Instability: ~w'-[Instability], nl],

@@ -11,8 +11,8 @@
 Core predicates for computing source code metrics.
 
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0:9:1
-| **Date:** 2021-01-02
+| **Version:** 0:10:0
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static``
@@ -212,6 +212,9 @@ Score is a term that represents the metric score associated with a loaded entity
 
 | **Template:**
 |    ``entity_score(Entity,Score)``
+| **Mode and number of proofs:**
+|    ``entity_score(@entity_identifier,-ground)`` - ``zero_or_one``
+
 
 ------------
 
@@ -355,24 +358,23 @@ Score is a term that represents the metric score associated with all loaded sour
 
 .. raw:: html
 
-   <div id="entity_score//2"> </div>
+   <div id="format_entity_score//2"> </div>
 
-.. index:: entity_score//2
-.. _code_metric/0::entity_score//2:
+.. index:: format_entity_score//2
+.. _code_metric/0::format_entity_score//2:
 
-``entity_score//2``
-^^^^^^^^^^^^^^^^^^^
+``format_entity_score//2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Pretty prints the entity score.
+Formats the entity score for pretty printing.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``entity_score(Entity,Score)``
+|    ``format_entity_score(Entity,Score)``
 | **Mode and number of proofs:**
-|    ``entity_score(@entity_identifier,-ground)`` - ``zero_or_one``
-|    ``entity_score(@entity_identifier,+ground)`` - ``one``
+|    ``format_entity_score(@entity_identifier,+ground)`` - ``one``
 
 
 ------------
