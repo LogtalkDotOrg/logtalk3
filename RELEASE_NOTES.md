@@ -63,6 +63,9 @@ tool.
 
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
 
+* FIXED: Typo in the `mode/2` directive for the `debug_messages::disable/1`
+predicate.
+
 * FIXED: Typo in the `mode/2` directive for the `packs::save/2` predicate.
 
 Examples

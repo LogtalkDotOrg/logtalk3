@@ -11,8 +11,8 @@
 Supports selective enabling and disabling of ``debug`` and ``debug(Group)`` messages.
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2019-01-16
+| **Version:** 1:0:1
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -77,6 +77,9 @@ Disables all ``debug`` and ``debug(Group)`` messages for the given component.
 
 | **Template:**
 |    ``disable(Component)``
+| **Mode and number of proofs:**
+|    ``disable(@term)`` - ``one``
+
 
 ------------
 
@@ -144,7 +147,6 @@ Disables ``debug(Group)`` messages for the given component and group.
 | **Template:**
 |    ``disable(Component,Group)``
 | **Mode and number of proofs:**
-|    ``disable(@term,@term)`` - ``one``
 |    ``disable(@term,@term)`` - ``one``
 
 

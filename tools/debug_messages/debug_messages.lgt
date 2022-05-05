@@ -22,9 +22,9 @@
 :- object(debug_messages).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2019-01-16,
+		date is 2022-05-05,
 		comment is 'Supports selective enabling and disabling of ``debug`` and ``debug(Group)`` messages.',
 		remarks is [
 			'Limitations' - 'Debug messages are suppressed by the compiler when the ``optimize`` flag is turned on and thus cannot be enabled in this case.'
@@ -39,7 +39,7 @@
 	]).
 
 	:- public(disable/1).
-	:- mode(disable(@term, @term), one).
+	:- mode(disable(@term), one).
 	:- info(disable/1, [
 		comment is 'Disables all ``debug`` and ``debug(Group)`` messages for the given component.',
 		argnames is ['Component']
