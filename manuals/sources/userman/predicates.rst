@@ -198,8 +198,12 @@ often have different determinism. The possible values are:
    Predicate has zero or more proofs.
 ``one_or_more``
    Predicate has one or more proofs.
+``zero_or_error``
+   Predicate either fails or throws an error (see below).
 ``one_or_error``
    Predicate either succeeds once or throws an error (see below).
+``zero_or_one_or_error``
+   Predicate either succeeds once or fails or throws an error (see below).
 ``error``
    Predicate will throw an error.
 

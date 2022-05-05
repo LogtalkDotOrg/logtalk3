@@ -277,6 +277,9 @@
 		<xsd:enumeration value="zero_or_more"/>
 		<xsd:enumeration value="one"/>
 		<xsd:enumeration value="one_or_more"/>
+		<xsd:enumeration value="zero_or_error"/>
+		<xsd:enumeration value="one_or_error"/>
+		<xsd:enumeration value="zero_or_one_or_error"/>
 		<xsd:enumeration value="error"/>
 	</xsd:restriction>
 </xsd:simpleType>

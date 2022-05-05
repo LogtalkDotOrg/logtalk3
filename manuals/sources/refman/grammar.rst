@@ -833,7 +833,8 @@ Predicate directives
 
 | number_of_proofs ::=
 |    "``zero``" \| "``zero_or_one``" \| "``zero_or_more``" \| "``one``" \|
-|    "``one_or_more``" \| "``one_or_error``" \| "``error``"
+|    "``one_or_more``" \| "``zero_or_error``" \| "``one_or_error``" \|
+|    "``zero_or_one_or_error``" \| "``error``"
 
 | meta_predicate_template_term ::=
 |    *meta_predicate_template* \|
