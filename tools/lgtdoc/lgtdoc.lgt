@@ -912,13 +912,19 @@
 		),
 		(	\+ member(mode(_, _), Properties),
 			current_logtalk_flag(missing_directives, warning) ->
-			print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q predicate: ~q'+[Entity, Name])
+			(	Name = _//_ ->
+				print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q non-terminal: ~q'+[Entity, Name])
+			;	print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q predicate: ~q'+[Entity, Name])
+			)
 		;	true
 		),
 		(	member(info(Info), Properties) ->
 			write_xml_predicate_info(Stream, Entity, Functor, Arity, Info)
 		;	current_logtalk_flag(missing_directives, warning) ->
-			print_message(warning, lgtdoc, 'Missing info/2 directive for ~q predicate: ~q'+[Entity, Name])
+			(	Name = _//_ ->
+				print_message(warning, lgtdoc, 'Missing info/2 directive for ~q non-terminal: ~q'+[Entity, Name])
+			;	print_message(warning, lgtdoc, 'Missing info/2 directive for ~q predicate: ~q'+[Entity, Name])
+			)
 		;	true
 		),
 		write_xml_close_tag(Stream, predicate).
