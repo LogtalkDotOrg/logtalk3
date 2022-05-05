@@ -22,9 +22,9 @@
 :- protocol(varlistp).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2019-01-03,
+		date is 2022-05-05,
 		comment is 'List of variables protocol.',
 		see_also is [varlist, listp, numberlistp]
 	]).
@@ -128,7 +128,7 @@
 	]).
 
 	:- public(remove_duplicates/2).
-	:- mode(reverse(+list, -list), one).
+	:- mode(remove_duplicates(+list, -list), one).
 	:- info(remove_duplicates/2, [
 		comment is 'Removes duplicated variables and keeping the left-most variable when repeated.',
 		argnames is ['List', 'Set']

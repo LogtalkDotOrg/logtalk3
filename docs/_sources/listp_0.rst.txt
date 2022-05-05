@@ -11,8 +11,8 @@
 List protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:15:1
-| **Date:** 2020-05-11
+| **Version:** 1:15:2
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static``
@@ -677,6 +677,9 @@ Removes duplicated list elements using equality (``==/2``) for comparison and ke
 
 | **Template:**
 |    ``remove_duplicates(List,Set)``
+| **Mode and number of proofs:**
+|    ``remove_duplicates(+list,-list)`` - ``one``
+
 
 ------------
 
@@ -698,7 +701,6 @@ Reverses a list.
 | **Template:**
 |    ``reverse(List,Reversed)``
 | **Mode and number of proofs:**
-|    ``reverse(+list,-list)`` - ``one``
 |    ``reverse(+list,?list)`` - ``zero_or_one``
 |    ``reverse(?list,+list)`` - ``zero_or_one``
 |    ``reverse(-list,-list)`` - ``one_or_more``

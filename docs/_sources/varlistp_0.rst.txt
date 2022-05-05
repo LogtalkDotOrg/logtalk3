@@ -11,8 +11,8 @@
 List of variables protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2019-01-03
+| **Version:** 1:2:1
+| **Date:** 2022-05-05
 
 | **Compilation flags:**
 |    ``static``
@@ -374,6 +374,9 @@ Removes duplicated variables and keeping the left-most variable when repeated.
 
 | **Template:**
 |    ``remove_duplicates(List,Set)``
+| **Mode and number of proofs:**
+|    ``remove_duplicates(+list,-list)`` - ``one``
+
 
 ------------
 
@@ -395,7 +398,6 @@ Reverses a list.
 | **Template:**
 |    ``reverse(List,Reversed)``
 | **Mode and number of proofs:**
-|    ``reverse(+list,-list)`` - ``one``
 |    ``reverse(@list,?list)`` - ``zero_or_one``
 |    ``reverse(?list,@list)`` - ``zero_or_one``
 |    ``reverse(-list,-list)`` - ``one_or_more``

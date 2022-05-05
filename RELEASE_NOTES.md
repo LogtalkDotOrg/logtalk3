@@ -49,6 +49,9 @@ Library
 * FIXED: Typos in the `mode/2` directives for the `os` library `file_size/2`,
 `file_modification_time/2`, and `file_permission/2` predicates.
 
+* FIXED: Typo in the `mode/2` directive for the `remove_duplicates/2` predicate
+in the `listp` and `varlistp` library protocols.
+
 Tools
 -----
 

@@ -22,9 +22,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1:15:1,
+		version is 1:15:2,
 		author is 'Paulo Moura',
-		date is 2020-05-11,
+		date is 2022-05-05,
 		comment is 'List protocol.',
 		see_also is [list, list(_), numberlistp, varlistp]
 	]).
@@ -222,7 +222,7 @@
 	]).
 
 	:- public(remove_duplicates/2).
-	:- mode(reverse(+list, -list), one).
+	:- mode(remove_duplicates(+list, -list), one).
 	:- info(remove_duplicates/2, [
 		comment is 'Removes duplicated list elements using equality (``==/2``) for comparison and keeping the left-most element when repeated.',
 		argnames is ['List', 'Set']
