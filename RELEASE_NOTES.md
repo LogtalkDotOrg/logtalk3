@@ -40,8 +40,8 @@ modules as objects.
 Library
 -------
 
-* FIXED: Typos in the `mode/2` directives for the `os` library `file_size/2`
-and `file_modification_time/2` predicates.
+* FIXED: Typos in the `mode/2` directives for the `os` library `file_size/2`,
+`file_modification_time/2`, and `file_permission/2` predicates.
 
 Tools
 -----

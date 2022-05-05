@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:32:1,
+		version is 1:32:2,
 		author is 'Paulo Moura',
-		date is 2022-05-04,
+		date is 2022-05-05,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -203,7 +203,7 @@
 	]).
 
 	:- public(file_permission/2).
-	:- mode(file_permission(+atom, +atom), zero_or_one).
+	:- mode(file_permission(+atom, +atom), zero_or_one_or_error).
 	:- info(file_permission/2, [
 		comment is 'True iff the specified file has the specified permission (``read``, ``write``, or ``execute``). Throws an error if the file does not exist.',
 		argnames is ['File', 'Permission']
