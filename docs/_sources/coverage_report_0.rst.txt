@@ -11,8 +11,8 @@
 Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.
 
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2022-05-02
+| **Version:** 3:1:0
+| **Date:** 2022-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -57,8 +57,15 @@ Private predicates
 ``timestamp_/6``
 ^^^^^^^^^^^^^^^^
 
+Cache of the starting tests timestamp.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``timestamp_(Year,Month,Day,Hours,Minutes,Seconds)``
+| **Mode and number of proofs:**
+|    ``timestamp_(-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
 
 
 ------------
@@ -73,8 +80,15 @@ Private predicates
 ``object_file_/2``
 ^^^^^^^^^^^^^^^^^^
 
+Cache of test object - file pairs.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``object_file_(Object,File)``
+| **Mode and number of proofs:**
+|    ``object_file_(?object_identifier,?atom)`` - ``zero_or_more``
 
 
 ------------

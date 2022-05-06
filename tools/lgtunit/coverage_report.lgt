@@ -33,9 +33,9 @@
 :- object(coverage_report).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2022-05-02,
+		date is 2022-05-06,
 		comment is 'Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(coverage_report))``.'
@@ -46,11 +46,21 @@
 	% the report directory that we may require to create the XML report
 	:- private(timestamp_/6).
 	:- dynamic(timestamp_/6).
+	:- mode(timestamp_(-integer, -integer, -integer, -integer, -integer, -integer), one).
+	:- info(timestamp_/6, [
+		comment is 'Cache of the starting tests timestamp.',
+		argnames is ['Year', 'Month', 'Day', 'Hours', 'Minutes', 'Seconds']
+	]).
 
 	% a parametric test object may be used; record it so that all
 	% its parameterizations can be reported
 	:- private(object_file_/2).
 	:- dynamic(object_file_/2).
+	:- mode(object_file_(?object_identifier, ?atom), zero_or_more).
+	:- info(object_file_/2, [
+		comment is 'Cache of test object - file pairs.',
+		argnames is ['Object', 'File']
+	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
 

@@ -193,8 +193,8 @@
 <p>Intercepts unit test execution messages and generates a <code class="docutils literal notranslate"><span class="pre">coverage_report.xml</span></code> file with a test suite code coverage results.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:0:0</div>
-<div class="line"><strong>Date:</strong> 2022-05-02</div>
+<div class="line"><strong>Version:</strong> 3:1:0</div>
+<div class="line"><strong>Date:</strong> 2022-05-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -251,20 +251,42 @@
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <div id="timestamp_/6"> </div><section id="timestamp-6">
 <span id="coverage-report-0-timestamp-6"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">timestamp_/6</span></code></a><a class="headerlink" href="#timestamp-6" title="Permalink to this headline"></a></h3>
+<p>Cache of the starting tests timestamp.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp_(Year,Month,Day,Hours,Minutes,Seconds)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp_(-integer,-integer,-integer,-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="object_file_/2"> </div></section>
 <section id="object-file-2">
 <span id="coverage-report-0-object-file-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">object_file_/2</span></code></a><a class="headerlink" href="#object-file-2" title="Permalink to this headline"></a></h3>
+<p>Cache of test object - file pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">object_file_(Object,File)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">object_file_(?object_identifier,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </section>

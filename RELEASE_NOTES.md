@@ -70,6 +70,8 @@ all test object parameterizations and files.
 * ADDED: Linter warnings for missing documentation directives to the `lgtdoc`
 tool.
 
+* IMPROVED: API documentation of the `debugger` and `lgtunit` tools.
+
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
 
 * FIXED: Typo in the `mode/2` directive for the `debug_messages::disable/1`

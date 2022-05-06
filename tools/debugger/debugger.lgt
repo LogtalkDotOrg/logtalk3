@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:11:0,
+		version is 4:12:0,
 		author is 'Paulo Moura',
-		date is 2021-10-01,
+		date is 2022-05-06,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -34,42 +34,105 @@
 
 	:- private(debugging_/0).
 	:- dynamic(debugging_/0).
+	:- mode(debugging_, zero_or_one).
+	:- info(debugging_/0, [
+		comment is 'True iff debug is on.'
+	]).
 
 	:- private(tracing_/0).
 	:- dynamic(tracing_/0).
+	:- mode(tracing_, zero_or_one).
+	:- info(tracing_/0, [
+		comment is 'True iff tracing is on.'
+	]).
 
 	:- private(skipping_/0).
 	:- dynamic(skipping_/0).
+	:- mode(skipping_, zero_or_one).
+	:- info(skipping_/0, [
+		comment is 'True iff skipping.'
+	]).
 
 	:- private(quasi_skipping_/0).
 	:- dynamic(quasi_skipping_/0).
+	:- mode(quasi_skipping_, zero_or_one).
+	:- info(quasi_skipping_/0, [
+		comment is 'True iff quasi-skipping.'
+	]).
 
 	:- private(leaping_/1).
 	:- dynamic(leaping_/1).
+	:- mode(leaping_(?atom), zero_or_one).
+	:- info(leaping_/1, [
+		comment is 'True iff leaping in tracing or debugging mode.',
+		argnames is ['Mode']
+	]).
 
 	:- private(spying_line_number_/2).
 	:- dynamic(spying_line_number_/2).
+	:- mode(spying_line_number_(?object_identifier, ?integer), zero_or_more).
+	:- mode(spying_line_number_(?category_identifier, ?integer), zero_or_more).
+	:- info(spying_line_number_/2, [
+		comment is 'Table of line number breakpoints.',
+		argnames is ['Entity', 'Line']
+	]).
 
 	:- private(spying_predicate_/3).
 	:- dynamic(spying_predicate_/3).
+	:- mode(spying_predicate_(?atom, ?integer, ?predicate_indicator), zero_or_more).
+	:- mode(spying_predicate_(?atom, ?integer, ?non_terminal_indicator), zero_or_more).
+	:- info(spying_predicate_/3, [
+		comment is 'Table of predicate spy points.',
+		argnames is ['Functor', 'Arity', 'Original']
+	]).
 
 	:- private(spying_context_/4).
 	:- dynamic(spying_context_/4).
+	:- mode(spying_context_(?object_identifier, ?object_identifier, ?object_identifier, ?callable), zero_or_more).
+	:- info(spying_context_/4, [
+		comment is 'Table of context spy points.',
+		argnames is ['Sender', 'This', 'Self', 'Goal']
+	]).
 
 	:- private(leashing_/1).
 	:- dynamic(leashing_/1).
+	:- mode(leashing_(?atom), zero_or_more).
+	:- info(leashing_/1, [
+		comment is 'Table of currently leashed ports.',
+		argnames is ['Port']
+	]).
 
 	:- private(invocation_number_/1).
 	:- dynamic(invocation_number_/1).
+	:- mode(invocation_number_(?integer), zero_or_one).
+	:- info(invocation_number_/1, [
+		comment is 'Current call stack invocation number.',
+		argnames is ['N']
+	]).
 
 	:- private(jump_to_invocation_number_/1).
 	:- dynamic(jump_to_invocation_number_/1).
+	:- mode(jump_to_invocation_number_(?integer), zero_or_one).
+	:- info(jump_to_invocation_number_/1, [
+		comment is 'Invocation number to jump to.',
+		argnames is ['N']
+	]).
 
 	:- private(zap_to_port_/1).
 	:- dynamic(zap_to_port_/1).
+	:- mode(zap_to_port_(?integer), zero_or_one).
+	:- info(zap_to_port_/1, [
+		comment is 'Port to zap to.',
+		argnames is ['Port']
+	]).
 
 	:- private(write_max_depth_/1).
 	:- dynamic(write_max_depth_/1).
+	:- mode(write_max_depth_(?integer), zero_or_one).
+	:- info(write_max_depth_/1, [
+		comment is 'Current term maximum depth.',
+		argnames is ['MaxDepth']
+	]).
 
 	% we use the structured printing and question asking mechanisms to allow debugger
 	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs

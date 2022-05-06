@@ -11,8 +11,8 @@
 Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.
 
 | **Author:** Paulo Moura
-| **Version:** 4:11:0
-| **Date:** 2021-10-01
+| **Version:** 4:12:0
+| **Date:** 2022-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,8 +59,13 @@ Private predicates
 ``debugging_/0``
 ^^^^^^^^^^^^^^^^
 
+True iff debug is on.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``debugging_`` - ``zero_or_one``
 
 
 ------------
@@ -75,8 +80,13 @@ Private predicates
 ``tracing_/0``
 ^^^^^^^^^^^^^^
 
+True iff tracing is on.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``tracing_`` - ``zero_or_one``
 
 
 ------------
@@ -91,8 +101,13 @@ Private predicates
 ``skipping_/0``
 ^^^^^^^^^^^^^^^
 
+True iff skipping.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``skipping_`` - ``zero_or_one``
 
 
 ------------
@@ -107,8 +122,13 @@ Private predicates
 ``quasi_skipping_/0``
 ^^^^^^^^^^^^^^^^^^^^^
 
+True iff quasi-skipping.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``quasi_skipping_`` - ``zero_or_one``
 
 
 ------------
@@ -123,8 +143,15 @@ Private predicates
 ``leaping_/1``
 ^^^^^^^^^^^^^^
 
+True iff leaping in tracing or debugging mode.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``leaping_(Mode)``
+| **Mode and number of proofs:**
+|    ``leaping_(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -139,8 +166,16 @@ Private predicates
 ``spying_line_number_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of line number breakpoints.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``spying_line_number_(Entity,Line)``
+| **Mode and number of proofs:**
+|    ``spying_line_number_(?object_identifier,?integer)`` - ``zero_or_more``
+|    ``spying_line_number_(?category_identifier,?integer)`` - ``zero_or_more``
 
 
 ------------
@@ -155,8 +190,16 @@ Private predicates
 ``spying_predicate_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of predicate spy points.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``spying_predicate_(Functor,Arity,Original)``
+| **Mode and number of proofs:**
+|    ``spying_predicate_(?atom,?integer,?predicate_indicator)`` - ``zero_or_more``
+|    ``spying_predicate_(?atom,?integer,?non_terminal_indicator)`` - ``zero_or_more``
 
 
 ------------
@@ -171,8 +214,15 @@ Private predicates
 ``spying_context_/4``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Table of context spy points.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``spying_context_(Sender,This,Self,Goal)``
+| **Mode and number of proofs:**
+|    ``spying_context_(?object_identifier,?object_identifier,?object_identifier,?callable)`` - ``zero_or_more``
 
 
 ------------
@@ -187,8 +237,15 @@ Private predicates
 ``leashing_/1``
 ^^^^^^^^^^^^^^^
 
+Table of currently leashed ports.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``leashing_(Port)``
+| **Mode and number of proofs:**
+|    ``leashing_(?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -203,8 +260,15 @@ Private predicates
 ``invocation_number_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Current call stack invocation number.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``invocation_number_(N)``
+| **Mode and number of proofs:**
+|    ``invocation_number_(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -219,8 +283,15 @@ Private predicates
 ``jump_to_invocation_number_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Invocation number to jump to.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``jump_to_invocation_number_(N)``
+| **Mode and number of proofs:**
+|    ``jump_to_invocation_number_(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -235,8 +306,15 @@ Private predicates
 ``zap_to_port_/1``
 ^^^^^^^^^^^^^^^^^^
 
+Port to zap to.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``zap_to_port_(Port)``
+| **Mode and number of proofs:**
+|    ``zap_to_port_(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -251,8 +329,15 @@ Private predicates
 ``write_max_depth_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Current term maximum depth.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``write_max_depth_(MaxDepth)``
+| **Mode and number of proofs:**
+|    ``write_max_depth_(?integer)`` - ``zero_or_one``
 
 
 ------------
