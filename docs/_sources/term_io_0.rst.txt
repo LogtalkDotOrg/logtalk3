@@ -11,8 +11,8 @@
 Term input/output from/to atom, chars, and codes.
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2021-02-14
+| **Version:** 1:1:1
+| **Date:** 2022-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,8 +56,15 @@ Private predicates
 ``temporary_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Logtalk session and ``term_io`` specific temporary file path.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``temporary_file_(Path)``
+| **Mode and number of proofs:**
+|    ``temporary_file_(-atom)`` - ``one``
 
 
 ------------

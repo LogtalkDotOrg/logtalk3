@@ -11,8 +11,8 @@
 Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.
 
 | **Author:** Paulo Moura
-| **Version:** 0:13:0
-| **Date:** 2019-06-13
+| **Version:** 0:13:1
+| **Date:** 2022-05-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -51,16 +51,23 @@ Private predicates
 
 .. raw:: html
 
-   <div id="generated_predicate/1"> </div>
+   <div id="generated_predicate_/1"> </div>
 
-.. index:: generated_predicate/1
-.. _meta_compiler/0::generated_predicate/1:
+.. index:: generated_predicate_/1
+.. _meta_compiler/0::generated_predicate_/1:
 
-``generated_predicate/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``generated_predicate_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of generated auxiliary predicates.
 
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``generated_predicate_(Predicate)``
+| **Mode and number of proofs:**
+|    ``generated_predicate_(?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------

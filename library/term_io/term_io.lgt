@@ -23,9 +23,9 @@
 	implements(term_io_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2021-02-14,
+		date is 2022-05-06,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -37,6 +37,11 @@
 
 	:- private(temporary_file_/1).
 	:- dynamic(temporary_file_/1).
+	:- mode(temporary_file_(-atom), one).
+	:- info(temporary_file_/1, [
+		comment is 'Logtalk session and ``term_io`` specific temporary file path.',
+		argnames is ['Path']
+	]).
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
