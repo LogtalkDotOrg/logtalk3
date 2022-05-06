@@ -11,8 +11,8 @@
 Statistical calculations over a list of numbers.
 
 | **Author:** Paulo Moura
-| **Version:** 1:5:0
-| **Date:** 2019-05-23
+| **Version:** 1:6:0
+| **Date:** 2022-05-06
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,97 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. raw:: html
+
+   <div id="arithmetic_mean/5"> </div>
+
+.. index:: arithmetic_mean/5
+.. _statistics/0::arithmetic_mean/5:
+
+``arithmetic_mean/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the arithmetic mean.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``arithmetic_mean(List,Length0,Length,Sum,Mean)``
+| **Mode and number of proofs:**
+|    ``arithmetic_mean(+list(number),+integer,-integer,+number,-float)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="squares_and_cubes/6"> </div>
+
+.. index:: squares_and_cubes/6
+.. _statistics/0::squares_and_cubes/6:
+
+``squares_and_cubes/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the skewness.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squares_and_cubes(List,Mean,Squares0,Squares,Cubes0,Cubes)``
+| **Mode and number of proofs:**
+|    ``squares_and_cubes(+list(number),+float,+float,-float,+float,-float)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="squares_and_hypers/6"> </div>
+
+.. index:: squares_and_hypers/6
+.. _statistics/0::squares_and_hypers/6:
+
+``squares_and_hypers/6``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the kurtosis.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squares_and_hypers(List,Mean,Squares0,Squares,Hypers0,Hypers)``
+| **Mode and number of proofs:**
+|    ``squares_and_hypers(+list(number),+float,+float,-float,+float,-float)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="variance/6"> </div>
+
+.. index:: variance/6
+.. _statistics/0::variance/6:
+
+``variance/6``
+^^^^^^^^^^^^^^
+
+Auxiliary predicate for computing the variance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variance(List,Length0,Length,Mean,M20,M2)``
+| **Mode and number of proofs:**
+|    ``variance(+list(number),+integer,-integer,+float,+float,-float)`` - ``one``
+
+
+------------
 
 Operators
 ---------

@@ -46,6 +46,9 @@ objects.
 Library
 -------
 
+* IMPROVED: API documentation of the `meta_compiler`, `statistics`, and
+`term_io` libraries.
+
 * FIXED: Typos in the `mode/2` directives for the `inorder/2` and `postorder/2`
 predicates of the `bintree` library object.
 

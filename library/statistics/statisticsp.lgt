@@ -22,9 +22,9 @@
 :- protocol(statisticsp).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2017-10-03,
+		date is 2022-05-06,
 		comment is 'Statistical calculations over a list of numbers protocol.',
 		see_also is [statistics, sample, population]
 	]).
@@ -168,10 +168,5 @@
 		comment is 'Term is a closed list of numbers.',
 		argnames is ['Term']
 	]).
-
-	:- private(arithmetic_mean/5).
-	:- private(squares_and_cubes/6).
-	:- private(squares_and_hypers/6).
-	:- private(variance/6).
 
 :- end_protocol.

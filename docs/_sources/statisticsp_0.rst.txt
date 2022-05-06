@@ -11,8 +11,8 @@
 Statistical calculations over a list of numbers protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2017-10-03
+| **Version:** 1:2:0
+| **Date:** 2022-05-06
 
 | **Compilation flags:**
 |    ``static``
@@ -503,69 +503,7 @@ Protected predicates
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="arithmetic_mean/5"> </div>
-
-.. index:: arithmetic_mean/5
-.. _statisticsp/0::arithmetic_mean/5:
-
-``arithmetic_mean/5``
-^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="squares_and_cubes/6"> </div>
-
-.. index:: squares_and_cubes/6
-.. _statisticsp/0::squares_and_cubes/6:
-
-``squares_and_cubes/6``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="squares_and_hypers/6"> </div>
-
-.. index:: squares_and_hypers/6
-.. _statisticsp/0::squares_and_hypers/6:
-
-``squares_and_hypers/6``
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. raw:: html
-
-   <div id="variance/6"> </div>
-
-.. index:: variance/6
-.. _statisticsp/0::variance/6:
-
-``variance/6``
-^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``static``
-
-
-------------
+(none)
 
 Operators
 ---------

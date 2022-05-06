@@ -23,10 +23,38 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2019-05-23,
+		date is 2022-05-06,
 		comment is 'Statistical calculations over a list of numbers.'
+	]).
+
+	:- private(arithmetic_mean/5).
+	:- mode(arithmetic_mean(+list(number), +integer, -integer, +number, -float), one).
+	:- info(arithmetic_mean/5, [
+		comment is 'Auxiliary predicate for computing the arithmetic mean.',
+		argnames is ['List', 'Length0', 'Length', 'Sum', 'Mean']
+	]).
+
+	:- private(squares_and_cubes/6).
+	:- mode(squares_and_cubes(+list(number), +float, +float, -float, +float, -float), one).
+	:- info(squares_and_cubes/6, [
+		comment is 'Auxiliary predicate for computing the skewness.',
+		argnames is ['List', 'Mean', 'Squares0', 'Squares', 'Cubes0', 'Cubes']
+	]).
+
+	:- private(squares_and_hypers/6).
+	:- mode(squares_and_hypers(+list(number), +float, +float, -float, +float, -float), one).
+	:- info(squares_and_hypers/6, [
+		comment is 'Auxiliary predicate for computing the kurtosis.',
+		argnames is ['List', 'Mean', 'Squares0', 'Squares', 'Hypers0', 'Hypers']
+	]).
+
+	:- private(variance/6).
+	:- mode(variance(+list(number), +integer, -integer, +float, +float, -float), one).
+	:- info(variance/6, [
+		comment is 'Auxiliary predicate for computing the variance.',
+		argnames is ['List', 'Length0', 'Length', 'Mean', 'M20', 'M2']
 	]).
 
 	arithmetic_mean([X| Xs], Mean) :-
@@ -34,20 +62,20 @@
 
 	arithmetic_mean([], Length, Length, Sum, Mean) :-
 		Mean is float(Sum / Length).
-	arithmetic_mean([X| Xs], Lacc, Length, Sacc, Mean) :-
-		Lacc2 is Lacc + 1,
-		Sacc2 is Sacc + X,
-		arithmetic_mean(Xs, Lacc2, Length, Sacc2, Mean).
+	arithmetic_mean([X| Xs], Length0, Length, Sum0, Mean) :-
+		Length1 is Length0 + 1,
+		Sum1 is Sum0 + X,
+		arithmetic_mean(Xs, Length1, Length, Sum1, Mean).
 
 	geometric_mean([X| Xs], Mean) :-
 		geometric_mean(Xs, 1, X, Mean).
 
 	geometric_mean([], Length, Product, Mean) :-
 		Mean is float(Product ** (1.0 / Length)).
-	geometric_mean([X| Xs], Lacc, Pacc, Mean) :-
-		Lacc2 is Lacc + 1,
+	geometric_mean([X| Xs], Length0, Pacc, Mean) :-
+		Length1 is Length0 + 1,
 		Pacc2 is Pacc * X,
-		geometric_mean(Xs, Lacc2, Pacc2, Mean).
+		geometric_mean(Xs, Length1, Pacc2, Mean).
 
 	harmonic_mean([X| Xs], Mean) :-
 		Sum is 1.0 / X,
@@ -55,10 +83,10 @@
 
 	harmonic_mean([], Length, Sum, Mean) :-
 		Mean is float(Length / Sum).
-	harmonic_mean([X| Xs], Lacc, Sacc, Mean) :-
-		Lacc2 is Lacc + 1,
-		Sacc2 is Sacc + 1.0 / X,
-		harmonic_mean(Xs, Lacc2, Sacc2, Mean).
+	harmonic_mean([X| Xs], Length0, Sum0, Mean) :-
+		Length1 is Length0 + 1,
+		Sum1 is Sum0 + 1.0 / X,
+		harmonic_mean(Xs, Length1, Sum1, Mean).
 
 	mean_deviation([X| Xs], Deviation) :-
 		arithmetic_mean(Xs, 1, Length, X, Mean),
@@ -75,10 +103,10 @@
 		Deviation is float(Sum / Length).
 
 	average_deviation([], _, Length, Length, Sum, Sum).
-	average_deviation([X| Xs], CentralTendency, Lacc, Length, Sacc, Sum) :-
-		Lacc2 is Lacc + 1,
-		Sacc2 is Sacc + abs(X - CentralTendency),
-		average_deviation(Xs, CentralTendency, Lacc2, Length, Sacc2, Sum).
+	average_deviation([X| Xs], CentralTendency, Length0, Length, Sum0, Sum) :-
+		Length1 is Length0 + 1,
+		Sum1 is Sum0 + abs(X - CentralTendency),
+		average_deviation(Xs, CentralTendency, Length1, Length, Sum1, Sum).
 
 	coefficient_of_variation([X| Xs], Coefficient) :-
 		::standard_deviation([X| Xs], Deviation),
@@ -90,24 +118,24 @@
 		Percentage is float(Coefficient * 100).
 
 	variance([], Length, Length, _, M2, M2).
-	variance([X| Xs], Lacc, Length, Mean, M2acc, M2) :-
-		Lacc2 is Lacc + 1,
+	variance([X| Xs], Length0, Length, Mean, M2acc, M2) :-
+		Length1 is Length0 + 1,
 		Delta is X - Mean,
-		Mean2 is Mean + Delta/Lacc2,
+		Mean2 is Mean + Delta/Length1,
 		M2acc2 is M2acc + Delta * (X - Mean2),
-		variance(Xs, Lacc2, Length, Mean2, M2acc2, M2).
+		variance(Xs, Length1, Length, Mean2, M2acc2, M2).
 
 	squares_and_cubes([], _, Squares, Squares, Cubes, Cubes).
-	squares_and_cubes([X| Xs], Mean, Sacc, Squares, Cacc, Cubes) :-
-		Sacc2 is Sacc + (X - Mean) ** 2,
-		Cacc2 is Cacc + (X - Mean) ** 3,
-		squares_and_cubes(Xs, Mean, Sacc2, Squares, Cacc2, Cubes).
+	squares_and_cubes([X| Xs], Mean, Squares0, Squares, Cubes0, Cubes) :-
+		Squares1 is Squares0 + (X - Mean) ** 2,
+		Cubes1 is Cubes0 + (X - Mean) ** 3,
+		squares_and_cubes(Xs, Mean, Squares1, Squares, Cubes1, Cubes).
 
 	squares_and_hypers([], _, Squares, Squares, Hypers, Hypers).
-	squares_and_hypers([X| Xs], Mean, Sacc, Squares, Hacc, Hypers) :-
-		Sacc2 is Sacc + (X - Mean) ** 2,
-		Hacc2 is Hacc + (X - Mean) ** 4,
-		squares_and_hypers(Xs, Mean, Sacc2, Squares, Hacc2, Hypers).
+	squares_and_hypers([X| Xs], Mean, Squares0, Squares, Hypers0, Hypers) :-
+		Squares1 is Squares0 + (X - Mean) ** 2,
+		Hypers1 is Hypers0 + (X - Mean) ** 4,
+		squares_and_hypers(Xs, Mean, Squares1, Squares, Hypers1, Hypers).
 
 	median([X| Xs], Median) :-
 		median([X| Xs], Median, _).
