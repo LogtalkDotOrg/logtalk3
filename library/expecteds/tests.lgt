@@ -23,14 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2020-01-04,
+		date is 2022-05-06,
 		comment is 'Unit tests for the "expecteds" library.'
-	]).
-
-	:- discontiguous([
-		fails/1, succeeds/1, throws/2
 	]).
 
 	cover(expected).
@@ -39,403 +35,416 @@
 
 	% type and arbitrary support
 
-	succeeds(expected_type_1_01) :-
+	test(expected_type_1_01, true) :-
 		type::type(expected).
 
-	succeeds(either_type_1_01) :-
+	test(either_type_1_01, true) :-
 		type::type(either(_,_)).
 
-	succeeds(either_arbitrary_1_01) :-
+	test(either_arbitrary_1_01, true) :-
 		type::arbitrary(either(_,_)).
 
 	% from_goal/4 tests
 
-	succeeds(expected_from_goal_4_01) :-
-		expected::from_goal(Y is 1+2, Y, failure, Expected), expected(Expected)::is_expected.
+	test(expected_from_goal_4_01, true) :-
+		expected::from_goal(Y is 1+2, Y, failure, Expected),
+		expected(Expected)::is_expected.
 
-	succeeds(expected_from_goal_4_02) :-
-		expected::from_goal(Y is 1+2, Y, failure, Expected), expected(Expected)::expected(Value),
-		Value == 3.
+	test(expected_from_goal_4_02, true(Value == 3)) :-
+		expected::from_goal(Y is 1+2, Y, failure, Expected),
+		expected(Expected)::expected(Value).
 
-	succeeds(expected_from_goal_4_03) :-
-		expected::from_goal(Y is _, Y, failure, Expected), expected(Expected)::is_unexpected.
+	test(expected_from_goal_4_03, true) :-
+		expected::from_goal(Y is _, Y, failure, Expected),
+		expected(Expected)::is_unexpected.
 
-	succeeds(expected_from_goal_4_04) :-
-		expected::from_goal(Y is _, Y, failure, Expected), expected(Expected)::unexpected(Error),
-		Error == failure.
+	test(expected_from_goal_4_04, true(Error == failure)) :-
+		expected::from_goal(Y is _, Y, failure, Expected),
+		expected(Expected)::unexpected(Error).
 
 	% from_goal/3 tests
 
-	succeeds(expected_from_goal_3_01) :-
-		expected::from_goal(Y is 1+2, Y, Expected), expected(Expected)::is_expected.
+	test(expected_from_goal_3_01, true) :-
+		expected::from_goal(Y is 1+2, Y, Expected),
+		expected(Expected)::is_expected.
 
-	succeeds(expected_from_goal_3_02) :-
-		expected::from_goal(Y is 1+2, Y, Expected), expected(Expected)::expected(Value),
-		Value == 3.
+	test(expected_from_goal_3_02, true(Value == 3)) :-
+		expected::from_goal(Y is 1+2, Y, Expected),
+		expected(Expected)::expected(Value).
 
-	succeeds(expected_from_goal_3_03) :-
-		expected::from_goal(Y is _, Y, Expected), expected(Expected)::is_unexpected.
+	test(expected_from_goal_3_03, true) :-
+		expected::from_goal(Y is _, Y, Expected),
+		expected(Expected)::is_unexpected.
 
-	succeeds(expected_from_goal_3_04) :-
-		expected::from_goal(Y is _, Y, Expected), expected(Expected)::unexpected(Error),
-		subsumes_term(error(instantiation_error, _), Error).
+	test(expected_from_goal_3_04, subsumes(error(instantiation_error, _), Error)) :-
+		expected::from_goal(Y is _, Y, Expected),
+		expected(Expected)::unexpected(Error).
 
 	% from_goal/2 tests
 
-	succeeds(expected_from_goal_2_01) :-
-		expected::from_goal([Y]>>(Y is 1+2), Expected), expected(Expected)::is_expected.
+	test(expected_from_goal_2_01, true) :-
+		expected::from_goal([Y]>>(Y is 1+2), Expected),
+		expected(Expected)::is_expected.
 
-	succeeds(expected_from_goal_2_02) :-
-		expected::from_goal([Y]>>(Y is 1+2), Expected), expected(Expected)::expected(Value),
-		Value == 3.
+	test(expected_from_goal_2_02, true(Value == 3)) :-
+		expected::from_goal([Y]>>(Y is 1+2), Expected),
+		expected(Expected)::expected(Value).
 
-	succeeds(expected_from_goal_2_03) :-
-		expected::from_goal(is(_), Expected), expected(Expected)::is_unexpected.
+	test(expected_from_goal_2_03, true) :-
+		expected::from_goal(is(_), Expected),
+		expected(Expected)::is_unexpected.
 
-	succeeds(expected_from_goal_2_04) :-
-		expected::from_goal(is(_), Expected), expected(Expected)::unexpected(Error),
-		subsumes_term(error(instantiation_error, _), Error).
+	test(expected_from_goal_2_04, subsumes(error(instantiation_error, _), Error)) :-
+		expected::from_goal(is(_), Expected),
+		expected(Expected)::unexpected(Error).
 
 	% from_generator/4 tests
 
-	succeeds(expected_from_generator_4_01) :-
+	test(expected_from_generator_4_01, true) :-
 		findall(Expected, expected::from_generator(a(X), X, failure, Expected), [Expected1,Expected2,Expected3]),
 		expected(Expected1)::is_expected,
 		expected(Expected2)::is_expected,
 		expected(Expected3)::is_unexpected.
 
-	succeeds(expected_from_generator_4_02) :-
+	test(expected_from_generator_4_02, true(r(Value1,Value2,Error) == r(1,2,failure))) :-
 		findall(Expected, expected::from_generator(b(X), X, failure, Expected), [Expected1,Expected2,Expected3]),
-		expected(Expected1)::expected(Value1), Value1 == 1,
-		expected(Expected2)::expected(Value2), Value2 == 2,
-		expected(Expected3)::unexpected(Error), Error == failure.
+		expected(Expected1)::expected(Value1),
+		expected(Expected2)::expected(Value2),
+		expected(Expected3)::unexpected(Error).
 
 	% from_generator/3 tests
 
-	succeeds(expected_from_generator_3_01) :-
+	test(expected_from_generator_3_01, true) :-
 		findall(Expected, expected::from_generator(a(X), X, Expected), [Expected1,Expected2,Expected3]),
 		expected(Expected1)::is_expected,
 		expected(Expected2)::is_expected,
 		expected(Expected3)::is_unexpected.
 
-	succeeds(expected_from_generator_3_02) :-
+	test(expected_from_generator_3_02, true(r(Value1,Value2,Error) == r(1,2,e))) :-
 		findall(Expected, expected::from_generator(a(X), X, Expected), [Expected1,Expected2,Expected3]),
-		expected(Expected1)::expected(Value1), Value1 == 1,
-		expected(Expected2)::expected(Value2), Value2 == 2,
-		expected(Expected3)::unexpected(Error), Error == e.
+		expected(Expected1)::expected(Value1),
+		expected(Expected2)::expected(Value2),
+		expected(Expected3)::unexpected(Error).
 
-	succeeds(expected_from_generator_3_03) :-
+	test(expected_from_generator_3_03, true(r(Value1,Value2,Error) == r(1,2,fail))) :-
 		findall(Expected, expected::from_generator(b(X), X, Expected), [Expected1,Expected2,Expected3]),
-		expected(Expected1)::expected(Value1), Value1 == 1,
-		expected(Expected2)::expected(Value2), Value2 == 2,
-		expected(Expected3)::unexpected(Error), Error == fail.
+		expected(Expected1)::expected(Value1),
+		expected(Expected2)::expected(Value2),
+		expected(Expected3)::unexpected(Error).
 
 	% from_generator/2 tests
 
-	succeeds(expected_from_generator_2_01) :-
+	test(expected_from_generator_2_01, true) :-
 		findall(Expected, expected::from_generator(a, Expected), [Expected1,Expected2,Expected3]),
 		expected(Expected1)::is_expected,
 		expected(Expected2)::is_expected,
 		expected(Expected3)::is_unexpected.
 
-	succeeds(expected_from_generator_2_02) :-
+	test(expected_from_generator_2_02, true(r(Value1,Value2,Error) == r(1,2,e))) :-
 		findall(Expected, expected::from_generator(a, Expected), [Expected1,Expected2,Expected3]),
-		expected(Expected1)::expected(Value1), Value1 == 1,
-		expected(Expected2)::expected(Value2), Value2 == 2,
-		expected(Expected3)::unexpected(Error), Error == e.
+		expected(Expected1)::expected(Value1),
+		expected(Expected2)::expected(Value2),
+		expected(Expected3)::unexpected(Error).
 
-	succeeds(expected_from_generator_2_03) :-
+	test(expected_from_generator_2_03, true(r(Value1,Value2,Error) == r(1,2,fail))) :-
 		findall(Expected, expected::from_generator(b, Expected), [Expected1,Expected2,Expected3]),
-		expected(Expected1)::expected(Value1), Value1 == 1,
-		expected(Expected2)::expected(Value2), Value2 == 2,
-		expected(Expected3)::unexpected(Error), Error == fail.
+		expected(Expected1)::expected(Value1),
+		expected(Expected2)::expected(Value2),
+		expected(Expected3)::unexpected(Error).
 
 	% is_unexpected/0 tests
 
-	succeeds(expected_is_unexpected_1_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::is_unexpected.
+	test(expected_is_unexpected_1_01, true) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::is_unexpected.
 
-	succeeds(expected_is_unexpected_1_02) :-
-		expected::of_expected(1, Expected), \+ expected(Expected)::is_unexpected.
+	test(expected_is_unexpected_1_02, false) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::is_unexpected.
 
 	% is_expected/0 tests
 
-	succeeds(expected_is_expected_1_01) :-
-		expected::of_unexpected(-1, Expected), \+ expected(Expected)::is_expected.
+	test(expected_is_expected_1_01, false) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::is_expected.
 
-	succeeds(expected_is_expected_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::is_expected.
+	test(expected_is_expected_1_02, true) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::is_expected.
 
 	% if_unexpected/1 tests
 
-	succeeds(expected_if_unexpected_1_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::if_unexpected({Y}/[X]>>(Y is X + 1)),
-		Y == 0.
+	test(expected_if_unexpected_1_01, true(Y == 0)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::if_unexpected({Y}/[X]>>(Y is X + 1)).
 
-	succeeds(expected_if_unexpected_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::if_unexpected({Y}/[X]>>(Y is X + 1)),
-		var(Y).
+	test(expected_if_unexpected_1_02, true(var(Y))) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::if_unexpected({Y}/[X]>>(Y is X + 1)).
 
 	% if_expected/1 tests
 
-	succeeds(expected_if_expected_1_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::if_expected({Y}/[X]>>(Y is X + 1)),
-		var(Y).
+	test(expected_if_expected_1_01, true(var(Y))) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::if_expected({Y}/[X]>>(Y is X + 1)).
 
-	succeeds(expected_if_expected_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::if_expected({Y}/[X]>>(Y is X + 1)),
-		Y == 2.
+	test(expected_if_expected_1_02, true(Y == 2)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::if_expected({Y}/[X]>>(Y is X + 1)).
 
 	% if_expected_or_else/2 tests
 
-	succeeds(expected_if_expected_or_else_1_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::if_expected_or_else({Y}/[X]>>(Y is X + 1), {Y}/[X]>>(Y is -X)),
-		Y == 1.
+	test(expected_if_expected_or_else_1_01, true(Y == 1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::if_expected_or_else({Y}/[X]>>(Y is X + 1), {Y}/[X]>>(Y is -X)).
 
-	succeeds(expected_if_expected_or_else_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::if_expected_or_else({Y}/[X]>>(Y is X + 1), {Y}/[X]>>(Y is -X)),
-		Y == 2.
+	test(expected_if_expected_or_else_1_02, true(Y == 2)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::if_expected_or_else({Y}/[X]>>(Y is X + 1), {Y}/[X]>>(Y is -X)).
 
 	% unexpected/1 tests
 
-	throws(expected_unexpected_1_01, error(existence_error(unexpected_error,_), _)) :-
-		expected::of_expected(1, Expected), expected(Expected)::unexpected(_).
+	test(expected_unexpected_1_01, error(existence_error(unexpected_error,_))) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::unexpected(_).
 
-	succeeds(expected_unexpected_1_02) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::unexpected(Error),
-		Error == -1.
+	test(expected_unexpected_1_02, true(Error == -1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::unexpected(Error).
 
 	% expected/1 tests
 
-	throws(expected_expected_1_01, error(existence_error(expected_value,_), _)) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::expected(_).
+	test(expected_expected_1_01, error(existence_error(expected_value,_))) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::expected(_).
 
-	succeeds(expected_expected_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::expected(Value),
-		Value == 1.
+	test(expected_expected_1_02, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::expected(Value).
 
 	% map/2 tests
 
-	succeeds(expected_map_2_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::map(char_code, NewExpected),
+	test(expected_map_2_01, true) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::map(char_code, NewExpected),
 		expected(NewExpected)::is_unexpected.
 
-	succeeds(expected_map_2_02) :-
-		expected::of_expected(a, Expected), expected(Expected)::map(char_code, NewExpected),
-		expected(NewExpected)::expected(Value), Value == 97.
+	test(expected_map_2_02, true(Value == 97)) :-
+		expected::of_expected(a, Expected),
+		expected(Expected)::map(char_code, NewExpected),
+		expected(NewExpected)::expected(Value).
 
 	% flat_map/2 tests
 
-	succeeds(expected_flat_map_2_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::flat_map(flat_map_closure, NewExpected),
+	test(expected_flat_map_2_01, true) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::flat_map(flat_map_closure, NewExpected),
 		expected(NewExpected)::is_unexpected.
 
-	succeeds(expected_flat_map_2_02) :-
-		expected::of_expected(a, Expected), expected(Expected)::flat_map(flat_map_closure, NewExpected),
-		expected(NewExpected)::expected(Value), Value == 97.
+	test(expected_flat_map_2_02, true(Value == 97)) :-
+		expected::of_expected(a, Expected),
+		expected(Expected)::flat_map(flat_map_closure, NewExpected),
+		expected(NewExpected)::expected(Value).
 
 	% either/3 tests
 
-	succeeds(expected_either_3_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::either(either_expected, either_unexpected, NewExpected),
-		expected(NewExpected)::expected(Error), Error == 1.
+	test(expected_either_3_01, true(Error == 1)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::either(either_expected, either_unexpected, NewExpected),
+		expected(NewExpected)::expected(Error).
 
-	succeeds(expected_either_3_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::either(either_expected, either_unexpected, NewExpected),
-		expected(NewExpected)::unexpected(Value), Value == -1.
+	test(expected_either_3_02, true(Value == -1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::either(either_expected, either_unexpected, NewExpected),
+		expected(NewExpected)::unexpected(Value).
 
 	% or_else/2 tests
 
-	succeeds(expected_or_else_2_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::or_else(Value, 0),
-		Value == 0.
+	test(expected_or_else_2_01, true(Value == 0)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or_else(Value, 0).
 
-	succeeds(expected_or_else_2_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::or_else(Value, 0),
-		Value == 1.
+	test(expected_or_else_2_02, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or_else(Value, 0).
 
 	% or_else_get/2 tests
 
-	succeeds(expected_or_else_get_2_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::or_else_get(Value, current_logtalk_flag(prolog_dialect)),
-		atom(Value).
+	test(expected_or_else_get_2_01, true(atom(Value))) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or_else_get(Value, current_logtalk_flag(prolog_dialect)).
 
-	succeeds(expected_or_else_get_2_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::or_else_get(Value, current_logtalk_flag(prolog_dialect)),
-		Value == 1.
+	test(expected_or_else_get_2_02, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or_else_get(Value, current_logtalk_flag(prolog_dialect)).
 
-	throws(expected_or_else_get_2_03, error(existence_error(expected_value,_), _)) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::or_else_get(_, nonvar).
+	test(expected_or_else_get_2_03, error(existence_error(expected_value,_))) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or_else_get(_, nonvar).
 
 	% or_else_call/2 tests
 
-	succeeds(expected_or_else_call_2_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::or_else_call(_, X = 0),
-		X == 0.
+	test(expected_or_else_call_2_01, true(X == 0)) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or_else_call(_, X = 0).
 
-	succeeds(expected_or_else_call_2_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::or_else_call(Value, X = 0),
-		Value == 1, var(X).
+	test(expected_or_else_call_2_02, true((Value == 1, var(X)))) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or_else_call(Value, X = 0).
 
 	% or_else_throw/1 tests
 
-	throws(expected_or_else_throw_1_01, instantiation_error) :-
-		expected::of_unexpected(instantiation_error, Expected), expected(Expected)::or_else_throw(_).
+	test(expected_or_else_throw_1_01, ball(instantiation_error)) :-
+		expected::of_unexpected(instantiation_error, Expected),
+		expected(Expected)::or_else_throw(_).
 
-	succeeds(expected_or_else_throw_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::or_else_throw(Value),
-		Value == 1.
+	test(expected_or_else_throw_1_02, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or_else_throw(Value).
 
 	% or_else_fail/1 tests
 
-	fails(expected_or_else_fail_1_01) :-
-		expected::of_unexpected(-1, Expected), expected(Expected)::or_else_fail(_).
+	test(expected_or_else_fail_1_01, false) :-
+		expected::of_unexpected(-1, Expected),
+		expected(Expected)::or_else_fail(_).
 
-	succeeds(expected_or_else_fail_1_02) :-
-		expected::of_expected(1, Expected), expected(Expected)::or_else_fail(Value),
-		Value == 1.
+	test(expected_or_else_fail_1_02, true(Value == 1)) :-
+		expected::of_expected(1, Expected),
+		expected(Expected)::or_else_fail(Value).
 
 	% "expected" type tests
 
-	succeeds(expected_type_checking_support_01) :-
+	test(expected_type_checking_support_01, true) :-
 		expected::of_unexpected(-1, Expected),
 		type::check(expected, Expected).
 
-	succeeds(expected_type_checking_support_02) :-
+	test(expected_type_checking_support_02, true) :-
 		expected::of_expected(1, Expected),
 		type::check(expected, Expected).
 
-	succeeds(expected_type_checking_support_03) :-
+	test(expected_type_checking_support_03, true) :-
 		expected::from_goal(Y is 1+2, Y, failure, Expected),
 		type::check(expected, Expected).
 
-	succeeds(expected_type_checking_support_04) :-
+	test(expected_type_checking_support_04, true) :-
 		expected::from_goal(Y is _, Y, failure, Expected),
 		type::check(expected, Expected).
 
-	succeeds(expected_type_checking_support_05) :-
+	test(expected_type_checking_support_05, true) :-
 		expected::from_goal(Y is 1+2, Y, Expected),
 		type::check(expected, Expected).
 
-	succeeds(expected_type_checking_support_06) :-
+	test(expected_type_checking_support_06, true) :-
 		expected::from_goal(Y is _, Y, Expected),
 		type::check(expected, Expected).
 
-	throws(expected_type_checking_support_07, instantiation_error) :-
+	test(expected_type_checking_support_07, ball(instantiation_error)) :-
 		type::check(expected, _).
 
-	throws(expected_type_checking_support_08, type_error(expected,12345)) :-
+	test(expected_type_checking_support_08, ball(type_error(expected,12345))) :-
 		type::check(expected, 12345).
 
-	throws(expected_type_checking_support_09, type_error(expected,foobar)) :-
+	test(expected_type_checking_support_09, ball(type_error(expected,foobar))) :-
 		type::check(expected, foobar).
 
-	throws(expected_type_checking_support_10, type_error(expected,foo(bar,baz))) :-
+	test(expected_type_checking_support_10, ball(type_error(expected,foo(bar,baz)))) :-
 		type::check(expected, foo(bar,baz)).
 
 	% expecteds/2 tests
 
-	succeeds(either_expecteds_2_01) :-
-		either::expecteds([], Values),
-		Values == [].
+	test(either_expecteds_2_01, true(Values == [])) :-
+		either::expecteds([], Values).
 
-	succeeds(either_expecteds_2_02) :-
+	test(either_expecteds_2_02, true(Values == [1, 2])) :-
 		expected::of_unexpected(e1, Expected1),
 		expected::of_expected(1, Expected2),
 		expected::of_unexpected(e2, Expected3),
 		expected::of_expected(2, Expected4),
-		either::expecteds([Expected1, Expected2, Expected3, Expected4], Values),
-		Values == [1, 2].
+		either::expecteds([Expected1, Expected2, Expected3, Expected4], Values).
 
 	% unexpecteds/2 tests
 
-	succeeds(either_unexpecteds_2_01) :-
-		either::unexpecteds([], Errors),
-		Errors == [].
+	test(either_unexpecteds_2_01, true(Errors == [])) :-
+		either::unexpecteds([], Errors).
 
-	succeeds(either_unexpecteds_2_02) :-
+	test(either_unexpecteds_2_02, true(Errors == [e1, e2])) :-
 		expected::of_unexpected(e1, Expected1),
 		expected::of_expected(1, Expected2),
 		expected::of_unexpected(e2, Expected3),
 		expected::of_expected(2, Expected4),
-		either::unexpecteds([Expected1, Expected2, Expected3, Expected4], Errors),
-		Errors == [e1, e2].
+		either::unexpecteds([Expected1, Expected2, Expected3, Expected4], Errors).
 
 	% partition/3 tests
 
-	succeeds(either_partition_3_01) :-
-		either::partition([], Values, Errors),
-		Values == [],
-		Errors == [].
+	test(either_partition_3_01, true(Values-Errors == []-[])) :-
+		either::partition([], Values, Errors).
 
-	succeeds(either_partition_3_02) :-
+	test(either_partition_3_02, true(Values-Errors == [1,2]-[e1,e2])) :-
 		expected::of_unexpected(e1, Expected1),
 		expected::of_expected(1, Expected2),
 		expected::of_unexpected(e2, Expected3),
 		expected::of_expected(2, Expected4),
-		either::partition([Expected1, Expected2, Expected3, Expected4], Values, Errors),
-		Values == [1, 2],
-		Errors == [e1, e2].
+		either::partition([Expected1, Expected2, Expected3, Expected4], Values, Errors).
 
 	% "either" type tests
 
-	succeeds(either_type_checking_support_01) :-
+	test(either_type_checking_support_01, true) :-
 		expected::of_unexpected(a, Expected),
 		type::check(either(integer, atom), Expected).
 
-	succeeds(either_type_checking_support_02) :-
+	test(either_type_checking_support_02, true) :-
 		expected::of_expected(1, Expected),
 		type::check(either(integer, atom), Expected).
 
-	succeeds(either_type_checking_support_03) :-
+	test(either_type_checking_support_03, true) :-
 		expected::from_goal(Y is 1+2, Y, Expected),
 		type::check(either(integer, atom), Expected).
 
-	succeeds(either_type_checking_support_04) :-
+	test(either_type_checking_support_04, true) :-
 		expected::from_goal(2 is 3, _, Expected),
 		type::check(either(integer, atom), Expected).
 
-	succeeds(either_type_checking_support_05) :-
+	test(either_type_checking_support_05, true) :-
 		expected::from_goal(Y is 1+2, Y, a, Expected),
 		type::check(either(integer, atom), Expected).
 
-	succeeds(either_type_checking_support_06) :-
+	test(either_type_checking_support_06, true) :-
 		expected::from_goal(2 is 3, _, a, Expected),
 		type::check(either(integer, atom), Expected).
 
-	throws(either_type_checking_support_07, instantiation_error) :-
+	test(either_type_checking_support_07, ball(instantiation_error)) :-
 		type::check(either(integer, atom), _).
 
-	throws(either_type_checking_support_08, type_error(expected,12345)) :-
+	test(either_type_checking_support_08, ball(type_error(expected,12345))) :-
 		type::check(either(integer, atom), 12345).
 
-	throws(either_type_checking_support_09, type_error(expected,foobar)) :-
+	test(either_type_checking_support_09, ball(type_error(expected,foobar))) :-
 		type::check(either(integer, atom), foobar).
 
-	throws(either_type_checking_support_10, type_error(expected,foo(bar,baz))) :-
+	test(either_type_checking_support_10, ball(type_error(expected,foo(bar,baz)))) :-
 		type::check(either(integer, atom), foo(bar,baz)).
 
-	throws(either_type_checking_support_11, type_error(integer,a)) :-
+	test(either_type_checking_support_11, ball(type_error(integer,a))) :-
 		expected::of_expected(a, Expected),
 		type::check(either(integer, atom), Expected).
 
-	throws(either_type_checking_support_12, type_error(atom,1)) :-
+	test(either_type_checking_support_12, ball(type_error(atom,1))) :-
 		expected::of_unexpected(1, Expected),
 		type::check(either(integer, atom), Expected).
 
-	throws(either_type_checking_support_13, type_error(atom,3)) :-
+	test(either_type_checking_support_13, ball(type_error(atom,3))) :-
 		expected::from_goal(Y is 1+2, Y, Expected),
 		type::check(either(atom, integer), Expected).
 
-	throws(either_type_checking_support_14, type_error(integer,fail)) :-
+	test(either_type_checking_support_14, ball(type_error(integer,fail))) :-
 		expected::from_goal(2 is 3, _, Expected),
 		type::check(either(atom, integer), Expected).
 
-	throws(either_type_checking_support_15, type_error(atom,3)) :-
+	test(either_type_checking_support_15, ball(type_error(atom,3))) :-
 		expected::from_goal(Y is 1+2, Y, fail, Expected),
 		type::check(either(atom, integer), Expected).
 
-	throws(either_type_checking_support_16, type_error(integer,fail)) :-
+	test(either_type_checking_support_16, ball(type_error(integer,fail))) :-
 		expected::from_goal(2 is 3, _, fail, Expected),
 		type::check(either(atom, integer), Expected).
 
