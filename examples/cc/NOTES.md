@@ -26,3 +26,6 @@ Prolog compilers. Those resources have been moved as per Logtalk release
 3.00.0 Alpha 34 to the library directory. This example is kept, however,
 to maintain compatibility with existing applications that use this portable
 operating-system interface and to hold for now a set of unit tests.
+
+But this folder still contains a `plain.lgt` file for testing the conditional
+compilation directives independently of any libraries.

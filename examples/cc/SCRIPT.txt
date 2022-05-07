@@ -18,7 +18,14 @@ limitations under the License.
 ________________________________________________________________________
 
 
-% simply load the example:
+% simply load the example plain.lgt file for running the conditional
+% compilation tests:
 
-| ?- logtalk_load(cc(loader)).
+| ?- logtalk_load(plain).
+...
+
+
+% to run the tests for the old version of this example:
+
+| ?- logtalk_load(cc(tester)).
 ...
