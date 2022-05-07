@@ -49,7 +49,8 @@ Library
 * IMPROVED: API documentation of the `meta_compiler`, `statistics`, and
 `term_io` libraries.
 
-* IMPROVED: The `expecteds` library tests to use explicit assertions.
+* IMPROVED: The `expecteds` and `optionals` libraries tests to use explicit
+assertions.
 
 * FIXED: Typos in the `mode/2` directives for the `inorder/2` and `postorder/2`
 predicates of the `bintree` library object.
