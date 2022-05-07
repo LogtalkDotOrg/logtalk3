@@ -82,6 +82,8 @@ predicate.
 Examples
 --------
 
+* IMPROVED: The `aliases` example tests to use explicit assertions.
+
 * FIXED: The `bench` example to only load the `boyer` and `chat_parser`
 benchmarks when the backend provides `statistics/2` as a built-in predicate.
 
