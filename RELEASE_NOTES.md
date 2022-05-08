@@ -61,6 +61,8 @@ predicates of the `bintree` library object.
 * FIXED: Typo in the `mode/2` directive for the `remove_duplicates/2` predicate
 in the `listp` and `varlistp` library protocols.
 
+* FIXED: The definition of the `os::cpu_time/1` predicate for Tau Prolog.
+
 Tools
 -----
 
