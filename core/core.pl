@@ -22639,7 +22639,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(bagof(_,_,_), p, bagof(*, ^, *), 1).
 '$lgt_built_in_method_spec'(findall(_,_,_), p, findall(*, 0, *), 1).
 '$lgt_built_in_method_spec'(findall(_,_,_,_), p, findall(*, 0, *, *), 1).
-'$lgt_built_in_method_spec'(forall(_,_,_), p, forall(0, 0), 1).
+'$lgt_built_in_method_spec'(forall(_,_), p, forall(0, 0), 1).
 '$lgt_built_in_method_spec'(setof(_,_,_), p, setof(*, ^, *), 1).
 
 

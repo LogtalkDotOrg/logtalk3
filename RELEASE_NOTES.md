@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * ADDED: Support for using `zero_or_error` and `zero_or_one_or_error` number
 of proofs arguments in `mode/2` directives.
 
+* FIXED: Wrong arity in the compiler declaration of the `forall/2` built-in
+method.
+
 Prolog adapter and integration files
 ------------------------------------
 
