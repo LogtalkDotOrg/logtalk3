@@ -13141,11 +13141,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
 	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, _, _, _),
 	\+ (
-		'$lgt_member'(_=Term0, VariableNames),
-		Term0 == Term
-	),
-	% assume that Term is an anonymous variable
-	\+ (
 		'$lgt_member'(_=List0, VariableNames),
 		List0 == List
 	),
