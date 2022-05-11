@@ -97,6 +97,9 @@ Examples
 
 * UPDATED: Documentation and sample queries of the `cc` example.
 
+* UPDATED: The `errors` example to illustrate the linter warning for misuse
+of the standard `findall/3` predicate.
+
 * FIXED: The `bench` example to only load the `boyer` and `chat_parser`
 benchmarks when the backend provides `statistics/2` as a built-in predicate.
 

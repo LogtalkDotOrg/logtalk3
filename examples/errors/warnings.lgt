@@ -402,7 +402,7 @@
 
 	baz.
 
-	% a cut in a clause of a multifile predicate can unwanted and
+	% a cut in a clause of a multifile predicate can have unwanted and
 	% difficult to track consequences as the clauses are distributed
 	% among several entities/files
 
@@ -416,6 +416,15 @@
 	:- dynamic(logtalk::message_prefix_stream/4).
 	logtalk::message_prefix_stream(comment, foo, ':> ', user_error) :-
 		!.
+
+	% sometimes, specially in legacy code, the findall/3 predicate
+	% was used to implement a failure-driven loop or the more recent
+	% forall/2 predicate
+
+	misuse :-
+		findall(_, a(_), _).
+
+	a(1). a(2). a(3).
 
 :- end_object.
 
