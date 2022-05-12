@@ -80,3 +80,14 @@ next_state/3          0    66    18     0    38    18    38     0
 print_state/1         0    12    12    12     0     0     0     0
 -----------------------------------------------------------------
 
+
+% focus on a single predicate:
+
+| ?- ports_profiler::data(state_space, print_path/1).
+
+-------------
+Clause  Count  
+-------------
+     1      1
+     2     12
+-------------

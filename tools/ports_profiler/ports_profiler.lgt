@@ -25,9 +25,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2022-02-23,
+		date is 2022-05-12,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -42,6 +42,14 @@
 	:- info(data/1, [
 		comment is 'Prints a table with all port profiling data for the specified entity.',
 		argnames is ['Entity']
+	]).
+
+	:- public(data/2).
+	:- mode(data(+entity_identifier, +predicate_indicator), one).
+	:- mode(data(+entity_identifier, +non_terminal_indicator), one).
+	:- info(data/2, [
+		comment is 'Prints a table with all port profiling data for the specified entity predicate (or non-terminal).',
+		argnames is ['Entity', 'Predicate']
 	]).
 
 	:- public(reset/0).
@@ -64,12 +72,43 @@
 		argnames is ['Port', 'Entity', 'Functor', 'Arity', 'Count']
 	]).
 
+	:- public(clause_location/6).
+	:- mode(clause_location(?entity_identifier, ?atom, ?integer, ?integer, ?atom, ?integer), zero_or_more).
+	:- info(clause_location/6, [
+		comment is 'Enumerates, by backtracking, all collected profiled clause location data.',
+		argnames is ['Entity', 'Functor', 'Arity', 'ClauseNumber', 'File', 'BeginLine']
+	]).
+
+	:- public(clause/5).
+	:- dynamic(clause/5).
+	:- mode(clause(?entity_identifier, ?atom, ?integer, ?integer, ?integer), zero_or_more).
+	:- info(clause/5, [
+		comment is 'Enumerates, by backtracking, all collected clause profiling data.',
+		argnames is ['Entity', 'Functor', 'Arity', 'ClauseNumber', 'Count']
+	]).
+
+	:- private(clause_location_/6).
+	:- dynamic(clause_location_/6).
+	:- mode(clause_location_(?entity_identifier, ?atom, ?integer, ?integer, ?atom, ?integer), zero_or_more).
+	:- info(clause_location_/6, [
+		comment is 'Internal table of collected profiled clause location data.',
+		argnames is ['Entity', 'Functor', 'Arity', 'ClauseNumber', 'File', 'BeginLine']
+	]).
+
 	:- private(port_/5).
 	:- dynamic(port_/5).
 	:- mode(port_(?atom, ?entity_identifier, ?atom, ?integer, ?integer), zero_or_more).
 	:- info(port_/5, [
 		comment is 'Internal table of collected port profiling data.',
 		argnames is ['Port', 'Entity', 'Functor', 'Arity', 'Count']
+	]).
+
+	:- private(clause_/5).
+	:- dynamic(clause_/5).
+	:- mode(clause_(?entity_identifier, ?atom, ?integer, ?integer, ?integer), zero_or_more).
+	:- info(clause_/5, [
+		comment is 'Internal table of collected clause profiling data.',
+		argnames is ['Entity', 'Functor', 'Arity', 'ClauseNumber', 'Count']
 	]).
 
 	:- private(entity_defines_/2).
@@ -95,13 +134,13 @@
 	logtalk::debug_handler(Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
-	debug_handler(fact(_, Goal, _, _, _), ExCtx) :-
-		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
+	debug_handler(fact(Entity, Goal, ClauseNumber, File, BeginLine), _) :-
 		ground_entity_identifier(Entity, GroundEntity),
+		save_clause_data(GroundEntity, Goal, ClauseNumber, File, BeginLine),
 		port(Goal, fact, GroundEntity).
-	debug_handler(rule(_, Goal, _, _, _), ExCtx) :-
-		logtalk::execution_context(ExCtx, Entity, _, _, _, _, _),
+	debug_handler(rule(Entity, Goal, ClauseNumber, File, BeginLine), _) :-
 		ground_entity_identifier(Entity, GroundEntity),
+		save_clause_data(GroundEntity, Goal, ClauseNumber, File, BeginLine),
 		port(Goal, rule, GroundEntity).
 	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		debug_handler(goal(Goal, TGoal), ExCtx).
@@ -128,6 +167,15 @@
 		;	functor(Entity, Functor, Arity),
 			functor(GroundEntity, Functor, Arity),
 			numbervars(GroundEntity, 0, _)
+		).
+
+	save_clause_data(Entity, Goal, ClauseNumber, File, BeginLine) :-
+		functor(Goal, Functor, Arity),
+		(	retract(clause_(Entity, Functor, Arity, ClauseNumber, OldCount)) ->
+			NewCount is OldCount + 1,
+			assertz(clause_(Entity, Functor, Arity, ClauseNumber, NewCount))
+		;	assertz(clause_location_(Entity, Functor, Arity, ClauseNumber, File, BeginLine)),
+			assertz(clause_(Entity, Functor, Arity, ClauseNumber, 1))
 		).
 
 	% ignore calls to control constructs and ...
@@ -196,12 +244,48 @@
 			write_data_entity([], _)
 		).
 
+	data(Entity, Functor/Arity) :-
+		!,
+		entity_spec_to_template(Entity, EntityTemplate),
+		(	\+ \+ clause_(EntityTemplate, _, _, _, _) ->
+			setof(
+				ClauseNumber-Count,
+				clause_(EntityTemplate, Functor, Arity, ClauseNumber, Count),
+				ClauseCounts
+			),
+			write_data_predicate(ClauseCounts)
+		;	% no profiling data collected so far for this entity predicate
+			write_data_predicate([])
+		).
+
+	data(Entity, Functor//Arity) :-
+		entity_spec_to_template(Entity, EntityTemplate),
+		(	\+ \+ clause_(EntityTemplate, _, _, _, _) ->
+			ExtArity is Arity + 2,
+			setof(
+				GrammarRuleNumber-Count,
+				clause_(EntityTemplate, Functor, ExtArity, GrammarRuleNumber, Count),
+				GrammarRuleCounts
+			),
+			write_data_predicate(GrammarRuleCounts)
+		;	% no profiling data collected so far for this entity non-terminal
+			write_data_predicate([])
+		).
+
 	reset(Entity) :-
 		entity_spec_to_template(Entity, EntityTemplate),
-		retractall(port_(_, EntityTemplate, _, _, _)).
+		retractall(port_(_, EntityTemplate, _, _, _)),
+		retractall(clause_location_(_, _, _, _, _, _)),
+		retractall(clause_(_, _, _, _, _)).
 
 	port(Port, Entity, Functor, Arity, Count) :-
 		port_(Port, Entity, Functor, Arity, Count).
+
+	clause_location(Entity, Functor, Arity, ClauseNumber, File, BeginLine) :-
+		clause_location_(Entity, Functor, Arity, ClauseNumber, File, BeginLine).
+
+	clause(Entity, Functor, Arity, ClauseNumber, NewCount) :-
+		clause_(Entity, Functor, Arity, ClauseNumber, NewCount).
 
 	% auxiliary predicates
 
@@ -218,10 +302,10 @@
 	write_data(Predicates, Entity) :-
 		maximum_width_entity(Predicates, MaximumWidthEntity),
 		maximum_width_predicate(Predicates, MaximumWidthPredicate),
-		maximum_width_result(Entity, MaximumWidthCount),
+		maximum_width_port_count(Entity, MaximumWidthCount),
 		table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount, Ruler),
 		write(Ruler), nl,
-		write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount),
+		write_entity_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount),
 		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
@@ -231,14 +315,28 @@
 
 	write_data_entity(Predicates, Entity) :-
 		maximum_width_predicate(Predicates, MaximumWidthPredicate),
-		maximum_width_result(Entity, MaximumWidthCount),
+		maximum_width_port_count(Entity, MaximumWidthCount),
 		table_ruler(MaximumWidthPredicate, MaximumWidthCount, Ruler),
 		write(Ruler), nl,
-		write_table_label(MaximumWidthPredicate, MaximumWidthCount),
+		write_predicate_table_label(MaximumWidthPredicate, MaximumWidthCount),
 		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
 		;	write_data_rows(Predicates, MaximumWidthPredicate, MaximumWidthCount)
+		),
+		write(Ruler), nl.
+
+	write_data_predicate(ClauseCounts) :-
+		maximum_width_clause_number(ClauseCounts, MaximumWidthNumber),
+		maximum_width_clause_count(ClauseCounts, MaximumWidthCount),
+		Length is MaximumWidthNumber + 2 + MaximumWidthCount,
+		generate_atom(Length, '-', Ruler),
+		write(Ruler), nl,
+		write_clause_table_label(MaximumWidthNumber, MaximumWidthCount),
+		write(Ruler), nl,
+		(	ClauseCounts == [] ->
+			write('(no profiling data available)'), nl
+		;	write_clause_data_rows(ClauseCounts, MaximumWidthNumber, MaximumWidthCount)
 		),
 		write(Ruler), nl.
 
@@ -275,9 +373,9 @@
 		Max1 is max(Max0, FunctorLength+1+ArityLength),
 		maximum_width_predicate(Predicates, Max1, Max).
 
-	maximum_width_result(Entity, MaximumWidthCount) :-
+	maximum_width_port_count(Entity, MaximumWidthCount) :-
 		(	var(Entity),
-			setof(Count, count(Count), Counts) ->
+			setof(Count, port_count(Count), Counts) ->
 			true
 		;	numbervars(Entity, 0, _),
 			setof(Count, entity_count(Entity, Count), Counts) ->
@@ -293,13 +391,35 @@
 			atom_length(Atom, MaximumWidthCount)
 		).
 
-	count(Count) :-
+	port_count(Count) :-
 		port_(_, _, _, _, Count).
 
 	entity_count(Entity, Count) :-
 		port_(_, Entity, _, _, Count).
 
-	write_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount) :-
+	maximum_width_clause_number(ClauseCounts, MaximumWidthNumber) :-
+		last(ClauseCounts, MaxNumber-_),
+		(	MaxNumber =< 999999 ->
+			% "Clause" uses 6 letters
+			MaximumWidthNumber = 6
+		;	number_codes(MaxNumber, Codes),
+			atom_codes(Atom, Codes),
+			atom_length(Atom, MaximumWidthNumber)
+		).
+
+	maximum_width_clause_count(ClauseCounts, MaximumWidthCount) :-
+		findall(Count, member(_-Count, ClauseCounts), Counts),
+		sort(Counts, SortedCounts),
+		last(SortedCounts, MaxCount),
+		(	MaxCount =< 99999 ->
+			% "Count" uses 5 letters
+			MaximumWidthCount = 5
+		;	number_codes(MaxCount, Codes),
+			atom_codes(Atom, Codes),
+			atom_length(Atom, MaximumWidthCount)
+		).
+
+	write_entity_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount) :-
 		atom_to_right_padded_atom('Entity', MaximumWidthEntity, Entity),
 		atom_to_right_padded_atom('Predicate', MaximumWidthPredicate, Predicate),
 		atom_to_left_padded_atom(' Fact', MaximumWidthCount, Fact),
@@ -312,7 +432,7 @@
 		atom_to_left_padded_atom('Error', MaximumWidthCount, Error),
 		write_list([Entity, Predicate, Fact, Rule, Call, Exit, NDExit, Fail, Redo, Error]), nl.
 
-	write_table_label(MaximumWidthPredicate, MaximumWidthCount) :-
+	write_predicate_table_label(MaximumWidthPredicate, MaximumWidthCount) :-
 		atom_to_right_padded_atom('Predicate', MaximumWidthPredicate, Predicate),
 		atom_to_left_padded_atom(' Fact', MaximumWidthCount, Fact),
 		atom_to_left_padded_atom(' Rule', MaximumWidthCount, Rule),
@@ -323,6 +443,11 @@
 		atom_to_left_padded_atom(' Redo', MaximumWidthCount, Redo),
 		atom_to_left_padded_atom('Error', MaximumWidthCount, Error),
 		write_list([Predicate, Fact, Rule, Call, Exit, NDExit, Fail, Redo, Error]), nl.
+
+	write_clause_table_label(MaximumWidthNumber, MaximumWidthCount) :-
+		atom_to_right_padded_atom('Clause', MaximumWidthNumber, Clause),
+		atom_to_right_padded_atom('Count', MaximumWidthCount, Count),
+		write_list([Clause, Count]), nl.
 
 	write_data_rows([], _, _, _).
 	write_data_rows([Entity-Functor/Arity| Predicates], MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount) :-
@@ -354,6 +479,13 @@
 		predicate_to_padded_atom(Entity, Functor/Arity, MaximumWidthPredicate, PredicateAtom),
 		write_list([PredicateAtom, FactAtom, RuleAtom, CallAtom, ExitAtom, NDExitAtom, FailAtom, RedoAtom, ExceptionAtom]), nl,
 		write_data_rows(Predicates, MaximumWidthPredicate, MaximumWidthCount).
+
+	write_clause_data_rows([], _, _).
+	write_clause_data_rows([Clause-Count| ClauseCounts], MaximumWidthNumber, MaximumWidthCount) :-
+		clause_to_padded_atom(Clause, MaximumWidthNumber, ClauseAtom),
+		integer_to_padded_atom(Count, MaximumWidthCount, CountAtom),
+		write_list([ClauseAtom, CountAtom]), nl,
+		write_clause_data_rows(ClauseCounts, MaximumWidthNumber, MaximumWidthCount).
 
 	write_list([]).
 	write_list([Atom| Atoms]) :-
@@ -408,6 +540,14 @@
 		PadLength is MaximumWidth + 2 - Length1,
 		generate_atom(PadLength, ' ', Pad),
 		atom_concat(Atom1, Pad, Atom).
+
+	clause_to_padded_atom(Clause, MaximumWidth, Atom) :-
+		number_codes(Clause, Codes),
+		atom_codes(Atom0, Codes),
+		atom_length(Atom0, Length),
+		PadLength is MaximumWidth - Length,
+		generate_atom(PadLength, ' ', Pad),
+		atom_concat(Pad, Atom0, Atom).
 
 	integer_to_padded_atom(Integer, MaximumWidth, Atom) :-
 		number_codes(Integer, Codes),
@@ -488,6 +628,13 @@
 
 	% list auxiliary predicates; we could use the Logtalk standard library
 	% but we prefer to make this object self-contained given its purpose
+
+	last([Head| Tail], Last) :-
+		last(Tail, Head, Last).
+
+	last([], Last, Last).
+	last([Head| Tail], _, Last) :-
+		last(Tail, Head, Last).
 
 	member(Head, [Head| _]).
 	member(Head, [_| Tail]) :-

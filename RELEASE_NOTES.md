@@ -81,6 +81,8 @@ all test object parameterizations and files.
 * ADDED: Linter warnings for missing documentation directives to the `lgtdoc`
 tool.
 
+* ADDED: Support for printing clause usage stats to the `ports_profiler` tool.
+
 * IMPROVED: API documentation of the `debugger` and `lgtunit` tools.
 
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.

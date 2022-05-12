@@ -11,8 +11,8 @@
 Predicate execution box model port profiler.
 
 | **Author:** Paulo Moura
-| **Version:** 1:11:0
-| **Date:** 2022-02-23
+| **Version:** 1:12:0
+| **Date:** 2022-05-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -84,6 +84,30 @@ Prints a table with all port profiling data for the specified entity.
 
 .. raw:: html
 
+   <div id="data/2"> </div>
+
+.. index:: data/2
+.. _ports_profiler/0::data/2:
+
+``data/2``
+^^^^^^^^^^
+
+Prints a table with all port profiling data for the specified entity predicate (or non-terminal).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``data(Entity,Predicate)``
+| **Mode and number of proofs:**
+|    ``data(+entity_identifier,+predicate_indicator)`` - ``one``
+|    ``data(+entity_identifier,+non_terminal_indicator)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
    <div id="reset/0"> </div>
 
 .. index:: reset/0
@@ -149,6 +173,52 @@ Enumerates, by backtracking, all collected port profiling data.
 
 ------------
 
+.. raw:: html
+
+   <div id="clause_location/6"> </div>
+
+.. index:: clause_location/6
+.. _ports_profiler/0::clause_location/6:
+
+``clause_location/6``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all collected profiled clause location data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clause_location(Entity,Functor,Arity,ClauseNumber,File,BeginLine)``
+| **Mode and number of proofs:**
+|    ``clause_location(?entity_identifier,?atom,?integer,?integer,?atom,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clause/5"> </div>
+
+.. index:: clause/5
+.. _ports_profiler/0::clause/5:
+
+``clause/5``
+^^^^^^^^^^^^
+
+Enumerates, by backtracking, all collected clause profiling data.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``clause(Entity,Functor,Arity,ClauseNumber,Count)``
+| **Mode and number of proofs:**
+|    ``clause(?entity_identifier,?atom,?integer,?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
 Protected predicates
 --------------------
 
@@ -156,6 +226,29 @@ Protected predicates
 
 Private predicates
 ------------------
+
+.. raw:: html
+
+   <div id="clause_location_/6"> </div>
+
+.. index:: clause_location_/6
+.. _ports_profiler/0::clause_location_/6:
+
+``clause_location_/6``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Internal table of collected profiled clause location data.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``clause_location_(Entity,Functor,Arity,ClauseNumber,File,BeginLine)``
+| **Mode and number of proofs:**
+|    ``clause_location_(?entity_identifier,?atom,?integer,?integer,?atom,?integer)`` - ``zero_or_more``
+
+
+------------
 
 .. raw:: html
 
@@ -176,6 +269,29 @@ Internal table of collected port profiling data.
 |    ``port_(Port,Entity,Functor,Arity,Count)``
 | **Mode and number of proofs:**
 |    ``port_(?atom,?entity_identifier,?atom,?integer,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. raw:: html
+
+   <div id="clause_/5"> </div>
+
+.. index:: clause_/5
+.. _ports_profiler/0::clause_/5:
+
+``clause_/5``
+^^^^^^^^^^^^^
+
+Internal table of collected clause profiling data.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``clause_(Entity,Functor,Arity,ClauseNumber,Count)``
+| **Mode and number of proofs:**
+|    ``clause_(?entity_identifier,?atom,?integer,?integer,?integer)`` - ``zero_or_more``
 
 
 ------------
