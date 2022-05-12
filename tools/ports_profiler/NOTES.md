@@ -24,7 +24,8 @@ ________________________________________________________________________
 
 This tool counts and reports the number of times each port in the
 *procedure box model* is traversed during the execution of queries.
-It is inspired by the ECLiPSe `port_profiler` tool.
+It can also report the number of times each clause (or grammar rule)
+is used. It is inspired by the ECLiPSe `port_profiler` tool.
 
 The procedure box model is the same used in the debugger tool. This
 is an extended version of the original Byrd's four port model. Besides
@@ -100,6 +101,13 @@ To print a table with data for a single entity, use the query:
 
 	| ?- ports_profiler::data(Entity).
 
+To print a table with data for a single entity predicate, use the query:
+
+	| ?- ports_profiler::data(Entity, Predicate).
+
+In this case, the second argument must be either a predicate indicator,
+`Name/Arity, or a non-terminal indicator, `Name//Arity`.
+
 The profiling data can be reset using the query:
 
 	| ?- ports_profiler::reset.
@@ -134,15 +142,36 @@ distribution:
 	no
 	
 	| ?- ports_profiler::data.
-	-----------------------------------------------------------------------
-	Entity      Predicate    Fact  Rule  Call  Exit *Exit  Fail  Redo Error
-	-----------------------------------------------------------------------
-	addams      female/1        2     0     1     1     1     0     1     0
-	addams      parent/2        8     0     4     3     5     1     5     0
-	familytree  sister/2        0     1     1     0     4     1     4     0
-	-----------------------------------------------------------------------
+	----------------------------------------------------------------------
+	Entity     Predicate    Fact  Rule  Call  Exit *Exit  Fail  Redo Error
+	----------------------------------------------------------------------
+	addams     female/1        2     0     1     1     1     0     1     0
+	addams     parent/2        8     0     4     3     5     1     5     0
+	relations  sister/2        0     1     1     0     4     1     4     0
+	----------------------------------------------------------------------
 	yes
 
+	| ?- ports_profiler::data(addams).
+	-----------------------------------------------------------
+	Predicate    Fact  Rule  Call  Exit *Exit  Fail  Redo Error
+	-----------------------------------------------------------
+	female/1        2     0     1     1     1     0     1     0
+	parent/2        8     0     4     3     5     1     5     0
+	-----------------------------------------------------------
+	yes
+
+	| ?- ports_profiler::data(addams, parent/2).
+	-------------
+	Clause  Count  
+	-------------
+	     1      1
+	     2      1
+	     3      2
+	     4      1
+	     5      1
+	     6      2
+	-------------
+	yes
 
 Interpreting profiling data
 ---------------------------
@@ -155,6 +184,7 @@ Some useful information that can be inferred from the profiling data include:
 - performance issues due to backtracking (from the `*exit` and `redo` ports)
 - predicates acting like a generator of possible solutions (from the `*exit` and `redo` ports)
 - inefficient indexing of predicate clauses (from the `fact`, `rule`, and `call` ports)
+- clauses that are never used or seldom used
 
 The profiling data should be analyzed taking into account the expected
 behavior for the profiled predicates.

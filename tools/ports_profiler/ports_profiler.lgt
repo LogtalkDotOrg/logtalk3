@@ -259,18 +259,8 @@
 		).
 
 	data(Entity, Functor//Arity) :-
-		entity_spec_to_template(Entity, EntityTemplate),
-		(	\+ \+ clause_(EntityTemplate, _, _, _, _) ->
-			ExtArity is Arity + 2,
-			setof(
-				GrammarRuleNumber-Count,
-				clause_(EntityTemplate, Functor, ExtArity, GrammarRuleNumber, Count),
-				GrammarRuleCounts
-			),
-			write_data_predicate(GrammarRuleCounts)
-		;	% no profiling data collected so far for this entity non-terminal
-			write_data_predicate([])
-		).
+		ExtArity is Arity + 2,
+		data(Entity, Functor/ExtArity).
 
 	reset(Entity) :-
 		entity_spec_to_template(Entity, EntityTemplate),

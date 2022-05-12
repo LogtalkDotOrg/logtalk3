@@ -137,7 +137,8 @@
 <h1><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code><a class="headerlink" href="#ports-profiler" title="Permalink to this headline"></a></h1>
 <p>This tool counts and reports the number of times each port in the
 <em>procedure box model</em> is traversed during the execution of queries. It
-is inspired by the ECLiPSe <code class="docutils literal notranslate"><span class="pre">port_profiler</span></code> tool.</p>
+can also report the number of times each clause (or grammar rule) is
+used. It is inspired by the ECLiPSe <code class="docutils literal notranslate"><span class="pre">port_profiler</span></code> tool.</p>
 <p>The procedure box model is the same used in the debugger tool. This is
 an extended version of the original Byrd’s four port model. Besides the
 standard <code class="docutils literal notranslate"><span class="pre">call</span></code>, <code class="docutils literal notranslate"><span class="pre">exit</span></code>, <code class="docutils literal notranslate"><span class="pre">fail</span></code>, and <code class="docutils literal notranslate"><span class="pre">redo</span></code> ports, Logtalk also
@@ -202,6 +203,12 @@ with all profile data by typing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>data(<span class="nv">Entity</span>).
 </pre></div>
 </div>
+<p>To print a table with data for a single entity predicate, use the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>data(<span class="nv">Entity</span>, <span class="nv">Predicate</span>).
+</pre></div>
+</div>
+<p>In this case, the second argument must be either a predicate indicator,
+<code class="docutils literal notranslate"><span class="pre">Name/Arity,</span> <span class="pre">or</span> <span class="pre">a</span> <span class="pre">non-terminal</span> <span class="pre">indicator,</span></code>Name//Arity`.</p>
 <p>The profiling data can be reset using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>reset.
 </pre></div>
@@ -235,13 +242,35 @@ yes
 no
 
 | <span class="o">?-</span> ports_profiler<span class="o">::</span>data.
-<span class="o">-----------------------------------------------------------------------</span>
-<span class="nv">Entity</span>      <span class="nv">Predicate</span>    <span class="nv">Fact</span>  <span class="nv">Rule</span>  <span class="nv">Call</span>  <span class="nv">Exit</span> <span class="o">*</span><span class="nv">Exit</span>  <span class="nv">Fail</span>  <span class="nv">Redo</span> <span class="nv">Error</span>
-<span class="o">-----------------------------------------------------------------------</span>
-addams      female<span class="o">/</span><span class="m">1</span>        <span class="m">2</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">0</span>
-addams      parent<span class="o">/</span><span class="m">2</span>        <span class="m">8</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">3</span>     <span class="m">5</span>     <span class="m">1</span>     <span class="m">5</span>     <span class="m">0</span>
-familytree  sister<span class="o">/</span><span class="m">2</span>        <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">1</span>     <span class="m">4</span>     <span class="m">0</span>
-<span class="o">-----------------------------------------------------------------------</span>
+<span class="o">----------------------------------------------------------------------</span>
+<span class="nv">Entity</span>     <span class="nv">Predicate</span>    <span class="nv">Fact</span>  <span class="nv">Rule</span>  <span class="nv">Call</span>  <span class="nv">Exit</span> <span class="o">*</span><span class="nv">Exit</span>  <span class="nv">Fail</span>  <span class="nv">Redo</span> <span class="nv">Error</span>
+<span class="o">----------------------------------------------------------------------</span>
+addams     female<span class="o">/</span><span class="m">1</span>        <span class="m">2</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">0</span>
+addams     parent<span class="o">/</span><span class="m">2</span>        <span class="m">8</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">3</span>     <span class="m">5</span>     <span class="m">1</span>     <span class="m">5</span>     <span class="m">0</span>
+relations  sister<span class="o">/</span><span class="m">2</span>        <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">1</span>     <span class="m">4</span>     <span class="m">0</span>
+<span class="o">----------------------------------------------------------------------</span>
+yes
+
+| <span class="o">?-</span> ports_profiler<span class="o">::</span>data(addams).
+<span class="o">-----------------------------------------------------------</span>
+<span class="nv">Predicate</span>    <span class="nv">Fact</span>  <span class="nv">Rule</span>  <span class="nv">Call</span>  <span class="nv">Exit</span> <span class="o">*</span><span class="nv">Exit</span>  <span class="nv">Fail</span>  <span class="nv">Redo</span> <span class="nv">Error</span>
+<span class="o">-----------------------------------------------------------</span>
+female<span class="o">/</span><span class="m">1</span>        <span class="m">2</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">1</span>     <span class="m">0</span>     <span class="m">1</span>     <span class="m">0</span>
+parent<span class="o">/</span><span class="m">2</span>        <span class="m">8</span>     <span class="m">0</span>     <span class="m">4</span>     <span class="m">3</span>     <span class="m">5</span>     <span class="m">1</span>     <span class="m">5</span>     <span class="m">0</span>
+<span class="o">-----------------------------------------------------------</span>
+yes
+
+| <span class="o">?-</span> ports_profiler<span class="o">::</span>data(addams, parent<span class="o">/</span><span class="m">2</span>).
+<span class="o">-------------</span>
+<span class="nv">Clause</span>  <span class="nv">Count</span>
+<span class="o">-------------</span>
+     <span class="m">1</span>      <span class="m">1</span>
+     <span class="m">2</span>      <span class="m">1</span>
+     <span class="m">3</span>      <span class="m">2</span>
+     <span class="m">4</span>      <span class="m">1</span>
+     <span class="m">5</span>      <span class="m">1</span>
+     <span class="m">6</span>      <span class="m">2</span>
+<span class="o">-------------</span>
 yes
 </pre></div>
 </div>
@@ -260,6 +289,7 @@ include:</p>
 <code class="docutils literal notranslate"><span class="pre">*exit</span></code> and <code class="docutils literal notranslate"><span class="pre">redo</span></code> ports)</p></li>
 <li><p>inefficient indexing of predicate clauses (from the <code class="docutils literal notranslate"><span class="pre">fact</span></code>,
 <code class="docutils literal notranslate"><span class="pre">rule</span></code>, and <code class="docutils literal notranslate"><span class="pre">call</span></code> ports)</p></li>
+<li><p>clauses that are never used or seldom used</p></li>
 </ul>
 <p>The profiling data should be analyzed taking into account the expected
 behavior for the profiled predicates.</p>
