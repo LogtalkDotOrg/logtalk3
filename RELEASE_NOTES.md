@@ -37,6 +37,9 @@ of `forall/2` goals.
 * FIXED: Wrong arity in the compiler declaration of the `forall/2` built-in
 method.
 
+* FIXED: Bugs in the implementation of the `asserta/2` and `assertz/2` built-in
+methods where the second argument would not be bound in all cases.
+
 Prolog adapter and integration files
 ------------------------------------
 

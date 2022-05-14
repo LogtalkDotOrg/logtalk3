@@ -3488,7 +3488,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 56, 0, b01)).
+'$lgt_version_data'(logtalk(3, 56, 0, b02)).
 
 
 
@@ -4717,7 +4717,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				% object compiled in debug mode
 				asserta((THead :- '$lgt_debug'(fact(Obj, Head, 0, nil, 0), GExCtx)), Ref)
 			;	'$lgt_add_db_lookup_cache_entry'(Obj, Head, SCtn, DclScope, Type, Sender, THead, DDef, Update),
-				asserta(THead)
+				asserta(THead, Ref)
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Head, Functor, Arity),
@@ -4776,8 +4776,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_compile_body'(Body, TBody, DBody, Ctx),
 			(	Flags /\ 512 =:= 512 ->
 				% object compiled in debug mode
-				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), GExCtx), DBody)))
-			;	assertz((THead :- ('$lgt_nop'(Body), TBody)))
+				assertz((THead :- ('$lgt_nop'(Body), '$lgt_debug'(rule(Obj, Head, 0, nil, 0), GExCtx), DBody)), Ref)
+			;	assertz((THead :- ('$lgt_nop'(Body), TBody)), Ref)
 			)
 		;	% predicate is not within the scope of the sender
 			functor(Head, Functor, Arity),
@@ -4897,13 +4897,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	% predicate is not within the scope of the sender
 				functor(Head, Functor, Arity),
 				(	Scope == p ->
-					throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
-				;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
+					throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(clause(Head, Body, Ref), ExCtx)))
+				;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(clause(Head, Body, Ref), ExCtx)))
 				)
 			)
 		;	% predicate is static
 			functor(Head, Functor, Arity),
-			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
+			throw(error(permission_error(access, static_predicate, Functor/Arity), logtalk(clause(Head, Body, Ref), ExCtx)))
 		)
 	;	Obj = Sender,
 		(call(DDef, Head, _, THead0); call(Def, Head, _, THead0)) ->
@@ -4918,11 +4918,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	% unknown predicate
 		functor(Head, Functor, Arity),
-		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body), ExCtx)))
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(clause(Head, Body, Ref), ExCtx)))
 	).
 
-'$lgt_clause_checked'(Obj, Head, Body, _, _, _, ExCtx) :-
-	throw(error(existence_error(object, Obj), logtalk(Obj::clause(Head, Body), ExCtx))).
+'$lgt_clause_checked'(Obj, Head, Body, Ref, _, _, ExCtx) :-
+	throw(error(existence_error(object, Obj), logtalk(Obj::clause(Head, Body, Ref), ExCtx))).
 
 
 
