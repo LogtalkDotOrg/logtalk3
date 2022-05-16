@@ -23,6 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(user_predicates),
+	logtalk_load(test_entities),
 	logtalk_load(tests, [hook(lgtunit)]),
 	% the test/1 object parameter is used for testing
 	% predicate shortcuts declared in uses/2 directives

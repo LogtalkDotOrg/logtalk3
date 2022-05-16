@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for calls to the database and reflection built-in methods
+where the predicate argument is only bound at runtime and is listed in a
+`uses/2` or `use_module/2` directive.
+
 * ADDED: Support for using `zero_or_error` and `zero_or_one_or_error` number
 of proofs arguments in `mode/2` directives.
 

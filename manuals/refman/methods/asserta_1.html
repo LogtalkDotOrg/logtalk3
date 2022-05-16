@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>asserta/1 &mdash; The Logtalk Handbook v3.56.0-b02 documentation</title>
+  <title>asserta/1 &mdash; The Logtalk Handbook v3.56.0-b03 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -210,6 +210,28 @@ created objects when writing constructors.</p>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Object::asserta(Clause)</span></code></div>
 </div>
+</div>
+<p>An example of asserting clauses into another object with the predicates
+listed using a <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive (similar when using a
+<a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(reasoner(<span class="nv">_KnowledgeBase_</span>)).
+
+<span class="p">    :- </span><span class="k">uses</span>(<span class="nv">_KnowledgeBase_</span>, [
+        foo<span class="o">/</span><span class="m">1</span>, bar<span class="o">/</span><span class="m">1</span>
+    ]).
+
+    baz(<span class="nv">X</span>) <span class="o">:-</span>
+       <span class="c">% compiled as _KnowledgeBase_::assertz(foo(X))</span>
+       <span class="k">asserta</span>(foo(<span class="nv">X</span>)).
+
+   foobar(<span class="nv">Name</span>, <span class="nv">Argument</span>) <span class="o">:-</span>
+      <span class="nv">Clause</span> <span class="o">=..</span> [<span class="nv">Name</span>, <span class="nv">Argument</span>],
+      <span class="c">% runtime resolved to _KnowledgeBase_::assertz(Clause)</span>
+      <span class="c">% when Name is either foo or bar</span>
+      <span class="k">asserta</span>(<span class="nv">Clause</span>).
+
+    ...
+</pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>

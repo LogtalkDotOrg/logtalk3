@@ -33,9 +33,8 @@ Enumerates, by backtracking, visible, user-defined, object predicates.
 Built-in predicates and predicates not declared using a scope directive
 are not enumerated.
 
-When ``Predicate`` is ground at compile time, this predicate also
-succeeds for any predicates listed in :ref:`directives_uses_2` and
-:ref:`directives_use_module_2` directives.
+This predicate also succeeds for any predicates listed in :ref:`directives_uses_2`
+and :ref:`directives_use_module_2` directives.
 
 When ``Predicate`` is bound at compile time to a ``(:)/2`` term, this
 predicate enumerates module predicates (assuming that the
@@ -69,6 +68,32 @@ Examples
 |     ``::current_predicate(Predicate)``
 | To enumerate, by backtracking, the public user predicates visible for an explicit object:
 |     ``Object::current_predicate(Predicate)``
+
+An example of enumerating locally visible object predicates. These include
+predicates listed using :ref:`directives_uses_2` and :ref:`directives_use_module_2`
+directives:
+
+::
+
+   :- object(foo).
+
+       :- uses(bar, [
+           baz/1, quux/2
+       ]).
+
+       :- public(pred/1).
+       pred(X) :-
+          current_predicate(X).
+
+   :- end_object.
+
+::
+
+   | ?- foo::pred(X).
+   X = pred/1 ;
+   X = baz/1 ;
+   X = quux/2 ;
+   no
 
 .. seealso::
 

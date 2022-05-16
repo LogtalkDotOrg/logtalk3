@@ -19,131 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(uses_2_test_object_1).
-
-	:- public(p/1).
-	p(1).
-
-	:- public(q/1).
-	q(2).
-
-	:- public(r/2).
-	r(1, one).
-	r(2, two).
-
-	:- public(s/2).
-	s(1, a). s(1, b). s(1, c).
-	s(2, x). s(2, y). s(2, z).
-
-:- end_object.
-
-
-
-% test object for calling user-defined predicates in "user"
-% it requires a backend Prolog compiler that supports the
-% definition of meta-predicates in plain Prolog
-
-:- object(uses_2_test_object_2).
-
-	:- uses(user, [foo/1]).
-
-	:- public(p/1).
-	p(X) :-
-		foo(X).
-
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == eclipse; Dialect == lvm; Dialect == sicstus;
-			Dialect = swi; Dialect = trealla; Dialect = yap
-		)
-	)).
-
-	:- uses(user, [bar/1]).
-
-	:- public(mp/1).
-	mp(X) :-
-		bar(l(X)).
-
-	l(2).
-
-	:- endif.
-
-:- end_object.
-
-
-
-% test entities for using a parametric variable in the directive
-
-:- protocol(foo).
-
-	:- public([q/1, g//1]).
-
-:- end_protocol.
-
-
-:- object(bar,
-	implements(foo)).
-
-	q(bar).
-
-	g(X) --> [X].
-
-:- end_object.
-
-
-:- object(baz,
-	implements(foo)).
-
-	q(baz).
-
-	g(Y) --> [X], {Y is X * 2}.
-
-:- end_object.
-
-
-:- object(foo(_Object_)).
-
-	:- uses(_Object_, [q/1, g//1]).
-
-	:- public(p/1).
-	p(X) :- q(X).
-
-	:- public(r/1).
-	r(X) :- phrase(g(X), [1]).
-
-:- end_object.
-
-
-:- object(bar(_Object_)).
-
-	:- uses(_Object_, [r/1]).
-
-	:- public(q/1).
-	q(X) :- r(X).
-
-
-:- end_object.
-
-
-:- object(baz(_Object_)).
-
-	:- uses(bar(_Object_), [q/1]).
-
-	:- public(p/1).
-	p(X) :- q(X).
-
-:- end_object.
-
-
-% tests
-
 :- object(tests(_Index_),
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-12-29,
+		date is 2022-05-16,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
@@ -196,5 +78,21 @@
 
 	test(uses_2_11, true(L == [1,2,3])) :-
 		findall(X, baz(user)::p(X), L).
+
+	test(uses_2_12, true(L == [cp/1, d1/1, d2/1, d3/1, p/1, pp/2, q/1, r/1])) :-
+		setof(P, uses_2_test_object_3(dyn)::cp(P), L).
+
+	test(uses_2_13, true(L == [d1/1, d2/1, d3/1])) :-
+		setof(N/A, P^(uses_2_test_object_3(dyn)::cp(N/A), functor(P,N,A), uses_2_test_object_3(dyn)::pp(P,(dynamic))), L).
+
+	test(uses_2_14, true(X == 0)) :-
+		uses_2_test_object_3(dyn)::p(d1(X)).
+
+	test(uses_2_15, true(L == [0,1])) :-
+		uses_2_test_object_3(dyn)::q(d2(1)),
+		findall(X, uses_2_test_object_3(dyn)::p(d2(X)), L).
+
+	test(uses_2_16, true(L == [0,1])) :-
+		findall(X, uses_2_test_object_3(dyn)::r(d2(X)), L).
 
 :- end_object.

@@ -36,10 +36,9 @@ grammar section on :ref:`predicate properties <grammar_predicate_properties>`
 and described in the User Manual section on
 :ref:`predicate properties <predicates_properties>`.
 
-When ``Predicate`` is ground at compile time and its predicate indicator
-is listed in a :ref:`directives_uses_2` or :ref:`directives_use_module_2`
-directive, properties are enumerated for the referenced object or module
-predicate.
+When ``Predicate`` is listed in a :ref:`directives_uses_2` or
+:ref:`directives_use_module_2` directive, properties are enumerated for
+the referenced object or module predicate.
 
 When ``Predicate`` is bound at compile time to a ``(:)/2`` term, this
 predicate enumerates properties for module predicates (assuming that
@@ -71,6 +70,33 @@ Examples
 |     ``::predicate_property(Predicate, Property)``
 | To enumerate, by backtracking, the properties of a public predicate visible in an explicit object:
 |     ``Object::predicate_property(Predicate, Property)``
+
+An example of enumerating properties for locally visible object predicates.
+These include predicates listed using :ref:`directives_uses_2` and
+:ref:`directives_use_module_2` directives:
+
+::
+
+   :- object(foo).
+
+       :- uses(bar, [
+           baz/1, quux/2
+       ]).
+
+       :- public(pred/1).
+       pred_prop(Pred, Prop) :-
+          predicate_property(Pred, Prop).
+
+   :- end_object.
+
+::
+
+   | ?- foo::pred(baz(_), Prop).
+   Prop = logtalk ;
+   Prop = scope(public) ;
+   Prop = public ;
+   Prop = declared_in(bar) ;
+   ...
 
 .. seealso::
 

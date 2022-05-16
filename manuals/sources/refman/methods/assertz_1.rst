@@ -82,6 +82,30 @@ Examples
 | To assert a clause as the last one for any public dynamic predicate in an explicit object:
 |     ``Object::assertz(Clause)``
 
+An example of asserting clauses into another object with the predicates
+listed using a :ref:`directives_uses_2` directive (similar when using a
+:ref:`directives_use_module_2` directive):
+
+::
+
+   :- object(reasoner(_KnowledgeBase_)).
+
+       :- uses(_KnowledgeBase_, [
+           foo/1, bar/1
+       ]).
+
+       baz(X) :-
+          % compiled as _KnowledgeBase_::assertz(foo(X))
+          assertz(foo(X)).
+
+      foobar(Name, Argument) :-
+         Clause =.. [Name, Argument],
+         % runtime resolved to _KnowledgeBase_::assertz(Clause)
+         % when Name is either foo or bar
+         assertz(Clause).
+
+       ...
+
 .. seealso::
 
    :ref:`methods_abolish_1`,

@@ -156,7 +156,7 @@ identifier to delay to runtime the actual module to use:
 
        :- use_module(_OptionsModule_, [
            set/2, get/2, reset/0
-       ])
+       ]).
 
 .. seealso::
 
