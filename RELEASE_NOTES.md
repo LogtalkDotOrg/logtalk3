@@ -38,6 +38,10 @@ of proofs arguments in `mode/2` directives.
 * IMPROVED: Generalized the linter check for `findall/3` goals used in place
 of `forall/2` goals.
 
+* FIXED: Cases where name conflicts between built-in methods and predicates
+listed in `public/1`, `protected/1`, `private/1`, `uses/2` and `use_module/2`
+directives would not be reported.
+
 * FIXED: Wrong arity in the compiler declaration of the `forall/2` built-in
 method.
 
