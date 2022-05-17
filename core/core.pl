@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 56, 0, b05)).
+'$lgt_version_data'(logtalk(3, 56, 0, b06)).
 
 
 
@@ -3645,7 +3645,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property'(Obj, Pred, Prop, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
-	'$lgt_uses_predicate_'(Obj, Other, Original, Pred, Ctx),
+	'$lgt_uses_predicate_'(Entity, Other, Original, Pred, Ctx),
 	!,
 	'$lgt_predicate_property'(Other, Original, Prop, Obj, p(p(p)), ExCtx).
 
@@ -4026,12 +4026,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	abolish(Functor/Arity).
 
-'$lgt_abolish_checked'(Obj, Functor/Arity, _, _, ExCtx) :-
+'$lgt_abolish_checked'(Obj, Functor/Arity, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	functor(Head, Functor, Arity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		functor(Original, OriginalFunctor, OriginalArity),
 		'$lgt_abolish_checked'(Other, OriginalFunctor/OriginalArity, Obj, p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
@@ -4123,11 +4122,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_asserta_rule_checked'(Obj, (Head:-Body), _, _, _, ExCtx) :-
+'$lgt_asserta_rule_checked'(Obj, (Head:-Body), Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_asserta_rule_checked'(Other, (Original:-Body), Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		asserta(':'(Module, (Original:-Body)))
@@ -4172,11 +4170,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	asserta(THead).
 
-'$lgt_asserta_fact_checked'(Obj, Head, _, _, _, ExCtx) :-
+'$lgt_asserta_fact_checked'(Obj, Head, Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_asserta_fact_checked'(Other, Original, Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		asserta(':'(Module, Original))
@@ -4241,11 +4238,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_assertz_rule_checked'(Obj, (Head:-Body), _, _, _, ExCtx) :-
+'$lgt_assertz_rule_checked'(Obj, (Head:-Body), Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_assertz_rule_checked'(Other, (Original:-Body), Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		assertz(':'(Module, (Original:-Body)))
@@ -4290,11 +4286,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	assertz(THead).
 
-'$lgt_assertz_fact_checked'(Obj, Head, _, _, _, ExCtx) :-
+'$lgt_assertz_fact_checked'(Obj, Head, Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_assertz_fact_checked'(Other, Original, Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		assertz(':'(Module, Original))
@@ -4417,7 +4412,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TBody = Body
 	).
 
-'$lgt_clause_checked'(Obj, Head, Body, _, _, ExCtx) :-
+'$lgt_clause_checked'(Obj, Head, Body, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx),
@@ -4511,7 +4506,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_retract_var_body_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
+'$lgt_retract_var_body_checked'(Obj, (Head:-Body), Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx),
@@ -4584,7 +4579,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	throw(error(existence_error(object, Obj), logtalk(Obj::retract((Head:-Body)), ExCtx))).
 
 
-'$lgt_retract_rule_checked'(Obj, (Head:-Body), _, _, ExCtx) :-
+'$lgt_retract_rule_checked'(Obj, (Head:-Body), Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx),
@@ -4645,7 +4640,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retract(THead),
 	'$lgt_update_ddef_table_opt'(UpdateData).
 
-'$lgt_retract_fact_checked'(Obj, Head, _, _, ExCtx) :-
+'$lgt_retract_fact_checked'(Obj, Head, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx),
@@ -4745,11 +4740,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall(THead),
 	'$lgt_update_ddef_table_opt'(UpdateData).
 
-'$lgt_retractall_checked'(Obj, Head, _, _, ExCtx) :-
+'$lgt_retractall_checked'(Obj, Head, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_retractall_checked'(Other, Original, Obj, p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		retractall(':'(Module,Original))
@@ -4838,11 +4832,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_asserta_rule_checked'(Obj, (Head:-Body), Ref, _, _, _, ExCtx) :-
+'$lgt_asserta_rule_checked'(Obj, (Head:-Body), Ref, Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_asserta_rule_checked'(Other, (Original:-Body), Ref, Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		asserta(':'(Module, (Original:-Body)), Ref)
@@ -4887,11 +4880,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	asserta(THead, Ref).
 
-'$lgt_asserta_fact_checked'(Obj, Head, Ref, _, _, _, ExCtx) :-
+'$lgt_asserta_fact_checked'(Obj, Head, Ref, Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_asserta_fact_checked'(Other, Original, Ref, Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		asserta(':'(Module, Original), Ref)
@@ -4957,11 +4949,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 
-'$lgt_assertz_rule_checked'(Obj, (Head:-Body), Ref, _, _, _, ExCtx) :-
+'$lgt_assertz_rule_checked'(Obj, (Head:-Body), Ref, Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_assertz_rule_checked'(Other, (Original:-Body), Ref, Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		assertz(':'(Module, (Original:-Body)), Ref)
@@ -5006,11 +4997,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	assertz(THead, Ref).
 
-'$lgt_assertz_fact_checked'(Obj, Head, Ref, _, _, _, ExCtx) :-
+'$lgt_assertz_fact_checked'(Obj, Head, Ref, Obj, _, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	(	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx) ->
-		Obj \== Other,
 		'$lgt_assertz_fact_checked'(Other, Original, Ref, Obj, p(p(_)), p(p(p)), ExCtx)
 	;	'$lgt_use_module_predicate_'(Entity, Module, Original, Head, Ctx) ->
 		assertz(':'(Module, Original), Ref)
@@ -5065,7 +5055,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_clause_checked'(Obj, Head, Body, Ref, Sender, TestScope, ExCtx).
 
 
-'$lgt_clause_checked'(Obj, Head, Body, Ref, _, _, ExCtx) :-
+'$lgt_clause_checked'(Obj, Head, Body, Ref, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_uses_predicate_'(Entity, Other, Original, Head, Ctx),
