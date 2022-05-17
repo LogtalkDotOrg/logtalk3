@@ -41,7 +41,7 @@ Documenting tool protocol.
    - Known issues: The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

@@ -25,7 +25,7 @@ A* interpreter for general logic programs. The parameter W is used to fine tune 
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`interpreterp/0::prove/2`  :ref:`interpreterp/0::prove/3`  
+|     :ref:`interpreterp/0::prove/2`  :ref:`interpreterp/0::prove/3`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

@@ -39,7 +39,7 @@ Basic temporal interval relations. An interval is represented by a compound term
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`intervalp/0::after/2`  :ref:`intervalp/0::before/2`  :ref:`intervalp/0::contains/2`  :ref:`intervalp/0::during/2`  :ref:`intervalp/0::equal/2`  :ref:`intervalp/0::finished_by/2`  :ref:`intervalp/0::finishes/2`  :ref:`intervalp/0::meets/2`  :ref:`intervalp/0::met_by/2`  :ref:`intervalp/0::new/3`  :ref:`intervalp/0::overlapped_by/2`  :ref:`intervalp/0::overlaps/2`  :ref:`intervalp/0::started_by/2`  :ref:`intervalp/0::starts/2`  :ref:`intervalp/0::valid/1`  
+|     :ref:`intervalp/0::after/2`  :ref:`intervalp/0::before/2`  :ref:`intervalp/0::contains/2`  :ref:`intervalp/0::during/2`  :ref:`intervalp/0::equal/2`  :ref:`intervalp/0::finished_by/2`  :ref:`intervalp/0::finishes/2`  :ref:`intervalp/0::meets/2`  :ref:`intervalp/0::met_by/2`  :ref:`intervalp/0::new/3`  :ref:`intervalp/0::overlapped_by/2`  :ref:`intervalp/0::overlaps/2`  :ref:`intervalp/0::started_by/2`  :ref:`intervalp/0::starts/2`  :ref:`intervalp/0::valid/1`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

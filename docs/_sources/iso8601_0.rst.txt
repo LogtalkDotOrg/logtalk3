@@ -32,7 +32,7 @@ ISO 8601 (and European civil calendar) compliant library of date predicates.
    - Some Christian feast day offsets from Easter Sunday: Carnival Monday: -48 days, Mardi Gras (Shrove Tuesday): -47 days, Ash Wednesday: -46 days, Palm Sunday: -7 days, Easter Friday: -2 days, Easter Saturday: -1 day, Easter Monday: +1 day, Ascension of Christ: +39 days, Whitsunday: +49 days, Whitmonday: +50 days, Feast of Corpus Christi: +60 days.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

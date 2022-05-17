@@ -58,7 +58,7 @@ Type checking predicates. User extensible. New types can be defined by adding cl
    - Caveats: The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.
 
 | **Inherited public predicates:**
-|     :ref:`arbitrary/0::arbitrary/1`  :ref:`arbitrary/0::arbitrary/2`  :ref:`arbitrary/0::edge_case/2`  :ref:`arbitrary/0::get_seed/1`  :ref:`arbitrary/0::set_seed/1`  :ref:`arbitrary/0::shrink/3`  :ref:`arbitrary/0::shrinker/1`  
+|     :ref:`arbitrary/0::arbitrary/1`  :ref:`arbitrary/0::arbitrary/2`  :ref:`arbitrary/0::edge_case/2`  :ref:`arbitrary/0::get_seed/1`  :ref:`arbitrary/0::set_seed/1`  :ref:`arbitrary/0::shrink/3`  :ref:`arbitrary/0::shrinker/1`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

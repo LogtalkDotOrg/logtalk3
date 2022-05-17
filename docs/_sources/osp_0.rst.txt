@@ -27,7 +27,7 @@ Portable operating-system access protocol.
    - Error handling: Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

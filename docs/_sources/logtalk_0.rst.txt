@@ -39,7 +39,7 @@ Built-in object providing message printing, debugging, library, source file, and
    - Meta message ``Title::List``: By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

@@ -27,7 +27,7 @@ Internal predicates for analyzing source code.
    - Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are private.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

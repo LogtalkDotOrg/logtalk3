@@ -25,7 +25,7 @@ Assignable variables (supporting backtracable assignment of non-variable terms).
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`assignvarsp/0::(<=)/2`  :ref:`assignvarsp/0::(=>)/2`  :ref:`assignvarsp/0::assignable/1`  :ref:`assignvarsp/0::assignable/2`  
+|     :ref:`assignvarsp/0::(<=)/2`  :ref:`assignvarsp/0::(=>)/2`  :ref:`assignvarsp/0::assignable/1`  :ref:`assignvarsp/0::assignable/2`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:

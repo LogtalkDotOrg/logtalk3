@@ -28,7 +28,7 @@ Hook object for filtering registry loader file contents.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
 
 .. contents::
    :local:
