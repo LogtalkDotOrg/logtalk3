@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 56, 0, b04)).
+'$lgt_version_data'(logtalk(3, 56, 0, b05)).
 
 
 
@@ -3568,12 +3568,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	current_predicate(Pred).
 
-'$lgt_current_predicate'(_, Functor/Arity, _, _, ExCtx) :-
+'$lgt_current_predicate'(Obj, Functor/Arity, Obj, _, ExCtx) :-
 	ground(Functor/Arity),
-	'$lgt_execution_context'(ExCtx, Entity, _, _, _, _, _),
 	functor(Head, Functor, Arity),
-	(	'$lgt_uses_predicate_'(Entity, _, _, Head, _)
-	;	'$lgt_use_module_predicate_'(Entity, _, _, Head, _)
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
+	(	'$lgt_uses_predicate_'(Entity, _, _, Head, Ctx)
+	;	'$lgt_use_module_predicate_'(Entity, _, _, Head, Ctx)
 	),
 	!.
 
@@ -3611,10 +3612,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	fail
 	).
 
-'$lgt_current_predicate'(_, Functor/Arity, _, _, ExCtx) :-
-	'$lgt_execution_context'(ExCtx, Entity, _, _, _, _, _),
-	(	'$lgt_uses_predicate_'(Entity, _, _, Head, _)
-	;	'$lgt_use_module_predicate_'(Entity, _, _, Head, _)
+'$lgt_current_predicate'(Obj, Functor/Arity, Obj, _, ExCtx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
+	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
+	(	'$lgt_uses_predicate_'(Entity, _, _, Head, Ctx)
+	;	'$lgt_use_module_predicate_'(Entity, _, _, Head, Ctx)
 	),
 	functor(Head, Functor, Arity).
 
@@ -3640,15 +3642,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_predicate_property'(Pred, Prop).
 
-'$lgt_predicate_property'(Obj, Pred, Prop, _, _, ExCtx) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
-	'$lgt_uses_predicate_'(Entity, Other, Original, Pred, Ctx),
-	Obj \== Other,
+	'$lgt_uses_predicate_'(Obj, Other, Original, Pred, Ctx),
 	!,
 	'$lgt_predicate_property'(Other, Original, Prop, Obj, p(p(p)), ExCtx).
 
-'$lgt_predicate_property'(_, Pred, Prop, _, _, ExCtx) :-
+'$lgt_predicate_property'(Obj, Pred, Prop, Obj, _, ExCtx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
 	'$lgt_use_module_predicate_'(Entity, Module, Original, Pred, Ctx),

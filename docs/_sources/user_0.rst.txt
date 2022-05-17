@@ -27,7 +27,7 @@ Pseudo-object representing the plain Prolog database. Can be used as a monitor b
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`monitoring/0::after/3`  :ref:`monitoring/0::before/3`  :ref:`forwarding/0::forward/1`  :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
+|     :ref:`monitoring/0::after/3`  :ref:`monitoring/0::before/3`  :ref:`forwarding/0::forward/1`  :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
 
 .. contents::
    :local:

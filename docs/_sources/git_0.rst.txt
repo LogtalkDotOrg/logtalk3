@@ -27,7 +27,7 @@ Predicates for accessing a git project current branch and latest commit data.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`git_protocol/0::branch/2`  :ref:`git_protocol/0::commit_author/2`  :ref:`git_protocol/0::commit_date/2`  :ref:`git_protocol/0::commit_hash/2`  :ref:`git_protocol/0::commit_hash_abbreviated/2`  :ref:`git_protocol/0::commit_log/3`  :ref:`git_protocol/0::commit_message/2`  :ref:`listp/0::member/2`  :ref:`listp/0::memberchk/2`  :ref:`listp/0::sort/4`  :ref:`logtalk/0::print_message/3`  :ref:`type/0::valid/2`  :ref:`listp/0::member_var/2`  
+|     :ref:`git_protocol/0::branch/2`  :ref:`git_protocol/0::commit_author/2`  :ref:`git_protocol/0::commit_date/2`  :ref:`git_protocol/0::commit_hash/2`  :ref:`git_protocol/0::commit_hash_abbreviated/2`  :ref:`git_protocol/0::commit_log/3`  :ref:`git_protocol/0::commit_message/2`  
 
 .. contents::
    :local:
