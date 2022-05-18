@@ -14,8 +14,8 @@
 Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/2`` relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2:18:1
-| **Date:** 2020-03-25
+| **Version:** 2:19:0
+| **Date:** 2020-05-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,8 @@ Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/
 
 | **Extends:**
 |    ``public`` :ref:`entity_diagram(Format) <entity_diagram/1>`
+| **Uses:**
+|    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
 |    (none)

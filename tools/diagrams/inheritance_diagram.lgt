@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:17:0,
+		version is 2:18:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2022-05-18,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
@@ -68,7 +68,11 @@
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
 	% by default, don't omit any prefix when printing paths:
-	default_option(omit_path_prefixes([])).
+	default_option(omit_path_prefixes(Prefixes)) :-
+		(	logtalk::expand_library_path(home, Home) ->
+			Prefixes = [Home]
+		;	Prefixes = []
+		).
 	% by default, use a '.html' suffix for entity documentation URLs:
 	default_option(entity_url_suffix_target('.html', '#')).
 	% by default, don't link to sub-diagrams:

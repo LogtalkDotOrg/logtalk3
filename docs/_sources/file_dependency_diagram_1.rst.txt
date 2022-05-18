@@ -14,8 +14,8 @@
 Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.
 
 | **Author:** Paulo Moura
-| **Version:** 2:25:0
-| **Date:** 2019-06-13
+| **Version:** 2:26:0
+| **Date:** 2022-05-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Predicates for generating file contents dependency diagrams. A dependency exists
 |    ``public`` :ref:`file_diagram(Format) <file_diagram/1>`
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
 |    :ref:`modules_diagram_support <modules_diagram_support/0>`
 
 | **Remarks:**

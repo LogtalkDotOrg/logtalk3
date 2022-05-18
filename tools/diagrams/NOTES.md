@@ -340,7 +340,7 @@ generated diagrams. For entity diagrams the options are:
 	extension for entity documenting URLs (an atom; default is `'.html'`) and target separating symbols (an atom; default is `'#'`)
 
 - `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths and when constructing URLs (a list of atoms; default is an empty list)
+	omit common path prefixes when printing directory paths and when constructing URLs (a list of atoms; default is a list with the user home directory)
 
 - `zoom(Boolean)`  
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
@@ -378,7 +378,7 @@ For directory and file diagrams the options are:
 	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; no default)
 
 - `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths and when constructing URLs (a list of atoms; default is an empty list)
+	omit common path prefixes when printing directory paths and when constructing URLs (a list of atoms; default is a list with the user home directory)
 
 - `relation_labels(Boolean)`  
 	print entity relation labels (`true` or `false`; default is `false`)
@@ -425,7 +425,7 @@ For library diagrams the options are:
 	default URL code and documenting URL prefixes used when generating cluster, library, file, and entity links (atoms; no default)
 
 - `omit_path_prefixes(Prefixes)`  
-	omit common path prefixes when printing directory paths and when constructing URLs (a list of atoms; default is an empty list)
+	omit common path prefixes when printing directory paths and when constructing URLs (a list of atoms; default is a list with the user home directory)
 
 - `relation_labels(Boolean)`  
 	print entity relation labels (`true` or `false`; default is `false`)

@@ -89,6 +89,9 @@ all test object parameterizations and files.
 * CHANGED: Renamed the `code_metrics` tool `entity_score//2` non-terminal to
 `format_entity_score//2`.
 
+* CHANGED: The default value for the `diagrams` tool `omit_path_prefixes/1`
+option from an empty list to a list with the user home directory.
+
 * ADDED: Linter warnings for missing documentation directives to the `lgtdoc`
 tool.
 

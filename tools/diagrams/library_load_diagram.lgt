@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:28:0,
+		version is 2:29:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2022-05-18,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
@@ -121,7 +121,11 @@
 	% by default, print current date:
 	default_option(date(true)).
 	% by default, don't omit any prefix when printing paths:
-	default_option(omit_path_prefixes([])).
+	default_option(omit_path_prefixes(Prefixes)) :-
+		(	logtalk::expand_library_path(home, Home) ->
+			Prefixes = [Home]
+		;	Prefixes = []
+		).
 	% by default, don't print directory paths:
 	default_option(directory_paths(false)).
 	% by default, print relation labels:
