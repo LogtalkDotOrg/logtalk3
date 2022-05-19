@@ -69,6 +69,12 @@ Library
 * IMPROVED: The `expecteds` and `optionals` libraries tests to use explicit
 assertions.
 
+* IMPROVED: Performance of the `arbitrary` library category generation of
+Unicode code points.
+
+* FIXED: The `arbitrary` library category generation of Unicode code points
+included the non-valid code points 65535 and 1114111 as edge cases.
+
 * FIXED: Typos in the `mode/2` directives for the `inorder/2` and `postorder/2`
 predicates of the `bintree` library object.
 

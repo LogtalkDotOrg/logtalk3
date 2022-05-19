@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:20:0,
+		version is 2:21:0,
 		author is 'Paulo Moura',
-		date is 2022-03-08,
+		date is 2022-05-19,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -486,9 +486,9 @@
 		;	CharSet == byte ->
 			between(First, 255, Arbitrary)
 		;	CharSet == unicode_bmp ->
-			arbitrary_unicode_code_point(First, 65535, Arbitrary)
+			arbitrary_unicode_bmp_code_point(First, Arbitrary)
 		;	CharSet == unicode_full ->
-			arbitrary_unicode_code_point(First, 1114111, Arbitrary)
+			arbitrary_unicode_full_code_point(First, Arbitrary)
 		;	% default to ASCII printable
 			between(32, 126, Arbitrary)
 		).
@@ -1115,9 +1115,9 @@
 	edge_case(character_code(byte), 0).
 	edge_case(character_code(byte), 255).
 	edge_case(character_code(unicode_bmp), 0).
-	edge_case(character_code(unicode_bmp), 65535).
+	edge_case(character_code(unicode_bmp), 65533).
 	edge_case(character_code(unicode_full), 0).
-	edge_case(character_code(unicode_full), 1114111).
+	edge_case(character_code(unicode_full), 1114109).
 	edge_case(character_code(unicode_full), Code) :-
 		% generate surrogate code points
 		for(55296, 57343, Code).
@@ -1244,9 +1244,20 @@
 		'_'
 	]).
 
-	arbitrary_unicode_code_point(First, Last, Arbitrary) :-
+	arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
 		repeat,
-			between(First, Last, Arbitrary),
+			between(First, 65533, Arbitrary),
+			% not a high or low surrogate code point
+			\+ integer::between(Arbitrary, 55296, 57343),
+			% not a non-character code point
+			\+ integer::between(Arbitrary, 64976, 65007),
+			% not a private use code point
+			\+ integer::between(Arbitrary, 57344, 63743),
+		!.
+
+	arbitrary_unicode_full_code_point(First, Arbitrary) :-
+		repeat,
+			between(First, 1048575, Arbitrary),
 			% not a high or low surrogate code point
 			\+ integer::between(Arbitrary, 55296, 57343),
 			% not a non-character code point
@@ -1257,7 +1268,7 @@
 			% not a private use code point
 			\+ integer::between(Arbitrary, 57344, 63743),
 			\+ integer::between(Arbitrary, 983040, 1048573),
-			\+ integer::between(Arbitrary, 1048576, 1114109),
+			% \+ integer::between(Arbitrary, 1048576, 1114109),
 		!.
 
 	map_arbitrary([], _).
