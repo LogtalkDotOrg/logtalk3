@@ -72,6 +72,9 @@ assertions.
 * IMPROVED: Performance of the `arbitrary` library category generation of
 Unicode code points.
 
+* FIXED: The `arbitrary` library category to not generate surrogate code points
+as edge cases for the `unicode_full` character set.
+
 * FIXED: The `arbitrary` library category generation of Unicode code points
 included the non-valid code points 65535 and 1114111 as edge cases.
 

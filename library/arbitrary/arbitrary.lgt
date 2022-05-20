@@ -23,7 +23,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2:21:1,
+		version is 2:22:0,
 		author is 'Paulo Moura',
 		date is 2022-05-20,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
@@ -1118,9 +1118,6 @@
 	edge_case(character_code(unicode_bmp), 65533).
 	edge_case(character_code(unicode_full), 0).
 	edge_case(character_code(unicode_full), 1114109).
-	edge_case(character_code(unicode_full), Code) :-
-		% generate surrogate code points
-		for(55296, 57343, Code).
 	edge_case(code(CharSet), Term) :-
 		edge_case(character_code(CharSet), Term).
 	edge_case(operator_priority, 0).
