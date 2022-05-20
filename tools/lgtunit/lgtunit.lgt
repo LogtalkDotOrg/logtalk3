@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 11:1:0,
+		version is 11:1:1,
 		author is 'Paulo Moura',
-		date is 2022-02-14,
+		date is 2022-05-20,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1938,7 +1938,7 @@
 		!.
 	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded0, Discarded, Labels0, Labels) :-
 		generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
-		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error)) ->
+		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error, Template, Verbose)) ->
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
 					label_test(Label, Arguments, Labels0, Labels1),
@@ -2157,11 +2157,14 @@
 
 	% undo the <</2 control construct if added by the tool itself
 
-	quick_check_error(Object<<Goal, _<<_, Test, Seed, Error) :-
+	quick_check_error(Object<<Goal, _<<_, Test, Seed, Error, Template, Verbose) :-
+		verbose_report_quick_check_test(Verbose, Object<<Goal, Template, error, warning),
 		throw(quick_check_error(Error, Object<<Goal, Test, Seed)).
-	quick_check_error(_<<Goal, _, Test, Seed, Error) :-
+	quick_check_error(_<<Goal, _, Test, Seed, Error, Template, Verbose) :-
+		verbose_report_quick_check_test(Verbose, Goal, Template, error, warning),
 		throw(quick_check_error(Error, Goal, Test, Seed)).
-	quick_check_error(Goal, _, Test, Seed, Error) :-
+	quick_check_error(Goal, _, Test, Seed, Error, Template, Verbose) :-
+		verbose_report_quick_check_test(Verbose, Goal, Template, error, warning),
 		throw(quick_check_error(Error, Goal, Test, Seed)).
 
 	quick_check_failed(Object<<Goal, _<<_, Test, Depth, Seed) :-

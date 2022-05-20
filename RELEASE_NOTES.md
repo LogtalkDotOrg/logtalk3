@@ -115,6 +115,9 @@ predicate.
 
 * FIXED: Typo in the `mode/2` directive for the `packs::save/2` predicate.
 
+* FIXED: The `lgtunit` tool QuickCheck implementation of the verbose option
+to also apply when a generated test case throws an error.
+
 Examples
 --------
 
