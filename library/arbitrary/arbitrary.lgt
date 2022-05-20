@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:21:0,
+		version is 2:21:1,
 		author is 'Paulo Moura',
-		date is 2022-05-19,
+		date is 2022-05-20,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -1248,26 +1248,26 @@
 		repeat,
 			between(First, 65533, Arbitrary),
 			% not a high or low surrogate code point
-			\+ integer::between(Arbitrary, 55296, 57343),
+			\+ integer::between(55296, 57343, Arbitrary),
 			% not a non-character code point
-			\+ integer::between(Arbitrary, 64976, 65007),
+			\+ integer::between(64976, 65007, Arbitrary),
 			% not a private use code point
-			\+ integer::between(Arbitrary, 57344, 63743),
+			\+ integer::between(57344, 63743, Arbitrary),
 		!.
 
 	arbitrary_unicode_full_code_point(First, Arbitrary) :-
 		repeat,
 			between(First, 1048575, Arbitrary),
 			% not a high or low surrogate code point
-			\+ integer::between(Arbitrary, 55296, 57343),
+			\+ integer::between(55296, 57343, Arbitrary),
 			% not a non-character code point
-			\+ integer::between(Arbitrary, 64976, 65007),
+			\+ integer::between(64976, 65007, Arbitrary),
 			Code is Arbitrary /\ 65535,
 			Code =\= 65534,
 			Code =\= 65535,
 			% not a private use code point
-			\+ integer::between(Arbitrary, 57344, 63743),
-			\+ integer::between(Arbitrary, 983040, 1048573),
+			\+ integer::between(57344, 63743, Arbitrary),
+			\+ integer::between(983040, 1048573, Arbitrary),
 			% \+ integer::between(Arbitrary, 1048576, 1114109),
 		!.
 
