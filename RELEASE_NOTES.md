@@ -60,8 +60,8 @@ modules as objects.
 Documentation
 -------------
 
-* UPDATED: The `lgtunit` tool documentation on the term-expansion of test
-objects.
+* UPDATED: The `lgtunit` tool documentation sections on term-expansion of test
+objects, skipping tests, debugging tests, and backend timeout predicates.
 
 Library
 -------

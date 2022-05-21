@@ -692,6 +692,12 @@ have the test clause head prefixed with the `(-)/1` operator. For example:
 	- test(not_yet_ready) :-
 		...
 
+In this case, it's a good idea to use the `test/3` dialect with a `note/1`
+option that briefly explains why the test is being skipped. For example:
+
+	- test(xyz_reset, true, ['Feature xyz reset not yet implemented']) :-
+		...
+
 The number of skipped tests is reported together with the numbers of passed
 and failed tests. To skip a test depending on some condition, use the `test/3`
 dialect and the `condition/1` option. For example:

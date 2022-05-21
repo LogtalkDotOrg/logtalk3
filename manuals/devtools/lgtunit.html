@@ -869,6 +869,13 @@ example:</p>
     ...
 </pre></div>
 </div>
+<p>In this case, it’s a good idea to use the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect with a
+<code class="docutils literal notranslate"><span class="pre">note/1</span></code> option that briefly explains why the test is being skipped.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> test(xyz_reset, <span class="k">true</span>, [<span class="s">&#39;Feature xyz reset not yet implemented&#39;</span>]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
 <p>The number of skipped tests is reported together with the numbers of
 passed and failed tests. To skip a test depending on some condition, use
 the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect and the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code> option. For example:</p>
