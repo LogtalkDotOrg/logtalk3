@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:41:0,
+		version is 0:42:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-05-21,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -684,6 +684,21 @@
 	explain(disjunction_as_body(_, _, _, _, _, _)) -->
 		[	'Coding guidelines advise using separate clauses instead of a single'-[], nl,
 			'clause with a disjunction as body for improved code readability.'-[], nl, nl
+		].
+
+	% suspicious cuts
+
+	explain(suspicious_cut_in_if_then_else(_, _, _, _, _, _)) -->
+		[	'A cut in the if part of an if-then-else control construct is local to the if'-[], nl,
+			'part. If the cut is meant to commit to the clause, add parenthesis around the'-[], nl,
+			'if-then-else control construct to fix the scope of the cut.'-[], nl, nl
+		].
+
+	explain(suspicious_cut_in_disjunction(_, _, _, _, _, _)) -->
+		[	'A cut at the start of the first argument of a disjunction control construct'-[], nl,
+			'prevents backtracking into the second argument. If the cut is meant to commit'-[], nl,
+			'to the clause, add parenthesis around the disjunction control construct to'-[], nl,
+			'fix the scope of the cut.'-[], nl, nl
 		].
 
 	% catch/3 goals that catch all exceptions

@@ -113,6 +113,9 @@ tool.
 
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
 
+* UPDATED: The `tutor` tool for the new linter warnings for missing parenthesis
+around if-then-else and disjunction control constructs in the presence of cuts.
+
 * FIXED: Typo in the `mode/2` directive for the `debug_messages::disable/1`
 predicate.
 
