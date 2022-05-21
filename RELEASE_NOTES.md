@@ -35,6 +35,9 @@ where the predicate argument is only bound at runtime and is listed in a
 * ADDED: Support for using `zero_or_error` and `zero_or_one_or_error` number
 of proofs arguments in `mode/2` directives.
 
+* ADDED: Linter warnings for missing parenthesis around if-then-else and
+disjunction control constructs in the presence of cuts in the first argument.
+
 * IMPROVED: Generalized the linter check for `findall/3` goals used in place
 of `forall/2` goals.
 

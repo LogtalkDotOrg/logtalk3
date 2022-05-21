@@ -682,6 +682,18 @@
 		['Predicate ~q clause body is a disjunction'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
+	% suspicious cuts
+
+	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, _IfThenElse)) -->
+		{functor(Head, Name, Arity)},
+		['Predicate ~q clause body likely missing parenthesis around if-then-else'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head, _Disjunction)) -->
+		{functor(Head, Name, Arity)},
+		['Predicate ~q clause body likely missing parenthesis around disjunction'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
 	% catch/3 goals that catch all exceptions
 
 	message_tokens(catchall_catch(File, Lines, Type, Entity, Goal)) -->

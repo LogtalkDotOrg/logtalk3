@@ -377,7 +377,8 @@ generated diagrams. For entity diagrams the options are:
 
 -  | ``omit_path_prefixes(Prefixes)``
    | omit common path prefixes when printing directory paths and when
-     constructing URLs (a list of atoms; default is an empty list)
+     constructing URLs (a list of atoms; default is a list with the user
+     home directory)
 
 -  | ``zoom(Boolean)``
    | generate sub-diagrams and add links and zoom icons to library and
@@ -428,7 +429,8 @@ For directory and file diagrams the options are:
 
 -  | ``omit_path_prefixes(Prefixes)``
    | omit common path prefixes when printing directory paths and when
-     constructing URLs (a list of atoms; default is an empty list)
+     constructing URLs (a list of atoms; default is a list with the user
+     home directory)
 
 -  | ``relation_labels(Boolean)``
    | print entity relation labels (``true`` or ``false``; default is
@@ -486,7 +488,8 @@ For library diagrams the options are:
 
 -  | ``omit_path_prefixes(Prefixes)``
    | omit common path prefixes when printing directory paths and when
-     constructing URLs (a list of atoms; default is an empty list)
+     constructing URLs (a list of atoms; default is a list with the user
+     home directory)
 
 -  | ``relation_labels(Boolean)``
    | print entity relation labels (``true`` or ``false``; default is

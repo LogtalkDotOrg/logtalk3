@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 56, 0, b07)).
+'$lgt_version_data'(logtalk(3, 56, 0, b08)).
 
 
 
@@ -12664,6 +12664,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx)
 	).
 
+'$lgt_compile_body'((IfThen; Else), _, _, Ctx) :-
+	nonvar(IfThen),
+	IfThen = (If -> _),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	(	If == !
+	;	If = (Goal, _), Goal == !
+	),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, (IfThen; Else))
+	),
+	fail.
+
 '$lgt_compile_body'((IfThen; Else), (TIf -> TThen; TElse), (DIf -> DThen; DElse), Ctx) :-
 	nonvar(IfThen),
 	IfThen = (If -> Then),
@@ -12680,6 +12697,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(If, TIf, DIf, Ctx),
 	'$lgt_compile_body'(Then, TThen, DThen, Ctx),
 	'$lgt_compile_body'(Else, TElse, DElse, Ctx).
+
+'$lgt_compile_body'((Pred1; Pred2), _, _, Ctx) :-
+	nonvar(Pred1),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	(	Pred1 == !
+	;	Pred1 = (Goal, _), Goal == !
+	),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head, (Pred1; Pred2))
+	),
+	fail.
 
 '$lgt_compile_body'((Pred1; Pred2), _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),

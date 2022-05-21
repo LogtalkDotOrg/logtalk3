@@ -426,6 +426,16 @@
 
 	a(1). a(2). a(3).
 
+	% missing parenthesis in the presence of cuts
+
+	qux :-
+		!,
+		a(1) -> a(2) ; a(3).
+
+	quux :-
+		!,
+		a(1) ; a(2).
+
 :- end_object.
 
 
