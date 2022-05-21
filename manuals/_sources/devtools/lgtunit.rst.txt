@@ -1103,6 +1103,8 @@ preferably the ``test/2-3`` dialects with ``true(Assertion)``,
 ``deterministic(Assertion)``, ``subsumes(Expected, Result)``, or
 ``variant(Term1, Term2)`` outcomes. If a test checks multiple
 assertions, you can use the predicate ``assertion/2`` in the test body.
+In the case of QuickCheck tests, the ``v(true)`` verbose option can be
+used to print the generated test case that failed if necessary.
 
 If the assertion failures don't provide enough information, you can use
 the ``debugger`` tool to debug failed unit tests. Start by compiling the

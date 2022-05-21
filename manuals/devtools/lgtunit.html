@@ -1142,7 +1142,9 @@ the reason for the assertion failures is printed out. Thus, use
 preferably the <code class="docutils literal notranslate"><span class="pre">test/2-3</span></code> dialects with <code class="docutils literal notranslate"><span class="pre">true(Assertion)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">deterministic(Assertion)</span></code>, <code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code> outcomes. If a test checks multiple
-assertions, you can use the predicate <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code> in the test body.</p>
+assertions, you can use the predicate <code class="docutils literal notranslate"><span class="pre">assertion/2</span></code> in the test body.
+In the case of QuickCheck tests, the <code class="docutils literal notranslate"><span class="pre">v(true)</span></code> verbose option can be
+used to print the generated test case that failed if necessary.</p>
 <p>If the assertion failures don’t provide enough information, you can use
 the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool to debug failed unit tests. Start by compiling the
 unit test objects and the code being tested in debug mode. Load the
