@@ -1024,6 +1024,9 @@ some backend Prolog compilers provide this functionality:
 -  ECLiPSe: ``timeout/3`` and ``timeout/7`` library predicates
 -  SICStus Prolog: ``time_out/3`` library predicate
 -  SWI-Prolog: ``call_with_time_limit/2`` library predicate
+-  Trealla Prolog: ``call_with_time_limit/2`` and ``time_out/3`` library
+   predicates
+-  XSB: ``timed_call/2`` built-in predicate
 -  YAP: ``time_out/3`` library predicate
 
 Logtalk provides a ``timeout`` portability library implementing a simple
