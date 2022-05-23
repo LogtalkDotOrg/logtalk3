@@ -66,6 +66,9 @@ Documentation
 * UPDATED: The `lgtunit` tool documentation sections on term-expansion of test
 objects, skipping tests, debugging tests, and backend timeout predicates.
 
+* FIXED: The `arbitrary` library documentation on defining new arbitrary term
+generators.
+
 Library
 -------
 
