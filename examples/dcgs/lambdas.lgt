@@ -84,9 +84,9 @@
 :- object(meta).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2022-03-23,
+		date is 2022-05-23,
 		comment is 'Example definition of a meta-non-terminal.'
 	]).
 
@@ -97,7 +97,7 @@
 
 	:- meta_non_terminal(repeat(1, *, *, *, *)).
 	repeat(NonTerminal, Min, Count, Max, [Digit| Digits]) -->
-		{(Max = inf -> true; Count < Max), NextCount is Count + 1},
+		{(Max == inf -> true; Count < Max), NextCount is Count + 1},
 		call(NonTerminal, Digit),
 		!,
 		repeat(NonTerminal, Min, NextCount, Max, Digits).

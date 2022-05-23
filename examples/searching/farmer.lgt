@@ -23,9 +23,9 @@
 	instantiates(state_space)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 1998-3-23,
+		date is 2022-05-23,
 		comment is 'Farmer, cabbage, goat, and wolf state space search problem.'
 	]).
 
@@ -59,13 +59,13 @@
 	same_side(south, south).
 
 	print_state((Cabbage, Goat, Wolf, Farmer)) :-
-		(Cabbage = north -> write(c); write('_')),
-		(Goat = north -> write(g); write('_')),
-		(Wolf = north -> write(w); write('_')),
-		(Farmer = north -> write('f.<__>.........._'); write('_..........<__>.f')),
-		(Cabbage = north -> write('_'); write(c)),
-		(Goat = north -> write('_'); write(g)),
-		(Wolf = north -> write('_'); write(w)),
+		(Cabbage == north -> write(c); write('_')),
+		(Goat == north -> write(g); write('_')),
+		(Wolf == north -> write(w); write('_')),
+		(Farmer == north -> write('f.<__>.........._'); write('_..........<__>.f')),
+		(Cabbage == north -> write('_'); write(c)),
+		(Goat == north -> write('_'); write(g)),
+		(Wolf == north -> write('_'); write(w)),
 		nl.
 
 :- end_object.

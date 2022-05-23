@@ -23,9 +23,9 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2018-06-04,
+		date is 2022-05-23,
 		comment is 'Bridge puzzle.'
 	]).
 
@@ -51,14 +51,14 @@
 		next_state(s(Right0, left, Left0), s(Right, right, Left), Cost).
 
 	heuristic(s(Left, Lamp, Right), Heuristic) :-
-		(	Lamp = left ->
+		(	Lamp == left ->
 			min(Left, Heuristic)
 		;	min(Right, Heuristic)
 		).
 
 	print_state(s(Left, Lamp, Right)) :-
 		write_list(Left),
-		(	Lamp = left ->
+		(	Lamp == left ->
 			write(' lamp _|____________|_ ')
 		;	write(' _|____________|_ lamp ')
 		),

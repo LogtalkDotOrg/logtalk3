@@ -23,9 +23,9 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2000-11-21,
+		date is 2022-05-23,
 		comment is 'Missionaries and cannibals heuristic state space search problem.'
 	]).
 
@@ -38,7 +38,7 @@
 	print_state(((Ml,Cl), B, (Mr,Cr))) :-
 		forto(1, Ml, write('M')),
 		forto(1, Cl, write('C')),
-		(	B = left ->
+		(	B == left ->
 			write('.<__>..........')
 		;	write('..........<__>.')
 		),

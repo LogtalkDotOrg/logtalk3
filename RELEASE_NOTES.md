@@ -146,6 +146,8 @@ benchmarks when the backend provides `statistics/2` as a built-in predicate.
 * FIXED: The `benchmarks` and `module_aliases` examples when using the Scryer
 Prolog backend.
 
+* FIXED: If-then-else linter warnings in the `dcgs` and `searching` examples.
+
 Contributions
 -------------
 
