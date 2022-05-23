@@ -14,8 +14,8 @@
 Common predicates for generating library diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2:15:0
-| **Date:** 2022-01-03
+| **Version:** 2:16:0
+| **Date:** 2022-05-23
 
 | **Compilation flags:**
 |    ``static``
@@ -78,8 +78,15 @@ Adds a documentation URL when using the option url_prefixes/2.
 ``remember_included_library/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember included Logtalk library in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_included_library(Library,Path)``
+| **Mode and number of proofs:**
+|    ``remember_included_library(+atom,+atom)`` - ``one``
 
 
 ------------
@@ -94,8 +101,15 @@ Adds a documentation URL when using the option url_prefixes/2.
 ``remember_referenced_logtalk_library/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember referenced Logtalk library in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_referenced_logtalk_library(Library,Path)``
+| **Mode and number of proofs:**
+|    ``remember_referenced_logtalk_library(+atom,+atom)`` - ``one``
 
 
 ------------
@@ -110,8 +124,15 @@ Adds a documentation URL when using the option url_prefixes/2.
 ``remember_referenced_prolog_library/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember referenced Prolog library in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_referenced_prolog_library(Library,Path)``
+| **Mode and number of proofs:**
+|    ``remember_referenced_prolog_library(+atom,+atom)`` - ``one``
 
 
 ------------
@@ -129,8 +150,15 @@ Private predicates
 ``included_library_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of Logtalk libraries already included in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``included_library_(Library,Path)``
+| **Mode and number of proofs:**
+|    ``included_library_(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -145,8 +173,15 @@ Private predicates
 ``referenced_logtalk_library_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Logtalk libraries in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_logtalk_library_(Library,Path)``
+| **Mode and number of proofs:**
+|    ``referenced_logtalk_library_(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -161,8 +196,15 @@ Private predicates
 ``referenced_prolog_library_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Prolog libraries in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_prolog_library_(Library,Path)``
+| **Mode and number of proofs:**
+|    ``referenced_prolog_library_(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------

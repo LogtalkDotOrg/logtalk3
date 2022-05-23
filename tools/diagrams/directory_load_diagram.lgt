@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1:21:0,
+		version is 1:22:0,
 		author is 'Paulo Moura',
-		date is 2022-05-18,
+		date is 2022-05-23,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -37,6 +37,11 @@
 
 	:- private(sub_diagram_/2).
 	:- dynamic(sub_diagram_/2).
+	:- mode(sub_diagram_(?atom, ?atom), zero_or_more).
+	:- info(sub_diagram_/2, [
+		comment is 'Table of directory sub-diagrams to support their generation.',
+		argnames is ['Project', 'Directory']
+	]).
 
 	% first, output the directory node
 	output_library(Project, Directory, Options) :-

@@ -14,7 +14,7 @@
 Predicates for generating predicate call cross-referencing diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2:65:1
+| **Version:** 2:66:0
 | **Date:** 2022-05-23
 
 | **Compilation flags:**
@@ -107,8 +107,15 @@ Private predicates
 ``included_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of predicates already included in the diagram for the entity under processing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``included_predicate_(Predicate)``
+| **Mode and number of proofs:**
+|    ``included_predicate_(?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------
@@ -123,8 +130,15 @@ Private predicates
 ``referenced_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced predicates for the entity under processing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_predicate_(Predicate)``
+| **Mode and number of proofs:**
+|    ``referenced_predicate_(?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------
@@ -139,8 +153,15 @@ Private predicates
 ``external_predicate_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of external predicate references for all the entities under processing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``external_predicate_(Reference)``
+| **Mode and number of proofs:**
+|    ``external_predicate_(?compound)`` - ``zero_or_more``
 
 
 ------------

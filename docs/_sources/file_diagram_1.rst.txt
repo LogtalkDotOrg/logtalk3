@@ -14,8 +14,8 @@
 Common predicates for generating file diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 2:12:0
-| **Date:** 2019-06-13
+| **Version:** 2:13:0
+| **Date:** 2022-05-23
 
 | **Compilation flags:**
 |    ``static``
@@ -56,8 +56,15 @@ Protected predicates
 ``remember_included_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember included Logtalk file in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_included_file(Path)``
+| **Mode and number of proofs:**
+|    ``remember_included_file(+atom)`` - ``one``
 
 
 ------------
@@ -72,8 +79,15 @@ Protected predicates
 ``remember_referenced_logtalk_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember referenced Logtalk file in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_referenced_logtalk_file(Path)``
+| **Mode and number of proofs:**
+|    ``remember_referenced_logtalk_file(+atom)`` - ``one``
 
 
 ------------
@@ -88,8 +102,15 @@ Protected predicates
 ``remember_referenced_prolog_file/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember referenced Prolog file in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_referenced_prolog_file(Path)``
+| **Mode and number of proofs:**
+|    ``remember_referenced_prolog_file(+atom)`` - ``one``
 
 
 ------------
@@ -107,8 +128,15 @@ Private predicates
 ``included_file_/1``
 ^^^^^^^^^^^^^^^^^^^^
 
+Table of Logtalk files already included in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``included_file_(Path)``
+| **Mode and number of proofs:**
+|    ``included_file_(?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -123,8 +151,15 @@ Private predicates
 ``referenced_logtalk_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Logtalk files in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_logtalk_file_(Path)``
+| **Mode and number of proofs:**
+|    ``referenced_logtalk_file_(?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -139,8 +174,15 @@ Private predicates
 ``referenced_prolog_file_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Prolog files in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_prolog_file_(Path)``
+| **Mode and number of proofs:**
+|    ``referenced_prolog_file_(?atom)`` - ``zero_or_more``
 
 
 ------------

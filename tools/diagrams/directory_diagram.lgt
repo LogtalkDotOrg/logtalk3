@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2022-05-23,
 		comment is 'Common predicates for generating directory diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -15,17 +15,49 @@
 	]).
 
 	:- protected(remember_included_directory/1).
+	:- mode(remember_included_directory(+atom), one).
+	:- info(remember_included_directory/1, [
+		comment is 'Remember included Logtalk directory in the diagram.',
+		argnames is ['Path']
+	]).
+
 	:- protected(remember_referenced_logtalk_directory/1).
+	:- mode(remember_referenced_logtalk_directory(+atom), one).
+	:- info(remember_referenced_logtalk_directory/1, [
+		comment is 'Remember referenced Logtalk directory in the diagram.',
+		argnames is ['Path']
+	]).
+
 	:- protected(remember_referenced_prolog_directory/1).
+	:- mode(remember_referenced_prolog_directory(+atom), one).
+	:- info(remember_referenced_prolog_directory/1, [
+		comment is 'Remember referenced Prolog directory in the diagram.',
+		argnames is ['Path']
+	]).
 
 	:- private(included_directory_/1).
 	:- dynamic(included_directory_/1).
+	:- mode(included_directory_(?atom), zero_or_more).
+	:- info(included_directory_/1, [
+		comment is 'Table of Logtalk directories already included in the diagram.',
+		argnames is ['Path']
+	]).
 
 	:- private(referenced_logtalk_directory_/1).
 	:- dynamic(referenced_logtalk_directory_/1).
+	:- mode(referenced_logtalk_directory_(?atom), zero_or_more).
+	:- info(referenced_logtalk_directory_/1, [
+		comment is 'Table of referenced Logtalk directories in the diagram.',
+		argnames is ['Path']
+	]).
 
 	:- private(referenced_prolog_directory_/1).
 	:- dynamic(referenced_prolog_directory_/1).
+	:- mode(referenced_prolog_directory_(?atom), zero_or_more).
+	:- info(referenced_prolog_directory_/1, [
+		comment is 'Table of referenced Prolog directories in the diagram.',
+		argnames is ['Path']
+	]).
 
 	files(Project, Files, UserOptions) :-
 		files_directories(Files, Directories),

@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:12:0,
+		version is 2:13:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2022-05-23,
 		comment is 'Common predicates for generating file diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -15,17 +15,49 @@
 	]).
 
 	:- protected(remember_included_file/1).
+	:- mode(remember_included_file(+atom), one).
+	:- info(remember_included_file/1, [
+		comment is 'Remember included Logtalk file in the diagram.',
+		argnames is ['Path']
+	]).
+
 	:- protected(remember_referenced_logtalk_file/1).
+	:- mode(remember_referenced_logtalk_file(+atom), one).
+	:- info(remember_referenced_logtalk_file/1, [
+		comment is 'Remember referenced Logtalk file in the diagram.',
+		argnames is ['Path']
+	]).
+
 	:- protected(remember_referenced_prolog_file/1).
+	:- mode(remember_referenced_prolog_file(+atom), one).
+	:- info(remember_referenced_prolog_file/1, [
+		comment is 'Remember referenced Prolog file in the diagram.',
+		argnames is ['Path']
+	]).
 
 	:- private(included_file_/1).
 	:- dynamic(included_file_/1).
+	:- mode(included_file_(?atom), zero_or_more).
+	:- info(included_file_/1, [
+		comment is 'Table of Logtalk files already included in the diagram.',
+		argnames is ['Path']
+	]).
 
 	:- private(referenced_logtalk_file_/1).
 	:- dynamic(referenced_logtalk_file_/1).
+	:- mode(referenced_logtalk_file_(?atom), zero_or_more).
+	:- info(referenced_logtalk_file_/1, [
+		comment is 'Table of referenced Logtalk files in the diagram.',
+		argnames is ['Path']
+	]).
 
 	:- private(referenced_prolog_file_/1).
 	:- dynamic(referenced_prolog_file_/1).
+	:- mode(referenced_prolog_file_(?atom), zero_or_more).
+	:- info(referenced_prolog_file_/1, [
+		comment is 'Table of referenced Prolog files in the diagram.',
+		argnames is ['Path']
+	]).
 
 	remember_included_file(Path) :-
 		(	::included_file_(Path) ->

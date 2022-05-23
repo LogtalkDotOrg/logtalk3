@@ -14,8 +14,8 @@
 Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2:52:0
-| **Date:** 2022-05-18
+| **Version:** 2:53:0
+| **Date:** 2022-05-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -105,8 +105,15 @@ Private predicates
 ``included_entity_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Table of Logtalk entities already included in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``included_entity_(Entity)``
+| **Mode and number of proofs:**
+|    ``included_entity_(?entity_identifier)`` - ``zero_or_more``
 
 
 ------------
@@ -121,8 +128,15 @@ Private predicates
 ``included_module_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Table of Prolog modules already included in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``included_module_(Module)``
+| **Mode and number of proofs:**
+|    ``included_module_(?module_identifier)`` - ``zero_or_more``
 
 
 ------------
@@ -137,8 +151,15 @@ Private predicates
 ``referenced_entity_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Logtalk entities in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_entity_(Referencer,Entity)``
+| **Mode and number of proofs:**
+|    ``referenced_entity_(?entity_identifier,?entity_identifier)`` - ``zero_or_more``
 
 
 ------------
@@ -153,8 +174,15 @@ Private predicates
 ``referenced_module_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Logtalk entities in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_module_(Referencer,Entity)``
+| **Mode and number of proofs:**
+|    ``referenced_module_(?entity_identifier,?module_identifier)`` - ``zero_or_more``
 
 
 ------------

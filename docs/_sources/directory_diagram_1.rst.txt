@@ -14,8 +14,8 @@
 Common predicates for generating directory diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 1:11:0
-| **Date:** 2019-06-13
+| **Version:** 1:12:0
+| **Date:** 2022-05-23
 
 | **Compilation flags:**
 |    ``static``
@@ -54,8 +54,15 @@ Protected predicates
 ``remember_included_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember included Logtalk directory in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_included_directory(Path)``
+| **Mode and number of proofs:**
+|    ``remember_included_directory(+atom)`` - ``one``
 
 
 ------------
@@ -70,8 +77,15 @@ Protected predicates
 ``remember_referenced_logtalk_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember referenced Logtalk directory in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_referenced_logtalk_directory(Path)``
+| **Mode and number of proofs:**
+|    ``remember_referenced_logtalk_directory(+atom)`` - ``one``
 
 
 ------------
@@ -86,8 +100,15 @@ Protected predicates
 ``remember_referenced_prolog_directory/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Remember referenced Prolog directory in the diagram.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``remember_referenced_prolog_directory(Path)``
+| **Mode and number of proofs:**
+|    ``remember_referenced_prolog_directory(+atom)`` - ``one``
 
 
 ------------
@@ -105,8 +126,15 @@ Private predicates
 ``included_directory_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of Logtalk directories already included in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``included_directory_(Path)``
+| **Mode and number of proofs:**
+|    ``included_directory_(?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -121,8 +149,15 @@ Private predicates
 ``referenced_logtalk_directory_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Logtalk directories in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_logtalk_directory_(Path)``
+| **Mode and number of proofs:**
+|    ``referenced_logtalk_directory_(?atom)`` - ``zero_or_more``
 
 
 ------------
@@ -137,8 +172,15 @@ Private predicates
 ``referenced_prolog_directory_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of referenced Prolog directories in the diagram.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``referenced_prolog_directory_(Path)``
+| **Mode and number of proofs:**
+|    ``referenced_prolog_directory_(?atom)`` - ``zero_or_more``
 
 
 ------------

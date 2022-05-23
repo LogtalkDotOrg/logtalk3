@@ -3,9 +3,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:15:0,
+		version is 2:16:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2022-05-23,
 		comment is 'Common predicates for generating library diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), entity_diagram(_)]
@@ -27,17 +27,49 @@
 	]).
 
 	:- protected(remember_included_library/2).
+	:- mode(remember_included_library(+atom, +atom), one).
+	:- info(remember_included_library/2, [
+		comment is 'Remember included Logtalk library in the diagram.',
+		argnames is ['Library', 'Path']
+	]).
+
 	:- protected(remember_referenced_logtalk_library/2).
+	:- mode(remember_referenced_logtalk_library(+atom, +atom), one).
+	:- info(remember_referenced_logtalk_library/2, [
+		comment is 'Remember referenced Logtalk library in the diagram.',
+		argnames is ['Library', 'Path']
+	]).
+
 	:- protected(remember_referenced_prolog_library/2).
+	:- mode(remember_referenced_prolog_library(+atom, +atom), one).
+	:- info(remember_referenced_prolog_library/2, [
+		comment is 'Remember referenced Prolog library in the diagram.',
+		argnames is ['Library', 'Path']
+	]).
 
 	:- private(included_library_/2).
 	:- dynamic(included_library_/2).
+	:- mode(included_library_(?atom, ?atom), zero_or_more).
+	:- info(included_library_/2, [
+		comment is 'Table of Logtalk libraries already included in the diagram.',
+		argnames is ['Library', 'Path']
+	]).
 
 	:- private(referenced_logtalk_library_/2).
 	:- dynamic(referenced_logtalk_library_/2).
+	:- mode(referenced_logtalk_library_(?atom, ?atom), zero_or_more).
+	:- info(referenced_logtalk_library_/2, [
+		comment is 'Table of referenced Logtalk libraries in the diagram.',
+		argnames is ['Library', 'Path']
+	]).
 
 	:- private(referenced_prolog_library_/2).
 	:- dynamic(referenced_prolog_library_/2).
+	:- mode(referenced_prolog_library_(?atom, ?atom), zero_or_more).
+	:- info(referenced_prolog_library_/2, [
+		comment is 'Table of referenced Prolog libraries in the diagram.',
+		argnames is ['Library', 'Path']
+	]).
 
 	files(Project, Files, UserOptions) :-
 		files_directories(Files, Directories),

@@ -215,7 +215,7 @@
 <p>Predicates for generating predicate call cross-referencing diagrams.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:65:1</div>
+<div class="line"><strong>Version:</strong> 2:66:0</div>
 <div class="line"><strong>Date:</strong> 2022-05-23</div>
 </div>
 <div class="line-block">
@@ -322,30 +322,63 @@
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <div id="included_predicate_/1"> </div><section id="included-predicate-1">
 <span id="xref-diagram-1-included-predicate-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">included_predicate_/1</span></code></a><a class="headerlink" href="#included-predicate-1" title="Permalink to this headline"></a></h3>
+<p>Table of predicates already included in the diagram for the entity under processing.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_predicate_(Predicate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_predicate_(?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="referenced_predicate_/1"> </div></section>
 <section id="referenced-predicate-1">
 <span id="xref-diagram-1-referenced-predicate-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">referenced_predicate_/1</span></code></a><a class="headerlink" href="#referenced-predicate-1" title="Permalink to this headline"></a></h3>
+<p>Table of referenced predicates for the entity under processing.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">referenced_predicate_(Predicate)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">referenced_predicate_(?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="external_predicate_/1"> </div></section>
 <section id="external-predicate-1">
 <span id="xref-diagram-1-external-predicate-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">external_predicate_/1</span></code></a><a class="headerlink" href="#external-predicate-1" title="Permalink to this headline"></a></h3>
+<p>Table of external predicate references for all the entities under processing.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">external_predicate_(Reference)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">external_predicate_(?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </section>

@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:52:0,
+		version is 2:53:0,
 		author is 'Paulo Moura',
-		date is 2022-05-18,
+		date is 2022-05-23,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -51,15 +51,35 @@
 
 	:- private(included_entity_/1).
 	:- dynamic(included_entity_/1).
+	:- mode(included_entity_(?entity_identifier), zero_or_more).
+	:- info(included_entity_/1, [
+		comment is 'Table of Logtalk entities already included in the diagram.',
+		argnames is ['Entity']
+	]).
 
 	:- private(included_module_/1).
 	:- dynamic(included_module_/1).
+	:- mode(included_module_(?module_identifier), zero_or_more).
+	:- info(included_module_/1, [
+		comment is 'Table of Prolog modules already included in the diagram.',
+		argnames is ['Module']
+	]).
 
 	:- private(referenced_entity_/2).
 	:- dynamic(referenced_entity_/2).
+	:- mode(referenced_entity_(?entity_identifier, ?entity_identifier), zero_or_more).
+	:- info(referenced_entity_/2, [
+		comment is 'Table of referenced Logtalk entities in the diagram.',
+		argnames is ['Referencer', 'Entity']
+	]).
 
 	:- private(referenced_module_/2).
 	:- dynamic(referenced_module_/2).
+	:- mode(referenced_module_(?entity_identifier, ?module_identifier), zero_or_more).
+	:- info(referenced_module_/2, [
+		comment is 'Table of referenced Logtalk entities in the diagram.',
+		argnames is ['Referencer', 'Entity']
+	]).
 
 	file(Source, UserOptions) :-
 		self(Self),

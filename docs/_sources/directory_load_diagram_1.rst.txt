@@ -14,8 +14,8 @@
 Predicates for generating directory loading dependency diagrams.
 
 | **Author:** Paulo Moura
-| **Version:** 1:21:0
-| **Date:** 2022-05-18
+| **Version:** 1:22:0
+| **Date:** 2022-05-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -62,8 +62,15 @@ Private predicates
 ``sub_diagram_/2``
 ^^^^^^^^^^^^^^^^^^
 
+Table of directory sub-diagrams to support their generation.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``sub_diagram_(Project,Directory)``
+| **Mode and number of proofs:**
+|    ``sub_diagram_(?atom,?atom)`` - ``zero_or_more``
 
 
 ------------

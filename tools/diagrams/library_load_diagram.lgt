@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:29:0,
+		version is 2:30:0,
 		author is 'Paulo Moura',
-		date is 2022-05-18,
+		date is 2022-05-23,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
@@ -35,8 +35,13 @@
 		member/2
 	]).
 
-	:- private(sub_diagrams_/1).
-	:- dynamic(sub_diagrams_/1).
+	:- private(sub_diagram_/1).
+	:- dynamic(sub_diagram_/1).
+	:- mode(sub_diagram_(?atom), zero_or_more).
+	:- info(sub_diagram_/1, [
+		comment is 'Table of library sub-diagrams to support their generation.',
+		argnames is ['Library']
+	]).
 
 	% first, output the library node
 	output_library(Library, Directory, Options) :-
@@ -51,7 +56,7 @@
 			) ->
 			entity_diagram(Format)::diagram_name_suffix(Suffix),
 			^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
-			assertz(sub_diagrams_(Library))
+			assertz(sub_diagram_(Library))
 		;	% no entities for this library; entity diagram empty
 			NodeOptions = NodeOptions0
 		),
@@ -105,14 +110,14 @@
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
 		^^option(zoom(true), Options),
-		sub_diagrams_(Library),
+		sub_diagram_(Library),
 		entity_diagram(Format)::library(Library, Options),
 		fail.
 	output_sub_diagrams(_).
 
 	reset :-
 		^^reset,
-		::retractall(sub_diagrams_(_)).
+		::retractall(sub_diagram_(_)).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).

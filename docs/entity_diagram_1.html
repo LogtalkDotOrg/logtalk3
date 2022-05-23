@@ -215,8 +215,8 @@
 <p>Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:52:0</div>
-<div class="line"><strong>Date:</strong> 2022-05-18</div>
+<div class="line"><strong>Version:</strong> 2:53:0</div>
+<div class="line"><strong>Date:</strong> 2022-05-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -321,40 +321,84 @@
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
 <div id="included_entity_/1"> </div><section id="included-entity-1">
 <span id="entity-diagram-1-included-entity-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">included_entity_/1</span></code></a><a class="headerlink" href="#included-entity-1" title="Permalink to this headline"></a></h3>
+<p>Table of Logtalk entities already included in the diagram.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_entity_(Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_entity_(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="included_module_/1"> </div></section>
 <section id="included-module-1">
 <span id="entity-diagram-1-included-module-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">included_module_/1</span></code></a><a class="headerlink" href="#included-module-1" title="Permalink to this headline"></a></h3>
+<p>Table of Prolog modules already included in the diagram.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_module_(Module)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">included_module_(?module_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="referenced_entity_/2"> </div></section>
 <section id="referenced-entity-2">
 <span id="entity-diagram-1-referenced-entity-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">referenced_entity_/2</span></code></a><a class="headerlink" href="#referenced-entity-2" title="Permalink to this headline"></a></h3>
+<p>Table of referenced Logtalk entities in the diagram.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">referenced_entity_(Referencer,Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">referenced_entity_(?entity_identifier,?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 <div id="referenced_module_/2"> </div></section>
 <section id="referenced-module-2">
 <span id="entity-diagram-1-referenced-module-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">referenced_module_/2</span></code></a><a class="headerlink" href="#referenced-module-2" title="Permalink to this headline"></a></h3>
+<p>Table of referenced Logtalk entities in the diagram.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">referenced_module_(Referencer,Entity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">referenced_module_(?entity_identifier,?module_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </section>

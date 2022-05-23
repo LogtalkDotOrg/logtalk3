@@ -23,7 +23,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:65:1,
+		version is 2:66:0,
 		author is 'Paulo Moura',
 		date is 2022-05-23,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -59,12 +59,27 @@
 
 	:- private(included_predicate_/1).
 	:- dynamic(included_predicate_/1).
+	:- mode(included_predicate_(?predicate_indicator), zero_or_more).
+	:- info(included_predicate_/1, [
+		comment is 'Table of predicates already included in the diagram for the entity under processing.',
+		argnames is ['Predicate']
+	]).
 
 	:- private(referenced_predicate_/1).
 	:- dynamic(referenced_predicate_/1).
+	:- mode(referenced_predicate_(?predicate_indicator), zero_or_more).
+	:- info(referenced_predicate_/1, [
+		comment is 'Table of referenced predicates for the entity under processing.',
+		argnames is ['Predicate']
+	]).
 
 	:- private(external_predicate_/1).
 	:- dynamic(external_predicate_/1).
+	:- mode(external_predicate_(?compound), zero_or_more).
+	:- info(external_predicate_/1, [
+		comment is 'Table of external predicate references for all the entities under processing.',
+		argnames is ['Reference']
+	]).
 
 	entity(Entity, UserOptions) :-
 		^^check_options(UserOptions),
