@@ -141,7 +141,7 @@
 			'(or meta-non-terminal) template is ambiguous. A typical case is the'-[], nl,
 			'module-aware specifier, ":", which can mean a goal, a closure, or a'-[], nl,
 			'non-callable but module-aware argument. The warning may be fixed by'-[], nl,
-			'overridding the meta-predicate directive.'-[], nl, nl
+			'overriding the meta-predicate directive.'-[], nl, nl
 		].
 
 	error(domain_error([1,_], _)) -->
@@ -402,7 +402,7 @@
 
 	explain(deprecated_date_format(_, _, _, _, _, _)) -->
 		[	'Date representation is changing to the ISO 8601 format to avoid'-[], nl,
-			'ambuiguity when interpreting dates.'-[], nl, nl
+			'ambiguity when interpreting dates.'-[], nl, nl
 		].
 
 	explain(deprecated_version_format(_, _, _, _, _)) -->
@@ -710,17 +710,17 @@
 	% suspicious tests in if-then-else and soft-cut control constructs
 
 	explain(suspicious_if_then_else_test(_, _, _, _, _, _)) -->
-		[	'An if-then-else test that is a unification goal between a variable and a'-[], nl,
-			'ground term is a potential bug: if the variable if unbound at runtime, the'-[], nl,
-			'test will always succed, commiting to the then part. Consider using instead'-[], nl,
-			'the (==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
+		[	'An if-then-else test that is a unification goal between a variable and'-[], nl,
+			'a ground term is a potential bug: if the variable is unbound at runtime,'-[], nl,
+			'the test will always succeed, committing to the then part. Consider using'-[], nl,
+			'instead the (==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
 		].
 
 	explain(suspicious_soft_cut_test(_, _, _, _, _, _)) -->
 		[	'A soft-cut test that is a unification goal between a variable and a ground'-[], nl,
-			'term is a potential bug: if the variable if unbound at runtime, the test'-[], nl,
-			'will always succed, commiting to the then part. Consider using instead the'-[], nl,
-			'(==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
+			'term is a potential bug: if the variable is unbound at runtime, the test'-[], nl,
+			'will always succeed, committing to the then part. Consider using instead'-[], nl,
+			'the (==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
 		].
 
 	% catch/3 goals that catch all exceptions
@@ -740,7 +740,7 @@
 
 	explain(entity_name_with_digits_in_the_middle(_, _, _, _)) -->
 		[	'Coding guidelines advise against using names with'-[], nl,
-			'digits in the middle as these may hurt readbility.'-[], nl, nl
+			'digits in the middle as these may hurt readability.'-[], nl, nl
 		].
 
 	explain(camel_case_predicate_name(_, _, _, _, _)) -->
@@ -755,12 +755,12 @@
 
 	explain(predicate_name_with_digits_in_the_middle(_, _, _, _, _)) -->
 		[	'Coding guidelines advise against using names with'-[], nl,
-			'digits in the middle as these may hurt readbility.'-[], nl, nl
+			'digits in the middle as these may hurt readability.'-[], nl, nl
 		].
 
 	explain(non_terminal_name_with_digits_in_the_middle(_, _, _, _, _)) -->
 		[	'Coding guidelines advise against using names with'-[], nl,
-			'digits in the middle as these may hurt readbility.'-[], nl, nl
+			'digits in the middle as these may hurt readability.'-[], nl, nl
 		].
 
 	explain(non_camel_case_variable_name(_, _, _, _, _)) -->
@@ -775,12 +775,12 @@
 
 	explain(variable_name_with_digits_in_the_middle(_, _, _, _, _)) -->
 		[	'Coding guidelines advise against using names with'-[], nl,
-			'digits in the middle as these may hurt readbility.'-[], nl, nl
+			'digits in the middle as these may hurt readability.'-[], nl, nl
 		].
 
 	explain(variable_name_with_digits_in_the_middle(_, _, _)) -->
 		[	'Coding guidelines advise against using names with'-[], nl,
-			'digits in the middle as these may hurt readbility.'-[], nl, nl
+			'digits in the middle as these may hurt readability.'-[], nl, nl
 		].
 
 	explain(variable_names_differ_only_on_case(_, _, _, _, _, _)) -->
