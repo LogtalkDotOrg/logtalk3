@@ -134,9 +134,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2021-10-01,
+		date is 2022-05-23,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
@@ -219,13 +219,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	parse_heads(Heads,Type,Name,Guard,Body,N,NN,Prog0,Prog2) :-
 		(	Heads = (HeadRemain \ HeadKill) ->
-			Type = simp,
+			Type == simp,
 			parse_terms(HeadRemain,Remain),
 			parse_terms(HeadKill,Kill),
 			heads2prog(Kill,[],kill,Remain,Name,Guard,Body,N,N0,Prog0,Prog1),
 			heads2prog(Remain,[],remain,Kill,Name,Guard,Body,N0,NN,Prog1,Prog2)
 		;	parse_terms(Heads,Head),
-			(	Type = simp ->
+			(	Type == simp ->
 				heads2prog(Head,[],kill,[],Name,Guard,Body,N,NN,Prog0,Prog2)
 			;	heads2prog(Head,[],remain,[],Name,Guard,Body,N,NN,Prog0,Prog2)
 			)
@@ -463,7 +463,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	get_wakeups(C,S,S1) :-
 		(	check_optimization_level(2) ->
 			term_variables(C,Vs),
-			(	Vs = [] ->
+			(	Vs == [] ->
 				S1 = []
 			;	get_with_vars(Vs,S,S1)
 			)
@@ -523,7 +523,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		).
 
 	get_occ(J,[Occ0|Occs],Occ) :-
-		(	J = 1 ->
+		(	J =:= 1 ->
 			Occ = Occ0
 		;	K is J - 1,
 			get_occ(K,Occs,Occ)
@@ -570,7 +570,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		).
 
 	history_check(RId,IdsR,IdsK,Kill,T0,T1) :-
-		(	Kill = [] ->
+		(	Kill == [] ->
 			E = [RId|IdsR],
 			\+ member(E,T0),
 			T1 = [E|T0]
@@ -756,7 +756,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 					write('step\n')
 				;	Comm == 'n' ->
 					write('next\n'),
-					(	Next = yes ->
+					(	Next == yes ->
 						do_next(State)
 					;	print_trace(Trans,Next,State)
 					)
@@ -877,7 +877,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	print_store([]).
 	print_store([num(C,I)|S]) :-
 		write(C), write('#'), write(I),
-		(	S = [] ->
+		(	S == [] ->
 			true
 		;	write(','),
 			print_store(S)
@@ -886,7 +886,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	print_stack([]).
 	print_stack([C|A]) :-
 		print_cons(C),
-		(	A = [] ->
+		(	A == [] ->
 			true
 		;	write(','),
 			print_stack(A)
@@ -897,7 +897,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		write('('),
 		print_stack(E),
 		write(')'),
-		(	T = [] ->
+		(	T == [] ->
 			true
 		;	write(','),
 			print_history(T)
@@ -931,11 +931,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	print_rule(N,A,R,K,G,B) :-
 		write(N), write(' @ '),
-		(	R = [] ->
+		(	R == [] ->
 			print_heads(K,A),
 			write(' <=> ')
 		;	print_heads(R,A),
-			(	K = [] ->
+			(	K == [] ->
 				write(' ==> ')
 			;	write(' \\ '),
 				print_heads(K,A),
@@ -948,11 +948,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	print_heads([],_).
 	print_heads([H|Hs],A) :-
-		(	H = active ->
+		(	H == active ->
 			write('(active) '),
 			print_cons(A)
 		;	print_cons(H)),
-		(	Hs = [] ->
+		(	Hs == [] ->
 			true
 		;	write(', '),
 			print_heads(Hs,A)
@@ -963,7 +963,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	store_to_result([],true).
 	store_to_result([num(C,_)|S],R) :-
-		(	S = [] ->
+		(	S == [] ->
 			R = C
 		;	R = (C , R0),
 			store_to_result(S,R0)

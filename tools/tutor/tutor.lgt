@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:42:0,
+		version is 0:43:0,
 		author is 'Paulo Moura',
-		date is 2022-05-21,
+		date is 2022-05-23,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -694,11 +694,33 @@
 			'if-then-else control construct to fix the scope of the cut.'-[], nl, nl
 		].
 
+	explain(suspicious_cut_in_soft_cut(_, _, _, _, _, _)) -->
+		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
+			'part. If the cut is meant to commit to the clause, add parenthesis around'-[], nl,
+			'the soft-cut control construct to fix the scope of the cut.'-[], nl, nl
+		].
+
 	explain(suspicious_cut_in_disjunction(_, _, _, _, _, _)) -->
 		[	'A cut at the start of the first argument of a disjunction control construct'-[], nl,
 			'prevents backtracking into the second argument. If the cut is meant to commit'-[], nl,
 			'to the clause, add parenthesis around the disjunction control construct to'-[], nl,
 			'fix the scope of the cut.'-[], nl, nl
+		].
+
+	% suspicious tests in if-then-else and soft-cut control constructs
+
+	explain(suspicious_if_then_else_test(_, _, _, _, _, _)) -->
+		[	'An if-then-else test that is a unification goal between a variable and a'-[], nl,
+			'ground term is a potential bug: if the variable if unbound at runtime, the'-[], nl,
+			'test will always succed, commiting to the then part. Consider using instead'-[], nl,
+			'the (==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
+		].
+
+	explain(suspicious_soft_cut_test(_, _, _, _, _, _)) -->
+		[	'A soft-cut test that is a unification goal between a variable and a ground'-[], nl,
+			'term is a potential bug: if the variable if unbound at runtime, the test'-[], nl,
+			'will always succed, commiting to the then part. Consider using instead the'-[], nl,
+			'(==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
 		].
 
 	% catch/3 goals that catch all exceptions

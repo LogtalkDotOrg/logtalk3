@@ -38,6 +38,9 @@ of proofs arguments in `mode/2` directives.
 * ADDED: Linter warnings for missing parenthesis around if-then-else and
 disjunction control constructs in the presence of cuts in the first argument.
 
+* ADDED: Linter warnings for if-then-else and soft-cut control constructs
+where the test is a unification between a variable and a ground term.
+
 * IMPROVED: Generalized the linter check for `findall/3` goals used in place
 of `forall/2` goals.
 
@@ -113,8 +116,7 @@ tool.
 
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
 
-* UPDATED: The `tutor` tool for the new linter warnings for missing parenthesis
-around if-then-else and disjunction control constructs in the presence of cuts.
+* UPDATED: The `tutor` tool for the new linter warnings.
 
 * FIXED: Typo in the `mode/2` directive for the `debug_messages::disable/1`
 predicate.
@@ -124,6 +126,9 @@ predicate.
 * FIXED: The `lgtunit` tool QuickCheck implementation of the verbose option
 to also apply when a generated test case throws an error.
 
+* FIXED: If-then-else linter warning in the `diagrams` tool `xref_diagram/1`
+object.
+
 Examples
 --------
 
@@ -132,13 +137,25 @@ Examples
 * UPDATED: Documentation and sample queries of the `cc` example.
 
 * UPDATED: The `errors` example to illustrate the linter warning for misuse
-of the standard `findall/3` predicate.
+of the standard `findall/3` predicate and the new if-then-else, soft-cut, and
+disjunction linter warnings.
 
 * FIXED: The `bench` example to only load the `boyer` and `chat_parser`
 benchmarks when the backend provides `statistics/2` as a built-in predicate.
 
 * FIXED: The `benchmarks` and `module_aliases` examples when using the Scryer
 Prolog backend.
+
+Contributions
+-------------
+
+* FIXED: Bug in the `verdi_neruda` implementation of the semi-naive bottom-up
+interpreter for general (stratified) logic programs.
+
+Ports
+-----
+
+* FIXED: Several if-then-else linter warnings in the `toychr` port.
 
 Tests
 -----

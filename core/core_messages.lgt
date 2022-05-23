@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:106:0,
+		version is 1:107:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-02-23,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -686,12 +686,27 @@
 
 	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, _IfThenElse)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause body likely missing parenthesis around if-then-else'-[Name/Arity], nl],
+		['Predicate ~q clause likely missing parenthesis around if-then-else'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, _SoftCut)) -->
+		{functor(Head, Name, Arity)},
+		['Predicate ~q clause likely missing parenthesis around soft-cut'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head, _Disjunction)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause body likely missing parenthesis around disjunction'-[Name/Arity], nl],
+		['Predicate ~q clause likely missing parenthesis around disjunction'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	% suspicious tests in if-then-else and soft-cut control constructs
+
+	message_tokens(suspicious_if_then_else_test(File, Lines, Type, Entity, _Head, _IfThenElse)) -->
+		['If-then-else test is a unification between a variable and a ground term'-[], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_soft_cut_test(File, Lines, Type, Entity, _Head, _SoftCut)) -->
+		['Soft-cut test is a unification between a variable and a ground term'-[], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% catch/3 goals that catch all exceptions

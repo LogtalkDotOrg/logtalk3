@@ -436,6 +436,14 @@
 		!,
 		a(1) ; a(2).
 
+	% suspicious tests
+
+	oops(X) :-
+		(	X = 1 ->
+			fail
+		;	true
+		).
+
 :- end_object.
 
 

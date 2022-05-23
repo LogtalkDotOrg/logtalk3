@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>linter &mdash; The Logtalk Handbook v3.56.0-b08 documentation</title>
+  <title>linter &mdash; The Logtalk Handbook v3.56.0-b09 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -176,6 +176,10 @@ modules)</p></li>
 <li><p>Lambda expression with parameter variables used elsewhere in a clause</p></li>
 <li><p>Singleton variables</p></li>
 <li><p>If-then-else and soft cut control constructs without an else part</p></li>
+<li><p>If-then-else and soft cut control constructs where the test is a
+unification between a variable and a ground term</p></li>
+<li><p>Missing parenthesis around if-then-else and disjunction control
+constructs in the presence of cuts in the first argument</p></li>
 <li><p>Cuts in clauses for multifile predicates</p></li>
 <li><p>Missing cut in repeat loops</p></li>
 <li><p>Possible non-steadfast predicate definitions</p></li>

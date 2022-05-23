@@ -35,9 +35,9 @@
 :- object(shell(_Interpreters_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2019-03-20,
+		date is 2022-05-23,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
@@ -237,10 +237,10 @@
 
 	write_unifiers(VarNames) :-
 		unify_variable_names(VarNames),
-		(	VarNames = [] ->
-				write('true.'),
-				nl
-			;	meta::map(writeln, VarNames)
+		(	VarNames == [] ->
+			write('true.'),
+			nl
+		;	meta::map(writeln, VarNames)
 		).
 
 	unify_variable_names([]).

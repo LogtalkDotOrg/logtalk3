@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:65:0,
+		version is 2:65:1,
 		author is 'Paulo Moura',
-		date is 2022-05-18,
+		date is 2022-05-23,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -383,7 +383,7 @@
 				% absolute path as a local URL
 				CodeURL0 = Path
 			),
-			(	Line = -1 ->
+			(	Line =:= -1 ->
 				% no line number available; simply link to the entity file
 				CodeURL = CodeURL0
 			;	sub_atom(CodeURL0, 0, 1, _, '/') ->

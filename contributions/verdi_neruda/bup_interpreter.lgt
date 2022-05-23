@@ -36,9 +36,9 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.',
-		date is 2021-01-02,
+		date is 2022-05-23,
 		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.'
 	]).
 
@@ -52,7 +52,7 @@
 
 	prove(Goal, I, DI, FixPoint, Limit, DB) :-
 		subsumption_iterate(Goal, I, DI, [], Pending, FixPoint0, Limit, DB),
-		(	Pending = [] ->
+		(	Pending == [] ->
 			FixPoint = FixPoint0
 		;	satisfy_negative_literals(Pending, FixPoint0, Satisfied),
 			subsumption_union(FixPoint0, Satisfied, FixPoint1),
@@ -68,7 +68,7 @@
 		;	satisfy_negative_literals(Pending, FixPoint, Satisfied)
 		).
 
-	subsumption_iterate(Goal, _, DI, _, _, _, _, _) :-
+	subsumption_iterate(Goal, _, DI, Pending, Pending, _, _, _) :-
 		list::member(Goal, DI).
 	subsumption_iterate(Goal, I, DI, Pending0, Pending, Fix, Limit, DB) :-
 		Limit \= 0,

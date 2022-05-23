@@ -50,6 +50,10 @@ Lint checks include:
 -  Lambda expression with parameter variables used elsewhere in a clause
 -  Singleton variables
 -  If-then-else and soft cut control constructs without an else part
+-  If-then-else and soft cut control constructs where the test is a
+   unification between a variable and a ground term
+-  Missing parenthesis around if-then-else and disjunction control
+   constructs in the presence of cuts in the first argument
 -  Cuts in clauses for multifile predicates
 -  Missing cut in repeat loops
 -  Possible non-steadfast predicate definitions

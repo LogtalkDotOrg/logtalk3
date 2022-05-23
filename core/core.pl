@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 56, 0, b08)).
+'$lgt_version_data'(logtalk(3, 56, 0, b09)).
 
 
 
@@ -12665,11 +12665,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_body'((IfThen; Else), _, _, Ctx) :-
-	nonvar(IfThen),
 	IfThen = (If -> _),
+	nonvar(If),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
-	(	If == !
+	(	If == ! ->
+		true
 	;	If = (Goal, _), Goal == !
 	),
 	'$lgt_increment_compiling_warnings_counter',
@@ -12681,6 +12682,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	fail.
 
+'$lgt_compile_body'((IfThen; Else), _, _, Ctx) :-
+	IfThen = (If -> _),
+	nonvar(If),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	If = (Term1 = Term2),
+	(	var(Term1), ground(Term2) ->
+		true
+	;	ground(Term1), var(Term2)
+	),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_if_then_else_test(File, Lines, Type, Entity, Head, (IfThen; Else))
+	),
+	fail.
+
 '$lgt_compile_body'((IfThen; Else), (TIf -> TThen; TElse), (DIf -> DThen; DElse), Ctx) :-
 	nonvar(IfThen),
 	IfThen = (If -> Then),
@@ -12688,6 +12708,45 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(If, TIf, DIf, Ctx),
 	'$lgt_compile_body'(Then, TThen, DThen, Ctx),
 	'$lgt_compile_body'(Else, TElse, DElse, Ctx).
+
+'$lgt_compile_body'((IfThen; Else), _, _, Ctx) :-
+	nonvar(IfThen),
+	IfThen = '*->'(If, _),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	(	If == ! ->
+		true
+	;	If = (Goal, _), Goal == !
+	),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, (IfThen; Else))
+	),
+	fail.
+
+'$lgt_compile_body'((IfThen; Else), _, _, Ctx) :-
+	nonvar(IfThen),
+	IfThen = '*->'(If, _),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	If = (Term1 = Term2),
+	(	var(Term1), ground(Term2) ->
+		true
+	;	ground(Term1), var(Term2)
+	),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_comp_ctx_head'(Ctx, Head),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_soft_cut_test(File, Lines, Type, Entity, Head, (IfThen; Else))
+	),
+	fail.
 
 '$lgt_compile_body'((IfThen; Else), ('*->'(TIf, TThen); TElse), ('*->'(DIf, DThen); DElse), Ctx) :-
 	nonvar(IfThen),
