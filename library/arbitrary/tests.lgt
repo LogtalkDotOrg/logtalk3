@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-10-28,
+		date is 2022-05-24,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -267,19 +267,34 @@
 
 	% random seed predicates
 
-	test(arbitrary_get_seed_1_01) :-
-		type::get_seed(Seed),
-		ground(Seed).
+	test(arbitrary_get_seed_1_01, true(ground(Seed))) :-
+		type::get_seed(Seed).
 
-	test(arbitrary_set_seed_1_02) :-
+	test(arbitrary_set_seed_1_02, true) :-
 		type::get_seed(Seed),
 		type::set_seed(Seed).
 
-	test(arbitrary_set_seed_1_03) :-
+	test(arbitrary_set_seed_1_03, true(Seed0 == Seed)) :-
 		type::get_seed(Seed0),
 		type::set_seed(Seed0),
-		type::get_seed(Seed),
-		Seed0 == Seed.
+		type::get_seed(Seed).
+
+	% custom arbitrary generators
+
+	test(arbitrary_custom_generator_01, true) :-
+		type::check(odd, 41).
+
+	test(arbitrary_custom_generator_02, ball(type_error(odd,42))) :-
+		type::check(odd, 42).
+
+	test(arbitrary_custom_generator_03, true(Small == 0)) :-
+		type::shrink(odd, -2, Small).
+
+	test(arbitrary_custom_generator_04, true(Small == 0)) :-
+		type::shrink(odd, 2, Small).
+
+	test(arbitrary_custom_generator_05, subsumes(passed(_,_,_), Result)) :-
+		lgtunit::quick_check(type::arbitrary({odd}, -odd), Result, []).
 
 	% auxiliary predicates
 

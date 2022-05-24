@@ -67,25 +67,29 @@ To define a generator of arbitrary values for a type, define a clause for the
 for the `arbitrary::arbitrary/2` multifile predicate generating an arbitrary
 term of the specified type. For example:
 
-    :- multifile(arbitrary::arbitrary/1).
-    arbitrary::arbitrary(foo).
+	:- multifile(arbitrary::arbitrary/1).
+	arbitrary::arbitrary(foo).
 
-    :- multifile(arbitrary::arbitrary/2).
-    arbitrary::arbitrary(foo, Arbitrary) :-
-        ...
+	:- multifile(arbitrary::arbitrary/2).
+	arbitrary::arbitrary(foo, Arbitrary) :-
+		...
 
-Optionally, define a clause for the `arbitrary::shrink/3` multifile predicate
-for shrinking arbitrary values for QuickCheck usage. For example:
+Optionally, define a clause for the `arbitrary::shrinker/1` multifile predicate
+to declare a new shrinker and a `arbitrary::shrink/3` multifile predicate for
+shrinking arbitrary values for QuickCheck usage. For example:
 
-    :- multifile(arbitrary::shrink/3).
-    arbitrary::shrink(foo, Large, Small) :-
-        ...
+	:- multifile(arbitrary::shrinker/1).
+	arbitrary::shrinker(foo).
+
+	:- multifile(arbitrary::shrink/3).
+	arbitrary::shrink(foo, Large, Small) :-
+		...
 
 It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:
 
 	:- multifile(arbitrary::edge_case/2).
-    arbitrary::edge_case(cost, 0).
+	arbitrary::edge_case(cost, 0).
 
 Edge cases are usually tried before resorting to generating arbitrary values
 for a type.

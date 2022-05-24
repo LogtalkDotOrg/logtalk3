@@ -208,10 +208,14 @@ arbitrary<span class="o">::</span>arbitrary(foo, <span class="nv">Arbitrary</spa
     ...
 </pre></div>
 </div>
-<p>Optionally, define a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::shrink/3</span></code> multifile
-predicate for shrinking arbitrary values for QuickCheck usage. For
-example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>shrink<span class="o">/</span><span class="m">3</span>).
+<p>Optionally, define a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::shrinker/1</span></code> multifile
+predicate to declare a new shrinker and a <code class="docutils literal notranslate"><span class="pre">arbitrary::shrink/3</span></code>
+multifile predicate for shrinking arbitrary values for QuickCheck usage.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>shrinker<span class="o">/</span><span class="m">1</span>).
+arbitrary<span class="o">::</span>shrinker(foo).
+
+<span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>shrink<span class="o">/</span><span class="m">3</span>).
 arbitrary<span class="o">::</span>shrink(foo, <span class="nv">Large</span>, <span class="nv">Small</span>) <span class="o">:-</span>
     ...
 </pre></div>

@@ -60,11 +60,15 @@ generating an arbitrary term of the specified type. For example:
    arbitrary::arbitrary(foo, Arbitrary) :-
        ...
 
-Optionally, define a clause for the ``arbitrary::shrink/3`` multifile
-predicate for shrinking arbitrary values for QuickCheck usage. For
-example:
+Optionally, define a clause for the ``arbitrary::shrinker/1`` multifile
+predicate to declare a new shrinker and a ``arbitrary::shrink/3``
+multifile predicate for shrinking arbitrary values for QuickCheck usage.
+For example:
 
 ::
+
+   :- multifile(arbitrary::shrinker/1).
+   arbitrary::shrinker(foo).
 
    :- multifile(arbitrary::shrink/3).
    arbitrary::shrink(foo, Large, Small) :-

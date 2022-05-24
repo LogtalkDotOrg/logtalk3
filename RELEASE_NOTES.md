@@ -72,14 +72,16 @@ generators.
 Library
 -------
 
+* ADDED: Tests for custom generators to the `arbitrary` library category.
+
+* IMPROVED: Performance of the `arbitrary` library category generation of
+Unicode code points.
+
 * IMPROVED: API documentation of the `meta_compiler`, `statistics`, and
 `term_io` libraries.
 
 * IMPROVED: The `expecteds` and `optionals` libraries tests to use explicit
 assertions.
-
-* IMPROVED: Performance of the `arbitrary` library category generation of
-Unicode code points.
 
 * FIXED: The `arbitrary` library category to not generate surrogate code points
 as edge cases for the `unicode_full` character set.
