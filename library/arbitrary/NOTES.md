@@ -135,7 +135,9 @@ in the QuickCheck implementation provided by the `lgtunit` tool.
 Examples
 --------
 
-See the implementation of the `optionals` and `expecteds` libraries.
+See the implementation of the `optionals` and `expecteds` libraries. See also
+the `test_files/custom.lgt` source file for an example of defining custom
+arbitrary term generators.
 
 
 Known issues
@@ -145,3 +147,10 @@ Some Prolog systems either don't support the null character or provide buggy
 results when calling `char_code/2` with a code of zero. When that's the case,
 the null character is excluded when generating arbitrary characters or
 character codes.
+
+Generating arbitrary Unicode characters (instead of Unicode codepoints) is
+inherently problematic as the process first generates codepoints and then
+tries to use the standard `char_code/2` to convert them to characters. But,
+depending on the backend Prolog system and its internal (if any) Unicode
+normalization, it may not be possible to convert a codepoint to a single
+character.

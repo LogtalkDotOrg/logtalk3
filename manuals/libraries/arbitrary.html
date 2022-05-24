@@ -269,7 +269,9 @@ notably used in the QuickCheck implementation provided by the
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<p>See the implementation of the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries.</p>
+<p>See the implementation of the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries.
+See also the <code class="docutils literal notranslate"><span class="pre">test_files/custom.lgt</span></code> source file for an example of
+defining custom arbitrary term generators.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
@@ -277,6 +279,12 @@ notably used in the QuickCheck implementation provided by the
 buggy results when calling <code class="docutils literal notranslate"><span class="pre">char_code/2</span></code> with a code of zero. When
 that’s the case, the null character is excluded when generating
 arbitrary characters or character codes.</p>
+<p>Generating arbitrary Unicode characters (instead of Unicode codepoints)
+is inherently problematic as the process first generates codepoints and
+then tries to use the standard <code class="docutils literal notranslate"><span class="pre">char_code/2</span></code> to convert them to
+characters. But, depending on the backend Prolog system and its internal
+(if any) Unicode normalization, it may not be possible to convert a
+codepoint to a single character.</p>
 </section>
 </section>
 
