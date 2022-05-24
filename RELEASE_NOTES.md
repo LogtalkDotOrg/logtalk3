@@ -167,6 +167,8 @@ Ports
 Tests
 -----
 
+* ADDED: Additional test for the standard `char_code/2` built-in predicate.
+
 * FIXED: Tests for the Logtalk `{}/1` control construct when the expected
 error may contain a module-qualified term.
 

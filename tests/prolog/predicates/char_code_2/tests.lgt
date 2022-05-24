@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-05-10,
+		date is 2022-05-24,
 		comment is 'Unit tests for the ISO Prolog standard char_code/2 built-in predicate.'
+	]).
+
+	:- uses(integer, [
+		between/3
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.6.4
@@ -40,7 +44,7 @@
 	test(iso_char_code_2_03, true(Char == c)) :-
 		{char_code(Char, 0'c)}.
 
-	succeeds(iso_char_code_2_04) :-
+	test(iso_char_code_2_04, true) :-
 		% the ISO standard also allows a representation_error(character_code)
 		catch({char_code(_Char, 163)}, Error, true),
 		(	var(Error) ->
@@ -72,5 +76,8 @@
 
 	test(lgt_char_code_2_11, error(type_error(character,42))) :-
 		{char_code(42, _Code)}.
+
+	test(lgt_char_code_2_12, all((char_code(Char,Code0), char_code(Char,Code), Code0 == Code))) :-
+		between(1, 127, Code0).
 
 :- end_object.
