@@ -36,9 +36,9 @@ bar(_X) :- true.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-09-20,
+		date is 2022-05-25,
 		comment is 'Unit tests for the ISO Prolog standard abolish/1 built-in predicate.'
 	]).
 
@@ -50,10 +50,12 @@ bar(_X) :- true.
 	test(iso_abolish_1_02, error(instantiation_error)) :-
 		{abolish(foo/_)}.
 
-	test(iso_abolish_1_03, error(type_error(predicate_indicator,foo))) :-
+	test(iso_abolish_1_03, errors([type_error(predicate_indicator,foo), type_error(predicate_indicator,':'(user,foo))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(foo)}.
 
-	test(iso_abolish_1_04, error(type_error(predicate_indicator,foo(X)))) :-
+	test(iso_abolish_1_04, errors([type_error(predicate_indicator,foo(X)), type_error(predicate_indicator,':'(user,foo(X)))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(foo(X))}.
 
 	test(iso_abolish_1_05, errors([permission_error(modify,static_procedure,abolish/1), permission_error(modify,static_procedure,':'(user,abolish/1))])) :-
@@ -90,7 +92,8 @@ bar(_X) :- true.
 	test(eddbali_abolish_1_12, error(type_error(atom,5))) :-
 		{abolish(5/2)}.
 
-	test(eddbali_abolish_1_13, error(type_error(predicate_indicator,insect))) :-
+	test(eddbali_abolish_1_13, errors([type_error(predicate_indicator,insect), type_error(predicate_indicator,':'(user,insect))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
 		{abolish(insect)}.
 
 	% tests from the ECLiPSe test suite
