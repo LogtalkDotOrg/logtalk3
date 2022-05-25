@@ -782,6 +782,22 @@ predicate to collect all solutions and check against the list of expected
 solutions. When the expected solutions are a set, use in alternative the
 standard `setof/3` predicate.
 
+If you want to check that all solutions of a non-deterministic predicate
+satisfy an assertion, use the `test/2` or `test/3` test dialect with the
+`all(Assertion)` outcome. For example:
+
+	test(atom_list, all(atom(Item))) :-
+		member(Item, [a, b, c]).
+
+See also the next section on testing *generators*.
+
+If you want to check that a solution exists for a non-deterministic predicate
+that satisfies an assertion, use the `test/2` or `test/3` test dialect with
+the `exists(Assertion)` outcome. For example:
+
+	test(at_least_one_atom, exists(atom(Item))) :-
+		member(Item, [1, foo(2), 3.14, abc, 42]).
+
 
 Testing generators
 ------------------

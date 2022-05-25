@@ -957,6 +957,21 @@ number of solutions), you can wrap the test goal using the standard
 <code class="docutils literal notranslate"><span class="pre">findall/3</span></code> predicate to collect all solutions and check against the
 list of expected solutions. When the expected solutions are a set, use
 in alternative the standard <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicate.</p>
+<p>If you want to check that all solutions of a non-deterministic predicate
+satisfy an assertion, use the <code class="docutils literal notranslate"><span class="pre">test/2</span></code> or <code class="docutils literal notranslate"><span class="pre">test/3</span></code> test dialect with
+the <code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code> outcome. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(atom_list, all(<span class="k">atom</span>(<span class="nv">Item</span>))) <span class="o">:-</span>
+    member(<span class="nv">Item</span>, [a, b, c]).
+</pre></div>
+</div>
+<p>See also the next section on testing <em>generators</em>.</p>
+<p>If you want to check that a solution exists for a non-deterministic
+predicate that satisfies an assertion, use the <code class="docutils literal notranslate"><span class="pre">test/2</span></code> or <code class="docutils literal notranslate"><span class="pre">test/3</span></code>
+test dialect with the <code class="docutils literal notranslate"><span class="pre">exists(Assertion)</span></code> outcome. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(at_least_one_atom, exists(<span class="k">atom</span>(<span class="nv">Item</span>))) <span class="o">:-</span>
+    member(<span class="nv">Item</span>, [<span class="m">1</span>, foo(<span class="m">2</span>), <span class="m">3.14</span>, abc, <span class="m">42</span>]).
+</pre></div>
+</div>
 </section>
 <section id="testing-generators">
 <h2>Testing generators<a class="headerlink" href="#testing-generators" title="Permalink to this headline"></a></h2>
