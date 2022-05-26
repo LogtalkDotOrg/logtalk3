@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:93:1,
+		version is 1:93:2,
 		author is 'Paulo Moura',
-		date is 2022-05-08,
+		date is 2022-05-26,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2547,7 +2547,7 @@
 				Parts = [Part| Parts0]
 			;	Directory == ('/') ->
 				Parts = [Path| Parts0]
-			;	Directory = './' ->
+			;	Directory == './' ->
 				atom_concat(Name, Extension, Part),
 				Parts = [Part| Parts0]
 			;	atom_concat(Name, Extension, Part0),
