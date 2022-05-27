@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2022-01-24,
+		date is 2022-05-27,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
@@ -322,10 +322,10 @@
 			dbg('Final line at'-N),
 			Rows = []
 		;	phrase(record(Row, false), LineCodes) ->
-			Rows = [Row|Rest_Rows],
+			Rows = [Row| RestRows],
 			dbg('Read Line'-N),
 			NN is N + 1,
-			read_line_by_line(Stream, Rest_Rows, NN)
+			read_line_by_line(Stream, RestRows, NN)
 		;	fail
 		).
 
@@ -343,12 +343,12 @@
 	% parse and ask
 	parse_one_line_and_ask_separator(Codes, Separator) :-
 		dbg('File codes'-Codes),
-		phrase(guess_record(Row, Guest_Sep, false), Codes),
-		dbg(i_suggest_separator(Row, Guest_Sep)),
+		phrase(guess_record(Row, GuessedSeparator, false), Codes),
+		dbg(i_suggest_separator(Row, GuessedSeparator)),
 		logtalk::ask_question(question, csv, guess_row(Row), valid, Answer),
 		correct(Answer),
-		(	nonvar(Guest_Sep) ->
-			Separator = Guest_Sep
+		(	nonvar(GuessedSeparator) ->
+			Separator = GuessedSeparator
 		;	% setting a default in case there is none in the file
 			Separator = comma
 		).
