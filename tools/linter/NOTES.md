@@ -78,7 +78,7 @@ Lint checks include:
 - Calls to `findall/3` used to backtrack over all solutions of a goal
 - Calls to `catch/3` that catch all exceptions
 - Calls to standard predicates that have more efficient alternatives
-- Entity, predicate, and variable names not following official coding guidelines
+- File, entity, predicate, and variable names not following official coding guidelines
 - Variable names that differ only on case
 - Clauses whose body is a disjunction
 
