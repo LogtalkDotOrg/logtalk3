@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 56, 0, b09)).
+'$lgt_version_data'(logtalk(3, 56, 0, b10)).
 
 
 
@@ -7297,7 +7297,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compiler_output_stream_error_handler'(Output, OutputError)
 	),
 	'$lgt_close'(Output),
-	'$lgt_restore_global_operator_table'.
+	'$lgt_restore_global_operator_table',
+	'$lgt_check_file_naming'.
 
 
 '$lgt_write_runtime_tables'(Output) :-
@@ -7393,6 +7394,41 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % assume no encoding/1 directive present on the source file
 '$lgt_check_for_encoding_directive'(_, _, _, Input, Input, _, []).
+
+
+
+% as per coding guidelines, the basename of a file that defines a single
+% entity should by the name of the entity or, in the case of parametric
+% entities, the name of the entity concatenated with the number of the
+% parameters, possible separated by an underscore
+
+'$lgt_check_file_naming' :-
+	(	'$lgt_compiler_flag'(naming, warning),
+		findall(
+			Entity,
+			(	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Entity, _, _, _, _))
+			;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Entity, _, _, _, _, _))
+			;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _))
+			),
+			[Single]
+		) ->
+		'$lgt_pp_file_paths_flags_'(Basename, _, SourceFile, _, _),
+		(	functor(Single, Name, Arity),
+			(	Expected = Name
+			;	number_codes(Arity, ArityCodes),
+				(	atom_codes(ArityAtom, [95| ArityCodes])
+				;	atom_codes(ArityAtom, ArityCodes)
+				),
+				atom_concat(Name, ArityAtom, Expected)
+			),
+			'$lgt_file_extension'(logtalk, Extension),
+			atom_concat(Expected, Extension, Basename) ->
+			true
+		;	'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(warning(naming), file_and_entity_names_differ(SourceFile, Single))
+		)
+	;	true
+	).
 
 
 

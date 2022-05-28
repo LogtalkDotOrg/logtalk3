@@ -41,6 +41,9 @@ disjunction control constructs in the presence of cuts in the first argument.
 * ADDED: Linter warnings for if-then-else and soft-cut control constructs
 where the test is a unification between a variable and a ground term.
 
+* ADDED: Linter warning for naming of files that define a single entity as per
+coding guidelines. Controlled by the `naming` linter flag.
+
 * IMPROVED: Generalized the linter check for `findall/3` goals used in place
 of `forall/2` goals.
 

@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:107:0,
+		version is 1:108:0,
 		author is 'Paulo Moura',
-		date is 2022-02-23,
+		date is 2022-05-28,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -765,6 +765,10 @@
 		['Variables differ only on case: ~w ~w'-[Name, OtherName], nl],
 		message_context(File, Lines).
 
+	message_tokens(file_and_entity_names_differ(File, Entity)) -->
+		['Source file basename differ from file entity name: ~q'-[Entity], nl],
+		message_context(File).
+
 	% duplicated clause and grammar rule messages
 
 	message_tokens(duplicated_clause(File, Lines, Type, Entity, Clause, OriginalFile, OriginalLines)) -->
@@ -905,6 +909,9 @@
 			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).
+
+	message_context(File) -->
+		['  while compiling file ~w'-[File], nl, nl].
 
 	error_message_context(File, Lines) -->
 		(	{Lines == 0-0} ->
