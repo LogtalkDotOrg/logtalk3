@@ -49,9 +49,9 @@ f(_, 2, b).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-02-01,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -111,8 +111,9 @@ f(_, 2, b).
 	test(iso_bagof_3_13, error(instantiation_error)) :-
 		{bagof(_X, _Y^_Z, _L)}.
 
-	test(iso_bagof_3_14, error(type_error(callable,1))) :-
-		% try to delay the error to runtime
+	test(iso_bagof_3_14, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		one(One),
 		{bagof(_X, One, _L)}.
 

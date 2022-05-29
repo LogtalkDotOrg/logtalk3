@@ -57,7 +57,8 @@
 		{findall(_X, _Goal, _S, _T)}.
 
 	test(commons_findall_4_09, errors([type_error(callable,4), type_error(callable,':'(user,4))])) :-
-		% try to delay the error to runtime
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		four(Four),
 		{findall(_X, Four, _S, _T)}.
 

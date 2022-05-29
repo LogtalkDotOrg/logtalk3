@@ -87,7 +87,7 @@ setof_3_member(X, [_| L]) :-
 	:- info([
 		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-12-10,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -221,11 +221,13 @@ setof_3_member(X, [_| L]) :-
 
 	:- endif.
 
-	test(eddbali_setof_3_26, errors([type_error(callable,(true;4)), type_error(callable,4)])) :-
-		% the second exception term is a common but not strictly conforming alternative
+	test(eddbali_setof_3_26, errors([type_error(callable,(true;4)), type_error(callable,':'(user,(true;4))), type_error(callable,4), type_error(callable,':'(user,4))])) :-
+		% the third and fourth exception terms are a common but not strictly conforming alternative
 		{setof(X, X^(true; 4), _L)}.
 
-	test(sics_setof_3_27, error(type_error(callable,1))) :-
+	test(sics_setof_3_27, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		{setof(_X, A^A^1, _L)}.
 
 	test(sics_setof_3_28, true(A == [])) :-

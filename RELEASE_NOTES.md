@@ -179,9 +179,9 @@ Tests
 * FIXED: Tests for the Logtalk `{}/1` control construct when the expected
 error may contain a module-qualified term.
 
-* FIXED: Tests for the Prolog `abolish/1`, `call/1`, `call/2-N`, `catch/3`,
-`findall/4`, and `once/1` control constructs and predicates when the expected
-error may contain a module-qualified term.
+* FIXED: Tests for the Prolog `abolish/1`, `bagof/3`, `call/1`, `call/2-N`,
+`catch/3`, `findall/3-4`, `once/1`, and `setof/3` control constructs and
+predicates when the expected error may contain a module-qualified term.
 
 
 3.55.0 - April 28, 2022

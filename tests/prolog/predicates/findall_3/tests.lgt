@@ -29,9 +29,9 @@ f(_, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-02-07,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -58,8 +58,9 @@ f(_, 2).
 	test(iso_findall_3_07, error(instantiation_error)) :-
 		{findall(_X, _Goal, _S)}.
 
-	test(iso_findall_3_08, error(type_error(callable,4))) :-
-		% try to delay the error to runtime
+	test(iso_findall_3_08, errors([type_error(callable,4), type_error(callable,':'(user,4))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		four(Four),
 		{findall(_X, Four, _S)}.
 
