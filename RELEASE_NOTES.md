@@ -176,6 +176,10 @@ Tests
 * ADDED: Additional tests for the `atomic_list_concat/2-3` and
 `atomic_concat/3` predicates.
 
+* UPDATED: The `predicate_property/2` predicate tests to accept `bagof/3`
+and `setof/3` meta-predicate templates that use `^` instead of `0` for the
+meta-argument.
+
 * FIXED: Tests for the Logtalk `{}/1` control construct when the expected
 error may contain a module-qualified term.
 

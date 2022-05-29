@@ -34,9 +34,9 @@ elk(X) :- moose(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-12-31,
+		date is 2022-05-30,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 
@@ -112,10 +112,12 @@ elk(X) :- moose(X).
 	test(lgt_predicate_property_2_20, true(Template == once(0))) :-
 		{predicate_property(once(_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_21, subsumes(bagof(_,0,_),Template)) :-
+	test(lgt_predicate_property_2_21, true((subsumes_term(bagof(_,0,_),Template); subsumes_term(bagof(_,^,_),Template)))) :-
+		% in some Prolog systems, "^" is used instead of "0" to indicate that an existentially-qualified goal may be used
 		{predicate_property(bagof(_,_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_22, subsumes(setof(_,0,_),Template)) :-
+	test(lgt_predicate_property_2_22, true((subsumes_term(setof(_,0,_),Template); subsumes_term(setof(_,^,_),Template)))) :-
+		% in some Prolog systems, "^" is used instead of "0" to indicate that an existentially-qualified goal may be used
 		{predicate_property(setof(_,_,_), meta_predicate(Template))}.
 
 	test(lgt_predicate_property_2_23, subsumes(findall(_,0,_,_),Template), [condition({predicate_property(findall(_,_,_,_), built_in)})]) :-
