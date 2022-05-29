@@ -40,9 +40,9 @@ condition_opaque_to_cut(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-09-25,
+		date is 2022-05-29,
 		comment is 'Unit tests for the soft-cut if/3 built-in predicate.'
 	]).
 
@@ -76,18 +76,21 @@ condition_opaque_to_cut(2).
 	test(if_3_09, true(L == [1, 2])) :-
 		findall(X, {condition_opaque_to_cut(X)}, L).
 
-	test(if_3_10, errors([type_error(callable,3), type_error(callable,if(3,true,true))])) :-
-		% try to delay the error to runtime
+	test(if_3_10, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,if(3,true,true))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{if(Three, true, true)}.
 
-	test(if_3_11, errors([type_error(callable,3), type_error(callable,if(true,3,true))])) :-
-		% try to delay the error to runtime
+	test(if_3_11, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,if(true,3,true))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{if(true, Three, true)}.
 
-	test(if_3_12, errors([type_error(callable,3), type_error(callable,if(fail,true,3))])) :-
-		% try to delay the error to runtime
+	test(if_3_12, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,if(fail,true,3))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{if(fail, true, Three)}.
 

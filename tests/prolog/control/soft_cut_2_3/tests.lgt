@@ -48,9 +48,9 @@ condition_opaque_to_cut_3(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-04-28,
+		date is 2022-05-29,
 		comment is 'Unit tests for the soft-cut (*->)/2 control construct that is becoming a de facto standard.'
 	]).
 
@@ -112,18 +112,21 @@ condition_opaque_to_cut_3(2).
 		% then part is cut transparent
 		findall(X, {';'(X=1, X=2), '*->'(true, !)}, L).
 
-	test(lgt_soft_cut_2_3_18, errors([type_error(callable,3), type_error(callable,';'('*->'(3,true),fail))])) :-
-		% try to delay the error to runtime
+	test(lgt_soft_cut_2_3_18, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,';'('*->'(3,true),fail))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{';'('*->'(Three, true), fail)}.
 
-	test(lgt_soft_cut_2_3_19, errors([type_error(callable,3), type_error(callable,';'('*->'(true,3),fail))])) :-
-		% try to delay the error to runtime
+	test(lgt_soft_cut_2_3_19, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,';'('*->'(true,3),fail))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{';'('*->'(true, Three), fail)}.
 
-	test(lgt_soft_cut_2_3_20, errors([type_error(callable,3), type_error(callable,';'('*->'(fail,true),3))])) :-
-		% try to delay the error to runtime
+	test(lgt_soft_cut_2_3_20, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,';'('*->'(fail,true),3))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{';'('*->'(fail, true), Three)}.
 

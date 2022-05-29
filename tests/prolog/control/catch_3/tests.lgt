@@ -93,7 +93,8 @@ q :-
 		{catch(_, Y, true)}.
 
 	test(lgt_catch_3_10, true((subsumes_term(error(type_error(callable,1),_), Y); subsumes_term(error(type_error(callable,':'(user,1)),_), Y)))) :-
-		% try to delay the error to runtime
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		one(One),
 		{catch(One, Y, true)}.
 

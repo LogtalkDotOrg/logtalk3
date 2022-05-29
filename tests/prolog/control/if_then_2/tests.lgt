@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2020-12-26,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard (->)/2 control construct.'
 	]).
 
@@ -63,13 +63,15 @@
 		% then part is cut transparent
 		findall(X, {';'(X=1, X=2), '->'(true, !)}, L).
 
-	test(lgt_if_then_2_10, errors([type_error(callable,3), type_error(callable,'->'(3,true))])) :-
-		% try to delay the error to runtime
+	test(lgt_if_then_2_10, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,'->'(3,true))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{'->'(Three, true)}.
 
-	test(lgt_if_then_2_11, errors([type_error(callable,3), type_error(callable,'->'(true,3))])) :-
-		% try to delay the error to runtime
+	test(lgt_if_then_2_11, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,'->'(true,3))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{'->'(true, Three)}.
 

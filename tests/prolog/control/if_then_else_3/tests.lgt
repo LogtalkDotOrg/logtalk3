@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-12-26,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
@@ -70,18 +70,21 @@
 		% in the condition of an if-then-else
 		{';'('->'((!, fail), true), true)}.
 
-	test(lgt_if_then_else_3_11, errors([type_error(callable,3), type_error(callable,';'('->'(3,true),fail))])) :-
-		% try to delay the error to runtime
+	test(lgt_if_then_else_3_11, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,';'('->'(3,true),fail))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{';'('->'(Three, true), fail)}.
 
-	test(lgt_if_then_else_3_12, errors([type_error(callable,3), type_error(callable,';'('->'(true,3),fail))])) :-
-		% try to delay the error to runtime
+	test(lgt_if_then_else_3_12, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,';'('->'(true,3),fail))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{';'('->'(true, Three), fail)}.
 
-	test(lgt_if_then_else_3_13, errors([type_error(callable,3), type_error(callable,';'('->'(fail,true),3))])) :-
-		% try to delay the error to runtime
+	test(lgt_if_then_else_3_13, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,';'('->'(fail,true),3))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{';'('->'(fail, true), Three)}.
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-11-11,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard (;)/2 control construct.'
 	]).
 
@@ -35,34 +35,34 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.6.4
 
-	succeeds(iso_disjunction_2_01) :-
+	test(iso_disjunction_2_01, true) :-
 		{';'(true, fail)}.
 
-	fails(iso_disjunction_2_02) :-
+	test(iso_disjunction_2_02, false) :-
 		{';'((!, fail), true)}.
 
-	succeeds(iso_disjunction_2_03) :-
+	test(iso_disjunction_2_03, true) :-
 		% try to avoid a compile time error with some backends
 		three(Three),
 		{';'(!, call(Three))}.
 
-	succeeds(iso_disjunction_2_04) :-
-		{';'((X=1, !), X=2)},
-		X == 1.
+	test(iso_disjunction_2_04, true(X == 1)) :-
+		{';'((X=1, !), X=2)}.
 
-	succeeds(iso_disjunction_2_05) :-
-		findall(X, {';'(X=1, X=2)}, L),
-		L == [1,2].
+	test(iso_disjunction_2_05, true(L == [1,2])) :-
+		findall(X, {';'(X=1, X=2)}, L).
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_disjunction_2_06, [error(type_error(callable,3),_), error(type_error(callable,(3;true)),_)]) :-
-		% try to delay the error to runtime
+	test(lgt_disjunction_2_06, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,(3;true))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{(Three; true)}.
 
-	throws(lgt_disjunction_2_07, [error(type_error(callable,3),_), error(type_error(callable,(fail;3)),_)]) :-
-		% try to delay the error to runtime
+	test(lgt_disjunction_2_07, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,(fail;3))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{(fail; Three)}.
 

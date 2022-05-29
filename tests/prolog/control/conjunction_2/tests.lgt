@@ -23,34 +23,34 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-06-23,
+		date is 2022-05-29,
 		comment is 'Unit tests for the ISO Prolog standard (,)/2 control construct.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 7.8.5.4
 
-	fails(iso_conjunction_2_01) :-
+	test(iso_conjunction_2_01, false) :-
 		{','(X=1, var(X))}.
 
-	succeeds(iso_conjunction_2_02) :-
-		{','(var(X), X=1)},
-		X == 1.
+	test(iso_conjunction_2_02, true(X == 1)) :-
+		{','(var(X), X=1)}.
 
-	succeeds(iso_conjunction_2_03) :-
-		{','(X = true, call(X))},
-		X == true.
+	test(iso_conjunction_2_03, true(X == true)) :-
+		{','(X = true, call(X))}.
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_conjunction_2_04, [error(type_error(callable,3),_), error(type_error(callable,(3,true)),_)]) :-
-		% try to delay the error to runtime
+	test(lgt_conjunction_2_04, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,(3,true))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{(Three, true)}.
 
-	throws(lgt_conjunction_2_05, [error(type_error(callable,3),_), error(type_error(callable,(true,3)),_)]) :-
-		% try to delay the error to runtime
+	test(lgt_conjunction_2_05, errors([type_error(callable,3), type_error(callable,':'(user,3)), type_error(callable,(true,3))])) :-
+		% try to delay the error to runtime; the second exception term
+		% is used in some of the Prolog compilers supporting modules
 		three(Three),
 		{(true, Three)}.
 
