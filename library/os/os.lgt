@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:93:2,
+		version is 1:93:3,
 		author is 'Paulo Moura',
-		date is 2022-05-26,
+		date is 2022-05-29,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1912,7 +1912,7 @@
 			}.
 
 		cpu_time(Seconds) :-
-			{statistics(cputime, [Milliseconds| _])},
+			{statistics(cputime, Milliseconds)},
 			Seconds is Milliseconds / 1000.
 
 		wall_time(Seconds) :-
