@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paul Brown and Paulo Moura',
-		date is 2021-10-25,
+		date is 2022-05-29,
 		comment is 'Unit tests for the atomic_list_concat/2 predicate.'
 	]).
 
@@ -50,7 +50,10 @@
 	test(atomic_list_concat_2_var_tail, error(instantiation_error)) :-
 		atomic_list_concat([foo, bar| _], foobar).
 
-	test(atomic_list_concat_2_non_atomic, error(type_error(atomic,a(1)))) :-
+	test(atomic_list_concat_2_non_atomic_in_first, error(type_error(atomic,a(1)))) :-
 		atomic_list_concat([a(1), bar], foobar).
+
+	test(atomic_list_concat_2_non_atom_second, error(type_error(atom,a(1)))) :-
+		atomic_list_concat([foo, bar], a(1)).
 
 :- end_object.
