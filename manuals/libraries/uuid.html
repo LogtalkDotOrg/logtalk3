@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -159,7 +160,7 @@
            <div itemprop="articleBody">
              
   <section id="uuid">
-<h1><code class="docutils literal notranslate"><span class="pre">uuid</span></code><a class="headerlink" href="#uuid" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">uuid</span></code><a class="headerlink" href="#uuid" title="Permalink to this heading"></a></h1>
 <p>This library implements a Universally unique identifier (UUID)
 generator. Currently only version 1 and version 4 UUIDs are supported.
 For reference material, see e.g.</p>
@@ -172,27 +173,27 @@ number generator when available. This includes macOS, Linux, *BSD, and
 other POSIX operating-systems. On Windows, a pseudo-random generator is
 used but randomized using the current wall time.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#uuid">../../docs/library_index.html#uuid</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(uuid(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(uuid(tester)).
 </pre></div>
 </div>
 </section>
 <section id="generating-version-1-uuids">
-<h2>Generating version 1 UUIDs<a class="headerlink" href="#generating-version-1-uuids" title="Permalink to this headline"></a></h2>
+<h2>Generating version 1 UUIDs<a class="headerlink" href="#generating-version-1-uuids" title="Permalink to this heading"></a></h2>
 <p>By default, version 1 UUIDs are generated as atoms. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_v1([<span class="mh">0xf2</span>,<span class="mh">0xd1</span>,<span class="mh">0x90</span>,<span class="mh">0x94</span>,<span class="mh">0xdc</span>,<span class="mh">0x4b</span>], <span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;00a66fc0-82cf-11eb-bc83-f2d19094dc4b&#39;</span>
@@ -216,7 +217,7 @@ yes
 </div>
 </section>
 <section id="generating-version-4-uuids">
-<h2>Generating version 4 UUIDs<a class="headerlink" href="#generating-version-4-uuids" title="Permalink to this headline"></a></h2>
+<h2>Generating version 4 UUIDs<a class="headerlink" href="#generating-version-4-uuids" title="Permalink to this heading"></a></h2>
 <p>By default, version 4 UUIDs are generated as atoms. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_v4(<span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;1c652782-69c5-4252-88c8-09e576a44db5&#39;</span>
@@ -240,7 +241,7 @@ yes
 </div>
 </section>
 <section id="generating-the-null-uuid">
-<h2>Generating the null UUID<a class="headerlink" href="#generating-the-null-uuid" title="Permalink to this headline"></a></h2>
+<h2>Generating the null UUID<a class="headerlink" href="#generating-the-null-uuid" title="Permalink to this heading"></a></h2>
 <p>A predicate is also provided that returns the null UUID:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_null(<span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;00000000-0000-0000-0000-000000000000&#39;</span>

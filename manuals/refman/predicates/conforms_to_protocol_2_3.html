@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -133,9 +134,9 @@
            <div itemprop="articleBody">
              
   <section id="conforms-to-protocol-2-3">
-<span id="predicates-conforms-to-protocol-2-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">conforms_to_protocol/2-3</span></code><a class="headerlink" href="#conforms-to-protocol-2-3" title="Permalink to this headline"></a></h1>
+<span id="predicates-conforms-to-protocol-2-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">conforms_to_protocol/2-3</span></code><a class="headerlink" href="#conforms-to-protocol-2-3" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">conforms_to_protocol</span>(<span class="nv">Object</span>, <span class="nv">Protocol</span>)
 <span class="k">conforms_to_protocol</span>(<span class="nv">Category</span>, <span class="nv">Protocol</span>)
 
@@ -150,7 +151,7 @@ implements a transitive closure for the protocol implementation
 relation.</p>
 </section>
 <section id="modes-and-number-of-proofs">
-<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">conforms_to_protocol</span>(<span class="o">?</span>object_identifier, <span class="o">?</span>protocol_identifier) <span class="o">-</span> zero_or_more
 <span class="k">conforms_to_protocol</span>(<span class="o">?</span>category_identifier, <span class="o">?</span>protocol_identifier) <span class="o">-</span> zero_or_more
 
@@ -160,7 +161,7 @@ relation.</p>
 </div>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor a valid object identifier:</div>
 <div class="line-block">
@@ -185,7 +186,7 @@ relation.</p>
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% enumerate objects and categories that conform to the listp protocol:</span>
 | <span class="o">?-</span> <span class="k">conforms_to_protocol</span>(<span class="nv">Object</span>, listp).
 

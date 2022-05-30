@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -157,7 +158,7 @@
            <div itemprop="articleBody">
              
   <section id="union-find">
-<h1><code class="docutils literal notranslate"><span class="pre">union_find</span></code><a class="headerlink" href="#union-find" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">union_find</span></code><a class="headerlink" href="#union-find" title="Permalink to this heading"></a></h1>
 <p>This library implements a union-find data structure. This structure
 tracks a set of elements partitioned into a number of disjoint
 (non-overlapping) subsets. It provides fast operations to add new sets,
@@ -176,27 +177,27 @@ resulting tree is taller by one node.</p></li>
 <p>For a general and extended discussion on this data structure, see e.g.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">https://en.wikipedia.org/wiki/Disjoint-set_data_structure</a></p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#union-find">../../docs/library_index.html#union-find</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(union_find(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(union_find(tester)).
 </pre></div>
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>An usage example is Kruskal’s algorithm, a minimum-spanning-tree
 algorithm which finds an edge of the least possible weight that connects
 any two trees in the forest. It is a greedy algorithm in graph theory as

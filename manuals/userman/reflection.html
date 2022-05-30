@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -131,20 +132,20 @@
            <div itemprop="articleBody">
              
   <section id="reflection">
-<span id="reflection-reflection"></span><span id="index-0"></span><h1>Reflection<a class="headerlink" href="#reflection" title="Permalink to this headline"></a></h1>
+<span id="reflection-reflection"></span><span id="index-0"></span><h1>Reflection<a class="headerlink" href="#reflection" title="Permalink to this heading"></a></h1>
 <p>Logtalk provides support for both <em>structural</em> and <em>behavioral</em> reflection.
 Structural reflection supports computations over an application structure
 while behavioral reflection computations over what an application does while
 running. The structural and behavioral reflection APIs are used by all the
 <a class="reference internal" href="../devtools/index.html"><span class="doc">developer tools</span></a>, which are regular applications.</p>
 <section id="structural-reflection">
-<span id="reflection-structural"></span><span id="index-1"></span><h2>Structural reflection<a class="headerlink" href="#structural-reflection" title="Permalink to this headline"></a></h2>
+<span id="reflection-structural"></span><span id="index-1"></span><h2>Structural reflection<a class="headerlink" href="#structural-reflection" title="Permalink to this heading"></a></h2>
 <p>Structural reflection allows querying the properties of objects, categories,
 protocols, and predicates. This API provides two views on the structure of
 an application: a <em>transparent-box view</em> and a <em>black-box view</em>, described
 next.</p>
 <section id="transparent-box-view">
-<span id="index-2"></span><h3>Transparent-box view<a class="headerlink" href="#transparent-box-view" title="Permalink to this headline"></a></h3>
+<span id="index-2"></span><h3>Transparent-box view<a class="headerlink" href="#transparent-box-view" title="Permalink to this heading"></a></h3>
 <p>The transparent-box view provides a structural view of the contents and
 properties of entities, predicates, and source files akin to accessing
 the corresponding source code. I.e. this is the view we use when asking
@@ -172,7 +173,7 @@ turned on.</p>
 querying loaded source files and their properties.</p>
 </section>
 <section id="black-box-view">
-<span id="index-3"></span><h3>Black-box view<a class="headerlink" href="#black-box-view" title="Permalink to this headline"></a></h3>
+<span id="index-3"></span><h3>Black-box view<a class="headerlink" href="#black-box-view" title="Permalink to this heading"></a></h3>
 <p>The black-box view provides a view that takes into account entity encapsulation
 and thus only allow querying about predicates and operators that are within
 scope of the entity calling the reflection methods. This is the view we use
@@ -186,7 +187,7 @@ on <a class="reference internal" href="predicates.html#predicates-properties"><s
 </section>
 </section>
 <section id="behavioral-reflection">
-<span id="reflection-behavioral"></span><span id="index-4"></span><h2>Behavioral reflection<a class="headerlink" href="#behavioral-reflection" title="Permalink to this headline"></a></h2>
+<span id="reflection-behavioral"></span><span id="index-4"></span><h2>Behavioral reflection<a class="headerlink" href="#behavioral-reflection" title="Permalink to this heading"></a></h2>
 <p>Behavioral reflection provides insight on what an application does when running.
 Specifically, by observing and acting on the messages being exchanged between
 objects. See the section on <a class="reference internal" href="events.html#events-events"><span class="std std-ref">event-driven programming</span></a>

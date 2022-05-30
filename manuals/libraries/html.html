@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -160,7 +161,7 @@
            <div itemprop="articleBody">
              
   <section id="html">
-<h1><code class="docutils literal notranslate"><span class="pre">html</span></code><a class="headerlink" href="#html" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">html</span></code><a class="headerlink" href="#html" title="Permalink to this heading"></a></h1>
 <p>This library provides predicates for generating HTML content using
 either HTML 5 or XHTML 1.1 formats from a term representation. The
 library performs minimal validation, checking only that all elements are
@@ -196,27 +197,27 @@ content. Non atomic element content can be represented as a quoted atom
 or by using the <code class="docutils literal notranslate"><span class="pre">pre</span></code> or <code class="docutils literal notranslate"><span class="pre">code</span></code> elements as explained above.</p>
 <p>This library is a work in progress.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#html">../../docs/library_index.html#html</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(html(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(html(tester)).
 </pre></div>
 </div>
 </section>
 <section id="generating-a-html-document">
-<h2>Generating a HTML document<a class="headerlink" href="#generating-a-html-document" title="Permalink to this headline"></a></h2>
+<h2>Generating a HTML document<a class="headerlink" href="#generating-a-html-document" title="Permalink to this heading"></a></h2>
 <p>HTML documents can be generated from a compound term representation and
 written to a file or a stream. For example, assuming we want to generate
 a HTML 5 file:</p>
@@ -237,7 +238,7 @@ a HTML 5 file:</p>
 </div>
 </section>
 <section id="generating-a-html-fragment">
-<h2>Generating a HTML fragment<a class="headerlink" href="#generating-a-html-fragment" title="Permalink to this headline"></a></h2>
+<h2>Generating a HTML fragment<a class="headerlink" href="#generating-a-html-fragment" title="Permalink to this heading"></a></h2>
 <p>It’s also possible to generate just a fragment of a (X)HTML document by
 using a list of compound terms or a compound term for an element other
 then <code class="docutils literal notranslate"><span class="pre">html</span></code>. For example:</p>
@@ -258,7 +259,7 @@ baz<span class="o">&lt;/</span>li<span class="o">&gt;</span>
 </div>
 </section>
 <section id="working-with-callbacks-to-generate-content">
-<h2>Working with callbacks to generate content<a class="headerlink" href="#working-with-callbacks-to-generate-content" title="Permalink to this headline"></a></h2>
+<h2>Working with callbacks to generate content<a class="headerlink" href="#working-with-callbacks-to-generate-content" title="Permalink to this heading"></a></h2>
 <p>Often we need to programmatically generate HTML content from queries. In
 other cases, we may have fixed content that we don’t want to keep
 repeating (e.g. a navigation bar). The library supports a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>
@@ -283,7 +284,7 @@ generated content). More complex callbacks are possible by using lambda
 expressions.</p>
 </section>
 <section id="working-with-custom-elements">
-<h2>Working with custom elements<a class="headerlink" href="#working-with-custom-elements" title="Permalink to this headline"></a></h2>
+<h2>Working with custom elements<a class="headerlink" href="#working-with-custom-elements" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">html5</span></code> and <code class="docutils literal notranslate"><span class="pre">xhtml11</span></code> objects recognize the same set of standard
 HTML 5 normal and void elements and generate an error for non-standard
 elements. If you need to generate HTML content containing custom

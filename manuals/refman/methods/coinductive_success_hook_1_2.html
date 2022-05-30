@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -128,9 +129,9 @@
            <div itemprop="articleBody">
              
   <section id="coinductive-success-hook-1-2">
-<span id="methods-coinductive-success-hook-1-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">coinductive_success_hook/1-2</span></code><a class="headerlink" href="#coinductive-success-hook-1-2" title="Permalink to this headline"></a></h1>
+<span id="methods-coinductive-success-hook-1-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">coinductive_success_hook/1-2</span></code><a class="headerlink" href="#coinductive-success-hook-1-2" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>coinductive_success_hook(<span class="nv">Head</span>, <span class="nv">Hypothesis</span>)
 coinductive_success_hook(<span class="nv">Head</span>)
 </pre></div>
@@ -149,18 +150,18 @@ corresponding definition for the coinductive success hook predicates.</p>
 predicates in order to optimize their use.</p>
 </section>
 <section id="modes-and-number-of-proofs">
-<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>coinductive_success_hook(<span class="o">+</span>callable, <span class="o">+</span>callable) <span class="o">-</span> zero_or_one
 coinductive_success_hook(<span class="o">+</span>callable) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% Are there &quot;occurrences&quot; of arg1 in arg2?</span>
 <span class="p">:- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">coinductive</span>(member<span class="o">/</span><span class="m">2</span>).

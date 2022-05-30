@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -158,7 +159,7 @@
            <div itemprop="articleBody">
              
   <section id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
 <p>This folder contains libraries of useful objects, categories, and
 protocols. Specific notes about individual libraries can be found in the
 corresponding library directory <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> files.</p>
@@ -172,7 +173,7 @@ continuous integration servers). Starting with Logtalk 3.48.0, this
 setup is only required in general when running with the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag
 turned off. See the comments in the file itself for usage instructions.</p>
 <section id="library-documentation">
-<h2>Library documentation<a class="headerlink" href="#library-documentation" title="Permalink to this headline"></a></h2>
+<h2>Library documentation<a class="headerlink" href="#library-documentation" title="Permalink to this heading"></a></h2>
 <p>Specific notes about each library can be found in the corresponding
 <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> files. HTML documentation for each library API can be found
 on the <code class="docutils literal notranslate"><span class="pre">docs</span></code> directory (open the <code class="docutils literal notranslate"><span class="pre">../docs/index.html</span></code> file with
@@ -181,7 +182,7 @@ regenerated using the shell scripts <code class="docutils literal notranslate"><
 and <code class="docutils literal notranslate"><span class="pre">../scripts/update_svg_diagrams.sh</span></code>.</p>
 </section>
 <section id="loading-libraries">
-<h2>Loading libraries<a class="headerlink" href="#loading-libraries" title="Permalink to this headline"></a></h2>
+<h2>Loading libraries<a class="headerlink" href="#loading-libraries" title="Permalink to this heading"></a></h2>
 <p>All the individual libraries can be loaded using the
 <code class="docutils literal notranslate"><span class="pre">&lt;library</span> <span class="pre">name&gt;(loader)</span></code> notation as argument for the compiling and
 loading predicates. For example:</p>
@@ -204,7 +205,7 @@ of a basic types hierarchy). Using the loader files takes care of all
 dependencies and also ensures compilation in optimized mode.</p>
 </section>
 <section id="testing-libraries">
-<h2>Testing libraries<a class="headerlink" href="#testing-libraries" title="Permalink to this headline"></a></h2>
+<h2>Testing libraries<a class="headerlink" href="#testing-libraries" title="Permalink to this heading"></a></h2>
 <p>Most of the libraries include unit tests in their directory, together
 with a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file for running them. For example, to run the
 tests for the <code class="docutils literal notranslate"><span class="pre">random</span></code> library, we can use the goal:</p>
@@ -222,7 +223,7 @@ $ logtalk_tester -p eclipse
 </div>
 </section>
 <section id="credits">
-<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline"></a></h2>
+<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this heading"></a></h2>
 <p>Some code in this library is based on public domain Prolog code, in
 particular, code adopted from the Edinburgh Prolog library. The
 definition of predicate <code class="docutils literal notranslate"><span class="pre">reverse/2</span></code> in object list is from Richard
@@ -237,7 +238,7 @@ of the Logtalk distribution for copyright information on third-party
 source code.</p>
 </section>
 <section id="other-notes">
-<h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline"></a></h2>
+<h2>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this heading"></a></h2>
 <p>Some files contained in this directory represent work in progress and
 are not loaded by default by any loader utility file.</p>
 </section>

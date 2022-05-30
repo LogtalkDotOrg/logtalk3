@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -127,9 +128,9 @@
            <div itemprop="articleBody">
              
   <section id="create-category-4">
-<span id="predicates-create-category-4"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">create_category/4</span></code><a class="headerlink" href="#create-category-4" title="Permalink to this headline"></a></h1>
+<span id="predicates-create-category-4"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">create_category/4</span></code><a class="headerlink" href="#create-category-4" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_category</span>(<span class="nv">Identifier</span>, <span class="nv">Relations</span>, <span class="nv">Directives</span>, <span class="nv">Clauses</span>)
 </pre></div>
 </div>
@@ -148,13 +149,13 @@ built-in predicate may need to be declared synchronized in order to
 avoid race conditions.</p>
 </section>
 <section id="modes-and-number-of-proofs">
-<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">create_category</span>(<span class="o">?</span>category_identifier, <span class="o">@</span>list(category_relation), <span class="o">@</span>list(category_directive), <span class="o">@</span>list(clause)) <span class="o">-</span> one
 </pre></div>
 </div>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Relations</span></code>, <code class="docutils literal notranslate"><span class="pre">Directives</span></code>, or <code class="docutils literal notranslate"><span class="pre">Clauses</span></code> is a variable:</div>
 <div class="line-block">
@@ -191,7 +192,7 @@ avoid race conditions.</p>
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">create_category</span>(
         tolerances,
         [implements(comparing)],

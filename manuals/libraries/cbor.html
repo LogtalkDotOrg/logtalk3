@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -159,7 +160,7 @@
            <div itemprop="articleBody">
              
   <section id="cbor">
-<h1><code class="docutils literal notranslate"><span class="pre">cbor</span></code><a class="headerlink" href="#cbor" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">cbor</span></code><a class="headerlink" href="#cbor" title="Permalink to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">cbor</span></code> library implements predicates for importing and exporting
 data in the Concise Binary Object Representation (CBOR) format:</p>
 <ul class="simple">
@@ -169,7 +170,7 @@ data in the Concise Binary Object Representation (CBOR) format:</p>
 <p>This library is a work-in-progress. Currently it requires a backend
 supporting unbounded integer arithmetic.</p>
 <section id="representation">
-<h2>Representation<a class="headerlink" href="#representation" title="Permalink to this headline"></a></h2>
+<h2>Representation<a class="headerlink" href="#representation" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Maps are represented using curly-bracketed terms, <code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where
 each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p></li>
@@ -214,7 +215,7 @@ as an alternative for encoding. The decoder, however, produces the
 </ul>
 </section>
 <section id="encoding">
-<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline"></a></h2>
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this heading"></a></h2>
 <p>Encoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">generate/2</span></code> predicate. For
 example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> cbor<span class="o">::</span>generate([a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>], <span class="nv">Encoding</span>).
@@ -227,7 +228,7 @@ floats are currently encoded using decimal fractions. Encoding
 indicators and big floats are not currently supported.</p>
 </section>
 <section id="decoding">
-<h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline"></a></h2>
+<h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this heading"></a></h2>
 <p>Decoding is accomplished using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> cbor<span class="o">::</span>parse([<span class="mh">0x9f</span>,<span class="mh">0x61</span>,<span class="mh">0x61</span>,<span class="mh">0xbf</span>,<span class="mh">0x61</span>,<span class="mh">0x62</span>,<span class="mh">0x61</span>,<span class="mh">0x63</span>,<span class="mh">0xff</span>,<span class="mh">0xff</span>], <span class="nv">Term</span>).
 <span class="nv">Term</span> <span class="o">=</span> [a,<span class="k">{</span>b<span class="o">-</span>c<span class="k">}</span>]
@@ -236,20 +237,20 @@ yes
 </div>
 </section>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#cbor">../../docs/library_index.html#cbor</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(cbor(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(cbor(tester)).
 </pre></div>

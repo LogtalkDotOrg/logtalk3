@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -158,7 +159,7 @@
            <div itemprop="articleBody">
              
   <section id="nested-dictionaries">
-<h1><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code><a class="headerlink" href="#nested-dictionaries" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code><a class="headerlink" href="#nested-dictionaries" title="Permalink to this heading"></a></h1>
 <p>This library provides nested dictionary implementations based on private
 extensions to the <code class="docutils literal notranslate"><span class="pre">dictionaries</span></code> library objects. The representations
 of a nested dictionary should be regarded as opaque terms and only
@@ -166,27 +167,27 @@ accessed using the library predicates.</p>
 <p>This library is experimental, a work in progress, and future versions
 can introduce incompatible changes.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#nested-dictionaries">../../docs/library_index.html#nested-dictionaries</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(nested_dictionaries(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(nested_dictionaries(tester)).
 </pre></div>
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>First, select the nested dictionary implementation that you want to use.
 For cases where the number of elements is relatively small and
 performance is not critical, <code class="docutils literal notranslate"><span class="pre">nbintree</span></code> can be a good choice. For
@@ -234,7 +235,7 @@ yes
 API documentation.</p>
 </section>
 <section id="curly-term-representation">
-<h2>Curly term representation<a class="headerlink" href="#curly-term-representation" title="Permalink to this headline"></a></h2>
+<h2>Curly term representation<a class="headerlink" href="#curly-term-representation" title="Permalink to this heading"></a></h2>
 <p>To simplify importing and exporting data into a nested dictionary, the
 library provides <code class="docutils literal notranslate"><span class="pre">as_nested_dictionary/2</span></code> and <code class="docutils literal notranslate"><span class="pre">as_curly_bracketed/2</span></code>
 predicates that work with a <em>curly term representation</em>. This format is

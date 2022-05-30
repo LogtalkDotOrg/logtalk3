@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -128,10 +129,10 @@
            <div itemprop="articleBody">
              
   <section id="profiler">
-<h1><code class="docutils literal notranslate"><span class="pre">profiler</span></code><a class="headerlink" href="#profiler" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">profiler</span></code><a class="headerlink" href="#profiler" title="Permalink to this heading"></a></h1>
 <p>This tool contains simple wrappers for selected Prolog profiler tools.</p>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(loader)).
 </pre></div>
@@ -140,14 +141,14 @@
 directory.</p>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(tester)).
 </pre></div>
 </div>
 </section>
 <section id="supported-backend-prolog-compilers">
-<h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Permalink to this headline"></a></h2>
+<h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Permalink to this heading"></a></h2>
 <p>Currently, this tool supports the profilers provided with SICStus Prolog
 4, SWI-Prolog, and YAP. The tool includes two files:</p>
 <ul>
@@ -200,7 +201,7 @@ time and the number of calls/redos of concealed predicates is added to
 the caller predicates.</p>
 </section>
 <section id="compiling-source-code-for-profiling">
-<h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this headline"></a></h2>
+<h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this heading"></a></h2>
 <p>In order to get user-level object and predicate names instead of
 compiler generated internal names when using the SWI-Prolog and YAP
 profilers, you must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a character other than

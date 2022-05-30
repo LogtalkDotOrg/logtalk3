@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -136,7 +137,7 @@
            <div itemprop="articleBody">
              
   <section id="performance">
-<span id="performance-performance"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline"></a></h1>
+<span id="performance-performance"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading"></a></h1>
 <p>Logtalk is implemented as a <em>trans-compiler</em> to Prolog. When compiling
 predicates, it preserves in the generated Prolog code all cases of
 first-argument indexing and tail-recursion. In practice, this mean that
@@ -154,7 +155,7 @@ call) there may be a small inherent overhead due to the access to the
 individual arguments of the compound term used to represent the
 execution-context.</p>
 <section id="source-code-compilation-modes">
-<h2>Source code compilation modes<a class="headerlink" href="#source-code-compilation-modes" title="Permalink to this headline"></a></h2>
+<h2>Source code compilation modes<a class="headerlink" href="#source-code-compilation-modes" title="Permalink to this heading"></a></h2>
 <p>Source code can be compiled in <em>optimal</em>, <em>normal</em>, or <em>debug</em> mode,
 depending on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> and
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> compiler flags. Optimal mode is used when
@@ -168,25 +169,25 @@ as the <a class="reference internal" href="../devtools/debugger.html"><span clas
 <a class="reference internal" href="../devtools/ports_profiler.html"><span class="doc">ports profiler</span></a>.</p>
 </section>
 <section id="local-predicate-calls">
-<h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Permalink to this headline"></a></h2>
+<h2>Local predicate calls<a class="headerlink" href="#local-predicate-calls" title="Permalink to this heading"></a></h2>
 <p>Local calls to object (or category) predicates have zero overhead in
 terms of number of inferences, as expected, compared with local Prolog
 calls.</p>
 </section>
 <section id="calls-to-imported-or-inherited-predicates">
-<h2>Calls to imported or inherited predicates<a class="headerlink" href="#calls-to-imported-or-inherited-predicates" title="Permalink to this headline"></a></h2>
+<h2>Calls to imported or inherited predicates<a class="headerlink" href="#calls-to-imported-or-inherited-predicates" title="Permalink to this heading"></a></h2>
 <p>Assuming the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on and a
 static predicate, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> calls have zero overhead
 in terms of number of inferences.</p>
 </section>
 <section id="calls-to-module-predicates">
-<h2>Calls to module predicates<a class="headerlink" href="#calls-to-module-predicates" title="Permalink to this headline"></a></h2>
+<h2>Calls to module predicates<a class="headerlink" href="#calls-to-module-predicates" title="Permalink to this heading"></a></h2>
 <p>Local calls from an object (or category) to a module predicate have zero
 overhead (assuming both the module and the predicate are bound at
 compile time).</p>
 </section>
 <section id="messages">
-<h2>Messages<a class="headerlink" href="#messages" title="Permalink to this headline"></a></h2>
+<h2>Messages<a class="headerlink" href="#messages" title="Permalink to this heading"></a></h2>
 <p>Logtalk implements <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> and <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>
 for message sending calls. For dynamic binding, a caching mechanism is
 used by the runtime. It’s useful to measure the performance overhead in
@@ -219,7 +220,7 @@ used backend Prolog compiler when the <code class="docutils literal notranslate"
 Consult the Prolog compiler adapter file notes for details.</p>
 </section>
 <section id="automatic-expansion-of-built-in-meta-predicates">
-<h2>Automatic expansion of built-in meta-predicates<a class="headerlink" href="#automatic-expansion-of-built-in-meta-predicates" title="Permalink to this headline"></a></h2>
+<h2>Automatic expansion of built-in meta-predicates<a class="headerlink" href="#automatic-expansion-of-built-in-meta-predicates" title="Permalink to this heading"></a></h2>
 <p>The compiler always expands calls to the <a class="reference internal" href="../refman/methods/forall_2.html#methods-forall-2"><span class="std std-ref">forall/2</span></a>,
 <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>, and <a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a> meta-predicates into
 equivalent definitions using the negation and conditional control constructs.
@@ -227,7 +228,7 @@ It also expands calls to the <a class="reference internal" href="../refman/metho
 and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> meta-predicates when the first argument is bound.</p>
 </section>
 <section id="inlining">
-<h2>Inlining<a class="headerlink" href="#inlining" title="Permalink to this headline"></a></h2>
+<h2>Inlining<a class="headerlink" href="#inlining" title="Permalink to this heading"></a></h2>
 <p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
 compiler performs <em>inlining</em> of predicate calls whenever possible. This
 includes calls to Prolog predicates that are either built-in, foreign, or
@@ -238,7 +239,7 @@ overhead. In the specific case of the
 calls are inlined independently of the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag value.</p>
 </section>
 <section id="generated-code-simplification-and-optimizations">
-<h2>Generated code simplification and optimizations<a class="headerlink" href="#generated-code-simplification-and-optimizations" title="Permalink to this headline"></a></h2>
+<h2>Generated code simplification and optimizations<a class="headerlink" href="#generated-code-simplification-and-optimizations" title="Permalink to this heading"></a></h2>
 <p>When the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag is turned on, the Logtalk
 compiler simplifies and optimizes generated clauses (including those
 resulting from the compilation of grammar rules), by flattening conjunctions,
@@ -246,7 +247,7 @@ folding left unifications (e.g. generated as a by-product of the compilation
 of grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
 </section>
 <section id="size-of-the-generated-code">
-<h2>Size of the generated code<a class="headerlink" href="#size-of-the-generated-code" title="Permalink to this headline"></a></h2>
+<h2>Size of the generated code<a class="headerlink" href="#size-of-the-generated-code" title="Permalink to this heading"></a></h2>
 <p>The size of the intermediate Prolog code generated by the compiler is
 proportional to the size of the source code. Assuming that the
 <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a> is not used, each
@@ -266,7 +267,7 @@ application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.</p>
 </section>
 <section id="debug-mode-overhead">
-<h2>Debug mode overhead<a class="headerlink" href="#debug-mode-overhead" title="Permalink to this headline"></a></h2>
+<h2>Debug mode overhead<a class="headerlink" href="#debug-mode-overhead" title="Permalink to this heading"></a></h2>
 <p>Code compiled in debug mode runs slower, as expected, when compared with
 normal or optimized mode. The overhead depends on the number of <em>debug events</em>
 generated when running the application. A debug event is simply a pass on a
@@ -288,7 +289,7 @@ relatively larger overhead when compared with code performing significant
 backtracking).</p>
 </section>
 <section id="other-considerations">
-<h2>Other considerations<a class="headerlink" href="#other-considerations" title="Permalink to this headline"></a></h2>
+<h2>Other considerations<a class="headerlink" href="#other-considerations" title="Permalink to this heading"></a></h2>
 <p>One aspect of performance, that affects both Logtalk and Prolog code, is
 the characteristics of the Prolog VM. The Logtalk distribution includes
 two examples,

@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -201,7 +202,7 @@
              
   <p class="right" id="pairs-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="pairs">
-<h1><code class="docutils literal notranslate"><span class="pre">pairs</span></code><a class="headerlink" href="#pairs" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">pairs</span></code><a class="headerlink" href="#pairs" title="Permalink to this heading"></a></h1>
 <p>Useful predicates over lists of pairs (key-value terms).</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
@@ -254,9 +255,9 @@
 </ul>
 </div>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
 <div id="keys_values/3"> </div><section id="keys-values-3">
-<span id="pairs-0-keys-values-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">keys_values/3</span></code></a><a class="headerlink" href="#keys-values-3" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-keys-values-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">keys_values/3</span></code></a><a class="headerlink" href="#keys-values-3" title="Permalink to this heading"></a></h3>
 <p>Converts between a list of pairs and lists of keys and values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -278,7 +279,7 @@
 <hr class="docutils" />
 <div id="keys/2"> </div></section>
 <section id="keys-2">
-<span id="pairs-0-keys-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">keys/2</span></code></a><a class="headerlink" href="#keys-2" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-keys-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">keys/2</span></code></a><a class="headerlink" href="#keys-2" title="Permalink to this heading"></a></h3>
 <p>Extracts a list of keys from a list of pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -299,7 +300,7 @@
 <hr class="docutils" />
 <div id="values/2"> </div></section>
 <section id="values-2">
-<span id="pairs-0-values-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">values/2</span></code></a><a class="headerlink" href="#values-2" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-values-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">values/2</span></code></a><a class="headerlink" href="#values-2" title="Permalink to this heading"></a></h3>
 <p>Extracts a list of values from a list of pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -320,7 +321,7 @@
 <hr class="docutils" />
 <div id="transpose/2"> </div></section>
 <section id="transpose-2">
-<span id="pairs-0-transpose-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">transpose/2</span></code></a><a class="headerlink" href="#transpose-2" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-transpose-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">transpose/2</span></code></a><a class="headerlink" href="#transpose-2" title="Permalink to this heading"></a></h3>
 <p>Transposes a list of pairs by swapping each pair key and value. The relative order of the list elements is kept.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -341,7 +342,7 @@
 <hr class="docutils" />
 <div id="group_sorted_by_key/2"> </div></section>
 <section id="group-sorted-by-key-2">
-<span id="pairs-0-group-sorted-by-key-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code></a><a class="headerlink" href="#group-sorted-by-key-2" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-group-sorted-by-key-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code></a><a class="headerlink" href="#group-sorted-by-key-2" title="Permalink to this heading"></a></h3>
 <p>Groups pairs by key by sorting them and then constructing new pairs by grouping all values for a given key in a list. Keys are compared using equality. Relative order of values per key is kept. Resulting list of pairs is sorted by key.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -362,7 +363,7 @@
 <hr class="docutils" />
 <div id="group_consecutive_by_key/2"> </div></section>
 <section id="group-consecutive-by-key-2">
-<span id="pairs-0-group-consecutive-by-key-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_consecutive_by_key/2</span></code></a><a class="headerlink" href="#group-consecutive-by-key-2" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-group-consecutive-by-key-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_consecutive_by_key/2</span></code></a><a class="headerlink" href="#group-consecutive-by-key-2" title="Permalink to this heading"></a></h3>
 <p>Groups pairs by constructing new pairs by grouping all values for consecutive key in a list. Keys are compared using equality. The relative order of the values for the same key is kept.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -383,7 +384,7 @@
 <hr class="docutils" />
 <div id="group_by_key/2"> </div></section>
 <section id="group-by-key-2">
-<span id="pairs-0-group-by-key-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_by_key/2</span></code></a><a class="headerlink" href="#group-by-key-2" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-group-by-key-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">group_by_key/2</span></code></a><a class="headerlink" href="#group-by-key-2" title="Permalink to this heading"></a></h3>
 <p>Same as the <code class="docutils literal notranslate"><span class="pre">group_sorted_by_key/2</span></code> predicate. Deprecated.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -404,7 +405,7 @@
 <hr class="docutils" />
 <div id="map/3"> </div></section>
 <section id="map-3">
-<span id="pairs-0-map-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">map/3</span></code></a><a class="headerlink" href="#map-3" title="Permalink to this headline"></a></h3>
+<span id="pairs-0-map-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">map/3</span></code></a><a class="headerlink" href="#map-3" title="Permalink to this heading"></a></h3>
 <p>Maps a list into pairs using a closure that applies to each list element to compute its key.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -430,15 +431,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>

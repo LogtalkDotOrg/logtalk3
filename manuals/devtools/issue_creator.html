@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -128,11 +129,11 @@
            <div itemprop="articleBody">
              
   <section id="issue-creator">
-<h1><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code><a class="headerlink" href="#issue-creator" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code><a class="headerlink" href="#issue-creator" title="Permalink to this heading"></a></h1>
 <p>This is a complementary tool for the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool for automatically
 creating bug report issues for failed tests in GitHub or GitLab servers.</p>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline"></a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <p>This tool requires that the GitHub and GitLab CLIs be installed. For the
 installation instructions see:</p>
 <ul class="simple">
@@ -141,7 +142,7 @@ installation instructions see:</p>
 </ul>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(issue_creator(loader)).
 </pre></div>
@@ -150,7 +151,7 @@ installation instructions see:</p>
 by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script accepts a <code class="docutils literal notranslate"><span class="pre">-b</span></code> option for
 automatically using this tool (see the script man page for details). In
 the most simple case, this option possible values are <code class="docutils literal notranslate"><span class="pre">github</span></code> and
@@ -208,7 +209,7 @@ string or a <code class="docutils literal notranslate"><span class="pre">-b</spa
 </div>
 </section>
 <section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
 <p>GitLab creates CI/CD pipelines in a detached HEAD state. As a
 consequence, the bug reports always show “Git branch: HEAD”.</p>
 <p>This tool is in a beta stage of development. Your feedback is most

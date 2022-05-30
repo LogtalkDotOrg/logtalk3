@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -130,9 +131,9 @@
            <div itemprop="articleBody">
              
   <section id="question-hook-6">
-<span id="methods-question-hook-6"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code><a class="headerlink" href="#question-hook-6" title="Permalink to this headline"></a></h1>
+<span id="methods-question-hook-6"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code><a class="headerlink" href="#question-hook-6" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>question_hook(<span class="nv">Question</span>, <span class="nv">Kind</span>, <span class="nv">Component</span>, <span class="nv">Tokens</span>, <span class="nv">Check</span>, <span class="nv">Answer</span>)
 </pre></div>
 </div>
@@ -144,23 +145,23 @@ succeeds, the <code class="docutils literal notranslate"><span class="pre">ask_q
 been successfully asked and replied.</p>
 </section>
 <section id="modes-and-number-of-proofs">
-<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>question_hook(<span class="o">+</span>nonvar, <span class="o">+</span>nonvar, <span class="o">+</span>nonvar, <span class="o">+</span>list(nonvar), <span class="o">+</span>callable, <span class="o">-</span>term) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </section>
 <section id="meta-predicate-template">
-<h2>Meta-predicate template<a class="headerlink" href="#meta-predicate-template" title="Permalink to this headline"></a></h2>
+<h2>Meta-predicate template<a class="headerlink" href="#meta-predicate-template" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>question_hook(<span class="o">*</span>, <span class="o">*</span>, <span class="o">*</span>, <span class="o">*</span>, <span class="m">1</span>, <span class="o">*</span>)
 </pre></div>
 </div>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
 <span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>question_hook<span class="o">/</span><span class="m">6</span>).
 

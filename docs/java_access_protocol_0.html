@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -184,7 +185,7 @@
              
   <p class="right" id="java-access-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="java-access-protocol">
-<h1><code class="docutils literal notranslate"><span class="pre">java_access_protocol</span></code><a class="headerlink" href="#java-access-protocol" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">java_access_protocol</span></code><a class="headerlink" href="#java-access-protocol" title="Permalink to this heading"></a></h1>
 <p>Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura and Sergio Castro</div>
@@ -233,9 +234,9 @@
 </ul>
 </div>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
 <div id="get_field/2"> </div><section id="get-field-2">
-<span id="java-access-protocol-0-get-field-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">get_field/2</span></code></a><a class="headerlink" href="#get-field-2" title="Permalink to this headline"></a></h3>
+<span id="java-access-protocol-0-get-field-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">get_field/2</span></code></a><a class="headerlink" href="#get-field-2" title="Permalink to this heading"></a></h3>
 <p>Gets the value of a class or object field.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -256,7 +257,7 @@
 <hr class="docutils" />
 <div id="set_field/2"> </div></section>
 <section id="set-field-2">
-<span id="java-access-protocol-0-set-field-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code></a><a class="headerlink" href="#set-field-2" title="Permalink to this headline"></a></h3>
+<span id="java-access-protocol-0-set-field-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">set_field/2</span></code></a><a class="headerlink" href="#set-field-2" title="Permalink to this heading"></a></h3>
 <p>Sets the value of a class or object field.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -277,7 +278,7 @@
 <hr class="docutils" />
 <div id="new/2"> </div></section>
 <section id="new-2">
-<span id="java-access-protocol-0-new-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a><a class="headerlink" href="#new-2" title="Permalink to this headline"></a></h3>
+<span id="java-access-protocol-0-new-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/2</span></code></a><a class="headerlink" href="#new-2" title="Permalink to this heading"></a></h3>
 <p>Creates a new instance using the specified parameter values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -298,7 +299,7 @@
 <hr class="docutils" />
 <div id="new/1"> </div></section>
 <section id="new-1">
-<span id="java-access-protocol-0-new-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/1</span></code></a><a class="headerlink" href="#new-1" title="Permalink to this headline"></a></h3>
+<span id="java-access-protocol-0-new-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">new/1</span></code></a><a class="headerlink" href="#new-1" title="Permalink to this heading"></a></h3>
 <p>Creates a new instance using default parameter values.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -319,7 +320,7 @@
 <hr class="docutils" />
 <div id="invoke/1"> </div></section>
 <section id="invoke-1">
-<span id="java-access-protocol-0-invoke-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code></a><a class="headerlink" href="#invoke-1" title="Permalink to this headline"></a></h3>
+<span id="java-access-protocol-0-invoke-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/1</span></code></a><a class="headerlink" href="#invoke-1" title="Permalink to this heading"></a></h3>
 <p>Invokes a method. This is a more efficient compared with relying on the <code class="docutils literal notranslate"><span class="pre">forward/1</span></code> handler to resolve methods.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -340,7 +341,7 @@
 <hr class="docutils" />
 <div id="invoke/2"> </div></section>
 <section id="invoke-2">
-<span id="java-access-protocol-0-invoke-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a><a class="headerlink" href="#invoke-2" title="Permalink to this headline"></a></h3>
+<span id="java-access-protocol-0-invoke-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">invoke/2</span></code></a><a class="headerlink" href="#invoke-2" title="Permalink to this heading"></a></h3>
 <p>Invokes a method. This is a more efficient compared with relying on the <code class="docutils literal notranslate"><span class="pre">forward/1</span></code> handler to resolve methods.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -362,15 +363,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>

@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -137,7 +138,7 @@
            <div itemprop="articleBody">
              
   <section id="multi-threading-programming">
-<span id="threads-threads"></span><h1>Multi-threading programming<a class="headerlink" href="#multi-threading-programming" title="Permalink to this headline"></a></h1>
+<span id="threads-threads"></span><h1>Multi-threading programming<a class="headerlink" href="#multi-threading-programming" title="Permalink to this heading"></a></h1>
 <p>Logtalk provides <strong>experimental</strong> support for multi-threading programming
 on selected Prolog compilers. Logtalk makes use of the low-level Prolog
 built-in predicates that implement message queues and interface with POSIX
@@ -150,13 +151,13 @@ programming integrates with object-oriented programming providing a
 <em>threaded engines</em> API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.</p>
 <section id="enabling-multi-threading-support">
-<span id="threads-enabling"></span><h2>Enabling multi-threading support<a class="headerlink" href="#enabling-multi-threading-support" title="Permalink to this headline"></a></h2>
+<span id="threads-enabling"></span><h2>Enabling multi-threading support<a class="headerlink" href="#enabling-multi-threading-support" title="Permalink to this heading"></a></h2>
 <p>Multi-threading support may be disabled by default. It can be enabled on
 the Prolog adapter files of supported compilers by setting the read-only
 <a class="reference internal" href="programming.html#flag-threads"><span class="std std-ref">threads</span></a> compiler flag to <code class="docutils literal notranslate"><span class="pre">supported</span></code>.</p>
 </section>
 <section id="enabling-objects-to-make-multi-threading-calls">
-<span id="threads-directive"></span><h2>Enabling objects to make multi-threading calls<a class="headerlink" href="#enabling-objects-to-make-multi-threading-calls" title="Permalink to this headline"></a></h2>
+<span id="threads-directive"></span><h2>Enabling objects to make multi-threading calls<a class="headerlink" href="#enabling-objects-to-make-multi-threading-calls" title="Permalink to this heading"></a></h2>
 <p>The <a class="reference internal" href="../refman/directives/threaded_0.html#directives-threaded-0"><span class="std std-ref">threaded/0</span></a> object
 directive is used to enable an object to make multi-threading calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">threaded</span>.
@@ -164,7 +165,7 @@ directive is used to enable an object to make multi-threading calls:</p>
 </div>
 </section>
 <section id="multi-threading-built-in-predicates">
-<span id="threads-predicates"></span><h2>Multi-threading built-in predicates<a class="headerlink" href="#multi-threading-built-in-predicates" title="Permalink to this headline"></a></h2>
+<span id="threads-predicates"></span><h2>Multi-threading built-in predicates<a class="headerlink" href="#multi-threading-built-in-predicates" title="Permalink to this heading"></a></h2>
 <p>Logtalk provides a small set of built-in predicates for multi-threading
 programming. For simple tasks where you simply want to prove a set of
 goals, each one in its own thread, Logtalk provides a
@@ -175,7 +176,7 @@ supporting non-deterministic thread goals, and making <em>one-way</em>
 asynchronous calls. Together, these predicates provide high-level
 support for multi-threading programming, covering most common use cases.</p>
 <section id="proving-goals-concurrently-using-threads">
-<span id="threads-threaded"></span><h3>Proving goals concurrently using threads<a class="headerlink" href="#proving-goals-concurrently-using-threads" title="Permalink to this headline"></a></h3>
+<span id="threads-threaded"></span><h3>Proving goals concurrently using threads<a class="headerlink" href="#proving-goals-concurrently-using-threads" title="Permalink to this heading"></a></h3>
 <p>A set of goals may be proved concurrently by calling the Logtalk
 built-in predicate <a class="reference internal" href="../refman/predicates/threaded_1.html#predicates-threaded-1"><span class="std std-ref">threaded/1</span></a>. Each goal in
 the set runs in its own thread.</p>
@@ -226,7 +227,7 @@ each goal outweigh the overhead of the implicit thread creation and
 management.</p>
 </section>
 <section id="proving-goals-asynchronously-using-threads">
-<span id="threads-call"></span><h3>Proving goals asynchronously using threads<a class="headerlink" href="#proving-goals-asynchronously-using-threads" title="Permalink to this headline"></a></h3>
+<span id="threads-call"></span><h3>Proving goals asynchronously using threads<a class="headerlink" href="#proving-goals-asynchronously-using-threads" title="Permalink to this heading"></a></h3>
 <p>A goal may be proved asynchronously using a new thread by calling the
 <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/1-2</span></a> built-in predicate .
 Calls to this predicate are always true and return immediately (assuming
@@ -331,7 +332,7 @@ canceled by using the <a class="reference internal" href="../refman/predicates/t
 </section>
 </section>
 <section id="one-way-asynchronous-calls">
-<span id="threads-ignore"></span><h2>One-way asynchronous calls<a class="headerlink" href="#one-way-asynchronous-calls" title="Permalink to this headline"></a></h2>
+<span id="threads-ignore"></span><h2>One-way asynchronous calls<a class="headerlink" href="#one-way-asynchronous-calls" title="Permalink to this heading"></a></h2>
 <p>Sometimes we want to prove a goal in a new thread without caring about
 the results. This may be accomplished by using the built-in predicate
 <a class="reference internal" href="../refman/predicates/threaded_ignore_1.html#predicates-threaded-ignore-1"><span class="std std-ref">threaded_ignore/1</span></a>.
@@ -346,7 +347,7 @@ exception ever being sent back to the object making the call. Note that
 this predicate implicitly performs a deterministic call of its argument.</p>
 </section>
 <section id="asynchronous-calls-and-synchronized-predicates">
-<span id="threads-synchronized-predicates"></span><h2>Asynchronous calls and synchronized predicates<a class="headerlink" href="#asynchronous-calls-and-synchronized-predicates" title="Permalink to this headline"></a></h2>
+<span id="threads-synchronized-predicates"></span><h2>Asynchronous calls and synchronized predicates<a class="headerlink" href="#asynchronous-calls-and-synchronized-predicates" title="Permalink to this heading"></a></h2>
 <p>Proving a goal asynchronously using a new thread may lead to problems
 when the goal results in side effects such as input/output operations or
 modifications to an <a class="reference internal" href="../glossary.html#term-object-database"><span class="xref std std-term">object database</span></a>. For example, if a new thread is
@@ -424,7 +425,7 @@ directive simply make calls to the synchronized predicates deterministic
 when the objects are used in a single-threaded application.</p>
 </section>
 <section id="synchronizing-threads-through-notifications">
-<span id="threads-notifications"></span><h2>Synchronizing threads through notifications<a class="headerlink" href="#synchronizing-threads-through-notifications" title="Permalink to this headline"></a></h2>
+<span id="threads-notifications"></span><h2>Synchronizing threads through notifications<a class="headerlink" href="#synchronizing-threads-through-notifications" title="Permalink to this heading"></a></h2>
 <p>Declaring a set of predicates as synchronized can only ensure that they
 are not executed at the same time by different threads. Sometimes we
 need to suspend a thread not on a synchronization lock but on some
@@ -447,7 +448,7 @@ be taken to avoid deadlocks when two (or more) threads both wait and
 post notifications to each other.</p>
 </section>
 <section id="threaded-engines">
-<span id="threads-engines"></span><h2>Threaded engines<a class="headerlink" href="#threaded-engines" title="Permalink to this headline"></a></h2>
+<span id="threads-engines"></span><h2>Threaded engines<a class="headerlink" href="#threaded-engines" title="Permalink to this heading"></a></h2>
 <p>Threaded engines provide an alternative to the multi-threading
 predicates described in the previous sections. An <em>engine</em> is a computing
 thread whose solutions can be lazily computed and retrieved. In
@@ -540,7 +541,7 @@ predicate blocks until the returned solution is consumed while the
 available.</p>
 </section>
 <section id="multi-threading-performance">
-<span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Permalink to this headline"></a></h2>
+<span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Permalink to this heading"></a></h2>
 <p>The performance of multi-threading applications is highly dependent on
 the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, on the operating-system, and on the use
 of <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> and dynamic predicates. All compatible backend

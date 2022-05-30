@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -111,7 +112,7 @@
            <div itemprop="articleBody">
              
   <section id="dynamic-object-attributes">
-<h1>Dynamic object attributes<a class="headerlink" href="#dynamic-object-attributes" title="Permalink to this headline"></a></h1>
+<h1>Dynamic object attributes<a class="headerlink" href="#dynamic-object-attributes" title="Permalink to this heading"></a></h1>
 <p>In this example, we will illustrate the use of:</p>
 <ul class="simple">
 <li><p>categories</p></li>
@@ -121,7 +122,7 @@
 <p>by defining a category that implements a set of predicates for handling
 dynamic object attributes.</p>
 <section id="defining-a-category">
-<span id="category"></span><h2>Defining a category<a class="headerlink" href="#defining-a-category" title="Permalink to this headline"></a></h2>
+<span id="category"></span><h2>Defining a category<a class="headerlink" href="#defining-a-category" title="Permalink to this heading"></a></h2>
 <p>We want to define a set of predicates to handle dynamic object
 attributes. We need public predicates to set, get, and delete
 attributes, and a private dynamic predicate to store the attributes
@@ -207,7 +208,7 @@ directives inside a protocol that will be implemented by the category:</p>
 both.</p>
 </section>
 <section id="importing-the-category">
-<span id="importing"></span><h2>Importing the category<a class="headerlink" href="#importing-the-category" title="Permalink to this headline"></a></h2>
+<span id="importing"></span><h2>Importing the category<a class="headerlink" href="#importing-the-category" title="Permalink to this heading"></a></h2>
 <p>We reuse a category’s predicates by importing them into an object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(person,
     <span class="k">imports</span>(attributes)).
@@ -236,7 +237,7 @@ no
 </div>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Categories are similar to objects: we just write our predicate
 directives and definitions bracketed by opening and ending category

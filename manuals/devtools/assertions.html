@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -132,7 +133,7 @@
            <div itemprop="articleBody">
              
   <section id="assertions">
-<h1><code class="docutils literal notranslate"><span class="pre">assertions</span></code><a class="headerlink" href="#assertions" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">assertions</span></code><a class="headerlink" href="#assertions" title="Permalink to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">assertions.lgt</span></code> file contains definitions for two
 meta-predicates, <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code>, which allows using of assertions on
 your source code to print warning and error messages (using the message
@@ -140,26 +141,26 @@ printing mechanism). The <code class="docutils literal notranslate"><span class=
 default message translations generated on assertions succeed, fail, or
 throw an exception.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#assertions">../../docs/library_index.html#assertions</a></p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(assertions(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(assertions(tester)).
 </pre></div>
 </div>
 </section>
 <section id="adding-assertions-to-your-source-code">
-<h2>Adding assertions to your source code<a class="headerlink" href="#adding-assertions-to-your-source-code" title="Permalink to this headline"></a></h2>
+<h2>Adding assertions to your source code<a class="headerlink" href="#adding-assertions-to-your-source-code" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">assertion/1</span></code> predicate takes a goal as argument. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo(<span class="nv">L</span>) <span class="o">:-</span>
     assertions<span class="o">::</span>assertion(non_empty_list(<span class="nv">L</span>)),
@@ -180,7 +181,7 @@ adding a <code class="docutils literal notranslate"><span class="pre">uses/2</sp
 </div>
 </section>
 <section id="automatically-adding-file-and-line-context-information-to-assertions">
-<h2>Automatically adding file and line context information to assertions<a class="headerlink" href="#automatically-adding-file-and-line-context-information-to-assertions" title="Permalink to this headline"></a></h2>
+<h2>Automatically adding file and line context information to assertions<a class="headerlink" href="#automatically-adding-file-and-line-context-information-to-assertions" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">assertions/1</span></code> parametric object can be used as a hook object to
 automatically add file and line context information, represented by the
 term <code class="docutils literal notranslate"><span class="pre">file_lines(File,</span> <span class="pre">BeginLine-EndLine)</span></code>, to calls to the
@@ -195,7 +196,7 @@ compiled and loaded using the call:</p>
 </div>
 </section>
 <section id="suppressing-assertion-calls-from-source-code">
-<h2>Suppressing assertion calls from source code<a class="headerlink" href="#suppressing-assertion-calls-from-source-code" title="Permalink to this headline"></a></h2>
+<h2>Suppressing assertion calls from source code<a class="headerlink" href="#suppressing-assertion-calls-from-source-code" title="Permalink to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">assertions/1</span></code> parametric object can be used as a hook object to
 suppress calls to the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates using goal-expansion
 (the expansion assumes <code class="docutils literal notranslate"><span class="pre">assertions::assertion/1-2</span></code> messages). For
@@ -206,7 +207,7 @@ would be compiled and loaded using the call:</p>
 </div>
 </section>
 <section id="redirecting-assertion-failure-messages">
-<h2>Redirecting assertion failure messages<a class="headerlink" href="#redirecting-assertion-failure-messages" title="Permalink to this headline"></a></h2>
+<h2>Redirecting assertion failure messages<a class="headerlink" href="#redirecting-assertion-failure-messages" title="Permalink to this heading"></a></h2>
 <p>By default, assertion failures and errors are printed to the standard
 output stream. These messages, however, can be intercepted by defining
 the <code class="docutils literal notranslate"><span class="pre">logtalk::message_hook/4</span></code> multifile predicate. For example:</p>
@@ -223,7 +224,7 @@ the <code class="docutils literal notranslate"><span class="pre">logtalk::messag
 </div>
 </section>
 <section id="converting-assertion-failures-into-errors">
-<h2>Converting assertion failures into errors<a class="headerlink" href="#converting-assertion-failures-into-errors" title="Permalink to this headline"></a></h2>
+<h2>Converting assertion failures into errors<a class="headerlink" href="#converting-assertion-failures-into-errors" title="Permalink to this heading"></a></h2>
 <p>If you want an assertion failure to result in a failure or a runtime
 error, you can intercept the assertion failure messages, optionally
 still printing them, and throw an error. For example:</p>

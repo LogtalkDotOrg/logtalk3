@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -133,9 +134,9 @@
            <div itemprop="articleBody">
              
   <section id="logtalk-library-path-2">
-<span id="predicates-logtalk-library-path-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code><a class="headerlink" href="#logtalk-library-path-2" title="Permalink to this headline"></a></h1>
+<span id="predicates-logtalk-library-path-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code><a class="headerlink" href="#logtalk-library-path-2" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_library_path</span>(<span class="nv">Library</span>, <span class="nv">Path</span>)
 </pre></div>
 </div>
@@ -180,18 +181,18 @@ predicate that can be used to expand library aliases and files expressed
 using library notation.</p>
 </section>
 <section id="modes-and-number-of-proofs">
-<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_library_path</span>(<span class="o">?</span>atom, <span class="o">-</span>atom) <span class="o">-</span> zero_or_more
 <span class="k">logtalk_library_path</span>(<span class="o">?</span>atom, <span class="o">-</span>compound) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
    <span class="k">logtalk_load_context</span>(directory, <span class="nv">Directory</span>),
    <span class="k">assertz</span>(<span class="k">logtalk_library_path</span>(my_application_root, <span class="nv">Directory</span>))

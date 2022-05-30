@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -130,32 +131,32 @@
            <div itemprop="articleBody">
              
   <section id="help">
-<h1><code class="docutils literal notranslate"><span class="pre">help</span></code><a class="headerlink" href="#help" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">help</span></code><a class="headerlink" href="#help" title="Permalink to this heading"></a></h1>
 <p>This tool provides basic on-line help for Logtalk features and libraries
 when running in a limited set of operating-systems. For help on the
 Logtalk compiler error and warning messages, see the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#help">../../docs/library_index.html#help</a></p>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(help(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(help(tester)).
 </pre></div>
 </div>
 </section>
 <section id="supported-operating-systems">
-<h2>Supported operating-systems<a class="headerlink" href="#supported-operating-systems" title="Permalink to this headline"></a></h2>
+<h2>Supported operating-systems<a class="headerlink" href="#supported-operating-systems" title="Permalink to this heading"></a></h2>
 <p>Currently, support is limited to Linux, macOS, and Windows.</p>
 <p>On Windows, the <code class="docutils literal notranslate"><span class="pre">start</span></code> command must be available. On Linux, the
 <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command must be available. On macOS, the command <code class="docutils literal notranslate"><span class="pre">open</span></code>
@@ -164,11 +165,11 @@ is used.</p>
 abstraction.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>After loading the tool, use the query <code class="docutils literal notranslate"><span class="pre">help::help</span></code> to get started.</p>
 </section>
 <section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline"></a></h2>
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
 <p>On macOS, the <code class="docutils literal notranslate"><span class="pre">open</span></code> command used to open documentation URLs drops the
 anchors, thus preventing navigating to the specified position on the
 documentation page.</p>

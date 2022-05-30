@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -125,9 +126,9 @@
            <div itemprop="articleBody">
              
   <section id="logtalk-linter-hook-7">
-<span id="predicates-logtalk-linter-hook-7"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">logtalk_linter_hook/7</span></code><a class="headerlink" href="#logtalk-linter-hook-7" title="Permalink to this headline"></a></h1>
+<span id="predicates-logtalk-linter-hook-7"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">logtalk_linter_hook/7</span></code><a class="headerlink" href="#logtalk-linter-hook-7" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="nv">Goal</span>, <span class="nv">Flag</span>, <span class="nv">File</span>, <span class="nv">Lines</span>, <span class="nv">Type</span>, <span class="nv">Entity</span>, <span class="nv">Warning</span>)
 </pre></div>
 </div>
@@ -139,17 +140,17 @@ supported linter flag. The <code class="docutils literal notranslate"><span clas
 message term.</p>
 </section>
 <section id="modes-and-number-of-proofs">
-<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this headline"></a></h2>
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="o">@</span>callable, <span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">+</span>pair(integer), <span class="o">+</span>atom, <span class="o">@</span>object_identifier, <span class="o">--</span>callable) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline"></a></h2>
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(user<span class="o">::</span>logtalk_linter_hook<span class="o">/</span><span class="m">7</span>).
 <span class="c">% warn about using list::append/3 to construct a list from an head and a tail</span>
 user<span class="o">::</span>logtalk_linter_hook(

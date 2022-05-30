@@ -15,6 +15,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -133,9 +134,9 @@
            <div itemprop="articleBody">
              
   <section id="alias-2">
-<span id="directives-alias-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">alias/2</span></code><a class="headerlink" href="#alias-2" title="Permalink to this headline"></a></h1>
+<span id="directives-alias-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">alias/2</span></code><a class="headerlink" href="#alias-2" title="Permalink to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>alias(<span class="nv">Entity</span>, [<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">/</span><span class="nv">Arity</span>, ...])
 alias(<span class="nv">Entity</span>, [<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span> <span class="o">as</span> <span class="nv">Alias</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 </pre></div>
@@ -157,14 +158,14 @@ aliases in implicit qualification directives for sending messages
 to objects and calling module predicates.</p>
 </section>
 <section id="template-and-modes">
-<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this headline"></a></h2>
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(predicate_indicator_alias))
 alias(<span class="o">@</span>entity_identifier, <span class="o">+</span>list(non_terminal_indicator_alias))
 </pre></div>
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% resolve a predicate name conflict:</span>
 <span class="p">:- </span><span class="k">alias</span>(list, [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> list_member<span class="o">/</span><span class="m">2</span>]).
 <span class="p">:- </span><span class="k">alias</span>(set,  [member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> set_member<span class="o">/</span><span class="m">2</span>]).

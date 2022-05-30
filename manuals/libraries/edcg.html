@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -163,7 +164,7 @@
            <div itemprop="articleBody">
              
   <section id="edcg">
-<h1><code class="docutils literal notranslate"><span class="pre">edcg</span></code><a class="headerlink" href="#edcg" title="Permalink to this headline"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">edcg</span></code><a class="headerlink" href="#edcg" title="Permalink to this heading"></a></h1>
 <p>This library provides a Logtalk port of the Peter Van Roy’s extended DCG
 implementation. For full documentation on EDCGs, see:</p>
 <p><a class="reference external" href="https://www.info.ucl.ac.be/%7Epvr/edcg.html">https://www.info.ucl.ac.be/%7Epvr/edcg.html</a></p>
@@ -191,13 +192,13 @@ The Logtalk version uses instead the <code class="docutils literal notranslate">
 to temporarily save those predicates in order to parse the corresponding
 EDCGs.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#edcg">../../docs/library_index.html#edcg</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this headline"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
 file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(edcg(loader)).
@@ -205,7 +206,7 @@ file:</p>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file of the
 <code class="docutils literal notranslate"><span class="pre">edcgs</span></code> example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(edcgs(tester)).
@@ -213,7 +214,7 @@ file:</p>
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>Follows the usage documentation written by Michael Hendricks (with a
 contribution from Peter Ludemann), used here with permission, with the
 necessary changes for the Logtalk port.</p>
@@ -245,7 +246,7 @@ len <span class="o">--&gt;&gt;</span>
 </div>
 </section>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>DCG notation gives us a single, hidden accumulator. Extended DCG
 notation (implemented by this library) lets predicates have arbitrarily
 many hidden accumulators. As demonstrated by the synopsis above, those
@@ -261,7 +262,7 @@ switching from ordsets to rbtrees)</p></li>
 </ul>
 </section>
 <section id="syntax">
-<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline"></a></h2>
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading"></a></h2>
 <p>Extended DCG syntax is very similar to DCG notation. An EDCG is created
 with clauses whose neck is the <code class="docutils literal notranslate"><span class="pre">--&gt;&gt;</span></code> operator. The following syntax
 is supported inside an EDCG clause:</p>
@@ -295,7 +296,7 @@ list X-Y into the accumulated list</p></li>
 </ul>
 </section>
 <section id="declaration-of-predicates">
-<h2>Declaration of Predicates<a class="headerlink" href="#declaration-of-predicates" title="Permalink to this headline"></a></h2>
+<h2>Declaration of Predicates<a class="headerlink" href="#declaration-of-predicates" title="Permalink to this heading"></a></h2>
 <p>Predicates are declared with facts of the following form:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>pred_info(<span class="nv">Name</span>, <span class="nv">Arity</span>, <span class="nv">List</span>).
 </pre></div>
@@ -305,7 +306,7 @@ list X-Y into the accumulated list</p></li>
 their names must be atoms.</p>
 </section>
 <section id="declaration-of-accumulators">
-<h2>Declaration of Accumulators<a class="headerlink" href="#declaration-of-accumulators" title="Permalink to this headline"></a></h2>
+<h2>Declaration of Accumulators<a class="headerlink" href="#declaration-of-accumulators" title="Permalink to this heading"></a></h2>
 <p>Accumulators are declared with facts in one of two forms. The short form
 is:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>acc_info(<span class="nv">Acc</span>, <span class="nv">Term</span>, <span class="nv">Left</span>, <span class="nv">Right</span>, <span class="nv">Joiner</span>).
@@ -334,7 +335,7 @@ accumulation, <code class="docutils literal notranslate"><span class="pre">Left<
 reverse accumulation, <code class="docutils literal notranslate"><span class="pre">Right</span></code> is the input and <code class="docutils literal notranslate"><span class="pre">Left</span></code> is the output.</p>
 </section>
 <section id="declaration-of-passed-arguments">
-<h2>Declaration of Passed Arguments<a class="headerlink" href="#declaration-of-passed-arguments" title="Permalink to this headline"></a></h2>
+<h2>Declaration of Passed Arguments<a class="headerlink" href="#declaration-of-passed-arguments" title="Permalink to this heading"></a></h2>
 <p>Passed arguments are conceptually the same as accumulators with <code class="docutils literal notranslate"><span class="pre">=/2</span></code>
 as the joiner function. Passed arguments are declared as facts in one of
 two forms. The short form is:</p>
@@ -352,7 +353,7 @@ passed argument in a body goal that does not occur in the head. Most of
 the time this situation does not occur.</p>
 </section>
 <section id="additional-documentation">
-<h2>Additional documentation<a class="headerlink" href="#additional-documentation" title="Permalink to this headline"></a></h2>
+<h2>Additional documentation<a class="headerlink" href="#additional-documentation" title="Permalink to this heading"></a></h2>
 <p>Peter Van Roy’s page: <a class="reference external" href="https://www.info.ucl.ac.be/~pvr/edcg.html">Declarative Programming with
 State</a></p>
 <p>Technical Report UCB/CSD-90-583 <a class="reference external" href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/5471.html">Extended DCG Notation: A Tool for

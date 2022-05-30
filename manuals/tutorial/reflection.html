@@ -15,6 +15,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
@@ -110,7 +111,7 @@
            <div itemprop="articleBody">
              
   <section id="a-reflective-class-based-system">
-<h1>A reflective class-based system<a class="headerlink" href="#a-reflective-class-based-system" title="Permalink to this headline"></a></h1>
+<h1>A reflective class-based system<a class="headerlink" href="#a-reflective-class-based-system" title="Permalink to this heading"></a></h1>
 <p>When compiling an object, Logtalk distinguishes prototypes from instance
 or classes by examining the object relations. If an object instantiates
 and/or specializes another object, then it is compiled as an instance or
@@ -127,7 +128,7 @@ provides, along with root objects for the instantiation and
 specialization hierarchies, explicit support for abstract classes
 <a class="reference internal" href="../bibliography.html#moura94" id="id3"><span>[Moura94]</span></a>.</p>
 <section id="defining-the-base-classes">
-<span id="classes"></span><h2>Defining the base classes<a class="headerlink" href="#defining-the-base-classes" title="Permalink to this headline"></a></h2>
+<span id="classes"></span><h2>Defining the base classes<a class="headerlink" href="#defining-the-base-classes" title="Permalink to this heading"></a></h2>
 <p>We will start by defining three classes: <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract_class</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">class</span></code>. The class <code class="docutils literal notranslate"><span class="pre">object</span></code> will contain all predicates common
 to all objects. It will be the root of the inheritance graph:</p>
@@ -169,7 +170,7 @@ object may use the predicates defined in itself and in the other two
 objects, with no danger of <a class="reference internal" href="../glossary.html#term-message-lookup"><span class="xref std std-term">message lookup</span></a> endless loops.</p>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline"></a></h2>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>An object that does not instantiate or specialize other objects is
 always compiled as a prototype.</p></li>
