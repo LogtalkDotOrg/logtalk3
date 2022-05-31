@@ -110,6 +110,9 @@ Tools
 * CHANGED: The `lgtunit` tool code coverage report format to enable reporting
 all test object parameterizations and files.
 
+* CHANGED: The `lgtunit` tool messages in case of failed tests or steps to
+take into account the `suppress_path_prefix` flag when printing file paths.
+
 * CHANGED: Renamed the `code_metrics` tool `entity_score//2` non-terminal to
 `format_entity_score//2`.
 

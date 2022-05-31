@@ -22,9 +22,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 5:2:1,
+		version is 5:3:0,
 		author is 'Paulo Moura',
-		date is 2022-05-20,
+		date is 2022-05-31,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -115,10 +115,7 @@
 		;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 		),
 		failed_test_reason(non_deterministic_success),
-		(	{Position = Line-Line} ->
-			['  in file ~w at or above line ~w'-[File, Line], nl]
-		;	['  in file ~w between lines ~w'-[File, Position], nl]
-		).
+		file_position(File, Position).
 
 	message_tokens(failed_test(_Object, Test, File, Position, Reason, Note, Time)) -->
 		(	{Note == ''} ->
@@ -126,10 +123,7 @@
 		;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 		),
 		failed_test_reason(Reason),
-		(	{Position = Line-Line} ->
-			['  in file ~w at or above line ~w'-[File, Line], nl]
-		;	['  in file ~w between lines ~w'-[File, Position], nl]
-		).
+		file_position(File, Position).
 
 	message_tokens(skipped_test(_Object, Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
@@ -183,10 +177,7 @@
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),
-		(	{Position = Line-Line} ->
-			['  in file ~w at or above line ~w'-[File, Line], nl]
-		;	['  in file ~w between lines ~w'-[File, Position], nl]
-		).
+		file_position(File, Position).
 
 	message_tokens(broken_step(Step, Object, Error)) -->
 		['broken ~w goal for test object ~q: ~q'-[Step, Object, Error], nl].
@@ -320,6 +311,20 @@
 		['  test ~q cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
 	failed_cleanup_reason(failure, _Object, Test) -->
 		['  test ~q cleanup goal failed but should have succeeded'-[Test], nl].
+
+	file_position(Path, Position) -->
+		{suppress_path_prefix(Path, ShortPath)},
+		(	{Position = Line-Line} ->
+			['  in file ~w at or above line ~w'-[ShortPath, Line], nl]
+		;	['  in file ~w between lines ~w'-[ShortPath, Position], nl]
+		).
+
+	suppress_path_prefix(Path, ShortPath) :-
+		current_logtalk_flag(suppress_path_prefix, Prefix),
+		(	atom_concat(Prefix, ShortPath, Path) ->
+			true
+		;	ShortPath = Path
+		).
 
 	entity_tokens(Entities) -->
 		(	{Entities =:= 1} ->
