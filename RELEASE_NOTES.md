@@ -63,6 +63,8 @@ Prolog adapter and integration files
 * ADDED: Experimental Scryer Prolog adapter file support for compiling Prolog
 modules as objects.
 
+* IMPROVED: The `setup_call_cleanup/3` predicate definition for SICStus Prolog.
+
 Documentation
 -------------
 
