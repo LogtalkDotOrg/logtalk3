@@ -131,7 +131,7 @@ tool.
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
 
 * UPDATED: The `lgtunit` tool to explicitly handle and report QuickCheck test
-generation errors.
+generation errors and failures.
 
 * UPDATED: The `lgtunit` tool to handle unexpected QuickCheck test errors due
 to backend bugs by printing an informative message instead of reporting an

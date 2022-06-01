@@ -1890,8 +1890,9 @@
 	quick_check_error_reified(quick_check_error(error(Exception,_), Goal, _, Seed),       error(Exception, Goal, Seed)).
 	quick_check_error_reified(quick_check_error(Exception, Goal, _, Seed),                error(Exception, Goal, Seed)).
 	quick_check_error_reified(quick_check_error(generate_test_error(Template),error(Exception,_)), Result) :-
-		quick_check_error_reified(quick_check_error(generate_test_error(Template),Exception), Result).
-	quick_check_error_reified(quick_check_error(generate_test_error(_),Exception),        error(generate_test_error, Exception)).
+		quick_check_error_reified(quick_check_error(generate_test_error(Template), Exception), Result).
+	quick_check_error_reified(quick_check_error(generate_test_error(_), Exception),       error(generate_test_error, Exception)).
+	quick_check_error_reified(quick_check_error(generate_test_failure(_), Culprit),       error(generate_test_failure, Culprit)).
 	quick_check_error_reified(quick_check_error(label_goal_error(error(Exception,_)), Culprit), Result) :-
 		quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit), Result).
 	quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit),    error(Exception, Culprit)).
@@ -2031,11 +2032,7 @@
 
 	generate_test(true, _, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
 		% no pre-condition closure was specified (as represented internally by the atom "true")
-		catch(
-			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
-			Error,
-			throw(quick_check_error(generate_test_error(Template),Error))
-		),
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases, Template),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
 	generate_test(Closure-Original, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded, Goal) :-
@@ -2044,11 +2041,7 @@
 		% number of tests that we want to run
 		repeat(N, 0, R),
 			Test1 is Test + R,
-			catch(
-				generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases),
-				Error,
-				throw(quick_check_error(generate_test_error(Template),Error))
-			),
+			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases, Template),
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
@@ -2065,10 +2058,17 @@
 	% we can check that the property being tested don't further instantiates
 	% '@'(Type) arguments; but as copies for other argument instantiation modes
 	% are not required, only '@'(Type) arguments are actually copied
-	generate_arbitrary_arguments([], [], [], _, _).
-	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test, EdgeCases) :-
-		generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test, EdgeCases),
-		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases).
+	generate_arbitrary_arguments([], [], [], _, _, _).
+	generate_arbitrary_arguments([Type| Types], [Argument| Arguments], [ArgumentCopy| ArgumentsCopy], Test, EdgeCases, Template) :-
+		(	catch(
+				generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test, EdgeCases),
+				Error,
+				throw(quick_check_error(generate_test_error(Template),Error))
+			) ->
+			true
+		;	throw(quick_check_error(generate_test_failure(Template),Type))
+		),
+		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases, Template).
 
 	generate_arbitrary_argument('--'(_), _, _, _, _).
 	generate_arbitrary_argument('-'(_), _, _, _, _).

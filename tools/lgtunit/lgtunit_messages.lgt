@@ -160,10 +160,12 @@
 		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
 		['starting seed: ~w'-[Seed], nl].
 
-	message_tokens(quick_check_error(generate_test_error(Template),error(Error,_))) -->
-		message_tokens(quick_check_error(generate_test_error(Template),Error)).
-	message_tokens(quick_check_error(generate_test_error(Template),Error)) -->
-		['quick check error while generating test for template: ~q'-[Template], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(generate_test_error(Template), error(Error,_))) -->
+		message_tokens(quick_check_error(generate_test_error(Template), Error)).
+	message_tokens(quick_check_error(generate_test_error(Template), Error)) -->
+		['quick check test generation error for template: ~q'-[Template], nl, '  ~q'-[Error], nl].
+	message_tokens(quick_check_error(generate_test_failure(Template), Type)) -->
+		['quick check test generation failure for template: ~q'-[Template], nl, '  ~q'-[Type], nl].
 	message_tokens(quick_check_error(label_goal_error(error(Error,_)), Label)) -->
 		message_tokens(quick_check_error(label_goal_error(Error), Label)).
 	message_tokens(quick_check_error(label_goal_error(Error), Label)) -->
