@@ -126,13 +126,16 @@ tool.
 
 * ADDED: Support for printing clause usage stats to the `ports_profiler` tool.
 
-* IMPROVED: The `lgtunit` tool to handle unexpected QuickCheck test errors due
-to backend bugs by printing an informative message instead of reporting an
-unknown error message term.
-
 * IMPROVED: API documentation of the `debugger` and `lgtunit` tools.
 
 * IMPROVED: Minimized use of the `term_io` library by the `diagrams` tool.
+
+* UPDATED: The `lgtunit` tool to explicitly handle and report QuickCheck test
+generation errors.
+
+* UPDATED: The `lgtunit` tool to handle unexpected QuickCheck test errors due
+to backend bugs by printing an informative message instead of reporting an
+unknown error message term.
 
 * UPDATED: The `tutor` tool for the new linter warnings.
 

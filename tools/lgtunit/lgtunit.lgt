@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 11:1:1,
+		version is 11:2:0,
 		author is 'Paulo Moura',
-		date is 2022-05-20,
+		date is 2022-06-01,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1889,6 +1889,9 @@
 	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                       failed(Goal, Seed)).
 	quick_check_error_reified(quick_check_error(error(Exception,_), Goal, _, Seed),       error(Exception, Goal, Seed)).
 	quick_check_error_reified(quick_check_error(Exception, Goal, _, Seed),                error(Exception, Goal, Seed)).
+	quick_check_error_reified(quick_check_error(generate_test_error(Template),error(Exception,_)), Result) :-
+		quick_check_error_reified(quick_check_error(generate_test_error(Template),Exception), Result).
+	quick_check_error_reified(quick_check_error(generate_test_error(_),Exception),        error(generate_test_error, Exception)).
 	quick_check_error_reified(quick_check_error(label_goal_error(error(Exception,_)), Culprit), Result) :-
 		quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit), Result).
 	quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit),    error(Exception, Culprit)).
@@ -1937,7 +1940,11 @@
 		Test > N,
 		!.
 	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded0, Discarded, Labels0, Labels) :-
-		generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
+		catch(
+			generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
+			GenerateError,
+			throw(quick_check_error(generate_test_error(Template),GenerateError))
+		),
 		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error, Template, Verbose)) ->
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
