@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-01-05,
+		date is 2022-06-01,
 		comment is 'Unit tests for the database built-in methods that take a clause reference argument.'
 	]).
 
@@ -44,8 +44,26 @@
 		test_object::asserta(a(3), Ref1),
 		test_object::asserta(a(4), Ref2).
 
-	test(asserta_2_05, error(uninstantiation_error(_))) :-
+	test(asserta_2_05, true(X == 0)) :-
+		test_object::asserta((aa(N) :- N = 0), _),
+		test_object::aa(X).
+
+	test(asserta_2_06, true(nonvar(Ref))) :-
+		test_object::asserta((aa(N) :- N = 1), Ref).
+
+	test(asserta_2_07, true(Ref1 \== Ref2)) :-
+		test_object::asserta((aa(N) :- N = 2), Ref1),
+		test_object::asserta((aa(N) :- N = 2), Ref2).
+
+	test(asserta_2_08, true(Ref1 \== Ref2)) :-
+		test_object::asserta((aa(N) :- N = 3), Ref1),
+		test_object::asserta((aa(N) :- N = 4), Ref2).
+
+	test(asserta_2_09, error(uninstantiation_error(_))) :-
 		test_object::asserta(a(5), ref).
+
+	test(asserta_2_10, error(uninstantiation_error(_))) :-
+		test_object::asserta((aa(N) :- N = 5), ref).
 
 	test(assertz_2_01, true(X == 0)) :-
 		test_object::assertz(z(0), _),
@@ -62,8 +80,26 @@
 		test_object::assertz(z(3), Ref1),
 		test_object::assertz(z(4), Ref2).
 
-	test(assertz_2_05, error(uninstantiation_error(_))) :-
-		test_object::assertz(a(5), ref).
+	test(assertz_2_05, true(X == 0)) :-
+		test_object::assertz((zz(N) :- N = 0), _),
+		test_object::zz(X).
+
+	test(assertz_2_06, true(nonvar(Ref))) :-
+		test_object::assertz((zz(N) :- N = 1), Ref).
+
+	test(assertz_2_07, true(Ref1 \== Ref2)) :-
+		test_object::assertz((zz(N) :- N = 2), Ref1),
+		test_object::assertz((zz(N) :- N = 2), Ref2).
+
+	test(assertz_2_08, true(Ref1 \== Ref2)) :-
+		test_object::assertz((zz(N) :- N = 3), Ref1),
+		test_object::assertz((zz(N) :- N = 4), Ref2).
+
+	test(assertz_2_09, error(uninstantiation_error(_))) :-
+		test_object::assertz(z(5), ref).
+
+	test(assertz_2_10, error(uninstantiation_error(_))) :-
+		test_object::assertz((zz(N) :- N = 5), ref).
 
 	test(clause_3_01, true((Y == 1, Body == true))) :-
 		test_object::assertz(y(1), Ref),
@@ -77,16 +113,24 @@
 		test_object::assertz(y(3), _),
 		test_object::clause(y(_), _, Ref).
 
-	test(clause_3_04, false) :-
+	test(clause_3_04, true(Ref1 == Ref2)) :-
+		test_object::assertz((yy(N) :- N = 2), Ref1),
+		test_object::clause(yy(2), N = 2, Ref2).
+
+	test(clause_3_05, true(nonvar(Ref))) :-
+		test_object::assertz((yy(N) :- N = 3), _),
+		test_object::clause(yy(_), N = 3, Ref).
+
+	test(clause_3_06, false) :-
 		test_object::assertz(y(4), Ref),
 		test_object::assertz(y(5), _),
 		test_object::clause(y(5), _, Ref).
 
-	test(clause_3_05, true(Head-Body == y(6)-true)) :-
+	test(clause_3_07, true(Head-Body == y(6)-true)) :-
 		test_object::assertz(y(6), Ref),
 		test_object::clause(Head, Body, Ref).
 
-	test(clause_3_06, error(type_error(_, 3.14))) :-
+	test(clause_3_08, error(type_error(_, 3.14))) :-
 		test_object::assertz(y(7), _),
 		test_object::clause(y(_), _, 3.14).
 

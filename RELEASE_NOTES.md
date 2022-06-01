@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.56.0 - May ??, 2022
-=====================
+3.56.0 - June ??, 2022
+======================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -175,6 +175,9 @@ Ports
 
 Tests
 -----
+
+* ADDED: Additional tests for the database methods that take a clause
+reference. 
 
 * ADDED: Additional test for the standard `char_code/2` built-in predicate.
 
