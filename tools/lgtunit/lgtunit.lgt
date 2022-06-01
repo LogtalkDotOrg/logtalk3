@@ -1940,11 +1940,7 @@
 		Test > N,
 		!.
 	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded0, Discarded, Labels0, Labels) :-
-		catch(
-			generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
-			GenerateError,
-			throw(quick_check_error(generate_test_error(Template),GenerateError))
-		),
+		generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
 		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error, Template, Verbose)) ->
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
@@ -2033,9 +2029,13 @@
 	extend_quick_check_closure(Closure, (Sender<<Closure)-Closure) :-
 		sender(Sender).
 
-	generate_test(true, _, _Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
+	generate_test(true, _, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
 		% no pre-condition closure was specified (as represented internally by the atom "true")
-		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
+		catch(
+			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases),
+			Error,
+			throw(quick_check_error(generate_test_error(Template),Error))
+		),
 		Predicate =.. [Name| Arguments],
 		Goal =.. [Operator, Entity, Predicate].
 	generate_test(Closure-Original, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded, Goal) :-
@@ -2044,7 +2044,11 @@
 		% number of tests that we want to run
 		repeat(N, 0, R),
 			Test1 is Test + R,
-			generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases),
+			catch(
+				generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test1, EdgeCases),
+				Error,
+				throw(quick_check_error(generate_test_error(Template),Error))
+			),
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
