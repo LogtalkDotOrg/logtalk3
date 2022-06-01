@@ -52,6 +52,7 @@ CONTRIBUTORS
 * Hans N. Beck (integrations and embedding PowerShell scripts)
 * Ivan Bratko (search methods in the state-space searching example)
 * Jacinto Dávila (CSV library, bug reports)
+* Jacob Friedman (Visual Studio Code support for Logtalk)
 * Jan Burse (unit tests patches and feedback)
 * Jan Wielemaker (feedback on Prolog compliance testing and engine examples)
 * Jeremy Vickery (bug reports)
