@@ -1889,8 +1889,6 @@
 	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                       failed(Goal, Seed)).
 	quick_check_error_reified(quick_check_error(error(Exception,_), Goal, _, Seed),       error(Exception, Goal, Seed)).
 	quick_check_error_reified(quick_check_error(Exception, Goal, _, Seed),                error(Exception, Goal, Seed)).
-	quick_check_error_reified(quick_check_error(generate_test_error(Template),error(Exception,_)), Result) :-
-		quick_check_error_reified(quick_check_error(generate_test_error(Template), Exception), Result).
 	quick_check_error_reified(quick_check_error(generate_test_error(_), Exception),       error(generate_test_error, Exception)).
 	quick_check_error_reified(quick_check_error(generate_test_failure(_), Culprit),       error(generate_test_failure, Culprit)).
 	quick_check_error_reified(quick_check_error(label_goal_error(error(Exception,_)), Culprit), Result) :-
