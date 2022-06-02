@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:13:0,
 		author is 'Paulo Moura',
-		date is 2020-02-01,
+		date is 2022-06-02,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -40,6 +40,49 @@
 		Lacc2 is Lacc + 1,
 		Sacc2 is Sacc + N,
 		average(Ns, Lacc2, Sacc2, Average).
+
+	median([X| Xs], Median) :-
+		median([X| Xs], Median, _).
+
+	median([X| Xs], Median, Length) :-
+		quicksort([X| Xs], [], Sorted, 0, Length),
+		(	Length mod 2 =:= 1 ->
+			Middle is Length // 2 + 1,
+			middle_element(1, Middle, Sorted, Median)
+		;	Left is Length // 2,
+			middle_elements(1, Left, Sorted, XLeft, XRight),
+			Median is XLeft + (XRight - XLeft) / 2
+		).
+
+	quicksort([], Sorted, Sorted, Length, Length).
+	quicksort([Pivot| List], Aux, Sorted, Acc, Length) :-
+		partition(List, Pivot, Small, Large),
+		Acc2 is Acc + 1,
+		quicksort(Large, Aux, Sorted1, Acc2, Acc3),
+		quicksort(Small, [Pivot| Sorted1], Sorted, Acc3, Length).
+
+	partition([], _, [], []).
+	partition([X| Xs], Pivot, Small, Large) :-
+		(	X < Pivot ->
+			Small = [X| Small1], Large = Large1
+		;	Small = Small1, Large = [X| Large1]
+		),
+		partition(Xs, Pivot, Small1, Large1).
+
+	middle_element(N, N, [X| _], Middle) :-
+		!,
+		Middle = X.
+	middle_element(M, N, [_| Xs], X) :-
+		M2 is M + 1,
+		middle_element(M2, N, Xs, X).
+
+	middle_elements(N, N, [X1, X2| _], MiddleLeft, MiddleRight) :-
+		!,
+		MiddleLeft = X1,
+		MiddleRight = X2.
+	middle_elements(M, N, [_| Xs], X1, X2) :-
+		M2 is M + 1,
+		middle_elements(M2, N, Xs, X1, X2).
 
 	min([X| Xs], Min) :-
 		min(Xs, X, Min).

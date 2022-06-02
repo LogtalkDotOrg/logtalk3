@@ -78,6 +78,8 @@ generators.
 Library
 -------
 
+* ADDED: Predicate `numberlist::median/2` to the `types` library.
+
 * ADDED: Tests for custom generators to the `arbitrary` library category.
 
 * IMPROVED: Performance of the `arbitrary` library category generation of

@@ -11,8 +11,8 @@
 List of numbers protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:6:0
-| **Date:** 2019-03-02
+| **Version:** 1:7:0
+| **Date:** 2022-06-02
 
 | **Compilation flags:**
 |    ``static``
@@ -146,6 +146,29 @@ Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the
 |    ``average(List,Average)``
 | **Mode and number of proofs:**
 |    ``average(+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="median/2"> </div>
+
+.. index:: median/2
+.. _numberlistp/0::median/2:
+
+``median/2``
+^^^^^^^^^^^^
+
+Calculates the median of a list of numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``median(List,Median)``
+| **Mode and number of proofs:**
+|    ``median(+list(number),-float)`` - ``zero_or_one``
 
 
 ------------
