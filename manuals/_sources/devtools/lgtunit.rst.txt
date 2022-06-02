@@ -494,16 +494,21 @@ and replaced with the default value if applicable. The
 
 -  ``passed(Seed, Discarded, Labels)``,
 -  ``failed(Goal, Seed)``
--  ``error(Error, Culprit)`` or ``error(Error, Goal, Seed)``
+-  ``error(Error, Goal, Seed)``
+-  ``broken(Why, Culprit)``
+
+The ``broken(Why, Culprit)`` result only occurs when the user-defined
+testing setup is broken. For example, a non-callable template (e.g. a
+non-existing predicate), a problem with the pre-condition closure or
+with the label closure (e.g. a pre-condition that always fails or a
+label that fails to classify a generated test), or errors/failures when
+generating tests (e.g. due to an unknown type being used in the template
+or a broken custom type arbitrary value generator).
 
 The ``Goal`` argument is the random test that failed. The ``Seed``
 argument is the starting seed used to generate the random tests and
 should be regarded as an opaque term. See below how to use it when
-testing bug fixes. The ``error(Error, Culprit)`` result only occurs when
-the template is not callable (e.g. a non-existing predicate) or when
-there's a problem with the pre-condition closure or with the label
-closure (e.g. a pre-condition that always fails or a label that fails to
-classify a generated test).
+testing bug fixes.
 
 The ``Discarded`` argument returns the number of generated tests that
 were discarded for failing to comply a pre-condition specified using the

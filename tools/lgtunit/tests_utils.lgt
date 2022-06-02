@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2021-09-04,
+		date is 2022-06-02,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -399,10 +399,10 @@ a(1).
 		Result = failed(atom(Integer), _Seed),
 		assertion(type, integer(Integer)).
 
-	test(quick_check_3_05, subsumes(error(instantiation_error,_), Result)) :-
+	test(quick_check_3_05, true(Result == broken(template_error, instantiation_error))) :-
 		quick_check(_, Result, []).
 
-	test(quick_check_3_06, subsumes(error(type_error(callable,1),_), Result)) :-
+	test(quick_check_3_06, true(Result == broken(template_error, type_error(callable,1)))) :-
 		quick_check(1, Result, []).
 
 	test(quick_check_3_07, subsumes(error(existence_error(predicate_declaration,foo42/1),_,_), Result)) :-
@@ -433,10 +433,10 @@ a(1).
 			)
 		).
 
-	test(quick_check_3_11, true(Result == error(label_goal_failure, label3))) :-
+	test(quick_check_3_11, true(Result == broken(label_goal_failure, label3))) :-
 		quick_check(integer(+byte), Result, [l(label3), n(1000)]).
 
-	test(quick_check_3_12, subsumes(error(existence_error(procedure, label4/2), label4), Result)) :-
+	test(quick_check_3_12, subsumes(broken(label_goal_error, error(existence_error(procedure, label4/2),_)), Result)) :-
 		quick_check(integer(+byte), Result, [l(label4), n(1000)]).
 
 	test(quick_check_3_13, true) :-
@@ -451,16 +451,22 @@ a(1).
 		assertion(discarded, Discarded == 0),
 		assertion(pairs, Pairs == []).
 
-	test(quick_check_3_15, true(Result == error(pre_condition_always_fails, condition3))) :-
+	test(quick_check_3_15, true(Result == broken(pre_condition_always_fails, condition3))) :-
 		quick_check(integer(+byte), Result, [pc(condition3)]).
 
-	test(quick_check_3_16, subsumes(error(existence_error(procedure, condition4/1), condition4), Result)) :-
+	test(quick_check_3_16, subsumes(broken(pre_condition_error, error(existence_error(procedure,condition4/1),_)), Result)) :-
 		quick_check(integer(+byte), Result, [pc(condition4)]).
 
 	test(quick_check_3_17, true(Goal0-Seed0 == Goal-Seed)) :-
 		% test that we are using a pseudo random generator
 		quick_check(atom(+integer), failed(Goal0, Seed0), [ec(false)]),
 		quick_check(atom(+integer), failed(Goal, Seed), [ec(false), rs(Seed0)]).
+
+	test(quick_check_3_18, true(Result == broken(generate_test_failure, +foo))) :-
+		quick_check(integer(+foo), Result, []).
+
+	test(quick_check_3_19, subsumes(broken(generate_test_error, error(type_error(character,1),_)), Result)) :-
+		quick_check(integer(+broken_type), Result, []).
 
 	% quick_check/2 tests
 
@@ -541,6 +547,13 @@ a(1).
 	label3(_, _) :-
 		fail.
 
+	:- multifile(arbitrary::arbitrary/1).
+	arbitrary::arbitrary(broken_type).
+
+	:- multifile(arbitrary::arbitrary/2).
+	arbitrary::arbitrary(broken_type, _) :-
+	    char_code(1, _).
+
 	% suppress quick_check/1-3 messages and save option values for tests
 
 	:- private(quick_check_passed/1).
@@ -555,5 +568,6 @@ a(1).
 	logtalk::message_hook(quick_check_failed(_,_,_,_), _, lgtunit, _).
 	logtalk::message_hook(quick_check_error(_,_,_,_), _, lgtunit, _).
 	logtalk::message_hook(quick_check_error(_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_broken(_,_), _, lgtunit, _).
 
 :- end_object.

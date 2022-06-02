@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 11:2:0,
+		version is 12:0:0,
 		author is 'Paulo Moura',
-		date is 2022-06-01,
+		date is 2022-06-02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -131,12 +131,13 @@
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- meta_predicate(quick_check(::, *, ::)).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)``, ``error(Error,Goal,Seed)``, or ``error(Error,Culprit)``. ``Goal`` is the failed test. ``Seed`` is the starting seed.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)``, ``error(Error,Goal,Seed)``, or ``broken(Why,Culprit)``. ``Goal`` is the failed test. ``Seed`` is the starting seed.',
 		argnames is ['Template', 'Result', 'Options'],
 		remarks is [
 			'``Seed`` argument' - 'Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.',
 			'``Discarded`` argument' - 'Number of generated tests that were discarded for failing to comply a pre-condition specified using the ``pc/1`` option.',
-			'``Labels`` argument' - 'List of pairs ``Label-N`` where ``N`` is the number of generated tests that are classified as ``Label`` by a closure specified using the ``l/1`` option.'
+			'``Labels`` argument' - 'List of pairs ``Label-N`` where ``N`` is the number of generated tests that are classified as ``Label`` by a closure specified using the ``l/1`` option.',
+			'``broken(Why,Culprit)`` result' - 'This result signals a broken setup. For example, an invalid template, a broken pre-condition or label goal, or broken test generation.'
 		]
 	]).
 
@@ -1886,21 +1887,16 @@
 			Result = error(Error, _)
 		).
 
-	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                       failed(Goal, Seed)).
-	quick_check_error_reified(quick_check_error(error(Exception,_), Goal, _, Seed),       error(Exception, Goal, Seed)).
-	quick_check_error_reified(quick_check_error(Exception, Goal, _, Seed),                error(Exception, Goal, Seed)).
-	quick_check_error_reified(quick_check_error(generate_test_error(_), Exception),       error(generate_test_error, Exception)).
-	quick_check_error_reified(quick_check_error(generate_test_failure(_), Culprit),       error(generate_test_failure, Culprit)).
-	quick_check_error_reified(quick_check_error(label_goal_error(error(Exception,_)), Culprit), Result) :-
-		quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit), Result).
-	quick_check_error_reified(quick_check_error(label_goal_error(Exception), Culprit),    error(Exception, Culprit)).
-	quick_check_error_reified(quick_check_error(label_goal_failure, Culprit),             error(label_goal_failure, Culprit)).
-	quick_check_error_reified(quick_check_error(pre_condition_error(error(Exception,_)), Culprit), Result) :-
-		quick_check_error_reified(quick_check_error(pre_condition_error(Exception), Culprit), Result).
-	quick_check_error_reified(quick_check_error(pre_condition_error(Exception), Culprit), error(Exception, Culprit)).
-	quick_check_error_reified(quick_check_error(pre_condition_always_fails, Culprit),     error(pre_condition_always_fails, Culprit)).
-	quick_check_error_reified(quick_check_error(error(Exception, _), Culprit),            error(Exception, Culprit)).
-	quick_check_error_reified(quick_check_error(Exception, Culprit),                      error(Exception, Culprit)).
+	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                   failed(Goal, Seed)).
+	quick_check_error_reified(quick_check_error(error(Error,_), Goal, _, Seed),       error(Error, Goal, Seed)).
+	quick_check_error_reified(quick_check_error(Error, Goal, _, Seed),                error(Error, Goal, Seed)).
+	quick_check_error_reified(quick_check_broken(generate_test_error(_), Error),       broken(generate_test_error, Error)).
+	quick_check_error_reified(quick_check_broken(generate_test_failure(_), Culprit),   broken(generate_test_failure, Culprit)).
+	quick_check_error_reified(quick_check_broken(label_goal_error(_), Error),          broken(label_goal_error, Error)).
+	quick_check_error_reified(quick_check_broken(label_goal_failure(Culprit)),         broken(label_goal_failure, Culprit)).
+	quick_check_error_reified(quick_check_broken(pre_condition_error(_), Error),       broken(pre_condition_error, Error)).
+	quick_check_error_reified(quick_check_broken(pre_condition_always_fails(Culprit)), broken(pre_condition_always_fails, Culprit)).
+	quick_check_error_reified(quick_check_broken(template_error(_), Error),           broken(template_error, Error)).
 
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
@@ -1917,7 +1913,7 @@
 
 	:- meta_predicate(run_quick_check_tests(::, ::, *, *, *)).
 	run_quick_check_tests(Template, Options, Seed, Discarded, Labels) :-
-		catch(check(callable, Template), Error, throw(quick_check_error(Error,Template))),
+		catch(check(callable, Template), Error, throw(quick_check_broken(template_error(Template), Error))),
 		memberchk(n(N), Options),
 		memberchk(s(MaxShrinks), Options),
 		memberchk(ec(EdgeCases), Options),
@@ -1958,9 +1954,9 @@
 	label_test(Closure-Original, Arguments, Labels0, Labels) :-
 		append(Arguments, [TestLabels], FullArguments),
 		Goal =.. [call, Closure| FullArguments],
-		(	catch(Goal, Error, throw(quick_check_error(label_goal_error(Error), Original))) ->
+		(	catch(Goal, Error, throw(quick_check_broken(label_goal_error(Original), Error))) ->
 			count_labels(TestLabels, Labels0, Labels)
-		;	throw(quick_check_error(label_goal_failure, Original))
+		;	throw(quick_check_broken(label_goal_failure(Original)))
 		).
 
 	% support label closures returning a single test label or a list of test labels
@@ -2043,14 +2039,14 @@
 			Predicate =.. [Name| Arguments],
 			Goal =.. [Operator, Entity, Predicate],
 			Condition =.. [call, Closure| Arguments],
-		(	catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))) ->
+		(	catch(Condition, Error, throw(quick_check_broken(pre_condition_error(Original), Error))) ->
 			!
 		;	verbose_report_quick_check_test(Verbose, Goal, Template, discarded, information),
 			fail
 		),
 		Discarded is Discarded0 + R.
 	generate_test(_-Original, _N, _Template, _Entity, _Operator, _Name, _Types, _Arguments, _ArgumentsCopy, _Test, _EdgeCases, _Verbose, _Discarded0, _Discarded, _Goal) :-
-		throw(quick_check_error(pre_condition_always_fails, Original)).
+		throw(quick_check_broken(pre_condition_always_fails(Original))).
 
 	% return, along the generated arguments, a copy of those arguments so that
 	% we can check that the property being tested don't further instantiates
@@ -2061,10 +2057,10 @@
 		(	catch(
 				generate_arbitrary_argument(Type, Argument, ArgumentCopy, Test, EdgeCases),
 				Error,
-				throw(quick_check_error(generate_test_error(Template),Error))
+				throw(quick_check_broken(generate_test_error(Template), Error))
 			) ->
 			true
-		;	throw(quick_check_error(generate_test_failure(Template),Type))
+		;	throw(quick_check_broken(generate_test_failure(Template), Type))
 		),
 		generate_arbitrary_arguments(Types, Arguments, ArgumentsCopy, Test, EdgeCases, Template).
 
@@ -2132,7 +2128,7 @@
 		(	Count < MaxShrinks ->
 			(	shrink_goal(Types, Goal, SmallArguments, Small),
 				Condition =.. [call, Closure| SmallArguments],
-				catch(Condition, Error, throw(quick_check_error(pre_condition_error(Error), Original))),
+				catch(Condition, Error, throw(quick_check_error(pre_condition_error(Original), Error))),
 				catch(\+ Small, _, fail) ->
 				verbose_report_quick_check_test(Verbose, Small, Template, shrinked, warning),
 				Next is Count + 1,

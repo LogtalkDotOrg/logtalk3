@@ -109,6 +109,9 @@ in the `listp` and `varlistp` library protocols.
 Tools
 -----
 
+* CHANGED: The `lgtunit::quick_check/3` predicate to report a `broken/2`
+reified result when the user-defined testing setup is broken.
+
 * CHANGED: The `lgtunit` tool code coverage report format to enable reporting
 all test object parameterizations and files.
 

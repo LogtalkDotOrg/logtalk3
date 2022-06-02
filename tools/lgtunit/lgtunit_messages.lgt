@@ -22,9 +22,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 5:4:0,
+		version is 6:0:0,
 		author is 'Paulo Moura',
-		date is 2022-06-01,
+		date is 2022-06-02,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -160,23 +160,22 @@
 		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
 		['starting seed: ~w'-[Seed], nl].
 
-	message_tokens(quick_check_error(generate_test_error(Template), Error)) -->
+	message_tokens(quick_check_broken(generate_test_error(Template), Error)) -->
 		['quick check test generation error for template: ~q'-[Template], nl, '  ~q'-[Error], nl].
-	message_tokens(quick_check_error(generate_test_failure(Template), Type)) -->
+	message_tokens(quick_check_broken(generate_test_failure(Template), Type)) -->
 		['quick check test generation failure for template: ~q'-[Template], nl, '  ~q'-[Type], nl].
-	message_tokens(quick_check_error(label_goal_error(error(Error,_)), Label)) -->
-		message_tokens(quick_check_error(label_goal_error(Error), Label)).
-	message_tokens(quick_check_error(label_goal_error(Error), Label)) -->
+
+	message_tokens(quick_check_broken(label_goal_error(Label), Error)) -->
 		['quick check error using label closure: ~w'-[Label], nl, '  ~q'-[Error], nl].
-	message_tokens(quick_check_error(label_goal_failure, Label)) -->
+	message_tokens(quick_check_broken(label_goal_failure(Label))) -->
 		['quick check label closure fails: ~w'-[Label], nl].
-	message_tokens(quick_check_error(pre_condition_error(error(Error,_)), Condition)) -->
-		message_tokens(quick_check_error(pre_condition_error(Error), Condition)).
-	message_tokens(quick_check_error(pre_condition_error(Error), Condition)) -->
+
+	message_tokens(quick_check_broken(pre_condition_error(Condition), Error)) -->
 		['quick check error using pre-condition closure: ~w'-[Condition], nl, '  ~q'-[Error], nl].
-	message_tokens(quick_check_error(pre_condition_always_fails, Condition)) -->
+	message_tokens(quick_check_broken(pre_condition_always_fails(Condition))) -->
 		['quick check pre-condition closure fails: ~w'-[Condition], nl].
-	message_tokens(quick_check_error(Error, Template)) -->
+
+	message_tokens(quick_check_broken(template_error(Template), Error)) -->
 		['quick check error using template: ~w'-[Template], nl, '  ~q'-[Error], nl].
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
