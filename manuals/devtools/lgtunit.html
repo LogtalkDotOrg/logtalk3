@@ -610,7 +610,7 @@ before generating random tests (default is <code class="docutils literal notrans
 <li><p><code class="docutils literal notranslate"><span class="pre">pc/1</span></code>: pre-condition closure for generated tests (extended with
 the test arguments; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">l/1</span></code>: label closure for classifying the generated tests (extended
-with the test arguments plus the labels argument; no default).</p></li>
+with the test arguments plus the label argument; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">v/1</span></code>: boolean option for verbose reporting of generated random
 tests (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
 </ul>
@@ -620,7 +620,7 @@ and replaced with the default value if applicable. The
 <code class="docutils literal notranslate"><span class="pre">quick_check/1-2</span></code> predicates print the test results. The
 <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">Seed)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">Seed)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code></p></li>

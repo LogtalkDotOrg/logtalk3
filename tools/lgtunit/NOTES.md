@@ -434,7 +434,7 @@ The following options are supported:
 - `ec/1`: boolean option deciding if type edge cases are tested before generating random tests (default is `true`).
 - `rs/1`: starting seed to be used when generating the random tests (no default).
 - `pc/1`: pre-condition closure for generated tests (extended with the test arguments; no default).
-- `l/1`: label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default).
+- `l/1`: label closure for classifying the generated tests (extended with the test arguments plus the label argument; no default).
 - `v/1`: boolean option for verbose reporting of generated random tests (default is `false`).
 
 The `quick_check/1` predicate uses the default option values. When using the
@@ -442,7 +442,7 @@ The `quick_check/1` predicate uses the default option values. When using the
 the default value if applicable. The `quick_check/1-2` predicates print the
 test results. The `quick_check/3` predicate returns results in reified form:
 
-- `passed(Seed, Discarded, Labels)`,
+- `passed(Seed, Discarded, Labels)`
 - `failed(Goal, Seed)`
 - `error(Error, Goal, Seed)`
 - `broken(Why, Culprit)`

@@ -482,7 +482,7 @@ The following options are supported:
 -  ``pc/1``: pre-condition closure for generated tests (extended with
    the test arguments; no default).
 -  ``l/1``: label closure for classifying the generated tests (extended
-   with the test arguments plus the labels argument; no default).
+   with the test arguments plus the label argument; no default).
 -  ``v/1``: boolean option for verbose reporting of generated random
    tests (default is ``false``).
 
@@ -492,7 +492,7 @@ and replaced with the default value if applicable. The
 ``quick_check/1-2`` predicates print the test results. The
 ``quick_check/3`` predicate returns results in reified form:
 
--  ``passed(Seed, Discarded, Labels)``,
+-  ``passed(Seed, Discarded, Labels)``
 -  ``failed(Goal, Seed)``
 -  ``error(Error, Goal, Seed)``
 -  ``broken(Why, Culprit)``
