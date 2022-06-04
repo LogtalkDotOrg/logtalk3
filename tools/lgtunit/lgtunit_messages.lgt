@@ -19,6 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% define a flag to allow the logtalk_tester script to pass the
+% option to suppress the test file and directory path prefix
+:- initialization(
+	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)])
+).
+
+
 :- category(lgtunit_messages).
 
 	:- info([
@@ -326,7 +333,7 @@
 		).
 
 	suppress_path_prefix(Path, ShortPath) :-
-		current_logtalk_flag(suppress_path_prefix, Prefix),
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
 		(	atom_concat(Prefix, ShortPath, Path) ->
 			true
 		;	ShortPath = Path
