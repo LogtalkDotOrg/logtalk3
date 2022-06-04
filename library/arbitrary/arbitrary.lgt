@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:22:0,
+		version is 2:23:0,
 		author is 'Paulo Moura',
-		date is 2022-05-20,
+		date is 2022-06-04,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -52,7 +52,7 @@
 
 	:- uses(integer, [between/3 as for/3]).
 	:- uses(list, [append/3, length/2]).
-	:- uses(fast_random, [between/3, maybe/2, member/2, permutation/2, random/1]).
+	:- uses(fast_random, [between/3, maybe/0, maybe/2, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
 	:- multifile(arbitrary/1).
@@ -257,13 +257,13 @@
 		arbitrary(atom(ascii_identifier), Arbitrary).
 
 	arbitrary(object_identifier, Arbitrary) :-
-		arbitrary(types([atom(ascii_identifier), compound]), Arbitrary).
+		arbitrary(callable, Arbitrary).
 
 	arbitrary(protocol_identifier, Arbitrary) :-
 		arbitrary(atom(ascii_identifier), Arbitrary).
 
 	arbitrary(category_identifier, Arbitrary) :-
-		arbitrary(types([atom(ascii_identifier), compound]), Arbitrary).
+		arbitrary(callable, Arbitrary).
 
 	:- if(current_logtalk_flag(modules, supported)).
 
@@ -275,7 +275,10 @@
 	% events
 
 	arbitrary(event, Arbitrary) :-
-		member(Arbitrary, [before, after]).
+		(	maybe ->
+			Arbitrary = before
+		;	Arbitrary = after
+		).
 
 	% Prolog base types
 
@@ -305,7 +308,10 @@
 		atom_codes(Arbitrary, Codes).
 
 	arbitrary(number, Arbitrary) :-
-		arbitrary(types([integer, float]), Arbitrary).
+		(	maybe ->
+			arbitrary(integer, Arbitrary)
+		;	arbitrary(float, Arbitrary)
+		).
 
 	arbitrary(integer, Arbitrary) :-
 		between(-1000, 1000, Arbitrary).
@@ -321,7 +327,10 @@
 		Arbitrary =.. [Functor| Arguments].
 
 	arbitrary(callable, Arbitrary) :-
-		arbitrary(types([atom(ascii_identifier), compound]), Arbitrary).
+		(	maybe ->
+			arbitrary(non_empty_atom(ascii_identifier), Arbitrary)
+		;	arbitrary(compound, Arbitrary)
+		).
 
 	arbitrary(ground, Arbitrary) :-
 		arbitrary(types([atom, integer, float, ground(compound), ground(list)]), Arbitrary).
@@ -340,7 +349,10 @@
 	% atom derived types
 
 	arbitrary(boolean, Arbitrary) :-
-		member(Arbitrary, [true, false]).
+		(	maybe ->
+			Arbitrary = true
+		;	Arbitrary = false
+		).
 
 	arbitrary(character, Arbitrary) :-
 		% ascii_full
@@ -540,35 +552,41 @@
 		arbitrary(types([predicate_indicator, non_terminal_indicator]), Arbitrary).
 
 	arbitrary(clause, Arbitrary) :-
-		member(Kind, [fact, rule]),
-		(	Kind == fact ->
-			arbitrary(callable, Arbitrary)
-		;	% Kind == rule,
+		arbitrary(callable, ArbitraryHead),
+		(	maybe ->
+			% fact
+			Arbitrary = ArbitraryHead
+		;	% rule,
 			Arbitrary = (ArbitraryHead :- ArbitraryBody),
-			arbitrary(callable, ArbitraryHead),
 			arbitrary(callable, ArbitraryBody)
 		).
 
 	arbitrary(clause_or_partial_clause, Arbitrary) :-
-		member(Kind, [fact, rule]),
-		(	Kind == fact ->
-			arbitrary(callable, Arbitrary)
-		;	% Kind == rule,
+		arbitrary(callable, ArbitraryHead),
+		(	maybe ->
+			% fact
+			Arbitrary = ArbitraryHead
+		;	% rule
+			maybe ->
+			% partial clause
+			Arbitrary = (ArbitraryHead :- _)
+		;	% clause
 			Arbitrary = (ArbitraryHead :- ArbitraryBody),
-			arbitrary(callable, ArbitraryHead),
-			arbitrary(types([var,callable]), ArbitraryBody)
+			arbitrary(callable, ArbitraryBody)
 		).
 
 	arbitrary(grammar_rule, Arbitrary) :-
-		member(Kind, [push_back, simple]),
-		(	Kind == push_back ->
+		arbitrary(callable, ArbitraryHead),
+		(	maybe ->
+			arbitrary(list, ArbitraryBody)
+		;	arbitrary(callable, ArbitraryBody)
+		),
+		(	maybe ->
+			% push_back
 			Arbitrary = (ArbitraryHead, ArbitraryList --> ArbitraryBody),
-			arbitrary(callable, ArbitraryHead),
-			arbitrary(list, ArbitraryList),
-			arbitrary(types([list,callable]), ArbitraryBody)
-		;	Arbitrary = (ArbitraryHead --> ArbitraryBody),
-			arbitrary(callable, ArbitraryHead),
-			arbitrary(types([list,callable]), ArbitraryBody)
+			arbitrary(list, ArbitraryList)
+		;	% simple
+			Arbitrary = (ArbitraryHead --> ArbitraryBody)
 		).
 
 	arbitrary(list, Arbitrary) :-
@@ -578,18 +596,20 @@
 		arbitrary(non_empty_list(types([var,atom,integer,float])), Arbitrary).
 
 	arbitrary(partial_list, Arbitrary) :-
-		member(Type, [var, list]),
-		(	Type == var ->
+		(	maybe ->
+			% var
 			Arbitrary = _
-		;	arbitrary(list, List),
+		;	% open list
+			arbitrary(list, List),
 			append(List, _, Arbitrary)
 		).
 
 	arbitrary(list_or_partial_list, Arbitrary) :-
-		member(Type, [list, partial_list]),
-		(	Type == list ->
+		(	maybe ->
+			% list
 			arbitrary(list, Arbitrary)
-		;	arbitrary(partial_list, Arbitrary)
+		;	% partial list
+			arbitrary(partial_list, Arbitrary)
 		).
 
 	arbitrary(list(Type), Arbitrary) :-
@@ -664,7 +684,10 @@
 		member(Arbitrary, Set).
 
 	arbitrary(var_or(Type), Arbitrary) :-
-		arbitrary(types([var, Type]), Arbitrary).
+		(	maybe ->
+			arbitrary(var, Arbitrary)
+		;	arbitrary(Type, Arbitrary)
+		).
 
 	arbitrary(ground(Type), Arbitrary) :-
 		Type \== var,

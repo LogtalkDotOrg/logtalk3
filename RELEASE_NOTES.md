@@ -91,6 +91,11 @@ Unicode code points.
 * IMPROVED: The `expecteds` and `optionals` libraries tests to use explicit
 assertions.
 
+* IMPROVED: The `arbitrary` library performance for several types. 
+
+* FIXED: The `arbitrary` library to not generate empty atoms for the `callable`
+type.
+
 * FIXED: The `arbitrary` library category to not generate surrogate code points
 as edge cases for the `unicode_full` character set.
 
