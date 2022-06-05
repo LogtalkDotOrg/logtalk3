@@ -196,7 +196,8 @@ Tests
 * ADDED: Additional tests for the database methods that take a clause
 reference. 
 
-* ADDED: Additional test for the standard `char_code/2` built-in predicate.
+* ADDED: Additional tests for the ISO Prolog standard `char_code/2`,
+`current_op/3`, and `op/3` built-in predicates.
 
 * ADDED: Additional tests for the `atomic_list_concat/2-3` and
 `atomic_concat/3` predicates.

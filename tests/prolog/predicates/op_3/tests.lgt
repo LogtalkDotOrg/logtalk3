@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-09-14,
+		date is 2022-06-05,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -155,5 +155,14 @@
 
 	test(sics_op_3_30, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, [a,(',')])}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_op_3_31, true) :-
+		{op(0, fx, foo)}.
+
+	test(lgt_op_3_32, true) :-
+		{op(0, fx, bar)},
+		{\+ current_op(_, _, bar)}.
 
 :- end_object.

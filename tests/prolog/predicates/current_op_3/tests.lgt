@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-09-25,
+		date is 2022-06-05,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -225,6 +225,19 @@
 		% the standard specifies a domain_error(operator_priority,a) for this case
 		% but domain errors imply that the type is correct, which is not the case here
 		{current_op(a, _, _)}.
+
+	test(lgt_current_op_3_50, false) :-
+		{current_op(0, _, _)}.
+
+	test(lgt_current_op_3_51, false) :-
+		{	op(0, xfx, foo),
+			current_op(0, _, _)
+		}.
+
+	test(lgt_current_op_3_52, false) :-
+		{	op(0, xfx, foo),
+			current_op(0, xfx, foo)
+		}.
 
 	infix(yfx).
 	infix(xfx).
