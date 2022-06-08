@@ -402,9 +402,9 @@ point for user interaction. The commands available are as follows:
    reads invocation number and continues execution until a port is
    reached for that number
 ``z`` — zap
-   reads port name and continues execution until that port is reached
-   reads negated port name and continues execution until a port other
-   than the negated port is reached
+   reads either a port name and continues execution until that port is
+   reached or a negated port name and continues execution until a port
+   other than the negated port is reached
 ``i`` — ignore
    ignores goal, assumes that it succeeded; valid at call and redo ports
 ``f`` — fail
