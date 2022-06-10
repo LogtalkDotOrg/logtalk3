@@ -149,7 +149,7 @@ Support
 
 Support channels include:
 
-* [Community discussion forums](https://forums.logtalk.org/)
+* [Community discussion forum](https://github.com/LogtalkDotOrg/logtalk3/discussions)
 * [Community live chat room](https://gitter.im/LogtalkDotOrg/logtalk3)
 * [Support contracts](https://logtalk.org/support_contracts.html)
 
