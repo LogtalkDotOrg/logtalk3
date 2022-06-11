@@ -11,7 +11,15 @@ keywords:
   - "declarative-language"
   - "declarative-programming"
 license: Apache-2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this software, please cite both the handbook and the software itself."
+preferred-citation:
+  authors:
+    - family-names: Moura
+      given-names: Paulo
+  title: "The Logtalk Handbook"
+  edition = "Release 3.56.0"
+  type: manual
+  url: https://logtalk.org/papers/TheLogtalkHandbook-3.56.0.pdf
 repository-code: "https://github.com/LogtalkDotOrg/logtalk3"
 title: "Logtalk"
 version: 3.56.0
