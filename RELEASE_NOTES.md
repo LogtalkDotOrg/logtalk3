@@ -25,7 +25,10 @@ RELEASE NOTES
 3.57.0 - July ??, 2022
 ======================
 
+Library
+-------
 
+* ADDED: Additional tests for the `timeout` library.
 
 
 3.56.0 - June 9, 2022

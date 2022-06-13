@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-02-10,
+		date is 2022-06-13,
 		comment is 'Unit tests for the "timeout" library.'
 	]).
 
@@ -55,6 +55,12 @@
 	test(call_with_timeout_2_06, ball(e)) :-
 		call_with_timeout(throw(e), 0.1).
 
+	test(call_with_timeout_2_07, ball(error(_, _))) :-
+		call_with_timeout(_, 0.1).
+
+	test(call_with_timeout_2_08, ball(error(_, _))) :-
+		call_with_timeout(42, 0.1).
+
 	% call_with_timeout/3 tests
 
 	test(call_with_timeout_3_01, true(Result == timeout)) :-
@@ -74,6 +80,12 @@
 
 	test(call_with_timeout_3_06, true(Result == error(e))) :-
 		call_with_timeout(throw(e), 0.1, Result).
+
+	test(call_with_timeout_3_07, subsumes(error(_), Result)) :-
+		call_with_timeout(_, 0.1, Result).
+
+	test(call_with_timeout_3_08, subsumes(error(_), Result)) :-
+		call_with_timeout(42, 0.1, Result).
 
 	% auxiliary predicates
 
