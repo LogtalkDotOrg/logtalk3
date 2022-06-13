@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:43:0,
+		version is 0:44:0,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2022-06-13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -105,6 +105,13 @@
 			'the flag name and the single argument is the flag value.'-[], nl, nl
 		].
 
+	error(domain_error(directive, '.'/2)) -->
+		[	'The common Prolog top-level shortcut for loading files should never'-[], nl,
+			'be used in source files, including as directives. To fix this error,'-[], nl,
+			'either move the loading of the files to your application loader file'-[], nl,
+			'or use an include/1 directive if the contents of those files should'-[], nl,
+			'be part of an object or category containing the directive.'-[], nl, nl
+		].
 	error(domain_error(directive, (',')/2)) -->
 		[	'Use individual directives instead of conjunction of directives'-[], nl,
 			'to fix this error.'-[], nl, nl

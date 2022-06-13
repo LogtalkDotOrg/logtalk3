@@ -30,6 +30,12 @@ Library
 
 * ADDED: Additional tests for the `timeout` library.
 
+Tools
+-----
+
+* UPDATED: The `tutor` tool to give specific advise when the user is trying to
+use the common Prolog top-level shortcut for loading files as a directive.
+
 
 3.56.0 - June 9, 2022
 =====================
