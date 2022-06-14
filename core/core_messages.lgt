@@ -22,7 +22,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:109:0,
+		version is 1:110:0,
 		author is 'Paulo Moura',
 		date is 2022-06-14,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
@@ -705,12 +705,12 @@
 
 	% suspicious tests in if-then-else and soft-cut control constructs
 
-	message_tokens(suspicious_if_then_else_test(File, Lines, Type, Entity, _Head, _IfThenElse)) -->
-		['If-then-else test is a unification between a variable and a ground term'-[], nl],
+	message_tokens(suspicious_if_then_else_test(File, Lines, Type, Entity, _Head, Test)) -->
+		['If-then-else test is a unification between a variable and a ground term: ~q'-[Test], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(suspicious_soft_cut_test(File, Lines, Type, Entity, _Head, _SoftCut)) -->
-		['Soft-cut test is a unification between a variable and a ground term'-[], nl],
+	message_tokens(suspicious_soft_cut_test(File, Lines, Type, Entity, _Head, Test)) -->
+		['Soft-cut test is a unification between a variable and a ground term: ~q'-[Test], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% catch/3 goals that catch all exceptions

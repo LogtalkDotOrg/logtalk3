@@ -32,6 +32,8 @@ Logtalk compiler and runtime
 `Goal` when `otherwise/0` is a built-in predicate, printing a deprecated
 linter warning instead of warning about a missing else part.
 
+* IMPROVED: Linter warnings for the `(->)/2` and `(*->)/2` control constructs.
+
 Library
 -------
 
@@ -42,6 +44,9 @@ Tools
 
 * UPDATED: The `tutor` tool to give specific advise when the user is trying to
 use the common Prolog top-level shortcut for loading files as a directive.
+
+* UPDATED: The `tutor` tool for the use of deprecated `(->)/2` and `(*->)/2`
+programming idioms using a `otherwise/0` built-in predicate.
 
 
 3.56.0 - June 9, 2022
