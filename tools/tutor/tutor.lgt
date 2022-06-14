@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:44:0,
+		version is 0:45:0,
 		author is 'Paulo Moura',
-		date is 2022-06-13,
+		date is 2022-06-14,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -393,6 +393,10 @@
 	explain(deprecated_control_construct(_, _, _, _, _)) -->
 		[	'Code that uses deprecated control constructs will likely break when those'-[], nl,
 			'control constructs are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_construct(_, _, _, _, _, _)) -->
+		[	'Code that uses deprecated constructs may hinder portability.'-[], nl,
+			'Use the suggested alternative instead to fix this warning.'-[], nl, nl
 		].
 	explain(deprecated_directive(_, _, _, _, _)) -->
 		[	'Code that uses deprecated directives will likely break when those'-[], nl,

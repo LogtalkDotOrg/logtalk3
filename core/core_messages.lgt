@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:108:0,
+		version is 1:109:0,
 		author is 'Paulo Moura',
-		date is 2022-05-28,
+		date is 2022-06-14,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -639,8 +639,12 @@
 		['Deprecated compiler flag: ~w (renamed to ~w)'-[Flag, NewFlag], nl],
 		message_context(File, Lines).
 
-	message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Term)) -->
-		['Deprecated control construct: ~q'-[Term], nl],
+	message_tokens(deprecated_control_construct(File, Lines, Type, Entity, Construct)) -->
+		['Deprecated control construct: ~q'-[Construct], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(deprecated_construct(File, Lines, Type, Entity, Construct, Replacement)) -->
+		['Deprecated construct: ~q (compiled as ~q)'-[Construct, Replacement], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(deprecated_directive(File, Lines, Type, Entity, Directive)) -->

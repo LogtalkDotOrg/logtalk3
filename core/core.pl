@@ -12829,6 +12829,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_fix_disjunction_left_side'(DPred10, DPred1),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
+'$lgt_compile_body'('*->'(Pred1, Pred2), TPred2, DPred2, Ctx) :-
+	Pred1 == otherwise,
+	'$lgt_predicate_property'(otherwise, built_in),
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_construct(File, Lines, Type, Entity, '*->'(Pred1, Pred2), Pred2)
+		)
+	;	true
+	),
+	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
+
 '$lgt_compile_body'('*->'(Pred1, Pred2), _, _, Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	callable(Pred1),
@@ -12847,6 +12864,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_compile_body'(Pred1, TPred1, DPred1, Ctx),
+	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
+
+'$lgt_compile_body'((Pred1 -> Pred2), TPred2, DPred2, Ctx) :-
+	Pred1 == otherwise,
+	'$lgt_predicate_property'(otherwise, built_in),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_construct(File, Lines, Type, Entity, (Pred1 -> Pred2), Pred2)
+		)
+	;	true
+	),
 	'$lgt_compile_body'(Pred2, TPred2, DPred2, Ctx).
 
 '$lgt_compile_body'((Pred1 -> Pred2), _, _, Ctx) :-

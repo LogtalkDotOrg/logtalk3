@@ -25,6 +25,13 @@ RELEASE NOTES
 3.57.0 - July ??, 2022
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Compile `otherwise -> Goal` and `otherwise *-> Goal` constructs as
+`Goal` when `otherwise/0` is a built-in predicate, printing a deprecated
+linter warning instead of warning about a missing else part.
+
 Library
 -------
 
