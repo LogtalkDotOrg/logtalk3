@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:45:0,
+		version is 0:46:0,
 		author is 'Paulo Moura',
 		date is 2022-06-15,
 		comment is 'Registry handling predicates.'
@@ -572,6 +572,7 @@
 	default_option(checksum(true)).
 	default_option(checksig(false)).
 	default_option(save(installed)).
+	default_option(curl('')).
 
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
@@ -585,6 +586,8 @@
 		valid(boolean, Boolean).
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
+	valid_option(curl(Atom)) :-
+		atom(Atom).
 
 	% pinned registry handling
 
@@ -771,9 +774,10 @@
 		path_concat(ArchivesRegistriesRegistry, Basename, Archive0),
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesRegistriesRegistry),
+		^^option(curl(CurlExtraOptions), Options),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat(['curl -v -L -o "',    Archive, '" "', URL, '"'], Command)
-		;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+			atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
+		;	atomic_list_concat(['curl ', CurlExtraOptions, ' -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 		),
 		^^command(Command, registry_download_failed(Registry, URL)).
 

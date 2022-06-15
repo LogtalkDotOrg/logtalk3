@@ -46,6 +46,9 @@ Tools
 `.tar.gz` and `.tar.bz2` extensions. Also list in documentation all valid
 archive formats.
 
+* ADDED: Support to the `packs` tool for passing extra command-line options
+to `curl` (e.g. for use with pack registry servers requiring authentication).
+
 * UPDATED: The `tutor` tool to give specific advise when the user is trying to
 use the common Prolog top-level shortcut for loading files as a directive.
 

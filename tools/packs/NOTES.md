@@ -614,6 +614,7 @@ predicates that accept a list of options:
 - `force(Boolean)` (default is `false`)
 - `checksum(Boolean)` (default is `true`)
 - `checksig(Boolean)` (default is `false`)
+- `curl(Atom)` (extra command-line options; default is `''`)
 
 When using a `checksig(true)` option to check a pack signature, is strongly
 advised that you also use the `verbose(true)` option. For example:
@@ -622,6 +623,12 @@ advised that you also use the `verbose(true)` option. For example:
 
 Note that the public key used to sign the pack archive must be already present
 in your local system.
+
+Downloading pack archives may require passing extra command-line options to
+`curl` for e.g. authentication. For example, assume that a private token
+header must be used to access the download server:
+
+	| ?- packs::install(foo, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foobar42"')]).
 
 To uninstall a pack that you no longer need, use the `packs::uninstall/1-2`
 predicates. By default, only packs with no dependent packs can be uninstalled.

@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:49:1,
+		version is 0:50:0,
 		author is 'Paulo Moura',
 		date is 2022-06-15,
 		comment is 'Pack handling predicates.'
@@ -1491,9 +1491,10 @@
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
 			true
-		;	(	^^option(verbose(true), Options) ->
-				atomic_list_concat(['curl -v -L -o "',    Archive, '" "', URL, '"'], Command)
-			;	atomic_list_concat(['curl -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+		;	^^option(curl(CurlExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Archive))
 		).
@@ -1591,6 +1592,7 @@
 	default_option(checksum(true)).
 	default_option(checksig(false)).
 	default_option(save(installed)).
+	default_option(curl('')).
 
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
@@ -1604,5 +1606,7 @@
 		valid(boolean, Boolean).
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
+	valid_option(curl(Atom)) :-
+		atom(Atom).
 
 :- end_object.

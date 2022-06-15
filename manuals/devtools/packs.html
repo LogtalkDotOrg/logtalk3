@@ -707,6 +707,7 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 </ul>
 <p>When using a <code class="docutils literal notranslate"><span class="pre">checksig(true)</span></code> option to check a pack signature, is
 strongly advised that you also use the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option. For
@@ -716,6 +717,12 @@ example:</p>
 </div>
 <p>Note that the public key used to sign the pack archive must be already
 present in your local system.</p>
+<p>Downloading pack archives may require passing extra command-line options
+to <code class="docutils literal notranslate"><span class="pre">curl</span></code> for e.g. authentication. For example, assume that a private
+token header must be used to access the download server:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(foo, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [curl(<span class="s">&#39;--header &quot;PRIVATE-TOKEN: foobar42&quot;&#39;</span>)]).
+</pre></div>
+</div>
 <p>To uninstall a pack that you no longer need, use the
 <code class="docutils literal notranslate"><span class="pre">packs::uninstall/1-2</span></code> predicates. By default, only packs with no
 dependent packs can be uninstalled. You can print or get a list of the
