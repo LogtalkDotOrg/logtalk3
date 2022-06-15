@@ -625,10 +625,14 @@ Note that the public key used to sign the pack archive must be already present
 in your local system.
 
 Downloading pack archives may require passing extra command-line options to
-`curl` for e.g. authentication. For example, assume that a private token
-header must be used to access the download server:
+`curl` for authentication. A common solution is to use a personal access token.
+The details depend on the server software. For example:
 
-	| ?- packs::install(foo, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foobar42"')]).
+	| ?- packs::install(foo, bar, 1:1:2, [curl('--header "Authorization: token foo42"')]).
+
+or:
+
+	| ?- packs::install(foo, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foo42"')]).
 
 To uninstall a pack that you no longer need, use the `packs::uninstall/1-2`
 predicates. By default, only packs with no dependent packs can be uninstalled.
