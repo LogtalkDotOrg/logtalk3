@@ -37,6 +37,8 @@ linter warning instead of warning about a missing else part.
 Library
 -------
 
+* ADDED: Support for LVM to the `timeout` library.
+
 * ADDED: Additional tests for the `timeout` library.
 
 Tools

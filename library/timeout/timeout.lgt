@@ -22,9 +22,9 @@
 :- object(timeout).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2021-12-24,
+		date is 2022-06-15,
 		comment is 'Predicates for calling goal with a time limit.',
 		remarks is [
 			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.'
@@ -200,6 +200,24 @@
 				)
 			;	Result = fail
 			).
+
+	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+
+		call_with_timeout(Goal, Time) :-
+			call_with_timeout_aux(Goal, Goal, Time).
+
+		:- meta_predicate(call_with_timeout_aux(0, *, *)).
+		call_with_timeout_aux(TGoal, Goal, Time) :-
+			catch(user::call_with_timeout(TGoal, Time), Error, true),
+			(	var(Error) ->
+				true
+			;	Error = timeout(_) ->
+				throw(timeout(Goal))
+			;	throw(Error)
+			).
+
+		call_with_timeout(Goal, Time, Result) :-
+			user::call_with_timeout(Goal, Time, Result).
 
 	:- endif.
 

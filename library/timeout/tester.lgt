@@ -23,7 +23,8 @@
 	current_logtalk_flag(prolog_dialect, Dialect),
 	(	Dialect == b; Dialect == eclipse; Dialect == sicstus;
 		Dialect == swi; Dialect == trealla; Dialect == xsb;
-		Dialect == yap
+		Dialect == yap;
+		Dialect == lvm, predicate_property(call_with_timeout(_,_), built_in)
 	)
 )).
 
