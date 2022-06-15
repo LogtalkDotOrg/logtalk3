@@ -42,11 +42,17 @@ Library
 Tools
 -----
 
+* ADDED: Support to the `packs` tool for registry and pack archives using
+`.tar.gz` and `.tar.bz2` extensions. Also list in documentation all valid
+archive formats.
+
 * UPDATED: The `tutor` tool to give specific advise when the user is trying to
 use the common Prolog top-level shortcut for loading files as a directive.
 
 * UPDATED: The `tutor` tool for the use of deprecated `(->)/2` and `(*->)/2`
 programming idioms using a `otherwise/0` built-in predicate.
+
+* FIXED: Typo in two `packs` tool warning messages format.
 
 
 3.56.0 - June 9, 2022

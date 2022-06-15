@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:44:0,
+		version is 0:45:0,
 		author is 'Paulo Moura',
-		date is 2022-02-26,
+		date is 2022-06-15,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -236,7 +236,7 @@
 		decompose_file_name(URL, _, _, Extension),
 		(	Extension == '.git' ->
 			HowDefined = git
-		;	^^supported_archive(Extension) ->
+		;	^^supported_url_archive(URL) ->
 			HowDefined = archive
 		;	HowDefined = directory
 		),
@@ -320,7 +320,7 @@
 				fail
 			;	clone(Registry, URL, Path, Options)
 			)
-		;	^^supported_archive(Extension) ->
+		;	^^supported_url_archive(URL) ->
 			download(Registry, URL, Archive, Options),
 			uncompress(Registry, Archive, Path, Options)
 		;	atom_concat(Name, Extension, Archive),
@@ -721,21 +721,21 @@
 	lint_check_clone_url(Registry, URL):-
 		decompose_file_name(URL, _, Name, Extension),
 		(	Extension \== '.git' ->
-			print_message(warning, packs, 'Git cloning URL should end with ".git"!'),
+			print_message(warning, packs, @'Git cloning URL should end with ".git"!'),
 			fail
 		;	Name == Registry ->
 			true
-		;	print_message(warning, packs, 'Git repos should have the same name as the registry!'),
+		;	print_message(warning, packs, @'Git repos should have the same name as the registry!'),
 			fail
 		).
 	lint_check_archive_url(URL) :-
-		decompose_file_name(URL, _, _, Extension),
-		(	^^supported_archive(Extension) ->
+		(	^^supported_url_archive(URL) ->
 			true
-		;	Extension == '' ->
-			print_message(warning, packs, 'Archive extension missing!'),
+		;	decompose_file_name(URL, _, _, Extension),
+			Extension == '' ->
+			print_message(warning, packs, @'Archive extension missing!'),
 			fail
-		;	print_message(warning, packs, 'Archive extension not supported!'),
+		;	print_message(warning, packs, @'Archive extension not supported!'),
 			fail
 		).
 

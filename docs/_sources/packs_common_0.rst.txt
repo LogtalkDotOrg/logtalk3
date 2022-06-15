@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:23:0
-| **Date:** 2022-02-26
+| **Version:** 0:24:0
+| **Date:** 2022-06-15
 
 | **Compilation flags:**
 |    ``static``
@@ -504,6 +504,29 @@ True iff the archive format is supported.
 |    ``supported_archive(Extension)``
 | **Mode and number of proofs:**
 |    ``supported_archive(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="supported_url_archive/1"> </div>
+
+.. index:: supported_url_archive/1
+.. _packs_common/0::supported_url_archive/1:
+
+``supported_url_archive/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff the URL archive is supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_url_archive(URL)``
+| **Mode and number of proofs:**
+|    ``supported_url_archive(+atom)`` - ``zero_or_one``
 
 
 ------------

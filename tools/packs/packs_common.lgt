@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:23:0,
+		version is 0:24:0,
 		author is 'Paulo Moura',
-		date is 2022-02-26,
+		date is 2022-06-15,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -168,6 +168,13 @@
 		argnames is ['Extension']
 	]).
 
+	:- protected(supported_url_archive/1).
+	:- mode(supported_url_archive(+atom), zero_or_one).
+	:- info(supported_url_archive/1, [
+		comment is 'True iff the URL archive is supported.',
+		argnames is ['URL']
+	]).
+
 	:- protected(decode_url_spaces/2).
 	:- mode(decode_url_spaces(+atom, -atom), one).
 	:- info(decode_url_spaces/2, [
@@ -280,12 +287,15 @@
 	tar_command(unknown, tar).
 
 	supported_archive('.zip').
-	supported_archive('.gz').
-	supported_archive('.bz2').
 	supported_archive('.tgz').
-	supported_archive('.tbz').
-	supported_archive('.tz2').
+	supported_archive('.tar.gz').
 	supported_archive('.tbz2').
+	supported_archive('.tar.bz2').
+
+	supported_url_archive(URL) :-
+		supported_archive(Extension),
+		sub_atom(URL, _, _, 0, Extension),
+		!.
 
 	readme_file_path(Directory, ReadMeFile) :-
 		readme_file_name(Basename),

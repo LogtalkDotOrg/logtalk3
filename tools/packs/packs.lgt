@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:48:1,
+		version is 0:49:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2022-06-15,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -555,11 +555,11 @@
 		(	Extension = '',
 			sub_atom(URL, 0, _, _, 'file://') ->
 			install_pack_directory(Registry, Pack, Version, URL, Options)
-		;	\+ ^^supported_archive(Extension) ->
-			atom_concat(Name, Extension, Archive),
+		;	^^supported_url_archive(URL) ->
+			install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options)
+		;	atom_concat(Name, Extension, Archive),
 			print_message(error, packs, unsupported_archive_format(Archive)),
 			fail
-		;	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options)
 		).
 
 	install_pack_directory(Registry, Pack, Version, URL, Options) :-
@@ -1168,16 +1168,16 @@
 		;	print_message(warning, packs, 'Unknown pack status: ~q'+[Status]),
 			fail
 		),
-		decompose_file_name(URL, _, Name, Extension),
+		decompose_file_name(URL, _, Name, _),
 		(	sub_atom(URL, 0, _, _, 'file://') ->
 			(	Name == Pack ->
 				true
-			;	^^supported_archive(Extension) ->
+			;	^^supported_url_archive(URL) ->
 				true
 			;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL]),
 			fail
 			)
-		;	^^supported_archive(Extension) ->
+		;	^^supported_url_archive(URL) ->
 			true
 		;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL]),
 			fail

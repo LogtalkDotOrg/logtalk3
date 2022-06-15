@@ -536,9 +536,15 @@ object would be:</p>
 </pre></div>
 </div>
 <p>The pack sources must be available either as a local directory (when
-using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or for downloading as a <code class="docutils literal notranslate"><span class="pre">.zip</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code>,
-or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code> archive. The checksum for the archive must use the
-SHA-256 hash algorithm (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>). The pack may optionally be signed.</p>
+using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or for downloading as a supported archive. The
+checksum for the archive must use the SHA-256 hash algorithm
+(<code class="docutils literal notranslate"><span class="pre">sha256</span></code>). The pack may optionally be signed. Supported archive
+formats and extensions are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.zip</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.tgz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.tbz2</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code></p></li>
+</ul>
 <p>The pack sources should contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> (or <code class="docutils literal notranslate"><span class="pre">loader.logtalk</span></code>) files. The path to the
 <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is installed or updated. It

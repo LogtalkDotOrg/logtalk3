@@ -461,9 +461,14 @@ object would be:
    :- end_object.
 
 The pack sources must be available either as a local directory (when
-using a ``file://`` URL) or for downloading as a ``.zip``, ``.tar.gz``,
-or ``.tar.bz2`` archive. The checksum for the archive must use the
-SHA-256 hash algorithm (``sha256``). The pack may optionally be signed.
+using a ``file://`` URL) or for downloading as a supported archive. The
+checksum for the archive must use the SHA-256 hash algorithm
+(``sha256``). The pack may optionally be signed. Supported archive
+formats and extensions are:
+
+-  ``.zip``
+-  ``.tgz``, ``.tar.gz``
+-  ``.tbz2``, ``.tar.bz2``
 
 The pack sources should contain ``LICENSE``, ``README.md``, and
 ``loader.lgt`` (or ``loader.logtalk``) files. The path to the
