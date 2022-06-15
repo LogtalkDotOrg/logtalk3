@@ -52,6 +52,8 @@ use the common Prolog top-level shortcut for loading files as a directive.
 * UPDATED: The `tutor` tool for the use of deprecated `(->)/2` and `(*->)/2`
 programming idioms using a `otherwise/0` built-in predicate.
 
+* FIXED: The `packs::install/1-2` tool predicates to use all default options.
+
 * FIXED: Typo in two `packs` tool warning messages format.
 
 

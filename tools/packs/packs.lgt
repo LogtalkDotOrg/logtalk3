@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:49:0,
+		version is 0:49:1,
 		author is 'Paulo Moura',
 		date is 2022-06-15,
 		comment is 'Pack handling predicates.'
@@ -528,7 +528,8 @@
 			check_dependencies(Dependencies, Installs),
 			check_portability(Portability),
 			install_dependencies(Installs),
-			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, []),
+			^^merge_options([], Options),
+			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
 			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion))
 		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
