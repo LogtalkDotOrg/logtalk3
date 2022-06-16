@@ -173,7 +173,7 @@ required:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sha256sum</span></code> (provided by GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">libarchive</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">libarchive</span></code> or <code class="docutils literal notranslate"><span class="pre">libarchive-tools</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
 </ul>
@@ -723,7 +723,7 @@ access token. The details depend on the server software. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(foo, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [curl(<span class="s">&#39;--header &quot;Authorization: token foo42&quot;&#39;</span>)]).
 </pre></div>
 </div>
-<p>or:</p>
+<p>Or:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(foo, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [curl(<span class="s">&#39;--header &quot;PRIVATE-TOKEN: foo42&quot;&#39;</span>)]).
 </pre></div>
 </div>

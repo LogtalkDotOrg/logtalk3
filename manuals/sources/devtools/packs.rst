@@ -30,7 +30,7 @@ required:
 
 -  ``sha256sum`` (provided by GNU ``coreutils``)
 -  ``curl``
--  ``bsdtar`` (provided by ``libarchive``)
+-  ``bsdtar`` (provided by ``libarchive`` or ``libarchive-tools``)
 -  ``gpg`` (provided by ``gnupg2``)
 -  ``git``
 
@@ -685,7 +685,7 @@ access token. The details depend on the server software. For example:
 
    | ?- packs::install(foo, bar, 1:1:2, [curl('--header "Authorization: token foo42"')]).
 
-or:
+Or:
 
 ::
 
