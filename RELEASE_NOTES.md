@@ -61,6 +61,11 @@ programming idioms using a `otherwise/0` built-in predicate.
 
 * FIXED: Typo in two `packs` tool warning messages format.
 
+Tests
+-----
+
+* ADDED: Additional tests for the Prolog standard `is/2` predicate.
+
 
 3.56.0 - June 9, 2022
 =====================

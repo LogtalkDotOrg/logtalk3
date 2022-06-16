@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:2:1,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2020-11-05,
+		date is 2022-06-16,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -205,6 +205,19 @@
 
 	test(lgt_is_2_45, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is ceiling(R)}.
+
+	% check evaluation of runtime bound arithmetic expressions
+
+	test(lgt_is_2_46, true(X == 2)) :-
+		{Exp = (4 - 2), X is Exp}.
+
+	test(lgt_is_2_47, true(X == 2)) :-
+		{Exp =.. [(-), 4, 2], X is Exp}.
+
+	test(lgt_is_2_48, true(X == 2)) :-
+		^^set_text_input('4 - 2. '),
+		read(Exp),
+		{X is Exp}.
 
 	% auxiliary predicates used to delay errors to runtime
 
