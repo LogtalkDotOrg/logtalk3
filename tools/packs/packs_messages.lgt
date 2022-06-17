@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:24:2,
+		version is 0:25:0,
 		author is 'Paulo Moura',
-		date is 2021-12-07,
+		date is 2022-06-17,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -280,6 +280,9 @@
 
 	message_tokens(pack_not_installed(Pack)) -->
 		['Pack is not installed: ~q'-[Pack], nl].
+
+	message_tokens(pack_directory_not_found(Pack, Directory)) -->
+		['Pack directory not found: ~q (~q)'-[Pack, Directory], nl].
 
 	message_tokens(pack_archive_download_failed(Pack, Archive)) -->
 		['Pack archive download failed: ~q (~q)'-[Pack, Archive], nl].

@@ -578,6 +578,11 @@
 			sub_atom(Directory0, _, _, 1, Directory)
 		;	Directory = Directory0
 		),
+		(	directory_exists(Directory) ->
+			true
+		;	print_message(error, packs, pack_directory_not_found(Pack, Directory)),
+			fail
+		),
 		make_pack_installation_directory(Pack, Path, OSPath),
 		path_concat(Directory, '.git', Git),
 		(	directory_exists(Git) ->
@@ -817,6 +822,7 @@
 		;	pack_object(Pack, PackObject),
 			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
+			check_availability(Registry, Pack, URL, CheckSum, Options),
 			check_dependencies(Dependencies, Installs),
 			check_portability(Portability),
 			uninstall_pack(Registry, Pack, Options),
@@ -1263,6 +1269,46 @@
 	valid_backend(trealla).
 	valid_backend(xsb).
 	valid_backend(yap).
+
+	% check availability of a pack update
+
+	check_availability(Registry, Pack, URL, CheckSum, Options) :-
+		decompose_file_name(URL, _, Name, Extension),
+		(	Extension = '',
+			sub_atom(URL, 0, _, _, 'file://') ->
+			check_availability_directory(Pack, URL)
+		;	^^supported_url_archive(URL) ->
+			check_availability_archive(Registry, Pack, URL, CheckSum, Options)
+		;	atom_concat(Name, Extension, Archive),
+			print_message(error, packs, unsupported_archive_format(Archive)),
+			fail
+		).
+
+	check_availability_directory(Pack, URL) :-
+		^^decode_url_spaces(URL, Decoded),
+		atom_concat('file://', Directory0, Decoded),
+		(	sub_atom(Directory0, _, _, 0, '/') ->
+			sub_atom(Directory0, _, _, 1, Directory)
+		;	Directory = Directory0
+		),
+		(	directory_exists(Directory) ->
+			true
+		;	print_message(error, packs, pack_directory_not_found(Pack, Directory)),
+			fail
+		).
+
+	check_availability_archive(Registry, Pack, URL, CheckSum, Options) :-
+		download(Registry, Pack, URL, Archive, Options),
+		(	^^option(checksum(true), Options) ->
+			verify_checksum(Pack, Archive, CheckSum, Options)
+		;	true
+		),
+		(	^^option(checksig(true), Options) ->
+			atom_concat(URL, '.asc', URLSig),
+			download(Registry, Pack, URLSig, ArchiveSig, Options),
+			verify_checksig(Pack, Archive, ArchiveSig, Options)
+		;	true
+		).
 
 	% dependency checking predicates
 
