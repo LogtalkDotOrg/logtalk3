@@ -615,6 +615,7 @@ predicates that accept a list of options:
 - `checksum(Boolean)` (default is `true`)
 - `checksig(Boolean)` (default is `false`)
 - `curl(Atom)` (extra command-line options; default is `''`)
+- `tar(Atom)` (extra command-line options; default is `''`)
 
 When using a `checksig(true)` option to check a pack signature, is strongly
 advised that you also use the `verbose(true)` option. For example:
@@ -633,6 +634,14 @@ The details depend on the server software. For example:
 Or:
 
 	| ?- packs::install(foo, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foo42"')]).
+
+Pack archives may be encrypted, requiring passing the decryption passphrase
+when installing or updating a pack. For example:
+
+	| ?- packs::install(foo, bar, 1:1:2, [tar('--passphrase test123')]).
+
+In this case, you should be careful to not leak your passphrase in e.g. the
+query history.
 
 To uninstall a pack that you no longer need, use the `packs::uninstall/1-2`
 predicates. By default, only packs with no dependent packs can be uninstalled.

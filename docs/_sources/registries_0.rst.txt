@@ -11,8 +11,8 @@
 Registry handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:46:0
-| **Date:** 2022-06-15
+| **Version:** 0:47:0
+| **Date:** 2022-06-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -134,6 +134,8 @@ Adds a new registry using the given options. Fails if the registry cannot be add
     - ``force(Boolean)`` option: Force re-installation if the registry is already defined. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose adding steps. Default is ``false``.
+    - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
 ------------
@@ -218,6 +220,8 @@ Updates a defined registry using the specified options. Fails if the registry is
     - ``force(Boolean)`` option: Force update if the registry is pinned. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
+    - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
 ------------
@@ -291,6 +295,8 @@ Deletes a registry using the specified options (if not pinned).
     - ``force(Boolean)`` option: Force deletion if the registry is pinned or there are installed registry packs. Default is ``false``.
     - ``clean(Boolean)`` option: Clean registry archive after deleting. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose deleting steps. Default is ``false``.
+    - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
 ------------

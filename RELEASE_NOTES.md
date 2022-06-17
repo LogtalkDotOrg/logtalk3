@@ -49,7 +49,8 @@ Tools
 archive formats.
 
 * ADDED: Support to the `packs` tool for passing extra command-line options
-to `curl` (e.g. for use with pack registry servers requiring authentication).
+to `curl` (e.g. for use with pack registry servers requiring authentication)
+and `bsdtar` (e.g. for decrypting archives).
 
 * UPDATED: The `tutor` tool to give specific advise when the user is trying to
 use the common Prolog top-level shortcut for loading files as a directive.

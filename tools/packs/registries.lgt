@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:46:0,
+		version is 0:47:0,
 		author is 'Paulo Moura',
-		date is 2022-06-15,
+		date is 2022-06-17,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -58,7 +58,9 @@
 			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.',
 			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -91,7 +93,9 @@
 		remarks is [
 			'``force(Boolean)`` option' - 'Force update if the registry is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -116,7 +120,9 @@
 		remarks is [
 			'``force(Boolean)`` option' - 'Force deletion if the registry is pinned or there are installed registry packs. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after deleting. Default is ``false``.',
-			'``verbose(Boolean)`` option' - 'Verbose deleting steps. Default is ``false``.'
+			'``verbose(Boolean)`` option' - 'Verbose deleting steps. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -573,6 +579,7 @@
 	default_option(checksig(false)).
 	default_option(save(installed)).
 	default_option(curl('')).
+	default_option(tar('')).
 
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
@@ -587,6 +594,8 @@
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
 	valid_option(curl(Atom)) :-
+		atom(Atom).
+	valid_option(tar(Atom)) :-
 		atom(Atom).
 
 	% pinned registry handling
@@ -784,9 +793,10 @@
 	uncompress(Registry, Archive, Path, Options) :-
 		make_registry_installation_directory(Registry, Path, OSPath),
 		^^tar_command(Tar),
+		^^option(tar(TarExtraOptions), Options),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		),
 		^^command(Command, registry_archive_uncompress_failed(Registry, OSPath)).
 

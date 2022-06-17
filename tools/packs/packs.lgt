@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:50:0,
+		version is 0:51:0,
 		author is 'Paulo Moura',
-		date is 2022-06-15,
+		date is 2022-06-17,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -125,7 +125,9 @@
 			'``clean(Boolean)`` option' - 'Clean pack archive after installation. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose installing steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
-			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.'
+			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -160,7 +162,9 @@
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
-			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.'
+			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -174,7 +178,9 @@
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
-			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.'
+			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -260,7 +266,9 @@
 			'``clean(Boolean)`` option' - 'Clean registry and pack archives after restoring. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose restoring steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
-			'``checksig(Boolean)`` option' - 'Verify pack archive signatures. Default is ``false``.'
+			'``checksig(Boolean)`` option' - 'Verify pack archive signatures. Default is ``false``.',
+			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
 
@@ -1530,9 +1538,10 @@
 	uncompress(Pack, Archive, Path, Options) :-
 		make_pack_installation_directory(Pack, Path, OSPath),
 		^^tar_command(Tar),
+		^^option(tar(TarExtraOptions), Options),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
 		),
 		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
 
@@ -1593,6 +1602,7 @@
 	default_option(checksig(false)).
 	default_option(save(installed)).
 	default_option(curl('')).
+	default_option(tar('')).
 
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
@@ -1607,6 +1617,8 @@
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
 	valid_option(curl(Atom)) :-
+		atom(Atom).
+	valid_option(tar(Atom)) :-
 		atom(Atom).
 
 :- end_object.
