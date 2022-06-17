@@ -34,6 +34,11 @@ linter warning instead of warning about a missing else part.
 
 * IMPROVED: Linter warnings for the `(->)/2` and `(*->)/2` control constructs.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The LVM adapter file to require version 4.1.0 or later.
+
 Library
 -------
 

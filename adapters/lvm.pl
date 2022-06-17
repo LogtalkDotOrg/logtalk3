@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 3.3.0 and later versions
-%  Last updated on March 22, 2022
+%  Adapter file for LVM 4.1.0 and later versions
+%  Last updated on June 17, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -234,7 +234,7 @@
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(3, 3, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(4, 1, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
