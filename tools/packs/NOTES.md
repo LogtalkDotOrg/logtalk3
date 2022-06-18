@@ -615,6 +615,7 @@ predicates that accept a list of options:
 - `checksum(Boolean)` (default is `true`)
 - `checksig(Boolean)` (default is `false`)
 - `curl(Atom)` (extra command-line options; default is `''`)
+- `gpg(Atom)` (extra command-line options; default is `''`)
 - `tar(Atom)` (extra command-line options; default is `''`)
 
 When using a `checksig(true)` option to check a pack signature, is strongly
@@ -763,7 +764,10 @@ index third-party packs.
 
 Pack checksums are checked by default. But pack signatures are only checked
 if requested as packs are often unsigned. Care should be taken when adding
-public keys for pack signers to your local system.
+public keys for pack signers to your local system. Detached signature files
+are assumed and expected to share the name of the archive and use a `.asc`
+extension. When the `checksig(true)` option is used, the signature file is
+automatically downloaded using a URL constructed from the pack archive URL.
 
 Registry and pack spec files plus the registry loader file are compiled
 by term-expanding them so that only expected terms are actually loaded and

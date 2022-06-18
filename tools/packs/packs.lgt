@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:51:0,
+		version is 0:52:0,
 		author is 'Paulo Moura',
-		date is 2022-06-17,
+		date is 2022-06-18,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -127,6 +127,7 @@
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -164,6 +165,7 @@
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -180,6 +182,7 @@
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -268,6 +271,7 @@
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signatures. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -1573,11 +1577,12 @@
 		verify_checksum(unix, Pack, Archive, sha256-CheckSum, Options).
 
 	verify_checksig(Pack, Archive, ArchiveSig, Options) :-
+		^^option(gpg(GpgExtraOptions), Options),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat(['gpg -v --verify "', ArchiveSig, '" "', Archive, '"'],                  Command)
+			atomic_list_concat(['gpg ', GpgExtraOptions, ' -v --verify "', ArchiveSig, '" "', Archive, '"'],                  Command)
 		;	operating_system_type(windows) ->
-			atomic_list_concat(['gpg --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
-		;	atomic_list_concat(['gpg --verify "',    ArchiveSig, '" "', Archive, '" > /dev/null 2>&1'], Command)
+			atomic_list_concat(['gpg ', GpgExtraOptions, ' --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
+		;	atomic_list_concat(['gpg ', GpgExtraOptions, ' --verify "',    ArchiveSig, '" "', Archive, '" > /dev/null 2>&1'], Command)
 		),
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
@@ -1648,6 +1653,7 @@
 	default_option(checksig(false)).
 	default_option(save(installed)).
 	default_option(curl('')).
+	default_option(gpg('')).
 	default_option(tar('')).
 
 	valid_option(verbose(Boolean)) :-
@@ -1663,6 +1669,8 @@
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
 	valid_option(curl(Atom)) :-
+		atom(Atom).
+	valid_option(gpg(Atom)) :-
 		atom(Atom).
 	valid_option(tar(Atom)) :-
 		atom(Atom).

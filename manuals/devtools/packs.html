@@ -708,6 +708,7 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 </ul>
 <p>When using a <code class="docutils literal notranslate"><span class="pre">checksig(true)</span></code> option to check a pack signature, is
@@ -854,7 +855,11 @@ be taken when adding or updating a pack. Note that a registry can always
 index third-party packs.</p>
 <p>Pack checksums are checked by default. But pack signatures are only
 checked if requested as packs are often unsigned. Care should be taken
-when adding public keys for pack signers to your local system.</p>
+when adding public keys for pack signers to your local system. Detached
+signature files are assumed and expected to share the name of the
+archive and use a <code class="docutils literal notranslate"><span class="pre">.asc</span></code> extension. When the <code class="docutils literal notranslate"><span class="pre">checksig(true)</span></code> option
+is used, the signature file is automatically downloaded using a URL
+constructed from the pack archive URL.</p>
 <p>Registry and pack spec files plus the registry loader file are compiled
 by term-expanding them so that only expected terms are actually loaded
 and only expected <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> goals with expected relative file

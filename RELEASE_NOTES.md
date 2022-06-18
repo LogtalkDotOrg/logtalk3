@@ -39,6 +39,11 @@ Prolog adapter and integration files
 
 * UPDATED: The LVM adapter file to require version 4.1.0 or later.
 
+Documentation
+-------------
+
+* UPDATED: The `packs` tool documentation section on pack signature checking.
+
 Library
 -------
 
@@ -54,8 +59,8 @@ Tools
 archive formats.
 
 * ADDED: Support to the `packs` tool for passing extra command-line options
-to `curl` (e.g. for use with pack registry servers requiring authentication)
-and `bsdtar` (e.g. for decrypting archives).
+to `curl` (e.g. for use with pack registry servers requiring authentication),
+`bsdtar` (e.g. for decrypting archives), and `gpg`.
 
 * IMPROVED: The `packs` tool to check the availability of a new version of a
 pack before uninstalling the older version when updating.

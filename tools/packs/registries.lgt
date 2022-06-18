@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:47:0,
+		version is 0:48:0,
 		author is 'Paulo Moura',
-		date is 2022-06-17,
+		date is 2022-06-18,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -60,6 +60,7 @@
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -95,6 +96,7 @@
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -122,6 +124,7 @@
 			'``clean(Boolean)`` option' - 'Clean registry archive after deleting. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose deleting steps. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		]
 	]).
@@ -579,6 +582,7 @@
 	default_option(checksig(false)).
 	default_option(save(installed)).
 	default_option(curl('')).
+	default_option(gpg('')).
 	default_option(tar('')).
 
 	valid_option(verbose(Boolean)) :-
@@ -594,6 +598,8 @@
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
 	valid_option(curl(Atom)) :-
+		atom(Atom).
+	valid_option(gpg(Atom)) :-
 		atom(Atom).
 	valid_option(tar(Atom)) :-
 		atom(Atom).

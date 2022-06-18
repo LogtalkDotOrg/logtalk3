@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:51:0
-| **Date:** 2022-06-17
+| **Version:** 0:52:0
+| **Date:** 2022-06-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -359,6 +359,7 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``gpg(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
@@ -461,6 +462,7 @@ Updates an outdated pack to the specified version using the specified options. F
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``gpg(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
@@ -494,6 +496,7 @@ Updates an outdated pack to its latest version using the specified options. Fail
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``gpg(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
@@ -757,6 +760,7 @@ Restores a list of registries and packs plus their pinning status from a file us
     - ``checksum(Boolean)`` option: Verify pack archive checksums. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signatures. Default is ``false``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
+    - ``gpg(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``tar(Atom)`` option: Extra command-line options. Default is ``''``.
 
 
