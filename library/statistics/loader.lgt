@@ -19,6 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
+:- initialization((
+	logtalk_load(types(loader)),
 	logtalk_load([statisticsp, statistics, population, sample], [optimize(on)])
-).
+)).

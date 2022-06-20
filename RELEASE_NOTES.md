@@ -47,6 +47,10 @@ Documentation
 Library
 -------
 
+* CHANGED: The `statistics` library to depend on the `types` library.
+
+* ADDED: Predicate `modes/2` to the `types` and `statistics` libraries.
+
 * ADDED: Support for LVM to the `timeout` library.
 
 * ADDED: Additional tests for the `timeout` library.

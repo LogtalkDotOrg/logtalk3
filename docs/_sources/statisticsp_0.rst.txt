@@ -11,8 +11,8 @@
 Statistical calculations over a list of numbers protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2022-05-06
+| **Version:** 1:3:0
+| **Date:** 2022-06-20
 
 | **Compilation flags:**
 |    ``static``
@@ -238,6 +238,29 @@ Calculates the median of a list of numbers. Fails if the list is empty.
 |    ``median(List,Median)``
 | **Mode and number of proofs:**
 |    ``median(+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="modes/2"> </div>
+
+.. index:: modes/2
+.. _statisticsp/0::modes/2:
+
+``modes/2``
+^^^^^^^^^^^
+
+Returns the list of modes of a list of numbers in ascending order. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``modes(List,Modes)``
+| **Mode and number of proofs:**
+|    ``modes(+list(number),-list(number))`` - ``zero_or_one``
 
 
 ------------

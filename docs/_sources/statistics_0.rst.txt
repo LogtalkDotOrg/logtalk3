@@ -11,8 +11,8 @@
 Statistical calculations over a list of numbers.
 
 | **Author:** Paulo Moura
-| **Version:** 1:6:0
-| **Date:** 2022-05-06
+| **Version:** 1:7:0
+| **Date:** 2022-06-20
 
 | **Compilation flags:**
 |    ``static``
@@ -20,12 +20,15 @@ Statistical calculations over a list of numbers.
 
 | **Implements:**
 |    ``public`` :ref:`statisticsp <statisticsp/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`statisticsp/0::arithmetic_mean/2`  :ref:`statisticsp/0::average_deviation/3`  :ref:`statisticsp/0::coefficient_of_variation/2`  :ref:`statisticsp/0::geometric_mean/2`  :ref:`statisticsp/0::harmonic_mean/2`  :ref:`statisticsp/0::kurtosis/2`  :ref:`statisticsp/0::max/2`  :ref:`statisticsp/0::mean_deviation/2`  :ref:`statisticsp/0::median/2`  :ref:`statisticsp/0::median_deviation/2`  :ref:`statisticsp/0::min/2`  :ref:`statisticsp/0::product/2`  :ref:`statisticsp/0::range/2`  :ref:`statisticsp/0::relative_standard_deviation/2`  :ref:`statisticsp/0::skewness/2`  :ref:`statisticsp/0::standard_deviation/2`  :ref:`statisticsp/0::sum/2`  :ref:`statisticsp/0::valid/1`  :ref:`statisticsp/0::variance/2`  :ref:`statisticsp/0::z_normalization/2`  
+|     :ref:`statisticsp/0::arithmetic_mean/2`  :ref:`statisticsp/0::average_deviation/3`  :ref:`statisticsp/0::coefficient_of_variation/2`  :ref:`statisticsp/0::geometric_mean/2`  :ref:`statisticsp/0::harmonic_mean/2`  :ref:`statisticsp/0::kurtosis/2`  :ref:`statisticsp/0::max/2`  :ref:`statisticsp/0::mean_deviation/2`  :ref:`statisticsp/0::median/2`  :ref:`statisticsp/0::median_deviation/2`  :ref:`statisticsp/0::min/2`  :ref:`statisticsp/0::modes/2`  :ref:`statisticsp/0::product/2`  :ref:`statisticsp/0::range/2`  :ref:`statisticsp/0::relative_standard_deviation/2`  :ref:`statisticsp/0::skewness/2`  :ref:`statisticsp/0::standard_deviation/2`  :ref:`statisticsp/0::sum/2`  :ref:`statisticsp/0::valid/1`  :ref:`statisticsp/0::variance/2`  :ref:`statisticsp/0::z_normalization/2`  
 
 .. contents::
    :local:

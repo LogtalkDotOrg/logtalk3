@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2019-05-23,
+		date is 2022-06-20,
 		comment is 'Unit tests for the "statistics" library.'
 	]).
 
@@ -52,7 +52,6 @@
 
 	test(sample_sum_2_02, deterministic(Sum == 6)) :-
 		sample::sum([1,2,3], Sum).
-
 
 	% max/2 tests
 
@@ -123,6 +122,20 @@
 
 	test(sample_median_2_03, deterministic(Median =~= 46.0)) :-
 		sample::median([35,36,46,68,70], Median).
+
+	% modes/2 tests
+
+	test(numberlist_modes_2_01, fail) :-
+		sample::modes([], _).
+
+	test(numberlist_modes_2_02, deterministic(Modes == [1])) :-
+		sample::modes([1,0,1,2,2,1], Modes).
+
+	test(numberlist_modes_2_03, deterministic(Modes == [2,3])) :-
+		sample::modes([1,2,1,2,2,3,3,4,3], Modes).
+
+	test(numberlist_modes_2_04, deterministic(Modes == [1,2,3])) :-
+		sample::modes([1,2,3], Modes).
 
 	% average_deviation/3 tests
 

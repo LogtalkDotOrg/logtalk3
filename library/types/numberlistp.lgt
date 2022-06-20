@@ -22,9 +22,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2022-06-02,
+		date is 2022-06-20,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).
@@ -69,6 +69,13 @@
 	:- info(median/2, [
 		comment is 'Calculates the median of a list of numbers. Fails if the list is empty.',
 		argnames is ['List', 'Median']
+	]).
+
+	:- public(modes/2).
+	:- mode(modes(+list(number), -list(number)), zero_or_one).
+	:- info(modes/2, [
+		comment is 'Returns the list of modes of a list of numbers in ascending order. Fails if the list is empty.',
+		argnames is ['List', 'Modes']
 	]).
 
 	:- public(euclidean_norm/2).

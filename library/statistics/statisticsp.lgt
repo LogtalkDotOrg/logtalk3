@@ -22,9 +22,9 @@
 :- protocol(statisticsp).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-05-06,
+		date is 2022-06-20,
 		comment is 'Statistical calculations over a list of numbers protocol.',
 		see_also is [statistics, sample, population]
 	]).
@@ -90,6 +90,13 @@
 	:- info(median/2, [
 		comment is 'Calculates the median of a list of numbers. Fails if the list is empty.',
 		argnames is ['List', 'Median']
+	]).
+
+	:- public(modes/2).
+	:- mode(modes(+list(number), -list(number)), zero_or_one).
+	:- info(modes/2, [
+		comment is 'Returns the list of modes of a list of numbers in ascending order. Fails if the list is empty.',
+		argnames is ['List', 'Modes']
 	]).
 
 	:- public(average_deviation/3).

@@ -24,11 +24,15 @@
 	extends(list)).
 
 	:- info([
-		version is 1:13:0,
+		version is 1:14:0,
 		author is 'Paulo Moura',
-		date is 2022-06-02,
+		date is 2022-06-20,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
+	]).
+
+	:- uses(list, [
+		msort/2, sort/2, sort/4
 	]).
 
 	average([N| Ns], Average) :-
@@ -83,6 +87,27 @@
 	middle_elements(M, N, [_| Xs], X1, X2) :-
 		M2 is M + 1,
 		middle_elements(M2, N, Xs, X1, X2).
+
+	modes([X| Xs], Modes) :-
+		msort([X| Xs], [Y| Ys]),
+		count_occurrences(Ys, Y, 1, Occurrences),
+		sort(1, (@>=), Occurrences, [K-M| Sorted]),
+		occurrences_modes(Sorted, K, M, Modes0),
+		sort(Modes0, Modes).
+
+	count_occurrences([], X, N, [N-X]).
+	count_occurrences([X| Xs], X, N, Occurrences) :-
+		!,
+		M is N + 1,
+		count_occurrences(Xs, X, M, Occurrences).
+	count_occurrences([Y| Ys], X, N, [N-X| Occurrences]) :-
+		count_occurrences(Ys, Y, 1, Occurrences).
+
+	occurrences_modes([], _, Mode, [Mode]).
+	occurrences_modes([K-Mode1| Ks], K, Mode0, [Mode0| Modes]) :-
+		!,
+		occurrences_modes(Ks, K, Mode1, Modes).
+	occurrences_modes([_| _], _, Mode, [Mode]).
 
 	min([X| Xs], Min) :-
 		min(Xs, X, Min).

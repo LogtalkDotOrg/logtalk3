@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
-		date is 2022-06-02,
+		date is 2022-06-20,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -138,6 +138,18 @@
 
 	test(numberlist_median_2_03, deterministic(Median =~= 46.0)) :-
 		numberlist::median([35,36,46,68,70], Median).
+
+	test(numberlist_modes_2_01, fail) :-
+		numberlist::modes([], _).
+
+	test(numberlist_modes_2_02, deterministic(Modes == [1])) :-
+		numberlist::modes([1,0,1,2,2,1], Modes).
+
+	test(numberlist_modes_2_03, deterministic(Modes == [2,3])) :-
+		numberlist::modes([1,2,1,2,2,3,3,4,3], Modes).
+
+	test(numberlist_modes_2_04, deterministic(Modes == [1,2,3])) :-
+		numberlist::modes([1,2,3], Modes).
 
 	test(numberlist_euclidean_norm_2_01, true(Norm =~= 119.0)) :-
 		numberlist::euclidean_norm([35,36,46,68,70], Norm).

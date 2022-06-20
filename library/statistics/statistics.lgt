@@ -23,9 +23,9 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-05-06,
+		date is 2022-06-20,
 		comment is 'Statistical calculations over a list of numbers.'
 	]).
 
@@ -55,6 +55,14 @@
 	:- info(variance/6, [
 		comment is 'Auxiliary predicate for computing the variance.',
 		argnames is ['List', 'Length0', 'Length', 'Mean', 'M20', 'M2']
+	]).
+
+	:- uses(list, [
+		msort/2, sort/4
+	]).
+
+	:- uses(numberlist, [
+		max/2, min/2, modes/2, product/2, sum/2 as sum_list/2
 	]).
 
 	arithmetic_mean([X| Xs], Mean) :-
@@ -151,11 +159,11 @@
 		).
 
 	quicksort([], Sorted, Sorted, Length, Length).
-	quicksort([Pivot| List], Aux, Sorted, Acc, Length) :-
+	quicksort([Pivot| List], Aux, Sorted, Length0, Length) :-
 		partition(List, Pivot, Small, Large),
-		Acc2 is Acc + 1,
-		quicksort(Large, Aux, Sorted1, Acc2, Acc3),
-		quicksort(Small, [Pivot| Sorted1], Sorted, Acc3, Length).
+		Length1 is Length0 + 1,
+		quicksort(Large, Aux, Sorted1, Length1, Length2),
+		quicksort(Small, [Pivot| Sorted1], Sorted, Length2, Length).
 
 	partition([], _, [], []).
 	partition([X| Xs], Pivot, Small, Large) :-
@@ -180,26 +188,6 @@
 		M2 is M + 1,
 		middle_elements(M2, N, Xs, X1, X2).
 
-	min([X| Xs], Min) :-
-		min(Xs, X, Min).
-
-	min([], Min, Min).
-	min([X| Xs], Aux, Min) :-
-		(	X < Aux ->
-			min(Xs, X, Min)
-		;	min(Xs, Aux, Min)
-		).
-
-	max([X| Xs], Max) :-
-		max(Xs, X, Max).
-
-	max([], Max, Max).
-	max([X| Xs], Aux, Max) :-
-		(	X > Aux ->
-			max(Xs, X, Max)
-		;	max(Xs, Aux, Max)
-		).
-
 	range([X| Xs], Range) :-
 		range(Xs, X, Min, X, Max),
 		Range is Max - Min.
@@ -213,22 +201,6 @@
 		;	range(Xs, Min0, Min, Max0, Max)
 		).
 
-	product([X| Xs], Product) :-
-		product(Xs, X, Product).
-
-	product([], Product, Product).
-	product([X| Xs], Acc, Product) :-
-		Acc2 is Acc * X,
-		product(Xs, Acc2, Product).
-
-	sum([X| Xs], Sum) :-
-		sum(Xs, X, Sum).
-
-	sum([], Sum, Sum).
-	sum([X| Xs], Acc, Sum) :-
-		Acc2 is Acc + X,
-		sum(Xs, Acc2, Sum).
-
 	z_normalization(Xs, Ys) :-
 		arithmetic_mean(Xs, Mean),
 		::standard_deviation(Xs, Deviation),
@@ -238,6 +210,9 @@
 	z_normalization([X| Xs], Mean, Deviation, [Y| Ys]) :-
 		Y is float((X - Mean) / Deviation),
 		z_normalization(Xs, Mean, Deviation, Ys).
+
+	sum([X| Xs], Sum) :-
+		sum_list([X| Xs], Sum).
 
 	valid((-)) :-		% catch variables and lists with unbound tails
 		!,
