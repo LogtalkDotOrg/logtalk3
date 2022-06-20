@@ -96,6 +96,16 @@
 		Sum1 is Sum0 + 1.0 / X,
 		harmonic_mean(Xs, Length1, Sum1, Mean).
 
+	weighted_mean([W| Ws], [X| Xs], Mean) :-
+		weighted_mean(Ws, W, SumWs, Xs, X * W, SumXs),
+		Mean is SumXs / SumWs.
+
+	weighted_mean([], SumWs, SumWs, [], SumXs, SumXs).
+	weighted_mean([W| Ws], SumWs0, SumWs, [X| Xs], SumXs0, SumXs) :-
+		SumWs1 is SumWs0 + W,
+		SumXs1 is SumXs0 + X * W,
+		weighted_mean(Ws, SumWs1, SumWs, Xs, SumXs1, SumXs).
+
 	mean_deviation([X| Xs], Deviation) :-
 		arithmetic_mean(Xs, 1, Length, X, Mean),
 		average_deviation([X| Xs], Mean, 0, Length, 0, Sum),

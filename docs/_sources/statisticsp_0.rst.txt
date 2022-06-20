@@ -221,6 +221,29 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
 .. raw:: html
 
+   <div id="weighted_mean/3"> </div>
+
+.. index:: weighted_mean/3
+.. _statisticsp/0::weighted_mean/3:
+
+``weighted_mean/3``
+^^^^^^^^^^^^^^^^^^^
+
+Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Wights are assume to be non-negative.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``weighted_mean(Weights,List,Mean)``
+| **Mode and number of proofs:**
+|    ``weighted_mean(+list(number),+list(number),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="median/2"> </div>
 
 .. index:: median/2

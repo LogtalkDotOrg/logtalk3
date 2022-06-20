@@ -51,6 +51,8 @@ Library
 
 * ADDED: Predicate `modes/2` to the `types` and `statistics` libraries.
 
+* ADDED: Predicate `weighted_mean/3` to the `statistics` library.
+
 * ADDED: Support for LVM to the `timeout` library.
 
 * ADDED: Additional tests for the `timeout` library.

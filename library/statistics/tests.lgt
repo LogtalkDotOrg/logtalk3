@@ -112,6 +112,14 @@
 	test(sample_harmonic_mean_2_02, deterministic(Mean =~= 46.694089547712)) :-
 		sample::harmonic_mean([35,36,46,68,70], Mean).
 
+	% weighted_mean/3 tests
+
+	test(sample_weighted_mean_3_01, fail) :-
+		sample::weighted_mean([], [], _).
+
+	test(sample_weighted_mean_3_02, deterministic(Mean =~= 83.0)) :-
+		sample::weighted_mean([0.4, 0.4, 0.2], [80, 80, 95], Mean).
+
 	% median/2 tests
 
 	test(sample_median_2_01, fail) :-

@@ -85,6 +85,13 @@
 		argnames is ['List', 'Mean']
 	]).
 
+	:- public(weighted_mean/3).
+	:- mode(weighted_mean(+list(number), +list(number), -float), zero_or_one).
+	:- info(weighted_mean/3, [
+		comment is 'Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Wights are assume to be non-negative.',
+		argnames is ['Weights', 'List', 'Mean']
+	]).
+
 	:- public(median/2).
 	:- mode(median(+list(number), -float), zero_or_one).
 	:- info(median/2, [
