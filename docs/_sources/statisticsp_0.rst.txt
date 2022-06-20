@@ -543,6 +543,30 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 
 .. raw:: html
 
+   <div id="fractile/3"> </div>
+
+.. index:: fractile/3
+.. _statisticsp/0::fractile/3:
+
+``fractile/3``
+^^^^^^^^^^^^^^
+
+Calculates the smalest value in a list of numbers such that the list elements in its fraction ``P`` are less or equal to that value (with ``P`` in the open interval ``(0.0, 1.0)``). Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fractile(P,List,Fractile)``
+| **Mode and number of proofs:**
+|    ``fractile(+float,+list(integer),-integer)`` - ``zero_or_one``
+|    ``fractile(+float,+list(float),-float)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="valid/1"> </div>
 
 .. index:: valid/1

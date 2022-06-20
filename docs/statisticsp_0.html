@@ -240,12 +240,13 @@
 <li><p><a class="reference internal" href="#kurtosis-2" id="id21"><code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#variance-2" id="id22"><code class="docutils literal notranslate"><span class="pre">variance/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#z-normalization-2" id="id23"><code class="docutils literal notranslate"><span class="pre">z_normalization/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#valid-1" id="id24"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#fractile-3" id="id24"><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#valid-1" id="id25"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id26">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
@@ -711,9 +712,31 @@
 </div>
 </div>
 <hr class="docutils" />
+<div id="fractile/3"> </div></section>
+<section id="fractile-3">
+<span id="statisticsp-0-fractile-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></a><a class="headerlink" href="#fractile-3" title="Permalink to this heading"></a></h3>
+<p>Calculates the smalest value in a list of numbers such that the list elements in its fraction <code class="docutils literal notranslate"><span class="pre">P</span></code> are less or equal to that value (with <code class="docutils literal notranslate"><span class="pre">P</span></code> in the open interval <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code>). Fails if the list is empty.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fractile(P,List,Fractile)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fractile(+float,+list(integer),-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">fractile(+float,+list(float),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 <div id="valid/1"> </div></section>
 <section id="valid-1">
-<span id="statisticsp-0-valid-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a><a class="headerlink" href="#valid-1" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-valid-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a><a class="headerlink" href="#valid-1" title="Permalink to this heading"></a></h3>
 <p>Term is a closed list of numbers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

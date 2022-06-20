@@ -58,7 +58,7 @@
 	]).
 
 	:- uses(list, [
-		msort/2, sort/4
+		msort/2, sort/4, nth1/3
 	]).
 
 	:- uses(numberlist, [
@@ -214,6 +214,12 @@
 
 	sum([X| Xs], Sum) :-
 		sum_list([X| Xs], Sum).
+
+	fractile(P, [X| Xs], Fractile) :-
+		0.0 < P, P < 1.0,
+		quicksort([X| Xs], [], Sorted, 0, Length),
+		Index is ceiling(P * Length),
+		nth1(Index, Sorted, Fractile).
 
 	valid((-)) :-		% catch variables and lists with unbound tails
 		!,

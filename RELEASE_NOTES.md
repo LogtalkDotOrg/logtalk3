@@ -52,7 +52,8 @@ Library
 * ADDED: Predicates `min_max/3` and `modes/2` to the `types` and `statistics`
 libraries.
 
-* ADDED: Predicate `weighted_mean/3` to the `statistics` library.
+* ADDED: Predicates `fractile/3` and `weighted_mean/3` to the `statistics`
+library.
 
 * ADDED: Support for LVM to the `timeout` library.
 
