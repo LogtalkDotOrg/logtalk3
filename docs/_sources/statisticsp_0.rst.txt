@@ -83,6 +83,29 @@ Calculates the sum of all list numbers. Fails if the list is empty.
 
 .. raw:: html
 
+   <div id="min/2"> </div>
+
+.. index:: min/2
+.. _statisticsp/0::min/2:
+
+``min/2``
+^^^^^^^^^
+
+Determines the minimum value in a list of numbers. Fails if the list is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``min(List,Minimum)``
+| **Mode and number of proofs:**
+|    ``min(+list,-number)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
    <div id="max/2"> </div>
 
 .. index:: max/2
@@ -106,23 +129,23 @@ Determines the list maximum value in a list of numbers. Fails if the list is emp
 
 .. raw:: html
 
-   <div id="min/2"> </div>
+   <div id="min_max/3"> </div>
 
-.. index:: min/2
-.. _statisticsp/0::min/2:
+.. index:: min_max/3
+.. _statisticsp/0::min_max/3:
 
-``min/2``
-^^^^^^^^^
+``min_max/3``
+^^^^^^^^^^^^^
 
-Determines the minimum value in a list of numbers. Fails if the list is empty.
+Determines the minimum and maxium values in a list of numbers. Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``min(List,Minimum)``
+|    ``min_max(List,Minimum,Maximum)``
 | **Mode and number of proofs:**
-|    ``min(+list,-number)`` - ``zero_or_one``
+|    ``min_max(+list(number),-number,-number)`` - ``zero_or_one``
 
 
 ------------

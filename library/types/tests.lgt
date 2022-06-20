@@ -157,6 +157,18 @@
 	test(numberlist_sum_2_01, true(Sum == 15)) :-
 		numberlist::sum([1,2,3,4,5], Sum).
 
+	test(numberlist_product_2_01, true(Product == 120)) :-
+		numberlist::product([1,2,3,4,5], Product).
+
+	test(numberlist_min_2_01, true(Min == 1)) :-
+		numberlist::min([1,2,3,4,5], Min).
+
+	test(numberlist_max_2_01, true(Max == 5)) :-
+		numberlist::max([1,2,3,4,5], Max).
+
+	test(numberlist_min_max_2_01, true(Min-Max == 1-5)) :-
+		numberlist::min_max([1,2,3,4,5], Min, Max).
+
 	test(numberlist_normalize_range_2_01, true(Normalized =~= [1.0,1.0,0.5,0.0])) :-
 		numberlist::normalize_range([2,2,1,0], Normalized).
 

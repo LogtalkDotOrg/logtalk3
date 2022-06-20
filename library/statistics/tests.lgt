@@ -69,6 +69,14 @@
 	test(sample_min_2_02, deterministic(Min == 1)) :-
 		sample::min([1,2,3], Min).
 
+	% min_max/3 tests
+
+	test(sample_min_max_3_01, fail) :-
+		sample::min_max([], _, _).
+
+	test(sample_min_max_3_02, deterministic(Min-Max == 1-3)) :-
+		sample::min_max([1,2,3], Min, Max).
+
 	% range/2 tests
 
 	test(sample_range_2_01, fail) :-

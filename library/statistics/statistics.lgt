@@ -62,7 +62,7 @@
 	]).
 
 	:- uses(numberlist, [
-		max/2, min/2, modes/2, product/2, sum/2 as sum_list/2
+		min/2, max/2, min_max/3, modes/2, product/2, sum/2 as sum_list/2
 	]).
 
 	arithmetic_mean([X| Xs], Mean) :-
@@ -198,18 +198,9 @@
 		M2 is M + 1,
 		middle_elements(M2, N, Xs, X1, X2).
 
-	range([X| Xs], Range) :-
-		range(Xs, X, Min, X, Max),
+	range(Xs, Range) :-
+		min_max(Xs, Min, Max),
 		Range is Max - Min.
-
-	range([], Min, Min, Max, Max).
-	range([X| Xs], Min0, Min, Max0, Max) :-
-		(	X < Min0 ->
-			range(Xs, X, Min, Max0, Max)
-		;	X > Max0 ->
-			range(Xs, Min0, Min, X, Max)
-		;	range(Xs, Min0, Min, Max0, Max)
-		).
 
 	z_normalization(Xs, Ys) :-
 		arithmetic_mean(Xs, Mean),

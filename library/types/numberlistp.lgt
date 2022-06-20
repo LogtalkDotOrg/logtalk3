@@ -29,6 +29,13 @@
 		see_also is [numberlist, listp, varlistp]
 	]).
 
+	:- public(min/2).
+	:- mode(min(+list(number), -number), zero_or_one).
+	:- info(min/2, [
+		comment is 'Determines the minimum value in a list using arithmetic order. Fails if the list is empty.',
+		argnames is ['List', 'Minimum']
+	]).
+
 	:- public(max/2).
 	:- mode(max(+list(number), -number), zero_or_one).
 	:- info(max/2, [
@@ -36,11 +43,11 @@
 		argnames is ['List', 'Maximum']
 	]).
 
-	:- public(min/2).
-	:- mode(min(+list(number), -number), zero_or_one).
-	:- info(min/2, [
-		comment is 'Determines the minimum value in a list using arithmetic order. Fails if the list is empty.',
-		argnames is ['List', 'Minimum']
+	:- public(min_max/3).
+	:- mode(min_max(+list(number), -number, -number), zero_or_one).
+	:- info(min_max/3, [
+		comment is 'Determines the minimum and maxium values in a list using arithmetic order. Fails if the list is empty.',
+		argnames is ['List', 'Minimum', 'Maximum']
 	]).
 
 	:- public(product/2).

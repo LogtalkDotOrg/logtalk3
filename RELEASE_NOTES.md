@@ -49,7 +49,8 @@ Library
 
 * CHANGED: The `statistics` library to depend on the `types` library.
 
-* ADDED: Predicate `modes/2` to the `types` and `statistics` libraries.
+* ADDED: Predicates `min_max/3` and `modes/2` to the `types` and `statistics`
+libraries.
 
 * ADDED: Predicate `weighted_mean/3` to the `statistics` library.
 

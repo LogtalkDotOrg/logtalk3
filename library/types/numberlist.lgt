@@ -129,6 +129,15 @@
 		;	max(Xs, Max0, Max)
 		).
 
+	min_max([X| Xs], Min, Max) :-
+		min_max(Xs, X, Min, X, Max).
+
+	min_max([], Min, Min, Max, Max).
+	min_max([X| Xs], Min0, Min, Max0, Max) :-
+		Min1 is min(X, Min0),
+		Max1 is max(X, Max0),
+		min_max(Xs, Min1, Min, Max1, Max).
+
 	product([X| Xs], Product) :-
 		product(Xs, X, Product).
 
