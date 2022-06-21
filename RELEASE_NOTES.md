@@ -64,6 +64,9 @@ library.
 Tools
 -----
 
+* CHANGED: The `packs` tool safety hooks to also accept underscores in URLs
+and file paths.
+
 * ADDED: Support to the `packs` tool for registry and pack archives using
 `.tar.gz` and `.tar.bz2` extensions. Also list in documentation all valid
 archive formats.

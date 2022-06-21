@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2021-10-21,
+		date is 2022-06-21,
 		comment is 'Hook object for filtering registry loader file contents.'
 	]).
 
@@ -78,6 +78,7 @@
 	valid_char --> ['/'].
 	valid_char --> ['.'].
 	valid_char --> ['-'].
+	valid_char --> ['_'].
 	valid_char --> [Char], {character::is_alphanumeric(Char)}.
 
 :- end_object.
@@ -87,9 +88,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2021-10-21,
+		date is 2022-06-21,
 		comment is 'Hook object for filtering registry and pack specification file contents.'
 	]).
 
@@ -147,6 +148,7 @@
 	valid_char --> ['/'].
 	valid_char --> ['.'].
 	valid_char --> ['-'].
+	valid_char --> ['_'].
 	valid_char --> [Char], {character::is_alphanumeric(Char)}.
 
 :- end_object.
