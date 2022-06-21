@@ -27,7 +27,7 @@
 		date is 2022-06-15,
 		comment is 'Predicates for calling goal with a time limit.',
 		remarks is [
-			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.'
+			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.'
 		]
 	]).
 
