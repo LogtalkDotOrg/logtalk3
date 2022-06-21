@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2022-06-20,
+		date is 2022-06-21,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -93,6 +93,33 @@
 
 	test(atom_split_3_04, true(Atoms == [''])) :-
 		atom::split('', d, Atoms).
+
+	test(integer_sequence_3_01, false) :-
+		integer::sequence(5, 3, _).
+
+	test(integer_sequence_3_02, true(Sequence == [1,2,3])) :-
+		integer::sequence(1, 3, Sequence).
+
+	test(integer_sequence_3_03, true(Sequence == [-3,-2,-1])) :-
+		integer::sequence(-3, -1, Sequence).
+
+	test(integer_sequence_4_01, false) :-
+		integer::sequence(5, 3, 2, _).
+
+	test(integer_sequence_4_02, false) :-
+		integer::sequence(1, 3, 0, _).
+
+	test(integer_sequence_4_03, false) :-
+		integer::sequence(1, 3, -2, _).
+
+	test(integer_sequence_4_04, true(Sequence == [1,5])) :-
+		integer::sequence(1, 7, 4, Sequence).
+
+	test(integer_sequence_4_05, true(Sequence == [10,20,30,40,50,60,70,80,90,100])) :-
+		integer::sequence(10, 100, 10, Sequence).
+
+	test(integer_sequence_4_06, true(Sequence == [-100,-90,-80,-70,-60,-50,-40,-30,-20,-10])) :-
+		integer::sequence(-100, -10, 10, Sequence).
 
 	test(list_sort_4_01, true(Sorted == [1,2,3])) :-
 		list::sort(0, @<, [3,2,1], Sorted).

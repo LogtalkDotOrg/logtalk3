@@ -11,8 +11,8 @@
 Integer data type predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:54:0
-| **Date:** 2019-06-04
+| **Version:** 1:55:0
+| **Date:** 2022-06-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -118,15 +118,38 @@ Successor of a natural number. At least one of the arguments must be instantiate
 ``sequence/3``
 ^^^^^^^^^^^^^^
 
-Generates a list with the sequence of all integers in the interval ``[Inf,Sup]``, assuming ``Inf =< Sup``.
+Generates a list with the sequence of all integers in the interval ``[Lower,Upper]``. Assumes ``Lower =< Upper`` and fails otherwise.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``sequence(Inf,Sup,List)``
+|    ``sequence(Lower,Upper,List)``
 | **Mode and number of proofs:**
 |    ``sequence(+integer,+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="sequence/4"> </div>
+
+.. index:: sequence/4
+.. _integer/0::sequence/4:
+
+``sequence/4``
+^^^^^^^^^^^^^^
+
+Generates a list with the sequence of integers in the interval ``[Lower,Upper]`` by ``Step``. Assumes ``Lower =< Upper, Step >= 1`` and fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Lower,Upper,Step,List)``
+| **Mode and number of proofs:**
+|    ``sequence(+integer,+integer,+integer,-list(integer))`` - ``zero_or_one``
 
 
 ------------

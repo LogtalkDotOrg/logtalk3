@@ -55,6 +55,8 @@ libraries.
 * ADDED: Predicates `fractile/3` and `weighted_mean/3` to the `statistics`
 library.
 
+* ADDED: Predicate `integer::sequence/4` to the `types` library.
+
 * ADDED: Support for LVM to the `timeout` library.
 
 * ADDED: Additional tests for the `timeout` library.

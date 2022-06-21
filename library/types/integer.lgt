@@ -23,9 +23,9 @@
 	extends(number)).
 
 	:- info([
-		version is 1:54:0,
+		version is 1:55:0,
 		author is 'Paulo Moura',
-		date is 2019-06-04,
+		date is 2022-06-21,
 		comment is 'Integer data type predicates.',
 		remarks is [
 			'Portability notes' - 'This object will use the backend Prolog system ``between/3``, ``plus/3``, and ``succ/2`` built-in predicates when available.'
@@ -60,8 +60,15 @@
 	:- public(sequence/3).
 	:- mode(sequence(+integer, +integer, -list(integer)), zero_or_one).
 	:- info(sequence/3, [
-		comment is 'Generates a list with the sequence of all integers in the interval ``[Inf,Sup]``, assuming ``Inf =< Sup``.',
-		argnames is ['Inf', 'Sup', 'List']
+		comment is 'Generates a list with the sequence of all integers in the interval ``[Lower,Upper]``. Assumes ``Lower =< Upper`` and fails otherwise.',
+		argnames is ['Lower', 'Upper', 'List']
+	]).
+
+	:- public(sequence/4).
+	:- mode(sequence(+integer, +integer, +integer, -list(integer)), zero_or_one).
+	:- info(sequence/4, [
+		comment is 'Generates a list with the sequence of integers in the interval ``[Lower,Upper]`` by ``Step``. Assumes ``Lower =< Upper, Step >= 1`` and fails otherwise.',
+		argnames is ['Lower', 'Upper', 'Step', 'List']
 	]).
 
 	:- if(predicate_property(between(_, _, _), built_in)).
@@ -133,16 +140,32 @@
 
 	:- endif.
 
-	sequence(Inf, Sup, List) :-
-		Inf =< Sup,
-		gen_sequence(Inf, Sup, List).
+	sequence(Lower, Upper, List) :-
+		Lower =< Upper,
+		gen_sequence(Lower, Upper, List).
 
-	gen_sequence(Sup, Sup, List) :-
+	gen_sequence(Upper, Upper, List) :-
 		!,
-		List = [Sup].
-	gen_sequence(Inf, Sup, [Inf| List]) :-
-		Next is Inf + 1,
-		gen_sequence(Next, Sup, List).
+		List = [Upper].
+	gen_sequence(Lower, Upper, [Lower| Tail]) :-
+		Next is Lower + 1,
+		gen_sequence(Next, Upper, Tail).
+
+	sequence(Lower, Upper, Step, List) :-
+		Lower =< Upper,
+		Step >= 1,
+		gen_sequence(Lower, Upper, Step, List).
+
+	gen_sequence(Upper, Upper, _, List) :-
+		!,
+		List = [Upper].
+	gen_sequence(Next, Upper, _, List) :-
+		Next > Upper,
+		!,
+		List = [].
+	gen_sequence(Lower, Upper, Step, [Lower| Tail]) :-
+		Next is Lower + Step,
+		gen_sequence(Next, Upper, Step, Tail).
 
 	valid(Integer) :-
 		integer(Integer).
