@@ -30,9 +30,11 @@ Description
    mode(Mode, NumberOfProofs)
 
 Most predicates can be used with several instantiations modes. This
-directive enables the specification of each instantiation mode and the
-corresponding number of proofs (not necessarily distinct solutions). You
-may also use this directive for documenting grammar rule non-terminals.
+directive enables the specification of each
+:ref:`instantiation mode <predicates_mode_instantiation>` and the
+corresponding :ref:`number of proofs <predicates_mode_number_of_proofs>`
+(not necessarily distinct solutions). You may also use this directive
+for documenting grammar rule non-terminals.
 
 Template and modes
 ------------------

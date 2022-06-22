@@ -42,7 +42,7 @@ Prolog adapter and integration files
 Documentation
 -------------
 
-* IMPROVED: Handbook documentation of the `uses/2` directive.
+* IMPROVED: Handbook documentation of the `mode/2` and `uses/2` directives.
 
 * UPDATED: The `packs` tool documentation section on pack signature checking.
 

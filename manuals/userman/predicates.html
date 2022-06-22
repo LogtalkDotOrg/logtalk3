@@ -282,7 +282,7 @@ example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(member(<span class="o">?</span>term, <span class="o">?</span>list), zero_or_more).
 </pre></div>
 </div>
-<p>The first directive argument describes a valid calling mode. The minimum
+<p id="predicates-mode-instantiation">The first directive argument describes a valid calling mode. The minimum
 information will be the instantiation mode of each argument. The first
 four possible values are described in <a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a>). The remaining two can
 also be found in use in some Prolog systems.</p>
@@ -310,7 +310,7 @@ values are: <code class="docutils literal notranslate"><span class="pre">event</
 first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
 compound terms.</p>
-<p>The second directive argument documents the number of proofs, but not
+<p id="predicates-mode-number-of-proofs">The second directive argument documents the number of proofs, but not
 necessarily distinct solutions, for the specified mode. As an example,
 the <code class="docutils literal notranslate"><span class="pre">member(X,</span> <span class="pre">[1,1,1,1])</span></code> goal have only one distinct solution but four
 proofs for that solution. Note that different modes for the same predicate

@@ -153,6 +153,8 @@ example:
 
    :- mode(member(?term, ?list), zero_or_more).
 
+.. _predicates_mode_instantiation:
+
 The first directive argument describes a valid calling mode. The minimum
 information will be the instantiation mode of each argument. The first
 four possible values are described in [ISO95]_). The remaining two can
@@ -181,6 +183,8 @@ values are: ``event``, ``object``, ``category``, ``protocol``,
 first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
 compound terms.
+
+.. _predicates_mode_number_of_proofs:
 
 The second directive argument documents the number of proofs, but not
 necessarily distinct solutions, for the specified mode. As an example,
