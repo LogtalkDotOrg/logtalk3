@@ -532,8 +532,13 @@ notation <code class="docutils literal notranslate"><span class="pre">Predicate<
 predicates declared on several <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or just for giving
 new names to the predicates that will be more meaningful on their using
 context. It’s also possible to define predicate aliases that are also
-<a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. See the directive
-documentation for details and examples.</p>
+<a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(pretty_printer, [
+    indent(<span class="m">4</span>, <span class="nv">Term</span>) <span class="o">as</span> indent(<span class="nv">Term</span>)
+]).
+</pre></div>
+</div>
+<p>See the directive documentation for details and other examples.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive allows simpler predicate definitions as long as
 there are no conflicts between the predicates declared in the directive
 and the predicates defined in the object (or category) containing the
@@ -551,6 +556,18 @@ with multiple implementations of the same protocol (for example, to evaluate
 the performance of each implementation for a particular case). It also
 simplifies writing tests that check multiple implementations of the same
 protocol.</p>
+<p>An object (or category) can make a predicate listed in a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>) directive part of its protocol by simply adding a scope
+directive for the predicate. For example, in the <code class="docutils literal notranslate"><span class="pre">statistics</span></code> library
+we have:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(modes<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">uses</span>(numberlist, [modes<span class="o">/</span><span class="m">2</span>]).
+</pre></div>
+</div>
+<p>Therefore, a goal such as <code class="docutils literal notranslate"><span class="pre">sample::modes(Sample,</span> <span class="pre">Modes)</span></code> implicitly calls
+<code class="docutils literal notranslate"><span class="pre">numberlist::modes(Sample,</span> <span class="pre">Modes)</span></code> without requiring an explicit local
+definition for the <code class="docutils literal notranslate"><span class="pre">modes/2</span></code> predicate (which would trigger a compilation
+error).</p>
 </section>
 <section id="alias-directive">
 <span id="predicates-alias"></span><h3>Alias directive<a class="headerlink" href="#alias-directive" title="Permalink to this heading"></a></h3>

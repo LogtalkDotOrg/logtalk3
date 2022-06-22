@@ -446,8 +446,15 @@ You may use this extended version for solving conflicts between
 predicates declared on several ``uses/2`` directives or just for giving
 new names to the predicates that will be more meaningful on their using
 context. It's also possible to define predicate aliases that are also
-:term:`predicate shorthands <predicate shorthand>`. See the directive
-documentation for details and examples.
+:term:`predicate shorthands <predicate shorthand>`. For example:
+
+::
+
+   :- uses(pretty_printer, [
+       indent(4, Term) as indent(Term)
+   ]).
+
+See the directive documentation for details and other examples.
 
 The ``uses/2`` directive allows simpler predicate definitions as long as
 there are no conflicts between the predicates declared in the directive
@@ -467,6 +474,21 @@ with multiple implementations of the same protocol (for example, to evaluate
 the performance of each implementation for a particular case). It also
 simplifies writing tests that check multiple implementations of the same
 protocol.
+
+An object (or category) can make a predicate listed in a ``uses/2`` (or
+``use_module/2``) directive part of its protocol by simply adding a scope
+directive for the predicate. For example, in the ``statistics`` library
+we have:
+
+::
+
+   :- public(modes/2).
+   :- uses(numberlist, [modes/2]).
+
+Therefore, a goal such as ``sample::modes(Sample, Modes)`` implicitly calls
+``numberlist::modes(Sample, Modes)`` without requiring an explicit local
+definition for the ``modes/2`` predicate (which would trigger a compilation
+error).
 
 .. _predicates_alias:
 

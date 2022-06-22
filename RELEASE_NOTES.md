@@ -42,6 +42,8 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* IMPROVED: Handbook documentation of the `uses/2` directive.
+
 * UPDATED: The `packs` tool documentation section on pack signature checking.
 
 Library
