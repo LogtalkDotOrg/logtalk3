@@ -133,6 +133,14 @@ An example of defining a predicate alias that is also a shorthand:
        print_message(debug, my_app, Message) as dbg(Message)
    ]).
 
+Predicate aliases can also be used to change argument order:
+
+::
+
+   :- uses(meta, [
+       fold_left(Closure,Accumulator,List,Result) as foldl(Closure,List,Accumulator,Result)
+   ]).
+
 An example of using a :term:`parameter variable` in place of the object
 identifier to allow using the same test set for checking multiple
 implementations of the same protocol:

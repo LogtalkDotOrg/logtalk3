@@ -233,6 +233,12 @@ btree_to_queue <span class="o">:-</span>
 ]).
 </pre></div>
 </div>
+<p>Predicate aliases can also be used to change argument order:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(meta, [
+    fold_left(<span class="nv">Closure</span>,<span class="nv">Accumulator</span>,<span class="nv">List</span>,<span class="nv">Result</span>) <span class="o">as</span> foldl(<span class="nv">Closure</span>,<span class="nv">List</span>,<span class="nv">Accumulator</span>,<span class="nv">Result</span>)
+]).
+</pre></div>
+</div>
 <p>An example of using a <a class="reference internal" href="../../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variable</span></a> in place of the object
 identifier to allow using the same test set for checking multiple
 implementations of the same protocol:</p>
