@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2022-05-27,
+		date is 2022-06-23,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
@@ -133,9 +133,9 @@
 		read_line_by_line(Stream, Rows, N),
 		dbg('All the stream has been read'-[Stream,Rows]).
 
-	write_file(File, Object, Predicate/Arity) :-
+	write_file(File, Object, Name/Arity) :-
 		ensure_bound_options,
-		functor(Message, Predicate, Arity),
+		functor(Message, Name, Arity),
 		dbg('Goal to be called'-Object::Message),
 		csv_file_write_options(Options),
 		open(File, write, Stream, Options),
@@ -146,9 +146,9 @@
 		),
 		close(Stream).
 
-	write_stream(Stream, Object, Predicate/Arity) :-
+	write_stream(Stream, Object, Name/Arity) :-
 		ensure_bound_options,
-		functor(Message, Predicate, Arity),
+		functor(Message, Name, Arity),
 		dbg('Goal to be called'-Object::Message),
 		write_one_by_one(Stream, Object, Message).
 
@@ -205,7 +205,7 @@
 		records(Rows).
 
 	csv(skip, Rows) -->
-		records([_|Rows]).
+		records([_| Rows]).
 
 	csv(keep, Rows) -->
 		records(Rows).
@@ -246,11 +246,11 @@
 	field(0'", Atom, true) -->
 		!, {dbg('>>>'-0'")}, escaped(true, Codes), {atom_codes(Atom, Codes)}.
 	field(0'", Atom, false) -->
-		!, escaped(false, Codes), {atom_codes(Atom, [0'"|Codes])}.
+		!, escaped(false, Codes), {atom_codes(Atom, [0'"| Codes])}.
 	field(Code, Field, _) -->
 		{\+ forbidden(Code), \+ separator_code(_Separator_, Code)},
 		non_escaped(Codes),
-		{number_or_atom_codes(Field, [Code|Codes])}.
+		{number_or_atom_codes(Field, [Code| Codes])}.
 
 	%   escaped = DQUOTE *(TEXTDATA / COMMA / CR / LF / 2DQUOTE) DQUOTE
 	escaped(true, Data) -->
@@ -300,17 +300,19 @@
 		catch(number_codes(Field, Codes), _, atom_codes(Field, Codes)).
 
 	% it reads each line from the Stream, parses it and asserts it
-	read_assert_line_by_line(Stream,  Object, Predicate/Arity, N) :-
+	read_assert_line_by_line(Stream,  Object, Name/Arity, N) :-
 		reader::line_to_codes(Stream, LineCodes),
 		(	LineCodes == end_of_file ->
 			dbg('Final line at'-N)
+		;	LineCodes == [] ->
+			read_assert_line_by_line(Stream, Object, Name/Arity, N)
 		;	phrase(record(Row, false), LineCodes),
 			dbg('Read Line'-N),
 			list::length(Row, Arity) ->
-			Datum =.. [Predicate|Row],
-			Object::assertz(Datum),
-			NN is N + 1,
-			read_assert_line_by_line(Stream, Object, Predicate/Arity, NN)
+			Clause =.. [Name| Row],
+			Object::assertz(Clause),
+			M is N + 1,
+			read_assert_line_by_line(Stream, Object, Name/Arity, M)
 		;	dbg('Wrong row length at'-[Row, Arity, N]),
 			fail
 		).
@@ -318,24 +320,26 @@
 	% it reads each line from Stream and parses it
 	read_line_by_line(Stream, Rows, N) :-
 		reader::line_to_codes(Stream, LineCodes),
-		(	(LineCodes == end_of_file; LineCodes == []) ->
+		(	LineCodes == end_of_file ->
 			dbg('Final line at'-N),
 			Rows = []
+		;	LineCodes == [] ->
+			read_line_by_line(Stream, Rows, N)
 		;	phrase(record(Row, false), LineCodes) ->
 			Rows = [Row| RestRows],
 			dbg('Read Line'-N),
-			NN is N + 1,
-			read_line_by_line(Stream, RestRows, NN)
+			M is N + 1,
+			read_line_by_line(Stream, RestRows, M)
 		;	fail
 		).
 
 	assert_rows([], _, _, _).
-	assert_rows([Row|Rows], Object, Predicate/Arity, N) :-
+	assert_rows([Row| Rows], Object, Name/Arity, N) :-
 		(	list::length(Row, Arity) ->
-			Datum =.. [Predicate|Row],
-			Object::assertz(Datum),
+			Clause =.. [Name| Row],
+			Object::assertz(Clause),
 			M is N + 1,
-			assert_rows(Rows, Object, Predicate/Arity, M)
+			assert_rows(Rows, Object, Name/Arity, M)
 		;	dbg('Wrong row length at'-[Row, Arity, N]),
 			fail
 		).
@@ -364,13 +368,13 @@
 
 	guess_field(Atom, _IgnoreQuotes_, _) -->
 		guess_escaped(Codes, _IgnoreQuotes_),
-		{(_IgnoreQuotes_ == true -> AllCodes = Codes; AllCodes = [0'"|Codes]), atom_codes(Atom, AllCodes)}.
+		{(_IgnoreQuotes_ == true -> AllCodes = Codes; AllCodes = [0'"| Codes]), atom_codes(Atom, AllCodes)}.
 	guess_field(Field, _, Separator) -->
 		guess_non_escaped(Codes, Separator), {number_or_atom_codes(Field, Codes)}.
 
 	guess_non_escaped([Char], Separator) -->
 		guess_textdata(Char, Separator).
-	guess_non_escaped([Char|RestC], Separator) -->
+	guess_non_escaped([Char| RestC], Separator) -->
 		guess_textdata(Char, Separator), guess_non_escaped(RestC, Separator).
 	%guess_non_escaped([], _Separator) --> [].
 
@@ -476,18 +480,18 @@
 
 	% quoting
 	quoting(Codes, QField) :-
-		( 	Codes = [0'"|RCodes] ->
+		( 	Codes = [0'"| RCodes] ->
 			apply_quotes(RCodes, QCodes)
 		;	apply_quotes(Codes, QCodes)
 		),
-		atom_codes(QField, [0'"|QCodes]).
+		atom_codes(QField, [0'"| QCodes]).
 
 	% check all quotes except the first and the last
 	apply_quotes([0'"], [0'"]) :- !.
 	apply_quotes([], [0'"]) :- !.
-	apply_quotes([0'", 0'"|R], [0'", 0'"|RR]) :- !, apply_quotes(R, RR).
-	apply_quotes([0'"|R], [0'", 0'"|RR]) :- !, apply_quotes(R, RR).
-	apply_quotes([C|R], [C|RR]) :- C\==0'", apply_quotes(R, RR).
+	apply_quotes([0'", 0'"| R], [0'", 0'"| RR]) :- !, apply_quotes(R, RR).
+	apply_quotes([0'"| R], [0'", 0'"| RR]) :- !, apply_quotes(R, RR).
+	apply_quotes([C| R], [C| RR]) :- C\==0'", apply_quotes(R, RR).
 
 	ensure_bound_options :-
 		(var(_Header_) -> _Header_ = keep; true),
