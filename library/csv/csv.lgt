@@ -26,12 +26,12 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2022-06-23,
+		date is 2022-06-24,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
-			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
-			'Separator' - 'Separator handling option with possible values ``comma``, ``tab``, ``semicolon``, and ``colon``.',
-			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``) double quotes surrounding data.'
+			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
+			'Separator' - 'Separator handling option with possible values ``comma`` (default for non ``.tsv`` files or when no file name is available), ``tab`` (default for ``.tsv`` files), ``semicolon``, and ``colon``.',
+			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.'
 		]
 	]).
 
@@ -39,10 +39,14 @@
 		print_message(debug, csv, Message) as dbg(Message)
 	]).
 
+	:- uses(os, [
+		decompose_file_name/4
+	]).
+
 	read_file(File, Object, Predicate) :-
 		type::check(predicate, Object::Predicate),
 		type::check(file, File),
-		ensure_bound_options,
+		ensure_bound_options(File),
 		reader::file_to_codes(File, Codes),
 		dbg('File codes'-Codes),
 		phrase(csv(Rows), Codes),
@@ -59,7 +63,7 @@
 	read_file(File, Rows) :-
 		type::check(file, File),
 		reader::file_to_codes(File, Codes),
-		ensure_bound_options,
+		ensure_bound_options(File),
 		dbg('File codes'-Codes),
 		phrase(csv(Rows), Codes).
 
@@ -72,7 +76,7 @@
 	read_file_by_line(File, Object, Predicate) :-
 		type::check(predicate, Object::Predicate),
 		type::check(file, File),
-		ensure_bound_options,
+		ensure_bound_options(File),
 		open(File, read, Stream),
 		(	_Header_ == skip ->
 			N = 2,
@@ -104,7 +108,7 @@
 
 	read_file_by_line(File, Rows) :-
 		type::check(file, File),
-		ensure_bound_options,
+		ensure_bound_options(File),
 		open(File, read, Stream),
 		(	_Header_ == skip ->
 			N = 2,
@@ -134,7 +138,7 @@
 		dbg('All the stream has been read'-[Stream,Rows]).
 
 	write_file(File, Object, Name/Arity) :-
-		ensure_bound_options,
+		ensure_bound_options(File),
 		functor(Message, Name, Arity),
 		dbg('Goal to be called'-Object::Message),
 		csv_file_write_options(Options),
@@ -492,6 +496,18 @@
 	apply_quotes([0'", 0'"| R], [0'", 0'"| RR]) :- !, apply_quotes(R, RR).
 	apply_quotes([0'"| R], [0'", 0'"| RR]) :- !, apply_quotes(R, RR).
 	apply_quotes([C| R], [C| RR]) :- C\==0'", apply_quotes(R, RR).
+
+	ensure_bound_options(File) :-
+		(var(_Header_) -> _Header_ = keep; true),
+		(	nonvar(_Separator_) ->
+			true
+		;	decompose_file_name(File, _, _, Extension),
+			(	Extension == '.tsv' ->
+				_Separator_ = tab
+			;	_Separator_ = comma
+			)
+		),
+		(var(_IgnoreQuotes_) -> _IgnoreQuotes_ = false; true).
 
 	ensure_bound_options :-
 		(var(_Header_) -> _Header_ = keep; true),

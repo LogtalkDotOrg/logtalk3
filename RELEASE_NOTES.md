@@ -49,6 +49,9 @@ Documentation
 Library
 -------
 
+* CHANGED: The `cvs/3` library object to use a default separator based on the
+extension of the file to be parsed/written when possible.
+
 * CHANGED: The `csv` library predicates `read_file_by_line/2-3` to skip empty
 lines in CSV files.
 
@@ -65,6 +68,8 @@ library.
 * ADDED: Support for LVM to the `timeout` library.
 
 * ADDED: Additional tests for the `timeout` library.
+
+* IMPROVED: Tests for the `csv` library.
 
 Tools
 -----

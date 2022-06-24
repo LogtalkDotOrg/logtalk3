@@ -21,10 +21,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
 	logtalk_load(reader(loader)),
 	logtalk_load(os(loader)),
-	logtalk_load(meta(loader)),
 	logtalk_load([csv_guess_questions_bypass, csv_protocol, csv], [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit), suspicious_calls(silent)]),
