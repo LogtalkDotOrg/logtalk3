@@ -52,10 +52,6 @@ Library
 * CHANGED: The `csv` library predicates `read_file_by_line/2-3` to skip empty
 lines in CSV files.
 
-* CHANGED: The default header parameter value for the `csv` library objects
-from `keep` to `skip` so that CSV files can be parsed to predicate clauses
-without special handling of the first clause.
-
 * CHANGED: The `statistics` library to depend on the `types` library.
 
 * ADDED: Predicates `min_max/3` and `modes/2` to the `types` and `statistics`
