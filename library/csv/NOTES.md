@@ -36,7 +36,10 @@ number of columns in a given CSV file.
 
 Files and streams can be read into a list of rows (with each row being
 represented by a list of fields) or asserted using a user-defined dynamic
-predicate.
+predicate. Reading can be done by first loading the whole file (using the
+`read_file/2-3` predicates) into memory or line by line (using the
+`read_file_by_line/2-3` predicates). Reading line by line is usually the
+best option for parsing large CSV files. 
 
 Data can be saved to a CSV file or stream by providing the object and
 predicate for accessing the data plus the name of the destination file
