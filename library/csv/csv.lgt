@@ -24,14 +24,14 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:3:0,
+		version is 2:0:0,
 		author is 'Jacinto Dávila and Paulo Moura',
 		date is 2022-06-23,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
-			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep``.',
-			'Separator' - 'Separator handling option with possible values ``comma``, ``tab``, ``semicolon``, and ``colon``.',
-			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``) double quotes surrounding data.'
+			'Header' - 'Header handling option with possible values ``missing``, ``skip`` (default), and ``keep``.',
+			'Separator' - 'Separator handling option with possible values ``comma`` (default), ``tab``, ``semicolon``, and ``colon``.',
+			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.'
 		]
 	]).
 
@@ -494,7 +494,7 @@
 	apply_quotes([C| R], [C| RR]) :- C\==0'", apply_quotes(R, RR).
 
 	ensure_bound_options :-
-		(var(_Header_) -> _Header_ = keep; true),
+		(var(_Header_) -> _Header_ = skip; true),
 		(var(_Separator_) -> _Separator_ = comma; true),
 		(var(_IgnoreQuotes_) -> _IgnoreQuotes_ = false; true).
 
@@ -502,13 +502,13 @@
 
 
 :- object(csv,
-	extends(csv(keep, comma, false))).
+	extends(csv(skip, comma, false))).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Jacinto Dávila',
-		date is 2021-02-02,
-		comment is 'CSV files reading and writing predicates using the options Header - ``keep``, Separator - ``comma``, and IgnoreQuotes - ``false``.'
+		date is 2022-06-24,
+		comment is 'CSV files reading and writing predicates using the options Header - ``skip``, Separator - ``comma``, and IgnoreQuotes - ``false``.'
 	]).
 
 :- end_object.

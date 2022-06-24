@@ -8,18 +8,18 @@
 ``csv``
 =======
 
-CSV files reading and writing predicates using the options Header - ``keep``, Separator - ``comma``, and IgnoreQuotes - ``false``.
+CSV files reading and writing predicates using the options Header - ``skip``, Separator - ``comma``, and IgnoreQuotes - ``false``.
 
 | **Author:** Jacinto Dávila
-| **Version:** 1:0:0
-| **Date:** 2021-02-02
+| **Version:** 2:0:0
+| **Date:** 2022-06-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`csv(keep,comma,false) <csv/3>`
+|    ``public`` :ref:`csv(skip,comma,false) <csv/3>`
 
 | **Remarks:**
 |    (none)

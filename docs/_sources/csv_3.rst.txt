@@ -8,15 +8,15 @@
 ``csv(Header,Separator,IgnoreQuotes)``
 ======================================
 
-* ``Header`` - Header handling option with possible values ``missing``, ``skip``, and ``keep``.
-* ``Separator`` - Separator handling option with possible values ``comma``, ``tab``, ``semicolon``, and ``colon``.
-* ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``) double quotes surrounding data.
+* ``Header`` - Header handling option with possible values ``missing``, ``skip`` (default), and ``keep``.
+* ``Separator`` - Separator handling option with possible values ``comma`` (default), ``tab``, ``semicolon``, and ``colon``.
+* ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.
 
 
 CSV file and stream reading and writing predicates.
 
 | **Author:** Jacinto Dávila and Paulo Moura
-| **Version:** 1:3:0
+| **Version:** 2:0:0
 | **Date:** 2022-06-23
 
 | **Compilation flags:**
