@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Jacinto Dávila',
-		date is 2022-02-13,
+		date is 2022-06-24,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -51,13 +51,13 @@
 	test(csv_read_file_sample_csv_empty_file, true(Rows == [])) :-
 		^^suppress_text_output,
 		file_path('test_files/empty.csv', Path),
-		csv::read_file(Path, Rows).
+		csv(keep,_,_)::read_file(Path, Rows).
 
 	test(csv_read_stream_sample_csv_empty_file, true(Rows == [])) :-
 		^^suppress_text_output,
 		file_path('test_files/empty.csv', Path),
 		open(Path, read, Stream),
-		csv::read_stream(Stream, Rows),
+		csv(keep,_,_)::read_stream(Stream, Rows),
 		close(Stream).
 
 	% following: https://www.rfc-editor.org/rfc/rfc4180.txt
@@ -69,7 +69,7 @@
 	test(csv_read_sample_csv_crlf_ending, true(Rows == [[aaa,bbb,ccc],[zzz,yyy,xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/crlf_ending.csv', Path),
-		csv::read_file(Path, Rows).
+		csv(keep,_,_)::read_file(Path, Rows).
 
 	%    without CRLF in the last row
 	%    aaa,bbb,ccc CRLF
@@ -77,7 +77,7 @@
 	test(csv_read_sample_csv_no_crlf_at_end, true(Rows == [[aaa,bbb,ccc],[zzz,yyy,xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/no_crlf_at_end.csv', Path),
-		csv::read_file(Path, Rows).
+		csv(keep,_,_)::read_file(Path, Rows).
 
 	%3.  There maybe an optional header line appearing as the first line
 	%    of the file with the same format as normal record lines.  This
@@ -93,19 +93,19 @@
 	test(csv_read_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/with_header.csv', Path),
-		csv::read_file(Path, Rows).
+		csv(keep,_,_)::read_file(Path, Rows).
 
 	%
 	test(csv_read_file_by_line_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/with_header.csv', Path),
-		csv::read_file_by_line(Path, Rows).
+		csv(keep,_,_)::read_file_by_line(Path, Rows).
 
 	test(csv_read_stream_by_line_sample_csv_keep_header, true(Rows == [[field1, field2, field3], [aaa, bbb, ccc], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/with_header.csv', Path),
 		open(Path, read, Stream),
-		csv::read_stream_by_line(Stream, Rows),
+		csv(keep,_,_)::read_stream_by_line(Stream, Rows),
 		close(Stream).
 
 	% but we have an option to jump over the headers
@@ -136,7 +136,7 @@
 	test(csv_read_sample_csv_with_double_quotes, true(Rows == [['"aaa"', '"bbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
 		^^suppress_text_output,
 		file_path('test_files/with_double_quotes.csv', Path),
-		csv::read_file(Path, Rows).
+		csv(keep,_,_)::read_file(Path, Rows).
 
 	%6.  Fields containing line breaks (CRLF), double quotes, and commas
 	%    should be enclosed in double-quotes.  For example:
@@ -158,14 +158,14 @@
 		test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\r\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
 			^^suppress_text_output,
 			file_path('test_files/escaping_double_quotes.csv', Path),
-			csv::read_file(Path, Rows).
+			csv(keep,_,_)::read_file(Path, Rows).
 
 	:- else.
 
 		test(csv_read_sample_csv_escaping_double_quotes, true(Rows == [['"aaa"', '"b\nbb"', '"ccc"'], [zzz, yyy, xxx]])) :-
 			^^suppress_text_output,
 			file_path('test_files/escaping_double_quotes.csv', Path),
-			csv::read_file(Path, Rows).
+			csv(keep,_,_)::read_file(Path, Rows).
 
 	:- endif.
 
