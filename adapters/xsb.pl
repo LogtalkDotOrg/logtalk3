@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on February 13, 2022
+%  Last updated on June 25, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -98,8 +98,11 @@
 
 '$lgt_predicate_property'(Pred, Prop) :-
 	predicate_property(Pred, Prop).
-'$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).
-'$lgt_predicate_property'(setup_call_cleanup(_, _, _), static).
+:- if(\+ predicate_property(setup_call_cleanup(_,_,_), _)).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), static).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), meta_predicate(setup_call_cleanup(0,0,0))).
+:- endif.
 
 
 
@@ -112,9 +115,13 @@
 
 % setup_call_cleanup(+callable, +callable, +callable)
 
-setup_call_cleanup(Setup, Call, Cleanup) :-
-	once(Setup),
-	call_cleanup(Call, (Cleanup->true;true)).
+:- if(\+ predicate_property(setup_call_cleanup(_,_,_), _)).
+
+	setup_call_cleanup(Setup, Call, Cleanup) :-
+		once(Setup),
+		call_cleanup(Call, (Cleanup->true;true)).
+
+:- endif.
 
 
 

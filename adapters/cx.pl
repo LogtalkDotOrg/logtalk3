@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on February 13, 2022
+%  Last updated on June 25, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -103,6 +103,7 @@ findall(Term, Goal, List, Tail) :-
 	predicate_property(Pred, Prop).
 '$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).
 '$lgt_predicate_property'(setup_call_cleanup(_, _, _), static).
+'$lgt_predicate_property'(setup_call_cleanup(_, _, _), meta_predicate(setup_call_cleanup(0,0,0))).
 
 
 
