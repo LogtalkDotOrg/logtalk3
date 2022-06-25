@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on June 1, 2022
+%  Last updated on June 25, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -143,6 +143,7 @@ forall(Generate, Test) :-
 :- if(\+ predicate_property(setup_call_cleanup(_,_,_), _)).
 	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), built_in).
 	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), static).
+	'$lgt_predicate_property'(setup_call_cleanup(_, _, _), meta_predicate(setup_call_cleanup(0,0,0))).
 :- endif.
 
 

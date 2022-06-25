@@ -39,6 +39,9 @@ Prolog adapter and integration files
 
 * UPDATED: The LVM adapter file to require version 4.1.0 or later.
 
+* FIXED: The SICStus Prolog adapter file missing meta-predicate property for
+the `setup_call_cleanup/3` predicate when not built-in.
+
 Documentation
 -------------
 
