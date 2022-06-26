@@ -1244,13 +1244,14 @@
 	valid_status(alpha).
 	valid_status(deprecated).
 
-	valid_dependency(logtalk, _) :-
-		!.
 	valid_dependency(Dependency, Pack) :-
 		functor(Dependency, Operator, 2),
-		(	arg(1, Dependency, logtalk) ->
+		arg(1, Dependency, What),
+		(	What == logtalk ->
 			true
-		;	arg(1, Dependency, DependencyRegistry::DependencyPack),
+		;	atom(What), valid_backend(What) ->
+			true
+		;	What = DependencyRegistry::DependencyPack,
 			atom(DependencyRegistry),
 			atom(DependencyPack),
 			DependencyPack \== Pack

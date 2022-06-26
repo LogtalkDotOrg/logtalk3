@@ -105,6 +105,10 @@ programming idioms using a `otherwise/0` built-in predicate.
 
 * FIXED: Typo in two `packs` tool warning messages format.
 
+* FIXED: Workaround issues with operating-system file-systems that are not
+case-sensitive but are case-preserving in the implementation of the `packs`
+tool `readme_file_path/2` predicate.
+
 Tests
 -----
 

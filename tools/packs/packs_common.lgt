@@ -22,7 +22,7 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:25:1,
 		author is 'Paulo Moura',
 		date is 2022-06-26,
 		comment is 'Common predicates for the packs tool objects.'
@@ -182,6 +182,10 @@
 		argnames is ['URL', 'Decoded']
 	]).
 
+	:- uses(list, [
+		member/2
+	]).
+
 	:- uses(logtalk, [
 		expand_library_path/2, print_message/3
 	]).
@@ -189,7 +193,7 @@
 	:- uses(os, [
 		environment_variable/2, operating_system_type/1, shell/1,
 		file_exists/1, internal_os_path/2, make_directory_path/1,
-		path_concat/3
+		path_concat/3, directory_files/3
 	]).
 
 	:- uses(user, [
@@ -297,11 +301,15 @@
 		sub_atom(URL, _, _, 0, Extension),
 		!.
 
+	% use directory_files/2 instead of file_exists/1 as the later may
+	% succeed for a file that differs in case in operating-systems
+	% like macOS that are not case-sensitive but are case-preserving
 	readme_file_path(Directory, ReadMeFile) :-
 		readme_file_name(Basename),
-		path_concat(Directory, Basename, ReadMeFile),
-		file_exists(ReadMeFile),
-		!.
+		directory_files(Directory, Files, [type(regular), dot_files(false)]),
+		member(Basename, Files),
+		!,
+		path_concat(Directory, Basename, ReadMeFile).
 
 	print_readme_file_path(Directory) :-
 		(	readme_file_path(Directory, ReadMeFile) ->

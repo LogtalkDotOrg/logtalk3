@@ -11,7 +11,7 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:25:0
+| **Version:** 0:25:1
 | **Date:** 2022-06-26
 
 | **Compilation flags:**
@@ -19,6 +19,7 @@ Common predicates for the packs tool objects.
 
 
 | **Uses:**
+|    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
 |    :ref:`user <user/0>`
