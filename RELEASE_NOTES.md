@@ -109,6 +109,9 @@ programming idioms using a `otherwise/0` built-in predicate.
 case-sensitive but are case-preserving in the implementation of the `packs`
 tool `readme_file_path/2` predicate.
 
+* FIXED: The `packs` tool to only warn about a non-satisfied backend version
+dependency if running on that backend.
+
 Tests
 -----
 

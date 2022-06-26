@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:52:0,
+		version is 0:52:1,
 		author is 'Paulo Moura',
-		date is 2022-06-18,
+		date is 2022-06-26,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1420,12 +1420,15 @@
 		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
 		).
 	check_version(Operator, Backend, Version, _, none) :-
-		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
-		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
-		(	{call(Operator, FixedVersion, Version)} ->
-			true
-		;	backend(Backend, Name),
-			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version])
+		(	current_logtalk_flag(prolog_dialect, Backend) ->
+			current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
+			fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
+			(	{call(Operator, FixedVersion, Version)} ->
+				true
+			;	backend(Backend, Name),
+				print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version])
+			)
+		;	true
 		).
 
 	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.

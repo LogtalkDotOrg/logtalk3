@@ -562,11 +562,12 @@ installing (or updating to) the latest version of the pack.</p>
 </section>
 <section id="pack-dependencies">
 <h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Permalink to this heading"></a></h2>
-<p>Pack dependencies can be specified by registry and pack dependency names
-using the syntax <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>. When the pack depends on the
-Logtalk version itself, the reserved name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> can be used. When
-a pack is Prolog backend specific, the backend identifier can be used
-(see below for the table of backend specifiers).</p>
+<p>Pack dependencies on other packs can be specified using the syntax
+<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a standard
+term comparison operator as described below. When a pack depends on a
+Logtalk or backend version, the name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or the identifier of
+the backend can be used in place of <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code> (see below for
+the table of backend specifiers).</p>
 <p>Dependencies are specified using a list of the following elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;=</span> <span class="pre">Version</span></code> - the pack requires a dependency with

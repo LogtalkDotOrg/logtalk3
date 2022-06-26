@@ -490,11 +490,12 @@ installing (or updating to) the latest version of the pack.
 Pack dependencies
 -----------------
 
-Pack dependencies can be specified by registry and pack dependency names
-using the syntax ``Registry::Pack``. When the pack depends on the
-Logtalk version itself, the reserved name ``logtalk`` can be used. When
-a pack is Prolog backend specific, the backend identifier can be used
-(see below for the table of backend specifiers).
+Pack dependencies on other packs can be specified using the syntax
+``Registry::Pack Operator Version`` where ``Operator`` is a standard
+term comparison operator as described below. When a pack depends on a
+Logtalk or backend version, the name ``logtalk`` or the identifier of
+the backend can be used in place of ``Registry::Pack`` (see below for
+the table of backend specifiers).
 
 Dependencies are specified using a list of the following elements:
 
