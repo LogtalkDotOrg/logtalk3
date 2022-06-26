@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:25:0,
 		author is 'Paulo Moura',
-		date is 2022-06-15,
+		date is 2022-06-26,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -310,10 +310,15 @@
 		;	true
 		).
 
+	readme_file_name('README.MD').
 	readme_file_name('README.md').
 	readme_file_name('Readme.md').
 	readme_file_name('readme.md').
 	readme_file_name('README').
+	readme_file_name('README.TXT').
+	readme_file_name('README.txt').
+	readme_file_name('Readme.txt').
+	readme_file_name('readme.txt').
 
 	decode_url_spaces(URL0, URL) :-
 		atom_chars(URL0, Chars0),

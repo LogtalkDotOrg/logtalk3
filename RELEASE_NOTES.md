@@ -92,6 +92,9 @@ to `curl` (e.g. for use with pack registry servers requiring authentication),
 * IMPROVED: The `packs` tool to check the availability of a new version of a
 pack before uninstalling the older version when updating.
 
+* UPDATED: The `packs` tool to also recognize readme files with `.txt`
+extensions to better support Prolog packs.
+
 * UPDATED: The `tutor` tool to give specific advise when the user is trying to
 use the common Prolog top-level shortcut for loading files as a directive.
 
