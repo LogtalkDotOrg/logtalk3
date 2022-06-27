@@ -109,11 +109,7 @@ This tool can be loaded using the query:
 Testing
 -------
 
-To test this tool, first source the `tester.sh` file:
-
-	$ source tester.sh
-
-Then, load the `tester.lgt` file:
+To run the tool tests, use the query:
 
 	| ?- logtalk_load(packs(tester)).
 
