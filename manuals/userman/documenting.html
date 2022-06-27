@@ -78,6 +78,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#documenting-directives">Documenting directives</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#entity-directives">Entity directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#predicate-directives">Predicate directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documenting-predicate-exceptions">Documenting predicate exceptions</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#processing-and-viewing-documenting-files">Processing and viewing documenting files</a></li>
@@ -291,6 +292,48 @@ keywords. All key-value pairs can also be retrieved programmatically
 using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and are visible
 to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool (which includes them in the generated
 documentation).</p>
+</section>
+<section id="documenting-predicate-exceptions">
+<span id="documenting-exceptions"></span><h3>Documenting predicate exceptions<a class="headerlink" href="#documenting-predicate-exceptions" title="Permalink to this heading"></a></h3>
+<p>As described above, the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> predicate directive supports an
+<code class="docutils literal notranslate"><span class="pre">exceptions</span></code> key that allows us to list all exceptions that may occur
+when calling a predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(check_option<span class="o">/</span><span class="m">1</span>, [
+    comment <span class="k">is</span> <span class="s">&#39;Succeeds if the option is valid. Throws an error otherwise.&#39;</span>,
+    argnames <span class="k">is</span> [<span class="s">&#39;Option&#39;</span>],
+    exceptions <span class="k">is</span> [
+        <span class="s">&#39;``Option`` is a variable&#39;</span> <span class="o">-</span> <span class="k">instantiation_error</span>,
+        <span class="s">&#39;``Option`` is neither a variable nor a compound term&#39;</span> <span class="o">-</span> <span class="k">type_error</span>(compound, <span class="s">&#39;Option&#39;</span>),
+        <span class="s">&#39;``Option`` is a compound term but not a valid option&#39;</span> <span class="o">-</span> <span class="k">domain_error</span>(option, <span class="s">&#39;Option&#39;</span>)
+    ]
+]).
+</pre></div>
+</div>
+<p>When possible, only standard exceptions should be used. See e.g the
+<a class="reference internal" href="../refman/methods/error_handling_methods.html#error-handling-methods"><span class="std std-ref">error handling methods</span></a> section for
+a full list. The argument names should be the same as those provided
+in the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> or <code class="docutils literal notranslate"><span class="pre">argnames</span></code> keys. For each exception, we
+use <em>controlled language</em> as found e.g. in the ISO Prolog Core standard.
+Some examples:</p>
+<dl class="simple">
+<dt>Instantiation error when an argument cannot be a variable</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a variable</p>
+</dd>
+<dt>Instantiation error when a closed list with bound elements is required</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable</p>
+</dd>
+<dt>Uninstantiation error when an argument is not a variable</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is not a variable</p>
+</dd>
+<dt>Type error when an argument is not a variable but is not of the expected type</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is neither a variable nor a TYPE</p>
+</dd>
+<dt>Type error when an element of a list is not a variable but is not of the expected type</dt><dd><p>An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Argument</span></code> list is neither a variable not a TYPE</p>
+</dd>
+<dt>Domain error when an argument is of the correct type but not in the expected domain</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a TYPE but not a valid DOMAIN</p>
+</dd>
+<dt>Domain error when an element of a list is of the correct type but not in the expected domain</dt><dd><p>An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Argument</span></code> list is a TYPE but not a valid DOMAIN</p>
+</dd>
+</dl>
+<p>Other classes of errors have a less rigid style. In case of doubt,
+look for examples in this Handbook, in the APIs documentation, and
+in standard documents.</p>
 </section>
 </section>
 <section id="processing-and-viewing-documenting-files">

@@ -46,6 +46,8 @@ built-in.
 Documentation
 -------------
 
+* ADDED: A Handbook section on documenting predicate exceptions.
+
 * IMPROVED: Handbook documentation of the `mode/2` and `uses/2` directives.
 
 * UPDATED: The `packs` tool documentation section on pack signature checking.

@@ -182,7 +182,7 @@ values are: ``event``, ``object``, ``category``, ``protocol``,
 ``number``, ``integer``, ``float``, ``compound``, and ``list``. The
 first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
-compound terms.
+compound terms. See the ``types`` library documentation for details.
 
 .. _predicates_mode_number_of_proofs:
 

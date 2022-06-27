@@ -197,6 +197,59 @@ using the :ref:`reflection API <reflection_reflection>` and are visible
 to the :doc:`../devtools/lgtdoc` tool (which includes them in the generated
 documentation).
 
+.. _documenting_exceptions:
+
+Documenting predicate exceptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As described above, the ``info/2`` predicate directive supports an
+``exceptions`` key that allows us to list all exceptions that may occur
+when calling a predicate. For example:
+
+::
+
+   :- info(check_option/1, [
+       comment is 'Succeeds if the option is valid. Throws an error otherwise.',
+       argnames is ['Option'],
+       exceptions is [
+           '``Option`` is a variable' - instantiation_error,
+           '``Option`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+           '``Option`` is a compound term but not a valid option' - domain_error(option, 'Option')
+       ]
+   ]).
+
+When possible, only standard exceptions should be used. See e.g the
+:ref:`error handling methods <error_handling_methods>` section for
+a full list. The argument names should be the same as those provided
+in the ``arguments`` or ``argnames`` keys. For each exception, we
+use *controlled language* as found e.g. in the ISO Prolog Core standard.
+Some examples:
+
+Instantiation error when an argument cannot be a variable
+   ``Argument`` is a variable
+
+Instantiation error when a closed list with bound elements is required
+   ``Argument`` is a partial list or a list with an element ``Element`` which is a variable
+
+Uninstantiation error when an argument is not a variable
+   ``Argument`` is not a variable
+
+Type error when an argument is not a variable but is not of the expected type
+   ``Argument`` is neither a variable nor a TYPE
+
+Type error when an element of a list is not a variable but is not of the expected type
+   An element ``Element`` of the ``Argument`` list is neither a variable not a TYPE
+
+Domain error when an argument is of the correct type but not in the expected domain
+   ``Argument`` is a TYPE but not a valid DOMAIN
+
+Domain error when an element of a list is of the correct type but not in the expected domain
+   An element ``Element`` of the ``Argument`` list is a TYPE but not a valid DOMAIN
+
+Other classes of errors have a less rigid style. In case of doubt,
+look for examples in this Handbook, in the APIs documentation, and
+in standard documents.
+
 .. _documenting_processing:
 
 Processing and viewing documenting files
