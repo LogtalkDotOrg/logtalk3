@@ -312,21 +312,26 @@ when calling a predicate. For example:</p>
 <p>When possible, only standard exceptions should be used. See e.g the
 <a class="reference internal" href="../refman/methods/error_handling_methods.html#error-handling-methods"><span class="std std-ref">error handling methods</span></a> section for
 a full list. The argument names should be the same as those provided
-in the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> or <code class="docutils literal notranslate"><span class="pre">argnames</span></code> keys. For each exception, we
-use <em>controlled language</em> as found e.g. in the ISO Prolog Core standard.
-Some examples:</p>
-<dl class="simple">
-<dt>Instantiation error when an argument cannot be a variable</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a variable</p>
+in the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> or <code class="docutils literal notranslate"><span class="pre">argnames</span></code> keys. Exceptions are usually
+listed starting with instantiation and uninstantiation errors,
+followed by type errors, and then domain errors.</p>
+<p>For each exception, use <em>controlled language</em> as found e.g. in the ISO
+Prolog Core standard and this Handbook is advised. Some examples:</p>
+<dl>
+<dt>Instantiation error when one of more arguments cannot be a variable</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a variable</p>
+<p><code class="docutils literal notranslate"><span class="pre">Argument1</span></code> and <code class="docutils literal notranslate"><span class="pre">Argument2</span></code> are variables</p>
 </dd>
 <dt>Instantiation error when a closed list with bound elements is required</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a partial list or a list with an element <code class="docutils literal notranslate"><span class="pre">Element</span></code> which is a variable</p>
 </dd>
 <dt>Uninstantiation error when an argument is not a variable</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is not a variable</p>
 </dd>
-<dt>Type error when an argument is not a variable but is not of the expected type</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is neither a variable nor a TYPE</p>
+<dt>Type error when an argument is not a variable but also not of the expected type</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is neither a variable nor a TYPE</p>
+<p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is neither a partial list nor a list</p>
 </dd>
-<dt>Type error when an element of a list is not a variable but is not of the expected type</dt><dd><p>An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Argument</span></code> list is neither a variable not a TYPE</p>
+<dt>Type error when an element of a list is not a variable but is not of the expected type</dt><dd><p>An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Argument</span></code> list is neither a variable nor a TYPE</p>
 </dd>
 <dt>Domain error when an argument is of the correct type but not in the expected domain</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a TYPE but not a valid DOMAIN</p>
+<p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is an integer that is less than zero</p>
 </dd>
 <dt>Domain error when an element of a list is of the correct type but not in the expected domain</dt><dd><p>An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Argument</span></code> list is a TYPE but not a valid DOMAIN</p>
 </dd>
