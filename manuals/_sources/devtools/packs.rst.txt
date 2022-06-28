@@ -280,7 +280,7 @@ Optionally, the registry object can also define a ``note(Action, Note)``
 predicate. The ``Action`` argument is an atom: ``add``, ``update``, or
 ``delete``. The ``Notes`` argument is also an atom. The tool will print
 any available notes when executing one of the registry actions. See the
-``registry_protocol`` documentation for details.
+``registry_protocol`` documentation for more details.
 
 The registry directory should also contain ``LICENSE`` and ``README.md``
 files (individual packs can use a different license, however). The path
