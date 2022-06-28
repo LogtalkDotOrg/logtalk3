@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-970 1190,-970 1190,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object cc_metric</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;06&#45;26, 22:54</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;06&#45;28, 15:12</text>
 <g id="clust1" class="cluster">
 <title>cluster_cc_metric_object</title>
 <g id="a_clust1"><a xlink:title="cc_metric">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 1166,-49 1166,-49 1172,-49 1178,-55 1178,-61 1178,-61 1178,-946 1178,-946 1178,-952 1172,-958 1166,-958 1166,-958 20,-958 20,-958 14,-958 8,-952 8,-946 8,-946 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt">
 <text text-anchor="start" x="20.5" y="-941.5" font-family="Monospace" font-size="10.00" fill="dimgray">cc_metric</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- entity_score/2 -->
 <g id="node1" class="node">
 <title>entity_score/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37">
 <polygon fill="cornsilk" stroke="black" points="1059.5,-449 936.5,-449 936.5,-413 1059.5,-413 1059.5,-449"/>
 <text text-anchor="start" x="945" y="-433.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="951" y="-433.2" font-family="Monospace" font-size="11.00">entity_score/2</text>
@@ -41,7 +41,7 @@
 <!-- entity_score/3 -->
 <g id="node2" class="node">
 <title>entity_score/3</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L42">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L42">
 <polygon fill="cornsilk" stroke="black" points="851.5,-331 728.5,-331 728.5,-295 851.5,-295 851.5,-331"/>
 <text text-anchor="start" x="737" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="743" y="-315.2" font-family="Monospace" font-size="11.00">entity_score/3</text>
@@ -55,12 +55,12 @@
 <!-- entity_score/2&#45;&gt;entity_score/3 -->
 <g id="edge1" class="edge">
 <title>entity_score/2&#45;&gt;entity_score/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M980.47,-412.75C965.79,-399 943.79,-379.98 922,-367 900.46,-354.18 875.25,-343.19 852.67,-334.6"/>
 <polygon fill="black" stroke="black" points="853.76,-331.27 843.17,-331.07 851.32,-337.83 853.76,-331.27"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37">
 <text text-anchor="start" x="935" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- entity_score/2&#45;&gt;^^current_entity/1 -->
 <g id="edge19" class="edge">
 <title>entity_score/2&#45;&gt;^^current_entity/1</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M992.2,-412.89C987.68,-400.07 981.01,-382.2 974,-367 969.91,-358.14 964.97,-348.73 960.33,-340.33"/>
 <polygon fill="black" stroke="black" points="963.24,-338.36 955.28,-331.36 957.14,-341.79 963.24,-338.36"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37">
 <text text-anchor="start" x="977" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,12 +103,12 @@
 <!-- entity_score/2&#45;&gt;^^entity_kind/2 -->
 <g id="edge20" class="edge">
 <title>entity_score/2&#45;&gt;^^entity_kind/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M1013.49,-412.88C1031.25,-393.27 1060.5,-360.95 1080.71,-338.63"/>
 <polygon fill="black" stroke="black" points="1083.33,-340.95 1087.44,-331.19 1078.14,-336.25 1083.33,-340.95"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L37">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L37">
 <text text-anchor="start" x="1053" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -116,7 +116,7 @@
 <!-- predicate_edges/3 -->
 <g id="node3" class="node">
 <title>predicate_edges/3</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50">
 <polygon fill="cornsilk" stroke="black" points="700.5,-213 557.5,-213 557.5,-177 700.5,-177 700.5,-213"/>
 <text text-anchor="start" x="566" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="572" y="-197.2" font-family="Monospace" font-size="11.00">predicate_edges/3</text>
@@ -130,12 +130,12 @@
 <!-- entity_score/3&#45;&gt;predicate_edges/3 -->
 <g id="edge2" class="edge">
 <title>entity_score/3&#45;&gt;predicate_edges/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M766.24,-294.88C738.42,-274.84 692.19,-241.53 661.17,-219.18"/>
 <polygon fill="black" stroke="black" points="663.01,-216.19 652.85,-213.19 658.92,-221.87 663.01,-216.19"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44">
 <text text-anchor="start" x="714" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -143,7 +143,7 @@
 <!-- predicate_nodes/3 -->
 <g id="node4" class="node">
 <title>predicate_nodes/3</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L91">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L91">
 <polygon fill="cornsilk" stroke="black" points="861.5,-213 718.5,-213 718.5,-177 861.5,-177 861.5,-213"/>
 <text text-anchor="start" x="727" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="733" y="-197.2" font-family="Monospace" font-size="11.00">predicate_nodes/3</text>
@@ -157,12 +157,12 @@
 <!-- entity_score/3&#45;&gt;predicate_nodes/3 -->
 <g id="edge3" class="edge">
 <title>entity_score/3&#45;&gt;predicate_nodes/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M790,-294.88C790,-276.04 790,-245.47 790,-223.3"/>
 <polygon fill="black" stroke="black" points="793.5,-223.19 790,-213.19 786.5,-223.19 793.5,-223.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44">
 <text text-anchor="start" x="790" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -170,7 +170,7 @@
 <!-- connected_components/3 -->
 <g id="node5" class="node">
 <title>connected_components/3</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L104">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L104">
 <polygon fill="cornsilk" stroke="black" points="1056.5,-213 879.5,-213 879.5,-177 1056.5,-177 1056.5,-213"/>
 <text text-anchor="start" x="888" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="894" y="-197.2" font-family="Monospace" font-size="11.00">connected_components/3</text>
@@ -184,12 +184,12 @@
 <!-- entity_score/3&#45;&gt;connected_components/3 -->
 <g id="edge4" class="edge">
 <title>entity_score/3&#45;&gt;connected_components/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M816.26,-294.88C847.16,-274.75 898.57,-241.25 932.87,-218.89"/>
 <polygon fill="black" stroke="black" points="935.16,-221.58 941.63,-213.19 931.34,-215.71 935.16,-221.58"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L44">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L44">
 <text text-anchor="start" x="884" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -211,12 +211,12 @@
 <!-- predicate_edges/3&#45;&gt;list::memberchk/2 -->
 <g id="edge23" class="edge">
 <title>predicate_edges/3&#45;&gt;list::memberchk/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M629,-176.88C629,-158.04 629,-127.47 629,-105.3"/>
 <polygon fill="black" stroke="black" points="632.5,-105.19 629,-95.19 625.5,-105.19 632.5,-105.19"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50">
 <text text-anchor="start" x="629" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -238,12 +238,12 @@
 <!-- predicate_edges/3&#45;&gt;list::length/2 -->
 <g id="edge24" class="edge">
 <title>predicate_edges/3&#45;&gt;list::length/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M652.76,-176.88C680.58,-156.84 726.81,-123.53 757.83,-101.18"/>
 <polygon fill="black" stroke="black" points="760.08,-103.87 766.15,-95.19 755.99,-98.19 760.08,-103.87"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L50">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L50">
 <text text-anchor="start" x="714" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -251,12 +251,12 @@
 <!-- predicate_nodes/3&#45;&gt;list::length/2 -->
 <g id="edge25" class="edge">
 <title>predicate_nodes/3&#45;&gt;list::length/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L91" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M790,-176.88C790,-158.04 790,-127.47 790,-105.3"/>
 <polygon fill="black" stroke="black" points="793.5,-105.19 790,-95.19 786.5,-105.19 793.5,-105.19"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L91">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L91">
 <text text-anchor="start" x="790" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -264,12 +264,12 @@
 <!-- connected_components/3&#45;&gt;list::length/2 -->
 <g id="edge26" class="edge">
 <title>connected_components/3&#45;&gt;list::length/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L104" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M941.74,-176.88C910.84,-156.75 859.43,-123.25 825.13,-100.89"/>
 <polygon fill="black" stroke="black" points="826.66,-97.71 816.37,-95.19 822.84,-103.58 826.66,-97.71"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L104">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L104">
 <text text-anchor="start" x="884" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -277,7 +277,7 @@
 <!-- process_entity/2 -->
 <g id="node6" class="node">
 <title>process_entity/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125">
 <polygon fill="cornsilk" stroke="black" points="1019.5,-803 882.5,-803 882.5,-767 1019.5,-767 1019.5,-803"/>
 <text text-anchor="start" x="891" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="897" y="-787.2" font-family="Monospace" font-size="11.00">process_entity/2</text>
@@ -291,12 +291,12 @@
 <!-- process_entity/2&#45;&gt;entity_score/3 -->
 <g id="edge5" class="edge">
 <title>process_entity/2&#45;&gt;entity_score/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M942.6,-766.78C932.53,-744.52 917,-704.31 917,-668 917,-668 917,-668 917,-430 917,-386.55 875.98,-355.02 840.56,-335.9"/>
 <polygon fill="black" stroke="black" points="841.72,-332.56 831.23,-331.07 838.5,-338.77 841.72,-332.56"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125">
 <text text-anchor="start" x="917" y="-546.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -318,12 +318,12 @@
 <!-- process_entity/2&#45;&gt;logtalk::print_message/3 -->
 <g id="edge27" class="edge">
 <title>process_entity/2&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M890.34,-766.88C843.01,-753.73 775.52,-735.43 716,-721 666.35,-708.96 610.7,-696.77 565.1,-687.13"/>
 <polygon fill="black" stroke="black" points="565.74,-683.68 555.23,-685.04 564.3,-690.53 565.74,-683.68"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L125">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L125">
 <text text-anchor="start" x="754" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -331,7 +331,7 @@
 <!-- file_score/2 -->
 <g id="node7" class="node">
 <title>file_score/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129">
 <polygon fill="cornsilk" stroke="black" points="615,-449 505,-449 505,-413 615,-413 615,-449"/>
 <text text-anchor="start" x="513" y="-433.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="519" y="-433.2" font-family="Monospace" font-size="11.00">file_score/2</text>
@@ -345,12 +345,12 @@
 <!-- file_score/2&#45;&gt;entity_score/3 -->
 <g id="edge6" class="edge">
 <title>file_score/2&#45;&gt;entity_score/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M593.94,-412.88C634.53,-392.41 702.56,-358.1 746.85,-335.76"/>
 <polygon fill="black" stroke="black" points="748.57,-338.81 755.92,-331.19 745.42,-332.56 748.57,-338.81"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129">
 <text text-anchor="start" x="681" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -372,12 +372,12 @@
 <!-- file_score/2&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge28" class="edge">
 <title>file_score/2&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M564.57,-412.88C569.63,-393.95 577.85,-363.19 583.78,-341"/>
 <polygon fill="black" stroke="black" points="587.21,-341.75 586.41,-331.19 580.44,-339.94 587.21,-341.75"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129">
 <text text-anchor="start" x="576" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -399,12 +399,12 @@
 <!-- file_score/2&#45;&gt;numberlist::sum/2 -->
 <g id="edge29" class="edge">
 <title>file_score/2&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M543.86,-412.74C530.55,-399.18 510.73,-380.39 491,-367 473.2,-354.92 452.24,-344.04 433.47,-335.32"/>
 <polygon fill="black" stroke="black" points="434.73,-332.05 424.17,-331.09 431.83,-338.42 434.73,-332.05"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L129">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L129">
 <text text-anchor="start" x="503" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -412,7 +412,7 @@
 <!-- process_file/1 -->
 <g id="node8" class="node">
 <title>process_file/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141">
 <polygon fill="cornsilk" stroke="black" points="141.5,-803 18.5,-803 18.5,-767 141.5,-767 141.5,-803"/>
 <text text-anchor="start" x="27" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="33" y="-787.2" font-family="Monospace" font-size="11.00">process_file/1</text>
@@ -426,12 +426,12 @@
 <!-- process_file/1&#45;&gt;file_score/2 -->
 <g id="edge7" class="edge">
 <title>process_file/1&#45;&gt;file_score/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M69.85,-766.87C44.91,-722.31 -13.24,-601.37 45,-531 45.97,-529.83 474.51,-449.29 476,-449 482.13,-447.8 488.51,-446.53 494.9,-445.25"/>
 <polygon fill="black" stroke="black" points="495.78,-448.65 504.89,-443.25 494.4,-441.78 495.78,-448.65"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141">
 <text text-anchor="start" x="19" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -439,12 +439,12 @@
 <!-- process_file/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge30" class="edge">
 <title>process_file/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141" xlink:title="calls">
 <path fill="none" stroke="black" d="M106.84,-766.83C130.29,-752.56 165.71,-732.75 199,-721 229.58,-710.21 303.22,-696.15 366.32,-685.23"/>
 <polygon fill="black" stroke="black" points="367.08,-688.64 376.35,-683.5 365.9,-681.75 367.08,-688.64"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L141">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L141">
 <text text-anchor="start" x="199" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -452,7 +452,7 @@
 <!-- directory_score/2 -->
 <g id="node9" class="node">
 <title>directory_score/2</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145">
 <polygon fill="cornsilk" stroke="black" points="897.5,-685 754.5,-685 754.5,-649 897.5,-649 897.5,-685"/>
 <text text-anchor="start" x="763" y="-669.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="769" y="-669.2" font-family="Monospace" font-size="11.00">directory_score/2</text>
@@ -466,7 +466,7 @@
 <!-- directory_file_score/3 -->
 <g id="node11" class="node">
 <title>directory_file_score/3</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153">
 <polygon fill="cornsilk" stroke="black" points="682.5,-567 505.5,-567 505.5,-531 682.5,-531 682.5,-567"/>
 <text text-anchor="start" x="514" y="-551.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="520" y="-551.2" font-family="Monospace" font-size="11.00">directory_file_score/3</text>
@@ -480,12 +480,12 @@
 <!-- directory_score/2&#45;&gt;directory_file_score/3 -->
 <g id="edge8" class="edge">
 <title>directory_score/2&#45;&gt;directory_file_score/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145" xlink:title="calls">
 <path fill="none" stroke="black" d="M782.36,-648.9C758.32,-639.09 728.14,-626.15 702,-613 677.34,-600.6 650.52,-584.97 629.78,-572.38"/>
 <polygon fill="black" stroke="black" points="631.36,-569.24 621,-567.01 627.71,-575.21 631.36,-569.24"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145">
 <text text-anchor="start" x="702" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -493,12 +493,12 @@
 <!-- directory_score/2&#45;&gt;numberlist::sum/2 -->
 <g id="edge31" class="edge">
 <title>directory_score/2&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145" xlink:title="calls">
 <path fill="none" stroke="black" d="M837.12,-648.57C853.07,-621.12 877.92,-567.24 853,-531 795.28,-447.08 712.05,-519.97 639,-449 626.57,-436.92 635.77,-425.72 624,-413 593.49,-380.03 575.31,-384.66 534,-367 505.85,-354.97 473.96,-343.53 446.68,-334.37"/>
 <polygon fill="black" stroke="black" points="447.45,-330.94 436.86,-331.11 445.24,-337.58 447.45,-330.94"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L145">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L145">
 <text text-anchor="start" x="810" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -506,7 +506,7 @@
 <!-- process_directory/1 -->
 <g id="node10" class="node">
 <title>process_directory/1</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149">
 <polygon fill="cornsilk" stroke="black" points="864.5,-803 707.5,-803 707.5,-767 864.5,-767 864.5,-803"/>
 <text text-anchor="start" x="716" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="722" y="-787.2" font-family="Monospace" font-size="11.00">process_directory/1</text>
@@ -520,12 +520,12 @@
 <!-- process_directory/1&#45;&gt;directory_score/2 -->
 <g id="edge9" class="edge">
 <title>process_directory/1&#45;&gt;directory_score/2</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M791.9,-766.88C798.46,-747.86 809.13,-716.91 816.79,-694.7"/>
 <polygon fill="black" stroke="black" points="820.12,-695.78 820.07,-685.19 813.5,-693.5 820.12,-695.78"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149">
 <text text-anchor="start" x="807" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -533,12 +533,12 @@
 <!-- process_directory/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge32" class="edge">
 <title>process_directory/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M757.47,-766.94C733.45,-753.12 697.85,-733.89 665,-721 630.85,-707.6 592.04,-696.23 558.23,-687.51"/>
 <polygon fill="black" stroke="black" points="558.92,-684.07 548.37,-685 557.2,-690.86 558.92,-684.07"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L149">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L149">
 <text text-anchor="start" x="685" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -546,12 +546,12 @@
 <!-- directory_file_score/3&#45;&gt;file_score/2 -->
 <g id="edge10" class="edge">
 <title>directory_file_score/3&#45;&gt;file_score/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M588.98,-530.88C583.43,-511.95 574.42,-481.19 567.91,-459"/>
 <polygon fill="black" stroke="black" points="571.21,-457.8 565.04,-449.19 564.49,-459.77 571.21,-457.8"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153">
 <text text-anchor="start" x="578" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -559,12 +559,12 @@
 <!-- directory_file_score/3&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge33" class="edge">
 <title>directory_file_score/3&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M635.5,-530.85C653.73,-520.32 670.19,-505 666,-485 654.62,-430.71 624.94,-372.6 606.52,-340.03"/>
 <polygon fill="black" stroke="black" points="609.44,-338.08 601.42,-331.16 603.37,-341.57 609.44,-338.08"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L153">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L153">
 <text text-anchor="start" x="655" y="-428.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -572,7 +572,7 @@
 <!-- rdirectory_score/2 -->
 <g id="node12" class="node">
 <title>rdirectory_score/2</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161">
 <polygon fill="cornsilk" stroke="black" points="736,-685 586,-685 586,-649 736,-649 736,-685"/>
 <text text-anchor="start" x="594" y="-669.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="600" y="-669.2" font-family="Monospace" font-size="11.00">rdirectory_score/2</text>
@@ -586,12 +586,12 @@
 <!-- rdirectory_score/2&#45;&gt;directory_file_score/3 -->
 <g id="edge11" class="edge">
 <title>rdirectory_score/2&#45;&gt;directory_file_score/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M651.11,-648.88C640.03,-629.69 621.93,-598.35 609.08,-576.1"/>
 <polygon fill="black" stroke="black" points="611.96,-574.1 603.93,-567.19 605.9,-577.6 611.96,-574.1"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161">
 <text text-anchor="start" x="629" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -599,12 +599,12 @@
 <!-- rdirectory_score/2&#45;&gt;numberlist::sum/2 -->
 <g id="edge35" class="edge">
 <title>rdirectory_score/2&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M611.05,-648.86C573.67,-633.38 524.45,-606.85 497,-567 457.82,-510.11 504.69,-475.84 476,-413 462.12,-382.6 435.02,-355.66 413.47,-337.59"/>
 <polygon fill="black" stroke="black" points="415.48,-334.71 405.52,-331.1 411.06,-340.14 415.48,-334.71"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161">
 <text text-anchor="start" x="483" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -626,12 +626,12 @@
 <!-- rdirectory_score/2&#45;&gt;list::member/2 -->
 <g id="edge34" class="edge">
 <title>rdirectory_score/2&#45;&gt;list::member/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M585.92,-650.69C582.91,-650.11 579.93,-649.55 577,-649 483.92,-631.61 453.86,-650.7 367,-613 345.38,-603.62 324.27,-587.46 308.75,-573.87"/>
 <polygon fill="black" stroke="black" points="310.94,-571.13 301.17,-567.04 306.25,-576.33 310.94,-571.13"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161">
 <text text-anchor="start" x="367" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -650,12 +650,12 @@
 <!-- rdirectory_score/2&#45;&gt;^^sub_directory/2 -->
 <g id="edge21" class="edge">
 <title>rdirectory_score/2&#45;&gt;^^sub_directory/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M689.32,-648.84C703.48,-639.4 720.26,-626.8 733,-613 743.05,-602.11 751.95,-588.26 758.71,-576.33"/>
 <polygon fill="black" stroke="black" points="761.94,-577.71 763.64,-567.25 755.79,-574.37 761.94,-577.71"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L161">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L161">
 <text text-anchor="start" x="740" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -663,7 +663,7 @@
 <!-- process_rdirectory/1 -->
 <g id="node13" class="node">
 <title>process_rdirectory/1</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176">
 <polygon fill="cornsilk" stroke="black" points="689,-803 525,-803 525,-767 689,-767 689,-803"/>
 <text text-anchor="start" x="533" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="539" y="-787.2" font-family="Monospace" font-size="11.00">process_rdirectory/1</text>
@@ -677,12 +677,12 @@
 <!-- process_rdirectory/1&#45;&gt;rdirectory_score/2 -->
 <g id="edge12" class="edge">
 <title>process_rdirectory/1&#45;&gt;rdirectory_score/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M614.97,-766.88C623.86,-747.78 638.36,-716.63 648.71,-694.4"/>
 <polygon fill="black" stroke="black" points="651.95,-695.73 653,-685.19 645.61,-692.78 651.95,-695.73"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176">
 <text text-anchor="start" x="635" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -690,12 +690,12 @@
 <!-- process_rdirectory/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge36" class="edge">
 <title>process_rdirectory/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M587.08,-766.88C563.95,-747.01 525.65,-714.1 499.65,-691.76"/>
 <polygon fill="black" stroke="black" points="501.87,-689.05 492,-685.19 497.31,-694.36 501.87,-689.05"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L176">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L176">
 <text text-anchor="start" x="543" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -703,7 +703,7 @@
 <!-- library_score/2 -->
 <g id="node14" class="node">
 <title>library_score/2</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180">
 <polygon fill="cornsilk" stroke="black" points="1168,-803 1038,-803 1038,-767 1168,-767 1168,-803"/>
 <text text-anchor="start" x="1046" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1052" y="-787.2" font-family="Monospace" font-size="11.00">library_score/2</text>
@@ -717,12 +717,12 @@
 <!-- library_score/2&#45;&gt;directory_score/2 -->
 <g id="edge13" class="edge">
 <title>library_score/2&#45;&gt;directory_score/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M1062.13,-766.88C1012.72,-746.19 929.6,-711.38 876.3,-689.07"/>
 <polygon fill="black" stroke="black" points="877.62,-685.82 867.04,-685.19 874.91,-692.28 877.62,-685.82"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180">
 <text text-anchor="start" x="972" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -744,12 +744,12 @@
 <!-- library_score/2&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge37" class="edge">
 <title>library_score/2&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180" xlink:title="calls">
 <path fill="none" stroke="black" d="M1095.47,-766.88C1087.08,-747.78 1073.38,-716.63 1063.61,-694.4"/>
 <polygon fill="black" stroke="black" points="1066.78,-692.93 1059.56,-685.19 1060.38,-695.75 1066.78,-692.93"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L180">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L180">
 <text text-anchor="start" x="1079" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -757,7 +757,7 @@
 <!-- process_library/1 -->
 <g id="node15" class="node">
 <title>process_library/1</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184">
 <polygon fill="cornsilk" stroke="black" points="1093.5,-921 950.5,-921 950.5,-885 1093.5,-885 1093.5,-921"/>
 <text text-anchor="start" x="959" y="-905.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="965" y="-905.2" font-family="Monospace" font-size="11.00">process_library/1</text>
@@ -771,12 +771,12 @@
 <!-- process_library/1&#45;&gt;library_score/2 -->
 <g id="edge14" class="edge">
 <title>process_library/1&#45;&gt;library_score/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M1033.95,-884.88C1047.47,-865.52 1069.63,-833.79 1085.19,-811.51"/>
 <polygon fill="black" stroke="black" points="1088.14,-813.39 1091,-803.19 1082.4,-809.38 1088.14,-813.39"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184">
 <text text-anchor="start" x="1064" y="-841.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -784,12 +784,12 @@
 <!-- process_library/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge38" class="edge">
 <title>process_library/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M950.47,-893.43C812.51,-876.24 520.44,-836.33 489,-803 461.89,-774.25 462.95,-725.43 466.94,-695.05"/>
 <polygon fill="black" stroke="black" points="470.41,-695.54 468.43,-685.13 463.48,-694.5 470.41,-695.54"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L184">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L184">
 <text text-anchor="start" x="489" y="-782.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -797,7 +797,7 @@
 <!-- rlibrary_score/2 -->
 <g id="node16" class="node">
 <title>rlibrary_score/2</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188">
 <polygon fill="cornsilk" stroke="black" points="294.5,-685 157.5,-685 157.5,-649 294.5,-649 294.5,-685"/>
 <text text-anchor="start" x="166" y="-669.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="172" y="-669.2" font-family="Monospace" font-size="11.00">rlibrary_score/2</text>
@@ -811,12 +811,12 @@
 <!-- rlibrary_score/2&#45;&gt;directory_file_score/3 -->
 <g id="edge15" class="edge">
 <title>rlibrary_score/2&#45;&gt;directory_file_score/3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M280.3,-648.88C346.85,-627.91 459.44,-592.41 530.1,-570.14"/>
 <polygon fill="black" stroke="black" points="531.29,-573.44 539.78,-567.09 529.19,-566.76 531.29,-573.44"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188">
 <text text-anchor="start" x="421" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -824,12 +824,12 @@
 <!-- rlibrary_score/2&#45;&gt;numberlist::sum/2 -->
 <g id="edge40" class="edge">
 <title>rlibrary_score/2&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M223.29,-648.89C220.32,-629.2 215.74,-595.86 214,-567 209.8,-497.48 216.27,-477.31 243,-413 252.19,-390.9 253.24,-383.05 271,-367 285.64,-353.77 304.17,-343.19 321.88,-335.06"/>
 <polygon fill="black" stroke="black" points="323.29,-338.27 331.04,-331.04 320.47,-331.86 323.29,-338.27"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188">
 <text text-anchor="start" x="217" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -837,12 +837,12 @@
 <!-- rlibrary_score/2&#45;&gt;list::member/2 -->
 <g id="edge39" class="edge">
 <title>rlibrary_score/2&#45;&gt;list::member/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M223.13,-648.9C221.72,-635.76 221.5,-617.47 228,-603 233.01,-591.86 241.56,-581.92 250.5,-573.75"/>
 <polygon fill="black" stroke="black" points="253.03,-576.19 258.37,-567.04 248.49,-570.86 253.03,-576.19"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188">
 <text text-anchor="start" x="228" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -861,12 +861,12 @@
 <!-- rlibrary_score/2&#45;&gt;^^sub_library/2 -->
 <g id="edge22" class="edge">
 <title>rlibrary_score/2&#45;&gt;^^sub_library/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M207.15,-648.84C196.28,-638.7 182.53,-625.45 171,-613 159.83,-600.94 148.12,-586.89 138.65,-575.12"/>
 <polygon fill="black" stroke="black" points="141.16,-572.65 132.18,-567.02 135.68,-577.02 141.16,-572.65"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L188">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L188">
 <text text-anchor="start" x="171" y="-605.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -874,7 +874,7 @@
 <!-- process_rlibrary/1 -->
 <g id="node17" class="node">
 <title>process_rlibrary/1</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203">
 <polygon fill="cornsilk" stroke="black" points="310,-803 160,-803 160,-767 310,-767 310,-803"/>
 <text text-anchor="start" x="168" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="174" y="-787.2" font-family="Monospace" font-size="11.00">process_rlibrary/1</text>
@@ -888,12 +888,12 @@
 <!-- process_rlibrary/1&#45;&gt;rlibrary_score/2 -->
 <g id="edge16" class="edge">
 <title>process_rlibrary/1&#45;&gt;rlibrary_score/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M233.67,-766.88C232.21,-748.04 229.84,-717.47 228.12,-695.3"/>
 <polygon fill="black" stroke="black" points="231.6,-694.89 227.33,-685.19 224.62,-695.43 231.6,-694.89"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203">
 <text text-anchor="start" x="230" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -901,12 +901,12 @@
 <!-- process_rlibrary/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge41" class="edge">
 <title>process_rlibrary/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203" xlink:title="calls">
 <path fill="none" stroke="black" d="M269.97,-766.88C311.89,-746.37 382.19,-711.96 427.82,-689.62"/>
 <polygon fill="black" stroke="black" points="429.44,-692.73 436.89,-685.19 426.37,-686.44 429.44,-692.73"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L203">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L203">
 <text text-anchor="start" x="360" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -914,7 +914,7 @@
 <!-- all_score/1 -->
 <g id="node18" class="node">
 <title>all_score/1</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207">
 <polygon fill="cornsilk" stroke="black" points="466.5,-567 363.5,-567 363.5,-531 466.5,-531 466.5,-567"/>
 <text text-anchor="start" x="372" y="-551.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="378" y="-551.2" font-family="Monospace" font-size="11.00">all_score/1</text>
@@ -928,12 +928,12 @@
 <!-- all_score/1&#45;&gt;file_score/2 -->
 <g id="edge17" class="edge">
 <title>all_score/1&#45;&gt;file_score/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="calls">
 <path fill="none" stroke="black" d="M457.61,-530.79C476.47,-521.88 498.14,-509.75 515,-495 527.05,-484.46 537.62,-470.09 545.49,-457.74"/>
 <polygon fill="black" stroke="black" points="548.49,-459.54 550.72,-449.18 542.52,-455.89 548.49,-459.54"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207">
 <text text-anchor="start" x="524" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -941,12 +941,12 @@
 <!-- all_score/1&#45;&gt;numberlist::sum/2 -->
 <g id="edge43" class="edge">
 <title>all_score/1&#45;&gt;numberlist::sum/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="calls">
 <path fill="none" stroke="black" d="M363.15,-531.57C325.45,-516.59 277.14,-490.39 254,-449 228.14,-402.75 288,-360.33 334.33,-335.83"/>
 <polygon fill="black" stroke="black" points="336.09,-338.86 343.38,-331.18 332.89,-332.64 336.09,-338.86"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207">
 <text text-anchor="start" x="254" y="-428.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -968,12 +968,12 @@
 <!-- all_score/1&#45;&gt;logtalk::loaded_file/1 -->
 <g id="edge42" class="edge">
 <title>all_score/1&#45;&gt;logtalk::loaded_file/1</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="calls">
 <path fill="none" stroke="black" d="M409.54,-530.88C403.5,-511.95 393.69,-481.19 386.61,-459"/>
 <polygon fill="black" stroke="black" points="389.86,-457.65 383.48,-449.19 383.19,-459.78 389.86,-457.65"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L207">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L207">
 <text text-anchor="start" x="397" y="-487.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -981,7 +981,7 @@
 <!-- process_all/0 -->
 <g id="node19" class="node">
 <title>process_all/0</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217">
 <polygon fill="cornsilk" stroke="black" points="444,-803 328,-803 328,-767 444,-767 444,-803"/>
 <text text-anchor="start" x="336" y="-787.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="342" y="-787.2" font-family="Monospace" font-size="11.00">process_all/0</text>
@@ -995,12 +995,12 @@
 <!-- process_all/0&#45;&gt;all_score/1 -->
 <g id="edge18" class="edge">
 <title>process_all/0&#45;&gt;all_score/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217" xlink:title="calls">
 <path fill="none" stroke="black" d="M366.65,-766.87C357.34,-757.35 347.1,-744.67 342,-731 329.25,-696.85 329.5,-683.59 341,-649 350.54,-620.31 371.99,-593.22 389.35,-574.65"/>
 <polygon fill="black" stroke="black" points="392.08,-576.87 396.49,-567.24 387.04,-572.01 392.08,-576.87"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217">
 <text text-anchor="start" x="341" y="-664.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1008,12 +1008,12 @@
 <!-- process_all/0&#45;&gt;logtalk::print_message/3 -->
 <g id="edge44" class="edge">
 <title>process_all/0&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217" xlink:title="calls">
 <path fill="none" stroke="black" d="M398.69,-766.88C413.04,-747.52 436.57,-715.79 453.09,-693.51"/>
 <polygon fill="black" stroke="black" points="456.11,-695.3 459.26,-685.19 450.49,-691.14 456.11,-695.3"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L217">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L217">
 <text text-anchor="start" x="431" y="-723.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1021,7 +1021,7 @@
 <!-- format_entity_score//2 -->
 <g id="node20" class="node">
 <title>format_entity_score//2</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L221">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L221">
 <polygon fill="cornsilk" stroke="black" points="858.5,-921 681.5,-921 681.5,-885 858.5,-885 858.5,-921"/>
 <text text-anchor="start" x="690" y="-905.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="696" y="-905.2" font-family="Monospace" font-size="11.00">format_entity_score//2</text>
@@ -1035,7 +1035,7 @@
 <!-- logtalk::message_tokens//2 -->
 <g id="node21" class="node">
 <title>logtalk::message_tokens//2</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c44e9f82b6340765ff27b521923a3fea2d67e2eb/tools/code_metrics/cc_metric.lgt#L227">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/27ab29628e0ac3c87d0cd4c9987828fce5c739f1/tools/code_metrics/cc_metric.lgt#L227">
 <polygon fill="skyblue" stroke="black" points="516,-921 312,-921 312,-885 516,-885 516,-921"/>
 <text text-anchor="start" x="320" y="-905.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="326" y="-905.2" font-family="Monospace" font-size="11.00">logtalk::message_tokens//2</text>
