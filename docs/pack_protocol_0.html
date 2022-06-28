@@ -191,8 +191,8 @@
 <p>Pack specification protocol. Objects implementing this protocol should be named after the pack with a <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix and saved in a file with the same name as the object.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:14:0</div>
-<div class="line"><strong>Date:</strong> 2021-10-30</div>
+<div class="line"><strong>Version:</strong> 0:15:0</div>
+<div class="line"><strong>Date:</strong> 2022-06-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -227,11 +227,12 @@
 <li><p><a class="reference internal" href="#license-1" id="id4"><code class="docutils literal notranslate"><span class="pre">license/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#home-1" id="id5"><code class="docutils literal notranslate"><span class="pre">home/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#version-6" id="id6"><code class="docutils literal notranslate"><span class="pre">version/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#note-3" id="id7"><code class="docutils literal notranslate"><span class="pre">note/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
@@ -352,6 +353,37 @@
 <li><p>Dependencies: A list of the pack dependencies. Each dependency is a compound term <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a term comparison operator. The atom <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or a backend identifier atom can also be used in place of <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>.</p></li>
 <li><p>Portability: Either the atom <code class="docutils literal notranslate"><span class="pre">all</span></code> or a list of the supported backend Prolog compilers (using the identifier atoms used by the <code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code> flag).</p></li>
 <li><p>Clause order: Versions must be listed ordered from newest to oldest.</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div id="note/3"> </div></section>
+<section id="note-3">
+<span id="pack-protocol-0-note-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">note/3</span></code></a><a class="headerlink" href="#note-3" title="Permalink to this heading"></a></h3>
+<p>Table of notes per action and version.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">note(Action,Version,Note)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">note(?atom,?term,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Action: Possible values are <code class="docutils literal notranslate"><span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, and <code class="docutils literal notranslate"><span class="pre">uninstall</span></code>. When unbound, the note apply to all actions.</p></li>
+<li><p>Version: Version acted on (i.e. version being installed, updated to, or uninstalled). When unbound, the note apply to all versions.</p></li>
+<li><p>Note: Note to print when performing an action on a pack version.</p></li>
 </ul>
 </div></blockquote>
 </section>

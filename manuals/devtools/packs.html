@@ -378,6 +378,11 @@ the registry object file and all pack object files.</p></li>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>Optionally, the registry object can also define a <code class="docutils literal notranslate"><span class="pre">note(Action,</span> <span class="pre">Note)</span></code>
+predicate. The <code class="docutils literal notranslate"><span class="pre">Action</span></code> argument is an atom: <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">delete</span></code>. The <code class="docutils literal notranslate"><span class="pre">Notes</span></code> argument is also an atom. The tool will print
+any available notes when executing one of the registry actions. See the
+<code class="docutils literal notranslate"><span class="pre">registry_protocol</span></code> documentation for details.</p>
 <p>The registry directory should also contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> and <code class="docutils literal notranslate"><span class="pre">README.md</span></code>
 files (individual packs can use a different license, however). The path
 to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the registry is added. It can
@@ -531,6 +536,12 @@ object would be:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>Optionally, the pack object can also define a
+<code class="docutils literal notranslate"><span class="pre">note(Action,</span> <span class="pre">Version,</span> <span class="pre">Note)</span></code> predicate. The <code class="docutils literal notranslate"><span class="pre">Action</span></code> argument is an
+atom: <code class="docutils literal notranslate"><span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, or <code class="docutils literal notranslate"><span class="pre">uninstall</span></code>. The <code class="docutils literal notranslate"><span class="pre">Note</span></code> argument
+is also an atom. The tool will print any available notes when executing
+one of the registry actions. See the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code> documentation for
+more details.</p>
 <p>The pack sources must be available either as a local directory (when
 using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or for downloading as a supported archive. The
 checksum for the archive must use the SHA-256 hash algorithm
@@ -789,7 +800,7 @@ documentation.</p>
 <p>It is also possible to add API documentation and diagrams for all the
 installed packs to the Logtalk distribution API documentation and
 diagrams by calling the <code class="docutils literal notranslate"><span class="pre">update_html_docs</span></code> and <code class="docutils literal notranslate"><span class="pre">update_svg_diagrams</span></code>
-scripts with the <code class="docutils literal notranslate"><span class="pre">-i</span></code> option. See the scripts documentation for
+scripts with the <code class="docutils literal notranslate"><span class="pre">-i</span></code> option. See the scripts documentation for more
 details.</p>
 </section>
 <section id="pinning-registries-and-packs">

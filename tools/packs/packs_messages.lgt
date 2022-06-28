@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2022-06-17,
+		date is 2022-06-28,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -72,6 +72,9 @@
 
 	message_tokens(readme_file(ReadMeFile)) -->
 		['Readme file: ~w'-[ReadMeFile], nl].
+
+	message_tokens(note(Note)) -->
+		['Note: ~w'-[Note], nl].
 
 	message_tokens(logtalk_packs(LogtalkPacks)) -->
 		['Logtalk packs storage directory: ~w'-[LogtalkPacks], nl].
@@ -158,7 +161,7 @@
 
 	% registry describe messages
 
-	message_tokens(registry_info(Registry,Description,Home,Clone,Archive,Pinned)) -->
+	message_tokens(registry_info(Registry,Description,Home,Clone,Archive,Notes,Pinned)) -->
 		[	nl,
 			'Registry:    ~q'-[Registry]
 		],
@@ -166,9 +169,9 @@
 		[	'Description: ~w'-[Description], nl,
 			'Home:        ~w'-[Home], nl,
 			'Cloning URL: ~w'-[Clone], nl,
-			'Archive URL: ~w'-[Archive], nl,
-			nl
-		].
+			'Archive URL: ~w'-[Archive], nl
+		],
+		notes(Notes).
 
 	message_tokens(defined_registries(DefinedRegistries)) -->
 		defined_registries(DefinedRegistries).
@@ -298,7 +301,7 @@
 
 	% pack describe messages
 
-	message_tokens(pack_info(Registry,Pack,Description,License,Home,Versions)) -->
+	message_tokens(pack_info(Registry,Pack,Description,License,Home,Versions,Notes)) -->
 		[	nl,
 			'Registry:    ~q'-[Registry], nl,
 			'Pack:        ~q'-[Pack], nl,
@@ -307,7 +310,8 @@
 			'Home:        ~w'-[Home], nl,
 			'Versions:'-[], nl
 		],
-		pack_info(Versions).
+		pack_info(Versions),
+		notes(Notes).
 
 	% pack search hits
 
@@ -356,5 +360,25 @@
 		[' (pinned)'-[], nl].
 	pinned(false) -->
 		[nl].
+
+	notes([]) -->
+		[nl].
+	notes([Note| Notes]) -->
+		['Notes:'-[], nl],
+		notes(Notes, Note).
+
+	notes([], Note) -->
+		note(Note), [nl].
+	notes([Next| Notes], Note) -->
+		note(Note),
+		notes(Notes, Next).
+
+	note(note(Action, Note)) -->
+		{var(Action) -> ActionGrounded = '(all)'; ActionGrounded = Action},
+		['  ~w - ~w'-[ActionGrounded, Note], nl].
+	note(note(Action, Version, Note)) -->
+		{var(Action) -> ActionGrounded = '(all)'; ActionGrounded = Action},
+		{var(Version) -> VersionGrounded = '(all)'; VersionGrounded = Version},
+		['  ~w - ~w - ~w'-[ActionGrounded, VersionGrounded, Note], nl].
 
 :- end_category.

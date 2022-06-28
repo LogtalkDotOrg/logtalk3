@@ -83,6 +83,9 @@ Tools
 * CHANGED: The `packs` tool safety hooks to also accept underscores in URLs
 and file paths.
 
+* ADDED: Predicates `registry_protocol::note/2` and `pack_protocol::note/3`
+to the `packs` tool.
+
 * ADDED: Support to the `packs` tool for registry and pack archives using
 `.tar.gz` and `.tar.bz2` extensions. Also list in documentation all valid
 archive formats.

@@ -22,9 +22,9 @@
 :- protocol(pack_protocol).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2021-10-30,
+		date is 2022-06-28,
 		comment is 'Pack specification protocol. Objects implementing this protocol should be named after the pack with a ``_pack`` suffix and saved in a file with the same name as the object.'
 	]).
 
@@ -70,6 +70,18 @@
 			'Dependencies' - 'A list of the pack dependencies. Each dependency is a compound term ``Registry::Pack Operator Version`` where ``Operator`` is a term comparison operator. The atom ``logtalk`` or a backend identifier atom can also be used in place of ``Registry::Pack``.',
 			'Portability' - 'Either the atom ``all`` or a list of the supported backend Prolog compilers (using the identifier atoms used by the ``prolog_dialect`` flag).',
 			'Clause order' - 'Versions must be listed ordered from newest to oldest.'
+		]
+	]).
+
+	:- public(note/3).
+	:- mode(note(?atom, ?term, -atom), zero_or_more).
+	:- info(note/3, [
+		comment is 'Table of notes per action and version.',
+		argnames is ['Action', 'Version', 'Note'],
+		remarks is [
+			'Action' - 'Possible values are ``install``, ``update``, and ``uninstall``. When unbound, the note apply to all actions.',
+			'Version' - 'Version acted on (i.e. version being installed, updated to, or uninstalled). When unbound, the note apply to all versions.',
+			'Note' - 'Note to print when performing an action on a pack version.'
 		]
 	]).
 

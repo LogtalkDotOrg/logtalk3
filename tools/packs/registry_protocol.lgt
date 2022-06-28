@@ -22,9 +22,9 @@
 :- protocol(registry_protocol).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2021-10-30,
+		date is 2022-06-28,
 		comment is 'Registry specification protocol. Objects implementing this protocol should be named after the pack with a ``_registry`` suffix and saved in a file with the same name as the object.'
 	]).
 
@@ -61,6 +61,17 @@
 	:- info(archive/1, [
 		comment is 'Registry archive download HTTPS URL.',
 		argnames is ['URL']
+	]).
+
+	:- public(note/2).
+	:- mode(note(?atom, -atom), zero_or_more).
+	:- info(note/2, [
+		comment is 'Table of notes per action.',
+		argnames is ['Action', 'Note'],
+		remarks is [
+			'Action' - 'Possible values are ``add``, ``update``, and ``delete``. When unbound, the note apply to all actions.',
+			'Note' - 'Note to print when performing an action on a registry.'
+		]
 	]).
 
 :- end_protocol.

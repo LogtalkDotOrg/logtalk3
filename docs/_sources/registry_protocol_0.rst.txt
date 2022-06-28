@@ -11,8 +11,8 @@
 Registry specification protocol. Objects implementing this protocol should be named after the pack with a ``_registry`` suffix and saved in a file with the same name as the object.
 
 | **Author:** Paulo Moura
-| **Version:** 0:11:0
-| **Date:** 2021-10-30
+| **Version:** 0:12:0
+| **Date:** 2022-06-28
 
 | **Compilation flags:**
 |    ``static``
@@ -146,6 +146,34 @@ Registry archive download HTTPS URL.
 |    ``archive(URL)``
 | **Mode and number of proofs:**
 |    ``archive(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="note/2"> </div>
+
+.. index:: note/2
+.. _registry_protocol/0::note/2:
+
+``note/2``
+^^^^^^^^^^
+
+Table of notes per action.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``note(Action,Note)``
+| **Mode and number of proofs:**
+|    ``note(?atom,-atom)`` - ``zero_or_more``
+
+| **Remarks:**
+
+    - Action: Possible values are ``add``, ``update``, and ``delete``. When unbound, the note apply to all actions.
+    - Note: Note to print when performing an action on a registry.
 
 
 ------------

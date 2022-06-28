@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:52:1,
+		version is 0:53:0,
 		author is 'Paulo Moura',
-		date is 2022-06-26,
+		date is 2022-06-28,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -518,7 +518,8 @@
 				check_portability(Portability),
 				install_dependencies(Installs),
 				install_pack(Registry, Pack, Version, URL, CheckSum, Options),
-				print_message(comment, packs, pack_installed(Registry, Pack, Version))
+				print_message(comment, packs, pack_installed(Registry, Pack, Version)),
+				print_note(install, Version, Pack)
 			;	print_message(error, packs, unknown_pack_version(Registry, Pack, Version)),
 				fail
 			)
@@ -542,7 +543,8 @@
 			install_dependencies(Installs),
 			^^merge_options([], Options),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion))
+			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion)),
+			print_note(install, LatestVersion, Pack)
 		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		).
@@ -634,7 +636,7 @@
 		check(atom, Pack),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	installed_pack(Registry, Pack, _, Pinned) ->
+		(	installed_pack(Registry, Pack, Version, Pinned) ->
 			(	Pinned == true,
 				^^option(force(false), Options) ->
 				print_message(error, packs, cannot_uninstall_pinned_pack(Pack)),
@@ -646,7 +648,8 @@
 				fail
 			;	print_message(comment, packs, uninstalling_pack(Registry, Pack)),
 				uninstall_pack(Registry, Pack, Options),
-				print_message(comment, packs, pack_uninstalled(Registry, Pack))
+				print_message(comment, packs, pack_uninstalled(Registry, Pack)),
+				print_note(uninstall, Version, Pack)
 			)
 		;	registry_pack(_, Pack, _) ->
 			print_message(error, packs, pack_not_installed(Pack)),
@@ -707,7 +710,8 @@
 			Versions
 		),
 		sort(1, (@>), Versions, Sorted),
-		print_message(information, packs, pack_info(Registry,Pack,Description,License,Home,Sorted)).
+		findall(note(Action,ForVersion,Note), PackObject::note(Action,ForVersion,Note), Notes),
+		print_message(information, packs, pack_info(Registry,Pack,Description,License,Home,Sorted, Notes)).
 
 	% pack readme predicates
 
@@ -832,7 +836,8 @@
 			uninstall_pack(Registry, Pack, Options),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion))
+			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion)),
+			print_note(update, NewVersion, Pack)
 		;	print_message(error, packs, unknown_pack_version(Registry, Pack, NewVersion)),
 			fail
 		),
@@ -850,7 +855,8 @@
 			uninstall_pack(Registry, Pack, Options),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion))
+			print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion)),
+			print_note(update, LatestVersion, Pack)
 		;	print_message(comment, packs, up_to_date_pack(Registry, Pack, Version))
 		),
 		(	^^option(clean(true), Options) ->
@@ -1174,6 +1180,11 @@
 			fail
 		;	lint_check_versions(Pack, PackObject)
 		).
+	lint_check(notes, _Registry, RegistryObject) :-
+		forall(
+			RegistryObject::note(Action, Version, Note),
+			lint_check_note(Action, Version, Note)
+		).
 
 	lint_check_versions(Pack, PackObject) :-
 		PackObject::version(Version, Status, URL, CheckSum, Dependencies, Portability),
@@ -1232,6 +1243,27 @@
 		),
 		fail.
 	lint_check_versions(_, _).
+
+	lint_check_note(Action, Version, Note) :-
+		(	var(Action) ->
+			true
+		;	member(Action, [add, update, delete]) ->
+			true
+		;	print_message(warning, packs, @'The notes/3 predicate action argument is neither a variable nor install, update, or uninstall!'),
+			fail
+		),
+		(	var(Version) ->
+			true
+		;	valid_version(Version) ->
+			true
+		;	print_message(warning, packs, @'The notes/3 predicate version argument is neither a variable nor a valid version!'),
+			fail
+		),
+		(	atom(Note) ->
+			true
+		;	print_message(warning, packs, @'The notes/3 predicate note argument is not an atom!'),
+			fail
+		).
 
 	valid_version(Major:Minor:Patch) :-
 		integer(Major),
@@ -1678,5 +1710,14 @@
 		atom(Atom).
 	valid_option(tar(Atom)) :-
 		atom(Atom).
+
+	% notes
+
+	print_note(Action, Version, Pack) :-
+		pack_object(Pack, PackObject),
+		(	PackObject::note(Action, Version, Note) ->
+			print_message(information, packs, note(Note))
+		;	true
+		).
 
 :- end_object.

@@ -272,6 +272,12 @@ An example of a registry specification object would be:
 	
 	:- end_object.
 
+Optionally, the registry object can also define a ``note(Action, Note)``
+predicate. The ``Action`` argument is an atom: ``add``, ``update``, or
+``delete``. The ``Notes`` argument is also an atom. The tool will print
+any available notes when executing one of the registry actions. See the
+``registry_protocol`` documentation for details.
+
 The registry directory should also contain `LICENSE` and `README.md` files
 (individual packs can use a different license, however). The path to the
 `README.md` file is printed when the registry is added. It can also be
@@ -428,6 +434,12 @@ atom. An example of a registry specification object would be:
 		).
 	
 	:- end_object.
+
+Optionally, the pack object can also define a ``note(Action, Version, Note)``
+predicate. The ``Action`` argument is an atom: ``install``, ``update``, or
+``uninstall``. The ``Note`` argument is also an atom. The tool will print
+any available notes when executing one of the registry actions. See the
+``pack_protocol`` documentation for more details.
 
 The pack sources must be available either as a local directory (when using
 a `file://` URL) or for downloading as a supported archive. The checksum for
@@ -697,7 +709,7 @@ For more details and alternatives, see the `lgtdoc` tool documentation.
 It is also possible to add API documentation and diagrams for all the installed
 packs to the Logtalk distribution API documentation and diagrams by calling
 the `update_html_docs` and `update_svg_diagrams` scripts with the `-i` option.
-See the scripts documentation for details.
+See the scripts documentation for more details.
 
 Pinning registries and packs
 ----------------------------

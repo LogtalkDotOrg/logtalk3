@@ -88,9 +88,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2022-06-21,
+		date is 2022-06-28,
 		comment is 'Hook object for filtering registry and pack specification file contents.'
 	]).
 
@@ -100,7 +100,7 @@
 		valid_directive(Directive).
 	% filter clauses (only facts are accepted)
 	term_expansion(Fact, Fact) :-
-		ground(Fact),
+		nonvar(Fact),
 		valid_fact(Fact).
 	% virtual terms
 	term_expansion(begin_of_file, begin_of_file).
@@ -122,9 +122,11 @@
 	% registry spec
 	valid_fact(clone(URL)) :- safe_url(URL).
 	valid_fact(archive(URL)) :- safe_url(URL).
-	% registry spec
+	valid_fact(note(Action, Note)) :- (var(Action) -> true; atom(Action)), atom(Note).
+	% pack spec
 	valid_fact(license(License)) :- atom(License).
 	valid_fact(version(_, _, URL, _, _, _)) :- safe_url(URL).
+	valid_fact(note(Action, Version, Note)) :- (var(Action) -> true; atom(Action)), (var(Version) -> true; compound(Version)), atom(Note).
 
 	safe_url(URL) :-
 		atom_chars(URL, Chars),

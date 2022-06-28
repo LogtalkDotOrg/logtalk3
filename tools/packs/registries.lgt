@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:48:0,
+		version is 0:49:0,
 		author is 'Paulo Moura',
-		date is 2022-06-18,
+		date is 2022-06-28,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -227,7 +227,8 @@
 				Pinned = true
 			;	Pinned = false
 			),
-			print_message(information, packs, registry_info(Registry,Description,Home,Clone,Archive,Pinned))
+			findall(note(Action,Note), RegistryObject::note(Action,Note), Notes),
+			print_message(information, packs, registry_info(Registry,Description,Home,Clone,Archive,Notes,Pinned))
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
 		).
@@ -283,7 +284,8 @@
 		fix_url(URL, URLFixed),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		add_registry(Registry, URLFixed, Options).
+		add_registry(Registry, URLFixed, Options),
+		print_note(add, Registry).
 
 	add(Registry, URL) :-
 		check(atom, Registry),
@@ -406,7 +408,8 @@
 				delete_archives(Registry)
 			;	true
 			),
-			print_message(comment, packs, registry_deleted(Registry))
+			print_message(comment, packs, registry_deleted(Registry)),
+			print_note(delete, Registry)
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
 		).
@@ -457,7 +460,8 @@
 					delete_archives(Registry)
 				;	true
 				),
-				print_message(comment, packs, registry_updated(Registry, URL))
+				print_message(comment, packs, registry_updated(Registry, URL)),
+				print_note(update, Registry)
 			)
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
@@ -702,6 +706,7 @@
 		lint_check(home, Registry, RegistryObject),
 		lint_check(clone, Registry, RegistryObject),
 		lint_check(archive, Registry, RegistryObject),
+		lint_check(notes, Registry, RegistryObject),
 		print_message(comment, packs, linted_registry(Registry)).
 
 	lint_check(name, Registry, RegistryObject) :-
@@ -735,6 +740,11 @@
 		;	print_message(warning, packs, @'The archive/1 predicate is missing or failed safety check!'),
 			fail
 		).
+	lint_check(notes, _Registry, RegistryObject) :-
+		forall(
+			RegistryObject::note(Action, Note),
+			lint_check_note(Action, Note)
+		).
 
 	lint_check_clone_url(Registry, URL):-
 		decompose_file_name(URL, _, Name, Extension),
@@ -754,6 +764,20 @@
 			print_message(warning, packs, @'Archive extension missing!'),
 			fail
 		;	print_message(warning, packs, @'Archive extension not supported!'),
+			fail
+		).
+
+	lint_check_note(Action, Notes) :-
+		(	var(Action) ->
+			true
+		;	member(Action, [add, update, delete]) ->
+			true
+		;	print_message(warning, packs, @'The notes/2 predicate action argument is neither a variable nor add, update, or delete!'),
+			fail
+		),
+		(	atom(Notes) ->
+			true
+		;	print_message(warning, packs, @'The notes/2 predicate notes argument is not an atom!'),
 			fail
 		).
 
@@ -825,5 +849,15 @@
 		path_concat(Registries, Registry, Path),
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
+
+	% notes
+
+	print_note(Action, Registry) :-
+		implements_protocol(RegistryObject, registry_protocol),
+		RegistryObject::name(Registry), !,
+		(	RegistryObject::note(Action, Note) ->
+			print_message(information, packs, note(Note))
+		;	true
+		).
 
 :- end_object.
