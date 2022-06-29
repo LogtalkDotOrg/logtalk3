@@ -191,8 +191,8 @@
 <p>Common predicates for the packs tool objects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:25:1</div>
-<div class="line"><strong>Date:</strong> 2022-06-26</div>
+<div class="line"><strong>Version:</strong> 0:26:0</div>
+<div class="line"><strong>Date:</strong> 2022-06-29</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -240,22 +240,24 @@
 <li><p><a class="reference internal" href="#readme-1" id="id14"><code class="docutils literal notranslate"><span class="pre">readme/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#logtalk-packs-1" id="id15"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#logtalk-packs-0" id="id16"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prefix-1" id="id17"><code class="docutils literal notranslate"><span class="pre">prefix/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prefix-0" id="id18"><code class="docutils literal notranslate"><span class="pre">prefix/0</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id17">Protected predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id19">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#readme-file-path-2" id="id18"><code class="docutils literal notranslate"><span class="pre">readme_file_path/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-readme-file-path-1" id="id19"><code class="docutils literal notranslate"><span class="pre">print_readme_file_path/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#command-2" id="id20"><code class="docutils literal notranslate"><span class="pre">command/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#load-registry-1" id="id21"><code class="docutils literal notranslate"><span class="pre">load_registry/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tar-command-1" id="id22"><code class="docutils literal notranslate"><span class="pre">tar_command/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#supported-archive-1" id="id23"><code class="docutils literal notranslate"><span class="pre">supported_archive/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#supported-url-archive-1" id="id24"><code class="docutils literal notranslate"><span class="pre">supported_url_archive/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#decode-url-spaces-2" id="id25"><code class="docutils literal notranslate"><span class="pre">decode_url_spaces/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#readme-file-path-2" id="id20"><code class="docutils literal notranslate"><span class="pre">readme_file_path/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-readme-file-path-1" id="id21"><code class="docutils literal notranslate"><span class="pre">print_readme_file_path/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#command-2" id="id22"><code class="docutils literal notranslate"><span class="pre">command/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#load-registry-1" id="id23"><code class="docutils literal notranslate"><span class="pre">load_registry/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tar-command-1" id="id24"><code class="docutils literal notranslate"><span class="pre">tar_command/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#supported-archive-1" id="id25"><code class="docutils literal notranslate"><span class="pre">supported_archive/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#supported-url-archive-1" id="id26"><code class="docutils literal notranslate"><span class="pre">supported_url_archive/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decode-url-spaces-2" id="id27"><code class="docutils literal notranslate"><span class="pre">decode_url_spaces/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id28">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id29">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
@@ -427,7 +429,7 @@
 <div id="directory/2"> </div></section>
 <section id="directory-2">
 <span id="packs-common-0-directory-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a><a class="headerlink" href="#directory-2" title="Permalink to this heading"></a></h3>
-<p>Enumerates by backtracking all packs or registries and respective installation or definition directories.</p>
+<p>Enumerates by backtracking all packs or registries and respective installation or definition directories (using the internal backend format).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -448,7 +450,7 @@
 <div id="directory/1"> </div></section>
 <section id="directory-1">
 <span id="packs-common-0-directory-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Permalink to this heading"></a></h3>
-<p>Returns the directory where the registries or the packs are installed.</p>
+<p>Prints the directory where the registry or the pack is installed (using the native operating-system format).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -458,7 +460,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(Directory)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(Resource)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -469,7 +471,7 @@
 <div id="readme/2"> </div></section>
 <section id="readme-2">
 <span id="packs-common-0-readme-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme/2</span></code></a><a class="headerlink" href="#readme-2" title="Permalink to this heading"></a></h3>
-<p>Returns the path to the resource (pack or registry) readme file using the internal backend format. Fails if the resource is not defined or installed or if no readme file is found for it.</p>
+<p>Returns the path to the resource (pack or registry) readme file (using the internal backend format). Fails if the resource is not defined or installed or if no readme file is found for it.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -490,7 +492,7 @@
 <div id="readme/1"> </div></section>
 <section id="readme-1">
 <span id="packs-common-0-readme-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme/1</span></code></a><a class="headerlink" href="#readme-1" title="Permalink to this heading"></a></h3>
-<p>Prints the path to the resource (pack or registry) readme file using the native operating-system format. Fails if the resource is not defined or installed or if no readme file is found for it.</p>
+<p>Prints the path to the resource (pack or registry) readme file (using the native operating-system format). Fails if the resource is not defined or installed or if no readme file is found for it.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -511,7 +513,7 @@
 <div id="logtalk_packs/1"> </div></section>
 <section id="logtalk-packs-1">
 <span id="packs-common-0-logtalk-packs-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code></a><a class="headerlink" href="#logtalk-packs-1" title="Permalink to this heading"></a></h3>
-<p>Returns the directory (using the internal backend format) where the registries, packs, and archives are installed.</p>
+<p>Returns the directory prefix (using the internal backend format) where the registries, packs, and archives are installed.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -532,7 +534,7 @@
 <div id="logtalk_packs/0"> </div></section>
 <section id="logtalk-packs-0">
 <span id="packs-common-0-logtalk-packs-0"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/0</span></code></a><a class="headerlink" href="#logtalk-packs-0" title="Permalink to this heading"></a></h3>
-<p>Prints the directory (using the native operating-system format) where the registries, packs, and archives are installed.</p>
+<p>Prints the directory prefix (using the native operating-system format) where the registries, packs, and archives are installed.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -545,13 +547,51 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<hr class="docutils" />
+<div id="prefix/1"> </div></section>
+<section id="prefix-1">
+<span id="packs-common-0-prefix-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">prefix/1</span></code></a><a class="headerlink" href="#prefix-1" title="Permalink to this heading"></a></h3>
+<p>Returns the directory prefix (using the internal backend format) where the registries or packs are installed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(Prefix)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix(-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="prefix/0"> </div></section>
+<section id="prefix-0">
+<span id="packs-common-0-prefix-0"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">prefix/0</span></code></a><a class="headerlink" href="#prefix-0" title="Permalink to this heading"></a></h3>
+<p>Prints the directory prefix (using the native operating-system format) where the registries or packs are installed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prefix</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
 <div id="readme_file_path/2"> </div><section id="readme-file-path-2">
-<span id="packs-common-0-readme-file-path-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme_file_path/2</span></code></a><a class="headerlink" href="#readme-file-path-2" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-readme-file-path-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">readme_file_path/2</span></code></a><a class="headerlink" href="#readme-file-path-2" title="Permalink to this heading"></a></h3>
 <p>Returns the absolute path for the given directory readme file if it exists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -572,7 +612,7 @@
 <hr class="docutils" />
 <div id="print_readme_file_path/1"> </div></section>
 <section id="print-readme-file-path-1">
-<span id="packs-common-0-print-readme-file-path-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_readme_file_path/1</span></code></a><a class="headerlink" href="#print-readme-file-path-1" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-print-readme-file-path-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">print_readme_file_path/1</span></code></a><a class="headerlink" href="#print-readme-file-path-1" title="Permalink to this heading"></a></h3>
 <p>Prints the absolute path for the given directory readme file if it exists. Succeeds otherwise.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -593,7 +633,7 @@
 <hr class="docutils" />
 <div id="command/2"> </div></section>
 <section id="command-2">
-<span id="packs-common-0-command-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">command/2</span></code></a><a class="headerlink" href="#command-2" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-command-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">command/2</span></code></a><a class="headerlink" href="#command-2" title="Permalink to this heading"></a></h3>
 <p>Executes a shell command. Prints an error message and fails if the command fails.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -614,7 +654,7 @@
 <hr class="docutils" />
 <div id="load_registry/1"> </div></section>
 <section id="load-registry-1">
-<span id="packs-common-0-load-registry-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">load_registry/1</span></code></a><a class="headerlink" href="#load-registry-1" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-load-registry-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">load_registry/1</span></code></a><a class="headerlink" href="#load-registry-1" title="Permalink to this heading"></a></h3>
 <p>Loads all registry files from the given directory.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -635,7 +675,7 @@
 <hr class="docutils" />
 <div id="tar_command/1"> </div></section>
 <section id="tar-command-1">
-<span id="packs-common-0-tar-command-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tar_command/1</span></code></a><a class="headerlink" href="#tar-command-1" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-tar-command-1"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">tar_command/1</span></code></a><a class="headerlink" href="#tar-command-1" title="Permalink to this heading"></a></h3>
 <p>Returns the name of the tar command to be used depending on the operating-system.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -656,7 +696,7 @@
 <hr class="docutils" />
 <div id="supported_archive/1"> </div></section>
 <section id="supported-archive-1">
-<span id="packs-common-0-supported-archive-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">supported_archive/1</span></code></a><a class="headerlink" href="#supported-archive-1" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-supported-archive-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">supported_archive/1</span></code></a><a class="headerlink" href="#supported-archive-1" title="Permalink to this heading"></a></h3>
 <p>True iff the archive format is supported.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -677,7 +717,7 @@
 <hr class="docutils" />
 <div id="supported_url_archive/1"> </div></section>
 <section id="supported-url-archive-1">
-<span id="packs-common-0-supported-url-archive-1"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">supported_url_archive/1</span></code></a><a class="headerlink" href="#supported-url-archive-1" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-supported-url-archive-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">supported_url_archive/1</span></code></a><a class="headerlink" href="#supported-url-archive-1" title="Permalink to this heading"></a></h3>
 <p>True iff the URL archive is supported.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -698,7 +738,7 @@
 <hr class="docutils" />
 <div id="decode_url_spaces/2"> </div></section>
 <section id="decode-url-spaces-2">
-<span id="packs-common-0-decode-url-spaces-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">decode_url_spaces/2</span></code></a><a class="headerlink" href="#decode-url-spaces-2" title="Permalink to this heading"></a></h3>
+<span id="packs-common-0-decode-url-spaces-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">decode_url_spaces/2</span></code></a><a class="headerlink" href="#decode-url-spaces-2" title="Permalink to this heading"></a></h3>
 <p>Decodes encoded spaces (%20) in URLs to spaces.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

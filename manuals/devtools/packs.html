@@ -244,8 +244,13 @@ handling, respectively, registries and packs. Both objects accept a
 alias when defined (in a settings file or in a backend Prolog
 initialization file). When this library alias is not defined, the tool
 uses the value of the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable when
-defined. Otherwise it defaults to the <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory.
-This directory holds sub-directories for registries, packs, and
+defined. Otherwise it defaults to the <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory. The
+actual directory can be retrieved by the query:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>logtalk_packs(<span class="nv">Directory</span>).
+...
+</pre></div>
+</div>
+<p>This directory holds sub-directories for registries, packs, and
 archives. These sub-directories are automatically created when loading
 the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool if they don’t exist . Users shouldn’t manually modify
 the contents of these directories. Multiple and independent
@@ -845,9 +850,9 @@ pack:</p>
 </pre></div>
 </div>
 <p>To test all installed packs, you can use the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code>
-automation script from the packs directory, which you can query using
-the goal:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>directory(<span class="nv">Directory</span>).
+automation script from the installed packs directory, which you can
+query using the goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>prefix(<span class="nv">Directory</span>).
 </pre></div>
 </div>
 <p>Note that running the packs tests, like simply loading the pack, can

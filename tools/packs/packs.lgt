@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:53:0,
+		version is 0:54:0,
 		author is 'Paulo Moura',
-		date is 2022-06-28,
+		date is 2022-06-29,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -412,9 +412,19 @@
 		path_concat(Packs, Pack, Directory),
 		directory_exists(Directory).
 
-	directory(Directory) :-
+	directory(Pack) :-
+		directory(Pack, Directory),
+		internal_os_path(Directory, OSDirectory),
+		print_message(information, packs, install_directory(OSDirectory)).
+
+	prefix(Directory) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, packs, Directory).
+
+	prefix :-
+		prefix(Directory),
+		internal_os_path(Directory, OSDirectory),
+		print_message(information, packs, install_directory(OSDirectory)).
 
 	% installed pack predicates
 

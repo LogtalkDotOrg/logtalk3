@@ -80,6 +80,10 @@ library.
 Tools
 -----
 
+* CHANGED: The semantics of the `packs` tool `directory/1` predicate for
+consistency with the `directory/2` and `readme/1-2` predicates. The old
+semantics are now available from the new `prefix/1-2` predicates.
+
 * CHANGED: The `packs` tool safety hooks to also accept underscores in URLs
 and file paths.
 

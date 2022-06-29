@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:25:1,
+		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2022-06-26,
+		date is 2022-06-29,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -88,42 +88,55 @@
 	:- public(directory/2).
 	:- mode(directory(?atom, ?atom), zero_or_more).
 	:- info(directory/2, [
-		comment is 'Enumerates by backtracking all packs or registries and respective installation or definition directories.',
+		comment is 'Enumerates by backtracking all packs or registries and respective installation or definition directories (using the internal backend format).',
 		argnames is ['Resource', 'Directory']
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(?atom), zero_or_one).
 	:- info(directory/1, [
-		comment is 'Returns the directory where the registries or the packs are installed.',
-		argnames is ['Directory']
+		comment is 'Prints the directory where the registry or the pack is installed (using the native operating-system format).',
+		argnames is ['Resource']
 	]).
 
 	:- public(readme/2).
 	:- mode(readme(+atom, -atom), zero_or_one).
 	:- info(readme/2, [
-		comment is 'Returns the path to the resource (pack or registry) readme file using the internal backend format. Fails if the resource is not defined or installed or if no readme file is found for it.',
+		comment is 'Returns the path to the resource (pack or registry) readme file (using the internal backend format). Fails if the resource is not defined or installed or if no readme file is found for it.',
 		argnames is ['Resource', 'ReadMeFile']
 	]).
 
 	:- public(readme/1).
 	:- mode(readme(+atom), zero_or_one).
 	:- info(readme/1, [
-		comment is 'Prints the path to the resource (pack or registry) readme file using the native operating-system format. Fails if the resource is not defined or installed or if no readme file is found for it.',
+		comment is 'Prints the path to the resource (pack or registry) readme file (using the native operating-system format). Fails if the resource is not defined or installed or if no readme file is found for it.',
 		argnames is ['Resource']
 	]).
 
 	:- public(logtalk_packs/1).
 	:- mode(logtalk_packs(-atom), one).
 	:- info(logtalk_packs/1, [
-		comment is 'Returns the directory (using the internal backend format) where the registries, packs, and archives are installed.',
+		comment is 'Returns the directory prefix (using the internal backend format) where the registries, packs, and archives are installed.',
 		argnames is ['LogtalkPacks']
 	]).
 
 	:- public(logtalk_packs/0).
 	:- mode(logtalk_packs, one).
 	:- info(logtalk_packs/0, [
-		comment is 'Prints the directory (using the native operating-system format) where the registries, packs, and archives are installed.'
+		comment is 'Prints the directory prefix (using the native operating-system format) where the registries, packs, and archives are installed.'
+	]).
+
+	:- public(prefix/1).
+	:- mode(prefix(-atom), one).
+	:- info(prefix/1, [
+		comment is 'Returns the directory prefix (using the internal backend format) where the registries or packs are installed.',
+		argnames is ['Prefix']
+	]).
+
+	:- public(prefix/0).
+	:- mode(prefix, one).
+	:- info(prefix/0, [
+		comment is 'Prints the directory prefix (using the native operating-system format) where the registries or packs are installed.'
 	]).
 
 	:- protected(readme_file_path/2).

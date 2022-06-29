@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:25:1
-| **Date:** 2022-06-26
+| **Version:** 0:26:0
+| **Date:** 2022-06-29
 
 | **Compilation flags:**
 |    ``static``
@@ -242,7 +242,7 @@ True iff the resource (pack or registry) is defined or installed and if it is pi
 ``directory/2``
 ^^^^^^^^^^^^^^^
 
-Enumerates by backtracking all packs or registries and respective installation or definition directories.
+Enumerates by backtracking all packs or registries and respective installation or definition directories (using the internal backend format).
 
 | **Compilation flags:**
 |    ``static``
@@ -265,13 +265,13 @@ Enumerates by backtracking all packs or registries and respective installation o
 ``directory/1``
 ^^^^^^^^^^^^^^^
 
-Returns the directory where the registries or the packs are installed.
+Prints the directory where the registry or the pack is installed (using the native operating-system format).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``directory(Directory)``
+|    ``directory(Resource)``
 | **Mode and number of proofs:**
 |    ``directory(?atom)`` - ``zero_or_one``
 
@@ -288,7 +288,7 @@ Returns the directory where the registries or the packs are installed.
 ``readme/2``
 ^^^^^^^^^^^^
 
-Returns the path to the resource (pack or registry) readme file using the internal backend format. Fails if the resource is not defined or installed or if no readme file is found for it.
+Returns the path to the resource (pack or registry) readme file (using the internal backend format). Fails if the resource is not defined or installed or if no readme file is found for it.
 
 | **Compilation flags:**
 |    ``static``
@@ -311,7 +311,7 @@ Returns the path to the resource (pack or registry) readme file using the intern
 ``readme/1``
 ^^^^^^^^^^^^
 
-Prints the path to the resource (pack or registry) readme file using the native operating-system format. Fails if the resource is not defined or installed or if no readme file is found for it.
+Prints the path to the resource (pack or registry) readme file (using the native operating-system format). Fails if the resource is not defined or installed or if no readme file is found for it.
 
 | **Compilation flags:**
 |    ``static``
@@ -334,7 +334,7 @@ Prints the path to the resource (pack or registry) readme file using the native 
 ``logtalk_packs/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Returns the directory (using the internal backend format) where the registries, packs, and archives are installed.
+Returns the directory prefix (using the internal backend format) where the registries, packs, and archives are installed.
 
 | **Compilation flags:**
 |    ``static``
@@ -357,13 +357,57 @@ Returns the directory (using the internal backend format) where the registries, 
 ``logtalk_packs/0``
 ^^^^^^^^^^^^^^^^^^^
 
-Prints the directory (using the native operating-system format) where the registries, packs, and archives are installed.
+Prints the directory prefix (using the native operating-system format) where the registries, packs, and archives are installed.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
 |    ``logtalk_packs`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="prefix/1"> </div>
+
+.. index:: prefix/1
+.. _packs_common/0::prefix/1:
+
+``prefix/1``
+^^^^^^^^^^^^
+
+Returns the directory prefix (using the internal backend format) where the registries or packs are installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prefix(Prefix)``
+| **Mode and number of proofs:**
+|    ``prefix(-atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="prefix/0"> </div>
+
+.. index:: prefix/0
+.. _packs_common/0::prefix/0:
+
+``prefix/0``
+^^^^^^^^^^^^
+
+Prints the directory prefix (using the native operating-system format) where the registries or packs are installed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``prefix`` - ``one``
 
 
 ------------

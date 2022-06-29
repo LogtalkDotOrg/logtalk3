@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2022-06-28,
+		date is 2022-06-29,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -48,21 +48,23 @@
 
 	message_tokens(help) -->
 		[	'Common queries using the packs tool main predicates:'-[], nl, nl,
-			'  List registries:      registries::list.'-[], nl,
-			'  Add a new registry:   registries::add(Registry, URL).'-[], nl,
-			'  Delete a registry:    registries::delete(Registry).'-[], nl, nl,
-			'  Print registry data:  registries::describe(Registry).'-[], nl,
-			'  Registry readme file: registries::readme(Registry).'-[], nl, nl,
-			'  List available packs: packs::available.'-[], nl,
-			'  List installed packs: packs::installed.'-[], nl, nl,
-			'  Print pack data:      packs::describe(Pack).'-[], nl,
-			'                        packs::describe(Registry, Pack).'-[], nl,
-			'  Pack readme file:     packs::readme(Pack).'-[], nl, nl,
-			'  Install a pack:       packs::install(Pack).'-[], nl,
-			'                        packs::install(Registry, Pack).'-[], nl,
-			'                        packs::install(Registry, Pack, Version).'-[], nl, nl,
-			'  Update a pack:        packs::update(Pack).'-[], nl,
-			'  Uninstall a pack:     packs::uninstall(Pack).'-[], nl, nl,
+			'  List registries:                 registries::list.'-[], nl,
+			'  Add a new registry:              registries::add(Registry, URL).'-[], nl,
+			'  Delete a registry:               registries::delete(Registry).'-[], nl, nl,
+			'  Print registry data:             registries::describe(Registry).'-[], nl,
+			'  Registry readme file:            registries::readme(Registry).'-[], nl,
+			'  Registry installation directory: packs::directory(Pack).'-[], nl, nl,
+			'  List available packs:            packs::available.'-[], nl,
+			'  List installed packs:            packs::installed.'-[], nl, nl,
+			'  Print pack data:                 packs::describe(Pack).'-[], nl,
+			'                                   packs::describe(Registry, Pack).'-[], nl,
+			'  Pack readme file:                packs::readme(Pack).'-[], nl,
+			'  Pack installation directory:     packs::directory(Pack).'-[], nl, nl,
+			'  Install a pack:                  packs::install(Pack).'-[], nl,
+			'                                   packs::install(Registry, Pack).'-[], nl,
+			'                                   packs::install(Registry, Pack, Version).'-[], nl, nl,
+			'  Update a pack:                   packs::update(Pack).'-[], nl,
+			'  Uninstall a pack:                packs::uninstall(Pack).'-[], nl, nl,
 			'Consult the Handbook and the tool API documentation'-[], nl,
 			'for details and other available predicates.'-[], nl
 		].

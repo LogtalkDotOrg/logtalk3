@@ -135,12 +135,17 @@ The tool uses a directory specified using the `logtalk_packs` library alias
 when defined (in a settings file or in a backend Prolog initialization file).
 When this library alias is not defined, the tool uses the value of the
 `LOGTALKPACKS` environment variable when defined. Otherwise it defaults to
-the `~/logtalk_packs` directory. This directory holds sub-directories for
-registries, packs, and archives. These sub-directories are automatically
-created when loading the `packs` tool if they don't exist . Users shouldn't
-manually modify the contents of these directories. Multiple and independent
-registry/pack setups are possible using _virtual environments_ as explained
-next.
+the `~/logtalk_packs` directory. The actual directory can be retrieved by
+the query:
+
+	| ?- packs::logtalk_packs(Directory).
+	...
+
+This directory holds sub-directories for registries, packs, and archives.
+These sub-directories are automatically created when loading the `packs`
+tool if they don't exist . Users shouldn't manually modify the contents
+of these directories. Multiple and independent registry/pack setups are
+possible using _virtual environments_ as explained next.
 
 Your registries and packs setup can be saved and restored (e.g. in a different
 system) by using the `packs::save/2` and `packs::restore/1-2` predicates. For
@@ -755,9 +760,10 @@ For example, after installing the `foo` pack:
 	| ?- {foo(tester)}.
 
 To test all installed packs, you can use the `logtalk_tester` automation
-script from the packs directory, which you can query using the goal:
+script from the installed packs directory, which you can query using the
+goal:
 
-	| ?- packs::directory(Directory).
+	| ?- packs::prefix(Directory).
 
 Note that running the packs tests, like simply loading the pack, can result
 in calling arbitrary code, which can potentially harm your system. Always

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:18:2,
+		version is 0:19:0,
 		author is 'Paulo Moura',
-		date is 2022-02-26,
+		date is 2022-02-29,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -76,10 +76,10 @@
 		packs::logtalk_packs.
 
 	test(packs_registries_directory_1_01, true(atom(Directory))) :-
-		registries::directory(Directory).
+		registries::prefix(Directory).
 
 	test(packs_packs_directory_1_01, true(atom(Directory))) :-
-		packs::directory(Directory).
+		packs::prefix(Directory).
 
 	test(packs_registries_list_0_01, true) :-
 		registries::list.
