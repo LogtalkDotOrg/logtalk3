@@ -48,12 +48,16 @@ The transparent-box view provides a structural view of the contents and
 properties of entities, predicates, and source files akin to accessing
 the corresponding source code. I.e. this is the view we use when asking
 questions such as: *What predicates are declared in this protocol?*
+*Which predicates are called by this predicate?* *Where are clauses for
+this multifile predicate defined?*
 
 For entities, built-in predicates are provided for
 :ref:`enumerating entities <enumerating_entity_predicates>`,
 :ref:`enumerating entity properties <enumerating_entity_property_predicates>`
-(including entity declared, defined, called, and updated predicates),
-and :ref:`enumerating entity relations <entity_relation_predicates>`.
+(including entity declared, defined, called, and updated predicates; i.e.
+full predicate cross-referencing data), and
+:ref:`enumerating entity relations <entity_relation_predicates>` (for full
+entity cross-referencing data).
 For a detailed description of the supported entity properties, see the sections
 on :ref:`object properties <objects_properties>`,
 :ref:`protocol properties <protocols_properties>`, and

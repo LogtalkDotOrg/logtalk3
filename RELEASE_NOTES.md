@@ -169,6 +169,8 @@ modules as objects.
 Documentation
 -------------
 
+* IMPROVED: Handbook section on reflection.
+
 * UPDATED: The `lgtunit` tool documentation sections on term-expansion of test
 objects, skipping tests, testing non-deterministic predicates, debugging tests,
 and backend timeout predicates.

@@ -278,7 +278,7 @@ An example of a registry specification object would be:
 
 Optionally, the registry object can also define a ``note(Action, Note)``
 predicate. The ``Action`` argument is an atom: ``add``, ``update``, or
-``delete``. The ``Notes`` argument is also an atom. The tool will print
+``delete``. The ``Note`` argument is also an atom. The tool will print
 any available notes when executing one of the registry actions. See the
 ``registry_protocol`` documentation for more details.
 
