@@ -245,8 +245,7 @@
 			true
 		;	environment_variable('LOGTALKPACKS', LogtalkPacks0) ->
 			internal_os_path(LogtalkPacks, LogtalkPacks0)
-		;	expand_library_path(home(logtalk_packs), LogtalkPacks),
-			true
+		;	expand_library_path(home('logtalk_packs/'), LogtalkPacks)
 		).
 
 	logtalk_packs :-

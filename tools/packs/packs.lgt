@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:55:0,
+		version is 0:55:1,
 		author is 'Paulo Moura',
 		date is 2022-06-30,
 		comment is 'Pack handling predicates.'
@@ -609,10 +609,10 @@
 			^^command(Command, pack_cloning_failed(Pack, URL))
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
-			atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', Path, '"'], Command),
+			atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', OSPath, '"'], Command),
 			^^command(Command, pack_directory_copy_failed(Pack, URL))
 		;	internal_os_path(Directory, OSDirectory),
-			atomic_list_concat(['cp -R "', OSDirectory, '/." "', Path, '"'], Command),
+			atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command),
 			^^command(Command, pack_directory_copy_failed(Pack, URL))
 		),
 		save_version(Path, Version),
