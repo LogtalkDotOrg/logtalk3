@@ -285,9 +285,7 @@ defining the <code class="docutils literal notranslate"><span class="pre">LOGTAL
 Logtalk allows easy creation and switching between virtual environments.
 By using a per application settings file (or a per application
 environment variable definition) each application can thus use its own
-virtual environment. The directory being used can always be queried by
-sending the <code class="docutils literal notranslate"><span class="pre">logtalk_packs/1</span></code> message to either the <code class="docutils literal notranslate"><span class="pre">packs</span></code> or
-<code class="docutils literal notranslate"><span class="pre">registries</span></code> objects.</p>
+virtual environment.</p>
 <p>When a virtual environment also requires a specific Logtalk version,
 this can be installed as a pack from the official
 <a class="reference external" href="https://github.com/LogtalkDotOrg/talkshow">talkshow</a> registry and
@@ -329,11 +327,11 @@ Typically, an application directory will include <code class="docutils literal n
 requirements can then be fulfilled by starting Logtalk from the
 application directory (so that the application settings file is loaded)
 and running once the query:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">{</span>packs(loader)<span class="k">}</span>, packs<span class="o">::</span>restore(<span class="s">&#39;requirements.lgt&#39;</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>restore(<span class="s">&#39;requirements.lgt&#39;</span>).
 </pre></div>
 </div>
-<p>The application <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file can then load the required packs
-using their loader files:</p>
+<p>After, the application <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file can then load the required
+packs using their loader files:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
     <span class="c">% load required packs</span>
     <span class="k">logtalk_load</span>(foo(loader)),

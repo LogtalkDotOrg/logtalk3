@@ -84,6 +84,9 @@ Tools
 consistency with the `directory/2` and `readme/1-2` predicates. The old
 semantics are now available from the new `prefix/1-2` predicates.
 
+* CHANGED: The `packs` tool `restore/2` predicate to use by default the
+`force(true)` option, same as the `restore/1` predicate.
+
 * CHANGED: The `packs` tool safety hooks to also accept underscores in URLs
 and file paths.
 

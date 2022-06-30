@@ -177,9 +177,7 @@ Defining the `logtalk_packs` library alias in a settings file or defining
 the `LOGTALKPACKS` environment variable before starting Logtalk allows easy
 creation and switching between virtual environments. By using a per application
 settings file (or a per application environment variable definition) each
-application can thus use its own virtual environment. The directory being used
-can always be queried by sending the `logtalk_packs/1` message to either the
-`packs` or `registries` objects.
+application can thus use its own virtual environment.
 
 When a virtual environment also requires a specific Logtalk version, this
 can be installed as a pack from the official
@@ -222,10 +220,10 @@ A suitable named sub-directory can also be used. The application requirements
 can then be fulfilled by starting Logtalk from the application directory (so
 that the application settings file is loaded) and running once the query:
 
-	| ?- {packs(loader)}, packs::restore('requirements.lgt').
+	| ?- packs::restore('requirements.lgt').
 
-The application `loader.lgt` file can then load the required packs using their
-loader files:
+After, the application `loader.lgt` file can then load the required packs
+using their loader files:
 
 	:- initialization((
 		% load required packs

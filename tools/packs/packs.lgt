@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:54:0,
+		version is 0:55:0,
 		author is 'Paulo Moura',
-		date is 2022-06-29,
+		date is 2022-06-30,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -248,14 +248,14 @@
 	:- public(save/2).
 	:- mode(save(+atom, ++list(compound)), one).
 	:- info(save/2, [
-		comment is 'Saves a list of all installed packs and registries plus pinning status to a file. Registries without installed packs are saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).',
+		comment is 'Saves a list of all installed packs and registries plus pinning status to a file using the given options. Registries without installed packs are only saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).',
 		argnames is ['File', 'Options']
 	]).
 
 	:- public(save/1).
 	:- mode(save(+atom), one).
 	:- info(save/1, [
-		comment is 'Saves a list of all installed packs and their registries plus pinning status to a file. Registries without installed packs are not saved.',
+		comment is 'Saves a list of all installed packs and their registries plus pinning status to a file using default options.',
 		argnames is ['File']
 	]).
 
@@ -265,7 +265,7 @@
 		comment is 'Restores a list of registries and packs plus their pinning status from a file using the given options. Fails if restoring is not possible.',
 		argnames is ['File', 'Options'],
 		remarks is [
-			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``false``.',
+			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean registry and pack archives after restoring. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose restoring steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
@@ -279,7 +279,7 @@
 	:- public(restore/1).
 	:- mode(restore(+atom), zero_or_one).
 	:- info(restore/1, [
-		comment is 'Restores a list of registries and packs plus their pinning status from a file using the ``force(true)`` option. Fails if restoring is not possible.',
+		comment is 'Restores a list of registries and packs plus their pinning status from a file using default options. Fails if restoring is not possible.',
 		argnames is ['File']
 	]).
 
@@ -979,14 +979,18 @@
 		print_message(comment, packs, @'Restoring setup'),
 		check(file, File),
 		^^check_options(UserOptions),
-		^^merge_options(UserOptions, Options),
+		(	member(force(_), UserOptions) ->
+			UpdatedOptions = UserOptions
+		;	UpdatedOptions = [force(true)| UserOptions]
+		),
+		^^merge_options(UpdatedOptions, Options),
 		open(File, read, Stream),
 		read(Stream, Term),
 		restore(Term, Stream, Options),
 		print_message(comment, packs, @'Restored setup').
 
 	restore(File) :-
-		restore(File, [force(true)]).
+		restore(File, []).
 
 	restore(end_of_file, Stream, _) :-
 		!,
@@ -1694,6 +1698,7 @@
 
 	default_option(verbose(false)).
 	default_option(clean(false)).
+	% the restore/1-2 predicates use force(true) instead
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
