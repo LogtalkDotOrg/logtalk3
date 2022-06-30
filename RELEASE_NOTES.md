@@ -124,6 +124,9 @@ tool `readme_file_path/2` predicate.
 * FIXED: The `packs` tool to only warn about a non-satisfied backend version
 dependency if running on that backend.
 
+* FIXED: Workaround ECLiPSe internal file path representation on Windows when
+running the `packs` tool tests.
+
 Tests
 -----
 

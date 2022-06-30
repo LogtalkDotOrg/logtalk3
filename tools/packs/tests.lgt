@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:20:0,
 		author is 'Paulo Moura',
-		date is 2022-02-29,
+		date is 2022-02-30,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -140,8 +140,7 @@
 	test(packs_registries_add_1_01, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/local_1_d'], URL0),
-		encode_spaces(URL0, URL),
+		file_to_url(Directory, 'test_files/local_1_d', URL),
 		registries::add(URL).
 
 	test(packs_registries_defined_4_02, true(Registries == [local_1_d])) :-
@@ -234,8 +233,7 @@
 	test(packs_registries_add_2_01, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/local_2_d.zip'], URL0),
-		encode_spaces(URL0, URL),
+		file_to_url(Directory, 'test_files/local_2_d.zip', URL),
 		registries::add(local_2_d, URL).
 
 	test(packs_registries_defined_4_03, true(Registries == [local_1_d, local_2_d])) :-
@@ -375,8 +373,7 @@
 	test(packs_registries_add_1_02, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atomic_list_concat(['file://', Directory, 'test_files/broken_d'], URL0),
-		encode_spaces(URL0, URL),
+		file_to_url(Directory, 'test_files/broken_d', URL),
 		registries::add(URL).
 
 	test(packs_registries_lint_1_02, false) :-
@@ -421,5 +418,15 @@
 		encode_spaces_in_list(Chars0, Chars).
 	encode_spaces_in_list([Char| Chars0], [Char| Chars]) :-
 		encode_spaces_in_list(Chars0, Chars).
+
+	file_to_url(Directory, File, URL) :-
+		(	sub_atom(Directory, 0, _, _, '//C/') ->
+			% assume ECLiPSe running on Windows
+			atom_concat('//C/', Directory1, Directory),
+			atomic_list_concat(['file://C:/', Directory1, File], URL0)
+		;	% most common case
+			atomic_list_concat(['file://', Directory, File], URL0)
+		),
+		encode_spaces(URL0, URL).
 
 :- end_object.
