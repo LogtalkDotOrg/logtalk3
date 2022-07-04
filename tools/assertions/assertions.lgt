@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 2:2:1,
+		version is 2:2:2,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2022-07-04,
 		comment is 'A simple assertions framework. Can be used as a hook object for either suppressing assertions (``production`` mode) or expanding them with file context information (``debug`` mode).',
 		parnames is ['Mode']
 	]).
@@ -74,7 +74,7 @@
 		(	Mode == debug ->
 			logtalk_load_context(source, File),
 			logtalk_load_context(term_position, Position),
-			ExpandedGoal = assertions::assertion(file_lines(File,Position), Goal)
+			ExpandedGoal = (assertions::assertion(file_lines(File,Position), Goal))
 		;	Mode == production ->
 			ExpandedGoal = true
 		;	fail

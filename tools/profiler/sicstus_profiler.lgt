@@ -23,9 +23,9 @@
 	implements(profilerp)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:6:2,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2022-07-04,
 		comment is 'Simple wrapper for the SICStus Prolog profiler.'
 	]).
 
@@ -186,9 +186,9 @@
 			;	Module == user,
 				logtalk::decompile_predicate_indicators(TFunctor/TArity, Entity, _, Functor/Arity) ->
 				(	atom(Entity) ->
-					Label = Entity::Functor/Arity
+					Label = (Entity::Functor/Arity)
 				;	functor(Entity, EntityFunctor, EntityArity),
-					Label = EntityFunctor/EntityArity::Functor/Arity
+					Label = (EntityFunctor/EntityArity::Functor/Arity)
 				)
 			;	Label = Module:TFunctor/TArity
 			).

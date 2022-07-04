@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:33:1,
+		version is 1:33:2,
 		author is 'Paulo Moura',
-		date is 2022-04-27,
+		date is 2022-07-04,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -375,7 +375,7 @@
 	% object public predicate
 
 	check(predicate, Term) :-
-		(	Term = Object::Predicate ->
+		(	Term = (Object::Predicate) ->
 			(	check(object, Object),
 				check(predicate_indicator, Predicate),
 				Object::current_predicate(Predicate) ->

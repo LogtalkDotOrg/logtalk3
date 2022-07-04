@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:66:0,
+		version is 2:66:1,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2022-07-04,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -228,7 +228,7 @@
 		remember_external_predicate(Callee0),
 		\+ ^^edge(Caller, Callee0, [calls], calls_predicate, _),
 		add_xref_code_url(Options, Kind, Entity, Line, XRefOptions),
-		(	Callee0 = Other::Predicate,
+		(	Callee0 = (Other::Predicate),
 			nonvar(Other) ->
 			^^ground_entity_identifier(object, Other, Name),
 			Callee = Name::Predicate
@@ -238,7 +238,7 @@
 		fail.
 	process_entity(Kind, Entity, Options) :-
 		updates_predicate(Kind, Entity, Caller, Line, Dynamic),
-		(	Dynamic = ::_ ->
+		(	Dynamic = (::_) ->
 			EdgeKind = updates_self_predicate
 		;	Kind == category ->
 			EdgeKind = updates_this_predicate
@@ -463,15 +463,15 @@
 			)
 		;	fail
 		),
-		(	Caller0 = From::Predicate ->
+		(	Caller0 = (From::Predicate) ->
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
 			),
 			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
 			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
-				Caller = From::NonTerminal
-			;	Caller = From::Predicate
+				Caller = (From::NonTerminal)
+			;	Caller = (From::Predicate)
 			)
 		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
 			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
@@ -488,7 +488,7 @@
 			true
 		;	Line = -1
 		),
-		(	Caller0 = From::Predicate ->
+		(	Caller0 = (From::Predicate) ->
 			% multifile predicate caller (unlikely but possible)
 			Predicate = Functor/Arity,
 			functor(Template, Functor, Arity),
@@ -528,7 +528,7 @@
 			true
 		;	Line = -1
 		),
-		(	Caller0 = From::Predicate ->
+		(	Caller0 = (From::Predicate) ->
 			% multifile predicate caller
 			Predicate = Functor/Arity,
 			functor(Template, Functor, Arity),
@@ -543,8 +543,8 @@
 				fail
 			),
 			(	member(non_terminal(NonTerminal), CallerProperties) ->
-				Caller = From::NonTerminal
-			;	Caller = From::Predicate
+				Caller = (From::NonTerminal)
+			;	Caller = (From::Predicate)
 			)
 		;	% local predicate caller
 			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
@@ -556,7 +556,7 @@
 	calls_external_predicate(module, Entity, Caller, Line, Callee) :-
 		!,
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
-		(	Callee = Object::_, nonvar(Object)
+		(	Callee = (Object::_), nonvar(Object)
 		;	Callee = ':'(Module,_), nonvar(Module)
 		),
 		memberchk(caller(Caller), Properties),
@@ -606,7 +606,7 @@
 	updates_predicate(Kind, Entity, Updater, Line, Dynamic) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, updates(Dynamic, UpdatesProperties)),
-		(	Dynamic = Object::PredicateIndicator ->
+		(	Dynamic = (Object::PredicateIndicator) ->
 			% we can have a parametric object ...
 			callable(Object), ground(PredicateIndicator)
 		;	ground(Dynamic)
@@ -616,15 +616,15 @@
 			true
 		;	Line = -1
 		),
-		(	Updater0 = From::Predicate ->
+		(	Updater0 = (From::Predicate) ->
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
 			),
 			entity_property(FromKind, From, declares(Predicate, DeclaresProperties)),
 			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
-				Updater = From::NonTerminal
-			;	Updater = From::Predicate
+				Updater = (From::NonTerminal)
+			;	Updater = (From::Predicate)
 			)
 		;	entity_property(Kind, Entity, defines(Updater0, DefinesProperties)),
 			member(non_terminal(UpdaterNonTerminal), DefinesProperties) ->
@@ -650,7 +650,7 @@
 	remember_included_predicate(Reference) :-
 		(	included_predicate_(Reference) ->
 			true
-		;	Reference = Entity::Predicate ->
+		;	Reference = (Entity::Predicate) ->
 			functor(Entity, Functor, Arity),
 			functor(Template, Functor, Arity),
 			assertz(included_predicate_(Template::Predicate))
@@ -660,7 +660,7 @@
 	remember_referenced_predicate(Reference) :-
 		(	referenced_predicate_(Reference) ->
 			true
-		;	Reference = Entity::Predicate ->
+		;	Reference = (Entity::Predicate) ->
 			functor(Entity, Functor, Arity),
 			functor(Template, Functor, Arity),
 			assertz(referenced_predicate_(Template::Predicate))
@@ -670,7 +670,7 @@
 	remember_external_predicate(Reference) :-
 		(	external_predicate_(Reference) ->
 			true
-		;	Reference = Entity::Predicate ->
+		;	Reference = (Entity::Predicate) ->
 			functor(Entity, Functor, Arity),
 			functor(Template, Functor, Arity),
 			assertz(external_predicate_(Template::Predicate))

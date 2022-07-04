@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:55:1,
+		version is 0:55:2,
 		author is 'Paulo Moura',
-		date is 2022-06-30,
+		date is 2022-07-04,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1297,7 +1297,7 @@
 			true
 		;	atom(What), valid_backend(What) ->
 			true
-		;	What = DependencyRegistry::DependencyPack,
+		;	What = (DependencyRegistry::DependencyPack),
 			atom(DependencyRegistry),
 			atom(DependencyPack),
 			DependencyPack \== Pack

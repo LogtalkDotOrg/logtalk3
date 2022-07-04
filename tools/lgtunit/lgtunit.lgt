@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 12:0:0,
+		version is 12:0:1,
 		author is 'Paulo Moura',
-		date is 2022-06-02,
+		date is 2022-07-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2510,8 +2510,8 @@
 			category_property(Other, declares(Functor/Arity, DeclarationProperties))
 		),
 		(	member(non_terminal(NonTerminal), DeclarationProperties) ->
-			PredicateIndicator = Other::NonTerminal
-		;	PredicateIndicator = Other::Functor/Arity
+			PredicateIndicator = (Other::NonTerminal)
+		;	PredicateIndicator = (Other::Functor/Arity)
 		).
 	entity_indicator_number_of_clauses(Entity, Functor/Arity, PredicateIndicator, NumberOfClauses) :-
 		(	current_object(Entity) ->

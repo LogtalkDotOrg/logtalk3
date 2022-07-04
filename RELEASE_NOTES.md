@@ -132,6 +132,10 @@ some backends on Windows.
 * FIXED: Workaround ECLiPSe internal file path representation on Windows when
 running the `packs` tool tests.
 
+* FIXED: Workaround potential compilation issues in tools that use unification
+goals with `::/1-2` arguments due to user redefinition of the standard `::/1-2`
+Logtalk operators.
+
 Tests
 -----
 
