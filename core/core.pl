@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b01)).
+'$lgt_version_data'(logtalk(3, 57, 0, b02)).
 
 
 
@@ -11189,7 +11189,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_uses_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, Arity, Obj, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor, Arity, AliasFunctor/Arity),
+	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
 	% unify arguments of TOriginal and TAlias
 	Original =.. [_| Args],
 	Alias =.. [_| Args],
@@ -11226,7 +11226,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, AliasFunctor, Arity),
 	functor(Pred, OriginalFunctor, ExtArity),
 	functor(PredAlias, AliasFunctor, ExtArity),
-	'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor, ExtArity, AliasFunctor//Arity),
+	'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
 	% unify arguments of TOriginal and TAlias
 	Original =.. [_| Args],
 	Alias =.. [_| Args],
@@ -11260,7 +11260,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_uses_directive_predicate_call'(Original, Alias, Obj, Flag, Ctx) :-
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor, Arity, AliasFunctor/Arity),
+	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
 	% allow for runtime use by adding a local definition that calls the remote definition
 	% except when the remote is a built-in predicate in "user" with no alias being defined
 	% or a built-in method that would clash with the local definition
@@ -11416,7 +11416,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_use_module_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, Arity, Module, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor, Arity, AliasFunctor/Arity),
+	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
 	% unify arguments of TOriginal and TAlias
 	Original =.. [_| Args],
 	Alias =.. [_| Args],
@@ -11453,7 +11453,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, AliasFunctor, Arity),
 	functor(Pred, AliasFunctor, ExtArity),
 	functor(PredAlias, AliasFunctor, ExtArity),
-	'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor, ExtArity, AliasFunctor//Arity),
+	'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
 	% unify arguments of TOriginal and TAlias
 	Original =.. [_| Args],
 	Alias =.. [_| Args],
@@ -11487,7 +11487,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_use_module_directive_predicate_call'(Original, Alias, Module, Flag, Ctx) :-
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor, Arity, AliasFunctor/Arity),
+	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
 	% allow for runtime use by adding a local definition that calls the remote definition
 	% except when the remote is a built-in predicate in "user" with no alias being defined
 	% or a built-in method that would clash with the local definition
@@ -11519,7 +11519,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % built-in methods and predicates listed in public/1, protected/1,
 % private/1, uses/2, and use_module/2 directives
 
-'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor, Arity, Culprit) :-
+'$lgt_check_predicate_name_conflict'(Alias, Culprit) :-
 	(	'$lgt_built_in_method'(Alias, _, _, _) ->
 		% clash with a built-in method, which cannot be redefined
 		throw(permission_error(modify, built_in_method, Culprit))
@@ -11535,15 +11535,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_use_module_non_terminal_'(_, _, _, _, Alias, _) ->
 		% clash with an earlier use_module/2 directive non-terminal
 		throw(permission_error(modify, uses_module_non_terminal, Culprit))
-	;	'$lgt_pp_public_'(AliasFunctor, Arity, _, _) ->
-		% clash with an earlier public predicate
-		throw(permission_error(modify, public_predicate, Culprit))
-	;	'$lgt_pp_protected_'(AliasFunctor, Arity, _, _) ->
-		% clash with an earlier protected predicate
-		throw(permission_error(modify, protected_predicate, Culprit))
-	;	'$lgt_pp_private_'(AliasFunctor, Arity, _, _) ->
-		% clash with an earlier private predicate
-		throw(permission_error(modify, private_predicate, Culprit))
 	;	true
 	).
 

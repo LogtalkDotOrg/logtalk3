@@ -34,6 +34,10 @@ linter warning instead of warning about a missing else part.
 
 * IMPROVED: Linter warnings for the `(->)/2` and `(*->)/2` control constructs.
 
+* FIXED: Allow making a predicate (or non-terminal) listed in a `uses/2` or a
+`use_module/2` directive available as public, protected, or private predicate
+without requiring defining a protocol.
+
 Prolog adapter and integration files
 ------------------------------------
 
