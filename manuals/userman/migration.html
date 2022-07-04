@@ -89,6 +89,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#supported-module-directives">Supported module directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#unsupported-module-directives">Unsupported module directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#modules-using-a-term-expansion-mechanism">Modules using a term-expansion mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-search-paths">File search paths</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dealing-with-proprietary-prolog-directives-and-predicates">Dealing with proprietary Prolog directives and predicates</a></li>
@@ -254,30 +255,27 @@ leads to several issues, specially with semantics, operators, and
 meta-predicates. In addition, the conversion allows you to take
 advantage of Logtalk more powerful abstraction and reuse mechanisms such
 as separation between interface from implementation, inheritance,
-parametric objects, and categories.</p>
-<p>Converting a Prolog module into an object is easy as long as the
-directives used in the module are supported by Logtalk (see below).
-Assuming that this is the case, apply the following steps:</p>
+parametric objects, and categories. It also allows you to take full
+advantage of Logtalk developer tools for improved productivity.</p>
+<p>Converting a Prolog module into an object is simplified when the directives
+used in the module are supported by Logtalk (see the listing in the next
+section). Assuming that this is the case, apply the following steps:</p>
 <ol class="arabic simple">
-<li><p>Convert the module <code class="docutils literal notranslate"><span class="pre">module/1</span></code> directive into an opening object
-directive, <a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a>,
+<li><p>Convert the module <code class="docutils literal notranslate"><span class="pre">module/1</span></code> directive into an
+<a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1</span></a> opening object directive,
 using the module name as the object name. For <code class="docutils literal notranslate"><span class="pre">module/2</span></code> directives
 apply the same conversion and convert the list of exported predicates
-into Logtalk <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a>
-predicate directives.</p></li>
-<li><p>Add a closing object directive,
-<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, at the
-end of the module code.</p></li>
+into <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a> predicate directives. Add a closing
+object directive, <a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, at the end of the
+source code.</p></li>
 <li><p>Convert any <code class="docutils literal notranslate"><span class="pre">export/1</span></code> directives into <code class="docutils literal notranslate"><span class="pre">public/1</span></code> predicate
 directives.</p></li>
-<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives into <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
-directives (see next section).</p></li>
-<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives referencing other modules
-also being converted to objects into Logtalk
-<a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives. If the
-referenced modules are not being converted into objects, keep
-the <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives but change the first argument to be
-the module name.</p></li>
+<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives for modules that will not be
+converted to objects into <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives (see next section),
+replacing the file spec in the first argument with the module name.</p></li>
+<li><p>Convert any <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code> directives referencing other modules
+also being converted to objects into Logtalk <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
+directives.</p></li>
 <li><p>Convert each <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> directive into a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
 directive and <code class="docutils literal notranslate"><span class="pre">public/1</span></code> predicate directives (see next section).</p></li>
 <li><p>Convert any <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives into Logtalk
@@ -293,7 +291,7 @@ by replacing the <code class="docutils literal notranslate"><span class="pre">(:
 sending operator when the referenced modules are also being
 converted into objects. Calls in the pseudo-module <code class="docutils literal notranslate"><span class="pre">user</span></code> can
 be encapsulated using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> Logtalk
-external call control construct. You can also use instead an
+external call control construct. You can also use instead a
 <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive where the
 first argument would be the atom <code class="docutils literal notranslate"><span class="pre">user</span></code> and the second argument a
 list of all external predicates. This alternative has the advantage
@@ -337,8 +335,8 @@ extended language features and its developer tools. Why partial support?
 Although there is a ISO Prolog standard for modules, it is (rightfully)
 ignored by most implementers and vendors (due to its flaws and deviation
 from common practice). In addition, there is no de facto standard for module
-systems, despite otherwise frequent bogus claims. Systems differences include
-the set of implemented module directives, the directive semantics, the
+systems, despite otherwise frequent misleading claims. Key system differences
+include the set of implemented module directives, the directive semantics, the
 handling of operators, the locality of flags, and on the integration of
 term-expansion mechanisms (when provided). Follows a discussion of the
 limitations of this approach that you should be aware.</p>
@@ -471,6 +469,17 @@ assuming expansions stored on both <code class="docutils literal notranslate"><s
 <p>After these queries, we can try to compile the modules and look for
 other porting or portability issues.</p>
 </section>
+<section id="file-search-paths">
+<span id="migration-file-search-paths"></span><h3>File search paths<a class="headerlink" href="#file-search-paths" title="Permalink to this heading"></a></h3>
+<p>Some Prolog systems provide a mechanism for defining file search paths
+(this mechanism works differently from Logtalk own suporty for defining
+library paths). When porting Prolog code that defines file search paths,
+e.g. for finding module libraries, it often helps to load the pristine
+Prolog application before attempting to compile its source files as
+Logtalk source files. Depending on the Prolog backend, this may allow
+the file search paths to be used when compiling modules as objects that
+use file directives such as <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>.</p>
+</section>
 </section>
 <section id="dealing-with-proprietary-prolog-directives-and-predicates">
 <span id="migration-proprietary"></span><h2>Dealing with proprietary Prolog directives and predicates<a class="headerlink" href="#dealing-with-proprietary-prolog-directives-and-predicates" title="Permalink to this heading"></a></h2>
@@ -545,10 +554,11 @@ modules are sometimes defined in files with names different from the
 module names requiring finding, opening, and reading the file in order
 to find the actual module name.</p>
 <p>Logtalk supports the declaration of <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate aliases</span></a>
-in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives used within object and categories. For
-example, the ECLiPSe IC Constraint Solvers define a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> variable
-domain operator that clashes with the Logtalk <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending
-operator. We can solve the conflict by writing:</p>
+and <a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a> in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
+directives used within object and categories. For example, the ECLiPSe IC
+Constraint Solvers define a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> variable domain operator that clashes
+with the Logtalk <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending operator. We can solve the conflict
+by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(ic, [(<span class="o">::</span>)<span class="o">/</span><span class="m">2</span> <span class="o">as</span> ins<span class="o">/</span><span class="m">2</span>]).
 </pre></div>
 </div>

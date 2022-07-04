@@ -155,31 +155,28 @@ leads to several issues, specially with semantics, operators, and
 meta-predicates. In addition, the conversion allows you to take
 advantage of Logtalk more powerful abstraction and reuse mechanisms such
 as separation between interface from implementation, inheritance,
-parametric objects, and categories.
+parametric objects, and categories. It also allows you to take full
+advantage of Logtalk developer tools for improved productivity.
 
-Converting a Prolog module into an object is easy as long as the
-directives used in the module are supported by Logtalk (see below).
-Assuming that this is the case, apply the following steps:
+Converting a Prolog module into an object is simplified when the directives
+used in the module are supported by Logtalk (see the listing in the next
+section). Assuming that this is the case, apply the following steps:
 
-#. Convert the module ``module/1`` directive into an opening object
-   directive, :ref:`directives_object_1_5`,
+#. Convert the module ``module/1`` directive into an
+   :ref:`object/1 <directives_object_1_5>` opening object directive,
    using the module name as the object name. For ``module/2`` directives
    apply the same conversion and convert the list of exported predicates
-   into Logtalk :ref:`directives_public_1`
-   predicate directives.
-#. Add a closing object directive,
-   :ref:`directives_end_object_0`, at the
-   end of the module code.
+   into :ref:`directives_public_1` predicate directives. Add a closing
+   object directive, :ref:`directives_end_object_0`, at the end of the
+   source code.
 #. Convert any ``export/1`` directives into ``public/1`` predicate
    directives.
-#. Convert any ``use_module/1`` directives into ``use_module/2``
-   directives (see next section).
-#. Convert any ``use_module/2`` directives referencing other modules
-   also being converted to objects into Logtalk
-   :ref:`directives_uses_2` directives. If the
-   referenced modules are not being converted into objects, keep
-   the ``use_module/2`` directives but change the first argument to be
-   the module name.
+#. Convert any ``use_module/1`` directives for modules that will not be
+   converted to objects into ``use_module/2`` directives (see next section),
+   replacing the file spec in the first argument with the module name.
+#. Convert any ``use_module/1-2`` directives referencing other modules
+   also being converted to objects into Logtalk :ref:`directives_uses_2`
+   directives.
 #. Convert each ``reexport/1`` directive into a :ref:`directives_uses_2`
    directive and ``public/1`` predicate directives (see next section).
 #. Convert any ``meta_predicate/1`` directives into Logtalk
@@ -195,7 +192,7 @@ Assuming that this is the case, apply the following steps:
    sending operator when the referenced modules are also being
    converted into objects. Calls in the pseudo-module ``user`` can
    be encapsulated using the :ref:`control_external_call_1` Logtalk
-   external call control construct. You can also use instead an
+   external call control construct. You can also use instead a
    :ref:`directives_uses_2` directive where the
    first argument would be the atom ``user`` and the second argument a
    list of all external predicates. This alternative has the advantage
@@ -242,8 +239,8 @@ extended language features and its developer tools. Why partial support?
 Although there is a ISO Prolog standard for modules, it is (rightfully)
 ignored by most implementers and vendors (due to its flaws and deviation
 from common practice). In addition, there is no de facto standard for module
-systems, despite otherwise frequent bogus claims. Systems differences include
-the set of implemented module directives, the directive semantics, the
+systems, despite otherwise frequent misleading claims. Key system differences
+include the set of implemented module directives, the directive semantics, the
 handling of operators, the locality of flags, and on the integration of
 term-expansion mechanisms (when provided). Follows a discussion of the
 limitations of this approach that you should be aware.
@@ -395,6 +392,21 @@ assuming expansions stored on both ``user`` and ``system`` modules:
 After these queries, we can try to compile the modules and look for
 other porting or portability issues.
 
+.. _migration_file_search_paths:
+
+File search paths
+~~~~~~~~~~~~~~~~~
+
+Some Prolog systems provide a mechanism for defining file search paths
+(this mechanism works differently from Logtalk own suporty for defining
+library paths). When porting Prolog code that defines file search paths,
+e.g. for finding module libraries, it often helps to load the pristine
+Prolog application before attempting to compile its source files as
+Logtalk source files. Depending on the Prolog backend, this may allow
+the file search paths to be used when compiling modules as objects that
+use file directives such as ``use_module/2``.
+
+
 .. _migration_proprietary:
 
 Dealing with proprietary Prolog directives and predicates
@@ -483,10 +495,11 @@ module names requiring finding, opening, and reading the file in order
 to find the actual module name.
 
 Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
-in ``use_module/2`` directives used within object and categories. For
-example, the ECLiPSe IC Constraint Solvers define a ``(::)/2`` variable
-domain operator that clashes with the Logtalk ``(::)/2`` message sending
-operator. We can solve the conflict by writing:
+and :term:`predicate shorthands <predicate shorthand>` in ``use_module/2``
+directives used within object and categories. For example, the ECLiPSe IC
+Constraint Solvers define a ``(::)/2`` variable domain operator that clashes
+with the Logtalk ``(::)/2`` message sending operator. We can solve the conflict
+by writing:
 
 ::
 

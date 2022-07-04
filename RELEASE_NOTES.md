@@ -50,6 +50,8 @@ Documentation
 
 * IMPROVED: Handbook documentation of the `mode/2` and `uses/2` directives.
 
+* IMPROVED: Handbook section on Prolog integration and migration.
+
 * UPDATED: The `packs` tool documentation section on pack signature checking.
 
 Library
