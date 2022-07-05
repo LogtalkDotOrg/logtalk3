@@ -52,7 +52,8 @@ Documentation
 
 * ADDED: A Handbook section on documenting predicate exceptions.
 
-* IMPROVED: Handbook documentation of the `mode/2` and `uses/2` directives.
+* IMPROVED: Handbook documentation of the `if/1`, `elif/1`, `mode/2`, and
+`uses/2` directives.
 
 * IMPROVED: Handbook section on Prolog integration and migration.
 

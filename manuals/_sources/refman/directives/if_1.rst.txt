@@ -29,10 +29,12 @@ Description
 
    if(Goal)
 
-Starts conditional compilation. The code following the directive is
-compiled iff ``Goal`` is true. The goal is subjected to
-:ref:`goal expansion <expansion_expansion>` when the directive occurs
-in a source file. Conditional compilation directives can be nested.
+Starts conditional compilation. The code following the directive is compiled
+iff ``Goal`` is true. If ``Goal`` throws an error instead of either succeeding
+or failing, the error is reported by the compiler and compilation of the
+enclosing source file or entity is aborted. The goal is subjected to
+:ref:`goal expansion <expansion_expansion>` when the directive occurs in a
+source file. Conditional compilation directives can be nested.
 
 .. warning::
 
@@ -72,6 +74,18 @@ backend Prolog compiler:
 
        % SWI-Prolog specific code
        :- set_prolog_flag(double_quotes, codes).
+
+   :- endif.
+
+If necessary, test goal errors can be converted into failures using the
+standard ``catch/3`` control construct. For example:
+
+::
+
+   :- if(catch(\+ log(7,_), _, fail)).
+
+      % define the legacy log/2 predicate
+      log(X, Y) :- Y is log(X).
 
    :- endif.
 

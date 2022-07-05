@@ -128,10 +128,12 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>if(<span class="nv">Goal</span>)
 </pre></div>
 </div>
-<p>Starts conditional compilation. The code following the directive is
-compiled iff <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is true. The goal is subjected to
-<a class="reference internal" href="../../userman/expansion.html#expansion-expansion"><span class="std std-ref">goal expansion</span></a> when the directive occurs
-in a source file. Conditional compilation directives can be nested.</p>
+<p>Starts conditional compilation. The code following the directive is compiled
+iff <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is true. If <code class="docutils literal notranslate"><span class="pre">Goal</span></code> throws an error instead of either succeeding
+or failing, the error is reported by the compiler and compilation of the
+enclosing source file or entity is aborted. The goal is subjected to
+<a class="reference internal" href="../../userman/expansion.html#expansion-expansion"><span class="std std-ref">goal expansion</span></a> when the directive occurs in a
+source file. Conditional compilation directives can be nested.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Conditional compilation goals <strong>cannot</strong> depend on predicate definitions
@@ -164,6 +166,16 @@ backend Prolog compiler:</p>
 
     <span class="c">% SWI-Prolog specific code</span>
 <span class="p">    :- </span><span class="k">set_prolog_flag</span>(double_quotes, codes).
+
+<span class="p">:- </span><span class="k">endif</span>.
+</pre></div>
+</div>
+<p>If necessary, test goal errors can be converted into failures using the
+standard <code class="docutils literal notranslate"><span class="pre">catch/3</span></code> control construct. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">catch</span>(<span class="o">\+</span> <span class="k">log</span>(<span class="m">7</span>,<span class="nv">_</span>), <span class="nv">_</span>, <span class="k">fail</span>)).
+
+   <span class="c">% define the legacy log/2 predicate</span>
+   <span class="k">log</span>(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o">:-</span> <span class="nv">Y</span> <span class="k">is</span> <span class="k">log</span>(<span class="nv">X</span>).
 
 <span class="p">:- </span><span class="k">endif</span>.
 </pre></div>
