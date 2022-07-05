@@ -1887,16 +1887,16 @@
 			Result = error(Error, _)
 		).
 
-	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                   failed(Goal, Seed)).
-	quick_check_error_reified(quick_check_error(error(Error,_), Goal, _, Seed),       error(Error, Goal, Seed)).
-	quick_check_error_reified(quick_check_error(Error, Goal, _, Seed),                error(Error, Goal, Seed)).
+	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                    failed(Goal, Seed)).
+	quick_check_error_reified(quick_check_error(error(Error,_), Goal, _, Seed),        error(Error, Goal, Seed)).
+	quick_check_error_reified(quick_check_error(Error, Goal, _, Seed),                 error(Error, Goal, Seed)).
 	quick_check_error_reified(quick_check_broken(generate_test_error(_), Error),       broken(generate_test_error, Error)).
 	quick_check_error_reified(quick_check_broken(generate_test_failure(_), Culprit),   broken(generate_test_failure, Culprit)).
 	quick_check_error_reified(quick_check_broken(label_goal_error(_), Error),          broken(label_goal_error, Error)).
 	quick_check_error_reified(quick_check_broken(label_goal_failure(Culprit)),         broken(label_goal_failure, Culprit)).
 	quick_check_error_reified(quick_check_broken(pre_condition_error(_), Error),       broken(pre_condition_error, Error)).
 	quick_check_error_reified(quick_check_broken(pre_condition_always_fails(Culprit)), broken(pre_condition_always_fails, Culprit)).
-	quick_check_error_reified(quick_check_broken(template_error(_), Error),           broken(template_error, Error)).
+	quick_check_error_reified(quick_check_broken(template_error(_), Error),            broken(template_error, Error)).
 
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
