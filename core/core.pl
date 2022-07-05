@@ -11516,8 +11516,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % auxiliary predicate for checking predicate name conflicts between
-% built-in methods and predicates listed in public/1, protected/1,
-% private/1, uses/2, and use_module/2 directives
+% predicates listed in uses/2 and use_module/2 directives
 
 '$lgt_check_predicate_name_conflict'(Alias, Culprit) :-
 	(	'$lgt_built_in_method'(Alias, _, _, _) ->
