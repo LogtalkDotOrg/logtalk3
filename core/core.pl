@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b02)).
+'$lgt_version_data'(logtalk(3, 57, 0, b03)).
 
 
 
@@ -11522,18 +11522,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_built_in_method'(Alias, _, _, _) ->
 		% clash with a built-in method, which cannot be redefined
 		throw(permission_error(modify, built_in_method, Culprit))
-	;	'$lgt_pp_uses_predicate_'(_, _, Alias, _) ->
+	;	'$lgt_pp_uses_predicate_'(Obj, _, Alias, _) ->
 		% clash with an earlier uses/2 directive predicate
-		throw(permission_error(modify, uses_object_predicate, Culprit))
-	;	'$lgt_pp_uses_non_terminal_'(_, _, _, _, Alias, _) ->
+		throw(permission_error(modify, uses_object_predicate, Obj::Culprit))
+	;	'$lgt_pp_uses_non_terminal_'(Obj, _, _, _, Alias, _) ->
 		% clash with an earlier uses/2 directive non-terminal
-		throw(permission_error(modify, uses_object_non_terminal, Culprit))
-	;	'$lgt_pp_use_module_predicate_'(_, _, Alias, _) ->
+		throw(permission_error(modify, uses_object_non_terminal, Obj::Culprit))
+	;	'$lgt_pp_use_module_predicate_'(Module, _, Alias, _) ->
 		% clash with an earlier use_module/2 directive predicate
-		throw(permission_error(modify, uses_module_predicate, Culprit))
-	;	'$lgt_pp_use_module_non_terminal_'(_, _, _, _, Alias, _) ->
+		throw(permission_error(modify, uses_module_predicate, ':'(Module,Culprit)))
+	;	'$lgt_pp_use_module_non_terminal_'(Module, _, _, _, Alias, _) ->
 		% clash with an earlier use_module/2 directive non-terminal
-		throw(permission_error(modify, uses_module_non_terminal, Culprit))
+		throw(permission_error(modify, uses_module_non_terminal, ':'(Module,Culprit)))
 	;	true
 	).
 

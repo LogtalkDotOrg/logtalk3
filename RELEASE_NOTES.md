@@ -32,6 +32,9 @@ Logtalk compiler and runtime
 `Goal` when `otherwise/0` is a built-in predicate, printing a deprecated
 linter warning instead of warning about a missing else part.
 
+* IMPROVED: More informative permission errors for predicates listed in
+multiple `uses/2` or `use_module/2` directives.
+
 * IMPROVED: Linter warnings for the `(->)/2` and `(*->)/2` control constructs.
 
 * FIXED: Allow making a predicate (or non-terminal) listed in a `uses/2` or a
