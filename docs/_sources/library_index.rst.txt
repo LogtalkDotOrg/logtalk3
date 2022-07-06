@@ -421,6 +421,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    print_goal_hook <print_goal_hook_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
    suppress_goal_hook <suppress_goal_hook_0>
+   write_to_file_hook(File) <write_to_file_hook_1>
+   write_to_file_hook(File,Options) <write_to_file_hook_2>
    write_to_stream_hook(Stream) <write_to_stream_hook_1>
    write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
 

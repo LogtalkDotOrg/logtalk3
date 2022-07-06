@@ -85,6 +85,9 @@ library.
 
 * ADDED: Additional tests for the `timeout` library.
 
+* ADDED: Parametric objects `write_to_file_hook/1-2` to the `hook_objects`
+library.
+
 * IMPROVED: Tests for the `csv` library.
 
 Tools

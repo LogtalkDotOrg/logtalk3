@@ -230,6 +230,8 @@ Objects
    uuid(Representation) <uuid_1>
    varlist <varlist_0>
    wrapper <wrapper_0>
+   write_to_file_hook(File) <write_to_file_hook_1>
+   write_to_file_hook(File,Options) <write_to_file_hook_2>
    write_to_stream_hook(Stream) <write_to_stream_hook_1>
    write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
    xhtml11 <xhtml11_0>

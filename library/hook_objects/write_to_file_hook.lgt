@@ -19,51 +19,53 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(write_to_stream_hook(_Stream_, _Options_),
+:- object(write_to_file_hook(_File_, _Options_),
 	implements(expanding)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-16,
-		comment is 'This hook object writes term-expansion results to a stream using a list of ``write_term/3`` options. The terms are terminated by a period and a new line.',
-		parnames is ['Stream', 'Options'],
+		date is 2022-07-06,
+		comment is 'This hook object writes term-expansion results to a file using a list of ``write_term/3`` options. The terms are terminated by a period and a new line.',
+		parnames is ['File', 'Options'],
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,
 			identity_hook, grammar_rules_hook,
 			prolog_module_hook(_),  object_wrapper_hook,
-			write_to_stream_hook(_),
-			write_to_file_hook(_, _), write_to_file_hook(_),
+			write_to_file_hook(_),
+			write_to_stream_hook(_, _), write_to_stream_hook(_),
 			print_goal_hook, suppress_goal_hook
 		]
 	]).
 
 	term_expansion(begin_of_file, begin_of_file) :-
-		!.
+		!,
+		open(_File_, write, _, [alias(write_to_file_hook_alias)]).
 	term_expansion(end_of_file, end_of_file) :-
-		!.
+		!,
+		close(write_to_file_hook_alias).
 	term_expansion(Term, Term) :-
-		write_term(_Stream_, Term, _Options_),
-		write(_Stream_, '.'), nl(_Stream_).
+		write_term(write_to_file_hook_alias, Term, _Options_),
+		write(write_to_file_hook_alias, '.'), nl(write_to_file_hook_alias).
 
 :- end_object.
 
 
-:- object(write_to_stream_hook(Stream),
-	extends(write_to_stream_hook(Stream, [quoted(true),ignore_ops(true)]))).
+:- object(write_to_file_hook(Stream),
+	extends(write_to_file_hook(Stream, [quoted(true),ignore_ops(true)]))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-16,
-		comment is 'This hook object writes term-expansion results to a stream in canonical format. The terms are terminated by a period and a new line.',
-		parnames is ['Stream'],
+		date is 2022-07-06,
+		comment is 'This hook object writes term-expansion results to a file in canonical format. The terms are terminated by a period and a new line.',
+		parnames is ['File'],
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,
 			identity_hook, grammar_rules_hook,
 			prolog_module_hook(_), object_wrapper_hook,
-			write_to_stream_hook(_, _),
-			write_to_file_hook(_, _), write_to_file_hook(_),
+			write_to_file_hook(_, _),
+			write_to_stream_hook(_, _), write_to_stream_hook(_),
 			print_goal_hook, suppress_goal_hook
 		]
 	]).
