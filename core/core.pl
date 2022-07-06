@@ -12397,16 +12397,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 % conflict with a predicate specified in a uses/2 directive
 
 '$lgt_compile_head'(Alias, _, _, _) :-
-	'$lgt_pp_uses_predicate_'(_, _, Alias, _),
+	'$lgt_pp_uses_predicate_'(Obj, _, Alias, _),
 	functor(Alias, Functor, Arity),
-	throw(permission_error(modify, uses_object_predicate, Functor/Arity)).
+	throw(permission_error(modify, uses_object_predicate, Obj::Functor/Arity)).
 
 % conflict with a predicate specified in a use_module/2 directive
 
 '$lgt_compile_head'(Alias, _, _, _) :-
-	'$lgt_pp_use_module_predicate_'(_, _, Alias, _),
+	'$lgt_pp_use_module_predicate_'(Module, _, Alias, _),
 	functor(Alias, Functor, Arity),
-	throw(permission_error(modify, uses_module_predicate, Functor/Arity)).
+	throw(permission_error(modify, uses_module_predicate, ':'(Module,Functor/Arity))).
 
 % definition of a reserved predicate without reference to the built-in protocol declaring it
 

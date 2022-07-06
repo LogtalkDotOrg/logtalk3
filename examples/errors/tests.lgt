@@ -3,9 +3,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2017-08-06,
+		date is 2022-07-06,
 		comment is 'Unit tests for the "errors" example.'
 	]).
 
@@ -117,13 +117,13 @@
 
 	throws(
 		object_uses_predicate_repeated,
-		error(permission_error(modify,uses_object_predicate,member/2), _)
+		error(permission_error(modify,uses_object_predicate,list::member/2), _)
 	) :-
 		create_object(_, [], [uses(list,[member/2]), uses(set,[member/2])], []).
 
 	throws(
 		category_uses_predicate_repeated,
-		error(permission_error(modify,uses_object_predicate,member/2), _)
+		error(permission_error(modify,uses_object_predicate,list::member/2), _)
 	) :-
 		create_category(_, [], [uses(list,[member/2]), uses(set,[member/2])], []).
 
@@ -131,13 +131,13 @@
 
 	throws(
 		object_uses_predicate_conflict,
-		error(permission_error(modify,uses_object_predicate,member/2), _)
+		error(permission_error(modify,uses_object_predicate,list::member/2), _)
 	) :-
 		create_object(_, [], [uses(list,[member/2])], [member(H, [H| _])]).
 
 	throws(
 		category_uses_predicate_conflict,
-		error(permission_error(modify,uses_object_predicate,member/2), _)
+		error(permission_error(modify,uses_object_predicate,list::member/2), _)
 	) :-
 		create_category(_, [], [uses(list,[member/2])], [member(H, [H| _])]).
 
