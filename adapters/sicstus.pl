@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SICStus Prolog 4.1.0 and later versions
-%  Last updated on June 25, 2022
+%  Last updated on July 6, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -248,6 +248,13 @@ forall(Generate, Test) :-
 % compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(block(_)).
+'$lgt_prolog_predicate_property'(compiled).
+'$lgt_prolog_predicate_property'(exported).
+'$lgt_prolog_predicate_property'(fd_constraint).
+'$lgt_prolog_predicate_property'(interpreted).
+'$lgt_prolog_predicate_property'(jittable).
+'$lgt_prolog_predicate_property'(jitted).
+'$lgt_prolog_predicate_property'(imported_from(_)).
 '$lgt_prolog_predicate_property'(volatile).
 
 
