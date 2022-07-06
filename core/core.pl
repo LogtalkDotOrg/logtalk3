@@ -10269,18 +10269,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_built_in_method'(Pred, _, _, _) ->
 		% clash with a built-in method, whose scope cannot be changed
 		throw(permission_error(modify, built_in_method, Functor/Arity))
-	;	'$lgt_pp_uses_predicate_'(_, _, Pred, _) ->
-		% clash with an earlier uses/2 directive predicate
-		throw(permission_error(modify, uses_object_predicate, Functor/Arity))
-	;	'$lgt_pp_uses_non_terminal_'(_, _, _, _, Pred, _) ->
-		% clash with an earlier uses/2 directive non-terminal
-		throw(permission_error(modify, uses_object_non_terminal, Functor/Arity))
-	;	'$lgt_pp_use_module_predicate_'(_, _, Pred, _) ->
-		% clash with an earlier use_module/2 directive predicate
-		throw(permission_error(modify, uses_module_predicate, Functor/Arity))
-	;	'$lgt_pp_use_module_non_terminal_'(_, _, _, _, Pred, _) ->
-		% clash with an earlier use_module/2 directive non-terminal
-		throw(permission_error(modify, uses_module_non_terminal, Functor/Arity))
 	;	!,
 		'$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope),
 		'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity, File, StartLine-EndLine),
@@ -10293,18 +10281,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_built_in_method'(Pred, _, _, _) ->
 		% clash with a built-in method, whose scope cannot be changed
 		throw(permission_error(modify, built_in_method, Functor//Arity))
-	;	'$lgt_pp_uses_predicate_'(_, _, Pred, _) ->
-		% clash with an earlier uses/2 directive predicate
-		throw(permission_error(modify, uses_object_predicate, Functor//Arity))
-	;	'$lgt_pp_uses_non_terminal_'(_, _, _, _, Pred, _) ->
-		% clash with an earlier uses/2 directive non-terminal
-		throw(permission_error(modify, uses_object_non_terminal, Functor//Arity))
-	;	'$lgt_pp_use_module_predicate_'(_, _, Pred, _) ->
-		% clash with an earlier use_module/2 directive predicate
-		throw(permission_error(modify, uses_module_predicate, Functor//Arity))
-	;	'$lgt_pp_use_module_non_terminal_'(_, _, _, _, Pred, _) ->
-		% clash with an earlier use_module/2 directive non-terminal
-		throw(permission_error(modify, uses_module_non_terminal, Functor//Arity))
 	;	!,
 		'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope),
 		assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
