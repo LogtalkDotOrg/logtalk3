@@ -324,14 +324,14 @@
 % '$lgt_pp_module_alias_'(Module, Alias, CompilationContext)
 :- dynamic('$lgt_pp_module_alias_'/3).
 
-% '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, CompilationContext)
-:- dynamic('$lgt_pp_uses_predicate_'/4).
-% '$lgt_pp_uses_non_terminal_'(Obj, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext)
-:- dynamic('$lgt_pp_uses_non_terminal_'/6).
-% '$lgt_pp_use_module_predicate_'(Module, Predicate, Alias, CompilationContext)
-:- dynamic('$lgt_pp_use_module_predicate_'/4).
-% '$lgt_pp_use_module_non_terminal_'(Module, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext)
-:- dynamic('$lgt_pp_use_module_non_terminal_'/6).
+% '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, CompilationContext, File, Lines)
+:- dynamic('$lgt_pp_uses_predicate_'/6).
+% '$lgt_pp_uses_non_terminal_'(Obj, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext, File, Lines)
+:- dynamic('$lgt_pp_uses_non_terminal_'/8).
+% '$lgt_pp_use_module_predicate_'(Module, Predicate, Alias, CompilationContext, File, Lines)
+:- dynamic('$lgt_pp_use_module_predicate_'/6).
+% '$lgt_pp_use_module_non_terminal_'(Module, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext, File, Lines)
+:- dynamic('$lgt_pp_use_module_non_terminal_'/8).
 % '$lgt_pp_entity_info_'(List)
 :- dynamic('$lgt_pp_entity_info_'/1).
 % '$lgt_pp_predicate_info_'(Predicate, List, File, Lines)
@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b03)).
+'$lgt_version_data'(logtalk(3, 57, 0, b04)).
 
 
 
@@ -7658,7 +7658,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_referenced_object_message_'(Object, PredicateFunctor/PredicateArity, AliasFunctor/AliasArity, Caller, File, Line-_),
 	'$lgt_property_location'(MainFile, File, Line, Location),
 	functor(Predicate, PredicateFunctor, PredicateArity),
-	(	'$lgt_pp_uses_non_terminal_'(Object, _, _, Predicate, _, _) ->
+	(	'$lgt_pp_uses_non_terminal_'(Object, _, _, Predicate, _, _, _, _) ->
 		PredicateArity2 is PredicateArity - 2,
 		NonTerminal = PredicateFunctor//PredicateArity2
 	;	NonTerminal = no
@@ -7673,7 +7673,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_referenced_module_predicate_'(Module, PredicateFunctor/PredicateArity, AliasFunctor/AliasArity, Caller, File, Line-_),
 	'$lgt_property_location'(MainFile, File, Line, Location),
 	functor(Predicate, PredicateFunctor, PredicateArity),
-	(	'$lgt_pp_use_module_non_terminal_'(Module, _, _, Predicate, _, _) ->
+	(	'$lgt_pp_use_module_non_terminal_'(Module, _, _, Predicate, _, _, _, _) ->
 		PredicateArity2 is PredicateArity - 2,
 		NonTerminal = PredicateFunctor//PredicateArity2
 	;	NonTerminal = no
@@ -8309,10 +8309,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_parameter_variables_'(_)),
 	retractall('$lgt_pp_object_alias_'(_, _, _)),
 	retractall('$lgt_pp_module_alias_'(_, _, _)),
-	retractall('$lgt_pp_uses_predicate_'(_, _, _, _)),
-	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _)),
-	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _)),
-	retractall('$lgt_pp_use_module_non_terminal_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_uses_predicate_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _, _, _)),
+	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _, _, _)),
+	retractall('$lgt_pp_use_module_non_terminal_'(_, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_def_'(_)),
 	retractall('$lgt_pp_ddef_'(_)),
 	retractall('$lgt_pp_super_'(_)),
@@ -9263,9 +9263,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% but not unsupported directives that the backend Prolog compiler adapter
 	% file failed to expand into supported use_module/2 directives
 	(	'$lgt_pp_defines_predicate_'(Directive, _, _, _, _, _)
-	;	'$lgt_pp_uses_predicate_'(_, _, Directive, _)
+	;	'$lgt_pp_uses_predicate_'(_, _, Directive, _, _, _)
 		% directive is a query for a locally defined predicate
-	;	'$lgt_pp_use_module_predicate_'(_, _, Directive, _)
+	;	'$lgt_pp_use_module_predicate_'(_, _, Directive, _, _, _)
 		% or a predicate referenced in a use_module/2 directive
 	;	'$lgt_built_in_predicate'(Directive)
 		% or a built-in predicate
@@ -11165,103 +11165,139 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_uses_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, Arity, Obj, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
-	% unify arguments of TOriginal and TAlias
-	Original =.. [_| Args],
-	Alias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote definition
-	% except when the remote is a built-in predicate in "user" with no alias being defined
-	% or a built-in method that would clash with the local definition
-	(	Obj == user,
-		OriginalFunctor == AliasFunctor,
-		'$lgt_predicate_property'(Original, built_in) ->
-		% no need for a local definition
-		true
-	;	% add local definition
-		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-		'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
-	),
-	% ensure that this uses/2 directive is found when looking for senders of this message
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
-	'$lgt_pp_entity_'(_, Entity, _),
-	(	Flag == true ->
-		% shared parameter variables; use a minimal compilation-context to preserve
-		% the binding between any parameter variable and the object argument
-		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, NewCtx)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, NewCtx)))
-	;	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, _)))
+	'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity),
+	(	'$lgt_pp_uses_predicate_'(Obj, Original, Alias, _, OriginalFile, OriginalLines) ->
+		% predicate already listed in another uses/2 directive
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+			'$lgt_compiler_flag'(duplicated_directives, warning) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_predicate_reference(File, Lines, Type, Entity, Obj::AliasFunctor/Arity, OriginalFile, OriginalLines)
+			)
+		;	true
+		)
+	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+		% unify arguments of TOriginal and TAlias
+		Original =.. [_| Args],
+		Alias =.. [_| Args],
+		% allow for runtime use by adding a local definition that calls the remote definition
+		% except when the remote is a built-in predicate in "user" with no alias being defined
+		% or a built-in method that would clash with the local definition
+		(	Obj == user,
+			OriginalFunctor == AliasFunctor,
+			'$lgt_predicate_property'(Original, built_in) ->
+			% no need for a local definition
+			true
+		;	% add local definition
+			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+			'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
+		),
+		% ensure that this uses/2 directive is found when looking for senders of this message
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+		'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
+		(	Flag == true ->
+			% shared parameter variables; use a minimal compilation-context to preserve
+			% the binding between any parameter variable and the object argument
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, NewCtx, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, NewCtx)))
+		;	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, _)))
+		)
 	).
 
 
 '$lgt_compile_uses_directive_non_terminal_indicator'(OriginalFunctor, AliasFunctor, Arity, ExtArity, Obj, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	functor(Pred, OriginalFunctor, ExtArity),
-	functor(PredAlias, AliasFunctor, ExtArity),
-	'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
-	% unify arguments of TOriginal and TAlias
-	Original =.. [_| Args],
-	Alias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote definition
-	% except when the remote is a built-in predicate in "user" with no alias being defined
-	% or a built-in method that would clash with the local definition
-	(	Obj == user,
-		OriginalFunctor == AliasFunctor,
-		'$lgt_predicate_property'(Pred, built_in) ->
-		% no need for a local definition
-		true
-	;	% add local definition
-		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-		'$lgt_compile_grammar_rule'((Alias --> Obj::Original), AuxCtx)
-	),
-	% ensure that the this uses/2 directive is found when looking for senders of this message
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, PredAlias, PredAlias),
-	'$lgt_pp_entity_'(_, Entity, _),
-	(	Flag == true ->
-		% shared parameter variables; use a minimal compilation-context to preserve
-		% the binding between the parameter variable and the object argument
-		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, NewCtx)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Pred, PredAlias, NewCtx)))
-	;	assertz('$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, _)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Pred, PredAlias, _)))
+	'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity),
+	(	'$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, _, _, _, OriginalFile, OriginalLines) ->
+		% predicate already listed in another uses/2 directive
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+			'$lgt_compiler_flag'(duplicated_directives, warning) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_non_terminal_reference(File, Lines, Type, Entity, Obj::AliasFunctor//Arity, OriginalFile, OriginalLines)
+			)
+		;	true
+		)
+	;	functor(Pred, OriginalFunctor, ExtArity),
+		functor(PredAlias, AliasFunctor, ExtArity),
+		'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
+		% unify arguments of TOriginal and TAlias
+		Original =.. [_| Args],
+		Alias =.. [_| Args],
+		% allow for runtime use by adding a local definition that calls the remote definition
+		% except when the remote is a built-in predicate in "user" with no alias being defined
+		% or a built-in method that would clash with the local definition
+		(	Obj == user,
+			OriginalFunctor == AliasFunctor,
+			'$lgt_predicate_property'(Pred, built_in) ->
+			% no need for a local definition
+			true
+		;	% add local definition
+			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+			'$lgt_compile_grammar_rule'((Alias --> Obj::Original), AuxCtx)
+		),
+		% ensure that the this uses/2 directive is found when looking for senders of this message
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+		'$lgt_add_referenced_object_message'(Mode, Obj, Pred, PredAlias, PredAlias),
+		(	Flag == true ->
+			% shared parameter variables; use a minimal compilation-context to preserve
+			% the binding between the parameter variable and the object argument
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, NewCtx, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Pred, PredAlias, NewCtx)))
+		;	assertz('$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, _, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Pred, PredAlias, _)))
+		)
 	).
 
 
 '$lgt_compile_uses_directive_predicate_call'(Original, Alias, Obj, Flag, Ctx) :-
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
-	% allow for runtime use by adding a local definition that calls the remote definition
-	% except when the remote is a built-in predicate in "user" with no alias being defined
-	% or a built-in method that would clash with the local definition
-	(	Obj == user,
-		'$lgt_predicate_property'(Original, built_in) ->
-		% no need for a local definition
-		true
-	;	% add local definition
-		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-		'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
+	'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity),
+	(	'$lgt_pp_uses_predicate_'(Obj, Original, Alias, _, OriginalFile, OriginalLines) ->
+		% predicate already listed in another uses/2 directive
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+			'$lgt_compiler_flag'(duplicated_directives, warning) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_predicate_reference(File, Lines, Type, Entity, Obj::AliasFunctor/Arity, OriginalFile, OriginalLines)
+			)
+		;	true
+		)
+	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+		% allow for runtime use by adding a local definition that calls the remote definition
+		% except when the remote is a built-in predicate in "user" with no alias being defined
+		% or a built-in method that would clash with the local definition
+		(	Obj == user,
+			'$lgt_predicate_property'(Original, built_in) ->
+			% no need for a local definition
+			true
+		;	% add local definition
+			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+			'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
 
-	),
-	% ensure that this uses/2 directive is found when looking for senders of this message
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
-	'$lgt_pp_entity_'(_, Entity, _),
-	(	Flag == true ->
-		% shared parameter variables; use a minimal compilation-context to preserve
-		% the binding between any parameter variable and the object argument
-		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, NewCtx)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, NewCtx)))
-	;	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, _)))
+		),
+		% ensure that this uses/2 directive is found when looking for senders of this message
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+		'$lgt_add_referenced_object_message'(Mode, Obj, Original, Alias, Alias),
+		(	Flag == true ->
+			% shared parameter variables; use a minimal compilation-context to preserve
+			% the binding between any parameter variable and the object argument
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, NewCtx, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, NewCtx)))
+		;	assertz('$lgt_pp_uses_predicate_'(Obj, Original, Alias, _, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Obj, Original, Alias, _)))
+		)
 	).
 
 
@@ -11392,102 +11428,138 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_use_module_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, Arity, Module, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
-	% unify arguments of TOriginal and TAlias
-	Original =.. [_| Args],
-	Alias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote definition
-	% except when the remote is a built-in predicate in "user" with no alias being defined
-	% or a built-in method that would clash with the local definition
-	(	Module == user,
-		OriginalFunctor == AliasFunctor,
-		'$lgt_predicate_property'(Original, built_in) ->
-		% no need for a local definition
-		true
-	;	% add local definition
-		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-		'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
-	),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	% ensure that this use_module/2 directive is found when looking for callers of this module predicate
-	'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
-	'$lgt_pp_entity_'(_, Entity, _),
-	(	Flag == true ->
-		% parameter variable; use a minimal compilation-context to preserve
-		% the binding between the parameter variable and the module argument
-		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, NewCtx)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, NewCtx)))
-	;	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, _)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, _)))
+	'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity),
+	(	'$lgt_pp_use_module_predicate_'(Module, Original, Alias, _, OriginalFile, OriginalLines) ->
+		% predicate already listed in another uses/2 directive
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+			'$lgt_compiler_flag'(duplicated_directives, warning) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_predicate_reference(File, Lines, Type, Entity, ':'(Module, AliasFunctor/Arity), OriginalFile, OriginalLines)
+			)
+		;	true
+		)
+	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+		% unify arguments of TOriginal and TAlias
+		Original =.. [_| Args],
+		Alias =.. [_| Args],
+		% allow for runtime use by adding a local definition that calls the remote definition
+		% except when the remote is a built-in predicate in "user" with no alias being defined
+		% or a built-in method that would clash with the local definition
+		(	Module == user,
+			OriginalFunctor == AliasFunctor,
+			'$lgt_predicate_property'(Original, built_in) ->
+			% no need for a local definition
+			true
+		;	% add local definition
+			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+			'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
+		),
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+		% ensure that this use_module/2 directive is found when looking for callers of this module predicate
+		'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
+		(	Flag == true ->
+			% parameter variable; use a minimal compilation-context to preserve
+			% the binding between the parameter variable and the module argument
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, NewCtx, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, NewCtx)))
+		;	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, _, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, _)))
+		)
 	).
 
 
 '$lgt_compile_use_module_directive_non_terminal_indicator'(OriginalFunctor, AliasFunctor, Arity, ExtArity, Module, Flag, Ctx) :-
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	functor(Pred, AliasFunctor, ExtArity),
-	functor(PredAlias, AliasFunctor, ExtArity),
-	'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
-	% unify arguments of TOriginal and TAlias
-	Original =.. [_| Args],
-	Alias =.. [_| Args],
-	% allow for runtime use by adding a local definition that calls the remote definition
-	% except when the remote is a built-in predicate in "user" with no alias being defined
-	% or a built-in method that would clash with the local definition
-	(	Module == user,
-		OriginalFunctor == AliasFunctor,
-		'$lgt_predicate_property'(Pred, built_in) ->
-		% no need for a local definition
-		true
-	;	% add local definition
-		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-		'$lgt_compile_grammar_rule'((Alias --> ':'(Module,Original)), AuxCtx)
-	),
-	% ensure that the this use_module/2 directive is found when looking for callers of this module non-terminal
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, PredAlias, PredAlias),
-	'$lgt_pp_entity_'(_, Entity, _),
-	(	Flag == true ->
-		% parameter variable; use a minimal compilation-context to preserve
-		% the binding between the parameter variable and the object argument
-		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, NewCtx)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Module, Pred, PredAlias, NewCtx)))
-	;	assertz('$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, _)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Module, Pred, PredAlias, _)))
+	'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity),
+	(	'$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, _, _, _, OriginalFile, OriginalLines) ->
+		% predicate already listed in another uses/2 directive
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+			'$lgt_compiler_flag'(duplicated_directives, warning) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_non_terminal_reference(File, Lines, Type, Entity, ':'(Module, AliasFunctor//Arity), OriginalFile, OriginalLines)
+			)
+		;	true
+		)
+	;	functor(Pred, AliasFunctor, ExtArity),
+		functor(PredAlias, AliasFunctor, ExtArity),
+		'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
+		% unify arguments of TOriginal and TAlias
+		Original =.. [_| Args],
+		Alias =.. [_| Args],
+		% allow for runtime use by adding a local definition that calls the remote definition
+		% except when the remote is a built-in predicate in "user" with no alias being defined
+		% or a built-in method that would clash with the local definition
+		(	Module == user,
+			OriginalFunctor == AliasFunctor,
+			'$lgt_predicate_property'(Pred, built_in) ->
+			% no need for a local definition
+			true
+		;	% add local definition
+			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+			'$lgt_compile_grammar_rule'((Alias --> ':'(Module,Original)), AuxCtx)
+		),
+		% ensure that the this use_module/2 directive is found when looking for callers of this module non-terminal
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+		'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, PredAlias, PredAlias),
+		(	Flag == true ->
+			% parameter variable; use a minimal compilation-context to preserve
+			% the binding between the parameter variable and the object argument
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, NewCtx, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Module, Pred, PredAlias, NewCtx)))
+		;	assertz('$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, _, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_uses_predicate_'(Entity, Module, Pred, PredAlias, _)))
+		)
 	).
 
 
 '$lgt_compile_use_module_directive_predicate_call'(Original, Alias, Module, Flag, Ctx) :-
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
-	% allow for runtime use by adding a local definition that calls the remote definition
-	% except when the remote is a built-in predicate in "user" with no alias being defined
-	% or a built-in method that would clash with the local definition
-	(	Module == user,
-		'$lgt_predicate_property'(Original, built_in) ->
-		% no need for a local definition
-		true
-	;	% add local definition
-		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-		'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
-	),
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
-	% ensure that this use_module/2 directive is found when looking for callers of this module predicate
-	'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
-	'$lgt_pp_entity_'(_, Entity, _),
-	(	Flag == true ->
-		% parameter variable; use a minimal compilation-context to preserve
-		% the binding between the parameter variable and the module argument
-		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, NewCtx)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, NewCtx)))
-	;	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, _)),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, _)))
+	'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity),
+	(	'$lgt_pp_use_module_predicate_'(Module, Original, Alias, _, OriginalFile, OriginalLines) ->
+		% predicate already listed in another uses/2 directive
+		(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+			'$lgt_compiler_flag'(duplicated_directives, warning) ->
+			'$lgt_increment_compiling_warnings_counter',
+			'$lgt_print_message'(
+				warning(duplicated_directives),
+				duplicated_predicate_reference(File, Lines, Type, Entity, ':'(Module, AliasFunctor/Arity), OriginalFile, OriginalLines)
+			)
+		;	true
+		)
+	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+		% allow for runtime use by adding a local definition that calls the remote definition
+		% except when the remote is a built-in predicate in "user" with no alias being defined
+		% or a built-in method that would clash with the local definition
+		(	Module == user,
+			'$lgt_predicate_property'(Original, built_in) ->
+			% no need for a local definition
+			true
+		;	% add local definition
+			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+			'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
+		),
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
+		% ensure that this use_module/2 directive is found when looking for callers of this module predicate
+		'$lgt_add_referenced_module_predicate'(Mode, Module, Original, Alias, Alias),
+		(	Flag == true ->
+			% parameter variable; use a minimal compilation-context to preserve
+			% the binding between the parameter variable and the module argument
+			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
+			assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, NewCtx, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, NewCtx)))
+		;	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, _, File, Lines)),
+			assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, _)))
+		)
 	).
 
 
@@ -11498,16 +11570,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_built_in_method'(Alias, _, _, _) ->
 		% clash with a built-in method, which cannot be redefined
 		throw(permission_error(modify, built_in_method, Culprit))
-	;	'$lgt_pp_uses_predicate_'(Obj, _, Alias, _) ->
+	;	'$lgt_pp_uses_predicate_'(Obj, _, Alias, _, _, _) ->
 		% clash with an earlier uses/2 directive predicate
 		throw(permission_error(modify, uses_object_predicate, Obj::Culprit))
-	;	'$lgt_pp_uses_non_terminal_'(Obj, _, _, _, Alias, _) ->
+	;	'$lgt_pp_uses_non_terminal_'(Obj, _, _, _, Alias, _, _, _) ->
 		% clash with an earlier uses/2 directive non-terminal
 		throw(permission_error(modify, uses_object_non_terminal, Obj::Culprit))
-	;	'$lgt_pp_use_module_predicate_'(Module, _, Alias, _) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, _, Alias, _, _, _) ->
 		% clash with an earlier use_module/2 directive predicate
 		throw(permission_error(modify, uses_module_predicate, ':'(Module,Culprit)))
-	;	'$lgt_pp_use_module_non_terminal_'(Module, _, _, _, Alias, _) ->
+	;	'$lgt_pp_use_module_non_terminal_'(Module, _, _, _, Alias, _, _, _) ->
 		% clash with an earlier use_module/2 directive non-terminal
 		throw(permission_error(modify, uses_module_non_terminal, ':'(Module,Culprit)))
 	;	true
@@ -12397,14 +12469,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 % conflict with a predicate specified in a uses/2 directive
 
 '$lgt_compile_head'(Alias, _, _, _) :-
-	'$lgt_pp_uses_predicate_'(Obj, _, Alias, _),
+	'$lgt_pp_uses_predicate_'(Obj, _, Alias, _, _, _),
 	functor(Alias, Functor, Arity),
 	throw(permission_error(modify, uses_object_predicate, Obj::Functor/Arity)).
 
 % conflict with a predicate specified in a use_module/2 directive
 
 '$lgt_compile_head'(Alias, _, _, _) :-
-	'$lgt_pp_use_module_predicate_'(Module, _, Alias, _),
+	'$lgt_pp_use_module_predicate_'(Module, _, Alias, _, _, _),
 	functor(Alias, Functor, Arity),
 	throw(permission_error(modify, uses_module_predicate, ':'(Module,Functor/Arity))).
 
@@ -14461,10 +14533,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(current_predicate(Term), TPred, DPred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Term, AliasFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		functor(Head, HeadFunctor, Arity),
 		'$lgt_compile_body'(Obj::current_predicate(HeadFunctor/Arity), TPred, DPred, Ctx)
-	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		functor(Head, HeadFunctor, Arity),
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = current_predicate(':'(Module, HeadFunctor/Arity)),
@@ -14508,9 +14580,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(predicate_property(Alias, Prop), TPred, DPred, Ctx) :-
 	nonvar(Alias),
-	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		'$lgt_compile_body'(Obj::predicate_property(Head, Prop), TPred, DPred, Ctx)
-	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		TPred = predicate_property(':'(Module, Head), Prop),
 		DPred = '$lgt_debug'(goal(predicate_property(':'(Module,Head), Prop), TPred), ExCtx)
@@ -14569,10 +14641,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(abolish(Pred), TCond, DCond, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, AliasFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		functor(Head, HeadFunctor, Arity),
 		'$lgt_compile_body'(Obj::abolish(HeadFunctor/Arity), TCond, DCond, Ctx)
-	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		functor(Head, HeadFunctor, Arity),
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = abolish(':'(Module, HeadFunctor/Arity)),
@@ -14640,9 +14712,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Clause),
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::asserta((Head :- Body)), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta((':'(Module,Head) :- Body)),
 			DCond = '$lgt_debug'(goal(asserta((':'(Module,Head) :- Body)), TCond), ExCtx),
@@ -14652,9 +14724,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			fail
 		)
 	;	Clause = Alias,
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::asserta(Head), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta(':'(Module,Head)),
 			DCond = '$lgt_debug'(goal(asserta(':'(Module,Head)), TCond), ExCtx),
@@ -14719,9 +14791,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Clause),
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::assertz((Head :- Body)), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz((':'(Module,Head) :- Body)),
 			DCond = '$lgt_debug'(goal(assertz((':'(Module,Head) :- Body)), TCond), ExCtx),
@@ -14731,9 +14803,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			fail
 		)
 	;	Clause = Alias,
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::assertz(Head), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz(':'(Module,Head)),
 			DCond = '$lgt_debug'(goal(assertz(':'(Module,Head)), TCond), ExCtx),
@@ -14796,9 +14868,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(clause(Alias, Body), TCond, DCond, Ctx) :-
 	nonvar(Alias),
-	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		'$lgt_compile_body'(Obj::clause(Head, Body), TCond, DCond, Ctx)
-	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = clause(':'(Module,Head), Body),
 		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx),
@@ -14854,9 +14926,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Clause),
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::retract((Head :- Body)), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = retract((':'(Module,Head) :- Body)),
 			DCond = '$lgt_debug'(goal(retract((':'(Module,Head) :- Body)), TCond), ExCtx),
@@ -14866,9 +14938,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			fail
 		)
 	;	Clause = Alias,
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::retract(Head), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = retract(':'(Module,Head)),
 			DCond = '$lgt_debug'(goal(retract(':'(Module,Head)), TCond), ExCtx),
@@ -14932,9 +15004,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(retractall(Alias), TCond, DCond, Ctx) :-
 	nonvar(Alias),
-	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		'$lgt_compile_body'(Obj::retractall(Head), TCond, DCond, Ctx)
-	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = retractall(':'(Module,Head)),
 		DCond = '$lgt_debug'(goal(retractall(':'(Module,Head)), TCond), ExCtx),
@@ -15014,9 +15086,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Clause),
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::asserta((Head :- Body), Ref), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta((':'(Module,Head) :- Body), Ref),
 			DCond = '$lgt_debug'(goal(asserta((':'(Module,Head) :- Body), Ref), TCond), ExCtx),
@@ -15026,9 +15098,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			fail
 		)
 	;	Clause = Alias,
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::asserta(Head, Ref), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta(':'(Module,Head), Ref),
 			DCond = '$lgt_debug'(goal(asserta(':'(Module,Head), Ref), TCond), ExCtx),
@@ -15099,9 +15171,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Clause),
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::assertz((Head :- Body), Ref), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz((':'(Module,Head) :- Body), Ref),
 			DCond = '$lgt_debug'(goal(assertz((':'(Module,Head) :- Body), Ref), TCond), ExCtx),
@@ -15111,9 +15183,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			fail
 		)
 	;	Clause = Alias,
-		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 			'$lgt_compile_body'(Obj::assertz(Head, Ref), TCond, DCond, Ctx)
-		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz(':'(Module,Head), Ref),
 			DCond = '$lgt_debug'(goal(assertz(':'(Module,Head), Ref), TCond), ExCtx),
@@ -15182,9 +15254,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_built_in_predicate'(clause(_, _, _)),
 	\+ '$lgt_pp_defines_predicate_'(clause(_, _, _), _, _, _, _, _),
 	nonvar(Alias),
-	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		'$lgt_compile_body'(Obj::clause(Head, Body, Ref), TCond, DCond, Ctx)
-	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = clause(':'(Module,Head), Body, Ref),
 		DCond = '$lgt_debug'(goal(clause(':'(Module,Head), Body), TCond), ExCtx),
@@ -15789,12 +15861,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		catch('$lgt_predicate_property'(Pred, meta_predicate(Meta)), _, fail) ->
 		% non-declared proprietary built-in meta-predicate
 		true
-	;	'$lgt_pp_use_module_predicate_'(Module, Original, Pred, _),
+	;	'$lgt_pp_use_module_predicate_'(Module, Original, Pred, _, _, _),
 		nonvar(Module),
 		catch('$lgt_predicate_property'(':'(Module, Original), meta_predicate(Meta)), _, fail) ->
 		% meta-predicates specified in a use_module/2 directive
 		true
-	;	'$lgt_pp_uses_predicate_'(Obj, Original, Pred, _),
+	;	'$lgt_pp_uses_predicate_'(Obj, Original, Pred, _, _, _),
 		Obj == user,
 		catch('$lgt_predicate_property'(Original, meta_predicate(Meta)), _, fail) ->
 		% Prolog meta-predicate undeclared in the adapter file (may not be a built-in)
@@ -15817,7 +15889,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % predicates specified in use_module/2 directives
 
 '$lgt_compile_body'(Alias, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
-	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias, Ctx),
+	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias, Ctx, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, Alias, Head),
@@ -15830,7 +15902,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % predicates (usually, but not necessarily, built-in predicates)
 
 '$lgt_compile_body'(Alias, TPred, DPred, Ctx) :-
-	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias, Ctx),
+	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias, Ctx, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	(	Obj == user ->
@@ -17032,9 +17104,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_extend_closure'(Closure, ExtArgs, Goal, Ctx) :-
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Alias),
-	(	'$lgt_pp_uses_predicate_'(Object, Original, Alias, Ctx) ->
+	(	'$lgt_pp_uses_predicate_'(Object, Original, Alias, Ctx, _, _) ->
 		Goal = Object::Original
-	;	'$lgt_pp_use_module_predicate_'(Module, Original, Alias, Ctx) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Original, Alias, Ctx, _, _) ->
 		Goal = ':'(Module, Original)
 	;	Goal = Alias
 	).
@@ -19603,12 +19675,24 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_source_file_context'(@compilation_context, -atom, -pair(integer), -atom, -entity_identifier)
+%
+% returns file, lines, and entity source context for the last term read;
+% it fails if the last attempt to read a term resulted in a syntax error;
+% in the context of runtime compilation, returns dummy file and line values
+
+'$lgt_source_file_context'(Ctx, File, Lines, Type, Entity) :-
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _).
+
+
+
 % '$lgt_source_file_context'(@compilation_context, -atom, -pair(integer))
 %
 % in the context of compiling a file, returns file and lines source context
 % for the last term read and fails if the last attempt to read a term
 % resulted in a syntax error; in the context of runtime compilation, returns
-% dummy values
+% dummy file and line values
 
 '$lgt_source_file_context'(Ctx, File, Lines) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
@@ -24613,7 +24697,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_terminals'(Codes, S0, S, Goal).
 
 '$lgt_dcg_body'(Alias, S0, S, Goal, Ctx) :-
-	'$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, Ctx),
+	'$lgt_pp_uses_non_terminal_'(Obj, Original, Alias, Pred, PredAlias, Ctx, _, _),
 	!,
 	% we must register here otherwise the non-terminal alias information would be lost
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
@@ -24621,7 +24705,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_dcg_body'(Obj::Original, S0, S, Goal, Ctx).
 
 '$lgt_dcg_body'(Alias, S0, S, Goal, Ctx) :-
-	'$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, Ctx),
+	'$lgt_pp_use_module_non_terminal_'(Module, Original, Alias, Pred, PredAlias, Ctx, _, _),
 	!,
 	% we must register here otherwise the non-terminal alias information would be lost
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, Mode, _, _, _),

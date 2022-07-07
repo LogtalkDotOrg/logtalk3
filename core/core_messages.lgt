@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:110:0,
+		version is 1:111:0,
 		author is 'Paulo Moura',
-		date is 2022-06-14,
+		date is 2022-07-07,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -463,6 +463,15 @@
 
 	message_tokens(missing_scope_directive(File, Lines, Type, Entity, _Directive, Predicate)) -->
 		['Missing scope directive for predicate: ~q'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(duplicated_predicate_reference(File, Lines, Type, Entity, Predicate, OriginalFile, OriginalLines)) -->
+		['Duplicated predicate reference in directive: ~q'-[Predicate], nl],
+		first_found_at(OriginalFile, OriginalLines, File),
+		message_context(File, Lines, Type, Entity).
+	message_tokens(duplicated_non_terminal_reference(File, Lines, Type, Entity, NonTerminal, OriginalFile, OriginalLines)) -->
+		['Duplicated non-terminal reference in directive: ~q'-[NonTerminal], nl],
+		first_found_at(OriginalFile, OriginalLines, File),
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(duplicated_directive(File, Lines, Type, Entity, Directive, OriginalFile, OriginalLines)) -->

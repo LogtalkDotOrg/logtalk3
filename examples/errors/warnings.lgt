@@ -343,6 +343,25 @@
 
 
 
+:- object(object_uses_predicate_repeated).
+
+	:- uses(list, [member/2]).
+
+	:- uses(list, [member/2]).
+
+:- end_object.
+
+
+:- category(category_uses_predicate_repeated).
+
+	:- uses(list, [member/2]).
+
+	:- uses(list, [member/2]).
+
+:- end_category.
+
+
+
 :- object(duplicated_clauses).
 
 	a(1).
