@@ -155,6 +155,9 @@ Tests
 
 * ADDED: Additional tests for the Prolog standard `is/2` predicate.
 
+* UPDATED: Enable running the `prolog/unicode/encodings` test set when running
+on SWI-Prolog.
+
 
 3.56.0 - June 9, 2022
 =====================
