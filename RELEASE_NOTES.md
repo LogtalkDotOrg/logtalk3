@@ -41,6 +41,9 @@ multiple `uses/2` or `use_module/2` directives.
 `use_module/2` directive available as public, protected, or private predicate
 without requiring defining a protocol.
 
+* FIXED: Internal compiler predicate that retrieves the source file context
+when the compilation mode is `runtime`.
+
 Prolog adapter and integration files
 ------------------------------------
 

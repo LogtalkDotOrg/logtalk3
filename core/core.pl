@@ -19612,7 +19612,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_source_file_context'(Ctx, File, Lines) :-
 	(	'$lgt_comp_ctx_mode'(Ctx, runtime) ->
-		File = nil, Lines = 0-0
+		File = nil, Lines = '-'(-1, -1)
 	;	'$lgt_pp_term_source_data_'(_, _, _, File, Lines) ->
 		true
 	;	% e.g. when compiling auxiliary clauses at runtime
