@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b04)).
+'$lgt_version_data'(logtalk(3, 57, 0, b05)).
 
 
 
@@ -8702,6 +8702,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_expand_file_directive_goal'(logtalk_load_context(Key, Value), true, _) :-
 	nonvar(Key),
 	logtalk_load_context(Key, Value),
+	!.
+
+% when the directive is found inside an entity, use any applicable uses/2 or
+% use_module/2 directive; this is mainly useful when compiling Prolog modules
+% as objects as the user can always write a (::)/2 or (:)/2 goal instead
+
+'$lgt_expand_file_directive_goal'(Goal, Obj::Goal, _) :-
+	'$lgt_pp_entity_'(_, _, _),
+	'$lgt_pp_uses_predicate_'(Obj, _, Goal, _, _, _),
+	!.
+
+'$lgt_expand_file_directive_goal'(Goal, ':'(Module,Goal), _) :-
+	'$lgt_pp_entity_'(_, _, _),
+	'$lgt_pp_use_module_predicate_'(Module, _, Goal, _, _, _),
 	!.
 
 % catchall clause

@@ -28,6 +28,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: When expanding the goal argument of an `initialization/1`, `if/1`,
+or `elif/1` directive inside an entity, use any preceding, applicable `uses/2`
+or `use_module/2` directive. This is mainly useful when compiling Prolog
+modules as objects as the user can always write a `(::)/2` or `(:)/2` goal
+instead.
+
 * ADDED: Compile `otherwise -> Goal` and `otherwise *-> Goal` constructs as
 `Goal` when `otherwise/0` is a built-in predicate, printing a deprecated
 linter warning instead of warning about a missing else part.
