@@ -56,3 +56,9 @@ yes
 
 Redefinition of method m/0 in object b3
 yes
+
+| ?- d4::m.
+
+Redefinition of method m/0 in object b3
+Redefinition of method m/0 in object c3
+yes

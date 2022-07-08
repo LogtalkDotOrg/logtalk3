@@ -71,12 +71,29 @@ alias/2 predicate directive.
 
 % bottom object, descending from the two previous objects and, as such, inheriting
 % two definitions for the predicate m/0; both inherited definitions are renamed
-% using the alias/2 directive:
+% using the alias/2 directive; the definition of m/0 inherited from b3 is still
+% available due to the default inheritance conflcit resolution mechanism:
 
 :- object(d3,
 	extends((b3, c3))).
 
 	:- alias(b3, [m/0 as b3_m/0]).
 	:- alias(c3, [m/0 as c3_m/0]).
+
+:- end_object.
+
+
+% we can also redefined the inherited m/0 predicate to call both inherited m/0
+% definitions by using their aliases:
+
+:- object(d4,
+	extends((b3, c3))).
+
+	:- alias(b3, [m/0 as b3_m/0]).
+	:- alias(c3, [m/0 as c3_m/0]).
+
+	m :-
+		^^b3_m,
+		^^c3_m.
 
 :- end_object.

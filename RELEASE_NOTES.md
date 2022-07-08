@@ -165,6 +165,12 @@ running the `packs` tool tests.
 goals with `::/1-2` arguments due to user redefinition of the standard `::/1-2`
 Logtalk operators.
 
+Examples
+--------
+
+* UPDATED: The `diamonds` example to illustrate using the `alias/2` directive
+to access all inherited definitions for the same predicate.
+
 Tests
 -----
 
