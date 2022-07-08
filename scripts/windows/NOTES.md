@@ -66,7 +66,8 @@ as the value of the `Start in` shortcut setting.
 
 The installer can be run in silent mode when executed at the command-line
 by using the option `/SILENT` (progress window is show) or `/VERYSILENT`
-(no progress window).
+(no progress window). Currently, the installer cannot be run in system
+context.
 
 The installation directory can be set at the command-line by using
 the option `/DIR=path` or by defining the value of the `LOGTALKHOME`

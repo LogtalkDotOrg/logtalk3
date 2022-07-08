@@ -78,6 +78,8 @@ Documentation
 
 * UPDATED: The `packs` tool documentation section on pack signature checking.
 
+* UPDATED: Notes on the Windows installer.
+
 Library
 -------
 
