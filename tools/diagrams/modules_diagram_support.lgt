@@ -22,9 +22,9 @@
 :- object(modules_diagram_support).
 
 	:- info([
-		version is 0:19:4,
+		version is 0:19:5,
 		author is 'Paulo Moura',
-		date is 2022-07-04,
+		date is 2022-07-08,
 		comment is 'Utility predicates for supporting Prolog modules in diagrams.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.'
@@ -222,7 +222,7 @@
 			 ),
 			 (	Callee0 = (Object::Callee1) ->
 			 	functor(Callee1, CalleeFunctor, CalleeArity),
-				Callee = Object::CalleeFunctor/CalleeArity
+				Callee = (Object::CalleeFunctor/CalleeArity)
 			 ;	Callee0 = ':'(OtherModule,Callee1) ->
 			 	functor(Callee1, CalleeFunctor, CalleeArity),
 				Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)

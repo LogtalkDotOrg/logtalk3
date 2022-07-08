@@ -23,9 +23,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0:11:1,
+		version is 0:11:2,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2022-07-04,
+		date is 2022-07-08,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -180,7 +180,7 @@
 
 	non_scoped_predicate(Entity, Alias, File, Line) :-
 		entity_property(Entity, defines(Alias, Properties)),
-		Alias \= _::_,
+		Alias \= (_ :: _),
 		% not a Logtalk multifile predicate definition
 		Alias \= ':'(_, _),
 		% not a Prolog multifile predicate definition
@@ -279,7 +279,7 @@
 	used_by_scoped_predicate(Predicate, Public, Protected, Private, Tested, Entity) :-
 		entity_property(Entity, calls(Predicate, Properties)),
 		memberchk(caller(Caller), Properties),
-		(	Caller = (_::_)
+		(	Caller = (_ :: _)
 			% called from a Logtalk multifile predicate clause
 		;	Caller = ':'(_, _)
 			% called from a Prolog multifile predicate clause
