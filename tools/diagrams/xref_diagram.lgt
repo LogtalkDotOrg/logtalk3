@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:66:1,
+		version is 2:66:2,
 		author is 'Paulo Moura',
-		date is 2022-07-04,
+		date is 2022-07-08,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -231,7 +231,7 @@
 		(	Callee0 = (Other::Predicate),
 			nonvar(Other) ->
 			^^ground_entity_identifier(object, Other, Name),
-			Callee = Name::Predicate
+			Callee = (Name::Predicate)
 		;	Callee = Callee0
 		),
 		^^save_edge(Caller, Callee, [calls], calls_predicate, [tooltip(calls)| XRefOptions]),
@@ -432,7 +432,7 @@
 	calls_local_predicate(module, Entity, Caller, Line, Callee) :-
 		!,
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
-		Callee \= _::_,
+		Callee \= (_ :: _),
 		Callee \= ':'(_, _),
 		memberchk(caller(Caller), Properties),
 		(	member(line_count(Line), Properties) ->
@@ -442,10 +442,10 @@
 	calls_local_predicate(Kind, Entity, Caller, Line, Callee) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
-		Callee0 \= _::_,
-		Callee0 \= ::_,
-		Callee0 \= ^^_,
-		Callee0 \= _<<_,
+		Callee0 \= (_ :: _),
+		Callee0 \= (:: _),
+		Callee0 \= (^^ _),
+		Callee0 \= (_ << _),
 		Callee0 \= ':'(_, _),
 		memberchk(caller(Caller0), CallsProperties),
 		(	member(line_count(Line), CallsProperties) ->
@@ -503,8 +503,8 @@
 				fail
 			),
 			(	member(non_terminal(NonTerminal), CallerProperties) ->
-				Caller = From::NonTerminal
-			;	Caller = From::Predicate
+				Caller = (From::NonTerminal)
+			;	Caller = (From::Predicate)
 			)
 		;	% local predicate caller
 			entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
