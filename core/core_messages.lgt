@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:111:0,
+		version is 1:112:0,
 		author is 'Paulo Moura',
-		date is 2022-07-07,
+		date is 2022-07-09,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -249,6 +249,7 @@
 			current_logtalk_flag(naming, Naming),
 			current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
 			current_logtalk_flag(disjunctions, Disjunctions),
+			current_logtalk_flag(conditionals, Conditionals),
 			current_logtalk_flag(catchall_catch, CatchallCatch),
 			current_logtalk_flag(tail_recursive, TailRecursive),
 			current_logtalk_flag(portability, Portability),
@@ -297,7 +298,8 @@
 			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
 			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
-			'  disjunctions: ~w, catchall_catch: ~w, tail_recursive: ~w'-[Disjunctions, CatchallCatch, TailRecursive], nl,
+			'  disjunctions: ~w, conditionals: ~w'-[Disjunctions, Conditionals], nl,
+			'  catchall_catch: ~w, tail_recursive: ~w'-[CatchallCatch, TailRecursive], nl,
 			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
 			'Default optional features compiler flags:'-[], nl,
 			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,
@@ -722,6 +724,10 @@
 		['Soft-cut test is a unification between a variable and a ground term: ~q'-[Test], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(missing_else_part(File, Lines, Type, Entity, Construct)) -->
+		['Else part of the conditional is missing: ~q'-[Construct], nl],
+		message_context(File, Lines, Type, Entity).
+
 	% catch/3 goals that catch all exceptions
 
 	message_tokens(catchall_catch(File, Lines, Type, Entity, Goal)) -->
@@ -982,8 +988,6 @@
 		['in ~w goal contains singleton variable ~q'-[Predicate, Singleton], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton| Singletons])) -->
 		['in ~w goal contains singleton variables ~q'-[Predicate, [Singleton| Singletons]], nl].
-	suspicious_call_reason(missing_else_part) -->
-		['as else part of the conditional is missing'-[], nl].
 	suspicious_call_reason(as(Text)) -->
 		['as ~w'-[Text], nl].
 	suspicious_call_reason(due_to(Text)) -->

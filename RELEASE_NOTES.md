@@ -34,6 +34,10 @@ or `use_module/2` directive. This is mainly useful when compiling Prolog
 modules as objects as the user can always write a `(::)/2` or `(:)/2` goal
 instead.
 
+* CHANGED: Separate linter warnings for conditionals from other suspicious
+calls warnings. Controlled by the new `conditionals` flag, whose default
+value is `warning`.
+
 * ADDED: Compile `otherwise -> Goal` and `otherwise *-> Goal` constructs as
 `Goal` when `otherwise/0` is a built-in predicate, printing a deprecated
 linter warning instead of warning about a missing else part.

@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b05)).
+'$lgt_version_data'(logtalk(3, 57, 0, b06)).
 
 
 
@@ -12835,7 +12835,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(conditionals),
 		suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, Pred1)
 	),
 	fail.
@@ -12854,7 +12854,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(conditionals),
 		suspicious_soft_cut_test(File, Lines, Type, Entity, Head, Pred1)
 	),
 	fail.
@@ -12868,8 +12868,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
-		suspicious_call(File, Lines, Type, Entity, '*->'(Pred1, Pred2), reason(missing_else_part))
+		warning(conditionals),
+		missing_else_part(File, Lines, Type, Entity, '*->'(Pred1, Pred2))
 	),
 	fail.
 
@@ -12907,7 +12907,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(conditionals),
 		suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, Pred1)
 	),
 	fail.
@@ -12925,7 +12925,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(conditionals),
 		suspicious_if_then_else_test(File, Lines, Type, Entity, Head, Pred1)
 	),
 	fail.
@@ -12938,8 +12938,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
-		suspicious_call(File, Lines, Type, Entity, (Pred1 -> Pred2), reason(missing_else_part))
+		warning(conditionals),
+		missing_else_part(File, Lines, Type, Entity, (Pred1 -> Pred2))
 	),
 	fail.
 
@@ -23941,6 +23941,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(duplicated_clauses).
 '$lgt_valid_flag'(tail_recursive).
 '$lgt_valid_flag'(disjunctions).
+'$lgt_valid_flag'(conditionals).
 '$lgt_valid_flag'(catchall_catch).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
@@ -24063,6 +24064,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(disjunctions, silent) :- !.
 '$lgt_valid_flag_value'(disjunctions, warning) :- !.
+
+'$lgt_valid_flag_value'(conditionals, silent) :- !.
+'$lgt_valid_flag_value'(conditionals, warning) :- !.
 
 '$lgt_valid_flag_value'(catchall_catch, silent) :- !.
 '$lgt_valid_flag_value'(catchall_catch, warning) :- !.
