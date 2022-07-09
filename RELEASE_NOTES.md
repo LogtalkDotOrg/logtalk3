@@ -71,6 +71,9 @@ properties.
 meta-predicate property for the `setup_call_cleanup/3` predicate when not
 built-in.
 
+* FIXED: The SWI-Prolog adapter file to recognize the new `utf16le` and
+`utf16be` text encoding names.
+
 Documentation
 -------------
 

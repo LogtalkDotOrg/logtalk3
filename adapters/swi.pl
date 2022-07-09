@@ -1072,6 +1072,10 @@ thread_sleep(Time) :-
 		Encoding = unicode_be
 	;	stream_property(Stream, encoding(unicode_le)) ->
 		Encoding = unicode_le
+	;	stream_property(Stream, encoding(utf16le)) ->
+		Encoding = utf16le
+	;	stream_property(Stream, encoding(utf16be)) ->
+		Encoding = utf16be
 	).
 '$lgt_logtalk_prolog_encoding'('UCS-2BE', unicode_be, _).		% BOM forbidden
 '$lgt_logtalk_prolog_encoding'('UCS-2LE', unicode_le, _).
@@ -1080,6 +1084,10 @@ thread_sleep(Time) :-
 		Encoding = unicode_be
 	;	stream_property(Stream, encoding(unicode_le)) ->
 		Encoding = unicode_le
+	;	stream_property(Stream, encoding(utf16le)) ->
+		Encoding = utf16le
+	;	stream_property(Stream, encoding(utf16be)) ->
+		Encoding = utf16be
 	).
 '$lgt_logtalk_prolog_encoding'('UTF-16BE', unicode_be, _).		% BOM forbidden
 '$lgt_logtalk_prolog_encoding'('UTF-16LE', unicode_le, _).
