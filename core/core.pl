@@ -12826,7 +12826,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	nonvar(Pred1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(conditionals, warning),
 	(	Pred1 == ! ->
 		true
 	;	Pred1 = (Goal, _), Goal == !
@@ -12844,7 +12844,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	nonvar(Pred1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(conditionals, warning),
 	Pred1 = (Term1 = Term2),
 	(	var(Term1), ground(Term2) ->
 		true
@@ -12864,7 +12864,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Pred1),
 	callable(Pred2),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(conditionals, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
@@ -12898,7 +12898,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'((Pred1 -> _), _, _, Ctx) :-
 	nonvar(Pred1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(conditionals, warning),
 	(	Pred1 == ! ->
 		true
 	;	Pred1 = (Goal, _), Goal == !
@@ -12915,7 +12915,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'((Pred1 -> _), _, _, Ctx) :-
 	nonvar(Pred1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(conditionals, warning),
 	Pred1 = (Term1 = Term2),
 	(	var(Term1), ground(Term2) ->
 		true
@@ -12934,7 +12934,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Pred1),
 	callable(Pred2),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(conditionals, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
