@@ -242,8 +242,15 @@ from common practice). In addition, there is no de facto standard for module
 systems, despite otherwise frequent misleading claims. Key system differences
 include the set of implemented module directives, the directive semantics, the
 handling of operators, the locality of flags, and on the integration of
-term-expansion mechanisms (when provided). Follows a discussion of the
-limitations of this approach that you should be aware.
+term-expansion mechanisms (when provided). Another potential issue is that,
+when compiling modules as objects, Logtalk assumes that any referenced module
+(e.g. using ``use_module/1-2`` directives) is also being compiled as an
+object. If that's not the case, the compiled module calls being compiled as
+message sending goals will still work for normal predicates but will not
+work for meta-predicates called using implicit module qualification. The
+reason is that, unlike in Logtalk, calls to implicitly and explicitly
+qualified module meta-predicates have different semantics. Follows a
+discussion of other limitations of this approach that you should be aware.
 
 .. _migration_compatibility:
 

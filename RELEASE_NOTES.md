@@ -84,6 +84,8 @@ Documentation
 
 * IMPROVED: Handbook section on Prolog integration and migration.
 
+* IMPROVED: Handbook section on compiling Prolog modules as objects.
+
 * UPDATED: The `packs` tool documentation section on pack signature checking.
 
 * UPDATED: Notes on the Windows installer.
@@ -173,7 +175,8 @@ running the `packs` tool tests.
 goals with `::/1-2` arguments due to user redefinition of the standard `::/1-2`
 Logtalk operators.
 
-* FIXED: Cases in the `diagrams` tool where excluded files would be ignored.
+* FIXED: Cases in the `diagrams` tool where excluded files would be included
+in generated diagrams.
 
 Examples
 --------
