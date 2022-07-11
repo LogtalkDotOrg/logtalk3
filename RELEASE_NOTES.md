@@ -173,6 +173,8 @@ running the `packs` tool tests.
 goals with `::/1-2` arguments due to user redefinition of the standard `::/1-2`
 Logtalk operators.
 
+* FIXED: Cases in the `diagrams` tool where excluded files would be ignored.
+
 Examples
 --------
 

@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:51:0,
+		version is 2:51:1,
 		author is 'Paulo Moura',
-		date is 2022-04-15,
+		date is 2022-07-11,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format']
 	]).
@@ -573,16 +573,20 @@
 
 	output_all_files(Options) :-
 		self(Self),
+		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
+		::not_excluded_file(ExcludedFiles, Path, Basename),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
 		::output_file(Path, Basename, Directory, Options),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
 		fail.
 	output_all_files(Options) :-
 		self(Self),
+		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
+		::not_excluded_file(ExcludedFiles, Path, Basename),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
