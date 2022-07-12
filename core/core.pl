@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b06)).
+'$lgt_version_data'(logtalk(3, 57, 0, b07)).
 
 
 
@@ -17897,6 +17897,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(warning(Flag), Warning),
+	fail.
+
+'$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
+	\+ '$lgt_implements_protocol_'(Obj, forwarding, _),
+	\+ call(Dcl, Pred, _, _, _, _, _),
+	'$lgt_compiler_flag'(unknown_predicates, warning),
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_increment_compiling_warnings_counter',
+	(	'$lgt_pp_entity_'(Type, Entity, _) ->
+		Message = message_not_understood(File, Lines, Type, Entity, Obj, Pred)
+	;	Message = message_not_understood(File, Lines, Obj, Pred)
+	),
+	'$lgt_print_message'(warning(unknown_predicates), Message),
 	fail.
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-

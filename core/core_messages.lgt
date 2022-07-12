@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:112:0,
+		version is 1:113:0,
 		author is 'Paulo Moura',
-		date is 2022-07-09,
+		date is 2022-07-12,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -603,6 +603,16 @@
 	message_tokens(unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal)) -->
 		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
+
+	message_tokens(message_not_understood(File, Lines, Type, Entity, Obj, Pred)) -->
+		{functor(Pred, Name, Arity)},
+		['Unknown message sent to object: ~q'-[Obj::Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(message_not_understood(File, Lines, Obj, Pred)) -->
+		{functor(Pred, Name, Arity)},
+		['Unknown message sent to object: ~q'-[Obj::Name/Arity], nl],
+		message_context(File, Lines).
 
 	message_tokens(missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)) -->
 		['Missing reference to the built-in protocol: ~q'-[Protocol], nl],

@@ -746,11 +746,12 @@ Lint flags
 .. index:: pair: unknown_predicates; Flag
 
 ``unknown_predicates(Option)``
-   Defines the compiler behavior when calls to unknown predicates (or
-   non-terminals) are found. An unknown predicate is a called predicate
-   that is neither locally declared or defined. Possible option values
-   are ``error``, ``warning`` (the usual default), and ``silent`` (not
-   recommended).
+   Defines the compiler behavior when unknown messages or calls to unknown
+   predicates (or non-terminals) are found. An unknown message is a message
+   sent to an object that is not part of the object protocol. An unknown
+   predicate is a called predicate that is neither locally declared or
+   defined. Possible option values are ``error``, ``warning`` (the usual
+   default), and ``silent`` (not recommended).
 
 .. _flag_undefined_predicates:
 .. index:: pair: undefined_predicates; Flag

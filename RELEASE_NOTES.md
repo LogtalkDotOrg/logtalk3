@@ -38,6 +38,9 @@ instead.
 calls warnings. Controlled by the new `conditionals` flag, whose default
 value is `warning`.
 
+* ADDED: Linter warnings for unknown messages sent to loaded objects
+(controlled by the `unknown_predicates` flag).
+
 * ADDED: Compile `otherwise -> Goal` and `otherwise *-> Goal` constructs as
 `Goal` when `otherwise/0` is a built-in predicate, printing a deprecated
 linter warning instead of warning about a missing else part.
