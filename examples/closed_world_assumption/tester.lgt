@@ -30,6 +30,11 @@
 			unknown_predicates(silent)
 		]
 	),
-	logtalk_load(tests, [hook(lgtunit)]),
+	logtalk_load(
+		tests,
+		[	hook(lgtunit),
+			unknown_predicates(silent)
+		]
+	),
 	tests::run
 )).
