@@ -9285,7 +9285,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% or a built-in predicate
 	;	\+ '$lgt_control_construct'(Directive),
 		'$lgt_find_visible_module_predicate'(Current, Module, Directive),
-		% or an implicit call to a module predicate with a missing use_module/2 directive
+		% or an implicit call to a module predicate with a missing use_module/2 directive;
+		% in practice, this only occurs in backend systems with an autoload mechanism
 		functor(Directive, Functor, Arity),
 		'$lgt_comp_ctx_mode'(Ctx, Mode),
 		'$lgt_remember_missing_use_module_directive'(Mode, Module, Functor/Arity)
@@ -17902,7 +17903,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_current_object_'(Obj, _, Dcl, _, _, _, _, _, _, _, _),
-	\+ '$lgt_implements_protocol_'(Obj, forwarding, _),
+	\+ call(Dcl, forward(_), _, _, _, _, _),
 	\+ call(Dcl, Pred, _, _, _, _, _),
 	'$lgt_compiler_flag'(unknown_predicates, warning),
 	'$lgt_source_file_context'(File, Lines),
