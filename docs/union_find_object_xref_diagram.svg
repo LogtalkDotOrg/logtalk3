@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-498 707,-498 707,4 -4,4"/>
 <text text-anchor="start" x="8" y="-29" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-18" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object union_find</text>
-<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;07&#45;11, 06:23</text>
+<text text-anchor="start" x="8" y="-7" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2022&#45;07&#45;12, 19:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_union_find_object</title>
 <g id="a_clust1"><a xlink:title="union_find">
 <path fill="snow" stroke="dimgray" d="M20,-49C20,-49 683,-49 683,-49 689,-49 695,-55 695,-61 695,-61 695,-474 695,-474 695,-480 689,-486 683,-486 683,-486 20,-486 20,-486 14,-486 8,-480 8,-474 8,-474 8,-61 8,-61 8,-55 14,-49 20,-49"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt">
 <text text-anchor="start" x="20.5" y="-469.5" font-family="Monospace" font-size="10.00" fill="dimgray">union_find</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- new/2 -->
 <g id="node1" class="node">
 <title>new/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38">
 <polygon fill="cornsilk" stroke="black" points="586,-331 524,-331 524,-295 586,-295 586,-331"/>
 <text text-anchor="start" x="532" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="538" y="-315.2" font-family="Monospace" font-size="11.00">new/2</text>
@@ -41,7 +41,7 @@
 <!-- union_find/4 -->
 <g id="node2" class="node">
 <title>union_find/4</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L43">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L43">
 <polygon fill="cornsilk" stroke="black" points="543,-213 433,-213 433,-177 543,-177 543,-213"/>
 <text text-anchor="start" x="441" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="447" y="-197.2" font-family="Monospace" font-size="11.00">union_find/4</text>
@@ -55,12 +55,12 @@
 <!-- new/2&#45;&gt;union_find/4 -->
 <g id="edge1" class="edge">
 <title>new/2&#45;&gt;union_find/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38" xlink:title="calls">
 <path fill="none" stroke="black" d="M545.11,-294.88C534.03,-275.69 515.93,-244.35 503.08,-222.1"/>
 <polygon fill="black" stroke="black" points="505.96,-220.1 497.93,-213.19 499.9,-223.6 505.96,-220.1"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38">
 <text text-anchor="start" x="523" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- new/2&#45;&gt;avltree::new/1 -->
 <g id="edge5" class="edge">
 <title>new/2&#45;&gt;avltree::new/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38" xlink:title="calls">
 <path fill="none" stroke="black" d="M565.03,-294.88C576.28,-275.69 594.65,-244.35 607.7,-222.1"/>
 <polygon fill="black" stroke="black" points="610.89,-223.58 612.93,-213.19 604.85,-220.04 610.89,-223.58"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L38">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L38">
 <text text-anchor="start" x="591" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- union_find/4&#45;&gt;avltree::insert/4 -->
 <g id="edge6" class="edge">
 <title>union_find/4&#45;&gt;avltree::insert/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L44" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M468.08,-176.88C444.95,-157.01 406.65,-124.1 380.65,-101.76"/>
 <polygon fill="black" stroke="black" points="382.87,-99.05 373,-95.19 378.31,-104.36 382.87,-99.05"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L44">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L44">
 <text text-anchor="start" x="424" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <!-- make_set/3 -->
 <g id="node3" class="node">
 <title>make_set/3</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49">
 <polygon fill="cornsilk" stroke="black" points="352,-213 256,-213 256,-177 352,-177 352,-213"/>
 <text text-anchor="start" x="264" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="270" y="-197.2" font-family="Monospace" font-size="11.00">make_set/3</text>
@@ -136,12 +136,12 @@
 <!-- make_set/3&#45;&gt;avltree::insert/4 -->
 <g id="edge8" class="edge">
 <title>make_set/3&#45;&gt;avltree::insert/4</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M313.61,-176.62C319.06,-166.41 325.81,-153.16 331,-141 335.98,-129.33 340.73,-116.12 344.52,-104.82"/>
 <polygon fill="black" stroke="black" points="347.93,-105.68 347.73,-95.08 341.28,-103.49 347.93,-105.68"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49">
 <text text-anchor="start" x="334" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- make_set/3&#45;&gt;avltree::lookup/3 -->
 <g id="edge7" class="edge">
 <title>make_set/3&#45;&gt;avltree::lookup/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49" xlink:title="calls">
 <path fill="none" stroke="black" d="M280.98,-176.88C254.02,-156.84 209.23,-123.53 179.17,-101.18"/>
 <polygon fill="black" stroke="black" points="181.23,-98.34 171.11,-95.19 177.05,-103.96 181.23,-98.34"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L49">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L49">
 <text text-anchor="start" x="230" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -176,7 +176,7 @@
 <!-- union/4 -->
 <g id="node4" class="node">
 <title>union/4</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53">
 <polygon fill="cornsilk" stroke="black" points="342,-331 266,-331 266,-295 342,-295 342,-331"/>
 <text text-anchor="start" x="274" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="280" y="-315.2" font-family="Monospace" font-size="11.00">union/4</text>
@@ -190,7 +190,7 @@
 <!-- find/5 -->
 <g id="node7" class="node">
 <title>find/5</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83">
 <polygon fill="cornsilk" stroke="black" points="237.5,-213 168.5,-213 168.5,-177 237.5,-177 237.5,-213"/>
 <text text-anchor="start" x="177" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="183" y="-197.2" font-family="Monospace" font-size="11.00">find/5</text>
@@ -204,12 +204,12 @@
 <!-- union/4&#45;&gt;find/5 -->
 <g id="edge2" class="edge">
 <title>union/4&#45;&gt;find/5</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53" xlink:title="calls">
 <path fill="none" stroke="black" d="M289.1,-294.88C272.09,-275.35 244.12,-243.23 224.7,-220.92"/>
 <polygon fill="black" stroke="black" points="227.17,-218.43 217.96,-213.19 221.89,-223.03 227.17,-218.43"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53">
 <text text-anchor="start" x="256" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- union/4&#45;&gt;avltree::insert/4 -->
 <g id="edge9" class="edge">
 <title>union/4&#45;&gt;avltree::insert/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53" xlink:title="calls">
 <path fill="none" stroke="black" d="M317.2,-294.91C330.95,-276.04 351.73,-244.18 361,-213 371.4,-178.02 369.05,-167.26 365,-131 364.04,-122.43 362.24,-113.22 360.31,-104.93"/>
 <polygon fill="black" stroke="black" points="363.66,-103.89 357.87,-95.02 356.87,-105.57 363.66,-103.89"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L53">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L53">
 <text text-anchor="start" x="368" y="-192.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -230,7 +230,7 @@
 <!-- union_all/3 -->
 <g id="node5" class="node">
 <title>union_all/3</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L69">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L69">
 <polygon fill="cornsilk" stroke="black" points="355.5,-449 252.5,-449 252.5,-413 355.5,-413 355.5,-449"/>
 <text text-anchor="start" x="261" y="-433.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="267" y="-433.2" font-family="Monospace" font-size="11.00">union_all/3</text>
@@ -244,12 +244,12 @@
 <!-- union_all/3&#45;&gt;union/4 -->
 <g id="edge3" class="edge">
 <title>union_all/3&#45;&gt;union/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L71" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M304,-412.88C304,-394.04 304,-363.47 304,-341.3"/>
 <polygon fill="black" stroke="black" points="307.5,-341.19 304,-331.19 300.5,-341.19 307.5,-341.19"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L71">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L71">
 <text text-anchor="start" x="304" y="-369.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -257,7 +257,7 @@
 <!-- find/4 -->
 <g id="node6" class="node">
 <title>find/4</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75">
 <polygon fill="cornsilk" stroke="black" points="150.5,-213 81.5,-213 81.5,-177 150.5,-177 150.5,-213"/>
 <text text-anchor="start" x="90" y="-197.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="96" y="-197.2" font-family="Monospace" font-size="11.00">find/4</text>
@@ -271,12 +271,12 @@
 <!-- find/4&#45;&gt;avltree::insert/4 -->
 <g id="edge11" class="edge">
 <title>find/4&#45;&gt;avltree::insert/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M121.02,-176.75C126.06,-162.43 135.24,-142.59 150,-131 169.16,-115.96 223.7,-102.17 271.43,-92.43"/>
 <polygon fill="black" stroke="black" points="272.38,-95.81 281.49,-90.41 271,-88.94 272.38,-95.81"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75">
 <text text-anchor="start" x="150" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -284,12 +284,12 @@
 <!-- find/4&#45;&gt;avltree::lookup/3 -->
 <g id="edge10" class="edge">
 <title>find/4&#45;&gt;avltree::lookup/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M107.89,-176.77C102.97,-163.88 98.59,-145.98 104,-131 107.75,-120.6 114.54,-110.8 121.67,-102.52"/>
 <polygon fill="black" stroke="black" points="124.32,-104.81 128.53,-95.08 119.17,-100.06 124.32,-104.81"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L75">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L75">
 <text text-anchor="start" x="104" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -297,12 +297,12 @@
 <!-- find/5&#45;&gt;avltree::insert/4 -->
 <g id="edge13" class="edge">
 <title>find/5&#45;&gt;avltree::insert/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M229.92,-176.87C245.22,-166.86 264.55,-153.71 281,-141 296.82,-128.78 313.68,-114.12 327.11,-102.02"/>
 <polygon fill="black" stroke="black" points="329.54,-104.54 334.58,-95.23 324.83,-99.36 329.54,-104.54"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83">
 <text text-anchor="start" x="293" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -310,12 +310,12 @@
 <!-- find/5&#45;&gt;avltree::lookup/3 -->
 <g id="edge12" class="edge">
 <title>find/5&#45;&gt;avltree::lookup/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M198.11,-176.75C194.18,-163.85 188.15,-145.94 181,-131 176.55,-121.71 170.86,-112.02 165.46,-103.5"/>
 <polygon fill="black" stroke="black" points="168.4,-101.59 160.01,-95.11 162.53,-105.4 168.4,-101.59"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L83">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L83">
 <text text-anchor="start" x="185" y="-133.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -323,7 +323,7 @@
 <!-- disjoint_sets/2 -->
 <g id="node8" class="node">
 <title>disjoint_sets/2</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90">
 <polygon fill="cornsilk" stroke="black" points="164,-331 34,-331 34,-295 164,-295 164,-331"/>
 <text text-anchor="start" x="42" y="-315.8" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="48" y="-315.2" font-family="Monospace" font-size="11.00">disjoint_sets/2</text>
@@ -337,12 +337,12 @@
 <!-- disjoint_sets/2&#45;&gt;find/4 -->
 <g id="edge4" class="edge">
 <title>disjoint_sets/2&#45;&gt;find/4</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M101.51,-294.88C104.27,-276.04 108.75,-245.47 112,-223.3"/>
 <polygon fill="black" stroke="black" points="115.49,-223.59 113.48,-213.19 108.57,-222.57 115.49,-223.59"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90">
 <text text-anchor="start" x="108" y="-251.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -350,12 +350,12 @@
 <!-- disjoint_sets/2&#45;&gt;avltree::lookup/3 -->
 <g id="edge14" class="edge">
 <title>disjoint_sets/2&#45;&gt;avltree::lookup/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M83.45,-294.84C62.09,-269.08 28.25,-218.97 46,-177 59.42,-145.28 88.51,-118.73 112.21,-101.13"/>
 <polygon fill="black" stroke="black" points="114.26,-103.97 120.33,-95.29 110.17,-98.29 114.26,-103.97"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e381268a9a8acf75a9a173e0c0b9891edf82250d/library/union_find/union_find.lgt#L90">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d1a85897b3368803e65c9f842d7eb815fba0a607/library/union_find/union_find.lgt#L90">
 <text text-anchor="start" x="46" y="-192.8" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
