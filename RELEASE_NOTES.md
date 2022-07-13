@@ -62,6 +62,10 @@ without requiring defining a protocol.
 * FIXED: Internal compiler predicate that retrieves the source file context
 when the compilation mode is `runtime`.
 
+* FIXED: Compiler optimization bug when calling the `phrase/2-3` predicates
+with pre-compiled closure arguments. Thanks to Lindsey Spratt and Jacob
+Friedman for the bug report.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -189,6 +193,8 @@ to access all inherited definitions for the same predicate.
 
 Tests
 -----
+
+* ADDED: Additional test for the `meta_non_terminal/1` directive.
 
 * ADDED: Additional tests for the Prolog standard `is/2` predicate.
 

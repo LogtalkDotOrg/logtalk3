@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 57, 0, b07)).
+'$lgt_version_data'(logtalk(3, 57, 0, b08)).
 
 
 
@@ -24594,6 +24594,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_dcg_body'(Var, S0, S, phrase(Var, S0, S), _) :-
 	var(Var),
 	!.
+
+'$lgt_dcg_body'('$lgt_closure'(TFunctor, TArgs, ExCtx), S0, S, {TGoal}, _) :-
+	% pre-compiled closure (note that the closure may be called from a mapping
+	% predicate, which prevents us to use a difference list based solution to
+	% avoid the calls to append/3 and =../2 as that would fix the extra arguments
+	% in the goal on the first closure call and thus break the followup calls)
+	!,
+	'$lgt_append'(TArgs, [S0, S, ExCtx], FullArgs),
+	TGoal =.. [TFunctor| FullArgs].
 
 '$lgt_dcg_body'(Free/Parameters>>Lambda, S0, S, call(Free/Parameters>>Lambda, S0, S), Ctx) :-
 	!,

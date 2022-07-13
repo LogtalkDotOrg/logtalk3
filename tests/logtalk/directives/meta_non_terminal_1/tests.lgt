@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2013-11-18,
+		date is 2022-07-13,
 		comment is 'Unit tests for the meta_non_terminal/1 built-in directive.'
 	]).
 
@@ -34,10 +34,9 @@
 	:- public(foo//1).
 	:- meta_non_terminal(foo(0)).
 
-	test(meta_non_terminal_1_1) :-
+	test(meta_non_terminal_1_01, true(Template == foo(2, *, *))) :-
 		predicate_property(foo(_,_,_), non_terminal(foo//1)),
-		predicate_property(foo(_,_,_), meta_predicate(Template)),
-		Template == foo(2, *, *).
+		predicate_property(foo(_,_,_), meta_predicate(Template)).
 
 	% existentially-qualified closures are currently not supported
 	% :- public(bar/2).
@@ -46,17 +45,20 @@
 	:- public(baz//3).
 	:- meta_non_terminal(baz(2, *, *)).
 
-	test(meta_non_terminal_1_3) :-
+	test(meta_non_terminal_1_02, true(Template == baz(4, *, *, *, *))) :-
 		predicate_property(baz(_,_,_,_,_), non_terminal(baz//3)),
-		predicate_property(baz(_,_,_,_,_), meta_predicate(Template)),
-		Template == baz(4, *, *, *, *).
+		predicate_property(baz(_,_,_,_,_), meta_predicate(Template)).
 
 	:- public(qux//2).
 	:- meta_non_terminal(qux(::, *)).
 
-	test(meta_non_terminal_1_4) :-
+	test(meta_non_terminal_1_03, true(Template == qux(::, *, *, *))) :-
 		predicate_property(qux(_,_,_,_), non_terminal(qux//2)),
-		predicate_property(qux(_,_,_,_), meta_predicate(Template)),
-		Template == qux(::, *, *, *).
+		predicate_property(qux(_,_,_,_), meta_predicate(Template)).
+
+	% test the use of pre-compiled closures passed as argument to
+	% the phrase/2-3 predicates when compiling in optimal mode
+	test(meta_non_terminal_1_04, true((Lower == one, Upper == 'ONE'))) :-
+		test_object_2::p(1, Lower, Upper).
 
 :- end_object.
