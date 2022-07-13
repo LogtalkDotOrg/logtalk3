@@ -441,7 +441,7 @@ then be able to compile the modified Prolog module as an object.</p>
 <section id="modules-using-a-term-expansion-mechanism">
 <span id="migration-module-expansions"></span><h3>Modules using a term-expansion mechanism<a class="headerlink" href="#modules-using-a-term-expansion-mechanism" title="Permalink to this heading"></a></h3>
 <p>Although Logtalk supports
-<a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term and goal expansion mechanisms</span></a>, the
+<a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term and goal expansion mechanisms</span></a>, the usage
 semantics are different from similar mechanisms found in some Prolog
 compilers. In particular, Logtalk does not support defining term and
 goal expansions clauses in a source file for expanding the source file
@@ -474,7 +474,12 @@ assuming expansions stored on both <code class="docutils literal notranslate"><s
 </pre></div>
 </div>
 <p>After these queries, we can try to compile the modules and look for
-other porting or portability issues.</p>
+other porting or portability issues. A well know issue is Prolog module
+term-expansions calling predicates such as <code class="docutils literal notranslate"><span class="pre">prolog_load_context/2</span></code>,
+which will always fail when it’s the Logtalk compiler instead of the
+Prolog compiler loading a source file. In some of these cases, it may
+be possible to rewrite the expansion rules to use the
+<a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a> predicate instead.</p>
 </section>
 <section id="file-search-paths">
 <span id="migration-file-search-paths"></span><h3>File search paths<a class="headerlink" href="#file-search-paths" title="Permalink to this heading"></a></h3>

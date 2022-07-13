@@ -37,8 +37,8 @@ computationally expensive.
 Note that, in some cases, the linter may generate false warnings due to source
 code analysis limitations or special cases that, while valid when intended,
 usually result from programming issues. When a code rewrite is not a sensible
-solution to avoid the warning, the workaround is to turn off locally the flag
-that controls the warning.
+solution to avoid the warning, the workaround is to turn off as locally as
+possible the flag that controls the warning.
 
 
 Main linter checks

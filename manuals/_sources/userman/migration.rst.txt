@@ -360,7 +360,7 @@ Modules using a term-expansion mechanism
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Although Logtalk supports
-:ref:`term and goal expansion mechanisms <expansion_expansion>`, the
+:ref:`term and goal expansion mechanisms <expansion_expansion>`, the usage
 semantics are different from similar mechanisms found in some Prolog
 compilers. In particular, Logtalk does not support defining term and
 goal expansions clauses in a source file for expanding the source file
@@ -397,7 +397,12 @@ assuming expansions stored on both ``user`` and ``system`` modules:
    ...
 
 After these queries, we can try to compile the modules and look for
-other porting or portability issues.
+other porting or portability issues. A well know issue is Prolog module
+term-expansions calling predicates such as ``prolog_load_context/2``,
+which will always fail when it's the Logtalk compiler instead of the
+Prolog compiler loading a source file. In some of these cases, it may
+be possible to rewrite the expansion rules to use the
+:ref:`predicates_logtalk_load_context_2` predicate instead.
 
 .. _migration_file_search_paths:
 
