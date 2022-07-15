@@ -94,6 +94,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dealing-with-proprietary-prolog-directives-and-predicates">Dealing with proprietary Prolog directives and predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#calling-prolog-module-predicates">Calling Prolog module predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-converted-prolog-applications">Loading converted Prolog applications</a></li>
 </ul>
 </li>
 </ul>
@@ -397,7 +398,10 @@ arguments marked as goals or <a class="reference internal" href="../glossary.htm
 are interpreted as meta-arguments. In addition, Prolog module
 meta-predicates and Logtalk meta-predicates don’t share the same
 explicit-qualification calling semantics: in Logtalk, meta-arguments
-are always called in the context of the <em>sender</em>.</p>
+are always called in the context of the <em>sender</em>. Logtalk expects
+<code class="docutils literal notranslate"><span class="pre">meta-predicate/1</span></code> directives for all meta-predicates as it is not
+based on the predicate-prefixing mechanism common to most Prolog
+module systems.</p>
 </dd>
 </dl>
 <p>A common issue when compiling modules as objects is the use of the atoms
@@ -592,6 +596,26 @@ on a module compiled as an object, any predicate calling other module
 predicates will work as expected either these other modules are loaded
 as-is or also compiled as objects.</p>
 <p>For more details, see the <a class="reference internal" href="predicates.html#predicates-prolog"><span class="std std-ref">Calling Prolog predicates</span></a> section.</p>
+</section>
+<section id="loading-converted-prolog-applications">
+<span id="migration-loading"></span><h2>Loading converted Prolog applications<a class="headerlink" href="#loading-converted-prolog-applications" title="Permalink to this heading"></a></h2>
+<p>Logtalk strongly favors and advises users to provide a main
+<a class="reference internal" href="programming.html#programming-loaders"><span class="std std-ref">loader file</span></a> for applications that explicitly
+load any required libraries and the application source files. In contrast,
+Prolog applications often either scatter loading of source files from multiple
+files or use implicit loading of source files via <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code>
+directives. Due to this frequent ad-hoc approach, it’s common to find Prolog
+applications with duplicated loading directives and are loading order ignores
+the dependencies between source files. These issues are easily exposed by the
+Logtalk linter when compiling Prolog files as Logtalk files. Also common are
+Prolog files with multiple circular dependencies. While this should not
+affect the <em>semantics</em> of the ported code, it may cause some performance
+penalties as it prevents the Logtalk compiler of optimizing the message
+sending goals using static-binding. It also makes the application architecture
+more difficult to understand. The definition of explicit loader files
+provides a good opportunity of sorting out loading order and circular
+dependencies, with the linter warnings providing hints for possible code
+refactoring to eliminate these issues.</p>
 </section>
 </section>
 

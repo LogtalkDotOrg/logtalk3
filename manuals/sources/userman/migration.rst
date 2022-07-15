@@ -306,7 +306,10 @@ Currently, Logtalk supports the following module directives:
    are interpreted as meta-arguments. In addition, Prolog module
    meta-predicates and Logtalk meta-predicates don't share the same
    explicit-qualification calling semantics: in Logtalk, meta-arguments
-   are always called in the context of the *sender*.
+   are always called in the context of the *sender*. Logtalk expects
+   ``meta-predicate/1`` directives for all meta-predicates as it is not
+   based on the predicate-prefixing mechanism common to most Prolog
+   module systems.
 
 A common issue when compiling modules as objects is the use of the atoms
 ``dynamic``, ``discontiguous``, and ``multifile`` as operators in
@@ -537,3 +540,26 @@ predicates will work as expected either these other modules are loaded
 as-is or also compiled as objects.
 
 For more details, see the :ref:`predicates_prolog` section.
+
+.. _migration_loading:
+
+Loading converted Prolog applications
+-------------------------------------
+
+Logtalk strongly favors and advises users to provide a main
+:ref:`loader file <programming_loaders>` for applications that explicitly
+load any required libraries and the application source files. In contrast,
+Prolog applications often either scatter loading of source files from multiple
+files or use implicit loading of source files via ``use_module/1-2``
+directives. Due to this frequent ad-hoc approach, it's common to find Prolog
+applications with duplicated loading directives and are loading order ignores
+the dependencies between source files. These issues are easily exposed by the
+Logtalk linter when compiling Prolog files as Logtalk files. Also common are
+Prolog files with multiple circular dependencies. While this should not
+affect the *semantics* of the ported code, it may cause some performance
+penalties as it prevents the Logtalk compiler of optimizing the message
+sending goals using static-binding. It also makes the application architecture
+more difficult to understand. The definition of explicit loader files
+provides a good opportunity of sorting out loading order and circular
+dependencies, with the linter warnings providing hints for possible code
+refactoring to eliminate these issues.
