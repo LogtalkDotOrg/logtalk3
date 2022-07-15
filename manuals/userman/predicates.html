@@ -837,40 +837,57 @@ code.</p>
 </section>
 <section id="category-predicates">
 <span id="predicates-categories"></span><h3>Category predicates<a class="headerlink" href="#category-predicates" title="Permalink to this heading"></a></h3>
-<p>Because a category can be imported by multiple objects, dynamic private
+<p>A category can only contain clauses for static predicates. But there are
+no restrictions in declaring and calling dynamic predicates from inside
+a category. Because a category can be imported by multiple objects, dynamic
 predicates must be called either in the context of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a>, using the
 <a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> control structure, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, or
 in the context of <a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e. in the context of the object importing
 the category). For example, if we want to define a category implementing
-variables using destructive assignment where the variable values are stored
-in <em>self</em> we could write:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(variable).
+attributes using the dynamic database of <em>self</em> we could write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes).
 
 <span class="p">    :- </span><span class="k">public</span>(get<span class="o">/</span><span class="m">2</span>).
 <span class="p">    :- </span><span class="k">public</span>(set<span class="o">/</span><span class="m">2</span>).
 
-<span class="p">    :- </span><span class="k">private</span>(value_<span class="o">/</span><span class="m">2</span>).
-<span class="p">    :- </span><span class="k">dynamic</span>(value_<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">private</span>(attribute_<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">dynamic</span>(attribute_<span class="o">/</span><span class="m">2</span>).
 
     get(<span class="nv">Var</span>, <span class="nv">Value</span>) <span class="o">:-</span>
-        <span class="o">::</span>value_(<span class="nv">Var</span>, <span class="nv">Value</span>).
+        <span class="o">::</span>attribute_(<span class="nv">Var</span>, <span class="nv">Value</span>).
 
     set(<span class="nv">Var</span>, <span class="nv">Value</span>) <span class="o">:-</span>
-        <span class="o">::</span><span class="k">retractall</span>(value_(<span class="nv">Var</span>, <span class="nv">_</span>)),
-        <span class="o">::</span><span class="k">asserta</span>(value_(<span class="nv">Var</span>, <span class="nv">Value</span>).
+        <span class="o">::</span><span class="k">retractall</span>(attribute_(<span class="nv">Var</span>, <span class="nv">_</span>)),
+        <span class="o">::</span><span class="k">asserta</span>(attribute_(<span class="nv">Var</span>, <span class="nv">Value</span>).
 
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
 <p>In this case, the <code class="docutils literal notranslate"><span class="pre">get/2</span></code> and <code class="docutils literal notranslate"><span class="pre">set/2</span></code> predicates will always
 access/update the correct definition, contained in the object receiving
-the messages. The alternative, storing the variable values in <em>this</em>,
-such that each object importing the category will have its own
-definition for the <code class="docutils literal notranslate"><span class="pre">value_/2</span></code> private predicate is simple: just omit
-the use of the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> control construct in the code above.</p>
-<p>A category can only contain clauses for static predicates. Nevertheless,
-as the example above illustrates, there are no restrictions in declaring
-and calling dynamic predicates from inside a category.</p>
+the messages.</p>
+<p>In alternative, if we want a category implementing attributes using the
+dynamic database of <em>this</em>, we would write instead:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes).
+
+<span class="p">    :- </span><span class="k">public</span>(get<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">public</span>(set<span class="o">/</span><span class="m">2</span>).
+
+<span class="p">    :- </span><span class="k">private</span>(attribute_<span class="o">/</span><span class="m">2</span>).
+<span class="p">    :- </span><span class="k">dynamic</span>(attribute_<span class="o">/</span><span class="m">2</span>).
+
+    get(<span class="nv">Var</span>, <span class="nv">Value</span>) <span class="o">:-</span>
+        attribute_(<span class="nv">Var</span>, <span class="nv">Value</span>).
+
+    set(<span class="nv">Var</span>, <span class="nv">Value</span>) <span class="o">:-</span>
+        <span class="k">retractall</span>(attribute_(<span class="nv">Var</span>, <span class="nv">_</span>)),
+        <span class="k">asserta</span>(attribute_(<span class="nv">Var</span>, <span class="nv">Value</span>).
+
+<span class="p">:- </span><span class="k">end_category</span>.
+</pre></div>
+</div>
+<p>In this case, each object importing the category will have its own clauses
+for the <code class="docutils literal notranslate"><span class="pre">attribute_/2</span></code> private dynamic predicate.</p>
 </section>
 <section id="meta-predicates">
 <span id="predicates-metadef"></span><h3>Meta-predicates<a class="headerlink" href="#meta-predicates" title="Permalink to this heading"></a></h3>

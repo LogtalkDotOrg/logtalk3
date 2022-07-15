@@ -820,43 +820,62 @@ code.
 Category predicates
 ~~~~~~~~~~~~~~~~~~~
 
-Because a category can be imported by multiple objects, dynamic private
+A category can only contain clauses for static predicates. But there are
+no restrictions in declaring and calling dynamic predicates from inside
+a category. Because a category can be imported by multiple objects, dynamic
 predicates must be called either in the context of :term:`self`, using the
 :term:`message to self` control structure, :ref:`control_send_to_self_1`, or
 in the context of :term:`this` (i.e. in the context of the object importing
 the category). For example, if we want to define a category implementing
-variables using destructive assignment where the variable values are stored
-in *self* we could write:
+attributes using the dynamic database of *self* we could write:
 
 ::
 
-   :- category(variable).
+   :- category(attributes).
 
        :- public(get/2).
        :- public(set/2).
 
-       :- private(value_/2).
-       :- dynamic(value_/2).
+       :- private(attribute_/2).
+       :- dynamic(attribute_/2).
 
        get(Var, Value) :-
-           ::value_(Var, Value).
+           ::attribute_(Var, Value).
 
        set(Var, Value) :-
-           ::retractall(value_(Var, _)), 
-           ::asserta(value_(Var, Value).
+           ::retractall(attribute_(Var, _)), 
+           ::asserta(attribute_(Var, Value).
 
    :- end_category.
 
 In this case, the ``get/2`` and ``set/2`` predicates will always
 access/update the correct definition, contained in the object receiving
-the messages. The alternative, storing the variable values in *this*,
-such that each object importing the category will have its own
-definition for the ``value_/2`` private predicate is simple: just omit
-the use of the ``(::)/1`` control construct in the code above.
+the messages.
 
-A category can only contain clauses for static predicates. Nevertheless,
-as the example above illustrates, there are no restrictions in declaring
-and calling dynamic predicates from inside a category.
+In alternative, if we want a category implementing attributes using the
+dynamic database of *this*, we would write instead:
+
+::
+
+   :- category(attributes).
+
+       :- public(get/2).
+       :- public(set/2).
+
+       :- private(attribute_/2).
+       :- dynamic(attribute_/2).
+
+       get(Var, Value) :-
+           attribute_(Var, Value).
+
+       set(Var, Value) :-
+           retractall(attribute_(Var, _)), 
+           asserta(attribute_(Var, Value).
+
+   :- end_category.
+
+In this case, each object importing the category will have its own clauses
+for the ``attribute_/2`` private dynamic predicate.
 
 .. _predicates_metadef:
 
