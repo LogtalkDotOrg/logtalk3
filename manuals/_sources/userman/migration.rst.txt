@@ -562,4 +562,6 @@ sending goals using static-binding. It also makes the application architecture
 more difficult to understand. The definition of explicit loader files
 provides a good opportunity of sorting out loading order and circular
 dependencies, with the linter warnings providing hints for possible code
-refactoring to eliminate these issues.
+refactoring to eliminate these issues. The :doc:`../devtools/diagrams` tool
+supports directory and file loading and dependency diagrams that are also
+useful in understanding applications architecture.

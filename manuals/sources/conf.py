@@ -42,8 +42,6 @@ release = u'v3.57.0-b08'
 # ones.
 extensions = [
     'sphinx.ext.intersphinx'
-#    'rinoh.frontend.sphinx'
-#    'rst2pdf.pdfbuilder'
 ]
 
 intersphinx_mapping = {'apis': ('../docs/','../../docs/objects.inv')}
