@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on July 9, 2022
+%  Last updated on July 15, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -938,12 +938,12 @@ forall(Generate, Test) :-
 			throw(error(type_error(atomic, Atomic1), atomic_concat/3))
 		;	\+ atomic(Atomic2) ->
 			throw(error(type_error(atomic, Atomic2), atomic_concat/3))
-		;	'$lgt_gnu_atomic_atom'(Atomic1, Atom1),
-			'$lgt_gnu_atomic_atom'(Atomic2, Atom2),
+		;	'$lgt_eclipse_atomic_atom'(Atomic1, Atom1),
+			'$lgt_eclipse_atomic_atom'(Atomic2, Atom2),
 			atom_concat(Atom1, Atom2, Atom)
 		).
 
-	'$lgt_gnu_atomic_atom'(Atomic, Atom) :-
+	'$lgt_eclipse_atomic_atom'(Atomic, Atom) :-
 		(	atom(Atomic) ->
 			Atom = Atomic
 		;	number_codes(Atomic, Codes),
@@ -963,16 +963,16 @@ forall(Generate, Test) :-
 			throw(error(instantiation_error, atomic_list_concat/2))
 		;	\+ atomic(Atomic) ->
 			throw(error(type_error(atomic, Atomic), atomic_list_concat/2))
-		;	'$lgt_gnu_atomic_atom'(Atomic, Atom0),
-			'$lgt_gnu_atomic_list_concat'(Atomics, Atom0, Atom)
+		;	'$lgt_eclipse_atomic_atom'(Atomic, Atom0),
+			'$lgt_eclipse_atomic_list_concat'(Atomics, Atom0, Atom)
 		).
 	atomic_list_concat([], '').
 
-	'$lgt_gnu_atomic_list_concat'([Next| Atomics], Atom0, Atom) :-
+	'$lgt_eclipse_atomic_list_concat'([Next| Atomics], Atom0, Atom) :-
 		!,
 		atomic_list_concat([Next| Atomics], Atom1),
 		atom_concat(Atom0, Atom1, Atom).
-	'$lgt_gnu_atomic_list_concat'([], Atom, Atom).
+	'$lgt_eclipse_atomic_list_concat'([], Atom, Atom).
 
 :- endif.
 
@@ -991,18 +991,18 @@ forall(Generate, Test) :-
 			throw(error(type_error(atomic, Atomic), atomic_list_concat/3))
 		;	\+ atomic(Separator) ->
 			throw(error(type_error(atomic, Separator), atomic_list_concat/3))
-		;	'$lgt_gnu_atomic_atom'(Atomic, Atom0),
-			'$lgt_gnu_atomic_atom'(Separator, SeparatorAtom),
-			'$lgt_gnu_atomic_list_concat'(Atomics, Atom0, SeparatorAtom, Atom)
+		;	'$lgt_eclipse_atomic_atom'(Atomic, Atom0),
+			'$lgt_eclipse_atomic_atom'(Separator, SeparatorAtom),
+			'$lgt_eclipse_atomic_list_concat'(Atomics, Atom0, SeparatorAtom, Atom)
 		).
 	atomic_list_concat([], _, '').
 
-	'$lgt_gnu_atomic_list_concat'([Next| Atomics], Atom0, SeparatorAtom, Atom) :-
+	'$lgt_eclipse_atomic_list_concat'([Next| Atomics], Atom0, SeparatorAtom, Atom) :-
 		!,
 		atomic_list_concat([Next| Atomics], SeparatorAtom, Atom2),
 		atom_concat(SeparatorAtom, Atom2, Atom1),
 		atom_concat(Atom0, Atom1, Atom).
-	'$lgt_gnu_atomic_list_concat'([], Atom, _, Atom).
+	'$lgt_eclipse_atomic_list_concat'([], Atom, _, Atom).
 
 :- endif.
 
