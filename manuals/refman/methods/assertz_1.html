@@ -211,6 +211,22 @@ created objects when writing constructors.</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Object::assertz(Clause)</span></code></div>
 </div>
 </div>
+<p>An example of asserting clauses in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a> and in <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a> from a category:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes,
+    <span class="k">implements</span>(attributes_protocol)).
+
+<span class="p">    :- </span><span class="k">private</span>(attr_<span class="o">/</span><span class="m">1</span>).
+<span class="p">    :- </span><span class="k">dynamic</span>(attr_<span class="o">/</span><span class="m">1</span>).
+
+    set_in_this(<span class="nv">A</span>, <span class="nv">X</span>) <span class="o">:-</span>
+       <span class="k">assertz</span>(attr_(<span class="nv">A</span>, <span class="nv">X</span>)).
+
+    set_in_self(<span class="nv">A</span>, <span class="nv">X</span>) <span class="o">:-</span>
+       <span class="o">::</span><span class="k">assertz</span>(attr_(<span class="nv">A</span>, <span class="nv">X</span>)).
+
+    ...
+</pre></div>
+</div>
 <p>An example of asserting clauses into another object with the predicates
 listed using a <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive (similar when using a
 <a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive):</p>

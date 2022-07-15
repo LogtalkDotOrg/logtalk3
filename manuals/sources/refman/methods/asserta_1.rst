@@ -83,6 +83,24 @@ Examples
 | To assert a clause as the first one for any public dynamic predicate in an explicit object:
 |     ``Object::asserta(Clause)``
 
+An example of asserting clauses in :term:`this` and in :term:`self` from a category:
+
+::
+
+   :- category(attributes,
+       implements(attributes_protocol)).
+
+       :- private(attr_/1).
+       :- dynamic(attr_/1).
+
+       set_in_this(A, X) :-
+          asserta(attr_(A, X)).
+
+       set_in_self(A, X) :-
+          ::asserta(attr_(A, X)).
+
+       ...
+
 An example of asserting clauses into another object with the predicates
 listed using a :ref:`directives_uses_2` directive (similar when using a
 :ref:`directives_use_module_2` directive):
