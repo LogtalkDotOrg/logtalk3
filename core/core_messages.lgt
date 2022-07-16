@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:113:0,
+		version is 1:114:0,
 		author is 'Paulo Moura',
-		date is 2022-07-12,
+		date is 2022-07-16,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -453,12 +453,19 @@
 		['Reference to unknown object but there is a module with the same name: ~q'-[Module], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Functor/Arity)) -->
-		['Missing ~w directive for predicate: ~q'-[Directive, Functor/Arity], nl],
+	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, DirectiveFunctor/DirectiveArity, Predicate)) -->
+		% avoid extraneous parenthesis due to directives names being declared as operators in some backends
+		['Missing ~w/~w directive for '-[DirectiveFunctor, DirectiveArity]],
+		(	{Predicate = _/_} ->
+			['predicate: ~q'-[Predicate], nl]
+		;	{Predicate = _::_/_} ->
+			['predicate: ~q'-[Predicate], nl]
+		;	{Predicate = ':'(_, _/_)} ->
+			['predicate: ~q'-[Predicate], nl]
+		;	['non-terminal: ~q'-[Predicate], nl]
+		),
 		message_context(File, Lines, Type, Entity).
-	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive, Functor//Arity)) -->
-		['Missing ~w directive for non-terminal: ~q'-[Directive, Functor//Arity], nl],
-		message_context(File, Lines, Type, Entity).
+
 	message_tokens(missing_predicate_directive(File, Lines, Type, Entity, Directive)) -->
 		['Missing predicate directive: ~q.'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).

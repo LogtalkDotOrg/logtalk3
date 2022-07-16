@@ -21854,7 +21854,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_scope_directive(File, Lines, category, Entity, (dynamic), Functor/Arity)
+		missing_scope_directive(File, Lines, category, Entity, (dynamic)/1, Functor/Arity)
 	),
 	fail.
 
@@ -21871,7 +21871,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_scope_directive(File, Lines, Type, Entity, (multifile), Functor/Arity)
+		missing_scope_directive(File, Lines, Type, Entity, (multifile)/1, Functor/Arity)
 	),
 	fail.
 
@@ -21884,11 +21884,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_defines_non_terminal_'(Functor, NonTerminalArity, Arity) ->
 		'$lgt_print_message'(
 			warning(missing_directives),
-			missing_predicate_directive(File, Lines, Type, Entity, (meta_non_terminal), Functor//NonTerminalArity)
+			missing_predicate_directive(File, Lines, Type, Entity, (meta_non_terminal)/1, Functor//NonTerminalArity)
 		)
 	;	'$lgt_print_message'(
 			warning(missing_directives),
-			missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate), Functor/Arity)
+			missing_predicate_directive(File, Lines, Type, Entity, (meta_predicate)/1, Functor/Arity)
 		)
 	),
 	fail.
@@ -21900,7 +21900,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_predicate_directive(File, Lines, Type, Entity, (:- multifile(PI)))
+		missing_predicate_directive(File, Lines, Type, Entity, (multifile)/1, PI)
 	),
 	fail.
 
@@ -21912,7 +21912,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_predicate_directive(File, Lines, Type, Entity, (:- dynamic(Functor/Arity)))
+		missing_predicate_directive(File, Lines, Type, Entity, (dynamic)/1, Functor/Arity)
 	),
 	fail.
 
@@ -21924,7 +21924,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_predicate_directive(File, Lines, Type, Entity, (:- discontiguous(Functor/Arity)))
+		missing_predicate_directive(File, Lines, Type, Entity, (discontiguous)/1, Functor/Arity)
 	),
 	fail.
 

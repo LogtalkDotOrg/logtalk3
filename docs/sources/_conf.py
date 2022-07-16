@@ -40,7 +40,10 @@ release = u'v3.57.0-b08'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.intersphinx'
 ]
+
+intersphinx_mapping = {'handbook': ('../manuals/','../../manuals/objects.inv')}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

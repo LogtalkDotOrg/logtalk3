@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:45:0,
+		version is 0:46:0,
 		author is 'Paulo Moura',
-		date is 2022-06-14,
+		date is 2022-07-16,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -670,20 +670,44 @@
 	explain(module_used_as_object(_, _, _, _, _)) -->
 		['This is also portability issue as not all backends support a module system.'-[], nl, nl].
 
-	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Name/Arity)) -->
+	explain(missing_predicate_directive(_, _, Type, _, (dynamic)/1, Name/Arity)) -->
 		[	'The ~w updates the ~q predicate but does not declare it dynamic.'-[Type, Name/Arity], nl,
 			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Name/Arity], nl, nl
 		].
-	explain(missing_predicate_directive(_, _, Type, _, (dynamic), Name//Arity)) -->
+	explain(missing_predicate_directive(_, _, Type, _, (dynamic)/1, Name//Arity)) -->
 		[	'The ~w updates the ~q non-terminal but does not declare it dynamic.'-[Type, Name//Arity], nl,
 			'Add a local ":- dynamic(~q)." directive to suppress this warning.'-[Name//Arity], nl, nl
+		].
+	explain(missing_predicate_directive(_, _, Type, _, (discontiguous)/1, Name/Arity)) -->
+		[	'The ~w ~q predicate clauses are discontiguous.'-[Type, Name/Arity], nl,
+			'If there are no typos in a clause head causing this warning, add a local'-[], nl,
+			'":- discontiguous(~q)." directive to suppress this warning.'-[Name/Arity], nl, nl
+		].
+	explain(missing_predicate_directive(_, _, Type, _, (discontiguous)/1, Name//Arity)) -->
+		[	'The ~w ~q non-terminal rules are discontiguous.'-[Type, Name/Arity], nl,
+			'If there are no typos in a rule head causing this warning, add a local'-[], nl,
+			'":- discontiguous(~q)." directive to suppress this warning.'-[Name/Arity], nl, nl
+		].
+	explain(missing_predicate_directive(_, _, Type, _, (multifile)/1, Predicate)) -->
+		[	'Clauses and grammar rules defined in multiple entities and/or source'-[], nl,
+			'files must be declared as multifile. Add to the ~w a local'-[Type], nl,
+			'":- multifile(~q)." directive to suppress this warning.'-[Predicate], nl, nl
+		].
+	explain(missing_predicate_directive(_, _, Type, _, (meta_predicate)/1, Predicate)) -->
+		[	'The ~w ~q predicate has one or more meta-arguments.'-[Type, Predicate], nl,
+			'Add a local meta_predicate/1 directive declaring those meta-arguments'-[], nl,
+			'to suppress this warning.'-[], nl, nl
+		].
+	explain(missing_predicate_directive(_, _, Type, _, (meta_non_terminal)/1, NonTerminal)) -->
+		[	'The ~w ~q non-terminal has one or more meta-arguments.'-[Type, NonTerminal], nl,
+			'Add a local meta_non_terminal/1 directive declaring those meta-arguments'-[], nl,
+			'to suppress this warning.'-[], nl, nl
 		].
 	explain(missing_predicate_directive(_, _, _, _, Directive, Predicate)) -->
 		['Add a ":- ~q(~q)." directive to suppress this warning.'-[Directive, Predicate], nl, nl].
 	explain(missing_predicate_directive(_, _, _, _, Directive)) -->
 		['Add a  "~q." directive to suppress this warning.'-[Directive], nl, nl
 		].
-
 
 	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
 		[	'But there is a ~w directive for the predicate. If there is a scope'-[Directive], nl,

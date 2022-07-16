@@ -55,6 +55,8 @@ compilation errors.
 
 * IMPROVED: Linter warnings for the `(->)/2` and `(*->)/2` control constructs.
 
+* IMPROVED: Text of warnings for missing predicate directives.
+
 * FIXED: Allow making a predicate (or non-terminal) listed in a `uses/2` or a
 `use_module/2` directive available as public, protected, or private predicate
 without requiring defining a protocol.
@@ -151,6 +153,8 @@ to `curl` (e.g. for use with pack registry servers requiring authentication),
 
 * IMPROVED: The `packs` tool to check the availability of a new version of a
 pack before uninstalling the older version when updating.
+
+* IMPROVED: The `tutor` tool explanations for missing predicate directives.
 
 * UPDATED: The `packs` tool to also recognize readme files with `.txt`
 extensions to better support Prolog packs.
