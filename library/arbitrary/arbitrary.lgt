@@ -42,7 +42,7 @@
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
-			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception',
+			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
 			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``',
 			'Default character sets' - 'The default character set when using a parameterizable type that takes a character set parameter depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ``ascii_identifier`` functor. Character and character code types default to ``ascii_full``. Other types default to ``ascii_printable``.',

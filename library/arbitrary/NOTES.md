@@ -85,6 +85,8 @@ shrinking arbitrary values for QuickCheck usage. For example:
 	arbitrary::shrink(foo, Large, Small) :-
 		...
 
+The `shrink/3` should either succeed or fail but never throw an exception.
+
 It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:
 

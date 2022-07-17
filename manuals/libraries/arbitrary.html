@@ -221,6 +221,8 @@ arbitrary<span class="o">::</span>shrink(foo, <span class="nv">Large</span>, <sp
     ...
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> should either succeed or fail but never throw an
+exception.</p>
 <p>It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>edge_case<span class="o">/</span><span class="m">2</span>).
