@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:23:0,
+		version is 2:23:1,
 		author is 'Paulo Moura',
-		date is 2022-06-04,
+		date is 2022-07-17,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -840,45 +840,56 @@
 		).
 
 	shrink(integer, Large, Small) :-
+		integer(Large),
 		Large =\= 0,
 		Small is Large // 2.
 
 	shrink(non_positive_integer, Large, Small) :-
+		integer(Large),
 		Large =\= 0,
 		Small is Large // 2.
 
 	shrink(non_negative_integer, Large, Small) :-
+		integer(Large),
 		Large =\= 0,
 		Small is Large // 2.
 
 	shrink(positive_integer, Large, Small) :-
+		integer(Large),
 		Small is Large // 2,
 		Small > 0.
 
 	shrink(negative_integer, Large, Small) :-
+		integer(Large),
 		Small is Large // 2,
 		Small < 0.
 
 	shrink(float, Large, Small) :-
+		float(Large),
 		Small is Large / 2.0.
 
 	shrink(non_positive_float, Large, Small) :-
+		float(Large),
 		Small is Large / 2.0,
 		Small =\= Large.
 
 	shrink(non_negative_float, Large, Small) :-
+		float(Large),
 		Small is Large / 2.0,
 		Small =\= Large.
 
 	shrink(positive_float, Large, Small) :-
+		float(Large),
 		Small is Large / 2.0,
 		Small > 0.0.
 
 	shrink(negative_float, Large, Small) :-
+		float(Large),
 		Small is Large / 2.0,
 		Small < 0.0.
 
 	shrink(probability, Large, Small) :-
+		float(Large),
 		Small is Large / 2.0,
 		Small =\= Large.
 
@@ -960,12 +971,14 @@
 		shrink(ValueType, LargeValue, SmallValue).
 
 	shrink(compound, Large, Small) :-
+		compound(Large),
 		% shrink by reducing the number of arguments
 		Large =.. [LargeFunctor| LargeArguments],
 		shrink(atom, LargeFunctor, SmallFunctor),
 		shrink(non_empty_list, LargeArguments, SmallArguments),
 		Small =.. [SmallFunctor| SmallArguments].
 	shrink(compound, Large, Small) :-
+		compound(Large),
 		% shrink by returning the arguments
 		functor(Large, _, Arity),
 		for(1, Arity, Argument),
