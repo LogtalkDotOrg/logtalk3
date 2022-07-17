@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:46:0,
+		version is 0:47:0,
 		author is 'Paulo Moura',
-		date is 2022-07-16,
+		date is 2022-07-17,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -695,13 +695,13 @@
 		].
 	explain(missing_predicate_directive(_, _, Type, _, (meta_predicate)/1, Predicate)) -->
 		[	'The ~w ~q predicate has one or more meta-arguments.'-[Type, Predicate], nl,
-			'Add a local meta_predicate/1 directive declaring those meta-arguments'-[], nl,
-			'to suppress this warning.'-[], nl, nl
+			'Add a local meta_predicate/1 directive declaring those meta-arguments to'-[], nl,
+			'suppress this warning and ensure that meta-calls occur in the correct context.'-[], nl, nl
 		].
 	explain(missing_predicate_directive(_, _, Type, _, (meta_non_terminal)/1, NonTerminal)) -->
 		[	'The ~w ~q non-terminal has one or more meta-arguments.'-[Type, NonTerminal], nl,
-			'Add a local meta_non_terminal/1 directive declaring those meta-arguments'-[], nl,
-			'to suppress this warning.'-[], nl, nl
+			'Add a local meta_non_terminal/1 directive declaring those meta-arguments to'-[], nl,
+			'suppress this warning and ensure that meta-calls occur in the correct context.'-[], nl, nl
 		].
 	explain(missing_predicate_directive(_, _, _, _, Directive, Predicate)) -->
 		['Add a ":- ~q(~q)." directive to suppress this warning.'-[Directive, Predicate], nl, nl].
