@@ -22,9 +22,9 @@
 :- object(custom).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2022-05-24,
+		date is 2022-07-17,
 		comment is 'Custom arbitrary generators.'
 	]).
 
@@ -58,6 +58,7 @@
 
     :- multifile(arbitrary::shrink/3).
     arbitrary::shrink(odd, Large, Small) :-
+		integer(Large),
         (	Large < -1 ->
 			Small is Large + 2
 		;	Large > 1,
