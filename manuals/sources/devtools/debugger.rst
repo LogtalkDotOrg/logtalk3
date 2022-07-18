@@ -1,4 +1,4 @@
-.. _debugger:
+.. _library_debugger:
 
 ``debugger``
 ============

@@ -1,4 +1,4 @@
-.. _dead_code_scanner:
+.. _library_dead_code_scanner:
 
 ``dead_code_scanner``
 =====================

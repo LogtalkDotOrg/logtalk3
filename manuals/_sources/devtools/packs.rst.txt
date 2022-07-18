@@ -1,4 +1,4 @@
-.. _packs:
+.. _library_packs:
 
 ``packs``
 =========

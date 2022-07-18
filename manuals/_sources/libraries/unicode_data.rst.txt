@@ -1,4 +1,4 @@
-.. _unicode_data:
+.. _library_unicode_data:
 
 ``unicode_data``
 ================

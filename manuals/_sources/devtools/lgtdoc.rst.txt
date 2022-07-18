@@ -1,4 +1,4 @@
-.. _lgtdoc:
+.. _library_lgtdoc:
 
 ``lgtdoc``
 ==========

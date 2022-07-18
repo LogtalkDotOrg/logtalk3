@@ -1,4 +1,4 @@
-.. _tutor:
+.. _library_tutor:
 
 ``tutor``
 =========

@@ -1,4 +1,4 @@
-.. _core:
+.. _library_core:
 
 ``core``
 ========

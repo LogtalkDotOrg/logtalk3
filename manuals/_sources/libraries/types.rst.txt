@@ -1,4 +1,4 @@
-.. _types:
+.. _library_types:
 
 ``types``
 =========

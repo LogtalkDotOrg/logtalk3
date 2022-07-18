@@ -1,4 +1,4 @@
-.. _hierarchies:
+.. _library_hierarchies:
 
 ``hierarchies``
 ===============

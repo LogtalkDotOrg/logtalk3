@@ -1,4 +1,4 @@
-.. _heaps:
+.. _library_heaps:
 
 ``heaps``
 =========

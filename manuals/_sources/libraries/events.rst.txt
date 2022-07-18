@@ -1,4 +1,4 @@
-.. _events:
+.. _library_events:
 
 ``events``
 ==========

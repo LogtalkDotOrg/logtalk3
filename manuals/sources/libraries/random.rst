@@ -1,4 +1,4 @@
-.. _random:
+.. _library_random:
 
 ``random``
 ==========

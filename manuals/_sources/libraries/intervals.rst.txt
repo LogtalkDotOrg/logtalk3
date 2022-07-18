@@ -1,4 +1,4 @@
-.. _intervals:
+.. _library_intervals:
 
 ``intervals``
 =============

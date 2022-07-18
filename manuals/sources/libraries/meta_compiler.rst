@@ -1,4 +1,4 @@
-.. _meta_compiler:
+.. _library_meta_compiler:
 
 ``meta_compiler``
 =================

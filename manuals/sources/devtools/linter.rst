@@ -1,4 +1,4 @@
-.. _linter:
+.. _library_linter:
 
 ``linter``
 ==========

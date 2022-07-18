@@ -1,4 +1,4 @@
-.. _dif:
+.. _library_dif:
 
 ``dif``
 =======

@@ -1,4 +1,4 @@
-.. _reader:
+.. _library_reader:
 
 ``reader``
 ==========

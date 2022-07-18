@@ -1,4 +1,4 @@
-.. _queues:
+.. _library_queues:
 
 ``queues``
 ==========

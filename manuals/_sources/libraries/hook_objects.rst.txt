@@ -1,4 +1,4 @@
-.. _hook_objects:
+.. _library_hook_objects:
 
 ``hook_objects``
 ================

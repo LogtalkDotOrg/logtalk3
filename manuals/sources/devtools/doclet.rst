@@ -1,4 +1,4 @@
-.. _doclet:
+.. _library_doclet:
 
 ``doclet``
 ==========

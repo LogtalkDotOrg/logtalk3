@@ -1,4 +1,4 @@
-.. _lgtunit:
+.. _library_lgtunit:
 
 ``lgtunit``
 ===========

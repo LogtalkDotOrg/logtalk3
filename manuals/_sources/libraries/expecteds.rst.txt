@@ -1,4 +1,4 @@
-.. _expecteds:
+.. _library_expecteds:
 
 ``expecteds``
 =============

@@ -1,4 +1,4 @@
-.. _hook_flows:
+.. _library_hook_flows:
 
 ``hook_flows``
 ==============

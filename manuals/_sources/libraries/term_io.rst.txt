@@ -1,4 +1,4 @@
-.. _term_io:
+.. _library_term_io:
 
 ``term_io``
 ===========

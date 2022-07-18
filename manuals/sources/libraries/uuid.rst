@@ -1,4 +1,4 @@
-.. _uuid:
+.. _library_uuid:
 
 ``uuid``
 ========

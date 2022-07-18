@@ -1,4 +1,4 @@
-.. _logging:
+.. _library_logging:
 
 ``logging``
 ===========

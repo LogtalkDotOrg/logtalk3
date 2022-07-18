@@ -1,4 +1,4 @@
-.. _sets:
+.. _library_sets:
 
 ``sets``
 ========

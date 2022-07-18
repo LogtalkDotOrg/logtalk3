@@ -1,4 +1,4 @@
-.. _meta:
+.. _library_meta:
 
 ``meta``
 ========

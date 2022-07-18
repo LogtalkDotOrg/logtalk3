@@ -1,4 +1,4 @@
-.. _diagrams:
+.. _library_diagrams:
 
 ``diagrams``
 ============

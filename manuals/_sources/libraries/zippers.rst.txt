@@ -1,4 +1,4 @@
-.. _zippers:
+.. _library_zippers:
 
 ``zippers``
 ===========

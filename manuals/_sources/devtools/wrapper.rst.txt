@@ -1,4 +1,4 @@
-.. _wrapper:
+.. _library_wrapper:
 
 ``wrapper``
 ===========

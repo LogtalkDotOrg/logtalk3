@@ -1,4 +1,4 @@
-.. _redis:
+.. _library_redis:
 
 ``redis``
 =========

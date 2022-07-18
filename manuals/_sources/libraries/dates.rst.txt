@@ -1,4 +1,4 @@
-.. _dates:
+.. _library_dates:
 
 ``dates``
 =========

@@ -1,4 +1,4 @@
-.. _profiler:
+.. _library_profiler:
 
 ``profiler``
 ============

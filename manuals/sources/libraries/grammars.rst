@@ -1,4 +1,4 @@
-.. _grammars:
+.. _library_grammars:
 
 ``grammars``
 ============

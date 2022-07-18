@@ -1,4 +1,4 @@
-.. _assignvars:
+.. _library_assignvars:
 
 ``assignvars``
 ==============

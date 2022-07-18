@@ -1,4 +1,4 @@
-.. _optionals:
+.. _library_optionals:
 
 ``optionals``
 =============

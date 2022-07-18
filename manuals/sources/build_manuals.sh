@@ -65,7 +65,7 @@ for file in devtools/*.rst; do
 	base="${file##*/}"
 	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] ; then
 		name="${base%.*}"
-		echo ".. _$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
+		echo ".. _library_$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
 	fi
 done
 rm -f temp0
@@ -124,7 +124,7 @@ for file in libraries/*.rst; do
 	base="${file##*/}"
 	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] && [ "$base" != "core.rst" ] ; then
 		name="${base%.*}"
-		echo ".. _$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
+		echo ".. _library_$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
 	fi
 done
 rm -f temp0

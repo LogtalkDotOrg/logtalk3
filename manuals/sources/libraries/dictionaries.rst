@@ -1,4 +1,4 @@
-.. _dictionaries:
+.. _library_dictionaries:
 
 ``dictionaries``
 ================

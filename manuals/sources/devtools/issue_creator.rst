@@ -1,4 +1,4 @@
-.. _issue_creator:
+.. _library_issue_creator:
 
 ``issue_creator``
 =================

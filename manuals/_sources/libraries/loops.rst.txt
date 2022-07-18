@@ -1,4 +1,4 @@
-.. _loops:
+.. _library_loops:
 
 ``loops``
 =========

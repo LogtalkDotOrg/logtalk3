@@ -179,11 +179,11 @@
 		<xsl:otherwise>
 			<xsl:choose>
 				<xsl:when test="($mapping != '') and (/logtalk_index/type='library')">
-					<xsl:text>:ref:`</xsl:text><xsl:value-of select="." /><xsl:text> &#60;</xsl:text><xsl:value-of select="$mapping"/><xsl:text>:</xsl:text><xsl:value-of select="." /><xsl:text>&#62;`</xsl:text>
+					<xsl:text>:ref:`</xsl:text><xsl:value-of select="." /><xsl:text> &#60;</xsl:text><xsl:value-of select="$mapping"/><xsl:text>:library_</xsl:text><xsl:value-of select="." /><xsl:text>&#62;`</xsl:text>
 					<xsl:value-of select="$nl" />
 					<xsl:call-template name="adornment">
 						<xsl:with-param name="char" select="'-'"/>
-						<xsl:with-param name="n" select="6 + string-length(.) + 2 + string-length($mapping) + 5 + string-length(.) + 2"/>
+						<xsl:with-param name="n" select="6 + string-length(.) + 2 + string-length($mapping) + 9 + string-length(.) + 2"/>
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>

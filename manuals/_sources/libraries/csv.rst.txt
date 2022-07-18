@@ -1,4 +1,4 @@
-.. _csv:
+.. _library_csv:
 
 ``csv``
 =======

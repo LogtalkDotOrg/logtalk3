@@ -1,4 +1,4 @@
-.. _git:
+.. _library_git:
 
 ``git``
 =======

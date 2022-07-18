@@ -1,4 +1,4 @@
-.. _edcg:
+.. _library_edcg:
 
 ``edcg``
 ========

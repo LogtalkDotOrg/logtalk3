@@ -1,4 +1,4 @@
-.. _debug_messages:
+.. _library_debug_messages:
 
 ``debug_messages``
 ==================

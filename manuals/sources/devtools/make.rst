@@ -1,4 +1,4 @@
-.. _make:
+.. _library_make:
 
 ``make``
 ========

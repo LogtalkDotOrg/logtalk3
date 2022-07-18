@@ -1,4 +1,4 @@
-.. _arbitrary:
+.. _library_arbitrary:
 
 ``arbitrary``
 =============

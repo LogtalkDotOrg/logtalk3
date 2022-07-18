@@ -1,4 +1,4 @@
-.. _timeout:
+.. _library_timeout:
 
 ``timeout``
 ===========

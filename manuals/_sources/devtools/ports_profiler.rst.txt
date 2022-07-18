@@ -1,4 +1,4 @@
-.. _ports_profiler:
+.. _library_ports_profiler:
 
 ``ports_profiler``
 ==================

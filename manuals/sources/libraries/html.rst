@@ -1,4 +1,4 @@
-.. _html:
+.. _library_html:
 
 ``html``
 ========

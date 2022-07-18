@@ -1,4 +1,4 @@
-.. _statistics:
+.. _library_statistics:
 
 ``statistics``
 ==============

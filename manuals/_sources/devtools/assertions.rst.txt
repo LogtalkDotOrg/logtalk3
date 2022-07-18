@@ -1,4 +1,4 @@
-.. _assertions:
+.. _library_assertions:
 
 ``assertions``
 ==============

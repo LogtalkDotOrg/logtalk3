@@ -1,4 +1,4 @@
-.. _json:
+.. _library_json:
 
 ``json``
 ========

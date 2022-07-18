@@ -1,4 +1,4 @@
-.. _nested_dictionaries:
+.. _library_nested_dictionaries:
 
 ``nested_dictionaries``
 =======================

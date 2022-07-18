@@ -1,4 +1,4 @@
-.. _gensym:
+.. _library_gensym:
 
 ``gensym``
 ==========

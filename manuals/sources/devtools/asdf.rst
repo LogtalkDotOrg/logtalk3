@@ -1,4 +1,4 @@
-.. _asdf:
+.. _library_asdf:
 
 ``asdf``
 ========

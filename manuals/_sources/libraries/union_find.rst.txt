@@ -1,4 +1,4 @@
-.. _union_find:
+.. _library_union_find:
 
 ``union_find``
 ==============

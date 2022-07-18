@@ -1,4 +1,4 @@
-.. _code_metrics:
+.. _library_code_metrics:
 
 ``code_metrics``
 ================

@@ -1,4 +1,4 @@
-.. _dependents:
+.. _library_dependents:
 
 ``dependents``
 ==============

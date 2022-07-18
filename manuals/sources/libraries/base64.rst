@@ -1,4 +1,4 @@
-.. _base64:
+.. _library_base64:
 
 ``base64``
 ==========

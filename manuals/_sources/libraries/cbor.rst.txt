@@ -1,4 +1,4 @@
-.. _cbor:
+.. _library_cbor:
 
 ``cbor``
 ========

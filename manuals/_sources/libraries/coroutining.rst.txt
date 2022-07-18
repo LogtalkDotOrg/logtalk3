@@ -1,4 +1,4 @@
-.. _coroutining:
+.. _library_coroutining:
 
 ``coroutining``
 ===============

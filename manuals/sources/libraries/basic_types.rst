@@ -1,4 +1,4 @@
-.. _basic_types:
+.. _library_basic_types:
 
 ``basic_types``
 ===============

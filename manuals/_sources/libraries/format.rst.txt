@@ -1,4 +1,4 @@
-.. _format:
+.. _library_format:
 
 ``format``
 ==========

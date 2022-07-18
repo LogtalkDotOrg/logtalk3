@@ -1,4 +1,4 @@
-.. _help:
+.. _library_help:
 
 ``help``
 ========

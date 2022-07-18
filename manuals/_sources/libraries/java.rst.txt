@@ -1,4 +1,4 @@
-.. _java:
+.. _library_java:
 
 ``java``
 ========
