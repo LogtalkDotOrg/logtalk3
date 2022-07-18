@@ -1,3 +1,5 @@
+.. _coroutining:
+
 ``coroutining``
 ===============
 

@@ -1,3 +1,5 @@
+.. _hook_objects:
+
 ``hook_objects``
 ================
 

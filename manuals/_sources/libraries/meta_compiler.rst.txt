@@ -1,3 +1,5 @@
+.. _meta_compiler:
+
 ``meta_compiler``
 =================
 

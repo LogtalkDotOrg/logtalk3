@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on April 12, 2022
+%  Last updated on July 18, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -36,6 +36,9 @@
 	method="text"
 	indent="yes"
 	encoding="utf-8"/>
+
+
+<xsl:param name="mapping"/>
 
 
 <xsl:variable name="nl">
@@ -174,12 +177,24 @@
 			<xsl:value-of select="$nl2" />
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:text>``</xsl:text><xsl:value-of select="." /><xsl:text>``</xsl:text>
-			<xsl:value-of select="$nl" />
-			<xsl:call-template name="adornment">
-				<xsl:with-param name="char" select="'-'"/>
-				<xsl:with-param name="n" select="2 + string-length(.) + 2"/>
-			</xsl:call-template>
+			<xsl:choose>
+				<xsl:when test="($mapping != '') and (/logtalk_index/type='library')">
+					<xsl:text>:ref:`</xsl:text><xsl:value-of select="." /><xsl:text> &#60;</xsl:text><xsl:value-of select="$mapping"/><xsl:text>:</xsl:text><xsl:value-of select="." /><xsl:text>&#62;`</xsl:text>
+					<xsl:value-of select="$nl" />
+					<xsl:call-template name="adornment">
+						<xsl:with-param name="char" select="'-'"/>
+						<xsl:with-param name="n" select="6 + string-length(.) + 2 + string-length($mapping) + 5 + string-length(.) + 2"/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>``</xsl:text><xsl:value-of select="." /><xsl:text>``</xsl:text>
+					<xsl:value-of select="$nl" />
+					<xsl:call-template name="adornment">
+						<xsl:with-param name="char" select="'-'"/>
+						<xsl:with-param name="n" select="2 + string-length(.) + 2"/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
 			<xsl:value-of select="$nl2" />
 			<xsl:text>.. toctree::</xsl:text>
 			<xsl:value-of select="$nl" />

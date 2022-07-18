@@ -121,7 +121,7 @@
 <p>by defining a simple profiler that prints the starting and ending time
 for processing a message sent to an object.</p>
 <section id="messages-as-events">
-<span id="events"></span><h2>Messages as events<a class="headerlink" href="#messages-as-events" title="Permalink to this heading"></a></h2>
+<span id="profiling-events"></span><h2>Messages as events<a class="headerlink" href="#messages-as-events" title="Permalink to this heading"></a></h2>
 <p>In a pure object-oriented system, all computations start by sending
 messages to objects. We can thus define an <em>event</em> as the sending of a
 message to an object. An event can then be specified by the tuple
@@ -151,7 +151,7 @@ each public message sent using the
 <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> operator.</p>
 </section>
 <section id="profilers-as-monitors">
-<span id="monitors"></span><h2>Profilers as monitors<a class="headerlink" href="#profilers-as-monitors" title="Permalink to this heading"></a></h2>
+<span id="profiling-monitors"></span><h2>Profilers as monitors<a class="headerlink" href="#profilers-as-monitors" title="Permalink to this heading"></a></h2>
 <p>A monitor is an object that reacts whenever a spied event occurs. The
 monitor actions are defined by two event handlers:
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> for <code class="docutils literal notranslate"><span class="pre">before</span></code> events

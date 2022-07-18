@@ -1,3 +1,5 @@
+.. _unicode_data:
+
 ``unicode_data``
 ================
 

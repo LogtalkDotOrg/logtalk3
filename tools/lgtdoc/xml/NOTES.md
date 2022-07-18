@@ -225,7 +225,7 @@ Brief description of each directory and file in this folder:
 	`lgt2rst.sh -h`; depending on your Logtalk installation, you may simply
 	need to type `lgt2rst` in order to run the script). The generated files
 	are expected to be used with Sphinx. Assuming that Sphinx and the 
-	Read the Docs Sphinx Theme are both installed, `lgt2rst -s` calls the
+	Read the Docs Sphinx theme are both installed, `lgt2rst -s` calls the
 	`sphinx-quickstart` interactive script using the `conf.py_t` file in this
 	directory as the `conf.py` template and using the `css/sphinx/custom.css`
 	to customize the Read the Docs Sphinx Theme. You can edit the `conf.py_t` to
@@ -234,7 +234,9 @@ Brief description of each directory and file in this folder:
 	it using the syntax `lgt2rst -s -- -q` followed by `-p`, `-a` and `-v`
 	options. For example `lgt2rst -s -- -q -p "My Project" -a "J. Doe" -v "1.12"`.
 	This use in non-interactive mode is currently only supported by the
-	`lgt2rst.sh` POSIX script.
+	`lgt2rst.sh` POSIX script. To add links from library APIs to library
+	descriptions, update the used `conf.py` to define a Intersphinx mapping
+	and use the script `-l` option.
 
 	Required software:  
 		* [Sphinx](https://www.sphinx-doc.org/) (tested with version 4.5.0)  

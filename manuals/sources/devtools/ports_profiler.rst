@@ -1,3 +1,5 @@
+.. _ports_profiler:
+
 ``ports_profiler``
 ==================
 

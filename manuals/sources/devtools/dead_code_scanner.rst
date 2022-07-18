@@ -1,3 +1,5 @@
+.. _dead_code_scanner:
+
 ``dead_code_scanner``
 =====================
 

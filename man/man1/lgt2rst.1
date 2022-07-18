@@ -1,4 +1,4 @@
-.TH lgt2rst 1 "July 29, 2021" "Logtalk 3.50.0" "Logtalk Documentation"
+.TH lgt2rst 1 "July 17, 2022" "Logtalk 3.57.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2rst \- Logtalk script for converting XML documenting files into reStructuredText files, notably for use with Sphinx
@@ -11,6 +11,7 @@ lgt2rst \- Logtalk script for converting XML documenting files into reStructured
 [\fB-p \fIprocessor\fR]
 [\fB-s\fI\fR]
 [\fB-m\fI\fR]
+[\fB-b \fIback-references mapping\fR]
 .br
 .B lgt2rst
 .B \-h
@@ -42,13 +43,19 @@ Runs sphinx-quickstart script.
 .B \-m
 Runs make html (requires also using the \fB-s\fI\fR option).
 .TP
+.B \-b
+.I mapping
+Name of the Intersphinx mapping for linking library APIs back to library descriptions.
+.TP
 .B \-h
 Prints a summary of the script options.
 
 .SH REQUIREMENTS
 Requires a compatible XSLT processor. See the script help screen for more information.
-The use of the -s option requires Sphinx, the Read the Docs Sphinx theme, and Pygments
-to be installed.
+.PP
+The use of the \fB-s\fI\fR, \fB-m\fI\fR, and \fB-b\fI\fR options require Sphinx, Intersphinx extension, Read the Docs Sphinx theme, and Pygments to be installed.
+.PP
+The use of the \fB-b\fI\fR option requires that the used \fBconf.py\fI\fR file defines the mapping. See the Intersphinx documentation for details.
 
 .SH ENVIRONMENT
 .TP

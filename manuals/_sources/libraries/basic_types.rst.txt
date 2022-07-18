@@ -1,3 +1,5 @@
+.. _basic_types:
+
 ``basic_types``
 ===============
 

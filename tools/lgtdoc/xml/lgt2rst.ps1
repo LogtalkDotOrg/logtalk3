@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on April 15, 2022
+##   Last updated on July 17, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -27,6 +27,7 @@ param(
 	[String]$d = $pwd, 
 	[String]$i = "index.rst", 
 	[String]$t = "Documentation index", 
+	[String]$l = "", 
 	[Switch]$s,
 	[Switch]$m,
 	[Switch]$v,
@@ -36,7 +37,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 4.5")
+	Write-Output ($myName + " 5.0")
 }
 
 function Get-Logtalkhome {
@@ -82,7 +83,7 @@ function Write-Usage-Help() {
 	Write-Output "current directory to reStructuredText files for use with Sphinx"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d directory] [-i index] [-t title] [-s] [-m]")
+	Write-Output ("  " + $myName + " [-d directory] [-i index] [-t title] [-s] [-m] [-l mapping]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -92,6 +93,7 @@ function Write-Usage-Help() {
 	Write-Output ("  -t title to be used in the index file (default is `"" + $t + "`")")
 	Write-Output "  -s run sphinx-quickstart script"
 	Write-Output "  -m run make html (requires also using the -s option)"
+	Write-Output "  -l Intersphinx mapping for linking library APIs to library descriptions (requires -s option)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
@@ -241,11 +243,18 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 
 	$xml_url_resolver = New-Object System.Xml.XmlUrlResolver
 
-	$entity_xslt_object = New-Object System.Xml.Xsl.XslCompiledTransform;
+	$entity_xslt_object = New-Object System.Xml.Xsl.XslCompiledTransform
 	$entity_xslt_object.Load($entity_xslt, $xslt_settings, $xml_url_resolver)
 
 	$index_xslt_object = New-Object System.Xml.Xsl.XslCompiledTransform;
 	$index_xslt_object.Load($index_xslt, $xslt_settings, $xml_url_resolver)
+
+	XsltArgumentList xslArguments = new XsltArgumentList()
+	if ($l) {
+		xslArguments.AddParam("mapping", string.Empty, $l)
+	} else {
+		xslArguments = $null;
+	}
 
 	Get-ChildItem -Path .\*.xml |
 	Foreach-Object {
@@ -256,7 +265,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
             $fs = New-Object IO.FileStream $rst, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
-			$entity_xslt_object.Transform($reader, $null, $writer)
+			$entity_xslt_object.Transform($reader, $xslArguments, $writer)
 			$writer.Close()
 		}
 	}
@@ -269,7 +278,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
             $fs = New-Object IO.FileStream $rst, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
-			$index_xslt_object.Transform($reader, $null, $writer)
+			$index_xslt_object.Transform($reader, $xslArguments, $writer)
 			$writer.Close()
 		}
 	}

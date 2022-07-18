@@ -1,3 +1,5 @@
+.. _expecteds:
+
 ``expecteds``
 =============
 

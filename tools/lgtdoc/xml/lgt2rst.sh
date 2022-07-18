@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on April 13, 2022
+##   Last updated on July 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 4.5"
+	echo "$(basename "$0") 5.0"
 	exit 0
 }
 
@@ -97,6 +97,7 @@ directory="."
 
 sphinx=false
 make_html=false
+mapping=""
 
 index_file=index.rst
 index_title="Documentation index"
@@ -108,7 +109,7 @@ usage_help()
 	echo "current directory to reStructuredText files for use with Sphinx"
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor] [-s] [-m]"
+	echo "  $(basename "$0") [-d directory] [-i index] [-t title] [-p processor] [-s] [-m] [-l mapping]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -118,7 +119,8 @@ usage_help()
 	echo "  -t title to be used in the index file (default is $index_title)"
 	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
 	echo "  -s run sphinx-quickstart script"
-	echo "  -m run make html (requires also using the -s option)"
+	echo "  -m run make html (requires -s option)"
+	echo "  -l Intersphinx mapping for linking library APIs to library descriptions (requires -s option)"
 	echo "  -- arguments to be passed to sphinx-quickstart script (no default)"
 	echo "  -v print version"
 	echo "  -h help"
@@ -175,7 +177,7 @@ create_index_file()
 	echo "Generated on $date" >> "$index_file"
 }
 
-while getopts "vd:i:t:p:smh" option
+while getopts "vd:i:t:p:l:smh" option
 do
 	case $option in
 		v) print_version;;
@@ -183,6 +185,7 @@ do
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
+		l) l_arg="$OPTARG";;
 		s) sphinx=true;;
 		m) make_html=true;;
 		h) usage_help; exit;;
@@ -215,6 +218,10 @@ if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] &
 	exit 1
 elif [ "$p_arg" != "" ] ; then
 	processor=$p_arg
+fi
+
+if [ "$l_arg" != "" ] ; then
+	mapping=$l_arg
 fi
 
 if ! [ -e "./logtalk_entity.dtd" ] ; then
@@ -255,12 +262,21 @@ if grep -q "<logtalk" ./*.xml ; then
 		echo "  converting $(basename "$file")"
 		base="${file##*/}"
 		name="${base%.*}"
-		case "$processor" in
-			xsltproc)	eval xsltproc -o \"$directory/$name.rst\" \"$index_xslt\" \"$file\";;
-			xalan)		eval xalan -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
-			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.rst\";;
-			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$index_xslt\";;
-		esac
+		if [ "$mapping" != "" ] ; then
+			case "$processor" in
+				xsltproc)	eval xsltproc --stringparam mapping "$mapping" -o \"$directory/$name.rst\" \"$index_xslt\" \"$file\";;
+				xalan)		eval xalan -p mapping "$mapping" -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
+				sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.rst\" mapping="$mapping";;
+				saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$index_xslt\" mapping="$mapping";;
+			esac
+		else
+			case "$processor" in
+				xsltproc)	eval xsltproc -o \"$directory/$name.rst\" \"$index_xslt\" \"$file\";;
+				xalan)		eval xalan -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
+				sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.rst\";;
+				saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$index_xslt\";;
+			esac
+		fi
 	done
 	echo "conversion done"
 	echo
@@ -271,7 +287,11 @@ if grep -q "<logtalk" ./*.xml ; then
 	echo
 	if [ "$sphinx" = true ] ; then
 		mv index.rst index.rst.backup
-		sphinx-quickstart --templatedir="$LOGTALKUSER/tools/lgtdoc/xml" "${args[@]}"
+		if [ "$mapping" != "" ] ; then
+			sphinx-quickstart --ext-intersphinx --templatedir="$LOGTALKUSER/tools/lgtdoc/xml" "${args[@]}"
+		else
+			sphinx-quickstart --templatedir="$LOGTALKUSER/tools/lgtdoc/xml" "${args[@]}"
+		fi
 		mkdir -p _static/css
 		cp "$LOGTALKUSER/tools/lgtdoc/xml/css/sphinx/custom.css" _static/css/custom.css
 		mv index.rst.backup index.rst

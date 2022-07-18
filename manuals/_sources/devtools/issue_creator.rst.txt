@@ -1,3 +1,5 @@
+.. _issue_creator:
+
 ``issue_creator``
 =================
 

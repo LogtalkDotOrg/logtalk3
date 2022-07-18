@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on April 25, 2022
+##   Last updated on July 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -156,7 +156,7 @@ fi
 set_goal
 $logtalk "$goal"
 cd "$cwd/../docs/sources" || exit 1
-lgt2rst -t "Logtalk APIs"
+lgt2rst -t "Logtalk APIs" -l "handbook"
 if [ "$include_packs" == 'true' ] ; then
 	cp _templates/layout_packs.html _templates/layout.html
 else

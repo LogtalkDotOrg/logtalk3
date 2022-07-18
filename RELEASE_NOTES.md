@@ -155,6 +155,9 @@ archive formats.
 to `curl` (e.g. for use with pack registry servers requiring authentication),
 `bsdtar` (e.g. for decrypting archives), and `gpg`.
 
+* ADDED: Support to the `lgtdoc` tool to generate links from library APIs to
+library descriptions when using the `lgt2rst` scripts.
+
 * IMPROVED: The `packs` tool to check the availability of a new version of a
 pack before uninstalling the older version when updating.
 

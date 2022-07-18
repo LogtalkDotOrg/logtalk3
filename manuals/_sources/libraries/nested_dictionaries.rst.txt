@@ -1,3 +1,5 @@
+.. _nested_dictionaries:
+
 ``nested_dictionaries``
 =======================
 

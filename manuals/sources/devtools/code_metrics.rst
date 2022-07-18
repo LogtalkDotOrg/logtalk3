@@ -1,3 +1,5 @@
+.. _code_metrics:
+
 ``code_metrics``
 ================
 

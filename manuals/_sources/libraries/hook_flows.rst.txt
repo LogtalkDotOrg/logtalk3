@@ -1,3 +1,5 @@
+.. _hook_flows:
+
 ``hook_flows``
 ==============
 

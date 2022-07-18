@@ -1,3 +1,5 @@
+.. _expand_library_alias_paths:
+
 ``expand_library_alias_paths``
 ==============================
 

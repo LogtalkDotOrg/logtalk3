@@ -8,8 +8,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
 
 
-``arbitrary``
--------------
+:ref:`arbitrary <handbook:arbitrary>`
+-----------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -18,8 +18,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    arbitrary <arbitrary_0>
 
-``assertions``
---------------
+:ref:`assertions <handbook:assertions>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -30,8 +30,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    assertions(Mode) <assertions_1>
    assertions_messages <assertions_messages_0>
 
-``assignvars``
---------------
+:ref:`assignvars <handbook:assignvars>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -41,8 +41,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    assignvars <assignvars_0>
    assignvarsp <assignvarsp_0>
 
-``base64``
-----------
+:ref:`base64 <handbook:base64>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -52,8 +52,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    base64 <base64_0>
    base64url <base64url_0>
 
-``cbor``
---------
+:ref:`cbor <handbook:cbor>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -63,8 +63,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    cbor <cbor_0>
    cbor(StringRepresentation) <cbor_1>
 
-``code_metrics``
-----------------
+:ref:`code_metrics <handbook:code_metrics>`
+-----------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -86,8 +86,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    size_metric <size_metric_0>
    upn_metric <upn_metric_0>
 
-``core``
---------
+:ref:`core <handbook:core>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -101,8 +101,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    monitoring <monitoring_0>
    user <user_0>
 
-``coroutining``
----------------
+:ref:`coroutining <handbook:coroutining>`
+---------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -111,8 +111,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    coroutining <coroutining_0>
 
-``csv``
--------
+:ref:`csv <handbook:csv>`
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -124,8 +124,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
 
-``dates``
----------
+:ref:`dates <handbook:dates>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -137,8 +137,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    time <time_0>
    timep <timep_0>
 
-``dead_code_scanner``
----------------------
+:ref:`dead_code_scanner <handbook:dead_code_scanner>`
+---------------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -148,8 +148,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    dead_code_scanner <dead_code_scanner_0>
    dead_code_scanner_messages <dead_code_scanner_messages_0>
 
-``debug_messages``
-------------------
+:ref:`debug_messages <handbook:debug_messages>`
+---------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -158,8 +158,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    debug_messages <debug_messages_0>
 
-``debugger``
-------------
+:ref:`debugger <handbook:debugger>`
+---------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -171,8 +171,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    debuggerp <debuggerp_0>
    dump_trace <dump_trace_0>
 
-``dependents``
---------------
+:ref:`dependents <handbook:dependents>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -182,8 +182,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    observer <observer_0>
    subject <subject_0>
 
-``diagrams``
-------------
+:ref:`diagrams <handbook:diagrams>`
+---------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -221,8 +221,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    xref_diagram <xref_diagram_0>
    xref_diagram(Format) <xref_diagram_1>
 
-``dictionaries``
-----------------
+:ref:`dictionaries <handbook:dictionaries>`
+-----------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -234,8 +234,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    dictionaryp <dictionaryp_0>
    rbtree <rbtree_0>
 
-``dif``
--------
+:ref:`dif <handbook:dif>`
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -244,8 +244,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    dif <dif_0>
 
-``doclet``
-----------
+:ref:`doclet <handbook:doclet>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -254,8 +254,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    doclet <doclet_0>
 
-``edcg``
---------
+:ref:`edcg <handbook:edcg>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -264,8 +264,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    edcg <edcg_0>
 
-``events``
-----------
+:ref:`events <handbook:events>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -279,8 +279,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    monitor <monitor_0>
    monitorp <monitorp_0>
 
-``expand_library_alias_paths``
-------------------------------
+:ref:`expand_library_alias_paths <handbook:expand_library_alias_paths>`
+---------------------------------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -289,8 +289,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    expand_library_alias_paths <expand_library_alias_paths_0>
 
-``expecteds``
--------------
+:ref:`expecteds <handbook:expecteds>`
+-----------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -301,8 +301,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    expected <expected_0>
    expected(Expected) <expected_1>
 
-``flags``
----------
+:ref:`flags <handbook:flags>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -312,8 +312,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    flags <flags_0>
    flags_validator <flags_validator_0>
 
-``format``
-----------
+:ref:`format <handbook:format>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -322,8 +322,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    format <format_0>
 
-``gensym``
-----------
+:ref:`gensym <handbook:gensym>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -332,8 +332,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    gensym <gensym_0>
 
-``git``
--------
+:ref:`git <handbook:git>`
+-----------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -343,8 +343,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    git <git_0>
    git_protocol <git_protocol_0>
 
-``grammars``
-------------
+:ref:`grammars <handbook:grammars>`
+---------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -355,8 +355,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    ip_grammars(Format) <ip_grammars_1>
    number_grammars(Format) <number_grammars_1>
 
-``heaps``
----------
+:ref:`heaps <handbook:heaps>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -368,8 +368,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    maxheap <maxheap_0>
    minheap <minheap_0>
 
-``help``
---------
+:ref:`help <handbook:help>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -378,8 +378,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    help <help_0>
 
-``hierarchies``
----------------
+:ref:`hierarchies <handbook:hierarchies>`
+---------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -392,8 +392,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    proto_hierarchy <proto_hierarchy_0>
    proto_hierarchyp <proto_hierarchyp_0>
 
-``hook_flows``
---------------
+:ref:`hook_flows <handbook:hook_flows>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -403,8 +403,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    hook_pipeline(Pipeline) <hook_pipeline_1>
    hook_set(Set) <hook_set_1>
 
-``hook_objects``
-----------------
+:ref:`hook_objects <handbook:hook_objects>`
+-----------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -426,8 +426,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    write_to_stream_hook(Stream) <write_to_stream_hook_1>
    write_to_stream_hook(Stream,Options) <write_to_stream_hook_2>
 
-``html``
---------
+:ref:`html <handbook:html>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -438,8 +438,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    html5 <html5_0>
    xhtml11 <xhtml11_0>
 
-``intervals``
--------------
+:ref:`intervals <handbook:intervals>`
+-----------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -449,8 +449,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    interval <interval_0>
    intervalp <intervalp_0>
 
-``iso8601``
------------
+:ref:`iso8601 <handbook:iso8601>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -459,8 +459,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    iso8601 <iso8601_0>
 
-``issue_creator``
------------------
+:ref:`issue_creator <handbook:issue_creator>`
+-------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -469,8 +469,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    issue_creator <issue_creator_0>
 
-``java``
---------
+:ref:`java <handbook:java>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -484,8 +484,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    java_hook <java_hook_0>
    java_utils_protocol <java_utils_protocol_0>
 
-``json``
---------
+:ref:`json <handbook:json>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -496,8 +496,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    json(StringRepresentation) <json_1>
    json_protocol <json_protocol_0>
 
-``lgtdoc``
-----------
+:ref:`lgtdoc <handbook:lgtdoc>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -507,8 +507,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    lgtdoc <lgtdoc_0>
    lgtdocp <lgtdocp_0>
 
-``lgtunit``
------------
+:ref:`lgtunit <handbook:lgtunit>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -527,8 +527,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    xunit_output <xunit_output_0>
    xunit_report <xunit_report_0>
 
-``library``
------------
+:ref:`library <handbook:library>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -539,8 +539,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    counters <counters_0>
    streamvars <streamvars_0>
 
-``logging``
------------
+:ref:`logging <handbook:logging>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -551,8 +551,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    logging <logging_0>
    loggingp <loggingp_0>
 
-``loops``
----------
+:ref:`loops <handbook:loops>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -562,8 +562,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    loop <loop_0>
    loopp <loopp_0>
 
-``meta``
---------
+:ref:`meta <handbook:meta>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -573,8 +573,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    meta <meta_0>
    metap <metap_0>
 
-``meta_compiler``
------------------
+:ref:`meta_compiler <handbook:meta_compiler>`
+-------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -583,8 +583,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    meta_compiler <meta_compiler_0>
 
-``metagol``
------------
+:ref:`metagol <handbook:metagol>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -594,8 +594,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    metagol <metagol_0>
    metagol_example_protocol <metagol_example_protocol_0>
 
-``nested_dictionaries``
------------------------
+:ref:`nested_dictionaries <handbook:nested_dictionaries>`
+-------------------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -607,8 +607,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nrbtree <nrbtree_0>
 
-``optionals``
--------------
+:ref:`optionals <handbook:optionals>`
+-----------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -619,8 +619,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    optional <optional_0>
    optional(Optional) <optional_1>
 
-``options``
------------
+:ref:`options <handbook:options>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -630,8 +630,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    options <options_0>
    options_protocol <options_protocol_0>
 
-``os``
-------
+:ref:`os <handbook:os>`
+---------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -642,8 +642,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    os_types <os_types_0>
    osp <osp_0>
 
-``packs``
----------
+:ref:`packs <handbook:packs>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -659,8 +659,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    registry_loader_hook <registry_loader_hook_0>
    registry_protocol <registry_protocol_0>
 
-``pddl_parser``
----------------
+:ref:`pddl_parser <handbook:pddl_parser>`
+---------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -670,8 +670,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    pddl <pddl_0>
    read_file <read_file_0>
 
-``ports_profiler``
-------------------
+:ref:`ports_profiler <handbook:ports_profiler>`
+---------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -680,8 +680,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    ports_profiler <ports_profiler_0>
 
-``queues``
-----------
+:ref:`queues <handbook:queues>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -691,8 +691,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    queue <queue_0>
    queuep <queuep_0>
 
-``random``
-----------
+:ref:`random <handbook:random>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -705,8 +705,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    random <random_0>
    random_protocol <random_protocol_0>
 
-``reader``
-----------
+:ref:`reader <handbook:reader>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -715,8 +715,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    reader <reader_0>
 
-``redis``
----------
+:ref:`redis <handbook:redis>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -725,8 +725,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    redis <redis_0>
 
-``sets``
---------
+:ref:`sets <handbook:sets>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -737,8 +737,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    set(Type) <set_1>
    setp <setp_0>
 
-``statistics``
---------------
+:ref:`statistics <handbook:statistics>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -750,8 +750,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    statistics <statistics_0>
    statisticsp <statisticsp_0>
 
-``term_io``
------------
+:ref:`term_io <handbook:term_io>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -761,8 +761,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    term_io <term_io_0>
    term_io_protocol <term_io_protocol_0>
 
-``timeout``
------------
+:ref:`timeout <handbook:timeout>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -771,8 +771,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    timeout <timeout_0>
 
-``toychr``
-----------
+:ref:`toychr <handbook:toychr>`
+-----------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -781,8 +781,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    toychrdb <toychrdb_0>
 
-``tutor``
----------
+:ref:`tutor <handbook:tutor>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -791,8 +791,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    tutor <tutor_0>
 
-``types``
----------
+:ref:`types <handbook:types>`
+---------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -823,8 +823,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    varlist <varlist_0>
    varlistp <varlistp_0>
 
-``union_find``
---------------
+:ref:`union_find <handbook:union_find>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -834,8 +834,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    union_find <union_find_0>
    union_find_protocol <union_find_protocol_0>
 
-``uuid``
---------
+:ref:`uuid <handbook:uuid>`
+-------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -846,8 +846,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    uuid(Representation) <uuid_1>
    uuid_protocol <uuid_protocol_0>
 
-``verdi_neruda``
-----------------
+:ref:`verdi_neruda <handbook:verdi_neruda>`
+-----------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -875,8 +875,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
    shell(Interpreters) <shell_1>
    shell_expansion(A) <shell_expansion_1>
 
-``wrapper``
------------
+:ref:`wrapper <handbook:wrapper>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -885,8 +885,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    wrapper <wrapper_0>
 
-``xml_parser``
---------------
+:ref:`xml_parser <handbook:xml_parser>`
+-------------------------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -895,8 +895,8 @@ To load any library, use the goal ``logtalk_load(library_name(loader))``. To run
 
    xml <xml_0>
 
-``zippers``
------------
+:ref:`zippers <handbook:zippers>`
+-------------------------------------
 
 .. toctree::
    :maxdepth: 1

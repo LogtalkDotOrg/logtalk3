@@ -1,3 +1,5 @@
+.. _union_find:
+
 ``union_find``
 ==============
 

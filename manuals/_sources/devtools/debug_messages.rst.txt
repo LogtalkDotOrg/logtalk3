@@ -1,3 +1,5 @@
+.. _debug_messages:
+
 ``debug_messages``
 ==================
 

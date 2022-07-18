@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on February 17, 2022
+##   Last updated on July 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -61,6 +61,15 @@ sed '1,19d' ../../tools/profiler/NOTES.md | pandoc -f gfm -t rst -o devtools/pro
 sed '1,19d' ../../tools/tutor/NOTES.md | pandoc -f gfm -t rst -o devtools/tutor.rst
 sed '1,19d' ../../tools/wrapper/NOTES.md | pandoc -f gfm -t rst -o devtools/wrapper.rst
 
+for file in devtools/*.rst; do
+	base="${file##*/}"
+	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] ; then
+		name="${base%.*}"
+		echo ".. _$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
+	fi
+done
+rm -f temp0
+
 sed '1,19d' ../../library/NOTES.md | pandoc -f gfm -t rst -o libraries/overview.rst
 sed '1,19d' ../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 sed '1,19d' ../../library/assignvars/NOTES.md | pandoc -f gfm -t rst -o libraries/assignvars.rst
@@ -110,6 +119,15 @@ cat ../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/uni
 sed '1,19d' ../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
 sed '1,19d' ../../library/zippers/NOTES.md | pandoc -f gfm -t rst -o libraries/zippers.rst
+
+for file in libraries/*.rst; do
+	base="${file##*/}"
+	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] && [ "$base" != "core.rst" ] ; then
+		name="${base%.*}"
+		echo ".. _$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
+	fi
+done
+rm -f temp0
 
 make html
 make latexpdf

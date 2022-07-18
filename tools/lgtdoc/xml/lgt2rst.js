@@ -2,7 +2,7 @@
 //
 //   XML documenting files to reStructuredText files conversion script
 //
-//   Last updated on April 12, 2022
+//   Last updated on July 18, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -82,6 +82,7 @@ var d_arg = "";
 var i_arg = "";
 var t_arg = "";
 var p_arg = "";
+var l_arg = "";
 
 if (WScript.Arguments.Named.Exists("d"))
 	d_arg = WScript.Arguments.Named.Item("d");
@@ -94,6 +95,9 @@ if (WScript.Arguments.Named.Exists("t"))
 
 if (WScript.Arguments.Named.Exists("p"))
 	p_arg = WScript.Arguments.Named.Item("p");
+
+if (WScript.Arguments.Named.Exists("l"))
+	l_arg = WScript.Arguments.Named.Item("l");
 
 if (WScript.Arguments.Named.Exists("s"))
 	sphinx = true;
@@ -122,6 +126,9 @@ if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" &
 	usage_help();
 } else if (p_arg != "")
 	processor = p_arg;
+
+if (l_arg != "")
+	mapping=l_arg;
 
 if (!FSObject.FileExists(WshShell.CurrentDirectory + "\\logtalk_entity.dtd")) {
 	FSObject.CopyFile(logtalk_home + "\\tools\\lgtdoc\\xml\\logtalk_entity.dtd", WshShell.CurrentDirectory + "\\logtalk_entity.dtd");
@@ -163,22 +170,42 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 		} else {
 			xslt = entity_xslt;
 		}
-		switch (processor) {
-			case "msxsl" :
-				WshShell.Run("msxsl -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
-				break;
-			case "xsltproc" :
-				WshShell.Run("xsltproc -o \"" + rst_file + "\" \"" + xslt + "\" \"" + file + "\"", true);
-				break;
-			case "xalan" :
-				WshShell.Run("xalan -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
-				break;
-			case "sabcmd" :
-				WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + rst_file + "\"", true);
-				break;
-			case "saxon" :
-				WshShell.Run("java net.sf.saxon.Transform -o:\"" + rst_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\"", true);
-				break;
+		if (mapping == "") {
+			switch (processor) {
+				case "msxsl" :
+					WshShell.Run("msxsl -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
+					break;
+				case "xsltproc" :
+					WshShell.Run("xsltproc -o \"" + rst_file + "\" \"" + xslt + "\" \"" + file + "\"", true);
+					break;
+				case "xalan" :
+					WshShell.Run("xalan -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
+					break;
+				case "sabcmd" :
+					WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + rst_file + "\"", true);
+					break;
+				case "saxon" :
+					WshShell.Run("java net.sf.saxon.Transform -o:\"" + rst_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\"", true);
+					break;
+			}
+		} else {
+			switch (processor) {
+				case "msxsl" :
+					WshShell.Run("msxsl -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\" mapping=mapping", true);
+					break;
+				case "xsltproc" :
+					WshShell.Run("xsltproc --stringparam mapping " + mapping + " -o \"" + rst_file + "\" \"" + xslt + "\" \"" + file + "\"", true);
+					break;
+				case "xalan" :
+					WshShell.Run("xalan -p mapping " + mapping + " -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
+					break;
+				case "sabcmd" :
+					WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + rst_file + "\" mapping=mapping", true);
+					break;
+				case "saxon" :
+					WshShell.Run("java net.sf.saxon.Transform -o:\"" + rst_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\" mapping=mapping", true);
+					break;
+			}
 		}
 	}
 }
@@ -229,7 +256,7 @@ function usage_help() {
 	WScript.Echo("current directory to reStructuredText files for use with Sphinx");
 	WScript.Echo("");
 	WScript.Echo("Usage:");
-	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor] [/s] [/m]");
+	WScript.Echo("  " + WScript.ScriptName + " [/d:directory] [/i:index] [/t:title] [/p:processor] [/s] [/m] [/l:mapping]");
 	WScript.Echo("  " + WScript.ScriptName + " help");
 	WScript.Echo("");
 	WScript.Echo("Optional arguments:");
@@ -239,6 +266,7 @@ function usage_help() {
 	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, sabcmd, or saxon; default is " + processor + ")");
 	WScript.Echo("  s - run sphinx-quickstart script");
 	WScript.Echo("  m - run make html (requires also using the -s option)");
+	WScript.Echo("  l - Intersphinx mapping for linking library APIs to library descriptions (requires -s option)");
 	WScript.Echo("");
 	WScript.Quit(1);
 }
