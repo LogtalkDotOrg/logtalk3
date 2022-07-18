@@ -265,7 +265,7 @@ if grep -q "<logtalk" ./*.xml ; then
 		if [ "$mapping" != "" ] ; then
 			case "$processor" in
 				xsltproc)	eval xsltproc --stringparam mapping "$mapping" -o \"$directory/$name.rst\" \"$index_xslt\" \"$file\";;
-				xalan)		eval xalan -p mapping "$mapping" -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
+				xalan)		eval xalan -p mapping \"\'"$mapping"\'\" -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
 				sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.rst\" mapping="$mapping";;
 				saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$index_xslt\" mapping="$mapping";;
 			esac

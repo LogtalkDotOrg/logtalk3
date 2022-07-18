@@ -197,7 +197,7 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 					WshShell.Run("xsltproc --stringparam mapping " + mapping + " -o \"" + rst_file + "\" \"" + xslt + "\" \"" + file + "\"", true);
 					break;
 				case "xalan" :
-					WshShell.Run("xalan -p mapping " + mapping + " -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
+					WshShell.Run("xalan -p mapping \"'" + mapping + "'\" -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
 					break;
 				case "sabcmd" :
 					WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + rst_file + "\" mapping=mapping", true);
