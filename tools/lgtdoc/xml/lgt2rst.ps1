@@ -251,7 +251,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 
 	$xslArguments = New-Object System.Xml.Xsl.XsltArgumentList
 	if ($l) {
-		$xslArguments.AddParam("mapping", System.String.Empty, $l)
+		$xslArguments.AddParam("mapping", [string]::Empty, $l)
 	} else {
 		$xslArguments = $null;
 	}
