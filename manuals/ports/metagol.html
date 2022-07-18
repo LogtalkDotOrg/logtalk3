@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metagol &mdash; The Logtalk Handbook v3.57.0-b08 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> The Logtalk Handbook
+            <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.57.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="docutils literal notranslate"><span class="pre">metagol</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/ports/metagol.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metagol">
+<span id="library-metagol"></span><h1><code class="docutils literal notranslate"><span class="pre">metagol</span></code><a class="headerlink" href="#metagol" title="Permalink to this heading"></a></h1>
+<p>To load this port and for sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code>
+file. To run the tests, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file (there are three
+lengthy tests that only run when the tests are being run manually
+instead of automatically).</p>
+<p>This folder contains a Logtalk port of <code class="docutils literal notranslate"><span class="pre">metagol</span></code>, an inductive logic
+programming (ILP) system based on meta-interpretive learning available
+from:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>github.com<span class="o">/</span>metagol<span class="o">/</span>metagol
+</pre></div>
+</div>
+<p>See the original code git repo for details and bibliography on Metagol
+and ILP.</p>
+<p>The port allows any number of datasets to be loaded simultaneously with
+per-dataset learning options. A dataset is simply wrapped in an object
+that extends and is expanded by the <code class="docutils literal notranslate"><span class="pre">metagol</span></code> object as illustrated by
+the ported examples.</p>
+<p>Both the original code and the port requires the coroutining <code class="docutils literal notranslate"><span class="pre">when/2</span></code>
+predicate, which is only available in some backend Prolog systems. The
+port currently supports ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, and
+YAP. It can be used on both POSIX and Windows operating-systems.</p>
+<p>The examples are ported from the original Metagol distribution. Some of
+the examples are taken from the following paper (with the original
+Prolog examples source code files made available by MystikNinja):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>article<span class="k">{</span><span class="nv">DBLP</span><span class="o">:</span>journals<span class="o">/</span>jair<span class="o">/</span><span class="nv">EvansG18</span>,
+    author    <span class="o">=</span> <span class="k">{</span><span class="nv">Richard</span> <span class="nv">Evans</span> and <span class="nv">Edward</span> <span class="nv">Grefenstette</span><span class="k">}</span>,
+    title     <span class="o">=</span> <span class="k">{</span><span class="nv">Learning</span> <span class="nv">Explanatory</span> <span class="nv">Rules</span> from <span class="nv">Noisy</span> <span class="nv">Data</span><span class="k">}</span>,
+    journal   <span class="o">=</span> <span class="k">{</span><span class="nv">J</span>. <span class="nv">Artif</span>. <span class="nv">Intell</span>. <span class="nv">Res</span>.<span class="k">}</span>,
+    volume    <span class="o">=</span> <span class="k">{</span><span class="m">61</span><span class="k">}</span>,
+    pages     <span class="o">=</span> <span class="k">{</span><span class="m">1</span><span class="o">--</span><span class="m">64</span><span class="k">}</span>,
+    year      <span class="o">=</span> <span class="k">{</span><span class="m">2018</span><span class="k">}</span>,
+    url       <span class="o">=</span> <span class="k">{</span>https<span class="o">://</span>doi.org<span class="o">/</span><span class="m">10.1613</span><span class="o">/</span>jair.<span class="m">5714</span><span class="k">}</span>,
+    doi       <span class="o">=</span> <span class="k">{</span><span class="m">10.1613</span><span class="o">/</span>jair.<span class="m">5714</span><span class="k">}</span>,
+    timestamp <span class="o">=</span> <span class="k">{</span><span class="nv">Mon</span>, <span class="m">21</span> <span class="nv">Jan</span> <span class="m">2019</span> <span class="m">15</span><span class="o">:</span><span class="m">01</span><span class="o">:</span><span class="m">17</span> <span class="o">+</span><span class="m">0100</span><span class="k">}</span>,
+    biburl    <span class="o">=</span> <span class="k">{</span>https<span class="o">://</span>dblp.org<span class="o">/</span>rec<span class="o">/</span>bib<span class="o">/</span>journals<span class="o">/</span>jair<span class="o">/</span><span class="nv">EvansG18</span><span class="k">}</span>,
+    bibsource <span class="o">=</span> <span class="k">{</span>dblp computer science bibliography, https<span class="o">://</span>dblp.org<span class="k">}</span>
+<span class="k">}</span>
+</pre></div>
+</div>
+<p>The paper can be downloaded at</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>arxiv.org<span class="o">/</span>pdf<span class="o">/</span><span class="m">1711.04574</span>.pdf
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2022, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

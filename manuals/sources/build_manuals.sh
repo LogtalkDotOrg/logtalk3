@@ -129,6 +129,18 @@ for file in libraries/*.rst; do
 done
 rm -f temp0
 
+sed '1,35d' ../../ports/metagol/NOTES.md | pandoc -f gfm -t rst -o ports/metagol.rst
+sed '1,22d' ../../ports/toychr/NOTES.md | pandoc -f gfm -t rst -o ports/toychr.rst
+
+for file in ports/*.rst; do
+	base="${file##*/}"
+	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] && [ "$base" != "core.rst" ] ; then
+		name="${base%.*}"
+		echo ".. _library_$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
+	fi
+done
+rm -f temp0
+
 make html
 make latexpdf
 make epub
@@ -137,6 +149,7 @@ make info
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/devtools/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/faq/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/libraries/index.html
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/ports/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/refman/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/tutorial/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/userman/index.html

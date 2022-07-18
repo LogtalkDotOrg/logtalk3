@@ -21,6 +21,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ________________________________________________________________________
 
 
+`toychr`
+========
+
 To load this port and for sample queries, please see the `SCRIPT.txt`
 file.
 
