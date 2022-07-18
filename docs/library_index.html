@@ -584,7 +584,7 @@
              
   <section id="libraries">
 <span id="library-index"></span><h1>Libraries<a class="headerlink" href="#libraries" title="Permalink to this heading"></a></h1>
-<p>To load any library, use the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(loader))</span></code>. To run the library tests, use the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(tester))</span></code>.</p>
+<p>To load any library (including developer tools, ports, and contributions), use the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(loader))</span></code>. To run the library tests, use the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(tester))</span></code>. To load an entity, always load the loader file of the library that includes it to ensure that all required dependencies are also loaded and that any required flags are used.</p>
 <section id="arbitrary">
 <h2><a class="reference external" href="../manuals/libraries/arbitrary.html#library-arbitrary" title="(in The Logtalk Handbook v3.57.0)"><span class="xref std std-ref">arbitrary</span></a><a class="headerlink" href="#arbitrary" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">

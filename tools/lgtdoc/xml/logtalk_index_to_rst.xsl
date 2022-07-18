@@ -82,7 +82,7 @@
 		<xsl:value-of select="$nl" />
 		<xsl:text>=========</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>To load any library, use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``.</xsl:text>
+		<xsl:text>To load any library (including developer tools, ports, and contributions), use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``. To load an entity, always load the loader file of the library that includes it to ensure that all required dependencies are also loaded and that any required flags are used.</xsl:text>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:if test=".='directory'">
@@ -92,7 +92,7 @@
 		<xsl:value-of select="$nl" />
 		<xsl:text>===========</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of using its path. The library loader file ensures that all the required dependencies are also loaded.</xsl:text>
+		<xsl:text>To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of using its path. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used.</xsl:text>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:if test=".='entity'">
@@ -102,7 +102,7 @@
 		<xsl:value-of select="$nl" />
 		<xsl:text>========</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded.</xsl:text>
+		<xsl:text>To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used.</xsl:text>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:if test=".='predicate'">
@@ -112,7 +112,7 @@
 		<xsl:value-of select="$nl" />
 		<xsl:text>==========</xsl:text>
 		<xsl:value-of select="$nl2" />
-		<xsl:text>This index lists all entities *declaring* a given predicate. To load an entity providing the predicate that you want to call, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded.</xsl:text>
+		<xsl:text>This index lists all entities *declaring* a given predicate. To load an entity providing the predicate that you want to call, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used.</xsl:text>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 </xsl:template>

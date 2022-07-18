@@ -4,7 +4,7 @@
 Libraries
 =========
 
-To load any library, use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``.
+To load any library (including developer tools, ports, and contributions), use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``. To load an entity, always load the loader file of the library that includes it to ensure that all required dependencies are also loaded and that any required flags are used.
 
 
 
