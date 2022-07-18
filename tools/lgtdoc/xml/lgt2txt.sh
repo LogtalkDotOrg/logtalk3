@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on July 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -90,7 +90,6 @@ index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_txt.xsl"
 
 processor=xsltproc
 # processor=xalan
-# processor=sabcmd
 # processor=saxon
 
 directory="."
@@ -108,7 +107,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -d output directory for the text files (default is $directory)"
-	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
+	echo "  -p XSLT processor (xsltproc, xalan, or saxon; default is $processor)"
 	echo "  -v print version"
 	echo "  -h help"
 	echo
@@ -133,7 +132,7 @@ elif [ "$d_arg" != "" ] ; then
 	directory=$d_arg
 fi
 
-if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "sabcmd" ] && [ "$p_arg" != "saxon" ] ; then
+if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "saxon" ] ; then
 	echo "Error! Unsupported XSLT processor: $p_arg" >&2
 	usage_help
 	exit 1
@@ -171,7 +170,6 @@ if grep -q "<logtalk" ./*.xml ; then
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.txt\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.txt\" \"$file\" \"$entity_xslt\";;
-			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory/$name.txt\";;
 			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.txt\" -s:\"$file\" -xsl:\"$entity_xslt\";;
 		esac
 	done
@@ -182,7 +180,6 @@ if grep -q "<logtalk" ./*.xml ; then
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.txt\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.txt\" \"$file\" \"$index_xslt\";;
-			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.txt\";;
 			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.txt\" -s:\"$file\" -xsl:\"$index_xslt\";;
 		esac
 	done

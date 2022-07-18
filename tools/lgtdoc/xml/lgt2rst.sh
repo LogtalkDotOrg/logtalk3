@@ -90,7 +90,6 @@ index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_rst.xsl"
 
 processor=xsltproc
 # processor=xalan
-# processor=sabcmd
 # processor=saxon
 
 directory="."
@@ -117,7 +116,7 @@ usage_help()
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
-	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
+	echo "  -p XSLT processor (xsltproc, xalan, or saxon; default is $processor)"
 	echo "  -s run sphinx-quickstart script"
 	echo "  -m run make html (requires -s option)"
 	echo "  -l Intersphinx mapping for linking library APIs to library descriptions (requires -s option)"
@@ -212,7 +211,7 @@ if [ "$t_arg" != "" ] ; then
 	index_title=$t_arg
 fi
 
-if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "sabcmd" ] && [ "$p_arg" != "saxon" ] ; then
+if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "saxon" ] ; then
 	echo "Error! Unsupported XSLT processor: $p_arg" >&2
 	usage_help
 	exit 1
@@ -254,7 +253,6 @@ if grep -q "<logtalk" ./*.xml ; then
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.rst\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.rst\" \"$file\" \"$entity_xslt\";;
-			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory/$name.rst\";;
 			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$entity_xslt\";;
 		esac
 	done
@@ -266,14 +264,12 @@ if grep -q "<logtalk" ./*.xml ; then
 			case "$processor" in
 				xsltproc)	eval xsltproc --stringparam mapping "$mapping" -o \"$directory/$name.rst\" \"$index_xslt\" \"$file\";;
 				xalan)		eval xalan -p mapping \"\'"$mapping"\'\" -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
-				sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.rst\" mapping="$mapping";;
 				saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$index_xslt\" mapping="$mapping";;
 			esac
 		else
 			case "$processor" in
 				xsltproc)	eval xsltproc -o \"$directory/$name.rst\" \"$index_xslt\" \"$file\";;
 				xalan)		eval xalan -o \"$directory/$name.rst\" \"$file\" \"$index_xslt\";;
-				sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.rst\";;
 				saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.rst\" -s:\"$file\" -xsl:\"$index_xslt\";;
 			esac
 		fi

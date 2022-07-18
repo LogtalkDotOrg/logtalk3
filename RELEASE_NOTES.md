@@ -136,6 +136,8 @@ not of the expected type.
 Tools
 -----
 
+* REMOVED: Support for the Sablotron XSLT processor from the `lgtdoc` tool.
+
 * CHANGED: The semantics of the `packs` tool `directory/1` predicate for
 consistency with the `directory/2` and `readme/1-2` predicates. The old
 semantics are now available from the new `prefix/1-2` predicates.

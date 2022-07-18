@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to Mardown text files conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on July 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -90,7 +90,6 @@ index_xslt="$LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_md.xsl"
 
 processor=xsltproc
 # processor=xalan
-# processor=sabcmd
 # processor=saxon
 
 directory="."
@@ -113,7 +112,7 @@ usage_help()
 	echo "  -d output directory for the text files (default is $directory)"
 	echo "  -i name of the index file (default is $index_file)"
 	echo "  -t title to be used in the index file (default is $index_title)"
-	echo "  -p XSLT processor (xsltproc, xalan, sabcmd, or saxon; default is $processor)"
+	echo "  -p XSLT processor (xsltproc, xalan, or saxon; default is $processor)"
 	echo "  -v print version"
 	echo "  -h help"
 	echo
@@ -181,7 +180,7 @@ if [ "$t_arg" != "" ] ; then
 	index_title=$t_arg
 fi
 
-if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "sabcmd" ] && [ "$p_arg" != "saxon" ] ; then
+if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] && [ "$p_arg" != "saxon" ] ; then
 	echo "Error! Unsupported XSLT processor: $p_arg" >&2
 	usage_help
 	exit 1
@@ -219,7 +218,6 @@ if grep -q "<logtalk" ./*.xml ; then
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.md\" \"$entity_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.md\" \"$file\" \"$entity_xslt\";;
-			sabcmd)		eval sabcmd \"$entity_xslt\" \"$file\" \"$directory/$name.md\";;
 			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.md\" -s:\"$file\" -xsl:\"$entity_xslt\";;
 		esac
 	done
@@ -230,7 +228,6 @@ if grep -q "<logtalk" ./*.xml ; then
 		case "$processor" in
 			xsltproc)	eval xsltproc -o \"$directory/$name.md\" \"$index_xslt\" \"$file\";;
 			xalan)		eval xalan -o \"$directory/$name.md\" \"$file\" \"$index_xslt\";;
-			sabcmd)		eval sabcmd \"$index_xslt\" \"$file\" \"$directory/$name.md\";;
 			saxon)		eval java net.sf.saxon.Transform -o:\"$directory/$name.md\" -s:\"$file\" -xsl:\"$index_xslt\";;
 		esac
 	done

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   XML documenting files to (X)HTML conversion script 
-//   Last updated on April 12, 2022
+//   Last updated on July 18, 2022
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,6 @@ var index_title = "Documentation index";
 var processor = "msxsl";
 // var processor = "xsltproc";
 // var processor = "xalan";
-// var processor = "sabcmd";
 // var processor = "saxon";
 
 if (WScript.Arguments.Unnamed.Length > 0) {
@@ -126,7 +125,7 @@ if (i_arg != "")
 if (t_arg != "")
 	index_title=t_arg;
 
-if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" && p_arg != "sabcmd" && p_arg != "saxon") {
+if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" && p_arg != "saxon") {
 	WScript.Echo("Error! Unsupported XSLT processor:" + p_arg);
 	WScript.Echo("");
 	usage_help();
@@ -191,9 +190,6 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 			case "xalan" :
 				WshShell.Run("xalan -o \"" + html_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
 				break;
-			case "sabcmd" :
-				WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + html_file + "\"", true);
-				break;
 			case "saxon" :
 				WshShell.Run("java net.sf.saxon.Transform -o:\"" + html_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\"", true);
 				break;
@@ -227,7 +223,7 @@ function usage_help() {
 	WScript.Echo("  d - output directory for the generated files (default is " + directory + ")");
 	WScript.Echo("  i - name of the index file (default is " + index_file + ")");
 	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
-	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, sabcmd, or saxon; default is " + processor + ")");
+	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, or saxon; default is " + processor + ")");
 	WScript.Echo("");
 	WScript.Quit(1);
 }

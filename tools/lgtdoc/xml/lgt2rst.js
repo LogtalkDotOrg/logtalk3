@@ -41,7 +41,6 @@ var index_title = "Documentation index"
 var processor = "msxsl";
 // var processor = "xsltproc";
 // var processor = "xalan";
-// var processor = "sabcmd";
 // var processor = "saxon";
 
 if (WScript.Arguments.Unnamed.Length > 0) {
@@ -120,7 +119,7 @@ if (i_arg != "")
 if (t_arg != "")
 	index_title=t_arg;
 
-if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" && p_arg != "sabcmd" && p_arg != "saxon") {
+if (p_arg != "" && p_arg != "msxsl" && p_arg != "xsltproc" && p_arg != "xalan" && p_arg != "saxon") {
 	WScript.Echo("Error! Unsupported XSLT processor:" + p_arg);
 	WScript.Echo("");
 	usage_help();
@@ -181,9 +180,6 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 				case "xalan" :
 					WshShell.Run("xalan -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
 					break;
-				case "sabcmd" :
-					WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + rst_file + "\"", true);
-					break;
 				case "saxon" :
 					WshShell.Run("java net.sf.saxon.Transform -o:\"" + rst_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\"", true);
 					break;
@@ -198,9 +194,6 @@ for (files.moveFirst(); !files.atEnd(); files.moveNext()) {
 					break;
 				case "xalan" :
 					WshShell.Run("xalan -p mapping \"'" + mapping + "'\" -o \"" + rst_file + "\" \"" + file + "\" \"" + xslt + "\"", true);
-					break;
-				case "sabcmd" :
-					WshShell.Run("sabcmd \"" + xslt + "\" \"" + file + "\" \"" + rst_file + "\" mapping=mapping", true);
 					break;
 				case "saxon" :
 					WshShell.Run("java net.sf.saxon.Transform -o:\"" + rst_file + "\" -s:\"" + file + "\" -xsl:\"" + xslt + "\" mapping=mapping", true);
@@ -263,7 +256,7 @@ function usage_help() {
 	WScript.Echo("  d - output directory for the generated files (default is " + directory + ")");
 	WScript.Echo("  i - name of the index file (default is " + index_file + ")");
 	WScript.Echo("  t - title to be used in the index file (default is " + index_title + ")");
-	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, sabcmd, or saxon; default is " + processor + ")");
+	WScript.Echo("  p - XSLT processor (msxsl, xsltproc, xalan, or saxon; default is " + processor + ")");
 	WScript.Echo("  s - run sphinx-quickstart script");
 	WScript.Echo("  m - run make html (requires also using the -s option)");
 	WScript.Echo("  l - Intersphinx mapping for linking library APIs to library descriptions (requires -s option)");
