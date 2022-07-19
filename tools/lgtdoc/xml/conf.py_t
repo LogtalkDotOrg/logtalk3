@@ -43,6 +43,8 @@ extensions = [
     'sphinx.ext.intersphinx'
 ]
 
+intersphinx_mapping = {'logtalk':  ('https://logtalk.org/docs', 'https://logtalk.org/docs/objects.inv')}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

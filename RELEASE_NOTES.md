@@ -162,6 +162,9 @@ to `curl` (e.g. for use with pack registry servers requiring authentication),
 * ADDED: Support to the `lgtdoc` tool to generate links from library APIs to
 library descriptions when using the `lgt2rst` scripts.
 
+* ADDED: Intersphinx mapping to the Logtalk APIs documentation to the Sphinx
+template file for the `lgtdoc` tool.
+
 * IMPROVED: The `packs` tool to check the availability of a new version of a
 pack before uninstalling the older version when updating.
 
