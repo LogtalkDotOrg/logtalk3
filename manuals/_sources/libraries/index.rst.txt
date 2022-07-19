@@ -33,6 +33,7 @@ directory in the ``NOTES.md`` file.
    basic_types
    coroutining
    cbor
+   core
    csv
    dates
    dependents

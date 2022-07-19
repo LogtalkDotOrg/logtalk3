@@ -60,4 +60,4 @@ Testing
 
 To test this library predicates, load the `tester.lgt` file:
 
-	| ?- logtalk_load(coroutining(tester)).
+	| ?- logtalk_load(assignvars(tester)).
