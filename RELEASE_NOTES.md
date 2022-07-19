@@ -97,6 +97,9 @@ Documentation
 
 * IMPROVED: Handbook section on compiling Prolog modules as objects.
 
+* IMPROVED: The APIs documentation now include links to library descriptions
+in the Handbook.
+
 * UPDATED: The `packs` tool documentation section on pack signature checking.
 
 * UPDATED: Notes on the Windows installer.
@@ -160,7 +163,8 @@ to `curl` (e.g. for use with pack registry servers requiring authentication),
 `bsdtar` (e.g. for decrypting archives), and `gpg`.
 
 * ADDED: Support to the `lgtdoc` tool to generate links from library APIs to
-library descriptions when using the `lgt2rst` scripts.
+library descriptions. These links can be explicitly-qualified by using the
+`lgt2rst` scripts new `-l` option to pass the mapping name.
 
 * ADDED: Intersphinx mapping to the Logtalk APIs documentation to the Sphinx
 template file for the `lgtdoc` tool.

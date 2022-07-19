@@ -235,7 +235,8 @@ Brief description of each directory and file in this folder:
 	This use in non-interactive mode is currently only supported by the
 	`lgt2rst.sh` POSIX script. To add links from library APIs to library
 	descriptions, update the used `conf.py` to define a Intersphinx mapping
-	and use the script `-l` option. The library description files musts have
+	and optionally use the script `-l` option to explicitly qualify the links
+	to the library descriptions. The library description files musts have
 	a reStructuredText target in the first line with the name of the library
 	prefixed by `library_`.
 

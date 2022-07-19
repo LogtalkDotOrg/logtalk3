@@ -10,7 +10,7 @@
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
 %
-%  Last updated on July 18, 2022
+%  Last updated on July 19, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -184,6 +184,14 @@
 					<xsl:call-template name="adornment">
 						<xsl:with-param name="char" select="'-'"/>
 						<xsl:with-param name="n" select="6 + string-length(.) + 2 + string-length($mapping) + 9 + string-length(.) + 2"/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:when test="/logtalk_index/type='library'">
+					<xsl:text>:ref:`</xsl:text><xsl:value-of select="." /><xsl:text> &#60;library_</xsl:text><xsl:value-of select="." /><xsl:text>&#62;`</xsl:text>
+					<xsl:value-of select="$nl" />
+					<xsl:call-template name="adornment">
+						<xsl:with-param name="char" select="'-'"/>
+						<xsl:with-param name="n" select="6 + string-length(.) + 10 + string-length(.) + 2"/>
 					</xsl:call-template>
 				</xsl:when>
 				<xsl:otherwise>
