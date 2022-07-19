@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on July 18, 2022
+##   Last updated on July 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -38,6 +38,7 @@ rm -rf ../tutorial
 rm -rf ../userman
 rm -rf ../devtools
 rm -rf ../libraries
+rm -rf ../ports
 make clean
 
 sed '1,19d' ../../tools/NOTES.md | pandoc -f gfm -t rst -o devtools/overview.rst

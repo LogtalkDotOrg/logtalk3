@@ -315,16 +315,17 @@ found in the ``_build/html`` directory by default:
 
    $ open _build/html/index.html
 
-On Windows operating-systems, the JScript scripts can be used. For example,
-assuming that we want to generate HTML documentation, we could run in a
-``cmd.exe`` window:
+For Windows operating-systems, PowerShell (recommended) and JScript (legacy)
+scripts are available. For example, assuming that we want to generate HTML
+documentation, we could run in a PowerShell window:
 
 .. code-block:: text
 
    cd xml_docs
-   cscript "%LOGTALKHOME%\tools\lgtdoc\xml\lgt2html.js" /p:saxon
+   lgt2html.ps1 -p saxon
 
-Or simply use the ``.bat`` script alternatives:
+When using the legacy JScript scripts, you can also use the ``.bat`` script
+alternatives:
 
 .. code-block:: text
 
