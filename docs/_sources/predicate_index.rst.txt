@@ -3330,6 +3330,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`html <html/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
 
+``genint/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genint_core <genint_core/0::genint/2>`
+
 ``gensym/2``
 ------------
 
@@ -6990,6 +7000,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`flags <flags/0::reset_flags/1>`
+
+``reset_genint/0``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genint_core <genint_core/0::reset_genint/0>`
+
+``reset_genint/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genint_core <genint_core/0::reset_genint/1>`
 
 ``reset_gensym/0``
 ------------------

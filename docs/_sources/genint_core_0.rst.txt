@@ -1,0 +1,140 @@
+.. index:: genint_core
+.. _genint_core/0:
+
+.. rst-class:: right
+
+**category**
+
+``genint_core``
+===============
+
+Predicates for generating increasing non-negative integers. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-07-21
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="reset_genint/0"> </div>
+
+.. index:: reset_genint/0
+.. _genint_core/0::reset_genint/0:
+
+``reset_genint/0``
+^^^^^^^^^^^^^^^^^^
+
+Resets all counters.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Mode and number of proofs:**
+|    ``reset_genint`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="reset_genint/1"> </div>
+
+.. index:: reset_genint/1
+.. _genint_core/0::reset_genint/1:
+
+``reset_genint/1``
+^^^^^^^^^^^^^^^^^^
+
+Resets the given counter.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``reset_genint(Counter)``
+| **Mode and number of proofs:**
+|    ``reset_genint(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="genint/2"> </div>
+
+.. index:: genint/2
+.. _genint_core/0::genint/2:
+
+``genint/2``
+^^^^^^^^^^^^
+
+Returns the next integer for a given counter.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``genint(Counter,Integer)``
+| **Mode and number of proofs:**
+|    ``genint(+atom,-non_negative_integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="counter_/2"> </div>
+
+.. index:: counter_/2
+.. _genint_core/0::counter_/2:
+
+``counter_/2``
+^^^^^^^^^^^^^^
+
+Table of current state of counters.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``counter_(Counter,Latest)``
+| **Mode and number of proofs:**
+|    ``counter_(?atom,?non_negative_integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

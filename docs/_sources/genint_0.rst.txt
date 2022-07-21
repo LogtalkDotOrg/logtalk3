@@ -1,0 +1,53 @@
+.. index:: genint
+.. _genint/0:
+
+.. rst-class:: right
+
+**object**
+
+``genint``
+==========
+
+Global object for generating increasing non-negative integers for named counters. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-07-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`genint_core <genint_core/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`genint_core/0::genint/2`  :ref:`genint_core/0::reset_genint/0`  :ref:`genint_core/0::reset_genint/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

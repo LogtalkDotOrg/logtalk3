@@ -57,6 +57,7 @@
 		term_io(loader),
 		timeout(loader),
 		gensym(loader),
+		genint(loader),
 		git(loader),
 		grammars(loader),
 		csv(loader),

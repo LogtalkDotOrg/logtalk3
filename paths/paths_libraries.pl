@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on February 17, 2022
+%  Last updated on July 21, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -50,6 +50,7 @@ logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_p
 logtalk_library_path(expecteds, library('expecteds/')).
 logtalk_library_path(format, library('format/')).
 logtalk_library_path(gensym, library('gensym/')).
+logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(git, library('git/')).
 logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(heaps, library('heaps/')).

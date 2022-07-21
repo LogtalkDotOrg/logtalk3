@@ -115,6 +115,9 @@ lines in CSV files.
 
 * CHANGED: The `statistics` library to depend on the `types` library.
 
+* ADDED: Library `genint` supporting application global and object local named
+generators for increasing non-negative integers.
+
 * ADDED: Predicates `min_max/3` and `modes/2` to the `types` and `statistics`
 libraries.
 

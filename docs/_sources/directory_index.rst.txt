@@ -276,6 +276,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    format <format_0>
 
+``library/genint/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   genint <genint_0>
+   genint_core <genint_core_0>
+
 ``library/gensym/``
 -------------------
 
