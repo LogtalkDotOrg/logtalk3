@@ -20,5 +20,5 @@
 
 
 :- initialization((
-	logtalk_load(gensym, [optimize(on)])
+	logtalk_load([gensym_core, gensym], [optimize(on)])
 )).

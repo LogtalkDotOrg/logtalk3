@@ -135,6 +135,9 @@ library.
 
 * IMPROVED: Tests for the `csv` library.
 
+* UPDATED: The `gensym` library to support both application global and object
+local generators.
+
 * FIXED: The `arbitrary` category `shrink/3` predicate for number and compound
 types to fail instead of throwing an exception when the value to be shrink is
 not of the expected type.

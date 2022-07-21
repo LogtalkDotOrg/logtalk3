@@ -23,48 +23,74 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-05-21,
+		date is 2022-07-21,
 		comment is 'Unit tests for the "gensym" library.'
 	]).
 
+	cover(gensym_core).
 	cover(gensym).
+
+	setup :-
+		create_object(gs1, [imports(gensym_core)], [], []),
+		create_object(gs2, [imports(gensym_core)], [], []).
+
+	cleanup :-
+		abolish_object(gs1),
+		abolish_object(gs2).
+
+	:- uses(gensym, [
+		gensym/2, reset_gensym/1, reset_gensym/0
+	]).
 
 	% gensym/2
 
 	test(gensym_gensym_2_01, deterministic(A1 \== A2)) :-
-		gensym::gensym(a, A1),
-		gensym::gensym(a, A2),
+		gensym(a, A1),
+		gensym(a, A2),
 		ground(A1), ground(A2).
 
 	test(gensym_gensym_2_02, deterministic(Prefix == a)) :-
-		gensym::gensym(a, A),
+		gensym(a, A),
 		sub_atom(A, 0, 1, _, Prefix).
 
 	% reset_gensym/0
 
 	test(gensym_reset_gensym_0_01) :-
-		gensym::reset_gensym.
+		reset_gensym.
 
 	test(gensym_reset_gensym_0_02, deterministic(A1 == A2)) :-
-		gensym::gensym(a, A1),
-		gensym::reset_gensym,
-		gensym::gensym(a, A2).
+		gensym(a, A1),
+		reset_gensym,
+		gensym(a, A2).
 
 	% reset_gensym/1
 
 	test(gensym_reset_gensym_1_01) :-
-		gensym::reset_gensym(a).
+		reset_gensym(a).
 
 	test(gensym_reset_gensym_1_02, deterministic(A1 == A2)) :-
-		gensym::gensym(a, A1),
-		gensym::reset_gensym(a),
-		gensym::gensym(a, A2).
+		gensym(a, A1),
+		reset_gensym(a),
+		gensym(a, A2).
 
 	test(gensym_reset_gensym_1_03, deterministic(A1 \== A2)) :-
-		gensym::gensym(a, A1),
-		gensym::reset_gensym(b),
-		gensym::gensym(a, A2).
+		gensym(a, A1),
+		reset_gensym(b),
+		gensym(a, A2).
+
+	% multiple gensym objects
+
+	test(gensym_multiple_same_counter, deterministic(A1 == A2)) :-
+		gs1::gensym(a, A1),
+		gs2::gensym(a, A2).
+
+	test(gensym_multiple_reset_one, deterministic((B1 == B2, B2 == B3, B3 \== B4))) :-
+		gs1::gensym(b, B1),
+		gs2::gensym(b, B2),
+		gs1::reset_gensym,
+		gs1::gensym(b, B3),
+		gs2::gensym(b, B4).
 
 :- end_object.

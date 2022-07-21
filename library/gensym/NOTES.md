@@ -47,3 +47,14 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(gensym(tester)).
+
+
+Usage
+-----
+
+The `gensym_core` category implements the library predicates. This category
+is imported by the default `gensym` object to provide application global
+generators. To make the generators local and thus minimize the potential
+for generator name clashes, the category can be imported by one of more
+application objects. Use protected or private import to restrict the scope
+of the library predicates.

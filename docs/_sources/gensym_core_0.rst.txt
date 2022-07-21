@@ -1,0 +1,140 @@
+.. index:: gensym_core
+.. _gensym_core/0:
+
+.. rst-class:: right
+
+**category**
+
+``gensym_core``
+===============
+
+Predicates for generating unique atoms. Protocol based on the ``gensym`` module of SWI-Prolog. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
+
+| **Author:** Paulo Moura
+| **Version:** 2:0:0
+| **Date:** 2022-07-21
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="reset_gensym/0"> </div>
+
+.. index:: reset_gensym/0
+.. _gensym_core/0::reset_gensym/0:
+
+``reset_gensym/0``
+^^^^^^^^^^^^^^^^^^
+
+Resets the generator counter for all bases.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Mode and number of proofs:**
+|    ``reset_gensym`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="reset_gensym/1"> </div>
+
+.. index:: reset_gensym/1
+.. _gensym_core/0::reset_gensym/1:
+
+``reset_gensym/1``
+^^^^^^^^^^^^^^^^^^
+
+Resets the generator counter for a given base.
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``reset_gensym(Base)``
+| **Mode and number of proofs:**
+|    ``reset_gensym(+atom)`` - ``one``
+
+
+------------
+
+.. raw:: html
+
+   <div id="gensym/2"> </div>
+
+.. index:: gensym/2
+.. _gensym_core/0::gensym/2:
+
+``gensym/2``
+^^^^^^^^^^^^
+
+Returns a new unique atom with a given base (prefix).
+
+| **Compilation flags:**
+|    ``static, synchronized``
+
+| **Template:**
+|    ``gensym(Base,Unique)``
+| **Mode and number of proofs:**
+|    ``gensym(+atom,-atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. raw:: html
+
+   <div id="base_/2"> </div>
+
+.. index:: base_/2
+.. _gensym_core/0::base_/2:
+
+``base_/2``
+^^^^^^^^^^^
+
+Table of generator bases and respective counters.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``base_(Base,Counter)``
+| **Mode and number of proofs:**
+|    ``base_(?atom,?integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

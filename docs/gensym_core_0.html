@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>git &mdash; Logtalk APIs v3.57.0-b08 documentation</title>
+  <title>gensym_core &mdash; Logtalk APIs v3.57.0-b08 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -30,8 +30,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="git_protocol" href="git_protocol_0.html" />
-    <link rel="prev" title="gensym_core" href="gensym_core_0.html" />
+    <link rel="next" title="git" href="git_0.html" />
+    <link rel="prev" title="gensym" href="gensym_0.html" />
    
 </head>
 
@@ -83,12 +83,12 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#flags"><span class="xref std std-ref">flags</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#format"><span class="xref std std-ref">format</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#genint"><span class="xref std std-ref">genint</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">git</a></li>
-<li class="toctree-l3"><a class="reference internal" href="git_protocol_0.html">git_protocol</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#gensym"><span class="xref std std-ref">gensym</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gensym_0.html">gensym</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gensym_core</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#git"><span class="xref std std-ref">git</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#grammars"><span class="xref std std-ref">grammars</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#heaps"><span class="xref std std-ref">heaps</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#help"><span class="xref std std-ref">help</span></a></li>
@@ -170,9 +170,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="library_index.html">Libraries</a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">git</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">gensym_core</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/git_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/gensym_core_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -180,29 +180,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="git-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="git">
-<h1><code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#git" title="Permalink to this heading"></a></h1>
-<p>Predicates for accessing a git project current branch and latest commit data.</p>
+  <p class="right" id="gensym-core-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="gensym-core">
+<h1><code class="docutils literal notranslate"><span class="pre">gensym_core</span></code><a class="headerlink" href="#gensym-core" title="Permalink to this heading"></a></h1>
+<p>Predicates for generating unique atoms. Protocol based on the <code class="docutils literal notranslate"><span class="pre">gensym</span></code> module of SWI-Prolog. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:0:2</div>
-<div class="line"><strong>Date:</strong> 2022-01-25</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2022-07-21</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
+<div class="line"><strong>Dependencies:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="git_protocol_0.html#git-protocol-0"><span class="std std-ref">git_protocol</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <div class="line-block">
@@ -214,29 +210,117 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="git_protocol_0.html#git-protocol-0-branch-2"><span class="std std-ref">branch/2</span></a>  <a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-author-2"><span class="std std-ref">commit_author/2</span></a>  <a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-date-2"><span class="std std-ref">commit_date/2</span></a>  <a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-hash-2"><span class="std std-ref">commit_hash/2</span></a>  <a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-hash-abbreviated-2"><span class="std std-ref">commit_hash_abbreviated/2</span></a>  <a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-log-3"><span class="std std-ref">commit_log/3</span></a>  <a class="reference internal" href="git_protocol_0.html#git-protocol-0-commit-message-2"><span class="std std-ref">commit_message/2</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#reset-gensym-0" id="id2"><code class="docutils literal notranslate"><span class="pre">reset_gensym/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reset-gensym-1" id="id3"><code class="docutils literal notranslate"><span class="pre">reset_gensym/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#gensym-2" id="id4"><code class="docutils literal notranslate"><span class="pre">gensym/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#base-2" id="id7"><code class="docutils literal notranslate"><span class="pre">base_/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<div id="reset_gensym/0"> </div><section id="reset-gensym-0">
+<span id="gensym-core-0-reset-gensym-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">reset_gensym/0</span></code></a><a class="headerlink" href="#reset-gensym-0" title="Permalink to this heading"></a></h3>
+<p>Resets the generator counter for all bases.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_gensym</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="reset_gensym/1"> </div></section>
+<section id="reset-gensym-1">
+<span id="gensym-core-0-reset-gensym-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">reset_gensym/1</span></code></a><a class="headerlink" href="#reset-gensym-1" title="Permalink to this heading"></a></h3>
+<p>Resets the generator counter for a given base.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_gensym(Base)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">reset_gensym(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+<div id="gensym/2"> </div></section>
+<section id="gensym-2">
+<span id="gensym-core-0-gensym-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">gensym/2</span></code></a><a class="headerlink" href="#gensym-2" title="Permalink to this heading"></a></h3>
+<p>Returns a new unique atom with a given base (prefix).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">synchronized</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">gensym(Base,Unique)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">gensym(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<p>(none)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<div id="base_/2"> </div><section id="base-2">
+<span id="gensym-core-0-base-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">base_/2</span></code></a><a class="headerlink" href="#base-2" title="Permalink to this heading"></a></h3>
+<p>Table of generator bases and respective counters.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">base_(Base,Counter)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">base_(?atom,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
 <p>(none)</p>
@@ -247,8 +331,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gensym_core_0.html" class="btn btn-neutral float-left" title="gensym_core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="git_protocol_0.html" class="btn btn-neutral float-right" title="git_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gensym_0.html" class="btn btn-neutral float-left" title="gensym" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="git_0.html" class="btn btn-neutral float-right" title="git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
