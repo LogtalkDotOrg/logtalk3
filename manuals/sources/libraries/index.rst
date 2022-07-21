@@ -45,6 +45,7 @@ directory in the ``NOTES.md`` file.
    expecteds
    format
    gensym
+   genint
    git
    grammars
    heaps
