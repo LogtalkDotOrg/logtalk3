@@ -133,6 +133,8 @@ library.
 * ADDED: Parametric objects `write_to_file_hook/1-2` to the `hook_objects`
 library.
 
+* ADDED: Shortcut `tsv` object to the `csv` library for parsing TSV files.
+
 * IMPROVED: Tests for the `csv` library.
 
 * UPDATED: The `gensym` library to support both application global and object

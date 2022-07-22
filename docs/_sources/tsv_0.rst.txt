@@ -1,0 +1,53 @@
+.. index:: tsv
+.. _tsv/0:
+
+.. rst-class:: right
+
+**object**
+
+``tsv``
+=======
+
+TSV files reading and writing predicates using the options Header - ``keep``, Separator - ``tab``, and IgnoreQuotes - ``false``.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-07-22
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`csv(keep,tab,false) <csv/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`csv_protocol/0::guess_arity/2`  :ref:`csv_protocol/0::guess_separator/2`  :ref:`csv_protocol/0::read_file/2`  :ref:`csv_protocol/0::read_file/3`  :ref:`csv_protocol/0::read_file_by_line/2`  :ref:`csv_protocol/0::read_file_by_line/3`  :ref:`csv_protocol/0::read_stream/2`  :ref:`csv_protocol/0::read_stream/3`  :ref:`csv_protocol/0::read_stream_by_line/2`  :ref:`csv_protocol/0::read_stream_by_line/3`  :ref:`csv_protocol/0::write_file/3`  :ref:`csv_protocol/0::write_stream/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

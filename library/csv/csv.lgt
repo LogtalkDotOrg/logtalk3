@@ -528,3 +528,16 @@
 	]).
 
 :- end_object.
+
+
+:- object(tsv,
+	extends(csv(keep, tab, false))).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2022-07-22,
+		comment is 'TSV files reading and writing predicates using the options Header - ``keep``, Separator - ``tab``, and IgnoreQuotes - ``false``.'
+	]).
+
+:- end_object.
