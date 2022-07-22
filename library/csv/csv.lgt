@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2022-06-24,
+		date is 2022-07-22,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
@@ -88,9 +88,9 @@
 		;	N = 1
 		),
 		catch(
-				read_assert_line_by_line(Stream, Object, Predicate, N),
-				Error,
-				(close(Stream), throw(Error))
+			read_assert_line_by_line(Stream, Object, Predicate, N),
+			Error,
+			(close(Stream), throw(Error))
 		),
 		close(Stream),
 		dbg('All the file has been read into memory'-File).
@@ -120,9 +120,9 @@
 		;	N = 1
 		),
 		catch(
-				read_line_by_line(Stream, Rows, N),
-				Error,
-				(close(Stream), throw(Error))
+			read_line_by_line(Stream, Rows, N),
+			Error,
+			(close(Stream), throw(Error))
 		),
 		close(Stream),
 		dbg('All the file has been read'-[File,Rows]).
@@ -231,7 +231,7 @@
 	record([''], true) -->
 		[], {dbg(field-'')}.
 
-	separator(tab) --> [0'\t], tabs.
+	separator(tab) --> [0'\t], spaces.
 	separator(comma) --> [0',], spaces.
 	separator(semicolon) --> [0';], spaces.
 	separator(colon) --> [0':], spaces.

@@ -142,6 +142,9 @@ local generators.
 types to fail instead of throwing an exception when the value to be shrink is
 not of the expected type.
 
+* FIXED: Bug in the `csv` library preventing parsing of TSV files in the
+presence of empty fields.
+
 Tools
 -----
 
