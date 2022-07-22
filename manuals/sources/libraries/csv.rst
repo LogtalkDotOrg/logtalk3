@@ -97,7 +97,7 @@ object predicate. For example:
 ::
 
    | ?- csv(keep, comma, true)::read_file('test_files/crlf_ending.csv', user, p/3).
-   ** yes
+   yes
 
    | ?-  p(A,B,C).
 
@@ -115,7 +115,7 @@ written to a file or stream. For example:
 ::
 
    | ?- csv(keep, comma, true)::write_file('output.csv', user, p/3).
-   ** yes
+   yes
 
 leaving the content just as the original file thanks to the use of
 ``true`` for the ``IgnoreQuotes`` option:
@@ -130,7 +130,7 @@ Otherwise:
 ::
 
    | ?- csv(keep, comma, false)::write_file('output.csv', user, p/3).
-   ** yes
+   yes
 
 results in the following file content:
 

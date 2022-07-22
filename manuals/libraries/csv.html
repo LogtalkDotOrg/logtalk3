@@ -235,7 +235,7 @@ of rows:</p>
 <p>Alternatively, The CSV data can be saved using a public and dynamic
 object predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>)<span class="o">::</span>read_file(<span class="s">&#39;test_files/crlf_ending.csv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
-<span class="o">**</span> yes
+yes
 
 | <span class="o">?-</span>  p(<span class="nv">A</span>,<span class="nv">B</span>,<span class="nv">C</span>).
 
@@ -251,7 +251,7 @@ object predicate. For example:</p>
 <p>Given a predicate representing a table, the predicate data can be
 written to a file or stream. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">true</span>)<span class="o">::</span>write_file(<span class="s">&#39;output.csv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
-<span class="o">**</span> yes
+yes
 </pre></div>
 </div>
 <p>leaving the content just as the original file thanks to the use of
@@ -262,7 +262,7 @@ zzz,yyy,xxx
 </div>
 <p>Otherwise:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> csv(keep, comma, <span class="k">false</span>)<span class="o">::</span>write_file(<span class="s">&#39;output.csv&#39;</span>, user, p<span class="o">/</span><span class="m">3</span>).
-<span class="o">**</span> yes
+yes
 </pre></div>
 </div>
 <p>results in the following file content:</p>
