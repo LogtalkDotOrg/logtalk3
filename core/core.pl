@@ -22827,10 +22827,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_decompile_predicate_indicator'(Prefix, TFunctor/TArity, Functor/Arity) :-
 	atom_concat(Prefix, Predicate, TFunctor),
-	% locate the rightmost #
+	% locate the rightmost # by looking for occurences left-to-right and
+	% backtracking until the rest of the atom no longer contains a #
 	sub_atom(Predicate, Before, 1, _, '#'),
-	Lines is Before + 1,
-	sub_atom(Predicate, Lines, _, 0, Rest),
+	Parsed is Before + 1,
+	sub_atom(Predicate, Parsed, _, 0, Rest),
 	\+ sub_atom(Rest, _, 1, _, '#'),
 	sub_atom(Predicate, 0, Before, _, Functor),
 	% subtract execution context argument
