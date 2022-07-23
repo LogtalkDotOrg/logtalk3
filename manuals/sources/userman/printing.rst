@@ -108,9 +108,10 @@ list of message kinds is supported by default:
 ``error`` and ``error(Group)``
    error messages (generated e.g. by the compiler)
 ``debug, debug(Group)``
-   debugging messages (by default, only printed when the
-   :ref:`debug <flag_debug>` flag is turned on; these messages are suppressed
-   by the compiler when the :ref:`optimize <flag_optimize>` flag is turned on)
+   debugging messages (by default, only printed when the :ref:`debug <flag_debug>`
+   flag is turned on; the ``print_message/3`` goals for these messages are
+   suppressed by the compiler when the :ref:`optimize <flag_optimize>` flag is
+   turned on)
 ``question, question(Group)``
    questions to a user
 
