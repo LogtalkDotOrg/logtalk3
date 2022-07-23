@@ -93,6 +93,8 @@ Documentation
 * IMPROVED: Handbook documentation of the `if/1`, `elif/1`, `mode/2`, and
 `uses/2` directives.
 
+* IMPROVED: Handbook documentation of the `logtalk::print_message/3` predicate.
+
 * IMPROVED: Handbook section on Prolog integration and migration.
 
 * IMPROVED: Handbook section on compiling Prolog modules as objects.

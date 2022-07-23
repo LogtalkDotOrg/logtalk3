@@ -155,6 +155,12 @@ and by calling the
 <a class="reference internal" href="message_hook_4.html#methods-message-hook-4"><span class="std std-ref">logtalk::message_hook(Message, Kind, Component, Tokens)</span></a>
 hook predicate. If this predicate succeeds, the <code class="docutils literal notranslate"><span class="pre">print_message/3</span></code>
 predicate assumes that the message have been successfully printed.</p>
+<p>By default: messages of kind <code class="docutils literal notranslate"><span class="pre">debug</span></code> or <code class="docutils literal notranslate"><span class="pre">debug(_)</span></code> are only printed when
+the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on; messages of kind <code class="docutils literal notranslate"><span class="pre">banner</span></code>, <code class="docutils literal notranslate"><span class="pre">comment</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">comment(_)</span></code> are only printed when the <code class="docutils literal notranslate"><span class="pre">report</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">on</span></code>;
+messages of kind <code class="docutils literal notranslate"><span class="pre">warning</span></code> and <code class="docutils literal notranslate"><span class="pre">warning(_)</span></code> are not printed when the
+<code class="docutils literal notranslate"><span class="pre">report</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">off</span></code>; messages of kind <code class="docutils literal notranslate"><span class="pre">silent</span></code> and <code class="docutils literal notranslate"><span class="pre">silent()</span></code>
+are not printed (but can be intercepted).</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>

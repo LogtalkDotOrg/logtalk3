@@ -45,6 +45,13 @@ and by calling the
 hook predicate. If this predicate succeeds, the ``print_message/3``
 predicate assumes that the message have been successfully printed.
 
+By default: messages of kind ``debug`` or ``debug(_)`` are only printed when
+the ``debug`` flag is turned on; messages of kind ``banner``, ``comment``, or
+``comment(_)`` are only printed when the ``report`` flag is set to ``on``;
+messages of kind ``warning`` and ``warning(_)`` are not printed when the
+``report`` flag is set to ``off``; messages of kind ``silent`` and ``silent()``
+are not printed (but can be intercepted).
+
 Modes and number of proofs
 --------------------------
 
