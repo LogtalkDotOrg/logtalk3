@@ -904,8 +904,8 @@ be defined as:
    ignore(Goal) :-
       (Goal -> true; true).
 
-The ``0`` in the meta-predicate template tells us that the argument will be
-called as-is.
+The ``0`` in the meta-predicate template tells us that the meta-argument is a
+goal that will be called by the meta-predicate.
 
 Some meta-predicates have meta-arguments which are not goals but
 :term:`closures <closure>`. Logtalk supports the definition of meta-predicates

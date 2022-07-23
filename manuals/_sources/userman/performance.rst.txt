@@ -25,19 +25,21 @@ Logtalk is implemented as a *trans-compiler* to Prolog. When compiling
 predicates, it preserves in the generated Prolog code all cases of
 first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
-how to write efficient Logtalk predicates.
+the basics of how to write efficient Logtalk predicates.
 
-The Logtalk compiler appends a hidden execution-context argument to all
-entity predicate clauses. In the common case where a predicate makes no
-calls to the execution-context predicates and message-sending control
-constructs and is neither a meta-predicate nor a coinductive predicate,
-the execution-context argument is simply passed between goals. In this
-case, with most backend Prolog virtual machines, the cost of this extra
-argument is null or negligible. When the execution-context needs to be
-accessed (e.g. to fetch the value of *self* for a :ref:`control_send_to_self_1`
-call) there may be a small inherent overhead due to the access to the
-individual arguments of the compound term used to represent the
-execution-context.
+The Logtalk compiler appends a single argument to the compiled form of
+all entity predicate clauses. This hidden argument is used to pass the
+:term:`execution-context <predicate execution context>` when proving a
+query. In the common case where a predicate makes no calls to the
+:ref:`execution-context predicates <context_methods>` and
+:ref:`message-sending control constructs <message_sending>` and
+is neither a meta-predicate nor a coinductive predicate, the
+execution-context is simply passed between goals. In this case, with most
+backend Prolog virtual machines, the cost of this extra argument is null
+or negligible. When the execution-context needs to be accessed (e.g. to
+fetch the value of :term:`self` for a :ref:`control_send_to_self_1` call)
+there may be a small inherent overhead due to the access to the individual
+arguments of the compound term used to represent the execution-context.
 
 Source code compilation modes
 -----------------------------

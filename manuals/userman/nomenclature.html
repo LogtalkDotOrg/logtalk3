@@ -144,9 +144,9 @@ translates to a concept of class that is different in key aspects from the
 concept of class in e.g. Java or C++. Other terms that can have different
 meanings are <em>delegation</em> and <em>forwarding</em>. There are also cases where the
 same concept is found under different names in some languages (e.g. <em>self</em>
-and <em>this</em>) but that can also mean different concepts in other languages.
-Always be aware of these differences and be cautious with assumptions carried
-from other programming languages.</p>
+and <em>this</em>) but that can also mean different concepts in Logtalk and other
+languages. Always be aware of these differences and be cautious with assumptions
+carried from other programming languages.</p>
 <p>In this section, we map nomenclatures from Prolog and popular OOP languages
 such as Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The
 Logtalk distribution includes several examples of how to implement common
@@ -174,11 +174,11 @@ successfully compiled and loaded.</p>
 </dd>
 <dt><strong>calling a predicate</strong></dt><dd><p>Sending a <a class="reference internal" href="../glossary.html#term-message"><span class="xref std std-term">message</span></a> to an object is similar to <em>calling a goal</em> with
 the difference that the actual predicate that is called is determined not
-just by the message <em>term</em> but also by the object receiving the message.
-This is also different from calling a Prolog module predicate: a message
-may result e.g. in calling a predicate <a class="reference internal" href="../glossary.html#term-inheritance"><span class="xref std std-term">inherited</span></a> by
-the object but calling a module predicate requires the predicate to exist
-in (or be reexported by) the module.</p>
+just by the message <em>term</em> but also by the object receiving the message and
+possibly its ancestors. This is also different from calling a Prolog module
+predicate: a message may result e.g. in calling a predicate
+<a class="reference internal" href="../glossary.html#term-inheritance"><span class="xref std std-term">inherited</span></a> by the object but calling a module predicate
+requires the predicate to exist in (or be reexported by) the module.</p>
 </dd>
 <dt><strong>closed world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed world assumption semantics: messages or calls
 for declared but undefined predicates fail. Messages or calls for unknown

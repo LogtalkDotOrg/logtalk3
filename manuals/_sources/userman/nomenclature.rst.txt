@@ -33,9 +33,9 @@ translates to a concept of class that is different in key aspects from the
 concept of class in e.g. Java or C++. Other terms that can have different
 meanings are *delegation* and *forwarding*. There are also cases where the
 same concept is found under different names in some languages (e.g. *self*
-and *this*) but that can also mean different concepts in other languages.
-Always be aware of these differences and be cautious with assumptions carried
-from other programming languages.
+and *this*) but that can also mean different concepts in Logtalk and other
+languages. Always be aware of these differences and be cautious with assumptions
+carried from other programming languages.
 
 In this section, we map nomenclatures from Prolog and popular OOP languages
 such as Smalltalk, C++, Java, and Python to the Logtalk nomenclature. The
@@ -70,11 +70,11 @@ found elsewhere in this Handbook.
 **calling a predicate**
    Sending a :term:`message` to an object is similar to *calling a goal* with
    the difference that the actual predicate that is called is determined not
-   just by the message *term* but also by the object receiving the message.
-   This is also different from calling a Prolog module predicate: a message
-   may result e.g. in calling a predicate :term:`inherited <inheritance>` by
-   the object but calling a module predicate requires the predicate to exist
-   in (or be reexported by) the module.
+   just by the message *term* but also by the object receiving the message and
+   possibly its ancestors. This is also different from calling a Prolog module
+   predicate: a message may result e.g. in calling a predicate
+   :term:`inherited <inheritance>` by the object but calling a module predicate
+   requires the predicate to exist in (or be reexported by) the module.
 
 **closed world assumption semantics**
    Logtalk provides clear closed world assumption semantics: messages or calls

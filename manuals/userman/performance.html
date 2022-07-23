@@ -143,18 +143,20 @@
 predicates, it preserves in the generated Prolog code all cases of
 first-argument indexing and tail-recursion. In practice, this mean that
 if you know how to write efficient Prolog predicates, you already know
-how to write efficient Logtalk predicates.</p>
-<p>The Logtalk compiler appends a hidden execution-context argument to all
-entity predicate clauses. In the common case where a predicate makes no
-calls to the execution-context predicates and message-sending control
-constructs and is neither a meta-predicate nor a coinductive predicate,
-the execution-context argument is simply passed between goals. In this
-case, with most backend Prolog virtual machines, the cost of this extra
-argument is null or negligible. When the execution-context needs to be
-accessed (e.g. to fetch the value of <em>self</em> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>
-call) there may be a small inherent overhead due to the access to the
-individual arguments of the compound term used to represent the
-execution-context.</p>
+the basics of how to write efficient Logtalk predicates.</p>
+<p>The Logtalk compiler appends a single argument to the compiled form of
+all entity predicate clauses. This hidden argument is used to pass the
+<a class="reference internal" href="../glossary.html#term-predicate-execution-context"><span class="xref std std-term">execution-context</span></a> when proving a
+query. In the common case where a predicate makes no calls to the
+<a class="reference internal" href="../refman/methods/context_methods.html#context-methods"><span class="std std-ref">execution-context predicates</span></a> and
+<a class="reference internal" href="../refman/control/message_sending.html#message-sending"><span class="std std-ref">message-sending control constructs</span></a> and
+is neither a meta-predicate nor a coinductive predicate, the
+execution-context is simply passed between goals. In this case, with most
+backend Prolog virtual machines, the cost of this extra argument is null
+or negligible. When the execution-context needs to be accessed (e.g. to
+fetch the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> for a <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> call)
+there may be a small inherent overhead due to the access to the individual
+arguments of the compound term used to represent the execution-context.</p>
 <section id="source-code-compilation-modes">
 <h2>Source code compilation modes<a class="headerlink" href="#source-code-compilation-modes" title="Permalink to this heading"></a></h2>
 <p>Source code can be compiled in <em>optimal</em>, <em>normal</em>, or <em>debug</em> mode,
