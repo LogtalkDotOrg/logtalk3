@@ -30,6 +30,7 @@ The Logtalk Handbook
    devtools/index
    libraries/index
    ports/index
+   contributions/index
    glossary
    bibliography
    genindex

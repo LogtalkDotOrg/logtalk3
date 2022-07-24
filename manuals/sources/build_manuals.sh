@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on July 21, 2022
+##   Last updated on July 24, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -39,6 +39,7 @@ rm -rf ../userman
 rm -rf ../devtools
 rm -rf ../libraries
 rm -rf ../ports
+rm -rf ../contributions
 make clean
 
 sed '1,19d' ../../tools/NOTES.md | pandoc -f gfm -t rst -o devtools/overview.rst
@@ -136,7 +137,18 @@ sed '1,22d' ../../ports/toychr/NOTES.md | pandoc -f gfm -t rst -o ports/toychr.r
 
 for file in ports/*.rst; do
 	base="${file##*/}"
-	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] && [ "$base" != "core.rst" ] ; then
+	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] ; then
+		name="${base%.*}"
+		echo ".. _library_$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
+	fi
+done
+rm -f temp0
+
+sed '1,19d' ../../contributions/iso8601/NOTES.md | pandoc -f gfm -t rst -o contributions/iso8601.rst
+
+for file in contributions/*.rst; do
+	base="${file##*/}"
+	if [ "$base" != "index.rst" ] && [ "$base" != "overview.rst" ] ; then
 		name="${base%.*}"
 		echo ".. _library_$name:" > temp0 && echo >> temp0 && cat temp0 "$file" > temp1 && mv temp1 "$file"
 	fi
@@ -148,6 +160,7 @@ make latexpdf
 make epub
 make info
 
+sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/contributions/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/devtools/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/faq/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/libraries/index.html
