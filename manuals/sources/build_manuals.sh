@@ -145,6 +145,7 @@ done
 rm -f temp0
 
 sed '1,19d' ../../contributions/iso8601/NOTES.md | pandoc -f gfm -t rst -o contributions/iso8601.rst
+cat ../../contributions/pddl_parser/README.txt | pandoc -f gfm -t rst -o contributions/pddl_parser.rst
 
 for file in contributions/*.rst; do
 	base="${file##*/}"
