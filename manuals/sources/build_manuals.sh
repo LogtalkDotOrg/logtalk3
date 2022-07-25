@@ -144,6 +144,7 @@ for file in ports/*.rst; do
 done
 rm -f temp0
 
+cat ../../contributions/flags/NOTES.md | pandoc -f gfm -t rst -o contributions/flags.rst
 sed '1,19d' ../../contributions/iso8601/NOTES.md | pandoc -f gfm -t rst -o contributions/iso8601.rst
 cat ../../contributions/pddl_parser/README.txt | pandoc -f gfm -t rst -o contributions/pddl_parser.rst
 cat ../../contributions/verdi_neruda/README.txt | pandoc -f gfm -t rst -o contributions/verdi_neruda.rst

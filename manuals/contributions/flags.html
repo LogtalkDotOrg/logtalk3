@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pddl_parser &mdash; The Logtalk Handbook v3.57.0-b09 documentation</title>
+  <title>flags &mdash; The Logtalk Handbook v3.57.0-b09 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -30,8 +30,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="verdi_neruda" href="verdi_neruda.html" />
-    <link rel="prev" title="iso8601" href="iso8601.html" />
+    <link rel="next" title="iso8601" href="iso8601.html" />
+    <link rel="prev" title="Contributions" href="index.html" />
    
 </head>
 
@@ -65,14 +65,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributions</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="flags.html"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="iso8601.html"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">flags</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="iso8601.html"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pddl_parser.html"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="verdi_neruda.html"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="xml_parser.html"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
 </ul>
@@ -104,9 +104,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="index.html">Contributions</a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">flags</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/contributions/pddl_parser.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/contributions/flags.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -114,52 +114,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pddl-parser">
-<span id="library-pddl-parser"></span><h1><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code><a class="headerlink" href="#pddl-parser" title="Permalink to this heading"></a></h1>
+  <section id="flags">
+<span id="library-flags"></span><h1><code class="docutils literal notranslate"><span class="pre">flags</span></code><a class="headerlink" href="#flags" title="Permalink to this heading"></a></h1>
+<p>Flags was developed at Katholieke Universiteit Leuven</p>
 <div class="line-block">
-<div class="line">PDDL 3.0 parser</div>
-<div class="line">Release 1.0</div>
+<div class="line">Copyright 2010</div>
+<div class="line">Katholieke Universiteit Leuven</div>
 </div>
-<p>Copyright (c) 2011 Robert Sasak. All Rights Reserved. This is free
-software. You can redistribute it and/or modify it under the terms of
-the “Artistic License 2.0” as published by The Perl Foundation. Consult
-the “LICENSE.txt” file for details.</p>
-<p>This PDDL 3.0 file parser converts PDDL files to Logtalk/Prolog friendly
-syntax. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PDDL</span>         <span class="nv">Prolog</span>
-(on <span class="o">?</span>x <span class="o">?</span>y)   on(<span class="o">?</span>x, <span class="o">?</span>y)
-</pre></div>
+<p>License: The Artistic License 2.0</p>
+<div class="line-block">
+<div class="line">Contributions to this file:</div>
+<div class="line">Author: Theofrastos Mantadelis</div>
+<div class="line">Suggestions: Paulo Moura</div>
+<div class="line">Version: 1</div>
+<div class="line">Date: 27/11/2010</div>
 </div>
-<p>Syntax sugar: op(200, fy, ?).</p>
-<p>For whole example check the “pddl.lgt” file for usage and example
-output.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
-<a class="reference external" href="../../docs/library_index.html#pddl_parser">../../docs/library_index.html#pddl_parser</a>
+<a class="reference external" href="../../docs/library_index.html#flags">../../docs/library_index.html#flags</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(pddl_parser(loader)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(flags(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
-<p>The provided unit tests are based on a collection of problemset files
-from International Planning Competition 2008. In order to run all unit
-tests from the parser’s directory type:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(tester).
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(flags(tester)).
 </pre></div>
 </div>
-<p>Or from any directory by typing:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(pddl_parser(tester)).
-</pre></div>
-</div>
-<p>Some of the unit tests fail in some Prolog compilers due to limitations
-to the maximum arity of a term.</p>
 </section>
 </section>
 
@@ -167,8 +155,8 @@ to the maximum arity of a term.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="iso8601.html" class="btn btn-neutral float-left" title="iso8601" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="verdi_neruda.html" class="btn btn-neutral float-right" title="verdi_neruda" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Contributions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="iso8601.html" class="btn btn-neutral float-right" title="iso8601" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
