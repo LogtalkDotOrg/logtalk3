@@ -146,6 +146,7 @@ rm -f temp0
 
 sed '1,19d' ../../contributions/iso8601/NOTES.md | pandoc -f gfm -t rst -o contributions/iso8601.rst
 cat ../../contributions/pddl_parser/README.txt | pandoc -f gfm -t rst -o contributions/pddl_parser.rst
+cat ../../contributions/verdi_neruda/README.txt | pandoc -f gfm -t rst -o contributions/verdi_neruda.rst
 sed '1,19d' ../../contributions/xml_parser/NOTES.md | pandoc -f gfm -t rst -o contributions/xml_parser.rst
 
 for file in contributions/*.rst; do

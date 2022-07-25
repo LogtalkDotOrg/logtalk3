@@ -28,4 +28,5 @@ directory in the ``NOTES.md`` file.
 
    iso8601
    pddl_parser
+   verdi_neruda
    xml_parser

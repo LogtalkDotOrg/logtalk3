@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributions &mdash; The Logtalk Handbook v3.57.0-b09 documentation</title>
+  <title>xml_parser &mdash; The Logtalk Handbook v3.57.0-b09 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -30,8 +30,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="iso8601" href="iso8601.html" />
-    <link rel="prev" title="toychr" href="../ports/toychr.html" />
+    <link rel="next" title="Glossary" href="../glossary.html" />
+    <link rel="prev" title="verdi_neruda" href="verdi_neruda.html" />
    
 </head>
 
@@ -64,11 +64,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributions</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="iso8601.html"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="pddl_parser.html"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="verdi_neruda.html"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="xml_parser.html"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
@@ -78,7 +84,7 @@
 
     <p class="caption"><span class="caption-text">External Contents</span></p>
     <ul>
-    <li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">APIs</a></li>
     <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
     <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
     </ul>
@@ -97,9 +103,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Contributions</li>
+          <li><a href="index.html">Contributions</a> &raquo;</li>
+      <li><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/contributions/index.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/contributions/xml_parser.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -107,42 +114,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="contributions">
-<h1>Contributions<a class="headerlink" href="#contributions" title="Permalink to this heading"></a></h1>
-<p>The documentation of contribution can also be found in the contribution
-directory in the <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="iso8601.html"><code class="docutils literal notranslate"><span class="pre">iso8601</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="iso8601.html#api-documentation">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="iso8601.html#loading">Loading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="iso8601.html#testing">Testing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pddl_parser.html"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pddl_parser.html#api-documentation">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pddl_parser.html#loading">Loading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pddl_parser.html#testing">Testing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="verdi_neruda.html"><code class="docutils literal notranslate"><span class="pre">verdi_neruda</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="xml_parser.html"><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="xml_parser.html#api-documentation">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xml_parser.html#loading">Loading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xml_parser.html#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xml_parser.html#known-issues">Known issues</a></li>
-</ul>
-</li>
-</ul>
+  <section id="xml-parser">
+<span id="library-xml-parser"></span><h1><code class="docutils literal notranslate"><span class="pre">xml_parser</span></code><a class="headerlink" href="#xml-parser" title="Permalink to this heading"></a></h1>
+<p>This folder contains a Logtalk version of John Fletcher’s Prolog XML
+parser:</p>
+<p><a class="reference external" href="https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog">https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog</a></p>
+<p>For a detailed description of this XML parser, please see the comments
+in the <code class="docutils literal notranslate"><span class="pre">xml.lgt</span></code> source file or convert the automatically generated
+documentation to HTML or PDF. For sample queries, please see the
+<code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file.</p>
+<p>See the copyright and license information on the contributed files for
+usage and distributions conditions.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#xml_parser">../../docs/library_index.html#xml_parser</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(xml_parser(loader)).
+</pre></div>
 </div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(xml_parser(tester)).
+</pre></div>
+</div>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<p>When using GNU Prolog as the backend compiler, you may need to to use a
+larger default global stack size (see the GNU Prolog documentation on
+the environment variable <code class="docutils literal notranslate"><span class="pre">GLOBALSZ</span></code>).</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../ports/toychr.html" class="btn btn-neutral float-left" title="toychr" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="iso8601.html" class="btn btn-neutral float-right" title="iso8601" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="verdi_neruda.html" class="btn btn-neutral float-left" title="verdi_neruda" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
