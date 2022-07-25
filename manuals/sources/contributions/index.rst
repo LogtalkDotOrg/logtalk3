@@ -28,3 +28,4 @@ directory in the ``NOTES.md`` file.
 
    iso8601
    pddl_parser
+   xml_parser

@@ -2,15 +2,13 @@
 =============
 
 
-- - -
 PDDL 3.0 parser  
-Release 1.0 
+Release 1.0
 
 Copyright (c) 2011 Robert Sasak.            All Rights Reserved.
 This is free software.     You can redistribute it and/or modify
 it under the terms of the "Artistic License 2.0" as published by 
 The Perl Foundation. Consult the "LICENSE.txt" file for details.
-- - -
 
 
 This PDDL 3.0 file parser converts PDDL files to Logtalk/Prolog

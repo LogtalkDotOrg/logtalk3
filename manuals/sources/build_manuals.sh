@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on July 24, 2022
+##   Last updated on July 25, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -146,6 +146,7 @@ rm -f temp0
 
 sed '1,19d' ../../contributions/iso8601/NOTES.md | pandoc -f gfm -t rst -o contributions/iso8601.rst
 cat ../../contributions/pddl_parser/README.txt | pandoc -f gfm -t rst -o contributions/pddl_parser.rst
+sed '1,19d' ../../contributions/xml_parser/NOTES.md | pandoc -f gfm -t rst -o contributions/xml_parser.rst
 
 for file in contributions/*.rst; do
 	base="${file##*/}"
