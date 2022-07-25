@@ -88,7 +88,7 @@ Documentation
 
 * ADDED: A Handbook section on documenting predicate exceptions.
 
-* ADDED: A Handbook section on ports distributed with Logtalk.
+* ADDED: Handbook sections on ports and contributions distributed with Logtalk.
 
 * IMPROVED: Handbook documentation of the `if/1`, `elif/1`, `mode/2`, and
 `uses/2` directives.
@@ -148,6 +148,8 @@ not of the expected type.
 
 * FIXED: Bug in the `csv` library preventing parsing of TSV files in the
 presence of empty fields.
+
+* FIXED: Malformed TSV test file in the `csv` library.
 
 Tools
 -----
