@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.57.0 - July ??, 2022
+3.57.0 - July 26, 2022
 ======================
 
 Logtalk compiler and runtime
@@ -118,7 +118,7 @@ lines in CSV files.
 * CHANGED: The `statistics` library to depend on the `types` library.
 
 * ADDED: Library `genint` supporting application global and object local named
-generators for increasing non-negative integers.
+generators for increasing positive integers.
 
 * ADDED: Predicates `min_max/3` and `modes/2` to the `types` and `statistics`
 libraries.
