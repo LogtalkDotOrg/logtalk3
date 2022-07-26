@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2022-07-21,
+		date is 2022-07-26,
 		comment is 'Unit tests for the "genint" library.'
 	]).
 
@@ -46,12 +46,12 @@
 
 	% genint/2
 
-	test(genint_genint_2_01, deterministic(a(A0,A1,A2) == a(0,1,2))) :-
+	test(genint_genint_2_01, deterministic(a(A0,A1,A2) == a(1,2,3))) :-
 		genint(a, A0),
 		genint(a, A1),
 		genint(a, A2).
 
-	test(genint_genint_2_02, deterministic(B0 == 0)) :-
+	test(genint_genint_2_02, deterministic(B0 == 1)) :-
 		genint(b, B0).
 
 	% reset_genint/0
@@ -59,7 +59,7 @@
 	test(genint_reset_genint_0_01, deterministic) :-
 		reset_genint.
 
-	test(genint_reset_genint_0_02, deterministic(a(A1,A2) == a(0,0))) :-
+	test(genint_reset_genint_0_02, deterministic(a(A1,A2) == a(1,1))) :-
 		genint(a, A1),
 		reset_genint,
 		genint(a, A2).
@@ -69,23 +69,23 @@
 	test(genint_reset_genint_1_01) :-
 		reset_genint(a).
 
-	test(genint_reset_genint_1_02, deterministic(a(A1,A2) == a(0,0))) :-
+	test(genint_reset_genint_1_02, deterministic(a(A1,A2) == a(1,1))) :-
 		genint(a, A1),
 		reset_genint(a),
 		genint(a, A2).
 
-	test(genint_reset_genint_1_03, deterministic(d(D0,D1) == d(0,1))) :-
+	test(genint_reset_genint_1_03, deterministic(d(D0,D1) == d(1,2))) :-
 		genint(d, D0),
 		reset_genint(a),
 		genint(d, D1).
 
 	% multiple genint objects
 
-	test(genint_multiple_same_counter, deterministic(a(A1,A2) == a(0,0))) :-
+	test(genint_multiple_same_counter, deterministic(a(A1,A2) == a(1,1))) :-
 		gi1::genint(a, A1),
 		gi2::genint(a, A2).
 
-	test(genint_multiple_reset_one, deterministic(a(B1,B2,B3,B4) == a(0,0,0,1))) :-
+	test(genint_multiple_reset_one, deterministic(a(B1,B2,B3,B4) == a(1,1,1,2))) :-
 		gi1::genint(b, B1),
 		gi2::genint(b, B2),
 		gi1::reset_genint,

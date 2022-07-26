@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2022-07-21,
+		date is 2022-07-26,
 		comment is 'Predicates for generating increasing non-negative integers. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.'
 	]).
 
@@ -65,19 +65,16 @@
 	:- endif.
 
 	reset_genint :-
-		retract(counter_(Counter, _)),
-		asserta(counter_(Counter, -1)),
-		fail.
-	reset_genint.
+		retractall(counter_(_, _)).
 
 	reset_genint(Counter) :-
 		retractall(counter_(Counter, _)),
-		asserta(counter_(Counter, -1)).
+		asserta(counter_(Counter, 0)).
 
 	genint(Counter, Next) :-
 		(	retract(counter_(Counter, Latest)) ->
 			Next is Latest + 1
-		;	Next is 0
+		;	Next is 1
 		),
 		asserta(counter_(Counter, Next)).
 

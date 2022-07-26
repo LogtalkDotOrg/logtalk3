@@ -21,9 +21,9 @@ ________________________________________________________________________
 `genint`
 ========
 
-The `genint` library implements predicates for generating non-negative
-integers in increasing order. The public predicates are declared synchronized
-to prevent race conditions when using a backend Prolog compiler with
+The `genint` library implements predicates for generating positive integers
+in increasing order. The public predicates are declared synchronized to
+prevent race conditions when using a backend Prolog compiler with
 multi-threading support.
 
 
