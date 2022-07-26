@@ -22,9 +22,9 @@
 :- category(gensym_core).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2022-07-21,
+		date is 2022-07-26,
 		comment is 'Predicates for generating unique atoms. Protocol based on the ``gensym`` module of SWI-Prolog. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.'
 	]).
 
@@ -65,10 +65,7 @@
 	:- endif.
 
 	reset_gensym :-
-		retract(base_(Base, _)),
-		asserta(base_(Base, 0)),
-		fail.
-	reset_gensym.
+		retractall(base_(_, _)).
 
 	reset_gensym(Base) :-
 		retractall(base_(Base, _)),
