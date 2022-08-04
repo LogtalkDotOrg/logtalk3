@@ -40,7 +40,7 @@ yes
 
 % get the text contents of a "sample.doc" document:
 
-| ?- document::convert('sample.doc', Contents).
+| ?- document::contents('sample.doc', Contents).
 
 Contents = ...
 yes

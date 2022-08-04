@@ -25,6 +25,10 @@ RELEASE NOTES
 3.58.0 - September ??, 2022
 ===========================
 
+Examples
+--------
+
+* FIXED: Typo in the sample queries of the `document_converter` example.
 
 
 3.57.0 - July 26, 2022
