@@ -25,6 +25,12 @@ RELEASE NOTES
 3.58.0 - September ??, 2022
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Detect conflicts between `dynamic/1` directives and `uses/2` and
+`use_module/2` directives.
+
 Examples
 --------
 

@@ -10485,6 +10485,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
+	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor/Arity),
 	(	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
@@ -10497,6 +10498,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
+	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor//Arity),
 	(	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
@@ -11192,7 +11194,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			)
 		;	true
 		)
-	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+	;	'$lgt_check_predicate_name_conflict'(uses, Alias, AliasFunctor/Arity),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11241,7 +11243,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	functor(Pred, OriginalFunctor, ExtArity),
 		functor(PredAlias, AliasFunctor, ExtArity),
-		'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
+		'$lgt_check_predicate_name_conflict'(uses, PredAlias, AliasFunctor//Arity),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11287,7 +11289,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			)
 		;	true
 		)
-	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+	;	'$lgt_check_predicate_name_conflict'(uses, Alias, AliasFunctor/Arity),
 		% allow for runtime use by adding a local definition that calls the remote definition
 		% except when the remote is a built-in predicate in "user" with no alias being defined
 		% or a built-in method that would clash with the local definition
@@ -11455,7 +11457,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			)
 		;	true
 		)
-	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+	;	'$lgt_check_predicate_name_conflict'(use_module, Alias, AliasFunctor/Arity),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11504,7 +11506,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	functor(Pred, AliasFunctor, ExtArity),
 		functor(PredAlias, AliasFunctor, ExtArity),
-		'$lgt_check_predicate_name_conflict'(PredAlias, AliasFunctor//Arity),
+		'$lgt_check_predicate_name_conflict'(use_module, PredAlias, AliasFunctor//Arity),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11550,7 +11552,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			)
 		;	true
 		)
-	;	'$lgt_check_predicate_name_conflict'(Alias, AliasFunctor/Arity),
+	;	'$lgt_check_predicate_name_conflict'(use_module, Alias, AliasFunctor/Arity),
 		% allow for runtime use by adding a local definition that calls the remote definition
 		% except when the remote is a built-in predicate in "user" with no alias being defined
 		% or a built-in method that would clash with the local definition
@@ -11579,9 +11581,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % auxiliary predicate for checking predicate name conflicts between
-% predicates listed in uses/2 and use_module/2 directives
+% predicates listed in uses/2, use_module/2, and dynamic/1 directives
 
-'$lgt_check_predicate_name_conflict'(Alias, Culprit) :-
+'$lgt_check_predicate_name_conflict'(Directive, Alias, Culprit) :-
 	(	'$lgt_built_in_method'(Alias, _, _, _) ->
 		% clash with a built-in method, which cannot be redefined
 		throw(permission_error(modify, built_in_method, Culprit))
@@ -11597,6 +11599,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_use_module_non_terminal_'(Module, _, _, _, Alias, _, _, _) ->
 		% clash with an earlier use_module/2 directive non-terminal
 		throw(permission_error(modify, uses_module_non_terminal, ':'(Module,Culprit)))
+	;	Directive \== (dynamic), '$lgt_pp_dynamic_'(Alias, _, _) ->
+		% clash with an earlier dynamic/1 directive (but allow duplicated dynamic/1 directives)
+		throw(permission_error(modify, dynamic_predicate, Culprit))
 	;	true
 	).
 
