@@ -36,6 +36,11 @@ Examples
 
 * FIXED: Typo in the sample queries of the `document_converter` example.
 
+Tests
+-----
+
+* ADDED: Additional test for the `setof/3` predicate.
+
 
 3.57.0 - July 26, 2022
 ======================
