@@ -25,5 +25,6 @@ The documentation of each port can also be found in the port directory in the ``
 .. toctree::
    :maxdepth: 2
 
+   fcube
    metagol
    toychr

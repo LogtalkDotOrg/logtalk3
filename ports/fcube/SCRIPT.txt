@@ -1,0 +1,104 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  Copyright 2012 Mauro Ferrari      <mauro.ferrari@uninsubria.it>
+%  Copyright 2012 Camillo Fiorentini <fiorenti@dsi.unimi.it>
+%  Copyright 2012 Guido Fiorino      <guido.fiorino@unimib.it>
+%  Copyright 2020-2021 Paulo Moura   <pmoura@logtalk.org>
+%  SPDX-License-Identifier: GPL-2.0-or-later
+%
+%  This program is free software; you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation; either version 2 of the License, or
+%  (at your option) any later version.
+%
+%  This program is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You should have received a copy of the GNU General Public License
+%  along with this program; if not, write to the Free Software
+%  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% start by loading the port:
+
+| ?- logtalk_load(fcube(loader)).
+...
+
+
+% to run the port tests:
+
+| ?- logtalk_load(fcube(tester')).
+...
+
+
+% for examples see the tesrts.lgt file; e.g.:
+
+| ?- ?- fcube::decide((((a & b) => c) <=> ((a => c) | (b => c))), CounterModel).
+Input Formula:
+F (((a&b) => c) <=> ((a => c) | (b => c)))
+
+Sign Permanence tried,input formula equivalent to: 
+   F (((a&b) => c) <=> ((a => c) | (b => c)));
+Left branch of F equiv,Main SWFF: F (((a&b) => c) <=> ((a => c) | (b => c)))
+
+      F (((a&b) => c) => ((a => c) | (b => c)));
+ 
+F->,Main SWFF: F (((a&b) => c) => ((a => c) | (b => c)))
+
+         F ((a => c) | (b => c));
+         T ((a&b) => c);
+ 
+Main SWFF: F ((a => c) | (b => c))
+
+            F (a => c);
+            F (b => c);
+            T ((a&b) => c);
+ 
+Main SWFF: T ((a&b) => c)
+
+               T (a => (b => c));
+               F (b => c);
+               F (a => c);
+ 
+F->,Main SWFF: F (b => c)
+
+                  FC a;
+                  FC c;
+                  T b;
+ 
+Found a backtacking point:
+
+               F (b => c);
+               F (a => c);
+               T (a => (b => c));
+ 
+F->,Main SWFF: F (a => c)
+
+                  FC b;
+                  FC c;
+                  T a;
+ 
+Time: 0.003098999999999963 seconds
+ 
+1 search result = unprovable (fCube-4.1)
+*** The Counter Model (see also the prolog term ) ***
+-- root --
+-- end world -- 
+-- end world -- 
+         FC a;
+         FC c;
+         T b;
+-- end world -- 
+         FC b;
+         FC c;
+         T a;
+-- end world --
+*** Prolog term of the countermodel ***
+[[[swff(fc,a),swff(fc,c),swff(t,b)],[swff(fc,b),swff(fc,c),swff(t,a)]]]
+CounterModel = [[[swff(fc, a), swff(fc, c), swff(t, b)], [swff(fc, b), swff(fc, c), swff(t, a)]]].
+

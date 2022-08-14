@@ -21,6 +21,7 @@
 
 :- initialization((
 	set_logtalk_flag(source_data, on),
+	logtalk_load(fcube(loader)),
 	logtalk_load(metagol(loader)),
 	logtalk_load(toychr(loader))
 )).

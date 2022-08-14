@@ -130,7 +130,7 @@ Unifies ``Value`` with the current state of the stream variable ``Variable``.
 | **Template:**
 |    ``Variable=>Value``
 | **Mode and number of proofs:**
-|    ``(+streamvar)=>(?nonvar)`` - ``zero_or_one``
+|    ``+streamvar=> ?nonvar`` - ``zero_or_one``
 
 
 ------------

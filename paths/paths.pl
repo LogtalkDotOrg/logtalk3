@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on July 21, 2022
+%  Last updated on August 14, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -80,6 +80,7 @@ logtalk_library_path(verdi_neruda, contributions('verdi_neruda/')).
 logtalk_library_path(xml_parser, contributions('xml_parser/')).
 
 % ports of third-party libraries and applications
+logtalk_library_path(fcube, ports('fcube/')).
 logtalk_library_path(metagol, ports('metagol/')).
 logtalk_library_path(toychr, ports('toychr/')).
 

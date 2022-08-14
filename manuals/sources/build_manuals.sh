@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on July 25, 2022
+##   Last updated on August 14, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -132,6 +132,7 @@ for file in libraries/*.rst; do
 done
 rm -f temp0
 
+sed '1,24d' ../../ports/fcube/NOTES.md | pandoc -f gfm -t rst -o ports/fcube.rst
 sed '1,35d' ../../ports/metagol/NOTES.md | pandoc -f gfm -t rst -o ports/metagol.rst
 sed '1,22d' ../../ports/toychr/NOTES.md | pandoc -f gfm -t rst -o ports/toychr.rst
 

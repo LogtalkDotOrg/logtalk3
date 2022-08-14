@@ -136,7 +136,7 @@ Unifies ``Value`` with the current state of the assignable variable ``Variable``
 | **Template:**
 |    ``Variable=>Value``
 | **Mode and number of proofs:**
-|    ``(+assignvar)=>(?nonvar)`` - ``zero_or_one``
+|    ``+assignvar=> ?nonvar`` - ``zero_or_one``
 
 | **Exceptions:**
 |    Variable is not instantiated:

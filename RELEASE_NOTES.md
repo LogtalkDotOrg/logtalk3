@@ -41,6 +41,12 @@ Tests
 
 * ADDED: Additional test for the `setof/3` predicate.
 
+Ports
+-----
+
+* ADDED: Port of FCube: An Efficient Prover for Intuitionistic Propositional
+Logic by Mauro Ferrari, Camillo Fiorentini, and Guido Fiorino.
+
 
 3.57.0 - July 26, 2022
 ======================

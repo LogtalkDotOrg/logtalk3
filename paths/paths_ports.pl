@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for ports
-%  Last updated on October 10, 2019
+%  Last updated on August 14, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -33,5 +33,6 @@
 
 logtalk_library_path(ports, logtalk_user('ports/')).
 
+logtalk_library_path(fcube, ports('fcube/')).
 logtalk_library_path(metagol, ports('metagol/')).
 logtalk_library_path(toychr, ports('toychr/')).
