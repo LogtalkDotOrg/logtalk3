@@ -1,0 +1,130 @@
+.. index:: fcube
+.. _fcube/0:
+
+.. rst-class:: right
+
+**object**
+
+``fcube``
+=========
+
+FCube: An Efficient Prover for Intuitionistic Propositional Logic.
+
+| **Author:** Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.
+| **Version:** 4:1:0
+| **Date:** 2022-08-14
+
+| **Copyright:** Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura
+| **License:** GNU GPL 2.0 or later version
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`integer <integer/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`set <set/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. raw:: html
+
+   <div id="fcube/0"> </div>
+
+.. index:: fcube/0
+.. _fcube/0::fcube/0:
+
+``fcube/0``
+^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="decide/1"> </div>
+
+.. index:: decide/1
+.. _fcube/0::decide/1:
+
+``decide/1``
+^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. raw:: html
+
+   <div id="decide/2"> </div>
+
+.. index:: decide/2
+.. _fcube/0::decide/2:
+
+``decide/2``
+^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+``op(1200,xfy,<=>)``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+``op(1110,xfy,=>)``
+^^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+``op(1000,xfy,&)``
+^^^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+``op(500,fy,~)``
+^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+
+
