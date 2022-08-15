@@ -32,7 +32,7 @@
 
 	:- op(1200, xfy, <=>).
 	:- op(1110, xfy, =>).
-	:- if(\+ current_op(_, _, '|')).
+	:- if((\+ current_logtalk_flag(prolog_dialect, xsb), \+ current_logtalk_flag(prolog_dialect, ji), \+ current_op(_, _, '|'))).
 		:- op(1100, xfy, '|').
 	:- endif.
 	:- op(1000, xfy, &).

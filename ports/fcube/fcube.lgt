@@ -46,7 +46,7 @@
 		op(500, fy, ~)
 	]).
 
-	:- if(\+ current_op(_, _, '|')).
+	:- if((\+ current_logtalk_flag(prolog_dialect, xsb), \+ current_logtalk_flag(prolog_dialect, ji), \+ current_op(_, _, '|'))).
 		:- public(op(1100, xfy, '|')).
 	:- endif.
 
