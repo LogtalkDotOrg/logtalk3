@@ -41,6 +41,9 @@ Tests
 
 * ADDED: Additional test for the `setof/3` predicate.
 
+* ADDED: Additional test for the optional `'|'` infix operator for a compliant
+definition.
+
 Ports
 -----
 
