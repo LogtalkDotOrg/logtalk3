@@ -185,6 +185,7 @@
 	 */
 	iteraSemplificazione([A|L], NewSet, NewerSet) :- append([A|L], NewSet, TempSet), !,
 		simplification([A|L], TempSet, NewTempSet0), !,
+		% Paulo Moura: added the next list_to_set/2 to allow using an ordered set representation
 		list_to_set(NewTempSet0, NewTempSet),
 		/*chiama permanenza del segno se simplification ha fatto qualche rimpiazzamento*/
 		chiamaPermanenzaSegno(TempSet, NewTempSet, NewerSet), !.
@@ -1736,6 +1737,7 @@
 	clSimplification(Set, NewSet) :- buildFalseAtomicSwffs(Set, SetOfFalseAtomicSwffs),
 		union(Set, SetOfFalseAtomicSwffs, SimpSet),
 		simplification(SetOfFalseAtomicSwffs, SimpSet, NewSet0),
+		% Paulo Moura: added the next list_to_set/2 to allow using an ordered set representation
 		list_to_set(NewSet0, NewSet).
 
 	/*
