@@ -82,5 +82,10 @@ To test this port predicates, load the `tester.lgt` file:
 Known issues
 ------------
 
-This port exposes parsing bugs related to operators and comments in
-some backend Prolog systems.
+This port cannot currently be loaded using JIProlog or XSB as they
+define a `|` operator that is not found by the standard `current_op/3`
+predicate. It also cannot be loaded using LVM due to a clash with a
+built-in operator.
+
+This port also exposes an apparent parsing bug in Scryer Prolog that
+prevents loading it.
