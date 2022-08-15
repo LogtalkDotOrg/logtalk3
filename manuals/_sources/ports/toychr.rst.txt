@@ -3,9 +3,6 @@
 ``toychr``
 ==========
 
-To load this port and for sample queries, please see the ``SCRIPT.txt``
-file.
-
 This folder contains a Logtalk port of ToyCHR, a reference
 implementation of Constraint Handling Rules (CHR) available from:
 
@@ -26,3 +23,30 @@ the original code:
 The port also includes examples ported from the SWI-Prolog CHR package
 examples and documentation. These examples are ported using the same
 license of the original code (BSD-2-Clause).
+
+For sample queries, please see the ``SCRIPT.txt`` file.
+
+API documentation
+-----------------
+
+Open the
+`../../docs/library_index.html#toychr <../../docs/library_index.html#toychr>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this port, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(toychr(loader)).
+
+Testing
+-------
+
+To test this port predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(toychr(tester)).

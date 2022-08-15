@@ -66,7 +66,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Ports</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="fcube.html"><code class="docutils literal notranslate"><span class="pre">fcube</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="metagol.html"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">toychr</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">toychr</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
@@ -109,8 +114,6 @@
              
   <section id="toychr">
 <span id="library-toychr"></span><h1><code class="docutils literal notranslate"><span class="pre">toychr</span></code><a class="headerlink" href="#toychr" title="Permalink to this heading"></a></h1>
-<p>To load this port and for sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code>
-file.</p>
 <p>This folder contains a Logtalk port of ToyCHR, a reference
 implementation of Constraint Handling Rules (CHR) available from:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https://www.comp.nus.edu.sg/~gregory/toychr/
@@ -128,6 +131,27 @@ original <code class="docutils literal notranslate"><span class="pre">chr_compil
 <p>The port also includes examples ported from the SWI-Prolog CHR package
 examples and documentation. These examples are ported using the same
 license of the original code (BSD-2-Clause).</p>
+<p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#toychr">../../docs/library_index.html#toychr</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<p>To load all entities in this port, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(toychr(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<p>To test this port predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(toychr(tester)).
+</pre></div>
+</div>
+</section>
 </section>
 
 

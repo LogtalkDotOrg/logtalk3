@@ -37,10 +37,6 @@ ________________________________________________________________________
 `metagol`
 =========
 
-To load this port and for sample queries, please see the `SCRIPT.txt` file.
-To run the tests, load the `tester.lgt` file (there are three lengthy tests
-that only run when the tests are being run manually instead of automatically).
-
 This folder contains a Logtalk port of `metagol`, an inductive logic
 programming (ILP) system based on meta-interpretive learning available
 from:
@@ -81,3 +77,31 @@ examples source code files made available by MystikNinja):
 The paper can be downloaded at
 
 	https://arxiv.org/pdf/1711.04574.pdf
+
+For sample queries, please see the `SCRIPT.txt` file.
+
+
+API documentation
+-----------------
+
+Open the [../../docs/library_index.html#metagol](../../docs/library_index.html#metagol)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this port, load the `loader.lgt` file:
+
+	| ?- logtalk_load(metagol(loader)).
+
+
+Testing
+-------
+
+To test this port predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(metagol(tester)).
+
+There are three lengthy tests that only run when the tests are being run
+manually instead of automatically.

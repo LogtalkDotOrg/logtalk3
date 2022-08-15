@@ -36,7 +36,7 @@
 ...
 
 
-% for examples see the tesrts.lgt file; e.g.:
+% for examples see the tests.lgt file; e.g.:
 
 | ?- ?- fcube::decide((((a & b) => c) <=> ((a => c) | (b => c))), CounterModel).
 Input Formula:

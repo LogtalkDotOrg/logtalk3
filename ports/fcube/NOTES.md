@@ -55,6 +55,8 @@ For more information about FCube, see the following paper:
 		isbn="978-3-642-16242-8"
 	}
 
+For sample queries, please see the `SCRIPT.txt` file.
+
 
 API documentation
 -----------------

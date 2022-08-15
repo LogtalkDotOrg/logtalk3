@@ -65,7 +65,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Ports</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="fcube.html"><code class="docutils literal notranslate"><span class="pre">fcube</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="toychr.html"><code class="docutils literal notranslate"><span class="pre">toychr</span></code></a></li>
 </ul>
 </li>
@@ -109,10 +114,6 @@
              
   <section id="metagol">
 <span id="library-metagol"></span><h1><code class="docutils literal notranslate"><span class="pre">metagol</span></code><a class="headerlink" href="#metagol" title="Permalink to this heading"></a></h1>
-<p>To load this port and for sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code>
-file. To run the tests, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file (there are three
-lengthy tests that only run when the tests are being run manually
-instead of automatically).</p>
 <p>This folder contains a Logtalk port of <code class="docutils literal notranslate"><span class="pre">metagol</span></code>, an inductive logic
 programming (ILP) system based on meta-interpretive learning available
 from:</p>
@@ -151,6 +152,29 @@ Prolog examples source code files made available by MystikNinja):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>arxiv.org<span class="o">/</span>pdf<span class="o">/</span><span class="m">1711.04574</span>.pdf
 </pre></div>
 </div>
+<p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../docs/library_index.html#metagol">../../docs/library_index.html#metagol</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<p>To load all entities in this port, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(metagol(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<p>To test this port predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(metagol(tester)).
+</pre></div>
+</div>
+<p>There are three lengthy tests that only run when the tests are being run
+manually instead of automatically.</p>
+</section>
 </section>
 
 

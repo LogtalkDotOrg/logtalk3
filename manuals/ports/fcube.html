@@ -141,6 +141,7 @@ file.</p>
 <span class="k">}</span>
 </pre></div>
 </div>
+<p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
@@ -163,8 +164,12 @@ link in a web browser.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
-<p>This port exposes parsing bugs related to operators and comments in some
-backend Prolog systems.</p>
+<p>This port cannot currently be loaded using JIProlog or XSB as they
+define a <code class="docutils literal notranslate"><span class="pre">|</span></code> operator that is not found by the standard
+<code class="docutils literal notranslate"><span class="pre">current_op/3</span></code> predicate. It also cannot be loaded using LVM due to a
+clash with a built-in operator.</p>
+<p>This port also exposes an apparent parsing bug in Scryer Prolog that
+prevents loading it.</p>
 </section>
 </section>
 
