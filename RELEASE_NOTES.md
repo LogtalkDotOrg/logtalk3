@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * FIXED: Detect conflicts between `dynamic/1` directives and `uses/2` and
 `use_module/2` directives.
 
+Library
+-------
+
+* ADDED: New `[]` and `{}` edge cases for atoms to the `arbitrary` library.
+
 Examples
 --------
 
