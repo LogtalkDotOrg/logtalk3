@@ -85,7 +85,6 @@ Known issues
 ------------
 
 This port cannot currently be loaded using LVM due to a clash with a
-built-in operator.
-
-This port also exposes apparent parsing bugs in JIProlog and Scryer
-Prolog that prevents loading it.
+built-in operator. This port also exposes a Scryer Prolog bug that
+prevents loading it. Several tests fail when running on Tau Prolog,
+possibly due to a bug in this system.

@@ -164,12 +164,10 @@ link in a web browser.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
-<p>This port cannot currently be loaded using JIProlog or XSB as they
-define a <code class="docutils literal notranslate"><span class="pre">|</span></code> operator that is not found by the standard
-<code class="docutils literal notranslate"><span class="pre">current_op/3</span></code> predicate. It also cannot be loaded using LVM due to a
-clash with a built-in operator.</p>
-<p>This port also exposes an apparent parsing bug in Scryer Prolog that
-prevents loading it.</p>
+<p>This port cannot currently be loaded using LVM due to a clash with a
+built-in operator. This port also exposes a Scryer Prolog bug that
+prevents loading it. Several tests fail when running on Tau Prolog,
+possibly due to a bug in this system.</p>
 </section>
 </section>
 
