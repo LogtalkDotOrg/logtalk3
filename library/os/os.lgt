@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:93:3,
+		version is 1:93:4,
 		author is 'Paulo Moura',
-		date is 2022-05-29,
+		date is 2022-08-18,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -272,7 +272,10 @@
 
 		directory_files(Directory, Files) :-
 			absolute_file_name(Directory, Path),
-			{directory_files(Path, Files)}.
+			(	{file_exists(Path)} ->
+				{directory_files(Path, Files)}
+			;	existence_error(directory, Directory)
+			).
 
 		directory_exists(Directory) :-
 			absolute_file_name(Directory, ExpandedPath),
@@ -296,7 +299,10 @@
 
 		file_permission(File, Permission) :-
 			absolute_file_name(File, ExpandedPath),
-			{access_file(ExpandedPath, Permission)}.
+			(	{file_exists(ExpandedPath)} ->
+				{access_file(ExpandedPath, Permission)}
+			;	existence_error(file, File)
+			).
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
@@ -313,7 +319,8 @@
 			{rename_file(OldExpandedPath, NewExpandedPath)}.
 
 		environment_variable(Variable, Value) :-
-			{environ(Variable, Value)}.
+			{environ(Variable, Value)},
+			Value \== ''.
 
 		time_stamp(Time) :-
 			{datime(Time)}.
