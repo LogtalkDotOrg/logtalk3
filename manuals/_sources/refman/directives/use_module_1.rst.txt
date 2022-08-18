@@ -66,6 +66,7 @@ Examples
    :- object(foo(_DataModule_)).
 
        :- use_module([
+           data_noise_handler as cleaner,
            _DataModule_ as data
        ]).
 
@@ -73,6 +74,8 @@ Examples
            ...,
            % the same as _DataModule_:xy(X, Y)
            data:xy(X, Y),
+           % the same as data_noise_handler:filter(X, Y)
+           cleaner:filter(X, Y, Z),
            ...
 
 .. seealso::

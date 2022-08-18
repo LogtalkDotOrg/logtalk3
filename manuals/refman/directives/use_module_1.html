@@ -171,6 +171,7 @@ and import all its exported predicates.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_DataModule_</span>)).
 
 <span class="p">    :- </span><span class="k">use_module</span>([
+        data_noise_handler <span class="o">as</span> cleaner,
         <span class="nv">_DataModule_</span> <span class="o">as</span> data
     ]).
 
@@ -178,6 +179,8 @@ and import all its exported predicates.</p>
         ...,
         <span class="c">% the same as _DataModule_:xy(X, Y)</span>
         data<span class="o">:</span>xy(<span class="nv">X</span>, <span class="nv">Y</span>),
+        <span class="c">% the same as data_noise_handler:filter(X, Y)</span>
+        cleaner<span class="o">:</span>filter(<span class="nv">X</span>, <span class="nv">Y</span>, <span class="nv">Z</span>),
         ...
 </pre></div>
 </div>
