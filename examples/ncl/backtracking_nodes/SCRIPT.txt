@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(backtracking(loader)).
+| ?- logtalk_load(backtracking_nodes(loader)).
 ...
 
 
