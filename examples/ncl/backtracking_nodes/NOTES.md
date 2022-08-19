@@ -30,5 +30,5 @@ https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/parallel
 The Logtalk version uses parametric objects to represent the concept of
 "net-variables" described in the paper as "global logical variables" and
 events to implement the functionality of spreading activation nodes.
-Implicit in NCL, when multiple spreading activation nodes fire, all their
-procedure must be true.
+When multiple spreading activation nodes fire, all their procedures must
+be true by default (in the NCL manual, this corresponds to `netmode(3)`).
