@@ -27,4 +27,4 @@ in the Net-Clause Language (NCL) manual, available at:
 https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/parallel/ncl/0.html
 
 The Logtalk version uses parametric objects to represent the concept of
-"net-variables" described in the paper as "global logical variables."
+"net-variables" described in the paper as "global logical variables".
