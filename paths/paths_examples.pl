@@ -42,6 +42,7 @@ logtalk_library_path(aspects, examples('aspects/')).
 logtalk_library_path(assign_parameters, examples('assign_parameters/')).
 logtalk_library_path(assumptions, examples('assumptions/')).
 logtalk_library_path(attvars, examples('attvars/')).
+logtalk_library_path(backtracking_nodes, ncl('backtracking_nodes/')).
 logtalk_library_path(barriers, threads('barriers/')).
 logtalk_library_path(bench, examples('bench/')).
 logtalk_library_path(benchmarks, examples('benchmarks/')).
