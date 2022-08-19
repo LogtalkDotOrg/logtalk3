@@ -42,6 +42,9 @@ Library
 Examples
 --------
 
+* UPDATED: Reorganize all Net-Clause Language (NCL) examples in the new
+`examples/ncl` directory, including the `figures` individual example.
+
 * FIXED: Typo in the sample queries of the `document_converter` example.
 
 Tests

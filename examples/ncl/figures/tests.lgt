@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2020-06-08,
-		comment is 'Unit tests for the "figures" example.'
+		comment is 'Unit tests for the NCL "figures" example.'
 	]).
 
 	:- uses([

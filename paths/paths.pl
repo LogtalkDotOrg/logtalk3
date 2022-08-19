@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 14, 2022
+%  Last updated on August 19, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -154,6 +154,7 @@ logtalk_library_path(zippers, library('zippers/')).
 
 % programming examples
 logtalk_library_path(ack, examples('ack/')).
+logtalk_library_path(activation_nodes, ncl('activation_nodes/')).
 logtalk_library_path(adventure, examples('adventure/')).
 logtalk_library_path(aliases, examples('aliases/')).
 logtalk_library_path(around_methods, examples('around_methods/')).
@@ -211,8 +212,9 @@ logtalk_library_path(family, examples('family/')).
 logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
 logtalk_library_path(fibonacci, threads('fibonacci/')).
-logtalk_library_path(figures, examples('figures/')).
+logtalk_library_path(figures, ncl('figures/')).
 logtalk_library_path(fluents, engines('fluents/')).
+logtalk_library_path(free_nodes, ncl('free_nodes/')).
 logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(futures, examples('futures/')).
 logtalk_library_path(hailstone, examples('hailstone/')).
@@ -254,6 +256,7 @@ logtalk_library_path(mtbatch, threads('mtbatch/')).
 logtalk_library_path(multifile, examples('multifile/')).
 logtalk_library_path(my_types, examples('my_types/')).
 logtalk_library_path(named_databases, examples('named_databases/')).
+logtalk_library_path(ncl, examples('ncl/')).
 logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(now_you_see_me, examples('now_you_see_me/')).
 logtalk_library_path(object_aliases, examples('object_aliases/')).

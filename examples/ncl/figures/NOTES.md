@@ -33,7 +33,7 @@ paper:
 
 A copy of the paper can be downloaded from:
 
-	https://www.ijcai.org/Proceedings/89-1/Papers/013.pdf
+https://www.ijcai.org/Proceedings/89-1/Papers/013.pdf
 
 The Logtalk versions of the examples use parametric objects and the
 coroutining library to approximate the semantics of the original examples.
