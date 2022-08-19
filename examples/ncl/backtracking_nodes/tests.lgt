@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the NCL "backtracking_nodes" example.'
 	]).
 
-	test(backtracking_01, true(L == [3,2,1])) :-
+	test(backtracking_nodes_01, true(L == [3,2,1])) :-
 		% events triggered by messages sent from "user"
 		{backtracking(X,Y,Z)::(n(2), n(1), n(3)), bagof(E, backtracking(X,Y,Z)::n(E), L)}.
 
