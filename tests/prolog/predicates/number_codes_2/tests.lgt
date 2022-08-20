@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-03-07,
+		date is 2022-08-20,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -144,6 +144,9 @@
 
 	test(wg17_number_codes_2_34, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'X,0'f])}.
+
+	test(wg17_number_codes_2_35, true(X == 32)) :-
+		{number_codes(X, [48,39,32])}.
 
 	% auxiliary predicates
 
