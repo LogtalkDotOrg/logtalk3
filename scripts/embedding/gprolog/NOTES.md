@@ -35,8 +35,8 @@ interpreter when run.
 Usage
 -----
 
-Use `gprolog_embed_logtalk.sh -h` for a list and description of the script
-options.
+Use `gprolog_embed_logtalk.sh -h` or `gprolog_embed_logtalk.ps1 -h` for a
+list and description of the script options.
 
 To define an application goal to be called automatically when running an
 executable, try e.g.

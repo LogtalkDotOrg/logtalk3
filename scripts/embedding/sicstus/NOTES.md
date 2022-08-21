@@ -37,8 +37,8 @@ saved states can be loaded using `sicstus -r SavedStateFile`.
 Usage
 -----
 
-Use `sicstus_logtalk_po.sh -h` for a list and description of the script
-options.
+Use `sicstus_logtalk_po.sh -h` or `sicstus_logtalk_po.ps1 -h` for a list
+and description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file on how to
 create a SICStus Prolog saved state that includes a Logtalk application.

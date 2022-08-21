@@ -34,7 +34,7 @@ runtime and an optional `application.pl` file for an application.
 Usage
 -----
 
-Use `lvm_logtalk_pl.sh -h` for a list and description of the script
-options.
+Use `lvm_logtalk_pl.sh -h` or `lvm_logtalk_pl.ps1 -h` for a list and
+description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file.

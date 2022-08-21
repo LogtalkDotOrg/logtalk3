@@ -39,8 +39,8 @@ For example:
 Usage
 -----
 
-Use `xsb_logtalk_xwam.sh -h` for a list and description of the script
-options.
+Use `xsb_logtalk_xwam.sh -h` or `xsb_logtalk_xwam.ps1 -h` for a list and
+description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file.
 

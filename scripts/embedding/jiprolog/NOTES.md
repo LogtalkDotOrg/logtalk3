@@ -53,7 +53,7 @@ file by using the `load_library/1` JIProlog built-in predicate:
 Usage
 -----
 
-Use `jiprolog_logtalk_jip.sh -h` for a list and description of the script
-options.
+Use `jiprolog_logtalk_jip.sh -h` or `jiprolog_logtalk_jip.ps1 -h` for a
+list and description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file.

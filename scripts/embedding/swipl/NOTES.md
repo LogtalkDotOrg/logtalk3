@@ -35,8 +35,8 @@ runtime and an optional `application.qlf` file for an application.
 Usage
 -----
 
-Use `swipl_logtalk_qlf.sh -h` for a list and description of the script
-options.
+Use `swipl_logtalk_qlf.sh -h` or `swipl_logtalk_qlf.ps1 -h` for a list
+and description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file on how to
 create a SWI-Prolog saved state that includes a Logtalk application.

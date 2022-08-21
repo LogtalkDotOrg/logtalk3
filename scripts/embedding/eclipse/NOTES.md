@@ -41,7 +41,7 @@ generated `*.eco` files.
 Usage
 -----
 
-Use `eclipse_logtalk_eco.sh -h` for a list and description of the script
-options.
+Use `eclipse_logtalk_eco.sh -h` or `eclipse_logtalk_eco.ps1 -h` for a
+list and description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file.

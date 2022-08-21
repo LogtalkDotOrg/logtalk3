@@ -37,7 +37,7 @@ example, `ciaosh --iso-strict -u logtalk.pl -u application.pl`.
 Usage
 -----
 
-Use `ciao_logtalk_pl.sh -h` for a list and description of the script
-options.
+Use `ciao_logtalk_pl.sh -h` or  `ciao_logtalk_pl.ps1 -h` for a list and
+description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file.

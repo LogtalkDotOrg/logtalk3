@@ -34,8 +34,8 @@ runtime and an optional `application.pl` file for an application.
 Usage
 -----
 
-Use `yap_logtalk_pl.sh -h` for a list and description of the script
-options.
+Use `yap_logtalk_pl.sh -h` or `yap_logtalk_pl.ps1 -h` for a list and
+description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file on how to
 create a YAP saved state that includes a Logtalk application.
