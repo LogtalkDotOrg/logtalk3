@@ -65,6 +65,8 @@ Logic by Mauro Ferrari, Camillo Fiorentini, and Guido Fiorino.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Experimental embedding script for Ciao Prolog.
+
 * IMPROVED: Documentation of the sample embedding scripts.
 
 
