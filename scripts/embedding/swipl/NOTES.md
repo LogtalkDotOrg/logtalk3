@@ -25,8 +25,12 @@ files.
 The following scripts are provided:
 
 - `swipl_logtalk_qlf.sh`  
-	creates a `logtalk.qlf` file with the Logtalk compiler and runtime
-	and an optional `application.qlf` file for an application
+	Bash shell script for POSIX systems
+- `swipl_logtalk_qlf.ps1`  
+	PowerShell script for Windows systems
+
+Both scripts create a `logtalk.qlf` file with the Logtalk compiler and
+runtime and an optional `application.qlf` file for an application.
 
 Usage
 -----

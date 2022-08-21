@@ -24,8 +24,12 @@ from Logtalk core files and Logtalk source files.
 The following scripts are provided:
 
 - `lvm_logtalk_pl.sh`  
-	creates a `logtalk.pl` file with the Logtalk compiler and runtime
-	and an optional `application.pl` file for an application
+	Bash shell script for POSIX systems
+- `lvm_logtalk_pl.ps1`  
+	PowerShell script for Windows systems
+
+Both scripts create a `logtalk.pl` file with the Logtalk compiler and
+runtime and an optional `application.pl` file for an application.
 
 Usage
 -----

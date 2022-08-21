@@ -62,6 +62,11 @@ Ports
 * ADDED: Port of FCube: An Efficient Prover for Intuitionistic Propositional
 Logic by Mauro Ferrari, Camillo Fiorentini, and Guido Fiorino.
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: Documentation of the sample embedding scripts.
+
 
 3.57.0 - July 26, 2022
 ======================

@@ -24,8 +24,13 @@ executable files that embed Logtalk and an optional Logtalk application.
 The following scripts are provided:
 
 - `gprolog_embed_logtalk.sh`  
-	creates a `logtalk` executable that embeds the Logtalk compiler/runtime
-	and an optional application; starts the top-level interpreter when run
+	Bash shell script for POSIX systems
+- `gprolog_embed_logtalk.ps1`  
+	PowerShell script for Windows systems
+
+Both scrips create a `logtalk` executable that embeds the Logtalk
+compiler/runtime and an optional application; starts the top-level
+interpreter when run.
 
 Usage
 -----

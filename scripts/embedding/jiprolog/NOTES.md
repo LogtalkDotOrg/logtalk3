@@ -24,8 +24,12 @@ from Logtalk core files and Logtalk source files.
 The following scripts are provided:
 
 - `jiprolog_logtalk_jip.sh`  
-	creates a `logtalk.jip` file with the Logtalk compiler and runtime
-	and an optional `application.jip` file for an application
+	Bash shell script for POSIX systems
+- `jiprolog_logtalk_jip.ps1`  
+	PowerShell script for Windows systems
+
+Both scripts create a `logtalk.jip` file with the Logtalk compiler and
+runtime and an optional `application.jip` file for an application.
 
 The `.jip` files can be loaded using the `load/1` JIProlog predicate. It
 is also possible to create a JAR file from the `.jip` files. For example,

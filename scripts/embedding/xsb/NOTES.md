@@ -24,8 +24,12 @@ from Logtalk core files and Logtalk source files.
 The following scripts are provided:
 
 - `xsb_logtalk_xwam.sh`  
-	creates a `logtalk.xwam` file with the Logtalk compiler and runtime
-	and an optional `application.xwam` file for an application
+	Bash shell script for POSIX systems
+- `xsb_logtalk_xwam.ps1`  
+	PowerShell script for Windows systems
+
+Both scripts create a `logtalk.xwam` file with the Logtalk compiler and
+runtime and an optional `application.xwam` file for an application.
 
 The `.xwam` files can be loaded by XSB using the `loader:load/1` predicate.
 For example:
