@@ -36,8 +36,8 @@ Library
 
 * ADDED: New `[]` and `{}` edge cases for atoms to the `arbitrary` library.
 
-* FIXED: The `os` library `directory_files/2`, `environment_variable/1`, and
-`file_permission/2` predicates for YAP.
+* FIXED: The `os` library `delete_directory/1`, `directory_files/2`,
+`environment_variable/1`, and `file_permission/2` predicates for YAP.
 
 Examples
 --------
