@@ -50,8 +50,8 @@ Examples
 Tests
 -----
 
-* ADDED: Additional tests for the `number_chars/2`, `number_codes/2`, and 
-`setof/3` standard Prolog predicates.
+* ADDED: Additional tests for the `atom_concat/3`, `number_chars/2`,
+`number_codes/2`, and  `setof/3` standard Prolog predicates.
 
 * ADDED: Additional test for the optional `'|'` infix operator for a compliant
 definition.
