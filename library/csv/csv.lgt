@@ -469,7 +469,7 @@
 		write_data(Fields, Next, Stream).
 
 	write_field(Stream, Field) :-
-		( 	number(Field) ->
+		(	number(Field) ->
 			write(Stream, Field)
 		;	% overloading the parameter _IgnoreQuotes_
 			% to decide if double-quoting when writing
@@ -484,7 +484,7 @@
 
 	% quoting
 	quoting(Codes, QField) :-
-		( 	Codes = [0'"| RCodes] ->
+		(	Codes = [0'"| RCodes] ->
 			apply_quotes(RCodes, QCodes)
 		;	apply_quotes(Codes, QCodes)
 		),

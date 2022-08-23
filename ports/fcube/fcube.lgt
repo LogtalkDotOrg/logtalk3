@@ -436,11 +436,11 @@
 
 	/****************************************************************
 
-					 SEMPLIFICAZIONI BOOLEANE DI UNA FORMULA
+	SEMPLIFICAZIONI BOOLEANE DI UNA FORMULA
 
-	valTerm(termine,valore): 	valuta ricorsivamente un termine:
-					se termine Ã¨ atomico allora vale se stesso;
-					se termine Ã¨ non atomico viene valutato seguendo la tavola di veritÃ  del connettivo principale.
+	valTerm(termine,valore): valuta ricorsivamente un termine:
+		se termine Ã¨ atomico allora vale se stesso;
+		se termine Ã¨ non atomico viene valutato seguendo la tavola di veritÃ  del connettivo principale.
 	************************************************************************************************/
 
 	/*passo base: il valore di un termine atomico Ã¨ se stesso */
@@ -529,7 +529,7 @@
 
 	/*
 		data T X e S Y,esegue S Y[X/1],dove S Ã¨ il segno di Y
-	  	data Fc X e S Y,esegue S Y[X/0],dove ...
+		data Fc X e S Y,esegue S Y[X/0],dove ...
 	*/
 
 	massacci(swff(t, X), swff(S, Y), swff(S, RISP)) :-massacciTrue(X, Y, RISP).
@@ -537,7 +537,7 @@
 
 
 	/*
-	  	data F X e S Y,esegue S Y{X/0},
+		data F X e S Y,esegue S Y{X/0},
 		dove { } indica un rimpiazzamento che si ferma se si trova un connettivo implica o non
 		e S e' il segno T o F MA NON Fc perche' Fc e' sinomimo di T non
 	*/
@@ -669,10 +669,10 @@
 		valSWFF(RR, RISP),
 	/*
 	 * TODO: se RISP e' formula contraddittoria
-	 * 	 allora TheReplacementResult = [RISP | T] e
-	 * 			NEWCANDIDATES = []
-	 *	 altrimenti passo ricorsivo di rimpiazzamento di F in T.
-	 *	 possiamo cosÃ¬ evitare la chiamata a coerente fatta sopra.
+	 *	allora TheReplacementResult = [RISP | T] e
+	 *		NEWCANDIDATES = []
+	 *	altrimenti passo ricorsivo di rimpiazzamento di F in T.
+	 *	possiamo cosÃ¬ evitare la chiamata a coerente fatta sopra.
 	 */
 		goToSubstitute(F, T, NI, NC),
 		!,
@@ -788,14 +788,14 @@
 
 	intControModello([], RESTO, Contromodello, _SPAZIO, safebranch, _) :-
 	/*
-								tab(3*SPAZIO-3),
-								writeln('Open set,searching for a backtraking point...\n\n'),
-								*/
+		tab(3*SPAZIO-3),
+		writeln('Open set,searching for a backtraking point...\n\n'),
+		*/
 		filtraNonAtomiche(RESTO, Contromodello).
 	/* se non ci sono regole da applicare
-											 		allora dato che RESTO Ã¨ coerente,il contromodello Ã¨ RESTO
-								e la conclusione Ã¨ considerata safe
-								*/
+		allora dato che RESTO Ã¨ coerente,il contromodello Ã¨ RESTO
+		e la conclusione Ã¨ considerata safe
+	*/
 
 	intControModello([swff(fperm, list(Wff, Atoms))], RESTO, MODEL, SPAZIO, WhichBranch, IdxNewAtom) :- !,
 		/* nota che adesso rule Ã¨ a 5 parametri */ rule(swff(fperm, list(Wff, Atoms)), RESTO, RESULT, WhichBranch, IdxNewAtom),
@@ -1447,9 +1447,9 @@
 	wffIsCorrect((~X)) :- wffIsCorrect(X).
 
 	/****************************************
-	*					*
-	*	PREDICATI PER IL PRUNING 	*
-	*					*
+	*                                       *
+	*    PREDICATI PER IL PRUNING           *
+	*                                       *
 	****************************************/
 
 

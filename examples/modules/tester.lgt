@@ -27,7 +27,7 @@
 	% is only supported by some backend Prolog compilers
 	(	current_logtalk_flag(modules, supported) ->
 		logtalk_load(client, [debug(on), source_data(on)])
-	; 	true
+	;	true
 	),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
