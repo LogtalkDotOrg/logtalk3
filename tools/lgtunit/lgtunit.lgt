@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 12:0:1,
+		version is 13:0:0,
 		author is 'Paulo Moura',
-		date is 2022-07-04,
+		date is 2022-08-23,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1624,7 +1624,7 @@
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
-	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose)| Other]) :-
+	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose), pb(ProgressBar, Tick)| Other]) :-
 		(	memberchk(n(NumberOfTests), Options),
 			integer(NumberOfTests),
 			NumberOfTests >= 0 ->
@@ -1657,6 +1657,12 @@
 			true
 		;	default_quick_check_option(v(Verbose))
 		),
+		(	memberchk(pb(ProgressBar, Tick), Options),
+			(ProgressBar == true; ProgressBar == false),
+			integer(Tick), Tick > 0 ->
+			true
+		;	default_quick_check_option(pb(ProgressBar, Tick))
+		),
 		(	member(rs(Seed), Options) ->
 			Other = [rs(Seed)]
 		;	Other = []
@@ -1674,6 +1680,8 @@
 	default_quick_check_option(l(true)).
 	% don't do a verbose reporting of generated random tests
 	default_quick_check_option(v(false)).
+	% don't do a progress bar on executed random tests
+	default_quick_check_option(pb(false, 100)).
 
 	% default number of tests
 	number_of_tests(0).
@@ -1887,16 +1895,16 @@
 			Result = error(Error, _)
 		).
 
-	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed),                    failed(Goal, Seed)).
-	quick_check_error_reified(quick_check_error(error(Error,_), Goal, _, Seed),        error(Error, Goal, Seed)).
-	quick_check_error_reified(quick_check_error(Error, Goal, _, Seed),                 error(Error, Goal, Seed)).
-	quick_check_error_reified(quick_check_broken(generate_test_error(_), Error),       broken(generate_test_error, Error)).
-	quick_check_error_reified(quick_check_broken(generate_test_failure(_), Culprit),   broken(generate_test_failure, Culprit)).
-	quick_check_error_reified(quick_check_broken(label_goal_error(_), Error),          broken(label_goal_error, Error)).
-	quick_check_error_reified(quick_check_broken(label_goal_failure(Culprit)),         broken(label_goal_failure, Culprit)).
-	quick_check_error_reified(quick_check_broken(pre_condition_error(_), Error),       broken(pre_condition_error, Error)).
-	quick_check_error_reified(quick_check_broken(pre_condition_always_fails(Culprit)), broken(pre_condition_always_fails, Culprit)).
-	quick_check_error_reified(quick_check_broken(template_error(_), Error),            broken(template_error, Error)).
+	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed, TestSeed),             failed(Goal, Seed, TestSeed)).
+	quick_check_error_reified(quick_check_error(error(Error,_), Goal, _, Seed, TestSeed), error(Error, Goal, Seed, TestSeed)).
+	quick_check_error_reified(quick_check_error(Error, Goal, _, Seed, TestSeed),          error(Error, Goal, Seed, TestSeed)).
+	quick_check_error_reified(quick_check_broken(generate_test_error(_), Error),          broken(generate_test_error, Error)).
+	quick_check_error_reified(quick_check_broken(generate_test_failure(_), Culprit),      broken(generate_test_failure, Culprit)).
+	quick_check_error_reified(quick_check_broken(label_goal_error(_), Error),             broken(label_goal_error, Error)).
+	quick_check_error_reified(quick_check_broken(label_goal_failure(Culprit)),            broken(label_goal_failure, Culprit)).
+	quick_check_error_reified(quick_check_broken(pre_condition_error(_), Error),          broken(pre_condition_error, Error)).
+	quick_check_error_reified(quick_check_broken(pre_condition_always_fails(Culprit)),    broken(pre_condition_always_fails, Culprit)).
+	quick_check_error_reified(quick_check_broken(template_error(_), Error),               broken(template_error, Error)).
 
 	quick_check(Template, Options) :-
 		parse_quick_check_options(Options, QuickCheckOptions),
@@ -1920,6 +1928,7 @@
 		memberchk(pc(ConditionClosure), Options),
 		memberchk(l(LabelClosure), Options),
 		memberchk(v(Verbose), Options),
+		memberchk(pb(ProgressBar, Tick), Options),
 		(	member(rs(Seed), Options) ->
 			set_seed(Seed)
 		;	get_seed(Seed)
@@ -1929,24 +1938,38 @@
 		extend_quick_check_closure(ConditionClosure, Condition),
 		extend_quick_check_closure(LabelClosure, Label),
 		% we pass both the extend closures and the original closures for improved error reporting
-		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, 0, Discarded, [], Labels).
+		(	Verbose == false, ProgressBar == true ->
+			print_message(information, lgtunit, quick_check_progress_bar_start)
+		;	true
+		),
+		run_quick_check_tests(1, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, ProgressBar-Tick, Seed, 0, Discarded, [], Labels).
 
-	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, _Verbose, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
+	run_quick_check_tests(Test, N, _Template, _Entity, _Operator, _Name, _Types, _MaxShrinks, _EdgeCases, _Condition, _Label, Verbose, ProgressBar-_Tick, _Seed, _Discarded, _Discarded, _Labels, _Labels) :-
 		Test > N,
-		!.
-	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded0, Discarded, Labels0, Labels) :-
+		!,
+		(	Verbose == false, ProgressBar == true ->
+			print_message(information, lgtunit, quick_check_progress_bar_end)
+		;	true
+		).
+	run_quick_check_tests(Test, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, ProgressBar-Tick, Seed, Discarded0, Discarded, Labels0, Labels) :-
+		(	Verbose == false, ProgressBar == true,
+			Test mod Tick =:= 0 ->
+			print_message(information, lgtunit, quick_check_progress_bar_tick(Test))
+		;	true
+		),
+		fast_random::get_seed(TestSeed),
 		generate_test(Condition, N, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, Verbose, Discarded0, Discarded1, Goal),
-		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, Error, Template, Verbose)) ->
+		(	catch(Goal, Error, quick_check_error(Goal, Template, Test, Seed, TestSeed, Error, Template, Verbose)) ->
 				(	check_output_arguments(Types, Arguments, ArgumentsCopy) ->
 					Next is Test + 1,
 					label_test(Label, Arguments, Labels0, Labels1),
 					verbose_report_quick_check_test(Verbose, Goal, Template, passed, information),
-					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, Seed, Discarded1, Discarded, Labels1, Labels)
+					run_quick_check_tests(Next, N, Template, Entity, Operator, Name, Types, MaxShrinks, EdgeCases, Condition, Label, Verbose, ProgressBar-Tick, Seed, Discarded1, Discarded, Labels1, Labels)
 				;	verbose_report_quick_check_test(Verbose, Goal, Template, failure, warning),
-					shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed)
+					shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed, TestSeed)
 				)
 			;	verbose_report_quick_check_test(Verbose, Goal, Template, failure, warning),
-				shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed)
+				shrink_failed_test(Condition, Types, Goal, Template, Test, 0, MaxShrinks, Verbose, Seed, TestSeed)
 		).
 
 	label_test(true, _, Labels, Labels).
@@ -2113,18 +2136,18 @@
 		variant(Argument, ArgumentCopy).
 	check_output_argument('{}'(_), _, _).
 
-	shrink_failed_test(true, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed) :-
+	shrink_failed_test(true, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed, TestSeed) :-
 		(	Count < MaxShrinks ->
 			(	shrink_goal(Types, Goal, _, Small),
 				catch(\+ Small, _, fail) ->
 				verbose_report_quick_check_test(Verbose, Small, Template, shrinked, warning),
 				Next is Count + 1,
-				shrink_failed_test(true, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed)
-			;	quick_check_failed(Goal, Template, Test, Count, Seed)
+				shrink_failed_test(true, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed, TestSeed)
+			;	quick_check_failed(Goal, Template, Test, Count, Seed, TestSeed)
 			)
-		;	quick_check_failed(Goal, Template, Test, Count, Seed)
+		;	quick_check_failed(Goal, Template, Test, Count, Seed, TestSeed)
 		).
-	shrink_failed_test(Closure-Original, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed) :-
+	shrink_failed_test(Closure-Original, Types, Goal, Template, Test, Count, MaxShrinks, Verbose, Seed, TestSeed) :-
 		(	Count < MaxShrinks ->
 			(	shrink_goal(Types, Goal, SmallArguments, Small),
 				Condition =.. [call, Closure| SmallArguments],
@@ -2132,10 +2155,10 @@
 				catch(\+ Small, _, fail) ->
 				verbose_report_quick_check_test(Verbose, Small, Template, shrinked, warning),
 				Next is Count + 1,
-				shrink_failed_test(Closure-Original, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed)
-			;	quick_check_failed(Goal, Template, Test, Count, Seed)
+				shrink_failed_test(Closure-Original, Types, Small, Template, Test, Next, MaxShrinks, Verbose, Seed, TestSeed)
+			;	quick_check_failed(Goal, Template, Test, Count, Seed, TestSeed)
 			)
-		;	quick_check_failed(Goal, Template, Test, Count, Seed)
+		;	quick_check_failed(Goal, Template, Test, Count, Seed, TestSeed)
 		).
 
 	shrink_goal(Types, Large, SmallArguments, Small) :-
@@ -2162,22 +2185,22 @@
 
 	% undo the <</2 control construct if added by the tool itself
 
-	quick_check_error(Object<<Goal, _<<_, Test, Seed, Error, Template, Verbose) :-
+	quick_check_error(Object<<Goal, _<<_, Test, Seed, TestSeed, Error, Template, Verbose) :-
 		verbose_report_quick_check_test(Verbose, Object<<Goal, Template, error, warning),
-		throw(quick_check_error(Error, Object<<Goal, Test, Seed)).
-	quick_check_error(_<<Goal, _, Test, Seed, Error, Template, Verbose) :-
+		throw(quick_check_error(Error, Object<<Goal, Test, Seed, TestSeed)).
+	quick_check_error(_<<Goal, _, Test, Seed, TestSeed, Error, Template, Verbose) :-
 		verbose_report_quick_check_test(Verbose, Goal, Template, error, warning),
-		throw(quick_check_error(Error, Goal, Test, Seed)).
-	quick_check_error(Goal, _, Test, Seed, Error, Template, Verbose) :-
+		throw(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
+	quick_check_error(Goal, _, Test, Seed, TestSeed, Error, Template, Verbose) :-
 		verbose_report_quick_check_test(Verbose, Goal, Template, error, warning),
-		throw(quick_check_error(Error, Goal, Test, Seed)).
+		throw(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
 
-	quick_check_failed(Object<<Goal, _<<_, Test, Depth, Seed) :-
-		throw(quick_check_failed(Object<<Goal, Test, Depth, Seed)).
-	quick_check_failed(_<<Goal, _, Test, Depth, Seed) :-
-		throw(quick_check_failed(Goal, Test, Depth, Seed)).
-	quick_check_failed(Goal, _, Test, Depth, Seed) :-
-		throw(quick_check_failed(Goal, Test, Depth, Seed)).
+	quick_check_failed(Object<<Goal, _<<_, Test, Depth, Seed, TestSeed) :-
+		throw(quick_check_failed(Object<<Goal, Test, Depth, Seed, TestSeed)).
+	quick_check_failed(_<<Goal, _, Test, Depth, Seed, TestSeed) :-
+		throw(quick_check_failed(Goal, Test, Depth, Seed, TestSeed)).
+	quick_check_failed(Goal, _, Test, Depth, Seed, TestSeed) :-
+		throw(quick_check_failed(Goal, Test, Depth, Seed, TestSeed)).
 
 	% definition taken from the SWI-Prolog documentation
 	variant(Term1, Term2) :-

@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:4:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2022-06-02,
+		date is 2022-08-23,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -382,21 +382,21 @@ a(1).
 	% quick_check/3 tests
 
 	test(quick_check_3_01, subsumes(passed(_,_,_), Result)) :-
-		quick_check(atom(+atom), Result, []).
+		quick_check(atom(+atom), Result, [ec(false)]).
 
 	test(quick_check_3_02, subsumes(passed(_,_,_), Result)) :-
-		quick_check(atom(+atom), Result, [n(25)]).
+		quick_check(atom(+atom), Result, [n(25), ec(false)]).
 
 	test(quick_check_3_03, true) :-
 		quick_check(atom(+integer), Result, []),
-		assertion(result, subsumes_term(failed(atom(Integer), _Seed), Result)),
-		Result = failed(atom(Integer), _Seed),
+		assertion(result, subsumes_term(failed(atom(Integer), _Seed, _TestSeed), Result)),
+		Result = failed(atom(Integer), _Seed, _TestSeed),
 		assertion(type, integer(Integer)).
 
 	test(quick_check_3_04, true) :-
 		quick_check(atom(+integer), Result, [n(25)]),
-		assertion(result, subsumes_term(failed(atom(Integer), _Seed), Result)),
-		Result = failed(atom(Integer), _Seed),
+		assertion(result, subsumes_term(failed(atom(Integer), _Seed, _TestSeed), Result)),
+		Result = failed(atom(Integer), _Seed, _TestSeed),
 		assertion(type, integer(Integer)).
 
 	test(quick_check_3_05, true(Result == broken(template_error, instantiation_error))) :-
@@ -405,10 +405,10 @@ a(1).
 	test(quick_check_3_06, true(Result == broken(template_error, type_error(callable,1)))) :-
 		quick_check(1, Result, []).
 
-	test(quick_check_3_07, subsumes(error(existence_error(predicate_declaration,foo42/1),_,_), Result)) :-
+	test(quick_check_3_07, subsumes(error(existence_error(predicate_declaration,foo42/1),_,_,_), Result)) :-
 		quick_check(type::foo42(+integer), Result, []).
 
-	test(quick_check_3_08, subsumes(failed(foo(1),_), Result)) :-
+	test(quick_check_3_08, subsumes(failed(foo(1),_Seed,_TestSeed), Result)) :-
 		quick_check(foo(@var), Result, []).
 
 	test(quick_check_3_09, true) :-
@@ -457,10 +457,10 @@ a(1).
 	test(quick_check_3_16, subsumes(broken(pre_condition_error, error(existence_error(procedure,condition4/1),_)), Result)) :-
 		quick_check(integer(+byte), Result, [pc(condition4)]).
 
-	test(quick_check_3_17, true(Goal0-Seed0 == Goal-Seed)) :-
+	test(quick_check_3_17, true(r(Goal0,Seed0,TestSeed0) == r(Goal,Seed,TestSeed))) :-
 		% test that we are using a pseudo random generator
-		quick_check(atom(+integer), failed(Goal0, Seed0), [ec(false)]),
-		quick_check(atom(+integer), failed(Goal, Seed), [ec(false), rs(Seed0)]).
+		quick_check(atom(+integer), failed(Goal0, Seed0, TestSeed0), [ec(false)]),
+		quick_check(atom(+integer), failed(Goal, Seed, TestSeed), [ec(false), rs(Seed0)]).
 
 	test(quick_check_3_18, true(Result == broken(generate_test_failure, +foo))) :-
 		quick_check(integer(+foo), Result, []).
@@ -471,11 +471,11 @@ a(1).
 	% quick_check/2 tests
 
 	test(quick_check_2_01, true(N == 100)) :-
-		quick_check(atom(+atom), []),
+		quick_check(atom(+atom), [ec(false)]),
 		quick_check_passed(N).
 
 	test(quick_check_2_02, true(N == 25)) :-
-		quick_check(atom(+atom), [n(25)]),
+		quick_check(atom(+atom), [n(25), ec(false)]),
 		quick_check_passed(N).
 
 	test(quick_check_2_03, false) :-
@@ -502,7 +502,7 @@ a(1).
 	% quick_check/1 tests
 
 	test(quick_check_1_01,  true(N == 100)) :-
-		quick_check(atom(+atom)),
+		quick_check(integer(+integer)),
 		quick_check_passed(N).
 
 	test(quick_check_1_02, false) :-
@@ -565,8 +565,8 @@ a(1).
 	logtalk::message_hook(quick_check_passed(NumberOfTests,_Seed,_Dicarded,_Labels), _, lgtunit, _) :-
 		retractall(quick_check_passed(_)),
 		assertz(quick_check_passed(NumberOfTests)).
-	logtalk::message_hook(quick_check_failed(_,_,_,_), _, lgtunit, _).
-	logtalk::message_hook(quick_check_error(_,_,_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_failed(_,_,_,_,_), _, lgtunit, _).
+	logtalk::message_hook(quick_check_error(_,_,_,_,_), _, lgtunit, _).
 	logtalk::message_hook(quick_check_error(_,_), _, lgtunit, _).
 	logtalk::message_hook(quick_check_broken(_,_), _, lgtunit, _).
 

@@ -436,15 +436,16 @@ The following options are supported:
 - `pc/1`: pre-condition closure for generated tests (extended with the test arguments; no default).
 - `l/1`: label closure for classifying the generated tests (extended with the test arguments plus the label argument; no default).
 - `v/1`: boolean option for verbose reporting of generated random tests (default is `false`).
+- `pb/2`: progress bar option for executed random tests when the verbose option is false (first argument is a boolean, default is `false`; second argument is the tick number, a positive integer).
 
 The `quick_check/1` predicate uses the default option values. When using the
 `quick_check/2-3` predicates, invalid options are ignored and replaced with
 the default value if applicable. The `quick_check/1-2` predicates print the
 test results. The `quick_check/3` predicate returns results in reified form:
 
-- `passed(Seed, Discarded, Labels)`
-- `failed(Goal, Seed)`
-- `error(Error, Goal, Seed)`
+- `passed(SequenceSeed, Discarded, Labels)`
+- `failed(Goal, SequenceSeed, TestSeed)`
+- `error(Error, Goal, SequenceSeed, TestSeed)`
 - `broken(Why, Culprit)`
 
 The `broken(Why, Culprit)` result only occurs when the user-defined testing
@@ -455,9 +456,14 @@ generated test), or errors/failures when generating tests (e.g. due to an
 unknown type being used in the template or a broken custom type arbitrary
 value generator).
 
-The `Goal` argument is the random test that failed. The `Seed` argument is the
-starting seed used to generate the random tests and should be regarded as an
-opaque term. See below how to use it when testing bug fixes.
+The `Goal` argument is the random test that failed.
+
+The `SequenceSeed` argument is the starting seed used to generate the
+sequence of random tests. The `TestSeed` is the seed used to generate the
+test that failed. Both seems should be regarded as opaque terms. When the
+test seed equal to the sequence seed, this means means that the failure or
+error occurred while using only type edge cases. See below how to use the
+seeds when testing bug fixes.
 
 The `Discarded` argument returns the number of generated tests that were
 discarded for failing to comply a pre-condition specified using the `pc/1`
@@ -522,15 +528,20 @@ When a counter-example is found, the verbose option also prints the shrink
 steps. For example:
 
 	| ?- lgtunit::quick_check(atom(+atomic), [v(true), ec(false)]).
-	% Passed:    atom('}U')
-	*     Failure:   atom(-13)
+	% Passed:    atom('dyO=Xv_MX-3b/U4KH U')
+	*     Failure:   atom(-198)
+	*     Shrinked:  atom(-99)
+	*     Shrinked:  atom(-49)
+	*     Shrinked:  atom(-24)
+	*     Shrinked:  atom(-12)
 	*     Shrinked:  atom(-6)
 	*     Shrinked:  atom(-3)
 	*     Shrinked:  atom(-1)
 	*     Shrinked:  atom(0)
-	*     quick check test failure (at test 2 after 4 shrinks):
+	*     quick check test failure (at test 2 after 8 shrinks):
 	*       atom(0)
-	*     starting seed: seed(1341,12174,18263)
+	*     starting seed: seed(3172,9814,20125)
+	*     test seed:     seed(7035,19506,18186)
 	no
 
 The template can be a `(::)/2`, `(<<)/2`, or `(:)/2` qualified callable term. When
@@ -544,6 +555,7 @@ non-negative floats):
 	*     quick check test failure (at test 1 after 0 shrinks):
 	*       random::random(0.09230089279334841)
 	*     starting seed: seed(3172,9814,20125)
+	*     test seed:     seed(3172,9814,20125)
 	no
 
 When QuickCheck exposes a bug in the tested code, we can use the reported
@@ -572,6 +584,7 @@ returns a list of integers:
 	*     quick check test failure (at test 2 after 0 shrinks):
 	*       every_other([0],A)
 	*     starting seed: seed(3172,9814,20125)
+	*     test seed:     seed(3172,9814,20125)
 	no
 
 We could fix this particular bug by rewriting the predicate:
@@ -584,8 +597,8 @@ We could fix this particular bug by rewriting the predicate:
 	every_other([_| T], X, [X| L]) :-
 		every_other(T, L).
 
-By retesting with the same seed that uncovered the bug, the same random test
-that found the bug will be generated and run again:
+By retesting with the same test seed that uncovered the bug, the same random
+test that found the bug will be generated and run again:
 
 	| ?- lgtunit::quick_check(
 			every_other(+list(integer), -list(integer)),
@@ -594,6 +607,10 @@ that found the bug will be generated and run again:
 	% 100 random tests passed, 0 discarded
 	% starting seed: seed(3172,9814,20125)
 	yes
+
+Still, after verifying the bug fix, is also a good idea to re-run the tests
+using the sequence seed instead as bug fixes sometimes cause regressions
+elsewhere.
 
 When retesting using the `logtalk_tester` automation script, the starting seed
 can be set using the `-r` option. For example:

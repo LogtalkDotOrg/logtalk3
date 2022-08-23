@@ -39,6 +39,18 @@ Library
 * FIXED: The `os` library `delete_directory/1`, `directory_files/2`,
 `environment_variable/1`, and `file_permission/2` predicates for YAP.
 
+Tools
+-----
+
+* CHANGED: The `lgtunit::quick_check/3` predicate now uses reified `error/4`
+and `failed/3` results that include as last argument the test seed.
+
+* ADDED: The `lgtunit` QuickCheck test dialects and predicates now also accept
+a `pb/2` option to show an ASCII progress bar.
+
+* IMPROVED: The `lgtunit::quick_check/1-2` predicates now also print the
+test seed when a counter-example is found.
+
 Examples
 --------
 

@@ -615,6 +615,9 @@ the test arguments; no default).</p></li>
 with the test arguments plus the label argument; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">v/1</span></code>: boolean option for verbose reporting of generated random
 tests (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pb/2</span></code>: progress bar option for executed random tests when the
+verbose option is false (first argument is a boolean, default is
+<code class="docutils literal notranslate"><span class="pre">false</span></code>; second argument is the tick number, a positive integer).</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code> predicate uses the default option values. When
 using the <code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code> predicates, invalid options are ignored
@@ -622,9 +625,9 @@ and replaced with the default value if applicable. The
 <code class="docutils literal notranslate"><span class="pre">quick_check/1-2</span></code> predicates print the test results. The
 <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">passed(Seed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">Seed)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">Seed)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passed(SequenceSeed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">failed(Goal,</span> <span class="pre">SequenceSeed,</span> <span class="pre">TestSeed)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error(Error,</span> <span class="pre">Goal,</span> <span class="pre">SequenceSeed,</span> <span class="pre">TestSeed)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code> result only occurs when the user-defined
@@ -634,10 +637,13 @@ with the label closure (e.g. a pre-condition that always fails or a
 label that fails to classify a generated test), or errors/failures when
 generating tests (e.g. due to an unknown type being used in the template
 or a broken custom type arbitrary value generator).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Goal</span></code> argument is the random test that failed. The <code class="docutils literal notranslate"><span class="pre">Seed</span></code>
-argument is the starting seed used to generate the random tests and
-should be regarded as an opaque term. See below how to use it when
-testing bug fixes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Goal</span></code> argument is the random test that failed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SequenceSeed</span></code> argument is the starting seed used to generate the
+sequence of random tests. The <code class="docutils literal notranslate"><span class="pre">TestSeed</span></code> is the seed used to generate
+the test that failed. Both seems should be regarded as opaque terms.
+When the test seed equal to the sequence seed, this means means that the
+failure or error occurred while using only type edge cases. See below
+how to use the seeds when testing bug fixes.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Discarded</span></code> argument returns the number of generated tests that
 were discarded for failing to comply a pre-condition specified using the
 <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option. This option is specially useful when constraining or
@@ -701,15 +707,20 @@ yes
 <p>When a counter-example is found, the verbose option also prints the
 shrink steps. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(<span class="k">atom</span>(<span class="o">+</span>atomic), [v(<span class="k">true</span>), ec(<span class="k">false</span>)]).
-<span class="c">% Passed:    atom(&#39;}U&#39;)</span>
-<span class="o">*</span>     <span class="nv">Failure</span><span class="o">:</span>   <span class="k">atom</span>(<span class="o">-</span><span class="m">13</span>)
+<span class="c">% Passed:    atom(&#39;dyO=Xv_MX-3b/U4KH U&#39;)</span>
+<span class="o">*</span>     <span class="nv">Failure</span><span class="o">:</span>   <span class="k">atom</span>(<span class="o">-</span><span class="m">198</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">99</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">49</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">24</span>)
+<span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">12</span>)
 <span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">6</span>)
 <span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">3</span>)
 <span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="o">-</span><span class="m">1</span>)
 <span class="o">*</span>     <span class="nv">Shrinked</span><span class="o">:</span>  <span class="k">atom</span>(<span class="m">0</span>)
-<span class="o">*</span>     quick check test failure (at test <span class="m">2</span> after <span class="m">4</span> shrinks)<span class="o">:</span>
+<span class="o">*</span>     quick check test failure (at test <span class="m">2</span> after <span class="m">8</span> shrinks)<span class="o">:</span>
 <span class="o">*</span>       <span class="k">atom</span>(<span class="m">0</span>)
-<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">1341</span>,<span class="m">12174</span>,<span class="m">18263</span>)
+<span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+<span class="o">*</span>     test seed<span class="o">:</span>     seed(<span class="m">7035</span>,<span class="m">19506</span>,<span class="m">18186</span>)
 no
 </pre></div>
 </div>
@@ -723,6 +734,7 @@ the <code class="docutils literal notranslate"><span class="pre">random::random/
 <span class="o">*</span>     quick check test failure (at test <span class="m">1</span> after <span class="m">0</span> shrinks)<span class="o">:</span>
 <span class="o">*</span>       random<span class="o">::</span>random(<span class="m">0.09230089279334841</span>)
 <span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+<span class="o">*</span>     test seed<span class="o">:</span>     seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
 no
 </pre></div>
 </div>
@@ -751,6 +763,7 @@ succeed and returns a list of integers:</p>
 <span class="o">*</span>     quick check test failure (at test <span class="m">2</span> after <span class="m">0</span> shrinks)<span class="o">:</span>
 <span class="o">*</span>       every_other([<span class="m">0</span>],<span class="nv">A</span>)
 <span class="o">*</span>     starting seed<span class="o">:</span> seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
+<span class="o">*</span>     test seed<span class="o">:</span>     seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>)
 no
 </pre></div>
 </div>
@@ -764,8 +777,8 @@ every_other([<span class="nv">_</span>| <span class="nv">T</span>], <span class=
     every_other(<span class="nv">T</span>, <span class="nv">L</span>).
 </pre></div>
 </div>
-<p>By retesting with the same seed that uncovered the bug, the same random
-test that found the bug will be generated and run again:</p>
+<p>By retesting with the same test seed that uncovered the bug, the same
+random test that found the bug will be generated and run again:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>quick_check(
         every_other(<span class="o">+</span>list(integer), <span class="o">-</span>list(integer)),
         [rs(seed(<span class="m">3172</span>,<span class="m">9814</span>,<span class="m">20125</span>))]
@@ -775,6 +788,9 @@ test that found the bug will be generated and run again:</p>
 yes
 </pre></div>
 </div>
+<p>Still, after verifying the bug fix, is also a good idea to re-run the
+tests using the sequence seed instead as bug fixes sometimes cause
+regressions elsewhere.</p>
 <p>When retesting using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script, the
 starting seed can be set using the <code class="docutils literal notranslate"><span class="pre">-r</span></code> option. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -r &quot;seed(3172,9814,20125)&quot;

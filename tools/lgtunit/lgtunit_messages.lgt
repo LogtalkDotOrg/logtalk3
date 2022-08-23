@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 6:0:0,
+		version is 7:0:0,
 		author is 'Paulo Moura',
-		date is 2022-06-02,
+		date is 2022-08-23,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -149,23 +149,32 @@
 	message_tokens(verbose_quick_check_test(shrinked, Goal)) -->
 		['Shrinked:  ~q'-[Goal], nl].
 
+	message_tokens(quick_check_progress_bar_start) -->
+		[].
+	message_tokens(quick_check_progress_bar_tick(Test)) -->
+		[at_same_line, '...~d'-[Test], flush].
+	message_tokens(quick_check_progress_bar_end) -->
+		[at_same_line, nl].
+
 	message_tokens(quick_check_passed(NumberOfTests, Seed, Discarded, Labels)) -->
 		['~w random tests passed, ~w discarded'-[NumberOfTests, Discarded], nl],
 		['starting seed: ~w'-[Seed], nl],
 		quick_check_labels(Labels, NumberOfTests).
 
-	message_tokens(quick_check_failed(Goal, Test, Shrinks, Seed)) -->
+	message_tokens(quick_check_failed(Goal, Test, Shrinks, Seed, TestSeed)) -->
 		(	{Shrinks == 1} ->
 			['quick check test failure (at test ~w after ~w shrink):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
 		;	['quick check test failure (at test ~w after ~w shrinks):'-[Test, Shrinks], nl, '  ~q'-[Goal], nl]
 		),
-		['starting seed: ~w'-[Seed], nl].
+		['starting seed: ~q'-[Seed], nl],
+		['test seed:     ~q'-[TestSeed], nl].
 
-	message_tokens(quick_check_error(error(Error,_), Goal, Test, Seed)) -->
-		message_tokens(quick_check_error(Error, Goal, Test, Seed)).
-	message_tokens(quick_check_error(Error, _Goal, Test, Seed)) -->
+	message_tokens(quick_check_error(error(Error,_), Goal, Test, Seed, TestSeed)) -->
+		message_tokens(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
+	message_tokens(quick_check_error(Error, _Goal, Test, Seed, TestSeed)) -->
 		['quick check test error (at test ~w):'-[Test], nl, '  ~q'-[Error], nl],
-		['starting seed: ~w'-[Seed], nl].
+		['starting seed: ~q'-[Seed], nl],
+		['test seed:     ~q'-[TestSeed], nl].
 
 	message_tokens(quick_check_broken(generate_test_error(Template), Error)) -->
 		['quick check test generation error for template: ~q'-[Template], nl, '  ~q'-[Error], nl].
@@ -299,16 +308,16 @@
 		['    expected ~q'-[ExpectedError], nl],
 		['    but got  ~q'-[Error], nl].
 
-	failed_test_reason(quick_check_failed(Goal, Test, Shrinks, Seed)) -->
+	failed_test_reason(quick_check_failed(Goal, Test, Shrinks, Seed, TestSeed)) -->
 		(	{Shrinks == 1} ->
-			['  quick check test failure (at test ~w after ~w shrink with starting seed ~q): ~q'-[Test, Shrinks, Seed, Goal], nl]
-		;	['  quick check test failure (at test ~w after ~w shrinks with starting seed ~q): ~q'-[Test, Shrinks, Seed, Goal], nl]
+			['  quick check test failure (at test ~w after ~w shrink with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
+		;	['  quick check test failure (at test ~w after ~w shrinks with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
 		).
 
-	failed_test_reason(quick_check_error(error(Error,_), Goal, Test, Seed)) -->
-		failed_test_reason(quick_check_error(Error, Goal, Test, Seed)).
-	failed_test_reason(quick_check_error(Error, _Goal, Test, Seed)) -->
-		['  quick check test error (at test ~w with starting seed ~q): ~q'-[Test, Seed, Error], nl].
+	failed_test_reason(quick_check_error(error(Error,_), Goal, Test, Seed, TestSeed)) -->
+		failed_test_reason(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
+	failed_test_reason(quick_check_error(Error, _Goal, Test, Seed, TestSeed)) -->
+		['  quick check test error (at test ~w with starting seed ~q and test seed ~q): ~q'-[Test, Seed, TestSeed, Error], nl].
 	failed_test_reason(quick_check_error(Error, Culprit)) -->
 		['  quick check test error (caused by ~q): ~q'-[Error, Culprit], nl].
 
