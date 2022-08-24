@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:50:0,
+		version is 0:50:1,
 		author is 'Paulo Moura',
-		date is 2022-06-29,
+		date is 2022-08-24,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -275,7 +275,7 @@
 	directory(Registry) :-
 		directory(Registry, Directory),
 		internal_os_path(Directory, OSDirectory),
-		print_message(information, packs, install_directory(OSDirectory)).
+		print_message(information, packs, installation_directory(OSDirectory)).
 
 	prefix(Directory) :-
 		^^logtalk_packs(LogtalkPacks),
@@ -284,7 +284,7 @@
 	prefix :-
 		prefix(Directory),
 		internal_os_path(Directory, OSDirectory),
-		print_message(information, packs, install_directory(OSDirectory)).
+		print_message(information, packs, installation_directory(OSDirectory)).
 
 	% add registry predicates
 

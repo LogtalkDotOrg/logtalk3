@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:27:0,
+		version is 0:27:1,
 		author is 'Paulo Moura',
-		date is 2022-06-29,
+		date is 2022-08-24,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -314,6 +314,9 @@
 		],
 		pack_info(Versions),
 		notes(Notes).
+
+	message_tokens(installation_directory(Directory)) -->
+		['Installation directory: ~q'-[Directory], nl].
 
 	% pack search hits
 
