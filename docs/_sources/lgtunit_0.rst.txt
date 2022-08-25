@@ -328,7 +328,7 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 ``quick_check/3``
 ^^^^^^^^^^^^^^^^^
 
-Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)``, ``error(Error,Goal,Seed)``, or ``broken(Why,Culprit)``. ``Goal`` is the failed test. ``Seed`` is the starting seed.
+Reified version of the ``quick_check/2`` predicate. Reports ``passed(SequenceSeed,Discarded,Labels)``, ``failed(Goal,SequenceSeed,TestSeed)``, ``error(Error,Goal,SequenceSeed,TestSeed)``, or ``broken(Why,Culprit)``. ``Goal`` is the failed test.
 
 | **Compilation flags:**
 |    ``static``
@@ -342,7 +342,8 @@ Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discar
 
 | **Remarks:**
 
-    - ``Seed`` argument: Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.
+    - ``SequenceSeed`` argument: Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.
+    - ``TestSeed`` argument: Can be used to re-run the test that failed by using the ``rs/1`` option after changes to the code being tested.
     - ``Discarded`` argument: Number of generated tests that were discarded for failing to comply a pre-condition specified using the ``pc/1`` option.
     - ``Labels`` argument: List of pairs ``Label-N`` where ``N`` is the number of generated tests that are classified as ``Label`` by a closure specified using the ``l/1`` option.
     - ``broken(Why,Culprit)`` result: This result signals a broken setup. For example, an invalid template, a broken pre-condition or label goal, or broken test generation.
@@ -360,7 +361,7 @@ Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discar
 ``quick_check/2``
 ^^^^^^^^^^^^^^^^^
 
-Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test.
+Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test. Also fails on an invalid option, printing the option.
 
 | **Compilation flags:**
 |    ``static``
@@ -381,6 +382,7 @@ Generates and runs random tests for a predicate given its mode template and a se
     - Test generation filtering: Use the ``pc/1`` option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).
     - Generated tests classification: Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.
     - Verbose test generation: Use the ``v(Boolean)`` option to specifiy verbose reporting of generated random tests. Default is ``false``.
+    - Progress bar: Use the ``pb(Boolean,Tick)`` option to print a progress bar for the executed tests, advancing at every ``Tick`` tests. Default is ``false``. Only applies when the verbose option is false.
 
 
 ------------

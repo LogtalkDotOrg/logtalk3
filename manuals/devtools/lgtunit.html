@@ -619,10 +619,9 @@ tests (default is <code class="docutils literal notranslate"><span class="pre">f
 verbose option is false (first argument is a boolean, default is
 <code class="docutils literal notranslate"><span class="pre">false</span></code>; second argument is the tick number, a positive integer).</p></li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code> predicate uses the default option values. When
-using the <code class="docutils literal notranslate"><span class="pre">quick_check/2-3</span></code> predicates, invalid options are ignored
-and replaced with the default value if applicable. The
-<code class="docutils literal notranslate"><span class="pre">quick_check/1-2</span></code> predicates print the test results. The
+<p>The <code class="docutils literal notranslate"><span class="pre">quick_check/1</span></code> predicate uses the default option values. The
+<code class="docutils literal notranslate"><span class="pre">quick_check/1-2</span></code> predicates print the test results and are thus
+better reserved for testing at the top-level interpreter. The
 <code class="docutils literal notranslate"><span class="pre">quick_check/3</span></code> predicate returns results in reified form:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">passed(SequenceSeed,</span> <span class="pre">Discarded,</span> <span class="pre">Labels)</span></code></p></li>
@@ -632,11 +631,12 @@ and replaced with the default value if applicable. The
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code> result only occurs when the user-defined
 testing setup is broken. For example, a non-callable template (e.g. a
-non-existing predicate), a problem with the pre-condition closure or
-with the label closure (e.g. a pre-condition that always fails or a
-label that fails to classify a generated test), or errors/failures when
-generating tests (e.g. due to an unknown type being used in the template
-or a broken custom type arbitrary value generator).</p>
+non-existing predicate), an invalid option, a problem with the
+pre-condition closure or with the label closure (e.g. a pre-condition
+that always fails or a label that fails to classify a generated test),
+or errors/failures when generating tests (e.g. due to an unknown type
+being used in the template or a broken custom type arbitrary value
+generator).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Goal</span></code> argument is the random test that failed.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">SequenceSeed</span></code> argument is the starting seed used to generate the
 sequence of random tests. The <code class="docutils literal notranslate"><span class="pre">TestSeed</span></code> is the seed used to generate

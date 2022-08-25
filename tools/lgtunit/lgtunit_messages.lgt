@@ -31,7 +31,7 @@
 	:- info([
 		version is 7:0:0,
 		author is 'Paulo Moura',
-		date is 2022-08-23,
+		date is 2022-08-25,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -182,17 +182,20 @@
 		['quick check test generation failure for template: ~q'-[Template], nl, '  ~q'-[Type], nl].
 
 	message_tokens(quick_check_broken(label_goal_error(Label), Error)) -->
-		['quick check error using label closure: ~w'-[Label], nl, '  ~q'-[Error], nl].
+		['quick check error using label closure: ~q'-[Label], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_broken(label_goal_failure(Label))) -->
-		['quick check label closure fails: ~w'-[Label], nl].
+		['quick check label closure fails: ~q'-[Label], nl].
 
 	message_tokens(quick_check_broken(pre_condition_error(Condition), Error)) -->
-		['quick check error using pre-condition closure: ~w'-[Condition], nl, '  ~q'-[Error], nl].
+		['quick check error using pre-condition closure: ~q'-[Condition], nl, '  ~q'-[Error], nl].
 	message_tokens(quick_check_broken(pre_condition_always_fails(Condition))) -->
-		['quick check pre-condition closure fails: ~w'-[Condition], nl].
+		['quick check pre-condition closure fails: ~q'-[Condition], nl].
 
 	message_tokens(quick_check_broken(template_error(Template), Error)) -->
-		['quick check error using template: ~w'-[Template], nl, '  ~q'-[Error], nl].
+		['quick check error using template: ~q'-[Template], nl, '  ~q'-[Error], nl].
+
+	message_tokens(quick_check_broken(option_error(Option), Error)) -->
+		['quick check option error: ~q'-[Option], nl, '  ~q'-[Error], nl].
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),

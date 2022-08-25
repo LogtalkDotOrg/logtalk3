@@ -45,6 +45,9 @@ Tools
 * CHANGED: The `lgtunit::quick_check/3` predicate now uses reified `error/4`
 and `failed/3` results that include as last argument the test seed.
 
+* CHANGED: The `lgtunit` tool now reports an error on wrong QuickCheck options
+instead of silently using default option values.
+
 * ADDED: The `lgtunit` QuickCheck test dialects and predicates now also accept
 a `pb/2` option to show an ASCII progress bar.
 

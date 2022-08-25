@@ -131,10 +131,11 @@
 	:- mode(quick_check(@callable, -callable, ++list(compound)), one).
 	:- meta_predicate(quick_check(::, *, ::)).
 	:- info(quick_check/3, [
-		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(Seed,Discarded,Labels)``, ``failed(Goal,Seed)``, ``error(Error,Goal,Seed)``, or ``broken(Why,Culprit)``. ``Goal`` is the failed test. ``Seed`` is the starting seed.',
+		comment is 'Reified version of the ``quick_check/2`` predicate. Reports ``passed(SequenceSeed,Discarded,Labels)``, ``failed(Goal,SequenceSeed,TestSeed)``, ``error(Error,Goal,SequenceSeed,TestSeed)``, or ``broken(Why,Culprit)``. ``Goal`` is the failed test.',
 		argnames is ['Template', 'Result', 'Options'],
 		remarks is [
-			'``Seed`` argument' - 'Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.',
+			'``SequenceSeed`` argument' - 'Can be used to re-run the same exact sequence of pseudo-random tests by using the ``rs/1`` option after changes to the code being tested.',
+			'``TestSeed`` argument' - 'Can be used to re-run the test that failed by using the ``rs/1`` option after changes to the code being tested.',
 			'``Discarded`` argument' - 'Number of generated tests that were discarded for failing to comply a pre-condition specified using the ``pc/1`` option.',
 			'``Labels`` argument' - 'List of pairs ``Label-N`` where ``N`` is the number of generated tests that are classified as ``Label`` by a closure specified using the ``l/1`` option.',
 			'``broken(Why,Culprit)`` result' - 'This result signals a broken setup. For example, an invalid template, a broken pre-condition or label goal, or broken test generation.'
@@ -145,7 +146,7 @@
 	:- mode(quick_check(@callable, ++list(compound)), zero_or_one).
 	:- meta_predicate(quick_check(::, ::)).
 	:- info(quick_check/2, [
-		comment is 'Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test.',
+		comment is 'Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test. Also fails on an invalid option, printing the option.',
 		argnames is ['Template', 'Options'],
 		remarks is [
 			'Number of tests' - 'Use the ``n(NumberOfTests)`` option to specifiy the number of random tests. Default is 100.',
@@ -154,7 +155,8 @@
 			'Starting seed' - 'Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.',
 			'Test generation filtering' - 'Use the ``pc/1`` option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).',
 			'Generated tests classification' - 'Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.',
-			'Verbose test generation' - 'Use the ``v(Boolean)`` option to specifiy verbose reporting of generated random tests. Default is ``false``.'
+			'Verbose test generation' - 'Use the ``v(Boolean)`` option to specifiy verbose reporting of generated random tests. Default is ``false``.',
+			'Progress bar' - 'Use the ``pb(Boolean,Tick)`` option to print a progress bar for the executed tests, advancing at every ``Tick`` tests. Default is ``false``. Only applies when the verbose option is false.'
 		]
 	]).
 
@@ -1625,45 +1627,37 @@
 		parse_quick_check_options(Options, QuickCheckOptions).
 
 	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose), pb(ProgressBar, Tick)| Other]) :-
-		(	memberchk(n(NumberOfTests), Options),
-			integer(NumberOfTests),
-			NumberOfTests >= 0 ->
-			true
+		(	memberchk(n(NumberOfTests), Options) ->
+			check(non_negative_integer, NumberOfTests, option_error(n(NumberOfTests)))
 		;	default_quick_check_option(n(NumberOfTests))
 		),
-		(	memberchk(s(MaxShrinks), Options),
-			integer(MaxShrinks),
-			MaxShrinks >= 0 ->
-			true
+		(	memberchk(s(MaxShrinks), Options) ->
+			check(non_negative_integer, MaxShrinks, option_error(s(MaxShrinks)))
 		;	default_quick_check_option(s(MaxShrinks))
 		),
-		(	memberchk(ec(EdgeCases), Options),
-			(EdgeCases == true; EdgeCases == false) ->
-			true
+		(	memberchk(ec(EdgeCases), Options) ->
+			check(boolean, EdgeCases, option_error(ec(EdgeCases)))
 		;	default_quick_check_option(ec(EdgeCases))
 		),
-		(	memberchk(pc(Condition), Options),
-			callable(Condition) ->
-			true
+		(	memberchk(pc(Condition), Options) ->
+			check(callable, Condition, option_error(pc(Condition)))
 		;	default_quick_check_option(pc(Condition))
 		),
-		(	memberchk(l(Label), Options),
-			callable(Label) ->
-			true
+		(	memberchk(l(Label), Options) ->
+			check(callable, Label, option_error(l(Label)))
 		;	default_quick_check_option(l(Label))
 		),
-		(	memberchk(v(Verbose), Options),
-			(Verbose == true; Verbose == false) ->
-			true
+		(	memberchk(v(Verbose), Options) ->
+			check(boolean, Verbose, option_error(v(Verbose)))
 		;	default_quick_check_option(v(Verbose))
 		),
-		(	memberchk(pb(ProgressBar, Tick), Options),
-			(ProgressBar == true; ProgressBar == false),
-			integer(Tick), Tick > 0 ->
-			true
+		(	memberchk(pb(ProgressBar, Tick), Options) ->
+			check(boolean, ProgressBar, option_error(pb(ProgressBar, Tick))),
+			check(positive_integer, Tick, option_error(pb(ProgressBar, Tick)))
 		;	default_quick_check_option(pb(ProgressBar, Tick))
 		),
 		(	member(rs(Seed), Options) ->
+			check(ground, Seed),
 			Other = [rs(Seed)]
 		;	Other = []
 		).
@@ -1884,15 +1878,18 @@
 	:- endif.
 
 	quick_check(Template, Result, Options) :-
-		parse_quick_check_options(Options, QuickCheckOptions),
-		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed, Discarded, Labels), Error, true),
-		(	var(Error) ->
-			Result = passed(Seed, Discarded, Labels)
-		;	quick_check_error_reified(Error, Result) ->
-			true
-		;	% should not happen but some Prolog backends have
-			% non-standard exception-handling mechanisms
-			Result = error(Error, _)
+		catch(parse_quick_check_options(Options, QuickCheckOptions), OptionError, true),
+		(	var(OptionError) ->
+			catch(run_quick_check_tests(Template, QuickCheckOptions, Seed, Discarded, Labels), Error, true),
+			(	var(Error) ->
+				Result = passed(Seed, Discarded, Labels)
+			;	quick_check_error_reified(Error, Result) ->
+				true
+			;	% should not happen but some Prolog backends have
+				% non-standard exception-handling mechanisms
+				Result = error(Error, _)
+			)
+		;	quick_check_error_reified(OptionError, Result)
 		).
 
 	quick_check_error_reified(quick_check_failed(Goal, _, _, Seed, TestSeed),             failed(Goal, Seed, TestSeed)).
@@ -1905,9 +1902,15 @@
 	quick_check_error_reified(quick_check_broken(pre_condition_error(_), Error),          broken(pre_condition_error, Error)).
 	quick_check_error_reified(quick_check_broken(pre_condition_always_fails(Culprit)),    broken(pre_condition_always_fails, Culprit)).
 	quick_check_error_reified(quick_check_broken(template_error(_), Error),               broken(template_error, Error)).
+	quick_check_error_reified(error(Error, option_error(_)),                              broken(option_error, Error)).
 
 	quick_check(Template, Options) :-
-		parse_quick_check_options(Options, QuickCheckOptions),
+		catch(parse_quick_check_options(Options, QuickCheckOptions), error(OptionError, option_error(Option)), true),
+		(	var(OptionError) ->
+			true
+		;	print_message(error, lgtunit, quick_check_broken(option_error(Option), OptionError)),
+			fail
+		),
 		memberchk(n(NumberOfTests), QuickCheckOptions),
 		catch(run_quick_check_tests(Template, QuickCheckOptions, Seed, Discarded, Labels), Error, true),
 		(	var(Error) ->

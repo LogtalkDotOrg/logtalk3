@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:4:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2022-02-04,
+		date is 2022-08-25,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -199,6 +199,8 @@
 	quick_check(quick_check_3_03, type::valid({integer}, +integer), []).
 
 	quick_check(quick_check_3_04, type::valid({integer}, +integer), [n(50)]).
+
+	- quick_check(quick_check_3_05, type::valid({integer}, +integer), [ec(fail)]).
 
 	quick_check(quick_check_2_01, integer(+integer)).
 

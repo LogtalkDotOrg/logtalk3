@@ -29,7 +29,7 @@ a(1).
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2022-08-23,
+		date is 2022-08-25,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -468,6 +468,12 @@ a(1).
 	test(quick_check_3_19, subsumes(broken(generate_test_error, error(type_error(character,1),_)), Result)) :-
 		quick_check(integer(+broken_type), Result, []).
 
+	test(quick_check_3_20, true(Result == broken(option_error,domain_error(non_negative_integer,-42)))) :-
+		quick_check(atom(+atom), Result, [n(-42)]).
+
+	test(quick_check_3_21, true(Result == broken(option_error,domain_error(boolean,fail)))) :-
+		quick_check(atom(+atom), Result, [ec(fail)]).
+
 	% quick_check/2 tests
 
 	test(quick_check_2_01, true(N == 100)) :-
@@ -498,6 +504,12 @@ a(1).
 
 	test(quick_check_2_09, false) :-
 		quick_check(type::foo42(+integer), []).
+
+	test(quick_check_2_10, false) :-
+		quick_check(atom(+atom), [n(-42)]).
+
+	test(quick_check_2_11, false) :-
+		quick_check(atom(+atom), [ec(fail)]).
 
 	% quick_check/1 tests
 

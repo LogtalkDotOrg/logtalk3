@@ -491,10 +491,9 @@ The following options are supported:
    verbose option is false (first argument is a boolean, default is
    ``false``; second argument is the tick number, a positive integer).
 
-The ``quick_check/1`` predicate uses the default option values. When
-using the ``quick_check/2-3`` predicates, invalid options are ignored
-and replaced with the default value if applicable. The
-``quick_check/1-2`` predicates print the test results. The
+The ``quick_check/1`` predicate uses the default option values. The
+``quick_check/1-2`` predicates print the test results and are thus
+better reserved for testing at the top-level interpreter. The
 ``quick_check/3`` predicate returns results in reified form:
 
 -  ``passed(SequenceSeed, Discarded, Labels)``
@@ -504,11 +503,12 @@ and replaced with the default value if applicable. The
 
 The ``broken(Why, Culprit)`` result only occurs when the user-defined
 testing setup is broken. For example, a non-callable template (e.g. a
-non-existing predicate), a problem with the pre-condition closure or
-with the label closure (e.g. a pre-condition that always fails or a
-label that fails to classify a generated test), or errors/failures when
-generating tests (e.g. due to an unknown type being used in the template
-or a broken custom type arbitrary value generator).
+non-existing predicate), an invalid option, a problem with the
+pre-condition closure or with the label closure (e.g. a pre-condition
+that always fails or a label that fails to classify a generated test),
+or errors/failures when generating tests (e.g. due to an unknown type
+being used in the template or a broken custom type arbitrary value
+generator).
 
 The ``Goal`` argument is the random test that failed.
 
