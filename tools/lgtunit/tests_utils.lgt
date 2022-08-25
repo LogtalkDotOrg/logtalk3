@@ -474,6 +474,12 @@ a(1).
 	test(quick_check_3_21, true(Result == broken(option_error,domain_error(boolean,fail)))) :-
 		quick_check(atom(+atom), Result, [ec(fail)]).
 
+	test(quick_check_3_22, subsumes(error(existence_error(procedure,foobar/1),_,_,_), Result)) :-
+		quick_check(foobar(+atom), Result, []).
+
+	test(quick_check_3_23, true(Result == broken(generate_test_failure,+bar))) :-
+		quick_check(foobar(+bar), Result, []).
+
 	% quick_check/2 tests
 
 	test(quick_check_2_01, true(N == 100)) :-
