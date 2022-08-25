@@ -290,7 +290,7 @@ to succeed once without leaving a choice-point. For ``fails/1`` tests,
 ``Goal`` is expected to fail. For ``throws/2`` tests, ``Goal`` is
 expected to throw the exception term ``Ball`` or one of the exception
 terms in the list ``Balls``. The specified exception must subsume the
-generated exception for the test to succeed.
+actual exception for the test to succeed.
 
 An alternative test dialect that can be used with more expressive power
 is:
@@ -302,53 +302,58 @@ is:
 The possible values of the outcome argument are:
 
 -  | ``true``
-   | the test is expected to succeed
+   | The test is expected to succeed.
 
 -  | ``true(Assertion)``
-   | the test is expected to succeed and satisfy the ``Assertion`` goal
+   | The test is expected to succeed and satisfy the ``Assertion`` goal.
 
 -  | ``deterministic``
-   | the test is expected to succeed once without leaving a choice-point
+   | The test is expected to succeed once without leaving a
+     choice-point.
 
 -  | ``deterministic(Assertion)``
-   | the test is expected to succeed once without leaving a choice-point
-     and satisfy the ``Assertion`` goal
+   | The test is expected to succeed once without leaving a choice-point
+     and satisfy the ``Assertion`` goal.
 
 -  | ``subsumes(Expected, Result)``
-   | the test is expected to succeed binding ``Result`` to a term that
-     is subsumed by the ``Expected`` term
+   | The test is expected to succeed binding ``Result`` to a term that
+     is subsumed by the ``Expected`` term.
 
 -  | ``variant(Term1, Term2)``
-   | the test is expected to succeed binding ``Term1`` to a term that is
-     a variant of the ``Term2`` term
+   | The test is expected to succeed binding ``Term1`` to a term that is
+     a variant of the ``Term2`` term.
 
 -  | ``exists(Assertion)``
-   | a solution exists for the test goal that satisfies the
-     ``Assertion`` goal
+   | A solution exists for the test goal that satisfies the
+     ``Assertion`` goal.
 
 -  | ``all(Assertion)``
-   | all test goal solutions satisfy the ``Assertion`` goal
+   | All test goal solutions satisfy the ``Assertion`` goal.
 
 -  | ``fail``
-   | the test is expected to fail
+   | The test is expected to fail.
 
 -  | ``false``
-   | the test is expected to fail
+   | The test is expected to fail.
 
 -  | ``error(Error)``
-   | the test is expected to throw the exception term
-     ``error(Error, _)``
+   | The test is expected to throw the exception term
+     ``error(ActualError, _)`` where ``ActualError`` is subsumed
+     ``Error``.
 
 -  | ``errors(Errors)``
-   | the test is expected to throw an exception term ``error(Error, _)``
-     where ``Error`` is an element of the list ``Errors``
+   | The test is expected to throw an exception term
+     ``error(ActualError, _)`` where ``ActualError`` is subsumed by an
+     element of the list ``Errors``.
 
 -  | ``ball(Ball)``
-   | the test is expected to throw the exception term ``Ball``
+   | The test is expected to throw the exception term ``ActualBall``
+     where ``ActualBall`` is subsumed ``Ball``.
 
 -  | ``balls(Balls)``
-   | the test is expected to throw an exception term ``Ball`` where
-     ``Ball`` is an element of the list ``Balls``
+   | The test is expected to throw an exception term ``ActualBall``
+     where ``ActualBall`` is subsumed by an element of the list
+     ``Balls``.
 
 In the case of the ``true(Assertion)``, ``deterministic(Assertion)``,
 and ``all(Assertion)`` outcomes, a message that includes the assertion
@@ -374,20 +379,20 @@ The currently supported options are (non-recognized options are
 ignored):
 
 -  | ``condition(Goal)``
-   | condition for deciding if the test should be run or skipped
-     (default goal is ``true``)
+   | Condition for deciding if the test should be run or skipped
+     (default goal is ``true``).
 
 -  | ``setup(Goal)``
-   | setup goal for the test (default goal is ``true``)
+   | Setup goal for the test (default goal is ``true``).
 
 -  | ``cleanup(Goal)``
-   | cleanup goal for the test (default goal is ``true``)
+   | Cleanup goal for the test (default goal is ``true``).
 
 -  | ``note(Term)``
-   | annotation to print (between parenthesis by default) after the test
+   | Annotation to print (between parenthesis by default) after the test
      result (default is ``''``); the annotation term can share variables
      with the test goal, which can be used to pass additional
-     information about the test result
+     information about the test result.
 
 Also supported is QuickCheck testing where random tests are
 automatically generated and run given a predicate mode template with
@@ -1390,51 +1395,51 @@ The ``lgtunit`` tool provides several public utility predicates to
 simplify writing unit tests and for general use:
 
 -  | ``variant(Term1, Term2)``
-   | to check when two terms are a variant of each other (e.g. to check
+   | To check when two terms are a variant of each other (e.g. to check
      expected test results against actual results when they contain
-     variables)
+     variables).
 
 -  | ``assertion(Goal)``
-   | to generate an exception in case the goal argument fails or throws
-     an error
+   | To generate an exception in case the goal argument fails or throws
+     an error.
 
 -  | ``assertion(Description, Goal)``
-   | to generate an exception in case the goal argument fails or throws
+   | To generate an exception in case the goal argument fails or throws
      an error (the first argument allows assertion failures to be
-     distinguished when using multiple assertions)
+     distinguished when using multiple assertions).
 
 -  | ``approximately_equal(Number1, Number2, Epsilon)``
-   | for number approximate equality
+   | For number approximate equality.
 
 -  | ``essentially_equal(Number1, Number2, Epsilon)``
-   | for number essential equality
+   | For number essential equality.
 
 -  | ``tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)``
-   | for number equality within tolerances
+   | For number equality within tolerances.
 
 -  | ``Number1 =~= Number2``
-   | for number (or list of numbers) close equality (usually
-     floating-point numbers)
+   | For number (or list of numbers) close equality (usually
+     floating-point numbers).
 
 -  | ``benchmark(Goal, Time)``
-   | for timing a goal
+   | For timing a goal.
 
 -  | ``benchmark_reified(Goal, Time, Result)``
-   | reified version of ``benchmark/2``
+   | Reified version of ``benchmark/2``.
 
 -  | ``benchmark(Goal, Repetitions, Time)``
-   | for finding the average time to prove a goal
+   | For finding the average time to prove a goal.
 
 -  | ``benchmark(Goal, Repetitions, Clock, Time)``
-   | for finding the average time to prove a goal using a cpu or a wall
-     clock
+   | For finding the average time to prove a goal using a cpu or a wall
+     clock.
 
 -  | ``deterministic(Goal)``
-   | for checking that a predicate succeeds without leaving a
-     choice-point
+   | For checking that a predicate succeeds without leaving a
+     choice-point.
 
 -  | ``deterministic(Goal, Deterministic)``
-   | reified version of the ``deterministic/1`` predicate
+   | Reified version of the ``deterministic/1`` predicate.
 
 The ``assertion/1-2`` predicates can be used in the body of tests where
 using two or more assertions is convenient or in the body of tests

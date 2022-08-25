@@ -54,6 +54,9 @@ a `pb/2` option to show an ASCII progress bar.
 * IMPROVED: The `lgtunit::quick_check/1-2` predicates now also print the
 test seed when a counter-example is found.
 
+* IMPROVED: The `lgtunit` tool documentation of the `test/2-3` test dialect
+valid outcomes.
+
 * FIXED: Missing message tokenization in the `packs` tool when printing a
 pack/registry installation directory.
 
