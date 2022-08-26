@@ -1,3 +1,5 @@
+.. _library_library:
+
 ..
    This file is part of Logtalk <https://logtalk.org/>  
    Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -14,7 +16,6 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
 
 =========
 Libraries
