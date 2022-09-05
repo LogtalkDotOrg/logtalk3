@@ -29,7 +29,7 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Linter warning for non-terminals called as predicates instead of
-via the `phrase/2-3` built_in-in methods.
+via the `phrase/2-3` built-in methods.
 
 * FIXED: Detect conflicts between `dynamic/1` directives and `uses/2` and
 `use_module/2` directives.
