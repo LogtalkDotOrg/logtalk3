@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Linter warning for non-terminals called as predicates instead of
+via the `phrase/2-3` built_in-in methods.
+
 * FIXED: Detect conflicts between `dynamic/1` directives and `uses/2` and
 `use_module/2` directives.
 
@@ -57,6 +60,9 @@ test seed when a counter-example is found.
 * IMPROVED: The `lgtunit` tool documentation of the `test/2-3` test dialect
 valid outcomes.
 
+* UPDATED: The `tutor` tool for the new linter warning on non-terminals being
+called as predicates.
+
 * FIXED: Missing message tokenization in the `packs` tool when printing a
 pack/registry installation directory.
 
@@ -65,6 +71,9 @@ Examples
 
 * UPDATED: Reorganize all Net-Clause Language (NCL) examples in the new
 `examples/ncl` directory, including the `figures` individual example.
+
+* UPDATED: The `errors` example to illustrate the new linter warning on
+non-terminals being called as predicates.
 
 * FIXED: Typo in the sample queries of the `document_converter` example.
 

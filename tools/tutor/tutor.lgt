@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:47:0,
+		version is 0:48:0,
 		author is 'Paulo Moura',
-		date is 2022-07-17,
+		date is 2022-09-05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -446,6 +446,12 @@
 	explain(unknown_non_terminal_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to unknown and undefined grammar rules generate a runtime error.'-[], nl,
 			'Misspelt grammar rule name? Wrong number of arguments?'-[], nl, nl
+		].
+
+	explain(calls_non_terminal_as_predicate(_, _, _, _, _)) -->
+		[	'Calls to non-terminals from predicates should always be made using the'-[], nl,
+			'phrase/2-3 built-in methods instead of assuming how grammar rules are'-[], nl,
+			'compiled into predicate clauses.'-[], nl, nl
 		].
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->

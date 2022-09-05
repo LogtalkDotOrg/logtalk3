@@ -155,6 +155,17 @@
 
 
 
+:- object(non_terminal_called_as_a_predicate).
+
+	foo :-
+		bar(_, _).
+
+	bar --> [].
+
+:- end_object.
+
+
+
 :- object(missing_protocol_reference).
 
 	before(_, _, _).

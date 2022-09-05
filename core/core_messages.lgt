@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:114:0,
+		version is 1:115:0,
 		author is 'Paulo Moura',
-		date is 2022-07-16,
+		date is 2022-09-05,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -609,6 +609,10 @@
 
 	message_tokens(unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal)) -->
 		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(calls_non_terminal_as_predicate(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-terminal called as a predicate: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(message_not_understood(File, Lines, Type, Entity, Obj, Pred)) -->

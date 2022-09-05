@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 58, 0, b01)).
+'$lgt_version_data'(logtalk(3, 58, 0, b02)).
 
 
 
@@ -16001,6 +16001,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % call to a local user-defined predicate
 
+'$lgt_compile_body'(Pred, _, _, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user,_,_), _, Lines, _),
+	functor(Pred, Functor, ExtArity),
+	'$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
+	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(
+		warning(general),
+		calls_non_terminal_as_predicate(File, Lines, Type, Entity, Functor//Arity)
+	),
+	fail.
+
 '$lgt_compile_body'(Pred, TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
 	'$lgt_execution_context_this_entity'(ExCtx, _, Entity),
@@ -24764,8 +24777,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_dcg_body'(NonTerminal, S0, S, Goal, Ctx) :-
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal),
 	functor(NonTerminal, Functor, Arity),
-	(	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(_,_,_), _, Lines, _),
-		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, _, _) ->
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
+	(	Mode = compile(_,_,_),
+		\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, _, Lines) ->
 		ExtArity is Arity + 2,
 		assertz('$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines))
 	;	true
