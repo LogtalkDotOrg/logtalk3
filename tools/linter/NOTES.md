@@ -50,6 +50,7 @@ Lint checks include:
 - Duplicated directives, clauses, and grammar rules
 - Missing predicates (unknown messages plus calls to non-declared and non-defined predicates)
 - Calls to declared but not defined static predicates
+- Non-terminals called as predicates (instead of via the `phrase/2-3` built-in methods)
 - Non-portable predicate calls, predicate options, arithmetic function calls, directives, flags, and flag values
 - Suspicious calls (syntactically valid calls that are likely semantic errors; e.g. float comparisons using the standard arithmetic comparison operators)
 - Deprecated directives, predicates, control constructs, and flags
