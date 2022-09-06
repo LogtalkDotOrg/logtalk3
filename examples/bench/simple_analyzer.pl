@@ -344,7 +344,7 @@ var_args(Goal, Set) :-
 	filter_vars(Ar, Goal, Bag),
 	sort(Bag, Set).
 
-filter_vars(Ar, Goal, Vs) :- filter_vars(Ar, Goal, Vs, []).
+filter_vars(Ar, Goal, Vs) :- phrase(filter_vars(Ar, Goal), Vs).
 
 filter_vars(N, Goal) --> {N=<0}, !.
 filter_vars(N, Goal) --> {N>0}, !,
@@ -374,7 +374,7 @@ goal_dupset_varbag(Goal, DupSet, VarBag) :-
 make_key([], []).
 make_key([V|Bag], [V-dummy|KeyBag]) :- make_key(Bag, KeyBag).
 
-filter_dups(KeySet, Set) :- filter_dups(KeySet, Set, []).
+filter_dups(KeySet, Set) :- phrase(filter_dups(KeySet), Set).
 
 filter_dups([]) --> !.
 filter_dups([V1-_,V2-_,V3-_|KeySet]) --> {V1==V2,V2==V3}, !,
@@ -460,7 +460,7 @@ subsetv_2(=, A, S1, S2) :- subsetv(S1, S2).
 subsetv_2(>, A, S1, S2) :- subsetv([A|S1], S2).
 
 varset(Term, VarSet) :- varbag(Term, VB), sort(VB, VarSet).
-varbag(Term, VarBag) :- varbag(Term, VarBag, []).
+varbag(Term, VarBag) :- phrase(varbag(Term), VarBag).
 
 varbag(Var) --> {var(Var)}, !, [Var].
 varbag(Str) --> {nonvar(Str), !, functor(Str,_,Arity)}, varbag(Str, 1, Arity).

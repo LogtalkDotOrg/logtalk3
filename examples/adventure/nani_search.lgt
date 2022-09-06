@@ -9,9 +9,9 @@
 :- object(nani_search).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Amzi! inc.; Logtalk port by Paulo Moura',
-		date is 2021-01-16,
+		date is 2022-09-06,
 		comment is 'NANI SEARCH - A sample adventure game.'
 	]).
 
@@ -399,7 +399,7 @@
 		% read a sentence and puts [it,in,list,form]
 		readlist(L),
 		% call the grammar for command
-		command(X, L, []),
+		phrase(command(X), L),
 		% make the command list a structure
 		C =.. X,
 		!.

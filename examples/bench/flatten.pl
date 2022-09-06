@@ -130,7 +130,7 @@ make_sym([V|L], [p(V,_)|S]) :- make_sym(L, S).
 % *** Gather all variables used in a term: (in a set or a bag)
 varset(Term, VarSet) :- varbag(Term, VB),
     sort(VB, VarSet).
-varbag(Term, VarBag) :- varbag(Term, VarBag, []).
+varbag(Term, VarBag) :- phrase(varbag(Term), VarBag).
 
 varbag(Var) --> {var(Var)}, !, [Var].
 varbag(Str) --> {nonvar(Str), !, functor(Str,_,Arity)}, varbag(Str, 1, Arity).

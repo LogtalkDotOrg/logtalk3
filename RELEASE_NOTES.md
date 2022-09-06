@@ -77,6 +77,9 @@ non-terminals being called as predicates.
 
 * FIXED: Typo in the sample queries of the `document_converter` example.
 
+* FIXED: The `adventure` and `bench` examples linter warnings for
+non-terminals called as predicates.
+
 Tests
 -----
 

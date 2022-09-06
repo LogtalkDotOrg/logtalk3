@@ -14,8 +14,8 @@ top :- main(X).
 main(Size) :- u(X, [1,Y], [X], Code), size(Code, 0, Size).
 
 % Unify variable X with term T and write the result:
-u(X, T, In, Code) :- unify(X, T, In, _, Code, []).
- 
+u(X, T, In, Code) :- phrase(unify(X, T, In, _), Code).
+
 % Unify the variable X with the term T, given that
 % In = set of variables initialized before the unification.
 % Returns the intermediate code for the unification and
@@ -54,7 +54,7 @@ unify_readmode(X, T, In,  In,     _) --> {atomic(T)}, !, [equal(X,tatm^T,fail)].
 
 unify_args(I, N, _, In,  In, _, _,         _) --> {I>N}, !.
 unify_args(I, N, T, In, Out, D, X, [ _ | LLbls]) --> {I=N}, !,
-        unify_arg(I, T, In, Out, D, X, last, LLbls). 
+        unify_arg(I, T, In, Out, D, X, last, LLbls).
 unify_args(I, N, T, In, Out, D, X,     LLbls) --> {I<N}, !,
         unify_arg(I, T, In, Mid, D, X, nonlast, _),
         {I1 is I+1}, unify_args(I1, N, T, Mid, Out, D, X, LLbls).

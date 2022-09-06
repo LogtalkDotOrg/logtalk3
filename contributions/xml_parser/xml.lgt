@@ -17,7 +17,7 @@
 :- object(xml).
 
 	:- info([
-		version is 3:9:0,
+		version is 3:8:2,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
 		date is 2022-09-06,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',

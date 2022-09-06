@@ -324,7 +324,7 @@ intersectv_3(=, A, S1, _, S2, [A|S]) :- intersectv(S1, S2, S).
 intersectv_3(>, A, S1, _, S2,     S) :- intersectv_2(S2, A, S1, S).
 
 intersectv_list([], []).
-intersectv_list([InS|Sets], OutS) :- intersectv_list(Sets, InS, OutS).
+intersectv_list([InS|Sets], OutS) :- phrase(intersectv_list(Sets), InS, OutS).
 
 intersectv_list([]) --> [].
 intersectv_list([S|Sets]) --> intersectv(S), intersectv_list(Sets).
