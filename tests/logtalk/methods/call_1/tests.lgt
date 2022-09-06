@@ -23,15 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2016-05-18,
+		date is 2022-09-06,
 		comment is 'Unit tests for the call//1-N built-in method.'
 	]).
 
-	succeeds(call_1_1) :-
-		phrase(list(next, Successors), [1,2,3]),
-		Successors == [2,3,4].
+	test(call_1_1, true(Successors == [2,3,4])) :-
+		phrase(list(next, Successors), [1,2,3]).
 
 	% test DCG
 
