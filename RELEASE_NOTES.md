@@ -92,6 +92,12 @@ Ports
 * ADDED: Port of FCube: An Efficient Prover for Intuitionistic Propositional
 Logic by Mauro Ferrari, Camillo Fiorentini, and Guido Fiorino.
 
+Contributions
+-------------
+
+* FIXED: The `xml_parser` contribution linter warnings for non-terminals
+called as predicates.
+
 Installers and installation scripts
 -----------------------------------
 

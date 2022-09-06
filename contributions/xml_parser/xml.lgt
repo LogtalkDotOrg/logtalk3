@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3:8:1,
+		version is 3:9:0,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2021-04-01,
+		date is 2022-09-06,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -149,7 +149,7 @@
 		;	Format = true
 		),
 		(	ground( Document ),
-			document_generation(Format, Document, Codes0, [] ) ->
+			phrase( document_generation( Format, Document ), Codes0 ) ->
 			Codes = Codes0
 		;	fault( Document, [], Culprit, Path, Message ),
 			exception( Message, Document, Culprit, Path )
@@ -186,7 +186,7 @@
 
 	xml_to_document( Options, XML, Document ) :-
 		initial_context( Options, Context ),
-		(	xml_declaration( Attributes0, XML, XML1 ) ->
+		(	phrase( xml_declaration( Attributes0 ), XML, XML1 ) ->
 			Attributes = Attributes0
 		;	XML1 = XML,
 			Attributes = []
@@ -264,7 +264,7 @@
 			pi_acquisition( Codes1, Context, Terms, Residue, WF )
 		;	Code =:= 0'! ->
 			declaration_acquisition( Codes1, Context, Terms, Residue, WF )
-		;	open_tag(Tag,Context,Attributes,Type, Codes, Codes2 ) ->
+		;	phrase( open_tag(Tag,Context,Attributes,Type), Codes, Codes2 ) ->
 			push_tag( Tag, Codes2, Context, Attributes, Type, Terms, Residue, WF )
 		;	unparsed( [0'<|Codes], Context, Terms, Residue, WF ) %'
 		).
@@ -314,7 +314,7 @@
 
 	declaration_acquisition( Codes, Context, Terms, Residue, WF ) :-
 		(	declaration_type( Codes, Type, Codes1 ),
-			declaration_parse( Type, Context, Term, Context1, Codes1, Rest ) ->
+			phrase( declaration_parse( Type, Context, Term, Context1 ), Codes1, Rest ) ->
 			Terms = [Term|Terms1],
 			xml_to_document0( Rest, Context1, Terms1, Residue, WF )
 		;	unparsed( [0'<,0'!|Codes], Context, Terms, Residue, WF )
@@ -341,7 +341,7 @@
 		">".
 
 	inline_instruction( Target, Processing, Plus, Minus  ) :-
-		nmtoken(Target, Plus, Mid0 ),
+		phrase( nmtoken( Target ), Plus, Mid0 ),
 		spaces( Mid0, Mid1 ),
 		append( Processing, [0'?,0'>|Minus], Mid1 ),
 		!.
@@ -366,7 +366,7 @@
 		append( "CTYPE", Residue, Codes ).
 
 	closing_tag( Context, Codes, Terms, Residue, WellFormed ) :-
-		(	closing_tag_name( Tag, Codes, Rest ),
+		(	phrase( closing_tag_name( Tag ), Codes, Rest ),
 			current_tag( Context, Tag ) ->
 			Terms = [],
 			Residue = Rest,
@@ -383,11 +383,11 @@
 		reference_in_layout( Codes, Context, L, L, Terms, Residue, WF ).
 
 	reference_in_layout( Codes, Context, Plus, Minus, Terms, Residue, WF ) :-
-		(	standard_character_entity( Code, Codes, Rest ) ->
+		(	phrase( standard_character_entity( Code ), Codes, Rest ) ->
 			Minus = [Code|Codes1],
 			Terms = [pcdata(Plus)|Terms1],
 			acquire_pcdata( Rest, Context, Codes1, Terms1, Residue, WF )
-		;	entity_reference_name( Reference, Codes, Rest ),
+		;	phrase( entity_reference_name( Reference ), Codes, Rest ),
 			defined_entity( Reference, Context, String ) ->
 			append( String, Rest, Full ),
 			xml_to_document0( Full, Context, Terms, Residue, WF )
@@ -399,10 +399,10 @@
 		).
 
 	reference_in_pcdata( Codes0, Context, Codes1, Terms, Residue, WF ) :-
-		(	standard_character_entity( Code, Codes0, Rest ) ->
+		(	phrase( standard_character_entity( Code ), Codes0, Rest ) ->
 			Codes1 = [Code|Codes2],
 			acquire_pcdata( Rest, Context, Codes2, Terms, Residue, WF )
-		;	entity_reference_name( Reference, Codes0, Rest ),
+		;	phrase( entity_reference_name( Reference ), Codes0, Rest ),
 			defined_entity( Reference, Context, String ) ->
 			append( String, Rest, Full ),
 			acquire_pcdata( Full, Context, Codes1, Terms, Residue, WF )
@@ -600,10 +600,10 @@
 		).
 
 	ref_in_attribute_layout( NS, Quote, String, Plus, Minus ) :-
-		(	standard_character_entity( Code, Plus, Mid ) ->
+		(	phrase( standard_character_entity( Code ), Plus, Mid ) ->
 			String = [Code|String1],
 			attribute_layouts( Quote, NS, false,  String1, Mid, Minus )
-		;	entity_reference_name( Name, Plus, Suffix ),
+		;	phrase( entity_reference_name( Name ), Plus, Suffix ),
 			defined_entity( Name, NS, Text ) ->
 			append( Text, Suffix, Mid ),
 			attribute_leading_layouts( Quote, NS, String, Mid, Minus )
@@ -613,13 +613,13 @@
 		).
 
 	reference_in_value( Namespaces, Quote, Layout, String, Plus, Minus ) :-
-		(	standard_character_entity( Code, Plus, Mid ) ->
+		(	phrase( standard_character_entity( Code ), Plus, Mid ) ->
 			(	Layout == true ->
 				String = [0' ,Code|String1] %'
 			;	String = [Code|String1]
 			),
 			Layout1 = false
-		;	entity_reference_name( Name, Plus, Suffix ),
+		;	phrase( entity_reference_name( Name ), Plus, Suffix ),
 			defined_entity( Name, Namespaces, Text ) ->
 			String = String1,
 			append( Text, Suffix, Mid ),
@@ -635,10 +635,10 @@
 	 * circularity is avoided.
 	 */
 	reference_in_entity( Namespaces, Quote, String, Plus, Minus ) :-
-		(	standard_character_entity( _SomeCode, Plus, _Rest ) ->
+		(	phrase( standard_character_entity( _SomeCode ), Plus, _Rest ) ->
 			String = [0'&|String1], % ' Codeacter entities are unparsed
 			Mid = Plus
-		;	entity_reference_name( Name, Plus, Suffix ),
+		;	phrase( entity_reference_name( Name ), Plus, Suffix ),
 			defined_entity( Name, Namespaces, Text ) ->
 			String = String1,
 			append( Text, Suffix, Mid )
@@ -1632,18 +1632,18 @@
 	content_fault( Element, Indent, Culprit, Path, Message ) :-
 		element_fault( Element, [0' |Indent], Culprit, Path, Message ).
 	content_fault( Term, Indent, Term, [], "Illegal Term" ) :-
-		\+ generation(Term, "", false, Indent, _Format, _Plus, _Minus ).
+		\+ phrase( generation(Term, "", false, Indent, _Format ), _Plus, _Minus ).
 
 	element_fault( element(Tag, _Attributes, _Contents), _Indent, Tag, [], "Tag must be an atom" ) :-
 		\+ atom( Tag ).
 	element_fault( element(Tag, Attributes, _Contents), _Indent, Tag, [], "Attributes must be instantiated" ) :-
 		var( Attributes ).
 	element_fault( element(Tag, Attributes, _Contents), _Indent, Faulty, Path, Message ) :-
-		fault_path( Tag, Attributes, Path, [] ),
+		phrase( fault_path( Tag, Attributes ), Path, [] ),
 		member( Attribute, Attributes ),
 		attribute_fault( Attribute, Faulty, Message ).
 	element_fault( element(Tag, Attributes, Contents), Indent, Culprit, Path, Message ) :-
-		fault_path( Tag, Attributes, Path, Path1 ),
+		phrase( fault_path( Tag, Attributes ), Path, Path1 ),
 		content_fault( Contents, Indent, Culprit, Path1, Message ).
 
 	attribute_fault( Attribute, Attribute, "Illegal Variable" ) :-
@@ -1856,20 +1856,20 @@
 			LayoutPlus = LayoutPlus1
 		;	Code == 34 ->
 			Plus = LayoutPlus,
-			escaped_quote( LayoutMinus, Plus1 ),
+			phrase( escaped_quote, LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
 		;	Code == 39 ->
 			Plus = LayoutPlus,
-			apos( LayoutMinus, Plus1 ),
+			phrase( apos, LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
 		;	Code =< 127 ->
 			Plus = LayoutPlus,
-			pcdata_7bit( Code, LayoutMinus, Plus1 ),
+			phrase( pcdata_7bit( Code ), LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
 		;	legal_xml_unicode( Code ) ->
 			Plus = LayoutPlus,
 			number_codes( Code, Codes ),
-			pcdata_8bits_plus( Codes, LayoutMinus, Plus1 ),
+			phrase( pcdata_8bits_plus( Codes ), LayoutMinus, Plus1 ),
 			LayoutPlus1 = LayoutMinus1
 		;	LayoutPlus = LayoutPlus1,
 			LayoutMinus = LayoutMinus1,
@@ -1895,10 +1895,10 @@
 	pcdata_generation( [], Plus, Plus ).
 	pcdata_generation( [Code|Codes], Plus, Minus ) :-
 		(	Code =< 127 ->
-			pcdata_7bit( Code, Plus, Mid )
+			phrase( pcdata_7bit( Code ), Plus, Mid )
 		;	legal_xml_unicode( Code ) ->
 			number_codes( Code, Digits ),
-			pcdata_8bits_plus( Digits, Plus, Mid )
+			phrase( pcdata_8bits_plus( Digits ), Plus, Mid )
 		;	Plus = Mid
 		),
 		pcdata_generation( Codes, Mid, Minus ).
