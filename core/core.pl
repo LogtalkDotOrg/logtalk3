@@ -16002,7 +16002,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % call to a local user-defined predicate
 
 '$lgt_compile_body'(Pred, _, _, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user,_,_), _, Lines, _),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user,_,_), _, Lines, Term),
+	Term \= (_ --> _),
 	functor(Pred, Functor, ExtArity),
 	'$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
 	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines),
