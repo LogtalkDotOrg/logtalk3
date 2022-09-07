@@ -27,9 +27,9 @@
 :- object(fcube).
 
 	:- info([
-		version is 4:1:0,
+		version is 4:1:1,
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
-		date is 2022-08-14,
+		date is 2022-09-07,
 		copyright is 'Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
@@ -67,7 +67,7 @@
 	]).
 
 	:- uses(user, [
-		abort/0
+		abort/0, atomic_concat/3
 	]).
 
 	/****************************
@@ -1269,7 +1269,7 @@
 		write('Left branch of T->->,'),
 		partecerta(S, SCERTO),
 		!,
-		atom_concat(newAt, IdxNewAtom, NewAtom),
+		atomic_concat(newAt, IdxNewAtom, NewAtom),
 		semplificazione([swff(t, A)],
 			[swff(t, A), swff(f, NewAtom), swff(t, (B => NewAtom)), swff(t, (NewAtom => C))|SCERTO], NEWS).
 

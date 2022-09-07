@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 4:1:0,
+		version is 4:2:0,
 		author is 'Tests from Joseph Vidal-Rosset - Personal Blog (https://www.vidal-rosset.net/fCube/); ported to Logtalk by Paulo Moura.',
-		date is 2022-08-14,
+		date is 2022-09-07,
 		comment is 'Tests for FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
 	]).
 
@@ -89,5 +89,9 @@
 	test(fcube_formula_2, true(CounterModel == [[[swff(fc, a), swff(fc, c), swff(t, b)], [swff(fc, b), swff(fc, c), swff(t, a)]]])) :-
 		^^suppress_text_output,
 		decide((((a & b) => c) <=> ((a => c) | (b => c))), CounterModel).
+
+	test(fcube_formula_3, true(CounterModel ==  [valida])) :-
+		^^suppress_text_output,
+		decide((~ (~ (a <=> (b <=> (c <=> (a <=> (b <=> c))))))), CounterModel).
 
 :- end_object.
