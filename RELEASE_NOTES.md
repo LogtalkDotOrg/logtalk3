@@ -89,6 +89,9 @@ Tests
 * ADDED: Additional test for the optional `'|'` infix operator for a compliant
 definition.
 
+* ADDED: Additional tests for double-quoted terms syntax (escaped
+double-quote).
+
 Ports
 -----
 

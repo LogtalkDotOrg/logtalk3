@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-01-02,
+		date is 2022-09-08,
 		comment is 'Unit tests for the ISO Prolog standard double quoted term syntax.'
 	]).
 
@@ -106,6 +106,38 @@
 	test(lgt_double_quoted_term_14, error(syntax_error(_))) :-
 		^^set_text_input('"a\tb". '),
 		{read(_)}.
+
+	% escaped double-quote
+
+	test(lgt_double_quoted_term_15, true(T == [a,' ','"',b,'"'])) :-
+		^^set_text_input('"a \\"b\\"". '),
+		set_prolog_flag(double_quotes, chars),
+		{read(T)}.
+
+	test(lgt_double_quoted_term_16, true(T == [97,32,34,98,34])) :-
+		^^set_text_input('"a \\"b\\"". '),
+		set_prolog_flag(double_quotes, codes),
+		{read(T)}.
+
+	test(lgt_double_quoted_term_17, true(T == 'a "b"')) :-
+		^^set_text_input('"a \\"b\\"". '),
+		set_prolog_flag(double_quotes, atom),
+		{read(T)}.
+
+	test(lgt_double_quoted_term_18, true(T == [a,' ','"',b,'"'])) :-
+		^^set_text_input('"a ""b""". '),
+		set_prolog_flag(double_quotes, chars),
+		{read(T)}.
+
+	test(lgt_double_quoted_term_19, true(T == [97,32,34,98,34])) :-
+		^^set_text_input('"a ""b""". '),
+		set_prolog_flag(double_quotes, codes),
+		{read(T)}.
+
+	test(lgt_double_quoted_term_20, true(T == 'a "b"')) :-
+		^^set_text_input('"a ""b""". '),
+		set_prolog_flag(double_quotes, atom),
+		{read(T)}.
 
 	cleanup :-
 		^^clean_text_input.
