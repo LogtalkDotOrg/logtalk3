@@ -71,6 +71,7 @@ Lint checks include:
 -  Calls to ``bagof/3`` and ``setof/3`` where the goal argument contains
    singleton variables
 -  Calls to ``findall/3`` used to backtrack over all solutions of a goal
+   without collecting them
 -  Calls to ``catch/3`` that catch all exceptions
 -  Calls to standard predicates that have more efficient alternatives
 -  File, entity, predicate, and variable names not following official

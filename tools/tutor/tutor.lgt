@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:48:0,
+		version is 0:49:0,
 		author is 'Paulo Moura',
-		date is 2022-09-05,
+		date is 2022-09-09,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -869,6 +869,11 @@
 	explain(suspicious_call(_, _, _, _, atom_concat(_, _, _), _)) -->
 		[	'Avoid implicit creation of atoms that will not be used as atom management'-[], nl,
 			'is relatively costly. Consider using the suggested alternative.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, findall(_, Goal, _), [(Goal, fail; true)])) -->
+		[	'Avoid using a costly findall/3 goal (due to its copy semantics and list'-[], nl,
+			'creation) to enumerate all solutions of a goal without collecting them.'-[],  nl,
+			'Consider using the suggested alternative.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Object::_, _)) -->
 		{Object == user},

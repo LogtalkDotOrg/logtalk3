@@ -76,7 +76,7 @@ Lint checks include:
 - Calls to all-solutions predicates with existentially qualified variables not occurring in the qualified goal
 - Calls to all-solutions predicates with no shared variables between template and goal
 - Calls to `bagof/3` and `setof/3` where the goal argument contains singleton variables
-- Calls to `findall/3` used to backtrack over all solutions of a goal
+- Calls to `findall/3` used to backtrack over all solutions of a goal without collecting them
 - Calls to `catch/3` that catch all exceptions
 - Calls to standard predicates that have more efficient alternatives
 - File, entity, predicate, and variable names not following official coding guidelines

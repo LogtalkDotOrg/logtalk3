@@ -60,6 +60,9 @@ test seed when a counter-example is found.
 * IMPROVED: The `lgtunit` tool documentation of the `test/2-3` test dialect
 valid outcomes.
 
+* IMPROVED: The `tutor` tool explanation for the linter warning on `findall/3`
+goals used to backtrack over all solutions of a goal without collecting them.
+
 * UPDATED: The `tutor` tool for the new linter warning on non-terminals being
 called as predicates.
 
