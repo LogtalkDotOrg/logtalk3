@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2022-03-06,
+		date is 2022-09-12,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -334,10 +334,18 @@
 		object_property(This, file(File)),
 		os::is_absolute_file_name(File).
 
-	test(os_is_absolute_file_name_1_02, true) :-
+	test(os_is_absolute_file_name_1_02, false) :-
 		this(This),
 		object_property(This, file(File,_)),
-		\+ os::is_absolute_file_name(File).
+		os::is_absolute_file_name(File).
+
+	test(os_is_absolute_file_name_1_03, true) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::is_absolute_file_name(Directory).
+
+	test(os_is_absolute_file_name_1_04, false) :-
+		os::is_absolute_file_name('$LOGTALKHOME').
 
 	test(os_absolute_file_name_2_01, true(ExpandedFile == Path)) :-
 		this(This),

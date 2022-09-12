@@ -188,8 +188,8 @@
 <p>Portable operating-system access protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:32:2</div>
-<div class="line"><strong>Date:</strong> 2022-05-05</div>
+<div class="line"><strong>Version:</strong> 1:33:0</div>
+<div class="line"><strong>Date:</strong> 2022-09-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -331,7 +331,7 @@
 <div id="is_absolute_file_name/1"> </div></section>
 <section id="is-absolute-file-name-1">
 <span id="osp-0-is-absolute-file-name-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">is_absolute_file_name/1</span></code></a><a class="headerlink" href="#is-absolute-file-name-1" title="Permalink to this heading"></a></h3>
-<p>True iff the argument is an absolute file path.</p>
+<p>True iff the argument is an absolute file path. On POSIX systems, this predicate is true if <code class="docutils literal notranslate"><span class="pre">File</span></code> starts with a <code class="docutils literal notranslate"><span class="pre">/</span></code>. On Windows systems, this predicate is true if <code class="docutils literal notranslate"><span class="pre">File</span></code> starts with a drive letter. No attempt is made to expand <code class="docutils literal notranslate"><span class="pre">File</span></code> as a path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

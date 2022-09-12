@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:32:2
-| **Date:** 2022-05-05
+| **Version:** 1:33:0
+| **Date:** 2022-09-12
 
 | **Compilation flags:**
 |    ``static``
@@ -115,7 +115,7 @@ Runs an operating-system shell command.
 ``is_absolute_file_name/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-True iff the argument is an absolute file path.
+True iff the argument is an absolute file path. On POSIX systems, this predicate is true if ``File`` starts with a ``/``. On Windows systems, this predicate is true if ``File`` starts with a drive letter. No attempt is made to expand ``File`` as a path.
 
 | **Compilation flags:**
 |    ``static``

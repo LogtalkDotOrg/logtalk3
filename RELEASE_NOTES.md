@@ -37,6 +37,9 @@ via the `phrase/2-3` built-in methods.
 Library
 -------
 
+* CHANGED: Use a portable `os::is_absolute_file_name/1` predicate definition
+for all backends for consistency and improve the predicate documentation.
+
 * ADDED: New `[]` and `{}` edge cases for atoms to the `arbitrary` library.
 
 * FIXED: The `os` library `delete_directory/1`, `directory_files/2`,

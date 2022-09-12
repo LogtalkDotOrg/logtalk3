@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:32:2,
+		version is 1:33:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2022-09-12,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -56,7 +56,7 @@
 	:- public(is_absolute_file_name/1).
 	:- mode(is_absolute_file_name(+atom), zero_or_one).
 	:- info(is_absolute_file_name/1, [
-		comment is 'True iff the argument is an absolute file path.',
+		comment is 'True iff the argument is an absolute file path. On POSIX systems, this predicate is true if ``File`` starts with a ``/``. On Windows systems, this predicate is true if ``File`` starts with a drive letter. No attempt is made to expand ``File`` as a path.',
 		argnames is ['File']
 	]).
 

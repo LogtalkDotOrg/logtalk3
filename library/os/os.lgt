@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:93:5,
+		version is 1:94:0,
 		author is 'Paulo Moura',
-		date is 2022-08-22,
+		date is 2022-09-12,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -93,9 +93,6 @@
 
 		shell(Command) :-
 			shell(Command, 0).
-
-		is_absolute_file_name(Path) :-
-			{is_absolute_file_name(Path)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			catch(
@@ -225,9 +222,6 @@
 
 		shell(Command) :-
 			{shell(Command)}.
-
-		is_absolute_file_name(Path) :-
-			{is_absolute_file_name(Path)}.
 
 		:- if((current_prolog_flag(version_data, yap(Major,Minor,_,_)), (Major,Minor) @< (6,3))).
 		absolute_file_name(Path, ExpandedPath) :-
@@ -364,11 +358,6 @@
 		shell(Command) :-
 			{shell(Command, Status)},
 			Status =:= 0.
-
-		is_absolute_file_name(Path) :-
-			{	expand_atom(Path, EnvVarExpandedPath),
-				path_sysop(isabsolute, EnvVarExpandedPath)
-			}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{	expand_atom(Path, EnvVarExpandedPath),
@@ -522,9 +511,6 @@
 		shell(Command) :-
 			{shell(Command)}.
 
-		is_absolute_file_name(Path) :-
-			{is_absolute_file_name(Path)}.
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -647,9 +633,6 @@
 
 		shell(Command) :-
 			{system(Command, 0)}.
-
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{	expand_environment(Path, ExpandedPath0),
@@ -816,19 +799,6 @@
 
 		:- endif.
 
-		is_absolute_file_name(Path) :-
-			operating_system_type(Type),
-			(	Type == windows ->
-				sub_atom(Path, 1, 1, _, ':'),
-				sub_atom(Path, 0, 1, _, Drive),
-				(	a @=< Drive, Drive @=< z ->
-					true
-				;	'A' @=< Drive, Drive @=< 'Z'
-				)
-			;	% assume POSIX or POSIX compatible operating-system
-				sub_atom(Path, 0, 1, _, '/')
-			).
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{	current_directory(Directory),
 				absolute_file_name(Path, ExpandedPath, [relative_to(Directory)])
@@ -955,9 +925,6 @@
 
 		shell(Command) :-
 			shell(Command, 0).
-
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{	os_file_name(InternalPath, Path),
@@ -1127,9 +1094,6 @@
 		shell(Command) :-
 			{shell(Command)}.
 
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -1267,9 +1231,6 @@
 
 		shell(Command) :-
 			{os_run(Command)}.
-
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
@@ -1411,9 +1372,6 @@
 		shell(Command) :-
 			{os(system(Command))}.
 
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -1553,9 +1511,6 @@
 
 		shell(Command) :-
 			{unix(shell(Command))}.
-
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{expanded_file_name(Path, ExpandedPath0)},
@@ -1707,9 +1662,6 @@
 		shell(Command) :-
 			{shell(Command)}.
 
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath0)},
 			convert_file_path(ExpandedPath0, ExpandedPath).
@@ -1832,9 +1784,6 @@
 		shell(Command) :-
 			{shell(Command)}.
 
-		is_absolute_file_name(Path) :-
-			{is_absolute_file_name(Path)}.
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
 
@@ -1956,9 +1905,6 @@
 		shell(Command) :-
 			{shell(Command)}.
 
-		is_absolute_file_name(Path) :-
-			absolute_file_name(Path, Path).
-
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath, [expand(true)])}.
 
@@ -2063,9 +2009,6 @@
 
 		shell(Command) :-
 			{shell(Command)}.
-
-		is_absolute_file_name(Path) :-
-			{is_absolute_file_name(Path)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			{absolute_file_name(Path, ExpandedPath)}.
@@ -2188,10 +2131,6 @@
 		shell(Command) :-
 			atom_chars(Command, Chars),
 			{shell(Chars)}.
-
-		is_absolute_file_name(Path) :-
-			atom_chars(Path, PathChars),
-			{path_canonical(PathChars, PathChars)}.
 
 		absolute_file_name(Path, ExpandedPath) :-
 			expand_path_chars(Path, ExpandedPathChars),
@@ -2324,6 +2263,19 @@
 		:- initialization((write('WARNING: backend Prolog compiler not supported!'), nl)).
 
 	:- endif.
+
+	is_absolute_file_name(Path) :-
+		operating_system_type(Type),
+		(	Type == windows ->
+			sub_atom(Path, 1, 1, _, ':'),
+			sub_atom(Path, 0, 1, _, Drive),
+			(	a @=< Drive, Drive @=< z ->
+				true
+			;	'A' @=< Drive, Drive @=< 'Z'
+			)
+		;	% assume POSIX or POSIX compatible operating-system
+			sub_atom(Path, 0, 1, _, '/')
+		).
 
 	path_concat(Prefix, Suffix, Path) :-
 		(	Suffix == '' ->
