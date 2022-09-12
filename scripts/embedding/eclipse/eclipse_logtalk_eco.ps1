@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on April 13, 2022
+##   Last updated on September 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -210,21 +210,6 @@ Set-Location $t
 
 Copy-Item -Path ($env:LOGTALKHOME + '\adapters\eclipse.pl') -Destination .
 Copy-Item -Path ($env:LOGTALKHOME + '\core\core.pl') -Destination .
-
-Set-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_current_protocol_'/5)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_current_category_'/6)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_current_object_'/11)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_entity_property_'/2)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_predicate_property_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_implements_protocol_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_imports_category_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_instantiates_class_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_specializes_class_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_extends_category_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_extends_object_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_extends_protocol_'/3)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_loaded_file_'/7)."
-Add-Content -Path logtalk.pl -Value ":- discontiguous('\$lgt_included_file_'/4)."
 
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 

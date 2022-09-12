@@ -114,6 +114,8 @@ Installers and installation scripts
 
 * IMPROVED: Documentation of the sample embedding scripts.
 
+* IMPROVED: Simplified embedding scripts for ECLiPSe.
+
 
 3.57.0 - July 26, 2022
 ======================

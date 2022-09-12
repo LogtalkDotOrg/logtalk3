@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on September 12, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.16"
+	echo "$(basename "$0") 0.17"
 	exit 0
 }
 
@@ -212,21 +212,6 @@ fi
 
 cp "$LOGTALKHOME/adapters/eclipse.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
-
-echo ":- discontiguous('\$lgt_current_protocol_'/5)." > logtalk.pl
-echo ":- discontiguous('\$lgt_current_category_'/6)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_current_object_'/11)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_entity_property_'/2)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_predicate_property_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_implements_protocol_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_imports_category_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_instantiates_class_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_specializes_class_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_extends_category_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_extends_object_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> logtalk.pl
-echo ":- discontiguous('\$lgt_included_file_'/4)." >> logtalk.pl
 
 eclipselgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt"
 
