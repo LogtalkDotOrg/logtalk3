@@ -446,35 +446,41 @@
 	library(Functor/Arity) :-
 		atom(Functor),
 		integer(Arity),
-		!,
 		atom_concat('predicate_index.html#', Functor, File0),
 		atom_concat(File0, '/', File1),
 		number_chars(Arity, ArityChars),
 		atom_chars(ArityAtom, ArityChars),
 		atom_concat(File1, ArityAtom, File),
-		open('/docs/', File).
-	library(_/_) :-
+		open('/docs/', File),
+		!.
+	library(Functor/Arity) :-
 		!,
+		write('Unknown predicate or no help available for '), writeq(Functor/Arity), write('.'), nl,
+		write('Showing index of all documented predicates.'), nl,
 		open('/docs/', 'predicate_index.html').
 	library(Functor//Arity) :-
 		atom(Functor),
 		integer(Arity),
-		!,
 		atom_concat('predicate_index.html#', Functor, File0),
 		atom_concat(File0, '//', File1),
 		number_chars(Arity, ArityChars),
 		atom_chars(ArityAtom, ArityChars),
 		atom_concat(File1, ArityAtom, File),
-		open('/docs/', File).
-	library(_//_) :-
+		open('/docs/', File),
+		!.
+	library(Functor//Arity) :-
 		!,
+		write('Unknown non-terminal or no help available for '), writeq(Functor//Arity), write('.'), nl,
+		write('Showing index of all documented predicates.'), nl,
 		open('/docs/', 'predicate_index.html').
 	library(Library) :-
 		logtalk_library_path(Library, _),
-		!,
 		atom_concat(Library,  '.html', Path),
-		open('/manuals/libraries/', Path).
-	library(_) :-
+		open('/manuals/libraries/', Path),
+		!.
+	library(Library) :-
+		write('Unknown library or no help available for '), writeq(Library), write('.'), nl,
+		write('Showing index of all libraries.'), nl,
 		open('/manuals/libraries/', 'index.html').
 
 	:- public(entity/1).
@@ -494,7 +500,9 @@
 		atom_concat(File1, '.html', File),
 		open('/docs/', File),
 		!.
-	entity(_) :-
+	entity(Entity) :-
+		write('Unknown entity or no help available for '), writeq(Entity), write('.'), nl,
+		write('Showing index of all documented entities.'), nl,
 		open('/docs/', 'entity_index.html').
 
 	:- public(manuals/0).
