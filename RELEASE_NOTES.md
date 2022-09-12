@@ -48,6 +48,9 @@ for all backends for consistency and improve the predicate documentation.
 Tools
 -----
 
+* CHANGED: The `help` tool to provide a dedicated `entity/1` predicate for
+help on entities (objects, protocols, or categories).
+
 * CHANGED: The `lgtunit::quick_check/3` predicate now uses reified `error/4`
 and `failed/3` results that include as last argument the test seed.
 

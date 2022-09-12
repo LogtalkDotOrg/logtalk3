@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2022-03-15,
+		date is 2022-09-12,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -51,8 +51,8 @@
 		write('control constructs, directives, predicates, non-terminals, and methods:'), nl, nl,
 		write('    help::Functor/Arity.           help::Functor//Arity.'), nl,
 		write('    help::library.                 help::library(Library).'), nl,
-		write('    help::library(Entity).'), nl,
-		write('    help::library(Functor/Arity).  help::library(Functor//Arity).'), nl, nl,
+		write('    help::library(Functor/Arity).  help::library(Functor//Arity).'), nl,
+		write('    help::entity(Entity).'), nl, nl,
 		write('The help page opens in your default web browser. To consult the manuals:'), nl, nl,
 		write('    help::manuals.'), nl, nl,
 		write('To compile and load source files the following shortcut can be used:'), nl, nl,
@@ -431,16 +431,18 @@
 		open('/docs/', 'index.html').
 
 	:- public(library/1).
-	:- mode(library(+entity_identifier), zero_or_one).
+	:- mode(library(+atom), zero_or_one).
+	:- mode(library(+predicate_indicator), zero_or_one).
+	:- mode(library(+non_terminal_indicator), zero_or_one).
 	:- info(library/1, [
-		comment is 'Provides help on the standard Logtalk library entities, predicates, and non-terminals.',
+		comment is 'Provides help on the standard Logtalk libraries, library predicates, and library non-terminals.',
 		argnames is ['Topic']
 	]).
 
 	library(Topic) :-
 		var(Topic),
 		!,
-		open('/docs/', 'index.html').
+		open('/manuals/libraries/', 'index.html').
 	library(Functor/Arity) :-
 		atom(Functor),
 		integer(Arity),
@@ -467,7 +469,22 @@
 	library(_//_) :-
 		!,
 		open('/docs/', 'predicate_index.html').
-	library(Entity) :-
+	library(Library) :-
+		logtalk_library_path(Library, _),
+		!,
+		atom_concat(Library,  '.html', Path),
+		open('/manuals/libraries/', Path).
+	library(_) :-
+		open('/manuals/libraries/', 'index.html').
+
+	:- public(entity/1).
+	:- mode(entity(+entity_identifier), zero_or_one).
+	:- info(entity/1, [
+		comment is 'Provides help on Logtalk entities (objects, protocols, or categories).',
+		argnames is ['Entity']
+	]).
+
+	entity(Entity) :-
 		callable(Entity),
 		functor(Entity, Functor, Arity),
 		atom_concat(Functor, '_', File0),
@@ -477,11 +494,7 @@
 		atom_concat(File1, '.html', File),
 		open('/docs/', File),
 		!.
-	library(Library) :-
-		logtalk_library_path(Library, _),
-		!,
-		open('/docs/', 'library_index.html').
-	library(_) :-
+	entity(_) :-
 		open('/docs/', 'entity_index.html').
 
 	:- public(manuals/0).
