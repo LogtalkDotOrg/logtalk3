@@ -53,8 +53,8 @@ After loading the tool, use the query ``help::help`` to get started.
 Known issues
 ------------
 
-On macOS, the ``open`` command used to open documentation URLs drops the
-anchors, thus preventing navigating to the specified position on the
+The open commands used to open documentation URLs drop the fragment
+part, thus preventing navigating to the specified position on the
 documentation page.
 
 ECLiPSe defines a ``help`` prefix operator that forces wrapping this
