@@ -42,6 +42,12 @@ a clause is a variable; these clauses are conformant with the ISO Prolog
 Core standard and this fix also ensures consistency of the handling of
 naked variables in transparent control constructs.
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: Support for calling LVM disk predicate built-in predicates from
+categories.
+
 Documentation
 -------------
 

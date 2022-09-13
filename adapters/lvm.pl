@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 4.1.0 and later versions
-%  Last updated on July 9, 2022
+%  Last updated on September 13, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -542,12 +542,24 @@
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
 '$lgt_prolog_goal_expansion'(define_disk_predicate(Template,Mode,Database), {define_disk_predicate(CTemplate,Mode,Database)}) :-
-	logtalk_load_context(entity_type, _),
+	logtalk_load_context(entity_type, object),
+	!,
 	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore).
+'$lgt_prolog_goal_expansion'(
+		define_disk_predicate(Template,Mode,Database),
+		(this(This), {'$lgt_compile_predicate_heads'(Template, This, CTemplate, ignore), define_disk_predicate(CTemplate,Mode,Database)})
+	) :-
+	logtalk_load_context(entity_type, category).
 
 '$lgt_prolog_goal_expansion'(destroy_disk_predicate(Functor/Arity), {destroy_disk_predicate(CFunctor/CArity)}) :-
-	logtalk_load_context(entity_type, _),
+	logtalk_load_context(entity_type, object),
+	!,
 	'$lgt_compile_predicate_indicators'(Functor/Arity, _, CFunctor/CArity).
+'$lgt_prolog_goal_expansion'(
+		destroy_disk_predicate(Functor/Arity),
+		(this(This), {'$lgt_compile_predicate_indicators'(Functor/Arity, This, CFunctor/CArity), destroy_disk_predicate(CFunctor/CArity)})
+	) :-
+	logtalk_load_context(entity_type, category).
 
 
 
