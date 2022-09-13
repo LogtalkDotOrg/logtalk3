@@ -34,6 +34,10 @@ the object has been successfully loaded into memory. When used at a global
 level within a source file, this directive defines a goal to be called after
 the source file is successfully compiled and loaded into memory.
 
+The loading context can be accessed from this directive by calling the
+:ref:`predicates_logtalk_load_context_2` predicate. Note that the usable
+loading context keys depends on the directive scope (file or object).
+
 Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in the same order as the directives at
 loading time.
@@ -91,3 +95,7 @@ Examples
            logtalk::print_message(debug, my_app, 'Starting date: ~d-~d-~d~n'+[Year,Month,Day]).
    
    :- end_object.
+
+.. seealso::
+
+   :ref:`predicates_logtalk_load_context_2`

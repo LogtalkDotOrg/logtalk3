@@ -135,6 +135,9 @@
 the object has been successfully loaded into memory. When used at a global
 level within a source file, this directive defines a goal to be called after
 the source file is successfully compiled and loaded into memory.</p>
+<p>The loading context can be accessed from this directive by calling the
+<a class="reference internal" href="../predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a> predicate. Note that the usable
+loading context keys depends on the directive scope (file or object).</p>
 <p>Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in the same order as the directives at
 loading time.</p>
@@ -186,6 +189,10 @@ and is therefore a practice best avoided.</p>
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a></p>
 </div>
 </section>
 </section>

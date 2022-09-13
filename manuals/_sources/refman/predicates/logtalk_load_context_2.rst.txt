@@ -48,7 +48,7 @@ following keys are currently supported:
 * ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
 * ``singletons`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
 
-The ``logtalk_load_context/2`` predicate can also be called
+The ``logtalk_load_context/2`` predicate can also be called from
 :ref:`directives_initialization_1` directives in a source file.
 A common scenario is to use the ``directory`` key to define
 :term:`library aliases <library alias>`.
@@ -105,4 +105,5 @@ Examples
 .. seealso::
 
    :ref:`methods_term_expansion_2`,
-   :ref:`methods_goal_expansion_2`
+   :ref:`methods_goal_expansion_2`,
+   :ref:`directives_initialization_1`

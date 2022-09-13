@@ -34,6 +34,11 @@ via the `phrase/2-3` built-in methods.
 * FIXED: Detect conflicts between `dynamic/1` directives and `uses/2` and
 `use_module/2` directives.
 
+Documentation
+-------------
+
+* IMPROVED: Handbook documentation of the `initialization/1` directive.
+
 Library
 -------
 
