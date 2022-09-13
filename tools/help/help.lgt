@@ -443,34 +443,28 @@
 		var(Topic),
 		!,
 		open('/manuals/libraries/', 'index.html').
-	library(Functor/Arity) :-
-		atom(Functor),
+	library(Name/Arity) :-
+		atom(Name),
 		integer(Arity),
-		atom_concat('predicate_index.html#', Functor, File0),
-		atom_concat(File0, '/', File1),
-		number_chars(Arity, ArityChars),
-		atom_chars(ArityAtom, ArityChars),
-		atom_concat(File1, ArityAtom, File),
+		atom::replace_sub_atom('_', '-', Name, NameDashes),
+		atomic_list_concat(['predicate_index.html#', NameDashes, '-', Arity], File),
 		open('/docs/', File),
 		!.
-	library(Functor/Arity) :-
+	library(Name/Arity) :-
 		!,
-		write('Unknown predicate or no help available for '), writeq(Functor/Arity), write('.'), nl,
+		write('Unknown predicate or no help available for '), writeq(Name/Arity), write('.'), nl,
 		write('Showing index of all documented predicates.'), nl,
 		open('/docs/', 'predicate_index.html').
-	library(Functor//Arity) :-
-		atom(Functor),
+	library(Name//Arity) :-
+		atom(Name),
 		integer(Arity),
-		atom_concat('predicate_index.html#', Functor, File0),
-		atom_concat(File0, '//', File1),
-		number_chars(Arity, ArityChars),
-		atom_chars(ArityAtom, ArityChars),
-		atom_concat(File1, ArityAtom, File),
+		atom::replace_sub_atom('_', '-', Name, NameDashes),
+		atomic_list_concat(['predicate_index.html#', NameDashes, '-', Arity], File),
 		open('/docs/', File),
 		!.
-	library(Functor//Arity) :-
+	library(Name//Arity) :-
 		!,
-		write('Unknown non-terminal or no help available for '), writeq(Functor//Arity), write('.'), nl,
+		write('Unknown non-terminal or no help available for '), writeq(Name//Arity), write('.'), nl,
 		write('Showing index of all documented predicates.'), nl,
 		open('/docs/', 'predicate_index.html').
 	library(Library) :-

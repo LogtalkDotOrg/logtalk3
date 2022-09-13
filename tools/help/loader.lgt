@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(basic_types(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load(help, [optimize(on)])
 )).
