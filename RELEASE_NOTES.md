@@ -37,6 +37,11 @@ via the `phrase/2-3` built-in methods.
 * FIXED: Detect conflicts between `dynamic/1` directives and `uses/2` and
 `use_module/2` directives.
 
+* FIXED: The compiler to not throw an instantiation error when the body of
+a clause is a variable; these clauses are conformant with the ISO Prolog
+Core standard and this fix also ensures consistency of the handling of
+naked variables in transparent control constructs.
+
 Documentation
 -------------
 
