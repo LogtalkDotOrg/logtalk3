@@ -62,7 +62,7 @@ and `arbitrary` libraries.
 * FIXED: The `os` library `delete_directory/1`, `directory_files/2`,
 `environment_variable/1`, and `file_permission/2` predicates for YAP.
 
-* FIXED: The definiton of the type `clause` in the `types` and `arbitrary`
+* FIXED: The definition of the type `clause` in the `types` and `arbitrary`
 libraries to allow a naked variable body as per the ISO Prolog Core standard.
 
 Tools
