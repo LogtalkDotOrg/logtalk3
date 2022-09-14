@@ -37,7 +37,8 @@ via the `phrase/2-3` built-in methods.
 Documentation
 -------------
 
-* IMPROVED: Handbook documentation of the `initialization/1` directive.
+* IMPROVED: Handbook documentation of the `initialization/1` directive and
+the `logtalk_load_context/2` built-in predicate.
 
 Library
 -------

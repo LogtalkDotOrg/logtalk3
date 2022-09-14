@@ -48,10 +48,11 @@ following keys are currently supported:
 * ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
 * ``singletons`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
 
-The ``logtalk_load_context/2`` predicate can also be called from
-:ref:`directives_initialization_1` directives in a source file.
-A common scenario is to use the ``directory`` key to define
-:term:`library aliases <library alias>`.
+This predicate is usually called by the :ref:`methods_term_expansion_2`
+and :ref:`methods_goal_expansion_2` methods. It can also be called from
+:ref:`directives_initialization_1` directives in a source file. Note that
+the entity keys are only available when compiling an entity term or from
+an object ``initialization/1`` directive.
 
 .. warning::
 
@@ -62,9 +63,9 @@ A common scenario is to use the ``directory`` key to define
    the start and the end lines.
 
    Currently, any variables in the values of the ``term``, ``variables``,
-   ``variable_names``, and ``singletons`` keys are not shared with, respectively,
-   the term and goal arguments of the :ref:`methods_term_expansion_2` and
-   :ref:`methods_goal_expansion_2` methods.
+   ``variable_names``, and ``singletons`` keys are not shared with,
+   respectively, the term and goal arguments of the ``term_expansion/2``
+   and ``goal_expansion/2`` methods.
 
    Using the ``variables``, ``variable_names``, and ``singletons`` keys
    may require calling the standard built-in predicate ``term_variables/2``
@@ -92,11 +93,12 @@ Examples
 
 ::
 
+   % expand source file terms only if they are entity terms
    term_expansion(Term, ExpandedTerms) :-
-       ...
-       logtalk_load_context(entity_identifier, Entity),
+       logtalk_load_context(entity_identifier, _),
        ....
 
+   % define a library alias based on the source directory
    :- initialization((
        logtalk_load_context(directory, Directory),
        assertz(logtalk_library_path(my_app, Directory))
