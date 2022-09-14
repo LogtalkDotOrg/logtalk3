@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:115:0,
+		version is 1:116:0,
 		author is 'Paulo Moura',
-		date is 2022-09-05,
+		date is 2022-09-14,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -636,6 +636,13 @@
 	message_tokens(compiling_query_as_initialization_goal(File, Lines, Type, Entity, Directive)) -->
 		['Compiling query as an initialization goal: ~q'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
+
+	message_tokens(invalid_logtalk_load_context_key(File, Lines, Type, Entity, Key)) -->
+		['Invalid logtalk_load_context/2 predicate key: ~q'-[Key], nl],
+		message_context(File, Lines, Type, Entity).
+	message_tokens(invalid_logtalk_load_context_key(File, Lines, Key)) -->
+		['Invalid logtalk_load_context/2 predicate key: ~q'-[Key], nl],
+		message_context(File, Lines).
 
 	% singleton variable messages
 

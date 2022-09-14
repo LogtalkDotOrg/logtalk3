@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Compilation warning when compiling a `logtalk_load_context/2` goal
+with an invalid key.
+
 * ADDED: Linter warning for non-terminals called as predicates instead of
 via the `phrase/2-3` built-in methods.
 

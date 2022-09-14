@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>logtalk_load_context/2 &mdash; The Logtalk Handbook v3.58.0-b02 documentation</title>
+  <title>logtalk_load_context/2 &mdash; The Logtalk Handbook v3.58.0-b03 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -162,10 +162,10 @@ following keys are currently supported:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">singletons</span></code> - the singleton variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
 </ul>
 <p>This predicate is usually called by the <a class="reference internal" href="../methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>
-and <a class="reference internal" href="../methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> methods. It can also be called from
-<a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directives in a source file. Note that
-the entity keys are only available when compiling an entity term or from
-an object <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive.</p>
+and <a class="reference internal" href="../methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> methods. It can also be called directly
+from <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directives in a source file. Note
+that the entity keys are only available when compiling an entity term or
+from an object <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">term_position</span></code> key is only supported in

@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 58, 0, b02)).
+'$lgt_version_data'(logtalk(3, 58, 0, b03)).
 
 
 
@@ -13753,6 +13753,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	DPred = '$lgt_debug'(goal(logtalk_load(Files, Flags), TPred), ExCtx).
 
 % file compilation/loading context
+
+'$lgt_compile_body'(logtalk_load_context(Key, _), _, _, Ctx) :-
+	nonvar(Key),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	\+ '$lgt_member'(Key, [
+		entity_identifier, entity_prefix, entity_type,
+		source, file, basename, directory,
+		stream, target, flags,
+		term, term_position, variables, variable_names, singletons
+	]),
+	'$lgt_source_file_context'(File, Lines),
+	(	'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_print_message'(warning(general), invalid_logtalk_load_context_key(File, Lines, Type, Entity, Key))
+	;	'$lgt_print_message'(warning(general), invalid_logtalk_load_context_key(File, Lines, Key))
+	),
+	fail.
 
 '$lgt_compile_body'(logtalk_load_context(Key, Value), TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, _, _, _, _),

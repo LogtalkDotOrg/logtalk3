@@ -49,10 +49,10 @@ following keys are currently supported:
 * ``singletons`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
 
 This predicate is usually called by the :ref:`methods_term_expansion_2`
-and :ref:`methods_goal_expansion_2` methods. It can also be called from
-:ref:`directives_initialization_1` directives in a source file. Note that
-the entity keys are only available when compiling an entity term or from
-an object ``initialization/1`` directive.
+and :ref:`methods_goal_expansion_2` methods. It can also be called directly
+from :ref:`directives_initialization_1` directives in a source file. Note
+that the entity keys are only available when compiling an entity term or
+from an object ``initialization/1`` directive.
 
 .. warning::
 
