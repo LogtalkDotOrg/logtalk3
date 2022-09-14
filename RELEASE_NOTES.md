@@ -54,10 +54,16 @@ Library
 * CHANGED: Use a portable `os::is_absolute_file_name/1` predicate definition
 for all backends for consistency and improve the predicate documentation.
 
+* REMOVED: Support for the type `clause_or_partial_clause` from the `types`
+and `arbitrary` libraries.
+
 * ADDED: New `[]` and `{}` edge cases for atoms to the `arbitrary` library.
 
 * FIXED: The `os` library `delete_directory/1`, `directory_files/2`,
 `environment_variable/1`, and `file_permission/2` predicates for YAP.
+
+* FIXED: The definiton of the type `clause` in the `types` and `arbitrary`
+libraries to allow a naked variable body as per the ISO Prolog Core standard.
 
 Tools
 -----

@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:24:0,
+		version is 2:25:0,
 		author is 'Paulo Moura',
-		date is 2022-08-16,
+		date is 2022-09-14,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -39,7 +39,7 @@
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``',
-			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``',
+			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
@@ -192,7 +192,6 @@
 	arbitrary(non_terminal_indicator).
 	arbitrary(predicate_or_non_terminal_indicator).
 	arbitrary(clause).
-	arbitrary(clause_or_partial_clause).
 	arbitrary(list).
 	arbitrary(non_empty_list).
 	arbitrary(list(_Type)).
@@ -557,21 +556,11 @@
 		(	maybe ->
 			% fact
 			Arbitrary = ArbitraryHead
-		;	% rule,
-			Arbitrary = (ArbitraryHead :- ArbitraryBody),
-			arbitrary(callable, ArbitraryBody)
-		).
-
-	arbitrary(clause_or_partial_clause, Arbitrary) :-
-		arbitrary(callable, ArbitraryHead),
-		(	maybe ->
-			% fact
-			Arbitrary = ArbitraryHead
 		;	% rule
 			maybe ->
-			% partial clause
+			% naked variable body
 			Arbitrary = (ArbitraryHead :- _)
-		;	% clause
+		;	% callable body
 			Arbitrary = (ArbitraryHead :- ArbitraryBody),
 			arbitrary(callable, ArbitraryBody)
 		).
@@ -747,7 +736,6 @@
 	shrinker(non_terminal_indicator).
 	shrinker(predicate_or_non_terminal_indicator).
 	shrinker(clause).
-	shrinker(clause_or_partial_clause).
 	shrinker(list).
 	shrinker(non_empty_list).
 	shrinker(list(_Type)).
@@ -1047,14 +1035,6 @@
 		).
 
 	shrink(clause, Large, Small) :-
-		(	Large = (Head :- Body) ->
-			shrink(callable, Head, SmallHead),
-			shrink(callable, Body, SmallBody),
-			Small = (SmallHead :- SmallBody)
-		;	shrink(callable, Large, Small)
-		).
-
-	shrink(clause_or_partial_clause, Large, Small) :-
 		(	Large = (Head :- Body) ->
 			shrink(callable, Head, SmallHead),
 			(	var(Body) ->

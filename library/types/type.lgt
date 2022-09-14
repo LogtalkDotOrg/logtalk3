@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:33:2,
+		version is 1:34:0,
 		author is 'Paulo Moura',
-		date is 2022-07-04,
+		date is 2022-09-14,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``',
@@ -38,7 +38,7 @@
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``',
-			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``clause_or_partial_clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``',
+			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``type``',
 			'Type ``predicate`` notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
@@ -193,7 +193,6 @@
 	type(non_terminal_indicator).
 	type(predicate_or_non_terminal_indicator).
 	type(clause).
-	type(clause_or_partial_clause).
 	type(grammar_rule).
 	type(list).
 	type(non_empty_list).
@@ -946,22 +945,13 @@
 	check(clause, Term) :-
 		(	Term = (Head :- Body) ->
 			check(callable, Head),
-			check(callable, Body)
-		;	callable(Term) ->
-			true
-		;	throw(type_error(clause, Term))
-		).
-
-	check(clause_or_partial_clause, Term) :-
-		(	Term = (Head :- Body) ->
-			check(callable, Head),
 			(	var(Body) ->
 				true
 			;	check(callable, Body)
 			)
 		;	callable(Term) ->
 			true
-		;	throw(type_error(clause_or_partial_clause, Term))
+		;	throw(type_error(clause, Term))
 		).
 
 	check(grammar_rule, Term) :-
