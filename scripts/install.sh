@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on March 22, 2022
+##   Last updated on September 15, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -37,11 +37,12 @@ fi
 cd "$(dirname "$0")" || exit 1
 
 version=$(cat ../VERSION.txt)
+version_base=$(cat ../VERSION.txt | cut -f1 -d"-")
 default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.8"
+	echo "  0.9"
 	exit 0
 }
 
@@ -165,6 +166,11 @@ gzip --best ../../logtalk/man/man1/*.1
 for file in ../../logtalk/man/man1/*.1.gz ; do
 	ln -sf "$file" "$(basename "$file")"
 done
+
+mkdir -p ../../info
+cd ../../info || exit 1
+ln -sf "$prefix/share/$directory/docs/LogtalkAPIs-$version_base.info" "LogtalkAPIs.info"
+ln -sf "$prefix/share/$directory/manuals/TheLogtalkHandbook-$version_base.info" "TheLogtalkHandbook.info"
 
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"

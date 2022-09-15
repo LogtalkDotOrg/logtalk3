@@ -158,7 +158,8 @@ the `install.sh` script, you will also need to add:
 	PATH=$PATH:$LOGTALKHOME/scripts
 	PATH=$PATH:$LOGTALKHOME/integration
 	MANPATH=$MANPATH:$LOGTALKHOME/man
-	export PATH MANPATH
+	INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
+	export PATH MANPATH INFOPATH
 
 If you use instead a csh shell, edit and add the following lines to your
 `~/.cshrc` file:
@@ -174,6 +175,7 @@ the `install.sh` script, you will also need to add:
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/scripts
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/integration
 	setenv MANPATH "${MANPATH}":"${LOGTALKHOME}"/man
+	setenv INFOPATH ${INFOPATH}:"${LOGTALKHOME}"/docs:"${LOGTALKHOME}"/manuals
 
 Don't use relative paths such as `../` or `./` in the definition of the environment
 variables. Some Prolog compilers don't expand environment variables, resulting

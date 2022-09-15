@@ -145,6 +145,10 @@ Installers and installation scripts
 
 * IMPROVED: Simplified embedding scripts for ECLiPSe.
 
+* UPDATED: The manual install script and the Linux RPM installer to create
+links to the `.info` versions of the Handbook and APIs documentation in the
+default `info` directory.
+
 
 3.57.0 - July 26, 2022
 ======================

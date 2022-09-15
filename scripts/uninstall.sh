@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on May 4, 2021
+##   Last updated on September 15, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -119,7 +119,9 @@ rm -f taulgt.1.gz
 rm -f tplgt.1.gz
 rm -f xsblgt.1.gz
 rm -f yaplgt.1.gz
-
+cd ../../info || exit 1
+rm -f LogtalkAPIs.info
+rm -f TheLogtalkHandbook.info
 
 echo "Logtalk $version system-level uninstall completed. For uninstalling user-level"
 echo "Logtalk files simply delete the LOGTALKUSER directories."
