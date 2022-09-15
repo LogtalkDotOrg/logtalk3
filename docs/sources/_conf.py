@@ -162,8 +162,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'LogtalkAPIs-' + version, 'Logtalk APIs',
-     u'Paulo Moura', 'Logtalk APIs', 'Logtalk core, library, tools, and contributions APIs.',
-     'Miscellaneous'),
+     u'Paulo Moura', 'Logtalk APIs', 'Logtalk programming APIs.',
+     'Programming Languages'),
 ]
 
 

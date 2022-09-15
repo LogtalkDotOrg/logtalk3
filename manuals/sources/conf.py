@@ -178,7 +178,7 @@ man_pages = [
 texinfo_documents = [
     (master_doc, 'TheLogtalkHandbook-' + version, u'The Logtalk Handbook',
      u'Paulo Moura', u'The Logtalk Handbook', 'Declarative object-oriented logic programming language.',
-     'Miscellaneous'),
+     'Programming Languages'),
 ]
 
 
