@@ -1,6 +1,6 @@
 Logtalk <https://logtalk.org/>
 Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
-
+Licensed under the Apache License 2.0
 
 The Logtalk distribution includes contributed third-party software
 and Logtalk ports of third-party software:
@@ -49,13 +49,13 @@ and Logtalk ports of third-party software:
 	Copyright 2004-2018 various people and institutions
 	Licensed under the BSD 2-Clause License
 
-- library/rbtree.lgt
-	Copyright 2010 Vitor Santos Costa
-	Licensed under the Apache License 2.0
-
 - library/edcg.lgt
 	Copyright (c) 1992 Peter Van Roy
 	Licensed under the MIT License
+
+- library/rbtree.lgt
+	Copyright 2010 Vitor Santos Costa
+	Licensed under the Apache License 2.0
 
 - manuals/_static
 	Copyright (c) 2013-2018 Dave Snider, Read the Docs, Inc. & contributors

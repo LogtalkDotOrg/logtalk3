@@ -7,6 +7,11 @@ Files: *
 Copyright: 1998-2021 Paulo Moura
 License: Apache-2.0
 
+Files: coding/textadept
+Copyright 2006-2019 Mitchell (`prolog.lua`)
+Copyright 2017-2019 Michael T. Richter (`logtalk.lua`)
+Licensed under the MIT License
+
 Files: contributions/flags/*
 Copyright: 2010 Katholieke Universiteit Leuven
 License: Artistic-2.0
@@ -30,9 +35,42 @@ License: permissive
  use it, copy it, distribute it, modify it or sell it without restriction,
  but entirely at your own risk.
 
+Files: docs/_static
+Copyright (c) 2013-2018 Dave Snider, Read the Docs, Inc. & contributors
+Licensed under the MIT License
+
+Files: examples/adventure/nani_search.lgt
+Copyright (C) Amzi! inc. 1990-2010
+No rights reserved, use it as you wish
+
+Files: library/avltree.lgt
+Copyright 2004-2018 various people and institutions
+Licensed under the BSD 2-Clause License
+
+Files: examples/edcgs
+Copyright (c) 1992 Peter Van Roy
+Copyright (c) 2015 Michael Hendricks
+Licensed under the MIT License
+
 Files: library/rbtree.lgt
 Copyright: 2010 Vitor Santos Costa
 License: Apache-2.0
+
+Files: manuals/_static
+Copyright (c) 2013-2018 Dave Snider, Read the Docs, Inc. & contributors
+Licensed under the MIT License
+
+Files: ports/fcube
+Copyright Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino
+Licensed under the GNU GPL 2 License
+
+Files: ports/metagol
+Copyright 2016 Metagol authors
+Licensed under the BSD-3-Clause License
+
+Files: ports/toychr
+Copyright 2004 Gregory J. Duck
+Licensed under the GNU GPL 2 License
 
 License: Apache-2.0
  /usr/share/common-licenses/Apache-2.0
@@ -42,3 +80,6 @@ License: Artistic-2.0
 
 License: BSD
  /usr/share/common-licenses/BSD
+
+License: GNU GPL 2
+ /usr/share/common-licenses/GPL-2
