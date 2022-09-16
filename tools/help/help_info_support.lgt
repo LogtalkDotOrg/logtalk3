@@ -23,7 +23,7 @@
 	complements(help)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
 		date is 2022-09-16,
 		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, LVM, or SWI-Prolog as the backend running on a POSIX system.'
@@ -60,7 +60,7 @@
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	handbook :-
@@ -143,6 +143,14 @@
 
 		process_create(Process, Arguments) :-
 			{process_create(Process, Arguments, [stdout(std)])}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
+
+		process_create(Process, Arguments) :-
+			user::atomic_list_concat([Process| Arguments], ' ', Command),
+			{	current_output(Output),
+				shell(Command, none, Output, none, _)
+			}.
 
 	:- endif.
 

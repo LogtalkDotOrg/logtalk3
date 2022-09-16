@@ -68,7 +68,7 @@ After loading the tool, use the query `help::help` to get started.
 Experimental features
 ---------------------
 
-When using Ciao Prolog, LVM, or SWI-Prolog as the backend, `handbook/0-1`
+When using Ciao Prolog, LVM, SWI-Prolog, or XSB as the backend, `handbook/0-1`
 and `apis/1` predicates are made available. These predicates open inline,
 respectively, the Texinfo versions of the Handbook and the APIs documentation.
 The optional argument is a topic to search, which can be an atom, a predicate
