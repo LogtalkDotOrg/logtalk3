@@ -129,6 +129,12 @@
 				process_call(Process, Arguments, [stdout(stream(Output))])
 			}.
 
+	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
+
+		process_create(Process, Arguments) :-
+			atomic_list_concat([Process| Arguments], ' ', Command),
+			{exec(Command, [])}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
 
 		process_create(Process, Arguments) :-
@@ -147,7 +153,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
 
 		process_create(Process, Arguments) :-
-			user::atomic_list_concat([Process| Arguments], ' ', Command),
+			atomic_list_concat([Process| Arguments], ' ', Command),
 			{	current_output(Output),
 				shell(Command, none, Output, none, _)
 			}.
