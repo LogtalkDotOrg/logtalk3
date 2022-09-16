@@ -19,6 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% only allow complementing categories to add new functionality,
+% not redefine existing functionality:
+
+:- set_logtalk_flag(complements, restrict).
+
+
 :- object(help,
 	implements(forwarding)).
 

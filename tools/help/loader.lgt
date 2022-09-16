@@ -24,3 +24,17 @@
 	logtalk_load(os(loader)),
 	logtalk_load(help, [optimize(on)])
 )).
+
+% experimental features
+:- if(current_logtalk_flag(prolog_dialect, ciao)).
+	:- use_module(library(process)).
+	:- initialization(logtalk_load(help_info_support)).
+:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- initialization(logtalk_load(help_info_support)).
+:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
+	:- use_module(library(process)).
+	:- initialization(logtalk_load(help_info_support)).
+:- elif(current_logtalk_flag(prolog_dialect, swi)).
+	:- use_module(library(process)).
+	:- initialization(logtalk_load(help_info_support)).
+:- endif.

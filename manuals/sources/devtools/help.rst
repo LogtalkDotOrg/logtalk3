@@ -50,6 +50,35 @@ Usage
 
 After loading the tool, use the query ``help::help`` to get started.
 
+Experimental features
+---------------------
+
+When using Ciao Prolog, LVM, or SWI-Prolog as the backend,
+``handbook/0-1`` and ``apis/1`` predicates are made available. These
+predicates open inline, respectively, the Texinfo versions of the
+Handbook and the APIs documentation. The optional argument is a topic to
+search, which can be an atom, a predicate indicator, or a non-terminal
+indicator. Some examples:
+
+::
+
+   | ?- help::handbook.
+
+   | ?- help::handbook(base64).
+
+   | ?- help::handbook(logtalk_load/2).
+
+   | ?- help::apis.
+
+   | ?- help::apis(string_match/2).
+
+   | ?- help::apis(body_term//2).
+
+When you finish consult the documentation and quit the ``info`` process,
+you will be back to the top-level prompt (if you find that the top-level
+have scrolled from its last position, try to set your terminal terminfo
+to ``xterm-256colour``).
+
 Known issues
 ------------
 
