@@ -41,4 +41,7 @@
 	:- initialization(logtalk_load(help_info_support)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
 	:- initialization(logtalk_load(help_info_support)).
+:- elif(current_logtalk_flag(prolog_dialect, yap)).
+	:- use_module(library(system)).
+	:- initialization(logtalk_load(help_info_support)).
 :- endif.

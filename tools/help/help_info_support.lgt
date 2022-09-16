@@ -158,6 +158,12 @@
 				shell(Command, none, Output, none, _)
 			}.
 
+	:- elif(current_logtalk_flag(prolog_dialect, yap)).
+
+		process_create(Process, Arguments) :-
+			atomic_list_concat([Process| Arguments], ' ', Command),
+			{exec(Command, [std,std,std], _)}.
+
 	:- endif.
 
 :- end_category.
