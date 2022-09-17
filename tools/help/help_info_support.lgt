@@ -23,9 +23,9 @@
 	complements(help)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2022-09-16,
+		date is 2022-09-17,
 		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, LVM, or SWI-Prolog as the backend running on a POSIX system.'
 	]).
 
@@ -72,7 +72,7 @@
 		topic_to_atom(Topic, TopicAtom),
 		info_executable(Info),
 		handbook_file(File),
-		process_create(Info, ['-f', File, TopicAtom]).
+		process_create(Info, ['-f', File, '--index-search', TopicAtom]).
 
 	apis :-
 		info_executable(Info),
@@ -83,7 +83,7 @@
 		topic_to_atom(Topic, TopicAtom),
 		info_executable(Info),
 		apis_file(File),
-		process_create(Info, ['-f', File, TopicAtom]).
+		process_create(Info, ['-f', File, '--index-search', TopicAtom]).
 
 	topic_to_atom(Topic, TopicAtom) :-
 		(	atom(Topic) ->
