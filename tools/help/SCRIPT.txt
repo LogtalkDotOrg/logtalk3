@@ -51,11 +51,34 @@ ________________________________________________________________________
 
 % get on-line help for a library entity:
 
-?- help::library(random).
+| ?- help::library(random).
 ...
 
 
 % consult the User and Reference manuals:
 
 | ?- help::manuals.
+...
+
+
+% with selected backends and on POSIX systems (see the NOTES.md file),
+% it's also possible to browse and search the Texinfo versions of the
+% Handbook and APIs documentation inline at the top-level. For example:
+
+| ?- help::handbook.
+...
+
+| ?- help::handbook(base64).
+...
+
+| ?- help::handbook(logtalk_load/2).
+...
+
+| ?- help::apis.
+...
+
+| ?- help::apis(string_match/2).
+...
+
+| ?- help::apis(body_term//2).
 ...
