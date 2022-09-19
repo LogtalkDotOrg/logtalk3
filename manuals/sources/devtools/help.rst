@@ -53,12 +53,13 @@ After loading the tool, use the query ``help::help`` to get started.
 Experimental features
 ---------------------
 
-When using Ciao Prolog, ECLiPSe, LVM, SWI-Prolog, or XSB as the backend,
-``apis/1`` and ``handbook/0-1`` predicates are made available. These
-predicates open inline, respectively, the Texinfo versions of the
-Handbook and the APIs documentation. The optional argument is a topic to
-search, which can be an atom, a predicate indicator, or a non-terminal
-indicator. Some examples:
+When using Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, or XSB as the backend, ``apis/1`` and ``handbook/0-1``
+predicates are made available. These predicates open inline,
+respectively, the Texinfo versions of the Handbook and the APIs
+documentation. The optional argument is a topic to search, which can be
+an atom, a predicate indicator, or a non-terminal indicator. Some
+examples:
 
 ::
 
@@ -78,6 +79,14 @@ When you finish consult the documentation and quit the ``info`` process,
 you will be back to the top-level prompt (if you find that the top-level
 have scrolled from its last position, try to set your terminal terminfo
 to ``xterm-256colour``).
+
+If you're running Logtalk from a git clone of its repo, you will need to
+run the ``scripts/update_html_docs.sh`` or
+``scripts/update_html_docs.ps1`` to generate the APIs documentation
+``.info`` file and also run the ``manuals/sources/build_manuals.sh`` to
+generated the Handbook ``.info`` file. In alternative, you can download
+the ``.info`` files for the latest stable release from the Logtalk
+website and save them to the ``docs`` and ``manuals`` directories.
 
 Known issues
 ------------

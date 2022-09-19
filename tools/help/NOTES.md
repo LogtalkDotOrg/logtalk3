@@ -92,6 +92,14 @@ you will be back to the top-level prompt (if you find that the top-level
 have scrolled from its last position, try to set your terminal terminfo
 to `xterm-256colour`).
 
+If you're running Logtalk from a git clone of its repo, you will need to
+run the `scripts/update_html_docs.sh` or `scripts/update_html_docs.ps1`
+to generate the APIs documentation `.info` file and also run the
+`manuals/sources/build_manuals.sh` to generated the Handbook `.info`
+file. In alternative, you can download the `.info` files for the latest
+stable release from the Logtalk website and save them to the `docs` and
+`manuals` directories.
+
 Known issues
 ------------
 

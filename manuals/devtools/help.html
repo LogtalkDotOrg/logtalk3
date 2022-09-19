@@ -173,12 +173,13 @@ abstraction.</p>
 </section>
 <section id="experimental-features">
 <h2>Experimental features<a class="headerlink" href="#experimental-features" title="Permalink to this heading"></a></h2>
-<p>When using Ciao Prolog, ECLiPSe, LVM, SWI-Prolog, or XSB as the backend,
-<code class="docutils literal notranslate"><span class="pre">apis/1</span></code> and <code class="docutils literal notranslate"><span class="pre">handbook/0-1</span></code> predicates are made available. These
-predicates open inline, respectively, the Texinfo versions of the
-Handbook and the APIs documentation. The optional argument is a topic to
-search, which can be an atom, a predicate indicator, or a non-terminal
-indicator. Some examples:</p>
+<p>When using Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog,
+Trealla Prolog, or XSB as the backend, <code class="docutils literal notranslate"><span class="pre">apis/1</span></code> and <code class="docutils literal notranslate"><span class="pre">handbook/0-1</span></code>
+predicates are made available. These predicates open inline,
+respectively, the Texinfo versions of the Handbook and the APIs
+documentation. The optional argument is a topic to search, which can be
+an atom, a predicate indicator, or a non-terminal indicator. Some
+examples:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>handbook.
 
 | <span class="o">?-</span> help<span class="o">::</span>handbook(base64).
@@ -196,6 +197,13 @@ indicator. Some examples:</p>
 you will be back to the top-level prompt (if you find that the top-level
 have scrolled from its last position, try to set your terminal terminfo
 to <code class="docutils literal notranslate"><span class="pre">xterm-256colour</span></code>).</p>
+<p>If you’re running Logtalk from a git clone of its repo, you will need to
+run the <code class="docutils literal notranslate"><span class="pre">scripts/update_html_docs.sh</span></code> or
+<code class="docutils literal notranslate"><span class="pre">scripts/update_html_docs.ps1</span></code> to generate the APIs documentation
+<code class="docutils literal notranslate"><span class="pre">.info</span></code> file and also run the <code class="docutils literal notranslate"><span class="pre">manuals/sources/build_manuals.sh</span></code> to
+generated the Handbook <code class="docutils literal notranslate"><span class="pre">.info</span></code> file. In alternative, you can download
+the <code class="docutils literal notranslate"><span class="pre">.info</span></code> files for the latest stable release from the Logtalk
+website and save them to the <code class="docutils literal notranslate"><span class="pre">docs</span></code> and <code class="docutils literal notranslate"><span class="pre">manuals</span></code> directories.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
