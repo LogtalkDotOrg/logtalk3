@@ -162,6 +162,9 @@ Installers and installation scripts
 links to the `.info` versions of the Handbook and APIs documentation in the
 default `info` directory.
 
+* FIXED: The `update_man_html_versions.sh`, `update_html_docs.sh`, and
+`update_svg_diagrams.sh` scripts to allow running them from any directory.
+
 
 3.57.0 - July 26, 2022
 ======================

@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML versions of man pages
 ## 
-##   Last updated on December 27, 2020
+##   Last updated on September 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -24,6 +24,9 @@
 ## 
 #############################################################################
 
+
+# allow using this script from any directory
+cd "$(dirname "$0")" || exit 1
 
 print_version() {
 	echo "$(basename "$0") 0.1"

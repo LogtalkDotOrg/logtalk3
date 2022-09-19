@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on July 19, 2022
+##   Last updated on September 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -24,6 +24,10 @@
 ##   limitations under the License.
 ## 
 #############################################################################
+
+
+# allow using this script from any directory
+cd "$(dirname "$0")" || exit 1
 
 
 operating_system=$(uname -s)
