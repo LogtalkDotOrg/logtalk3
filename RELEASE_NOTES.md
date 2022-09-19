@@ -162,6 +162,9 @@ Installers and installation scripts
 links to the `.info` versions of the Handbook and APIs documentation in the
 default `info` directory.
 
+* UPDATED: The release build script to include all final formats for the
+Handbook and APIs documentation in the generated archives and installers.
+
 * FIXED: The `update_man_html_versions.sh`, `update_html_docs.sh`, and
 `update_svg_diagrams.sh` scripts to allow running them from any directory.
 

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on March 22, 2022
+##   Last updated on September 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -35,6 +35,14 @@ chmod a+x scripts/cleandist.sh
 scripts/cleandist.sh
 cd ..
 
+"logtalk-$version"/manuals/sources/build_manuals.sh
+cp -R "logtalk-$version/manuals" "logtalk-manuals-$version"
+tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
+
+"logtalk-$version"/scripts/update_html_docs.sh
+
+tar -cjf "logtalk-$version.tar.bz2" "logtalk-$version"
+
 cp -R "logtalk-$version/scripts/pack" "pack-$version"
 cp -R "logtalk-$version" "pack-$version/logtalk"
 mv "pack-$version/settings.lgt" "pack-$version/logtalk/logtalk-$version"
@@ -50,11 +58,6 @@ cd "pack-experimental-$version" || exit 1
 tar zcvf "logtalk-experimental-$version.tgz" logtalk
 mv "logtalk-experimental-$version.tgz" ..
 cd ..
-
-"logtalk-$version"/manuals/sources/build_manuals.sh
-cp -R "logtalk-$version/manuals" "logtalk-manuals-$version"
-tar -czf "logtalk-manuals-$version.tgz" "logtalk-manuals-$version"
-tar -cjf "logtalk-$version.tar.bz2" "logtalk-$version"
 
 rm -rf debian
 mkdir -p debian/usr/bin
