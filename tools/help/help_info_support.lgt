@@ -23,10 +23,10 @@
 	complements(help)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2022-09-19,
-		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
+		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
 	]).
 
 	:- public(handbook/0).
@@ -143,7 +143,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		process_create(Process, Arguments) :-
-			{process_create(Process, Arguments, [stdin(std), stdout(std), stderr(std)])}.
+			{process_create(Process, Arguments, [stdin(std), stdout(std), stderr(std), wait(_)])}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 

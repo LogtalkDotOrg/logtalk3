@@ -87,8 +87,8 @@ instead of silently using default option values.
 
 * ADDED: Experimental support to the `help` tool to browse and search inline
 at the top-level interpreter the Texinfo versions of the Handbook and APIs
-documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SWI-Prolog, or
-XSB as the backend running on a POSIX system.
+documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog,
+SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.
 
 * ADDED: The `lgtunit` QuickCheck test dialects and predicates now also accept
 a `pb/2` option to show an ASCII progress bar.
