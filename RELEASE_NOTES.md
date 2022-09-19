@@ -48,6 +48,8 @@ Prolog adapter and integration files
 * ADDED: Support for calling LVM disk predicate built-in predicates from
 categories.
 
+* UPDATED: The Trealla Prolog adapter file to require version 2.2.5 or later.
+
 Documentation
 -------------
 
