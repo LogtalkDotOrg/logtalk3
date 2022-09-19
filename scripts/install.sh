@@ -169,8 +169,8 @@ done
 
 mkdir -p ../../info
 cd ../../info || exit 1
-ln -sf ../share/logtalk/docs/LogtalkAPIs-$version_base.info LogtalkAPIs.info
-ln -sf ../share/logtalk/manuals/TheLogtalkHandbook-$version_base.info TheLogtalkHandbook.info
+ln -sf ../logtalk/docs/LogtalkAPIs-$version_base.info LogtalkAPIs.info
+ln -sf ../logtalk/manuals/TheLogtalkHandbook-$version_base.info TheLogtalkHandbook.info
 
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
