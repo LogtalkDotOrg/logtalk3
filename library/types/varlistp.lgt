@@ -22,9 +22,9 @@
 :- protocol(varlistp).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2022-09-19,
 		comment is 'List of variables protocol.',
 		see_also is [varlist, listp, numberlistp]
 	]).
@@ -95,7 +95,7 @@
 	:- public(nth0/4).
 	:- mode(nth0(?integer, +list, @var, ?list), zero_or_more).
 	:- info(nth0/4, [
-		comment is 'Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
+		comment is 'Nth element of a list (counting from zero). ``Rest`` is a list of all the other elements. Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
 		argnames is ['Nth', 'List', 'Element', 'Rest']
 	]).
 
@@ -109,7 +109,7 @@
 	:- public(nth1/4).
 	:- mode(nth1(?integer, +list, @var, ?list), zero_or_more).
 	:- info(nth1/4, [
-		comment is 'Nth element of a list (counting from zero). Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
+		comment is 'Nth element of a list (counting from zero). ``Rest`` is a list of all the other elements. Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
 		argnames is ['Nth', 'List', 'Element', 'Rest']
 	]).
 
