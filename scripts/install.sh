@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on September 19, 2022
+##   Last updated on September 20, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -169,8 +169,12 @@ done
 
 mkdir -p ../../info
 cd ../../info || exit 1
-ln -sf ../logtalk/docs/LogtalkAPIs-$version_base.info LogtalkAPIs.info
-ln -sf ../logtalk/manuals/TheLogtalkHandbook-$version_base.info TheLogtalkHandbook.info
+if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
+	ln -sf ../logtalk/docs/LogtalkAPIs-$version_base.info LogtalkAPIs.info
+fi
+if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
+	ln -sf ../logtalk/manuals/TheLogtalkHandbook-$version_base.info TheLogtalkHandbook.info
+fi
 
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
