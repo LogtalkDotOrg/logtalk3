@@ -154,7 +154,7 @@ Move-Item -Path _conf.py -Destination conf.py
 .\make.bat clean
 .\make.bat html
 .\make.bat info
-#make linkcheck
+#.\make linkcheck
 Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..
 .\make.bat clean

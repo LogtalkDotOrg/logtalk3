@@ -56,6 +56,8 @@ Documentation
 * IMPROVED: Handbook documentation of the `initialization/1` directive and
 the `logtalk_load_context/2` built-in predicate.
 
+* UPDATED: List of required dependencies to build the Handbook final formats.
+
 Library
 -------
 
