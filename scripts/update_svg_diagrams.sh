@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on September 19, 2022
+##   Last updated on September 21, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,7 @@ set_goals() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.21"
+	echo "$(basename "$0") 0.22"
 	exit 0
 }
 

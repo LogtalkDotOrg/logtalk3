@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on September 19, 2022
+##   Last updated on September 21, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -69,7 +69,7 @@ set_goal() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.22"
+	echo "$(basename "$0") 0.23"
 	exit 0
 }
 
