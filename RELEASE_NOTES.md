@@ -154,6 +154,8 @@ called as predicates.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Experimental PowerShell version of the `built_manuals.sh` script.
+
 * ADDED: Experimental embedding script for Ciao Prolog.
 
 * IMPROVED: Documentation of the sample embedding scripts.
