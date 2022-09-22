@@ -68,3 +68,11 @@ the ``docs`` directory (open the ``../docs/index.html`` file with your
 web browser). The documentation for these tools can be regenerated using
 the shell scripts ``../scripts/update_html_docs.sh`` and
 ``../scripts/update_svg_diagrams.sh``.
+
+Tools requirements
+------------------
+
+Some of the developer tools have third-party dependencies. For example,
+the ``lgtdoc`` tool depends on XSLT processors to generate documentation
+final formats. Be sure to consult the tools documentation for a list of
+those requirements.

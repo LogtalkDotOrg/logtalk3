@@ -1374,8 +1374,8 @@ Generating Allure reports
 -------------------------
 
 A `logtalk_allure_report.pl` Bash shell script and a `logtalk_allure_report.ps1`
-PowerShell script are provided for generating [Allure](http://allure.qatools.ru)
-reports. This requires exporting test results in xUnit XML format. A simple
+PowerShell script are provided for generating [Allure reports](https://docs.qameta.io/allure-report/).
+This requires exporting test results in xUnit XML format. A simple
 usage example (assuming a current directory containing tests):
 
 	$ logtalk_tester -p gnu -f xunit
