@@ -19,21 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% only allow complementing categories to add new functionality,
-% not redefine existing functionality:
-
-:- set_logtalk_flag(complements, restrict).
-
-
 :- object(help,
 	implements(forwarding)).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:31:0,
 		author is 'Paulo Moura',
-		date is 2022-09-12,
+		date is 2022-09-22,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
+
+	% only allow complementing categories to add new functionality:
+	:- set_logtalk_flag(complements, allow).
 
 	:- initialization((nl, write('For help on Logtalk, type help::help.'), nl, nl)).
 

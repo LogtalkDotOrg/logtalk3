@@ -23,9 +23,9 @@
 	complements(help)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2022-09-19,
+		date is 2022-09-22,
 		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
 	]).
 
@@ -62,6 +62,16 @@
 	:- uses(user, [
 		atomic_list_concat/2, atomic_list_concat/3
 	]).
+
+	help :-
+		@help,
+		write('Experimental features: assuming the Handbook and APIs documentation'), nl,
+		write('info files and the info command-line executable are available, the'), nl,
+		write('following predicates can be used for inline browsing of the info files:'), nl, nl,
+		write('    help::handbook.                 help::apis.'), nl,
+		write('    help::handbook(Topic).          help::apis(Topic).'), nl,
+		write('    help::handbook(Name/Arity).     help::apis(Name/Arity).'), nl,
+		write('    help::handbook(Name//Arity).    help::apis(Name//Arity).'), nl, nl.
 
 	handbook :-
 		info_executable(Info),
