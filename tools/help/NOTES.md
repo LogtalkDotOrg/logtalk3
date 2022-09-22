@@ -100,6 +100,21 @@ scripts to generated the Handbook `.info` file. In alternative, you can
 download the `.info` files for the latest stable release from the Logtalk
 website and save them to the `docs` and `manuals` directories.
 
+The required `info` command is provided by the third-party `texinfo` package
+(tested with version 6.8). On macOS, this package can be installed with
+either MacPorts:
+
+	$ sudo port install texinfo
+
+Or using Homebrew:
+
+	$ brew install texinfo
+
+On Linux systems, use the distribution own package manager to install the
+`texinfo` package. For example, in Ubuntu systems:
+
+	$ sudo apt install info
+
 Known issues
 ------------
 
