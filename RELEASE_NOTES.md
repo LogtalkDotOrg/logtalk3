@@ -87,6 +87,9 @@ and `failed/3` results that include as last argument the test seed.
 * CHANGED: The `lgtunit` tool now reports an error on wrong QuickCheck options
 instead of silently using default option values.
 
+* ADDED: A convenient global list of most of the developer tool requirements
+per operating-system.
+
 * ADDED: Experimental support to the `help` tool to browse and search inline
 at the top-level interpreter the Texinfo versions of the Handbook and APIs
 documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog,

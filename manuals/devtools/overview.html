@@ -65,7 +65,15 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#loading-the-developer-tools">Loading the developer tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-documentation">Tools documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tools-requirements">Tools requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-requirements">Tools requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#macos-macports">macOS - MacPorts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macos-homebrew">macOS - Homebrew</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows-chocolatey">Windows - Chocolatey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows-installers">Windows - installers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-dependencies">Python dependencies</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="asdf.html"><code class="docutils literal notranslate"><span class="pre">asdf</span></code></a></li>
@@ -194,8 +202,71 @@ the shell scripts <code class="docutils literal notranslate"><span class="pre">.
 <h2>Tools requirements<a class="headerlink" href="#tools-requirements" title="Permalink to this heading"></a></h2>
 <p>Some of the developer tools have third-party dependencies. For example,
 the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool depends on XSLT processors to generate documentation
-final formats. Be sure to consult the tools documentation for a list of
-those requirements.</p>
+final formats. Be sure to consult the tools documentation details on
+those requirements and possible alternatives. For convenience, follows a
+global list of the main tool requirements per operating-system. If your
+operating-system is not listed, see the dependency websites for
+installation instructions.</p>
+<section id="macos-macports">
+<h3>macOS - MacPorts<a class="headerlink" href="#macos-macports" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install graphviz
+$ sudo port install texinfo
+$ sudo port install libxslt fop
+$ sudo port install coreutils libarchive gnupg2 git
+$ sudo port install gh glab
+</pre></div>
+</div>
+</section>
+<section id="macos-homebrew">
+<h3>macOS - Homebrew<a class="headerlink" href="#macos-homebrew" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ brew install graphviz
+$ brew install texinfo
+$ brew install libxslt fop
+$ brew install allure
+$ brew install coretutils libarchive gnupg2 git
+$ brew install gh glab
+</pre></div>
+</div>
+</section>
+<section id="ubuntu">
+<h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo apt install graphviz
+$ sudo apt install info
+$ sudo apt install libxslt fop
+$ sudo apt-add-repository ppa:qameta/allure &amp;&amp; sudo apt install allure
+$ sudo apt install libarchive-tools gnupg2 git
+$ sudo apt install gh glab
+</pre></div>
+</div>
+</section>
+<section id="windows-chocolatey">
+<h3>Windows - Chocolatey<a class="headerlink" href="#windows-chocolatey" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install graphviz
+<span class="o">&gt;</span> choco install xsltproc apache<span class="o">-</span>fop
+<span class="o">&gt;</span> choco install gnupg git
+<span class="o">&gt;</span> choco install gh glab
+</pre></div>
+</div>
+</section>
+<section id="windows-installers">
+<h3>Windows - installers<a class="headerlink" href="#windows-installers" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://www.graphviz.org/download/">https://www.graphviz.org/download/</a></div>
+<div class="line"><a class="reference external" href="https://docs.qameta.io/allure-report/">https://docs.qameta.io/allure-report/</a></div>
+<div class="line"><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></div>
+<div class="line"><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></div>
+<div class="line"><a class="reference external" href="https://cli.github.com">https://cli.github.com</a></div>
+<div class="line"><a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></div>
+</div>
+</section>
+<section id="python-dependencies">
+<h3>Python dependencies<a class="headerlink" href="#python-dependencies" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ pip install --upgrade pygments
+$ pip install --upgrade sphinx
+$ pip install --upgrade sphinx_rtd_theme
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 

@@ -35,6 +35,49 @@ the ``logtalk_doclet`` scripts. See the ``doclet`` tool examples and
 documentation for details. See also the ``diagrams`` tool own
 ``lgt2svg`` Bash and PowerShell scripts.
 
+Requirements
+------------
+
+A recent version of Graphviz is required for generating diagrams in the
+final formats. It can be installed using a Graphviz installer or e.g.
+the following per operating-system commands:
+
+macOS - MacPorts
+~~~~~~~~~~~~~~~~
+
+::
+
+   $ sudo port install graphviz
+
+macOS - Homebrew
+~~~~~~~~~~~~~~~~
+
+::
+
+   $ brew install graphviz
+
+Ubuntu
+~~~~~~
+
+::
+
+   $ sudo apt install graphviz
+
+Windows - Chocolatey
+~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   > choco install graphviz
+
+Installers
+~~~~~~~~~~
+
+https://www.graphviz.org/download/
+
+On Linux systems, use the distribution own package manager to install
+any missing command.
+
 API documentation
 -----------------
 

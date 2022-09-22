@@ -74,5 +74,72 @@ Tools requirements
 
 Some of the developer tools have third-party dependencies. For example,
 the ``lgtdoc`` tool depends on XSLT processors to generate documentation
-final formats. Be sure to consult the tools documentation for a list of
-those requirements.
+final formats. Be sure to consult the tools documentation details on
+those requirements and possible alternatives. For convenience, follows a
+global list of the main tool requirements per operating-system. If your
+operating-system is not listed, see the dependency websites for
+installation instructions.
+
+macOS - MacPorts
+~~~~~~~~~~~~~~~~
+
+::
+
+   $ sudo port install graphviz
+   $ sudo port install texinfo
+   $ sudo port install libxslt fop
+   $ sudo port install coreutils libarchive gnupg2 git
+   $ sudo port install gh glab
+
+macOS - Homebrew
+~~~~~~~~~~~~~~~~
+
+::
+
+   $ brew install graphviz
+   $ brew install texinfo
+   $ brew install libxslt fop
+   $ brew install allure
+   $ brew install coretutils libarchive gnupg2 git
+   $ brew install gh glab
+
+Ubuntu
+~~~~~~
+
+::
+
+   $ sudo apt install graphviz
+   $ sudo apt install info
+   $ sudo apt install libxslt fop
+   $ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
+   $ sudo apt install libarchive-tools gnupg2 git
+   $ sudo apt install gh glab
+
+Windows - Chocolatey
+~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   > choco install graphviz
+   > choco install xsltproc apache-fop
+   > choco install gnupg git
+   > choco install gh glab
+
+Windows - installers
+~~~~~~~~~~~~~~~~~~~~
+
+| https://www.graphviz.org/download/
+| https://docs.qameta.io/allure-report/
+| https://www.gnupg.org/
+| https://gitforwindows.org
+| https://cli.github.com
+| https://glab.readthedocs.io
+
+Python dependencies
+~~~~~~~~~~~~~~~~~~~
+
+::
+
+   $ pip install --upgrade pygments
+   $ pip install --upgrade sphinx
+   $ pip install --upgrade sphinx_rtd_theme

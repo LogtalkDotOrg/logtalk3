@@ -65,13 +65,13 @@ MacPorts:
 
 ::
 
-   $ sudo port install coreutils libarchive gnupg2
+   $ sudo port install coreutils libarchive gnupg2 git
 
 Or using Homebrew:
 
 ::
 
-   $ brew install coretutils libarchive gnupg2
+   $ brew install coretutils libarchive gnupg2 git
 
 On Linux systems, use the distribution own package manager to install
 any missing command.
