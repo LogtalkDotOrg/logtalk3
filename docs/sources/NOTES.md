@@ -20,8 +20,8 @@ ________________________________________________________________________
 
 This directory contains files used by the Logtalk API documentation. The
 sources are generated automatically in reStructuredText markup language
-using the `update_html_docs.sh` script and then converted to HTML, PDF,
-and ePub formats using Sphinx:
+using the `scripts/update_html_docs.sh` script and then converted to HTML
+and Texinfo formats using Sphinx:
 
 http://sphinx-doc.org/
 

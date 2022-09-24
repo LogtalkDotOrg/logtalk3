@@ -21,11 +21,11 @@ ________________________________________________________________________
 To consult the Logtalk documentation open the file `index.html` with a
 web browser.
 
-The HTML, PDF, and ePub versions of the documentation are generated from
-reStructuredText sources in the `sources` directory using Sphinx. See the
-`sources/NOTES.md` file for details. Only the HTML version is included in
-the sources distribution. The PDF and ePub versions can be downloaded from
-the Logtalk website (for the latest stable release) at:
+The HTML, PDF, ePub, and Texinfo versions of the documentation are generated
+from reStructuredText sources in the `sources` directory using Sphinx. See
+the `sources/NOTES.md` file for details. Only the HTML version is included
+in the sources distribution. The PDF, ePub, and Texinfo versions can be
+downloaded from the Logtalk website (for the latest stable release) at:
 
 https://logtalk.org/documentation.html
 
