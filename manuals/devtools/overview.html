@@ -69,6 +69,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#macos-macports">macOS - MacPorts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#macos-homebrew">macOS - Homebrew</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#redhat">RedHat</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-chocolatey">Windows - Chocolatey</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-installers">Windows - installers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#python-dependencies">Python dependencies</a></li>
@@ -205,8 +206,8 @@ the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></
 final formats. Be sure to consult the tools documentation details on
 those requirements and possible alternatives. For convenience, follows a
 global list of the main tool requirements per operating-system. If your
-operating-system is not listed, see the dependency websites for
-installation instructions.</p>
+operating-system or a dependency for it is not listed, see the
+dependency websites for installation instructions.</p>
 <section id="macos-macports">
 <h3>macOS - MacPorts<a class="headerlink" href="#macos-macports" title="Permalink to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install graphviz
@@ -236,6 +237,14 @@ $ sudo apt install libxslt fop
 $ sudo apt-add-repository ppa:qameta/allure &amp;&amp; sudo apt install allure
 $ sudo apt install libarchive-tools gnupg2 git
 $ sudo apt install gh glab
+</pre></div>
+</div>
+</section>
+<section id="redhat">
+<h3>RedHat<a class="headerlink" href="#redhat" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo dnf install graphviz
+$ sudo dnf install libxslt fop
+$ sudo dnf install bsdtar gnupg2 git
 </pre></div>
 </div>
 </section>

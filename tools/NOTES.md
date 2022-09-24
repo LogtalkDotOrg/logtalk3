@@ -93,8 +93,8 @@ the `lgtdoc` tool depends on XSLT processors to generate documentation
 final formats. Be sure to consult the tools documentation details on
 those requirements and possible alternatives. For convenience, follows
 a global list of the main tool requirements per operating-system. If
-your operating-system is not listed, see the dependency websites for
-installation instructions.
+your operating-system or a dependency for it is not listed, see the
+dependency websites for installation instructions.
 
 ### macOS - MacPorts
 
@@ -121,6 +121,12 @@ installation instructions.
 	$ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
 	$ sudo apt install libarchive-tools gnupg2 git
 	$ sudo apt install gh glab
+
+### RedHat
+
+	$ sudo dnf install graphviz
+	$ sudo dnf install libxslt fop
+	$ sudo dnf install bsdtar gnupg2 git
 
 ### Windows - Chocolatey
 
