@@ -67,13 +67,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading-the-developer-tools">Loading the developer tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-documentation">Tools documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-requirements">Tools requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-dependencies-all-operating-systems">Python dependencies (all operating-systems)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#macos-macports">macOS - MacPorts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#macos-homebrew">macOS - Homebrew</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#redhat">RedHat</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-chocolatey">Windows - Chocolatey</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-installers">Windows - installers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#python-dependencies">Python dependencies</a></li>
 </ul>
 </li>
 </ul>
@@ -204,11 +204,20 @@ the shell scripts <code class="docutils literal notranslate"><span class="pre">.
 <h2>Tools requirements<a class="headerlink" href="#tools-requirements" title="Permalink to this heading"></a></h2>
 <p>Some of the developer tools have third-party dependencies. For example,
 the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool depends on XSLT processors to generate documentation
-final formats. Be sure to consult the tools documentation details on
-those requirements and possible alternatives. For convenience, follows a
-global list of the main tool requirements per operating-system. If your
-operating-system or a dependency for it is not listed, see the
-dependency websites for installation instructions.</p>
+final formats and uses Sphinx for the preferred HTML final format. Be
+sure to consult the tools documentation details on those requirements
+and possible alternatives. For convenience, follows a global list of the
+main tool requirements per operating-system. If your operating-system or
+a dependency for it is not listed, see the dependency websites for
+installation instructions.</p>
+<section id="python-dependencies-all-operating-systems">
+<h3>Python dependencies (all operating-systems)<a class="headerlink" href="#python-dependencies-all-operating-systems" title="Permalink to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ pip install --upgrade pygments
+$ pip install --upgrade sphinx
+$ pip install --upgrade sphinx_rtd_theme
+</pre></div>
+</div>
+</section>
 <section id="macos-macports">
 <h3>macOS - MacPorts<a class="headerlink" href="#macos-macports" title="Permalink to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install graphviz
@@ -267,14 +276,6 @@ $ sudo dnf install bsdtar gnupg2 git
 <div class="line"><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></div>
 <div class="line"><a class="reference external" href="https://cli.github.com">https://cli.github.com</a></div>
 <div class="line"><a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></div>
-</div>
-</section>
-<section id="python-dependencies">
-<h3>Python dependencies<a class="headerlink" href="#python-dependencies" title="Permalink to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ pip install --upgrade pygments
-$ pip install --upgrade sphinx
-$ pip install --upgrade sphinx_rtd_theme
-</pre></div>
 </div>
 </section>
 </section>

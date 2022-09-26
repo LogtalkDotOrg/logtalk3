@@ -74,11 +74,21 @@ Tools requirements
 
 Some of the developer tools have third-party dependencies. For example,
 the ``lgtdoc`` tool depends on XSLT processors to generate documentation
-final formats. Be sure to consult the tools documentation details on
-those requirements and possible alternatives. For convenience, follows a
-global list of the main tool requirements per operating-system. If your
-operating-system or a dependency for it is not listed, see the
-dependency websites for installation instructions.
+final formats and uses Sphinx for the preferred HTML final format. Be
+sure to consult the tools documentation details on those requirements
+and possible alternatives. For convenience, follows a global list of the
+main tool requirements per operating-system. If your operating-system or
+a dependency for it is not listed, see the dependency websites for
+installation instructions.
+
+Python dependencies (all operating-systems)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   $ pip install --upgrade pygments
+   $ pip install --upgrade sphinx
+   $ pip install --upgrade sphinx_rtd_theme
 
 macOS - MacPorts
 ~~~~~~~~~~~~~~~~
@@ -143,12 +153,3 @@ Windows - installers
 | https://gitforwindows.org
 | https://cli.github.com
 | https://glab.readthedocs.io
-
-Python dependencies
-~~~~~~~~~~~~~~~~~~~
-
-::
-
-   $ pip install --upgrade pygments
-   $ pip install --upgrade sphinx
-   $ pip install --upgrade sphinx_rtd_theme
