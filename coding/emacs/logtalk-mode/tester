@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: tester
+# key: tester
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+:- initialization((
+	set_logtalk_flag(report, warnings),
+	logtalk_load([
+		${1:Dependencies}
+	]),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load([
+		${2:`(string-join (delq nil (mapcar (lambda (str) (when (not (string-match "^\\(test\\|loader\\|settings\\)" str)) str)) (directory-files (file-name-directory buffer-file-name) nil ".+?\.\\(lgt\\|logtalk\\)"))) ",\n\t\t")`}
+	], [
+		source_data(on),
+		debug(on)
+	]),
+	logtalk_load(tests, [
+		hook(lgtunit)
+	]),
+	tests::run
+)).

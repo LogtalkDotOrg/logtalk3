@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: public
+# key: public
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+	:- public(${1:name}/${2:2}).
+	:- mode($1($3), ${4:$$(yas-choose-value '("zero_or_more" "zero_or_one" "one_or_more" "one" "one_or_error" "error" "zero"))}).
+	:- info($1/$2, [
+		comment is '$5',
+		argnames is [${6:args}]
+	]).
+	$1(${6:$(s-replace "'" "" yas-text)}) :-
+		$0.

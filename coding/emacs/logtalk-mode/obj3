@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: object-extends-object
+# key: obj
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+:- object(${1:Object},
+   extends(${2:Parent})).
+
+	:- info([
+		version is 1:0:0,
+		author is '${3:`(if (boundp 'logtalk-snippets-author) logtalk-snippets-author "name")`}',
+		date is `(format-time-string "%Y-%m-%d")`,
+		comment is '${4:Comment}'
+	]).
+$0
+
+:- end_object.

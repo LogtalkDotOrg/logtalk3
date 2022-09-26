@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: ifelif
+# key: if
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+	(    ${1:Condition1}
+	->   ${2:If1True}
+	;    ${3:Condition2}
+	->   ${4:If2True}
+	;    ${5:Else}
+	)$0

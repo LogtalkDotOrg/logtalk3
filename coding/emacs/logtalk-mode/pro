@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: protocol
+# key: pro
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+:- protocol($1).
+
+	:- info([
+		version is 1:0:0,
+		author is '${2:`(if (boundp 'logtalk-snippets-author) logtalk-snippets-author "name")`}',
+		date is `(format-time-string "%Y-%m-%d")`,
+		comment is '$3'
+	]).
+$0
+
+:- end_protocol.

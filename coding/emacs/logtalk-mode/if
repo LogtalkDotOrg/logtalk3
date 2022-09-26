@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: if
+# key: if
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+	(    ${1:Condition}
+	->   ${2:WhenTrue}
+	;    ${3:WhenFalse}
+	)$0

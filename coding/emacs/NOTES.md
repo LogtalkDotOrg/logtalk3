@@ -27,7 +27,29 @@ editor:
 These support files are dual-licensed under the Apache License 2.0 and the
 Emacs license.
 
-To install follow the instructions contained in the file itself.
+To install logtalk-mode follow the instructions contained in the `logtalk.el` file itself.
 
 Emacs regular expressions don't support look-ahead assertions, which
 result is syntax coloring errors in valid code such as the `0'"` term.
+
+Also included are a set of snippets for use with
+[yasnippet](https://github.com/joaotavora/yasnippet) and logtalk-mode. To
+install these snippets move the `logtalk-mode` directory into `yas-snippet-dirs`
+(by default `~/.emacs.d/snippets`).  To set the `author` for the snippets, in
+your `init.el` add:
+
+```
+(setq-default logtalk-snippets-author "Your Name")
+```
+
+Included snippets:
+- `obj` (object)
+- `cat` (category)
+- `pro` (protocol)
+- `public` (public declaration)
+- `protected` (protected declaration)
+- `private` (private declaration)
+- `loader` (loader file template)
+- `tester` (tester file template)
+- `tests` (tests template)
+- and more, see the `key` in the file headings for the triggers.

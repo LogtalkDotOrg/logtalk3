@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: tests
+# key: tests
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paul Brown',
+		date is `(format-time-string "%Y-%m-%d")`,
+		comment is 'Unit tests for $1'
+	]).
+
+	cover($2).
+
+	test($3, ${4:true}) :-
+		${5:fail}.
+
+:- end_object.
