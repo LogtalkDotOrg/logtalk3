@@ -154,6 +154,11 @@ Contributions
 * FIXED: The `xml_parser` contribution linter warnings for non-terminals
 called as predicates.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: Code snippets for Emacs. Contributed by Paul Brown.
+
 Installers and installation scripts
 -----------------------------------
 
