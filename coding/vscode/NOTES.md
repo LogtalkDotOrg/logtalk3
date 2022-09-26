@@ -18,7 +18,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-DEPRECATED: For a more full featured Logtalk extension for the Visual Studio
+DEPRECATED: For a more featured Logtalk extension for the Visual Studio
 Code text editor use instead:
 
 https://github.com/jacobfriedman/vsc-logtalk
