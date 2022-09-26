@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: loader
+# key: loader
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+:- initialization((
+	logtalk_load([
+		${1:Dependencies}
+	]),
+	logtalk_load([
+		${2:`(string-join (delq nil (mapcar (lambda (str) (when (not (string-match "^\\(test\\|loader\\|settings\\)" str)) str)) (directory-files (file-name-directory buffer-file-name) nil ".+?\.\\(lgt\\|logtalk\\)"))) ",\n\t\t")`}
+	], [
+		% optimize(on)
+	])
+)).

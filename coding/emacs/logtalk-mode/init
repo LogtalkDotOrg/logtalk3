@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: init
+# key: init
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+:- initialization((
+	$0
+)).

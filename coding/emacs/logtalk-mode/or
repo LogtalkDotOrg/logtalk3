@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: or
+# key: or
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+	(    ${1:Call}
+	;    ${2:OnFail}
+	)$0

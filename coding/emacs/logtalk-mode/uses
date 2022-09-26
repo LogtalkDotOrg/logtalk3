@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: uses
+# key: uses
+# condition: t
+# expand-env: ((yas-indent-line 'fixed))
+# --
+	:- uses(${1:Object}, [
+		${0:Predicates}
+	]).
