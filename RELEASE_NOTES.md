@@ -25,6 +25,12 @@ RELEASE NOTES
 3.59.0 - October ??, 2022
 =========================
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The manual installation script to call `install-info` after adding
+the Handbook and Logtalk APIs info files to the `info` directory.
+
 
 3.58.0 - September 27, 2022
 ===========================
