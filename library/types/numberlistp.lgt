@@ -46,7 +46,7 @@
 	:- public(min_max/3).
 	:- mode(min_max(+list(number), -number, -number), zero_or_one).
 	:- info(min_max/3, [
-		comment is 'Determines the minimum and maxium values in a list using arithmetic order. Fails if the list is empty.',
+		comment is 'Determines the minimum and maximum values in a list using arithmetic order. Fails if the list is empty.',
 		argnames is ['List', 'Minimum', 'Maximum']
 	]).
 
