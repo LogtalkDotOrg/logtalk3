@@ -93,9 +93,18 @@ the `lgtdoc` tool depends on XSLT processors to generate documentation
 final formats and uses Sphinx for the preferred HTML final format. Be
 sure to consult the tools documentation details on those requirements
 and possible alternatives. For convenience, follows a global list of
-the main tool requirements per operating-system. If your operating-system
-or a dependency for it is not listed, see the dependency websites for
-installation instructions.
+the main tool requirements and suggestions for installing them per
+operating-system. If your operating-system or a dependency for it is
+not listed, see the dependency websites for installation instructions.
+
+### Tool dependencies for full functionality
+
+- `diagrams`: Graphviz
+- `help`: `info`
+- `issue_creator`: `gh`, `glab`
+- `lgtdoc`: Sphinx, `libxslt`, `fop`
+- `lgtunit`: Allure
+- `packs`: `coretutils`, `libarchive`, `gnupg2`, `git`
 
 ### Python dependencies (all operating-systems)
 
@@ -127,7 +136,6 @@ installation instructions.
 	$ sudo apt install libxslt fop
 	$ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
 	$ sudo apt install libarchive-tools gnupg2 git
-	$ sudo apt install gh glab
 
 ### RedHat
 

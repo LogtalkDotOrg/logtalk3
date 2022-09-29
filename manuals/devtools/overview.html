@@ -67,6 +67,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading-the-developer-tools">Loading the developer tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-documentation">Tools documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-requirements">Tools requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tool-dependencies-for-full-functionality">Tool dependencies for full functionality</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#python-dependencies-all-operating-systems">Python dependencies (all operating-systems)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#macos-macports">macOS - MacPorts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#macos-homebrew">macOS - Homebrew</a></li>
@@ -207,9 +208,20 @@ the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></
 final formats and uses Sphinx for the preferred HTML final format. Be
 sure to consult the tools documentation details on those requirements
 and possible alternatives. For convenience, follows a global list of the
-main tool requirements per operating-system. If your operating-system or
-a dependency for it is not listed, see the dependency websites for
-installation instructions.</p>
+main tool requirements and suggestions for installing them per
+operating-system. If your operating-system or a dependency for it is not
+listed, see the dependency websites for installation instructions.</p>
+<section id="tool-dependencies-for-full-functionality">
+<h3>Tool dependencies for full functionality<a class="headerlink" href="#tool-dependencies-for-full-functionality" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">diagrams</span></code>: Graphviz</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">help</span></code>: <code class="docutils literal notranslate"><span class="pre">info</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code>: <code class="docutils literal notranslate"><span class="pre">gh</span></code>, <code class="docutils literal notranslate"><span class="pre">glab</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>: Sphinx, <code class="docutils literal notranslate"><span class="pre">libxslt</span></code>, <code class="docutils literal notranslate"><span class="pre">fop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>: Allure</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">packs</span></code>: <code class="docutils literal notranslate"><span class="pre">coretutils</span></code>, <code class="docutils literal notranslate"><span class="pre">libarchive</span></code>, <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+</ul>
+</section>
 <section id="python-dependencies-all-operating-systems">
 <h3>Python dependencies (all operating-systems)<a class="headerlink" href="#python-dependencies-all-operating-systems" title="Permalink to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ pip install --upgrade pygments
@@ -246,7 +258,6 @@ $ sudo apt install info
 $ sudo apt install libxslt fop
 $ sudo apt-add-repository ppa:qameta/allure &amp;&amp; sudo apt install allure
 $ sudo apt install libarchive-tools gnupg2 git
-$ sudo apt install gh glab
 </pre></div>
 </div>
 </section>
