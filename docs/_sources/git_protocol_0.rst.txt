@@ -35,10 +35,6 @@ Predicates for accessing a git project current branch and latest commit data.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="branch/2"> </div>
-
 .. index:: branch/2
 .. _git_protocol/0::branch/2:
 
@@ -57,10 +53,6 @@ Returns the name of the current git branch. Fails if the directory is not a git 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="commit_author/2"> </div>
 
 .. index:: commit_author/2
 .. _git_protocol/0::commit_author/2:
@@ -81,10 +73,6 @@ Returns the latest commit author. Fails if the directory is not a git repo or a 
 
 ------------
 
-.. raw:: html
-
-   <div id="commit_date/2"> </div>
-
 .. index:: commit_date/2
 .. _git_protocol/0::commit_date/2:
 
@@ -103,10 +91,6 @@ Returns the latest commit date (strict ISO 8601 format). Fails if the directory 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="commit_hash/2"> </div>
 
 .. index:: commit_hash/2
 .. _git_protocol/0::commit_hash/2:
@@ -127,10 +111,6 @@ Returns the latest commit hash. Fails if the directory is not a git repo or a su
 
 ------------
 
-.. raw:: html
-
-   <div id="commit_hash_abbreviated/2"> </div>
-
 .. index:: commit_hash_abbreviated/2
 .. _git_protocol/0::commit_hash_abbreviated/2:
 
@@ -150,10 +130,6 @@ Returns the latest commit abbreviated hash. Fails if the directory is not a git 
 
 ------------
 
-.. raw:: html
-
-   <div id="commit_message/2"> </div>
-
 .. index:: commit_message/2
 .. _git_protocol/0::commit_message/2:
 
@@ -172,10 +148,6 @@ Returns the latest commit message. Fails if the directory is not a git repo or a
 
 
 ------------
-
-.. raw:: html
-
-   <div id="commit_log/3"> </div>
 
 .. index:: commit_log/3
 .. _git_protocol/0::commit_log/3:

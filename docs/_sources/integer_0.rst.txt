@@ -35,10 +35,6 @@ Integer data type predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="between/3"> </div>
-
 .. index:: between/3
 .. _integer/0::between/3:
 
@@ -58,10 +54,6 @@ Returns integers in the interval defined by the two first arguments.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="plus/3"> </div>
 
 .. index:: plus/3
 .. _integer/0::plus/3:
@@ -84,10 +76,6 @@ Reversible integer sum. At least two of the arguments must be instantiated to in
 
 ------------
 
-.. raw:: html
-
-   <div id="succ/2"> </div>
-
 .. index:: succ/2
 .. _integer/0::succ/2:
 
@@ -108,10 +96,6 @@ Successor of a natural number. At least one of the arguments must be instantiate
 
 ------------
 
-.. raw:: html
-
-   <div id="sequence/3"> </div>
-
 .. index:: sequence/3
 .. _integer/0::sequence/3:
 
@@ -130,10 +114,6 @@ Generates a list with the sequence of all integers in the interval ``[Lower,Uppe
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sequence/4"> </div>
 
 .. index:: sequence/4
 .. _integer/0::sequence/4:

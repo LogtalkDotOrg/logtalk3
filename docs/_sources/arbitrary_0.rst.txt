@@ -58,10 +58,6 @@ Adds predicates for generating and shrinking random values for selected types to
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="arbitrary/1"> </div>
-
 .. index:: arbitrary/1
 .. _arbitrary/0::arbitrary/1:
 
@@ -80,10 +76,6 @@ Table of defined types for which an arbitrary value can be generated. A new type
 
 
 ------------
-
-.. raw:: html
-
-   <div id="arbitrary/2"> </div>
 
 .. index:: arbitrary/2
 .. _arbitrary/0::arbitrary/2:
@@ -104,10 +96,6 @@ Generates an arbitrary term of the specified type. Fails if the type is not supp
 
 ------------
 
-.. raw:: html
-
-   <div id="shrinker/1"> </div>
-
 .. index:: shrinker/1
 .. _arbitrary/0::shrinker/1:
 
@@ -126,10 +114,6 @@ Table of defined types for which a shrinker is provided. A new shrinker can be r
 
 
 ------------
-
-.. raw:: html
-
-   <div id="shrink/3"> </div>
 
 .. index:: shrink/3
 .. _arbitrary/0::shrink/3:
@@ -150,10 +134,6 @@ Shrinks a value to a smaller value if possible. Must generate a finite number of
 
 ------------
 
-.. raw:: html
-
-   <div id="edge_case/2"> </div>
-
 .. index:: edge_case/2
 .. _arbitrary/0::edge_case/2:
 
@@ -173,10 +153,6 @@ Table of type edge cases. Fails if the given type have no defined edge cases. Ne
 
 ------------
 
-.. raw:: html
-
-   <div id="get_seed/1"> </div>
-
 .. index:: get_seed/1
 .. _arbitrary/0::get_seed/1:
 
@@ -195,10 +171,6 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_seed/1"> </div>
 
 .. index:: set_seed/1
 .. _arbitrary/0::set_seed/1:

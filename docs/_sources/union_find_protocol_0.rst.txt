@@ -35,10 +35,6 @@ Union-find data structure protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="new/2"> </div>
-
 .. index:: new/2
 .. _union_find_protocol/0::new/2:
 
@@ -57,10 +53,6 @@ Creates a new union-find data structure with a list of elements as keys.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="make_set/3"> </div>
 
 .. index:: make_set/3
 .. _union_find_protocol/0::make_set/3:
@@ -81,10 +73,6 @@ Makes a new set by creating a new element with a unique key ``Element``, a rank 
 
 ------------
 
-.. raw:: html
-
-   <div id="union/4"> </div>
-
 .. index:: union/4
 .. _union_find_protocol/0::union/4:
 
@@ -104,10 +92,6 @@ Merges the two trees, if distinct, that contain the given elements. The trees ar
 
 ------------
 
-.. raw:: html
-
-   <div id="union_all/3"> </div>
-
 .. index:: union_all/3
 .. _union_find_protocol/0::union_all/3:
 
@@ -126,10 +110,6 @@ Merges the distinct trees for all the given elements returning the resulting uni
 
 
 ------------
-
-.. raw:: html
-
-   <div id="find/4"> </div>
 
 .. index:: find/4
 .. _union_find_protocol/0::find/4:
@@ -154,10 +134,6 @@ Finds the root element of a set by following the chain of parent pointers from t
 
 ------------
 
-.. raw:: html
-
-   <div id="find/5"> </div>
-
 .. index:: find/5
 .. _union_find_protocol/0::find/5:
 
@@ -180,10 +156,6 @@ Same as the ``find/4`` predicate, but returning also the rank of the root. Fails
 
 
 ------------
-
-.. raw:: html
-
-   <div id="disjoint_sets/2"> </div>
 
 .. index:: disjoint_sets/2
 .. _union_find_protocol/0::disjoint_sets/2:

@@ -35,10 +35,6 @@ Loop control constructs protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="whiledo/2"> </div>
-
 .. index:: whiledo/2
 .. _loopp/0::whiledo/2:
 
@@ -59,10 +55,6 @@ While ``Condition`` is true do ``Action``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="dowhile/2"> </div>
 
 .. index:: dowhile/2
 .. _loopp/0::dowhile/2:
@@ -85,10 +77,6 @@ Do ``Action`` while ``Condition`` is true.
 
 ------------
 
-.. raw:: html
-
-   <div id="foreach/3"> </div>
-
 .. index:: foreach/3
 .. _loopp/0::foreach/3:
 
@@ -109,10 +97,6 @@ For each ``Element`` in ``List`` call ``Goal``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="foreach/4"> </div>
 
 .. index:: foreach/4
 .. _loopp/0::foreach/4:
@@ -135,10 +119,6 @@ For each ``Element`` in ``List`` at position ``Index`` call ``Goal``. ``Index`` 
 
 ------------
 
-.. raw:: html
-
-   <div id="forto/3"> </div>
-
 .. index:: forto/3
 .. _loopp/0::forto/3:
 
@@ -159,10 +139,6 @@ Calls ``Goal`` counting up from ``First`` to ``Last``. Increment is 1. For conve
 
 
 ------------
-
-.. raw:: html
-
-   <div id="forto/4"> </div>
 
 .. index:: forto/4
 .. _loopp/0::forto/4:
@@ -185,10 +161,6 @@ Calls ``Goal`` counting up from ``First`` to ``Last`` and binding ``Count`` to e
 
 ------------
 
-.. raw:: html
-
-   <div id="forto/5"> </div>
-
 .. index:: forto/5
 .. _loopp/0::forto/5:
 
@@ -209,10 +181,6 @@ Calls ``Goal`` counting up from ``First`` to ``Last`` and binding ``Count`` to e
 
 
 ------------
-
-.. raw:: html
-
-   <div id="fordownto/3"> </div>
 
 .. index:: fordownto/3
 .. _loopp/0::fordownto/3:
@@ -235,10 +203,6 @@ Calls ``Goal`` counting down from ``First`` to ``Last``. Decrement is 1. For con
 
 ------------
 
-.. raw:: html
-
-   <div id="fordownto/4"> </div>
-
 .. index:: fordownto/4
 .. _loopp/0::fordownto/4:
 
@@ -259,10 +223,6 @@ Calls ``Goal`` counting down from ``First`` to ``Last`` and binding ``Count`` to
 
 
 ------------
-
-.. raw:: html
-
-   <div id="fordownto/5"> </div>
 
 .. index:: fordownto/5
 .. _loopp/0::fordownto/5:

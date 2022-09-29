@@ -35,10 +35,6 @@ Monitor protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="monitor_activated/0"> </div>
-
 .. index:: monitor_activated/0
 .. _monitorp/0::monitor_activated/0:
 
@@ -55,10 +51,6 @@ True if monitor is currently active.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="activate_monitor/0"> </div>
 
 .. index:: activate_monitor/0
 .. _monitorp/0::activate_monitor/0:
@@ -77,10 +69,6 @@ Activates all spy points and start monitoring.
 
 ------------
 
-.. raw:: html
-
-   <div id="suspend_monitor/0"> </div>
-
 .. index:: suspend_monitor/0
 .. _monitorp/0::suspend_monitor/0:
 
@@ -98,10 +86,6 @@ Suspends monitoring, deactivating all spy points.
 
 ------------
 
-.. raw:: html
-
-   <div id="reset_monitor/0"> </div>
-
 .. index:: reset_monitor/0
 .. _monitorp/0::reset_monitor/0:
 
@@ -118,10 +102,6 @@ Resets monitor, deactivating and deleting all spy points.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="spy_point/4"> </div>
 
 .. index:: spy_point/4
 .. _monitorp/0::spy_point/4:
@@ -142,10 +122,6 @@ Current spy point.
 
 ------------
 
-.. raw:: html
-
-   <div id="set_spy_point/4"> </div>
-
 .. index:: set_spy_point/4
 .. _monitorp/0::set_spy_point/4:
 
@@ -164,10 +140,6 @@ Sets a spy point.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="del_spy_points/4"> </div>
 
 .. index:: del_spy_points/4
 .. _monitorp/0::del_spy_points/4:

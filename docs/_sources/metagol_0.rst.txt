@@ -48,10 +48,6 @@ Inductive logic programming (ILP) system based on meta-interpretive learning.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="learn/3"> </div>
-
 .. index:: learn/3
 .. _metagol/0::learn/3:
 
@@ -70,10 +66,6 @@ Learns from a set of positive examples and a set of negative examples and return
 
 
 ------------
-
-.. raw:: html
-
-   <div id="learn/2"> </div>
 
 .. index:: learn/2
 .. _metagol/0::learn/2:
@@ -94,10 +86,6 @@ Learns from a set of positive examples and a set of negative examples and pretty
 
 ------------
 
-.. raw:: html
-
-   <div id="learn_seq/2"> </div>
-
 .. index:: learn_seq/2
 .. _metagol/0::learn_seq/2:
 
@@ -116,10 +104,6 @@ Learns from a sequence of examples represented as a list of PositiveExamples/Neg
 
 
 ------------
-
-.. raw:: html
-
-   <div id="learn_with_timeout/4"> </div>
 
 .. index:: learn_with_timeout/4
 .. _metagol/0::learn_with_timeout/4:
@@ -140,10 +124,6 @@ Learns from a set of positive examples and a set of negative examples and return
 
 ------------
 
-.. raw:: html
-
-   <div id="program_to_clauses/2"> </div>
-
 .. index:: program_to_clauses/2
 .. _metagol/0::program_to_clauses/2:
 
@@ -162,10 +142,6 @@ Converts a learned program into a list of clauses.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="pprint/1"> </div>
 
 .. index:: pprint/1
 .. _metagol/0::pprint/1:
@@ -186,10 +162,6 @@ Pretty prints a learned program.
 
 ------------
 
-.. raw:: html
-
-   <div id="metarule/6"> </div>
-
 .. index:: metarule/6
 .. _metagol/0::metarule/6:
 
@@ -201,10 +173,6 @@ Pretty prints a learned program.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="head_pred/1"> </div>
 
 .. index:: head_pred/1
 .. _metagol/0::head_pred/1:
@@ -218,10 +186,6 @@ Pretty prints a learned program.
 
 ------------
 
-.. raw:: html
-
-   <div id="body_pred/1"> </div>
-
 .. index:: body_pred/1
 .. _metagol/0::body_pred/1:
 
@@ -233,10 +197,6 @@ Pretty prints a learned program.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ibk/3"> </div>
 
 .. index:: ibk/3
 .. _metagol/0::ibk/3:
@@ -250,10 +210,6 @@ Pretty prints a learned program.
 
 ------------
 
-.. raw:: html
-
-   <div id="func_test/3"> </div>
-
 .. index:: func_test/3
 .. _metagol/0::func_test/3:
 
@@ -265,10 +221,6 @@ Pretty prints a learned program.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="functional/0"> </div>
 
 .. index:: functional/0
 .. _metagol/0::functional/0:
@@ -282,10 +234,6 @@ Pretty prints a learned program.
 
 ------------
 
-.. raw:: html
-
-   <div id="min_clauses/1"> </div>
-
 .. index:: min_clauses/1
 .. _metagol/0::min_clauses/1:
 
@@ -297,10 +245,6 @@ Pretty prints a learned program.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="max_clauses/1"> </div>
 
 .. index:: max_clauses/1
 .. _metagol/0::max_clauses/1:
@@ -314,10 +258,6 @@ Pretty prints a learned program.
 
 ------------
 
-.. raw:: html
-
-   <div id="max_inv_preds/1"> </div>
-
 .. index:: max_inv_preds/1
 .. _metagol/0::max_inv_preds/1:
 
@@ -330,10 +270,6 @@ Pretty prints a learned program.
 
 ------------
 
-.. raw:: html
-
-   <div id="metarule_next_id/1"> </div>
-
 .. index:: metarule_next_id/1
 .. _metagol/0::metarule_next_id/1:
 
@@ -345,10 +281,6 @@ Pretty prints a learned program.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="timeout/1"> </div>
 
 .. index:: timeout/1
 .. _metagol/0::timeout/1:
@@ -365,10 +297,6 @@ Pretty prints a learned program.
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="pprint_clause/1"> </div>
-
 .. index:: pprint_clause/1
 .. _metagol/0::pprint_clause/1:
 
@@ -380,10 +308,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="pprint_clauses/1"> </div>
 
 .. index:: pprint_clauses/1
 .. _metagol/0::pprint_clauses/1:
@@ -397,10 +321,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="compiled_pred_call/2"> </div>
-
 .. index:: compiled_pred_call/2
 .. _metagol/0::compiled_pred_call/2:
 
@@ -413,10 +333,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="body_pred_call/2"> </div>
-
 .. index:: body_pred_call/2
 .. _metagol/0::body_pred_call/2:
 
@@ -428,10 +344,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="type/3"> </div>
 
 .. index:: type/3
 .. _metagol/0::type/3:

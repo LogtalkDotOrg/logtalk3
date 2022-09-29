@@ -35,10 +35,6 @@ Stream variables (supporting logical, backtracable, adding and retrieving of ter
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="new/1"> </div>
-
 .. index:: new/1
 .. _streamvars/0::new/1:
 
@@ -61,10 +57,6 @@ Makes ``Variable`` a stream variable. Initial state will be empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="new/2"> </div>
 
 .. index:: new/2
 .. _streamvars/0::new/2:
@@ -89,10 +81,6 @@ Makes ``Variable`` a stream variable and sets its initial state to ``Value``.
 
 ------------
 
-.. raw:: html
-
-   <div id="(<=)/2"> </div>
-
 .. index:: (<=)/2
 .. _streamvars/0::(<=)/2:
 
@@ -111,10 +99,6 @@ Sets the state of the stream variable ``Variable`` to ``Value`` (initializing th
 
 
 ------------
-
-.. raw:: html
-
-   <div id="(=>)/2"> </div>
 
 .. index:: (=>)/2
 .. _streamvars/0::(=>)/2:

@@ -34,10 +34,6 @@ Prototype hierarchy protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="parent/1"> </div>
-
 .. index:: parent/1
 .. _proto_hierarchyp/0::parent/1:
 
@@ -56,10 +52,6 @@ Returns, by backtracking, all object parents.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="parents/1"> </div>
 
 .. index:: parents/1
 .. _proto_hierarchyp/0::parents/1:
@@ -80,10 +72,6 @@ List of all object parents.
 
 ------------
 
-.. raw:: html
-
-   <div id="extension/1"> </div>
-
 .. index:: extension/1
 .. _proto_hierarchyp/0::extension/1:
 
@@ -102,10 +90,6 @@ Returns, by backtracking, all object direct descendants.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="extensions/1"> </div>
 
 .. index:: extensions/1
 .. _proto_hierarchyp/0::extensions/1:

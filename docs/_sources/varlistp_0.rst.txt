@@ -35,10 +35,6 @@ List of variables protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="append/3"> </div>
-
 .. index:: append/3
 .. _varlistp/0::append/3:
 
@@ -57,10 +53,6 @@ Appends two lists.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="delete/3"> </div>
 
 .. index:: delete/3
 .. _varlistp/0::delete/3:
@@ -81,10 +73,6 @@ Deletes from a list all occurrences of an element returning the list of remainin
 
 ------------
 
-.. raw:: html
-
-   <div id="empty/1"> </div>
-
 .. index:: empty/1
 .. _varlistp/0::empty/1:
 
@@ -103,10 +91,6 @@ True if the argument is an empty list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="flatten/2"> </div>
 
 .. index:: flatten/2
 .. _varlistp/0::flatten/2:
@@ -127,10 +111,6 @@ Flattens a list of lists into a list.
 
 ------------
 
-.. raw:: html
-
-   <div id="last/2"> </div>
-
 .. index:: last/2
 .. _varlistp/0::last/2:
 
@@ -149,10 +129,6 @@ List last element (if it exists).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="length/2"> </div>
 
 .. index:: length/2
 .. _varlistp/0::length/2:
@@ -173,10 +149,6 @@ List length.
 
 ------------
 
-.. raw:: html
-
-   <div id="memberchk/2"> </div>
-
 .. index:: memberchk/2
 .. _varlistp/0::memberchk/2:
 
@@ -195,10 +167,6 @@ Checks if a variable is a member of a list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="nextto/3"> </div>
 
 .. index:: nextto/3
 .. _varlistp/0::nextto/3:
@@ -219,10 +187,6 @@ Checks if a variable is a member of a list.
 
 ------------
 
-.. raw:: html
-
-   <div id="nth0/3"> </div>
-
 .. index:: nth0/3
 .. _varlistp/0::nth0/3:
 
@@ -241,10 +205,6 @@ Nth element of a list (counting from zero).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="nth0/4"> </div>
 
 .. index:: nth0/4
 .. _varlistp/0::nth0/4:
@@ -265,10 +225,6 @@ Nth element of a list (counting from zero). ``Rest`` is a list of all the other 
 
 ------------
 
-.. raw:: html
-
-   <div id="nth1/3"> </div>
-
 .. index:: nth1/3
 .. _varlistp/0::nth1/3:
 
@@ -287,10 +243,6 @@ Nth element of a list (counting from one).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="nth1/4"> </div>
 
 .. index:: nth1/4
 .. _varlistp/0::nth1/4:
@@ -311,10 +263,6 @@ Nth element of a list (counting from zero). ``Rest`` is a list of all the other 
 
 ------------
 
-.. raw:: html
-
-   <div id="permutation/2"> </div>
-
 .. index:: permutation/2
 .. _varlistp/0::permutation/2:
 
@@ -333,10 +281,6 @@ The two lists are a permutation of the same list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="prefix/2"> </div>
 
 .. index:: prefix/2
 .. _varlistp/0::prefix/2:
@@ -357,10 +301,6 @@ The two lists are a permutation of the same list.
 
 ------------
 
-.. raw:: html
-
-   <div id="remove_duplicates/2"> </div>
-
 .. index:: remove_duplicates/2
 .. _varlistp/0::remove_duplicates/2:
 
@@ -379,10 +319,6 @@ Removes duplicated variables and keeping the left-most variable when repeated.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="reverse/2"> </div>
 
 .. index:: reverse/2
 .. _varlistp/0::reverse/2:
@@ -405,10 +341,6 @@ Reverses a list.
 
 ------------
 
-.. raw:: html
-
-   <div id="same_length/2"> </div>
-
 .. index:: same_length/2
 .. _varlistp/0::same_length/2:
 
@@ -430,10 +362,6 @@ The two lists have the same length.
 
 ------------
 
-.. raw:: html
-
-   <div id="select/3"> </div>
-
 .. index:: select/3
 .. _varlistp/0::select/3:
 
@@ -452,10 +380,6 @@ Selects an element from a list, returning the list of remaining elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sublist/2"> </div>
 
 .. index:: sublist/2
 .. _varlistp/0::sublist/2:
@@ -476,10 +400,6 @@ The first list is a sublist of the second.
 
 ------------
 
-.. raw:: html
-
-   <div id="subtract/3"> </div>
-
 .. index:: subtract/3
 .. _varlistp/0::subtract/3:
 
@@ -498,10 +418,6 @@ Removes all elements in the second list from the first list, returning the list 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="suffix/2"> </div>
 
 .. index:: suffix/2
 .. _varlistp/0::suffix/2:
@@ -522,10 +438,6 @@ Removes all elements in the second list from the first list, returning the list 
 
 ------------
 
-.. raw:: html
-
-   <div id="valid/1"> </div>
-
 .. index:: valid/1
 .. _varlistp/0::valid/1:
 
@@ -544,10 +456,6 @@ Term is a valid list of variables.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check/1"> </div>
 
 .. index:: check/1
 .. _varlistp/0::check/1:

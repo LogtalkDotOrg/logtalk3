@@ -44,10 +44,6 @@ Types and predicates for extended type-checking and handling of expected terms.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="expecteds/2"> </div>
-
 .. index:: expecteds/2
 .. _either/0::expecteds/2:
 
@@ -67,10 +63,6 @@ Returns the values stored in the expected terms that hold a value.
 
 ------------
 
-.. raw:: html
-
-   <div id="unexpecteds/2"> </div>
-
 .. index:: unexpecteds/2
 .. _either/0::unexpecteds/2:
 
@@ -89,10 +81,6 @@ Returns the errors stored in the expected terms that hold an error.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="partition/3"> </div>
 
 .. index:: partition/3
 .. _either/0::partition/3:

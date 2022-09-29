@@ -35,10 +35,6 @@ Logging events to files protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="log_file/2"> </div>
-
 .. index:: log_file/2
 .. _loggingp/0::log_file/2:
 
@@ -57,10 +53,6 @@ Access to the table of log files.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="define_log_file/2"> </div>
 
 .. index:: define_log_file/2
 .. _loggingp/0::define_log_file/2:
@@ -81,10 +73,6 @@ Defines a log file with alias Alias and file name File. If the log file already 
 
 ------------
 
-.. raw:: html
-
-   <div id="init_log_file/2"> </div>
-
 .. index:: init_log_file/2
 .. _loggingp/0::init_log_file/2:
 
@@ -103,10 +91,6 @@ Initializes a new log file with alias Alias and file name File. If the log file 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="log_event/2"> </div>
 
 .. index:: log_event/2
 .. _loggingp/0::log_event/2:
@@ -127,10 +111,6 @@ Logs an event Event to a log file with alias Alias. Fails if a log file with ali
 
 ------------
 
-.. raw:: html
-
-   <div id="logging/1"> </div>
-
 .. index:: logging/1
 .. _loggingp/0::logging/1:
 
@@ -150,10 +130,6 @@ True if logging to file with alias Alias is enabled.
 
 ------------
 
-.. raw:: html
-
-   <div id="enable_logging/1"> </div>
-
 .. index:: enable_logging/1
 .. _loggingp/0::enable_logging/1:
 
@@ -172,10 +148,6 @@ Enables logging to file with alias Alias. Fails if a log file with alias Alias i
 
 
 ------------
-
-.. raw:: html
-
-   <div id="disable_logging/1"> </div>
 
 .. index:: disable_logging/1
 .. _loggingp/0::disable_logging/1:

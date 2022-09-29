@@ -35,10 +35,6 @@ Time protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="now/3"> </div>
-
 .. index:: now/3
 .. _timep/0::now/3:
 
@@ -58,10 +54,6 @@ Returns current time.
 
 ------------
 
-.. raw:: html
-
-   <div id="cpu_time/1"> </div>
-
 .. index:: cpu_time/1
 .. _timep/0::cpu_time/1:
 
@@ -80,10 +72,6 @@ Returns the current cpu time.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="valid/3"> </div>
 
 .. index:: valid/3
 .. _timep/0::valid/3:

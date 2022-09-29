@@ -36,10 +36,6 @@ Coroutining predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="dif/2"> </div>
-
 .. index:: dif/2
 .. _coroutining/0::dif/2:
 
@@ -59,10 +55,6 @@ Sets a constraint that is true iff the two terms are different.
 
 ------------
 
-.. raw:: html
-
-   <div id="dif/1"> </div>
-
 .. index:: dif/1
 .. _coroutining/0::dif/1:
 
@@ -81,10 +73,6 @@ Sets a set of constraints that are true iff all terms in a list are different.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="freeze/2"> </div>
 
 .. index:: freeze/2
 .. _coroutining/0::freeze/2:
@@ -107,10 +95,6 @@ Delays the execution of a goal until a variable is bound.
 
 ------------
 
-.. raw:: html
-
-   <div id="frozen/2"> </div>
-
 .. index:: frozen/2
 .. _coroutining/0::frozen/2:
 
@@ -129,10 +113,6 @@ Unifies ``Goal`` with the goal delayed by ``Variable``. When no goals are frozen
 
 
 ------------
-
-.. raw:: html
-
-   <div id="when/2"> </div>
 
 .. index:: when/2
 .. _coroutining/0::when/2:

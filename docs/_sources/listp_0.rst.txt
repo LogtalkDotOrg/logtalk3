@@ -35,10 +35,6 @@ List protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="append/2"> </div>
-
 .. index:: append/2
 .. _listp/0::append/2:
 
@@ -57,10 +53,6 @@ Appends all lists in a list of lists.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="append/3"> </div>
 
 .. index:: append/3
 .. _listp/0::append/3:
@@ -81,10 +73,6 @@ Appends two lists.
 
 ------------
 
-.. raw:: html
-
-   <div id="delete/3"> </div>
-
 .. index:: delete/3
 .. _listp/0::delete/3:
 
@@ -103,10 +91,6 @@ Deletes from a list all occurrences of an element returning the list of remainin
 
 
 ------------
-
-.. raw:: html
-
-   <div id="delete_matches/3"> </div>
 
 .. index:: delete_matches/3
 .. _listp/0::delete_matches/3:
@@ -127,10 +111,6 @@ Deletes all matching elements from a list, returning the list of remaining eleme
 
 ------------
 
-.. raw:: html
-
-   <div id="empty/1"> </div>
-
 .. index:: empty/1
 .. _listp/0::empty/1:
 
@@ -149,10 +129,6 @@ True if the argument is an empty list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="flatten/2"> </div>
 
 .. index:: flatten/2
 .. _listp/0::flatten/2:
@@ -173,10 +149,6 @@ Flattens a list of lists into a list.
 
 ------------
 
-.. raw:: html
-
-   <div id="hamming_distance/3"> </div>
-
 .. index:: hamming_distance/3
 .. _listp/0::hamming_distance/3:
 
@@ -195,10 +167,6 @@ Calculates the Hamming distance between two lists (using equality to compare lis
 
 
 ------------
-
-.. raw:: html
-
-   <div id="keysort/2"> </div>
 
 .. index:: keysort/2
 .. _listp/0::keysort/2:
@@ -219,10 +187,6 @@ Sorts a list of key-value pairs in ascending order.
 
 ------------
 
-.. raw:: html
-
-   <div id="last/2"> </div>
-
 .. index:: last/2
 .. _listp/0::last/2:
 
@@ -241,10 +205,6 @@ List last element (if it exists).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="length/2"> </div>
 
 .. index:: length/2
 .. _listp/0::length/2:
@@ -265,10 +225,6 @@ List length.
 
 ------------
 
-.. raw:: html
-
-   <div id="max/2"> </div>
-
 .. index:: max/2
 .. _listp/0::max/2:
 
@@ -287,10 +243,6 @@ Determines the list maximum value using standard order. Fails if the list is emp
 
 
 ------------
-
-.. raw:: html
-
-   <div id="member/2"> </div>
 
 .. index:: member/2
 .. _listp/0::member/2:
@@ -311,10 +263,6 @@ Element is a list member.
 
 ------------
 
-.. raw:: html
-
-   <div id="memberchk/2"> </div>
-
 .. index:: memberchk/2
 .. _listp/0::memberchk/2:
 
@@ -333,10 +281,6 @@ Checks if a term is a member of a list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="min/2"> </div>
 
 .. index:: min/2
 .. _listp/0::min/2:
@@ -357,10 +301,6 @@ Determines the minimum value in a list using standard order. Fails if the list i
 
 ------------
 
-.. raw:: html
-
-   <div id="msort/2"> </div>
-
 .. index:: msort/2
 .. _listp/0::msort/2:
 
@@ -379,10 +319,6 @@ Sorts a list in ascending order (duplicated elements are not removed).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="msort/3"> </div>
 
 .. index:: msort/3
 .. _listp/0::msort/3:
@@ -405,10 +341,6 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 ------------
 
-.. raw:: html
-
-   <div id="nextto/3"> </div>
-
 .. index:: nextto/3
 .. _listp/0::nextto/3:
 
@@ -427,10 +359,6 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 
 ------------
-
-.. raw:: html
-
-   <div id="nth0/3"> </div>
 
 .. index:: nth0/3
 .. _listp/0::nth0/3:
@@ -451,10 +379,6 @@ Nth element of a list (counting from zero).
 
 ------------
 
-.. raw:: html
-
-   <div id="nth0/4"> </div>
-
 .. index:: nth0/4
 .. _listp/0::nth0/4:
 
@@ -473,10 +397,6 @@ Nth element of a list (counting from zero). ``Rest`` is a list of all the other 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="nth1/3"> </div>
 
 .. index:: nth1/3
 .. _listp/0::nth1/3:
@@ -497,10 +417,6 @@ Nth element of a list (counting from one).
 
 ------------
 
-.. raw:: html
-
-   <div id="nth1/4"> </div>
-
 .. index:: nth1/4
 .. _listp/0::nth1/4:
 
@@ -519,10 +435,6 @@ Nth element of a list (counting from one). ``Rest`` is a list of all the other e
 
 
 ------------
-
-.. raw:: html
-
-   <div id="partition/5"> </div>
 
 .. index:: partition/5
 .. _listp/0::partition/5:
@@ -543,10 +455,6 @@ Partitions a list in lists with values less, equal, and greater than a given val
 
 ------------
 
-.. raw:: html
-
-   <div id="permutation/2"> </div>
-
 .. index:: permutation/2
 .. _listp/0::permutation/2:
 
@@ -566,10 +474,6 @@ The two lists are a permutation of the same list.
 
 ------------
 
-.. raw:: html
-
-   <div id="prefix/2"> </div>
-
 .. index:: prefix/2
 .. _listp/0::prefix/2:
 
@@ -588,10 +492,6 @@ The two lists are a permutation of the same list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="prefix/3"> </div>
 
 .. index:: prefix/3
 .. _listp/0::prefix/3:
@@ -613,10 +513,6 @@ The two lists are a permutation of the same list.
 
 ------------
 
-.. raw:: html
-
-   <div id="proper_prefix/2"> </div>
-
 .. index:: proper_prefix/2
 .. _listp/0::proper_prefix/2:
 
@@ -635,10 +531,6 @@ The two lists are a permutation of the same list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="proper_prefix/3"> </div>
 
 .. index:: proper_prefix/3
 .. _listp/0::proper_prefix/3:
@@ -660,10 +552,6 @@ The two lists are a permutation of the same list.
 
 ------------
 
-.. raw:: html
-
-   <div id="remove_duplicates/2"> </div>
-
 .. index:: remove_duplicates/2
 .. _listp/0::remove_duplicates/2:
 
@@ -682,10 +570,6 @@ Removes duplicated list elements using equality (``==/2``) for comparison and ke
 
 
 ------------
-
-.. raw:: html
-
-   <div id="reverse/2"> </div>
 
 .. index:: reverse/2
 .. _listp/0::reverse/2:
@@ -708,10 +592,6 @@ Reverses a list.
 
 ------------
 
-.. raw:: html
-
-   <div id="same_length/2"> </div>
-
 .. index:: same_length/2
 .. _listp/0::same_length/2:
 
@@ -732,10 +612,6 @@ The two lists have the same length.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="same_length/3"> </div>
 
 .. index:: same_length/3
 .. _listp/0::same_length/3:
@@ -758,10 +634,6 @@ The two lists have the same length.
 
 ------------
 
-.. raw:: html
-
-   <div id="select/3"> </div>
-
 .. index:: select/3
 .. _listp/0::select/3:
 
@@ -780,10 +652,6 @@ Selects an element from a list, returning the list of remaining elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="selectchk/3"> </div>
 
 .. index:: selectchk/3
 .. _listp/0::selectchk/3:
@@ -804,10 +672,6 @@ Checks that an element can be selected from a list, returning the list of remain
 
 ------------
 
-.. raw:: html
-
-   <div id="select/4"> </div>
-
 .. index:: select/4
 .. _listp/0::select/4:
 
@@ -826,10 +690,6 @@ Selects an element from a list, replacing it by a new element and returning the 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="selectchk/4"> </div>
 
 .. index:: selectchk/4
 .. _listp/0::selectchk/4:
@@ -850,10 +710,6 @@ Checks that an element from a list can be replaced by a new element, returning t
 
 ------------
 
-.. raw:: html
-
-   <div id="sort/2"> </div>
-
 .. index:: sort/2
 .. _listp/0::sort/2:
 
@@ -872,10 +728,6 @@ Sorts a list in ascending order (duplicated elements are removed).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sort/3"> </div>
 
 .. index:: sort/3
 .. _listp/0::sort/3:
@@ -897,10 +749,6 @@ Sorts a list using a user-specified comparison predicate modeled on the standard
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sort/4"> </div>
 
 .. index:: sort/4
 .. _listp/0::sort/4:
@@ -928,10 +776,6 @@ Sorts a list using the given key and order. Uses the standard term comparison op
 
 ------------
 
-.. raw:: html
-
-   <div id="split/4"> </div>
-
 .. index:: split/4
 .. _listp/0::split/4:
 
@@ -950,10 +794,6 @@ Splits a list into sublists of a given length. Also returns a list with the rema
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sublist/2"> </div>
 
 .. index:: sublist/2
 .. _listp/0::sublist/2:
@@ -974,10 +814,6 @@ The first list is a sublist of the second.
 
 ------------
 
-.. raw:: html
-
-   <div id="subsequence/3"> </div>
-
 .. index:: subsequence/3
 .. _listp/0::subsequence/3:
 
@@ -996,10 +832,6 @@ The first list is a sublist of the second.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="subsequence/4"> </div>
 
 .. index:: subsequence/4
 .. _listp/0::subsequence/4:
@@ -1020,10 +852,6 @@ Generates subsequences of a given length from a list. Also returns the remaining
 
 ------------
 
-.. raw:: html
-
-   <div id="substitute/4"> </div>
-
 .. index:: substitute/4
 .. _listp/0::substitute/4:
 
@@ -1042,10 +870,6 @@ Substitutes all occurrences of ``Old`` in ``List`` by ``New``, returning ``NewLi
 
 
 ------------
-
-.. raw:: html
-
-   <div id="subtract/3"> </div>
 
 .. index:: subtract/3
 .. _listp/0::subtract/3:
@@ -1066,10 +890,6 @@ Removes all elements in the second list from the first list, returning the list 
 
 ------------
 
-.. raw:: html
-
-   <div id="suffix/2"> </div>
-
 .. index:: suffix/2
 .. _listp/0::suffix/2:
 
@@ -1088,10 +908,6 @@ Suffix is a suffix of List.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="suffix/3"> </div>
 
 .. index:: suffix/3
 .. _listp/0::suffix/3:
@@ -1113,10 +929,6 @@ Suffix is a suffix of List.
 
 ------------
 
-.. raw:: html
-
-   <div id="proper_suffix/2"> </div>
-
 .. index:: proper_suffix/2
 .. _listp/0::proper_suffix/2:
 
@@ -1135,10 +947,6 @@ Suffix is a suffix of List.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="proper_suffix/3"> </div>
 
 .. index:: proper_suffix/3
 .. _listp/0::proper_suffix/3:
@@ -1160,10 +968,6 @@ Suffix is a suffix of List.
 
 ------------
 
-.. raw:: html
-
-   <div id="take/3"> </div>
-
 .. index:: take/3
 .. _listp/0::take/3:
 
@@ -1182,10 +986,6 @@ Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`
 
 
 ------------
-
-.. raw:: html
-
-   <div id="drop/3"> </div>
 
 .. index:: drop/3
 .. _listp/0::drop/3:

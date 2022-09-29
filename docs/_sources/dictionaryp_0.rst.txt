@@ -35,10 +35,6 @@ Dictionary protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="as_dictionary/2"> </div>
-
 .. index:: as_dictionary/2
 .. _dictionaryp/0::as_dictionary/2:
 
@@ -57,10 +53,6 @@ Converts a list of key-value pairs to a dictionary.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="as_list/2"> </div>
 
 .. index:: as_list/2
 .. _dictionaryp/0::as_list/2:
@@ -81,10 +73,6 @@ Converts a dictionary to an ordered list (as per standard order) of key-value pa
 
 ------------
 
-.. raw:: html
-
-   <div id="as_curly_bracketed/2"> </div>
-
 .. index:: as_curly_bracketed/2
 .. _dictionaryp/0::as_curly_bracketed/2:
 
@@ -103,10 +91,6 @@ Creates a curly-bracketed term representation of a dictionary.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="clone/3"> </div>
 
 .. index:: clone/3
 .. _dictionaryp/0::clone/3:
@@ -127,10 +111,6 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 ------------
 
-.. raw:: html
-
-   <div id="clone/4"> </div>
-
 .. index:: clone/4
 .. _dictionaryp/0::clone/4:
 
@@ -149,10 +129,6 @@ Clones a dictionary using the same keys but with all values unbound and returnin
 
 
 ------------
-
-.. raw:: html
-
-   <div id="insert/4"> </div>
 
 .. index:: insert/4
 .. _dictionaryp/0::insert/4:
@@ -173,10 +149,6 @@ Inserts a key-value pair into a dictionary, returning the updated dictionary. Wh
 
 ------------
 
-.. raw:: html
-
-   <div id="delete/4"> </div>
-
 .. index:: delete/4
 .. _dictionaryp/0::delete/4:
 
@@ -195,10 +167,6 @@ Deletes a matching key-value pair from a dictionary, returning the updated dicti
 
 
 ------------
-
-.. raw:: html
-
-   <div id="update/4"> </div>
 
 .. index:: update/4
 .. _dictionaryp/0::update/4:
@@ -219,10 +187,6 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 
 ------------
 
-.. raw:: html
-
-   <div id="update/5"> </div>
-
 .. index:: update/5
 .. _dictionaryp/0::update/5:
 
@@ -241,10 +205,6 @@ Updates the value associated with a key in a dictionary, returning the updated d
 
 
 ------------
-
-.. raw:: html
-
-   <div id="update/3"> </div>
 
 .. index:: update/3
 .. _dictionaryp/0::update/3:
@@ -265,10 +225,6 @@ Updates the key-value pairs in a dictionary, returning the updated dictionary. F
 
 ------------
 
-.. raw:: html
-
-   <div id="empty/1"> </div>
-
 .. index:: empty/1
 .. _dictionaryp/0::empty/1:
 
@@ -287,10 +243,6 @@ True iff the dictionary is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="lookup/3"> </div>
 
 .. index:: lookup/3
 .. _dictionaryp/0::lookup/3:
@@ -312,10 +264,6 @@ Lookups a matching key-value pair from a dictionary.
 
 ------------
 
-.. raw:: html
-
-   <div id="lookup/2"> </div>
-
 .. index:: lookup/2
 .. _dictionaryp/0::lookup/2:
 
@@ -334,10 +282,6 @@ Lookups all matching key-value pairs from a dictionary. Fails if it cannot find 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="intersection/2"> </div>
 
 .. index:: intersection/2
 .. _dictionaryp/0::intersection/2:
@@ -358,10 +302,6 @@ True iff the values of the dictionaries common keys unify. Trivially true when t
 
 ------------
 
-.. raw:: html
-
-   <div id="intersection/3"> </div>
-
 .. index:: intersection/3
 .. _dictionaryp/0::intersection/3:
 
@@ -380,10 +320,6 @@ Returns the (possibly empty) intersection between two dictionaries when the valu
 
 
 ------------
-
-.. raw:: html
-
-   <div id="previous/4"> </div>
 
 .. index:: previous/4
 .. _dictionaryp/0::previous/4:
@@ -404,10 +340,6 @@ Returns the previous pair in a dictionary given a key.
 
 ------------
 
-.. raw:: html
-
-   <div id="next/4"> </div>
-
 .. index:: next/4
 .. _dictionaryp/0::next/4:
 
@@ -426,10 +358,6 @@ Returns the next pair in a dictionary given a key.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="min/3"> </div>
 
 .. index:: min/3
 .. _dictionaryp/0::min/3:
@@ -450,10 +378,6 @@ Returns the pair with the minimum key (as per standard order) in a dictionary. F
 
 ------------
 
-.. raw:: html
-
-   <div id="max/3"> </div>
-
 .. index:: max/3
 .. _dictionaryp/0::max/3:
 
@@ -472,10 +396,6 @@ Returns the pair with the maximum key (as per standard order) in a dictionary. F
 
 
 ------------
-
-.. raw:: html
-
-   <div id="delete_min/4"> </div>
 
 .. index:: delete_min/4
 .. _dictionaryp/0::delete_min/4:
@@ -496,10 +416,6 @@ Deletes the pair with the minimum key (as per standard order) from a dictionary,
 
 ------------
 
-.. raw:: html
-
-   <div id="delete_max/4"> </div>
-
 .. index:: delete_max/4
 .. _dictionaryp/0::delete_max/4:
 
@@ -518,10 +434,6 @@ Deletes the pair with the maximum key (as per standard order) from a dictionary,
 
 
 ------------
-
-.. raw:: html
-
-   <div id="keys/2"> </div>
 
 .. index:: keys/2
 .. _dictionaryp/0::keys/2:
@@ -542,10 +454,6 @@ Returns a list with all the dictionary keys in ascending order (as per standard 
 
 ------------
 
-.. raw:: html
-
-   <div id="values/2"> </div>
-
 .. index:: values/2
 .. _dictionaryp/0::values/2:
 
@@ -564,10 +472,6 @@ Returns a list with all the dictionary values in ascending order of the keys (as
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/2"> </div>
 
 .. index:: map/2
 .. _dictionaryp/0::map/2:
@@ -590,10 +494,6 @@ Maps a closure over each dictionary key-value pair. Fails if the mapped closure 
 
 ------------
 
-.. raw:: html
-
-   <div id="map/3"> </div>
-
 .. index:: map/3
 .. _dictionaryp/0::map/3:
 
@@ -615,10 +515,6 @@ Maps a closure over each dictionary key-value pair, returning the new dictionary
 
 ------------
 
-.. raw:: html
-
-   <div id="apply/4"> </div>
-
 .. index:: apply/4
 .. _dictionaryp/0::apply/4:
 
@@ -639,10 +535,6 @@ Applies a closure to a specific key-value pair, returning the new dictionary. Fa
 
 
 ------------
-
-.. raw:: html
-
-   <div id="size/2"> </div>
 
 .. index:: size/2
 .. _dictionaryp/0::size/2:

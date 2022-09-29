@@ -35,10 +35,6 @@ Flag validation protocol. Must be implemented by validator objects.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="print_flags/0"> </div>
-
 .. index:: print_flags/0
 .. _flags_validator/0::print_flags/0:
 
@@ -55,10 +51,6 @@ Validates the validator object itself.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="validate/1"> </div>
 
 .. index:: validate/1
 .. _flags_validator/0::validate/1:

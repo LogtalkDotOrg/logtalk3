@@ -36,10 +36,6 @@ Portable operating-system access protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="pid/1"> </div>
-
 .. index:: pid/1
 .. _osp/0::pid/1:
 
@@ -58,10 +54,6 @@ Returns the process identifier of the running process.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="shell/2"> </div>
 
 .. index:: shell/2
 .. _osp/0::shell/2:
@@ -82,10 +74,6 @@ Runs an operating-system shell command and returns its exit status.
 
 ------------
 
-.. raw:: html
-
-   <div id="shell/1"> </div>
-
 .. index:: shell/1
 .. _osp/0::shell/1:
 
@@ -104,10 +92,6 @@ Runs an operating-system shell command.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_absolute_file_name/1"> </div>
 
 .. index:: is_absolute_file_name/1
 .. _osp/0::is_absolute_file_name/1:
@@ -128,10 +112,6 @@ True iff the argument is an absolute file path. On POSIX systems, this predicate
 
 ------------
 
-.. raw:: html
-
-   <div id="absolute_file_name/2"> </div>
-
 .. index:: absolute_file_name/2
 .. _osp/0::absolute_file_name/2:
 
@@ -150,10 +130,6 @@ Expands a file name to an absolute file path. An environment variable at the beg
 
 
 ------------
-
-.. raw:: html
-
-   <div id="decompose_file_name/3"> </div>
 
 .. index:: decompose_file_name/3
 .. _osp/0::decompose_file_name/3:
@@ -174,10 +150,6 @@ Decomposes a file name into its directory (which always ends with a slash; ``./`
 
 ------------
 
-.. raw:: html
-
-   <div id="decompose_file_name/4"> </div>
-
 .. index:: decompose_file_name/4
 .. _osp/0::decompose_file_name/4:
 
@@ -197,10 +169,6 @@ Decomposes a file name into its directory (which always ends with a slash; ``./`
 
 ------------
 
-.. raw:: html
-
-   <div id="path_concat/3"> </div>
-
 .. index:: path_concat/3
 .. _osp/0::path_concat/3:
 
@@ -219,10 +187,6 @@ Concatenates a path prefix and a path suffix, adding  a ``/`` separator if requi
 
 
 ------------
-
-.. raw:: html
-
-   <div id="internal_os_path/2"> </div>
 
 .. index:: internal_os_path/2
 .. _osp/0::internal_os_path/2:
@@ -244,10 +208,6 @@ Converts between the internal path representation (which is backend dependent) a
 
 ------------
 
-.. raw:: html
-
-   <div id="make_directory/1"> </div>
-
 .. index:: make_directory/1
 .. _osp/0::make_directory/1:
 
@@ -266,10 +226,6 @@ Makes a new directory. Succeeds if the directory already exists.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="make_directory_path/1"> </div>
 
 .. index:: make_directory_path/1
 .. _osp/0::make_directory_path/1:
@@ -290,10 +246,6 @@ Makes a new directory creating all the intermediate directories if necessary. Su
 
 ------------
 
-.. raw:: html
-
-   <div id="delete_directory/1"> </div>
-
 .. index:: delete_directory/1
 .. _osp/0::delete_directory/1:
 
@@ -312,10 +264,6 @@ Deletes an empty directory. Throws an error if the directory does not exist.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="change_directory/1"> </div>
 
 .. index:: change_directory/1
 .. _osp/0::change_directory/1:
@@ -336,10 +284,6 @@ Changes current working directory. Throws an error if the directory does not exi
 
 ------------
 
-.. raw:: html
-
-   <div id="working_directory/1"> </div>
-
 .. index:: working_directory/1
 .. _osp/0::working_directory/1:
 
@@ -358,10 +302,6 @@ Current working directory.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="temporary_directory/1"> </div>
 
 .. index:: temporary_directory/1
 .. _osp/0::temporary_directory/1:
@@ -382,10 +322,6 @@ Temporary directory. Tries first environment variables: ``TEMP`` and ``TMP`` on 
 
 ------------
 
-.. raw:: html
-
-   <div id="null_device_path/1"> </div>
-
 .. index:: null_device_path/1
 .. _osp/0::null_device_path/1:
 
@@ -405,10 +341,6 @@ Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.
 
 ------------
 
-.. raw:: html
-
-   <div id="directory_files/2"> </div>
-
 .. index:: directory_files/2
 .. _osp/0::directory_files/2:
 
@@ -427,10 +359,6 @@ Returns a list of all files (including directories, regular files, and hidden di
 
 
 ------------
-
-.. raw:: html
-
-   <div id="directory_files/3"> </div>
 
 .. index:: directory_files/3
 .. _osp/0::directory_files/3:
@@ -460,10 +388,6 @@ Returns a list of files filtered using the given list of options. Invalid option
 
 ------------
 
-.. raw:: html
-
-   <div id="directory_exists/1"> </div>
-
 .. index:: directory_exists/1
 .. _osp/0::directory_exists/1:
 
@@ -482,10 +406,6 @@ True if the specified directory exists (irrespective of directory permissions).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ensure_directory/1"> </div>
 
 .. index:: ensure_directory/1
 .. _osp/0::ensure_directory/1:
@@ -506,10 +426,6 @@ Ensures that a directory exists, creating it if necessary.
 
 ------------
 
-.. raw:: html
-
-   <div id="file_exists/1"> </div>
-
 .. index:: file_exists/1
 .. _osp/0::file_exists/1:
 
@@ -528,10 +444,6 @@ True if the specified file exists and is a regular file (irrespective of file pe
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file_modification_time/2"> </div>
 
 .. index:: file_modification_time/2
 .. _osp/0::file_modification_time/2:
@@ -552,10 +464,6 @@ File modification time (which can be used for comparison). Throws an error if th
 
 ------------
 
-.. raw:: html
-
-   <div id="file_size/2"> </div>
-
 .. index:: file_size/2
 .. _osp/0::file_size/2:
 
@@ -574,10 +482,6 @@ File size (in bytes). Throws an error if the file does not exist.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file_permission/2"> </div>
 
 .. index:: file_permission/2
 .. _osp/0::file_permission/2:
@@ -598,10 +502,6 @@ True iff the specified file has the specified permission (``read``, ``write``, o
 
 ------------
 
-.. raw:: html
-
-   <div id="copy_file/2"> </div>
-
 .. index:: copy_file/2
 .. _osp/0::copy_file/2:
 
@@ -620,10 +520,6 @@ Copies a file. Throws an error if the original file does not exist or if the cop
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rename_file/2"> </div>
 
 .. index:: rename_file/2
 .. _osp/0::rename_file/2:
@@ -644,10 +540,6 @@ Renames a file or a directory. Throws an error if the file or directory does not
 
 ------------
 
-.. raw:: html
-
-   <div id="delete_file/1"> </div>
-
 .. index:: delete_file/1
 .. _osp/0::delete_file/1:
 
@@ -666,10 +558,6 @@ Deletes a file. Throws an error if the file does not exist.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ensure_file/1"> </div>
 
 .. index:: ensure_file/1
 .. _osp/0::ensure_file/1:
@@ -690,10 +578,6 @@ Ensures that a file exists, creating it if necessary.
 
 ------------
 
-.. raw:: html
-
-   <div id="environment_variable/2"> </div>
-
 .. index:: environment_variable/2
 .. _osp/0::environment_variable/2:
 
@@ -712,10 +596,6 @@ Returns an environment variable value. Fails if the variable does not exists.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="time_stamp/1"> </div>
 
 .. index:: time_stamp/1
 .. _osp/0::time_stamp/1:
@@ -736,10 +616,6 @@ Returns a system-dependent time stamp, which can be used for sorting, but should
 
 ------------
 
-.. raw:: html
-
-   <div id="date_time/7"> </div>
-
 .. index:: date_time/7
 .. _osp/0::date_time/7:
 
@@ -758,10 +634,6 @@ Returns the current date and time.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="cpu_time/1"> </div>
 
 .. index:: cpu_time/1
 .. _osp/0::cpu_time/1:
@@ -782,10 +654,6 @@ System cpu time in seconds.
 
 ------------
 
-.. raw:: html
-
-   <div id="wall_time/1"> </div>
-
 .. index:: wall_time/1
 .. _osp/0::wall_time/1:
 
@@ -804,10 +672,6 @@ Wall time in seconds.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="operating_system_type/1"> </div>
 
 .. index:: operating_system_type/1
 .. _osp/0::operating_system_type/1:
@@ -828,10 +692,6 @@ Operating system type. Possible values are ``unix``, ``windows``, and ``unknown`
 
 ------------
 
-.. raw:: html
-
-   <div id="command_line_arguments/1"> </div>
-
 .. index:: command_line_arguments/1
 .. _osp/0::command_line_arguments/1:
 
@@ -850,10 +710,6 @@ Returns a list with the command line arguments that occur after ``--``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sleep/1"> </div>
 
 .. index:: sleep/1
 .. _osp/0::sleep/1:

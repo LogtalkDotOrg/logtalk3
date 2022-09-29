@@ -41,10 +41,6 @@ Entity and entity predicates documentation score.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="entity_predicates_weights_hook/2"> </div>
-
 .. index:: entity_predicates_weights_hook/2
 .. _doc_metric/0::entity_predicates_weights_hook/2:
 
@@ -63,10 +59,6 @@ Relative weight between entity documentation and predicates documentation in per
 
 
 ------------
-
-.. raw:: html
-
-   <div id="entity_info_score_hook/2"> </div>
 
 .. index:: entity_info_score_hook/2
 .. _doc_metric/0::entity_info_score_hook/2:
@@ -87,10 +79,6 @@ Maximum score for entity ``info/1`` directives.
 
 ------------
 
-.. raw:: html
-
-   <div id="entity_info_pair_score_hook/3"> </div>
-
 .. index:: entity_info_pair_score_hook/3
 .. _doc_metric/0::entity_info_pair_score_hook/3:
 
@@ -109,10 +97,6 @@ Score for relevant entity ``info/1`` directive pairs. If defined, the ``entity_i
 
 
 ------------
-
-.. raw:: html
-
-   <div id="predicate_mode_score_hook/3"> </div>
 
 .. index:: predicate_mode_score_hook/3
 .. _doc_metric/0::predicate_mode_score_hook/3:
@@ -133,10 +117,6 @@ Maximum score for predicate ``mode/2`` directives.
 
 ------------
 
-.. raw:: html
-
-   <div id="predicate_mode_score_hook/5"> </div>
-
 .. index:: predicate_mode_score_hook/5
 .. _doc_metric/0::predicate_mode_score_hook/5:
 
@@ -156,10 +136,6 @@ Score for a predicate ``mode/2`` directive. If defined, the ``predicate_mode_sco
 
 ------------
 
-.. raw:: html
-
-   <div id="predicate_info_score_hook/3"> </div>
-
 .. index:: predicate_info_score_hook/3
 .. _doc_metric/0::predicate_info_score_hook/3:
 
@@ -178,10 +154,6 @@ Maximum score for predicate ``info/2`` directives.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="predicate_info_pair_score_hook/4"> </div>
 
 .. index:: predicate_info_pair_score_hook/4
 .. _doc_metric/0::predicate_info_pair_score_hook/4:

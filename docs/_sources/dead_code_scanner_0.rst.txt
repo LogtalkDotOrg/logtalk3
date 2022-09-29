@@ -39,10 +39,6 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="entity/1"> </div>
-
 .. index:: entity/1
 .. _dead_code_scanner/0::entity/1:
 
@@ -61,10 +57,6 @@ Scans a loaded entity for dead code. Fails if the entity does not exist.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file/1"> </div>
 
 .. index:: file/1
 .. _dead_code_scanner/0::file/1:
@@ -85,10 +77,6 @@ Scans all entities in a loaded source file for dead code. The file can be given 
 
 ------------
 
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
 .. index:: directory/1
 .. _dead_code_scanner/0::directory/1:
 
@@ -107,10 +95,6 @@ Scans all entities in all loaded files from a given directory for dead code.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
 
 .. index:: rdirectory/1
 .. _dead_code_scanner/0::rdirectory/1:
@@ -131,10 +115,6 @@ Scans all entities in all loaded files from a given directory and its sub-direct
 
 ------------
 
-.. raw:: html
-
-   <div id="library/1"> </div>
-
 .. index:: library/1
 .. _dead_code_scanner/0::library/1:
 
@@ -153,10 +133,6 @@ Scans all entities in all loaded files from a given library for dead code.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rlibrary/1"> </div>
 
 .. index:: rlibrary/1
 .. _dead_code_scanner/0::rlibrary/1:
@@ -177,10 +153,6 @@ Scans all entities in all loaded files in a loaded library and its sub-libraries
 
 ------------
 
-.. raw:: html
-
-   <div id="all/0"> </div>
-
 .. index:: all/0
 .. _dead_code_scanner/0::all/0:
 
@@ -197,10 +169,6 @@ Scans all entities for dead code.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="predicates/2"> </div>
 
 .. index:: predicates/2
 .. _dead_code_scanner/0::predicates/2:
@@ -220,10 +188,6 @@ Returns an ordered set of local predicates (and non-terminals) that are not used
 
 
 ------------
-
-.. raw:: html
-
-   <div id="predicate/2"> </div>
 
 .. index:: predicate/2
 .. _dead_code_scanner/0::predicate/2:

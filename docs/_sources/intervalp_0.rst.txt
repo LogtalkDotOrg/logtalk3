@@ -35,10 +35,6 @@ Basic temporal interval relations protocol (based on James F. Allen Interval Alg
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="new/3"> </div>
-
 .. index:: new/3
 .. _intervalp/0::new/3:
 
@@ -57,10 +53,6 @@ Constructs a new interval given start and end points. The start point must stric
 
 
 ------------
-
-.. raw:: html
-
-   <div id="valid/1"> </div>
 
 .. index:: valid/1
 .. _intervalp/0::valid/1:
@@ -81,10 +73,6 @@ True if Interval is a valid interval.
 
 ------------
 
-.. raw:: html
-
-   <div id="before/2"> </div>
-
 .. index:: before/2
 .. _intervalp/0::before/2:
 
@@ -103,10 +91,6 @@ True if ``Interval1`` takes place before ``Interval2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="after/2"> </div>
 
 .. index:: after/2
 .. _intervalp/0::after/2:
@@ -127,10 +111,6 @@ True if ``Interval1`` takes place after ``Interval2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="meets/2"> </div>
-
 .. index:: meets/2
 .. _intervalp/0::meets/2:
 
@@ -149,10 +129,6 @@ True if ``Interval1`` meets ``Interval2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="met_by/2"> </div>
 
 .. index:: met_by/2
 .. _intervalp/0::met_by/2:
@@ -173,10 +149,6 @@ True if ``Interval1`` is met by ``Interval2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="overlaps/2"> </div>
-
 .. index:: overlaps/2
 .. _intervalp/0::overlaps/2:
 
@@ -195,10 +167,6 @@ True if ``Interval1`` overlaps with ``Interval2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="overlapped_by/2"> </div>
 
 .. index:: overlapped_by/2
 .. _intervalp/0::overlapped_by/2:
@@ -219,10 +187,6 @@ True if ``Interval1`` is overlapped by ``Interval2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="starts/2"> </div>
-
 .. index:: starts/2
 .. _intervalp/0::starts/2:
 
@@ -241,10 +205,6 @@ True if ``Interval1`` starts ``Interval2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="started_by/2"> </div>
 
 .. index:: started_by/2
 .. _intervalp/0::started_by/2:
@@ -265,10 +225,6 @@ True if ``Interval1`` is started by ``Interval2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="during/2"> </div>
-
 .. index:: during/2
 .. _intervalp/0::during/2:
 
@@ -287,10 +243,6 @@ True if ``Interval1`` occurs during ``Interval2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="contains/2"> </div>
 
 .. index:: contains/2
 .. _intervalp/0::contains/2:
@@ -311,10 +263,6 @@ True if ``Interval1`` contains ``Interval2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="finishes/2"> </div>
-
 .. index:: finishes/2
 .. _intervalp/0::finishes/2:
 
@@ -334,10 +282,6 @@ True if ``Interval1`` finishes ``Interval2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="finished_by/2"> </div>
-
 .. index:: finished_by/2
 .. _intervalp/0::finished_by/2:
 
@@ -356,10 +300,6 @@ True if ``Interval1`` is finished by ``Interval2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="equal/2"> </div>
 
 .. index:: equal/2
 .. _intervalp/0::equal/2:

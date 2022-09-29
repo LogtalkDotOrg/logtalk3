@@ -49,10 +49,6 @@ Common predicates for generating diagrams.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="libraries/3"> </div>
-
 .. index:: libraries/3
 .. _diagram/1::libraries/3:
 
@@ -71,10 +67,6 @@ Creates a diagram for a set of libraries using the specified options. The ``Proj
 
 
 ------------
-
-.. raw:: html
-
-   <div id="libraries/2"> </div>
 
 .. index:: libraries/2
 .. _diagram/1::libraries/2:
@@ -95,10 +87,6 @@ Creates a diagram for a set of libraries using the default options. The ``Projec
 
 ------------
 
-.. raw:: html
-
-   <div id="libraries/1"> </div>
-
 .. index:: libraries/1
 .. _diagram/1::libraries/1:
 
@@ -117,10 +105,6 @@ Creates a diagram for a set of libraries using the default options. The prefix `
 
 
 ------------
-
-.. raw:: html
-
-   <div id="all_libraries/1"> </div>
 
 .. index:: all_libraries/1
 .. _diagram/1::all_libraries/1:
@@ -141,10 +125,6 @@ Creates a diagram for all loaded libraries using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="all_libraries/0"> </div>
-
 .. index:: all_libraries/0
 .. _diagram/1::all_libraries/0:
 
@@ -161,10 +141,6 @@ Creates a diagram for all loaded libraries using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rlibrary/2"> </div>
 
 .. index:: rlibrary/2
 .. _diagram/1::rlibrary/2:
@@ -185,10 +161,6 @@ Creates a diagram for a library and its sub-libraries using the specified option
 
 ------------
 
-.. raw:: html
-
-   <div id="rlibrary/1"> </div>
-
 .. index:: rlibrary/1
 .. _diagram/1::rlibrary/1:
 
@@ -207,10 +179,6 @@ Creates a diagram for a library and its sub-libraries using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="library/2"> </div>
 
 .. index:: library/2
 .. _diagram/1::library/2:
@@ -231,10 +199,6 @@ Creates a diagram for a library using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="library/1"> </div>
-
 .. index:: library/1
 .. _diagram/1::library/1:
 
@@ -253,10 +217,6 @@ Creates a diagram for a library using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="directories/3"> </div>
 
 .. index:: directories/3
 .. _diagram/1::directories/3:
@@ -277,10 +237,6 @@ Creates a diagram for a set of directories using the specified options. The ``Pr
 
 ------------
 
-.. raw:: html
-
-   <div id="directories/2"> </div>
-
 .. index:: directories/2
 .. _diagram/1::directories/2:
 
@@ -299,10 +255,6 @@ Creates a diagram for a set of directories using the default options. The ``Proj
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rdirectory/3"> </div>
 
 .. index:: rdirectory/3
 .. _diagram/1::rdirectory/3:
@@ -323,10 +275,6 @@ Creates a diagram for a directory and its sub-directories using the specified op
 
 ------------
 
-.. raw:: html
-
-   <div id="rdirectory/2"> </div>
-
 .. index:: rdirectory/2
 .. _diagram/1::rdirectory/2:
 
@@ -345,10 +293,6 @@ Creates a diagram for a directory and its sub-directories using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
 
 .. index:: rdirectory/1
 .. _diagram/1::rdirectory/1:
@@ -369,10 +313,6 @@ Creates a diagram for a directory and its sub-directories using default options.
 
 ------------
 
-.. raw:: html
-
-   <div id="directory/3"> </div>
-
 .. index:: directory/3
 .. _diagram/1::directory/3:
 
@@ -391,10 +331,6 @@ Creates a diagram for a directory using the specified options. The ``Project`` a
 
 
 ------------
-
-.. raw:: html
-
-   <div id="directory/2"> </div>
 
 .. index:: directory/2
 .. _diagram/1::directory/2:
@@ -415,10 +351,6 @@ Creates a diagram for a directory using default options. The ``Project`` argumen
 
 ------------
 
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
 .. index:: directory/1
 .. _diagram/1::directory/1:
 
@@ -437,10 +369,6 @@ Creates a diagram for a directory using default options. The name of the directo
 
 
 ------------
-
-.. raw:: html
-
-   <div id="files/3"> </div>
 
 .. index:: files/3
 .. _diagram/1::files/3:
@@ -461,10 +389,6 @@ Creates a diagram for a set of files using the specified options. The file can b
 
 ------------
 
-.. raw:: html
-
-   <div id="files/2"> </div>
-
 .. index:: files/2
 .. _diagram/1::files/2:
 
@@ -483,10 +407,6 @@ Creates a diagram for a set of files using the default options. The file can be 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="files/1"> </div>
 
 .. index:: files/1
 .. _diagram/1::files/1:
@@ -507,10 +427,6 @@ Creates a diagram for a set of files using the default options. The file can be 
 
 ------------
 
-.. raw:: html
-
-   <div id="all_files/1"> </div>
-
 .. index:: all_files/1
 .. _diagram/1::all_files/1:
 
@@ -530,10 +446,6 @@ Creates a diagram for all loaded files using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="all_files/0"> </div>
-
 .. index:: all_files/0
 .. _diagram/1::all_files/0:
 
@@ -550,10 +462,6 @@ Creates a diagram for all loaded files using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="format_object/1"> </div>
 
 .. index:: format_object/1
 .. _diagram/1::format_object/1:
@@ -574,10 +482,6 @@ Returns the identifier of the object implementing the graph language currently b
 
 ------------
 
-.. raw:: html
-
-   <div id="diagram_description/1"> </div>
-
 .. index:: diagram_description/1
 .. _diagram/1::diagram_description/1:
 
@@ -596,10 +500,6 @@ Returns the diagram description.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="diagram_name_suffix/1"> </div>
 
 .. index:: diagram_name_suffix/1
 .. _diagram/1::diagram_name_suffix/1:
@@ -623,10 +523,6 @@ Returns the diagram name suffix.
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="diagram_caption/3"> </div>
-
 .. index:: diagram_caption/3
 .. _diagram/1::diagram_caption/3:
 
@@ -645,10 +541,6 @@ Creates a diagram caption from the diagram description and the subject and its k
 
 
 ------------
-
-.. raw:: html
-
-   <div id="output_rlibrary/3"> </div>
 
 .. index:: output_rlibrary/3
 .. _diagram/1::output_rlibrary/3:
@@ -669,10 +561,6 @@ Generates diagram output for a library and its sub-libraries using the specified
 
 ------------
 
-.. raw:: html
-
-   <div id="output_library/3"> </div>
-
 .. index:: output_library/3
 .. _diagram/1::output_library/3:
 
@@ -691,10 +579,6 @@ Generates diagram output for a library using the specified options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="output_rdirectory/3"> </div>
 
 .. index:: output_rdirectory/3
 .. _diagram/1::output_rdirectory/3:
@@ -715,10 +599,6 @@ Generates diagram output for a directory and its sub-directories using the speci
 
 ------------
 
-.. raw:: html
-
-   <div id="output_externals/1"> </div>
-
 .. index:: output_externals/1
 .. _diagram/1::output_externals/1:
 
@@ -737,10 +617,6 @@ Output external nodes using the specified options depending on the value of the 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="output_files/2"> </div>
 
 .. index:: output_files/2
 .. _diagram/1::output_files/2:
@@ -761,10 +637,6 @@ Generates diagram output for a list of files using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="output_file/4"> </div>
-
 .. index:: output_file/4
 .. _diagram/1::output_file/4:
 
@@ -783,10 +655,6 @@ Generates diagram output for a file using the specified options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="output_sub_diagrams/1"> </div>
 
 .. index:: output_sub_diagrams/1
 .. _diagram/1::output_sub_diagrams/1:
@@ -807,10 +675,6 @@ Outputs sub-diagrams using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="reset/0"> </div>
-
 .. index:: reset/0
 .. _diagram/1::reset/0:
 
@@ -827,10 +691,6 @@ Resets all temporary information used when generating a diagram.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="output_node/6"> </div>
 
 .. index:: output_node/6
 .. _diagram/1::output_node/6:
@@ -851,10 +711,6 @@ Outputs a graph node.
 
 ------------
 
-.. raw:: html
-
-   <div id="node/6"> </div>
-
 .. index:: node/6
 .. _diagram/1::node/6:
 
@@ -873,10 +729,6 @@ Enumerates, by backtracking, all saved nodes.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="edge/5"> </div>
 
 .. index:: edge/5
 .. _diagram/1::edge/5:
@@ -897,10 +749,6 @@ Enumerates, by backtracking, all saved edges.
 
 ------------
 
-.. raw:: html
-
-   <div id="output_edges/1"> </div>
-
 .. index:: output_edges/1
 .. _diagram/1::output_edges/1:
 
@@ -919,10 +767,6 @@ Outputs all edges.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="save_edge/5"> </div>
 
 .. index:: save_edge/5
 .. _diagram/1::save_edge/5:
@@ -943,10 +787,6 @@ Saves a graph edge.
 
 ------------
 
-.. raw:: html
-
-   <div id="output_missing_externals/1"> </div>
-
 .. index:: output_missing_externals/1
 .. _diagram/1::output_missing_externals/1:
 
@@ -965,10 +805,6 @@ Outputs missing external nodes (usually due to unloaded resources) that are refe
 
 
 ------------
-
-.. raw:: html
-
-   <div id="not_excluded_file/3"> </div>
 
 .. index:: not_excluded_file/3
 .. _diagram/1::not_excluded_file/3:
@@ -989,10 +825,6 @@ True when the given file is not excluded from the generated output. Excluded fil
 
 ------------
 
-.. raw:: html
-
-   <div id="output_file_path/4"> </div>
-
 .. index:: output_file_path/4
 .. _diagram/1::output_file_path/4:
 
@@ -1011,10 +843,6 @@ Returns the output file path.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="locate_library/2"> </div>
 
 .. index:: locate_library/2
 .. _diagram/1::locate_library/2:
@@ -1035,10 +863,6 @@ Locates a library given its name.
 
 ------------
 
-.. raw:: html
-
-   <div id="locate_directory/2"> </div>
-
 .. index:: locate_directory/2
 .. _diagram/1::locate_directory/2:
 
@@ -1057,10 +881,6 @@ Locates a directory given its name or full path.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="locate_file/5"> </div>
 
 .. index:: locate_file/5
 .. _diagram/1::locate_file/5:
@@ -1081,10 +901,6 @@ Locates a file given its name, basename, full path, or library notation represen
 
 ------------
 
-.. raw:: html
-
-   <div id="ground_entity_identifier/3"> </div>
-
 .. index:: ground_entity_identifier/3
 .. _diagram/1::ground_entity_identifier/3:
 
@@ -1103,10 +919,6 @@ Converts an entity identifier to a ground term.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="filter_file_extension/3"> </div>
 
 .. index:: filter_file_extension/3
 .. _diagram/1::filter_file_extension/3:
@@ -1127,10 +939,6 @@ Filters the file name extension depending on the ``file_extensions/1`` option.
 
 ------------
 
-.. raw:: html
-
-   <div id="add_link_options/3"> </div>
-
 .. index:: add_link_options/3
 .. _diagram/1::add_link_options/3:
 
@@ -1149,10 +957,6 @@ Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph
 
 
 ------------
-
-.. raw:: html
-
-   <div id="omit_path_prefix/3"> </div>
 
 .. index:: omit_path_prefix/3
 .. _diagram/1::omit_path_prefix/3:
@@ -1173,10 +977,6 @@ Removes a prefix from a path, returning the relative path, when using the option
 
 ------------
 
-.. raw:: html
-
-   <div id="add_node_zoom_option/4"> </div>
-
 .. index:: add_node_zoom_option/4
 .. _diagram/1::add_node_zoom_option/4:
 
@@ -1195,10 +995,6 @@ Adds node zoom options when using the zoom option.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="message_diagram_description/1"> </div>
 
 .. index:: message_diagram_description/1
 .. _diagram/1::message_diagram_description/1:
@@ -1222,10 +1018,6 @@ Diagram description for progress messages.
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="node_/6"> </div>
-
 .. index:: node_/6
 .. _diagram/1::node_/6:
 
@@ -1244,10 +1036,6 @@ Table of saved nodes.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="edge_/5"> </div>
 
 .. index:: edge_/5
 .. _diagram/1::edge_/5:

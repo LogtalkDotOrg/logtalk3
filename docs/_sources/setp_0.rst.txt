@@ -35,10 +35,6 @@ Set protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="as_set/2"> </div>
-
 .. index:: as_set/2
 .. _setp/0::as_set/2:
 
@@ -57,10 +53,6 @@ Returns a set with all unique elements from the given list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="as_list/2"> </div>
 
 .. index:: as_list/2
 .. _setp/0::as_list/2:
@@ -81,10 +73,6 @@ Returns a list with all elements of the given set.
 
 ------------
 
-.. raw:: html
-
-   <div id="delete/3"> </div>
-
 .. index:: delete/3
 .. _setp/0::delete/3:
 
@@ -103,10 +91,6 @@ Deletes an element from a set returning the set of remaining elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="disjoint/2"> </div>
 
 .. index:: disjoint/2
 .. _setp/0::disjoint/2:
@@ -127,10 +111,6 @@ True if the two sets have no element in common.
 
 ------------
 
-.. raw:: html
-
-   <div id="equal/2"> </div>
-
 .. index:: equal/2
 .. _setp/0::equal/2:
 
@@ -149,10 +129,6 @@ True if the two sets are equal.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="empty/1"> </div>
 
 .. index:: empty/1
 .. _setp/0::empty/1:
@@ -173,10 +149,6 @@ True if the set is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="insert/3"> </div>
-
 .. index:: insert/3
 .. _setp/0::insert/3:
 
@@ -195,10 +167,6 @@ Inserts an element in a set, returning the resulting set.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="insert_all/3"> </div>
 
 .. index:: insert_all/3
 .. _setp/0::insert_all/3:
@@ -219,10 +187,6 @@ Inserts a list of elements in a set, returning the resulting set.
 
 ------------
 
-.. raw:: html
-
-   <div id="intersect/2"> </div>
-
 .. index:: intersect/2
 .. _setp/0::intersect/2:
 
@@ -241,10 +205,6 @@ True if the two sets have at least one element in common.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="intersection/3"> </div>
 
 .. index:: intersection/3
 .. _setp/0::intersection/3:
@@ -265,10 +225,6 @@ Returns the intersection of ``Set1`` and ``Set2``.
 
 ------------
 
-.. raw:: html
-
-   <div id="intersection/4"> </div>
-
 .. index:: intersection/4
 .. _setp/0::intersection/4:
 
@@ -288,10 +244,6 @@ True if ``Intersection`` is the intersection of ``Set1`` and ``Set2`` and ``Diff
 
 ------------
 
-.. raw:: html
-
-   <div id="size/2"> </div>
-
 .. index:: size/2
 .. _setp/0::size/2:
 
@@ -310,10 +262,6 @@ Number of set elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="member/2"> </div>
 
 .. index:: member/2
 .. _setp/0::member/2:
@@ -335,10 +283,6 @@ Number of set elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="memberchk/2"> </div>
-
 .. index:: memberchk/2
 .. _setp/0::memberchk/2:
 
@@ -357,10 +301,6 @@ Checks if a term is a member of a set.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="powerset/2"> </div>
 
 .. index:: powerset/2
 .. _setp/0::powerset/2:
@@ -381,10 +321,6 @@ Returns the power set of a set, represented as a list of sets.
 
 ------------
 
-.. raw:: html
-
-   <div id="product/3"> </div>
-
 .. index:: product/3
 .. _setp/0::product/3:
 
@@ -403,10 +339,6 @@ Returns the cartesian product of two sets.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="select/3"> </div>
 
 .. index:: select/3
 .. _setp/0::select/3:
@@ -427,10 +359,6 @@ Selects an element from a set, returning the set of remaining elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="selectchk/3"> </div>
-
 .. index:: selectchk/3
 .. _setp/0::selectchk/3:
 
@@ -449,10 +377,6 @@ Checks that an element can be selected from a set, returning the set of remainin
 
 
 ------------
-
-.. raw:: html
-
-   <div id="subset/2"> </div>
 
 .. index:: subset/2
 .. _setp/0::subset/2:
@@ -473,10 +397,6 @@ True if ``Subset`` is a subset of ``Set``.
 
 ------------
 
-.. raw:: html
-
-   <div id="subtract/3"> </div>
-
 .. index:: subtract/3
 .. _setp/0::subtract/3:
 
@@ -495,10 +415,6 @@ True when ``Difference`` contains all and only the elements of ``Set1`` which ar
 
 
 ------------
-
-.. raw:: html
-
-   <div id="symdiff/3"> </div>
 
 .. index:: symdiff/3
 .. _setp/0::symdiff/3:
@@ -519,10 +435,6 @@ True if ``Difference`` is the symmetric difference of ``Set1`` and ``Set2``, con
 
 ------------
 
-.. raw:: html
-
-   <div id="union/3"> </div>
-
 .. index:: union/3
 .. _setp/0::union/3:
 
@@ -541,10 +453,6 @@ True if ``Union`` is the union of ``Set1`` and ``Set2``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="union/4"> </div>
 
 .. index:: union/4
 .. _setp/0::union/4:

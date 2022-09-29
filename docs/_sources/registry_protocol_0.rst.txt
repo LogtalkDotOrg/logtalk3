@@ -35,10 +35,6 @@ Registry specification protocol. Objects implementing this protocol should be na
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="name/1"> </div>
-
 .. index:: name/1
 .. _registry_protocol/0::name/1:
 
@@ -57,10 +53,6 @@ Registry name. Preferably a valid unquoted atom.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="description/1"> </div>
 
 .. index:: description/1
 .. _registry_protocol/0::description/1:
@@ -81,10 +73,6 @@ Registry one line description.
 
 ------------
 
-.. raw:: html
-
-   <div id="home/1"> </div>
-
 .. index:: home/1
 .. _registry_protocol/0::home/1:
 
@@ -103,10 +91,6 @@ Registry home HTTPS or file URL.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="clone/1"> </div>
 
 .. index:: clone/1
 .. _registry_protocol/0::clone/1:
@@ -127,10 +111,6 @@ Registry git clone HTTPS URL (must end with the ``.git`` extension). Git repos s
 
 ------------
 
-.. raw:: html
-
-   <div id="archive/1"> </div>
-
 .. index:: archive/1
 .. _registry_protocol/0::archive/1:
 
@@ -149,10 +129,6 @@ Registry archive download HTTPS URL.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="note/2"> </div>
 
 .. index:: note/2
 .. _registry_protocol/0::note/2:

@@ -35,10 +35,6 @@ Abstract interface to Java utility predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="value_reference/2"> </div>
-
 .. index:: value_reference/2
 .. _java_utils_protocol/0::value_reference/2:
 
@@ -57,10 +53,6 @@ Returns an opaque term that represents the Java value with the given name.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="true/1"> </div>
 
 .. index:: true/1
 .. _java_utils_protocol/0::true/1:
@@ -81,10 +73,6 @@ Returns an opaque term that represents the Java value *true*.
 
 ------------
 
-.. raw:: html
-
-   <div id="false/1"> </div>
-
 .. index:: false/1
 .. _java_utils_protocol/0::false/1:
 
@@ -103,10 +91,6 @@ Returns an opaque term that represents the Java value *false*.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="void/1"> </div>
 
 .. index:: void/1
 .. _java_utils_protocol/0::void/1:
@@ -127,10 +111,6 @@ Returns an opaque term that represents the Java value *void*.
 
 ------------
 
-.. raw:: html
-
-   <div id="null/1"> </div>
-
 .. index:: null/1
 .. _java_utils_protocol/0::null/1:
 
@@ -149,10 +129,6 @@ Returns an opaque term that represents the Java value *null*.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_true/1"> </div>
 
 .. index:: is_true/1
 .. _java_utils_protocol/0::is_true/1:
@@ -173,10 +149,6 @@ True when the argument is the Java value *true*. Fails if the argument is not in
 
 ------------
 
-.. raw:: html
-
-   <div id="is_false/1"> </div>
-
 .. index:: is_false/1
 .. _java_utils_protocol/0::is_false/1:
 
@@ -195,10 +167,6 @@ True when the argument is the Java value *false*. Fails if the argument is not i
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_void/1"> </div>
 
 .. index:: is_void/1
 .. _java_utils_protocol/0::is_void/1:
@@ -219,10 +187,6 @@ True when the argument is the Java value *void*. Fails if the argument is not in
 
 ------------
 
-.. raw:: html
-
-   <div id="is_null/1"> </div>
-
 .. index:: is_null/1
 .. _java_utils_protocol/0::is_null/1:
 
@@ -241,10 +205,6 @@ True when the argument is the Java value *null*. Fails if the argument is not in
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_object/1"> </div>
 
 .. index:: is_object/1
 .. _java_utils_protocol/0::is_object/1:
@@ -265,10 +225,6 @@ True when the argument is a reference to a Java object. Fails if the argument is
 
 ------------
 
-.. raw:: html
-
-   <div id="terms_to_array/2"> </div>
-
 .. index:: terms_to_array/2
 .. _java_utils_protocol/0::terms_to_array/2:
 
@@ -287,10 +243,6 @@ Converts a list of ground Prolog terms to an array (a Java reference).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="array_to_terms/3"> </div>
 
 .. index:: array_to_terms/3
 .. _java_utils_protocol/0::array_to_terms/3:
@@ -311,10 +263,6 @@ Converts an array (a Java reference) to a list of ground Prolog terms returning 
 
 ------------
 
-.. raw:: html
-
-   <div id="array_to_terms/2"> </div>
-
 .. index:: array_to_terms/2
 .. _java_utils_protocol/0::array_to_terms/2:
 
@@ -333,10 +281,6 @@ Converts an array (a Java reference) to a list of ground Prolog terms. The array
 
 
 ------------
-
-.. raw:: html
-
-   <div id="array_list/2"> </div>
 
 .. index:: array_list/2
 .. _java_utils_protocol/0::array_list/2:
@@ -358,10 +302,6 @@ Converts between an array (a Java reference) and a list. Deprecated. Use the ``t
 
 ------------
 
-.. raw:: html
-
-   <div id="iterator_element/2"> </div>
-
 .. index:: iterator_element/2
 .. _java_utils_protocol/0::iterator_element/2:
 
@@ -381,10 +321,6 @@ Enumerates, by backtracking, all iterator elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="decode_exception/2"> </div>
-
 .. index:: decode_exception/2
 .. _java_utils_protocol/0::decode_exception/2:
 
@@ -403,10 +339,6 @@ Decodes an exception into its corresponding cause. Fails if the exception is not
 
 
 ------------
-
-.. raw:: html
-
-   <div id="decode_exception/3"> </div>
 
 .. index:: decode_exception/3
 .. _java_utils_protocol/0::decode_exception/3:

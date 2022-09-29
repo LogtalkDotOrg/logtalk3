@@ -46,10 +46,6 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="cover/1"> </div>
-
 .. index:: cover/1
 .. _lgtunit/0::cover/1:
 
@@ -69,10 +65,6 @@ Declares entities being tested for which code coverage information should be col
 
 ------------
 
-.. raw:: html
-
-   <div id="run/0"> </div>
-
 .. index:: run/0
 .. _lgtunit/0::run/0:
 
@@ -89,10 +81,6 @@ Runs the unit tests, writing the results to the current output stream.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="run/1"> </div>
 
 .. index:: run/1
 .. _lgtunit/0::run/1:
@@ -114,10 +102,6 @@ Runs a unit test or a list of unit tests, writing the results to the current out
 
 ------------
 
-.. raw:: html
-
-   <div id="run/2"> </div>
-
 .. index:: run/2
 .. _lgtunit/0::run/2:
 
@@ -136,10 +120,6 @@ Runs the unit tests, writing the results to the specified file. Mode can be eith
 
 
 ------------
-
-.. raw:: html
-
-   <div id="run_test_sets/1"> </div>
 
 .. index:: run_test_sets/1
 .. _lgtunit/0::run_test_sets/1:
@@ -160,10 +140,6 @@ Runs two or more test sets as a unified set generating a single code coverage re
 
 ------------
 
-.. raw:: html
-
-   <div id="test/1"> </div>
-
 .. index:: test/1
 .. _lgtunit/0::test/1:
 
@@ -183,10 +159,6 @@ Enumerates, by backtracking, the identifiers of all defined unit tests.
 
 ------------
 
-.. raw:: html
-
-   <div id="number_of_tests/1"> </div>
-
 .. index:: number_of_tests/1
 .. _lgtunit/0::number_of_tests/1:
 
@@ -205,10 +177,6 @@ Number of defined unit tests.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="deterministic/1"> </div>
 
 .. index:: deterministic/1
 .. _lgtunit/0::deterministic/1:
@@ -231,10 +199,6 @@ True if the goal succeeds once without leaving choice-points.
 
 ------------
 
-.. raw:: html
-
-   <div id="deterministic/2"> </div>
-
 .. index:: deterministic/2
 .. _lgtunit/0::deterministic/2:
 
@@ -255,10 +219,6 @@ Reified version of the ``deterministic/1`` predicate. True if the goal succeeds.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="assertion/1"> </div>
 
 .. index:: assertion/1
 .. _lgtunit/0::assertion/1:
@@ -287,10 +247,6 @@ True if the assertion goal succeeds. Throws an error using the assertion goal as
 
 ------------
 
-.. raw:: html
-
-   <div id="assertion/2"> </div>
-
 .. index:: assertion/2
 .. _lgtunit/0::assertion/2:
 
@@ -317,10 +273,6 @@ True if the assertion goal succeeds. Throws an error using the description as ar
 
 
 ------------
-
-.. raw:: html
-
-   <div id="quick_check/3"> </div>
 
 .. index:: quick_check/3
 .. _lgtunit/0::quick_check/3:
@@ -350,10 +302,6 @@ Reified version of the ``quick_check/2`` predicate. Reports ``passed(SequenceSee
 
 
 ------------
-
-.. raw:: html
-
-   <div id="quick_check/2"> </div>
 
 .. index:: quick_check/2
 .. _lgtunit/0::quick_check/2:
@@ -387,10 +335,6 @@ Generates and runs random tests for a predicate given its mode template and a se
 
 ------------
 
-.. raw:: html
-
-   <div id="quick_check/1"> </div>
-
 .. index:: quick_check/1
 .. _lgtunit/0::quick_check/1:
 
@@ -409,10 +353,6 @@ Generates and runs random tests using default options for a predicate given its 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="benchmark/2"> </div>
 
 .. index:: benchmark/2
 .. _lgtunit/0::benchmark/2:
@@ -435,10 +375,6 @@ Benchmarks a goal and returns the total execution time in seconds. Uses CPU cloc
 
 ------------
 
-.. raw:: html
-
-   <div id="benchmark_reified/3"> </div>
-
 .. index:: benchmark_reified/3
 .. _lgtunit/0::benchmark_reified/3:
 
@@ -459,10 +395,6 @@ Benchmarks a goal and returns the total execution time in seconds plus its resul
 
 
 ------------
-
-.. raw:: html
-
-   <div id="benchmark/3"> </div>
 
 .. index:: benchmark/3
 .. _lgtunit/0::benchmark/3:
@@ -485,10 +417,6 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 
 ------------
 
-.. raw:: html
-
-   <div id="benchmark/4"> </div>
-
 .. index:: benchmark/4
 .. _lgtunit/0::benchmark/4:
 
@@ -510,10 +438,6 @@ Benchmarks a goal by repeating it the specified number of times and returning th
 
 ------------
 
-.. raw:: html
-
-   <div id="variant/2"> </div>
-
 .. index:: variant/2
 .. _lgtunit/0::variant/2:
 
@@ -532,10 +456,6 @@ True when the two arguments are a variant of each other. I.e. if is possible to 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="approximately_equal/3"> </div>
 
 .. index:: approximately_equal/3
 .. _lgtunit/0::approximately_equal/3:
@@ -556,10 +476,6 @@ Compares two numbers for approximate equality given an epsilon value using the d
 
 ------------
 
-.. raw:: html
-
-   <div id="essentially_equal/3"> </div>
-
 .. index:: essentially_equal/3
 .. _lgtunit/0::essentially_equal/3:
 
@@ -578,10 +494,6 @@ Compares two numbers for essential equality given an epsilon value using the de 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="tolerance_equal/4"> </div>
 
 .. index:: tolerance_equal/4
 .. _lgtunit/0::tolerance_equal/4:
@@ -602,10 +514,6 @@ Compares two numbers for close equality given relative and absolute tolerances u
 
 ------------
 
-.. raw:: html
-
-   <div id="=~= / 2"> </div>
-
 .. index:: =~= / 2
 .. _lgtunit/0::=~= / 2:
 
@@ -625,10 +533,6 @@ Compares two numbers (or lists of numbers) for approximate equality using ``100*
 
 
 ------------
-
-.. raw:: html
-
-   <div id="epsilon/1"> </div>
 
 .. index:: epsilon/1
 .. _lgtunit/0::epsilon/1:
@@ -652,10 +556,6 @@ Returns the value of epsilon used in the definition of the ``(=~=)/2`` predicate
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="run_tests/0"> </div>
-
 .. index:: run_tests/0
 .. _lgtunit/0::run_tests/0:
 
@@ -672,10 +572,6 @@ Runs all defined unit tests.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="run_tests/1"> </div>
 
 .. index:: run_tests/1
 .. _lgtunit/0::run_tests/1:
@@ -696,10 +592,6 @@ Runs all the tests defined in the given file.
 
 ------------
 
-.. raw:: html
-
-   <div id="run_test_set/0"> </div>
-
 .. index:: run_test_set/0
 .. _lgtunit/0::run_test_set/0:
 
@@ -716,10 +608,6 @@ Runs a test set as part of running two or more test sets as a unified set.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="run_quick_check_tests/5"> </div>
 
 .. index:: run_quick_check_tests/5
 .. _lgtunit/0::run_quick_check_tests/5:
@@ -742,10 +630,6 @@ Runs a list of defined tests using the given options. Returns the starting seed 
 
 ------------
 
-.. raw:: html
-
-   <div id="condition/0"> </div>
-
 .. index:: condition/0
 .. _lgtunit/0::condition/0:
 
@@ -762,10 +646,6 @@ Verifies conditions for running the tests. Defaults to the goal ``true``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="setup/0"> </div>
 
 .. index:: setup/0
 .. _lgtunit/0::setup/0:
@@ -784,10 +664,6 @@ Setup environment before running the test set. Defaults to the goal ``true``.
 
 ------------
 
-.. raw:: html
-
-   <div id="cleanup/0"> </div>
-
 .. index:: cleanup/0
 .. _lgtunit/0::cleanup/0:
 
@@ -804,10 +680,6 @@ Cleanup environment after running the test set. Defaults to the goal ``true``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="make/1"> </div>
 
 .. index:: make/1
 .. _lgtunit/0::make/1:
@@ -826,10 +698,6 @@ Make target for automatically running the test set when calling the ``logtalk_ma
 
 ------------
 
-.. raw:: html
-
-   <div id="note/1"> </div>
-
 .. index:: note/1
 .. _lgtunit/0::note/1:
 
@@ -846,10 +714,6 @@ Note to be printed after the test results. Defaults to the empty atom.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="suppress_text_output/0"> </div>
 
 .. index:: suppress_text_output/0
 .. _lgtunit/0::suppress_text_output/0:
@@ -868,10 +732,6 @@ Suppresses text output. Useful to avoid irrelevant text output from predicates b
 
 ------------
 
-.. raw:: html
-
-   <div id="suppress_binary_output/0"> </div>
-
 .. index:: suppress_binary_output/0
 .. _lgtunit/0::suppress_binary_output/0:
 
@@ -888,10 +748,6 @@ Suppresses binary output. Useful to avoid irrelevant binary output from predicat
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_text_input/3"> </div>
 
 .. index:: set_text_input/3
 .. _lgtunit/0::set_text_input/3:
@@ -913,10 +769,6 @@ Creates a temporary file with the given text contents and opens it for reading r
 
 ------------
 
-.. raw:: html
-
-   <div id="set_text_input/2"> </div>
-
 .. index:: set_text_input/2
 .. _lgtunit/0::set_text_input/2:
 
@@ -936,10 +788,6 @@ Creates a temporary file with the given text contents and opens it for reading r
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_text_input/1"> </div>
 
 .. index:: set_text_input/1
 .. _lgtunit/0::set_text_input/1:
@@ -961,10 +809,6 @@ Creates a temporary file with the given text contents, opens it for reading usin
 
 ------------
 
-.. raw:: html
-
-   <div id="check_text_input/2"> </div>
-
 .. index:: check_text_input/2
 .. _lgtunit/0::check_text_input/2:
 
@@ -983,10 +827,6 @@ Checks that the temporary file (referenced by the given alias) being read have t
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_text_input/1"> </div>
 
 .. index:: check_text_input/1
 .. _lgtunit/0::check_text_input/1:
@@ -1007,10 +847,6 @@ Checks that the temporary file being read have the expected text contents.
 
 ------------
 
-.. raw:: html
-
-   <div id="text_input_assertion/3"> </div>
-
 .. index:: text_input_assertion/3
 .. _lgtunit/0::text_input_assertion/3:
 
@@ -1029,10 +865,6 @@ Returns an assertion for checking that the temporary file (referenced by the giv
 
 
 ------------
-
-.. raw:: html
-
-   <div id="text_input_assertion/2"> </div>
 
 .. index:: text_input_assertion/2
 .. _lgtunit/0::text_input_assertion/2:
@@ -1053,10 +885,6 @@ Returns an assertion for checking that the temporary file being read have the ex
 
 ------------
 
-.. raw:: html
-
-   <div id="clean_text_input/0"> </div>
-
 .. index:: clean_text_input/0
 .. _lgtunit/0::clean_text_input/0:
 
@@ -1073,10 +901,6 @@ Cleans the temporary file used when testing text input.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_binary_input/3"> </div>
 
 .. index:: set_binary_input/3
 .. _lgtunit/0::set_binary_input/3:
@@ -1097,10 +921,6 @@ Creates a temporary file with the given binary contents and opens it for reading
 
 ------------
 
-.. raw:: html
-
-   <div id="set_binary_input/2"> </div>
-
 .. index:: set_binary_input/2
 .. _lgtunit/0::set_binary_input/2:
 
@@ -1119,10 +939,6 @@ Creates a temporary file with the given binary contents and opens it for reading
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_binary_input/1"> </div>
 
 .. index:: set_binary_input/1
 .. _lgtunit/0::set_binary_input/1:
@@ -1143,10 +959,6 @@ Creates a temporary file with the given binary contents, opens it for reading us
 
 ------------
 
-.. raw:: html
-
-   <div id="check_binary_input/2"> </div>
-
 .. index:: check_binary_input/2
 .. _lgtunit/0::check_binary_input/2:
 
@@ -1165,10 +977,6 @@ Checks that the temporary file (referenced by the given alias) being read have t
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_binary_input/1"> </div>
 
 .. index:: check_binary_input/1
 .. _lgtunit/0::check_binary_input/1:
@@ -1189,10 +997,6 @@ Checks that the temporary file being read have the expected binary contents.
 
 ------------
 
-.. raw:: html
-
-   <div id="binary_input_assertion/3"> </div>
-
 .. index:: binary_input_assertion/3
 .. _lgtunit/0::binary_input_assertion/3:
 
@@ -1211,10 +1015,6 @@ Returns an assertion for checking that the temporary file (referenced by the giv
 
 
 ------------
-
-.. raw:: html
-
-   <div id="binary_input_assertion/2"> </div>
 
 .. index:: binary_input_assertion/2
 .. _lgtunit/0::binary_input_assertion/2:
@@ -1235,10 +1035,6 @@ Returns an assertion for checking that the temporary file being read have the ex
 
 ------------
 
-.. raw:: html
-
-   <div id="clean_binary_input/0"> </div>
-
 .. index:: clean_binary_input/0
 .. _lgtunit/0::clean_binary_input/0:
 
@@ -1255,10 +1051,6 @@ Cleans the temporary file used when testing binary input.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_text_output/3"> </div>
 
 .. index:: set_text_output/3
 .. _lgtunit/0::set_text_output/3:
@@ -1280,10 +1072,6 @@ Creates a temporary file with the given text contents and opens it for writing r
 
 ------------
 
-.. raw:: html
-
-   <div id="set_text_output/2"> </div>
-
 .. index:: set_text_output/2
 .. _lgtunit/0::set_text_output/2:
 
@@ -1303,10 +1091,6 @@ Creates a temporary file with the given text contents and referenced by the give
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_text_output/1"> </div>
 
 .. index:: set_text_output/1
 .. _lgtunit/0::set_text_output/1:
@@ -1328,10 +1112,6 @@ Creates a temporary file with the given text contents and sets the current outpu
 
 ------------
 
-.. raw:: html
-
-   <div id="check_text_output/3"> </div>
-
 .. index:: check_text_output/3
 .. _lgtunit/0::check_text_output/3:
 
@@ -1350,10 +1130,6 @@ Checks that the temporary file (open with the given options and alias) being wri
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_text_output/2"> </div>
 
 .. index:: check_text_output/2
 .. _lgtunit/0::check_text_output/2:
@@ -1374,10 +1150,6 @@ Checks that the temporary file (open with default options and alias) being writt
 
 ------------
 
-.. raw:: html
-
-   <div id="check_text_output/1"> </div>
-
 .. index:: check_text_output/1
 .. _lgtunit/0::check_text_output/1:
 
@@ -1396,10 +1168,6 @@ Checks that the temporary file being written have the expected text contents.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="text_output_assertion/4"> </div>
 
 .. index:: text_output_assertion/4
 .. _lgtunit/0::text_output_assertion/4:
@@ -1420,10 +1188,6 @@ Returns an assertion for checking that the temporary file (open with the given o
 
 ------------
 
-.. raw:: html
-
-   <div id="text_output_assertion/3"> </div>
-
 .. index:: text_output_assertion/3
 .. _lgtunit/0::text_output_assertion/3:
 
@@ -1442,10 +1206,6 @@ Returns an assertion for checking that the temporary file (open with default opt
 
 
 ------------
-
-.. raw:: html
-
-   <div id="text_output_assertion/2"> </div>
 
 .. index:: text_output_assertion/2
 .. _lgtunit/0::text_output_assertion/2:
@@ -1466,10 +1226,6 @@ Returns an assertion for checking that the temporary file being written have the
 
 ------------
 
-.. raw:: html
-
-   <div id="text_output_contents/3"> </div>
-
 .. index:: text_output_contents/3
 .. _lgtunit/0::text_output_contents/3:
 
@@ -1488,10 +1244,6 @@ Returns the contents of the temporary file (open with the given options and alia
 
 
 ------------
-
-.. raw:: html
-
-   <div id="text_output_contents/2"> </div>
 
 .. index:: text_output_contents/2
 .. _lgtunit/0::text_output_contents/2:
@@ -1512,10 +1264,6 @@ Returns the contents of the temporary file (open with default options and alias)
 
 ------------
 
-.. raw:: html
-
-   <div id="text_output_contents/1"> </div>
-
 .. index:: text_output_contents/1
 .. _lgtunit/0::text_output_contents/1:
 
@@ -1535,10 +1283,6 @@ Returns the contents of the temporary file being written.
 
 ------------
 
-.. raw:: html
-
-   <div id="clean_text_output/0"> </div>
-
 .. index:: clean_text_output/0
 .. _lgtunit/0::clean_text_output/0:
 
@@ -1555,10 +1299,6 @@ Cleans the temporary file used when testing text output.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_binary_output/3"> </div>
 
 .. index:: set_binary_output/3
 .. _lgtunit/0::set_binary_output/3:
@@ -1579,10 +1319,6 @@ Creates a temporary file with the given binary contents and opens it for writing
 
 ------------
 
-.. raw:: html
-
-   <div id="set_binary_output/2"> </div>
-
 .. index:: set_binary_output/2
 .. _lgtunit/0::set_binary_output/2:
 
@@ -1601,10 +1337,6 @@ Creates a temporary file with the given binary contents and opens it for writing
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_binary_output/1"> </div>
 
 .. index:: set_binary_output/1
 .. _lgtunit/0::set_binary_output/1:
@@ -1625,10 +1357,6 @@ Creates a temporary file with the given binary contents and sets the current out
 
 ------------
 
-.. raw:: html
-
-   <div id="check_binary_output/2"> </div>
-
 .. index:: check_binary_output/2
 .. _lgtunit/0::check_binary_output/2:
 
@@ -1647,10 +1375,6 @@ Checks that the temporary file (referenced by the given alias) have the expected
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_binary_output/1"> </div>
 
 .. index:: check_binary_output/1
 .. _lgtunit/0::check_binary_output/1:
@@ -1671,10 +1395,6 @@ Checks that the temporary file have the expected binary contents.
 
 ------------
 
-.. raw:: html
-
-   <div id="binary_output_assertion/3"> </div>
-
 .. index:: binary_output_assertion/3
 .. _lgtunit/0::binary_output_assertion/3:
 
@@ -1693,10 +1413,6 @@ Returns an assertion for checking that the temporary file (referenced by the giv
 
 
 ------------
-
-.. raw:: html
-
-   <div id="binary_output_assertion/2"> </div>
 
 .. index:: binary_output_assertion/2
 .. _lgtunit/0::binary_output_assertion/2:
@@ -1717,10 +1433,6 @@ Returns an assertion for checking that the temporary file have the expected bina
 
 ------------
 
-.. raw:: html
-
-   <div id="binary_output_contents/2"> </div>
-
 .. index:: binary_output_contents/2
 .. _lgtunit/0::binary_output_contents/2:
 
@@ -1739,10 +1451,6 @@ Returns the binary contents of the temporary file (referenced by the given alias
 
 
 ------------
-
-.. raw:: html
-
-   <div id="binary_output_contents/1"> </div>
 
 .. index:: binary_output_contents/1
 .. _lgtunit/0::binary_output_contents/1:
@@ -1763,10 +1471,6 @@ Returns the binary contents of the temporary file being written.
 
 ------------
 
-.. raw:: html
-
-   <div id="clean_binary_output/0"> </div>
-
 .. index:: clean_binary_output/0
 .. _lgtunit/0::clean_binary_output/0:
 
@@ -1783,10 +1487,6 @@ Cleans the temporary file used when testing binary output.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="create_text_file/3"> </div>
 
 .. index:: create_text_file/3
 .. _lgtunit/0::create_text_file/3:
@@ -1808,10 +1508,6 @@ Creates a text file with the given contents. The file is open for writing using 
 
 ------------
 
-.. raw:: html
-
-   <div id="create_text_file/2"> </div>
-
 .. index:: create_text_file/2
 .. _lgtunit/0::create_text_file/2:
 
@@ -1832,10 +1528,6 @@ Creates a text file with the given contents. The file is open for writing using 
 
 ------------
 
-.. raw:: html
-
-   <div id="create_binary_file/2"> </div>
-
 .. index:: create_binary_file/2
 .. _lgtunit/0::create_binary_file/2:
 
@@ -1854,10 +1546,6 @@ Creates a binary file with the given contents.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_text_file/3"> </div>
 
 .. index:: check_text_file/3
 .. _lgtunit/0::check_text_file/3:
@@ -1878,10 +1566,6 @@ Checks that the contents of a text file match the expected contents. The file is
 
 ------------
 
-.. raw:: html
-
-   <div id="check_text_file/2"> </div>
-
 .. index:: check_text_file/2
 .. _lgtunit/0::check_text_file/2:
 
@@ -1900,10 +1584,6 @@ Checks that the contents of a text file (open for reading using default options)
 
 
 ------------
-
-.. raw:: html
-
-   <div id="text_file_assertion/4"> </div>
 
 .. index:: text_file_assertion/4
 .. _lgtunit/0::text_file_assertion/4:
@@ -1924,10 +1604,6 @@ Returns an assertion for checking that the given file have the expected text con
 
 ------------
 
-.. raw:: html
-
-   <div id="text_file_assertion/3"> </div>
-
 .. index:: text_file_assertion/3
 .. _lgtunit/0::text_file_assertion/3:
 
@@ -1946,10 +1622,6 @@ Returns an assertion for checking that the given file have the expected text con
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_binary_file/2"> </div>
 
 .. index:: check_binary_file/2
 .. _lgtunit/0::check_binary_file/2:
@@ -1970,10 +1642,6 @@ Checks the contents of a binary file match the expected contents.
 
 ------------
 
-.. raw:: html
-
-   <div id="binary_file_assertion/3"> </div>
-
 .. index:: binary_file_assertion/3
 .. _lgtunit/0::binary_file_assertion/3:
 
@@ -1992,10 +1660,6 @@ Returns an assertion for checking that the given file have the expected binary c
 
 
 ------------
-
-.. raw:: html
-
-   <div id="clean_file/1"> </div>
 
 .. index:: clean_file/1
 .. _lgtunit/0::clean_file/1:
@@ -2016,10 +1680,6 @@ Closes any existing stream associated with the file and deletes the file if it e
 
 ------------
 
-.. raw:: html
-
-   <div id="closed_input_stream/2"> </div>
-
 .. index:: closed_input_stream/2
 .. _lgtunit/0::closed_input_stream/2:
 
@@ -2038,10 +1698,6 @@ Opens a temporary file with the given options for reading, closes it, and return
 
 
 ------------
-
-.. raw:: html
-
-   <div id="closed_output_stream/2"> </div>
 
 .. index:: closed_output_stream/2
 .. _lgtunit/0::closed_output_stream/2:
@@ -2062,10 +1718,6 @@ Opens a temporary file with the given options for writing, closes it, and return
 
 ------------
 
-.. raw:: html
-
-   <div id="stream_position/1"> </div>
-
 .. index:: stream_position/1
 .. _lgtunit/0::stream_position/1:
 
@@ -2084,10 +1736,6 @@ Returns a syntactically valid stream position.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="test/2"> </div>
 
 .. index:: test/2
 .. _lgtunit/0::test/2:
@@ -2111,10 +1759,6 @@ Table of defined tests.
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="running_test_sets_/0"> </div>
-
 .. index:: running_test_sets_/0
 .. _lgtunit/0::running_test_sets_/0:
 
@@ -2131,10 +1775,6 @@ Internal flag used when running two or more test sets as a unified set.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="test/3"> </div>
 
 .. index:: test/3
 .. _lgtunit/0::test/3:
@@ -2157,10 +1797,6 @@ Compiled unit tests. The list of variables is used to ensure variable sharing be
 
 ------------
 
-.. raw:: html
-
-   <div id="auxiliary_predicate_counter_/1"> </div>
-
 .. index:: auxiliary_predicate_counter_/1
 .. _lgtunit/0::auxiliary_predicate_counter_/1:
 
@@ -2179,10 +1815,6 @@ Counter for generating unique auxiliary predicate names.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="test_/2"> </div>
 
 .. index:: test_/2
 .. _lgtunit/0::test_/2:
@@ -2203,10 +1835,6 @@ Table of compiled tests.
 
 ------------
 
-.. raw:: html
-
-   <div id="skipped_/1"> </div>
-
 .. index:: skipped_/1
 .. _lgtunit/0::skipped_/1:
 
@@ -2225,10 +1853,6 @@ Counter for skipped tests.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="passed_/1"> </div>
 
 .. index:: passed_/1
 .. _lgtunit/0::passed_/1:
@@ -2249,10 +1873,6 @@ Counter for passed tests.
 
 ------------
 
-.. raw:: html
-
-   <div id="failed_/1"> </div>
-
 .. index:: failed_/1
 .. _lgtunit/0::failed_/1:
 
@@ -2271,10 +1891,6 @@ Counter for failed tests.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="flaky_/1"> </div>
 
 .. index:: flaky_/1
 .. _lgtunit/0::flaky_/1:
@@ -2295,10 +1911,6 @@ Counter for failed tests that are marked as flaky.
 
 ------------
 
-.. raw:: html
-
-   <div id="fired_/3"> </div>
-
 .. index:: fired_/3
 .. _lgtunit/0::fired_/3:
 
@@ -2317,10 +1929,6 @@ Fired clauses when running the unit tests.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="covered_/4"> </div>
 
 .. index:: covered_/4
 .. _lgtunit/0::covered_/4:

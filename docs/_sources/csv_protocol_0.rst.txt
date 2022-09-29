@@ -35,10 +35,6 @@ CSV file and stream reading and writing protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="read_file/3"> </div>
-
 .. index:: read_file/3
 .. _csv_protocol/0::read_file/3:
 
@@ -57,10 +53,6 @@ Reads a CSV file saving the data as clauses for the specified object predicate. 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_stream/3"> </div>
 
 .. index:: read_stream/3
 .. _csv_protocol/0::read_stream/3:
@@ -81,10 +73,6 @@ Reads a CSV stream saving the data as clauses for the specified object predicate
 
 ------------
 
-.. raw:: html
-
-   <div id="read_file/2"> </div>
-
 .. index:: read_file/2
 .. _csv_protocol/0::read_file/2:
 
@@ -103,10 +91,6 @@ Reads a CSV file returning the data as a list of rows, each row a list of fields
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_stream/2"> </div>
 
 .. index:: read_stream/2
 .. _csv_protocol/0::read_stream/2:
@@ -127,10 +111,6 @@ Reads a CSV stream returning the data as a list of rows, each row a list of fiel
 
 ------------
 
-.. raw:: html
-
-   <div id="read_file_by_line/3"> </div>
-
 .. index:: read_file_by_line/3
 .. _csv_protocol/0::read_file_by_line/3:
 
@@ -149,10 +129,6 @@ Reads a CSV file saving the data as clauses for the specified object predicate. 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_stream_by_line/3"> </div>
 
 .. index:: read_stream_by_line/3
 .. _csv_protocol/0::read_stream_by_line/3:
@@ -173,10 +149,6 @@ Reads a CSV stream saving the data as clauses for the specified object predicate
 
 ------------
 
-.. raw:: html
-
-   <div id="read_file_by_line/2"> </div>
-
 .. index:: read_file_by_line/2
 .. _csv_protocol/0::read_file_by_line/2:
 
@@ -195,10 +167,6 @@ Reads a CSV file returning the data as a list of rows, each row a list of fields
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_stream_by_line/2"> </div>
 
 .. index:: read_stream_by_line/2
 .. _csv_protocol/0::read_stream_by_line/2:
@@ -219,10 +187,6 @@ Reads a CSV stream returning the data as a list of rows, each row a list of fiel
 
 ------------
 
-.. raw:: html
-
-   <div id="write_file/3"> </div>
-
 .. index:: write_file/3
 .. _csv_protocol/0::write_file/3:
 
@@ -241,10 +205,6 @@ Writes a CSV file with the data represented by the clauses of the specified obje
 
 
 ------------
-
-.. raw:: html
-
-   <div id="write_stream/3"> </div>
 
 .. index:: write_stream/3
 .. _csv_protocol/0::write_stream/3:
@@ -265,10 +225,6 @@ Writes a CSV stream with the data represented by the clauses of the specified ob
 
 ------------
 
-.. raw:: html
-
-   <div id="guess_separator/2"> </div>
-
 .. index:: guess_separator/2
 .. _csv_protocol/0::guess_separator/2:
 
@@ -287,10 +243,6 @@ Guesses the separator used in a given file, asking the user to confirm.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="guess_arity/2"> </div>
 
 .. index:: guess_arity/2
 .. _csv_protocol/0::guess_arity/2:

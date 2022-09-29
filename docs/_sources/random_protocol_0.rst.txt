@@ -35,10 +35,6 @@ Random number generator protocol. The predicates are declared as synchronized wh
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="random/1"> </div>
-
 .. index:: random/1
 .. _random_protocol/0::random/1:
 
@@ -57,10 +53,6 @@ Returns a new random float value in the interval ``[0.0, 1.0[``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="between/3"> </div>
 
 .. index:: between/3
 .. _random_protocol/0::between/3:
@@ -81,10 +73,6 @@ Returns a new random integer in the interval ``[Lower, Upper]``. Fails if ``Lowe
 
 ------------
 
-.. raw:: html
-
-   <div id="member/2"> </div>
-
 .. index:: member/2
 .. _random_protocol/0::member/2:
 
@@ -103,10 +91,6 @@ Returns a random member of a list. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="select/3"> </div>
 
 .. index:: select/3
 .. _random_protocol/0::select/3:
@@ -127,10 +111,6 @@ Returns a random member of a list and the rest of the list. Fails if the list is
 
 ------------
 
-.. raw:: html
-
-   <div id="enumerate/2"> </div>
-
 .. index:: enumerate/2
 .. _random_protocol/0::enumerate/2:
 
@@ -149,10 +129,6 @@ Enumerates the elements of a list in random order. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="permutation/2"> </div>
 
 .. index:: permutation/2
 .. _random_protocol/0::permutation/2:
@@ -173,10 +149,6 @@ Returns a random permutation of a list.
 
 ------------
 
-.. raw:: html
-
-   <div id="sequence/4"> </div>
-
 .. index:: sequence/4
 .. _random_protocol/0::sequence/4:
 
@@ -196,10 +168,6 @@ Returns list of random integers of given length in random order in interval ``[L
 
 ------------
 
-.. raw:: html
-
-   <div id="set/4"> </div>
-
 .. index:: set/4
 .. _random_protocol/0::set/4:
 
@@ -218,10 +186,6 @@ Returns ordered set of random integers of given size in interval ``[Lower, Upper
 
 
 ------------
-
-.. raw:: html
-
-   <div id="random/3"> </div>
 
 .. index:: random/3
 .. _random_protocol/0::random/3:
@@ -243,10 +207,6 @@ Returns a new random value in the interval ``[Lower, Upper[``. Fails if ``Lower 
 
 ------------
 
-.. raw:: html
-
-   <div id="randseq/4"> </div>
-
 .. index:: randseq/4
 .. _random_protocol/0::randseq/4:
 
@@ -266,10 +226,6 @@ Returns list of random values of given length in random order in interval ``[Low
 
 
 ------------
-
-.. raw:: html
-
-   <div id="randset/4"> </div>
 
 .. index:: randset/4
 .. _random_protocol/0::randset/4:
@@ -291,10 +247,6 @@ Returns ordered set of random values of given size in interval ``[Lower, Upper[`
 
 ------------
 
-.. raw:: html
-
-   <div id="maybe/0"> </div>
-
 .. index:: maybe/0
 .. _random_protocol/0::maybe/0:
 
@@ -311,10 +263,6 @@ Succeeds or fails with equal probability.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="maybe/1"> </div>
 
 .. index:: maybe/1
 .. _random_protocol/0::maybe/1:
@@ -335,10 +283,6 @@ Succeeds with probability ``Probability`` or fails with probability ``1 - Probab
 
 ------------
 
-.. raw:: html
-
-   <div id="maybe/2"> </div>
-
 .. index:: maybe/2
 .. _random_protocol/0::maybe/2:
 
@@ -357,10 +301,6 @@ Succeeds with probability ``K/N`` where ``K`` and ``N`` are integers satisfying 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="maybe_call/1"> </div>
 
 .. index:: maybe_call/1
 .. _random_protocol/0::maybe_call/1:
@@ -382,10 +322,6 @@ Calls a goal or fails without calling it with equal probability. When the goal i
 
 
 ------------
-
-.. raw:: html
-
-   <div id="maybe_call/2"> </div>
 
 .. index:: maybe_call/2
 .. _random_protocol/0::maybe_call/2:

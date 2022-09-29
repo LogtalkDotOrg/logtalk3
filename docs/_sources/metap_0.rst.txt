@@ -35,10 +35,6 @@ Useful meta-predicates protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="include/3"> </div>
-
 .. index:: include/3
 .. _metap/0::include/3:
 
@@ -59,10 +55,6 @@ Returns a list of all list elements that satisfy a predicate.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="exclude/3"> </div>
 
 .. index:: exclude/3
 .. _metap/0::exclude/3:
@@ -85,10 +77,6 @@ Returns a list of all list elements that fail to satisfy a predicate.
 
 ------------
 
-.. raw:: html
-
-   <div id="findall_member/4"> </div>
-
 .. index:: findall_member/4
 .. _metap/0::findall_member/4:
 
@@ -109,10 +97,6 @@ Finds all members of a list that satisfy a given test.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="findall_member/5"> </div>
 
 .. index:: findall_member/5
 .. _metap/0::findall_member/5:
@@ -135,10 +119,6 @@ Finds all members of a list that satisfy a given test appending the given tail t
 
 ------------
 
-.. raw:: html
-
-   <div id="partition/4"> </div>
-
 .. index:: partition/4
 .. _metap/0::partition/4:
 
@@ -159,10 +139,6 @@ Partition a list of elements in two lists using a predicate.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="partition/6"> </div>
 
 .. index:: partition/6
 .. _metap/0::partition/6:
@@ -185,10 +161,6 @@ Partitions a list in lists with values less, equal, and greater than a given val
 
 ------------
 
-.. raw:: html
-
-   <div id="fold_left/4"> </div>
-
 .. index:: fold_left/4
 .. _metap/0::fold_left/4:
 
@@ -209,10 +181,6 @@ List folding (left associative). Closure is extended with three arguments: accum
 
 
 ------------
-
-.. raw:: html
-
-   <div id="fold_left_1/3"> </div>
 
 .. index:: fold_left_1/3
 .. _metap/0::fold_left_1/3:
@@ -235,10 +203,6 @@ List folding (left associative). Closure is extended with three arguments: accum
 
 ------------
 
-.. raw:: html
-
-   <div id="scan_left/4"> </div>
-
 .. index:: scan_left/4
 .. _metap/0::scan_left/4:
 
@@ -259,10 +223,6 @@ List scanning (left associative). Closure is extended with three arguments: accu
 
 
 ------------
-
-.. raw:: html
-
-   <div id="scan_left_1/3"> </div>
 
 .. index:: scan_left_1/3
 .. _metap/0::scan_left_1/3:
@@ -285,10 +245,6 @@ List scanning (left associative). Closure is extended with three arguments: accu
 
 ------------
 
-.. raw:: html
-
-   <div id="fold_right/4"> </div>
-
 .. index:: fold_right/4
 .. _metap/0::fold_right/4:
 
@@ -309,10 +265,6 @@ List folding (right associative). Closure is extended with three arguments: list
 
 
 ------------
-
-.. raw:: html
-
-   <div id="fold_right_1/3"> </div>
 
 .. index:: fold_right_1/3
 .. _metap/0::fold_right_1/3:
@@ -335,10 +287,6 @@ List folding (right associative). Closure is extended with three arguments: list
 
 ------------
 
-.. raw:: html
-
-   <div id="scan_right/4"> </div>
-
 .. index:: scan_right/4
 .. _metap/0::scan_right/4:
 
@@ -359,10 +307,6 @@ List scanning (right associative). Closure is extended with three arguments: lis
 
 
 ------------
-
-.. raw:: html
-
-   <div id="scan_right_1/3"> </div>
 
 .. index:: scan_right_1/3
 .. _metap/0::scan_right_1/3:
@@ -385,10 +329,6 @@ List scanning (right associative). Closure is extended with three arguments: lis
 
 ------------
 
-.. raw:: html
-
-   <div id="map/2"> </div>
-
 .. index:: map/2
 .. _metap/0::map/2:
 
@@ -409,10 +349,6 @@ True if the predicate succeeds for each list element.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/3"> </div>
 
 .. index:: map/3
 .. _metap/0::map/3:
@@ -435,10 +371,6 @@ List mapping predicate taken arguments from two lists of elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="map/4"> </div>
-
 .. index:: map/4
 .. _metap/0::map/4:
 
@@ -459,10 +391,6 @@ List mapping predicate taken arguments from three lists of elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/5"> </div>
 
 .. index:: map/5
 .. _metap/0::map/5:
@@ -485,10 +413,6 @@ List mapping predicate taken arguments from four lists of elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="map/6"> </div>
-
 .. index:: map/6
 .. _metap/0::map/6:
 
@@ -509,10 +433,6 @@ List mapping predicate taken arguments from five lists of elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/7"> </div>
 
 .. index:: map/7
 .. _metap/0::map/7:
@@ -535,10 +455,6 @@ List mapping predicate taken arguments from six lists of elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="map/8"> </div>
-
 .. index:: map/8
 .. _metap/0::map/8:
 
@@ -559,10 +475,6 @@ List mapping predicate taken arguments from seven lists of elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map_reduce/5"> </div>
 
 .. index:: map_reduce/5
 .. _metap/0::map_reduce/5:

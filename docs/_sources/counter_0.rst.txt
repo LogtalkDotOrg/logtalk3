@@ -35,10 +35,6 @@ Counter implemented with asserta/retract.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="increment/0"> </div>
-
 .. index:: increment/0
 .. _counter/0::increment/0:
 
@@ -55,10 +51,6 @@ Increment the counter by 1.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="increase/1"> </div>
 
 .. index:: increase/1
 .. _counter/0::increase/1:
@@ -79,10 +71,6 @@ Increments the counter by the specified amount.
 
 ------------
 
-.. raw:: html
-
-   <div id="set/1"> </div>
-
 .. index:: set/1
 .. _counter/0::set/1:
 
@@ -102,10 +90,6 @@ Sets the counter to the specified amount.
 
 ------------
 
-.. raw:: html
-
-   <div id="value/1"> </div>
-
 .. index:: value/1
 .. _counter/0::value/1:
 
@@ -124,10 +108,6 @@ Gets the current value of the counter.
 |    [N]
 
 ------------
-
-.. raw:: html
-
-   <div id="reset/0"> </div>
 
 .. index:: reset/0
 .. _counter/0::reset/0:
@@ -153,10 +133,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="c/1"> </div>
 
 .. index:: c/1
 .. _counter/0::c/1:

@@ -38,10 +38,6 @@ Simple binary tree implementation of the dictionary protocol. Uses standard orde
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="preorder/2"> </div>
-
 .. index:: preorder/2
 .. _bintree/0::preorder/2:
 
@@ -61,10 +57,6 @@ Preorder tree traversal.
 
 ------------
 
-.. raw:: html
-
-   <div id="inorder/2"> </div>
-
 .. index:: inorder/2
 .. _bintree/0::inorder/2:
 
@@ -83,10 +75,6 @@ Inorder tree traversal.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="postorder/2"> </div>
 
 .. index:: postorder/2
 .. _bintree/0::postorder/2:

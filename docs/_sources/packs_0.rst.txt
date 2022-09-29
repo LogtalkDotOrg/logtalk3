@@ -42,10 +42,6 @@ Pack handling predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="available/1"> </div>
-
 .. index:: available/1
 .. _packs/0::available/1:
 
@@ -65,10 +61,6 @@ Lists all the packs that are available for installation from the given registry.
 
 ------------
 
-.. raw:: html
-
-   <div id="available/0"> </div>
-
 .. index:: available/0
 .. _packs/0::available/0:
 
@@ -85,10 +77,6 @@ Lists all the packs that are available for installation from all defined registr
 
 
 ------------
-
-.. raw:: html
-
-   <div id="installed/4"> </div>
 
 .. index:: installed/4
 .. _packs/0::installed/4:
@@ -109,10 +97,6 @@ Enumerates by backtracking all installed packs.
 
 ------------
 
-.. raw:: html
-
-   <div id="installed/3"> </div>
-
 .. index:: installed/3
 .. _packs/0::installed/3:
 
@@ -132,10 +116,6 @@ Enumerates by backtracking all installed packs.
 
 ------------
 
-.. raw:: html
-
-   <div id="installed/0"> </div>
-
 .. index:: installed/0
 .. _packs/0::installed/0:
 
@@ -152,10 +132,6 @@ Lists all the packs that are installed.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="outdated/4"> </div>
 
 .. index:: outdated/4
 .. _packs/0::outdated/4:
@@ -176,10 +152,6 @@ Enumerates by backtracking all installed but outdated packs (together with the c
 
 ------------
 
-.. raw:: html
-
-   <div id="outdated/1"> </div>
-
 .. index:: outdated/1
 .. _packs/0::outdated/1:
 
@@ -197,10 +169,6 @@ Lists all the packs from the given registry that are installed but outdated.
 
 ------------
 
-.. raw:: html
-
-   <div id="outdated/0"> </div>
-
 .. index:: outdated/0
 .. _packs/0::outdated/0:
 
@@ -217,10 +185,6 @@ Lists all the packs that are installed but outdated.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="orphaned/2"> </div>
 
 .. index:: orphaned/2
 .. _packs/0::orphaned/2:
@@ -241,10 +205,6 @@ Lists all the packs that are installed but whose registry is no longer defined.
 
 ------------
 
-.. raw:: html
-
-   <div id="orphaned/0"> </div>
-
 .. index:: orphaned/0
 .. _packs/0::orphaned/0:
 
@@ -261,10 +221,6 @@ Lists all the packs that are installed but whose registry is no longer defined.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="describe/2"> </div>
 
 .. index:: describe/2
 .. _packs/0::describe/2:
@@ -285,10 +241,6 @@ Describes a registered pack, including installed version if applicable.
 
 ------------
 
-.. raw:: html
-
-   <div id="describe/1"> </div>
-
 .. index:: describe/1
 .. _packs/0::describe/1:
 
@@ -308,10 +260,6 @@ Describes a registered pack, including installed version if applicable.
 
 ------------
 
-.. raw:: html
-
-   <div id="search/1"> </div>
-
 .. index:: search/1
 .. _packs/0::search/1:
 
@@ -330,10 +278,6 @@ Searches packs whose name or description includes the search term (case sensitiv
 
 
 ------------
-
-.. raw:: html
-
-   <div id="install/4"> </div>
 
 .. index:: install/4
 .. _packs/0::install/4:
@@ -365,10 +309,6 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
 
 ------------
 
-.. raw:: html
-
-   <div id="install/3"> </div>
-
 .. index:: install/3
 .. _packs/0::install/3:
 
@@ -387,10 +327,6 @@ Installs the specified version of a pack from the given registry using default o
 
 
 ------------
-
-.. raw:: html
-
-   <div id="install/2"> </div>
 
 .. index:: install/2
 .. _packs/0::install/2:
@@ -411,10 +347,6 @@ Installs the latest version of a pack from the given registry using default opti
 
 ------------
 
-.. raw:: html
-
-   <div id="install/1"> </div>
-
 .. index:: install/1
 .. _packs/0::install/1:
 
@@ -433,10 +365,6 @@ Installs a pack (if its name is unique among all registries) using default optio
 
 
 ------------
-
-.. raw:: html
-
-   <div id="update/3"> </div>
 
 .. index:: update/3
 .. _packs/0::update/3:
@@ -468,10 +396,6 @@ Updates an outdated pack to the specified version using the specified options. F
 
 ------------
 
-.. raw:: html
-
-   <div id="update/2"> </div>
-
 .. index:: update/2
 .. _packs/0::update/2:
 
@@ -502,10 +426,6 @@ Updates an outdated pack to its latest version using the specified options. Fail
 
 ------------
 
-.. raw:: html
-
-   <div id="update/1"> </div>
-
 .. index:: update/1
 .. _packs/0::update/1:
 
@@ -525,10 +445,6 @@ Updates an outdated pack to its latest version using default options. Fails if t
 
 ------------
 
-.. raw:: html
-
-   <div id="update/0"> </div>
-
 .. index:: update/0
 .. _packs/0::update/0:
 
@@ -545,10 +461,6 @@ Updades all outdated packs (that are not pinned) using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="uninstall/2"> </div>
 
 .. index:: uninstall/2
 .. _packs/0::uninstall/2:
@@ -575,10 +487,6 @@ Uninstalls a pack using the specified options. Fails if the pack is unknown or n
 
 ------------
 
-.. raw:: html
-
-   <div id="uninstall/1"> </div>
-
 .. index:: uninstall/1
 .. _packs/0::uninstall/1:
 
@@ -598,10 +506,6 @@ Uninstalls a pack using default options. Fails if the pack is pinned, have depen
 
 ------------
 
-.. raw:: html
-
-   <div id="uninstall/0"> </div>
-
 .. index:: uninstall/0
 .. _packs/0::uninstall/0:
 
@@ -618,10 +522,6 @@ Uninstalls all packs using the ``force(true)`` option.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="clean/2"> </div>
 
 .. index:: clean/2
 .. _packs/0::clean/2:
@@ -642,10 +542,6 @@ Cleans all pack archives. Fails if the the pack is unknown.
 
 ------------
 
-.. raw:: html
-
-   <div id="clean/1"> </div>
-
 .. index:: clean/1
 .. _packs/0::clean/1:
 
@@ -665,10 +561,6 @@ Cleans all pack archives. Fails if the pack is not unknown.
 
 ------------
 
-.. raw:: html
-
-   <div id="clean/0"> </div>
-
 .. index:: clean/0
 .. _packs/0::clean/0:
 
@@ -685,10 +577,6 @@ Cleans all archives for all packs.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="save/2"> </div>
 
 .. index:: save/2
 .. _packs/0::save/2:
@@ -709,10 +597,6 @@ Saves a list of all installed packs and registries plus pinning status to a file
 
 ------------
 
-.. raw:: html
-
-   <div id="save/1"> </div>
-
 .. index:: save/1
 .. _packs/0::save/1:
 
@@ -731,10 +615,6 @@ Saves a list of all installed packs and their registries plus pinning status to 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="restore/2"> </div>
 
 .. index:: restore/2
 .. _packs/0::restore/2:
@@ -766,10 +646,6 @@ Restores a list of registries and packs plus their pinning status from a file us
 
 ------------
 
-.. raw:: html
-
-   <div id="restore/1"> </div>
-
 .. index:: restore/1
 .. _packs/0::restore/1:
 
@@ -788,10 +664,6 @@ Restores a list of registries and packs plus their pinning status from a file us
 
 
 ------------
-
-.. raw:: html
-
-   <div id="dependents/3"> </div>
 
 .. index:: dependents/3
 .. _packs/0::dependents/3:
@@ -812,10 +684,6 @@ Returns a list of all installed packs that depend on the given pack from the giv
 
 ------------
 
-.. raw:: html
-
-   <div id="dependents/2"> </div>
-
 .. index:: dependents/2
 .. _packs/0::dependents/2:
 
@@ -834,10 +702,6 @@ Prints a list of all installed packs that depend on the given pack from the give
 
 
 ------------
-
-.. raw:: html
-
-   <div id="dependents/1"> </div>
 
 .. index:: dependents/1
 .. _packs/0::dependents/1:
@@ -858,10 +722,6 @@ Prints a list of all installed packs that depend on the given pack if unique fro
 
 ------------
 
-.. raw:: html
-
-   <div id="lint/2"> </div>
-
 .. index:: lint/2
 .. _packs/0::lint/2:
 
@@ -881,10 +741,6 @@ Checks the pack specification. Fails if the pack is unknown or if linting detect
 
 ------------
 
-.. raw:: html
-
-   <div id="lint/1"> </div>
-
 .. index:: lint/1
 .. _packs/0::lint/1:
 
@@ -903,10 +759,6 @@ Checks the pack specification. Fails if the pack is unknown, or available from m
 
 
 ------------
-
-.. raw:: html
-
-   <div id="lint/0"> </div>
 
 .. index:: lint/0
 .. _packs/0::lint/0:

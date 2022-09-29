@@ -38,10 +38,6 @@ Command-line help for Logtalk libraries, entities, plus built-in control constru
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="help/0"> </div>
-
 .. index:: help/0
 .. _help/0::help/0:
 
@@ -58,10 +54,6 @@ Prints instructions on how to use the help tool.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="(/)/2"> </div>
 
 .. index:: (/)/2
 .. _help/0::(/)/2:
@@ -82,10 +74,6 @@ Provides help on the ``Functor/Arity`` built-in control construct, directive, pr
 
 ------------
 
-.. raw:: html
-
-   <div id="(//)/2"> </div>
-
 .. index:: (//)/2
 .. _help/0::(//)/2:
 
@@ -104,10 +92,6 @@ Provides help on the ``Functor//Arity`` built-in non-terminal.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="completion/2"> </div>
 
 .. index:: completion/2
 .. _help/0::completion/2:
@@ -128,10 +112,6 @@ Provides a completion pair, ``Completion-Page``, for a given prefix.
 
 ------------
 
-.. raw:: html
-
-   <div id="completions/2"> </div>
-
 .. index:: completions/2
 .. _help/0::completions/2:
 
@@ -150,10 +130,6 @@ Provides a list of completions pairs, ``Completion-Page``, for a given prefix.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="built_in_directive/4"> </div>
 
 .. index:: built_in_directive/4
 .. _help/0::built_in_directive/4:
@@ -174,10 +150,6 @@ Provides access to the HTML documenting files describing built-in directives.
 
 ------------
 
-.. raw:: html
-
-   <div id="built_in_predicate/4"> </div>
-
 .. index:: built_in_predicate/4
 .. _help/0::built_in_predicate/4:
 
@@ -196,10 +168,6 @@ Provides access to the HTML documenting files describing built-in predicates.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="built_in_method/4"> </div>
 
 .. index:: built_in_method/4
 .. _help/0::built_in_method/4:
@@ -220,10 +188,6 @@ Provides access to the HTML documenting files describing built-in methods.
 
 ------------
 
-.. raw:: html
-
-   <div id="control_construct/4"> </div>
-
 .. index:: control_construct/4
 .. _help/0::control_construct/4:
 
@@ -242,10 +206,6 @@ Provides access to the HTML documenting files describing built-in control constr
 
 
 ------------
-
-.. raw:: html
-
-   <div id="built_in_non_terminal/4"> </div>
 
 .. index:: built_in_non_terminal/4
 .. _help/0::built_in_non_terminal/4:
@@ -266,10 +226,6 @@ Provides access to the HTML documenting files describing built-in DCG non-termin
 
 ------------
 
-.. raw:: html
-
-   <div id="library/0"> </div>
-
 .. index:: library/0
 .. _help/0::library/0:
 
@@ -286,10 +242,6 @@ Provides help on the standard Logtalk library.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="library/1"> </div>
 
 .. index:: library/1
 .. _help/0::library/1:
@@ -312,10 +264,6 @@ Provides help on the standard Logtalk libraries, library predicates, and library
 
 ------------
 
-.. raw:: html
-
-   <div id="entity/1"> </div>
-
 .. index:: entity/1
 .. _help/0::entity/1:
 
@@ -334,10 +282,6 @@ Provides help on Logtalk entities (objects, protocols, or categories).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="manuals/0"> </div>
 
 .. index:: manuals/0
 .. _help/0::manuals/0:

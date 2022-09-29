@@ -35,10 +35,6 @@ Event handlers protocol. The handlers are automatically called by the runtime fo
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="before/3"> </div>
-
 .. index:: before/3
 .. _monitoring/0::before/3:
 
@@ -57,10 +53,6 @@ Event handler for ``before`` events. A ``before`` event handler may prevent a me
 
 
 ------------
-
-.. raw:: html
-
-   <div id="after/3"> </div>
 
 .. index:: after/3
 .. _monitoring/0::after/3:

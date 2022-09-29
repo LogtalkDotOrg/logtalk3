@@ -36,10 +36,6 @@ Predicates for calling goal with a time limit.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="call_with_timeout/2"> </div>
-
 .. index:: call_with_timeout/2
 .. _timeout/0::call_with_timeout/2:
 
@@ -64,10 +60,6 @@ Calls a goal deterministically with the given time limit (expressed in seconds).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="call_with_timeout/3"> </div>
 
 .. index:: call_with_timeout/3
 .. _timeout/0::call_with_timeout/3:

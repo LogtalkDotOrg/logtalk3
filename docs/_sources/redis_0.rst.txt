@@ -39,10 +39,6 @@ Redis client. Inspired by Sean Charles GNU Prolog Redis client.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="connect/1"> </div>
-
 .. index:: connect/1
 .. _redis/0::connect/1:
 
@@ -61,10 +57,6 @@ Connect to a Redis server running on localhost using the default 6379 port.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="connect/3"> </div>
 
 .. index:: connect/3
 .. _redis/0::connect/3:
@@ -85,10 +77,6 @@ Connect to a Redis server running on the given host and port.
 
 ------------
 
-.. raw:: html
-
-   <div id="disconnect/1"> </div>
-
 .. index:: disconnect/1
 .. _redis/0::disconnect/1:
 
@@ -108,10 +96,6 @@ Disconnect from a Redis server.
 
 ------------
 
-.. raw:: html
-
-   <div id="send/3"> </div>
-
 .. index:: send/3
 .. _redis/0::send/3:
 
@@ -130,10 +114,6 @@ Sends a request to the a Redis server and returns its reply
 
 
 ------------
-
-.. raw:: html
-
-   <div id="console/1"> </div>
 
 .. index:: console/1
 .. _redis/0::console/1:

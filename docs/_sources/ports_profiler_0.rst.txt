@@ -38,10 +38,6 @@ Predicate execution box model port profiler.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="data/0"> </div>
-
 .. index:: data/0
 .. _ports_profiler/0::data/0:
 
@@ -58,10 +54,6 @@ Prints a table with all port profiling data.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="data/1"> </div>
 
 .. index:: data/1
 .. _ports_profiler/0::data/1:
@@ -81,10 +73,6 @@ Prints a table with all port profiling data for the specified entity.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="data/2"> </div>
 
 .. index:: data/2
 .. _ports_profiler/0::data/2:
@@ -106,10 +94,6 @@ Prints a table with all port profiling data for the specified entity predicate (
 
 ------------
 
-.. raw:: html
-
-   <div id="reset/0"> </div>
-
 .. index:: reset/0
 .. _ports_profiler/0::reset/0:
 
@@ -126,10 +110,6 @@ Resets all port profiling data.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="reset/1"> </div>
 
 .. index:: reset/1
 .. _ports_profiler/0::reset/1:
@@ -150,10 +130,6 @@ Resets all port profiling data for the specified entity.
 
 ------------
 
-.. raw:: html
-
-   <div id="port/5"> </div>
-
 .. index:: port/5
 .. _ports_profiler/0::port/5:
 
@@ -173,10 +149,6 @@ Enumerates, by backtracking, all collected port profiling data.
 
 ------------
 
-.. raw:: html
-
-   <div id="clause_location/6"> </div>
-
 .. index:: clause_location/6
 .. _ports_profiler/0::clause_location/6:
 
@@ -195,10 +167,6 @@ Enumerates, by backtracking, all collected profiled clause location data.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="clause/5"> </div>
 
 .. index:: clause/5
 .. _ports_profiler/0::clause/5:
@@ -227,10 +195,6 @@ Protected predicates
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="clause_location_/6"> </div>
-
 .. index:: clause_location_/6
 .. _ports_profiler/0::clause_location_/6:
 
@@ -249,10 +213,6 @@ Internal table of collected profiled clause location data.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="port_/5"> </div>
 
 .. index:: port_/5
 .. _ports_profiler/0::port_/5:
@@ -273,10 +233,6 @@ Internal table of collected port profiling data.
 
 ------------
 
-.. raw:: html
-
-   <div id="clause_/5"> </div>
-
 .. index:: clause_/5
 .. _ports_profiler/0::clause_/5:
 
@@ -295,10 +251,6 @@ Internal table of collected clause profiling data.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="entity_defines_/2"> </div>
 
 .. index:: entity_defines_/2
 .. _ports_profiler/0::entity_defines_/2:

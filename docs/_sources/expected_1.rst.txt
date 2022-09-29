@@ -35,10 +35,6 @@ Expected term predicates. Requires passing an expected term (constructed using t
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="is_expected/0"> </div>
-
 .. index:: is_expected/0
 .. _expected/1::is_expected/0:
 
@@ -56,10 +52,6 @@ True if the expected term holds a value. See also the ``if_expected/1`` predicat
 
 ------------
 
-.. raw:: html
-
-   <div id="is_unexpected/0"> </div>
-
 .. index:: is_unexpected/0
 .. _expected/1::is_unexpected/0:
 
@@ -76,10 +68,6 @@ True if the expected term holds an error. See also the ``if_unexpected/1`` predi
 
 
 ------------
-
-.. raw:: html
-
-   <div id="if_expected/1"> </div>
 
 .. index:: if_expected/1
 .. _expected/1::if_expected/1:
@@ -102,10 +90,6 @@ Applies a closure when the expected term holds a value using the value as argume
 
 ------------
 
-.. raw:: html
-
-   <div id="if_unexpected/1"> </div>
-
 .. index:: if_unexpected/1
 .. _expected/1::if_unexpected/1:
 
@@ -127,10 +111,6 @@ Applies a closure when the expected term holds an error using the error as argum
 
 ------------
 
-.. raw:: html
-
-   <div id="if_expected_or_else/2"> </div>
-
 .. index:: if_expected_or_else/2
 .. _expected/1::if_expected_or_else/2:
 
@@ -151,10 +131,6 @@ Applies either ``ExpectedClosure`` or ``UnexpectedClosure`` depending on the exp
 
 
 ------------
-
-.. raw:: html
-
-   <div id="unexpected/1"> </div>
 
 .. index:: unexpected/1
 .. _expected/1::unexpected/1:
@@ -179,10 +155,6 @@ Returns the error hold by the expected term. Throws an error otherwise.
 
 ------------
 
-.. raw:: html
-
-   <div id="expected/1"> </div>
-
 .. index:: expected/1
 .. _expected/1::expected/1:
 
@@ -206,10 +178,6 @@ Returns the value hold by the expected term. Throws an error otherwise.
 
 ------------
 
-.. raw:: html
-
-   <div id="map/2"> </div>
-
 .. index:: map/2
 .. _expected/1::map/2:
 
@@ -230,10 +198,6 @@ When the expected term does not hold an error and mapping a closure with the exp
 
 
 ------------
-
-.. raw:: html
-
-   <div id="flat_map/2"> </div>
 
 .. index:: flat_map/2
 .. _expected/1::flat_map/2:
@@ -256,10 +220,6 @@ When the expected term does not hold an error and mapping a closure with the exp
 
 ------------
 
-.. raw:: html
-
-   <div id="either/3"> </div>
-
 .. index:: either/3
 .. _expected/1::either/3:
 
@@ -281,10 +241,6 @@ Applies either ``ExpectedClosure`` if the expected term holds a value or ``Unexp
 
 ------------
 
-.. raw:: html
-
-   <div id="or_else/2"> </div>
-
 .. index:: or_else/2
 .. _expected/1::or_else/2:
 
@@ -303,10 +259,6 @@ Returns the value hold by the expected term if it does not hold an error or the 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="or_else_get/2"> </div>
 
 .. index:: or_else_get/2
 .. _expected/1::or_else_get/2:
@@ -333,10 +285,6 @@ Returns the value hold by the expected term if it does not hold an error. Otherw
 
 ------------
 
-.. raw:: html
-
-   <div id="or_else_call/2"> </div>
-
 .. index:: or_else_call/2
 .. _expected/1::or_else_call/2:
 
@@ -358,10 +306,6 @@ Returns the value hold by the expected term if it does not hold an error. Calls 
 
 ------------
 
-.. raw:: html
-
-   <div id="or_else_throw/1"> </div>
-
 .. index:: or_else_throw/1
 .. _expected/1::or_else_throw/1:
 
@@ -380,10 +324,6 @@ Returns the value hold by the expected term if present. Throws the error hold by
 
 
 ------------
-
-.. raw:: html
-
-   <div id="or_else_fail/1"> </div>
 
 .. index:: or_else_fail/1
 .. _expected/1::or_else_fail/1:

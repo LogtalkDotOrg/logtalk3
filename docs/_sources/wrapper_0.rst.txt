@@ -46,10 +46,6 @@ Adviser tool for porting and wrapping plain Prolog applications.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="rdirectory/2"> </div>
-
 .. index:: rdirectory/2
 .. _wrapper/0::rdirectory/2:
 
@@ -68,10 +64,6 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
 
 .. index:: rdirectory/1
 .. _wrapper/0::rdirectory/1:
@@ -92,10 +84,6 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 ------------
 
-.. raw:: html
-
-   <div id="directory/2"> </div>
-
 .. index:: directory/2
 .. _wrapper/0::directory/2:
 
@@ -114,10 +102,6 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="directory/1"> </div>
 
 .. index:: directory/1
 .. _wrapper/0::directory/1:
@@ -138,10 +122,6 @@ Advises the user on missing directives for converting all plain Prolog files in 
 
 ------------
 
-.. raw:: html
-
-   <div id="directories/2"> </div>
-
 .. index:: directories/2
 .. _wrapper/0::directories/2:
 
@@ -160,10 +140,6 @@ Advises the user on missing directives for converting all Prolog files in a set 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="directories/1"> </div>
 
 .. index:: directories/1
 .. _wrapper/0::directories/1:
@@ -184,10 +160,6 @@ Advises the user on missing directives for converting all Prolog files in a set 
 
 ------------
 
-.. raw:: html
-
-   <div id="files/2"> </div>
-
 .. index:: files/2
 .. _wrapper/0::files/2:
 
@@ -206,10 +178,6 @@ Advises the user on missing directives for converting a list of plain Prolog fil
 
 
 ------------
-
-.. raw:: html
-
-   <div id="files/1"> </div>
 
 .. index:: files/1
 .. _wrapper/0::files/1:
@@ -230,10 +198,6 @@ Advises the user on missing directives for converting a list of plain Prolog fil
 
 ------------
 
-.. raw:: html
-
-   <div id="file/2"> </div>
-
 .. index:: file/2
 .. _wrapper/0::file/2:
 
@@ -252,10 +216,6 @@ Advises the user on missing directives for converting a plain Prolog file to Log
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file/1"> </div>
 
 .. index:: file/1
 .. _wrapper/0::file/1:
@@ -276,10 +236,6 @@ Advises the user on missing directives for converting a plain Prolog file to Log
 
 ------------
 
-.. raw:: html
-
-   <div id="save/1"> </div>
-
 .. index:: save/1
 .. _wrapper/0::save/1:
 
@@ -299,10 +255,6 @@ Saves the generated wrapper objects (plus a loader file per directory) for all a
 
 ------------
 
-.. raw:: html
-
-   <div id="save/0"> </div>
-
 .. index:: save/0
 .. _wrapper/0::save/0:
 
@@ -319,10 +271,6 @@ Saves the generated wrapper objects (plus a loader file per directory) for all a
 
 
 ------------
-
-.. raw:: html
-
-   <div id="default_option/1"> </div>
 
 .. index:: default_option/1
 .. _wrapper/0::default_option/1:
@@ -342,10 +290,6 @@ Enumerates by backtracking the default options used when generating the wrapper 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="default_options/1"> </div>
 
 .. index:: default_options/1
 .. _wrapper/0::default_options/1:
@@ -374,10 +318,6 @@ Protected predicates
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="merge_options/2"> </div>
-
 .. index:: merge_options/2
 .. _wrapper/0::merge_options/2:
 
@@ -396,10 +336,6 @@ Merges the user options with the default options, returning the list of options 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="predicate_called_but_not_defined_/2"> </div>
 
 .. index:: predicate_called_but_not_defined_/2
 .. _wrapper/0::predicate_called_but_not_defined_/2:
@@ -420,10 +356,6 @@ Table of called object predicates that are not locally defined.
 
 ------------
 
-.. raw:: html
-
-   <div id="object_predicate_called_/3"> </div>
-
 .. index:: object_predicate_called_/3
 .. _wrapper/0::object_predicate_called_/3:
 
@@ -442,10 +374,6 @@ Table of called object predicates.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="module_predicate_called_/3"> </div>
 
 .. index:: module_predicate_called_/3
 .. _wrapper/0::module_predicate_called_/3:
@@ -466,10 +394,6 @@ Table of called module predicates.
 
 ------------
 
-.. raw:: html
-
-   <div id="unknown_predicate_called_/2"> </div>
-
 .. index:: unknown_predicate_called_/2
 .. _wrapper/0::unknown_predicate_called_/2:
 
@@ -488,10 +412,6 @@ Table of predicates called but not defined.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="missing_predicate_directive_/3"> </div>
 
 .. index:: missing_predicate_directive_/3
 .. _wrapper/0::missing_predicate_directive_/3:
@@ -512,10 +432,6 @@ Table of missing predicate directives.
 
 ------------
 
-.. raw:: html
-
-   <div id="non_standard_predicate_call_/2"> </div>
-
 .. index:: non_standard_predicate_call_/2
 .. _wrapper/0::non_standard_predicate_call_/2:
 
@@ -534,10 +450,6 @@ Table of called non-standard predicates.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="dynamic_directive_/3"> </div>
 
 .. index:: dynamic_directive_/3
 .. _wrapper/0::dynamic_directive_/3:
@@ -558,10 +470,6 @@ Table of declared dynamic predicates.
 
 ------------
 
-.. raw:: html
-
-   <div id="multifile_directive_/3"> </div>
-
 .. index:: multifile_directive_/3
 .. _wrapper/0::multifile_directive_/3:
 
@@ -580,10 +488,6 @@ Table of declared multifile predicates.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="add_directive_before_entity_/2"> </div>
 
 .. index:: add_directive_before_entity_/2
 .. _wrapper/0::add_directive_before_entity_/2:
@@ -604,10 +508,6 @@ Table of directives to be added before the entity opening directive.
 
 ------------
 
-.. raw:: html
-
-   <div id="add_directive_/2"> </div>
-
 .. index:: add_directive_/2
 .. _wrapper/0::add_directive_/2:
 
@@ -626,10 +526,6 @@ Table of directives to be added.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="add_directive_/3"> </div>
 
 .. index:: add_directive_/3
 .. _wrapper/0::add_directive_/3:
@@ -650,10 +546,6 @@ Table of directives to be added to complement existing directives.
 
 ------------
 
-.. raw:: html
-
-   <div id="remove_directive_/2"> </div>
-
 .. index:: remove_directive_/2
 .. _wrapper/0::remove_directive_/2:
 
@@ -672,10 +564,6 @@ Table of directives to be removed.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file_being_advised_/4"> </div>
 
 .. index:: file_being_advised_/4
 .. _wrapper/0::file_being_advised_/4:

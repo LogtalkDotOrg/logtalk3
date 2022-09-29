@@ -35,10 +35,6 @@ Character protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="is_ascii/1"> </div>
-
 .. index:: is_ascii/1
 .. _characterp/0::is_ascii/1:
 
@@ -57,10 +53,6 @@ True if the argument is an ASCII character.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_alphanumeric/1"> </div>
 
 .. index:: is_alphanumeric/1
 .. _characterp/0::is_alphanumeric/1:
@@ -81,10 +73,6 @@ True if the argument is an alphanumeric character.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_alpha/1"> </div>
-
 .. index:: is_alpha/1
 .. _characterp/0::is_alpha/1:
 
@@ -103,10 +91,6 @@ True if the argument is a letter or an underscore.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_letter/1"> </div>
 
 .. index:: is_letter/1
 .. _characterp/0::is_letter/1:
@@ -127,10 +111,6 @@ True if the argument is a letter.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_bin_digit/1"> </div>
-
 .. index:: is_bin_digit/1
 .. _characterp/0::is_bin_digit/1:
 
@@ -149,10 +129,6 @@ True if the argument is a binary digit.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_octal_digit/1"> </div>
 
 .. index:: is_octal_digit/1
 .. _characterp/0::is_octal_digit/1:
@@ -173,10 +149,6 @@ True if the argument is an octal digit.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_dec_digit/1"> </div>
-
 .. index:: is_dec_digit/1
 .. _characterp/0::is_dec_digit/1:
 
@@ -195,10 +167,6 @@ True if the argument is a decimal digit.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_hex_digit/1"> </div>
 
 .. index:: is_hex_digit/1
 .. _characterp/0::is_hex_digit/1:
@@ -219,10 +187,6 @@ True if the argument is an hexadecimal digit.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_lower_case/1"> </div>
-
 .. index:: is_lower_case/1
 .. _characterp/0::is_lower_case/1:
 
@@ -241,10 +205,6 @@ True if the argument is a lower case letter.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_upper_case/1"> </div>
 
 .. index:: is_upper_case/1
 .. _characterp/0::is_upper_case/1:
@@ -265,10 +225,6 @@ True if the argument is a upper case letter.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_vowel/1"> </div>
-
 .. index:: is_vowel/1
 .. _characterp/0::is_vowel/1:
 
@@ -287,10 +243,6 @@ True if the argument is a vowel.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_white_space/1"> </div>
 
 .. index:: is_white_space/1
 .. _characterp/0::is_white_space/1:
@@ -311,10 +263,6 @@ True if the argument is a white space character (a space or a tab) inside a line
 
 ------------
 
-.. raw:: html
-
-   <div id="is_layout/1"> </div>
-
 .. index:: is_layout/1
 .. _characterp/0::is_layout/1:
 
@@ -333,10 +281,6 @@ True if the argument is a layout character.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_quote/1"> </div>
 
 .. index:: is_quote/1
 .. _characterp/0::is_quote/1:
@@ -357,10 +301,6 @@ True if the argument is a quote character.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_punctuation/1"> </div>
-
 .. index:: is_punctuation/1
 .. _characterp/0::is_punctuation/1:
 
@@ -379,10 +319,6 @@ True if the argument is a sentence punctuation character.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_period/1"> </div>
 
 .. index:: is_period/1
 .. _characterp/0::is_period/1:
@@ -403,10 +339,6 @@ True if the argument is a character that ends a sentence.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_control/1"> </div>
-
 .. index:: is_control/1
 .. _characterp/0::is_control/1:
 
@@ -425,10 +357,6 @@ True if the argument is an ASCII control character.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_newline/1"> </div>
 
 .. index:: is_newline/1
 .. _characterp/0::is_newline/1:
@@ -449,10 +377,6 @@ True if the argument is the ASCII newline character.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_end_of_line/1"> </div>
-
 .. index:: is_end_of_line/1
 .. _characterp/0::is_end_of_line/1:
 
@@ -471,10 +395,6 @@ True if the argument is the ASCII end-of-line character (either a carriage retur
 
 
 ------------
-
-.. raw:: html
-
-   <div id="parenthesis/2"> </div>
 
 .. index:: parenthesis/2
 .. _characterp/0::parenthesis/2:
@@ -496,10 +416,6 @@ Recognizes and converts between open and close parenthesis.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="lower_upper/2"> </div>
 
 .. index:: lower_upper/2
 .. _characterp/0::lower_upper/2:

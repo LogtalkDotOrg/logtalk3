@@ -25,6 +25,11 @@ RELEASE NOTES
 3.59.0 - October ??, 2022
 =========================
 
+Tools
+-----
+
+* IMPROVED: Simplify the `lgtdoc` tool generated reStructuredText files.
+
 Installers and installation scripts
 -----------------------------------
 

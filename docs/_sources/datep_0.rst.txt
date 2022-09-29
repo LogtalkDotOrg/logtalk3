@@ -35,10 +35,6 @@ Date protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="today/3"> </div>
-
 .. index:: today/3
 .. _datep/0::today/3:
 
@@ -57,10 +53,6 @@ Returns current date.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leap_year/1"> </div>
 
 .. index:: leap_year/1
 .. _datep/0::leap_year/1:
@@ -81,10 +73,6 @@ True if the argument is a leap year.
 
 ------------
 
-.. raw:: html
-
-   <div id="name_of_day/3"> </div>
-
 .. index:: name_of_day/3
 .. _datep/0::name_of_day/3:
 
@@ -103,10 +91,6 @@ Name and short name of day.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="name_of_month/3"> </div>
 
 .. index:: name_of_month/3
 .. _datep/0::name_of_month/3:
@@ -127,10 +111,6 @@ Name and short name of month.
 
 ------------
 
-.. raw:: html
-
-   <div id="days_in_month/3"> </div>
-
 .. index:: days_in_month/3
 .. _datep/0::days_in_month/3:
 
@@ -149,10 +129,6 @@ Number of days in a month.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="valid/3"> </div>
 
 .. index:: valid/3
 .. _datep/0::valid/3:

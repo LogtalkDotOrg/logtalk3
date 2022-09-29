@@ -35,10 +35,6 @@ Common hierarchy protocol for prototype and class hierarchies.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="ancestor/1"> </div>
-
 .. index:: ancestor/1
 .. _hierarchyp/0::ancestor/1:
 
@@ -57,10 +53,6 @@ Returns, by backtracking, all object ancestors.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ancestors/1"> </div>
 
 .. index:: ancestors/1
 .. _hierarchyp/0::ancestors/1:
@@ -81,10 +73,6 @@ List of all object ancestors.
 
 ------------
 
-.. raw:: html
-
-   <div id="leaf/1"> </div>
-
 .. index:: leaf/1
 .. _hierarchyp/0::leaf/1:
 
@@ -103,10 +91,6 @@ Returns, by backtracking, all object leaves.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leaves/1"> </div>
 
 .. index:: leaves/1
 .. _hierarchyp/0::leaves/1:
@@ -127,10 +111,6 @@ List of all object leaves.
 
 ------------
 
-.. raw:: html
-
-   <div id="descendant/1"> </div>
-
 .. index:: descendant/1
 .. _hierarchyp/0::descendant/1:
 
@@ -149,10 +129,6 @@ Returns, by backtracking, all object descendants.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="descendants/1"> </div>
 
 .. index:: descendants/1
 .. _hierarchyp/0::descendants/1:

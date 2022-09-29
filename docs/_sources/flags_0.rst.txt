@@ -35,10 +35,6 @@ Implementation of persistent object flags.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="get_flag_value/2"> </div>
-
 .. index:: get_flag_value/2
 .. _flags/0::get_flag_value/2:
 
@@ -57,10 +53,6 @@ Gets or tests the value of a flag.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_flag_value/2"> </div>
 
 .. index:: set_flag_value/2
 .. _flags/0::set_flag_value/2:
@@ -81,10 +73,6 @@ Sets the value of a flag.
 
 ------------
 
-.. raw:: html
-
-   <div id="set_flag_value/3"> </div>
-
 .. index:: set_flag_value/3
 .. _flags/0::set_flag_value/3:
 
@@ -104,10 +92,6 @@ Sets the value of a flag, returning the old value.
 
 ------------
 
-.. raw:: html
-
-   <div id="reset_flags/0"> </div>
-
 .. index:: reset_flags/0
 .. _flags/0::reset_flags/0:
 
@@ -124,10 +108,6 @@ Resets all flags to their default values.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="reset_flags/1"> </div>
 
 .. index:: reset_flags/1
 .. _flags/0::reset_flags/1:
@@ -148,10 +128,6 @@ Resets all flags in a group to their default values.
 
 ------------
 
-.. raw:: html
-
-   <div id="flag_groups/1"> </div>
-
 .. index:: flag_groups/1
 .. _flags/0::flag_groups/1:
 
@@ -170,10 +146,6 @@ Returns a list of all flag groups.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="flag_group_chk/1"> </div>
 
 .. index:: flag_group_chk/1
 .. _flags/0::flag_group_chk/1:
@@ -194,10 +166,6 @@ Checks if a given atom is a flag group.
 
 ------------
 
-.. raw:: html
-
-   <div id="print_flags/0"> </div>
-
 .. index:: print_flags/0
 .. _flags/0::print_flags/0:
 
@@ -214,10 +182,6 @@ Prints a listing of all flags.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="print_flags/1"> </div>
 
 .. index:: print_flags/1
 .. _flags/0::print_flags/1:
@@ -238,10 +202,6 @@ Prints a listing of all flags in a group.
 
 ------------
 
-.. raw:: html
-
-   <div id="defined_flag/6"> </div>
-
 .. index:: defined_flag/6
 .. _flags/0::defined_flag/6:
 
@@ -260,10 +220,6 @@ Gets or test the existing (visible) flag definitions.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="built_in_flag/2"> </div>
 
 .. index:: built_in_flag/2
 .. _flags/0::built_in_flag/2:
@@ -287,10 +243,6 @@ True if the argument is a built-in flag type with the specified default value.
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="unsafe_set_flag_value/2"> </div>
-
 .. index:: unsafe_set_flag_value/2
 .. _flags/0::unsafe_set_flag_value/2:
 
@@ -310,10 +262,6 @@ Sets the value of a flag without performing any validation checks.
 
 ------------
 
-.. raw:: html
-
-   <div id="define_flag/1"> </div>
-
 .. index:: define_flag/1
 .. _flags/0::define_flag/1:
 
@@ -332,10 +280,6 @@ Defines a new flag using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="define_flag/2"> </div>
 
 .. index:: define_flag/2
 .. _flags/0::define_flag/2:
@@ -359,10 +303,6 @@ Defines a new flag using a given set of options (for example, [group(general), t
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="defined_flag_/6"> </div>
-
 .. index:: defined_flag_/6
 .. _flags/0::defined_flag_/6:
 
@@ -381,10 +321,6 @@ Gets or test the existing flag definitions.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="flag_value_/2"> </div>
 
 .. index:: flag_value_/2
 .. _flags/0::flag_value_/2:
@@ -405,10 +341,6 @@ Table of flag values.
 
 ------------
 
-.. raw:: html
-
-   <div id="validate/3"> </div>
-
 .. index:: validate/3
 .. _flags/0::validate/3:
 
@@ -421,10 +353,6 @@ Table of flag values.
 
 ------------
 
-.. raw:: html
-
-   <div id="validate_type/1"> </div>
-
 .. index:: validate_type/1
 .. _flags/0::validate_type/1:
 
@@ -436,10 +364,6 @@ Table of flag values.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="is_validator/1"> </div>
 
 .. index:: is_validator/1
 .. _flags/0::is_validator/1:

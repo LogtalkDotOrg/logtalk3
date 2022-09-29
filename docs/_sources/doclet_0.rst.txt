@@ -37,10 +37,6 @@ Utility object to help automate (re)generating documentation for a project.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="update/0"> </div>
-
 .. index:: update/0
 .. _doclet/0::update/0:
 
@@ -57,10 +53,6 @@ Updates the project documentation, first by calling a sequence of goals and seco
 
 
 ------------
-
-.. raw:: html
-
-   <div id="doc_goal/1"> </div>
 
 .. index:: doc_goal/1
 .. _doclet/0::doc_goal/1:
@@ -80,10 +72,6 @@ Table of goals, typically using the ``diagrams`` and the ``lgtdoc`` tools, used 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="shell_command/1"> </div>
 
 .. index:: shell_command/1
 .. _doclet/0::shell_command/1:

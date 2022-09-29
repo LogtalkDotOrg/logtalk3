@@ -49,10 +49,6 @@ Protected predicates
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="debugging_/0"> </div>
-
 .. index:: debugging_/0
 .. _debugger/0::debugging_/0:
 
@@ -69,10 +65,6 @@ True iff debug is on.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="tracing_/0"> </div>
 
 .. index:: tracing_/0
 .. _debugger/0::tracing_/0:
@@ -91,10 +83,6 @@ True iff tracing is on.
 
 ------------
 
-.. raw:: html
-
-   <div id="skipping_/0"> </div>
-
 .. index:: skipping_/0
 .. _debugger/0::skipping_/0:
 
@@ -112,10 +100,6 @@ True iff skipping.
 
 ------------
 
-.. raw:: html
-
-   <div id="quasi_skipping_/0"> </div>
-
 .. index:: quasi_skipping_/0
 .. _debugger/0::quasi_skipping_/0:
 
@@ -132,10 +116,6 @@ True iff quasi-skipping.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leaping_/1"> </div>
 
 .. index:: leaping_/1
 .. _debugger/0::leaping_/1:
@@ -155,10 +135,6 @@ True iff leaping in tracing or debugging mode.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="spying_line_number_/2"> </div>
 
 .. index:: spying_line_number_/2
 .. _debugger/0::spying_line_number_/2:
@@ -180,10 +156,6 @@ Table of line number breakpoints.
 
 ------------
 
-.. raw:: html
-
-   <div id="spying_predicate_/3"> </div>
-
 .. index:: spying_predicate_/3
 .. _debugger/0::spying_predicate_/3:
 
@@ -204,10 +176,6 @@ Table of predicate spy points.
 
 ------------
 
-.. raw:: html
-
-   <div id="spying_context_/4"> </div>
-
 .. index:: spying_context_/4
 .. _debugger/0::spying_context_/4:
 
@@ -226,10 +194,6 @@ Table of context spy points.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leashing_/1"> </div>
 
 .. index:: leashing_/1
 .. _debugger/0::leashing_/1:
@@ -250,10 +214,6 @@ Table of currently leashed ports.
 
 ------------
 
-.. raw:: html
-
-   <div id="invocation_number_/1"> </div>
-
 .. index:: invocation_number_/1
 .. _debugger/0::invocation_number_/1:
 
@@ -272,10 +232,6 @@ Current call stack invocation number.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="jump_to_invocation_number_/1"> </div>
 
 .. index:: jump_to_invocation_number_/1
 .. _debugger/0::jump_to_invocation_number_/1:
@@ -296,10 +252,6 @@ Invocation number to jump to.
 
 ------------
 
-.. raw:: html
-
-   <div id="zap_to_port_/1"> </div>
-
 .. index:: zap_to_port_/1
 .. _debugger/0::zap_to_port_/1:
 
@@ -318,10 +270,6 @@ Port to zap to.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="write_max_depth_/1"> </div>
 
 .. index:: write_max_depth_/1
 .. _debugger/0::write_max_depth_/1:

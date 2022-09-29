@@ -37,10 +37,6 @@ Fast portable random number generator predicates. Core predicates originally wri
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="reset_seed/0"> </div>
-
 .. index:: reset_seed/0
 .. _fast_random/0::reset_seed/0:
 
@@ -57,10 +53,6 @@ Resets the random generator seed to its default value. Use ``get_seed/1`` and ``
 
 
 ------------
-
-.. raw:: html
-
-   <div id="randomize/1"> </div>
 
 .. index:: randomize/1
 .. _fast_random/0::randomize/1:
@@ -88,10 +80,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="seed_/3"> </div>
 
 .. index:: seed_/3
 .. _fast_random/0::seed_/3:

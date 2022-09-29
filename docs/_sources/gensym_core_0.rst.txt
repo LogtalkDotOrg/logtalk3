@@ -35,10 +35,6 @@ Predicates for generating unique atoms. Protocol based on the ``gensym`` module 
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="reset_gensym/0"> </div>
-
 .. index:: reset_gensym/0
 .. _gensym_core/0::reset_gensym/0:
 
@@ -55,10 +51,6 @@ Resets the generator counter for all bases.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="reset_gensym/1"> </div>
 
 .. index:: reset_gensym/1
 .. _gensym_core/0::reset_gensym/1:
@@ -78,10 +70,6 @@ Resets the generator counter for a given base.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="gensym/2"> </div>
 
 .. index:: gensym/2
 .. _gensym_core/0::gensym/2:
@@ -109,10 +97,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="base_/2"> </div>
 
 .. index:: base_/2
 .. _gensym_core/0::base_/2:

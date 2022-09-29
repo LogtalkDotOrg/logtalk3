@@ -41,10 +41,6 @@ ISO 8601 (and European civil calendar) compliant library of date predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="date/4"> </div>
-
 .. index:: date/4
 .. _iso8601/0::date/4:
 
@@ -94,10 +90,6 @@ Get the system date and/or its Julian Day # or convert a Julian Day # to/from gi
 
 ------------
 
-.. raw:: html
-
-   <div id="date/5"> </div>
-
 .. index:: date/5
 .. _iso8601/0::date/5:
 
@@ -135,10 +127,6 @@ Ditto ``date/4`` + get/check its day-of-week #.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="date/6"> </div>
 
 .. index:: date/6
 .. _iso8601/0::date/6:
@@ -203,10 +191,6 @@ Ditto ``date/5`` + get/check its week #.
 
 ------------
 
-.. raw:: html
-
-   <div id="date/7"> </div>
-
 .. index:: date/7
 .. _iso8601/0::date/7:
 
@@ -258,10 +242,6 @@ Ditto ``date/6`` + get/check its day-of-year #.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="date_string/3"> </div>
 
 .. index:: date_string/3
 .. _iso8601/0::date_string/3:
@@ -366,10 +346,6 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 
 ------------
 
-.. raw:: html
-
-   <div id="valid_date/3"> </div>
-
 .. index:: valid_date/3
 .. _iso8601/0::valid_date/3:
 
@@ -402,10 +378,6 @@ Validate a given date in the Gregorian calendar.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leap_year/1"> </div>
 
 .. index:: leap_year/1
 .. _iso8601/0::leap_year/1:
@@ -456,10 +428,6 @@ Succeed if given year is a leap year in the Gregorian calendar.
 
 ------------
 
-.. raw:: html
-
-   <div id="calendar_month/3"> </div>
-
 .. index:: calendar_month/3
 .. _iso8601/0::calendar_month/3:
 
@@ -486,10 +454,6 @@ Compute a calendar month.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="easter_day/3"> </div>
 
 .. index:: easter_day/3
 .. _iso8601/0::easter_day/3:

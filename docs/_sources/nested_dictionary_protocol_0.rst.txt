@@ -35,10 +35,6 @@ Nested dictionary protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="new/1"> </div>
-
 .. index:: new/1
 .. _nested_dictionary_protocol/0::new/1:
 
@@ -57,10 +53,6 @@ Create an empty (nested) dictionary.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="empty/1"> </div>
 
 .. index:: empty/1
 .. _nested_dictionary_protocol/0::empty/1:
@@ -81,10 +73,6 @@ True iff the dictionary is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="as_nested_dictionary/2"> </div>
-
 .. index:: as_nested_dictionary/2
 .. _nested_dictionary_protocol/0::as_nested_dictionary/2:
 
@@ -103,10 +91,6 @@ Creates a (nested) dictionary term from a curly-brackted term representation.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="as_curly_bracketed/2"> </div>
 
 .. index:: as_curly_bracketed/2
 .. _nested_dictionary_protocol/0::as_curly_bracketed/2:
@@ -127,10 +111,6 @@ Creates a a curly-brackted term representation from a (nested) dictionary.
 
 ------------
 
-.. raw:: html
-
-   <div id="lookup_in/3"> </div>
-
 .. index:: lookup_in/3
 .. _nested_dictionary_protocol/0::lookup_in/3:
 
@@ -149,10 +129,6 @@ Lookup a chain of keys in a nested dictionary. Unifies ``Value`` with ``Dictiona
 
 
 ------------
-
-.. raw:: html
-
-   <div id="update_in/4"> </div>
 
 .. index:: update_in/4
 .. _nested_dictionary_protocol/0::update_in/4:
@@ -173,10 +149,6 @@ Updates the value found by traversing through the nested keys.
 
 ------------
 
-.. raw:: html
-
-   <div id="update_in/5"> </div>
-
 .. index:: update_in/5
 .. _nested_dictionary_protocol/0::update_in/5:
 
@@ -196,10 +168,6 @@ Updates the value found by traversing through the nested keys, only succeeding i
 
 ------------
 
-.. raw:: html
-
-   <div id="insert_in/4"> </div>
-
 .. index:: insert_in/4
 .. _nested_dictionary_protocol/0::insert_in/4:
 
@@ -218,10 +186,6 @@ Inserts a key-value pair into a dictionary by traversing through the nested keys
 
 
 ------------
-
-.. raw:: html
-
-   <div id="delete_in/4"> </div>
 
 .. index:: delete_in/4
 .. _nested_dictionary_protocol/0::delete_in/4:

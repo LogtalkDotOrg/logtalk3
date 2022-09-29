@@ -34,10 +34,6 @@ Simple solution for redirecting a debugger trace to a file.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="start_redirect_to_file/2"> </div>
-
 .. index:: start_redirect_to_file/2
 .. _dump_trace/0::start_redirect_to_file/2:
 
@@ -58,10 +54,6 @@ Starts redirecting debugger trace messages to a file.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="stop_redirect_to_file/0"> </div>
 
 .. index:: stop_redirect_to_file/0
 .. _dump_trace/0::stop_redirect_to_file/0:

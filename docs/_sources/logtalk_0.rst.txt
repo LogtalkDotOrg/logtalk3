@@ -48,10 +48,6 @@ Built-in object providing message printing, debugging, library, source file, and
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="print_message/3"> </div>
-
 .. index:: print_message/3
 .. _logtalk/0::print_message/3:
 
@@ -70,10 +66,6 @@ Prints a message of the given kind for the specified component.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="print_message_tokens/3"> </div>
 
 .. index:: print_message_tokens/3
 .. _logtalk/0::print_message_tokens/3:
@@ -94,10 +86,6 @@ Print the messages tokens to the given stream, prefixing each line with the spec
 
 ------------
 
-.. raw:: html
-
-   <div id="print_message_token/4"> </div>
-
 .. index:: print_message_token/4
 .. _logtalk/0::print_message_token/4:
 
@@ -116,10 +104,6 @@ User-defined hook predicate for printing a message token (``at_same_line``, ``nl
 
 
 ------------
-
-.. raw:: html
-
-   <div id="message_tokens//2"> </div>
 
 .. index:: message_tokens//2
 .. _logtalk/0::message_tokens//2:
@@ -140,10 +124,6 @@ User-defined hook grammar rule for converting a message into a list of tokens (`
 
 ------------
 
-.. raw:: html
-
-   <div id="message_prefix_stream/4"> </div>
-
 .. index:: message_prefix_stream/4
 .. _logtalk/0::message_prefix_stream/4:
 
@@ -163,10 +143,6 @@ Message line prefix and output stream to be used when printing a message given i
 
 ------------
 
-.. raw:: html
-
-   <div id="message_hook/4"> </div>
-
 .. index:: message_hook/4
 .. _logtalk/0::message_hook/4:
 
@@ -185,10 +161,6 @@ User-defined hook predicate for intercepting message printing calls.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ask_question/5"> </div>
 
 .. index:: ask_question/5
 .. _logtalk/0::ask_question/5:
@@ -211,10 +183,6 @@ Asks a question and reads the answer until the check predicate is true.
 
 ------------
 
-.. raw:: html
-
-   <div id="question_hook/6"> </div>
-
 .. index:: question_hook/6
 .. _logtalk/0::question_hook/6:
 
@@ -236,10 +204,6 @@ User-defined hook predicate for intercepting question asking calls.
 
 ------------
 
-.. raw:: html
-
-   <div id="question_prompt_stream/4"> </div>
-
 .. index:: question_prompt_stream/4
 .. _logtalk/0::question_prompt_stream/4:
 
@@ -258,10 +222,6 @@ Prompt and input stream to be used when asking a question given its kind and com
 
 
 ------------
-
-.. raw:: html
-
-   <div id="trace_event/2"> </div>
 
 .. index:: trace_event/2
 .. _logtalk/0::trace_event/2:
@@ -287,10 +247,6 @@ Trace event handler. The runtime calls all trace event handlers using a failure-
 
 ------------
 
-.. raw:: html
-
-   <div id="debug_handler_provider/1"> </div>
-
 .. index:: debug_handler_provider/1
 .. _logtalk/0::debug_handler_provider/1:
 
@@ -309,10 +265,6 @@ Declares an object as the debug handler provider. There should be at most one de
 
 
 ------------
-
-.. raw:: html
-
-   <div id="debug_handler/2"> </div>
 
 .. index:: debug_handler/2
 .. _logtalk/0::debug_handler/2:
@@ -338,10 +290,6 @@ Debug event handler. Called by the runtime. When the call succeeds, the runtime 
 
 ------------
 
-.. raw:: html
-
-   <div id="expand_library_path/2"> </div>
-
 .. index:: expand_library_path/2
 .. _logtalk/0::expand_library_path/2:
 
@@ -362,10 +310,6 @@ Expands a library alias or a library path into its absolute path. Uses a depth b
 
 ------------
 
-.. raw:: html
-
-   <div id="loaded_file/1"> </div>
-
 .. index:: loaded_file/1
 .. _logtalk/0::loaded_file/1:
 
@@ -384,10 +328,6 @@ Enumerates, by backtracking, all loaded files, returning their full paths.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="loaded_file_property/2"> </div>
 
 .. index:: loaded_file_property/2
 .. _logtalk/0::loaded_file_property/2:
@@ -424,10 +364,6 @@ Enumerates, by backtracking, loaded file properties.
 
 ------------
 
-.. raw:: html
-
-   <div id="file_type_extension/2"> </div>
-
 .. index:: file_type_extension/2
 .. _logtalk/0::file_type_extension/2:
 
@@ -446,10 +382,6 @@ Enumerates, by backtracking, all defined file type extensions. The defined types
 
 
 ------------
-
-.. raw:: html
-
-   <div id="compile_aux_clauses/1"> </div>
 
 .. index:: compile_aux_clauses/1
 .. _logtalk/0::compile_aux_clauses/1:
@@ -470,10 +402,6 @@ Compiles a list of auxiliary clauses. Can only be called during source file comp
 
 ------------
 
-.. raw:: html
-
-   <div id="entity_prefix/2"> </div>
-
 .. index:: entity_prefix/2
 .. _logtalk/0::entity_prefix/2:
 
@@ -492,10 +420,6 @@ Converts between an entity identifier and the entity prefix that is used for its
 
 
 ------------
-
-.. raw:: html
-
-   <div id="compile_predicate_heads/4"> </div>
 
 .. index:: compile_predicate_heads/4
 .. _logtalk/0::compile_predicate_heads/4:
@@ -518,10 +442,6 @@ Compiles clause heads. The heads are compiled in the context of the entity under
 
 ------------
 
-.. raw:: html
-
-   <div id="compile_predicate_indicators/3"> </div>
-
 .. index:: compile_predicate_indicators/3
 .. _logtalk/0::compile_predicate_indicators/3:
 
@@ -542,10 +462,6 @@ Compiles predicate indicators. The predicate are compiled in the context of the 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="decompile_predicate_heads/4"> </div>
 
 .. index:: decompile_predicate_heads/4
 .. _logtalk/0::decompile_predicate_heads/4:
@@ -568,10 +484,6 @@ Decompiles clause heads. All compiled clause heads must belong to the same entit
 
 ------------
 
-.. raw:: html
-
-   <div id="decompile_predicate_indicators/4"> </div>
-
 .. index:: decompile_predicate_indicators/4
 .. _logtalk/0::decompile_predicate_indicators/4:
 
@@ -592,10 +504,6 @@ Decompiles predicate indicators. All compiled predicate indicators must belong t
 
 
 ------------
-
-.. raw:: html
-
-   <div id="execution_context/7"> </div>
 
 .. index:: execution_context/7
 .. _logtalk/0::execution_context/7:

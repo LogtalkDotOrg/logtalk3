@@ -35,10 +35,6 @@ Queue protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="empty/1"> </div>
-
 .. index:: empty/1
 .. _queuep/0::empty/1:
 
@@ -57,10 +53,6 @@ True if the queue is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="head/2"> </div>
 
 .. index:: head/2
 .. _queuep/0::head/2:
@@ -81,10 +73,6 @@ Unifies ``Head`` with the first element of the queue.
 
 ------------
 
-.. raw:: html
-
-   <div id="join/3"> </div>
-
 .. index:: join/3
 .. _queuep/0::join/3:
 
@@ -103,10 +91,6 @@ Adds the new element at the end of the queue.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="join_all/3"> </div>
 
 .. index:: join_all/3
 .. _queuep/0::join_all/3:
@@ -127,10 +111,6 @@ Adds the new elements at the end of the queue. The elements are added in the sam
 
 ------------
 
-.. raw:: html
-
-   <div id="jump/3"> </div>
-
 .. index:: jump/3
 .. _queuep/0::jump/3:
 
@@ -149,10 +129,6 @@ Adds the new element at the front of the queue.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="jump_all/3"> </div>
 
 .. index:: jump_all/3
 .. _queuep/0::jump_all/3:
@@ -173,10 +149,6 @@ Adds the new elements at the front of the queue. The last element in the list wi
 
 ------------
 
-.. raw:: html
-
-   <div id="jump_all_block/3"> </div>
-
 .. index:: jump_all_block/3
 .. _queuep/0::jump_all_block/3:
 
@@ -195,10 +167,6 @@ Adds the new elements as a block at the front of the queue. The first element in
 
 
 ------------
-
-.. raw:: html
-
-   <div id="append/3"> </div>
 
 .. index:: append/3
 .. _queuep/0::append/3:
@@ -219,10 +187,6 @@ Appends two queues. The new queue will have the elements of the first queue foll
 
 ------------
 
-.. raw:: html
-
-   <div id="length/2"> </div>
-
 .. index:: length/2
 .. _queuep/0::length/2:
 
@@ -241,10 +205,6 @@ Queue length.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="serve/3"> </div>
 
 .. index:: serve/3
 .. _queuep/0::serve/3:
@@ -265,10 +225,6 @@ Removes the first element of the queue for service.
 
 ------------
 
-.. raw:: html
-
-   <div id="as_list/2"> </div>
-
 .. index:: as_list/2
 .. _queuep/0::as_list/2:
 
@@ -287,10 +243,6 @@ Converts a queue to a list.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/2"> </div>
 
 .. index:: map/2
 .. _queuep/0::map/2:
@@ -312,10 +264,6 @@ Applies a closure to all elements of a queue.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/3"> </div>
 
 .. index:: map/3
 .. _queuep/0::map/3:

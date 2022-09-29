@@ -35,10 +35,6 @@ Term and goal expansion protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="goal_expansion/2"> </div>
-
 .. index:: goal_expansion/2
 .. _expanding/0::goal_expansion/2:
 
@@ -57,10 +53,6 @@ Defines a goal expansion. Called recursively until a fixed point is reached on g
 
 
 ------------
-
-.. raw:: html
-
-   <div id="term_expansion/2"> </div>
 
 .. index:: term_expansion/2
 .. _expanding/0::term_expansion/2:

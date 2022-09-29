@@ -35,10 +35,6 @@ List of numbers protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="min/2"> </div>
-
 .. index:: min/2
 .. _numberlistp/0::min/2:
 
@@ -57,10 +53,6 @@ Determines the minimum value in a list using arithmetic order. Fails if the list
 
 
 ------------
-
-.. raw:: html
-
-   <div id="max/2"> </div>
 
 .. index:: max/2
 .. _numberlistp/0::max/2:
@@ -81,10 +73,6 @@ Determines the list maximum value using arithmetic order. Fails if the list is e
 
 ------------
 
-.. raw:: html
-
-   <div id="min_max/3"> </div>
-
 .. index:: min_max/3
 .. _numberlistp/0::min_max/3:
 
@@ -103,10 +91,6 @@ Determines the minimum and maxium values in a list using arithmetic order. Fails
 
 
 ------------
-
-.. raw:: html
-
-   <div id="product/2"> </div>
 
 .. index:: product/2
 .. _numberlistp/0::product/2:
@@ -127,10 +111,6 @@ Calculates the product of all list numbers. Fails if the list is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="sum/2"> </div>
-
 .. index:: sum/2
 .. _numberlistp/0::sum/2:
 
@@ -149,10 +129,6 @@ Calculates the sum of all list numbers. Returns the integer zero if the list is 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="average/2"> </div>
 
 .. index:: average/2
 .. _numberlistp/0::average/2:
@@ -173,10 +149,6 @@ Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the
 
 ------------
 
-.. raw:: html
-
-   <div id="median/2"> </div>
-
 .. index:: median/2
 .. _numberlistp/0::median/2:
 
@@ -195,10 +167,6 @@ Calculates the median of a list of numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="modes/2"> </div>
 
 .. index:: modes/2
 .. _numberlistp/0::modes/2:
@@ -219,10 +187,6 @@ Returns the list of modes of a list of numbers in ascending order. Fails if the 
 
 ------------
 
-.. raw:: html
-
-   <div id="euclidean_norm/2"> </div>
-
 .. index:: euclidean_norm/2
 .. _numberlistp/0::euclidean_norm/2:
 
@@ -241,10 +205,6 @@ Calculates the Euclidean norm of a list of numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chebyshev_norm/2"> </div>
 
 .. index:: chebyshev_norm/2
 .. _numberlistp/0::chebyshev_norm/2:
@@ -266,10 +226,6 @@ Calculates the Chebyshev norm of a list of numbers. Fails if the list is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="manhattan_norm/2"> </div>
-
 .. index:: manhattan_norm/2
 .. _numberlistp/0::manhattan_norm/2:
 
@@ -290,10 +246,6 @@ Calculates the Manhattan norm of a list of numbers. Fails if the list is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="euclidean_distance/3"> </div>
-
 .. index:: euclidean_distance/3
 .. _numberlistp/0::euclidean_distance/3:
 
@@ -312,10 +264,6 @@ Calculates the Euclidean distance between two lists of numbers. Fails if the two
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chebyshev_distance/3"> </div>
 
 .. index:: chebyshev_distance/3
 .. _numberlistp/0::chebyshev_distance/3:
@@ -337,10 +285,6 @@ Calculates the Chebyshev distance between two lists of numbers. Fails if the two
 
 ------------
 
-.. raw:: html
-
-   <div id="manhattan_distance/3"> </div>
-
 .. index:: manhattan_distance/3
 .. _numberlistp/0::manhattan_distance/3:
 
@@ -360,10 +304,6 @@ Calculates the Manhattan distance between two lists of numbers. Fails if the two
 
 
 ------------
-
-.. raw:: html
-
-   <div id="scalar_product/3"> </div>
 
 .. index:: scalar_product/3
 .. _numberlistp/0::scalar_product/3:
@@ -385,10 +325,6 @@ Calculates the scalar product of two lists of numbers. Fails if the two lists ar
 
 ------------
 
-.. raw:: html
-
-   <div id="normalize_range/2"> </div>
-
 .. index:: normalize_range/2
 .. _numberlistp/0::normalize_range/2:
 
@@ -407,10 +343,6 @@ Normalizes a list of numbers into the ``[0.0,1.0]`` range. Caller must handle ar
 
 
 ------------
-
-.. raw:: html
-
-   <div id="normalize_range/4"> </div>
 
 .. index:: normalize_range/4
 .. _numberlistp/0::normalize_range/4:
@@ -431,10 +363,6 @@ Normalizes a list of numbers into the given range. Caller must handle arithmetic
 
 ------------
 
-.. raw:: html
-
-   <div id="normalize_unit/2"> </div>
-
 .. index:: normalize_unit/2
 .. _numberlistp/0::normalize_unit/2:
 
@@ -454,10 +382,6 @@ Normalizes a list of numbers returning its unit vector (i.e. a list with Euclide
 
 ------------
 
-.. raw:: html
-
-   <div id="normalize_scalar/2"> </div>
-
 .. index:: normalize_scalar/2
 .. _numberlistp/0::normalize_scalar/2:
 
@@ -476,10 +400,6 @@ Normalizes a list of numbers such that the sum of all numbers is equal to one. C
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rescale/3"> </div>
 
 .. index:: rescale/3
 .. _numberlistp/0::rescale/3:

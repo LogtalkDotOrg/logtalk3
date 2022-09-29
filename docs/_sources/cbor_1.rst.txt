@@ -37,10 +37,6 @@ Concise Binary Object Representation (CBOR) format exporter and importer.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="parse/2"> </div>
-
 .. index:: parse/2
 .. _cbor/1::parse/2:
 
@@ -59,10 +55,6 @@ Parses a list of bytes in the CBOR format returning the corresponding term repre
 
 
 ------------
-
-.. raw:: html
-
-   <div id="generate/2"> </div>
 
 .. index:: generate/2
 .. _cbor/1::generate/2:

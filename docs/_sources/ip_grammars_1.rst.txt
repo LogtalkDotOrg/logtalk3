@@ -34,10 +34,6 @@ IP address grammars.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="ipv4//1"> </div>
-
 .. index:: ipv4//1
 .. _ip_grammars/1::ipv4//1:
 
@@ -54,10 +50,6 @@ Parses an IPv4 network address in the format XXX.XXX.XXX.XXX where each XXX is a
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ipv6//1"> </div>
 
 .. index:: ipv6//1
 .. _ip_grammars/1::ipv6//1:

@@ -35,10 +35,6 @@ Optional term handling predicates. Requires passing an optional term (constructe
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="is_empty/0"> </div>
-
 .. index:: is_empty/0
 .. _optional/1::is_empty/0:
 
@@ -56,10 +52,6 @@ True if the optional term is empty. See also the ``if_empty/1`` predicate.
 
 ------------
 
-.. raw:: html
-
-   <div id="is_present/0"> </div>
-
 .. index:: is_present/0
 .. _optional/1::is_present/0:
 
@@ -76,10 +68,6 @@ True if the optional term holds a value. See also the ``if_present/1`` predicate
 
 
 ------------
-
-.. raw:: html
-
-   <div id="if_empty/1"> </div>
 
 .. index:: if_empty/1
 .. _optional/1::if_empty/1:
@@ -102,10 +90,6 @@ Calls a goal if the optional term is empty. Succeeds otherwise.
 
 ------------
 
-.. raw:: html
-
-   <div id="if_present/1"> </div>
-
 .. index:: if_present/1
 .. _optional/1::if_present/1:
 
@@ -126,10 +110,6 @@ Applies a closure to the value hold by the optional term if not empty. Succeeds 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="if_present_or_else/2"> </div>
 
 .. index:: if_present_or_else/2
 .. _optional/1::if_present_or_else/2:
@@ -152,10 +132,6 @@ Applies a closure to the value hold by the optional term if not empty. Otherwise
 
 ------------
 
-.. raw:: html
-
-   <div id="filter/2"> </div>
-
 .. index:: filter/2
 .. _optional/1::filter/2:
 
@@ -176,10 +152,6 @@ Returns the optional term when it is not empty and the value it holds satisfies 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="map/2"> </div>
 
 .. index:: map/2
 .. _optional/1::map/2:
@@ -202,10 +174,6 @@ When the optional term is not empty and mapping a closure with the value it hold
 
 ------------
 
-.. raw:: html
-
-   <div id="flat_map/2"> </div>
-
 .. index:: flat_map/2
 .. _optional/1::flat_map/2:
 
@@ -227,10 +195,6 @@ When the optional term is not empty and mapping a closure with the value it hold
 
 ------------
 
-.. raw:: html
-
-   <div id="or/2"> </div>
-
 .. index:: or/2
 .. _optional/1::or/2:
 
@@ -251,10 +215,6 @@ Returns the same optional term if not empty. Otherwise calls closure to generate
 
 
 ------------
-
-.. raw:: html
-
-   <div id="get/1"> </div>
 
 .. index:: get/1
 .. _optional/1::get/1:
@@ -279,10 +239,6 @@ Returns the value hold by the optional term if not empty. Throws an error otherw
 
 ------------
 
-.. raw:: html
-
-   <div id="or_else/2"> </div>
-
 .. index:: or_else/2
 .. _optional/1::or_else/2:
 
@@ -301,10 +257,6 @@ Returns the value hold by the optional term if not empty or the given default va
 
 
 ------------
-
-.. raw:: html
-
-   <div id="or_else_get/2"> </div>
 
 .. index:: or_else_get/2
 .. _optional/1::or_else_get/2:
@@ -331,10 +283,6 @@ Returns the value hold by the optional term if not empty. Applies a closure to c
 
 ------------
 
-.. raw:: html
-
-   <div id="or_else_call/2"> </div>
-
 .. index:: or_else_call/2
 .. _optional/1::or_else_call/2:
 
@@ -356,10 +304,6 @@ Returns the value hold by the optional term if not empty or calls a goal determi
 
 ------------
 
-.. raw:: html
-
-   <div id="or_else_fail/1"> </div>
-
 .. index:: or_else_fail/1
 .. _optional/1::or_else_fail/1:
 
@@ -378,10 +322,6 @@ Returns the value hold by the optional term if not empty. Fails otherwise. Usual
 
 
 ------------
-
-.. raw:: html
-
-   <div id="or_else_throw/2"> </div>
 
 .. index:: or_else_throw/2
 .. _optional/1::or_else_throw/2:

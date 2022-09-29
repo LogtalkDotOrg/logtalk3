@@ -34,10 +34,6 @@ Class hierarchy protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="class/1"> </div>
-
 .. index:: class/1
 .. _class_hierarchyp/0::class/1:
 
@@ -56,10 +52,6 @@ Returns, by backtracking, all object classes.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="classes/1"> </div>
 
 .. index:: classes/1
 .. _class_hierarchyp/0::classes/1:
@@ -80,10 +72,6 @@ List of all object classes.
 
 ------------
 
-.. raw:: html
-
-   <div id="instance/1"> </div>
-
 .. index:: instance/1
 .. _class_hierarchyp/0::instance/1:
 
@@ -102,10 +90,6 @@ Returns, by backtracking, all class instances.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="instances/1"> </div>
 
 .. index:: instances/1
 .. _class_hierarchyp/0::instances/1:
@@ -126,10 +110,6 @@ List of all class instances.
 
 ------------
 
-.. raw:: html
-
-   <div id="subclass/1"> </div>
-
 .. index:: subclass/1
 .. _class_hierarchyp/0::subclass/1:
 
@@ -148,10 +128,6 @@ Returns, by backtracking, all class subclasses.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="subclasses/1"> </div>
 
 .. index:: subclasses/1
 .. _class_hierarchyp/0::subclasses/1:
@@ -172,10 +148,6 @@ List of all class subclasses.
 
 ------------
 
-.. raw:: html
-
-   <div id="superclass/1"> </div>
-
 .. index:: superclass/1
 .. _class_hierarchyp/0::superclass/1:
 
@@ -194,10 +166,6 @@ Returns, by backtracking, all class superclasses.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="superclasses/1"> </div>
 
 .. index:: superclasses/1
 .. _class_hierarchyp/0::superclasses/1:
@@ -218,10 +186,6 @@ List of all class superclasses.
 
 ------------
 
-.. raw:: html
-
-   <div id="leaf_instance/1"> </div>
-
 .. index:: leaf_instance/1
 .. _class_hierarchyp/0::leaf_instance/1:
 
@@ -240,10 +204,6 @@ Returns, by backtracking, all class leaf instances.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leaf_instances/1"> </div>
 
 .. index:: leaf_instances/1
 .. _class_hierarchyp/0::leaf_instances/1:
@@ -264,10 +224,6 @@ List of all class leaf instances.
 
 ------------
 
-.. raw:: html
-
-   <div id="leaf_class/1"> </div>
-
 .. index:: leaf_class/1
 .. _class_hierarchyp/0::leaf_class/1:
 
@@ -286,10 +242,6 @@ Returns, by backtracking, all class leaf subclasses.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="leaf_classes/1"> </div>
 
 .. index:: leaf_classes/1
 .. _class_hierarchyp/0::leaf_classes/1:
@@ -310,10 +262,6 @@ List of all class leaf leaf subclasses.
 
 ------------
 
-.. raw:: html
-
-   <div id="descendant_instance/1"> </div>
-
 .. index:: descendant_instance/1
 .. _class_hierarchyp/0::descendant_instance/1:
 
@@ -332,10 +280,6 @@ Returns, by backtracking, all class descendant instances.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="descendant_instances/1"> </div>
 
 .. index:: descendant_instances/1
 .. _class_hierarchyp/0::descendant_instances/1:
@@ -356,10 +300,6 @@ List of all class descendant instances.
 
 ------------
 
-.. raw:: html
-
-   <div id="descendant_class/1"> </div>
-
 .. index:: descendant_class/1
 .. _class_hierarchyp/0::descendant_class/1:
 
@@ -378,10 +318,6 @@ Returns, by backtracking, all class descendant subclasses.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="descendant_classes/1"> </div>
 
 .. index:: descendant_classes/1
 .. _class_hierarchyp/0::descendant_classes/1:

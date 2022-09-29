@@ -36,10 +36,6 @@ Predicates for term input/output from/to atom, chars, and codes. The predicates 
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="read_term_from_atom/3"> </div>
-
 .. index:: read_term_from_atom/3
 .. _term_io_protocol/0::read_term_from_atom/3:
 
@@ -58,10 +54,6 @@ Reads a term from an atom using the given read options. A period at the end of t
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_from_atom/2"> </div>
 
 .. index:: read_from_atom/2
 .. _term_io_protocol/0::read_from_atom/2:
@@ -82,10 +74,6 @@ Reads a term from an atom using default read options. Shorthand for ``read_term_
 
 ------------
 
-.. raw:: html
-
-   <div id="read_term_from_chars/3"> </div>
-
 .. index:: read_term_from_chars/3
 .. _term_io_protocol/0::read_term_from_chars/3:
 
@@ -104,10 +92,6 @@ Reads a term from a list of characters using the given read options. A period at
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_from_chars/2"> </div>
 
 .. index:: read_from_chars/2
 .. _term_io_protocol/0::read_from_chars/2:
@@ -128,10 +112,6 @@ Reads a term from a list of characters using default read options. Shorthand for
 
 ------------
 
-.. raw:: html
-
-   <div id="read_term_from_codes/3"> </div>
-
 .. index:: read_term_from_codes/3
 .. _term_io_protocol/0::read_term_from_codes/3:
 
@@ -150,10 +130,6 @@ Reads a term from a list of character codes using the given read options. A peri
 
 
 ------------
-
-.. raw:: html
-
-   <div id="read_from_codes/2"> </div>
 
 .. index:: read_from_codes/2
 .. _term_io_protocol/0::read_from_codes/2:
@@ -174,10 +150,6 @@ Reads a term from a list of character codes using default read options. Shorthan
 
 ------------
 
-.. raw:: html
-
-   <div id="write_term_to_atom/3"> </div>
-
 .. index:: write_term_to_atom/3
 .. _term_io_protocol/0::write_term_to_atom/3:
 
@@ -196,10 +168,6 @@ Writes a term to an atom using the given write options. Valid options are those 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="write_to_atom/2"> </div>
 
 .. index:: write_to_atom/2
 .. _term_io_protocol/0::write_to_atom/2:
@@ -220,10 +188,6 @@ Writes a term to an atom using default write options. Shorthand for ``write_term
 
 ------------
 
-.. raw:: html
-
-   <div id="write_term_to_chars/3"> </div>
-
 .. index:: write_term_to_chars/3
 .. _term_io_protocol/0::write_term_to_chars/3:
 
@@ -242,10 +206,6 @@ Writes a term to a list of characters using the given write options. Shorthand f
 
 
 ------------
-
-.. raw:: html
-
-   <div id="write_term_to_chars/4"> </div>
 
 .. index:: write_term_to_chars/4
 .. _term_io_protocol/0::write_term_to_chars/4:
@@ -266,10 +226,6 @@ Writes a term to a list of characters with the given tail using the given write 
 
 ------------
 
-.. raw:: html
-
-   <div id="write_to_chars/2"> </div>
-
 .. index:: write_to_chars/2
 .. _term_io_protocol/0::write_to_chars/2:
 
@@ -288,10 +244,6 @@ Writes a term to a list of characters using default write options. Shorthand for
 
 
 ------------
-
-.. raw:: html
-
-   <div id="write_term_to_codes/3"> </div>
 
 .. index:: write_term_to_codes/3
 .. _term_io_protocol/0::write_term_to_codes/3:
@@ -312,10 +264,6 @@ Writes a term to a list of character codes using the given write options. Shorth
 
 ------------
 
-.. raw:: html
-
-   <div id="write_term_to_codes/4"> </div>
-
 .. index:: write_term_to_codes/4
 .. _term_io_protocol/0::write_term_to_codes/4:
 
@@ -334,10 +282,6 @@ Writes a term to a list of character codes with the given tail using the given w
 
 
 ------------
-
-.. raw:: html
-
-   <div id="write_to_codes/2"> </div>
 
 .. index:: write_to_codes/2
 .. _term_io_protocol/0::write_to_codes/2:
@@ -358,10 +302,6 @@ Writes a term to a list of character codes using default write options. Shorthan
 
 ------------
 
-.. raw:: html
-
-   <div id="format_to_atom/3"> </div>
-
 .. index:: format_to_atom/3
 .. _term_io_protocol/0::format_to_atom/3:
 
@@ -380,10 +320,6 @@ Writes a list of arguments to an atom using the given format (specified as in th
 
 
 ------------
-
-.. raw:: html
-
-   <div id="format_to_chars/3"> </div>
 
 .. index:: format_to_chars/3
 .. _term_io_protocol/0::format_to_chars/3:
@@ -404,10 +340,6 @@ Writes a list of arguments to a list of characters using the given format (speci
 
 ------------
 
-.. raw:: html
-
-   <div id="format_to_chars/4"> </div>
-
 .. index:: format_to_chars/4
 .. _term_io_protocol/0::format_to_chars/4:
 
@@ -426,10 +358,6 @@ Writes a term to a list of characters with the given tail using the given format
 
 
 ------------
-
-.. raw:: html
-
-   <div id="format_to_codes/3"> </div>
 
 .. index:: format_to_codes/3
 .. _term_io_protocol/0::format_to_codes/3:
@@ -450,10 +378,6 @@ Writes a list of arguments to a list of character codes using the given format (
 
 ------------
 
-.. raw:: html
-
-   <div id="format_to_codes/4"> </div>
-
 .. index:: format_to_codes/4
 .. _term_io_protocol/0::format_to_codes/4:
 
@@ -472,10 +396,6 @@ Writes a list of arguments to a list of character codes with the given tail usin
 
 
 ------------
-
-.. raw:: html
-
-   <div id="with_output_to/2"> </div>
 
 .. index:: with_output_to/2
 .. _term_io_protocol/0::with_output_to/2:

@@ -67,10 +67,6 @@ Type checking predicates. User extensible. New types can be defined by adding cl
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="type/1"> </div>
-
 .. index:: type/1
 .. _type/0::type/1:
 
@@ -89,10 +85,6 @@ Table of defined types. A new type can be registered by defining a clause for th
 
 
 ------------
-
-.. raw:: html
-
-   <div id="meta_type/3"> </div>
 
 .. index:: meta_type/3
 .. _type/0::meta_type/3:
@@ -113,10 +105,6 @@ Table of defined meta-types. A registered type that is a meta-type can be descri
 
 ------------
 
-.. raw:: html
-
-   <div id="valid/2"> </div>
-
 .. index:: valid/2
 .. _type/0::valid/2:
 
@@ -136,10 +124,6 @@ True if the given term is of the specified type. Fails otherwise.
 
 ------------
 
-.. raw:: html
-
-   <div id="check/3"> </div>
-
 .. index:: check/3
 .. _type/0::check/3:
 
@@ -158,10 +142,6 @@ True if the given term is of the specified type. Throws an error otherwise using
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check/2"> </div>
 
 .. index:: check/2
 .. _type/0::check/2:

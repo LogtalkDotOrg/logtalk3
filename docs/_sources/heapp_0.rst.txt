@@ -35,10 +35,6 @@ Heap protocol. Key-value pairs are represented as ``Key-Value``.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="insert/4"> </div>
-
 .. index:: insert/4
 .. _heapp/0::insert/4:
 
@@ -57,10 +53,6 @@ Inserts the new pair into a heap, returning the updated heap.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="insert_all/3"> </div>
 
 .. index:: insert_all/3
 .. _heapp/0::insert_all/3:
@@ -81,10 +73,6 @@ Inserts a list of pairs into a heap, returning the updated heap.
 
 ------------
 
-.. raw:: html
-
-   <div id="delete/4"> </div>
-
 .. index:: delete/4
 .. _heapp/0::delete/4:
 
@@ -103,10 +91,6 @@ Deletes and returns the top pair in a heap returning the updated heap.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="merge/3"> </div>
 
 .. index:: merge/3
 .. _heapp/0::merge/3:
@@ -127,10 +111,6 @@ Merges two heaps.
 
 ------------
 
-.. raw:: html
-
-   <div id="empty/1"> </div>
-
 .. index:: empty/1
 .. _heapp/0::empty/1:
 
@@ -149,10 +129,6 @@ True if the heap is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="size/2"> </div>
 
 .. index:: size/2
 .. _heapp/0::size/2:
@@ -173,10 +149,6 @@ Returns the number of heap elements.
 
 ------------
 
-.. raw:: html
-
-   <div id="as_list/2"> </div>
-
 .. index:: as_list/2
 .. _heapp/0::as_list/2:
 
@@ -195,10 +167,6 @@ Returns the current set of pairs in the heap as a list, sorted into ascending or
 
 
 ------------
-
-.. raw:: html
-
-   <div id="as_heap/2"> </div>
 
 .. index:: as_heap/2
 .. _heapp/0::as_heap/2:
@@ -219,10 +187,6 @@ Constructs a heap from a list of pairs.
 
 ------------
 
-.. raw:: html
-
-   <div id="top/3"> </div>
-
 .. index:: top/3
 .. _heapp/0::top/3:
 
@@ -241,10 +205,6 @@ Returns the top pair in the heap. Fails if the heap is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="top_next/5"> </div>
 
 .. index:: top_next/5
 .. _heapp/0::top_next/5:

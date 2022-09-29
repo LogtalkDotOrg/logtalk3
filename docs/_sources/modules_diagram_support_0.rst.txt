@@ -36,10 +36,6 @@ Utility predicates for supporting Prolog modules in diagrams.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="module_property/2"> </div>
-
 .. index:: module_property/2
 .. _modules_diagram_support/0::module_property/2:
 
@@ -59,10 +55,6 @@ Access to module properties, at least ``exports/1``, ``file/1``, and ``file/2`` 
 
 ------------
 
-.. raw:: html
-
-   <div id="loaded_file_property/2"> </div>
-
 .. index:: loaded_file_property/2
 .. _modules_diagram_support/0::loaded_file_property/2:
 
@@ -81,10 +73,6 @@ Access to loaded source file properties, at least ``basename/1``, ``directory/1`
 
 
 ------------
-
-.. raw:: html
-
-   <div id="source_file_extension/1"> </div>
 
 .. index:: source_file_extension/1
 .. _modules_diagram_support/0::source_file_extension/1:

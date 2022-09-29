@@ -35,10 +35,6 @@ Options protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="check_option/1"> </div>
-
 .. index:: check_option/1
 .. _options_protocol/0::check_option/1:
 
@@ -65,10 +61,6 @@ Succeeds if the option is valid. Throws an error otherwise.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check_options/1"> </div>
 
 .. index:: check_options/1
 .. _options_protocol/0::check_options/1:
@@ -101,10 +93,6 @@ Succeeds if all the options in a list are valid. Throws an error otherwise.
 
 ------------
 
-.. raw:: html
-
-   <div id="valid_option/1"> </div>
-
 .. index:: valid_option/1
 .. _options_protocol/0::valid_option/1:
 
@@ -123,10 +111,6 @@ Succeeds if the option is valid.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="valid_options/1"> </div>
 
 .. index:: valid_options/1
 .. _options_protocol/0::valid_options/1:
@@ -147,10 +131,6 @@ Succeeds if all the options in a list are valid.
 
 ------------
 
-.. raw:: html
-
-   <div id="default_option/1"> </div>
-
 .. index:: default_option/1
 .. _options_protocol/0::default_option/1:
 
@@ -169,10 +149,6 @@ Enumerates, by backtracking, the default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="default_options/1"> </div>
 
 .. index:: default_options/1
 .. _options_protocol/0::default_options/1:
@@ -193,10 +169,6 @@ Returns a list of the default options.
 
 ------------
 
-.. raw:: html
-
-   <div id="option/2"> </div>
-
 .. index:: option/2
 .. _options_protocol/0::option/2:
 
@@ -215,10 +187,6 @@ True iff ``Option`` unifies with the first occurrence of the same option in the 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="option/3"> </div>
 
 .. index:: option/3
 .. _options_protocol/0::option/3:
@@ -242,10 +210,6 @@ True iff ``Option`` unifies with the first occurrence of the same option in the 
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="merge_options/2"> </div>
-
 .. index:: merge_options/2
 .. _options_protocol/0::merge_options/2:
 
@@ -265,10 +229,6 @@ Merges the user options with the default options, returning the final list of op
 
 ------------
 
-.. raw:: html
-
-   <div id="fix_options/2"> </div>
-
 .. index:: fix_options/2
 .. _options_protocol/0::fix_options/2:
 
@@ -287,10 +247,6 @@ Fixes a list of options, returning the list of options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="fix_option/2"> </div>
 
 .. index:: fix_option/2
 .. _options_protocol/0::fix_option/2:

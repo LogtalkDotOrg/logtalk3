@@ -36,10 +36,6 @@ Simple parser of PDDL 3.0 files.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="parse_domain/3"> </div>
-
 .. index:: parse_domain/3
 .. _pddl/0::parse_domain/3:
 
@@ -58,10 +54,6 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 
 
 ------------
-
-.. raw:: html
-
-   <div id="parse_domain/2"> </div>
 
 .. index:: parse_domain/2
 .. _pddl/0::parse_domain/2:
@@ -82,10 +74,6 @@ Parses a PDDL 3.0 domain file, returning a compound term representing its conten
 
 ------------
 
-.. raw:: html
-
-   <div id="parse_problem/2"> </div>
-
 .. index:: parse_problem/2
 .. _pddl/0::parse_problem/2:
 
@@ -104,10 +92,6 @@ Parses a PDDL 3.0 problem file, returning a compound term representing its conte
 
 
 ------------
-
-.. raw:: html
-
-   <div id="parse_problem/3"> </div>
 
 .. index:: parse_problem/3
 .. _pddl/0::parse_problem/3:

@@ -34,10 +34,6 @@ Term utility predicates protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="depth/2"> </div>
-
 .. index:: depth/2
 .. _termp/0::depth/2:
 
@@ -56,10 +52,6 @@ True if the depth of ``Term`` is ``Depth``. The depth of atomic terms is zero; t
 
 
 ------------
-
-.. raw:: html
-
-   <div id="ground/1"> </div>
 
 .. index:: ground/1
 .. _termp/0::ground/1:
@@ -80,10 +72,6 @@ True if the argument is ground. Deprecated. Use the ``ground/1`` standard predic
 
 ------------
 
-.. raw:: html
-
-   <div id="new/1"> </div>
-
 .. index:: new/1
 .. _termp/0::new/1:
 
@@ -102,10 +90,6 @@ Creates a new term instance (if meaningful).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="occurs/2"> </div>
 
 .. index:: occurs/2
 .. _termp/0::occurs/2:
@@ -126,10 +110,6 @@ True if the variable occurs in the term.
 
 ------------
 
-.. raw:: html
-
-   <div id="subsumes/2"> </div>
-
 .. index:: subsumes/2
 .. _termp/0::subsumes/2:
 
@@ -148,10 +128,6 @@ The first term subsumes the second term. Deprecated. Use the ``subsumes_term/2``
 
 
 ------------
-
-.. raw:: html
-
-   <div id="subterm/2"> </div>
 
 .. index:: subterm/2
 .. _termp/0::subterm/2:
@@ -172,10 +148,6 @@ The first term is a subterm of the second term.
 
 ------------
 
-.. raw:: html
-
-   <div id="valid/1"> </div>
-
 .. index:: valid/1
 .. _termp/0::valid/1:
 
@@ -194,10 +166,6 @@ Term is valid.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="check/1"> </div>
 
 .. index:: check/1
 .. _termp/0::check/1:
@@ -218,10 +186,6 @@ Checks if a term is valid. Throws an exception if the term is not valid.
 
 ------------
 
-.. raw:: html
-
-   <div id="variant/2"> </div>
-
 .. index:: variant/2
 .. _termp/0::variant/2:
 
@@ -240,10 +204,6 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="variables/2"> </div>
 
 .. index:: variables/2
 .. _termp/0::variables/2:
@@ -264,10 +224,6 @@ Returns a list of all term variables (ordered as found when doing a depth-first,
 
 ------------
 
-.. raw:: html
-
-   <div id="singletons/2"> </div>
-
 .. index:: singletons/2
 .. _termp/0::singletons/2:
 
@@ -286,10 +242,6 @@ Returns a list of all term singleton variables (ordered as found when doing a de
 
 
 ------------
-
-.. raw:: html
-
-   <div id="numbervars/3"> </div>
 
 .. index:: numbervars/3
 .. _termp/0::numbervars/3:
@@ -310,10 +262,6 @@ Grounds a term by replacing all variables with ``'$VAR'(N)`` terms with ``N`` st
 
 ------------
 
-.. raw:: html
-
-   <div id="numbervars/1"> </div>
-
 .. index:: numbervars/1
 .. _termp/0::numbervars/1:
 
@@ -333,10 +281,6 @@ Grounds a term by replacing all variables with ``'$VAR'(N)`` terms with ``N`` st
 
 ------------
 
-.. raw:: html
-
-   <div id="varnumbers/3"> </div>
-
 .. index:: varnumbers/3
 .. _termp/0::varnumbers/3:
 
@@ -355,10 +299,6 @@ Replaces all ``'$VAR'(N)`` sub-terms in a term with fresh variables for all valu
 
 
 ------------
-
-.. raw:: html
-
-   <div id="varnumbers/2"> </div>
 
 .. index:: varnumbers/2
 .. _termp/0::varnumbers/2:

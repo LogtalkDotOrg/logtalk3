@@ -35,10 +35,6 @@ Predicates for generating graph files.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="output_file_name/2"> </div>
-
 .. index:: output_file_name/2
 .. _graph_language_protocol/0::output_file_name/2:
 
@@ -57,10 +53,6 @@ Constructs the diagram file basename by adding a graph language dependent extens
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file_header/3"> </div>
 
 .. index:: file_header/3
 .. _graph_language_protocol/0::file_header/3:
@@ -81,10 +73,6 @@ Writes the output file header using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="file_footer/3"> </div>
-
 .. index:: file_footer/3
 .. _graph_language_protocol/0::file_footer/3:
 
@@ -103,10 +91,6 @@ Writes the output file footer using the specified options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="graph_header/5"> </div>
 
 .. index:: graph_header/5
 .. _graph_language_protocol/0::graph_header/5:
@@ -127,10 +111,6 @@ Writes a graph header using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="graph_footer/5"> </div>
-
 .. index:: graph_footer/5
 .. _graph_language_protocol/0::graph_footer/5:
 
@@ -150,10 +130,6 @@ Writes a graph footer using the specified options.
 
 ------------
 
-.. raw:: html
-
-   <div id="node/7"> </div>
-
 .. index:: node/7
 .. _graph_language_protocol/0::node/7:
 
@@ -172,10 +148,6 @@ Writes a node using the specified options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="edge/6"> </div>
 
 .. index:: edge/6
 .. _graph_language_protocol/0::edge/6:

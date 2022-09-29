@@ -35,10 +35,6 @@ Pack specification protocol. Objects implementing this protocol should be named 
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="name/1"> </div>
-
 .. index:: name/1
 .. _pack_protocol/0::name/1:
 
@@ -57,10 +53,6 @@ Pack name.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="description/1"> </div>
 
 .. index:: description/1
 .. _pack_protocol/0::description/1:
@@ -81,10 +73,6 @@ Pack one line description.
 
 ------------
 
-.. raw:: html
-
-   <div id="license/1"> </div>
-
 .. index:: license/1
 .. _pack_protocol/0::license/1:
 
@@ -104,10 +92,6 @@ Pack license. Specified using the identifier from the SPDX License List (https:/
 
 ------------
 
-.. raw:: html
-
-   <div id="home/1"> </div>
-
 .. index:: home/1
 .. _pack_protocol/0::home/1:
 
@@ -126,10 +110,6 @@ Pack home HTTPS or file URL.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="version/6"> </div>
 
 .. index:: version/6
 .. _pack_protocol/0::version/6:
@@ -160,10 +140,6 @@ Table of available versions.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="note/3"> </div>
 
 .. index:: note/3
 .. _pack_protocol/0::note/3:

@@ -35,10 +35,6 @@ Named integer counters. Counter names can be any nonvar term.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="counter/2"> </div>
-
 .. index:: counter/2
 .. _counters/0::counter/2:
 
@@ -57,10 +53,6 @@ True if ``Counter`` is a counter with value ``Value``.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="increment_counter/1"> </div>
 
 .. index:: increment_counter/1
 .. _counters/0::increment_counter/1:
@@ -81,10 +73,6 @@ Increments the named counter.
 
 ------------
 
-.. raw:: html
-
-   <div id="decrement_counter/1"> </div>
-
 .. index:: decrement_counter/1
 .. _counters/0::decrement_counter/1:
 
@@ -104,10 +92,6 @@ Decrements the named counter.
 
 ------------
 
-.. raw:: html
-
-   <div id="reset_counter/1"> </div>
-
 .. index:: reset_counter/1
 .. _counters/0::reset_counter/1:
 
@@ -126,10 +110,6 @@ Resets the named counter to zero. Creates the counter if it does not exist.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="reset_counters/0"> </div>
 
 .. index:: reset_counters/0
 .. _counters/0::reset_counters/0:
@@ -155,10 +135,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="counter_/2"> </div>
 
 .. index:: counter_/2
 .. _counters/0::counter_/2:

@@ -35,10 +35,6 @@ Statistical calculations over a list of numbers protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="product/2"> </div>
-
 .. index:: product/2
 .. _statisticsp/0::product/2:
 
@@ -57,10 +53,6 @@ Calculates the product of all list numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sum/2"> </div>
 
 .. index:: sum/2
 .. _statisticsp/0::sum/2:
@@ -81,10 +73,6 @@ Calculates the sum of all list numbers. Fails if the list is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="min/2"> </div>
-
 .. index:: min/2
 .. _statisticsp/0::min/2:
 
@@ -103,10 +91,6 @@ Determines the minimum value in a list of numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="max/2"> </div>
 
 .. index:: max/2
 .. _statisticsp/0::max/2:
@@ -127,10 +111,6 @@ Determines the list maximum value in a list of numbers. Fails if the list is emp
 
 ------------
 
-.. raw:: html
-
-   <div id="min_max/3"> </div>
-
 .. index:: min_max/3
 .. _statisticsp/0::min_max/3:
 
@@ -149,10 +129,6 @@ Determines the minimum and maxium values in a list of numbers. Fails if the list
 
 
 ------------
-
-.. raw:: html
-
-   <div id="range/2"> </div>
 
 .. index:: range/2
 .. _statisticsp/0::range/2:
@@ -173,10 +149,6 @@ Range is the length of the smallest interval which contains all the numbers in L
 
 ------------
 
-.. raw:: html
-
-   <div id="arithmetic_mean/2"> </div>
-
 .. index:: arithmetic_mean/2
 .. _statisticsp/0::arithmetic_mean/2:
 
@@ -195,10 +167,6 @@ Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="geometric_mean/2"> </div>
 
 .. index:: geometric_mean/2
 .. _statisticsp/0::geometric_mean/2:
@@ -219,10 +187,6 @@ Calculates the geometric mean of a list of numbers. Fails if the list is empty.
 
 ------------
 
-.. raw:: html
-
-   <div id="harmonic_mean/2"> </div>
-
 .. index:: harmonic_mean/2
 .. _statisticsp/0::harmonic_mean/2:
 
@@ -241,10 +205,6 @@ Calculates the harmonic mean of a list of numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="weighted_mean/3"> </div>
 
 .. index:: weighted_mean/3
 .. _statisticsp/0::weighted_mean/3:
@@ -265,10 +225,6 @@ Calculates the weighted mean of a list of numbers. Fails if the list is empty or
 
 ------------
 
-.. raw:: html
-
-   <div id="median/2"> </div>
-
 .. index:: median/2
 .. _statisticsp/0::median/2:
 
@@ -287,10 +243,6 @@ Calculates the median of a list of numbers. Fails if the list is empty.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="modes/2"> </div>
 
 .. index:: modes/2
 .. _statisticsp/0::modes/2:
@@ -311,10 +263,6 @@ Returns the list of modes of a list of numbers in ascending order. Fails if the 
 
 ------------
 
-.. raw:: html
-
-   <div id="average_deviation/3"> </div>
-
 .. index:: average_deviation/3
 .. _statisticsp/0::average_deviation/3:
 
@@ -333,10 +281,6 @@ Calculates the average absolute deviation of a list of numbers given a central t
 
 
 ------------
-
-.. raw:: html
-
-   <div id="mean_deviation/2"> </div>
 
 .. index:: mean_deviation/2
 .. _statisticsp/0::mean_deviation/2:
@@ -357,10 +301,6 @@ Calculates the mean absolute deviation of a list of numbers. Fails if the list i
 
 ------------
 
-.. raw:: html
-
-   <div id="median_deviation/2"> </div>
-
 .. index:: median_deviation/2
 .. _statisticsp/0::median_deviation/2:
 
@@ -379,10 +319,6 @@ Calculates the median absolute deviation of a list of numbers. Fails if the list
 
 
 ------------
-
-.. raw:: html
-
-   <div id="standard_deviation/2"> </div>
 
 .. index:: standard_deviation/2
 .. _statisticsp/0::standard_deviation/2:
@@ -403,10 +339,6 @@ Calculates the standard deviation of a list of numbers. Fails if the list is emp
 
 ------------
 
-.. raw:: html
-
-   <div id="coefficient_of_variation/2"> </div>
-
 .. index:: coefficient_of_variation/2
 .. _statisticsp/0::coefficient_of_variation/2:
 
@@ -425,10 +357,6 @@ Calculates the coefficient of variation of a list of numbers. Fails if the list 
 
 
 ------------
-
-.. raw:: html
-
-   <div id="relative_standard_deviation/2"> </div>
 
 .. index:: relative_standard_deviation/2
 .. _statisticsp/0::relative_standard_deviation/2:
@@ -449,10 +377,6 @@ Calculates the relative standard deviation of a list of numbers. Fails if the li
 
 ------------
 
-.. raw:: html
-
-   <div id="skewness/2"> </div>
-
 .. index:: skewness/2
 .. _statisticsp/0::skewness/2:
 
@@ -471,10 +395,6 @@ Calculates the (moment) skewness of a list of numbers. Fails if the list is empt
 
 
 ------------
-
-.. raw:: html
-
-   <div id="kurtosis/2"> </div>
 
 .. index:: kurtosis/2
 .. _statisticsp/0::kurtosis/2:
@@ -495,10 +415,6 @@ Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empt
 
 ------------
 
-.. raw:: html
-
-   <div id="variance/2"> </div>
-
 .. index:: variance/2
 .. _statisticsp/0::variance/2:
 
@@ -517,10 +433,6 @@ Calculates the unbiased variance of a list of numbers. Fails if the list is empt
 
 
 ------------
-
-.. raw:: html
-
-   <div id="z_normalization/2"> </div>
 
 .. index:: z_normalization/2
 .. _statisticsp/0::z_normalization/2:
@@ -541,10 +453,6 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 
 ------------
 
-.. raw:: html
-
-   <div id="fractile/3"> </div>
-
 .. index:: fractile/3
 .. _statisticsp/0::fractile/3:
 
@@ -564,10 +472,6 @@ Calculates the smalest value in a list of numbers such that the list elements in
 
 
 ------------
-
-.. raw:: html
-
-   <div id="valid/1"> </div>
 
 .. index:: valid/1
 .. _statisticsp/0::valid/1:

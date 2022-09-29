@@ -35,10 +35,6 @@ HTML generation.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="generate/2"> </div>
-
 .. index:: generate/2
 .. _html/0::generate/2:
 
@@ -58,10 +54,6 @@ Generates HTML content using the representation specified in the first argument 
 
 ------------
 
-.. raw:: html
-
-   <div id="void_element/1"> </div>
-
 .. index:: void_element/1
 .. _html/0::void_element/1:
 
@@ -80,10 +72,6 @@ Enumerates, by backtracking, all void elements.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="normal_element/2"> </div>
 
 .. index:: normal_element/2
 .. _html/0::normal_element/2:
@@ -111,10 +99,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="doctype/1"> </div>
 
 .. index:: doctype/1
 .. _html/0::doctype/1:

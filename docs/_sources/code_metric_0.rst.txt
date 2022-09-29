@@ -36,10 +36,6 @@ Core predicates for computing source code metrics.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="entity/1"> </div>
-
 .. index:: entity/1
 .. _code_metric/0::entity/1:
 
@@ -58,10 +54,6 @@ Scans an entity and prints its metric score.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="file/1"> </div>
 
 .. index:: file/1
 .. _code_metric/0::file/1:
@@ -82,10 +74,6 @@ Prints metric scores for all the entities defined in a loaded source file.
 
 ------------
 
-.. raw:: html
-
-   <div id="directory/1"> </div>
-
 .. index:: directory/1
 .. _code_metric/0::directory/1:
 
@@ -104,10 +92,6 @@ Scans a directory and prints metric scores for all entities defined in its loade
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rdirectory/1"> </div>
 
 .. index:: rdirectory/1
 .. _code_metric/0::rdirectory/1:
@@ -128,10 +112,6 @@ Recursive version of the ``directory/1`` predicate.
 
 ------------
 
-.. raw:: html
-
-   <div id="library/1"> </div>
-
 .. index:: library/1
 .. _code_metric/0::library/1:
 
@@ -150,10 +130,6 @@ Prints metrics scores for all loaded entities from a given library.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rlibrary/1"> </div>
 
 .. index:: rlibrary/1
 .. _code_metric/0::rlibrary/1:
@@ -174,10 +150,6 @@ Recursive version of the ``library/1`` predicate.
 
 ------------
 
-.. raw:: html
-
-   <div id="all/0"> </div>
-
 .. index:: all/0
 .. _code_metric/0::all/0:
 
@@ -194,10 +166,6 @@ Scans all loaded entities and prints their metric scores.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="entity_score/2"> </div>
 
 .. index:: entity_score/2
 .. _code_metric/0::entity_score/2:
@@ -218,10 +186,6 @@ Score is a term that represents the metric score associated with a loaded entity
 
 ------------
 
-.. raw:: html
-
-   <div id="library_score/2"> </div>
-
 .. index:: library_score/2
 .. _code_metric/0::library_score/2:
 
@@ -240,10 +204,6 @@ Score is a term that represents the metric score associated with a loaded librar
 
 
 ------------
-
-.. raw:: html
-
-   <div id="rlibrary_score/2"> </div>
 
 .. index:: rlibrary_score/2
 .. _code_metric/0::rlibrary_score/2:
@@ -264,10 +224,6 @@ Score is a term that represents the metric score associated with loaded source f
 
 ------------
 
-.. raw:: html
-
-   <div id="file_score/2"> </div>
-
 .. index:: file_score/2
 .. _code_metric/0::file_score/2:
 
@@ -286,10 +242,6 @@ Score is a term that represents the metric score associated with a loaded source
 
 
 ------------
-
-.. raw:: html
-
-   <div id="directory_score/2"> </div>
 
 .. index:: directory_score/2
 .. _code_metric/0::directory_score/2:
@@ -310,10 +262,6 @@ Score is a term that represents the metric score associated with loaded source f
 
 ------------
 
-.. raw:: html
-
-   <div id="rdirectory_score/2"> </div>
-
 .. index:: rdirectory_score/2
 .. _code_metric/0::rdirectory_score/2:
 
@@ -333,10 +281,6 @@ Score is a term that represents the metric score associated with loaded source f
 
 ------------
 
-.. raw:: html
-
-   <div id="all_score/1"> </div>
-
 .. index:: all_score/1
 .. _code_metric/0::all_score/1:
 
@@ -355,10 +299,6 @@ Score is a term that represents the metric score associated with all loaded sour
 
 
 ------------
-
-.. raw:: html
-
-   <div id="format_entity_score//2"> </div>
 
 .. index:: format_entity_score//2
 .. _code_metric/0::format_entity_score//2:
@@ -382,10 +322,6 @@ Formats the entity score for pretty printing.
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="process_entity/2"> </div>
-
 .. index:: process_entity/2
 .. _code_metric/0::process_entity/2:
 
@@ -404,10 +340,6 @@ Processes an entity of the given kind.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="process_file/1"> </div>
 
 .. index:: process_file/1
 .. _code_metric/0::process_file/1:
@@ -428,10 +360,6 @@ Processes a source file.
 
 ------------
 
-.. raw:: html
-
-   <div id="process_directory/1"> </div>
-
 .. index:: process_directory/1
 .. _code_metric/0::process_directory/1:
 
@@ -450,10 +378,6 @@ Processes a directory of source files.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="process_rdirectory/1"> </div>
 
 .. index:: process_rdirectory/1
 .. _code_metric/0::process_rdirectory/1:
@@ -474,10 +398,6 @@ Recursively process a directory of source files.
 
 ------------
 
-.. raw:: html
-
-   <div id="process_library/1"> </div>
-
 .. index:: process_library/1
 .. _code_metric/0::process_library/1:
 
@@ -496,10 +416,6 @@ Processes a library of source files.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="process_rlibrary/1"> </div>
 
 .. index:: process_rlibrary/1
 .. _code_metric/0::process_rlibrary/1:
@@ -520,10 +436,6 @@ Recursively process a library of source files.
 
 ------------
 
-.. raw:: html
-
-   <div id="process_all/0"> </div>
-
 .. index:: process_all/0
 .. _code_metric/0::process_all/0:
 
@@ -540,10 +452,6 @@ Processes all loaded source code.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sub_directory/2"> </div>
 
 .. index:: sub_directory/2
 .. _code_metric/0::sub_directory/2:
@@ -563,10 +471,6 @@ Enumerates, by backtracking, all directory sub-directories containing loaded fil
 
 
 ------------
-
-.. raw:: html
-
-   <div id="sub_library/2"> </div>
 
 .. index:: sub_library/2
 .. _code_metric/0::sub_library/2:

@@ -34,10 +34,6 @@ Number grammars.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="bit//1"> </div>
-
 .. index:: bit//1
 .. _number_grammars/1::bit//1:
 
@@ -54,10 +50,6 @@ Parses a single bit.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="bits//1"> </div>
 
 .. index:: bits//1
 .. _number_grammars/1::bits//1:
@@ -76,10 +68,6 @@ Parses a sequence of one of more bits.
 
 ------------
 
-.. raw:: html
-
-   <div id="digit//1"> </div>
-
 .. index:: digit//1
 .. _number_grammars/1::digit//1:
 
@@ -96,10 +84,6 @@ Parses a single decimal digit.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="digits//1"> </div>
 
 .. index:: digits//1
 .. _number_grammars/1::digits//1:
@@ -118,10 +102,6 @@ Parses a sequence of zero of more digits.
 
 ------------
 
-.. raw:: html
-
-   <div id="hex_digit//1"> </div>
-
 .. index:: hex_digit//1
 .. _number_grammars/1::hex_digit//1:
 
@@ -138,10 +118,6 @@ Parses a single hexa-decimal digit.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="hex_digits//1"> </div>
 
 .. index:: hex_digits//1
 .. _number_grammars/1::hex_digits//1:
@@ -160,10 +136,6 @@ Parses a sequence of zero or more hexa-decimal digits.
 
 ------------
 
-.. raw:: html
-
-   <div id="natural//1"> </div>
-
 .. index:: natural//1
 .. _number_grammars/1::natural//1:
 
@@ -180,10 +152,6 @@ Parses a natural number (a non signed integer).
 
 
 ------------
-
-.. raw:: html
-
-   <div id="integer//1"> </div>
 
 .. index:: integer//1
 .. _number_grammars/1::integer//1:
@@ -202,10 +170,6 @@ Parses an integer.
 
 ------------
 
-.. raw:: html
-
-   <div id="float//1"> </div>
-
 .. index:: float//1
 .. _number_grammars/1::float//1:
 
@@ -222,10 +186,6 @@ Parses a float.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="number//1"> </div>
 
 .. index:: number//1
 .. _number_grammars/1::number//1:
@@ -244,10 +204,6 @@ Parses a number (an integer or a float).
 
 ------------
 
-.. raw:: html
-
-   <div id="sign//1"> </div>
-
 .. index:: sign//1
 .. _number_grammars/1::sign//1:
 
@@ -264,10 +220,6 @@ Parses a number sign.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="dot//1"> </div>
 
 .. index:: dot//1
 .. _number_grammars/1::dot//1:

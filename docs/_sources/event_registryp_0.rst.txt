@@ -35,10 +35,6 @@ Event registry protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="monitors/1"> </div>
-
 .. index:: monitors/1
 .. _event_registryp/0::monitors/1:
 
@@ -57,10 +53,6 @@ Returns a list of all current monitors.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="monitor/1"> </div>
 
 .. index:: monitor/1
 .. _event_registryp/0::monitor/1:
@@ -82,10 +74,6 @@ Monitor is an object playing the role of a monitor.
 
 ------------
 
-.. raw:: html
-
-   <div id="monitored/1"> </div>
-
 .. index:: monitored/1
 .. _event_registryp/0::monitored/1:
 
@@ -104,10 +92,6 @@ Returns a list of all currently monitored objects.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="monitor/4"> </div>
 
 .. index:: monitor/4
 .. _event_registryp/0::monitor/4:
@@ -128,10 +112,6 @@ True if the arguments describe a currently defined monitored event.
 
 ------------
 
-.. raw:: html
-
-   <div id="set_monitor/4"> </div>
-
 .. index:: set_monitor/4
 .. _event_registryp/0::set_monitor/4:
 
@@ -151,10 +131,6 @@ Sets a monitor for the set of matching events.
 
 ------------
 
-.. raw:: html
-
-   <div id="del_monitors/4"> </div>
-
 .. index:: del_monitors/4
 .. _event_registryp/0::del_monitors/4:
 
@@ -173,10 +149,6 @@ Deletes all matching monitored events.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="del_monitors/0"> </div>
 
 .. index:: del_monitors/0
 .. _event_registryp/0::del_monitors/0:

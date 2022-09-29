@@ -34,10 +34,6 @@ Pseudo-random number generator protocol for seed handling predicates. These pred
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="get_seed/1"> </div>
-
 .. index:: get_seed/1
 .. _pseudo_random_protocol/0::get_seed/1:
 
@@ -56,10 +52,6 @@ Gets the current random generator seed. Seed should be regarded as an opaque gro
 
 
 ------------
-
-.. raw:: html
-
-   <div id="set_seed/1"> </div>
 
 .. index:: set_seed/1
 .. _pseudo_random_protocol/0::set_seed/1:

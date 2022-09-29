@@ -40,10 +40,6 @@ Simple CHR interpreter/debugger based on the refined operational semantics of CH
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="chr_is/2"> </div>
-
 .. index:: chr_is/2
 .. _toychrdb/0::chr_is/2:
 
@@ -55,10 +51,6 @@ Public predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_trace/0"> </div>
 
 .. index:: chr_trace/0
 .. _toychrdb/0::chr_trace/0:
@@ -72,10 +64,6 @@ Public predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_notrace/0"> </div>
-
 .. index:: chr_notrace/0
 .. _toychrdb/0::chr_notrace/0:
 
@@ -87,10 +75,6 @@ Public predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_spy/1"> </div>
 
 .. index:: chr_spy/1
 .. _toychrdb/0::chr_spy/1:
@@ -104,10 +88,6 @@ Public predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_nospy/0"> </div>
-
 .. index:: chr_nospy/0
 .. _toychrdb/0::chr_nospy/0:
 
@@ -120,10 +100,6 @@ Public predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_no_spy/1"> </div>
-
 .. index:: chr_no_spy/1
 .. _toychrdb/0::chr_no_spy/1:
 
@@ -135,10 +111,6 @@ Public predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_option/2"> </div>
 
 .. index:: chr_option/2
 .. _toychrdb/0::chr_option/2:
@@ -155,10 +127,6 @@ Public predicates
 Protected predicates
 --------------------
 
-.. raw:: html
-
-   <div id="current_prog/1"> </div>
-
 .. index:: current_prog/1
 .. _toychrdb/0::current_prog/1:
 
@@ -170,10 +138,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_option_print_trace/0"> </div>
 
 .. index:: chr_option_print_trace/0
 .. _toychrdb/0::chr_option_print_trace/0:
@@ -187,10 +151,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_option_trace_interactive/0"> </div>
-
 .. index:: chr_option_trace_interactive/0
 .. _toychrdb/0::chr_option_trace_interactive/0:
 
@@ -202,10 +162,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_option_optimization_level/1"> </div>
 
 .. index:: chr_option_optimization_level/1
 .. _toychrdb/0::chr_option_optimization_level/1:
@@ -219,10 +175,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_option_show_stack/0"> </div>
-
 .. index:: chr_option_show_stack/0
 .. _toychrdb/0::chr_option_show_stack/0:
 
@@ -234,10 +186,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_option_show_store/0"> </div>
 
 .. index:: chr_option_show_store/0
 .. _toychrdb/0::chr_option_show_store/0:
@@ -251,10 +199,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_option_show_history/0"> </div>
-
 .. index:: chr_option_show_history/0
 .. _toychrdb/0::chr_option_show_history/0:
 
@@ -266,10 +210,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_option_show_id/0"> </div>
 
 .. index:: chr_option_show_id/0
 .. _toychrdb/0::chr_option_show_id/0:
@@ -283,10 +223,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_option_allow_deep_guards/0"> </div>
-
 .. index:: chr_option_allow_deep_guards/0
 .. _toychrdb/0::chr_option_allow_deep_guards/0:
 
@@ -299,10 +235,6 @@ Protected predicates
 
 ------------
 
-.. raw:: html
-
-   <div id="chr_next_state/1"> </div>
-
 .. index:: chr_next_state/1
 .. _toychrdb/0::chr_next_state/1:
 
@@ -314,10 +246,6 @@ Protected predicates
 
 
 ------------
-
-.. raw:: html
-
-   <div id="chr_spy_point/1"> </div>
 
 .. index:: chr_spy_point/1
 .. _toychrdb/0::chr_spy_point/1:
@@ -333,10 +261,6 @@ Protected predicates
 
 Private predicates
 ------------------
-
-.. raw:: html
-
-   <div id="chr_rule_/1"> </div>
 
 .. index:: chr_rule_/1
 .. _toychrdb/0::chr_rule_/1:

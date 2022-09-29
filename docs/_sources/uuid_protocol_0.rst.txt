@@ -35,10 +35,6 @@ Universally unique identifier (UUID) generator protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="uuid_v1/2"> </div>
-
 .. index:: uuid_v1/2
 .. _uuid_protocol/0::uuid_v1/2:
 
@@ -57,10 +53,6 @@ Returns a version 1 UUID for the given MAC address (a list of six bytes). The MA
 
 
 ------------
-
-.. raw:: html
-
-   <div id="uuid_v4/1"> </div>
 
 .. index:: uuid_v4/1
 .. _uuid_protocol/0::uuid_v4/1:
@@ -81,10 +73,6 @@ Returns a version 4 UUID.
 
 ------------
 
-.. raw:: html
-
-   <div id="uuid_null/1"> </div>
-
 .. index:: uuid_null/1
 .. _uuid_protocol/0::uuid_null/1:
 
@@ -103,10 +91,6 @@ Returns the null UUID.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="random_node/1"> </div>
 
 .. index:: random_node/1
 .. _uuid_protocol/0::random_node/1:

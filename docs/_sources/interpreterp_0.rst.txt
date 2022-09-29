@@ -35,10 +35,6 @@ Protocol for an interpreter.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="prove/2"> </div>
-
 .. index:: prove/2
 .. _interpreterp/0::prove/2:
 
@@ -57,10 +53,6 @@ True if goal is provable in the specified database.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="prove/3"> </div>
 
 .. index:: prove/3
 .. _interpreterp/0::prove/3:

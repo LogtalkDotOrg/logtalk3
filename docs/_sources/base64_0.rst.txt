@@ -34,10 +34,6 @@ Base64 parser and generator.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="parse/2"> </div>
-
 .. index:: parse/2
 .. _base64/0::parse/2:
 
@@ -56,10 +52,6 @@ Parses the Base64 data from the given source (``atom(Atom)``, ``chars(List)``, `
 
 
 ------------
-
-.. raw:: html
-
-   <div id="generate/2"> </div>
 
 .. index:: generate/2
 .. _base64/0::generate/2:

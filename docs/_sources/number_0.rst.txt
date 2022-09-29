@@ -34,10 +34,6 @@ Number data type predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="approximately_equal/3"> </div>
-
 .. index:: approximately_equal/3
 .. _number/0::approximately_equal/3:
 
@@ -56,10 +52,6 @@ Compares two numbers for approximate equality given an epsilon value using the d
 
 
 ------------
-
-.. raw:: html
-
-   <div id="essentially_equal/3"> </div>
 
 .. index:: essentially_equal/3
 .. _number/0::essentially_equal/3:
@@ -80,10 +72,6 @@ Compares two numbers for essential equality given an epsilon value using the de 
 
 ------------
 
-.. raw:: html
-
-   <div id="tolerance_equal/4"> </div>
-
 .. index:: tolerance_equal/4
 .. _number/0::tolerance_equal/4:
 
@@ -102,10 +90,6 @@ Compares two numbers for close equality given relative and absolute tolerances u
 
 
 ------------
-
-.. raw:: html
-
-   <div id="=~= / 2"> </div>
 
 .. index:: =~= / 2
 .. _number/0::=~= / 2:

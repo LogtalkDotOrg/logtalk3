@@ -41,10 +41,6 @@ Registry handling predicates.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="list/0"> </div>
-
 .. index:: list/0
 .. _registries/0::list/0:
 
@@ -61,10 +57,6 @@ Prints a list of all defined registries, including how defined (``git``, ``archi
 
 
 ------------
-
-.. raw:: html
-
-   <div id="describe/1"> </div>
 
 .. index:: describe/1
 .. _registries/0::describe/1:
@@ -85,10 +77,6 @@ Prints all registry entries.
 
 ------------
 
-.. raw:: html
-
-   <div id="defined/4"> </div>
-
 .. index:: defined/4
 .. _registries/0::defined/4:
 
@@ -107,10 +95,6 @@ Enumerates by backtracking all defined registries, their definition URL, how the
 
 
 ------------
-
-.. raw:: html
-
-   <div id="add/3"> </div>
 
 .. index:: add/3
 .. _registries/0::add/3:
@@ -141,10 +125,6 @@ Adds a new registry using the given options. Fails if the registry cannot be add
 
 ------------
 
-.. raw:: html
-
-   <div id="add/2"> </div>
-
 .. index:: add/2
 .. _registries/0::add/2:
 
@@ -167,10 +147,6 @@ Adds a new registry using default options. Fails if the registry cannot be added
 
 
 ------------
-
-.. raw:: html
-
-   <div id="add/1"> </div>
 
 .. index:: add/1
 .. _registries/0::add/1:
@@ -195,10 +171,6 @@ Adds a new registry from a git cloning or local directory URL using default opti
 
 
 ------------
-
-.. raw:: html
-
-   <div id="update/2"> </div>
 
 .. index:: update/2
 .. _registries/0::update/2:
@@ -228,10 +200,6 @@ Updates a defined registry using the specified options. Fails if the registry is
 
 ------------
 
-.. raw:: html
-
-   <div id="update/1"> </div>
-
 .. index:: update/1
 .. _registries/0::update/1:
 
@@ -251,10 +219,6 @@ Updates a defined registry using default options. Fails if the registry is not d
 
 ------------
 
-.. raw:: html
-
-   <div id="update/0"> </div>
-
 .. index:: update/0
 .. _registries/0::update/0:
 
@@ -271,10 +235,6 @@ Updates all defined registries using default options.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="delete/2"> </div>
 
 .. index:: delete/2
 .. _registries/0::delete/2:
@@ -304,10 +264,6 @@ Deletes a registry using the specified options (if not pinned).
 
 ------------
 
-.. raw:: html
-
-   <div id="delete/1"> </div>
-
 .. index:: delete/1
 .. _registries/0::delete/1:
 
@@ -327,10 +283,6 @@ Deletes a registry using default options.
 
 ------------
 
-.. raw:: html
-
-   <div id="delete/0"> </div>
-
 .. index:: delete/0
 .. _registries/0::delete/0:
 
@@ -347,10 +299,6 @@ Deletes all registries using the ``force(true)`` option.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="clean/1"> </div>
 
 .. index:: clean/1
 .. _registries/0::clean/1:
@@ -371,10 +319,6 @@ Cleans all registry archives. Fails if the registry is not defined.
 
 ------------
 
-.. raw:: html
-
-   <div id="clean/0"> </div>
-
 .. index:: clean/0
 .. _registries/0::clean/0:
 
@@ -391,10 +335,6 @@ Cleans all archives for all registries.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="provides/2"> </div>
 
 .. index:: provides/2
 .. _registries/0::provides/2:
@@ -415,10 +355,6 @@ Enumerates by backtracking all packs provided by a registry.
 
 ------------
 
-.. raw:: html
-
-   <div id="lint/1"> </div>
-
 .. index:: lint/1
 .. _registries/0::lint/1:
 
@@ -437,10 +373,6 @@ Checks the registry specification. Fails if the registry is not defined or if li
 
 
 ------------
-
-.. raw:: html
-
-   <div id="lint/0"> </div>
 
 .. index:: lint/0
 .. _registries/0::lint/0:

@@ -37,10 +37,6 @@ Supports selective enabling and disabling of ``debug`` and ``debug(Group)`` mess
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="enable/1"> </div>
-
 .. index:: enable/1
 .. _debug_messages/0::enable/1:
 
@@ -59,10 +55,6 @@ Enables all ``debug`` and ``debug(Group)`` messages for the given component.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="disable/1"> </div>
 
 .. index:: disable/1
 .. _debug_messages/0::disable/1:
@@ -83,10 +75,6 @@ Disables all ``debug`` and ``debug(Group)`` messages for the given component.
 
 ------------
 
-.. raw:: html
-
-   <div id="enabled/1"> </div>
-
 .. index:: enabled/1
 .. _debug_messages/0::enabled/1:
 
@@ -105,10 +93,6 @@ Enumerates by backtracking the components with enabled ``debug`` and ``debug(Gro
 
 
 ------------
-
-.. raw:: html
-
-   <div id="enable/2"> </div>
 
 .. index:: enable/2
 .. _debug_messages/0::enable/2:
@@ -129,10 +113,6 @@ Enables ``debug(Group)`` messages for the given component and group.
 
 ------------
 
-.. raw:: html
-
-   <div id="disable/2"> </div>
-
 .. index:: disable/2
 .. _debug_messages/0::disable/2:
 
@@ -151,10 +131,6 @@ Disables ``debug(Group)`` messages for the given component and group.
 
 
 ------------
-
-.. raw:: html
-
-   <div id="enabled/2"> </div>
 
 .. index:: enabled/2
 .. _debug_messages/0::enabled/2:
@@ -183,10 +159,6 @@ Protected predicates
 Private predicates
 ------------------
 
-.. raw:: html
-
-   <div id="enabled_/1"> </div>
-
 .. index:: enabled_/1
 .. _debug_messages/0::enabled_/1:
 
@@ -205,10 +177,6 @@ Table of components with currently enabled ``debug`` and ``debug(Group)`` messag
 
 
 ------------
-
-.. raw:: html
-
-   <div id="enabled_/2"> </div>
 
 .. index:: enabled_/2
 .. _debug_messages/0::enabled_/2:

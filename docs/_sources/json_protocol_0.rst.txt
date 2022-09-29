@@ -35,10 +35,6 @@ JSON parser and generator protocol.
 Public predicates
 -----------------
 
-.. raw:: html
-
-   <div id="parse/2"> </div>
-
 .. index:: parse/2
 .. _json_protocol/0::parse/2:
 
@@ -57,10 +53,6 @@ Parses the JSON contents read from the given source (``codes(List)``, ``stream(S
 
 
 ------------
-
-.. raw:: html
-
-   <div id="generate/2"> </div>
 
 .. index:: generate/2
 .. _json_protocol/0::generate/2:
