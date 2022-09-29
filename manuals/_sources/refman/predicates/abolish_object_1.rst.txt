@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: abolish_object/1; Built-in predicate
 .. _predicates_abolish_object_1:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: question_prompt_stream/4; Built-in method
 .. _methods_question_prompt_stream_4:
 

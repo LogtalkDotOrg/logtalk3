@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: encoding/1; Directive
 .. _directives_encoding_1:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: print_message/3; Built-in method
 .. _methods_print_message_3:
 

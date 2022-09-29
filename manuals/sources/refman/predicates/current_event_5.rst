@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: current_event/5; Built-in predicate
 .. _predicates_current_event_5:
 

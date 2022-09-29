@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: set_logtalk_flag/2; Built-in predicate
 .. _predicates_set_logtalk_flag_2:
 

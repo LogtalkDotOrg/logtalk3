@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: after/3; Built-in method
 .. _methods_after_3:
 

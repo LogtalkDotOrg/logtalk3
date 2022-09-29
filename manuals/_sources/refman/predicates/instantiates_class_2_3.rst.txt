@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: instantiates_class/2-3; Built-in predicate
 .. _predicates_instantiates_class_2_3:
 

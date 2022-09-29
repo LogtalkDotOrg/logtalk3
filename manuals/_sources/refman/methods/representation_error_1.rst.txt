@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: representation_error/1; Built-in method
 .. _methods_representation_error_1:
 

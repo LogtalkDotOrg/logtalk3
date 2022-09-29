@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: print_message_token/4; Built-in method
 .. _methods_print_message_token_4:
 

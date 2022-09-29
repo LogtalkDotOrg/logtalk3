@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: use_module/2; Directive
 .. _directives_use_module_2:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: implements_protocol/2-3; Built-in predicate
 .. _predicates_implements_protocol_2_3:
 

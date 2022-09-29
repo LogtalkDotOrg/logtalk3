@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: goal_expansion/2; Built-in method
 .. _methods_goal_expansion_2:
 

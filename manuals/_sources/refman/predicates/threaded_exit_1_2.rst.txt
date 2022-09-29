@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: threaded_exit/1-2; Built-in predicate
 .. _predicates_threaded_exit_1_2:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: initialization/1; Directive
 .. _directives_initialization_1:
 

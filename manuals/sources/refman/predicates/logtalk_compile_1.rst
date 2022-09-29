@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: logtalk_compile/1; Built-in predicate
 .. _predicates_logtalk_compile_1:
 

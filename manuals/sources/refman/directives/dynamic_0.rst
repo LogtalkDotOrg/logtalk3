@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: dynamic/0; Directive
 .. _directives_dynamic_0:
 

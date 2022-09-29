@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: syntax_error/1; Built-in method
 .. _methods_syntax_error_1:
 

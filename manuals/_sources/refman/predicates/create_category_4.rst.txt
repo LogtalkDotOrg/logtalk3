@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: create_category/4; Built-in predicate
 .. _predicates_create_category_4:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: threaded_peek/1-2; Built-in predicate
 .. _predicates_threaded_peek_1_2:
 

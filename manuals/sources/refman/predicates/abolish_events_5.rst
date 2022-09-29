@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: abolish_events/5; Built-in predicate
 .. _predicates_abolish_events_5:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**control construct**
+
 .. index:: pair: {}/1; Control construct
 .. _control_external_call_1:
 

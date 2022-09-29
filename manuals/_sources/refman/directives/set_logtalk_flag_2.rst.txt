@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: set_logtalk_flag/2; Directive
 .. _directives_set_logtalk_flag_2:
 

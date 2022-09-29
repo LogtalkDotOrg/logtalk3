@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: threaded_cancel/1; Built-in predicate
 .. _predicates_threaded_cancel_1:
 

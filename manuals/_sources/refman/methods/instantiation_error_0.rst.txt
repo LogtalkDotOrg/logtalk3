@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: instantiation_error/0; Built-in method
 .. _methods_instantiation_error_0:
 

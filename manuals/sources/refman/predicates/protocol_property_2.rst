@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: protocol_property/2; Built-in predicate
 .. _predicates_protocol_property_2:
 

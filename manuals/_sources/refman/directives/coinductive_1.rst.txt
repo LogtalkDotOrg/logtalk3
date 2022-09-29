@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: coinductive/1; Directive
 .. _directives_coinductive_1:
 

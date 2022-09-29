@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**control construct**
+
 .. index:: pair: (<<)/2; Control construct
 .. _control_context_switch_2:
 

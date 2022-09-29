@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: protocol/1-2; Directive
 .. _directives_protocol_1_2:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: message_prefix_stream/4; Built-in method
 .. _methods_message_prefix_stream_4:
 

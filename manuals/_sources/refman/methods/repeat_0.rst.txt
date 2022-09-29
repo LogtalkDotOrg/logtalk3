@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: repeat/0; Built-in method
 .. _methods_repeat_0:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: domain_error/2; Built-in method
 .. _methods_domain_error_2:
 

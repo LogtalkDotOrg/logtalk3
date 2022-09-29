@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: bagof/3; Built-in method
 .. _methods_bagof_3:
 

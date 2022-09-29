@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: coinductive_success_hook/1-2; Built-in method
 .. _methods_coinductive_success_hook_1_2:
 

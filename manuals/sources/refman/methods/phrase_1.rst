@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in method**
+
 .. index:: pair: phrase//1; Built-in method
 .. _methods_phrase_1:
 

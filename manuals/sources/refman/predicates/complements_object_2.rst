@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: complements_object/2; Built-in predicate
 .. _predicates_complements_object_2:
 

@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**directive**
+
 .. index:: pair: meta_non_terminal/1; Directive
 .. _directives_meta_non_terminal_1:
 

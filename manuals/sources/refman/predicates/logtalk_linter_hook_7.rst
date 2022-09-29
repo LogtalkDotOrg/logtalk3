@@ -16,6 +16,10 @@
    limitations under the License.
 
 
+.. rst-class:: align-right
+
+**built-in predicate**
+
 .. index:: pair: logtalk_linter_hook/7; Built-in predicate
 .. _predicates_logtalk_linter_hook_7:
 
