@@ -25,6 +25,12 @@ RELEASE NOTES
 3.59.0 - October ??, 2022
 =========================
 
+Documentation
+-------------
+
+* FIXED: Added missing Handbook and APIs documentation `sphinx_highlight.js`
+file.
+
 Tools
 -----
 
