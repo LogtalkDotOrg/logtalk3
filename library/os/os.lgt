@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:94:0,
+		version is 1:94:1,
 		author is 'Paulo Moura',
-		date is 2022-09-12,
+		date is 2022-09-30,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -1193,7 +1193,7 @@
 			atom_codes(Value, String).
 
 		time_stamp(Time) :-
-			{time(Time)}.
+			{now(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{datime(_, Year, Month, Day, Hours, Minutes, Seconds, _, _)}.

@@ -31,6 +31,12 @@ Documentation
 * FIXED: Added missing Handbook and APIs documentation `sphinx_highlight.js`
 file.
 
+Library
+-------
+
+* FIXED: Definition of the `os::time_stamp/1` library predicate for Ciao
+Prolog.
+
 Tools
 -----
 
