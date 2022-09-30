@@ -25,6 +25,11 @@ RELEASE NOTES
 3.59.0 - October ??, 2022
 =========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Ciao Prolog adapter file to require version 1.22.0 or later.
+
 Documentation
 -------------
 
