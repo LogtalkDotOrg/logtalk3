@@ -30,6 +30,10 @@ Prolog adapter and integration files
 
 * UPDATED: The Ciao Prolog adapter file to require version 1.22.0 or later.
 
+* UPDATED: All Bash shell integration scripts to also look into the
+`/opt/homebrew/share` directory (used by Homebrew on Apple Silicon)
+when the `LOGTALKHOME` environment variable is not defined.
+
 Documentation
 -------------
 

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Integration script for XSB
-##   Last updated on April 12, 2022
+##   Last updated on September 30, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -40,6 +40,9 @@ if ! [ "$LOGTALKHOME" ]; then
 	elif [ -d "/opt/share/logtalk" ]; then
 		LOGTALKHOME=/opt/share/logtalk
 		echo "... using Logtalk installation found at /opt/share/logtalk"
+	elif [ -d "/opt/homebrew/share/logtalk" ]; then
+		LOGTALKHOME=/opt/homebrew/share/logtalk
+		echo "... using Logtalk installation found at /opt/homebrew/share/logtalk"
 	elif [ -d "$HOME/share/logtalk" ]; then
 		LOGTALKHOME="$HOME/share/logtalk"
 		echo "... using Logtalk installation found at $HOME/share/logtalk"
