@@ -42,7 +42,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.10"
+	echo "  0.11"
 	exit 0
 }
 
@@ -170,15 +170,15 @@ done
 mkdir -p ../../info
 cd ../../info || exit 1
 if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
-	ln -sf ../logtalk/docs/LogtalkAPIs-$version_base.info LogtalkAPIs.info
+	cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
 	if [ "$(command -v install-info)" != "" ]; then
-		install-info LogtalkAPIs.info dir
+		install-info LogtalkAPIs-$version_base.info dir
 	fi
 fi
 if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
-	ln -sf ../logtalk/manuals/TheLogtalkHandbook-$version_base.info TheLogtalkHandbook.info
+	cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
 	if [ "$(command -v install-info)" != "" ]; then
-		install-info TheLogtalkHandbook.info dir
+		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
 fi
 
