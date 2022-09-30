@@ -51,6 +51,9 @@ Tools
 
 * IMPROVED: Simplify the `lgtdoc` tool generated reStructuredText files.
 
+* FIXED: Missing new-line after index titles in the output of the `lgtdoc`
+tool `logtalk_index_to_txt.xsl` XSLT file.
+
 Installers and installation scripts
 -----------------------------------
 
