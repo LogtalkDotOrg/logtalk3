@@ -51,11 +51,11 @@
 		length(PerColData, NCols),
 		% set up domains for the battleship variables
 		% a zero tally => that row or column must be empty
-		zero_positions(PerColData, 0, NoCols1, []),
+		phrase(zero_positions(PerColData, 0), NoCols1),
 		list_to_fdset(NoCols1, NoCols2),
 		fdset_parts(XDom1, 1, NCols, []),
 		fdset_subtract(XDom1, NoCols2, XDom2),
-		zero_positions(PerRowData, 0, NoRows1, []),
+		phrase(zero_positions(PerRowData, 0), NoRows1),
 		list_to_fdset(NoRows1, NoRows2),
 		fdset_parts(YDom1, 1, NRows, []),
 		fdset_subtract(YDom1, NoRows2, YDom2),
@@ -74,7 +74,7 @@
 		keyclumped(TShips2, Groups),
 		order_groups(Groups),
 		% search: largest ship first
-		ships_vars(Ships, Vars, []),
+		phrase(ships_vars(Ships), Vars),
 		labeling([bisect], Vars),
 		% display solution
 		draw(Ships, NRows, NCols).
@@ -165,7 +165,7 @@
 	draw_lines(NR, NR, _, _) :- !.
 	draw_lines(I,  NR, NC, Ships) :-
 		R is I+1,
-		ascii_line(0, NC, R, Ships, String, "|\n"),
+		phrase(ascii_line(0, NC, R, Ships), String, "|\n"),
 		format([0'||String], []),
 		draw_lines(R, NR, NC, Ships).
 

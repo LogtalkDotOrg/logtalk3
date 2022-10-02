@@ -54,6 +54,12 @@ Tools
 * FIXED: Missing new-line after index titles in the output of the `lgtdoc`
 tool `logtalk_index_to_txt.xsl` XSLT file.
 
+Examples
+--------
+
+* FIXED: The `constraints/sicstus` example linter warnings on non-terminals
+called as predicates.
+
 Installers and installation scripts
 -----------------------------------
 
