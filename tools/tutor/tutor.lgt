@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:49:0,
+		version is 0:50:0,
 		author is 'Paulo Moura',
-		date is 2022-09-09,
+		date is 2022-10-03,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -861,6 +861,11 @@
 		[	'Using the *->/2 soft cut control construct without an else part is'-[], nl,
 			'a common source of errors. Check if the else part is missing due'-[], nl,
 			'to a coding error or use the (If *-> Then; fail) pattern instead.'-[], nl, nl
+		].
+	explain(suspicious_call(_, _, _, _, Var, [call(Var)])) -->
+		[	'Naked mata-variables in control constructs that are cut-transparent'-[], nl,
+			'may have different semantics across Prolog systems. Use instead the '-[], nl,
+			'suggested alternative to avoid portability issues.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
 		[	'The standard Prolog =../2 built-in predicate is costly and should be'-[], nl,

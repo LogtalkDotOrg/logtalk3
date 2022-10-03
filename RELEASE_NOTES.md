@@ -25,6 +25,13 @@ RELEASE NOTES
 3.59.0 - October ??, 2022
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Linter warning for predicate rules where the body is a naked
+meta-variable or contains a control construct where a cut-transparent
+argument is a naked meta-variable.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -49,6 +56,9 @@ Prolog.
 Tools
 -----
 
+* UPDATED: The `tutor` tool to explain the new linter warning on naked
+meta-variables in cut-transparent control constructs.
+
 * IMPROVED: Simplify the `lgtdoc` tool generated reStructuredText files.
 
 * FIXED: Missing new-line after index titles in the output of the `lgtdoc`
@@ -56,6 +66,9 @@ tool `logtalk_index_to_txt.xsl` XSLT file.
 
 Examples
 --------
+
+* UPDATED: The `errors` tool to illustrate the new linter warning on naked
+meta-variables in cut-transparent control constructs.
 
 * FIXED: The `constraints/sicstus` example linter warnings on non-terminals
 called as predicates.

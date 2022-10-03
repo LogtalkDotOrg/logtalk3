@@ -735,3 +735,22 @@
 	baz.
 
 :- end_object.
+
+
+
+:- object(naked).
+
+	foo(X) :-
+		X.
+
+	bar(X) :-
+		foo(X),
+		X.
+
+	baz(X, Y, Z) :-
+		(	X ->
+			Y
+		;	Z
+		).
+
+:- end_object.
