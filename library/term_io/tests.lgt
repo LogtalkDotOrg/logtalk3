@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-02-15,
+		date is 2022-10-04,
 		comment is 'Unit tests for the "term_io" library.'
 	]).
 
 	:- uses(term_io, [
 		read_term_from_atom/3,  read_from_atom/2,
-		read_term_from_chars/3, read_from_chars/2,
-		read_term_from_codes/3, read_from_codes/2,
+		read_term_from_chars/3, read_term_from_chars/4, read_from_chars/2,
+		read_term_from_codes/3, read_term_from_codes/4, read_from_codes/2,
 		write_term_to_atom/3,   write_to_atom/2,
 		write_term_to_chars/3,  write_term_to_chars/4, write_to_chars/2,
 		write_term_to_codes/3,  write_term_to_codes/4, write_to_codes/2,
@@ -150,6 +150,18 @@
 		atom_chars('[1,2,3].', Chars),
 		read_term_from_chars(Chars, Term, []).
 
+	% read_term_from_chars/4 tests
+
+	test(read_term_from_chars_4_01, true(Term == a(1))) :-
+		atom_chars('a(1). a(2). a(3). ', Chars),
+		read_term_from_chars(Chars, Term, _, []).
+
+	test(read_term_from_chars_4_02, true([Term1, Term2, Term3| Tail3] == [a(1), a(2), a(3)])) :-
+		atom_chars('a(1). a(2). a(3).', Chars),
+		read_term_from_chars(Chars, Term1, Tail1, []),
+		read_term_from_chars(Tail1, Term2, Tail2, []),
+		read_term_from_chars(Tail2, Term3, Tail3, []).
+
 	% read_term_from_codes/3 tests
 
 	test(read_term_from_codes_3_01, true(var(Term))) :-
@@ -207,6 +219,18 @@
 	test(read_term_from_codes_3_14, true(Term == [1,2,3])) :-
 		atom_codes('[1,2,3].', Codes),
 		read_term_from_codes(Codes, Term, []).
+
+	% read_term_from_chars/4 tests
+
+	test(read_term_from_codes_4_01, true(Term == a(1))) :-
+		atom_codes('a(1). a(2). a(3). ', Codes),
+		read_term_from_codes(Codes, Term, _, []).
+
+	test(read_term_from_codes_4_02, true([Term1, Term2, Term3| Tail3] == [a(1), a(2), a(3)])) :-
+		atom_codes('a(1). a(2). a(3).', Codes),
+		read_term_from_codes(Codes, Term1, Tail1, []),
+		read_term_from_codes(Tail1, Term2, Tail2, []),
+		read_term_from_codes(Tail2, Term3, Tail3, []).
 
 	% write_term_to_atom/3 tests
 

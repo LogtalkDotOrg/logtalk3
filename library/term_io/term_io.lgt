@@ -23,9 +23,9 @@
 	implements(term_io_protocol)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-05-06,
+		date is 2022-10-04,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -80,6 +80,19 @@
 			close(Input)
 		).
 
+	read_term_from_chars(Chars, Term, Tail, Options) :-
+		(	Chars == [] ->
+			Term = end_of_file
+		;	temporary_file_(Path),
+			open(Path, write, Output),
+			put_chars_raw(Chars, Output),
+			close(Output),
+			open(Path, read, Input),
+			catch(read_term(Input, Term, Options), Error, (close(Input),throw(Error))),
+			get_chars(Input, Tail, []),
+			close(Input)
+		).
+
 	read_term_from_codes(Codes, Term, Options) :-
 		(	Codes == [] ->
 			Term = end_of_file
@@ -90,6 +103,19 @@
 			close(Output),
 			open(Path, read, Input),
 			catch(read_term(Input, Term, Options), Error, (close(Input),throw(Error))),
+			close(Input)
+		).
+
+	read_term_from_codes(Codes, Term, Tail, Options) :-
+		(	Codes == [] ->
+			Term = end_of_file
+		;	temporary_file_(Path),
+			open(Path, write, Output),
+			put_codes_raw(Codes, Output),
+			close(Output),
+			open(Path, read, Input),
+			catch(read_term(Input, Term, Options), Error, (close(Input),throw(Error))),
+			get_codes(Input, Tail, []),
 			close(Input)
 		).
 
@@ -226,6 +252,11 @@
 
 	% auxiliary predicates
 
+	put_chars_raw([], _).
+	put_chars_raw([Char| Chars], Stream) :-
+		put_char(Stream, Char),
+		put_chars_raw(Chars, Stream).
+
 	put_chars([], Char, Stream) :-
 		(	Char == '.' ->
 			put_char(Stream, Char)
@@ -236,6 +267,11 @@
 	put_chars([Next| Chars], Char, Stream) :-
 		put_char(Stream, Char),
 		put_chars(Chars, Next, Stream).
+
+	put_codes_raw([], _).
+	put_codes_raw([Char| Chars], Stream) :-
+		put_code(Stream, Char),
+		put_codes_raw(Chars, Stream).
 
 	put_codes([], Code, Stream) :-
 		(	Code == 0'. ->

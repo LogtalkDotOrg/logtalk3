@@ -22,9 +22,9 @@
 :- protocol(term_io_protocol).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-05-23,
+		date is 2021-10-04,
 		comment is 'Predicates for term input/output from/to atom, chars, and codes. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		remarks is [
 			'Portability notes' - 'To keep calls to these library predicates portable, use only standard read/write options and specify output formats using atoms.'
@@ -52,6 +52,13 @@
 		argnames is ['Chars', 'Term', 'Options']
 	]).
 
+	:- public(read_term_from_chars/4).
+	:- mode(read_term_from_chars(+list(character), -term, -list(character), +list(read_option)), one_or_error).
+	:- info(read_term_from_chars/4, [
+		comment is 'Reads a term from a list of characters using the given read options, also returning the remaining characters. A period at the end of the term is required. Valid options are those supported by the standard ``read_term/3`` predicate.',
+		argnames is ['Chars', 'Term', 'Tail', 'Options']
+	]).
+
 	:- public(read_from_chars/2).
 	:- mode(read_from_chars(+list(character), -term), one_or_error).
 	:- info(read_from_chars/2, [
@@ -64,6 +71,13 @@
 	:- info(read_term_from_codes/3, [
 		comment is 'Reads a term from a list of character codes using the given read options. A period at the end of the list is optional. Valid options are those supported by the standard ``read_term/3`` predicate.',
 		argnames is ['Codes', 'Term', 'Options']
+	]).
+
+	:- public(read_term_from_codes/4).
+	:- mode(read_term_from_codes(+list(character_code), -term, -list(character_code), +list(read_option)), one_or_error).
+	:- info(read_term_from_codes/4, [
+		comment is 'Reads a term from a list of character codes using the given read options, also returning the remaining character codes. A period at the end of the term is required. Valid options are those supported by the standard ``read_term/3`` predicate.',
+		argnames is ['Codes', 'Term', 'Tail', 'Options']
 	]).
 
 	:- public(read_from_codes/2).
