@@ -945,7 +945,7 @@ called as a goal or used as a closure. For example:
 The ``::`` mode indicator in the meta-predicate template allows the
 corresponding argument in the meta-predicate definiton to be a
 non-variable term and instructs the compiler to look into the argument
-sub-terms for goal and closure meta-variables.
+sub-terms for goal and closure :term:`meta-variables <meta-variable>`.
 
 When a meta-predicate calls another meta-predicate, both predicates require
 ``meta_predicate/1`` directives. For example, the ``map/2`` meta-predicate

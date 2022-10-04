@@ -613,3 +613,13 @@ Glossary
       :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_make_1`.
       These shorthands are **not** part of the Logtalk language and must
       only be used at the top-level interpreter.
+
+   meta-variable
+      A variable in a :term:`meta-argument` position that is expected to be
+      unified with a goal or a closure at runtime.
+
+   naked meta-variable
+      A :term:`meta-variable` used as the body of a predicate clause or
+      grammar rule or used in a cut-transparent argument of a control
+      construct. The "naked" designation highlights that the meta-variable
+      is not wrapped by ``call/1`` or ``phrase//1`` goals.

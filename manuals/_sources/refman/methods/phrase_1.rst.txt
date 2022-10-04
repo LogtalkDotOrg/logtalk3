@@ -35,7 +35,7 @@ Description
 
 This non-terminal takes a grammar rule body and parses it using the implicit
 difference list of tokens. A common use is to wrap what otherwise would be a
-naked variable in a grammar rule body.
+:term:`naked meta-variable` in a grammar rule body.
 
 Modes and number of proofs
 --------------------------

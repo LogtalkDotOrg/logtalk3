@@ -44,6 +44,8 @@ when the `LOGTALKHOME` environment variable is not defined.
 Documentation
 -------------
 
+* ADDED: Glossary definitions for "meta-variable" and "naked meta-variable".
+
 * FIXED: Added missing Handbook and APIs documentation `sphinx_highlight.js`
 file.
 
