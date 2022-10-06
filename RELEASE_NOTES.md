@@ -75,6 +75,10 @@ meta-variables in cut-transparent control constructs.
 * FIXED: Missing new-line after index titles in the output of the `lgtdoc`
 tool `logtalk_index_to_txt.xsl` XSLT file.
 
+* FIXED: Cases in the `lgtdoc` tool where looking for properties of
+referenced but not loaded entities could result in `current_protocol/1`
+or `protocol_property/2` exceptions.
+
 Examples
 --------
 

@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:66:2,
+		version is 2:66:3,
 		author is 'Paulo Moura',
-		date is 2022-07-08,
+		date is 2022-10-06,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -119,7 +119,8 @@
 			Kind = object
 		;	current_category(Entity) ->
 			Kind = category
-		;	current_protocol(Entity) ->
+		;	atom(Entity),
+			current_protocol(Entity) ->
 			Kind = protocol
 		;	atom(Entity),
 			current_logtalk_flag(modules, supported),
@@ -323,7 +324,8 @@
 				object_property(Entity, file(Path))
 			;	current_category(Entity) ->
 				object_property(Entity, file(Path))
-			;	current_protocol(Entity) ->
+			;	atom(Entity),
+				current_protocol(Entity) ->
 				protocol_property(Entity, file(Path))
 			;	% entity is not loaded
 				fail

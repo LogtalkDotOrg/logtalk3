@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:53:0,
+		version is 2:53:1,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2022-10-06,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -264,7 +264,8 @@
 			object_property(Entity, file(Path))
 		;	current_category(Entity) ->
 			category_property(Entity, file(Path))
-		;	current_protocol(Entity) ->
+		;	atom(Entity),
+			current_protocol(Entity) ->
 			protocol_property(Entity, file(Path))
 		;	% entity is not loaded
 			fail
@@ -802,7 +803,8 @@
 			object_name_kind_caption(Entity, Name, Kind0, Caption)
 		;	current_category(Entity) ->
 			category_name_kind_caption(Entity, Name, Kind0, Caption)
-		;	% current_protocol(Entity),
+		;	atom(Entity),
+			current_protocol(Entity),
 			protocol_name_kind_caption(Entity, Name, Kind0, Caption)
 		),
 		(	Location == external ->
