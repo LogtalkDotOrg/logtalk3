@@ -223,9 +223,11 @@ When possible, only standard exceptions should be used. See e.g the
 a full list. The argument names should be the same as those provided
 in the ``arguments`` or ``argnames`` keys. Exceptions are usually
 listed starting with instantiation and uninstantiation errors,
-followed by type errors, and then domain errors.
+followed by type errors, and then domain errors. These may then be
+followed by permission, existence, evaluation, representation, or
+resource errors.
 
-For each exception, use *controlled language* as found e.g. in the ISO
+For each exception, use of *controlled language* as found e.g. in the ISO
 Prolog Core standard and this Handbook is advised. Some examples:
 
 Instantiation error when one of more arguments cannot be a variable
@@ -254,6 +256,9 @@ Domain error when an argument is of the correct type but not in the expected dom
 
 Domain error when an element of a list is of the correct type but not in the expected domain
    An element ``Element`` of the ``Argument`` list is a TYPE but not a valid DOMAIN
+
+Existence error when an entity of a given kind does not exist
+   The KIND ``Argument`` does not exist
 
 Other classes of errors have a less rigid style. In case of doubt,
 look for examples in this Handbook, in the APIs documentation, and
