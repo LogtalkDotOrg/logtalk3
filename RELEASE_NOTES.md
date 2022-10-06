@@ -64,6 +64,9 @@ Prolog.
 Tools
 -----
 
+* UPDATED: The `lgtunit` tool to print a warning on invalid (non QuickCheck)
+test options instead of just ignoring them.
+
 * UPDATED: The `tutor` tool to explain the new linter warning on naked
 meta-variables in cut-transparent control constructs.
 

@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 7:0:0,
+		version is 7:1:0,
 		author is 'Paulo Moura',
-		date is 2022-08-25,
+		date is 2022-10-06,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -276,6 +276,11 @@
 
 	message_tokens(invalid_test_outcome(Test, Outcome)) -->
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
+
+	% messages for invald test specifications
+
+	message_tokens(invalid_test_option(Test, Option)) -->
+		['test ~q option is invalid: ~q'-[Test, Option], nl].
 
 	% linter warnings
 
