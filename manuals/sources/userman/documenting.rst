@@ -389,6 +389,11 @@ Rendering this block as markup gives:
    Mark *italic text* with one asterisk. Mark **bold text** with
    two asterisks. Mark ``monospaced text`` with two backquotes.
 
+As single backquotes have different purposes in Markdown (monospaced text)
+and reStructuredText (domain- or application-dependent meaning), never use
+them. This also avoids doubts if there's an inline formatting typo in text
+meant to be rendered as monospaced text (usually inline code fragments).
+
 Diagrams
 --------
 

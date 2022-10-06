@@ -46,8 +46,11 @@ Documentation
 
 * ADDED: Glossary definitions for "meta-variable" and "naked meta-variable".
 
+* IMPROVED: Handbook section on inline formatting in `info/1-2` directives
+comments text.
+
 * FIXED: Added missing Handbook and APIs documentation `sphinx_highlight.js`
-file.
+files.
 
 Library
 -------
