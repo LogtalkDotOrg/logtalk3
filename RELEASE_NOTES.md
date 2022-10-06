@@ -88,6 +88,12 @@ meta-variables in cut-transparent control constructs.
 * FIXED: The `constraints/sicstus` example linter warnings on non-terminals
 called as predicates.
 
+Tests
+-----
+
+* ADDED: Tests for the syntax and semantics of the `discontiguous/1` Prolog
+standard directive.
+
 Installers and installation scripts
 -----------------------------------
 
