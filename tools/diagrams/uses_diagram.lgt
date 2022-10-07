@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2020-05-18,
 		comment is 'Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/2`` relation edges.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
 	]).
 

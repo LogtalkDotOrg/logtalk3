@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-05-23,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
 	]).
 

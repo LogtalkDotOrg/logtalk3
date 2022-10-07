@@ -56,7 +56,7 @@
 	:- public(send/3).
 	:- mode(send(++ground, ++callable, --callable), one).
 	:- info(send/3, [
-		comment is 'Sends a request to the a Redis server and returns its reply',
+		comment is 'Sends a request to the a Redis server and returns its reply.',
 		argnames is ['Connection', 'Request', 'Reply']
 	]).
 

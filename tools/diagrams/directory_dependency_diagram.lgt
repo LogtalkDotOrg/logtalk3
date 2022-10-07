@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-05-23,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
 	]).
 

@@ -30,7 +30,7 @@
 		author is 'Paulo Moura',
 		date is 2019-06-13,
 		comment is 'Use a set (represented using a list) of hook objects to expand terms and goals. The hook objects are tried in sequence until one of them succeeds in expanding the current term (goal) into a different term (goal).',
-		parameters is ['Set'-'Set (list) of hook objects'],
+		parameters is ['Set'-'Set (list) of hook objects.'],
 		remarks is [
 			'Usage' - 'Compile source files that should be expanded using the set of hook objects using the compiler option ``hook(hook_set(Set))``.'
 		],

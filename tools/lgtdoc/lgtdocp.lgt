@@ -19,6 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% linter flags
+:- initialization((
+	create_logtalk_flag(lgtdoc_non_standard_exceptions, warning, [type(atom), keep(true)]),
+	create_logtalk_flag(lgtdoc_missing_directives,      warning, [type(atom), keep(true)]),
+	create_logtalk_flag(lgtdoc_missing_periods,         warning, [type(atom), keep(true)])
+)).
+
+
 :- protocol(lgtdocp).
 
 	:- info([
@@ -40,7 +48,7 @@
 			'exclude_paths(List) option' - 'List of relative library paths to exclude when generating the XML documenting files (default is ``[]``).',
 			'exclude_prefixes(List) option' - 'List of path prefixes to exclude when generating the XML documenting files (default is ``[]``).',
 			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files (default is ``[]``).',
-			'sort_predicates(Boolean) option' - 'Sort entity predicates (default is ``false``)',
+			'sort_predicates(Boolean) option' - 'Sort entity predicates (default is ``false``).',
 			'Known issues' - 'The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.'
 		],
 		see_also is [lgtdoc]

@@ -7,7 +7,7 @@
 		author is 'Paulo Moura',
 		date is 2022-05-23,
 		comment is 'Common predicates for generating library diagrams.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), entity_diagram(_)]
 	]).
 

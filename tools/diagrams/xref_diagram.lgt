@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-10-06,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
 	]).
 

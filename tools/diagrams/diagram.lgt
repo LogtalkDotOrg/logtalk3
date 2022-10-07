@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-07-11,
 		comment is 'Common predicates for generating diagrams.',
-		parameters is ['Format' - 'Graph language file format']
+		parameters is ['Format' - 'Graph language file format.']
 	]).
 
 	:- uses(list, [

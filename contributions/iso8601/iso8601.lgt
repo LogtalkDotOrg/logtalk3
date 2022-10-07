@@ -60,10 +60,10 @@
 	:- info(date/4, [
 		comment is 'Get the system date and/or its Julian Day # or convert a Julian Day # to/from given date parts.',
 		arguments is [
-			'JD' - 'Julian day serial number',
-			'Year' - '0 or negative if converted BC year, positive otherwise',
-			'Month' - 'Normally an integer between 1 and 12 inclusive',
-			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month'
+			'JD' - 'Julian day serial number.',
+			'Year' - '0 or negative if converted BC year, positive otherwise.',
+			'Month' - 'Normally an integer between 1 and 12 inclusive.',
+			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month.'
 		],
 		examples is [
 			'Current date (i.e., today)' - date(JD,Y,M,D) - {JD = 2453471, Y = 2005, M = 4, D = 10},
@@ -82,11 +82,11 @@
 	:- info(date/5, [
 		comment is 'Ditto ``date/4`` + get/check its day-of-week #.',
 		arguments is [
-			'JD' - 'Julian day serial number',
-			'Year' - '0 or negative if converted BC year, positive otherwise',
-			'Month' - 'Normally an integer between 1 and 12 inclusive',
-			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
-			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7'
+			'JD' - 'Julian day serial number.',
+			'Year' - '0 or negative if converted BC year, positive otherwise.',
+			'Month' - 'Normally an integer between 1 and 12 inclusive.',
+			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month.',
+			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7.'
 		],
 		examples is [
 			'Get the Julian and the day-of-week # of a date' - date(JD,2000,2,29,DoW) - {JD = 2451604, DoW = 2},
@@ -101,12 +101,12 @@
 	:- info(date/6, [
 		comment is 'Ditto ``date/5`` + get/check its week #.',
 		arguments is [
-			'JD' - 'Julian day serial number',
-			'Year' - '0 or negative if converted BC year, positive otherwise',
-			'Month' - 'Normally an integer between 1 and 12 inclusive',
-			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
-			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7',
-			'Week' - 'Compound term, ``week(WeekNo,ActualYear)``, of a day'
+			'JD' - 'Julian day serial number.',
+			'Year' - '0 or negative if converted BC year, positive otherwise.',
+			'Month' - 'Normally an integer between 1 and 12 inclusive.',
+			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month.',
+			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7.',
+			'Week' - 'Compound term, ``week(WeekNo,ActualYear)``, of a day.'
 		],
 		examples is [
 			'Get the day-of-week and week number of a date' - date(_,2000,1,1,DoW,Wk) - {DoW = 6, Wk = week(52,1999)},
@@ -129,13 +129,13 @@
 	:- info(date/7, [
 		comment is 'Ditto ``date/6`` + get/check its day-of-year #.',
 		arguments is [
-			'JD' - 'Julian day serial number',
-			'Year' - '0 or negative if converted BC year, positive otherwise',
-			'Month' - 'Normally an integer between 1 and 12 inclusive',
-			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month',
-			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7',
-			'Week' - 'Compound term, ``week(WeekNo,ActualYear)``, of a day',
-			'DoY' - 'Day of year (NB! calendar year, not week # year)'
+			'JD' - 'Julian day serial number.',
+			'Year' - '0 or negative if converted BC year, positive otherwise.',
+			'Month' - 'Normally an integer between 1 and 12 inclusive.',
+			'Day' - 'Normally an integer between 1 and 31 inclusive depending upon month.',
+			'DoW' - 'Day of week, where Monday=1, Tuesday=2, ..., Sunday=7.',
+			'Week' - 'Compound term, ``week(WeekNo,ActualYear)``, of a day.',
+			'DoY' - 'Day of year (NB! calendar year, not week # year).'
 		],
 		examples is [
 			'Get the date and day-of-year of a Julian number' - date(2451649,Year,Month,Day,_,_,DoY) - {Year = 2000, Month = 4, Day = 14, DoY = 105},
@@ -155,9 +155,9 @@
 	:- info(date_string/3, [
 		comment is 'Conversion between an ISO 8601 compliant date string and its components (truncated and expanded date representations are currently unsupported). Note that date components are not validated; that is the caller''s responsibility!',
 		arguments is [
-			'Format' - 'ISO 8601 format',
-			'Components' - 'When bound and String is free, either a Julian number or a ``[Year,Month,Day]`` term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String',
-			'String' - 'ISO 8601 formatted string correspondent to Components'
+			'Format' - 'ISO 8601 format.',
+			'Components' - 'When bound and String is free, either a Julian number or a ``[Year,Month,Day]`` term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String.',
+			'String' - 'ISO 8601 formatted string correspondent to Components.'
 		],
 		examples is [
 			'Date, complete, basic (section 5.2.1.1)' - date_string('YYYYMMDD',[2004,2,29],Str) - {Str = '20040229'},
@@ -209,7 +209,7 @@
 	:- info(leap_year/1, [
 		comment is 'Succeed if given year is a leap year in the Gregorian calendar.',
 		arguments is [
-			'Year' - 'The Gregorian calendar year to investigate. If free, it binds to the system year'
+			'Year' - 'The Gregorian calendar year to investigate. If free, it binds to the system year.'
 		],
 		examples is [
 			'No, the prior centenary was not a leap year' - leap_year(1900) - {no},
@@ -229,8 +229,8 @@
 	:- info(calendar_month/3, [
 		comment is 'Compute a calendar month.',
 		arguments is [
-			'Year' - 'The calendar year',
-			'Month' - 'The calendar month',
+			'Year' - 'The calendar year.',
+			'Month' - 'The calendar month.',
 			'Calendar' - 'A compound term, ``m/3``, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).'
 		],
 		examples is [
@@ -243,9 +243,9 @@
 	:- info(easter_day/3, [
 		comment is 'Compute a Gregorian Easter Sunday.',
 		arguments is [
-			'Year' - 'Integer specifying the year to be investigated',
-			'Month' - 'Month in which Easter Sunday falls for given year',
-			'Day'- 'Day of month in which Easter Sunday falls for given year'
+			'Year' - 'Integer specifying the year to be investigated.',
+			'Month' - 'Month in which Easter Sunday falls for given year.',
+			'Day'- 'Day of month in which Easter Sunday falls for given year.'
 		],
 		examples is [
 			'Compute Easter Sunday for a particular year' - easter_day(2006,Month,Day) - {Month=4, Day=16},

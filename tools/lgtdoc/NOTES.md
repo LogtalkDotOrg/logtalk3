@@ -137,6 +137,16 @@ used with the `documentation` target.
 Documentation linter checks
 ---------------------------
 
-When the `missing_directives` flag is set to `warning` (its usual default
+When the `lgtdoc_missing_directives` flag is set to `warning` (its usual default
 value), the `lgtdoc` tool prints warnings on missing entity `info/1` directives
 and missing predicate `info/2` and `mode/2` directives.
+
+When the `lgtdoc_non_standard_exceptions` flag is set to `warning` (its usual
+default value), the `lgtdoc` tool prints warnings on non-standard exceptions.
+
+When the `lgtdoc_missing_periods` flag is set to `warning` (its usual default
+value), the `lgtdoc` tool prints warnings on missing ending periods (full
+stops) or exclamation marks in `info/1-2` directives (in comments, remarks,
+parameter descriptions, and argument descriptions).
+
+Set a flag value to `silent` to turn of the corresponding linter warnings.

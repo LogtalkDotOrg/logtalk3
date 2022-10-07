@@ -28,8 +28,8 @@
 		date is 2019-06-13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
-			'Reference' - 'Either a class name or a Java reference to an object',
-			'ReturnValue' - 'Value returned by a method call (possibly the Java value void)'
+			'Reference' - 'Either a class name or a Java reference to an object.',
+			'ReturnValue' - 'Value returned by a method call (possibly the Java value void).'
 		],
 		remarks is [
 			'Usage' - 'Send to this object any valid message as listed in the JavaDocs for the given reference.'
@@ -80,7 +80,7 @@
 		date is 2019-06-13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
-			'Reference' - 'Either a class name or a Java reference to an object'
+			'Reference' - 'Either a class name or a Java reference to an object.'
 		],
 		remarks is [
 			'Usage' - 'Send to this object any valid message as listed in the JavaDocs for the given reference.'

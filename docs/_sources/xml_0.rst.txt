@@ -82,8 +82,8 @@ Parses a list of character codes to/from a data structure of the form ``xml(<att
 
 | **Remarks:**
 
-    - ``extended_characters(Boolean)`` option: Use the extended character entities for XHTML (default ``true``)
-    - ``format(Boolean)`` option: For parsing, strip layouts when no character data appears between elements (default ``true``). For generating, indent the element content (default ``true``)
+    - ``extended_characters(Boolean)`` option: Use the extended character entities for XHTML (default ``true``).
+    - ``format(Boolean)`` option: For parsing, strip layouts when no character data appears between elements (default ``true``). For generating, indent the element content (default ``true``).
     - ``remove_attribute_prefixes(Boolean)`` option: Remove namespace prefixes from attributes when it's the same as the prefix of the parent element (default ``false``).
     - ``allow_ampersand(Boolean)`` option: Allow unescaped ampersand characters (&) to occur in PCDATA (default ``false``).
 

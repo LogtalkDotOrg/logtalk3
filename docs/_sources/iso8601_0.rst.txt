@@ -54,10 +54,10 @@ Get the system date and/or its Julian Day # or convert a Julian Day # to/from gi
 
 | **Template:**
 |    ``date(JD,Year,Month,Day)``
-|        ``JD`` - Julian day serial number
-|        ``Year`` - 0 or negative if converted BC year, positive otherwise
-|        ``Month`` - Normally an integer between 1 and 12 inclusive
-|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
+|        ``JD`` - Julian day serial number.
+|        ``Year`` - 0 or negative if converted BC year, positive otherwise.
+|        ``Month`` - Normally an integer between 1 and 12 inclusive.
+|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month.
 | **Mode and number of proofs:**
 |    ``date(?integer,?integer,?integer,?integer)`` - ``zero_or_one``
 
@@ -103,11 +103,11 @@ Ditto ``date/4`` + get/check its day-of-week #.
 
 | **Template:**
 |    ``date(JD,Year,Month,Day,DoW)``
-|        ``JD`` - Julian day serial number
-|        ``Year`` - 0 or negative if converted BC year, positive otherwise
-|        ``Month`` - Normally an integer between 1 and 12 inclusive
-|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
-|        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
+|        ``JD`` - Julian day serial number.
+|        ``Year`` - 0 or negative if converted BC year, positive otherwise.
+|        ``Month`` - Normally an integer between 1 and 12 inclusive.
+|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month.
+|        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7.
 | **Mode and number of proofs:**
 |    ``date(?integer,?integer,?integer,?integer,?integer)`` - ``zero_or_one``
 
@@ -141,12 +141,12 @@ Ditto ``date/5`` + get/check its week #.
 
 | **Template:**
 |    ``date(JD,Year,Month,Day,DoW,Week)``
-|        ``JD`` - Julian day serial number
-|        ``Year`` - 0 or negative if converted BC year, positive otherwise
-|        ``Month`` - Normally an integer between 1 and 12 inclusive
-|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
-|        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
-|        ``Week`` - Compound term, ``week(WeekNo,ActualYear)``, of a day
+|        ``JD`` - Julian day serial number.
+|        ``Year`` - 0 or negative if converted BC year, positive otherwise.
+|        ``Month`` - Normally an integer between 1 and 12 inclusive.
+|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month.
+|        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7.
+|        ``Week`` - Compound term, ``week(WeekNo,ActualYear)``, of a day.
 | **Mode and number of proofs:**
 |    ``date(?integer,?integer,?integer,?integer,?integer,?compound)`` - ``zero_or_one``
 
@@ -204,13 +204,13 @@ Ditto ``date/6`` + get/check its day-of-year #.
 
 | **Template:**
 |    ``date(JD,Year,Month,Day,DoW,Week,DoY)``
-|        ``JD`` - Julian day serial number
-|        ``Year`` - 0 or negative if converted BC year, positive otherwise
-|        ``Month`` - Normally an integer between 1 and 12 inclusive
-|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month
-|        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7
-|        ``Week`` - Compound term, ``week(WeekNo,ActualYear)``, of a day
-|        ``DoY`` - Day of year (NB! calendar year, not week # year)
+|        ``JD`` - Julian day serial number.
+|        ``Year`` - 0 or negative if converted BC year, positive otherwise.
+|        ``Month`` - Normally an integer between 1 and 12 inclusive.
+|        ``Day`` - Normally an integer between 1 and 31 inclusive depending upon month.
+|        ``DoW`` - Day of week, where Monday=1, Tuesday=2, ..., Sunday=7.
+|        ``Week`` - Compound term, ``week(WeekNo,ActualYear)``, of a day.
+|        ``DoY`` - Day of year (NB! calendar year, not week # year).
 | **Mode and number of proofs:**
 |    ``date(?integer,?integer,?integer,?integer,?integer,?compound,?integer)`` - ``zero_or_one``
 
@@ -256,9 +256,9 @@ Conversion between an ISO 8601 compliant date string and its components (truncat
 
 | **Template:**
 |    ``date_string(Format,Components,String)``
-|        ``Format`` - ISO 8601 format
-|        ``Components`` - When bound and String is free, either a Julian number or a ``[Year,Month,Day]`` term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String
-|        ``String`` - ISO 8601 formatted string correspondent to Components
+|        ``Format`` - ISO 8601 format.
+|        ``Components`` - When bound and String is free, either a Julian number or a ``[Year,Month,Day]`` term; it binds to the system day/date if free When free and String is bound, it binds to an integer list representing the numeric elements of String.
+|        ``String`` - ISO 8601 formatted string correspondent to Components.
 | **Mode and number of proofs:**
 |    ``date_string(+atom,+integer,?atom)`` - ``zero_or_one``
 |    ``date_string(+atom,?list,?atom)`` - ``zero_or_one``
@@ -392,7 +392,7 @@ Succeed if given year is a leap year in the Gregorian calendar.
 
 | **Template:**
 |    ``leap_year(Year)``
-|        ``Year`` - The Gregorian calendar year to investigate. If free, it binds to the system year
+|        ``Year`` - The Gregorian calendar year to investigate. If free, it binds to the system year.
 | **Mode and number of proofs:**
 |    ``leap_year(?integer)`` - ``zero_or_one``
 
@@ -441,8 +441,8 @@ Compute a calendar month.
 
 | **Template:**
 |    ``calendar_month(Year,Month,Calendar)``
-|        ``Year`` - The calendar year
-|        ``Month`` - The calendar month
+|        ``Year`` - The calendar year.
+|        ``Month`` - The calendar month.
 |        ``Calendar`` - A compound term, ``m/3``, composed of three main arguments specifying year, month, and a list of week and week day numbers (calendar body).
 | **Mode and number of proofs:**
 |    ``calendar_month(?integer,?integer,-compound)`` - ``zero_or_one``
@@ -468,9 +468,9 @@ Compute a Gregorian Easter Sunday.
 
 | **Template:**
 |    ``easter_day(Year,Month,Day)``
-|        ``Year`` - Integer specifying the year to be investigated
-|        ``Month`` - Month in which Easter Sunday falls for given year
-|        ``Day`` - Day of month in which Easter Sunday falls for given year
+|        ``Year`` - Integer specifying the year to be investigated.
+|        ``Month`` - Month in which Easter Sunday falls for given year.
+|        ``Day`` - Day of month in which Easter Sunday falls for given year.
 | **Mode and number of proofs:**
 |    ``easter_day(?integer,-integer,-integer)`` - ``zero_or_one``
 

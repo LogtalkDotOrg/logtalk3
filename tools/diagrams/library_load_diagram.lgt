@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-05-23,
 		comment is 'Predicates for generating library loading dependency diagrams.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
 	]).
 

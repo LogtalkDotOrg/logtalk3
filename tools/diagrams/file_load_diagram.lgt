@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-07-11,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
 	]).
 

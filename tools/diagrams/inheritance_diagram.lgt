@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2022-05-18,
 		comment is 'Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.',
-		parameters is ['Format' - 'Graph language file format'],
+		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), uses_diagram(_), xref_diagram(_)]
 	]).
 

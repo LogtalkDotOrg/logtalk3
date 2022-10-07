@@ -66,6 +66,13 @@ Prolog.
 Tools
 -----
 
+* CHANGED: The `lgtdoc` tool to use its own linter flag to control warnings
+about missing documentation directives.
+
+* ADDED: Linter flags to the `lgtdoc` tool to warn on non-standard predicate
+exceptions and missing periods at the end of documentation text in `info/1-2`
+directives.
+
 * UPDATED: The `lgtunit` tool to print a warning on invalid (non QuickCheck)
 test options instead of just ignoring them.
 

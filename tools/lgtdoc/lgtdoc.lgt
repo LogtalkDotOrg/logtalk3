@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 6:5:0,
+		version is 7:0:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2022-10-07,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -424,8 +424,8 @@
 		xml_entity_compilation_text(Type, Entity, Compilation),
 		write_xml_element(Stream, compilation, [], Compilation),
 		(	entity_property(Entity, info(Info)) ->
-			write_xml_entity_info(Stream, Info)
-		;	current_logtalk_flag(missing_directives, warning) ->
+			write_xml_entity_info(Stream, Entity, Info)
+		;	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			print_message(warning, lgtdoc, 'Missing info/1 directive for ~w: ~q'+[Type, Entity])
 		;	true
 		),
@@ -487,14 +487,15 @@
 		;	Flags = Mode
 		).
 
-	% write_xml_entity_info(+stream, +list)
+	% write_xml_entity_info(+stream, +entity_indentifier, +list)
 	%
 	% outputs the contents of entity info/1 directive
 	% in the order specified in the Logtalk DTD file
 
-	write_xml_entity_info(Stream, Info) :-
+	write_xml_entity_info(Stream, Entity, Info) :-
 		(	member(comment(Comment), Info) ->
-			write_xml_cdata_element(Stream, comment, [], Comment)
+			write_xml_cdata_element(Stream, comment, [], Comment),
+			warn_on_missing_period(Entity, Comment)
 		;	true
 		),
 		(	member(parameters(Parameters), Info) ->
@@ -504,7 +505,8 @@
 				(	write_xml_open_tag(Stream, parameter, []),
 					write_xml_cdata_element(Stream, name, [], Parname),
 					write_xml_cdata_element(Stream, description, [], Description),
-					write_xml_close_tag(Stream, parameter)
+					write_xml_close_tag(Stream, parameter),
+					warn_on_missing_period(Entity, Description)
 				)
 			),
 			write_xml_close_tag(Stream, parameters)
@@ -911,7 +913,7 @@
 			)
 		),
 		(	\+ member(mode(_, _), Properties),
-			current_logtalk_flag(missing_directives, warning) ->
+			current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			(	Name = _//_ ->
 				print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q non-terminal: ~q'+[Entity, Name])
 			;	print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q predicate: ~q'+[Entity, Name])
@@ -920,7 +922,7 @@
 		),
 		(	member(info(Info), Properties) ->
 			write_xml_predicate_info(Stream, Entity, Functor, Arity, Info)
-		;	current_logtalk_flag(missing_directives, warning) ->
+		;	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			(	Name = _//_ ->
 				print_message(warning, lgtdoc, 'Missing info/2 directive for ~q non-terminal: ~q'+[Entity, Name])
 			;	print_message(warning, lgtdoc, 'Missing info/2 directive for ~q predicate: ~q'+[Entity, Name])
@@ -955,7 +957,8 @@
 
 	write_xml_predicate_info(Stream, Entity, Functor, Arity, Info) :-
 		(	member(comment(Comment), Info) ->
-			write_xml_cdata_element(Stream, comment, [], Comment)
+			write_xml_cdata_element(Stream, comment, [], Comment),
+			warn_on_missing_period(Entity, Comment)
 		;	true
 		),
 		(	member(arguments(Arguments), Info) ->
@@ -968,7 +971,8 @@
 				(	write_xml_open_tag(Stream, argument, []),
 					write_xml_cdata_element(Stream, name, [], Name),
 					write_xml_cdata_element(Stream, description, [], Description),
-					write_xml_close_tag(Stream, argument)
+					write_xml_close_tag(Stream, argument),
+					warn_on_missing_period(Entity, Description)
 				)
 			),
 			write_xml_close_tag(Stream, arguments)
@@ -986,7 +990,8 @@
 				(	write_xml_open_tag(Stream, exception, []),
 					write_xml_cdata_element(Stream, condition, [], Cond),
 					write_xml_cdata_element(Stream, term, [], Term),
-					write_xml_close_tag(Stream, exception)
+					write_xml_close_tag(Stream, exception),
+					warn_on_non_standard_exception(Entity, Term)
 				)
 			),
 			write_xml_close_tag(Stream, exceptions)
@@ -999,7 +1004,8 @@
 				(	write_xml_open_tag(Stream, remark, []),
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
-					write_xml_close_tag(Stream, remark)
+					write_xml_close_tag(Stream, remark),
+					warn_on_missing_period(Entity, Text)
 				)
 			),
 			write_xml_close_tag(Stream, remarks)
@@ -1240,7 +1246,8 @@
 				(	write_xml_open_tag(Stream, remark, []),
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
-					write_xml_close_tag(Stream, remark)
+					write_xml_close_tag(Stream, remark),
+					warn_on_missing_period(Entity, Text)
 				)
 			)
 		;	true
@@ -1615,6 +1622,35 @@
 	%	\+ \+ (
 	%		numbervars(Term, 0, _),
 	%		write_term(Stream, Term, [numbervars(true), quoted(true)])).
+
+	warn_on_missing_period(Entity, Text) :-
+		(	current_logtalk_flag(lgtdoc_missing_periods, warning),
+			\+ sub_atom(Text, _, 1, 0, '.'),
+			\+ sub_atom(Text, _, 1, 0, '!'),
+			\+ sub_atom(Text, 0, _, _, 'http'),
+			\+ sub_atom(Text, 0, _, _, 'ftp') ->
+			print_message(warning, lgtdoc, 'Missing period at the end of text for ~q: ~q'+[Entity, Text])
+		;	true
+		).
+
+	warn_on_non_standard_exception(Entity, Exception) :-
+		(	current_logtalk_flag(lgtdoc_non_standard_exceptions, warning),
+			\+ standard_exception(Exception) ->
+			print_message(warning, lgtdoc, 'Non-standard exception for ~q: ~q'+[Entity, Exception])
+		;	true
+		).
+
+	standard_exception(instantiation_error).
+	standard_exception(uninstantiation_error(_)).
+	standard_exception(type_error(_, _)).
+	standard_exception(domain_error(_, _)).
+	standard_exception(existence_error(_, _)).
+	standard_exception(permission_error(_, _, _)).
+	standard_exception(representation_error(_)).
+	standard_exception(evaluation_error(_)).
+	standard_exception(resource_error(_)).
+	standard_exception(syntax_error(_)).
+	standard_exception(system_error).
 
 :- end_object.
 

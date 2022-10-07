@@ -8,7 +8,7 @@
 ``java(Reference)``
 ===================
 
-* ``Reference`` - Either a class name or a Java reference to an object
+* ``Reference`` - Either a class name or a Java reference to an object.
 
 
 Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.
