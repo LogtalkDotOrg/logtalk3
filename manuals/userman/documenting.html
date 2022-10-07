@@ -174,9 +174,9 @@ documentation information such as the <a class="reference internal" href="../ref
 The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom). As a style guideline,
-don’t use overly long comments. If you need to provide additional
-details, use the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the entity purpose (an atom). End the comment with a
+period (full stop). As a style guideline, don’t use overly long comments.
+If you need to provide additional details, use the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt><dd><p>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
 <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity in a user defined
@@ -189,7 +189,8 @@ details, use the <code class="docutils literal notranslate"><span class="pre">re
 where <code class="docutils literal notranslate"><span class="pre">Year</span></code>, <code class="docutils literal notranslate"><span class="pre">Month</span></code>, and <code class="docutils literal notranslate"><span class="pre">Day</span></code> are integers).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt><dd><p>Parameter names and descriptions for parametric entities (a list of
-<code class="docutils literal notranslate"><span class="pre">Name-Description</span></code> pairs where both names and descriptions are atoms).</p>
+<code class="docutils literal notranslate"><span class="pre">Name-Description</span></code> pairs where both names and descriptions are atoms).
+End the <code class="docutils literal notranslate"><span class="pre">Description</span></code> with a period (full stop).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">parnames</span></code></dt><dd><p>Parameter names for parametric entities (a list of atoms; a simpler
 version of the previous key, used when parameter descriptions are
@@ -204,7 +205,8 @@ name (an atom or a compound term <code class="docutils literal notranslate"><spa
 name of an XML entity in a user defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the entity using <code class="docutils literal notranslate"><span class="pre">Topic-Text</span></code> pairs
-where both the topic and the text must be atoms.</p>
+where both the topic and the text must be atoms. End the <code class="docutils literal notranslate"><span class="pre">Text</span></code>
+with a period (full stop).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt><dd><p>List of related entities (using the entity identifiers, which can
 be atoms or compound terms).</p>
@@ -243,12 +245,13 @@ The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">comment</span></code></dt><dd><p>Comment describing the predicate (or non-terminal) purpose (an atom).
-As a style guideline, don’t use overly long comments. If you need to
-provide additional details, use the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key.</p>
+End the comment with a period (full stop). As a style guideline, don’t
+use overly long comments. If you need to provide additional details,
+use the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">arguments</span></code></dt><dd><p>Names and descriptions of predicate arguments for pretty print output
 (a list of <code class="docutils literal notranslate"><span class="pre">Name-Description</span></code> pairs where both names and descriptions
-are atoms).</p>
+are atoms). End the <code class="docutils literal notranslate"><span class="pre">Description</span></code> with a period (full stop).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">argnames</span></code></dt><dd><p>Names of predicate arguments for pretty print output (a list of
 atoms; a simpler version of the previous key, used when argument
@@ -275,7 +278,8 @@ the predicate call should be represented by the terms <code class="docutils lite
 or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the predicate using <code class="docutils literal notranslate"><span class="pre">Topic-Text</span></code>
-pairs where both the topic and the text must be atoms.</p>
+pairs where both the topic and the text must be atoms. End the
+<code class="docutils literal notranslate"><span class="pre">Text</span></code> with a period (full stop).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">see_also</span></code></dt><dd><p>List of related predicates and non-terminals (using the predicate
 and non-terminal indicators).</p>

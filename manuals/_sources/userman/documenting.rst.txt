@@ -67,9 +67,9 @@ The following keys are predefined and may be processed specially by
 Logtalk tools:
 
 ``comment``
-   Comment describing the entity purpose (an atom). As a style guideline,
-   don't use overly long comments. If you need to provide additional
-   details, use the ``remarks`` key.
+   Comment describing the entity purpose (an atom). End the comment with a
+   period (full stop). As a style guideline, don't use overly long comments.
+   If you need to provide additional details, use the ``remarks`` key.
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
    ``entity`` is the name of an XML entity in a user defined
@@ -83,6 +83,7 @@ Logtalk tools:
 ``parameters``
    Parameter names and descriptions for parametric entities (a list of
    ``Name-Description`` pairs where both names and descriptions are atoms).
+   End the ``Description`` with a period (full stop).
 ``parnames``
    Parameter names for parametric entities (a list of atoms; a simpler
    version of the previous key, used when parameter descriptions are
@@ -97,7 +98,8 @@ Logtalk tools:
    name of an XML entity in a user defined ``custom.ent`` file).
 ``remarks``
    List of general remarks about the entity using ``Topic-Text`` pairs
-   where both the topic and the text must be atoms.
+   where both the topic and the text must be atoms. End the ``Text``
+   with a period (full stop).
 ``see_also``
    List of related entities (using the entity identifiers, which can
    be atoms or compound terms).
@@ -143,12 +145,13 @@ Logtalk tools:
 
 ``comment``
    Comment describing the predicate (or non-terminal) purpose (an atom).
-   As a style guideline, don't use overly long comments. If you need to
-   provide additional details, use the ``remarks`` key.
+   End the comment with a period (full stop). As a style guideline, don't
+   use overly long comments. If you need to provide additional details,
+   use the ``remarks`` key.
 ``arguments``
    Names and descriptions of predicate arguments for pretty print output
    (a list of ``Name-Description`` pairs where both names and descriptions
-   are atoms).
+   are atoms). End the ``Description`` with a period (full stop).
 ``argnames``
    Names of predicate arguments for pretty print output (a list of
    atoms; a simpler version of the previous key, used when argument
@@ -175,7 +178,8 @@ Logtalk tools:
    or ``{no}``, respectively.
 ``remarks``
    List of general remarks about the predicate using ``Topic-Text``
-   pairs where both the topic and the text must be atoms.
+   pairs where both the topic and the text must be atoms. End the
+   ``Text`` with a period (full stop).
 ``see_also``
    List of related predicates and non-terminals (using the predicate
    and non-terminal indicators).

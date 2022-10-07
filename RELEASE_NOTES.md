@@ -49,6 +49,8 @@ Documentation
 * IMPROVED: Handbook section on inline formatting in `info/1-2` directives
 comments text.
 
+* IMPROVED: Handbook section on documenting entities and predicates.
+
 * FIXED: Added missing Handbook and APIs documentation `sphinx_highlight.js`
 files.
 
