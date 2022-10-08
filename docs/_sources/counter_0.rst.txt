@@ -140,8 +140,15 @@ Private predicates
 ``c/1``
 ^^^^^^^
 
+Stores the current value of the counter.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``c(N)``
+| **Mode and number of proofs:**
+|    ``c(?number)`` - ``zero_or_one``
 
 
 ------------

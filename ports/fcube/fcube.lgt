@@ -27,16 +27,32 @@
 :- object(fcube).
 
 	:- info([
-		version is 4:1:1,
+		version is 4:2:0,
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
-		date is 2022-09-07,
+		date is 2022-10-08,
 		copyright is 'Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
 	]).
 
-	:- public([
-		fcube/0, decide/1, decide/2
+	:- public(fcube/0).
+	:- mode(fcube, one).
+	:- info(fcube/0, [
+		comment is 'Reads a formula and aplies the prover to it, priting its counter-model.'
+	]).
+
+	:- public(decide/1).
+	:- mode(decide(++compound), one).
+	:- info(decide/1, [
+		comment is 'Applies the prover to the given formula and prints its counter-model.',
+		argnames is ['Formula']
+	]).
+
+	:- public(decide/2).
+	:- mode(decide(++compound, --compound), one).
+	:- info(decide/2, [
+		comment is 'Applies the prover to the given formula and returns its counter-model.',
+		argnames is ['Formula', 'CounterModel']
 	]).
 
 	:- public([

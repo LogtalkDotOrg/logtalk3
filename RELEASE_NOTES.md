@@ -103,6 +103,11 @@ Tests
 * ADDED: Tests for the syntax and semantics of the `discontiguous/1` Prolog
 standard directive.
 
+Ports
+-----
+
+* IMPROVED: Documentation of the `fcube` port public predicates.
+
 Installers and installation scripts
 -----------------------------------
 

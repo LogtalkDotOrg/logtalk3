@@ -11,8 +11,8 @@
 FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 
 | **Author:** Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.
-| **Version:** 4:1:1
-| **Date:** 2022-09-07
+| **Version:** 4:2:0
+| **Date:** 2022-10-08
 
 | **Copyright:** Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura
 | **License:** GNU GPL 2.0 or later version
@@ -47,8 +47,13 @@ Public predicates
 ``fcube/0``
 ^^^^^^^^^^^
 
+Reads a formula and aplies the prover to it, priting its counter-model.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Mode and number of proofs:**
+|    ``fcube`` - ``one``
 
 
 ------------
@@ -59,8 +64,15 @@ Public predicates
 ``decide/1``
 ^^^^^^^^^^^^
 
+Applies the prover to the given formula and prints its counter-model.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``decide(Formula)``
+| **Mode and number of proofs:**
+|    ``decide(++compound)`` - ``one``
 
 
 ------------
@@ -71,8 +83,15 @@ Public predicates
 ``decide/2``
 ^^^^^^^^^^^^
 
+Applies the prover to the given formula and returns its counter-model.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``decide(Formula,CounterModel)``
+| **Mode and number of proofs:**
+|    ``decide(++compound,--compound)`` - ``one``
 
 
 ------------

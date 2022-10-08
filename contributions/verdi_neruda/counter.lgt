@@ -78,6 +78,11 @@
 
 	:- private(c/1).
 	:- dynamic(c/1).
+	:- mode(c(?number), zero_or_one).
+	:- info(c/1, [
+		comment is 'Stores the current value of the counter.',
+		argnames is ['N']
+	]).
 
 	init :-
 		retractall(c(_)),
