@@ -425,9 +425,7 @@
 		write_xml_element(Stream, compilation, [], Compilation),
 		(	entity_property(Entity, info(Info)) ->
 			write_xml_entity_info(Stream, Entity, Info)
-		;	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			print_message(warning, lgtdoc, 'Missing info/1 directive for ~w: ~q'+[Type, Entity])
-		;	true
+		;	warn_on_missing_entity_directive(info/1, Type, Entity)
 		),
 		write_xml_close_tag(Stream, entity).
 
@@ -915,22 +913,13 @@
 				write_xml_close_tag(Stream, (mode))
 			)
 		),
-		(	\+ member(mode(_, _), Properties),
-			current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			(	Name = _//_ ->
-				print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q non-terminal: ~q'+[Entity, Name])
-			;	print_message(warning, lgtdoc, 'Missing mode/2 directive for ~q predicate: ~q'+[Entity, Name])
-			)
-		;	true
+		(	member(mode(_, _), Properties) ->
+			true
+		;	warn_on_missing_predicate_directive(mode/2, Entity, Name)
 		),
 		(	member(info(Info), Properties) ->
 			write_xml_predicate_info(Stream, Entity, Name, Functor, Arity, Info)
-		;	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			(	Name = _//_ ->
-				print_message(warning, lgtdoc, 'Missing info/2 directive for ~q non-terminal: ~q'+[Entity, Name])
-			;	print_message(warning, lgtdoc, 'Missing info/2 directive for ~q predicate: ~q'+[Entity, Name])
-			)
-		;	true
+		;	warn_on_missing_predicate_directive(info/2, Entity, Name)
 		),
 		write_xml_close_tag(Stream, predicate).
 
@@ -1627,9 +1616,30 @@
 	%		numbervars(Term, 0, _),
 	%		write_term(Stream, Term, [numbervars(true), quoted(true)])).
 
+	warn_on_missing_entity_directive(Directive, Type, Entity) :-
+		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
+			print_message(warning, lgtdoc, 'Missing ~q directive for ~w: ~q'+[Directive, Type, Entity]),
+			entity_property(Entity, file(File)),
+			print_message(warning, lgtdoc, '  in file ~w'+[File])
+		;	true
+		).
+
+	warn_on_missing_predicate_directive(Directive, Entity, Indicator) :-
+		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
+			(	Indicator = _//_ ->
+				print_message(warning, lgtdoc, 'Missing ~q directive for ~q non-terminal: ~q'+[Directive, Entity, Indicator])
+			;	print_message(warning, lgtdoc, 'Missing ~q directive for ~q predicate: ~q'+[Directive, Entity, Indicator])
+			),
+			entity_property(Entity, file(File)),
+			print_message(warning, lgtdoc, '  in file ~w'+[File])
+		;	true
+		).
+
 	warn_on_missing_info_key(Entity, Key) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
-			print_message(warning, lgtdoc, 'Missing key for ~q: ~q'+[Entity, Key])
+			print_message(warning, lgtdoc, 'Missing key for ~q: ~q'+[Entity, Key]),
+			entity_property(Entity, file(File)),
+			print_message(warning, lgtdoc, '  in file ~w'+[File])
 		;	true
 		).
 
@@ -1638,7 +1648,9 @@
 			(	Name = _/_ ->
 				print_message(warning, lgtdoc, 'Missing key for ~q predicate ~q: ~q'+[Entity, Name, Key])
 			;	print_message(warning, lgtdoc, 'Missing key for ~q non-terminal ~q: ~q'+[Entity, Name, Key])
-			)
+			),
+			entity_property(Entity, file(File)),
+			print_message(warning, lgtdoc, '  in file ~w'+[File])
 		;	true
 		).
 
@@ -1648,14 +1660,18 @@
 			\+ sub_atom(Text, _, 1, 0, '!'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
-			print_message(warning, lgtdoc, 'Missing period at the end of text for ~q: ~q'+[Entity, Text])
+			print_message(warning, lgtdoc, 'Missing period at the end of text for ~q: ~q'+[Entity, Text]),
+			entity_property(Entity, file(File)),
+			print_message(warning, lgtdoc, '  in file ~w'+[File])
 		;	true
 		).
 
 	warn_on_non_standard_exception(Entity, Exception) :-
 		(	current_logtalk_flag(lgtdoc_non_standard_exceptions, warning),
 			\+ standard_exception(Exception) ->
-			print_message(warning, lgtdoc, 'Non-standard exception for ~q: ~q'+[Entity, Exception])
+			print_message(warning, lgtdoc, 'Non-standard exception for ~q: ~q'+[Entity, Exception]),
+			entity_property(Entity, file(File)),
+			print_message(warning, lgtdoc, '  in file ~w'+[File])
 		;	true
 		).
 
