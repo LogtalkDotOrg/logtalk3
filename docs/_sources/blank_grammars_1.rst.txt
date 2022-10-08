@@ -11,8 +11,8 @@
 Blank grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:3:0
-| **Date:** 2022-02-16
+| **Version:** 0:3:1
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -216,6 +216,8 @@ Returns a single non-blank character or character code.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``non_blank(NonBlank)``
 | **Mode and number of proofs:**
 |    ``non_blank(-atomic)`` - ``zero_or_one``
 
@@ -233,6 +235,8 @@ Returns a (possibly empty) list of non-blank characters or character codes.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``non_blanks(NonBlanks)``
 | **Mode and number of proofs:**
 |    ``non_blanks(-list(atomic))`` - ``one``
 

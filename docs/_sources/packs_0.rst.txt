@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:55:3
-| **Date:** 2022-08-24
+| **Version:** 0:55:4
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -163,6 +163,8 @@ Lists all the packs from the given registry that are installed but outdated.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``outdated(Registry)``
 | **Mode and number of proofs:**
 |    ``outdated(+atom)`` - ``one``
 

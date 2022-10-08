@@ -37,10 +37,11 @@
 	extends(rule_expansion(Mode))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Victor Lagerkvist',
-		date is 2010-06-13,
-		comment is 'Expansion object for the shell.'
+		date is 2022-10-08,
+		comment is 'Expansion object for the shell.',
+		parnames is ['Mode']
 	]).
 
 	goal_expansion(Term, Expansion) :-

@@ -42,10 +42,11 @@
 	extends(debug_expansion(Mode))).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Victor Lagerkvist',
-		date is 2020-11-11,
-		comment is 'Expands rules of the form p if f and g to the more manageable rule(p, [f,g]) and performs magic transformation of clauses.'
+		date is 2022-10-08,
+		comment is 'Expands rules of the form p if f and g to the more manageable rule(p, [f,g]) and performs magic transformation of clauses.',
+		parnames is ['Mode']
 	]).
 
 	goal_expansion(Term, Expansion) :-

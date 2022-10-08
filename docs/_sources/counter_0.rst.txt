@@ -11,8 +11,8 @@
 Counter implemented with asserta/retract.
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:0:0
-| **Date:** 2010-06-13
+| **Version:** 1:0:1
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -63,11 +63,11 @@ Increments the counter by the specified amount.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``increase(I)``
 | **Mode and number of proofs:**
 |    ``increase(+number)`` - ``one``
 
-| **argname:**
-|    [I]
 
 ------------
 
@@ -82,11 +82,11 @@ Sets the counter to the specified amount.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``set(N)``
 | **Mode and number of proofs:**
 |    ``set(+number)`` - ``one``
 
-| **argname:**
-|    [N]
 
 ------------
 
@@ -101,11 +101,11 @@ Gets the current value of the counter.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``value(N)``
 | **Mode and number of proofs:**
 |    ``value(?number)`` - ``one``
 
-| **argname:**
-|    [N]
 
 ------------
 

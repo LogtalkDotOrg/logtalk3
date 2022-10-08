@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 13:1:0
-| **Date:** 2022-10-06
+| **Version:** 13:1:1
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -692,6 +692,8 @@ Make target for automatically running the test set when calling the ``logtalk_ma
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``make(Target)``
 | **Mode and number of proofs:**
 |    ``make(?atom)`` - ``zero_or_one``
 
@@ -709,6 +711,8 @@ Note to be printed after the test results. Defaults to the empty atom.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``note(Note)``
 | **Mode and number of proofs:**
 |    ``note(?atom)`` - ``zero_or_one``
 

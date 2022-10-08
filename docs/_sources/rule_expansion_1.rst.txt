@@ -1,18 +1,18 @@
-.. index:: rule_expansion(A)
+.. index:: rule_expansion(Mode)
 .. _rule_expansion/1:
 
 .. rst-class:: right
 
 **object**
 
-``rule_expansion(A)``
-=====================
+``rule_expansion(Mode)``
+========================
 
 Expands rules of the form p if f and g to the more manageable rule(p, [f,g]).
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:0:1
-| **Date:** 2020-11-11
+| **Version:** 1:0:2
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,7 +23,7 @@ Expands rules of the form p if f and g to the more manageable rule(p, [f,g]).
 | **Imports:**
 |    ``public`` :ref:`flatting <flatting/0>`
 | **Extends:**
-|    ``public`` :ref:`debug_expansion(A) <debug_expansion/1>`
+|    ``public`` :ref:`debug_expansion(Mode) <debug_expansion/1>`
 
 | **Remarks:**
 |    (none)

@@ -26,7 +26,7 @@
 	:- info([
 		version is 7:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-07,
+		date is 2022-10-08,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -496,7 +496,7 @@
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
 			warn_on_missing_period(Entity, Comment)
-		;	true
+		;	warn_on_missing_info_key(Entity, comment)
 		),
 		(	member(parameters(Parameters), Info) ->
 			write_xml_open_tag(Stream, parameters, []),
@@ -510,6 +510,9 @@
 				)
 			),
 			write_xml_close_tag(Stream, parameters)
+		;	compound(Entity),
+			\+ member(parnames(_), Info) ->
+			warn_on_missing_info_key(Entity, parameters)
 		;	true
 		),
 		(	member(author(Author), Info) ->
@@ -921,7 +924,7 @@
 		;	true
 		),
 		(	member(info(Info), Properties) ->
-			write_xml_predicate_info(Stream, Entity, Functor, Arity, Info)
+			write_xml_predicate_info(Stream, Entity, Name, Functor, Arity, Info)
 		;	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			(	Name = _//_ ->
 				print_message(warning, lgtdoc, 'Missing info/2 directive for ~q non-terminal: ~q'+[Entity, Name])
@@ -955,11 +958,11 @@
 	convert_coinductive_to_coinductive_non_terminal_args([Arg| Args], [Arg| NonTerminalArgs]) :-
 		convert_coinductive_to_coinductive_non_terminal_args(Args, NonTerminalArgs).
 
-	write_xml_predicate_info(Stream, Entity, Functor, Arity, Info) :-
+	write_xml_predicate_info(Stream, Entity, Indicator, Functor, Arity, Info) :-
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
 			warn_on_missing_period(Entity, Comment)
-		;	true
+		;	warn_on_missing_info_key(Entity, Indicator, comment)
 		),
 		(	member(arguments(Arguments), Info) ->
 			findall(Name, member(Name - _, Arguments), Names),
@@ -976,11 +979,12 @@
 				)
 			),
 			write_xml_close_tag(Stream, arguments)
-		;	true
-		),
-		(	member(argnames(Names), Info) ->
+		;	member(argnames(Names), Info) ->
 			Template =.. [Functor| Names],
 			write_xml_cdata_element(Stream, template, [], Template)
+		;	arg(2, Indicator, IndicatorArity),
+			IndicatorArity > 0 ->
+			warn_on_missing_info_key(Entity, Indicator, arguments)
 		;	true
 		),
 		(	member(exceptions(Exceptions), Info) ->
@@ -1622,6 +1626,21 @@
 	%	\+ \+ (
 	%		numbervars(Term, 0, _),
 	%		write_term(Stream, Term, [numbervars(true), quoted(true)])).
+
+	warn_on_missing_info_key(Entity, Key) :-
+		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
+			print_message(warning, lgtdoc, 'Missing key for ~q: ~q'+[Entity, Key])
+		;	true
+		).
+
+	warn_on_missing_info_key(Entity, Name, Key) :-
+		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
+			(	Name = _/_ ->
+				print_message(warning, lgtdoc, 'Missing key for ~q predicate ~q: ~q'+[Entity, Name, Key])
+			;	print_message(warning, lgtdoc, 'Missing key for ~q non-terminal ~q: ~q'+[Entity, Name, Key])
+			)
+		;	true
+		).
 
 	warn_on_missing_period(Entity, Text) :-
 		(	current_logtalk_flag(lgtdoc_missing_periods, warning),

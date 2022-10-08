@@ -1,18 +1,18 @@
-.. index:: heuristic_expansion(A)
+.. index:: heuristic_expansion(Mode)
 .. _heuristic_expansion/1:
 
 .. rst-class:: right
 
 **object**
 
-``heuristic_expansion(A)``
-==========================
+``heuristic_expansion(Mode)``
+=============================
 
 Expands rules of the form p if f and g to rule(p, [f,g|Tail], Length, Tail).
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:0:1
-| **Date:** 2020-11-11
+| **Version:** 1:0:2
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -21,7 +21,7 @@ Expands rules of the form p if f and g to rule(p, [f,g|Tail], Length, Tail).
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Extends:**
-|    ``public`` :ref:`rule_expansion(A) <rule_expansion/1>`
+|    ``public`` :ref:`rule_expansion(Mode) <rule_expansion/1>`
 | **Uses:**
 |    :ref:`list <list/0>`
 

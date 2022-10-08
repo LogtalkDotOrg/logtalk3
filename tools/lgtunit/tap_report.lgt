@@ -33,9 +33,9 @@
 :- object(tap_report).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2021-05-31,
+		date is 2022-10-08,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -46,14 +46,16 @@
 	:- dynamic(partial_/1).
 	:- mode(partial_(?integer), zero_or_more).
 	:- info(partial_/1, [
-		comment is 'Cache of total of tests per test set.'
+		comment is 'Cache of total of tests per test set.',
+		argnames is ['Count']
 	]).
 
 	:- private(test_count_/1).
 	:- dynamic(test_count_/1).
 	:- mode(test_count_(?integer), zero_or_one).
 	:- info(test_count_/1, [
-		comment is 'Test counter.'
+		comment is 'Test counter.',
+		argnames is ['Count']
 	]).
 
 	test_count(N) :-

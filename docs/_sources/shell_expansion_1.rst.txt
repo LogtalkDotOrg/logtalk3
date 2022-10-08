@@ -1,18 +1,18 @@
-.. index:: shell_expansion(A)
+.. index:: shell_expansion(Mode)
 .. _shell_expansion/1:
 
 .. rst-class:: right
 
 **object**
 
-``shell_expansion(A)``
-======================
+``shell_expansion(Mode)``
+=========================
 
 Expansion object for the shell.
 
 | **Author:** Victor Lagerkvist
-| **Version:** 1:0:0
-| **Date:** 2010-06-13
+| **Version:** 1:0:1
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -21,7 +21,7 @@ Expansion object for the shell.
 | **Implements:**
 |    ``public`` :ref:`expanding <expanding/0>`
 | **Extends:**
-|    ``public`` :ref:`rule_expansion(A) <rule_expansion/1>`
+|    ``public`` :ref:`rule_expansion(Mode) <rule_expansion/1>`
 
 | **Remarks:**
 |    (none)

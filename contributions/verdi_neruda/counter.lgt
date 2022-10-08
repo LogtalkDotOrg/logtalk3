@@ -35,9 +35,9 @@
 :- object(counter).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Victor Lagerkvist',
-		date is 2010-06-13,
+		date is 2022-10-08,
 		comment is 'Counter implemented with asserta/retract.'
 	]).
 
@@ -53,21 +53,21 @@
 	:- mode(increase(+number), one).
 	:- info(increase/1, [
 		comment is 'Increments the counter by the specified amount.',
-		argname is ['I']
+		argnames is ['I']
 	]).
 
 	:- public(set/1).
 	:- mode(set(+number), one).
 	:- info(set/1, [
 		comment is 'Sets the counter to the specified amount.',
-		argname is ['N']
+		argnames is ['N']
 	]).
 
 	:- public(value/1).
 	:- mode(value(?number), one).
 	:- info(value/1, [
 		comment is 'Gets the current value of the counter.',
-		argname is ['N']
+		argnames is ['N']
 	]).
 
 	:- public(reset/0).

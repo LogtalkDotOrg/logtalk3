@@ -11,8 +11,8 @@
 Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.
 
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2021-05-31
+| **Version:** 3:0:1
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -73,6 +73,8 @@ Cache of total of tests per test set.
 | **Compilation flags:**
 |    ``dynamic``
 
+| **Template:**
+|    ``partial_(Count)``
 | **Mode and number of proofs:**
 |    ``partial_(?integer)`` - ``zero_or_more``
 
@@ -90,6 +92,8 @@ Test counter.
 | **Compilation flags:**
 |    ``dynamic``
 
+| **Template:**
+|    ``test_count_(Count)``
 | **Mode and number of proofs:**
 |    ``test_count_(?integer)`` - ``zero_or_one``
 

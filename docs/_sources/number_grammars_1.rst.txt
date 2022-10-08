@@ -11,8 +11,8 @@
 Number grammars.
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2022-02-15
+| **Version:** 0:2:1
+| **Date:** 2022-10-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -45,6 +45,8 @@ Parses a single bit.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``bit(Bit)``
 | **Mode and number of proofs:**
 |    ``bit(?integer)`` - ``zero_or_one``
 
@@ -62,6 +64,8 @@ Parses a sequence of one of more bits.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``bits(Bits)``
 | **Mode and number of proofs:**
 |    ``bits(?list(integer))`` - ``zero_or_one``
 
@@ -79,6 +83,8 @@ Parses a single decimal digit.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``digit(Digit)``
 | **Mode and number of proofs:**
 |    ``digit(?atomic)`` - ``zero_or_one``
 
@@ -96,6 +102,8 @@ Parses a sequence of zero of more digits.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``digits(Digits)``
 | **Mode and number of proofs:**
 |    ``digits(?list(atomic))`` - ``one``
 
@@ -113,6 +121,8 @@ Parses a single hexa-decimal digit.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``hex_digit(HexDigit)``
 | **Mode and number of proofs:**
 |    ``hex_digit(?atomic)`` - ``zero_or_one``
 
@@ -130,6 +140,8 @@ Parses a sequence of zero or more hexa-decimal digits.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``hex_digits(HexDigits)``
 | **Mode and number of proofs:**
 |    ``hex_digits(?list(atomic))`` - ``one``
 
@@ -147,6 +159,8 @@ Parses a natural number (a non signed integer).
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``natural(Natural)``
 | **Mode and number of proofs:**
 |    ``natural(?non_negative_integer)`` - ``zero_or_one``
 
@@ -164,6 +178,8 @@ Parses an integer.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``integer(Integer)``
 | **Mode and number of proofs:**
 |    ``integer(?integer)`` - ``zero_or_one``
 
@@ -181,6 +197,8 @@ Parses a float.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``float(Float)``
 | **Mode and number of proofs:**
 |    ``float(?float)`` - ``zero_or_one``
 
@@ -198,6 +216,8 @@ Parses a number (an integer or a float).
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``number(Number)``
 | **Mode and number of proofs:**
 |    ``number(?number)`` - ``zero_or_one``
 
@@ -210,11 +230,13 @@ Parses a number (an integer or a float).
 ``sign//1``
 ^^^^^^^^^^^
 
-Parses a number sign.
+Parses a number sign (plus or minus).
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``sign(Sign)``
 | **Mode and number of proofs:**
 |    ``sign(?atomic)`` - ``zero_or_one``
 
@@ -232,6 +254,8 @@ Parses a decimal dot.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``dot(Dot)``
 | **Mode and number of proofs:**
 |    ``dot(?atomic)`` - ``zero_or_one``
 

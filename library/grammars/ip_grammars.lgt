@@ -22,9 +22,9 @@
 :- object(ip_grammars(_Format_)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paulo Moura',
-		date is 2022-02-15,
+		date is 2022-10-08,
 		comment is 'IP address grammars.',
 		parnames is ['Format']
 	]).
@@ -32,13 +32,15 @@
 	:- public(ipv4//1).
 	:- mode(ipv4(?list(integer)), zero_or_one).
 	:- info(ipv4//1, [
-		comment is 'Parses an IPv4 network address in the format XXX.XXX.XXX.XXX where each XXX is an octet (i.e. an integer between 0 and 255).'
+		comment is 'Parses an IPv4 network address in the format XXX.XXX.XXX.XXX where each XXX is an octet (i.e. an integer between 0 and 255).',
+		argnames is ['Octets']
 	]).
 
 	:- public(ipv6//1).
 	:- mode(ipv6(?list(integer)), one).
 	:- info(ipv6//1, [
-		comment is 'Parses an IPv6 network address in the format XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX where each X is a hexadecimal digit.'
+		comment is 'Parses an IPv6 network address in the format XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX.XXXX where each X is a hexadecimal digit.',
+		argnames is ['HexDigits']
 	]).
 
 	:- uses(number_grammars(_Format_), [

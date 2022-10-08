@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 13:1:0,
+		version is 13:1:1,
 		author is 'Paulo Moura',
-		date is 2022-10-06,
+		date is 2022-10-08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -290,13 +290,15 @@
 	:- protected(make/1).
 	:- mode(make(?atom), zero_or_one).
 	:- info(make/1, [
-		comment is 'Make target for automatically running the test set when calling the ``logtalk_make/1`` built-in predicate. No default. Possible values are ``all`` and ``check``.'
+		comment is 'Make target for automatically running the test set when calling the ``logtalk_make/1`` built-in predicate. No default. Possible values are ``all`` and ``check``.',
+		argnames is ['Target']
 	]).
 
 	:- protected(note/1).
 	:- mode(note(?atom), zero_or_one).
 	:- info(note/1, [
-		comment is 'Note to be printed after the test results. Defaults to the empty atom.'
+		comment is 'Note to be printed after the test results. Defaults to the empty atom.',
+		argnames is ['Note']
 	]).
 
 	:- protected(suppress_text_output/0).

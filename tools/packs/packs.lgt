@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:55:3,
+		version is 0:55:4,
 		author is 'Paulo Moura',
-		date is 2022-08-24,
+		date is 2022-10-08,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -72,7 +72,8 @@
 	:- public(outdated/1).
 	:- mode(outdated(+atom), one).
 	:- info(outdated/1, [
-		comment is 'Lists all the packs from the given registry that are installed but outdated.'
+		comment is 'Lists all the packs from the given registry that are installed but outdated.',
+		argnames is ['Registry']
 	]).
 
 	:- public(outdated/0).

@@ -22,9 +22,9 @@
 :- object(blank_grammars(_Format_)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:3:1,
 		author is 'Paulo Moura',
-		date is 2022-02-16,
+		date is 2022-10-08,
 		comment is 'Blank grammars.',
 		parnames is ['Format']
 	]).
@@ -92,13 +92,15 @@
 	:- public(non_blank//1).
 	:- mode(non_blank(-atomic), zero_or_one).
 	:- info(non_blank//1, [
-		comment is 'Returns a single non-blank character or character code.'
+		comment is 'Returns a single non-blank character or character code.',
+		argnames is ['NonBlank']
 	]).
 
 	:- public(non_blanks//1).
 	:- mode(non_blanks(-list(atomic)), one).
 	:- info(non_blanks//1, [
-		comment is 'Returns a (possibly empty) list of non-blank characters or character codes.'
+		comment is 'Returns a (possibly empty) list of non-blank characters or character codes.',
+		argnames is ['NonBlanks']
 	]).
 
 	:- public(control//0).
