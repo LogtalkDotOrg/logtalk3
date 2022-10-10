@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on April 13, 2022
+; Last updated on October 10, 2022
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -481,7 +481,9 @@ var
   SP_PATH: String;
 begin
   if IsWin64 then
-    if RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.7_win32\', 'SP_PATH', SP_PATH) or
+    if RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.8_win32\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.8_win32\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.7_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.7_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM64, 'Software\SICS\SICStus4.6_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM32, 'Software\SICS\SICStus4.6_win32\', 'SP_PATH', SP_PATH) or
@@ -499,7 +501,8 @@ begin
     else
       Result := 'prolog_compiler_not_installed'
   else
-    if RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.7_win32\', 'SP_PATH', SP_PATH) or
+    if RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.8_win32\', 'SP_PATH', SP_PATH) or
+       RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.7_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.6_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.5_win32\', 'SP_PATH', SP_PATH) or
        RegQueryStringValue(HKLM, 'Software\SICS\SICStus4.4_win32\', 'SP_PATH', SP_PATH) or
