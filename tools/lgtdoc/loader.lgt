@@ -23,5 +23,5 @@
 	logtalk_load(types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
-	logtalk_load([lgtdocp, lgtdoc], [optimize(on)])
+	logtalk_load([lgtdocp, lgtdoc, lgtdoc_messages], [optimize(on)])
 )).

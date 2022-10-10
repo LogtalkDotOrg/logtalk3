@@ -26,7 +26,7 @@
 	:- info([
 		version is 7:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-08,
+		date is 2022-10-10,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -984,7 +984,7 @@
 					write_xml_cdata_element(Stream, condition, [], Cond),
 					write_xml_cdata_element(Stream, term, [], Term),
 					write_xml_close_tag(Stream, exception),
-					warn_on_non_standard_exception(Entity, Term)
+					warn_on_non_standard_exception(Entity, Indicator, Term)
 				)
 			),
 			write_xml_close_tag(Stream, exceptions)
@@ -1618,39 +1618,29 @@
 
 	warn_on_missing_entity_directive(Directive, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			print_message(warning, lgtdoc, 'Missing ~q directive for ~w: ~q'+[Directive, Type, Entity]),
 			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, '  in file ~w'+[File])
+			print_message(warning, lgtdoc, missing_entity_directive(Directive, Type, Entity, File))
 		;	true
 		).
 
 	warn_on_missing_predicate_directive(Directive, Entity, Indicator) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			(	Indicator = _//_ ->
-				print_message(warning, lgtdoc, 'Missing ~q directive for ~q non-terminal: ~q'+[Directive, Entity, Indicator])
-			;	print_message(warning, lgtdoc, 'Missing ~q directive for ~q predicate: ~q'+[Directive, Entity, Indicator])
-			),
 			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, '  in file ~w'+[File])
+			print_message(warning, lgtdoc, missing_predicate_directive(Directive, Entity, Indicator, File))
 		;	true
 		).
 
 	warn_on_missing_info_key(Entity, Key) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
-			print_message(warning, lgtdoc, 'Missing key for ~q: ~q'+[Entity, Key]),
 			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, '  in file ~w'+[File])
+			print_message(warning, lgtdoc, missing_info_key(Entity, Key, File))
 		;	true
 		).
 
-	warn_on_missing_info_key(Entity, Name, Key) :-
+	warn_on_missing_info_key(Entity, Indicator, Key) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
-			(	Name = _/_ ->
-				print_message(warning, lgtdoc, 'Missing key for ~q predicate ~q: ~q'+[Entity, Name, Key])
-			;	print_message(warning, lgtdoc, 'Missing key for ~q non-terminal ~q: ~q'+[Entity, Name, Key])
-			),
 			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, '  in file ~w'+[File])
+			print_message(warning, lgtdoc, missing_info_key(Entity, Indicator, Key, File))
 		;	true
 		).
 
@@ -1660,18 +1650,16 @@
 			\+ sub_atom(Text, _, 1, 0, '!'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
-			print_message(warning, lgtdoc, 'Missing period at the end of text for ~q: ~q'+[Entity, Text]),
 			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, '  in file ~w'+[File])
+			print_message(warning, lgtdoc, missing_period(Entity, Text, File))
 		;	true
 		).
 
-	warn_on_non_standard_exception(Entity, Exception) :-
+	warn_on_non_standard_exception(Entity, Indicator, Exception) :-
 		(	current_logtalk_flag(lgtdoc_non_standard_exceptions, warning),
 			\+ standard_exception(Exception) ->
-			print_message(warning, lgtdoc, 'Non-standard exception for ~q: ~q'+[Entity, Exception]),
 			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, '  in file ~w'+[File])
+			print_message(warning, lgtdoc, non_standard_exception(Entity, Indicator, Exception, File))
 		;	true
 		).
 
