@@ -332,8 +332,8 @@
 :- dynamic('$lgt_pp_use_module_predicate_'/6).
 % '$lgt_pp_use_module_non_terminal_'(Module, NonTerminal, NonTerminalAlias, Predicate, PredicateAlias, CompilationContext, File, Lines)
 :- dynamic('$lgt_pp_use_module_non_terminal_'/8).
-% '$lgt_pp_entity_info_'(List)
-:- dynamic('$lgt_pp_entity_info_'/1).
+% '$lgt_pp_entity_info_'(List, File, Lines)
+:- dynamic('$lgt_pp_entity_info_'/3).
 % '$lgt_pp_predicate_info_'(Predicate, List, File, Lines)
 :- dynamic('$lgt_pp_predicate_info_'/4).
 
@@ -7708,7 +7708,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, _) :-
-	'$lgt_pp_entity_info_'(Info),
+	'$lgt_pp_entity_info_'(Info, _, _),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, info(Info)))),
 	fail.
 
@@ -8347,7 +8347,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_clean_pp_common_entity_clauses' :-
 	retractall('$lgt_pp_entity_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_entity_'(_, _, _)),
-	retractall('$lgt_pp_entity_info_'(_)),
+	retractall('$lgt_pp_entity_info_'(_, _, _)),
 	retractall('$lgt_pp_predicate_info_'(_, _, _, _)),
 	retractall('$lgt_pp_directive_'(_)),
 	retractall('$lgt_pp_synchronized_'(_, _, _, _)),
@@ -9968,10 +9968,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_logtalk_directive'(info(Pairs), Ctx) :-
 	'$lgt_compile_entity_info_directive'(Pairs, TPairs),
-	assertz('$lgt_pp_entity_info_'(TPairs)),
+	'$lgt_source_file_context'(Ctx, File, Lines),
+	assertz('$lgt_pp_entity_info_'(TPairs, File, Lines)),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(deprecated, warning),
-		'$lgt_source_file_context'(File, Lines),
 		'$lgt_pp_entity_'(Type, Entity, _) ->
 		(	'$lgt_member'(date is Year/Month/Day, Pairs) ->
 			'$lgt_increment_compiling_warnings_counter',
