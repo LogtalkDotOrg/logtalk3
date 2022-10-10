@@ -85,6 +85,16 @@ documentation for these tools can be regenerated using the shell scripts
 `../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.
 
 
+Tools common flags
+------------------
+
+The `lgtdoc` and `lgtunit` tools share a `suppress_path_prefix` flag that
+can be used to suppress a prefix when printing file paths. For example
+(after loading the tools):
+
+	| ?- set_logtalk_flag(suppress_path_prefix, '/home/jdoe/').
+
+
 Tools requirements
 ------------------
 

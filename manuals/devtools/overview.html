@@ -66,6 +66,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#loading-the-developer-tools">Loading the developer tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-documentation">Tools documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-common-flags">Tools common flags</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tools-requirements">Tools requirements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#tool-dependencies-for-full-functionality">Tool dependencies for full functionality</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#python-dependencies-all-operating-systems">Python dependencies (all operating-systems)</a></li>
@@ -200,6 +201,15 @@ the <code class="docutils literal notranslate"><span class="pre">docs</span></co
 web browser). The documentation for these tools can be regenerated using
 the shell scripts <code class="docutils literal notranslate"><span class="pre">../scripts/update_html_docs.sh</span></code> and
 <code class="docutils literal notranslate"><span class="pre">../scripts/update_svg_diagrams.sh</span></code>.</p>
+</section>
+<section id="tools-common-flags">
+<h2>Tools common flags<a class="headerlink" href="#tools-common-flags" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tools share a <code class="docutils literal notranslate"><span class="pre">suppress_path_prefix</span></code>
+flag that can be used to suppress a prefix when printing file paths. For
+example (after loading the tools):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(suppress_path_prefix, <span class="s">&#39;/home/jdoe/&#39;</span>).
+</pre></div>
+</div>
 </section>
 <section id="tools-requirements">
 <h2>Tools requirements<a class="headerlink" href="#tools-requirements" title="Permalink to this heading"></a></h2>
