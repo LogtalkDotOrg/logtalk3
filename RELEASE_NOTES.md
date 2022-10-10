@@ -32,6 +32,10 @@ Logtalk compiler and runtime
 meta-variable or contains a control construct where a cut-transparent
 argument is a naked meta-variable.
 
+* FIXED: The `declared_in/2`, `defined_in/2`, and `redefined_from/2` predicate
+properties when the predicate is being declared or (re)defined in an included
+file.
+
 Prolog adapter and integration files
 ------------------------------------
 

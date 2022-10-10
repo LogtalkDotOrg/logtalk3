@@ -3726,8 +3726,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_user'(declared_in(TCtn), _, _, _, _, _, _, TCtn, _, _, _).
 '$lgt_predicate_property_user'(declared_in(TCtn, Line), _, Original, _, _, _, _, TCtn, _, _, _) :-
 	functor(Original, Functor, Arity),
-	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, declaration_location(Line)) ->
-		true
+	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, declaration_location(Location)) ->
+		(	Location = _-Line ->
+			true
+		;	Location = Line
+		)
 	;	fail
 	).
 '$lgt_predicate_property_user'(meta_predicate(Meta), Alias, _, _, _, Meta0, _, _, _, _, _) :-
@@ -3759,8 +3762,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_user'(defined_in(DCtn, Line), Alias, Original, _, _, _, _, _, _, Def, _) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	functor(Original, Functor, Arity),
-			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_location(_, _, _, Line)) ->
-			true
+			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_location(_, _, _, Location)) ->
+			(	Location = _-Line ->
+				true
+			;	Location = Line
+			)
 		;	fail
 		)
 	;	fail
@@ -3783,8 +3789,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	'$lgt_find_overridden_predicate'(DCtn, Obj, Alias, Super),
 			functor(Original, Functor, Arity),
-			'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_rules_location(_, _, _, Line)) ->
-			true
+			'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_rules_location(_, _, _, Location)) ->
+			(	Location = _-Line ->
+				true
+			;	Location = Line
+			)
 		;	fail
 		)
 	;	fail
