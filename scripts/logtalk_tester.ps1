@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 27, 2022
+##   Last updated on October 10, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -20,6 +20,9 @@
 ##   limitations under the License.
 ## 
 #############################################################################
+
+
+#Requires -Version 7.2
 
 [CmdletBinding()]
 param(

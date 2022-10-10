@@ -41,6 +41,9 @@ Prolog adapter and integration files
 `/opt/homebrew/share` directory (used by Homebrew on Apple Silicon)
 when the `LOGTALKHOME` environment variable is not defined.
 
+* UPDATED: All PowerShell integration scripts to check for and require version
+7.2 or later.
+
 Documentation
 -------------
 
@@ -72,6 +75,9 @@ about missing documentation directives.
 * ADDED: Linter flags to the `lgtdoc` tool to warn on non-standard predicate
 exceptions and missing periods at the end of documentation text in `info/1-2`
 directives.
+
+* UPDATED: All PowerShell tool scripts to check for and require version 7.2
+or later.
 
 * UPDATED: The `lgtunit` tool to print a warning on invalid (non QuickCheck)
 test options instead of just ignoring them.
@@ -116,6 +122,9 @@ the Handbook and Logtalk APIs info files to the `info` directory.
 
 * UPDATED: The Windows installation script to also detect SICStus Prolog 4.8.x
 versions.
+
+* UPDATED: All PowerShell embedding scripts to check for and require version
+7.2 or later.
 
 
 3.58.0 - September 27, 2022

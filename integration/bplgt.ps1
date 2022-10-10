@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for B-Prolog
-##   Last updated on April 12, 2022
+##   Last updated on October 10, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
