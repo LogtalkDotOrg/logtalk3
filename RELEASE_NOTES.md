@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `user` pseudo-object to declare the `before/3` and `after/3`
+predicates multifile to avoid predicate existence errors when using this
+object as monitor without definitions for these predicates in `user`.
+
 * ADDED: Linter warning for predicate rules where the body is a naked
 meta-variable or contains a control construct where a cut-transparent
 argument is a naked meta-variable.

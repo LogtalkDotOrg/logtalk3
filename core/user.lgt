@@ -23,9 +23,9 @@
 	implements((expanding, forwarding, monitoring))).
 
 	:- info([
-		version is 1:4:3,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-11-30,
+		date is 2022-10-12,
 		comment is 'Pseudo-object representing the plain Prolog database. Can be used as a monitor by defining ``before/3`` and ``after/3`` predicates. Can be used as a hook object by defining ``term_expansion/2`` and ``goal_expansion/2`` multifile and dynamic predicates.'
 	]).
 
@@ -52,10 +52,17 @@
 	% requires before/3 and after/3 predicates to be defined in "user"
 
 	before(Object, Message, Sender) :-
-		{before(Object, Message, Sender)}.
+		user::before(Object, Message, Sender).
 
 	after(Object, Message, Sender) :-
-		{after(Object, Message, Sender)}.
+		user::after(Object, Message, Sender).
+
+	% ensure attempts to use this object as monitor without definitions
+	% for the before/3 and after/3 predicates in "user" will not result
+	% in predicate existence errors
+
+	:- multifile(user::before/3).
+	:- multifile(user::after/3).
 
 	% ensure that setting the "hook" flag to "user" will not result in
 	% predicate existence errors during compilation of source files as
