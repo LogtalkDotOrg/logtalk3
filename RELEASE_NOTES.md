@@ -65,6 +65,8 @@ comments text.
 
 * IMPROVED: Handbook section on documenting entities and predicates.
 
+* IMPROVED: Handbook section on event-driven programming.
+
 * FIXED: Added missing Handbook and APIs documentation `sphinx_highlight.js`
 files.
 

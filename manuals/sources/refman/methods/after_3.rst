@@ -33,11 +33,12 @@ Description
 
    after(Object, Message, Sender)
 
-User-defined method for handling *after* events. This method is
-declared in the :ref:`monitoring <apis:monitoring/0>` built-in protocol
-as a public predicate and automatically called by the runtime for messages
-sent using the :ref:`control_send_to_object_2` control construct from within
-objects compiled with the :ref:`events <flag_events>` flag set to ``allow``.
+User-defined method for handling :ref:`after events <events_definitions>`.
+This method is declared in the :ref:`monitoring <apis:monitoring/0>` built-in
+protocol as a public predicate and automatically called by the runtime for
+messages sent using the :ref:`control_send_to_object_2` control construct
+from within objects compiled with the :ref:`events <flag_events>` flag set
+to ``allow``.
 
 Note that you can make this predicate scope protected or private by using,
 respectively, :ref:`protected or private implementation <inheritance_scope>`

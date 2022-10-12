@@ -386,3 +386,15 @@ order to change the scope of the event handler predicates. Note that the
 message sending processing mechanism is able to call the event handlers
 irrespective of their scope. Nevertheless, the scope of the event handlers
 may be restricted in order to prevent other objects from calling them.
+
+The pseudo-object :ref:`user <objects_user>` can also act as a monitor.
+This object expects the ``before/3`` and ``after/3`` predicates to be
+defined in the plain Prolog database. To avoid predicate existence errors
+when setting ``user`` as a monitor, this object declares the predicates
+multifile. Thus, any plain Prolog code defining the predicates should
+include the directives:
+
+::
+
+   :- multifile(before/3).
+   :- multifile(after/3).

@@ -441,6 +441,16 @@ order to change the scope of the event handler predicates. Note that the
 message sending processing mechanism is able to call the event handlers
 irrespective of their scope. Nevertheless, the scope of the event handlers
 may be restricted in order to prevent other objects from calling them.</p>
+<p>The pseudo-object <a class="reference internal" href="objects.html#objects-user"><span class="std std-ref">user</span></a> can also act as a monitor.
+This object expects the <code class="docutils literal notranslate"><span class="pre">before/3</span></code> and <code class="docutils literal notranslate"><span class="pre">after/3</span></code> predicates to be
+defined in the plain Prolog database. To avoid predicate existence errors
+when setting <code class="docutils literal notranslate"><span class="pre">user</span></code> as a monitor, this object declares the predicates
+multifile. Thus, any plain Prolog code defining the predicates should
+include the directives:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(before<span class="o">/</span><span class="m">3</span>).
+<span class="p">:- </span><span class="k">multifile</span>(after<span class="o">/</span><span class="m">3</span>).
+</pre></div>
+</div>
 </section>
 </section>
 </section>
