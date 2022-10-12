@@ -36,6 +36,9 @@ argument is a naked meta-variable.
 properties when the predicate is being declared or (re)defined in an included
 file.
 
+* FIXED: The compiler to avoid a trivial failure warning with some Prolog
+backends when checking the `encoding_directive` flag value.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -7361,7 +7361,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	(	var(Encoding) ->
 		throw(error(instantiation_error, directive(encoding(Encoding))))
-	;	'$lgt_prolog_feature'(encoding_directive, unsupported) ->
+	;	'$lgt_prolog_feature'(encoding_directive, EncodingDirective),
+		% avoid a trivial failure warning with some Prolog backends
+		% by checking the flag value in a separate goal
+		EncodingDirective == unsupported ->
 		throw(error(resource_error(text_encoding_support), directive(encoding(Encoding))))
 	;	% the conversion between Logtalk and Prolog encodings is defined in the adapter files
 		(	'$lgt_decompose_file_name'(SourceFile, _, _, Extension),
