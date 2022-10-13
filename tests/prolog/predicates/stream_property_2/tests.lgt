@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-09-14,
+		date is 2021-10-13,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 
@@ -93,7 +93,7 @@
 		findall(A, {stream_property(S, alias(A))}, L),
 		memberchk(user_output, L).
 
-	test(sics_stream_property_2_06c, deterministic(Action == reset)) :-
+	- test(sics_stream_property_2_06c, deterministic(Action == reset), [note('ISO requires this test to pass but EOF action for an output stream is arguably non-sensical.')]) :-
 		current_output(S),
 		{stream_property(S, eof_action(Action))}.
 
@@ -140,7 +140,7 @@
 		findall(P, {stream_property(S, P)}, L),
 		memberchk(output, L).
 
-	test(lgt_stream_property_2_09b, true(Action == reset)) :-
+	- test(lgt_stream_property_2_09b, true(Action == reset), [note('ISO requires this test to pass but EOF action for an output stream is arguably non-sensical.')]) :-
 		stream_property(S, alias(user_output)),
 		{stream_property(S, eof_action(Action))}.
 
@@ -161,7 +161,7 @@
 		findall(P, {stream_property(S, P)}, L),
 		memberchk(output, L).
 
-	test(lgt_stream_property_2_10b, true(Action == reset)) :-
+	- test(lgt_stream_property_2_10b, true(Action == reset), [note('ISO requires this test to pass but EOF action for an output stream is arguably non-sensical.')]) :-
 		stream_property(S, alias(user_error)),
 		{stream_property(S, eof_action(Action))}.
 

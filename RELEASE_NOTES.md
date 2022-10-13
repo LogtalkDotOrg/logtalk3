@@ -119,6 +119,10 @@ called as predicates.
 Tests
 -----
 
+* CHANGED: Skip `stream_property/2` tests that check `eof_action/1` for output
+streams as they are arguably non-sensical. Thanks to Per Mildner for feedback
+on these tests.
+
 * ADDED: Tests for the syntax and semantics of the `discontiguous/1` Prolog
 standard directive.
 
