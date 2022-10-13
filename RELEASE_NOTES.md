@@ -123,6 +123,10 @@ Tests
 streams as they are arguably non-sensical. Thanks to Per Mildner for feedback
 on these tests.
 
+* CHANGED: Test for the `meta_predicate/1` directive to accept normal argument
+indicators other than `*` (e.g. `?`) as common on some Prolog systems. Thanks
+to Per Mildner for feedback on these tests.
+
 * ADDED: Tests for the syntax and semantics of the `discontiguous/1` Prolog
 standard directive.
 

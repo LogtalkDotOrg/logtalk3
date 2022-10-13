@@ -33,16 +33,19 @@ mp2(Closure, Argument) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
-		date is 2021-11-12,
+		date is 2022-10-13,
 		comment is 'Unit tests for the de facto Prolog standard meta_predicate/1 directive syntax.'
 	]).
 
-	test(meta_predicate_1_goal, true(Template == mp1(0))) :-
+	test(meta_predicate_1_goal_01, true(Template == mp1(0))) :-
 		{predicate_property(mp1(_), meta_predicate(Template))}.
 
-	test(meta_predicate_1_closure, true(Template == mp2(1,*))) :-
+	test(meta_predicate_1_closure_01, subsumes(mp2(1,_), Template)) :-
 		{predicate_property(mp2(_, _), meta_predicate(Template))}.
+
+	test(meta_predicate_1_closure_02, true((atom(Indicator), Indicator \== (:)))) :-
+		{predicate_property(mp2(_, _), meta_predicate(mp2(1,Indicator)))}.
 
 :- end_object.
