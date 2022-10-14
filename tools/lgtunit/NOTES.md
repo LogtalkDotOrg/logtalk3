@@ -328,9 +328,13 @@ In the case of the `true(Assertion)`, `deterministic(Assertion)`, and
 `all(Assertion)` outcomes, a message that includes the assertion goal is
 printed for assertion failures and errors to help to debug failed unit
 tests. Same for the `subsumes(Expected, Result)` and `variant(Term1, Term2)`
-assertions. Note that this message is only  printed when the test goal
+assertions. Note that this message is only printed when the test goal
 succeeds as its failure will prevent the assertion goal from being called.
 This allows distinguishing between test goal failure and assertion failure.
+
+Note that the `all(Assertion)` outcome simplifies pinpointing which test
+goal solution failed the assertion. See also the section below on testing
+non-deterministic predicates.
 
 The `fail` and `false` outcomes are better reserved to cases where there is a
 single test goal. With multiple test goals, the test will succeed when *any* of

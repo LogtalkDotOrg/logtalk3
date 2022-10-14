@@ -500,6 +500,9 @@ failed unit tests. Same for the <code class="docutils literal notranslate"><span
 printed when the test goal succeeds as its failure will prevent the
 assertion goal from being called. This allows distinguishing between
 test goal failure and assertion failure.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">all(Assertion)</span></code> outcome simplifies pinpointing which
+test goal solution failed the assertion. See also the section below on
+testing non-deterministic predicates.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">fail</span></code> and <code class="docutils literal notranslate"><span class="pre">false</span></code> outcomes are better reserved to cases where
 there is a single test goal. With multiple test goals, the test will
 succeed when <em>any</em> of those goals fail.</p>
