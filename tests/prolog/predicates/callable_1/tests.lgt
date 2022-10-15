@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2015-05-05,
+		date is 2022-10-15,
 		comment is 'Unit tests for the ISO Prolog standard callable/1 built-in predicate.'
 	]).
 
@@ -61,12 +61,15 @@
 	succeeds(lgt_callable_1_08) :-
 		{callable({a})}.
 
+	succeeds(lgt_callable_1_09) :-
+		{callable(1:0)}.
+
 	% tests from the ECLiPSe test suite
 
-	succeeds(eclipse_callable_1_09) :-
+	succeeds(eclipse_callable_1_10) :-
 		{callable(f(b))}.
 
-	fails(eclipse_callable_1_10) :-
+	fails(eclipse_callable_1_11) :-
 		{callable(3.1)}.
 
 :- end_object.

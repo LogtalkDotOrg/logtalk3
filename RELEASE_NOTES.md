@@ -133,6 +133,8 @@ to Per Mildner for feedback on these tests.
 * ADDED: Tests for the syntax and semantics of the `discontiguous/1` Prolog
 standard directive.
 
+* ADDED: Additional test for the Prolog standard `callable/1` predicate.
+
 Ports
 -----
 
