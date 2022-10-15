@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2022-06-29,
+		date is 2022-10-15,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -351,5 +351,21 @@
 		decode_url_spaces_in_list(Chars0, Chars).
 	decode_url_spaces_in_list([Char| Chars0], [Char| Chars]) :-
 		decode_url_spaces_in_list(Chars0, Chars).
+
+	:- multifile(type::type/1).
+	type::type(pack_version).
+
+	% add the actual checking code for the new type
+	:- multifile(type::check/2).
+	type::check(pack_version, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term = Major:Minor:Patch,
+			integer(Major), Major >= 0,
+			integer(Minor), Minor >= 0,
+			integer(Patch), Patch >= 0
+		->	true
+		;	throw(type_error(pack_version, Term))
+		).
 
 :- end_category.

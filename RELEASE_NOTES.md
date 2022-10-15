@@ -89,6 +89,9 @@ about missing documentation directives.
 exceptions and missing periods at the end of documentation text in `info/1-2`
 directives.
 
+* IMPROVED: The `packs` tool checking for pack version arguments by defining
+a custom type.
+
 * UPDATED: All PowerShell tool scripts to check for and require version 7.2
 or later.
 

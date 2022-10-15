@@ -11,13 +11,16 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:26:0
-| **Date:** 2022-06-29
+| **Version:** 0:27:0
+| **Date:** 2022-10-15
 
 | **Compilation flags:**
 |    ``static``
 
 
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`

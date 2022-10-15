@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:55:4,
+		version is 0:56:0,
 		author is 'Paulo Moura',
-		date is 2022-10-08,
+		date is 2022-10-15,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -515,7 +515,7 @@
 	install(Registry, Pack, Version, UserOptions) :-
 		check(atom, Registry),
 		check(atom, Pack),
-		check(callable, Version),
+		check(pack_version, Version),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		(	installed_pack(_, Pack, _, _),
@@ -786,7 +786,7 @@
 
 	update(Pack, Version, UserOptions) :-
 		check(atom, Pack),
-		check(callable, Version),
+		check(pack_version, Version),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		(	installed_pack(Registry, Pack, OldVersion, Pinned) ->
