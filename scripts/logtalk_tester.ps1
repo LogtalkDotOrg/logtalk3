@@ -175,15 +175,15 @@ param(
 )
 	if ($a -eq "") {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	} else {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
 	if ($LASTEXITCODE -eq 0 -and
@@ -460,6 +460,10 @@ Function Check-Parameters() {
 		$script:level = 999
 	}
 
+	if ($i -ne "") {
+		$script:backend_options = $i
+	}
+
 	if ($g -ne "") {
 		$script:initialization_goal = $g
 	}
@@ -505,6 +509,7 @@ if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
 }
 
 $flag_goal = "true"
+$backend_options = $null
 $initialization_goal = "true"
 
 $issue_server = ""
@@ -556,7 +561,7 @@ if (Test-Path $results/tester_versions.txt) {
 if ($o -eq "verbose") {
 	$start_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 	Write-Output "% Batch testing started @ $start_date"
-	& $logtalk $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
+	& $logtalk $backend_options $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
 }
