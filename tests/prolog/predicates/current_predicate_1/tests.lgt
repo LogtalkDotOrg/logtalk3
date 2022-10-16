@@ -46,9 +46,9 @@ insect(bee).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2020-11-18,
+		date is 2022-10-16,
 		comment is 'Unit tests for the ISO Prolog standard current_predicate/1 built-in predicate.'
 	]).
 
@@ -115,17 +115,21 @@ insect(bee).
 	succeeds(lgt_current_predicate_1_15) :-
 		{current_predicate(scattered/2)}.
 
-	succeeds(iso_current_predicate_1_16) :-
+	succeeds(lgt_current_predicate_1_16) :-
 		findall(Name, {current_predicate(Name/0)}, Names),
 		memberchk(unicorn, Names).
 
-	succeeds(iso_current_predicate_1_17) :-
+	succeeds(lgt_current_predicate_1_17) :-
 		findall(Name, {current_predicate(Name/1)}, Names),
 		memberchk(fenix, Names).
 
-	succeeds(iso_current_predicate_1_18) :-
+	succeeds(lgt_current_predicate_1_18) :-
 		findall(Name, {current_predicate(Name/2)}, Names),
 		memberchk(scattered, Names).
+
+	fails(lgt_current_predicate_1_19) :-
+		{current_predicate(Predicate)},
+		Predicate == assertz/1.
 
 	% avoid library dependencies
 	memberchk(Element, [Head| _]) :-
