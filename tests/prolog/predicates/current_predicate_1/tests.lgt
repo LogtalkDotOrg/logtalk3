@@ -131,6 +131,14 @@ insect(bee).
 		{current_predicate(Predicate)},
 		Predicate == assertz/1.
 
+	fails(lgt_current_predicate_1_20) :-
+		{current_predicate(assertz/Arity)},
+		Arity == 1.
+
+	fails(lgt_current_predicate_1_21) :-
+		{current_predicate(Name/1)},
+		Name == assertz.
+
 	% avoid library dependencies
 	memberchk(Element, [Head| _]) :-
 		Element == Head,
