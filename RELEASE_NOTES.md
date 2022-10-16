@@ -110,6 +110,9 @@ tool `logtalk_index_to_txt.xsl` XSLT file.
 referenced but not loaded entities could result in `current_protocol/1`
 or `protocol_property/2` exceptions.
 
+* FIXED: The `logtalk_tester.ps1` script to report the Logtalk and backend
+Prolog versions as expected when using the default verbose option.
+
 Examples
 --------
 

@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 10, 2022
+##   Last updated on October 16, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -52,7 +52,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.5")
+	Write-Output ($myName + " 10.6")
 }
 
 Function Run-TestSet() {
@@ -175,15 +175,15 @@ param(
 )
 	if ($a -eq "") {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option "$goal" > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option "$goal" > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	} else {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option "$goal" '--' @a > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
-			& $logtalk $logtalk_option "$goal" '--' @a > "$results/$name.results" 2> "$results/$name.errors"
+			& $logtalk $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
 	if ($LASTEXITCODE -eq 0 -and
@@ -556,7 +556,7 @@ if (Test-Path $results/tester_versions.txt) {
 if ($o -eq "verbose") {
 	$start_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 	Write-Output "% Batch testing started @ $start_date"
-	& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $results/tester_versions.txt 2> $null
+	& $logtalk $logtalk_option $versions_goal | Out-File $results/tester_versions.txt
 	Select-String -Path $results/tester_versions.txt -Pattern "Logtalk version:" -Raw -SimpleMatch
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
 }
