@@ -114,6 +114,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-checking">Type-checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-new-types">Defining new types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
@@ -198,6 +201,57 @@ alternative the file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(types(tester)).
 </pre></div>
 </div>
+</section>
+<section id="type-checking">
+<h2>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this heading"></a></h2>
+<p>This library <code class="docutils literal notranslate"><span class="pre">type</span></code> object can be used to type-check common Logtalk
+and Prolog term types. The <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> predicate succeeds or fails if a
+term is of a given type. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>valid(positive_integer, <span class="m">42</span>).
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>valid(positive_integer, <span class="o">-</span><span class="m">13</span>).
+no
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">check/2</span></code> and <code class="docutils literal notranslate"><span class="pre">check/3</span></code> predicates throw an exception if a term
+is not of a given type. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">catch</span>(type<span class="o">::</span>check(integer, abc), <span class="nv">Error</span>, <span class="k">true</span>).
+<span class="nv">Error</span> <span class="o">=</span> <span class="k">type_error</span>(integer, abc)
+yes
+</pre></div>
+</div>
+<p>If we require a standard <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term, the <code class="docutils literal notranslate"><span class="pre">check/3</span></code>
+predicate takes a <em>context</em> argument. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">catch</span>(type<span class="o">::</span>check(integer, abc, foo<span class="o">/</span><span class="m">3</span>), <span class="nv">Error</span>, <span class="k">true</span>).
+<span class="nv">Error</span> <span class="o">=</span> error(<span class="k">type_error</span>(integer, abc), foo<span class="o">/</span><span class="m">3</span>)
+yes
+</pre></div>
+</div>
+<p>Typically, the context is provided by calling the built-in <code class="docutils literal notranslate"><span class="pre">context/1</span></code>
+method.</p>
+</section>
+<section id="defining-new-types">
+<h2>Defining new types<a class="headerlink" href="#defining-new-types" title="Permalink to this heading"></a></h2>
+<p>To define a custom type, define clauses for both the <code class="docutils literal notranslate"><span class="pre">type::type/1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">type::check/2</span></code> multifile predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
+type<span class="o">::</span>type(age).
+
+<span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>check<span class="o">/</span><span class="m">2</span>).
+type<span class="o">::</span>check(age, <span class="nv">Term</span>) <span class="o">:-</span>
+    type<span class="o">::</span>check(between(non_negative_integer, <span class="m">0</span>, <span class="m">150</span>), <span class="nv">Term</span>).
+</pre></div>
+</div>
+<p>Be careful to ensure that new type definitions don’t introduce spurious
+choice-points for these predicates. The unit tests of the <code class="docutils literal notranslate"><span class="pre">types</span></code>
+library perform this check for ground types.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>See e.g. the <code class="docutils literal notranslate"><span class="pre">os</span></code> library implementation of custom types for files and
+directories. Or the <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> and <code class="docutils literal notranslate"><span class="pre">optionals</span></code> libraries custom
+types. See also the <code class="docutils literal notranslate"><span class="pre">my_types</span></code> programming example.</p>
 </section>
 </section>
 

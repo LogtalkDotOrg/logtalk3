@@ -61,3 +61,59 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(types(tester)).
+
+
+Type-checking
+-------------
+
+This library `type` object can be used to type-check common Logtalk and Prolog
+term types. The `valid/2` predicate succeeds or fails if a term is of a given
+type. For example:
+
+	| ?- type::valid(positive_integer, 42).
+	yes
+
+	| ?- type::valid(positive_integer, -13).
+	no
+
+The `check/2` and `check/3` predicates throw an exception if a term is not of
+a given type. For example:
+
+	| ?- catch(type::check(integer, abc), Error, true).
+	Error = type_error(integer, abc)
+	yes
+
+If we require a standard `error/2` exception term, the `check/3` predicate
+takes a *context* argument. For example:
+
+	| ?- catch(type::check(integer, abc, foo/3), Error, true).
+	Error = error(type_error(integer, abc), foo/3)
+	yes
+
+Typically, the context is provided by calling the built-in `context/1` method.
+
+
+Defining new types
+------------------
+
+To define a custom type, define clauses for both the `type::type/1` and
+`type::check/2` multifile predicates. For example:
+
+	:- multifile(type::type/1).
+	type::type(age).
+
+	:- multifile(type::check/2).
+	type::check(age, Term) :-
+		type::check(between(non_negative_integer, 0, 150), Term).
+
+Be careful to ensure that new type definitions don't introduce spurious
+choice-points for these predicates. The unit tests of the `types` library
+perform this check for ground types.
+
+
+Examples
+--------
+
+See e.g. the `os` library implementation of custom types for files and
+directories. Or the `expecteds` and `optionals` libraries custom types.
+See also the `my_types` programming example.
