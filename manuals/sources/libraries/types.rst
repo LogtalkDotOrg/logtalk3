@@ -104,6 +104,18 @@ Be careful to ensure that new type definitions don't introduce spurious
 choice-points for these predicates. The unit tests of the ``types``
 library perform this check for ground types.
 
+When defining a meta-type (i.e. a type with arguments that are also
+types), add also a clause for the ``type::meta_type/3`` multifile
+predicate. For example:
+
+::
+
+   :- multifile(type::meta_type/3).
+   type::meta_type(tuple(Type1, Type2, Type3), [Type1, Type2, Type3], []).
+
+This predicate is called when checking if a type is a defined type. For
+meta-types, that check must extend to the sub-types.
+
 Examples
 --------
 

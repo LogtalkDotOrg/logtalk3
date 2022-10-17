@@ -246,6 +246,15 @@ type<span class="o">::</span>check(age, <span class="nv">Term</span>) <span clas
 <p>Be careful to ensure that new type definitions don’t introduce spurious
 choice-points for these predicates. The unit tests of the <code class="docutils literal notranslate"><span class="pre">types</span></code>
 library perform this check for ground types.</p>
+<p>When defining a meta-type (i.e. a type with arguments that are also
+types), add also a clause for the <code class="docutils literal notranslate"><span class="pre">type::meta_type/3</span></code> multifile
+predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>meta_type<span class="o">/</span><span class="m">3</span>).
+type<span class="o">::</span>meta_type(tuple(<span class="nv">Type1</span>, <span class="nv">Type2</span>, <span class="nv">Type3</span>), [<span class="nv">Type1</span>, <span class="nv">Type2</span>, <span class="nv">Type3</span>], []).
+</pre></div>
+</div>
+<p>This predicate is called when checking if a type is a defined type. For
+meta-types, that check must extend to the sub-types.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
