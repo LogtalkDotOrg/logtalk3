@@ -12,7 +12,7 @@ Fast portable random number generator predicates. Core predicates originally wri
 
 | **Author:** Paulo Moura
 | **Version:** 2:8:0
-| **Date:** 2021-02-21
+| **Date:** 2022-10-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,6 +26,7 @@ Fast portable random number generator predicates. Core predicates originally wri
 | **Remarks:**
 
    - Single random number generator: This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.
+   - Randomness: Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The ``randomize/1`` predicate can be used to initialize the seed with a random value.
 
 | **Inherited public predicates:**
 |     :ref:`random_protocol/0::between/3`  :ref:`random_protocol/0::enumerate/2`  :ref:`pseudo_random_protocol/0::get_seed/1`  :ref:`random_protocol/0::maybe/0`  :ref:`random_protocol/0::maybe/1`  :ref:`random_protocol/0::maybe/2`  :ref:`random_protocol/0::maybe_call/1`  :ref:`random_protocol/0::maybe_call/2`  :ref:`random_protocol/0::member/2`  :ref:`random_protocol/0::permutation/2`  :ref:`random_protocol/0::random/1`  :ref:`random_protocol/0::random/3`  :ref:`random_protocol/0::randseq/4`  :ref:`random_protocol/0::randset/4`  :ref:`random_protocol/0::select/3`  :ref:`random_protocol/0::sequence/4`  :ref:`random_protocol/0::set/4`  :ref:`pseudo_random_protocol/0::set_seed/1`  

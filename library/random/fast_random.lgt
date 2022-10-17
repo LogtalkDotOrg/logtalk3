@@ -25,10 +25,11 @@
 	:- info([
 		version is 2:8:0,
 		author is 'Paulo Moura',
-		date is 2021-02-21,
+		date is 2022-10-17,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
-			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.'
+			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.',
+			'Randomness' - 'Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The ``randomize/1`` predicate can be used to initialize the seed with a random value.'
 		],
 		see_also is [random, backend_random]
 	]).

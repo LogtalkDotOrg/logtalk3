@@ -192,7 +192,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 2:8:0</div>
-<div class="line"><strong>Date:</strong> 2021-02-21</div>
+<div class="line"><strong>Date:</strong> 2022-10-17</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -216,6 +216,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Multiple random number generators: To define multiple random number generators, simply extend this object. The derived objects must send to <em>self</em> the <code class="docutils literal notranslate"><span class="pre">reset_seed/0</span></code> message.</p></li>
+<li><p>Randomness: Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code> predicate can be used to initialize the seed with a random value.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

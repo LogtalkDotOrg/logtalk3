@@ -25,10 +25,11 @@
 	:- info([
 		version is 2:8:0,
 		author is 'Paulo Moura',
-		date is 2021-02-21,
+		date is 2022-10-17,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
-			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.'
+			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.',
+			'Randomness' - 'Loading this object always initializes the random generator seed to the same value, thus providing a pseudo random number generator. The ``randomize/1`` predicate can be used to initialize the seed with a random value.'
 		],
 		see_also is [fast_random, backend_random]
 	]).

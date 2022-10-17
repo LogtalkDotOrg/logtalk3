@@ -76,6 +76,8 @@ Library
 * ADDED: Predicates `read_term_from_chars/4` and `read_term_from_codes/4` to
 the `term_io` library.
 
+* IMPROVED: The documentation of the `random` library.
+
 * FIXED: Definition of the `os::time_stamp/1` library predicate for Ciao
 Prolog.
 

@@ -60,6 +60,11 @@ objects from multi-threaded applications as there is not portable
 solution to protect seed updates from signals and prevent inconsistent
 state when threads are canceled.
 
+The ``random`` and ``fast_random`` objects always initialize the random
+generator seed to the same value, thus providing a pseudo random number
+generator. The ``randomize/1`` predicate can be used to initialize the
+seed with a random value.
+
 The ``backend_random`` object abstracts the native backend Prolog
 compiler random number generator for the basic ``random/1``,
 ``get_seed/1``, and ``set_seed/1`` predicates providing a portable
