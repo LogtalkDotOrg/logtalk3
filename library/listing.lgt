@@ -19,13 +19,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(listing).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2010-03-12,
+		date is 2022-10-18,
 		comment is 'Listing predicates.'
 	]).
 
@@ -121,7 +120,7 @@
 		write(':- alias('), writeq(OFunctor/OArity), write(', '), writeq(Functor/Arity), write(').'), nl,
 		fail.
 	listing_properties(Head, _, _) :-
-		::predicate_property(Head, non_terminal(NonTerminal//NTArity)) ->
+		::predicate_property(Head, non_terminal(NonTerminal//NTArity)),
 		write('% clauses resulting from the expansion of the non-terminal '), writeq(NonTerminal//NTArity), nl,
 		fail.
 	listing_properties(_, _, _).
