@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on September 30, 2022
+##   Last updated on October 18, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -170,15 +170,15 @@ done
 mkdir -p ../../info
 cd ../../info || exit 1
 if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
-	cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
+	cp ../logtalk/docs/LogtalkAPIs-$version_base.info ./LogtalkAPIs.info
 	if [ "$(command -v install-info)" != "" ]; then
-		install-info LogtalkAPIs-$version_base.info dir
+		install-info LogtalkAPIs.info dir
 	fi
 fi
 if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
-	cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
+	cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ./TheLogtalkHandbook.info
 	if [ "$(command -v install-info)" != "" ]; then
-		install-info TheLogtalkHandbook-$version_base.info dir
+		install-info TheLogtalkHandbook.info dir
 	fi
 fi
 
