@@ -126,6 +126,8 @@ meta-variables in cut-transparent control constructs.
 * FIXED: The `constraints/sicstus` example linter warnings on non-terminals
 called as predicates.
 
+* FIXED: The `named_databases` example to only load in supported backends.
+
 Tests
 -----
 

@@ -19,6 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization(
-	logtalk_load([named_databases, named_databases_hook])
-).
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap)
+)).
+
+	:- initialization(
+		logtalk_load([named_databases, named_databases_hook])
+	).
+
+:- else.
+
+	:- initialization((write('(not available for the used backend Prolog compiler)'), nl)).
+
+:- endif.

@@ -32,9 +32,8 @@ compilers, the module file is compiled in one step without requiring generating
 and compiling an intermediate file as (must be) done by the Logtalk compiler
 when loading a source file (for portability across compiler backends).
 
-Named databases are currently implemented for a subset of the Prolog
-systems supported by Logtalk: ECLiPSe, Lean Prolog, SICStus Prolog,
-SWI-Prolog, and YAP.
+Named databases are currently implemented for a subset of the Prolog systems
+supported by Logtalk: ECLiPSe, SICStus Prolog, SWI-Prolog, and YAP.
 
 Caveat: most Prolog systems cannot list clauses for static code. Some systems,
 such as SWI-Prolog, do allow listing of static code by default but can be set
