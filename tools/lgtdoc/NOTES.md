@@ -154,7 +154,7 @@ standard exceptions.
 
 When the `lgtdoc_missing_periods` flag is set to `warning` (its usual default
 value), the `lgtdoc` tool prints warnings on missing ending periods (full
-stops) or exclamation marks in `info/1-2` directives (in comments, remarks,
-parameter descriptions, and argument descriptions).
+stops), exclamation marks, or question marks in `info/1-2` directives (in
+comments, remarks, parameter descriptions, and argument descriptions).
 
 Set a flag value to `silent` to turn off the corresponding linter warnings.

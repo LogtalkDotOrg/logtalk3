@@ -28,7 +28,10 @@ RELEASE NOTES
 Tools
 -----
 
-* FIXED: The `logtalk_doclet.sh` script when using a backends Prolog system
+* UPDATED: The `lgtdoc` tool to also accept question marks at the end of
+comments and remarks when using the `lgtdoc_missing_periods` linter flag.
+
+* FIXED: The `logtalk_doclet.sh` script when using a backend Prolog system
 that requires command-line passed queries to end with a period.
 
 

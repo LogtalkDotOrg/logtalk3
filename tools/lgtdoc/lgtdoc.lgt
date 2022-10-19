@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 7:0:0,
+		version is 7:1:0,
 		author is 'Paulo Moura',
-		date is 2022-10-10,
+		date is 2022-10-19,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1648,6 +1648,7 @@
 		(	current_logtalk_flag(lgtdoc_missing_periods, warning),
 			\+ sub_atom(Text, _, 1, 0, '.'),
 			\+ sub_atom(Text, _, 1, 0, '!'),
+			\+ sub_atom(Text, _, 1, 0, '?'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_property(Entity, file(File)),
