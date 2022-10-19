@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on April 21, 2022
+##   Last updated on October 19, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.3"
+	echo "$(basename "$0") 2.4"
 	exit 0
 }
 
@@ -53,11 +53,6 @@ elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU core
 else
 	timeout_command=""
 fi
-
-# documenting goals
-
-versions_goal="logtalk_load(library(tester_versions)),halt$dot"
-documenting_goal="logtalk_load([doclet(loader),doclet]),halt$dot"
 
 # default argument values
 
@@ -245,6 +240,11 @@ fi
 if [ "$timeout_command" == "" ] ; then
 	echo "Warning! Timeout support not available. The timeout option will be ignored." >&2
 fi
+
+# documenting goals
+
+versions_goal="logtalk_load(library(tester_versions)),halt$dot"
+documenting_goal="logtalk_load([doclet(loader),doclet]),halt$dot"
 
 mkdir -p "$results"
 rm -f "$results"/*.results

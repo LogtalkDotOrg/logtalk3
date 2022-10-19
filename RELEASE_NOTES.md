@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.60.0 - November ??, 2022
+==========================
+
+Tools
+-----
+
+* FIXED: The `logtalk_doclet.sh` script when using a backends Prolog system
+that requires command-line passed queries to end with a period.
+
+
 3.59.0 - October 18, 2022
 =========================
 
