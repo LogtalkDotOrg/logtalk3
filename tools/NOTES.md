@@ -114,7 +114,7 @@ not listed, see the dependency websites for installation instructions.
 - `issue_creator`: `gh`, `glab`
 - `lgtdoc`: Sphinx, `libxslt`, `fop`
 - `lgtunit`: Allure
-- `packs`: `coretutils`, `libarchive`, `gnupg2`, `git`
+- `packs`: `coreutils`, `libarchive`, `gnupg2`, `git`
 
 ### Python dependencies (all operating-systems)
 

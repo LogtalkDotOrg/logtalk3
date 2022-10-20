@@ -100,7 +100,7 @@ Tool dependencies for full functionality
 -  ``issue_creator``: ``gh``, ``glab``
 -  ``lgtdoc``: Sphinx, ``libxslt``, ``fop``
 -  ``lgtunit``: Allure
--  ``packs``: ``coretutils``, ``libarchive``, ``gnupg2``, ``git``
+-  ``packs``: ``coreutils``, ``libarchive``, ``gnupg2``, ``git``
 
 Python dependencies (all operating-systems)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
