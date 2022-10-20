@@ -25,6 +25,12 @@ RELEASE NOTES
 3.60.0 - November ??, 2022
 ==========================
 
+Documentation
+-------------
+
+* UPDATED: The manual installation instructions in the `INSTALL.md` file for
+zsh users.
+
 Tools
 -----
 

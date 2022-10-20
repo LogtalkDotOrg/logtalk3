@@ -161,6 +161,9 @@ the `install.sh` script, you will also need to add:
 	INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
 	export PATH MANPATH INFOPATH
 
+If you use a zsh shell, edit and add the above lines for bash to your
+`~/.zshenv` file instead.
+
 If you use instead a csh shell, edit and add the following lines to your
 `~/.cshrc` file:
 
