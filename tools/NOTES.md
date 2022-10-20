@@ -136,7 +136,7 @@ not listed, see the dependency websites for installation instructions.
 	$ brew install texinfo
 	$ brew install libxslt fop
 	$ brew install allure
-	$ brew install coretutils libarchive gnupg2 git
+	$ brew install coreutils libarchive gnupg2 git
 	$ brew install gh glab
 
 ### Ubuntu
