@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2021-08-20,
+		date is 2022-10-22,
 		comment is 'Unit tests for the "jpl" example.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, '=~='), '=~='/2
 	]).
 
 	test(java_01, true) :-
@@ -78,8 +82,12 @@
 			Names
 		).
 
-	test(java_11, true(List == [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)])) :-
-		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], 3.14, foo(bar)], Array),
+	test(java_11, true(List == [x, [1, a, 7, [y, z]], k, [], foo(bar)])) :-
+		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], foo(bar)], Array),
+		java::array_to_terms(Array, List).
+
+	test(java_12, true(List =~= [1.73, 3.14, 8.91])) :-
+		java::terms_to_array([1.73, 3.14, 8.91], Array),
 		java::array_to_terms(Array, List).
 
 :- end_object.

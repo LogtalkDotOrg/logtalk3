@@ -45,6 +45,11 @@ comments and remarks when using the `lgtdoc_missing_periods` linter flag.
 * FIXED: The `logtalk_doclet.sh` script when using a backend Prolog system
 that requires command-line passed queries to end with a period.
 
+Examples
+--------
+
+* FIXED: Test for the `jpl` example to correctly compare floats.
+
 
 3.59.0 - October 18, 2022
 =========================
