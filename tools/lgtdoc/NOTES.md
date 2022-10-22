@@ -147,6 +147,10 @@ predicate `info/2` directive missing de facto required keys (e.g `comment`,
 `parameters` or `parnames` for parametric entities, `arguments` or `argnames`
 for predicates/non-terminals with arguments).
 
+When the `lgtdoc_invalid_dates` flag is set to `warning` (its usual default
+value), the `lgtdoc` tool prints warnings on invalid dates in `info/1`
+directives.
+
 When the `lgtdoc_non_standard_exceptions` flag is set to `warning` (its usual
 default value), the `lgtdoc` tool prints warnings on non-standard exceptions.
 This linter check is particularly effective in detecting typos when specifying

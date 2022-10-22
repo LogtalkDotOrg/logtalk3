@@ -62,12 +62,24 @@
 		argnames is ['Predicate', 'PrimarySortKey', 'SecondarySortKey', 'Entity']
 	]).
 
+	:- uses(date, [
+		valid/3 as valid_date/3
+	]).
+
 	:- uses(list, [
 		member/2, memberchk/2, sort/4
 	]).
 
 	:- uses(logtalk, [
-		print_message/3
+		expand_library_path/2, print_message/3,
+		loaded_file/1, loaded_file_property/2,
+		file_type_extension/2
+	]).
+
+	:- uses(os, [
+		absolute_file_name/2, internal_os_path/2, make_directory/1,
+		decompose_file_name/3, decompose_file_name/4,
+		operating_system_type/1
 	]).
 
 	:- uses(type, [
@@ -81,10 +93,10 @@
 	rlibrary(Library, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
-		logtalk::expand_library_path(Library, TopPath),
+		expand_library_path(Library, TopPath),
 		^^merge_options(UserOptions, Options),
 		^^option(xml_docs_directory(XMLDirectory), Options),
-		os::make_directory(XMLDirectory),
+		make_directory(XMLDirectory),
 		output_rlibrary(TopPath, Options).
 
 	rlibrary(Library) :-
@@ -101,7 +113,7 @@
 
 	sub_library(TopPath, ExcludedPaths, ExcludedPrefixes, LibraryPath) :-
 		logtalk_library_path(Library, _),
-		logtalk::expand_library_path(Library, LibraryPath),
+		expand_library_path(Library, LibraryPath),
 		\+ (
 			member(ExcludedPrefix, ExcludedPrefixes),
 			sub_atom(LibraryPath, 0, _, _, ExcludedPrefix)
@@ -112,10 +124,10 @@
 	library(Library, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
-		logtalk::expand_library_path(Library, Path),
+		expand_library_path(Library, Path),
 		^^merge_options(UserOptions, Options),
 		^^option(xml_docs_directory(XMLDirectory), Options),
-		os::make_directory(XMLDirectory),
+		make_directory(XMLDirectory),
 		output_directory_files(Path, Options),
 		write_indexes(Options).
 
@@ -125,10 +137,10 @@
 	rdirectory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
-		os::absolute_file_name(Directory, Path),
+		absolute_file_name(Directory, Path),
 		^^merge_options(UserOptions, Options),
 		^^option(xml_docs_directory(XMLDirectory), Options),
-		os::make_directory(XMLDirectory),
+		make_directory(XMLDirectory),
 		output_rdirectory(Path, Options).
 
 	rdirectory(Directory) :-
@@ -149,22 +161,22 @@
 		write_indexes(Options).
 
 	sub_directory(Directory, ExcludedPaths, ExcludedPrefixes, SubDirectory) :-
-		logtalk::loaded_file(Path),
+		loaded_file(Path),
 		\+ (
 			member(ExcludedPrefix, ExcludedPrefixes),
 			sub_atom(Path, 0, _, _, ExcludedPrefix)
 		),
-		os::decompose_file_name(Path, SubDirectory, _),
+		decompose_file_name(Path, SubDirectory, _),
 		atom_concat(Directory, RelativePath, SubDirectory),
 		\+ member(RelativePath, ExcludedPaths).
 
 	directory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
-		os::absolute_file_name(Directory, Path),
+		absolute_file_name(Directory, Path),
 		^^merge_options(UserOptions, Options),
 		^^option(xml_docs_directory(XMLDirectory), Options),
-		os::make_directory(XMLDirectory),
+		make_directory(XMLDirectory),
 		output_directory_files(Path, Options),
 		write_indexes(Options).
 
@@ -177,13 +189,13 @@
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
 		^^option(exclude_files(ExcludedFiles), Options),
-		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
-		logtalk::loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, directory(DirectorySlash)),
+		loaded_file_property(Path, basename(Basename)),
 		\+ member(Path, ExcludedFiles),
 		\+ member(Basename, ExcludedFiles),
-		os::decompose_file_name(Path, _, Name, _),
+		decompose_file_name(Path, _, Name, _),
 		\+ member(Name, ExcludedFiles),
-		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
+		loaded_file_property(Path, text_properties(StreamOptions)),
 		process(Basename, DirectorySlash, Options, StreamOptions),
 		fail.
 	output_directory_files(_, _).
@@ -194,7 +206,7 @@
 		locate_file(Source, Basename, Directory, StreamOptions),
 		^^merge_options(UserOptions, Options),
 		^^option(xml_docs_directory(XMLDirectory), Options),
-		os::make_directory(XMLDirectory),
+		make_directory(XMLDirectory),
 		process(Basename, Directory, Options, StreamOptions).
 
 	file(Source) :-
@@ -206,14 +218,14 @@
 		^^merge_options(UserOptions, Options),
 		^^option(xml_docs_directory(XMLDirectory), Options),
 		^^option(exclude_prefixes(ExcludedPrefixes), Options),
-		os::make_directory(XMLDirectory),
-		(	logtalk::loaded_file_property(Path, directory(Directory)),
+		make_directory(XMLDirectory),
+		(	loaded_file_property(Path, directory(Directory)),
 			\+ (
 				member(ExcludedPrefix, ExcludedPrefixes),
 				sub_atom(Directory, 0, _, _, ExcludedPrefix)
 			),
-			logtalk::loaded_file_property(Path, basename(File)),
-			logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
+			loaded_file_property(Path, basename(File)),
+			loaded_file_property(Path, text_properties(StreamOptions)),
 			process(File, Directory, Options, StreamOptions),
 			fail
 		;	write_indexes(Options)
@@ -227,40 +239,40 @@
 		compound(LibraryNotation),
 		!,
 		LibraryNotation =.. [Library, Name],
-		logtalk::expand_library_path(Library, LibraryPath),
+		expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
 		locate_file(Source, Basename, Directory, StreamOptions).
 	% file given using its name or basename
 	locate_file(Source, Basename, Directory, StreamOptions) :-
 		add_extension(Source, Basename),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
+		loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, directory(Directory)),
 		% check that there isn't another file with the same basename
 		% from a different directory
 		\+ (
-			logtalk::loaded_file_property(OtherPath, basename(Basename)),
+			loaded_file_property(OtherPath, basename(Basename)),
 			Path \== OtherPath
 		),
-		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
+		loaded_file_property(Path, text_properties(StreamOptions)),
 		!.
 	% file given using a full path
 	locate_file(Source, Basename, Directory, StreamOptions) :-
 		add_extension(Source, SourceWithExtension),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
+		loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, directory(Directory)),
 		atom_concat(Directory, Basename, SourceWithExtension),
-		logtalk::loaded_file_property(Path, text_properties(StreamOptions)),
+		loaded_file_property(Path, text_properties(StreamOptions)),
 		!.
 
 	add_extension(Source, SourceWithExtension) :-
 		% ensure that Source is not specified using library notation
 		atom(Source),
-		os::decompose_file_name(Source, _, _, SourceExtension),
-		(	logtalk::file_type_extension(source, SourceExtension) ->
+		decompose_file_name(Source, _, _, SourceExtension),
+		(	file_type_extension(source, SourceExtension) ->
 			% source file extension present
 			SourceWithExtension = Source
 		;	% try possible source extensions
-			logtalk::file_type_extension(source, Extension),
+			file_type_extension(source, Extension),
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
@@ -274,7 +286,7 @@
 				Library \== startup
 			;	logtalk_library_path(Library, _)
 			),
-			logtalk::expand_library_path(Library, Path) ->
+			expand_library_path(Library, Path) ->
 			assertz(library_entity_(Library, Library, Functor, Entity))
 		;	true
 		),
@@ -335,7 +347,7 @@
 		convert_encoding('UTF-16BE', unicode_be).
 		convert_encoding('UTF-16LE', unicode_le).
 		convert_encoding('UTF-16', Encoding) :-
-			os::operating_system_type(Type),
+			operating_system_type(Type),
 			(	Type == windows ->
 				Encoding = unicode_le
 			;	% other operating-systems can be either big-endian or little-endian
@@ -418,7 +430,7 @@
 		write_xml_cdata_element(Stream, name, [], Entity),
 		functor(Entity, Name, Arity),
 		write_xml_cdata_element(Stream, functor, [], Name/Arity),
-		os::decompose_file_name(File, _, Basename, _),
+		decompose_file_name(File, _, Basename, _),
 		write_xml_cdata_element(Stream, file, [], Basename),
 		write_xml_element(Stream, type, [], Type),
 		xml_entity_compilation_text(Type, Entity, Compilation),
@@ -532,7 +544,8 @@
 		),
 		(	member(date(Date), Info) ->
 			date_to_padded_atom(Date, DateAtom),
-			write_xml_element(Stream, date, [], DateAtom)
+			write_xml_element(Stream, date, [], DateAtom),
+			warn_on_invalid_date(Entity, Date)
 		;	true
 		),
 		(	member(copyright(Copyright), Info) ->
@@ -1518,7 +1531,7 @@
 	default_option(bom(true)).
 	default_option(encoding('UTF-8')).
 	default_option(omit_path_prefixes(Prefixes)) :-
-		(	logtalk::expand_library_path(home, Home) ->
+		(	expand_library_path(home, Home) ->
 			Prefixes = [Home]
 		;	Prefixes = []
 		).
@@ -1564,8 +1577,8 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
-		os::internal_os_path(Directory1, Directory0),
-		os::absolute_file_name(Directory1, Directory2),
+		internal_os_path(Directory1, Directory0),
+		absolute_file_name(Directory1, Directory2),
 		(	sub_atom(Directory2, _, _, 0, '/') ->
 			Directory = Directory2
 		;	atom_concat(Directory2, '/', Directory)
@@ -1574,7 +1587,7 @@
 
 	normalize_file_paths([], []).
 	normalize_file_paths([File| Files], [NormalizedFile| NormalizedFiles]) :-
-		os::absolute_file_name(File, NormalizedFile),
+		absolute_file_name(File, NormalizedFile),
 		normalize_file_paths(Files, NormalizedFiles).
 
 	reset :-
@@ -1641,6 +1654,16 @@
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
 			print_message(warning, lgtdoc, missing_info_key(Entity, Indicator, Key, File, Line))
+		;	true
+		).
+
+	warn_on_invalid_date(Entity, Date) :-
+		(	current_logtalk_flag(lgtdoc_invalid_dates, warning),
+			% don't check deprecated date format
+			Date = Year-Month-Day,
+			\+ valid_date(Year, Month, Day) ->
+			entity_file_line(Entity, File, Line),
+			print_message(warning, lgtdoc, invalid_date(Entity, Date, File, Line))
 		;	true
 		).
 

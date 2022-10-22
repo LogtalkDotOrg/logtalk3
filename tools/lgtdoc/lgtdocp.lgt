@@ -25,7 +25,8 @@
 	create_logtalk_flag(lgtdoc_non_standard_exceptions, warning, [type(atom), keep(true)]),
 	create_logtalk_flag(lgtdoc_missing_directives,      warning, [type(atom), keep(true)]),
 	create_logtalk_flag(lgtdoc_missing_info_key,        warning, [type(atom), keep(true)]),
-	create_logtalk_flag(lgtdoc_missing_periods,         warning, [type(atom), keep(true)])
+	create_logtalk_flag(lgtdoc_missing_periods,         warning, [type(atom), keep(true)]),
+	create_logtalk_flag(lgtdoc_invalid_dates,           warning, [type(atom), keep(true)])
 )).
 
 

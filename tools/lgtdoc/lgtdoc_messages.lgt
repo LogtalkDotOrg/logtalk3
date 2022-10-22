@@ -80,6 +80,10 @@
 		),
 		file_context(File, Line).
 
+	message_tokens(invalid_date(Entity, Date, File, Line)) -->
+		['Invalid date in info/1 directive for ~q: ~q'-[Entity, Date], nl],
+		file_context(File, Line).
+
 	% auxiliary non-terminals and predicates
 
 	file_context(Path, -1) -->

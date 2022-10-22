@@ -22,6 +22,7 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
+	logtalk_load(dates(loader)),
 	logtalk_load(types(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(os(loader)),
