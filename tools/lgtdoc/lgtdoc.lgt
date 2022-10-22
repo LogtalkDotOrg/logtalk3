@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 7:1:0,
+		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-19,
+		date is 2022-10-22,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -950,7 +950,7 @@
 	write_xml_predicate_info(Stream, Entity, Indicator, Functor, Arity, Info) :-
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
-			warn_on_missing_period(Entity, Comment)
+			warn_on_missing_period(Entity, Indicator, Comment)
 		;	warn_on_missing_info_key(Entity, Indicator, comment)
 		),
 		(	member(arguments(Arguments), Info) ->
@@ -964,7 +964,7 @@
 					write_xml_cdata_element(Stream, name, [], Name),
 					write_xml_cdata_element(Stream, description, [], Description),
 					write_xml_close_tag(Stream, argument),
-					warn_on_missing_period(Entity, Description)
+					warn_on_missing_period(Entity, Indicator, Description)
 				)
 			),
 			write_xml_close_tag(Stream, arguments)
@@ -998,7 +998,7 @@
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
 					write_xml_close_tag(Stream, remark),
-					warn_on_missing_period(Entity, Text)
+					warn_on_missing_period(Entity, Indicator, Text)
 				)
 			),
 			write_xml_close_tag(Stream, remarks)
@@ -1618,29 +1618,29 @@
 
 	warn_on_missing_entity_directive(Directive, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, missing_entity_directive(Directive, Type, Entity, File))
+			entity_file_line(Entity, File, Line),
+			print_message(warning, lgtdoc, missing_entity_directive(Directive, Type, Entity, File, Line))
 		;	true
 		).
 
 	warn_on_missing_predicate_directive(Directive, Entity, Indicator) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
-			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, missing_predicate_directive(Directive, Entity, Indicator, File))
+			entity_predicate_file_line(Entity, Indicator, File, Line),
+			print_message(warning, lgtdoc, missing_predicate_directive(Directive, Entity, Indicator, File, Line))
 		;	true
 		).
 
 	warn_on_missing_info_key(Entity, Key) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
-			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, missing_info_key(Entity, Key, File))
+			entity_file_line(Entity, File, Line),
+			print_message(warning, lgtdoc, missing_info_key(Entity, Key, File, Line))
 		;	true
 		).
 
 	warn_on_missing_info_key(Entity, Indicator, Key) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
-			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, missing_info_key(Entity, Indicator, Key, File))
+			entity_predicate_file_line(Entity, Indicator, File, Line),
+			print_message(warning, lgtdoc, missing_info_key(Entity, Indicator, Key, File, Line))
 		;	true
 		).
 
@@ -1651,16 +1651,28 @@
 			\+ sub_atom(Text, _, 1, 0, '?'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
-			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, missing_period(Entity, Text, File))
+			entity_file_line(Entity, File, Line),
+			print_message(warning, lgtdoc, missing_period(Entity, Text, File, Line))
+		;	true
+		).
+
+	warn_on_missing_period(Entity, Indicator, Text) :-
+		(	current_logtalk_flag(lgtdoc_missing_periods, warning),
+			\+ sub_atom(Text, _, 1, 0, '.'),
+			\+ sub_atom(Text, _, 1, 0, '!'),
+			\+ sub_atom(Text, _, 1, 0, '?'),
+			\+ sub_atom(Text, 0, _, _, 'http'),
+			\+ sub_atom(Text, 0, _, _, 'ftp') ->
+			entity_predicate_file_line(Entity, Indicator, File, Line),
+			print_message(warning, lgtdoc, missing_period(Entity, Text, File, Line))
 		;	true
 		).
 
 	warn_on_non_standard_exception(Entity, Indicator, Exception) :-
 		(	current_logtalk_flag(lgtdoc_non_standard_exceptions, warning),
 			\+ standard_exception(Exception) ->
-			entity_property(Entity, file(File)),
-			print_message(warning, lgtdoc, non_standard_exception(Entity, Indicator, Exception, File))
+			entity_predicate_file_line(Entity, Indicator, File, Line),
+			print_message(warning, lgtdoc, non_standard_exception(Entity, Indicator, Exception, File, Line))
 		;	true
 		).
 
@@ -1675,6 +1687,21 @@
 	standard_exception(resource_error(_)).
 	standard_exception(syntax_error(_)).
 	standard_exception(system_error).
+
+	entity_file_line(Entity, File, Line) :-
+		entity_property(Entity, file(File)),
+		(	entity_property(Entity, lines(Line, _)) ->
+			true
+		;	Line = -1
+		).
+
+	entity_predicate_file_line(Entity, Indicator, File, Line) :-
+		entity_property(Entity, file(File)),
+		(	entity_property(Entity, declares(Indicator, Properties)),
+			member(line_count(Line), Properties) ->
+			true
+		;	Line = -1
+		).
 
 :- end_object.
 

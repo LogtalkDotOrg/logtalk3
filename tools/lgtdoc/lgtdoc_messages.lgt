@@ -29,9 +29,9 @@
 :- category(lgtdoc_messages).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-10,
+		date is 2022-10-22,
 		comment is 'Logtalk documentation tool default message translations.'
 	]).
 
@@ -47,46 +47,48 @@
 
 	% linter messages
 
-	message_tokens(missing_entity_directive(Directive, Type, Entity, File)) -->
+	message_tokens(missing_entity_directive(Directive, Type, Entity, File, Line)) -->
 		['Missing ~q directive for ~w: ~q'-[Directive, Type, Entity], nl],
-		file_context(File).
+		file_context(File, Line).
 
-	message_tokens(missing_predicate_directive(Directive, Entity, Indicator, File)) -->
+	message_tokens(missing_predicate_directive(Directive, Entity, Indicator, File, Line)) -->
 		(	{Indicator = _//_} ->
 			['Missing ~q directive for ~q non-terminal: ~q'-[Directive, Entity, Indicator], nl]
 		;	['Missing ~q directive for ~q predicate: ~q'-[Directive, Entity, Indicator], nl]
 		),
-		file_context(File).
+		file_context(File, Line).
 
-	message_tokens(missing_info_key(Entity, Key, File)) -->
+	message_tokens(missing_info_key(Entity, Key, File, Line)) -->
 		['Missing key for ~q: ~q'-[Entity, Key], nl],
-		file_context(File).
+		file_context(File, Line).
 
-	message_tokens(missing_info_key(Entity, Indicator, Key, File)) -->
+	message_tokens(missing_info_key(Entity, Indicator, Key, File, Line)) -->
 		(	{Indicator = _//_} ->
 			['Missing key for ~q non-terminal ~q: ~q'-[Entity, Indicator, Key], nl]
 		;	['Missing key for ~q predicate ~q: ~q'-[Entity, Indicator, Key], nl]
 		),
-		file_context(File).
+		file_context(File, Line).
 
-	message_tokens(missing_period(Entity, Text, File)) -->
+	message_tokens(missing_period(Entity, Text, File, Line)) -->
 		['Missing period at the end of text for ~q: ~q'-[Entity, Text], nl],
-		file_context(File).
+		file_context(File, Line).
 
-	message_tokens(non_standard_exception(Entity, Indicator, Exception, File)) -->
+	message_tokens(non_standard_exception(Entity, Indicator, Exception, File, Line)) -->
 		(	{Indicator = _//_} ->
 			['Non-standard exception for ~q non-terminal ~q: ~q'-[Entity, Indicator, Exception], nl]
 		;	['Non-standard exception for ~q predicate ~q: ~q'-[Entity, Indicator, Exception], nl]
 		),
-		file_context(File).
+		file_context(File, Line).
 
-	% auxiliary non-terminals
+	% auxiliary non-terminals and predicates
 
-	file_context(Path) -->
+	file_context(Path, -1) -->
+		!,
 		{suppress_path_prefix(Path, ShortPath)},
 		['  in file ~w'-[ShortPath], nl, nl].
-
-	% auxiliary predicates
+	file_context(Path, Line) -->
+		{suppress_path_prefix(Path, ShortPath)},
+		['  in file ~w below line ~d'-[ShortPath, Line], nl, nl].
 
 	suppress_path_prefix(Path, ShortPath) :-
 		{current_logtalk_flag(suppress_path_prefix, Prefix)},
