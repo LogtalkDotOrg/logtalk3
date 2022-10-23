@@ -31,7 +31,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-22,
+		date is 2022-10-23,
 		comment is 'Logtalk documentation tool default message translations.'
 	]).
 
@@ -82,6 +82,10 @@
 
 	message_tokens(invalid_date(Entity, Date, File, Line)) -->
 		['Invalid date in info/1 directive for ~q: ~q'-[Entity, Date], nl],
+		file_context(File, Line).
+
+	message_tokens(date_in_the_future(Entity, Date, File, Line)) -->
+		['Date in info/1 directive for ~q is in the future: ~q'-[Entity, Date], nl],
 		file_context(File, Line).
 
 	% auxiliary non-terminals and predicates

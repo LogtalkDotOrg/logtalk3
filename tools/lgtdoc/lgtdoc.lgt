@@ -26,7 +26,7 @@
 	:- info([
 		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-22,
+		date is 2022-10-23,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -63,7 +63,7 @@
 	]).
 
 	:- uses(date, [
-		valid/3 as valid_date/3
+		today/3, valid/3 as valid_date/3
 	]).
 
 	:- uses(list, [
@@ -1660,10 +1660,16 @@
 	warn_on_invalid_date(Entity, Date) :-
 		(	current_logtalk_flag(lgtdoc_invalid_dates, warning),
 			% don't check deprecated date format
-			Date = Year-Month-Day,
-			\+ valid_date(Year, Month, Day) ->
-			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, invalid_date(Entity, Date, File, Line))
+			Date = Year-Month-Day ->
+			(	\+ valid_date(Year, Month, Day) ->
+				entity_file_line(Entity, File, Line),
+				print_message(warning, lgtdoc, invalid_date(Entity, Date, File, Line))
+			;	today(TodayYear, TodayMonth, TodayDay),
+				d(Year, Month, Day) @> d(TodayYear, TodayMonth, TodayDay) ->
+				entity_file_line(Entity, File, Line),
+				print_message(warning, lgtdoc, date_in_the_future(Entity, Date, File, Line))
+			;	true
+			)
 		;	true
 		).
 

@@ -144,8 +144,8 @@ parametric entities, ``arguments`` or ``argnames`` for
 predicates/non-terminals with arguments).
 
 When the ``lgtdoc_invalid_dates`` flag is set to ``warning`` (its usual
-default value), the ``lgtdoc`` tool prints warnings on invalid dates in
-``info/1`` directives.
+default value), the ``lgtdoc`` tool prints warnings on invalid dates
+(including dates in the future) in ``info/1`` directives.
 
 When the ``lgtdoc_non_standard_exceptions`` flag is set to ``warning``
 (its usual default value), the ``lgtdoc`` tool prints warnings on
