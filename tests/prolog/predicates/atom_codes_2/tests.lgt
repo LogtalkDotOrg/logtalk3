@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-08-26,
+		date is 2022-10-25,
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
 	]).
 
@@ -85,6 +85,12 @@
 
 	test(lgt_atom_codes_2_17, true) :-
 		{atom_codes('ABC', [65,66,67])}.
+
+	test(lgt_atom_codes_2_18, false) :-
+		{atom_codes('ABC', [66| _])}.
+
+	test(lgt_atom_codes_2_19, error(type_error(list,[66| 67]))) :-
+		{atom_codes('ABC', [66| 67])}.
 
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for

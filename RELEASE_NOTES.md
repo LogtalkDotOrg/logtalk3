@@ -50,6 +50,12 @@ Examples
 
 * FIXED: Test for the `jpl` example to correctly compare floats.
 
+Tests
+-----
+
+* ADDED: Additional tests for the Prolog standard `atom_chars/2` and
+`atom_codes/2` predicates.
+
 
 3.59.0 - October 18, 2022
 =========================
