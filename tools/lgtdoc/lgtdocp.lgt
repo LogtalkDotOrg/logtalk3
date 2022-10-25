@@ -25,7 +25,7 @@
 	create_logtalk_flag(lgtdoc_non_standard_exceptions, warning, [type(atom), keep(true)]),
 	create_logtalk_flag(lgtdoc_missing_directives,      warning, [type(atom), keep(true)]),
 	create_logtalk_flag(lgtdoc_missing_info_key,        warning, [type(atom), keep(true)]),
-	create_logtalk_flag(lgtdoc_missing_periods,         warning, [type(atom), keep(true)]),
+	create_logtalk_flag(lgtdoc_missing_punctuation,     warning, [type(atom), keep(true)]),
 	create_logtalk_flag(lgtdoc_invalid_dates,           warning, [type(atom), keep(true)])
 )).
 
@@ -33,9 +33,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 4:1:0,
+		version is 5:0:0,
 		author is 'Paulo Moura',
-		date is 2021-10-18,
+		date is 2021-10-25,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',

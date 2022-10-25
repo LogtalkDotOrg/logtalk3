@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 8:0:0,
+		version is 9:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-23,
+		date is 2022-10-25,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -505,7 +505,7 @@
 	write_xml_entity_info(Stream, Entity, Info) :-
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
-			warn_on_missing_period(Entity, Comment)
+			warn_on_missing_punctuation(Entity, Comment)
 		;	warn_on_missing_info_key(Entity, comment)
 		),
 		(	member(parameters(Parameters), Info) ->
@@ -516,7 +516,7 @@
 					write_xml_cdata_element(Stream, name, [], Parname),
 					write_xml_cdata_element(Stream, description, [], Description),
 					write_xml_close_tag(Stream, parameter),
-					warn_on_missing_period(Entity, Description)
+					warn_on_missing_punctuation(Entity, Description)
 				)
 			),
 			write_xml_close_tag(Stream, parameters)
@@ -963,7 +963,7 @@
 	write_xml_predicate_info(Stream, Entity, Indicator, Functor, Arity, Info) :-
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
-			warn_on_missing_period(Entity, Indicator, Comment)
+			warn_on_missing_punctuation(Entity, Indicator, Comment)
 		;	warn_on_missing_info_key(Entity, Indicator, comment)
 		),
 		(	member(arguments(Arguments), Info) ->
@@ -977,7 +977,7 @@
 					write_xml_cdata_element(Stream, name, [], Name),
 					write_xml_cdata_element(Stream, description, [], Description),
 					write_xml_close_tag(Stream, argument),
-					warn_on_missing_period(Entity, Indicator, Description)
+					warn_on_missing_punctuation(Entity, Indicator, Description)
 				)
 			),
 			write_xml_close_tag(Stream, arguments)
@@ -1011,7 +1011,7 @@
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
 					write_xml_close_tag(Stream, remark),
-					warn_on_missing_period(Entity, Indicator, Text)
+					warn_on_missing_punctuation(Entity, Indicator, Text)
 				)
 			),
 			write_xml_close_tag(Stream, remarks)
@@ -1253,7 +1253,7 @@
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
 					write_xml_close_tag(Stream, remark),
-					warn_on_missing_period(Entity, Text)
+					warn_on_missing_punctuation(Entity, Text)
 				)
 			)
 		;	true
@@ -1673,27 +1673,27 @@
 		;	true
 		).
 
-	warn_on_missing_period(Entity, Text) :-
-		(	current_logtalk_flag(lgtdoc_missing_periods, warning),
+	warn_on_missing_punctuation(Entity, Text) :-
+		(	current_logtalk_flag(lgtdoc_missing_punctuation, warning),
 			\+ sub_atom(Text, _, 1, 0, '.'),
 			\+ sub_atom(Text, _, 1, 0, '!'),
 			\+ sub_atom(Text, _, 1, 0, '?'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, missing_period(Entity, Text, File, Line))
+			print_message(warning, lgtdoc, missing_punctuation(Entity, Text, File, Line))
 		;	true
 		).
 
-	warn_on_missing_period(Entity, Indicator, Text) :-
-		(	current_logtalk_flag(lgtdoc_missing_periods, warning),
+	warn_on_missing_punctuation(Entity, Indicator, Text) :-
+		(	current_logtalk_flag(lgtdoc_missing_punctuation, warning),
 			\+ sub_atom(Text, _, 1, 0, '.'),
 			\+ sub_atom(Text, _, 1, 0, '!'),
 			\+ sub_atom(Text, _, 1, 0, '?'),
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, missing_period(Entity, Text, File, Line))
+			print_message(warning, lgtdoc, missing_punctuation(Entity, Text, File, Line))
 		;	true
 		).
 

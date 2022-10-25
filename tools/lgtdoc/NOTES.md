@@ -156,9 +156,9 @@ default value), the `lgtdoc` tool prints warnings on non-standard exceptions.
 This linter check is particularly effective in detecting typos when specifying
 standard exceptions.
 
-When the `lgtdoc_missing_periods` flag is set to `warning` (its usual default
-value), the `lgtdoc` tool prints warnings on missing ending periods (full
-stops), exclamation marks, or question marks in `info/1-2` directives (in
-comments, remarks, parameter descriptions, and argument descriptions).
+When the `lgtdoc_missing_punctuation` flag is set to `warning` (its usual
+default value), the `lgtdoc` tool prints warnings on missing ending periods
+(full stops), exclamation marks, or question marks in `info/1-2` directives
+(in comments, remarks, parameter descriptions, and argument descriptions).
 
 Set a flag value to `silent` to turn off the corresponding linter warnings.

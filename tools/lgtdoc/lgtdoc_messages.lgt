@@ -29,9 +29,9 @@
 :- category(lgtdoc_messages).
 
 	:- info([
-		version is 2:0:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-23,
+		date is 2022-10-25,
 		comment is 'Logtalk documentation tool default message translations.'
 	]).
 
@@ -69,8 +69,8 @@
 		),
 		file_context(File, Line).
 
-	message_tokens(missing_period(Entity, Text, File, Line)) -->
-		['Missing period at the end of text for ~q: ~q'-[Entity, Text], nl],
+	message_tokens(missing_punctuation(Entity, Text, File, Line)) -->
+		['Missing punctuation at the end of text for ~q: ~q'-[Entity, Text], nl],
 		file_context(File, Line).
 
 	message_tokens(non_standard_exception(Entity, Indicator, Exception, File, Line)) -->

@@ -34,13 +34,13 @@ zsh users.
 Tools
 -----
 
+* CHANGED: Renamed the `lgtdoc` tool `lgtdoc_missing_periods` linter flag to
+`lgtdoc_missing_punctuation` and accept also exclamation and question marks.
+
 * ADDED: New linter warning to the `lgtdoc` tool for invalid dates in `info/1`
 directives.
 
 * IMPROVED: The `lgtdoc` tool linter warnings to include the file line number.
-
-* UPDATED: The `lgtdoc` tool to also accept question marks at the end of
-comments and remarks when using the `lgtdoc_missing_periods` linter flag.
 
 * FIXED: The `logtalk_doclet.sh` script when using a backend Prolog system
 that requires command-line passed queries to end with a period.
