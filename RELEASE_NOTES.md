@@ -53,8 +53,8 @@ Examples
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `atom_chars/2` and
-`atom_codes/2` predicates.
+* ADDED: Additional tests for the Prolog standard `atom_chars/2`,
+`atom_codes/2`, `number_chars/2`, and `number_codes/2` predicates.
 
 
 3.59.0 - October 18, 2022
