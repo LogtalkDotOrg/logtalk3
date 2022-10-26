@@ -42,6 +42,9 @@ directives.
 
 * IMPROVED: The `lgtdoc` tool linter warnings to include the file line number.
 
+* IMPROVED: More portable checking of the `packs` tool required command-line
+executables in POSIX systems.
+
 * FIXED: The `logtalk_doclet.sh` script when using a backend Prolog system
 that requires command-line passed queries to end with a period.
 
