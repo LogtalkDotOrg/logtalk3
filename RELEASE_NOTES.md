@@ -51,6 +51,8 @@ that requires command-line passed queries to end with a period.
 * FIXED: The `logtalk_tester.*` scripts to ensure that the searching for
 a `tester.sh` file to be sourced is restricted to the test set directory.
 
+* FIXED: List of dependencies for the developer tools for Ubuntu.
+
 Examples
 --------
 

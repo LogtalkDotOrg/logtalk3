@@ -143,7 +143,7 @@ not listed, see the dependency websites for installation instructions.
 
 	$ sudo apt install graphviz
 	$ sudo apt install info
-	$ sudo apt install libxslt fop
+	$ sudo apt install xsltproc fop
 	$ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
 	$ sudo apt install libarchive-tools gnupg2 git
 
