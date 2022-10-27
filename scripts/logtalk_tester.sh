@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 26, 2022
+##   Last updated on October 27, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.5"
+	echo "$(basename "$0") 10.6"
 	exit 0
 }
 
@@ -113,7 +113,7 @@ run_testset() {
 		echo "% $unit_short"
 	fi
 	if [ -f "$driver.sh" ] ; then
-		source "$driver.sh" "$@"
+		source "./$driver.sh" "$@"
 		source_exit=$?
 		if [ "$source_exit" -gt 0 ] ; then
 			echo "%         source $driver.sh returned code $source_exit"

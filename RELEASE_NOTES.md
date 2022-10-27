@@ -48,6 +48,9 @@ executables in POSIX systems.
 * FIXED: The `logtalk_doclet.sh` script when using a backend Prolog system
 that requires command-line passed queries to end with a period.
 
+* FIXED: The `logtalk_tester.*` scripts to ensure that the searching for
+a `tester.sh` file to be sourced is restricted to the test set directory.
+
 Examples
 --------
 
