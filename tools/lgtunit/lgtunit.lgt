@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 13:1:1,
+		version is 13:2:0,
 		author is 'Paulo Moura',
-		date is 2022-10-08,
+		date is 2022-10-28,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -299,6 +299,13 @@
 	:- info(note/1, [
 		comment is 'Note to be printed after the test results. Defaults to the empty atom.',
 		argnames is ['Note']
+	]).
+
+	:- protected(file_path/2).
+	:- mode(file_path(+atom, -atom), one).
+	:- info(file_path/2, [
+		comment is 'Returns the absolute path for a file path that is relative to the tests object path.',
+		argnames is ['File', 'Path']
 	]).
 
 	:- protected(suppress_text_output/0).
@@ -2618,6 +2625,13 @@
 		Coverage1 is Coverage0 + Covered,
 		Clauses1 is Clauses0 + Total,
 		sum_coverage(List, Coverage1, Coverage, Clauses1, Clauses).
+
+	% support for computing full paths for test data files
+
+	file_path(File, Path) :-
+		self(Self),
+		object_property(Self, file(_, Directory)),
+		atom_concat(Directory, File, Path).
 
 	% support for suppressing output
 

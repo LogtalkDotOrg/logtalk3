@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2022-07-06,
+		date is 2022-10-28,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -234,7 +234,7 @@ goal_expansion(X = 1, X = 2).
 	)).
 
 	test(write_to_file_hook_2_01, true(Assertion)) :-
-		file_path('test_files/target2.pl', Path),
+		^^file_path('test_files/target2.pl', Path),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(a('A'), _),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(end_of_file, _),
@@ -243,7 +243,7 @@ goal_expansion(X = 1, X = 2).
 	:- else.
 
 	test(write_to_file_hook_2_01, true(Assertion)) :-
-		file_path('test_files/target2.pl', Path),
+		^^file_path('test_files/target2.pl', Path),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(a('A'), _),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(end_of_file, _),
@@ -252,7 +252,7 @@ goal_expansion(X = 1, X = 2).
 	:- endif.
 
 	test(write_to_file_hook_2_02, true(Term == a('A'))) :-
-		file_path('test_files/target2.pl', Path),
+		^^file_path('test_files/target2.pl', Path),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(a('A'), Term),
 		write_to_file_hook(Path, [quoted(true)])::term_expansion(end_of_file, _).
@@ -270,7 +270,7 @@ goal_expansion(X = 1, X = 2).
 	)).
 
 	test(write_to_stream_hook_1_01, true(Assertion)) :-
-		file_path('test_files/target1.pl', Path),
+		^^file_path('test_files/target1.pl', Path),
 		write_to_file_hook(Path)::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path)::term_expansion(x + y, _),
 		write_to_file_hook(Path)::term_expansion(end_of_file, _),
@@ -279,7 +279,7 @@ goal_expansion(X = 1, X = 2).
 	:- else.
 
 	test(write_to_file_hook_1_01, true(Assertion)) :-
-		file_path('test_files/target1.pl', Path),
+		^^file_path('test_files/target1.pl', Path),
 		write_to_file_hook(Path)::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path)::term_expansion(x + y, _),
 		write_to_file_hook(Path)::term_expansion(end_of_file, _),
@@ -288,7 +288,7 @@ goal_expansion(X = 1, X = 2).
 	:- endif.
 
 	test(write_to_file_hook_1_02, true(Term == x + y)) :-
-		file_path('test_files/target1.pl', Path),
+		^^file_path('test_files/target1.pl', Path),
 		write_to_file_hook(Path)::term_expansion(begin_of_file, _),
 		write_to_file_hook(Path)::term_expansion(x + y, Term),
 		write_to_file_hook(Path)::term_expansion(end_of_file, _).
@@ -338,17 +338,10 @@ goal_expansion(X = 1, X = 2).
 	% test set actions
 
 	cleanup :-
-		file_path('test_files/target1.pl', Path1),
+		^^file_path('test_files/target1.pl', Path1),
 		(os::file_exists(Path1) -> os::delete_file(Path1); true),
-		file_path('test_files/target2.pl', Path2),
+		^^file_path('test_files/target2.pl', Path2),
 		(os::file_exists(Path2) -> os::delete_file(Path2); true),
 		^^clean_text_output.
-
-	% auxiliary predicates
-
-	file_path(File, Path) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, File, Path).
 
 :- end_object.

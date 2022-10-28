@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 13:1:1
-| **Date:** 2022-10-08
+| **Version:** 13:2:0
+| **Date:** 2022-10-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -715,6 +715,25 @@ Note to be printed after the test results. Defaults to the empty atom.
 |    ``note(Note)``
 | **Mode and number of proofs:**
 |    ``note(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: file_path/2
+.. _lgtunit/0::file_path/2:
+
+``file_path/2``
+^^^^^^^^^^^^^^^
+
+Returns the absolute path for a file path that is relative to the tests object path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file_path(File,Path)``
+| **Mode and number of proofs:**
+|    ``file_path(+atom,-atom)`` - ``one``
 
 
 ------------

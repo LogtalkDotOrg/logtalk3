@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:3,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-10-28,
 		comment is 'Unit tests for the logtalk_make/0-1 built-in predicates.'
 	]).
 
@@ -127,15 +127,10 @@
 	% auxiliary predicates
 
 	main_file(Main) :-
-		file_path('main_file.lgt', Main).
+		^^file_path('main_file.lgt', Main).
 
 	included_file(Included) :-
-		file_path('included_file.lgt', Included).
-
-	file_path(File, Path) :-
-		this(Object),
-		object_property(Object, file(_,Directory)),
-		atom_concat(Directory, File, Path).
+		^^file_path('included_file.lgt', Included).
 
 	create_main_file(Main) :-
 		main_file(Main),

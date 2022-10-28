@@ -1148,6 +1148,30 @@ skipped by writing:
 Annotations are written, by default, between parenthesis after and in
 the same line as the test results.
 
+Working with test data files
+----------------------------
+
+Frequently tests make use of test data files that are usually stored in
+the test set directory or in sub-directories. These data files are
+referenced using their relative paths. But to allow the tests to run
+independently of the Logtalk process current directory, the relative
+paths often must be expanded into an absolute path before being passed
+to the predicates being tested. The ``file_path/2`` protected predicate
+can be used in the test definitions to expand the relative paths. For
+example:
+
+::
+
+   % check that the encoding/1 option is accepted
+   test(lgt_unicode_open_4_01, true) :-
+       ^^file_path(sample_utf_8, Path),
+       open(Path, write, Stream, [encoding('UTF-8')]),
+       close(Stream).
+
+The absolute path is computed relative to the path of *self*, i.e.
+relative to the path of the test object that received the message that
+runs the tests.
+
 Flaky tests
 -----------
 

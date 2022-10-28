@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:1,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2022-10-28,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -280,7 +280,7 @@
 
 	% check that the BOM is not skipped when opening a binary file for reading
 	test(lgt_unicode_get_byte_2_01, true(Byte == 239)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, [type(binary)]),
 		% UTF-8 is represented by the bytes 0xEF 0xBB 0xBF
 		put_byte(Output, 239), put_byte(Output, 187), put_byte(Output, 191),
@@ -310,7 +310,7 @@
 
 	% check that the BOM is skipped when opening a text file for reading
 	test(lgt_unicode_get_char_2_03, true(Char == a)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, [type(binary)]),
 		% UTF-8 is represented by the bytes 0xEF 0xBB 0xBF
 		put_byte(Output, 239), put_byte(Output, 187), put_byte(Output, 191),
@@ -344,25 +344,25 @@
 
 	% check that the encoding/1 option is accepted
 	test(lgt_unicode_open_4_01, true) :-
-		file_path(sample_utf_8, Path),
+		^^file_path(sample_utf_8, Path),
 		open(Path, write, Stream, [encoding('UTF-8')]),
 		close(Stream).
 
 	% check that a bom(false) option is accepted
 	test(lgt_unicode_open_4_02, true) :-
-		file_path(sample_utf_8_no_bom, Path),
+		^^file_path(sample_utf_8_no_bom, Path),
 		open(Path, write, Stream, [encoding('UTF-8'), bom(false)]),
 		close(Stream).
 
 	% check that a bom(true) option is accepted
 	test(lgt_unicode_open_4_03, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Stream, [encoding('UTF-8'), bom(true)]),
 		close(Stream).
 
 	% always write a BOM if requested for a text file (which is the default type)
 	test(lgt_unicode_open_4_04, true(Byte == 239)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, [bom(true), encoding('UTF-8')]),
 		close(Output),
 		open(Path, read, Input, [type(binary)]),
@@ -370,7 +370,7 @@
 
 	% don't write a BOM unless explicitly requested for UTF-8 files
 	test(lgt_unicode_open_4_05, true(Byte == 97)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, [encoding('UTF-8')]),
 		write(Output, abc),
 		close(Output),
@@ -379,7 +379,7 @@
 
 	% don't write a BOM even if explicitly requested for a binary file
 	test(lgt_unicode_open_4_06, true(Byte == 97)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, [type(binary), bom(true)]),
 		put_byte(Output, 97),
 		close(Output),
@@ -388,7 +388,7 @@
 
 	% never write a BOM if appending to a file
 	test(lgt_unicode_open_4_07, true(Byte1-Byte2 == 97-98)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Write, [bom(false)]),
 		write(Write, 'a'),
 		close(Write),
@@ -402,7 +402,7 @@
 	% check that a file is written using the default encoding if none is specified
 	test(lgt_unicode_open_4_08, true(Encoding == Default)) :-
 		current_prolog_flag(encoding, Default),
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, []),
 		stream_property(Output, encoding(Encoding)),
 		close(Output).
@@ -472,7 +472,7 @@
 
 	% check that BOM detection doesn't break stream position
 	test(lgt_unicode_set_stream_position_2_01, true(Term1 == Term3)) :-
-		file_path('terms.pl', Path),
+		^^file_path('terms.pl', Path),
 		open(Path, read, Stream, [type(text), reposition(true)]),
 		stream_property(Stream, position(Position)),
 		read_term(Stream, Term1, []),
@@ -483,40 +483,40 @@
 	% stream_property/2
 
 	test(lgt_unicode_stream_property_2_01, true(Encoding-BOM == 'UTF-8'-false)) :-
-		file_path(sample_utf_8, Path),
+		^^file_path(sample_utf_8, Path),
 		open(Path, write, Stream, [encoding('UTF-8')]),
 		stream_property(Stream, encoding(Encoding)),
 		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_02, true(Encoding-BOM == 'UTF-8'-false)) :-
-		file_path(sample_utf_8_no_bom, Path),
+		^^file_path(sample_utf_8_no_bom, Path),
 		open(Path, write, Stream, [encoding('UTF-8'), bom(false)]),
 		stream_property(Stream, encoding(Encoding)),
 		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_03, true(Encoding-BOM == 'UTF-8'-true)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Stream, [encoding('UTF-8'), bom(true)]),
 		stream_property(Stream, encoding(Encoding)),
 		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_04, true(Encoding == 'UTF-8')) :-
-		file_path('tests.lgt', Path),
+		^^file_path('tests.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-8')]),
 		stream_property(Stream, encoding(Encoding)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_05, true(BOM == false)) :-
-		file_path('tests.lgt', Path),
+		^^file_path('tests.lgt', Path),
 		open(Path, read, Stream, [encoding('UTF-8')]),
 		stream_property(Stream, bom(BOM)),
 		close(Stream).
 
 	test(lgt_unicode_stream_property_2_06, true(Encoding-BOM == 'UTF-8'-true)) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Output, [encoding('UTF-8'), bom(true)]),
 		close(Output),
 		open(Path, read, Input),
@@ -527,32 +527,32 @@
 	% binary streams should not have bom/1 or encoding/1 properties
 
 	test(lgt_unicode_stream_property_2_07, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Stream, [type(binary)]),
 		\+ stream_property(Stream, encoding(_)).
 
 	test(lgt_unicode_stream_property_2_08, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, write, Stream, [type(binary)]),
 		\+ stream_property(Stream, bom(_)).
 
 	test(lgt_unicode_stream_property_2_09, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, append, Stream, [type(binary)]),
 		\+ stream_property(Stream, encoding(_)).
 
 	test(lgt_unicode_stream_property_2_10, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, append, Stream, [type(binary)]),
 		\+ stream_property(Stream, bom(_)).
 
 	test(lgt_unicode_stream_property_2_11, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, read, Stream, [type(binary)]),
 		\+ stream_property(Stream, encoding(_)).
 
 	test(lgt_unicode_stream_property_2_12, true) :-
-		file_path(sample_utf_8_bom, Path),
+		^^file_path(sample_utf_8_bom, Path),
 		open(Path, read, Stream, [type(binary)]),
 		\+ stream_property(Stream, bom(_)).
 
@@ -627,21 +627,15 @@
 	cleanup :-
 		^^clean_text_input,
 		^^clean_text_output,
-		file_path(sample_utf_8, Path1),
+		^^file_path(sample_utf_8, Path1),
 		(os::file_exists(Path1) -> os::delete_file(Path1); true),
-		file_path(sample_utf_8_bom, Path2),
+		^^file_path(sample_utf_8_bom, Path2),
 		(os::file_exists(Path2) -> os::delete_file(Path2); true),
-		file_path(sample_utf_8_no_bom, Path3),
+		^^file_path(sample_utf_8_no_bom, Path3),
 		(os::file_exists(Path3) -> os::delete_file(Path3); true).
 
-	% auxiliary predicates
-
-	file_path(File, Path) :-
-		this(Object),
-		object_property(Object, file(_,Directory)),
-		atom_concat(Directory, File, Path).
-
 	% partial list of valid encodings (from http://www.iana.org/assignments/character-sets)
+
 	valid('US-ASCII').
 	valid('UTF-8').
 	valid('UTF-16BE').

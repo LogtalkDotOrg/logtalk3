@@ -32,14 +32,14 @@
 	]).
 
 	test(encoding_1_us_ascii) :-
-		file_path('us_ascii.lgt', Path),
+		^^file_path('us_ascii.lgt', Path),
 		logtalk_load(Path),
 		logtalk::loaded_file_property(Path, text_properties(Properties)),
 		member(encoding('US-ASCII'), Properties),
 		\+ member(encoding('UTF-8'), Properties).
 
 	test(encoding_1_iso_8859_1) :-
-		file_path('iso_8859_1.lgt', Path),
+		^^file_path('iso_8859_1.lgt', Path),
 		% avoid printing expected warnings
 		logtalk_load(Path, [report(off)]),
 		logtalk::loaded_file_property(Path, text_properties(Properties)),
@@ -47,14 +47,14 @@
 		\+ member(encoding('UTF-8'), Properties).
 
 	test(encoding_1_utf_8_bom) :-
-		file_path('utf_8_bom.lgt', Path),
+		^^file_path('utf_8_bom.lgt', Path),
 		logtalk_load(Path),
 		logtalk::loaded_file_property(Path, text_properties(Properties)),
 		member(encoding('UTF-8'), Properties),
 		member(bom(true), Properties).
 
 	test(encoding_1_utf_8_no_bom) :-
-		file_path('utf_8_no_bom.lgt', Path),
+		^^file_path('utf_8_no_bom.lgt', Path),
 		logtalk_load(Path),
 		logtalk::loaded_file_property(Path, text_properties(Properties)),
 		member(encoding('UTF-8'), Properties),
@@ -71,11 +71,6 @@
 		).
 
 	% auxiliary predicates
-
-	file_path(File, Path) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, File, Path).
 
 	member(Element, [Head| _]) :-
 		Element == Head,

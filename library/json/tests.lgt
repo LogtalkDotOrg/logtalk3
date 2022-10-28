@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-03-18,
+		date is 2022-10-28,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
@@ -53,7 +53,7 @@
 	cover(json(_)).
 
 	setup :-
-		file_path('test_files/simple/output01.json', Path),
+		^^file_path('test_files/simple/output01.json', Path),
 		(	os::file_exists(Path) ->
 			os::delete_file(Path)
 		;	true
@@ -73,27 +73,27 @@
 		json::parse(codes(Codes), _Obj).
 
 	test(parse_simple_glossary_json, true) :-
-		file_path('test_files/json_org/simple_glossary.json', Path),
+		^^file_path('test_files/json_org/simple_glossary.json', Path),
 		parse(file(Path), _Term).
 
 	test(parse_menu_lists_json, true) :-
-		file_path('test_files/json_org/menu_lists.json', Path),
+		^^file_path('test_files/json_org/menu_lists.json', Path),
 		parse(file(Path), _Term).
 
 	test(parse_menu_items_lists_json, true) :-
-		file_path('test_files/json_org/menu_items_lists.json', Path),
+		^^file_path('test_files/json_org/menu_items_lists.json', Path),
 		parse(file(Path), _Term).
 
 	test(parse_widget_conf_json, true) :-
-		file_path('test_files/json_org/widget_conf.json', Path),
+		^^file_path('test_files/json_org/widget_conf.json', Path),
 		parse(file(Path), _Term).
 
 	test(parse_web_app_lists_json, true) :-
-		file_path('test_files/json_org/web_app_lists.json', Path),
+		^^file_path('test_files/json_org/web_app_lists.json', Path),
 		parse(file(Path), _Term).
 
 	test(parse_stream, true) :-
-		file_path('test_files/json_org/web_app_lists.json', Path),
+		^^file_path('test_files/json_org/web_app_lists.json', Path),
 		open(Path, read, Stream),
 		parse(stream(Stream), _Term),
 		close(Stream).
@@ -112,23 +112,23 @@
 		generate(atom(Atom), Prolog).
 
 	test(parse_simple_valid_files, true) :-
-		file_path('test_files/simple', Directory),
+		^^file_path('test_files/simple', Directory),
 		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))).
 
 	test(parse_simple_invalid_files, true) :-
-		file_path('test_files/json_org', Directory),
+		^^file_path('test_files/json_org', Directory),
 		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(fail_named(File, Files), assertion(File, (catch(json::parse(file(File), _), Error, true), nonvar(Error)))).
 
 	test(parse_json_org_valid_files, true) :-
-		file_path('test_files/json_org', Directory),
+		^^file_path('test_files/json_org', Directory),
 		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))).
 
 	test(roundtrip_hexadecimals, true(roundtrip(File))) :-
 		^^suppress_text_output,
-		file_path('test_files/simple/hexadecimals.json', File).
+		^^file_path('test_files/simple/hexadecimals.json', File).
 
 	test(encode_pair_string_number, true( A == '{"a":1}' ) ) :-
 		generate(atom(A), {a-1}).
@@ -137,7 +137,7 @@
 		generate(atom(A), {a-{b-c}}).
 
 	test(roundtrip_simple_files, true) :-
-		file_path('test_files/simple', Directory),
+		^^file_path('test_files/simple', Directory),
 		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(roundtrip_named(File, Files), assertion(roundtrip(File))).
 
@@ -167,7 +167,7 @@
 		json(_)::generate(chars(Chars),  chars([h, e, l, l, o])).
 
 	test(json_double_quote_escape_parse, true(Term == {foo-'bar "1" baz'})) :-
-		file_path('test_files/simple/double_quote_escape.json', Path),
+		^^file_path('test_files/simple/double_quote_escape.json', Path),
 		json(atom)::parse(file(Path), Term).
 
 	test(json_double_quote_escape_generate, true(Atom == '{"foo":"bar \\"1\\" baz"}')) :-
@@ -191,10 +191,5 @@
 	roundtrip(File) :-
 		parse(file(File), Prolog), generate(codes(Codes), Prolog),
 		dbg('Prolog term read from file and generated as a list of codes'-[Prolog, Codes]).
-
-	file_path(File, Path) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, File, Path).
 
 :- end_object.

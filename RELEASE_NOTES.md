@@ -28,6 +28,9 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: New `lgtunit` tool documentation section on working with test data
+files.
+
 * UPDATED: The manual installation instructions in the `INSTALL.md` file for
 zsh users.
 
@@ -39,6 +42,9 @@ Tools
 
 * ADDED: New linter warning to the `lgtdoc` tool for invalid dates in `info/1`
 directives.
+
+* ADDED: New `lgtunit` tool `file_path/2` protected predicate for computing
+absolute paths for file paths relative to test object paths.
 
 * IMPROVED: The `lgtdoc` tool linter warnings to include the file line number.
 

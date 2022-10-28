@@ -96,6 +96,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tests-with-timeout-limits">Tests with timeout limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-test-data-files">Working with test data files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#flaky-tests">Flaky tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
@@ -1180,6 +1181,27 @@ skipped by writing:</p>
 </div>
 <p>Annotations are written, by default, between parenthesis after and in
 the same line as the test results.</p>
+</section>
+<section id="working-with-test-data-files">
+<h2>Working with test data files<a class="headerlink" href="#working-with-test-data-files" title="Permalink to this heading"></a></h2>
+<p>Frequently tests make use of test data files that are usually stored in
+the test set directory or in sub-directories. These data files are
+referenced using their relative paths. But to allow the tests to run
+independently of the Logtalk process current directory, the relative
+paths often must be expanded into an absolute path before being passed
+to the predicates being tested. The <code class="docutils literal notranslate"><span class="pre">file_path/2</span></code> protected predicate
+can be used in the test definitions to expand the relative paths. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% check that the encoding/1 option is accepted</span>
+test(lgt_unicode_open_4_01, <span class="k">true</span>) <span class="o">:-</span>
+    <span class="o">^^</span>file_path(sample_utf_8, <span class="nv">Path</span>),
+    <span class="k">open</span>(<span class="nv">Path</span>, write, <span class="nv">Stream</span>, [encoding(<span class="s">&#39;UTF-8&#39;</span>)]),
+    <span class="k">close</span>(<span class="nv">Stream</span>).
+</pre></div>
+</div>
+<p>The absolute path is computed relative to the path of <em>self</em>, i.e.
+relative to the path of the test object that received the message that
+runs the tests.</p>
 </section>
 <section id="flaky-tests">
 <h2>Flaky tests<a class="headerlink" href="#flaky-tests" title="Permalink to this heading"></a></h2>
