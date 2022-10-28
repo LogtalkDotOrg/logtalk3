@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 27, 2022
+##   Last updated on October 28, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -52,7 +52,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.7")
+	Write-Output ($myName + " 10.8")
 }
 
 Function Run-TestSet() {
@@ -73,7 +73,7 @@ param(
 		Write-Output ("% " + $unit_short)
 	}
 	if (Test-Path ($n + ".ps1")) {
-		$source_exit = & (".\" + $n + ".ps1") $args
+		$source_exit = & (".\\" + $n + ".ps1") $args
 		if ($source_exit -gt 0) {
 			Write-Output ("%         source " + $n + ".ps1 returned code " + $source_exit)
 			Exit 9
