@@ -696,13 +696,14 @@ present in your local system.
 
 Downloading pack archives may require passing extra command-line options
 to ``curl`` for authentication. A common solution is to use a personal
-access token. The details depend on the server software. For example:
+access token. The details depend on the server software. An example when
+using GitHub:
 
 ::
 
    | ?- packs::install(foo, bar, 1:1:2, [curl('--header "Authorization: token foo42"')]).
 
-Or:
+Another example when using GitLab:
 
 ::
 
