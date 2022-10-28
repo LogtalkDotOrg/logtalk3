@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on January 27, 2022
+%  Last updated on October 28, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -369,17 +369,6 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 	set_logtalk_flag(optimize, off),
 	set_logtalk_flag(source_data, on),
 	set_prolog_flag(optimise, off)
-)).
-%*/
-
-
-%  To automatically delete temporary files generated during the compilation
-%  of source files (strongly advised when alternating between backend Prolog
-%  compilers), uncomment the following lines:
-
-/*
-:- initialization((
-	set_logtalk_flag(clean, on)
 )).
 %*/
 
