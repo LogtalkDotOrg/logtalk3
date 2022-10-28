@@ -72,10 +72,11 @@ param(
 		Write-Output "%"
 		Write-Output ("% " + $unit_short)
 	}
-	if (Test-Path ($n + ".ps1")) {
-		$source_exit = & (".\\" + $n + ".ps1") $args
-		if ($source_exit -gt 0) {
-			Write-Output ("%         source " + $n + ".ps1 returned code " + $source_exit)
+	$source = ".\\" + $n + ".ps1"
+	if (Test-Path $source) {
+		& $source @args
+		if ($LASTEXITCODE -gt 0) {
+			Write-Output ("%         source " + $n + ".ps1 returned code " + $LASTEXITCODE)
 			Exit 9
 		}
 	}
