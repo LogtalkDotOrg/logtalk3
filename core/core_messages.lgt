@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:116:0,
+		version is 1:117:0,
 		author is 'Paulo Moura',
-		date is 2022-09-14,
+		date is 2022-10-30,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -242,80 +242,11 @@
 		).
 
 	message_tokens(default_flags) -->
-		{	current_logtalk_flag(unknown_entities, UnknownEntities),
-			current_logtalk_flag(unknown_predicates, UnknownPredicates),
-			current_logtalk_flag(undefined_predicates, UndefinedPredicates),
-			current_logtalk_flag(steadfastness, Steadfastness),
-			current_logtalk_flag(naming, Naming),
-			current_logtalk_flag(duplicated_clauses, DuplicatedClauses),
-			current_logtalk_flag(disjunctions, Disjunctions),
-			current_logtalk_flag(conditionals, Conditionals),
-			current_logtalk_flag(catchall_catch, CatchallCatch),
-			current_logtalk_flag(tail_recursive, TailRecursive),
-			current_logtalk_flag(portability, Portability),
-			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns),
-			current_logtalk_flag(redefined_operators, RedefinedOperators),
-			current_logtalk_flag(deprecated, Deprecated),
-			current_logtalk_flag(missing_directives, Missing),
-			current_logtalk_flag(duplicated_directives, Duplicated),
-			current_logtalk_flag(trivial_goal_fails, Trivial),
-			current_logtalk_flag(always_true_or_false_goals, Always),
-			current_logtalk_flag(lambda_variables, Lambda),
-			current_logtalk_flag(suspicious_calls, SuspiciousCalls),
-			current_logtalk_flag(singleton_variables, Singletons),
-			current_logtalk_flag(underscore_variables, Underscore),
-			current_logtalk_flag(complements, Complements),
-			current_logtalk_flag(dynamic_declarations, DynamicDeclarations),
-			current_logtalk_flag(context_switching_calls, ContextCalls),
-			current_logtalk_flag(events, Events),
-			current_logtalk_flag(report, Report),
-			current_logtalk_flag(scratch_directory, ScratchDirectory),
-			current_logtalk_flag(code_prefix, Code),
-			(current_logtalk_flag(hook, Hook) -> true; Hook = n/d),
-			current_logtalk_flag(optimize, Optimize),
-			current_logtalk_flag(source_data, SourceData),
-			current_logtalk_flag(clean, Clean),
-			current_logtalk_flag(debug, Debug),
-			current_logtalk_flag(reload, Reload),
-			current_logtalk_flag(prolog_compiler, PrologCompiler),
-			current_logtalk_flag(prolog_loader, PrologLoader),
-			current_logtalk_flag(prolog_dialect, PrologDialect),
-			current_logtalk_flag(modules, Modules),
-			current_logtalk_flag(engines, Engines),
-			current_logtalk_flag(threads, Threads),
-			current_logtalk_flag(tabling, Tabling),
-			current_logtalk_flag(coinduction, Coinduction),
-			current_logtalk_flag(unicode, Unicode),
-			current_logtalk_flag(encoding_directive, Encodings),
-			ground_term_copy(Hook, GroundHook)
-		},
-		[
-			'Default lint compilation flags: '-[], nl,
-			'  unknown_predicates: ~w, undefined_predicates: ~w'-[UnknownPredicates, UndefinedPredicates], nl,
-			'  unknown_entities: ~w, steadfastness: ~w, naming: ~w'-[UnknownEntities, Steadfastness, Naming], nl,
-			'  missing_directives: ~w, duplicated_directives: ~w'-[Missing, Duplicated], nl,
-			'  duplicated_clauses: ~w, portability: ~w, deprecated: ~w'-[DuplicatedClauses, Portability, Deprecated], nl,
-			'  redefined_built_ins: ~w, redefined_operators: ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
-			'  trivial_goal_fails: ~w, always_true_or_false_goals: ~w'-[Trivial, Always], nl,
-			'  lambda_variables: ~w, suspicious_calls: ~w'-[Lambda, SuspiciousCalls], nl,
-			'  disjunctions: ~w, conditionals: ~w'-[Disjunctions, Conditionals], nl,
-			'  catchall_catch: ~w, tail_recursive: ~w'-[CatchallCatch, TailRecursive], nl,
-			'  singleton_variables: ~w, underscore_variables: ~w'-[Singletons, Underscore], nl,
-			'Default optional features compiler flags:'-[], nl,
-			'  complements: ~w, dynamic_declarations: ~w'-[Complements, DynamicDeclarations], nl,
-			'  context_switching_calls: ~w, events: ~w'-[ContextCalls, Events], nl,
-			'Other default compilation flags:'-[], nl,
-			'  report: ~w, scratch_directory: ~w'-[Report, ScratchDirectory], nl,
-			'  source_data: ~w, code_prefix: ~q, hook: ~q'-[SourceData, Code, GroundHook], nl,
-			'  optimize: ~w, debug: ~w, clean: ~w, reload: ~w'-[Optimize, Debug, Clean, Reload], nl,
-			'Backend Prolog compiler file compilation and loading flags:'-[], nl,
-			'  prolog_compiler: ~w'-[PrologCompiler], nl,
-			'  prolog_loader:   ~w'-[PrologLoader], nl,
-			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
-			'  prolog_dialect: ~w, modules: ~w, threads: ~w'-[PrologDialect, Modules, Threads], nl,
-			'  engines: ~w, tabling: ~w, coinduction: ~w'-[Engines, Tabling, Coinduction], nl,
-			'  unicode: ~w, encoding_directive: ~w'-[Unicode, Encodings], nl, nl
-		].
+		default_lint_flags,
+		default_optional_features_flags,
+		default_other_flags,
+		default_backend_flags,
+		default_read_only_flags.
 
 	% help
 
@@ -1056,8 +987,125 @@
 		;	['    in file ~w at line ~w'-[File,Line], nl]
 		).
 
+	default_lint_flags -->
+		{	current_logtalk_flag(unknown_entities, UnknownEntities0), align(UnknownEntities0, UnknownEntities),
+			current_logtalk_flag(unknown_predicates, UnknownPredicates0), align(UnknownPredicates0, UnknownPredicates),
+			current_logtalk_flag(undefined_predicates, UndefinedPredicates0), align(UndefinedPredicates0, UndefinedPredicates),
+			current_logtalk_flag(steadfastness, Steadfastness0), align(Steadfastness0, Steadfastness),
+			current_logtalk_flag(naming, Naming0), align(Naming0, Naming),
+			current_logtalk_flag(duplicated_clauses, DuplicatedClauses0), align(DuplicatedClauses0, DuplicatedClauses),
+			current_logtalk_flag(disjunctions, Disjunctions0), align(Disjunctions0, Disjunctions),
+			current_logtalk_flag(conditionals, Conditionals0), align(Conditionals0, Conditionals),
+			current_logtalk_flag(catchall_catch, CatchallCatch0), align(CatchallCatch0, CatchallCatch),
+			current_logtalk_flag(tail_recursive, TailRecursive0), align(TailRecursive0, TailRecursive),
+			current_logtalk_flag(portability, Portability0), align(Portability0, Portability),
+			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns0), align(RedefinedBuiltIns0, RedefinedBuiltIns),
+			current_logtalk_flag(redefined_operators, RedefinedOperators0), align(RedefinedOperators0, RedefinedOperators),
+			current_logtalk_flag(deprecated, Deprecated0), align(Deprecated0, Deprecated),
+			current_logtalk_flag(missing_directives, Missing0), align(Missing0, Missing),
+			current_logtalk_flag(duplicated_directives, Duplicated0), align(Duplicated0, Duplicated),
+			current_logtalk_flag(trivial_goal_fails, Trivial0), align(Trivial0, Trivial),
+			current_logtalk_flag(always_true_or_false_goals, Always0), align(Always0, Always),
+			current_logtalk_flag(lambda_variables, Lambda0), align(Lambda0, Lambda),
+			current_logtalk_flag(suspicious_calls, SuspiciousCalls0), align(SuspiciousCalls0, SuspiciousCalls),
+			current_logtalk_flag(singleton_variables, Singletons0), align(Singletons0, Singletons),
+			current_logtalk_flag(underscore_variables, Underscore)
+		},
+		[
+			'Default lint compilation flags: '-[], nl,
+			'  unknown_predicates:   ~w    undefined_predicates:       ~w'-[UnknownPredicates, UndefinedPredicates], nl,
+			'  unknown_entities:     ~w    steadfastness:              ~w'-[UnknownEntities, Steadfastness], nl,
+			'  missing_directives:   ~w    duplicated_directives:      ~w'-[Missing, Duplicated], nl,
+			'  duplicated_clauses:   ~w    portability:                ~w'-[DuplicatedClauses, Portability], nl,
+			'  redefined_built_ins:  ~w    redefined_operators:        ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
+			'  trivial_goal_fails:   ~w    always_true_or_false_goals: ~w'-[Trivial, Always], nl,
+			'  lambda_variables:     ~w    suspicious_calls:           ~w'-[Lambda, SuspiciousCalls], nl,
+			'  disjunctions:         ~w    conditionals:               ~w'-[Disjunctions, Conditionals], nl,
+			'  catchall_catch:       ~w    tail_recursive:             ~w'-[CatchallCatch, TailRecursive], nl,
+			'  singleton_variables:  ~w    underscore_variables:       ~w'-[Singletons, Underscore], nl,
+			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl
+		].
+
+	default_optional_features_flags -->
+		{
+			current_logtalk_flag(complements, Complements),
+			current_logtalk_flag(dynamic_declarations, DynamicDeclarations0), align(DynamicDeclarations0, DynamicDeclarations),
+			current_logtalk_flag(context_switching_calls, ContextCalls0), align(ContextCalls0, ContextCalls),
+			current_logtalk_flag(events, Events0), align(Events0, Events)
+		},
+		[
+			'Default optional features compiler flags:'-[], nl,
+			'  dynamic_declarations:    ~w  complements: ~w'-[DynamicDeclarations, Complements], nl,
+			'  context_switching_calls: ~w  events:      ~w'-[ContextCalls, Events], nl
+		].
+
+	default_other_flags -->
+		{
+			current_logtalk_flag(report, Report0), align(Report0, Report),
+			current_logtalk_flag(scratch_directory, ScratchDirectory),
+			current_logtalk_flag(source_data, SourceData0), align(SourceData0, SourceData),
+			current_logtalk_flag(code_prefix, Code),
+			current_logtalk_flag(optimize, Optimize0), align(Optimize0, Optimize),
+			current_logtalk_flag(debug, Debug0), align(Debug0, Debug),
+			current_logtalk_flag(clean, Clean0), align(Clean0, Clean),
+			current_logtalk_flag(reload, Reload),
+			(current_logtalk_flag(hook, Hook) -> true; Hook = n/d),
+			ground_term_copy(Hook, GroundHook)
+		},
+		[
+			'Other default compilation flags:'-[], nl,
+			'  report:      ~w      scratch_directory: ~w'-[Report, ScratchDirectory], nl,
+			'  source_data: ~w      code_prefix:       ~q'-[SourceData, Code], nl,
+			'  optimize:    ~w      debug:             ~w'-[Optimize, Debug], nl,
+			'  clean:       ~w      reload:            ~w'-[Clean, Reload], nl,
+			'  hook:        ~q'-[GroundHook], nl
+		].
+
+	default_backend_flags -->
+		{
+			current_logtalk_flag(prolog_dialect, PrologDialect),
+			current_logtalk_flag(prolog_compiler, PrologCompiler),
+			current_logtalk_flag(prolog_loader, PrologLoader)
+		},
+		[
+			'Backend Prolog compiler file compilation and loading flags:'-[], nl,
+			'  prolog_dialect:  ~w'-[PrologDialect], nl,
+			'  prolog_compiler: ~w'-[PrologCompiler], nl,
+			'  prolog_loader:   ~w'-[PrologLoader], nl
+		].
+
+	default_read_only_flags -->
+		{
+			current_logtalk_flag(unicode, Unicode0), align(Unicode0, Unicode),
+			current_logtalk_flag(encoding_directive, Encodings0), align(Encodings0, Encodings),
+			current_logtalk_flag(engines, Engines0), align(Engines0, Engines),
+			current_logtalk_flag(threads, Threads0), align(Threads0, Threads),
+			current_logtalk_flag(modules, Modules0), align(Modules0, Modules),
+			current_logtalk_flag(coinduction, Coinduction0), align(Coinduction0, Coinduction),
+			current_logtalk_flag(tabling, Tabling0), align(Tabling0, Tabling)
+		},
+		[
+			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
+			'  unicode: ~w  encoding_directive: ~w'-[Unicode, Encodings], nl,
+			'  engines: ~w  threads:            ~w'-[Engines, Threads], nl,
+			'  modules: ~w  coinduction:        ~w '-[Modules, Coinduction], nl,
+			'  tabling: ~w'-[Tabling], nl, nl
+		].
+
 	ground_term_copy(Term, GroundTerm) :-
 		copy_term(Term, GroundTerm),
 		numbervars(GroundTerm, 0, _).
+
+	align(warning, warning).
+	align(silent, 'silent ').
+	align(allow, allow).
+	align(deny, 'deny ').
+	align(on, 'on ').
+	align(off, off).
+	align(unsupported, unsupported).
+	align(supported, 'supported  ').
+	align(full, 'full       ').
+	align(bmp, 'bmp        ').
+	align(source, 'source     ').
 
 :- end_category.

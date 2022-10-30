@@ -25,6 +25,11 @@ RELEASE NOTES
 3.60.0 - November ??, 2022
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Readability of default flag values printed at startup.
+
 Documentation
 -------------
 
