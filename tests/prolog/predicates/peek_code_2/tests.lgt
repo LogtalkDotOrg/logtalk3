@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:1,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard peek_code/1-2 built-in predicates.'
 	]).
 
@@ -126,7 +126,7 @@
 		C1 == -1, C2 == -1.
 
 	succeeds(sics_peek_code_2_19) :-
-		os::absolute_file_name(t, Path),
+		^^file_path(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
 		catch({peek_code(Stream, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).

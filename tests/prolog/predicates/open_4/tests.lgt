@@ -23,27 +23,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-12-27,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.5.4
 
 	test(iso_open_4_01, true) :-
-		os::absolute_file_name('roger_data', Path),
+		^^file_path('roger_data', Path),
 		^^create_binary_file(Path, []),
 		{open(Path, read, D, [type(binary)]),
 		 at_end_of_stream(D)}.
 
 	test(iso_open_4_02, true) :-
-		os::absolute_file_name('scowen', Path),
+		^^file_path('scowen', Path),
 		{open(Path, write, D, [alias(editor)]),
 		 stream_property(D, alias(editor))}.
 
 	test(iso_open_4_03, true) :-
-		os::absolute_file_name('dave', Path),
+		^^file_path('dave', Path),
 		^^create_text_file(Path, 'foo.'),
 		{open(Path, read, DD, []),
 		 read(DD, foo),
@@ -85,11 +85,11 @@
 		{open(foo, write, _, [bar])}.
 
 	test(sics_open_4_15, error(existence_error(source_sink,Path))) :-
-		os::absolute_file_name('nonexistent', Path),
+		^^file_path('nonexistent', Path),
 		{open(Path, read, _)}.
 
 	test(sics_open_4_16, error(permission_error(open,source_sink,alias(a)))) :-
-		os::absolute_file_name(foo, Path),
+		^^file_path(foo, Path),
 		{open(Path, write, _, [alias(a)]),
 		 open(bar, write, _, [alias(a)])}.
 
@@ -126,15 +126,15 @@
 		{open(foo, write, _, [type(1)])}.
 
 	test(lgt_open_4_27, error(permission_error(open,source_sink,_)), [condition(create_no_read_permission_file)]) :-
-		os::absolute_file_name('no_read_permission', Path),
+		^^file_path('no_read_permission', Path),
 		{open(Path, read, _, [])}.
 
 	test(lgt_open_4_28, error(permission_error(open,source_sink,_)), [condition(create_no_write_permission_file)]) :-
-		os::absolute_file_name('no_write_permission', Path),
+		^^file_path('no_write_permission', Path),
 		{open(Path, write, _, [])}.
 
 	test(lgt_open_4_29, error(permission_error(open,source_sink,_)), [condition(create_no_append_permission_file)]) :-
-		os::absolute_file_name('no_append_permission', Path),
+		^^file_path('no_append_permission', Path),
 		{open(Path, append, _, [])}.
 
 	test(lgt_open_4_30, error(permission_error(open,source_sink,_)), [condition(not_running_as_root)]) :-
@@ -168,7 +168,7 @@
 	create_no_read_permission_file :-
 		os::operating_system_type(unix),
 		not_running_as_root,
-		os::absolute_file_name('no_read_permission', Path),
+		^^file_path('no_read_permission', Path),
 		^^create_text_file(Path, 'foo.'),
 		atom_concat('chmod a-r ', Path, Command),
 		os::shell(Command).
@@ -176,7 +176,7 @@
 	create_no_write_permission_file :-
 		os::operating_system_type(unix),
 		not_running_as_root,
-		os::absolute_file_name('no_write_permission', Path),
+		^^file_path('no_write_permission', Path),
 		^^create_text_file(Path, 'foo.'),
 		atom_concat('chmod a-w ', Path, Command),
 		os::shell(Command).
@@ -184,7 +184,7 @@
 	create_no_append_permission_file :-
 		os::operating_system_type(unix),
 		not_running_as_root,
-		os::absolute_file_name('no_append_permission', Path),
+		^^file_path('no_append_permission', Path),
 		^^create_text_file(Path, 'foo.'),
 		atom_concat('chmod a-w ', Path, Command),
 		os::shell(Command).

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-12-27,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard put_code/1-2 built-in predicates.'
 	]).
 
@@ -72,7 +72,7 @@
 		{put_code(S, 0'a)}.
 
 	test(iso_put_code_2_10, error(permission_error(output,binary_stream,S))) :-
-		os::absolute_file_name(t, Path),
+		^^file_path(t, Path),
 		open(Path, write, S, [type(binary)]),
 		{put_code(S, 0'a)}.
 

@@ -78,6 +78,9 @@ Tests
 * ADDED: Additional tests for the Prolog standard `atom_chars/2`,
 `atom_codes/2`, `number_chars/2`, and `number_codes/2` predicates.
 
+* UPDATED: Several Prolog compliance tests to use the new `lgtunit` tool
+`file_path/2` predicate.
+
 
 3.59.0 - October 18, 2022
 =========================

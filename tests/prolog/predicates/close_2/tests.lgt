@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2020-11-29,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
@@ -39,7 +39,7 @@
 	% close/1 tests
 
 	succeeds(sics_close_1_01) :-
-		os::absolute_file_name(foo, Path),
+		^^file_path(foo, Path),
 		open(Path, write, S),
 		{close(S)},
 		^^check_text_file(Path, '').

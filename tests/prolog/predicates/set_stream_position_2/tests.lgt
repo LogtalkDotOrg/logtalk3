@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-12-14,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard set_stream_position/2 built-in predicate.'
 	]).
 
@@ -62,7 +62,7 @@
 		{set_stream_position(st_i, foo)}.
 
 	test(sics_set_stream_position_2_06, error(permission_error(reposition,stream,Stream))) :-
-		os::absolute_file_name('terms.pl', Path),
+		^^file_path('terms.pl', Path),
 		open(Path, read, Stream, [reposition(false)]),
 		stream_property(Stream, position(Position)),
 		{set_stream_position(Stream, Position)}.
@@ -70,7 +70,7 @@
 	% tests from the Logtalk portability work
 
 	test(lgt_set_stream_position_2_07, true(Term1 == Term3)) :-
-		os::absolute_file_name('terms.pl', Path),
+		^^file_path('terms.pl', Path),
 		open(Path, read, Stream, [type(text), reposition(true)]),
 		stream_property(Stream, position(Position)),
 		read_term(Stream, Term1, []),
@@ -79,7 +79,7 @@
 		read_term(Stream, Term3, []).
 
 	test(lgt_set_stream_position_2_08, true(Byte1 == Byte3)) :-
-		os::absolute_file_name('bytes.pl', Path),
+		^^file_path('bytes.pl', Path),
 		open(Path, read, Stream, [type(binary), reposition(true)]),
 		stream_property(Stream, position(Position)),
 		get_byte(Stream, Byte1),

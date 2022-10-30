@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2021-09-13,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -116,14 +116,14 @@
 		{peek_char(s, _)}.
 
 	succeeds(sics_peek_char_2_17) :-
-		os::absolute_file_name(t, Path),
+		^^file_path(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{peek_char(Stream, C1), peek_char(Stream, C1), peek_char(Stream, C2)},
 		C1 == end_of_file, C2 == end_of_file.
 
 	succeeds(sics_peek_char_2_18) :-
-		os::absolute_file_name(t, Path),
+		^^file_path(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
 		catch({peek_char(Stream, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2021-12-27,
+		date is 2022-10-30,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -109,7 +109,7 @@
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_get_char_2_16) :-
-		os::absolute_file_name(t, Path),
+		^^file_path(t, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S, [eof_action(eof_code)]),
 		{get_char(S, C1), get_char(S, C1), get_char(S, C2)},
@@ -117,7 +117,7 @@
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_get_char_2_17) :-
-		os::absolute_file_name(t, Path),
+		^^file_path(t, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
 		catch({get_char(S, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).
