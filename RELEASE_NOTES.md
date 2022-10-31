@@ -42,6 +42,8 @@ zsh users.
 Library
 -------
 
+* ADDED: Library `reader::line_to_chars/2-3` predicates.
+
 * FIXED: Mode directives for the `reader::line_to_codes/2-3` predicates.
 
 Tools

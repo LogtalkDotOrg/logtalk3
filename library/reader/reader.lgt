@@ -22,7 +22,7 @@
 :- object(reader).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Paulo Moura',
 		date is 2022-10-31,
 		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.'
@@ -146,17 +146,31 @@
 
 	% line reader predicates
 
+	:- public(line_to_chars/2).
+	:- mode(line_to_chars(+stream_or_alias, -types([atom,list(character)])), one).
+	:- info(line_to_chars/2, [
+		comment is 'Reads a line from a text stream into a list of characters. Discards the end-of-line characters. Unifies ``Chars`` with ``end_of_file`` at the end of the file.',
+		argnames is ['Stream', 'Chars']
+	]).
+
+	:- public(line_to_chars/3).
+	:- mode(line_to_chars(+stream_or_alias, -list(character), ?term), one).
+	:- info(line_to_chars/3, [
+		comment is 'Reads a line from a text stream into a list of characters. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.',
+		argnames is ['Stream', 'Chars', 'Tail']
+	]).
+
 	:- public(line_to_codes/2).
 	:- mode(line_to_codes(+stream_or_alias, -types([atom,list(character_code)])), one).
 	:- info(line_to_codes/2, [
-		comment is 'Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.',
+		comment is 'Reads a line from a text stream into a list of character codes. Discards the end-of-line character codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.',
 		argnames is ['Stream', 'Codes']
 	]).
 
 	:- public(line_to_codes/3).
 	:- mode(line_to_codes(+stream_or_alias, -list(character_code), ?term), one).
 	:- info(line_to_codes/3, [
-		comment is 'Reads a line from a text stream into a list of codes. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.',
+		comment is 'Reads a line from a text stream into a list of character codes. Keeps the end-of-line marker normalized to the line feed control character code. The list is terminated by the given tail, which is unified with the empty list at the end of the file.',
 		argnames is ['Stream', 'Codes', 'Tail']
 	]).
 
@@ -240,6 +254,55 @@
 		;	Bytes = [Byte| Rest],
 			stream_to_bytes(Stream, Rest, Tail)
 		).
+
+	line_to_chars(Stream, Chars) :-
+		(	at_end_of_stream(Stream) ->
+			Chars = end_of_file
+		;	get_char(Stream, Char),
+			(	Char == end_of_file ->
+				Chars = end_of_file
+			;	line_to_chars_no_tail(Char, Stream, Chars)
+			)
+		).
+
+	line_to_chars_no_tail(end_of_file, _, []) :-
+		!.
+	line_to_chars_no_tail('\n', _, []) :-
+		!.
+	line_to_chars_no_tail('\r', Stream, []) :-
+		!,
+		(	peek_char(Stream, '\n') ->
+			get_char(Stream, '\n')
+		;	true
+		).
+	line_to_chars_no_tail(Char, Stream, [Char| Chars]) :-
+		get_char(Stream, NextChar),
+		line_to_chars_no_tail(NextChar, Stream, Chars).
+
+	line_to_chars(Stream, Chars, Tail) :-
+		(	at_end_of_stream(Stream) ->
+			Chars = Tail, Tail = []
+		;	get_char(Stream, Char),
+			(	Char == end_of_file ->
+				Chars = Tail, Tail = []
+			;	line_to_chars_tail(Char, Stream, Chars, Tail)
+			)
+		).
+
+	line_to_chars_tail(end_of_file, _, Tail, Tail) :-
+		!,
+		Tail = [].
+	line_to_chars_tail('\n', _, ['\n'| Tail], Tail) :-
+		!.
+	line_to_chars_tail('\r', Stream, ['\n'| Tail], Tail) :-
+		!,
+		(	peek_char(Stream, '\n') ->
+			get_char(Stream, '\n')
+		;	true
+		).
+	line_to_chars_tail(Char, Stream, [Char| Chars], Tail) :-
+		get_char(Stream, NextChar),
+		line_to_chars_tail(NextChar, Stream, Chars, Tail).
 
 	line_to_codes(Stream, Codes) :-
 		(	at_end_of_stream(Stream) ->

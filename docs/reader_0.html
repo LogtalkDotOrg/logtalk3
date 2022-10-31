@@ -187,7 +187,7 @@
 <p>Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:0:1</div>
+<div class="line"><strong>Version:</strong> 2:1:0</div>
 <div class="line"><strong>Date:</strong> 2022-10-31</div>
 </div>
 <div class="line-block">
@@ -234,13 +234,15 @@
 <li><p><a class="reference internal" href="#stream-to-terms-3" id="id15"><code class="docutils literal notranslate"><span class="pre">stream_to_terms/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#stream-to-bytes-2" id="id16"><code class="docutils literal notranslate"><span class="pre">stream_to_bytes/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#stream-to-bytes-3" id="id17"><code class="docutils literal notranslate"><span class="pre">stream_to_bytes/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#line-to-codes-2" id="id18"><code class="docutils literal notranslate"><span class="pre">line_to_codes/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#line-to-codes-3" id="id19"><code class="docutils literal notranslate"><span class="pre">line_to_codes/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#line-to-chars-2" id="id18"><code class="docutils literal notranslate"><span class="pre">line_to_chars/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#line-to-chars-3" id="id19"><code class="docutils literal notranslate"><span class="pre">line_to_chars/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#line-to-codes-2" id="id20"><code class="docutils literal notranslate"><span class="pre">line_to_codes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#line-to-codes-3" id="id21"><code class="docutils literal notranslate"><span class="pre">line_to_codes/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id20">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id22">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id23">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
 </ul>
 </div>
 <section id="public-predicates">
@@ -581,9 +583,51 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="line-to-chars-2">
+<span id="reader-0-line-to-chars-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">line_to_chars/2</span></code></a><a class="headerlink" href="#line-to-chars-2" title="Permalink to this heading"></a></h3>
+<p>Reads a line from a text stream into a list of characters. Discards the end-of-line characters. Unifies <code class="docutils literal notranslate"><span class="pre">Chars</span></code> with <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> at the end of the file.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">line_to_chars(Stream,Chars)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">line_to_chars(+stream_or_alias,-types([atom,list(character)]))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="line-to-chars-3">
+<span id="reader-0-line-to-chars-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">line_to_chars/3</span></code></a><a class="headerlink" href="#line-to-chars-3" title="Permalink to this heading"></a></h3>
+<p>Reads a line from a text stream into a list of characters. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">line_to_chars(Stream,Chars,Tail)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">line_to_chars(+stream_or_alias,-list(character),?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="line-to-codes-2">
-<span id="reader-0-line-to-codes-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">line_to_codes/2</span></code></a><a class="headerlink" href="#line-to-codes-2" title="Permalink to this heading"></a></h3>
-<p>Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies <code class="docutils literal notranslate"><span class="pre">Codes</span></code> with <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> at the end of the file.</p>
+<span id="reader-0-line-to-codes-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">line_to_codes/2</span></code></a><a class="headerlink" href="#line-to-codes-2" title="Permalink to this heading"></a></h3>
+<p>Reads a line from a text stream into a list of character codes. Discards the end-of-line character codes. Unifies <code class="docutils literal notranslate"><span class="pre">Codes</span></code> with <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> at the end of the file.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -603,8 +647,8 @@
 <hr class="docutils" />
 </section>
 <section id="line-to-codes-3">
-<span id="reader-0-line-to-codes-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">line_to_codes/3</span></code></a><a class="headerlink" href="#line-to-codes-3" title="Permalink to this heading"></a></h3>
-<p>Reads a line from a text stream into a list of codes. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.</p>
+<span id="reader-0-line-to-codes-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">line_to_codes/3</span></code></a><a class="headerlink" href="#line-to-codes-3" title="Permalink to this heading"></a></h3>
+<p>Reads a line from a text stream into a list of character codes. Keeps the end-of-line marker normalized to the line feed control character code. The list is terminated by the given tail, which is unified with the empty list at the end of the file.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2022-10-28,
+		date is 2022-10-31,
 		comment is 'Unit tests for the "reader" library.'
 	]).
 
@@ -364,6 +364,41 @@
 		close(Stream).
 
 	% line reader predicates
+
+	test(reader_line_to_chars_2_01, true(Chars == end_of_file)) :-
+		text_file_stream('test_files/empty', Stream),
+		reader::line_to_chars(Stream, Chars),
+		close(Stream).
+
+	test(reader_line_to_chars_2_02, true(Chars == [a,b,c])) :-
+		text_file_stream('test_files/lines', Stream),
+		reader::line_to_chars(Stream, Chars),
+		close(Stream).
+
+	test(reader_line_to_chars_2_03, true([Chars1,Chars2,Chars3] == [[a,b,c],[d,e,f],[g,h,i]])) :-
+		text_file_stream('test_files/lines', Stream),
+		reader::line_to_chars(Stream, Chars1),
+		reader::line_to_chars(Stream, Chars2),
+		reader::line_to_chars(Stream, Chars3),
+		close(Stream).
+
+	test(reader_line_to_chars_2_04, true([Chars1,Chars2,Chars3,Chars4] == [[a,b,c],[d,e,f],[g,h,i],end_of_file])) :-
+		text_file_stream('test_files/lines', Stream),
+		reader::line_to_chars(Stream, Chars1),
+		reader::line_to_chars(Stream, Chars2),
+		reader::line_to_chars(Stream, Chars3),
+		reader::line_to_chars(Stream, Chars4),
+		close(Stream).
+
+	test(reader_line_to_chars_3_01, true(Chars == [])) :-
+		text_file_stream('test_files/empty', Stream),
+		reader::line_to_chars(Stream, Chars, []),
+		close(Stream).
+
+	test(reader_line_to_chars_3_02, true(Chars == [a,b,c,'\n'])) :-
+		text_file_stream('test_files/lines', Stream),
+		reader::line_to_chars(Stream, Chars, []),
+		close(Stream).
 
 	test(reader_line_to_codes_2_01, true(Codes == end_of_file)) :-
 		text_file_stream('test_files/empty', Stream),
