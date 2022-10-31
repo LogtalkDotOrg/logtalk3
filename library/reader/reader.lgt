@@ -22,9 +22,9 @@
 :- object(reader).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2021-03-09,
+		date is 2022-10-31,
 		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.'
 	]).
 
@@ -147,14 +147,14 @@
 	% line reader predicates
 
 	:- public(line_to_codes/2).
-	:- mode(line_to_codes(+stream_or_alias, -list(character_code)), zero_or_one).
+	:- mode(line_to_codes(+stream_or_alias, -types([atom,list(character_code)])), one).
 	:- info(line_to_codes/2, [
 		comment is 'Reads a line from a text stream into a list of codes. Discards the end-of-line codes. Unifies ``Codes`` with ``end_of_file`` at the end of the file.',
 		argnames is ['Stream', 'Codes']
 	]).
 
 	:- public(line_to_codes/3).
-	:- mode(line_to_codes(+stream_or_alias, -list(character_code), ?term), zero_or_one).
+	:- mode(line_to_codes(+stream_or_alias, -list(character_code), ?term), one).
 	:- info(line_to_codes/3, [
 		comment is 'Reads a line from a text stream into a list of codes. Keeps the end-of-line marker normalized to the line feed control character. The list is terminated by the given tail, which is unified with the empty list at the end of the file.',
 		argnames is ['Stream', 'Codes', 'Tail']

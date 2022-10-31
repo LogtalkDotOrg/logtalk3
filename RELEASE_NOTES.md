@@ -39,6 +39,11 @@ files.
 * UPDATED: The manual installation instructions in the `INSTALL.md` file for
 zsh users.
 
+Library
+-------
+
+* FIXED: Mode directives for the `reader::line_to_codes/2-3` predicates.
+
 Tools
 -----
 
