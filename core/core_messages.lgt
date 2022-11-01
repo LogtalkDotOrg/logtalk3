@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:117:0,
+		version is 1:117:1,
 		author is 'Paulo Moura',
-		date is 2022-10-30,
+		date is 2022-11-01,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -445,7 +445,7 @@
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(non_standard_arithmetic_function_call(File, Lines, Type, Entity, Function)) -->
-		['Call to non-standard Prolog built-in arithmetic function: ~q'-[Function], nl],
+		['Call to non-standard Prolog arithmetic function: ~q'-[Function], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(non_standard_prolog_flag(File, Lines, Type, Entity, Flag)) -->

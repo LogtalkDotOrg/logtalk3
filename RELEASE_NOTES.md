@@ -30,6 +30,10 @@ Logtalk compiler and runtime
 
 * IMPROVED: Readability of default flag values printed at startup.
 
+* FIXED: When reporting calls to non-standard arithmetic functions don't
+describe them as built-in functions as most Prolog systems fail to provide
+reflection support to check or enumerate built-in functions.
+
 Prolog adapter and integration files
 ------------------------------------
 
