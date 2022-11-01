@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for tuProlog 2.9.0 and later versions
-%  Last updated on July 9, 2022
+%  Last updated on November 1, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -242,6 +242,7 @@ numbervars(Term, From, Next) :-
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
+'$lgt_file_extension'(prolog, '.pro').
 
 
 

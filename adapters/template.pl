@@ -194,6 +194,7 @@ numbervars(Term, From, Next) :-
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
+'$lgt_file_extension'(prolog, '.pro').
 
 
 

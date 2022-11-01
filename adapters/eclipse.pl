@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on July 15, 2022
+%  Last updated on November 1, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -334,6 +334,7 @@ forall(Generate, Test) :-
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.ecl').
 '$lgt_file_extension'(prolog, '.prolog').
+'$lgt_file_extension'(prolog, '.pro').
 '$lgt_file_extension'(tmp, Extension) :-
 	get_flag(eclipse_object_suffix, Extension0),	% '.eco' by default
 	atom_string(Extension, Extension0).

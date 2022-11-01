@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XSB 3.8.0 or later versions
-%  Last updated on July 9, 2022
+%  Last updated on November 1, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -220,6 +220,7 @@
 '$lgt_file_extension'(prolog, '.P').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
+'$lgt_file_extension'(prolog, '.pro').
 '$lgt_file_extension'(tmp, '.xwam').
 
 

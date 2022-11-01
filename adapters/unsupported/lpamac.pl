@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on July 9, 2022
+%  Last updated on November 1, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -290,6 +290,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
+'$lgt_file_extension'(prolog, '.pro').
 
 
 

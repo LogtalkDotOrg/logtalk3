@@ -30,6 +30,12 @@ Logtalk compiler and runtime
 
 * IMPROVED: Readability of default flag values printed at startup.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: All backend adapter files to recognize `.pro` as a valid Prolog
+file name extension.
+
 Documentation
 -------------
 
