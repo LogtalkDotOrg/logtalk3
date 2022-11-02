@@ -98,6 +98,13 @@ Tests
 * UPDATED: Several Prolog compliance tests to use the new `lgtunit` tool
 `file_path/2` predicate.
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: The `logtalk_user_setup.sh` and `logtalk_user_setup.ps1` scripts
+to detect when the `LOGTALKHOME` and `LOGTALKUSER` environment variables point
+to the same directory and refuse to run.
+
 
 3.59.0 - October 18, 2022
 =========================

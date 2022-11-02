@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on April 13, 2022
+##   Last updated on November 2, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -72,6 +72,12 @@ then
 	echo "After the script completion, you must set the environment variable"
 	echo "LOGTALKUSER pointing to \"$LOGTALKUSER\"."
 	echo
+fi
+
+if [ "$LOGTALKHOME" = "$LOGTALKUSER" ]; then 
+	echo "The environment variables LOGTALKHOME and LOGTALKUSER point"
+	echo "to the same directory! Running this script is not necessary!"
+	exit
 fi
 
 if [ -d "$LOGTALKUSER" ]
