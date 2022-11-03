@@ -69,23 +69,23 @@ Lookup order for prototype hierarchies
 The lookup order for predicate declarations is first the object, second
 the implemented protocols (and the protocols that these may extend),
 third the imported categories (and the protocols that they may implement),
-and finally the objects that the object extends. This lookup is performed
-in depth-first order. When an object inherits two different declarations
-for the same predicate, by default, only the first one will be considered.
+and finally the objects that the object extends (following their declaration
+order). This lookup is performed in depth-first order. When an object
+inherits two different declarations for the same predicate, by default,
+only the first one will be considered.
 
 .. _inheritance_protocol_class:
 
 Lookup order for class hierarchies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The lookup order for predicate declarations starts in the object
-classes. Following the classes declaration order, the lookup starts in
-the classes implemented protocols (and the protocols that these may
-extend), second the classes imported categories (and the protocols that
-they may implement), and finally the superclasses of the object classes.
-This lookup is performed in depth-first order. If the object inherits
-two different declarations for the same predicate, by default only the
-first one will be considered.
+The lookup order for predicate declarations is first the object classes
+(following their declaration order), second the classes implemented protocols
+(and the protocols that these may extend), third the classes imported
+categories (and the protocols that they may implement), and finally the
+superclasses of the object classes. This lookup is performed in depth-first
+order. If the object inherits two different declarations for the same
+predicate, by default, only the first one will be considered.
 
 .. _inheritance_implementation:
 
@@ -116,8 +116,8 @@ The lookup order for predicate definitions is similar to the lookup for
 predicate declarations except that implemented protocols are ignored (as
 they can only contain predicate directives) and that the lookup starts
 at the instance itself (that received the message) before proceeding, if
-no predicate definition is found there, to the instance classes and then
-to the class superclasses.
+no predicate definition is found there, to the instance classes imported
+categories and then to the class superclasses.
 
 .. _inheritance_implementation_redefinition:
 

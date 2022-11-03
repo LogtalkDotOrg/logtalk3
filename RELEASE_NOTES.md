@@ -50,6 +50,8 @@ Documentation
 * ADDED: New `lgtunit` tool documentation section on working with test data
 files.
 
+* IMPROVED: The Handbook inheritance section on the predicate lookups order.
+
 * UPDATED: The manual installation instructions in the `INSTALL.md` file for
 zsh users.
 
