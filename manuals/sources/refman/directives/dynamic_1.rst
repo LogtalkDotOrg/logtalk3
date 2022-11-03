@@ -55,10 +55,10 @@ Description
    dynamic((Module:Name//Arity, ...))
    dynamic([Module:Name//Arity, ...])
 
-Declares dynamic predicates and dynamic grammar rule non-terminals. Note
-that an object can be static and have both static and dynamic
-predicates/non-terminals. When the dynamic predicates are local to an object,
-declaring them also as :ref:`private predicates <directives_private_1>`
+Declares :term:`dynamic <dynamic predicate>` predicates and dynamic grammar
+rule non-terminals. Note that an object can be static and have both static
+and dynamic predicates/non-terminals. When the dynamic predicates are local
+to an object, declaring them also as :ref:`private predicates <directives_private_1>`
 allows the Logtalk compiler to generate optimized code for asserting and
 retracting predicate clauses. Categories can also contain dynamic predicate
 directives but cannot contain clauses for dynamic predicates.

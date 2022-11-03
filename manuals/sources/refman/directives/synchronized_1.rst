@@ -39,12 +39,13 @@ Description
    synchronized((Name//Arity, ...))
    synchronized([Name//Arity, ...])
 
-Declares synchronized predicates and synchronized grammar rule non-terminals.
-The most common use is for predicates that have side effects (e.g. asserting
-or retracting clauses for a dynamic predicate) in multi-threaded applications.
-A synchronized predicate (or synchronized non-terminal) is protected by a
-mutex in order to allow for thread synchronization when proving a call to
-the predicate (or non-terminal).
+Declares :term:`synchronized <synchronized predicate>` predicates and
+synchronized grammar rule non-terminals. The most common use is for
+predicates that have side effects (e.g. asserting or retracting clauses
+for a dynamic predicate) in multi-threaded applications. A synchronized
+predicate (or synchronized non-terminal) is protected by a mutex in order
+to allow for thread synchronization when proving a call to the predicate
+(or non-terminal).
 
 All predicates (and non-terminals) declared in the same synchronized
 directive share the same mutex. In order to use a separate mutex for

@@ -154,17 +154,17 @@ coinductive((<span class="nv">Template1</span>, ...))
 coinductive([<span class="nv">Template1</span>, ...])
 </pre></div>
 </div>
-<p>This is an <strong>experimental</strong> directive, used for declaring coinductive
-predicates. Requires a <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> with minimal support
-for cyclic terms. The current implementation of coinduction allows the
-generation of only the <em>basic cycles</em> but all valid solutions should be
-recognized. Use a predicate indicator or a non-terminal indicator as
-argument when all the coinductive predicate arguments are relevant for
-coinductive success. Use a template when only some coinductive predicate
-arguments (represented by a “<code class="docutils literal notranslate"><span class="pre">+</span></code>”) should be considered when testing for
-coinductive success (represent the arguments that should be disregarded
-by a “<code class="docutils literal notranslate"><span class="pre">-</span></code>“). It’s possible to define local
-<a class="reference internal" href="../methods/coinductive_success_hook_1_2.html#methods-coinductive-success-hook-1-2"><span class="std std-ref">coinductive_success_hook/1-2</span></a>
+<p>This is an <strong>experimental</strong> directive, used for declaring
+<a class="reference internal" href="../../glossary.html#term-coinductive-predicate"><span class="xref std std-term">coinductive</span></a> predicates. Requires a
+<a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> with minimal support for cyclic terms.
+The current implementation of coinduction allows the generation of only
+the <em>basic cycles</em> but all valid solutions should be recognized. Use a
+predicate indicator or a non-terminal indicator as argument when all the
+coinductive predicate arguments are relevant for coinductive success.
+Use a template when only some coinductive predicate arguments (represented
+by a “<code class="docutils literal notranslate"><span class="pre">+</span></code>”) should be considered when testing for coinductive success
+(represent the arguments that should be disregarded by a “<code class="docutils literal notranslate"><span class="pre">-</span></code>“). It’s
+possible to define local <a class="reference internal" href="../methods/coinductive_success_hook_1_2.html#methods-coinductive-success-hook-1-2"><span class="std std-ref">coinductive_success_hook/1-2</span></a>
 predicates that are automatically called with the coinductive predicate
 term resulting from a successful unification with an ancestor goal as
 first argument. The second argument, when present, is the coinductive

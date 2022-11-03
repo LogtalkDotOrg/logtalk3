@@ -150,12 +150,13 @@ synchronized((<span class="nv">Name</span><span class="o">//</span><span class="
 synchronized([<span class="nv">Name</span><span class="o">//</span><span class="nv">Arity</span>, ...])
 </pre></div>
 </div>
-<p>Declares synchronized predicates and synchronized grammar rule non-terminals.
-The most common use is for predicates that have side effects (e.g. asserting
-or retracting clauses for a dynamic predicate) in multi-threaded applications.
-A synchronized predicate (or synchronized non-terminal) is protected by a
-mutex in order to allow for thread synchronization when proving a call to
-the predicate (or non-terminal).</p>
+<p>Declares <a class="reference internal" href="../../glossary.html#term-synchronized-predicate"><span class="xref std std-term">synchronized</span></a> predicates and
+synchronized grammar rule non-terminals. The most common use is for
+predicates that have side effects (e.g. asserting or retracting clauses
+for a dynamic predicate) in multi-threaded applications. A synchronized
+predicate (or synchronized non-terminal) is protected by a mutex in order
+to allow for thread synchronization when proving a call to the predicate
+(or non-terminal).</p>
 <p>All predicates (and non-terminals) declared in the same synchronized
 directive share the same mutex. In order to use a separate mutex for
 each predicate (non-terminal) so that they are independently synchronized,

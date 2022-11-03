@@ -68,6 +68,7 @@ CONTRIBUTORS
 * Michael Covington (DCGs tokenizer example)
 * Michael Hendricks (EDCGs examples and tests)
 * Michael Igler (testing, bug reports, examples documentation improvements)
+* Michael McNally (feedback on tutorials, examples, and documentation)
 * Michael Sheets (text editor support)
 * Michael T. Richter (Textadept text editor support, pengines example)
 * Neda Saeedloei (coinduction examples)

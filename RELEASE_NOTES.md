@@ -52,6 +52,9 @@ files.
 
 * IMPROVED: The Handbook inheritance section on the predicate lookups order.
 
+* IMPROVED: The Handbook pages on some predicate directives by linking to the
+corresponding glossary definitions. 
+
 * UPDATED: The manual installation instructions in the `INSTALL.md` file for
 zsh users.
 

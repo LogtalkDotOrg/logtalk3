@@ -43,12 +43,13 @@ Description
    protected((op(Precedence,Associativity,Operator), ...))
    protected([op(Precedence,Associativity,Operator), ...])
 
-Declares protected predicates, protected grammar rule non-terminals, and
-protected operators. A protected predicate can only be called from the
-object containing the directive or from an object that inherits the
-directive. A protected non-terminal can only be used as an argument in a
-:ref:`methods_phrase_2` and :ref:`methods_phrase_3` calls from the object
-containing the directive or from an object that inherits the directive.
+Declares :term:`protected <protected predicate>` predicates, protected
+grammar rule non-terminals, and protected operators. A protected predicate
+can only be called from the object containing the directive or from an
+object that inherits the directive. A protected non-terminal can only be
+used as an argument in a :ref:`methods_phrase_2` and :ref:`methods_phrase_3`
+calls from the object containing the directive or from an object that
+inherits the directive.
 
 .. note::
 

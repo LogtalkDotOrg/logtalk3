@@ -55,11 +55,12 @@ Description
    multifile((Module:Name//Arity, ...))
    multifile([Module:Name//Arity, ...])
 
-Declares multifile predicates and multifile grammar rule non-terminals. In the
-case of object or category multifile predicates, the predicate (or non-terminal)
-must also have a :term:`scope directive <predicate scope directive>` in the
-object or category holding its *primary declaration* (i.e. the declaration
-without the ``Entity::`` prefix). Entities holding multifile predicate primary
+Declares :term:`multifile <multifile predicate>` predicates and multifile
+grammar rule non-terminals. In the case of object or category multifile
+predicates, the predicate (or non-terminal) must also have a
+:term:`scope directive <predicate scope directive>` in the object or category
+holding its *primary declaration* (i.e. the declaration without the
+``Entity::`` prefix). Entities holding multifile predicate primary
 declarations must be compiled and loaded prior to any entities contributing
 with clauses for the multifile predicates (to prevent using multifile
 predicates to break entity encapsulation).

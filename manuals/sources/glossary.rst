@@ -433,6 +433,15 @@ Glossary
       and :term:`this`) required for the correct execution of a
       predicate call.
 
+   dynamic predicate
+      A predicate whose clauses can be dynamically added or retracted at
+      runtime.
+
+   discontiguous predicate
+      A predicate whose clauses are not contiguous in a :term:`source file`.
+      I.e. a predicate whose clauses are mixed with clauses for other
+      predicates.
+
    multifile predicate
       A predicate whose clauses can be defined in multiple
       :term:`entities <entity>` and :term:`source files <source file>`.

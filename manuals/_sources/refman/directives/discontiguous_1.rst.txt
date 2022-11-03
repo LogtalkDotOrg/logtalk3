@@ -39,10 +39,10 @@ Description
    discontiguous((Name//Arity, ...))
    discontiguous([Name//Arity, ...])
 
-Declares discontiguous predicates and discontiguous grammar rule
-non-terminals. The use of this directive should be avoided as not all
-:term:`backend Prolog compilers <backend Prolog compiler>` support
-discontiguous predicates.
+Declares :term:`discontiguous <discontiguous predicate>` predicates and
+discontiguous grammar rule non-terminals. The use of this directive should
+be avoided as not all :term:`backend Prolog compilers <backend Prolog compiler>`
+support discontiguous predicates.
 
 .. warning::
 
