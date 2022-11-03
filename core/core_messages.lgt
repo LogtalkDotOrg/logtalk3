@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:117:1,
+		version is 1:118:0,
 		author is 'Paulo Moura',
-		date is 2022-11-01,
+		date is 2022-11-02,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -554,6 +554,16 @@
 	message_tokens(message_not_understood(File, Lines, Obj, Pred)) -->
 		{functor(Pred, Name, Arity)},
 		['Unknown message sent to object: ~q'-[Obj::Name/Arity], nl],
+		message_context(File, Lines).
+
+	message_tokens(unknown_module_predicate(File, Lines, Type, Entity, Module, Pred)) -->
+		{functor(Pred, Name, Arity)},
+		['Unknown module predicate: ~q'-[':'(Module, Name/Arity)], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(unknown_module_predicate(File, Lines, Module, Pred)) -->
+		{functor(Pred, Name, Arity)},
+		['Unknown module predicate: ~q'-[':'(Module, Name/Arity)], nl],
 		message_context(File, Lines).
 
 	message_tokens(missing_reference_to_built_in_protocol(File, Lines, Type, Entity, Protocol)) -->

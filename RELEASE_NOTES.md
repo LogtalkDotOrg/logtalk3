@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Linter check for the availability of predicates (and non-terminals)
+listed in `uses/2` and `use_module/2` directives. Controlled by the flag
+`unknown_predicates`.
+
 * IMPROVED: Readability of default flag values printed at startup.
 
 * FIXED: When reporting calls to non-standard arithmetic functions don't
