@@ -23,6 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
+	logtalk_load(data),
 	% predicate definitions are only inlined when compiling source
 	% files in optimized mode; also, the "inline" predicate property
 	% is only available when the "source_data" flag is turned on

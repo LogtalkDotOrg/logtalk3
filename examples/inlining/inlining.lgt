@@ -19,15 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% simple plain Prolog table for the inlining examples
-t(1,  a,  'A').
-t(2,  b,  'B').
-t(3,  c,  'C').
-t(4, 'A', 'A').
-t(5, 'B', 'B').
-t(6, 'C', 'C').
-
-
 :- object(inlining).
 
 	:- info([

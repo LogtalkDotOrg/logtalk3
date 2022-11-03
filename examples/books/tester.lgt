@@ -23,6 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(optionals(loader)),
+	logtalk_load(data),
 	logtalk_load(books, [source_data(on), debug(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

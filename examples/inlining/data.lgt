@@ -19,8 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(optionals(loader)),
-	logtalk_load(data),
-	logtalk_load(books, [optimize(on)])
-)).
+% simple plain Prolog table for the inlining examples
+t(1,  a,  'A').
+t(2,  b,  'B').
+t(3,  c,  'C').
+t(4, 'A', 'A').
+t(5, 'B', 'B').
+t(6, 'C', 'C').

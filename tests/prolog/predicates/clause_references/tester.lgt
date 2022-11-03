@@ -26,6 +26,10 @@
 	\+ current_logtalk_flag(prolog_dialect, gnu)
 )).
 
+	:- dynamic([
+		a/1, b/1, y/1, z/1
+	]).
+
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(lgtunit(loader)),
