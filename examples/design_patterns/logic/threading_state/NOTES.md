@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 Design pattern:
-	Treading State
+	Threading State
 
 Description:
 	Definite Clause Grammars (DCGs) can be used to thread state
