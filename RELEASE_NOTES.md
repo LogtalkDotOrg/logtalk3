@@ -114,6 +114,12 @@ Installers and installation scripts
 to detect when the `LOGTALKHOME` and `LOGTALKUSER` environment variables point
 to the same directory and refuse to run.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Deleted accidentally committed temporary files in the `coding/tests`
+directory.
+
 
 3.59.0 - October 18, 2022
 =========================
