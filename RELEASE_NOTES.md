@@ -96,6 +96,8 @@ in the test set directory.
 Examples
 --------
 
+* IMPROVED: Documentation of the `people` example.
+
 * FIXED: Test for the `jpl` example to correctly compare floats.
 
 Tests

@@ -29,4 +29,8 @@ new objects. This predicate can be used to define object constructors,
 similar to those used in other OOP languages.
 
 This example also illustrates how to efficiently represent objects with 
-immutable state using parametric objects and object proxies (Prolog facts).
+immutable state using parametric objects and object proxies (Prolog facts;
+see also the `proxies` example). This alternative is often a good choice
+when dealing with a very large number of objects due to its compact
+representation and/or connecting Prolog data tables with a Logtalk object
+hierarchies.

@@ -19,6 +19,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% we start with a small abstraction hierarchy for persons, teachers, and
+% students with concrete persons represented as dynamic objects; this
+% representation allows person data to be dynamically modified while
+% surviving backtracking:
+
 :- object(person).
 
 	:- info([
@@ -148,7 +153,8 @@
 :- end_object.
 
 
-% some parametric objects for working with object proxies:
+% an alternative representation is to use parametric objects and
+% object proxies:
 
 :- object(person(_Name_, _Birth_),
 	extends(person)).
@@ -208,7 +214,11 @@
 :- end_object.
 
 
-% some object proxies:
+% some object proxies, which are simply Prolog predicate facts that are
+% interpreted as "instnaitations" of the parametric object identifiers;
+% this representation os more compact but also much more rigid as the
+% number of arguments (which is also the number of person attributes)
+% is fixed:
 
 person('Oscar the Grouch', '1969/11/10').
 person('Cookie Monster', '1969/12/02').
