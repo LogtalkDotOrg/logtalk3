@@ -23,24 +23,21 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-03,
+		date is 2022-11-04,
 		comment is 'Unit tests for the "ack" example.'
 	]).
 
 	cover(ack).
 
-	test(ack_1) :-
-		ack::ack(2, 4, Result),
-		Result == 11.
+	test(ack_1, true(Result == 11)) :-
+		ack::ack(2, 4, Result).
 
-	test(ack_2) :-
-		ack::ack(3, 3, Result),
-		Result == 61.
+	test(ack_2, true(Result == 61)) :-
+		ack::ack(3, 3, Result).
 
-	test(ack_3) :-
-		ack::ack(3, 4, Result),
-		Result == 125.
+	test(ack_3, true(Result == 125)) :-
+		ack::ack(3, 4, Result).
 
 :- end_object.
