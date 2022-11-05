@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:   Paulo Moura <pmoura@logtalk.org>
-" Last Change:  July 31, 2020
+" Last Change:  November 4, 2022
 
 
 " Quit when a syntax file was already loaded:
@@ -33,7 +33,7 @@ syn match	logtalkOperator		":-"
 
 " Logtalk quoted atoms and strings
 
-syn region	logtalkString		start=+"+	skip=+\\"+	end=+"+
+syn region	logtalkString		start=+"+	skip=+\\"+	end=+"+		contains=logtalkEscapeSequence
 syn region	logtalkAtom		start=+'+	skip=+\\'+	end=+'+		contains=logtalkEscapeSequence
 
 syn match	logtalkEscapeSequence	contained	"\\\([\\abfnrtv\"\']\|\(x[a-fA-F0-9]\+\|[0-7]\+\)\\\)"

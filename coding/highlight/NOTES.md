@@ -31,7 +31,7 @@ Highlight license.
 In order to check if your Highlight installation already includes support 
 for Logtalk, you may use the following command:
 
-	% highlight --list-langs
+	% highlight --list-scripts=langs
 
 Look in the resulting listing for the `lgt` extension. If support for Logtalk 
 is not included or if it is outdated, copy the file `logtalk.lang` to the
@@ -44,7 +44,7 @@ There's also a `lgt.lang` file for older 2.x versions of Highlight.
 
 Usage example for a `foo.lgt` Logtalk source file:
 
-	% highlight --replace-tabs=4 --out-format=xhtml --input=foo.lgt --output=foo.html --style=edit-kwrite
+	% highlight --replace-tabs=4 --out-format=xhtml --input=foo.lgt --output=foo.html --style=molokai
 
 You should try different style files (using the `--style` option) in order to 
 find which ones provide the more satisfactory results. As Logtalk files are 

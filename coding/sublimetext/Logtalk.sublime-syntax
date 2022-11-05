@@ -148,7 +148,7 @@ contexts:
           captures:
             0: punctuation.definition.string.end.logtalk
           pop: true
-        - match: \\.
+        - match: '\\([\\abfnrtv"'']|(x[a-fA-F0-9]+|[0-7]+)\\)'
           scope: constant.character.escape.logtalk
     - match: '\b(0b[0-1]+|0o[0-7]+|0x\h+)\b'
       scope: constant.numeric.logtalk

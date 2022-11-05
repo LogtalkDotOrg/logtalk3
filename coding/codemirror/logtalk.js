@@ -618,7 +618,8 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
              { token: 'punctuation.definition.string.begin.logtalk',
                regex: '"',
                push: 
-                [ { token: 'constant.character.escape.logtalk', regex: '\\\\.' },
+                [ { token: 'constant.character.escape.logtalk',
+                    regex: '\\\\([\\\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\\\)' },
                   { token: 'punctuation.definition.string.end.logtalk',
                     regex: '"',
                     next: 'pop' },

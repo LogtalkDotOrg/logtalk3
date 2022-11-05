@@ -93,6 +93,11 @@ sh_languages['logtalk'] = [
       /"/g,
       'sh_string',
       -2
+    ],
+    [
+      /\\(?:[\\abfnrtv"']|(?:x[a-fA-F0-9]+|[0-7]+)\\)/g,
+      'sh_specialchar',
+      -1
     ]
   ],
   [

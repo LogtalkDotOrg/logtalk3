@@ -248,3 +248,11 @@ escape_sequences :-
 	write('Quoted atom with control escape sequences: \a \b \r \f \t \n \v'),
 	write('Quoted atom with an octal escape sequence: \123\.'),
 	write('Quoted atom with an hexadecimal escape sequence: \x123f\.').
+
+escape_sequences :-
+	write("Double-quoted term with a double-quote ("") inside."),
+	write("Double-quoted term with a double-quote (\") inside using a control escape sequence."),
+	write("Double-quoted term with a backslash (\\) inside."),
+	write("Double-quoted term with control escape sequences: \a \b \r \f \t \n \v"),
+	write("Double-quoted term with an octal escape sequence: \123\."),
+	write("Double-quoted term with an hexadecimal escape sequence: \x123f\.").

@@ -34,14 +34,14 @@ KDE license.
 On POSIX systems, to install copy the file `logtalk.xml` to one of the
 directories:
 
-    KDE3:	$KDEDIR/share/apps/katepart/syntax/
-    KDE4:	$KDEDIR/share/kde4/apps/katepart/syntax/
+	KDE3:	$KDEDIR/share/apps/katepart/syntax/
+	KDE4:	$KDEDIR/share/kde4/apps/katepart/syntax/
 	KDE5:	$KDEDIR/share/katepart5/syntax
 
 or:
-    
-    KDE3:	~/.kde/share/apps/katepart/syntax/
-    KDE4:	~/.kde/share/kde4/apps/katepart/syntax/
+
+	KDE3:	~/.kde/share/apps/katepart/syntax/
+	KDE4:	~/.kde/share/kde4/apps/katepart/syntax/
 	KDE5:	~/.local/share/katepart5/syntax
 
 In recent versions, try:

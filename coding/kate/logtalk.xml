@@ -143,7 +143,7 @@
 				<Detect2Chars char = "/" char1 = "/" attribute = "Operator" context = "#stay" />
 				<AnyChar String = "+-*/" attribute = "Operator" context = "#stay" />
 				<RegExpr String = "\b(e|pi|div|mod|rem)\b" attribute = "Operator" context = "#stay" />
-				<!-- Other arithemtic functors -->
+				<!-- Other arithmetic functors -->
 				<Detect2Chars char = "*" char1 = "*" attribute = "Operator" context = "#stay" />
 				<!-- DCG rules -->
 				<StringDetect String = "--&gt;" attribute = "Operator" context = "#stay" />
@@ -215,6 +215,9 @@
 			</context>
 
 			<context name = "string" attribute = "String" lineEndContext = "#stay" >
+				<RegExpr attribute="String Char" context="#stay" String="\\x[a-fA-F0-9]+\\"/>
+				<RegExpr attribute="String Char" context="#stay" String="\\[0-7]+\\"/>
+				<HlCStringChar attribute="String Char" context="#stay"/>
 				<DetectChar char = "&quot;" attribute = "String" context = "#pop" />
 			</context>
 

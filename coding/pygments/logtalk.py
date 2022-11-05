@@ -15,7 +15,7 @@ class LogtalkLexer(RegexLexer):
     """
     For `Logtalk <https://logtalk.org/>`_ source code.
 
-    :copyright: 2008-2020 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2022 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
@@ -154,13 +154,13 @@ class LogtalkLexer(RegexLexer):
             (r'[?@]', Operator),
             # Existential quantifier
             (r'\^', Operator),
-            # Strings
-            (r'"(\\\\|\\"|[^"])*"', String),
             # Punctuation
             (r'[()\[\],.|]', Text),
             # Atoms
             (r"[a-z][a-zA-Z0-9_]*", Text),
             (r"'", String, 'quoted_atom'),
+            # Double-quoted terms
+            (r'"', String, 'double_quoted_term'),
         ],
 
         'quoted_atom': [
@@ -168,6 +168,14 @@ class LogtalkLexer(RegexLexer):
             (r"'", String, '#pop'),
             (r'\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)', String.Escape),
             (r"[^\\'\n]+", String),
+            (r'\\', String),
+        ],
+
+        'double_quoted_term': [
+            (r'""', String),
+            (r'"', String, '#pop'),
+            (r'\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)', String.Escape),
+            (r'[^\\"\n]+', String),
             (r'\\', String),
         ],
 
@@ -204,8 +212,8 @@ class LogtalkLexer(RegexLexer):
             # Atoms
             (r"[a-z][a-zA-Z0-9_]*", Text),
             (r"'", String, 'quoted_atom'),
-            # Strings
-            (r'"(\\\\|\\"|[^"])*"', String),
+            # Double-quoted terms
+            (r'"', String, 'double_quoted_term'),
             # End of entity-opening directive
             (r'([)]\.)', Text, 'root'),
             # Scope operator

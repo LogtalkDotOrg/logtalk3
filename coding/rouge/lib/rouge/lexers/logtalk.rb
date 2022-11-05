@@ -221,8 +221,13 @@ module Rouge
       end
 
       state :strings do
-        rule /"(\\\\|\\"|[^"])*"/, Str
-#       rule %r("[^\\'\n]+"), Str
+        rule /["]/, Str, :double_quoted_terms
+      end
+
+      state :double_quoted_terms do
+        rule /["]/, Str, :pop!
+        rule /\\([\\abfnrtv"']|(x[a-fA-F0-9]+|[0-7]+)\\)/, Str::Escape
+        rule /[^\\"\n]+/, Str
       end
 
       state :numbers do

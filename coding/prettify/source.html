@@ -50,9 +50,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:48:0,
+		version is 1:49:0,
 		author is &#x27;Paulo Moura&#x27;,
-		date is 2020-07-31,
+		date is 2022-11-04,
 		comment is &#x27;Sample prototype for testing syntax coloring.&#x27;
 	]).
 
@@ -428,6 +428,21 @@ comment
 		write(&#x27;Quoted atom with control escape sequences: \a \b \r \f \t \n \v&#x27;),
 		write(&#x27;Quoted atom with an octal escape sequence: \123\.&#x27;),
 		write(&#x27;Quoted atom with an hexadecimal escape sequence: \x123f\.&#x27;).
+
+	escape_sequences :-
+		write(&quot;Quoted atom with a quote (&quot;&quot;) inside.&quot;),
+		write(&quot;Quoted atom with a quote (\&quot;) inside using a control escape sequence.&quot;),
+		write(&quot;Quoted atom with a backslash (\\) inside.&quot;),
+		write(&quot;Quoted atom with control escape sequences: \a \b \r \f \t \n \v&quot;),
+		write(&quot;Quoted atom with an octal escape sequence: \123\.&quot;),
+		write(&quot;Quoted atom with an hexadecimal escape sequence: \x123f\.&quot;).
+
+	% nothing in the following predicate definition should be highlighted
+	sort :-
+		forall,
+		object,
+		write,
+		number.
 
 :- end_object.
 

@@ -119,6 +119,12 @@ to the same directory and refuse to run.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: Support for escape sequences inside double-quoted terms to most text
+editors and syntax highlighters.
+
+* UPDATED: Syntax highlighting test files to test escape sequences inside
+double-quoted terms.
+
 * FIXED: Deleted accidentally committed temporary files in the `coding/tests`
 directory.
 

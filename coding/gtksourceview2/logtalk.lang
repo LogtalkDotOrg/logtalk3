@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2019 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2022 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -52,6 +52,11 @@
     <context id="string" style-ref="string" end-at-line-end="true">
       <start>"</start>
       <end>"</end>
+      <include>
+        <context id="escaped-character" style-ref="escaped-character">
+          <match>\%{escaped-character}</match>
+        </context>
+      </include>
     </context>
 
     <context id="quoted-atom" style-ref="string" end-at-line-end="true">

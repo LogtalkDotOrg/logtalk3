@@ -1,12 +1,14 @@
 # highlighting for Logtalk source files (https://logtalk.org/)
 #
 #	written by Paulo Moura (pmoura@logtalk.org)
-#	last revised on July 31, 2020
+#	last revised on November 5, 2022
 
 comment start "%"
 comment delim "/*" "*/" multiline nested
 
-string delim "\"" "\"" escape "\\"
+environment string delim '"' '"' begin
+	specialchar = '\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)'
+end
 
 environment string delim "'" "'" begin
 	specialchar = '\\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)'
