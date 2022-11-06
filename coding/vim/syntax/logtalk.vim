@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:   Paulo Moura <pmoura@logtalk.org>
-" Last Change:  November 4, 2022
+" Last Change:  November 6, 2022
 
 
 " Quit when a syntax file was already loaded:
@@ -369,7 +369,7 @@ syn match	logtalkNumber		"\<\d\+\>"
 syn match	logtalkNumber		"\<\d\+\.\d\+\>"
 syn match	logtalkNumber		"\<\d\+[eE][-+]\=\d\+\>"
 syn match	logtalkNumber		"\<\d\+\.\d\+[eE][-+]\=\d\+\>"
-syn match	logtalkNumber		"\<0'[\\]\?.\|0''\|0'\"\>"
+syn match	logtalkNumber		"\<0'[\\]\?.\>"
 syn match	logtalkNumber		"\<0b[0-1]\+\>"
 syn match	logtalkNumber		"\<0o\o\+\>"
 syn match	logtalkNumber		"\<0x\x\+\>"

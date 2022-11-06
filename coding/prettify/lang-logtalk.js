@@ -1,4 +1,4 @@
-// Copyright (C) 2014 Paulo Moura
+// Copyright (C) 2014-2022 Paulo Moura
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ PR['registerLangHandler'](
           // quoted atoms
           [PR['PR_LITERAL'], /^\'(?:[^\'\\\n\x0C\r]|\\[^&])+\'?/, null, "'"],
           // numbers
-          [PR['PR_LITERAL'], /^(?:0'\\.|0'.|0b[0-1]+|0o[0-7]+|0x[\da-f]+|\d+(?:\.\d+)?(?:e[+\-]?\d+)?)/i, null, '0123456789']
+          [PR['PR_LITERAL'], /^(?:0'[\\]?.|0b[0-1]+|0o[0-7]+|0x[\da-f]+|\d+(?:\.\d+)?(?:e[+\-]?\d+)?)/i, null, '0123456789']
         ],
         [
           // single-line comments begin with %

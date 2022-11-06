@@ -7,7 +7,7 @@
 	written by      Paulo Moura
 	version         1.112
 	created on      May 5, 2002
-	last revised    March 16, 2022
+	last revised    November 6, 2022
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -140,11 +140,11 @@
 		<SEQ_REGEXP HASH_CHARS="_ABCDEFGHIJKLMNOPQRSTUVWXYZ" AT_WORD_START="TRUE" TYPE="MARKUP">[_A-Z]+[a-zA-Z0-9]*</SEQ_REGEXP>
 
 		<!-- String literals -->
-		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="TRUE">
+		<SPAN TYPE="LITERAL1" ESCAPE="\" NO_LINE_BREAK="TRUE">
 			<BEGIN>'</BEGIN>
 			<END>'</END>
 		</SPAN>
-		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="TRUE">
+		<SPAN TYPE="LITERAL1" ESCAPE="\" NO_LINE_BREAK="TRUE">
 			<BEGIN>"</BEGIN>
 			<END>"</END>
 		</SPAN>
@@ -156,8 +156,7 @@
 		</SPAN>
 
 		<!-- Character code constants -->
-		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0'\\.</SEQ_REGEXP>
-		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0'.</SEQ_REGEXP>
+		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0'[\\]?.</SEQ_REGEXP>
 		<!-- Binary, octal, and hexadecimal numbers -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0b[0-1]+</SEQ_REGEXP>
 		<SEQ_REGEXP AT_WORD_START="TRUE" HASH_CHAR="0" TYPE="DIGIT">0o[0-7]+</SEQ_REGEXP>

@@ -627,7 +627,7 @@ CodeMirror.defineMode("logtalk", function(cmCfg, modeCfg) {
              { token: 'constant.numeric.logtalk',
                regex: '\\b(0b[0-1]+|0o[0-7]+|0x[0-9a-fA-F]+)\\b' },
              { token: 'constant.numeric.logtalk',
-               regex: '\\b(0\'\\\\.|0\'.|0\'\'|0\'")' },
+               regex: '\\b(0\'[\\]?.)' },
              { token: 'constant.numeric.logtalk',
                regex: '\\b(\\d+\\.?\\d*((e|E)(\\+|-)?\\d+)?)\\b' },
              { token: 'variable.other.logtalk',
