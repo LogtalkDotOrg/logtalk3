@@ -23,9 +23,9 @@
 	implements(term_io_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2022-10-04,
+		date is 2022-11-08,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -45,7 +45,9 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
-			read_term_from_atom/3, read_term_from_chars/3, read_term_from_codes/3,
+			read_term_from_atom/3,
+			read_term_from_chars/3, read_term_from_chars/4,
+			read_term_from_codes/3, read_term_from_codes/4,
 			write_term_to_atom/3, write_term_to_chars/4, write_term_to_codes/4,
 			format_to_atom/3, format_to_chars/4, format_to_codes/4,
 			with_output_to/2

@@ -65,6 +65,9 @@ Library
 
 * FIXED: Mode directives for the `reader::line_to_codes/2-3` predicates.
 
+* FIXED: Also declare as synchronized the `term_io` predicates
+`read_term_from_chars/4` and `read_term_from_codes/4`.
+
 Tools
 -----
 
