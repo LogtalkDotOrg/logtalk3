@@ -81,7 +81,7 @@ as terms:
    respectively, the ``@false``, ``@true`` and ``@null`` compound terms.
 
 The following table exemplifies the term equivalents of JSON elements
-(with) JSON strings being represented as atoms:
+(with) JSON strings being represented as atoms (default):
 
 ========================= =========================
 JSON                      term
@@ -114,9 +114,39 @@ null                      @null
 [-1]                      [-1]
 [true]                    [@true]
 [9223372036854775807]     [9223372036854775807]
-{"foo":"bar"}             {foo-bar}
-{}                        {}
 ========================= =========================
+
+For JSON objects that are two possible term representations:
+
+===================== ===============
+JSON object           term (curly)
+===================== ===============
+{"a":1, "b":2, "c":3} {a-1, b-2, c-3}
+{}                    {}
+===================== ===============
+
+and:
+
+===================== =====================
+JSON object           term (list)
+===================== =====================
+{"a":1, "b":2, "c":3} json([a-1, b-2, c-3])
+{}                    json([])
+===================== =====================
+
+By default, the curly-term representation is used. The ``json/2``
+parametric object allows selecting the desired representation (``curly``
+or ``list``). For example:
+
+::
+
+   | ?- json(curly,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
+   JSON = {a-1, b-2, c-3}
+   yes
+
+   | ?- json(list,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
+   JSON = json([a-1, b-2, c-3])
+   yes
 
 Encoding
 --------
@@ -161,6 +191,6 @@ to decode a given json file:
    yes
 
 The ``parse/2`` predicate first argument must indicate the input source
-(``codes(Source)``, ``stream(Source)``, ``file(Source)``,
-``chars(Source)`` or ``atom(Source)``) containing a JSON payload to be
+(``codes(Codes)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``,
+``chars(Chars)`` or ``atom(Atom)``) containing a JSON payload to be
 decoded into the Prolog term in the second argument.

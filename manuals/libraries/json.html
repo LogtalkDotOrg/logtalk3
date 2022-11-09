@@ -232,7 +232,7 @@ yes
 respectively, the <code class="docutils literal notranslate"><span class="pre">&#64;false</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;true</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;null</span></code> compound terms.</p></li>
 </ul>
 <p>The following table exemplifies the term equivalents of JSON elements
-(with) JSON strings being represented as atoms:</p>
+(with) JSON strings being represented as atoms (default):</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 50%" />
@@ -328,14 +328,60 @@ respectively, the <code class="docutils literal notranslate"><span class="pre">&
 <tr class="row-odd"><td><p>[9223372036854775807]</p></td>
 <td><p>[9223372036854775807]</p></td>
 </tr>
-<tr class="row-even"><td><p>{“foo”:”bar”}</p></td>
-<td><p>{foo-bar}</p></td>
+</tbody>
+</table>
+<p>For JSON objects that are two possible term representations:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JSON object</p></th>
+<th class="head"><p>term (curly)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{“a”:1, “b”:2, “c”:3}</p></td>
+<td><p>{a-1, b-2, c-3}</p></td>
 </tr>
 <tr class="row-odd"><td><p>{}</p></td>
 <td><p>{}</p></td>
 </tr>
 </tbody>
 </table>
+<p>and:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JSON object</p></th>
+<th class="head"><p>term (list)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{“a”:1, “b”:2, “c”:3}</p></td>
+<td><p>json([a-1, b-2, c-3])</p></td>
+</tr>
+<tr class="row-odd"><td><p>{}</p></td>
+<td><p>json([])</p></td>
+</tr>
+</tbody>
+</table>
+<p>By default, the curly-term representation is used. The <code class="docutils literal notranslate"><span class="pre">json/2</span></code>
+parametric object allows selecting the desired representation (<code class="docutils literal notranslate"><span class="pre">curly</span></code>
+or <code class="docutils literal notranslate"><span class="pre">list</span></code>). For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json(curly,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
+<span class="nv">JSON</span> <span class="o">=</span> <span class="k">{</span>a<span class="o">-</span><span class="m">1</span>, b<span class="o">-</span><span class="m">2</span>, c<span class="o">-</span><span class="m">3</span><span class="k">}</span>
+yes
+
+| <span class="o">?-</span> json(list,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
+<span class="nv">JSON</span> <span class="o">=</span> json([a<span class="o">-</span><span class="m">1</span>, b<span class="o">-</span><span class="m">2</span>, c<span class="o">-</span><span class="m">3</span>])
+yes
+</pre></div>
+</div>
 </section>
 <section id="encoding">
 <h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this heading"></a></h2>
@@ -372,8 +418,8 @@ yes
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> predicate first argument must indicate the input source
-(<code class="docutils literal notranslate"><span class="pre">codes(Source)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Source)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Source)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">chars(Source)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Source)</span></code>) containing a JSON payload to be
+(<code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">line(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">chars(Chars)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>) containing a JSON payload to be
 decoded into the Prolog term in the second argument.</p>
 </section>
 </section>

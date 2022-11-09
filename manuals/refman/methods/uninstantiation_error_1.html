@@ -148,7 +148,7 @@
 <span id="methods-uninstantiation-error-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">uninstantiation_error/1</span></code><a class="headerlink" href="#uninstantiation-error-1" title="Permalink to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uninstantiation_error(<span class="nv">Culprit</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">uninstantiation_error</span>(<span class="nv">Culprit</span>)
 </pre></div>
 </div>
 <p>Throws an uninstantiation error. Used when an argument or one of its
@@ -159,7 +159,7 @@ to an object. Calling this predicate is equivalent to the following sequence
 of calls:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(uninstantiation_error(<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
+<span class="k">throw</span>(error(<span class="k">uninstantiation_error</span>(<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -167,7 +167,7 @@ runtime.</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>uninstantiation_error(<span class="o">@</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">uninstantiation_error</span>(<span class="o">@</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </section>
@@ -184,7 +184,7 @@ runtime.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">var</span>(<span class="nv">Handler</span>),
-uninstantiation_error(my_stream).
+<span class="k">uninstantiation_error</span>(my_stream).
 </pre></div>
 </div>
 <div class="admonition seealso">

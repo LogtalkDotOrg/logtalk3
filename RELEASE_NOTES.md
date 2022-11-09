@@ -64,6 +64,9 @@ Library
 * ADDED: New `json` library parsing source `line(Stream)` to parse a single
 line from the given stream into a JSON term.
 
+* ADDED: Support for alternative term representations of JSON objects to the
+`json` library.
+
 * ADDED: Library `reader::line_to_chars/2-3` predicates.
 
 * FIXED: Mode directives for the `reader::line_to_codes/2-3` predicates.

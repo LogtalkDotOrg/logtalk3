@@ -24,7 +24,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura and Jacinto Dávila',
 		date is 2022-11-09,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
@@ -105,16 +105,22 @@
 		parse(line(in), Term2),
 		close(in).
 
-	test(parse_chars, true(Term=={a-b})) :-
+	test(parse_chars, true(Term == {a-b})) :-
 		atom_chars('{"a":"b"}', Chars),
 		parse(chars(Chars), Term).
 
-	test(generate_chars, true(Term=={a-b})) :-
+	test(parse_object_curly, true(Term == {a-1,b-2,c-3})) :-
+		json(curly,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
+
+	test(parse_object_list, true(Term == json([a-1,b-2,c-3]))) :-
+		json(list,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
+
+	test(generate_chars, true(Term == {a-b})) :-
 		generate(chars(Chars), {a-b}),
 		atom_chars(Atom, Chars),
 		parse(atom(Atom), Term).
 
-	test(parse_generate_atom, true(Atom=='[1,2,{"a":"b"}]')) :-
+	test(parse_generate_atom, true(Atom == '[1,2,{"a":"b"}]')) :-
 		parse(atom('[1,2,{"a":"b"}]'), Prolog),
 		generate(atom(Atom), Prolog).
 
@@ -137,10 +143,10 @@
 		^^suppress_text_output,
 		^^file_path('test_files/simple/hexadecimals.json', File).
 
-	test(encode_pair_string_number, true( A == '{"a":1}' ) ) :-
+	test(encode_pair_string_number, true(A == '{"a":1}')) :-
 		generate(atom(A), {a-1}).
 
-	test(encode_pair_string_object, true( A == '{"a":{"b":"c"}}' ) ) :-
+	test(encode_pair_string_object, true(A == '{"a":{"b":"c"}}')) :-
 		generate(atom(A), {a-{b-c}}).
 
 	test(roundtrip_simple_files, true) :-
