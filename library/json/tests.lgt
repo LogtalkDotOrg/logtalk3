@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-10-28,
+		date is 2022-11-09,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
@@ -60,7 +60,8 @@
 		).
 
 	cleanup :-
-		setup.
+		setup,
+		^^clean_text_input.
 
 	collection('test_files/json_org').
 	collection('test_files/simple').
@@ -97,6 +98,12 @@
 		open(Path, read, Stream),
 		parse(stream(Stream), _Term),
 		close(Stream).
+
+	test(parse_line, true(Term1-Term2 == {a-0}-{b-[1,2,3]})) :-
+		^^set_text_input(in, '{"a":0}\n{"b":[1,2,3]}\n'),
+		parse(line(in), Term1),
+		parse(line(in), Term2),
+		close(in).
 
 	test(parse_chars, true(Term=={a-b})) :-
 		atom_chars('{"a":"b"}', Chars),

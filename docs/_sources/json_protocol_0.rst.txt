@@ -11,8 +11,8 @@
 JSON parser and generator protocol.
 
 | **Author:** Paulo Moura and Jacinto Dávila
-| **Version:** 0:10:0
-| **Date:** 2021-03-22
+| **Version:** 0:11:0
+| **Date:** 2022-11-09
 
 | **Compilation flags:**
 |    ``static``
@@ -41,7 +41,7 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.
+Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.
 
 | **Compilation flags:**
 |    ``static``

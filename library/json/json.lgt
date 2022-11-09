@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:10:2,
+		version is 0:11:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-12-04,
+		date is 2022-11-09,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -42,6 +42,10 @@
 		!.
 	parse(stream(Stream), JSON) :-
 		reader::stream_to_codes(Stream, Codes),
+		phrase(json(JSON), Codes),
+		!.
+	parse(line(Stream), JSON) :-
+		line_to_codes(Stream, Codes),
 		phrase(json(JSON), Codes),
 		!.
 	parse(codes(Codes), JSON) :-
@@ -302,6 +306,30 @@
 		[Code], codes(Codes).
 
 	% auxiliary predicates
+
+	line_to_codes(Stream, Codes) :-
+		(	at_end_of_stream(Stream) ->
+			Codes = end_of_file
+		;	get_code(Stream, Code),
+			(	Code == -1 ->
+				Codes = end_of_file
+			;	line_to_codes(Code, Stream, Codes)
+			)
+		).
+
+	line_to_codes(-1, _, []) :-
+		!.
+	line_to_codes(10, _, []) :-
+		!.
+	line_to_codes(13, Stream, []) :-
+		!,
+		(	peek_code(Stream, 10) ->
+			get_code(Stream, 10)
+		;	true
+		).
+	line_to_codes(Code, Stream, [Code| Codes]) :-
+		get_code(Stream, NextCode),
+		line_to_codes(NextCode, Stream, Codes).
 
 	chars_to_codes([], []).
 	chars_to_codes([Char| Chars], [Code| Codes]) :-

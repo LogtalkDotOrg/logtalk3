@@ -167,6 +167,6 @@ decode a given json file:
 	yes
 
 The `parse/2` predicate first argument must indicate the input source
-(`codes(Source)`, `stream(Source)`, `file(Source)`,  `chars(Source)` or
-`atom(Source)`) containing a JSON payload to be decoded into the Prolog
-term in the second argument.
+(`codes(Codes)`, `stream(Stream)`, `line(Stream)`, `file(Path)`,
+`chars(Chars)` or `atom(Atom)`) containing a JSON payload to be
+decoded into the Prolog term in the second argument.

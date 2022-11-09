@@ -23,16 +23,16 @@
 :- protocol(json_protocol).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2021-03-22,
+		date is 2022-11-09,
 		comment is 'JSON parser and generator protocol.'
 	]).
 
 	:- public(parse/2).
 	:- mode(parse(++compound, --term), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.',
+		comment is 'Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.',
 		argnames is ['Source', 'Term']
 	]).
 
