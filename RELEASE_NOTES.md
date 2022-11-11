@@ -44,6 +44,8 @@ Prolog adapter and integration files
 * UPDATED: All backend adapter files to recognize `.pro` as a valid Prolog
 file name extension.
 
+* UPDATED: The Scryer Prolog adapter file to require version 0.9.1 or later.
+
 Documentation
 -------------
 

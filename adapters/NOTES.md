@@ -272,7 +272,7 @@ of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
 current release using version 3.5 for Windows for testing.
 
 
-Scryer Prolog 0.9.0 and later versions
+Scryer Prolog 0.9.1 and later versions
 ----------------------------------------
 
 	scryer.pl
