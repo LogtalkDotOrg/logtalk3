@@ -173,6 +173,18 @@
 	test(valid_escape, true) :-
 		parse(atom('"\\t  \\r  \\n \\f \\b \\/ \\\\ \\"  "'), _Term).
 
+	test(new_line_escape, true(Term == {a-'\n'})) :-
+		^^file_path('test_files/escape_sequences/new_line.json', Path),
+		parse(file(Path), Term).
+
+	test(tab_escape, true(Term == {a-'\t'})) :-
+		^^file_path('test_files/escape_sequences/tab.json', Path),
+		parse(file(Path), Term).
+
+	test(unicode_escape, true(Term == {codes([97])-codes([945])})) :-
+		^^file_path('test_files/escape_sequences/unicode.json', Path),
+		json(codes)::parse(file(Path), Term).
+
 	test(json_escape_char, true) :-
 		generate(codes(_Codes), '"\t  \r  \n \f \b \" \\ \\/ "').
 

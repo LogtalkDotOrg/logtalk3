@@ -158,14 +158,11 @@
 		[0'"], json_string_contents(Codes), [0'"],
 		{json_string_to_string_term(_StringRepresentation_, Codes, String)}.
 
-	json_string_contents([0'\\, 0'u, H1, H2, H3, H4| Codes]) -->
-		[0'\\, 0'u, H1, H2, H3, H4], !, {is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4)},
+	json_string_contents([Code2| Codes]) -->
+		[0'\\, 0'u, H1, H2, H3, H4], !, {is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4), number_codes(Code2, [0'0, 0'x, H1, H2, H3, H4])},
 		json_string_contents(Codes).
-	json_string_contents([0'"| Codes]) -->
-		[0'\\, 0'"], !,
-		json_string_contents(Codes).
-	json_string_contents([0'\\, Code| Codes]) -->
-		[0'\\, Code], !, {valid_escape_code(Code)},
+	json_string_contents([Code2| Codes]) -->
+		[0'\\, Code], !, {valid_escape_code(Code, Code2)},
 		json_string_contents(Codes).
 	json_string_contents([Code| Codes]) -->
 		[Code],
@@ -183,14 +180,14 @@
 	invalid_string_code(0'\r).
 
 	% see https://www.json.org/json-en.html
-	valid_escape_code(0'").
-	valid_escape_code(0'\\).
-	valid_escape_code(0'/).
-	valid_escape_code(0'b).
-	valid_escape_code(0'f).
-	valid_escape_code(0'n).
-	valid_escape_code(0'r).
-	valid_escape_code(0't).
+	valid_escape_code(0'",  34).
+	valid_escape_code(0'\\, 92).
+	valid_escape_code(0'/,  47).
+	valid_escape_code(0'b,   8).
+	valid_escape_code(0'f,  12).
+	valid_escape_code(0'n,  10).
+	valid_escape_code(0'r,  13).
+	valid_escape_code(0't,   9).
 
 	json_number(Number) -->
 		json_integer(Codes, Tail0),

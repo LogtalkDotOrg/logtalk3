@@ -69,6 +69,8 @@ line from the given stream into a JSON term.
 * ADDED: Support for alternative term representations of JSON objects and JSON
 pairs to the `json` library.
 
+* FIXED: Bug in the `json` library handling of JSON escape sequences.
+
 * ADDED: Library `reader::line_to_chars/2-3` predicates.
 
 * FIXED: Mode directives for the `reader::line_to_codes/2-3` predicates.
