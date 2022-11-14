@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#encoding">Encoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#decoding">Decoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
@@ -477,6 +478,12 @@ yes
 (<code class="docutils literal notranslate"><span class="pre">codes(Codes)</span></code>, <code class="docutils literal notranslate"><span class="pre">stream(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">line(Stream)</span></code>, <code class="docutils literal notranslate"><span class="pre">file(Path)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">chars(Chars)</span></code> or <code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>) containing a JSON payload to be
 decoded into the Prolog term in the second argument.</p>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<p>Some tests, notably <code class="docutils literal notranslate"><span class="pre">parse_simple_valid_files</span></code> and
+<code class="docutils literal notranslate"><span class="pre">roundtrip_hexadecimals</span></code>, fail on backends such as ECLiPSe and GNU
+Prolog that don’t support Unicode.</p>
 </section>
 </section>
 

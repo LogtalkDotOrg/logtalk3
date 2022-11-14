@@ -223,3 +223,10 @@ The ``parse/2`` predicate first argument must indicate the input source
 (``codes(Codes)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``,
 ``chars(Chars)`` or ``atom(Atom)``) containing a JSON payload to be
 decoded into the Prolog term in the second argument.
+
+Known issues
+------------
+
+Some tests, notably ``parse_simple_valid_files`` and
+``roundtrip_hexadecimals``, fail on backends such as ECLiPSe and GNU
+Prolog that don't support Unicode.
