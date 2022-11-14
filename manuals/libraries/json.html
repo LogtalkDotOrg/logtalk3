@@ -172,9 +172,9 @@ in the JSON format based on the specification and standard found at:</p>
 <li><p><a class="reference external" href="https://tools.ietf.org/html/rfc8259">https://tools.ietf.org/html/rfc8259</a></p></li>
 <li><p><a class="reference external" href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">https://www.ecma-international.org/publications-and-standards/standards/ecma-404/</a></p></li>
 </ul>
-<p>It includes a parametric object whose parameter indicates the preferred
-representation for decoded JSON text strings (<code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">codes</span></code>).</p>
+<p>It includes parametric objects whose parameters allow selecting the
+representation for parsed JSON text strings (<code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">codes</span></code>) and JSON pairs (<code class="docutils literal notranslate"><span class="pre">dash</span></code>, <code class="docutils literal notranslate"><span class="pre">equal</span></code>, or <code class="docutils literal notranslate"><span class="pre">colon</span></code>).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
@@ -202,8 +202,9 @@ link in a web browser.</p>
 <p>The following choices of syntax has been made to represent JSON elements
 as terms:</p>
 <ul>
-<li><p>JSON objects are represented using curly-bracketed terms,
-<code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>.</p></li>
+<li><p>By default, JSON objects are represented using curly-bracketed terms,
+<code class="docutils literal notranslate"><span class="pre">{Pairs}</span></code>, where each pair uses the representation <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>
+(see below for alternative representations).</p></li>
 <li><p>Arrays are represented using lists.</p></li>
 <li><p>Text strings can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>. The default when decoding is to use atoms when using
@@ -232,7 +233,7 @@ yes
 respectively, the <code class="docutils literal notranslate"><span class="pre">&#64;false</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;true</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;null</span></code> compound terms.</p></li>
 </ul>
 <p>The following table exemplifies the term equivalents of JSON elements
-(with) JSON strings being represented as atoms (default):</p>
+using default representations for objects, pairs, and strings:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 50%" />
@@ -370,15 +371,70 @@ respectively, the <code class="docutils literal notranslate"><span class="pre">&
 </tr>
 </tbody>
 </table>
-<p>By default, the curly-term representation is used. The <code class="docutils literal notranslate"><span class="pre">json/2</span></code>
-parametric object allows selecting the desired representation (<code class="docutils literal notranslate"><span class="pre">curly</span></code>
-or <code class="docutils literal notranslate"><span class="pre">list</span></code>). For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json(curly,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
+<p>For JSON pairs that are three possible representations:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JSON object</p></th>
+<th class="head"><p>term (dash)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{“a”:1, “b”:2, “c”:3}</p></td>
+<td><p>{a-1, b-2, c-3}</p></td>
+</tr>
+</tbody>
+</table>
+<p>and:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JSON object</p></th>
+<th class="head"><p>term (equal)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{“a”:1, “b”:2, “c”:3}</p></td>
+<td><p>{a=1, b=2, c=3}</p></td>
+</tr>
+</tbody>
+</table>
+<p>and:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JSON object</p></th>
+<th class="head"><p>term (colon)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{“a”:1, “b”:2, “c”:3}</p></td>
+<td><p>{a:1, b:2, c:3}</p></td>
+</tr>
+</tbody>
+</table>
+<p>By default, the curly-term representation and the dash pair
+representation are used. The <code class="docutils literal notranslate"><span class="pre">json/3</span></code> parametric object allows
+selecting the desired representation choices. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json(curly,dash,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
 <span class="nv">JSON</span> <span class="o">=</span> <span class="k">{</span>a<span class="o">-</span><span class="m">1</span>, b<span class="o">-</span><span class="m">2</span>, c<span class="o">-</span><span class="m">3</span><span class="k">}</span>
 yes
 
-| <span class="o">?-</span> json(list,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
-<span class="nv">JSON</span> <span class="o">=</span> json([a<span class="o">-</span><span class="m">1</span>, b<span class="o">-</span><span class="m">2</span>, c<span class="o">-</span><span class="m">3</span>])
+| <span class="o">?-</span> json(list,equal,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
+<span class="nv">JSON</span> <span class="o">=</span> json([a<span class="o">=</span><span class="m">1</span>, b<span class="o">=</span><span class="m">2</span>, c<span class="o">=</span><span class="m">3</span>])
+yes
+
+| <span class="o">?-</span> json(curly,colon,atom)<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;a&quot;:1, &quot;b&quot;:2, &quot;c&quot;:3}&#39;</span>), <span class="nv">JSON</span>).
+<span class="nv">JSON</span> <span class="o">=</span> <span class="k">{</span>a<span class="o">:</span><span class="m">1</span>, b<span class="o">:</span><span class="m">2</span>, c<span class="o">:</span><span class="m">3</span><span class="k">}</span>
 yes
 </pre></div>
 </div>

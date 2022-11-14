@@ -11,20 +11,18 @@
 * ``StringRepresentation`` - Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.
 
 
-JSON parser and generator.
+JSON parser and generator. Uses curly terms for parsed JSON objects and dashes for parsed JSON pairs.
 
-| **Author:** Paulo Moura and Jacinto Dávila
-| **Version:** 0:11:0
-| **Date:** 2022-11-09
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-11-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`json_protocol <json_protocol/0>`
-| **Uses:**
-|    :ref:`reader <reader/0>`
+| **Extends:**
+|    ``public`` :ref:`json(curly,dash,StringRepresentation) <json/3>`
 
 | **Remarks:**
 |    (none)

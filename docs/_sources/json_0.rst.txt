@@ -8,18 +8,18 @@
 ``json``
 ========
 
-JSON parser and generator. Uses atoms to represent decoded JSON strings.
+JSON parser and generator. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.
 
-| **Author:** Jacinto Dávila
-| **Version:** 1:0:0
-| **Date:** 2021-03-05
+| **Author:** Paulo Moura and Jacinto Dávila
+| **Version:** 1:1:0
+| **Date:** 2022-11-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`json(atom) <json/1>`
+|    ``public`` :ref:`json(curly,dash,atom) <json/3>`
 
 | **Remarks:**
 |    (none)

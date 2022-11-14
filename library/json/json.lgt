@@ -20,16 +20,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(json(_ObjectRepresentation_, _StringRepresentation_),
+:- object(json(_ObjectRepresentation_, _PairRepresentation_, _StringRepresentation_),
 	implements(json_protocol)).
 
 	:- info([
 		version is 0:12:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-11-09,
+		date is 2022-11-14,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
+			'PairRepresentation' - 'Pair representation to be used when decoding JSON objects. Possible values are ``dash`` (default), ``equal``, and ``colon``.',
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		]
 	]).
@@ -118,15 +119,19 @@
 		[0'{], json_object_pairs(list, Pairs), [0'}].
 
 	json_object_pairs(curly, (Pair, Pairs)) -->
-		json_object_pair(Pair), [0',], !, json_object_pairs(curly, Pairs).
+		json_object_pair(_PairRepresentation_, Pair), [0',], !, json_object_pairs(curly, Pairs).
 	json_object_pairs(curly, Pair) -->
-		json_object_pair(Pair).
+		json_object_pair(_PairRepresentation_, Pair).
 	json_object_pairs(list, [Pair| Pairs]) -->
-		json_object_pair(Pair), [0',], !, json_object_pairs(list, Pairs).
+		json_object_pair(_PairRepresentation_, Pair), [0',], !, json_object_pairs(list, Pairs).
 	json_object_pairs(list, [Pair]) -->
-		json_object_pair(Pair).
+		json_object_pair(_PairRepresentation_, Pair).
 
-	json_object_pair(Key-Value) -->
+	json_object_pair(dash, Key-Value) -->
+		json_white_space, json_string(Key), json_white_space, [0':], json(Value).
+	json_object_pair(equal, Key=Value) -->
+		json_white_space, json_string(Key), json_white_space, [0':], json(Value).
+	json_object_pair(colon, ':'(Key,Value)) -->
 		json_white_space, json_string(Key), json_white_space, [0':], json(Value).
 
 	json_array([]) -->
@@ -292,6 +297,10 @@
 
 	encode_pair(Key-Value) -->
 		encode(Key), [0':], encode(Value).
+	encode_pair(Key=Value) -->
+		encode(Key), [0':], encode(Value).
+	encode_pair(':'(Key,Value)) -->
+		encode(Key), [0':], encode(Value).
 
 	encode_string([]) -->
 		[].
@@ -379,13 +388,13 @@
 
 
 :- object(json(StringRepresentation),
-	extends(json(curly, StringRepresentation))).
+	extends(json(curly, dash, StringRepresentation))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2022-11-09,
-		comment is 'JSON parser and generator. Uses a curly term representation for JSON objects.',
+		date is 2022-11-14,
+		comment is 'JSON parser and generator. Uses curly terms for parsed JSON objects and dashes for parsed JSON pairs.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding JSON strings. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		]
@@ -395,13 +404,13 @@
 
 
 :- object(json,
-	extends(json(curly, atom))).
+	extends(json(curly, dash, atom))).
 
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-11-09,
-		comment is 'JSON parser and generator. Uses atoms to represent decoded JSON strings.'
+		date is 2022-11-14,
+		comment is 'JSON parser and generator. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.'
 	]).
 
 :- end_object.

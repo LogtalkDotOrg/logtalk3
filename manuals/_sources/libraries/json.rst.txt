@@ -9,9 +9,9 @@ in the JSON format based on the specification and standard found at:
 -  https://tools.ietf.org/html/rfc8259
 -  https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 
-It includes a parametric object whose parameter indicates the preferred
-representation for decoded JSON text strings (``atom``, ``chars``, or
-``codes``).
+It includes parametric objects whose parameters allow selecting the
+representation for parsed JSON text strings (``atom``, ``chars``, or
+``codes``) and JSON pairs (``dash``, ``equal``, or ``colon``).
 
 API documentation
 -----------------
@@ -48,8 +48,9 @@ Representation
 The following choices of syntax has been made to represent JSON elements
 as terms:
 
--  JSON objects are represented using curly-bracketed terms,
-   ``{Pairs}``, where each pair uses the representation ``Key-Value``.
+-  By default, JSON objects are represented using curly-bracketed terms,
+   ``{Pairs}``, where each pair uses the representation ``Key-Value``
+   (see below for alternative representations).
 
 -  Arrays are represented using lists.
 
@@ -81,7 +82,7 @@ as terms:
    respectively, the ``@false``, ``@true`` and ``@null`` compound terms.
 
 The following table exemplifies the term equivalents of JSON elements
-(with) JSON strings being represented as atoms (default):
+using default representations for objects, pairs, and strings:
 
 ========================= =========================
 JSON                      term
@@ -134,18 +135,46 @@ JSON object           term (list)
 {}                    json([])
 ===================== =====================
 
-By default, the curly-term representation is used. The ``json/2``
-parametric object allows selecting the desired representation (``curly``
-or ``list``). For example:
+For JSON pairs that are three possible representations:
+
+===================== ===============
+JSON object           term (dash)
+===================== ===============
+{"a":1, "b":2, "c":3} {a-1, b-2, c-3}
+===================== ===============
+
+and:
+
+===================== ===============
+JSON object           term (equal)
+===================== ===============
+{"a":1, "b":2, "c":3} {a=1, b=2, c=3}
+===================== ===============
+
+and:
+
+===================== ===============
+JSON object           term (colon)
+===================== ===============
+{"a":1, "b":2, "c":3} {a:1, b:2, c:3}
+===================== ===============
+
+By default, the curly-term representation and the dash pair
+representation are used. The ``json/3`` parametric object allows
+selecting the desired representation choices. For example:
 
 ::
 
-   | ?- json(curly,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
+   | ?- json(curly,dash,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
    JSON = {a-1, b-2, c-3}
    yes
 
-   | ?- json(list,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
-   JSON = json([a-1, b-2, c-3])
+   | ?- json(list,equal,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
+   JSON = json([a=1, b=2, c=3])
+   yes
+
+   | ?- json(curly,colon,atom)::parse(atom('{"a":1, "b":2, "c":3}'), JSON).
+   JSON = {a:1, b:2, c:3}
    yes
 
 Encoding

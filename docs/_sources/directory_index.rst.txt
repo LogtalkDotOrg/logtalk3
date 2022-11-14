@@ -431,6 +431,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
    json <json_0>
    json(StringRepresentation) <json_1>
+   json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
    json_protocol <json_protocol_0>
 
 ``library/logging/``

@@ -26,7 +26,7 @@
 	:- info([
 		version is 0:16:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-11-09,
+		date is 2022-11-14,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
@@ -110,10 +110,16 @@
 		parse(chars(Chars), Term).
 
 	test(parse_object_curly, true(Term == {a-1,b-2,c-3})) :-
-		json(curly,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
+		json(curly,dash,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
 
 	test(parse_object_list, true(Term == json([a-1,b-2,c-3]))) :-
-		json(list,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
+		json(list,dash,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
+
+	test(parse_pair_equal, true(Term == json([a=1,b=2,c=3]))) :-
+		json(list,equal,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
+
+	test(parse_pair_colon, true(Term == json([':'(a,1),':'(b,2),':'(c,3)]))) :-
+		json(list,colon,atom)::parse(atom('{"a":1, "b":2, "c":3}'), Term).
 
 	test(generate_chars, true(Term == {a-b})) :-
 		generate(chars(Chars), {a-b}),
@@ -146,8 +152,14 @@
 	test(encode_pair_string_number, true(A == '{"a":1}')) :-
 		generate(atom(A), {a-1}).
 
-	test(encode_pair_string_object, true(A == '{"a":{"b":"c"}}')) :-
+	test(encode_pair_dash_string_object, true(A == '{"a":{"b":"c"}}')) :-
 		generate(atom(A), {a-{b-c}}).
+
+	test(encode_pair_equal_string_object, true(A == '{"a":{"b":"c"}}')) :-
+		generate(atom(A), {a={b=c}}).
+
+	test(encode_pair_colon_string_object, true(A == '{"a":{"b":"c"}}')) :-
+		generate(atom(A), {':'(a,{':'(b,c)})}).
 
 	test(roundtrip_simple_files, true) :-
 		^^file_path('test_files/simple', Directory),
