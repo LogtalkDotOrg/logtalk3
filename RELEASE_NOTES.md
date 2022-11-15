@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.60.0 - November ??, 2022
+3.60.0 - November 15, 2022
 ==========================
 
 Logtalk compiler and runtime
@@ -58,7 +58,7 @@ files.
 corresponding glossary definitions. 
 
 * UPDATED: The manual installation instructions in the `INSTALL.md` file for
-zsh users.
+`zsh` users.
 
 Library
 -------
