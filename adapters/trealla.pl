@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for Trealla Prolog 1.23.14 and later versions
-%  Last updated on November 1, 2022
+%  Adapter file for Trealla Prolog 2.6.3 and later versions
+%  Last updated on November 17, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -225,7 +225,7 @@
 '$lgt_prolog_feature'(prolog_dialect, trealla).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(2, 2, 5))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(2, 6, 3))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
@@ -280,7 +280,11 @@
 '$lgt_default_flag'(context_switching_calls, allow).
 % other compilation flags:
 '$lgt_default_flag'(scratch_directory, './.lgt_tmp/').
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	(	catch(current_prolog_flag(verbose, false), _, fail) ->
+		Report = warnings
+	;	Report = on
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).
