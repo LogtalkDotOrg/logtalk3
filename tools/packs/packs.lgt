@@ -722,7 +722,7 @@
 		),
 		sort(1, (@>), Versions, Sorted),
 		findall(note(Action,ForVersion,Note), PackObject::note(Action,ForVersion,Note), Notes),
-		print_message(information, packs, pack_info(Registry,Pack,Description,License,Home,Sorted, Notes)).
+		print_message(information, packs, pack_info(Registry,Pack,Description,License,Home,Sorted,Notes)).
 
 	% pack readme predicates
 

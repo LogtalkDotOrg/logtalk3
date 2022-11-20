@@ -339,10 +339,11 @@
 		pack_info_version(Version),
 		pack_info(Versions).
 
-	pack_info_version(version(Version, Status, _URL, _Checksum, Dependencies, Portability)) -->
+	pack_info_version(version(Version, Status, URL, _Checksum, Dependencies, Portability)) -->
 		['  ~w (~w)'-[Version, Status], nl],
+		['    URL:          ~w'-[URL], nl],
 		['    Dependencies: ~q'-[Dependencies], nl],
-		['    Portability: ~q'-[Portability], nl].
+		['    Portability:  ~q'-[Portability], nl].
 
 	defined_registries([defined(Registry,_,HowDefined,Pinned)| DefinedRegistries]) -->
 		['  ~q'-[Registry]], registry_data(HowDefined, Pinned),
