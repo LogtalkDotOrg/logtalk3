@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2022-06-21,
+		date is 2022-11-20,
 		comment is 'Hook object for filtering registry loader file contents.'
 	]).
 
@@ -140,13 +140,17 @@
 		[h,t,t,p,s,':','/','/'].
 	valid_protocol -->
 		[f,i,l,e,':','/','/'].
+	valid_protocol -->
+		[g,i,t,(@)].
 
 	valid_chars -->
 		valid_char,
+		!,
 		valid_chars.
 	valid_chars -->
 		[].
 
+	valid_char --> [':'].
 	valid_char --> ['/'].
 	valid_char --> ['.'].
 	valid_char --> ['-'].

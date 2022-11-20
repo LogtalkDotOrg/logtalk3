@@ -1617,10 +1617,11 @@
 		).
 
 	git_archive_url(URL, Remote, Tag) :-
-		decompose_file_name(URL, Remote, Tag, _),
-		sub_atom(Remote, 0, _, _, 'git@'),
-		sub_atom(Remote, _, _, 0, '.git/'),
-		!.
+		decompose_file_name(URL, Remote0, Tag, _),
+		sub_atom(Remote0, 0, _, _, 'git@'),
+		sub_atom(Remote0, _, _, 0, '.git/'),
+		!,
+		sub_atom(Remote0, 0, _, 1, Remote).
 
 	verify_checksum(Pack, Archive, CheckSum, Options) :-
 		operating_system_type(OS),

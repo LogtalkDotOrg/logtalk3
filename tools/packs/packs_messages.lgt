@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:27:1,
+		version is 0:28:0,
 		author is 'Paulo Moura',
-		date is 2022-08-24,
+		date is 2022-11-20,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -49,6 +49,7 @@
 	message_tokens(help) -->
 		[	'Common queries using the packs tool main predicates:'-[], nl, nl,
 			'  List registries:                 registries::list.'-[], nl,
+			'  Update registries:               registries::update.'-[], nl,
 			'  Add a new registry:              registries::add(Registry, URL).'-[], nl,
 			'  Delete a registry:               registries::delete(Registry).'-[], nl, nl,
 			'  Print registry data:             registries::describe(Registry).'-[], nl,
@@ -64,7 +65,8 @@
 			'                                   packs::install(Registry, Pack).'-[], nl,
 			'                                   packs::install(Registry, Pack, Version).'-[], nl, nl,
 			'  Update a pack:                   packs::update(Pack).'-[], nl,
-			'  Uninstall a pack:                packs::uninstall(Pack).'-[], nl, nl,
+			'  Uninstall a pack:                packs::uninstall(Pack).'-[], nl,
+			'  Clean a pack archive:            packs::clean(Pack).'-[], nl, nl,
 			'Consult the Handbook and the tool API documentation'-[], nl,
 			'for details and other available predicates.'-[], nl
 		].
