@@ -621,18 +621,18 @@
 		^^print_readme_file_path(Path).
 
 	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Archive, Options),
+		download(Registry, Pack, URL, Archive, Options, Downloader),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
 		(	^^option(checksig(true), Options) ->
 			atom_concat(URL, '.asc', URLSig),
-			download(Registry, Pack, URLSig, ArchiveSig, Options),
+			download(Registry, Pack, URLSig, ArchiveSig, Options, _),
 			verify_checksig(Pack, Archive, ArchiveSig, Options)
 		;	true
 		),
-		uncompress(Pack, Archive, Path, Options),
+		uncompress(Pack, Archive, Path, Options, Downloader),
 		save_version(Path, Version),
 		save_registry(Path, Registry),
 		^^print_readme_file_path(Path),
@@ -1351,14 +1351,14 @@
 		).
 
 	check_availability_archive(Registry, Pack, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Archive, Options),
+		download(Registry, Pack, URL, Archive, Options, _),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
 		(	^^option(checksig(true), Options) ->
 			atom_concat(URL, '.asc', URLSig),
-			download(Registry, Pack, URLSig, ArchiveSig, Options),
+			download(Registry, Pack, URLSig, ArchiveSig, Options, _),
 			verify_checksig(Pack, Archive, ArchiveSig, Options)
 		;	true
 		).
@@ -1589,7 +1589,7 @@
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
 
-	download(Registry, Pack, URL, Archive, Options) :-
+	download(Registry, Pack, URL, Archive, Options, Downloader) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
@@ -1607,21 +1607,25 @@
 				atomic_list_concat(['git archive ', GitExtraOptions, ' -v -o "', Archive, '" --remote="', Remote, '" ', Tag], Command)
 			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
 			),
-			^^command(Command, pack_archive_download_failed(Pack, Archive))
+			^^command(Command, pack_archive_download_failed(Pack, Archive)),
+			Downloader = git
 		;	^^option(curl(CurlExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
 			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
-			^^command(Command, pack_archive_download_failed(Pack, Archive))
+			^^command(Command, pack_archive_download_failed(Pack, Archive)),
+			Downloader = curl
 		).
 
 	git_archive_url(URL, Remote, Tag) :-
-		decompose_file_name(URL, Remote0, Tag, _),
+		decompose_file_name(URL, Remote0, Archive),
 		sub_atom(Remote0, 0, _, _, 'git@'),
 		sub_atom(Remote0, _, _, 0, '.git/'),
-		!,
-		sub_atom(Remote0, 0, _, 1, Remote).
+		sub_atom(Remote0, 0, _, 1, Remote),
+		^^supported_archive(Extension),
+		atom_concat(Tag, Extension, Archive),
+		!.
 
 	verify_checksum(Pack, Archive, CheckSum, Options) :-
 		operating_system_type(OS),
@@ -1652,13 +1656,17 @@
 		),
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
-	uncompress(Pack, Archive, Path, Options) :-
+	uncompress(Pack, Archive, Path, Options, Downloader) :-
 		make_pack_installation_directory(Pack, Path, OSPath),
 		^^tar_command(Tar),
 		^^option(tar(TarExtraOptions), Options),
+		(	Downloader == git ->
+			Strip = 0
+		;	Strip = 1
+		),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip ', Strip, ' --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip ', Strip, ' --directory "', OSPath, '"'], Command)
 		),
 		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
 
