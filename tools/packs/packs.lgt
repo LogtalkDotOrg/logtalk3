@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:56:0,
+		version is 0:57:0,
 		author is 'Paulo Moura',
-		date is 2022-10-15,
+		date is 2022-11-20,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1220,7 +1220,7 @@
 			;	^^supported_url_archive(URL) ->
 				true
 			;	print_message(warning, packs, 'Invalid version URL: ~q'+[URL]),
-			fail
+				fail
 			)
 		;	^^supported_url_archive(URL) ->
 			true
@@ -1314,6 +1314,7 @@
 	valid_backend(gnu).
 	valid_backend(ji).
 	valid_backend(lvm).
+	valid_backend(quintus).
 	valid_backend(scryer).
 	valid_backend(sicstus).
 	valid_backend(swi).
@@ -1600,6 +1601,13 @@
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
 			true
+		;	git_archive_url(URL, Remote, Tag) ->
+			^^option(git(GitExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['git archive ', GitExtraOptions, ' -v -o "', Archive, '" --remote="', Remote, '" ', Tag], Command)
+			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
+			),
+			^^command(Command, pack_archive_download_failed(Pack, Archive))
 		;	^^option(curl(CurlExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
@@ -1607,6 +1615,12 @@
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Archive))
 		).
+
+	git_archive_url(URL, Remote, Tag) :-
+		decompose_file_name(URL, Remote, Tag, _),
+		sub_atom(Remote, 0, _, _, 'git@'),
+		sub_atom(Remote, _, _, 0, '.git/'),
+		!.
 
 	verify_checksum(Pack, Archive, CheckSum, Options) :-
 		operating_system_type(OS),
@@ -1687,6 +1701,7 @@
 	backend(gnu,     'GNU Prolog').
 	backend(ji,      'JIProlog').
 	backend(lvm,     'LVM').
+	backend(quintus, 'Quintus Prolog').
 	backend(scryer,  'Scryer Prolog').
 	backend(sicstus, 'SICStus Prolog').
 	backend(swi,     'SWI-Prolog').
@@ -1704,6 +1719,7 @@
 	default_option(checksum(true)).
 	default_option(checksig(false)).
 	default_option(save(installed)).
+	default_option(git('')).
 	default_option(curl('')).
 	default_option(gpg('')).
 	default_option(tar('')).
@@ -1720,6 +1736,8 @@
 		valid(boolean, Boolean).
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
+	valid_option(git(Atom)) :-
+		atom(Atom).
 	valid_option(curl(Atom)) :-
 		atom(Atom).
 	valid_option(gpg(Atom)) :-

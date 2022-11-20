@@ -33,6 +33,13 @@ Prolog adapter and integration files
 * FIXED: The YAP adapter file to set the Logtalk `report` flag to `warnings`
 when the `-q` command-line option is used.
 
+Tools
+-----
+
+* ADDED: Support for using `git archive` for installing packs to the `packs`
+tool. This simplifies pack installation and thus improved user experience
+when the packs registry server uses Single Sign-On (SSO) for authentication.
+
 
 3.60.0 - November 15, 2022
 ==========================

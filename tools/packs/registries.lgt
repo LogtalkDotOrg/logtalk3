@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:50:1,
+		version is 0:51:0,
 		author is 'Paulo Moura',
-		date is 2022-08-24,
+		date is 2022-11-20,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -595,6 +595,7 @@
 	default_option(checksum(true)).
 	default_option(checksig(false)).
 	default_option(save(installed)).
+	default_option(git('')).
 	default_option(curl('')).
 	default_option(gpg('')).
 	default_option(tar('')).
@@ -611,6 +612,8 @@
 		valid(boolean, Boolean).
 	valid_option(save(What)) :-
 		once((What == all; What == installed)).
+	valid_option(git(Atom)) :-
+		atom(Atom).
 	valid_option(curl(Atom)) :-
 		atom(Atom).
 	valid_option(gpg(Atom)) :-

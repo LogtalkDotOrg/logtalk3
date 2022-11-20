@@ -490,6 +490,42 @@ The pack sources should contain ``LICENSE``, ``README.md``, and
 ``README.md`` file is printed when the pack is installed or updated. It
 can also be queried using the ``packs::directory/2`` predicate.
 
+Pack URLs and Single Sign-On
+----------------------------
+
+Typically, pack archive download URLs are HTTPS URLs and handled using
+``curl``. It's also possible to use ``git archive`` to download pack
+archives, provided that the server supports it (as of this writing,
+Bitbucket and GitLab public hosting services support it but not GitHub).
+Using ``git archive`` is specially useful when the packs registry in
+hosted in a server using Single Sign-On (SSO) for authentication. In
+this case, HTTPS URLs can only be handled by ``curl`` by passing a token
+(see below for an example). When the user have setup SSH keys to
+authenticate to the packs registry server, ``git archive`` simplifies
+pack installation, providing a better user experience. For example:
+
+::
+
+   version(
+       1:0:1,
+       stable,
+       'git@gitlab.com/me/my_project.git/v1.0.1.zip',
+       sha256 - '0894c7cdb8968b6bbcf00e3673c1c16cfa98232573af30ceddda207b20a7a207',
+       [logtalk @>= 3:36:0],
+       all
+   ).
+
+The pseudo-URL must be the concatenation of the SSH repo cloning URL
+with the archive name. The archive name must be the concatenation of a
+valid tag with a supported archive extension. SSH repo cloning URLs use
+the format:
+
+::
+
+   git@<hostname>:path/to/project.git
+
+They can usually be easily copied from the hosting service repo webpage.
+
 Pack versions
 -------------
 
@@ -570,6 +606,7 @@ identifiers (atoms):
 -  GNU Prolog: ``gnu``
 -  JIProlog: ``ji``
 -  LVM: ``lvm``
+-  Quintus Prolog: ``quintus``
 -  Scryer Prolog: ``scryer``
 -  SICStus Prolog: ``sicstus``
 -  SWI-Prolog: ``swi``
@@ -680,6 +717,7 @@ predicates that accept a list of options:
 -  ``force(Boolean)`` (default is ``false``)
 -  ``checksum(Boolean)`` (default is ``true``)
 -  ``checksig(Boolean)`` (default is ``false``)
+-  ``git(Atom)`` (extra command-line options; default is ``''``)
 -  ``curl(Atom)`` (extra command-line options; default is ``''``)
 -  ``gpg(Atom)`` (extra command-line options; default is ``''``)
 -  ``tar(Atom)`` (extra command-line options; default is ``''``)

@@ -90,6 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-development">Registry development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-specification">Pack specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pack-urls-and-single-sign-on">Pack URLs and Single Sign-On</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-versions">Pack versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-dependencies">Pack dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-portability">Pack portability</a></li>
@@ -564,6 +565,37 @@ formats and extensions are:</p>
 <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is installed or updated. It
 can also be queried using the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> predicate.</p>
 </section>
+<section id="pack-urls-and-single-sign-on">
+<h2>Pack URLs and Single Sign-On<a class="headerlink" href="#pack-urls-and-single-sign-on" title="Permalink to this heading"></a></h2>
+<p>Typically, pack archive download URLs are HTTPS URLs and handled using
+<code class="docutils literal notranslate"><span class="pre">curl</span></code>. It’s also possible to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> to download pack
+archives, provided that the server supports it (as of this writing,
+Bitbucket and GitLab public hosting services support it but not GitHub).
+Using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> is specially useful when the packs registry in
+hosted in a server using Single Sign-On (SSO) for authentication. In
+this case, HTTPS URLs can only be handled by <code class="docutils literal notranslate"><span class="pre">curl</span></code> by passing a token
+(see below for an example). When the user have setup SSH keys to
+authenticate to the packs registry server, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> simplifies
+pack installation, providing a better user experience. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>version(
+    <span class="m">1</span><span class="o">:</span><span class="m">0</span><span class="o">:</span><span class="m">1</span>,
+    stable,
+    <span class="s">&#39;git@gitlab.com/me/my_project.git/v1.0.1.zip&#39;</span>,
+    sha256 <span class="o">-</span> <span class="s">&#39;0894c7cdb8968b6bbcf00e3673c1c16cfa98232573af30ceddda207b20a7a207&#39;</span>,
+    [logtalk <span class="o">@&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
+    all
+).
+</pre></div>
+</div>
+<p>The pseudo-URL must be the concatenation of the SSH repo cloning URL
+with the archive name. The archive name must be the concatenation of a
+valid tag with a supported archive extension. SSH repo cloning URLs use
+the format:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>git<span class="o">@&lt;</span>hostname<span class="o">&gt;:</span>path<span class="o">/</span>to<span class="o">/</span>project.git
+</pre></div>
+</div>
+<p>They can usually be easily copied from the hosting service repo webpage.</p>
+</section>
 <section id="pack-versions">
 <h2>Pack versions<a class="headerlink" href="#pack-versions" title="Permalink to this heading"></a></h2>
 <p>A pack may specify multiple versions. Each version is described using a
@@ -633,6 +665,7 @@ identifiers (atoms):</p>
 <li><p>GNU Prolog: <code class="docutils literal notranslate"><span class="pre">gnu</span></code></p></li>
 <li><p>JIProlog: <code class="docutils literal notranslate"><span class="pre">ji</span></code></p></li>
 <li><p>LVM: <code class="docutils literal notranslate"><span class="pre">lvm</span></code></p></li>
+<li><p>Quintus Prolog: <code class="docutils literal notranslate"><span class="pre">quintus</span></code></p></li>
 <li><p>Scryer Prolog: <code class="docutils literal notranslate"><span class="pre">scryer</span></code></p></li>
 <li><p>SICStus Prolog: <code class="docutils literal notranslate"><span class="pre">sicstus</span></code></p></li>
 <li><p>SWI-Prolog: <code class="docutils literal notranslate"><span class="pre">swi</span></code></p></li>
@@ -722,6 +755,7 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
