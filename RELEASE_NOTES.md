@@ -43,6 +43,12 @@ when the packs registry server uses Single Sign-On (SSO) for authentication.
 * UPDATED: The `packs::describe/1` predicate to also print the pack archive
 URL.
 
+Tests
+-----
+
+* ADDED: Additional tests for the standard `mod/2` and `rem/2` arithmetic
+functions.
+
 
 3.60.0 - November 15, 2022
 ==========================

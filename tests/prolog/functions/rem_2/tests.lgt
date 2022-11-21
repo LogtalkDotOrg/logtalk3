@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2021-03-15,
+		date is 2022-11-21,
 		comment is 'Unit tests for the ISO Prolog standard rem/2 built-in function.'
 	]).
 
@@ -43,26 +43,29 @@
 	test(lgt_rem_2_04, true(X == -1)) :-
 		{X is rem(-5, 2)}.
 
-	test(lgt_rem_2_05, error(instantiation_error)) :-
+	test(lgt_rem_2_05, true(X == -1)) :-
+		{X is rem(-1, 3)}.
+
+	test(lgt_rem_2_06, error(instantiation_error)) :-
 		% try to delay the error to runtime
 		variable(N),
 		{_X is rem(77, N)}.
 
-	test(lgt_rem_2_06, error(type_error(evaluable,foo/0))) :-
+	test(lgt_rem_2_07, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is rem(Foo, 77)}.
 
-	test(lgt_rem_2_07, error(type_error(evaluable,foo/1))) :-
+	test(lgt_rem_2_08, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is rem(77, Foo)}.
 
-	test(lgt_rem_2_08, error(type_error(integer,7.5))) :-
+	test(lgt_rem_2_09, error(type_error(integer,7.5))) :-
 		% try to delay the expected error to runtime
 		{G = (_X is rem(7.5, 2)), call(G)}.
 
-	test(lgt_rem_2_09, error(evaluation_error(zero_divisor))) :-
+	test(lgt_rem_2_10, error(evaluation_error(zero_divisor))) :-
 		% try to delay the expected error to runtime
 		{G = (_X is rem(7, 0)), call(G)}.
 
