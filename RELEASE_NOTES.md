@@ -43,6 +43,13 @@ when the packs registry server uses Single Sign-On (SSO) for authentication.
 * UPDATED: The `packs::describe/1` predicate to also print the pack archive
 URL.
 
+Ports
+-----
+
+* FIXED: The `metagol` port examples loader to exclude loading the `sorter`
+example when using LVM as it doesn't provide the required `setarg/3` built-in
+predicate.
+
 Tests
 -----
 
