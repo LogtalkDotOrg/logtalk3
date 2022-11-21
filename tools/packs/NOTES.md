@@ -25,21 +25,21 @@ This tool provides predicates for downloading, installing, upgrading, and
 uninstalling third-party libraries and applications, generically known as
 _packs_. Collections of pack specifications are made available using
 _registries_. Registries can be local to a system, publicly shared, or
-private to a company VPN. There is no concept of a central registry. Users
-decide which registries they trust and want to use and add them using their
-published URLs. The tool supports both pack checksums and signatures and
-takes several steps to sanitize registry and pack specifications. As other
-Logtalk developer tools, portability is a main goal. This tool can be used
-with any supported Prolog backend and run in both POSIX and Windows systems.
-Moreover, this tool can be used not only for handling Logtalk packs but also
-Prolog only packs, thus providing a solution for sharing portable resources
-between multiple systems.
+private to a company (e.g. only available in a VPN). There is no concept
+of a central registry. Users decide which registries they trust and want
+to use and add them using their published URLs. The tool supports both pack
+checksums and signatures and takes several steps to sanitize registry and
+pack specifications. As other Logtalk developer tools, portability is a main
+goal. This tool can be used with any supported Prolog backend and run in both
+POSIX and Windows systems. Moreover, this tool can be used not only for
+handling Logtalk packs but also Prolog only packs, thus providing a solution
+for sharing portable resources between multiple systems.
 
 A list of public Logtalk and Prolog pack registries is available at:
 
 https://github.com/LogtalkDotOrg/pack-registries
 
-This tool is the beta stage of development.
+This tool is the beta stage of development. Feedback is most welcome.
 
 
 Requirements
@@ -64,8 +64,8 @@ On Windows systems, the following shell commands are required:
 - `certutil.exe`
 - `curl.exe`
 - `tar.exe`
-- `gpg`
-- `git`
+- `gpg.exe`
+- `git.exe`
 
 In recent Windows 10 builds, only `gpg` and `git` should require installation.
 You can download the GnuPG software from:
@@ -491,8 +491,8 @@ a supported archive extension. SSH repo cloning URLs use the format:
 They can usually be easily copied from the hosting service repo webpage.
 
 
-Pack versions
--------------
+Multiple pack versions
+----------------------
 
 A pack may specify multiple versions. Each version is described using a
 `version/6` predicate clause as illustrated in the example above. The

@@ -91,7 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#registry-development">Registry development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-specification">Pack specification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-urls-and-single-sign-on">Pack URLs and Single Sign-On</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pack-versions">Pack versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-pack-versions">Multiple pack versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-dependencies">Pack dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-portability">Pack portability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-development">Pack development</a></li>
@@ -157,19 +157,19 @@
 and uninstalling third-party libraries and applications, generically
 known as <em>packs</em>. Collections of pack specifications are made available
 using <em>registries</em>. Registries can be local to a system, publicly
-shared, or private to a company VPN. There is no concept of a central
-registry. Users decide which registries they trust and want to use and
-add them using their published URLs. The tool supports both pack
-checksums and signatures and takes several steps to sanitize registry
-and pack specifications. As other Logtalk developer tools, portability
-is a main goal. This tool can be used with any supported Prolog backend
-and run in both POSIX and Windows systems. Moreover, this tool can be
-used not only for handling Logtalk packs but also Prolog only packs,
-thus providing a solution for sharing portable resources between
-multiple systems.</p>
+shared, or private to a company (e.g. only available in a VPN). There is
+no concept of a central registry. Users decide which registries they
+trust and want to use and add them using their published URLs. The tool
+supports both pack checksums and signatures and takes several steps to
+sanitize registry and pack specifications. As other Logtalk developer
+tools, portability is a main goal. This tool can be used with any
+supported Prolog backend and run in both POSIX and Windows systems.
+Moreover, this tool can be used not only for handling Logtalk packs but
+also Prolog only packs, thus providing a solution for sharing portable
+resources between multiple systems.</p>
 <p>A list of public Logtalk and Prolog pack registries is available at:</p>
 <p><a class="reference external" href="https://github.com/LogtalkDotOrg/pack-registries">https://github.com/LogtalkDotOrg/pack-registries</a></p>
-<p>This tool is the beta stage of development.</p>
+<p>This tool is the beta stage of development. Feedback is most welcome.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <p>On POSIX systems (Linux, macOS, …), the following shell commands are
@@ -190,8 +190,8 @@ non-predictable name of the wrapper directory).</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">certutil.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar.exe</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gpg</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpg.exe</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git.exe</span></code></p></li>
 </ul>
 <p>In recent Windows 10 builds, only <code class="docutils literal notranslate"><span class="pre">gpg</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span></code> should require
 installation. You can download the GnuPG software from:</p>
@@ -596,8 +596,8 @@ the format:</p>
 </div>
 <p>They can usually be easily copied from the hosting service repo webpage.</p>
 </section>
-<section id="pack-versions">
-<h2>Pack versions<a class="headerlink" href="#pack-versions" title="Permalink to this heading"></a></h2>
+<section id="multiple-pack-versions">
+<h2>Multiple pack versions<a class="headerlink" href="#multiple-pack-versions" title="Permalink to this heading"></a></h2>
 <p>A pack may specify multiple versions. Each version is described using a
 <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause as illustrated in the example above. The
 versions must be listed ordered from newest to oldest. For details, see
