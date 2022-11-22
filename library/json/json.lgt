@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-11-14,
+		date is 2022-11-22,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -336,13 +336,10 @@
 	% auxiliary predicates
 
 	line_to_codes(Stream, Codes) :-
-		(	at_end_of_stream(Stream) ->
+		get_code(Stream, Code),
+		(	Code == -1 ->
 			Codes = end_of_file
-		;	get_code(Stream, Code),
-			(	Code == -1 ->
-				Codes = end_of_file
-			;	line_to_codes(Code, Stream, Codes)
-			)
+		;	line_to_codes(Code, Stream, Codes)
 		).
 
 	line_to_codes(-1, _, []) :-

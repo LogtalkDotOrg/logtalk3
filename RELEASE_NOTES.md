@@ -33,6 +33,13 @@ Prolog adapter and integration files
 * FIXED: The YAP adapter file to set the Logtalk `report` flag to `warnings`
 when the `-q` command-line option is used.
 
+Library
+-------
+
+* CHANGED: The `json` and `reader` libraries to not use calls to the Prolog
+standard `at_end_of_stream/1` predicate due to differences and bugs in its
+implementation by the supported backends. 
+
 Tools
 -----
 
