@@ -420,7 +420,13 @@ forall(Generate, Test) :-
 	;	% ... but not POSIX systems
 		ScratchDirectory = './.lgt_tmp/'
 	).
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	argv(all, Arguments),
+	atom_string('--quiet', String),
+	(	member(String, Arguments) ->
+		Report = warnings
+	;	Report = on
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).

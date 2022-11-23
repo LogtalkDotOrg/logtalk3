@@ -1,0 +1,57 @@
+.. index:: ids
+.. _ids/0:
+
+.. rst-class:: right
+
+**object**
+
+``ids``
+=======
+
+Generator of random identifiers with 160 bits (20 bytes) of randomness.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-11-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`ids(20) <ids/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ids/1::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ids(Bytes) <ids/1>`, :ref:`uuid <uuid/0>`
+

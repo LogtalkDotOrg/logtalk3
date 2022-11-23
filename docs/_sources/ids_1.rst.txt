@@ -1,0 +1,80 @@
+.. index:: ids(Bytes)
+.. _ids/1:
+
+.. rst-class:: right
+
+**object**
+
+``ids(Bytes)``
+==============
+
+* ``Bytes`` - Number of bytes of randomness.
+
+
+Generator of random identifiers.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2022-11-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`base64 <base64/0>`
+|    :ref:`fast_random <fast_random/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/1
+.. _ids/1::generate/1:
+
+``generate/1``
+^^^^^^^^^^^^^^
+
+Geenrate a random identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Identifier)``
+| **Mode and number of proofs:**
+|    ``generate(--atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ids <ids/0>`, :ref:`uuid <uuid/0>`
+

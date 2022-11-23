@@ -293,7 +293,12 @@ setup_call_cleanup(_, _, _) :-
 		ScratchDirectory = './lgt_tmp/'
 	;	ScratchDirectory = './.lgt_tmp/'
 	).
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	current_prolog_flag(argv, Arguments),
+	(	member('--quiet', Arguments) ->
+		Report = warnings
+	;	Report = on
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).

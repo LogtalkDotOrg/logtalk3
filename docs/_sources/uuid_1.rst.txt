@@ -14,8 +14,8 @@
 Universally unique identifier (UUID) generator.
 
 | **Author:** Paulo Moura
-| **Version:** 0:4:0
-| **Date:** 2021-03-13
+| **Version:** 0:5:0
+| **Date:** 2022-11-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -58,4 +58,8 @@ Operators
 ---------
 
 (none)
+
+.. seealso::
+
+   :ref:`ids <ids/0>`, :ref:`ids(Bytes) <ids/1>`
 

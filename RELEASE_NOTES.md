@@ -40,11 +40,14 @@ Library
 standard `at_end_of_stream/1` predicate due to differences and bugs in its
 implementation by the supported backends. 
 
+* ADDED: New `ids` library for generating identifiers (Base64 encoded atoms)
+with a parametrizable number of bytes of randomness.
+
 Tools
 -----
 
 * ADDED: Support for using `git archive` for installing packs to the `packs`
-tool. This simplifies pack installation and thus improved user experience
+tool. This simplifies pack installation and thus improves user experience
 when the packs registry server uses Single Sign-On (SSO) for authentication.
 
 * UPDATED: The `packs::describe/1` predicate to also print the pack archive

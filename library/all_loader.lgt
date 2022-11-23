@@ -37,6 +37,7 @@
 		loops(loader),
 		random(loader),
 		statistics(loader),
+		ids(loader),
 		intervals(loader),
 		logging(loader),
 		meta_compiler(loader),
