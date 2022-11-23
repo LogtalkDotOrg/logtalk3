@@ -404,7 +404,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    ids <ids_0>
-   ids(Bytes) <ids_1>
+   ids(Representation,Bytes) <ids_2>
 
 ``library/intervals/``
 ----------------------

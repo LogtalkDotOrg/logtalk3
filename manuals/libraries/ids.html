@@ -165,13 +165,15 @@
              
   <section id="library-ids">
 <span id="ids"></span><h1><code class="docutils literal notranslate"><span class="pre">ids</span></code><a class="headerlink" href="#library-ids" title="Permalink to this heading"></a></h1>
-<p>This library generates random identifiers (atoms) given the number of
-bytes of randomness. The identifiers are Base64 encoded. By default, 20
-bytes (160 bits) are used.</p>
+<p>This library generates random identifiers given the number of bytes of
+randomness. The identifiers are Base64 encoded. By default, 20 bytes
+(160 bits) are used.</p>
 <p>The generation of random identifiers uses the <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> random
 number generator when available. This includes macOS, Linux, *BSD, and
 other POSIX operating-systems. On Windows, a pseudo-random generator is
 used but randomized using the current wall time.</p>
+<p>Identifiers can be generated as atoms, lists of characters, or lists of
+character codes.</p>
 <p>See also the <code class="docutils literal notranslate"><span class="pre">uuid</span></code> library.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
@@ -201,9 +203,24 @@ link in a web browser.</p>
 yes
 </pre></div>
 </div>
-<p>To generate an identifier using the 240 bits (30 bytes) of randomness:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ids(<span class="m">30</span>)<span class="o">::</span>generate(<span class="nv">Identifier</span>).
+<p>To generate an identifier represented by an atom using 240 bits (30
+bytes) of randomness:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ids(atom, <span class="m">30</span>)<span class="o">::</span>generate(<span class="nv">Identifier</span>).
 <span class="nv">Identifier</span> <span class="o">=</span> <span class="s">&#39;ie/jYcLsqo8ZguCOF1ZNPFDRvJ03Ww5Qa9e0FxRB&#39;</span>
+yes
+</pre></div>
+</div>
+<p>To generate an identifier represented by a list of characters using 64
+bits (8 bytes) of randomness:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ids(chars, <span class="m">8</span>)<span class="o">::</span>generate(<span class="nv">Identifier</span>).
+<span class="nv">Identifier</span> <span class="o">=</span> [<span class="s">&#39;5&#39;</span>,<span class="s">&#39;0&#39;</span>,<span class="s">&#39;8&#39;</span>,<span class="s">&#39;V&#39;</span>,d,<span class="s">&#39;S&#39;</span>,c,y,n,o,<span class="s">&#39;A&#39;</span>,<span class="o">=</span>]
+yes
+</pre></div>
+</div>
+<p>To generate an identifier represented by a list of character codes using
+64 bits (8 bytes) of randomness:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ids(codes, <span class="m">8</span>)<span class="o">::</span>generate(<span class="nv">Identifier</span>).
+<span class="nv">Identifier</span> <span class="o">=</span> [<span class="m">111</span>,<span class="m">81</span>,<span class="m">86</span>,<span class="m">55</span>,<span class="m">99</span>,<span class="m">79</span>,<span class="m">70</span>,<span class="m">77</span>,<span class="m">65</span>,<span class="m">74</span>,<span class="m">103</span>,<span class="m">61</span>]
 yes
 </pre></div>
 </div>

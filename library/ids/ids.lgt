@@ -19,27 +19,39 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(ids(_Bytes_)).
+:- object(ids(_Representation_, _Bytes_)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2022-11-23,
 		comment is 'Generator of random identifiers.',
-		parameters is ['Bytes' - 'Number of bytes of randomness.'],
+		parameters is [
+			'Representation' - 'Text representation for the identifier. Possible values are ``atom``, ``chars``, and ``codes``.',
+			'Bytes' - 'Number of bytes of randomness.'
+		],
 		see_also is [ids, uuid]
 	]).
 
 	:- public(generate/1).
-	:- mode(generate(--atom), one).
+	:- mode(generate(--textids), one).
 	:- info(generate/1, [
-		comment is 'Geenrate a random identifier.',
+		comment is 'Generate a random identifier.',
 		argnames is ['Identifier']
 	]).
 
 	generate(Identifier) :-
+		generate(_Representation_, Identifier).
+
+	generate(atom, Identifier) :-
 		random_bytes(_Bytes_, Bytes),
 		base64::generate(atom(Identifier), Bytes).
+	generate(chars, Identifier) :-
+		random_bytes(_Bytes_, Bytes),
+		base64::generate(chars(Identifier), Bytes).
+	generate(codes, Identifier) :-
+		random_bytes(_Bytes_, Bytes),
+		base64::generate(codes(Identifier), Bytes).
 
 	random_bytes(N, Bytes) :-
 		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),
@@ -58,23 +70,18 @@
 		get_byte(Stream, Byte),
 		read_random_bytes(Bytes, Stream).
 
-	codes_to_chars([], []).
-	codes_to_chars([Code| Codes], [Char| Chars]) :-
-		char_code(Char, Code),
-		codes_to_chars(Codes, Chars).
-
 :- end_object.
 
 
 :- object(ids,
-	extends(ids(20))).
+	extends(ids(atom, 20))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2022-11-23,
 		comment is 'Generator of random identifiers with 160 bits (20 bytes) of randomness.',
-		see_also is [ids(_), uuid]
+		see_also is [ids(_, _), uuid]
 	]).
 
 :- end_object.

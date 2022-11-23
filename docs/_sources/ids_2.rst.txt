@@ -1,13 +1,14 @@
-.. index:: ids(Bytes)
-.. _ids/1:
+.. index:: ids(Representation，Bytes)
+.. _ids/2:
 
 .. rst-class:: right
 
 **object**
 
-``ids(Bytes)``
-==============
+``ids(Representation,Bytes)``
+=============================
 
+* ``Representation`` - Text representation for the identifier. Possible values are ``atom``, ``chars``, and ``codes``.
 * ``Bytes`` - Number of bytes of randomness.
 
 
@@ -41,12 +42,12 @@ Public predicates
 -----------------
 
 .. index:: generate/1
-.. _ids/1::generate/1:
+.. _ids/2::generate/1:
 
 ``generate/1``
 ^^^^^^^^^^^^^^
 
-Geenrate a random identifier.
+Generate a random identifier.
 
 | **Compilation flags:**
 |    ``static``
@@ -54,7 +55,7 @@ Geenrate a random identifier.
 | **Template:**
 |    ``generate(Identifier)``
 | **Mode and number of proofs:**
-|    ``generate(--atom)`` - ``one``
+|    ``generate(--textids)`` - ``one``
 
 
 ------------

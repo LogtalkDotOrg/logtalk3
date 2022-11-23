@@ -11,8 +11,8 @@
 Universally unique identifier (UUID) generator using an atom representation.
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2021-03-11
+| **Version:** 0:2:0
+| **Date:** 2022-11-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -50,4 +50,8 @@ Operators
 ---------
 
 (none)
+
+.. seealso::
+
+   :ref:`uuid(Representation) <uuid/1>`, :ref:`ids <ids/0>`, :ref:`ids(Representation,Bytes) <ids/2>`
 

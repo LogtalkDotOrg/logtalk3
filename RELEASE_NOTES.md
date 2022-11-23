@@ -40,8 +40,8 @@ Library
 standard `at_end_of_stream/1` predicate due to differences and bugs in its
 implementation by the supported backends. 
 
-* ADDED: New `ids` library for generating identifiers (Base64 encoded atoms)
-with a parametrizable number of bytes of randomness.
+* ADDED: New `ids` library for generating identifiers (Base64 encoded) with
+a parametrizable number of bytes of randomness.
 
 Tools
 -----

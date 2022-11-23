@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ids(Bytes) &mdash; Logtalk APIs v3.61.0-b01 documentation</title>
+  <title>ids(Representation,Bytes) &mdash; Logtalk APIs v3.61.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -96,7 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#html"><span class="xref std std-ref">html</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#ids"><span class="xref std std-ref">ids</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="ids_0.html">ids</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ids(Bytes)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ids(Representation,Bytes)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#intervals"><span class="xref std std-ref">intervals</span></a></li>
@@ -173,9 +173,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="library_index.html">Libraries</a> &raquo;</li>
-      <li><code class="docutils literal notranslate"><span class="pre">ids(Bytes)</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">ids(Representation,Bytes)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/ids_1.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ids_2.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -183,10 +183,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="ids-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="ids-bytes">
-<h1><code class="docutils literal notranslate"><span class="pre">ids(Bytes)</span></code><a class="headerlink" href="#ids-bytes" title="Permalink to this heading"></a></h1>
+  <p class="right" id="ids-2"><span id="index-0"></span><strong>object</strong></p>
+<section id="ids-representation-bytes">
+<h1><code class="docutils literal notranslate"><span class="pre">ids(Representation,Bytes)</span></code><a class="headerlink" href="#ids-representation-bytes" title="Permalink to this heading"></a></h1>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Representation</span></code> - Text representation for the identifier. Possible values are <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> - Number of bytes of randomness.</p></li>
 </ul>
 <p>Generator of random identifiers.</p>
@@ -237,8 +238,8 @@
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
 <section id="generate-1">
-<span id="ids-1-generate-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">generate/1</span></code></a><a class="headerlink" href="#generate-1" title="Permalink to this heading"></a></h3>
-<p>Geenrate a random identifier.</p>
+<span id="ids-2-generate-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents"><code class="docutils literal notranslate"><span class="pre">generate/1</span></code></a><a class="headerlink" href="#generate-1" title="Permalink to this heading"></a></h3>
+<p>Generate a random identifier.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -252,7 +253,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(--textids)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

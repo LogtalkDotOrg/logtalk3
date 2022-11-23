@@ -19,13 +19,13 @@ Generator of random identifiers with 160 bits (20 bytes) of randomness.
 
 
 | **Extends:**
-|    ``public`` :ref:`ids(20) <ids/1>`
+|    ``public`` :ref:`ids(atom,20) <ids/2>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`ids/1::generate/1`  
+|     :ref:`ids/2::generate/1`  
 
 .. contents::
    :local:
@@ -53,5 +53,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ids(Bytes) <ids/1>`, :ref:`uuid <uuid/0>`
+   :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`uuid <uuid/0>`
 

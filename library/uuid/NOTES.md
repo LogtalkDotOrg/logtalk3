@@ -36,6 +36,11 @@ generator when available. This includes macOS, Linux, *BSD, and other POSIX
 operating-systems. On Windows, a pseudo-random generator is used but
 randomized using the current wall time. 
 
+UUIDs can be generated as atoms, lists of characters, or lists of character
+codes.
+
+See also the `ids` library.
+
 
 API documentation
 -----------------

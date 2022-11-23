@@ -30,15 +30,17 @@
 	]).
 
 	cover(ids).
-	cover(ids(_)).
+	cover(ids(_, _)).
 
 	quick_check(id_default_valid, ids(-atom)).
-	quick_check(id_valid, ids(+between(integer,1,30), -atom)).
+	quick_check(id_valid(atom),  ids({atom},  +between(integer,1,30), -atom)).
+	quick_check(id_valid(chars), ids({chars}, +between(integer,1,30), -chars)).
+	quick_check(id_valid(codes), ids({codes}, +between(integer,1,30), -codes)).
 
 	ids(Identifier) :-
 		ids::generate(Identifier).
 
-	ids(Bytes, Identifier) :-
-		ids(Bytes)::generate(Identifier).
+	ids(Representation, Bytes, Identifier) :-
+		ids(Representation, Bytes)::generate(Identifier).
 
 :- end_object.
