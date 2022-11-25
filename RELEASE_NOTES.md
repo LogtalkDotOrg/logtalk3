@@ -28,6 +28,8 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: PowerShell integration script for Trealla Prolog. Experimental.
+
 * UPDATED: The Trealla Prolog adapter file to require version 2.6.3 or later.
 
 * FIXED: The YAP adapter file to set the Logtalk `report` flag to `warnings`
