@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on November 1, 2022
+%  Last updated on November 27, 2022
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2022 Paulo Moura <pmoura@logtalk.org>
@@ -291,7 +291,11 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 		ScratchDirectory = './.lgt_tmp/'
 	;	ScratchDirectory = './lgt_tmp/'
 	).
-'$lgt_default_flag'(report, on).
+'$lgt_default_flag'(report, Report) :-
+	(	current_prolog_flag(info_messages, silent) ->
+		Report = warnings
+	;	Report = on
+	).
 '$lgt_default_flag'(clean, on).
 '$lgt_default_flag'(code_prefix, '$').
 '$lgt_default_flag'(optimize, off).

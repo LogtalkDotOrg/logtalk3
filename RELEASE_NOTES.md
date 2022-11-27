@@ -35,6 +35,9 @@ Prolog adapter and integration files
 * FIXED: The YAP adapter file to set the Logtalk `report` flag to `warnings`
 when the `-q` command-line option is used.
 
+* FIXED: The CxProlog adapter file to set the Logtalk `report` flag to
+`warnings` when the `--quiet` command-line option is used.
+
 Library
 -------
 
