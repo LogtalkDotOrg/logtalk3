@@ -22,9 +22,9 @@
 :- object(reader).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2022-11-22,
+		date is 2022-10-31,
 		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.'
 	]).
 
@@ -256,10 +256,13 @@
 		).
 
 	line_to_chars(Stream, Chars) :-
-		get_char(Stream, Char),
-		(	Char == end_of_file ->
+		(	at_end_of_stream(Stream) ->
 			Chars = end_of_file
-		;	line_to_chars_no_tail(Char, Stream, Chars)
+		;	get_char(Stream, Char),
+			(	Char == end_of_file ->
+				Chars = end_of_file
+			;	line_to_chars_no_tail(Char, Stream, Chars)
+			)
 		).
 
 	line_to_chars_no_tail(end_of_file, _, []) :-
@@ -277,10 +280,13 @@
 		line_to_chars_no_tail(NextChar, Stream, Chars).
 
 	line_to_chars(Stream, Chars, Tail) :-
-		get_char(Stream, Char),
-		(	Char == end_of_file ->
+		(	at_end_of_stream(Stream) ->
 			Chars = Tail, Tail = []
-		;	line_to_chars_tail(Char, Stream, Chars, Tail)
+		;	get_char(Stream, Char),
+			(	Char == end_of_file ->
+				Chars = Tail, Tail = []
+			;	line_to_chars_tail(Char, Stream, Chars, Tail)
+			)
 		).
 
 	line_to_chars_tail(end_of_file, _, Tail, Tail) :-
@@ -299,10 +305,13 @@
 		line_to_chars_tail(NextChar, Stream, Chars, Tail).
 
 	line_to_codes(Stream, Codes) :-
-		get_code(Stream, Code),
-		(	Code == -1 ->
+		(	at_end_of_stream(Stream) ->
 			Codes = end_of_file
-		;	line_to_codes_no_tail(Code, Stream, Codes)
+		;	get_code(Stream, Code),
+			(	Code == -1 ->
+				Codes = end_of_file
+			;	line_to_codes_no_tail(Code, Stream, Codes)
+			)
 		).
 
 	line_to_codes_no_tail(-1, _, []) :-
@@ -320,10 +329,13 @@
 		line_to_codes_no_tail(NextCode, Stream, Codes).
 
 	line_to_codes(Stream, Codes, Tail) :-
-		get_code(Stream, Code),
-		(	Code == -1 ->
+		(	at_end_of_stream(Stream) ->
 			Codes = Tail, Tail = []
-		;	line_to_codes_tail(Code, Stream, Codes, Tail)
+		;	get_code(Stream, Code),
+			(	Code == -1 ->
+				Codes = Tail, Tail = []
+			;	line_to_codes_tail(Code, Stream, Codes, Tail)
+			)
 		).
 
 	line_to_codes_tail(-1, _, Tail, Tail) :-

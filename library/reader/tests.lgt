@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2022-10-31,
+		date is 2022-12-01,
 		comment is 'Unit tests for the "reader" library.'
 	]).
 
@@ -390,6 +390,17 @@
 		reader::line_to_chars(Stream, Chars4),
 		close(Stream).
 
+	test(reader_line_to_chars_2_05, true([Chars] == [[a,b,c]])) :-
+		^^set_text_input(in, 'abc'),
+		reader::line_to_chars(in, Chars),
+		close(in).
+
+	test(reader_line_to_chars_2_06, true([Chars1,Chars2] == [[a,b,c],end_of_file])) :-
+		^^set_text_input(in, 'abc'),
+		reader::line_to_chars(in, Chars1),
+		reader::line_to_chars(in, Chars2),
+		close(in).
+
 	test(reader_line_to_chars_3_01, true(Chars == [])) :-
 		text_file_stream('test_files/empty', Stream),
 		reader::line_to_chars(Stream, Chars, []),
@@ -425,6 +436,17 @@
 		reader::line_to_codes(Stream, Codes4),
 		close(Stream).
 
+	test(reader_line_to_codes_2_05, true([Codes] == [[97,98,99]])) :-
+		^^set_text_input(in, 'abc'),
+		reader::line_to_codes(in, Codes),
+		close(in).
+
+	test(reader_line_to_codes_2_06, true([Codes1,Codes2] == [[97,98,99],end_of_file])) :-
+		^^set_text_input(in, 'abc'),
+		reader::line_to_codes(in, Codes1),
+		reader::line_to_codes(in, Codes2),
+		close(in).
+
 	test(reader_line_to_codes_3_01, true(Codes == [])) :-
 		text_file_stream('test_files/empty', Stream),
 		reader::line_to_codes(Stream, Codes, []),
@@ -434,6 +456,9 @@
 		text_file_stream('test_files/lines', Stream),
 		reader::line_to_codes(Stream, Codes, []),
 		close(Stream).
+
+	cleanup :-
+		^^clean_text_input.
 
 	% auxiliary predicates
 

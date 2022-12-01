@@ -41,12 +41,11 @@ when the `-q` command-line option is used.
 Library
 -------
 
-* CHANGED: The `json` and `reader` libraries to not use calls to the Prolog
-standard `at_end_of_stream/1` predicate due to differences and bugs in its
-implementation by the supported backends. 
-
 * ADDED: New `ids` library for generating identifiers (Base64 encoded) with
-a parametrizable number of bytes of randomness.
+parametrizable text representation and number of bytes of randomness.
+
+* ADDED: Additional tests for the `reader` library `line_to_chars/2` and
+`line_to_codes/2` predicates.
 
 Tools
 -----
