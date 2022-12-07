@@ -32,6 +32,10 @@ Prolog adapter and integration files
 
 * UPDATED: The Trealla Prolog adapter file to require version 2.6.3 or later.
 
+* UPDATED: The GNU Prolog adapter file to set the Logtalk `report` flag to
+`warnings` when the `--quiet` command-line option is used by checking the
+new `show_information` flag introduced in version 1.5.1.
+
 * FIXED: The YAP adapter file to set the Logtalk `report` flag to `warnings`
 when the `-q` command-line option is used.
 
