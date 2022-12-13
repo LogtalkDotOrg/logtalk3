@@ -11,8 +11,8 @@
 Useful predicates over lists of pairs (key-value terms).
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2021-02-22
+| **Version:** 2:1:0
+| **Date:** 2022-12-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -62,7 +62,7 @@ Converts between a list of pairs and lists of keys and values.
 ``keys/2``
 ^^^^^^^^^^
 
-Extracts a list of keys from a list of pairs.
+Returns a list of keys from a list of pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -75,13 +75,32 @@ Extracts a list of keys from a list of pairs.
 
 ------------
 
+.. index:: key/2
+.. _pairs/0::key/2:
+
+``key/2``
+^^^^^^^^^
+
+Enumerates by backtracking all keys from a list of pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``key(Pairs,Key)``
+| **Mode and number of proofs:**
+|    ``key(+list(pair),-term)`` - ``zero_or_more``
+
+
+------------
+
 .. index:: values/2
 .. _pairs/0::values/2:
 
 ``values/2``
 ^^^^^^^^^^^^
 
-Extracts a list of values from a list of pairs.
+Returns a list of values from a list of pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -90,6 +109,26 @@ Extracts a list of values from a list of pairs.
 |    ``values(Pairs,Values)``
 | **Mode and number of proofs:**
 |    ``values(+list(pair),-list)`` - ``one``
+
+
+------------
+
+.. index:: value/3
+.. _pairs/0::value/3:
+
+``value/3``
+^^^^^^^^^^^
+
+Returns a value addressed by the given path (a key or a list of keys in the case of nested list of pairs). Fails if path does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``value(Pairs,Path,Value)``
+| **Mode and number of proofs:**
+|    ``value(+list(pair),+term,-term)`` - ``zero_or_one``
+|    ``value(+list(pair),+list,-term)`` - ``zero_or_one``
 
 
 ------------

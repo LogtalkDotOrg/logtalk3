@@ -22,8 +22,8 @@
 :- object(pairs).
 
 	:- info([
-		version is 2:0:0,
-		date is 2021-02-22,
+		version is 2:1:0,
+		date is 2022-12-13,
 		author is 'Paulo Moura',
 		comment is 'Useful predicates over lists of pairs (key-value terms).',
 		remarks is [
@@ -42,15 +42,30 @@
 	:- public(keys/2).
 	:- mode(keys(+list(pair), -list), one).
 	:- info(keys/2, [
-		comment is 'Extracts a list of keys from a list of pairs.',
+		comment is 'Returns a list of keys from a list of pairs.',
 		argnames is ['Pairs', 'Keys']
+	]).
+
+	:- public(key/2).
+	:- mode(key(+list(pair), -term), zero_or_more).
+	:- info(key/2, [
+		comment is 'Enumerates by backtracking all keys from a list of pairs.',
+		argnames is ['Pairs', 'Key']
 	]).
 
 	:- public(values/2).
 	:- mode(values(+list(pair), -list), one).
 	:- info(values/2, [
-		comment is 'Extracts a list of values from a list of pairs.',
+		comment is 'Returns a list of values from a list of pairs.',
 		argnames is ['Pairs', 'Values']
+	]).
+
+	:- public(value/3).
+	:- mode(value(+list(pair), +term, -term), zero_or_one).
+	:- mode(value(+list(pair), +list, -term), zero_or_one).
+	:- info(value/3, [
+		comment is 'Returns a value addressed by the given path (a key or a list of keys in the case of nested list of pairs). Fails if path does not exist.',
+		argnames is ['Pairs', 'Path', 'Value']
 	]).
 
 	:- public(transpose/2).
@@ -108,9 +123,30 @@
 	keys([Key-_| Pairs], [Key| Keys]) :-
 		keys(Pairs, Keys).
 
+	key([Key-_| _], Key).
+	key([_| Pairs], Key) :-
+		key(Pairs, Key).
+
 	values([], []).
 	values([_-Value| Pairs], [Value| Values]) :-
 		values(Pairs, Values).
+
+	value(Pairs, Path, Value) :-
+		(	Path = [Key| Keys] ->
+			value_nested(Keys, Key, Pairs, Value)
+		;	value_nested(Pairs, Path, Value)
+		).
+
+	value_nested([], Key, Pairs, Value) :-
+		value_nested(Pairs, Key, Value).
+	value_nested([Key| Keys], Key0, Pairs, Value) :-
+		value_nested(Pairs, Key0, NestedPairs),
+		value_nested(Keys, Key, NestedPairs, Value).
+
+	value_nested([Key-Value| _], Key, Value) :-
+		!.
+	value_nested([_| Pairs], Key, Value) :-
+		value_nested(Pairs, Key, Value).
 
 	transpose([], []).
 	transpose([Key-Value| Pairs], [Value-Key| TransposedPairs]) :-

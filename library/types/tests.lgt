@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2022-06-21,
+		date is 2022-12-13,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -212,5 +212,41 @@
 
 	test(numberlist_rescale_3_01, true(Rescaled == [2,4,6,8])) :-
 		numberlist::rescale([1,2,3,4], 2, Rescaled).
+
+	test(pairs_keys_values_3_01, true(Keys-Values == [a,b,c]-[1,2,3])) :-
+		pairs::keys_values([a-1,b-2,c-3], Keys, Values).
+
+	test(pairs_keys_2_01, true(Keys == [a,b,c])) :-
+		pairs::keys([a-1,b-2,c-3], Keys).
+
+	test(pairs_key_2_01, true(Keys == [a,b,c])) :-
+		findall(Key, pairs::key([a-1,b-2,c-3], Key), Keys).
+
+	test(pairs_key_2_02, false) :-
+		pairs::key([a-1,b-2,c-3], d).
+
+	test(pairs_values_2_01, true(Values == [1,2,3])) :-
+		pairs::values([a-1,b-2,c-3], Values).
+
+	test(pairs_value_3_01, true(Value == 2)) :-
+		pairs::value([a-1,b-2,c-3], b, Value).
+
+	test(pairs_value_3_02, true(Value == 4)) :-
+		pairs::value([a-1,b-2,c-[d-4,e-5]], [c,d], Value).
+
+	test(pairs_value_3_03, false) :-
+		pairs::value([a-1,b-2,c-3], [c,d], _).
+
+	test(pairs_transpose_2_01, true(Pairs == [1-a,2-b,3-c])) :-
+		pairs::transpose([a-1,b-2,c-3], Pairs).
+
+	test(pairs_group_sorted_by_key_2_01, true(Pairs == [a-[1,11],b-[2,22],c-[3,33]])) :-
+		pairs::group_sorted_by_key([b-2,a-1,c-3,b-22,c-33,a-11], Pairs).
+
+	test(pairs_group_consecutive_by_key_2_01, true(Pairs == [b-[2],a-[1,11],b-[22],c-[3,33]])) :-
+		pairs::group_consecutive_by_key([b-2,a-1,a-11,b-22,c-3,c-33], Pairs).
+
+	test(pairs_map_3_01, true(Pairs == [a-97,b-98,c-99])) :-
+		pairs::map([Code,Char]>>char_code(Char,Code), [97,98,99], Pairs).
 
 :- end_object.

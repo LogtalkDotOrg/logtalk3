@@ -48,6 +48,9 @@ Library
 * ADDED: New `ids` library for generating identifiers (Base64 encoded) with
 parametrizable text representation and number of bytes of randomness.
 
+* ADDED: New `pairs` library object `key/2` and `value/3` predicates. Also
+add tests for all the `pairs` library object predicates.
+
 * ADDED: Additional tests for the `reader` library `line_to_chars/2` and
 `line_to_codes/2` predicates.
 
