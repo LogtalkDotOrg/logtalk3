@@ -530,8 +530,12 @@ example:
 
 ::
 
-   $ git archive --format=zip --output=foo-v1.0.1.zip --remote=git@gitlab.com/me/foo.git v1.0.1
+   $ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com/me/foo.git v1.0.1
    $ openssl sha256 foo-v1.0.1.zip
+
+Be sure to use a format that is supported by both the ``packs`` tool and
+the ``git archive`` command (the format is inferred from the
+``--output`` option).
 
 Multiple pack versions
 ----------------------

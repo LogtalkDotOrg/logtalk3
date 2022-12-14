@@ -597,10 +597,13 @@ the format:</p>
 <p>They can usually be easily copied from the hosting service repo webpage.
 To compute the checksum, you must first download the archive. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ git archive --format=zip --output=foo-v1.0.1.zip --remote=git@gitlab.com/me/foo.git v1.0.1
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com/me/foo.git v1.0.1
 $ openssl sha256 foo-v1.0.1.zip
 </pre></div>
 </div>
+<p>Be sure to use a format that is supported by both the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool and
+the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> command (the format is inferred from the
+<code class="docutils literal notranslate"><span class="pre">--output</span></code> option).</p>
 </section>
 <section id="multiple-pack-versions">
 <h2>Multiple pack versions<a class="headerlink" href="#multiple-pack-versions" title="Permalink to this heading"></a></h2>
