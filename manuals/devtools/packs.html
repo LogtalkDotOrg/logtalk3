@@ -603,7 +603,10 @@ $ openssl sha256 foo-v1.0.1.zip
 </div>
 <p>Be sure to use a format that is supported by both the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool and
 the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> command (the format is inferred from the
-<code class="docutils literal notranslate"><span class="pre">--output</span></code> option).</p>
+<code class="docutils literal notranslate"><span class="pre">--output</span></code> option). Do not download the archive from the web interface
+of the git hosting service in order to compute the checksum. Different
+implementations of the archiving and compressing algorithms may be used
+resulting in mismatched checksums.</p>
 </section>
 <section id="multiple-pack-versions">
 <h2>Multiple pack versions<a class="headerlink" href="#multiple-pack-versions" title="Permalink to this heading"></a></h2>

@@ -496,6 +496,10 @@ compute the checksum, you must first download the archive. For example:
 
 Be sure to use a format that is supported by both the `packs` tool and the
 `git archive` command (the format is inferred from the `--output` option).
+Do not download the archive from the web interface of the git hosting
+service in order to compute the checksum. Different implementations
+of the archiving and compressing algorithms may be used resulting in
+mismatched checksums.
 
 
 Multiple pack versions
