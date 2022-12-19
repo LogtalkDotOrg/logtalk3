@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.61.0 - December ??, 2022
+3.61.0 - December 20, 2022
 ==========================
 
 Prolog adapter and integration files
