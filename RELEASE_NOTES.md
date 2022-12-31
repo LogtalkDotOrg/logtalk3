@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.61.0 - January ??, 2023
+=========================
+
+Tests
+-----
+
+* ADDED: Additional test for the Prolog standard `unify_with_occurs_check/2`
+predicate.
+
+
 3.61.0 - December 20, 2022
 ==========================
 

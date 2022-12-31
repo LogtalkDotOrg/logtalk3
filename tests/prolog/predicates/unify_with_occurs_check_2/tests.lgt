@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-03-13,
+		date is 2022-12-31,
 		comment is 'Unit tests for the ISO Prolog standard unify_with_occurs_check/2 built-in predicate.'
 	]).
 
@@ -100,5 +100,8 @@
 			{L1 = [1,2,3| L1], L2 = [A,B,C| L2], unify_with_occurs_check(L1, L2)}.
 
 	:- endif.
+
+	test(lgt_unify_with_occurs_check_2_19, true(X == Y)) :-
+		{unify_with_occurs_check(f(X,X), f(Y,Y))}.
 
 :- end_object.
