@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on September 21, 2022
+##   Last updated on January 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -178,6 +178,8 @@ $logtalk "$contributions_goal"
 $logtalk "$ports_goal"
 
 "$LOGTALKHOME/tools/diagrams/lgt2svg.sh"
+lgt2svg_exit=$?
+
 rm ./*.dot
 
-exit 0
+exit $lgt2svg_exit

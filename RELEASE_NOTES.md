@@ -32,6 +32,9 @@ _____
 alert the user when one or more files could not be converted (usually due
 to Graphviz crashes).
 
+* UPDATED: The `update_svg_diagrams.sh` script to exit with the same code
+as the called `lgt2svg.sh` script.
+
 Tests
 -----
 
