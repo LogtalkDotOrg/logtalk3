@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on April 27, 2022
+##   Last updated on January 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -82,7 +82,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -141,8 +141,10 @@ fi
 
 
 echo "Converting .dot files to .svg files ..."
+failed_flag=0
 count=$(ls -1 ./*.dot 2>/dev/null | wc -l)
-if [ $count != 0 ] ; then
+
+if [ "$count" != 0 ] ; then
 	cp "$LOGTALKUSER/tools/diagrams/zoom.png" .
 	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 	for file in ./*.dot; do
@@ -150,7 +152,7 @@ if [ $count != 0 ] ; then
 		converted=1
 		counter=24
 		while [ $converted -eq 1 ] && [ $counter -gt 0 ] ; do
-			$command -q -Tsvg -Gfontnames=svg -o "${file%.*}.svg" ${args[@]} "$file" 2>/dev/null | cat
+			$command -q -Tsvg -Gfontnames=svg -o "${file%.*}.svg" "${args[@]}" "$file" 2>/dev/null | cat
 			if [ "${PIPESTATUS[0]}" == 0 ] ; then
 				converted=0
 			fi
@@ -158,16 +160,23 @@ if [ $count != 0 ] ; then
 			echo -n "."
 		done
 		if [ $counter == 0 ] ; then
+			failed_flag=1
 			echo " failed"
 		else
 			echo " done"
 		fi
 	done
-	echo "Conversion done"
-	echo
 else
 	echo "No .dot files exist in the current directory!"
 	echo
 fi
 
-exit 0
+if [ "$failed_flag" == 0 ] ; then
+	echo "Conversion done"
+	echo
+	exit 0
+else
+	echo "One or more files could not be converted"
+	echo
+	exit 1
+fi

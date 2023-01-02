@@ -25,6 +25,13 @@ RELEASE NOTES
 3.61.0 - January ??, 2023
 =========================
 
+Tools
+_____
+
+* IMPROVED: The `diagrams` tool `lgt2svg.sh` and `lgt2svg.ps1` scripts to
+alert the user when one or more files could not be converted (usually due
+to Graphviz crashes).
+
 Tests
 -----
 

@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on October 10, 2022
+##   Last updated on January 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -36,7 +36,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.9")
+	Write-Output ($myName + " 0.10")
 }
 
 function Get-Logtalkhome {
@@ -155,6 +155,7 @@ if (Test-Path $env:LOGTALKUSER) {
 }
 
 Write-Output "Converting .dot files to .svg files ..."
+$failed_flag=0
 $count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | %{$_.Count}
 
 if ($count -gt 0) {
@@ -178,14 +179,21 @@ if ($count -gt 0) {
 			Write-Host -NoNewline "."
 		}
 		if ($counter -eq 0) {
+			$failed_flag = 1
 			Write-Output " failed"
 		} else {
 			Write-Output " done"
 		}
 	}
+} else {
+	Write-Output "No .dot files exist in the current directory!"
+	Write-Output ""
+}
+
+if ($failed_flag -eq 0) {
 	Write-Output "Conversion done"
 	Write-Output ""
 } else {
-	Write-Output "No .dot files exist in the current directory!"
+	Write-Output "One or more files could not be converted"
 	Write-Output ""
 }
