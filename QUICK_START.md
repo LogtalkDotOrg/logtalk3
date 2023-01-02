@@ -59,6 +59,7 @@ Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
 The first run of the JIProlog and XSB integration shortcuts may require
 administrator privileges depending on the JIProlog and XSB installation
 (right-click on the shortcut and select the "Run as administrator" option).
+PowerShell versions of the scripts listed above are also available.
 
 If you get an unexpected failure when using one of the Prolog integration
 scripts or shortcuts, consult the [`adapters/NOTES.md`](adapters/NOTES.md)

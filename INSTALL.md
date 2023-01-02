@@ -232,10 +232,10 @@ Automatically loading Logtalk at Prolog startup
 -----------------------------------------------
 
 The `$LOGTALKHOME/integration` sub-directory contains shell scripts for running
-Logtalk with all supported backend Prolog compilers. You can use these scripts
-as examples when creating initialization files for other Prolog compilers. Be
-sure to read the `adapters/NOTES.md` file notes on the Prolog compilers that
-you intend to use.
+Logtalk with all supported backend Prolog compilers (see the `QUICK_START.md`
+file for the script names). You can use these scripts as examples when creating
+initialization files for other Prolog compilers. Be sure to read the
+`adapters/NOTES.md` file notes on the Prolog compilers that you intend to use.
 
 There's also a `logtalk_backend_select` script that creates a `logtalk` alias
 to the Prolog integration script of your choice.
