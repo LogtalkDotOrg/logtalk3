@@ -272,10 +272,14 @@ logtalk<span class="o">::</span>message_tokens(redefining_entity(<span class="nv
 in between; this token is ignored when it’s not the first in the list
 of tokens</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">flush</span></code></dt><dd><p>Flush the output stream (by calling the <code class="docutils literal notranslate"><span class="pre">flush_output/1</span></code> standard
-predicate)</p>
+<dt><code class="docutils literal notranslate"><span class="pre">tab(Expression)</span></code></dt><dd><p>Evaluate the argument as an arithmetic expression and write the resulting
+number of spaces; this token is ignored when the number of spaces is not
+positive</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">nl</span></code></dt><dd><p>Change line in the output stream</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">flush</span></code></dt><dd><p>Flush the output stream (by calling the <code class="docutils literal notranslate"><span class="pre">flush_output/1</span></code> standard
+predicate)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">Format</span></code> must be an atom and <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> must be a list of format
 arguments (the token arguments are passed to a call to the

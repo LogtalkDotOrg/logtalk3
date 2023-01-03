@@ -171,11 +171,15 @@ The following tokens can be used when translating a message:
    Signals a following part to a multi-part message with no line break
    in between; this token is ignored when it's not the first in the list
    of tokens
+``tab(Expression)``
+   Evaluate the argument as an arithmetic expression and write the resulting
+   number of spaces; this token is ignored when the number of spaces is not
+   positive
+``nl``
+   Change line in the output stream
 ``flush``
    Flush the output stream (by calling the ``flush_output/1`` standard
    predicate)
-``nl``
-   Change line in the output stream
 ``Format-Arguments``
    ``Format`` must be an atom and ``Arguments`` must be a list of format
    arguments (the token arguments are passed to a call to the

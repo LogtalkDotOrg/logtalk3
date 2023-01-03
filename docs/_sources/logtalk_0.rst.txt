@@ -11,8 +11,8 @@
 Built-in object providing message printing, debugging, library, source file, and hacking methods.
 
 | **Author:** Paulo Moura
-| **Version:** 1:20:0
-| **Date:** 2021-11-15
+| **Version:** 1:21:0
+| **Date:** 2023-01-03
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -37,6 +37,7 @@ Built-in object providing message printing, debugging, library, source file, and
    - Meta message ``Format+Arguments``: By default, the message is printed as passed to the ``format/2`` predicate.
    - Meta message ``List``: By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.
    - Meta message ``Title::List``: By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.
+   - Message tokens: ``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.
 
 | **Inherited public predicates:**
 |    (none)
@@ -92,7 +93,7 @@ Print the messages tokens to the given stream, prefixing each line with the spec
 ``print_message_token/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-User-defined hook predicate for printing a message token (``at_same_line``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``).
+User-defined hook predicate for printing a message token (see this object remarks).
 
 | **Compilation flags:**
 |    ``dynamic, multifile``
@@ -111,7 +112,7 @@ User-defined hook predicate for printing a message token (``at_same_line``, ``nl
 ``message_tokens//2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-User-defined hook grammar rule for converting a message into a list of tokens (``at_same_line``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``).
+User-defined hook grammar rule for converting a message into a list of tokens (see this object remarks).
 
 | **Compilation flags:**
 |    ``dynamic, multifile``

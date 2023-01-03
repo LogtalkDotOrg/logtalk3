@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:20:0,
+		version is 1:21:0,
 		author is 'Paulo Moura',
-		date is 2021-11-15,
+		date is 2023-01-03,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -45,7 +45,8 @@
 			'Meta message ``Key-Value``' - 'By default, the message is printed as "Key: Value" followed by a newline. The key is printed as passed to the ``write/1`` predicate while the value is printed as passed to the ``writeq/1`` predicate.',
 			'Meta message ``Format+Arguments``' - 'By default, the message is printed as passed to the ``format/2`` predicate.',
 			'Meta message ``List``' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.',
-			'Meta message ``Title::List``' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.'
+			'Meta message ``Title::List``' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.',
+			'Message tokens' - '``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.'
 		]
 	]).
 
@@ -80,7 +81,7 @@
 	:- dynamic(print_message_token/4).
 	:- mode(print_message_token(@stream_or_alias, @atom, @nonvar, @list(nonvar)), zero_or_one).
 	:- info(print_message_token/4, [
-		comment is 'User-defined hook predicate for printing a message token (``at_same_line``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``).',
+		comment is 'User-defined hook predicate for printing a message token (see this object remarks).',
 		argnames is ['Stream', 'Prefix', 'Token', 'Tokens']
 	]).
 
@@ -89,7 +90,7 @@
 	:- dynamic(message_tokens//2).
 	:- mode(message_tokens(+nonvar, +nonvar), zero_or_one).
 	:- info(message_tokens//2, [
-		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (``at_same_line``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``).',
+		comment is 'User-defined hook grammar rule for converting a message into a list of tokens (see this object remarks).',
 		argnames is ['Message', 'Component']
 	]).
 
@@ -399,6 +400,9 @@
 	% if a token unifies with (-), assume it's a variable and ignore it
 	default_print_message_token((-), _, _, _).
 	default_print_message_token(at_same_line, _, _, _).
+	default_print_message_token(tab(Expression), _, Stream, _) :-
+		N is Expression,
+		write_spaces(N, Stream).
 	default_print_message_token(nl, Tokens, Stream, Prefix) :-
 		(	Tokens == [] ->
 			nl(Stream)
@@ -419,6 +423,14 @@
 		{'$lgt_format'(Stream, Format, Arguments)}.
 	default_print_message_token(begin(_, _), _, _, _).
 	default_print_message_token(end(_), _, _, _).
+
+	write_spaces(N, Stream) :-
+		N > 0,
+		!,
+		put_char(Stream, ' '),
+		M is N - 1,
+		write_spaces(M, Stream).
+	write_spaces(_, _).
 
 	default_message_tokens(@Message) -->
 		['~w'-[Message], nl].
