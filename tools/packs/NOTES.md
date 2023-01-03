@@ -476,7 +476,7 @@ installation, providing a better user experience. For example:
 	version(
 		1:0:1,
 		stable,
-		'git@gitlab.com/me/foo.git/v1.0.1.zip',
+		'git@gitlab.com:me/foo.git/v1.0.1.zip',
 		sha256 - '0894c7cdb8968b6bbcf00e3673c1c16cfa98232573af30ceddda207b20a7a207',
 		[logtalk @>= 3:36:0],
 		all
@@ -491,7 +491,7 @@ a supported archive extension. SSH repo cloning URLs use the format:
 They can usually be easily copied from the hosting service repo webpage. To
 compute the checksum, you must first download the archive. For example:
 
-	$ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com/me/foo.git v1.0.1
+	$ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com:me/foo.git v1.0.1
 	$ openssl sha256 foo-v1.0.1.zip
 
 Be sure to use a format that is supported by both the `packs` tool and the

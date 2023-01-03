@@ -580,7 +580,7 @@ pack installation, providing a better user experience. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>version(
     <span class="m">1</span><span class="o">:</span><span class="m">0</span><span class="o">:</span><span class="m">1</span>,
     stable,
-    <span class="s">&#39;git@gitlab.com/me/foo.git/v1.0.1.zip&#39;</span>,
+    <span class="s">&#39;git@gitlab.com:me/foo.git/v1.0.1.zip&#39;</span>,
     sha256 <span class="o">-</span> <span class="s">&#39;0894c7cdb8968b6bbcf00e3673c1c16cfa98232573af30ceddda207b20a7a207&#39;</span>,
     [logtalk <span class="o">@&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
     all
@@ -597,7 +597,7 @@ the format:</p>
 <p>They can usually be easily copied from the hosting service repo webpage.
 To compute the checksum, you must first download the archive. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com/me/foo.git v1.0.1
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com:me/foo.git v1.0.1
 $ openssl sha256 foo-v1.0.1.zip
 </pre></div>
 </div>
