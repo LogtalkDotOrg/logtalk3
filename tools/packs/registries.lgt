@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:51:0,
+		version is 0:52:0,
 		author is 'Paulo Moura',
-		date is 2022-11-20,
+		date is 2023-01-04,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -52,11 +52,13 @@
 	:- public(add/3).
 	:- mode(add(+atom, +atom, ++list(compound)), zero_or_one).
 	:- info(add/3, [
-		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.',
+		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined but not using ``update(true)`` or ``force(true)`` options. A ``file://`` URL can be used for a local directory.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
 			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.',
-			'``force(Boolean)`` option' - 'Force re-installation if the registry is already defined. Default is ``false``.',
+			'HTTPS URLs' - 'Must end with either a ``.git`` extension or an archive extension.',
+			'``update(Boolean)`` option' - 'Update registry if already defined. Default is ``false``. Overrides the ``force/1`` option.',
+			'``force(Boolean)`` option' - 'Force registry re-installation if already defined by first deleting the previous installation. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
@@ -317,6 +319,11 @@
 		;	URLFixed = URL
 		).
 
+	add_registry(Registry, _, Options) :-
+		registry_object(Registry, _),
+		^^option(update(true), Options),
+		!,
+		update_registry(Registry, Options).
 	add_registry(Registry, URL, Options) :-
 		print_message(comment, packs, adding_registry(Registry)),
 		(	registry_object(Registry, _) ->
@@ -441,6 +448,25 @@
 		check(atom, Registry),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
+		update_registry(Registry, Options).
+
+	update(Registry) :-
+		update(Registry, []).
+
+	% use a failure-driven loop so that we don't stop updating
+	% the defined registries if the update for one of them fails
+	update :-
+		print_message(comment, packs, @'Updating defined registries:'),
+		defined(Registry, URL, _, Pinned),
+		(	Pinned == true ->
+			print_message(comment, packs, pinned_registry(Registry, URL))
+		;	update(Registry, [])
+		),
+		fail.
+	update :-
+		print_message(comment, packs, @'Registries updating completed').
+
+	update_registry(Registry, Options) :-
 		(	registry_object(Registry, RegistryObject) ->
 			(	pinned(Registry),
 				^^option(force(false), Options) ->
@@ -476,22 +502,6 @@
 		;	print_message(error, packs, unknown_registry(Registry)),
 			fail
 		).
-
-	update(Registry) :-
-		update(Registry, []).
-
-	% use a failure-driven loop so that we don't stop updating
-	% the defined registries if the update for one of them fails
-	update :-
-		print_message(comment, packs, @'Updating defined registries:'),
-		defined(Registry, URL, _, Pinned),
-		(	Pinned == true ->
-			print_message(comment, packs, pinned_registry(Registry, URL))
-		;	update(Registry, [])
-		),
-		fail.
-	update :-
-		print_message(comment, packs, @'Registries updating completed').
 
 	update_directory(Registry, URL, Path, Updated, Options) :-
 		^^decode_url_spaces(URL, Decoded),
@@ -591,6 +601,7 @@
 
 	default_option(verbose(false)).
 	default_option(clean(false)).
+	default_option(update(false)).
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
@@ -603,6 +614,8 @@
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(clean(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(update(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).

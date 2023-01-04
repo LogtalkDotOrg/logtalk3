@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:57:0
-| **Date:** 2022-11-20
+| **Version:** 0:58:0
+| **Date:** 2023-01-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -287,7 +287,7 @@ Searches packs whose name or description includes the search term (case sensitiv
 ``install/4``
 ^^^^^^^^^^^^^
 
-Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using a ``force(true)`` option. Fails also if the pack version is unknown.
+Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using ``update(true)`` or ``force(true)`` options. Fails also if the pack version is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -299,7 +299,8 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
 
 | **Remarks:**
 
-    - ``force(Boolean)`` option: Force re-installation if the pack is already installed. Default is ``false``.
+    - ``update(Boolean)`` option: Update pack if already installed. Default is ``false``. Overrides the ``force/1`` option.
+    - ``force(Boolean)`` option: Force pack re-installation if already installed. Default is ``false``.
     - ``clean(Boolean)`` option: Clean pack archive after installation. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose installing steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.

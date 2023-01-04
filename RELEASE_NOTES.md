@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 Tools
 _____
 
+* ADDED: New `update/1` option to the `packs` tool registry adding and pack
+installation predicates.
+
 * IMPROVED: The `diagrams` tool `lgt2svg.sh` and `lgt2svg.ps1` scripts to
 alert the user when one or more files could not be converted (usually due
 to Graphviz crashes).

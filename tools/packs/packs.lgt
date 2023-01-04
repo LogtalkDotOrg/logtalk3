@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:57:0,
+		version is 0:58:0,
 		author is 'Paulo Moura',
-		date is 2022-11-20,
+		date is 2023-01-04,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -119,10 +119,11 @@
 	:- public(install/4).
 	:- mode(install(+atom, +atom, ++compound, ++list(compound)), zero_or_one).
 	:- info(install/4, [
-		comment is 'Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using a ``force(true)`` option. Fails also if the pack version is unknown.',
+		comment is 'Installs a new pack using the specified options. Fails if the pack is unknown or already installed but not using ``update(true)`` or ``force(true)`` options. Fails also if the pack version is unknown.',
 		argnames is ['Registry', 'Pack', 'Version', 'Options'],
 		remarks is [
-			'``force(Boolean)`` option' - 'Force re-installation if the pack is already installed. Default is ``false``.',
+			'``update(Boolean)`` option' - 'Update pack if already installed. Default is ``false``. Overrides the ``force/1`` option.',
+			'``force(Boolean)`` option' - 'Force pack re-installation if already installed. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after installation. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose installing steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
@@ -518,7 +519,10 @@
 		check(pack_version, Version),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	installed_pack(_, Pack, _, _),
+		(	installed_pack(_, Pack, OldVersion, _),
+			^^option(update(true), Options) ->
+			update_pack(Registry, Pack, OldVersion, Version, Options)
+		;	installed_pack(_, Pack, _, _),
 			^^option(force(false), Options) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
@@ -837,7 +841,7 @@
 
 	update_pack(Registry, Pack, Version, NewVersion, Options) :-
 		(	Version == NewVersion ->
-			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion))
+			print_message(comment, packs, up_to_date_pack(Registry, Pack, NewVersion))
 		;	pack_object(Pack, PackObject),
 			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
@@ -1723,6 +1727,7 @@
 
 	default_option(verbose(false)).
 	default_option(clean(false)).
+	default_option(update(false)).
 	% the restore/1-2 predicates use force(true) instead
 	default_option(force(false)).
 	default_option(checksum(true)).
@@ -1736,6 +1741,8 @@
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(clean(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(update(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).

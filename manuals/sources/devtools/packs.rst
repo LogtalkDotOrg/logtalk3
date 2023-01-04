@@ -359,6 +359,18 @@ name in the registry specification object. For example:
            'https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip'
         ).
 
+When a registry may be already defined, you can use the ``update(true)``
+option to ensure that the registry will be updated to its latest
+definition:
+
+::
+
+   | ?- registries::add(
+           jdoe_awesome_packs,
+           'https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip',
+           [update(true)]
+        ).
+
 The added registries can be listed using the ``registries::list/0``
 predicate:
 
@@ -728,6 +740,7 @@ predicates that accept a list of options:
 
 -  ``verbose(Boolean)`` (default is ``false``)
 -  ``clean(Boolean)`` (default is ``false``)
+-  ``update(Boolean)`` (default is ``false``)
 -  ``force(Boolean)`` (default is ``false``)
 -  ``checksum(Boolean)`` (default is ``true``)
 -  ``checksig(Boolean)`` (default is ``false``)
@@ -735,6 +748,14 @@ predicates that accept a list of options:
 -  ``curl(Atom)`` (extra command-line options; default is ``''``)
 -  ``gpg(Atom)`` (extra command-line options; default is ``''``)
 -  ``tar(Atom)`` (extra command-line options; default is ``''``)
+
+When a pack may be already installed, you can use the ``update(true)``
+option to ensure that the installation will by updated to the specified
+version:
+
+::
+
+   | ?- packs::install(foo, bar, 1:1:2, [update(true)]).
 
 When using a ``checksig(true)`` option to check a pack signature, is
 strongly advised that you also use the ``verbose(true)`` option. For

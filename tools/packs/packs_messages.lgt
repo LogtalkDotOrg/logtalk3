@@ -111,7 +111,7 @@
 	message_tokens(up_to_date_registry(Registry, URL)) -->
 		['Registry is up-to-date: ~q (~w)'-[Registry, URL], nl].
 
-	% registr delete messages
+	% registry delete messages
 
 	message_tokens(deleting_registry(Registry)) -->
 		['Deleting registry: ~q'-[Registry], nl].

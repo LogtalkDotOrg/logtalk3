@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:21:0,
 		author is 'Paulo Moura',
-		date is 2022-02-30,
+		date is 2023-01-04,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -142,6 +142,12 @@
 		object_property(This, file(_, Directory)),
 		file_to_url(Directory, 'test_files/local_1_d', URL),
 		registries::add(URL).
+
+	test(packs_registries_add_3_01, true) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		file_to_url(Directory, 'test_files/local_1_d', URL),
+		registries::add(local_1_d, URL, [update(true)]).
 
 	test(packs_registries_defined_4_02, true(Registries == [local_1_d])) :-
 		findall(Registry, registries::defined(Registry, _, _, _), Registries).
@@ -261,6 +267,9 @@
 	test(packs_packs_install_3_02, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
+	test(packs_packs_install_3_03, true) :-
+		packs::install(local_1_d, foo, 2:0:0, [update(true)]).
+
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
 
@@ -273,6 +282,8 @@
 		packs::update(baz, [force(true)]).
 
 	test(packs_packs_update_3_01, true) :-
+		packs::uninstall(foo),
+		packs::install(local_1_d, foo, 1:0:0),
 		packs::update(foo, 2:0:0, [clean(true)]).
 
 	% clean pack archives
