@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on November 23, 2022
+##   Last updated on January 7, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -168,6 +168,7 @@ Foreach-Object {
 .\make.bat latexpdf
 .\make.bat epub
 .\make.bat info
+#.\make.bat linkcheck
 
 (Get-Content _build/html/contributions/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/contributions/index.html
 (Get-Content _build/html/devtools/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/devtools/index.html

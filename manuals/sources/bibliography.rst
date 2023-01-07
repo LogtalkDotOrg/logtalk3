@@ -32,7 +32,7 @@
    Belli, F., Jack, O., Naish, L.
    Technical Report 92/2, Department of Electrical and Electronics
    Engineering, University of Paderborn, Germany
-   URL: http://www.cs.mu.oz.au/~lee/papers/oolp/
+   URL: https://lee-naish.github.io/papers/oolp/index.html
 
 .. [Block89]
    An Extended Frame Language
@@ -90,20 +90,20 @@
    Davison, A.
    Tech Report 92/3, Dept. of Computer Science, University of Melbourne,
    Australia
-   URL: http://www.cs.mu.oz.au/tr_db/mu_92_03.ps.gz
+   URL: https://catalogue.nla.gov.au/Record/772526
 
 .. [Davison93]
    The deductive and object oriented features of BeBOP
    Davison, A.
    Tech Report 93/6, Dept. of Computer Science, University of Melbourne,
    Australia
-   URL:\ http://www.cs.mu.oz.au/tr_db/mu_93_06.ps.gz
+   URL: https://catalogue.nla.gov.au/Record/1273317
 
 .. [Delzanno97]
    Logic and Object-Oriented Programming in Linear Logic
    Delzanno, G.
    Ph.D. Thesis, University of Pisa, Italy
-   URL:\ http://www.mpi-sb.mpg.de/~delzanno/
+   URL: https://opac.bncf.firenze.sbn.it/bncf-prod/resource?uri=BVE0136144
 
 .. [Dony90]
    Exception Handling and Object-Oriented Programming: Towards a

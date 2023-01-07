@@ -534,7 +534,7 @@ atom, `''`, as a prefix. As an example, consider the Logtalk library. Its
 source code is available from a GitHub repository and its documentation
 is published in the Logtalk website. The relevant URLs in this case are:
 
-- https://github.com/LogtalkDotOrg/logtalk3/tree/ (source code)
+- https://github.com/LogtalkDotOrg/logtalk3/ (source code)
 - https://logtalk.org/library/ (API documentation)
 
 Git source code URLs should include the commit SHA1 to ensure that entity
@@ -543,7 +543,7 @@ changes in later commits. Assuming a `GitHub` variable bound to the SHA1
 commit URL we want to reference, an inheritance diagram can be generated
 using the goal:
 
-	| ?- GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/tree/...',
+	| ?- GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/commit/...',
 	     APIDocs = 'https://logtalk.org/library/',
 	     logtalk_load(diagrams(loader)),
 	     set_logtalk_flag(source_data, on),
