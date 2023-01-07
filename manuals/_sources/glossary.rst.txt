@@ -283,10 +283,8 @@ Glossary
 
    doclet object
       An object specifying the steps necessary to (re)generate the API
-      documentation for a project. See the
-      `doclet <https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/doclet/NOTES.md>`_
-      and `lgtdoc <https://github.com/LogtalkDotOrg/logtalk3/tree/master/tools/lgtdoc/NOTES.md>`_
-      tools for details.
+      documentation for a project. See the :doc:`devtools/doclet`
+      and :doc:`devtools/lgtdoc/` tools for details.
 
    hook object
       An object, implementing the :ref:`expanding <apis:expanding/0>` built-in

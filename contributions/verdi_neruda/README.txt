@@ -88,7 +88,7 @@ such as CPU-time as well.
 
 Visit the Verdi Neruda GitHub www-page at:
 
-http://joelbyte.github.com/verdi-neruda/
+https://github.com/Joelbyte/verdi-neruda
 
 4. INSTALLATION AND RUNNING
 

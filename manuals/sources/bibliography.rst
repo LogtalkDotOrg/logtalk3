@@ -219,7 +219,7 @@
 .. [SICStus95]
    SICStus Prolog Manual
    SICStus
-   URL: http://www.sics.se/ps/sicstus.html
+   URL: https://sicstus.sics.se
 
 .. [Shan_et_al_93]
    Is Multiple Inheritance Essential to OOP? (Panel)

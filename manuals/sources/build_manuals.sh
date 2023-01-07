@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on November 23, 2022
+##   Last updated on January 7, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -165,6 +165,7 @@ make html
 make latexpdf
 make epub
 make info
+#make linkcheck
 
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/contributions/index.html
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/devtools/index.html

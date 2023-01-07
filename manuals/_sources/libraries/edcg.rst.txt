@@ -6,7 +6,7 @@
 This library provides a Logtalk port of the Peter Van Roy's extended DCG
 implementation. For full documentation on EDCGs, see:
 
-https://www.info.ucl.ac.be/%7Epvr/edcg.html
+https://www.info.ucl.ac.be/~pvr/edcg.html
 
 This Logtalk version defines a hook object, ``edcg``. Source files
 defining EDCGs must be compiled using the compiler option

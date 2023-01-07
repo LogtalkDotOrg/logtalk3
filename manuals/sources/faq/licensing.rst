@@ -38,7 +38,7 @@ Can Logtalk be used in commercial applications?
 -----------------------------------------------
 
 Yes, the Apache License 2.0 allows commercial use. See e.g. the
-`Apache License and Distribution FAQ <http://www.apache.org/foundation/license-faq.html>`_.
+`Apache License and Distribution FAQ <https://www.apache.org/foundation/license-faq.html>`_.
 
 .. _faq_licensing_combining:
 

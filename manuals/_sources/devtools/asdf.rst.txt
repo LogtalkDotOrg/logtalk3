@@ -3,7 +3,7 @@
 ``asdf``
 ========
 
-A Logtalk plugin for the `asdf <https://asdf-vm.com/#/>`__ extendable
+A Logtalk plugin for the `asdf <https://asdf-vm.com>`__ extendable
 version manager is available at:
 
 https://github.com/LogtalkDotOrg/asdf-logtalk

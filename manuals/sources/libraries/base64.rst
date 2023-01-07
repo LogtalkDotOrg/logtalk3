@@ -7,7 +7,7 @@ The ``base64`` library provides predicates for parsing and generating
 data in the Base64 and Base64URL formats as per the specification found
 at:
 
-https://tools.ietf.org/html/rfc4648
+https://www.rfc-editor.org/rfc/rfc4648
 
 API documentation
 -----------------

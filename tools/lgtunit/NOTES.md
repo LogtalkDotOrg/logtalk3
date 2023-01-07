@@ -1355,7 +1355,7 @@ files on the test set directories.
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
-- http://allure.qatools.ru
+- https://docs.qameta.io/allure-report/
   (supports multiple reports)
 - https://github.com/Zir0-93/xunit-to-html
   (supports multiple test sets in a single report)

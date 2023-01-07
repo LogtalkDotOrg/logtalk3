@@ -30,6 +30,12 @@ Logtalk compiler and runtime
 
 * ADDED: Message token `tab(Expression)` to the `logtalk` built-in object.
 
+Documentation
+-------------
+
+* FIXED: Permanently redirected and broken hyperlinks in the Handbook and
+developer tools documentation.
+
 Tools
 _____
 

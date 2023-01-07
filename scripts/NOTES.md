@@ -93,7 +93,7 @@ also available in the Logtalk website.
 
 - `logtalk_allure_report.sh` and `logtalk_allure_report.ps1`  
 	Bash shell and PowerShell scripts for creating Allure test reports
-	(http://allure.qatools.ru); tested with Allure 2.13.8; these scripts
+	(https://docs.qameta.io/allure-report/); tested with Allure 2.13.8; these scripts
 	should be called after running the `logtalk_tester.*` scripts using
 	the `-f xunit` or `-f xunit_net_v2` command-line options
 

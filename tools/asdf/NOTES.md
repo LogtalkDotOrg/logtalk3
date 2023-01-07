@@ -21,7 +21,7 @@ ________________________________________________________________________
 `asdf`
 ======
 
-A Logtalk plugin for the [asdf](https://asdf-vm.com/#/) extendable version
+A Logtalk plugin for the [asdf](https://asdf-vm.com) extendable version
 manager is available at:
 
 https://github.com/LogtalkDotOrg/asdf-logtalk
