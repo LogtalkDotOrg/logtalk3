@@ -36,6 +36,11 @@ Documentation
 * FIXED: Permanently redirected and broken hyperlinks in the Handbook and
 developer tools documentation.
 
+Library
+-------
+
+* IMPROVED: Documentation of the `hook_objects` library.
+
 Tools
 _____
 

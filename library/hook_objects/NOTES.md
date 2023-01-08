@@ -153,12 +153,27 @@ the `(<<)/2` context-switching control construct. But it's usually better to
 define a protocol for the predicates being encapsulated and use instead the
 `object_wrapper_hook/1-2` objects.
 
-### Outputting term-expansion results to a stream
+### Outputting term-expansion results to a stream or a file
 
 Load the `write_to_stream_hook.lgt` file and using the `write_to_stream_hook(Stream)`
-or `write_to_stream_hook(Stream, Options)` hook object. The terms are not
+or `write_to_stream_hook(Stream, Options)` hook objects. Alternatively, you can
+load the `write_to_file_hook.lgt` file and use the `write_to_file_hook(File)`
+or `write_to_file_hook(File, Options)` hook objects. The terms are not
 modified and thus these hook objects may be used at any point in an expansion
-workflow.
+workflow. The terms are written followed by a period and a new line.
+
+For example, assume that we want to expand all terms in a `input.pl` source
+file, writing the resulting terms to a `output.pl` file, using the expansion
+rules defined in a `expansions` hook object. Taking advantage of the `hook_flows`
+library `hook_pipeline/1` object, we can write:
+
+	| ?- logtalk_compile(
+	         'input.pl',
+	         [hook(hook_pipeline([
+	             expansions,
+	             write_to_file_hook('output.pl')
+	         ]))]
+	     ).
 
 ### Printing entity predicate goals before or after calling them
 

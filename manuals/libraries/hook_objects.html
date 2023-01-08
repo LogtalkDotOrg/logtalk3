@@ -100,7 +100,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler">Expanding grammar rules into clauses independently of the compiler</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-the-expansion-rules-defined-in-a-prolog-module">Using the expansion rules defined in a Prolog module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#wrap-the-contents-of-a-plain-prolog-file-as-an-object">Wrap the contents of a plain Prolog file as an object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#outputting-term-expansion-results-to-a-stream">Outputting term-expansion results to a stream</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outputting-term-expansion-results-to-a-stream-or-a-file">Outputting term-expansion results to a stream or a file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#printing-entity-predicate-goals-before-or-after-calling-them">Printing entity predicate goals before or after calling them</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#suppressing-goals">Suppressing goals</a></li>
 </ul>
@@ -308,13 +308,30 @@ predicates using the <code class="docutils literal notranslate"><span class="pre
 it’s usually better to define a protocol for the predicates being
 encapsulated and use instead the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook/1-2</span></code> objects.</p>
 </section>
-<section id="outputting-term-expansion-results-to-a-stream">
-<h3>Outputting term-expansion results to a stream<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream" title="Permalink to this heading"></a></h3>
+<section id="outputting-term-expansion-results-to-a-stream-or-a-file">
+<h3>Outputting term-expansion results to a stream or a file<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream-or-a-file" title="Permalink to this heading"></a></h3>
 <p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and using the
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream)</span></code> or
-<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook object. The terms are not
-modified and thus these hook objects may be used at any point in an
-expansion workflow.</p>
+<code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook objects. Alternatively,
+you can load the <code class="docutils literal notranslate"><span class="pre">write_to_file_hook.lgt</span></code> file and use the
+<code class="docutils literal notranslate"><span class="pre">write_to_file_hook(File)</span></code> or <code class="docutils literal notranslate"><span class="pre">write_to_file_hook(File,</span> <span class="pre">Options)</span></code>
+hook objects. The terms are not modified and thus these hook objects may
+be used at any point in an expansion workflow. The terms are written
+followed by a period and a new line.</p>
+<p>For example, assume that we want to expand all terms in a <code class="docutils literal notranslate"><span class="pre">input.pl</span></code>
+source file, writing the resulting terms to a <code class="docutils literal notranslate"><span class="pre">output.pl</span></code> file, using
+the expansion rules defined in a <code class="docutils literal notranslate"><span class="pre">expansions</span></code> hook object. Taking
+advantage of the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library <code class="docutils literal notranslate"><span class="pre">hook_pipeline/1</span></code> object, we
+can write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_compile</span>(
+         <span class="s">&#39;input.pl&#39;</span>,
+         [hook(hook_pipeline([
+             expansions,
+             write_to_file_hook(<span class="s">&#39;output.pl&#39;</span>)
+         ]))]
+     ).
+</pre></div>
+</div>
 </section>
 <section id="printing-entity-predicate-goals-before-or-after-calling-them">
 <h3>Printing entity predicate goals before or after calling them<a class="headerlink" href="#printing-entity-predicate-goals-before-or-after-calling-them" title="Permalink to this heading"></a></h3>
