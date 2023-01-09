@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: "Install and setup"
-          command: "logtalk3/scripts/install.sh && logtalk_user_setup"
+          command: "scripts/install.sh && logtalk_user_setup"
       - run:
           name: "Run tests/logtalk tests"
           command: "cd ~/logtalk/tests/logtalk && logtalk_tester -p swi"
