@@ -11,7 +11,7 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:59:0
+| **Version:** 0:60:0
 | **Date:** 2023-01-09
 
 | **Compilation flags:**
@@ -58,6 +58,12 @@ Enumerates, by backtracking, all available packs.
 | **Mode and number of proofs:**
 |    ``available(?atom,?atom)`` - ``zero_or_more``
 
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -76,6 +82,12 @@ Lists all the packs that are available for installation from the given registry.
 |    ``available(Registry)``
 | **Mode and number of proofs:**
 |    ``available(+atom)`` - ``one``
+
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
 
 
 ------------
@@ -113,6 +125,16 @@ Enumerates by backtracking all installed packs.
 | **Mode and number of proofs:**
 |    ``installed(?atom,?atom,?compound,?boolean)`` - ``zero_or_more``
 
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``Pinned`` is neither a variable nor a boolean:
+|        ``type_error(boolean,Pinned)``
+
 
 ------------
 
@@ -131,6 +153,14 @@ Enumerates by backtracking all installed packs.
 |    ``installed(Registry,Pack,Version)``
 | **Mode and number of proofs:**
 |    ``installed(?atom,?atom,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
 
 
 ------------
@@ -168,6 +198,16 @@ Enumerates by backtracking all installed but outdated packs (together with the c
 | **Mode and number of proofs:**
 |    ``outdated(?atom,?atom,?compound,?compound)`` - ``zero_or_more``
 
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is neither a variable nor a compound term:
+|        ``type_error(compound,Version)``
+|    ``LatestVersion`` is neither a variable nor a compound term:
+|        ``type_error(compound,LatestVersion)``
+
 
 ------------
 
@@ -186,6 +226,10 @@ Lists all the packs from the given registry that are installed but outdated.
 |    ``outdated(Registry)``
 | **Mode and number of proofs:**
 |    ``outdated(+atom)`` - ``one``
+
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
 
 
 ------------
@@ -223,6 +267,12 @@ Lists all the packs that are installed but whose registry is no longer defined.
 | **Mode and number of proofs:**
 |    ``orphaned(?atom,?atom)`` - ``zero_or_more``
 
+| **Exceptions:**
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -259,6 +309,16 @@ Returns a list of all available pack versions. Fails if the pack is unknown.
 | **Mode and number of proofs:**
 |    ``versions(+atom,+atom,-list)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -277,6 +337,16 @@ Describes a registered pack, including installed version if applicable. Fails if
 |    ``describe(Registry,Pack)``
 | **Mode and number of proofs:**
 |    ``describe(+atom,+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------
@@ -297,6 +367,12 @@ Describes a registered pack, including installed version if applicable. Fails if
 | **Mode and number of proofs:**
 |    ``describe(+atom)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -316,6 +392,12 @@ Searches packs whose name or description includes the search term (case sensitiv
 | **Mode and number of proofs:**
 |    ``search(+atom)`` - ``one``
 
+| **Exceptions:**
+|    ``Term`` is a variable:
+|        ``instantiation_error``
+|    ``Term`` is neither a variable nor an atom:
+|        ``type_error(atom,Term)``
+
 
 ------------
 
@@ -334,6 +416,30 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
 |    ``install(Registry,Pack,Version,Options)``
 | **Mode and number of proofs:**
 |    ``install(+atom,+atom,++compound,++list(compound))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is a variable:
+|        ``instantiation_error``
+|    ``Version`` is neither a variable nor a valid version:
+|        ``type_error(pack_version,Version)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 | **Remarks:**
 
@@ -366,6 +472,20 @@ Installs the specified version of a pack from the given registry using default o
 | **Mode and number of proofs:**
 |    ``install(+atom,+atom,?compound)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is a variable:
+|        ``instantiation_error``
+|    ``Version`` is neither a variable nor a valid version:
+|        ``type_error(pack_version,Version)``
+
 
 ------------
 
@@ -384,6 +504,16 @@ Installs the latest version of a pack from the given registry using default opti
 |    ``install(Registry,Pack)``
 | **Mode and number of proofs:**
 |    ``install(+atom,+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------
@@ -404,6 +534,12 @@ Installs a pack (if its name is unique among all registries) using default optio
 | **Mode and number of proofs:**
 |    ``install(+atom)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is not an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -422,6 +558,26 @@ Updates an outdated pack to the specified version using the specified options. F
 |    ``update(Pack,Version,Options)``
 | **Mode and number of proofs:**
 |    ``update(+atom,++callable,++list(callable))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Version`` is a variable:
+|        ``instantiation_error``
+|    ``Version`` is neither a variable nor a valid version:
+|        ``type_error(pack_version,Version)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 | **Remarks:**
 
@@ -453,6 +609,22 @@ Updates an outdated pack to its latest version using the specified options. Fail
 | **Mode and number of proofs:**
 |    ``update(+atom,++list(callable))`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 | **Remarks:**
 
     - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
@@ -482,6 +654,12 @@ Updates an outdated pack to its latest version using default options. Fails if t
 |    ``update(Pack)``
 | **Mode and number of proofs:**
 |    ``update(+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------
@@ -519,6 +697,22 @@ Uninstalls a pack using the specified options. Fails if the pack is unknown or n
 | **Mode and number of proofs:**
 |    ``uninstall(+atom,++list(compound))`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 | **Remarks:**
 
     - ``force(Boolean)`` option: Force deletion if the pack is pinned. Default is ``false``.
@@ -543,6 +737,12 @@ Uninstalls a pack using default options. Fails if the pack is pinned, have depen
 |    ``uninstall(Pack)``
 | **Mode and number of proofs:**
 |    ``uninstall(+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------
@@ -580,6 +780,16 @@ Cleans all pack archives. Fails if the the pack is unknown.
 | **Mode and number of proofs:**
 |    ``clean(+atom,+atom)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -598,6 +808,12 @@ Cleans all pack archives. Fails if the pack is not unknown.
 |    ``clean(Pack)``
 | **Mode and number of proofs:**
 |    ``clean(+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------
@@ -633,7 +849,25 @@ Saves a list of all installed packs and registries plus pinning status to a file
 | **Template:**
 |    ``save(File,Options)``
 | **Mode and number of proofs:**
-|    ``save(+atom,++list(compound))`` - ``one``
+|    ``save(+atom,++list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an existing file but cannot be written:
+|        ``permission_error(open,source_sink,File)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -652,7 +886,15 @@ Saves a list of all installed packs and their registries plus pinning status to 
 | **Template:**
 |    ``save(File)``
 | **Mode and number of proofs:**
-|    ``save(+atom)`` - ``one``
+|    ``save(+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an existing file but cannot be written:
+|        ``permission_error(open,source_sink,File)``
 
 
 ------------
@@ -671,7 +913,27 @@ Restores a list of registries and packs plus their pinning status from a file us
 | **Template:**
 |    ``restore(File,Options)``
 | **Mode and number of proofs:**
-|    ``restore(+atom,++list(compound))`` - ``zero_or_one``
+|    ``restore(+atom,++list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an existing file but cannot be read:
+|        ``permission_error(open,source_sink,File)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 | **Remarks:**
 
@@ -701,7 +963,17 @@ Restores a list of registries and packs plus their pinning status from a file us
 | **Template:**
 |    ``restore(File)``
 | **Mode and number of proofs:**
-|    ``restore(+atom)`` - ``zero_or_one``
+|    ``restore(+atom)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an existing file but cannot be read:
+|        ``permission_error(open,source_sink,File)``
 
 
 ------------
@@ -722,6 +994,16 @@ Returns a list of all installed packs that depend on the given pack from the giv
 | **Mode and number of proofs:**
 |    ``dependents(+atom,+atom,-list(atom))`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -740,6 +1022,16 @@ Prints a list of all installed packs that depend on the given pack from the give
 |    ``dependents(Registry,Pack)``
 | **Mode and number of proofs:**
 |    ``dependents(+atom,+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------
@@ -760,6 +1052,12 @@ Prints a list of all installed packs that depend on the given pack if unique fro
 | **Mode and number of proofs:**
 |    ``dependents(+atom)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -779,6 +1077,16 @@ Checks the pack specification. Fails if the pack is unknown or if linting detect
 | **Mode and number of proofs:**
 |    ``lint(+atom,+atom)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
+
 
 ------------
 
@@ -797,6 +1105,12 @@ Checks the pack specification. Fails if the pack is unknown, or available from m
 |    ``lint(Pack)``
 | **Mode and number of proofs:**
 |    ``lint(+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Pack`` is a variable:
+|        ``instantiation_error``
+|    ``Pack`` is neither a variable nor an atom:
+|        ``type_error(atom,Pack)``
 
 
 ------------

@@ -195,7 +195,7 @@
 <p>Pack handling predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:59:0</div>
+<div class="line"><strong>Version:</strong> 0:60:0</div>
 <div class="line"><strong>Date:</strong> 2023-01-09</div>
 </div>
 <div class="line-block">
@@ -303,6 +303,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">available(?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="available-1">
@@ -322,6 +335,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">available(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -362,6 +388,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">installed(?atom,?atom,?compound,?boolean)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Version)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pinned</span></code> is neither a variable nor a boolean:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(boolean,Pinned)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="installed-3">
@@ -381,6 +428,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">installed(?atom,?atom,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Version)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -421,6 +485,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">outdated(?atom,?atom,?compound,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Version)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">LatestVersion</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,LatestVersion)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="outdated-1">
@@ -440,6 +525,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">outdated(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -480,6 +574,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">orphaned(?atom,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="orphaned-0">
@@ -518,6 +625,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">versions(+atom,+atom,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="describe-2">
@@ -537,6 +665,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">describe(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -560,6 +709,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">describe(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="search-1">
@@ -581,6 +743,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">search(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Term</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Term)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="install-4">
@@ -600,6 +775,55 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">install(+atom,+atom,++compound,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is neither a variable nor a valid version:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pack_version,Version)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -639,6 +863,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">install(+atom,+atom,?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is neither a variable nor a valid version:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pack_version,Version)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="install-2">
@@ -658,6 +911,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">install(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -681,6 +955,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">install(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is not an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="update-3">
@@ -700,6 +987,47 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">update(+atom,++callable,++list(callable))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Version</span></code> is neither a variable nor a valid version:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(pack_version,Version)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -739,6 +1067,39 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -772,6 +1133,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">update(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -813,6 +1187,39 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
 </div>
 <blockquote>
@@ -841,6 +1248,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">uninstall(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -881,6 +1301,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="clean-1">
@@ -900,6 +1341,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -937,7 +1391,44 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">save(+atom,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">save(+atom,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be written:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -958,7 +1449,24 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">save(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">save(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be written:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -979,7 +1487,48 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">restore(+atom,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">restore(+atom,++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be read:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -1015,7 +1564,28 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">restore(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">restore(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be read:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1039,6 +1609,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dependents(+atom,+atom,-list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="dependents-2">
@@ -1058,6 +1649,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dependents(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1081,6 +1693,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dependents(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="lint-2">
@@ -1102,6 +1727,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">lint(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="lint-1">
@@ -1121,6 +1767,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">lint(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pack</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Pack)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

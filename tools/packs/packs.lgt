@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:59:0,
+		version is 0:60:0,
 		author is 'Paulo Moura',
 		date is 2023-01-09,
 		comment is 'Pack handling predicates.'
@@ -33,14 +33,22 @@
 	:- mode(available(?atom, ?atom), zero_or_more).
 	:- info(available/2, [
 		comment is 'Enumerates, by backtracking, all available packs.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(available/1).
 	:- mode(available(+atom), one).
 	:- info(available/1, [
 		comment is 'Lists all the packs that are available for installation from the given registry.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(available/0).
@@ -50,17 +58,28 @@
 	]).
 
 	:- public(installed/4).
-	:- mode(installed(?atom, ?atom, ?compound, ? boolean), zero_or_more).
+	:- mode(installed(?atom, ?atom, ?compound, ?boolean), zero_or_more).
 	:- info(installed/4, [
 		comment is 'Enumerates by backtracking all installed packs.',
-		argnames is ['Registry', 'Pack', 'Version', 'Pinned']
+		argnames is ['Registry', 'Pack', 'Version', 'Pinned'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``Pinned`` is neither a variable nor a boolean' - type_error(boolean, 'Pinned')
+		]
 	]).
 
 	:- public(installed/3).
 	:- mode(installed(?atom, ?atom, ?compound), zero_or_more).
 	:- info(installed/3, [
 		comment is 'Enumerates by backtracking all installed packs.',
-		argnames is ['Registry', 'Pack', 'Version']
+		argnames is ['Registry', 'Pack', 'Version'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version')
+		]
 	]).
 
 	:- public(installed/0).
@@ -73,14 +92,23 @@
 	:- mode(outdated(?atom, ?atom, ?compound, ?compound), zero_or_more).
 	:- info(outdated/4, [
 		comment is 'Enumerates by backtracking all installed but outdated packs (together with the current version installed and the latest version available).',
-		argnames is ['Registry', 'Pack', 'Version', 'LatestVersion']
+		argnames is ['Registry', 'Pack', 'Version', 'LatestVersion'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version'),
+			'``LatestVersion`` is neither a variable nor a compound term' - type_error(compound, 'LatestVersion')
+		]
 	]).
 
 	:- public(outdated/1).
 	:- mode(outdated(+atom), one).
 	:- info(outdated/1, [
 		comment is 'Lists all the packs from the given registry that are installed but outdated.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(outdated/0).
@@ -93,7 +121,11 @@
 	:- mode(orphaned(?atom, ?atom), zero_or_more).
 	:- info(orphaned/2, [
 		comment is 'Lists all the packs that are installed but whose registry is no longer defined.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(orphaned/0).
@@ -106,28 +138,48 @@
 	:- mode(versions(+atom, +atom, -list), zero_or_one).
 	:- info(versions/3, [
 		comment is 'Returns a list of all available pack versions. Fails if the pack is unknown.',
-		argnames is ['Registry', 'Pack', 'Versions']
+		argnames is ['Registry', 'Pack', 'Versions'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(describe/2).
 	:- mode(describe(+atom, +atom), zero_or_one).
 	:- info(describe/2, [
 		comment is 'Describes a registered pack, including installed version if applicable. Fails if the pack is unknown.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(describe/1).
 	:- mode(describe(+atom), zero_or_one).
 	:- info(describe/1, [
 		comment is 'Describes a registered pack, including installed version if applicable. Fails if the pack is unknown.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(search/1).
 	:- mode(search(+atom), one).
 	:- info(search/1, [
 		comment is 'Searches packs whose name or description includes the search term (case sensitive).',
-		argnames is ['Term']
+		argnames is ['Term'],
+		exceptions is [
+			'``Term`` is a variable' - instantiation_error,
+			'``Term`` is neither a variable nor an atom' - type_error(atom, 'Term')
+		]
 	]).
 
 	:- public(install/4).
@@ -145,6 +197,19 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is a variable' - instantiation_error,
+			'``Version`` is neither a variable nor a valid version' - type_error(pack_version, 'Version'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -152,21 +217,39 @@
 	:- mode(install(+atom, +atom, ?compound), zero_or_one).
 	:- info(install/3, [
 		comment is 'Installs the specified version of a pack from the given registry using default options. Fails if the pack is already installed or unknown. Fails also if the pack version is unknown.',
-		argnames is ['Registry', 'Pack', 'Version']
+		argnames is ['Registry', 'Pack', 'Version'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is a variable' - instantiation_error,
+			'``Version`` is neither a variable nor a valid version' - type_error(pack_version, 'Version')
+		]
 	]).
 
 	:- public(install/2).
 	:- mode(install(+atom, +atom), zero_or_one).
 	:- info(install/2, [
 		comment is 'Installs the latest version of a pack from the given registry using default options. Fails if the pack is already installed or unknown.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(install/1).
 	:- mode(install(+atom), zero_or_one).
 	:- info(install/1, [
 		comment is 'Installs a pack (if its name is unique among all registries) using default options. Fails if the pack is already installed or unknown. Fails also if the pack is available from multiple registries.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is not an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(update/3).
@@ -183,6 +266,17 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Version`` is a variable' - instantiation_error,
+			'``Version`` is neither a variable nor a valid version' - type_error(pack_version, 'Version'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -200,6 +294,15 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -207,7 +310,11 @@
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
 		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(update/0).
@@ -225,6 +332,15 @@
 			'``force(Boolean)`` option' - 'Force deletion if the pack is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after deleting. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose uninstalling steps. Default is ``false``.'
+		],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -232,7 +348,11 @@
 	:- mode(uninstall(+atom), zero_or_one).
 	:- info(uninstall/1, [
 		comment is 'Uninstalls a pack using default options. Fails if the pack is pinned, have dependents, not installed, or unknown.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(uninstall/0).
@@ -245,14 +365,24 @@
 	:- mode(clean(+atom, +atom), zero_or_one).
 	:- info(clean/2, [
 		comment is 'Cleans all pack archives. Fails if the the pack is unknown.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(clean/1).
 	:- mode(clean(+atom), zero_or_one).
 	:- info(clean/1, [
 		comment is 'Cleans all pack archives. Fails if the pack is not unknown.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(clean/0).
@@ -262,21 +392,36 @@
 	]).
 
 	:- public(save/2).
-	:- mode(save(+atom, ++list(compound)), one).
+	:- mode(save(+atom, ++list(compound)), one_or_error).
 	:- info(save/2, [
 		comment is 'Saves a list of all installed packs and registries plus pinning status to a file using the given options. Registries without installed packs are saved when using the option ``save(all)`` and skipped when using the option ``save(installed)`` (default).',
-		argnames is ['File', 'Options']
+		argnames is ['File', 'Options'],
+		exceptions is [
+			'``File`` is a variable' - instantiation_error,
+			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
+			'``File`` is an existing file but cannot be written' - permission_error(open, source_sink, 'File'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(save/1).
-	:- mode(save(+atom), one).
+	:- mode(save(+atom), one_or_error).
 	:- info(save/1, [
 		comment is 'Saves a list of all installed packs and their registries plus pinning status to a file using default options.',
-		argnames is ['File']
+		argnames is ['File'],
+		exceptions is [
+			'``File`` is a variable' - instantiation_error,
+			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
+			'``File`` is an existing file but cannot be written' - permission_error(open, source_sink, 'File')
+		]
 	]).
 
 	:- public(restore/2).
-	:- mode(restore(+atom, ++list(compound)), zero_or_one).
+	:- mode(restore(+atom, ++list(compound)), zero_or_one_or_error).
 	:- info(restore/2, [
 		comment is 'Restores a list of registries and packs plus their pinning status from a file using the given options. Fails if restoring is not possible.',
 		argnames is ['File', 'Options'],
@@ -289,49 +434,92 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``File`` is a variable' - instantiation_error,
+			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
+			'``File`` is an atom but not an existing file' - existence_error(file, 'File'),
+			'``File`` is an existing file but cannot be read' - permission_error(open, source_sink, 'File'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
 	:- public(restore/1).
-	:- mode(restore(+atom), zero_or_one).
+	:- mode(restore(+atom), zero_or_one_or_error).
 	:- info(restore/1, [
 		comment is 'Restores a list of registries and packs plus their pinning status from a file using default options. Fails if restoring is not possible.',
-		argnames is ['File']
+		argnames is ['File'],
+		exceptions is [
+			'``File`` is a variable' - instantiation_error,
+			'``File`` is neither a variable nor an atom' - type_error(atom, 'File'),
+			'``File`` is an atom but not an existing file' - existence_error(file, 'File'),
+			'``File`` is an existing file but cannot be read' - permission_error(open, source_sink, 'File')
+		]
 	]).
 
 	:- public(dependents/3).
 	:- mode(dependents(+atom, +atom, -list(atom)), zero_or_one).
 	:- info(dependents/3, [
 		comment is 'Returns a list of all installed packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
-		argnames is ['Registry', 'Pack', 'Dependents']
+		argnames is ['Registry', 'Pack', 'Dependents'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(dependents/2).
 	:- mode(dependents(+atom, +atom), zero_or_one).
 	:- info(dependents/2, [
 		comment is 'Prints a list of all installed packs that depend on the given pack from the given registry. Fails if the pack is unknown.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(dependents/1).
 	:- mode(dependents(+atom), zero_or_one).
 	:- info(dependents/1, [
 		comment is 'Prints a list of all installed packs that depend on the given pack if unique from all defined registries. Fails if the pack is unknown or available from multiple registries.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(lint/2).
 	:- mode(lint(+atom, +atom), zero_or_one).
 	:- info(lint/2, [
 		comment is 'Checks the pack specification. Fails if the pack is unknown or if linting detects errors.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(lint/1).
 	:- mode(lint(+atom), zero_or_one).
 	:- info(lint/1, [
 		comment is 'Checks the pack specification. Fails if the pack is unknown, or available from multiple registries, or if linting detects errors.',
-		argnames is ['Pack']
+		argnames is ['Pack'],
+		exceptions is [
+			'``Pack`` is a variable' - instantiation_error,
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(lint/0).
@@ -424,6 +612,8 @@
 	% packs directory predicates
 
 	directory(Pack, Directory) :-
+		check(var_or(atom), Pack),
+		check(var_or(atom), Directory),
 		(	var(Pack) ->
 			implements_protocol(PackObject, pack_protocol),
 			PackObject::name(Pack)
@@ -438,11 +628,13 @@
 		directory_exists(Directory).
 
 	directory(Pack) :-
+		check(atom, Pack),
 		directory(Pack, Directory),
 		internal_os_path(Directory, OSDirectory),
 		print_message(information, packs, installation_directory(OSDirectory)).
 
 	prefix(Directory) :-
+		check(var_or(atom), Directory),
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, packs, Directory).
 
@@ -457,6 +649,7 @@
 		check(var_or(atom), Registry),
 		check(var_or(atom), Pack),
 		check(var_or(compound), Version),
+		check(var_or(boolean), Pinned),
 		installed_pack(Registry, Pack, Version, Pinned).
 
 	installed(Registry, Pack, Version) :-
@@ -479,6 +672,7 @@
 		check(var_or(atom), Registry),
 		check(var_or(atom), Pack),
 		check(var_or(compound), Version),
+		check(var_or(compound), LatestVersion),
 		outdated_pack(Registry, Pack, Version, LatestVersion).
 
 	outdated(Registry) :-
@@ -769,6 +963,7 @@
 	% pack readme predicates
 
 	readme(Pack, ReadMeFile) :-
+		check(var_or(atom), ReadMeFile),
 		directory(Pack, Directory),
 		^^readme_file_path(Directory, ReadMeFile).
 
@@ -985,6 +1180,7 @@
 	% save and restore predicates
 
 	save(File, UserOptions) :-
+		check(atom, File),
 		print_message(comment, packs, @'Saving current setup'),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),

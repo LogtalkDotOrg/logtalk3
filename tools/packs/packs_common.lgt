@@ -56,7 +56,11 @@
 	:- mode(pin(+atom), zero_or_one).
 	:- info(pin/1, [
 		comment is 'Pins a resource (pack or registry) preventing it from being updated, uninstalled, or deleted. Fails if the resource is not found.',
-		argnames is ['Resource']
+		argnames is ['Resource'],
+		exceptions is [
+			'``Resource`` is a variable' - instantiation_error,
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource')
+		]
 	]).
 
 	:- public(pin/0).
@@ -69,7 +73,11 @@
 	:- mode(unpin(+atom), zero_or_one).
 	:- info(unpin/1, [
 		comment is 'Unpins a resource (pack or registry), allowing it to be updated, uninstalled, or deleted. Fails if the resource is not found.',
-		argnames is ['Resource']
+		argnames is ['Resource'],
+		exceptions is [
+			'``Resource`` is a variable' - instantiation_error,
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource')
+		]
 	]).
 
 	:- public(unpin/0).
@@ -82,42 +90,66 @@
 	:- mode(pinned(+atom), zero_or_one).
 	:- info(pinned/1, [
 		comment is 'True iff the resource (pack or registry) is defined or installed and if it is pinned.',
-		argnames is ['Resource']
+		argnames is ['Resource'],
+		exceptions is [
+			'``Resource`` is a variable' - instantiation_error,
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource')
+		]
 	]).
 
 	:- public(directory/2).
 	:- mode(directory(?atom, ?atom), zero_or_more).
 	:- info(directory/2, [
 		comment is 'Enumerates by backtracking all packs or registries and respective installation or definition directories (using the internal backend format).',
-		argnames is ['Resource', 'Directory']
+		argnames is ['Resource', 'Directory'],
+		exceptions is [
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource'),
+			'``Directory`` is neither a variable nor an atom' - type_error(atom, 'Directory')
+		]
 	]).
 
 	:- public(directory/1).
-	:- mode(directory(?atom), zero_or_one).
+	:- mode(directory(+atom), zero_or_one).
 	:- info(directory/1, [
 		comment is 'Prints the directory where the registry or the pack is installed (using the native operating-system format).',
-		argnames is ['Resource']
+		argnames is ['Resource'],
+		exceptions is [
+			'``Resource`` is a variable' - instantiation_error,
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource')
+		]
 	]).
 
 	:- public(readme/2).
 	:- mode(readme(+atom, -atom), zero_or_one).
 	:- info(readme/2, [
 		comment is 'Returns the path to the resource (pack or registry) readme file (using the internal backend format). Fails if the resource is not defined or installed or if no readme file is found for it.',
-		argnames is ['Resource', 'ReadMeFile']
+		argnames is ['Resource', 'ReadMeFile'],
+		exceptions is [
+			'``Resource`` is a variable' - instantiation_error,
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource'),
+			'``ReadMeFile`` is neither a variable nor an atom' - type_error(atom, 'ReadMeFile')
+		]
 	]).
 
 	:- public(readme/1).
 	:- mode(readme(+atom), zero_or_one).
 	:- info(readme/1, [
 		comment is 'Prints the path to the resource (pack or registry) readme file (using the native operating-system format). Fails if the resource is not defined or installed or if no readme file is found for it.',
-		argnames is ['Resource']
+		argnames is ['Resource'],
+		exceptions is [
+			'``Resource`` is a variable' - instantiation_error,
+			'``Resource`` is neither a variable nor an atom' - type_error(atom, 'Resource')
+		]
 	]).
 
 	:- public(logtalk_packs/1).
 	:- mode(logtalk_packs(-atom), one).
 	:- info(logtalk_packs/1, [
 		comment is 'Returns the directory prefix (using the internal backend format) where the registries, packs, and archives are installed.',
-		argnames is ['LogtalkPacks']
+		argnames is ['LogtalkPacks'],
+		exceptions is [
+			'``LogtalkPacks`` is neither a variable nor an atom' - type_error(atom, 'LogtalkPacks')
+		]
 	]).
 
 	:- public(logtalk_packs/0).
@@ -130,7 +162,10 @@
 	:- mode(prefix(-atom), one).
 	:- info(prefix/1, [
 		comment is 'Returns the directory prefix (using the internal backend format) where the registries or packs are installed.',
-		argnames is ['Prefix']
+		argnames is ['Prefix'],
+		exceptions is [
+			'``Prefix`` is neither a variable nor an atom' - type_error(atom, 'Prefix')
+		]
 	]).
 
 	:- public(prefix/0).
@@ -209,6 +244,14 @@
 		path_concat/3, directory_files/3
 	]).
 
+	:- if(current_logtalk_flag(prolog_dialect, ciao)).
+		:- multifile(type::check/2).
+	:- endif.
+
+	:- uses(type, [
+		check/2
+	]).
+
 	:- uses(user, [
 		atomic_list_concat/2
 	]).
@@ -241,6 +284,7 @@
 		setup.
 
 	logtalk_packs(LogtalkPacks) :-
+		check(var_or(atom), LogtalkPacks),
 		(	expand_library_path(logtalk_packs, LogtalkPacks) ->
 			true
 		;	environment_variable('LOGTALKPACKS', LogtalkPacks0) ->

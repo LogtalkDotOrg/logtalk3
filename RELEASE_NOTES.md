@@ -56,6 +56,11 @@ to Graphviz crashes).
 * UPDATED: The `update_svg_diagrams.sh` script to exit with the same code
 as the called `lgt2svg.sh` script.
 
+* FIXED: Document `packs` tool predicates possible exceptions.
+
+* FIXED: Missing type-checking of some arguments of some of the `packs` tool
+predicates.
+
 Tests
 -----
 

@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:23:0,
 		author is 'Paulo Moura',
 		date is 2023-01-09,
 		comment is 'Unit tests for the "packs" tool.'
@@ -79,11 +79,17 @@
 	test(packs_packs_logtalk_packs_0_02, true) :-
 		packs::logtalk_packs.
 
-	test(packs_registries_directory_1_01, true(atom(Directory))) :-
+	test(packs_registries_prefix_1_01, true(atom(Directory))) :-
 		registries::prefix(Directory).
 
-	test(packs_packs_directory_1_01, true(atom(Directory))) :-
+	test(packs_registries_prefix_0_01, true) :-
+		registries::prefix.
+
+	test(packs_packs_prefix_1_01, true(atom(Directory))) :-
 		packs::prefix(Directory).
+
+	test(packs_packs_prefix_0_01, true) :-
+		packs::prefix.
 
 	test(packs_registries_list_0_01, true) :-
 		registries::list.
@@ -159,11 +165,20 @@
 	test(packs_registries_lint_1_01, true) :-
 		registries::lint(local_1_d).
 
+	% registry describe predicate
+
 	test(packs_registries_describe_1_01, true) :-
 		registries::describe(local_1_d).
 
+	% registry directory
+
 	test(packs_registries_directory_2_01, true(atom(Directory))) :-
 		registries::directory(local_1_d, Directory).
+
+	test(packs_registries_directory_1_01, true) :-
+		registries::directory(local_1_d).
+
+	% registry readme
 
 	test(packs_registries_readme_2_01, true(Readme == File)) :-
 		this(This),
@@ -305,7 +320,15 @@
 	test(packs_packs_clean_1_01, true) :-
 		packs::clean(foo).
 
-	% packs readme files
+	% pack directory
+
+	test(packs_packs_directory_2_01, true(atom(Directory))) :-
+		packs::directory(foo, Directory).
+
+	test(packs_packs_directory_1_01, true) :-
+		packs::directory(foo).
+
+	% pack readme file
 
 	test(packs_packs_readme_1_01, true) :-
 		packs::readme(foo).
@@ -313,7 +336,7 @@
 	test(packs_packs_readme_2_01, true(os::file_exists(ReadMeFile))) :-
 		packs::readme(foo, ReadMeFile).
 
-	% packs describe predicates
+	% pack describe predicates
 
 	test(packs_packs_describe_2_01, true) :-
 		packs::describe(local_1_d, foo).

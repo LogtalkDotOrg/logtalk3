@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:52:0,
+		version is 0:53:0,
 		author is 'Paulo Moura',
-		date is 2023-01-04,
+		date is 2023-01-09,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -39,14 +39,24 @@
 	:- mode(describe(+atom), one).
 	:- info(describe/1, [
 		comment is 'Prints all registry entries.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(defined/4).
 	:- mode(defined(?atom, ?atom, ?atom, ?boolean), zero_or_more).
 	:- info(defined/4, [
 		comment is 'Enumerates by backtracking all defined registries, their definition URL, how they are defined (``git``, ``archive``, or ``directory``), and if they are pinned.',
-		argnames is ['Registry', 'URL', 'HowDefined', 'Pinned']
+		argnames is ['Registry', 'URL', 'HowDefined', 'Pinned'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``URL`` is neither a variable nor an atom' - type_error(atom, 'URL'),
+			'``HowDefined`` is neither a variable nor an atom' - type_error(atom, 'HowDefined'),
+			'``Pinned`` is neither a variable nor a boolean' - type_error(boolean, 'Pinned')
+		]
 	]).
 
 	:- public(add/3).
@@ -64,6 +74,17 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is neither a variable nor an atom' - type_error(atom, 'URL'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -74,6 +95,12 @@
 		argnames is ['Registry', 'URL'],
 		remarks is [
 			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.'
+		],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is neither a variable nor an atom' - type_error(atom, 'URL')
 		]
 	]).
 
@@ -85,6 +112,10 @@
 		remarks is [
 			'Limitations' - 'Cannot be used for archive download URLs.',
 			'Registry name' - 'Taken from the URL basename.'
+		],
+		exceptions is [
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is neither a variable nor an atom' - type_error(atom, 'URL')
 		]
 	]).
 
@@ -100,6 +131,15 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -107,7 +147,11 @@
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
 		comment is 'Updates a defined registry using default options. Fails if the registry is not defined.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(update/0).
@@ -128,6 +172,15 @@
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
+		],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 
@@ -135,7 +188,11 @@
 	:- mode(delete(+atom), zero_or_one).
 	:- info(delete/1, [
 		comment is 'Deletes a registry using default options.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(delete/0).
@@ -148,7 +205,11 @@
 	:- mode(clean(+atom), zero_or_one).
 	:- info(clean/1, [
 		comment is 'Cleans all registry archives. Fails if the registry is not defined.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(clean/0).
@@ -161,14 +222,22 @@
 	:- mode(provides(?atom, ?atom), zero_or_more).
 	:- info(provides/2, [
 		comment is 'Enumerates by backtracking all packs provided by a registry.',
-		argnames is ['Registry', 'Pack']
+		argnames is ['Registry', 'Pack'],
+		exceptions is [
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
+			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack')
+		]
 	]).
 
 	:- public(lint/1).
 	:- mode(lint(+atom), zero_or_one).
 	:- info(lint/1, [
 		comment is 'Checks the registry specification. Fails if the registry is not defined or if linting detects errors.',
-		argnames is ['Registry']
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
+		]
 	]).
 
 	:- public(lint/0).
@@ -237,6 +306,7 @@
 
 	defined(Registry, URL, HowDefined, Pinned) :-
 		check(var_or(atom), Registry),
+		check(var_or(atom), URL),
 		check(var_or(atom), HowDefined),
 		check(var_or(boolean), Pinned),
 		^^logtalk_packs(LogtalkPacks),
@@ -260,6 +330,8 @@
 	% registry directory predicates
 
 	directory(Registry, Directory) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Directory),
 		(	var(Registry) ->
 			implements_protocol(RegistryObject, registry_protocol),
 			RegistryObject::name(Registry)
@@ -275,11 +347,13 @@
 		read_url(Directory, _).
 
 	directory(Registry) :-
+		check(atom, Registry),
 		directory(Registry, Directory),
 		internal_os_path(Directory, OSDirectory),
 		print_message(information, packs, installation_directory(OSDirectory)).
 
 	prefix(Directory) :-
+		check(var_or(atom), Directory),
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, registries, Directory).
 
@@ -698,6 +772,7 @@
 	% registry readme predicates
 
 	readme(Registry, ReadMeFile) :-
+		check(var_or(atom), ReadMeFile),
 		directory(Registry, Directory),
 		^^readme_file_path(Directory, ReadMeFile).
 
