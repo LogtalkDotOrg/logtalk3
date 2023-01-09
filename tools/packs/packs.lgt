@@ -23,10 +23,17 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:58:0,
+		version is 0:59:0,
 		author is 'Paulo Moura',
-		date is 2023-01-04,
+		date is 2023-01-09,
 		comment is 'Pack handling predicates.'
+	]).
+
+	:- public(available/2).
+	:- mode(available(?atom, ?atom), zero_or_more).
+	:- info(available/2, [
+		comment is 'Enumerates, by backtracking, all available packs.',
+		argnames is ['Registry', 'Pack']
 	]).
 
 	:- public(available/1).
@@ -95,17 +102,24 @@
 		comment is 'Lists all the packs that are installed but whose registry is no longer defined.'
 	]).
 
+	:- public(versions/3).
+	:- mode(versions(+atom, +atom, -list), zero_or_one).
+	:- info(versions/3, [
+		comment is 'Returns a list of all available pack versions. Fails if the pack is unknown.',
+		argnames is ['Registry', 'Pack', 'Versions']
+	]).
+
 	:- public(describe/2).
 	:- mode(describe(+atom, +atom), zero_or_one).
 	:- info(describe/2, [
-		comment is 'Describes a registered pack, including installed version if applicable.',
+		comment is 'Describes a registered pack, including installed version if applicable. Fails if the pack is unknown.',
 		argnames is ['Registry', 'Pack']
 	]).
 
 	:- public(describe/1).
 	:- mode(describe(+atom), zero_or_one).
 	:- info(describe/1, [
-		comment is 'Describes a registered pack, including installed version if applicable.',
+		comment is 'Describes a registered pack, including installed version if applicable. Fails if the pack is unknown.',
 		argnames is ['Pack']
 	]).
 
@@ -371,6 +385,15 @@
 		print_message(banner, packs, @'Packs manager ready. For basic help, type: packs::help.').
 
 	% packs availability predicates
+
+	available(Registry, Pack) :-
+		check(var_or(atom), Registry),
+		check(var_or(atom), Pack),
+		(	ground(Registry-Pack) ->
+			registry_pack(Registry, Pack, _),
+			!
+		;	registry_pack(Registry, Pack, _)
+		).
 
 	available(Registry) :-
 		check(atom, Registry),
@@ -683,6 +706,21 @@
 			uninstall(Pack, [force(true)])
 		),
 		print_message(comment, packs, @'Uninstalled all packs').
+
+	% pack versions predicates
+
+	versions(Registry, Pack, Versions) :-
+		check(atom, Registry),
+		check(atom, Pack),
+		(	registry_pack(Registry, Pack, PackObject) ->
+			findall(
+				Version,
+				PackObject::version(Version, _, _, _, _, _),
+				Versions
+			)
+		;	print_message(error, packs, unknown_pack(Registry, Pack)),
+			fail
+		).
 
 	% describe pack predicates
 

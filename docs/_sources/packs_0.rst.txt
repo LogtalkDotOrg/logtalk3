@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:58:0
-| **Date:** 2023-01-04
+| **Version:** 0:59:0
+| **Date:** 2023-01-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -41,6 +41,25 @@ Pack handling predicates.
 
 Public predicates
 -----------------
+
+.. index:: available/2
+.. _packs/0::available/2:
+
+``available/2``
+^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all available packs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``available(Registry,Pack)``
+| **Mode and number of proofs:**
+|    ``available(?atom,?atom)`` - ``zero_or_more``
+
+
+------------
 
 .. index:: available/1
 .. _packs/0::available/1:
@@ -224,13 +243,32 @@ Lists all the packs that are installed but whose registry is no longer defined.
 
 ------------
 
+.. index:: versions/3
+.. _packs/0::versions/3:
+
+``versions/3``
+^^^^^^^^^^^^^^
+
+Returns a list of all available pack versions. Fails if the pack is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``versions(Registry,Pack,Versions)``
+| **Mode and number of proofs:**
+|    ``versions(+atom,+atom,-list)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: describe/2
 .. _packs/0::describe/2:
 
 ``describe/2``
 ^^^^^^^^^^^^^^
 
-Describes a registered pack, including installed version if applicable.
+Describes a registered pack, including installed version if applicable. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -249,7 +287,7 @@ Describes a registered pack, including installed version if applicable.
 ``describe/1``
 ^^^^^^^^^^^^^^
 
-Describes a registered pack, including installed version if applicable.
+Describes a registered pack, including installed version if applicable. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``

@@ -21,6 +21,6 @@
 
 :- initialization((
 	logtalk_load(local_1_d_registry),
-	logtalk_load(foo_pack),
-	logtalk_load(bar_pack)
+	logtalk_load(bar_pack),
+	logtalk_load(foo_pack)
 )).

@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura',
-		date is 2023-01-04,
+		date is 2023-01-09,
 		comment is 'Unit tests for the "packs" tool.'
+	]).
+
+	:- uses(list, [
+		msort/2
 	]).
 
 	:- uses(user, [
@@ -206,6 +210,13 @@
 
 	test(packs_packs_lint_1_01, true) :-
 		packs::lint(foo).
+
+	test(packs_packs_versions_3_01, true(Versions == [2:0:0,1:0:0])) :-
+		packs::versions(local_1_d, foo, Versions).
+
+	test(packs_packs_available_2_01, true(Packs == [local_1_d-bar, local_1_d-foo])) :-
+		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
+		msort(Packs0, Packs).
 
 	test(packs_packs_available_1_01, true) :-
 		packs::available(local_1_d).
