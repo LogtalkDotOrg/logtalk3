@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-09-22,
+		date is 2023-01-09,
 		comment is 'Unit tests for the ISO Prolog standard sub_atom/5 built-in predicate.'
 	]).
 
@@ -185,5 +185,37 @@
 
 	test(lgt_sub_atom_5_49, deterministic) :-
 		{sub_atom('/abc/def/ghi/', _, 1, 3, _)}.
+
+	% tests from the LVM development work
+
+	test(lvm_sub_atom_5_pmmmp_one, true(Xs == [x(4,1,1)])) :-
+		findall(x(B,S,A), {sub_atom(abcbde, B, S, A, d)}, Xs).
+
+	test(lvm_sub_atom_5_pmmmp_equal1, true(Xs == [x(0,3,0)])) :-
+		findall(x(B,S,A), {sub_atom(abc, B, S, A, abc)}, Xs).
+
+	test(lvm_sub_atom_5_pmmmp_equal2, true(Xs == [x(0,0,0)])) :-
+		findall(x(B,S,A), {sub_atom('', B, S, A, '')}, Xs).
+
+	test(lvm_sub_atom_5_pmmmp_many1, true(Xs == [x(1,1,4),x(3,1,2)])) :-
+		findall(x(B,S,A), {sub_atom(abcbde, B, S, A, b)}, Xs).
+
+	test(lvm_sub_atom_5_pmmmp_many2, true(Xs == [x(0,1,1),x(1,1,0)])) :-
+		findall(x(B,S,A), {sub_atom(aa, B, S, A, a)}, Xs).
+
+	test(lvm_sub_atom_5_pmmmp_many3, true(Xs == [x(0,0,2),x(1,0,1),x(2,0,0)])) :-
+		findall(x(B,S,A), {sub_atom(ab, B, S, A, '')}, Xs).
+
+	test(lvm_sub_atom_5_ppmmp_equal1, true(Xs == [x(0,3,0)])) :-
+		B = 0,
+		findall(x(B,S,A), {sub_atom(abc, B, S, A, abc)}, Xs).
+
+	test(lvm_sub_atom_5_ppmmp_equal2, true(Xs == [x(0,0,0)])) :-
+		B = 0,
+		findall(x(B,S,A), {sub_atom('', B, S, A, '')}, Xs).
+
+	test(lvm_sub_atom_5_pmmpp_equal, true(Xs == [x(0,0,0)])) :-
+		A = 0,
+		findall(x(B,S,A), {sub_atom('', B, S, A, '')}, Xs).
 
 :- end_object.

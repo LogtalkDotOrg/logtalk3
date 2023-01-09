@@ -65,12 +65,17 @@ The test identifier prefixes indicate their origin:
 - `commons_` - tests for de facto standard Prolog features
 - `wg17_` - tests from WG17 test suite
 - `tpl_` - tests contributed by Trealla Prolog developers
+- `lvm_` - tests contributed by LVM developers
 
 To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 
 	$ cd $LOGTALKUSER/tests/prolog
 	$ logtalk_tester -p swi
 	...
+
+When running Logtalk form a git repo clone, you may need to type instead:
+
+	$ logtalk_tester.sh -p swi
 
 By convention, tests for standard built-in predicates encapsulate the main
 test goal using the `{}/1` control construct. In most cases, this precaution

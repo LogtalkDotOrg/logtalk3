@@ -63,6 +63,7 @@ CONTRIBUTORS
 * Joost Geurts (bug reports)
 * José Antonio Riaza Valverde (Tau Prolog integration and union-find library)
 * José Morales (Ciao Prolog integration)
+* Lindsey Spratt (unit tests and feedback)
 * Markus Triska (help in porting CLP(FD) examples)
 * Mats Carlsson (bug reports)
 * Michael Covington (DCGs tokenizer example)

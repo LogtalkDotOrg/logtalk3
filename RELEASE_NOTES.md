@@ -57,6 +57,9 @@ as the called `lgt2svg.sh` script.
 Tests
 -----
 
+* ADDED: Additional tests for the Prolog standard `sub_atom/5` predicate.
+Contributed by Lindsey Spratt from the LVM development work.
+
 * ADDED: Additional test for the Prolog standard `unify_with_occurs_check/2`
 predicate.
 
