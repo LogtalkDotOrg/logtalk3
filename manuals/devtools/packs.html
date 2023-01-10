@@ -298,10 +298,22 @@ variables to point to its pack directory (which can be queried by using
 the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> message). Several shell utilities are
 available that can set environment variables when changing to an
 application directory (see e.g.
-<a class="reference external" href="https://github.com/direnv/direnv">direnv</a> or
-<a class="reference external" href="https://github.com/rajivharris/Set-PsEnv">Set-PsEnv</a>). This tool
-provides experimental <code class="docutils literal notranslate"><span class="pre">lgtenv.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtenv.ps1</span></code> scripts to
-simplify the creation of packs virtual environments.</p>
+<a class="reference external" href="https://github.com/direnv/direnv">direnv</a> for POSIX systems and
+<a class="reference external" href="https://github.com/rajivharris/Set-PsEnv">Set-PsEnv</a> for Windows
+systems).</p>
+<p>Experimental <code class="docutils literal notranslate"><span class="pre">lgtenv.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtenv.ps1</span></code> scripts are included to
+simplify creating packs virtual environments by using, respectively,
+<code class="docutils literal notranslate"><span class="pre">direnv</span></code> and <code class="docutils literal notranslate"><span class="pre">Set-PsEnv</span></code>. On Windows systems, you also need to
+redefine the PowerShell prompt in a profile file (e.g.
+<code class="docutils literal notranslate"><span class="pre">$HOME\Documents\PowerShell\Profile.ps1</span></code>) to mimic the functionality
+of <code class="docutils literal notranslate"><span class="pre">direnv</span></code> of automatically loading an existing <code class="docutils literal notranslate"><span class="pre">.env</span></code> file when
+changing to its directory. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>function prompt {
+    Set-PsEnv
+    &#39;PS &#39; + $(Get-Location) + &#39;&gt; &#39;
+}
+</pre></div>
+</div>
 <p>A virtual environment setup (i.e. the currently defined registries and
 installed packs) can be saved into a file (e.g. <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>)
 using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> predicate:</p>

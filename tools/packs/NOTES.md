@@ -186,10 +186,20 @@ by (re)defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables
 to point to its pack directory (which can be queried by using the
 `packs::directory/2` message). Several shell utilities are available that
 can set environment variables when changing to an application directory
-(see e.g. [direnv](https://github.com/direnv/direnv) or
-[Set-PsEnv](https://github.com/rajivharris/Set-PsEnv)). This tool provides
-experimental `lgtenv.sh` and `lgtenv.ps1` scripts to simplify the creation
-of packs virtual environments. 
+(see e.g. [direnv](https://github.com/direnv/direnv) for POSIX systems and
+[Set-PsEnv](https://github.com/rajivharris/Set-PsEnv) for Windows systems).
+
+Experimental `lgtenv.sh` and `lgtenv.ps1` scripts are included to simplify
+creating packs virtual environments by using, respectively, `direnv` and
+`Set-PsEnv`. On Windows systems, you also need to redefine the PowerShell
+prompt in a profile file (e.g. `$HOME\Documents\PowerShell\Profile.ps1`) to
+mimic the functionality of `direnv` of automatically loading an existing
+`.env` file when changing to its directory. For example:
+
+	function prompt {
+	    Set-PsEnv
+	    'PS ' + $(Get-Location) + '> '
+	}
 
 A virtual environment setup (i.e. the currently defined registries and
 installed packs) can be saved into a file (e.g. `requirements.lgt`) using
