@@ -101,4 +101,5 @@ if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
 }
 
 Add-Content -Path $directory\.env -Value "LOGTALKPACKS=$directory"
+Set-PsEnv
 Exit
