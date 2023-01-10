@@ -187,7 +187,9 @@ to point to its pack directory (which can be queried by using the
 `packs::directory/2` message). Several shell utilities are available that
 can set environment variables when changing to an application directory
 (see e.g. [direnv](https://github.com/direnv/direnv) or
-[Set-PsEnv](https://github.com/rajivharris/Set-PsEnv)).
+[Set-PsEnv](https://github.com/rajivharris/Set-PsEnv)). This tool provides
+experimental `lgtenv.sh` and `lgtenv.ps1` scripts to simplify the creation
+of packs virtual environments. 
 
 A virtual environment setup (i.e. the currently defined registries and
 installed packs) can be saved into a file (e.g. `requirements.lgt`) using

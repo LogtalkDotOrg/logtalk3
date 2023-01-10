@@ -70,6 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/lgt2md
 /usr/local/bin/lgt2rst
 /usr/local/bin/lgt2txt
+/usr/local/bin/lgtenv
 /usr/local/bin/logtalk_allure_report
 /usr/local/bin/logtalk_tester
 /usr/local/bin/logtalk_doclet
@@ -105,6 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/lgt2md.1.gz
 /usr/local/share/man/man1/lgt2rst.1.gz
 /usr/local/share/man/man1/lgt2txt.1.gz
+/usr/local/share/man/man1/lgtenv.1.gz
 /usr/local/share/man/man1/logtalk_allure_report.1.gz
 /usr/local/share/man/man1/logtalk_backend_select.1.gz
 /usr/local/share/man/man1/logtalk_tester.1.gz
@@ -127,10 +129,12 @@ echo
 echo "Installed Logtalk on \"/usr/local/share\"."
 echo
 
-echo "Links to the \"logtalk_user_setup\", \"logtalk_backend_select\","
-echo "\"logtalk_version_select\", \"logtalk_tester\", \"logtalk_doclet\","
-echo "\"lgt2svg\", \"lgt2pdf\", \"lgt2html\", \"lgt2xml\", \"lgt2md\","
-echo "\"lgt2rst\" and \"lgt2txt\" scripts have been created on \"/usr/local/bin\"."
+echo "Links to the following scripts have been created on /usr/local/bin:"
+echo
+echo "- logtalk_user_setup, logtalk_backend_select, logtalk_version_select"
+echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"
+echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
+echo "- lgtenv"
 echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"

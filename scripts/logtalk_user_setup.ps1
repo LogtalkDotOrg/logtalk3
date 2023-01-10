@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on November 2, 2022
+##   Last updated on January 10, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -176,6 +176,7 @@ function Create-Logtalkuser-Directory {
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.rng > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\packs\lgtenv.ps1 -Target $env:LOGTALKHOME\tools\packs\lgtenv.ps1 > $null
 
 	Write-Output "Finished copying Logtalk files and directories."
 	Write-Output ""

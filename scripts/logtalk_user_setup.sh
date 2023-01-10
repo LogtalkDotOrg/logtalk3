@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on November 2, 2022
+##   Last updated on January 10, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -172,6 +172,7 @@ ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_entity.xsd "$LOGTALKUSER"/tools/l
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.dtd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index.dtd
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.rng "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index.rng
 ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd "$LOGTALKUSER"/tools/lgtdoc/xml/logtalk_index.xsd
+ln -sf "$LOGTALKHOME"/tools/packs/lgtenv.sh "$LOGTALKUSER"/tools/packs/lgtenv
 echo "Finished copying Logtalk files and directories."
 echo
 echo "You may want to customize the default Logtalk compiler flags by renaming"

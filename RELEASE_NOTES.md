@@ -44,6 +44,9 @@ Library
 Tools
 _____
 
+* ADDED: Experimental `lgtenv.sh` and `lgtenv.ps1` scripts for creating packs
+virtual environments.
+
 * ADDED: New `packs` tool `available/2` and `versions/3` predicates.
 
 * ADDED: New `update/1` option to the `packs` tool registry adding and pack

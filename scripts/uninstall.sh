@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on September 15, 2022
+##   Last updated on January 10, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -76,6 +76,7 @@ rm -f lgt2xml
 rm -f lgt2md
 rm -f lgt2rst
 rm -f lgt2txt
+rm -f lgtenv
 rm -f logtalk_allure_report
 rm -f logtalk_backend_select
 rm -f logtalk_tester
@@ -104,6 +105,7 @@ rm -f lgt2xml.1.gz
 rm -f lgt2md.1.gz
 rm -f lgt2rst.1.gz
 rm -f lgt2txt.1.gz
+rm -f lgtenv.1.gz
 rm -f logtalk_allure_report.1.gz
 rm -f logtalk_backend_select.1.gz
 rm -f logtalk_tester.1.gz
