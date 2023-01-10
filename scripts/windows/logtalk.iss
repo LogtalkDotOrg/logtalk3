@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on October 10, 2022
+; Last updated on January 10, 2023
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -128,6 +128,7 @@ Source: "{#MyBaseDir}\scripts\embedding\yap\*.ps1"; DestDir: "{win}"; Components
 Source: "{#MyBaseDir}\integration\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\diagrams\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
+Source: "{#MyBaseDir}\tools\packs\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 
 [INI]
 Filename: "{app}\{#MyAppUrlName}"; Section: "InternetShortcut"; Key: "URL"; String: "{#MyAppURL}"; Components: base
