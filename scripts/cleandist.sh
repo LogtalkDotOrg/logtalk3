@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Distribution clean script for packaging
-##   Last updated on December 15, 2021
+##   Last updated on January 11, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -62,3 +62,4 @@ chmod a+x tools/diagrams/*.sh
 chmod a+x tools/diagrams/*.js
 chmod a+x tools/lgtdoc/xml/*.sh
 chmod a-x tools/lgtdoc/xml/*.js
+chmod a+x tools/packs/*.sh
