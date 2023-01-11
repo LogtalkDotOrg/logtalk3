@@ -1,4 +1,4 @@
-.TH lgtenv 1 "January 10, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
+.TH lgtenv 1 "January 11, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
 
 .SH NAME
 lgtenv \- Logtalk script for creating packs virtual environments
@@ -6,8 +6,9 @@ lgtenv \- Logtalk script for creating packs virtual environments
 .SH SYNOPSIS
 .B lgtenv -v
 .br
-[\fB-d \fIresults\fR]
-[\fB-w\fR]
+.B lgtenv
+[\fB-d \fIdirectory\fR]
+[\fB-c\fR]
 .br
 .B lgtenv -h
 
@@ -19,7 +20,7 @@ lgtenv \- Logtalk script for creating packs virtual environments
 .BI \-d
 Directory where to create the virtual environment. Default is the current directory.
 .TP
-.BI \-w
+.BI \-c
 Create directory if it does not exist.
 
 .SH REQUIREMENTS
