@@ -166,8 +166,7 @@ to delete any defined registries and installed packs.
 Virtual environments
 --------------------
 
-An application may require a specific Logtalk version (e.g. the version used
-to test and certify it) and specific pack versions. These requirements may
+An application may require specific pack versions. These requirements may
 differ between applications. Different applications may also have conflicting
 requirements. Therefore, a _virtual environment_ where an application
 requirements are fulfilled may be required to develop and/or run it. A virtual
@@ -177,24 +176,37 @@ Defining the `logtalk_packs` library alias in a settings file or defining
 the `LOGTALKPACKS` environment variable before starting Logtalk allows easy
 creation and switching between virtual environments. By using a per application
 settings file (or a per application environment variable definition) each
-application can thus use its own virtual environment.
+application can thus use its own virtual environment. The `settings.lgt` file
+can define the `logtalk_packs` library alias using code such as:
 
-When a virtual environment also requires a specific Logtalk version, this
-can be installed as a pack from the official
-[talkshow](https://github.com/LogtalkDotOrg/talkshow) registry and used
-by (re)defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables
-to point to its pack directory (which can be queried by using the
-`packs::directory/2` message). Several shell utilities are available that
-can set environment variables when changing to an application directory
-(see e.g. [direnv](https://github.com/direnv/direnv) for POSIX systems and
-[Set-PsEnv](https://github.com/rajivharris/Set-PsEnv) for Windows systems).
+	:- initialization((
+		logtalk_load_context(directory, Directory),
+		assertz(logtalk_library_path(logtalk_packs, Directory))
+	)).
+
+When a virtual environment also requires a specific Logtalk version (e.g. the
+version used to test and certify it), this can be installed as a pack from
+the official [talkshow](https://github.com/LogtalkDotOrg/talkshow) registry
+and used by (re)defining the `LOGTALKHOME` and `LOGTALKUSER` environment
+variables to point to its pack directory (which can be queried by using the
+`packs::directory/2` message).
 
 Experimental `lgtenv.sh` and `lgtenv.ps1` scripts are included to simplify
-creating packs virtual environments by using, respectively, `direnv` and
-`Set-PsEnv`. On Windows systems, you also need to redefine the PowerShell
-prompt in a profile file (e.g. `$HOME\Documents\PowerShell\Profile.ps1`) to
-mimic the functionality of `direnv` of automatically loading an existing
-`.env` file when changing to its directory. For example:
+creating virtual environments. For example:
+
+	$ lgtenv -d ~/my_venv -c
+	$ cd ~/my_venv/
+	direnv: loading ~/my_venv/.envrc
+	direnv: export +LOGTALKPACKS
+
+These scripts require, respectively, [direnv](https://github.com/direnv/direnv)
+and [Set-PsEnv](https://github.com/rajivharris/Set-PsEnv) to be installed.
+These utilities load and unload environment variables when changing the current
+directory. On Windows systems, when using the `lgtenv.ps1` script, you also
+need to redefine the PowerShell prompt in a profile file
+(e.g. `$HOME\Documents\PowerShell\Profile.ps1`) to mimic the functionality of
+`direnv` of automatically loading an existing `.env` file when changing to its
+directory. For example:
 
 	function prompt {
 	    Set-PsEnv
@@ -219,19 +231,7 @@ or edited if necessary. For example:
 	pack(talkshow, lflat, 2:1:0).
 
 These files can be distributed with applications so that users can easily
-fulfill application requirements by using the `packs` tool. Typically, an
-application directory will include `settings.lgt` and `requirements.lgt`
-files. The `settings.lgt` file can define the `logtalk_packs` library alias
-using code such as:
-
-	:- initialization((
-		logtalk_load_context(directory, Directory),
-		assertz(logtalk_library_path(logtalk_packs, Directory))
-	)).
-
-A suitable named sub-directory can also be used. The application requirements
-can then be fulfilled by starting Logtalk from the application directory (so
-that the application settings file is loaded) and running once the query:
+fulfill application requirements by running once the query:
 
 	| ?- packs::restore('requirements.lgt').
 
