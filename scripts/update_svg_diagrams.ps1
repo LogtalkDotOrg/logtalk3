@@ -2,7 +2,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on October 10, 2022
+##   Last updated on January 12, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.22")
+	Write-Output ($myName + " 0.23")
 }
 
 function Write-Usage-Help() {
@@ -46,8 +46,8 @@ function Write-Usage-Help() {
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
 	Write-Output ""
-	Write-Output "This script updates the SVG diagrams of the core entities, the library,"
-	Write-Output "the development tools, and the third-party contributions."
+	Write-Output "This script updates the SVG diagrams of the core entities, library,"
+	Write-Output "developer tools, ports, contributions, and optionally installed packs."
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-p prolog] [-i]")

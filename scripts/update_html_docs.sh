@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on September 21, 2022
+##   Last updated on January 12, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -69,7 +69,7 @@ set_goal() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.23"
+	echo "$(basename "$0") 0.24"
 	exit 0
 }
 
@@ -77,7 +77,8 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script updates the HTML documentation of the library and the development tools."
+	echo "This script updates the HTML documentation of the core entities, library,"
+	echo "developer tools, ports, contributions, and optionally installed packs."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog] [-i]"

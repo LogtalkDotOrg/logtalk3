@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on October 10, 2022
+##   Last updated on January 12, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.23")
+	Write-Output ($myName + " 0.24")
 }
 
 function Write-Usage-Help() {
@@ -48,7 +48,8 @@ function Write-Usage-Help() {
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
 	Write-Output ""
-	Write-Output "This script updates the HTML documentation of the library and the development tools."
+	Write-Output "This script updates the HTML documentation of the core entities, library,"
+	Write-Output "developer tools, ports, contributions, and optionally installed packs."
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-p prolog] [-i]")

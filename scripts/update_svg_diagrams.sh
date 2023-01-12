@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on January 2, 2023
+##   Last updated on January 12, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,7 @@ set_goals() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.22"
+	echo "$(basename "$0") 0.23"
 	exit 0
 }
 
@@ -83,8 +83,8 @@ print_version() {
 usage_help()
 {
 	echo 
-	echo "This script updates the SVG diagrams of the core entities, the library,"
-	echo "the development tools, and the third-party contributions."
+	echo "This script updates the SVG diagrams of the core entities, library,"
+	echo "developer tools, ports, contributions, and optionally installed packs."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-p prolog] [-i]"

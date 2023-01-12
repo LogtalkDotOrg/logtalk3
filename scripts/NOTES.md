@@ -164,17 +164,19 @@ also available in the Logtalk website.
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
 
 - `update_html_docs.sh` and `update_html_docs.ps1`  
-	Bash shell and PowerShell scripts for updating the library and tools HTML
-	documentation requires [Sphinx](https://www.sphinx-doc.org) to be installed
-	(version 3.4.1 or later) plus [Pygments](https://pygments.org) (version
-	2.7.3 or later) and the Sphinx [Read The Docs theme](https://github.com/rtfd/sphinx_rtd_theme)
+	Bash shell and PowerShell scripts for updating the HTML	documentation
+	of core entities, library, developer tools, ports, contributions, and
+	optionally installed packs; requires [Sphinx](https://www.sphinx-doc.org)
+	to be installed (version 3.4.1 or later) plus [Pygments](https://pygments.org)
+	(version 2.7.3 or later) and the Sphinx
+	[Read The Docs theme](https://github.com/rtfd/sphinx_rtd_theme)
 	(version 0.5.0 or later)
 
 - `update_svg_diagrams.sh` and `update_svg_diagrams.ps1`  
-	Bash shell and PowerShell scripts for updating the core entities, library,
-	development tools, ports, and third-party contributions SVG diagrams;
-	requires [GraphViz](https://www.graphviz.org/) to be installed (version
-	2.43.20191029.1313 or later)
+	Bash shell and PowerShell scripts for updating the SVG diagrams of core
+	entities, library, developer tools, ports, contributions, and optionally
+	installed packs; requires [GraphViz](https://www.graphviz.org/) to be
+	installed (version 2.43.20191029.1313 or later)
 
 - `update_man_html_versions.sh`  
 	shell script for updating the HTML versions of the man pages; requires
