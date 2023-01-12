@@ -33,6 +33,9 @@ Logtalk compiler and runtime
 Documentation
 -------------
 
+* UPDATED: Man pages of integration scripts that accept a command-line option
+for silencing informative messages.
+
 * FIXED: Permanently redirected and broken hyperlinks in the Handbook and
 developer tools documentation.
 

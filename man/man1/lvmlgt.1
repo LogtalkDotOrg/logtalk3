@@ -1,10 +1,11 @@
-.TH lvmlgt 1 "June 17, 2022" "Logtalk 3.57.0" "Logtalk Documentation"
+.TH lvmlgt 1 "January 12, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
 
 .SH NAME
 lvmlgt \- Logtalk integration script for LVM
 
 .SH SYNOPSIS
 .B lvmlgt
+[\fB-q\fR]
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
@@ -12,12 +13,15 @@ lvmlgt \- Logtalk integration script for LVM
 
 .SH OPTIONS
 .TP
+.B \-q
+Silence Logtalk default startup messages and compilation messages by setting the \fBreport\fR flag to \fBwarnings\fR.
+.TP
 .B \-g
 .I goal
 Initialization goal, written between double quotes, to be executed after Logtalk startup.
 
 .SH REQUIREMENTS
-LVM 4.1.0 or a later version is required. This integration script looks for a "lvmpl" executable in the system path.
+LVM 4.1.0 or a later version is required. This integration script looks for a \fBlvmpl\fR executable in the system path.
 
 .SH ENVIRONMENT
 .TP

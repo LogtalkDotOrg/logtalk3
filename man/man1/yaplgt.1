@@ -1,10 +1,11 @@
-.TH yaplgt 1 "November 25, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
+.TH yaplgt 1 "January 12, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
 
 .SH NAME
 yaplgt \- Logtalk integration script for YAP
 
 .SH SYNOPSIS
 .B yaplgt
+[\fB-q\fR]
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
@@ -12,12 +13,15 @@ yaplgt \- Logtalk integration script for YAP
 
 .SH OPTIONS
 .TP
+.B \-q
+Silence Logtalk default startup messages and compilation messages by setting the \fBreport\fR flag to \fBwarnings\fR.
+.TP
 .B \-g
 .I goal
 Initialization goal, written between double quotes, to be executed after Logtalk startup.
 
 .SH REQUIREMENTS
-YAP 6.3.4 or later is required. YAP can be compiled with either tabling or threads support, among other options. Check the YAP flag "system_options" before trying to run examples or applications that require YAP to be compiled with specific options.  This integration script looks for a "yap" executable in the system path.
+YAP 6.3.4 or later is required. YAP can be compiled with either tabling or threads support, among other options. Check the YAP flag \fBsystem_options\fR before trying to run examples or applications that require YAP to be compiled with specific options. This integration script looks for a \fByap\fR executable in the system path.
 
 .SH ENVIRONMENT
 .TP

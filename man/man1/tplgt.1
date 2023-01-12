@@ -1,10 +1,11 @@
-.TH tplgt 1 "November 17, 2022" "Logtalk 3.61.0" "Logtalk Documentation"
+.TH tplgt 1 "January 12, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
 
 .SH NAME
 tplgt \- Logtalk integration script for Trealla Prolog
 
 .SH SYNOPSIS
 .B tplgt
+[\fB-q\fR]
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
@@ -12,12 +13,15 @@ tplgt \- Logtalk integration script for Trealla Prolog
 
 .SH OPTIONS
 .TP
+.B \-q
+Silence Logtalk default startup messages and compilation messages by setting the \fBreport\fR flag to \fBwarnings\fR.
+.TP
 .B \-g
 .I goal
 Initialization goal, written between double quotes, to be executed after Logtalk startup.
 
 .SH REQUIREMENTS
-Trealla Prolog 2.6.3 or a later version is required. This integration script looks for a "tpl" executable in the system path.
+Trealla Prolog 2.6.3 or a later version is required. This integration script looks for a \fBtpl\fR executable in the system path.
 
 .SH ENVIRONMENT
 .TP

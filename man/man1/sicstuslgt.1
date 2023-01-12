@@ -1,10 +1,11 @@
-.TH sicstuslgt 1 "November 25, 2021" "Logtalk 3.52.0" "Logtalk Documentation"
+.TH sicstuslgt 1 "January 12, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
 
 .SH NAME
 sicstuslgt \- Logtalk integration script for SICStus Prolog
 
 .SH SYNOPSIS
 .B sicstuslgt
+[\fB--noinfo\fR]
 [\fB--goal \fIgoal\fR]
 
 .SH DESCRIPTION
@@ -12,12 +13,15 @@ sicstuslgt \- Logtalk integration script for SICStus Prolog
 
 .SH OPTIONS
 .TP
+.B \--noinfo
+Silence Logtalk default startup messages and compilation messages by setting the \fBreport\fR flag to \fBwarnings\fR.
+.TP
 .B \--goal
 .I goal
 Initialization goal, written between double quotes, to be executed after Logtalk startup.
 
 .SH REQUIREMENTS
-SICStus Prolog 4.1.0 (or later versions) is required. This integration script looks for a "sicstus" executable in the system path.
+SICStus Prolog 4.1.0 (or later versions) is required. This integration script looks for a \fBsicstus\fR executable in the system path.
 
 .SH ENVIRONMENT
 .TP
