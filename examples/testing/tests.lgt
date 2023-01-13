@@ -28,9 +28,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-12-16,
+		date is 2023-01-13,
 		comment is 'Examples of the default test dialects.'
 	]).
 
@@ -63,7 +63,7 @@
 		\+ current_object(foo42).
 
 	% skip the next test
-	- test(object_system_exists) :-
+	- test(object_system_exists, true, [note('Checks test skipping syntax')]) :-
 		current_object(system).
 
 	% a test dialect with an explicit expected outcome: test/2
