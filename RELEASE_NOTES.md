@@ -67,6 +67,11 @@ as the called `lgt2svg.sh` script.
 * FIXED: Missing type-checking of some arguments of some of the `packs` tool
 predicates.
 
+Examples
+--------
+
+* FIXED: Avoid a linter warning when loading the `assumptions` example.
+
 Tests
 -----
 

@@ -23,9 +23,9 @@
 	imports(assumptions)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Orginal example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2016-05-18,
+		date is 2023-01-13,
 		comment is 'Example of defining a switch...case control construct using linear assumptions.'
 	]).
 
@@ -35,6 +35,10 @@
 		comment is 'Test predicate for the switch control construct.',
 		argnames is ['Value']
 	]).
+
+	% avoid a linter warning in the definition of the test/1
+	% predicate due to a missing else part of the conditional
+	:- set_logtalk_flag(conditionals, silent).
 
 	:- meta_predicate(switch(*, 0)).
 	switch(Selector, Body) :-
