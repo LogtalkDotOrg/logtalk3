@@ -70,6 +70,9 @@ predicates.
 Examples
 --------
 
+* FIXED: Portability issue in the `bench` example that prevented running the
+`flatten` benchmark with some backend Prolog systems.
+
 * FIXED: Avoid a linter warning when loading the `assumptions` example.
 
 Tests

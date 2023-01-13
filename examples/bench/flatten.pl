@@ -6,7 +6,7 @@
 % Link is the uninstantiated last cdr of this list
 
 top:-
-	eliminate_disjunctions([(a(A,B,C):-(b(A);c(C)))],X,Y,[]),
+	eliminate_disjunctions([(a(A,_B,C):-(b(A);c(C)))],X,Y,[]),
     inst_vars((X,Y)).
 %	write((X,Y)), nl,
 	% (X,Y) == ([(a:-'_dummy_0')],[('_dummy_0':-b),('_dummy_0':-c)]),
@@ -34,7 +34,7 @@ gather_disj([C|Cs],NewProc,Disj,Link) :-
 extract_disj(C, (Head:-NewBody), Disj, Link) :-
 	C = (Head:-Body), !,
 	CtrIn = 0,
-	extract_disj(Body, NewBody, Disj, Link, C, CtrIn, CtrOut).
+	extract_disj(Body, NewBody, Disj, Link, C, CtrIn, _CtrOut).
 extract_disj(Head, Head, Link, Link).
 
 extract_disj((C1,C2), (NewC1,NewC2), Disj, Link, C, CtrIn, CtrOut) :-
@@ -143,7 +143,9 @@ varbag(Str, N, Arity) --> {N=<Arity}, !,
 
 inst_vars(Term) :-
 	varset(Term, Vars),
-        [A]=`A`,
+	% original code was:
+	% [A]=`A`,
+    char_code('A', A),
 	inst_vars_list(Vars, A).
 
 inst_vars_list([], _).

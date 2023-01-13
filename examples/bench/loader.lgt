@@ -82,14 +82,13 @@
 :- endif.
 
 
-:- if(current_logtalk_flag(prolog_dialect, swi)).
+:- if(predicate_property(name(_,_), built_in)).
 
 	:- initialization(
 		logtalk_load([
 			flatten
 		], [
-			optimize(on),
-			singleton_variables(silent)
+			optimize(on)
 		])
 	).
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2022-05-01,
+		date is 2023-01-13,
 		comment is 'Unit tests for the "bench" example.'
 	]).
 
@@ -50,7 +50,7 @@
 	test(fast_mu_01, true, [condition(predicate_property(length(_,_), built_in))]) :-
 		fast_mu::top.
 
-	test(flatten_01, true, [condition(current_logtalk_flag(prolog_dialect, swi))]) :-
+	test(flatten_01, true, [condition(predicate_property(name(_,_), built_in))]) :-
 		flatten::top.
 
 	test(log10_01, true) :-
