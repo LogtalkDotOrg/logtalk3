@@ -50,9 +50,9 @@ q :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:1,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2022-05-02,
+		date is 2023-01-15,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -64,10 +64,10 @@ q :-
 	test(iso_catch_3_02, true(Z == 3)) :-
 		{catch(bar(3), Z, true)}.
 
-	% this test is skipped as systems should be allowed to compile both
-	% goal arguments, which in this case would result in a callable type
-	% error instead of success as in the original test definition
-	- test(iso_catch_3_03, true) :-
+	% problematic test as systems should be allowed to compile both goal
+	% arguments, which in this case would result in compile time callable
+	% type error instead of success as in the original test definition
+	test(iso_catch_3_03, true) :-
 		{catch(true, _, 3)}.
 
 	test(iso_catch_3_04, ball(bla)) :-
