@@ -114,6 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
@@ -190,6 +191,15 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(timeout(tester)).
 </pre></div>
 </div>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<p>Two tests are currently skipped when using the SWI-Prolog backend as
+they cannot be interrupted and generate the expected timeout exceptions
+due to tests being run from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive goal that,
+in the SWI-Prolog, implementation of this directive, ignores signals.
+The test goals do generate the expected timeout exception when not
+called from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive.</p>
 </section>
 </section>
 

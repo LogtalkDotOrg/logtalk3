@@ -59,5 +59,7 @@ Known issues
 
 Two tests are currently skipped when using the SWI-Prolog backend as they
 cannot be interrupted and generate the expected timeout exceptions due to
-tests being run from an `initialization/1` goal that, in the SWI-Prolog,
-implementation of this directive, ignores signals.
+tests being run from an `initialization/1` directive goal that, in the
+SWI-Prolog, implementation of this directive, ignores signals. The test
+goals do generate the expected timeout exception when not called from an
+`initialization/1` directive.
