@@ -44,6 +44,9 @@ Library
 
 * IMPROVED: Documentation of the `hook_objects` library.
 
+* FIXED: Workaround issue with the SWI-Prolog implementation of the standard
+`initialization/1` directive by skipping two tests of the `timeout` library.
+
 Tools
 _____
 

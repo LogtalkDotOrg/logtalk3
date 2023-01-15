@@ -52,3 +52,12 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(timeout(tester)).
+
+
+Known issues
+------------
+
+Two tests are currently skipped when using the SWI-Prolog backend as they
+cannot be interrupted and generate the expected timeout exceptions due to
+tests being run from an `initialization/1` goal that, in the SWI-Prolog,
+implementation of this directive, ignores signals.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2022-06-13,
+		date is 2023-01-15,
 		comment is 'Unit tests for the "timeout" library.'
 	]).
 
@@ -37,7 +37,7 @@
 
 	% call_with_timeout/2 tests
 
-	test(call_with_timeout_2_01, ball(timeout((repeat,fail)))) :-
+	test(call_with_timeout_2_01, ball(timeout((repeat,fail))), [condition(\+ current_logtalk_flag(prolog_dialect, swi))]) :-
 		call_with_timeout((repeat,fail), 0.1).
 
 	test(call_with_timeout_2_02, deterministic) :-
@@ -63,7 +63,7 @@
 
 	% call_with_timeout/3 tests
 
-	test(call_with_timeout_3_01, true(Result == timeout)) :-
+	test(call_with_timeout_3_01, true(Result == timeout), [condition(\+ current_logtalk_flag(prolog_dialect, swi))]) :-
 		call_with_timeout((repeat,fail), 0.1, Result).
 
 	test(call_with_timeout_3_02, true(Result == true)) :-
