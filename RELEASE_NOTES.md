@@ -87,6 +87,10 @@ Contributed by Lindsey Spratt from the LVM development work.
 * ADDED: Additional test for the Prolog standard `unify_with_occurs_check/2`
 predicate.
 
+* ADDED: Additional test for the de facto Prolog standard `format/2-3`
+predicates for the `~0f` format specifier. Test case contributed by
+Andrew Davison.
+
 
 3.61.0 - December 20, 2022
 ==========================

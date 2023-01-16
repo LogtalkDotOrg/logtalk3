@@ -234,6 +234,11 @@
 		{format("~4f", [-1.0e-1])},
 		^^text_output_assertion('-0.1000', Assertion).
 
+	test(lgt_format_2_float_zero_places, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~0f", [123.456])},
+		^^text_output_assertion('123', Assertion).
+
 	test(lgt_format_2_float_exponential_notation, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~e", [1.333333])},
