@@ -2,8 +2,8 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %
-%  Author: R.A.O'Keefe, L.Damas, V.S.Costa, Glenn Burgess,
-%          Jiri Spitz, and Jan Wielemaker
+%  Authors: R.A.O'Keefe, L.Damas, V.S.Costa, Glenn Burgess,
+%           Jiri Spitz, and Jan Wielemaker
 %  Logtalk port and additional predicates: Paulo Moura
 %
 %  Copyright 2004-2018 various people and institutions
