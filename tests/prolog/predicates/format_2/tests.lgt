@@ -409,5 +409,13 @@
 		^^set_text_output(''),
 		{format("~a ~d ~a", [abc, 42])}.
 
+	test(lgt_format_2_too_many_arguments_1, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format("abc", [def])}.
+
+	test(lgt_format_2_too_many_arguments_2, errors([domain_error(_,_), consistency_error(_,_,_)])) :-
+		^^set_text_output(''),
+		{format("~a ~d", [abc, 42, def])}.
+
 	cleanup :-
 		^^clean_text_output.

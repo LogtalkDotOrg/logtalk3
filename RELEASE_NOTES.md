@@ -91,6 +91,10 @@ predicate.
 predicates for the `~0f` format specifier. Test case contributed by
 Andrew Davison.
 
+* ADDED: Additional tests for the de facto Prolog standard `format/2-3`
+predicates for the case where the number of arguments is larger than required
+by the format string.
+
 
 3.61.0 - December 20, 2022
 ==========================
