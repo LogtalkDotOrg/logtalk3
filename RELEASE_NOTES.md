@@ -30,6 +30,11 @@ Logtalk compiler and runtime
 
 * ADDED: Message token `tab(Expression)` to the `logtalk` built-in object.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Simplify integration script for Trealla Prolog.
+
 Documentation
 -------------
 
