@@ -11,7 +11,7 @@
 Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.
 
 | **Author:** Paulo Moura
-| **Version:** 4:12:1
+| **Version:** 4:13:0
 | **Date:** 2023-01-24
 
 | **Compilation flags:**
@@ -96,6 +96,25 @@ True iff skipping.
 
 | **Mode and number of proofs:**
 |    ``skipping_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: skipping_unleashed_/1
+.. _debugger/0::skipping_unleashed_/1:
+
+``skipping_unleashed_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True iff skipping (a goal with invocation number ``N``) but showing intermediate ports as unleashed.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``skipping_unleashed_(N)``
+| **Mode and number of proofs:**
+|    ``skipping_unleashed_(?integer)`` - ``zero_or_one``
 
 
 ------------

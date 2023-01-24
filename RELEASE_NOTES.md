@@ -55,6 +55,9 @@ Library
 Tools
 _____
 
+* ADDED: New `debugger` tool port option to skip debugging for the current
+goal but displaying all intermediate ports unleashed.
+
 * ADDED: Experimental `lgtenv.sh` and `lgtenv.ps1` scripts for creating packs
 virtual environments.
 

@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2023-01-24,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -267,6 +267,7 @@
 			'       c - creep (go on; you may use also the space, return, or enter keys)'-[], nl,
 			'       l - leap (continues execution until the next spy point is found)'-[], nl,
 			'       s - skip (skips debugging for the current goal; valid at call, redo, and unification ports)'-[], nl,
+			'       S - Skip (similar to skip but displaying all intermediate ports unleashed)'-[], nl,
 			'       q - quasi-skip (skips debugging until returning to the current goal or reaching a spy point)'-[], nl,
 			'       r - retry (retries the current goal but side-effects are not undone; valid at the fail port)'-[], nl,
 			'       j - jump (reads invocation number and jumps to the next port with that number)'-[], nl,
@@ -306,12 +307,13 @@
 			'       c - creep            i - ignore     * - add context spy point'-[], nl,
 			'       l - leap             f - fail       / - remove context spy point'-[], nl,
 			'       s - skip             u - unify      + - add predicate spy point'-[], nl,
-			'       q - quasi-skip       n - nodebug    - - remove predicate spy point'-[], nl,
-			'       r - retry            ! - command    # - add line number spy point'-[], nl,
-			'       j - jump             @ - command    | - remove line number spy point'-[], nl,
-			'       z - zap              b - break'-[], nl,
-			'       p - print            a - abort'-[], nl,
-			'       d - display          Q - quit Logtalk'-[], nl,
+			'       S - Skip             n - nodebug    - - remove predicate spy point'-[], nl,
+			'       q - quasi-skip       ! - command    # - add line number spy point'-[], nl,
+			'       r - retry            @ - command    | - remove line number spy point'-[], nl,
+			'       j - jump             b - break'-[], nl,
+			'       z - zap              a - abort'-[], nl,
+			'       p - print            Q - quit Logtalk'-[], nl,
+			'       d - display'-[], nl,
 			'       w - write            x - execution context'-[], nl,
 			'       e - exception        = - debugging information'-[], nl,
 			'       $ - compiled goal    . - file information'-[], nl,

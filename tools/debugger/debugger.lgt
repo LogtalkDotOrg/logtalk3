@@ -23,7 +23,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:12:1,
+		version is 4:13:0,
 		author is 'Paulo Moura',
 		date is 2023-01-24,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -51,6 +51,14 @@
 	:- mode(skipping_, zero_or_one).
 	:- info(skipping_/0, [
 		comment is 'True iff skipping.'
+	]).
+
+	:- private(skipping_unleashed_/1).
+	:- dynamic(skipping_unleashed_/1).
+	:- mode(skipping_unleashed_(?integer), zero_or_one).
+	:- info(skipping_unleashed_/1, [
+		comment is 'True iff skipping (a goal with invocation number ``N``) but showing intermediate ports as unleashed.',
+		argnames is ['N']
 	]).
 
 	:- private(quasi_skipping_/0).
@@ -535,11 +543,13 @@
 			)
 		;	retractall(skipping_),
 			retractall(quasi_skipping_),
+			retractall(skipping_unleashed_(N)),
 			port(fail, N, Goal, TGoal, _, ExCtx, _),
 			fail
 		),
 		retractall(skipping_),
-		retractall(quasi_skipping_).
+		retractall(quasi_skipping_),
+		retractall(skipping_unleashed_(N)).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
@@ -592,7 +602,8 @@
 		debugging_,
 		!,
 		port_user_name(Port, PortUserName),
-		(	leashing(Port, PortUserName, N, Goal, ExCtx, _) ->
+		(	leashing(Port, PortUserName, N, Goal, ExCtx, _),
+			\+ skipping_unleashed_(_) ->
 			repeat,
 				% the do_port_option/7 call can fail but still change the value of Code
 				% (e.g. when adding or removing a spy point)
@@ -625,6 +636,7 @@
 	valid_port_option(c, _, _) :- !.
 	valid_port_option(l, _, _) :- !.
 	valid_port_option(s, _, _) :- !.
+	valid_port_option('S', _, _) :- !.
 	valid_port_option(q, _, _) :- !.
 	valid_port_option(j, _, _) :- !.
 	valid_port_option(z, _, _) :- !.
@@ -691,6 +703,20 @@
 		retractall(skipping_),
 		assertz(skipping_).
 	do_port_option(s, _, _, _, _, _, _, true).
+
+	do_port_option('S', rule(_,_,_,_), N, _, _, _, _, true) :-
+		!,
+		retractall(skipping_unleashed_(_)),
+		assertz(skipping_unleashed_(N)).
+	do_port_option('S', call, N, _, _, _, _, true) :-
+		!,
+		retractall(skipping_unleashed_(_)),
+		assertz(skipping_unleashed_(N)).
+	do_port_option('S', redo, N, _, _, _, _, true) :-
+		!,
+		retractall(skipping_unleashed_(_)),
+		assertz(skipping_unleashed_(N)).
+	do_port_option('S', _, _, _, _, _, _, true).
 
 	do_port_option(q, call, _, _, _, _, _, true) :-
 		!,
@@ -811,6 +837,7 @@
 	do_port_option(a, _, _, _, _, _, _, _) :-
 		retractall(skipping_),
 		retractall(quasi_skipping_),
+		retractall(skipping_unleashed_(_)),
 		throw(logtalk_debugger_aborted).
 
 	do_port_option('Q', _, _, _, _, _, _, _) :-

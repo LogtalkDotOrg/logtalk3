@@ -392,6 +392,8 @@ point for user interaction. The commands available are as follows:
 ``s`` — skip
    skips debugging for the current goal; valid at call, redo, and
    unification ports
+``S`` - Skip
+   similar to skip but displaying all intermediate ports unleashed
 ``q`` — quasi-skip
    skips debugging until returning to the current goal or reaching a spy
    point; valid at call and redo ports
