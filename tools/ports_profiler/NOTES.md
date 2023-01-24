@@ -106,7 +106,7 @@ To print a table with data for a single entity predicate, use the query:
 	| ?- ports_profiler::data(Entity, Predicate).
 
 In this case, the second argument must be either a predicate indicator,
-`Name/Arity, or a non-terminal indicator, `Name//Arity`.
+`Name/Arity`, or a non-terminal indicator, `Name//Arity`.
 
 The profiling data can be reset using the query:
 
