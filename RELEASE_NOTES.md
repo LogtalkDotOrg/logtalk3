@@ -75,9 +75,9 @@ as the called `lgt2svg.sh` script.
 * FIXED: Missing type-checking of some arguments of some of the `packs` tool
 predicates.
 
-* FIXED: The `debugger` tool to consume any new-line code after reading a goal
-to be called at a leashed port to avoid an automatic creep when returning to
-the port after calling the goal.
+* FIXED: The `debugger` tool to consume any new-line code after the user
+answers a question at a leashed port to avoid an automatic creep when
+returning to the port after calling the goal.
 
 Examples
 --------

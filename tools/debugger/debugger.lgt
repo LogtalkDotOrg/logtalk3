@@ -704,12 +704,14 @@
 
 	do_port_option(j, _, _, _, _, _, _, true) :-
 		ask_question(question, debugger, enter_invocation_number, integer, N),
+		discard_new_line,
 		retractall(jump_to_invocation_number_(_)),
 		assertz(jump_to_invocation_number_(N)),
 		retractall(tracing_).
 
 	do_port_option(z, _, _, _, _, _, _, true) :-
 		ask_question(question, debugger, enter_port_name, valid_zap_port, ZapPort),
+		discard_new_line,
 		retractall(zap_to_port_(_)),
 		(	atom(ZapPort) ->
 			assertz(zap_to_port_(ZapPort))
@@ -732,6 +734,7 @@
 
 	do_port_option(u, _, _, Goal, _, _, _, Result) :-
 		ask_question(question, debugger, enter_goal, callable, Term),
+		discard_new_line,
 		(	Goal = Term ->
 			Result = unify
 		;	Result = fail
@@ -784,6 +787,7 @@
 		functor(Goal, Functor, Arity),
 		functor(Template, Functor, Arity),
 		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
+		discard_new_line,
 		spy(Sender, This, Self, Template),
 		fail.
 
@@ -791,6 +795,7 @@
 		functor(Goal, Functor, Arity),
 		functor(Template, Functor, Arity),
 		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
+		discard_new_line,
 		nospy(Sender, This, Self, Template),
 		fail.
 
@@ -799,10 +804,7 @@
 
 	do_port_option((@), _, _, _, _, _, _, _) :-
 		ask_question(question, debugger, enter_query, callable, Goal),
-		(	peek_code(10) ->
-			get_code(_)
-		;	true
-		),
+		discard_new_line,
 		{once(Goal)},
 		fail.
 
@@ -838,6 +840,7 @@
 
 	do_port_option((<), _, _, _, _, _, _, _) :-
 		ask_question(question, debugger, enter_write_max_depth, '=<'(0), N),
+		discard_new_line,
 		retractall(write_max_depth_(_)),
 		assertz(write_max_depth_(N)),
 		fail.
@@ -1041,6 +1044,15 @@
 			).
 
 	:- endif.
+
+	% called after a call to logtalk::ask_question/5 to discard
+	% any new-line and thus avoiding an automatic creep when
+	% returning to the port after the user answers the question
+	discard_new_line :-
+		(	peek_code(10) ->
+			get_code(_)
+		;	true
+		).
 
 :- end_object.
 
