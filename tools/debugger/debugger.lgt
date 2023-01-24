@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:12:0,
+		version is 4:12:1,
 		author is 'Paulo Moura',
-		date is 2022-05-06,
+		date is 2023-01-24,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -799,6 +799,10 @@
 
 	do_port_option((@), _, _, _, _, _, _, _) :-
 		ask_question(question, debugger, enter_query, callable, Goal),
+		(	peek_code(10) ->
+			get_code(_)
+		;	true
+		),
 		{once(Goal)},
 		fail.
 
