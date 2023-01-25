@@ -438,6 +438,8 @@ point for user interaction. The commands available are as follows:
    unification port
 ``e`` — exception
    prints exception term thrown by the current goal
+``E`` — raise exception
+   reads and throws an exception term
 ``=`` — debugging
    prints debugging information
 ``<`` — write depth

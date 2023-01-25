@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:13:0,
+		version is 4:14:0,
 		author is 'Paulo Moura',
-		date is 2023-01-24,
+		date is 2023-01-25,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -674,6 +674,7 @@
 	valid_port_option((#), _, ' ') :- !.
 	valid_port_option(('|'), _, (#)) :- !.
 	valid_port_option(e, exception, _) :- !.
+	valid_port_option('E', _, _) :- !.
 	valid_port_option((<), _, _) :- !.
 
 	do_port_option('\r', _, _, _, _, _, _, true).
@@ -936,6 +937,11 @@
 		;	print_message(information, debugger, write_exception_term(Error))
 		),
 		fail.
+
+	do_port_option('E', _, _, _, _, _, _, _) :-
+		ask_question(question, debugger, enter_exception_term, callable, Error),
+		discard_new_line,
+		throw(Error).
 
 	do_port_option(h, _, _, _, _, _, _, _) :-
 		print_message(information, debugger, condensed_help),

@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 2:4:0,
+		version is 2:5:0,
 		author is 'Paulo Moura',
-		date is 2023-01-24,
+		date is 2023-01-25,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -83,6 +83,9 @@
 
 	message_tokens(enter_write_max_depth) -->
 		['     Enter the maximum write depth for terms (0 to reset)'-[], nl].
+
+	message_tokens(enter_exception_term) -->
+		['     Enter the exception term to throw'-[], nl].
 
 	% debugger status and switching
 
@@ -289,6 +292,7 @@
 			'       x - context (prints execution context)'-[], nl,
 			'       . - file (prints file, entity, predicate, and line number data at an unification port)'-[], nl,
 			'       e - exception (prints exception term thrown by current goal)'-[], nl,
+			'       E - raise exception (reads and throws an exception term)'-[], nl,
 			'       < - depth (sets the maximum write term depth; type 0 to reset)'-[], nl,
 			'       = - debugging (prints debugging information)'-[], nl,
 			'       * - add (adds a context spy point for the current goal)'-[], nl,
@@ -315,9 +319,10 @@
 			'       p - print            Q - quit Logtalk'-[], nl,
 			'       d - display'-[], nl,
 			'       w - write            x - execution context'-[], nl,
-			'       e - exception        = - debugging information'-[], nl,
+			'       < - write depth      = - debugging information'-[], nl,
 			'       $ - compiled goal    . - file information'-[], nl,
-			'       < - write depth'-[], nl,
+			'       e - exception'-[], nl,
+			'       E - raise exception'-[], nl,
 			'       h - condensed help   ? - extended help'-[], nl
 		].
 
