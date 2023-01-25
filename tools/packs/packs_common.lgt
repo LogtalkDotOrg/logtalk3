@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2022-11-20,
+		date is 2023-01-25,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -178,7 +178,10 @@
 	:- mode(readme_file_path(+atom, -atom), zero_or_one).
 	:- info(readme_file_path/2, [
 		comment is 'Returns the absolute path for the given directory readme file if it exists.',
-		argnames is ['Directory',  'ReadMeFile']
+		argnames is ['Directory',  'ReadMeFile'],
+		remarks is [
+			'Valid file names' - 'Case variations of ``README`` and ``NOTES`` with or without a ``.md`` or ``.txt`` extension. The recommended file name is ``README.md``.'
+		]
 	]).
 
 	:- protected(print_readme_file_path/1).
@@ -385,6 +388,15 @@
 	readme_file_name('README.txt').
 	readme_file_name('Readme.txt').
 	readme_file_name('readme.txt').
+	readme_file_name('NOTES.MD').
+	readme_file_name('NOTES.md').
+	readme_file_name('Notes.md').
+	readme_file_name('notes.md').
+	readme_file_name('NOTES').
+	readme_file_name('NOTES.TXT').
+	readme_file_name('NOTES.txt').
+	readme_file_name('Notes.txt').
+	readme_file_name('notes.txt').
 
 	decode_url_spaces(URL0, URL) :-
 		atom_chars(URL0, Chars0),

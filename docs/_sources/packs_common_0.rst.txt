@@ -11,8 +11,8 @@
 Common predicates for the packs tool objects.
 
 | **Author:** Paulo Moura
-| **Version:** 0:29:0
-| **Date:** 2022-11-20
+| **Version:** 0:30:0
+| **Date:** 2023-01-25
 
 | **Compilation flags:**
 |    ``static``
@@ -418,6 +418,10 @@ Returns the absolute path for the given directory readme file if it exists.
 |    ``readme_file_path(Directory,ReadMeFile)``
 | **Mode and number of proofs:**
 |    ``readme_file_path(+atom,-atom)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Valid file names: Case variations of ``README`` and ``NOTES`` with or without a ``.md`` or ``.txt`` extension. The recommended file name is ``README.md``.
 
 
 ------------

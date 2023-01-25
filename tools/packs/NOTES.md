@@ -297,7 +297,8 @@ any available notes when executing one of the registry actions. See the
 The registry directory should also contain `LICENSE` and `README.md` files
 (individual packs can use a different license, however). The path to the
 `README.md` file is printed when the registry is added. It can also be
-queried using the `registries::directory/2` predicate.
+queried using the `registries::directory/2` predicate. The `NOTES.md` file
+name can also be used in alternative to the recommended `README.md` file name.
 
 Summarizing the required directory structure using the above example (note
 that the registry and pack specification files are named after the objects):

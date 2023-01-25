@@ -73,6 +73,10 @@ to Graphviz crashes).
 * UPDATED: The `update_svg_diagrams.sh` script to exit with the same code
 as the called `lgt2svg.sh` script.
 
+* UPDATED: The `packs` tool to also recognize as a valid registry and pack
+readme file name case variations of `NOTES` with or without a `.md` or `.txt`
+extension.
+
 * FIXED: Document `packs` tool predicates possible exceptions.
 
 * FIXED: Missing type-checking of some arguments of some of the `packs` tool
