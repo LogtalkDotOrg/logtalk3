@@ -151,7 +151,7 @@ list should look like:
 
 The variables means that the interpreters are parametric objects and
 that additional information is needed in order to run them. The
-iddfs-interpreter needs to know the increment and the A*-interpreter
+iddfs-interpreter needs to know the increment and the A\*-interpreter
 needs to know what weight should be used when calculating the cost of
 nodes. To start with let's use the dfs-interpreter and do something
 exciting, namely appending two lists!
