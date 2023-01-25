@@ -78,6 +78,9 @@ trace to a file. For example:
    | ?- dump_trace::start_redirect_to_file('trace.txt', some_goal),
         dump_trace::stop_redirect_to_file.
 
+A full trace can also be obtained at the top-level by using the ``S``
+(Skip) command at the call port for the top-levle goal when tracing it.
+
 Alternative debugger tools
 --------------------------
 
