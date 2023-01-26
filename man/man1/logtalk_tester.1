@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "January 15, 2022" "Logtalk 3.53.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "January 26, 2023" "Logtalk 3.62.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -18,6 +18,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 [\fB-u \fIurl\fR]
 [\fB-c \fIreport\fR]
 [\fB-l \fIlevel\fR]
+[\fB-e \fIexclude\fR]
 [\fB-i \fIoptions\fR]
 [\fB-g \fIgoal\fR]
 [\fB-r \fIseed\fR]
@@ -69,6 +70,9 @@ Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fIn
 .TP
 .BI \-l
 Directory depth level to look for test sets. Level 1 means current directory only. Default is to recurse into all sub-directories.
+.TP
+.BI \-e
+Regular expression for excluding directories (using the \fIfind\fR command \fI-E\fR and \fI-regex\fR options).
 .TP
 .BI \-i
 Integration script command-line options (no default).
@@ -140,6 +144,10 @@ Run the Logtalk distribution tests using the GNU Prolog backend, passing a base 
 .TP
 Run all tests on the current directory and sub-directories using the YAP backend with its disable signal handling option:
 \fBlogtalk_tester -p yap -i "-nosignals"\fR
+.PP
+.TP
+Run all Prolog standards compliance tests with the exception of the \fIcatch_3\fR and \fIcut_0\fR test sets:
+\fBlogtalk_tester -p swi -e ".*/(catch_3|cut_0)/.*"\fR
 
 .SH IMPLEMENTATION NOTES
 When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (provided by the GNU \fIcoreutils\fR package), it will use it to run each test set if the timeout option is set to a value greater than zero. This package can be easily installed in POSIX operating-systems (including Linux and macOS) if not provided by default. On Windows operating-systems, the native timeout command is not usable for this purpose. But the Git for Windows installer includes the GNU \fIcoreutils\fR package, which can be used from the bundled Bash shell.

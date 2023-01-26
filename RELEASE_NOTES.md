@@ -55,6 +55,9 @@ Library
 Tools
 _____
 
+* ADDED: Option to the `logtalk_tester.sh` script for excluding directories
+using a regular expression.
+
 * ADDED: New `debugger` tool port option to skip debugging for the current
 goal but displaying all intermediate ports unleashed.
 

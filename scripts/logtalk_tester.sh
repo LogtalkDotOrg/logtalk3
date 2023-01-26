@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 27, 2022
+##   Last updated on January 26, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 10.6"
+	echo "$(basename "$0") 11.0"
 	exit 0
 }
 
@@ -68,6 +68,7 @@ else
 	base="$PWD"
 fi
 level=""
+exclude=""
 results="$base/logtalk_tester_logs"
 mode='normal'
 format='default'
@@ -291,7 +292,7 @@ usage_help()
 	echo "The timeout option requires availability of the GNU coreutils timeout command."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
+	echo "  $(basename "$0") -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-- arguments]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -316,6 +317,7 @@ usage_help()
 	echo "     (valid values are none and xml)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
+	echo "  -e exclude directories matching a regular expression (uses find command -E and -regex options)"
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
@@ -326,7 +328,7 @@ usage_help()
 	echo
 }
 
-while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:g:r:i:wh" option
+while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:e:g:r:i:wh" option
 do
 	case $option in
 		v) print_version;;
@@ -342,6 +344,7 @@ do
 		u) u_arg="$OPTARG";;
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		e) e_arg="$OPTARG";;
 		i) i_arg="$OPTARG";;
 		g) g_arg="$OPTARG";;
 		r) r_arg="$OPTARG";;
@@ -550,6 +553,10 @@ if [ "$l_arg" != "" ] ; then
 	fi
 fi
 
+if [ "$e_arg" != "" ] ; then
+	exclude="$e_arg"
+fi
+
 if [ "$g_arg" != "" ] ; then
 	initialization_goal="$g_arg"
 fi
@@ -589,8 +596,13 @@ if [ "$output" == 'verbose' ] ; then
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
 fi
 
-drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+if [ "$exclude" == "" ] ; then
+	drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+	testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+else
+	drivers="$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+	testsets=$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+fi
 
 if  [ $testsets -eq 0 ] ; then
 	echo "%"
