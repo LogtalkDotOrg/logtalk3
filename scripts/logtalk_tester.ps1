@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 28, 2022
+##   Last updated on January 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,6 +40,7 @@ param(
 	[String]$u,
 	[String]$c = "none",
 	[String]$l,
+	[String]$e,
 	[String]$i,
 	[String]$g = "true",
 	[String]$r,
@@ -262,7 +263,7 @@ Function Write-Usage-Help() {
 	Write-Output "The `"tester.sh`" file is sourced with all the parameters passed to the script."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-i options] [-g goal] [-r seed] [-w] [-a arguments]")
+	Write-Output ("  " + $myName + " -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-a arguments]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -286,6 +287,7 @@ Function Write-Usage-Help() {
 	Write-Output "     (valid values are none and xml)"
 	Write-Output "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	Write-Output "     (level 1 means current directory only)"
+	Write-Output "  -e exclude directories matching a regular expression"
 	Write-Output "  -i integration script command-line options (no default)"
 	Write-Output ("  -g initialization goal (default is " + $g + ")")
 	Write-Output "  -r random generator starting seed (no default)"
@@ -461,6 +463,10 @@ Function Check-Parameters() {
 		$script:level = 999
 	}
 
+	if ($e -ne "") {
+		$script:exclude = $e
+	}
+
 	if ($i -ne "") {
 		$script:backend_options = $i
 	}
@@ -501,6 +507,7 @@ $dot = ""
 $base = $pwd
 
 $level = 999
+$exclude = ""
 
 if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
 	$timeout_command = "$env:Programfiles\Git\usr\bin\timeout.exe"
@@ -567,17 +574,17 @@ if ($o -eq "verbose") {
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
 }
 
-$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | Measure-Object).count
+$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
 		Foreach-Object {
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
 		Foreach-Object {
 			Write-Host -NoNewline "% running $testsets test sets: "
 			Write-Host -NoNewline "$counter`r"
@@ -588,13 +595,13 @@ if ($l -eq "") {
 	}
 } else {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 		Foreach-Object {
 			Run-TestSet $_.FullName
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
+		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 		Foreach-Object {
 			Write-Host -NoNewline "% running $testsets test sets: "
 			Write-Host -NoNewline "$counter`r"
