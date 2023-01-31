@@ -1,0 +1,124 @@
+.. index:: sequence_grammars
+.. _sequence_grammars/0:
+
+.. rst-class:: right
+
+**object**
+
+``sequence_grammars``
+=====================
+
+Sequence grammars.
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2023-01-30
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: zero_or_more//1
+.. _sequence_grammars/0::zero_or_more//1:
+
+``zero_or_more//1``
+^^^^^^^^^^^^^^^^^^^
+
+Describes a sequence of zero or more terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_or_more(Terminals)``
+| **Mode and number of proofs:**
+|    ``zero_or_more(-list(atomic))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: one_or_more//1
+.. _sequence_grammars/0::one_or_more//1:
+
+``one_or_more//1``
+^^^^^^^^^^^^^^^^^^
+
+Describes a sequence of one or more terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``one_or_more(Terminals)``
+| **Mode and number of proofs:**
+|    ``one_or_more(-list(atomic))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: zero_or_more//0
+.. _sequence_grammars/0::zero_or_more//0:
+
+``zero_or_more//0``
+^^^^^^^^^^^^^^^^^^^
+
+Describes a sequence of zero or more terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``zero_or_more`` - ``one``
+
+
+------------
+
+.. index:: one_or_more//0
+.. _sequence_grammars/0::one_or_more//0:
+
+``one_or_more//0``
+^^^^^^^^^^^^^^^^^^
+
+Describes a sequence of one or more terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``one_or_more`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
