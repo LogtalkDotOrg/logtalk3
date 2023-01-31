@@ -168,11 +168,12 @@
 <p>This library provides Definite Clause Grammars (DCGs) for common parsing
 tasks. The DCGs support parsing both lists of characters (aka chars) and
 lists of character codes (aka codes).</p>
-<p>Currently, three groups of DCGs are available, each defined in its own
+<p>Currently, four groups of DCGs are available, each defined in its own
 file:</p>
 <ul class="simple">
 <li><p>blanks (<code class="docutils literal notranslate"><span class="pre">blank_grammars.lgt</span></code>)</p></li>
 <li><p>numbers (<code class="docutils literal notranslate"><span class="pre">number_grammars.lgt</span></code>)</p></li>
+<li><p>sequences (<code class="docutils literal notranslate"><span class="pre">sequence_grammars.lgt</span></code>)</p></li>
 <li><p>IP addresses (<code class="docutils literal notranslate"><span class="pre">ip_grammars.lgt</span></code>; depends on
 <code class="docutils literal notranslate"><span class="pre">number_grammars.lgt</span></code>)</p></li>
 </ul>
@@ -199,9 +200,10 @@ link in a web browser.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>The library uses parametric objects where the single parameter can be
-either <code class="docutils literal notranslate"><span class="pre">chars</span></code> or <code class="docutils literal notranslate"><span class="pre">codes</span></code>. The parameter must be bound when using
-the DCGs. For example, when using implicit message sending:</p>
+<p>The library uses (when necessary) parametric objects where the single
+parameter can be either <code class="docutils literal notranslate"><span class="pre">chars</span></code> or <code class="docutils literal notranslate"><span class="pre">codes</span></code>. The parameter must be
+bound when using the DCGs. For example, when using implicit message
+sending:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(blank_grammars(chars), [
     white_spaces<span class="o">//</span><span class="m">0</span>, new_lines<span class="o">//</span><span class="m">0</span>
 ]).

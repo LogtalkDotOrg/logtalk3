@@ -24,7 +24,8 @@
 	logtalk_load([
 		blank_grammars,
 		number_grammars,
-		ip_grammars
+		ip_grammars,
+		sequence_grammars
 	], [
 		optimize(on)
 	])

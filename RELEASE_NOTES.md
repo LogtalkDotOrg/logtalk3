@@ -47,6 +47,9 @@ developer tools documentation.
 Library
 -------
 
+* ADDED: Preliminary version of sequence grammar rules to the `grammars`
+library. 
+
 * IMPROVED: Documentation of the `hook_objects` library.
 
 * FIXED: Workaround issue with the SWI-Prolog implementation of the standard

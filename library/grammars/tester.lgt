@@ -25,7 +25,8 @@
 	logtalk_load([
 		blank_grammars,
 		number_grammars,
-		ip_grammars
+		ip_grammars,
+		sequence_grammars
 	], [
 		debug(on), source_data(on)
 	]),

@@ -321,6 +321,7 @@ To load an entity, always load the library that includes it using the goal ``log
    blank_grammars(Format) <blank_grammars_1>
    ip_grammars(Format) <ip_grammars_1>
    number_grammars(Format) <number_grammars_1>
+   sequence_grammars <sequence_grammars_0>
 
 ``library/heaps/``
 ------------------

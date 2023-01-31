@@ -37,6 +37,7 @@
 	cover(blank_grammars(_)).
 	cover(number_grammars(_)).
 	cover(ip_grammars(_)).
+	cover(sequence_grammars).
 
 	% blank_grammars tests
 
@@ -260,6 +261,38 @@
 	test(ip_ipv6, true(List == [8193,3512,34211,0,0,35374,880,29492])) :-
 		convert('2001:0db8:85a3:0000:0000:8a2e:0370:7334', Input),
 		phrase(ip_grammars(_Format_)::ipv6(List), Input).
+
+	% sequence_grammars tests
+
+	test(zero_or_more_1, true(Sequences == [[],[1],[1,2],[1,2,3]])) :-
+		findall(
+			Sequence,
+			phrase(sequence_grammars::zero_or_more(Sequence), [1,2,3], _),
+			Sequences
+		).
+
+	test(one_or_more_1, true(Sequences == [[1],[1,2],[1,2,3]])) :-
+		findall(
+			Sequence,
+			phrase(sequence_grammars::one_or_more(Sequence), [1,2,3], _),
+			Sequences
+		).
+
+	test(zero_or_more_0, true(N == 4)) :-
+		findall(
+			1,
+			phrase(sequence_grammars::zero_or_more, [1,2,3], _),
+			Solutions
+		),
+		list::length(Solutions, N).
+
+	test(one_or_more_0, true(N == 3)) :-
+		findall(
+			1,
+			phrase(sequence_grammars::one_or_more, [1,2,3], _),
+			Solutions
+		),
+		list::length(Solutions, N).
 
 	% auxiliary predicates
 
