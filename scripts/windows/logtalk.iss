@@ -18,7 +18,7 @@
 ; limitations under the License.
 
 #define MyAppName "Logtalk"
-#define MyAppCopyright "Copyright © 1998-2022 Paulo Moura"
+#define MyAppCopyright "Copyright © 1998-2023 Paulo Moura"
 #define MyAppPublisher "Logtalk.org"
 #define MyAppURL "https://logtalk.org"
 #define MyAppUrlName "Logtalk Web Site.url"
