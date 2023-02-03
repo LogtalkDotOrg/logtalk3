@@ -14179,9 +14179,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded(Goals), Caller, MTGoals, '$lgt_debug'(goal(threaded(Goals), MDGoals), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded(Goals), _, MTGoals, '$lgt_debug'(goal(threaded(Goals), MDGoals), ExCtx), Ctx) :-
 	!,
-	'$lgt_compile_body'(Goals, Caller, TGoals, DGoals, Ctx),
+	'$lgt_compile_body'(Goals, meta, TGoals, DGoals, Ctx),
 	'$lgt_compile_threaded_call'(TGoals, MTGoals),
 	'$lgt_compile_threaded_call'(DGoals, MDGoals),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
@@ -14192,11 +14192,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_call(Goal, Tag), Caller, MTGoal, '$lgt_debug'(goal(threaded_call(Goal, Tag), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_call(Goal, Tag), _, MTGoal, '$lgt_debug'(goal(threaded_call(Goal, Tag), MDGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var, Tag),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, Caller, TGoal, DGoal, Ctx),
+	'$lgt_compile_body'(Goal, meta, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_call_tagged'(Goal, TGoal, ExCtx, Tag),
 	MDGoal = '$lgt_threaded_call_tagged'(Goal, DGoal, ExCtx, Tag).
 
@@ -14206,10 +14206,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_call(Goal), Caller, MTGoal, '$lgt_debug'(goal(threaded_call(Goal), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_call(Goal), _, MTGoal, '$lgt_debug'(goal(threaded_call(Goal), MDGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, Caller, TGoal, DGoal, Ctx),
+	'$lgt_compile_body'(Goal, meta, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_call'(Goal, TGoal, ExCtx),
 	MDGoal = '$lgt_threaded_call'(Goal, DGoal, ExCtx).
 
@@ -14218,11 +14218,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_once(Goal, Tag), Caller, MTGoal, '$lgt_debug'(goal(threaded_once(Goal, Tag), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_once(Goal, Tag), _, MTGoal, '$lgt_debug'(goal(threaded_once(Goal, Tag), MDGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_check'(var, Tag),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, Caller, TGoal, DGoal, Ctx),
+	'$lgt_compile_body'(Goal, meta, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_once_tagged'(Goal, TGoal, ExCtx, Tag),
 	MDGoal = '$lgt_threaded_once_tagged'(Goal, DGoal, ExCtx, Tag).
 
@@ -14232,10 +14232,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_once(Goal), Caller, MTGoal, '$lgt_debug'(goal(threaded_once(Goal), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_once(Goal), _, MTGoal, '$lgt_debug'(goal(threaded_once(Goal), MDGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, Caller, TGoal, DGoal, Ctx),
+	'$lgt_compile_body'(Goal, meta, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_once'(Goal, TGoal, ExCtx),
 	MDGoal = '$lgt_threaded_once'(Goal, DGoal, ExCtx).
 
@@ -14245,9 +14245,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_ignore(Goal), Caller, MTGoal, '$lgt_debug'(goal(threaded_ignore(Goal), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_ignore(Goal), _, MTGoal, '$lgt_debug'(goal(threaded_ignore(Goal), MDGoal), ExCtx), Ctx) :-
 	!,
-	'$lgt_compile_body'(Goal, Caller, TGoal, DGoal, Ctx),
+	'$lgt_compile_body'(Goal, meta, TGoal, DGoal, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	MTGoal = '$lgt_threaded_ignore'(Goal, TGoal, ExCtx),
 	MDGoal = '$lgt_threaded_ignore'(Goal, DGoal, ExCtx).
@@ -14258,11 +14258,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_exit(Goal, Tag), Caller, TGoal, '$lgt_debug'(goal(threaded_exit(Goal, Tag), TGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_exit(Goal, Tag), _, TGoal, '$lgt_debug'(goal(threaded_exit(Goal, Tag), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	% compile the goal just for type-checking and collecting source data
-	'$lgt_compile_body'(Goal, Caller, _, _, Ctx),
+	'$lgt_compile_body'(Goal, meta, _, _, Ctx),
 	TGoal = '$lgt_threaded_exit_tagged'(Goal, ExCtx, Tag).
 
 
@@ -14271,11 +14271,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_exit(Goal), Caller, TGoal, '$lgt_debug'(goal(threaded_exit(Goal), TGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_exit(Goal), _, TGoal, '$lgt_debug'(goal(threaded_exit(Goal), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	% compile the goal just for type-checking and collecting source data
-	'$lgt_compile_body'(Goal, Caller, _, _, Ctx),
+	'$lgt_compile_body'(Goal, meta, _, _, Ctx),
 	TGoal = '$lgt_threaded_exit'(Goal, ExCtx).
 
 
@@ -14284,11 +14284,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_peek(Goal, Tag), Caller, TGoal, '$lgt_debug'(goal(threaded_peek(Goal, Tag), TGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_peek(Goal, Tag), _, TGoal, '$lgt_debug'(goal(threaded_peek(Goal, Tag), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	% compile the goal just for type-checking and collecting source data
-	'$lgt_compile_body'(Goal, Caller, _, _, Ctx),
+	'$lgt_compile_body'(Goal, meta, _, _, Ctx),
 	TGoal = '$lgt_threaded_peek_tagged'(Goal, ExCtx, Tag).
 
 
@@ -14297,11 +14297,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_peek(Goal), Caller, TGoal, '$lgt_debug'(goal(threaded_peek(Goal), TGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_peek(Goal), _, TGoal, '$lgt_debug'(goal(threaded_peek(Goal), TGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	% compile the goal just for type-checking and collecting source data
-	'$lgt_compile_body'(Goal, Caller, _, _, Ctx),
+	'$lgt_compile_body'(Goal, meta, _, _, Ctx),
 	TGoal = '$lgt_threaded_peek'(Goal, ExCtx).
 
 
@@ -14321,10 +14321,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
-'$lgt_compile_body'(threaded_engine_create(AnswerTemplate, Goal, Engine), Caller, MTGoal, '$lgt_debug'(goal(threaded_engine_create(AnswerTemplate, Goal, Engine), MDGoal), ExCtx), Ctx) :-
+'$lgt_compile_body'(threaded_engine_create(AnswerTemplate, Goal, Engine), _, MTGoal, '$lgt_debug'(goal(threaded_engine_create(AnswerTemplate, Goal, Engine), MDGoal), ExCtx), Ctx) :-
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_compile_body'(Goal, Caller, TGoal, DGoal, Ctx),
+	'$lgt_compile_body'(Goal, meta, TGoal, DGoal, Ctx),
 	MTGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, TGoal, ExCtx, Engine),
 	MDGoal = '$lgt_threaded_engine_create'(AnswerTemplate, Goal, DGoal, ExCtx, Engine).
 

@@ -25,7 +25,11 @@ RELEASE NOTES
 3.63.0 - February ??, 2023
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
 
+* FIXED: Spurious suspicious call linter warnings when compiling calls to
+threaded meta-predicates. Thanks to Didier Garcin for the big report.
 
 
 3.62.0 - January 31, 2023
