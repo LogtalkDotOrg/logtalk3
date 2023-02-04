@@ -11206,7 +11206,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	true
 		)
 	;	'$lgt_check_predicate_name_conflict'(uses, Alias, AliasFunctor/Arity),
-		'$lgt_check_predicate_availability'(uses, Obj, OriginalFunctor, Arity, Original, Ctx),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11256,7 +11255,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	functor(Pred, OriginalFunctor, ExtArity),
 		functor(PredAlias, AliasFunctor, ExtArity),
 		'$lgt_check_predicate_name_conflict'(uses, PredAlias, AliasFunctor//Arity),
-		'$lgt_check_predicate_availability'(uses, Obj, OriginalFunctor, ExtArity, Original, Ctx),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11471,7 +11469,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	true
 		)
 	;	'$lgt_check_predicate_name_conflict'(use_module, Alias, AliasFunctor/Arity),
-		'$lgt_check_predicate_availability'(use_module, Module, OriginalFunctor, Arity, Original, Ctx),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11521,7 +11518,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	functor(Pred, AliasFunctor, ExtArity),
 		functor(PredAlias, AliasFunctor, ExtArity),
 		'$lgt_check_predicate_name_conflict'(use_module, PredAlias, AliasFunctor//Arity),
-		'$lgt_check_predicate_availability'(use_module, Module, OriginalFunctor, ExtArity, Original, Ctx),
 		% unify arguments of TOriginal and TAlias
 		Original =.. [_| Args],
 		Alias =.. [_| Args],
@@ -11619,61 +11615,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(modify, dynamic_predicate, Culprit))
 	;	true
 	).
-
-% auxiliary predicate for checking predicate availability for predicates
-% listed in uses/2 and use_module/2 directives but only when the objects
-% and modules are loaded
-
-'$lgt_check_predicate_availability'(_, Entity, _, _, _, _) :-
-	% parameter variable
-	var(Entity),
-	!.
-
-'$lgt_check_predicate_availability'(uses, Obj, Functor, Arity, Template, Ctx) :-
-	!,
-	(	\+ current_object(Obj) ->
-		true
-	;	Obj::current_predicate(Functor/Arity) ->
-		true
-	;	Obj == user,
-		(	'$lgt_predicate_property'(Template, built_in)
-		;	catch('$lgt_predicate_property'(Template, foreign), _, fail)
-		) ->
-		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
-		'$lgt_compiler_flag'(unknown_predicates, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(
-			warning(unknown_predicates),
-			message_not_understood(File, Lines, Type, Entity, Obj, Template)
-		)
-	;	true
-	).
-
-'$lgt_check_predicate_availability'(use_module, Module, Functor, Arity, Template, Ctx) :-
-	!,
-	(	\+ current_module(Module) ->
-		true
-	;	current_predicate(':'(Module, Functor/Arity)) ->
-		true
-	;	Module == user,
-		(	'$lgt_predicate_property'(Template, built_in)
-		;	catch('$lgt_predicate_property'(Template, foreign), _, fail)
-		) ->
-		true
-	;	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
-		'$lgt_compiler_flag'(unknown_predicates, warning) ->
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_print_message'(
-			warning(unknown_predicates),
-			unknown_module_predicate(File, Lines, Type, Entity, Module, Template)
-		)
-	;	true
-	).
-
-'$lgt_check_predicate_availability'(_, _, _, _, _).
 
 
 
@@ -19796,6 +19737,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_report_non_portable_calls'(Type, Entity),
 	'$lgt_report_non_tail_recursive_predicates'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity),
+	'$lgt_report_unknown_messages'(Type, Entity),
 	'$lgt_report_naming_issues'(Type, Entity).
 
 
@@ -19960,6 +19902,98 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_unknown_modules'(_, _).
+
+
+
+% '$lgt_report_unknown_messages'(+atom, @entity_identifier)
+%
+% reports any unknown messages for loaded objects and calls to unknown
+% predicates for loaded modules found while compiling an entity
+
+'$lgt_report_unknown_messages'(_, _) :-
+	'$lgt_compiler_flag'(unknown_predicates, silent),
+	!.
+
+'$lgt_report_unknown_messages'(Type, Entity) :-
+	'$lgt_pp_uses_predicate_'(Obj, Original, _, _, File, Lines),
+	functor(Original, Functor, Arity),
+	'$lgt_check_predicate_availability'(uses, Obj, Original, Original, Functor, Arity, Type, Entity, File, Lines),
+	fail.
+
+'$lgt_report_unknown_messages'(Type, Entity) :-
+	'$lgt_pp_uses_non_terminal_'(Obj, Original, _, Pred, _, _, File, Lines),
+	functor(Pred, Functor, Arity),
+	'$lgt_check_predicate_availability'(uses, Obj, Original, Pred, Functor, Arity, Type, Entity, File, Lines),
+	fail.
+
+'$lgt_report_unknown_messages'(Type, Entity) :-
+	'$lgt_pp_use_module_predicate_'(Module, Original, _, _, File, Lines),
+	functor(Original, Functor, Arity),
+	'$lgt_check_predicate_availability'(use_module, Module, Original, Original, Functor, Arity, Type, Entity, File, Lines),
+	fail.
+
+'$lgt_report_unknown_messages'(Type, Entity) :-
+	'$lgt_pp_use_module_non_terminal_'(Module, Original, _, Pred, _, _, File, Lines),
+	functor(Pred, Functor, Arity),
+	'$lgt_check_predicate_availability'(use_module, Module, Original, Pred, Functor, Arity, Type, Entity, File, Lines),
+	fail.
+
+'$lgt_report_unknown_messages'(_, _).
+
+
+
+% auxiliary predicate for checking predicate availability for predicates
+% listed in uses/2 and use_module/2 directives but only when the objects
+% and modules are loaded
+
+'$lgt_check_predicate_availability'(_, Entity, _, _, _, _, _, _, _, _) :-
+	% parameter variable
+	var(Entity),
+	!.
+
+'$lgt_check_predicate_availability'(uses, Obj, Original, Pred, Functor, Arity, Type, Entity, File, Lines) :-
+	!,
+	(	\+ current_object(Obj) ->
+		true
+	;	Obj::current_predicate(Functor/Arity) ->
+		true
+	;	Obj == user,
+		(	'$lgt_predicate_property'(Pred, built_in)
+		;	catch('$lgt_predicate_property'(Pred, foreign), _, fail)
+		;	'$lgt_pp_directive_'(dynamic(Functor/Arity))
+		;	'$lgt_pp_directive_'(multifile(Functor/Arity))
+		) ->
+		true
+	;	'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(unknown_predicates),
+			message_not_understood(File, Lines, Type, Entity, Obj, Original)
+		)
+	;	true
+	).
+
+'$lgt_check_predicate_availability'(use_module, Module, Original, Pred, Functor, Arity, Type, Entity, File, Lines) :-
+	!,
+	(	\+ current_module(Module) ->
+		true
+	;	current_predicate(':'(Module, Functor/Arity)) ->
+		true
+	;	Module == user,
+		(	'$lgt_predicate_property'(Pred, built_in)
+		;	catch('$lgt_predicate_property'(Pred, foreign), _, fail)
+		;	'$lgt_pp_directive_'(dynamic(Functor/Arity))
+		;	'$lgt_pp_directive_'(multifile(Functor/Arity))
+		) ->
+		true
+	;	'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(unknown_predicates),
+			unknown_module_predicate(File, Lines, Type, Entity, Module, Original)
+		)
+	;	true
+	).
+
+'$lgt_check_predicate_availability'(_, _, _, _, _, _, _, _, _, _).
 
 
 
