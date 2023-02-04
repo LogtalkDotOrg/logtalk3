@@ -36,6 +36,12 @@ the same entity.
 * FIXED: Spurious suspicious call linter warnings when compiling calls to
 threaded meta-predicates. Thanks to Didier Garcin for the big report.
 
+Examples
+--------
+
+* FIXED: Unknown module predicate linter warnings in the `constraints/sicstus`
+example due to the `length/2` and `member/2` predicates being built-in.
+
 
 3.62.0 - January 31, 2023
 =========================

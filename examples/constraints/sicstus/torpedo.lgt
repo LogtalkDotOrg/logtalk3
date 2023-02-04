@@ -35,7 +35,7 @@
 	:- public(torpedo/1).
 
 	:- use_module(lists, [
-		keys_and_values/3, keyclumped/2, length/2, member/2
+		keys_and_values/3, keyclumped/2
 	]).
 
 	:- use_module(clpfd, [
