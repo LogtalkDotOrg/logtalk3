@@ -19916,24 +19916,28 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_unknown_messages'(Type, Entity) :-
 	'$lgt_pp_uses_predicate_'(Obj, Original, _, _, File, Lines),
+	nonvar(Obj),
 	functor(Original, Functor, Arity),
 	'$lgt_check_predicate_availability'(uses, Obj, Original, Original, Functor, Arity, Type, Entity, File, Lines),
 	fail.
 
 '$lgt_report_unknown_messages'(Type, Entity) :-
 	'$lgt_pp_uses_non_terminal_'(Obj, Original, _, Pred, _, _, File, Lines),
+	nonvar(Obj),
 	functor(Pred, Functor, Arity),
 	'$lgt_check_predicate_availability'(uses, Obj, Original, Pred, Functor, Arity, Type, Entity, File, Lines),
 	fail.
 
 '$lgt_report_unknown_messages'(Type, Entity) :-
 	'$lgt_pp_use_module_predicate_'(Module, Original, _, _, File, Lines),
+	nonvar(Module),
 	functor(Original, Functor, Arity),
 	'$lgt_check_predicate_availability'(use_module, Module, Original, Original, Functor, Arity, Type, Entity, File, Lines),
 	fail.
 
 '$lgt_report_unknown_messages'(Type, Entity) :-
 	'$lgt_pp_use_module_non_terminal_'(Module, Original, _, Pred, _, _, File, Lines),
+	nonvar(Module),
 	functor(Pred, Functor, Arity),
 	'$lgt_check_predicate_availability'(use_module, Module, Original, Pred, Functor, Arity, Type, Entity, File, Lines),
 	fail.
@@ -19946,13 +19950,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % listed in uses/2 and use_module/2 directives but only when the objects
 % and modules are loaded
 
-'$lgt_check_predicate_availability'(_, Entity, _, _, _, _, _, _, _, _) :-
-	% parameter variable
-	var(Entity),
-	!.
-
 '$lgt_check_predicate_availability'(uses, Obj, Original, Pred, Functor, Arity, Type, Entity, File, Lines) :-
-	!,
 	(	\+ current_object(Obj) ->
 		true
 	;	Obj::current_predicate(Functor/Arity) ->
@@ -19969,11 +19967,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 			warning(unknown_predicates),
 			message_not_understood(File, Lines, Type, Entity, Obj, Original)
 		)
-	;	true
 	).
 
 '$lgt_check_predicate_availability'(use_module, Module, Original, Pred, Functor, Arity, Type, Entity, File, Lines) :-
-	!,
 	(	\+ current_module(Module) ->
 		true
 	;	current_predicate(':'(Module, Functor/Arity)) ->
@@ -19990,10 +19986,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			warning(unknown_predicates),
 			unknown_module_predicate(File, Lines, Type, Entity, Module, Original)
 		)
-	;	true
 	).
-
-'$lgt_check_predicate_availability'(_, _, _, _, _, _, _, _, _, _).
 
 
 
