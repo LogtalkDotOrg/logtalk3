@@ -36,6 +36,12 @@ the same entity.
 * FIXED: Spurious suspicious call linter warnings when compiling calls to
 threaded meta-predicates. Thanks to Didier Garcin for the big report.
 
+Documentation
+-------------
+
+* ADDED: Handbook section on compiler formatting of errors, warnings, and
+comments.
+
 Examples
 --------
 

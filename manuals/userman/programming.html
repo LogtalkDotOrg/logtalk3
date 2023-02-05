@@ -82,6 +82,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#multi-pass-compiler">Multi-pass compiler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compiling-and-loading-your-applications">Compiling and loading your applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-errors-warnings-and-comments">Compiler errors, warnings, and comments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loader-files">Loader files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#libraries-of-source-files">Libraries of source files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#settings-files">Settings files</a></li>
@@ -183,19 +184,24 @@ necessary files. Logtalk extends but does not modify your Prolog
 compiler. We can freely mix Prolog queries with the sending of messages
 and our applications can be made of both normal Prolog clauses and
 object definitions.</p>
-<p>Depending on your Logtalk installation, you may use a script or a
-shortcut to start Logtalk with your chosen Prolog compiler. On POSIX
-operating-systems, the scripts should be available from the
-command-line; scripts are named upon the used backend Prolog compilers.
-On Windows, the shortcuts should be available from the Start Menu. For
-example, assuming a POSIX operating-system and GNU Prolog as the
-backend:</p>
+<p>Depending on your Logtalk installation, you may use a script or a shortcut
+to start Logtalk with your chosen Prolog compiler. On POSIX operating-systems,
+Bash shell integration scripts should be available from the command-line.
+On Windows, PowerShell integration scripts should be available from the
+command-line and integration shortcuts should be available from the Start Menu.
+Scripts are named upon the used backend Prolog compilers.</p>
+<p>For example, assuming a POSIX operating-system and GNU Prolog as the backend:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>gplgt
 ...
 </pre></div>
 </div>
 <p>Depending on your Logtalk installation, you may need to type instead
-<code class="docutils literal notranslate"><span class="pre">gplgt.sh</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">gplgt.sh</span></code>. On Windows, using PowerShell 7.2 or later version and
+ECLiPSe as the backend:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">eclipselgt</span><span class="p">.</span><span class="n">ps1</span>
+<span class="p">...</span>
+</pre></div>
+</div>
 </section>
 <section id="running-parallel-logtalk-processes">
 <span id="programming-parallel-processes"></span><h2>Running parallel Logtalk processes<a class="headerlink" href="#running-parallel-logtalk-processes" title="Permalink to this heading"></a></h2>
@@ -369,6 +375,29 @@ complete list of targets and top-level shortcuts. In particular, the
 backend Prolog compilers as the generated intermediate files may not be
 compatible. The <code class="docutils literal notranslate"><span class="pre">logtalk_make(caches)</span></code> goal is usually used when
 benchmarking compiler performance improvements.</p>
+</section>
+<section id="compiler-errors-warnings-and-comments">
+<span id="programming-errors-warnings-comments"></span><h2>Compiler errors, warnings, and comments<a class="headerlink" href="#compiler-errors-warnings-and-comments" title="Permalink to this heading"></a></h2>
+<p>Following a Prolog tradition inherited from Quintus Prolog, the compiler
+prefixes (by default) errors with a <code class="docutils literal notranslate"><span class="pre">!</span></code> and warnings with a <code class="docutils literal notranslate"><span class="pre">*</span></code>. For
+example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>!     Existence error: directive object/1 does not exist
+!       in directive end_object/0
+!       in file /home/jdoe/logtalk/examples/errors/unmatched_directive.lgt at or above line 27
+
+*     No matching clause for goal: baz(a)
+*       while compiling object main_include_compiler_warning
+*       in file /home/jdoe/logtalk/examples/errors/include_compiler_warning.lgt between lines 38-39
+</pre></div>
+</div>
+<p>Compiler comments are prefixed by <code class="docutils literal notranslate"><span class="pre">%</span></code>. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>?- {ack(loader)}.
+% [ /home/jdoe/logtalk/examples/ack/ack.lgt loaded ]
+% [ /home/jdoe/logtalk/examples/ack/loader.lgt loaded ]
+% (0 warnings)
+true.
+</pre></div>
+</div>
 </section>
 <section id="loader-files">
 <span id="programming-loaders"></span><h2>Loader files<a class="headerlink" href="#loader-files" title="Permalink to this heading"></a></h2>
@@ -1076,8 +1105,8 @@ The default value is the directory of the source file being compiled.</p>
 </dl>
 <span class="target" id="flag-hook"></span><dl class="simple" id="index-48">
 <dt><code class="docutils literal notranslate"><span class="pre">hook(Object)</span></code></dt><dd><p>Allows the definition of an object (which can be the pseudo-object
-<a class="reference external" href="../../docs/user_0.html#user-0" title="(in Logtalk APIs v3.62.0)"><span class="xref std std-ref">user</span></a>) implementing the
-<a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.62.0)"><span class="xref std std-ref">expanding</span></a> built-in
+<a class="reference external" href="../../docs/user_0.html#user-0" title="(in Logtalk APIs v3.63.0)"><span class="xref std std-ref">user</span></a>) implementing the
+<a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.63.0)"><span class="xref std std-ref">expanding</span></a> built-in
 protocol. The hook object must be compiled and loaded when this option
 is used. It’s also possible to specify a Prolog module instead of a
 Logtalk object but the module must be pre-loaded and its identifier

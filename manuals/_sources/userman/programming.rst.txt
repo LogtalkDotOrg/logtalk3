@@ -50,13 +50,14 @@ compiler. We can freely mix Prolog queries with the sending of messages
 and our applications can be made of both normal Prolog clauses and
 object definitions.
 
-Depending on your Logtalk installation, you may use a script or a
-shortcut to start Logtalk with your chosen Prolog compiler. On POSIX
-operating-systems, the scripts should be available from the
-command-line; scripts are named upon the used backend Prolog compilers.
-On Windows, the shortcuts should be available from the Start Menu. For
-example, assuming a POSIX operating-system and GNU Prolog as the
-backend:
+Depending on your Logtalk installation, you may use a script or a shortcut
+to start Logtalk with your chosen Prolog compiler. On POSIX operating-systems,
+Bash shell integration scripts should be available from the command-line.
+On Windows, PowerShell integration scripts should be available from the
+command-line and integration shortcuts should be available from the Start Menu.
+Scripts are named upon the used backend Prolog compilers.
+
+For example, assuming a POSIX operating-system and GNU Prolog as the backend:
 
 .. code-block:: bash
 
@@ -64,7 +65,13 @@ backend:
    ...
 
 Depending on your Logtalk installation, you may need to type instead
-``gplgt.sh``.
+``gplgt.sh``. On Windows, using PowerShell 7.2 or later version and
+ECLiPSe as the backend:
+
+.. code-block:: powershell
+
+   PS> eclipselgt.ps1
+   ...
 
 .. _programming_parallel_processes:
 
@@ -268,6 +275,35 @@ complete list of targets and top-level shortcuts. In particular, the
 backend Prolog compilers as the generated intermediate files may not be
 compatible. The ``logtalk_make(caches)`` goal is usually used when
 benchmarking compiler performance improvements.
+
+.. _programming_errors_warnings_comments:
+
+Compiler errors, warnings, and comments
+---------------------------------------
+
+Following a Prolog tradition inherited from Quintus Prolog, the compiler
+prefixes (by default) errors with a ``!`` and warnings with a ``*``. For
+example:
+
+.. code-block:: text
+
+   !     Existence error: directive object/1 does not exist
+   !       in directive end_object/0
+   !       in file /home/jdoe/logtalk/examples/errors/unmatched_directive.lgt at or above line 27
+   
+   *     No matching clause for goal: baz(a)
+   *       while compiling object main_include_compiler_warning
+   *       in file /home/jdoe/logtalk/examples/errors/include_compiler_warning.lgt between lines 38-39
+
+Compiler comments are prefixed by ``%``. For example:
+
+.. code-block:: text
+
+   ?- {ack(loader)}.
+   % [ /home/jdoe/logtalk/examples/ack/ack.lgt loaded ]
+   % [ /home/jdoe/logtalk/examples/ack/loader.lgt loaded ]
+   % (0 warnings)
+   true.
 
 .. _programming_loaders:
 
