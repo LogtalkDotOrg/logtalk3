@@ -174,13 +174,13 @@ abstraction.</p>
 </section>
 <section id="experimental-features">
 <h2>Experimental features<a class="headerlink" href="#experimental-features" title="Permalink to this heading"></a></h2>
-<p>On POSIX systems, when using Ciao Prolog, ECLiPSe, LVM, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, or XSB as the backend, <code class="docutils literal notranslate"><span class="pre">apis/1</span></code> and
-<code class="docutils literal notranslate"><span class="pre">handbook/0-1</span></code> predicates are made available. These predicates open
-inline, respectively, the Texinfo versions of the Handbook and the APIs
-documentation. The optional argument is a topic to search, which can be
-an atom, a predicate indicator, or a non-terminal indicator. Some
-examples:</p>
+<p>On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or
+later version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
+as the backend, <code class="docutils literal notranslate"><span class="pre">apis/1</span></code> and <code class="docutils literal notranslate"><span class="pre">handbook/0-1</span></code> predicates are made
+available. These predicates open inline, respectively, the Texinfo
+versions of the Handbook and the APIs documentation. The optional
+argument is a topic to search, which can be an atom, a predicate
+indicator, or a non-terminal indicator. Some examples:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>handbook.
 
 | <span class="o">?-</span> help<span class="o">::</span>handbook(base64).
@@ -189,9 +189,9 @@ examples:</p>
 
 | <span class="o">?-</span> help<span class="o">::</span>apis.
 
-| <span class="o">?-</span> help<span class="o">::</span>apis(string_match<span class="o">/</span><span class="m">2</span>).
+| <span class="o">?-</span> help<span class="o">::</span>apis(check<span class="o">/</span><span class="m">2</span>).
 
-| <span class="o">?-</span> help<span class="o">::</span>apis(body_term<span class="o">//</span><span class="m">2</span>).
+| <span class="o">?-</span> help<span class="o">::</span>apis(message_tokens<span class="o">//</span><span class="m">2</span>).
 </pre></div>
 </div>
 <p>When you finish consult the documentation and quit the <code class="docutils literal notranslate"><span class="pre">info</span></code> process,

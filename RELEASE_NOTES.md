@@ -42,6 +42,13 @@ Documentation
 * ADDED: Handbook section on compiler formatting of errors, warnings, and
 comments.
 
+Tools
+-----
+
+* ADDED: GNU Prolog (1.5.1 or later version) support for the `help` tool
+experimental predicates for top-level inline browse and search of the
+Texinfo versions of the Handbook and APIs documentation.
+
 Examples
 --------
 

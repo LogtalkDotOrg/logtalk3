@@ -23,9 +23,9 @@
 	complements(help)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2022-09-22,
+		date is 2023-02-06,
 		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
 	]).
 
@@ -144,6 +144,12 @@
 		process_create(Process, Arguments) :-
 			atomic_list_concat([Process| Arguments], ' ', Command),
 			{exec(Command, [])}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+
+		process_create(Process, Arguments) :-
+			atomic_list_concat([Process| Arguments], ' ', Command),
+			{exec(Command, user_input, user_output, user_error)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
 

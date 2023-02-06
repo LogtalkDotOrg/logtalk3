@@ -53,13 +53,13 @@ After loading the tool, use the query ``help::help`` to get started.
 Experimental features
 ---------------------
 
-On POSIX systems, when using Ciao Prolog, ECLiPSe, LVM, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, or XSB as the backend, ``apis/1`` and
-``handbook/0-1`` predicates are made available. These predicates open
-inline, respectively, the Texinfo versions of the Handbook and the APIs
-documentation. The optional argument is a topic to search, which can be
-an atom, a predicate indicator, or a non-terminal indicator. Some
-examples:
+On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or
+later version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
+as the backend, ``apis/1`` and ``handbook/0-1`` predicates are made
+available. These predicates open inline, respectively, the Texinfo
+versions of the Handbook and the APIs documentation. The optional
+argument is a topic to search, which can be an atom, a predicate
+indicator, or a non-terminal indicator. Some examples:
 
 ::
 
@@ -71,9 +71,9 @@ examples:
 
    | ?- help::apis.
 
-   | ?- help::apis(string_match/2).
+   | ?- help::apis(check/2).
 
-   | ?- help::apis(body_term//2).
+   | ?- help::apis(message_tokens//2).
 
 When you finish consult the documentation and quit the ``info`` process,
 you will be back to the top-level prompt (if you find that the top-level

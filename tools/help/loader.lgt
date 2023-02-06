@@ -31,6 +31,8 @@
 	:- initialization(logtalk_load(help_info_support)).
 :- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 	:- initialization(logtalk_load(help_info_support)).
+:- elif(current_logtalk_flag(prolog_dialect, gnu)).
+	:- initialization(logtalk_load(help_info_support)).
 :- elif(current_logtalk_flag(prolog_dialect, lvm)).
 	:- initialization(logtalk_load(help_info_support)).
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
