@@ -43,6 +43,8 @@ extensions = [
     'sphinx.ext.intersphinx'
 ]
 
+# Ensure that documentation of user code can resolve references to
+# Logtalk libraries and built-in entities
 intersphinx_mapping = {'logtalk':  ('https://logtalk.org/docs', 'https://logtalk.org/docs/objects.inv')}
 
 # Add any paths that contain templates here, relative to this directory.
