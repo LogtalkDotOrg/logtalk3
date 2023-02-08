@@ -214,7 +214,9 @@ state when threads are canceled.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">random</span></code> and <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> objects always initialize the random
 generator seed to the same value, thus providing a pseudo random number
 generator. The <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code> predicate can be used to initialize the
-seed with a random value.</p>
+seed with a random value. The argument should be a large positive
+integer. In alternative, when using a small integer argument, discard
+the first dozen random values.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">backend_random</span></code> object abstracts the native backend Prolog
 compiler random number generator for the basic <code class="docutils literal notranslate"><span class="pre">random/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates providing a portable

@@ -11,8 +11,8 @@
 Fast portable random number generator predicates. Core predicates originally written by Richard O'Keefe. Based on algorithm AS 183 from Applied Statistics.
 
 | **Author:** Paulo Moura
-| **Version:** 2:8:0
-| **Date:** 2022-10-17
+| **Version:** 2:8:1
+| **Date:** 2023-02-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -61,7 +61,7 @@ Resets the random generator seed to its default value. Use ``get_seed/1`` and ``
 ``randomize/1``
 ^^^^^^^^^^^^^^^
 
-Randomizes the random generator using a positive integer to compute a new seed.
+Randomizes the random generator using a positive integer to compute a new seed. Use of a large integer is recommended. In alternative, when using a small integer argument, discard the first dozen random values.
 
 | **Compilation flags:**
 |    ``static, synchronized``

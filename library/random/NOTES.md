@@ -51,9 +51,9 @@ To test this library predicates, load the `tester.lgt` file:
 Usage
 -----
 
-The `random` object implements portable random number generator and
-supports multiple random number generators, using different seeds,
-by defining derived objects. For example:
+The `random` object implements portable random number generator and supports
+multiple random number generators, using different seeds, by defining derived
+objects. For example:
 
 	:- object(my_random_generator_1,
 		extends(random)).
@@ -62,9 +62,9 @@ by defining derived objects. For example:
 
 	:- end_object.
 
-The `fast_random` object also implements a portable random number
-generator but does not support deriving multiple random number
-generators, which makes it a bit faster than the `random` object.
+The `fast_random` object also implements a portable random number generator
+but does not support deriving multiple random number generators, which makes
+it a bit faster than the `random` object.
 
 The `random` and `fast_random` objects manage the random number generator
 seed using internal dynamic state. The predicates that update the seed
@@ -76,8 +76,9 @@ canceled.
 
 The `random` and `fast_random` objects always initialize the random generator
 seed to the same value, thus providing a pseudo random number generator. The
-``randomize/1`` predicate can be used to initialize the seed with a random
-value.
+`randomize/1` predicate can be used to initialize the seed with a random
+value. The argument should be a large positive integer. In alternative, when
+using a small integer argument, discard the first dozen random values.
 
 The `backend_random` object abstracts the native backend Prolog compiler
 random number generator for the basic `random/1`, `get_seed/1`, and `set_seed/1`

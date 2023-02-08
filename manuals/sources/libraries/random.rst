@@ -63,7 +63,9 @@ state when threads are canceled.
 The ``random`` and ``fast_random`` objects always initialize the random
 generator seed to the same value, thus providing a pseudo random number
 generator. The ``randomize/1`` predicate can be used to initialize the
-seed with a random value.
+seed with a random value. The argument should be a large positive
+integer. In alternative, when using a small integer argument, discard
+the first dozen random values.
 
 The ``backend_random`` object abstracts the native backend Prolog
 compiler random number generator for the basic ``random/1``,

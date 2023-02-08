@@ -23,9 +23,9 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 2:8:0,
+		version is 2:8:1,
 		author is 'Paulo Moura',
-		date is 2022-10-17,
+		date is 2023-02-08,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.',
@@ -43,7 +43,7 @@
 	:- public(randomize/1).
 	:- mode(randomize(+positive_integer), one).
 	:- info(randomize/1, [
-		comment is 'Randomizes the random generator using a positive integer to compute a new seed.',
+		comment is 'Randomizes the random generator using a positive integer to compute a new seed. Use of a large integer is recommended. In alternative, when using a small integer argument, discard the first dozen random values.',
 		argnames is ['Seed']
 	]).
 
