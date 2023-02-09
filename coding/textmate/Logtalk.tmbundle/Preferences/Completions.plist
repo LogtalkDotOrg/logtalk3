@@ -10,6 +10,7 @@
 	<dict>
 		<key>completions</key>
 		<array>
+			<!-- directive names -->
 			<string>if</string>
 			<string>elif</string>
 			<string>else</string>
@@ -46,6 +47,7 @@
 			<string>use_module</string>
 			<string>export</string>
 			<string>reexport</string>
+			<!-- predicate names -->
 			<string>current_object</string>
 			<string>current_protocol</string>
 			<string>current_category</string>
@@ -253,6 +255,7 @@
 			<string>lambda_variables</string>
 			<string>suspicious_calls</string>
 			<string>catchall_catch</string>
+			<string>conditionals</string>
 			<string>complements</string>
 			<string>dynamic_declarations</string>
 			<string>events</string>
@@ -278,6 +281,16 @@
 			<string>coinduction</string>
 			<string>prolog_compiler</string>
 			<string>prolog_loader</string>
+			<!-- number of proofs names -->
+			<string>zero</string>
+			<string>zero_or_one</string>
+			<string>zero_or_more</string>
+			<string>one</string>
+			<string>one_or_more</string>
+			<string>zero_or_one_or_error</string>
+			<string>zero_or_error</string>
+			<string>one_or_error</string>
+			<string>error</string>
 		</array>
 	</dict>
 	<key>uuid</key>

@@ -64,6 +64,12 @@ Examples
 * FIXED: Unknown module predicate linter warnings in the `constraints/sicstus`
 example due to the `length/2` and `member/2` predicates being built-in.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Syntax completion keywords for the jEdit, Sublime Text, TextMate,
+and Vim text editors.
+
 
 3.62.0 - January 31, 2023
 =========================

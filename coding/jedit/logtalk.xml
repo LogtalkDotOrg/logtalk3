@@ -5,9 +5,9 @@
 <!--	jEdit 4.3 Logtalk syntax file
 
 	written by      Paulo Moura
-	version         1.112
+	version         1.113
 	created on      May 5, 2002
-	last revised    November 6, 2022
+	last revised    February 9, 2023
 
 	To install, copy this file to the "modes" subdirectory in jEdit 
 	directory installation.   Next, check the "catalog" file in the 
@@ -241,7 +241,6 @@
 		<SEQ TYPE="OPERATOR">^</SEQ>
 
 		<KEYWORDS> <!-- just for code completion to work! -->
-
 			<NULL>abolish</NULL>
 			<NULL>abolish_category</NULL>
 			<NULL>abolish_events</NULL>
@@ -458,6 +457,7 @@
 			<NULL>catchall_catch</NULL>
 			<NULL>complements</NULL>
 			<NULL>dynamic_declarations</NULL>
+			<NULL>conditionals</NULL>
 			<NULL>events</NULL>
 			<NULL>context_switching_calls</NULL>
 			<NULL>scratch_directory</NULL>
@@ -481,7 +481,16 @@
 			<NULL>coinduction</NULL>
 			<NULL>prolog_compiler</NULL>
 			<NULL>prolog_loader</NULL>
-
+			<!-- number of proofs names -->
+			<NULL>zero</NULL>
+			<NULL>zero_or_one</NULL>
+			<NULL>zero_or_more</NULL>
+			<NULL>one</NULL>
+			<NULL>one_or_more</NULL>
+			<NULL>zero_or_one_or_error</NULL>
+			<NULL>zero_or_error</NULL>
+			<NULL>one_or_error</NULL>
+			<NULL>error</NULL>
 		</KEYWORDS>
 
 	</RULES>
