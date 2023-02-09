@@ -174,8 +174,9 @@ Logtalk tools:
    with the goal sharing variables with the bindings. The
    variable bindings term uses the format ``{Variable = Term, ...}``.
    When there are no variable bindings, the success or failure of
-   the predicate call should be represented by the terms
-   ``{true}``/``{yes}`` or ``{false}``/``{no}``, respectively.
+   the predicate call should be represented by the terms ``{true}``
+   or ``{false}``, respectively (you can also use in alternative
+   the terms ``{yes}`` or ``{no}``).
 ``remarks``
    List of general remarks about the predicate using ``Topic-Text``
    pairs where both the topic and the text must be atoms. End the
@@ -191,7 +192,10 @@ For example:
    :- info(color/1, [
        comment is 'Table of defined colors.',
        argnames is ['Color'],
-       constraint is 'Up to four visible colors allowed.'
+       constraint is 'Up to four visible colors allowed.',
+       examples is [
+          'Check that the color blue is defined' - color(blue) - {true}
+       ]
    ]).
 
 As with the ``info/1`` directive, use only the keywords that make sense

@@ -274,8 +274,9 @@ atom. The exception term must be a ground term.</p>
 with the goal sharing variables with the bindings. The
 variable bindings term uses the format <code class="docutils literal notranslate"><span class="pre">{Variable</span> <span class="pre">=</span> <span class="pre">Term,</span> <span class="pre">...}</span></code>.
 When there are no variable bindings, the success or failure of
-the predicate call should be represented by the terms
-<code class="docutils literal notranslate"><span class="pre">{true}</span></code>/<code class="docutils literal notranslate"><span class="pre">{yes}</span></code> or <code class="docutils literal notranslate"><span class="pre">{false}</span></code>/<code class="docutils literal notranslate"><span class="pre">{no}</span></code>, respectively.</p>
+the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{true}</span></code>
+or <code class="docutils literal notranslate"><span class="pre">{false}</span></code>, respectively (you can also use in alternative
+the terms <code class="docutils literal notranslate"><span class="pre">{yes}</span></code> or <code class="docutils literal notranslate"><span class="pre">{no}</span></code>).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the predicate using <code class="docutils literal notranslate"><span class="pre">Topic-Text</span></code>
 pairs where both the topic and the text must be atoms. End the
@@ -289,7 +290,10 @@ and non-terminal indicators).</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(color<span class="o">/</span><span class="m">1</span>, [
     comment <span class="k">is</span> <span class="s">&#39;Table of defined colors.&#39;</span>,
     argnames <span class="k">is</span> [<span class="s">&#39;Color&#39;</span>],
-    constraint <span class="k">is</span> <span class="s">&#39;Up to four visible colors allowed.&#39;</span>
+    constraint <span class="k">is</span> <span class="s">&#39;Up to four visible colors allowed.&#39;</span>,
+    examples <span class="k">is</span> [
+       <span class="s">&#39;Check that the color blue is defined&#39;</span> <span class="o">-</span> color(blue) <span class="o">-</span> <span class="k">{true}</span>
+    ]
 ]).
 </pre></div>
 </div>
