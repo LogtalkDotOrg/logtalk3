@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Allow `info/2` directive `examples` key examples to also use `{true}`
+and `{false}` for bindings.
+
 * FIXED: Spurious linter warnings of unknown calls to `user` predicates (and
 non-terminals) listed in `uses/2` and `use_module/2` directives when the
 predicates (and non-terminals) are also declared as dynamic or multifile in

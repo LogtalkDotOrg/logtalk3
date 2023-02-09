@@ -24386,21 +24386,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_valid_predicate_call_example'(@term)
-%
-% valid predicate call example documentation on info/1 directive
-
-'$lgt_valid_predicate_call_example'(Description - Call - {Bindings}) :-
-	atom(Description),
-	callable(Call),
-	nonvar(Bindings),
-	(	Bindings == no -> true
-	;	Bindings == yes -> true
-	;	'$lgt_valid_example_var_bindings'(Bindings)
-	).
-
-
-
 % '$lgt_valid_predicate_call_example'(@term, +atom, +integer)
 %
 % valid predicate call example documentation on info/2 directive
@@ -24413,9 +24398,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Bindings),
 	(	Bindings == no -> true
 	;	Bindings == yes -> true
+	;	Bindings == false -> true
+	;	Bindings == true -> true
 	;	'$lgt_valid_example_var_bindings'(Bindings)
 	).
-
 
 
 '$lgt_valid_example_var_bindings'((Binding, Bindings)) :-
