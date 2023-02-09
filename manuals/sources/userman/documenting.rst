@@ -174,8 +174,8 @@ Logtalk tools:
    with the goal sharing variables with the bindings. The
    variable bindings term uses the format ``{Variable = Term, ...}``.
    When there are no variable bindings, the success or failure of
-   the predicate call should be represented by the terms ``{yes}``
-   or ``{no}``, respectively.
+   the predicate call should be represented by the terms
+   ``{true}``/``{yes}`` or ``{false}``/``{no}``, respectively.
 ``remarks``
    List of general remarks about the predicate using ``Topic-Text``
    pairs where both the topic and the text must be atoms. End the
