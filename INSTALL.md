@@ -27,14 +27,15 @@ one of the provided installers that can be downloaded from the
 Windows, and Linux.
 
 This file contains detailed instructions for **manual** installation and
-configuration of Logtalk. You should also consult
-the [scripts/NOTES.md](scripts/NOTES.md) and
+configuration of Logtalk. You should also consult the
+[scripts/NOTES.md](scripts/NOTES.md) and
 [integration/NOTES.md](integration/NOTES.md) files for a description of a
 set of shell scripts that might be used for Logtalk installation on some
 operating-systems and for easy Logtalk integration with popular Prolog
 compilers.
 
-The POSIX shell scripts assume that `bash` is available.
+The POSIX shell scripts assume that `bash` is available. The PowerShell
+scripts require version 7.2 or later.
 
 
 Logtalk basic installation
@@ -42,8 +43,8 @@ Logtalk basic installation
 
 Manual installation of Logtalk can be accomplished by decompressing the
 sources archive (or by cloning the development git server), optionally running
-an installation script, and defining a couple of environment variables. You can
-install Logtalk in any user accessible location. Whenever possible, it is
+an installation script, and defining a couple of environment variables. You
+can install Logtalk in any user accessible location. Whenever possible, it is
 recommended that Logtalk be installed by a user with administrative rights,
 as described below. This leads to a setup where each Logtalk user may freely
 run and modify the provided examples, library, and tool files with the option
@@ -128,9 +129,10 @@ a removable disk mounted as `G:\`. The shortcut would use a path such as:
 
 	G:\swipl\bin\swipl-win.exe -s "%LOGTALKHOME%\integration\logtalk_swi.pl"
 
-Alternatively, on Windows 10 or Windows Server 2019, you can use the
-Windows Subsystem for Linux (WSL) and install Logtalk using one of the
-Linux installers or by following the instructions above for POSIX systems.
+Alternatively, on Windows 10 or Windows Server 2019 and later versions, you
+can use the Windows Subsystem for Linux (WSL) and install Logtalk using one
+of the Linux installers or by following the instructions above for POSIX
+systems.
 
 
 Setting Logtalk environment variables

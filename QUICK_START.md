@@ -25,8 +25,8 @@ Starting up Logtalk
 -------------------
 
 Install Logtalk by using either the [installer](https://logtalk.org/download.html)
-provided for your operating-system or by following the instructions
-on the [`INSTALL.md`](INSTALL.md) file.
+provided for your operating-system or by following the manual installation
+instructions in the [`INSTALL.md`](INSTALL.md) file.
 
 On POSIX operating-systems, the following shell scripts are installed
 by default for running Logtalk with the supported backend Prolog compilers
@@ -59,7 +59,8 @@ Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
 The first run of the JIProlog and XSB integration shortcuts may require
 administrator privileges depending on the JIProlog and XSB installation
 (right-click on the shortcut and select the "Run as administrator" option).
-PowerShell versions of the scripts listed above are also available.
+PowerShell versions of the scripts listed above are also available (e.g.
+`gplgt.ps1`).
 
 If you get an unexpected failure when using one of the Prolog integration
 scripts or shortcuts, consult the [`adapters/NOTES.md`](adapters/NOTES.md)
