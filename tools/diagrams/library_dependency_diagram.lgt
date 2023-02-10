@@ -94,7 +94,10 @@
 			true
 		;	OtherDirectory \== Directory
 		),
-		% ensure that this dependency is not already recorded
+		% ensure that this dependency is not already recorded; this check is done
+		% here instead of in the caller of this predicate to improve performance
+		% by avoiding the creation of new atoms and the costly computation of
+		% finding the library name from a path
 		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		atom_concat(OtherDirectory, OtherBasename, OtherPath),
 		(	Kind == module ->
