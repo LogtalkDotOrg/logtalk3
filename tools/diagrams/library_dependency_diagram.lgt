@@ -71,8 +71,6 @@
 		^^option(exclude_libraries(ExcludedLibraries), Options),
 		depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind),
 		\+ member(OtherLibrary, ExcludedLibraries),
-		% ensure that this dependency is not already recorded
-		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		^^save_edge(Directory, OtherDirectory, [depends], depends_on_library, [tooltip(depends)| Options]),
 		(	Kind == module ->
 			^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory)
@@ -96,6 +94,8 @@
 			true
 		;	OtherDirectory \== Directory
 		),
+		% ensure that this dependency is not already recorded
+		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		atom_concat(OtherDirectory, OtherBasename, OtherPath),
 		(	Kind == module ->
 			modules_diagram_support::module_property(Other, file(OtherPath)),

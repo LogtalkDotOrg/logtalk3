@@ -58,6 +58,9 @@ Tools
 experimental predicates for top-level inline browse and search of the
 Texinfo versions of the Handbook and APIs documentation.
 
+* IMPROVED: Performance of the `diagrams` tool when generating library
+dependency diagrams.
+
 Examples
 --------
 
