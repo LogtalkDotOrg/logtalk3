@@ -45,6 +45,6 @@ The required Python packages can be installed using the commands:
 
 Required versions are:
 
-- Sphinx 4.2.0 or later
-- RTD theme 1.0 or later
+- Sphinx 6.1.3 or later
+- RTD theme 1.2.0 or later
 - Pygments 2.10.0 or later
