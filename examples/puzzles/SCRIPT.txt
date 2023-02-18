@@ -86,12 +86,12 @@ h(spanish,dog,lucky,juice,white)
 Solution = [h(norwegian, fox, kool, water, yellow), h(ukrainian, horse, chesterfield, tea, blue), h(english, snake, winston, milk, red), h(japonese, zebra, kent, coffee, green), h(spanish, dog, lucky, juice, white)] ;
 no
 
-| ?- zebra_owner(Owner).
+| ?- houses::zebra_owner(Owner).
 Owner = japonese ;
 Owner = japonese ;
 no
 
-| ?- water_drinker(Drinker).
+| ?- houses::water_drinker(Drinker).
 Drinker = norwegian ;
 Drinker = norwegian ;
 no
