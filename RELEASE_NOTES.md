@@ -61,6 +61,9 @@ Texinfo versions of the Handbook and APIs documentation.
 * IMPROVED: Performance of the `diagrams` tool when generating library
 dependency diagrams.
 
+* IMPROVED: The `logtalk_tester.sh` script to exit with an error code when
+the `find` command used to find test sets fails to recognize an option.
+
 * FIXED: The `logtalk_tester.sh` script `-e` option to work on Linux. Thanks
 to Lindsey Spratt for the bug report.
 

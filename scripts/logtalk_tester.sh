@@ -25,8 +25,10 @@
 
 # loosely based on a unit test automation script contributed by Parker Jones
 
+set -o pipefail
+
 print_version() {
-	echo "$(basename "$0") 11.1"
+	echo "$(basename "$0") 11.2"
 	exit 0
 }
 
@@ -596,15 +598,25 @@ if [ "$output" == 'verbose' ] ; then
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
 fi
 
+declare drivers
+declare testsets
 if [ "$exclude" == "" ] ; then
 	drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
 	testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	find_exit=$?
 elif [ "$(uname)" == "Darwin" ] ; then
 	drivers="$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
 	testsets=$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	find_exit=$?
 else
 	drivers="$(find "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
 	testsets=$(find "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	find_exit=$?
+fi
+
+if [ "$find_exit" -gt 0 ] ; then
+	echo "%         find command returned code $find_exit"
+	exit 11
 fi
 
 if  [ $testsets -eq 0 ] ; then
