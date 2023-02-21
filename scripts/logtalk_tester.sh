@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 11.2"
+	echo "$(basename "$0") 12.0"
 	exit 0
 }
 
@@ -58,7 +58,6 @@ fi
 
 # default argument values
 
-backend=""
 driver='tester'
 dot=""
 output='verbose'
@@ -156,11 +155,11 @@ run_testset() {
 		mode_prefix="% (debug) "
 	fi
 
-	if [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] && grep -q "tests skipped" "$results/$name.results" ; then
+	if [ "$tests_exit" -eq 0 ] && [ "$output" == 'verbose' ] && grep -q "tests skipped" "$results/$name.results" ; then
 		echo "%         skipped"
-	elif [ $tests_exit -eq 0 ] && [ "$output" == 'verbose' ] && grep -q "(not applicable)" "$results/$name.results" ; then
+	elif [ "$tests_exit" -eq 0 ] && [ "$output" == 'verbose' ] && grep -q "(not applicable)" "$results/$name.results" ; then
 		echo "%         not applicable"
-	elif [ $tests_exit -eq 0 ] && [ -f "$results/$name.totals" ] && [ "$output" == 'verbose' ] ; then
+	elif [ "$tests_exit" -eq 0 ] && [ -f "$results/$name.totals" ] && [ "$output" == 'verbose' ] ; then
 		while read -r line ; do
 			echo -n "$mode_prefix"
 			echo -n "$(cut -f 3 <<< "$line")"
@@ -184,18 +183,18 @@ run_testset() {
 		done < <(grep '^object' "$results/$name.totals")
 		echo -n '%         clause coverage '
 		echo "$(grep "^coverage" "$results/$name.totals" | cut -f 2)"
-	elif [ $tests_exit -eq 5 ] ; then
+	elif [ "$tests_exit" -eq 5 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         broken"
 		fi
 		ensure_format_report "$unit" "$(basename "$unit")" "Broken"
-	elif [ $tests_exit -eq 137 ] || [ $tests_exit -eq 124 ] ; then
+	elif [ "$tests_exit" -eq 137 ] || [ "$tests_exit" -eq 124 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         timeout"
 		fi
 		echo "LOGTALK_TIMEOUT" >> "$results/$name.errors"
 		ensure_format_report "$unit" "$(basename "$unit")" "Timeout"
-	elif [ $tests_exit -ne 0 ] ; then
+	elif [ "$tests_exit" -ne 0 ] ; then
 		if [ "$output" == 'verbose' ] ; then
 			echo "%         crash"
 		fi
@@ -364,37 +363,30 @@ if [ "$p_arg" == "" ] ; then
 	usage_help
 	exit 1
 elif [ "$p_arg" == "b" ] ; then
-	backend=b
 	prolog='B-Prolog'
 	logtalk=bplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "ciao" ] ; then
-	backend=ciao
 	prolog='Ciao Prolog'
 	logtalk=ciaolgt$extension
 	logtalk_call="$logtalk $i_arg -e"
 elif [ "$p_arg" == "cx" ] ; then
-	backend=cx
 	prolog='CxProlog'
 	logtalk=cxlgt$extension
 	logtalk_call="$logtalk $i_arg --goal"
 elif [ "$p_arg" == "eclipse" ] ; then
-	backend=eclipse
 	prolog='ECLiPSe'
 	logtalk=eclipselgt$extension
 	logtalk_call="$logtalk $i_arg -e"
 elif [ "$p_arg" == "gnu" ] ; then
-	backend=gnu
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk $i_arg --query-goal"
 elif [ "$p_arg" == "ji" ] ; then
-	backend=ji
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk $i_arg -n -g"
 elif [ "$p_arg" == "lvm" ] ; then
-	backend=lvm
 	prolog='LVM'
 	logtalk=lvmlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
@@ -406,45 +398,37 @@ elif [ "$p_arg" == "lvm" ] ; then
 		*) dot=".";;
 	esac
 elif [ "$p_arg" == "scryer" ] ; then
-	backend=scryer
 	prolog='Scryer Prolog'
 	logtalk=scryerlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "sicstus" ] ; then
-	backend=sicstus
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension
 	logtalk_call="$logtalk $i_arg --goal"
 	dot="."
 elif [ "$p_arg" == "swi" ] ; then
-	backend=swi
 	prolog='SWI-Prolog'
 	logtalk=swilgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "swipack" ] ; then
-	backend=swipack
 	prolog='SWI-Prolog'
 	logtalk=swipl
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "tau" ] ; then
-	backend=tau
 	prolog='Tau Prolog'
 	logtalk=taulgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 	dot="."
 elif [ "$p_arg" == "trealla" ] ; then
-	backend=trealla
 	prolog='Trealla Prolog'
 	logtalk=tplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "xsb" ] ; then
-	backend=xsb
 	prolog='XSB'
 	logtalk=xsblgt$extension
 	logtalk_call="$logtalk $i_arg -e"
 	dot="."
 elif [ "$p_arg" == "yap" ] ; then
-	backend=yap
 	prolog='YAP'
 	logtalk=yaplgt$extension
 	logtalk_call="$logtalk $i_arg -g"
@@ -619,7 +603,7 @@ if [ "$find_exit" -gt 0 ] ; then
 	exit 11
 fi
 
-if  [ $testsets -eq 0 ] ; then
+if  [ "$testsets" -eq 0 ] ; then
 	echo "%"
 	echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
 	echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
