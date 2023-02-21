@@ -61,6 +61,9 @@ Texinfo versions of the Handbook and APIs documentation.
 * IMPROVED: Performance of the `diagrams` tool when generating library
 dependency diagrams.
 
+* FIXED: The `logtalk_tester.sh` script `-e` option to work on Linux. Thanks
+to Lindsey Spratt for the bug report.
+
 Examples
 --------
 

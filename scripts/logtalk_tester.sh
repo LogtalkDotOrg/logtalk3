@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 26, 2023
+##   Last updated on February 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 # loosely based on a unit test automation script contributed by Parker Jones
 
 print_version() {
-	echo "$(basename "$0") 11.0"
+	echo "$(basename "$0") 11.1"
 	exit 0
 }
 
@@ -317,7 +317,7 @@ usage_help()
 	echo "     (valid values are none and xml)"
 	echo "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	echo "     (level 1 means current directory only)"
-	echo "  -e exclude directories matching a regular expression (uses find command -E and -regex options)"
+	echo "  -e exclude directories matching a POSIX-extended regular expression"
 	echo "  -i integration script command-line options (no default)"
 	echo "  -g initialization goal (default is $initialization_goal)"
 	echo "  -r random generator starting seed (no default)"
@@ -599,9 +599,12 @@ fi
 if [ "$exclude" == "" ] ; then
 	drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
 	testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
-else
+elif [ "$(uname)" == "Darwin" ] ; then
 	drivers="$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
 	testsets=$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+else
+	drivers="$(find "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+	testsets=$(find "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
 fi
 
 if  [ $testsets -eq 0 ] ; then
