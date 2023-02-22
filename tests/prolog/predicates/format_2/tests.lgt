@@ -385,6 +385,14 @@
 		^^set_text_output(''),
 		{format("~d", _)}.
 
+	test(lgt_format_2_partial_list_second_argument_1, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~d", [42| _])}.
+
+	test(lgt_format_2_partial_list_second_argument_2, error(instantiation_error)) :-
+		^^set_text_output(''),
+		{format("~d ~d", [42| _])}.
+
 	test(lgt_format_2_first_argument_wrong_type, error(type_error(_,42))) :-
 		^^set_text_output(''),
 		{format(42, [42])}.

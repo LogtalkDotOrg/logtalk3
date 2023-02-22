@@ -388,6 +388,14 @@
 		^^set_text_output(out, ''),
 		{format(out, "~d", _)}.
 
+	test(lgt_format_3_partial_list_second_argument_1, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~d", [42| _])}.
+
+	test(lgt_format_3_partial_list_second_argument_2, error(instantiation_error)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~d ~d", [42| _])}.
+
 	test(lgt_format_3_first_argument_wrong_type, error(domain_error(stream_or_alias,3.14))) :-
 		{format(3.14, "~d", [42])}.
 

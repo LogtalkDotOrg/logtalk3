@@ -76,6 +76,9 @@ example due to the `length/2` and `member/2` predicates being built-in.
 Tests
 -----
 
+* ADDED: Additional tests for the de facto Prolog standard `format/2-3`
+predicates.
+
 * ADDED: Additional tests for the `setup_call_cleanup/3` predicate adapted
 from the WG17 standardization proposal.
 
