@@ -40,8 +40,11 @@ the same entity.
 threaded meta-predicates. Thanks to Didier Garcin for the bug report.
 
 * FIXED: Linter warning for message-sending calls sent from an object to
-itself to check that it calls a locally defined object predicate. Thanks
-to Paul Brown for the sample code.
+itself to check that it calls a locally defined predicate. Thanks to Paul
+Brown for the sample code.
+
+* FIXED: Compiler optimization for message-sending calls sent from an object
+to itself to only apply when calling a locally defined predicate.
 
 Documentation
 -------------

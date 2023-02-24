@@ -17939,6 +17939,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_entity_'(object, Entity, _),
 	functor(Obj, Functor, Arity),
 	functor(Entity, Functor, Arity),
+	'$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+	% local predicate
 	!,
 	'$lgt_comp_ctx'(Ctx,    Head, HeadExCtx, Entity, _,      This, _,    Prefix, MetaVars, _, ExCtx,    Mode, _, Lines, Term),
 	'$lgt_comp_ctx'(NewCtx, Head, HeadExCtx, Obj,    Entity, Obj,  Obj,  Prefix, MetaVars, _, NewExCtx, Mode, _, Lines, Term),
