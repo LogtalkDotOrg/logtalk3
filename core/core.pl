@@ -17552,6 +17552,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _),
 	This == Obj,
+	% message sent from an object to itself
+	nonvar(Pred),
+	'$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+	% local predicate
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(

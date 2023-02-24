@@ -39,6 +39,10 @@ the same entity.
 * FIXED: Spurious suspicious call linter warnings when compiling calls to
 threaded meta-predicates. Thanks to Didier Garcin for the bug report.
 
+* FIXED: Linter warning for message-sending calls sent from an object to
+itself to check that it calls a locally defined object predicate. Thanks
+to Paul Brown for the sample code.
+
 Documentation
 -------------
 
