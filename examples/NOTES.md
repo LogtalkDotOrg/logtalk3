@@ -493,6 +493,9 @@ Follows a short description of each included example (in alphabetical order):
 	them intended only for benchmarking multi-threading Prolog compilers
 	(requires Logtalk to be run with a multi-threaded backend)
 
+- `units`  
+	Logtalk version of a GNU Prolog/CX parametric unit example
+
 - `viewpoints`  
 	example on how to implement property sharing and value sharing
 	with prototypes

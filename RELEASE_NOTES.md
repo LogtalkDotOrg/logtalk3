@@ -77,6 +77,9 @@ to Lindsey Spratt for the bug report.
 Examples
 --------
 
+* ADDED: New `units` example, a Logtalk version of a GNU Prolog/CX parametric
+unit example.
+
 * FIXED: Unknown module predicate linter warnings in the `constraints/sicstus`
 example due to the `length/2` and `member/2` predicates being built-in.
 

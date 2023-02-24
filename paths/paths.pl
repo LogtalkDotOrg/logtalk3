@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on November 23, 2022
+%  Last updated on February 24, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -315,6 +315,7 @@ logtalk_library_path(tbbt, engines('tbbt/')).
 logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
+logtalk_library_path(units, examples('units/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
 logtalk_library_path(whisper, engines('whisper/')).
 logtalk_library_path(wrappers, examples('wrappers/')).
