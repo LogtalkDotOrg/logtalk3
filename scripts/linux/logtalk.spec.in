@@ -30,6 +30,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/ACKNOWLEDGMENTS.md
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/BIBLIOGRAPHY.bib
+%doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CITATION.cff
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CODE_OF_CONDUCT.md
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CONTRIBUTING.md
 %doc /usr/local/share/LOGTALK_INSTALL_DIRECTORY/CUSTOMIZE.md
