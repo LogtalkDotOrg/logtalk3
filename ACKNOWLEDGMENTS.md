@@ -63,7 +63,7 @@ CONTRIBUTORS
 * Joost Geurts (bug reports)
 * José Antonio Riaza Valverde (Tau Prolog integration and union-find library)
 * José Morales (Ciao Prolog integration)
-* Lindsey Spratt (unit tests and feedback)
+* Lindsey Spratt (unit tests, bug reports, and feedback)
 * Markus Triska (help in porting CLP(FD) examples)
 * Mats Carlsson (bug reports)
 * Michael Covington (DCGs tokenizer example)
@@ -123,7 +123,8 @@ RESEARCH SUPPORT
 SPONSORS
 ========
 
-* GraphStax - 2020-present
+* Permion - 2023-present
+* GraphStax - 2020-2022
 * Kyndi, Inc. - 2015-2017
 * VivoMind Research, LLC - 2012-2013
 * GitHub sponsors (https://github.com/sponsors/pmoura)
