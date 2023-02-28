@@ -133,7 +133,13 @@ Distribution overview
 In the Logtalk installation directory, you will find the following files
 and directories:
 
+``ACKNOWLEDGMENTS.md`` - List of authors, contributors, sponsors, and open source credits
+
 ``BIBLIOGRAPHY.bib`` – Logtalk bibliography in BibTeX format
+
+``CITATION.cff`` - Information on how to cite Logtalk
+
+``CODE_OF_CONDUCT.md`` - Code of conduct for contributors and users posting on support forums
 
 ``CUSTOMIZE.md`` – Logtalk end-user customization instructions
 
