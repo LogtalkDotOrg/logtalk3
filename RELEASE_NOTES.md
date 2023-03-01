@@ -31,6 +31,9 @@ Tools
 * ADDED: New `packs::installed/1` predicate to list all packs installed from
 a given registry.
 
+* IMPROVED: The `registries::update/0` predicate to inform the user when no
+registry is defined.
+
 Tests
 -----
 
