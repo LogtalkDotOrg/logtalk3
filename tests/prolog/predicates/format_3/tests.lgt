@@ -88,6 +88,11 @@
 		{format(out, "~8c", [65])},
 		^^text_output_assertion(out, 'AAAAAAAA', Assertion).
 
+	test(lgt_format_3_code_star, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*c", [8,65])},
+		^^text_output_assertion(out, 'AAAAAAAA', Assertion).
+
 	test(lgt_format_3_string, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~s", [[65,66,67]])},
@@ -135,6 +140,11 @@
 		{format(out, "~4n", [])},
 		^^text_output_assertion(out, '\n\n\n\n', Assertion).
 
+	test(lgt_format_3_new_line_star, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*n", [4])},
+		^^text_output_assertion(out, '\n\n\n\n', Assertion).
+
 	test(lgt_format_3_new_line_if_not_beginning_of_line, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~Nbegin~N~Nend", [])},
@@ -155,6 +165,11 @@
 	test(lgt_format_3_decimal_n, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~1d", [123])},
+		^^text_output_assertion(out, '12.3', Assertion).
+
+	test(lgt_format_3_decimal_star, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*d", [1,123])},
 		^^text_output_assertion(out, '12.3', Assertion).
 
 	test(lgt_format_3_decimal_group, true(Assertion)) :-
@@ -234,6 +249,11 @@
 		{format(out, "~4f", [-1.0e-1])},
 		^^text_output_assertion(out, '-0.1000', Assertion).
 
+	test(lgt_format_3_float_star_places, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*f", [4,-1.0e-1])},
+		^^text_output_assertion(out, '-0.1000', Assertion).
+
 	test(lgt_format_3_float_zero_places, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~0f", [123.456])},
@@ -248,6 +268,11 @@
 	test(lgt_format_3_float_exponential_notation_n_places, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~3e", [1.333333])},
+		^^text_output_assertion(out, '1.333e+00', Assertion).
+
+	test(lgt_format_3_float_exponential_notation_star_places, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~*e", [3,1.333333])},
 		^^text_output_assertion(out, '1.333e+00', Assertion).
 
 	test(lgt_format_3_float_exponential_notation_upper_case, true(Assertion)) :-

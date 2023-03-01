@@ -25,7 +25,11 @@ RELEASE NOTES
 3.64.0 - March ??, 2023
 =======================
 
+Tests
+-----
 
+* ADDED: Additional tests for the de facto Prolog standard `format/2-3`
+predicates.
 
 
 3.63.0 - February 27, 2023

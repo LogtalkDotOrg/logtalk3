@@ -88,6 +88,11 @@
 		{format("~8c", [65])},
 		^^text_output_assertion('AAAAAAAA', Assertion).
 
+	test(lgt_format_2_code_star, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~*c", [8,65])},
+		^^text_output_assertion('AAAAAAAA', Assertion).
+
 	test(lgt_format_2_string, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~s", [[65,66,67]])},
@@ -135,6 +140,11 @@
 			{format("~4n", [])},
 			^^text_output_assertion('\n\n\n\n', Assertion).
 
+		test(lgt_format_2_new_line_star, true(Assertion)) :-
+			^^set_text_output(''),
+			{format("~*n", [4])},
+			^^text_output_assertion('\n\n\n\n', Assertion).
+
 		test(lgt_format_2_new_line_if_not_beginning_of_line, true(Assertion)) :-
 			^^set_text_output(''),
 			{format("~Nbegin~N~Nend", [])},
@@ -155,6 +165,11 @@
 	test(lgt_format_2_decimal_n, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~1d", [123])},
+		^^text_output_assertion('12.3', Assertion).
+
+	test(lgt_format_2_decimal_star, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~*d", [1,123])},
 		^^text_output_assertion('12.3', Assertion).
 
 	test(lgt_format_2_decimal_group, true(Assertion)) :-
@@ -234,6 +249,11 @@
 		{format("~4f", [-1.0e-1])},
 		^^text_output_assertion('-0.1000', Assertion).
 
+	test(lgt_format_2_float_star_places, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~*f", [4,-1.0e-1])},
+		^^text_output_assertion('-0.1000', Assertion).
+
 	test(lgt_format_2_float_zero_places, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~0f", [123.456])},
@@ -248,6 +268,11 @@
 	test(lgt_format_2_float_exponential_notation_n_places, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~3e", [1.333333])},
+		^^text_output_assertion('1.333e+00', Assertion).
+
+	test(lgt_format_2_float_exponential_notation_star_places, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~*e", [3,1.333333])},
 		^^text_output_assertion('1.333e+00', Assertion).
 
 	test(lgt_format_2_float_exponential_notation_upper_case, true(Assertion)) :-
