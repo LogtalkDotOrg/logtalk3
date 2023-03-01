@@ -650,6 +650,15 @@ To list all installed packs, call the `packs::installed/0` predicate:
 
 	| ?- packs::installed.
 
+To list all installed packs, call the `packs::installed/0` predicate:
+
+	| ?- packs::installed.
+
+To list only the installed packs from a specific registry, call instead the
+`packs::installed/1` predicate. For example:
+
+	| ?- packs::installed(talkshow).
+
 To know more about a specific pack, use the `packs::describe/1-2` predicates.
 For example:
 

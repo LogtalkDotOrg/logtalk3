@@ -750,6 +750,15 @@ predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>installed.
 </pre></div>
 </div>
+<p>To list all installed packs, call the <code class="docutils literal notranslate"><span class="pre">packs::installed/0</span></code> predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>installed.
+</pre></div>
+</div>
+<p>To list only the installed packs from a specific registry, call instead
+the <code class="docutils literal notranslate"><span class="pre">packs::installed/1</span></code> predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>installed(talkshow).
+</pre></div>
+</div>
 <p>To know more about a specific pack, use the <code class="docutils literal notranslate"><span class="pre">packs::describe/1-2</span></code>
 predicates. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>describe(bar).
