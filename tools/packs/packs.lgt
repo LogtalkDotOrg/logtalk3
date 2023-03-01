@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:60:0,
+		version is 0:61:0,
 		author is 'Paulo Moura',
-		date is 2023-01-09,
+		date is 2023-03-01,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -79,6 +79,17 @@
 			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry'),
 			'``Pack`` is neither a variable nor an atom' - type_error(atom, 'Pack'),
 			'``Version`` is neither a variable nor a compound term' - type_error(compound, 'Version')
+		]
+	]).
+
+	:- public(installed/1).
+	:- mode(installed(+atom), zero_or_one).
+	:- info(installed/1, [
+		comment is 'Lists all the packs that are installed from the given registry. Fails if the registry is unknown.',
+		argnames is ['Registry'],
+		exceptions is [
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an atom' - type_error(atom, 'Registry')
 		]
 	]).
 
@@ -654,6 +665,28 @@
 
 	installed(Registry, Pack, Version) :-
 		installed(Registry, Pack, Version, _).
+
+	installed(Registry) :-
+		check(atom, Registry),
+		(	\+ (
+				implements_protocol(RegistryObject, registry_protocol),
+				RegistryObject::name(Registry)
+			) ->
+			print_message(error, packs, unknown_registry(Registry)),
+			!,
+			fail
+		;	fail
+		).
+	installed(Registry) :-
+		print_message(information, packs, 'Installed packs from the ~q registry:'+[Registry]),
+		installed_pack(Registry, Pack, Version, Pinned),
+		print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned)),
+		fail.
+	installed(Registry) :-
+		\+ installed_pack(Registry, _, _, _),
+		print_message(information, packs, @'  (none)'),
+		fail.
+	installed(_).
 
 	installed :-
 		print_message(information, packs, @'Installed packs:'),

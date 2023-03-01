@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:60:0
-| **Date:** 2023-01-09
+| **Version:** 0:61:0
+| **Date:** 2023-03-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -161,6 +161,31 @@ Enumerates by backtracking all installed packs.
 |        ``type_error(atom,Pack)``
 |    ``Version`` is neither a variable nor a compound term:
 |        ``type_error(compound,Version)``
+
+
+------------
+
+.. index:: installed/1
+.. _packs/0::installed/1:
+
+``installed/1``
+^^^^^^^^^^^^^^^
+
+Lists all the packs that are installed from the given registry. Fails if the registry is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``installed(Registry)``
+| **Mode and number of proofs:**
+|    ``installed(+atom)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Registry`` is a variable:
+|        ``instantiation_error``
+|    ``Registry`` is neither a variable nor an atom:
+|        ``type_error(atom,Registry)``
 
 
 ------------

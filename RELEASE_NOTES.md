@@ -25,6 +25,12 @@ RELEASE NOTES
 3.64.0 - March ??, 2023
 =======================
 
+Tools
+-----
+
+* ADDED: New `packs::installed/1` predicate to list all packs installed from
+a given registry.
+
 Tests
 -----
 
