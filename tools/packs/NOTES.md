@@ -87,7 +87,10 @@ Or using Homebrew:
 	$ brew install coretutils libarchive gnupg2 git
 
 On Linux systems, use the distribution own package manager to install any
-missing command.
+missing command. For example, in recent Ubuntu versions:
+
+	$ sudo apt update
+	$ sudo apt install coreutils curl libarchive-tools gnupg2 git
 
 
 API documentation
