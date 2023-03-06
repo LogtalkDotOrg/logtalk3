@@ -25,6 +25,13 @@ RELEASE NOTES
 3.64.0 - March ??, 2023
 =======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The LVM adapter file to expand calls to the `open_db/2` built-in
+predicate from within objects and categories to ensure that all database
+predicates are visible.
+
 Tools
 -----
 

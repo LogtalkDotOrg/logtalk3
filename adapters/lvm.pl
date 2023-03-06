@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 4.1.0 and later versions
-%  Last updated on November 1, 2022
+%  Last updated on March 6, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -560,6 +560,44 @@
 		(this(This), {'$lgt_compile_predicate_indicators'(Functor/Arity, This, CFunctor/CArity), destroy_disk_predicate(CFunctor/CArity)})
 	) :-
 	logtalk_load_context(entity_type, category).
+
+'$lgt_prolog_goal_expansion'(
+		open_db(DB, DBFile),
+		{open_db(DB, DBFile), '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix)}) :-
+	logtalk_load_context(entity_type, object),
+	!,
+	logtalk_load_context(entity_prefix, Prefix).
+'$lgt_prolog_goal_expansion'(
+		open_db(DB, DBFile),
+		(this(This), {open_db(DB, DBFile), '$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _), '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix)})
+	) :-
+	logtalk_load_context(entity_type, category).
+
+
+'$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix) :-
+	database_property(DB, predicates(CPIs)),
+	atom_concat(Prefix, '_def', Def),
+	atom_concat(Prefix, '_ddef', DDef),
+	forall(
+		member(CPI, CPIs),
+		'$lgt_lvm_add_disk_predicate_ddef'(Def, DDef, CPI)
+	).
+
+'$lgt_lvm_add_disk_predicate_ddef'(Def, DDef, CFunctor/CArity) :-
+	'$lgt_decompile_predicate_indicators'(CFunctor/CArity, _, _, Functor/Arity),
+	functor(Template, Functor, Arity),
+	Template =.. [Functor| Arguments],
+	DefFact =.. [Def, Template, _],
+	(	clause(DefFact, true) ->
+		true
+	;	DDefFact =.. [DDef, Template, Context, CTemplate],
+		(	clause(DDefFact, true) ->
+			true
+		;	append(Arguments, [Context], CArguments),
+			CTemplate =.. [CFunctor| CArguments],
+			assertz(DDefFact)
+		)
+	).
 
 
 
