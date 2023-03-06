@@ -585,6 +585,7 @@
 
 '$lgt_lvm_add_disk_predicate_ddef'(Def, DDef, CFunctor/CArity) :-
 	'$lgt_decompile_predicate_indicators'(CFunctor/CArity, _, _, Functor/Arity),
+	!,
 	functor(Template, Functor, Arity),
 	Template =.. [Functor| Arguments],
 	DefFact =.. [Def, Template, _],
@@ -598,6 +599,7 @@
 			assertz(DDefFact)
 		)
 	).
+'$lgt_lvm_add_disk_predicate_ddef'(_, _, _).
 
 
 
