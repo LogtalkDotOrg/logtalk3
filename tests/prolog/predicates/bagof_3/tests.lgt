@@ -49,9 +49,9 @@ f(_, 2, b).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2022-05-29,
+		date is 2023-03-07,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -165,6 +165,9 @@ f(_, 2, b).
 			findall(Z-L, {bagof(Y, X, L)}, LL).
 
 	:- endif.
+
+	test(lgt_bagof_3_23, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
+		{bagof(X, foobar(X), _)}.
 
 	% auxiliary predicates
 
