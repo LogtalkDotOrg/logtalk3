@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-05-02,
+		date is 2023-03-08,
 		comment is 'Unit tests for the ISO Prolog standard once/1 built-in predicate.'
 	]).
 
@@ -67,6 +67,11 @@
 		% try to delay the error to runtime
 		variable(X),
 		{once(X)}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_once_1_08, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
+		{once(foobar(_))}.
 
 	% auxiliary predicate used to delay errors to runtime
 

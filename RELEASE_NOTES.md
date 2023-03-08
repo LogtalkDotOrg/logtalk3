@@ -44,11 +44,11 @@ registry is defined.
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `bagof/3`, `findall/3`, and
-`setof/3` predicates.
+* ADDED: Additional tests for the Prolog standard `bagof/3`, `findall/3`,
+`setof/3`, `(\+)/1`, `call/1-N`, and `once/1`, predicates.
 
-* ADDED: Additional tests for the de facto Prolog standard `findall/4` and
-`format/2-3` predicates.
+* ADDED: Additional tests for the de facto Prolog standard `findall/4`,
+`format/2-3`, and `setup_call_cleanup/3` predicates.
 
 
 3.63.0 - February 27, 2023

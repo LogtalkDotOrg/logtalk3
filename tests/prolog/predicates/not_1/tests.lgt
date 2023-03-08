@@ -23,36 +23,35 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-05-19,
+		date is 2023-03-08,
 		comment is 'Unit tests for the ISO Prolog standard (\\+)/1 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.15.1.4
 
-	fails(iso_not_1_01) :-
+	test(iso_not_1_01, false) :-
 		{'\\+'(true)}.
 
-	fails(iso_not_1_02) :-
+	test(iso_not_1_02, false) :-
 		{'\\+'(!)}.
 
-	succeeds(iso_not_1_03) :-
+	test(iso_not_1_03, true) :-
 		{'\\+'((!,fail))}.
 
-	succeeds(iso_not_1_04) :-
-		findall(X, {(X=1;X=2), '\\+'((!,fail))}, L),
-		L == [1, 2].
+	test(iso_not_1_04, true(L == [1, 2])) :-
+		findall(X, {(X=1;X=2), '\\+'((!,fail))}, L).
 
-	succeeds(iso_not_1_05) :-
+	test(iso_not_1_05, true) :-
 		{'\\+'(4 = 5)}.
 
-	throws(iso_not_1_06, [error(type_error(callable,3),_), error(type_error(callable,'\\+'(3)),_)]) :-
+	test(iso_not_1_06, errors([type_error(callable,3), type_error(callable,'\\+'(3))])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		% try to force runtime goal checking
 		G = '\\+'(3), {G}.
 
-	throws(iso_not_1_07, error(instantiation_error,_)) :-
+	test(iso_not_1_07, error(instantiation_error)) :-
 		% try to force runtime goal checking
 		G = '\\+'(_X), {G}.
 
@@ -61,18 +60,20 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		fails(iso_not_1_08) :-
+		test(iso_not_1_08, false) :-
 			{'\\+'(X=f(X))}.
 	:- else.
-		- fails(iso_not_1_08) :-
+		- test(iso_not_1_08, false) :-
 			% STO; Undefined
 			{'\\+'(X=f(X))}.
 	:- endif.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_not_1_09) :-
-		{'\\+'('\\+'(X=1))},
-		var(X).
+	test(lgt_not_1_09, true(var(X))) :-
+		{'\\+'('\\+'(X=1))}.
+
+	test(lgt_not_1_10, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
+		{'\\+'(foobar(_))}.
 
 :- end_object.

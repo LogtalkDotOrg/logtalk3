@@ -42,9 +42,9 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2022-05-02,
+		date is 2023-03-08,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
@@ -120,5 +120,8 @@ a(2).
 
 	test(lgt_call_1_18, false) :-
 		{call(scattered(_, _))}.
+
+	test(lgt_call_1_19, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
+		{call(foobar(_))}.
 
 :- end_object.
