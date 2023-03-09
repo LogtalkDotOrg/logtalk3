@@ -23,22 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-09-21,
+		date is 2023-03-09,
 		comment is 'Tests for the "clustering" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~=')]).
+	:- uses(lgtunit, [
+		op(700, xfx, '=~=')
+	]).
 
 	condition :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'jars', JarsDirectory),
-		os::directory_files(JarsDirectory, Files),
-		list::member(File, Files),
-		atom_concat('commons-math3-', Suffix, File),
-		sub_atom(Suffix, _, 4, 0, '.jar').
+		os::environment_variable('CLASSPATH', CLASSPATH),
+		sub_atom(CLASSPATH, _, _, _, 'commons-math3-').
 
 	test(clustering_01) :-
 		clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters),
