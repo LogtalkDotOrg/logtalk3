@@ -47,6 +47,8 @@ registry is defined.
 Examples
 --------
 
+* ADDED: Tests for the `document_converter` example.
+
 * FIXED: The `clustering` and `document_converter` examples `tester.sh`
 scripts.
 

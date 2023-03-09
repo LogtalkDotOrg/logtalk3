@@ -23,19 +23,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-12-10,
+		date is 2023-03-09,
 		comment is 'Tests for the "document_converter" example.'
 	]).
 
 	condition :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'jars', JarsDirectory),
-		os::directory_files(JarsDirectory, Files),
-		list::member(File, Files),
-		atom_concat('tika-app-', Suffix, File),
-		sub_atom(Suffix, _, 4, 0, '.jar').
+		os::environment_variable('CLASSPATH', CLASSPATH),
+		sub_atom(CLASSPATH, _, _, _, 'tika-app-').
+
+	cleanup :-
+		^^file_path('sample.txt', Target),
+		^^clean_file(Target).
+
+	test(document_converter_convert_to_text, true(os::file_exists(Target))) :-
+		^^file_path('sample.pdf', Source),
+		^^file_path('sample.txt', Target),
+		document::convert(Source, Target).
+
+	test(document_converter_get_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('sample.pdf', Source),
+		document::contents(Source, Contents).
 
 :- end_object.

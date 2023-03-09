@@ -34,16 +34,16 @@ $ . set_classpath_swi.sh
 ...
 
 
-% convert a "sample.doc" document to a "sample.txt" file:
+% convert a "sample.pdf" document to a "sample.txt" file:
 
-| ?- document::convert('sample.doc', 'sample.txt').
+| ?- document::convert('sample.pdf', 'sample.txt').
 
 yes
 
 
-% get the text contents of a "sample.doc" document:
+% get the text contents of a "sample.pdf" document:
 
-| ?- document::contents('sample.doc', Contents).
+| ?- document::contents('sample.pdf', Contents).
 
 Contents = ...
 yes
