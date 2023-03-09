@@ -47,6 +47,9 @@ registry is defined.
 Examples
 --------
 
+* ADDED: New `neo4j` example of using the `java` library to interface with
+Neo4j.
+
 * ADDED: Tests for the `document_converter` example.
 
 * IMPROVED: Test set condition for the `clustering` example.

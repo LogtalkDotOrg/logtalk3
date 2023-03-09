@@ -338,6 +338,9 @@ Follows a short description of each included example (in alphabetical order):
 	example of an implementation of the Lean Prolog API for named
 	databases for Prolog compilers with a module system
 
+- `neo4j`  
+	example of using the Java library to interface with Neo4j
+
 - `now_you_see_me`  
 	example illustrating requirements dictated by inheritance semantics
 	for the implementation of dynamic predicates
