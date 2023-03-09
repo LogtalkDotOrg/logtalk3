@@ -41,6 +41,15 @@ a given registry.
 * IMPROVED: The `registries::update/0` predicate to inform the user when no
 registry is defined.
 
+* FIXED: The `logtalk_tester.sh` script passing calling options to a sourced
+`tester.sh` script in the test set directories.
+
+Examples
+--------
+
+* FIXED: The `clustering` and `document_converter` examples `tester.sh`
+scripts.
+
 Tests
 -----
 

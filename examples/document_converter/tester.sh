@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Bash script to be sourced by the logtalk_tester script
-##   Last updated on December 3, 2018
+##   Last updated on March 9, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -23,9 +23,13 @@
 #############################################################################
 
 
-while getopts "p:" option; do
+local OPTIND=1
+local OPTERR=0
+while getopts "p:" option
+do
 	case $option in
-		p) backend="$OPTARG";;
+		p) backend=$OPTARG;;
+		?) shift;;
 	esac
 done
 

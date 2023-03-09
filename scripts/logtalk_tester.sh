@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on February 21, 2023
+##   Last updated on March 9, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 12.0"
+	echo "$(basename "$0") 13.0"
 	exit 0
 }
 
@@ -58,6 +58,8 @@ fi
 
 # default argument values
 
+declare allargs
+allargs="$@"
 driver='tester'
 dot=""
 output='verbose'
@@ -115,7 +117,7 @@ run_testset() {
 		echo "% $unit_short"
 	fi
 	if [ -f "$driver.sh" ] ; then
-		source "./$driver.sh" "$@"
+		source "./$driver.sh" $allargs
 		source_exit=$?
 		if [ "$source_exit" -gt 0 ] ; then
 			echo "%         source $driver.sh returned code $source_exit"
