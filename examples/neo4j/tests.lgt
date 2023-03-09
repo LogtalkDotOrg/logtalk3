@@ -23,11 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Paulo Moura',
 		date is 2023-03-09,
 		comment is 'Tests for the "neo4j" example.'
 	]).
+
+	condition :-
+		% succeeds if Neo4j is running
+		os::shell('neo4j status').
 
 	test(neo4j_01, true) :-
 		neo4j('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
