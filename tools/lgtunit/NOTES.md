@@ -1301,19 +1301,19 @@ the `test/1`, `succeeds/1`, and `deterministic/1` dialects to help
 differentiate between the test goal and checking the test goal results and
 to provide more informative test failure messages.
 
-When the assertion is a call to local predicate of the tests object, you must
-call `assertion/1-2` using an implicit or explicit message instead of a using
-_super_ call. To use an implicit message, add the following directive to the
-tests object:
+When the assertion, benchmarking, and deterministic meta-predicates call a
+local predicate of the tests object, you must call them using an implicit
+or explicit message instead of a using _super_ call. For example, to use
+an implicit message to call the `assertion/1-2` meta-predicates, add the
+following directive to the tests object:
 
 	:- uses(lgtunit, [assertion/1, assertion/2]).
 
-The reason this is required is that the `assertion/1-2` predicates are
-declared as meta-predicates and thus assertion goals are called in the
-context of the _sender_, which would be the `lgtunit` object in the case
-of a `(^^)/2` call (as it preserves both _self_ and _sender_ and the tests
-are internally run by a message sent from the `lgtunit` object to the
-tests object).
+The reason this is required is that meta-predicates goals arguments are
+always called in the context of the _sender_, which would be the `lgtunit`
+object in the case of a `(^^)/2` call (as it preserves both _self_ and
+_sender_ and the tests are internally run by a message sent from the
+`lgtunit` object to the tests object).
 
 As the `benchmark/2-4` predicates are meta-predicates, turning on the
 `optimize` compiler flag is advised to avoid runtime compilation of the

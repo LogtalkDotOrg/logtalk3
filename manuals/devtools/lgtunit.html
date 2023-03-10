@@ -1496,19 +1496,19 @@ using two or more assertions is convenient or in the body of tests
 written using the <code class="docutils literal notranslate"><span class="pre">test/1</span></code>, <code class="docutils literal notranslate"><span class="pre">succeeds/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">deterministic/1</span></code>
 dialects to help differentiate between the test goal and checking the
 test goal results and to provide more informative test failure messages.</p>
-<p>When the assertion is a call to local predicate of the tests object, you
-must call <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> using an implicit or explicit message
-instead of a using <em>super</em> call. To use an implicit message, add the
-following directive to the tests object:</p>
+<p>When the assertion, benchmarking, and deterministic meta-predicates call
+a local predicate of the tests object, you must call them using an
+implicit or explicit message instead of a using <em>super</em> call. For
+example, to use an implicit message to call the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code>
+meta-predicates, add the following directive to the tests object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [assertion<span class="o">/</span><span class="m">1</span>, assertion<span class="o">/</span><span class="m">2</span>]).
 </pre></div>
 </div>
-<p>The reason this is required is that the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates are
-declared as meta-predicates and thus assertion goals are called in the
-context of the <em>sender</em>, which would be the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object in the
-case of a <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code> call (as it preserves both <em>self</em> and <em>sender</em> and
-the tests are internally run by a message sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
-object to the tests object).</p>
+<p>The reason this is required is that meta-predicates goals arguments are
+always called in the context of the <em>sender</em>, which would be the
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object in the case of a <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code> call (as it preserves
+both <em>self</em> and <em>sender</em> and the tests are internally run by a message
+sent from the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object to the tests object).</p>
 <p>As the <code class="docutils literal notranslate"><span class="pre">benchmark/2-4</span></code> predicates are meta-predicates, turning on the
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> compiler flag is advised to avoid runtime compilation of
 the meta-argument, which would add an overhead to the timing results.
