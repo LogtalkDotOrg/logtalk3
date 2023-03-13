@@ -35,7 +35,7 @@
 	:- initialization((
 		logtalk_load(basic_types(loader)),
 		logtalk_load(java(loader)),
-		logtalk_load(neo4j, [optimize(on), hook(java_hook)])
+		logtalk_load([hello_world, matrix], [optimize(on), hook(java_hook)])
 	)).
 
 :- else.

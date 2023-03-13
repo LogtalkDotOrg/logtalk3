@@ -37,6 +37,15 @@ $ . set_classpath_swi.sh
 
 % print a greeting message:
 
-| ?- neo4j('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
+| ?- hello_world('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
+
 Hello world!, from node 0
+yes
+
+
+% find the people Neo knows in the Matrix:
+
+| ?- matrix('bolt://localhost:7687', 'neo4j', 'password')::neo_knows(Who).
+
+Who =  = ['Agent Smith', 'Cypher', 'Morpheus', 'Trinity']
 yes

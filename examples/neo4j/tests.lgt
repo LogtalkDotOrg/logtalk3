@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2023-03-09,
+		date is 2023-03-13,
 		comment is 'Tests for the "neo4j" example.'
 	]).
 
@@ -33,7 +33,10 @@
 		% succeeds if Neo4j is running
 		os::shell('neo4j status').
 
-	test(neo4j_01, true) :-
-		neo4j('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
+	test(neo4j_hello_world, true) :-
+		hello_world('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
+
+	test(neo4j_matrix, true(Who == ['Agent Smith', 'Cypher', 'Morpheus', 'Trinity'])) :-
+		matrix('bolt://localhost:7687', 'neo4j', 'password')::neo_knows(Who).
 
 :- end_object.

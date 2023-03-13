@@ -22,10 +22,14 @@ To load this example and for sample queries, please see the `SCRIPT.txt`
 file. This example is only supported when using SWI-Prolog or YAP as the
 backend compiler.
 
-This is a simple example of using Neo4j based on the `HelloWorldExample`
-found at:
+There are two individual examples. The first is a simple example of using
+Neo4j based on the `HelloWorldExample` found at:
 
 https://neo4j.com/docs/java-manual/current/get-started/
+
+The second example is more elaborated and based on Neo4j example found at:
+
+https://console.neo4j.org
 
 After instaling Neo4j, you must edit the `neo4j.conf` file to run this
 example:

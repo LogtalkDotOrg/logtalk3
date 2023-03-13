@@ -19,13 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(neo4j(_URI_, _User_, _Password_)).
+:- object(hello_world(_URI_, _User_, _Password_)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2023-03-09,
-		comment is 'Neo4j example.'
+		comment is 'Simple example of using Neo4j.',
+		argnames is ['URI', 'User', 'Password']
 	]).
 
 	:- public(print_greeting/1).
@@ -39,7 +40,9 @@
 		]
 	]).
 
-	:- uses(type, [check/3]).
+	:- uses(type, [
+		check/3
+	]).
 
 	print_greeting(Message) :-
 		% type check all arguments to minimize the possible exceptions in the Java side
