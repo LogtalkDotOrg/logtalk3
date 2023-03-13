@@ -76,9 +76,9 @@
 :- protocol(java_utils_protocol).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2017-10-16,
+		date is 2023-03-13,
 		comment is 'Abstract interface to Java utility predicates.'
 	]).
 
@@ -186,6 +186,20 @@
 	:- info(iterator_element/2, [
 		comment is 'Enumerates, by backtracking, all iterator elements.',
 		argnames is ['Iterator', 'Element']
+	]).
+
+	:- public(map_element/2).
+	:- mode(map_element(+iterator, -element), zero_or_more).
+	:- info(map_element/2, [
+		comment is 'Enumerates, by backtracking, all map elements.',
+		argnames is ['Map', 'Element']
+	]).
+
+	:- public(set_element/2).
+	:- mode(set_element(+iterator, -element), zero_or_more).
+	:- info(set_element/2, [
+		comment is 'Enumerates, by backtracking, all set elements.',
+		argnames is ['Set', 'Element']
 	]).
 
 	:- public(decode_exception/2).

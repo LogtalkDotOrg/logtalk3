@@ -11,8 +11,8 @@
 Abstract interface to Java utility predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:5:0
-| **Date:** 2017-10-16
+| **Version:** 1:6:0
+| **Date:** 2023-03-13
 
 | **Compilation flags:**
 |    ``static``
@@ -317,6 +317,44 @@ Enumerates, by backtracking, all iterator elements.
 |    ``iterator_element(Iterator,Element)``
 | **Mode and number of proofs:**
 |    ``iterator_element(+iterator,-element)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: map_element/2
+.. _java_utils_protocol/0::map_element/2:
+
+``map_element/2``
+^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all map elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``map_element(Map,Element)``
+| **Mode and number of proofs:**
+|    ``map_element(+iterator,-element)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: set_element/2
+.. _java_utils_protocol/0::set_element/2:
+
+``set_element/2``
+^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all set elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_element(Set,Element)``
+| **Mode and number of proofs:**
+|    ``set_element(+iterator,-element)`` - ``zero_or_more``
 
 
 ------------

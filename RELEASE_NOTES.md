@@ -32,6 +32,12 @@ Prolog adapter and integration files
 predicate from within objects and categories to ensure that all database
 predicates are visible.
 
+Library
+-------
+
+* UPDATED: The `java` library to also abstract JPL `jpl_map_element/2` and
+`jpl_set_element/2` predicates for the SWI-Prolog and YAP backends.
+
 Tools
 -----
 

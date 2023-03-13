@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2019-06-12,
+		date is 2023-03-13,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
@@ -138,5 +138,26 @@
 		java(ArrayList)::(add(a), add(b), add(c)),
 		java(ArrayList, Iterator)::iterator,
 		findall(Element, java::iterator_element(Iterator,Element), Elements).
+
+	test(java_map_element_2_01, true(Elements == [a-1,b-2,c-3])) :-
+		java('java.util.TreeMap')::new(Map),
+		forall(
+			list::member(Key-Value0, [a-1,b-2,c-3]),
+			(	java('java.lang.Integer')::new([Value0], Value),
+				java(Map)::put(Key, Value)
+			)
+		),
+		findall(
+			Key-Value,
+			(	java::map_element(Map, Key-Value0),
+				java(Value0, Value)::intValue
+			),
+			Elements
+		).
+
+	test(java_set_element_2_01, true(Elements == [a,b,c])) :-
+		java('java.util.TreeSet')::new(Set),
+		java(Set)::(add(a), add(b), add(c)),
+		findall(Element, java::set_element(Set,Element), Elements).
 
 :- end_object.

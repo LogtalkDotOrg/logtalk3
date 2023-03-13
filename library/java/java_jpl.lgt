@@ -97,9 +97,9 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2023-03-13,
 		comment is 'Abstract interface to JPL API utility predicates.',
 		see_also is [
 			java(_,_), java(_), java_hook
@@ -111,7 +111,7 @@
 		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_object/1,
 		jpl_is_ref/1,
 		jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
-		jpl_iterator_element/2,
+		jpl_iterator_element/2, jpl_map_element/2, jpl_set_element/2,
 		jpl_call/4
 	]).
 
@@ -173,6 +173,12 @@
 
 	iterator_element(Iterator, Element) :-
 		jpl_iterator_element(Iterator, Element).
+
+	map_element(Map, Element) :-
+		jpl_map_element(Map, Element).
+
+	set_element(Set, Element) :-
+		jpl_set_element(Set, Element).
 
 	decode_exception(error(java_exception(Exception),_), Cause) :-
 		!,
